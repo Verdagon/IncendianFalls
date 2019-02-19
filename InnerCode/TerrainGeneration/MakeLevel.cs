@@ -1,42 +1,91 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atharia.Model;
 
 namespace IncendianFalls {
   public static class MakeLevel {
-    public static Level MakeNextLevel(Root root, Rand rand, bool squareLevelsOnly, string name) {
+    public static Level MakeNextLevel(
+        SSContext context,
+        Rand rand,
+        int currentTime,
+        bool squareLevelsOnly,
+        string name) {
+      //return MakeSimpleLevel(root, name);
       if (squareLevelsOnly || rand.Next() % 2 == 0) {
-        return MakeSquareLevel(root, rand, name);
+        return MakeSquareLevel(context, rand, currentTime, name);
       } else {
-        return MakePentagonalLevel(root, rand, name);
+        return MakePentagonalLevel(context, rand, currentTime, name);
       }
     }
 
-    private static Level MakePentagonalLevel(Root root, Rand rand, string name) {
+    private static Level MakeSimpleLevel(SSContext context, string name) {
+      var tiles = context.root.EffectTerrainTileByLocationMutMapCreate();
+      tiles.Add(
+          new Location(0, 0, 0),
+          context.root.EffectTerrainTileCreate(
+              1, true, "floor", context.root.EffectIFeatureMutListCreate()));
+      var terrain = context.root.EffectTerrainCreate(SquarePattern.MakeSquarePattern(), 1, tiles);
+      return context.root.EffectLevelCreate(name, false, terrain, context.root.EffectUnitMutBunchCreate());
+    }
+
+    private static void PlaceStaircases(SSContext context, Rand rand, Terrain terrain, UnitMutBunch units) {
+
+      var walkableLocations = new WalkableLocations(terrain, units);
+
+      List<Location> staircaseLocations = walkableLocations.GetRandomN(rand.Next(), 2);
+      var upStaircaseLocation = staircaseLocations[0];
+      var downStaircaseLocation = staircaseLocations[1];
+
+      var upStaircaseTile = terrain.tiles[upStaircaseLocation];
+      upStaircaseTile.features.Add(new UpStaircaseFeatureAsIFeature(context.root.EffectUpStaircaseFeatureCreate()));
+
+      var downStaircaseTile = terrain.tiles[downStaircaseLocation];
+      downStaircaseTile.features.Add(new DownStaircaseFeatureAsIFeature(context.root.EffectDownStaircaseFeatureCreate()));
+    }
+
+    private static Level MakePentagonalLevel(
+        SSContext context,
+        Rand rand,
+        int currentTime,
+        string name) {
       var terrain =
           ForestTerrainGenerator.Generate(
-              root,
+              context,
               rand,
               PentagonPattern9.makePentagon9Pattern());
 
-      var units = root.EffectUnitMutBunchCreate();
+      var units = context.root.EffectUnitMutBunchCreate();
 
       var walkableLocations = new WalkableLocations(terrain, units);
 
-      SetupCommon.FillWithUnits(root, rand, terrain, units, walkableLocations, 40);
+      SetupCommon.FillWithUnits(context, rand, currentTime, terrain, units, walkableLocations, 40);
 
-      return root.EffectLevelCreate(name, false, terrain, units);
+      PlaceStaircases(context, rand, terrain, units);
+
+      return context.root.EffectLevelCreate(name, false, terrain, units);
     }
 
-    private static Level MakeSquareLevel(Root root, Rand rand, string name) {
-      var terrain = DungeonTerrainGenerator.Generate(root, 80, 20, rand);
+    private static Level MakeSquareLevel(
+        SSContext context,
+        Rand rand,
+        int currentTime, 
+        string name) {
+      context.root.GetDeterministicHashCode();
+      var terrain = DungeonTerrainGenerator.Generate(context, 80, 20, rand);
+      context.root.GetDeterministicHashCode();
 
-      var units = root.EffectUnitMutBunchCreate();
+      var units = context.root.EffectUnitMutBunchCreate();
+
+      context.root.GetDeterministicHashCode();
 
       var walkableLocations = new WalkableLocations(terrain, units);
 
-      SetupCommon.FillWithUnits(root, rand, terrain, units, walkableLocations, 15);
+      SetupCommon.FillWithUnits(context, rand, currentTime, terrain, units, walkableLocations, 15);
 
-      return root.EffectLevelCreate(name, true, terrain, units);
+      PlaceStaircases(context, rand, terrain, units);
+
+      context.root.GetDeterministicHashCode();
+      return context.root.EffectLevelCreate(name, true, terrain, units);
     }
 
   }

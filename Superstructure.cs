@@ -1,60 +1,78 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Atharia.Model;
 
 namespace IncendianFalls {
-  public interface IRequestObserver {
+  public interface ISuperstructureObserver {
     void BeforeRequest(IRequest request);
     void AfterRequest(IRequest request);
+    void OnFlare(string message);
+  }
+
+  public class SSContext {
+    public readonly Root root;
+    private readonly List<ISuperstructureObserver> observers;
+
+    public SSContext(
+        Root root,
+        List<ISuperstructureObserver> observers) {
+      this.root = root;
+      this.observers = observers;
+    }
+
+    public void Flare(
+        string message,
+        [CallerFilePath] string file = "",
+        [CallerLineNumber] int lineNumber = 0) {
+      broadcastFlare(file + ":" + lineNumber + ": " + message);
+    }
+
+    public void Flare(
+        int message,
+        [CallerFilePath] string file = "",
+        [CallerLineNumber] int lineNumber = 0) {
+      broadcastFlare(file + ":" + lineNumber + ": " + message);
+    }
+
+    private void broadcastFlare(string message) {
+      root.Lock();
+      foreach (var observer in observers) {
+        observer.OnFlare(message);
+      }
+      root.Unlock();
+    }
   }
 
   public class Superstructure {
-    private readonly ILogger logger;
-
     private readonly Root root;
-    private readonly SortedDictionary<int, List<IRequestObserver>> observers;
+    private readonly List<ISuperstructureObserver> observers;
+    SSContext context;
 
-    public Superstructure(ILogger logger) {
-      this.logger = logger;
+    public Superstructure() {
+      observers = new List<ISuperstructureObserver>();
       root = new Root();
-      observers = new SortedDictionary<int, List<IRequestObserver>>();
+      context = new SSContext(root, observers);
     }
 
-    public void AddObserver(int id, IRequestObserver observer) {
-      if (!observers.ContainsKey(id)) {
-        observers.Add(id, new List<IRequestObserver>());
-      }
-      observers[id].Add(observer);
+    public void AddObserver(ISuperstructureObserver observer) {
+      observers.Add(observer);
     }
 
-    private void broadcastBeforeRequest(int id, IRequest request) {
-      if (observers.ContainsKey(0)) {
-        foreach (var observer in observers[0]) {
-          observer.BeforeRequest(request);
-        }
+    private void broadcastBeforeRequest(IRequest request) {
+      root.Lock();
+      foreach (var observer in observers) {
+        observer.BeforeRequest(request);
       }
-      if (id != 0) {
-        if (observers.ContainsKey(id)) {
-          foreach (var observer in observers[id]) {
-            observer.BeforeRequest(request);
-          }
-        }
-      }
+      root.Unlock();
     }
 
-    private void broadcastAfterRequest(int id, IRequest request) {
-      if (observers.ContainsKey(id)) {
-        foreach (var observer in observers[id]) {
-          observer.AfterRequest(request);
-        }
+    private void broadcastAfterRequest(IRequest request) {
+      root.Lock();
+      foreach (var observer in observers) {
+        observer.AfterRequest(request);
       }
-      if (id != 0) {
-        if (observers.ContainsKey(0)) {
-          foreach (var observer in observers[0]) {
-            observer.AfterRequest(request);
-          }
-        }
-      }
+      root.Unlock();
     }
 
     public Root GetRoot() {
@@ -62,78 +80,191 @@ namespace IncendianFalls {
     }
 
     public Game RequestSetupGame(int randomSeed, bool squareLevelsOnly) {
-      var request = new SetupGameRequest(randomSeed, squareLevelsOnly);
-      broadcastBeforeRequest(0, new SetupGameRequestAsIRequest(request));
-      var game = SetupGameRequestExecutor.Execute(root, randomSeed, squareLevelsOnly);
-      broadcastAfterRequest(0, new SetupGameRequestAsIRequest(request));
-      return game;
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new SetupGameRequest(randomSeed, squareLevelsOnly);
+        broadcastBeforeRequest(new SetupGameRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        var game = SetupGameRequestExecutor.Execute(context, randomSeed, squareLevelsOnly);
+        // context.Flare(game.DStr());
+        broadcastAfterRequest(new SetupGameRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return game;
+      //} catch (Exception) {
+      //  Logger.Error("Caught exception, rolling back!");
+      //  root.Revert(rollbackPoint);
+      //  throw;
+      } finally {
+        root.Lock();
+      }
     }
 
     public bool RequestInteract(int gameId) {
-      var request = new InteractRequest(gameId);
-      broadcastBeforeRequest(0, new InteractRequestAsIRequest(request));
-      var success = new InteractRequestExecutor(logger).Execute(root, gameId, -1337);
-      broadcastAfterRequest(0, new InteractRequestAsIRequest(request));
-      return success;
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new InteractRequest(gameId);
+        broadcastBeforeRequest(new InteractRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        var success = InteractRequestExecutor.Execute(context, gameId, -1337);
+        context.Flare(success.DStr());
+        broadcastAfterRequest(new InteractRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return success;
+      //} catch (Exception) {
+      //  Logger.Error("Caught exception, rolling back!");
+      //  root.Revert(rollbackPoint);
+      //  throw;
+      } finally {
+        root.Lock();
+      }
     }
 
     public bool RequestMove(int gameId, Location newLocation) {
-      var request = new MoveRequest(gameId, newLocation);
-      broadcastBeforeRequest(gameId, new MoveRequestAsIRequest(request));
-      bool did = new MoveRequestExecutor(logger).Execute(root, gameId, newLocation);
-      broadcastAfterRequest(gameId, new MoveRequestAsIRequest(request));
-      return did;
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new MoveRequest(gameId, newLocation);
+        broadcastBeforeRequest(new MoveRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        bool success = MoveRequestExecutor.Execute(context, gameId, newLocation);
+        context.Flare(success.DStr());
+        broadcastAfterRequest(new MoveRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return success;
+      //} catch (Exception) {
+      //  Logger.Error("Caught exception, rolling back!");
+      //  root.Revert(rollbackPoint);
+      //  throw;
+      } finally {
+        root.Lock();
+      }
     }
 
     public bool RequestAttack(int gameId, int targetUnitId) {
-      var request = new AttackRequest(gameId, targetUnitId);
-      broadcastBeforeRequest(gameId, new AttackRequestAsIRequest(request));
-      bool success = new AttackRequestExecutor(logger).Execute(root, gameId, targetUnitId);
-      broadcastAfterRequest(gameId, new AttackRequestAsIRequest(request));
-      return success;
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new AttackRequest(gameId, targetUnitId);
+        broadcastBeforeRequest(new AttackRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        bool success = AttackRequestExecutor.Execute(context, gameId, targetUnitId);
+        context.Flare(success.DStr());
+        broadcastAfterRequest(new AttackRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return success;
+      //} catch (Exception) {
+      //  Logger.Error("Caught exception, rolling back!");
+      //  root.Revert(rollbackPoint);
+      //  throw;
+      } finally {
+        root.Lock();
+      }
     }
 
     public bool RequestTimeShift(
         int gameId,
         RootIncarnation pastIncarnation,
         int futuremostTime) {
-      var request = new TimeShiftRequest(gameId, pastIncarnation.version, futuremostTime);
-      broadcastBeforeRequest(gameId, new TimeShiftRequestAsIRequest(request));
-      bool success = new TimeShiftRequestExecutor(logger).Execute(root, gameId, pastIncarnation, futuremostTime);
-      broadcastAfterRequest(gameId, new TimeShiftRequestAsIRequest(request));
-      return success;
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new TimeShiftRequest(gameId, pastIncarnation.version, futuremostTime);
+        broadcastBeforeRequest(new TimeShiftRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        bool success = TimeShiftRequestExecutor.Execute(context, gameId, pastIncarnation, futuremostTime);
+        context.Flare(success.DStr());
+        broadcastAfterRequest(new TimeShiftRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return success;
+      //} catch (Exception) {
+      //  Logger.Error("Caught exception, rolling back!");
+      //  root.Revert(rollbackPoint);
+      //  throw;
+      } finally {
+        root.Lock();
+      }
     }
 
     public bool RequestDefend(int gameId) {
-      var request = new DefendRequest(gameId);
-      broadcastBeforeRequest(gameId, new DefendRequestAsIRequest(request));
-      bool success = new DefendRequestExecutor(logger).Execute(root, gameId);
-      broadcastAfterRequest(gameId, new DefendRequestAsIRequest(request));
-      return success;
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new DefendRequest(gameId);
+        broadcastBeforeRequest(new DefendRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        bool success = DefendRequestExecutor.Execute(context, gameId);
+        context.Flare(success.DStr());
+        broadcastAfterRequest(new DefendRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return success;
+      //} catch (Exception) {
+      //  Logger.Error("Caught exception, rolling back!");
+      //  root.Revert(rollbackPoint);
+      //  throw;
+      } finally {
+        root.Lock();
+      }
     }
 
     public bool RequestFollowDirective(int gameId) {
-      var request = new FollowDirectiveRequest(gameId);
-      broadcastBeforeRequest(gameId, new FollowDirectiveRequestAsIRequest(request));
-      bool success = new FollowDirectiveRequestExecutor(logger).Execute(root, gameId);
-      broadcastAfterRequest(gameId, new FollowDirectiveRequestAsIRequest(request));
-      return success;
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new FollowDirectiveRequest(gameId);
+        broadcastBeforeRequest(new FollowDirectiveRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        bool success = FollowDirectiveRequestExecutor.Execute(context, gameId);
+        context.Flare(success.DStr());
+        broadcastAfterRequest(new FollowDirectiveRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return success;
+      //} catch (Exception) {
+      //  Logger.Error("Caught exception, rolling back!");
+      //  root.Revert(rollbackPoint);
+      //  throw;
+      } finally {
+        root.Lock();
+      }
     }
 
     public bool RequestResume(int gameId) {
-      var request = new ResumeRequest(gameId);
-      broadcastBeforeRequest(gameId, new ResumeRequestAsIRequest(request));
-      bool success = new ResumeRequestExecutor(logger).Execute(root, gameId);
-      broadcastAfterRequest(gameId, new ResumeRequestAsIRequest(request));
-      return success;
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new ResumeRequest(gameId);
+        broadcastBeforeRequest(new ResumeRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        bool success = ResumeRequestExecutor.Execute(context, gameId);
+        context.Flare(success.DStr());
+        broadcastAfterRequest(new ResumeRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return success;
+      //} catch (Exception) {
+      //  Logger.Error("Caught exception, rolling back!");
+      //  root.Revert(rollbackPoint);
+      //  throw;
+      } finally {
+        root.Lock();
+      }
     }
 
     public RootIncarnation Snapshot() {
+      root.Unlock();
       var request = new SnapshotRequest();
-      broadcastBeforeRequest(0, new SnapshotRequestAsIRequest(request));
+      broadcastBeforeRequest(new SnapshotRequestAsIRequest(request));
+      context.Flare(GetDeterministicHashCode());
       var snapshot = root.Snapshot();
-      broadcastAfterRequest(0, new SnapshotRequestAsIRequest(request));
+      // context.Flare(snapshot.DStr());
+      broadcastAfterRequest(new SnapshotRequestAsIRequest(request));
+      context.Flare(GetDeterministicHashCode());
+      root.Lock();
       return snapshot;
+    }
+
+    public int GetDeterministicHashCode() {
+      return root.GetDeterministicHashCode();
     }
   }
 }

@@ -4,12 +4,8 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class ResumeRequestExecutor {
-    ILogger logger;
-    public ResumeRequestExecutor(ILogger logger) {
-      this.logger = logger;
-    }
-    public bool Execute(Root root, int gameId) {
-      var game = root.GetGame(gameId);
+    public static bool Execute(SSContext context, int gameId) {
+      var game = context.root.GetGame(gameId);
 
       var liveUnitByLocationMap = PreRequest.Do(game);
 
@@ -31,7 +27,7 @@ namespace IncendianFalls {
           Asserts.Assert(false);
           break;
         case GameExecutionStateType.kBeforePlayerAction:
-          logger.Error("Use a Move, Attack, FollowDirective etc to resume when paused before player!");
+          Logger.Error("Use a Move, Attack, FollowDirective etc to resume when paused before player!");
           return false;
       }
 

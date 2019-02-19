@@ -1,4 +1,6 @@
-.DS_Store
-.vs
 bin
 obj
+Requests/.DS_Store
+.vs
+.DS_Store
+.gitignore

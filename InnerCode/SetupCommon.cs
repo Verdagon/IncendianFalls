@@ -23,6 +23,9 @@ namespace IncendianFalls {
     public Location GetRandom(int randomInt) {
       return SetUtils.GetRandom(randomInt, walkableLocations);
     }
+    public List<Location> GetRandomN(int randomInt, int n) {
+      return SetUtils.GetRandomN(randomInt, walkableLocations, n);
+    }
     public void Remove(Location location) {
       walkableLocations.Remove(location);
     }
@@ -30,19 +33,24 @@ namespace IncendianFalls {
 
   public class SetupCommon {
     public static void FillWithUnits(
-        Root root,
+        SSContext context,
         Rand rand,
+        int currentTime,
         Terrain terrain,
         UnitMutBunch units,
         WalkableLocations walkableLocations,
         int numUnits) {
+      context.root.GetDeterministicHashCode();
       for (int i = 0; i < numUnits; i++) {
+        context.root.GetDeterministicHashCode();
         var goblinLocation = walkableLocations.GetRandom(rand.Next());
         walkableLocations.Remove(goblinLocation);
 
+        context.root.GetDeterministicHashCode();
+
         var goblin =
-            root.EffectUnitCreate(
-                root.EffectIUnitEventMutListCreate(),
+            context.root.EffectUnitCreate(
+                context.root.EffectIUnitEventMutListCreate(),
                 true,
                 0,
                 goblinLocation,
@@ -50,23 +58,25 @@ namespace IncendianFalls {
                 3, 3,
                 40, 40,
                 600,
-                0,
+                currentTime,
                 new MoveDirectiveAsIDirective(MoveDirective.Null),
-                root.EffectIDetailMutListCreate(),
-                root.EffectIItemMutBunchCreate());
+                context.root.EffectIDetailMutListCreate(),
+                context.root.EffectIItemMutBunchCreate());
+        context.root.GetDeterministicHashCode();
         units.Add(goblin);
+        context.root.GetDeterministicHashCode();
 
         if (rand.Next(0, 3) == 0) {
-          goblin.items.Add(new ArmorAsIItem(root.EffectArmorCreate()));
+          goblin.items.Add(new ArmorAsIItem(context.root.EffectArmorCreate()));
         }
         if (rand.Next(0, 3) == 0) {
-          goblin.items.Add(new GlaiveAsIItem(root.EffectGlaiveCreate()));
+          goblin.items.Add(new GlaiveAsIItem(context.root.EffectGlaiveCreate()));
         }
       }
     }
 
     public static Unit MakePlayer(
-        Root root,
+        SSContext context,
         Rand rand,
         UnitMutBunch units,
         WalkableLocations walkableLocations) {
@@ -74,8 +84,8 @@ namespace IncendianFalls {
       var playerLocation = walkableLocations.GetRandom(rand.Next());
       walkableLocations.Remove(playerLocation);
       var player =
-          root.EffectUnitCreate(
-              root.EffectIUnitEventMutListCreate(),
+          context.root.EffectUnitCreate(
+              context.root.EffectIUnitEventMutListCreate(),
               true,
               0,
               playerLocation,
@@ -85,8 +95,8 @@ namespace IncendianFalls {
               600,
               0,
               new MoveDirectiveAsIDirective(MoveDirective.Null),
-              root.EffectIDetailMutListCreate(),
-              root.EffectIItemMutBunchCreate());
+              context.root.EffectIDetailMutListCreate(),
+              context.root.EffectIItemMutBunchCreate());
       units.Add(player);
       return player;
     }

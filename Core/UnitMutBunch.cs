@@ -32,6 +32,9 @@ public class UnitMutBunch {// : IEnumerable<Unit> {
     }
   }
   public int Count { get { return incarnation.set.Count; } }
+  public int GetDeterministicHashCode() {
+    return incarnation.GetDeterministicHashCode();
+  }
   public IEnumerator<Unit> GetEnumerator() {
     foreach (var element in incarnation.set) {
       yield return root.GetUnit(element);

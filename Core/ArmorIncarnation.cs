@@ -6,6 +6,10 @@ public class ArmorIncarnation {
   public ArmorIncarnation(
 ) {
   }
+  public int GetDeterministicHashCode() {
+    int s = 0;
+    return s;
+  }
 }
 
 }

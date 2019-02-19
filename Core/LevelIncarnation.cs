@@ -17,6 +17,14 @@ public class LevelIncarnation {
     this.terrain = terrain;
     this.units = units;
   }
+  public int GetDeterministicHashCode() {
+    int s = 0;
+    s = s * 37 + name.GetDeterministicHashCode();
+    s = s * 37 + considerCornersAdjacent.GetDeterministicHashCode();
+    s = s * 37 + terrain.GetDeterministicHashCode();
+    s = s * 37 + units.GetDeterministicHashCode();
+    return s;
+  }
 }
 
 }

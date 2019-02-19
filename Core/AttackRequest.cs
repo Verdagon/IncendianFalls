@@ -9,7 +9,7 @@ public class AttackRequest : IComparable<AttackRequest> {
       return a.Equals(b);
     }
     public int GetHashCode(AttackRequest a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<AttackRequest> {
@@ -17,6 +17,7 @@ public class AttackRequest : IComparable<AttackRequest> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public readonly int gameId;
   public readonly int targetUnitId;
   public AttackRequest(
@@ -24,6 +25,10 @@ public class AttackRequest : IComparable<AttackRequest> {
       int targetUnitId) {
     this.gameId = gameId;
     this.targetUnitId = targetUnitId;
+    int hash = 0;
+    hash = hash * 37 + gameId.GetDeterministicHashCode();
+    hash = hash * 37 + targetUnitId.GetDeterministicHashCode();
+    this.hashCode = hash;
 
   }
   public static bool operator==(AttackRequest a, AttackRequest b) {
@@ -46,13 +51,9 @@ public class AttackRequest : IComparable<AttackRequest> {
         ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    hash = hash * 1337;
-    hash = hash + gameId.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + targetUnitId.GetHashCode();
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(AttackRequest that) {
     if (gameId != that.gameId) {
       return gameId.CompareTo(that.gameId);
@@ -64,8 +65,8 @@ public class AttackRequest : IComparable<AttackRequest> {
   }
   public string DStr() {
     return "AttackRequest(" +
-        gameId + ", " +
-        targetUnitId
+        gameId.DStr() + ", " +
+        targetUnitId.DStr()
         + ")";
 
     }

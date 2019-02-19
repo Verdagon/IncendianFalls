@@ -4,14 +4,14 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class CircleTerrainGenerator {
-    public static Terrain makeStartingMapTerrain(Root root, Random random) {
+    public static Terrain makeStartingMapTerrain(SSContext context, Random random) {
       float elevationStepHeight = .2f;
 
       var terrain =
-        root.EffectTerrainCreate(
+          context.root.EffectTerrainCreate(
               PentagonPattern9.makePentagon9Pattern(),
               elevationStepHeight,
-              root.EffectTerrainTileByLocationMutMapCreate());
+              context.root.EffectTerrainTileByLocationMutMapCreate());
 
       var searcher = new PatternExplorer(terrain.pattern, false, new Location(0, 0, 0));
 
@@ -19,7 +19,13 @@ namespace IncendianFalls {
         Location loc = searcher.Next();
         Vec2 center = terrain.pattern.GetTileCenter(loc);
         if (center.distance(new Vec2(0, 0)) <= 8.0) {
-          terrain.tiles.Add(loc, root.EffectTerrainTileCreate(1, true, "grass"));
+          terrain.tiles.Add(
+              loc,
+              context.root.EffectTerrainTileCreate(
+                  1,
+                  true,
+                  "grass",
+                  context.root.EffectIFeatureMutListCreate()));
         } else {
           break;
         }

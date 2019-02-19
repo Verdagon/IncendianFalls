@@ -9,6 +9,15 @@ public class LevelMutBunchIncarnation {
   public LevelMutBunchIncarnation(SortedSet<int> set) {
     this.set = set;
   }
+
+  public int GetDeterministicHashCode() {
+    int hash = 0;
+    hash = hash * 37 + set.Count;
+    foreach (var element in set) {
+      hash = hash * 37 + element.GetDeterministicHashCode();
+    }
+    return hash;
+  }
 }
          
 }

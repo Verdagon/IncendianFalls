@@ -108,8 +108,7 @@ namespace IncendianFalls {
       }
 
 
-      var nextUnit = Utils.GetNextActingUnit(game.root, game);
-      Console.WriteLine("Starting unit " + nextUnit.id);
+      var nextUnit = Utils.GetNextActingUnit(game);
       game.time = nextUnit.nextActionTime;
 
       if (nextUnit.alive == false) {

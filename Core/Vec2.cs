@@ -9,7 +9,7 @@ public class Vec2 : IComparable<Vec2> {
       return a.Equals(b);
     }
     public int GetHashCode(Vec2 a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<Vec2> {
@@ -17,6 +17,7 @@ public class Vec2 : IComparable<Vec2> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public readonly float x;
   public readonly float y;
   public Vec2(
@@ -24,6 +25,10 @@ public class Vec2 : IComparable<Vec2> {
       float y) {
     this.x = x;
     this.y = y;
+    int hash = 0;
+    hash = hash * 37 + x.GetDeterministicHashCode();
+    hash = hash * 37 + y.GetDeterministicHashCode();
+    this.hashCode = hash;
 
   }
   public static bool operator==(Vec2 a, Vec2 b) {
@@ -46,13 +51,9 @@ public class Vec2 : IComparable<Vec2> {
         ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    hash = hash * 1337;
-    hash = hash + x.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + y.GetHashCode();
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(Vec2 that) {
     if (x != that.x) {
       return x.CompareTo(that.x);
@@ -64,8 +65,8 @@ public class Vec2 : IComparable<Vec2> {
   }
   public string DStr() {
     return "Vec2(" +
-        x + ", " +
-        y
+        x.DStr() + ", " +
+        y.DStr()
         + ")";
 
     }

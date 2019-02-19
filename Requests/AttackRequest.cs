@@ -3,12 +3,8 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class AttackRequestExecutor {
-    ILogger logger;
-    public AttackRequestExecutor(ILogger logger) {
-      this.logger = logger;
-    }
-    public bool Execute(Root root, int gameId, int targetUnitId) {
-      var game = root.GetGame(gameId);
+    public static bool Execute(SSContext context, int gameId, int targetUnitId) {
+      var game = context.root.GetGame(gameId);
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
@@ -17,13 +13,13 @@ namespace IncendianFalls {
 
       var player = game.player;
 
-      Unit victim = root.GetUnit(targetUnitId);
+      Unit victim = context.root.GetUnit(targetUnitId);
       if (!victim.alive) {
         return false;
       }
 
       Asserts.Assert(game.executionState.actingUnit.Is(game.player));
-      Asserts.Assert(game.player.Is(Utils.GetNextActingUnit(root, game)));
+      Asserts.Assert(game.player.Is(Utils.GetNextActingUnit(game)));
 
       Actions.Attack(game, liveUnitByLocationMap, game.player, victim);
 

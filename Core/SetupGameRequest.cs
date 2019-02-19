@@ -9,7 +9,7 @@ public class SetupGameRequest : IComparable<SetupGameRequest> {
       return a.Equals(b);
     }
     public int GetHashCode(SetupGameRequest a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<SetupGameRequest> {
@@ -17,6 +17,7 @@ public class SetupGameRequest : IComparable<SetupGameRequest> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public readonly int randomSeed;
   public readonly bool squareLevelsOnly;
   public SetupGameRequest(
@@ -24,6 +25,10 @@ public class SetupGameRequest : IComparable<SetupGameRequest> {
       bool squareLevelsOnly) {
     this.randomSeed = randomSeed;
     this.squareLevelsOnly = squareLevelsOnly;
+    int hash = 0;
+    hash = hash * 37 + randomSeed.GetDeterministicHashCode();
+    hash = hash * 37 + squareLevelsOnly.GetDeterministicHashCode();
+    this.hashCode = hash;
 
   }
   public static bool operator==(SetupGameRequest a, SetupGameRequest b) {
@@ -46,13 +51,9 @@ public class SetupGameRequest : IComparable<SetupGameRequest> {
         ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    hash = hash * 1337;
-    hash = hash + randomSeed.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + squareLevelsOnly.GetHashCode();
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(SetupGameRequest that) {
     if (randomSeed != that.randomSeed) {
       return randomSeed.CompareTo(that.randomSeed);
@@ -64,8 +65,8 @@ public class SetupGameRequest : IComparable<SetupGameRequest> {
   }
   public string DStr() {
     return "SetupGameRequest(" +
-        randomSeed + ", " +
-        (squareLevelsOnly ? "true" : "false")
+        randomSeed.DStr() + ", " +
+        squareLevelsOnly.DStr()
         + ")";
 
     }

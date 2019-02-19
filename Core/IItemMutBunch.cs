@@ -32,6 +32,9 @@ public class IItemMutBunch {// : IEnumerable<IItem> {
     }
   }
   public int Count { get { return incarnation.set.Count; } }
+  public int GetDeterministicHashCode() {
+    return incarnation.GetDeterministicHashCode();
+  }
   public IEnumerator<IItem> GetEnumerator() {
     foreach (var element in incarnation.set) {
       yield return root.GetIItem(element);

@@ -46,6 +46,15 @@ public class PatternCornerAdjacencyList {
   public string DStr() {
     throw new Exception("Not implemented!");
   }
+
+  public int GetDeterministicHashCode() {
+    int hash = 0;
+    hash = hash * 37 + list.Count;
+    foreach (var element in list) {
+      hash = hash * 37 + element.GetDeterministicHashCode();
+    }
+    return hash;
+  }
 }
          
 }

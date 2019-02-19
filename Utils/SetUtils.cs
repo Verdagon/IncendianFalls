@@ -22,19 +22,6 @@ public class SetUtils {
     }
     throw new Exception("Set not big enough!");
   }
-  //public static T GetRandom<T>(Random random, SortedSet<T> set) {
-  //  if (set.Count == 0) {
-  //    throw new Exception("wat");
-  //  }
-  //  int randomUnusedLocationIndex = random.Next(0, set.Count - 1);
-  //  foreach (var key in set) {
-  //    if (randomUnusedLocationIndex == 0) {
-  //      return key;
-  //    }
-  //    randomUnusedLocationIndex--;
-  //  }
-  //  throw new Exception("unreachable");
-  //}
   public static T GetRandom<T>(int randomInt, SortedSet<T> set) {
     if (set.Count == 0) {
       throw new Exception("wat");
@@ -47,6 +34,30 @@ public class SetUtils {
       randomUnusedLocationIndex--;
     }
     throw new Exception("unreachable");
+  }
+  public static List<T> GetRandomN<T>(int randomInt, SortedSet<T> set, int n) {
+    if (set.Count < n) {
+      throw new Exception("wat");
+    }
+
+
+    SortedSet<T> possibleValues = new SortedSet<T>(set);
+
+    List<T> result = new List<T>();
+
+    for (int i = 0; i < n; i++) {
+      int randomUnusedLocationIndex = randomInt % set.Count;
+      foreach (var key in set) {
+        if (randomUnusedLocationIndex == 0) {
+          result.Add(key);
+          possibleValues.Remove(key);
+          break;
+        }
+        randomUnusedLocationIndex--;
+      }
+    }
+
+    return result;
   }
 
   public static void RemoveAll<T>(

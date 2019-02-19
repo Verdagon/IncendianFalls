@@ -9,6 +9,8 @@ public class UnitAttackEventAsIUnitEvent : IUnitEvent {
     this.obj = obj;
   }
   public string DStr() { return obj.DStr(); }
+  public int GetDeterministicHashCode() { return obj.GetDeterministicHashCode(); }
+  public override int GetHashCode() { return GetDeterministicHashCode(); }
        public int GetTime() { return IncendianFalls.UnitAttackEventExtensions.GetTime(obj); }
 
   public void Visit(IUnitEventVisitor visitor) { visitor.Visit(this); }

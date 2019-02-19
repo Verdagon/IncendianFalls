@@ -3,31 +3,13 @@ using System.Collections.Generic;
 using Atharia.Model;
 
 namespace IncendianFalls {
-  //public struct TimeShiftRequest : IRequest {
-  //  public readonly int gameId;
-  //  public readonly RootIncarnation pastIncarnation;
-
-  //  public TimeShiftRequest(int gameId, RootIncarnation pastIncarnation) {
-  //    this.gameId = gameId;
-  //    this.pastIncarnation = pastIncarnation;
-  //  }
-
-  //  public void visit(IRequestVisitor visitor) {
-  //    visitor.visitTimeShiftRequest(this);
-  //  }
-  //}
-
   public class TimeShiftRequestExecutor {
-    ILogger logger;
-    public TimeShiftRequestExecutor(ILogger logger) {
-      this.logger = logger;
-    }
-    public bool Execute(
-        Root root,
+    public static bool Execute(
+        SSContext context,
         int gameId,
         RootIncarnation pastIncarnation,
         int futuremostTime) {
-      var game = root.GetGame(gameId);
+      var game = context.root.GetGame(gameId);
 
       // time shift costs 5 now, and 5 + timeDifference / 100 from your past self.
 
@@ -48,7 +30,7 @@ namespace IncendianFalls {
       PreRequest.Do(game);
 
       float futureTime = game.time;
-      root.Revert(pastIncarnation);
+      context.root.Revert(pastIncarnation);
 
       // We don't want to follow the player's directive from back then.
       if (game.player.directive.Exists()) {

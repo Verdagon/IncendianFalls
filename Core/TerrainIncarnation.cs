@@ -14,6 +14,13 @@ public class TerrainIncarnation {
     this.elevationStepHeight = elevationStepHeight;
     this.tiles = tiles;
   }
+  public int GetDeterministicHashCode() {
+    int s = 0;
+    s = s * 37 + pattern.GetDeterministicHashCode();
+    s = s * 37 + elevationStepHeight.GetDeterministicHashCode();
+    s = s * 37 + tiles.GetDeterministicHashCode();
+    return s;
+  }
 }
 
 }

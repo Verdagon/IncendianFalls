@@ -4,19 +4,15 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class FollowDirectiveRequestExecutor {
-    ILogger logger;
-    public FollowDirectiveRequestExecutor(ILogger logger) {
-      this.logger = logger;
-    }
-    public bool Execute(Root root, int gameId) {
-      var game = root.GetGame(gameId);
+    public static bool Execute(SSContext context, int gameId) {
+      var game = context.root.GetGame(gameId);
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
       Asserts.Assert(game.GetExecutionStateType() == GameExecutionStateType.kBeforePlayerAction);
 
       if (!game.player.directive.Exists()) {
-        logger.Error("Player has no directive, can't resume!");
+        Logger.Error("Player has no directive, can't resume!");
         return false;
       }
 

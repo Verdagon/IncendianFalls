@@ -32,6 +32,9 @@ public class LevelMutBunch {// : IEnumerable<Level> {
     }
   }
   public int Count { get { return incarnation.set.Count; } }
+  public int GetDeterministicHashCode() {
+    return incarnation.GetDeterministicHashCode();
+  }
   public IEnumerator<Level> GetEnumerator() {
     foreach (var element in incarnation.set) {
       yield return root.GetLevel(element);

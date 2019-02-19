@@ -9,7 +9,7 @@ public class PatternCornerAdjacency : IComparable<PatternCornerAdjacency> {
       return a.Equals(b);
     }
     public int GetHashCode(PatternCornerAdjacency a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<PatternCornerAdjacency> {
@@ -17,6 +17,7 @@ public class PatternCornerAdjacency : IComparable<PatternCornerAdjacency> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public readonly int groupRelativeX;
   public readonly int groupRelativeY;
   public readonly int tileIndex;
@@ -30,6 +31,12 @@ public class PatternCornerAdjacency : IComparable<PatternCornerAdjacency> {
     this.groupRelativeY = groupRelativeY;
     this.tileIndex = tileIndex;
     this.cornerIndex = cornerIndex;
+    int hash = 0;
+    hash = hash * 37 + groupRelativeX.GetDeterministicHashCode();
+    hash = hash * 37 + groupRelativeY.GetDeterministicHashCode();
+    hash = hash * 37 + tileIndex.GetDeterministicHashCode();
+    hash = hash * 37 + cornerIndex.GetDeterministicHashCode();
+    this.hashCode = hash;
 
   }
   public static bool operator==(PatternCornerAdjacency a, PatternCornerAdjacency b) {
@@ -54,17 +61,9 @@ public class PatternCornerAdjacency : IComparable<PatternCornerAdjacency> {
         ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    hash = hash * 1337;
-    hash = hash + groupRelativeX.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + groupRelativeY.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + tileIndex.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + cornerIndex.GetHashCode();
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(PatternCornerAdjacency that) {
     if (groupRelativeX != that.groupRelativeX) {
       return groupRelativeX.CompareTo(that.groupRelativeX);
@@ -82,10 +81,10 @@ public class PatternCornerAdjacency : IComparable<PatternCornerAdjacency> {
   }
   public string DStr() {
     return "PatternCornerAdjacency(" +
-        groupRelativeX + ", " +
-        groupRelativeY + ", " +
-        tileIndex + ", " +
-        cornerIndex
+        groupRelativeX.DStr() + ", " +
+        groupRelativeY.DStr() + ", " +
+        tileIndex.DStr() + ", " +
+        cornerIndex.DStr()
         + ")";
 
     }

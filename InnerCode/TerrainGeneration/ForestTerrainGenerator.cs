@@ -4,7 +4,7 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class ForestTerrainGenerator {
-    public static Terrain Generate(Root root, Rand rand, Pattern pattern) {
+    public static Terrain Generate(SSContext context, Rand rand, Pattern pattern) {
       float elevationStepHeight = .2f;
 
       // The "canvas" is the entire area of the level upon which we will
@@ -63,11 +63,13 @@ namespace IncendianFalls {
 
       ConnectRooms(pattern, rand, roomByNumber);
 
-      var tiles = root.EffectTerrainTileByLocationMutMapCreate();
+      var tiles = context.root.EffectTerrainTileByLocationMutMapCreate();
 
       foreach (var room in roomByNumber.Values) {
         foreach (var roomFloorLocation in room.floors) {
-          var tile = root.EffectTerrainTileCreate(1, true, "grass");
+          var tile =
+              context.root.EffectTerrainTileCreate(
+                  1, true, "grass", context.root.EffectIFeatureMutListCreate());
           tiles.Add(roomFloorLocation, tile);
         }
       }
@@ -76,11 +78,13 @@ namespace IncendianFalls {
       var allAdjacent = pattern.GetAdjacentLocations(allTiles, true);
       SetUtils.RemoveAll(allAdjacent, allTiles);
       foreach (var borderLocation in allAdjacent) {
-        var tile = root.EffectTerrainTileCreate(2, false, "grass");
+        var tile =
+            context.root.EffectTerrainTileCreate(
+                2, false, "grass", context.root.EffectIFeatureMutListCreate());
         tiles.Add(borderLocation, tile);
       }
 
-      var terrain = root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
+      var terrain = context.root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
       return terrain;
     }
 
@@ -114,16 +118,6 @@ namespace IncendianFalls {
       }
 
       while (true) {
-        //Logger.Info("Starting iteration!");
-        //foreach (var roomNumberAndRegion in regionByRoomNumber) {
-        //  Logger.Info(roomNumberAndRegion.Key + " is in " + roomNumberAndRegion.Value);
-        //}
-        //foreach (var regionAndRoomNumbers in roomNumbersByRegion) {
-        //  foreach (var roomNumber in regionAndRoomNumbers.Value) {
-        //    Logger.Info(regionAndRoomNumbers.Key + " has " + roomNumber);
-        //  }
-        //}
-
         var distinctRegions = new SortedSet<String>(regionByRoomNumber.Values);
         //Logger.Info(distinctRegions.Count + " distinct regions!");
         if (distinctRegions.Count < 2) {

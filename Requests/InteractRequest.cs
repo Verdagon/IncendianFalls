@@ -3,12 +3,8 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class InteractRequestExecutor {
-    ILogger logger;
-    public InteractRequestExecutor(ILogger logger) {
-      this.logger = logger;
-    }
-    public bool Execute(Root root, int gameId, int interactableId) {
-      var game = root.GetGame(gameId);
+    public static bool Execute(SSContext context, int gameId, int interactableId) {
+      var game = context.root.GetGame(gameId);
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
@@ -18,13 +14,13 @@ namespace IncendianFalls {
       var player = game.player;
 
       Asserts.Assert(game.executionState.actingUnit.Is(game.player));
-      Asserts.Assert(game.player.Is(Utils.GetNextActingUnit(root, game)));
+      Asserts.Assert(game.player.Is(Utils.GetNextActingUnit(game)));
 
-      Actions.Interact(game, game.player);
+      bool success = Actions.Interact(context, game, game.player);
 
       GameLoop.NoteUnitActed(game, game.player);
 
-      return true;
+      return success;
     }
   }
 }

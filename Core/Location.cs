@@ -9,7 +9,7 @@ public class Location : IComparable<Location> {
       return a.Equals(b);
     }
     public int GetHashCode(Location a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<Location> {
@@ -17,6 +17,7 @@ public class Location : IComparable<Location> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public readonly int groupX;
   public readonly int groupY;
   public readonly int indexInGroup;
@@ -27,6 +28,11 @@ public class Location : IComparable<Location> {
     this.groupX = groupX;
     this.groupY = groupY;
     this.indexInGroup = indexInGroup;
+    int hash = 0;
+    hash = hash * 37 + groupX.GetDeterministicHashCode();
+    hash = hash * 37 + groupY.GetDeterministicHashCode();
+    hash = hash * 37 + indexInGroup.GetDeterministicHashCode();
+    this.hashCode = hash;
 
   }
   public static bool operator==(Location a, Location b) {
@@ -50,15 +56,9 @@ public class Location : IComparable<Location> {
         ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    hash = hash * 1337;
-    hash = hash + groupX.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + groupY.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + indexInGroup.GetHashCode();
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(Location that) {
     if (groupX != that.groupX) {
       return groupX.CompareTo(that.groupX);
@@ -73,9 +73,9 @@ public class Location : IComparable<Location> {
   }
   public string DStr() {
     return "Location(" +
-        groupX + ", " +
-        groupY + ", " +
-        indexInGroup
+        groupX.DStr() + ", " +
+        groupY.DStr() + ", " +
+        indexInGroup.DStr()
         + ")";
 
     }

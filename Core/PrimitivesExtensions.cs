@@ -18,6 +18,35 @@ public static class PrimitivesExtensions {
   public static int Compare(this string a, string b) {
     return a.CompareTo(b);
   }
+  public static int GetDeterministicHashCode(this int a) {
+    return a.GetHashCode();
+  }
+  public static int GetDeterministicHashCode(this bool a) {
+    return a.GetHashCode();
+  }
+  public static int GetDeterministicHashCode(this float a) {
+    return a.GetHashCode();
+  }
+  public static int GetDeterministicHashCode(this string s) {
+    int hash = 0;
+    hash = 37 * hash + s.Length;
+    foreach (var c in s) {
+      hash = 37 * hash + c;
+    }
+    return hash;
+  }
+  public static string DStr(this int a) {
+    return a.ToString();
+  }
+  public static string DStr(this bool a) {
+    return a ? "true" : "false";
+  }
+  public static string DStr(this float a) {
+    return a.ToString();
+  }
+  public static string DStr(this string s) {
+    return '"' + s + '"';
+  }
 }
     
 }

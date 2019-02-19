@@ -9,7 +9,7 @@ public class TimeShiftRequest : IComparable<TimeShiftRequest> {
       return a.Equals(b);
     }
     public int GetHashCode(TimeShiftRequest a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<TimeShiftRequest> {
@@ -17,6 +17,7 @@ public class TimeShiftRequest : IComparable<TimeShiftRequest> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public readonly int gameId;
   public readonly int version;
   public readonly int futuremostTime;
@@ -27,6 +28,11 @@ public class TimeShiftRequest : IComparable<TimeShiftRequest> {
     this.gameId = gameId;
     this.version = version;
     this.futuremostTime = futuremostTime;
+    int hash = 0;
+    hash = hash * 37 + gameId.GetDeterministicHashCode();
+    hash = hash * 37 + version.GetDeterministicHashCode();
+    hash = hash * 37 + futuremostTime.GetDeterministicHashCode();
+    this.hashCode = hash;
 
   }
   public static bool operator==(TimeShiftRequest a, TimeShiftRequest b) {
@@ -50,15 +56,9 @@ public class TimeShiftRequest : IComparable<TimeShiftRequest> {
         ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    hash = hash * 1337;
-    hash = hash + gameId.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + version.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + futuremostTime.GetHashCode();
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(TimeShiftRequest that) {
     if (gameId != that.gameId) {
       return gameId.CompareTo(that.gameId);
@@ -73,9 +73,9 @@ public class TimeShiftRequest : IComparable<TimeShiftRequest> {
   }
   public string DStr() {
     return "TimeShiftRequest(" +
-        gameId + ", " +
-        version + ", " +
-        futuremostTime
+        gameId.DStr() + ", " +
+        version.DStr() + ", " +
+        futuremostTime.DStr()
         + ")";
 
     }

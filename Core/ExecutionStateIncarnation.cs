@@ -17,6 +17,14 @@ public class ExecutionStateIncarnation {
     this.remainingPreActingDetails = remainingPreActingDetails;
     this.remainingPostActingDetails = remainingPostActingDetails;
   }
+  public int GetDeterministicHashCode() {
+    int s = 0;
+    s = s * 37 + actingUnit.GetDeterministicHashCode();
+    s = s * 37 + actingUnitDidAction.GetDeterministicHashCode();
+    s = s * 37 + remainingPreActingDetails.GetDeterministicHashCode();
+    s = s * 37 + remainingPostActingDetails.GetDeterministicHashCode();
+    return s;
+  }
 }
 
 }

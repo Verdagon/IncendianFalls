@@ -4,12 +4,8 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class MoveRequestExecutor {
-    ILogger logger;
-    public MoveRequestExecutor(ILogger logger) {
-      this.logger = logger;
-    }
-    public bool Execute(Root root, int gameId, Location destination) {
-      var game = root.GetGame(gameId);
+    public static bool Execute(SSContext context, int gameId, Location destination) {
+      var game = context.root.GetGame(gameId);
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
@@ -21,7 +17,7 @@ namespace IncendianFalls {
       if (!game.executionState.actingUnit.NullableIs(game.player)) {
         throw new Exception("Player isn't the state's acting unit!");
       }
-      if (!game.player.NullableIs(Utils.GetNextActingUnit(root, game))) {
+      if (!game.player.NullableIs(Utils.GetNextActingUnit(game))) {
         throw new Exception("Player isn't the next acting unit!");
       }
 
@@ -30,18 +26,18 @@ namespace IncendianFalls {
       }
 
       if (destination == player.location) {
-        logger.Error("Already there!");
+        Logger.Error("Already there!");
         return false;
       }
 
       var steps = AStarExplorer.Go(game.level.terrain, game.player.location, destination, game.level.considerCornersAdjacent);
       if (steps.Count == 0) {
-        logger.Error("No path!");
+        Logger.Error("No path!");
         return false;
       }
 
-      var path = root.EffectLocationMutListCreate(steps);
-      var directive = root.EffectMoveDirectiveCreate(path);
+      var path = context.root.EffectLocationMutListCreate(steps);
+      var directive = context.root.EffectMoveDirectiveCreate(path);
       player.directive = new MoveDirectiveAsIDirective(directive);
 
       if (!PlayerAI.FollowMoveDirective(game, liveUnitByLocationMap, game.player)) {

@@ -9,7 +9,7 @@ public class MoveRequest : IComparable<MoveRequest> {
       return a.Equals(b);
     }
     public int GetHashCode(MoveRequest a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<MoveRequest> {
@@ -17,6 +17,7 @@ public class MoveRequest : IComparable<MoveRequest> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public readonly int gameId;
   public readonly Location destination;
   public MoveRequest(
@@ -24,6 +25,10 @@ public class MoveRequest : IComparable<MoveRequest> {
       Location destination) {
     this.gameId = gameId;
     this.destination = destination;
+    int hash = 0;
+    hash = hash * 37 + gameId.GetDeterministicHashCode();
+    hash = hash * 37 + destination.GetDeterministicHashCode();
+    this.hashCode = hash;
 
   }
   public static bool operator==(MoveRequest a, MoveRequest b) {
@@ -46,13 +51,9 @@ public class MoveRequest : IComparable<MoveRequest> {
         ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    hash = hash * 1337;
-    hash = hash + gameId.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + destination.GetHashCode();
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(MoveRequest that) {
     if (gameId != that.gameId) {
       return gameId.CompareTo(that.gameId);
@@ -64,7 +65,7 @@ public class MoveRequest : IComparable<MoveRequest> {
   }
   public string DStr() {
     return "MoveRequest(" +
-        gameId + ", " +
+        gameId.DStr() + ", " +
         destination.DStr()
         + ")";
 

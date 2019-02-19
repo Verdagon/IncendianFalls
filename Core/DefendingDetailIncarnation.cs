@@ -8,6 +8,11 @@ public class DefendingDetailIncarnation {
       int power) {
     this.power = power;
   }
+  public int GetDeterministicHashCode() {
+    int s = 0;
+    s = s * 37 + power.GetDeterministicHashCode();
+    return s;
+  }
 }
 
 }

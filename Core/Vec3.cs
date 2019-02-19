@@ -9,7 +9,7 @@ public class Vec3 : IComparable<Vec3> {
       return a.Equals(b);
     }
     public int GetHashCode(Vec3 a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<Vec3> {
@@ -17,6 +17,7 @@ public class Vec3 : IComparable<Vec3> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public readonly float x;
   public readonly float y;
   public readonly float z;
@@ -27,6 +28,11 @@ public class Vec3 : IComparable<Vec3> {
     this.x = x;
     this.y = y;
     this.z = z;
+    int hash = 0;
+    hash = hash * 37 + x.GetDeterministicHashCode();
+    hash = hash * 37 + y.GetDeterministicHashCode();
+    hash = hash * 37 + z.GetDeterministicHashCode();
+    this.hashCode = hash;
 
   }
   public static bool operator==(Vec3 a, Vec3 b) {
@@ -50,15 +56,9 @@ public class Vec3 : IComparable<Vec3> {
         ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    hash = hash * 1337;
-    hash = hash + x.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + y.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + z.GetHashCode();
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(Vec3 that) {
     if (x != that.x) {
       return x.CompareTo(that.x);
@@ -73,9 +73,9 @@ public class Vec3 : IComparable<Vec3> {
   }
   public string DStr() {
     return "Vec3(" +
-        x + ", " +
-        y + ", " +
-        z
+        x.DStr() + ", " +
+        y.DStr() + ", " +
+        z.DStr()
         + ")";
 
     }

@@ -20,7 +20,6 @@ namespace IncendianFalls {
       directive.path.RemoveAt(0);
 
       if (directive.path.Count == 0) {
-        Console.WriteLine("Accomplished directive, deleting!");
         directive.Delete();
       }
 

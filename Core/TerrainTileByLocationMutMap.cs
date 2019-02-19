@@ -34,6 +34,10 @@ public class TerrainTileByLocationMutMap {
 
   public int Count { get { return incarnation.map.Count; } }
 
+  public int GetDeterministicHashCode() {
+    return incarnation.GetDeterministicHashCode();
+  }
+
   public bool ContainsKey(Location key) {
     return incarnation.map.ContainsKey(key);
   }

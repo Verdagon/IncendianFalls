@@ -9,7 +9,7 @@ public class UnitAttackEvent : IComparable<UnitAttackEvent> {
       return a.Equals(b);
     }
     public int GetHashCode(UnitAttackEvent a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<UnitAttackEvent> {
@@ -17,6 +17,7 @@ public class UnitAttackEvent : IComparable<UnitAttackEvent> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public readonly int time;
   public readonly int attackerId;
   public readonly int victimId;
@@ -27,6 +28,11 @@ public class UnitAttackEvent : IComparable<UnitAttackEvent> {
     this.time = time;
     this.attackerId = attackerId;
     this.victimId = victimId;
+    int hash = 0;
+    hash = hash * 37 + time.GetDeterministicHashCode();
+    hash = hash * 37 + attackerId.GetDeterministicHashCode();
+    hash = hash * 37 + victimId.GetDeterministicHashCode();
+    this.hashCode = hash;
 
   }
   public static bool operator==(UnitAttackEvent a, UnitAttackEvent b) {
@@ -50,15 +56,9 @@ public class UnitAttackEvent : IComparable<UnitAttackEvent> {
         ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    hash = hash * 1337;
-    hash = hash + time.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + attackerId.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + victimId.GetHashCode();
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(UnitAttackEvent that) {
     if (time != that.time) {
       return time.CompareTo(that.time);
@@ -73,9 +73,9 @@ public class UnitAttackEvent : IComparable<UnitAttackEvent> {
   }
   public string DStr() {
     return "UnitAttackEvent(" +
-        time + ", " +
-        attackerId + ", " +
-        victimId
+        time.DStr() + ", " +
+        attackerId.DStr() + ", " +
+        victimId.DStr()
         + ")";
 
     }

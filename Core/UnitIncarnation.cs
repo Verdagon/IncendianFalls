@@ -47,6 +47,24 @@ public class UnitIncarnation {
     this.details = details;
     this.items = items;
   }
+  public int GetDeterministicHashCode() {
+    int s = 0;
+    s = s * 37 + events.GetDeterministicHashCode();
+    s = s * 37 + alive.GetDeterministicHashCode();
+    s = s * 37 + lifeEndTime.GetDeterministicHashCode();
+    s = s * 37 + location.GetDeterministicHashCode();
+    s = s * 37 + classId.GetDeterministicHashCode();
+    s = s * 37 + hp.GetDeterministicHashCode();
+    s = s * 37 + maxHp.GetDeterministicHashCode();
+    s = s * 37 + mp.GetDeterministicHashCode();
+    s = s * 37 + maxMp.GetDeterministicHashCode();
+    s = s * 37 + inertia.GetDeterministicHashCode();
+    s = s * 37 + nextActionTime.GetDeterministicHashCode();
+    s = s * 37 + directive.GetDeterministicHashCode();
+    s = s * 37 + details.GetDeterministicHashCode();
+    s = s * 37 + items.GetDeterministicHashCode();
+    return s;
+  }
 }
 
 }

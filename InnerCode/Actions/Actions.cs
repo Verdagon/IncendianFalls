@@ -10,8 +10,6 @@ namespace IncendianFalls {
         Unit victim) {
       Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
 
-      attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
-
       int damage = 5;
       foreach (var item in attacker.items) {
         damage = item.AffectOutgoingDamage(damage);
@@ -32,6 +30,8 @@ namespace IncendianFalls {
         victim.nextActionTime = game.time;
         liveUnitByLocationMap.Remove(victim);
       }
+
+      attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
     }
 
     public static void Defend(
@@ -43,26 +43,47 @@ namespace IncendianFalls {
       unit.nextActionTime = unit.nextActionTime + unit.inertia;
     }
 
-    public static void Interact(
+    private static bool TileHasDownStaircase(
+        SSContext context,
+        Game game,
+        Location location) {
+      foreach (var thing in game.level.terrain.tiles[location].features) {
+        if (thing is DownStaircaseFeatureAsIFeature down) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    public static bool Interact(
+        SSContext context,
         Game game,
         Unit unit) {
       Asserts.Assert(unit.Is(game.player));
       var player = game.player;
 
-      string levelName = "Falls" + game.levels.Count;
+      if (TileHasDownStaircase(context, game, player.location)) {
+        string levelName = "Falls" + game.levels.Count;
 
-      // Remove the player, player now has no level.
-      game.level.units.Remove(player);
-      var nextLevel = MakeLevel.MakeNextLevel(game.root, game.rand, game.squareLevelsOnly, levelName);
-      game.levels.Add(nextLevel);
+        // Remove the player, player now has no level.
+        game.level.units.Remove(player);
+        var nextLevel =
+            MakeLevel.MakeNextLevel(
+                context, game.rand, game.time, game.squareLevelsOnly, levelName);
+        game.levels.Add(nextLevel);
 
-      var walkableLocations = new WalkableLocations(nextLevel.terrain, nextLevel.units);
-      player.location = walkableLocations.GetRandom(game.rand.Next());
-      nextLevel.units.Add(player);
+        var walkableLocations = new WalkableLocations(nextLevel.terrain, nextLevel.units);
+        player.location = walkableLocations.GetRandom(game.rand.Next());
+        nextLevel.units.Add(player);
 
-      game.level = nextLevel;
+        game.level = nextLevel;
 
-      unit.nextActionTime = unit.nextActionTime + unit.inertia;
+        unit.nextActionTime = unit.nextActionTime + unit.inertia;
+
+        return true;
+      } else {
+        return false;
+      }
     }
 
     public static bool CanStep(

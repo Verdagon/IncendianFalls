@@ -9,7 +9,7 @@ public class PatternTile : IComparable<PatternTile> {
       return a.Equals(b);
     }
     public int GetHashCode(PatternTile a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<PatternTile> {
@@ -17,6 +17,7 @@ public class PatternTile : IComparable<PatternTile> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public readonly int shapeIndex;
   public readonly float rotateDegrees;
   public readonly Vec2 translate;
@@ -33,6 +34,13 @@ public class PatternTile : IComparable<PatternTile> {
     this.translate = translate;
     this.sideAdjacenciesBySideIndex = sideAdjacenciesBySideIndex;
     this.cornerAdjacenciesByCornerIndex = cornerAdjacenciesByCornerIndex;
+    int hash = 0;
+    hash = hash * 37 + shapeIndex.GetDeterministicHashCode();
+    hash = hash * 37 + rotateDegrees.GetDeterministicHashCode();
+    hash = hash * 37 + translate.GetDeterministicHashCode();
+    hash = hash * 37 + sideAdjacenciesBySideIndex.GetDeterministicHashCode();
+    hash = hash * 37 + cornerAdjacenciesByCornerIndex.GetDeterministicHashCode();
+    this.hashCode = hash;
 
   }
   public static bool operator==(PatternTile a, PatternTile b) {
@@ -58,19 +66,9 @@ public class PatternTile : IComparable<PatternTile> {
         ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    hash = hash * 1337;
-    hash = hash + shapeIndex.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + rotateDegrees.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + translate.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + sideAdjacenciesBySideIndex.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + cornerAdjacenciesByCornerIndex.GetHashCode();
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(PatternTile that) {
     if (shapeIndex != that.shapeIndex) {
       return shapeIndex.CompareTo(that.shapeIndex);
@@ -91,8 +89,8 @@ public class PatternTile : IComparable<PatternTile> {
   }
   public string DStr() {
     return "PatternTile(" +
-        shapeIndex + ", " +
-        rotateDegrees + ", " +
+        shapeIndex.DStr() + ", " +
+        rotateDegrees.DStr() + ", " +
         translate.DStr() + ", " +
         sideAdjacenciesBySideIndex.DStr() + ", " +
         cornerAdjacenciesByCornerIndex.DStr()

@@ -9,6 +9,8 @@ public class DefendRequestAsIRequest : IRequest {
     this.obj = obj;
   }
   public string DStr() { return obj.DStr(); }
+  public int GetDeterministicHashCode() { return obj.GetDeterministicHashCode(); }
+  public override int GetHashCode() { return GetDeterministicHashCode(); }
      
   public void Visit(IRequestVisitor visitor) { visitor.Visit(this); }
 }

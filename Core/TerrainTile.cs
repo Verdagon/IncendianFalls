@@ -50,5 +50,8 @@ public class TerrainTile {
   public string classId {
     get { return incarnation.classId; }
   }
+  public IFeatureMutList features {
+    get { return new IFeatureMutList(root, incarnation.features); }
+  }
 }
 }

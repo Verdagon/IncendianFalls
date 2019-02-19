@@ -9,7 +9,7 @@ public class Pattern : IComparable<Pattern> {
       return a.Equals(b);
     }
     public int GetHashCode(Pattern a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<Pattern> {
@@ -17,6 +17,7 @@ public class Pattern : IComparable<Pattern> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public readonly string name;
   public readonly Vec2ListList cornersByShapeIndex;
   public readonly PatternTileList patternTiles;
@@ -33,6 +34,13 @@ public class Pattern : IComparable<Pattern> {
     this.patternTiles = patternTiles;
     this.xOffset = xOffset;
     this.yOffset = yOffset;
+    int hash = 0;
+    hash = hash * 37 + name.GetDeterministicHashCode();
+    hash = hash * 37 + cornersByShapeIndex.GetDeterministicHashCode();
+    hash = hash * 37 + patternTiles.GetDeterministicHashCode();
+    hash = hash * 37 + xOffset.GetDeterministicHashCode();
+    hash = hash * 37 + yOffset.GetDeterministicHashCode();
+    this.hashCode = hash;
 
   }
   public static bool operator==(Pattern a, Pattern b) {
@@ -58,19 +66,9 @@ public class Pattern : IComparable<Pattern> {
         ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    hash = hash * 1337;
-    hash = hash + name.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + cornersByShapeIndex.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + patternTiles.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + xOffset.GetHashCode();
-    hash = hash * 1337;
-    hash = hash + yOffset.GetHashCode();
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(Pattern that) {
     if (name != that.name) {
       return name.CompareTo(that.name);
@@ -91,7 +89,7 @@ public class Pattern : IComparable<Pattern> {
   }
   public string DStr() {
     return "Pattern(" +
-        '"' + name + '"' + ", " +
+        name.DStr() + ", " +
         cornersByShapeIndex.DStr() + ", " +
         patternTiles.DStr() + ", " +
         xOffset.DStr() + ", " +

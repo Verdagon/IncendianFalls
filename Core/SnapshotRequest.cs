@@ -9,7 +9,7 @@ public class SnapshotRequest : IComparable<SnapshotRequest> {
       return a.Equals(b);
     }
     public int GetHashCode(SnapshotRequest a) {
-      return a.GetHashCode();
+      return a.GetDeterministicHashCode();
     }
   }
   public class Comparer : IComparer<SnapshotRequest> {
@@ -17,8 +17,11 @@ public class SnapshotRequest : IComparable<SnapshotRequest> {
       return a.CompareTo(b);
     }
   }
+  private readonly int hashCode;
        public SnapshotRequest(
 ) {
+    int hash = 0;
+    this.hashCode = hash;
 
   }
   public static bool operator==(SnapshotRequest a, SnapshotRequest b) {
@@ -39,9 +42,9 @@ public class SnapshotRequest : IComparable<SnapshotRequest> {
              ;
   }
   public override int GetHashCode() {
-    int hash = 0;
-    return hash;
+    return GetDeterministicHashCode();
   }
+  public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(SnapshotRequest that) {
     return 0;
   }

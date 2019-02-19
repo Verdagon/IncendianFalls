@@ -4,12 +4,6 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class Utils {
-    ILogger logger;
-
-    public Utils(ILogger logger) {
-      this.logger = logger;
-    }
-
     private class LowerNextActionTimeComparer : IComparer<Unit> {
       public int Compare(Unit a, Unit b) {
         var tickDiff = Math.Sign(a.nextActionTime - b.nextActionTime);
@@ -21,7 +15,7 @@ namespace IncendianFalls {
 
     // Returns false if it couldn't figure out what the player should do and instead wants
     // direct input.
-    public static Unit GetNextActingUnit(Root root, Game game) {
+    public static Unit GetNextActingUnit(Game game) {
       if (game.level.units.Count == 0) {
         // Caller should check before calling us.
         throw new Exception("No units!");

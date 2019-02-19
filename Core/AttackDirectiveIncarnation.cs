@@ -11,6 +11,12 @@ public class AttackDirectiveIncarnation {
     this.targetUnit = targetUnit;
     this.pathToLastSeenLocation = pathToLastSeenLocation;
   }
+  public int GetDeterministicHashCode() {
+    int s = 0;
+    s = s * 37 + targetUnit.GetDeterministicHashCode();
+    s = s * 37 + pathToLastSeenLocation.GetDeterministicHashCode();
+    return s;
+  }
 }
 
 }
