@@ -9,7 +9,7 @@ namespace IncendianFalls {
     public WalkableLocations() {
       walkableLocations = new SortedSet<Location>();
     }
-    public WalkableLocations(Terrain terrain, UnitMutBunch units) : this() {
+    public WalkableLocations(Terrain terrain, UnitMutSet units) : this() {
       foreach (var locationAndTile in terrain.tiles) {
         if (locationAndTile.Value.walkable) {
           walkableLocations.Add(locationAndTile.Key);
@@ -37,40 +37,58 @@ namespace IncendianFalls {
         Rand rand,
         int currentTime,
         Terrain terrain,
-        UnitMutBunch units,
+        UnitMutSet units,
         WalkableLocations walkableLocations,
         int numUnits) {
       context.root.GetDeterministicHashCode();
       for (int i = 0; i < numUnits; i++) {
         context.root.GetDeterministicHashCode();
-        var goblinLocation = walkableLocations.GetRandom(rand.Next());
-        walkableLocations.Remove(goblinLocation);
+        var enemyLocation = walkableLocations.GetRandom(rand.Next());
+        walkableLocations.Remove(enemyLocation);
 
         context.root.GetDeterministicHashCode();
 
-        var goblin =
-            context.root.EffectUnitCreate(
-                context.root.EffectIUnitEventMutListCreate(),
-                true,
-                0,
-                goblinLocation,
-                "goblin",
-                3, 3,
-                40, 40,
-                600,
-                currentTime,
-                new MoveDirectiveAsIDirective(MoveDirective.Null),
-                context.root.EffectIDetailMutListCreate(),
-                context.root.EffectIItemMutBunchCreate());
+        Unit enemy;
+        if (rand.Next(0, 5) == 0) {
+          enemy =
+              context.root.EffectUnitCreate(
+                  context.root.EffectIUnitEventMutListCreate(),
+                  true,
+                  0,
+                  enemyLocation,
+                  "goblin",
+                  3, 3,
+                  0, 0,
+                  600,
+                  currentTime,
+                  new MoveDirectiveAsIDirective(MoveDirective.Null),
+                  IUnitComponentMutBunch.New(context.root),
+                  IItemMutBunch.New(context.root));
+        } else {
+          enemy =
+              context.root.EffectUnitCreate(
+                  context.root.EffectIUnitEventMutListCreate(),
+                  true,
+                  0,
+                  enemyLocation,
+                  "irklingking",
+                  10, 10,
+                  40, 40,
+                  600,
+                  currentTime,
+                  new MoveDirectiveAsIDirective(MoveDirective.Null),
+                  IUnitComponentMutBunch.New(context.root),
+                  IItemMutBunch.New(context.root));
+        }
         context.root.GetDeterministicHashCode();
-        units.Add(goblin);
+        units.Add(enemy);
         context.root.GetDeterministicHashCode();
 
         if (rand.Next(0, 3) == 0) {
-          goblin.items.Add(new ArmorAsIItem(context.root.EffectArmorCreate()));
+          enemy.items.Add(new ArmorAsIItem(context.root.EffectArmorCreate()));
         }
         if (rand.Next(0, 3) == 0) {
-          goblin.items.Add(new GlaiveAsIItem(context.root.EffectGlaiveCreate()));
+          enemy.items.Add(new GlaiveAsIItem(context.root.EffectGlaiveCreate()));
         }
       }
     }
@@ -78,7 +96,7 @@ namespace IncendianFalls {
     public static Unit MakePlayer(
         SSContext context,
         Rand rand,
-        UnitMutBunch units,
+        UnitMutSet units,
         WalkableLocations walkableLocations) {
 
       var playerLocation = walkableLocations.GetRandom(rand.Next());
@@ -95,8 +113,8 @@ namespace IncendianFalls {
               600,
               0,
               new MoveDirectiveAsIDirective(MoveDirective.Null),
-              context.root.EffectIDetailMutListCreate(),
-              context.root.EffectIItemMutBunchCreate());
+              IUnitComponentMutBunch.New(context.root),
+              IItemMutBunch.New(context.root));
       units.Add(player);
       return player;
     }

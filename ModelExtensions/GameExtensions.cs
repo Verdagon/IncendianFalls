@@ -16,10 +16,10 @@ namespace IncendianFalls {
       if (!game.executionState.actingUnit.Exists()) {
         return GameExecutionStateType.kBetweenUnits;
       }
-      if (game.executionState.remainingPreActingDetails.Exists()) {
+      if (game.executionState.remainingPreActingUnitComponents.Exists()) {
         return GameExecutionStateType.kPreActingDetail;
       }
-      if (game.executionState.remainingPostActingDetails.Exists()) {
+      if (game.executionState.remainingPostActingUnitComponents.Exists()) {
         return GameExecutionStateType.kPostActingDetail;
       }
       if (!game.executionState.actingUnitDidAction) {

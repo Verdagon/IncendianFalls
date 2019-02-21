@@ -14,7 +14,7 @@ namespace IncendianFalls {
       foreach (var item in attacker.items) {
         damage = item.AffectOutgoingDamage(damage);
       }
-      foreach (var detail in victim.details) {
+      foreach (var detail in victim.components.GetAllIDefenseUnitComponent()) {
         damage = detail.AffectIncomingDamage(damage);
       }
       foreach (var item in victim.items) {
@@ -37,8 +37,8 @@ namespace IncendianFalls {
     public static void Defend(
         Game game,
         Unit unit) {
-      var detail = game.root.EffectDefendingDetailCreate(3);
-      unit.details.Add(detail.AsIDetail());
+      var detail = game.root.EffectShieldingUnitComponentCreate(3);
+      unit.components.Add(detail.AsIUnitComponent());
 
       unit.nextActionTime = unit.nextActionTime + unit.inertia;
     }
@@ -47,8 +47,8 @@ namespace IncendianFalls {
         SSContext context,
         Game game,
         Location location) {
-      foreach (var thing in game.level.terrain.tiles[location].features) {
-        if (thing is DownStaircaseFeatureAsIFeature down) {
+      foreach (var thing in game.level.terrain.tiles[location].components) {
+        if (thing is DownStaircaseTerrainTileComponentAsITerrainTileComponent down) {
           return true;
         }
       }

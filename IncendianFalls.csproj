@@ -34,8 +34,4 @@
     <Folder Include="InnerCode\TerrainGeneration\" />
     <Folder Include="InnerCode\Patterns\" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="InnerCode\PlayerAI.cs" />
-    <Compile Remove="Requests\SetupPentagonalRequest.cs" />
-  </ItemGroup>
 </Project>

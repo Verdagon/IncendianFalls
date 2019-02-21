@@ -23,12 +23,12 @@ namespace IncendianFalls {
       tiles.Add(
           new Location(0, 0, 0),
           context.root.EffectTerrainTileCreate(
-              1, true, "floor", context.root.EffectIFeatureMutListCreate()));
+              1, true, "floor", ITerrainTileComponentMutBunch.New(context.root)));
       var terrain = context.root.EffectTerrainCreate(SquarePattern.MakeSquarePattern(), 1, tiles);
-      return context.root.EffectLevelCreate(name, false, terrain, context.root.EffectUnitMutBunchCreate());
+      return context.root.EffectLevelCreate(name, false, terrain, context.root.EffectUnitMutSetCreate());
     }
 
-    private static void PlaceStaircases(SSContext context, Rand rand, Terrain terrain, UnitMutBunch units) {
+    private static void PlaceStaircases(SSContext context, Rand rand, Terrain terrain, UnitMutSet units) {
 
       var walkableLocations = new WalkableLocations(terrain, units);
 
@@ -37,10 +37,10 @@ namespace IncendianFalls {
       var downStaircaseLocation = staircaseLocations[1];
 
       var upStaircaseTile = terrain.tiles[upStaircaseLocation];
-      upStaircaseTile.features.Add(new UpStaircaseFeatureAsIFeature(context.root.EffectUpStaircaseFeatureCreate()));
+      upStaircaseTile.components.Add(new UpStaircaseTerrainTileComponentAsITerrainTileComponent(context.root.EffectUpStaircaseTerrainTileComponentCreate()));
 
       var downStaircaseTile = terrain.tiles[downStaircaseLocation];
-      downStaircaseTile.features.Add(new DownStaircaseFeatureAsIFeature(context.root.EffectDownStaircaseFeatureCreate()));
+      downStaircaseTile.components.Add(new DownStaircaseTerrainTileComponentAsITerrainTileComponent(context.root.EffectDownStaircaseTerrainTileComponentCreate()));
     }
 
     private static Level MakePentagonalLevel(
@@ -54,7 +54,7 @@ namespace IncendianFalls {
               rand,
               PentagonPattern9.makePentagon9Pattern());
 
-      var units = context.root.EffectUnitMutBunchCreate();
+      var units = context.root.EffectUnitMutSetCreate();
 
       var walkableLocations = new WalkableLocations(terrain, units);
 
@@ -74,7 +74,7 @@ namespace IncendianFalls {
       var terrain = DungeonTerrainGenerator.Generate(context, 80, 20, rand);
       context.root.GetDeterministicHashCode();
 
-      var units = context.root.EffectUnitMutBunchCreate();
+      var units = context.root.EffectUnitMutSetCreate();
 
       context.root.GetDeterministicHashCode();
 

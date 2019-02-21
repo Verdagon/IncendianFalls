@@ -29,7 +29,7 @@ namespace IncendianFalls {
 
       context.root.GetDeterministicHashCode();
 
-      var levels = context.root.EffectLevelMutBunchCreate();
+      var levels = context.root.EffectLevelMutSetCreate();
       context.root.GetDeterministicHashCode();
 
       levels.Add(firstLevel);
@@ -44,7 +44,7 @@ namespace IncendianFalls {
               player,
               firstLevel,
               0,
-              context.root.EffectExecutionStateCreate(Unit.Null, false, IDetailMutList.Null, IDetailMutList.Null));
+              context.root.EffectExecutionStateCreate(Unit.Null, false, IPreActingUnitComponentMutBunch.Null, IPostActingUnitComponentMutBunch.Null));
 
       context.root.GetDeterministicHashCode();
 

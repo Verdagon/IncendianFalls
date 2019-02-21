@@ -25,7 +25,7 @@ namespace IncendianFalls {
                   1,
                   true,
                   "grass",
-                  context.root.EffectIFeatureMutListCreate()));
+                  ITerrainTileComponentMutBunch.New(context.root)));
         } else {
           break;
         }

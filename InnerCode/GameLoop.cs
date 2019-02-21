@@ -15,8 +15,8 @@ namespace IncendianFalls {
 
       var executionState = game.executionState;
       Asserts.Assert(!executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPreActingDetails.Exists());
-      Asserts.Assert(!executionState.remainingPostActingDetails.Exists());
+      Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
+      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
 
       StartNextUnit(game, liveUnitByLocationMap);
     }
@@ -26,8 +26,8 @@ namespace IncendianFalls {
 
       var executionState = game.executionState;
       Asserts.Assert(executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPreActingDetails.Exists());
-      Asserts.Assert(!executionState.remainingPostActingDetails.Exists());
+      Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
+      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
       Asserts.Assert(!executionState.actingUnitDidAction);
 
       executionState.actingUnitDidAction = true;
@@ -41,8 +41,8 @@ namespace IncendianFalls {
 
       var executionState = game.executionState;
       Asserts.Assert(executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPreActingDetails.Exists());
-      Asserts.Assert(!executionState.remainingPostActingDetails.Exists());
+      Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
+      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
 
       StartPostActions(game, liveUnitByLocationMap);
     }
@@ -53,11 +53,11 @@ namespace IncendianFalls {
 
       var executionState = game.executionState;
 
-      var postActingDetails = game.root.EffectIDetailMutListCreate();
-      foreach (var details in executionState.actingUnit.details) {
+      var postActingDetails = IPostActingUnitComponentMutBunch.New(game.root);
+      foreach (var details in executionState.actingUnit.components.GetAllIPostActingUnitComponent()) {
         postActingDetails.Add(details);
       }
-      executionState.remainingPostActingDetails = postActingDetails;
+      executionState.remainingPostActingUnitComponents = postActingDetails;
 
       DoNextPostActingDetailOrContinue(game, liveUnitByLocationMap);
     }
@@ -68,12 +68,12 @@ namespace IncendianFalls {
 
       var executionState = game.executionState;
       var unit = executionState.actingUnit;
-      var remainingPostActingDetails = executionState.remainingPostActingDetails;
+      var remainingPostActingDetails = executionState.remainingPostActingUnitComponents;
       Asserts.Assert(remainingPostActingDetails.Exists());
 
       while (remainingPostActingDetails.Count > 0) {
-        var detail = remainingPostActingDetails[0];
-        remainingPostActingDetails.RemoveAt(0);
+        var detail = remainingPostActingDetails.GetArbitrary();
+        remainingPostActingDetails.Remove(detail);
         if (!detail.Exists()) {
           continue;
         }
@@ -81,7 +81,7 @@ namespace IncendianFalls {
         return; // To be continued... via ContinueAfterPostActingDetail.
       }
       // There were no existing remaining pre-acting details. Go on to the unit's acting.
-      executionState.remainingPostActingDetails.Delete();
+      executionState.remainingPostActingUnitComponents.Delete();
 
       executionState.actingUnit = new Unit(game.root, 0);
 
@@ -101,7 +101,7 @@ namespace IncendianFalls {
 
       var executionState = game.executionState;
       Asserts.Assert(!executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPostActingDetails.Exists());
+      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
 
       if (game.level.units.Count == 0) {
         return;
@@ -129,14 +129,14 @@ namespace IncendianFalls {
 
       var executionState = game.executionState;
       Asserts.Assert(executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPreActingDetails.Exists());
-      Asserts.Assert(!executionState.remainingPostActingDetails.Exists());
+      Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
+      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
 
-      var preTurnActingDetails = game.root.EffectIDetailMutListCreate();
-      foreach (var details in executionState.actingUnit.details) {
+      var preTurnActingDetails = IPreActingUnitComponentMutBunch.New(game.root);
+      foreach (var details in executionState.actingUnit.components.GetAllIPreActingUnitComponent()) {
         preTurnActingDetails.Add(details);
       }
-      executionState.remainingPreActingDetails = preTurnActingDetails;
+      executionState.remainingPreActingUnitComponents = preTurnActingDetails;
 
       DoNextPreActingDetailOrContinue(game, liveUnitByLocationMap);
     }
@@ -147,12 +147,12 @@ namespace IncendianFalls {
 
       var executionState = game.executionState;
       var unit = executionState.actingUnit;
-      var remainingPreActingDetails = executionState.remainingPreActingDetails;
+      var remainingPreActingDetails = executionState.remainingPreActingUnitComponents;
       Asserts.Assert(remainingPreActingDetails.Exists());
 
       while (remainingPreActingDetails.Count > 0) {
-        var detail = remainingPreActingDetails[0];
-        remainingPreActingDetails.RemoveAt(0);
+        var detail = remainingPreActingDetails.GetArbitrary();
+        remainingPreActingDetails.Remove(detail);
         if (!detail.Exists()) {
           continue;
         }
@@ -161,7 +161,7 @@ namespace IncendianFalls {
       }
 
       // There were no existing remaining pre-acting details. Go on to the unit's action.
-      executionState.remainingPreActingDetails.Delete();
+      executionState.remainingPreActingUnitComponents.Delete();
 
       DoUnitAction(game, liveUnitByLocationMap);
     }
@@ -178,8 +178,8 @@ namespace IncendianFalls {
 
       var executionState = game.executionState;
       Asserts.Assert(executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPreActingDetails.Exists());
-      Asserts.Assert(!executionState.remainingPostActingDetails.Exists());
+      Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
+      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
       Asserts.Assert(!executionState.actingUnitDidAction);
       var unit = executionState.actingUnit;
 
