@@ -13,7 +13,7 @@ namespace IncendianFalls {
       Asserts.Assert(directive.Exists());
 
       var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
-      Actions.Attack(game, liveUnitByLocationMap, unit, directive.targetUnit);
+      Actions.Attack(game, liveUnitByLocationMap, unit, directive.targetUnit, true);
 
       return new Atharia.Model.Void();
     }

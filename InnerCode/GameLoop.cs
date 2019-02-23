@@ -94,8 +94,6 @@ namespace IncendianFalls {
 
       executionState.actingUnit = new Unit(game.root, 0);
 
-      game.root.logger.Info("done with unit! " + unit.classId + " " + unit.nextActionTime);
-
       StartNextUnit(game, liveUnitByLocationMap);
 
       flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
@@ -125,7 +123,6 @@ namespace IncendianFalls {
 
 
       var nextUnit = Utils.GetNextActingUnit(game);
-      game.root.logger.Info("Starting unit! " + nextUnit.classId);
 
       game.time = nextUnit.nextActionTime;
 
@@ -146,7 +143,6 @@ namespace IncendianFalls {
 
     // Never called from the outside, always called by StartNextUnit
     private static void StartPreActions(Game game, LiveUnitByLocationMap liveUnitByLocationMap) {
-      game.root.logger.Info("Starting pre actions!");
 
       flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
@@ -158,7 +154,6 @@ namespace IncendianFalls {
       var preTurnActingDetails = IPreActingUCMutBunch.New(game.root);
       foreach (var details in executionState.actingUnit.components.GetAllIPreActingUC()) {
         preTurnActingDetails.Add(details);
-        game.root.logger.Info("Added to preturn acting: " + details);
       }
       executionState.remainingPreActingUnitComponents = preTurnActingDetails;
 

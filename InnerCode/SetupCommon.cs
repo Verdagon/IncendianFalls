@@ -69,6 +69,7 @@ namespace IncendianFalls {
                   components,
                   IItemMutBunch.New(context.root));
         } else {
+          components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
           enemy =
               context.root.EffectUnitCreate(
                   context.root.EffectIUnitEventMutListCreate(),

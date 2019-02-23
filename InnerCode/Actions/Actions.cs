@@ -7,7 +7,8 @@ namespace IncendianFalls {
         Game game,
         LiveUnitByLocationMap liveUnitByLocationMap,
         Unit attacker,
-        Unit victim) {
+        Unit victim,
+        bool updateNextActionTime) {
       Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
 
       int damage = 5;
@@ -31,7 +32,9 @@ namespace IncendianFalls {
         liveUnitByLocationMap.Remove(victim);
       }
 
-      attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
+      if (updateNextActionTime) {
+        attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
+      }
     }
 
     public static void Defend(

@@ -21,7 +21,7 @@ namespace IncendianFalls {
       Asserts.Assert(game.executionState.actingUnit.Is(game.player));
       Asserts.Assert(game.player.Is(Utils.GetNextActingUnit(game)));
 
-      Actions.Attack(game, liveUnitByLocationMap, game.player, victim);
+      Actions.Attack(game, liveUnitByLocationMap, game.player, victim, true);
 
       GameLoop.NoteUnitActed(game, game.player);
 

@@ -15,14 +15,11 @@ namespace IncendianFalls {
       IImpulse strongestImpulse = game.root.EffectNoImpulseCreate().AsIImpulse();
       foreach (var capability in unit.components.GetAllIAICapabilityUC()) {
         var hayImpulse = capability.ProduceImpulse(unit, game);
-        game.root.logger.Info("Weighing impulse " + hayImpulse + " " + hayImpulse.GetWeight() + " against incumbent " + strongestImpulse + " " + strongestImpulse.GetWeight());
         if (hayImpulse.GetWeight() > strongestImpulse.GetWeight()) {
           strongestImpulse = hayImpulse;
         }
       }
-      game.root.logger.Info("Enacting impulse: " + strongestImpulse + " " + unit.nextActionTime);
       strongestImpulse.Enact(unit, game);
-      game.root.logger.Info("Enacted impulse: " + unit.nextActionTime);
     }
   }
 }
