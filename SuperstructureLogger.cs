@@ -4,6 +4,12 @@ using System.IO;
 using Atharia.Model;
 
 namespace IncendianFalls {
+  public class NullLogger : ILogger {
+    public void Error(string str) { }
+    public void Info(string str) { }
+    public void Warning(string str) { }
+  }
+
   public class ReplayLogger : ISuperstructureObserver {
     private Superstructure externalSS;
     private Superstructure duplicateSS;
@@ -13,7 +19,7 @@ namespace IncendianFalls {
     public ReplayLogger(Superstructure externalSS, string[] logFilenames) {
       this.externalSS = externalSS;
       externalSS.AddObserver(this);
-      duplicateSS = new Superstructure();
+      duplicateSS = new Superstructure(new NullLogger());
       replayer = new Replayer(duplicateSS);
       writers = new StreamWriter[logFilenames.Length];
       for (int i = 0; i < logFilenames.Length; i++) {

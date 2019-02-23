@@ -7,12 +7,14 @@ namespace IncendianFalls {
         Game game,
         LiveUnitByLocationMap liveUnitByLocationMap,
         Unit unit) {
-      Asserts.Assert(unit.directive is MoveDirectiveAsIDirective move);
-      var directive = (unit.directive as MoveDirectiveAsIDirective).obj;
+      var idirective = unit.components.GetOnlyIDirectiveUCOrNull();
+      Asserts.Assert(idirective is MoveDirectiveUCAsIDirectiveUC move);
+      var directive = (idirective as MoveDirectiveUCAsIDirectiveUC).obj;
 
       if (!Actions.CanStep(game, liveUnitByLocationMap, game.player, directive.path[0])) {
-        unit.directive.Delete();
-        Console.WriteLine("Blocked!");
+        unit.components.ClearAllIDirectiveUC();
+        directive.Delete();
+        game.root.logger.Info("Blocked!");
         return false;
       }
 
@@ -20,6 +22,7 @@ namespace IncendianFalls {
       directive.path.RemoveAt(0);
 
       if (directive.path.Count == 0) {
+        unit.components.Remove(directive.AsIUnitComponent());
         directive.Delete();
       }
 

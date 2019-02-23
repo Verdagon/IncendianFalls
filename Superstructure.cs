@@ -11,12 +11,15 @@ namespace IncendianFalls {
   }
 
   public class SSContext {
+    public readonly ILogger logger;
     public readonly Root root;
     private readonly List<ISuperstructureObserver> observers;
 
     public SSContext(
+        ILogger logger,
         Root root,
         List<ISuperstructureObserver> observers) {
+      this.logger = logger;
       this.root = root;
       this.observers = observers;
     }
@@ -49,10 +52,10 @@ namespace IncendianFalls {
     private readonly List<ISuperstructureObserver> observers;
     SSContext context;
 
-    public Superstructure() {
+    public Superstructure(ILogger logger) {
       observers = new List<ISuperstructureObserver>();
-      root = new Root();
-      context = new SSContext(root, observers);
+      root = new Root(logger);
+      context = new SSContext(logger, root, observers);
     }
 
     public void AddObserver(ISuperstructureObserver observer) {

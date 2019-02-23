@@ -11,11 +11,25 @@ namespace IncendianFalls {
         bool squareLevelsOnly,
         string name) {
       //return MakeSimpleLevel(root, name);
+      Level level;
       if (squareLevelsOnly || rand.Next() % 2 == 0) {
-        return MakeSquareLevel(context, rand, currentTime, name);
+        level = MakeSquareLevel(context, rand, currentTime, name);
       } else {
-        return MakePentagonalLevel(context, rand, currentTime, name);
+        level = MakePentagonalLevel(context, rand, currentTime, name);
       }
+
+      var walkableLocations = new WalkableLocations(level.terrain, level.units);
+
+      SetupCommon.FillWithUnits(
+          context,
+          rand,
+          currentTime,
+          level.terrain,
+          level.units,
+          walkableLocations,
+          walkableLocations.Count / 15);
+
+      return level;
     }
 
     private static Level MakeSimpleLevel(SSContext context, string name) {
@@ -56,10 +70,6 @@ namespace IncendianFalls {
 
       var units = context.root.EffectUnitMutSetCreate();
 
-      var walkableLocations = new WalkableLocations(terrain, units);
-
-      SetupCommon.FillWithUnits(context, rand, currentTime, terrain, units, walkableLocations, 40);
-
       PlaceStaircases(context, rand, terrain, units);
 
       return context.root.EffectLevelCreate(name, false, terrain, units);
@@ -77,10 +87,6 @@ namespace IncendianFalls {
       var units = context.root.EffectUnitMutSetCreate();
 
       context.root.GetDeterministicHashCode();
-
-      var walkableLocations = new WalkableLocations(terrain, units);
-
-      SetupCommon.FillWithUnits(context, rand, currentTime, terrain, units, walkableLocations, 15);
 
       PlaceStaircases(context, rand, terrain, units);
 

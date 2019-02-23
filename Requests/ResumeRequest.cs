@@ -27,7 +27,7 @@ namespace IncendianFalls {
           Asserts.Assert(false);
           break;
         case GameExecutionStateType.kBeforePlayerAction:
-          Logger.Error("Use a Move, Attack, FollowDirective etc to resume when paused before player!");
+          context.logger.Error("Use a Move, Attack, FollowDirective etc to resume when paused before player!");
           return false;
       }
 

@@ -21,24 +21,24 @@ namespace IncendianFalls {
         throw new Exception("Player isn't the next acting unit!");
       }
 
-      if (player.directive.Exists()) {
-        player.directive.Delete();
+      if (player.GetDirectiveOrNull().Exists()) {
+        player.GetDirectiveOrNull().Delete();
       }
 
       if (destination == player.location) {
-        Logger.Error("Already there!");
+        context.logger.Error("Already there!");
         return false;
       }
 
       var steps = AStarExplorer.Go(game.level.terrain, game.player.location, destination, game.level.considerCornersAdjacent);
       if (steps.Count == 0) {
-        Logger.Error("No path!");
+        context.logger.Error("No path!");
         return false;
       }
 
       var path = context.root.EffectLocationMutListCreate(steps);
-      var directive = context.root.EffectMoveDirectiveCreate(path);
-      player.directive = new MoveDirectiveAsIDirective(directive);
+      var directive = context.root.EffectMoveDirectiveUCCreate(path);
+      player.ReplaceDirective(directive.AsIDirectiveUC());
 
       if (!PlayerAI.FollowMoveDirective(game, liveUnitByLocationMap, game.player)) {
         return false;

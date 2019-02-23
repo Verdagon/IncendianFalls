@@ -27,11 +27,12 @@
     <Folder Include="InnerCode\" />
     <Folder Include="Requests\" />
     <Folder Include="Utils\" />
-    <Folder Include="ModelExtensions\" />
+    <Folder Include="CoreExtensions\" />
     <Folder Include="Core\" />
     <Folder Include="InnerCode\AI\" />
     <Folder Include="InnerCode\Actions\" />
     <Folder Include="InnerCode\TerrainGeneration\" />
     <Folder Include="InnerCode\Patterns\" />
+    <Folder Include="CoreExtensions\AI\" />
   </ItemGroup>
 </Project>

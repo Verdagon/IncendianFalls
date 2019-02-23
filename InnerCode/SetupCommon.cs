@@ -29,6 +29,7 @@ namespace IncendianFalls {
     public void Remove(Location location) {
       walkableLocations.Remove(location);
     }
+    public int Count {  get { return walkableLocations.Count;  } }
   }
 
   public class SetupCommon {
@@ -48,6 +49,10 @@ namespace IncendianFalls {
 
         context.root.GetDeterministicHashCode();
 
+        var components = IUnitComponentMutBunch.New(context.root);
+        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+
         Unit enemy;
         if (rand.Next(0, 5) == 0) {
           enemy =
@@ -61,8 +66,7 @@ namespace IncendianFalls {
                   0, 0,
                   600,
                   currentTime,
-                  new MoveDirectiveAsIDirective(MoveDirective.Null),
-                  IUnitComponentMutBunch.New(context.root),
+                  components,
                   IItemMutBunch.New(context.root));
         } else {
           enemy =
@@ -76,8 +80,7 @@ namespace IncendianFalls {
                   40, 40,
                   600,
                   currentTime,
-                  new MoveDirectiveAsIDirective(MoveDirective.Null),
-                  IUnitComponentMutBunch.New(context.root),
+                  components,
                   IItemMutBunch.New(context.root));
         }
         context.root.GetDeterministicHashCode();
@@ -112,7 +115,6 @@ namespace IncendianFalls {
               40, 40,
               600,
               0,
-              new MoveDirectiveAsIDirective(MoveDirective.Null),
               IUnitComponentMutBunch.New(context.root),
               IItemMutBunch.New(context.root));
       units.Add(player);

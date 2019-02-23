@@ -11,14 +11,14 @@ namespace IncendianFalls {
       }
       Asserts.Assert(game.GetExecutionStateType() == GameExecutionStateType.kBeforePlayerAction);
 
-      if (!game.player.directive.Exists()) {
-        Logger.Error("Player has no directive, can't resume!");
+      if (!game.player.GetDirectiveOrNull().Exists()) {
+        context.logger.Error("Player has no directive, can't resume!");
         return false;
       }
 
       var liveUnitByLocationMap = PreRequest.Do(game);
 
-      if (game.player.directive is MoveDirectiveAsIDirective move) {
+      if (game.player.GetDirectiveOrNull() is MoveDirectiveUCAsIDirectiveUC move) {
         if (!PlayerAI.FollowMoveDirective(game, liveUnitByLocationMap, game.player)) {
           return false;
         }

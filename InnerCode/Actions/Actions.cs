@@ -14,13 +14,13 @@ namespace IncendianFalls {
       foreach (var item in attacker.items) {
         damage = item.AffectOutgoingDamage(damage);
       }
-      foreach (var detail in victim.components.GetAllIDefenseUnitComponent()) {
+      foreach (var detail in victim.components.GetAllIDefenseUC()) {
         damage = detail.AffectIncomingDamage(damage);
       }
       foreach (var item in victim.items) {
         damage = item.AffectIncomingDamage(damage);
       }
-      Console.WriteLine((attacker.Is(game.player) ? "Player" : "Enemy") + " does " + damage + " damage to " + (victim.Is(game.player) ? "player" : "enemy") + "!");
+      game.root.logger.Info((attacker.Is(game.player) ? "Player" : "Enemy") + " does " + damage + " damage to " + (victim.Is(game.player) ? "player" : "enemy") + "!");
       victim.hp = victim.hp - damage;
 
       if (victim.hp <= 0) {
@@ -37,7 +37,7 @@ namespace IncendianFalls {
     public static void Defend(
         Game game,
         Unit unit) {
-      var detail = game.root.EffectShieldingUnitComponentCreate(3);
+      var detail = game.root.EffectShieldingUCCreate();
       unit.components.Add(detail.AsIUnitComponent());
 
       unit.nextActionTime = unit.nextActionTime + unit.inertia;
