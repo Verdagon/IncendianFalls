@@ -1,0 +1,168 @@
+using System;
+using System.Collections;
+
+using System.Collections.Generic;
+
+namespace Atharia.Model {
+public class RootIncarnation {
+  public readonly int version;
+  public int nextId;
+  public int hash;
+  public readonly SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>> incarnationsLevel;
+  public readonly SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentIncarnation>> incarnationsDecorativeTerrainTileComponent;
+  public readonly SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentIncarnation>> incarnationsUpStaircaseTerrainTileComponent;
+  public readonly SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentIncarnation>> incarnationsDownStaircaseTerrainTileComponent;
+  public readonly SortedDictionary<int, VersionAndIncarnation<TerrainTileIncarnation>> incarnationsTerrainTile;
+  public readonly SortedDictionary<int, VersionAndIncarnation<ITerrainTileComponentMutBunchIncarnation>> incarnationsITerrainTileComponentMutBunch;
+  public readonly SortedDictionary<int, VersionAndIncarnation<TerrainIncarnation>> incarnationsTerrain;
+  public readonly SortedDictionary<int, VersionAndIncarnation<GlaiveIncarnation>> incarnationsGlaive;
+  public readonly SortedDictionary<int, VersionAndIncarnation<ArmorIncarnation>> incarnationsArmor;
+  public readonly SortedDictionary<int, VersionAndIncarnation<RandIncarnation>> incarnationsRand;
+  public readonly SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCIncarnation>> incarnationsWanderAICapabilityUC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<ShieldingUCIncarnation>> incarnationsShieldingUC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<BidingOperationUCIncarnation>> incarnationsBidingOperationUC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<UnleashBideImpulseIncarnation>> incarnationsUnleashBideImpulse;
+  public readonly SortedDictionary<int, VersionAndIncarnation<StartBidingImpulseIncarnation>> incarnationsStartBidingImpulse;
+  public readonly SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCIncarnation>> incarnationsBideAICapabilityUC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<AttackImpulseIncarnation>> incarnationsAttackImpulse;
+  public readonly SortedDictionary<int, VersionAndIncarnation<PursueImpulseIncarnation>> incarnationsPursueImpulse;
+  public readonly SortedDictionary<int, VersionAndIncarnation<KillDirectiveUCIncarnation>> incarnationsKillDirectiveUC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<AttackAICapabilityUCIncarnation>> incarnationsAttackAICapabilityUC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<MoveImpulseIncarnation>> incarnationsMoveImpulse;
+  public readonly SortedDictionary<int, VersionAndIncarnation<MoveDirectiveUCIncarnation>> incarnationsMoveDirectiveUC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<UnitIncarnation>> incarnationsUnit;
+  public readonly SortedDictionary<int, VersionAndIncarnation<IItemMutBunchIncarnation>> incarnationsIItemMutBunch;
+  public readonly SortedDictionary<int, VersionAndIncarnation<IUnitComponentMutBunchIncarnation>> incarnationsIUnitComponentMutBunch;
+  public readonly SortedDictionary<int, VersionAndIncarnation<NoImpulseIncarnation>> incarnationsNoImpulse;
+  public readonly SortedDictionary<int, VersionAndIncarnation<ExecutionStateIncarnation>> incarnationsExecutionState;
+  public readonly SortedDictionary<int, VersionAndIncarnation<IPostActingUCMutBunchIncarnation>> incarnationsIPostActingUCMutBunch;
+  public readonly SortedDictionary<int, VersionAndIncarnation<IPreActingUCMutBunchIncarnation>> incarnationsIPreActingUCMutBunch;
+  public readonly SortedDictionary<int, VersionAndIncarnation<GameIncarnation>> incarnationsGame;
+  public readonly SortedDictionary<int, VersionAndIncarnation<IUnitEventMutListIncarnation>> incarnationsIUnitEventMutList;
+  public readonly SortedDictionary<int, VersionAndIncarnation<LocationMutListIncarnation>> incarnationsLocationMutList;
+  public readonly SortedDictionary<int, VersionAndIncarnation<LevelMutSetIncarnation>> incarnationsLevelMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<ShieldingUCMutSetIncarnation>> incarnationsShieldingUCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>> incarnationsAttackAICapabilityUCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<KillDirectiveUCMutSetIncarnation>> incarnationsKillDirectiveUCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<MoveDirectiveUCMutSetIncarnation>> incarnationsMoveDirectiveUCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>> incarnationsWanderAICapabilityUCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>> incarnationsBideAICapabilityUCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<BidingOperationUCMutSetIncarnation>> incarnationsBidingOperationUCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>> incarnationsGlaiveMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>> incarnationsArmorMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentMutSetIncarnation>> incarnationsDecorativeTerrainTileComponentMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentMutSetIncarnation>> incarnationsUpStaircaseTerrainTileComponentMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentMutSetIncarnation>> incarnationsDownStaircaseTerrainTileComponentMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<UnitMutSetIncarnation>> incarnationsUnitMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<TerrainTileByLocationMutMapIncarnation>> incarnationsTerrainTileByLocationMutMap;
+  public RootIncarnation(int version, int nextId, int hash) {
+    this.version = version;
+    this.nextId = nextId;
+    this.hash = hash;
+    this.incarnationsLevel = new SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>>();
+    this.incarnationsDecorativeTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentIncarnation>>();
+    this.incarnationsUpStaircaseTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentIncarnation>>();
+    this.incarnationsDownStaircaseTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentIncarnation>>();
+    this.incarnationsTerrainTile = new SortedDictionary<int, VersionAndIncarnation<TerrainTileIncarnation>>();
+    this.incarnationsITerrainTileComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<ITerrainTileComponentMutBunchIncarnation>>();
+    this.incarnationsTerrain = new SortedDictionary<int, VersionAndIncarnation<TerrainIncarnation>>();
+    this.incarnationsGlaive = new SortedDictionary<int, VersionAndIncarnation<GlaiveIncarnation>>();
+    this.incarnationsArmor = new SortedDictionary<int, VersionAndIncarnation<ArmorIncarnation>>();
+    this.incarnationsRand = new SortedDictionary<int, VersionAndIncarnation<RandIncarnation>>();
+    this.incarnationsWanderAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCIncarnation>>();
+    this.incarnationsShieldingUC = new SortedDictionary<int, VersionAndIncarnation<ShieldingUCIncarnation>>();
+    this.incarnationsBidingOperationUC = new SortedDictionary<int, VersionAndIncarnation<BidingOperationUCIncarnation>>();
+    this.incarnationsUnleashBideImpulse = new SortedDictionary<int, VersionAndIncarnation<UnleashBideImpulseIncarnation>>();
+    this.incarnationsStartBidingImpulse = new SortedDictionary<int, VersionAndIncarnation<StartBidingImpulseIncarnation>>();
+    this.incarnationsBideAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCIncarnation>>();
+    this.incarnationsAttackImpulse = new SortedDictionary<int, VersionAndIncarnation<AttackImpulseIncarnation>>();
+    this.incarnationsPursueImpulse = new SortedDictionary<int, VersionAndIncarnation<PursueImpulseIncarnation>>();
+    this.incarnationsKillDirectiveUC = new SortedDictionary<int, VersionAndIncarnation<KillDirectiveUCIncarnation>>();
+    this.incarnationsAttackAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<AttackAICapabilityUCIncarnation>>();
+    this.incarnationsMoveImpulse = new SortedDictionary<int, VersionAndIncarnation<MoveImpulseIncarnation>>();
+    this.incarnationsMoveDirectiveUC = new SortedDictionary<int, VersionAndIncarnation<MoveDirectiveUCIncarnation>>();
+    this.incarnationsUnit = new SortedDictionary<int, VersionAndIncarnation<UnitIncarnation>>();
+    this.incarnationsIItemMutBunch = new SortedDictionary<int, VersionAndIncarnation<IItemMutBunchIncarnation>>();
+    this.incarnationsIUnitComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<IUnitComponentMutBunchIncarnation>>();
+    this.incarnationsNoImpulse = new SortedDictionary<int, VersionAndIncarnation<NoImpulseIncarnation>>();
+    this.incarnationsExecutionState = new SortedDictionary<int, VersionAndIncarnation<ExecutionStateIncarnation>>();
+    this.incarnationsIPostActingUCMutBunch = new SortedDictionary<int, VersionAndIncarnation<IPostActingUCMutBunchIncarnation>>();
+    this.incarnationsIPreActingUCMutBunch = new SortedDictionary<int, VersionAndIncarnation<IPreActingUCMutBunchIncarnation>>();
+    this.incarnationsGame = new SortedDictionary<int, VersionAndIncarnation<GameIncarnation>>();
+    this.incarnationsIUnitEventMutList = new SortedDictionary<int, VersionAndIncarnation<IUnitEventMutListIncarnation>>();
+    this.incarnationsLocationMutList = new SortedDictionary<int, VersionAndIncarnation<LocationMutListIncarnation>>();
+    this.incarnationsLevelMutSet = new SortedDictionary<int, VersionAndIncarnation<LevelMutSetIncarnation>>();
+    this.incarnationsShieldingUCMutSet = new SortedDictionary<int, VersionAndIncarnation<ShieldingUCMutSetIncarnation>>();
+    this.incarnationsAttackAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>>();
+    this.incarnationsKillDirectiveUCMutSet = new SortedDictionary<int, VersionAndIncarnation<KillDirectiveUCMutSetIncarnation>>();
+    this.incarnationsMoveDirectiveUCMutSet = new SortedDictionary<int, VersionAndIncarnation<MoveDirectiveUCMutSetIncarnation>>();
+    this.incarnationsWanderAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>>();
+    this.incarnationsBideAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>>();
+    this.incarnationsBidingOperationUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BidingOperationUCMutSetIncarnation>>();
+    this.incarnationsGlaiveMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>>();
+    this.incarnationsArmorMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>>();
+    this.incarnationsDecorativeTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentMutSetIncarnation>>();
+    this.incarnationsUpStaircaseTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentMutSetIncarnation>>();
+    this.incarnationsDownStaircaseTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentMutSetIncarnation>>();
+    this.incarnationsUnitMutSet = new SortedDictionary<int, VersionAndIncarnation<UnitMutSetIncarnation>>();
+    this.incarnationsTerrainTileByLocationMutMap = new SortedDictionary<int, VersionAndIncarnation<TerrainTileByLocationMutMapIncarnation>>();
+  }
+  public RootIncarnation(
+      int newVersion,
+      int newNextId,
+      int newHash,
+      RootIncarnation that) {
+    this.version = newVersion;
+    this.nextId = newNextId;
+    this.hash = newHash;
+    this.incarnationsLevel = new SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>>(that.incarnationsLevel);
+    this.incarnationsDecorativeTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentIncarnation>>(that.incarnationsDecorativeTerrainTileComponent);
+    this.incarnationsUpStaircaseTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentIncarnation>>(that.incarnationsUpStaircaseTerrainTileComponent);
+    this.incarnationsDownStaircaseTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentIncarnation>>(that.incarnationsDownStaircaseTerrainTileComponent);
+    this.incarnationsTerrainTile = new SortedDictionary<int, VersionAndIncarnation<TerrainTileIncarnation>>(that.incarnationsTerrainTile);
+    this.incarnationsITerrainTileComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<ITerrainTileComponentMutBunchIncarnation>>(that.incarnationsITerrainTileComponentMutBunch);
+    this.incarnationsTerrain = new SortedDictionary<int, VersionAndIncarnation<TerrainIncarnation>>(that.incarnationsTerrain);
+    this.incarnationsGlaive = new SortedDictionary<int, VersionAndIncarnation<GlaiveIncarnation>>(that.incarnationsGlaive);
+    this.incarnationsArmor = new SortedDictionary<int, VersionAndIncarnation<ArmorIncarnation>>(that.incarnationsArmor);
+    this.incarnationsRand = new SortedDictionary<int, VersionAndIncarnation<RandIncarnation>>(that.incarnationsRand);
+    this.incarnationsWanderAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCIncarnation>>(that.incarnationsWanderAICapabilityUC);
+    this.incarnationsShieldingUC = new SortedDictionary<int, VersionAndIncarnation<ShieldingUCIncarnation>>(that.incarnationsShieldingUC);
+    this.incarnationsBidingOperationUC = new SortedDictionary<int, VersionAndIncarnation<BidingOperationUCIncarnation>>(that.incarnationsBidingOperationUC);
+    this.incarnationsUnleashBideImpulse = new SortedDictionary<int, VersionAndIncarnation<UnleashBideImpulseIncarnation>>(that.incarnationsUnleashBideImpulse);
+    this.incarnationsStartBidingImpulse = new SortedDictionary<int, VersionAndIncarnation<StartBidingImpulseIncarnation>>(that.incarnationsStartBidingImpulse);
+    this.incarnationsBideAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCIncarnation>>(that.incarnationsBideAICapabilityUC);
+    this.incarnationsAttackImpulse = new SortedDictionary<int, VersionAndIncarnation<AttackImpulseIncarnation>>(that.incarnationsAttackImpulse);
+    this.incarnationsPursueImpulse = new SortedDictionary<int, VersionAndIncarnation<PursueImpulseIncarnation>>(that.incarnationsPursueImpulse);
+    this.incarnationsKillDirectiveUC = new SortedDictionary<int, VersionAndIncarnation<KillDirectiveUCIncarnation>>(that.incarnationsKillDirectiveUC);
+    this.incarnationsAttackAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<AttackAICapabilityUCIncarnation>>(that.incarnationsAttackAICapabilityUC);
+    this.incarnationsMoveImpulse = new SortedDictionary<int, VersionAndIncarnation<MoveImpulseIncarnation>>(that.incarnationsMoveImpulse);
+    this.incarnationsMoveDirectiveUC = new SortedDictionary<int, VersionAndIncarnation<MoveDirectiveUCIncarnation>>(that.incarnationsMoveDirectiveUC);
+    this.incarnationsUnit = new SortedDictionary<int, VersionAndIncarnation<UnitIncarnation>>(that.incarnationsUnit);
+    this.incarnationsIItemMutBunch = new SortedDictionary<int, VersionAndIncarnation<IItemMutBunchIncarnation>>(that.incarnationsIItemMutBunch);
+    this.incarnationsIUnitComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<IUnitComponentMutBunchIncarnation>>(that.incarnationsIUnitComponentMutBunch);
+    this.incarnationsNoImpulse = new SortedDictionary<int, VersionAndIncarnation<NoImpulseIncarnation>>(that.incarnationsNoImpulse);
+    this.incarnationsExecutionState = new SortedDictionary<int, VersionAndIncarnation<ExecutionStateIncarnation>>(that.incarnationsExecutionState);
+    this.incarnationsIPostActingUCMutBunch = new SortedDictionary<int, VersionAndIncarnation<IPostActingUCMutBunchIncarnation>>(that.incarnationsIPostActingUCMutBunch);
+    this.incarnationsIPreActingUCMutBunch = new SortedDictionary<int, VersionAndIncarnation<IPreActingUCMutBunchIncarnation>>(that.incarnationsIPreActingUCMutBunch);
+    this.incarnationsGame = new SortedDictionary<int, VersionAndIncarnation<GameIncarnation>>(that.incarnationsGame);
+    this.incarnationsIUnitEventMutList = new SortedDictionary<int, VersionAndIncarnation<IUnitEventMutListIncarnation>>(that.incarnationsIUnitEventMutList);
+    this.incarnationsLocationMutList = new SortedDictionary<int, VersionAndIncarnation<LocationMutListIncarnation>>(that.incarnationsLocationMutList);
+    this.incarnationsLevelMutSet = new SortedDictionary<int, VersionAndIncarnation<LevelMutSetIncarnation>>(that.incarnationsLevelMutSet);
+    this.incarnationsShieldingUCMutSet = new SortedDictionary<int, VersionAndIncarnation<ShieldingUCMutSetIncarnation>>(that.incarnationsShieldingUCMutSet);
+    this.incarnationsAttackAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>>(that.incarnationsAttackAICapabilityUCMutSet);
+    this.incarnationsKillDirectiveUCMutSet = new SortedDictionary<int, VersionAndIncarnation<KillDirectiveUCMutSetIncarnation>>(that.incarnationsKillDirectiveUCMutSet);
+    this.incarnationsMoveDirectiveUCMutSet = new SortedDictionary<int, VersionAndIncarnation<MoveDirectiveUCMutSetIncarnation>>(that.incarnationsMoveDirectiveUCMutSet);
+    this.incarnationsWanderAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>>(that.incarnationsWanderAICapabilityUCMutSet);
+    this.incarnationsBideAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>>(that.incarnationsBideAICapabilityUCMutSet);
+    this.incarnationsBidingOperationUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BidingOperationUCMutSetIncarnation>>(that.incarnationsBidingOperationUCMutSet);
+    this.incarnationsGlaiveMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>>(that.incarnationsGlaiveMutSet);
+    this.incarnationsArmorMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>>(that.incarnationsArmorMutSet);
+    this.incarnationsDecorativeTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentMutSetIncarnation>>(that.incarnationsDecorativeTerrainTileComponentMutSet);
+    this.incarnationsUpStaircaseTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentMutSetIncarnation>>(that.incarnationsUpStaircaseTerrainTileComponentMutSet);
+    this.incarnationsDownStaircaseTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentMutSetIncarnation>>(that.incarnationsDownStaircaseTerrainTileComponentMutSet);
+    this.incarnationsUnitMutSet = new SortedDictionary<int, VersionAndIncarnation<UnitMutSetIncarnation>>(that.incarnationsUnitMutSet);
+    this.incarnationsTerrainTileByLocationMutMap = new SortedDictionary<int, VersionAndIncarnation<TerrainTileByLocationMutMapIncarnation>>(that.incarnationsTerrainTileByLocationMutMap);
+  }
+}
+
+}

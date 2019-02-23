@@ -1,0 +1,16 @@
+using System;
+using System.Collections;
+
+using System.Collections.Generic;
+
+namespace Atharia.Model {
+public interface IExecutionStateEffectVisitor {
+  void visitExecutionStateCreateEffect(ExecutionStateCreateEffect effect);
+  void visitExecutionStateDeleteEffect(ExecutionStateDeleteEffect effect);
+  void visitExecutionStateSetActingUnitEffect(ExecutionStateSetActingUnitEffect effect);
+  void visitExecutionStateSetActingUnitDidActionEffect(ExecutionStateSetActingUnitDidActionEffect effect);
+  void visitExecutionStateSetRemainingPreActingUnitComponentsEffect(ExecutionStateSetRemainingPreActingUnitComponentsEffect effect);
+  void visitExecutionStateSetRemainingPostActingUnitComponentsEffect(ExecutionStateSetRemainingPostActingUnitComponentsEffect effect);
+}
+
+}
