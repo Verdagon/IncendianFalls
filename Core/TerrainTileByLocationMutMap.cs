@@ -45,9 +45,17 @@ public class TerrainTileByLocationMutMap {
     }
   }
 
+  public void Delete() {
+    root.EffectTerrainTileByLocationMutMapDelete(id);
+  }
   public void Destruct() {
+    var elements = new List<TerrainTile>();
     foreach (var entry in this) {
-      entry.Value.Destruct();
+      elements.Add(entry.Value);
+    }
+    this.Delete();
+    foreach (var element in elements) {
+      element.Destruct();
     }
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {

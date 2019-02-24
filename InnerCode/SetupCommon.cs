@@ -65,7 +65,7 @@ namespace IncendianFalls {
                   3, 3,
                   0, 0,
                   600,
-                  currentTime,
+                  currentTime + 10,
                   components,
                   IItemMutBunch.New(context.root));
         } else {
@@ -80,7 +80,7 @@ namespace IncendianFalls {
                   10, 10,
                   40, 40,
                   600,
-                  currentTime,
+                  currentTime + 10,
                   components,
                   IItemMutBunch.New(context.root));
         }

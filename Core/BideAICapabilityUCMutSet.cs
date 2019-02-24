@@ -26,6 +26,9 @@ public class BideAICapabilityUCMutSet {
   public void Remove(BideAICapabilityUC element) {
     root.EffectBideAICapabilityUCMutSetRemove(id, element.id);
   }
+  public void Delete() {
+    root.EffectBideAICapabilityUCMutSetDelete(id);
+  }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
       root.EffectBideAICapabilityUCMutSetRemove(id, elementId);
@@ -38,7 +41,12 @@ public class BideAICapabilityUCMutSet {
     }
   }
   public void Destruct() {
+    var elements = new List<BideAICapabilityUC>();
     foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
+    foreach (var element in elements) {
       element.Destruct();
     }
   }

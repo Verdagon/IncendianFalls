@@ -26,6 +26,9 @@ public class AttackAICapabilityUCMutSet {
   public void Remove(AttackAICapabilityUC element) {
     root.EffectAttackAICapabilityUCMutSetRemove(id, element.id);
   }
+  public void Delete() {
+    root.EffectAttackAICapabilityUCMutSetDelete(id);
+  }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
       root.EffectAttackAICapabilityUCMutSetRemove(id, elementId);
@@ -38,7 +41,12 @@ public class AttackAICapabilityUCMutSet {
     }
   }
   public void Destruct() {
+    var elements = new List<AttackAICapabilityUC>();
     foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
+    foreach (var element in elements) {
       element.Destruct();
     }
   }

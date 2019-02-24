@@ -26,6 +26,9 @@ public class ShieldingUCMutSet {
   public void Remove(ShieldingUC element) {
     root.EffectShieldingUCMutSetRemove(id, element.id);
   }
+  public void Delete() {
+    root.EffectShieldingUCMutSetDelete(id);
+  }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
       root.EffectShieldingUCMutSetRemove(id, elementId);
@@ -38,7 +41,12 @@ public class ShieldingUCMutSet {
     }
   }
   public void Destruct() {
+    var elements = new List<ShieldingUC>();
     foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
+    foreach (var element in elements) {
       element.Destruct();
     }
   }

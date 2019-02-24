@@ -26,6 +26,9 @@ public class UnitMutSet {
   public void Remove(Unit element) {
     root.EffectUnitMutSetRemove(id, element.id);
   }
+  public void Delete() {
+    root.EffectUnitMutSetDelete(id);
+  }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
       root.EffectUnitMutSetRemove(id, elementId);
@@ -38,7 +41,12 @@ public class UnitMutSet {
     }
   }
   public void Destruct() {
+    var elements = new List<Unit>();
     foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
+    foreach (var element in elements) {
       element.Destruct();
     }
   }

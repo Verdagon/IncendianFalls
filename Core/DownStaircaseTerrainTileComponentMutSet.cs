@@ -26,6 +26,9 @@ public class DownStaircaseTerrainTileComponentMutSet {
   public void Remove(DownStaircaseTerrainTileComponent element) {
     root.EffectDownStaircaseTerrainTileComponentMutSetRemove(id, element.id);
   }
+  public void Delete() {
+    root.EffectDownStaircaseTerrainTileComponentMutSetDelete(id);
+  }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
       root.EffectDownStaircaseTerrainTileComponentMutSetRemove(id, elementId);
@@ -38,7 +41,12 @@ public class DownStaircaseTerrainTileComponentMutSet {
     }
   }
   public void Destruct() {
+    var elements = new List<DownStaircaseTerrainTileComponent>();
     foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
+    foreach (var element in elements) {
       element.Destruct();
     }
   }

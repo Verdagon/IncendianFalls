@@ -67,6 +67,11 @@ public class LocationMutList : IEnumerable<Location> {
     get { return incarnation.list[index]; }
   }
   public void Destruct() {
+    var elements = new List<Location>();
+    foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
   }
   public void CheckForNullViolations(List<string> violations) {
   }

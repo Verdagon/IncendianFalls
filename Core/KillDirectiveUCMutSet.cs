@@ -26,6 +26,9 @@ public class KillDirectiveUCMutSet {
   public void Remove(KillDirectiveUC element) {
     root.EffectKillDirectiveUCMutSetRemove(id, element.id);
   }
+  public void Delete() {
+    root.EffectKillDirectiveUCMutSetDelete(id);
+  }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
       root.EffectKillDirectiveUCMutSetRemove(id, elementId);
@@ -38,7 +41,12 @@ public class KillDirectiveUCMutSet {
     }
   }
   public void Destruct() {
+    var elements = new List<KillDirectiveUC>();
     foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
+    foreach (var element in elements) {
       element.Destruct();
     }
   }

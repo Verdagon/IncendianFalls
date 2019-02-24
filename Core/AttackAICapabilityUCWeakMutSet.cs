@@ -26,6 +26,9 @@ public class AttackAICapabilityUCWeakMutSet {
   public void Remove(AttackAICapabilityUC element) {
     root.EffectAttackAICapabilityUCWeakMutSetRemove(id, element.id);
   }
+  public void Delete() {
+    root.EffectAttackAICapabilityUCWeakMutSetDelete(id);
+  }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
       root.EffectAttackAICapabilityUCWeakMutSetRemove(id, elementId);
@@ -38,6 +41,11 @@ public class AttackAICapabilityUCWeakMutSet {
     }
   }
   public void Destruct() {
+    var elements = new List<AttackAICapabilityUC>();
+    foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
   }
   public void CheckForNullViolations(List<string> violations) {
     foreach (var element in this) {

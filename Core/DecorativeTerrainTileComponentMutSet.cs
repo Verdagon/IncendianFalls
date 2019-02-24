@@ -26,6 +26,9 @@ public class DecorativeTerrainTileComponentMutSet {
   public void Remove(DecorativeTerrainTileComponent element) {
     root.EffectDecorativeTerrainTileComponentMutSetRemove(id, element.id);
   }
+  public void Delete() {
+    root.EffectDecorativeTerrainTileComponentMutSetDelete(id);
+  }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
       root.EffectDecorativeTerrainTileComponentMutSetRemove(id, elementId);
@@ -38,7 +41,12 @@ public class DecorativeTerrainTileComponentMutSet {
     }
   }
   public void Destruct() {
+    var elements = new List<DecorativeTerrainTileComponent>();
     foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
+    foreach (var element in elements) {
       element.Destruct();
     }
   }

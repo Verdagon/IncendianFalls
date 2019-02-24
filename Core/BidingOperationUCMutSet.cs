@@ -26,6 +26,9 @@ public class BidingOperationUCMutSet {
   public void Remove(BidingOperationUC element) {
     root.EffectBidingOperationUCMutSetRemove(id, element.id);
   }
+  public void Delete() {
+    root.EffectBidingOperationUCMutSetDelete(id);
+  }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
       root.EffectBidingOperationUCMutSetRemove(id, elementId);
@@ -38,7 +41,12 @@ public class BidingOperationUCMutSet {
     }
   }
   public void Destruct() {
+    var elements = new List<BidingOperationUC>();
     foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
+    foreach (var element in elements) {
       element.Destruct();
     }
   }

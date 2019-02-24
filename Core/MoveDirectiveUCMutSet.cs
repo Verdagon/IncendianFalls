@@ -26,6 +26,9 @@ public class MoveDirectiveUCMutSet {
   public void Remove(MoveDirectiveUC element) {
     root.EffectMoveDirectiveUCMutSetRemove(id, element.id);
   }
+  public void Delete() {
+    root.EffectMoveDirectiveUCMutSetDelete(id);
+  }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
       root.EffectMoveDirectiveUCMutSetRemove(id, elementId);
@@ -38,7 +41,12 @@ public class MoveDirectiveUCMutSet {
     }
   }
   public void Destruct() {
+    var elements = new List<MoveDirectiveUC>();
     foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
+    foreach (var element in elements) {
       element.Destruct();
     }
   }

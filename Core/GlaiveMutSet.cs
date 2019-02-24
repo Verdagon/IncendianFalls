@@ -26,6 +26,9 @@ public class GlaiveMutSet {
   public void Remove(Glaive element) {
     root.EffectGlaiveMutSetRemove(id, element.id);
   }
+  public void Delete() {
+    root.EffectGlaiveMutSetDelete(id);
+  }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
       root.EffectGlaiveMutSetRemove(id, elementId);
@@ -38,7 +41,12 @@ public class GlaiveMutSet {
     }
   }
   public void Destruct() {
+    var elements = new List<Glaive>();
     foreach (var element in this) {
+      elements.Add(element);
+    }
+    this.Delete();
+    foreach (var element in elements) {
       element.Destruct();
     }
   }
