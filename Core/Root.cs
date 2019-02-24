@@ -7278,19 +7278,27 @@ public class Root {
   }
 
   public ITerrainTileComponent GetITerrainTileComponent(int id) {
-
     if (rootIncarnation.incarnationsDecorativeTerrainTileComponent.ContainsKey(id)) {
       return new DecorativeTerrainTileComponentAsITerrainTileComponent(new DecorativeTerrainTileComponent(this, id));
     }
-
     if (rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.ContainsKey(id)) {
       return new UpStaircaseTerrainTileComponentAsITerrainTileComponent(new UpStaircaseTerrainTileComponent(this, id));
     }
-
     if (rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.ContainsKey(id)) {
       return new DownStaircaseTerrainTileComponentAsITerrainTileComponent(new DownStaircaseTerrainTileComponent(this, id));
     }
-
+    throw new Exception("Unknown ITerrainTileComponent: " + id);
+  }
+  public ITerrainTileComponent GetITerrainTileComponentOrNull(int id) {
+    if (rootIncarnation.incarnationsDecorativeTerrainTileComponent.ContainsKey(id)) {
+      return new DecorativeTerrainTileComponentAsITerrainTileComponent(new DecorativeTerrainTileComponent(this, id));
+    }
+    if (rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.ContainsKey(id)) {
+      return new UpStaircaseTerrainTileComponentAsITerrainTileComponent(new UpStaircaseTerrainTileComponent(this, id));
+    }
+    if (rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.ContainsKey(id)) {
+      return new DownStaircaseTerrainTileComponentAsITerrainTileComponent(new DownStaircaseTerrainTileComponent(this, id));
+    }
     return NullITerrainTileComponent.Null;
   }
   public void CheckHasITerrainTileComponent(ITerrainTileComponent thing) {
@@ -7301,15 +7309,21 @@ public class Root {
   }
 
   public IItem GetIItem(int id) {
-
     if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
       return new GlaiveAsIItem(new Glaive(this, id));
     }
-
     if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
       return new ArmorAsIItem(new Armor(this, id));
     }
-
+    throw new Exception("Unknown IItem: " + id);
+  }
+  public IItem GetIItemOrNull(int id) {
+    if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
+      return new GlaiveAsIItem(new Glaive(this, id));
+    }
+    if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
+      return new ArmorAsIItem(new Armor(this, id));
+    }
     return NullIItem.Null;
   }
   public void CheckHasIItem(IItem thing) {
@@ -7320,11 +7334,15 @@ public class Root {
   }
 
   public IOperationUC GetIOperationUC(int id) {
-
     if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
       return new BidingOperationUCAsIOperationUC(new BidingOperationUC(this, id));
     }
-
+    throw new Exception("Unknown IOperationUC: " + id);
+  }
+  public IOperationUC GetIOperationUCOrNull(int id) {
+    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
+      return new BidingOperationUCAsIOperationUC(new BidingOperationUC(this, id));
+    }
     return NullIOperationUC.Null;
   }
   public void CheckHasIOperationUC(IOperationUC thing) {
@@ -7335,15 +7353,21 @@ public class Root {
   }
 
   public IDirectiveUC GetIDirectiveUC(int id) {
-
     if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
       return new KillDirectiveUCAsIDirectiveUC(new KillDirectiveUC(this, id));
     }
-
     if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
       return new MoveDirectiveUCAsIDirectiveUC(new MoveDirectiveUC(this, id));
     }
-
+    throw new Exception("Unknown IDirectiveUC: " + id);
+  }
+  public IDirectiveUC GetIDirectiveUCOrNull(int id) {
+    if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
+      return new KillDirectiveUCAsIDirectiveUC(new KillDirectiveUC(this, id));
+    }
+    if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
+      return new MoveDirectiveUCAsIDirectiveUC(new MoveDirectiveUC(this, id));
+    }
     return NullIDirectiveUC.Null;
   }
   public void CheckHasIDirectiveUC(IDirectiveUC thing) {
@@ -7354,19 +7378,27 @@ public class Root {
   }
 
   public IAICapabilityUC GetIAICapabilityUC(int id) {
-
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIAICapabilityUC(new WanderAICapabilityUC(this, id));
     }
-
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIAICapabilityUC(new BideAICapabilityUC(this, id));
     }
-
     if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
       return new AttackAICapabilityUCAsIAICapabilityUC(new AttackAICapabilityUC(this, id));
     }
-
+    throw new Exception("Unknown IAICapabilityUC: " + id);
+  }
+  public IAICapabilityUC GetIAICapabilityUCOrNull(int id) {
+    if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
+      return new WanderAICapabilityUCAsIAICapabilityUC(new WanderAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIAICapabilityUC(new BideAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
+      return new AttackAICapabilityUCAsIAICapabilityUC(new AttackAICapabilityUC(this, id));
+    }
     return NullIAICapabilityUC.Null;
   }
   public void CheckHasIAICapabilityUC(IAICapabilityUC thing) {
@@ -7377,11 +7409,15 @@ public class Root {
   }
 
   public IPostActingUC GetIPostActingUC(int id) {
-
     if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
       return new ShieldingUCAsIPostActingUC(new ShieldingUC(this, id));
     }
-
+    throw new Exception("Unknown IPostActingUC: " + id);
+  }
+  public IPostActingUC GetIPostActingUCOrNull(int id) {
+    if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
+      return new ShieldingUCAsIPostActingUC(new ShieldingUC(this, id));
+    }
     return NullIPostActingUC.Null;
   }
   public void CheckHasIPostActingUC(IPostActingUC thing) {
@@ -7392,15 +7428,21 @@ public class Root {
   }
 
   public IPreActingUC GetIPreActingUC(int id) {
-
     if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
       return new ShieldingUCAsIPreActingUC(new ShieldingUC(this, id));
     }
-
     if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
       return new AttackAICapabilityUCAsIPreActingUC(new AttackAICapabilityUC(this, id));
     }
-
+    throw new Exception("Unknown IPreActingUC: " + id);
+  }
+  public IPreActingUC GetIPreActingUCOrNull(int id) {
+    if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
+      return new ShieldingUCAsIPreActingUC(new ShieldingUC(this, id));
+    }
+    if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
+      return new AttackAICapabilityUCAsIPreActingUC(new AttackAICapabilityUC(this, id));
+    }
     return NullIPreActingUC.Null;
   }
   public void CheckHasIPreActingUC(IPreActingUC thing) {
@@ -7411,15 +7453,21 @@ public class Root {
   }
 
   public IDefenseUC GetIDefenseUC(int id) {
-
     if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
       return new ShieldingUCAsIDefenseUC(new ShieldingUC(this, id));
     }
-
     if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
       return new BidingOperationUCAsIDefenseUC(new BidingOperationUC(this, id));
     }
-
+    throw new Exception("Unknown IDefenseUC: " + id);
+  }
+  public IDefenseUC GetIDefenseUCOrNull(int id) {
+    if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
+      return new ShieldingUCAsIDefenseUC(new ShieldingUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
+      return new BidingOperationUCAsIDefenseUC(new BidingOperationUC(this, id));
+    }
     return NullIDefenseUC.Null;
   }
   public void CheckHasIDefenseUC(IDefenseUC thing) {
@@ -7430,35 +7478,51 @@ public class Root {
   }
 
   public IUnitComponent GetIUnitComponent(int id) {
-
     if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
       return new KillDirectiveUCAsIUnitComponent(new KillDirectiveUC(this, id));
     }
-
     if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
       return new MoveDirectiveUCAsIUnitComponent(new MoveDirectiveUC(this, id));
     }
-
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIUnitComponent(new WanderAICapabilityUC(this, id));
     }
-
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIUnitComponent(new BideAICapabilityUC(this, id));
     }
-
     if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
       return new AttackAICapabilityUCAsIUnitComponent(new AttackAICapabilityUC(this, id));
     }
-
     if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
       return new ShieldingUCAsIUnitComponent(new ShieldingUC(this, id));
     }
-
     if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
       return new BidingOperationUCAsIUnitComponent(new BidingOperationUC(this, id));
     }
-
+    throw new Exception("Unknown IUnitComponent: " + id);
+  }
+  public IUnitComponent GetIUnitComponentOrNull(int id) {
+    if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
+      return new KillDirectiveUCAsIUnitComponent(new KillDirectiveUC(this, id));
+    }
+    if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
+      return new MoveDirectiveUCAsIUnitComponent(new MoveDirectiveUC(this, id));
+    }
+    if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
+      return new WanderAICapabilityUCAsIUnitComponent(new WanderAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIUnitComponent(new BideAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
+      return new AttackAICapabilityUCAsIUnitComponent(new AttackAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
+      return new ShieldingUCAsIUnitComponent(new ShieldingUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
+      return new BidingOperationUCAsIUnitComponent(new BidingOperationUC(this, id));
+    }
     return NullIUnitComponent.Null;
   }
   public void CheckHasIUnitComponent(IUnitComponent thing) {
@@ -7469,31 +7533,45 @@ public class Root {
   }
 
   public IImpulse GetIImpulse(int id) {
-
     if (rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(id)) {
       return new UnleashBideImpulseAsIImpulse(new UnleashBideImpulse(this, id));
     }
-
     if (rootIncarnation.incarnationsStartBidingImpulse.ContainsKey(id)) {
       return new StartBidingImpulseAsIImpulse(new StartBidingImpulse(this, id));
     }
-
     if (rootIncarnation.incarnationsAttackImpulse.ContainsKey(id)) {
       return new AttackImpulseAsIImpulse(new AttackImpulse(this, id));
     }
-
     if (rootIncarnation.incarnationsPursueImpulse.ContainsKey(id)) {
       return new PursueImpulseAsIImpulse(new PursueImpulse(this, id));
     }
-
     if (rootIncarnation.incarnationsMoveImpulse.ContainsKey(id)) {
       return new MoveImpulseAsIImpulse(new MoveImpulse(this, id));
     }
-
     if (rootIncarnation.incarnationsNoImpulse.ContainsKey(id)) {
       return new NoImpulseAsIImpulse(new NoImpulse(this, id));
     }
-
+    throw new Exception("Unknown IImpulse: " + id);
+  }
+  public IImpulse GetIImpulseOrNull(int id) {
+    if (rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(id)) {
+      return new UnleashBideImpulseAsIImpulse(new UnleashBideImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsStartBidingImpulse.ContainsKey(id)) {
+      return new StartBidingImpulseAsIImpulse(new StartBidingImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsAttackImpulse.ContainsKey(id)) {
+      return new AttackImpulseAsIImpulse(new AttackImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsPursueImpulse.ContainsKey(id)) {
+      return new PursueImpulseAsIImpulse(new PursueImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsMoveImpulse.ContainsKey(id)) {
+      return new MoveImpulseAsIImpulse(new MoveImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsNoImpulse.ContainsKey(id)) {
+      return new NoImpulseAsIImpulse(new NoImpulse(this, id));
+    }
     return NullIImpulse.Null;
   }
   public void CheckHasIImpulse(IImpulse thing) {
@@ -7504,63 +7582,93 @@ public class Root {
   }
 
   public IDestructible GetIDestructible(int id) {
-
     if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
       return new KillDirectiveUCAsIDestructible(new KillDirectiveUC(this, id));
     }
-
     if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
       return new MoveDirectiveUCAsIDestructible(new MoveDirectiveUC(this, id));
     }
-
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIDestructible(new WanderAICapabilityUC(this, id));
     }
-
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIDestructible(new BideAICapabilityUC(this, id));
     }
-
     if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
       return new AttackAICapabilityUCAsIDestructible(new AttackAICapabilityUC(this, id));
     }
-
     if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
       return new ShieldingUCAsIDestructible(new ShieldingUC(this, id));
     }
-
     if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
       return new BidingOperationUCAsIDestructible(new BidingOperationUC(this, id));
     }
-
     if (rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(id)) {
       return new UnleashBideImpulseAsIDestructible(new UnleashBideImpulse(this, id));
     }
-
     if (rootIncarnation.incarnationsStartBidingImpulse.ContainsKey(id)) {
       return new StartBidingImpulseAsIDestructible(new StartBidingImpulse(this, id));
     }
-
     if (rootIncarnation.incarnationsAttackImpulse.ContainsKey(id)) {
       return new AttackImpulseAsIDestructible(new AttackImpulse(this, id));
     }
-
     if (rootIncarnation.incarnationsPursueImpulse.ContainsKey(id)) {
       return new PursueImpulseAsIDestructible(new PursueImpulse(this, id));
     }
-
     if (rootIncarnation.incarnationsMoveImpulse.ContainsKey(id)) {
       return new MoveImpulseAsIDestructible(new MoveImpulse(this, id));
     }
-
     if (rootIncarnation.incarnationsNoImpulse.ContainsKey(id)) {
       return new NoImpulseAsIDestructible(new NoImpulse(this, id));
     }
-
     if (rootIncarnation.incarnationsUnit.ContainsKey(id)) {
       return new UnitAsIDestructible(new Unit(this, id));
     }
-
+    throw new Exception("Unknown IDestructible: " + id);
+  }
+  public IDestructible GetIDestructibleOrNull(int id) {
+    if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
+      return new KillDirectiveUCAsIDestructible(new KillDirectiveUC(this, id));
+    }
+    if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
+      return new MoveDirectiveUCAsIDestructible(new MoveDirectiveUC(this, id));
+    }
+    if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
+      return new WanderAICapabilityUCAsIDestructible(new WanderAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIDestructible(new BideAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
+      return new AttackAICapabilityUCAsIDestructible(new AttackAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
+      return new ShieldingUCAsIDestructible(new ShieldingUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
+      return new BidingOperationUCAsIDestructible(new BidingOperationUC(this, id));
+    }
+    if (rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(id)) {
+      return new UnleashBideImpulseAsIDestructible(new UnleashBideImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsStartBidingImpulse.ContainsKey(id)) {
+      return new StartBidingImpulseAsIDestructible(new StartBidingImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsAttackImpulse.ContainsKey(id)) {
+      return new AttackImpulseAsIDestructible(new AttackImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsPursueImpulse.ContainsKey(id)) {
+      return new PursueImpulseAsIDestructible(new PursueImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsMoveImpulse.ContainsKey(id)) {
+      return new MoveImpulseAsIDestructible(new MoveImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsNoImpulse.ContainsKey(id)) {
+      return new NoImpulseAsIDestructible(new NoImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsUnit.ContainsKey(id)) {
+      return new UnitAsIDestructible(new Unit(this, id));
+    }
     return NullIDestructible.Null;
   }
   public void CheckHasIDestructible(IDestructible thing) {

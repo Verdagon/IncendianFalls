@@ -15,7 +15,6 @@ namespace Atharia.Model {
         Game game) {
       var bidingOperation = unit.components.GetOnlyBidingOperationUCOrNull();
       if (bidingOperation.Exists()) {
-        obj.root.logger.Info("Already biding, unleash!");
         return obj.root.EffectUnleashBideImpulseCreate(800).AsIImpulse();
       } else {
         var isNextToPlayer =
@@ -24,7 +23,6 @@ namespace Atharia.Model {
             unit.location,
             game.level.considerCornersAdjacent);
         if (isNextToPlayer) {
-          obj.root.logger.Info("Next to player, bide!");
           return obj.root.EffectStartBidingImpulseCreate(800).AsIImpulse();
         } else {
           return obj.root.EffectNoImpulseCreate().AsIImpulse();
