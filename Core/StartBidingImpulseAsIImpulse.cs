@@ -14,6 +14,27 @@ public class StartBidingImpulseAsIImpulse : IImpulse {
   public StartBidingImpulseAsIImpulse(StartBidingImpulse obj) {
     this.obj = obj;
   }
+  public bool Is(IDestructible that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IDestructible that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IDestructible AsIDestructible() {
+    return new StartBidingImpulseAsIDestructible(obj);
+  }
   public bool Is(IImpulse that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -36,11 +57,14 @@ public class StartBidingImpulseAsIImpulse : IImpulse {
     return new StartBidingImpulseAsIImpulse(obj);
   }
 
-         public int GetWeight() {
-    return IncendianFalls.StartBidingImpulseExtensions.GetWeightImpl(obj);
+         public Void Destruct() {
+    return StartBidingImpulseExtensions.Destruct(obj);
+  }
+  public int GetWeight() {
+    return StartBidingImpulseExtensions.GetWeight(obj);
   }
   public Void Enact(Unit unit, Game game) {
-    return IncendianFalls.StartBidingImpulseExtensions.EnactImpl(obj, unit, game);
+    return StartBidingImpulseExtensions.Enact(obj, unit, game);
   }
 
 }

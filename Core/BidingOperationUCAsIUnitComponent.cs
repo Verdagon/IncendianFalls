@@ -35,6 +35,27 @@ public class BidingOperationUCAsIUnitComponent : IUnitComponent {
   public IOperationUC AsIOperationUC() {
     return new BidingOperationUCAsIOperationUC(obj);
   }
+  public bool Is(IDestructible that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IDestructible that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IDestructible AsIDestructible() {
+    return new BidingOperationUCAsIDestructible(obj);
+  }
   public bool Is(IUnitComponent that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -78,7 +99,10 @@ public class BidingOperationUCAsIUnitComponent : IUnitComponent {
     return new BidingOperationUCAsIDefenseUC(obj);
   }
 
-       
+         public Void Destruct() {
+    return BidingOperationUCExtensions.Destruct(obj);
+  }
+
 }
 public static class BidingOperationUCAsIUnitComponentCaster {
   public static BidingOperationUCAsIUnitComponent AsIUnitComponent(this BidingOperationUC obj) {

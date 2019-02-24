@@ -32,14 +32,34 @@ public class GlaiveMutSet {
     }
   }
   public int Count { get { return incarnation.set.Count; } }
-  //public int GetDeterministicHashCode() {
-  //  return incarnation.GetDeterministicHashCode();
-  //}
   public IEnumerator<Glaive> GetEnumerator() {
     foreach (var element in incarnation.set) {
       yield return root.GetGlaive(element);
     }
   }
+  public void Destruct() {
+    foreach (var element in this) {
+      element.Destruct();
+    }
+  }
+  public void CheckForNullViolations(List<string> violations) {
+    foreach (var element in this) {
+      if (!root.GlaiveExists(element.id)) {
+        violations.Add("Null constraint violated! GlaiveMutSet#" + id + "." + element.id);
+      }
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    foreach (var element in this) {
+      if (root.GlaiveExists(element.id)) {
+       element.FindReachableObjects(foundIds);
+      }
+    }
+  }
 }
-         
+       
 }

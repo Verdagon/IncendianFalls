@@ -28,10 +28,67 @@ public class IUnitComponentMutBunch {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
+  }
+  public void CheckForNullViolations(List<string> violations) {
+
+    if (!root.KillDirectiveUCMutSetExists(membersKillDirectiveUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersKillDirectiveUCMutSet");
+    }
+
+    if (!root.MoveDirectiveUCMutSetExists(membersMoveDirectiveUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersMoveDirectiveUCMutSet");
+    }
+
+    if (!root.WanderAICapabilityUCMutSetExists(membersWanderAICapabilityUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersWanderAICapabilityUCMutSet");
+    }
+
+    if (!root.BideAICapabilityUCMutSetExists(membersBideAICapabilityUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersBideAICapabilityUCMutSet");
+    }
+
+    if (!root.AttackAICapabilityUCMutSetExists(membersAttackAICapabilityUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersAttackAICapabilityUCMutSet");
+    }
+
+    if (!root.ShieldingUCMutSetExists(membersShieldingUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersShieldingUCMutSet");
+    }
+
+    if (!root.BidingOperationUCMutSetExists(membersBidingOperationUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersBidingOperationUCMutSet");
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    if (root.KillDirectiveUCMutSetExists(membersKillDirectiveUCMutSet.id)) {
+      membersKillDirectiveUCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.MoveDirectiveUCMutSetExists(membersMoveDirectiveUCMutSet.id)) {
+      membersMoveDirectiveUCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.WanderAICapabilityUCMutSetExists(membersWanderAICapabilityUCMutSet.id)) {
+      membersWanderAICapabilityUCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.BideAICapabilityUCMutSetExists(membersBideAICapabilityUCMutSet.id)) {
+      membersBideAICapabilityUCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.AttackAICapabilityUCMutSetExists(membersAttackAICapabilityUCMutSet.id)) {
+      membersAttackAICapabilityUCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.ShieldingUCMutSetExists(membersShieldingUCMutSet.id)) {
+      membersShieldingUCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.BidingOperationUCMutSetExists(membersBidingOperationUCMutSet.id)) {
+      membersBidingOperationUCMutSet.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(IUnitComponentMutBunch that) {
     if (!this.Exists()) {
@@ -242,6 +299,24 @@ public class IUnitComponentMutBunch {
     throw new Exception("Can't get element from empty bunch!");
   }
 
+  public void Destruct() {
+    var tempMembersKillDirectiveUCMutSet = this.membersKillDirectiveUCMutSet;
+    var tempMembersMoveDirectiveUCMutSet = this.membersMoveDirectiveUCMutSet;
+    var tempMembersWanderAICapabilityUCMutSet = this.membersWanderAICapabilityUCMutSet;
+    var tempMembersBideAICapabilityUCMutSet = this.membersBideAICapabilityUCMutSet;
+    var tempMembersAttackAICapabilityUCMutSet = this.membersAttackAICapabilityUCMutSet;
+    var tempMembersShieldingUCMutSet = this.membersShieldingUCMutSet;
+    var tempMembersBidingOperationUCMutSet = this.membersBidingOperationUCMutSet;
+
+    this.Delete();
+    tempMembersKillDirectiveUCMutSet.Destruct();
+    tempMembersMoveDirectiveUCMutSet.Destruct();
+    tempMembersWanderAICapabilityUCMutSet.Destruct();
+    tempMembersBideAICapabilityUCMutSet.Destruct();
+    tempMembersAttackAICapabilityUCMutSet.Destruct();
+    tempMembersShieldingUCMutSet.Destruct();
+    tempMembersBidingOperationUCMutSet.Destruct();
+  }
   public IEnumerator<IUnitComponent> GetEnumerator() {
     foreach (var element in this.membersKillDirectiveUCMutSet) {
       yield return new KillDirectiveUCAsIUnitComponent(element);

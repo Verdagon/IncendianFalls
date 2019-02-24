@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Atharia.Model;
 
 namespace IncendianFalls {
-  public class TerrainUtils {
+  public static class TerrainUtils {
     // Returns all this-room spaces that are touching anything not in this room.
     public static SortedSet<Location> FindBorderLocations(
         Pattern pattern,

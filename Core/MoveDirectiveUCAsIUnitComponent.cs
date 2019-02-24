@@ -14,6 +14,27 @@ public class MoveDirectiveUCAsIUnitComponent : IUnitComponent {
   public MoveDirectiveUCAsIUnitComponent(MoveDirectiveUC obj) {
     this.obj = obj;
   }
+  public bool Is(IDestructible that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IDestructible that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IDestructible AsIDestructible() {
+    return new MoveDirectiveUCAsIDestructible(obj);
+  }
   public bool Is(IUnitComponent that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -57,7 +78,10 @@ public class MoveDirectiveUCAsIUnitComponent : IUnitComponent {
     return new MoveDirectiveUCAsIDirectiveUC(obj);
   }
 
-       
+         public Void Destruct() {
+    return MoveDirectiveUCExtensions.Destruct(obj);
+  }
+
 }
 public static class MoveDirectiveUCAsIUnitComponentCaster {
   public static MoveDirectiveUCAsIUnitComponent AsIUnitComponent(this MoveDirectiveUC obj) {

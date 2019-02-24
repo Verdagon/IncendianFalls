@@ -28,10 +28,32 @@ public class Level {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
+  }
+  public void CheckForNullViolations(List<string> violations) {
+
+    if (!root.TerrainExists(terrain.id)) {
+      violations.Add("Null constraint violated! Level#" + id + ".terrain");
+    }
+
+    if (!root.UnitMutSetExists(units.id)) {
+      violations.Add("Null constraint violated! Level#" + id + ".units");
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    if (root.TerrainExists(terrain.id)) {
+      terrain.FindReachableObjects(foundIds);
+    }
+    if (root.UnitMutSetExists(units.id)) {
+      units.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(Level that) {
     if (!this.Exists()) {

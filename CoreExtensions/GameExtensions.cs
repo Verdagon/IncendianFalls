@@ -1,7 +1,7 @@
 ﻿using System;
 using Atharia.Model;
 
-namespace IncendianFalls {
+namespace Atharia.Model {
   public enum GameExecutionStateType {
     kBetweenUnits = 0,
     kPreActingDetail = 1,

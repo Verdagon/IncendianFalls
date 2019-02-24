@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using Atharia.Model;
+using IncendianFalls;
 
-namespace IncendianFalls {
+namespace Atharia.Model {
   public static class UnleashBideImpulseExtensions {
-    public static int GetWeightImpl(this UnleashBideImpulse obj) {
+    public static Atharia.Model.Void Destruct(
+        this UnleashBideImpulse obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+    public static int GetWeight(this UnleashBideImpulse obj) {
       return obj.weight;
     }
 
-    public static Atharia.Model.Void EnactImpl(this UnleashBideImpulse obj, Unit actingUnit, Game game) {
+    public static Atharia.Model.Void Enact(this UnleashBideImpulse obj, Unit actingUnit, Game game) {
       var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
 
       foreach (var otherUnit in game.level.units) {

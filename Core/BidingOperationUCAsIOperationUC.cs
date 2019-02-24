@@ -35,6 +35,27 @@ public class BidingOperationUCAsIOperationUC : IOperationUC {
   public IOperationUC AsIOperationUC() {
     return new BidingOperationUCAsIOperationUC(obj);
   }
+  public bool Is(IDestructible that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IDestructible that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IDestructible AsIDestructible() {
+    return new BidingOperationUCAsIDestructible(obj);
+  }
   public bool Is(IUnitComponent that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -78,8 +99,11 @@ public class BidingOperationUCAsIOperationUC : IOperationUC {
     return new BidingOperationUCAsIDefenseUC(obj);
   }
 
-         public Void OnImpulse(Unit unit, Game game, IImpulse impulse) {
-    return IncendianFalls.BidingOperationUCExtensions.OnImpulseImpl(obj, unit, game, impulse);
+         public Void Destruct() {
+    return BidingOperationUCExtensions.Destruct(obj);
+  }
+  public Void OnImpulse(Unit unit, Game game, IImpulse impulse) {
+    return BidingOperationUCExtensions.OnImpulse(obj, unit, game, impulse);
   }
 
 }

@@ -4,10 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-
-public interface IIPreActingUCMutBunchEffect {
+public interface IShieldingUCWeakMutSetEffect {
   int id { get; }
-  void visit(IIPreActingUCMutBunchEffectVisitor visitor);
+  void visit(IShieldingUCWeakMutSetEffectVisitor visitor);
 }
-       
+
 }

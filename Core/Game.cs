@@ -28,10 +28,53 @@ public class Game {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
+  }
+  public void CheckForNullViolations(List<string> violations) {
+
+    if (!root.RandExists(rand.id)) {
+      violations.Add("Null constraint violated! Game#" + id + ".rand");
+    }
+
+    if (!root.LevelMutSetExists(levels.id)) {
+      violations.Add("Null constraint violated! Game#" + id + ".levels");
+    }
+
+    if (!root.UnitExists(player.id)) {
+      violations.Add("Null constraint violated! Game#" + id + ".player");
+    }
+
+    if (!root.LevelExists(level.id)) {
+      violations.Add("Null constraint violated! Game#" + id + ".level");
+    }
+
+    if (!root.ExecutionStateExists(executionState.id)) {
+      violations.Add("Null constraint violated! Game#" + id + ".executionState");
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    if (root.RandExists(rand.id)) {
+      rand.FindReachableObjects(foundIds);
+    }
+    if (root.LevelMutSetExists(levels.id)) {
+      levels.FindReachableObjects(foundIds);
+    }
+    if (root.UnitExists(player.id)) {
+      player.FindReachableObjects(foundIds);
+    }
+    if (root.LevelExists(level.id)) {
+      level.FindReachableObjects(foundIds);
+    }
+    if (root.ExecutionStateExists(executionState.id)) {
+      executionState.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(Game that) {
     if (!this.Exists()) {

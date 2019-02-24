@@ -1,13 +1,19 @@
 ﻿using System;
 using Atharia.Model;
+using IncendianFalls;
 
-namespace IncendianFalls {
+namespace Atharia.Model {
   public static class PursueImpulseExtensions {
-    public static int GetWeightImpl(this PursueImpulse obj) {
+    public static Atharia.Model.Void Destruct(
+        this PursueImpulse obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+    public static int GetWeight(this PursueImpulse obj) {
       return obj.weight;
     }
 
-    public static Atharia.Model.Void EnactImpl(this PursueImpulse impulse, Unit unit, Game game) {
+    public static Atharia.Model.Void Enact(this PursueImpulse impulse, Unit unit, Game game) {
       var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
       Actions.Step(game, liveUnitByLocationMap, unit, impulse.stepLocation);
 
@@ -19,8 +25,7 @@ namespace IncendianFalls {
       if (directive.pathToLastSeenLocation.Count == 0) {
         // We made it and we can't find the player.
         unit.components.Remove(directive.AsIDirectiveUC());
-        directive.pathToLastSeenLocation.Delete();
-        directive.Delete();
+        directive.Destruct();
       }
 
       return new Atharia.Model.Void();

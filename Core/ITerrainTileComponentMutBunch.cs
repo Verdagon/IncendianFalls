@@ -28,10 +28,39 @@ public class ITerrainTileComponentMutBunch {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
+  }
+  public void CheckForNullViolations(List<string> violations) {
+
+    if (!root.DecorativeTerrainTileComponentMutSetExists(membersDecorativeTerrainTileComponentMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersDecorativeTerrainTileComponentMutSet");
+    }
+
+    if (!root.UpStaircaseTerrainTileComponentMutSetExists(membersUpStaircaseTerrainTileComponentMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersUpStaircaseTerrainTileComponentMutSet");
+    }
+
+    if (!root.DownStaircaseTerrainTileComponentMutSetExists(membersDownStaircaseTerrainTileComponentMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersDownStaircaseTerrainTileComponentMutSet");
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    if (root.DecorativeTerrainTileComponentMutSetExists(membersDecorativeTerrainTileComponentMutSet.id)) {
+      membersDecorativeTerrainTileComponentMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.UpStaircaseTerrainTileComponentMutSetExists(membersUpStaircaseTerrainTileComponentMutSet.id)) {
+      membersUpStaircaseTerrainTileComponentMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.DownStaircaseTerrainTileComponentMutSetExists(membersDownStaircaseTerrainTileComponentMutSet.id)) {
+      membersDownStaircaseTerrainTileComponentMutSet.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(ITerrainTileComponentMutBunch that) {
     if (!this.Exists()) {
@@ -142,6 +171,16 @@ public class ITerrainTileComponentMutBunch {
     throw new Exception("Can't get element from empty bunch!");
   }
 
+  public void Destruct() {
+    var tempMembersDecorativeTerrainTileComponentMutSet = this.membersDecorativeTerrainTileComponentMutSet;
+    var tempMembersUpStaircaseTerrainTileComponentMutSet = this.membersUpStaircaseTerrainTileComponentMutSet;
+    var tempMembersDownStaircaseTerrainTileComponentMutSet = this.membersDownStaircaseTerrainTileComponentMutSet;
+
+    this.Delete();
+    tempMembersDecorativeTerrainTileComponentMutSet.Destruct();
+    tempMembersUpStaircaseTerrainTileComponentMutSet.Destruct();
+    tempMembersDownStaircaseTerrainTileComponentMutSet.Destruct();
+  }
   public IEnumerator<ITerrainTileComponent> GetEnumerator() {
     foreach (var element in this.membersDecorativeTerrainTileComponentMutSet) {
       yield return new DecorativeTerrainTileComponentAsITerrainTileComponent(element);

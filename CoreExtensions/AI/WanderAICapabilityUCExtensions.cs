@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using Atharia.Model;
+using IncendianFalls;
 
-namespace IncendianFalls {
+namespace Atharia.Model {
   public static class WanderAICapabilityUCExtensions {
-    public static IImpulse ProduceImpulseImpl(
+    public static Atharia.Model.Void Destruct(
+        this WanderAICapabilityUC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+
+    public static IImpulse ProduceImpulse(
         this WanderAICapabilityUC obj,
         Unit unit,
         Game game) {

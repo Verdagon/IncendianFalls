@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using Atharia.Model;
+using IncendianFalls;
 
-namespace IncendianFalls {
+namespace Atharia.Model {
   public static class AttackAICapabilityUCExtensions {
-    public static Atharia.Model.Void PreActImpl(
+    public static Atharia.Model.Void Destruct(
+        this AttackAICapabilityUC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+
+    public static Atharia.Model.Void PreAct(
         this AttackAICapabilityUC obj,
         Game game,
         Unit unit) {
@@ -14,8 +21,7 @@ namespace IncendianFalls {
       if (directive.Exists() && (!directive.targetUnit.Exists() || !directive.targetUnit.alive)) {
         // Target died, and/or was deleted. Stop targeting.
         unit.components.Remove(directive.AsIUnitComponent());
-        directive.pathToLastSeenLocation.Delete();
-        directive.Delete();
+        directive.Destruct();
       }
 
       // Remember, if we get here, we might still have an existing valid directive.
@@ -40,7 +46,7 @@ namespace IncendianFalls {
       }
     }
 
-    public static IImpulse ProduceImpulseImpl(
+    public static IImpulse ProduceImpulse(
         this AttackAICapabilityUC obj,
         Unit unit,
         Game game) {

@@ -14,6 +14,27 @@ public class MoveImpulseAsIImpulse : IImpulse {
   public MoveImpulseAsIImpulse(MoveImpulse obj) {
     this.obj = obj;
   }
+  public bool Is(IDestructible that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IDestructible that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IDestructible AsIDestructible() {
+    return new MoveImpulseAsIDestructible(obj);
+  }
   public bool Is(IImpulse that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -36,11 +57,14 @@ public class MoveImpulseAsIImpulse : IImpulse {
     return new MoveImpulseAsIImpulse(obj);
   }
 
-         public int GetWeight() {
-    return IncendianFalls.MoveImpulseExtensions.GetWeightImpl(obj);
+         public Void Destruct() {
+    return MoveImpulseExtensions.Destruct(obj);
+  }
+  public int GetWeight() {
+    return MoveImpulseExtensions.GetWeight(obj);
   }
   public Void Enact(Unit unit, Game game) {
-    return IncendianFalls.MoveImpulseExtensions.EnactImpl(obj, unit, game);
+    return MoveImpulseExtensions.Enact(obj, unit, game);
   }
 
 }

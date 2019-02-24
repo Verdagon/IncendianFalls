@@ -13,7 +13,7 @@ public class UnitStepEventAsIUnitEvent : IUnitEvent {
   public string DStr() { return obj.DStr(); }
   public int GetDeterministicHashCode() { return obj.GetDeterministicHashCode(); }
   public override int GetHashCode() { return GetDeterministicHashCode(); }
-         public int GetTime() { return IncendianFalls.UnitStepEventExtensions.GetTime(obj); }
+         public int GetTime() { return UnitStepEventExtensions.GetTime(obj); }
 
   public void Visit(IUnitEventVisitor visitor) { visitor.Visit(this); }
 }

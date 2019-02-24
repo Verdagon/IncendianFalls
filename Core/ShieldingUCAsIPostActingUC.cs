@@ -56,6 +56,27 @@ public class ShieldingUCAsIPostActingUC : IPostActingUC {
   public IPreActingUC AsIPreActingUC() {
     return new ShieldingUCAsIPreActingUC(obj);
   }
+  public bool Is(IDestructible that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IDestructible that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IDestructible AsIDestructible() {
+    return new ShieldingUCAsIDestructible(obj);
+  }
   public bool Is(IUnitComponent that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -99,8 +120,11 @@ public class ShieldingUCAsIPostActingUC : IPostActingUC {
     return new ShieldingUCAsIDefenseUC(obj);
   }
 
-         public Void PostAct(Unit unit) {
-    return IncendianFalls.ShieldingUCExtensions.PostActImpl(obj, unit);
+         public Void Destruct() {
+    return ShieldingUCExtensions.Destruct(obj);
+  }
+  public Void PostAct(Unit unit) {
+    return ShieldingUCExtensions.PostAct(obj, unit);
   }
 
 }

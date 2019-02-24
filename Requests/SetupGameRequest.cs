@@ -44,7 +44,7 @@ namespace IncendianFalls {
               player,
               firstLevel,
               0,
-              context.root.EffectExecutionStateCreate(Unit.Null, false, IPreActingUCMutBunch.Null, IPostActingUCMutBunch.Null));
+              context.root.EffectExecutionStateCreate(Unit.Null, false, IPreActingUCWeakMutBunch.Null, IPostActingUCWeakMutBunch.Null));
 
       context.root.GetDeterministicHashCode();
 

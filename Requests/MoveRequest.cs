@@ -22,7 +22,7 @@ namespace IncendianFalls {
       }
 
       if (player.GetDirectiveOrNull().Exists()) {
-        player.GetDirectiveOrNull().Delete();
+        player.GetDirectiveOrNull().Destruct();
       }
 
       if (destination == player.location) {

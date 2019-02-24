@@ -1,8 +1,17 @@
 ﻿using System;
 using Atharia.Model;
 
-namespace IncendianFalls {
+namespace Atharia.Model {
   public static class UnitExtensions {
+    public static Atharia.Model.Void Destruct(
+        this Unit obj) {
+      var events = obj.events;
+      var components = obj.components;
+      obj.Delete();
+      components.Delete();
+      events.Delete();
+      return new Atharia.Model.Void();
+    }
     public static IDirectiveUC GetDirectiveOrNull(this Unit unit) {
       return unit.components.GetOnlyIDirectiveUCOrNull();
     }
@@ -18,7 +27,7 @@ namespace IncendianFalls {
       if (existingDirective.Exists()) {
         unit.root.logger.Info("Deleting existing directive " + existingDirective.id);
         unit.components.Remove(existingDirective);
-        existingDirective.Delete();
+        existingDirective.Destruct();
       }
     }
     public static IOperationUC GetOperationOrNull(this Unit unit) {
@@ -36,15 +45,8 @@ namespace IncendianFalls {
       if (existingOperation.Exists()) {
         unit.root.logger.Info("Deleting existing operation " + existingOperation.id);
         unit.components.Remove(existingOperation);
-        existingOperation.Delete();
+        existingOperation.Destruct();
       }
-    }
-    public static void Destructor(this Unit unit) {
-      var events = unit.events;
-      var components = unit.components;
-      unit.Delete();
-      components.Delete();
-      events.Delete();
     }
   }
 }

@@ -7,10 +7,10 @@ namespace Atharia.Model {
 
 public struct ExecutionStateSetRemainingPostActingUnitComponentsEffect : IExecutionStateEffect {
   public readonly int id;
-  public readonly IPostActingUCMutBunch newValue;
+  public readonly IPostActingUCWeakMutBunch newValue;
   public ExecutionStateSetRemainingPostActingUnitComponentsEffect(
       int id,
-      IPostActingUCMutBunch newValue) {
+      IPostActingUCWeakMutBunch newValue) {
     this.id = id;
     this.newValue = newValue;
   }

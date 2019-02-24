@@ -1,9 +1,15 @@
 ﻿using System;
 using Atharia.Model;
 
-namespace IncendianFalls {
+namespace Atharia.Model {
   public static class BideAICapabilityUCExtensions {
-    public static IImpulse ProduceImpulseImpl(
+    public static Atharia.Model.Void Destruct(
+        this BideAICapabilityUC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+
+    public static IImpulse ProduceImpulse(
         this BideAICapabilityUC obj,
         Unit unit,
         Game game) {

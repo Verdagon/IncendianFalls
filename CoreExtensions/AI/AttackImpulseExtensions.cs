@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using Atharia.Model;
+using IncendianFalls;
 
-namespace IncendianFalls {
+namespace Atharia.Model {
   public static class AttackImpulseExtensions {
-    public static int GetWeightImpl(this AttackImpulse obj) {
+    public static Atharia.Model.Void Destruct(
+        this AttackImpulse obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+
+    public static int GetWeight(this AttackImpulse obj) {
       return obj.weight;
     }
 
-    public static Atharia.Model.Void EnactImpl(this AttackImpulse obj, Unit unit, Game game) {
+    public static Atharia.Model.Void Enact(this AttackImpulse obj, Unit unit, Game game) {
       var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
       Asserts.Assert(directive.Exists());
 

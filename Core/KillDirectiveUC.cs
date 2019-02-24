@@ -28,10 +28,32 @@ public class KillDirectiveUC {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
+  }
+  public void CheckForNullViolations(List<string> violations) {
+
+    if (!root.UnitExists(targetUnit.id)) {
+      violations.Add("Null constraint violated! KillDirectiveUC#" + id + ".targetUnit");
+    }
+
+    if (!root.LocationMutListExists(pathToLastSeenLocation.id)) {
+      violations.Add("Null constraint violated! KillDirectiveUC#" + id + ".pathToLastSeenLocation");
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    if (root.UnitExists(targetUnit.id)) {
+      targetUnit.FindReachableObjects(foundIds);
+    }
+    if (root.LocationMutListExists(pathToLastSeenLocation.id)) {
+      pathToLastSeenLocation.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(KillDirectiveUC that) {
     if (!this.Exists()) {

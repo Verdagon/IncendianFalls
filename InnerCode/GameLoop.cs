@@ -59,7 +59,7 @@ namespace IncendianFalls {
 
       var executionState = game.executionState;
 
-      var postActingDetails = IPostActingUCMutBunch.New(game.root);
+      var postActingDetails = IPostActingUCWeakMutBunch.New(game.root);
       foreach (var details in executionState.actingUnit.components.GetAllIPostActingUC()) {
         postActingDetails.Add(details);
       }
@@ -90,7 +90,7 @@ namespace IncendianFalls {
         return; // To be continued... via ContinueAfterPostActingDetail.
       }
       // There were no existing remaining pre-acting details. Go on to the unit's acting.
-      executionState.remainingPostActingUnitComponents.Delete();
+      executionState.remainingPostActingUnitComponents.Destruct();
 
       executionState.actingUnit = new Unit(game.root, 0);
 
@@ -128,7 +128,7 @@ namespace IncendianFalls {
 
       if (nextUnit.alive == false) {
         game.level.units.Remove(nextUnit);
-        nextUnit.Destructor();
+        nextUnit.Destruct();
         flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
         return; // To be continued... via ContinueAtStartTurn.
       }
@@ -151,7 +151,7 @@ namespace IncendianFalls {
       Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
       Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
 
-      var preTurnActingDetails = IPreActingUCMutBunch.New(game.root);
+      var preTurnActingDetails = IPreActingUCWeakMutBunch.New(game.root);
       foreach (var details in executionState.actingUnit.components.GetAllIPreActingUC()) {
         preTurnActingDetails.Add(details);
       }
@@ -183,7 +183,7 @@ namespace IncendianFalls {
       }
 
       // There were no existing remaining pre-acting details. Go on to the unit's action.
-      executionState.remainingPreActingUnitComponents.Delete();
+      executionState.remainingPreActingUnitComponents.Destruct();
 
       DoUnitAction(game, liveUnitByLocationMap);
 

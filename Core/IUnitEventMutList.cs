@@ -66,6 +66,16 @@ public class IUnitEventMutList : IEnumerable<IUnitEvent> {
   public IUnitEvent this[int index] {
     get { return incarnation.list[index]; }
   }
+  public void Destruct() {
+  }
+  public void CheckForNullViolations(List<string> violations) {
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+  }
   public IEnumerator<IUnitEvent> GetEnumerator() {
     foreach (var element in incarnation.list) {
       yield return element;

@@ -37,10 +37,10 @@ public class GlaiveAsIItem : IItem {
   }
 
          public int AffectIncomingDamage(int incomingDamage) {
-    return IncendianFalls.GlaiveExtensions.AffectIncomingDamageImpl(obj, incomingDamage);
+    return GlaiveExtensions.AffectIncomingDamage(obj, incomingDamage);
   }
   public int AffectOutgoingDamage(int outgoingDamage) {
-    return IncendianFalls.GlaiveExtensions.AffectOutgoingDamageImpl(obj, outgoingDamage);
+    return GlaiveExtensions.AffectOutgoingDamage(obj, outgoingDamage);
   }
 
 }

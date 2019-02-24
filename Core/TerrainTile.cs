@@ -28,10 +28,25 @@ public class TerrainTile {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
+  }
+  public void CheckForNullViolations(List<string> violations) {
+
+    if (!root.ITerrainTileComponentMutBunchExists(components.id)) {
+      violations.Add("Null constraint violated! TerrainTile#" + id + ".components");
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    if (root.ITerrainTileComponentMutBunchExists(components.id)) {
+      components.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(TerrainTile that) {
     if (!this.Exists()) {

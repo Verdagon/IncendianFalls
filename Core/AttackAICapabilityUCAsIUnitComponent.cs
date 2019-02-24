@@ -35,6 +35,27 @@ public class AttackAICapabilityUCAsIUnitComponent : IUnitComponent {
   public IAICapabilityUC AsIAICapabilityUC() {
     return new AttackAICapabilityUCAsIAICapabilityUC(obj);
   }
+  public bool Is(IDestructible that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IDestructible that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IDestructible AsIDestructible() {
+    return new AttackAICapabilityUCAsIDestructible(obj);
+  }
   public bool Is(IUnitComponent that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -78,7 +99,10 @@ public class AttackAICapabilityUCAsIUnitComponent : IUnitComponent {
     return new AttackAICapabilityUCAsIPreActingUC(obj);
   }
 
-       
+         public Void Destruct() {
+    return AttackAICapabilityUCExtensions.Destruct(obj);
+  }
+
 }
 public static class AttackAICapabilityUCAsIUnitComponentCaster {
   public static AttackAICapabilityUCAsIUnitComponent AsIUnitComponent(this AttackAICapabilityUC obj) {

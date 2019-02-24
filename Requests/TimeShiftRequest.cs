@@ -34,7 +34,7 @@ namespace IncendianFalls {
 
       // We don't want to follow the player's directive from back then.
       if (game.player.GetDirectiveOrNull().Exists()) {
-        game.player.GetDirectiveOrNull().Delete();
+        game.player.GetDirectiveOrNull().Destruct();
       }
 
       var player = game.player;

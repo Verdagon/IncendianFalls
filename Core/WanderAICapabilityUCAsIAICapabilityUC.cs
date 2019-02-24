@@ -14,6 +14,27 @@ public class WanderAICapabilityUCAsIAICapabilityUC : IAICapabilityUC {
   public WanderAICapabilityUCAsIAICapabilityUC(WanderAICapabilityUC obj) {
     this.obj = obj;
   }
+  public bool Is(IDestructible that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IDestructible that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IDestructible AsIDestructible() {
+    return new WanderAICapabilityUCAsIDestructible(obj);
+  }
   public bool Is(IUnitComponent that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -57,8 +78,11 @@ public class WanderAICapabilityUCAsIAICapabilityUC : IAICapabilityUC {
     return new WanderAICapabilityUCAsIAICapabilityUC(obj);
   }
 
-         public IImpulse ProduceImpulse(Unit unit, Game game) {
-    return IncendianFalls.WanderAICapabilityUCExtensions.ProduceImpulseImpl(obj, unit, game);
+         public Void Destruct() {
+    return WanderAICapabilityUCExtensions.Destruct(obj);
+  }
+  public IImpulse ProduceImpulse(Unit unit, Game game) {
+    return WanderAICapabilityUCExtensions.ProduceImpulse(obj, unit, game);
   }
 
 }

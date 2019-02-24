@@ -28,10 +28,39 @@ public class Unit {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
+  }
+  public void CheckForNullViolations(List<string> violations) {
+
+    if (!root.IUnitEventMutListExists(events.id)) {
+      violations.Add("Null constraint violated! Unit#" + id + ".events");
+    }
+
+    if (!root.IUnitComponentMutBunchExists(components.id)) {
+      violations.Add("Null constraint violated! Unit#" + id + ".components");
+    }
+
+    if (!root.IItemMutBunchExists(items.id)) {
+      violations.Add("Null constraint violated! Unit#" + id + ".items");
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    if (root.IUnitEventMutListExists(events.id)) {
+      events.FindReachableObjects(foundIds);
+    }
+    if (root.IUnitComponentMutBunchExists(components.id)) {
+      components.FindReachableObjects(foundIds);
+    }
+    if (root.IItemMutBunchExists(items.id)) {
+      items.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(Unit that) {
     if (!this.Exists()) {

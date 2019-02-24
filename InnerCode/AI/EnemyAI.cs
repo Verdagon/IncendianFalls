@@ -17,9 +17,12 @@ namespace IncendianFalls {
         var hayImpulse = capability.ProduceImpulse(unit, game);
         if (hayImpulse.GetWeight() > strongestImpulse.GetWeight()) {
           strongestImpulse = hayImpulse;
+        } else {
+          hayImpulse.Destruct();
         }
       }
       strongestImpulse.Enact(unit, game);
+      strongestImpulse.Destruct();
     }
   }
 }

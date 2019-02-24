@@ -37,10 +37,10 @@ public class ArmorAsIItem : IItem {
   }
 
          public int AffectIncomingDamage(int incomingDamage) {
-    return IncendianFalls.ArmorExtensions.AffectIncomingDamageImpl(obj, incomingDamage);
+    return ArmorExtensions.AffectIncomingDamage(obj, incomingDamage);
   }
   public int AffectOutgoingDamage(int outgoingDamage) {
-    return IncendianFalls.ArmorExtensions.AffectOutgoingDamageImpl(obj, outgoingDamage);
+    return ArmorExtensions.AffectOutgoingDamage(obj, outgoingDamage);
   }
 
 }

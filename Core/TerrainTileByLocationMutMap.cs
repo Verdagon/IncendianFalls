@@ -36,10 +36,32 @@ public class TerrainTileByLocationMutMap {
 
   public int Count { get { return incarnation.map.Count; } }
 
-  //public int GetDeterministicHashCode() {
-  //  return incarnation.GetDeterministicHashCode();
-  //}
+  public void CheckForNullViolations(List<string> violations) {
+    foreach (var entry in this) {
+      var element = entry.Value;
+      if (!root.TerrainTileExists(element.id)) {
+        violations.Add("Null constraint violated! TerrainTileByLocationMutMap#" + id + "." + element.id);
+      }
+    }
+  }
 
+  public void Destruct() {
+    foreach (var entry in this) {
+      entry.Value.Destruct();
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    foreach (var entry in this) {
+      var element = entry.Value;
+      if (root.TerrainTileExists(element.id)) {
+       element.FindReachableObjects(foundIds);
+      }
+    }
+  }
   public bool ContainsKey(Location key) {
     return incarnation.map.ContainsKey(key);
   }

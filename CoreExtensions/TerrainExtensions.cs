@@ -13,6 +13,12 @@ namespace Atharia.Model {
 	*/
 
   public static class TerrainExtensions {
+    public static Atharia.Model.Void Destruct(
+        this Terrain obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+
     public static bool TileExists(
         this Terrain terrain,
         Location location) {

@@ -28,10 +28,32 @@ public class IItemMutBunch {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
+  }
+  public void CheckForNullViolations(List<string> violations) {
+
+    if (!root.GlaiveMutSetExists(membersGlaiveMutSet.id)) {
+      violations.Add("Null constraint violated! IItemMutBunch#" + id + ".membersGlaiveMutSet");
+    }
+
+    if (!root.ArmorMutSetExists(membersArmorMutSet.id)) {
+      violations.Add("Null constraint violated! IItemMutBunch#" + id + ".membersArmorMutSet");
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    if (root.GlaiveMutSetExists(membersGlaiveMutSet.id)) {
+      membersGlaiveMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.ArmorMutSetExists(membersArmorMutSet.id)) {
+      membersArmorMutSet.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(IItemMutBunch that) {
     if (!this.Exists()) {
@@ -117,6 +139,14 @@ public class IItemMutBunch {
     throw new Exception("Can't get element from empty bunch!");
   }
 
+  public void Destruct() {
+    var tempMembersGlaiveMutSet = this.membersGlaiveMutSet;
+    var tempMembersArmorMutSet = this.membersArmorMutSet;
+
+    this.Delete();
+    tempMembersGlaiveMutSet.Destruct();
+    tempMembersArmorMutSet.Destruct();
+  }
   public IEnumerator<IItem> GetEnumerator() {
     foreach (var element in this.membersGlaiveMutSet) {
       yield return new GlaiveAsIItem(element);

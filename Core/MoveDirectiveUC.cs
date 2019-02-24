@@ -28,10 +28,25 @@ public class MoveDirectiveUC {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
+  }
+  public void CheckForNullViolations(List<string> violations) {
+
+    if (!root.LocationMutListExists(path.id)) {
+      violations.Add("Null constraint violated! MoveDirectiveUC#" + id + ".path");
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    if (root.LocationMutListExists(path.id)) {
+      path.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(MoveDirectiveUC that) {
     if (!this.Exists()) {

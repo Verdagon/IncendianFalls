@@ -60,18 +60,20 @@ public class Root {
   readonly SortedDictionary<int, List<IIUnitComponentMutBunchEffectObserver>> observersIUnitComponentMutBunch;
   readonly SortedDictionary<int, List<INoImpulseEffectObserver>> observersNoImpulse;
   readonly SortedDictionary<int, List<IExecutionStateEffectObserver>> observersExecutionState;
-  readonly SortedDictionary<int, List<IIPostActingUCMutBunchEffectObserver>> observersIPostActingUCMutBunch;
-  readonly SortedDictionary<int, List<IIPreActingUCMutBunchEffectObserver>> observersIPreActingUCMutBunch;
+  readonly SortedDictionary<int, List<IIPostActingUCWeakMutBunchEffectObserver>> observersIPostActingUCWeakMutBunch;
+  readonly SortedDictionary<int, List<IIPreActingUCWeakMutBunchEffectObserver>> observersIPreActingUCWeakMutBunch;
   readonly SortedDictionary<int, List<IGameEffectObserver>> observersGame;
   readonly SortedDictionary<int, List<IIUnitEventMutListEffectObserver>> observersIUnitEventMutList;
   readonly SortedDictionary<int, List<ILocationMutListEffectObserver>> observersLocationMutList;
   readonly SortedDictionary<int, List<ILevelMutSetEffectObserver>> observersLevelMutSet;
-  readonly SortedDictionary<int, List<IShieldingUCMutSetEffectObserver>> observersShieldingUCMutSet;
-  readonly SortedDictionary<int, List<IAttackAICapabilityUCMutSetEffectObserver>> observersAttackAICapabilityUCMutSet;
+  readonly SortedDictionary<int, List<IShieldingUCWeakMutSetEffectObserver>> observersShieldingUCWeakMutSet;
+  readonly SortedDictionary<int, List<IAttackAICapabilityUCWeakMutSetEffectObserver>> observersAttackAICapabilityUCWeakMutSet;
   readonly SortedDictionary<int, List<IKillDirectiveUCMutSetEffectObserver>> observersKillDirectiveUCMutSet;
   readonly SortedDictionary<int, List<IMoveDirectiveUCMutSetEffectObserver>> observersMoveDirectiveUCMutSet;
   readonly SortedDictionary<int, List<IWanderAICapabilityUCMutSetEffectObserver>> observersWanderAICapabilityUCMutSet;
   readonly SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>> observersBideAICapabilityUCMutSet;
+  readonly SortedDictionary<int, List<IAttackAICapabilityUCMutSetEffectObserver>> observersAttackAICapabilityUCMutSet;
+  readonly SortedDictionary<int, List<IShieldingUCMutSetEffectObserver>> observersShieldingUCMutSet;
   readonly SortedDictionary<int, List<IBidingOperationUCMutSetEffectObserver>> observersBidingOperationUCMutSet;
   readonly SortedDictionary<int, List<IGlaiveMutSetEffectObserver>> observersGlaiveMutSet;
   readonly SortedDictionary<int, List<IArmorMutSetEffectObserver>> observersArmorMutSet;
@@ -110,18 +112,20 @@ public class Root {
     this.observersIUnitComponentMutBunch = new SortedDictionary<int, List<IIUnitComponentMutBunchEffectObserver>>();
     this.observersNoImpulse = new SortedDictionary<int, List<INoImpulseEffectObserver>>();
     this.observersExecutionState = new SortedDictionary<int, List<IExecutionStateEffectObserver>>();
-    this.observersIPostActingUCMutBunch = new SortedDictionary<int, List<IIPostActingUCMutBunchEffectObserver>>();
-    this.observersIPreActingUCMutBunch = new SortedDictionary<int, List<IIPreActingUCMutBunchEffectObserver>>();
+    this.observersIPostActingUCWeakMutBunch = new SortedDictionary<int, List<IIPostActingUCWeakMutBunchEffectObserver>>();
+    this.observersIPreActingUCWeakMutBunch = new SortedDictionary<int, List<IIPreActingUCWeakMutBunchEffectObserver>>();
     this.observersGame = new SortedDictionary<int, List<IGameEffectObserver>>();
     this.observersIUnitEventMutList = new SortedDictionary<int, List<IIUnitEventMutListEffectObserver>>();
     this.observersLocationMutList = new SortedDictionary<int, List<ILocationMutListEffectObserver>>();
     this.observersLevelMutSet = new SortedDictionary<int, List<ILevelMutSetEffectObserver>>();
-    this.observersShieldingUCMutSet = new SortedDictionary<int, List<IShieldingUCMutSetEffectObserver>>();
-    this.observersAttackAICapabilityUCMutSet = new SortedDictionary<int, List<IAttackAICapabilityUCMutSetEffectObserver>>();
+    this.observersShieldingUCWeakMutSet = new SortedDictionary<int, List<IShieldingUCWeakMutSetEffectObserver>>();
+    this.observersAttackAICapabilityUCWeakMutSet = new SortedDictionary<int, List<IAttackAICapabilityUCWeakMutSetEffectObserver>>();
     this.observersKillDirectiveUCMutSet = new SortedDictionary<int, List<IKillDirectiveUCMutSetEffectObserver>>();
     this.observersMoveDirectiveUCMutSet = new SortedDictionary<int, List<IMoveDirectiveUCMutSetEffectObserver>>();
     this.observersWanderAICapabilityUCMutSet = new SortedDictionary<int, List<IWanderAICapabilityUCMutSetEffectObserver>>();
     this.observersBideAICapabilityUCMutSet = new SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>>();
+    this.observersAttackAICapabilityUCMutSet = new SortedDictionary<int, List<IAttackAICapabilityUCMutSetEffectObserver>>();
+    this.observersShieldingUCMutSet = new SortedDictionary<int, List<IShieldingUCMutSetEffectObserver>>();
     this.observersBidingOperationUCMutSet = new SortedDictionary<int, List<IBidingOperationUCMutSetEffectObserver>>();
     this.observersGlaiveMutSet = new SortedDictionary<int, List<IGlaiveMutSetEffectObserver>>();
     this.observersArmorMutSet = new SortedDictionary<int, List<IArmorMutSetEffectObserver>>();
@@ -273,11 +277,11 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsExecutionState) {
       result += GetExecutionStateHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsIPostActingUCMutBunch) {
-      result += GetIPostActingUCMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    foreach (var entry in this.rootIncarnation.incarnationsIPostActingUCWeakMutBunch) {
+      result += GetIPostActingUCWeakMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsIPreActingUCMutBunch) {
-      result += GetIPreActingUCMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    foreach (var entry in this.rootIncarnation.incarnationsIPreActingUCWeakMutBunch) {
+      result += GetIPreActingUCWeakMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsGame) {
       result += GetGameHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -291,11 +295,11 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsLevelMutSet) {
       result += GetLevelMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsShieldingUCMutSet) {
-      result += GetShieldingUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    foreach (var entry in this.rootIncarnation.incarnationsShieldingUCWeakMutSet) {
+      result += GetShieldingUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsAttackAICapabilityUCMutSet) {
-      result += GetAttackAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    foreach (var entry in this.rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet) {
+      result += GetAttackAICapabilityUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsKillDirectiveUCMutSet) {
       result += GetKillDirectiveUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -308,6 +312,12 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsBideAICapabilityUCMutSet) {
       result += GetBideAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsAttackAICapabilityUCMutSet) {
+      result += GetAttackAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsShieldingUCMutSet) {
+      result += GetShieldingUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsBidingOperationUCMutSet) {
       result += GetBidingOperationUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -334,6 +344,416 @@ public class Root {
       result += GetTerrainTileByLocationMutMapHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     return result;
+  }
+
+  public void CheckForViolations() {
+    List<string> violations = new List<string>();
+
+    foreach (var obj in this.AllLevel()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllDecorativeTerrainTileComponent()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllUpStaircaseTerrainTileComponent()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllDownStaircaseTerrainTileComponent()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllTerrainTile()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllITerrainTileComponentMutBunch()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllTerrain()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllGlaive()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllArmor()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllRand()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllWanderAICapabilityUC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllShieldingUC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllBidingOperationUC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllUnleashBideImpulse()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllStartBidingImpulse()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllBideAICapabilityUC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllAttackImpulse()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllPursueImpulse()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllKillDirectiveUC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllAttackAICapabilityUC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllMoveImpulse()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllMoveDirectiveUC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllUnit()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllIItemMutBunch()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllIUnitComponentMutBunch()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllNoImpulse()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllExecutionState()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllIPostActingUCWeakMutBunch()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllIPreActingUCWeakMutBunch()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllGame()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllIUnitEventMutList()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllLocationMutList()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllLevelMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllShieldingUCWeakMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllAttackAICapabilityUCWeakMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllKillDirectiveUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllMoveDirectiveUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllWanderAICapabilityUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllBideAICapabilityUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllAttackAICapabilityUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllShieldingUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllBidingOperationUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllGlaiveMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllArmorMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllDecorativeTerrainTileComponentMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllUpStaircaseTerrainTileComponentMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllDownStaircaseTerrainTileComponentMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllUnitMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllTerrainTileByLocationMutMap()) {
+      obj.CheckForNullViolations(violations);
+    }
+
+    SortedSet<int> reachableIds = new SortedSet<int>();
+    foreach (var rootStruct in this.AllGame()) {
+      rootStruct.FindReachableObjects(reachableIds);
+    }
+    foreach (var obj in this.AllLevel()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllDecorativeTerrainTileComponent()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllUpStaircaseTerrainTileComponent()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllDownStaircaseTerrainTileComponent()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllTerrainTile()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllITerrainTileComponentMutBunch()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllTerrain()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllGlaive()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllArmor()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllRand()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllWanderAICapabilityUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllShieldingUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllBidingOperationUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllUnleashBideImpulse()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllStartBidingImpulse()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllBideAICapabilityUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllAttackImpulse()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllPursueImpulse()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllKillDirectiveUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllAttackAICapabilityUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllMoveImpulse()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllMoveDirectiveUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllUnit()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllIItemMutBunch()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllIUnitComponentMutBunch()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllNoImpulse()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllExecutionState()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllIPostActingUCWeakMutBunch()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllIPreActingUCWeakMutBunch()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllGame()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllIUnitEventMutList()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllLocationMutList()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllLevelMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllShieldingUCWeakMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllAttackAICapabilityUCWeakMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllKillDirectiveUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllMoveDirectiveUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllWanderAICapabilityUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllBideAICapabilityUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllAttackAICapabilityUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllShieldingUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllBidingOperationUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllGlaiveMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllArmorMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllDecorativeTerrainTileComponentMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllUpStaircaseTerrainTileComponentMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllDownStaircaseTerrainTileComponentMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllUnitMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllTerrainTileByLocationMutMap()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+
+    if (violations.Count > 0) {
+      string message = "Found violations!\n";
+      foreach (var violation in violations) {
+        message += violation + "\n";
+      }
+      throw new Exception(message);
+    }
   }
 
   public int GetDeterministicHashCode() {
@@ -622,23 +1042,23 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPostActingUCMutBunch) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPostActingUCWeakMutBunch) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsIPostActingUCMutBunch.ContainsKey(sourceObjId)) {
-        EffectInternalCreateIPostActingUCMutBunch(sourceObjId, sourceObjIncarnation);
+      if (!rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(sourceObjId)) {
+        EffectInternalCreateIPostActingUCWeakMutBunch(sourceObjId, sourceObjIncarnation);
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPreActingUCMutBunch) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPreActingUCWeakMutBunch) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsIPreActingUCMutBunch.ContainsKey(sourceObjId)) {
-        EffectInternalCreateIPreActingUCMutBunch(sourceObjId, sourceObjIncarnation);
+      if (!rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(sourceObjId)) {
+        EffectInternalCreateIPreActingUCWeakMutBunch(sourceObjId, sourceObjIncarnation);
       }
     }
          
@@ -682,23 +1102,23 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsShieldingUCMutSet) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsShieldingUCWeakMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsShieldingUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateShieldingUCMutSet(sourceObjId, sourceObjIncarnation);
+      if (!rootIncarnation.incarnationsShieldingUCWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateShieldingUCWeakMutSet(sourceObjId, sourceObjIncarnation);
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackAICapabilityUCMutSet) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackAICapabilityUCWeakMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsAttackAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateAttackAICapabilityUCMutSet(sourceObjId, sourceObjIncarnation);
+      if (!rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateAttackAICapabilityUCWeakMutSet(sourceObjId, sourceObjIncarnation);
       }
     }
          
@@ -739,6 +1159,26 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateBideAICapabilityUCMutSet(sourceObjId, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackAICapabilityUCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsAttackAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateAttackAICapabilityUCMutSet(sourceObjId, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsShieldingUCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsShieldingUCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateShieldingUCMutSet(sourceObjId, sourceObjIncarnation);
       }
     }
          
@@ -928,78 +1368,78 @@ public class Root {
         }
       }
              
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsShieldingUCMutSet) {
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsShieldingUCWeakMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
         var sourceVersion = sourceVersionAndObjIncarnation.version;
         var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsShieldingUCMutSet.ContainsKey(objId)) {
+        if (rootIncarnation.incarnationsShieldingUCWeakMutSet.ContainsKey(objId)) {
           // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsShieldingUCMutSet[objId];
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsShieldingUCWeakMutSet[objId];
           var currentVersion = currentVersionAndObjIncarnation.version;
           var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
           if (currentVersion != sourceVersion) {
             foreach (var objIdInCurrentObjIncarnation in currentObjIncarnation.set) {
               if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectShieldingUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+                EffectShieldingUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
               }
             }
             foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
               if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectShieldingUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+                EffectShieldingUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
               }
             }
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.hash -=
-                GetShieldingUCMutSetHash(
+                GetShieldingUCWeakMutSetHash(
                     objId,
-                    rootIncarnation.incarnationsShieldingUCMutSet[objId].version,
-                    rootIncarnation.incarnationsShieldingUCMutSet[objId].incarnation);
-            rootIncarnation.incarnationsShieldingUCMutSet[objId] = sourceVersionAndObjIncarnation;
+                    rootIncarnation.incarnationsShieldingUCWeakMutSet[objId].version,
+                    rootIncarnation.incarnationsShieldingUCWeakMutSet[objId].incarnation);
+            rootIncarnation.incarnationsShieldingUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
             rootIncarnation.hash +=
-                GetShieldingUCMutSetHash(
+                GetShieldingUCWeakMutSetHash(
                     objId,
-                    rootIncarnation.incarnationsShieldingUCMutSet[objId].version,
-                    rootIncarnation.incarnationsShieldingUCMutSet[objId].incarnation);
+                    rootIncarnation.incarnationsShieldingUCWeakMutSet[objId].version,
+                    rootIncarnation.incarnationsShieldingUCWeakMutSet[objId].incarnation);
           }
         }
       }
              
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackAICapabilityUCMutSet) {
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackAICapabilityUCWeakMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
         var sourceVersion = sourceVersionAndObjIncarnation.version;
         var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsAttackAICapabilityUCMutSet.ContainsKey(objId)) {
+        if (rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(objId)) {
           // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId];
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[objId];
           var currentVersion = currentVersionAndObjIncarnation.version;
           var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
           if (currentVersion != sourceVersion) {
             foreach (var objIdInCurrentObjIncarnation in currentObjIncarnation.set) {
               if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectAttackAICapabilityUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+                EffectAttackAICapabilityUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
               }
             }
             foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
               if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectAttackAICapabilityUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+                EffectAttackAICapabilityUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
               }
             }
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.hash -=
-                GetAttackAICapabilityUCMutSetHash(
+                GetAttackAICapabilityUCWeakMutSetHash(
                     objId,
-                    rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId].version,
-                    rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId].incarnation);
-            rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId] = sourceVersionAndObjIncarnation;
+                    rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[objId].version,
+                    rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[objId].incarnation);
+            rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
             rootIncarnation.hash +=
-                GetAttackAICapabilityUCMutSetHash(
+                GetAttackAICapabilityUCWeakMutSetHash(
                     objId,
-                    rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId].version,
-                    rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId].incarnation);
+                    rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[objId].version,
+                    rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[objId].incarnation);
           }
         }
       }
@@ -1152,6 +1592,82 @@ public class Root {
                     objId,
                     rootIncarnation.incarnationsBideAICapabilityUCMutSet[objId].version,
                     rootIncarnation.incarnationsBideAICapabilityUCMutSet[objId].incarnation);
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackAICapabilityUCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsAttackAICapabilityUCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in currentObjIncarnation.set) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectAttackAICapabilityUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectAttackAICapabilityUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.hash -=
+                GetAttackAICapabilityUCMutSetHash(
+                    objId,
+                    rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId].version,
+                    rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId].incarnation);
+            rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId] = sourceVersionAndObjIncarnation;
+            rootIncarnation.hash +=
+                GetAttackAICapabilityUCMutSetHash(
+                    objId,
+                    rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId].version,
+                    rootIncarnation.incarnationsAttackAICapabilityUCMutSet[objId].incarnation);
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsShieldingUCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsShieldingUCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsShieldingUCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in currentObjIncarnation.set) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectShieldingUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectShieldingUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.hash -=
+                GetShieldingUCMutSetHash(
+                    objId,
+                    rootIncarnation.incarnationsShieldingUCMutSet[objId].version,
+                    rootIncarnation.incarnationsShieldingUCMutSet[objId].incarnation);
+            rootIncarnation.incarnationsShieldingUCMutSet[objId] = sourceVersionAndObjIncarnation;
+            rootIncarnation.hash +=
+                GetShieldingUCMutSetHash(
+                    objId,
+                    rootIncarnation.incarnationsShieldingUCMutSet[objId].version,
+                    rootIncarnation.incarnationsShieldingUCMutSet[objId].incarnation);
           }
         }
       }
@@ -2233,11 +2749,11 @@ public class Root {
           }
 
           if (sourceObjIncarnation.remainingPreActingUnitComponents != currentObjIncarnation.remainingPreActingUnitComponents) {
-            EffectExecutionStateSetRemainingPreActingUnitComponents(objId, new IPreActingUCMutBunch(this, sourceObjIncarnation.remainingPreActingUnitComponents));
+            EffectExecutionStateSetRemainingPreActingUnitComponents(objId, new IPreActingUCWeakMutBunch(this, sourceObjIncarnation.remainingPreActingUnitComponents));
           }
 
           if (sourceObjIncarnation.remainingPostActingUnitComponents != currentObjIncarnation.remainingPostActingUnitComponents) {
-            EffectExecutionStateSetRemainingPostActingUnitComponents(objId, new IPostActingUCMutBunch(this, sourceObjIncarnation.remainingPostActingUnitComponents));
+            EffectExecutionStateSetRemainingPostActingUnitComponents(objId, new IPostActingUCWeakMutBunch(this, sourceObjIncarnation.remainingPostActingUnitComponents));
           }
 
           // Swap out the underlying incarnation. The only visible effect this has is
@@ -2257,14 +2773,14 @@ public class Root {
       }
     }
 
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPostActingUCMutBunch) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPostActingUCWeakMutBunch) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsIPostActingUCMutBunch.ContainsKey(objId)) {
+      if (rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(objId)) {
         // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIPostActingUCMutBunch[objId];
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId];
         var currentVersion = currentVersionAndObjIncarnation.version;
         var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
         if (currentVersion != sourceVersion) {
@@ -2272,28 +2788,28 @@ public class Root {
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
             rootIncarnation.hash -=
-                GetIPostActingUCMutBunchHash(
+                GetIPostActingUCWeakMutBunchHash(
                     objId,
-                    rootIncarnation.incarnationsIPostActingUCMutBunch[objId].version,
-                    rootIncarnation.incarnationsIPostActingUCMutBunch[objId].incarnation);
-          rootIncarnation.incarnationsIPostActingUCMutBunch[objId] = sourceVersionAndObjIncarnation;
+                    rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId].version,
+                    rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId].incarnation);
+          rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId] = sourceVersionAndObjIncarnation;
             rootIncarnation.hash +=
-                GetIPostActingUCMutBunchHash(
+                GetIPostActingUCWeakMutBunchHash(
                     objId,
-                    rootIncarnation.incarnationsIPostActingUCMutBunch[objId].version,
-                    rootIncarnation.incarnationsIPostActingUCMutBunch[objId].incarnation);
+                    rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId].version,
+                    rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId].incarnation);
         }
       }
     }
 
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPreActingUCMutBunch) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPreActingUCWeakMutBunch) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsIPreActingUCMutBunch.ContainsKey(objId)) {
+      if (rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(objId)) {
         // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIPreActingUCMutBunch[objId];
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId];
         var currentVersion = currentVersionAndObjIncarnation.version;
         var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
         if (currentVersion != sourceVersion) {
@@ -2301,16 +2817,16 @@ public class Root {
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
             rootIncarnation.hash -=
-                GetIPreActingUCMutBunchHash(
+                GetIPreActingUCWeakMutBunchHash(
                     objId,
-                    rootIncarnation.incarnationsIPreActingUCMutBunch[objId].version,
-                    rootIncarnation.incarnationsIPreActingUCMutBunch[objId].incarnation);
-          rootIncarnation.incarnationsIPreActingUCMutBunch[objId] = sourceVersionAndObjIncarnation;
+                    rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId].version,
+                    rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId].incarnation);
+          rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId] = sourceVersionAndObjIncarnation;
             rootIncarnation.hash +=
-                GetIPreActingUCMutBunchHash(
+                GetIPreActingUCWeakMutBunchHash(
                     objId,
-                    rootIncarnation.incarnationsIPreActingUCMutBunch[objId].version,
-                    rootIncarnation.incarnationsIPreActingUCMutBunch[objId].incarnation);
+                    rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId].version,
+                    rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId].incarnation);
         }
       }
     }
@@ -2545,17 +3061,17 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IPostActingUCMutBunchIncarnation>>(rootIncarnation.incarnationsIPostActingUCMutBunch)) {
-      if (!sourceIncarnation.incarnationsIPostActingUCMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IPostActingUCWeakMutBunchIncarnation>>(rootIncarnation.incarnationsIPostActingUCWeakMutBunch)) {
+      if (!sourceIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectIPostActingUCMutBunchDelete(id);
+        EffectIPostActingUCWeakMutBunchDelete(id);
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IPreActingUCMutBunchIncarnation>>(rootIncarnation.incarnationsIPreActingUCMutBunch)) {
-      if (!sourceIncarnation.incarnationsIPreActingUCMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IPreActingUCWeakMutBunchIncarnation>>(rootIncarnation.incarnationsIPreActingUCWeakMutBunch)) {
+      if (!sourceIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectIPreActingUCMutBunchDelete(id);
+        EffectIPreActingUCWeakMutBunchDelete(id);
       }
     }
 
@@ -2587,17 +3103,17 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ShieldingUCMutSetIncarnation>>(rootIncarnation.incarnationsShieldingUCMutSet)) {
-      if (!sourceIncarnation.incarnationsShieldingUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ShieldingUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsShieldingUCWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsShieldingUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectShieldingUCMutSetDelete(id);
+        EffectShieldingUCWeakMutSetDelete(id);
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>>(rootIncarnation.incarnationsAttackAICapabilityUCMutSet)) {
-      if (!sourceIncarnation.incarnationsAttackAICapabilityUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectAttackAICapabilityUCMutSetDelete(id);
+        EffectAttackAICapabilityUCWeakMutSetDelete(id);
       }
     }
 
@@ -2626,6 +3142,20 @@ public class Root {
       if (!sourceIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectBideAICapabilityUCMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>>(rootIncarnation.incarnationsAttackAICapabilityUCMutSet)) {
+      if (!sourceIncarnation.incarnationsAttackAICapabilityUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectAttackAICapabilityUCMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ShieldingUCMutSetIncarnation>>(rootIncarnation.incarnationsShieldingUCMutSet)) {
+      if (!sourceIncarnation.incarnationsShieldingUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectShieldingUCMutSetDelete(id);
       }
     }
 
@@ -2701,14 +3231,14 @@ public class Root {
   }
   public List<Level> AllLevel() {
     List<Level> result = new List<Level>(rootIncarnation.incarnationsLevel.Count);
-    foreach (var gameId in rootIncarnation.incarnationsLevel.Keys) {
-      result.Add(new Level(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsLevel.Keys) {
+      result.Add(new Level(this, id));
     }
     return result;
   }
   public IEnumerator<Level> EnumAllLevel() {
-    foreach (var gameId in rootIncarnation.incarnationsLevel.Keys) {
-      yield return GetLevel(gameId);
+    foreach (var id in rootIncarnation.incarnationsLevel.Keys) {
+      yield return GetLevel(id);
     }
   }
   public void CheckHasLevel(Level thing) {
@@ -2825,14 +3355,14 @@ public class Root {
   }
   public List<DecorativeTerrainTileComponent> AllDecorativeTerrainTileComponent() {
     List<DecorativeTerrainTileComponent> result = new List<DecorativeTerrainTileComponent>(rootIncarnation.incarnationsDecorativeTerrainTileComponent.Count);
-    foreach (var gameId in rootIncarnation.incarnationsDecorativeTerrainTileComponent.Keys) {
-      result.Add(new DecorativeTerrainTileComponent(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsDecorativeTerrainTileComponent.Keys) {
+      result.Add(new DecorativeTerrainTileComponent(this, id));
     }
     return result;
   }
   public IEnumerator<DecorativeTerrainTileComponent> EnumAllDecorativeTerrainTileComponent() {
-    foreach (var gameId in rootIncarnation.incarnationsDecorativeTerrainTileComponent.Keys) {
-      yield return GetDecorativeTerrainTileComponent(gameId);
+    foreach (var id in rootIncarnation.incarnationsDecorativeTerrainTileComponent.Keys) {
+      yield return GetDecorativeTerrainTileComponent(id);
     }
   }
   public void CheckHasDecorativeTerrainTileComponent(DecorativeTerrainTileComponent thing) {
@@ -2938,14 +3468,14 @@ public class Root {
   }
   public List<UpStaircaseTerrainTileComponent> AllUpStaircaseTerrainTileComponent() {
     List<UpStaircaseTerrainTileComponent> result = new List<UpStaircaseTerrainTileComponent>(rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.Count);
-    foreach (var gameId in rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.Keys) {
-      result.Add(new UpStaircaseTerrainTileComponent(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.Keys) {
+      result.Add(new UpStaircaseTerrainTileComponent(this, id));
     }
     return result;
   }
   public IEnumerator<UpStaircaseTerrainTileComponent> EnumAllUpStaircaseTerrainTileComponent() {
-    foreach (var gameId in rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.Keys) {
-      yield return GetUpStaircaseTerrainTileComponent(gameId);
+    foreach (var id in rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.Keys) {
+      yield return GetUpStaircaseTerrainTileComponent(id);
     }
   }
   public void CheckHasUpStaircaseTerrainTileComponent(UpStaircaseTerrainTileComponent thing) {
@@ -3050,14 +3580,14 @@ public class Root {
   }
   public List<DownStaircaseTerrainTileComponent> AllDownStaircaseTerrainTileComponent() {
     List<DownStaircaseTerrainTileComponent> result = new List<DownStaircaseTerrainTileComponent>(rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.Count);
-    foreach (var gameId in rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.Keys) {
-      result.Add(new DownStaircaseTerrainTileComponent(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.Keys) {
+      result.Add(new DownStaircaseTerrainTileComponent(this, id));
     }
     return result;
   }
   public IEnumerator<DownStaircaseTerrainTileComponent> EnumAllDownStaircaseTerrainTileComponent() {
-    foreach (var gameId in rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.Keys) {
-      yield return GetDownStaircaseTerrainTileComponent(gameId);
+    foreach (var id in rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.Keys) {
+      yield return GetDownStaircaseTerrainTileComponent(id);
     }
   }
   public void CheckHasDownStaircaseTerrainTileComponent(DownStaircaseTerrainTileComponent thing) {
@@ -3162,14 +3692,14 @@ public class Root {
   }
   public List<TerrainTile> AllTerrainTile() {
     List<TerrainTile> result = new List<TerrainTile>(rootIncarnation.incarnationsTerrainTile.Count);
-    foreach (var gameId in rootIncarnation.incarnationsTerrainTile.Keys) {
-      result.Add(new TerrainTile(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsTerrainTile.Keys) {
+      result.Add(new TerrainTile(this, id));
     }
     return result;
   }
   public IEnumerator<TerrainTile> EnumAllTerrainTile() {
-    foreach (var gameId in rootIncarnation.incarnationsTerrainTile.Keys) {
-      yield return GetTerrainTile(gameId);
+    foreach (var id in rootIncarnation.incarnationsTerrainTile.Keys) {
+      yield return GetTerrainTile(id);
     }
   }
   public void CheckHasTerrainTile(TerrainTile thing) {
@@ -3314,14 +3844,14 @@ public class Root {
   }
   public List<ITerrainTileComponentMutBunch> AllITerrainTileComponentMutBunch() {
     List<ITerrainTileComponentMutBunch> result = new List<ITerrainTileComponentMutBunch>(rootIncarnation.incarnationsITerrainTileComponentMutBunch.Count);
-    foreach (var gameId in rootIncarnation.incarnationsITerrainTileComponentMutBunch.Keys) {
-      result.Add(new ITerrainTileComponentMutBunch(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsITerrainTileComponentMutBunch.Keys) {
+      result.Add(new ITerrainTileComponentMutBunch(this, id));
     }
     return result;
   }
   public IEnumerator<ITerrainTileComponentMutBunch> EnumAllITerrainTileComponentMutBunch() {
-    foreach (var gameId in rootIncarnation.incarnationsITerrainTileComponentMutBunch.Keys) {
-      yield return GetITerrainTileComponentMutBunch(gameId);
+    foreach (var id in rootIncarnation.incarnationsITerrainTileComponentMutBunch.Keys) {
+      yield return GetITerrainTileComponentMutBunch(id);
     }
   }
   public void CheckHasITerrainTileComponentMutBunch(ITerrainTileComponentMutBunch thing) {
@@ -3436,14 +3966,14 @@ public class Root {
   }
   public List<Terrain> AllTerrain() {
     List<Terrain> result = new List<Terrain>(rootIncarnation.incarnationsTerrain.Count);
-    foreach (var gameId in rootIncarnation.incarnationsTerrain.Keys) {
-      result.Add(new Terrain(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsTerrain.Keys) {
+      result.Add(new Terrain(this, id));
     }
     return result;
   }
   public IEnumerator<Terrain> EnumAllTerrain() {
-    foreach (var gameId in rootIncarnation.incarnationsTerrain.Keys) {
-      yield return GetTerrain(gameId);
+    foreach (var id in rootIncarnation.incarnationsTerrain.Keys) {
+      yield return GetTerrain(id);
     }
   }
   public void CheckHasTerrain(Terrain thing) {
@@ -3584,14 +4114,14 @@ public class Root {
   }
   public List<Glaive> AllGlaive() {
     List<Glaive> result = new List<Glaive>(rootIncarnation.incarnationsGlaive.Count);
-    foreach (var gameId in rootIncarnation.incarnationsGlaive.Keys) {
-      result.Add(new Glaive(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsGlaive.Keys) {
+      result.Add(new Glaive(this, id));
     }
     return result;
   }
   public IEnumerator<Glaive> EnumAllGlaive() {
-    foreach (var gameId in rootIncarnation.incarnationsGlaive.Keys) {
-      yield return GetGlaive(gameId);
+    foreach (var id in rootIncarnation.incarnationsGlaive.Keys) {
+      yield return GetGlaive(id);
     }
   }
   public void CheckHasGlaive(Glaive thing) {
@@ -3696,14 +4226,14 @@ public class Root {
   }
   public List<Armor> AllArmor() {
     List<Armor> result = new List<Armor>(rootIncarnation.incarnationsArmor.Count);
-    foreach (var gameId in rootIncarnation.incarnationsArmor.Keys) {
-      result.Add(new Armor(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsArmor.Keys) {
+      result.Add(new Armor(this, id));
     }
     return result;
   }
   public IEnumerator<Armor> EnumAllArmor() {
-    foreach (var gameId in rootIncarnation.incarnationsArmor.Keys) {
-      yield return GetArmor(gameId);
+    foreach (var id in rootIncarnation.incarnationsArmor.Keys) {
+      yield return GetArmor(id);
     }
   }
   public void CheckHasArmor(Armor thing) {
@@ -3808,14 +4338,14 @@ public class Root {
   }
   public List<Rand> AllRand() {
     List<Rand> result = new List<Rand>(rootIncarnation.incarnationsRand.Count);
-    foreach (var gameId in rootIncarnation.incarnationsRand.Keys) {
-      result.Add(new Rand(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsRand.Keys) {
+      result.Add(new Rand(this, id));
     }
     return result;
   }
   public IEnumerator<Rand> EnumAllRand() {
-    foreach (var gameId in rootIncarnation.incarnationsRand.Keys) {
-      yield return GetRand(gameId);
+    foreach (var id in rootIncarnation.incarnationsRand.Keys) {
+      yield return GetRand(id);
     }
   }
   public void CheckHasRand(Rand thing) {
@@ -3947,14 +4477,14 @@ public class Root {
   }
   public List<WanderAICapabilityUC> AllWanderAICapabilityUC() {
     List<WanderAICapabilityUC> result = new List<WanderAICapabilityUC>(rootIncarnation.incarnationsWanderAICapabilityUC.Count);
-    foreach (var gameId in rootIncarnation.incarnationsWanderAICapabilityUC.Keys) {
-      result.Add(new WanderAICapabilityUC(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsWanderAICapabilityUC.Keys) {
+      result.Add(new WanderAICapabilityUC(this, id));
     }
     return result;
   }
   public IEnumerator<WanderAICapabilityUC> EnumAllWanderAICapabilityUC() {
-    foreach (var gameId in rootIncarnation.incarnationsWanderAICapabilityUC.Keys) {
-      yield return GetWanderAICapabilityUC(gameId);
+    foreach (var id in rootIncarnation.incarnationsWanderAICapabilityUC.Keys) {
+      yield return GetWanderAICapabilityUC(id);
     }
   }
   public void CheckHasWanderAICapabilityUC(WanderAICapabilityUC thing) {
@@ -4059,14 +4589,14 @@ public class Root {
   }
   public List<ShieldingUC> AllShieldingUC() {
     List<ShieldingUC> result = new List<ShieldingUC>(rootIncarnation.incarnationsShieldingUC.Count);
-    foreach (var gameId in rootIncarnation.incarnationsShieldingUC.Keys) {
-      result.Add(new ShieldingUC(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsShieldingUC.Keys) {
+      result.Add(new ShieldingUC(this, id));
     }
     return result;
   }
   public IEnumerator<ShieldingUC> EnumAllShieldingUC() {
-    foreach (var gameId in rootIncarnation.incarnationsShieldingUC.Keys) {
-      yield return GetShieldingUC(gameId);
+    foreach (var id in rootIncarnation.incarnationsShieldingUC.Keys) {
+      yield return GetShieldingUC(id);
     }
   }
   public void CheckHasShieldingUC(ShieldingUC thing) {
@@ -4171,14 +4701,14 @@ public class Root {
   }
   public List<BidingOperationUC> AllBidingOperationUC() {
     List<BidingOperationUC> result = new List<BidingOperationUC>(rootIncarnation.incarnationsBidingOperationUC.Count);
-    foreach (var gameId in rootIncarnation.incarnationsBidingOperationUC.Keys) {
-      result.Add(new BidingOperationUC(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsBidingOperationUC.Keys) {
+      result.Add(new BidingOperationUC(this, id));
     }
     return result;
   }
   public IEnumerator<BidingOperationUC> EnumAllBidingOperationUC() {
-    foreach (var gameId in rootIncarnation.incarnationsBidingOperationUC.Keys) {
-      yield return GetBidingOperationUC(gameId);
+    foreach (var id in rootIncarnation.incarnationsBidingOperationUC.Keys) {
+      yield return GetBidingOperationUC(id);
     }
   }
   public void CheckHasBidingOperationUC(BidingOperationUC thing) {
@@ -4283,14 +4813,14 @@ public class Root {
   }
   public List<UnleashBideImpulse> AllUnleashBideImpulse() {
     List<UnleashBideImpulse> result = new List<UnleashBideImpulse>(rootIncarnation.incarnationsUnleashBideImpulse.Count);
-    foreach (var gameId in rootIncarnation.incarnationsUnleashBideImpulse.Keys) {
-      result.Add(new UnleashBideImpulse(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsUnleashBideImpulse.Keys) {
+      result.Add(new UnleashBideImpulse(this, id));
     }
     return result;
   }
   public IEnumerator<UnleashBideImpulse> EnumAllUnleashBideImpulse() {
-    foreach (var gameId in rootIncarnation.incarnationsUnleashBideImpulse.Keys) {
-      yield return GetUnleashBideImpulse(gameId);
+    foreach (var id in rootIncarnation.incarnationsUnleashBideImpulse.Keys) {
+      yield return GetUnleashBideImpulse(id);
     }
   }
   public void CheckHasUnleashBideImpulse(UnleashBideImpulse thing) {
@@ -4396,14 +4926,14 @@ public class Root {
   }
   public List<StartBidingImpulse> AllStartBidingImpulse() {
     List<StartBidingImpulse> result = new List<StartBidingImpulse>(rootIncarnation.incarnationsStartBidingImpulse.Count);
-    foreach (var gameId in rootIncarnation.incarnationsStartBidingImpulse.Keys) {
-      result.Add(new StartBidingImpulse(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsStartBidingImpulse.Keys) {
+      result.Add(new StartBidingImpulse(this, id));
     }
     return result;
   }
   public IEnumerator<StartBidingImpulse> EnumAllStartBidingImpulse() {
-    foreach (var gameId in rootIncarnation.incarnationsStartBidingImpulse.Keys) {
-      yield return GetStartBidingImpulse(gameId);
+    foreach (var id in rootIncarnation.incarnationsStartBidingImpulse.Keys) {
+      yield return GetStartBidingImpulse(id);
     }
   }
   public void CheckHasStartBidingImpulse(StartBidingImpulse thing) {
@@ -4509,14 +5039,14 @@ public class Root {
   }
   public List<BideAICapabilityUC> AllBideAICapabilityUC() {
     List<BideAICapabilityUC> result = new List<BideAICapabilityUC>(rootIncarnation.incarnationsBideAICapabilityUC.Count);
-    foreach (var gameId in rootIncarnation.incarnationsBideAICapabilityUC.Keys) {
-      result.Add(new BideAICapabilityUC(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsBideAICapabilityUC.Keys) {
+      result.Add(new BideAICapabilityUC(this, id));
     }
     return result;
   }
   public IEnumerator<BideAICapabilityUC> EnumAllBideAICapabilityUC() {
-    foreach (var gameId in rootIncarnation.incarnationsBideAICapabilityUC.Keys) {
-      yield return GetBideAICapabilityUC(gameId);
+    foreach (var id in rootIncarnation.incarnationsBideAICapabilityUC.Keys) {
+      yield return GetBideAICapabilityUC(id);
     }
   }
   public void CheckHasBideAICapabilityUC(BideAICapabilityUC thing) {
@@ -4621,14 +5151,14 @@ public class Root {
   }
   public List<AttackImpulse> AllAttackImpulse() {
     List<AttackImpulse> result = new List<AttackImpulse>(rootIncarnation.incarnationsAttackImpulse.Count);
-    foreach (var gameId in rootIncarnation.incarnationsAttackImpulse.Keys) {
-      result.Add(new AttackImpulse(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsAttackImpulse.Keys) {
+      result.Add(new AttackImpulse(this, id));
     }
     return result;
   }
   public IEnumerator<AttackImpulse> EnumAllAttackImpulse() {
-    foreach (var gameId in rootIncarnation.incarnationsAttackImpulse.Keys) {
-      yield return GetAttackImpulse(gameId);
+    foreach (var id in rootIncarnation.incarnationsAttackImpulse.Keys) {
+      yield return GetAttackImpulse(id);
     }
   }
   public void CheckHasAttackImpulse(AttackImpulse thing) {
@@ -4734,14 +5264,14 @@ public class Root {
   }
   public List<PursueImpulse> AllPursueImpulse() {
     List<PursueImpulse> result = new List<PursueImpulse>(rootIncarnation.incarnationsPursueImpulse.Count);
-    foreach (var gameId in rootIncarnation.incarnationsPursueImpulse.Keys) {
-      result.Add(new PursueImpulse(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsPursueImpulse.Keys) {
+      result.Add(new PursueImpulse(this, id));
     }
     return result;
   }
   public IEnumerator<PursueImpulse> EnumAllPursueImpulse() {
-    foreach (var gameId in rootIncarnation.incarnationsPursueImpulse.Keys) {
-      yield return GetPursueImpulse(gameId);
+    foreach (var id in rootIncarnation.incarnationsPursueImpulse.Keys) {
+      yield return GetPursueImpulse(id);
     }
   }
   public void CheckHasPursueImpulse(PursueImpulse thing) {
@@ -4850,14 +5380,14 @@ public class Root {
   }
   public List<KillDirectiveUC> AllKillDirectiveUC() {
     List<KillDirectiveUC> result = new List<KillDirectiveUC>(rootIncarnation.incarnationsKillDirectiveUC.Count);
-    foreach (var gameId in rootIncarnation.incarnationsKillDirectiveUC.Keys) {
-      result.Add(new KillDirectiveUC(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsKillDirectiveUC.Keys) {
+      result.Add(new KillDirectiveUC(this, id));
     }
     return result;
   }
   public IEnumerator<KillDirectiveUC> EnumAllKillDirectiveUC() {
-    foreach (var gameId in rootIncarnation.incarnationsKillDirectiveUC.Keys) {
-      yield return GetKillDirectiveUC(gameId);
+    foreach (var id in rootIncarnation.incarnationsKillDirectiveUC.Keys) {
+      yield return GetKillDirectiveUC(id);
     }
   }
   public void CheckHasKillDirectiveUC(KillDirectiveUC thing) {
@@ -4968,14 +5498,14 @@ public class Root {
   }
   public List<AttackAICapabilityUC> AllAttackAICapabilityUC() {
     List<AttackAICapabilityUC> result = new List<AttackAICapabilityUC>(rootIncarnation.incarnationsAttackAICapabilityUC.Count);
-    foreach (var gameId in rootIncarnation.incarnationsAttackAICapabilityUC.Keys) {
-      result.Add(new AttackAICapabilityUC(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsAttackAICapabilityUC.Keys) {
+      result.Add(new AttackAICapabilityUC(this, id));
     }
     return result;
   }
   public IEnumerator<AttackAICapabilityUC> EnumAllAttackAICapabilityUC() {
-    foreach (var gameId in rootIncarnation.incarnationsAttackAICapabilityUC.Keys) {
-      yield return GetAttackAICapabilityUC(gameId);
+    foreach (var id in rootIncarnation.incarnationsAttackAICapabilityUC.Keys) {
+      yield return GetAttackAICapabilityUC(id);
     }
   }
   public void CheckHasAttackAICapabilityUC(AttackAICapabilityUC thing) {
@@ -5080,14 +5610,14 @@ public class Root {
   }
   public List<MoveImpulse> AllMoveImpulse() {
     List<MoveImpulse> result = new List<MoveImpulse>(rootIncarnation.incarnationsMoveImpulse.Count);
-    foreach (var gameId in rootIncarnation.incarnationsMoveImpulse.Keys) {
-      result.Add(new MoveImpulse(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsMoveImpulse.Keys) {
+      result.Add(new MoveImpulse(this, id));
     }
     return result;
   }
   public IEnumerator<MoveImpulse> EnumAllMoveImpulse() {
-    foreach (var gameId in rootIncarnation.incarnationsMoveImpulse.Keys) {
-      yield return GetMoveImpulse(gameId);
+    foreach (var id in rootIncarnation.incarnationsMoveImpulse.Keys) {
+      yield return GetMoveImpulse(id);
     }
   }
   public void CheckHasMoveImpulse(MoveImpulse thing) {
@@ -5196,14 +5726,14 @@ public class Root {
   }
   public List<MoveDirectiveUC> AllMoveDirectiveUC() {
     List<MoveDirectiveUC> result = new List<MoveDirectiveUC>(rootIncarnation.incarnationsMoveDirectiveUC.Count);
-    foreach (var gameId in rootIncarnation.incarnationsMoveDirectiveUC.Keys) {
-      result.Add(new MoveDirectiveUC(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsMoveDirectiveUC.Keys) {
+      result.Add(new MoveDirectiveUC(this, id));
     }
     return result;
   }
   public IEnumerator<MoveDirectiveUC> EnumAllMoveDirectiveUC() {
-    foreach (var gameId in rootIncarnation.incarnationsMoveDirectiveUC.Keys) {
-      yield return GetMoveDirectiveUC(gameId);
+    foreach (var id in rootIncarnation.incarnationsMoveDirectiveUC.Keys) {
+      yield return GetMoveDirectiveUC(id);
     }
   }
   public void CheckHasMoveDirectiveUC(MoveDirectiveUC thing) {
@@ -5310,14 +5840,14 @@ public class Root {
   }
   public List<Unit> AllUnit() {
     List<Unit> result = new List<Unit>(rootIncarnation.incarnationsUnit.Count);
-    foreach (var gameId in rootIncarnation.incarnationsUnit.Keys) {
-      result.Add(new Unit(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsUnit.Keys) {
+      result.Add(new Unit(this, id));
     }
     return result;
   }
   public IEnumerator<Unit> EnumAllUnit() {
-    foreach (var gameId in rootIncarnation.incarnationsUnit.Keys) {
-      yield return GetUnit(gameId);
+    foreach (var id in rootIncarnation.incarnationsUnit.Keys) {
+      yield return GetUnit(id);
     }
   }
   public void CheckHasUnit(Unit thing) {
@@ -5690,14 +6220,14 @@ public class Root {
   }
   public List<IItemMutBunch> AllIItemMutBunch() {
     List<IItemMutBunch> result = new List<IItemMutBunch>(rootIncarnation.incarnationsIItemMutBunch.Count);
-    foreach (var gameId in rootIncarnation.incarnationsIItemMutBunch.Keys) {
-      result.Add(new IItemMutBunch(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsIItemMutBunch.Keys) {
+      result.Add(new IItemMutBunch(this, id));
     }
     return result;
   }
   public IEnumerator<IItemMutBunch> EnumAllIItemMutBunch() {
-    foreach (var gameId in rootIncarnation.incarnationsIItemMutBunch.Keys) {
-      yield return GetIItemMutBunch(gameId);
+    foreach (var id in rootIncarnation.incarnationsIItemMutBunch.Keys) {
+      yield return GetIItemMutBunch(id);
     }
   }
   public void CheckHasIItemMutBunch(IItemMutBunch thing) {
@@ -5808,14 +6338,14 @@ public class Root {
   }
   public List<IUnitComponentMutBunch> AllIUnitComponentMutBunch() {
     List<IUnitComponentMutBunch> result = new List<IUnitComponentMutBunch>(rootIncarnation.incarnationsIUnitComponentMutBunch.Count);
-    foreach (var gameId in rootIncarnation.incarnationsIUnitComponentMutBunch.Keys) {
-      result.Add(new IUnitComponentMutBunch(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsIUnitComponentMutBunch.Keys) {
+      result.Add(new IUnitComponentMutBunch(this, id));
     }
     return result;
   }
   public IEnumerator<IUnitComponentMutBunch> EnumAllIUnitComponentMutBunch() {
-    foreach (var gameId in rootIncarnation.incarnationsIUnitComponentMutBunch.Keys) {
-      yield return GetIUnitComponentMutBunch(gameId);
+    foreach (var id in rootIncarnation.incarnationsIUnitComponentMutBunch.Keys) {
+      yield return GetIUnitComponentMutBunch(id);
     }
   }
   public void CheckHasIUnitComponentMutBunch(IUnitComponentMutBunch thing) {
@@ -5946,14 +6476,14 @@ public class Root {
   }
   public List<NoImpulse> AllNoImpulse() {
     List<NoImpulse> result = new List<NoImpulse>(rootIncarnation.incarnationsNoImpulse.Count);
-    foreach (var gameId in rootIncarnation.incarnationsNoImpulse.Keys) {
-      result.Add(new NoImpulse(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsNoImpulse.Keys) {
+      result.Add(new NoImpulse(this, id));
     }
     return result;
   }
   public IEnumerator<NoImpulse> EnumAllNoImpulse() {
-    foreach (var gameId in rootIncarnation.incarnationsNoImpulse.Keys) {
-      yield return GetNoImpulse(gameId);
+    foreach (var id in rootIncarnation.incarnationsNoImpulse.Keys) {
+      yield return GetNoImpulse(id);
     }
   }
   public void CheckHasNoImpulse(NoImpulse thing) {
@@ -6058,14 +6588,14 @@ public class Root {
   }
   public List<ExecutionState> AllExecutionState() {
     List<ExecutionState> result = new List<ExecutionState>(rootIncarnation.incarnationsExecutionState.Count);
-    foreach (var gameId in rootIncarnation.incarnationsExecutionState.Keys) {
-      result.Add(new ExecutionState(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsExecutionState.Keys) {
+      result.Add(new ExecutionState(this, id));
     }
     return result;
   }
   public IEnumerator<ExecutionState> EnumAllExecutionState() {
-    foreach (var gameId in rootIncarnation.incarnationsExecutionState.Keys) {
-      yield return GetExecutionState(gameId);
+    foreach (var id in rootIncarnation.incarnationsExecutionState.Keys) {
+      yield return GetExecutionState(id);
     }
   }
   public void CheckHasExecutionState(ExecutionState thing) {
@@ -6114,8 +6644,8 @@ public class Root {
   public ExecutionState EffectExecutionStateCreate(
       Unit actingUnit,
       bool actingUnitDidAction,
-      IPreActingUCMutBunch remainingPreActingUnitComponents,
-      IPostActingUCMutBunch remainingPostActingUnitComponents) {
+      IPreActingUCWeakMutBunch remainingPreActingUnitComponents,
+      IPostActingUCWeakMutBunch remainingPostActingUnitComponents) {
     CheckUnlocked();
 
     var id = NewId();
@@ -6225,7 +6755,7 @@ public class Root {
     BroadcastExecutionStateEffect(id, effect);
   }
 
-  public void EffectExecutionStateSetRemainingPreActingUnitComponents(int id, IPreActingUCMutBunch newValue) {
+  public void EffectExecutionStateSetRemainingPreActingUnitComponents(int id, IPreActingUCWeakMutBunch newValue) {
     CheckUnlocked();
     CheckHasExecutionState(id);
     var effect = new ExecutionStateSetRemainingPreActingUnitComponentsEffect(id, newValue);
@@ -6254,7 +6784,7 @@ public class Root {
     BroadcastExecutionStateEffect(id, effect);
   }
 
-  public void EffectExecutionStateSetRemainingPostActingUnitComponents(int id, IPostActingUCMutBunch newValue) {
+  public void EffectExecutionStateSetRemainingPostActingUnitComponents(int id, IPostActingUCWeakMutBunch newValue) {
     CheckUnlocked();
     CheckHasExecutionState(id);
     var effect = new ExecutionStateSetRemainingPostActingUnitComponentsEffect(id, newValue);
@@ -6282,236 +6812,236 @@ public class Root {
 
     BroadcastExecutionStateEffect(id, effect);
   }
-  public IPostActingUCMutBunchIncarnation GetIPostActingUCMutBunchIncarnation(int id) {
+  public IPostActingUCWeakMutBunchIncarnation GetIPostActingUCWeakMutBunchIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
     }
-    return rootIncarnation.incarnationsIPostActingUCMutBunch[id].incarnation;
+    return rootIncarnation.incarnationsIPostActingUCWeakMutBunch[id].incarnation;
   }
-  public bool IPostActingUCMutBunchExists(int id) {
-    return rootIncarnation.incarnationsIPostActingUCMutBunch.ContainsKey(id);
+  public bool IPostActingUCWeakMutBunchExists(int id) {
+    return rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(id);
   }
-  public IPostActingUCMutBunch GetIPostActingUCMutBunch(int id) {
-    return new IPostActingUCMutBunch(this, id);
+  public IPostActingUCWeakMutBunch GetIPostActingUCWeakMutBunch(int id) {
+    return new IPostActingUCWeakMutBunch(this, id);
   }
-  public List<IPostActingUCMutBunch> AllIPostActingUCMutBunch() {
-    List<IPostActingUCMutBunch> result = new List<IPostActingUCMutBunch>(rootIncarnation.incarnationsIPostActingUCMutBunch.Count);
-    foreach (var gameId in rootIncarnation.incarnationsIPostActingUCMutBunch.Keys) {
-      result.Add(new IPostActingUCMutBunch(this, gameId));
+  public List<IPostActingUCWeakMutBunch> AllIPostActingUCWeakMutBunch() {
+    List<IPostActingUCWeakMutBunch> result = new List<IPostActingUCWeakMutBunch>(rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Count);
+    foreach (var id in rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Keys) {
+      result.Add(new IPostActingUCWeakMutBunch(this, id));
     }
     return result;
   }
-  public IEnumerator<IPostActingUCMutBunch> EnumAllIPostActingUCMutBunch() {
-    foreach (var gameId in rootIncarnation.incarnationsIPostActingUCMutBunch.Keys) {
-      yield return GetIPostActingUCMutBunch(gameId);
+  public IEnumerator<IPostActingUCWeakMutBunch> EnumAllIPostActingUCWeakMutBunch() {
+    foreach (var id in rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Keys) {
+      yield return GetIPostActingUCWeakMutBunch(id);
     }
   }
-  public void CheckHasIPostActingUCMutBunch(IPostActingUCMutBunch thing) {
+  public void CheckHasIPostActingUCWeakMutBunch(IPostActingUCWeakMutBunch thing) {
     CheckRootsEqual(this, thing.root);
-    CheckHasIPostActingUCMutBunch(thing.id);
+    CheckHasIPostActingUCWeakMutBunch(thing.id);
   }
-  public void CheckHasIPostActingUCMutBunch(int id) {
-    if (!rootIncarnation.incarnationsIPostActingUCMutBunch.ContainsKey(id)) {
-      throw new System.Exception("Invalid IPostActingUCMutBunch!");
+  public void CheckHasIPostActingUCWeakMutBunch(int id) {
+    if (!rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(id)) {
+      throw new System.Exception("Invalid IPostActingUCWeakMutBunch!");
     }
   }
-  public void AddIPostActingUCMutBunchObserver(int id, IIPostActingUCMutBunchEffectObserver observer) {
-    List<IIPostActingUCMutBunchEffectObserver> obsies;
-    if (!observersIPostActingUCMutBunch.TryGetValue(id, out obsies)) {
-      obsies = new List<IIPostActingUCMutBunchEffectObserver>();
+  public void AddIPostActingUCWeakMutBunchObserver(int id, IIPostActingUCWeakMutBunchEffectObserver observer) {
+    List<IIPostActingUCWeakMutBunchEffectObserver> obsies;
+    if (!observersIPostActingUCWeakMutBunch.TryGetValue(id, out obsies)) {
+      obsies = new List<IIPostActingUCWeakMutBunchEffectObserver>();
     }
     obsies.Add(observer);
-    observersIPostActingUCMutBunch[id] = obsies;
+    observersIPostActingUCWeakMutBunch[id] = obsies;
   }
 
-  public void RemoveIPostActingUCMutBunchObserver(int id, IIPostActingUCMutBunchEffectObserver observer) {
-    if (observersIPostActingUCMutBunch.ContainsKey(id)) {
-      var list = observersIPostActingUCMutBunch[id];
+  public void RemoveIPostActingUCWeakMutBunchObserver(int id, IIPostActingUCWeakMutBunchEffectObserver observer) {
+    if (observersIPostActingUCWeakMutBunch.ContainsKey(id)) {
+      var list = observersIPostActingUCWeakMutBunch[id];
       list.Remove(observer);
       if (list.Count == 0) {
-        observersIPostActingUCMutBunch.Remove(id);
+        observersIPostActingUCWeakMutBunch.Remove(id);
       }
     } else {
       throw new Exception("Couldnt find!");
     }
   }
 
-  public void BroadcastIPostActingUCMutBunchEffect(int id, IIPostActingUCMutBunchEffect effect) {
-    if (observersIPostActingUCMutBunch.ContainsKey(0)) {
-      foreach (var observer in new List<IIPostActingUCMutBunchEffectObserver>(observersIPostActingUCMutBunch[0])) {
-        observer.OnIPostActingUCMutBunchEffect(effect);
+  public void BroadcastIPostActingUCWeakMutBunchEffect(int id, IIPostActingUCWeakMutBunchEffect effect) {
+    if (observersIPostActingUCWeakMutBunch.ContainsKey(0)) {
+      foreach (var observer in new List<IIPostActingUCWeakMutBunchEffectObserver>(observersIPostActingUCWeakMutBunch[0])) {
+        observer.OnIPostActingUCWeakMutBunchEffect(effect);
       }
     }
-    if (observersIPostActingUCMutBunch.ContainsKey(id)) {
-      foreach (var observer in new List<IIPostActingUCMutBunchEffectObserver>(observersIPostActingUCMutBunch[id])) {
-        observer.OnIPostActingUCMutBunchEffect(effect);
+    if (observersIPostActingUCWeakMutBunch.ContainsKey(id)) {
+      foreach (var observer in new List<IIPostActingUCWeakMutBunchEffectObserver>(observersIPostActingUCWeakMutBunch[id])) {
+        observer.OnIPostActingUCWeakMutBunchEffect(effect);
       }
     }
   }
 
-  public IPostActingUCMutBunch EffectIPostActingUCMutBunchCreate(
-      ShieldingUCMutSet membersShieldingUCMutSet) {
+  public IPostActingUCWeakMutBunch EffectIPostActingUCWeakMutBunchCreate(
+      ShieldingUCWeakMutSet membersShieldingUCWeakMutSet) {
     CheckUnlocked();
-    CheckHasShieldingUCMutSet(membersShieldingUCMutSet);
+    CheckHasShieldingUCWeakMutSet(membersShieldingUCWeakMutSet);
 
     var id = NewId();
     var incarnation =
-        new IPostActingUCMutBunchIncarnation(
-            membersShieldingUCMutSet.id
+        new IPostActingUCWeakMutBunchIncarnation(
+            membersShieldingUCWeakMutSet.id
             );
-    EffectInternalCreateIPostActingUCMutBunch(id, incarnation);
-    return new IPostActingUCMutBunch(this, id);
+    EffectInternalCreateIPostActingUCWeakMutBunch(id, incarnation);
+    return new IPostActingUCWeakMutBunch(this, id);
   }
-  public void EffectInternalCreateIPostActingUCMutBunch(
+  public void EffectInternalCreateIPostActingUCWeakMutBunch(
       int id,
-      IPostActingUCMutBunchIncarnation incarnation) {
+      IPostActingUCWeakMutBunchIncarnation incarnation) {
     CheckUnlocked();
-    var effect = new IPostActingUCMutBunchCreateEffect(id, incarnation);
-    rootIncarnation.incarnationsIPostActingUCMutBunch.Add(
+    var effect = new IPostActingUCWeakMutBunchCreateEffect(id, incarnation);
+    rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Add(
         id,
-        new VersionAndIncarnation<IPostActingUCMutBunchIncarnation>(
+        new VersionAndIncarnation<IPostActingUCWeakMutBunchIncarnation>(
             rootIncarnation.version,
             incarnation));
-    this.rootIncarnation.hash += GetIPostActingUCMutBunchHash(id, rootIncarnation.version, incarnation);
-    BroadcastIPostActingUCMutBunchEffect(id, effect);
+    this.rootIncarnation.hash += GetIPostActingUCWeakMutBunchHash(id, rootIncarnation.version, incarnation);
+    BroadcastIPostActingUCWeakMutBunchEffect(id, effect);
   }
 
-  public void EffectIPostActingUCMutBunchDelete(int id) {
+  public void EffectIPostActingUCWeakMutBunchDelete(int id) {
     CheckUnlocked();
-    var effect = new IPostActingUCMutBunchDeleteEffect(id);
+    var effect = new IPostActingUCWeakMutBunchDeleteEffect(id);
 
     var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsIPostActingUCMutBunch[id];
+        rootIncarnation.incarnationsIPostActingUCWeakMutBunch[id];
     this.rootIncarnation.hash -=
-        GetIPostActingUCMutBunchHash(
+        GetIPostActingUCWeakMutBunchHash(
             id, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
 
-    BroadcastIPostActingUCMutBunchEffect(id, effect);
-    rootIncarnation.incarnationsIPostActingUCMutBunch.Remove(id);
+    BroadcastIPostActingUCWeakMutBunchEffect(id, effect);
+    rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Remove(id);
   }
 
      
-  public int GetIPostActingUCMutBunchHash(int id, int version, IPostActingUCMutBunchIncarnation incarnation) {
+  public int GetIPostActingUCWeakMutBunchHash(int id, int version, IPostActingUCWeakMutBunchIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.membersShieldingUCMutSet.GetDeterministicHashCode();
+    result += id * version * 1 * incarnation.membersShieldingUCWeakMutSet.GetDeterministicHashCode();
     return result;
   }
-       public IPreActingUCMutBunchIncarnation GetIPreActingUCMutBunchIncarnation(int id) {
+       public IPreActingUCWeakMutBunchIncarnation GetIPreActingUCWeakMutBunchIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
     }
-    return rootIncarnation.incarnationsIPreActingUCMutBunch[id].incarnation;
+    return rootIncarnation.incarnationsIPreActingUCWeakMutBunch[id].incarnation;
   }
-  public bool IPreActingUCMutBunchExists(int id) {
-    return rootIncarnation.incarnationsIPreActingUCMutBunch.ContainsKey(id);
+  public bool IPreActingUCWeakMutBunchExists(int id) {
+    return rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(id);
   }
-  public IPreActingUCMutBunch GetIPreActingUCMutBunch(int id) {
-    return new IPreActingUCMutBunch(this, id);
+  public IPreActingUCWeakMutBunch GetIPreActingUCWeakMutBunch(int id) {
+    return new IPreActingUCWeakMutBunch(this, id);
   }
-  public List<IPreActingUCMutBunch> AllIPreActingUCMutBunch() {
-    List<IPreActingUCMutBunch> result = new List<IPreActingUCMutBunch>(rootIncarnation.incarnationsIPreActingUCMutBunch.Count);
-    foreach (var gameId in rootIncarnation.incarnationsIPreActingUCMutBunch.Keys) {
-      result.Add(new IPreActingUCMutBunch(this, gameId));
+  public List<IPreActingUCWeakMutBunch> AllIPreActingUCWeakMutBunch() {
+    List<IPreActingUCWeakMutBunch> result = new List<IPreActingUCWeakMutBunch>(rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Count);
+    foreach (var id in rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Keys) {
+      result.Add(new IPreActingUCWeakMutBunch(this, id));
     }
     return result;
   }
-  public IEnumerator<IPreActingUCMutBunch> EnumAllIPreActingUCMutBunch() {
-    foreach (var gameId in rootIncarnation.incarnationsIPreActingUCMutBunch.Keys) {
-      yield return GetIPreActingUCMutBunch(gameId);
+  public IEnumerator<IPreActingUCWeakMutBunch> EnumAllIPreActingUCWeakMutBunch() {
+    foreach (var id in rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Keys) {
+      yield return GetIPreActingUCWeakMutBunch(id);
     }
   }
-  public void CheckHasIPreActingUCMutBunch(IPreActingUCMutBunch thing) {
+  public void CheckHasIPreActingUCWeakMutBunch(IPreActingUCWeakMutBunch thing) {
     CheckRootsEqual(this, thing.root);
-    CheckHasIPreActingUCMutBunch(thing.id);
+    CheckHasIPreActingUCWeakMutBunch(thing.id);
   }
-  public void CheckHasIPreActingUCMutBunch(int id) {
-    if (!rootIncarnation.incarnationsIPreActingUCMutBunch.ContainsKey(id)) {
-      throw new System.Exception("Invalid IPreActingUCMutBunch!");
+  public void CheckHasIPreActingUCWeakMutBunch(int id) {
+    if (!rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(id)) {
+      throw new System.Exception("Invalid IPreActingUCWeakMutBunch!");
     }
   }
-  public void AddIPreActingUCMutBunchObserver(int id, IIPreActingUCMutBunchEffectObserver observer) {
-    List<IIPreActingUCMutBunchEffectObserver> obsies;
-    if (!observersIPreActingUCMutBunch.TryGetValue(id, out obsies)) {
-      obsies = new List<IIPreActingUCMutBunchEffectObserver>();
+  public void AddIPreActingUCWeakMutBunchObserver(int id, IIPreActingUCWeakMutBunchEffectObserver observer) {
+    List<IIPreActingUCWeakMutBunchEffectObserver> obsies;
+    if (!observersIPreActingUCWeakMutBunch.TryGetValue(id, out obsies)) {
+      obsies = new List<IIPreActingUCWeakMutBunchEffectObserver>();
     }
     obsies.Add(observer);
-    observersIPreActingUCMutBunch[id] = obsies;
+    observersIPreActingUCWeakMutBunch[id] = obsies;
   }
 
-  public void RemoveIPreActingUCMutBunchObserver(int id, IIPreActingUCMutBunchEffectObserver observer) {
-    if (observersIPreActingUCMutBunch.ContainsKey(id)) {
-      var list = observersIPreActingUCMutBunch[id];
+  public void RemoveIPreActingUCWeakMutBunchObserver(int id, IIPreActingUCWeakMutBunchEffectObserver observer) {
+    if (observersIPreActingUCWeakMutBunch.ContainsKey(id)) {
+      var list = observersIPreActingUCWeakMutBunch[id];
       list.Remove(observer);
       if (list.Count == 0) {
-        observersIPreActingUCMutBunch.Remove(id);
+        observersIPreActingUCWeakMutBunch.Remove(id);
       }
     } else {
       throw new Exception("Couldnt find!");
     }
   }
 
-  public void BroadcastIPreActingUCMutBunchEffect(int id, IIPreActingUCMutBunchEffect effect) {
-    if (observersIPreActingUCMutBunch.ContainsKey(0)) {
-      foreach (var observer in new List<IIPreActingUCMutBunchEffectObserver>(observersIPreActingUCMutBunch[0])) {
-        observer.OnIPreActingUCMutBunchEffect(effect);
+  public void BroadcastIPreActingUCWeakMutBunchEffect(int id, IIPreActingUCWeakMutBunchEffect effect) {
+    if (observersIPreActingUCWeakMutBunch.ContainsKey(0)) {
+      foreach (var observer in new List<IIPreActingUCWeakMutBunchEffectObserver>(observersIPreActingUCWeakMutBunch[0])) {
+        observer.OnIPreActingUCWeakMutBunchEffect(effect);
       }
     }
-    if (observersIPreActingUCMutBunch.ContainsKey(id)) {
-      foreach (var observer in new List<IIPreActingUCMutBunchEffectObserver>(observersIPreActingUCMutBunch[id])) {
-        observer.OnIPreActingUCMutBunchEffect(effect);
+    if (observersIPreActingUCWeakMutBunch.ContainsKey(id)) {
+      foreach (var observer in new List<IIPreActingUCWeakMutBunchEffectObserver>(observersIPreActingUCWeakMutBunch[id])) {
+        observer.OnIPreActingUCWeakMutBunchEffect(effect);
       }
     }
   }
 
-  public IPreActingUCMutBunch EffectIPreActingUCMutBunchCreate(
-      ShieldingUCMutSet membersShieldingUCMutSet,
-      AttackAICapabilityUCMutSet membersAttackAICapabilityUCMutSet) {
+  public IPreActingUCWeakMutBunch EffectIPreActingUCWeakMutBunchCreate(
+      ShieldingUCWeakMutSet membersShieldingUCWeakMutSet,
+      AttackAICapabilityUCWeakMutSet membersAttackAICapabilityUCWeakMutSet) {
     CheckUnlocked();
-    CheckHasShieldingUCMutSet(membersShieldingUCMutSet);
-    CheckHasAttackAICapabilityUCMutSet(membersAttackAICapabilityUCMutSet);
+    CheckHasShieldingUCWeakMutSet(membersShieldingUCWeakMutSet);
+    CheckHasAttackAICapabilityUCWeakMutSet(membersAttackAICapabilityUCWeakMutSet);
 
     var id = NewId();
     var incarnation =
-        new IPreActingUCMutBunchIncarnation(
-            membersShieldingUCMutSet.id,
-            membersAttackAICapabilityUCMutSet.id
+        new IPreActingUCWeakMutBunchIncarnation(
+            membersShieldingUCWeakMutSet.id,
+            membersAttackAICapabilityUCWeakMutSet.id
             );
-    EffectInternalCreateIPreActingUCMutBunch(id, incarnation);
-    return new IPreActingUCMutBunch(this, id);
+    EffectInternalCreateIPreActingUCWeakMutBunch(id, incarnation);
+    return new IPreActingUCWeakMutBunch(this, id);
   }
-  public void EffectInternalCreateIPreActingUCMutBunch(
+  public void EffectInternalCreateIPreActingUCWeakMutBunch(
       int id,
-      IPreActingUCMutBunchIncarnation incarnation) {
+      IPreActingUCWeakMutBunchIncarnation incarnation) {
     CheckUnlocked();
-    var effect = new IPreActingUCMutBunchCreateEffect(id, incarnation);
-    rootIncarnation.incarnationsIPreActingUCMutBunch.Add(
+    var effect = new IPreActingUCWeakMutBunchCreateEffect(id, incarnation);
+    rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Add(
         id,
-        new VersionAndIncarnation<IPreActingUCMutBunchIncarnation>(
+        new VersionAndIncarnation<IPreActingUCWeakMutBunchIncarnation>(
             rootIncarnation.version,
             incarnation));
-    this.rootIncarnation.hash += GetIPreActingUCMutBunchHash(id, rootIncarnation.version, incarnation);
-    BroadcastIPreActingUCMutBunchEffect(id, effect);
+    this.rootIncarnation.hash += GetIPreActingUCWeakMutBunchHash(id, rootIncarnation.version, incarnation);
+    BroadcastIPreActingUCWeakMutBunchEffect(id, effect);
   }
 
-  public void EffectIPreActingUCMutBunchDelete(int id) {
+  public void EffectIPreActingUCWeakMutBunchDelete(int id) {
     CheckUnlocked();
-    var effect = new IPreActingUCMutBunchDeleteEffect(id);
+    var effect = new IPreActingUCWeakMutBunchDeleteEffect(id);
 
     var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsIPreActingUCMutBunch[id];
+        rootIncarnation.incarnationsIPreActingUCWeakMutBunch[id];
     this.rootIncarnation.hash -=
-        GetIPreActingUCMutBunchHash(
+        GetIPreActingUCWeakMutBunchHash(
             id, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
 
-    BroadcastIPreActingUCMutBunchEffect(id, effect);
-    rootIncarnation.incarnationsIPreActingUCMutBunch.Remove(id);
+    BroadcastIPreActingUCWeakMutBunchEffect(id, effect);
+    rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Remove(id);
   }
 
      
-  public int GetIPreActingUCMutBunchHash(int id, int version, IPreActingUCMutBunchIncarnation incarnation) {
+  public int GetIPreActingUCWeakMutBunchHash(int id, int version, IPreActingUCWeakMutBunchIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.membersShieldingUCMutSet.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 1 * incarnation.membersShieldingUCWeakMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersAttackAICapabilityUCWeakMutSet.GetDeterministicHashCode();
     return result;
   }
        public GameIncarnation GetGameIncarnation(int id) {
@@ -6528,14 +7058,14 @@ public class Root {
   }
   public List<Game> AllGame() {
     List<Game> result = new List<Game>(rootIncarnation.incarnationsGame.Count);
-    foreach (var gameId in rootIncarnation.incarnationsGame.Keys) {
-      result.Add(new Game(this, gameId));
+    foreach (var id in rootIncarnation.incarnationsGame.Keys) {
+      result.Add(new Game(this, id));
     }
     return result;
   }
   public IEnumerator<Game> EnumAllGame() {
-    foreach (var gameId in rootIncarnation.incarnationsGame.Keys) {
-      yield return GetGame(gameId);
+    foreach (var id in rootIncarnation.incarnationsGame.Keys) {
+      yield return GetGame(id);
     }
   }
   public void CheckHasGame(Game thing) {
@@ -6973,6 +7503,73 @@ public class Root {
     GetIImpulse(id);
   }
 
+  public IDestructible GetIDestructible(int id) {
+
+    if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
+      return new KillDirectiveUCAsIDestructible(new KillDirectiveUC(this, id));
+    }
+
+    if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
+      return new MoveDirectiveUCAsIDestructible(new MoveDirectiveUC(this, id));
+    }
+
+    if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
+      return new WanderAICapabilityUCAsIDestructible(new WanderAICapabilityUC(this, id));
+    }
+
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIDestructible(new BideAICapabilityUC(this, id));
+    }
+
+    if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
+      return new AttackAICapabilityUCAsIDestructible(new AttackAICapabilityUC(this, id));
+    }
+
+    if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
+      return new ShieldingUCAsIDestructible(new ShieldingUC(this, id));
+    }
+
+    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
+      return new BidingOperationUCAsIDestructible(new BidingOperationUC(this, id));
+    }
+
+    if (rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(id)) {
+      return new UnleashBideImpulseAsIDestructible(new UnleashBideImpulse(this, id));
+    }
+
+    if (rootIncarnation.incarnationsStartBidingImpulse.ContainsKey(id)) {
+      return new StartBidingImpulseAsIDestructible(new StartBidingImpulse(this, id));
+    }
+
+    if (rootIncarnation.incarnationsAttackImpulse.ContainsKey(id)) {
+      return new AttackImpulseAsIDestructible(new AttackImpulse(this, id));
+    }
+
+    if (rootIncarnation.incarnationsPursueImpulse.ContainsKey(id)) {
+      return new PursueImpulseAsIDestructible(new PursueImpulse(this, id));
+    }
+
+    if (rootIncarnation.incarnationsMoveImpulse.ContainsKey(id)) {
+      return new MoveImpulseAsIDestructible(new MoveImpulse(this, id));
+    }
+
+    if (rootIncarnation.incarnationsNoImpulse.ContainsKey(id)) {
+      return new NoImpulseAsIDestructible(new NoImpulse(this, id));
+    }
+
+    if (rootIncarnation.incarnationsUnit.ContainsKey(id)) {
+      return new UnitAsIDestructible(new Unit(this, id));
+    }
+
+    return NullIDestructible.Null;
+  }
+  public void CheckHasIDestructible(IDestructible thing) {
+    GetIDestructible(thing.id);
+  }
+  public void CheckHasIDestructible(int id) {
+    GetIDestructible(id);
+  }
+
     public int GetIUnitEventMutListHash(int id, int version, IUnitEventMutListIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.list) {
@@ -6985,6 +7582,13 @@ public class Root {
     }
     public IUnitEventMutList GetIUnitEventMutList(int id) {
       return new IUnitEventMutList(this, id);
+    }
+    public List<IUnitEventMutList> AllIUnitEventMutList() {
+      List<IUnitEventMutList> result = new List<IUnitEventMutList>(rootIncarnation.incarnationsIUnitEventMutList.Count);
+      foreach (var id in rootIncarnation.incarnationsIUnitEventMutList.Keys) {
+        result.Add(new IUnitEventMutList(this, id));
+      }
+      return result;
     }
     public bool IUnitEventMutListExists(int id) {
       return rootIncarnation.incarnationsIUnitEventMutList.ContainsKey(id);
@@ -7127,6 +7731,13 @@ public class Root {
     public LocationMutList GetLocationMutList(int id) {
       return new LocationMutList(this, id);
     }
+    public List<LocationMutList> AllLocationMutList() {
+      List<LocationMutList> result = new List<LocationMutList>(rootIncarnation.incarnationsLocationMutList.Count);
+      foreach (var id in rootIncarnation.incarnationsLocationMutList.Keys) {
+        result.Add(new LocationMutList(this, id));
+      }
+      return result;
+    }
     public bool LocationMutListExists(int id) {
       return rootIncarnation.incarnationsLocationMutList.ContainsKey(id);
     }
@@ -7268,6 +7879,16 @@ public class Root {
     public LevelMutSet GetLevelMutSet(int id) {
       return new LevelMutSet(this, id);
     }
+    public List<LevelMutSet> AllLevelMutSet() {
+      List<LevelMutSet> result = new List<LevelMutSet>(rootIncarnation.incarnationsLevelMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsLevelMutSet.Keys) {
+        result.Add(new LevelMutSet(this, id));
+      }
+      return result;
+    }
+    public bool LevelMutSetExists(int id) {
+      return rootIncarnation.incarnationsLevelMutSet.ContainsKey(id);
+    }
     public void CheckHasLevelMutSet(LevelMutSet thing) {
       CheckRootsEqual(this, thing.root);
       CheckHasLevelMutSet(thing.id);
@@ -7393,65 +8014,75 @@ public class Root {
       }
     }
 
-    public int GetShieldingUCMutSetHash(int id, int version, ShieldingUCMutSetIncarnation incarnation) {
+    public int GetShieldingUCWeakMutSetHash(int id, int version, ShieldingUCWeakMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.set) {
         result += id * version * element.GetDeterministicHashCode();
       }
       return result;
     }
-    public ShieldingUCMutSetIncarnation GetShieldingUCMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsShieldingUCMutSet[id].incarnation;
+    public ShieldingUCWeakMutSetIncarnation GetShieldingUCWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsShieldingUCWeakMutSet[id].incarnation;
     }
-    public ShieldingUCMutSet GetShieldingUCMutSet(int id) {
-      return new ShieldingUCMutSet(this, id);
+    public ShieldingUCWeakMutSet GetShieldingUCWeakMutSet(int id) {
+      return new ShieldingUCWeakMutSet(this, id);
     }
-    public void CheckHasShieldingUCMutSet(ShieldingUCMutSet thing) {
+    public List<ShieldingUCWeakMutSet> AllShieldingUCWeakMutSet() {
+      List<ShieldingUCWeakMutSet> result = new List<ShieldingUCWeakMutSet>(rootIncarnation.incarnationsShieldingUCWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsShieldingUCWeakMutSet.Keys) {
+        result.Add(new ShieldingUCWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool ShieldingUCWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsShieldingUCWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasShieldingUCWeakMutSet(ShieldingUCWeakMutSet thing) {
       CheckRootsEqual(this, thing.root);
-      CheckHasShieldingUCMutSet(thing.id);
+      CheckHasShieldingUCWeakMutSet(thing.id);
     }
-    public void CheckHasShieldingUCMutSet(int id) {
-      if (!rootIncarnation.incarnationsShieldingUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid ShieldingUCMutSet}!");
+    public void CheckHasShieldingUCWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsShieldingUCWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid ShieldingUCWeakMutSet}!");
       }
     }
-    public ShieldingUCMutSet EffectShieldingUCMutSetCreate() {
+    public ShieldingUCWeakMutSet EffectShieldingUCWeakMutSetCreate() {
       CheckUnlocked();
       var id = NewId();
-      var incarnation = new ShieldingUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateShieldingUCMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetShieldingUCMutSetHash(id, rootIncarnation.version, incarnation);
-      return new ShieldingUCMutSet(this, id);
+      var incarnation = new ShieldingUCWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateShieldingUCWeakMutSet(id, incarnation);
+      this.rootIncarnation.hash += GetShieldingUCWeakMutSetHash(id, rootIncarnation.version, incarnation);
+      return new ShieldingUCWeakMutSet(this, id);
     }
-    public void EffectInternalCreateShieldingUCMutSet(int id, ShieldingUCMutSetIncarnation incarnation) {
-      var effect = new ShieldingUCMutSetCreateEffect(id, incarnation);
-      rootIncarnation.incarnationsShieldingUCMutSet
+    public void EffectInternalCreateShieldingUCWeakMutSet(int id, ShieldingUCWeakMutSetIncarnation incarnation) {
+      var effect = new ShieldingUCWeakMutSetCreateEffect(id, incarnation);
+      rootIncarnation.incarnationsShieldingUCWeakMutSet
           .Add(
               id,
-              new VersionAndIncarnation<ShieldingUCMutSetIncarnation>(
+              new VersionAndIncarnation<ShieldingUCWeakMutSetIncarnation>(
                   rootIncarnation.version,
                   incarnation));
-      BroadcastShieldingUCMutSetEffect(id, effect);
+      BroadcastShieldingUCWeakMutSetEffect(id, effect);
     }
-    public void EffectShieldingUCMutSetDelete(int id) {
+    public void EffectShieldingUCWeakMutSetDelete(int id) {
       CheckUnlocked();
-      var effect = new ShieldingUCMutSetDeleteEffect(id);
-      BroadcastShieldingUCMutSetEffect(id, effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsShieldingUCMutSet[id];
+      var effect = new ShieldingUCWeakMutSetDeleteEffect(id);
+      BroadcastShieldingUCWeakMutSetEffect(id, effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsShieldingUCWeakMutSet[id];
       this.rootIncarnation.hash -=
-          GetShieldingUCMutSetHash(id, versionAndIncarnation.version, versionAndIncarnation.incarnation);
-      rootIncarnation.incarnationsShieldingUCMutSet.Remove(id);
+          GetShieldingUCWeakMutSetHash(id, versionAndIncarnation.version, versionAndIncarnation.incarnation);
+      rootIncarnation.incarnationsShieldingUCWeakMutSet.Remove(id);
     }
 
        
-    public void EffectShieldingUCMutSetAdd(int setId, int elementId) {
+    public void EffectShieldingUCWeakMutSetAdd(int setId, int elementId) {
       CheckUnlocked();
-      CheckHasShieldingUCMutSet(setId);
+      CheckHasShieldingUCWeakMutSet(setId);
       CheckHasShieldingUC(elementId);
 
-      var effect = new ShieldingUCMutSetAddEffect(setId, elementId);
+      var effect = new ShieldingUCWeakMutSetAddEffect(setId, elementId);
 
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsShieldingUCMutSet[setId];
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsShieldingUCWeakMutSet[setId];
       Asserts.Assert(!oldIncarnationAndVersion.incarnation.set.Contains(elementId));
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
         oldIncarnationAndVersion.incarnation.set.Add(elementId);
@@ -7460,24 +8091,24 @@ public class Root {
         var oldMap = oldIncarnationAndVersion.incarnation.set;
         var newMap = new SortedSet<int>(oldMap);
         newMap.Add(elementId);
-        var newIncarnation = new ShieldingUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsShieldingUCMutSet[setId] =
-            new VersionAndIncarnation<ShieldingUCMutSetIncarnation>(
+        var newIncarnation = new ShieldingUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsShieldingUCWeakMutSet[setId] =
+            new VersionAndIncarnation<ShieldingUCWeakMutSetIncarnation>(
                 rootIncarnation.version,
                 newIncarnation);
-        this.rootIncarnation.hash -= GetShieldingUCMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
-        this.rootIncarnation.hash += GetShieldingUCMutSetHash(setId, rootIncarnation.version, newIncarnation);
+        this.rootIncarnation.hash -= GetShieldingUCWeakMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+        this.rootIncarnation.hash += GetShieldingUCWeakMutSetHash(setId, rootIncarnation.version, newIncarnation);
       }
-      BroadcastShieldingUCMutSetEffect(setId, effect);
+      BroadcastShieldingUCWeakMutSetEffect(setId, effect);
     }
-    public void EffectShieldingUCMutSetRemove(int setId, int elementId) {
+    public void EffectShieldingUCWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
-      CheckHasShieldingUCMutSet(setId);
+      CheckHasShieldingUCWeakMutSet(setId);
       CheckHasShieldingUC(elementId);
 
-      var effect = new ShieldingUCMutSetRemoveEffect(setId, elementId);
+      var effect = new ShieldingUCWeakMutSetRemoveEffect(setId, elementId);
 
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsShieldingUCMutSet[setId];
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsShieldingUCWeakMutSet[setId];
       Asserts.Assert(oldIncarnationAndVersion.incarnation.set.Contains(elementId));
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
         this.rootIncarnation.hash -= setId * rootIncarnation.version * elementId.GetDeterministicHashCode();
@@ -7486,110 +8117,120 @@ public class Root {
         var oldMap = oldIncarnationAndVersion.incarnation.set;
         var newMap = new SortedSet<int>(oldMap);
         newMap.Remove(elementId);
-        var newIncarnation = new ShieldingUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsShieldingUCMutSet[setId] =
-            new VersionAndIncarnation<ShieldingUCMutSetIncarnation>(
+        var newIncarnation = new ShieldingUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsShieldingUCWeakMutSet[setId] =
+            new VersionAndIncarnation<ShieldingUCWeakMutSetIncarnation>(
                 rootIncarnation.version, newIncarnation);
-        this.rootIncarnation.hash -= GetShieldingUCMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
-        this.rootIncarnation.hash += GetShieldingUCMutSetHash(setId, rootIncarnation.version, newIncarnation);
+        this.rootIncarnation.hash -= GetShieldingUCWeakMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+        this.rootIncarnation.hash += GetShieldingUCWeakMutSetHash(setId, rootIncarnation.version, newIncarnation);
       }
-      BroadcastShieldingUCMutSetEffect(setId, effect);
+      BroadcastShieldingUCWeakMutSetEffect(setId, effect);
     }
 
        
-    public void AddShieldingUCMutSetObserver(int id, IShieldingUCMutSetEffectObserver observer) {
-      List<IShieldingUCMutSetEffectObserver> obsies;
-      if (!observersShieldingUCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IShieldingUCMutSetEffectObserver>();
+    public void AddShieldingUCWeakMutSetObserver(int id, IShieldingUCWeakMutSetEffectObserver observer) {
+      List<IShieldingUCWeakMutSetEffectObserver> obsies;
+      if (!observersShieldingUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IShieldingUCWeakMutSetEffectObserver>();
       }
       obsies.Add(observer);
-      observersShieldingUCMutSet[id] = obsies;
+      observersShieldingUCWeakMutSet[id] = obsies;
     }
 
-    public void RemoveShieldingUCMutSetObserver(int id, IShieldingUCMutSetEffectObserver observer) {
-      if (observersShieldingUCMutSet.ContainsKey(id)) {
-        var list = observersShieldingUCMutSet[id];
+    public void RemoveShieldingUCWeakMutSetObserver(int id, IShieldingUCWeakMutSetEffectObserver observer) {
+      if (observersShieldingUCWeakMutSet.ContainsKey(id)) {
+        var list = observersShieldingUCWeakMutSet[id];
         list.Remove(observer);
         if (list.Count == 0) {
-          observersShieldingUCMutSet.Remove(id);
+          observersShieldingUCWeakMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");
       }
     }
        
-    public void BroadcastShieldingUCMutSetEffect(int id, IShieldingUCMutSetEffect effect) {
-      if (observersShieldingUCMutSet.ContainsKey(0)) {
-        foreach (var observer in new List<IShieldingUCMutSetEffectObserver>(observersShieldingUCMutSet[0])) {
-          observer.OnShieldingUCMutSetEffect(effect);
+    public void BroadcastShieldingUCWeakMutSetEffect(int id, IShieldingUCWeakMutSetEffect effect) {
+      if (observersShieldingUCWeakMutSet.ContainsKey(0)) {
+        foreach (var observer in new List<IShieldingUCWeakMutSetEffectObserver>(observersShieldingUCWeakMutSet[0])) {
+          observer.OnShieldingUCWeakMutSetEffect(effect);
         }
       }
-      if (observersShieldingUCMutSet.ContainsKey(id)) {
-        foreach (var observer in new List<IShieldingUCMutSetEffectObserver>(observersShieldingUCMutSet[id])) {
-          observer.OnShieldingUCMutSetEffect(effect);
+      if (observersShieldingUCWeakMutSet.ContainsKey(id)) {
+        foreach (var observer in new List<IShieldingUCWeakMutSetEffectObserver>(observersShieldingUCWeakMutSet[id])) {
+          observer.OnShieldingUCWeakMutSetEffect(effect);
         }
       }
     }
 
-    public int GetAttackAICapabilityUCMutSetHash(int id, int version, AttackAICapabilityUCMutSetIncarnation incarnation) {
+    public int GetAttackAICapabilityUCWeakMutSetHash(int id, int version, AttackAICapabilityUCWeakMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.set) {
         result += id * version * element.GetDeterministicHashCode();
       }
       return result;
     }
-    public AttackAICapabilityUCMutSetIncarnation GetAttackAICapabilityUCMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsAttackAICapabilityUCMutSet[id].incarnation;
+    public AttackAICapabilityUCWeakMutSetIncarnation GetAttackAICapabilityUCWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[id].incarnation;
     }
-    public AttackAICapabilityUCMutSet GetAttackAICapabilityUCMutSet(int id) {
-      return new AttackAICapabilityUCMutSet(this, id);
+    public AttackAICapabilityUCWeakMutSet GetAttackAICapabilityUCWeakMutSet(int id) {
+      return new AttackAICapabilityUCWeakMutSet(this, id);
     }
-    public void CheckHasAttackAICapabilityUCMutSet(AttackAICapabilityUCMutSet thing) {
+    public List<AttackAICapabilityUCWeakMutSet> AllAttackAICapabilityUCWeakMutSet() {
+      List<AttackAICapabilityUCWeakMutSet> result = new List<AttackAICapabilityUCWeakMutSet>(rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.Keys) {
+        result.Add(new AttackAICapabilityUCWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool AttackAICapabilityUCWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasAttackAICapabilityUCWeakMutSet(AttackAICapabilityUCWeakMutSet thing) {
       CheckRootsEqual(this, thing.root);
-      CheckHasAttackAICapabilityUCMutSet(thing.id);
+      CheckHasAttackAICapabilityUCWeakMutSet(thing.id);
     }
-    public void CheckHasAttackAICapabilityUCMutSet(int id) {
-      if (!rootIncarnation.incarnationsAttackAICapabilityUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid AttackAICapabilityUCMutSet}!");
+    public void CheckHasAttackAICapabilityUCWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid AttackAICapabilityUCWeakMutSet}!");
       }
     }
-    public AttackAICapabilityUCMutSet EffectAttackAICapabilityUCMutSetCreate() {
+    public AttackAICapabilityUCWeakMutSet EffectAttackAICapabilityUCWeakMutSetCreate() {
       CheckUnlocked();
       var id = NewId();
-      var incarnation = new AttackAICapabilityUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateAttackAICapabilityUCMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetAttackAICapabilityUCMutSetHash(id, rootIncarnation.version, incarnation);
-      return new AttackAICapabilityUCMutSet(this, id);
+      var incarnation = new AttackAICapabilityUCWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateAttackAICapabilityUCWeakMutSet(id, incarnation);
+      this.rootIncarnation.hash += GetAttackAICapabilityUCWeakMutSetHash(id, rootIncarnation.version, incarnation);
+      return new AttackAICapabilityUCWeakMutSet(this, id);
     }
-    public void EffectInternalCreateAttackAICapabilityUCMutSet(int id, AttackAICapabilityUCMutSetIncarnation incarnation) {
-      var effect = new AttackAICapabilityUCMutSetCreateEffect(id, incarnation);
-      rootIncarnation.incarnationsAttackAICapabilityUCMutSet
+    public void EffectInternalCreateAttackAICapabilityUCWeakMutSet(int id, AttackAICapabilityUCWeakMutSetIncarnation incarnation) {
+      var effect = new AttackAICapabilityUCWeakMutSetCreateEffect(id, incarnation);
+      rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet
           .Add(
               id,
-              new VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>(
+              new VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>(
                   rootIncarnation.version,
                   incarnation));
-      BroadcastAttackAICapabilityUCMutSetEffect(id, effect);
+      BroadcastAttackAICapabilityUCWeakMutSetEffect(id, effect);
     }
-    public void EffectAttackAICapabilityUCMutSetDelete(int id) {
+    public void EffectAttackAICapabilityUCWeakMutSetDelete(int id) {
       CheckUnlocked();
-      var effect = new AttackAICapabilityUCMutSetDeleteEffect(id);
-      BroadcastAttackAICapabilityUCMutSetEffect(id, effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsAttackAICapabilityUCMutSet[id];
+      var effect = new AttackAICapabilityUCWeakMutSetDeleteEffect(id);
+      BroadcastAttackAICapabilityUCWeakMutSetEffect(id, effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[id];
       this.rootIncarnation.hash -=
-          GetAttackAICapabilityUCMutSetHash(id, versionAndIncarnation.version, versionAndIncarnation.incarnation);
-      rootIncarnation.incarnationsAttackAICapabilityUCMutSet.Remove(id);
+          GetAttackAICapabilityUCWeakMutSetHash(id, versionAndIncarnation.version, versionAndIncarnation.incarnation);
+      rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.Remove(id);
     }
 
        
-    public void EffectAttackAICapabilityUCMutSetAdd(int setId, int elementId) {
+    public void EffectAttackAICapabilityUCWeakMutSetAdd(int setId, int elementId) {
       CheckUnlocked();
-      CheckHasAttackAICapabilityUCMutSet(setId);
+      CheckHasAttackAICapabilityUCWeakMutSet(setId);
       CheckHasAttackAICapabilityUC(elementId);
 
-      var effect = new AttackAICapabilityUCMutSetAddEffect(setId, elementId);
+      var effect = new AttackAICapabilityUCWeakMutSetAddEffect(setId, elementId);
 
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackAICapabilityUCMutSet[setId];
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId];
       Asserts.Assert(!oldIncarnationAndVersion.incarnation.set.Contains(elementId));
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
         oldIncarnationAndVersion.incarnation.set.Add(elementId);
@@ -7598,24 +8239,24 @@ public class Root {
         var oldMap = oldIncarnationAndVersion.incarnation.set;
         var newMap = new SortedSet<int>(oldMap);
         newMap.Add(elementId);
-        var newIncarnation = new AttackAICapabilityUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsAttackAICapabilityUCMutSet[setId] =
-            new VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>(
+        var newIncarnation = new AttackAICapabilityUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId] =
+            new VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>(
                 rootIncarnation.version,
                 newIncarnation);
-        this.rootIncarnation.hash -= GetAttackAICapabilityUCMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
-        this.rootIncarnation.hash += GetAttackAICapabilityUCMutSetHash(setId, rootIncarnation.version, newIncarnation);
+        this.rootIncarnation.hash -= GetAttackAICapabilityUCWeakMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+        this.rootIncarnation.hash += GetAttackAICapabilityUCWeakMutSetHash(setId, rootIncarnation.version, newIncarnation);
       }
-      BroadcastAttackAICapabilityUCMutSetEffect(setId, effect);
+      BroadcastAttackAICapabilityUCWeakMutSetEffect(setId, effect);
     }
-    public void EffectAttackAICapabilityUCMutSetRemove(int setId, int elementId) {
+    public void EffectAttackAICapabilityUCWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
-      CheckHasAttackAICapabilityUCMutSet(setId);
+      CheckHasAttackAICapabilityUCWeakMutSet(setId);
       CheckHasAttackAICapabilityUC(elementId);
 
-      var effect = new AttackAICapabilityUCMutSetRemoveEffect(setId, elementId);
+      var effect = new AttackAICapabilityUCWeakMutSetRemoveEffect(setId, elementId);
 
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackAICapabilityUCMutSet[setId];
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId];
       Asserts.Assert(oldIncarnationAndVersion.incarnation.set.Contains(elementId));
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
         this.rootIncarnation.hash -= setId * rootIncarnation.version * elementId.GetDeterministicHashCode();
@@ -7624,47 +8265,47 @@ public class Root {
         var oldMap = oldIncarnationAndVersion.incarnation.set;
         var newMap = new SortedSet<int>(oldMap);
         newMap.Remove(elementId);
-        var newIncarnation = new AttackAICapabilityUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsAttackAICapabilityUCMutSet[setId] =
-            new VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>(
+        var newIncarnation = new AttackAICapabilityUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId] =
+            new VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>(
                 rootIncarnation.version, newIncarnation);
-        this.rootIncarnation.hash -= GetAttackAICapabilityUCMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
-        this.rootIncarnation.hash += GetAttackAICapabilityUCMutSetHash(setId, rootIncarnation.version, newIncarnation);
+        this.rootIncarnation.hash -= GetAttackAICapabilityUCWeakMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+        this.rootIncarnation.hash += GetAttackAICapabilityUCWeakMutSetHash(setId, rootIncarnation.version, newIncarnation);
       }
-      BroadcastAttackAICapabilityUCMutSetEffect(setId, effect);
+      BroadcastAttackAICapabilityUCWeakMutSetEffect(setId, effect);
     }
 
        
-    public void AddAttackAICapabilityUCMutSetObserver(int id, IAttackAICapabilityUCMutSetEffectObserver observer) {
-      List<IAttackAICapabilityUCMutSetEffectObserver> obsies;
-      if (!observersAttackAICapabilityUCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IAttackAICapabilityUCMutSetEffectObserver>();
+    public void AddAttackAICapabilityUCWeakMutSetObserver(int id, IAttackAICapabilityUCWeakMutSetEffectObserver observer) {
+      List<IAttackAICapabilityUCWeakMutSetEffectObserver> obsies;
+      if (!observersAttackAICapabilityUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IAttackAICapabilityUCWeakMutSetEffectObserver>();
       }
       obsies.Add(observer);
-      observersAttackAICapabilityUCMutSet[id] = obsies;
+      observersAttackAICapabilityUCWeakMutSet[id] = obsies;
     }
 
-    public void RemoveAttackAICapabilityUCMutSetObserver(int id, IAttackAICapabilityUCMutSetEffectObserver observer) {
-      if (observersAttackAICapabilityUCMutSet.ContainsKey(id)) {
-        var list = observersAttackAICapabilityUCMutSet[id];
+    public void RemoveAttackAICapabilityUCWeakMutSetObserver(int id, IAttackAICapabilityUCWeakMutSetEffectObserver observer) {
+      if (observersAttackAICapabilityUCWeakMutSet.ContainsKey(id)) {
+        var list = observersAttackAICapabilityUCWeakMutSet[id];
         list.Remove(observer);
         if (list.Count == 0) {
-          observersAttackAICapabilityUCMutSet.Remove(id);
+          observersAttackAICapabilityUCWeakMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");
       }
     }
        
-    public void BroadcastAttackAICapabilityUCMutSetEffect(int id, IAttackAICapabilityUCMutSetEffect effect) {
-      if (observersAttackAICapabilityUCMutSet.ContainsKey(0)) {
-        foreach (var observer in new List<IAttackAICapabilityUCMutSetEffectObserver>(observersAttackAICapabilityUCMutSet[0])) {
-          observer.OnAttackAICapabilityUCMutSetEffect(effect);
+    public void BroadcastAttackAICapabilityUCWeakMutSetEffect(int id, IAttackAICapabilityUCWeakMutSetEffect effect) {
+      if (observersAttackAICapabilityUCWeakMutSet.ContainsKey(0)) {
+        foreach (var observer in new List<IAttackAICapabilityUCWeakMutSetEffectObserver>(observersAttackAICapabilityUCWeakMutSet[0])) {
+          observer.OnAttackAICapabilityUCWeakMutSetEffect(effect);
         }
       }
-      if (observersAttackAICapabilityUCMutSet.ContainsKey(id)) {
-        foreach (var observer in new List<IAttackAICapabilityUCMutSetEffectObserver>(observersAttackAICapabilityUCMutSet[id])) {
-          observer.OnAttackAICapabilityUCMutSetEffect(effect);
+      if (observersAttackAICapabilityUCWeakMutSet.ContainsKey(id)) {
+        foreach (var observer in new List<IAttackAICapabilityUCWeakMutSetEffectObserver>(observersAttackAICapabilityUCWeakMutSet[id])) {
+          observer.OnAttackAICapabilityUCWeakMutSetEffect(effect);
         }
       }
     }
@@ -7681,6 +8322,16 @@ public class Root {
     }
     public KillDirectiveUCMutSet GetKillDirectiveUCMutSet(int id) {
       return new KillDirectiveUCMutSet(this, id);
+    }
+    public List<KillDirectiveUCMutSet> AllKillDirectiveUCMutSet() {
+      List<KillDirectiveUCMutSet> result = new List<KillDirectiveUCMutSet>(rootIncarnation.incarnationsKillDirectiveUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsKillDirectiveUCMutSet.Keys) {
+        result.Add(new KillDirectiveUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool KillDirectiveUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsKillDirectiveUCMutSet.ContainsKey(id);
     }
     public void CheckHasKillDirectiveUCMutSet(KillDirectiveUCMutSet thing) {
       CheckRootsEqual(this, thing.root);
@@ -7820,6 +8471,16 @@ public class Root {
     public MoveDirectiveUCMutSet GetMoveDirectiveUCMutSet(int id) {
       return new MoveDirectiveUCMutSet(this, id);
     }
+    public List<MoveDirectiveUCMutSet> AllMoveDirectiveUCMutSet() {
+      List<MoveDirectiveUCMutSet> result = new List<MoveDirectiveUCMutSet>(rootIncarnation.incarnationsMoveDirectiveUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsMoveDirectiveUCMutSet.Keys) {
+        result.Add(new MoveDirectiveUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool MoveDirectiveUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsMoveDirectiveUCMutSet.ContainsKey(id);
+    }
     public void CheckHasMoveDirectiveUCMutSet(MoveDirectiveUCMutSet thing) {
       CheckRootsEqual(this, thing.root);
       CheckHasMoveDirectiveUCMutSet(thing.id);
@@ -7957,6 +8618,16 @@ public class Root {
     }
     public WanderAICapabilityUCMutSet GetWanderAICapabilityUCMutSet(int id) {
       return new WanderAICapabilityUCMutSet(this, id);
+    }
+    public List<WanderAICapabilityUCMutSet> AllWanderAICapabilityUCMutSet() {
+      List<WanderAICapabilityUCMutSet> result = new List<WanderAICapabilityUCMutSet>(rootIncarnation.incarnationsWanderAICapabilityUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsWanderAICapabilityUCMutSet.Keys) {
+        result.Add(new WanderAICapabilityUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool WanderAICapabilityUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsWanderAICapabilityUCMutSet.ContainsKey(id);
     }
     public void CheckHasWanderAICapabilityUCMutSet(WanderAICapabilityUCMutSet thing) {
       CheckRootsEqual(this, thing.root);
@@ -8096,6 +8767,16 @@ public class Root {
     public BideAICapabilityUCMutSet GetBideAICapabilityUCMutSet(int id) {
       return new BideAICapabilityUCMutSet(this, id);
     }
+    public List<BideAICapabilityUCMutSet> AllBideAICapabilityUCMutSet() {
+      List<BideAICapabilityUCMutSet> result = new List<BideAICapabilityUCMutSet>(rootIncarnation.incarnationsBideAICapabilityUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsBideAICapabilityUCMutSet.Keys) {
+        result.Add(new BideAICapabilityUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool BideAICapabilityUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(id);
+    }
     public void CheckHasBideAICapabilityUCMutSet(BideAICapabilityUCMutSet thing) {
       CheckRootsEqual(this, thing.root);
       CheckHasBideAICapabilityUCMutSet(thing.id);
@@ -8221,6 +8902,302 @@ public class Root {
       }
     }
 
+    public int GetAttackAICapabilityUCMutSetHash(int id, int version, AttackAICapabilityUCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public AttackAICapabilityUCMutSetIncarnation GetAttackAICapabilityUCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsAttackAICapabilityUCMutSet[id].incarnation;
+    }
+    public AttackAICapabilityUCMutSet GetAttackAICapabilityUCMutSet(int id) {
+      return new AttackAICapabilityUCMutSet(this, id);
+    }
+    public List<AttackAICapabilityUCMutSet> AllAttackAICapabilityUCMutSet() {
+      List<AttackAICapabilityUCMutSet> result = new List<AttackAICapabilityUCMutSet>(rootIncarnation.incarnationsAttackAICapabilityUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsAttackAICapabilityUCMutSet.Keys) {
+        result.Add(new AttackAICapabilityUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool AttackAICapabilityUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsAttackAICapabilityUCMutSet.ContainsKey(id);
+    }
+    public void CheckHasAttackAICapabilityUCMutSet(AttackAICapabilityUCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasAttackAICapabilityUCMutSet(thing.id);
+    }
+    public void CheckHasAttackAICapabilityUCMutSet(int id) {
+      if (!rootIncarnation.incarnationsAttackAICapabilityUCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid AttackAICapabilityUCMutSet}!");
+      }
+    }
+    public AttackAICapabilityUCMutSet EffectAttackAICapabilityUCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new AttackAICapabilityUCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateAttackAICapabilityUCMutSet(id, incarnation);
+      this.rootIncarnation.hash += GetAttackAICapabilityUCMutSetHash(id, rootIncarnation.version, incarnation);
+      return new AttackAICapabilityUCMutSet(this, id);
+    }
+    public void EffectInternalCreateAttackAICapabilityUCMutSet(int id, AttackAICapabilityUCMutSetIncarnation incarnation) {
+      var effect = new AttackAICapabilityUCMutSetCreateEffect(id, incarnation);
+      rootIncarnation.incarnationsAttackAICapabilityUCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>(
+                  rootIncarnation.version,
+                  incarnation));
+      BroadcastAttackAICapabilityUCMutSetEffect(id, effect);
+    }
+    public void EffectAttackAICapabilityUCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new AttackAICapabilityUCMutSetDeleteEffect(id);
+      BroadcastAttackAICapabilityUCMutSetEffect(id, effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsAttackAICapabilityUCMutSet[id];
+      this.rootIncarnation.hash -=
+          GetAttackAICapabilityUCMutSetHash(id, versionAndIncarnation.version, versionAndIncarnation.incarnation);
+      rootIncarnation.incarnationsAttackAICapabilityUCMutSet.Remove(id);
+    }
+
+       
+    public void EffectAttackAICapabilityUCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasAttackAICapabilityUCMutSet(setId);
+      CheckHasAttackAICapabilityUC(elementId);
+
+      var effect = new AttackAICapabilityUCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackAICapabilityUCMutSet[setId];
+      Asserts.Assert(!oldIncarnationAndVersion.incarnation.set.Contains(elementId));
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+        this.rootIncarnation.hash += setId * rootIncarnation.version * elementId.GetDeterministicHashCode();
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new AttackAICapabilityUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsAttackAICapabilityUCMutSet[setId] =
+            new VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+        this.rootIncarnation.hash -= GetAttackAICapabilityUCMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+        this.rootIncarnation.hash += GetAttackAICapabilityUCMutSetHash(setId, rootIncarnation.version, newIncarnation);
+      }
+      BroadcastAttackAICapabilityUCMutSetEffect(setId, effect);
+    }
+    public void EffectAttackAICapabilityUCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasAttackAICapabilityUCMutSet(setId);
+      CheckHasAttackAICapabilityUC(elementId);
+
+      var effect = new AttackAICapabilityUCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackAICapabilityUCMutSet[setId];
+      Asserts.Assert(oldIncarnationAndVersion.incarnation.set.Contains(elementId));
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        this.rootIncarnation.hash -= setId * rootIncarnation.version * elementId.GetDeterministicHashCode();
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new AttackAICapabilityUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsAttackAICapabilityUCMutSet[setId] =
+            new VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+        this.rootIncarnation.hash -= GetAttackAICapabilityUCMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+        this.rootIncarnation.hash += GetAttackAICapabilityUCMutSetHash(setId, rootIncarnation.version, newIncarnation);
+      }
+      BroadcastAttackAICapabilityUCMutSetEffect(setId, effect);
+    }
+
+       
+    public void AddAttackAICapabilityUCMutSetObserver(int id, IAttackAICapabilityUCMutSetEffectObserver observer) {
+      List<IAttackAICapabilityUCMutSetEffectObserver> obsies;
+      if (!observersAttackAICapabilityUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IAttackAICapabilityUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersAttackAICapabilityUCMutSet[id] = obsies;
+    }
+
+    public void RemoveAttackAICapabilityUCMutSetObserver(int id, IAttackAICapabilityUCMutSetEffectObserver observer) {
+      if (observersAttackAICapabilityUCMutSet.ContainsKey(id)) {
+        var list = observersAttackAICapabilityUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersAttackAICapabilityUCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+    public void BroadcastAttackAICapabilityUCMutSetEffect(int id, IAttackAICapabilityUCMutSetEffect effect) {
+      if (observersAttackAICapabilityUCMutSet.ContainsKey(0)) {
+        foreach (var observer in new List<IAttackAICapabilityUCMutSetEffectObserver>(observersAttackAICapabilityUCMutSet[0])) {
+          observer.OnAttackAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observersAttackAICapabilityUCMutSet.ContainsKey(id)) {
+        foreach (var observer in new List<IAttackAICapabilityUCMutSetEffectObserver>(observersAttackAICapabilityUCMutSet[id])) {
+          observer.OnAttackAICapabilityUCMutSetEffect(effect);
+        }
+      }
+    }
+
+    public int GetShieldingUCMutSetHash(int id, int version, ShieldingUCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public ShieldingUCMutSetIncarnation GetShieldingUCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsShieldingUCMutSet[id].incarnation;
+    }
+    public ShieldingUCMutSet GetShieldingUCMutSet(int id) {
+      return new ShieldingUCMutSet(this, id);
+    }
+    public List<ShieldingUCMutSet> AllShieldingUCMutSet() {
+      List<ShieldingUCMutSet> result = new List<ShieldingUCMutSet>(rootIncarnation.incarnationsShieldingUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsShieldingUCMutSet.Keys) {
+        result.Add(new ShieldingUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool ShieldingUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsShieldingUCMutSet.ContainsKey(id);
+    }
+    public void CheckHasShieldingUCMutSet(ShieldingUCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasShieldingUCMutSet(thing.id);
+    }
+    public void CheckHasShieldingUCMutSet(int id) {
+      if (!rootIncarnation.incarnationsShieldingUCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid ShieldingUCMutSet}!");
+      }
+    }
+    public ShieldingUCMutSet EffectShieldingUCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new ShieldingUCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateShieldingUCMutSet(id, incarnation);
+      this.rootIncarnation.hash += GetShieldingUCMutSetHash(id, rootIncarnation.version, incarnation);
+      return new ShieldingUCMutSet(this, id);
+    }
+    public void EffectInternalCreateShieldingUCMutSet(int id, ShieldingUCMutSetIncarnation incarnation) {
+      var effect = new ShieldingUCMutSetCreateEffect(id, incarnation);
+      rootIncarnation.incarnationsShieldingUCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<ShieldingUCMutSetIncarnation>(
+                  rootIncarnation.version,
+                  incarnation));
+      BroadcastShieldingUCMutSetEffect(id, effect);
+    }
+    public void EffectShieldingUCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new ShieldingUCMutSetDeleteEffect(id);
+      BroadcastShieldingUCMutSetEffect(id, effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsShieldingUCMutSet[id];
+      this.rootIncarnation.hash -=
+          GetShieldingUCMutSetHash(id, versionAndIncarnation.version, versionAndIncarnation.incarnation);
+      rootIncarnation.incarnationsShieldingUCMutSet.Remove(id);
+    }
+
+       
+    public void EffectShieldingUCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasShieldingUCMutSet(setId);
+      CheckHasShieldingUC(elementId);
+
+      var effect = new ShieldingUCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsShieldingUCMutSet[setId];
+      Asserts.Assert(!oldIncarnationAndVersion.incarnation.set.Contains(elementId));
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+        this.rootIncarnation.hash += setId * rootIncarnation.version * elementId.GetDeterministicHashCode();
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new ShieldingUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsShieldingUCMutSet[setId] =
+            new VersionAndIncarnation<ShieldingUCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+        this.rootIncarnation.hash -= GetShieldingUCMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+        this.rootIncarnation.hash += GetShieldingUCMutSetHash(setId, rootIncarnation.version, newIncarnation);
+      }
+      BroadcastShieldingUCMutSetEffect(setId, effect);
+    }
+    public void EffectShieldingUCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasShieldingUCMutSet(setId);
+      CheckHasShieldingUC(elementId);
+
+      var effect = new ShieldingUCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsShieldingUCMutSet[setId];
+      Asserts.Assert(oldIncarnationAndVersion.incarnation.set.Contains(elementId));
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        this.rootIncarnation.hash -= setId * rootIncarnation.version * elementId.GetDeterministicHashCode();
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new ShieldingUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsShieldingUCMutSet[setId] =
+            new VersionAndIncarnation<ShieldingUCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+        this.rootIncarnation.hash -= GetShieldingUCMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+        this.rootIncarnation.hash += GetShieldingUCMutSetHash(setId, rootIncarnation.version, newIncarnation);
+      }
+      BroadcastShieldingUCMutSetEffect(setId, effect);
+    }
+
+       
+    public void AddShieldingUCMutSetObserver(int id, IShieldingUCMutSetEffectObserver observer) {
+      List<IShieldingUCMutSetEffectObserver> obsies;
+      if (!observersShieldingUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IShieldingUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersShieldingUCMutSet[id] = obsies;
+    }
+
+    public void RemoveShieldingUCMutSetObserver(int id, IShieldingUCMutSetEffectObserver observer) {
+      if (observersShieldingUCMutSet.ContainsKey(id)) {
+        var list = observersShieldingUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersShieldingUCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+    public void BroadcastShieldingUCMutSetEffect(int id, IShieldingUCMutSetEffect effect) {
+      if (observersShieldingUCMutSet.ContainsKey(0)) {
+        foreach (var observer in new List<IShieldingUCMutSetEffectObserver>(observersShieldingUCMutSet[0])) {
+          observer.OnShieldingUCMutSetEffect(effect);
+        }
+      }
+      if (observersShieldingUCMutSet.ContainsKey(id)) {
+        foreach (var observer in new List<IShieldingUCMutSetEffectObserver>(observersShieldingUCMutSet[id])) {
+          observer.OnShieldingUCMutSetEffect(effect);
+        }
+      }
+    }
+
     public int GetBidingOperationUCMutSetHash(int id, int version, BidingOperationUCMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.set) {
@@ -8233,6 +9210,16 @@ public class Root {
     }
     public BidingOperationUCMutSet GetBidingOperationUCMutSet(int id) {
       return new BidingOperationUCMutSet(this, id);
+    }
+    public List<BidingOperationUCMutSet> AllBidingOperationUCMutSet() {
+      List<BidingOperationUCMutSet> result = new List<BidingOperationUCMutSet>(rootIncarnation.incarnationsBidingOperationUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsBidingOperationUCMutSet.Keys) {
+        result.Add(new BidingOperationUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool BidingOperationUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsBidingOperationUCMutSet.ContainsKey(id);
     }
     public void CheckHasBidingOperationUCMutSet(BidingOperationUCMutSet thing) {
       CheckRootsEqual(this, thing.root);
@@ -8372,6 +9359,16 @@ public class Root {
     public GlaiveMutSet GetGlaiveMutSet(int id) {
       return new GlaiveMutSet(this, id);
     }
+    public List<GlaiveMutSet> AllGlaiveMutSet() {
+      List<GlaiveMutSet> result = new List<GlaiveMutSet>(rootIncarnation.incarnationsGlaiveMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsGlaiveMutSet.Keys) {
+        result.Add(new GlaiveMutSet(this, id));
+      }
+      return result;
+    }
+    public bool GlaiveMutSetExists(int id) {
+      return rootIncarnation.incarnationsGlaiveMutSet.ContainsKey(id);
+    }
     public void CheckHasGlaiveMutSet(GlaiveMutSet thing) {
       CheckRootsEqual(this, thing.root);
       CheckHasGlaiveMutSet(thing.id);
@@ -8509,6 +9506,16 @@ public class Root {
     }
     public ArmorMutSet GetArmorMutSet(int id) {
       return new ArmorMutSet(this, id);
+    }
+    public List<ArmorMutSet> AllArmorMutSet() {
+      List<ArmorMutSet> result = new List<ArmorMutSet>(rootIncarnation.incarnationsArmorMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsArmorMutSet.Keys) {
+        result.Add(new ArmorMutSet(this, id));
+      }
+      return result;
+    }
+    public bool ArmorMutSetExists(int id) {
+      return rootIncarnation.incarnationsArmorMutSet.ContainsKey(id);
     }
     public void CheckHasArmorMutSet(ArmorMutSet thing) {
       CheckRootsEqual(this, thing.root);
@@ -8648,6 +9655,16 @@ public class Root {
     public DecorativeTerrainTileComponentMutSet GetDecorativeTerrainTileComponentMutSet(int id) {
       return new DecorativeTerrainTileComponentMutSet(this, id);
     }
+    public List<DecorativeTerrainTileComponentMutSet> AllDecorativeTerrainTileComponentMutSet() {
+      List<DecorativeTerrainTileComponentMutSet> result = new List<DecorativeTerrainTileComponentMutSet>(rootIncarnation.incarnationsDecorativeTerrainTileComponentMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsDecorativeTerrainTileComponentMutSet.Keys) {
+        result.Add(new DecorativeTerrainTileComponentMutSet(this, id));
+      }
+      return result;
+    }
+    public bool DecorativeTerrainTileComponentMutSetExists(int id) {
+      return rootIncarnation.incarnationsDecorativeTerrainTileComponentMutSet.ContainsKey(id);
+    }
     public void CheckHasDecorativeTerrainTileComponentMutSet(DecorativeTerrainTileComponentMutSet thing) {
       CheckRootsEqual(this, thing.root);
       CheckHasDecorativeTerrainTileComponentMutSet(thing.id);
@@ -8785,6 +9802,16 @@ public class Root {
     }
     public UpStaircaseTerrainTileComponentMutSet GetUpStaircaseTerrainTileComponentMutSet(int id) {
       return new UpStaircaseTerrainTileComponentMutSet(this, id);
+    }
+    public List<UpStaircaseTerrainTileComponentMutSet> AllUpStaircaseTerrainTileComponentMutSet() {
+      List<UpStaircaseTerrainTileComponentMutSet> result = new List<UpStaircaseTerrainTileComponentMutSet>(rootIncarnation.incarnationsUpStaircaseTerrainTileComponentMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsUpStaircaseTerrainTileComponentMutSet.Keys) {
+        result.Add(new UpStaircaseTerrainTileComponentMutSet(this, id));
+      }
+      return result;
+    }
+    public bool UpStaircaseTerrainTileComponentMutSetExists(int id) {
+      return rootIncarnation.incarnationsUpStaircaseTerrainTileComponentMutSet.ContainsKey(id);
     }
     public void CheckHasUpStaircaseTerrainTileComponentMutSet(UpStaircaseTerrainTileComponentMutSet thing) {
       CheckRootsEqual(this, thing.root);
@@ -8924,6 +9951,16 @@ public class Root {
     public DownStaircaseTerrainTileComponentMutSet GetDownStaircaseTerrainTileComponentMutSet(int id) {
       return new DownStaircaseTerrainTileComponentMutSet(this, id);
     }
+    public List<DownStaircaseTerrainTileComponentMutSet> AllDownStaircaseTerrainTileComponentMutSet() {
+      List<DownStaircaseTerrainTileComponentMutSet> result = new List<DownStaircaseTerrainTileComponentMutSet>(rootIncarnation.incarnationsDownStaircaseTerrainTileComponentMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsDownStaircaseTerrainTileComponentMutSet.Keys) {
+        result.Add(new DownStaircaseTerrainTileComponentMutSet(this, id));
+      }
+      return result;
+    }
+    public bool DownStaircaseTerrainTileComponentMutSetExists(int id) {
+      return rootIncarnation.incarnationsDownStaircaseTerrainTileComponentMutSet.ContainsKey(id);
+    }
     public void CheckHasDownStaircaseTerrainTileComponentMutSet(DownStaircaseTerrainTileComponentMutSet thing) {
       CheckRootsEqual(this, thing.root);
       CheckHasDownStaircaseTerrainTileComponentMutSet(thing.id);
@@ -9062,6 +10099,16 @@ public class Root {
     public UnitMutSet GetUnitMutSet(int id) {
       return new UnitMutSet(this, id);
     }
+    public List<UnitMutSet> AllUnitMutSet() {
+      List<UnitMutSet> result = new List<UnitMutSet>(rootIncarnation.incarnationsUnitMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsUnitMutSet.Keys) {
+        result.Add(new UnitMutSet(this, id));
+      }
+      return result;
+    }
+    public bool UnitMutSetExists(int id) {
+      return rootIncarnation.incarnationsUnitMutSet.ContainsKey(id);
+    }
     public void CheckHasUnitMutSet(UnitMutSet thing) {
       CheckRootsEqual(this, thing.root);
       CheckHasUnitMutSet(thing.id);
@@ -9199,6 +10246,16 @@ public class Root {
     }
     public TerrainTileByLocationMutMap GetTerrainTileByLocationMutMap(int id) {
       return new TerrainTileByLocationMutMap(this, id);
+    }
+    public List<TerrainTileByLocationMutMap> AllTerrainTileByLocationMutMap() {
+      List<TerrainTileByLocationMutMap> result = new List<TerrainTileByLocationMutMap>(rootIncarnation.incarnationsTerrainTileByLocationMutMap.Count);
+      foreach (var id in rootIncarnation.incarnationsTerrainTileByLocationMutMap.Keys) {
+        result.Add(new TerrainTileByLocationMutMap(this, id));
+      }
+      return result;
+    }
+    public bool TerrainTileByLocationMutMapExists(int id) {
+      return rootIncarnation.incarnationsTerrainTileByLocationMutMap.ContainsKey(id);
     }
     public void CheckHasTerrainTileByLocationMutMap(TerrainTileByLocationMutMap thing) {
       CheckRootsEqual(this, thing.root);

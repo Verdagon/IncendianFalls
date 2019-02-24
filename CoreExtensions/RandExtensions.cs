@@ -1,7 +1,7 @@
 ﻿using System;
 using Atharia.Model;
 
-namespace IncendianFalls {
+namespace Atharia.Model {
   public static class RandExtensions {
     public static int Next(this Rand rand) {
       rand.root.GetDeterministicHashCode();

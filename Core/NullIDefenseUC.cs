@@ -24,6 +24,15 @@ public class NullIDefenseUC : IDefenseUC {
     return this;
   }
          public int AffectIncomingDamage(int incomingDamage){ throw new Exception("Called method on a null!"); }
+  public bool Is(IDestructible that) {
+    throw new Exception("Called Is on a null!");
+  }
+  public bool NullableIs(IDestructible that) {
+    return !that.Exists();
+  }
+  public IDestructible AsIDestructible() {
+    return NullIDestructible.Null;
+  }
   public bool Is(IUnitComponent that) {
     throw new Exception("Called Is on a null!");
   }
@@ -33,5 +42,9 @@ public class NullIDefenseUC : IDefenseUC {
   public IUnitComponent AsIUnitComponent() {
     return NullIUnitComponent.Null;
   }
-}
+
+  public Void Destruct() {
+    throw new Exception("Called Destruct on a null!");
+  }
+             }
 }

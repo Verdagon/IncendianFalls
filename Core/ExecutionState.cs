@@ -28,10 +28,27 @@ public class ExecutionState {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
+  }
+  public void CheckForNullViolations(List<string> violations) {
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    if (root.UnitExists(actingUnit.id)) {
+      actingUnit.FindReachableObjects(foundIds);
+    }
+    if (root.IPreActingUCWeakMutBunchExists(remainingPreActingUnitComponents.id)) {
+      remainingPreActingUnitComponents.FindReachableObjects(foundIds);
+    }
+    if (root.IPostActingUCWeakMutBunchExists(remainingPostActingUnitComponents.id)) {
+      remainingPostActingUnitComponents.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(ExecutionState that) {
     if (!this.Exists()) {
@@ -56,23 +73,23 @@ public class ExecutionState {
     get { return incarnation.actingUnitDidAction; }
     set { root.EffectExecutionStateSetActingUnitDidAction(id, value); }
   }
-  public IPreActingUCMutBunch remainingPreActingUnitComponents {
+  public IPreActingUCWeakMutBunch remainingPreActingUnitComponents {
 
     get {
       if (root == null) {
         throw new Exception("Tried to get member remainingPreActingUnitComponents of null!");
       }
-      return new IPreActingUCMutBunch(root, incarnation.remainingPreActingUnitComponents);
+      return new IPreActingUCWeakMutBunch(root, incarnation.remainingPreActingUnitComponents);
     }
                          set { root.EffectExecutionStateSetRemainingPreActingUnitComponents(id, value); }
   }
-  public IPostActingUCMutBunch remainingPostActingUnitComponents {
+  public IPostActingUCWeakMutBunch remainingPostActingUnitComponents {
 
     get {
       if (root == null) {
         throw new Exception("Tried to get member remainingPostActingUnitComponents of null!");
       }
-      return new IPostActingUCMutBunch(root, incarnation.remainingPostActingUnitComponents);
+      return new IPostActingUCWeakMutBunch(root, incarnation.remainingPostActingUnitComponents);
     }
                          set { root.EffectExecutionStateSetRemainingPostActingUnitComponents(id, value); }
   }

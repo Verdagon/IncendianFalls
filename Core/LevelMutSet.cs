@@ -32,14 +32,34 @@ public class LevelMutSet {
     }
   }
   public int Count { get { return incarnation.set.Count; } }
-  //public int GetDeterministicHashCode() {
-  //  return incarnation.GetDeterministicHashCode();
-  //}
   public IEnumerator<Level> GetEnumerator() {
     foreach (var element in incarnation.set) {
       yield return root.GetLevel(element);
     }
   }
+  public void Destruct() {
+    foreach (var element in this) {
+      element.Destruct();
+    }
+  }
+  public void CheckForNullViolations(List<string> violations) {
+    foreach (var element in this) {
+      if (!root.LevelExists(element.id)) {
+        violations.Add("Null constraint violated! LevelMutSet#" + id + "." + element.id);
+      }
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    foreach (var element in this) {
+      if (root.LevelExists(element.id)) {
+       element.FindReachableObjects(foundIds);
+      }
+    }
+  }
 }
-         
+       
 }

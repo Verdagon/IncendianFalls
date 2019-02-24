@@ -269,5 +269,9 @@ namespace IncendianFalls {
     public int GetDeterministicHashCode() {
       return root.GetDeterministicHashCode();
     }
+
+    public void SanityCheck() {
+      root.CheckForViolations();
+    }
   }
 }

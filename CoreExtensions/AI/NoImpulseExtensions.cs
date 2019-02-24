@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using Atharia.Model;
 
-namespace IncendianFalls {
+namespace Atharia.Model {
   public static class NoImpulseExtensions {
-    public static int GetWeightImpl(this NoImpulse obj) {
+    public static Atharia.Model.Void Destruct(
+        this NoImpulse obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+
+    public static int GetWeight(this NoImpulse obj) {
       return 0;
     }
 
-    public static Atharia.Model.Void EnactImpl(this NoImpulse obj, Unit unit, Game game) {
+    public static Atharia.Model.Void Enact(this NoImpulse obj, Unit unit, Game game) {
       unit.nextActionTime = unit.nextActionTime + unit.inertia / 2;
       return new Atharia.Model.Void();
     }

@@ -32,14 +32,34 @@ public class BidingOperationUCMutSet {
     }
   }
   public int Count { get { return incarnation.set.Count; } }
-  //public int GetDeterministicHashCode() {
-  //  return incarnation.GetDeterministicHashCode();
-  //}
   public IEnumerator<BidingOperationUC> GetEnumerator() {
     foreach (var element in incarnation.set) {
       yield return root.GetBidingOperationUC(element);
     }
   }
+  public void Destruct() {
+    foreach (var element in this) {
+      element.Destruct();
+    }
+  }
+  public void CheckForNullViolations(List<string> violations) {
+    foreach (var element in this) {
+      if (!root.BidingOperationUCExists(element.id)) {
+        violations.Add("Null constraint violated! BidingOperationUCMutSet#" + id + "." + element.id);
+      }
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    foreach (var element in this) {
+      if (root.BidingOperationUCExists(element.id)) {
+       element.FindReachableObjects(foundIds);
+      }
+    }
+  }
 }
-         
+       
 }

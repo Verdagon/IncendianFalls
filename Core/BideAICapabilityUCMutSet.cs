@@ -32,14 +32,34 @@ public class BideAICapabilityUCMutSet {
     }
   }
   public int Count { get { return incarnation.set.Count; } }
-  //public int GetDeterministicHashCode() {
-  //  return incarnation.GetDeterministicHashCode();
-  //}
   public IEnumerator<BideAICapabilityUC> GetEnumerator() {
     foreach (var element in incarnation.set) {
       yield return root.GetBideAICapabilityUC(element);
     }
   }
+  public void Destruct() {
+    foreach (var element in this) {
+      element.Destruct();
+    }
+  }
+  public void CheckForNullViolations(List<string> violations) {
+    foreach (var element in this) {
+      if (!root.BideAICapabilityUCExists(element.id)) {
+        violations.Add("Null constraint violated! BideAICapabilityUCMutSet#" + id + "." + element.id);
+      }
+    }
+  }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    if (foundIds.Contains(id)) {
+      return;
+    }
+    foundIds.Add(id);
+    foreach (var element in this) {
+      if (root.BideAICapabilityUCExists(element.id)) {
+       element.FindReachableObjects(foundIds);
+      }
+    }
+  }
 }
-         
+       
 }
