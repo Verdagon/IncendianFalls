@@ -5,9 +5,7 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IItem
-
-        {
+public interface IItem {
   IItem AsIItem();
   Root root { get; }
   int id { get; }

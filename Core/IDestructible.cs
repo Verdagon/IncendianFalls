@@ -5,9 +5,7 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IDestructible
-
-        {
+public interface IDestructible {
   IDestructible AsIDestructible();
   Root root { get; }
   int id { get; }

@@ -23,9 +23,7 @@ public class NullIImpulse : IImpulse {
   public IImpulse AsIImpulse() {
     return this;
   }
-         public int GetWeight(){ throw new Exception("Called method on a null!"); }
-  public Void Enact(Unit unit, Game game){ throw new Exception("Called method on a null!"); }
-  public bool Is(IDestructible that) {
+         public bool Is(IDestructible that) {
     throw new Exception("Called Is on a null!");
   }
   public bool NullableIs(IDestructible that) {
@@ -35,6 +33,14 @@ public class NullIImpulse : IImpulse {
     return NullIDestructible.Null;
   }
 
+  public int GetWeight() {
+    throw new Exception("Called GetWeight on a null!");
+  }
+             
+  public Void Enact(Unit unit, Game game) {
+    throw new Exception("Called Enact on a null!");
+  }
+             
   public Void Destruct() {
     throw new Exception("Called Destruct on a null!");
   }

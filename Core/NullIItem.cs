@@ -23,7 +23,13 @@ public class NullIItem : IItem {
   public IItem AsIItem() {
     return this;
   }
-         public int AffectIncomingDamage(int incomingDamage){ throw new Exception("Called method on a null!"); }
-  public int AffectOutgoingDamage(int outgoingDamage){ throw new Exception("Called method on a null!"); }
-}
+       
+  public int AffectIncomingDamage(int incomingDamage) {
+    throw new Exception("Called AffectIncomingDamage on a null!");
+  }
+             
+  public int AffectOutgoingDamage(int outgoingDamage) {
+    throw new Exception("Called AffectOutgoingDamage on a null!");
+  }
+             }
 }

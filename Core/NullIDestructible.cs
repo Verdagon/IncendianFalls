@@ -23,6 +23,9 @@ public class NullIDestructible : IDestructible {
   public IDestructible AsIDestructible() {
     return this;
   }
-         public Void Destruct(){ throw new Exception("Called method on a null!"); }
-}
+       
+  public Void Destruct() {
+    throw new Exception("Called Destruct on a null!");
+  }
+             }
 }

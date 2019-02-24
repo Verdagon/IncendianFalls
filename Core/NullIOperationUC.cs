@@ -23,8 +23,7 @@ public class NullIOperationUC : IOperationUC {
   public IOperationUC AsIOperationUC() {
     return this;
   }
-         public Void OnImpulse(Unit unit, Game game, IImpulse impulse){ throw new Exception("Called method on a null!"); }
-  public bool Is(IDestructible that) {
+         public bool Is(IDestructible that) {
     throw new Exception("Called Is on a null!");
   }
   public bool NullableIs(IDestructible that) {
@@ -43,6 +42,10 @@ public class NullIOperationUC : IOperationUC {
     return NullIUnitComponent.Null;
   }
 
+  public Void OnImpulse(Unit unit, Game game, IImpulse impulse) {
+    throw new Exception("Called OnImpulse on a null!");
+  }
+             
   public Void Destruct() {
     throw new Exception("Called Destruct on a null!");
   }

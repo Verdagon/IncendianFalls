@@ -23,8 +23,7 @@ public class NullIDefenseUC : IDefenseUC {
   public IDefenseUC AsIDefenseUC() {
     return this;
   }
-         public int AffectIncomingDamage(int incomingDamage){ throw new Exception("Called method on a null!"); }
-  public bool Is(IDestructible that) {
+         public bool Is(IDestructible that) {
     throw new Exception("Called Is on a null!");
   }
   public bool NullableIs(IDestructible that) {
@@ -43,6 +42,10 @@ public class NullIDefenseUC : IDefenseUC {
     return NullIUnitComponent.Null;
   }
 
+  public int AffectIncomingDamage(int incomingDamage) {
+    throw new Exception("Called AffectIncomingDamage on a null!");
+  }
+             
   public Void Destruct() {
     throw new Exception("Called Destruct on a null!");
   }

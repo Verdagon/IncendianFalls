@@ -5,9 +5,7 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface ITerrainTileComponent
-
-        {
+public interface ITerrainTileComponent {
   ITerrainTileComponent AsITerrainTileComponent();
   Root root { get; }
   int id { get; }

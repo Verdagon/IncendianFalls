@@ -28,7 +28,7 @@ namespace Atharia.Model {
       var existingDirective = unit.components.GetOnlyIDirectiveUCOrNull();
       if (existingDirective.Exists()) {
         unit.root.logger.Info("Deleting existing directive " + existingDirective.id);
-        unit.components.Remove(existingDirective);
+        unit.components.Remove(existingDirective.AsIUnitComponent());
         existingDirective.Destruct();
       }
     }
@@ -46,7 +46,7 @@ namespace Atharia.Model {
       var existingOperation = unit.components.GetOnlyIOperationUCOrNull();
       if (existingOperation.Exists()) {
         unit.root.logger.Info("Deleting existing operation " + existingOperation.id);
-        unit.components.Remove(existingOperation);
+        unit.components.Remove(existingOperation.AsIUnitComponent());
         existingOperation.Destruct();
       }
     }

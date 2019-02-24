@@ -24,7 +24,7 @@ namespace Atharia.Model {
 
       if (directive.pathToLastSeenLocation.Count == 0) {
         // We made it and we can't find the player.
-        unit.components.Remove(directive.AsIDirectiveUC());
+        unit.components.Remove(directive.AsIUnitComponent());
         directive.Destruct();
       }
 

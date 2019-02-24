@@ -23,8 +23,7 @@ public class NullIAICapabilityUC : IAICapabilityUC {
   public IAICapabilityUC AsIAICapabilityUC() {
     return this;
   }
-         public IImpulse ProduceImpulse(Unit unit, Game game){ throw new Exception("Called method on a null!"); }
-  public bool Is(IDestructible that) {
+         public bool Is(IDestructible that) {
     throw new Exception("Called Is on a null!");
   }
   public bool NullableIs(IDestructible that) {
@@ -43,6 +42,10 @@ public class NullIAICapabilityUC : IAICapabilityUC {
     return NullIUnitComponent.Null;
   }
 
+  public IImpulse ProduceImpulse(Unit unit, Game game) {
+    throw new Exception("Called ProduceImpulse on a null!");
+  }
+             
   public Void Destruct() {
     throw new Exception("Called Destruct on a null!");
   }

@@ -23,8 +23,7 @@ public class NullIPostActingUC : IPostActingUC {
   public IPostActingUC AsIPostActingUC() {
     return this;
   }
-         public Void PostAct(Unit unit){ throw new Exception("Called method on a null!"); }
-  public bool Is(IDestructible that) {
+         public bool Is(IDestructible that) {
     throw new Exception("Called Is on a null!");
   }
   public bool NullableIs(IDestructible that) {
@@ -43,6 +42,10 @@ public class NullIPostActingUC : IPostActingUC {
     return NullIUnitComponent.Null;
   }
 
+  public Void PostAct(Unit unit) {
+    throw new Exception("Called PostAct on a null!");
+  }
+             
   public Void Destruct() {
     throw new Exception("Called Destruct on a null!");
   }

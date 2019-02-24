@@ -5,10 +5,17 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IPreActingUC
-
-        : IUnitComponent {
+public interface IPreActingUC {
   IPreActingUC AsIPreActingUC();
+  Root root { get; }
+  int id { get; }
+  void Delete();
+  bool Exists();
+  bool Is(IPreActingUC that);
+  bool NullableIs(IPreActingUC that);
+  IDestructible AsIDestructible();
+  IUnitComponent AsIUnitComponent();
   Void PreAct(Game game, Unit unit);
+  Void Destruct();
 }
 }

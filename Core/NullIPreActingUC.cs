@@ -23,8 +23,7 @@ public class NullIPreActingUC : IPreActingUC {
   public IPreActingUC AsIPreActingUC() {
     return this;
   }
-         public Void PreAct(Game game, Unit unit){ throw new Exception("Called method on a null!"); }
-  public bool Is(IDestructible that) {
+         public bool Is(IDestructible that) {
     throw new Exception("Called Is on a null!");
   }
   public bool NullableIs(IDestructible that) {
@@ -43,6 +42,10 @@ public class NullIPreActingUC : IPreActingUC {
     return NullIUnitComponent.Null;
   }
 
+  public Void PreAct(Game game, Unit unit) {
+    throw new Exception("Called PreAct on a null!");
+  }
+             
   public Void Destruct() {
     throw new Exception("Called Destruct on a null!");
   }
