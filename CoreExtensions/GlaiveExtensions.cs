@@ -14,7 +14,7 @@ namespace Atharia.Model {
     }
     public static int AffectOutgoingDamage(this Glaive glaive, int damage) {
       int newDamage = damage + 10;
-      glaive.root.logger.Info("Glaive:" + damage + "->" + newDamage);
+      //glaive.root.logger.Info("Glaive:" + damage + "->" + newDamage);
       return newDamage;
     }
   }

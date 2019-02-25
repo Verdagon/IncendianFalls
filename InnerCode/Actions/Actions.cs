@@ -41,7 +41,7 @@ namespace IncendianFalls {
       foreach (var item in victim.items) {
         damage = item.AffectIncomingDamage(damage);
       }
-      game.root.logger.Info((attacker.Is(game.player) ? "Player" : "Enemy") + " does " + damage + " damage to " + (victim.Is(game.player) ? "player" : "enemy") + "!");
+      //game.root.logger.Info((attacker.Is(game.player) ? "Player" : "Enemy") + " does " + damage + " damage to " + (victim.Is(game.player) ? "player" : "enemy") + "!");
       victim.hp = victim.hp - damage;
 
       if (victim.hp <= 0) {
