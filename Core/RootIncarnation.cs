@@ -9,6 +9,7 @@ public class RootIncarnation {
   public int nextId;
   public int hash;
   public readonly SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>> incarnationsLevel;
+  public readonly SortedDictionary<int, VersionAndIncarnation<ItemTerrainTileComponentIncarnation>> incarnationsItemTerrainTileComponent;
   public readonly SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentIncarnation>> incarnationsDecorativeTerrainTileComponent;
   public readonly SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentIncarnation>> incarnationsUpStaircaseTerrainTileComponent;
   public readonly SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentIncarnation>> incarnationsDownStaircaseTerrainTileComponent;
@@ -52,6 +53,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<BidingOperationUCMutSetIncarnation>> incarnationsBidingOperationUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>> incarnationsGlaiveMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>> incarnationsArmorMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<ItemTerrainTileComponentMutSetIncarnation>> incarnationsItemTerrainTileComponentMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentMutSetIncarnation>> incarnationsDecorativeTerrainTileComponentMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentMutSetIncarnation>> incarnationsUpStaircaseTerrainTileComponentMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentMutSetIncarnation>> incarnationsDownStaircaseTerrainTileComponentMutSet;
@@ -62,6 +64,7 @@ public class RootIncarnation {
     this.nextId = nextId;
     this.hash = hash;
     this.incarnationsLevel = new SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>>();
+    this.incarnationsItemTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<ItemTerrainTileComponentIncarnation>>();
     this.incarnationsDecorativeTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentIncarnation>>();
     this.incarnationsUpStaircaseTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentIncarnation>>();
     this.incarnationsDownStaircaseTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentIncarnation>>();
@@ -105,6 +108,7 @@ public class RootIncarnation {
     this.incarnationsBidingOperationUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BidingOperationUCMutSetIncarnation>>();
     this.incarnationsGlaiveMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>>();
     this.incarnationsArmorMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>>();
+    this.incarnationsItemTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<ItemTerrainTileComponentMutSetIncarnation>>();
     this.incarnationsDecorativeTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentMutSetIncarnation>>();
     this.incarnationsUpStaircaseTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentMutSetIncarnation>>();
     this.incarnationsDownStaircaseTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentMutSetIncarnation>>();
@@ -120,6 +124,7 @@ public class RootIncarnation {
     this.nextId = newNextId;
     this.hash = newHash;
     this.incarnationsLevel = new SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>>(that.incarnationsLevel);
+    this.incarnationsItemTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<ItemTerrainTileComponentIncarnation>>(that.incarnationsItemTerrainTileComponent);
     this.incarnationsDecorativeTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentIncarnation>>(that.incarnationsDecorativeTerrainTileComponent);
     this.incarnationsUpStaircaseTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentIncarnation>>(that.incarnationsUpStaircaseTerrainTileComponent);
     this.incarnationsDownStaircaseTerrainTileComponent = new SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentIncarnation>>(that.incarnationsDownStaircaseTerrainTileComponent);
@@ -163,6 +168,7 @@ public class RootIncarnation {
     this.incarnationsBidingOperationUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BidingOperationUCMutSetIncarnation>>(that.incarnationsBidingOperationUCMutSet);
     this.incarnationsGlaiveMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>>(that.incarnationsGlaiveMutSet);
     this.incarnationsArmorMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>>(that.incarnationsArmorMutSet);
+    this.incarnationsItemTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<ItemTerrainTileComponentMutSetIncarnation>>(that.incarnationsItemTerrainTileComponentMutSet);
     this.incarnationsDecorativeTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentMutSetIncarnation>>(that.incarnationsDecorativeTerrainTileComponentMutSet);
     this.incarnationsUpStaircaseTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<UpStaircaseTerrainTileComponentMutSetIncarnation>>(that.incarnationsUpStaircaseTerrainTileComponentMutSet);
     this.incarnationsDownStaircaseTerrainTileComponentMutSet = new SortedDictionary<int, VersionAndIncarnation<DownStaircaseTerrainTileComponentMutSetIncarnation>>(that.incarnationsDownStaircaseTerrainTileComponentMutSet);

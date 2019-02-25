@@ -4,19 +4,21 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class ITerrainTileComponentMutBunchBroadcaster:IDecorativeTerrainTileComponentMutSetEffectObserver, IDecorativeTerrainTileComponentMutSetEffectVisitor, IUpStaircaseTerrainTileComponentMutSetEffectObserver, IUpStaircaseTerrainTileComponentMutSetEffectVisitor, IDownStaircaseTerrainTileComponentMutSetEffectObserver, IDownStaircaseTerrainTileComponentMutSetEffectVisitor {
+public class ITerrainTileComponentMutBunchBroadcaster:IItemTerrainTileComponentMutSetEffectObserver, IItemTerrainTileComponentMutSetEffectVisitor, IDecorativeTerrainTileComponentMutSetEffectObserver, IDecorativeTerrainTileComponentMutSetEffectVisitor, IUpStaircaseTerrainTileComponentMutSetEffectObserver, IUpStaircaseTerrainTileComponentMutSetEffectVisitor, IDownStaircaseTerrainTileComponentMutSetEffectObserver, IDownStaircaseTerrainTileComponentMutSetEffectVisitor {
   ITerrainTileComponentMutBunch bunch;
   private List<IITerrainTileComponentMutBunchObserver> observers;
 
   public ITerrainTileComponentMutBunchBroadcaster(ITerrainTileComponentMutBunch bunch) {
     this.bunch = bunch;
     this.observers = new List<IITerrainTileComponentMutBunchObserver>();
+    bunch.membersItemTerrainTileComponentMutSet.AddObserver(this);
     bunch.membersDecorativeTerrainTileComponentMutSet.AddObserver(this);
     bunch.membersUpStaircaseTerrainTileComponentMutSet.AddObserver(this);
     bunch.membersDownStaircaseTerrainTileComponentMutSet.AddObserver(this);
 
   }
   public void Stop() {
+    bunch.membersItemTerrainTileComponentMutSet.RemoveObserver(this);
     bunch.membersDecorativeTerrainTileComponentMutSet.RemoveObserver(this);
     bunch.membersUpStaircaseTerrainTileComponentMutSet.RemoveObserver(this);
     bunch.membersDownStaircaseTerrainTileComponentMutSet.RemoveObserver(this);
@@ -38,6 +40,17 @@ public class ITerrainTileComponentMutBunchBroadcaster:IDecorativeTerrainTileComp
       observer.OnITerrainTileComponentMutBunchRemove(id);
     }
   }
+  public void OnItemTerrainTileComponentMutSetEffect(IItemTerrainTileComponentMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitItemTerrainTileComponentMutSetAddEffect(ItemTerrainTileComponentMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitItemTerrainTileComponentMutSetRemoveEffect(ItemTerrainTileComponentMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitItemTerrainTileComponentMutSetCreateEffect(ItemTerrainTileComponentMutSetCreateEffect effect) { }
+  public void visitItemTerrainTileComponentMutSetDeleteEffect(ItemTerrainTileComponentMutSetDeleteEffect effect) { }
   public void OnDecorativeTerrainTileComponentMutSetEffect(IDecorativeTerrainTileComponentMutSetEffect effect) {
     effect.visit(this);
   }

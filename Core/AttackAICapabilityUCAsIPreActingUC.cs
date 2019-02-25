@@ -14,6 +14,9 @@ public class AttackAICapabilityUCAsIPreActingUC : IPreActingUC {
   public AttackAICapabilityUCAsIPreActingUC(AttackAICapabilityUC obj) {
     this.obj = obj;
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    obj.FindReachableObjects(foundIds);
+  }
   public bool Is(IAICapabilityUC that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");

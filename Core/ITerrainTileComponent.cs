@@ -11,7 +11,10 @@ public interface ITerrainTileComponent {
   int id { get; }
   void Delete();
   bool Exists();
+  void FindReachableObjects(SortedSet<int> foundIds);
   bool Is(ITerrainTileComponent that);
   bool NullableIs(ITerrainTileComponent that);
+  IDestructible AsIDestructible();
+  Void Destruct();
 }
 }

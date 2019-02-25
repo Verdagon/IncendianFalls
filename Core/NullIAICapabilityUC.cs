@@ -17,6 +17,7 @@ public class NullIAICapabilityUC : IAICapabilityUC {
   public bool Is(IAICapabilityUC that) {
     throw new Exception("Called Is on a null!");
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) { }
   public bool NullableIs(IAICapabilityUC that) {
     return !that.Exists();
   }

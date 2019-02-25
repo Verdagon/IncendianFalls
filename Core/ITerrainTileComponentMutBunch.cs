@@ -35,6 +35,10 @@ public class ITerrainTileComponentMutBunch {
   }
   public void CheckForNullViolations(List<string> violations) {
 
+    if (!root.ItemTerrainTileComponentMutSetExists(membersItemTerrainTileComponentMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersItemTerrainTileComponentMutSet");
+    }
+
     if (!root.DecorativeTerrainTileComponentMutSetExists(membersDecorativeTerrainTileComponentMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersDecorativeTerrainTileComponentMutSet");
     }
@@ -52,6 +56,9 @@ public class ITerrainTileComponentMutBunch {
       return;
     }
     foundIds.Add(id);
+    if (root.ItemTerrainTileComponentMutSetExists(membersItemTerrainTileComponentMutSet.id)) {
+      membersItemTerrainTileComponentMutSet.FindReachableObjects(foundIds);
+    }
     if (root.DecorativeTerrainTileComponentMutSetExists(membersDecorativeTerrainTileComponentMutSet.id)) {
       membersDecorativeTerrainTileComponentMutSet.FindReachableObjects(foundIds);
     }
@@ -71,7 +78,16 @@ public class ITerrainTileComponentMutBunch {
     }
     return this.root == that.root && id == that.id;
   }
-         public DecorativeTerrainTileComponentMutSet membersDecorativeTerrainTileComponentMutSet {
+         public ItemTerrainTileComponentMutSet membersItemTerrainTileComponentMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersItemTerrainTileComponentMutSet of null!");
+      }
+      return new ItemTerrainTileComponentMutSet(root, incarnation.membersItemTerrainTileComponentMutSet);
+    }
+                       }
+  public DecorativeTerrainTileComponentMutSet membersDecorativeTerrainTileComponentMutSet {
 
     get {
       if (root == null) {
@@ -101,6 +117,8 @@ public class ITerrainTileComponentMutBunch {
 
   public static ITerrainTileComponentMutBunch New(Root root) {
     return root.EffectITerrainTileComponentMutBunchCreate(
+      root.EffectItemTerrainTileComponentMutSetCreate()
+,
       root.EffectDecorativeTerrainTileComponentMutSetCreate()
 ,
       root.EffectUpStaircaseTerrainTileComponentMutSetCreate()
@@ -109,6 +127,12 @@ public class ITerrainTileComponentMutBunch {
         );
   }
   public void Add(ITerrainTileComponent elementI) {
+
+    // Can optimize, check the type of element directly somehow
+    if (root.ItemTerrainTileComponentExists(elementI.id)) {
+      this.membersItemTerrainTileComponentMutSet.Add(root.GetItemTerrainTileComponent(elementI.id));
+      return;
+    }
 
     // Can optimize, check the type of element directly somehow
     if (root.DecorativeTerrainTileComponentExists(elementI.id)) {
@@ -132,6 +156,12 @@ public class ITerrainTileComponentMutBunch {
   public void Remove(ITerrainTileComponent elementI) {
 
     // Can optimize, check the type of element directly somehow
+    if (root.ItemTerrainTileComponentExists(elementI.id)) {
+      this.membersItemTerrainTileComponentMutSet.Remove(root.GetItemTerrainTileComponent(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.DecorativeTerrainTileComponentExists(elementI.id)) {
       this.membersDecorativeTerrainTileComponentMutSet.Remove(root.GetDecorativeTerrainTileComponent(elementI.id));
       return;
@@ -151,6 +181,7 @@ public class ITerrainTileComponentMutBunch {
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
+    this.membersItemTerrainTileComponentMutSet.Clear();
     this.membersDecorativeTerrainTileComponentMutSet.Clear();
     this.membersUpStaircaseTerrainTileComponentMutSet.Clear();
     this.membersDownStaircaseTerrainTileComponentMutSet.Clear();
@@ -158,6 +189,7 @@ public class ITerrainTileComponentMutBunch {
   public int Count {
     get {
       return
+        this.membersItemTerrainTileComponentMutSet.Count +
         this.membersDecorativeTerrainTileComponentMutSet.Count +
         this.membersUpStaircaseTerrainTileComponentMutSet.Count +
         this.membersDownStaircaseTerrainTileComponentMutSet.Count
@@ -172,16 +204,21 @@ public class ITerrainTileComponentMutBunch {
   }
 
   public void Destruct() {
+    var tempMembersItemTerrainTileComponentMutSet = this.membersItemTerrainTileComponentMutSet;
     var tempMembersDecorativeTerrainTileComponentMutSet = this.membersDecorativeTerrainTileComponentMutSet;
     var tempMembersUpStaircaseTerrainTileComponentMutSet = this.membersUpStaircaseTerrainTileComponentMutSet;
     var tempMembersDownStaircaseTerrainTileComponentMutSet = this.membersDownStaircaseTerrainTileComponentMutSet;
 
     this.Delete();
+    tempMembersItemTerrainTileComponentMutSet.Destruct();
     tempMembersDecorativeTerrainTileComponentMutSet.Destruct();
     tempMembersUpStaircaseTerrainTileComponentMutSet.Destruct();
     tempMembersDownStaircaseTerrainTileComponentMutSet.Destruct();
   }
   public IEnumerator<ITerrainTileComponent> GetEnumerator() {
+    foreach (var element in this.membersItemTerrainTileComponentMutSet) {
+      yield return new ItemTerrainTileComponentAsITerrainTileComponent(element);
+    }
     foreach (var element in this.membersDecorativeTerrainTileComponentMutSet) {
       yield return new DecorativeTerrainTileComponentAsITerrainTileComponent(element);
     }
@@ -192,6 +229,26 @@ public class ITerrainTileComponentMutBunch {
       yield return new DownStaircaseTerrainTileComponentAsITerrainTileComponent(element);
     }
   }
+    public List<ItemTerrainTileComponent> GetAllItemTerrainTileComponent() {
+      var result = new List<ItemTerrainTileComponent>();
+      foreach (var thing in this.membersItemTerrainTileComponentMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<ItemTerrainTileComponent> ClearAllItemTerrainTileComponent() {
+      var result = new List<ItemTerrainTileComponent>();
+      this.membersItemTerrainTileComponentMutSet.Clear();
+      return result;
+    }
+    public ItemTerrainTileComponent GetOnlyItemTerrainTileComponentOrNull() {
+      var result = GetAllItemTerrainTileComponent();
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return ItemTerrainTileComponent.Null;
+      }
+    }
     public List<DecorativeTerrainTileComponent> GetAllDecorativeTerrainTileComponent() {
       var result = new List<DecorativeTerrainTileComponent>();
       foreach (var thing in this.membersDecorativeTerrainTileComponentMutSet) {

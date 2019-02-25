@@ -17,6 +17,7 @@ public class NullIItem : IItem {
   public bool Is(IItem that) {
     throw new Exception("Called Is on a null!");
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) { }
   public bool NullableIs(IItem that) {
     return !that.Exists();
   }

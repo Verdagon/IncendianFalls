@@ -17,6 +17,7 @@ public class NullIDefenseUC : IDefenseUC {
   public bool Is(IDefenseUC that) {
     throw new Exception("Called Is on a null!");
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) { }
   public bool NullableIs(IDefenseUC that) {
     return !that.Exists();
   }

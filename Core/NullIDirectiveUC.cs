@@ -17,6 +17,7 @@ public class NullIDirectiveUC : IDirectiveUC {
   public bool Is(IDirectiveUC that) {
     throw new Exception("Called Is on a null!");
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) { }
   public bool NullableIs(IDirectiveUC that) {
     return !that.Exists();
   }

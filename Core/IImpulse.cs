@@ -11,6 +11,7 @@ public interface IImpulse {
   int id { get; }
   void Delete();
   bool Exists();
+  void FindReachableObjects(SortedSet<int> foundIds);
   bool Is(IImpulse that);
   bool NullableIs(IImpulse that);
   IDestructible AsIDestructible();

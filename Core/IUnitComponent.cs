@@ -11,6 +11,7 @@ public interface IUnitComponent {
   int id { get; }
   void Delete();
   bool Exists();
+  void FindReachableObjects(SortedSet<int> foundIds);
   bool Is(IUnitComponent that);
   bool NullableIs(IUnitComponent that);
   IDestructible AsIDestructible();

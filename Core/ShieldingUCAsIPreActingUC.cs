@@ -14,6 +14,9 @@ public class ShieldingUCAsIPreActingUC : IPreActingUC {
   public ShieldingUCAsIPreActingUC(ShieldingUC obj) {
     this.obj = obj;
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    obj.FindReachableObjects(foundIds);
+  }
   public bool Is(IPostActingUC that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");

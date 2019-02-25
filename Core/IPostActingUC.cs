@@ -11,6 +11,7 @@ public interface IPostActingUC {
   int id { get; }
   void Delete();
   bool Exists();
+  void FindReachableObjects(SortedSet<int> foundIds);
   bool Is(IPostActingUC that);
   bool NullableIs(IPostActingUC that);
   IDestructible AsIDestructible();

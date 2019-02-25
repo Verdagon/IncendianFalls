@@ -14,6 +14,9 @@ public class MoveDirectiveUCAsIUnitComponent : IUnitComponent {
   public MoveDirectiveUCAsIUnitComponent(MoveDirectiveUC obj) {
     this.obj = obj;
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    obj.FindReachableObjects(foundIds);
+  }
   public bool Is(IDestructible that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");

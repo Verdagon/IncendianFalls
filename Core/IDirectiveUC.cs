@@ -11,6 +11,7 @@ public interface IDirectiveUC {
   int id { get; }
   void Delete();
   bool Exists();
+  void FindReachableObjects(SortedSet<int> foundIds);
   bool Is(IDirectiveUC that);
   bool NullableIs(IDirectiveUC that);
   IDestructible AsIDestructible();

@@ -17,6 +17,7 @@ public class NullIPostActingUC : IPostActingUC {
   public bool Is(IPostActingUC that) {
     throw new Exception("Called Is on a null!");
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) { }
   public bool NullableIs(IPostActingUC that) {
     return !that.Exists();
   }

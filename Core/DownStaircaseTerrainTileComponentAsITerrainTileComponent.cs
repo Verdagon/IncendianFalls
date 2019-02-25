@@ -14,6 +14,30 @@ public class DownStaircaseTerrainTileComponentAsITerrainTileComponent : ITerrain
   public DownStaircaseTerrainTileComponentAsITerrainTileComponent(DownStaircaseTerrainTileComponent obj) {
     this.obj = obj;
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) {
+    obj.FindReachableObjects(foundIds);
+  }
+  public bool Is(IDestructible that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IDestructible that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IDestructible AsIDestructible() {
+    return new DownStaircaseTerrainTileComponentAsIDestructible(obj);
+  }
   public bool Is(ITerrainTileComponent that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -36,7 +60,10 @@ public class DownStaircaseTerrainTileComponentAsITerrainTileComponent : ITerrain
     return new DownStaircaseTerrainTileComponentAsITerrainTileComponent(obj);
   }
 
-       
+         public Void Destruct() {
+    return DownStaircaseTerrainTileComponentExtensions.Destruct(obj);
+  }
+
 }
 public static class DownStaircaseTerrainTileComponentAsITerrainTileComponentCaster {
   public static DownStaircaseTerrainTileComponentAsITerrainTileComponent AsITerrainTileComponent(this DownStaircaseTerrainTileComponent obj) {

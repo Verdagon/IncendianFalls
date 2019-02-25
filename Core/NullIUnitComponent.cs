@@ -17,6 +17,7 @@ public class NullIUnitComponent : IUnitComponent {
   public bool Is(IUnitComponent that) {
     throw new Exception("Called Is on a null!");
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) { }
   public bool NullableIs(IUnitComponent that) {
     return !that.Exists();
   }

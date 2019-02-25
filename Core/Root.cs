@@ -34,6 +34,7 @@ public class Root {
 
   // 0 means everything
   readonly SortedDictionary<int, List<ILevelEffectObserver>> observersLevel;
+  readonly SortedDictionary<int, List<IItemTerrainTileComponentEffectObserver>> observersItemTerrainTileComponent;
   readonly SortedDictionary<int, List<IDecorativeTerrainTileComponentEffectObserver>> observersDecorativeTerrainTileComponent;
   readonly SortedDictionary<int, List<IUpStaircaseTerrainTileComponentEffectObserver>> observersUpStaircaseTerrainTileComponent;
   readonly SortedDictionary<int, List<IDownStaircaseTerrainTileComponentEffectObserver>> observersDownStaircaseTerrainTileComponent;
@@ -77,6 +78,7 @@ public class Root {
   readonly SortedDictionary<int, List<IBidingOperationUCMutSetEffectObserver>> observersBidingOperationUCMutSet;
   readonly SortedDictionary<int, List<IGlaiveMutSetEffectObserver>> observersGlaiveMutSet;
   readonly SortedDictionary<int, List<IArmorMutSetEffectObserver>> observersArmorMutSet;
+  readonly SortedDictionary<int, List<IItemTerrainTileComponentMutSetEffectObserver>> observersItemTerrainTileComponentMutSet;
   readonly SortedDictionary<int, List<IDecorativeTerrainTileComponentMutSetEffectObserver>> observersDecorativeTerrainTileComponentMutSet;
   readonly SortedDictionary<int, List<IUpStaircaseTerrainTileComponentMutSetEffectObserver>> observersUpStaircaseTerrainTileComponentMutSet;
   readonly SortedDictionary<int, List<IDownStaircaseTerrainTileComponentMutSetEffectObserver>> observersDownStaircaseTerrainTileComponentMutSet;
@@ -86,6 +88,7 @@ public class Root {
   public Root(ILogger logger) {
     this.logger = logger;
     this.observersLevel = new SortedDictionary<int, List<ILevelEffectObserver>>();
+    this.observersItemTerrainTileComponent = new SortedDictionary<int, List<IItemTerrainTileComponentEffectObserver>>();
     this.observersDecorativeTerrainTileComponent = new SortedDictionary<int, List<IDecorativeTerrainTileComponentEffectObserver>>();
     this.observersUpStaircaseTerrainTileComponent = new SortedDictionary<int, List<IUpStaircaseTerrainTileComponentEffectObserver>>();
     this.observersDownStaircaseTerrainTileComponent = new SortedDictionary<int, List<IDownStaircaseTerrainTileComponentEffectObserver>>();
@@ -129,6 +132,7 @@ public class Root {
     this.observersBidingOperationUCMutSet = new SortedDictionary<int, List<IBidingOperationUCMutSetEffectObserver>>();
     this.observersGlaiveMutSet = new SortedDictionary<int, List<IGlaiveMutSetEffectObserver>>();
     this.observersArmorMutSet = new SortedDictionary<int, List<IArmorMutSetEffectObserver>>();
+    this.observersItemTerrainTileComponentMutSet = new SortedDictionary<int, List<IItemTerrainTileComponentMutSetEffectObserver>>();
     this.observersDecorativeTerrainTileComponentMutSet = new SortedDictionary<int, List<IDecorativeTerrainTileComponentMutSetEffectObserver>>();
     this.observersUpStaircaseTerrainTileComponentMutSet = new SortedDictionary<int, List<IUpStaircaseTerrainTileComponentMutSetEffectObserver>>();
     this.observersDownStaircaseTerrainTileComponentMutSet = new SortedDictionary<int, List<IDownStaircaseTerrainTileComponentMutSetEffectObserver>>();
@@ -198,6 +202,9 @@ public class Root {
 
     foreach (var entry in this.rootIncarnation.incarnationsLevel) {
       result += GetLevelHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsItemTerrainTileComponent) {
+      result += GetItemTerrainTileComponentHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsDecorativeTerrainTileComponent) {
       result += GetDecorativeTerrainTileComponentHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -328,6 +335,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsArmorMutSet) {
       result += GetArmorMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsItemTerrainTileComponentMutSet) {
+      result += GetItemTerrainTileComponentMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsDecorativeTerrainTileComponentMutSet) {
       result += GetDecorativeTerrainTileComponentMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -350,6 +360,9 @@ public class Root {
     List<string> violations = new List<string>();
 
     foreach (var obj in this.AllLevel()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllItemTerrainTileComponent()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllDecorativeTerrainTileComponent()) {
@@ -479,6 +492,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllArmorMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllItemTerrainTileComponentMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllDecorativeTerrainTileComponentMutSet()) {
@@ -506,6 +522,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllItemTerrainTileComponent()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllDecorativeTerrainTileComponent()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -717,6 +738,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllArmorMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllItemTerrainTileComponentMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -779,6 +805,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsLevel.ContainsKey(sourceObjId)) {
         EffectInternalCreateLevel(sourceObjId, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsItemTerrainTileComponent) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsItemTerrainTileComponent.ContainsKey(sourceObjId)) {
+        EffectInternalCreateItemTerrainTileComponent(sourceObjId, sourceObjIncarnation);
       }
     }
          
@@ -1209,6 +1245,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsArmorMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateArmorMutSet(sourceObjId, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsItemTerrainTileComponentMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsItemTerrainTileComponentMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateItemTerrainTileComponentMutSet(sourceObjId, sourceObjIncarnation);
       }
     }
          
@@ -1786,6 +1832,44 @@ public class Root {
         }
       }
              
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsItemTerrainTileComponentMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsItemTerrainTileComponentMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsItemTerrainTileComponentMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in currentObjIncarnation.set) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectItemTerrainTileComponentMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectItemTerrainTileComponentMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.hash -=
+                GetItemTerrainTileComponentMutSetHash(
+                    objId,
+                    rootIncarnation.incarnationsItemTerrainTileComponentMutSet[objId].version,
+                    rootIncarnation.incarnationsItemTerrainTileComponentMutSet[objId].incarnation);
+            rootIncarnation.incarnationsItemTerrainTileComponentMutSet[objId] = sourceVersionAndObjIncarnation;
+            rootIncarnation.hash +=
+                GetItemTerrainTileComponentMutSetHash(
+                    objId,
+                    rootIncarnation.incarnationsItemTerrainTileComponentMutSet[objId].version,
+                    rootIncarnation.incarnationsItemTerrainTileComponentMutSet[objId].incarnation);
+          }
+        }
+      }
+             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDecorativeTerrainTileComponentMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -1963,6 +2047,35 @@ public class Root {
                     objId,
                     rootIncarnation.incarnationsLevel[objId].version,
                     rootIncarnation.incarnationsLevel[objId].incarnation);
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsItemTerrainTileComponent) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsItemTerrainTileComponent.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsItemTerrainTileComponent[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+            rootIncarnation.hash -=
+                GetItemTerrainTileComponentHash(
+                    objId,
+                    rootIncarnation.incarnationsItemTerrainTileComponent[objId].version,
+                    rootIncarnation.incarnationsItemTerrainTileComponent[objId].incarnation);
+          rootIncarnation.incarnationsItemTerrainTileComponent[objId] = sourceVersionAndObjIncarnation;
+            rootIncarnation.hash +=
+                GetItemTerrainTileComponentHash(
+                    objId,
+                    rootIncarnation.incarnationsItemTerrainTileComponent[objId].version,
+                    rootIncarnation.incarnationsItemTerrainTileComponent[objId].incarnation);
         }
       }
     }
@@ -2879,6 +2992,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ItemTerrainTileComponentIncarnation>>(rootIncarnation.incarnationsItemTerrainTileComponent)) {
+      if (!sourceIncarnation.incarnationsItemTerrainTileComponent.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectItemTerrainTileComponentDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentIncarnation>>(rootIncarnation.incarnationsDecorativeTerrainTileComponent)) {
       if (!sourceIncarnation.incarnationsDecorativeTerrainTileComponent.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -3180,6 +3300,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ItemTerrainTileComponentMutSetIncarnation>>(rootIncarnation.incarnationsItemTerrainTileComponentMutSet)) {
+      if (!sourceIncarnation.incarnationsItemTerrainTileComponentMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectItemTerrainTileComponentMutSetDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DecorativeTerrainTileComponentMutSetIncarnation>>(rootIncarnation.incarnationsDecorativeTerrainTileComponentMutSet)) {
       if (!sourceIncarnation.incarnationsDecorativeTerrainTileComponentMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -3339,6 +3466,120 @@ public class Root {
     result += id * version * 2 * incarnation.considerCornersAdjacent.GetDeterministicHashCode();
     result += id * version * 3 * incarnation.terrain.GetDeterministicHashCode();
     result += id * version * 4 * incarnation.units.GetDeterministicHashCode();
+    return result;
+  }
+       public ItemTerrainTileComponentIncarnation GetItemTerrainTileComponentIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsItemTerrainTileComponent[id].incarnation;
+  }
+  public bool ItemTerrainTileComponentExists(int id) {
+    return rootIncarnation.incarnationsItemTerrainTileComponent.ContainsKey(id);
+  }
+  public ItemTerrainTileComponent GetItemTerrainTileComponent(int id) {
+    return new ItemTerrainTileComponent(this, id);
+  }
+  public List<ItemTerrainTileComponent> AllItemTerrainTileComponent() {
+    List<ItemTerrainTileComponent> result = new List<ItemTerrainTileComponent>(rootIncarnation.incarnationsItemTerrainTileComponent.Count);
+    foreach (var id in rootIncarnation.incarnationsItemTerrainTileComponent.Keys) {
+      result.Add(new ItemTerrainTileComponent(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<ItemTerrainTileComponent> EnumAllItemTerrainTileComponent() {
+    foreach (var id in rootIncarnation.incarnationsItemTerrainTileComponent.Keys) {
+      yield return GetItemTerrainTileComponent(id);
+    }
+  }
+  public void CheckHasItemTerrainTileComponent(ItemTerrainTileComponent thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasItemTerrainTileComponent(thing.id);
+  }
+  public void CheckHasItemTerrainTileComponent(int id) {
+    if (!rootIncarnation.incarnationsItemTerrainTileComponent.ContainsKey(id)) {
+      throw new System.Exception("Invalid ItemTerrainTileComponent!");
+    }
+  }
+  public void AddItemTerrainTileComponentObserver(int id, IItemTerrainTileComponentEffectObserver observer) {
+    List<IItemTerrainTileComponentEffectObserver> obsies;
+    if (!observersItemTerrainTileComponent.TryGetValue(id, out obsies)) {
+      obsies = new List<IItemTerrainTileComponentEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersItemTerrainTileComponent[id] = obsies;
+  }
+
+  public void RemoveItemTerrainTileComponentObserver(int id, IItemTerrainTileComponentEffectObserver observer) {
+    if (observersItemTerrainTileComponent.ContainsKey(id)) {
+      var list = observersItemTerrainTileComponent[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersItemTerrainTileComponent.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void BroadcastItemTerrainTileComponentEffect(int id, IItemTerrainTileComponentEffect effect) {
+    if (observersItemTerrainTileComponent.ContainsKey(0)) {
+      foreach (var observer in new List<IItemTerrainTileComponentEffectObserver>(observersItemTerrainTileComponent[0])) {
+        observer.OnItemTerrainTileComponentEffect(effect);
+      }
+    }
+    if (observersItemTerrainTileComponent.ContainsKey(id)) {
+      foreach (var observer in new List<IItemTerrainTileComponentEffectObserver>(observersItemTerrainTileComponent[id])) {
+        observer.OnItemTerrainTileComponentEffect(effect);
+      }
+    }
+  }
+
+  public ItemTerrainTileComponent EffectItemTerrainTileComponentCreate(
+      IItem item) {
+    CheckUnlocked();
+    CheckHasIItem(item);
+
+    var id = NewId();
+    var incarnation =
+        new ItemTerrainTileComponentIncarnation(
+            item.id
+            );
+    EffectInternalCreateItemTerrainTileComponent(id, incarnation);
+    return new ItemTerrainTileComponent(this, id);
+  }
+  public void EffectInternalCreateItemTerrainTileComponent(
+      int id,
+      ItemTerrainTileComponentIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new ItemTerrainTileComponentCreateEffect(id, incarnation);
+    rootIncarnation.incarnationsItemTerrainTileComponent.Add(
+        id,
+        new VersionAndIncarnation<ItemTerrainTileComponentIncarnation>(
+            rootIncarnation.version,
+            incarnation));
+    this.rootIncarnation.hash += GetItemTerrainTileComponentHash(id, rootIncarnation.version, incarnation);
+    BroadcastItemTerrainTileComponentEffect(id, effect);
+  }
+
+  public void EffectItemTerrainTileComponentDelete(int id) {
+    CheckUnlocked();
+    var effect = new ItemTerrainTileComponentDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsItemTerrainTileComponent[id];
+    this.rootIncarnation.hash -=
+        GetItemTerrainTileComponentHash(
+            id, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+
+    BroadcastItemTerrainTileComponentEffect(id, effect);
+    rootIncarnation.incarnationsItemTerrainTileComponent.Remove(id);
+  }
+
+     
+  public int GetItemTerrainTileComponentHash(int id, int version, ItemTerrainTileComponentIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.item.GetDeterministicHashCode();
     return result;
   }
        public DecorativeTerrainTileComponentIncarnation GetDecorativeTerrainTileComponentIncarnation(int id) {
@@ -3898,10 +4139,12 @@ public class Root {
   }
 
   public ITerrainTileComponentMutBunch EffectITerrainTileComponentMutBunchCreate(
+      ItemTerrainTileComponentMutSet membersItemTerrainTileComponentMutSet,
       DecorativeTerrainTileComponentMutSet membersDecorativeTerrainTileComponentMutSet,
       UpStaircaseTerrainTileComponentMutSet membersUpStaircaseTerrainTileComponentMutSet,
       DownStaircaseTerrainTileComponentMutSet membersDownStaircaseTerrainTileComponentMutSet) {
     CheckUnlocked();
+    CheckHasItemTerrainTileComponentMutSet(membersItemTerrainTileComponentMutSet);
     CheckHasDecorativeTerrainTileComponentMutSet(membersDecorativeTerrainTileComponentMutSet);
     CheckHasUpStaircaseTerrainTileComponentMutSet(membersUpStaircaseTerrainTileComponentMutSet);
     CheckHasDownStaircaseTerrainTileComponentMutSet(membersDownStaircaseTerrainTileComponentMutSet);
@@ -3909,6 +4152,7 @@ public class Root {
     var id = NewId();
     var incarnation =
         new ITerrainTileComponentMutBunchIncarnation(
+            membersItemTerrainTileComponentMutSet.id,
             membersDecorativeTerrainTileComponentMutSet.id,
             membersUpStaircaseTerrainTileComponentMutSet.id,
             membersDownStaircaseTerrainTileComponentMutSet.id
@@ -3947,9 +4191,10 @@ public class Root {
      
   public int GetITerrainTileComponentMutBunchHash(int id, int version, ITerrainTileComponentMutBunchIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.membersDecorativeTerrainTileComponentMutSet.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.membersUpStaircaseTerrainTileComponentMutSet.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.membersDownStaircaseTerrainTileComponentMutSet.GetDeterministicHashCode();
+    result += id * version * 1 * incarnation.membersItemTerrainTileComponentMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersDecorativeTerrainTileComponentMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersUpStaircaseTerrainTileComponentMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersDownStaircaseTerrainTileComponentMutSet.GetDeterministicHashCode();
     return result;
   }
        public TerrainIncarnation GetTerrainIncarnation(int id) {
@@ -7278,6 +7523,9 @@ public class Root {
   }
 
   public ITerrainTileComponent GetITerrainTileComponent(int id) {
+    if (rootIncarnation.incarnationsItemTerrainTileComponent.ContainsKey(id)) {
+      return new ItemTerrainTileComponentAsITerrainTileComponent(new ItemTerrainTileComponent(this, id));
+    }
     if (rootIncarnation.incarnationsDecorativeTerrainTileComponent.ContainsKey(id)) {
       return new DecorativeTerrainTileComponentAsITerrainTileComponent(new DecorativeTerrainTileComponent(this, id));
     }
@@ -7290,6 +7538,9 @@ public class Root {
     throw new Exception("Unknown ITerrainTileComponent: " + id);
   }
   public ITerrainTileComponent GetITerrainTileComponentOrNull(int id) {
+    if (rootIncarnation.incarnationsItemTerrainTileComponent.ContainsKey(id)) {
+      return new ItemTerrainTileComponentAsITerrainTileComponent(new ItemTerrainTileComponent(this, id));
+    }
     if (rootIncarnation.incarnationsDecorativeTerrainTileComponent.ContainsKey(id)) {
       return new DecorativeTerrainTileComponentAsITerrainTileComponent(new DecorativeTerrainTileComponent(this, id));
     }
@@ -7300,6 +7551,9 @@ public class Root {
       return new DownStaircaseTerrainTileComponentAsITerrainTileComponent(new DownStaircaseTerrainTileComponent(this, id));
     }
     return NullITerrainTileComponent.Null;
+  }
+  public bool ITerrainTileComponentExists(int id) {
+    return GetITerrainTileComponentOrNull(id) != null;
   }
   public void CheckHasITerrainTileComponent(ITerrainTileComponent thing) {
     GetITerrainTileComponent(thing.id);
@@ -7326,6 +7580,9 @@ public class Root {
     }
     return NullIItem.Null;
   }
+  public bool IItemExists(int id) {
+    return GetIItemOrNull(id) != null;
+  }
   public void CheckHasIItem(IItem thing) {
     GetIItem(thing.id);
   }
@@ -7344,6 +7601,9 @@ public class Root {
       return new BidingOperationUCAsIOperationUC(new BidingOperationUC(this, id));
     }
     return NullIOperationUC.Null;
+  }
+  public bool IOperationUCExists(int id) {
+    return GetIOperationUCOrNull(id) != null;
   }
   public void CheckHasIOperationUC(IOperationUC thing) {
     GetIOperationUC(thing.id);
@@ -7369,6 +7629,9 @@ public class Root {
       return new MoveDirectiveUCAsIDirectiveUC(new MoveDirectiveUC(this, id));
     }
     return NullIDirectiveUC.Null;
+  }
+  public bool IDirectiveUCExists(int id) {
+    return GetIDirectiveUCOrNull(id) != null;
   }
   public void CheckHasIDirectiveUC(IDirectiveUC thing) {
     GetIDirectiveUC(thing.id);
@@ -7401,6 +7664,9 @@ public class Root {
     }
     return NullIAICapabilityUC.Null;
   }
+  public bool IAICapabilityUCExists(int id) {
+    return GetIAICapabilityUCOrNull(id) != null;
+  }
   public void CheckHasIAICapabilityUC(IAICapabilityUC thing) {
     GetIAICapabilityUC(thing.id);
   }
@@ -7419,6 +7685,9 @@ public class Root {
       return new ShieldingUCAsIPostActingUC(new ShieldingUC(this, id));
     }
     return NullIPostActingUC.Null;
+  }
+  public bool IPostActingUCExists(int id) {
+    return GetIPostActingUCOrNull(id) != null;
   }
   public void CheckHasIPostActingUC(IPostActingUC thing) {
     GetIPostActingUC(thing.id);
@@ -7445,6 +7714,9 @@ public class Root {
     }
     return NullIPreActingUC.Null;
   }
+  public bool IPreActingUCExists(int id) {
+    return GetIPreActingUCOrNull(id) != null;
+  }
   public void CheckHasIPreActingUC(IPreActingUC thing) {
     GetIPreActingUC(thing.id);
   }
@@ -7469,6 +7741,9 @@ public class Root {
       return new BidingOperationUCAsIDefenseUC(new BidingOperationUC(this, id));
     }
     return NullIDefenseUC.Null;
+  }
+  public bool IDefenseUCExists(int id) {
+    return GetIDefenseUCOrNull(id) != null;
   }
   public void CheckHasIDefenseUC(IDefenseUC thing) {
     GetIDefenseUC(thing.id);
@@ -7525,6 +7800,9 @@ public class Root {
     }
     return NullIUnitComponent.Null;
   }
+  public bool IUnitComponentExists(int id) {
+    return GetIUnitComponentOrNull(id) != null;
+  }
   public void CheckHasIUnitComponent(IUnitComponent thing) {
     GetIUnitComponent(thing.id);
   }
@@ -7574,6 +7852,9 @@ public class Root {
     }
     return NullIImpulse.Null;
   }
+  public bool IImpulseExists(int id) {
+    return GetIImpulseOrNull(id) != null;
+  }
   public void CheckHasIImpulse(IImpulse thing) {
     GetIImpulse(thing.id);
   }
@@ -7582,6 +7863,18 @@ public class Root {
   }
 
   public IDestructible GetIDestructible(int id) {
+    if (rootIncarnation.incarnationsItemTerrainTileComponent.ContainsKey(id)) {
+      return new ItemTerrainTileComponentAsIDestructible(new ItemTerrainTileComponent(this, id));
+    }
+    if (rootIncarnation.incarnationsDecorativeTerrainTileComponent.ContainsKey(id)) {
+      return new DecorativeTerrainTileComponentAsIDestructible(new DecorativeTerrainTileComponent(this, id));
+    }
+    if (rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.ContainsKey(id)) {
+      return new UpStaircaseTerrainTileComponentAsIDestructible(new UpStaircaseTerrainTileComponent(this, id));
+    }
+    if (rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.ContainsKey(id)) {
+      return new DownStaircaseTerrainTileComponentAsIDestructible(new DownStaircaseTerrainTileComponent(this, id));
+    }
     if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
       return new KillDirectiveUCAsIDestructible(new KillDirectiveUC(this, id));
     }
@@ -7627,6 +7920,18 @@ public class Root {
     throw new Exception("Unknown IDestructible: " + id);
   }
   public IDestructible GetIDestructibleOrNull(int id) {
+    if (rootIncarnation.incarnationsItemTerrainTileComponent.ContainsKey(id)) {
+      return new ItemTerrainTileComponentAsIDestructible(new ItemTerrainTileComponent(this, id));
+    }
+    if (rootIncarnation.incarnationsDecorativeTerrainTileComponent.ContainsKey(id)) {
+      return new DecorativeTerrainTileComponentAsIDestructible(new DecorativeTerrainTileComponent(this, id));
+    }
+    if (rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.ContainsKey(id)) {
+      return new UpStaircaseTerrainTileComponentAsIDestructible(new UpStaircaseTerrainTileComponent(this, id));
+    }
+    if (rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.ContainsKey(id)) {
+      return new DownStaircaseTerrainTileComponentAsIDestructible(new DownStaircaseTerrainTileComponent(this, id));
+    }
     if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
       return new KillDirectiveUCAsIDestructible(new KillDirectiveUC(this, id));
     }
@@ -7670,6 +7975,9 @@ public class Root {
       return new UnitAsIDestructible(new Unit(this, id));
     }
     return NullIDestructible.Null;
+  }
+  public bool IDestructibleExists(int id) {
+    return GetIDestructibleOrNull(id) != null;
   }
   public void CheckHasIDestructible(IDestructible thing) {
     GetIDestructible(thing.id);
@@ -9746,6 +10054,154 @@ public class Root {
       if (observersArmorMutSet.ContainsKey(id)) {
         foreach (var observer in new List<IArmorMutSetEffectObserver>(observersArmorMutSet[id])) {
           observer.OnArmorMutSetEffect(effect);
+        }
+      }
+    }
+
+    public int GetItemTerrainTileComponentMutSetHash(int id, int version, ItemTerrainTileComponentMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public ItemTerrainTileComponentMutSetIncarnation GetItemTerrainTileComponentMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsItemTerrainTileComponentMutSet[id].incarnation;
+    }
+    public ItemTerrainTileComponentMutSet GetItemTerrainTileComponentMutSet(int id) {
+      return new ItemTerrainTileComponentMutSet(this, id);
+    }
+    public List<ItemTerrainTileComponentMutSet> AllItemTerrainTileComponentMutSet() {
+      List<ItemTerrainTileComponentMutSet> result = new List<ItemTerrainTileComponentMutSet>(rootIncarnation.incarnationsItemTerrainTileComponentMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsItemTerrainTileComponentMutSet.Keys) {
+        result.Add(new ItemTerrainTileComponentMutSet(this, id));
+      }
+      return result;
+    }
+    public bool ItemTerrainTileComponentMutSetExists(int id) {
+      return rootIncarnation.incarnationsItemTerrainTileComponentMutSet.ContainsKey(id);
+    }
+    public void CheckHasItemTerrainTileComponentMutSet(ItemTerrainTileComponentMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasItemTerrainTileComponentMutSet(thing.id);
+    }
+    public void CheckHasItemTerrainTileComponentMutSet(int id) {
+      if (!rootIncarnation.incarnationsItemTerrainTileComponentMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid ItemTerrainTileComponentMutSet}!");
+      }
+    }
+    public ItemTerrainTileComponentMutSet EffectItemTerrainTileComponentMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new ItemTerrainTileComponentMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateItemTerrainTileComponentMutSet(id, incarnation);
+      this.rootIncarnation.hash += GetItemTerrainTileComponentMutSetHash(id, rootIncarnation.version, incarnation);
+      return new ItemTerrainTileComponentMutSet(this, id);
+    }
+    public void EffectInternalCreateItemTerrainTileComponentMutSet(int id, ItemTerrainTileComponentMutSetIncarnation incarnation) {
+      var effect = new ItemTerrainTileComponentMutSetCreateEffect(id, incarnation);
+      rootIncarnation.incarnationsItemTerrainTileComponentMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<ItemTerrainTileComponentMutSetIncarnation>(
+                  rootIncarnation.version,
+                  incarnation));
+      BroadcastItemTerrainTileComponentMutSetEffect(id, effect);
+    }
+    public void EffectItemTerrainTileComponentMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new ItemTerrainTileComponentMutSetDeleteEffect(id);
+      BroadcastItemTerrainTileComponentMutSetEffect(id, effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsItemTerrainTileComponentMutSet[id];
+      this.rootIncarnation.hash -=
+          GetItemTerrainTileComponentMutSetHash(id, versionAndIncarnation.version, versionAndIncarnation.incarnation);
+      rootIncarnation.incarnationsItemTerrainTileComponentMutSet.Remove(id);
+    }
+
+       
+    public void EffectItemTerrainTileComponentMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasItemTerrainTileComponentMutSet(setId);
+      CheckHasItemTerrainTileComponent(elementId);
+
+      var effect = new ItemTerrainTileComponentMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsItemTerrainTileComponentMutSet[setId];
+      Asserts.Assert(!oldIncarnationAndVersion.incarnation.set.Contains(elementId));
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+        this.rootIncarnation.hash += setId * rootIncarnation.version * elementId.GetDeterministicHashCode();
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new ItemTerrainTileComponentMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsItemTerrainTileComponentMutSet[setId] =
+            new VersionAndIncarnation<ItemTerrainTileComponentMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+        this.rootIncarnation.hash -= GetItemTerrainTileComponentMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+        this.rootIncarnation.hash += GetItemTerrainTileComponentMutSetHash(setId, rootIncarnation.version, newIncarnation);
+      }
+      BroadcastItemTerrainTileComponentMutSetEffect(setId, effect);
+    }
+    public void EffectItemTerrainTileComponentMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasItemTerrainTileComponentMutSet(setId);
+      CheckHasItemTerrainTileComponent(elementId);
+
+      var effect = new ItemTerrainTileComponentMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsItemTerrainTileComponentMutSet[setId];
+      Asserts.Assert(oldIncarnationAndVersion.incarnation.set.Contains(elementId));
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        this.rootIncarnation.hash -= setId * rootIncarnation.version * elementId.GetDeterministicHashCode();
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new ItemTerrainTileComponentMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsItemTerrainTileComponentMutSet[setId] =
+            new VersionAndIncarnation<ItemTerrainTileComponentMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+        this.rootIncarnation.hash -= GetItemTerrainTileComponentMutSetHash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+        this.rootIncarnation.hash += GetItemTerrainTileComponentMutSetHash(setId, rootIncarnation.version, newIncarnation);
+      }
+      BroadcastItemTerrainTileComponentMutSetEffect(setId, effect);
+    }
+
+       
+    public void AddItemTerrainTileComponentMutSetObserver(int id, IItemTerrainTileComponentMutSetEffectObserver observer) {
+      List<IItemTerrainTileComponentMutSetEffectObserver> obsies;
+      if (!observersItemTerrainTileComponentMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IItemTerrainTileComponentMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersItemTerrainTileComponentMutSet[id] = obsies;
+    }
+
+    public void RemoveItemTerrainTileComponentMutSetObserver(int id, IItemTerrainTileComponentMutSetEffectObserver observer) {
+      if (observersItemTerrainTileComponentMutSet.ContainsKey(id)) {
+        var list = observersItemTerrainTileComponentMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersItemTerrainTileComponentMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+    public void BroadcastItemTerrainTileComponentMutSetEffect(int id, IItemTerrainTileComponentMutSetEffect effect) {
+      if (observersItemTerrainTileComponentMutSet.ContainsKey(0)) {
+        foreach (var observer in new List<IItemTerrainTileComponentMutSetEffectObserver>(observersItemTerrainTileComponentMutSet[0])) {
+          observer.OnItemTerrainTileComponentMutSetEffect(effect);
+        }
+      }
+      if (observersItemTerrainTileComponentMutSet.ContainsKey(id)) {
+        foreach (var observer in new List<IItemTerrainTileComponentMutSetEffectObserver>(observersItemTerrainTileComponentMutSet[id])) {
+          observer.OnItemTerrainTileComponentMutSetEffect(effect);
         }
       }
     }

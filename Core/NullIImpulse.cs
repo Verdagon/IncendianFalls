@@ -17,6 +17,7 @@ public class NullIImpulse : IImpulse {
   public bool Is(IImpulse that) {
     throw new Exception("Called Is on a null!");
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) { }
   public bool NullableIs(IImpulse that) {
     return !that.Exists();
   }

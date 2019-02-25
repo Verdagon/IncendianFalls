@@ -17,6 +17,7 @@ public class NullIDestructible : IDestructible {
   public bool Is(IDestructible that) {
     throw new Exception("Called Is on a null!");
   }
+  public void FindReachableObjects(SortedSet<int> foundIds) { }
   public bool NullableIs(IDestructible that) {
     return !that.Exists();
   }

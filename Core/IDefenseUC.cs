@@ -11,6 +11,7 @@ public interface IDefenseUC {
   int id { get; }
   void Delete();
   bool Exists();
+  void FindReachableObjects(SortedSet<int> foundIds);
   bool Is(IDefenseUC that);
   bool NullableIs(IDefenseUC that);
   IDestructible AsIDestructible();
