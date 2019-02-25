@@ -35,7 +35,7 @@ public class SetUtils {
     }
     throw new Exception("unreachable");
   }
-  public static List<T> GetRandomN<T>(int randomInt, SortedSet<T> set, int n) {
+  public static List<T> GetRandomN<T>(Rand rand, SortedSet<T> set, int n) {
     if (set.Count < n) {
       throw new Exception("wat");
     }
@@ -46,7 +46,7 @@ public class SetUtils {
     List<T> result = new List<T>();
 
     for (int i = 0; i < n; i++) {
-      int randomUnusedLocationIndex = randomInt % set.Count;
+      int randomUnusedLocationIndex = rand.Next() % set.Count;
       foreach (var key in set) {
         if (randomUnusedLocationIndex == 0) {
           result.Add(key);

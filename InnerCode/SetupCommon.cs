@@ -9,12 +9,14 @@ namespace IncendianFalls {
     public WalkableLocations() {
       walkableLocations = new SortedSet<Location>();
     }
-    public WalkableLocations(Terrain terrain, UnitMutSet units) : this() {
+    public WalkableLocations(Terrain terrain) : this() {
       foreach (var locationAndTile in terrain.tiles) {
         if (locationAndTile.Value.walkable) {
           walkableLocations.Add(locationAndTile.Key);
         }
       }
+    }
+    public WalkableLocations(Terrain terrain, UnitMutSet units) : this(terrain) {
       foreach (var unit in units) {
         walkableLocations.Remove(unit.location);
       }
@@ -23,8 +25,8 @@ namespace IncendianFalls {
     public Location GetRandom(int randomInt) {
       return SetUtils.GetRandom(randomInt, walkableLocations);
     }
-    public List<Location> GetRandomN(int randomInt, int n) {
-      return SetUtils.GetRandomN(randomInt, walkableLocations, n);
+    public List<Location> GetRandomN(Rand rand, int n) {
+      return SetUtils.GetRandomN(rand, walkableLocations, n);
     }
     public void Remove(Location location) {
       walkableLocations.Remove(location);

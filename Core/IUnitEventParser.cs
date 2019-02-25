@@ -9,6 +9,8 @@ public static class IUnitEventParser {
   public static IUnitEvent Parse(ParseSource source) {
     var nextThingPeek = source.PeekNextWord();
     switch (nextThingPeek) {
+      case "UnitUnleashBideEvent":
+        return new UnitUnleashBideEventAsIUnitEvent(UnitUnleashBideEvent.Parse(source));
       case "UnitAttackEvent":
         return new UnitAttackEventAsIUnitEvent(UnitAttackEvent.Parse(source));
       case "UnitStepEvent":

@@ -17,6 +17,7 @@ namespace Atharia.Model {
     public static Atharia.Model.Void Enact(this UnleashBideImpulse obj, Unit actingUnit, Game game) {
       var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
 
+      List<Unit> victims = new List<Unit>();
       foreach (var otherUnit in game.level.units) {
         if (otherUnit.Is(actingUnit)) {
           continue;
@@ -28,11 +29,11 @@ namespace Atharia.Model {
           game.level.terrain.pattern.GetTileCenter(otherUnit.location)
           .distance(game.level.terrain.pattern.GetTileCenter(actingUnit.location));
         if (distance <= 2) {
-          Actions.Attack(game, liveUnitByLocationMap, actingUnit, otherUnit, false);
+          victims.Add(otherUnit);
         }
       }
+      Actions.UnleashBide(game, liveUnitByLocationMap, actingUnit, victims);
 
-      actingUnit.nextActionTime = actingUnit.nextActionTime + actingUnit.inertia * 3 / 2;
       actingUnit.ClearOperation();
 
       return new Atharia.Model.Void();

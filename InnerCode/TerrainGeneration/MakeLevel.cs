@@ -42,13 +42,30 @@ namespace IncendianFalls {
       return context.root.EffectLevelCreate(name, false, terrain, context.root.EffectUnitMutSetCreate());
     }
 
+    private static void PlaceRocks(SSContext context, Rand rand, Terrain terrain) {
+
+      var walkableLocations = new WalkableLocations(terrain);
+
+      List<Location> rockLocations = walkableLocations.GetRandomN(rand, walkableLocations.Count / 15);
+
+      foreach (var rockLocation in rockLocations) {
+        var rockTile = terrain.tiles[rockLocation];
+        rockTile.components.Add(
+            context.root.EffectDecorativeTerrainTileComponentCreate("rocks")
+            .AsITerrainTileComponent());
+      }
+    }
+
     private static void PlaceStaircases(SSContext context, Rand rand, Terrain terrain, UnitMutSet units) {
 
       var walkableLocations = new WalkableLocations(terrain, units);
 
-      List<Location> staircaseLocations = walkableLocations.GetRandomN(rand.Next(), 2);
+      List<Location> staircaseLocations = walkableLocations.GetRandomN(rand, 2);
       var upStaircaseLocation = staircaseLocations[0];
       var downStaircaseLocation = staircaseLocations[1];
+
+      Console.WriteLine("placing up at " + upStaircaseLocation.DStr() + " and down at " + downStaircaseLocation.DStr());
+      context.root.logger.Info("placing up at " + upStaircaseLocation.DStr() + " and down at " + downStaircaseLocation.DStr());
 
       var upStaircaseTile = terrain.tiles[upStaircaseLocation];
       upStaircaseTile.components.Add(new UpStaircaseTerrainTileComponentAsITerrainTileComponent(context.root.EffectUpStaircaseTerrainTileComponentCreate()));
@@ -69,6 +86,8 @@ namespace IncendianFalls {
               PentagonPattern9.makePentagon9Pattern());
 
       var units = context.root.EffectUnitMutSetCreate();
+
+      PlaceRocks(context, rand, terrain);
 
       PlaceStaircases(context, rand, terrain, units);
 

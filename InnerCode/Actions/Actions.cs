@@ -1,16 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atharia.Model;
 
 namespace IncendianFalls {
   public class Actions {
-    public static void Attack(
+    public static void UnleashBide(
         Game game,
         LiveUnitByLocationMap liveUnitByLocationMap,
         Unit attacker,
-        Unit victim,
-        bool updateNextActionTime) {
-      Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
+        List<Unit> victims) {
+      Eventer.broadcastUnitUnleashBideEvent(game.root, game, attacker, victims);
+      foreach (var victim in victims) {
+        AttackInner(game, liveUnitByLocationMap, attacker, victim);
+      }
+      attacker.nextActionTime = attacker.nextActionTime + attacker.inertia * 3 / 2;
+    }
 
+    public static void Bump(
+        Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap,
+        Unit attacker,
+        Unit victim) {
+      Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
+      AttackInner(game, liveUnitByLocationMap, attacker, victim);
+      attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
+    }
+
+    private static void AttackInner(
+        Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap,
+        Unit attacker,
+        Unit victim) {
       int damage = 5;
       foreach (var item in attacker.items) {
         damage = item.AffectOutgoingDamage(damage);
@@ -30,10 +50,6 @@ namespace IncendianFalls {
         // Bump the victim up to be the next acting unit.
         victim.nextActionTime = game.time;
         liveUnitByLocationMap.Remove(victim);
-      }
-
-      if (updateNextActionTime) {
-        attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
       }
     }
 

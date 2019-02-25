@@ -20,7 +20,7 @@ namespace Atharia.Model {
       Asserts.Assert(directive.Exists());
 
       var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
-      Actions.Attack(game, liveUnitByLocationMap, unit, directive.targetUnit, true);
+      Actions.Bump(game, liveUnitByLocationMap, unit, directive.targetUnit);
 
       return new Atharia.Model.Void();
     }
