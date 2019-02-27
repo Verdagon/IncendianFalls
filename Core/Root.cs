@@ -804,7 +804,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsLevel.ContainsKey(sourceObjId)) {
-        EffectInternalCreateLevel(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateLevel(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -814,7 +814,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsItemTerrainTileComponent.ContainsKey(sourceObjId)) {
-        EffectInternalCreateItemTerrainTileComponent(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateItemTerrainTileComponent(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -824,7 +824,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsDecorativeTerrainTileComponent.ContainsKey(sourceObjId)) {
-        EffectInternalCreateDecorativeTerrainTileComponent(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateDecorativeTerrainTileComponent(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -834,7 +834,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.ContainsKey(sourceObjId)) {
-        EffectInternalCreateUpStaircaseTerrainTileComponent(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateUpStaircaseTerrainTileComponent(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -844,7 +844,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.ContainsKey(sourceObjId)) {
-        EffectInternalCreateDownStaircaseTerrainTileComponent(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateDownStaircaseTerrainTileComponent(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -854,7 +854,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsTerrainTile.ContainsKey(sourceObjId)) {
-        EffectInternalCreateTerrainTile(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateTerrainTile(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -864,7 +864,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsITerrainTileComponentMutBunch.ContainsKey(sourceObjId)) {
-        EffectInternalCreateITerrainTileComponentMutBunch(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateITerrainTileComponentMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -874,7 +874,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsTerrain.ContainsKey(sourceObjId)) {
-        EffectInternalCreateTerrain(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateTerrain(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -884,7 +884,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsGlaive.ContainsKey(sourceObjId)) {
-        EffectInternalCreateGlaive(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateGlaive(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -894,7 +894,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsArmor.ContainsKey(sourceObjId)) {
-        EffectInternalCreateArmor(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateArmor(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -904,7 +904,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsRand.ContainsKey(sourceObjId)) {
-        EffectInternalCreateRand(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateRand(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -914,7 +914,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateWanderAICapabilityUC(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateWanderAICapabilityUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -924,7 +924,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsShieldingUC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateShieldingUC(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateShieldingUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -934,7 +934,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsBidingOperationUC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateBidingOperationUC(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateBidingOperationUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -944,7 +944,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(sourceObjId)) {
-        EffectInternalCreateUnleashBideImpulse(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateUnleashBideImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -954,7 +954,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsStartBidingImpulse.ContainsKey(sourceObjId)) {
-        EffectInternalCreateStartBidingImpulse(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateStartBidingImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -964,7 +964,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateBideAICapabilityUC(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateBideAICapabilityUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -974,7 +974,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsAttackImpulse.ContainsKey(sourceObjId)) {
-        EffectInternalCreateAttackImpulse(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateAttackImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -984,7 +984,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsPursueImpulse.ContainsKey(sourceObjId)) {
-        EffectInternalCreatePursueImpulse(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreatePursueImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -994,7 +994,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateKillDirectiveUC(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateKillDirectiveUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1004,7 +1004,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateAttackAICapabilityUC(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateAttackAICapabilityUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1014,7 +1014,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsMoveImpulse.ContainsKey(sourceObjId)) {
-        EffectInternalCreateMoveImpulse(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateMoveImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1024,7 +1024,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateMoveDirectiveUC(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateMoveDirectiveUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1034,7 +1034,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsUnit.ContainsKey(sourceObjId)) {
-        EffectInternalCreateUnit(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateUnit(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1044,7 +1044,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsIItemMutBunch.ContainsKey(sourceObjId)) {
-        EffectInternalCreateIItemMutBunch(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateIItemMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1054,7 +1054,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsIUnitComponentMutBunch.ContainsKey(sourceObjId)) {
-        EffectInternalCreateIUnitComponentMutBunch(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateIUnitComponentMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1064,7 +1064,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsNoImpulse.ContainsKey(sourceObjId)) {
-        EffectInternalCreateNoImpulse(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateNoImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1074,7 +1074,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsExecutionState.ContainsKey(sourceObjId)) {
-        EffectInternalCreateExecutionState(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateExecutionState(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1084,7 +1084,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(sourceObjId)) {
-        EffectInternalCreateIPostActingUCWeakMutBunch(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateIPostActingUCWeakMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1094,7 +1094,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(sourceObjId)) {
-        EffectInternalCreateIPreActingUCWeakMutBunch(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateIPreActingUCWeakMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1104,7 +1104,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsGame.ContainsKey(sourceObjId)) {
-        EffectInternalCreateGame(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateGame(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1114,7 +1114,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsIUnitEventMutList.ContainsKey(sourceObjId)) {
-        EffectInternalCreateIUnitEventMutList(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateIUnitEventMutList(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1124,7 +1124,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsLocationMutList.ContainsKey(sourceObjId)) {
-        EffectInternalCreateLocationMutList(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateLocationMutList(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1134,7 +1134,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsLevelMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateLevelMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateLevelMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1144,7 +1144,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsShieldingUCWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateShieldingUCWeakMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateShieldingUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1154,7 +1154,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateAttackAICapabilityUCWeakMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateAttackAICapabilityUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1164,7 +1164,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsKillDirectiveUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateKillDirectiveUCMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateKillDirectiveUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1174,7 +1174,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsMoveDirectiveUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateMoveDirectiveUCMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateMoveDirectiveUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1184,7 +1184,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsWanderAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateWanderAICapabilityUCMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateWanderAICapabilityUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1194,7 +1194,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateBideAICapabilityUCMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateBideAICapabilityUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1204,7 +1204,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsAttackAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateAttackAICapabilityUCMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateAttackAICapabilityUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1214,7 +1214,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsShieldingUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateShieldingUCMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateShieldingUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1224,7 +1224,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsBidingOperationUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateBidingOperationUCMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateBidingOperationUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1234,7 +1234,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsGlaiveMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateGlaiveMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateGlaiveMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1244,7 +1244,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsArmorMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateArmorMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateArmorMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1254,7 +1254,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsItemTerrainTileComponentMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateItemTerrainTileComponentMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateItemTerrainTileComponentMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1264,7 +1264,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsDecorativeTerrainTileComponentMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateDecorativeTerrainTileComponentMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateDecorativeTerrainTileComponentMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1274,7 +1274,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsUpStaircaseTerrainTileComponentMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateUpStaircaseTerrainTileComponentMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateUpStaircaseTerrainTileComponentMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1284,7 +1284,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsDownStaircaseTerrainTileComponentMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateDownStaircaseTerrainTileComponentMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateDownStaircaseTerrainTileComponentMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1294,7 +1294,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsUnitMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateUnitMutSet(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateUnitMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -1304,7 +1304,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsTerrainTileByLocationMutMap.ContainsKey(sourceObjId)) {
-        EffectInternalCreateTerrainTileByLocationMutMap(sourceObjId, sourceObjIncarnation);
+        EffectInternalCreateTerrainTileByLocationMutMap(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3428,20 +3428,21 @@ public class Root {
             terrain.id,
             units.id
             );
-    EffectInternalCreateLevel(id, incarnation);
+    EffectInternalCreateLevel(id, rootIncarnation.version, incarnation);
     return new Level(this, id);
   }
   public void EffectInternalCreateLevel(
       int id,
+      int incarnationVersion,
       LevelIncarnation incarnation) {
     CheckUnlocked();
     var effect = new LevelCreateEffect(id, incarnation);
     rootIncarnation.incarnationsLevel.Add(
         id,
         new VersionAndIncarnation<LevelIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetLevelHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetLevelHash(id, incarnationVersion, incarnation);
     BroadcastLevelEffect(id, effect);
   }
 
@@ -3545,20 +3546,21 @@ public class Root {
         new ItemTerrainTileComponentIncarnation(
             item.id
             );
-    EffectInternalCreateItemTerrainTileComponent(id, incarnation);
+    EffectInternalCreateItemTerrainTileComponent(id, rootIncarnation.version, incarnation);
     return new ItemTerrainTileComponent(this, id);
   }
   public void EffectInternalCreateItemTerrainTileComponent(
       int id,
+      int incarnationVersion,
       ItemTerrainTileComponentIncarnation incarnation) {
     CheckUnlocked();
     var effect = new ItemTerrainTileComponentCreateEffect(id, incarnation);
     rootIncarnation.incarnationsItemTerrainTileComponent.Add(
         id,
         new VersionAndIncarnation<ItemTerrainTileComponentIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetItemTerrainTileComponentHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetItemTerrainTileComponentHash(id, incarnationVersion, incarnation);
     BroadcastItemTerrainTileComponentEffect(id, effect);
   }
 
@@ -3658,20 +3660,21 @@ public class Root {
         new DecorativeTerrainTileComponentIncarnation(
             symbolId
             );
-    EffectInternalCreateDecorativeTerrainTileComponent(id, incarnation);
+    EffectInternalCreateDecorativeTerrainTileComponent(id, rootIncarnation.version, incarnation);
     return new DecorativeTerrainTileComponent(this, id);
   }
   public void EffectInternalCreateDecorativeTerrainTileComponent(
       int id,
+      int incarnationVersion,
       DecorativeTerrainTileComponentIncarnation incarnation) {
     CheckUnlocked();
     var effect = new DecorativeTerrainTileComponentCreateEffect(id, incarnation);
     rootIncarnation.incarnationsDecorativeTerrainTileComponent.Add(
         id,
         new VersionAndIncarnation<DecorativeTerrainTileComponentIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetDecorativeTerrainTileComponentHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetDecorativeTerrainTileComponentHash(id, incarnationVersion, incarnation);
     BroadcastDecorativeTerrainTileComponentEffect(id, effect);
   }
 
@@ -3771,20 +3774,21 @@ public class Root {
         new UpStaircaseTerrainTileComponentIncarnation(
 
             );
-    EffectInternalCreateUpStaircaseTerrainTileComponent(id, incarnation);
+    EffectInternalCreateUpStaircaseTerrainTileComponent(id, rootIncarnation.version, incarnation);
     return new UpStaircaseTerrainTileComponent(this, id);
   }
   public void EffectInternalCreateUpStaircaseTerrainTileComponent(
       int id,
+      int incarnationVersion,
       UpStaircaseTerrainTileComponentIncarnation incarnation) {
     CheckUnlocked();
     var effect = new UpStaircaseTerrainTileComponentCreateEffect(id, incarnation);
     rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.Add(
         id,
         new VersionAndIncarnation<UpStaircaseTerrainTileComponentIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetUpStaircaseTerrainTileComponentHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetUpStaircaseTerrainTileComponentHash(id, incarnationVersion, incarnation);
     BroadcastUpStaircaseTerrainTileComponentEffect(id, effect);
   }
 
@@ -3883,20 +3887,21 @@ public class Root {
         new DownStaircaseTerrainTileComponentIncarnation(
 
             );
-    EffectInternalCreateDownStaircaseTerrainTileComponent(id, incarnation);
+    EffectInternalCreateDownStaircaseTerrainTileComponent(id, rootIncarnation.version, incarnation);
     return new DownStaircaseTerrainTileComponent(this, id);
   }
   public void EffectInternalCreateDownStaircaseTerrainTileComponent(
       int id,
+      int incarnationVersion,
       DownStaircaseTerrainTileComponentIncarnation incarnation) {
     CheckUnlocked();
     var effect = new DownStaircaseTerrainTileComponentCreateEffect(id, incarnation);
     rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.Add(
         id,
         new VersionAndIncarnation<DownStaircaseTerrainTileComponentIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetDownStaircaseTerrainTileComponentHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetDownStaircaseTerrainTileComponentHash(id, incarnationVersion, incarnation);
     BroadcastDownStaircaseTerrainTileComponentEffect(id, effect);
   }
 
@@ -4002,20 +4007,21 @@ public class Root {
             classId,
             components.id
             );
-    EffectInternalCreateTerrainTile(id, incarnation);
+    EffectInternalCreateTerrainTile(id, rootIncarnation.version, incarnation);
     return new TerrainTile(this, id);
   }
   public void EffectInternalCreateTerrainTile(
       int id,
+      int incarnationVersion,
       TerrainTileIncarnation incarnation) {
     CheckUnlocked();
     var effect = new TerrainTileCreateEffect(id, incarnation);
     rootIncarnation.incarnationsTerrainTile.Add(
         id,
         new VersionAndIncarnation<TerrainTileIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetTerrainTileHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetTerrainTileHash(id, incarnationVersion, incarnation);
     BroadcastTerrainTileEffect(id, effect);
   }
 
@@ -4157,20 +4163,21 @@ public class Root {
             membersUpStaircaseTerrainTileComponentMutSet.id,
             membersDownStaircaseTerrainTileComponentMutSet.id
             );
-    EffectInternalCreateITerrainTileComponentMutBunch(id, incarnation);
+    EffectInternalCreateITerrainTileComponentMutBunch(id, rootIncarnation.version, incarnation);
     return new ITerrainTileComponentMutBunch(this, id);
   }
   public void EffectInternalCreateITerrainTileComponentMutBunch(
       int id,
+      int incarnationVersion,
       ITerrainTileComponentMutBunchIncarnation incarnation) {
     CheckUnlocked();
     var effect = new ITerrainTileComponentMutBunchCreateEffect(id, incarnation);
     rootIncarnation.incarnationsITerrainTileComponentMutBunch.Add(
         id,
         new VersionAndIncarnation<ITerrainTileComponentMutBunchIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetITerrainTileComponentMutBunchHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetITerrainTileComponentMutBunchHash(id, incarnationVersion, incarnation);
     BroadcastITerrainTileComponentMutBunchEffect(id, effect);
   }
 
@@ -4278,20 +4285,21 @@ public class Root {
             elevationStepHeight,
             tiles.id
             );
-    EffectInternalCreateTerrain(id, incarnation);
+    EffectInternalCreateTerrain(id, rootIncarnation.version, incarnation);
     return new Terrain(this, id);
   }
   public void EffectInternalCreateTerrain(
       int id,
+      int incarnationVersion,
       TerrainIncarnation incarnation) {
     CheckUnlocked();
     var effect = new TerrainCreateEffect(id, incarnation);
     rootIncarnation.incarnationsTerrain.Add(
         id,
         new VersionAndIncarnation<TerrainIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetTerrainHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetTerrainHash(id, incarnationVersion, incarnation);
     BroadcastTerrainEffect(id, effect);
   }
 
@@ -4421,20 +4429,21 @@ public class Root {
         new GlaiveIncarnation(
 
             );
-    EffectInternalCreateGlaive(id, incarnation);
+    EffectInternalCreateGlaive(id, rootIncarnation.version, incarnation);
     return new Glaive(this, id);
   }
   public void EffectInternalCreateGlaive(
       int id,
+      int incarnationVersion,
       GlaiveIncarnation incarnation) {
     CheckUnlocked();
     var effect = new GlaiveCreateEffect(id, incarnation);
     rootIncarnation.incarnationsGlaive.Add(
         id,
         new VersionAndIncarnation<GlaiveIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetGlaiveHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetGlaiveHash(id, incarnationVersion, incarnation);
     BroadcastGlaiveEffect(id, effect);
   }
 
@@ -4533,20 +4542,21 @@ public class Root {
         new ArmorIncarnation(
 
             );
-    EffectInternalCreateArmor(id, incarnation);
+    EffectInternalCreateArmor(id, rootIncarnation.version, incarnation);
     return new Armor(this, id);
   }
   public void EffectInternalCreateArmor(
       int id,
+      int incarnationVersion,
       ArmorIncarnation incarnation) {
     CheckUnlocked();
     var effect = new ArmorCreateEffect(id, incarnation);
     rootIncarnation.incarnationsArmor.Add(
         id,
         new VersionAndIncarnation<ArmorIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetArmorHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetArmorHash(id, incarnationVersion, incarnation);
     BroadcastArmorEffect(id, effect);
   }
 
@@ -4645,20 +4655,21 @@ public class Root {
         new RandIncarnation(
             rand
             );
-    EffectInternalCreateRand(id, incarnation);
+    EffectInternalCreateRand(id, rootIncarnation.version, incarnation);
     return new Rand(this, id);
   }
   public void EffectInternalCreateRand(
       int id,
+      int incarnationVersion,
       RandIncarnation incarnation) {
     CheckUnlocked();
     var effect = new RandCreateEffect(id, incarnation);
     rootIncarnation.incarnationsRand.Add(
         id,
         new VersionAndIncarnation<RandIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetRandHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetRandHash(id, incarnationVersion, incarnation);
     BroadcastRandEffect(id, effect);
   }
 
@@ -4784,20 +4795,21 @@ public class Root {
         new WanderAICapabilityUCIncarnation(
 
             );
-    EffectInternalCreateWanderAICapabilityUC(id, incarnation);
+    EffectInternalCreateWanderAICapabilityUC(id, rootIncarnation.version, incarnation);
     return new WanderAICapabilityUC(this, id);
   }
   public void EffectInternalCreateWanderAICapabilityUC(
       int id,
+      int incarnationVersion,
       WanderAICapabilityUCIncarnation incarnation) {
     CheckUnlocked();
     var effect = new WanderAICapabilityUCCreateEffect(id, incarnation);
     rootIncarnation.incarnationsWanderAICapabilityUC.Add(
         id,
         new VersionAndIncarnation<WanderAICapabilityUCIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetWanderAICapabilityUCHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetWanderAICapabilityUCHash(id, incarnationVersion, incarnation);
     BroadcastWanderAICapabilityUCEffect(id, effect);
   }
 
@@ -4896,20 +4908,21 @@ public class Root {
         new ShieldingUCIncarnation(
 
             );
-    EffectInternalCreateShieldingUC(id, incarnation);
+    EffectInternalCreateShieldingUC(id, rootIncarnation.version, incarnation);
     return new ShieldingUC(this, id);
   }
   public void EffectInternalCreateShieldingUC(
       int id,
+      int incarnationVersion,
       ShieldingUCIncarnation incarnation) {
     CheckUnlocked();
     var effect = new ShieldingUCCreateEffect(id, incarnation);
     rootIncarnation.incarnationsShieldingUC.Add(
         id,
         new VersionAndIncarnation<ShieldingUCIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetShieldingUCHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetShieldingUCHash(id, incarnationVersion, incarnation);
     BroadcastShieldingUCEffect(id, effect);
   }
 
@@ -5008,20 +5021,21 @@ public class Root {
         new BidingOperationUCIncarnation(
 
             );
-    EffectInternalCreateBidingOperationUC(id, incarnation);
+    EffectInternalCreateBidingOperationUC(id, rootIncarnation.version, incarnation);
     return new BidingOperationUC(this, id);
   }
   public void EffectInternalCreateBidingOperationUC(
       int id,
+      int incarnationVersion,
       BidingOperationUCIncarnation incarnation) {
     CheckUnlocked();
     var effect = new BidingOperationUCCreateEffect(id, incarnation);
     rootIncarnation.incarnationsBidingOperationUC.Add(
         id,
         new VersionAndIncarnation<BidingOperationUCIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetBidingOperationUCHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetBidingOperationUCHash(id, incarnationVersion, incarnation);
     BroadcastBidingOperationUCEffect(id, effect);
   }
 
@@ -5120,20 +5134,21 @@ public class Root {
         new UnleashBideImpulseIncarnation(
             weight
             );
-    EffectInternalCreateUnleashBideImpulse(id, incarnation);
+    EffectInternalCreateUnleashBideImpulse(id, rootIncarnation.version, incarnation);
     return new UnleashBideImpulse(this, id);
   }
   public void EffectInternalCreateUnleashBideImpulse(
       int id,
+      int incarnationVersion,
       UnleashBideImpulseIncarnation incarnation) {
     CheckUnlocked();
     var effect = new UnleashBideImpulseCreateEffect(id, incarnation);
     rootIncarnation.incarnationsUnleashBideImpulse.Add(
         id,
         new VersionAndIncarnation<UnleashBideImpulseIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetUnleashBideImpulseHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetUnleashBideImpulseHash(id, incarnationVersion, incarnation);
     BroadcastUnleashBideImpulseEffect(id, effect);
   }
 
@@ -5233,20 +5248,21 @@ public class Root {
         new StartBidingImpulseIncarnation(
             weight
             );
-    EffectInternalCreateStartBidingImpulse(id, incarnation);
+    EffectInternalCreateStartBidingImpulse(id, rootIncarnation.version, incarnation);
     return new StartBidingImpulse(this, id);
   }
   public void EffectInternalCreateStartBidingImpulse(
       int id,
+      int incarnationVersion,
       StartBidingImpulseIncarnation incarnation) {
     CheckUnlocked();
     var effect = new StartBidingImpulseCreateEffect(id, incarnation);
     rootIncarnation.incarnationsStartBidingImpulse.Add(
         id,
         new VersionAndIncarnation<StartBidingImpulseIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetStartBidingImpulseHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetStartBidingImpulseHash(id, incarnationVersion, incarnation);
     BroadcastStartBidingImpulseEffect(id, effect);
   }
 
@@ -5346,20 +5362,21 @@ public class Root {
         new BideAICapabilityUCIncarnation(
 
             );
-    EffectInternalCreateBideAICapabilityUC(id, incarnation);
+    EffectInternalCreateBideAICapabilityUC(id, rootIncarnation.version, incarnation);
     return new BideAICapabilityUC(this, id);
   }
   public void EffectInternalCreateBideAICapabilityUC(
       int id,
+      int incarnationVersion,
       BideAICapabilityUCIncarnation incarnation) {
     CheckUnlocked();
     var effect = new BideAICapabilityUCCreateEffect(id, incarnation);
     rootIncarnation.incarnationsBideAICapabilityUC.Add(
         id,
         new VersionAndIncarnation<BideAICapabilityUCIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetBideAICapabilityUCHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetBideAICapabilityUCHash(id, incarnationVersion, incarnation);
     BroadcastBideAICapabilityUCEffect(id, effect);
   }
 
@@ -5458,20 +5475,21 @@ public class Root {
         new AttackImpulseIncarnation(
             weight
             );
-    EffectInternalCreateAttackImpulse(id, incarnation);
+    EffectInternalCreateAttackImpulse(id, rootIncarnation.version, incarnation);
     return new AttackImpulse(this, id);
   }
   public void EffectInternalCreateAttackImpulse(
       int id,
+      int incarnationVersion,
       AttackImpulseIncarnation incarnation) {
     CheckUnlocked();
     var effect = new AttackImpulseCreateEffect(id, incarnation);
     rootIncarnation.incarnationsAttackImpulse.Add(
         id,
         new VersionAndIncarnation<AttackImpulseIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetAttackImpulseHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetAttackImpulseHash(id, incarnationVersion, incarnation);
     BroadcastAttackImpulseEffect(id, effect);
   }
 
@@ -5563,30 +5581,29 @@ public class Root {
   }
 
   public PursueImpulse EffectPursueImpulseCreate(
-      int weight,
-      Location stepLocation) {
+      int weight) {
     CheckUnlocked();
 
     var id = NewId();
     var incarnation =
         new PursueImpulseIncarnation(
-            weight,
-            stepLocation
+            weight
             );
-    EffectInternalCreatePursueImpulse(id, incarnation);
+    EffectInternalCreatePursueImpulse(id, rootIncarnation.version, incarnation);
     return new PursueImpulse(this, id);
   }
   public void EffectInternalCreatePursueImpulse(
       int id,
+      int incarnationVersion,
       PursueImpulseIncarnation incarnation) {
     CheckUnlocked();
     var effect = new PursueImpulseCreateEffect(id, incarnation);
     rootIncarnation.incarnationsPursueImpulse.Add(
         id,
         new VersionAndIncarnation<PursueImpulseIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetPursueImpulseHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetPursueImpulseHash(id, incarnationVersion, incarnation);
     BroadcastPursueImpulseEffect(id, effect);
   }
 
@@ -5608,7 +5625,6 @@ public class Root {
   public int GetPursueImpulseHash(int id, int version, PursueImpulseIncarnation incarnation) {
     int result = id * version;
     result += id * version * 1 * incarnation.weight.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.stepLocation.GetDeterministicHashCode();
     return result;
   }
        public KillDirectiveUCIncarnation GetKillDirectiveUCIncarnation(int id) {
@@ -5691,20 +5707,21 @@ public class Root {
             targetUnit.id,
             pathToLastSeenLocation.id
             );
-    EffectInternalCreateKillDirectiveUC(id, incarnation);
+    EffectInternalCreateKillDirectiveUC(id, rootIncarnation.version, incarnation);
     return new KillDirectiveUC(this, id);
   }
   public void EffectInternalCreateKillDirectiveUC(
       int id,
+      int incarnationVersion,
       KillDirectiveUCIncarnation incarnation) {
     CheckUnlocked();
     var effect = new KillDirectiveUCCreateEffect(id, incarnation);
     rootIncarnation.incarnationsKillDirectiveUC.Add(
         id,
         new VersionAndIncarnation<KillDirectiveUCIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetKillDirectiveUCHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetKillDirectiveUCHash(id, incarnationVersion, incarnation);
     BroadcastKillDirectiveUCEffect(id, effect);
   }
 
@@ -5805,20 +5822,21 @@ public class Root {
         new AttackAICapabilityUCIncarnation(
 
             );
-    EffectInternalCreateAttackAICapabilityUC(id, incarnation);
+    EffectInternalCreateAttackAICapabilityUC(id, rootIncarnation.version, incarnation);
     return new AttackAICapabilityUC(this, id);
   }
   public void EffectInternalCreateAttackAICapabilityUC(
       int id,
+      int incarnationVersion,
       AttackAICapabilityUCIncarnation incarnation) {
     CheckUnlocked();
     var effect = new AttackAICapabilityUCCreateEffect(id, incarnation);
     rootIncarnation.incarnationsAttackAICapabilityUC.Add(
         id,
         new VersionAndIncarnation<AttackAICapabilityUCIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetAttackAICapabilityUCHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetAttackAICapabilityUCHash(id, incarnationVersion, incarnation);
     BroadcastAttackAICapabilityUCEffect(id, effect);
   }
 
@@ -5919,20 +5937,21 @@ public class Root {
             weight,
             stepLocation
             );
-    EffectInternalCreateMoveImpulse(id, incarnation);
+    EffectInternalCreateMoveImpulse(id, rootIncarnation.version, incarnation);
     return new MoveImpulse(this, id);
   }
   public void EffectInternalCreateMoveImpulse(
       int id,
+      int incarnationVersion,
       MoveImpulseIncarnation incarnation) {
     CheckUnlocked();
     var effect = new MoveImpulseCreateEffect(id, incarnation);
     rootIncarnation.incarnationsMoveImpulse.Add(
         id,
         new VersionAndIncarnation<MoveImpulseIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetMoveImpulseHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetMoveImpulseHash(id, incarnationVersion, incarnation);
     BroadcastMoveImpulseEffect(id, effect);
   }
 
@@ -6034,20 +6053,21 @@ public class Root {
         new MoveDirectiveUCIncarnation(
             path.id
             );
-    EffectInternalCreateMoveDirectiveUC(id, incarnation);
+    EffectInternalCreateMoveDirectiveUC(id, rootIncarnation.version, incarnation);
     return new MoveDirectiveUC(this, id);
   }
   public void EffectInternalCreateMoveDirectiveUC(
       int id,
+      int incarnationVersion,
       MoveDirectiveUCIncarnation incarnation) {
     CheckUnlocked();
     var effect = new MoveDirectiveUCCreateEffect(id, incarnation);
     rootIncarnation.incarnationsMoveDirectiveUC.Add(
         id,
         new VersionAndIncarnation<MoveDirectiveUCIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetMoveDirectiveUCHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetMoveDirectiveUCHash(id, incarnationVersion, incarnation);
     BroadcastMoveDirectiveUCEffect(id, effect);
   }
 
@@ -6174,20 +6194,21 @@ public class Root {
             components.id,
             items.id
             );
-    EffectInternalCreateUnit(id, incarnation);
+    EffectInternalCreateUnit(id, rootIncarnation.version, incarnation);
     return new Unit(this, id);
   }
   public void EffectInternalCreateUnit(
       int id,
+      int incarnationVersion,
       UnitIncarnation incarnation) {
     CheckUnlocked();
     var effect = new UnitCreateEffect(id, incarnation);
     rootIncarnation.incarnationsUnit.Add(
         id,
         new VersionAndIncarnation<UnitIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetUnitHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetUnitHash(id, incarnationVersion, incarnation);
     BroadcastUnitEffect(id, effect);
   }
 
@@ -6531,20 +6552,21 @@ public class Root {
             membersGlaiveMutSet.id,
             membersArmorMutSet.id
             );
-    EffectInternalCreateIItemMutBunch(id, incarnation);
+    EffectInternalCreateIItemMutBunch(id, rootIncarnation.version, incarnation);
     return new IItemMutBunch(this, id);
   }
   public void EffectInternalCreateIItemMutBunch(
       int id,
+      int incarnationVersion,
       IItemMutBunchIncarnation incarnation) {
     CheckUnlocked();
     var effect = new IItemMutBunchCreateEffect(id, incarnation);
     rootIncarnation.incarnationsIItemMutBunch.Add(
         id,
         new VersionAndIncarnation<IItemMutBunchIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetIItemMutBunchHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetIItemMutBunchHash(id, incarnationVersion, incarnation);
     BroadcastIItemMutBunchEffect(id, effect);
   }
 
@@ -6664,20 +6686,21 @@ public class Root {
             membersShieldingUCMutSet.id,
             membersBidingOperationUCMutSet.id
             );
-    EffectInternalCreateIUnitComponentMutBunch(id, incarnation);
+    EffectInternalCreateIUnitComponentMutBunch(id, rootIncarnation.version, incarnation);
     return new IUnitComponentMutBunch(this, id);
   }
   public void EffectInternalCreateIUnitComponentMutBunch(
       int id,
+      int incarnationVersion,
       IUnitComponentMutBunchIncarnation incarnation) {
     CheckUnlocked();
     var effect = new IUnitComponentMutBunchCreateEffect(id, incarnation);
     rootIncarnation.incarnationsIUnitComponentMutBunch.Add(
         id,
         new VersionAndIncarnation<IUnitComponentMutBunchIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetIUnitComponentMutBunchHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetIUnitComponentMutBunchHash(id, incarnationVersion, incarnation);
     BroadcastIUnitComponentMutBunchEffect(id, effect);
   }
 
@@ -6783,20 +6806,21 @@ public class Root {
         new NoImpulseIncarnation(
 
             );
-    EffectInternalCreateNoImpulse(id, incarnation);
+    EffectInternalCreateNoImpulse(id, rootIncarnation.version, incarnation);
     return new NoImpulse(this, id);
   }
   public void EffectInternalCreateNoImpulse(
       int id,
+      int incarnationVersion,
       NoImpulseIncarnation incarnation) {
     CheckUnlocked();
     var effect = new NoImpulseCreateEffect(id, incarnation);
     rootIncarnation.incarnationsNoImpulse.Add(
         id,
         new VersionAndIncarnation<NoImpulseIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetNoImpulseHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetNoImpulseHash(id, incarnationVersion, incarnation);
     BroadcastNoImpulseEffect(id, effect);
   }
 
@@ -6901,20 +6925,21 @@ public class Root {
             remainingPreActingUnitComponents.id,
             remainingPostActingUnitComponents.id
             );
-    EffectInternalCreateExecutionState(id, incarnation);
+    EffectInternalCreateExecutionState(id, rootIncarnation.version, incarnation);
     return new ExecutionState(this, id);
   }
   public void EffectInternalCreateExecutionState(
       int id,
+      int incarnationVersion,
       ExecutionStateIncarnation incarnation) {
     CheckUnlocked();
     var effect = new ExecutionStateCreateEffect(id, incarnation);
     rootIncarnation.incarnationsExecutionState.Add(
         id,
         new VersionAndIncarnation<ExecutionStateIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetExecutionStateHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetExecutionStateHash(id, incarnationVersion, incarnation);
     BroadcastExecutionStateEffect(id, effect);
   }
 
@@ -7134,20 +7159,21 @@ public class Root {
         new IPostActingUCWeakMutBunchIncarnation(
             membersShieldingUCWeakMutSet.id
             );
-    EffectInternalCreateIPostActingUCWeakMutBunch(id, incarnation);
+    EffectInternalCreateIPostActingUCWeakMutBunch(id, rootIncarnation.version, incarnation);
     return new IPostActingUCWeakMutBunch(this, id);
   }
   public void EffectInternalCreateIPostActingUCWeakMutBunch(
       int id,
+      int incarnationVersion,
       IPostActingUCWeakMutBunchIncarnation incarnation) {
     CheckUnlocked();
     var effect = new IPostActingUCWeakMutBunchCreateEffect(id, incarnation);
     rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Add(
         id,
         new VersionAndIncarnation<IPostActingUCWeakMutBunchIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetIPostActingUCWeakMutBunchHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetIPostActingUCWeakMutBunchHash(id, incarnationVersion, incarnation);
     BroadcastIPostActingUCWeakMutBunchEffect(id, effect);
   }
 
@@ -7251,20 +7277,21 @@ public class Root {
             membersShieldingUCWeakMutSet.id,
             membersAttackAICapabilityUCWeakMutSet.id
             );
-    EffectInternalCreateIPreActingUCWeakMutBunch(id, incarnation);
+    EffectInternalCreateIPreActingUCWeakMutBunch(id, rootIncarnation.version, incarnation);
     return new IPreActingUCWeakMutBunch(this, id);
   }
   public void EffectInternalCreateIPreActingUCWeakMutBunch(
       int id,
+      int incarnationVersion,
       IPreActingUCWeakMutBunchIncarnation incarnation) {
     CheckUnlocked();
     var effect = new IPreActingUCWeakMutBunchCreateEffect(id, incarnation);
     rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Add(
         id,
         new VersionAndIncarnation<IPreActingUCWeakMutBunchIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetIPreActingUCWeakMutBunchHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetIPreActingUCWeakMutBunchHash(id, incarnationVersion, incarnation);
     BroadcastIPreActingUCWeakMutBunchEffect(id, effect);
   }
 
@@ -7382,20 +7409,21 @@ public class Root {
             time,
             executionState.id
             );
-    EffectInternalCreateGame(id, incarnation);
+    EffectInternalCreateGame(id, rootIncarnation.version, incarnation);
     return new Game(this, id);
   }
   public void EffectInternalCreateGame(
       int id,
+      int incarnationVersion,
       GameIncarnation incarnation) {
     CheckUnlocked();
     var effect = new GameCreateEffect(id, incarnation);
     rootIncarnation.incarnationsGame.Add(
         id,
         new VersionAndIncarnation<GameIncarnation>(
-            rootIncarnation.version,
+            incarnationVersion,
             incarnation));
-    this.rootIncarnation.hash += GetGameHash(id, rootIncarnation.version, incarnation);
+    this.rootIncarnation.hash += GetGameHash(id, incarnationVersion, incarnation);
     BroadcastGameEffect(id, effect);
   }
 
@@ -8021,24 +8049,24 @@ public class Root {
     public IUnitEventMutList EffectIUnitEventMutListCreate() {
       CheckUnlocked();
       var id = NewId();
-      EffectInternalCreateIUnitEventMutList(id, new IUnitEventMutListIncarnation(new List<IUnitEvent>()));
+      EffectInternalCreateIUnitEventMutList(id, rootIncarnation.version, new IUnitEventMutListIncarnation(new List<IUnitEvent>()));
       return new IUnitEventMutList(this, id);
     }
     public IUnitEventMutList EffectIUnitEventMutListCreate(IEnumerable<IUnitEvent> elements) {
       var id = NewId();
       var incarnation = new IUnitEventMutListIncarnation(new List<IUnitEvent>(elements));
-      EffectInternalCreateIUnitEventMutList(id, incarnation);
+      EffectInternalCreateIUnitEventMutList(id, rootIncarnation.version, incarnation);
       return new IUnitEventMutList(this, id);
     }
-    public void EffectInternalCreateIUnitEventMutList(int id, IUnitEventMutListIncarnation incarnation) {
+    public void EffectInternalCreateIUnitEventMutList(int id, int incarnationVersion, IUnitEventMutListIncarnation incarnation) {
       var effect = new IUnitEventMutListCreateEffect(id, incarnation);
       rootIncarnation.incarnationsIUnitEventMutList
           .Add(
               id,
               new VersionAndIncarnation<IUnitEventMutListIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
-      this.rootIncarnation.hash += GetIUnitEventMutListHash(id, rootIncarnation.version, incarnation);
+      this.rootIncarnation.hash += GetIUnitEventMutListHash(id, incarnationVersion, incarnation);
       BroadcastIUnitEventMutListEffect(id, effect);
     }
     public void EffectIUnitEventMutListDelete(int id) {
@@ -8169,24 +8197,24 @@ public class Root {
     public LocationMutList EffectLocationMutListCreate() {
       CheckUnlocked();
       var id = NewId();
-      EffectInternalCreateLocationMutList(id, new LocationMutListIncarnation(new List<Location>()));
+      EffectInternalCreateLocationMutList(id, rootIncarnation.version, new LocationMutListIncarnation(new List<Location>()));
       return new LocationMutList(this, id);
     }
     public LocationMutList EffectLocationMutListCreate(IEnumerable<Location> elements) {
       var id = NewId();
       var incarnation = new LocationMutListIncarnation(new List<Location>(elements));
-      EffectInternalCreateLocationMutList(id, incarnation);
+      EffectInternalCreateLocationMutList(id, rootIncarnation.version, incarnation);
       return new LocationMutList(this, id);
     }
-    public void EffectInternalCreateLocationMutList(int id, LocationMutListIncarnation incarnation) {
+    public void EffectInternalCreateLocationMutList(int id, int incarnationVersion, LocationMutListIncarnation incarnation) {
       var effect = new LocationMutListCreateEffect(id, incarnation);
       rootIncarnation.incarnationsLocationMutList
           .Add(
               id,
               new VersionAndIncarnation<LocationMutListIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
-      this.rootIncarnation.hash += GetLocationMutListHash(id, rootIncarnation.version, incarnation);
+      this.rootIncarnation.hash += GetLocationMutListHash(id, incarnationVersion, incarnation);
       BroadcastLocationMutListEffect(id, effect);
     }
     public void EffectLocationMutListDelete(int id) {
@@ -8318,18 +8346,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new LevelMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateLevelMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetLevelMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateLevelMutSet(id, rootIncarnation.version, incarnation);
       return new LevelMutSet(this, id);
     }
-    public void EffectInternalCreateLevelMutSet(int id, LevelMutSetIncarnation incarnation) {
+    public void EffectInternalCreateLevelMutSet(int id, int incarnationVersion, LevelMutSetIncarnation incarnation) {
       var effect = new LevelMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsLevelMutSet
           .Add(
               id,
               new VersionAndIncarnation<LevelMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetLevelMutSetHash(id, incarnationVersion, incarnation);
       BroadcastLevelMutSetEffect(id, effect);
     }
     public void EffectLevelMutSetDelete(int id) {
@@ -8466,18 +8494,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new ShieldingUCWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateShieldingUCWeakMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetShieldingUCWeakMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateShieldingUCWeakMutSet(id, rootIncarnation.version, incarnation);
       return new ShieldingUCWeakMutSet(this, id);
     }
-    public void EffectInternalCreateShieldingUCWeakMutSet(int id, ShieldingUCWeakMutSetIncarnation incarnation) {
+    public void EffectInternalCreateShieldingUCWeakMutSet(int id, int incarnationVersion, ShieldingUCWeakMutSetIncarnation incarnation) {
       var effect = new ShieldingUCWeakMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsShieldingUCWeakMutSet
           .Add(
               id,
               new VersionAndIncarnation<ShieldingUCWeakMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetShieldingUCWeakMutSetHash(id, incarnationVersion, incarnation);
       BroadcastShieldingUCWeakMutSetEffect(id, effect);
     }
     public void EffectShieldingUCWeakMutSetDelete(int id) {
@@ -8614,18 +8642,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new AttackAICapabilityUCWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateAttackAICapabilityUCWeakMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetAttackAICapabilityUCWeakMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateAttackAICapabilityUCWeakMutSet(id, rootIncarnation.version, incarnation);
       return new AttackAICapabilityUCWeakMutSet(this, id);
     }
-    public void EffectInternalCreateAttackAICapabilityUCWeakMutSet(int id, AttackAICapabilityUCWeakMutSetIncarnation incarnation) {
+    public void EffectInternalCreateAttackAICapabilityUCWeakMutSet(int id, int incarnationVersion, AttackAICapabilityUCWeakMutSetIncarnation incarnation) {
       var effect = new AttackAICapabilityUCWeakMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet
           .Add(
               id,
               new VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetAttackAICapabilityUCWeakMutSetHash(id, incarnationVersion, incarnation);
       BroadcastAttackAICapabilityUCWeakMutSetEffect(id, effect);
     }
     public void EffectAttackAICapabilityUCWeakMutSetDelete(int id) {
@@ -8762,18 +8790,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new KillDirectiveUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateKillDirectiveUCMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetKillDirectiveUCMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateKillDirectiveUCMutSet(id, rootIncarnation.version, incarnation);
       return new KillDirectiveUCMutSet(this, id);
     }
-    public void EffectInternalCreateKillDirectiveUCMutSet(int id, KillDirectiveUCMutSetIncarnation incarnation) {
+    public void EffectInternalCreateKillDirectiveUCMutSet(int id, int incarnationVersion, KillDirectiveUCMutSetIncarnation incarnation) {
       var effect = new KillDirectiveUCMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsKillDirectiveUCMutSet
           .Add(
               id,
               new VersionAndIncarnation<KillDirectiveUCMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetKillDirectiveUCMutSetHash(id, incarnationVersion, incarnation);
       BroadcastKillDirectiveUCMutSetEffect(id, effect);
     }
     public void EffectKillDirectiveUCMutSetDelete(int id) {
@@ -8910,18 +8938,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new MoveDirectiveUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateMoveDirectiveUCMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetMoveDirectiveUCMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateMoveDirectiveUCMutSet(id, rootIncarnation.version, incarnation);
       return new MoveDirectiveUCMutSet(this, id);
     }
-    public void EffectInternalCreateMoveDirectiveUCMutSet(int id, MoveDirectiveUCMutSetIncarnation incarnation) {
+    public void EffectInternalCreateMoveDirectiveUCMutSet(int id, int incarnationVersion, MoveDirectiveUCMutSetIncarnation incarnation) {
       var effect = new MoveDirectiveUCMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsMoveDirectiveUCMutSet
           .Add(
               id,
               new VersionAndIncarnation<MoveDirectiveUCMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetMoveDirectiveUCMutSetHash(id, incarnationVersion, incarnation);
       BroadcastMoveDirectiveUCMutSetEffect(id, effect);
     }
     public void EffectMoveDirectiveUCMutSetDelete(int id) {
@@ -9058,18 +9086,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new WanderAICapabilityUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateWanderAICapabilityUCMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetWanderAICapabilityUCMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateWanderAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new WanderAICapabilityUCMutSet(this, id);
     }
-    public void EffectInternalCreateWanderAICapabilityUCMutSet(int id, WanderAICapabilityUCMutSetIncarnation incarnation) {
+    public void EffectInternalCreateWanderAICapabilityUCMutSet(int id, int incarnationVersion, WanderAICapabilityUCMutSetIncarnation incarnation) {
       var effect = new WanderAICapabilityUCMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsWanderAICapabilityUCMutSet
           .Add(
               id,
               new VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetWanderAICapabilityUCMutSetHash(id, incarnationVersion, incarnation);
       BroadcastWanderAICapabilityUCMutSetEffect(id, effect);
     }
     public void EffectWanderAICapabilityUCMutSetDelete(int id) {
@@ -9206,18 +9234,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new BideAICapabilityUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateBideAICapabilityUCMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetBideAICapabilityUCMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateBideAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new BideAICapabilityUCMutSet(this, id);
     }
-    public void EffectInternalCreateBideAICapabilityUCMutSet(int id, BideAICapabilityUCMutSetIncarnation incarnation) {
+    public void EffectInternalCreateBideAICapabilityUCMutSet(int id, int incarnationVersion, BideAICapabilityUCMutSetIncarnation incarnation) {
       var effect = new BideAICapabilityUCMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsBideAICapabilityUCMutSet
           .Add(
               id,
               new VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetBideAICapabilityUCMutSetHash(id, incarnationVersion, incarnation);
       BroadcastBideAICapabilityUCMutSetEffect(id, effect);
     }
     public void EffectBideAICapabilityUCMutSetDelete(int id) {
@@ -9354,18 +9382,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new AttackAICapabilityUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateAttackAICapabilityUCMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetAttackAICapabilityUCMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateAttackAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new AttackAICapabilityUCMutSet(this, id);
     }
-    public void EffectInternalCreateAttackAICapabilityUCMutSet(int id, AttackAICapabilityUCMutSetIncarnation incarnation) {
+    public void EffectInternalCreateAttackAICapabilityUCMutSet(int id, int incarnationVersion, AttackAICapabilityUCMutSetIncarnation incarnation) {
       var effect = new AttackAICapabilityUCMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsAttackAICapabilityUCMutSet
           .Add(
               id,
               new VersionAndIncarnation<AttackAICapabilityUCMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetAttackAICapabilityUCMutSetHash(id, incarnationVersion, incarnation);
       BroadcastAttackAICapabilityUCMutSetEffect(id, effect);
     }
     public void EffectAttackAICapabilityUCMutSetDelete(int id) {
@@ -9502,18 +9530,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new ShieldingUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateShieldingUCMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetShieldingUCMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateShieldingUCMutSet(id, rootIncarnation.version, incarnation);
       return new ShieldingUCMutSet(this, id);
     }
-    public void EffectInternalCreateShieldingUCMutSet(int id, ShieldingUCMutSetIncarnation incarnation) {
+    public void EffectInternalCreateShieldingUCMutSet(int id, int incarnationVersion, ShieldingUCMutSetIncarnation incarnation) {
       var effect = new ShieldingUCMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsShieldingUCMutSet
           .Add(
               id,
               new VersionAndIncarnation<ShieldingUCMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetShieldingUCMutSetHash(id, incarnationVersion, incarnation);
       BroadcastShieldingUCMutSetEffect(id, effect);
     }
     public void EffectShieldingUCMutSetDelete(int id) {
@@ -9650,18 +9678,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new BidingOperationUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateBidingOperationUCMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetBidingOperationUCMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateBidingOperationUCMutSet(id, rootIncarnation.version, incarnation);
       return new BidingOperationUCMutSet(this, id);
     }
-    public void EffectInternalCreateBidingOperationUCMutSet(int id, BidingOperationUCMutSetIncarnation incarnation) {
+    public void EffectInternalCreateBidingOperationUCMutSet(int id, int incarnationVersion, BidingOperationUCMutSetIncarnation incarnation) {
       var effect = new BidingOperationUCMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsBidingOperationUCMutSet
           .Add(
               id,
               new VersionAndIncarnation<BidingOperationUCMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetBidingOperationUCMutSetHash(id, incarnationVersion, incarnation);
       BroadcastBidingOperationUCMutSetEffect(id, effect);
     }
     public void EffectBidingOperationUCMutSetDelete(int id) {
@@ -9798,18 +9826,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new GlaiveMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateGlaiveMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetGlaiveMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateGlaiveMutSet(id, rootIncarnation.version, incarnation);
       return new GlaiveMutSet(this, id);
     }
-    public void EffectInternalCreateGlaiveMutSet(int id, GlaiveMutSetIncarnation incarnation) {
+    public void EffectInternalCreateGlaiveMutSet(int id, int incarnationVersion, GlaiveMutSetIncarnation incarnation) {
       var effect = new GlaiveMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsGlaiveMutSet
           .Add(
               id,
               new VersionAndIncarnation<GlaiveMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetGlaiveMutSetHash(id, incarnationVersion, incarnation);
       BroadcastGlaiveMutSetEffect(id, effect);
     }
     public void EffectGlaiveMutSetDelete(int id) {
@@ -9946,18 +9974,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new ArmorMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateArmorMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetArmorMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateArmorMutSet(id, rootIncarnation.version, incarnation);
       return new ArmorMutSet(this, id);
     }
-    public void EffectInternalCreateArmorMutSet(int id, ArmorMutSetIncarnation incarnation) {
+    public void EffectInternalCreateArmorMutSet(int id, int incarnationVersion, ArmorMutSetIncarnation incarnation) {
       var effect = new ArmorMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsArmorMutSet
           .Add(
               id,
               new VersionAndIncarnation<ArmorMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetArmorMutSetHash(id, incarnationVersion, incarnation);
       BroadcastArmorMutSetEffect(id, effect);
     }
     public void EffectArmorMutSetDelete(int id) {
@@ -10094,18 +10122,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new ItemTerrainTileComponentMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateItemTerrainTileComponentMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetItemTerrainTileComponentMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateItemTerrainTileComponentMutSet(id, rootIncarnation.version, incarnation);
       return new ItemTerrainTileComponentMutSet(this, id);
     }
-    public void EffectInternalCreateItemTerrainTileComponentMutSet(int id, ItemTerrainTileComponentMutSetIncarnation incarnation) {
+    public void EffectInternalCreateItemTerrainTileComponentMutSet(int id, int incarnationVersion, ItemTerrainTileComponentMutSetIncarnation incarnation) {
       var effect = new ItemTerrainTileComponentMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsItemTerrainTileComponentMutSet
           .Add(
               id,
               new VersionAndIncarnation<ItemTerrainTileComponentMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetItemTerrainTileComponentMutSetHash(id, incarnationVersion, incarnation);
       BroadcastItemTerrainTileComponentMutSetEffect(id, effect);
     }
     public void EffectItemTerrainTileComponentMutSetDelete(int id) {
@@ -10242,18 +10270,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new DecorativeTerrainTileComponentMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateDecorativeTerrainTileComponentMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetDecorativeTerrainTileComponentMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateDecorativeTerrainTileComponentMutSet(id, rootIncarnation.version, incarnation);
       return new DecorativeTerrainTileComponentMutSet(this, id);
     }
-    public void EffectInternalCreateDecorativeTerrainTileComponentMutSet(int id, DecorativeTerrainTileComponentMutSetIncarnation incarnation) {
+    public void EffectInternalCreateDecorativeTerrainTileComponentMutSet(int id, int incarnationVersion, DecorativeTerrainTileComponentMutSetIncarnation incarnation) {
       var effect = new DecorativeTerrainTileComponentMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsDecorativeTerrainTileComponentMutSet
           .Add(
               id,
               new VersionAndIncarnation<DecorativeTerrainTileComponentMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetDecorativeTerrainTileComponentMutSetHash(id, incarnationVersion, incarnation);
       BroadcastDecorativeTerrainTileComponentMutSetEffect(id, effect);
     }
     public void EffectDecorativeTerrainTileComponentMutSetDelete(int id) {
@@ -10390,18 +10418,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new UpStaircaseTerrainTileComponentMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateUpStaircaseTerrainTileComponentMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetUpStaircaseTerrainTileComponentMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateUpStaircaseTerrainTileComponentMutSet(id, rootIncarnation.version, incarnation);
       return new UpStaircaseTerrainTileComponentMutSet(this, id);
     }
-    public void EffectInternalCreateUpStaircaseTerrainTileComponentMutSet(int id, UpStaircaseTerrainTileComponentMutSetIncarnation incarnation) {
+    public void EffectInternalCreateUpStaircaseTerrainTileComponentMutSet(int id, int incarnationVersion, UpStaircaseTerrainTileComponentMutSetIncarnation incarnation) {
       var effect = new UpStaircaseTerrainTileComponentMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsUpStaircaseTerrainTileComponentMutSet
           .Add(
               id,
               new VersionAndIncarnation<UpStaircaseTerrainTileComponentMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetUpStaircaseTerrainTileComponentMutSetHash(id, incarnationVersion, incarnation);
       BroadcastUpStaircaseTerrainTileComponentMutSetEffect(id, effect);
     }
     public void EffectUpStaircaseTerrainTileComponentMutSetDelete(int id) {
@@ -10538,18 +10566,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new DownStaircaseTerrainTileComponentMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateDownStaircaseTerrainTileComponentMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetDownStaircaseTerrainTileComponentMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateDownStaircaseTerrainTileComponentMutSet(id, rootIncarnation.version, incarnation);
       return new DownStaircaseTerrainTileComponentMutSet(this, id);
     }
-    public void EffectInternalCreateDownStaircaseTerrainTileComponentMutSet(int id, DownStaircaseTerrainTileComponentMutSetIncarnation incarnation) {
+    public void EffectInternalCreateDownStaircaseTerrainTileComponentMutSet(int id, int incarnationVersion, DownStaircaseTerrainTileComponentMutSetIncarnation incarnation) {
       var effect = new DownStaircaseTerrainTileComponentMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsDownStaircaseTerrainTileComponentMutSet
           .Add(
               id,
               new VersionAndIncarnation<DownStaircaseTerrainTileComponentMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetDownStaircaseTerrainTileComponentMutSetHash(id, incarnationVersion, incarnation);
       BroadcastDownStaircaseTerrainTileComponentMutSetEffect(id, effect);
     }
     public void EffectDownStaircaseTerrainTileComponentMutSetDelete(int id) {
@@ -10686,18 +10714,18 @@ public class Root {
       CheckUnlocked();
       var id = NewId();
       var incarnation = new UnitMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateUnitMutSet(id, incarnation);
-      this.rootIncarnation.hash += GetUnitMutSetHash(id, rootIncarnation.version, incarnation);
+      EffectInternalCreateUnitMutSet(id, rootIncarnation.version, incarnation);
       return new UnitMutSet(this, id);
     }
-    public void EffectInternalCreateUnitMutSet(int id, UnitMutSetIncarnation incarnation) {
+    public void EffectInternalCreateUnitMutSet(int id, int incarnationVersion, UnitMutSetIncarnation incarnation) {
       var effect = new UnitMutSetCreateEffect(id, incarnation);
       rootIncarnation.incarnationsUnitMutSet
           .Add(
               id,
               new VersionAndIncarnation<UnitMutSetIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
+      this.rootIncarnation.hash += GetUnitMutSetHash(id, incarnationVersion, incarnation);
       BroadcastUnitMutSetEffect(id, effect);
     }
     public void EffectUnitMutSetDelete(int id) {
@@ -10835,20 +10863,21 @@ public class Root {
       var id = NewId();
       EffectInternalCreateTerrainTileByLocationMutMap(
           id,
+          rootIncarnation.version,
           new TerrainTileByLocationMutMapIncarnation(
               new SortedDictionary<Location, int>()));
       return new TerrainTileByLocationMutMap(this, id);
     }
        
-    public void EffectInternalCreateTerrainTileByLocationMutMap(int id, TerrainTileByLocationMutMapIncarnation incarnation) {
+    public void EffectInternalCreateTerrainTileByLocationMutMap(int id, int incarnationVersion, TerrainTileByLocationMutMapIncarnation incarnation) {
       var effect = new TerrainTileByLocationMutMapCreateEffect(id, incarnation);
       rootIncarnation.incarnationsTerrainTileByLocationMutMap
           .Add(
               id,
               new VersionAndIncarnation<TerrainTileByLocationMutMapIncarnation>(
-                  rootIncarnation.version,
+                  incarnationVersion,
                   incarnation));
-      this.rootIncarnation.hash += GetTerrainTileByLocationMutMapHash(id, rootIncarnation.version, incarnation);
+      this.rootIncarnation.hash += GetTerrainTileByLocationMutMapHash(id, incarnationVersion, incarnation);
       BroadcastTerrainTileByLocationMutMapEffect(id, effect);
     }
     public void EffectTerrainTileByLocationMutMapDelete(int id) {

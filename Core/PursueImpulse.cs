@@ -53,8 +53,5 @@ public class PursueImpulse {
          public int weight {
     get { return incarnation.weight; }
   }
-  public Location stepLocation {
-    get { return incarnation.stepLocation; }
-  }
 }
 }

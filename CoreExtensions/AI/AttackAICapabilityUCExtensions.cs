@@ -72,9 +72,7 @@ namespace Atharia.Model {
             return obj.root.EffectNoImpulseCreate().AsIImpulse();
           } else {
             // Can make the next step! Go for it!
-            return obj.root.EffectPursueImpulseCreate(
-                600,
-                directive.pathToLastSeenLocation[0]).AsIImpulse();
+            return obj.root.EffectPursueImpulseCreate(600).AsIImpulse();
           }
         }
       }

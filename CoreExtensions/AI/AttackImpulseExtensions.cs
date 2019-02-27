@@ -22,6 +22,13 @@ namespace Atharia.Model {
       var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
       Actions.Bump(game, liveUnitByLocationMap, unit, directive.targetUnit);
 
+      if (!directive.targetUnit.alive) {
+        // Glorious victory!
+        game.root.logger.Info("Destroyed enemy!");
+      //  unit.components.Remove(directive.AsIUnitComponent());
+      //  directive.Destruct();
+      }
+
       return new Atharia.Model.Void();
     }
 

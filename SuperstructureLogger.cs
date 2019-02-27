@@ -12,24 +12,19 @@ namespace IncendianFalls {
 
   public class ReplayLogger : ISuperstructureObserver {
     private Superstructure externalSS;
-    private Superstructure duplicateSS;
+    //private Superstructure duplicateSS;
     StreamWriter[] writers;
-    Replayer replayer;
 
     public ReplayLogger(Superstructure externalSS, string[] logFilenames) {
       this.externalSS = externalSS;
       externalSS.AddObserver(this);
-      duplicateSS = new Superstructure(new NullLogger());
-      replayer = new Replayer(duplicateSS);
       writers = new StreamWriter[logFilenames.Length];
       for (int i = 0; i < logFilenames.Length; i++) {
         writers[i] = new StreamWriter(logFilenames[i], false);
       }
     }
 
-    public void AfterRequest(IRequest request) {
-      replayer.Replay(request);
-    }
+    public void AfterRequest(IRequest request) { }
 
     public void BeforeRequest(IRequest request) {
       string str = request.DStr();
@@ -72,7 +67,7 @@ namespace IncendianFalls {
       string logFlareMessage = reader.ReadLine();
 
       if (inMemoryFlareMessage == logFlareMessage) {
-        Console.WriteLine("Agreeing flares: " + logFlareMessage + " == " + inMemoryFlareMessage);
+        //Console.WriteLine("Agreeing flares: " + logFlareMessage + " == " + inMemoryFlareMessage);
       } else {
         throw new Exception("Disagreeing flares! In memory flared " + inMemoryFlareMessage + " but log expected " + logFlareMessage);
       }
@@ -84,11 +79,11 @@ namespace IncendianFalls {
         Console.WriteLine("Reached end!");
         return false;
       }
-      Console.WriteLine("Read: " + line);
+      //Console.WriteLine("Read: " + line);
       ParseSource source = new ParseSource(line);
       var request = IRequestParser.Parse(source);
 
-      Console.WriteLine("Parsed: " + request.ToString());
+      Console.WriteLine("Parsed: " + request.DStr());
       Asserts.Assert(line.Trim() == request.DStr().Trim());
 
       // This will cause some flares

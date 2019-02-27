@@ -89,9 +89,6 @@ namespace IncendianFalls {
       var upStaircaseLocation = staircaseLocations[0];
       var downStaircaseLocation = staircaseLocations[1];
 
-      Console.WriteLine("placing up at " + upStaircaseLocation.DStr() + " and down at " + downStaircaseLocation.DStr());
-      context.root.logger.Info("placing up at " + upStaircaseLocation.DStr() + " and down at " + downStaircaseLocation.DStr());
-
       var upStaircaseTile = terrain.tiles[upStaircaseLocation];
       upStaircaseTile.components.Add(new UpStaircaseTerrainTileComponentAsITerrainTileComponent(context.root.EffectUpStaircaseTerrainTileComponentCreate()));
 

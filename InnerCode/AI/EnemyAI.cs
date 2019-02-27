@@ -22,6 +22,7 @@ namespace IncendianFalls {
           hayImpulse.Destruct();
         }
       }
+      game.root.logger.Info("Enacting impulse: " + strongestImpulse.ToString());
       strongestImpulse.Enact(unit, game);
       strongestImpulse.Destruct();
     }

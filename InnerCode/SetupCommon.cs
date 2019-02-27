@@ -115,7 +115,7 @@ namespace IncendianFalls {
               playerLocation,
               "chronomancer",
               90, 90,
-              40, 40,
+              100, 100,
               600,
               0,
               IUnitComponentMutBunch.New(context.root),
