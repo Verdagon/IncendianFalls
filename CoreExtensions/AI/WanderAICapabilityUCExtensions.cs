@@ -13,15 +13,14 @@ namespace Atharia.Model {
 
     public static IImpulse ProduceImpulse(
         this WanderAICapabilityUC obj,
-        Unit unit,
-        Game game) {
+        Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap,
+        Unit unit) {
 
       if (unit.GetDirectiveOrNull().Exists()) {
         // If there's a directive, we don't want to just be wandering.
         return obj.root.EffectNoImpulseCreate().AsIImpulse();
       } else {
-        var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
-
         var adjacentLocations =
             game.level.terrain.pattern.GetAdjacentLocations(
                 unit.location, game.level.considerCornersAdjacent);

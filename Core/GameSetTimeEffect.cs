@@ -20,5 +20,5 @@ public struct GameSetTimeEffect : IGameEffect {
     visitor.visitGameSetTimeEffect(this);
   }
 }
-           
+
 }

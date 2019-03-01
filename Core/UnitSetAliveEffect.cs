@@ -20,5 +20,5 @@ public struct UnitSetAliveEffect : IUnitEffect {
     visitor.visitUnitSetAliveEffect(this);
   }
 }
-           
+
 }

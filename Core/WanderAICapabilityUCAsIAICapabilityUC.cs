@@ -84,8 +84,8 @@ public class WanderAICapabilityUCAsIAICapabilityUC : IAICapabilityUC {
          public Void Destruct() {
     return WanderAICapabilityUCExtensions.Destruct(obj);
   }
-  public IImpulse ProduceImpulse(Unit unit, Game game) {
-    return WanderAICapabilityUCExtensions.ProduceImpulse(obj, unit, game);
+  public IImpulse ProduceImpulse(Game game, LiveUnitByLocationMap liveUnitByLocationMap, Unit unit) {
+    return WanderAICapabilityUCExtensions.ProduceImpulse(obj, game, liveUnitByLocationMap, unit);
   }
 
 }

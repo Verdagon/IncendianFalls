@@ -14,10 +14,13 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static Atharia.Model.Void Enact(this MoveImpulse obj, Unit unit, Game game) {
-      var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
+    public static bool Enact(
+        this MoveImpulse obj,
+        Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap,
+        Unit unit) {
       Actions.Step(game, liveUnitByLocationMap, unit, obj.stepLocation);
-      return new Atharia.Model.Void();
+      return false;
     }
   }
 }

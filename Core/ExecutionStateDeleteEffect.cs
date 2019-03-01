@@ -15,5 +15,5 @@ public struct ExecutionStateDeleteEffect : IExecutionStateEffect {
     visitor.visitExecutionStateDeleteEffect(this);
   }
 }
-       
+
 }

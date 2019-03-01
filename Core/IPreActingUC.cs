@@ -16,7 +16,7 @@ public interface IPreActingUC {
   bool NullableIs(IPreActingUC that);
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
-  Void PreAct(Game game, Unit unit);
+  bool PreAct(Game game, LiveUnitByLocationMap liveUnitByLocationMap, Unit unit);
   Void Destruct();
 }
 }

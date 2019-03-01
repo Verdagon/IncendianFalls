@@ -15,5 +15,5 @@ public struct DecorativeTerrainTileComponentDeleteEffect : IDecorativeTerrainTil
     visitor.visitDecorativeTerrainTileComponentDeleteEffect(this);
   }
 }
-       
+
 }

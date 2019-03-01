@@ -7,17 +7,13 @@ namespace Atharia.Model {
 
 public struct DownStaircaseTerrainTileComponentCreateEffect : IDownStaircaseTerrainTileComponentEffect {
   public readonly int id;
-  public readonly DownStaircaseTerrainTileComponentIncarnation incarnation;
-  public DownStaircaseTerrainTileComponentCreateEffect(
-      int id,
-      DownStaircaseTerrainTileComponentIncarnation incarnation) {
+  public DownStaircaseTerrainTileComponentCreateEffect(int id) {
     this.id = id;
-    this.incarnation = incarnation;
   }
   int IDownStaircaseTerrainTileComponentEffect.id => id;
   public void visit(IDownStaircaseTerrainTileComponentEffectVisitor visitor) {
     visitor.visitDownStaircaseTerrainTileComponentCreateEffect(this);
   }
 }
-       
+
 }

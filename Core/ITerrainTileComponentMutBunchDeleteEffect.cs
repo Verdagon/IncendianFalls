@@ -15,5 +15,5 @@ public struct ITerrainTileComponentMutBunchDeleteEffect : IITerrainTileComponent
     visitor.visitITerrainTileComponentMutBunchDeleteEffect(this);
   }
 }
-       
+
 }

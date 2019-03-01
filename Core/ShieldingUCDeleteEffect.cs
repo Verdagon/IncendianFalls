@@ -15,5 +15,5 @@ public struct ShieldingUCDeleteEffect : IShieldingUCEffect {
     visitor.visitShieldingUCDeleteEffect(this);
   }
 }
-       
+
 }

@@ -20,5 +20,5 @@ public struct GameSetPlayerEffect : IGameEffect {
     visitor.visitGameSetPlayerEffect(this);
   }
 }
-           
+
 }

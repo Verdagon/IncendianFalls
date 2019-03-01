@@ -15,5 +15,5 @@ public struct AttackImpulseDeleteEffect : IAttackImpulseEffect {
     visitor.visitAttackImpulseDeleteEffect(this);
   }
 }
-       
+
 }

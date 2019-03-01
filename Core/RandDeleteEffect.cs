@@ -15,5 +15,5 @@ public struct RandDeleteEffect : IRandEffect {
     visitor.visitRandDeleteEffect(this);
   }
 }
-       
+
 }

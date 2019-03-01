@@ -560,15 +560,10 @@ public class IUnitComponentMutBunch {
     }
                  public List<IPostActingUC> GetAllIPostActingUC() {
       var result = new List<IPostActingUC>();
-      foreach (var obj in this.membersShieldingUCMutSet) {
-        result.Add(
-            new ShieldingUCAsIPostActingUC(obj));
-      }
       return result;
     }
     public List<IPostActingUC> ClearAllIPostActingUC() {
       var result = new List<IPostActingUC>();
-      this.membersShieldingUCMutSet.Clear();
       return result;
     }
     public IPostActingUC GetOnlyIPostActingUCOrNull() {

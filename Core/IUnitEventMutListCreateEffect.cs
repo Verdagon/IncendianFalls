@@ -7,12 +7,8 @@ namespace Atharia.Model {
 
 public struct IUnitEventMutListCreateEffect : IIUnitEventMutListEffect {
   public readonly int id;
-  public readonly IUnitEventMutListIncarnation incarnation;
-  public IUnitEventMutListCreateEffect(
-      int id,
-      IUnitEventMutListIncarnation incarnation) {
+  public IUnitEventMutListCreateEffect(int id) {
     this.id = id;
-    this.incarnation = incarnation;
   }
   int IIUnitEventMutListEffect.id => id;
   public void visit(IIUnitEventMutListEffectVisitor visitor) {

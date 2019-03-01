@@ -6,12 +6,8 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct KillDirectiveUCMutSetCreateEffect : IKillDirectiveUCMutSetEffect {
   public readonly int id;
-  public readonly KillDirectiveUCMutSetIncarnation incarnation;
-  public KillDirectiveUCMutSetCreateEffect(
-      int id,
-      KillDirectiveUCMutSetIncarnation incarnation) {
+  public KillDirectiveUCMutSetCreateEffect(int id) {
     this.id = id;
-    this.incarnation = incarnation;
   }
   int IKillDirectiveUCMutSetEffect.id => id;
   public void visit(IKillDirectiveUCMutSetEffectVisitor visitor) {

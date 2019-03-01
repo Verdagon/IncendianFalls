@@ -15,5 +15,5 @@ public struct AttackAICapabilityUCDeleteEffect : IAttackAICapabilityUCEffect {
     visitor.visitAttackAICapabilityUCDeleteEffect(this);
   }
 }
-       
+
 }

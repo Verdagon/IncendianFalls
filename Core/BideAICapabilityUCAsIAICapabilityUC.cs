@@ -84,8 +84,8 @@ public class BideAICapabilityUCAsIAICapabilityUC : IAICapabilityUC {
          public Void Destruct() {
     return BideAICapabilityUCExtensions.Destruct(obj);
   }
-  public IImpulse ProduceImpulse(Unit unit, Game game) {
-    return BideAICapabilityUCExtensions.ProduceImpulse(obj, unit, game);
+  public IImpulse ProduceImpulse(Game game, LiveUnitByLocationMap liveUnitByLocationMap, Unit unit) {
+    return BideAICapabilityUCExtensions.ProduceImpulse(obj, game, liveUnitByLocationMap, unit);
   }
 
 }

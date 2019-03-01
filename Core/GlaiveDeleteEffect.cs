@@ -15,5 +15,5 @@ public struct GlaiveDeleteEffect : IGlaiveEffect {
     visitor.visitGlaiveDeleteEffect(this);
   }
 }
-       
+
 }

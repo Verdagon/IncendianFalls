@@ -15,5 +15,5 @@ public struct GameDeleteEffect : IGameEffect {
     visitor.visitGameDeleteEffect(this);
   }
 }
-       
+
 }

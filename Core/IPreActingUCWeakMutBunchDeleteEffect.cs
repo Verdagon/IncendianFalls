@@ -15,5 +15,5 @@ public struct IPreActingUCWeakMutBunchDeleteEffect : IIPreActingUCWeakMutBunchEf
     visitor.visitIPreActingUCWeakMutBunchDeleteEffect(this);
   }
 }
-       
+
 }

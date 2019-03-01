@@ -13,10 +13,14 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static Atharia.Model.Void Enact(this StartBidingImpulse obj, Unit unit, Game game) {
+    public static bool Enact(
+        this StartBidingImpulse obj,
+        Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap,
+        Unit unit) {
       unit.ReplaceOperation(obj.root.EffectBidingOperationUCCreate().AsIOperationUC());
       unit.nextActionTime = unit.nextActionTime + unit.inertia;
-      return new Atharia.Model.Void();
+      return false;
     }
   }
 }

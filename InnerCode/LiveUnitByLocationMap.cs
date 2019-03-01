@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Atharia.Model;
 
-namespace IncendianFalls {
+namespace Atharia.Model {
   public class LiveUnitByLocationMap {
     SortedDictionary<Location, Unit> liveUnitByLocation;
 

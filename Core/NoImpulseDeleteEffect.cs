@@ -15,5 +15,5 @@ public struct NoImpulseDeleteEffect : INoImpulseEffect {
     visitor.visitNoImpulseDeleteEffect(this);
   }
 }
-       
+
 }

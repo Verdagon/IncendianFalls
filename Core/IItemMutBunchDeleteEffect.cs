@@ -15,5 +15,5 @@ public struct IItemMutBunchDeleteEffect : IIItemMutBunchEffect {
     visitor.visitIItemMutBunchDeleteEffect(this);
   }
 }
-       
+
 }

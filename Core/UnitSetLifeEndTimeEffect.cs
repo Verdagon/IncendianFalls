@@ -20,5 +20,5 @@ public struct UnitSetLifeEndTimeEffect : IUnitEffect {
     visitor.visitUnitSetLifeEndTimeEffect(this);
   }
 }
-           
+
 }

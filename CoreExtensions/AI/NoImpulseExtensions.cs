@@ -14,9 +14,13 @@ namespace Atharia.Model {
       return 0;
     }
 
-    public static Atharia.Model.Void Enact(this NoImpulse obj, Unit unit, Game game) {
+    public static bool Enact(
+        this NoImpulse obj,
+        Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap, 
+        Unit unit) {
       unit.nextActionTime = unit.nextActionTime + unit.inertia / 2;
-      return new Atharia.Model.Void();
+      return false;
     }
   }
 }

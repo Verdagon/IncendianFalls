@@ -15,5 +15,5 @@ public struct IUnitComponentMutBunchDeleteEffect : IIUnitComponentMutBunchEffect
     visitor.visitIUnitComponentMutBunchDeleteEffect(this);
   }
 }
-       
+
 }

@@ -15,5 +15,5 @@ public struct LevelDeleteEffect : ILevelEffect {
     visitor.visitLevelDeleteEffect(this);
   }
 }
-       
+
 }

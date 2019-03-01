@@ -105,8 +105,8 @@ public class AttackAICapabilityUCAsIAICapabilityUC : IAICapabilityUC {
          public Void Destruct() {
     return AttackAICapabilityUCExtensions.Destruct(obj);
   }
-  public IImpulse ProduceImpulse(Unit unit, Game game) {
-    return AttackAICapabilityUCExtensions.ProduceImpulse(obj, unit, game);
+  public IImpulse ProduceImpulse(Game game, LiveUnitByLocationMap liveUnitByLocationMap, Unit unit) {
+    return AttackAICapabilityUCExtensions.ProduceImpulse(obj, game, liveUnitByLocationMap, unit);
   }
 
 }

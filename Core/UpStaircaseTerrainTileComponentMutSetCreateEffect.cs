@@ -6,12 +6,8 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct UpStaircaseTerrainTileComponentMutSetCreateEffect : IUpStaircaseTerrainTileComponentMutSetEffect {
   public readonly int id;
-  public readonly UpStaircaseTerrainTileComponentMutSetIncarnation incarnation;
-  public UpStaircaseTerrainTileComponentMutSetCreateEffect(
-      int id,
-      UpStaircaseTerrainTileComponentMutSetIncarnation incarnation) {
+  public UpStaircaseTerrainTileComponentMutSetCreateEffect(int id) {
     this.id = id;
-    this.incarnation = incarnation;
   }
   int IUpStaircaseTerrainTileComponentMutSetEffect.id => id;
   public void visit(IUpStaircaseTerrainTileComponentMutSetEffectVisitor visitor) {

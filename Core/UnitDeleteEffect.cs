@@ -15,5 +15,5 @@ public struct UnitDeleteEffect : IUnitEffect {
     visitor.visitUnitDeleteEffect(this);
   }
 }
-       
+
 }

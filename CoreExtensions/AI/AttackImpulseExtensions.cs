@@ -15,11 +15,14 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static Atharia.Model.Void Enact(this AttackImpulse obj, Unit unit, Game game) {
+    public static bool Enact(
+        this AttackImpulse obj,
+        Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap, 
+        Unit unit) {
       var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
       Asserts.Assert(directive.Exists());
 
-      var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
       Actions.Bump(game, liveUnitByLocationMap, unit, directive.targetUnit);
 
       if (!directive.targetUnit.alive) {
@@ -29,7 +32,7 @@ namespace Atharia.Model {
       //  directive.Destruct();
       }
 
-      return new Atharia.Model.Void();
+      return true;
     }
 
     //private static void AttackTo(

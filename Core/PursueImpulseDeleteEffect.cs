@@ -15,5 +15,5 @@ public struct PursueImpulseDeleteEffect : IPursueImpulseEffect {
     visitor.visitPursueImpulseDeleteEffect(this);
   }
 }
-       
+
 }

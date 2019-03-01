@@ -20,5 +20,5 @@ public struct ExecutionStateSetActingUnitDidActionEffect : IExecutionStateEffect
     visitor.visitExecutionStateSetActingUnitDidActionEffect(this);
   }
 }
-           
+
 }

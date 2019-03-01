@@ -15,5 +15,5 @@ public struct StartBidingImpulseDeleteEffect : IStartBidingImpulseEffect {
     visitor.visitStartBidingImpulseDeleteEffect(this);
   }
 }
-       
+
 }

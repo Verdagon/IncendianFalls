@@ -15,5 +15,5 @@ public struct UnleashBideImpulseDeleteEffect : IUnleashBideImpulseEffect {
     visitor.visitUnleashBideImpulseDeleteEffect(this);
   }
 }
-       
+
 }

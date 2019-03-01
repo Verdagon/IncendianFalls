@@ -5,11 +5,7 @@ using Atharia.Model;
 namespace IncendianFalls {
   public static class SetupGameRequestExecutor {
     public static Game Execute(SSContext context, int randomSeed, bool squareLevelsOnly) {
-      context.root.GetDeterministicHashCode();
-
       var rand = context.root.EffectRandCreate(randomSeed);
-
-      context.root.GetDeterministicHashCode();
 
       var firstLevel =
           MakeLevel.MakeNextLevel(
@@ -19,22 +15,12 @@ namespace IncendianFalls {
               squareLevelsOnly,
               "Ridge");
 
-      context.root.GetDeterministicHashCode();
-
       var walkableLocations = new WalkableLocations(firstLevel.terrain, firstLevel.units);
-
-      context.root.GetDeterministicHashCode();
 
       var player = SetupCommon.MakePlayer(context, rand, firstLevel.units, walkableLocations);
 
-      context.root.GetDeterministicHashCode();
-
       var levels = context.root.EffectLevelMutSetCreate();
-      context.root.GetDeterministicHashCode();
-
       levels.Add(firstLevel);
-
-      context.root.GetDeterministicHashCode();
 
       var game =
           context.root.EffectGameCreate(
@@ -45,8 +31,6 @@ namespace IncendianFalls {
               firstLevel,
               0,
               context.root.EffectExecutionStateCreate(Unit.Null, false, IPreActingUCWeakMutBunch.Null, IPostActingUCWeakMutBunch.Null));
-
-      context.root.GetDeterministicHashCode();
 
       return game;
     }

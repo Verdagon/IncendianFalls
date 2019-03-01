@@ -20,5 +20,5 @@ public struct GameSetLevelEffect : IGameEffect {
     visitor.visitGameSetLevelEffect(this);
   }
 }
-           
+
 }

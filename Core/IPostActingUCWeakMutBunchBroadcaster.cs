@@ -4,18 +4,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IPostActingUCWeakMutBunchBroadcaster:IShieldingUCWeakMutSetEffectObserver, IShieldingUCWeakMutSetEffectVisitor {
+public class IPostActingUCWeakMutBunchBroadcaster {
   IPostActingUCWeakMutBunch bunch;
   private List<IIPostActingUCWeakMutBunchObserver> observers;
 
   public IPostActingUCWeakMutBunchBroadcaster(IPostActingUCWeakMutBunch bunch) {
     this.bunch = bunch;
     this.observers = new List<IIPostActingUCWeakMutBunchObserver>();
-    bunch.membersShieldingUCWeakMutSet.AddObserver(this);
 
   }
   public void Stop() {
-    bunch.membersShieldingUCWeakMutSet.RemoveObserver(this);
 
   }
   public void AddObserver(IIPostActingUCWeakMutBunchObserver observer) {
@@ -34,17 +32,6 @@ public class IPostActingUCWeakMutBunchBroadcaster:IShieldingUCWeakMutSetEffectOb
       observer.OnIPostActingUCWeakMutBunchRemove(id);
     }
   }
-  public void OnShieldingUCWeakMutSetEffect(IShieldingUCWeakMutSetEffect effect) {
-    effect.visit(this);
-  }
-  public void visitShieldingUCWeakMutSetAddEffect(ShieldingUCWeakMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
-  }
-  public void visitShieldingUCWeakMutSetRemoveEffect(ShieldingUCWeakMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
-  }
-  public void visitShieldingUCWeakMutSetCreateEffect(ShieldingUCWeakMutSetCreateEffect effect) { }
-  public void visitShieldingUCWeakMutSetDeleteEffect(ShieldingUCWeakMutSetDeleteEffect effect) { }
 
 }
        

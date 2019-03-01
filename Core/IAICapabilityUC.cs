@@ -16,7 +16,7 @@ public interface IAICapabilityUC {
   bool NullableIs(IAICapabilityUC that);
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
-  IImpulse ProduceImpulse(Unit unit, Game game);
+  IImpulse ProduceImpulse(Game game, LiveUnitByLocationMap liveUnitByLocationMap, Unit unit);
   Void Destruct();
 }
 }

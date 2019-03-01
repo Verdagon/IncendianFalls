@@ -15,5 +15,5 @@ public struct UpStaircaseTerrainTileComponentDeleteEffect : IUpStaircaseTerrainT
     visitor.visitUpStaircaseTerrainTileComponentDeleteEffect(this);
   }
 }
-       
+
 }

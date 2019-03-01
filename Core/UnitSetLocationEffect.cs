@@ -20,5 +20,5 @@ public struct UnitSetLocationEffect : IUnitEffect {
     visitor.visitUnitSetLocationEffect(this);
   }
 }
-           
+
 }

@@ -20,5 +20,5 @@ public struct TerrainTileSetElevationEffect : ITerrainTileEffect {
     visitor.visitTerrainTileSetElevationEffect(this);
   }
 }
-           
+
 }

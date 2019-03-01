@@ -11,12 +11,11 @@ namespace Atharia.Model {
       return new Atharia.Model.Void();
     }
 
-    public static Atharia.Model.Void PreAct(
+    public static bool PreAct(
         this AttackAICapabilityUC obj,
         Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap,
         Unit unit) {
-      var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
-
       var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
       if (directive.Exists() && (!directive.targetUnit.Exists() || !directive.targetUnit.alive)) {
         // Target died, and/or was deleted. Stop targeting.
@@ -39,19 +38,18 @@ namespace Atharia.Model {
         Asserts.Assert(directive.Exists());
         unit.ReplaceDirective(directive.AsIDirectiveUC());
         Asserts.Assert(unit.GetDirectiveOrNull().Exists());
-        return new Atharia.Model.Void();
+        return false;
       } else {
         // Can't see the player. Don't update directive.
-        return new Atharia.Model.Void();
+        return false;
       }
     }
 
     public static IImpulse ProduceImpulse(
         this AttackAICapabilityUC obj,
-        Unit unit,
-        Game game) {
-
-      var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
+        Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap,
+        Unit unit) {
 
       // We only attack if we have a directive.
       var directive = unit.components.GetOnlyKillDirectiveUCOrNull();

@@ -20,5 +20,5 @@ public struct UnitSetHpEffect : IUnitEffect {
     visitor.visitUnitSetHpEffect(this);
   }
 }
-           
+
 }

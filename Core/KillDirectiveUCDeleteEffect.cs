@@ -15,5 +15,5 @@ public struct KillDirectiveUCDeleteEffect : IKillDirectiveUCEffect {
     visitor.visitKillDirectiveUCDeleteEffect(this);
   }
 }
-       
+
 }

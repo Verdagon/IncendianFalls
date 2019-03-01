@@ -20,5 +20,5 @@ public struct TerrainSetPatternEffect : ITerrainEffect {
     visitor.visitTerrainSetPatternEffect(this);
   }
 }
-           
+
 }

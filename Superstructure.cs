@@ -83,6 +83,9 @@ namespace IncendianFalls {
     }
 
     public Game RequestSetupGame(int randomSeed, bool squareLevelsOnly) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
       root.Unlock();
       //var rollbackPoint = root.Snapshot();
       try {
@@ -100,10 +103,17 @@ namespace IncendianFalls {
       //  throw;
       } finally {
         root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
     public bool RequestInteract(int gameId) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
       root.Unlock();
       //var rollbackPoint = root.Snapshot();
       try {
@@ -121,10 +131,17 @@ namespace IncendianFalls {
       //  throw;
       } finally {
         root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
     public bool RequestMove(int gameId, Location newLocation) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
       root.Unlock();
       //var rollbackPoint = root.Snapshot();
       try {
@@ -142,10 +159,17 @@ namespace IncendianFalls {
       //  throw;
       } finally {
         root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
     public bool RequestAttack(int gameId, int targetUnitId) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
       root.Unlock();
       //var rollbackPoint = root.Snapshot();
       try {
@@ -163,6 +187,10 @@ namespace IncendianFalls {
       //  throw;
       } finally {
         root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
@@ -170,6 +198,9 @@ namespace IncendianFalls {
         int gameId,
         RootIncarnation pastIncarnation,
         int futuremostTime) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
       root.Unlock();
       //var rollbackPoint = root.Snapshot();
       try {
@@ -187,10 +218,17 @@ namespace IncendianFalls {
       //  throw;
       } finally {
         root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
     public bool RequestDefend(int gameId) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
       root.Unlock();
       //var rollbackPoint = root.Snapshot();
       try {
@@ -208,10 +246,17 @@ namespace IncendianFalls {
       //  throw;
       } finally {
         root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
     public bool RequestFollowDirective(int gameId) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
       root.Unlock();
       //var rollbackPoint = root.Snapshot();
       try {
@@ -229,10 +274,18 @@ namespace IncendianFalls {
       //  throw;
       } finally {
         root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
     public bool RequestResume(int gameId) {
+
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
       root.Unlock();
       //var rollbackPoint = root.Snapshot();
       try {
@@ -250,6 +303,10 @@ namespace IncendianFalls {
       //  throw;
       } finally {
         root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
@@ -263,6 +320,7 @@ namespace IncendianFalls {
       broadcastAfterRequest(new SnapshotRequestAsIRequest(request));
       context.Flare(GetDeterministicHashCode());
       root.Lock();
+      root.FlushEvents();
       return snapshot;
     }
 

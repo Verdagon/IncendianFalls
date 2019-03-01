@@ -105,8 +105,8 @@ public class AttackAICapabilityUCAsIPreActingUC : IPreActingUC {
          public Void Destruct() {
     return AttackAICapabilityUCExtensions.Destruct(obj);
   }
-  public Void PreAct(Game game, Unit unit) {
-    return AttackAICapabilityUCExtensions.PreAct(obj, game, unit);
+  public bool PreAct(Game game, LiveUnitByLocationMap liveUnitByLocationMap, Unit unit) {
+    return AttackAICapabilityUCExtensions.PreAct(obj, game, liveUnitByLocationMap, unit);
   }
 
 }

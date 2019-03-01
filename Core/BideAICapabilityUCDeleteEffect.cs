@@ -15,5 +15,5 @@ public struct BideAICapabilityUCDeleteEffect : IBideAICapabilityUCEffect {
     visitor.visitBideAICapabilityUCDeleteEffect(this);
   }
 }
-       
+
 }

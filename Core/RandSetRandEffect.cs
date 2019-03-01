@@ -20,5 +20,5 @@ public struct RandSetRandEffect : IRandEffect {
     visitor.visitRandSetRandEffect(this);
   }
 }
-           
+
 }

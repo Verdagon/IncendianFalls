@@ -11,8 +11,9 @@ namespace Atharia.Model {
 
     public static IImpulse ProduceImpulse(
         this BideAICapabilityUC obj,
-        Unit unit,
-        Game game) {
+        Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap,
+        Unit unit) {
       var bidingOperation = unit.components.GetOnlyBidingOperationUCOrNull();
       if (bidingOperation.Exists()) {
         return obj.root.EffectUnleashBideImpulseCreate(800).AsIImpulse();

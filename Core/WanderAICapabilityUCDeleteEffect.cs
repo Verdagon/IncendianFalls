@@ -15,5 +15,5 @@ public struct WanderAICapabilityUCDeleteEffect : IWanderAICapabilityUCEffect {
     visitor.visitWanderAICapabilityUCDeleteEffect(this);
   }
 }
-       
+
 }

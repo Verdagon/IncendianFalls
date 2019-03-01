@@ -66,8 +66,8 @@ public class PursueImpulseAsIImpulse : IImpulse {
   public int GetWeight() {
     return PursueImpulseExtensions.GetWeight(obj);
   }
-  public Void Enact(Unit unit, Game game) {
-    return PursueImpulseExtensions.Enact(obj, unit, game);
+  public bool Enact(Game game, LiveUnitByLocationMap liveUnitByLocationMap, Unit unit) {
+    return PursueImpulseExtensions.Enact(obj, game, liveUnitByLocationMap, unit);
   }
 
 }

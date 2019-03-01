@@ -15,5 +15,5 @@ public struct MoveDirectiveUCDeleteEffect : IMoveDirectiveUCEffect {
     visitor.visitMoveDirectiveUCDeleteEffect(this);
   }
 }
-       
+
 }

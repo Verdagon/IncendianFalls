@@ -20,11 +20,23 @@ namespace IncendianFalls {
         // Caller should check before calling us.
         throw new Exception("No units!");
       }
-      var unitsOrderedByNextActionTime = new SortedDictionary<Unit, object>(new LowerNextActionTimeComparer());
-      foreach (var u in game.level.units) {
-        unitsOrderedByNextActionTime.Add(u, new object());
+      Unit nextActingUnit = Unit.Null;
+      foreach (var firstUnit in game.level.units) {
+        nextActingUnit = firstUnit;
+        break;
       }
-      return DictionaryUtils.GetFirstKey(unitsOrderedByNextActionTime);
+      foreach (var unit in game.level.units) {
+        if (unit.nextActionTime < nextActingUnit.nextActionTime) {
+          nextActingUnit = unit;
+        }
+      }
+      return nextActingUnit;
+
+      //var unitsOrderedByNextActionTime = new SortedDictionary<Unit, object>(new LowerNextActionTimeComparer());
+      //foreach (var u in game.level.units) {
+      //  unitsOrderedByNextActionTime.Add(u, new object());
+      //}
+      //return DictionaryUtils.GetFirstKey(unitsOrderedByNextActionTime);
     }
   }
 }

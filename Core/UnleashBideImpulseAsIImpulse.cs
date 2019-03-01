@@ -66,8 +66,8 @@ public class UnleashBideImpulseAsIImpulse : IImpulse {
   public int GetWeight() {
     return UnleashBideImpulseExtensions.GetWeight(obj);
   }
-  public Void Enact(Unit unit, Game game) {
-    return UnleashBideImpulseExtensions.Enact(obj, unit, game);
+  public bool Enact(Game game, LiveUnitByLocationMap liveUnitByLocationMap, Unit unit) {
+    return UnleashBideImpulseExtensions.Enact(obj, game, liveUnitByLocationMap, unit);
   }
 
 }

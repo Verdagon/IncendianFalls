@@ -43,7 +43,7 @@ public class NullIAICapabilityUC : IAICapabilityUC {
     return NullIUnitComponent.Null;
   }
 
-  public IImpulse ProduceImpulse(Unit unit, Game game) {
+  public IImpulse ProduceImpulse(Game game, LiveUnitByLocationMap liveUnitByLocationMap, Unit unit) {
     throw new Exception("Called ProduceImpulse on a null!");
   }
              

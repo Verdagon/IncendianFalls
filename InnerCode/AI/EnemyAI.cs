@@ -5,7 +5,8 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class EnemyAI {
-    public static void AI(
+    // Returns true if we should return
+    public static bool AI(
         Game game,
         LiveUnitByLocationMap liveUnitByLocationMap,
         Unit unit) {
@@ -14,7 +15,7 @@ namespace IncendianFalls {
 
       IImpulse strongestImpulse = game.root.EffectNoImpulseCreate().AsIImpulse();
       foreach (var capability in unit.components.GetAllIAICapabilityUC()) {
-        var hayImpulse = capability.ProduceImpulse(unit, game);
+        var hayImpulse = capability.ProduceImpulse(game, liveUnitByLocationMap, unit);
         if (hayImpulse.GetWeight() > strongestImpulse.GetWeight()) {
           strongestImpulse.Destruct();
           strongestImpulse = hayImpulse;
@@ -22,9 +23,10 @@ namespace IncendianFalls {
           hayImpulse.Destruct();
         }
       }
-      game.root.logger.Info("Enacting impulse: " + strongestImpulse.ToString());
-      strongestImpulse.Enact(unit, game);
+      // game.root.logger.Info("Enacting impulse: " + strongestImpulse.ToString());
+      bool ret = strongestImpulse.Enact(game, liveUnitByLocationMap, unit);
       strongestImpulse.Destruct();
+      return ret;
     }
   }
 }

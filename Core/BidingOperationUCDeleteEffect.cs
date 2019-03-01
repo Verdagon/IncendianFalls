@@ -15,5 +15,5 @@ public struct BidingOperationUCDeleteEffect : IBidingOperationUCEffect {
     visitor.visitBidingOperationUCDeleteEffect(this);
   }
 }
-       
+
 }

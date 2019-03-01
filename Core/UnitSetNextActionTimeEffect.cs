@@ -20,5 +20,5 @@ public struct UnitSetNextActionTimeEffect : IUnitEffect {
     visitor.visitUnitSetNextActionTimeEffect(this);
   }
 }
-           
+
 }

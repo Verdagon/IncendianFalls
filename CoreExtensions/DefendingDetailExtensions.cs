@@ -14,13 +14,14 @@ namespace Atharia.Model {
       detail.root.logger.Info("Defend:" + damage + "->" + newDamage);
       return newDamage;
     }
-    public static Atharia.Model.Void PreAct(this Atharia.Model.ShieldingUC detail, Game game, Unit unit) {
+    public static bool PreAct(
+        this Atharia.Model.ShieldingUC detail,
+        Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap,
+        Unit unit) {
       unit.components.Remove(detail.AsIUnitComponent());
       detail.Destruct();
-      return new Atharia.Model.Void();
-    }
-    public static Atharia.Model.Void PostAct(this Atharia.Model.ShieldingUC detail, Unit unit) {
-      return new Atharia.Model.Void();
+      return true;
     }
   }
 }

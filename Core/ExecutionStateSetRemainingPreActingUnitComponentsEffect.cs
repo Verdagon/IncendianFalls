@@ -20,5 +20,5 @@ public struct ExecutionStateSetRemainingPreActingUnitComponentsEffect : IExecuti
     visitor.visitExecutionStateSetRemainingPreActingUnitComponentsEffect(this);
   }
 }
-           
+
 }

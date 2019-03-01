@@ -16,7 +16,7 @@ public interface IPostActingUC {
   bool NullableIs(IPostActingUC that);
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
-  Void PostAct(Unit unit);
+  bool PostAct(Unit unit);
   Void Destruct();
 }
 }

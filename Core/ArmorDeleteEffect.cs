@@ -15,5 +15,5 @@ public struct ArmorDeleteEffect : IArmorEffect {
     visitor.visitArmorDeleteEffect(this);
   }
 }
-       
+
 }

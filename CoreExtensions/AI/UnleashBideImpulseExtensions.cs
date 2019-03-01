@@ -14,9 +14,11 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static Atharia.Model.Void Enact(this UnleashBideImpulse obj, Unit actingUnit, Game game) {
-      var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
-
+    public static bool Enact(
+        this UnleashBideImpulse obj,
+        Game game,
+        LiveUnitByLocationMap liveUnitByLocationMap,
+        Unit actingUnit) {
       List<Unit> victims = new List<Unit>();
       foreach (var otherUnit in game.level.units) {
         if (otherUnit.Is(actingUnit)) {
@@ -44,7 +46,7 @@ namespace Atharia.Model {
 
       actingUnit.ClearOperation();
 
-      return new Atharia.Model.Void();
+      return true;
     }
   }
 }

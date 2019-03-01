@@ -15,5 +15,5 @@ public struct MoveImpulseDeleteEffect : IMoveImpulseEffect {
     visitor.visitMoveImpulseDeleteEffect(this);
   }
 }
-       
+
 }

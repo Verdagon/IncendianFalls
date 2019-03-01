@@ -16,7 +16,7 @@ public interface IImpulse {
   bool NullableIs(IImpulse that);
   IDestructible AsIDestructible();
   int GetWeight();
-  Void Enact(Unit unit, Game game);
+  bool Enact(Game game, LiveUnitByLocationMap liveUnitByLocationMap, Unit unit);
   Void Destruct();
 }
 }

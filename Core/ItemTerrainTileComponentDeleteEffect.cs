@@ -15,5 +15,5 @@ public struct ItemTerrainTileComponentDeleteEffect : IItemTerrainTileComponentEf
     visitor.visitItemTerrainTileComponentDeleteEffect(this);
   }
 }
-       
+
 }

@@ -7,7 +7,7 @@ namespace IncendianFalls {
     public static bool Execute(SSContext context, int gameId) {
       var game = context.root.GetGame(gameId);
 
-      var liveUnitByLocationMap = PreRequest.Do(game);
+      LiveUnitByLocationMap liveUnitByLocationMap = PreRequest.Do(game);
 
       switch (game.GetExecutionStateType()) {
         case GameExecutionStateType.kBetweenUnits:

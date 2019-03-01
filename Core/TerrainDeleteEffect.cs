@@ -15,5 +15,5 @@ public struct TerrainDeleteEffect : ITerrainEffect {
     visitor.visitTerrainDeleteEffect(this);
   }
 }
-       
+
 }
