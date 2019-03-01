@@ -19,8 +19,7 @@ namespace Atharia.Model {
       var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
       if (directive.Exists() && (!directive.targetUnit.Exists() || !directive.targetUnit.alive)) {
         // Target died, and/or was deleted. Stop targeting.
-        unit.components.Remove(directive.AsIUnitComponent());
-        directive.Destruct();
+        unit.ClearDirective();
       }
 
       // Remember, if we get here, we might still have an existing valid directive.

@@ -4,13 +4,17 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class MoveRequestExecutor {
-    public static bool Execute(SSContext context, int gameId, Location destination) {
+    public static bool Execute(
+        SSContext context,
+        int gameId,
+        LiveUnitByLocationMap liveUnitByLocationMap,
+        Location destination) {
       var game = context.root.GetGame(gameId);
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
 
-      var liveUnitByLocationMap = PreRequest.Do(game);
+      PreRequest.Do(game);
 
       var player = game.player;
 
@@ -21,9 +25,7 @@ namespace IncendianFalls {
         throw new Exception("Player isn't the next acting unit!");
       }
 
-      if (player.GetDirectiveOrNull().Exists()) {
-        player.GetDirectiveOrNull().Destruct();
-      }
+      player.ClearDirective();
 
       if (destination == player.location) {
         context.logger.Error("Already there!");
@@ -39,6 +41,7 @@ namespace IncendianFalls {
       var path = context.root.EffectLocationMutListCreate(steps);
       var directive = context.root.EffectMoveDirectiveUCCreate(path);
       player.ReplaceDirective(directive.AsIDirectiveUC());
+      Console.WriteLine("Made directive! " + directive.id);
 
       if (!PlayerAI.FollowMoveDirective(game, liveUnitByLocationMap, game.player)) {
         return false;

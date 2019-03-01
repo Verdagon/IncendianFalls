@@ -243,6 +243,7 @@ public class ITerrainTileComponentMutBunch {
     }
     public ItemTerrainTileComponent GetOnlyItemTerrainTileComponentOrNull() {
       var result = GetAllItemTerrainTileComponent();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -263,6 +264,7 @@ public class ITerrainTileComponentMutBunch {
     }
     public DecorativeTerrainTileComponent GetOnlyDecorativeTerrainTileComponentOrNull() {
       var result = GetAllDecorativeTerrainTileComponent();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -283,6 +285,7 @@ public class ITerrainTileComponentMutBunch {
     }
     public UpStaircaseTerrainTileComponent GetOnlyUpStaircaseTerrainTileComponentOrNull() {
       var result = GetAllUpStaircaseTerrainTileComponent();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -303,6 +306,7 @@ public class ITerrainTileComponentMutBunch {
     }
     public DownStaircaseTerrainTileComponent GetOnlyDownStaircaseTerrainTileComponentOrNull() {
       var result = GetAllDownStaircaseTerrainTileComponent();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {

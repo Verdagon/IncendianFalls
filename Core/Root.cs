@@ -1442,6 +1442,7 @@ public class Root {
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(sourceObjId)) {
+          Console.WriteLine("Ressurrecting movedirective " + sourceObjId);
         EffectInternalCreateMoveDirectiveUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
@@ -3603,7 +3604,7 @@ public class Root {
   }
   public void CheckHasLevel(int id) {
     if (!rootIncarnation.incarnationsLevel.ContainsKey(id)) {
-      throw new System.Exception("Invalid Level!");
+      throw new System.Exception("Invalid Level: " + id);
     }
   }
   public void AddLevelObserver(int id, ILevelEffectObserver observer) {
@@ -3682,6 +3683,21 @@ public class Root {
   }
      
   public void BroadcastLevelEffects() {
+    foreach (var effect in effectsLevelDeleteEffect) {
+      if (observersForLevel.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+      if (observersForLevel.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLevelEffect(effect);
+        }
+        observersForLevel.Remove(effect.id);
+      }
+    }
+    effectsLevelDeleteEffect.Clear();
+
 
     foreach (var effect in effectsLevelCreateEffect) {
       if (observersForLevel.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
@@ -3695,22 +3711,7 @@ public class Root {
         }
       }
     }
-    effectsLevelCreateEffect.Clear();
-
-    foreach (var effect in effectsLevelDeleteEffect) {
-      if (observersForLevel.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-      if (observersForLevel.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-    }
     effectsLevelDeleteEffect.Clear();
-
   }
   public ItemTerrainTileComponentIncarnation GetItemTerrainTileComponentIncarnation(int id) {
     if (id == 0) {
@@ -3742,7 +3743,7 @@ public class Root {
   }
   public void CheckHasItemTerrainTileComponent(int id) {
     if (!rootIncarnation.incarnationsItemTerrainTileComponent.ContainsKey(id)) {
-      throw new System.Exception("Invalid ItemTerrainTileComponent!");
+      throw new System.Exception("Invalid ItemTerrainTileComponent: " + id);
     }
   }
   public void AddItemTerrainTileComponentObserver(int id, IItemTerrainTileComponentEffectObserver observer) {
@@ -3811,6 +3812,21 @@ public class Root {
   }
      
   public void BroadcastItemTerrainTileComponentEffects() {
+    foreach (var effect in effectsItemTerrainTileComponentDeleteEffect) {
+      if (observersForItemTerrainTileComponent.TryGetValue(0, out List<IItemTerrainTileComponentEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnItemTerrainTileComponentEffect(effect);
+        }
+      }
+      if (observersForItemTerrainTileComponent.TryGetValue(effect.id, out List<IItemTerrainTileComponentEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnItemTerrainTileComponentEffect(effect);
+        }
+        observersForItemTerrainTileComponent.Remove(effect.id);
+      }
+    }
+    effectsItemTerrainTileComponentDeleteEffect.Clear();
+
 
     foreach (var effect in effectsItemTerrainTileComponentCreateEffect) {
       if (observersForItemTerrainTileComponent.TryGetValue(0, out List<IItemTerrainTileComponentEffectObserver> globalObservers)) {
@@ -3824,22 +3840,7 @@ public class Root {
         }
       }
     }
-    effectsItemTerrainTileComponentCreateEffect.Clear();
-
-    foreach (var effect in effectsItemTerrainTileComponentDeleteEffect) {
-      if (observersForItemTerrainTileComponent.TryGetValue(0, out List<IItemTerrainTileComponentEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnItemTerrainTileComponentEffect(effect);
-        }
-      }
-      if (observersForItemTerrainTileComponent.TryGetValue(effect.id, out List<IItemTerrainTileComponentEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnItemTerrainTileComponentEffect(effect);
-        }
-      }
-    }
     effectsItemTerrainTileComponentDeleteEffect.Clear();
-
   }
   public DecorativeTerrainTileComponentIncarnation GetDecorativeTerrainTileComponentIncarnation(int id) {
     if (id == 0) {
@@ -3871,7 +3872,7 @@ public class Root {
   }
   public void CheckHasDecorativeTerrainTileComponent(int id) {
     if (!rootIncarnation.incarnationsDecorativeTerrainTileComponent.ContainsKey(id)) {
-      throw new System.Exception("Invalid DecorativeTerrainTileComponent!");
+      throw new System.Exception("Invalid DecorativeTerrainTileComponent: " + id);
     }
   }
   public void AddDecorativeTerrainTileComponentObserver(int id, IDecorativeTerrainTileComponentEffectObserver observer) {
@@ -3939,6 +3940,21 @@ public class Root {
   }
      
   public void BroadcastDecorativeTerrainTileComponentEffects() {
+    foreach (var effect in effectsDecorativeTerrainTileComponentDeleteEffect) {
+      if (observersForDecorativeTerrainTileComponent.TryGetValue(0, out List<IDecorativeTerrainTileComponentEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDecorativeTerrainTileComponentEffect(effect);
+        }
+      }
+      if (observersForDecorativeTerrainTileComponent.TryGetValue(effect.id, out List<IDecorativeTerrainTileComponentEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDecorativeTerrainTileComponentEffect(effect);
+        }
+        observersForDecorativeTerrainTileComponent.Remove(effect.id);
+      }
+    }
+    effectsDecorativeTerrainTileComponentDeleteEffect.Clear();
+
 
     foreach (var effect in effectsDecorativeTerrainTileComponentCreateEffect) {
       if (observersForDecorativeTerrainTileComponent.TryGetValue(0, out List<IDecorativeTerrainTileComponentEffectObserver> globalObservers)) {
@@ -3952,22 +3968,7 @@ public class Root {
         }
       }
     }
-    effectsDecorativeTerrainTileComponentCreateEffect.Clear();
-
-    foreach (var effect in effectsDecorativeTerrainTileComponentDeleteEffect) {
-      if (observersForDecorativeTerrainTileComponent.TryGetValue(0, out List<IDecorativeTerrainTileComponentEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnDecorativeTerrainTileComponentEffect(effect);
-        }
-      }
-      if (observersForDecorativeTerrainTileComponent.TryGetValue(effect.id, out List<IDecorativeTerrainTileComponentEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnDecorativeTerrainTileComponentEffect(effect);
-        }
-      }
-    }
     effectsDecorativeTerrainTileComponentDeleteEffect.Clear();
-
   }
   public UpStaircaseTerrainTileComponentIncarnation GetUpStaircaseTerrainTileComponentIncarnation(int id) {
     if (id == 0) {
@@ -3999,7 +4000,7 @@ public class Root {
   }
   public void CheckHasUpStaircaseTerrainTileComponent(int id) {
     if (!rootIncarnation.incarnationsUpStaircaseTerrainTileComponent.ContainsKey(id)) {
-      throw new System.Exception("Invalid UpStaircaseTerrainTileComponent!");
+      throw new System.Exception("Invalid UpStaircaseTerrainTileComponent: " + id);
     }
   }
   public void AddUpStaircaseTerrainTileComponentObserver(int id, IUpStaircaseTerrainTileComponentEffectObserver observer) {
@@ -4066,6 +4067,21 @@ public class Root {
   }
      
   public void BroadcastUpStaircaseTerrainTileComponentEffects() {
+    foreach (var effect in effectsUpStaircaseTerrainTileComponentDeleteEffect) {
+      if (observersForUpStaircaseTerrainTileComponent.TryGetValue(0, out List<IUpStaircaseTerrainTileComponentEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUpStaircaseTerrainTileComponentEffect(effect);
+        }
+      }
+      if (observersForUpStaircaseTerrainTileComponent.TryGetValue(effect.id, out List<IUpStaircaseTerrainTileComponentEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUpStaircaseTerrainTileComponentEffect(effect);
+        }
+        observersForUpStaircaseTerrainTileComponent.Remove(effect.id);
+      }
+    }
+    effectsUpStaircaseTerrainTileComponentDeleteEffect.Clear();
+
 
     foreach (var effect in effectsUpStaircaseTerrainTileComponentCreateEffect) {
       if (observersForUpStaircaseTerrainTileComponent.TryGetValue(0, out List<IUpStaircaseTerrainTileComponentEffectObserver> globalObservers)) {
@@ -4079,22 +4095,7 @@ public class Root {
         }
       }
     }
-    effectsUpStaircaseTerrainTileComponentCreateEffect.Clear();
-
-    foreach (var effect in effectsUpStaircaseTerrainTileComponentDeleteEffect) {
-      if (observersForUpStaircaseTerrainTileComponent.TryGetValue(0, out List<IUpStaircaseTerrainTileComponentEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUpStaircaseTerrainTileComponentEffect(effect);
-        }
-      }
-      if (observersForUpStaircaseTerrainTileComponent.TryGetValue(effect.id, out List<IUpStaircaseTerrainTileComponentEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUpStaircaseTerrainTileComponentEffect(effect);
-        }
-      }
-    }
     effectsUpStaircaseTerrainTileComponentDeleteEffect.Clear();
-
   }
   public DownStaircaseTerrainTileComponentIncarnation GetDownStaircaseTerrainTileComponentIncarnation(int id) {
     if (id == 0) {
@@ -4126,7 +4127,7 @@ public class Root {
   }
   public void CheckHasDownStaircaseTerrainTileComponent(int id) {
     if (!rootIncarnation.incarnationsDownStaircaseTerrainTileComponent.ContainsKey(id)) {
-      throw new System.Exception("Invalid DownStaircaseTerrainTileComponent!");
+      throw new System.Exception("Invalid DownStaircaseTerrainTileComponent: " + id);
     }
   }
   public void AddDownStaircaseTerrainTileComponentObserver(int id, IDownStaircaseTerrainTileComponentEffectObserver observer) {
@@ -4193,6 +4194,21 @@ public class Root {
   }
      
   public void BroadcastDownStaircaseTerrainTileComponentEffects() {
+    foreach (var effect in effectsDownStaircaseTerrainTileComponentDeleteEffect) {
+      if (observersForDownStaircaseTerrainTileComponent.TryGetValue(0, out List<IDownStaircaseTerrainTileComponentEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDownStaircaseTerrainTileComponentEffect(effect);
+        }
+      }
+      if (observersForDownStaircaseTerrainTileComponent.TryGetValue(effect.id, out List<IDownStaircaseTerrainTileComponentEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDownStaircaseTerrainTileComponentEffect(effect);
+        }
+        observersForDownStaircaseTerrainTileComponent.Remove(effect.id);
+      }
+    }
+    effectsDownStaircaseTerrainTileComponentDeleteEffect.Clear();
+
 
     foreach (var effect in effectsDownStaircaseTerrainTileComponentCreateEffect) {
       if (observersForDownStaircaseTerrainTileComponent.TryGetValue(0, out List<IDownStaircaseTerrainTileComponentEffectObserver> globalObservers)) {
@@ -4206,22 +4222,7 @@ public class Root {
         }
       }
     }
-    effectsDownStaircaseTerrainTileComponentCreateEffect.Clear();
-
-    foreach (var effect in effectsDownStaircaseTerrainTileComponentDeleteEffect) {
-      if (observersForDownStaircaseTerrainTileComponent.TryGetValue(0, out List<IDownStaircaseTerrainTileComponentEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnDownStaircaseTerrainTileComponentEffect(effect);
-        }
-      }
-      if (observersForDownStaircaseTerrainTileComponent.TryGetValue(effect.id, out List<IDownStaircaseTerrainTileComponentEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnDownStaircaseTerrainTileComponentEffect(effect);
-        }
-      }
-    }
     effectsDownStaircaseTerrainTileComponentDeleteEffect.Clear();
-
   }
   public TerrainTileIncarnation GetTerrainTileIncarnation(int id) {
     if (id == 0) {
@@ -4253,7 +4254,7 @@ public class Root {
   }
   public void CheckHasTerrainTile(int id) {
     if (!rootIncarnation.incarnationsTerrainTile.ContainsKey(id)) {
-      throw new System.Exception("Invalid TerrainTile!");
+      throw new System.Exception("Invalid TerrainTile: " + id);
     }
   }
   public void AddTerrainTileObserver(int id, ITerrainTileEffectObserver observer) {
@@ -4331,21 +4332,6 @@ public class Root {
   }
      
   public void BroadcastTerrainTileEffects() {
-
-    foreach (var effect in effectsTerrainTileCreateEffect) {
-      if (observersForTerrainTile.TryGetValue(0, out List<ITerrainTileEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainTileEffect(effect);
-        }
-      }
-      if (observersForTerrainTile.TryGetValue(effect.id, out List<ITerrainTileEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainTileEffect(effect);
-        }
-      }
-    }
-    effectsTerrainTileCreateEffect.Clear();
-
     foreach (var effect in effectsTerrainTileDeleteEffect) {
       if (observersForTerrainTile.TryGetValue(0, out List<ITerrainTileEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -4356,9 +4342,11 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnTerrainTileEffect(effect);
         }
+        observersForTerrainTile.Remove(effect.id);
       }
     }
     effectsTerrainTileDeleteEffect.Clear();
+
 
     foreach (var effect in effectsTerrainTileSetElevationEffect) {
       if (observersForTerrainTile.TryGetValue(0, out List<ITerrainTileEffectObserver> globalObservers)) {
@@ -4374,6 +4362,19 @@ public class Root {
     }
     effectsTerrainTileSetElevationEffect.Clear();
 
+    foreach (var effect in effectsTerrainTileCreateEffect) {
+      if (observersForTerrainTile.TryGetValue(0, out List<ITerrainTileEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTerrainTileEffect(effect);
+        }
+      }
+      if (observersForTerrainTile.TryGetValue(effect.id, out List<ITerrainTileEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTerrainTileEffect(effect);
+        }
+      }
+    }
+    effectsTerrainTileDeleteEffect.Clear();
   }
 
   public void EffectTerrainTileSetElevation(int id, int newValue) {
@@ -4430,7 +4431,7 @@ public class Root {
   }
   public void CheckHasITerrainTileComponentMutBunch(int id) {
     if (!rootIncarnation.incarnationsITerrainTileComponentMutBunch.ContainsKey(id)) {
-      throw new System.Exception("Invalid ITerrainTileComponentMutBunch!");
+      throw new System.Exception("Invalid ITerrainTileComponentMutBunch: " + id);
     }
   }
   public void AddITerrainTileComponentMutBunchObserver(int id, IITerrainTileComponentMutBunchEffectObserver observer) {
@@ -4511,6 +4512,21 @@ public class Root {
   }
      
   public void BroadcastITerrainTileComponentMutBunchEffects() {
+    foreach (var effect in effectsITerrainTileComponentMutBunchDeleteEffect) {
+      if (observersForITerrainTileComponentMutBunch.TryGetValue(0, out List<IITerrainTileComponentMutBunchEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnITerrainTileComponentMutBunchEffect(effect);
+        }
+      }
+      if (observersForITerrainTileComponentMutBunch.TryGetValue(effect.id, out List<IITerrainTileComponentMutBunchEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnITerrainTileComponentMutBunchEffect(effect);
+        }
+        observersForITerrainTileComponentMutBunch.Remove(effect.id);
+      }
+    }
+    effectsITerrainTileComponentMutBunchDeleteEffect.Clear();
+
 
     foreach (var effect in effectsITerrainTileComponentMutBunchCreateEffect) {
       if (observersForITerrainTileComponentMutBunch.TryGetValue(0, out List<IITerrainTileComponentMutBunchEffectObserver> globalObservers)) {
@@ -4524,22 +4540,7 @@ public class Root {
         }
       }
     }
-    effectsITerrainTileComponentMutBunchCreateEffect.Clear();
-
-    foreach (var effect in effectsITerrainTileComponentMutBunchDeleteEffect) {
-      if (observersForITerrainTileComponentMutBunch.TryGetValue(0, out List<IITerrainTileComponentMutBunchEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnITerrainTileComponentMutBunchEffect(effect);
-        }
-      }
-      if (observersForITerrainTileComponentMutBunch.TryGetValue(effect.id, out List<IITerrainTileComponentMutBunchEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnITerrainTileComponentMutBunchEffect(effect);
-        }
-      }
-    }
     effectsITerrainTileComponentMutBunchDeleteEffect.Clear();
-
   }
   public TerrainIncarnation GetTerrainIncarnation(int id) {
     if (id == 0) {
@@ -4571,7 +4572,7 @@ public class Root {
   }
   public void CheckHasTerrain(int id) {
     if (!rootIncarnation.incarnationsTerrain.ContainsKey(id)) {
-      throw new System.Exception("Invalid Terrain!");
+      throw new System.Exception("Invalid Terrain: " + id);
     }
   }
   public void AddTerrainObserver(int id, ITerrainEffectObserver observer) {
@@ -4646,21 +4647,6 @@ public class Root {
   }
      
   public void BroadcastTerrainEffects() {
-
-    foreach (var effect in effectsTerrainCreateEffect) {
-      if (observersForTerrain.TryGetValue(0, out List<ITerrainEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainEffect(effect);
-        }
-      }
-      if (observersForTerrain.TryGetValue(effect.id, out List<ITerrainEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainEffect(effect);
-        }
-      }
-    }
-    effectsTerrainCreateEffect.Clear();
-
     foreach (var effect in effectsTerrainDeleteEffect) {
       if (observersForTerrain.TryGetValue(0, out List<ITerrainEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -4671,9 +4657,11 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnTerrainEffect(effect);
         }
+        observersForTerrain.Remove(effect.id);
       }
     }
     effectsTerrainDeleteEffect.Clear();
+
 
     foreach (var effect in effectsTerrainSetPatternEffect) {
       if (observersForTerrain.TryGetValue(0, out List<ITerrainEffectObserver> globalObservers)) {
@@ -4689,6 +4677,19 @@ public class Root {
     }
     effectsTerrainSetPatternEffect.Clear();
 
+    foreach (var effect in effectsTerrainCreateEffect) {
+      if (observersForTerrain.TryGetValue(0, out List<ITerrainEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTerrainEffect(effect);
+        }
+      }
+      if (observersForTerrain.TryGetValue(effect.id, out List<ITerrainEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTerrainEffect(effect);
+        }
+      }
+    }
+    effectsTerrainDeleteEffect.Clear();
   }
 
   public void EffectTerrainSetPattern(int id, Pattern newValue) {
@@ -4744,7 +4745,7 @@ public class Root {
   }
   public void CheckHasGlaive(int id) {
     if (!rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
-      throw new System.Exception("Invalid Glaive!");
+      throw new System.Exception("Invalid Glaive: " + id);
     }
   }
   public void AddGlaiveObserver(int id, IGlaiveEffectObserver observer) {
@@ -4811,6 +4812,21 @@ public class Root {
   }
      
   public void BroadcastGlaiveEffects() {
+    foreach (var effect in effectsGlaiveDeleteEffect) {
+      if (observersForGlaive.TryGetValue(0, out List<IGlaiveEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGlaiveEffect(effect);
+        }
+      }
+      if (observersForGlaive.TryGetValue(effect.id, out List<IGlaiveEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGlaiveEffect(effect);
+        }
+        observersForGlaive.Remove(effect.id);
+      }
+    }
+    effectsGlaiveDeleteEffect.Clear();
+
 
     foreach (var effect in effectsGlaiveCreateEffect) {
       if (observersForGlaive.TryGetValue(0, out List<IGlaiveEffectObserver> globalObservers)) {
@@ -4824,22 +4840,7 @@ public class Root {
         }
       }
     }
-    effectsGlaiveCreateEffect.Clear();
-
-    foreach (var effect in effectsGlaiveDeleteEffect) {
-      if (observersForGlaive.TryGetValue(0, out List<IGlaiveEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnGlaiveEffect(effect);
-        }
-      }
-      if (observersForGlaive.TryGetValue(effect.id, out List<IGlaiveEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnGlaiveEffect(effect);
-        }
-      }
-    }
     effectsGlaiveDeleteEffect.Clear();
-
   }
   public ArmorIncarnation GetArmorIncarnation(int id) {
     if (id == 0) {
@@ -4871,7 +4872,7 @@ public class Root {
   }
   public void CheckHasArmor(int id) {
     if (!rootIncarnation.incarnationsArmor.ContainsKey(id)) {
-      throw new System.Exception("Invalid Armor!");
+      throw new System.Exception("Invalid Armor: " + id);
     }
   }
   public void AddArmorObserver(int id, IArmorEffectObserver observer) {
@@ -4938,6 +4939,21 @@ public class Root {
   }
      
   public void BroadcastArmorEffects() {
+    foreach (var effect in effectsArmorDeleteEffect) {
+      if (observersForArmor.TryGetValue(0, out List<IArmorEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnArmorEffect(effect);
+        }
+      }
+      if (observersForArmor.TryGetValue(effect.id, out List<IArmorEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnArmorEffect(effect);
+        }
+        observersForArmor.Remove(effect.id);
+      }
+    }
+    effectsArmorDeleteEffect.Clear();
+
 
     foreach (var effect in effectsArmorCreateEffect) {
       if (observersForArmor.TryGetValue(0, out List<IArmorEffectObserver> globalObservers)) {
@@ -4951,22 +4967,7 @@ public class Root {
         }
       }
     }
-    effectsArmorCreateEffect.Clear();
-
-    foreach (var effect in effectsArmorDeleteEffect) {
-      if (observersForArmor.TryGetValue(0, out List<IArmorEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnArmorEffect(effect);
-        }
-      }
-      if (observersForArmor.TryGetValue(effect.id, out List<IArmorEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnArmorEffect(effect);
-        }
-      }
-    }
     effectsArmorDeleteEffect.Clear();
-
   }
   public RandIncarnation GetRandIncarnation(int id) {
     if (id == 0) {
@@ -4998,7 +4999,7 @@ public class Root {
   }
   public void CheckHasRand(int id) {
     if (!rootIncarnation.incarnationsRand.ContainsKey(id)) {
-      throw new System.Exception("Invalid Rand!");
+      throw new System.Exception("Invalid Rand: " + id);
     }
   }
   public void AddRandObserver(int id, IRandEffectObserver observer) {
@@ -5066,21 +5067,6 @@ public class Root {
   }
      
   public void BroadcastRandEffects() {
-
-    foreach (var effect in effectsRandCreateEffect) {
-      if (observersForRand.TryGetValue(0, out List<IRandEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnRandEffect(effect);
-        }
-      }
-      if (observersForRand.TryGetValue(effect.id, out List<IRandEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnRandEffect(effect);
-        }
-      }
-    }
-    effectsRandCreateEffect.Clear();
-
     foreach (var effect in effectsRandDeleteEffect) {
       if (observersForRand.TryGetValue(0, out List<IRandEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -5091,9 +5077,11 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnRandEffect(effect);
         }
+        observersForRand.Remove(effect.id);
       }
     }
     effectsRandDeleteEffect.Clear();
+
 
     foreach (var effect in effectsRandSetRandEffect) {
       if (observersForRand.TryGetValue(0, out List<IRandEffectObserver> globalObservers)) {
@@ -5109,6 +5097,19 @@ public class Root {
     }
     effectsRandSetRandEffect.Clear();
 
+    foreach (var effect in effectsRandCreateEffect) {
+      if (observersForRand.TryGetValue(0, out List<IRandEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnRandEffect(effect);
+        }
+      }
+      if (observersForRand.TryGetValue(effect.id, out List<IRandEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnRandEffect(effect);
+        }
+      }
+    }
+    effectsRandDeleteEffect.Clear();
   }
 
   public void EffectRandSetRand(int id, int newValue) {
@@ -5162,7 +5163,7 @@ public class Root {
   }
   public void CheckHasWanderAICapabilityUC(int id) {
     if (!rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
-      throw new System.Exception("Invalid WanderAICapabilityUC!");
+      throw new System.Exception("Invalid WanderAICapabilityUC: " + id);
     }
   }
   public void AddWanderAICapabilityUCObserver(int id, IWanderAICapabilityUCEffectObserver observer) {
@@ -5229,6 +5230,21 @@ public class Root {
   }
      
   public void BroadcastWanderAICapabilityUCEffects() {
+    foreach (var effect in effectsWanderAICapabilityUCDeleteEffect) {
+      if (observersForWanderAICapabilityUC.TryGetValue(0, out List<IWanderAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnWanderAICapabilityUCEffect(effect);
+        }
+      }
+      if (observersForWanderAICapabilityUC.TryGetValue(effect.id, out List<IWanderAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnWanderAICapabilityUCEffect(effect);
+        }
+        observersForWanderAICapabilityUC.Remove(effect.id);
+      }
+    }
+    effectsWanderAICapabilityUCDeleteEffect.Clear();
+
 
     foreach (var effect in effectsWanderAICapabilityUCCreateEffect) {
       if (observersForWanderAICapabilityUC.TryGetValue(0, out List<IWanderAICapabilityUCEffectObserver> globalObservers)) {
@@ -5242,22 +5258,7 @@ public class Root {
         }
       }
     }
-    effectsWanderAICapabilityUCCreateEffect.Clear();
-
-    foreach (var effect in effectsWanderAICapabilityUCDeleteEffect) {
-      if (observersForWanderAICapabilityUC.TryGetValue(0, out List<IWanderAICapabilityUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnWanderAICapabilityUCEffect(effect);
-        }
-      }
-      if (observersForWanderAICapabilityUC.TryGetValue(effect.id, out List<IWanderAICapabilityUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnWanderAICapabilityUCEffect(effect);
-        }
-      }
-    }
     effectsWanderAICapabilityUCDeleteEffect.Clear();
-
   }
   public ShieldingUCIncarnation GetShieldingUCIncarnation(int id) {
     if (id == 0) {
@@ -5289,7 +5290,7 @@ public class Root {
   }
   public void CheckHasShieldingUC(int id) {
     if (!rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
-      throw new System.Exception("Invalid ShieldingUC!");
+      throw new System.Exception("Invalid ShieldingUC: " + id);
     }
   }
   public void AddShieldingUCObserver(int id, IShieldingUCEffectObserver observer) {
@@ -5356,6 +5357,21 @@ public class Root {
   }
      
   public void BroadcastShieldingUCEffects() {
+    foreach (var effect in effectsShieldingUCDeleteEffect) {
+      if (observersForShieldingUC.TryGetValue(0, out List<IShieldingUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnShieldingUCEffect(effect);
+        }
+      }
+      if (observersForShieldingUC.TryGetValue(effect.id, out List<IShieldingUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnShieldingUCEffect(effect);
+        }
+        observersForShieldingUC.Remove(effect.id);
+      }
+    }
+    effectsShieldingUCDeleteEffect.Clear();
+
 
     foreach (var effect in effectsShieldingUCCreateEffect) {
       if (observersForShieldingUC.TryGetValue(0, out List<IShieldingUCEffectObserver> globalObservers)) {
@@ -5369,22 +5385,7 @@ public class Root {
         }
       }
     }
-    effectsShieldingUCCreateEffect.Clear();
-
-    foreach (var effect in effectsShieldingUCDeleteEffect) {
-      if (observersForShieldingUC.TryGetValue(0, out List<IShieldingUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnShieldingUCEffect(effect);
-        }
-      }
-      if (observersForShieldingUC.TryGetValue(effect.id, out List<IShieldingUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnShieldingUCEffect(effect);
-        }
-      }
-    }
     effectsShieldingUCDeleteEffect.Clear();
-
   }
   public BidingOperationUCIncarnation GetBidingOperationUCIncarnation(int id) {
     if (id == 0) {
@@ -5416,7 +5417,7 @@ public class Root {
   }
   public void CheckHasBidingOperationUC(int id) {
     if (!rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
-      throw new System.Exception("Invalid BidingOperationUC!");
+      throw new System.Exception("Invalid BidingOperationUC: " + id);
     }
   }
   public void AddBidingOperationUCObserver(int id, IBidingOperationUCEffectObserver observer) {
@@ -5483,6 +5484,21 @@ public class Root {
   }
      
   public void BroadcastBidingOperationUCEffects() {
+    foreach (var effect in effectsBidingOperationUCDeleteEffect) {
+      if (observersForBidingOperationUC.TryGetValue(0, out List<IBidingOperationUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBidingOperationUCEffect(effect);
+        }
+      }
+      if (observersForBidingOperationUC.TryGetValue(effect.id, out List<IBidingOperationUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBidingOperationUCEffect(effect);
+        }
+        observersForBidingOperationUC.Remove(effect.id);
+      }
+    }
+    effectsBidingOperationUCDeleteEffect.Clear();
+
 
     foreach (var effect in effectsBidingOperationUCCreateEffect) {
       if (observersForBidingOperationUC.TryGetValue(0, out List<IBidingOperationUCEffectObserver> globalObservers)) {
@@ -5496,22 +5512,7 @@ public class Root {
         }
       }
     }
-    effectsBidingOperationUCCreateEffect.Clear();
-
-    foreach (var effect in effectsBidingOperationUCDeleteEffect) {
-      if (observersForBidingOperationUC.TryGetValue(0, out List<IBidingOperationUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnBidingOperationUCEffect(effect);
-        }
-      }
-      if (observersForBidingOperationUC.TryGetValue(effect.id, out List<IBidingOperationUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnBidingOperationUCEffect(effect);
-        }
-      }
-    }
     effectsBidingOperationUCDeleteEffect.Clear();
-
   }
   public UnleashBideImpulseIncarnation GetUnleashBideImpulseIncarnation(int id) {
     if (id == 0) {
@@ -5543,7 +5544,7 @@ public class Root {
   }
   public void CheckHasUnleashBideImpulse(int id) {
     if (!rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(id)) {
-      throw new System.Exception("Invalid UnleashBideImpulse!");
+      throw new System.Exception("Invalid UnleashBideImpulse: " + id);
     }
   }
   public void AddUnleashBideImpulseObserver(int id, IUnleashBideImpulseEffectObserver observer) {
@@ -5611,6 +5612,21 @@ public class Root {
   }
      
   public void BroadcastUnleashBideImpulseEffects() {
+    foreach (var effect in effectsUnleashBideImpulseDeleteEffect) {
+      if (observersForUnleashBideImpulse.TryGetValue(0, out List<IUnleashBideImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnleashBideImpulseEffect(effect);
+        }
+      }
+      if (observersForUnleashBideImpulse.TryGetValue(effect.id, out List<IUnleashBideImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnleashBideImpulseEffect(effect);
+        }
+        observersForUnleashBideImpulse.Remove(effect.id);
+      }
+    }
+    effectsUnleashBideImpulseDeleteEffect.Clear();
+
 
     foreach (var effect in effectsUnleashBideImpulseCreateEffect) {
       if (observersForUnleashBideImpulse.TryGetValue(0, out List<IUnleashBideImpulseEffectObserver> globalObservers)) {
@@ -5624,22 +5640,7 @@ public class Root {
         }
       }
     }
-    effectsUnleashBideImpulseCreateEffect.Clear();
-
-    foreach (var effect in effectsUnleashBideImpulseDeleteEffect) {
-      if (observersForUnleashBideImpulse.TryGetValue(0, out List<IUnleashBideImpulseEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUnleashBideImpulseEffect(effect);
-        }
-      }
-      if (observersForUnleashBideImpulse.TryGetValue(effect.id, out List<IUnleashBideImpulseEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUnleashBideImpulseEffect(effect);
-        }
-      }
-    }
     effectsUnleashBideImpulseDeleteEffect.Clear();
-
   }
   public StartBidingImpulseIncarnation GetStartBidingImpulseIncarnation(int id) {
     if (id == 0) {
@@ -5671,7 +5672,7 @@ public class Root {
   }
   public void CheckHasStartBidingImpulse(int id) {
     if (!rootIncarnation.incarnationsStartBidingImpulse.ContainsKey(id)) {
-      throw new System.Exception("Invalid StartBidingImpulse!");
+      throw new System.Exception("Invalid StartBidingImpulse: " + id);
     }
   }
   public void AddStartBidingImpulseObserver(int id, IStartBidingImpulseEffectObserver observer) {
@@ -5739,6 +5740,21 @@ public class Root {
   }
      
   public void BroadcastStartBidingImpulseEffects() {
+    foreach (var effect in effectsStartBidingImpulseDeleteEffect) {
+      if (observersForStartBidingImpulse.TryGetValue(0, out List<IStartBidingImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnStartBidingImpulseEffect(effect);
+        }
+      }
+      if (observersForStartBidingImpulse.TryGetValue(effect.id, out List<IStartBidingImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnStartBidingImpulseEffect(effect);
+        }
+        observersForStartBidingImpulse.Remove(effect.id);
+      }
+    }
+    effectsStartBidingImpulseDeleteEffect.Clear();
+
 
     foreach (var effect in effectsStartBidingImpulseCreateEffect) {
       if (observersForStartBidingImpulse.TryGetValue(0, out List<IStartBidingImpulseEffectObserver> globalObservers)) {
@@ -5752,22 +5768,7 @@ public class Root {
         }
       }
     }
-    effectsStartBidingImpulseCreateEffect.Clear();
-
-    foreach (var effect in effectsStartBidingImpulseDeleteEffect) {
-      if (observersForStartBidingImpulse.TryGetValue(0, out List<IStartBidingImpulseEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnStartBidingImpulseEffect(effect);
-        }
-      }
-      if (observersForStartBidingImpulse.TryGetValue(effect.id, out List<IStartBidingImpulseEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnStartBidingImpulseEffect(effect);
-        }
-      }
-    }
     effectsStartBidingImpulseDeleteEffect.Clear();
-
   }
   public BideAICapabilityUCIncarnation GetBideAICapabilityUCIncarnation(int id) {
     if (id == 0) {
@@ -5799,7 +5800,7 @@ public class Root {
   }
   public void CheckHasBideAICapabilityUC(int id) {
     if (!rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
-      throw new System.Exception("Invalid BideAICapabilityUC!");
+      throw new System.Exception("Invalid BideAICapabilityUC: " + id);
     }
   }
   public void AddBideAICapabilityUCObserver(int id, IBideAICapabilityUCEffectObserver observer) {
@@ -5866,6 +5867,21 @@ public class Root {
   }
      
   public void BroadcastBideAICapabilityUCEffects() {
+    foreach (var effect in effectsBideAICapabilityUCDeleteEffect) {
+      if (observersForBideAICapabilityUC.TryGetValue(0, out List<IBideAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBideAICapabilityUCEffect(effect);
+        }
+      }
+      if (observersForBideAICapabilityUC.TryGetValue(effect.id, out List<IBideAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBideAICapabilityUCEffect(effect);
+        }
+        observersForBideAICapabilityUC.Remove(effect.id);
+      }
+    }
+    effectsBideAICapabilityUCDeleteEffect.Clear();
+
 
     foreach (var effect in effectsBideAICapabilityUCCreateEffect) {
       if (observersForBideAICapabilityUC.TryGetValue(0, out List<IBideAICapabilityUCEffectObserver> globalObservers)) {
@@ -5879,22 +5895,7 @@ public class Root {
         }
       }
     }
-    effectsBideAICapabilityUCCreateEffect.Clear();
-
-    foreach (var effect in effectsBideAICapabilityUCDeleteEffect) {
-      if (observersForBideAICapabilityUC.TryGetValue(0, out List<IBideAICapabilityUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnBideAICapabilityUCEffect(effect);
-        }
-      }
-      if (observersForBideAICapabilityUC.TryGetValue(effect.id, out List<IBideAICapabilityUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnBideAICapabilityUCEffect(effect);
-        }
-      }
-    }
     effectsBideAICapabilityUCDeleteEffect.Clear();
-
   }
   public AttackImpulseIncarnation GetAttackImpulseIncarnation(int id) {
     if (id == 0) {
@@ -5926,7 +5927,7 @@ public class Root {
   }
   public void CheckHasAttackImpulse(int id) {
     if (!rootIncarnation.incarnationsAttackImpulse.ContainsKey(id)) {
-      throw new System.Exception("Invalid AttackImpulse!");
+      throw new System.Exception("Invalid AttackImpulse: " + id);
     }
   }
   public void AddAttackImpulseObserver(int id, IAttackImpulseEffectObserver observer) {
@@ -5994,6 +5995,21 @@ public class Root {
   }
      
   public void BroadcastAttackImpulseEffects() {
+    foreach (var effect in effectsAttackImpulseDeleteEffect) {
+      if (observersForAttackImpulse.TryGetValue(0, out List<IAttackImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnAttackImpulseEffect(effect);
+        }
+      }
+      if (observersForAttackImpulse.TryGetValue(effect.id, out List<IAttackImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnAttackImpulseEffect(effect);
+        }
+        observersForAttackImpulse.Remove(effect.id);
+      }
+    }
+    effectsAttackImpulseDeleteEffect.Clear();
+
 
     foreach (var effect in effectsAttackImpulseCreateEffect) {
       if (observersForAttackImpulse.TryGetValue(0, out List<IAttackImpulseEffectObserver> globalObservers)) {
@@ -6007,22 +6023,7 @@ public class Root {
         }
       }
     }
-    effectsAttackImpulseCreateEffect.Clear();
-
-    foreach (var effect in effectsAttackImpulseDeleteEffect) {
-      if (observersForAttackImpulse.TryGetValue(0, out List<IAttackImpulseEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnAttackImpulseEffect(effect);
-        }
-      }
-      if (observersForAttackImpulse.TryGetValue(effect.id, out List<IAttackImpulseEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnAttackImpulseEffect(effect);
-        }
-      }
-    }
     effectsAttackImpulseDeleteEffect.Clear();
-
   }
   public PursueImpulseIncarnation GetPursueImpulseIncarnation(int id) {
     if (id == 0) {
@@ -6054,7 +6055,7 @@ public class Root {
   }
   public void CheckHasPursueImpulse(int id) {
     if (!rootIncarnation.incarnationsPursueImpulse.ContainsKey(id)) {
-      throw new System.Exception("Invalid PursueImpulse!");
+      throw new System.Exception("Invalid PursueImpulse: " + id);
     }
   }
   public void AddPursueImpulseObserver(int id, IPursueImpulseEffectObserver observer) {
@@ -6122,6 +6123,21 @@ public class Root {
   }
      
   public void BroadcastPursueImpulseEffects() {
+    foreach (var effect in effectsPursueImpulseDeleteEffect) {
+      if (observersForPursueImpulse.TryGetValue(0, out List<IPursueImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnPursueImpulseEffect(effect);
+        }
+      }
+      if (observersForPursueImpulse.TryGetValue(effect.id, out List<IPursueImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnPursueImpulseEffect(effect);
+        }
+        observersForPursueImpulse.Remove(effect.id);
+      }
+    }
+    effectsPursueImpulseDeleteEffect.Clear();
+
 
     foreach (var effect in effectsPursueImpulseCreateEffect) {
       if (observersForPursueImpulse.TryGetValue(0, out List<IPursueImpulseEffectObserver> globalObservers)) {
@@ -6135,22 +6151,7 @@ public class Root {
         }
       }
     }
-    effectsPursueImpulseCreateEffect.Clear();
-
-    foreach (var effect in effectsPursueImpulseDeleteEffect) {
-      if (observersForPursueImpulse.TryGetValue(0, out List<IPursueImpulseEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnPursueImpulseEffect(effect);
-        }
-      }
-      if (observersForPursueImpulse.TryGetValue(effect.id, out List<IPursueImpulseEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnPursueImpulseEffect(effect);
-        }
-      }
-    }
     effectsPursueImpulseDeleteEffect.Clear();
-
   }
   public KillDirectiveUCIncarnation GetKillDirectiveUCIncarnation(int id) {
     if (id == 0) {
@@ -6182,7 +6183,7 @@ public class Root {
   }
   public void CheckHasKillDirectiveUC(int id) {
     if (!rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
-      throw new System.Exception("Invalid KillDirectiveUC!");
+      throw new System.Exception("Invalid KillDirectiveUC: " + id);
     }
   }
   public void AddKillDirectiveUCObserver(int id, IKillDirectiveUCEffectObserver observer) {
@@ -6255,6 +6256,21 @@ public class Root {
   }
      
   public void BroadcastKillDirectiveUCEffects() {
+    foreach (var effect in effectsKillDirectiveUCDeleteEffect) {
+      if (observersForKillDirectiveUC.TryGetValue(0, out List<IKillDirectiveUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKillDirectiveUCEffect(effect);
+        }
+      }
+      if (observersForKillDirectiveUC.TryGetValue(effect.id, out List<IKillDirectiveUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKillDirectiveUCEffect(effect);
+        }
+        observersForKillDirectiveUC.Remove(effect.id);
+      }
+    }
+    effectsKillDirectiveUCDeleteEffect.Clear();
+
 
     foreach (var effect in effectsKillDirectiveUCCreateEffect) {
       if (observersForKillDirectiveUC.TryGetValue(0, out List<IKillDirectiveUCEffectObserver> globalObservers)) {
@@ -6268,22 +6284,7 @@ public class Root {
         }
       }
     }
-    effectsKillDirectiveUCCreateEffect.Clear();
-
-    foreach (var effect in effectsKillDirectiveUCDeleteEffect) {
-      if (observersForKillDirectiveUC.TryGetValue(0, out List<IKillDirectiveUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnKillDirectiveUCEffect(effect);
-        }
-      }
-      if (observersForKillDirectiveUC.TryGetValue(effect.id, out List<IKillDirectiveUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnKillDirectiveUCEffect(effect);
-        }
-      }
-    }
     effectsKillDirectiveUCDeleteEffect.Clear();
-
   }
   public AttackAICapabilityUCIncarnation GetAttackAICapabilityUCIncarnation(int id) {
     if (id == 0) {
@@ -6315,7 +6316,7 @@ public class Root {
   }
   public void CheckHasAttackAICapabilityUC(int id) {
     if (!rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
-      throw new System.Exception("Invalid AttackAICapabilityUC!");
+      throw new System.Exception("Invalid AttackAICapabilityUC: " + id);
     }
   }
   public void AddAttackAICapabilityUCObserver(int id, IAttackAICapabilityUCEffectObserver observer) {
@@ -6382,6 +6383,21 @@ public class Root {
   }
      
   public void BroadcastAttackAICapabilityUCEffects() {
+    foreach (var effect in effectsAttackAICapabilityUCDeleteEffect) {
+      if (observersForAttackAICapabilityUC.TryGetValue(0, out List<IAttackAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnAttackAICapabilityUCEffect(effect);
+        }
+      }
+      if (observersForAttackAICapabilityUC.TryGetValue(effect.id, out List<IAttackAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnAttackAICapabilityUCEffect(effect);
+        }
+        observersForAttackAICapabilityUC.Remove(effect.id);
+      }
+    }
+    effectsAttackAICapabilityUCDeleteEffect.Clear();
+
 
     foreach (var effect in effectsAttackAICapabilityUCCreateEffect) {
       if (observersForAttackAICapabilityUC.TryGetValue(0, out List<IAttackAICapabilityUCEffectObserver> globalObservers)) {
@@ -6395,22 +6411,7 @@ public class Root {
         }
       }
     }
-    effectsAttackAICapabilityUCCreateEffect.Clear();
-
-    foreach (var effect in effectsAttackAICapabilityUCDeleteEffect) {
-      if (observersForAttackAICapabilityUC.TryGetValue(0, out List<IAttackAICapabilityUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnAttackAICapabilityUCEffect(effect);
-        }
-      }
-      if (observersForAttackAICapabilityUC.TryGetValue(effect.id, out List<IAttackAICapabilityUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnAttackAICapabilityUCEffect(effect);
-        }
-      }
-    }
     effectsAttackAICapabilityUCDeleteEffect.Clear();
-
   }
   public MoveImpulseIncarnation GetMoveImpulseIncarnation(int id) {
     if (id == 0) {
@@ -6442,7 +6443,7 @@ public class Root {
   }
   public void CheckHasMoveImpulse(int id) {
     if (!rootIncarnation.incarnationsMoveImpulse.ContainsKey(id)) {
-      throw new System.Exception("Invalid MoveImpulse!");
+      throw new System.Exception("Invalid MoveImpulse: " + id);
     }
   }
   public void AddMoveImpulseObserver(int id, IMoveImpulseEffectObserver observer) {
@@ -6513,6 +6514,21 @@ public class Root {
   }
      
   public void BroadcastMoveImpulseEffects() {
+    foreach (var effect in effectsMoveImpulseDeleteEffect) {
+      if (observersForMoveImpulse.TryGetValue(0, out List<IMoveImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnMoveImpulseEffect(effect);
+        }
+      }
+      if (observersForMoveImpulse.TryGetValue(effect.id, out List<IMoveImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnMoveImpulseEffect(effect);
+        }
+        observersForMoveImpulse.Remove(effect.id);
+      }
+    }
+    effectsMoveImpulseDeleteEffect.Clear();
+
 
     foreach (var effect in effectsMoveImpulseCreateEffect) {
       if (observersForMoveImpulse.TryGetValue(0, out List<IMoveImpulseEffectObserver> globalObservers)) {
@@ -6526,22 +6542,7 @@ public class Root {
         }
       }
     }
-    effectsMoveImpulseCreateEffect.Clear();
-
-    foreach (var effect in effectsMoveImpulseDeleteEffect) {
-      if (observersForMoveImpulse.TryGetValue(0, out List<IMoveImpulseEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnMoveImpulseEffect(effect);
-        }
-      }
-      if (observersForMoveImpulse.TryGetValue(effect.id, out List<IMoveImpulseEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnMoveImpulseEffect(effect);
-        }
-      }
-    }
     effectsMoveImpulseDeleteEffect.Clear();
-
   }
   public MoveDirectiveUCIncarnation GetMoveDirectiveUCIncarnation(int id) {
     if (id == 0) {
@@ -6573,7 +6574,7 @@ public class Root {
   }
   public void CheckHasMoveDirectiveUC(int id) {
     if (!rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
-      throw new System.Exception("Invalid MoveDirectiveUC!");
+      throw new System.Exception("Invalid MoveDirectiveUC: " + id);
     }
   }
   public void AddMoveDirectiveUCObserver(int id, IMoveDirectiveUCEffectObserver observer) {
@@ -6624,6 +6625,7 @@ public class Root {
   }
 
   public void EffectMoveDirectiveUCDelete(int id) {
+      Console.WriteLine("deleting move directive! " + id);
     CheckUnlocked();
     var effect = new MoveDirectiveUCDeleteEffect(id);
 
@@ -6642,6 +6644,21 @@ public class Root {
   }
      
   public void BroadcastMoveDirectiveUCEffects() {
+    foreach (var effect in effectsMoveDirectiveUCDeleteEffect) {
+      if (observersForMoveDirectiveUC.TryGetValue(0, out List<IMoveDirectiveUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnMoveDirectiveUCEffect(effect);
+        }
+      }
+      if (observersForMoveDirectiveUC.TryGetValue(effect.id, out List<IMoveDirectiveUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnMoveDirectiveUCEffect(effect);
+        }
+        observersForMoveDirectiveUC.Remove(effect.id);
+      }
+    }
+    effectsMoveDirectiveUCDeleteEffect.Clear();
+
 
     foreach (var effect in effectsMoveDirectiveUCCreateEffect) {
       if (observersForMoveDirectiveUC.TryGetValue(0, out List<IMoveDirectiveUCEffectObserver> globalObservers)) {
@@ -6655,22 +6672,7 @@ public class Root {
         }
       }
     }
-    effectsMoveDirectiveUCCreateEffect.Clear();
-
-    foreach (var effect in effectsMoveDirectiveUCDeleteEffect) {
-      if (observersForMoveDirectiveUC.TryGetValue(0, out List<IMoveDirectiveUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnMoveDirectiveUCEffect(effect);
-        }
-      }
-      if (observersForMoveDirectiveUC.TryGetValue(effect.id, out List<IMoveDirectiveUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnMoveDirectiveUCEffect(effect);
-        }
-      }
-    }
     effectsMoveDirectiveUCDeleteEffect.Clear();
-
   }
   public UnitIncarnation GetUnitIncarnation(int id) {
     if (id == 0) {
@@ -6702,7 +6704,7 @@ public class Root {
   }
   public void CheckHasUnit(int id) {
     if (!rootIncarnation.incarnationsUnit.ContainsKey(id)) {
-      throw new System.Exception("Invalid Unit!");
+      throw new System.Exception("Invalid Unit: " + id);
     }
   }
   public void AddUnitObserver(int id, IUnitEffectObserver observer) {
@@ -6809,21 +6811,6 @@ public class Root {
   }
      
   public void BroadcastUnitEffects() {
-
-    foreach (var effect in effectsUnitCreateEffect) {
-      if (observersForUnit.TryGetValue(0, out List<IUnitEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUnitEffect(effect);
-        }
-      }
-      if (observersForUnit.TryGetValue(effect.id, out List<IUnitEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUnitEffect(effect);
-        }
-      }
-    }
-    effectsUnitCreateEffect.Clear();
-
     foreach (var effect in effectsUnitDeleteEffect) {
       if (observersForUnit.TryGetValue(0, out List<IUnitEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -6834,9 +6821,11 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnUnitEffect(effect);
         }
+        observersForUnit.Remove(effect.id);
       }
     }
     effectsUnitDeleteEffect.Clear();
+
 
     foreach (var effect in effectsUnitSetAliveEffect) {
       if (observersForUnit.TryGetValue(0, out List<IUnitEffectObserver> globalObservers)) {
@@ -6922,6 +6911,19 @@ public class Root {
     }
     effectsUnitSetNextActionTimeEffect.Clear();
 
+    foreach (var effect in effectsUnitCreateEffect) {
+      if (observersForUnit.TryGetValue(0, out List<IUnitEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnitEffect(effect);
+        }
+      }
+      if (observersForUnit.TryGetValue(effect.id, out List<IUnitEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnitEffect(effect);
+        }
+      }
+    }
+    effectsUnitDeleteEffect.Clear();
   }
 
   public void EffectUnitSetAlive(int id, bool newValue) {
@@ -7157,7 +7159,7 @@ public class Root {
   }
   public void CheckHasIItemMutBunch(int id) {
     if (!rootIncarnation.incarnationsIItemMutBunch.ContainsKey(id)) {
-      throw new System.Exception("Invalid IItemMutBunch!");
+      throw new System.Exception("Invalid IItemMutBunch: " + id);
     }
   }
   public void AddIItemMutBunchObserver(int id, IIItemMutBunchEffectObserver observer) {
@@ -7230,6 +7232,21 @@ public class Root {
   }
      
   public void BroadcastIItemMutBunchEffects() {
+    foreach (var effect in effectsIItemMutBunchDeleteEffect) {
+      if (observersForIItemMutBunch.TryGetValue(0, out List<IIItemMutBunchEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIItemMutBunchEffect(effect);
+        }
+      }
+      if (observersForIItemMutBunch.TryGetValue(effect.id, out List<IIItemMutBunchEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIItemMutBunchEffect(effect);
+        }
+        observersForIItemMutBunch.Remove(effect.id);
+      }
+    }
+    effectsIItemMutBunchDeleteEffect.Clear();
+
 
     foreach (var effect in effectsIItemMutBunchCreateEffect) {
       if (observersForIItemMutBunch.TryGetValue(0, out List<IIItemMutBunchEffectObserver> globalObservers)) {
@@ -7243,22 +7260,7 @@ public class Root {
         }
       }
     }
-    effectsIItemMutBunchCreateEffect.Clear();
-
-    foreach (var effect in effectsIItemMutBunchDeleteEffect) {
-      if (observersForIItemMutBunch.TryGetValue(0, out List<IIItemMutBunchEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnIItemMutBunchEffect(effect);
-        }
-      }
-      if (observersForIItemMutBunch.TryGetValue(effect.id, out List<IIItemMutBunchEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnIItemMutBunchEffect(effect);
-        }
-      }
-    }
     effectsIItemMutBunchDeleteEffect.Clear();
-
   }
   public IUnitComponentMutBunchIncarnation GetIUnitComponentMutBunchIncarnation(int id) {
     if (id == 0) {
@@ -7290,7 +7292,7 @@ public class Root {
   }
   public void CheckHasIUnitComponentMutBunch(int id) {
     if (!rootIncarnation.incarnationsIUnitComponentMutBunch.ContainsKey(id)) {
-      throw new System.Exception("Invalid IUnitComponentMutBunch!");
+      throw new System.Exception("Invalid IUnitComponentMutBunch: " + id);
     }
   }
   public void AddIUnitComponentMutBunchObserver(int id, IIUnitComponentMutBunchEffectObserver observer) {
@@ -7383,6 +7385,21 @@ public class Root {
   }
      
   public void BroadcastIUnitComponentMutBunchEffects() {
+    foreach (var effect in effectsIUnitComponentMutBunchDeleteEffect) {
+      if (observersForIUnitComponentMutBunch.TryGetValue(0, out List<IIUnitComponentMutBunchEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIUnitComponentMutBunchEffect(effect);
+        }
+      }
+      if (observersForIUnitComponentMutBunch.TryGetValue(effect.id, out List<IIUnitComponentMutBunchEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIUnitComponentMutBunchEffect(effect);
+        }
+        observersForIUnitComponentMutBunch.Remove(effect.id);
+      }
+    }
+    effectsIUnitComponentMutBunchDeleteEffect.Clear();
+
 
     foreach (var effect in effectsIUnitComponentMutBunchCreateEffect) {
       if (observersForIUnitComponentMutBunch.TryGetValue(0, out List<IIUnitComponentMutBunchEffectObserver> globalObservers)) {
@@ -7396,22 +7413,7 @@ public class Root {
         }
       }
     }
-    effectsIUnitComponentMutBunchCreateEffect.Clear();
-
-    foreach (var effect in effectsIUnitComponentMutBunchDeleteEffect) {
-      if (observersForIUnitComponentMutBunch.TryGetValue(0, out List<IIUnitComponentMutBunchEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnIUnitComponentMutBunchEffect(effect);
-        }
-      }
-      if (observersForIUnitComponentMutBunch.TryGetValue(effect.id, out List<IIUnitComponentMutBunchEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnIUnitComponentMutBunchEffect(effect);
-        }
-      }
-    }
     effectsIUnitComponentMutBunchDeleteEffect.Clear();
-
   }
   public NoImpulseIncarnation GetNoImpulseIncarnation(int id) {
     if (id == 0) {
@@ -7443,7 +7445,7 @@ public class Root {
   }
   public void CheckHasNoImpulse(int id) {
     if (!rootIncarnation.incarnationsNoImpulse.ContainsKey(id)) {
-      throw new System.Exception("Invalid NoImpulse!");
+      throw new System.Exception("Invalid NoImpulse: " + id);
     }
   }
   public void AddNoImpulseObserver(int id, INoImpulseEffectObserver observer) {
@@ -7510,6 +7512,21 @@ public class Root {
   }
      
   public void BroadcastNoImpulseEffects() {
+    foreach (var effect in effectsNoImpulseDeleteEffect) {
+      if (observersForNoImpulse.TryGetValue(0, out List<INoImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnNoImpulseEffect(effect);
+        }
+      }
+      if (observersForNoImpulse.TryGetValue(effect.id, out List<INoImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnNoImpulseEffect(effect);
+        }
+        observersForNoImpulse.Remove(effect.id);
+      }
+    }
+    effectsNoImpulseDeleteEffect.Clear();
+
 
     foreach (var effect in effectsNoImpulseCreateEffect) {
       if (observersForNoImpulse.TryGetValue(0, out List<INoImpulseEffectObserver> globalObservers)) {
@@ -7523,22 +7540,7 @@ public class Root {
         }
       }
     }
-    effectsNoImpulseCreateEffect.Clear();
-
-    foreach (var effect in effectsNoImpulseDeleteEffect) {
-      if (observersForNoImpulse.TryGetValue(0, out List<INoImpulseEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnNoImpulseEffect(effect);
-        }
-      }
-      if (observersForNoImpulse.TryGetValue(effect.id, out List<INoImpulseEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnNoImpulseEffect(effect);
-        }
-      }
-    }
     effectsNoImpulseDeleteEffect.Clear();
-
   }
   public ExecutionStateIncarnation GetExecutionStateIncarnation(int id) {
     if (id == 0) {
@@ -7570,7 +7572,7 @@ public class Root {
   }
   public void CheckHasExecutionState(int id) {
     if (!rootIncarnation.incarnationsExecutionState.ContainsKey(id)) {
-      throw new System.Exception("Invalid ExecutionState!");
+      throw new System.Exception("Invalid ExecutionState: " + id);
     }
   }
   public void AddExecutionStateObserver(int id, IExecutionStateEffectObserver observer) {
@@ -7647,21 +7649,6 @@ public class Root {
   }
      
   public void BroadcastExecutionStateEffects() {
-
-    foreach (var effect in effectsExecutionStateCreateEffect) {
-      if (observersForExecutionState.TryGetValue(0, out List<IExecutionStateEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnExecutionStateEffect(effect);
-        }
-      }
-      if (observersForExecutionState.TryGetValue(effect.id, out List<IExecutionStateEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnExecutionStateEffect(effect);
-        }
-      }
-    }
-    effectsExecutionStateCreateEffect.Clear();
-
     foreach (var effect in effectsExecutionStateDeleteEffect) {
       if (observersForExecutionState.TryGetValue(0, out List<IExecutionStateEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -7672,9 +7659,11 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnExecutionStateEffect(effect);
         }
+        observersForExecutionState.Remove(effect.id);
       }
     }
     effectsExecutionStateDeleteEffect.Clear();
+
 
     foreach (var effect in effectsExecutionStateSetActingUnitEffect) {
       if (observersForExecutionState.TryGetValue(0, out List<IExecutionStateEffectObserver> globalObservers)) {
@@ -7732,6 +7721,19 @@ public class Root {
     }
     effectsExecutionStateSetRemainingPostActingUnitComponentsEffect.Clear();
 
+    foreach (var effect in effectsExecutionStateCreateEffect) {
+      if (observersForExecutionState.TryGetValue(0, out List<IExecutionStateEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnExecutionStateEffect(effect);
+        }
+      }
+      if (observersForExecutionState.TryGetValue(effect.id, out List<IExecutionStateEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnExecutionStateEffect(effect);
+        }
+      }
+    }
+    effectsExecutionStateDeleteEffect.Clear();
   }
 
   public void EffectExecutionStateSetActingUnit(int id, Unit newValue) {
@@ -7863,7 +7865,7 @@ public class Root {
   }
   public void CheckHasIPostActingUCWeakMutBunch(int id) {
     if (!rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(id)) {
-      throw new System.Exception("Invalid IPostActingUCWeakMutBunch!");
+      throw new System.Exception("Invalid IPostActingUCWeakMutBunch: " + id);
     }
   }
   public void AddIPostActingUCWeakMutBunchObserver(int id, IIPostActingUCWeakMutBunchEffectObserver observer) {
@@ -7930,6 +7932,21 @@ public class Root {
   }
      
   public void BroadcastIPostActingUCWeakMutBunchEffects() {
+    foreach (var effect in effectsIPostActingUCWeakMutBunchDeleteEffect) {
+      if (observersForIPostActingUCWeakMutBunch.TryGetValue(0, out List<IIPostActingUCWeakMutBunchEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIPostActingUCWeakMutBunchEffect(effect);
+        }
+      }
+      if (observersForIPostActingUCWeakMutBunch.TryGetValue(effect.id, out List<IIPostActingUCWeakMutBunchEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIPostActingUCWeakMutBunchEffect(effect);
+        }
+        observersForIPostActingUCWeakMutBunch.Remove(effect.id);
+      }
+    }
+    effectsIPostActingUCWeakMutBunchDeleteEffect.Clear();
+
 
     foreach (var effect in effectsIPostActingUCWeakMutBunchCreateEffect) {
       if (observersForIPostActingUCWeakMutBunch.TryGetValue(0, out List<IIPostActingUCWeakMutBunchEffectObserver> globalObservers)) {
@@ -7943,22 +7960,7 @@ public class Root {
         }
       }
     }
-    effectsIPostActingUCWeakMutBunchCreateEffect.Clear();
-
-    foreach (var effect in effectsIPostActingUCWeakMutBunchDeleteEffect) {
-      if (observersForIPostActingUCWeakMutBunch.TryGetValue(0, out List<IIPostActingUCWeakMutBunchEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnIPostActingUCWeakMutBunchEffect(effect);
-        }
-      }
-      if (observersForIPostActingUCWeakMutBunch.TryGetValue(effect.id, out List<IIPostActingUCWeakMutBunchEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnIPostActingUCWeakMutBunchEffect(effect);
-        }
-      }
-    }
     effectsIPostActingUCWeakMutBunchDeleteEffect.Clear();
-
   }
   public IPreActingUCWeakMutBunchIncarnation GetIPreActingUCWeakMutBunchIncarnation(int id) {
     if (id == 0) {
@@ -7990,7 +7992,7 @@ public class Root {
   }
   public void CheckHasIPreActingUCWeakMutBunch(int id) {
     if (!rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(id)) {
-      throw new System.Exception("Invalid IPreActingUCWeakMutBunch!");
+      throw new System.Exception("Invalid IPreActingUCWeakMutBunch: " + id);
     }
   }
   public void AddIPreActingUCWeakMutBunchObserver(int id, IIPreActingUCWeakMutBunchEffectObserver observer) {
@@ -8063,6 +8065,21 @@ public class Root {
   }
      
   public void BroadcastIPreActingUCWeakMutBunchEffects() {
+    foreach (var effect in effectsIPreActingUCWeakMutBunchDeleteEffect) {
+      if (observersForIPreActingUCWeakMutBunch.TryGetValue(0, out List<IIPreActingUCWeakMutBunchEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIPreActingUCWeakMutBunchEffect(effect);
+        }
+      }
+      if (observersForIPreActingUCWeakMutBunch.TryGetValue(effect.id, out List<IIPreActingUCWeakMutBunchEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIPreActingUCWeakMutBunchEffect(effect);
+        }
+        observersForIPreActingUCWeakMutBunch.Remove(effect.id);
+      }
+    }
+    effectsIPreActingUCWeakMutBunchDeleteEffect.Clear();
+
 
     foreach (var effect in effectsIPreActingUCWeakMutBunchCreateEffect) {
       if (observersForIPreActingUCWeakMutBunch.TryGetValue(0, out List<IIPreActingUCWeakMutBunchEffectObserver> globalObservers)) {
@@ -8076,22 +8093,7 @@ public class Root {
         }
       }
     }
-    effectsIPreActingUCWeakMutBunchCreateEffect.Clear();
-
-    foreach (var effect in effectsIPreActingUCWeakMutBunchDeleteEffect) {
-      if (observersForIPreActingUCWeakMutBunch.TryGetValue(0, out List<IIPreActingUCWeakMutBunchEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnIPreActingUCWeakMutBunchEffect(effect);
-        }
-      }
-      if (observersForIPreActingUCWeakMutBunch.TryGetValue(effect.id, out List<IIPreActingUCWeakMutBunchEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnIPreActingUCWeakMutBunchEffect(effect);
-        }
-      }
-    }
     effectsIPreActingUCWeakMutBunchDeleteEffect.Clear();
-
   }
   public GameIncarnation GetGameIncarnation(int id) {
     if (id == 0) {
@@ -8123,7 +8125,7 @@ public class Root {
   }
   public void CheckHasGame(int id) {
     if (!rootIncarnation.incarnationsGame.ContainsKey(id)) {
-      throw new System.Exception("Invalid Game!");
+      throw new System.Exception("Invalid Game: " + id);
     }
   }
   public void AddGameObserver(int id, IGameEffectObserver observer) {
@@ -8214,21 +8216,6 @@ public class Root {
   }
      
   public void BroadcastGameEffects() {
-
-    foreach (var effect in effectsGameCreateEffect) {
-      if (observersForGame.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnGameEffect(effect);
-        }
-      }
-      if (observersForGame.TryGetValue(effect.id, out List<IGameEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnGameEffect(effect);
-        }
-      }
-    }
-    effectsGameCreateEffect.Clear();
-
     foreach (var effect in effectsGameDeleteEffect) {
       if (observersForGame.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -8239,9 +8226,11 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnGameEffect(effect);
         }
+        observersForGame.Remove(effect.id);
       }
     }
     effectsGameDeleteEffect.Clear();
+
 
     foreach (var effect in effectsGameSetPlayerEffect) {
       if (observersForGame.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
@@ -8285,6 +8274,19 @@ public class Root {
     }
     effectsGameSetTimeEffect.Clear();
 
+    foreach (var effect in effectsGameCreateEffect) {
+      if (observersForGame.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGameEffect(effect);
+        }
+      }
+      if (observersForGame.TryGetValue(effect.id, out List<IGameEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGameEffect(effect);
+        }
+      }
+    }
+    effectsGameDeleteEffect.Clear();
   }
 
   public void EffectGameSetPlayer(int id, Unit newValue) {
@@ -8858,7 +8860,7 @@ public class Root {
     }
     public void CheckHasIUnitEventMutList(int id) {
       if (!rootIncarnation.incarnationsIUnitEventMutList.ContainsKey(id)) {
-        throw new System.Exception("Invalid IUnitEventMutList}!");
+        throw new System.Exception("Invalid IUnitEventMutList}: " + id);
       }
     }
     public IUnitEventMutList EffectIUnitEventMutListCreate() {
@@ -8957,21 +8959,6 @@ public class Root {
     }
 
   public void BroadcastIUnitEventMutListEffects() {
-
-    foreach (var effect in effectsIUnitEventMutListCreateEffect) {
-      if (observersForIUnitEventMutList.TryGetValue(0, out List<IIUnitEventMutListEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnIUnitEventMutListEffect(effect);
-        }
-      }
-      if (observersForIUnitEventMutList.TryGetValue(effect.id, out List<IIUnitEventMutListEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnIUnitEventMutListEffect(effect);
-        }
-      }
-    }
-    effectsIUnitEventMutListCreateEffect.Clear();
-
     foreach (var effect in effectsIUnitEventMutListDeleteEffect) {
       if (observersForIUnitEventMutList.TryGetValue(0, out List<IIUnitEventMutListEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -8982,6 +8969,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnIUnitEventMutListEffect(effect);
         }
+        observersForIUnitEventMutList.Remove(effect.id);
       }
     }
     effectsIUnitEventMutListDeleteEffect.Clear();
@@ -9014,6 +9002,20 @@ public class Root {
     }
     effectsIUnitEventMutListRemoveEffect.Clear();
 
+    foreach (var effect in effectsIUnitEventMutListCreateEffect) {
+      if (observersForIUnitEventMutList.TryGetValue(0, out List<IIUnitEventMutListEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIUnitEventMutListEffect(effect);
+        }
+      }
+      if (observersForIUnitEventMutList.TryGetValue(effect.id, out List<IIUnitEventMutListEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIUnitEventMutListEffect(effect);
+        }
+      }
+    }
+    effectsIUnitEventMutListCreateEffect.Clear();
+
   }
 
     public int GetLocationMutListHash(int id, int version, LocationMutListIncarnation incarnation) {
@@ -9045,7 +9047,7 @@ public class Root {
     }
     public void CheckHasLocationMutList(int id) {
       if (!rootIncarnation.incarnationsLocationMutList.ContainsKey(id)) {
-        throw new System.Exception("Invalid LocationMutList}!");
+        throw new System.Exception("Invalid LocationMutList}: " + id);
       }
     }
     public LocationMutList EffectLocationMutListCreate() {
@@ -9144,21 +9146,6 @@ public class Root {
     }
 
   public void BroadcastLocationMutListEffects() {
-
-    foreach (var effect in effectsLocationMutListCreateEffect) {
-      if (observersForLocationMutList.TryGetValue(0, out List<ILocationMutListEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnLocationMutListEffect(effect);
-        }
-      }
-      if (observersForLocationMutList.TryGetValue(effect.id, out List<ILocationMutListEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnLocationMutListEffect(effect);
-        }
-      }
-    }
-    effectsLocationMutListCreateEffect.Clear();
-
     foreach (var effect in effectsLocationMutListDeleteEffect) {
       if (observersForLocationMutList.TryGetValue(0, out List<ILocationMutListEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -9169,6 +9156,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnLocationMutListEffect(effect);
         }
+        observersForLocationMutList.Remove(effect.id);
       }
     }
     effectsLocationMutListDeleteEffect.Clear();
@@ -9201,6 +9189,20 @@ public class Root {
     }
     effectsLocationMutListRemoveEffect.Clear();
 
+    foreach (var effect in effectsLocationMutListCreateEffect) {
+      if (observersForLocationMutList.TryGetValue(0, out List<ILocationMutListEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLocationMutListEffect(effect);
+        }
+      }
+      if (observersForLocationMutList.TryGetValue(effect.id, out List<ILocationMutListEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLocationMutListEffect(effect);
+        }
+      }
+    }
+    effectsLocationMutListCreateEffect.Clear();
+
   }
 
     public int GetLevelMutSetHash(int id, int version, LevelMutSetIncarnation incarnation) {
@@ -9232,7 +9234,7 @@ public class Root {
     }
     public void CheckHasLevelMutSet(int id) {
       if (!rootIncarnation.incarnationsLevelMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid LevelMutSet}!");
+        throw new System.Exception("Invalid LevelMutSet}: " + id);
       }
     }
     public LevelMutSet EffectLevelMutSetCreate() {
@@ -9330,21 +9332,6 @@ public class Root {
     }
        
   public void BroadcastLevelMutSetEffects() {
-
-    foreach (var effect in effectsLevelMutSetCreateEffect) {
-      if (observersForLevelMutSet.TryGetValue(0, out List<ILevelMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnLevelMutSetEffect(effect);
-        }
-      }
-      if (observersForLevelMutSet.TryGetValue(effect.id, out List<ILevelMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnLevelMutSetEffect(effect);
-        }
-      }
-    }
-    effectsLevelMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsLevelMutSetDeleteEffect) {
       if (observersForLevelMutSet.TryGetValue(0, out List<ILevelMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -9355,6 +9342,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnLevelMutSetEffect(effect);
         }
+        observersForLevelMutSet.Remove(effect.id);
       }
     }
     effectsLevelMutSetDeleteEffect.Clear();
@@ -9387,6 +9375,20 @@ public class Root {
     }
     effectsLevelMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsLevelMutSetCreateEffect) {
+      if (observersForLevelMutSet.TryGetValue(0, out List<ILevelMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLevelMutSetEffect(effect);
+        }
+      }
+      if (observersForLevelMutSet.TryGetValue(effect.id, out List<ILevelMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLevelMutSetEffect(effect);
+        }
+      }
+    }
+    effectsLevelMutSetCreateEffect.Clear();
+
   }
 
     public int GetShieldingUCWeakMutSetHash(int id, int version, ShieldingUCWeakMutSetIncarnation incarnation) {
@@ -9418,7 +9420,7 @@ public class Root {
     }
     public void CheckHasShieldingUCWeakMutSet(int id) {
       if (!rootIncarnation.incarnationsShieldingUCWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid ShieldingUCWeakMutSet}!");
+        throw new System.Exception("Invalid ShieldingUCWeakMutSet}: " + id);
       }
     }
     public ShieldingUCWeakMutSet EffectShieldingUCWeakMutSetCreate() {
@@ -9516,21 +9518,6 @@ public class Root {
     }
        
   public void BroadcastShieldingUCWeakMutSetEffects() {
-
-    foreach (var effect in effectsShieldingUCWeakMutSetCreateEffect) {
-      if (observersForShieldingUCWeakMutSet.TryGetValue(0, out List<IShieldingUCWeakMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnShieldingUCWeakMutSetEffect(effect);
-        }
-      }
-      if (observersForShieldingUCWeakMutSet.TryGetValue(effect.id, out List<IShieldingUCWeakMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnShieldingUCWeakMutSetEffect(effect);
-        }
-      }
-    }
-    effectsShieldingUCWeakMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsShieldingUCWeakMutSetDeleteEffect) {
       if (observersForShieldingUCWeakMutSet.TryGetValue(0, out List<IShieldingUCWeakMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -9541,6 +9528,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnShieldingUCWeakMutSetEffect(effect);
         }
+        observersForShieldingUCWeakMutSet.Remove(effect.id);
       }
     }
     effectsShieldingUCWeakMutSetDeleteEffect.Clear();
@@ -9573,6 +9561,20 @@ public class Root {
     }
     effectsShieldingUCWeakMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsShieldingUCWeakMutSetCreateEffect) {
+      if (observersForShieldingUCWeakMutSet.TryGetValue(0, out List<IShieldingUCWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnShieldingUCWeakMutSetEffect(effect);
+        }
+      }
+      if (observersForShieldingUCWeakMutSet.TryGetValue(effect.id, out List<IShieldingUCWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnShieldingUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    effectsShieldingUCWeakMutSetCreateEffect.Clear();
+
   }
 
     public int GetAttackAICapabilityUCWeakMutSetHash(int id, int version, AttackAICapabilityUCWeakMutSetIncarnation incarnation) {
@@ -9604,7 +9606,7 @@ public class Root {
     }
     public void CheckHasAttackAICapabilityUCWeakMutSet(int id) {
       if (!rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid AttackAICapabilityUCWeakMutSet}!");
+        throw new System.Exception("Invalid AttackAICapabilityUCWeakMutSet}: " + id);
       }
     }
     public AttackAICapabilityUCWeakMutSet EffectAttackAICapabilityUCWeakMutSetCreate() {
@@ -9702,21 +9704,6 @@ public class Root {
     }
        
   public void BroadcastAttackAICapabilityUCWeakMutSetEffects() {
-
-    foreach (var effect in effectsAttackAICapabilityUCWeakMutSetCreateEffect) {
-      if (observersForAttackAICapabilityUCWeakMutSet.TryGetValue(0, out List<IAttackAICapabilityUCWeakMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnAttackAICapabilityUCWeakMutSetEffect(effect);
-        }
-      }
-      if (observersForAttackAICapabilityUCWeakMutSet.TryGetValue(effect.id, out List<IAttackAICapabilityUCWeakMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnAttackAICapabilityUCWeakMutSetEffect(effect);
-        }
-      }
-    }
-    effectsAttackAICapabilityUCWeakMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsAttackAICapabilityUCWeakMutSetDeleteEffect) {
       if (observersForAttackAICapabilityUCWeakMutSet.TryGetValue(0, out List<IAttackAICapabilityUCWeakMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -9727,6 +9714,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnAttackAICapabilityUCWeakMutSetEffect(effect);
         }
+        observersForAttackAICapabilityUCWeakMutSet.Remove(effect.id);
       }
     }
     effectsAttackAICapabilityUCWeakMutSetDeleteEffect.Clear();
@@ -9759,6 +9747,20 @@ public class Root {
     }
     effectsAttackAICapabilityUCWeakMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsAttackAICapabilityUCWeakMutSetCreateEffect) {
+      if (observersForAttackAICapabilityUCWeakMutSet.TryGetValue(0, out List<IAttackAICapabilityUCWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnAttackAICapabilityUCWeakMutSetEffect(effect);
+        }
+      }
+      if (observersForAttackAICapabilityUCWeakMutSet.TryGetValue(effect.id, out List<IAttackAICapabilityUCWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnAttackAICapabilityUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    effectsAttackAICapabilityUCWeakMutSetCreateEffect.Clear();
+
   }
 
     public int GetKillDirectiveUCMutSetHash(int id, int version, KillDirectiveUCMutSetIncarnation incarnation) {
@@ -9790,7 +9792,7 @@ public class Root {
     }
     public void CheckHasKillDirectiveUCMutSet(int id) {
       if (!rootIncarnation.incarnationsKillDirectiveUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid KillDirectiveUCMutSet}!");
+        throw new System.Exception("Invalid KillDirectiveUCMutSet}: " + id);
       }
     }
     public KillDirectiveUCMutSet EffectKillDirectiveUCMutSetCreate() {
@@ -9888,21 +9890,6 @@ public class Root {
     }
        
   public void BroadcastKillDirectiveUCMutSetEffects() {
-
-    foreach (var effect in effectsKillDirectiveUCMutSetCreateEffect) {
-      if (observersForKillDirectiveUCMutSet.TryGetValue(0, out List<IKillDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnKillDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observersForKillDirectiveUCMutSet.TryGetValue(effect.id, out List<IKillDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnKillDirectiveUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsKillDirectiveUCMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsKillDirectiveUCMutSetDeleteEffect) {
       if (observersForKillDirectiveUCMutSet.TryGetValue(0, out List<IKillDirectiveUCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -9913,6 +9900,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnKillDirectiveUCMutSetEffect(effect);
         }
+        observersForKillDirectiveUCMutSet.Remove(effect.id);
       }
     }
     effectsKillDirectiveUCMutSetDeleteEffect.Clear();
@@ -9945,6 +9933,20 @@ public class Root {
     }
     effectsKillDirectiveUCMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsKillDirectiveUCMutSetCreateEffect) {
+      if (observersForKillDirectiveUCMutSet.TryGetValue(0, out List<IKillDirectiveUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKillDirectiveUCMutSetEffect(effect);
+        }
+      }
+      if (observersForKillDirectiveUCMutSet.TryGetValue(effect.id, out List<IKillDirectiveUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKillDirectiveUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKillDirectiveUCMutSetCreateEffect.Clear();
+
   }
 
     public int GetMoveDirectiveUCMutSetHash(int id, int version, MoveDirectiveUCMutSetIncarnation incarnation) {
@@ -9976,7 +9978,7 @@ public class Root {
     }
     public void CheckHasMoveDirectiveUCMutSet(int id) {
       if (!rootIncarnation.incarnationsMoveDirectiveUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid MoveDirectiveUCMutSet}!");
+        throw new System.Exception("Invalid MoveDirectiveUCMutSet}: " + id);
       }
     }
     public MoveDirectiveUCMutSet EffectMoveDirectiveUCMutSetCreate() {
@@ -10074,21 +10076,6 @@ public class Root {
     }
        
   public void BroadcastMoveDirectiveUCMutSetEffects() {
-
-    foreach (var effect in effectsMoveDirectiveUCMutSetCreateEffect) {
-      if (observersForMoveDirectiveUCMutSet.TryGetValue(0, out List<IMoveDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnMoveDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observersForMoveDirectiveUCMutSet.TryGetValue(effect.id, out List<IMoveDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnMoveDirectiveUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsMoveDirectiveUCMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsMoveDirectiveUCMutSetDeleteEffect) {
       if (observersForMoveDirectiveUCMutSet.TryGetValue(0, out List<IMoveDirectiveUCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -10099,6 +10086,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnMoveDirectiveUCMutSetEffect(effect);
         }
+        observersForMoveDirectiveUCMutSet.Remove(effect.id);
       }
     }
     effectsMoveDirectiveUCMutSetDeleteEffect.Clear();
@@ -10131,6 +10119,20 @@ public class Root {
     }
     effectsMoveDirectiveUCMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsMoveDirectiveUCMutSetCreateEffect) {
+      if (observersForMoveDirectiveUCMutSet.TryGetValue(0, out List<IMoveDirectiveUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnMoveDirectiveUCMutSetEffect(effect);
+        }
+      }
+      if (observersForMoveDirectiveUCMutSet.TryGetValue(effect.id, out List<IMoveDirectiveUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnMoveDirectiveUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsMoveDirectiveUCMutSetCreateEffect.Clear();
+
   }
 
     public int GetWanderAICapabilityUCMutSetHash(int id, int version, WanderAICapabilityUCMutSetIncarnation incarnation) {
@@ -10162,7 +10164,7 @@ public class Root {
     }
     public void CheckHasWanderAICapabilityUCMutSet(int id) {
       if (!rootIncarnation.incarnationsWanderAICapabilityUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid WanderAICapabilityUCMutSet}!");
+        throw new System.Exception("Invalid WanderAICapabilityUCMutSet}: " + id);
       }
     }
     public WanderAICapabilityUCMutSet EffectWanderAICapabilityUCMutSetCreate() {
@@ -10260,21 +10262,6 @@ public class Root {
     }
        
   public void BroadcastWanderAICapabilityUCMutSetEffects() {
-
-    foreach (var effect in effectsWanderAICapabilityUCMutSetCreateEffect) {
-      if (observersForWanderAICapabilityUCMutSet.TryGetValue(0, out List<IWanderAICapabilityUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnWanderAICapabilityUCMutSetEffect(effect);
-        }
-      }
-      if (observersForWanderAICapabilityUCMutSet.TryGetValue(effect.id, out List<IWanderAICapabilityUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnWanderAICapabilityUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsWanderAICapabilityUCMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsWanderAICapabilityUCMutSetDeleteEffect) {
       if (observersForWanderAICapabilityUCMutSet.TryGetValue(0, out List<IWanderAICapabilityUCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -10285,6 +10272,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnWanderAICapabilityUCMutSetEffect(effect);
         }
+        observersForWanderAICapabilityUCMutSet.Remove(effect.id);
       }
     }
     effectsWanderAICapabilityUCMutSetDeleteEffect.Clear();
@@ -10317,6 +10305,20 @@ public class Root {
     }
     effectsWanderAICapabilityUCMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsWanderAICapabilityUCMutSetCreateEffect) {
+      if (observersForWanderAICapabilityUCMutSet.TryGetValue(0, out List<IWanderAICapabilityUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnWanderAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observersForWanderAICapabilityUCMutSet.TryGetValue(effect.id, out List<IWanderAICapabilityUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnWanderAICapabilityUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsWanderAICapabilityUCMutSetCreateEffect.Clear();
+
   }
 
     public int GetBideAICapabilityUCMutSetHash(int id, int version, BideAICapabilityUCMutSetIncarnation incarnation) {
@@ -10348,7 +10350,7 @@ public class Root {
     }
     public void CheckHasBideAICapabilityUCMutSet(int id) {
       if (!rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid BideAICapabilityUCMutSet}!");
+        throw new System.Exception("Invalid BideAICapabilityUCMutSet}: " + id);
       }
     }
     public BideAICapabilityUCMutSet EffectBideAICapabilityUCMutSetCreate() {
@@ -10446,21 +10448,6 @@ public class Root {
     }
        
   public void BroadcastBideAICapabilityUCMutSetEffects() {
-
-    foreach (var effect in effectsBideAICapabilityUCMutSetCreateEffect) {
-      if (observersForBideAICapabilityUCMutSet.TryGetValue(0, out List<IBideAICapabilityUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnBideAICapabilityUCMutSetEffect(effect);
-        }
-      }
-      if (observersForBideAICapabilityUCMutSet.TryGetValue(effect.id, out List<IBideAICapabilityUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnBideAICapabilityUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsBideAICapabilityUCMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsBideAICapabilityUCMutSetDeleteEffect) {
       if (observersForBideAICapabilityUCMutSet.TryGetValue(0, out List<IBideAICapabilityUCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -10471,6 +10458,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnBideAICapabilityUCMutSetEffect(effect);
         }
+        observersForBideAICapabilityUCMutSet.Remove(effect.id);
       }
     }
     effectsBideAICapabilityUCMutSetDeleteEffect.Clear();
@@ -10503,6 +10491,20 @@ public class Root {
     }
     effectsBideAICapabilityUCMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsBideAICapabilityUCMutSetCreateEffect) {
+      if (observersForBideAICapabilityUCMutSet.TryGetValue(0, out List<IBideAICapabilityUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBideAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observersForBideAICapabilityUCMutSet.TryGetValue(effect.id, out List<IBideAICapabilityUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBideAICapabilityUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsBideAICapabilityUCMutSetCreateEffect.Clear();
+
   }
 
     public int GetAttackAICapabilityUCMutSetHash(int id, int version, AttackAICapabilityUCMutSetIncarnation incarnation) {
@@ -10534,7 +10536,7 @@ public class Root {
     }
     public void CheckHasAttackAICapabilityUCMutSet(int id) {
       if (!rootIncarnation.incarnationsAttackAICapabilityUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid AttackAICapabilityUCMutSet}!");
+        throw new System.Exception("Invalid AttackAICapabilityUCMutSet}: " + id);
       }
     }
     public AttackAICapabilityUCMutSet EffectAttackAICapabilityUCMutSetCreate() {
@@ -10632,21 +10634,6 @@ public class Root {
     }
        
   public void BroadcastAttackAICapabilityUCMutSetEffects() {
-
-    foreach (var effect in effectsAttackAICapabilityUCMutSetCreateEffect) {
-      if (observersForAttackAICapabilityUCMutSet.TryGetValue(0, out List<IAttackAICapabilityUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnAttackAICapabilityUCMutSetEffect(effect);
-        }
-      }
-      if (observersForAttackAICapabilityUCMutSet.TryGetValue(effect.id, out List<IAttackAICapabilityUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnAttackAICapabilityUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsAttackAICapabilityUCMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsAttackAICapabilityUCMutSetDeleteEffect) {
       if (observersForAttackAICapabilityUCMutSet.TryGetValue(0, out List<IAttackAICapabilityUCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -10657,6 +10644,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnAttackAICapabilityUCMutSetEffect(effect);
         }
+        observersForAttackAICapabilityUCMutSet.Remove(effect.id);
       }
     }
     effectsAttackAICapabilityUCMutSetDeleteEffect.Clear();
@@ -10689,6 +10677,20 @@ public class Root {
     }
     effectsAttackAICapabilityUCMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsAttackAICapabilityUCMutSetCreateEffect) {
+      if (observersForAttackAICapabilityUCMutSet.TryGetValue(0, out List<IAttackAICapabilityUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnAttackAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observersForAttackAICapabilityUCMutSet.TryGetValue(effect.id, out List<IAttackAICapabilityUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnAttackAICapabilityUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsAttackAICapabilityUCMutSetCreateEffect.Clear();
+
   }
 
     public int GetShieldingUCMutSetHash(int id, int version, ShieldingUCMutSetIncarnation incarnation) {
@@ -10720,7 +10722,7 @@ public class Root {
     }
     public void CheckHasShieldingUCMutSet(int id) {
       if (!rootIncarnation.incarnationsShieldingUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid ShieldingUCMutSet}!");
+        throw new System.Exception("Invalid ShieldingUCMutSet}: " + id);
       }
     }
     public ShieldingUCMutSet EffectShieldingUCMutSetCreate() {
@@ -10818,21 +10820,6 @@ public class Root {
     }
        
   public void BroadcastShieldingUCMutSetEffects() {
-
-    foreach (var effect in effectsShieldingUCMutSetCreateEffect) {
-      if (observersForShieldingUCMutSet.TryGetValue(0, out List<IShieldingUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnShieldingUCMutSetEffect(effect);
-        }
-      }
-      if (observersForShieldingUCMutSet.TryGetValue(effect.id, out List<IShieldingUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnShieldingUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsShieldingUCMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsShieldingUCMutSetDeleteEffect) {
       if (observersForShieldingUCMutSet.TryGetValue(0, out List<IShieldingUCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -10843,6 +10830,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnShieldingUCMutSetEffect(effect);
         }
+        observersForShieldingUCMutSet.Remove(effect.id);
       }
     }
     effectsShieldingUCMutSetDeleteEffect.Clear();
@@ -10875,6 +10863,20 @@ public class Root {
     }
     effectsShieldingUCMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsShieldingUCMutSetCreateEffect) {
+      if (observersForShieldingUCMutSet.TryGetValue(0, out List<IShieldingUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnShieldingUCMutSetEffect(effect);
+        }
+      }
+      if (observersForShieldingUCMutSet.TryGetValue(effect.id, out List<IShieldingUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnShieldingUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsShieldingUCMutSetCreateEffect.Clear();
+
   }
 
     public int GetBidingOperationUCMutSetHash(int id, int version, BidingOperationUCMutSetIncarnation incarnation) {
@@ -10906,7 +10908,7 @@ public class Root {
     }
     public void CheckHasBidingOperationUCMutSet(int id) {
       if (!rootIncarnation.incarnationsBidingOperationUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid BidingOperationUCMutSet}!");
+        throw new System.Exception("Invalid BidingOperationUCMutSet}: " + id);
       }
     }
     public BidingOperationUCMutSet EffectBidingOperationUCMutSetCreate() {
@@ -11004,21 +11006,6 @@ public class Root {
     }
        
   public void BroadcastBidingOperationUCMutSetEffects() {
-
-    foreach (var effect in effectsBidingOperationUCMutSetCreateEffect) {
-      if (observersForBidingOperationUCMutSet.TryGetValue(0, out List<IBidingOperationUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnBidingOperationUCMutSetEffect(effect);
-        }
-      }
-      if (observersForBidingOperationUCMutSet.TryGetValue(effect.id, out List<IBidingOperationUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnBidingOperationUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsBidingOperationUCMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsBidingOperationUCMutSetDeleteEffect) {
       if (observersForBidingOperationUCMutSet.TryGetValue(0, out List<IBidingOperationUCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -11029,6 +11016,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnBidingOperationUCMutSetEffect(effect);
         }
+        observersForBidingOperationUCMutSet.Remove(effect.id);
       }
     }
     effectsBidingOperationUCMutSetDeleteEffect.Clear();
@@ -11061,6 +11049,20 @@ public class Root {
     }
     effectsBidingOperationUCMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsBidingOperationUCMutSetCreateEffect) {
+      if (observersForBidingOperationUCMutSet.TryGetValue(0, out List<IBidingOperationUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBidingOperationUCMutSetEffect(effect);
+        }
+      }
+      if (observersForBidingOperationUCMutSet.TryGetValue(effect.id, out List<IBidingOperationUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBidingOperationUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsBidingOperationUCMutSetCreateEffect.Clear();
+
   }
 
     public int GetGlaiveMutSetHash(int id, int version, GlaiveMutSetIncarnation incarnation) {
@@ -11092,7 +11094,7 @@ public class Root {
     }
     public void CheckHasGlaiveMutSet(int id) {
       if (!rootIncarnation.incarnationsGlaiveMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid GlaiveMutSet}!");
+        throw new System.Exception("Invalid GlaiveMutSet}: " + id);
       }
     }
     public GlaiveMutSet EffectGlaiveMutSetCreate() {
@@ -11190,21 +11192,6 @@ public class Root {
     }
        
   public void BroadcastGlaiveMutSetEffects() {
-
-    foreach (var effect in effectsGlaiveMutSetCreateEffect) {
-      if (observersForGlaiveMutSet.TryGetValue(0, out List<IGlaiveMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnGlaiveMutSetEffect(effect);
-        }
-      }
-      if (observersForGlaiveMutSet.TryGetValue(effect.id, out List<IGlaiveMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnGlaiveMutSetEffect(effect);
-        }
-      }
-    }
-    effectsGlaiveMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsGlaiveMutSetDeleteEffect) {
       if (observersForGlaiveMutSet.TryGetValue(0, out List<IGlaiveMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -11215,6 +11202,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnGlaiveMutSetEffect(effect);
         }
+        observersForGlaiveMutSet.Remove(effect.id);
       }
     }
     effectsGlaiveMutSetDeleteEffect.Clear();
@@ -11247,6 +11235,20 @@ public class Root {
     }
     effectsGlaiveMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsGlaiveMutSetCreateEffect) {
+      if (observersForGlaiveMutSet.TryGetValue(0, out List<IGlaiveMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGlaiveMutSetEffect(effect);
+        }
+      }
+      if (observersForGlaiveMutSet.TryGetValue(effect.id, out List<IGlaiveMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGlaiveMutSetEffect(effect);
+        }
+      }
+    }
+    effectsGlaiveMutSetCreateEffect.Clear();
+
   }
 
     public int GetArmorMutSetHash(int id, int version, ArmorMutSetIncarnation incarnation) {
@@ -11278,7 +11280,7 @@ public class Root {
     }
     public void CheckHasArmorMutSet(int id) {
       if (!rootIncarnation.incarnationsArmorMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid ArmorMutSet}!");
+        throw new System.Exception("Invalid ArmorMutSet}: " + id);
       }
     }
     public ArmorMutSet EffectArmorMutSetCreate() {
@@ -11376,21 +11378,6 @@ public class Root {
     }
        
   public void BroadcastArmorMutSetEffects() {
-
-    foreach (var effect in effectsArmorMutSetCreateEffect) {
-      if (observersForArmorMutSet.TryGetValue(0, out List<IArmorMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnArmorMutSetEffect(effect);
-        }
-      }
-      if (observersForArmorMutSet.TryGetValue(effect.id, out List<IArmorMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnArmorMutSetEffect(effect);
-        }
-      }
-    }
-    effectsArmorMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsArmorMutSetDeleteEffect) {
       if (observersForArmorMutSet.TryGetValue(0, out List<IArmorMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -11401,6 +11388,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnArmorMutSetEffect(effect);
         }
+        observersForArmorMutSet.Remove(effect.id);
       }
     }
     effectsArmorMutSetDeleteEffect.Clear();
@@ -11433,6 +11421,20 @@ public class Root {
     }
     effectsArmorMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsArmorMutSetCreateEffect) {
+      if (observersForArmorMutSet.TryGetValue(0, out List<IArmorMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnArmorMutSetEffect(effect);
+        }
+      }
+      if (observersForArmorMutSet.TryGetValue(effect.id, out List<IArmorMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnArmorMutSetEffect(effect);
+        }
+      }
+    }
+    effectsArmorMutSetCreateEffect.Clear();
+
   }
 
     public int GetItemTerrainTileComponentMutSetHash(int id, int version, ItemTerrainTileComponentMutSetIncarnation incarnation) {
@@ -11464,7 +11466,7 @@ public class Root {
     }
     public void CheckHasItemTerrainTileComponentMutSet(int id) {
       if (!rootIncarnation.incarnationsItemTerrainTileComponentMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid ItemTerrainTileComponentMutSet}!");
+        throw new System.Exception("Invalid ItemTerrainTileComponentMutSet}: " + id);
       }
     }
     public ItemTerrainTileComponentMutSet EffectItemTerrainTileComponentMutSetCreate() {
@@ -11562,21 +11564,6 @@ public class Root {
     }
        
   public void BroadcastItemTerrainTileComponentMutSetEffects() {
-
-    foreach (var effect in effectsItemTerrainTileComponentMutSetCreateEffect) {
-      if (observersForItemTerrainTileComponentMutSet.TryGetValue(0, out List<IItemTerrainTileComponentMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnItemTerrainTileComponentMutSetEffect(effect);
-        }
-      }
-      if (observersForItemTerrainTileComponentMutSet.TryGetValue(effect.id, out List<IItemTerrainTileComponentMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnItemTerrainTileComponentMutSetEffect(effect);
-        }
-      }
-    }
-    effectsItemTerrainTileComponentMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsItemTerrainTileComponentMutSetDeleteEffect) {
       if (observersForItemTerrainTileComponentMutSet.TryGetValue(0, out List<IItemTerrainTileComponentMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -11587,6 +11574,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnItemTerrainTileComponentMutSetEffect(effect);
         }
+        observersForItemTerrainTileComponentMutSet.Remove(effect.id);
       }
     }
     effectsItemTerrainTileComponentMutSetDeleteEffect.Clear();
@@ -11619,6 +11607,20 @@ public class Root {
     }
     effectsItemTerrainTileComponentMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsItemTerrainTileComponentMutSetCreateEffect) {
+      if (observersForItemTerrainTileComponentMutSet.TryGetValue(0, out List<IItemTerrainTileComponentMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnItemTerrainTileComponentMutSetEffect(effect);
+        }
+      }
+      if (observersForItemTerrainTileComponentMutSet.TryGetValue(effect.id, out List<IItemTerrainTileComponentMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnItemTerrainTileComponentMutSetEffect(effect);
+        }
+      }
+    }
+    effectsItemTerrainTileComponentMutSetCreateEffect.Clear();
+
   }
 
     public int GetDecorativeTerrainTileComponentMutSetHash(int id, int version, DecorativeTerrainTileComponentMutSetIncarnation incarnation) {
@@ -11650,7 +11652,7 @@ public class Root {
     }
     public void CheckHasDecorativeTerrainTileComponentMutSet(int id) {
       if (!rootIncarnation.incarnationsDecorativeTerrainTileComponentMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid DecorativeTerrainTileComponentMutSet}!");
+        throw new System.Exception("Invalid DecorativeTerrainTileComponentMutSet}: " + id);
       }
     }
     public DecorativeTerrainTileComponentMutSet EffectDecorativeTerrainTileComponentMutSetCreate() {
@@ -11748,21 +11750,6 @@ public class Root {
     }
        
   public void BroadcastDecorativeTerrainTileComponentMutSetEffects() {
-
-    foreach (var effect in effectsDecorativeTerrainTileComponentMutSetCreateEffect) {
-      if (observersForDecorativeTerrainTileComponentMutSet.TryGetValue(0, out List<IDecorativeTerrainTileComponentMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnDecorativeTerrainTileComponentMutSetEffect(effect);
-        }
-      }
-      if (observersForDecorativeTerrainTileComponentMutSet.TryGetValue(effect.id, out List<IDecorativeTerrainTileComponentMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnDecorativeTerrainTileComponentMutSetEffect(effect);
-        }
-      }
-    }
-    effectsDecorativeTerrainTileComponentMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsDecorativeTerrainTileComponentMutSetDeleteEffect) {
       if (observersForDecorativeTerrainTileComponentMutSet.TryGetValue(0, out List<IDecorativeTerrainTileComponentMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -11773,6 +11760,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnDecorativeTerrainTileComponentMutSetEffect(effect);
         }
+        observersForDecorativeTerrainTileComponentMutSet.Remove(effect.id);
       }
     }
     effectsDecorativeTerrainTileComponentMutSetDeleteEffect.Clear();
@@ -11805,6 +11793,20 @@ public class Root {
     }
     effectsDecorativeTerrainTileComponentMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsDecorativeTerrainTileComponentMutSetCreateEffect) {
+      if (observersForDecorativeTerrainTileComponentMutSet.TryGetValue(0, out List<IDecorativeTerrainTileComponentMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDecorativeTerrainTileComponentMutSetEffect(effect);
+        }
+      }
+      if (observersForDecorativeTerrainTileComponentMutSet.TryGetValue(effect.id, out List<IDecorativeTerrainTileComponentMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDecorativeTerrainTileComponentMutSetEffect(effect);
+        }
+      }
+    }
+    effectsDecorativeTerrainTileComponentMutSetCreateEffect.Clear();
+
   }
 
     public int GetUpStaircaseTerrainTileComponentMutSetHash(int id, int version, UpStaircaseTerrainTileComponentMutSetIncarnation incarnation) {
@@ -11836,7 +11838,7 @@ public class Root {
     }
     public void CheckHasUpStaircaseTerrainTileComponentMutSet(int id) {
       if (!rootIncarnation.incarnationsUpStaircaseTerrainTileComponentMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid UpStaircaseTerrainTileComponentMutSet}!");
+        throw new System.Exception("Invalid UpStaircaseTerrainTileComponentMutSet}: " + id);
       }
     }
     public UpStaircaseTerrainTileComponentMutSet EffectUpStaircaseTerrainTileComponentMutSetCreate() {
@@ -11934,21 +11936,6 @@ public class Root {
     }
        
   public void BroadcastUpStaircaseTerrainTileComponentMutSetEffects() {
-
-    foreach (var effect in effectsUpStaircaseTerrainTileComponentMutSetCreateEffect) {
-      if (observersForUpStaircaseTerrainTileComponentMutSet.TryGetValue(0, out List<IUpStaircaseTerrainTileComponentMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUpStaircaseTerrainTileComponentMutSetEffect(effect);
-        }
-      }
-      if (observersForUpStaircaseTerrainTileComponentMutSet.TryGetValue(effect.id, out List<IUpStaircaseTerrainTileComponentMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUpStaircaseTerrainTileComponentMutSetEffect(effect);
-        }
-      }
-    }
-    effectsUpStaircaseTerrainTileComponentMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsUpStaircaseTerrainTileComponentMutSetDeleteEffect) {
       if (observersForUpStaircaseTerrainTileComponentMutSet.TryGetValue(0, out List<IUpStaircaseTerrainTileComponentMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -11959,6 +11946,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnUpStaircaseTerrainTileComponentMutSetEffect(effect);
         }
+        observersForUpStaircaseTerrainTileComponentMutSet.Remove(effect.id);
       }
     }
     effectsUpStaircaseTerrainTileComponentMutSetDeleteEffect.Clear();
@@ -11991,6 +11979,20 @@ public class Root {
     }
     effectsUpStaircaseTerrainTileComponentMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsUpStaircaseTerrainTileComponentMutSetCreateEffect) {
+      if (observersForUpStaircaseTerrainTileComponentMutSet.TryGetValue(0, out List<IUpStaircaseTerrainTileComponentMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUpStaircaseTerrainTileComponentMutSetEffect(effect);
+        }
+      }
+      if (observersForUpStaircaseTerrainTileComponentMutSet.TryGetValue(effect.id, out List<IUpStaircaseTerrainTileComponentMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUpStaircaseTerrainTileComponentMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUpStaircaseTerrainTileComponentMutSetCreateEffect.Clear();
+
   }
 
     public int GetDownStaircaseTerrainTileComponentMutSetHash(int id, int version, DownStaircaseTerrainTileComponentMutSetIncarnation incarnation) {
@@ -12022,7 +12024,7 @@ public class Root {
     }
     public void CheckHasDownStaircaseTerrainTileComponentMutSet(int id) {
       if (!rootIncarnation.incarnationsDownStaircaseTerrainTileComponentMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid DownStaircaseTerrainTileComponentMutSet}!");
+        throw new System.Exception("Invalid DownStaircaseTerrainTileComponentMutSet}: " + id);
       }
     }
     public DownStaircaseTerrainTileComponentMutSet EffectDownStaircaseTerrainTileComponentMutSetCreate() {
@@ -12120,21 +12122,6 @@ public class Root {
     }
        
   public void BroadcastDownStaircaseTerrainTileComponentMutSetEffects() {
-
-    foreach (var effect in effectsDownStaircaseTerrainTileComponentMutSetCreateEffect) {
-      if (observersForDownStaircaseTerrainTileComponentMutSet.TryGetValue(0, out List<IDownStaircaseTerrainTileComponentMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnDownStaircaseTerrainTileComponentMutSetEffect(effect);
-        }
-      }
-      if (observersForDownStaircaseTerrainTileComponentMutSet.TryGetValue(effect.id, out List<IDownStaircaseTerrainTileComponentMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnDownStaircaseTerrainTileComponentMutSetEffect(effect);
-        }
-      }
-    }
-    effectsDownStaircaseTerrainTileComponentMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsDownStaircaseTerrainTileComponentMutSetDeleteEffect) {
       if (observersForDownStaircaseTerrainTileComponentMutSet.TryGetValue(0, out List<IDownStaircaseTerrainTileComponentMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -12145,6 +12132,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnDownStaircaseTerrainTileComponentMutSetEffect(effect);
         }
+        observersForDownStaircaseTerrainTileComponentMutSet.Remove(effect.id);
       }
     }
     effectsDownStaircaseTerrainTileComponentMutSetDeleteEffect.Clear();
@@ -12177,6 +12165,20 @@ public class Root {
     }
     effectsDownStaircaseTerrainTileComponentMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsDownStaircaseTerrainTileComponentMutSetCreateEffect) {
+      if (observersForDownStaircaseTerrainTileComponentMutSet.TryGetValue(0, out List<IDownStaircaseTerrainTileComponentMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDownStaircaseTerrainTileComponentMutSetEffect(effect);
+        }
+      }
+      if (observersForDownStaircaseTerrainTileComponentMutSet.TryGetValue(effect.id, out List<IDownStaircaseTerrainTileComponentMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDownStaircaseTerrainTileComponentMutSetEffect(effect);
+        }
+      }
+    }
+    effectsDownStaircaseTerrainTileComponentMutSetCreateEffect.Clear();
+
   }
 
     public int GetUnitMutSetHash(int id, int version, UnitMutSetIncarnation incarnation) {
@@ -12208,7 +12210,7 @@ public class Root {
     }
     public void CheckHasUnitMutSet(int id) {
       if (!rootIncarnation.incarnationsUnitMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid UnitMutSet}!");
+        throw new System.Exception("Invalid UnitMutSet}: " + id);
       }
     }
     public UnitMutSet EffectUnitMutSetCreate() {
@@ -12306,21 +12308,6 @@ public class Root {
     }
        
   public void BroadcastUnitMutSetEffects() {
-
-    foreach (var effect in effectsUnitMutSetCreateEffect) {
-      if (observersForUnitMutSet.TryGetValue(0, out List<IUnitMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUnitMutSetEffect(effect);
-        }
-      }
-      if (observersForUnitMutSet.TryGetValue(effect.id, out List<IUnitMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUnitMutSetEffect(effect);
-        }
-      }
-    }
-    effectsUnitMutSetCreateEffect.Clear();
-
     foreach (var effect in effectsUnitMutSetDeleteEffect) {
       if (observersForUnitMutSet.TryGetValue(0, out List<IUnitMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -12331,6 +12318,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnUnitMutSetEffect(effect);
         }
+        observersForUnitMutSet.Remove(effect.id);
       }
     }
     effectsUnitMutSetDeleteEffect.Clear();
@@ -12363,6 +12351,20 @@ public class Root {
     }
     effectsUnitMutSetRemoveEffect.Clear();
 
+    foreach (var effect in effectsUnitMutSetCreateEffect) {
+      if (observersForUnitMutSet.TryGetValue(0, out List<IUnitMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnitMutSetEffect(effect);
+        }
+      }
+      if (observersForUnitMutSet.TryGetValue(effect.id, out List<IUnitMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnitMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUnitMutSetCreateEffect.Clear();
+
   }
 
     public int GetTerrainTileByLocationMutMapHash(int id, int version, TerrainTileByLocationMutMapIncarnation incarnation) {
@@ -12394,7 +12396,7 @@ public class Root {
     }
     public void CheckHasTerrainTileByLocationMutMap(int id) {
       if (!rootIncarnation.incarnationsTerrainTileByLocationMutMap.ContainsKey(id)) {
-        throw new System.Exception("Invalid TerrainTileByLocationMutMap}!");
+        throw new System.Exception("Invalid TerrainTileByLocationMutMap}: " + id);
       }
     }
     public TerrainTileByLocationMutMap EffectTerrainTileByLocationMutMapCreate() {
@@ -12493,21 +12495,6 @@ public class Root {
     }
 
   public void BroadcastTerrainTileByLocationMutMapEffects() {
-
-    foreach (var effect in effectsTerrainTileByLocationMutMapCreateEffect) {
-      if (observersForTerrainTileByLocationMutMap.TryGetValue(0, out List<ITerrainTileByLocationMutMapEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainTileByLocationMutMapEffect(effect);
-        }
-      }
-      if (observersForTerrainTileByLocationMutMap.TryGetValue(effect.id, out List<ITerrainTileByLocationMutMapEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainTileByLocationMutMapEffect(effect);
-        }
-      }
-    }
-    effectsTerrainTileByLocationMutMapCreateEffect.Clear();
-
     foreach (var effect in effectsTerrainTileByLocationMutMapDeleteEffect) {
       if (observersForTerrainTileByLocationMutMap.TryGetValue(0, out List<ITerrainTileByLocationMutMapEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -12518,6 +12505,7 @@ public class Root {
         foreach (var observer in objObservers) {
           observer.OnTerrainTileByLocationMutMapEffect(effect);
         }
+        observersForTerrainTileByLocationMutMap.Remove(effect.id);
       }
     }
     effectsTerrainTileByLocationMutMapDeleteEffect.Clear();
@@ -12549,6 +12537,20 @@ public class Root {
       }
     }
     effectsTerrainTileByLocationMutMapRemoveEffect.Clear();
+
+    foreach (var effect in effectsTerrainTileByLocationMutMapCreateEffect) {
+      if (observersForTerrainTileByLocationMutMap.TryGetValue(0, out List<ITerrainTileByLocationMutMapEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTerrainTileByLocationMutMapEffect(effect);
+        }
+      }
+      if (observersForTerrainTileByLocationMutMap.TryGetValue(effect.id, out List<ITerrainTileByLocationMutMapEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTerrainTileByLocationMutMapEffect(effect);
+        }
+      }
+    }
+    effectsTerrainTileByLocationMutMapCreateEffect.Clear();
 
   }
 }

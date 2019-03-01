@@ -4,10 +4,13 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class ResumeRequestExecutor {
-    public static bool Execute(SSContext context, int gameId) {
+    public static bool Execute(
+        SSContext context,
+        int gameId,
+        LiveUnitByLocationMap liveUnitByLocationMap) {
       var game = context.root.GetGame(gameId);
 
-      LiveUnitByLocationMap liveUnitByLocationMap = PreRequest.Do(game);
+      PreRequest.Do(game);
 
       switch (game.GetExecutionStateType()) {
         case GameExecutionStateType.kBetweenUnits:

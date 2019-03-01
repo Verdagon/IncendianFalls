@@ -169,6 +169,7 @@ public class IPreActingUCWeakMutBunch {
     }
     public ShieldingUC GetOnlyShieldingUCOrNull() {
       var result = GetAllShieldingUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -189,6 +190,7 @@ public class IPreActingUCWeakMutBunch {
     }
     public AttackAICapabilityUC GetOnlyAttackAICapabilityUCOrNull() {
       var result = GetAllAttackAICapabilityUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {

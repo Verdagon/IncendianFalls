@@ -11,11 +11,7 @@ namespace Atharia.Model {
     }
 
     public LiveUnitByLocationMap(Game game) : this() {
-      foreach (var unit in game.level.units) {
-        if (unit.alive) {
-          liveUnitByLocation.Add(unit.location, unit);
-        }
-      }
+      Reconstruct(game);
     }
 
     public void Add(Unit unit) {
@@ -28,6 +24,15 @@ namespace Atharia.Model {
 
     public bool ContainsKey(Location location) {
       return liveUnitByLocation.ContainsKey(location);
+    }
+
+    public void Reconstruct(Game game) {
+      liveUnitByLocation.Clear();
+      foreach (var unit in game.level.units) {
+        if (unit.alive) {
+          liveUnitByLocation.Add(unit.location, unit);
+        }
+      }
     }
   }
 }

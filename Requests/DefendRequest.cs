@@ -4,18 +4,20 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class DefendRequestExecutor {
-    public static bool Execute(SSContext context, int gameId) {
+    public static bool Execute(SSContext context, int gameId, LiveUnitByLocationMap liveUnitByLocationMap) {
       var game = context.root.GetGame(gameId);
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
 
-      var liveUnitByLocationMap = PreRequest.Do(game);
+      PreRequest.Do(game);
 
       var player = game.player;
 
       Asserts.Assert(game.executionState.actingUnit.Is(game.player));
       Asserts.Assert(game.player.Is(Utils.GetNextActingUnit(game)));
+
+      player.ClearDirective();
 
       Actions.Defend(game, game.player);
 

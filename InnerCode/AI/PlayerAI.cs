@@ -12,8 +12,7 @@ namespace IncendianFalls {
       var directive = (idirective as MoveDirectiveUCAsIDirectiveUC).obj;
 
       if (!Actions.CanStep(game, liveUnitByLocationMap, game.player, directive.path[0])) {
-        unit.components.ClearAllIDirectiveUC();
-        directive.Destruct();
+        unit.ClearDirective();
         game.root.logger.Info("Blocked!");
         return false;
       }
@@ -22,8 +21,7 @@ namespace IncendianFalls {
       directive.path.RemoveAt(0);
 
       if (directive.path.Count == 0) {
-        unit.components.Remove(directive.AsIUnitComponent());
-        directive.Destruct();
+        unit.ClearDirective();
       }
 
       return true;

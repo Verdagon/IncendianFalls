@@ -18,14 +18,16 @@ namespace Atharia.Model {
       return unit.components.GetOnlyIDirectiveUCOrNull();
     }
     public static void ReplaceDirective(this Unit unit, IDirectiveUC directive) {
-      Asserts.Assert(directive.Exists());
+      Asserts.Assert(directive.Exists(), "Given directive doesnt exist!");
       ClearDirective(unit);
+      Asserts.Assert(unit.components.GetAllIDirectiveUC().Count == 0, "Couldnt delete existing directive!");
       unit.components.Add(directive.AsIUnitComponent());
-      Asserts.Assert(unit.components.GetAllIDirectiveUC().Count == 1);
+      Asserts.Assert(unit.components.GetAllIDirectiveUC().Count == 1, "Couldn't add directive!");
       Asserts.Assert(unit.GetDirectiveOrNull().Exists());
     }
     public static void ClearDirective(this Unit unit) {
       var existingDirective = unit.components.GetOnlyIDirectiveUCOrNull();
+      Console.WriteLine("Clearing directive! " + existingDirective.id);
       if (existingDirective.Exists()) {
         unit.components.Remove(existingDirective.AsIUnitComponent());
         existingDirective.Destruct();

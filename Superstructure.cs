@@ -51,11 +51,13 @@ namespace IncendianFalls {
     private readonly Root root;
     private readonly List<ISuperstructureObserver> observers;
     SSContext context;
+    SortedDictionary<int, LiveUnitByLocationMap> liveUnitByLocationMapByGameId;
 
     public Superstructure(ILogger logger) {
       observers = new List<ISuperstructureObserver>();
       root = new Root(logger);
       context = new SSContext(logger, root, observers);
+      liveUnitByLocationMapByGameId = new SortedDictionary<int, LiveUnitByLocationMap>();
     }
 
     public void AddObserver(ISuperstructureObserver observer) {
@@ -93,6 +95,8 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new SetupGameRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var game = SetupGameRequestExecutor.Execute(context, randomSeed, squareLevelsOnly);
+        var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
+        liveUnitByLocationMapByGameId.Add(game.id, liveUnitByLocationMap);
         // context.Flare(game.DStr());
         broadcastAfterRequest(new SetupGameRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -120,7 +124,7 @@ namespace IncendianFalls {
         var request = new InteractRequest(gameId);
         broadcastBeforeRequest(new InteractRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        var success = InteractRequestExecutor.Execute(context, gameId, -1337);
+        var success = InteractRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId]);
         context.Flare(success.DStr());
         broadcastAfterRequest(new InteractRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -148,7 +152,7 @@ namespace IncendianFalls {
         var request = new MoveRequest(gameId, newLocation);
         broadcastBeforeRequest(new MoveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = MoveRequestExecutor.Execute(context, gameId, newLocation);
+        bool success = MoveRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId], newLocation);
         context.Flare(success.DStr());
         broadcastAfterRequest(new MoveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -176,7 +180,7 @@ namespace IncendianFalls {
         var request = new AttackRequest(gameId, targetUnitId);
         broadcastBeforeRequest(new AttackRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = AttackRequestExecutor.Execute(context, gameId, targetUnitId);
+        bool success = AttackRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId], targetUnitId);
         context.Flare(success.DStr());
         broadcastAfterRequest(new AttackRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -207,7 +211,7 @@ namespace IncendianFalls {
         var request = new TimeShiftRequest(gameId, pastIncarnation.version, futuremostTime);
         broadcastBeforeRequest(new TimeShiftRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = TimeShiftRequestExecutor.Execute(context, gameId, pastIncarnation, futuremostTime);
+        bool success = TimeShiftRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId], pastIncarnation, futuremostTime);
         context.Flare(success.DStr());
         broadcastAfterRequest(new TimeShiftRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -235,7 +239,7 @@ namespace IncendianFalls {
         var request = new DefendRequest(gameId);
         broadcastBeforeRequest(new DefendRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = DefendRequestExecutor.Execute(context, gameId);
+        bool success = DefendRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId]);
         context.Flare(success.DStr());
         broadcastAfterRequest(new DefendRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -263,7 +267,7 @@ namespace IncendianFalls {
         var request = new FollowDirectiveRequest(gameId);
         broadcastBeforeRequest(new FollowDirectiveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = FollowDirectiveRequestExecutor.Execute(context, gameId);
+        bool success = FollowDirectiveRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId]);
         context.Flare(success.DStr());
         broadcastAfterRequest(new FollowDirectiveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -292,7 +296,7 @@ namespace IncendianFalls {
         var request = new ResumeRequest(gameId);
         broadcastBeforeRequest(new ResumeRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = ResumeRequestExecutor.Execute(context, gameId);
+        bool success = ResumeRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId]);
         context.Flare(success.DStr());
         broadcastAfterRequest(new ResumeRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());

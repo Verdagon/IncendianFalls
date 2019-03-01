@@ -4,7 +4,7 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class FollowDirectiveRequestExecutor {
-    public static bool Execute(SSContext context, int gameId) {
+    public static bool Execute(SSContext context, int gameId, LiveUnitByLocationMap liveUnitByLocationMap) {
       var game = context.root.GetGame(gameId);
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
@@ -16,7 +16,7 @@ namespace IncendianFalls {
         return false;
       }
 
-      var liveUnitByLocationMap = PreRequest.Do(game);
+      PreRequest.Do(game);
 
       if (game.player.GetDirectiveOrNull() is MoveDirectiveUCAsIDirectiveUC move) {
         if (!PlayerAI.FollowMoveDirective(game, liveUnitByLocationMap, game.player)) {

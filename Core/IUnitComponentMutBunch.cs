@@ -354,6 +354,7 @@ public class IUnitComponentMutBunch {
     }
     public KillDirectiveUC GetOnlyKillDirectiveUCOrNull() {
       var result = GetAllKillDirectiveUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -374,6 +375,7 @@ public class IUnitComponentMutBunch {
     }
     public MoveDirectiveUC GetOnlyMoveDirectiveUCOrNull() {
       var result = GetAllMoveDirectiveUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -394,6 +396,7 @@ public class IUnitComponentMutBunch {
     }
     public WanderAICapabilityUC GetOnlyWanderAICapabilityUCOrNull() {
       var result = GetAllWanderAICapabilityUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -414,6 +417,7 @@ public class IUnitComponentMutBunch {
     }
     public BideAICapabilityUC GetOnlyBideAICapabilityUCOrNull() {
       var result = GetAllBideAICapabilityUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -434,6 +438,7 @@ public class IUnitComponentMutBunch {
     }
     public AttackAICapabilityUC GetOnlyAttackAICapabilityUCOrNull() {
       var result = GetAllAttackAICapabilityUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -454,6 +459,7 @@ public class IUnitComponentMutBunch {
     }
     public ShieldingUC GetOnlyShieldingUCOrNull() {
       var result = GetAllShieldingUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -474,6 +480,7 @@ public class IUnitComponentMutBunch {
     }
     public BidingOperationUC GetOnlyBidingOperationUCOrNull() {
       var result = GetAllBidingOperationUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -505,6 +512,7 @@ public class IUnitComponentMutBunch {
     }
     public IAICapabilityUC GetOnlyIAICapabilityUCOrNull() {
       var result = GetAllIAICapabilityUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -526,6 +534,7 @@ public class IUnitComponentMutBunch {
     }
     public IOperationUC GetOnlyIOperationUCOrNull() {
       var result = GetAllIOperationUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -552,6 +561,7 @@ public class IUnitComponentMutBunch {
     }
     public IPreActingUC GetOnlyIPreActingUCOrNull() {
       var result = GetAllIPreActingUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -568,6 +578,7 @@ public class IUnitComponentMutBunch {
     }
     public IPostActingUC GetOnlyIPostActingUCOrNull() {
       var result = GetAllIPostActingUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -594,6 +605,7 @@ public class IUnitComponentMutBunch {
     }
     public IDefenseUC GetOnlyIDefenseUCOrNull() {
       var result = GetAllIDefenseUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -620,6 +632,7 @@ public class IUnitComponentMutBunch {
     }
     public IDirectiveUC GetOnlyIDirectiveUCOrNull() {
       var result = GetAllIDirectiveUC();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {

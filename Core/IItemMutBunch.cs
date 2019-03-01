@@ -169,6 +169,7 @@ public class IItemMutBunch {
     }
     public Glaive GetOnlyGlaiveOrNull() {
       var result = GetAllGlaive();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
@@ -189,6 +190,7 @@ public class IItemMutBunch {
     }
     public Armor GetOnlyArmorOrNull() {
       var result = GetAllArmor();
+      Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {

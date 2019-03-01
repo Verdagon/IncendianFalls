@@ -7,6 +7,7 @@ namespace IncendianFalls {
     public static bool Execute(
         SSContext context,
         int gameId,
+        LiveUnitByLocationMap liveUnitByLocationMap,
         RootIncarnation pastIncarnation,
         int futuremostTime) {
       var game = context.root.GetGame(gameId);
@@ -33,12 +34,12 @@ namespace IncendianFalls {
       context.root.Revert(pastIncarnation);
 
       // We don't want to follow the player's directive from back then.
-      if (game.player.GetDirectiveOrNull().Exists()) {
-        game.player.GetDirectiveOrNull().Destruct();
-      }
+      game.player.ClearDirective();
 
       var player = game.player;
       player.mp = player.mp - mpCost;
+
+      liveUnitByLocationMap.Reconstruct(game);
 
       //float pastTime = game.time;
 

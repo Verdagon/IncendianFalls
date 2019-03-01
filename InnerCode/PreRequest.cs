@@ -5,7 +5,7 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class PreRequest {
-    public static LiveUnitByLocationMap Do(Game game) {
+    public static void Do(Game game) {
       // If we can have an index on which units have events, that'd be pretty cool.
       // Not sure how to generalize that though...
       foreach (var unitMaybeWithEvents in game.level.units) {
@@ -13,9 +13,6 @@ namespace IncendianFalls {
           unitMaybeWithEvents.events.Clear();
         }
       }
-
-      // Reconstruct our caches and views
-      return new LiveUnitByLocationMap(game);
     }
   }
 }
