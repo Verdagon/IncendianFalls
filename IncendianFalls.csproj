@@ -27,7 +27,6 @@
     <Folder Include="InnerCode\" />
     <Folder Include="Requests\" />
     <Folder Include="Utils\" />
-    <Folder Include="CoreExtensions\" />
     <Folder Include="Core\" />
     <Folder Include="InnerCode\AI\" />
     <Folder Include="InnerCode\Actions\" />

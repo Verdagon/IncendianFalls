@@ -17,7 +17,7 @@ namespace Atharia.Model {
     public static bool Enact(
         this NoImpulse obj,
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap, 
+        Superstate superstate,
         Unit unit) {
       unit.nextActionTime = unit.nextActionTime + unit.inertia / 2;
       return false;

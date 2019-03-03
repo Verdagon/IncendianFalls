@@ -17,7 +17,7 @@ namespace Atharia.Model {
     public static bool Enact(
         this UnleashBideImpulse obj,
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        Superstate superstate,
         Unit actingUnit) {
       List<Unit> victims = new List<Unit>();
       foreach (var otherUnit in game.level.units) {
@@ -34,7 +34,7 @@ namespace Atharia.Model {
           victims.Add(otherUnit);
         }
       }
-      Actions.UnleashBide(game, liveUnitByLocationMap, actingUnit, victims);
+      Actions.UnleashBide(game, superstate, actingUnit, victims);
 
       var directive = actingUnit.components.GetOnlyKillDirectiveUCOrNull();
       if (directive.Exists() && !directive.targetUnit.alive) {

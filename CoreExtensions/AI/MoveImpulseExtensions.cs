@@ -17,9 +17,9 @@ namespace Atharia.Model {
     public static bool Enact(
         this MoveImpulse obj,
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        Superstate superstate,
         Unit unit) {
-      Actions.Step(game, liveUnitByLocationMap, unit, obj.stepLocation);
+      Actions.Step(game, superstate, unit, obj.stepLocation);
       return false;
     }
   }

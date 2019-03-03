@@ -10,7 +10,7 @@ namespace IncendianFalls {
     }
 
     // Called from the outside.
-    public static void ContinueAtStartTurn(Game game, LiveUnitByLocationMap liveUnitByLocationMap) {
+    public static void ContinueAtStartTurn(Game game, Superstate superstate) {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
       var executionState = game.executionState;
@@ -18,7 +18,7 @@ namespace IncendianFalls {
       Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
       Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
 
-      StartNextUnit(game, liveUnitByLocationMap);
+      StartNextUnit(game, superstate);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
@@ -40,7 +40,7 @@ namespace IncendianFalls {
     }
 
     // Called from the outside
-    public static void ContinueAfterUnitAction(Game game, LiveUnitByLocationMap liveUnitByLocationMap) {
+    public static void ContinueAfterUnitAction(Game game, Superstate superstate) {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
       var executionState = game.executionState;
@@ -48,13 +48,13 @@ namespace IncendianFalls {
       Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
       Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
 
-      StartPostActions(game, liveUnitByLocationMap);
+      StartPostActions(game, superstate);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Only called from the inside, from ContinueAfterUnitAction, PlayerDefend, etc.
-    private static void StartPostActions(Game game, LiveUnitByLocationMap liveUnitByLocationMap) {
+    private static void StartPostActions(Game game, Superstate superstate) {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
       var executionState = game.executionState;
@@ -65,13 +65,13 @@ namespace IncendianFalls {
       }
       executionState.remainingPostActingUnitComponents = postActingDetails;
 
-      DoNextPostActingDetailOrContinue(game, liveUnitByLocationMap);
+      DoNextPostActingDetailOrContinue(game, superstate);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Can be called from StartPostActions or ContinueAfterPreActingDetail.
-    private static void DoNextPostActingDetailOrContinue(Game game, LiveUnitByLocationMap liveUnitByLocationMap) {
+    private static void DoNextPostActingDetailOrContinue(Game game, Superstate superstate) {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
       var executionState = game.executionState;
@@ -96,22 +96,22 @@ namespace IncendianFalls {
 
       executionState.actingUnit = new Unit(game.root, 0);
 
-      StartNextUnit(game, liveUnitByLocationMap);
+      StartNextUnit(game, superstate);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Called from the outside, after we do a pre-acting detail.
-    public static void ContinueAfterPostActingDetail(Game game, LiveUnitByLocationMap liveUnitByLocationMap) {
+    public static void ContinueAfterPostActingDetail(Game game, Superstate superstate) {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-      DoNextPostActingDetailOrContinue(game, liveUnitByLocationMap);
+      DoNextPostActingDetailOrContinue(game, superstate);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Called from ContinueAtStartTurn or ContinueAtNextPostActingDetail.
-    private static void StartNextUnit(Game game, LiveUnitByLocationMap liveUnitByLocationMap) {
+    private static void StartNextUnit(Game game, Superstate superstate) {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
       var executionState = game.executionState;
@@ -138,13 +138,13 @@ namespace IncendianFalls {
       executionState.actingUnit = nextUnit;
       executionState.actingUnitDidAction = false;
 
-      StartPreActions(game, liveUnitByLocationMap);
+      StartPreActions(game, superstate);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Never called from the outside, always called by StartNextUnit
-    private static void StartPreActions(Game game, LiveUnitByLocationMap liveUnitByLocationMap) {
+    private static void StartPreActions(Game game, Superstate superstate) {
 
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
@@ -159,13 +159,13 @@ namespace IncendianFalls {
       }
       executionState.remainingPreActingUnitComponents = preActingDetails;
 
-      DoNextPreActingDetailOrContinue(game, liveUnitByLocationMap);
+      DoNextPreActingDetailOrContinue(game, superstate);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Can be called from StartPreActions or ContinueAfterPreActingDetail.
-    private static void DoNextPreActingDetailOrContinue(Game game, LiveUnitByLocationMap liveUnitByLocationMap) {
+    private static void DoNextPreActingDetailOrContinue(Game game, Superstate superstate) {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
       var executionState = game.executionState;
@@ -179,7 +179,7 @@ namespace IncendianFalls {
         if (!detail.Exists()) {
           continue;
         }
-        bool ret = detail.PreAct(game, liveUnitByLocationMap, executionState.actingUnit);
+        bool ret = detail.PreAct(game, superstate, executionState.actingUnit);
         //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
         if (ret) {
           return; // To be continued... via ContinueAfterPreActingDetail.
@@ -189,21 +189,21 @@ namespace IncendianFalls {
       // There were no existing remaining pre-acting details. Go on to the unit's action.
       executionState.remainingPreActingUnitComponents.Destruct();
 
-      DoUnitAction(game, liveUnitByLocationMap);
+      DoUnitAction(game, superstate);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Called from the oustide, after we do a pre-acting detail.
-    public static void ContinueAfterPreActingDetail(Game game, LiveUnitByLocationMap liveUnitByLocationMap) {
+    public static void ContinueAfterPreActingDetail(Game game, Superstate superstate) {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-      DoNextPreActingDetailOrContinue(game, liveUnitByLocationMap);
+      DoNextPreActingDetailOrContinue(game, superstate);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    private static void DoUnitAction(Game game, LiveUnitByLocationMap liveUnitByLocationMap) {
+    private static void DoUnitAction(Game game, Superstate superstate) {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
       var executionState = game.executionState;
@@ -222,7 +222,7 @@ namespace IncendianFalls {
         //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
         return; // To be continued... via PlayerAttack, PlayerMove, etc.
       } else {
-        bool ret = EnemyAI.AI(game, liveUnitByLocationMap, unit);
+        bool ret = EnemyAI.AI(game, superstate, unit);
         executionState.actingUnitDidAction = true;
         //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
@@ -231,7 +231,7 @@ namespace IncendianFalls {
         }
       }
 
-      ContinueAfterUnitAction(game, liveUnitByLocationMap);
+      ContinueAfterUnitAction(game, superstate);
     }
 
   }

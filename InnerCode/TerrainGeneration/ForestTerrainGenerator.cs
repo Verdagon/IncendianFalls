@@ -181,7 +181,7 @@ namespace IncendianFalls {
         // us realizing it.
         // So now, figure out all the regions that this path touches.
 
-        var pathAdjacentLocations = pattern.GetAdjacentLocations(new SortedSet<Location>(path), true);
+        var pathAdjacentLocations = pattern.GetAdjacentLocations(new SortedSet<Location>(path), false);
         var pathAdjacentRegions = new SortedSet<String>();
         foreach (var pathAdjacentLocation in pathAdjacentLocations) {
           if (roomNumberByLocation.ContainsKey(pathAdjacentLocation)) {

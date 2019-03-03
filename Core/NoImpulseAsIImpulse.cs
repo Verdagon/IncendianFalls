@@ -66,8 +66,8 @@ public class NoImpulseAsIImpulse : IImpulse {
   public int GetWeight() {
     return NoImpulseExtensions.GetWeight(obj);
   }
-  public bool Enact(Game game, LiveUnitByLocationMap liveUnitByLocationMap, Unit unit) {
-    return NoImpulseExtensions.Enact(obj, game, liveUnitByLocationMap, unit);
+  public bool Enact(Game game, Superstate superstate, Unit unit) {
+    return NoImpulseExtensions.Enact(obj, game, superstate, unit);
   }
 
 }

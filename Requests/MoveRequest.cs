@@ -6,8 +6,8 @@ namespace IncendianFalls {
   public class MoveRequestExecutor {
     public static bool Execute(
         SSContext context,
+        Superstate superstate,
         int gameId,
-        LiveUnitByLocationMap liveUnitByLocationMap,
         Location destination) {
       var game = context.root.GetGame(gameId);
       if (!game.player.Exists()) {
@@ -15,6 +15,9 @@ namespace IncendianFalls {
       }
 
       PreRequest.Do(game);
+
+      superstate.turnsIncludingPresent.Insert(0, context.root.Snapshot());
+      superstate.futuremostTime = Math.Max(superstate.futuremostTime, game.time);
 
       var player = game.player;
 
@@ -43,7 +46,7 @@ namespace IncendianFalls {
       player.ReplaceDirective(directive.AsIDirectiveUC());
       Console.WriteLine("Made directive! " + directive.id);
 
-      if (!PlayerAI.FollowMoveDirective(game, liveUnitByLocationMap, game.player)) {
+      if (!PlayerAI.FollowMoveDirective(game, superstate, game.player)) {
         return false;
       }
 

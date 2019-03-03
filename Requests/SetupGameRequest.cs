@@ -4,7 +4,8 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public static class SetupGameRequestExecutor {
-    public static Game Execute(SSContext context, int randomSeed, bool squareLevelsOnly) {
+    public static Game Execute(SSContext context, out Superstate superstate, int randomSeed, bool squareLevelsOnly) {
+
       var rand = context.root.EffectRandCreate(randomSeed);
 
       var firstLevel =
@@ -31,6 +32,9 @@ namespace IncendianFalls {
               firstLevel,
               0,
               context.root.EffectExecutionStateCreate(Unit.Null, false, IPreActingUCWeakMutBunch.Null, IPostActingUCWeakMutBunch.Null));
+
+      superstate =
+          new Superstate(new LiveUnitByLocationMap(game), new List<RootIncarnation>(), 0);
 
       return game;
     }

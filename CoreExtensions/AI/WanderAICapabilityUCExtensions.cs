@@ -14,7 +14,7 @@ namespace Atharia.Model {
     public static IImpulse ProduceImpulse(
         this WanderAICapabilityUC obj,
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        Superstate superstate,
         Unit unit) {
 
       if (unit.GetDirectiveOrNull().Exists()) {
@@ -26,7 +26,7 @@ namespace Atharia.Model {
                 unit.location, game.level.considerCornersAdjacent);
         var adjacentWalkableLocations = new SortedSet<Location>();
         foreach (var adjacentLocation in adjacentLocations) {
-          if (Actions.CanStep(game, liveUnitByLocationMap, unit, adjacentLocation)) {
+          if (Actions.CanStep(game, superstate, unit, adjacentLocation)) {
             adjacentWalkableLocations.Add(adjacentLocation);
           }
         }

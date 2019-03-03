@@ -6,24 +6,24 @@ namespace IncendianFalls {
   public class ResumeRequestExecutor {
     public static bool Execute(
         SSContext context,
-        int gameId,
-        LiveUnitByLocationMap liveUnitByLocationMap) {
+        Superstate superstate,
+        int gameId) {
       var game = context.root.GetGame(gameId);
 
       PreRequest.Do(game);
 
       switch (game.GetExecutionStateType()) {
         case GameExecutionStateType.kBetweenUnits:
-          GameLoop.ContinueAtStartTurn(game, liveUnitByLocationMap);
+          GameLoop.ContinueAtStartTurn(game, superstate);
           break;
         case GameExecutionStateType.kAfterUnitAction:
-          GameLoop.ContinueAfterUnitAction(game, liveUnitByLocationMap);
+          GameLoop.ContinueAfterUnitAction(game, superstate);
           break;
         case GameExecutionStateType.kPreActingDetail:
-          GameLoop.ContinueAfterPreActingDetail(game, liveUnitByLocationMap);
+          GameLoop.ContinueAfterPreActingDetail(game, superstate);
           break;
         case GameExecutionStateType.kPostActingDetail:
-          GameLoop.ContinueAfterPostActingDetail(game, liveUnitByLocationMap);
+          GameLoop.ContinueAfterPostActingDetail(game, superstate);
           break;
         case GameExecutionStateType.kBeforeEnemyAction:
           // shouldnt be possible, the game loop doesnt pause here.

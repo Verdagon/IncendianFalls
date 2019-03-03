@@ -8,14 +8,14 @@ namespace IncendianFalls {
     // Returns true if we should return
     public static bool AI(
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        Superstate superstate,
         Unit unit) {
 
       var unitPosition = game.level.terrain.pattern.GetTileCenter(unit.location);
 
       IImpulse strongestImpulse = game.root.EffectNoImpulseCreate().AsIImpulse();
       foreach (var capability in unit.components.GetAllIAICapabilityUC()) {
-        var hayImpulse = capability.ProduceImpulse(game, liveUnitByLocationMap, unit);
+        var hayImpulse = capability.ProduceImpulse(game, superstate, unit);
         if (hayImpulse.GetWeight() > strongestImpulse.GetWeight()) {
           strongestImpulse.Destruct();
           strongestImpulse = hayImpulse;
@@ -24,7 +24,7 @@ namespace IncendianFalls {
         }
       }
       // game.root.logger.Info("Enacting impulse: " + strongestImpulse.ToString());
-      bool ret = strongestImpulse.Enact(game, liveUnitByLocationMap, unit);
+      bool ret = strongestImpulse.Enact(game, superstate, unit);
       strongestImpulse.Destruct();
       return ret;
     }

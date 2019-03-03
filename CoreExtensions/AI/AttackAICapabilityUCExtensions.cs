@@ -14,7 +14,8 @@ namespace Atharia.Model {
     public static bool PreAct(
         this AttackAICapabilityUC obj,
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+
+        Superstate superstate,
         Unit unit) {
       var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
       if (directive.Exists() && (!directive.targetUnit.Exists() || !directive.targetUnit.alive)) {
@@ -47,7 +48,8 @@ namespace Atharia.Model {
     public static IImpulse ProduceImpulse(
         this AttackAICapabilityUC obj,
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+
+        Superstate superstate,
         Unit unit) {
 
       // We only attack if we have a directive.
@@ -62,7 +64,7 @@ namespace Atharia.Model {
         } else {
           // Not right next to us.
 
-          if (!Actions.CanStep(game, liveUnitByLocationMap, unit, directive.pathToLastSeenLocation[0])) {
+          if (!Actions.CanStep(game, superstate, unit, directive.pathToLastSeenLocation[0])) {
             // Am confused. Can't step that way. This might be because another unit
             // walked in front of us or something. Keep the same directive, but stall
             // by half a turn.

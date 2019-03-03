@@ -4,7 +4,10 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class FollowDirectiveRequestExecutor {
-    public static bool Execute(SSContext context, int gameId, LiveUnitByLocationMap liveUnitByLocationMap) {
+    public static bool Execute(
+        SSContext context,
+        Superstate superstate, 
+        int gameId) {
       var game = context.root.GetGame(gameId);
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
@@ -18,8 +21,11 @@ namespace IncendianFalls {
 
       PreRequest.Do(game);
 
+      superstate.turnsIncludingPresent.Insert(0, context.root.Snapshot());
+      superstate.futuremostTime = Math.Max(superstate.futuremostTime, game.time);
+
       if (game.player.GetDirectiveOrNull() is MoveDirectiveUCAsIDirectiveUC move) {
-        if (!PlayerAI.FollowMoveDirective(game, liveUnitByLocationMap, game.player)) {
+        if (!PlayerAI.FollowMoveDirective(game, superstate, game.player)) {
           return false;
         }
       } else {

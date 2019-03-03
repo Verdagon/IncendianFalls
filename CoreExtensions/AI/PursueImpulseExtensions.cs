@@ -16,13 +16,13 @@ namespace Atharia.Model {
     public static bool Enact(
         this PursueImpulse impulse,
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap, 
+        Superstate superstate,
         Unit unit) {
 
       var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
       Asserts.Assert(directive.Exists());
 
-      Actions.Step(game, liveUnitByLocationMap, unit, directive.pathToLastSeenLocation[0]);
+      Actions.Step(game, superstate, unit, directive.pathToLastSeenLocation[0]);
 
       directive.pathToLastSeenLocation.RemoveAt(0);
 

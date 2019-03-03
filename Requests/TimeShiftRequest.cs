@@ -6,17 +6,26 @@ namespace IncendianFalls {
   public class TimeShiftRequestExecutor {
     public static bool Execute(
         SSContext context,
-        int gameId,
-        LiveUnitByLocationMap liveUnitByLocationMap,
-        RootIncarnation pastIncarnation,
-        int futuremostTime) {
+        Superstate superstate,
+        int gameId) {
       var game = context.root.GetGame(gameId);
+
+      // Since we do it everywhere else...
+      superstate.turnsIncludingPresent.Insert(0, context.root.Snapshot());
+      superstate.futuremostTime = Math.Max(superstate.futuremostTime, game.time);
+
+      if (superstate.turnsIncludingPresent.Count < 2) {
+        context.logger.Error("Can't time shift, nothing to time shift back to!");
+        return false;
+      }
+      RootIncarnation pastIncarnation = superstate.turnsIncludingPresent[1];
+      superstate.turnsIncludingPresent.RemoveRange(0, 2);
 
       // time shift costs 5 now, and 5 + timeDifference / 100 from your past self.
 
       var pastGame = pastIncarnation.incarnationsGame[gameId].incarnation;
       var pastTime = pastGame.time;
-      int timeDifference = futuremostTime - pastTime;
+      int timeDifference = superstate.futuremostTime - pastTime;
       int mpCost = 5 + timeDifference / 100;
       game.root.logger.Info("time difference is " + timeDifference + " so mp cost " + mpCost);
       if (game.player.mp < 5) {
@@ -39,7 +48,7 @@ namespace IncendianFalls {
       var player = game.player;
       player.mp = player.mp - mpCost;
 
-      liveUnitByLocationMap.Reconstruct(game);
+      superstate.liveUnitByLocationMap.Reconstruct(game);
 
       //float pastTime = game.time;
 

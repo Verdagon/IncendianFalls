@@ -4,13 +4,19 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class DefendRequestExecutor {
-    public static bool Execute(SSContext context, int gameId, LiveUnitByLocationMap liveUnitByLocationMap) {
+    public static bool Execute(
+        SSContext context,
+        Superstate superstate,
+        int gameId) {
       var game = context.root.GetGame(gameId);
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
 
       PreRequest.Do(game);
+
+      superstate.turnsIncludingPresent.Insert(0, context.root.Snapshot());
+      superstate.futuremostTime = Math.Max(superstate.futuremostTime, game.time);
 
       var player = game.player;
 

@@ -51,13 +51,14 @@ namespace IncendianFalls {
     private readonly Root root;
     private readonly List<ISuperstructureObserver> observers;
     SSContext context;
-    SortedDictionary<int, LiveUnitByLocationMap> liveUnitByLocationMapByGameId;
+    SortedDictionary<int, Superstate> superstateByGameId;
+
 
     public Superstructure(ILogger logger) {
       observers = new List<ISuperstructureObserver>();
       root = new Root(logger);
       context = new SSContext(logger, root, observers);
-      liveUnitByLocationMapByGameId = new SortedDictionary<int, LiveUnitByLocationMap>();
+      superstateByGameId = new SortedDictionary<int, Superstate>();
     }
 
     public void AddObserver(ISuperstructureObserver observer) {
@@ -94,9 +95,11 @@ namespace IncendianFalls {
         var request = new SetupGameRequest(randomSeed, squareLevelsOnly);
         broadcastBeforeRequest(new SetupGameRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        var game = SetupGameRequestExecutor.Execute(context, randomSeed, squareLevelsOnly);
-        var liveUnitByLocationMap = new LiveUnitByLocationMap(game);
-        liveUnitByLocationMapByGameId.Add(game.id, liveUnitByLocationMap);
+        Superstate superstate = null;
+        var game = SetupGameRequestExecutor.Execute(context, out superstate, randomSeed, squareLevelsOnly);
+
+        superstateByGameId.Add(game.id, superstate);
+
         // context.Flare(game.DStr());
         broadcastAfterRequest(new SetupGameRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -124,7 +127,8 @@ namespace IncendianFalls {
         var request = new InteractRequest(gameId);
         broadcastBeforeRequest(new InteractRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        var success = InteractRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId]);
+        var superstate = superstateByGameId[gameId];
+        var success = InteractRequestExecutor.Execute(context, superstate, gameId);
         context.Flare(success.DStr());
         broadcastAfterRequest(new InteractRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -152,7 +156,8 @@ namespace IncendianFalls {
         var request = new MoveRequest(gameId, newLocation);
         broadcastBeforeRequest(new MoveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = MoveRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId], newLocation);
+        var superstate = superstateByGameId[gameId];
+        bool success = MoveRequestExecutor.Execute(context, superstate, gameId, newLocation);
         context.Flare(success.DStr());
         broadcastAfterRequest(new MoveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -180,7 +185,8 @@ namespace IncendianFalls {
         var request = new AttackRequest(gameId, targetUnitId);
         broadcastBeforeRequest(new AttackRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = AttackRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId], targetUnitId);
+        var superstate = superstateByGameId[gameId];
+        bool success = AttackRequestExecutor.Execute(context, superstate, gameId, targetUnitId);
         context.Flare(success.DStr());
         broadcastAfterRequest(new AttackRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -198,20 +204,18 @@ namespace IncendianFalls {
       }
     }
 
-    public bool RequestTimeShift(
-        int gameId,
-        RootIncarnation pastIncarnation,
-        int futuremostTime) {
+    public bool RequestTimeShift(int gameId) {
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
 
       root.Unlock();
       //var rollbackPoint = root.Snapshot();
       try {
-        var request = new TimeShiftRequest(gameId, pastIncarnation.version, futuremostTime);
+        var request = new TimeShiftRequest(gameId);
         broadcastBeforeRequest(new TimeShiftRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = TimeShiftRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId], pastIncarnation, futuremostTime);
+        var superstate = superstateByGameId[gameId];
+        bool success = TimeShiftRequestExecutor.Execute(context, superstate, gameId);
         context.Flare(success.DStr());
         broadcastAfterRequest(new TimeShiftRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -239,7 +243,8 @@ namespace IncendianFalls {
         var request = new DefendRequest(gameId);
         broadcastBeforeRequest(new DefendRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = DefendRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId]);
+        var superstate = superstateByGameId[gameId];
+        bool success = DefendRequestExecutor.Execute(context, superstate, gameId);
         context.Flare(success.DStr());
         broadcastAfterRequest(new DefendRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -267,7 +272,8 @@ namespace IncendianFalls {
         var request = new FollowDirectiveRequest(gameId);
         broadcastBeforeRequest(new FollowDirectiveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = FollowDirectiveRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId]);
+        var superstate = superstateByGameId[gameId];
+        bool success = FollowDirectiveRequestExecutor.Execute(context, superstate, gameId);
         context.Flare(success.DStr());
         broadcastAfterRequest(new FollowDirectiveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -296,7 +302,8 @@ namespace IncendianFalls {
         var request = new ResumeRequest(gameId);
         broadcastBeforeRequest(new ResumeRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        bool success = ResumeRequestExecutor.Execute(context, gameId, liveUnitByLocationMapByGameId[gameId]);
+        var superstate = superstateByGameId[gameId];
+        bool success = ResumeRequestExecutor.Execute(context, superstate, gameId);
         context.Flare(success.DStr());
         broadcastAfterRequest(new ResumeRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -312,20 +319,6 @@ namespace IncendianFalls {
         stopwatch.Stop();
         Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
-    }
-
-    public RootIncarnation Snapshot() {
-      root.Unlock();
-      var request = new SnapshotRequest();
-      broadcastBeforeRequest(new SnapshotRequestAsIRequest(request));
-      context.Flare(GetDeterministicHashCode());
-      var snapshot = root.Snapshot();
-      // context.Flare(snapshot.DStr());
-      broadcastAfterRequest(new SnapshotRequestAsIRequest(request));
-      context.Flare(GetDeterministicHashCode());
-      root.Lock();
-      root.FlushEvents();
-      return snapshot;
     }
 
     public int GetDeterministicHashCode() {

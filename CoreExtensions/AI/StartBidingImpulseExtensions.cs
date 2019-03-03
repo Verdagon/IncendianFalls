@@ -16,7 +16,7 @@ namespace Atharia.Model {
     public static bool Enact(
         this StartBidingImpulse obj,
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        Superstate superstate,
         Unit unit) {
       unit.ReplaceOperation(obj.root.EffectBidingOperationUCCreate().AsIOperationUC());
       unit.nextActionTime = unit.nextActionTime + unit.inertia;

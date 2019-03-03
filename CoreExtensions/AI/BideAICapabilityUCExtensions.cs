@@ -12,7 +12,7 @@ namespace Atharia.Model {
     public static IImpulse ProduceImpulse(
         this BideAICapabilityUC obj,
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        Superstate superstate,
         Unit unit) {
       var bidingOperation = unit.components.GetOnlyBidingOperationUCOrNull();
       if (bidingOperation.Exists()) {

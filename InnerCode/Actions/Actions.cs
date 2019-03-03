@@ -6,29 +6,29 @@ namespace IncendianFalls {
   public class Actions {
     public static void UnleashBide(
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        Superstate superstate,
         Unit attacker,
         List<Unit> victims) {
       Eventer.broadcastUnitUnleashBideEvent(game.root, game, attacker, victims);
       foreach (var victim in victims) {
-        AttackInner(game, liveUnitByLocationMap, attacker, victim);
+        AttackInner(game, superstate, attacker, victim);
       }
       attacker.nextActionTime = attacker.nextActionTime + attacker.inertia * 3 / 2;
     }
 
     public static void Bump(
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        Superstate superstate,
         Unit attacker,
         Unit victim) {
       Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
-      AttackInner(game, liveUnitByLocationMap, attacker, victim);
+      AttackInner(game, superstate, attacker, victim);
       attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
     }
 
     private static void AttackInner(
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        Superstate superstate,
         Unit attacker,
         Unit victim) {
       int damage = 5;
@@ -49,7 +49,7 @@ namespace IncendianFalls {
         victim.lifeEndTime = game.time;
         // Bump the victim up to be the next acting unit.
         victim.nextActionTime = game.time;
-        liveUnitByLocationMap.Remove(victim);
+        superstate.liveUnitByLocationMap.Remove(victim);
       }
     }
 
@@ -77,6 +77,7 @@ namespace IncendianFalls {
     public static bool Interact(
         SSContext context,
         Game game,
+        Superstate superstate,
         Unit unit) {
       Asserts.Assert(unit.Is(game.player));
       var player = game.player;
@@ -84,7 +85,7 @@ namespace IncendianFalls {
       if (TileHasDownStaircase(context, game, player.location)) {
         string levelName = "Falls" + game.levels.Count;
 
-        // Remove the player, player now has no level.
+        // Move the player from this level to the next one.
         game.level.units.Remove(player);
         var nextLevel =
             MakeLevel.MakeNextLevel(
@@ -96,9 +97,10 @@ namespace IncendianFalls {
         nextLevel.units.Add(player);
 
         game.level = nextLevel;
+        superstate.liveUnitByLocationMap.Reconstruct(game);
 
-        unit.nextActionTime = unit.nextActionTime + unit.inertia;
-
+        // Note how we are NOT setting unit.nextActionTime here. That's because
+        // we want the player to have the first action after they descend.
         return true;
       } else {
         return false;
@@ -107,7 +109,7 @@ namespace IncendianFalls {
 
     public static bool CanStep(
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        Superstate superstate,
         Unit unit,
         Location destination) {
       if (!game.level.terrain.tiles[destination].walkable) {
@@ -116,7 +118,7 @@ namespace IncendianFalls {
       if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.considerCornersAdjacent)) {
         return false;
       }
-      if (liveUnitByLocationMap.ContainsKey(destination)) {
+      if (superstate.liveUnitByLocationMap.ContainsKey(destination)) {
         return false;
       }
       return true;
@@ -124,17 +126,17 @@ namespace IncendianFalls {
 
     public static void Step(
           Game game,
-          LiveUnitByLocationMap liveUnitByLocationMap,
+          Superstate superstate,
           Unit unit,
           Location destination) {
       Asserts.Assert(game.level.terrain.tiles[destination].walkable);
       Asserts.Assert(game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.considerCornersAdjacent));
-      Asserts.Assert(!liveUnitByLocationMap.ContainsKey(destination));
+      Asserts.Assert(!superstate.liveUnitByLocationMap.ContainsKey(destination));
 
-      bool removed = liveUnitByLocationMap.Remove(unit);
+      bool removed = superstate.liveUnitByLocationMap.Remove(unit);
       Asserts.Assert(removed);
       unit.location = destination;
-      liveUnitByLocationMap.Add(unit);
+      superstate.liveUnitByLocationMap.Add(unit);
 
       unit.nextActionTime = unit.nextActionTime + unit.inertia;
     }

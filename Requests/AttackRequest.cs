@@ -5,8 +5,8 @@ namespace IncendianFalls {
   public class AttackRequestExecutor {
     public static bool Execute(
         SSContext context,
+        Superstate superstate,
         int gameId,
-        LiveUnitByLocationMap liveUnitByLocationMap, 
         int targetUnitId) {
       var game = context.root.GetGame(gameId);
       if (!game.player.Exists()) {
@@ -14,6 +14,9 @@ namespace IncendianFalls {
       }
 
       PreRequest.Do(game);
+
+      superstate.turnsIncludingPresent.Insert(0, context.root.Snapshot());
+      superstate.futuremostTime = Math.Max(superstate.futuremostTime, game.time);
 
       var player = game.player;
 
@@ -27,7 +30,7 @@ namespace IncendianFalls {
         return false;
       }
 
-      Actions.Bump(game, liveUnitByLocationMap, game.player, victim);
+      Actions.Bump(game, superstate, game.player, victim);
 
       GameLoop.NoteUnitActed(game, game.player);
 

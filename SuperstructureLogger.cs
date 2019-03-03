@@ -95,11 +95,9 @@ namespace IncendianFalls {
 
   public class Replayer {
     private Superstructure ss;
-    SortedDictionary<int, RootIncarnation> snapshotByVersion;
 
     public Replayer(Superstructure ss) {
       this.ss = ss;
-      snapshotByVersion = new SortedDictionary<int, RootIncarnation>();
     }
     public void Replay(IRequest request) {
       if (request is SetupGameRequestAsIRequest setupGame) {
@@ -111,19 +109,13 @@ namespace IncendianFalls {
       } else if (request is AttackRequestAsIRequest attack) {
         ss.RequestAttack(attack.obj.gameId, attack.obj.targetUnitId);
       } else if (request is TimeShiftRequestAsIRequest timeShift) {
-        ss.RequestTimeShift(
-            timeShift.obj.gameId,
-            snapshotByVersion[timeShift.obj.version],
-            timeShift.obj.futuremostTime);
+        ss.RequestTimeShift(timeShift.obj.gameId);
       } else if (request is DefendRequestAsIRequest defend) {
         ss.RequestDefend(defend.obj.gameId);
       } else if (request is ResumeRequestAsIRequest resume) {
         ss.RequestResume(resume.obj.gameId);
       } else if (request is FollowDirectiveRequestAsIRequest follow) {
         ss.RequestFollowDirective(follow.obj.gameId);
-      } else if (request is SnapshotRequestAsIRequest snap) {
-        var snapshot = ss.Snapshot();
-        snapshotByVersion.Add(snapshot.version, snapshot);
       } else {
         Asserts.Assert(false);
       }

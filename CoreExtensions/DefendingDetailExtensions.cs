@@ -17,7 +17,7 @@ namespace Atharia.Model {
     public static bool PreAct(
         this Atharia.Model.ShieldingUC detail,
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        Superstate superstate,
         Unit unit) {
       unit.components.Remove(detail.AsIUnitComponent());
       detail.Destruct();
