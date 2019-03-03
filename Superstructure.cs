@@ -96,7 +96,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new SetupGameRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         Superstate superstate = null;
-        var game = SetupGameRequestExecutor.Execute(context, out superstate, randomSeed, squareLevelsOnly);
+        var game = SetupGameRequestExecutor.Execute(context, out superstate, request);
 
         superstateByGameId.Add(game.id, superstate);
 
@@ -128,7 +128,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new InteractRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        var success = InteractRequestExecutor.Execute(context, superstate, gameId);
+        var success = InteractRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new InteractRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -157,7 +157,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new MoveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = MoveRequestExecutor.Execute(context, superstate, gameId, newLocation);
+        bool success = MoveRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new MoveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -186,7 +186,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new AttackRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = AttackRequestExecutor.Execute(context, superstate, gameId, targetUnitId);
+        bool success = AttackRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new AttackRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -215,7 +215,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new TimeShiftRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = TimeShiftRequestExecutor.Execute(context, superstate, gameId);
+        bool success = TimeShiftRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new TimeShiftRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -244,7 +244,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new DefendRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = DefendRequestExecutor.Execute(context, superstate, gameId);
+        bool success = DefendRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new DefendRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -273,7 +273,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new FollowDirectiveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = FollowDirectiveRequestExecutor.Execute(context, superstate, gameId);
+        bool success = FollowDirectiveRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new FollowDirectiveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -303,7 +303,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new ResumeRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = ResumeRequestExecutor.Execute(context, superstate, gameId);
+        bool success = ResumeRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new ResumeRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());

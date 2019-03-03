@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Atharia.Model;
 
 namespace IncendianFalls {
-  public class PreRequest {
-    public static void Do(Game game) {
+  public class EventsClearer {
+    public static void Clear(Game game) {
       // If we can have an index on which units have events, that'd be pretty cool.
       // Not sure how to generalize that though...
       foreach (var unitMaybeWithEvents in game.level.units) {

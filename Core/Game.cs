@@ -116,6 +116,10 @@ public class Game {
     }
                          set { root.EffectGameSetPlayer(id, value); }
   }
+  public IRequest lastPlayerRequest {
+    get { return incarnation.lastPlayerRequest; }
+    set { root.EffectGameSetLastPlayerRequest(id, value); }
+  }
   public Level level {
 
     get {

@@ -9,6 +9,7 @@ public class GameIncarnation {
   public readonly bool squareLevelsOnly;
   public readonly int levels;
   public  int player;
+  public  IRequest lastPlayerRequest;
   public  int level;
   public  int time;
   public readonly int executionState;
@@ -17,6 +18,7 @@ public class GameIncarnation {
       bool squareLevelsOnly,
       int levels,
       int player,
+      IRequest lastPlayerRequest,
       int level,
       int time,
       int executionState) {
@@ -24,6 +26,7 @@ public class GameIncarnation {
     this.squareLevelsOnly = squareLevelsOnly;
     this.levels = levels;
     this.player = player;
+    this.lastPlayerRequest = lastPlayerRequest;
     this.level = level;
     this.time = time;
     this.executionState = executionState;

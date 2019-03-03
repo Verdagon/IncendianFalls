@@ -7,8 +7,12 @@ namespace IncendianFalls {
     public static bool Execute(
         SSContext context,
         Superstate superstate, 
-        int gameId) {
+        FollowDirectiveRequest request) {
+      int gameId = request.gameId;
       var game = context.root.GetGame(gameId);
+
+      EventsClearer.Clear(game);
+
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
@@ -19,10 +23,10 @@ namespace IncendianFalls {
         return false;
       }
 
-      PreRequest.Do(game);
-
-      superstate.turnsIncludingPresent.Insert(0, context.root.Snapshot());
+      superstate.turnsIncludingPresent.Add(context.root.Snapshot());
       superstate.futuremostTime = Math.Max(superstate.futuremostTime, game.time);
+
+      game.lastPlayerRequest = request.AsIRequest();
 
       if (game.player.GetDirectiveOrNull() is MoveDirectiveUCAsIDirectiveUC move) {
         if (!PlayerAI.FollowMoveDirective(game, superstate, game.player)) {

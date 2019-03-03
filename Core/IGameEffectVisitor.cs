@@ -8,6 +8,7 @@ public interface IGameEffectVisitor {
   void visitGameCreateEffect(GameCreateEffect effect);
   void visitGameDeleteEffect(GameDeleteEffect effect);
   void visitGameSetPlayerEffect(GameSetPlayerEffect effect);
+  void visitGameSetLastPlayerRequestEffect(GameSetLastPlayerRequestEffect effect);
   void visitGameSetLevelEffect(GameSetLevelEffect effect);
   void visitGameSetTimeEffect(GameSetTimeEffect effect);
 }

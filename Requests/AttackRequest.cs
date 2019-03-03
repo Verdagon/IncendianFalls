@@ -6,29 +6,34 @@ namespace IncendianFalls {
     public static bool Execute(
         SSContext context,
         Superstate superstate,
-        int gameId,
-        int targetUnitId) {
+        AttackRequest request) {
+
+      int gameId = request.gameId;
+      int targetUnitId = request.targetUnitId;
+
       var game = context.root.GetGame(gameId);
+
+      EventsClearer.Clear(game);
+
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
-
-      PreRequest.Do(game);
-
-      superstate.turnsIncludingPresent.Insert(0, context.root.Snapshot());
-      superstate.futuremostTime = Math.Max(superstate.futuremostTime, game.time);
-
       var player = game.player;
 
       Asserts.Assert(game.executionState.actingUnit.Is(game.player));
       Asserts.Assert(game.player.Is(Utils.GetNextActingUnit(game)));
 
-      player.ClearDirective();
-
       Unit victim = context.root.GetUnit(targetUnitId);
       if (!victim.alive) {
         return false;
       }
+
+      superstate.turnsIncludingPresent.Add(context.root.Snapshot());
+      superstate.futuremostTime = Math.Max(superstate.futuremostTime, game.time);
+
+      game.lastPlayerRequest = request.AsIRequest();
+
+      player.ClearDirective();
 
       Actions.Bump(game, superstate, game.player, victim);
 

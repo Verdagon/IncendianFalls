@@ -278,6 +278,8 @@ public class Root {
       new List<GameDeleteEffect>();
   readonly List<GameSetPlayerEffect> effectsGameSetPlayerEffect =
       new List<GameSetPlayerEffect>();
+  readonly List<GameSetLastPlayerRequestEffect> effectsGameSetLastPlayerRequestEffect =
+      new List<GameSetLastPlayerRequestEffect>();
   readonly List<GameSetLevelEffect> effectsGameSetLevelEffect =
       new List<GameSetLevelEffect>();
   readonly List<GameSetTimeEffect> effectsGameSetTimeEffect =
@@ -3853,6 +3855,10 @@ public class Root {
 
           if (sourceObjIncarnation.player != currentObjIncarnation.player) {
             EffectGameSetPlayer(objId, new Unit(this, sourceObjIncarnation.player));
+          }
+
+          if (sourceObjIncarnation.lastPlayerRequest != currentObjIncarnation.lastPlayerRequest) {
+            EffectGameSetLastPlayerRequest(objId, sourceObjIncarnation.lastPlayerRequest);
           }
 
           if (sourceObjIncarnation.level != currentObjIncarnation.level) {
@@ -8846,6 +8852,7 @@ public class Root {
       bool squareLevelsOnly,
       LevelMutSet levels,
       Unit player,
+      IRequest lastPlayerRequest,
       Level level,
       int time,
       ExecutionState executionState) {
@@ -8863,6 +8870,7 @@ public class Root {
             squareLevelsOnly,
             levels.id,
             player.id,
+            lastPlayerRequest,
             level.id,
             time,
             executionState.id
@@ -8902,9 +8910,10 @@ public class Root {
     result += id * version * 2 * incarnation.squareLevelsOnly.GetDeterministicHashCode();
     result += id * version * 3 * incarnation.levels.GetDeterministicHashCode();
     result += id * version * 4 * incarnation.player.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.level.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.time.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.executionState.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.lastPlayerRequest.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.level.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.time.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.executionState.GetDeterministicHashCode();
     return result;
   }
      
@@ -8939,6 +8948,20 @@ public class Root {
       }
     }
     effectsGameSetPlayerEffect.Clear();
+
+    foreach (var effect in effectsGameSetLastPlayerRequestEffect) {
+      if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGameEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IGameEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGameEffect(effect);
+        }
+      }
+    }
+    effectsGameSetLastPlayerRequestEffect.Clear();
 
     foreach (var effect in effectsGameSetLevelEffect) {
       if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
@@ -8999,6 +9022,7 @@ public class Root {
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
               oldIncarnationAndVersion.incarnation.levels,
               newValue.id,
+              oldIncarnationAndVersion.incarnation.lastPlayerRequest,
               oldIncarnationAndVersion.incarnation.level,
               oldIncarnationAndVersion.incarnation.time,
               oldIncarnationAndVersion.incarnation.executionState);
@@ -9009,6 +9033,35 @@ public class Root {
     }
 
     effectsGameSetPlayerEffect.Add(effect);
+  }
+
+  public void EffectGameSetLastPlayerRequest(int id, IRequest newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = new GameSetLastPlayerRequestEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.lastPlayerRequest;
+      oldIncarnationAndVersion.incarnation.lastPlayerRequest = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              newValue,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.executionState);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsGameSetLastPlayerRequestEffect.Add(effect);
   }
 
   public void EffectGameSetLevel(int id, Level newValue) {
@@ -9027,6 +9080,7 @@ public class Root {
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.lastPlayerRequest,
               newValue.id,
               oldIncarnationAndVersion.incarnation.time,
               oldIncarnationAndVersion.incarnation.executionState);
@@ -9055,6 +9109,7 @@ public class Root {
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.lastPlayerRequest,
               oldIncarnationAndVersion.incarnation.level,
               newValue,
               oldIncarnationAndVersion.incarnation.executionState);

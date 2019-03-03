@@ -7,18 +7,16 @@ namespace IncendianFalls {
     public static bool Execute(
         SSContext context,
         Superstate superstate,
-        int gameId,
-        Location destination) {
+        MoveRequest request) {
+      int gameId = request.gameId;
+      Location destination = request.destination;
       var game = context.root.GetGame(gameId);
+
+      EventsClearer.Clear(game);
+
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
-
-      PreRequest.Do(game);
-
-      superstate.turnsIncludingPresent.Insert(0, context.root.Snapshot());
-      superstate.futuremostTime = Math.Max(superstate.futuremostTime, game.time);
-
       var player = game.player;
 
       if (!game.executionState.actingUnit.NullableIs(game.player)) {
@@ -27,6 +25,11 @@ namespace IncendianFalls {
       if (!game.player.NullableIs(Utils.GetNextActingUnit(game))) {
         throw new Exception("Player isn't the next acting unit!");
       }
+
+      superstate.turnsIncludingPresent.Add(context.root.Snapshot());
+      superstate.futuremostTime = Math.Max(superstate.futuremostTime, game.time);
+
+      game.lastPlayerRequest = request.AsIRequest();
 
       player.ClearDirective();
 

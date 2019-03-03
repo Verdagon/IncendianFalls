@@ -7,10 +7,11 @@ namespace IncendianFalls {
     public static bool Execute(
         SSContext context,
         Superstate superstate,
-        int gameId) {
+        ResumeRequest request) {
+      int gameId = request.gameId;
       var game = context.root.GetGame(gameId);
 
-      PreRequest.Do(game);
+      EventsClearer.Clear(game);
 
       switch (game.GetExecutionStateType()) {
         case GameExecutionStateType.kBetweenUnits:
