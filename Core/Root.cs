@@ -165,6 +165,8 @@ public class Root {
       new List<BidingOperationUCCreateEffect>();
   readonly List<BidingOperationUCDeleteEffect> effectsBidingOperationUCDeleteEffect =
       new List<BidingOperationUCDeleteEffect>();
+  readonly List<BidingOperationUCSetChargeEffect> effectsBidingOperationUCSetChargeEffect =
+      new List<BidingOperationUCSetChargeEffect>();
 
   readonly SortedDictionary<int, List<IUnleashBideImpulseEffectObserver>> observersForUnleashBideImpulse =
       new SortedDictionary<int, List<IUnleashBideImpulseEffectObserver>>();
@@ -172,6 +174,13 @@ public class Root {
       new List<UnleashBideImpulseCreateEffect>();
   readonly List<UnleashBideImpulseDeleteEffect> effectsUnleashBideImpulseDeleteEffect =
       new List<UnleashBideImpulseDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IContinueBidingImpulseEffectObserver>> observersForContinueBidingImpulse =
+      new SortedDictionary<int, List<IContinueBidingImpulseEffectObserver>>();
+  readonly List<ContinueBidingImpulseCreateEffect> effectsContinueBidingImpulseCreateEffect =
+      new List<ContinueBidingImpulseCreateEffect>();
+  readonly List<ContinueBidingImpulseDeleteEffect> effectsContinueBidingImpulseDeleteEffect =
+      new List<ContinueBidingImpulseDeleteEffect>();
 
   readonly SortedDictionary<int, List<IStartBidingImpulseEffectObserver>> observersForStartBidingImpulse =
       new SortedDictionary<int, List<IStartBidingImpulseEffectObserver>>();
@@ -724,6 +733,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsUnleashBideImpulse) {
       result += GetUnleashBideImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsContinueBidingImpulse) {
+      result += GetContinueBidingImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsStartBidingImpulse) {
       result += GetStartBidingImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -911,6 +923,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllUnleashBideImpulse()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllContinueBidingImpulse()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllStartBidingImpulse()) {
@@ -1135,6 +1150,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllUnleashBideImpulse()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllContinueBidingImpulse()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1569,6 +1589,17 @@ public class Root {
       copyOfObserversForUnleashBideImpulse.Add(
           objectId,
           new List<IUnleashBideImpulseEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForContinueBidingImpulse =
+        new SortedDictionary<int, List<IContinueBidingImpulseEffectObserver>>();
+    foreach (var entry in observersForContinueBidingImpulse) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForContinueBidingImpulse.Add(
+          objectId,
+          new List<IContinueBidingImpulseEffectObserver>(
               observers));
     }
 
@@ -2091,6 +2122,9 @@ public class Root {
     BroadcastUnleashBideImpulseEffects(
         copyOfObserversForUnleashBideImpulse);
            
+    BroadcastContinueBidingImpulseEffects(
+        copyOfObserversForContinueBidingImpulse);
+           
     BroadcastStartBidingImpulseEffects(
         copyOfObserversForStartBidingImpulse);
            
@@ -2420,6 +2454,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(sourceObjId)) {
         EffectInternalCreateUnleashBideImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsContinueBidingImpulse) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsContinueBidingImpulse.ContainsKey(sourceObjId)) {
+        EffectInternalCreateContinueBidingImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -4054,6 +4098,10 @@ public class Root {
         var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
         if (currentVersion != sourceVersion) {
 
+          if (sourceObjIncarnation.charge != currentObjIncarnation.charge) {
+            EffectBidingOperationUCSetCharge(objId, sourceObjIncarnation.charge);
+          }
+
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
             rootIncarnation.hash -=
@@ -4096,6 +4144,35 @@ public class Root {
                     objId,
                     rootIncarnation.incarnationsUnleashBideImpulse[objId].version,
                     rootIncarnation.incarnationsUnleashBideImpulse[objId].incarnation);
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsContinueBidingImpulse) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsContinueBidingImpulse.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsContinueBidingImpulse[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+            rootIncarnation.hash -=
+                GetContinueBidingImpulseHash(
+                    objId,
+                    rootIncarnation.incarnationsContinueBidingImpulse[objId].version,
+                    rootIncarnation.incarnationsContinueBidingImpulse[objId].incarnation);
+          rootIncarnation.incarnationsContinueBidingImpulse[objId] = sourceVersionAndObjIncarnation;
+            rootIncarnation.hash +=
+                GetContinueBidingImpulseHash(
+                    objId,
+                    rootIncarnation.incarnationsContinueBidingImpulse[objId].version,
+                    rootIncarnation.incarnationsContinueBidingImpulse[objId].incarnation);
         }
       }
     }
@@ -4779,6 +4856,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsUnleashBideImpulse.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectUnleashBideImpulseDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ContinueBidingImpulseIncarnation>>(rootIncarnation.incarnationsContinueBidingImpulse)) {
+      if (!sourceIncarnation.incarnationsContinueBidingImpulse.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectContinueBidingImpulseDelete(id);
       }
     }
 
@@ -7476,13 +7560,13 @@ public class Root {
     }
   }
   public BidingOperationUC EffectBidingOperationUCCreate(
-) {
+      int charge) {
     CheckUnlocked();
 
     var id = NewId();
     var incarnation =
         new BidingOperationUCIncarnation(
-
+            charge
             );
     EffectInternalCreateBidingOperationUC(id, rootIncarnation.version, incarnation);
     return new BidingOperationUC(this, id);
@@ -7515,6 +7599,7 @@ public class Root {
      
   public int GetBidingOperationUCHash(int id, int version, BidingOperationUCIncarnation incarnation) {
     int result = id * version;
+    result += id * version * 1 * incarnation.charge.GetDeterministicHashCode();
     return result;
   }
      
@@ -7536,6 +7621,20 @@ public class Root {
     effectsBidingOperationUCDeleteEffect.Clear();
 
 
+    foreach (var effect in effectsBidingOperationUCSetChargeEffect) {
+      if (observers.TryGetValue(0, out List<IBidingOperationUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBidingOperationUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IBidingOperationUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBidingOperationUCEffect(effect);
+        }
+      }
+    }
+    effectsBidingOperationUCSetChargeEffect.Clear();
+
     foreach (var effect in effectsBidingOperationUCCreateEffect) {
       if (observers.TryGetValue(0, out List<IBidingOperationUCEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -7549,6 +7648,28 @@ public class Root {
       }
     }
     effectsBidingOperationUCCreateEffect.Clear();
+  }
+
+  public void EffectBidingOperationUCSetCharge(int id, int newValue) {
+    CheckUnlocked();
+    CheckHasBidingOperationUC(id);
+    var effect = new BidingOperationUCSetChargeEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsBidingOperationUC[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.charge;
+      oldIncarnationAndVersion.incarnation.charge = newValue;
+
+    } else {
+      var newIncarnation =
+          new BidingOperationUCIncarnation(
+              newValue);
+      rootIncarnation.incarnationsBidingOperationUC[id] =
+          new VersionAndIncarnation<BidingOperationUCIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsBidingOperationUCSetChargeEffect.Add(effect);
   }
   public UnleashBideImpulseIncarnation GetUnleashBideImpulseIncarnation(int id) {
     if (id == 0) {
@@ -7678,6 +7799,135 @@ public class Root {
       }
     }
     effectsUnleashBideImpulseCreateEffect.Clear();
+  }
+  public ContinueBidingImpulseIncarnation GetContinueBidingImpulseIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsContinueBidingImpulse[id].incarnation;
+  }
+  public bool ContinueBidingImpulseExists(int id) {
+    return rootIncarnation.incarnationsContinueBidingImpulse.ContainsKey(id);
+  }
+  public ContinueBidingImpulse GetContinueBidingImpulse(int id) {
+    return new ContinueBidingImpulse(this, id);
+  }
+  public List<ContinueBidingImpulse> AllContinueBidingImpulse() {
+    List<ContinueBidingImpulse> result = new List<ContinueBidingImpulse>(rootIncarnation.incarnationsContinueBidingImpulse.Count);
+    foreach (var id in rootIncarnation.incarnationsContinueBidingImpulse.Keys) {
+      result.Add(new ContinueBidingImpulse(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<ContinueBidingImpulse> EnumAllContinueBidingImpulse() {
+    foreach (var id in rootIncarnation.incarnationsContinueBidingImpulse.Keys) {
+      yield return GetContinueBidingImpulse(id);
+    }
+  }
+  public void CheckHasContinueBidingImpulse(ContinueBidingImpulse thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasContinueBidingImpulse(thing.id);
+  }
+  public void CheckHasContinueBidingImpulse(int id) {
+    if (!rootIncarnation.incarnationsContinueBidingImpulse.ContainsKey(id)) {
+      throw new System.Exception("Invalid ContinueBidingImpulse: " + id);
+    }
+  }
+  public void AddContinueBidingImpulseObserver(int id, IContinueBidingImpulseEffectObserver observer) {
+    List<IContinueBidingImpulseEffectObserver> obsies;
+    if (!observersForContinueBidingImpulse.TryGetValue(id, out obsies)) {
+      obsies = new List<IContinueBidingImpulseEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForContinueBidingImpulse[id] = obsies;
+  }
+
+  public void RemoveContinueBidingImpulseObserver(int id, IContinueBidingImpulseEffectObserver observer) {
+    if (observersForContinueBidingImpulse.ContainsKey(id)) {
+      var list = observersForContinueBidingImpulse[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForContinueBidingImpulse.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public ContinueBidingImpulse EffectContinueBidingImpulseCreate(
+      int weight) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new ContinueBidingImpulseIncarnation(
+            weight
+            );
+    EffectInternalCreateContinueBidingImpulse(id, rootIncarnation.version, incarnation);
+    return new ContinueBidingImpulse(this, id);
+  }
+  public void EffectInternalCreateContinueBidingImpulse(
+      int id,
+      int incarnationVersion,
+      ContinueBidingImpulseIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new ContinueBidingImpulseCreateEffect(id);
+    rootIncarnation.incarnationsContinueBidingImpulse.Add(
+        id,
+        new VersionAndIncarnation<ContinueBidingImpulseIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsContinueBidingImpulseCreateEffect.Add(effect);
+  }
+
+  public void EffectContinueBidingImpulseDelete(int id) {
+    CheckUnlocked();
+    var effect = new ContinueBidingImpulseDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsContinueBidingImpulse[id];
+
+    rootIncarnation.incarnationsContinueBidingImpulse.Remove(id);
+    effectsContinueBidingImpulseDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetContinueBidingImpulseHash(int id, int version, ContinueBidingImpulseIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.weight.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastContinueBidingImpulseEffects(
+      SortedDictionary<int, List<IContinueBidingImpulseEffectObserver>> observers) {
+    foreach (var effect in effectsContinueBidingImpulseDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IContinueBidingImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnContinueBidingImpulseEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IContinueBidingImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnContinueBidingImpulseEffect(effect);
+        }
+        observersForContinueBidingImpulse.Remove(effect.id);
+      }
+    }
+    effectsContinueBidingImpulseDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsContinueBidingImpulseCreateEffect) {
+      if (observers.TryGetValue(0, out List<IContinueBidingImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnContinueBidingImpulseEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IContinueBidingImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnContinueBidingImpulseEffect(effect);
+        }
+      }
+    }
+    effectsContinueBidingImpulseCreateEffect.Clear();
   }
   public StartBidingImpulseIncarnation GetStartBidingImpulseIncarnation(int id) {
     if (id == 0) {
@@ -8119,13 +8369,16 @@ public class Root {
     }
   }
   public AttackImpulse EffectAttackImpulseCreate(
-      int weight) {
+      int weight,
+      Unit targetUnit) {
     CheckUnlocked();
+    CheckHasUnit(targetUnit);
 
     var id = NewId();
     var incarnation =
         new AttackImpulseIncarnation(
-            weight
+            weight,
+            targetUnit.id
             );
     EffectInternalCreateAttackImpulse(id, rootIncarnation.version, incarnation);
     return new AttackImpulse(this, id);
@@ -8159,6 +8412,7 @@ public class Root {
   public int GetAttackImpulseHash(int id, int version, AttackImpulseIncarnation incarnation) {
     int result = id * version;
     result += id * version * 1 * incarnation.weight.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.targetUnit.GetDeterministicHashCode();
     return result;
   }
      
@@ -10956,6 +11210,9 @@ public class Root {
     if (rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(id)) {
       return new UnleashBideImpulseAsIImpulse(new UnleashBideImpulse(this, id));
     }
+    if (rootIncarnation.incarnationsContinueBidingImpulse.ContainsKey(id)) {
+      return new ContinueBidingImpulseAsIImpulse(new ContinueBidingImpulse(this, id));
+    }
     if (rootIncarnation.incarnationsStartBidingImpulse.ContainsKey(id)) {
       return new StartBidingImpulseAsIImpulse(new StartBidingImpulse(this, id));
     }
@@ -10982,6 +11239,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(id)) {
       return new UnleashBideImpulseAsIImpulse(new UnleashBideImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsContinueBidingImpulse.ContainsKey(id)) {
+      return new ContinueBidingImpulseAsIImpulse(new ContinueBidingImpulse(this, id));
     }
     if (rootIncarnation.incarnationsStartBidingImpulse.ContainsKey(id)) {
       return new StartBidingImpulseAsIImpulse(new StartBidingImpulse(this, id));
@@ -11062,6 +11322,9 @@ public class Root {
     if (rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(id)) {
       return new UnleashBideImpulseAsIDestructible(new UnleashBideImpulse(this, id));
     }
+    if (rootIncarnation.incarnationsContinueBidingImpulse.ContainsKey(id)) {
+      return new ContinueBidingImpulseAsIDestructible(new ContinueBidingImpulse(this, id));
+    }
     if (rootIncarnation.incarnationsStartBidingImpulse.ContainsKey(id)) {
       return new StartBidingImpulseAsIDestructible(new StartBidingImpulse(this, id));
     }
@@ -11133,6 +11396,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsUnleashBideImpulse.ContainsKey(id)) {
       return new UnleashBideImpulseAsIDestructible(new UnleashBideImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsContinueBidingImpulse.ContainsKey(id)) {
+      return new ContinueBidingImpulseAsIDestructible(new ContinueBidingImpulse(this, id));
     }
     if (rootIncarnation.incarnationsStartBidingImpulse.ContainsKey(id)) {
       return new StartBidingImpulseAsIDestructible(new StartBidingImpulse(this, id));

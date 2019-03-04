@@ -10,5 +10,17 @@ namespace Atharia.Model {
       thing.Destruct();
       return new Atharia.Model.Void();
     }
+
+    public static Atharia.Model.Void AfterImpulse(
+        this KillDirectiveUC obj,
+        Game game,
+        Superstate superstate,
+        Unit unit,
+        IImpulse impulse) {
+      if (!obj.targetUnit.Exists()) {
+        unit.ClearDirective();
+      }
+      return new Atharia.Model.Void();
+    }
   }
 }

@@ -36,14 +36,6 @@ namespace Atharia.Model {
       }
       Actions.UnleashBide(game, superstate, actingUnit, victims);
 
-      var directive = actingUnit.components.GetOnlyKillDirectiveUCOrNull();
-      if (directive.Exists() && !directive.targetUnit.alive) {
-        // Glorious victory!
-        game.root.logger.Info("Destroyed enemy!");
-        //  unit.components.Remove(directive.AsIUnitComponent());
-        //  directive.Destruct();
-      }
-
       actingUnit.ClearOperation();
 
       return true;

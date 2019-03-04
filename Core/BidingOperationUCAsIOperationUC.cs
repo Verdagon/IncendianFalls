@@ -105,8 +105,8 @@ public class BidingOperationUCAsIOperationUC : IOperationUC {
          public Void Destruct() {
     return BidingOperationUCExtensions.Destruct(obj);
   }
-  public Void OnImpulse(Unit unit, Game game, IImpulse impulse) {
-    return BidingOperationUCExtensions.OnImpulse(obj, unit, game, impulse);
+  public Void BeforeImpulse(Game game, Superstate superstate, Unit unit, IImpulse impulse) {
+    return BidingOperationUCExtensions.BeforeImpulse(obj, game, superstate, unit, impulse);
   }
 
 }

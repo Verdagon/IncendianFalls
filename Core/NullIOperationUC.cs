@@ -43,8 +43,8 @@ public class NullIOperationUC : IOperationUC {
     return NullIUnitComponent.Null;
   }
 
-  public Void OnImpulse(Unit unit, Game game, IImpulse impulse) {
-    throw new Exception("Called OnImpulse on a null!");
+  public Void BeforeImpulse(Game game, Superstate superstate, Unit unit, IImpulse impulse) {
+    throw new Exception("Called BeforeImpulse on a null!");
   }
              
   public Void Destruct() {

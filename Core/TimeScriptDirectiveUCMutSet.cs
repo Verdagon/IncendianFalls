@@ -34,6 +34,9 @@ public class TimeScriptDirectiveUCMutSet {
       root.EffectTimeScriptDirectiveUCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(TimeScriptDirectiveUC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<TimeScriptDirectiveUC> GetEnumerator() {
     foreach (var element in incarnation.set) {

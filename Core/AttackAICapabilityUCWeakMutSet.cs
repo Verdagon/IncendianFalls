@@ -34,6 +34,9 @@ public class AttackAICapabilityUCWeakMutSet {
       root.EffectAttackAICapabilityUCWeakMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(AttackAICapabilityUC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<AttackAICapabilityUC> GetEnumerator() {
     foreach (var element in incarnation.set) {

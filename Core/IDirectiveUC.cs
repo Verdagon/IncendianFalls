@@ -16,6 +16,7 @@ public interface IDirectiveUC {
   bool NullableIs(IDirectiveUC that);
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
+  Void AfterImpulse(Game game, Superstate superstate, Unit unit, IImpulse impulse);
   Void Destruct();
 }
 }

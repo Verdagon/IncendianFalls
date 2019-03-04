@@ -26,7 +26,7 @@ namespace Atharia.Model {
       // The below code is to just to update it if we have better information now.
 
       Unit nearestEnemy =
-          superstate.liveUnitByLocationMap.FindNearestUnit(
+          superstate.liveUnitByLocationMap.FindNearestLiveUnit(
               game,
               unit.location,
               // Filter so its not this unit
@@ -71,7 +71,7 @@ namespace Atharia.Model {
       } else {
         if (game.level.terrain.pattern.LocationsAreAdjacent(unit.location, directive.targetUnit.location, game.level.considerCornersAdjacent)) {
           // Target is right next to subject. Attack!
-          return obj.root.EffectAttackImpulseCreate(800).AsIImpulse();
+          return obj.root.EffectAttackImpulseCreate(800, directive.targetUnit).AsIImpulse();
         } else {
           // Not right next to us.
 

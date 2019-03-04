@@ -43,6 +43,10 @@ public class NullIDirectiveUC : IDirectiveUC {
     return NullIUnitComponent.Null;
   }
 
+  public Void AfterImpulse(Game game, Superstate superstate, Unit unit, IImpulse impulse) {
+    throw new Exception("Called AfterImpulse on a null!");
+  }
+             
   public Void Destruct() {
     throw new Exception("Called Destruct on a null!");
   }

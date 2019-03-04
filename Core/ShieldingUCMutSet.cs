@@ -34,6 +34,9 @@ public class ShieldingUCMutSet {
       root.EffectShieldingUCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(ShieldingUC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<ShieldingUC> GetEnumerator() {
     foreach (var element in incarnation.set) {

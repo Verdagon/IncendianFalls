@@ -84,6 +84,9 @@ public class KillDirectiveUCAsIDirectiveUC : IDirectiveUC {
          public Void Destruct() {
     return KillDirectiveUCExtensions.Destruct(obj);
   }
+  public Void AfterImpulse(Game game, Superstate superstate, Unit unit, IImpulse impulse) {
+    return KillDirectiveUCExtensions.AfterImpulse(obj, game, superstate, unit, impulse);
+  }
 
 }
 public static class KillDirectiveUCAsIDirectiveUCCaster {

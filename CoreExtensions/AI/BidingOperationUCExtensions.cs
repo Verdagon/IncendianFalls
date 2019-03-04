@@ -15,8 +15,17 @@ namespace Atharia.Model {
       return incomingDamage * 3 / 2;
     }
 
-    public static Atharia.Model.Void OnImpulse(this BidingOperationUC obj, Unit unit, Game game, IImpulse impulse) {
-      if (impulse is UnleashBideImpulse unleash) {
+    public static Atharia.Model.Void BeforeImpulse(
+        this BidingOperationUC obj,
+        Game game,
+        Superstate superstate,
+        Unit unit,
+        IImpulse impulse) {
+      if (impulse is StartBidingImpulseAsIImpulse bide) {
+        // Gooooood... proceed.
+      } else if (impulse is ContinueBidingImpulseAsIImpulse cont) {
+        // Gooooood... proceed.
+      } else if (impulse is UnleashBideImpulseAsIImpulse unleash) {
         // Gooooood... proceed.
       } else {
         // They're doing something other than unleashing the bide, cancel this operation.

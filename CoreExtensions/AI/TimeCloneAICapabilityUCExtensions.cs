@@ -16,17 +16,6 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
-      var directive = unit.GetDirectiveOrNull();
-      if (directive is TimeScriptDirectiveUCAsIDirectiveUC tsdI) {
-        var script = tsdI.obj.script;
-        if (script.Count > 0) {
-          script.RemoveAt(0);
-        } else {
-          // Unit should be deleted when they try to act again.
-        }
-      } else {
-        Asserts.Assert(false);
-      }
       return false;
     }
 
@@ -49,9 +38,18 @@ namespace Atharia.Model {
               return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
             }
           } else if (request is AttackRequestAsIRequest arI) {
-            // todo: implement attacking
-            Asserts.Assert(false);
-            return null;
+            var targetUnitId = arI.obj.targetUnitId;
+            var targetUnit = game.root.GetUnit(targetUnitId);
+            if (!targetUnit.Exists()) {
+              return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            }
+            if (!game.level.units.Contains(targetUnit)) {
+              return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            }
+            if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, targetUnit.location, game.level.considerCornersAdjacent)) {
+              return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            }
+            return game.root.EffectAttackImpulseCreate(1000, targetUnit).AsIImpulse();
           } else if (request is DefendRequestAsIRequest drI) {
             return game.root.EffectDefendImpulseCreate(1000).AsIImpulse();
           } else {

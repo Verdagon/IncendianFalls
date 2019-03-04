@@ -84,6 +84,9 @@ public class MoveDirectiveUCAsIDirectiveUC : IDirectiveUC {
          public Void Destruct() {
     return MoveDirectiveUCExtensions.Destruct(obj);
   }
+  public Void AfterImpulse(Game game, Superstate superstate, Unit unit, IImpulse impulse) {
+    return MoveDirectiveUCExtensions.AfterImpulse(obj, game, superstate, unit, impulse);
+  }
 
 }
 public static class MoveDirectiveUCAsIDirectiveUCCaster {

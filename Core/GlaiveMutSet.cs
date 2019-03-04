@@ -34,6 +34,9 @@ public class GlaiveMutSet {
       root.EffectGlaiveMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(Glaive element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<Glaive> GetEnumerator() {
     foreach (var element in incarnation.set) {

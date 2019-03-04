@@ -34,6 +34,9 @@ public class BideAICapabilityUCMutSet {
       root.EffectBideAICapabilityUCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(BideAICapabilityUC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<BideAICapabilityUC> GetEnumerator() {
     foreach (var element in incarnation.set) {

@@ -51,12 +51,10 @@ namespace IncendianFalls {
         return false;
       }
 
-      Actions.Step(game, superstate, game.player, directive.path[0]);
-      directive.path.RemoveAt(0);
-
-      if (directive.path.Count == 0) {
-        unit.ClearDirective();
-      }
+      var moveImpulse = game.root.EffectMoveImpulseCreate(1000, directive.path[0]);
+      moveImpulse.Enact(game, superstate, game.player);
+      directive.AfterImpulse(game, superstate, game.player, moveImpulse.AsIImpulse());
+      moveImpulse.Destruct();
 
       return true;
     }

@@ -24,8 +24,21 @@ namespace IncendianFalls {
         }
       }
       // game.root.logger.Info("Enacting impulse: " + strongestImpulse.ToString());
+
+      if (unit.GetOperationOrNull().Exists()) {
+        unit.GetOperationOrNull().BeforeImpulse(game, superstate, unit, strongestImpulse);
+      }
+
       bool ret = strongestImpulse.Enact(game, superstate, unit);
+
+      if (unit.Exists()) {
+        if (unit.GetDirectiveOrNull().Exists()) {
+          unit.GetDirectiveOrNull().AfterImpulse(game, superstate, unit, strongestImpulse);
+        }
+      }
+
       strongestImpulse.Destruct();
+
       return ret;
     }
   }

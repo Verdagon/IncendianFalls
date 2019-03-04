@@ -34,6 +34,9 @@ public class WanderAICapabilityUCMutSet {
       root.EffectWanderAICapabilityUCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(WanderAICapabilityUC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<WanderAICapabilityUC> GetEnumerator() {
     foreach (var element in incarnation.set) {

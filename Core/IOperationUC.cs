@@ -16,7 +16,7 @@ public interface IOperationUC {
   bool NullableIs(IOperationUC that);
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
-  Void OnImpulse(Unit unit, Game game, IImpulse impulse);
+  Void BeforeImpulse(Game game, Superstate superstate, Unit unit, IImpulse impulse);
   Void Destruct();
 }
 }

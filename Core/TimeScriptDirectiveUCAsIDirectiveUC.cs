@@ -84,6 +84,9 @@ public class TimeScriptDirectiveUCAsIDirectiveUC : IDirectiveUC {
          public Void Destruct() {
     return TimeScriptDirectiveUCExtensions.Destruct(obj);
   }
+  public Void AfterImpulse(Game game, Superstate superstate, Unit unit, IImpulse impulse) {
+    return TimeScriptDirectiveUCExtensions.AfterImpulse(obj, game, superstate, unit, impulse);
+  }
 
 }
 public static class TimeScriptDirectiveUCAsIDirectiveUCCaster {

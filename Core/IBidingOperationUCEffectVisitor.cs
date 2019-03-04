@@ -7,6 +7,7 @@ namespace Atharia.Model {
 public interface IBidingOperationUCEffectVisitor {
   void visitBidingOperationUCCreateEffect(BidingOperationUCCreateEffect effect);
   void visitBidingOperationUCDeleteEffect(BidingOperationUCDeleteEffect effect);
+  void visitBidingOperationUCSetChargeEffect(BidingOperationUCSetChargeEffect effect);
 }
 
 }

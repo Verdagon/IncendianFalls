@@ -34,6 +34,9 @@ public class UnitMutSet {
       root.EffectUnitMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(Unit element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<Unit> GetEnumerator() {
     foreach (var element in incarnation.set) {

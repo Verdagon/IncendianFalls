@@ -34,6 +34,9 @@ public class ItemTTCMutSet {
       root.EffectItemTTCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(ItemTTC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<ItemTTC> GetEnumerator() {
     foreach (var element in incarnation.set) {

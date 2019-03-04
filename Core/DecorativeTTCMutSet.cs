@@ -34,6 +34,9 @@ public class DecorativeTTCMutSet {
       root.EffectDecorativeTTCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(DecorativeTTC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<DecorativeTTC> GetEnumerator() {
     foreach (var element in incarnation.set) {

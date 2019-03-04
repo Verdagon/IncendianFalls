@@ -20,18 +20,7 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
-      var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
-      Asserts.Assert(directive.Exists());
-
-      Actions.Bump(game, superstate, unit, directive.targetUnit);
-
-      if (!directive.targetUnit.alive) {
-        // Glorious victory!
-        game.root.logger.Info("Destroyed enemy!");
-      //  unit.components.Remove(directive.AsIUnitComponent());
-      //  directive.Destruct();
-      }
-
+      Actions.Bump(game, superstate, unit, obj.targetUnit);
       return true;
     }
 

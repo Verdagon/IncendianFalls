@@ -34,6 +34,9 @@ public class BidingOperationUCMutSet {
       root.EffectBidingOperationUCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(BidingOperationUC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<BidingOperationUC> GetEnumerator() {
     foreach (var element in incarnation.set) {

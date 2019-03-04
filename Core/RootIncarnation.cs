@@ -27,6 +27,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCIncarnation>> incarnationsTimeCloneAICapabilityUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<BidingOperationUCIncarnation>> incarnationsBidingOperationUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<UnleashBideImpulseIncarnation>> incarnationsUnleashBideImpulse;
+  public readonly SortedDictionary<int, VersionAndIncarnation<ContinueBidingImpulseIncarnation>> incarnationsContinueBidingImpulse;
   public readonly SortedDictionary<int, VersionAndIncarnation<StartBidingImpulseIncarnation>> incarnationsStartBidingImpulse;
   public readonly SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCIncarnation>> incarnationsBideAICapabilityUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<DefendImpulseIncarnation>> incarnationsDefendImpulse;
@@ -92,6 +93,7 @@ public class RootIncarnation {
     this.incarnationsTimeCloneAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCIncarnation>>();
     this.incarnationsBidingOperationUC = new SortedDictionary<int, VersionAndIncarnation<BidingOperationUCIncarnation>>();
     this.incarnationsUnleashBideImpulse = new SortedDictionary<int, VersionAndIncarnation<UnleashBideImpulseIncarnation>>();
+    this.incarnationsContinueBidingImpulse = new SortedDictionary<int, VersionAndIncarnation<ContinueBidingImpulseIncarnation>>();
     this.incarnationsStartBidingImpulse = new SortedDictionary<int, VersionAndIncarnation<StartBidingImpulseIncarnation>>();
     this.incarnationsBideAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCIncarnation>>();
     this.incarnationsDefendImpulse = new SortedDictionary<int, VersionAndIncarnation<DefendImpulseIncarnation>>();
@@ -162,6 +164,7 @@ public class RootIncarnation {
     this.incarnationsTimeCloneAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCIncarnation>>(that.incarnationsTimeCloneAICapabilityUC);
     this.incarnationsBidingOperationUC = new SortedDictionary<int, VersionAndIncarnation<BidingOperationUCIncarnation>>(that.incarnationsBidingOperationUC);
     this.incarnationsUnleashBideImpulse = new SortedDictionary<int, VersionAndIncarnation<UnleashBideImpulseIncarnation>>(that.incarnationsUnleashBideImpulse);
+    this.incarnationsContinueBidingImpulse = new SortedDictionary<int, VersionAndIncarnation<ContinueBidingImpulseIncarnation>>(that.incarnationsContinueBidingImpulse);
     this.incarnationsStartBidingImpulse = new SortedDictionary<int, VersionAndIncarnation<StartBidingImpulseIncarnation>>(that.incarnationsStartBidingImpulse);
     this.incarnationsBideAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCIncarnation>>(that.incarnationsBideAICapabilityUC);
     this.incarnationsDefendImpulse = new SortedDictionary<int, VersionAndIncarnation<DefendImpulseIncarnation>>(that.incarnationsDefendImpulse);

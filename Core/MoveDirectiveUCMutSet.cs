@@ -34,6 +34,9 @@ public class MoveDirectiveUCMutSet {
       root.EffectMoveDirectiveUCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(MoveDirectiveUC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<MoveDirectiveUC> GetEnumerator() {
     foreach (var element in incarnation.set) {

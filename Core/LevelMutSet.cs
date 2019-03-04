@@ -34,6 +34,9 @@ public class LevelMutSet {
       root.EffectLevelMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(Level element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<Level> GetEnumerator() {
     foreach (var element in incarnation.set) {

@@ -35,7 +35,7 @@ namespace Atharia.Model {
       }
     }
 
-    public Unit FindNearestUnit(
+    public Unit FindNearestLiveUnit(
         Game game,
         Location nearestTo,
         Unit notThisUnit,

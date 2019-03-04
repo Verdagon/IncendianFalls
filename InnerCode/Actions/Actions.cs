@@ -11,7 +11,7 @@ namespace IncendianFalls {
         List<Unit> victims) {
       Eventer.broadcastUnitUnleashBideEvent(game.root, game, attacker, victims);
       foreach (var victim in victims) {
-        AttackInner(game, superstate, attacker, victim);
+        AttackInner(game, superstate, attacker, victim, 15);
       }
       attacker.nextActionTime = attacker.nextActionTime + attacker.inertia * 3 / 2;
     }
@@ -22,7 +22,7 @@ namespace IncendianFalls {
         Unit attacker,
         Unit victim) {
       Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
-      AttackInner(game, superstate, attacker, victim);
+      AttackInner(game, superstate, attacker, victim, 5);
       attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
     }
 
@@ -30,8 +30,8 @@ namespace IncendianFalls {
         Game game,
         Superstate superstate,
         Unit attacker,
-        Unit victim) {
-      int damage = 5;
+        Unit victim,
+        int damage) {
       foreach (var item in attacker.items) {
         damage = item.AffectOutgoingDamage(damage);
       }

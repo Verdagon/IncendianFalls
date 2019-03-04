@@ -34,6 +34,9 @@ public class KillDirectiveUCMutSet {
       root.EffectKillDirectiveUCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(KillDirectiveUC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<KillDirectiveUC> GetEnumerator() {
     foreach (var element in incarnation.set) {

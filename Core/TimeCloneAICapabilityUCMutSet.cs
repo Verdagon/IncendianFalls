@@ -34,6 +34,9 @@ public class TimeCloneAICapabilityUCMutSet {
       root.EffectTimeCloneAICapabilityUCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(TimeCloneAICapabilityUC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<TimeCloneAICapabilityUC> GetEnumerator() {
     foreach (var element in incarnation.set) {

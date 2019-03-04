@@ -34,6 +34,9 @@ public class DownStaircaseTTCMutSet {
       root.EffectDownStaircaseTTCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(DownStaircaseTTC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<DownStaircaseTTC> GetEnumerator() {
     foreach (var element in incarnation.set) {

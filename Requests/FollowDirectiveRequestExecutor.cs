@@ -13,7 +13,7 @@ namespace IncendianFalls {
 
       EventsClearer.Clear(game);
 
-      Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput);
+      Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerResume);
       Asserts.Assert(superstate.timeShiftingState == null);
 
       if (!game.player.Exists()) {

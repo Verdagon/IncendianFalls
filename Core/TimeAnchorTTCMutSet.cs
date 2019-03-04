@@ -34,6 +34,9 @@ public class TimeAnchorTTCMutSet {
       root.EffectTimeAnchorTTCMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(TimeAnchorTTC element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<TimeAnchorTTC> GetEnumerator() {
     foreach (var element in incarnation.set) {

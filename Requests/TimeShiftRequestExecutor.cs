@@ -10,12 +10,16 @@ namespace IncendianFalls {
     // When shifting backwards by one incarnation, we're going from the "older"
     // turn to the "newer" turn.
 
+    private static int GetMpCost(int timeDifference) {
+      return 5 + timeDifference / 200;
+    }
+
     private static bool CheckCanTimeshift(Game presentGame, RootIncarnation destinationIncarnation) {
       var pastGame = destinationIncarnation.incarnationsGame[presentGame.id].incarnation;
       var pastTime = pastGame.time;
       int timeDifference = presentGame.time - pastTime;
       // time shift costs 5 now, and 5 + timeDifference / 100 from your past self.
-      int mpCost = 5 + timeDifference / 100;
+      int mpCost = GetMpCost(presentGame.time - pastGame.time);
 
       if (presentGame.player.mp < 5) {
         presentGame.root.logger.Info("Not enough mp now to cast the spell, need 5!");
@@ -149,6 +153,9 @@ namespace IncendianFalls {
           return true;
 
         case MultiverseStateType.kTimeshiftingAfterCloneMoved:
+          var futureGame = superstate.timeShiftingState.future.GetGame(game.id);
+          var futurePlayer = futureGame.player;
+
           // Now place a new player down, and switch game.player to it.
           var newPlayer =
               context.root.EffectUnitCreate(
@@ -157,13 +164,15 @@ namespace IncendianFalls {
                   0,
                   superstate.timeShiftingState.targetAnchorLocation,
                   "chronomancer",
-                  90, 90,
-                  100, 100,
+                  futurePlayer.hp, futurePlayer.maxHp,
+                  futurePlayer.mp, futurePlayer.maxMp,
                   600,
                   game.time, // Act now
                   IUnitComponentMutBunch.New(context.root),
                   IItemMutBunch.New(context.root),
                   true);
+          newPlayer.mp = newPlayer.mp - GetMpCost(futureGame.time - game.time);
+
           Console.WriteLine("Made new player! ID " + newPlayer.id);
           game.level.units.Add(newPlayer);
           game.player = newPlayer;
@@ -181,10 +190,6 @@ namespace IncendianFalls {
           GameLoop.NoteUnitAppearedReadyToAct(game, superstate);
 
           Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput);
-
-          context.logger.Error("todo, reduce mp");
-
-          // player.mp = player.mp - mpCost;
 
           return true;
 

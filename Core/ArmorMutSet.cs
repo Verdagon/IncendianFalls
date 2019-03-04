@@ -34,6 +34,9 @@ public class ArmorMutSet {
       root.EffectArmorMutSetRemove(id, elementId);
     }
   }
+  public bool Contains(Armor element) {
+      return incarnation.set.Contains(element.id);
+  }
   public int Count { get { return incarnation.set.Count; } }
   public IEnumerator<Armor> GetEnumerator() {
     foreach (var element in incarnation.set) {
