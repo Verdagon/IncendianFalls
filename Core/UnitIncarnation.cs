@@ -18,6 +18,7 @@ public class UnitIncarnation {
   public  int nextActionTime;
   public readonly int components;
   public readonly int items;
+  public readonly bool good;
   public UnitIncarnation(
       int events,
       bool alive,
@@ -31,7 +32,8 @@ public class UnitIncarnation {
       int inertia,
       int nextActionTime,
       int components,
-      int items) {
+      int items,
+      bool good) {
     this.events = events;
     this.alive = alive;
     this.lifeEndTime = lifeEndTime;
@@ -45,6 +47,7 @@ public class UnitIncarnation {
     this.nextActionTime = nextActionTime;
     this.components = components;
     this.items = items;
+    this.good = good;
   }
 }
 

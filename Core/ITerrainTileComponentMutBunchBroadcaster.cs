@@ -4,24 +4,26 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class ITerrainTileComponentMutBunchBroadcaster:IItemTerrainTileComponentMutSetEffectObserver, IItemTerrainTileComponentMutSetEffectVisitor, IDecorativeTerrainTileComponentMutSetEffectObserver, IDecorativeTerrainTileComponentMutSetEffectVisitor, IUpStaircaseTerrainTileComponentMutSetEffectObserver, IUpStaircaseTerrainTileComponentMutSetEffectVisitor, IDownStaircaseTerrainTileComponentMutSetEffectObserver, IDownStaircaseTerrainTileComponentMutSetEffectVisitor {
+public class ITerrainTileComponentMutBunchBroadcaster:ITimeAnchorTTCMutSetEffectObserver, ITimeAnchorTTCMutSetEffectVisitor, IItemTTCMutSetEffectObserver, IItemTTCMutSetEffectVisitor, IDecorativeTTCMutSetEffectObserver, IDecorativeTTCMutSetEffectVisitor, IUpStaircaseTTCMutSetEffectObserver, IUpStaircaseTTCMutSetEffectVisitor, IDownStaircaseTTCMutSetEffectObserver, IDownStaircaseTTCMutSetEffectVisitor {
   ITerrainTileComponentMutBunch bunch;
   private List<IITerrainTileComponentMutBunchObserver> observers;
 
   public ITerrainTileComponentMutBunchBroadcaster(ITerrainTileComponentMutBunch bunch) {
     this.bunch = bunch;
     this.observers = new List<IITerrainTileComponentMutBunchObserver>();
-    bunch.membersItemTerrainTileComponentMutSet.AddObserver(this);
-    bunch.membersDecorativeTerrainTileComponentMutSet.AddObserver(this);
-    bunch.membersUpStaircaseTerrainTileComponentMutSet.AddObserver(this);
-    bunch.membersDownStaircaseTerrainTileComponentMutSet.AddObserver(this);
+    bunch.membersTimeAnchorTTCMutSet.AddObserver(this);
+    bunch.membersItemTTCMutSet.AddObserver(this);
+    bunch.membersDecorativeTTCMutSet.AddObserver(this);
+    bunch.membersUpStaircaseTTCMutSet.AddObserver(this);
+    bunch.membersDownStaircaseTTCMutSet.AddObserver(this);
 
   }
   public void Stop() {
-    bunch.membersItemTerrainTileComponentMutSet.RemoveObserver(this);
-    bunch.membersDecorativeTerrainTileComponentMutSet.RemoveObserver(this);
-    bunch.membersUpStaircaseTerrainTileComponentMutSet.RemoveObserver(this);
-    bunch.membersDownStaircaseTerrainTileComponentMutSet.RemoveObserver(this);
+    bunch.membersTimeAnchorTTCMutSet.RemoveObserver(this);
+    bunch.membersItemTTCMutSet.RemoveObserver(this);
+    bunch.membersDecorativeTTCMutSet.RemoveObserver(this);
+    bunch.membersUpStaircaseTTCMutSet.RemoveObserver(this);
+    bunch.membersDownStaircaseTTCMutSet.RemoveObserver(this);
 
   }
   public void AddObserver(IITerrainTileComponentMutBunchObserver observer) {
@@ -40,50 +42,61 @@ public class ITerrainTileComponentMutBunchBroadcaster:IItemTerrainTileComponentM
       observer.OnITerrainTileComponentMutBunchRemove(id);
     }
   }
-  public void OnItemTerrainTileComponentMutSetEffect(IItemTerrainTileComponentMutSetEffect effect) {
+  public void OnTimeAnchorTTCMutSetEffect(ITimeAnchorTTCMutSetEffect effect) {
     effect.visit(this);
   }
-  public void visitItemTerrainTileComponentMutSetAddEffect(ItemTerrainTileComponentMutSetAddEffect effect) {
+  public void visitTimeAnchorTTCMutSetAddEffect(TimeAnchorTTCMutSetAddEffect effect) {
     BroadcastAdd(effect.elementId);
   }
-  public void visitItemTerrainTileComponentMutSetRemoveEffect(ItemTerrainTileComponentMutSetRemoveEffect effect) {
+  public void visitTimeAnchorTTCMutSetRemoveEffect(TimeAnchorTTCMutSetRemoveEffect effect) {
     BroadcastRemove(effect.elementId);
   }
-  public void visitItemTerrainTileComponentMutSetCreateEffect(ItemTerrainTileComponentMutSetCreateEffect effect) { }
-  public void visitItemTerrainTileComponentMutSetDeleteEffect(ItemTerrainTileComponentMutSetDeleteEffect effect) { }
-  public void OnDecorativeTerrainTileComponentMutSetEffect(IDecorativeTerrainTileComponentMutSetEffect effect) {
+  public void visitTimeAnchorTTCMutSetCreateEffect(TimeAnchorTTCMutSetCreateEffect effect) { }
+  public void visitTimeAnchorTTCMutSetDeleteEffect(TimeAnchorTTCMutSetDeleteEffect effect) { }
+  public void OnItemTTCMutSetEffect(IItemTTCMutSetEffect effect) {
     effect.visit(this);
   }
-  public void visitDecorativeTerrainTileComponentMutSetAddEffect(DecorativeTerrainTileComponentMutSetAddEffect effect) {
+  public void visitItemTTCMutSetAddEffect(ItemTTCMutSetAddEffect effect) {
     BroadcastAdd(effect.elementId);
   }
-  public void visitDecorativeTerrainTileComponentMutSetRemoveEffect(DecorativeTerrainTileComponentMutSetRemoveEffect effect) {
+  public void visitItemTTCMutSetRemoveEffect(ItemTTCMutSetRemoveEffect effect) {
     BroadcastRemove(effect.elementId);
   }
-  public void visitDecorativeTerrainTileComponentMutSetCreateEffect(DecorativeTerrainTileComponentMutSetCreateEffect effect) { }
-  public void visitDecorativeTerrainTileComponentMutSetDeleteEffect(DecorativeTerrainTileComponentMutSetDeleteEffect effect) { }
-  public void OnUpStaircaseTerrainTileComponentMutSetEffect(IUpStaircaseTerrainTileComponentMutSetEffect effect) {
+  public void visitItemTTCMutSetCreateEffect(ItemTTCMutSetCreateEffect effect) { }
+  public void visitItemTTCMutSetDeleteEffect(ItemTTCMutSetDeleteEffect effect) { }
+  public void OnDecorativeTTCMutSetEffect(IDecorativeTTCMutSetEffect effect) {
     effect.visit(this);
   }
-  public void visitUpStaircaseTerrainTileComponentMutSetAddEffect(UpStaircaseTerrainTileComponentMutSetAddEffect effect) {
+  public void visitDecorativeTTCMutSetAddEffect(DecorativeTTCMutSetAddEffect effect) {
     BroadcastAdd(effect.elementId);
   }
-  public void visitUpStaircaseTerrainTileComponentMutSetRemoveEffect(UpStaircaseTerrainTileComponentMutSetRemoveEffect effect) {
+  public void visitDecorativeTTCMutSetRemoveEffect(DecorativeTTCMutSetRemoveEffect effect) {
     BroadcastRemove(effect.elementId);
   }
-  public void visitUpStaircaseTerrainTileComponentMutSetCreateEffect(UpStaircaseTerrainTileComponentMutSetCreateEffect effect) { }
-  public void visitUpStaircaseTerrainTileComponentMutSetDeleteEffect(UpStaircaseTerrainTileComponentMutSetDeleteEffect effect) { }
-  public void OnDownStaircaseTerrainTileComponentMutSetEffect(IDownStaircaseTerrainTileComponentMutSetEffect effect) {
+  public void visitDecorativeTTCMutSetCreateEffect(DecorativeTTCMutSetCreateEffect effect) { }
+  public void visitDecorativeTTCMutSetDeleteEffect(DecorativeTTCMutSetDeleteEffect effect) { }
+  public void OnUpStaircaseTTCMutSetEffect(IUpStaircaseTTCMutSetEffect effect) {
     effect.visit(this);
   }
-  public void visitDownStaircaseTerrainTileComponentMutSetAddEffect(DownStaircaseTerrainTileComponentMutSetAddEffect effect) {
+  public void visitUpStaircaseTTCMutSetAddEffect(UpStaircaseTTCMutSetAddEffect effect) {
     BroadcastAdd(effect.elementId);
   }
-  public void visitDownStaircaseTerrainTileComponentMutSetRemoveEffect(DownStaircaseTerrainTileComponentMutSetRemoveEffect effect) {
+  public void visitUpStaircaseTTCMutSetRemoveEffect(UpStaircaseTTCMutSetRemoveEffect effect) {
     BroadcastRemove(effect.elementId);
   }
-  public void visitDownStaircaseTerrainTileComponentMutSetCreateEffect(DownStaircaseTerrainTileComponentMutSetCreateEffect effect) { }
-  public void visitDownStaircaseTerrainTileComponentMutSetDeleteEffect(DownStaircaseTerrainTileComponentMutSetDeleteEffect effect) { }
+  public void visitUpStaircaseTTCMutSetCreateEffect(UpStaircaseTTCMutSetCreateEffect effect) { }
+  public void visitUpStaircaseTTCMutSetDeleteEffect(UpStaircaseTTCMutSetDeleteEffect effect) { }
+  public void OnDownStaircaseTTCMutSetEffect(IDownStaircaseTTCMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitDownStaircaseTTCMutSetAddEffect(DownStaircaseTTCMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitDownStaircaseTTCMutSetRemoveEffect(DownStaircaseTTCMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitDownStaircaseTTCMutSetCreateEffect(DownStaircaseTTCMutSetCreateEffect effect) { }
+  public void visitDownStaircaseTTCMutSetDeleteEffect(DownStaircaseTTCMutSetDeleteEffect effect) { }
 
 }
        

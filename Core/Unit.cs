@@ -134,5 +134,8 @@ public class Unit {
       return new IItemMutBunch(root, incarnation.items);
     }
                        }
+  public bool good {
+    get { return incarnation.good; }
+  }
 }
 }

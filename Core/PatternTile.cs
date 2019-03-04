@@ -46,9 +46,13 @@ public class PatternTile : IComparable<PatternTile> {
 
   }
   public static bool operator==(PatternTile a, PatternTile b) {
+    if (object.ReferenceEquals(a, null))
+      return object.ReferenceEquals(b, null);
     return a.Equals(b);
   }
   public static bool operator!=(PatternTile a, PatternTile b) {
+    if (object.ReferenceEquals(a, null))
+      return !object.ReferenceEquals(b, null);
     return !a.Equals(b);
   }
   public override bool Equals(object obj) {

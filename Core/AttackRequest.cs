@@ -34,9 +34,13 @@ public class AttackRequest : IComparable<AttackRequest> {
 
   }
   public static bool operator==(AttackRequest a, AttackRequest b) {
+    if (object.ReferenceEquals(a, null))
+      return object.ReferenceEquals(b, null);
     return a.Equals(b);
   }
   public static bool operator!=(AttackRequest a, AttackRequest b) {
+    if (object.ReferenceEquals(a, null))
+      return !object.ReferenceEquals(b, null);
     return !a.Equals(b);
   }
   public override bool Equals(object obj) {

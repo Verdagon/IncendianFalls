@@ -34,5 +34,28 @@ namespace Atharia.Model {
         }
       }
     }
+
+    public Unit FindNearestUnit(
+        Game game,
+        Location nearestTo,
+        Unit notThisUnit,
+        bool goodFilter) {
+      Unit nearestEnemy = Unit.Null;
+      float distanceToNearestEnemy = 0;
+      foreach (var otherUnit in game.level.units) {
+        if (otherUnit.Is(notThisUnit))
+          continue;
+        if (otherUnit.good != goodFilter)
+          continue;
+        var distanceToOtherUnit =
+            game.level.terrain.pattern.DistanceBetween(
+                nearestTo, otherUnit.location);
+        if (!nearestEnemy.Exists() || distanceToOtherUnit < distanceToNearestEnemy) {
+          nearestEnemy = otherUnit;
+          distanceToNearestEnemy = distanceToOtherUnit;
+        }
+      }
+      return nearestEnemy;
+    }
   }
 }

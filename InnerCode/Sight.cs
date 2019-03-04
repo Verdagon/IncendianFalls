@@ -8,7 +8,7 @@ namespace IncendianFalls {
       var unitPos = game.level.terrain.pattern.GetTileCenter(unit.location);
       var destinationPos = game.level.terrain.pattern.GetTileCenter(destinationLoc);
       if (unitPos.distance(destinationPos) <= 8) {
-        if (CanSee(game, unit.location, game.player.location, out outPath)) {
+        if (CanSee(game, unit.location, destinationLoc, out outPath)) {
           return true;
         }
       }

@@ -67,7 +67,7 @@ namespace IncendianFalls {
         Game game,
         Location location) {
       foreach (var thing in game.level.terrain.tiles[location].components) {
-        if (thing is DownStaircaseTerrainTileComponentAsITerrainTileComponent down) {
+        if (thing is DownStaircaseTTCAsITerrainTileComponent down) {
           return true;
         }
       }
@@ -79,22 +79,19 @@ namespace IncendianFalls {
         Game game,
         Superstate superstate,
         Unit unit) {
-      Asserts.Assert(unit.Is(game.player));
-      var player = game.player;
-
-      if (TileHasDownStaircase(context, game, player.location)) {
+      if (TileHasDownStaircase(context, game, unit.location)) {
         string levelName = "Falls" + game.levels.Count;
 
         // Move the player from this level to the next one.
-        game.level.units.Remove(player);
+        game.level.units.Remove(unit);
         var nextLevel =
             MakeLevel.MakeNextLevel(
                 context, game.rand, game.time, game.squareLevelsOnly, levelName);
         game.levels.Add(nextLevel);
 
         var walkableLocations = new WalkableLocations(nextLevel.terrain, nextLevel.units);
-        player.location = walkableLocations.GetRandom(game.rand.Next());
-        nextLevel.units.Add(player);
+        unit.location = walkableLocations.GetRandom(game.rand.Next());
+        nextLevel.units.Add(unit);
 
         game.level = nextLevel;
         superstate.liveUnitByLocationMap.Reconstruct(game);
@@ -141,5 +138,13 @@ namespace IncendianFalls {
       unit.nextActionTime = unit.nextActionTime + unit.inertia;
     }
 
+    public static void Evaporate(
+        Game game,
+        Superstate superstate,
+        Unit unit) {
+      unit.alive = false;
+      unit.lifeEndTime = game.time;
+      superstate.liveUnitByLocationMap.Remove(unit);
+    }
   }
 }

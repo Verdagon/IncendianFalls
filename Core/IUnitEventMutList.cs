@@ -31,9 +31,9 @@ public class IUnitEventMutList : IEnumerable<IUnitEvent> {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
   }
   public bool Is(IUnitEventMutList that) {

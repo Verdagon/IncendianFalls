@@ -253,8 +253,8 @@ namespace IncendianFalls {
             context.root.GetDeterministicHashCode();
             if (rand.Next(0, 19) == 0) {
               tile.components.Add(
-                  new DecorativeTerrainTileComponentAsITerrainTileComponent(
-                      context.root.EffectDecorativeTerrainTileComponentCreate("blood")));
+                  new DecorativeTTCAsITerrainTileComponent(
+                      context.root.EffectDecorativeTTCCreate("blood")));
             }
             tiles.Add(new Location(colI, rowI, 0), tile);
           }

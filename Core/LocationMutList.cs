@@ -31,9 +31,9 @@ public class LocationMutList : IEnumerable<Location> {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
-  if (!this.Exists() || !that.Exists()) {
-    return false;
-  }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
     return this.Is(that);
   }
   public bool Is(LocationMutList that) {

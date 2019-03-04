@@ -30,9 +30,13 @@ public class FollowDirectiveRequest : IComparable<FollowDirectiveRequest> {
 
   }
   public static bool operator==(FollowDirectiveRequest a, FollowDirectiveRequest b) {
+    if (object.ReferenceEquals(a, null))
+      return object.ReferenceEquals(b, null);
     return a.Equals(b);
   }
   public static bool operator!=(FollowDirectiveRequest a, FollowDirectiveRequest b) {
+    if (object.ReferenceEquals(a, null))
+      return !object.ReferenceEquals(b, null);
     return !a.Equals(b);
   }
   public override bool Equals(object obj) {

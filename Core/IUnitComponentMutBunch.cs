@@ -35,6 +35,10 @@ public class IUnitComponentMutBunch {
   }
   public void CheckForNullViolations(List<string> violations) {
 
+    if (!root.TimeScriptDirectiveUCMutSetExists(membersTimeScriptDirectiveUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersTimeScriptDirectiveUCMutSet");
+    }
+
     if (!root.KillDirectiveUCMutSetExists(membersKillDirectiveUCMutSet.id)) {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersKillDirectiveUCMutSet");
     }
@@ -49,6 +53,10 @@ public class IUnitComponentMutBunch {
 
     if (!root.BideAICapabilityUCMutSetExists(membersBideAICapabilityUCMutSet.id)) {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersBideAICapabilityUCMutSet");
+    }
+
+    if (!root.TimeCloneAICapabilityUCMutSetExists(membersTimeCloneAICapabilityUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersTimeCloneAICapabilityUCMutSet");
     }
 
     if (!root.AttackAICapabilityUCMutSetExists(membersAttackAICapabilityUCMutSet.id)) {
@@ -68,6 +76,9 @@ public class IUnitComponentMutBunch {
       return;
     }
     foundIds.Add(id);
+    if (root.TimeScriptDirectiveUCMutSetExists(membersTimeScriptDirectiveUCMutSet.id)) {
+      membersTimeScriptDirectiveUCMutSet.FindReachableObjects(foundIds);
+    }
     if (root.KillDirectiveUCMutSetExists(membersKillDirectiveUCMutSet.id)) {
       membersKillDirectiveUCMutSet.FindReachableObjects(foundIds);
     }
@@ -79,6 +90,9 @@ public class IUnitComponentMutBunch {
     }
     if (root.BideAICapabilityUCMutSetExists(membersBideAICapabilityUCMutSet.id)) {
       membersBideAICapabilityUCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.TimeCloneAICapabilityUCMutSetExists(membersTimeCloneAICapabilityUCMutSet.id)) {
+      membersTimeCloneAICapabilityUCMutSet.FindReachableObjects(foundIds);
     }
     if (root.AttackAICapabilityUCMutSetExists(membersAttackAICapabilityUCMutSet.id)) {
       membersAttackAICapabilityUCMutSet.FindReachableObjects(foundIds);
@@ -99,7 +113,16 @@ public class IUnitComponentMutBunch {
     }
     return this.root == that.root && id == that.id;
   }
-         public KillDirectiveUCMutSet membersKillDirectiveUCMutSet {
+         public TimeScriptDirectiveUCMutSet membersTimeScriptDirectiveUCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersTimeScriptDirectiveUCMutSet of null!");
+      }
+      return new TimeScriptDirectiveUCMutSet(root, incarnation.membersTimeScriptDirectiveUCMutSet);
+    }
+                       }
+  public KillDirectiveUCMutSet membersKillDirectiveUCMutSet {
 
     get {
       if (root == null) {
@@ -135,6 +158,15 @@ public class IUnitComponentMutBunch {
       return new BideAICapabilityUCMutSet(root, incarnation.membersBideAICapabilityUCMutSet);
     }
                        }
+  public TimeCloneAICapabilityUCMutSet membersTimeCloneAICapabilityUCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersTimeCloneAICapabilityUCMutSet of null!");
+      }
+      return new TimeCloneAICapabilityUCMutSet(root, incarnation.membersTimeCloneAICapabilityUCMutSet);
+    }
+                       }
   public AttackAICapabilityUCMutSet membersAttackAICapabilityUCMutSet {
 
     get {
@@ -165,6 +197,8 @@ public class IUnitComponentMutBunch {
 
   public static IUnitComponentMutBunch New(Root root) {
     return root.EffectIUnitComponentMutBunchCreate(
+      root.EffectTimeScriptDirectiveUCMutSetCreate()
+,
       root.EffectKillDirectiveUCMutSetCreate()
 ,
       root.EffectMoveDirectiveUCMutSetCreate()
@@ -172,6 +206,8 @@ public class IUnitComponentMutBunch {
       root.EffectWanderAICapabilityUCMutSetCreate()
 ,
       root.EffectBideAICapabilityUCMutSetCreate()
+,
+      root.EffectTimeCloneAICapabilityUCMutSetCreate()
 ,
       root.EffectAttackAICapabilityUCMutSetCreate()
 ,
@@ -181,6 +217,12 @@ public class IUnitComponentMutBunch {
         );
   }
   public void Add(IUnitComponent elementI) {
+
+    // Can optimize, check the type of element directly somehow
+    if (root.TimeScriptDirectiveUCExists(elementI.id)) {
+      this.membersTimeScriptDirectiveUCMutSet.Add(root.GetTimeScriptDirectiveUC(elementI.id));
+      return;
+    }
 
     // Can optimize, check the type of element directly somehow
     if (root.KillDirectiveUCExists(elementI.id)) {
@@ -207,6 +249,12 @@ public class IUnitComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.TimeCloneAICapabilityUCExists(elementI.id)) {
+      this.membersTimeCloneAICapabilityUCMutSet.Add(root.GetTimeCloneAICapabilityUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.AttackAICapabilityUCExists(elementI.id)) {
       this.membersAttackAICapabilityUCMutSet.Add(root.GetAttackAICapabilityUC(elementI.id));
       return;
@@ -226,6 +274,12 @@ public class IUnitComponentMutBunch {
     throw new Exception("Unknown type " + elementI);
   }
   public void Remove(IUnitComponent elementI) {
+
+    // Can optimize, check the type of element directly somehow
+    if (root.TimeScriptDirectiveUCExists(elementI.id)) {
+      this.membersTimeScriptDirectiveUCMutSet.Remove(root.GetTimeScriptDirectiveUC(elementI.id));
+      return;
+    }
 
     // Can optimize, check the type of element directly somehow
     if (root.KillDirectiveUCExists(elementI.id)) {
@@ -252,6 +306,12 @@ public class IUnitComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.TimeCloneAICapabilityUCExists(elementI.id)) {
+      this.membersTimeCloneAICapabilityUCMutSet.Remove(root.GetTimeCloneAICapabilityUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.AttackAICapabilityUCExists(elementI.id)) {
       this.membersAttackAICapabilityUCMutSet.Remove(root.GetAttackAICapabilityUC(elementI.id));
       return;
@@ -271,10 +331,12 @@ public class IUnitComponentMutBunch {
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
+    this.membersTimeScriptDirectiveUCMutSet.Clear();
     this.membersKillDirectiveUCMutSet.Clear();
     this.membersMoveDirectiveUCMutSet.Clear();
     this.membersWanderAICapabilityUCMutSet.Clear();
     this.membersBideAICapabilityUCMutSet.Clear();
+    this.membersTimeCloneAICapabilityUCMutSet.Clear();
     this.membersAttackAICapabilityUCMutSet.Clear();
     this.membersShieldingUCMutSet.Clear();
     this.membersBidingOperationUCMutSet.Clear();
@@ -282,10 +344,12 @@ public class IUnitComponentMutBunch {
   public int Count {
     get {
       return
+        this.membersTimeScriptDirectiveUCMutSet.Count +
         this.membersKillDirectiveUCMutSet.Count +
         this.membersMoveDirectiveUCMutSet.Count +
         this.membersWanderAICapabilityUCMutSet.Count +
         this.membersBideAICapabilityUCMutSet.Count +
+        this.membersTimeCloneAICapabilityUCMutSet.Count +
         this.membersAttackAICapabilityUCMutSet.Count +
         this.membersShieldingUCMutSet.Count +
         this.membersBidingOperationUCMutSet.Count
@@ -300,24 +364,31 @@ public class IUnitComponentMutBunch {
   }
 
   public void Destruct() {
+    var tempMembersTimeScriptDirectiveUCMutSet = this.membersTimeScriptDirectiveUCMutSet;
     var tempMembersKillDirectiveUCMutSet = this.membersKillDirectiveUCMutSet;
     var tempMembersMoveDirectiveUCMutSet = this.membersMoveDirectiveUCMutSet;
     var tempMembersWanderAICapabilityUCMutSet = this.membersWanderAICapabilityUCMutSet;
     var tempMembersBideAICapabilityUCMutSet = this.membersBideAICapabilityUCMutSet;
+    var tempMembersTimeCloneAICapabilityUCMutSet = this.membersTimeCloneAICapabilityUCMutSet;
     var tempMembersAttackAICapabilityUCMutSet = this.membersAttackAICapabilityUCMutSet;
     var tempMembersShieldingUCMutSet = this.membersShieldingUCMutSet;
     var tempMembersBidingOperationUCMutSet = this.membersBidingOperationUCMutSet;
 
     this.Delete();
+    tempMembersTimeScriptDirectiveUCMutSet.Destruct();
     tempMembersKillDirectiveUCMutSet.Destruct();
     tempMembersMoveDirectiveUCMutSet.Destruct();
     tempMembersWanderAICapabilityUCMutSet.Destruct();
     tempMembersBideAICapabilityUCMutSet.Destruct();
+    tempMembersTimeCloneAICapabilityUCMutSet.Destruct();
     tempMembersAttackAICapabilityUCMutSet.Destruct();
     tempMembersShieldingUCMutSet.Destruct();
     tempMembersBidingOperationUCMutSet.Destruct();
   }
   public IEnumerator<IUnitComponent> GetEnumerator() {
+    foreach (var element in this.membersTimeScriptDirectiveUCMutSet) {
+      yield return new TimeScriptDirectiveUCAsIUnitComponent(element);
+    }
     foreach (var element in this.membersKillDirectiveUCMutSet) {
       yield return new KillDirectiveUCAsIUnitComponent(element);
     }
@@ -330,6 +401,9 @@ public class IUnitComponentMutBunch {
     foreach (var element in this.membersBideAICapabilityUCMutSet) {
       yield return new BideAICapabilityUCAsIUnitComponent(element);
     }
+    foreach (var element in this.membersTimeCloneAICapabilityUCMutSet) {
+      yield return new TimeCloneAICapabilityUCAsIUnitComponent(element);
+    }
     foreach (var element in this.membersAttackAICapabilityUCMutSet) {
       yield return new AttackAICapabilityUCAsIUnitComponent(element);
     }
@@ -340,6 +414,27 @@ public class IUnitComponentMutBunch {
       yield return new BidingOperationUCAsIUnitComponent(element);
     }
   }
+    public List<TimeScriptDirectiveUC> GetAllTimeScriptDirectiveUC() {
+      var result = new List<TimeScriptDirectiveUC>();
+      foreach (var thing in this.membersTimeScriptDirectiveUCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<TimeScriptDirectiveUC> ClearAllTimeScriptDirectiveUC() {
+      var result = new List<TimeScriptDirectiveUC>();
+      this.membersTimeScriptDirectiveUCMutSet.Clear();
+      return result;
+    }
+    public TimeScriptDirectiveUC GetOnlyTimeScriptDirectiveUCOrNull() {
+      var result = GetAllTimeScriptDirectiveUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return TimeScriptDirectiveUC.Null;
+      }
+    }
     public List<KillDirectiveUC> GetAllKillDirectiveUC() {
       var result = new List<KillDirectiveUC>();
       foreach (var thing in this.membersKillDirectiveUCMutSet) {
@@ -424,6 +519,27 @@ public class IUnitComponentMutBunch {
         return BideAICapabilityUC.Null;
       }
     }
+    public List<TimeCloneAICapabilityUC> GetAllTimeCloneAICapabilityUC() {
+      var result = new List<TimeCloneAICapabilityUC>();
+      foreach (var thing in this.membersTimeCloneAICapabilityUCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<TimeCloneAICapabilityUC> ClearAllTimeCloneAICapabilityUC() {
+      var result = new List<TimeCloneAICapabilityUC>();
+      this.membersTimeCloneAICapabilityUCMutSet.Clear();
+      return result;
+    }
+    public TimeCloneAICapabilityUC GetOnlyTimeCloneAICapabilityUCOrNull() {
+      var result = GetAllTimeCloneAICapabilityUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return TimeCloneAICapabilityUC.Null;
+      }
+    }
     public List<AttackAICapabilityUC> GetAllAttackAICapabilityUC() {
       var result = new List<AttackAICapabilityUC>();
       foreach (var thing in this.membersAttackAICapabilityUCMutSet) {
@@ -493,6 +609,10 @@ public class IUnitComponentMutBunch {
         result.Add(
             new WanderAICapabilityUCAsIAICapabilityUC(obj));
       }
+      foreach (var obj in this.membersTimeCloneAICapabilityUCMutSet) {
+        result.Add(
+            new TimeCloneAICapabilityUCAsIAICapabilityUC(obj));
+      }
       foreach (var obj in this.membersBideAICapabilityUCMutSet) {
         result.Add(
             new BideAICapabilityUCAsIAICapabilityUC(obj));
@@ -506,6 +626,7 @@ public class IUnitComponentMutBunch {
     public List<IAICapabilityUC> ClearAllIAICapabilityUC() {
       var result = new List<IAICapabilityUC>();
       this.membersWanderAICapabilityUCMutSet.Clear();
+      this.membersTimeCloneAICapabilityUCMutSet.Clear();
       this.membersBideAICapabilityUCMutSet.Clear();
       this.membersAttackAICapabilityUCMutSet.Clear();
       return result;
@@ -570,10 +691,15 @@ public class IUnitComponentMutBunch {
     }
                  public List<IPostActingUC> GetAllIPostActingUC() {
       var result = new List<IPostActingUC>();
+      foreach (var obj in this.membersTimeCloneAICapabilityUCMutSet) {
+        result.Add(
+            new TimeCloneAICapabilityUCAsIPostActingUC(obj));
+      }
       return result;
     }
     public List<IPostActingUC> ClearAllIPostActingUC() {
       var result = new List<IPostActingUC>();
+      this.membersTimeCloneAICapabilityUCMutSet.Clear();
       return result;
     }
     public IPostActingUC GetOnlyIPostActingUCOrNull() {
@@ -614,6 +740,10 @@ public class IUnitComponentMutBunch {
     }
                  public List<IDirectiveUC> GetAllIDirectiveUC() {
       var result = new List<IDirectiveUC>();
+      foreach (var obj in this.membersTimeScriptDirectiveUCMutSet) {
+        result.Add(
+            new TimeScriptDirectiveUCAsIDirectiveUC(obj));
+      }
       foreach (var obj in this.membersKillDirectiveUCMutSet) {
         result.Add(
             new KillDirectiveUCAsIDirectiveUC(obj));
@@ -626,6 +756,7 @@ public class IUnitComponentMutBunch {
     }
     public List<IDirectiveUC> ClearAllIDirectiveUC() {
       var result = new List<IDirectiveUC>();
+      this.membersTimeScriptDirectiveUCMutSet.Clear();
       this.membersKillDirectiveUCMutSet.Clear();
       this.membersMoveDirectiveUCMutSet.Clear();
       return result;

@@ -69,7 +69,8 @@ namespace IncendianFalls {
                   600,
                   currentTime + 10,
                   components,
-                  IItemMutBunch.New(context.root));
+                  IItemMutBunch.New(context.root),
+                  false);
         } else {
           components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
           enemy =
@@ -84,7 +85,8 @@ namespace IncendianFalls {
                   600,
                   currentTime + 10,
                   components,
-                  IItemMutBunch.New(context.root));
+                  IItemMutBunch.New(context.root),
+                  false);
         }
         context.root.GetDeterministicHashCode();
         units.Add(enemy);
@@ -119,7 +121,8 @@ namespace IncendianFalls {
               600,
               0,
               IUnitComponentMutBunch.New(context.root),
-              IItemMutBunch.New(context.root));
+              IItemMutBunch.New(context.root),
+              true);
       units.Add(player);
       return player;
     }

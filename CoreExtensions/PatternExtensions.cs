@@ -5,6 +5,10 @@ using Atharia.Model;
 namespace Atharia.Model {
   public static class PatternExtensions {
 
+    public static float DistanceBetween(this Pattern pattern, Location locA, Location locB) {
+      return pattern.GetTileCenter(locA).distance(pattern.GetTileCenter(locB));
+    }
+
     public static Vec2 GetTileCenter(this Pattern pattern, Location loc) {
       return pattern.xOffset.mul(loc.groupX)
           .plus(pattern.yOffset.mul(loc.groupY))

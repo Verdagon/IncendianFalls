@@ -19,6 +19,8 @@ public class TerrainTileByLocationMutMap {
     get { return root.GetTerrainTileByLocationMutMapIncarnation(id); }
   }
 
+  public bool Exists() { return root != null && root.TerrainTileByLocationMutMapExists(id); }
+
   public void AddObserver(ITerrainTileByLocationMutMapEffectObserver observer) {
     root.AddTerrainTileByLocationMutMapObserver(id, observer);
   }

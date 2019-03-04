@@ -38,9 +38,13 @@ public class UnitAttackEvent : IComparable<UnitAttackEvent> {
 
   }
   public static bool operator==(UnitAttackEvent a, UnitAttackEvent b) {
+    if (object.ReferenceEquals(a, null))
+      return object.ReferenceEquals(b, null);
     return a.Equals(b);
   }
   public static bool operator!=(UnitAttackEvent a, UnitAttackEvent b) {
+    if (object.ReferenceEquals(a, null))
+      return !object.ReferenceEquals(b, null);
     return !a.Equals(b);
   }
   public override bool Equals(object obj) {

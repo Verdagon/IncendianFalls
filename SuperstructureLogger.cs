@@ -116,6 +116,10 @@ namespace IncendianFalls {
         ss.RequestResume(resume.obj.gameId);
       } else if (request is FollowDirectiveRequestAsIRequest follow) {
         ss.RequestFollowDirective(follow.obj.gameId);
+      } else if (request is TimeAnchorMoveRequestAsIRequest tamrI) {
+        ss.RequestTimeAnchorMove(tamrI.obj.gameId, tamrI.obj.destination);
+      } else if (request is TimeShiftRequestAsIRequest tsrI) {
+        ss.RequestTimeShift(tsrI.obj.gameId);
       } else {
         Asserts.Assert(false);
       }

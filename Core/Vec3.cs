@@ -38,9 +38,13 @@ public class Vec3 : IComparable<Vec3> {
 
   }
   public static bool operator==(Vec3 a, Vec3 b) {
+    if (object.ReferenceEquals(a, null))
+      return object.ReferenceEquals(b, null);
     return a.Equals(b);
   }
   public static bool operator!=(Vec3 a, Vec3 b) {
+    if (object.ReferenceEquals(a, null))
+      return !object.ReferenceEquals(b, null);
     return !a.Equals(b);
   }
   public override bool Equals(object obj) {

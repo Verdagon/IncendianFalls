@@ -46,9 +46,13 @@ public class Pattern : IComparable<Pattern> {
 
   }
   public static bool operator==(Pattern a, Pattern b) {
+    if (object.ReferenceEquals(a, null))
+      return object.ReferenceEquals(b, null);
     return a.Equals(b);
   }
   public static bool operator!=(Pattern a, Pattern b) {
+    if (object.ReferenceEquals(a, null))
+      return !object.ReferenceEquals(b, null);
     return !a.Equals(b);
   }
   public override bool Equals(object obj) {

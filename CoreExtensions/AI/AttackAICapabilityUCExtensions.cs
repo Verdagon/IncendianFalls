@@ -14,7 +14,6 @@ namespace Atharia.Model {
     public static bool PreAct(
         this AttackAICapabilityUC obj,
         Game game,
-
         Superstate superstate,
         Unit unit) {
       var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
@@ -26,29 +25,41 @@ namespace Atharia.Model {
       // Remember, if we get here, we might still have an existing valid directive.
       // The below code is to just to update it if we have better information now.
 
-      // Player is not next to subject.
-      // Check if we can see them.
-      List<Location> pathToPlayer;
-      if (Sight.CanSee(game, unit, game.player.location, out pathToPlayer)) {
-        // Can see the enemy. Add directive to pursue.
-        directive =
-            game.root.EffectKillDirectiveUCCreate(
-                game.player,
-                game.root.EffectLocationMutListCreate(pathToPlayer));
-        Asserts.Assert(directive.Exists());
-        unit.ReplaceDirective(directive.AsIDirectiveUC());
-        Asserts.Assert(unit.GetDirectiveOrNull().Exists());
-        return false;
-      } else {
-        // Can't see the player. Don't update directive.
+      Unit nearestEnemy =
+          superstate.liveUnitByLocationMap.FindNearestUnit(
+              game,
+              unit.location,
+              // Filter so its not this unit
+              unit,
+              // Opposite allegiance to unit
+              !unit.good);
+      if (!nearestEnemy.Exists()) {
+        // There are no enemies. Don't update directive.
         return false;
       }
+
+      // Enemy is not next to subject.
+      // Check if we can see them.
+      List<Location> pathToNearestEnemy;
+      if (!Sight.CanSee(game, unit, nearestEnemy.location, out pathToNearestEnemy)) {
+        // Can't see the enemy. Don't update directive.
+        return false;
+      }
+
+      // Can see the enemy. Add directive to pursue.
+      directive =
+          game.root.EffectKillDirectiveUCCreate(
+              nearestEnemy,
+              game.root.EffectLocationMutListCreate(pathToNearestEnemy));
+      Asserts.Assert(directive.Exists());
+      unit.ReplaceDirective(directive.AsIDirectiveUC());
+      Asserts.Assert(unit.GetDirectiveOrNull().Exists());
+      return false;
     }
 
     public static IImpulse ProduceImpulse(
         this AttackAICapabilityUC obj,
         Game game,
-
         Superstate superstate,
         Unit unit) {
 

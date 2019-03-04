@@ -35,10 +35,6 @@ public class KillDirectiveUC {
   }
   public void CheckForNullViolations(List<string> violations) {
 
-    if (!root.UnitExists(targetUnit.id)) {
-      violations.Add("Null constraint violated! KillDirectiveUC#" + id + ".targetUnit");
-    }
-
     if (!root.LocationMutListExists(pathToLastSeenLocation.id)) {
       violations.Add("Null constraint violated! KillDirectiveUC#" + id + ".pathToLastSeenLocation");
     }

@@ -53,7 +53,6 @@ namespace IncendianFalls {
     SSContext context;
     SortedDictionary<int, Superstate> superstateByGameId;
 
-
     public Superstructure(ILogger logger) {
       observers = new List<ISuperstructureObserver>();
       root = new Root(logger);
@@ -83,6 +82,10 @@ namespace IncendianFalls {
 
     public Root GetRoot() {
       return root;
+    }
+
+    public Superstate GetSuperstate(Game game) {
+      return superstateByGameId[game.id];
     }
 
     public Game RequestSetupGame(int randomSeed, bool squareLevelsOnly) {
@@ -204,35 +207,6 @@ namespace IncendianFalls {
       }
     }
 
-    public bool RequestTimeShift(int gameId) {
-      var stopwatch = new System.Diagnostics.Stopwatch();
-      stopwatch.Start();
-
-      root.Unlock();
-      //var rollbackPoint = root.Snapshot();
-      try {
-        var request = new TimeShiftRequest(gameId);
-        broadcastBeforeRequest(new TimeShiftRequestAsIRequest(request));
-        context.Flare(GetDeterministicHashCode());
-        var superstate = superstateByGameId[gameId];
-        bool success = TimeShiftRequestExecutor.Execute(context, superstate, request);
-        context.Flare(success.DStr());
-        broadcastAfterRequest(new TimeShiftRequestAsIRequest(request));
-        context.Flare(GetDeterministicHashCode());
-        return success;
-      //} catch (Exception) {
-      //  Logger.Error("Caught exception, rolling back!");
-      //  root.Revert(rollbackPoint);
-      //  throw;
-      } finally {
-        root.Lock();
-        root.FlushEvents();
-
-        stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
-      }
-    }
-
     public bool RequestDefend(int gameId) {
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
@@ -282,6 +256,64 @@ namespace IncendianFalls {
       //  Logger.Error("Caught exception, rolling back!");
       //  root.Revert(rollbackPoint);
       //  throw;
+      } finally {
+        root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+      }
+    }
+
+    public bool RequestTimeAnchorMove(int gameId, Location destination) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new TimeAnchorMoveRequest(gameId, destination);
+        broadcastBeforeRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
+        var superstate = superstateByGameId[gameId];
+        bool success = TimeAnchorMoveRequestExecutor.Execute(context, superstate, request);
+        context.Flare(success.DStr());
+        broadcastAfterRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
+        return success;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
+      } finally {
+        root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+      }
+    }
+
+    public bool RequestTimeShift(int gameId) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new TimeShiftRequest(gameId);
+        broadcastBeforeRequest(new TimeShiftRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        var superstate = superstateByGameId[gameId];
+        bool success = TimeShiftRequestExecutor.Execute(context, superstate, request);
+        context.Flare(success.DStr());
+        broadcastAfterRequest(new TimeShiftRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return success;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
       } finally {
         root.Lock();
         root.FlushEvents();

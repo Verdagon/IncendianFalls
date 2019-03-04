@@ -51,7 +51,7 @@ namespace IncendianFalls {
       foreach (var itemLocation in glaiveLocations) {
         var rockTile = terrain.tiles[itemLocation];
         rockTile.components.Add(
-            context.root.EffectItemTerrainTileComponentCreate(
+            context.root.EffectItemTTCCreate(
                 context.root.EffectGlaiveCreate().AsIItem())
             .AsITerrainTileComponent());
       }
@@ -61,7 +61,7 @@ namespace IncendianFalls {
       foreach (var itemLocation in armorLocations) {
         var rockTile = terrain.tiles[itemLocation];
         rockTile.components.Add(
-            context.root.EffectItemTerrainTileComponentCreate(
+            context.root.EffectItemTTCCreate(
                 context.root.EffectArmorCreate().AsIItem())
             .AsITerrainTileComponent());
       }
@@ -76,7 +76,7 @@ namespace IncendianFalls {
       foreach (var rockLocation in rockLocations) {
         var rockTile = terrain.tiles[rockLocation];
         rockTile.components.Add(
-            context.root.EffectDecorativeTerrainTileComponentCreate("rocks")
+            context.root.EffectDecorativeTTCCreate("rocks")
             .AsITerrainTileComponent());
       }
     }
@@ -90,10 +90,10 @@ namespace IncendianFalls {
       var downStaircaseLocation = staircaseLocations[1];
 
       var upStaircaseTile = terrain.tiles[upStaircaseLocation];
-      upStaircaseTile.components.Add(new UpStaircaseTerrainTileComponentAsITerrainTileComponent(context.root.EffectUpStaircaseTerrainTileComponentCreate()));
+      upStaircaseTile.components.Add(new UpStaircaseTTCAsITerrainTileComponent(context.root.EffectUpStaircaseTTCCreate()));
 
       var downStaircaseTile = terrain.tiles[downStaircaseLocation];
-      downStaircaseTile.components.Add(new DownStaircaseTerrainTileComponentAsITerrainTileComponent(context.root.EffectDownStaircaseTerrainTileComponentCreate()));
+      downStaircaseTile.components.Add(new DownStaircaseTTCAsITerrainTileComponent(context.root.EffectDownStaircaseTTCCreate()));
     }
 
     private static Level MakePentagonalLevel(

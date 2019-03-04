@@ -9,6 +9,8 @@ public static class IRequestParser {
   public static IRequest Parse(ParseSource source) {
     var nextThingPeek = source.PeekNextWord();
     switch (nextThingPeek) {
+      case "TimeAnchorMoveRequest":
+        return new TimeAnchorMoveRequestAsIRequest(TimeAnchorMoveRequest.Parse(source));
       case "TimeShiftRequest":
         return new TimeShiftRequestAsIRequest(TimeShiftRequest.Parse(source));
       case "FollowDirectiveRequest":

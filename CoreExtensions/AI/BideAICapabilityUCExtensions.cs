@@ -18,11 +18,16 @@ namespace Atharia.Model {
       if (bidingOperation.Exists()) {
         return obj.root.EffectUnleashBideImpulseCreate(800).AsIImpulse();
       } else {
+        var nearestEnemy =
+            superstate.liveUnitByLocationMap.FindNearestUnit(
+                game, unit.location, unit, !unit.good);
+        Asserts.Assert(nearestEnemy.Exists());
+
         var isNextToPlayer =
-          game.level.terrain.pattern.LocationsAreAdjacent(
-            game.player.location,
-            unit.location,
-            game.level.considerCornersAdjacent);
+            game.level.terrain.pattern.LocationsAreAdjacent(
+                nearestEnemy.location,
+                unit.location,
+                game.level.considerCornersAdjacent);
         if (isNextToPlayer) {
           return obj.root.EffectStartBidingImpulseCreate(800).AsIImpulse();
         } else {

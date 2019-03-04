@@ -2,34 +2,41 @@
 using Atharia.Model;
 
 namespace Atharia.Model {
-  public enum GameExecutionStateType {
+  public enum WorldStateType {
     kBetweenUnits = 0,
     kPreActingDetail = 1,
     kAfterUnitAction = 2,
     kBeforeEnemyAction = 3,
-    kBeforePlayerAction = 4,
+    kBeforePlayerInput = 4,
     kPostActingDetail = 5,
+    kBeforePlayerResume = 9,
   }
 
   public static class GameExtensions {
-    public static GameExecutionStateType GetExecutionStateType(this Game game) {
-      if (!game.executionState.actingUnit.Exists()) {
-        return GameExecutionStateType.kBetweenUnits;
+    public static WorldStateType GetStateType(this Game game) {
+      var executionState = game.executionState;
+      var player = game.player;
+      if (!executionState.actingUnit.Exists()) {
+        return WorldStateType.kBetweenUnits;
       }
-      if (game.executionState.remainingPreActingUnitComponents.Exists()) {
-        return GameExecutionStateType.kPreActingDetail;
+      if (executionState.remainingPreActingUnitComponents.Exists()) {
+        return WorldStateType.kPreActingDetail;
       }
-      if (game.executionState.remainingPostActingUnitComponents.Exists()) {
-        return GameExecutionStateType.kPostActingDetail;
+      if (executionState.remainingPostActingUnitComponents.Exists()) {
+        return WorldStateType.kPostActingDetail;
       }
-      if (!game.executionState.actingUnitDidAction) {
-        if (game.executionState.actingUnit.Is(game.player)) {
-          return GameExecutionStateType.kBeforePlayerAction;
+      if (!executionState.actingUnitDidAction) {
+        if (game.player.Exists() && executionState.actingUnit.Is(game.player)) {
+          if (game.player.GetDirectiveOrNull().Exists()) {
+            return WorldStateType.kBeforePlayerResume;
+          } else {
+            return WorldStateType.kBeforePlayerInput;
+          }
         } else {
-          return GameExecutionStateType.kBeforeEnemyAction;
+          return WorldStateType.kBeforeEnemyAction;
         }
       } else {
-        return GameExecutionStateType.kAfterUnitAction;
+        return WorldStateType.kAfterUnitAction;
       }
     }
   }

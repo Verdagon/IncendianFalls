@@ -4,16 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IPostActingUCWeakMutBunchBroadcaster {
+public class IPostActingUCWeakMutBunchBroadcaster:ITimeCloneAICapabilityUCWeakMutSetEffectObserver, ITimeCloneAICapabilityUCWeakMutSetEffectVisitor {
   IPostActingUCWeakMutBunch bunch;
   private List<IIPostActingUCWeakMutBunchObserver> observers;
 
   public IPostActingUCWeakMutBunchBroadcaster(IPostActingUCWeakMutBunch bunch) {
     this.bunch = bunch;
     this.observers = new List<IIPostActingUCWeakMutBunchObserver>();
+    bunch.membersTimeCloneAICapabilityUCWeakMutSet.AddObserver(this);
 
   }
   public void Stop() {
+    bunch.membersTimeCloneAICapabilityUCWeakMutSet.RemoveObserver(this);
 
   }
   public void AddObserver(IIPostActingUCWeakMutBunchObserver observer) {
@@ -32,6 +34,17 @@ public class IPostActingUCWeakMutBunchBroadcaster {
       observer.OnIPostActingUCWeakMutBunchRemove(id);
     }
   }
+  public void OnTimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitTimeCloneAICapabilityUCWeakMutSetAddEffect(TimeCloneAICapabilityUCWeakMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitTimeCloneAICapabilityUCWeakMutSetRemoveEffect(TimeCloneAICapabilityUCWeakMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitTimeCloneAICapabilityUCWeakMutSetCreateEffect(TimeCloneAICapabilityUCWeakMutSetCreateEffect effect) { }
+  public void visitTimeCloneAICapabilityUCWeakMutSetDeleteEffect(TimeCloneAICapabilityUCWeakMutSetDeleteEffect effect) { }
 
 }
        

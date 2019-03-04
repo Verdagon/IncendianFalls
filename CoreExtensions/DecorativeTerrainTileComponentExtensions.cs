@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Atharia.Model;
 
 namespace Atharia.Model {
-  public static class DecorativeTerrainTileComponentExtensions {
+  public static class DecorativeTTCExtensions {
     public static Atharia.Model.Void Destruct(
-        this DecorativeTerrainTileComponent obj) {
+        this DecorativeTTC obj) {
       obj.Delete();
       return new Atharia.Model.Void();
     }

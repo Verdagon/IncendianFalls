@@ -35,20 +35,24 @@ public class ITerrainTileComponentMutBunch {
   }
   public void CheckForNullViolations(List<string> violations) {
 
-    if (!root.ItemTerrainTileComponentMutSetExists(membersItemTerrainTileComponentMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersItemTerrainTileComponentMutSet");
+    if (!root.TimeAnchorTTCMutSetExists(membersTimeAnchorTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersTimeAnchorTTCMutSet");
     }
 
-    if (!root.DecorativeTerrainTileComponentMutSetExists(membersDecorativeTerrainTileComponentMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersDecorativeTerrainTileComponentMutSet");
+    if (!root.ItemTTCMutSetExists(membersItemTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersItemTTCMutSet");
     }
 
-    if (!root.UpStaircaseTerrainTileComponentMutSetExists(membersUpStaircaseTerrainTileComponentMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersUpStaircaseTerrainTileComponentMutSet");
+    if (!root.DecorativeTTCMutSetExists(membersDecorativeTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersDecorativeTTCMutSet");
     }
 
-    if (!root.DownStaircaseTerrainTileComponentMutSetExists(membersDownStaircaseTerrainTileComponentMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersDownStaircaseTerrainTileComponentMutSet");
+    if (!root.UpStaircaseTTCMutSetExists(membersUpStaircaseTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersUpStaircaseTTCMutSet");
+    }
+
+    if (!root.DownStaircaseTTCMutSetExists(membersDownStaircaseTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersDownStaircaseTTCMutSet");
     }
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
@@ -56,17 +60,20 @@ public class ITerrainTileComponentMutBunch {
       return;
     }
     foundIds.Add(id);
-    if (root.ItemTerrainTileComponentMutSetExists(membersItemTerrainTileComponentMutSet.id)) {
-      membersItemTerrainTileComponentMutSet.FindReachableObjects(foundIds);
+    if (root.TimeAnchorTTCMutSetExists(membersTimeAnchorTTCMutSet.id)) {
+      membersTimeAnchorTTCMutSet.FindReachableObjects(foundIds);
     }
-    if (root.DecorativeTerrainTileComponentMutSetExists(membersDecorativeTerrainTileComponentMutSet.id)) {
-      membersDecorativeTerrainTileComponentMutSet.FindReachableObjects(foundIds);
+    if (root.ItemTTCMutSetExists(membersItemTTCMutSet.id)) {
+      membersItemTTCMutSet.FindReachableObjects(foundIds);
     }
-    if (root.UpStaircaseTerrainTileComponentMutSetExists(membersUpStaircaseTerrainTileComponentMutSet.id)) {
-      membersUpStaircaseTerrainTileComponentMutSet.FindReachableObjects(foundIds);
+    if (root.DecorativeTTCMutSetExists(membersDecorativeTTCMutSet.id)) {
+      membersDecorativeTTCMutSet.FindReachableObjects(foundIds);
     }
-    if (root.DownStaircaseTerrainTileComponentMutSetExists(membersDownStaircaseTerrainTileComponentMutSet.id)) {
-      membersDownStaircaseTerrainTileComponentMutSet.FindReachableObjects(foundIds);
+    if (root.UpStaircaseTTCMutSetExists(membersUpStaircaseTTCMutSet.id)) {
+      membersUpStaircaseTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.DownStaircaseTTCMutSetExists(membersDownStaircaseTTCMutSet.id)) {
+      membersDownStaircaseTTCMutSet.FindReachableObjects(foundIds);
     }
   }
   public bool Is(ITerrainTileComponentMutBunch that) {
@@ -78,77 +85,94 @@ public class ITerrainTileComponentMutBunch {
     }
     return this.root == that.root && id == that.id;
   }
-         public ItemTerrainTileComponentMutSet membersItemTerrainTileComponentMutSet {
+         public TimeAnchorTTCMutSet membersTimeAnchorTTCMutSet {
 
     get {
       if (root == null) {
-        throw new Exception("Tried to get member membersItemTerrainTileComponentMutSet of null!");
+        throw new Exception("Tried to get member membersTimeAnchorTTCMutSet of null!");
       }
-      return new ItemTerrainTileComponentMutSet(root, incarnation.membersItemTerrainTileComponentMutSet);
+      return new TimeAnchorTTCMutSet(root, incarnation.membersTimeAnchorTTCMutSet);
     }
                        }
-  public DecorativeTerrainTileComponentMutSet membersDecorativeTerrainTileComponentMutSet {
+  public ItemTTCMutSet membersItemTTCMutSet {
 
     get {
       if (root == null) {
-        throw new Exception("Tried to get member membersDecorativeTerrainTileComponentMutSet of null!");
+        throw new Exception("Tried to get member membersItemTTCMutSet of null!");
       }
-      return new DecorativeTerrainTileComponentMutSet(root, incarnation.membersDecorativeTerrainTileComponentMutSet);
+      return new ItemTTCMutSet(root, incarnation.membersItemTTCMutSet);
     }
                        }
-  public UpStaircaseTerrainTileComponentMutSet membersUpStaircaseTerrainTileComponentMutSet {
+  public DecorativeTTCMutSet membersDecorativeTTCMutSet {
 
     get {
       if (root == null) {
-        throw new Exception("Tried to get member membersUpStaircaseTerrainTileComponentMutSet of null!");
+        throw new Exception("Tried to get member membersDecorativeTTCMutSet of null!");
       }
-      return new UpStaircaseTerrainTileComponentMutSet(root, incarnation.membersUpStaircaseTerrainTileComponentMutSet);
+      return new DecorativeTTCMutSet(root, incarnation.membersDecorativeTTCMutSet);
     }
                        }
-  public DownStaircaseTerrainTileComponentMutSet membersDownStaircaseTerrainTileComponentMutSet {
+  public UpStaircaseTTCMutSet membersUpStaircaseTTCMutSet {
 
     get {
       if (root == null) {
-        throw new Exception("Tried to get member membersDownStaircaseTerrainTileComponentMutSet of null!");
+        throw new Exception("Tried to get member membersUpStaircaseTTCMutSet of null!");
       }
-      return new DownStaircaseTerrainTileComponentMutSet(root, incarnation.membersDownStaircaseTerrainTileComponentMutSet);
+      return new UpStaircaseTTCMutSet(root, incarnation.membersUpStaircaseTTCMutSet);
+    }
+                       }
+  public DownStaircaseTTCMutSet membersDownStaircaseTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersDownStaircaseTTCMutSet of null!");
+      }
+      return new DownStaircaseTTCMutSet(root, incarnation.membersDownStaircaseTTCMutSet);
     }
                        }
 
   public static ITerrainTileComponentMutBunch New(Root root) {
     return root.EffectITerrainTileComponentMutBunchCreate(
-      root.EffectItemTerrainTileComponentMutSetCreate()
+      root.EffectTimeAnchorTTCMutSetCreate()
 ,
-      root.EffectDecorativeTerrainTileComponentMutSetCreate()
+      root.EffectItemTTCMutSetCreate()
 ,
-      root.EffectUpStaircaseTerrainTileComponentMutSetCreate()
+      root.EffectDecorativeTTCMutSetCreate()
 ,
-      root.EffectDownStaircaseTerrainTileComponentMutSetCreate()
+      root.EffectUpStaircaseTTCMutSetCreate()
+,
+      root.EffectDownStaircaseTTCMutSetCreate()
         );
   }
   public void Add(ITerrainTileComponent elementI) {
 
     // Can optimize, check the type of element directly somehow
-    if (root.ItemTerrainTileComponentExists(elementI.id)) {
-      this.membersItemTerrainTileComponentMutSet.Add(root.GetItemTerrainTileComponent(elementI.id));
+    if (root.TimeAnchorTTCExists(elementI.id)) {
+      this.membersTimeAnchorTTCMutSet.Add(root.GetTimeAnchorTTC(elementI.id));
       return;
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.DecorativeTerrainTileComponentExists(elementI.id)) {
-      this.membersDecorativeTerrainTileComponentMutSet.Add(root.GetDecorativeTerrainTileComponent(elementI.id));
+    if (root.ItemTTCExists(elementI.id)) {
+      this.membersItemTTCMutSet.Add(root.GetItemTTC(elementI.id));
       return;
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.UpStaircaseTerrainTileComponentExists(elementI.id)) {
-      this.membersUpStaircaseTerrainTileComponentMutSet.Add(root.GetUpStaircaseTerrainTileComponent(elementI.id));
+    if (root.DecorativeTTCExists(elementI.id)) {
+      this.membersDecorativeTTCMutSet.Add(root.GetDecorativeTTC(elementI.id));
       return;
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.DownStaircaseTerrainTileComponentExists(elementI.id)) {
-      this.membersDownStaircaseTerrainTileComponentMutSet.Add(root.GetDownStaircaseTerrainTileComponent(elementI.id));
+    if (root.UpStaircaseTTCExists(elementI.id)) {
+      this.membersUpStaircaseTTCMutSet.Add(root.GetUpStaircaseTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.DownStaircaseTTCExists(elementI.id)) {
+      this.membersDownStaircaseTTCMutSet.Add(root.GetDownStaircaseTTC(elementI.id));
       return;
     }
     throw new Exception("Unknown type " + elementI);
@@ -156,43 +180,51 @@ public class ITerrainTileComponentMutBunch {
   public void Remove(ITerrainTileComponent elementI) {
 
     // Can optimize, check the type of element directly somehow
-    if (root.ItemTerrainTileComponentExists(elementI.id)) {
-      this.membersItemTerrainTileComponentMutSet.Remove(root.GetItemTerrainTileComponent(elementI.id));
+    if (root.TimeAnchorTTCExists(elementI.id)) {
+      this.membersTimeAnchorTTCMutSet.Remove(root.GetTimeAnchorTTC(elementI.id));
       return;
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.DecorativeTerrainTileComponentExists(elementI.id)) {
-      this.membersDecorativeTerrainTileComponentMutSet.Remove(root.GetDecorativeTerrainTileComponent(elementI.id));
+    if (root.ItemTTCExists(elementI.id)) {
+      this.membersItemTTCMutSet.Remove(root.GetItemTTC(elementI.id));
       return;
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.UpStaircaseTerrainTileComponentExists(elementI.id)) {
-      this.membersUpStaircaseTerrainTileComponentMutSet.Remove(root.GetUpStaircaseTerrainTileComponent(elementI.id));
+    if (root.DecorativeTTCExists(elementI.id)) {
+      this.membersDecorativeTTCMutSet.Remove(root.GetDecorativeTTC(elementI.id));
       return;
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.DownStaircaseTerrainTileComponentExists(elementI.id)) {
-      this.membersDownStaircaseTerrainTileComponentMutSet.Remove(root.GetDownStaircaseTerrainTileComponent(elementI.id));
+    if (root.UpStaircaseTTCExists(elementI.id)) {
+      this.membersUpStaircaseTTCMutSet.Remove(root.GetUpStaircaseTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.DownStaircaseTTCExists(elementI.id)) {
+      this.membersDownStaircaseTTCMutSet.Remove(root.GetDownStaircaseTTC(elementI.id));
       return;
     }
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
-    this.membersItemTerrainTileComponentMutSet.Clear();
-    this.membersDecorativeTerrainTileComponentMutSet.Clear();
-    this.membersUpStaircaseTerrainTileComponentMutSet.Clear();
-    this.membersDownStaircaseTerrainTileComponentMutSet.Clear();
+    this.membersTimeAnchorTTCMutSet.Clear();
+    this.membersItemTTCMutSet.Clear();
+    this.membersDecorativeTTCMutSet.Clear();
+    this.membersUpStaircaseTTCMutSet.Clear();
+    this.membersDownStaircaseTTCMutSet.Clear();
   }
   public int Count {
     get {
       return
-        this.membersItemTerrainTileComponentMutSet.Count +
-        this.membersDecorativeTerrainTileComponentMutSet.Count +
-        this.membersUpStaircaseTerrainTileComponentMutSet.Count +
-        this.membersDownStaircaseTerrainTileComponentMutSet.Count
+        this.membersTimeAnchorTTCMutSet.Count +
+        this.membersItemTTCMutSet.Count +
+        this.membersDecorativeTTCMutSet.Count +
+        this.membersUpStaircaseTTCMutSet.Count +
+        this.membersDownStaircaseTTCMutSet.Count
         ;
     }
   }
@@ -204,113 +236,139 @@ public class ITerrainTileComponentMutBunch {
   }
 
   public void Destruct() {
-    var tempMembersItemTerrainTileComponentMutSet = this.membersItemTerrainTileComponentMutSet;
-    var tempMembersDecorativeTerrainTileComponentMutSet = this.membersDecorativeTerrainTileComponentMutSet;
-    var tempMembersUpStaircaseTerrainTileComponentMutSet = this.membersUpStaircaseTerrainTileComponentMutSet;
-    var tempMembersDownStaircaseTerrainTileComponentMutSet = this.membersDownStaircaseTerrainTileComponentMutSet;
+    var tempMembersTimeAnchorTTCMutSet = this.membersTimeAnchorTTCMutSet;
+    var tempMembersItemTTCMutSet = this.membersItemTTCMutSet;
+    var tempMembersDecorativeTTCMutSet = this.membersDecorativeTTCMutSet;
+    var tempMembersUpStaircaseTTCMutSet = this.membersUpStaircaseTTCMutSet;
+    var tempMembersDownStaircaseTTCMutSet = this.membersDownStaircaseTTCMutSet;
 
     this.Delete();
-    tempMembersItemTerrainTileComponentMutSet.Destruct();
-    tempMembersDecorativeTerrainTileComponentMutSet.Destruct();
-    tempMembersUpStaircaseTerrainTileComponentMutSet.Destruct();
-    tempMembersDownStaircaseTerrainTileComponentMutSet.Destruct();
+    tempMembersTimeAnchorTTCMutSet.Destruct();
+    tempMembersItemTTCMutSet.Destruct();
+    tempMembersDecorativeTTCMutSet.Destruct();
+    tempMembersUpStaircaseTTCMutSet.Destruct();
+    tempMembersDownStaircaseTTCMutSet.Destruct();
   }
   public IEnumerator<ITerrainTileComponent> GetEnumerator() {
-    foreach (var element in this.membersItemTerrainTileComponentMutSet) {
-      yield return new ItemTerrainTileComponentAsITerrainTileComponent(element);
+    foreach (var element in this.membersTimeAnchorTTCMutSet) {
+      yield return new TimeAnchorTTCAsITerrainTileComponent(element);
     }
-    foreach (var element in this.membersDecorativeTerrainTileComponentMutSet) {
-      yield return new DecorativeTerrainTileComponentAsITerrainTileComponent(element);
+    foreach (var element in this.membersItemTTCMutSet) {
+      yield return new ItemTTCAsITerrainTileComponent(element);
     }
-    foreach (var element in this.membersUpStaircaseTerrainTileComponentMutSet) {
-      yield return new UpStaircaseTerrainTileComponentAsITerrainTileComponent(element);
+    foreach (var element in this.membersDecorativeTTCMutSet) {
+      yield return new DecorativeTTCAsITerrainTileComponent(element);
     }
-    foreach (var element in this.membersDownStaircaseTerrainTileComponentMutSet) {
-      yield return new DownStaircaseTerrainTileComponentAsITerrainTileComponent(element);
+    foreach (var element in this.membersUpStaircaseTTCMutSet) {
+      yield return new UpStaircaseTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersDownStaircaseTTCMutSet) {
+      yield return new DownStaircaseTTCAsITerrainTileComponent(element);
     }
   }
-    public List<ItemTerrainTileComponent> GetAllItemTerrainTileComponent() {
-      var result = new List<ItemTerrainTileComponent>();
-      foreach (var thing in this.membersItemTerrainTileComponentMutSet) {
+    public List<TimeAnchorTTC> GetAllTimeAnchorTTC() {
+      var result = new List<TimeAnchorTTC>();
+      foreach (var thing in this.membersTimeAnchorTTCMutSet) {
         result.Add(thing);
       }
       return result;
     }
-    public List<ItemTerrainTileComponent> ClearAllItemTerrainTileComponent() {
-      var result = new List<ItemTerrainTileComponent>();
-      this.membersItemTerrainTileComponentMutSet.Clear();
+    public List<TimeAnchorTTC> ClearAllTimeAnchorTTC() {
+      var result = new List<TimeAnchorTTC>();
+      this.membersTimeAnchorTTCMutSet.Clear();
       return result;
     }
-    public ItemTerrainTileComponent GetOnlyItemTerrainTileComponentOrNull() {
-      var result = GetAllItemTerrainTileComponent();
+    public TimeAnchorTTC GetOnlyTimeAnchorTTCOrNull() {
+      var result = GetAllTimeAnchorTTC();
       Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
-        return ItemTerrainTileComponent.Null;
+        return TimeAnchorTTC.Null;
       }
     }
-    public List<DecorativeTerrainTileComponent> GetAllDecorativeTerrainTileComponent() {
-      var result = new List<DecorativeTerrainTileComponent>();
-      foreach (var thing in this.membersDecorativeTerrainTileComponentMutSet) {
+    public List<ItemTTC> GetAllItemTTC() {
+      var result = new List<ItemTTC>();
+      foreach (var thing in this.membersItemTTCMutSet) {
         result.Add(thing);
       }
       return result;
     }
-    public List<DecorativeTerrainTileComponent> ClearAllDecorativeTerrainTileComponent() {
-      var result = new List<DecorativeTerrainTileComponent>();
-      this.membersDecorativeTerrainTileComponentMutSet.Clear();
+    public List<ItemTTC> ClearAllItemTTC() {
+      var result = new List<ItemTTC>();
+      this.membersItemTTCMutSet.Clear();
       return result;
     }
-    public DecorativeTerrainTileComponent GetOnlyDecorativeTerrainTileComponentOrNull() {
-      var result = GetAllDecorativeTerrainTileComponent();
+    public ItemTTC GetOnlyItemTTCOrNull() {
+      var result = GetAllItemTTC();
       Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
-        return DecorativeTerrainTileComponent.Null;
+        return ItemTTC.Null;
       }
     }
-    public List<UpStaircaseTerrainTileComponent> GetAllUpStaircaseTerrainTileComponent() {
-      var result = new List<UpStaircaseTerrainTileComponent>();
-      foreach (var thing in this.membersUpStaircaseTerrainTileComponentMutSet) {
+    public List<DecorativeTTC> GetAllDecorativeTTC() {
+      var result = new List<DecorativeTTC>();
+      foreach (var thing in this.membersDecorativeTTCMutSet) {
         result.Add(thing);
       }
       return result;
     }
-    public List<UpStaircaseTerrainTileComponent> ClearAllUpStaircaseTerrainTileComponent() {
-      var result = new List<UpStaircaseTerrainTileComponent>();
-      this.membersUpStaircaseTerrainTileComponentMutSet.Clear();
+    public List<DecorativeTTC> ClearAllDecorativeTTC() {
+      var result = new List<DecorativeTTC>();
+      this.membersDecorativeTTCMutSet.Clear();
       return result;
     }
-    public UpStaircaseTerrainTileComponent GetOnlyUpStaircaseTerrainTileComponentOrNull() {
-      var result = GetAllUpStaircaseTerrainTileComponent();
+    public DecorativeTTC GetOnlyDecorativeTTCOrNull() {
+      var result = GetAllDecorativeTTC();
       Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
-        return UpStaircaseTerrainTileComponent.Null;
+        return DecorativeTTC.Null;
       }
     }
-    public List<DownStaircaseTerrainTileComponent> GetAllDownStaircaseTerrainTileComponent() {
-      var result = new List<DownStaircaseTerrainTileComponent>();
-      foreach (var thing in this.membersDownStaircaseTerrainTileComponentMutSet) {
+    public List<UpStaircaseTTC> GetAllUpStaircaseTTC() {
+      var result = new List<UpStaircaseTTC>();
+      foreach (var thing in this.membersUpStaircaseTTCMutSet) {
         result.Add(thing);
       }
       return result;
     }
-    public List<DownStaircaseTerrainTileComponent> ClearAllDownStaircaseTerrainTileComponent() {
-      var result = new List<DownStaircaseTerrainTileComponent>();
-      this.membersDownStaircaseTerrainTileComponentMutSet.Clear();
+    public List<UpStaircaseTTC> ClearAllUpStaircaseTTC() {
+      var result = new List<UpStaircaseTTC>();
+      this.membersUpStaircaseTTCMutSet.Clear();
       return result;
     }
-    public DownStaircaseTerrainTileComponent GetOnlyDownStaircaseTerrainTileComponentOrNull() {
-      var result = GetAllDownStaircaseTerrainTileComponent();
+    public UpStaircaseTTC GetOnlyUpStaircaseTTCOrNull() {
+      var result = GetAllUpStaircaseTTC();
       Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
-        return DownStaircaseTerrainTileComponent.Null;
+        return UpStaircaseTTC.Null;
+      }
+    }
+    public List<DownStaircaseTTC> GetAllDownStaircaseTTC() {
+      var result = new List<DownStaircaseTTC>();
+      foreach (var thing in this.membersDownStaircaseTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<DownStaircaseTTC> ClearAllDownStaircaseTTC() {
+      var result = new List<DownStaircaseTTC>();
+      this.membersDownStaircaseTTCMutSet.Clear();
+      return result;
+    }
+    public DownStaircaseTTC GetOnlyDownStaircaseTTCOrNull() {
+      var result = GetAllDownStaircaseTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return DownStaircaseTTC.Null;
       }
     }
 }

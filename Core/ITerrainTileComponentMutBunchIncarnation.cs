@@ -5,19 +5,22 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class ITerrainTileComponentMutBunchIncarnation {
-  public readonly int membersItemTerrainTileComponentMutSet;
-  public readonly int membersDecorativeTerrainTileComponentMutSet;
-  public readonly int membersUpStaircaseTerrainTileComponentMutSet;
-  public readonly int membersDownStaircaseTerrainTileComponentMutSet;
+  public readonly int membersTimeAnchorTTCMutSet;
+  public readonly int membersItemTTCMutSet;
+  public readonly int membersDecorativeTTCMutSet;
+  public readonly int membersUpStaircaseTTCMutSet;
+  public readonly int membersDownStaircaseTTCMutSet;
   public ITerrainTileComponentMutBunchIncarnation(
-      int membersItemTerrainTileComponentMutSet,
-      int membersDecorativeTerrainTileComponentMutSet,
-      int membersUpStaircaseTerrainTileComponentMutSet,
-      int membersDownStaircaseTerrainTileComponentMutSet) {
-    this.membersItemTerrainTileComponentMutSet = membersItemTerrainTileComponentMutSet;
-    this.membersDecorativeTerrainTileComponentMutSet = membersDecorativeTerrainTileComponentMutSet;
-    this.membersUpStaircaseTerrainTileComponentMutSet = membersUpStaircaseTerrainTileComponentMutSet;
-    this.membersDownStaircaseTerrainTileComponentMutSet = membersDownStaircaseTerrainTileComponentMutSet;
+      int membersTimeAnchorTTCMutSet,
+      int membersItemTTCMutSet,
+      int membersDecorativeTTCMutSet,
+      int membersUpStaircaseTTCMutSet,
+      int membersDownStaircaseTTCMutSet) {
+    this.membersTimeAnchorTTCMutSet = membersTimeAnchorTTCMutSet;
+    this.membersItemTTCMutSet = membersItemTTCMutSet;
+    this.membersDecorativeTTCMutSet = membersDecorativeTTCMutSet;
+    this.membersUpStaircaseTTCMutSet = membersUpStaircaseTTCMutSet;
+    this.membersDownStaircaseTTCMutSet = membersDownStaircaseTTCMutSet;
   }
 }
 

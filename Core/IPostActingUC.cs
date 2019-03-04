@@ -16,7 +16,7 @@ public interface IPostActingUC {
   bool NullableIs(IPostActingUC that);
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
-  bool PostAct(Unit unit);
+  bool PostAct(Game game, Superstate superstate, Unit unit);
   Void Destruct();
 }
 }
