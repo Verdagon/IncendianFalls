@@ -17,6 +17,8 @@ namespace IncendianFalls {
     float GetPriority(Location location, Vec2 position);
   }
 
+  public delegate bool PatternExplorerFilter(Location location, Vec2 position);
+
   public class ApatheticPrioritizer : IPatternExplorerPrioritizer {
     public float GetPriority(Location location, Vec2 position) {
       return 0;
@@ -64,22 +66,30 @@ namespace IncendianFalls {
     Pattern pattern;
     bool considerCornersAdjacent;
     IPatternExplorerPrioritizer prioritizer;
+    PatternExplorerFilter filter;
     SortedDictionary<Location, object> exploredPoints = new SortedDictionary<Location, object>();
     SortedDictionary<Location, object> unexploredPoints = new SortedDictionary<Location, object>();
     SortedDictionary<PriorityAndLocation, object> unexploredPointsPrioritized;
 
     public PatternExplorer(Pattern pattern, bool considerCornersAdjacent, Location originLocation) :
-    this(pattern, considerCornersAdjacent, originLocation, new LessDistanceFromPrioritizer(pattern.GetTileCenter(originLocation))) {
+    this(
+        pattern,
+        considerCornersAdjacent,
+        originLocation,
+        new LessDistanceFromPrioritizer(pattern.GetTileCenter(originLocation)),
+        (Location, Vec2) => { return true; }) {
     }
 
     public PatternExplorer(
         Pattern pattern,
         bool considerCornersAdjacent,
         Location originLocation,
-        IPatternExplorerPrioritizer prioritizer) {
+        IPatternExplorerPrioritizer prioritizer,
+        PatternExplorerFilter filter) {
       this.pattern = pattern;
       this.considerCornersAdjacent = considerCornersAdjacent;
       this.prioritizer = prioritizer;
+      this.filter = filter;
       unexploredPointsPrioritized =
           new SortedDictionary<PriorityAndLocation, object>(
               new PriorityAndLocation.Comparer());
@@ -87,13 +97,16 @@ namespace IncendianFalls {
       unexploredPointsPrioritized.Add(
           new PriorityAndLocation(0, originLocation),
           new object());
+      Asserts.Assert(filter(originLocation, pattern.GetTileCenter(originLocation)));
     }
 
-    public void Next(out Location outLocation, out float outPriority) {
+    public bool Next(out Location outLocation, out float outPriority) {
       // This only has one iteration
       PriorityAndLocation priorityAndLocation = new PriorityAndLocation(0, new Location(0, 0, 0));
       if (unexploredPointsPrioritized.Count == 0) {
-        throw new Exception("wat");
+        outLocation = null;
+        outPriority = 0;
+        return false;
       }
       foreach (var locEntry in unexploredPointsPrioritized) {
         priorityAndLocation = locEntry.Key;
@@ -103,6 +116,8 @@ namespace IncendianFalls {
 
       foreach (Location adjacentLoc in pattern.GetAdjacentLocations(loc, considerCornersAdjacent)) {
         var center = pattern.GetTileCenter(adjacentLoc);
+        if (!filter(adjacentLoc, center))
+          continue;
         var priority = prioritizer.GetPriority(adjacentLoc, center);
         if (!exploredPoints.ContainsKey(adjacentLoc) &&
             !unexploredPoints.ContainsKey(adjacentLoc)) {
@@ -118,13 +133,17 @@ namespace IncendianFalls {
       unexploredPoints.Remove(loc);
       outLocation = loc;
       outPriority = priorityAndLocation.priority;
+      return true;
     }
 
     public Location Next() {
       Location loc = new Location(0, 0, 0);
       float priority = 0;
-      Next(out loc, out priority);
-      return loc;
+      if (Next(out loc, out priority)) {
+        return loc;
+      } else {
+        throw new Exception("No next element!");
+      }
     }
 
     public delegate bool ILocationPredicate(Location location);

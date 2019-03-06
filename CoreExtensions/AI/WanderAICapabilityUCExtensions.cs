@@ -23,7 +23,7 @@ namespace Atharia.Model {
       } else {
         var adjacentLocations =
             game.level.terrain.pattern.GetAdjacentLocations(
-                unit.location, game.level.considerCornersAdjacent);
+                unit.location, game.level.ConsiderCornersAdjacent());
         var adjacentWalkableLocations = new SortedSet<Location>();
         foreach (var adjacentLocation in adjacentLocations) {
           if (Actions.CanStep(game, superstate, unit, adjacentLocation)) {

@@ -18,5 +18,9 @@ namespace Atharia.Model {
       rand.root.GetDeterministicHashCode();
       return randomThing % (max + 1 - min) + min;
     }
+    public static float Next(this Rand rand, float min, float max, int numPossibilitiesBetween) {
+      int r = Next(rand, 0, numPossibilitiesBetween);
+      return min + (float)r / numPossibilitiesBetween * (max - min);
+    }
   }
 }

@@ -54,6 +54,9 @@ public class Level {
     if (root.UnitMutSetExists(units.id)) {
       units.FindReachableObjects(foundIds);
     }
+    if (root.ILevelControllerExists(controller.id)) {
+      controller.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(Level that) {
     if (!this.Exists()) {
@@ -64,13 +67,7 @@ public class Level {
     }
     return this.root == that.root && id == that.id;
   }
-         public string name {
-    get { return incarnation.name; }
-  }
-  public bool considerCornersAdjacent {
-    get { return incarnation.considerCornersAdjacent; }
-  }
-  public Terrain terrain {
+         public Terrain terrain {
 
     get {
       if (root == null) {
@@ -88,5 +85,9 @@ public class Level {
       return new UnitMutSet(root, incarnation.units);
     }
                        }
+  public ILevelController controller {
+    get { return root.GetILevelController(incarnation.controller); }
+    set { root.EffectLevelSetController(id, value); }
+  }
 }
 }

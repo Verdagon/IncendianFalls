@@ -17,7 +17,7 @@ namespace Atharia.Model {
       var bidingOperation = unit.components.GetOnlyBidingOperationUCOrNull();
       if (!bidingOperation.Exists()) {
         var nearestEnemy =
-            superstate.liveUnitByLocationMap.FindNearestLiveUnit(
+            superstate.levelSuperstate.FindNearestLiveUnit(
                 game, unit.location, unit, !unit.good);
         if (!nearestEnemy.Exists()) {
           return obj.root.EffectNoImpulseCreate().AsIImpulse();
@@ -27,14 +27,14 @@ namespace Atharia.Model {
             game.level.terrain.pattern.LocationsAreAdjacent(
                 nearestEnemy.location,
                 unit.location,
-                game.level.considerCornersAdjacent);
+                game.level.ConsiderCornersAdjacent());
         if (!isNextToPlayer) {
           return obj.root.EffectNoImpulseCreate().AsIImpulse();
         }
 
         return obj.root.EffectStartBidingImpulseCreate(800).AsIImpulse();
       } else {
-        if (bidingOperation.charge < 2) {
+        if (bidingOperation.charge < 3) {
           return obj.root.EffectContinueBidingImpulseCreate(800).AsIImpulse();
         } else {
           return obj.root.EffectUnleashBideImpulseCreate(800).AsIImpulse();

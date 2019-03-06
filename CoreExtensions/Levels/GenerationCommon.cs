@@ -1,0 +1,104 @@
+﻿using System;
+using System.Collections.Generic;
+using Atharia.Model;
+
+namespace IncendianFalls {
+  public class GenerationCommon {
+    public static void GetMapBounds(
+        out float mapMinX,
+        out float mapMinY,
+        out float mapMaxX,
+        out float mapMaxY,
+        Terrain terrain) {
+      mapMinX = 0;
+      mapMinY = 0;
+      mapMaxX = 0;
+      mapMaxY = 0;
+
+      foreach (var entry in terrain.tiles) {
+        var location = entry.Key;
+        var center = terrain.pattern.GetTileCenter(location);
+        mapMinX = Math.Min(mapMinX, center.x);
+        mapMinY = Math.Min(mapMinY, center.y);
+        mapMaxX = Math.Max(mapMaxX, center.x);
+        mapMaxY = Math.Max(mapMaxY, center.y);
+      }
+    }
+
+    public static Location GetLocationClosestTo(
+        Terrain terrain,
+        Vec2 targetPos) {
+      Location closestLocation = new Location(0, 0, 0);
+      float closestLocationDistance =
+          terrain.pattern.GetTileCenter(closestLocation)
+          .distance(targetPos);
+
+      foreach (var hay in terrain.tiles) {
+        var hayLoc = hay.Key;
+        var hayCenter = terrain.pattern.GetTileCenter(hayLoc);
+        var hayDistance = hayCenter.distance(targetPos);
+        if (hayDistance < closestLocationDistance) {
+          closestLocation = hayLoc;
+          closestLocationDistance = hayDistance;
+        }
+      }
+
+      return closestLocation;
+    }
+
+    public static void PlaceItems(SSContext context, Rand rand, Level level, LevelSuperstate levelSuperstate) {
+      List<Location> glaiveLocations =
+          levelSuperstate.GetNRandomWalkableLocations(
+              rand, levelSuperstate.NumWalkableLocations(false) / 20, false);
+
+      foreach (var itemLocation in glaiveLocations) {
+        var rockTile = level.terrain.tiles[itemLocation];
+        rockTile.components.Add(
+            context.root.EffectItemTTCCreate(
+                context.root.EffectGlaiveCreate().AsIItem())
+            .AsITerrainTileComponent());
+      }
+
+      List<Location> armorLocations =
+          levelSuperstate.GetNRandomWalkableLocations(
+              rand, levelSuperstate.NumWalkableLocations(false) / 20, false);
+
+      foreach (var itemLocation in armorLocations) {
+        var rockTile = level.terrain.tiles[itemLocation];
+        rockTile.components.Add(
+            context.root.EffectItemTTCCreate(
+                context.root.EffectArmorCreate().AsIItem())
+            .AsITerrainTileComponent());
+      }
+    }
+
+    public static void PlaceRocks(SSContext context, Rand rand, Level level, LevelSuperstate levelSuperstate) {
+      List<Location> rockLocations =
+          levelSuperstate.GetNRandomWalkableLocations(
+              rand, levelSuperstate.NumWalkableLocations(false) / 20, false);
+
+      foreach (var rockLocation in rockLocations) {
+        var rockTile = level.terrain.tiles[rockLocation];
+        rockTile.components.Add(
+            context.root.EffectDecorativeTTCCreate("rocks")
+            .AsITerrainTileComponent());
+      }
+    }
+
+    public static void PlaceStaircases(SSContext context, Rand rand, Level level, LevelSuperstate levelSuperstate) {
+      List<Location> staircaseLocations =
+          levelSuperstate.GetNRandomWalkableLocations(
+              rand, 2, false);
+
+      var upStaircaseLocation = staircaseLocations[0];
+      var downStaircaseLocation = staircaseLocations[1];
+
+      var upStaircaseTile = level.terrain.tiles[upStaircaseLocation];
+      upStaircaseTile.components.Add(new UpStaircaseTTCAsITerrainTileComponent(context.root.EffectUpStaircaseTTCCreate()));
+
+      var downStaircaseTile = level.terrain.tiles[downStaircaseLocation];
+      downStaircaseTile.components.Add(new DownStaircaseTTCAsITerrainTileComponent(context.root.EffectDownStaircaseTTCCreate()));
+    }
+
+  }
+}

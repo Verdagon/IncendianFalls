@@ -67,4 +67,12 @@ public class SetUtils {
       removeFrom.Remove(loc);
     }
   }
+
+  public static void AddAll<T>(
+      SortedSet<T> addTo,
+      SortedSet<T> addThese) {
+    foreach (var loc in addThese) {
+      addTo.Add(loc);
+    }
+  }
 }

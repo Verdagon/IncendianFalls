@@ -31,6 +31,7 @@ namespace IncendianFalls {
           ContinueAfterPostActingDetail(game, superstate, pauseCondition);
           break;
         case WorldStateType.kBeforePlayerResume:
+          Asserts.Assert(false, "at beforeplayerresume! " + superstate.GetStateType() + " <-");
           ContinueAtPlayerFollowDirective(game, superstate, pauseCondition);
           break;
         case WorldStateType.kBeforeEnemyAction:
@@ -39,10 +40,10 @@ namespace IncendianFalls {
           ContinueBeforeUnitAction(game, superstate, pauseCondition);
           break;
         case WorldStateType.kBeforePlayerInput:
-          Asserts.Assert(false);
+          Asserts.Assert(false, "at beforeplayerinput! " + superstate.GetStateType() + " <-");
           break;
         default:
-          Asserts.Assert(false);
+          Asserts.Assert(false, "unknown state!");
           break;
       }
     }

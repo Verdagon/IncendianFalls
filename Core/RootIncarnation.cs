@@ -8,6 +8,11 @@ public class RootIncarnation {
   public readonly int version;
   public int nextId;
   public int hash;
+  public readonly SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>> incarnationsSquareCaveLevelController;
+  public readonly SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>> incarnationsRidgeLevelController;
+  public readonly SortedDictionary<int, VersionAndIncarnation<RavashrikeLevelControllerIncarnation>> incarnationsRavashrikeLevelController;
+  public readonly SortedDictionary<int, VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>> incarnationsPentagonalCaveLevelController;
+  public readonly SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>> incarnationsCliffLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>> incarnationsLevel;
   public readonly SortedDictionary<int, VersionAndIncarnation<TimeAnchorTTCIncarnation>> incarnationsTimeAnchorTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<ItemTTCIncarnation>> incarnationsItemTTC;
@@ -74,6 +79,11 @@ public class RootIncarnation {
     this.version = version;
     this.nextId = nextId;
     this.hash = hash;
+    this.incarnationsSquareCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>>();
+    this.incarnationsRidgeLevelController = new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>();
+    this.incarnationsRavashrikeLevelController = new SortedDictionary<int, VersionAndIncarnation<RavashrikeLevelControllerIncarnation>>();
+    this.incarnationsPentagonalCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>>();
+    this.incarnationsCliffLevelController = new SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>>();
     this.incarnationsLevel = new SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>>();
     this.incarnationsTimeAnchorTTC = new SortedDictionary<int, VersionAndIncarnation<TimeAnchorTTCIncarnation>>();
     this.incarnationsItemTTC = new SortedDictionary<int, VersionAndIncarnation<ItemTTCIncarnation>>();
@@ -145,6 +155,11 @@ public class RootIncarnation {
     this.version = newVersion;
     this.nextId = newNextId;
     this.hash = newHash;
+    this.incarnationsSquareCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>>(that.incarnationsSquareCaveLevelController);
+    this.incarnationsRidgeLevelController = new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>(that.incarnationsRidgeLevelController);
+    this.incarnationsRavashrikeLevelController = new SortedDictionary<int, VersionAndIncarnation<RavashrikeLevelControllerIncarnation>>(that.incarnationsRavashrikeLevelController);
+    this.incarnationsPentagonalCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>>(that.incarnationsPentagonalCaveLevelController);
+    this.incarnationsCliffLevelController = new SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>>(that.incarnationsCliffLevelController);
     this.incarnationsLevel = new SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>>(that.incarnationsLevel);
     this.incarnationsTimeAnchorTTC = new SortedDictionary<int, VersionAndIncarnation<TimeAnchorTTCIncarnation>>(that.incarnationsTimeAnchorTTC);
     this.incarnationsItemTTC = new SortedDictionary<int, VersionAndIncarnation<ItemTTCIncarnation>>(that.incarnationsItemTTC);

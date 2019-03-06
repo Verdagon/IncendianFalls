@@ -13,29 +13,16 @@ namespace IncendianFalls {
 
       var rand = context.root.EffectRandCreate(randomSeed);
 
-      var firstLevel =
-          MakeLevel.MakeNextLevel(
-              context,
-              rand,
-              0,
-              squareLevelsOnly,
-              "Ridge");
-
-      var walkableLocations = new WalkableLocations(firstLevel.terrain, firstLevel.units);
-
-      var player = SetupCommon.MakePlayer(context, rand, firstLevel.units, walkableLocations);
-
       var levels = context.root.EffectLevelMutSetCreate();
-      levels.Add(firstLevel);
 
       var game =
           context.root.EffectGameCreate(
               rand,
               squareLevelsOnly,
               levels,
-              player,
+              Unit.Null,
               NullIRequest.Null,
-              firstLevel,
+              Level.Null,
               0,
               context.root.EffectExecutionStateCreate(
                   Unit.Null,
@@ -46,10 +33,41 @@ namespace IncendianFalls {
       superstate =
           new Superstate(
             game,
-            new LiveUnitByLocationMap(game),
+            null,
             new List<RootIncarnation>(),
             new List<int>(),
             null);
+
+      MakeLevel.MakeNextLevel(
+          out var firstLevel,
+          out var firstLevelSuperstate,
+          context,
+          game,
+          superstate,
+          2);
+      game.levels.Add(firstLevel);
+      game.level = firstLevel;
+      superstate.levelSuperstate = firstLevelSuperstate;
+
+      var playerLocation =
+          superstate.levelSuperstate.GetRandomWalkableLocation(
+              game.rand, true);
+      var player =
+          context.root.EffectUnitCreate(
+              context.root.EffectIUnitEventMutListCreate(),
+              true,
+              0,
+              playerLocation,
+              "chronomancer",
+              90, 90,
+              100, 100,
+              600,
+              0,
+              IUnitComponentMutBunch.New(context.root),
+              IItemMutBunch.New(context.root),
+              true);
+      firstLevel.EnterUnit(game, superstate.levelSuperstate, player);
+      game.player = player;
 
       return game;
     }

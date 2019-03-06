@@ -7,7 +7,7 @@ namespace Atharia.Model {
 public class TerrainTileIncarnation {
   public  int elevation;
   public readonly bool walkable;
-  public readonly string classId;
+  public  string classId;
   public readonly int components;
   public TerrainTileIncarnation(
       int elevation,

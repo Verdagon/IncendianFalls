@@ -31,7 +31,8 @@ namespace IncendianFalls {
               pattern,
               false, // not considering corners adjacent yet
               startLoc,
-              new Prioritizer(pattern, new Ray(startPos, endPos.minus(startPos))));
+              new Prioritizer(pattern, new Ray(startPos, endPos.minus(startPos))),
+              (location, position) => true);
       List<Location> path =
           explorer.ExploreWhile(
               delegate(Location loc) { return loc != endLoc; },

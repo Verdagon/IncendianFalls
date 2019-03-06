@@ -37,4 +37,28 @@ public class DictionaryUtils {
       removeFrom.Remove(loc);
     }
   }
+
+  public static K GetFirstKeyFromSetMultimap<K, V>(
+      SortedDictionary<K, SortedSet<V>> map) {
+    foreach (var thing in map) {
+      return thing.Key;
+    }
+    throw new Exception("No key to get!");
+  }
+
+  public static K GetLastKeyFromSetMultimap<K, V>(
+      SortedDictionary<K, SortedSet<V>> map) {
+    var keys = new List<K>(map.Keys);
+    return keys[keys.Count - 1];
+  }
+
+  public static void AddToSetMultimap<K, V>(SortedDictionary<K, SortedSet<V>> map, K key, V value) {
+    SortedSet<V> locs;
+    if (!map.TryGetValue(key, out locs)) {
+      locs = new SortedSet<V>();
+      map.Add(key, locs);
+    }
+    locs.Add(value);
+  }
+
 }

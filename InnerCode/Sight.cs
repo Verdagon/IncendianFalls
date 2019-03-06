@@ -34,7 +34,7 @@ namespace IncendianFalls {
 
     // Optimistic in that it assumes nothing's in the way
     private static List<Location> GetOptimisticDriveTo(Game game, Location from, Location to) {
-      return PatternDriver.Drive(game.level.terrain.pattern, game.level.considerCornersAdjacent, from, to);
+      return PatternDriver.Drive(game.level.terrain.pattern, game.level.ConsiderCornersAdjacent(), from, to);
     }
   }
 }

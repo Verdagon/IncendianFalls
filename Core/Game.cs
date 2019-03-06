@@ -43,10 +43,6 @@ public class Game {
       violations.Add("Null constraint violated! Game#" + id + ".levels");
     }
 
-    if (!root.LevelExists(level.id)) {
-      violations.Add("Null constraint violated! Game#" + id + ".level");
-    }
-
     if (!root.ExecutionStateExists(executionState.id)) {
       violations.Add("Null constraint violated! Game#" + id + ".executionState");
     }

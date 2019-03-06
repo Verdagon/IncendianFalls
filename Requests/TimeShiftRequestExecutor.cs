@@ -14,7 +14,7 @@ namespace IncendianFalls {
       return 5 + timeDifference / 200;
     }
 
-    private static bool CheckCanTimeshift(Game presentGame, RootIncarnation destinationIncarnation) {
+    private static string CheckCanTimeshift(Game presentGame, RootIncarnation destinationIncarnation) {
       var pastGame = destinationIncarnation.incarnationsGame[presentGame.id].incarnation;
       var pastTime = pastGame.time;
       int timeDifference = presentGame.time - pastTime;
@@ -22,17 +22,15 @@ namespace IncendianFalls {
       int mpCost = GetMpCost(presentGame.time - pastGame.time);
 
       if (presentGame.player.mp < 5) {
-        presentGame.root.logger.Info("Not enough mp now to cast the spell, need 5!");
-        return false;
+        return "Not enough mp now to cast the spell, need at least 5!";
       }
 
       var pastPlayerId = destinationIncarnation.incarnationsGame[presentGame.id].incarnation.player;
       if (destinationIncarnation.incarnationsUnit[pastPlayerId].incarnation.mp < mpCost) {
-        presentGame.root.logger.Info("Not enough mp back then to cast the spell!");
-        return false;
+        return "Not enough mp back then to cast the spell, need " + mpCost;
       }
 
-      return true;
+      return "";
     }
 
     private static void RewindOneTurnAndAddToScript(Superstate superstate, Game game) {
@@ -63,7 +61,7 @@ namespace IncendianFalls {
       // Revert to the previous turn.
       game.root.Revert(olderIncarnation);
       // Reconstruct the views.
-      superstate.liveUnitByLocationMap.Reconstruct(game);
+      superstate.levelSuperstate.Reconstruct(game.level);
 
       // Now, replace whatever their directive was with the new script.
       game.player.ReplaceDirective(
@@ -73,7 +71,17 @@ namespace IncendianFalls {
           .AsIDirectiveUC());
     }
 
-    public static bool Execute(
+    private static void TransitionToCloneMoving(Superstate superstate, Game game) {
+      Asserts.Assert(superstate.previousTurns.Count == superstate.timeShiftingState.targetAnchorTurnIndex);
+      superstate.timeShiftingState.rewinding = false;
+      game.player.components.Add(
+          game.root.EffectTimeCloneAICapabilityUCCreate()
+          .AsIUnitComponent());
+      game.player = Unit.Null;
+      Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kTimeshiftingCloneMoving);
+    }
+
+    public static string Execute(
         SSContext context,
         Superstate superstate,
         TimeShiftRequest request) {
@@ -86,8 +94,7 @@ namespace IncendianFalls {
       switch (superstate.GetStateType()) {
         case MultiverseStateType.kBeforePlayerInput:
           if (superstate.anchorTurnIndices.Count == 0) {
-            context.logger.Error("Can't time shift, nothing to time shift back to!");
-            return false;
+            return "Can't time shift, nothing to time shift back to!";
           }
 
           var playerRequestFromOlderToNewer = game.lastPlayerRequest;
@@ -96,13 +103,22 @@ namespace IncendianFalls {
 
           int mostRecentAnchorTurnIndex =
               superstate.anchorTurnIndices[superstate.anchorTurnIndices.Count - 1];
+
+          for (int turnIndex = mostRecentAnchorTurnIndex; turnIndex < superstate.previousTurns.Count; turnIndex++) {
+            var previousLevelId = superstate.previousTurns[turnIndex].incarnationsGame[game.id].incarnation.level;
+            if (game.level.id != previousLevelId) {
+              return "Can't time shift to a different level!";
+            }
+          }
+
           RootIncarnation pastIncarnation =
               superstate.previousTurns[mostRecentAnchorTurnIndex];
           var pastPlayerId = pastIncarnation.incarnationsGame[game.id].incarnation.player;
           var pastPlayerLocation = pastIncarnation.incarnationsUnit[pastPlayerId].incarnation.location;
 
-          if (!CheckCanTimeshift(game, pastIncarnation)) {
-            return false;
+          string cantTimeshiftReason = CheckCanTimeshift(game, pastIncarnation);
+          if (cantTimeshiftReason.Length > 0) {
+            return cantTimeshiftReason;
           }
 
           // Now that we're sure we can do it, do it!
@@ -118,13 +134,12 @@ namespace IncendianFalls {
           RewindOneTurnAndAddToScript(superstate, game);
 
           if (superstate.previousTurns.Count == superstate.timeShiftingState.targetAnchorTurnIndex) {
-            superstate.timeShiftingState.rewinding = false;
-            Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kTimeshiftingCloneMoving);
+            TransitionToCloneMoving(superstate, game);
           } else {
             Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kTimeshiftingBackward);
           }
 
-          return true;
+          return "";
 
         case MultiverseStateType.kTimeshiftingBackward:
           Asserts.Assert(superstate.timeShiftingState != null);
@@ -133,24 +148,17 @@ namespace IncendianFalls {
           RewindOneTurnAndAddToScript(superstate, game);
 
           if (superstate.previousTurns.Count == superstate.timeShiftingState.targetAnchorTurnIndex) {
-            superstate.timeShiftingState.rewinding = false;
-            game.player.components.Add(
-                game.root.EffectTimeCloneAICapabilityUCCreate()
-                .AsIUnitComponent());
-            game.player = Unit.Null;
-            Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kTimeshiftingCloneMoving);
+            TransitionToCloneMoving(superstate, game);
           }
 
-          return true;
+          return "";
 
         case MultiverseStateType.kTimeshiftingCloneMoving:
           // We're not between units yet; the time clone should do things until we're
           // between units.
-          game.root.logger.Info("About to Continue! " + game.GetStateType());
           GameLoop.Continue(game, superstate, new PauseCondition(true));
-          game.root.logger.Info("Just Continue'd! " + game.GetStateType());
 
-          return true;
+          return "";
 
         case MultiverseStateType.kTimeshiftingAfterCloneMoved:
           var futureGame = superstate.timeShiftingState.future.GetGame(game.id);
@@ -176,7 +184,7 @@ namespace IncendianFalls {
           Console.WriteLine("Made new player! ID " + newPlayer.id);
           game.level.units.Add(newPlayer);
           game.player = newPlayer;
-          superstate.liveUnitByLocationMap.Add(game.player);
+          superstate.levelSuperstate.Add(game.player);
 
           superstate.timeShiftingState = null;
 
@@ -191,11 +199,11 @@ namespace IncendianFalls {
 
           Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput);
 
-          return true;
+          return "";
 
         default:
           Asserts.Assert(false);
-          return false;
+          return "";
       }
     }
   }

@@ -88,10 +88,20 @@ namespace Atharia.Model {
       return result;
     }
 
-    public static SortedSet<Location> GetAdjacentLocations(this Pattern pattern, SortedSet<Location> originalLocations, bool considerCornersAdjacent) {
+    public static SortedSet<Location> GetAdjacentLocations(
+        this Pattern pattern,
+        SortedSet<Location> sourceLocs,
+        bool includeSourceLocs,
+        bool considerCornersAdjacent) {
       var result = new SortedSet<Location>();
-      foreach (var originalLocation in originalLocations) {
-        foreach (var adjacentLocation in pattern.GetAdjacentLocations(originalLocation, considerCornersAdjacent)) {
+      foreach (var originalLocation in sourceLocs) {
+        var adjacents = pattern.GetAdjacentLocations(originalLocation, considerCornersAdjacent);
+        if (includeSourceLocs) {
+          adjacents.Add(originalLocation);
+        }
+        foreach (var adjacentLocation in adjacents) {
+          if (!includeSourceLocs && sourceLocs.Contains(adjacentLocation))
+            continue;
           result.Add(adjacentLocation);
         }
       }

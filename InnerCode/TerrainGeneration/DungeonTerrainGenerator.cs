@@ -262,7 +262,7 @@ namespace IncendianFalls {
       }
 
       var allTiles = new SortedSet<Location>(tiles.Keys);
-      var allAdjacent = pattern.GetAdjacentLocations(allTiles, true);
+      var allAdjacent = pattern.GetAdjacentLocations(allTiles, true, true);
       SetUtils.RemoveAll(allAdjacent, allTiles);
       foreach (var borderLocation in allAdjacent) {
         var mutList = ITerrainTileComponentMutBunch.New(context.root);

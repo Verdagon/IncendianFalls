@@ -294,7 +294,7 @@ namespace IncendianFalls {
       }
     }
 
-    public bool RequestTimeShift(int gameId) {
+    public string RequestTimeShift(int gameId) {
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
 
@@ -305,11 +305,11 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new TimeShiftRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = TimeShiftRequestExecutor.Execute(context, superstate, request);
-        context.Flare(success.DStr());
+        string result = TimeShiftRequestExecutor.Execute(context, superstate, request);
+        context.Flare(result.DStr());
         broadcastAfterRequest(new TimeShiftRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
-        return success;
+        return result;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);

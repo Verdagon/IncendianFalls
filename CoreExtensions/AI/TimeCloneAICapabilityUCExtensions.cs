@@ -46,7 +46,7 @@ namespace Atharia.Model {
             if (!game.level.units.Contains(targetUnit)) {
               return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
             }
-            if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, targetUnit.location, game.level.considerCornersAdjacent)) {
+            if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, targetUnit.location, game.level.ConsiderCornersAdjacent())) {
               return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
             }
             return game.root.EffectAttackImpulseCreate(1000, targetUnit).AsIImpulse();

@@ -7,6 +7,7 @@ namespace Atharia.Model {
 public interface ILevelEffectVisitor {
   void visitLevelCreateEffect(LevelCreateEffect effect);
   void visitLevelDeleteEffect(LevelDeleteEffect effect);
+  void visitLevelSetControllerEffect(LevelSetControllerEffect effect);
 }
 
 }

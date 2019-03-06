@@ -35,7 +35,7 @@ namespace Atharia.Model {
     public Game game;
 
     // Views
-    public LiveUnitByLocationMap liveUnitByLocationMap;
+    public LevelSuperstate levelSuperstate;
 
     // Extra-model state
 
@@ -48,12 +48,12 @@ namespace Atharia.Model {
 
     public Superstate(
         Game game,
-        LiveUnitByLocationMap liveUnitByLocationMap,
+        LevelSuperstate liveUnitByLocationMap,
         List<RootIncarnation> turnsIncludingPresent,
         List<int> anchorTurnIndices,
         TimeShiftingState timeShiftingState) {
       this.game = game;
-      this.liveUnitByLocationMap = liveUnitByLocationMap;
+      this.levelSuperstate = liveUnitByLocationMap;
       this.previousTurns = turnsIncludingPresent;
       this.anchorTurnIndices = anchorTurnIndices;
       this.timeShiftingState = timeShiftingState;
@@ -96,7 +96,7 @@ namespace Atharia.Model {
                 !game.player.Exists() ||
                 game.player.location != timeShiftingState.targetAnchorLocation);
             Asserts.Assert(
-                !liveUnitByLocationMap.ContainsKey(
+                !levelSuperstate.ContainsKey(
                     timeShiftingState.targetAnchorLocation));
 
             return MultiverseStateType.kTimeshiftingAfterCloneMoved;

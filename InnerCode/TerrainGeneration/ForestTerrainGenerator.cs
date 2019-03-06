@@ -4,7 +4,11 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class ForestTerrainGenerator {
-    public static Terrain Generate(SSContext context, Rand rand, Pattern pattern) {
+    public static Terrain Generate(
+        SSContext context,
+        Rand rand,
+        Pattern pattern,
+        int size) {
       float elevationStepHeight = .2f;
 
       // The "canvas" is the entire area of the level upon which we will
@@ -16,14 +20,15 @@ namespace IncendianFalls {
               new Location(0, 0, 0),
               new RectanglePrioritizer(
                   pattern.GetTileCenter(new Location(0, 0, 0)),
-                  2.0f));
+                  2.0f),
+              (location, position) => true);
 
       var roomByNumber = new SortedDictionary<int, Room>();
       var borderLocations = new SortedSet<Location>();
       var unusedLocations = new SortedSet<Location>();
 
       // Find a ton of tiles.
-      for (int i = 0; i < 1000; i++) {
+      for (int i = 0; i < size; i++) {
         Location loc = canvasSearcher.Next();
         Vec2 center = pattern.GetTileCenter(loc);
         unusedLocations.Add(loc);
@@ -55,7 +60,7 @@ namespace IncendianFalls {
         if (roomFloorLocations.Count >= minNumTilesInRoom &&
             roomFloorLocations.Count <= maxNumTilesInRoom) {
           SetUtils.RemoveAll(unusedLocations, roomFloorLocations);
-          roomByNumber.Add(roomByNumber.Count, new Room(roomFloorLocations));
+          roomByNumber.Add(roomByNumber.Count, new Room(roomFloorLocations, null));
         }
       }
 
@@ -75,7 +80,7 @@ namespace IncendianFalls {
       }
 
       var allTiles = new SortedSet<Location>(tiles.Keys);
-      var allAdjacent = pattern.GetAdjacentLocations(allTiles, true);
+      var allAdjacent = pattern.GetAdjacentLocations(allTiles, true, true);
       SetUtils.RemoveAll(allAdjacent, allTiles);
       foreach (var borderLocation in allAdjacent) {
         var tile =
@@ -143,7 +148,8 @@ namespace IncendianFalls {
                 pattern,
                 false,
                 regionALocation,
-                new LinearPrioritizer(pattern.GetTileCenter(regionBLocation)));
+                new LinearPrioritizer(pattern.GetTileCenter(regionBLocation)),
+            (location, position) => true);
         List<Location> path = new List<Location>();
         while (true) {
           Location currentLocation = explorer.Next();
@@ -169,7 +175,7 @@ namespace IncendianFalls {
         regions.Add(combinedRegion);
 
         int newRoomNumber = roomByNumber.Count;
-        roomByNumber.Add(newRoomNumber, new Room(new SortedSet<Location>(path)));
+        roomByNumber.Add(newRoomNumber, new Room(new SortedSet<Location>(path), null));
         foreach (var pathLocation in path) {
           roomNumberByLocation.Add(pathLocation, newRoomNumber);
         }
@@ -181,7 +187,7 @@ namespace IncendianFalls {
         // us realizing it.
         // So now, figure out all the regions that this path touches.
 
-        var pathAdjacentLocations = pattern.GetAdjacentLocations(new SortedSet<Location>(path), false);
+        var pathAdjacentLocations = pattern.GetAdjacentLocations(new SortedSet<Location>(path), true, false);
         var pathAdjacentRegions = new SortedSet<String>();
         foreach (var pathAdjacentLocation in pathAdjacentLocations) {
           if (roomNumberByLocation.ContainsKey(pathAdjacentLocation)) {
@@ -217,17 +223,6 @@ namespace IncendianFalls {
         //Logger.Info("Region " + combinedRegion + " now has room numbers: " + roomNums);
         roomNumbersByRegion[combinedRegion] = roomNumbersInCombinedRegion;
       }
-    }
-  }
-
-  class LinearPrioritizer : IPatternExplorerPrioritizer {
-    Vec2 target;
-    public LinearPrioritizer(Vec2 target) {
-      this.target = target;
-    }
-    public float GetPriority(Location location, Vec2 position) {
-      // - because higher is better
-      return -position.distance(target);
     }
   }
 }

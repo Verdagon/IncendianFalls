@@ -37,6 +37,20 @@ namespace Atharia.Model {
       return result;
     }
 
+    public static SortedSet<Location> GetAdjacentExistingLocations(
+        this Terrain terrain,
+        SortedSet<Location> sourceLocs,
+        bool includeSourceLocs,
+        bool adjacentCornersToo) {
+      SortedSet<Location> result = new SortedSet<Location>();
+      foreach (Location adjacentLoc in terrain.pattern.GetAdjacentLocations(sourceLocs, includeSourceLocs, adjacentCornersToo)) {
+        if (!terrain.TileExists(adjacentLoc))
+          continue;
+        result.Add(adjacentLoc);
+      }
+      return result;
+    }
+
     public static Vec3 GetTileCenter(this Terrain terrain, Location loc) {
       var terrainTile = terrain.tiles[loc];
       var positionVec2 = terrain.pattern.GetTileCenter(loc);

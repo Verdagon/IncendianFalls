@@ -60,14 +60,26 @@ namespace IncendianFalls {
         tile.elevation = height;
       }
     }
+
+    public static void randify(Rand rand, Terrain terrain, int range) {
+      foreach (var locationAndTile in terrain.tiles) {
+        var tile = locationAndTile.Value;
+
+        var heightIncrease = rand.Next() % (range - 1);
+        var height = tile.elevation + heightIncrease;
+        tile.elevation = height;
+      }
+    }
   }
 
 
   class Room {
     public readonly SortedSet<Location> floors;
+    public readonly SortedSet<Location> border;
 
-    public Room(SortedSet<Location> floors) {
+    public Room(SortedSet<Location> floors, SortedSet<Location> border) {
       this.floors = floors;
+      this.border = border;
     }
 
     public Location CalculateCentermostLocation(Pattern pattern) {
@@ -106,6 +118,34 @@ namespace IncendianFalls {
           Math.Max(
               Math.Abs(originPosition.x - position.x),
               Math.Abs(originPosition.y - position.y) * widthOverHeightRatio));
+    }
+  }
+
+  // Not really an oval, more like a stretched circle.
+  public class OvalPrioritizer : IPatternExplorerPrioritizer {
+    Vec2 target;
+    readonly float widthOverHeightRatio;
+    public OvalPrioritizer(Vec2 target, float widthOverHeightRatio) {
+      this.target = target;
+      this.widthOverHeightRatio = widthOverHeightRatio;
+    }
+
+    public float GetPriority(Location location, Vec2 position) {
+      // - because higher is better
+      return -(float)Math.Sqrt(
+         ((position.x - target.x)) * ((position.x - target.x)) +
+         ((position.y - target.y) * widthOverHeightRatio) * ((position.y - target.y) * widthOverHeightRatio));
+    }
+  }
+
+  class LinearPrioritizer : IPatternExplorerPrioritizer {
+    Vec2 target;
+    public LinearPrioritizer(Vec2 target) {
+      this.target = target;
+    }
+    public float GetPriority(Location location, Vec2 position) {
+      // - because higher is better
+      return -position.distance(target);
     }
   }
 }

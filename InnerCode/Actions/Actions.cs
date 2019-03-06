@@ -49,7 +49,7 @@ namespace IncendianFalls {
         victim.lifeEndTime = game.time;
         // Bump the victim up to be the next acting unit.
         victim.nextActionTime = game.time;
-        superstate.liveUnitByLocationMap.Remove(victim);
+        superstate.levelSuperstate.Remove(victim);
       }
     }
 
@@ -83,18 +83,21 @@ namespace IncendianFalls {
         string levelName = "Falls" + game.levels.Count;
 
         // Move the player from this level to the next one.
-        game.level.units.Remove(unit);
-        var nextLevel =
-            MakeLevel.MakeNextLevel(
-                context, game.rand, game.time, game.squareLevelsOnly, levelName);
+        game.level.ExitUnit(game, superstate.levelSuperstate, unit);
+
+        MakeLevel.MakeNextLevel(
+            out var nextLevel,
+            out var nextLevelSuperstate,
+            context,
+            game,
+            superstate,
+            game.levels.Count);
         game.levels.Add(nextLevel);
 
-        var walkableLocations = new WalkableLocations(nextLevel.terrain, nextLevel.units);
-        unit.location = walkableLocations.GetRandom(game.rand.Next());
-        nextLevel.units.Add(unit);
-
         game.level = nextLevel;
-        superstate.liveUnitByLocationMap.Reconstruct(game);
+        superstate.levelSuperstate = nextLevelSuperstate;
+
+        game.level.EnterUnit(game, superstate.levelSuperstate, unit);
 
         // Note how we are NOT setting unit.nextActionTime here. That's because
         // we want the player to have the first action after they descend.
@@ -112,10 +115,10 @@ namespace IncendianFalls {
       if (!game.level.terrain.tiles[destination].walkable) {
         return false;
       }
-      if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.considerCornersAdjacent)) {
+      if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent())) {
         return false;
       }
-      if (superstate.liveUnitByLocationMap.ContainsKey(destination)) {
+      if (superstate.levelSuperstate.ContainsKey(destination)) {
         return false;
       }
       return true;
@@ -127,13 +130,13 @@ namespace IncendianFalls {
           Unit unit,
           Location destination) {
       Asserts.Assert(game.level.terrain.tiles[destination].walkable);
-      Asserts.Assert(game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.considerCornersAdjacent));
-      Asserts.Assert(!superstate.liveUnitByLocationMap.ContainsKey(destination));
+      Asserts.Assert(game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent()));
+      Asserts.Assert(!superstate.levelSuperstate.ContainsKey(destination));
 
-      bool removed = superstate.liveUnitByLocationMap.Remove(unit);
+      bool removed = superstate.levelSuperstate.Remove(unit);
       Asserts.Assert(removed);
       unit.location = destination;
-      superstate.liveUnitByLocationMap.Add(unit);
+      superstate.levelSuperstate.Add(unit);
 
       unit.nextActionTime = unit.nextActionTime + unit.inertia;
     }
@@ -144,7 +147,7 @@ namespace IncendianFalls {
         Unit unit) {
       unit.alive = false;
       unit.lifeEndTime = game.time;
-      superstate.liveUnitByLocationMap.Remove(unit);
+      superstate.levelSuperstate.Remove(unit);
     }
   }
 }

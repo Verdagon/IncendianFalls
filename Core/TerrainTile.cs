@@ -66,6 +66,7 @@ public class TerrainTile {
   }
   public string classId {
     get { return incarnation.classId; }
+    set { root.EffectTerrainTileSetClassId(id, value); }
   }
   public ITerrainTileComponentMutBunch components {
 

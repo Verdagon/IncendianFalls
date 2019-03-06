@@ -34,12 +34,49 @@ public class Root {
 
   // 0 means everything
 
+  readonly SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>> observersForSquareCaveLevelController =
+      new SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>>();
+  readonly List<SquareCaveLevelControllerCreateEffect> effectsSquareCaveLevelControllerCreateEffect =
+      new List<SquareCaveLevelControllerCreateEffect>();
+  readonly List<SquareCaveLevelControllerDeleteEffect> effectsSquareCaveLevelControllerDeleteEffect =
+      new List<SquareCaveLevelControllerDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>> observersForRidgeLevelController =
+      new SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>>();
+  readonly List<RidgeLevelControllerCreateEffect> effectsRidgeLevelControllerCreateEffect =
+      new List<RidgeLevelControllerCreateEffect>();
+  readonly List<RidgeLevelControllerDeleteEffect> effectsRidgeLevelControllerDeleteEffect =
+      new List<RidgeLevelControllerDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>> observersForRavashrikeLevelController =
+      new SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>>();
+  readonly List<RavashrikeLevelControllerCreateEffect> effectsRavashrikeLevelControllerCreateEffect =
+      new List<RavashrikeLevelControllerCreateEffect>();
+  readonly List<RavashrikeLevelControllerDeleteEffect> effectsRavashrikeLevelControllerDeleteEffect =
+      new List<RavashrikeLevelControllerDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IPentagonalCaveLevelControllerEffectObserver>> observersForPentagonalCaveLevelController =
+      new SortedDictionary<int, List<IPentagonalCaveLevelControllerEffectObserver>>();
+  readonly List<PentagonalCaveLevelControllerCreateEffect> effectsPentagonalCaveLevelControllerCreateEffect =
+      new List<PentagonalCaveLevelControllerCreateEffect>();
+  readonly List<PentagonalCaveLevelControllerDeleteEffect> effectsPentagonalCaveLevelControllerDeleteEffect =
+      new List<PentagonalCaveLevelControllerDeleteEffect>();
+
+  readonly SortedDictionary<int, List<ICliffLevelControllerEffectObserver>> observersForCliffLevelController =
+      new SortedDictionary<int, List<ICliffLevelControllerEffectObserver>>();
+  readonly List<CliffLevelControllerCreateEffect> effectsCliffLevelControllerCreateEffect =
+      new List<CliffLevelControllerCreateEffect>();
+  readonly List<CliffLevelControllerDeleteEffect> effectsCliffLevelControllerDeleteEffect =
+      new List<CliffLevelControllerDeleteEffect>();
+
   readonly SortedDictionary<int, List<ILevelEffectObserver>> observersForLevel =
       new SortedDictionary<int, List<ILevelEffectObserver>>();
   readonly List<LevelCreateEffect> effectsLevelCreateEffect =
       new List<LevelCreateEffect>();
   readonly List<LevelDeleteEffect> effectsLevelDeleteEffect =
       new List<LevelDeleteEffect>();
+  readonly List<LevelSetControllerEffect> effectsLevelSetControllerEffect =
+      new List<LevelSetControllerEffect>();
 
   readonly SortedDictionary<int, List<ITimeAnchorTTCEffectObserver>> observersForTimeAnchorTTC =
       new SortedDictionary<int, List<ITimeAnchorTTCEffectObserver>>();
@@ -84,6 +121,8 @@ public class Root {
       new List<TerrainTileDeleteEffect>();
   readonly List<TerrainTileSetElevationEffect> effectsTerrainTileSetElevationEffect =
       new List<TerrainTileSetElevationEffect>();
+  readonly List<TerrainTileSetClassIdEffect> effectsTerrainTileSetClassIdEffect =
+      new List<TerrainTileSetClassIdEffect>();
 
   readonly SortedDictionary<int, List<IITerrainTileComponentMutBunchEffectObserver>> observersForITerrainTileComponentMutBunch =
       new SortedDictionary<int, List<IITerrainTileComponentMutBunchEffectObserver>>();
@@ -676,6 +715,21 @@ public class Root {
         VERSION_HASH_MULTIPLIER * rootIncarnation.version +
         NEXT_ID_HASH_MULTIPLIER * rootIncarnation.nextId;
 
+    foreach (var entry in this.rootIncarnation.incarnationsSquareCaveLevelController) {
+      result += GetSquareCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsRidgeLevelController) {
+      result += GetRidgeLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsRavashrikeLevelController) {
+      result += GetRavashrikeLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsPentagonalCaveLevelController) {
+      result += GetPentagonalCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsCliffLevelController) {
+      result += GetCliffLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsLevel) {
       result += GetLevelHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -868,6 +922,21 @@ public class Root {
   public void CheckForViolations() {
     List<string> violations = new List<string>();
 
+    foreach (var obj in this.AllSquareCaveLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllRidgeLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllRavashrikeLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllPentagonalCaveLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllCliffLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllLevel()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1058,6 +1127,31 @@ public class Root {
     SortedSet<int> reachableIds = new SortedSet<int>();
     foreach (var rootStruct in this.AllGame()) {
       rootStruct.FindReachableObjects(reachableIds);
+    }
+    foreach (var obj in this.AllSquareCaveLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllRidgeLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllRavashrikeLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllPentagonalCaveLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllCliffLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
     }
     foreach (var obj in this.AllLevel()) {
       if (!reachableIds.Contains(obj.id)) {
@@ -1382,6 +1476,61 @@ public class Root {
   public void FlushEvents() {
 
 
+
+    var copyOfObserversForSquareCaveLevelController =
+        new SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>>();
+    foreach (var entry in observersForSquareCaveLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForSquareCaveLevelController.Add(
+          objectId,
+          new List<ISquareCaveLevelControllerEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForRidgeLevelController =
+        new SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>>();
+    foreach (var entry in observersForRidgeLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForRidgeLevelController.Add(
+          objectId,
+          new List<IRidgeLevelControllerEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForRavashrikeLevelController =
+        new SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>>();
+    foreach (var entry in observersForRavashrikeLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForRavashrikeLevelController.Add(
+          objectId,
+          new List<IRavashrikeLevelControllerEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForPentagonalCaveLevelController =
+        new SortedDictionary<int, List<IPentagonalCaveLevelControllerEffectObserver>>();
+    foreach (var entry in observersForPentagonalCaveLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForPentagonalCaveLevelController.Add(
+          objectId,
+          new List<IPentagonalCaveLevelControllerEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForCliffLevelController =
+        new SortedDictionary<int, List<ICliffLevelControllerEffectObserver>>();
+    foreach (var entry in observersForCliffLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForCliffLevelController.Add(
+          objectId,
+          new List<ICliffLevelControllerEffectObserver>(
+              observers));
+    }
 
     var copyOfObserversForLevel =
         new SortedDictionary<int, List<ILevelEffectObserver>>();
@@ -2065,6 +2214,21 @@ public class Root {
               observers));
     }
 
+    BroadcastSquareCaveLevelControllerEffects(
+        copyOfObserversForSquareCaveLevelController);
+           
+    BroadcastRidgeLevelControllerEffects(
+        copyOfObserversForRidgeLevelController);
+           
+    BroadcastRavashrikeLevelControllerEffects(
+        copyOfObserversForRavashrikeLevelController);
+           
+    BroadcastPentagonalCaveLevelControllerEffects(
+        copyOfObserversForPentagonalCaveLevelController);
+           
+    BroadcastCliffLevelControllerEffects(
+        copyOfObserversForCliffLevelController);
+           
     BroadcastLevelEffects(
         copyOfObserversForLevel);
            
@@ -2267,6 +2431,56 @@ public class Root {
     // Then we do all the removes.
 
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSquareCaveLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateSquareCaveLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRidgeLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsRidgeLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateRidgeLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavashrikeLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateRavashrikeLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPentagonalCaveLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreatePentagonalCaveLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCliffLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsCliffLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateCliffLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevel) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3581,6 +3795,111 @@ public class Root {
         }
       }
              
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSquareCaveLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsSquareCaveLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsSquareCaveLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRidgeLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsRidgeLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsRidgeLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavashrikeLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsRavashrikeLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsRavashrikeLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPentagonalCaveLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsPentagonalCaveLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsPentagonalCaveLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCliffLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsCliffLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsCliffLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevel) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3593,19 +3912,15 @@ public class Root {
         var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
         if (currentVersion != sourceVersion) {
 
+          if (sourceObjIncarnation.controller != currentObjIncarnation.controller) {
+            EffectLevelSetController(objId, GetILevelController(sourceObjIncarnation.controller));
+          }
+
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetLevelHash(
-                    objId,
-                    rootIncarnation.incarnationsLevel[objId].version,
-                    rootIncarnation.incarnationsLevel[objId].incarnation);
+          
           rootIncarnation.incarnationsLevel[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetLevelHash(
-                    objId,
-                    rootIncarnation.incarnationsLevel[objId].version,
-                    rootIncarnation.incarnationsLevel[objId].incarnation);
+          
         }
       }
     }
@@ -3624,17 +3939,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetTimeAnchorTTCHash(
-                    objId,
-                    rootIncarnation.incarnationsTimeAnchorTTC[objId].version,
-                    rootIncarnation.incarnationsTimeAnchorTTC[objId].incarnation);
+          
           rootIncarnation.incarnationsTimeAnchorTTC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetTimeAnchorTTCHash(
-                    objId,
-                    rootIncarnation.incarnationsTimeAnchorTTC[objId].version,
-                    rootIncarnation.incarnationsTimeAnchorTTC[objId].incarnation);
+          
         }
       }
     }
@@ -3653,17 +3960,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetItemTTCHash(
-                    objId,
-                    rootIncarnation.incarnationsItemTTC[objId].version,
-                    rootIncarnation.incarnationsItemTTC[objId].incarnation);
+          
           rootIncarnation.incarnationsItemTTC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetItemTTCHash(
-                    objId,
-                    rootIncarnation.incarnationsItemTTC[objId].version,
-                    rootIncarnation.incarnationsItemTTC[objId].incarnation);
+          
         }
       }
     }
@@ -3682,17 +3981,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetDecorativeTTCHash(
-                    objId,
-                    rootIncarnation.incarnationsDecorativeTTC[objId].version,
-                    rootIncarnation.incarnationsDecorativeTTC[objId].incarnation);
+          
           rootIncarnation.incarnationsDecorativeTTC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetDecorativeTTCHash(
-                    objId,
-                    rootIncarnation.incarnationsDecorativeTTC[objId].version,
-                    rootIncarnation.incarnationsDecorativeTTC[objId].incarnation);
+          
         }
       }
     }
@@ -3711,17 +4002,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetUpStaircaseTTCHash(
-                    objId,
-                    rootIncarnation.incarnationsUpStaircaseTTC[objId].version,
-                    rootIncarnation.incarnationsUpStaircaseTTC[objId].incarnation);
+          
           rootIncarnation.incarnationsUpStaircaseTTC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetUpStaircaseTTCHash(
-                    objId,
-                    rootIncarnation.incarnationsUpStaircaseTTC[objId].version,
-                    rootIncarnation.incarnationsUpStaircaseTTC[objId].incarnation);
+          
         }
       }
     }
@@ -3740,17 +4023,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetDownStaircaseTTCHash(
-                    objId,
-                    rootIncarnation.incarnationsDownStaircaseTTC[objId].version,
-                    rootIncarnation.incarnationsDownStaircaseTTC[objId].incarnation);
+          
           rootIncarnation.incarnationsDownStaircaseTTC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetDownStaircaseTTCHash(
-                    objId,
-                    rootIncarnation.incarnationsDownStaircaseTTC[objId].version,
-                    rootIncarnation.incarnationsDownStaircaseTTC[objId].incarnation);
+          
         }
       }
     }
@@ -3771,19 +4046,15 @@ public class Root {
             EffectTerrainTileSetElevation(objId, sourceObjIncarnation.elevation);
           }
 
+          if (sourceObjIncarnation.classId != currentObjIncarnation.classId) {
+            EffectTerrainTileSetClassId(objId, sourceObjIncarnation.classId);
+          }
+
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetTerrainTileHash(
-                    objId,
-                    rootIncarnation.incarnationsTerrainTile[objId].version,
-                    rootIncarnation.incarnationsTerrainTile[objId].incarnation);
+          
           rootIncarnation.incarnationsTerrainTile[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetTerrainTileHash(
-                    objId,
-                    rootIncarnation.incarnationsTerrainTile[objId].version,
-                    rootIncarnation.incarnationsTerrainTile[objId].incarnation);
+          
         }
       }
     }
@@ -3802,17 +4073,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetITerrainTileComponentMutBunchHash(
-                    objId,
-                    rootIncarnation.incarnationsITerrainTileComponentMutBunch[objId].version,
-                    rootIncarnation.incarnationsITerrainTileComponentMutBunch[objId].incarnation);
+          
           rootIncarnation.incarnationsITerrainTileComponentMutBunch[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetITerrainTileComponentMutBunchHash(
-                    objId,
-                    rootIncarnation.incarnationsITerrainTileComponentMutBunch[objId].version,
-                    rootIncarnation.incarnationsITerrainTileComponentMutBunch[objId].incarnation);
+          
         }
       }
     }
@@ -3835,17 +4098,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetTerrainHash(
-                    objId,
-                    rootIncarnation.incarnationsTerrain[objId].version,
-                    rootIncarnation.incarnationsTerrain[objId].incarnation);
+          
           rootIncarnation.incarnationsTerrain[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetTerrainHash(
-                    objId,
-                    rootIncarnation.incarnationsTerrain[objId].version,
-                    rootIncarnation.incarnationsTerrain[objId].incarnation);
+          
         }
       }
     }
@@ -3864,17 +4119,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetGlaiveHash(
-                    objId,
-                    rootIncarnation.incarnationsGlaive[objId].version,
-                    rootIncarnation.incarnationsGlaive[objId].incarnation);
+          
           rootIncarnation.incarnationsGlaive[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetGlaiveHash(
-                    objId,
-                    rootIncarnation.incarnationsGlaive[objId].version,
-                    rootIncarnation.incarnationsGlaive[objId].incarnation);
+          
         }
       }
     }
@@ -3893,17 +4140,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetArmorHash(
-                    objId,
-                    rootIncarnation.incarnationsArmor[objId].version,
-                    rootIncarnation.incarnationsArmor[objId].incarnation);
+          
           rootIncarnation.incarnationsArmor[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetArmorHash(
-                    objId,
-                    rootIncarnation.incarnationsArmor[objId].version,
-                    rootIncarnation.incarnationsArmor[objId].incarnation);
+          
         }
       }
     }
@@ -3926,17 +4165,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetRandHash(
-                    objId,
-                    rootIncarnation.incarnationsRand[objId].version,
-                    rootIncarnation.incarnationsRand[objId].incarnation);
+          
           rootIncarnation.incarnationsRand[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetRandHash(
-                    objId,
-                    rootIncarnation.incarnationsRand[objId].version,
-                    rootIncarnation.incarnationsRand[objId].incarnation);
+          
         }
       }
     }
@@ -3955,17 +4186,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetWanderAICapabilityUCHash(
-                    objId,
-                    rootIncarnation.incarnationsWanderAICapabilityUC[objId].version,
-                    rootIncarnation.incarnationsWanderAICapabilityUC[objId].incarnation);
+          
           rootIncarnation.incarnationsWanderAICapabilityUC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetWanderAICapabilityUCHash(
-                    objId,
-                    rootIncarnation.incarnationsWanderAICapabilityUC[objId].version,
-                    rootIncarnation.incarnationsWanderAICapabilityUC[objId].incarnation);
+          
         }
       }
     }
@@ -3984,17 +4207,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetShieldingUCHash(
-                    objId,
-                    rootIncarnation.incarnationsShieldingUC[objId].version,
-                    rootIncarnation.incarnationsShieldingUC[objId].incarnation);
+          
           rootIncarnation.incarnationsShieldingUC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetShieldingUCHash(
-                    objId,
-                    rootIncarnation.incarnationsShieldingUC[objId].version,
-                    rootIncarnation.incarnationsShieldingUC[objId].incarnation);
+          
         }
       }
     }
@@ -4013,17 +4228,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetEvaporateImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsEvaporateImpulse[objId].version,
-                    rootIncarnation.incarnationsEvaporateImpulse[objId].incarnation);
+          
           rootIncarnation.incarnationsEvaporateImpulse[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetEvaporateImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsEvaporateImpulse[objId].version,
-                    rootIncarnation.incarnationsEvaporateImpulse[objId].incarnation);
+          
         }
       }
     }
@@ -4042,17 +4249,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetTimeScriptDirectiveUCHash(
-                    objId,
-                    rootIncarnation.incarnationsTimeScriptDirectiveUC[objId].version,
-                    rootIncarnation.incarnationsTimeScriptDirectiveUC[objId].incarnation);
+          
           rootIncarnation.incarnationsTimeScriptDirectiveUC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetTimeScriptDirectiveUCHash(
-                    objId,
-                    rootIncarnation.incarnationsTimeScriptDirectiveUC[objId].version,
-                    rootIncarnation.incarnationsTimeScriptDirectiveUC[objId].incarnation);
+          
         }
       }
     }
@@ -4071,17 +4270,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetTimeCloneAICapabilityUCHash(
-                    objId,
-                    rootIncarnation.incarnationsTimeCloneAICapabilityUC[objId].version,
-                    rootIncarnation.incarnationsTimeCloneAICapabilityUC[objId].incarnation);
+          
           rootIncarnation.incarnationsTimeCloneAICapabilityUC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetTimeCloneAICapabilityUCHash(
-                    objId,
-                    rootIncarnation.incarnationsTimeCloneAICapabilityUC[objId].version,
-                    rootIncarnation.incarnationsTimeCloneAICapabilityUC[objId].incarnation);
+          
         }
       }
     }
@@ -4104,17 +4295,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetBidingOperationUCHash(
-                    objId,
-                    rootIncarnation.incarnationsBidingOperationUC[objId].version,
-                    rootIncarnation.incarnationsBidingOperationUC[objId].incarnation);
+          
           rootIncarnation.incarnationsBidingOperationUC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetBidingOperationUCHash(
-                    objId,
-                    rootIncarnation.incarnationsBidingOperationUC[objId].version,
-                    rootIncarnation.incarnationsBidingOperationUC[objId].incarnation);
+          
         }
       }
     }
@@ -4133,17 +4316,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetUnleashBideImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsUnleashBideImpulse[objId].version,
-                    rootIncarnation.incarnationsUnleashBideImpulse[objId].incarnation);
+          
           rootIncarnation.incarnationsUnleashBideImpulse[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetUnleashBideImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsUnleashBideImpulse[objId].version,
-                    rootIncarnation.incarnationsUnleashBideImpulse[objId].incarnation);
+          
         }
       }
     }
@@ -4162,17 +4337,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetContinueBidingImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsContinueBidingImpulse[objId].version,
-                    rootIncarnation.incarnationsContinueBidingImpulse[objId].incarnation);
+          
           rootIncarnation.incarnationsContinueBidingImpulse[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetContinueBidingImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsContinueBidingImpulse[objId].version,
-                    rootIncarnation.incarnationsContinueBidingImpulse[objId].incarnation);
+          
         }
       }
     }
@@ -4191,17 +4358,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetStartBidingImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsStartBidingImpulse[objId].version,
-                    rootIncarnation.incarnationsStartBidingImpulse[objId].incarnation);
+          
           rootIncarnation.incarnationsStartBidingImpulse[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetStartBidingImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsStartBidingImpulse[objId].version,
-                    rootIncarnation.incarnationsStartBidingImpulse[objId].incarnation);
+          
         }
       }
     }
@@ -4220,17 +4379,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetBideAICapabilityUCHash(
-                    objId,
-                    rootIncarnation.incarnationsBideAICapabilityUC[objId].version,
-                    rootIncarnation.incarnationsBideAICapabilityUC[objId].incarnation);
+          
           rootIncarnation.incarnationsBideAICapabilityUC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetBideAICapabilityUCHash(
-                    objId,
-                    rootIncarnation.incarnationsBideAICapabilityUC[objId].version,
-                    rootIncarnation.incarnationsBideAICapabilityUC[objId].incarnation);
+          
         }
       }
     }
@@ -4249,17 +4400,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetDefendImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsDefendImpulse[objId].version,
-                    rootIncarnation.incarnationsDefendImpulse[objId].incarnation);
+          
           rootIncarnation.incarnationsDefendImpulse[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetDefendImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsDefendImpulse[objId].version,
-                    rootIncarnation.incarnationsDefendImpulse[objId].incarnation);
+          
         }
       }
     }
@@ -4278,17 +4421,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetAttackImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsAttackImpulse[objId].version,
-                    rootIncarnation.incarnationsAttackImpulse[objId].incarnation);
+          
           rootIncarnation.incarnationsAttackImpulse[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetAttackImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsAttackImpulse[objId].version,
-                    rootIncarnation.incarnationsAttackImpulse[objId].incarnation);
+          
         }
       }
     }
@@ -4307,17 +4442,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetPursueImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsPursueImpulse[objId].version,
-                    rootIncarnation.incarnationsPursueImpulse[objId].incarnation);
+          
           rootIncarnation.incarnationsPursueImpulse[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetPursueImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsPursueImpulse[objId].version,
-                    rootIncarnation.incarnationsPursueImpulse[objId].incarnation);
+          
         }
       }
     }
@@ -4336,17 +4463,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetKillDirectiveUCHash(
-                    objId,
-                    rootIncarnation.incarnationsKillDirectiveUC[objId].version,
-                    rootIncarnation.incarnationsKillDirectiveUC[objId].incarnation);
+          
           rootIncarnation.incarnationsKillDirectiveUC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetKillDirectiveUCHash(
-                    objId,
-                    rootIncarnation.incarnationsKillDirectiveUC[objId].version,
-                    rootIncarnation.incarnationsKillDirectiveUC[objId].incarnation);
+          
         }
       }
     }
@@ -4365,17 +4484,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetAttackAICapabilityUCHash(
-                    objId,
-                    rootIncarnation.incarnationsAttackAICapabilityUC[objId].version,
-                    rootIncarnation.incarnationsAttackAICapabilityUC[objId].incarnation);
+          
           rootIncarnation.incarnationsAttackAICapabilityUC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetAttackAICapabilityUCHash(
-                    objId,
-                    rootIncarnation.incarnationsAttackAICapabilityUC[objId].version,
-                    rootIncarnation.incarnationsAttackAICapabilityUC[objId].incarnation);
+          
         }
       }
     }
@@ -4394,17 +4505,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetMoveImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsMoveImpulse[objId].version,
-                    rootIncarnation.incarnationsMoveImpulse[objId].incarnation);
+          
           rootIncarnation.incarnationsMoveImpulse[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetMoveImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsMoveImpulse[objId].version,
-                    rootIncarnation.incarnationsMoveImpulse[objId].incarnation);
+          
         }
       }
     }
@@ -4423,17 +4526,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetMoveDirectiveUCHash(
-                    objId,
-                    rootIncarnation.incarnationsMoveDirectiveUC[objId].version,
-                    rootIncarnation.incarnationsMoveDirectiveUC[objId].incarnation);
+          
           rootIncarnation.incarnationsMoveDirectiveUC[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetMoveDirectiveUCHash(
-                    objId,
-                    rootIncarnation.incarnationsMoveDirectiveUC[objId].version,
-                    rootIncarnation.incarnationsMoveDirectiveUC[objId].incarnation);
+          
         }
       }
     }
@@ -4476,17 +4571,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetUnitHash(
-                    objId,
-                    rootIncarnation.incarnationsUnit[objId].version,
-                    rootIncarnation.incarnationsUnit[objId].incarnation);
+          
           rootIncarnation.incarnationsUnit[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetUnitHash(
-                    objId,
-                    rootIncarnation.incarnationsUnit[objId].version,
-                    rootIncarnation.incarnationsUnit[objId].incarnation);
+          
         }
       }
     }
@@ -4505,17 +4592,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetIItemMutBunchHash(
-                    objId,
-                    rootIncarnation.incarnationsIItemMutBunch[objId].version,
-                    rootIncarnation.incarnationsIItemMutBunch[objId].incarnation);
+          
           rootIncarnation.incarnationsIItemMutBunch[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetIItemMutBunchHash(
-                    objId,
-                    rootIncarnation.incarnationsIItemMutBunch[objId].version,
-                    rootIncarnation.incarnationsIItemMutBunch[objId].incarnation);
+          
         }
       }
     }
@@ -4534,17 +4613,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetIUnitComponentMutBunchHash(
-                    objId,
-                    rootIncarnation.incarnationsIUnitComponentMutBunch[objId].version,
-                    rootIncarnation.incarnationsIUnitComponentMutBunch[objId].incarnation);
+          
           rootIncarnation.incarnationsIUnitComponentMutBunch[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetIUnitComponentMutBunchHash(
-                    objId,
-                    rootIncarnation.incarnationsIUnitComponentMutBunch[objId].version,
-                    rootIncarnation.incarnationsIUnitComponentMutBunch[objId].incarnation);
+          
         }
       }
     }
@@ -4563,17 +4634,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetNoImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsNoImpulse[objId].version,
-                    rootIncarnation.incarnationsNoImpulse[objId].incarnation);
+          
           rootIncarnation.incarnationsNoImpulse[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetNoImpulseHash(
-                    objId,
-                    rootIncarnation.incarnationsNoImpulse[objId].version,
-                    rootIncarnation.incarnationsNoImpulse[objId].incarnation);
+          
         }
       }
     }
@@ -4608,17 +4671,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetExecutionStateHash(
-                    objId,
-                    rootIncarnation.incarnationsExecutionState[objId].version,
-                    rootIncarnation.incarnationsExecutionState[objId].incarnation);
+          
           rootIncarnation.incarnationsExecutionState[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetExecutionStateHash(
-                    objId,
-                    rootIncarnation.incarnationsExecutionState[objId].version,
-                    rootIncarnation.incarnationsExecutionState[objId].incarnation);
+          
         }
       }
     }
@@ -4637,17 +4692,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetIPostActingUCWeakMutBunchHash(
-                    objId,
-                    rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId].version,
-                    rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId].incarnation);
+          
           rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetIPostActingUCWeakMutBunchHash(
-                    objId,
-                    rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId].version,
-                    rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId].incarnation);
+          
         }
       }
     }
@@ -4666,17 +4713,9 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetIPreActingUCWeakMutBunchHash(
-                    objId,
-                    rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId].version,
-                    rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId].incarnation);
+          
           rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetIPreActingUCWeakMutBunchHash(
-                    objId,
-                    rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId].version,
-                    rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId].incarnation);
+          
         }
       }
     }
@@ -4711,18 +4750,45 @@ public class Root {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
-            rootIncarnation.hash -=
-                GetGameHash(
-                    objId,
-                    rootIncarnation.incarnationsGame[objId].version,
-                    rootIncarnation.incarnationsGame[objId].incarnation);
+          
           rootIncarnation.incarnationsGame[objId] = sourceVersionAndObjIncarnation;
-            rootIncarnation.hash +=
-                GetGameHash(
-                    objId,
-                    rootIncarnation.incarnationsGame[objId].version,
-                    rootIncarnation.incarnationsGame[objId].incarnation);
+          
         }
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>>(rootIncarnation.incarnationsSquareCaveLevelController)) {
+      if (!sourceIncarnation.incarnationsSquareCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectSquareCaveLevelControllerDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>(rootIncarnation.incarnationsRidgeLevelController)) {
+      if (!sourceIncarnation.incarnationsRidgeLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectRidgeLevelControllerDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RavashrikeLevelControllerIncarnation>>(rootIncarnation.incarnationsRavashrikeLevelController)) {
+      if (!sourceIncarnation.incarnationsRavashrikeLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectRavashrikeLevelControllerDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>>(rootIncarnation.incarnationsPentagonalCaveLevelController)) {
+      if (!sourceIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectPentagonalCaveLevelControllerDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>>(rootIncarnation.incarnationsCliffLevelController)) {
+      if (!sourceIncarnation.incarnationsCliffLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectCliffLevelControllerDelete(id);
       }
     }
 
@@ -5161,7 +5227,666 @@ public class Root {
     }
 
   }
-       public LevelIncarnation GetLevelIncarnation(int id) {
+       public SquareCaveLevelControllerIncarnation GetSquareCaveLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsSquareCaveLevelController[id].incarnation;
+  }
+  public bool SquareCaveLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id);
+  }
+  public SquareCaveLevelController GetSquareCaveLevelController(int id) {
+    return new SquareCaveLevelController(this, id);
+  }
+  public List<SquareCaveLevelController> AllSquareCaveLevelController() {
+    List<SquareCaveLevelController> result = new List<SquareCaveLevelController>(rootIncarnation.incarnationsSquareCaveLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsSquareCaveLevelController.Keys) {
+      result.Add(new SquareCaveLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<SquareCaveLevelController> EnumAllSquareCaveLevelController() {
+    foreach (var id in rootIncarnation.incarnationsSquareCaveLevelController.Keys) {
+      yield return GetSquareCaveLevelController(id);
+    }
+  }
+  public void CheckHasSquareCaveLevelController(SquareCaveLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasSquareCaveLevelController(thing.id);
+  }
+  public void CheckHasSquareCaveLevelController(int id) {
+    if (!rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid SquareCaveLevelController: " + id);
+    }
+  }
+  public void AddSquareCaveLevelControllerObserver(int id, ISquareCaveLevelControllerEffectObserver observer) {
+    List<ISquareCaveLevelControllerEffectObserver> obsies;
+    if (!observersForSquareCaveLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<ISquareCaveLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForSquareCaveLevelController[id] = obsies;
+  }
+
+  public void RemoveSquareCaveLevelControllerObserver(int id, ISquareCaveLevelControllerEffectObserver observer) {
+    if (observersForSquareCaveLevelController.ContainsKey(id)) {
+      var list = observersForSquareCaveLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForSquareCaveLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public SquareCaveLevelController EffectSquareCaveLevelControllerCreate(
+      Level level,
+      int depth) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new SquareCaveLevelControllerIncarnation(
+            level.id,
+            depth
+            );
+    EffectInternalCreateSquareCaveLevelController(id, rootIncarnation.version, incarnation);
+    return new SquareCaveLevelController(this, id);
+  }
+  public void EffectInternalCreateSquareCaveLevelController(
+      int id,
+      int incarnationVersion,
+      SquareCaveLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new SquareCaveLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsSquareCaveLevelController.Add(
+        id,
+        new VersionAndIncarnation<SquareCaveLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsSquareCaveLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectSquareCaveLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new SquareCaveLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsSquareCaveLevelController[id];
+
+    rootIncarnation.incarnationsSquareCaveLevelController.Remove(id);
+    effectsSquareCaveLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetSquareCaveLevelControllerHash(int id, int version, SquareCaveLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastSquareCaveLevelControllerEffects(
+      SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsSquareCaveLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ISquareCaveLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSquareCaveLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISquareCaveLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSquareCaveLevelControllerEffect(effect);
+        }
+        observersForSquareCaveLevelController.Remove(effect.id);
+      }
+    }
+    effectsSquareCaveLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsSquareCaveLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<ISquareCaveLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSquareCaveLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISquareCaveLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSquareCaveLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsSquareCaveLevelControllerCreateEffect.Clear();
+  }
+  public RidgeLevelControllerIncarnation GetRidgeLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsRidgeLevelController[id].incarnation;
+  }
+  public bool RidgeLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id);
+  }
+  public RidgeLevelController GetRidgeLevelController(int id) {
+    return new RidgeLevelController(this, id);
+  }
+  public List<RidgeLevelController> AllRidgeLevelController() {
+    List<RidgeLevelController> result = new List<RidgeLevelController>(rootIncarnation.incarnationsRidgeLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsRidgeLevelController.Keys) {
+      result.Add(new RidgeLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<RidgeLevelController> EnumAllRidgeLevelController() {
+    foreach (var id in rootIncarnation.incarnationsRidgeLevelController.Keys) {
+      yield return GetRidgeLevelController(id);
+    }
+  }
+  public void CheckHasRidgeLevelController(RidgeLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasRidgeLevelController(thing.id);
+  }
+  public void CheckHasRidgeLevelController(int id) {
+    if (!rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid RidgeLevelController: " + id);
+    }
+  }
+  public void AddRidgeLevelControllerObserver(int id, IRidgeLevelControllerEffectObserver observer) {
+    List<IRidgeLevelControllerEffectObserver> obsies;
+    if (!observersForRidgeLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IRidgeLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForRidgeLevelController[id] = obsies;
+  }
+
+  public void RemoveRidgeLevelControllerObserver(int id, IRidgeLevelControllerEffectObserver observer) {
+    if (observersForRidgeLevelController.ContainsKey(id)) {
+      var list = observersForRidgeLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForRidgeLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public RidgeLevelController EffectRidgeLevelControllerCreate(
+      Level level) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new RidgeLevelControllerIncarnation(
+            level.id
+            );
+    EffectInternalCreateRidgeLevelController(id, rootIncarnation.version, incarnation);
+    return new RidgeLevelController(this, id);
+  }
+  public void EffectInternalCreateRidgeLevelController(
+      int id,
+      int incarnationVersion,
+      RidgeLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new RidgeLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsRidgeLevelController.Add(
+        id,
+        new VersionAndIncarnation<RidgeLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsRidgeLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectRidgeLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new RidgeLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsRidgeLevelController[id];
+
+    rootIncarnation.incarnationsRidgeLevelController.Remove(id);
+    effectsRidgeLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetRidgeLevelControllerHash(int id, int version, RidgeLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastRidgeLevelControllerEffects(
+      SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsRidgeLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IRidgeLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnRidgeLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IRidgeLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnRidgeLevelControllerEffect(effect);
+        }
+        observersForRidgeLevelController.Remove(effect.id);
+      }
+    }
+    effectsRidgeLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsRidgeLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<IRidgeLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnRidgeLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IRidgeLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnRidgeLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsRidgeLevelControllerCreateEffect.Clear();
+  }
+  public RavashrikeLevelControllerIncarnation GetRavashrikeLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsRavashrikeLevelController[id].incarnation;
+  }
+  public bool RavashrikeLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id);
+  }
+  public RavashrikeLevelController GetRavashrikeLevelController(int id) {
+    return new RavashrikeLevelController(this, id);
+  }
+  public List<RavashrikeLevelController> AllRavashrikeLevelController() {
+    List<RavashrikeLevelController> result = new List<RavashrikeLevelController>(rootIncarnation.incarnationsRavashrikeLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsRavashrikeLevelController.Keys) {
+      result.Add(new RavashrikeLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<RavashrikeLevelController> EnumAllRavashrikeLevelController() {
+    foreach (var id in rootIncarnation.incarnationsRavashrikeLevelController.Keys) {
+      yield return GetRavashrikeLevelController(id);
+    }
+  }
+  public void CheckHasRavashrikeLevelController(RavashrikeLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasRavashrikeLevelController(thing.id);
+  }
+  public void CheckHasRavashrikeLevelController(int id) {
+    if (!rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid RavashrikeLevelController: " + id);
+    }
+  }
+  public void AddRavashrikeLevelControllerObserver(int id, IRavashrikeLevelControllerEffectObserver observer) {
+    List<IRavashrikeLevelControllerEffectObserver> obsies;
+    if (!observersForRavashrikeLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IRavashrikeLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForRavashrikeLevelController[id] = obsies;
+  }
+
+  public void RemoveRavashrikeLevelControllerObserver(int id, IRavashrikeLevelControllerEffectObserver observer) {
+    if (observersForRavashrikeLevelController.ContainsKey(id)) {
+      var list = observersForRavashrikeLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForRavashrikeLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public RavashrikeLevelController EffectRavashrikeLevelControllerCreate(
+      Level level) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new RavashrikeLevelControllerIncarnation(
+            level.id
+            );
+    EffectInternalCreateRavashrikeLevelController(id, rootIncarnation.version, incarnation);
+    return new RavashrikeLevelController(this, id);
+  }
+  public void EffectInternalCreateRavashrikeLevelController(
+      int id,
+      int incarnationVersion,
+      RavashrikeLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new RavashrikeLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsRavashrikeLevelController.Add(
+        id,
+        new VersionAndIncarnation<RavashrikeLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsRavashrikeLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectRavashrikeLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new RavashrikeLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsRavashrikeLevelController[id];
+
+    rootIncarnation.incarnationsRavashrikeLevelController.Remove(id);
+    effectsRavashrikeLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetRavashrikeLevelControllerHash(int id, int version, RavashrikeLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastRavashrikeLevelControllerEffects(
+      SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsRavashrikeLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IRavashrikeLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnRavashrikeLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IRavashrikeLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnRavashrikeLevelControllerEffect(effect);
+        }
+        observersForRavashrikeLevelController.Remove(effect.id);
+      }
+    }
+    effectsRavashrikeLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsRavashrikeLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<IRavashrikeLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnRavashrikeLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IRavashrikeLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnRavashrikeLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsRavashrikeLevelControllerCreateEffect.Clear();
+  }
+  public PentagonalCaveLevelControllerIncarnation GetPentagonalCaveLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsPentagonalCaveLevelController[id].incarnation;
+  }
+  public bool PentagonalCaveLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id);
+  }
+  public PentagonalCaveLevelController GetPentagonalCaveLevelController(int id) {
+    return new PentagonalCaveLevelController(this, id);
+  }
+  public List<PentagonalCaveLevelController> AllPentagonalCaveLevelController() {
+    List<PentagonalCaveLevelController> result = new List<PentagonalCaveLevelController>(rootIncarnation.incarnationsPentagonalCaveLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsPentagonalCaveLevelController.Keys) {
+      result.Add(new PentagonalCaveLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<PentagonalCaveLevelController> EnumAllPentagonalCaveLevelController() {
+    foreach (var id in rootIncarnation.incarnationsPentagonalCaveLevelController.Keys) {
+      yield return GetPentagonalCaveLevelController(id);
+    }
+  }
+  public void CheckHasPentagonalCaveLevelController(PentagonalCaveLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasPentagonalCaveLevelController(thing.id);
+  }
+  public void CheckHasPentagonalCaveLevelController(int id) {
+    if (!rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid PentagonalCaveLevelController: " + id);
+    }
+  }
+  public void AddPentagonalCaveLevelControllerObserver(int id, IPentagonalCaveLevelControllerEffectObserver observer) {
+    List<IPentagonalCaveLevelControllerEffectObserver> obsies;
+    if (!observersForPentagonalCaveLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IPentagonalCaveLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForPentagonalCaveLevelController[id] = obsies;
+  }
+
+  public void RemovePentagonalCaveLevelControllerObserver(int id, IPentagonalCaveLevelControllerEffectObserver observer) {
+    if (observersForPentagonalCaveLevelController.ContainsKey(id)) {
+      var list = observersForPentagonalCaveLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForPentagonalCaveLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public PentagonalCaveLevelController EffectPentagonalCaveLevelControllerCreate(
+      Level level,
+      int depth) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new PentagonalCaveLevelControllerIncarnation(
+            level.id,
+            depth
+            );
+    EffectInternalCreatePentagonalCaveLevelController(id, rootIncarnation.version, incarnation);
+    return new PentagonalCaveLevelController(this, id);
+  }
+  public void EffectInternalCreatePentagonalCaveLevelController(
+      int id,
+      int incarnationVersion,
+      PentagonalCaveLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new PentagonalCaveLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsPentagonalCaveLevelController.Add(
+        id,
+        new VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsPentagonalCaveLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectPentagonalCaveLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new PentagonalCaveLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsPentagonalCaveLevelController[id];
+
+    rootIncarnation.incarnationsPentagonalCaveLevelController.Remove(id);
+    effectsPentagonalCaveLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetPentagonalCaveLevelControllerHash(int id, int version, PentagonalCaveLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastPentagonalCaveLevelControllerEffects(
+      SortedDictionary<int, List<IPentagonalCaveLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsPentagonalCaveLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IPentagonalCaveLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnPentagonalCaveLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IPentagonalCaveLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnPentagonalCaveLevelControllerEffect(effect);
+        }
+        observersForPentagonalCaveLevelController.Remove(effect.id);
+      }
+    }
+    effectsPentagonalCaveLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsPentagonalCaveLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<IPentagonalCaveLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnPentagonalCaveLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IPentagonalCaveLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnPentagonalCaveLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsPentagonalCaveLevelControllerCreateEffect.Clear();
+  }
+  public CliffLevelControllerIncarnation GetCliffLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsCliffLevelController[id].incarnation;
+  }
+  public bool CliffLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsCliffLevelController.ContainsKey(id);
+  }
+  public CliffLevelController GetCliffLevelController(int id) {
+    return new CliffLevelController(this, id);
+  }
+  public List<CliffLevelController> AllCliffLevelController() {
+    List<CliffLevelController> result = new List<CliffLevelController>(rootIncarnation.incarnationsCliffLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsCliffLevelController.Keys) {
+      result.Add(new CliffLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<CliffLevelController> EnumAllCliffLevelController() {
+    foreach (var id in rootIncarnation.incarnationsCliffLevelController.Keys) {
+      yield return GetCliffLevelController(id);
+    }
+  }
+  public void CheckHasCliffLevelController(CliffLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasCliffLevelController(thing.id);
+  }
+  public void CheckHasCliffLevelController(int id) {
+    if (!rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid CliffLevelController: " + id);
+    }
+  }
+  public void AddCliffLevelControllerObserver(int id, ICliffLevelControllerEffectObserver observer) {
+    List<ICliffLevelControllerEffectObserver> obsies;
+    if (!observersForCliffLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<ICliffLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForCliffLevelController[id] = obsies;
+  }
+
+  public void RemoveCliffLevelControllerObserver(int id, ICliffLevelControllerEffectObserver observer) {
+    if (observersForCliffLevelController.ContainsKey(id)) {
+      var list = observersForCliffLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForCliffLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public CliffLevelController EffectCliffLevelControllerCreate(
+      Level level,
+      int depth) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new CliffLevelControllerIncarnation(
+            level.id,
+            depth
+            );
+    EffectInternalCreateCliffLevelController(id, rootIncarnation.version, incarnation);
+    return new CliffLevelController(this, id);
+  }
+  public void EffectInternalCreateCliffLevelController(
+      int id,
+      int incarnationVersion,
+      CliffLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new CliffLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsCliffLevelController.Add(
+        id,
+        new VersionAndIncarnation<CliffLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsCliffLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectCliffLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new CliffLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsCliffLevelController[id];
+
+    rootIncarnation.incarnationsCliffLevelController.Remove(id);
+    effectsCliffLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetCliffLevelControllerHash(int id, int version, CliffLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastCliffLevelControllerEffects(
+      SortedDictionary<int, List<ICliffLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsCliffLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ICliffLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCliffLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICliffLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCliffLevelControllerEffect(effect);
+        }
+        observersForCliffLevelController.Remove(effect.id);
+      }
+    }
+    effectsCliffLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsCliffLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<ICliffLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCliffLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICliffLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCliffLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsCliffLevelControllerCreateEffect.Clear();
+  }
+  public LevelIncarnation GetLevelIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
     }
@@ -5215,10 +5940,9 @@ public class Root {
     }
   }
   public Level EffectLevelCreate(
-      string name,
-      bool considerCornersAdjacent,
       Terrain terrain,
-      UnitMutSet units) {
+      UnitMutSet units,
+      ILevelController controller) {
     CheckUnlocked();
     CheckHasTerrain(terrain);
     CheckHasUnitMutSet(units);
@@ -5226,10 +5950,9 @@ public class Root {
     var id = NewId();
     var incarnation =
         new LevelIncarnation(
-            name,
-            considerCornersAdjacent,
             terrain.id,
-            units.id
+            units.id,
+            controller.id
             );
     EffectInternalCreateLevel(id, rootIncarnation.version, incarnation);
     return new Level(this, id);
@@ -5262,10 +5985,11 @@ public class Root {
      
   public int GetLevelHash(int id, int version, LevelIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.name.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.considerCornersAdjacent.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.terrain.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.units.GetDeterministicHashCode();
+    result += id * version * 1 * incarnation.terrain.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.units.GetDeterministicHashCode();
+    if (!object.ReferenceEquals(incarnation.controller, null)) {
+      result += id * version * 3 * incarnation.controller.GetDeterministicHashCode();
+    }
     return result;
   }
      
@@ -5287,6 +6011,20 @@ public class Root {
     effectsLevelDeleteEffect.Clear();
 
 
+    foreach (var effect in effectsLevelSetControllerEffect) {
+      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+    }
+    effectsLevelSetControllerEffect.Clear();
+
     foreach (var effect in effectsLevelCreateEffect) {
       if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -5300,6 +6038,30 @@ public class Root {
       }
     }
     effectsLevelCreateEffect.Clear();
+  }
+
+  public void EffectLevelSetController(int id, ILevelController newValue) {
+    CheckUnlocked();
+    CheckHasLevel(id);
+    var effect = new LevelSetControllerEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsLevel[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldId = oldIncarnationAndVersion.incarnation.controller;
+      oldIncarnationAndVersion.incarnation.controller = newValue.id;
+
+    } else {
+      var newIncarnation =
+          new LevelIncarnation(
+              oldIncarnationAndVersion.incarnation.terrain,
+              oldIncarnationAndVersion.incarnation.units,
+              newValue.id);
+      rootIncarnation.incarnationsLevel[id] =
+          new VersionAndIncarnation<LevelIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsLevelSetControllerEffect.Add(effect);
   }
   public TimeAnchorTTCIncarnation GetTimeAnchorTTCIncarnation(int id) {
     if (id == 0) {
@@ -6084,6 +6846,20 @@ public class Root {
     }
     effectsTerrainTileSetElevationEffect.Clear();
 
+    foreach (var effect in effectsTerrainTileSetClassIdEffect) {
+      if (observers.TryGetValue(0, out List<ITerrainTileEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTerrainTileEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ITerrainTileEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTerrainTileEffect(effect);
+        }
+      }
+    }
+    effectsTerrainTileSetClassIdEffect.Clear();
+
     foreach (var effect in effectsTerrainTileCreateEffect) {
       if (observers.TryGetValue(0, out List<ITerrainTileEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -6122,6 +6898,31 @@ public class Root {
     }
 
     effectsTerrainTileSetElevationEffect.Add(effect);
+  }
+
+  public void EffectTerrainTileSetClassId(int id, string newValue) {
+    CheckUnlocked();
+    CheckHasTerrainTile(id);
+    var effect = new TerrainTileSetClassIdEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsTerrainTile[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.classId;
+      oldIncarnationAndVersion.incarnation.classId = newValue;
+
+    } else {
+      var newIncarnation =
+          new TerrainTileIncarnation(
+              oldIncarnationAndVersion.incarnation.elevation,
+              oldIncarnationAndVersion.incarnation.walkable,
+              newValue,
+              oldIncarnationAndVersion.incarnation.components);
+      rootIncarnation.incarnationsTerrainTile[id] =
+          new VersionAndIncarnation<TerrainTileIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsTerrainTileSetClassIdEffect.Add(effect);
   }
   public ITerrainTileComponentMutBunchIncarnation GetITerrainTileComponentMutBunchIncarnation(int id) {
     if (id == 0) {
@@ -10619,7 +11420,6 @@ public class Root {
     CheckUnlocked();
     CheckHasRand(rand);
     CheckHasLevelMutSet(levels);
-    CheckHasLevel(level);
     CheckHasExecutionState(executionState);
 
     var id = NewId();
@@ -10674,7 +11474,9 @@ public class Root {
     if (!object.ReferenceEquals(incarnation.lastPlayerRequest, null)) {
       result += id * version * 5 * incarnation.lastPlayerRequest.GetDeterministicHashCode();
     }
-    result += id * version * 6 * incarnation.level.GetDeterministicHashCode();
+    if (!object.ReferenceEquals(incarnation.level, null)) {
+      result += id * version * 6 * incarnation.level.GetDeterministicHashCode();
+    }
     result += id * version * 7 * incarnation.time.GetDeterministicHashCode();
     result += id * version * 8 * incarnation.executionState.GetDeterministicHashCode();
     return result;
@@ -10883,6 +11685,52 @@ public class Root {
     }
 
     effectsGameSetTimeEffect.Add(effect);
+  }
+
+  public ILevelController GetILevelController(int id) {
+    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      return new SquareCaveLevelControllerAsILevelController(new SquareCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
+      return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      return new PentagonalCaveLevelControllerAsILevelController(new PentagonalCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      return new CliffLevelControllerAsILevelController(new CliffLevelController(this, id));
+    }
+    throw new Exception("Unknown ILevelController: " + id);
+  }
+  public ILevelController GetILevelControllerOrNull(int id) {
+    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      return new SquareCaveLevelControllerAsILevelController(new SquareCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
+      return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      return new PentagonalCaveLevelControllerAsILevelController(new PentagonalCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      return new CliffLevelControllerAsILevelController(new CliffLevelController(this, id));
+    }
+    return NullILevelController.Null;
+  }
+  public bool ILevelControllerExists(int id) {
+    return GetILevelControllerOrNull(id) != null;
+  }
+  public void CheckHasILevelController(ILevelController thing) {
+    GetILevelController(thing.id);
+  }
+  public void CheckHasILevelController(int id) {
+    GetILevelController(id);
   }
 
   public ITerrainTileComponent GetITerrainTileComponent(int id) {

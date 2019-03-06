@@ -33,5 +33,6 @@
     <Folder Include="InnerCode\TerrainGeneration\" />
     <Folder Include="InnerCode\Patterns\" />
     <Folder Include="CoreExtensions\AI\" />
+    <Folder Include="CoreExtensions\Levels\" />
   </ItemGroup>
 </Project>
