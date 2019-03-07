@@ -57,7 +57,9 @@ namespace IncendianFalls {
         Terrain terrain,
         Location startLocation,
         Location targetLocation,
-        bool cornersAreAdjacent) {
+        bool cornersAreAdjacent,
+        bool limit2ElevationDifference,
+        string tileClassIdFilter) {
       //UnityEngine.Debug.Log("Pathing from " + startLocation + " to " + targetLocation);
 
       if (startLocation == targetLocation) {
@@ -110,6 +112,13 @@ namespace IncendianFalls {
             continue;
           }
           if (!terrain.tiles[neighborLocation].walkable) {
+            continue;
+          }
+          int elevationDifference = terrain.GetElevationDifference(neighborLocation, currentLocation);
+          if (limit2ElevationDifference && elevationDifference > 2) {
+            continue;
+          }
+          if (tileClassIdFilter.Length > 0 && terrain.tiles[neighborLocation].classId != tileClassIdFilter) {
             continue;
           }
           if (closedLocations.Contains(neighborLocation)) {

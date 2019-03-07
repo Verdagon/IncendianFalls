@@ -51,15 +51,15 @@ namespace IncendianFalls {
       }
     }
 
-    public static void randify(Random random, Terrain terrain, int range) {
-      foreach (var locationAndTile in terrain.tiles) {
-        var tile = locationAndTile.Value;
+    //public static void randify(Random random, Terrain terrain, int range) {
+    //  foreach (var locationAndTile in terrain.tiles) {
+    //    var tile = locationAndTile.Value;
 
-        var heightIncrease = random.Next(range - 1);
-        var height = tile.elevation + heightIncrease;
-        tile.elevation = height;
-      }
-    }
+    //    var heightIncrease = random.Next(range - 1);
+    //    var height = tile.elevation + heightIncrease;
+    //    tile.elevation = height;
+    //  }
+    //}
 
     public static void randify(Rand rand, Terrain terrain, int range) {
       foreach (var locationAndTile in terrain.tiles) {

@@ -50,6 +50,8 @@ namespace Atharia.Model {
               return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
             }
             return game.root.EffectAttackImpulseCreate(1000, targetUnit).AsIImpulse();
+          } else if (request is CounterRequestAsIRequest drC) {
+            return game.root.EffectCounterImpulseCreate(1000).AsIImpulse();
           } else if (request is DefendRequestAsIRequest drI) {
             return game.root.EffectDefendImpulseCreate(1000).AsIImpulse();
           } else {

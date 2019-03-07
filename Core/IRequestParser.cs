@@ -15,10 +15,14 @@ public static class IRequestParser {
         return new TimeShiftRequestAsIRequest(TimeShiftRequest.Parse(source));
       case "FollowDirectiveRequest":
         return new FollowDirectiveRequestAsIRequest(FollowDirectiveRequest.Parse(source));
+      case "CounterRequest":
+        return new CounterRequestAsIRequest(CounterRequest.Parse(source));
       case "DefendRequest":
         return new DefendRequestAsIRequest(DefendRequest.Parse(source));
       case "MoveRequest":
         return new MoveRequestAsIRequest(MoveRequest.Parse(source));
+      case "FireRequest":
+        return new FireRequestAsIRequest(FireRequest.Parse(source));
       case "AttackRequest":
         return new AttackRequestAsIRequest(AttackRequest.Parse(source));
       case "ResumeRequest":

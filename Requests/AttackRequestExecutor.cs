@@ -3,7 +3,7 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class AttackRequestExecutor {
-    public static bool Execute(
+    public static string Execute(
         SSContext context,
         Superstate superstate,
         AttackRequest request) {
@@ -26,7 +26,13 @@ namespace IncendianFalls {
 
       Unit victim = context.root.GetUnit(targetUnitId);
       if (!victim.alive) {
-        return false;
+        return "Can't attack, victim already dead!";
+      }
+
+      int elevationDifference =
+          game.level.terrain.GetElevationDifference(victim.location, player.location);
+      if (elevationDifference > 2) {
+        return "Can't attack that unit, can only attack <=2 elevation up or down.";
       }
 
       superstate.previousTurns.Add(context.root.Snapshot());
@@ -35,11 +41,11 @@ namespace IncendianFalls {
 
       player.ClearDirective();
 
-      Actions.Bump(game, superstate, game.player, victim);
+      Actions.Bump(game, superstate, game.player, victim, 1.0f);
 
       GameLoop.NoteUnitActed(game, game.player);
 
-      return true;
+      return "";
     }
   }
 }

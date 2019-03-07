@@ -35,29 +35,25 @@ public class SetUtils {
     }
     throw new Exception("unreachable");
   }
-  public static List<T> GetRandomN<T>(Rand rand, SortedSet<T> set, int n) {
-    if (set.Count < n) {
+  public static List<T> GetRandomN<T>(Rand rand, SortedSet<T> set, int x) {
+    if (set.Count < x) {
       throw new Exception("wat");
     }
 
+    List<T> shuffled = new List<T>(set);
 
-    SortedSet<T> possibleValues = new SortedSet<T>(set);
-
-    List<T> result = new List<T>();
-
-    for (int i = 0; i < n; i++) {
-      int randomUnusedLocationIndex = rand.Next() % set.Count;
-      foreach (var key in set) {
-        if (randomUnusedLocationIndex == 0) {
-          result.Add(key);
-          possibleValues.Remove(key);
-          break;
-        }
-        randomUnusedLocationIndex--;
-      }
+    // Shuffle them
+    int n = shuffled.Count;
+    while (n > 1) {
+      n--;
+      int k = rand.Next() % (shuffled.Count - 1);
+      var value = shuffled[k];
+      shuffled[k] = shuffled[n];
+      shuffled[n] = value;
     }
 
-    return result;
+    shuffled.RemoveRange(x, shuffled.Count - x);
+    return shuffled;
   }
 
   public static void RemoveAll<T>(

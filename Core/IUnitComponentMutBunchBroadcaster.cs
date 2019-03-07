@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IUnitComponentMutBunchBroadcaster:ITimeScriptDirectiveUCMutSetEffectObserver, ITimeScriptDirectiveUCMutSetEffectVisitor, IKillDirectiveUCMutSetEffectObserver, IKillDirectiveUCMutSetEffectVisitor, IMoveDirectiveUCMutSetEffectObserver, IMoveDirectiveUCMutSetEffectVisitor, IWanderAICapabilityUCMutSetEffectObserver, IWanderAICapabilityUCMutSetEffectVisitor, IBideAICapabilityUCMutSetEffectObserver, IBideAICapabilityUCMutSetEffectVisitor, ITimeCloneAICapabilityUCMutSetEffectObserver, ITimeCloneAICapabilityUCMutSetEffectVisitor, IAttackAICapabilityUCMutSetEffectObserver, IAttackAICapabilityUCMutSetEffectVisitor, IShieldingUCMutSetEffectObserver, IShieldingUCMutSetEffectVisitor, IBidingOperationUCMutSetEffectObserver, IBidingOperationUCMutSetEffectVisitor {
+public class IUnitComponentMutBunchBroadcaster:ITimeScriptDirectiveUCMutSetEffectObserver, ITimeScriptDirectiveUCMutSetEffectVisitor, IKillDirectiveUCMutSetEffectObserver, IKillDirectiveUCMutSetEffectVisitor, IMoveDirectiveUCMutSetEffectObserver, IMoveDirectiveUCMutSetEffectVisitor, IWanderAICapabilityUCMutSetEffectObserver, IWanderAICapabilityUCMutSetEffectVisitor, IBideAICapabilityUCMutSetEffectObserver, IBideAICapabilityUCMutSetEffectVisitor, ITimeCloneAICapabilityUCMutSetEffectObserver, ITimeCloneAICapabilityUCMutSetEffectVisitor, IAttackAICapabilityUCMutSetEffectObserver, IAttackAICapabilityUCMutSetEffectVisitor, ICounteringUCMutSetEffectObserver, ICounteringUCMutSetEffectVisitor, IShieldingUCMutSetEffectObserver, IShieldingUCMutSetEffectVisitor, IBidingOperationUCMutSetEffectObserver, IBidingOperationUCMutSetEffectVisitor {
   IUnitComponentMutBunch bunch;
   private List<IIUnitComponentMutBunchObserver> observers;
 
@@ -18,6 +18,7 @@ public class IUnitComponentMutBunchBroadcaster:ITimeScriptDirectiveUCMutSetEffec
     bunch.membersBideAICapabilityUCMutSet.AddObserver(this);
     bunch.membersTimeCloneAICapabilityUCMutSet.AddObserver(this);
     bunch.membersAttackAICapabilityUCMutSet.AddObserver(this);
+    bunch.membersCounteringUCMutSet.AddObserver(this);
     bunch.membersShieldingUCMutSet.AddObserver(this);
     bunch.membersBidingOperationUCMutSet.AddObserver(this);
 
@@ -30,6 +31,7 @@ public class IUnitComponentMutBunchBroadcaster:ITimeScriptDirectiveUCMutSetEffec
     bunch.membersBideAICapabilityUCMutSet.RemoveObserver(this);
     bunch.membersTimeCloneAICapabilityUCMutSet.RemoveObserver(this);
     bunch.membersAttackAICapabilityUCMutSet.RemoveObserver(this);
+    bunch.membersCounteringUCMutSet.RemoveObserver(this);
     bunch.membersShieldingUCMutSet.RemoveObserver(this);
     bunch.membersBidingOperationUCMutSet.RemoveObserver(this);
 
@@ -127,6 +129,17 @@ public class IUnitComponentMutBunchBroadcaster:ITimeScriptDirectiveUCMutSetEffec
   }
   public void visitAttackAICapabilityUCMutSetCreateEffect(AttackAICapabilityUCMutSetCreateEffect effect) { }
   public void visitAttackAICapabilityUCMutSetDeleteEffect(AttackAICapabilityUCMutSetDeleteEffect effect) { }
+  public void OnCounteringUCMutSetEffect(ICounteringUCMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitCounteringUCMutSetAddEffect(CounteringUCMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitCounteringUCMutSetRemoveEffect(CounteringUCMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitCounteringUCMutSetCreateEffect(CounteringUCMutSetCreateEffect effect) { }
+  public void visitCounteringUCMutSetDeleteEffect(CounteringUCMutSetDeleteEffect effect) { }
   public void OnShieldingUCMutSetEffect(IShieldingUCMutSetEffect effect) {
     effect.visit(this);
   }

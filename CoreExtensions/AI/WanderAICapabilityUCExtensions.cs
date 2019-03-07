@@ -22,7 +22,7 @@ namespace Atharia.Model {
         return obj.root.EffectNoImpulseCreate().AsIImpulse();
       } else {
         var adjacentLocations =
-            game.level.terrain.pattern.GetAdjacentLocations(
+            game.level.terrain.GetAdjacentExistingLocations(
                 unit.location, game.level.ConsiderCornersAdjacent());
         var adjacentWalkableLocations = new SortedSet<Location>();
         foreach (var adjacentLocation in adjacentLocations) {

@@ -17,6 +17,7 @@ namespace Atharia.Model {
       CliffTerrainGenerator.GenerateWithWaterfall(
           out Terrain terrain,
           out List<CliffTerrainGenerator.CliffHalf> cliffHalves,
+          out SortedDictionary<Location, int> preRandifiedElevationByLocation,
           context,
           game.rand,
           PentagonPattern9.makePentagon9Pattern(),
@@ -31,6 +32,10 @@ namespace Atharia.Model {
               terrain, units, depth, NullILevelController.Null);
       levelSuperstate = new LevelSuperstate(cliffLevel);
 
+      var controller =
+          context.root.EffectCliffLevelControllerCreate(
+              cliffLevel, depth);
+      cliffLevel.controller = controller.AsILevelController();
 
       SquareCaveLevelControllerExtensions.MakeLevel(
           out Level caveLevel,
@@ -44,53 +49,129 @@ namespace Atharia.Model {
           3,
           depth);
 
-      Location highestLocationInHighHalf =
+      Location upStaircaseLocation =
           GenerationCommon.GetFurthestLocationInDirection(
               terrain.pattern,
               cliffHalves[0].walkableLocs,
               new Vec2(0, 1));
       GenerationCommon.PlaceStaircase(
-          terrain, highestLocationInHighHalf, false, 0, levelAbove, 1);
+          terrain, upStaircaseLocation, false, 0, levelAbove, 1);
 
-      Location lowestLocationInLowHalf =
+      Location downStaircaseLocation =
           GenerationCommon.GetFurthestLocationInDirection(
               terrain.pattern,
               cliffHalves[1].walkableLocs,
               new Vec2(0, -1));
       GenerationCommon.PlaceStaircase(
-          terrain, lowestLocationInLowHalf, true, 1, Level.Null, 0);
+          terrain, downStaircaseLocation, true, 1, Level.Null, 0);
 
-      PlaceCave(terrain, game.rand, cliffHalves[0].rooms, 2, caveLevel, 0);
+      PlaceCave(
+          out Location highHalfCaveLocation,
+          out SortedSet<Location> highHalfCaveRoomBorder, 
+          terrain, game.rand, cliffHalves[0].rooms, 2, caveLevel, 0);
 
-      PlaceCave(terrain, game.rand, cliffHalves[1].rooms, 3, caveLevel, 1);
+      PlaceCave(
+          out Location lowHalfCaveLocation,
+          out SortedSet<Location> lowHalfCaveRoomBorder,
+          terrain, game.rand, cliffHalves[1].rooms, 3, caveLevel, 1);
 
-      var controller =
-          context.root.EffectCliffLevelControllerCreate(
-              cliffLevel, depth);
-      cliffLevel.controller = controller.AsILevelController();
+      if (!CanReachLimited(cliffLevel, upStaircaseLocation, highHalfCaveLocation)) {
+        ResetCliffs(terrain, preRandifiedElevationByLocation, highHalfCaveRoomBorder);
+        var arbitraryBorderLoc = SetUtils.GetFirst(highHalfCaveRoomBorder);
+        // Find a path that's not limited by hopping
+        var upperHalfPath = GetUnlimitedPathAlongBorder(cliffLevel, upStaircaseLocation, arbitraryBorderLoc);
+        Asserts.Assert(upperHalfPath.Count > 0);
+        ResetCliffs(terrain, preRandifiedElevationByLocation, new SortedSet<Location>(upperHalfPath));
+        Asserts.Assert(CanReachLimited(cliffLevel, upStaircaseLocation, highHalfCaveLocation));
+      }
+
+      if (!CanReachLimited(cliffLevel, downStaircaseLocation, lowHalfCaveLocation)) {
+        ResetCliffs(terrain, preRandifiedElevationByLocation, lowHalfCaveRoomBorder);
+        var arbitraryBorderLoc = SetUtils.GetFirst(lowHalfCaveRoomBorder);
+        // Find a path that's not limited by hopping
+        var lowerHalfPath = GetUnlimitedPathAlongBorder(cliffLevel, downStaircaseLocation, arbitraryBorderLoc);
+        Asserts.Assert(lowerHalfPath.Count > 0);
+        ResetCliffs(terrain, preRandifiedElevationByLocation, new SortedSet<Location>(lowerHalfPath));
+        Asserts.Assert(CanReachLimited(cliffLevel, downStaircaseLocation, lowHalfCaveLocation));
+      }
+
+      var unitForbiddenLocs = new SortedSet<Location> {
+        upStaircaseLocation,
+        downStaircaseLocation,
+        highHalfCaveLocation,
+        lowHalfCaveLocation,
+      };
+      GenerationCommon.FillWithUnits(
+          context, game, cliffLevel, levelSuperstate, unitForbiddenLocs, terrain.tiles.Count / 30);
+    }
+
+    private static void ResetCliffs(
+        Terrain terrain,
+        SortedDictionary<Location, int> preRandifiedElevationByLocation,
+        SortedSet<Location> locs) {
+      foreach (var step in locs) {
+        if (terrain.tiles[step].classId == "cliff") {
+          terrain.tiles[step].elevation = preRandifiedElevationByLocation[step];
+        }
+      }
+    }
+
+    private static bool CanReachLimited(
+        Level level,
+        Location from,
+        Location to) {
+      var upperHalfPathWithLimitedHopping =
+          AStarExplorer.Go(
+              level.terrain,
+              from,
+              to,
+              level.ConsiderCornersAdjacent(),
+              true,
+              "");
+      return upperHalfPathWithLimitedHopping.Count > 0;
+    }
+
+    private static List<Location> GetUnlimitedPathAlongBorder(
+        Level level, Location from, Location to) {
+      return AStarExplorer.Go(
+          level.terrain,
+          from,
+          to,
+          level.ConsiderCornersAdjacent(),
+          false,
+          "cliff");
     }
 
     private static void PlaceCave(
+        out Location caveLocation,
+        out SortedSet<Location> caveRoomBorder,
         Terrain terrain,
         Rand rand,
         SortedDictionary<int, Room> rooms,
         int portalIndex,
         Level destinationLevel,
         int destinationLevelPortalIndex) {
-      var randomLowHalfRoomNumber =
-          SetUtils.GetRandom(rand.Next(), new SortedSet<int>(rooms.Keys));
-      var randomLowHalfRoom = rooms[randomLowHalfRoomNumber];
+      var roomNumCandidates = new SortedSet<int>();
+      foreach (var entry in rooms) {
+        if (entry.Value.border != null) {
+          roomNumCandidates.Add(entry.Key);
+        }
+      }
+      var randomRoomNum = SetUtils.GetRandom(rand.Next(), roomNumCandidates);
+      var randomRoom = rooms[randomRoomNum];
       var highestSpaceInLowHalfRoom =
           GenerationCommon.GetFurthestLocationInDirection(
-              terrain.pattern, randomLowHalfRoom.floors, new Vec2(0, 1));
-      var lowHalfCaveTile = terrain.tiles[highestSpaceInLowHalfRoom];
-      lowHalfCaveTile.components.Add(
+              terrain.pattern, randomRoom.floors, new Vec2(0, 1));
+      var caveTile = terrain.tiles[highestSpaceInLowHalfRoom];
+      caveTile.components.Add(
           new StaircaseTTCAsITerrainTileComponent(
               terrain.root.EffectStaircaseTTCCreate(
                   portalIndex, destinationLevel, destinationLevelPortalIndex)));
-      lowHalfCaveTile.components.Add(
+      caveTile.components.Add(
           new DecorativeTTCAsITerrainTileComponent(
               terrain.root.EffectDecorativeTTCCreate("cave")));
+      caveLocation = highestSpaceInLowHalfRoom;
+      caveRoomBorder = randomRoom.border;
     }
 
     public static string GetName(this CliffLevelController obj) {
@@ -109,8 +190,7 @@ namespace Atharia.Model {
       foreach (var locationAndTile in obj.level.terrain.tiles) {
         var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
         if (staircase.Exists()) {
-          if (staircase.destinationLevel.Exists() &&
-              staircase.destinationLevel.NullableIs(fromLevel) &&
+          if (staircase.destinationLevel.NullableIs(fromLevel) &&
               staircase.destinationLevelPortalIndex == fromLevelPortalIndex) {
             game.root.logger.Warning("found! returning " + locationAndTile.Key);
             return locationAndTile.Key;

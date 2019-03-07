@@ -78,8 +78,7 @@ namespace Atharia.Model {
       foreach (var locationAndTile in obj.level.terrain.tiles) {
         var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
         if (staircase.Exists()) {
-          if (staircase.destinationLevel.Exists() &&
-              staircase.destinationLevel.NullableIs(fromLevel) &&
+          if (staircase.destinationLevel.NullableIs(fromLevel) &&
               staircase.destinationLevelPortalIndex == fromLevelPortalIndex) {
             return locationAndTile.Key;
           }

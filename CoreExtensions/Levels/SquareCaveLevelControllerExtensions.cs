@@ -44,6 +44,8 @@ namespace Atharia.Model {
         }
       }
       Asserts.Assert(roomNumbers.Count > 0);
+      Location upStairsLoc;
+      Location downStairsLoc;
       if (roomNumbers.Count == 1) {
         var room = rooms[0];
 
@@ -55,24 +57,32 @@ namespace Atharia.Model {
         }
         var stairsLocs = SetUtils.GetRandomN(game.rand, locs, 2);
 
-        var upStairsLoc = stairsLocs[0];
+        upStairsLoc = stairsLocs[0];
         GenerationCommon.PlaceStaircase(terrain, upStairsLoc, false, 0, levelAbove, levelAbovePortalIndex);
 
-        var downStairsLoc = stairsLocs[1];
+        downStairsLoc = stairsLocs[1];
         GenerationCommon.PlaceStaircase(terrain, downStairsLoc, true, 1, levelBelow, levelBelowPortalIndex);
       } else {
         var stairRoomNumbers = SetUtils.GetRandomN(game.rand, roomNumbers, 2);
 
+        Asserts.Assert(stairRoomNumbers[0] != stairRoomNumbers[1]);
+
         var upStairsRoom = rooms[stairRoomNumbers[0]];
-        var upStairsLoc = RandomLocationInRoom(game.rand, upStairsRoom);
+        upStairsLoc = RandomLocationInRoom(game.rand, upStairsRoom);
         GenerationCommon.PlaceStaircase(terrain, upStairsLoc, false, 0, levelAbove, levelAbovePortalIndex);
 
         var downStairsRoom = rooms[stairRoomNumbers[1]];
-        var downStairsLoc = RandomLocationInRoom(game.rand, downStairsRoom);
+        downStairsLoc = RandomLocationInRoom(game.rand, downStairsRoom);
         GenerationCommon.PlaceStaircase(terrain, downStairsLoc, true, 1, levelBelow, levelBelowPortalIndex);
       }
 
-      GenerationCommon.FillWithUnits(context, game, level, levelSuperstate, 20);
+      Asserts.Assert(upStairsLoc != downStairsLoc);
+
+      SortedSet<Location> forbiddenLocations = new SortedSet<Location> {
+        upStairsLoc,
+        downStairsLoc
+      };
+      GenerationCommon.FillWithUnits(context, game, level, levelSuperstate, forbiddenLocations, 20);
     }
 
     public static Location RandomLocationInRoom(Rand rand, DungeonTerrainGenerator.Room room) {
@@ -102,8 +112,7 @@ namespace Atharia.Model {
       foreach (var locationAndTile in obj.level.terrain.tiles) {
         var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
         if (staircase.Exists()) {
-          if (staircase.destinationLevel.Exists() &&
-              staircase.destinationLevel.NullableIs(fromLevel) &&
+          if (staircase.destinationLevel.NullableIs(fromLevel) &&
               staircase.destinationLevelPortalIndex == fromLevelPortalIndex) {
             return locationAndTile.Key;
           }

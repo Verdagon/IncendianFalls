@@ -34,6 +34,17 @@ namespace IncendianFalls {
         victim.events.Add(attackEvent);
       }
     }
+    public static void broadcastUnitFireEvent(
+        Root root,
+        Game game,
+        Unit attacker,
+        Unit victim) {
+      var attackEvent = new UnitFireEventAsIUnitEvent(new UnitFireEvent(game.time, attacker.id, victim.id));
+      attacker.events.Add(attackEvent);
+      if (victim.id != attacker.id) {
+        victim.events.Add(attackEvent);
+      }
+    }
     public static void broadcastUnitStepEvent(
         Root root,
         Game game,

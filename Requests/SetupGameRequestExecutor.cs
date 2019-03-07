@@ -72,7 +72,7 @@ namespace IncendianFalls {
           superstate.levelSuperstate,
           player,
           Level.Null,
-          0);
+          1);
       game.player = player;
 
       return game;

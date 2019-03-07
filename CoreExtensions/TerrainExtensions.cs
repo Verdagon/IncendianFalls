@@ -59,5 +59,11 @@ namespace Atharia.Model {
           positionVec2.y,
           terrainTile.elevation * terrain.elevationStepHeight);
     }
+
+    public static int GetElevationDifference(this Terrain terrain, Location locA, Location locB) {
+      return Math.Abs(
+          terrain.tiles[locA].elevation -
+          terrain.tiles[locB].elevation);
+    }
   }
 }

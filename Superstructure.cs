@@ -178,7 +178,36 @@ namespace IncendianFalls {
       }
     }
 
-    public bool RequestAttack(int gameId, int targetUnitId) {
+    public string RequestFire(int gameId, int targetUnitId) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new FireRequest(gameId, targetUnitId);
+        broadcastBeforeRequest(new FireRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        var superstate = superstateByGameId[gameId];
+        string result = FireRequestExecutor.Execute(context, superstate, request);
+        context.Flare(result.DStr());
+        broadcastAfterRequest(new FireRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return result;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
+      } finally {
+        root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+      }
+    }
+
+    public string RequestAttack(int gameId, int targetUnitId) {
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
 
@@ -189,7 +218,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new AttackRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = AttackRequestExecutor.Execute(context, superstate, request);
+        string success = AttackRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new AttackRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -227,6 +256,35 @@ namespace IncendianFalls {
       //  Logger.Error("Caught exception, rolling back!");
       //  root.Revert(rollbackPoint);
       //  throw;
+      } finally {
+        root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+      }
+    }
+
+    public string RequestCounter(int gameId) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new CounterRequest(gameId);
+        broadcastBeforeRequest(new CounterRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        var superstate = superstateByGameId[gameId];
+        string result = CounterRequestExecutor.Execute(context, superstate, request);
+        context.Flare(result.DStr());
+        broadcastAfterRequest(new CounterRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return result;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
       } finally {
         root.Lock();
         root.FlushEvents();

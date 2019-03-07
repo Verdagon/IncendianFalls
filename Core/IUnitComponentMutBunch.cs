@@ -63,6 +63,10 @@ public class IUnitComponentMutBunch {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersAttackAICapabilityUCMutSet");
     }
 
+    if (!root.CounteringUCMutSetExists(membersCounteringUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersCounteringUCMutSet");
+    }
+
     if (!root.ShieldingUCMutSetExists(membersShieldingUCMutSet.id)) {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersShieldingUCMutSet");
     }
@@ -96,6 +100,9 @@ public class IUnitComponentMutBunch {
     }
     if (root.AttackAICapabilityUCMutSetExists(membersAttackAICapabilityUCMutSet.id)) {
       membersAttackAICapabilityUCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.CounteringUCMutSetExists(membersCounteringUCMutSet.id)) {
+      membersCounteringUCMutSet.FindReachableObjects(foundIds);
     }
     if (root.ShieldingUCMutSetExists(membersShieldingUCMutSet.id)) {
       membersShieldingUCMutSet.FindReachableObjects(foundIds);
@@ -176,6 +183,15 @@ public class IUnitComponentMutBunch {
       return new AttackAICapabilityUCMutSet(root, incarnation.membersAttackAICapabilityUCMutSet);
     }
                        }
+  public CounteringUCMutSet membersCounteringUCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersCounteringUCMutSet of null!");
+      }
+      return new CounteringUCMutSet(root, incarnation.membersCounteringUCMutSet);
+    }
+                       }
   public ShieldingUCMutSet membersShieldingUCMutSet {
 
     get {
@@ -210,6 +226,8 @@ public class IUnitComponentMutBunch {
       root.EffectTimeCloneAICapabilityUCMutSetCreate()
 ,
       root.EffectAttackAICapabilityUCMutSetCreate()
+,
+      root.EffectCounteringUCMutSetCreate()
 ,
       root.EffectShieldingUCMutSetCreate()
 ,
@@ -257,6 +275,12 @@ public class IUnitComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.AttackAICapabilityUCExists(elementI.id)) {
       this.membersAttackAICapabilityUCMutSet.Add(root.GetAttackAICapabilityUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.CounteringUCExists(elementI.id)) {
+      this.membersCounteringUCMutSet.Add(root.GetCounteringUC(elementI.id));
       return;
     }
 
@@ -318,6 +342,12 @@ public class IUnitComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.CounteringUCExists(elementI.id)) {
+      this.membersCounteringUCMutSet.Remove(root.GetCounteringUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.ShieldingUCExists(elementI.id)) {
       this.membersShieldingUCMutSet.Remove(root.GetShieldingUC(elementI.id));
       return;
@@ -338,6 +368,7 @@ public class IUnitComponentMutBunch {
     this.membersBideAICapabilityUCMutSet.Clear();
     this.membersTimeCloneAICapabilityUCMutSet.Clear();
     this.membersAttackAICapabilityUCMutSet.Clear();
+    this.membersCounteringUCMutSet.Clear();
     this.membersShieldingUCMutSet.Clear();
     this.membersBidingOperationUCMutSet.Clear();
   }
@@ -351,6 +382,7 @@ public class IUnitComponentMutBunch {
         this.membersBideAICapabilityUCMutSet.Count +
         this.membersTimeCloneAICapabilityUCMutSet.Count +
         this.membersAttackAICapabilityUCMutSet.Count +
+        this.membersCounteringUCMutSet.Count +
         this.membersShieldingUCMutSet.Count +
         this.membersBidingOperationUCMutSet.Count
         ;
@@ -371,6 +403,7 @@ public class IUnitComponentMutBunch {
     var tempMembersBideAICapabilityUCMutSet = this.membersBideAICapabilityUCMutSet;
     var tempMembersTimeCloneAICapabilityUCMutSet = this.membersTimeCloneAICapabilityUCMutSet;
     var tempMembersAttackAICapabilityUCMutSet = this.membersAttackAICapabilityUCMutSet;
+    var tempMembersCounteringUCMutSet = this.membersCounteringUCMutSet;
     var tempMembersShieldingUCMutSet = this.membersShieldingUCMutSet;
     var tempMembersBidingOperationUCMutSet = this.membersBidingOperationUCMutSet;
 
@@ -382,6 +415,7 @@ public class IUnitComponentMutBunch {
     tempMembersBideAICapabilityUCMutSet.Destruct();
     tempMembersTimeCloneAICapabilityUCMutSet.Destruct();
     tempMembersAttackAICapabilityUCMutSet.Destruct();
+    tempMembersCounteringUCMutSet.Destruct();
     tempMembersShieldingUCMutSet.Destruct();
     tempMembersBidingOperationUCMutSet.Destruct();
   }
@@ -406,6 +440,9 @@ public class IUnitComponentMutBunch {
     }
     foreach (var element in this.membersAttackAICapabilityUCMutSet) {
       yield return new AttackAICapabilityUCAsIUnitComponent(element);
+    }
+    foreach (var element in this.membersCounteringUCMutSet) {
+      yield return new CounteringUCAsIUnitComponent(element);
     }
     foreach (var element in this.membersShieldingUCMutSet) {
       yield return new ShieldingUCAsIUnitComponent(element);
@@ -561,6 +598,27 @@ public class IUnitComponentMutBunch {
         return AttackAICapabilityUC.Null;
       }
     }
+    public List<CounteringUC> GetAllCounteringUC() {
+      var result = new List<CounteringUC>();
+      foreach (var thing in this.membersCounteringUCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<CounteringUC> ClearAllCounteringUC() {
+      var result = new List<CounteringUC>();
+      this.membersCounteringUCMutSet.Clear();
+      return result;
+    }
+    public CounteringUC GetOnlyCounteringUCOrNull() {
+      var result = GetAllCounteringUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return CounteringUC.Null;
+      }
+    }
     public List<ShieldingUC> GetAllShieldingUC() {
       var result = new List<ShieldingUC>();
       foreach (var thing in this.membersShieldingUCMutSet) {
@@ -603,7 +661,29 @@ public class IUnitComponentMutBunch {
         return BidingOperationUC.Null;
       }
     }
-    public List<IAICapabilityUC> GetAllIAICapabilityUC() {
+    public List<IReactingToAttacksUC> GetAllIReactingToAttacksUC() {
+      var result = new List<IReactingToAttacksUC>();
+      foreach (var obj in this.membersCounteringUCMutSet) {
+        result.Add(
+            new CounteringUCAsIReactingToAttacksUC(obj));
+      }
+      return result;
+    }
+    public List<IReactingToAttacksUC> ClearAllIReactingToAttacksUC() {
+      var result = new List<IReactingToAttacksUC>();
+      this.membersCounteringUCMutSet.Clear();
+      return result;
+    }
+    public IReactingToAttacksUC GetOnlyIReactingToAttacksUCOrNull() {
+      var result = GetAllIReactingToAttacksUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIReactingToAttacksUC.Null;
+      }
+    }
+                 public List<IAICapabilityUC> GetAllIAICapabilityUC() {
       var result = new List<IAICapabilityUC>();
       foreach (var obj in this.membersWanderAICapabilityUCMutSet) {
         result.Add(
@@ -664,6 +744,10 @@ public class IUnitComponentMutBunch {
     }
                  public List<IPreActingUC> GetAllIPreActingUC() {
       var result = new List<IPreActingUC>();
+      foreach (var obj in this.membersCounteringUCMutSet) {
+        result.Add(
+            new CounteringUCAsIPreActingUC(obj));
+      }
       foreach (var obj in this.membersShieldingUCMutSet) {
         result.Add(
             new ShieldingUCAsIPreActingUC(obj));
@@ -676,6 +760,7 @@ public class IUnitComponentMutBunch {
     }
     public List<IPreActingUC> ClearAllIPreActingUC() {
       var result = new List<IPreActingUC>();
+      this.membersCounteringUCMutSet.Clear();
       this.membersShieldingUCMutSet.Clear();
       this.membersAttackAICapabilityUCMutSet.Clear();
       return result;

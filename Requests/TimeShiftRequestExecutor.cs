@@ -186,6 +186,11 @@ namespace IncendianFalls {
           game.player = newPlayer;
           superstate.levelSuperstate.Add(game.player);
 
+          Asserts.Assert(
+              superstate.anchorTurnIndices[superstate.anchorTurnIndices.Count - 1] ==
+              superstate.timeShiftingState.targetAnchorTurnIndex);
+          superstate.anchorTurnIndices.RemoveAt(superstate.anchorTurnIndices.Count - 1);
+
           superstate.timeShiftingState = null;
 
           // The game loop is between units. Let's simulate until it's waiting for player input.

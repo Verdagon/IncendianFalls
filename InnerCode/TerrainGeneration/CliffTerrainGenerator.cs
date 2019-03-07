@@ -176,6 +176,7 @@ namespace IncendianFalls {
     public static void GenerateWithWaterfall(
         out Terrain terrain,
         out List<CliffHalf> halves,
+        out SortedDictionary<Location, int> preRandifiedElevationByLocation,
         SSContext context,
         Rand rand,
         Pattern pattern,
@@ -225,16 +226,16 @@ namespace IncendianFalls {
         terrain.tiles[waterLoc].classId = "falls";
       }
 
-      // Save all the elevations of the waterfall before randifying
-      var waterElevationByLocation = new Dictionary<Location, int>();
-      foreach (var waterLoc in waterLocations) {
-        waterElevationByLocation[waterLoc] = terrain.tiles[waterLoc].elevation;
+      // Save all the elevations of all the things before randifying
+      preRandifiedElevationByLocation = new SortedDictionary<Location, int>();
+      foreach (var entry in terrain.tiles) {
+        preRandifiedElevationByLocation[entry.Key] = entry.Value.elevation;
       }
       TerrainUtils.randify(rand, terrain, 3);
       // Restore the waterfall's elevations
-      foreach (var waterLocationAndElevation in waterElevationByLocation) {
-        terrain.tiles[waterLocationAndElevation.Key].elevation =
-            waterLocationAndElevation.Value;
+      foreach (var waterLocation in waterLocations) {
+        terrain.tiles[waterLocation].elevation =
+            preRandifiedElevationByLocation[waterLocation];
       }
 
       var waterAndAdjacentLocations = new SortedSet<Location>();

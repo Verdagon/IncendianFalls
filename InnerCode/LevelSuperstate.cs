@@ -98,15 +98,23 @@ namespace Atharia.Model {
       return new Location(0, 0, 0);
     }
 
-    public List<Location> GetNRandomWalkableLocations(Rand rand, int numToGet, bool checkUnitPresent) {
+    public List<Location> GetNRandomWalkableLocations(
+        Rand rand,
+        int numToGet,
+        SortedSet<Location> forbiddenLocations,
+        bool checkUnitPresent) {
       // Gather the candidates
       List<Location> candidates = new List<Location>(walkableLocations.Count);
       if (checkUnitPresent) {
         candidates = new List<Location>(walkableLocations.Count);
         foreach (var location in walkableLocations) {
-          if (!liveUnitByLocation.ContainsKey(location)) {
-            candidates.Add(location);
+          if (liveUnitByLocation.ContainsKey(location)) {
+            continue;
           }
+          if (forbiddenLocations.Contains(location)) {
+            continue;
+          }
+          candidates.Add(location);
         }
       } else {
         candidates = new List<Location>(walkableLocations);

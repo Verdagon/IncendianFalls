@@ -12,12 +12,27 @@ namespace IncendianFalls {
         Superstate superstate,
         Level levelAbove,
         int depth) {
-      int numCliffLevels = 0;
+      int numCliffLevels = 3;
       int cliffLevelsEnd = numCliffLevels;
       int caveLevelsStart = cliffLevelsEnd;
-      int numCaveLevels = 0;
+      int numCaveLevels = 3;
       int caveLevelsEnd = caveLevelsStart + numCaveLevels;
       int volcaetusLevel = caveLevelsEnd;
+
+      if (game.squareLevelsOnly) {
+        SquareCaveLevelControllerExtensions.MakeLevel(
+            out level,
+            out levelSuperstate,
+            context,
+            game,
+            superstate,
+            levelAbove,
+            1,
+            Level.Null,
+            0,
+            depth);
+        return;
+      }
 
       if (depth == -1) {
         RavashrikeLevelControllerExtensions.MakeLevel(

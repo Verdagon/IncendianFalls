@@ -40,8 +40,21 @@ namespace Atharia.Model {
 
       // Enemy is not next to subject.
       // Check if we can see them.
-      List<Location> pathToNearestEnemy;
-      if (!Sight.CanSee(game, unit, nearestEnemy.location, out pathToNearestEnemy)) {
+      if (!Sight.CanSee(game, unit, nearestEnemy.location, out List<Location> sightPath)) {
+        // Can't see the enemy. Don't update directive.
+        return false;
+      }
+
+      // Check if we can reach them.
+      List<Location> pathToNearestEnemy =
+          AStarExplorer.Go(
+              game.level.terrain,
+              unit.location,
+              nearestEnemy.location,
+              game.level.ConsiderCornersAdjacent(),
+              true,
+              "");
+      if (pathToNearestEnemy.Count == 0) {
         // Can't see the enemy. Don't update directive.
         return false;
       }
@@ -69,7 +82,8 @@ namespace Atharia.Model {
         // No directive, do nothing.
         return obj.root.EffectNoImpulseCreate().AsIImpulse();
       } else {
-        if (game.level.terrain.pattern.LocationsAreAdjacent(unit.location, directive.targetUnit.location, game.level.ConsiderCornersAdjacent())) {
+        if (game.level.terrain.pattern.LocationsAreAdjacent(unit.location, directive.targetUnit.location, game.level.ConsiderCornersAdjacent()) &&
+            game.level.terrain.GetElevationDifference(unit.location, directive.targetUnit.location) <= 2) {
           // Target is right next to subject. Attack!
           return obj.root.EffectAttackImpulseCreate(800, directive.targetUnit).AsIImpulse();
         } else {

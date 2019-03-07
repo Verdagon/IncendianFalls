@@ -310,10 +310,6 @@ namespace IncendianFalls {
       Asserts.Assert(!executionState.actingUnitDidAction);
       var unit = executionState.actingUnit;
 
-      if (unit.mp < unit.maxMp) {
-        unit.mp = unit.mp + 1;
-      }
-
       if (unit.NullableIs(game.player)) {
         // It's the player turn, we don't do any AI for it.
         //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);

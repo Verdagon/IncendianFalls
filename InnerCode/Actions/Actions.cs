@@ -20,9 +20,10 @@ namespace IncendianFalls {
         Game game,
         Superstate superstate,
         Unit attacker,
-        Unit victim) {
+        Unit victim,
+        float multiplier) {
       Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
-      AttackInner(game, superstate, attacker, victim, 5);
+      AttackInner(game, superstate, attacker, victim, (int)Math.Floor(5 * multiplier));
       attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
     }
 
@@ -50,6 +51,12 @@ namespace IncendianFalls {
         // Bump the victim up to be the next acting unit.
         victim.nextActionTime = game.time;
         superstate.levelSuperstate.Remove(victim);
+      } else {
+        foreach (var reactor in new List<IReactingToAttacksUC>(victim.components.GetAllIReactingToAttacksUC())) {
+          if (victim.Exists()) {
+            reactor.React(game, superstate, victim, attacker);
+          }
+        }
       }
     }
 
@@ -58,6 +65,17 @@ namespace IncendianFalls {
         Unit unit) {
       var detail = game.root.EffectShieldingUCCreate();
       unit.components.Add(detail.AsIUnitComponent());
+
+      unit.nextActionTime = unit.nextActionTime + unit.inertia;
+    }
+
+    public static void Counter(
+        Game game,
+        Unit unit) {
+      var detail = game.root.EffectCounteringUCCreate();
+      unit.components.Add(detail.AsIUnitComponent());
+
+      unit.mp = unit.mp - 1;
 
       unit.nextActionTime = unit.nextActionTime + unit.inertia;
     }
@@ -125,6 +143,9 @@ namespace IncendianFalls {
       if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent())) {
         return false;
       }
+      if (game.level.terrain.GetElevationDifference(unit.location, destination) > 2) {
+        return false;
+      }
       if (superstate.levelSuperstate.ContainsKey(destination)) {
         return false;
       }
@@ -155,6 +176,18 @@ namespace IncendianFalls {
       unit.alive = false;
       unit.lifeEndTime = game.time;
       superstate.levelSuperstate.Remove(unit);
+    }
+
+    public static void Fire(
+        Game game,
+        Superstate superstate,
+        Unit attacker,
+        Unit victim) {
+      Eventer.broadcastUnitFireEvent(game.root, game, attacker, victim);
+      AttackInner(game, superstate, attacker, victim, 12);
+      attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
+
+      attacker.mp = attacker.mp - 10;
     }
   }
 }

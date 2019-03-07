@@ -66,7 +66,10 @@ namespace IncendianFalls {
     public static void PlaceItems(SSContext context, Rand rand, Level level, LevelSuperstate levelSuperstate) {
       List<Location> glaiveLocations =
           levelSuperstate.GetNRandomWalkableLocations(
-              rand, levelSuperstate.NumWalkableLocations(false) / 20, false);
+              rand,
+              levelSuperstate.NumWalkableLocations(false) / 20,
+              new SortedSet<Location>(),
+              false);
 
       foreach (var itemLocation in glaiveLocations) {
         var rockTile = level.terrain.tiles[itemLocation];
@@ -78,7 +81,10 @@ namespace IncendianFalls {
 
       List<Location> armorLocations =
           levelSuperstate.GetNRandomWalkableLocations(
-              rand, levelSuperstate.NumWalkableLocations(false) / 20, false);
+              rand,
+              levelSuperstate.NumWalkableLocations(false) / 20,
+              new SortedSet<Location>(), 
+              false);
 
       foreach (var itemLocation in armorLocations) {
         var rockTile = level.terrain.tiles[itemLocation];
@@ -92,7 +98,10 @@ namespace IncendianFalls {
     public static void PlaceRocks(SSContext context, Rand rand, Level level, LevelSuperstate levelSuperstate) {
       List<Location> rockLocations =
           levelSuperstate.GetNRandomWalkableLocations(
-              rand, levelSuperstate.NumWalkableLocations(false) / 20, false);
+              rand,
+              levelSuperstate.NumWalkableLocations(false) / 20,
+              new SortedSet<Location>(),
+              false);
 
       foreach (var rockLocation in rockLocations) {
         var rockTile = level.terrain.tiles[rockLocation];
@@ -145,10 +154,9 @@ namespace IncendianFalls {
         Game game,
         Level level,
         LevelSuperstate levelSuperstate,
+        SortedSet<Location> forbiddenLocations,
         int numUnits) {
-      if (true) return;
-
-      var locations = levelSuperstate.GetNRandomWalkableLocations(game.rand, numUnits, true);
+      var locations = levelSuperstate.GetNRandomWalkableLocations(game.rand, numUnits, forbiddenLocations, true);
 
       for (int i = 0; i < numUnits; i++) {
         var enemyLocation = locations[i];

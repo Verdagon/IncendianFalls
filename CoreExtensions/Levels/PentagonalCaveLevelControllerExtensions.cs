@@ -53,7 +53,12 @@ namespace Atharia.Model {
       var downStairsLoc = SetUtils.GetRandom(game.rand.Next(), downStairsRoom.floors);
       GenerationCommon.PlaceStaircase(terrain, downStairsLoc, true, 1, levelBelow, levelBelowPortalIndex);
 
-      GenerationCommon.FillWithUnits(context, game, level, levelSuperstate, 20);
+      var unitForbiddenLocations = new SortedSet<Location> {
+        upStairsLoc,
+        downStairsLoc
+      };
+      GenerationCommon.FillWithUnits(
+          context, game, level, levelSuperstate, unitForbiddenLocations, 20);
     }
 
     public static string GetName(this PentagonalCaveLevelController obj) {
@@ -72,8 +77,7 @@ namespace Atharia.Model {
       foreach (var locationAndTile in obj.level.terrain.tiles) {
         var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
         if (staircase.Exists()) {
-          if (staircase.destinationLevel.Exists() &&
-              staircase.destinationLevel.NullableIs(fromLevel) &&
+          if (staircase.destinationLevel.NullableIs(fromLevel) &&
               staircase.destinationLevelPortalIndex == fromLevelPortalIndex) {
             return locationAndTile.Key;
           }

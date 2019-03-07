@@ -11,6 +11,8 @@ public static class IUnitEventParser {
     switch (nextThingPeek) {
       case "UnitUnleashBideEvent":
         return new UnitUnleashBideEventAsIUnitEvent(UnitUnleashBideEvent.Parse(source));
+      case "UnitFireEvent":
+        return new UnitFireEventAsIUnitEvent(UnitFireEvent.Parse(source));
       case "UnitAttackEvent":
         return new UnitAttackEventAsIUnitEvent(UnitAttackEvent.Parse(source));
       case "UnitStepEvent":
