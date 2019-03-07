@@ -4,7 +4,9 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class ForestTerrainGenerator {
-    public static Terrain Generate(
+    public static void Generate(
+        out Terrain terrain,
+        out SortedDictionary<int, Room> rooms,
         SSContext context,
         Rand rand,
         Pattern pattern,
@@ -40,6 +42,9 @@ namespace IncendianFalls {
 
       // 100 attempts to make rooms.
       for (int i = 0; i < 100; i++) {
+        if (unusedLocations.Count == 0) {
+          break;
+        }
         Location startLocation = SetUtils.GetRandom(rand.Next(), unusedLocations);
         var roomSearcher = new PatternExplorer(pattern, false, startLocation);
         int minNumTilesInRoom = 15;
@@ -60,7 +65,7 @@ namespace IncendianFalls {
         if (roomFloorLocations.Count >= minNumTilesInRoom &&
             roomFloorLocations.Count <= maxNumTilesInRoom) {
           SetUtils.RemoveAll(unusedLocations, roomFloorLocations);
-          roomByNumber.Add(roomByNumber.Count, new Room(roomFloorLocations, null));
+          roomByNumber.Add(roomByNumber.Count, new Room(roomFloorLocations, roomBorderLocations));
         }
       }
 
@@ -89,8 +94,8 @@ namespace IncendianFalls {
         tiles.Add(borderLocation, tile);
       }
 
-      var terrain = context.root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
-      return terrain;
+      terrain = context.root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
+      rooms = roomByNumber;
     }
 
     

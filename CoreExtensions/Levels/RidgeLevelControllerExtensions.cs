@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IncendianFalls;
 
 namespace Atharia.Model {
@@ -8,17 +9,21 @@ namespace Atharia.Model {
         out LevelSuperstate levelSuperstate,
         SSContext context,
         Game game,
-        Superstate superstate) {
-      var terrain =
-          ForestTerrainGenerator.Generate(
-              context,
-              game.rand,
-              PentagonPattern9.makePentagon9Pattern(),
-              1000);
+        Superstate superstate,
+        int depth) {
+      ForestTerrainGenerator.Generate(
+          out Terrain terrain,
+          out SortedDictionary<int, Room> rooms,
+          context,
+          game.rand,
+          PentagonPattern9.makePentagon9Pattern(),
+          1000);
 
       var units = context.root.EffectUnitMutSetCreate();
 
-      level = context.root.EffectLevelCreate(terrain, units, NullILevelController.Null);
+      level =
+          context.root.EffectLevelCreate(
+              terrain, units, depth, NullILevelController.Null);
       levelSuperstate = new LevelSuperstate(level);
 
       var controller = context.root.EffectRidgeLevelControllerCreate(level);
@@ -36,10 +41,20 @@ namespace Atharia.Model {
     public static Location GetEntryLocation(
         this RidgeLevelController obj,
         Game game,
-        Superstate superstate,
-        int entranceIndex) {
-      game.root.logger.Error("Replace this");
-      return superstate.levelSuperstate.GetRandomWalkableLocation(game.rand, true);
+        LevelSuperstate levelSuperstate,
+        Level fromLevel, int fromLevelPortalIndex) {
+      foreach (var locationAndTile in obj.level.terrain.tiles) {
+        var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
+        if (staircase.Exists()) {
+          if (staircase.destinationLevel.Exists() &&
+              staircase.destinationLevel.NullableIs(fromLevel) &&
+              staircase.destinationLevelPortalIndex == fromLevelPortalIndex) {
+            return locationAndTile.Key;
+          }
+        }
+      }
+      game.root.logger.Error("Couldnt figure out where to place unit!");
+      return levelSuperstate.GetRandomWalkableLocation(game.rand, true);
     }
 
     public static Atharia.Model.Void Generate(

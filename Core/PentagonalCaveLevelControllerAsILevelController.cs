@@ -45,8 +45,8 @@ public class PentagonalCaveLevelControllerAsILevelController : ILevelController 
   public bool ConsiderCornersAdjacent() {
     return PentagonalCaveLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Location GetEntryLocation(Game game, Superstate superstate, int entranceIndex) {
-    return PentagonalCaveLevelControllerExtensions.GetEntryLocation(obj, game, superstate, entranceIndex);
+  public Location GetEntryLocation(Game game, LevelSuperstate levelSuperstate, Level fromLevel, int fromLevelPortalIndex) {
+    return PentagonalCaveLevelControllerExtensions.GetEntryLocation(obj, game, levelSuperstate, fromLevel, fromLevelPortalIndex);
   }
 
 }

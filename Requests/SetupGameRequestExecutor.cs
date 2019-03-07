@@ -44,7 +44,8 @@ namespace IncendianFalls {
           context,
           game,
           superstate,
-          2);
+          Level.Null,
+          0);
       game.levels.Add(firstLevel);
       game.level = firstLevel;
       superstate.levelSuperstate = firstLevelSuperstate;
@@ -66,7 +67,12 @@ namespace IncendianFalls {
               IUnitComponentMutBunch.New(context.root),
               IItemMutBunch.New(context.root),
               true);
-      firstLevel.EnterUnit(game, superstate.levelSuperstate, player);
+      firstLevel.EnterUnit(
+          game,
+          superstate.levelSuperstate,
+          player,
+          Level.Null,
+          0);
       game.player = player;
 
       return game;

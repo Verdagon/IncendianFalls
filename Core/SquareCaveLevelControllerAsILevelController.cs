@@ -45,8 +45,8 @@ public class SquareCaveLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return SquareCaveLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Location GetEntryLocation(Game game, Superstate superstate, int entranceIndex) {
-    return SquareCaveLevelControllerExtensions.GetEntryLocation(obj, game, superstate, entranceIndex);
+  public Location GetEntryLocation(Game game, LevelSuperstate levelSuperstate, Level fromLevel, int fromLevelPortalIndex) {
+    return SquareCaveLevelControllerExtensions.GetEntryLocation(obj, game, levelSuperstate, fromLevel, fromLevelPortalIndex);
   }
 
 }

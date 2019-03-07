@@ -4,10 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class DownStaircaseTTCIncarnation {
-  public DownStaircaseTTCIncarnation(
-) {
-  }
+
+public interface IStaircaseTTCEffectObserver {
+  void OnStaircaseTTCEffect(IStaircaseTTCEffect effect);
 }
 
 }

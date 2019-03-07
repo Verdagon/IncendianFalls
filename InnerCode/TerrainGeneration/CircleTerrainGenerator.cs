@@ -4,7 +4,7 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class CircleTerrainGenerator {
-    public static Terrain makeStartingMapTerrain(SSContext context, Random random) {
+    public static Terrain Generate(SSContext context, Rand rand) {
       float elevationStepHeight = .2f;
 
       var terrain =
@@ -24,16 +24,16 @@ namespace IncendianFalls {
               context.root.EffectTerrainTileCreate(
                   1,
                   true,
-                  "grass",
+                  "ravanest",
                   ITerrainTileComponentMutBunch.New(context.root)));
         } else {
           break;
         }
       }
 
-      TerrainUtils.slopify(terrain, new Vec2(0, -1), .3f);
+      //TerrainUtils.slopify(terrain, new Vec2(0, -1), .3f);
 
-      TerrainUtils.randify(random, terrain, 4);
+      TerrainUtils.randify(rand, terrain, 2);
 
       return terrain;
     }

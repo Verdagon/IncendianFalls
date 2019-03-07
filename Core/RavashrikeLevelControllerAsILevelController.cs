@@ -45,8 +45,8 @@ public class RavashrikeLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return RavashrikeLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Location GetEntryLocation(Game game, Superstate superstate, int entranceIndex) {
-    return RavashrikeLevelControllerExtensions.GetEntryLocation(obj, game, superstate, entranceIndex);
+  public Location GetEntryLocation(Game game, LevelSuperstate levelSuperstate, Level fromLevel, int fromLevelPortalIndex) {
+    return RavashrikeLevelControllerExtensions.GetEntryLocation(obj, game, levelSuperstate, fromLevel, fromLevelPortalIndex);
   }
 
 }

@@ -4,16 +4,18 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class DungeonTerrainGenerator {
-    struct Room {
+    public struct Room {
       public readonly AbsRowCol origin;
       public readonly SizeRowCol size;
-      public Room(AbsRowCol origin, SizeRowCol size) {
+      public readonly bool isCorridor;
+      public Room(AbsRowCol origin, SizeRowCol size, bool isCorridor) {
         this.origin = origin;
         this.size = size;
+        this.isCorridor = isCorridor;
       }
     }
 
-    struct AbsRowCol : IComparable<AbsRowCol> {
+    public struct AbsRowCol : IComparable<AbsRowCol> {
       public readonly int row;
       public readonly int col;
       public AbsRowCol(int row, int col) {
@@ -39,7 +41,7 @@ namespace IncendianFalls {
       }
     }
 
-    struct SizeRowCol {
+    public struct SizeRowCol {
       public readonly int row;
       public readonly int col;
       public SizeRowCol(int row, int col) {
@@ -83,7 +85,13 @@ namespace IncendianFalls {
       return true;
     }
 
-    public static Terrain Generate(SSContext context, int width, int height, Rand rand) {
+    public static void Generate(
+        out Terrain terrain,
+        out SortedDictionary<int, Room> rooms,
+        SSContext context,
+        int width,
+        int height,
+        Rand rand) {
       Pattern pattern = SquarePattern.MakeSquarePattern();
 
       context.root.GetDeterministicHashCode();
@@ -206,7 +214,8 @@ namespace IncendianFalls {
             roomNumber,
             new Room(
                 new AbsRowCol(roomOrigin.row + 2, roomOrigin.col + 2),
-                new SizeRowCol(roomSize.row - 4, roomSize.col - 4)));
+                new SizeRowCol(roomSize.row - 4, roomSize.col - 4),
+                false));
 
         //if (roomByNumber.Count >= 5) { // remove me
         //  break;
@@ -273,9 +282,8 @@ namespace IncendianFalls {
       }
       context.root.GetDeterministicHashCode();
 
-      var terrain = context.root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
-      context.root.GetDeterministicHashCode();
-      return terrain;
+      terrain = context.root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
+      rooms = roomByNumber;
     }
 
 
@@ -446,7 +454,7 @@ namespace IncendianFalls {
                   Math.Abs(startLocation.col - endLocation.col) + 1);
 
           int newRoomNumber = roomByNumber.Count;
-          roomByNumber.Add(newRoomNumber, new Room(origin, size));
+          roomByNumber.Add(newRoomNumber, new Room(origin, size, true));
           foreach (var pathLocation in horizontalPath) {
             canvas[pathLocation.row, pathLocation.col] = newRoomNumber;
           }
@@ -466,7 +474,7 @@ namespace IncendianFalls {
                   1);
 
           int newRoomNumber = roomByNumber.Count;
-          roomByNumber.Add(newRoomNumber, new Room(origin, size));
+          roomByNumber.Add(newRoomNumber, new Room(origin, size, true));
           foreach (var pathLocation in verticalPath) {
             canvas[pathLocation.row, pathLocation.col] = newRoomNumber;
           }

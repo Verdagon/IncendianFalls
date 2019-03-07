@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public class TerrainTileIncarnation {
   public  int elevation;
-  public readonly bool walkable;
+  public  bool walkable;
   public  string classId;
   public readonly int components;
   public TerrainTileIncarnation(

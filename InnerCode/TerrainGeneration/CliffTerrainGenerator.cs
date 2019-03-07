@@ -4,6 +4,19 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class CliffTerrainGenerator {
+    public class CliffHalf {
+      public SortedSet<Location> walkableLocs;
+      public SortedDictionary<int, Room> rooms;
+      public SortedSet<Location> roomLocs;
+
+      public CliffHalf(
+          SortedSet<Location> walkableLocs,
+          SortedDictionary<int, Room> rooms) {
+        this.walkableLocs = walkableLocs;
+        this.rooms = rooms;
+      }
+    }
+
     private class RoomMappingThing {
       Pattern pattern;
 
@@ -160,11 +173,14 @@ namespace IncendianFalls {
       }
     }
 
-    public static Terrain Generate(
+    public static void GenerateWithWaterfall(
+        out Terrain terrain,
+        out List<CliffHalf> halves,
         SSContext context,
         Rand rand,
         Pattern pattern,
-        int size) {
+        int size,
+        bool waterfallTopLeftToBottomRight) {
       float elevationStepHeight = .4f;
 
       // The "canvas" is the entire area of the level upon which we will
@@ -186,11 +202,11 @@ namespace IncendianFalls {
         Location location = canvasSearcher.Next();
         var tile =
             context.root.EffectTerrainTileCreate(
-                1, true, "magma", ITerrainTileComponentMutBunch.New(context.root));
+                1, false, "magma", ITerrainTileComponentMutBunch.New(context.root));
         tiles.Add(location, tile);
       }
 
-      var terrain = context.root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
+      terrain = context.root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
 
       // Between .74 and .75, pentagonal9 had tiles that had some neighbors with elevation
       // more than 2 above them. Going with .73 to be safe.
@@ -204,7 +220,7 @@ namespace IncendianFalls {
       //  }
       //}
 
-      var waterLocations = GetWaterfallLocations(rand, terrain);
+      var waterLocations = GetWaterfallLocations(rand, terrain, waterfallTopLeftToBottomRight);
       foreach (var waterLoc in waterLocations) {
         terrain.tiles[waterLoc].classId = "falls";
       }
@@ -234,20 +250,73 @@ namespace IncendianFalls {
       SetUtils.RemoveAll(unusedLocations, waterAndAdjacentLocations);
 
       var contiguousAreas = FindAllContiguous(terrain.pattern, false, unusedLocations);
-      Asserts.Assert(contiguousAreas.Count >= 2);
+      while (contiguousAreas.Count > 2) {
+        int smallestContiguousAreaNumLocs = 0;
+        int smallestContiguousAreaIndex = -1;
+        for (int i = 0; i < contiguousAreas.Count; i++) {
+          if (smallestContiguousAreaIndex == -1 ||
+              contiguousAreas[i].Count < smallestContiguousAreaNumLocs) {
+            smallestContiguousAreaIndex = i;
+            smallestContiguousAreaNumLocs = contiguousAreas[i].Count;
+          }
+        }
+        Asserts.Assert(smallestContiguousAreaIndex != -1);
+        contiguousAreas.RemoveAt(smallestContiguousAreaIndex);
+      }
+      Asserts.Assert(contiguousAreas.Count == 2);
 
-      foreach (var contiguousArea in contiguousAreas) {
+      // Fix the order of contiguousAreas, we want the higher side to be first.
+      Location lowLeftLoc = SetUtils.GetFirst(contiguousAreas[0]);
+      Vec2 lowLeftPos = pattern.GetTileCenter(lowLeftLoc);
+      foreach (var loc in terrain.tiles.Keys) {
+        var center = pattern.GetTileCenter(loc);
+        if (center.x + center.y < lowLeftPos.x + lowLeftPos.y) {
+          lowLeftPos = center;
+          lowLeftLoc = loc;
+        }
+      }
+      if (contiguousAreas[0].Contains(lowLeftLoc)) {
+        if (waterfallTopLeftToBottomRight) {
+          var tmp = contiguousAreas[0];
+          contiguousAreas[0] = contiguousAreas[1];
+          contiguousAreas[1] = tmp;
+        } else {
+          // Nothing
+        }
+      } else { // lowLeftLoc is in contiguousAreas[1]
+        Asserts.Assert(contiguousAreas[1].Contains(lowLeftLoc));
+
+        if (waterfallTopLeftToBottomRight) {
+
+        } else {
+          var tmp = contiguousAreas[0];
+          contiguousAreas[0] = contiguousAreas[1];
+          contiguousAreas[1] = tmp;
+        }
+      }
+
+      halves = new List<CliffHalf>();
+      List<List<Room>> roomsByContiguousArea = new List<List<Room>>();
+      for (int i = 0; i < contiguousAreas.Count; i++) {
+        var contiguousArea = contiguousAreas[i];
         var roomByNumber = FindRooms(context, rand, terrain, contiguousArea);
         FlattenRooms(terrain, roomByNumber);
         ConnectRooms(pattern, rand, contiguousArea, roomByNumber);
         SetRoomsTiles(terrain, roomByNumber);
-      }
 
-      return terrain;
+        SortedSet<Location> walkableLocsInThisArea = new SortedSet<Location>();
+        foreach (var loc in contiguousArea) {
+          if (terrain.tiles[loc].walkable) {
+            walkableLocsInThisArea.Add(loc);
+          }
+        }
+
+        halves.Add(new CliffHalf(walkableLocsInThisArea, roomByNumber));
+      }
     }
 
     private static SortedSet<Location> GetWaterfallLocations(
-        Rand rand, Terrain terrain) {
+        Rand rand, Terrain terrain, bool topLeftToBottomRight) {
 
       GenerationCommon.GetMapBounds(
           out float mapMinX,
@@ -280,7 +349,6 @@ namespace IncendianFalls {
       // The thicker lines between the x's, riverWidth wide, are the "arms".
 
       Vec2[] riverElbowPositions;
-      bool topLeftToBottomRight = rand.Next() % 2 == 0;
       if (topLeftToBottomRight) {
         riverElbowPositions = new Vec2[5] {
           new Vec2(mapMinX + mapWidth * (0.33f + rand.Next(-.05f, .05f, 1000)), mapMinY + mapHeight * 1.0f),
@@ -418,6 +486,7 @@ namespace IncendianFalls {
         if (room.border != null) {
           foreach (var roomFloorLocation in room.border) {
             terrain.tiles[roomFloorLocation].classId = "cliff";
+            terrain.tiles[roomFloorLocation].walkable = true;
           }
         }
       }
@@ -425,10 +494,12 @@ namespace IncendianFalls {
         if (room.border == null) {
           foreach (var roomFloorLocation in room.floors) {
             terrain.tiles[roomFloorLocation].classId = "cliff";
+            terrain.tiles[roomFloorLocation].walkable = true;
           }
         } else {
           foreach (var roomFloorLocation in room.floors) {
             terrain.tiles[roomFloorLocation].classId = "clifflanding";
+            terrain.tiles[roomFloorLocation].walkable = true;
           }
         }
       }

@@ -23,10 +23,10 @@ namespace IncendianFalls {
 
     delegate float GetDistInEyeDirection(Location loc);
 
-    public static void slopify(Terrain terrain, Vec2 eyeDirection, float slope) {
+    public static void slopify(Terrain terrain, Vec2 directionToEye, float slope) {
       GetDistInEyeDirection getDistInEyeDirection = delegate (Location loc) {
         Vec2 center = terrain.pattern.GetTileCenter(loc);
-        return center.dot(eyeDirection);
+        return center.dot(directionToEye);
       };
 
       var locationFurthestInEyeDirection = new Location(0, 0, 0);
@@ -65,7 +65,7 @@ namespace IncendianFalls {
       foreach (var locationAndTile in terrain.tiles) {
         var tile = locationAndTile.Value;
 
-        var heightIncrease = rand.Next() % (range - 1);
+        var heightIncrease = rand.Next() % range;
         var height = tile.elevation + heightIncrease;
         tile.elevation = height;
       }
@@ -73,7 +73,7 @@ namespace IncendianFalls {
   }
 
 
-  class Room {
+  public class Room {
     public readonly SortedSet<Location> floors;
     public readonly SortedSet<Location> border;
 

@@ -63,6 +63,7 @@ public class TerrainTile {
   }
   public bool walkable {
     get { return incarnation.walkable; }
+    set { root.EffectTerrainTileSetWalkable(id, value); }
   }
   public string classId {
     get { return incarnation.classId; }

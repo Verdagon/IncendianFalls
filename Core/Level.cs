@@ -85,6 +85,9 @@ public class Level {
       return new UnitMutSet(root, incarnation.units);
     }
                        }
+  public int depth {
+    get { return incarnation.depth; }
+  }
   public ILevelController controller {
     get { return root.GetILevelController(incarnation.controller); }
     set { root.EffectLevelSetController(id, value); }

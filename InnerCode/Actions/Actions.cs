@@ -62,42 +62,49 @@ namespace IncendianFalls {
       unit.nextActionTime = unit.nextActionTime + unit.inertia;
     }
 
-    private static bool TileHasDownStaircase(
-        SSContext context,
-        Game game,
-        Location location) {
-      foreach (var thing in game.level.terrain.tiles[location].components) {
-        if (thing is DownStaircaseTTCAsITerrainTileComponent down) {
-          return true;
-        }
-      }
-      return false;
-    }
-
     public static bool Interact(
         SSContext context,
         Game game,
         Superstate superstate,
         Unit unit) {
-      if (TileHasDownStaircase(context, game, unit.location)) {
-        string levelName = "Falls" + game.levels.Count;
+      var staircase = game.level.terrain.tiles[unit.location].components.GetOnlyStaircaseTTCOrNull();
+      if (staircase != null) {
+        var previousLevel = game.level;
+        var previousLevelPortalIndex = staircase.portalIndex;
 
         // Move the player from this level to the next one.
-        game.level.ExitUnit(game, superstate.levelSuperstate, unit);
+        if (!staircase.destinationLevel.Exists()) {
+          game.level.ExitUnit(game, superstate.levelSuperstate, unit);
 
-        MakeLevel.MakeNextLevel(
-            out var nextLevel,
-            out var nextLevelSuperstate,
-            context,
-            game,
-            superstate,
-            game.levels.Count);
-        game.levels.Add(nextLevel);
+          MakeLevel.MakeNextLevel(
+              out var nextLevel,
+              out var nextLevelSuperstate,
+              context,
+              game,
+              superstate,
+              game.level,
+              game.level.depth + 1);
+          game.levels.Add(nextLevel);
 
-        game.level = nextLevel;
-        superstate.levelSuperstate = nextLevelSuperstate;
+          game.level = nextLevel;
+          superstate.levelSuperstate = nextLevelSuperstate;
 
-        game.level.EnterUnit(game, superstate.levelSuperstate, unit);
+          staircase.destinationLevel = nextLevel;
+          staircase.destinationLevelPortalIndex = 0;
+
+          game.level.EnterUnit(game, superstate.levelSuperstate, unit, previousLevel, previousLevelPortalIndex);
+        } else {
+          game.level.ExitUnit(game, superstate.levelSuperstate, unit);
+
+          game.level = staircase.destinationLevel;
+          superstate.levelSuperstate = new LevelSuperstate(game.level);
+
+          game.level.EnterUnit(game, superstate.levelSuperstate, unit, previousLevel, previousLevelPortalIndex);
+
+          foreach (var nativeUnit in game.level.units) {
+            nativeUnit.nextActionTime = game.time + 10;
+          }
+        }
 
         // Note how we are NOT setting unit.nextActionTime here. That's because
         // we want the player to have the first action after they descend.
