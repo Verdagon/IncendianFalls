@@ -146,6 +146,13 @@ public class Root {
   readonly List<HealthPotionDeleteEffect> effectsHealthPotionDeleteEffect =
       new List<HealthPotionDeleteEffect>();
 
+  readonly SortedDictionary<int, List<IInertiaRingEffectObserver>> observersForInertiaRing =
+      new SortedDictionary<int, List<IInertiaRingEffectObserver>>();
+  readonly List<InertiaRingCreateEffect> effectsInertiaRingCreateEffect =
+      new List<InertiaRingCreateEffect>();
+  readonly List<InertiaRingDeleteEffect> effectsInertiaRingDeleteEffect =
+      new List<InertiaRingDeleteEffect>();
+
   readonly SortedDictionary<int, List<IGlaiveEffectObserver>> observersForGlaive =
       new SortedDictionary<int, List<IGlaiveEffectObserver>>();
   readonly List<GlaiveCreateEffect> effectsGlaiveCreateEffect =
@@ -487,6 +494,17 @@ public class Root {
   readonly List<ArmorMutSetRemoveEffect> effectsArmorMutSetRemoveEffect =
       new List<ArmorMutSetRemoveEffect>();
 
+  readonly SortedDictionary<int, List<IInertiaRingMutSetEffectObserver>> observersForInertiaRingMutSet =
+      new SortedDictionary<int, List<IInertiaRingMutSetEffectObserver>>();
+  readonly List<InertiaRingMutSetCreateEffect> effectsInertiaRingMutSetCreateEffect =
+      new List<InertiaRingMutSetCreateEffect>();
+  readonly List<InertiaRingMutSetDeleteEffect> effectsInertiaRingMutSetDeleteEffect =
+      new List<InertiaRingMutSetDeleteEffect>();
+  readonly List<InertiaRingMutSetAddEffect> effectsInertiaRingMutSetAddEffect =
+      new List<InertiaRingMutSetAddEffect>();
+  readonly List<InertiaRingMutSetRemoveEffect> effectsInertiaRingMutSetRemoveEffect =
+      new List<InertiaRingMutSetRemoveEffect>();
+
   readonly SortedDictionary<int, List<IGlaiveMutSetEffectObserver>> observersForGlaiveMutSet =
       new SortedDictionary<int, List<IGlaiveMutSetEffectObserver>>();
   readonly List<GlaiveMutSetCreateEffect> effectsGlaiveMutSetCreateEffect =
@@ -799,6 +817,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsHealthPotion) {
       result += GetHealthPotionHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsInertiaRing) {
+      result += GetInertiaRingHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsGlaive) {
       result += GetGlaiveHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -916,6 +937,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsArmorMutSet) {
       result += GetArmorMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsInertiaRingMutSet) {
+      result += GetInertiaRingMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsGlaiveMutSet) {
       result += GetGlaiveMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1016,6 +1040,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllHealthPotion()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllInertiaRing()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllGlaive()) {
@@ -1133,6 +1160,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllArmorMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllInertiaRingMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllGlaiveMutSet()) {
@@ -1264,6 +1294,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllInertiaRing()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllGlaive()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -1455,6 +1490,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllArmorMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllInertiaRingMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1714,6 +1754,17 @@ public class Root {
       copyOfObserversForHealthPotion.Add(
           objectId,
           new List<IHealthPotionEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForInertiaRing =
+        new SortedDictionary<int, List<IInertiaRingEffectObserver>>();
+    foreach (var entry in observersForInertiaRing) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForInertiaRing.Add(
+          objectId,
+          new List<IInertiaRingEffectObserver>(
               observers));
     }
 
@@ -2146,6 +2197,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForInertiaRingMutSet =
+        new SortedDictionary<int, List<IInertiaRingMutSetEffectObserver>>();
+    foreach (var entry in observersForInertiaRingMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForInertiaRingMutSet.Add(
+          objectId,
+          new List<IInertiaRingMutSetEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForGlaiveMutSet =
         new SortedDictionary<int, List<IGlaiveMutSetEffectObserver>>();
     foreach (var entry in observersForGlaiveMutSet) {
@@ -2386,6 +2448,9 @@ public class Root {
     BroadcastHealthPotionEffects(
         copyOfObserversForHealthPotion);
            
+    BroadcastInertiaRingEffects(
+        copyOfObserversForInertiaRing);
+           
     BroadcastGlaiveEffects(
         copyOfObserversForGlaive);
            
@@ -2502,6 +2567,9 @@ public class Root {
            
     BroadcastArmorMutSetEffects(
         copyOfObserversForArmorMutSet);
+           
+    BroadcastInertiaRingMutSetEffects(
+        copyOfObserversForInertiaRingMutSet);
            
     BroadcastGlaiveMutSetEffects(
         copyOfObserversForGlaiveMutSet);
@@ -2710,6 +2778,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsHealthPotion.ContainsKey(sourceObjId)) {
         EffectInternalCreateHealthPotion(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsInertiaRing) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsInertiaRing.ContainsKey(sourceObjId)) {
+        EffectInternalCreateInertiaRing(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3100,6 +3178,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsArmorMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateArmorMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsInertiaRingMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsInertiaRingMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateInertiaRingMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3522,6 +3610,34 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsArmorMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsInertiaRingMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsInertiaRingMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsInertiaRingMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectInertiaRingMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectInertiaRingMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsInertiaRingMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -4355,6 +4471,27 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsInertiaRing) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsInertiaRing.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsInertiaRing[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsInertiaRing[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGlaive) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -5147,6 +5284,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<InertiaRingIncarnation>>(rootIncarnation.incarnationsInertiaRing)) {
+      if (!sourceIncarnation.incarnationsInertiaRing.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectInertiaRingDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<GlaiveIncarnation>>(rootIncarnation.incarnationsGlaive)) {
       if (!sourceIncarnation.incarnationsGlaive.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -5417,6 +5561,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsArmorMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectArmorMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<InertiaRingMutSetIncarnation>>(rootIncarnation.incarnationsInertiaRingMutSet)) {
+      if (!sourceIncarnation.incarnationsInertiaRingMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectInertiaRingMutSetDelete(id);
       }
     }
 
@@ -6827,6 +6978,7 @@ public class Root {
   }
   public ITerrainTileComponentMutBunch EffectITerrainTileComponentMutBunchCreate(
       ArmorMutSet membersArmorMutSet,
+      InertiaRingMutSet membersInertiaRingMutSet,
       GlaiveMutSet membersGlaiveMutSet,
       ManaPotionMutSet membersManaPotionMutSet,
       HealthPotionMutSet membersHealthPotionMutSet,
@@ -6835,6 +6987,7 @@ public class Root {
       DecorativeTTCMutSet membersDecorativeTTCMutSet) {
     CheckUnlocked();
     CheckHasArmorMutSet(membersArmorMutSet);
+    CheckHasInertiaRingMutSet(membersInertiaRingMutSet);
     CheckHasGlaiveMutSet(membersGlaiveMutSet);
     CheckHasManaPotionMutSet(membersManaPotionMutSet);
     CheckHasHealthPotionMutSet(membersHealthPotionMutSet);
@@ -6846,6 +6999,7 @@ public class Root {
     var incarnation =
         new ITerrainTileComponentMutBunchIncarnation(
             membersArmorMutSet.id,
+            membersInertiaRingMutSet.id,
             membersGlaiveMutSet.id,
             membersManaPotionMutSet.id,
             membersHealthPotionMutSet.id,
@@ -6885,12 +7039,13 @@ public class Root {
   public int GetITerrainTileComponentMutBunchHash(int id, int version, ITerrainTileComponentMutBunchIncarnation incarnation) {
     int result = id * version;
     result += id * version * 1 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.membersTimeAnchorTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersStaircaseTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.membersDecorativeTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersInertiaRingMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersTimeAnchorTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersStaircaseTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersDecorativeTTCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -7697,6 +7852,134 @@ public class Root {
       }
     }
     effectsHealthPotionCreateEffect.Clear();
+  }
+  public InertiaRingIncarnation GetInertiaRingIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsInertiaRing[id].incarnation;
+  }
+  public bool InertiaRingExists(int id) {
+    return rootIncarnation.incarnationsInertiaRing.ContainsKey(id);
+  }
+  public InertiaRing GetInertiaRing(int id) {
+    return new InertiaRing(this, id);
+  }
+  public List<InertiaRing> AllInertiaRing() {
+    List<InertiaRing> result = new List<InertiaRing>(rootIncarnation.incarnationsInertiaRing.Count);
+    foreach (var id in rootIncarnation.incarnationsInertiaRing.Keys) {
+      result.Add(new InertiaRing(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<InertiaRing> EnumAllInertiaRing() {
+    foreach (var id in rootIncarnation.incarnationsInertiaRing.Keys) {
+      yield return GetInertiaRing(id);
+    }
+  }
+  public void CheckHasInertiaRing(InertiaRing thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasInertiaRing(thing.id);
+  }
+  public void CheckHasInertiaRing(int id) {
+    if (!rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
+      throw new System.Exception("Invalid InertiaRing: " + id);
+    }
+  }
+  public void AddInertiaRingObserver(int id, IInertiaRingEffectObserver observer) {
+    List<IInertiaRingEffectObserver> obsies;
+    if (!observersForInertiaRing.TryGetValue(id, out obsies)) {
+      obsies = new List<IInertiaRingEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForInertiaRing[id] = obsies;
+  }
+
+  public void RemoveInertiaRingObserver(int id, IInertiaRingEffectObserver observer) {
+    if (observersForInertiaRing.ContainsKey(id)) {
+      var list = observersForInertiaRing[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForInertiaRing.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public InertiaRing EffectInertiaRingCreate(
+) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new InertiaRingIncarnation(
+
+            );
+    EffectInternalCreateInertiaRing(id, rootIncarnation.version, incarnation);
+    return new InertiaRing(this, id);
+  }
+  public void EffectInternalCreateInertiaRing(
+      int id,
+      int incarnationVersion,
+      InertiaRingIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new InertiaRingCreateEffect(id);
+    rootIncarnation.incarnationsInertiaRing.Add(
+        id,
+        new VersionAndIncarnation<InertiaRingIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsInertiaRingCreateEffect.Add(effect);
+  }
+
+  public void EffectInertiaRingDelete(int id) {
+    CheckUnlocked();
+    var effect = new InertiaRingDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsInertiaRing[id];
+
+    rootIncarnation.incarnationsInertiaRing.Remove(id);
+    effectsInertiaRingDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetInertiaRingHash(int id, int version, InertiaRingIncarnation incarnation) {
+    int result = id * version;
+    return result;
+  }
+     
+  public void BroadcastInertiaRingEffects(
+      SortedDictionary<int, List<IInertiaRingEffectObserver>> observers) {
+    foreach (var effect in effectsInertiaRingDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IInertiaRingEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnInertiaRingEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IInertiaRingEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnInertiaRingEffect(effect);
+        }
+        observersForInertiaRing.Remove(effect.id);
+      }
+    }
+    effectsInertiaRingDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsInertiaRingCreateEffect) {
+      if (observers.TryGetValue(0, out List<IInertiaRingEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnInertiaRingEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IInertiaRingEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnInertiaRingEffect(effect);
+        }
+      }
+    }
+    effectsInertiaRingCreateEffect.Clear();
   }
   public GlaiveIncarnation GetGlaiveIncarnation(int id) {
     if (id == 0) {
@@ -11265,6 +11548,7 @@ public class Root {
   }
   public IUnitComponentMutBunch EffectIUnitComponentMutBunchCreate(
       ArmorMutSet membersArmorMutSet,
+      InertiaRingMutSet membersInertiaRingMutSet,
       GlaiveMutSet membersGlaiveMutSet,
       ManaPotionMutSet membersManaPotionMutSet,
       HealthPotionMutSet membersHealthPotionMutSet,
@@ -11280,6 +11564,7 @@ public class Root {
       BidingOperationUCMutSet membersBidingOperationUCMutSet) {
     CheckUnlocked();
     CheckHasArmorMutSet(membersArmorMutSet);
+    CheckHasInertiaRingMutSet(membersInertiaRingMutSet);
     CheckHasGlaiveMutSet(membersGlaiveMutSet);
     CheckHasManaPotionMutSet(membersManaPotionMutSet);
     CheckHasHealthPotionMutSet(membersHealthPotionMutSet);
@@ -11298,6 +11583,7 @@ public class Root {
     var incarnation =
         new IUnitComponentMutBunchIncarnation(
             membersArmorMutSet.id,
+            membersInertiaRingMutSet.id,
             membersGlaiveMutSet.id,
             membersManaPotionMutSet.id,
             membersHealthPotionMutSet.id,
@@ -11344,19 +11630,20 @@ public class Root {
   public int GetIUnitComponentMutBunchHash(int id, int version, IUnitComponentMutBunchIncarnation incarnation) {
     int result = id * version;
     result += id * version * 1 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.membersTimeScriptDirectiveUCMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersKillDirectiveUCMutSet.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.membersMoveDirectiveUCMutSet.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.membersWanderAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.membersShieldingUCMutSet.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.membersBidingOperationUCMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersInertiaRingMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersTimeScriptDirectiveUCMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersKillDirectiveUCMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersMoveDirectiveUCMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersWanderAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 13 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.membersShieldingUCMutSet.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.membersBidingOperationUCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -12470,6 +12757,9 @@ public class Root {
     if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
       return new ArmorAsITerrainTileComponent(new Armor(this, id));
     }
+    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
+      return new InertiaRingAsITerrainTileComponent(new InertiaRing(this, id));
+    }
     if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
       return new GlaiveAsITerrainTileComponent(new Glaive(this, id));
     }
@@ -12493,6 +12783,9 @@ public class Root {
   public ITerrainTileComponent GetITerrainTileComponentOrNull(int id) {
     if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
       return new ArmorAsITerrainTileComponent(new Armor(this, id));
+    }
+    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
+      return new InertiaRingAsITerrainTileComponent(new InertiaRing(this, id));
     }
     if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
       return new GlaiveAsITerrainTileComponent(new Glaive(this, id));
@@ -12544,6 +12837,28 @@ public class Root {
   }
   public void CheckHasIDefenseItem(int id) {
     GetIDefenseItem(id);
+  }
+
+  public IInertiaItem GetIInertiaItem(int id) {
+    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
+      return new InertiaRingAsIInertiaItem(new InertiaRing(this, id));
+    }
+    throw new Exception("Unknown IInertiaItem: " + id);
+  }
+  public IInertiaItem GetIInertiaItemOrNull(int id) {
+    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
+      return new InertiaRingAsIInertiaItem(new InertiaRing(this, id));
+    }
+    return NullIInertiaItem.Null;
+  }
+  public bool IInertiaItemExists(int id) {
+    return GetIInertiaItemOrNull(id) != null;
+  }
+  public void CheckHasIInertiaItem(IInertiaItem thing) {
+    GetIInertiaItem(thing.id);
+  }
+  public void CheckHasIInertiaItem(int id) {
+    GetIInertiaItem(id);
   }
 
   public IOffenseItem GetIOffenseItem(int id) {
@@ -12600,6 +12915,9 @@ public class Root {
     if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
       return new ArmorAsIItem(new Armor(this, id));
     }
+    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
+      return new InertiaRingAsIItem(new InertiaRing(this, id));
+    }
     if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
       return new GlaiveAsIItem(new Glaive(this, id));
     }
@@ -12614,6 +12932,9 @@ public class Root {
   public IItem GetIItemOrNull(int id) {
     if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
       return new ArmorAsIItem(new Armor(this, id));
+    }
+    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
+      return new InertiaRingAsIItem(new InertiaRing(this, id));
     }
     if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
       return new GlaiveAsIItem(new Glaive(this, id));
@@ -12842,6 +13163,9 @@ public class Root {
     if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
       return new ArmorAsIUnitComponent(new Armor(this, id));
     }
+    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
+      return new InertiaRingAsIUnitComponent(new InertiaRing(this, id));
+    }
     if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
       return new GlaiveAsIUnitComponent(new Glaive(this, id));
     }
@@ -12886,6 +13210,9 @@ public class Root {
   public IUnitComponent GetIUnitComponentOrNull(int id) {
     if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
       return new ArmorAsIUnitComponent(new Armor(this, id));
+    }
+    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
+      return new InertiaRingAsIUnitComponent(new InertiaRing(this, id));
     }
     if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
       return new GlaiveAsIUnitComponent(new Glaive(this, id));
@@ -13033,6 +13360,9 @@ public class Root {
     if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
       return new ArmorAsIDestructible(new Armor(this, id));
     }
+    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
+      return new InertiaRingAsIDestructible(new InertiaRing(this, id));
+    }
     if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
       return new GlaiveAsIDestructible(new Glaive(this, id));
     }
@@ -13122,6 +13452,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
       return new ArmorAsIDestructible(new Armor(this, id));
+    }
+    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
+      return new InertiaRingAsIDestructible(new InertiaRing(this, id));
     }
     if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
       return new GlaiveAsIDestructible(new Glaive(this, id));
@@ -14893,6 +15226,193 @@ public class Root {
       }
     }
     effectsArmorMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetInertiaRingMutSetHash(int id, int version, InertiaRingMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public InertiaRingMutSetIncarnation GetInertiaRingMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsInertiaRingMutSet[id].incarnation;
+    }
+    public InertiaRingMutSet GetInertiaRingMutSet(int id) {
+      return new InertiaRingMutSet(this, id);
+    }
+    public List<InertiaRingMutSet> AllInertiaRingMutSet() {
+      List<InertiaRingMutSet> result = new List<InertiaRingMutSet>(rootIncarnation.incarnationsInertiaRingMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsInertiaRingMutSet.Keys) {
+        result.Add(new InertiaRingMutSet(this, id));
+      }
+      return result;
+    }
+    public bool InertiaRingMutSetExists(int id) {
+      return rootIncarnation.incarnationsInertiaRingMutSet.ContainsKey(id);
+    }
+    public void CheckHasInertiaRingMutSet(InertiaRingMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasInertiaRingMutSet(thing.id);
+    }
+    public void CheckHasInertiaRingMutSet(int id) {
+      if (!rootIncarnation.incarnationsInertiaRingMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid InertiaRingMutSet}: " + id);
+      }
+    }
+    public InertiaRingMutSet EffectInertiaRingMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new InertiaRingMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateInertiaRingMutSet(id, rootIncarnation.version, incarnation);
+      return new InertiaRingMutSet(this, id);
+    }
+    public void EffectInternalCreateInertiaRingMutSet(int id, int incarnationVersion, InertiaRingMutSetIncarnation incarnation) {
+      var effect = new InertiaRingMutSetCreateEffect(id);
+      rootIncarnation.incarnationsInertiaRingMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<InertiaRingMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsInertiaRingMutSetCreateEffect.Add(effect);
+    }
+    public void EffectInertiaRingMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new InertiaRingMutSetDeleteEffect(id);
+      effectsInertiaRingMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsInertiaRingMutSet[id];
+      rootIncarnation.incarnationsInertiaRingMutSet.Remove(id);
+    }
+
+       
+    public void EffectInertiaRingMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasInertiaRingMutSet(setId);
+      CheckHasInertiaRing(elementId);
+
+      var effect = new InertiaRingMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsInertiaRingMutSet[setId];
+      Asserts.Assert(!oldIncarnationAndVersion.incarnation.set.Contains(elementId));
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new InertiaRingMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsInertiaRingMutSet[setId] =
+            new VersionAndIncarnation<InertiaRingMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsInertiaRingMutSetAddEffect.Add(effect);
+    }
+    public void EffectInertiaRingMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasInertiaRingMutSet(setId);
+      CheckHasInertiaRing(elementId);
+
+      var effect = new InertiaRingMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsInertiaRingMutSet[setId];
+      Asserts.Assert(oldIncarnationAndVersion.incarnation.set.Contains(elementId));
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new InertiaRingMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsInertiaRingMutSet[setId] =
+            new VersionAndIncarnation<InertiaRingMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsInertiaRingMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddInertiaRingMutSetObserver(int id, IInertiaRingMutSetEffectObserver observer) {
+      List<IInertiaRingMutSetEffectObserver> obsies;
+      if (!observersForInertiaRingMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IInertiaRingMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForInertiaRingMutSet[id] = obsies;
+    }
+
+    public void RemoveInertiaRingMutSetObserver(int id, IInertiaRingMutSetEffectObserver observer) {
+      if (observersForInertiaRingMutSet.ContainsKey(id)) {
+        var list = observersForInertiaRingMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForInertiaRingMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastInertiaRingMutSetEffects(
+      SortedDictionary<int, List<IInertiaRingMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsInertiaRingMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IInertiaRingMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnInertiaRingMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IInertiaRingMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnInertiaRingMutSetEffect(effect);
+        }
+        observersForInertiaRingMutSet.Remove(effect.id);
+      }
+    }
+    effectsInertiaRingMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsInertiaRingMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IInertiaRingMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnInertiaRingMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IInertiaRingMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnInertiaRingMutSetEffect(effect);
+        }
+      }
+    }
+    effectsInertiaRingMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsInertiaRingMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IInertiaRingMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnInertiaRingMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IInertiaRingMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnInertiaRingMutSetEffect(effect);
+        }
+      }
+    }
+    effectsInertiaRingMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsInertiaRingMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IInertiaRingMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnInertiaRingMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IInertiaRingMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnInertiaRingMutSetEffect(effect);
+        }
+      }
+    }
+    effectsInertiaRingMutSetCreateEffect.Clear();
 
   }
 

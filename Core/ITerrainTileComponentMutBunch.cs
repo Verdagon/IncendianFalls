@@ -39,6 +39,10 @@ public class ITerrainTileComponentMutBunch {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersArmorMutSet");
     }
 
+    if (!root.InertiaRingMutSetExists(membersInertiaRingMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersInertiaRingMutSet");
+    }
+
     if (!root.GlaiveMutSetExists(membersGlaiveMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersGlaiveMutSet");
     }
@@ -70,6 +74,9 @@ public class ITerrainTileComponentMutBunch {
     foundIds.Add(id);
     if (root.ArmorMutSetExists(membersArmorMutSet.id)) {
       membersArmorMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.InertiaRingMutSetExists(membersInertiaRingMutSet.id)) {
+      membersInertiaRingMutSet.FindReachableObjects(foundIds);
     }
     if (root.GlaiveMutSetExists(membersGlaiveMutSet.id)) {
       membersGlaiveMutSet.FindReachableObjects(foundIds);
@@ -106,6 +113,15 @@ public class ITerrainTileComponentMutBunch {
         throw new Exception("Tried to get member membersArmorMutSet of null!");
       }
       return new ArmorMutSet(root, incarnation.membersArmorMutSet);
+    }
+                       }
+  public InertiaRingMutSet membersInertiaRingMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersInertiaRingMutSet of null!");
+      }
+      return new InertiaRingMutSet(root, incarnation.membersInertiaRingMutSet);
     }
                        }
   public GlaiveMutSet membersGlaiveMutSet {
@@ -167,6 +183,8 @@ public class ITerrainTileComponentMutBunch {
     return root.EffectITerrainTileComponentMutBunchCreate(
       root.EffectArmorMutSetCreate()
 ,
+      root.EffectInertiaRingMutSetCreate()
+,
       root.EffectGlaiveMutSetCreate()
 ,
       root.EffectManaPotionMutSetCreate()
@@ -185,6 +203,12 @@ public class ITerrainTileComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.ArmorExists(elementI.id)) {
       this.membersArmorMutSet.Add(root.GetArmor(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.InertiaRingExists(elementI.id)) {
+      this.membersInertiaRingMutSet.Add(root.GetInertiaRing(elementI.id));
       return;
     }
 
@@ -234,6 +258,12 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.InertiaRingExists(elementI.id)) {
+      this.membersInertiaRingMutSet.Remove(root.GetInertiaRing(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.GlaiveExists(elementI.id)) {
       this.membersGlaiveMutSet.Remove(root.GetGlaive(elementI.id));
       return;
@@ -272,6 +302,7 @@ public class ITerrainTileComponentMutBunch {
   }
   public void Clear() {
     this.membersArmorMutSet.Clear();
+    this.membersInertiaRingMutSet.Clear();
     this.membersGlaiveMutSet.Clear();
     this.membersManaPotionMutSet.Clear();
     this.membersHealthPotionMutSet.Clear();
@@ -283,6 +314,7 @@ public class ITerrainTileComponentMutBunch {
     get {
       return
         this.membersArmorMutSet.Count +
+        this.membersInertiaRingMutSet.Count +
         this.membersGlaiveMutSet.Count +
         this.membersManaPotionMutSet.Count +
         this.membersHealthPotionMutSet.Count +
@@ -301,6 +333,7 @@ public class ITerrainTileComponentMutBunch {
 
   public void Destruct() {
     var tempMembersArmorMutSet = this.membersArmorMutSet;
+    var tempMembersInertiaRingMutSet = this.membersInertiaRingMutSet;
     var tempMembersGlaiveMutSet = this.membersGlaiveMutSet;
     var tempMembersManaPotionMutSet = this.membersManaPotionMutSet;
     var tempMembersHealthPotionMutSet = this.membersHealthPotionMutSet;
@@ -310,6 +343,7 @@ public class ITerrainTileComponentMutBunch {
 
     this.Delete();
     tempMembersArmorMutSet.Destruct();
+    tempMembersInertiaRingMutSet.Destruct();
     tempMembersGlaiveMutSet.Destruct();
     tempMembersManaPotionMutSet.Destruct();
     tempMembersHealthPotionMutSet.Destruct();
@@ -320,6 +354,9 @@ public class ITerrainTileComponentMutBunch {
   public IEnumerator<ITerrainTileComponent> GetEnumerator() {
     foreach (var element in this.membersArmorMutSet) {
       yield return new ArmorAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersInertiaRingMutSet) {
+      yield return new InertiaRingAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersGlaiveMutSet) {
       yield return new GlaiveAsITerrainTileComponent(element);
@@ -359,6 +396,27 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return Armor.Null;
+      }
+    }
+    public List<InertiaRing> GetAllInertiaRing() {
+      var result = new List<InertiaRing>();
+      foreach (var thing in this.membersInertiaRingMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<InertiaRing> ClearAllInertiaRing() {
+      var result = new List<InertiaRing>();
+      this.membersInertiaRingMutSet.Clear();
+      return result;
+    }
+    public InertiaRing GetOnlyInertiaRingOrNull() {
+      var result = GetAllInertiaRing();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return InertiaRing.Null;
       }
     }
     public List<Glaive> GetAllGlaive() {
@@ -487,29 +545,7 @@ public class ITerrainTileComponentMutBunch {
         return DecorativeTTC.Null;
       }
     }
-    public List<IDefenseItem> GetAllIDefenseItem() {
-      var result = new List<IDefenseItem>();
-      foreach (var obj in this.membersArmorMutSet) {
-        result.Add(
-            new ArmorAsIDefenseItem(obj));
-      }
-      return result;
-    }
-    public List<IDefenseItem> ClearAllIDefenseItem() {
-      var result = new List<IDefenseItem>();
-      this.membersArmorMutSet.Clear();
-      return result;
-    }
-    public IDefenseItem GetOnlyIDefenseItemOrNull() {
-      var result = GetAllIDefenseItem();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return NullIDefenseItem.Null;
-      }
-    }
-                 public List<IOffenseItem> GetAllIOffenseItem() {
+    public List<IOffenseItem> GetAllIOffenseItem() {
       var result = new List<IOffenseItem>();
       foreach (var obj in this.membersGlaiveMutSet) {
         result.Add(
@@ -529,6 +565,92 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return NullIOffenseItem.Null;
+      }
+    }
+                 public List<IItem> GetAllIItem() {
+      var result = new List<IItem>();
+      foreach (var obj in this.membersArmorMutSet) {
+        result.Add(
+            new ArmorAsIItem(obj));
+      }
+      foreach (var obj in this.membersInertiaRingMutSet) {
+        result.Add(
+            new InertiaRingAsIItem(obj));
+      }
+      foreach (var obj in this.membersGlaiveMutSet) {
+        result.Add(
+            new GlaiveAsIItem(obj));
+      }
+      foreach (var obj in this.membersManaPotionMutSet) {
+        result.Add(
+            new ManaPotionAsIItem(obj));
+      }
+      foreach (var obj in this.membersHealthPotionMutSet) {
+        result.Add(
+            new HealthPotionAsIItem(obj));
+      }
+      return result;
+    }
+    public List<IItem> ClearAllIItem() {
+      var result = new List<IItem>();
+      this.membersArmorMutSet.Clear();
+      this.membersInertiaRingMutSet.Clear();
+      this.membersGlaiveMutSet.Clear();
+      this.membersManaPotionMutSet.Clear();
+      this.membersHealthPotionMutSet.Clear();
+      return result;
+    }
+    public IItem GetOnlyIItemOrNull() {
+      var result = GetAllIItem();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIItem.Null;
+      }
+    }
+                 public List<IInertiaItem> GetAllIInertiaItem() {
+      var result = new List<IInertiaItem>();
+      foreach (var obj in this.membersInertiaRingMutSet) {
+        result.Add(
+            new InertiaRingAsIInertiaItem(obj));
+      }
+      return result;
+    }
+    public List<IInertiaItem> ClearAllIInertiaItem() {
+      var result = new List<IInertiaItem>();
+      this.membersInertiaRingMutSet.Clear();
+      return result;
+    }
+    public IInertiaItem GetOnlyIInertiaItemOrNull() {
+      var result = GetAllIInertiaItem();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIInertiaItem.Null;
+      }
+    }
+                 public List<IDefenseItem> GetAllIDefenseItem() {
+      var result = new List<IDefenseItem>();
+      foreach (var obj in this.membersArmorMutSet) {
+        result.Add(
+            new ArmorAsIDefenseItem(obj));
+      }
+      return result;
+    }
+    public List<IDefenseItem> ClearAllIDefenseItem() {
+      var result = new List<IDefenseItem>();
+      this.membersArmorMutSet.Clear();
+      return result;
+    }
+    public IDefenseItem GetOnlyIDefenseItemOrNull() {
+      var result = GetAllIDefenseItem();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIDefenseItem.Null;
       }
     }
                  public List<IUsableItem> GetAllIUsableItem() {
@@ -556,43 +678,6 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return NullIUsableItem.Null;
-      }
-    }
-                 public List<IItem> GetAllIItem() {
-      var result = new List<IItem>();
-      foreach (var obj in this.membersArmorMutSet) {
-        result.Add(
-            new ArmorAsIItem(obj));
-      }
-      foreach (var obj in this.membersGlaiveMutSet) {
-        result.Add(
-            new GlaiveAsIItem(obj));
-      }
-      foreach (var obj in this.membersManaPotionMutSet) {
-        result.Add(
-            new ManaPotionAsIItem(obj));
-      }
-      foreach (var obj in this.membersHealthPotionMutSet) {
-        result.Add(
-            new HealthPotionAsIItem(obj));
-      }
-      return result;
-    }
-    public List<IItem> ClearAllIItem() {
-      var result = new List<IItem>();
-      this.membersArmorMutSet.Clear();
-      this.membersGlaiveMutSet.Clear();
-      this.membersManaPotionMutSet.Clear();
-      this.membersHealthPotionMutSet.Clear();
-      return result;
-    }
-    public IItem GetOnlyIItemOrNull() {
-      var result = GetAllIItem();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return NullIItem.Null;
       }
     }
              }

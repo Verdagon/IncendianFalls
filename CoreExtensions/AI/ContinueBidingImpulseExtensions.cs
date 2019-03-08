@@ -23,7 +23,7 @@ namespace Atharia.Model {
       } else {
         Asserts.Assert(false);
       }
-      unit.nextActionTime = unit.nextActionTime + unit.inertia;
+      unit.nextActionTime = unit.nextActionTime + unit.CalculateInertia();
       return false;
     }
   }

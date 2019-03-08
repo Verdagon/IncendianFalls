@@ -19,6 +19,7 @@ public interface IDefenseItem {
   IUnitComponent AsIUnitComponent();
   IItem AsIItem();
   int AffectIncomingDamage(int incomingDamage);
+  IItem ClonifyAndReturnNewReal(Root newRoot);
   Void Destruct();
 }
 }

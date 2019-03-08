@@ -4,6 +4,9 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class GenerationCommon {
+    public static readonly int TOTAL_NUM_LEVELS_BEFORE_BOSS = 5;
+    public static readonly int NUM_UNITS_PER_LEVEL = 30;
+
     public static void GetMapBounds(
         out float mapMinX,
         out float mapMinY,
@@ -63,7 +66,48 @@ namespace IncendianFalls {
       return closestLocation;
     }
 
-    public static void PlaceItems(SSContext context, Rand rand, Level level, LevelSuperstate levelSuperstate) {
+    private static void PlaceItemNextToEntry(
+        Level level,
+        Location entryLoc,
+        ITerrainTileComponent itc) {
+      foreach (var entryAdjLoc in level.terrain.GetAdjacentExistingLocations(entryLoc, false)) {
+        if (level.terrain.tiles[entryAdjLoc].walkable &&
+            level.terrain.GetElevationDifference(entryLoc, entryAdjLoc) <= 2) {
+          level.terrain.tiles[entryAdjLoc].components.Add(itc);
+          return;
+        }
+      }
+      level.root.logger.Error("Couldn't place item!");
+      itc.Destruct();
+    }
+
+    public static void PlaceItems(
+        SSContext context,
+        Rand rand,
+        Level level,
+        LevelSuperstate levelSuperstate,
+        int levelIndex,
+        Location entryLoc) {
+      if (LevelHasSpecial(levelIndex, .01f)) { //.21f)) {
+        PlaceItemNextToEntry(
+            level,
+            entryLoc,
+            context.root.EffectGlaiveCreate().AsITerrainTileComponent());
+      }
+      if (LevelHasSpecial(levelIndex, .01f)) { //.34f)) {
+        PlaceItemNextToEntry(
+            level,
+            entryLoc,
+            context.root.EffectArmorCreate().AsITerrainTileComponent());
+      }
+      if (LevelHasSpecial(levelIndex, .01f)) { //.53f)) {
+        PlaceItemNextToEntry(
+            level,
+            entryLoc,
+            context.root.EffectInertiaRingCreate().AsITerrainTileComponent());
+      }
+
+
       List<Location> healthLocs =
           levelSuperstate.GetNRandomWalkableLocations(
               level.terrain,
@@ -155,7 +199,7 @@ namespace IncendianFalls {
     }
 
     private static float Logistic(float stretchX, float shiftX, float stretchY, float x) {
-      return 1.0f / (1.0f + (float)Math.Pow(Math.E, (-(x - shiftX) / stretchX))) * stretchY;
+      return 1.0f / (1.0f + (float)Math.Pow(Math.E, -(x - shiftX) / stretchX)) * stretchY;
     }
 
     private static int RunWeight(Rand rand, float[] weights) {
@@ -184,70 +228,73 @@ namespace IncendianFalls {
       return results;
     }
 
+    private static bool LevelHasSpecial(int levelIndex, float specialGameFraction) {
+      float levelGameFractionStart = (float)levelIndex / TOTAL_NUM_LEVELS_BEFORE_BOSS;
+      float levelGameFractionEnd = (float)(levelIndex + 1) / TOTAL_NUM_LEVELS_BEFORE_BOSS;
+      return levelGameFractionStart <= specialGameFraction &&
+          specialGameFraction < levelGameFractionEnd;
+    }
+
     public static int[] DetermineUnitsForLevel(
         Rand rand,
-        int depth,
-        bool inside,
+        int levelIndex,
         int numUnits) {
 
-      float aveliskWeight = Normal(8, 0, 1f, depth);
-      float ravafaireWeight = Normal(8, 8, 1f, depth);
-      float draxlingWeight = Normal(8, 12, 1f, depth);
-      float lornixWeight = depth < 7 ? 0 : Logistic(4, 10, 1, depth);
-      float yotenWeight = depth < 8 ? 0 : Logistic(2, 14, 1, depth);
-      float mordranthWeight = depth < 10 ? 0 : Logistic(1, 14, .5f, depth);
+      float levelGameFraction = (float)levelIndex / TOTAL_NUM_LEVELS_BEFORE_BOSS;
+
+      float aveliskWeight = Normal(.4f, 0, 1f, levelGameFraction);
+      float novafaireWeight = Normal(.4f, .4f, 1f, levelGameFraction);
+      float draxlingWeight = Normal(.4f, .5f, 1f, levelGameFraction);
+      float lornixWeight = levelGameFraction < .35 ? 0 : Logistic(.2f, .3f, 1, levelGameFraction);
+      float yotenWeight = levelGameFraction < .4 ? 0 : Logistic(.2f, .5f, 1, levelGameFraction);
+      float mordranthWeight = levelGameFraction < .5 ? 0 : Logistic(.2f, .7f, 1.0f, levelGameFraction);
 
       int numAvelisk = 0;
-      int numRavafaire = 0;
+      int numNovafaire = 0;
       int numDraxling = 0;
       int numLornix = 0;
       int numYoten = 0;
       int numSpiriad = 0;
       int numMordranth = 0;
 
-      int depthAndCave = depth * (inside ? -1 : 1);
-      switch (depthAndCave) {
-        case -2:
-          numDraxling = 6;
-          break;
-        case -3:
-          numLornix = 1;
-          break;
-        case 4:
-          numYoten = 1;
-          break;
-        case -6:
-          numRavafaire = 5;
-          numLornix = 1;
-          break;
-        case 7:
-          numSpiriad = 1;
-          break;
-        case 8:
-          numRavafaire = 15;
-          break;
-        case -9:
-          numMordranth = 1;
-          break;
-        case -10:
-          numSpiriad = 1;
-          numRavafaire = 10;
-          break;
-        case 11:
-          numYoten = 1;
-          numDraxling = 10;
-          break;
-        case 15:
-          numYoten = 4;
-          break;
-        case 16:
-          numSpiriad = 2;
-          break;
+      if (LevelHasSpecial(levelIndex, .1f)) {
+        numDraxling += NUM_UNITS_PER_LEVEL / 12;
+      }
+      if (LevelHasSpecial(levelIndex, .19f)) {
+        numLornix += NUM_UNITS_PER_LEVEL / 20;
+      }
+      if (LevelHasSpecial(levelIndex, .28f)) {
+        numYoten += NUM_UNITS_PER_LEVEL / 20;
+      }
+      if (LevelHasSpecial(levelIndex, .37f)) {
+        numNovafaire += NUM_UNITS_PER_LEVEL / 4;
+        numLornix += NUM_UNITS_PER_LEVEL / 20;
+        numYoten += NUM_UNITS_PER_LEVEL / 20;
+      }
+      if (LevelHasSpecial(levelIndex, .46f)) {
+        numSpiriad += NUM_UNITS_PER_LEVEL / 20;
+      }
+      if (LevelHasSpecial(levelIndex, .55f)) {
+        numNovafaire += NUM_UNITS_PER_LEVEL;
+      }
+      if (LevelHasSpecial(levelIndex, .64f)) {
+        numMordranth += NUM_UNITS_PER_LEVEL / 20;
+      }
+      if (LevelHasSpecial(levelIndex, .73f)) {
+        numSpiriad += NUM_UNITS_PER_LEVEL / 10;
+        numNovafaire += NUM_UNITS_PER_LEVEL / 2;
+      }
+      if (LevelHasSpecial(levelIndex, .82f)) {
+        numYoten += NUM_UNITS_PER_LEVEL / 10;
+        numDraxling += NUM_UNITS_PER_LEVEL / 2;
+      }
+      if (LevelHasSpecial(levelIndex, .91f)) {
+        numSpiriad += NUM_UNITS_PER_LEVEL / 10;
       }
 
       int numPreorderedUnits =
           numAvelisk +
-          numRavafaire +
+          numNovafaire +
           numDraxling +
           numLornix +
           numYoten +
@@ -257,7 +304,7 @@ namespace IncendianFalls {
 
       float[] weights = {
         aveliskWeight,
-        ravafaireWeight,
+        novafaireWeight,
         draxlingWeight,
         lornixWeight,
         yotenWeight,
@@ -267,7 +314,7 @@ namespace IncendianFalls {
       int[] numAddedByUnit = RunWeights(rand, weights, numUnitsNeeded);
       return new int[] {
         numAddedByUnit[0] + numAvelisk,
-        numAddedByUnit[1] + numRavafaire,
+        numAddedByUnit[1] + numNovafaire,
         numAddedByUnit[2] + numDraxling,
         numAddedByUnit[3] + numLornix,
         numAddedByUnit[4] + numYoten,
@@ -281,14 +328,11 @@ namespace IncendianFalls {
         Game game,
         Level level,
         LevelSuperstate levelSuperstate,
-        int depth,
-        bool inside) {
+        int levelIndex) {
 
-      int numUnits = 30;
-
-      int[] numByUnit = DetermineUnitsForLevel(game.rand, depth, inside, numUnits);
+      int[] numByUnit = DetermineUnitsForLevel(game.rand, levelIndex, NUM_UNITS_PER_LEVEL);
       int numAvelisk = numByUnit[0];
-      int numRavafaire = numByUnit[1];
+      int numNovafaire = numByUnit[1];
       int numDraxling = numByUnit[2];
       int numLornix = numByUnit[3];
       int numYoten = numByUnit[4];
@@ -316,10 +360,11 @@ namespace IncendianFalls {
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
       }
 
-      for (int i = 0; i < numRavafaire; i++) {
+      for (int i = 0; i < numNovafaire; i++) {
         var components = IUnitComponentMutBunch.New(context.root);
         components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
         components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+        components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
         Unit unit =
             context.root.EffectUnitCreate(
                 context.root.EffectIUnitEventMutListCreate(),
@@ -327,13 +372,13 @@ namespace IncendianFalls {
                 0,
                 new Location(0, 0, 0),
                 "novafaire",
-                21, 21,
+                27, 27,
                 0, 0,
                 600,
                 game.time + 10,
                 components,
                 false,
-                4);
+                8);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
       }
 

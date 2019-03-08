@@ -52,8 +52,21 @@ namespace Atharia.Model {
             return game.root.EffectAttackImpulseCreate(1000, targetUnit).AsIImpulse();
           } else if (request is CounterRequestAsIRequest drC) {
             return game.root.EffectCounterImpulseCreate(1000).AsIImpulse();
+          } else if (request is InteractRequestAsIRequest irI) {
+            // Deciding time clones can't interact.
+            return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
           } else if (request is DefendRequestAsIRequest drI) {
             return game.root.EffectDefendImpulseCreate(1000).AsIImpulse();
+          } else if (request is FireRequestAsIRequest frI) {
+            var targetUnitId = frI.obj.targetUnitId;
+            var targetUnit = game.root.GetUnit(targetUnitId);
+            if (!targetUnit.Exists()) {
+              return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            }
+            if (!game.level.units.Contains(targetUnit)) {
+              return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            }
+            return game.root.EffectFireImpulseCreate(1000, targetUnit).AsIImpulse();
           } else {
             Asserts.Assert(false, request.DStr());
             return null;

@@ -12,6 +12,13 @@ namespace Atharia.Model {
       events.Destruct();
       return new Atharia.Model.Void();
     }
+    public static int CalculateInertia(this Unit unit) {
+      int val = unit.inertia;
+      foreach (var item in unit.components.GetAllIInertiaItem()) {
+        val = item.AffectInertia(val);
+      }
+      return val;
+    }
     public static IDirectiveUC GetDirectiveOrNull(this Unit unit) {
       return unit.components.GetOnlyIDirectiveUCOrNull();
     }

@@ -52,6 +52,10 @@ public class NullIItem : IItem {
     return NullIUnitComponent.Null;
   }
 
+  public IItem ClonifyAndReturnNewReal(Root newRoot) {
+    throw new Exception("Called ClonifyAndReturnNewReal on a null!");
+  }
+             
   public Void Destruct() {
     throw new Exception("Called Destruct on a null!");
   }

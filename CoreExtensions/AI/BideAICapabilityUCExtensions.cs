@@ -32,7 +32,8 @@ namespace Atharia.Model {
           return obj.root.EffectNoImpulseCreate().AsIImpulse();
         }
 
-        return obj.root.EffectStartBidingImpulseCreate(800).AsIImpulse();
+        int need = game.rand.Next() % 2 == 0 ? 800 : 400;
+        return obj.root.EffectStartBidingImpulseCreate(need).AsIImpulse();
       } else {
         if (bidingOperation.charge < 3) {
           return obj.root.EffectContinueBidingImpulseCreate(800).AsIImpulse();

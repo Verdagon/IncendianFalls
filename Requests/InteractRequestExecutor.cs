@@ -29,7 +29,9 @@ namespace IncendianFalls {
 
       bool success = Actions.Interact(context, game, superstate, game.player);
 
-      GameLoop.NoteUnitActed(game, game.player);
+      if (success) {
+        GameLoop.NoteUnitActed(game, game.player);
+      }
 
       return success;
     }

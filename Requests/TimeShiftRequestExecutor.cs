@@ -11,7 +11,7 @@ namespace IncendianFalls {
     // turn to the "newer" turn.
 
     private static int GetMpCost(int timeDifference) {
-      return 5 + timeDifference / 200;
+      return 5 + timeDifference / 600;
     }
 
     private static string CheckCanTimeshift(Game presentGame, RootIncarnation destinationIncarnation) {
@@ -180,6 +180,13 @@ namespace IncendianFalls {
                   true,
                   5);
           newPlayer.mp = newPlayer.mp - GetMpCost(futureGame.time - game.time);
+
+          foreach (var item in futurePlayer.components.GetAllIItem()) {
+            var newReal = item.ClonifyAndReturnNewReal(newPlayer.root);
+            if (newReal.Exists()) {
+              newPlayer.components.Add(newReal.AsIUnitComponent());
+            }
+          }
 
           Console.WriteLine("Made new player! ID " + newPlayer.id);
           game.level.units.Add(newPlayer);

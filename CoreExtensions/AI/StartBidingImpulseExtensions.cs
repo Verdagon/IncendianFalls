@@ -22,7 +22,7 @@ namespace Atharia.Model {
       unit.ReplaceOperation(
           obj.root.EffectBidingOperationUCCreate(1)
               .AsIOperationUC());
-      unit.nextActionTime = unit.nextActionTime + unit.inertia;
+      unit.nextActionTime = unit.nextActionTime + unit.CalculateInertia();
       return false;
     }
   }

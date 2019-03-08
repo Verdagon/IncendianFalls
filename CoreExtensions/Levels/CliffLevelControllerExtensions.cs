@@ -11,6 +11,7 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Level levelAbove,
+        int levelIndex,
         int depth) {
 
       bool waterfallTopLeftToBottomRight = game.rand.Next() % 2 == 0;
@@ -25,12 +26,15 @@ namespace Atharia.Model {
           //300,
           waterfallTopLeftToBottomRight);
 
+
       var units = context.root.EffectUnitMutSetCreate();
 
       cliffLevel =
           context.root.EffectLevelCreate(
               terrain, units, depth, NullILevelController.Null);
       levelSuperstate = new LevelSuperstate(cliffLevel);
+
+      game.levels.Add(cliffLevel);
 
       var controller =
           context.root.EffectCliffLevelControllerCreate(
@@ -50,6 +54,7 @@ namespace Atharia.Model {
             2,
             cliffLevel,
             3,
+            levelIndex + 1,
             depth);
       } else {
         PentagonalCaveLevelControllerExtensions.MakeLevel(
@@ -62,6 +67,7 @@ namespace Atharia.Model {
             2,
             cliffLevel,
             3,
+            levelIndex + 1,
             depth);
       }
 
@@ -119,19 +125,10 @@ namespace Atharia.Model {
         Asserts.Assert(CanReachLimited(cliffLevel, downStaircaseLocation, lowHalfCaveLocation));
       }
 
-      GenerationCommon.PlaceItems(context, game.rand, cliffLevel, levelSuperstate);
+      GenerationCommon.PlaceItems(context, game.rand, cliffLevel, levelSuperstate, levelIndex, upStaircaseLocation);
 
       GenerationCommon.FillWithUnits(
-          context, game, cliffLevel, levelSuperstate, depth, false);
-
-      if (depth == 2) {
-        var vampSwordLoc =
-            levelSuperstate.GetNRandomWalkableLocations(
-                terrain, game.rand, 1, true, true)[0];
-        terrain.tiles[vampSwordLoc].components.Add(
-            context.root.EffectGlaiveCreate()
-            .AsITerrainTileComponent());
-      }
+          context, game, cliffLevel, levelSuperstate, levelIndex);
 
       //}
     }

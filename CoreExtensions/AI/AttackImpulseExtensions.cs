@@ -20,7 +20,7 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
-      Actions.Bump(game, superstate, unit, obj.targetUnit, 1.0f);
+      Actions.Bump(game, superstate, unit, obj.targetUnit, 1.0f, true);
       return true;
     }
 

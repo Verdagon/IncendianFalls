@@ -17,6 +17,7 @@ public interface IItem {
   ITerrainTileComponent AsITerrainTileComponent();
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
+  IItem ClonifyAndReturnNewReal(Root newRoot);
   Void Destruct();
 }
 }

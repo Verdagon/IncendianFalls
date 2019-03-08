@@ -41,7 +41,7 @@ namespace IncendianFalls {
 
       player.ClearDirective();
 
-      Actions.Bump(game, superstate, game.player, victim, 1.0f);
+      Actions.Bump(game, superstate, game.player, victim, 1.0f, true);
 
       GameLoop.NoteUnitActed(game, game.player);
 

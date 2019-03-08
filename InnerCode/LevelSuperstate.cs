@@ -109,6 +109,14 @@ namespace Atharia.Model {
       return candidates;
     }
 
+    public Unit GetLiveUnitAt(Location loc) {
+      if (liveUnitByLocation.TryGetValue(loc, out Unit result)) {
+        return result;
+      } else {
+        return Unit.Null;
+      }
+    }
+
     public Unit FindNearestLiveUnit(
         Game game,
         Location nearestTo,

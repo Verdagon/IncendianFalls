@@ -19,7 +19,7 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
-      unit.nextActionTime = unit.nextActionTime + unit.inertia / 2;
+      unit.nextActionTime = unit.nextActionTime + unit.CalculateInertia() / 2;
       return false;
     }
   }

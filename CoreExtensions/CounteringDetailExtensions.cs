@@ -19,10 +19,9 @@ namespace Atharia.Model {
       if (!attacker.Exists()) {
         return false;
       }
-      game.root.logger.Error("Counterattacking!");
       unit.components.Remove(detail.AsIUnitComponent());
       detail.Destruct();
-      Actions.Bump(game, superstate, unit, attacker, 2.0f);
+      Actions.Bump(game, superstate, unit, attacker, 2.0f, false);
       unit.mp = unit.mp - 2;
       return true;
     }

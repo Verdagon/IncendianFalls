@@ -126,6 +126,9 @@ public class ArmorAsIItem : IItem {
          public Void Destruct() {
     return ArmorExtensions.Destruct(obj);
   }
+  public IItem ClonifyAndReturnNewReal(Root newRoot) {
+    return ArmorExtensions.ClonifyAndReturnNewReal(obj, newRoot);
+  }
 
 }
 public static class ArmorAsIItemCaster {

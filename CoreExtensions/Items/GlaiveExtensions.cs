@@ -17,5 +17,8 @@ namespace Atharia.Model {
       //glaive.root.logger.Info("Glaive:" + damage + "->" + newDamage);
       return newDamage;
     }
+    public static IItem ClonifyAndReturnNewReal(this Glaive glaive, Root newRoot) {
+      return newRoot.EffectGlaiveCreate().AsIItem();
+    }
   }
 }

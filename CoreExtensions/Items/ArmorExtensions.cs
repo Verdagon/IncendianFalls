@@ -13,8 +13,8 @@ namespace Atharia.Model {
       armor.root.logger.Info("Armor:" + damage + "->" + newDamage);
       return newDamage;
     }
-    public static int AffectOutgoingDamage(this Armor armor, int damage) {
-      return damage;
+    public static IItem ClonifyAndReturnNewReal(this Armor armor, Root newRoot) {
+      return newRoot.EffectArmorCreate().AsIItem();
     }
   }
 }

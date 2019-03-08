@@ -12,10 +12,10 @@ namespace IncendianFalls {
         Superstate superstate,
         Level levelAbove,
         int depth) {
-      int numCliffLevels = 10;
+      int numCliffLevels = GenerationCommon.TOTAL_NUM_LEVELS_BEFORE_BOSS * 2 / 3;
       int cliffLevelsEnd = numCliffLevels;
       int caveLevelsStart = cliffLevelsEnd;
-      int numCaveLevels = 10;
+      int numCaveLevels = GenerationCommon.TOTAL_NUM_LEVELS_BEFORE_BOSS - numCliffLevels;
       int caveLevelsEnd = caveLevelsStart + numCaveLevels;
       int volcaetusLevel = caveLevelsEnd;
 
@@ -30,19 +30,14 @@ namespace IncendianFalls {
             1,
             Level.Null,
             0,
+            game.levels.Count,
             depth);
         return;
       }
 
-      if (depth == -1) {
-        RavashrikeLevelControllerExtensions.MakeLevel(
-          out level,
-          out levelSuperstate,
-          context,
-          game,
-          superstate,
-          depth);
-      } else if (depth < cliffLevelsEnd) {
+      int levelIndex = game.levels.Count;
+
+      if (levelIndex < cliffLevelsEnd) {
         CliffLevelControllerExtensions.MakeLevel(
             out level,
             out levelSuperstate,
@@ -50,9 +45,10 @@ namespace IncendianFalls {
             game,
             superstate,
             levelAbove,
+            levelIndex,
             depth);
-      } else if (depth < caveLevelsEnd) {
-        if (depth % 2 == 1) {
+      } else if (levelIndex < caveLevelsEnd) {
+        if (levelIndex % 2 == 1) {
           PentagonalCaveLevelControllerExtensions.MakeLevel(
               out level,
               out levelSuperstate,
@@ -63,6 +59,7 @@ namespace IncendianFalls {
               1,
               Level.Null,
               0,
+              levelIndex,
               depth);
         } else {
           SquareCaveLevelControllerExtensions.MakeLevel(
@@ -75,16 +72,18 @@ namespace IncendianFalls {
               1,
               Level.Null,
               0,
+              levelIndex,
               depth);
         }
-      } else if (depth == volcaetusLevel) {
+      } else if (levelIndex == volcaetusLevel) {
         RavashrikeLevelControllerExtensions.MakeLevel(
             out level,
             out levelSuperstate,
             context,
             game,
             superstate,
-            depth);
+            depth,
+            levelIndex);
         return;
       } else {
         Asserts.Assert(false);

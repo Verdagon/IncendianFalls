@@ -19,6 +19,7 @@ public interface IUsableItem {
   IUnitComponent AsIUnitComponent();
   IItem AsIItem();
   Void Use(Game game, Superstate superstate, Unit unit);
+  IItem ClonifyAndReturnNewReal(Root newRoot);
   Void Destruct();
 }
 }

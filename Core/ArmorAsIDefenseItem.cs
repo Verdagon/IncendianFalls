@@ -129,6 +129,9 @@ public class ArmorAsIDefenseItem : IDefenseItem {
   public int AffectIncomingDamage(int incomingDamage) {
     return ArmorExtensions.AffectIncomingDamage(obj, incomingDamage);
   }
+  public IItem ClonifyAndReturnNewReal(Root newRoot) {
+    return ArmorExtensions.ClonifyAndReturnNewReal(obj, newRoot);
+  }
 
 }
 public static class ArmorAsIDefenseItemCaster {

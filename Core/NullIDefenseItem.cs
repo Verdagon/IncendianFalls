@@ -65,6 +65,10 @@ public class NullIDefenseItem : IDefenseItem {
     throw new Exception("Called AffectIncomingDamage on a null!");
   }
              
+  public IItem ClonifyAndReturnNewReal(Root newRoot) {
+    throw new Exception("Called ClonifyAndReturnNewReal on a null!");
+  }
+             
   public Void Destruct() {
     throw new Exception("Called Destruct on a null!");
   }

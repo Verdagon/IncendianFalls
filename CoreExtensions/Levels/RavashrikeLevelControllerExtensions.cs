@@ -10,7 +10,8 @@ namespace Atharia.Model {
         SSContext context,
         Game game,
         Superstate superstate,
-        int depth) {
+        int depth,
+        int levelIndex) {
       var terrain = CircleTerrainGenerator.Generate(context, game.rand);
 
       var units = context.root.EffectUnitMutSetCreate();
@@ -20,8 +21,10 @@ namespace Atharia.Model {
               terrain, units, depth, NullILevelController.Null);
       levelSuperstate = new LevelSuperstate(level);
 
+      game.levels.Add(level);
+
       GenerationCommon.PlaceRocks(context, game.rand, level, levelSuperstate);
-      GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate);
+      GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate, levelIndex, new Location(0, 0, 0));
       //GenerationCommon.PlaceStaircases(context, game.rand, level, levelSuperstate);
 
       var controller = context.root.EffectRavashrikeLevelControllerCreate(level);
@@ -42,7 +45,7 @@ namespace Atharia.Model {
               0,
               enemyLocation,
               "Ravashrike",
-              300, 300,
+              600, 600,
               100, 100,
               600,
               game.time + 10,
@@ -77,20 +80,7 @@ namespace Atharia.Model {
         Game game,
         LevelSuperstate levelSuperstate,
         Level fromLevel, int fromLevelPortalIndex) {
-      foreach (var locationAndTile in obj.level.terrain.tiles) {
-        var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
-        if (staircase.Exists()) {
-          if (staircase.destinationLevel.NullableIs(fromLevel) &&
-              staircase.destinationLevelPortalIndex == fromLevelPortalIndex) {
-            return locationAndTile.Key;
-          }
-        }
-      }
-      if (!fromLevel.NullableIs(obj.level)) {
-        game.root.logger.Error("Couldnt figure out where to place unit!");
-      }
-      return levelSuperstate.GetNRandomWalkableLocations(
-          obj.level.terrain, game.rand, 1, true, true)[0];
+      return new Location(0, 0, 0);
     }
 
     public static Atharia.Model.Void Generate(

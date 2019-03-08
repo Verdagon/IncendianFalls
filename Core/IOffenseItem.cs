@@ -19,6 +19,7 @@ public interface IOffenseItem {
   IUnitComponent AsIUnitComponent();
   IItem AsIItem();
   int AffectOutgoingDamage(int outgoingDamage);
+  IItem ClonifyAndReturnNewReal(Root newRoot);
   Void Destruct();
 }
 }

@@ -14,6 +14,7 @@ namespace Atharia.Model {
         int levelAbovePortalIndex,
         Level levelBelow,
         int levelBelowPortalIndex,
+        int levelIndex,
         int depth) {
       ForestTerrainGenerator.Generate(
           out Terrain terrain,
@@ -30,6 +31,8 @@ namespace Atharia.Model {
           context.root.EffectLevelCreate(
               terrain, units, depth, NullILevelController.Null);
       levelSuperstate = new LevelSuperstate(level);
+
+      game.levels.Add(level);
 
       var controller =
           context.root.EffectPentagonalCaveLevelControllerCreate(
@@ -54,9 +57,9 @@ namespace Atharia.Model {
       GenerationCommon.PlaceStaircase(terrain, downStairsLoc, true, 1, levelBelow, levelBelowPortalIndex);
 
       GenerationCommon.FillWithUnits(
-          context, game, level, levelSuperstate, depth, true);
+          context, game, level, levelSuperstate, levelIndex);
 
-      GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate);
+      GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate, levelIndex, upStairsLoc);
     }
 
     public static string GetName(this PentagonalCaveLevelController obj) {

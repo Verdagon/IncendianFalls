@@ -126,6 +126,9 @@ public class GlaiveAsIItem : IItem {
          public Void Destruct() {
     return GlaiveExtensions.Destruct(obj);
   }
+  public IItem ClonifyAndReturnNewReal(Root newRoot) {
+    return GlaiveExtensions.ClonifyAndReturnNewReal(obj, newRoot);
+  }
 
 }
 public static class GlaiveAsIItemCaster {

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmorMutSetEffectVisitor, IGlaiveMutSetEffectObserver, IGlaiveMutSetEffectVisitor, IManaPotionMutSetEffectObserver, IManaPotionMutSetEffectVisitor, IHealthPotionMutSetEffectObserver, IHealthPotionMutSetEffectVisitor, ITimeScriptDirectiveUCMutSetEffectObserver, ITimeScriptDirectiveUCMutSetEffectVisitor, IKillDirectiveUCMutSetEffectObserver, IKillDirectiveUCMutSetEffectVisitor, IMoveDirectiveUCMutSetEffectObserver, IMoveDirectiveUCMutSetEffectVisitor, IWanderAICapabilityUCMutSetEffectObserver, IWanderAICapabilityUCMutSetEffectVisitor, IBideAICapabilityUCMutSetEffectObserver, IBideAICapabilityUCMutSetEffectVisitor, ITimeCloneAICapabilityUCMutSetEffectObserver, ITimeCloneAICapabilityUCMutSetEffectVisitor, IAttackAICapabilityUCMutSetEffectObserver, IAttackAICapabilityUCMutSetEffectVisitor, ICounteringUCMutSetEffectObserver, ICounteringUCMutSetEffectVisitor, IShieldingUCMutSetEffectObserver, IShieldingUCMutSetEffectVisitor, IBidingOperationUCMutSetEffectObserver, IBidingOperationUCMutSetEffectVisitor {
+public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmorMutSetEffectVisitor, IInertiaRingMutSetEffectObserver, IInertiaRingMutSetEffectVisitor, IGlaiveMutSetEffectObserver, IGlaiveMutSetEffectVisitor, IManaPotionMutSetEffectObserver, IManaPotionMutSetEffectVisitor, IHealthPotionMutSetEffectObserver, IHealthPotionMutSetEffectVisitor, ITimeScriptDirectiveUCMutSetEffectObserver, ITimeScriptDirectiveUCMutSetEffectVisitor, IKillDirectiveUCMutSetEffectObserver, IKillDirectiveUCMutSetEffectVisitor, IMoveDirectiveUCMutSetEffectObserver, IMoveDirectiveUCMutSetEffectVisitor, IWanderAICapabilityUCMutSetEffectObserver, IWanderAICapabilityUCMutSetEffectVisitor, IBideAICapabilityUCMutSetEffectObserver, IBideAICapabilityUCMutSetEffectVisitor, ITimeCloneAICapabilityUCMutSetEffectObserver, ITimeCloneAICapabilityUCMutSetEffectVisitor, IAttackAICapabilityUCMutSetEffectObserver, IAttackAICapabilityUCMutSetEffectVisitor, ICounteringUCMutSetEffectObserver, ICounteringUCMutSetEffectVisitor, IShieldingUCMutSetEffectObserver, IShieldingUCMutSetEffectVisitor, IBidingOperationUCMutSetEffectObserver, IBidingOperationUCMutSetEffectVisitor {
   IUnitComponentMutBunch bunch;
   private List<IIUnitComponentMutBunchObserver> observers;
 
@@ -12,6 +12,7 @@ public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmo
     this.bunch = bunch;
     this.observers = new List<IIUnitComponentMutBunchObserver>();
     bunch.membersArmorMutSet.AddObserver(this);
+    bunch.membersInertiaRingMutSet.AddObserver(this);
     bunch.membersGlaiveMutSet.AddObserver(this);
     bunch.membersManaPotionMutSet.AddObserver(this);
     bunch.membersHealthPotionMutSet.AddObserver(this);
@@ -29,6 +30,7 @@ public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmo
   }
   public void Stop() {
     bunch.membersArmorMutSet.RemoveObserver(this);
+    bunch.membersInertiaRingMutSet.RemoveObserver(this);
     bunch.membersGlaiveMutSet.RemoveObserver(this);
     bunch.membersManaPotionMutSet.RemoveObserver(this);
     bunch.membersHealthPotionMutSet.RemoveObserver(this);
@@ -71,6 +73,17 @@ public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmo
   }
   public void visitArmorMutSetCreateEffect(ArmorMutSetCreateEffect effect) { }
   public void visitArmorMutSetDeleteEffect(ArmorMutSetDeleteEffect effect) { }
+  public void OnInertiaRingMutSetEffect(IInertiaRingMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitInertiaRingMutSetAddEffect(InertiaRingMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitInertiaRingMutSetRemoveEffect(InertiaRingMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitInertiaRingMutSetCreateEffect(InertiaRingMutSetCreateEffect effect) { }
+  public void visitInertiaRingMutSetDeleteEffect(InertiaRingMutSetDeleteEffect effect) { }
   public void OnGlaiveMutSetEffect(IGlaiveMutSetEffect effect) {
     effect.visit(this);
   }

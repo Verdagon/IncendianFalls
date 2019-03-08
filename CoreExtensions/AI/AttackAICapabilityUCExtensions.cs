@@ -11,6 +11,39 @@ namespace Atharia.Model {
       return new Atharia.Model.Void();
     }
 
+    private static Unit DetermineTarget(Game game, Superstate superstate, Unit unit) {
+      var adjLocs =
+          game.level.terrain.GetAdjacentExistingLocations(
+              unit.location, game.level.ConsiderCornersAdjacent());
+      var adjacentEnemies = new List<Unit>();
+      foreach (var adjLoc in adjLocs) {
+        if (game.level.terrain.GetElevationDifference(unit.location, adjLoc) <= 2) {
+          var otherUnit = superstate.levelSuperstate.GetLiveUnitAt(adjLoc);
+          if (otherUnit.Exists() && unit.good != otherUnit.good) {
+            // Prioritize shielding and countering units
+            if (otherUnit.components.GetOnlyShieldingUCOrNull().Exists()) {
+              adjacentEnemies.Insert(0, otherUnit);
+            } else if (otherUnit.components.GetOnlyCounteringUCOrNull().Exists()) {
+              adjacentEnemies.Insert(0, otherUnit);
+            } else {
+              adjacentEnemies.Add(otherUnit);
+            }
+          }
+        }
+      }
+      if (adjacentEnemies.Count > 0) {
+        return adjacentEnemies[0];
+      }
+
+      return superstate.levelSuperstate.FindNearestLiveUnit(
+          game,
+          unit.location,
+          // Filter so its not this unit
+          unit,
+          // Opposite allegiance to unit
+          !unit.good);
+    }
+
     public static bool PreAct(
         this AttackAICapabilityUC obj,
         Game game,
@@ -25,14 +58,7 @@ namespace Atharia.Model {
       // Remember, if we get here, we might still have an existing valid directive.
       // The below code is to just to update it if we have better information now.
 
-      Unit nearestEnemy =
-          superstate.levelSuperstate.FindNearestLiveUnit(
-              game,
-              unit.location,
-              // Filter so its not this unit
-              unit,
-              // Opposite allegiance to unit
-              !unit.good);
+      Unit nearestEnemy = DetermineTarget(game, superstate, unit);
       if (!nearestEnemy.Exists()) {
         // There are no enemies. Don't update directive.
         return false;

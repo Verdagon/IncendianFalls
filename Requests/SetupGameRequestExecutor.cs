@@ -46,7 +46,6 @@ namespace IncendianFalls {
           superstate,
           Level.Null,
           0);
-      game.levels.Add(firstLevel);
       game.level = firstLevel;
       superstate.levelSuperstate = firstLevelSuperstate;
 

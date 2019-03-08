@@ -21,5 +21,8 @@ namespace Atharia.Model {
       potion.Destruct();
       return new Atharia.Model.Void();
     }
+    public static IItem ClonifyAndReturnNewReal(this ManaPotion potion, Root newRoot) {
+      return NullIItem.Null;
+    }
   }
 }

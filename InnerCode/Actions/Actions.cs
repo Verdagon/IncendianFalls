@@ -11,9 +11,9 @@ namespace IncendianFalls {
         List<Unit> victims) {
       Eventer.broadcastUnitUnleashBideEvent(game.root, game, attacker, victims);
       foreach (var victim in victims) {
-        AttackInner(game, superstate, attacker, victim, 15);
+        AttackInner(game, superstate, attacker, victim, attacker.strength * 3);
       }
-      attacker.nextActionTime = attacker.nextActionTime + attacker.inertia * 3 / 2;
+      attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateInertia() * 3 / 2;
     }
 
     public static void Bump(
@@ -21,10 +21,13 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit attacker,
         Unit victim,
-        float multiplier) {
+        float multiplier,
+        bool takeTime) {
       Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
       AttackInner(game, superstate, attacker, victim, (int)Math.Floor(attacker.strength * multiplier));
-      attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
+      if (takeTime) {
+        attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateInertia();
+      }
     }
 
     private static void AttackInner(
@@ -66,7 +69,7 @@ namespace IncendianFalls {
       var detail = game.root.EffectShieldingUCCreate();
       unit.components.Add(detail.AsIUnitComponent());
 
-      unit.nextActionTime = unit.nextActionTime + unit.inertia;
+      unit.nextActionTime = unit.nextActionTime + unit.CalculateInertia();
       Eventer.broadcastUnitShieldingEvent(game.root, game, unit);
     }
 
@@ -78,7 +81,7 @@ namespace IncendianFalls {
 
       unit.mp = unit.mp - 1;
 
-      unit.nextActionTime = unit.nextActionTime + unit.inertia;
+      unit.nextActionTime = unit.nextActionTime + unit.CalculateInertia();
       Eventer.broadcastUnitCounteringEvent(game.root, game, unit);
     }
 
@@ -105,7 +108,6 @@ namespace IncendianFalls {
               superstate,
               game.level,
               game.level.depth + 1);
-          game.levels.Add(nextLevel);
 
           game.level = nextLevel;
           superstate.levelSuperstate = nextLevelSuperstate;
@@ -137,12 +139,21 @@ namespace IncendianFalls {
         var item = items[0];
 
         tile.components.Remove(item.AsITerrainTileComponent());
-        unit.components.Add(item.AsIUnitComponent());
 
-        if (item is HealthPotionAsIItem hp) {
-          hp.obj.Use(game, superstate, unit);
-        } else if (item is ManaPotionAsIItem mp) {
-          mp.obj.Use(game, superstate, unit);
+        if (item is ArmorAsIItem && unit.components.GetOnlyArmorOrNull().Exists()) {
+          item.Destruct();
+        } else if (item is GlaiveAsIItem && unit.components.GetOnlyGlaiveOrNull().Exists()) {
+          item.Destruct();
+        } else if (item is InertiaRingAsIItem && unit.components.GetOnlyInertiaRingOrNull().Exists()) {
+          item.Destruct();
+        } else {
+          unit.components.Add(item.AsIUnitComponent());
+
+          if (item is HealthPotionAsIItem hp) {
+            hp.obj.Use(game, superstate, unit);
+          } else if (item is ManaPotionAsIItem mp) {
+            mp.obj.Use(game, superstate, unit);
+          }
         }
         return true;
       }
@@ -185,7 +196,7 @@ namespace IncendianFalls {
       unit.location = destination;
       superstate.levelSuperstate.Add(unit);
 
-      unit.nextActionTime = unit.nextActionTime + unit.inertia;
+      unit.nextActionTime = unit.nextActionTime + unit.CalculateInertia();
     }
 
     public static void Evaporate(
@@ -197,16 +208,19 @@ namespace IncendianFalls {
       superstate.levelSuperstate.Remove(unit);
     }
 
+    public static readonly int FIRE_COST = 18;
+    public static readonly int FIRE_DAMAGE = 23;
+
     public static void Fire(
         Game game,
         Superstate superstate,
         Unit attacker,
         Unit victim) {
       Eventer.broadcastUnitFireEvent(game.root, game, attacker, victim);
-      AttackInner(game, superstate, attacker, victim, 23);
-      attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
+      AttackInner(game, superstate, attacker, victim, FIRE_DAMAGE);
+      attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateInertia();
 
-      attacker.mp = attacker.mp - 18;
+      attacker.mp = attacker.mp - FIRE_COST;
     }
   }
 }

@@ -14,6 +14,7 @@ namespace Atharia.Model {
         int levelAbovePortalIndex,
         Level levelBelow,
         int levelBelowPortalIndex,
+        int levelIndex,
         int depth) {
       DungeonTerrainGenerator.Generate(
           out Terrain terrain,
@@ -36,6 +37,8 @@ namespace Atharia.Model {
           context.root.EffectSquareCaveLevelControllerCreate(
               level, depth);
       level.controller = controller.AsILevelController();
+
+      game.levels.Add(level);
 
       SortedSet<int> roomNumbers = new SortedSet<int>();
       foreach (var entry in rooms) {
@@ -79,9 +82,9 @@ namespace Atharia.Model {
       Asserts.Assert(upStairsLoc != downStairsLoc);
 
       GenerationCommon.FillWithUnits(
-          context, game, level, levelSuperstate, depth, true);
+          context, game, level, levelSuperstate, levelIndex);
 
-      GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate);
+      GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate, levelIndex, upStairsLoc);
     }
 
     public static Location RandomLocationInRoom(Rand rand, DungeonTerrainGenerator.Room room) {
