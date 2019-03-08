@@ -33,6 +33,10 @@ namespace IncendianFalls {
         return "Can't fire at self!";
       }
 
+      if (game.level.terrain.pattern.GetDistanceBetween(victim.location, player.location) > 5) {
+        return "Too far, can't fire!";
+      }
+
       if (player.mp < 12) {
         return "Can't fire, need 12mp!";
       }

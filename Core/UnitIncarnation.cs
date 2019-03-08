@@ -19,6 +19,7 @@ public class UnitIncarnation {
   public readonly int components;
   public readonly int items;
   public readonly bool good;
+  public readonly int strength;
   public UnitIncarnation(
       int events,
       bool alive,
@@ -33,7 +34,8 @@ public class UnitIncarnation {
       int nextActionTime,
       int components,
       int items,
-      bool good) {
+      bool good,
+      int strength) {
     this.events = events;
     this.alive = alive;
     this.lifeEndTime = lifeEndTime;
@@ -48,6 +50,7 @@ public class UnitIncarnation {
     this.components = components;
     this.items = items;
     this.good = good;
+    this.strength = strength;
   }
 }
 

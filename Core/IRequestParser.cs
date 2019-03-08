@@ -21,6 +21,8 @@ public static class IRequestParser {
         return new DefendRequestAsIRequest(DefendRequest.Parse(source));
       case "MoveRequest":
         return new MoveRequestAsIRequest(MoveRequest.Parse(source));
+      case "CheatRequest":
+        return new CheatRequestAsIRequest(CheatRequest.Parse(source));
       case "FireRequest":
         return new FireRequestAsIRequest(FireRequest.Parse(source));
       case "AttackRequest":

@@ -19,10 +19,10 @@ namespace Atharia.Model {
           out Terrain terrain,
           out SortedDictionary<int, DungeonTerrainGenerator.Room> rooms,
           context,
-          //80,
-          //20,
-          30,
+          80,
           20,
+          //30,
+          //20,
           game.rand);
 
       var units = context.root.EffectUnitMutSetCreate();
@@ -78,11 +78,8 @@ namespace Atharia.Model {
 
       Asserts.Assert(upStairsLoc != downStairsLoc);
 
-      SortedSet<Location> forbiddenLocations = new SortedSet<Location> {
-        upStairsLoc,
-        downStairsLoc
-      };
-      GenerationCommon.FillWithUnits(context, game, level, levelSuperstate, forbiddenLocations, 20);
+      GenerationCommon.FillWithUnits(
+          context, game, level, levelSuperstate, depth, true);
     }
 
     public static Location RandomLocationInRoom(Rand rand, DungeonTerrainGenerator.Room room) {
@@ -118,8 +115,16 @@ namespace Atharia.Model {
           }
         }
       }
-      game.root.logger.Error("Couldn't figure out where to place unit!");
-      return levelSuperstate.GetRandomWalkableLocation(game.rand, true);
+      var forbiddenLocations = new SortedSet<Location>();
+      foreach (var locationAndTile in obj.level.terrain.tiles) {
+        var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
+        if (staircase.Exists()) {
+          forbiddenLocations.Add(locationAndTile.Key);
+        }
+      }
+      game.root.logger.Error("Couldnt figure out where to place unit!");
+      return levelSuperstate.GetNRandomWalkableLocations(
+          game.rand, 1, forbiddenLocations, true)[0];
     }
 
     public static Atharia.Model.Void Generate(

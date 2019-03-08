@@ -22,7 +22,7 @@ namespace Atharia.Model {
       var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
       Asserts.Assert(directive.Exists());
 
-      Actions.Step(game, superstate, unit, directive.pathToLastSeenLocation[0]);
+      Actions.Step(game, superstate, unit, directive.pathToLastSeenLocation[0], false);
 
       directive.pathToLastSeenLocation.RemoveAt(0);
 

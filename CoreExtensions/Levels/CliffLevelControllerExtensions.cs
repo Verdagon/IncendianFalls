@@ -21,8 +21,8 @@ namespace Atharia.Model {
           context,
           game.rand,
           PentagonPattern9.makePentagon9Pattern(),
-          //1000,
-          300,
+          1000,
+          //300,
           waterfallTopLeftToBottomRight);
 
       var units = context.root.EffectUnitMutSetCreate();
@@ -81,6 +81,7 @@ namespace Atharia.Model {
         // Find a path that's not limited by hopping
         var upperHalfPath = GetUnlimitedPathAlongBorder(cliffLevel, upStaircaseLocation, arbitraryBorderLoc);
         Asserts.Assert(upperHalfPath.Count > 0);
+        upperHalfPath.Insert(0, upStaircaseLocation);
         ResetCliffs(terrain, preRandifiedElevationByLocation, new SortedSet<Location>(upperHalfPath));
         Asserts.Assert(CanReachLimited(cliffLevel, upStaircaseLocation, highHalfCaveLocation));
       }
@@ -91,18 +92,13 @@ namespace Atharia.Model {
         // Find a path that's not limited by hopping
         var lowerHalfPath = GetUnlimitedPathAlongBorder(cliffLevel, downStaircaseLocation, arbitraryBorderLoc);
         Asserts.Assert(lowerHalfPath.Count > 0);
+        lowerHalfPath.Insert(0, upStaircaseLocation);
         ResetCliffs(terrain, preRandifiedElevationByLocation, new SortedSet<Location>(lowerHalfPath));
         Asserts.Assert(CanReachLimited(cliffLevel, downStaircaseLocation, lowHalfCaveLocation));
       }
 
-      var unitForbiddenLocs = new SortedSet<Location> {
-        upStaircaseLocation,
-        downStaircaseLocation,
-        highHalfCaveLocation,
-        lowHalfCaveLocation,
-      };
       GenerationCommon.FillWithUnits(
-          context, game, cliffLevel, levelSuperstate, unitForbiddenLocs, terrain.tiles.Count / 30);
+          context, game, cliffLevel, levelSuperstate, depth, false);
     }
 
     private static void ResetCliffs(
@@ -197,8 +193,16 @@ namespace Atharia.Model {
           }
         }
       }
+      var forbiddenLocations = new SortedSet<Location>();
+      foreach (var locationAndTile in obj.level.terrain.tiles) {
+        var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
+        if (staircase.Exists()) {
+          forbiddenLocations.Add(locationAndTile.Key);
+        }
+      }
       game.root.logger.Error("Couldnt figure out where to place unit!");
-      return levelSuperstate.GetRandomWalkableLocation(game.rand, true);
+      return levelSuperstate.GetNRandomWalkableLocations(
+          game.rand, 1, forbiddenLocations, true)[0];
     }
 
     public static Atharia.Model.Void Generate(

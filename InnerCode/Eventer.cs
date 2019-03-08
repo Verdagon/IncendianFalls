@@ -54,5 +54,19 @@ namespace IncendianFalls {
       var attackEvent = new UnitStepEventAsIUnitEvent(new UnitStepEvent(game.time, unit.id, from, to));
       unit.events.Add(attackEvent);
     }
+    public static void broadcastUnitShieldingEvent(
+        Root root,
+        Game game,
+        Unit unit) {
+      var e = new UnitShieldingEvent(game.time);
+      unit.events.Add(e.AsIUnitEvent());
+    }
+    public static void broadcastUnitCounteringEvent(
+        Root root,
+        Game game,
+        Unit unit) {
+      var e = new UnitCounteringEvent(game.time);
+      unit.events.Add(e.AsIUnitEvent());
+    }
   }
 }

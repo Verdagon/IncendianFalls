@@ -137,5 +137,8 @@ public class Unit {
   public bool good {
     get { return incarnation.good; }
   }
+  public int strength {
+    get { return incarnation.strength; }
+  }
 }
 }

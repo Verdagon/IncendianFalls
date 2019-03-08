@@ -10594,7 +10594,8 @@ public class Root {
       int nextActionTime,
       IUnitComponentMutBunch components,
       IItemMutBunch items,
-      bool good) {
+      bool good,
+      int strength) {
     CheckUnlocked();
     CheckHasIUnitEventMutList(events);
     CheckHasIUnitComponentMutBunch(components);
@@ -10616,7 +10617,8 @@ public class Root {
             nextActionTime,
             components.id,
             items.id,
-            good
+            good,
+            strength
             );
     EffectInternalCreateUnit(id, rootIncarnation.version, incarnation);
     return new Unit(this, id);
@@ -10663,6 +10665,7 @@ public class Root {
     result += id * version * 12 * incarnation.components.GetDeterministicHashCode();
     result += id * version * 13 * incarnation.items.GetDeterministicHashCode();
     result += id * version * 14 * incarnation.good.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.strength.GetDeterministicHashCode();
     return result;
   }
      
@@ -10808,7 +10811,8 @@ public class Root {
               oldIncarnationAndVersion.incarnation.nextActionTime,
               oldIncarnationAndVersion.incarnation.components,
               oldIncarnationAndVersion.incarnation.items,
-              oldIncarnationAndVersion.incarnation.good);
+              oldIncarnationAndVersion.incarnation.good,
+              oldIncarnationAndVersion.incarnation.strength);
       rootIncarnation.incarnationsUnit[id] =
           new VersionAndIncarnation<UnitIncarnation>(
               rootIncarnation.version,
@@ -10843,7 +10847,8 @@ public class Root {
               oldIncarnationAndVersion.incarnation.nextActionTime,
               oldIncarnationAndVersion.incarnation.components,
               oldIncarnationAndVersion.incarnation.items,
-              oldIncarnationAndVersion.incarnation.good);
+              oldIncarnationAndVersion.incarnation.good,
+              oldIncarnationAndVersion.incarnation.strength);
       rootIncarnation.incarnationsUnit[id] =
           new VersionAndIncarnation<UnitIncarnation>(
               rootIncarnation.version,
@@ -10878,7 +10883,8 @@ public class Root {
               oldIncarnationAndVersion.incarnation.nextActionTime,
               oldIncarnationAndVersion.incarnation.components,
               oldIncarnationAndVersion.incarnation.items,
-              oldIncarnationAndVersion.incarnation.good);
+              oldIncarnationAndVersion.incarnation.good,
+              oldIncarnationAndVersion.incarnation.strength);
       rootIncarnation.incarnationsUnit[id] =
           new VersionAndIncarnation<UnitIncarnation>(
               rootIncarnation.version,
@@ -10913,7 +10919,8 @@ public class Root {
               oldIncarnationAndVersion.incarnation.nextActionTime,
               oldIncarnationAndVersion.incarnation.components,
               oldIncarnationAndVersion.incarnation.items,
-              oldIncarnationAndVersion.incarnation.good);
+              oldIncarnationAndVersion.incarnation.good,
+              oldIncarnationAndVersion.incarnation.strength);
       rootIncarnation.incarnationsUnit[id] =
           new VersionAndIncarnation<UnitIncarnation>(
               rootIncarnation.version,
@@ -10948,7 +10955,8 @@ public class Root {
               oldIncarnationAndVersion.incarnation.nextActionTime,
               oldIncarnationAndVersion.incarnation.components,
               oldIncarnationAndVersion.incarnation.items,
-              oldIncarnationAndVersion.incarnation.good);
+              oldIncarnationAndVersion.incarnation.good,
+              oldIncarnationAndVersion.incarnation.strength);
       rootIncarnation.incarnationsUnit[id] =
           new VersionAndIncarnation<UnitIncarnation>(
               rootIncarnation.version,
@@ -10983,7 +10991,8 @@ public class Root {
               newValue,
               oldIncarnationAndVersion.incarnation.components,
               oldIncarnationAndVersion.incarnation.items,
-              oldIncarnationAndVersion.incarnation.good);
+              oldIncarnationAndVersion.incarnation.good,
+              oldIncarnationAndVersion.incarnation.strength);
       rootIncarnation.incarnationsUnit[id] =
           new VersionAndIncarnation<UnitIncarnation>(
               rootIncarnation.version,

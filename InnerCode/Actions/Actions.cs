@@ -23,7 +23,7 @@ namespace IncendianFalls {
         Unit victim,
         float multiplier) {
       Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
-      AttackInner(game, superstate, attacker, victim, (int)Math.Floor(5 * multiplier));
+      AttackInner(game, superstate, attacker, victim, (int)Math.Floor(attacker.strength * multiplier));
       attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
     }
 
@@ -67,6 +67,7 @@ namespace IncendianFalls {
       unit.components.Add(detail.AsIUnitComponent());
 
       unit.nextActionTime = unit.nextActionTime + unit.inertia;
+      Eventer.broadcastUnitShieldingEvent(game.root, game, unit);
     }
 
     public static void Counter(
@@ -78,6 +79,7 @@ namespace IncendianFalls {
       unit.mp = unit.mp - 1;
 
       unit.nextActionTime = unit.nextActionTime + unit.inertia;
+      Eventer.broadcastUnitCounteringEvent(game.root, game, unit);
     }
 
     public static bool Interact(
@@ -156,9 +158,10 @@ namespace IncendianFalls {
           Game game,
           Superstate superstate,
           Unit unit,
-          Location destination) {
+          Location destination,
+          bool overrideAdjacentCheck) {
       Asserts.Assert(game.level.terrain.tiles[destination].walkable);
-      Asserts.Assert(game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent()));
+      Asserts.Assert(overrideAdjacentCheck || game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent()));
       Asserts.Assert(!superstate.levelSuperstate.ContainsKey(destination));
 
       bool removed = superstate.levelSuperstate.Remove(unit);

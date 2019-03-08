@@ -149,64 +149,305 @@ namespace IncendianFalls {
       return furthestLoc;
     }
 
+    private static float Normal(float stretchX, float shiftX, float stretchY, float x) {
+      return (float)Math.Pow(Math.E, -0.5f * Math.Pow((x - shiftX) / stretchX, 2)) * stretchY;
+    }
+
+    private static float Logistic(float stretchX, float shiftX, float stretchY, float x) {
+      return 1.0f / (1.0f + (float)Math.Pow(Math.E, (-(x - shiftX) / stretchX))) * stretchY;
+    }
+
+    private static int RunWeight(Rand rand, float[] weights) {
+      float weightSum = 0;
+      float[] upperBounds = new float[weights.Length];
+      for (int i = 0; i < weights.Length; i++) {
+        weightSum += weights[i];
+        upperBounds[i] = weightSum;
+      }
+      float x = rand.Next(0, weightSum, 10000);
+      for (int i = 0; i < weights.Length; i++) {
+        if (x <= upperBounds[i]) {
+          return i;
+        }
+      }
+      rand.root.logger.Error("Weight distribution gave out of bounds! " + weightSum + " " + x);
+      return 0;
+    }
+
+    private static int[] RunWeights(Rand rand, float[] weights, int n) {
+      int[] results = new int[weights.Length];
+      for (int ni = 0; ni < n; ni++) {
+        int resultIndex = RunWeight(rand, weights);
+        results[resultIndex]++;
+      }
+      return results;
+    }
+
+    public static int[] DetermineUnitsForLevel(
+        Rand rand,
+        int depth,
+        bool inside,
+        int numUnits) {
+
+      float aveliskWeight = Normal(8, 0, 1f, depth);
+      float ravafaireWeight = Normal(8, 8, 1f, depth);
+      float draxlingWeight = Normal(8, 12, 1f, depth);
+      float lornixWeight = depth < 7 ? 0 : Logistic(4, 10, 1, depth);
+      float yotenWeight = depth < 8 ? 0 : Logistic(2, 14, 1, depth);
+      float mordranthWeight = depth < 10 ? 0 : Logistic(1, 14, .5f, depth);
+
+      int numAvelisk = 0;
+      int numRavafaire = 0;
+      int numDraxling = 0;
+      int numLornix = 0;
+      int numYoten = 0;
+      int numSpiriad = 0;
+      int numMordranth = 0;
+
+      int depthAndCave = depth * (inside ? -1 : 1);
+      switch (depthAndCave) {
+        case -2:
+          numDraxling = 6;
+          break;
+        case -3:
+          numLornix = 1;
+          break;
+        case 4:
+          numYoten = 1;
+          break;
+        case -6:
+          numRavafaire = 5;
+          numLornix = 1;
+          break;
+        case 7:
+          numSpiriad = 1;
+          break;
+        case 8:
+          numRavafaire = 15;
+          break;
+        case -9:
+          numMordranth = 1;
+          break;
+        case -10:
+          numSpiriad = 1;
+          numRavafaire = 10;
+          break;
+        case 11:
+          numYoten = 1;
+          numDraxling = 10;
+          break;
+        case 15:
+          numYoten = 4;
+          break;
+        case 16:
+          numSpiriad = 2;
+          break;
+      }
+
+      int numPreorderedUnits =
+          numAvelisk +
+          numRavafaire +
+          numDraxling +
+          numLornix +
+          numYoten +
+          numSpiriad +
+          numMordranth;
+      int numUnitsNeeded = numUnits - numPreorderedUnits;
+
+      float[] weights = {
+        aveliskWeight,
+        ravafaireWeight,
+        draxlingWeight,
+        lornixWeight,
+        yotenWeight,
+        mordranthWeight,
+      };
+
+      int[] numAddedByUnit = RunWeights(rand, weights, numUnitsNeeded);
+      return new int[] {
+        numAddedByUnit[0] + numAvelisk,
+        numAddedByUnit[1] + numRavafaire,
+        numAddedByUnit[2] + numDraxling,
+        numAddedByUnit[3] + numLornix,
+        numAddedByUnit[4] + numYoten,
+        numSpiriad,
+        numAddedByUnit[5] + numMordranth
+      };
+    }
+
     public static void FillWithUnits(
         SSContext context,
         Game game,
         Level level,
         LevelSuperstate levelSuperstate,
-        SortedSet<Location> forbiddenLocations,
-        int numUnits) {
-      var locations = levelSuperstate.GetNRandomWalkableLocations(game.rand, numUnits, forbiddenLocations, true);
+        int depth,
+        bool inside) {
 
-      for (int i = 0; i < numUnits; i++) {
-        var enemyLocation = locations[i];
+      int numUnits = 15;
 
+      int[] numByUnit = DetermineUnitsForLevel(game.rand, depth, inside, numUnits);
+      int numAvelisk = numByUnit[0];
+      int numRavafaire = numByUnit[1];
+      int numDraxling = numByUnit[2];
+      int numLornix = numByUnit[3];
+      int numYoten = numByUnit[4];
+      int numSpiriad = numByUnit[5];
+      int numMordranth = numByUnit[6];
+
+      for (int i = 0; i < numAvelisk; i++) {
         var components = IUnitComponentMutBunch.New(context.root);
         components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
         components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+        Unit unit =
+            context.root.EffectUnitCreate(
+                context.root.EffectIUnitEventMutListCreate(),
+                true,
+                0,
+                new Location(0, 0, 0),
+                "avelisk",
+                5, 5,
+                0, 0,
+                600,
+                game.time + 10,
+                components,
+                IItemMutBunch.New(context.root),
+                false,
+                5);
+        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+      }
 
-        Unit enemy;
-        if (game.rand.Next(0, 5) == 0) {
-          components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
-          enemy =
-              context.root.EffectUnitCreate(
-                  context.root.EffectIUnitEventMutListCreate(),
-                  true,
-                  0,
-                  enemyLocation,
-                  "irklingking",
-                  20, 20,
-                  40, 40,
-                  600,
-                  game.time + 10,
-                  components,
-                  IItemMutBunch.New(context.root),
-                  false);
-        } else {
-          enemy =
-              context.root.EffectUnitCreate(
-                  context.root.EffectIUnitEventMutListCreate(),
-                  true,
-                  0,
-                  enemyLocation,
-                  "goblin",
-                  3, 3,
-                  0, 0,
-                  600,
-                  game.time + 10,
-                  components,
-                  IItemMutBunch.New(context.root),
-                  false);
-        }
-        level.units.Add(enemy);
-        levelSuperstate.Add(enemy);
+      for (int i = 0; i < numRavafaire; i++) {
+        var components = IUnitComponentMutBunch.New(context.root);
+        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+        Unit unit =
+            context.root.EffectUnitCreate(
+                context.root.EffectIUnitEventMutListCreate(),
+                true,
+                0,
+                new Location(0, 0, 0),
+                "novafaire",
+                8, 8,
+                0, 0,
+                600,
+                game.time + 10,
+                components,
+                IItemMutBunch.New(context.root),
+                false,
+                8);
+        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+      }
 
-        if (game.rand.Next(0, 3) == 0) {
-          enemy.items.Add(new ArmorAsIItem(context.root.EffectArmorCreate()));
-        }
-        if (game.rand.Next(0, 3) == 0) {
-          enemy.items.Add(new GlaiveAsIItem(context.root.EffectGlaiveCreate()));
-        }
+      for (int i = 0; i < numDraxling; i++) {
+        var components = IUnitComponentMutBunch.New(context.root);
+        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+        Unit unit =
+            context.root.EffectUnitCreate(
+                context.root.EffectIUnitEventMutListCreate(),
+                true,
+                0,
+                new Location(0, 0, 0),
+                "draxling",
+                5, 5,
+                0, 0,
+                300,
+                game.time + 10,
+                components,
+                IItemMutBunch.New(context.root),
+                false,
+                5);
+        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+      }
+
+      for (int i = 0; i < numLornix; i++) {
+        var components = IUnitComponentMutBunch.New(context.root);
+        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+        components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
+        Unit unit =
+            context.root.EffectUnitCreate(
+                context.root.EffectIUnitEventMutListCreate(),
+                true,
+                0,
+                new Location(0, 0, 0),
+                "lornix",
+                50, 50,
+                0, 0,
+                300,
+                game.time + 10,
+                components,
+                IItemMutBunch.New(context.root),
+                false,
+                5);
+        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+      }
+
+      for (int i = 0; i < numYoten; i++) {
+        var components = IUnitComponentMutBunch.New(context.root);
+        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+        Unit unit =
+            context.root.EffectUnitCreate(
+                context.root.EffectIUnitEventMutListCreate(),
+                true,
+                0,
+                new Location(0, 0, 0),
+                "yoten",
+                50, 50,
+                0, 0,
+                300,
+                game.time + 10,
+                components,
+                IItemMutBunch.New(context.root),
+                false,
+                15);
+        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+      }
+
+      for (int i = 0; i < numSpiriad; i++) {
+        var components = IUnitComponentMutBunch.New(context.root);
+        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+        Unit unit =
+            context.root.EffectUnitCreate(
+                context.root.EffectIUnitEventMutListCreate(),
+                true,
+                0,
+                new Location(0, 0, 0),
+                "spiriad",
+                25, 25,
+                0, 0,
+                600,
+                game.time + 10,
+                components,
+                IItemMutBunch.New(context.root),
+                false,
+                65);
+        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+      }
+
+      for (int i = 0; i < numMordranth; i++) {
+        var components = IUnitComponentMutBunch.New(context.root);
+        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+        components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
+        Unit unit =
+            context.root.EffectUnitCreate(
+                context.root.EffectIUnitEventMutListCreate(),
+                true,
+                0,
+                new Location(0, 0, 0),
+                "mordranth",
+                60, 60,
+                0, 0,
+                600,
+                game.time + 10,
+                components,
+                IItemMutBunch.New(context.root),
+                false,
+                12);
+        level.EnterUnit(game, levelSuperstate, unit, level, 0);
       }
     }
 

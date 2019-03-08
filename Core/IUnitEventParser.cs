@@ -15,6 +15,10 @@ public static class IUnitEventParser {
         return new UnitFireEventAsIUnitEvent(UnitFireEvent.Parse(source));
       case "UnitAttackEvent":
         return new UnitAttackEventAsIUnitEvent(UnitAttackEvent.Parse(source));
+      case "UnitCounteringEvent":
+        return new UnitCounteringEventAsIUnitEvent(UnitCounteringEvent.Parse(source));
+      case "UnitShieldingEvent":
+        return new UnitShieldingEventAsIUnitEvent(UnitShieldingEvent.Parse(source));
       case "UnitStepEvent":
         return new UnitStepEventAsIUnitEvent(UnitStepEvent.Parse(source));
       default:

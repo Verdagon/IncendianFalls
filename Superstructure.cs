@@ -149,6 +149,36 @@ namespace IncendianFalls {
       }
     }
 
+    public string RequestCheat(int gameId, string cheatName) {
+      var stopwatch = new System.Diagnostics.Stopwatch();
+      stopwatch.Start();
+
+      root.Unlock();
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new CheatRequest(gameId, cheatName);
+        broadcastBeforeRequest(new CheatRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        var superstate = superstateByGameId[gameId];
+        context.logger.Info("d");
+        var success = CheatRequestExecutor.Execute(context, superstate, request);
+        context.Flare(success.DStr());
+        broadcastAfterRequest(new CheatRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return success;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
+      } finally {
+        root.Lock();
+        root.FlushEvents();
+
+        stopwatch.Stop();
+        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+      }
+    }
+
     public bool RequestMove(int gameId, Location newLocation) {
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();

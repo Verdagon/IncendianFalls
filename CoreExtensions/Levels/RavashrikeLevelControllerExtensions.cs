@@ -27,7 +27,9 @@ namespace Atharia.Model {
       var controller = context.root.EffectRavashrikeLevelControllerCreate(level);
       level.controller = controller.AsILevelController();
 
-      var enemyLocation = levelSuperstate.GetRandomWalkableLocation(game.rand, true);
+      var enemyLocation =
+          levelSuperstate.GetNRandomWalkableLocations(
+              game.rand, 1, new SortedSet<Location>(), true)[0];
 
       var components = IUnitComponentMutBunch.New(context.root);
       components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
@@ -46,7 +48,8 @@ namespace Atharia.Model {
               game.time + 10,
               components,
               IItemMutBunch.New(context.root),
-              false);
+              false,
+              27);
       level.EnterUnit(game, levelSuperstate, enemy, Level.Null, 0);
     }
 
@@ -84,8 +87,16 @@ namespace Atharia.Model {
           }
         }
       }
+      var forbiddenLocations = new SortedSet<Location>();
+      foreach (var locationAndTile in obj.level.terrain.tiles) {
+        var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
+        if (staircase.Exists()) {
+          forbiddenLocations.Add(locationAndTile.Key);
+        }
+      }
       game.root.logger.Error("Couldnt figure out where to place unit!");
-      return levelSuperstate.GetRandomWalkableLocation(game.rand, true);
+      return levelSuperstate.GetNRandomWalkableLocations(
+          game.rand, 1, forbiddenLocations, true)[0];
     }
 
     public static Atharia.Model.Void Generate(

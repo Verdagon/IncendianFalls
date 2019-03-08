@@ -178,7 +178,8 @@ namespace IncendianFalls {
                   game.time, // Act now
                   IUnitComponentMutBunch.New(context.root),
                   IItemMutBunch.New(context.root),
-                  true);
+                  true,
+                  5);
           newPlayer.mp = newPlayer.mp - GetMpCost(futureGame.time - game.time);
 
           Console.WriteLine("Made new player! ID " + newPlayer.id);

@@ -12,10 +12,10 @@ namespace IncendianFalls {
         Superstate superstate,
         Level levelAbove,
         int depth) {
-      int numCliffLevels = 3;
+      int numCliffLevels = 10;
       int cliffLevelsEnd = numCliffLevels;
       int caveLevelsStart = cliffLevelsEnd;
-      int numCaveLevels = 3;
+      int numCaveLevels = 10;
       int caveLevelsEnd = caveLevelsStart + numCaveLevels;
       int volcaetusLevel = caveLevelsEnd;
 

@@ -73,31 +73,6 @@ namespace Atharia.Model {
       }
     }
 
-    public Location GetRandomWalkableLocation(Rand rand, bool checkUnitPresent) {
-      if (checkUnitPresent) {
-        int i = rand.Next() % (walkableLocations.Count - liveUnitByLocation.Count);
-        foreach (var location in walkableLocations) {
-          if (liveUnitByLocation.ContainsKey(location)) {
-            continue;
-          }
-          if (i == 0) {
-            return location;
-          }
-          i--;
-        }
-      } else {
-        int i = rand.Next() % walkableLocations.Count;
-        foreach (var location in walkableLocations) {
-          if (i == 0) {
-            return location;
-          }
-          i--;
-        }
-      }
-      Asserts.Assert(false);
-      return new Location(0, 0, 0);
-    }
-
     public List<Location> GetNRandomWalkableLocations(
         Rand rand,
         int numToGet,
@@ -105,19 +80,14 @@ namespace Atharia.Model {
         bool checkUnitPresent) {
       // Gather the candidates
       List<Location> candidates = new List<Location>(walkableLocations.Count);
-      if (checkUnitPresent) {
-        candidates = new List<Location>(walkableLocations.Count);
-        foreach (var location in walkableLocations) {
-          if (liveUnitByLocation.ContainsKey(location)) {
-            continue;
-          }
-          if (forbiddenLocations.Contains(location)) {
-            continue;
-          }
-          candidates.Add(location);
+      foreach (var location in walkableLocations) {
+        if (liveUnitByLocation.ContainsKey(location)) {
+          continue;
         }
-      } else {
-        candidates = new List<Location>(walkableLocations);
+        if (forbiddenLocations.Contains(location)) {
+          continue;
+        }
+        candidates.Add(location);
       }
 
       // Shuffle the candidates

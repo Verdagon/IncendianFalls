@@ -14,7 +14,7 @@ namespace IncendianFalls {
             var mr = mrI.obj;
             var destination = mr.destination;
             if (Actions.CanStep(game, superstate, game.player, destination)) {
-              Actions.Step(game, superstate, game.player, destination);
+              Actions.Step(game, superstate, game.player, destination, false);
               return true;
             } else {
               Asserts.Assert(false); // todo: implement evaporate

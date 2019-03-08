@@ -125,5 +125,9 @@ namespace Atharia.Model {
       var polygon = new Polygon(pattern.GetCornerPositions(location));
       return MathUtils.Intersects(polygon, ray);
     }
+
+    public static float GetDistanceBetween(this Pattern pattern, Location locA, Location locB) {
+      return pattern.GetTileCenter(locA).distance(pattern.GetTileCenter(locB));
+    }
   }
 }

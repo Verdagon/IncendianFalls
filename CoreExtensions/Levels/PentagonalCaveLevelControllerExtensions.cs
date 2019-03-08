@@ -21,7 +21,7 @@ namespace Atharia.Model {
           context,
           game.rand,
           PentagonPattern9.makePentagon9Pattern(),
-          300);
+          1000);
           //1000);
 
       var units = context.root.EffectUnitMutSetCreate();
@@ -53,12 +53,8 @@ namespace Atharia.Model {
       var downStairsLoc = SetUtils.GetRandom(game.rand.Next(), downStairsRoom.floors);
       GenerationCommon.PlaceStaircase(terrain, downStairsLoc, true, 1, levelBelow, levelBelowPortalIndex);
 
-      var unitForbiddenLocations = new SortedSet<Location> {
-        upStairsLoc,
-        downStairsLoc
-      };
       GenerationCommon.FillWithUnits(
-          context, game, level, levelSuperstate, unitForbiddenLocations, 20);
+          context, game, level, levelSuperstate, depth, true);
     }
 
     public static string GetName(this PentagonalCaveLevelController obj) {
@@ -83,8 +79,16 @@ namespace Atharia.Model {
           }
         }
       }
+      var forbiddenLocations = new SortedSet<Location>();
+      foreach (var locationAndTile in obj.level.terrain.tiles) {
+        var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
+        if (staircase.Exists()) {
+          forbiddenLocations.Add(locationAndTile.Key);
+        }
+      }
       game.root.logger.Error("Couldnt figure out where to place unit!");
-      return levelSuperstate.GetRandomWalkableLocation(game.rand, true);
+      return levelSuperstate.GetNRandomWalkableLocations(
+          game.rand, 1, forbiddenLocations, true)[0];
     }
 
     public static Atharia.Model.Void Generate(
