@@ -14,7 +14,9 @@ public interface IItem {
   void FindReachableObjects(SortedSet<int> foundIds);
   bool Is(IItem that);
   bool NullableIs(IItem that);
-  int AffectIncomingDamage(int incomingDamage);
-  int AffectOutgoingDamage(int outgoingDamage);
+  ITerrainTileComponent AsITerrainTileComponent();
+  IDestructible AsIDestructible();
+  IUnitComponent AsIUnitComponent();
+  Void Destruct();
 }
 }

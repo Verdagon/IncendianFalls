@@ -74,37 +74,39 @@ namespace Atharia.Model {
     }
 
     public List<Location> GetNRandomWalkableLocations(
+        Terrain terrain,
         Rand rand,
         int numToGet,
-        SortedSet<Location> forbiddenLocations,
+        bool checkStairsPresent,
         bool checkUnitPresent) {
       // Gather the candidates
       List<Location> candidates = new List<Location>(walkableLocations.Count);
       foreach (var location in walkableLocations) {
-        if (liveUnitByLocation.ContainsKey(location)) {
+        if (checkUnitPresent && liveUnitByLocation.ContainsKey(location)) {
           continue;
         }
-        if (forbiddenLocations.Contains(location)) {
+        if (checkStairsPresent &&
+            terrain.tiles[location].components.GetOnlyStaircaseTTCOrNull().Exists()) {
           continue;
         }
         candidates.Add(location);
       }
 
-      // Shuffle the candidates
-      int n = candidates.Count;
-      while (n > 1) {
-        n--;
-        int k = rand.Next() % (candidates.Count - 1);
-        var value = candidates[k];
-        candidates[k] = candidates[n];
-        candidates[n] = value;
+      // Shuffle the candidates four times. For some reason if we don't do this
+      // most the units are on the left side of the map.
+      for (int i = 0; i < 4; i++) {
+        int n = candidates.Count;
+        while (n > 1) {
+          n--;
+          int k = rand.Next() % (candidates.Count - 1);
+          var value = candidates[k];
+          candidates[k] = candidates[n];
+          candidates[n] = value;
+        }
       }
 
-      var result = new List<Location>(numToGet);
-      for (int i = 0; i < numToGet; i++) {
-        result.Add(candidates[i]);
-      }
-      return result;
+      candidates.RemoveRange(numToGet, candidates.Count - numToGet);
+      return candidates;
     }
 
     public Unit FindNearestLiveUnit(

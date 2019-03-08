@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class IUnitComponentMutBunchIncarnation {
+  public readonly int membersArmorMutSet;
+  public readonly int membersGlaiveMutSet;
+  public readonly int membersManaPotionMutSet;
+  public readonly int membersHealthPotionMutSet;
   public readonly int membersTimeScriptDirectiveUCMutSet;
   public readonly int membersKillDirectiveUCMutSet;
   public readonly int membersMoveDirectiveUCMutSet;
@@ -16,6 +20,10 @@ public class IUnitComponentMutBunchIncarnation {
   public readonly int membersShieldingUCMutSet;
   public readonly int membersBidingOperationUCMutSet;
   public IUnitComponentMutBunchIncarnation(
+      int membersArmorMutSet,
+      int membersGlaiveMutSet,
+      int membersManaPotionMutSet,
+      int membersHealthPotionMutSet,
       int membersTimeScriptDirectiveUCMutSet,
       int membersKillDirectiveUCMutSet,
       int membersMoveDirectiveUCMutSet,
@@ -26,6 +34,10 @@ public class IUnitComponentMutBunchIncarnation {
       int membersCounteringUCMutSet,
       int membersShieldingUCMutSet,
       int membersBidingOperationUCMutSet) {
+    this.membersArmorMutSet = membersArmorMutSet;
+    this.membersGlaiveMutSet = membersGlaiveMutSet;
+    this.membersManaPotionMutSet = membersManaPotionMutSet;
+    this.membersHealthPotionMutSet = membersHealthPotionMutSet;
     this.membersTimeScriptDirectiveUCMutSet = membersTimeScriptDirectiveUCMutSet;
     this.membersKillDirectiveUCMutSet = membersKillDirectiveUCMutSet;
     this.membersMoveDirectiveUCMutSet = membersMoveDirectiveUCMutSet;

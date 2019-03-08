@@ -154,6 +154,9 @@ namespace IncendianFalls {
         float scoreThreshold = float.NegativeInfinity) {
       List<Location> foundLocations = new List<Location>();
       for (int j = 0; ; j++) {
+        if (foundLocations.Count > 10000) {
+          throw new Exception("Pattern explorer out of control!");
+        }
         if (maxLocations != -1 && j >= maxLocations) {
           break;
         }

@@ -6,11 +6,9 @@ namespace Atharia.Model {
     public static Atharia.Model.Void Destruct(
         this Unit obj) {
       var events = obj.events;
-      var items = obj.items;
       var components = obj.components;
       obj.Delete();
       components.Destruct();
-      items.Destruct();
       events.Destruct();
       return new Atharia.Model.Void();
     }

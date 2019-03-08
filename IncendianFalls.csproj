@@ -34,5 +34,8 @@
     <Folder Include="InnerCode\Patterns\" />
     <Folder Include="CoreExtensions\AI\" />
     <Folder Include="CoreExtensions\Levels\" />
+    <Folder Include="CoreExtensions\UnitEvent\" />
+    <Folder Include="CoreExtensions\Items\" />
+    <Folder Include="CoreExtensions\Terrain\" />
   </ItemGroup>
 </Project>

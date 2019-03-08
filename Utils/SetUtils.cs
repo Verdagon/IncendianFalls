@@ -42,14 +42,17 @@ public class SetUtils {
 
     List<T> shuffled = new List<T>(set);
 
-    // Shuffle them
-    int n = shuffled.Count;
-    while (n > 1) {
-      n--;
-      int k = rand.Next() % (shuffled.Count - 1);
-      var value = shuffled[k];
-      shuffled[k] = shuffled[n];
-      shuffled[n] = value;
+    // Shuffle them three times. For some reason just one shuffle isn't very random.
+    // TODO: Use a different algorithm!
+    for (int i = 0; i < 3; i++) {
+      int n = shuffled.Count;
+      while (n > 1) {
+        n--;
+        int k = rand.Next() % (shuffled.Count - 1);
+        var value = shuffled[k];
+        shuffled[k] = shuffled[n];
+        shuffled[n] = value;
+      }
     }
 
     shuffled.RemoveRange(x, shuffled.Count - x);

@@ -22,33 +22,19 @@ namespace IncendianFalls {
         // we'll skip any needless steps.
         bool considerCornersAdjacent,
         Location startLoc,
-        Location endLoc) {
-      Vec2 startPos = pattern.GetTileCenter(startLoc);
-      Vec2 endPos = pattern.GetTileCenter(endLoc);
-      PatternExplorer explorer =
-          new PatternExplorer(
+        Location endLoc,
+        bool includeStart) {
+      var path =
+          AStarExplorer.Go(
               pattern,
-              true,
               startLoc,
-              new Prioritizer(pattern, new Ray(startPos, endPos.minus(startPos))),
-              (location, position) => true);
-      List<Location> path =
-          explorer.ExploreWhile(
-              delegate(Location loc) { return loc != endLoc; },
-              -1,
-              0);
-      path.Add(endLoc);
-      if (considerCornersAdjacent) {
-        // Take out any needless steps.
-        for (int i = 0; i < path.Count - 2; ) {
-          if (pattern.GetAdjacentLocations(path[i], true).Contains(path[i + 2])) {
-            path.RemoveAt(i + 1);
-          } else {
-            i++;
-          }
-        }
+              endLoc,
+              considerCornersAdjacent,
+              (Location from, Location to) => true);
+      Asserts.Assert(path.Count > 0);
+      if (includeStart) {
+        path.Insert(0, startLoc);
       }
-      path.Remove(startLoc);
       return path;
     }
   }

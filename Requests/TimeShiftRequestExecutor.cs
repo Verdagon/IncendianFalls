@@ -94,7 +94,7 @@ namespace IncendianFalls {
       switch (superstate.GetStateType()) {
         case MultiverseStateType.kBeforePlayerInput:
           if (superstate.anchorTurnIndices.Count == 0) {
-            return "Can't time shift, nothing to time shift back to!";
+            return "Can't time shift, no anchor to time shift back to!";
           }
 
           var playerRequestFromOlderToNewer = game.lastPlayerRequest;
@@ -177,7 +177,6 @@ namespace IncendianFalls {
                   600,
                   game.time, // Act now
                   IUnitComponentMutBunch.New(context.root),
-                  IItemMutBunch.New(context.root),
                   true,
                   5);
           newPlayer.mp = newPlayer.mp - GetMpCost(futureGame.time - game.time);

@@ -42,10 +42,6 @@ public class Unit {
     if (!root.IUnitComponentMutBunchExists(components.id)) {
       violations.Add("Null constraint violated! Unit#" + id + ".components");
     }
-
-    if (!root.IItemMutBunchExists(items.id)) {
-      violations.Add("Null constraint violated! Unit#" + id + ".items");
-    }
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
     if (foundIds.Contains(id)) {
@@ -57,9 +53,6 @@ public class Unit {
     }
     if (root.IUnitComponentMutBunchExists(components.id)) {
       components.FindReachableObjects(foundIds);
-    }
-    if (root.IItemMutBunchExists(items.id)) {
-      items.FindReachableObjects(foundIds);
     }
   }
   public bool Is(Unit that) {
@@ -123,15 +116,6 @@ public class Unit {
         throw new Exception("Tried to get member components of null!");
       }
       return new IUnitComponentMutBunch(root, incarnation.components);
-    }
-                       }
-  public IItemMutBunch items {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member items of null!");
-      }
-      return new IItemMutBunch(root, incarnation.items);
     }
                        }
   public bool good {

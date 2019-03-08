@@ -17,7 +17,9 @@ namespace IncendianFalls {
     }
 
     private static bool CanSee(Game game, Location from, Location to, out List<Location> outPath) {
-      var path = GetOptimisticDriveTo(game, from, to);
+      var path =
+          GetOptimisticDriveTo(
+              game, from, to, false);
       foreach (var step in path) {
         if (!game.level.terrain.tiles.ContainsKey(step)) {
           outPath = new List<Location>();
@@ -33,8 +35,17 @@ namespace IncendianFalls {
     }
 
     // Optimistic in that it assumes nothing's in the way
-    private static List<Location> GetOptimisticDriveTo(Game game, Location from, Location to) {
-      return PatternDriver.Drive(game.level.terrain.pattern, game.level.ConsiderCornersAdjacent(), from, to);
+    private static List<Location> GetOptimisticDriveTo(
+        Game game,
+        Location from,
+        Location to,
+        bool includeStart) {
+      return PatternDriver.Drive(
+          game.level.terrain.pattern,
+          game.level.ConsiderCornersAdjacent(),
+          from,
+          to,
+          includeStart);
     }
   }
 }

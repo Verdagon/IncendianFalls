@@ -377,7 +377,12 @@ namespace IncendianFalls {
       var waterLocations = new SortedSet<Location>();
       for (int i = 0; i < riverElbowLocations.Length - 1; i++) {
         var boneLocations =
-            PatternDriver.Drive(terrain.pattern, false, riverElbowLocations[i], riverElbowLocations[i + 1]);
+            PatternDriver.Drive(
+                terrain.pattern,
+                false,
+                riverElbowLocations[i],
+                riverElbowLocations[i + 1],
+                true);
         boneLocations.Insert(0, riverElbowLocations[i]);
         Asserts.Assert(boneLocations.Contains(riverElbowLocations[i]));
         Asserts.Assert(boneLocations.Contains(riverElbowLocations[i + 1]));

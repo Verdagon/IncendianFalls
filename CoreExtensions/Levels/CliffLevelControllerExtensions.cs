@@ -66,68 +66,73 @@ namespace Atharia.Model {
       }
 
       //if (cliffHalves.Count == 2) {
-        Location upStaircaseLocation =
+      Location upStaircaseLocation =
             GenerationCommon.GetFurthestLocationInDirection(
                 terrain.pattern,
                 cliffHalves[0].walkableLocs,
                 new Vec2(0, 1));
-        GenerationCommon.PlaceStaircase(
-            terrain, upStaircaseLocation, false, 0, levelAbove, 1);
+      GenerationCommon.PlaceStaircase(
+          terrain, upStaircaseLocation, false, 0, levelAbove, 1);
 
-        Location downStaircaseLocation =
-            GenerationCommon.GetFurthestLocationInDirection(
-                terrain.pattern,
-                cliffHalves[1].walkableLocs,
-                new Vec2(0, -1));
-        GenerationCommon.PlaceStaircase(
-            terrain, downStaircaseLocation, true, 1, Level.Null, 0);
+      Location downStaircaseLocation =
+          GenerationCommon.GetFurthestLocationInDirection(
+              terrain.pattern,
+              cliffHalves[1].walkableLocs,
+              new Vec2(0, -1));
+      GenerationCommon.PlaceStaircase(
+          terrain, downStaircaseLocation, true, 1, Level.Null, 0);
 
-        PlaceCave(
-            out Location highHalfCaveLocation,
-            out SortedSet<Location> highHalfCaveRoomBorder,
-            terrain, game.rand, cliffHalves[0].rooms, 2, caveLevel, 0);
+      PlaceCave(
+          out Location highHalfCaveLocation,
+          out SortedSet<Location> highHalfCaveRoomBorder,
+          terrain, game.rand, cliffHalves[0].rooms, 2, caveLevel, 0);
 
-        PlaceCave(
-            out Location lowHalfCaveLocation,
-            out SortedSet<Location> lowHalfCaveRoomBorder,
-            terrain, game.rand, cliffHalves[1].rooms, 3, caveLevel, 1);
+      PlaceCave(
+          out Location lowHalfCaveLocation,
+          out SortedSet<Location> lowHalfCaveRoomBorder,
+          terrain, game.rand, cliffHalves[1].rooms, 3, caveLevel, 1);
 
-        // IMPORTANT NOTE
-        // Sometimes, a landing can be in another landing's border!!
-        // They can be close enough for that to happen.
-        // Remember, spaces in a room's border needn't even touch the room!
+      // IMPORTANT NOTE
+      // Sometimes, a landing can be in another landing's border!!
+      // They can be close enough for that to happen.
+      // Remember, spaces in a room's border needn't even touch the room!
 
-        if (!CanReachLimited(cliffLevel, upStaircaseLocation, highHalfCaveLocation)) {
-          ResetCliffs(terrain, preRandifiedElevationByLocation, highHalfCaveRoomBorder);
-          var arbitraryBorderLoc = GetArbitraryCliffIn(terrain, highHalfCaveRoomBorder);
-          // Find a path that's not limited by hopping
-          var upperHalfPath = GetUnlimitedPathAlongBorder(cliffLevel, upStaircaseLocation, arbitraryBorderLoc);
-          Asserts.Assert(upperHalfPath.Count > 0);
-          upperHalfPath.Insert(0, upStaircaseLocation);
-          ResetCliffs(terrain, preRandifiedElevationByLocation, new SortedSet<Location>(upperHalfPath));
-          Asserts.Assert(CanReachLimited(cliffLevel, upStaircaseLocation, highHalfCaveLocation));
-        }
+      if (!CanReachLimited(cliffLevel, upStaircaseLocation, highHalfCaveLocation)) {
+        ResetCliffs(terrain, preRandifiedElevationByLocation, highHalfCaveRoomBorder);
+        var arbitraryBorderLoc = GetArbitraryCliffIn(terrain, highHalfCaveRoomBorder);
+        // Find a path that's not limited by hopping
+        var upperHalfPath = GetUnlimitedPathAlongBorder(cliffLevel, upStaircaseLocation, arbitraryBorderLoc);
+        Asserts.Assert(upperHalfPath.Count > 0);
+        upperHalfPath.Insert(0, upStaircaseLocation);
+        ResetCliffs(terrain, preRandifiedElevationByLocation, new SortedSet<Location>(upperHalfPath));
+        Asserts.Assert(CanReachLimited(cliffLevel, upStaircaseLocation, highHalfCaveLocation));
+      }
 
-        if (!CanReachLimited(cliffLevel, downStaircaseLocation, lowHalfCaveLocation)) {
-          ResetCliffs(terrain, preRandifiedElevationByLocation, lowHalfCaveRoomBorder);
-          var arbitraryBorderLoc = GetArbitraryCliffIn(terrain, lowHalfCaveRoomBorder);
-          // Find a path that's not limited by hopping
-          var lowerHalfPath = GetUnlimitedPathAlongBorder(cliffLevel, downStaircaseLocation, arbitraryBorderLoc);
-          if (lowerHalfPath.Count > 0) {
-            lowerHalfPath.Insert(0, upStaircaseLocation);
-            ResetCliffs(terrain, preRandifiedElevationByLocation, new SortedSet<Location>(lowerHalfPath));
-            Asserts.Assert(CanReachLimited(cliffLevel, downStaircaseLocation, lowHalfCaveLocation));
-          } else {
-            context.logger.Error("Can't find path!");
+      if (!CanReachLimited(cliffLevel, downStaircaseLocation, lowHalfCaveLocation)) {
+        ResetCliffs(terrain, preRandifiedElevationByLocation, lowHalfCaveRoomBorder);
+        var arbitraryBorderLoc = GetArbitraryCliffIn(terrain, lowHalfCaveRoomBorder);
+        // Find a path that's not limited by hopping
+        var lowerHalfPath = GetUnlimitedPathAlongBorder(cliffLevel, downStaircaseLocation, arbitraryBorderLoc);
+        Asserts.Assert(lowerHalfPath.Count > 0);
+        lowerHalfPath.Insert(0, upStaircaseLocation);
+        ResetCliffs(terrain, preRandifiedElevationByLocation, new SortedSet<Location>(lowerHalfPath));
+        Asserts.Assert(CanReachLimited(cliffLevel, downStaircaseLocation, lowHalfCaveLocation));
+      }
 
-            GetUnlimitedPathAlongBorder(
-                cliffLevel, downStaircaseLocation, arbitraryBorderLoc);
-            //Asserts.Assert(lowerHalfPath.Count > 0);
-          }
-        }
+      GenerationCommon.PlaceItems(context, game.rand, cliffLevel, levelSuperstate);
 
-        GenerationCommon.FillWithUnits(
-            context, game, cliffLevel, levelSuperstate, depth, false);
+      GenerationCommon.FillWithUnits(
+          context, game, cliffLevel, levelSuperstate, depth, false);
+
+      if (depth == 2) {
+        var vampSwordLoc =
+            levelSuperstate.GetNRandomWalkableLocations(
+                terrain, game.rand, 1, true, true)[0];
+        terrain.tiles[vampSwordLoc].components.Add(
+            context.root.EffectGlaiveCreate()
+            .AsITerrainTileComponent());
+      }
+
       //}
     }
 
@@ -153,28 +158,36 @@ namespace Atharia.Model {
 
     private static bool CanReachLimited(
         Level level,
-        Location from,
-        Location to) {
+        Location origin,
+        Location destination) {
+      var terrain = level.terrain;
       var upperHalfPathWithLimitedHopping =
           AStarExplorer.Go(
-              level.terrain,
-              from,
-              to,
+              terrain.pattern,
+              origin,
+              destination,
               level.ConsiderCornersAdjacent(),
-              true,
-              "");
+              (Location from, Location to) => {
+                return terrain.tiles.ContainsKey(to) &&
+                    terrain.tiles[to].walkable &&
+                    terrain.GetElevationDifference(from, to) <= 2;
+              });
+
       return upperHalfPathWithLimitedHopping.Count > 0;
     }
 
     private static List<Location> GetUnlimitedPathAlongBorder(
-        Level level, Location from, Location to) {
+        Level level, Location origin, Location destination) {
       return AStarExplorer.Go(
-          level.terrain,
-          from,
-          to,
+          level.terrain.pattern,
+          origin,
+          destination,
           level.ConsiderCornersAdjacent(),
-          false,
-          "cliff");
+              (Location from, Location to) => {
+                return level.terrain.tiles.ContainsKey(to) &&
+                    level.terrain.tiles[to].walkable &&
+                    level.terrain.tiles[to].classId == "cliff";
+              });
     }
 
     private static void PlaceCave(
@@ -234,15 +247,8 @@ namespace Atharia.Model {
       if (!fromLevel.NullableIs(obj.level)) {
         game.root.logger.Error("Couldnt figure out where to place unit!");
       }
-      var forbiddenLocations = new SortedSet<Location>();
-      foreach (var locationAndTile in obj.level.terrain.tiles) {
-        var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
-        if (staircase.Exists()) {
-          forbiddenLocations.Add(locationAndTile.Key);
-        }
-      }
       return levelSuperstate.GetNRandomWalkableLocations(
-          game.rand, 1, forbiddenLocations, true)[0];
+          obj.level.terrain, game.rand, 1, true, true)[0];
     }
 
     public static Atharia.Model.Void Generate(

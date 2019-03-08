@@ -45,15 +45,20 @@ namespace Atharia.Model {
         return false;
       }
 
+      var terrain = game.level.terrain;
       // Check if we can reach them.
       List<Location> pathToNearestEnemy =
           AStarExplorer.Go(
-              game.level.terrain,
+              terrain.pattern,
               unit.location,
               nearestEnemy.location,
               game.level.ConsiderCornersAdjacent(),
-              true,
-              "");
+              (Location from, Location to) => {
+                return terrain.tiles.ContainsKey(to) &&
+                    terrain.tiles[to].walkable &&
+                    terrain.GetElevationDifference(from, to) <= 2;
+              });
+
       if (pathToNearestEnemy.Count == 0) {
         // Can't see the enemy. Don't update directive.
         return false;

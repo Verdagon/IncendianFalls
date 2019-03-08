@@ -17,7 +17,6 @@ public class UnitIncarnation {
   public readonly int inertia;
   public  int nextActionTime;
   public readonly int components;
-  public readonly int items;
   public readonly bool good;
   public readonly int strength;
   public UnitIncarnation(
@@ -33,7 +32,6 @@ public class UnitIncarnation {
       int inertia,
       int nextActionTime,
       int components,
-      int items,
       bool good,
       int strength) {
     this.events = events;
@@ -48,7 +46,6 @@ public class UnitIncarnation {
     this.inertia = inertia;
     this.nextActionTime = nextActionTime;
     this.components = components;
-    this.items = items;
     this.good = good;
     this.strength = strength;
   }

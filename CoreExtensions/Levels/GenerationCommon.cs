@@ -64,33 +64,33 @@ namespace IncendianFalls {
     }
 
     public static void PlaceItems(SSContext context, Rand rand, Level level, LevelSuperstate levelSuperstate) {
-      List<Location> glaiveLocations =
+      List<Location> healthLocs =
           levelSuperstate.GetNRandomWalkableLocations(
+              level.terrain,
               rand,
-              levelSuperstate.NumWalkableLocations(false) / 20,
-              new SortedSet<Location>(),
+              levelSuperstate.NumWalkableLocations(false) / 50,
+              true,
               false);
 
-      foreach (var itemLocation in glaiveLocations) {
-        var rockTile = level.terrain.tiles[itemLocation];
+      foreach (var healthLoc in healthLocs) {
+        var rockTile = level.terrain.tiles[healthLoc];
         rockTile.components.Add(
-            context.root.EffectItemTTCCreate(
-                context.root.EffectGlaiveCreate().AsIItem())
+            context.root.EffectHealthPotionCreate()
             .AsITerrainTileComponent());
       }
 
-      List<Location> armorLocations =
+      List<Location> manaLocs =
           levelSuperstate.GetNRandomWalkableLocations(
+            level.terrain,
               rand,
-              levelSuperstate.NumWalkableLocations(false) / 20,
-              new SortedSet<Location>(), 
+              levelSuperstate.NumWalkableLocations(false) / 50,
+              true, 
               false);
 
-      foreach (var itemLocation in armorLocations) {
-        var rockTile = level.terrain.tiles[itemLocation];
+      foreach (var manaLoc in manaLocs) {
+        var rockTile = level.terrain.tiles[manaLoc];
         rockTile.components.Add(
-            context.root.EffectItemTTCCreate(
-                context.root.EffectArmorCreate().AsIItem())
+            context.root.EffectManaPotionCreate()
             .AsITerrainTileComponent());
       }
     }
@@ -98,9 +98,10 @@ namespace IncendianFalls {
     public static void PlaceRocks(SSContext context, Rand rand, Level level, LevelSuperstate levelSuperstate) {
       List<Location> rockLocations =
           levelSuperstate.GetNRandomWalkableLocations(
+              level.terrain,
               rand,
               levelSuperstate.NumWalkableLocations(false) / 20,
-              new SortedSet<Location>(),
+              true,
               false);
 
       foreach (var rockLocation in rockLocations) {
@@ -283,7 +284,7 @@ namespace IncendianFalls {
         int depth,
         bool inside) {
 
-      int numUnits = 50;
+      int numUnits = 30;
 
       int[] numByUnit = DetermineUnitsForLevel(game.rand, depth, inside, numUnits);
       int numAvelisk = numByUnit[0];
@@ -305,12 +306,11 @@ namespace IncendianFalls {
                 0,
                 new Location(0, 0, 0),
                 "avelisk",
-                14, 14,
+                9, 9,
                 0, 0,
                 600,
                 game.time + 10,
                 components,
-                IItemMutBunch.New(context.root),
                 false,
                 5);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
@@ -332,7 +332,6 @@ namespace IncendianFalls {
                 600,
                 game.time + 10,
                 components,
-                IItemMutBunch.New(context.root),
                 false,
                 4);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
@@ -354,7 +353,6 @@ namespace IncendianFalls {
                 300,
                 game.time + 10,
                 components,
-                IItemMutBunch.New(context.root),
                 false,
                 3);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
@@ -377,7 +375,6 @@ namespace IncendianFalls {
                 600,
                 game.time + 10,
                 components,
-                IItemMutBunch.New(context.root),
                 false,
                 9);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
@@ -399,7 +396,6 @@ namespace IncendianFalls {
                 600,
                 game.time + 10,
                 components,
-                IItemMutBunch.New(context.root),
                 false,
                 15);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
@@ -421,7 +417,6 @@ namespace IncendianFalls {
                 600,
                 game.time + 10,
                 components,
-                IItemMutBunch.New(context.root),
                 false,
                 65);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
@@ -444,7 +439,6 @@ namespace IncendianFalls {
                 600,
                 game.time + 10,
                 components,
-                IItemMutBunch.New(context.root),
                 false,
                 12);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);

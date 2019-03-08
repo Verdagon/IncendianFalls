@@ -50,22 +50,18 @@ namespace IncendianFalls {
       game.level = firstLevel;
       superstate.levelSuperstate = firstLevelSuperstate;
 
-      var playerLocation =
-          superstate.levelSuperstate.GetNRandomWalkableLocations(
-              game.rand, 1, new SortedSet<Location>(), true)[0];
       var player =
           context.root.EffectUnitCreate(
               context.root.EffectIUnitEventMutListCreate(),
               true,
               0,
-              playerLocation,
+              new Location(0, 0, 0),
               "chronomancer",
               90, 90,
               100, 100,
               600,
               0,
               IUnitComponentMutBunch.New(context.root),
-              IItemMutBunch.New(context.root),
               true,
               5);
       firstLevel.EnterUnit(

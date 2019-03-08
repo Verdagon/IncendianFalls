@@ -18,6 +18,8 @@ namespace IncendianFalls {
   //  return (new Location.BeforeComparer()).Compare(a, b);
   //}
 
+  public delegate bool ICanStep(Location from, Location to);
+
   public class AStarExplorer {
     private class LowerFScoreComparer : IComparer<Location> {
       SortedDictionary<Location, GFAndCameFrom> fGAndCameFromByLocation;
@@ -54,12 +56,11 @@ namespace IncendianFalls {
     // Could optimize this... instead of having all these separate maps, combine some of them
     // so that they share cache lines.
     public static List<Location> Go(
-        Terrain terrain,
+        Pattern pattern,
         Location startLocation,
         Location targetLocation,
         bool cornersAreAdjacent,
-        bool limit2ElevationDifference,
-        string tileClassIdFilter) {
+        ICanStep canStep) {
       //UnityEngine.Debug.Log("Pathing from " + startLocation + " to " + targetLocation);
 
       if (startLocation == targetLocation) {
@@ -85,7 +86,7 @@ namespace IncendianFalls {
 
       gFAndCameFromByLocation[startLocation] =
           new GFAndCameFrom(
-              EstimateHeuristicCost(terrain.pattern, startLocation, targetLocation),
+              EstimateHeuristicCost(pattern, startLocation, targetLocation),
               0,
               startLocation);
 
@@ -106,19 +107,9 @@ namespace IncendianFalls {
         //}
         closedLocations.Add(currentLocation);
 
-        var neighbors = terrain.pattern.GetAdjacentLocations(currentLocation, cornersAreAdjacent);
+        var neighbors = pattern.GetAdjacentLocations(currentLocation, cornersAreAdjacent);
         foreach (var neighborLocation in neighbors) {
-          if (!terrain.tiles.ContainsKey(neighborLocation)) {
-            continue;
-          }
-          if (!terrain.tiles[neighborLocation].walkable) {
-            continue;
-          }
-          int elevationDifference = terrain.GetElevationDifference(neighborLocation, currentLocation);
-          if (limit2ElevationDifference && elevationDifference > 2) {
-            continue;
-          }
-          if (tileClassIdFilter.Length > 0 && terrain.tiles[neighborLocation].classId != tileClassIdFilter) {
+          if (!canStep(currentLocation, neighborLocation)) {
             continue;
           }
           if (closedLocations.Contains(neighborLocation)) {
@@ -126,8 +117,8 @@ namespace IncendianFalls {
           }
           float tentativeGScore =
               gFAndCameFromByLocation[currentLocation].gScore +
-              terrain.pattern.GetTileCenter(currentLocation)
-                  .distance(terrain.pattern.GetTileCenter(neighborLocation));
+              pattern.GetTileCenter(currentLocation)
+                  .distance(pattern.GetTileCenter(neighborLocation));
           if (!openLocationsLowestFFirst.ContainsKey(neighborLocation)) {
             // Discovered a new node
             openLocationsLowestFFirst.Add(neighborLocation, new object());
@@ -144,7 +135,7 @@ namespace IncendianFalls {
             new GFAndCameFrom(
               tentativeGScore,
               tentativeGScore +
-                  EstimateHeuristicCost(terrain.pattern, neighborLocation, targetLocation),
+                  EstimateHeuristicCost(pattern, neighborLocation, targetLocation),
               currentLocation);
           openLocationsLowestFFirst.Add(neighborLocation, new object());
         }

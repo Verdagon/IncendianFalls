@@ -4,13 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IUnitComponentMutBunchBroadcaster:ITimeScriptDirectiveUCMutSetEffectObserver, ITimeScriptDirectiveUCMutSetEffectVisitor, IKillDirectiveUCMutSetEffectObserver, IKillDirectiveUCMutSetEffectVisitor, IMoveDirectiveUCMutSetEffectObserver, IMoveDirectiveUCMutSetEffectVisitor, IWanderAICapabilityUCMutSetEffectObserver, IWanderAICapabilityUCMutSetEffectVisitor, IBideAICapabilityUCMutSetEffectObserver, IBideAICapabilityUCMutSetEffectVisitor, ITimeCloneAICapabilityUCMutSetEffectObserver, ITimeCloneAICapabilityUCMutSetEffectVisitor, IAttackAICapabilityUCMutSetEffectObserver, IAttackAICapabilityUCMutSetEffectVisitor, ICounteringUCMutSetEffectObserver, ICounteringUCMutSetEffectVisitor, IShieldingUCMutSetEffectObserver, IShieldingUCMutSetEffectVisitor, IBidingOperationUCMutSetEffectObserver, IBidingOperationUCMutSetEffectVisitor {
+public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmorMutSetEffectVisitor, IGlaiveMutSetEffectObserver, IGlaiveMutSetEffectVisitor, IManaPotionMutSetEffectObserver, IManaPotionMutSetEffectVisitor, IHealthPotionMutSetEffectObserver, IHealthPotionMutSetEffectVisitor, ITimeScriptDirectiveUCMutSetEffectObserver, ITimeScriptDirectiveUCMutSetEffectVisitor, IKillDirectiveUCMutSetEffectObserver, IKillDirectiveUCMutSetEffectVisitor, IMoveDirectiveUCMutSetEffectObserver, IMoveDirectiveUCMutSetEffectVisitor, IWanderAICapabilityUCMutSetEffectObserver, IWanderAICapabilityUCMutSetEffectVisitor, IBideAICapabilityUCMutSetEffectObserver, IBideAICapabilityUCMutSetEffectVisitor, ITimeCloneAICapabilityUCMutSetEffectObserver, ITimeCloneAICapabilityUCMutSetEffectVisitor, IAttackAICapabilityUCMutSetEffectObserver, IAttackAICapabilityUCMutSetEffectVisitor, ICounteringUCMutSetEffectObserver, ICounteringUCMutSetEffectVisitor, IShieldingUCMutSetEffectObserver, IShieldingUCMutSetEffectVisitor, IBidingOperationUCMutSetEffectObserver, IBidingOperationUCMutSetEffectVisitor {
   IUnitComponentMutBunch bunch;
   private List<IIUnitComponentMutBunchObserver> observers;
 
   public IUnitComponentMutBunchBroadcaster(IUnitComponentMutBunch bunch) {
     this.bunch = bunch;
     this.observers = new List<IIUnitComponentMutBunchObserver>();
+    bunch.membersArmorMutSet.AddObserver(this);
+    bunch.membersGlaiveMutSet.AddObserver(this);
+    bunch.membersManaPotionMutSet.AddObserver(this);
+    bunch.membersHealthPotionMutSet.AddObserver(this);
     bunch.membersTimeScriptDirectiveUCMutSet.AddObserver(this);
     bunch.membersKillDirectiveUCMutSet.AddObserver(this);
     bunch.membersMoveDirectiveUCMutSet.AddObserver(this);
@@ -24,6 +28,10 @@ public class IUnitComponentMutBunchBroadcaster:ITimeScriptDirectiveUCMutSetEffec
 
   }
   public void Stop() {
+    bunch.membersArmorMutSet.RemoveObserver(this);
+    bunch.membersGlaiveMutSet.RemoveObserver(this);
+    bunch.membersManaPotionMutSet.RemoveObserver(this);
+    bunch.membersHealthPotionMutSet.RemoveObserver(this);
     bunch.membersTimeScriptDirectiveUCMutSet.RemoveObserver(this);
     bunch.membersKillDirectiveUCMutSet.RemoveObserver(this);
     bunch.membersMoveDirectiveUCMutSet.RemoveObserver(this);
@@ -52,6 +60,50 @@ public class IUnitComponentMutBunchBroadcaster:ITimeScriptDirectiveUCMutSetEffec
       observer.OnIUnitComponentMutBunchRemove(id);
     }
   }
+  public void OnArmorMutSetEffect(IArmorMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitArmorMutSetAddEffect(ArmorMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitArmorMutSetRemoveEffect(ArmorMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitArmorMutSetCreateEffect(ArmorMutSetCreateEffect effect) { }
+  public void visitArmorMutSetDeleteEffect(ArmorMutSetDeleteEffect effect) { }
+  public void OnGlaiveMutSetEffect(IGlaiveMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitGlaiveMutSetAddEffect(GlaiveMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitGlaiveMutSetRemoveEffect(GlaiveMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitGlaiveMutSetCreateEffect(GlaiveMutSetCreateEffect effect) { }
+  public void visitGlaiveMutSetDeleteEffect(GlaiveMutSetDeleteEffect effect) { }
+  public void OnManaPotionMutSetEffect(IManaPotionMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitManaPotionMutSetAddEffect(ManaPotionMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitManaPotionMutSetRemoveEffect(ManaPotionMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitManaPotionMutSetCreateEffect(ManaPotionMutSetCreateEffect effect) { }
+  public void visitManaPotionMutSetDeleteEffect(ManaPotionMutSetDeleteEffect effect) { }
+  public void OnHealthPotionMutSetEffect(IHealthPotionMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitHealthPotionMutSetAddEffect(HealthPotionMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitHealthPotionMutSetRemoveEffect(HealthPotionMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitHealthPotionMutSetCreateEffect(HealthPotionMutSetCreateEffect effect) { }
+  public void visitHealthPotionMutSetDeleteEffect(HealthPotionMutSetDeleteEffect effect) { }
   public void OnTimeScriptDirectiveUCMutSetEffect(ITimeScriptDirectiveUCMutSetEffect effect) {
     effect.visit(this);
   }

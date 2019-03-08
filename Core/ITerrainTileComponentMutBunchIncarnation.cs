@@ -5,18 +5,27 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class ITerrainTileComponentMutBunchIncarnation {
+  public readonly int membersArmorMutSet;
+  public readonly int membersGlaiveMutSet;
+  public readonly int membersManaPotionMutSet;
+  public readonly int membersHealthPotionMutSet;
   public readonly int membersTimeAnchorTTCMutSet;
   public readonly int membersStaircaseTTCMutSet;
-  public readonly int membersItemTTCMutSet;
   public readonly int membersDecorativeTTCMutSet;
   public ITerrainTileComponentMutBunchIncarnation(
+      int membersArmorMutSet,
+      int membersGlaiveMutSet,
+      int membersManaPotionMutSet,
+      int membersHealthPotionMutSet,
       int membersTimeAnchorTTCMutSet,
       int membersStaircaseTTCMutSet,
-      int membersItemTTCMutSet,
       int membersDecorativeTTCMutSet) {
+    this.membersArmorMutSet = membersArmorMutSet;
+    this.membersGlaiveMutSet = membersGlaiveMutSet;
+    this.membersManaPotionMutSet = membersManaPotionMutSet;
+    this.membersHealthPotionMutSet = membersHealthPotionMutSet;
     this.membersTimeAnchorTTCMutSet = membersTimeAnchorTTCMutSet;
     this.membersStaircaseTTCMutSet = membersStaircaseTTCMutSet;
-    this.membersItemTTCMutSet = membersItemTTCMutSet;
     this.membersDecorativeTTCMutSet = membersDecorativeTTCMutSet;
   }
 }

@@ -44,14 +44,19 @@ namespace IncendianFalls {
         return null;
       }
 
+      var terrain = game.level.terrain;
       var steps =
           AStarExplorer.Go(
-              game.level.terrain,
+              terrain.pattern,
               game.player.location,
               destination,
               game.level.ConsiderCornersAdjacent(),
-              true,
-              "");
+              (Location from, Location to) => {
+                return terrain.tiles.ContainsKey(to) &&
+                    terrain.tiles[to].walkable &&
+                    terrain.GetElevationDifference(from, to) <= 2;
+              });
+
       if (steps.Count == 0) {
         game.root.logger.Error("No path!");
         return null;

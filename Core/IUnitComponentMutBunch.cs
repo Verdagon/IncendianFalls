@@ -35,6 +35,22 @@ public class IUnitComponentMutBunch {
   }
   public void CheckForNullViolations(List<string> violations) {
 
+    if (!root.ArmorMutSetExists(membersArmorMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersArmorMutSet");
+    }
+
+    if (!root.GlaiveMutSetExists(membersGlaiveMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersGlaiveMutSet");
+    }
+
+    if (!root.ManaPotionMutSetExists(membersManaPotionMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersManaPotionMutSet");
+    }
+
+    if (!root.HealthPotionMutSetExists(membersHealthPotionMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersHealthPotionMutSet");
+    }
+
     if (!root.TimeScriptDirectiveUCMutSetExists(membersTimeScriptDirectiveUCMutSet.id)) {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersTimeScriptDirectiveUCMutSet");
     }
@@ -80,6 +96,18 @@ public class IUnitComponentMutBunch {
       return;
     }
     foundIds.Add(id);
+    if (root.ArmorMutSetExists(membersArmorMutSet.id)) {
+      membersArmorMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.GlaiveMutSetExists(membersGlaiveMutSet.id)) {
+      membersGlaiveMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.ManaPotionMutSetExists(membersManaPotionMutSet.id)) {
+      membersManaPotionMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.HealthPotionMutSetExists(membersHealthPotionMutSet.id)) {
+      membersHealthPotionMutSet.FindReachableObjects(foundIds);
+    }
     if (root.TimeScriptDirectiveUCMutSetExists(membersTimeScriptDirectiveUCMutSet.id)) {
       membersTimeScriptDirectiveUCMutSet.FindReachableObjects(foundIds);
     }
@@ -120,7 +148,43 @@ public class IUnitComponentMutBunch {
     }
     return this.root == that.root && id == that.id;
   }
-         public TimeScriptDirectiveUCMutSet membersTimeScriptDirectiveUCMutSet {
+         public ArmorMutSet membersArmorMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersArmorMutSet of null!");
+      }
+      return new ArmorMutSet(root, incarnation.membersArmorMutSet);
+    }
+                       }
+  public GlaiveMutSet membersGlaiveMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersGlaiveMutSet of null!");
+      }
+      return new GlaiveMutSet(root, incarnation.membersGlaiveMutSet);
+    }
+                       }
+  public ManaPotionMutSet membersManaPotionMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersManaPotionMutSet of null!");
+      }
+      return new ManaPotionMutSet(root, incarnation.membersManaPotionMutSet);
+    }
+                       }
+  public HealthPotionMutSet membersHealthPotionMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersHealthPotionMutSet of null!");
+      }
+      return new HealthPotionMutSet(root, incarnation.membersHealthPotionMutSet);
+    }
+                       }
+  public TimeScriptDirectiveUCMutSet membersTimeScriptDirectiveUCMutSet {
 
     get {
       if (root == null) {
@@ -213,6 +277,14 @@ public class IUnitComponentMutBunch {
 
   public static IUnitComponentMutBunch New(Root root) {
     return root.EffectIUnitComponentMutBunchCreate(
+      root.EffectArmorMutSetCreate()
+,
+      root.EffectGlaiveMutSetCreate()
+,
+      root.EffectManaPotionMutSetCreate()
+,
+      root.EffectHealthPotionMutSetCreate()
+,
       root.EffectTimeScriptDirectiveUCMutSetCreate()
 ,
       root.EffectKillDirectiveUCMutSetCreate()
@@ -235,6 +307,30 @@ public class IUnitComponentMutBunch {
         );
   }
   public void Add(IUnitComponent elementI) {
+
+    // Can optimize, check the type of element directly somehow
+    if (root.ArmorExists(elementI.id)) {
+      this.membersArmorMutSet.Add(root.GetArmor(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.GlaiveExists(elementI.id)) {
+      this.membersGlaiveMutSet.Add(root.GetGlaive(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.ManaPotionExists(elementI.id)) {
+      this.membersManaPotionMutSet.Add(root.GetManaPotion(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.HealthPotionExists(elementI.id)) {
+      this.membersHealthPotionMutSet.Add(root.GetHealthPotion(elementI.id));
+      return;
+    }
 
     // Can optimize, check the type of element directly somehow
     if (root.TimeScriptDirectiveUCExists(elementI.id)) {
@@ -300,6 +396,30 @@ public class IUnitComponentMutBunch {
   public void Remove(IUnitComponent elementI) {
 
     // Can optimize, check the type of element directly somehow
+    if (root.ArmorExists(elementI.id)) {
+      this.membersArmorMutSet.Remove(root.GetArmor(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.GlaiveExists(elementI.id)) {
+      this.membersGlaiveMutSet.Remove(root.GetGlaive(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.ManaPotionExists(elementI.id)) {
+      this.membersManaPotionMutSet.Remove(root.GetManaPotion(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.HealthPotionExists(elementI.id)) {
+      this.membersHealthPotionMutSet.Remove(root.GetHealthPotion(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.TimeScriptDirectiveUCExists(elementI.id)) {
       this.membersTimeScriptDirectiveUCMutSet.Remove(root.GetTimeScriptDirectiveUC(elementI.id));
       return;
@@ -361,6 +481,10 @@ public class IUnitComponentMutBunch {
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
+    this.membersArmorMutSet.Clear();
+    this.membersGlaiveMutSet.Clear();
+    this.membersManaPotionMutSet.Clear();
+    this.membersHealthPotionMutSet.Clear();
     this.membersTimeScriptDirectiveUCMutSet.Clear();
     this.membersKillDirectiveUCMutSet.Clear();
     this.membersMoveDirectiveUCMutSet.Clear();
@@ -375,6 +499,10 @@ public class IUnitComponentMutBunch {
   public int Count {
     get {
       return
+        this.membersArmorMutSet.Count +
+        this.membersGlaiveMutSet.Count +
+        this.membersManaPotionMutSet.Count +
+        this.membersHealthPotionMutSet.Count +
         this.membersTimeScriptDirectiveUCMutSet.Count +
         this.membersKillDirectiveUCMutSet.Count +
         this.membersMoveDirectiveUCMutSet.Count +
@@ -396,6 +524,10 @@ public class IUnitComponentMutBunch {
   }
 
   public void Destruct() {
+    var tempMembersArmorMutSet = this.membersArmorMutSet;
+    var tempMembersGlaiveMutSet = this.membersGlaiveMutSet;
+    var tempMembersManaPotionMutSet = this.membersManaPotionMutSet;
+    var tempMembersHealthPotionMutSet = this.membersHealthPotionMutSet;
     var tempMembersTimeScriptDirectiveUCMutSet = this.membersTimeScriptDirectiveUCMutSet;
     var tempMembersKillDirectiveUCMutSet = this.membersKillDirectiveUCMutSet;
     var tempMembersMoveDirectiveUCMutSet = this.membersMoveDirectiveUCMutSet;
@@ -408,6 +540,10 @@ public class IUnitComponentMutBunch {
     var tempMembersBidingOperationUCMutSet = this.membersBidingOperationUCMutSet;
 
     this.Delete();
+    tempMembersArmorMutSet.Destruct();
+    tempMembersGlaiveMutSet.Destruct();
+    tempMembersManaPotionMutSet.Destruct();
+    tempMembersHealthPotionMutSet.Destruct();
     tempMembersTimeScriptDirectiveUCMutSet.Destruct();
     tempMembersKillDirectiveUCMutSet.Destruct();
     tempMembersMoveDirectiveUCMutSet.Destruct();
@@ -420,6 +556,18 @@ public class IUnitComponentMutBunch {
     tempMembersBidingOperationUCMutSet.Destruct();
   }
   public IEnumerator<IUnitComponent> GetEnumerator() {
+    foreach (var element in this.membersArmorMutSet) {
+      yield return new ArmorAsIUnitComponent(element);
+    }
+    foreach (var element in this.membersGlaiveMutSet) {
+      yield return new GlaiveAsIUnitComponent(element);
+    }
+    foreach (var element in this.membersManaPotionMutSet) {
+      yield return new ManaPotionAsIUnitComponent(element);
+    }
+    foreach (var element in this.membersHealthPotionMutSet) {
+      yield return new HealthPotionAsIUnitComponent(element);
+    }
     foreach (var element in this.membersTimeScriptDirectiveUCMutSet) {
       yield return new TimeScriptDirectiveUCAsIUnitComponent(element);
     }
@@ -451,6 +599,90 @@ public class IUnitComponentMutBunch {
       yield return new BidingOperationUCAsIUnitComponent(element);
     }
   }
+    public List<Armor> GetAllArmor() {
+      var result = new List<Armor>();
+      foreach (var thing in this.membersArmorMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<Armor> ClearAllArmor() {
+      var result = new List<Armor>();
+      this.membersArmorMutSet.Clear();
+      return result;
+    }
+    public Armor GetOnlyArmorOrNull() {
+      var result = GetAllArmor();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return Armor.Null;
+      }
+    }
+    public List<Glaive> GetAllGlaive() {
+      var result = new List<Glaive>();
+      foreach (var thing in this.membersGlaiveMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<Glaive> ClearAllGlaive() {
+      var result = new List<Glaive>();
+      this.membersGlaiveMutSet.Clear();
+      return result;
+    }
+    public Glaive GetOnlyGlaiveOrNull() {
+      var result = GetAllGlaive();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return Glaive.Null;
+      }
+    }
+    public List<ManaPotion> GetAllManaPotion() {
+      var result = new List<ManaPotion>();
+      foreach (var thing in this.membersManaPotionMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<ManaPotion> ClearAllManaPotion() {
+      var result = new List<ManaPotion>();
+      this.membersManaPotionMutSet.Clear();
+      return result;
+    }
+    public ManaPotion GetOnlyManaPotionOrNull() {
+      var result = GetAllManaPotion();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return ManaPotion.Null;
+      }
+    }
+    public List<HealthPotion> GetAllHealthPotion() {
+      var result = new List<HealthPotion>();
+      foreach (var thing in this.membersHealthPotionMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<HealthPotion> ClearAllHealthPotion() {
+      var result = new List<HealthPotion>();
+      this.membersHealthPotionMutSet.Clear();
+      return result;
+    }
+    public HealthPotion GetOnlyHealthPotionOrNull() {
+      var result = GetAllHealthPotion();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return HealthPotion.Null;
+      }
+    }
     public List<TimeScriptDirectiveUC> GetAllTimeScriptDirectiveUC() {
       var result = new List<TimeScriptDirectiveUC>();
       foreach (var thing in this.membersTimeScriptDirectiveUCMutSet) {
@@ -683,6 +915,28 @@ public class IUnitComponentMutBunch {
         return NullIReactingToAttacksUC.Null;
       }
     }
+                 public List<IOffenseItem> GetAllIOffenseItem() {
+      var result = new List<IOffenseItem>();
+      foreach (var obj in this.membersGlaiveMutSet) {
+        result.Add(
+            new GlaiveAsIOffenseItem(obj));
+      }
+      return result;
+    }
+    public List<IOffenseItem> ClearAllIOffenseItem() {
+      var result = new List<IOffenseItem>();
+      this.membersGlaiveMutSet.Clear();
+      return result;
+    }
+    public IOffenseItem GetOnlyIOffenseItemOrNull() {
+      var result = GetAllIOffenseItem();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIOffenseItem.Null;
+      }
+    }
                  public List<IAICapabilityUC> GetAllIAICapabilityUC() {
       var result = new List<IAICapabilityUC>();
       foreach (var obj in this.membersWanderAICapabilityUCMutSet) {
@@ -823,6 +1077,65 @@ public class IUnitComponentMutBunch {
         return NullIDefenseUC.Null;
       }
     }
+                 public List<IItem> GetAllIItem() {
+      var result = new List<IItem>();
+      foreach (var obj in this.membersArmorMutSet) {
+        result.Add(
+            new ArmorAsIItem(obj));
+      }
+      foreach (var obj in this.membersGlaiveMutSet) {
+        result.Add(
+            new GlaiveAsIItem(obj));
+      }
+      foreach (var obj in this.membersManaPotionMutSet) {
+        result.Add(
+            new ManaPotionAsIItem(obj));
+      }
+      foreach (var obj in this.membersHealthPotionMutSet) {
+        result.Add(
+            new HealthPotionAsIItem(obj));
+      }
+      return result;
+    }
+    public List<IItem> ClearAllIItem() {
+      var result = new List<IItem>();
+      this.membersArmorMutSet.Clear();
+      this.membersGlaiveMutSet.Clear();
+      this.membersManaPotionMutSet.Clear();
+      this.membersHealthPotionMutSet.Clear();
+      return result;
+    }
+    public IItem GetOnlyIItemOrNull() {
+      var result = GetAllIItem();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIItem.Null;
+      }
+    }
+                 public List<IDefenseItem> GetAllIDefenseItem() {
+      var result = new List<IDefenseItem>();
+      foreach (var obj in this.membersArmorMutSet) {
+        result.Add(
+            new ArmorAsIDefenseItem(obj));
+      }
+      return result;
+    }
+    public List<IDefenseItem> ClearAllIDefenseItem() {
+      var result = new List<IDefenseItem>();
+      this.membersArmorMutSet.Clear();
+      return result;
+    }
+    public IDefenseItem GetOnlyIDefenseItemOrNull() {
+      var result = GetAllIDefenseItem();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIDefenseItem.Null;
+      }
+    }
                  public List<IDirectiveUC> GetAllIDirectiveUC() {
       var result = new List<IDirectiveUC>();
       foreach (var obj in this.membersTimeScriptDirectiveUCMutSet) {
@@ -853,6 +1166,33 @@ public class IUnitComponentMutBunch {
         return result[0];
       } else {
         return NullIDirectiveUC.Null;
+      }
+    }
+                 public List<IUsableItem> GetAllIUsableItem() {
+      var result = new List<IUsableItem>();
+      foreach (var obj in this.membersManaPotionMutSet) {
+        result.Add(
+            new ManaPotionAsIUsableItem(obj));
+      }
+      foreach (var obj in this.membersHealthPotionMutSet) {
+        result.Add(
+            new HealthPotionAsIUsableItem(obj));
+      }
+      return result;
+    }
+    public List<IUsableItem> ClearAllIUsableItem() {
+      var result = new List<IUsableItem>();
+      this.membersManaPotionMutSet.Clear();
+      this.membersHealthPotionMutSet.Clear();
+      return result;
+    }
+    public IUsableItem GetOnlyIUsableItemOrNull() {
+      var result = GetAllIUsableItem();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIUsableItem.Null;
       }
     }
              }

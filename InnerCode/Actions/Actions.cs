@@ -33,14 +33,14 @@ namespace IncendianFalls {
         Unit attacker,
         Unit victim,
         int damage) {
-      foreach (var item in attacker.items) {
+      foreach (var item in attacker.components.GetAllIOffenseItem()) {
         damage = item.AffectOutgoingDamage(damage);
       }
       foreach (var detail in victim.components.GetAllIDefenseUC()) {
         damage = detail.AffectIncomingDamage(damage);
       }
-      foreach (var item in victim.items) {
-        damage = item.AffectIncomingDamage(damage);
+      foreach (var detail in victim.components.GetAllIDefenseItem()) {
+        damage = detail.AffectIncomingDamage(damage);
       }
       //game.root.logger.Info((attacker.Is(game.player) ? "Player" : "Enemy") + " does " + damage + " damage to " + (victim.Is(game.player) ? "player" : "enemy") + "!");
       victim.hp = victim.hp - damage;
@@ -87,8 +87,9 @@ namespace IncendianFalls {
         Game game,
         Superstate superstate,
         Unit unit) {
-      var staircase = game.level.terrain.tiles[unit.location].components.GetOnlyStaircaseTTCOrNull();
-      if (staircase != null) {
+      var tile = game.level.terrain.tiles[unit.location];
+      var staircase = tile.components.GetOnlyStaircaseTTCOrNull();
+      if (staircase.Exists()) {
         var previousLevel = game.level;
         var previousLevelPortalIndex = staircase.portalIndex;
 
@@ -129,9 +130,24 @@ namespace IncendianFalls {
         // Note how we are NOT setting unit.nextActionTime here. That's because
         // we want the player to have the first action after they descend.
         return true;
-      } else {
-        return false;
       }
+
+      var items = tile.components.GetAllIItem();
+      if (items.Count > 0) {
+        var item = items[0];
+
+        tile.components.Remove(item.AsITerrainTileComponent());
+        unit.components.Add(item.AsIUnitComponent());
+
+        if (item is HealthPotionAsIItem hp) {
+          hp.obj.Use(game, superstate, unit);
+        } else if (item is ManaPotionAsIItem mp) {
+          mp.obj.Use(game, superstate, unit);
+        }
+        return true;
+      }
+
+      return false;
     }
 
     public static bool CanStep(
@@ -187,10 +203,10 @@ namespace IncendianFalls {
         Unit attacker,
         Unit victim) {
       Eventer.broadcastUnitFireEvent(game.root, game, attacker, victim);
-      AttackInner(game, superstate, attacker, victim, 12);
+      AttackInner(game, superstate, attacker, victim, 23);
       attacker.nextActionTime = attacker.nextActionTime + attacker.inertia;
 
-      attacker.mp = attacker.mp - 10;
+      attacker.mp = attacker.mp - 18;
     }
   }
 }

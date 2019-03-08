@@ -37,8 +37,8 @@ namespace IncendianFalls {
         return "Too far, can't fire!";
       }
 
-      if (player.mp < 12) {
-        return "Can't fire, need 12mp!";
+      if (player.mp < 18) {
+        return "Can't fire, need 18mp!";
       }
 
       superstate.previousTurns.Add(context.root.Snapshot());

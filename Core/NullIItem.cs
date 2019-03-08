@@ -24,13 +24,36 @@ public class NullIItem : IItem {
   public IItem AsIItem() {
     return this;
   }
-       
-  public int AffectIncomingDamage(int incomingDamage) {
-    throw new Exception("Called AffectIncomingDamage on a null!");
+         public bool Is(ITerrainTileComponent that) {
+    throw new Exception("Called Is on a null!");
   }
-             
-  public int AffectOutgoingDamage(int outgoingDamage) {
-    throw new Exception("Called AffectOutgoingDamage on a null!");
+  public bool NullableIs(ITerrainTileComponent that) {
+    return !that.Exists();
+  }
+  public ITerrainTileComponent AsITerrainTileComponent() {
+    return NullITerrainTileComponent.Null;
+  }
+  public bool Is(IDestructible that) {
+    throw new Exception("Called Is on a null!");
+  }
+  public bool NullableIs(IDestructible that) {
+    return !that.Exists();
+  }
+  public IDestructible AsIDestructible() {
+    return NullIDestructible.Null;
+  }
+  public bool Is(IUnitComponent that) {
+    throw new Exception("Called Is on a null!");
+  }
+  public bool NullableIs(IUnitComponent that) {
+    return !that.Exists();
+  }
+  public IUnitComponent AsIUnitComponent() {
+    return NullIUnitComponent.Null;
+  }
+
+  public Void Destruct() {
+    throw new Exception("Called Destruct on a null!");
   }
              }
 }
