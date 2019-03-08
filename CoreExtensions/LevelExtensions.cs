@@ -36,7 +36,6 @@ namespace Atharia.Model {
         Unit unit,
         Level fromLevel,
         int fromLevelPortalIndex) {
-      game.root.logger.Warning("enterunit, " + fromLevel.id + " " + fromLevelPortalIndex);
       var entryLocation =
           obj.controller.GetEntryLocation(
               game, levelSuperstate, fromLevel, fromLevelPortalIndex);

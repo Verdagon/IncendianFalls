@@ -212,14 +212,11 @@ namespace IncendianFalls {
       // Between .74 and .75, pentagonal9 had tiles that had some neighbors with elevation
       // more than 2 above them. Going with .73 to be safe.
       TerrainUtils.slopify(terrain, new Vec2(0, -1), .73f);
-      //int unreachableNeighbors = 0;
-      //foreach (var location in terrain.tiles.Keys) {
-      //  foreach (var adjacent in terrain.GetAdjacentExistingLocations(location, false)) {
-      //    if (Math.Abs(terrain.tiles[location].elevation - terrain.tiles[adjacent].elevation) > 2) {
-      //      unreachableNeighbors++;
-      //    }
-      //  }
-      //}
+      foreach (var location in terrain.tiles.Keys) {
+        foreach (var adjacent in terrain.GetAdjacentExistingLocations(location, false)) {
+          Asserts.Assert(terrain.GetElevationDifference(location, adjacent) <= 2);
+        }
+      }
 
       var waterLocations = GetWaterfallLocations(rand, terrain, waterfallTopLeftToBottomRight);
       foreach (var waterLoc in waterLocations) {
@@ -265,35 +262,38 @@ namespace IncendianFalls {
         contiguousAreas.RemoveAt(smallestContiguousAreaIndex);
       }
       Asserts.Assert(contiguousAreas.Count == 2);
-
-      // Fix the order of contiguousAreas, we want the higher side to be first.
-      Location lowLeftLoc = SetUtils.GetFirst(contiguousAreas[0]);
-      Vec2 lowLeftPos = pattern.GetTileCenter(lowLeftLoc);
-      foreach (var loc in terrain.tiles.Keys) {
-        var center = pattern.GetTileCenter(loc);
-        if (center.x + center.y < lowLeftPos.x + lowLeftPos.y) {
-          lowLeftPos = center;
-          lowLeftLoc = loc;
+      //if (contiguousAreas.Count != 2) {
+      //  context.logger.Error("Not 2!? " + contiguousAreas.Count);
+      //} else {
+        // Fix the order of contiguousAreas, we want the higher side to be first.
+        Location lowLeftLoc = SetUtils.GetFirst(contiguousAreas[0]);
+        Vec2 lowLeftPos = pattern.GetTileCenter(lowLeftLoc);
+        foreach (var loc in terrain.tiles.Keys) {
+          var center = pattern.GetTileCenter(loc);
+          if (center.x + center.y < lowLeftPos.x + lowLeftPos.y) {
+            lowLeftPos = center;
+            lowLeftLoc = loc;
+          }
         }
-      }
-      if (contiguousAreas[0].Contains(lowLeftLoc)) {
-        if (waterfallTopLeftToBottomRight) {
-          var tmp = contiguousAreas[0];
-          contiguousAreas[0] = contiguousAreas[1];
-          contiguousAreas[1] = tmp;
-        } else {
-          // Nothing
-        }
-      } else { // lowLeftLoc is in contiguousAreas[1]
-        Asserts.Assert(contiguousAreas[1].Contains(lowLeftLoc));
+        if (contiguousAreas[0].Contains(lowLeftLoc)) {
+          if (waterfallTopLeftToBottomRight) {
+            var tmp = contiguousAreas[0];
+            contiguousAreas[0] = contiguousAreas[1];
+            contiguousAreas[1] = tmp;
+          } else {
+            // Nothing
+          }
+        } else { // lowLeftLoc is in contiguousAreas[1]
+          Asserts.Assert(contiguousAreas[1].Contains(lowLeftLoc));
 
-        if (waterfallTopLeftToBottomRight) {
+          if (waterfallTopLeftToBottomRight) {
 
-        } else {
-          var tmp = contiguousAreas[0];
-          contiguousAreas[0] = contiguousAreas[1];
-          contiguousAreas[1] = tmp;
-        }
+          } else {
+            var tmp = contiguousAreas[0];
+            contiguousAreas[0] = contiguousAreas[1];
+            contiguousAreas[1] = tmp;
+          }
+        //}
       }
 
       halves = new List<CliffHalf>();
@@ -378,6 +378,9 @@ namespace IncendianFalls {
       for (int i = 0; i < riverElbowLocations.Length - 1; i++) {
         var boneLocations =
             PatternDriver.Drive(terrain.pattern, false, riverElbowLocations[i], riverElbowLocations[i + 1]);
+        boneLocations.Insert(0, riverElbowLocations[i]);
+        Asserts.Assert(boneLocations.Contains(riverElbowLocations[i]));
+        Asserts.Assert(boneLocations.Contains(riverElbowLocations[i + 1]));
         var armLocations =
             terrain.pattern.GetAdjacentLocations(
                 new SortedSet<Location>(boneLocations), true, false);

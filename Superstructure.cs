@@ -160,7 +160,6 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new CheatRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        context.logger.Info("d");
         var success = CheatRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new CheatRequestAsIRequest(request));

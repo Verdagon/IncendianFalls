@@ -221,8 +221,12 @@ namespace IncendianFalls {
       game.time = nextUnit.nextActionTime;
 
       if (nextUnit.alive == false) {
-        game.level.units.Remove(nextUnit);
-        nextUnit.Destruct();
+        if (nextUnit.NullableIs(game.player)) {
+          // Do nothing, just return.
+        } else {
+          game.level.units.Remove(nextUnit);
+          nextUnit.Destruct();
+        }
         //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
         return; // To be continued... via ContinueAtStartTurn.
       }

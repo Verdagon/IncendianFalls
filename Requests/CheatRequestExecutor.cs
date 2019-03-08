@@ -29,7 +29,6 @@ namespace IncendianFalls {
 
       switch (request.cheatName) {
         case "warptoend":
-          context.logger.Info("e");
           Location end = null;
           foreach (var entry in game.level.terrain.tiles) {
             var stairs = entry.Value.components.GetOnlyStaircaseTTCOrNull();
@@ -44,7 +43,6 @@ namespace IncendianFalls {
           if (!superstate.levelSuperstate.IsLocationWalkable(end, true)) {
             return "Couldn't warp to end!";
           }
-          context.logger.Info("f");
           Actions.Step(game, superstate, game.player, end, true);
           break;
         default:

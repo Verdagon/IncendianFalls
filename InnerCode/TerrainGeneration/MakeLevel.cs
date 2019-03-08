@@ -52,7 +52,7 @@ namespace IncendianFalls {
             levelAbove,
             depth);
       } else if (depth < caveLevelsEnd) {
-        if (depth % 2 == 0) {
+        if (depth % 2 == 1) {
           PentagonalCaveLevelControllerExtensions.MakeLevel(
               out level,
               out levelSuperstate,

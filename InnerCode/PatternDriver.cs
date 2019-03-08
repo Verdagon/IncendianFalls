@@ -23,13 +23,12 @@ namespace IncendianFalls {
         bool considerCornersAdjacent,
         Location startLoc,
         Location endLoc) {
-      List<Location> result = new List<Location>();
       Vec2 startPos = pattern.GetTileCenter(startLoc);
       Vec2 endPos = pattern.GetTileCenter(endLoc);
       PatternExplorer explorer =
           new PatternExplorer(
               pattern,
-              false, // not considering corners adjacent yet
+              true,
               startLoc,
               new Prioritizer(pattern, new Ray(startPos, endPos.minus(startPos))),
               (location, position) => true);

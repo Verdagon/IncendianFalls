@@ -52,6 +52,9 @@ namespace Atharia.Model {
           }
         }
       }
+      if (!fromLevel.NullableIs(obj.level)) {
+        game.root.logger.Error("Couldnt figure out where to place unit!");
+      }
       var forbiddenLocations = new SortedSet<Location>();
       foreach (var locationAndTile in obj.level.terrain.tiles) {
         var staircase = locationAndTile.Value.components.GetOnlyStaircaseTTCOrNull();
@@ -59,7 +62,6 @@ namespace Atharia.Model {
           forbiddenLocations.Add(locationAndTile.Key);
         }
       }
-      game.root.logger.Error("Couldnt figure out where to place unit!");
       return levelSuperstate.GetNRandomWalkableLocations(
           game.rand, 1, forbiddenLocations, true)[0];
     }

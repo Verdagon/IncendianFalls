@@ -283,7 +283,7 @@ namespace IncendianFalls {
         int depth,
         bool inside) {
 
-      int numUnits = 15;
+      int numUnits = 50;
 
       int[] numByUnit = DetermineUnitsForLevel(game.rand, depth, inside, numUnits);
       int numAvelisk = numByUnit[0];
@@ -305,7 +305,7 @@ namespace IncendianFalls {
                 0,
                 new Location(0, 0, 0),
                 "avelisk",
-                5, 5,
+                14, 14,
                 0, 0,
                 600,
                 game.time + 10,
@@ -327,14 +327,14 @@ namespace IncendianFalls {
                 0,
                 new Location(0, 0, 0),
                 "novafaire",
-                8, 8,
+                21, 21,
                 0, 0,
                 600,
                 game.time + 10,
                 components,
                 IItemMutBunch.New(context.root),
                 false,
-                8);
+                4);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
       }
 
@@ -356,7 +356,7 @@ namespace IncendianFalls {
                 components,
                 IItemMutBunch.New(context.root),
                 false,
-                5);
+                3);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
       }
 
@@ -372,14 +372,14 @@ namespace IncendianFalls {
                 0,
                 new Location(0, 0, 0),
                 "lornix",
-                50, 50,
+                60, 60,
                 0, 0,
-                300,
+                600,
                 game.time + 10,
                 components,
                 IItemMutBunch.New(context.root),
                 false,
-                5);
+                9);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
       }
 
@@ -396,7 +396,7 @@ namespace IncendianFalls {
                 "yoten",
                 50, 50,
                 0, 0,
-                300,
+                600,
                 game.time + 10,
                 components,
                 IItemMutBunch.New(context.root),
