@@ -13,14 +13,19 @@ namespace IncendianFalls {
   public class ReplayLogger : ISuperstructureObserver {
     private Superstructure externalSS;
     //private Superstructure duplicateSS;
-    StreamWriter[] writers;
+    List<StreamWriter> writers;
 
     public ReplayLogger(Superstructure externalSS, string[] logFilenames) {
       this.externalSS = externalSS;
       externalSS.AddObserver(this);
-      writers = new StreamWriter[logFilenames.Length];
+      writers = new List<StreamWriter>();
       for (int i = 0; i < logFilenames.Length; i++) {
-        writers[i] = new StreamWriter(logFilenames[i], false);
+        try {
+          writers.Add(new StreamWriter(logFilenames[i], false));
+        } catch (UnauthorizedAccessException e) {
+          externalSS.GetRoot().logger.Error(
+              "Couldn't make a log file: " + e.Message);
+        }
       }
     }
 

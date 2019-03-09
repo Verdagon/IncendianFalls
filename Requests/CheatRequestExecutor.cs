@@ -17,9 +17,15 @@ namespace IncendianFalls {
       }
       var player = game.player;
 
-      Asserts.Assert(game.executionState.actingUnit.Is(game.player));
-      Asserts.Assert(game.player.Is(Utils.GetNextActingUnit(game)));
-      Asserts.Assert(superstate.timeShiftingState == null);
+      if (!game.executionState.actingUnit.Is(game.player)) {
+        return "Error: Player not next acting unit! (a)";
+      }
+      //if (!game.player.Is(Utils.GetNextActingUnit(game))) {
+      //  return "Error: Player not next acting unit! (b)";
+      //}
+      if (superstate.timeShiftingState != null) {
+        return "Error: Cannot cheat while time shifting!";
+      }
 
       superstate.previousTurns.Add(context.root.Snapshot());
 

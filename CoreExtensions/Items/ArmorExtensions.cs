@@ -10,7 +10,6 @@ namespace Atharia.Model {
     }
     public static int AffectIncomingDamage(this Armor armor, int damage) {
       int newDamage = damage / 2;
-      armor.root.logger.Info("Armor:" + damage + "->" + newDamage);
       return newDamage;
     }
     public static IItem ClonifyAndReturnNewReal(this Armor armor, Root newRoot) {

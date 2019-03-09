@@ -85,7 +85,7 @@ namespace IncendianFalls {
       Eventer.broadcastUnitCounteringEvent(game.root, game, unit);
     }
 
-    public static bool Interact(
+    public static string Interact(
         SSContext context,
         Game game,
         Superstate superstate,
@@ -131,7 +131,7 @@ namespace IncendianFalls {
 
         // Note how we are NOT setting unit.nextActionTime here. That's because
         // we want the player to have the first action after they descend.
-        return true;
+        return "";
       }
 
       var items = tile.components.GetAllIItem();
@@ -155,10 +155,10 @@ namespace IncendianFalls {
             mp.obj.Use(game, superstate, unit);
           }
         }
-        return true;
+        return "";
       }
 
-      return false;
+      return "Nothing to interact with!";
     }
 
     public static bool CanStep(

@@ -70,7 +70,7 @@ namespace IncendianFalls {
       return new MoveExecutor(superstate, game, steps);
     }
 
-    public static bool Execute(
+    public static string Execute(
         SSContext context,
         Superstate superstate,
         MoveRequest request) {
@@ -80,7 +80,18 @@ namespace IncendianFalls {
 
       EventsClearer.Clear(game);
 
-      Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput);
+      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
+        return "Error: Unexpected player input!";
+      }
+      if (!game.executionState.actingUnit.Is(game.player)) {
+        return "Error: Player not next acting unit! (a)";
+      }
+      //if (!game.player.Is(Utils.GetNextActingUnit(game))) {
+      //  return "Error: Player not next acting unit! (b)";
+      //}
+      if (superstate.timeShiftingState != null) {
+        return "Error: Cannot move while time shifting!";
+      }
 
       superstate.previousTurns.Add(context.root.Snapshot());
       game.lastPlayerRequest = request.AsIRequest();
@@ -88,11 +99,11 @@ namespace IncendianFalls {
       var moveExecutor = PrepareToMove(superstate, game, destination);
 
       if (moveExecutor == null) {
-        return false;
+        return "Could not move there!";
       }
       moveExecutor.Execute();
 
-      return true;
+      return "";
     }
   }
 }

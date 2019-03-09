@@ -32,7 +32,6 @@ namespace Atharia.Model {
     }
     public static void ClearDirective(this Unit unit) {
       var existingDirective = unit.components.GetOnlyIDirectiveUCOrNull();
-      Console.WriteLine("Clearing directive! " + existingDirective.id);
       if (existingDirective.Exists()) {
         unit.components.Remove(existingDirective.AsIUnitComponent());
         existingDirective.Destruct();

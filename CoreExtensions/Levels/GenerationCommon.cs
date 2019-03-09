@@ -4,7 +4,7 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class GenerationCommon {
-    public static readonly int TOTAL_NUM_LEVELS_BEFORE_BOSS = 5;
+    public static readonly int TOTAL_NUM_LEVELS_BEFORE_BOSS = 7;
     public static readonly int NUM_UNITS_PER_LEVEL = 30;
 
     public static void GetMapBounds(
@@ -88,19 +88,19 @@ namespace IncendianFalls {
         LevelSuperstate levelSuperstate,
         int levelIndex,
         Location entryLoc) {
-      if (LevelHasSpecial(levelIndex, .01f)) { //.21f)) {
+      if (LevelHasSpecial(levelIndex, .21f)) {
         PlaceItemNextToEntry(
             level,
             entryLoc,
             context.root.EffectGlaiveCreate().AsITerrainTileComponent());
       }
-      if (LevelHasSpecial(levelIndex, .01f)) { //.34f)) {
+      if (LevelHasSpecial(levelIndex, .34f)) {
         PlaceItemNextToEntry(
             level,
             entryLoc,
             context.root.EffectArmorCreate().AsITerrainTileComponent());
       }
-      if (LevelHasSpecial(levelIndex, .01f)) { //.53f)) {
+      if (LevelHasSpecial(levelIndex, .53f)) {
         PlaceItemNextToEntry(
             level,
             entryLoc,
@@ -415,13 +415,13 @@ namespace IncendianFalls {
                 0,
                 new Location(0, 0, 0),
                 "lornix",
-                60, 60,
+                120, 120,
                 0, 0,
-                600,
+                500,
                 game.time + 10,
                 components,
                 false,
-                9);
+                36);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
       }
 
@@ -436,13 +436,13 @@ namespace IncendianFalls {
                 0,
                 new Location(0, 0, 0),
                 "yoten",
-                50, 50,
+                100, 100,
                 0, 0,
-                600,
+                500,
                 game.time + 10,
                 components,
                 false,
-                15);
+                30);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
       }
 
@@ -457,13 +457,13 @@ namespace IncendianFalls {
                 0,
                 new Location(0, 0, 0),
                 "spiriad",
-                25, 25,
+                50, 50,
                 0, 0,
-                600,
+                500,
                 game.time + 10,
                 components,
                 false,
-                65);
+                130);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
       }
 
@@ -479,13 +479,13 @@ namespace IncendianFalls {
                 0,
                 new Location(0, 0, 0),
                 "mordranth",
-                60, 60,
+                120, 120,
                 0, 0,
-                600,
+                500,
                 game.time + 10,
                 components,
                 false,
-                12);
+                48);
         level.EnterUnit(game, levelSuperstate, unit, level, 0);
       }
     }

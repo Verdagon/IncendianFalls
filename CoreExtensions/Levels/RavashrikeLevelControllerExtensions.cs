@@ -47,7 +47,7 @@ namespace Atharia.Model {
               "Ravashrike",
               600, 600,
               100, 100,
-              600,
+              500,
               game.time + 10,
               components,
               false,
@@ -68,11 +68,11 @@ namespace Atharia.Model {
     //}
 
     public static string GetName(this RavashrikeLevelController obj) {
-      return "Bridge";
+      return "Ravashrike Lair";
     }
 
     public static bool ConsiderCornersAdjacent(this RavashrikeLevelController obj) {
-      return true;
+      return false;
     }
 
     public static Location GetEntryLocation(
@@ -80,7 +80,8 @@ namespace Atharia.Model {
         Game game,
         LevelSuperstate levelSuperstate,
         Level fromLevel, int fromLevelPortalIndex) {
-      return new Location(0, 0, 0);
+      return levelSuperstate.GetNRandomWalkableLocations(
+          obj.level.terrain, game.rand, 1, true, true)[0];
     }
 
     public static Atharia.Model.Void Generate(

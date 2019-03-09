@@ -37,6 +37,8 @@ namespace IncendianFalls {
 
       int levelIndex = game.levels.Count;
 
+      context.logger.Info(levelIndex + " " + cliffLevelsEnd + " " + caveLevelsStart + " " + volcaetusLevel);
+
       if (levelIndex < cliffLevelsEnd) {
         CliffLevelControllerExtensions.MakeLevel(
             out level,
@@ -75,7 +77,7 @@ namespace IncendianFalls {
               levelIndex,
               depth);
         }
-      } else if (levelIndex == volcaetusLevel) {
+      } else {
         RavashrikeLevelControllerExtensions.MakeLevel(
             out level,
             out levelSuperstate,
@@ -84,12 +86,6 @@ namespace IncendianFalls {
             superstate,
             depth,
             levelIndex);
-        return;
-      } else {
-        Asserts.Assert(false);
-        level = null;
-        levelSuperstate = null;
-        return;
       }
     }
 

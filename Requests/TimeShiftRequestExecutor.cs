@@ -11,7 +11,7 @@ namespace IncendianFalls {
     // turn to the "newer" turn.
 
     private static int GetMpCost(int timeDifference) {
-      return 5 + timeDifference / 600;
+      return 2 + timeDifference / 2400;
     }
 
     private static string CheckCanTimeshift(Game presentGame, RootIncarnation destinationIncarnation) {
@@ -21,13 +21,13 @@ namespace IncendianFalls {
       // time shift costs 5 now, and 5 + timeDifference / 100 from your past self.
       int mpCost = GetMpCost(presentGame.time - pastGame.time);
 
-      if (presentGame.player.mp < 5) {
-        return "Not enough mp now to cast the spell, need at least 5!";
+      if (presentGame.player.mp < 2) {
+        return "Not enough mp now to cast the spell, need at least 2!";
       }
 
       var pastPlayerId = destinationIncarnation.incarnationsGame[presentGame.id].incarnation.player;
       if (destinationIncarnation.incarnationsUnit[pastPlayerId].incarnation.mp < mpCost) {
-        return "Not enough mp back then to cast the spell, need " + mpCost;
+        return "Not enough mp in past to cast the spell, need " + mpCost;
       }
 
       return "";
@@ -188,7 +188,6 @@ namespace IncendianFalls {
             }
           }
 
-          Console.WriteLine("Made new player! ID " + newPlayer.id);
           game.level.units.Add(newPlayer);
           game.player = newPlayer;
           superstate.levelSuperstate.Add(game.player);

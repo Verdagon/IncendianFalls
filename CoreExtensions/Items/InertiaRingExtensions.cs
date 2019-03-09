@@ -9,7 +9,7 @@ namespace Atharia.Model {
       return new Atharia.Model.Void();
     }
     public static int AffectInertia(this InertiaRing armor, int inertia) {
-      int newInertia = inertia * 2 / 3;
+      int newInertia = inertia * 5 / 6;
       return newInertia;
     }
     public static IItem ClonifyAndReturnNewReal(this InertiaRing ring, Root newRoot) {

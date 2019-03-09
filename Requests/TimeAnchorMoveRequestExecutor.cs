@@ -4,7 +4,7 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class TimeAnchorMoveRequestExecutor {
-    public static bool Execute(
+    public static string Execute(
         SSContext context,
         Superstate superstate,
         TimeAnchorMoveRequest request) {
@@ -15,7 +15,18 @@ namespace IncendianFalls {
 
       EventsClearer.Clear(game);
 
-      Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput);
+      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
+        return "Error: Unexpected player input!";
+      }
+      if (!game.executionState.actingUnit.Is(game.player)) {
+        return "Error: Player not next acting unit! (a)";
+      }
+      //if (!game.player.Is(Utils.GetNextActingUnit(game))) {
+      //  return "Error: Player not next acting unit! (b)";
+      //}
+      if (superstate.timeShiftingState != null) {
+        return "Error: Cannot anchor move while time shifting!";
+      }
 
       superstate.previousTurns.Add(context.root.Snapshot());
       var anchorTurnIndex = superstate.previousTurns.Count - 1;
@@ -26,7 +37,7 @@ namespace IncendianFalls {
       var moveExecutor = MoveRequestExecutor.PrepareToMove(superstate, game, destination);
 
       if (moveExecutor == null) {
-        return false;
+        return "Could not move there!";
       }
 
       // Add the PREVIOUS turn to the anchorTurnIndices.
@@ -40,7 +51,7 @@ namespace IncendianFalls {
           context.root.EffectTimeAnchorTTCCreate(context.root.version)
               .AsITerrainTileComponent());
 
-      return true;
+      return "";
     }
   }
 }

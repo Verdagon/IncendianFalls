@@ -13,8 +13,7 @@ namespace Atharia.Model {
       return damage;
     }
     public static int AffectOutgoingDamage(this Glaive glaive, int damage) {
-      int newDamage = damage + 10;
-      //glaive.root.logger.Info("Glaive:" + damage + "->" + newDamage);
+      int newDamage = damage * 2;
       return newDamage;
     }
     public static IItem ClonifyAndReturnNewReal(this Glaive glaive, Root newRoot) {

@@ -116,11 +116,11 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestSetupGame RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
-    public bool RequestInteract(int gameId) {
+    public string RequestInteract(int gameId) {
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
 
@@ -145,7 +145,7 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestInteract RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
@@ -174,11 +174,11 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestCheat RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
-    public bool RequestMove(int gameId, Location newLocation) {
+    public string RequestMove(int gameId, Location newLocation) {
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
 
@@ -189,7 +189,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new MoveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = MoveRequestExecutor.Execute(context, superstate, request);
+        string success = MoveRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new MoveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -203,7 +203,7 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestMove RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
@@ -232,7 +232,7 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestFire RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
@@ -261,11 +261,11 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestAttack RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
-    public bool RequestDefend(int gameId) {
+    public string RequestDefend(int gameId) {
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
 
@@ -276,7 +276,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new DefendRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = DefendRequestExecutor.Execute(context, superstate, request);
+        string success = DefendRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new DefendRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -290,7 +290,7 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestDefend RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
@@ -319,11 +319,11 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestCounter RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
-    public bool RequestFollowDirective(int gameId) {
+    public string RequestFollowDirective(int gameId) {
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
 
@@ -334,7 +334,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new FollowDirectiveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = FollowDirectiveRequestExecutor.Execute(context, superstate, request);
+        string success = FollowDirectiveRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new FollowDirectiveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -348,11 +348,11 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestFollowDirective RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
-    public bool RequestTimeAnchorMove(int gameId, Location destination) {
+    public string RequestTimeAnchorMove(int gameId, Location destination) {
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
 
@@ -363,7 +363,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = TimeAnchorMoveRequestExecutor.Execute(context, superstate, request);
+        string success = TimeAnchorMoveRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
@@ -377,7 +377,7 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestTimeAnchorMove RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
@@ -406,11 +406,11 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestTimeShift RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 
-    public bool RequestResume(int gameId) {
+    public string RequestResume(int gameId) {
 
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
@@ -422,7 +422,7 @@ namespace IncendianFalls {
         broadcastBeforeRequest(new ResumeRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
-        bool success = ResumeRequestExecutor.Execute(context, superstate, request);
+        string success = ResumeRequestExecutor.Execute(context, superstate, request);
         context.Flare(success.DStr());
         broadcastAfterRequest(new ResumeRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -436,7 +436,7 @@ namespace IncendianFalls {
         root.FlushEvents();
 
         stopwatch.Stop();
-        Console.WriteLine("RunTime " + stopwatch.Elapsed.TotalMilliseconds);
+        Console.WriteLine("RequestResume RunTime " + stopwatch.Elapsed.TotalMilliseconds);
       }
     }
 

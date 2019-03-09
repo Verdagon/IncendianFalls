@@ -3,7 +3,7 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class InteractRequestExecutor {
-    public static bool Execute(
+    public static string Execute(
         SSContext context,
         Superstate superstate,
         InteractRequest request) {
@@ -17,9 +17,15 @@ namespace IncendianFalls {
       }
       var player = game.player;
 
-      Asserts.Assert(game.executionState.actingUnit.Is(game.player));
-      Asserts.Assert(game.player.Is(Utils.GetNextActingUnit(game)));
-      Asserts.Assert(superstate.timeShiftingState == null);
+      if (!game.executionState.actingUnit.Is(game.player)) {
+        return "Error: Player not next acting unit! (a)";
+      }
+      //if (!game.player.Is(Utils.GetNextActingUnit(game))) {
+      //  return "Error: Player not next acting unit! (b)";
+      //}
+      if (superstate.timeShiftingState != null) {
+        return "Error: Cannot interact while time shifting!";
+      }
 
       superstate.previousTurns.Add(context.root.Snapshot());
 
@@ -27,9 +33,9 @@ namespace IncendianFalls {
 
       player.ClearDirective();
 
-      bool success = Actions.Interact(context, game, superstate, game.player);
+      string success = Actions.Interact(context, game, superstate, game.player);
 
-      if (success) {
+      if (success == "") {
         GameLoop.NoteUnitActed(game, game.player);
       }
 

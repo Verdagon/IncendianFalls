@@ -4,20 +4,24 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class ResumeRequestExecutor {
-    public static bool Execute(
+    public static string Execute(
         SSContext context,
         Superstate superstate,
         ResumeRequest request) {
       int gameId = request.gameId;
       var game = context.root.GetGame(gameId);
 
-      Asserts.Assert(superstate.timeShiftingState == null);
+      if (superstate.timeShiftingState != null) {
+        return "Error: Cannot resume while timeshifting!";
+      }
 
       EventsClearer.Clear(game);
 
+      Asserts.Assert(game.player.Exists() && game.player.alive);
+
       GameLoop.Continue(game, superstate, new PauseCondition(false));
 
-      return true;
+      return "";
     }
   }
 }

@@ -4,7 +4,7 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class FollowDirectiveRequestExecutor {
-    public static bool Execute(
+    public static string Execute(
         SSContext context,
         Superstate superstate, 
         FollowDirectiveRequest request) {
@@ -13,16 +13,19 @@ namespace IncendianFalls {
 
       EventsClearer.Clear(game);
 
-      Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerResume);
-      Asserts.Assert(superstate.timeShiftingState == null);
+      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerResume) {
+        return "Error: Cannot follow directive, state is " + superstate.GetStateType();
+      }
+      if (superstate.timeShiftingState != null) {
+        return "Error: Cannot follow directive while time shifting!";
+      }
 
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
 
       if (!game.player.GetDirectiveOrNull().Exists()) {
-        context.logger.Error("Player has no directive, can't resume!");
-        return false;
+        return "Error: Player has no directive, can't resume!";
       }
 
       superstate.previousTurns.Add(context.root.Snapshot());
@@ -31,7 +34,7 @@ namespace IncendianFalls {
 
       GameLoop.ContinueAtPlayerFollowDirective(game, superstate, new PauseCondition(false));
 
-      return true;
+      return "";
     }
   }
 }
