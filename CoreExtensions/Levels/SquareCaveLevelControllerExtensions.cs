@@ -58,7 +58,8 @@ namespace Atharia.Model {
             locs.Add(new Location(room.origin.col + col, room.origin.row + row, 0));
           }
         }
-        var stairsLocs = SetUtils.GetRandomN(game.rand, locs, 2);
+        var stairsLocs =
+            ListUtils.GetRandomN(new List<Location>(locs), game.rand, 3, 2);
 
         upStairsLoc = stairsLocs[0];
         GenerationCommon.PlaceStaircase(terrain, upStairsLoc, false, 0, levelAbove, levelAbovePortalIndex);
@@ -66,7 +67,8 @@ namespace Atharia.Model {
         downStairsLoc = stairsLocs[1];
         GenerationCommon.PlaceStaircase(terrain, downStairsLoc, true, 1, levelBelow, levelBelowPortalIndex);
       } else {
-        var stairRoomNumbers = SetUtils.GetRandomN(game.rand, roomNumbers, 2);
+        var stairRoomNumbers =
+            ListUtils.GetRandomN(new List<int>(roomNumbers), game.rand, 3, 2);
 
         Asserts.Assert(stairRoomNumbers[0] != stairRoomNumbers[1]);
 
@@ -84,14 +86,15 @@ namespace Atharia.Model {
       GenerationCommon.FillWithUnits(
           context, game, level, levelSuperstate, levelIndex);
 
-      GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate, levelIndex, upStairsLoc);
+      GenerationCommon.PlaceItems(
+          context, game.rand, level, levelSuperstate, levelIndex, upStairsLoc, .02f, .02f);
     }
 
     public static Location RandomLocationInRoom(Rand rand, DungeonTerrainGenerator.Room room) {
       Asserts.Assert(room.size.row > 2);
       Asserts.Assert(room.size.col > 2);
       var rowInRoom = rand.Next() % (room.size.row - 2);
-      var colInRoom = rand.Next() % (room.size.row - 2);
+      var colInRoom = rand.Next() % (room.size.col - 2);
       return new Location(
           room.origin.col + colInRoom,
           room.origin.row + rowInRoom,

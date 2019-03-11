@@ -37,6 +37,7 @@ namespace IncendianFalls {
               context,
               game,
               superstate,
+              levelAbove,
               depth,
               levelIndex);
         }

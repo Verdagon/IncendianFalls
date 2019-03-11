@@ -26,8 +26,8 @@ namespace Atharia.Model {
       game.levels.Add(level);
 
       GenerationCommon.PlaceRocks(context, game.rand, level, levelSuperstate);
-      GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate, levelIndex, new Location(0, 0, 0));
-      //GenerationCommon.PlaceStaircases(context, game.rand, level, levelSuperstate);
+      GenerationCommon.PlaceItems(
+          context, game.rand, level, levelSuperstate, levelIndex, new Location(0, 0, 0), .2f, .2f);
 
       var controller = context.root.EffectGauntletLevelControllerCreate(level);
       level.controller = controller.AsILevelController();
@@ -81,9 +81,31 @@ namespace Atharia.Model {
         this GauntletLevelController obj,
         Game game,
         LevelSuperstate levelSuperstate,
-        Level fromLevel, int fromLevelPortalIndex) {
-      return levelSuperstate.GetNRandomWalkableLocations(
-          obj.level.terrain, game.rand, 1, true, true)[0];
+        Level fromLevel,
+        int fromLevelPortalIndex) {
+      var level = obj.level;
+      var terrain = level.terrain;
+      if (fromLevel.depth < obj.level.depth) {
+        return new Location(0, 0, 0);
+      } else {
+        var pattern = terrain.pattern;
+        var centerLoc = new Location(0, 0, 0);
+        var centerPos = pattern.GetTileCenter(centerLoc);
+
+        var walkableLocations =
+            levelSuperstate.GetWalkableLocations(terrain, true, true);
+
+        var locationsNearStairs =
+            new PatternExplorer(pattern, false, centerLoc)
+                .ExploreWhile(
+                    (location) => pattern.GetTileCenter(location).distance(centerPos) <= 3.0f);
+        Asserts.Assert(locationsNearStairs.Count > 1);
+        SetUtils.RemoveAll(walkableLocations, locationsNearStairs);
+
+        var loc = SetUtils.GetRandomN(walkableLocations, game.rand, 3, 1)[0];
+        Asserts.Assert(!terrain.tiles[loc].components.GetOnlyStaircaseTTCOrNull().Exists());
+        return loc;
+      }
     }
 
     public static Atharia.Model.Void Generate(

@@ -125,7 +125,8 @@ namespace Atharia.Model {
         Asserts.Assert(CanReachLimited(cliffLevel, downStaircaseLocation, lowHalfCaveLocation));
       }
 
-      GenerationCommon.PlaceItems(context, game.rand, cliffLevel, levelSuperstate, levelIndex, upStaircaseLocation);
+      GenerationCommon.PlaceItems(
+          context, game.rand, cliffLevel, levelSuperstate, levelIndex, upStaircaseLocation, .02f, .02f);
 
       GenerationCommon.FillWithUnits(
           context, game, cliffLevel, levelSuperstate, levelIndex);

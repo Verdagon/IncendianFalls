@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Atharia.Model;
 
 public class SetUtils {
+  public static List<T> GetRandomN<T>(SortedSet<T> set, Rand rand, int numShuffles, int numToGet) {
+    return ListUtils.GetRandomN(new List<T>(set), rand, numShuffles, numToGet);
+  }
   public static T GetFirst<T>(SortedSet<T> set) {
     foreach (var key in set) {
       return key;
@@ -35,35 +38,9 @@ public class SetUtils {
     }
     throw new Exception("unreachable");
   }
-  public static List<T> GetRandomN<T>(Rand rand, SortedSet<T> set, int x) {
-    if (set.Count < x) {
-      throw new Exception("wat");
-    }
-
-    List<T> shuffled = Shuffled(new List<T>(set), rand, 3); ;
-    shuffled.RemoveRange(x, shuffled.Count - x);
-    return shuffled;
-  }
-  public static List<T> Shuffled<T>(this List<T> original, Rand rand, int numShuffles) {
-    List<T> shuffled = new List<T>(original);
-
-    for (int i = 0; i < numShuffles; i++) {
-      int n = shuffled.Count;
-      while (n > 1) {
-        n--;
-        int k = rand.Next() % (shuffled.Count - 1);
-        var value = shuffled[k];
-        shuffled[k] = shuffled[n];
-        shuffled[n] = value;
-      }
-    }
-
-    return shuffled;
-  }
-
   public static void RemoveAll<T>(
       SortedSet<T> removeFrom,
-      SortedSet<T> removeThese) {
+      IEnumerable<T> removeThese) {
     foreach (var loc in removeThese) {
       removeFrom.Remove(loc);
     }
@@ -71,7 +48,7 @@ public class SetUtils {
 
   public static void AddAll<T>(
       SortedSet<T> addTo,
-      SortedSet<T> addThese) {
+      IEnumerable<T> addThese) {
     foreach (var loc in addThese) {
       addTo.Add(loc);
     }

@@ -82,8 +82,7 @@ public class TerrainTileByLocationMutMap {
     get { return new List<Location>(incarnation.map.Keys); }
   }
 
-  public TerrainTile this[Location key] {
-    get { return new TerrainTile(root, incarnation.map[key]); }
+  public TerrainTile this[Location key] {    get { return new TerrainTile(root, incarnation.map[key]); }
   }
 
   public IEnumerator<KeyValuePair<Location, TerrainTile>> GetEnumerator() {

@@ -50,7 +50,7 @@ public class ParseSource {
         break;
       }
       char c = source[position];
-      if (c == '(' || c == ')' || c == '"' || c == ' ' || c == '\t' || c == '\r' || c == '\n') {
+      if (c == '(' || c == ')' || c == '"' || c == ' ' || c == ',' || c == '\t' || c == '\r' || c == '\n') {
         break;
       }
       result += source[position];

@@ -24,26 +24,14 @@ namespace Atharia.Model {
 
       game.levels.Add(level);
 
-      GenerationCommon.PlaceRocks(context, game.rand, level, levelSuperstate);
-      GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate, levelIndex, new Location(0, 0, 0));
-
       var controller = context.root.EffectPreGauntletLevelControllerCreate(level);
       level.controller = controller.AsILevelController();
 
       GenerationCommon.PlaceStaircase(terrain, new Location(0, 0, 0), true, 0, Level.Null, 0);
+
+      GenerationCommon.PlaceItems(
+          context, game.rand, level, levelSuperstate, levelIndex, new Location(0, 0, 0), .1f, .1f);
     }
-
-    //  Level level;
-    //  if (squareLevelsOnly || rand.Next() % 2 == 0) {
-    //    level = MakeSquareLevel(context, rand, currentTime, name);
-    //  } else {
-    //    level = MakePentagonalLevel(context, rand, currentTime, name);
-    //  }
-
-    //  var walkableLocations = new WalkableLocations(level.terrain, level.units);
-
-    //  return level;
-    //}
 
     public static string GetName(this PreGauntletLevelController obj) {
       return "PreGauntlet Lair";
@@ -58,8 +46,13 @@ namespace Atharia.Model {
         Game game,
         LevelSuperstate levelSuperstate,
         Level fromLevel, int fromLevelPortalIndex) {
-      return levelSuperstate.GetNRandomWalkableLocations(
-          obj.level.terrain, game.rand, 1, true, true)[0];
+      var level = obj.level;
+      if (fromLevel.NullableIs(level)) {
+        return levelSuperstate.GetNRandomWalkableLocations(
+            obj.level.terrain, game.rand, 1, true, true)[0];
+      } else {
+        return new Location(0, 0, 0);
+      }
     }
 
     public static Atharia.Model.Void Generate(

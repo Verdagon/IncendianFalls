@@ -46,7 +46,7 @@ namespace Atharia.Model {
           roomNumbers.Add(entry.Key);
         }
       }
-      var stairRoomNumbers = SetUtils.GetRandomN(game.rand, roomNumbers, 2);
+      var stairRoomNumbers = SetUtils.GetRandomN(roomNumbers, game.rand, 3, 2);
 
       var upStairsRoom = rooms[stairRoomNumbers[0]];
       var upStairsLoc = SetUtils.GetRandom(game.rand.Next(), upStairsRoom.floors);
@@ -59,7 +59,8 @@ namespace Atharia.Model {
       GenerationCommon.FillWithUnits(
           context, game, level, levelSuperstate, levelIndex);
 
-      GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate, levelIndex, upStairsLoc);
+      GenerationCommon.PlaceItems(
+          context, game.rand, level, levelSuperstate, levelIndex, upStairsLoc, .02f, .02f);
     }
 
     public static string GetName(this PentagonalCaveLevelController obj) {

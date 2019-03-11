@@ -17,7 +17,7 @@ namespace IncendianFalls {
 
       EventsClearer.Clear(game);
 
-      Asserts.Assert(game.player.Exists() && game.player.alive);
+      Asserts.Assert(game.player.Exists() && game.player.alive, "Can't resume if player's not alive");
 
       GameLoop.Continue(game, superstate, new PauseCondition(false));
 

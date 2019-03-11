@@ -24,7 +24,8 @@ namespace Atharia.Model {
       game.levels.Add(level);
 
       GenerationCommon.PlaceRocks(context, game.rand, level, levelSuperstate);
-      GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate, levelIndex, new Location(0, 0, 0));
+      GenerationCommon.PlaceItems(
+          context, game.rand, level, levelSuperstate, levelIndex, new Location(0, 0, 0), .02f, .02f);
       //GenerationCommon.PlaceStaircases(context, game.rand, level, levelSuperstate);
 
       var controller = context.root.EffectRavashrikeLevelControllerCreate(level);

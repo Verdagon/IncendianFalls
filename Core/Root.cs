@@ -1638,9 +1638,6 @@ public class Root {
   }
 
   public void FlushEvents() {
-
-
-
     var copyOfObserversForSquareCaveLevelController =
         new SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>>();
     foreach (var entry in observersForSquareCaveLevelController) {
@@ -2690,8 +2687,7 @@ public class Root {
            
     BroadcastTerrainTileByLocationMutMapEffects(
         copyOfObserversForTerrainTileByLocationMutMap);
-           
-  }
+    }
 
   public int GetDeterministicHashCode() {
     // int doubleCheckHash = RecalculateEntireHash();

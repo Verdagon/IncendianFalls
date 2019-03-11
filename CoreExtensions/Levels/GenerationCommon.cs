@@ -87,7 +87,9 @@ namespace IncendianFalls {
         Level level,
         LevelSuperstate levelSuperstate,
         int levelIndex,
-        Location entryLoc) {
+        Location entryLoc,
+        float healthPotionDensity,
+        float manaPotionDensity) {
       if (LevelHasSpecial(levelIndex, .21f)) {
         PlaceItemNextToEntry(
             level,
@@ -112,7 +114,7 @@ namespace IncendianFalls {
           levelSuperstate.GetNRandomWalkableLocations(
               level.terrain,
               rand,
-              levelSuperstate.NumWalkableLocations(false) / 50,
+              (int)(levelSuperstate.NumWalkableLocations(false) * healthPotionDensity),
               true,
               false);
 
@@ -127,7 +129,7 @@ namespace IncendianFalls {
           levelSuperstate.GetNRandomWalkableLocations(
             level.terrain,
               rand,
-              levelSuperstate.NumWalkableLocations(false) / 50,
+              (int)(levelSuperstate.NumWalkableLocations(false) * manaPotionDensity),
               true, 
               false);
 
@@ -407,7 +409,7 @@ namespace IncendianFalls {
               "lornix",
               120, 120,
               0, 0,
-              500,
+              600,
               game.time + 10,
               components,
               false,
@@ -434,7 +436,7 @@ namespace IncendianFalls {
               "yoten",
               100, 100,
               0, 0,
-              500,
+              600,
               game.time + 10,
               components,
               false,
@@ -461,7 +463,7 @@ namespace IncendianFalls {
               "spiriad",
               50, 50,
               0, 0,
-              500,
+              600,
               game.time + 10,
               components,
               false,
@@ -490,7 +492,7 @@ namespace IncendianFalls {
               "mordranth",
               120, 120,
               0, 0,
-              500,
+              600,
               game.time + 10,
               components,
               false,
