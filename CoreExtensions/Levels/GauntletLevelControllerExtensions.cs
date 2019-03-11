@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using IncendianFalls;
 
 namespace Atharia.Model {
-  public static class RavashrikeLevelControllerExtensions {
+  public static class GauntletLevelControllerExtensions {
     public static void MakeLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,
         SSContext context,
         Game game,
         Superstate superstate,
+        Level fromLevel,
         int depth,
         int levelIndex) {
-      var terrain = CircleTerrainGenerator.Generate(context, game.rand, 8.0f);
+      var terrain =
+          CircleTerrainGenerator.Generate(context, game.rand, 8.0f);
 
       var units = context.root.EffectUnitMutSetCreate();
 
@@ -27,32 +29,32 @@ namespace Atharia.Model {
       GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate, levelIndex, new Location(0, 0, 0));
       //GenerationCommon.PlaceStaircases(context, game.rand, level, levelSuperstate);
 
-      var controller = context.root.EffectRavashrikeLevelControllerCreate(level);
+      var controller = context.root.EffectGauntletLevelControllerCreate(level);
       level.controller = controller.AsILevelController();
 
-      var enemyLocation =
-          levelSuperstate.GetNRandomWalkableLocations(
-              level.terrain, game.rand, 1, true, true)[0];
+      GenerationCommon.PlaceStaircase(terrain, new Location(0, 0, 0), false, 0, fromLevel, 0);
 
-      var components = IUnitComponentMutBunch.New(context.root);
-      components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
-      Unit enemy =
-          context.root.EffectUnitCreate(
-              context.root.EffectIUnitEventMutListCreate(),
-              true,
-              0,
-              enemyLocation,
-              "Ravashrike",
-              600, 600,
-              100, 100,
-              500,
-              game.time + 10,
-              components,
-              false,
-              27);
-      level.EnterUnit(game, levelSuperstate, enemy, Level.Null, 0);
+      for (int i = 0; i < 5; i++) {
+        GenerationCommon.PlaceAvelisk(context, game, level, levelSuperstate, level, 0);
+      }
+      for (int i = 0; i < 8; i++) {
+        GenerationCommon.PlaceNovafaire(context, game, level, levelSuperstate, level, 0);
+      }
+      for (int i = 0; i < 4; i++) {
+        GenerationCommon.PlaceDraxling(context, game, level, levelSuperstate, level, 0);
+      }
+      for (int i = 0; i < 3; i++) {
+        GenerationCommon.PlaceLornix(context, game, level, levelSuperstate, level, 0);
+      }
+      for (int i = 0; i < 3; i++) {
+        GenerationCommon.PlaceYoten(context, game, level, levelSuperstate, level, 0);
+      }
+      for (int i = 0; i < 3; i++) {
+        GenerationCommon.PlaceSpiriad(context, game, level, levelSuperstate, level, 0);
+      }
+      for (int i = 0; i < 4; i++) {
+        GenerationCommon.PlaceMordranth(context, game, level, levelSuperstate, level, 0);
+      }
     }
 
     //  Level level;
@@ -67,16 +69,16 @@ namespace Atharia.Model {
     //  return level;
     //}
 
-    public static string GetName(this RavashrikeLevelController obj) {
-      return "Ravashrike Lair";
+    public static string GetName(this GauntletLevelController obj) {
+      return "Gauntlet Lair";
     }
 
-    public static bool ConsiderCornersAdjacent(this RavashrikeLevelController obj) {
+    public static bool ConsiderCornersAdjacent(this GauntletLevelController obj) {
       return false;
     }
 
     public static Location GetEntryLocation(
-        this RavashrikeLevelController obj,
+        this GauntletLevelController obj,
         Game game,
         LevelSuperstate levelSuperstate,
         Level fromLevel, int fromLevelPortalIndex) {
@@ -85,7 +87,7 @@ namespace Atharia.Model {
     }
 
     public static Atharia.Model.Void Generate(
-        this RavashrikeLevelController cliffLevelController,
+        this GauntletLevelController cliffLevelController,
         Game game) {
       return new Atharia.Model.Void();
     }

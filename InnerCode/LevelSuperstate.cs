@@ -73,10 +73,8 @@ namespace Atharia.Model {
       }
     }
 
-    public List<Location> GetNRandomWalkableLocations(
+    public List<Location> GetWalkableLocations(
         Terrain terrain,
-        Rand rand,
-        int numToGet,
         bool checkStairsPresent,
         bool checkUnitPresent) {
       // Gather the candidates
@@ -91,19 +89,18 @@ namespace Atharia.Model {
         }
         candidates.Add(location);
       }
-
+      return candidates;
+    }
+    public List<Location> GetNRandomWalkableLocations(
+        Terrain terrain,
+        Rand rand,
+        int numToGet,
+        bool checkStairsPresent,
+        bool checkUnitPresent) {
+      var candidates = GetWalkableLocations(terrain, checkStairsPresent, checkUnitPresent);
       // Shuffle the candidates four times. For some reason if we don't do this
       // most the units are on the left side of the map.
-      for (int i = 0; i < 4; i++) {
-        int n = candidates.Count;
-        while (n > 1) {
-          n--;
-          int k = rand.Next() % (candidates.Count - 1);
-          var value = candidates[k];
-          candidates[k] = candidates[n];
-          candidates[n] = value;
-        }
-      }
+      candidates = SetUtils.Shuffled(candidates, rand, 4);
 
       candidates.RemoveRange(numToGet, candidates.Count - numToGet);
       return candidates;

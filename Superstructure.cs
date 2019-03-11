@@ -88,14 +88,14 @@ namespace IncendianFalls {
       return superstateByGameId[game.id];
     }
 
-    public Game RequestSetupGame(int randomSeed, bool squareLevelsOnly) {
+    public Game RequestSetupGame(int randomSeed, bool squareLevelsOnly, bool gauntletMode) {
       var stopwatch = new System.Diagnostics.Stopwatch();
       stopwatch.Start();
 
       root.Unlock();
       //var rollbackPoint = root.Snapshot();
       try {
-        var request = new SetupGameRequest(randomSeed, squareLevelsOnly);
+        var request = new SetupGameRequest(randomSeed, squareLevelsOnly, gauntletMode);
         broadcastBeforeRequest(new SetupGameRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         Superstate superstate = null;

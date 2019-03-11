@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using IncendianFalls;
 
 namespace Atharia.Model {
-  public static class RavashrikeLevelControllerExtensions {
+  public static class PreGauntletLevelControllerExtensions {
     public static void MakeLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,
@@ -12,7 +12,8 @@ namespace Atharia.Model {
         Superstate superstate,
         int depth,
         int levelIndex) {
-      var terrain = CircleTerrainGenerator.Generate(context, game.rand, 8.0f);
+      var terrain =
+          CircleTerrainGenerator.Generate(context, game.rand, 4.0f);
 
       var units = context.root.EffectUnitMutSetCreate();
 
@@ -25,34 +26,11 @@ namespace Atharia.Model {
 
       GenerationCommon.PlaceRocks(context, game.rand, level, levelSuperstate);
       GenerationCommon.PlaceItems(context, game.rand, level, levelSuperstate, levelIndex, new Location(0, 0, 0));
-      //GenerationCommon.PlaceStaircases(context, game.rand, level, levelSuperstate);
 
-      var controller = context.root.EffectRavashrikeLevelControllerCreate(level);
+      var controller = context.root.EffectPreGauntletLevelControllerCreate(level);
       level.controller = controller.AsILevelController();
 
-      var enemyLocation =
-          levelSuperstate.GetNRandomWalkableLocations(
-              level.terrain, game.rand, 1, true, true)[0];
-
-      var components = IUnitComponentMutBunch.New(context.root);
-      components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
-      Unit enemy =
-          context.root.EffectUnitCreate(
-              context.root.EffectIUnitEventMutListCreate(),
-              true,
-              0,
-              enemyLocation,
-              "Ravashrike",
-              600, 600,
-              100, 100,
-              500,
-              game.time + 10,
-              components,
-              false,
-              27);
-      level.EnterUnit(game, levelSuperstate, enemy, Level.Null, 0);
+      GenerationCommon.PlaceStaircase(terrain, new Location(0, 0, 0), true, 0, Level.Null, 0);
     }
 
     //  Level level;
@@ -67,16 +45,16 @@ namespace Atharia.Model {
     //  return level;
     //}
 
-    public static string GetName(this RavashrikeLevelController obj) {
-      return "Ravashrike Lair";
+    public static string GetName(this PreGauntletLevelController obj) {
+      return "PreGauntlet Lair";
     }
 
-    public static bool ConsiderCornersAdjacent(this RavashrikeLevelController obj) {
+    public static bool ConsiderCornersAdjacent(this PreGauntletLevelController obj) {
       return false;
     }
 
     public static Location GetEntryLocation(
-        this RavashrikeLevelController obj,
+        this PreGauntletLevelController obj,
         Game game,
         LevelSuperstate levelSuperstate,
         Level fromLevel, int fromLevelPortalIndex) {
@@ -85,7 +63,7 @@ namespace Atharia.Model {
     }
 
     public static Atharia.Model.Void Generate(
-        this RavashrikeLevelController cliffLevelController,
+        this PreGauntletLevelController cliffLevelController,
         Game game) {
       return new Atharia.Model.Void();
     }

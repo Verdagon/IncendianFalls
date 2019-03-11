@@ -10,6 +10,8 @@ public class RootIncarnation {
   public int hash;
   public readonly SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>> incarnationsSquareCaveLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>> incarnationsRidgeLevelController;
+  public readonly SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>> incarnationsGauntletLevelController;
+  public readonly SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>> incarnationsPreGauntletLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<RavashrikeLevelControllerIncarnation>> incarnationsRavashrikeLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>> incarnationsPentagonalCaveLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>> incarnationsCliffLevelController;
@@ -87,6 +89,8 @@ public class RootIncarnation {
     this.hash = hash;
     this.incarnationsSquareCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>>();
     this.incarnationsRidgeLevelController = new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>();
+    this.incarnationsGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>>();
+    this.incarnationsPreGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>>();
     this.incarnationsRavashrikeLevelController = new SortedDictionary<int, VersionAndIncarnation<RavashrikeLevelControllerIncarnation>>();
     this.incarnationsPentagonalCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>>();
     this.incarnationsCliffLevelController = new SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>>();
@@ -169,6 +173,8 @@ public class RootIncarnation {
     this.hash = newHash;
     this.incarnationsSquareCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>>(that.incarnationsSquareCaveLevelController);
     this.incarnationsRidgeLevelController = new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>(that.incarnationsRidgeLevelController);
+    this.incarnationsGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>>(that.incarnationsGauntletLevelController);
+    this.incarnationsPreGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>>(that.incarnationsPreGauntletLevelController);
     this.incarnationsRavashrikeLevelController = new SortedDictionary<int, VersionAndIncarnation<RavashrikeLevelControllerIncarnation>>(that.incarnationsRavashrikeLevelController);
     this.incarnationsPentagonalCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>>(that.incarnationsPentagonalCaveLevelController);
     this.incarnationsCliffLevelController = new SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>>(that.incarnationsCliffLevelController);

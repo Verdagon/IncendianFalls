@@ -106,7 +106,7 @@ namespace IncendianFalls {
     }
     public void Replay(IRequest request) {
       if (request is SetupGameRequestAsIRequest setupGame) {
-        ss.RequestSetupGame(setupGame.obj.randomSeed, setupGame.obj.squareLevelsOnly);
+        ss.RequestSetupGame(setupGame.obj.randomSeed, setupGame.obj.squareLevelsOnly, setupGame.obj.gauntletMode);
       } else if (request is InteractRequestAsIRequest interact) {
         ss.RequestInteract(interact.obj.gameId);
       } else if (request is MoveRequestAsIRequest move) {

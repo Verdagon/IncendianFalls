@@ -31,7 +31,7 @@ namespace Atharia.Model {
 
       cliffLevel =
           context.root.EffectLevelCreate(
-              terrain, units, depth, NullILevelController.Null);
+              terrain, units, depth, NullILevelController.Null, game.time);
       levelSuperstate = new LevelSuperstate(cliffLevel);
 
       game.levels.Add(cliffLevel);

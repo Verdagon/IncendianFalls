@@ -122,11 +122,17 @@ namespace IncendianFalls {
           game.level = staircase.destinationLevel;
           superstate.levelSuperstate = new LevelSuperstate(game.level);
 
-          game.level.EnterUnit(game, superstate.levelSuperstate, unit, previousLevel, previousLevelPortalIndex);
+          // These will likely be in the distant past, since it's been a while since we've
+          // visited here. We'll want to bump them all up to the near future.
+          Asserts.Assert(game.time >= game.level.time);
 
+          // Add that amount to every unit, so it's as if we just left this level.
           foreach (var nativeUnit in game.level.units) {
-            nativeUnit.nextActionTime = game.time + 10;
+            nativeUnit.nextActionTime =
+                nativeUnit.nextActionTime + (game.time - game.level.time);
           }
+
+          game.level.EnterUnit(game, superstate.levelSuperstate, unit, previousLevel, previousLevelPortalIndex);
         }
 
         // Note how we are NOT setting unit.nextActionTime here. That's because

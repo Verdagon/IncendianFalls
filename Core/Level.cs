@@ -92,5 +92,9 @@ public class Level {
     get { return root.GetILevelController(incarnation.controller); }
     set { root.EffectLevelSetController(id, value); }
   }
+  public int time {
+    get { return incarnation.time; }
+    set { root.EffectLevelSetTime(id, value); }
+  }
 }
 }

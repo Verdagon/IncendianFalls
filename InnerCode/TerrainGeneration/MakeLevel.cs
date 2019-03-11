@@ -19,51 +19,29 @@ namespace IncendianFalls {
       int caveLevelsEnd = caveLevelsStart + numCaveLevels;
       int volcaetusLevel = caveLevelsEnd;
 
-      if (game.squareLevelsOnly) {
-        SquareCaveLevelControllerExtensions.MakeLevel(
-            out level,
-            out levelSuperstate,
-            context,
-            game,
-            superstate,
-            levelAbove,
-            1,
-            Level.Null,
-            0,
-            game.levels.Count,
-            depth);
-        return;
-      }
-
-      int levelIndex = game.levels.Count;
-
-      context.logger.Info(levelIndex + " " + cliffLevelsEnd + " " + caveLevelsStart + " " + volcaetusLevel);
-
-      if (levelIndex < cliffLevelsEnd) {
-        CliffLevelControllerExtensions.MakeLevel(
-            out level,
-            out levelSuperstate,
-            context,
-            game,
-            superstate,
-            levelAbove,
-            levelIndex,
-            depth);
-      } else if (levelIndex < caveLevelsEnd) {
-        if (levelIndex % 2 == 1) {
-          PentagonalCaveLevelControllerExtensions.MakeLevel(
+      if (game.gauntletMode) {
+        int levelIndex = depth;
+        if (depth == 0) {
+          PreGauntletLevelControllerExtensions.MakeLevel(
               out level,
               out levelSuperstate,
               context,
               game,
               superstate,
-              levelAbove,
-              1,
-              Level.Null,
-              0,
-              levelIndex,
-              depth);
+              depth,
+              levelIndex);
         } else {
+          GauntletLevelControllerExtensions.MakeLevel(
+              out level,
+              out levelSuperstate,
+              context,
+              game,
+              superstate,
+              depth,
+              levelIndex);
+        }
+      } else {
+        if (game.squareLevelsOnly) {
           SquareCaveLevelControllerExtensions.MakeLevel(
               out level,
               out levelSuperstate,
@@ -74,18 +52,61 @@ namespace IncendianFalls {
               1,
               Level.Null,
               0,
+              game.levels.Count,
+              depth);
+          return;
+        }
+
+        int levelIndex = game.levels.Count;
+
+        if (levelIndex < cliffLevelsEnd) {
+          CliffLevelControllerExtensions.MakeLevel(
+              out level,
+              out levelSuperstate,
+              context,
+              game,
+              superstate,
+              levelAbove,
               levelIndex,
               depth);
+        } else if (levelIndex < caveLevelsEnd) {
+          if (levelIndex % 2 == 1) {
+            PentagonalCaveLevelControllerExtensions.MakeLevel(
+                out level,
+                out levelSuperstate,
+                context,
+                game,
+                superstate,
+                levelAbove,
+                1,
+                Level.Null,
+                0,
+                levelIndex,
+                depth);
+          } else {
+            SquareCaveLevelControllerExtensions.MakeLevel(
+                out level,
+                out levelSuperstate,
+                context,
+                game,
+                superstate,
+                levelAbove,
+                1,
+                Level.Null,
+                0,
+                levelIndex,
+                depth);
+          }
+        } else {
+          RavashrikeLevelControllerExtensions.MakeLevel(
+              out level,
+              out levelSuperstate,
+              context,
+              game,
+              superstate,
+              depth,
+              levelIndex);
         }
-      } else {
-        RavashrikeLevelControllerExtensions.MakeLevel(
-            out level,
-            out levelSuperstate,
-            context,
-            game,
-            superstate,
-            depth,
-            levelIndex);
       }
     }
 

@@ -22,14 +22,18 @@ public class SetupGameRequest : IComparable<SetupGameRequest> {
   private readonly int hashCode;
          public readonly int randomSeed;
   public readonly bool squareLevelsOnly;
+  public readonly bool gauntletMode;
   public SetupGameRequest(
       int randomSeed,
-      bool squareLevelsOnly) {
+      bool squareLevelsOnly,
+      bool gauntletMode) {
     this.randomSeed = randomSeed;
     this.squareLevelsOnly = squareLevelsOnly;
+    this.gauntletMode = gauntletMode;
     int hash = 0;
     hash = hash * 37 + randomSeed.GetDeterministicHashCode();
     hash = hash * 37 + squareLevelsOnly.GetDeterministicHashCode();
+    hash = hash * 37 + gauntletMode.GetDeterministicHashCode();
     this.hashCode = hash;
 
   }
@@ -54,6 +58,7 @@ public class SetupGameRequest : IComparable<SetupGameRequest> {
     return true
                && randomSeed.Equals(that.randomSeed)
         && squareLevelsOnly.Equals(that.squareLevelsOnly)
+        && gauntletMode.Equals(that.gauntletMode)
         ;
   }
   public override int GetHashCode() {
@@ -67,13 +72,17 @@ public class SetupGameRequest : IComparable<SetupGameRequest> {
     if (squareLevelsOnly != that.squareLevelsOnly) {
       return squareLevelsOnly.CompareTo(that.squareLevelsOnly);
     }
+    if (gauntletMode != that.gauntletMode) {
+      return gauntletMode.CompareTo(that.gauntletMode);
+    }
     return 0;
   }
   public override string ToString() { return DStr(); }
   public string DStr() {
     return "SetupGameRequest(" +
         randomSeed.DStr() + ", " +
-        squareLevelsOnly.DStr()
+        squareLevelsOnly.DStr() + ", " +
+        gauntletMode.DStr()
         + ")";
 
     }
@@ -83,8 +92,10 @@ public class SetupGameRequest : IComparable<SetupGameRequest> {
       var randomSeed = source.ParseInt();
       source.Expect(",");
       var squareLevelsOnly = source.ParseBool();
+      source.Expect(",");
+      var gauntletMode = source.ParseBool();
       source.Expect(")");
-      return new SetupGameRequest(randomSeed, squareLevelsOnly);
+      return new SetupGameRequest(randomSeed, squareLevelsOnly, gauntletMode);
   }
 }
        

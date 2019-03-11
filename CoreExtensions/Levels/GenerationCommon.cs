@@ -156,24 +156,6 @@ namespace IncendianFalls {
       }
     }
 
-    //public static void PlaceStaircases(SSContext context, Rand rand, Level level, LevelSuperstate levelSuperstate) {
-    //  List<Location> staircaseLocations =
-    //      levelSuperstate.GetNRandomWalkableLocations(
-    //          rand, 2, false);
-
-    //  var upStaircaseLocation = staircaseLocations[0];
-    //  var downStaircaseLocation = staircaseLocations[1];
-
-    //  var upStaircaseTile = level.terrain.tiles[upStaircaseLocation];
-    //  upStaircaseTile.components.Add(
-    //      new UpStaircaseTTCAsITerrainTileComponent(
-    //          context.root.EffectUpStaircaseTTCCreate()));
-
-    //  var downStaircaseTile = level.terrain.tiles[downStaircaseLocation];
-    //  downStaircaseTile.components.Add(
-    //      new DownStaircaseTTCAsITerrainTileComponent(context.root.EffectDownStaircaseTTCCreate()));
-    //}
-
     public static Location GetFurthestLocationInDirection(
         Pattern pattern,
         SortedSet<Location> locs,
@@ -323,6 +305,199 @@ namespace IncendianFalls {
       };
     }
 
+    public static void PlaceAvelisk(
+        SSContext context,
+        Game game, 
+        Level level,
+        LevelSuperstate levelSuperstate,
+        Level fromLevel,
+        int fromLevelPortalIndex) {
+      var components = IUnitComponentMutBunch.New(context.root);
+      components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+      Unit unit =
+          context.root.EffectUnitCreate(
+              context.root.EffectIUnitEventMutListCreate(),
+              true,
+              0,
+              new Location(0, 0, 0),
+              "avelisk",
+              9, 9,
+              0, 0,
+              600,
+              game.time + 10,
+              components,
+              false,
+              5);
+      level.EnterUnit(game, levelSuperstate, unit, fromLevel, fromLevelPortalIndex);
+    }
+
+    public static void PlaceNovafaire(
+        SSContext context,
+        Game game,
+        Level level,
+        LevelSuperstate levelSuperstate,
+        Level fromLevel,
+        int fromLevelPortalIndex) {
+      var components = IUnitComponentMutBunch.New(context.root);
+      components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
+      Unit unit =
+          context.root.EffectUnitCreate(
+              context.root.EffectIUnitEventMutListCreate(),
+              true,
+              0,
+              new Location(0, 0, 0),
+              "novafaire",
+              27, 27,
+              0, 0,
+              600,
+              game.time + 10,
+              components,
+              false,
+              8);
+      level.EnterUnit(game, levelSuperstate, unit, fromLevel, fromLevelPortalIndex);
+    }
+
+    public static void PlaceDraxling(
+        SSContext context,
+        Game game,
+        Level level,
+        LevelSuperstate levelSuperstate,
+        Level fromLevel,
+        int fromLevelPortalIndex) {
+      var components = IUnitComponentMutBunch.New(context.root);
+      components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+      Unit unit =
+          context.root.EffectUnitCreate(
+              context.root.EffectIUnitEventMutListCreate(),
+              true,
+              0,
+              new Location(0, 0, 0),
+              "draxling",
+              5, 5,
+              0, 0,
+              300,
+              game.time + 10,
+              components,
+              false,
+              3);
+      level.EnterUnit(game, levelSuperstate, unit, fromLevel, fromLevelPortalIndex);
+    }
+
+    public static void PlaceLornix(
+        SSContext context,
+        Game game,
+        Level level,
+        LevelSuperstate levelSuperstate,
+        Level fromLevel,
+        int fromLevelPortalIndex) {
+      var components = IUnitComponentMutBunch.New(context.root);
+      components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
+      Unit unit =
+          context.root.EffectUnitCreate(
+              context.root.EffectIUnitEventMutListCreate(),
+              true,
+              0,
+              new Location(0, 0, 0),
+              "lornix",
+              120, 120,
+              0, 0,
+              500,
+              game.time + 10,
+              components,
+              false,
+              36);
+      level.EnterUnit(game, levelSuperstate, unit, fromLevel, fromLevelPortalIndex);
+    }
+
+    public static void PlaceYoten(
+        SSContext context,
+        Game game,
+        Level level,
+        LevelSuperstate levelSuperstate,
+        Level fromLevel,
+        int fromLevelPortalIndex) {
+      var components = IUnitComponentMutBunch.New(context.root);
+      components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+      Unit unit =
+          context.root.EffectUnitCreate(
+              context.root.EffectIUnitEventMutListCreate(),
+              true,
+              0,
+              new Location(0, 0, 0),
+              "yoten",
+              100, 100,
+              0, 0,
+              500,
+              game.time + 10,
+              components,
+              false,
+              30);
+      level.EnterUnit(game, levelSuperstate, unit, fromLevel, fromLevelPortalIndex);
+    }
+
+    public static void PlaceSpiriad(
+        SSContext context,
+        Game game,
+        Level level,
+        LevelSuperstate levelSuperstate,
+        Level fromLevel,
+        int fromLevelPortalIndex) {
+      var components = IUnitComponentMutBunch.New(context.root);
+      components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+      Unit unit =
+          context.root.EffectUnitCreate(
+              context.root.EffectIUnitEventMutListCreate(),
+              true,
+              0,
+              new Location(0, 0, 0),
+              "spiriad",
+              50, 50,
+              0, 0,
+              500,
+              game.time + 10,
+              components,
+              false,
+              130);
+      level.EnterUnit(game, levelSuperstate, unit, fromLevel, fromLevelPortalIndex);
+    }
+
+
+    public static void PlaceMordranth(
+        SSContext context,
+        Game game,
+        Level level,
+        LevelSuperstate levelSuperstate,
+        Level fromLevel,
+        int fromLevelPortalIndex) {
+      var components = IUnitComponentMutBunch.New(context.root);
+      components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
+      Unit unit =
+          context.root.EffectUnitCreate(
+              context.root.EffectIUnitEventMutListCreate(),
+              true,
+              0,
+              new Location(0, 0, 0),
+              "mordranth",
+              120, 120,
+              0, 0,
+              500,
+              game.time + 10,
+              components,
+              false,
+              48);
+      level.EnterUnit(game, levelSuperstate, unit, fromLevel, fromLevelPortalIndex);
+    }
+
     public static void FillWithUnits(
         SSContext context,
         Game game,
@@ -340,153 +515,31 @@ namespace IncendianFalls {
       int numMordranth = numByUnit[6];
 
       for (int i = 0; i < numAvelisk; i++) {
-        var components = IUnitComponentMutBunch.New(context.root);
-        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-        Unit unit =
-            context.root.EffectUnitCreate(
-                context.root.EffectIUnitEventMutListCreate(),
-                true,
-                0,
-                new Location(0, 0, 0),
-                "avelisk",
-                9, 9,
-                0, 0,
-                600,
-                game.time + 10,
-                components,
-                false,
-                5);
-        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+        PlaceAvelisk(context, game, level, levelSuperstate, level, 0);
       }
 
       for (int i = 0; i < numNovafaire; i++) {
-        var components = IUnitComponentMutBunch.New(context.root);
-        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-        components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
-        Unit unit =
-            context.root.EffectUnitCreate(
-                context.root.EffectIUnitEventMutListCreate(),
-                true,
-                0,
-                new Location(0, 0, 0),
-                "novafaire",
-                27, 27,
-                0, 0,
-                600,
-                game.time + 10,
-                components,
-                false,
-                8);
-        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+        PlaceNovafaire(context, game, level, levelSuperstate, level, 0);
       }
 
       for (int i = 0; i < numDraxling; i++) {
-        var components = IUnitComponentMutBunch.New(context.root);
-        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-        Unit unit =
-            context.root.EffectUnitCreate(
-                context.root.EffectIUnitEventMutListCreate(),
-                true,
-                0,
-                new Location(0, 0, 0),
-                "draxling",
-                5, 5,
-                0, 0,
-                300,
-                game.time + 10,
-                components,
-                false,
-                3);
-        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+        PlaceDraxling(context, game, level, levelSuperstate, level, 0);
       }
 
       for (int i = 0; i < numLornix; i++) {
-        var components = IUnitComponentMutBunch.New(context.root);
-        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-        components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
-        Unit unit =
-            context.root.EffectUnitCreate(
-                context.root.EffectIUnitEventMutListCreate(),
-                true,
-                0,
-                new Location(0, 0, 0),
-                "lornix",
-                120, 120,
-                0, 0,
-                500,
-                game.time + 10,
-                components,
-                false,
-                36);
-        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+        PlaceLornix(context, game, level, levelSuperstate, level, 0);
       }
 
       for (int i = 0; i < numYoten; i++) {
-        var components = IUnitComponentMutBunch.New(context.root);
-        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-        Unit unit =
-            context.root.EffectUnitCreate(
-                context.root.EffectIUnitEventMutListCreate(),
-                true,
-                0,
-                new Location(0, 0, 0),
-                "yoten",
-                100, 100,
-                0, 0,
-                500,
-                game.time + 10,
-                components,
-                false,
-                30);
-        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+        PlaceYoten(context, game, level, levelSuperstate, level, 0);
       }
 
       for (int i = 0; i < numSpiriad; i++) {
-        var components = IUnitComponentMutBunch.New(context.root);
-        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-        Unit unit =
-            context.root.EffectUnitCreate(
-                context.root.EffectIUnitEventMutListCreate(),
-                true,
-                0,
-                new Location(0, 0, 0),
-                "spiriad",
-                50, 50,
-                0, 0,
-                500,
-                game.time + 10,
-                components,
-                false,
-                130);
-        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+        PlaceSpiriad(context, game, level, levelSuperstate, level, 0);
       }
 
       for (int i = 0; i < numMordranth; i++) {
-        var components = IUnitComponentMutBunch.New(context.root);
-        components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-        components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-        components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
-        Unit unit =
-            context.root.EffectUnitCreate(
-                context.root.EffectIUnitEventMutListCreate(),
-                true,
-                0,
-                new Location(0, 0, 0),
-                "mordranth",
-                120, 120,
-                0, 0,
-                500,
-                game.time + 10,
-                components,
-                false,
-                48);
-        level.EnterUnit(game, levelSuperstate, unit, level, 0);
+        PlaceMordranth(context, game, level, levelSuperstate, level, 0);
       }
     }
 

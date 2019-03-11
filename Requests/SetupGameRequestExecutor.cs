@@ -10,6 +10,7 @@ namespace IncendianFalls {
         SetupGameRequest request) {
       int randomSeed = request.randomSeed;
       bool squareLevelsOnly = request.squareLevelsOnly;
+      bool gauntletMode = request.gauntletMode;
 
       var rand = context.root.EffectRandCreate(randomSeed);
 
@@ -19,6 +20,7 @@ namespace IncendianFalls {
           context.root.EffectGameCreate(
               rand,
               squareLevelsOnly,
+              gauntletMode,
               levels,
               Unit.Null,
               NullIRequest.Null,

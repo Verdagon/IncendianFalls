@@ -30,7 +30,7 @@ namespace Atharia.Model {
 
       level =
           context.root.EffectLevelCreate(
-              terrain, units, depth, NullILevelController.Null);
+              terrain, units, depth, NullILevelController.Null, game.time);
       levelSuperstate = new LevelSuperstate(level);
 
       var controller =

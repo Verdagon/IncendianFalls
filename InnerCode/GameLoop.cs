@@ -218,6 +218,7 @@ namespace IncendianFalls {
 
       var nextUnit = Utils.GetNextActingUnit(game);
 
+      game.level.time = nextUnit.nextActionTime;
       game.time = nextUnit.nextActionTime;
 
       if (nextUnit.alive == false) {

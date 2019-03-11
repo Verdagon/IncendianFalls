@@ -89,6 +89,9 @@ public class Game {
   public bool squareLevelsOnly {
     get { return incarnation.squareLevelsOnly; }
   }
+  public bool gauntletMode {
+    get { return incarnation.gauntletMode; }
+  }
   public LevelMutSet levels {
 
     get {

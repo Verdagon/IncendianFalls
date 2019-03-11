@@ -48,6 +48,20 @@ public class Root {
   readonly List<RidgeLevelControllerDeleteEffect> effectsRidgeLevelControllerDeleteEffect =
       new List<RidgeLevelControllerDeleteEffect>();
 
+  readonly SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>> observersForGauntletLevelController =
+      new SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>>();
+  readonly List<GauntletLevelControllerCreateEffect> effectsGauntletLevelControllerCreateEffect =
+      new List<GauntletLevelControllerCreateEffect>();
+  readonly List<GauntletLevelControllerDeleteEffect> effectsGauntletLevelControllerDeleteEffect =
+      new List<GauntletLevelControllerDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IPreGauntletLevelControllerEffectObserver>> observersForPreGauntletLevelController =
+      new SortedDictionary<int, List<IPreGauntletLevelControllerEffectObserver>>();
+  readonly List<PreGauntletLevelControllerCreateEffect> effectsPreGauntletLevelControllerCreateEffect =
+      new List<PreGauntletLevelControllerCreateEffect>();
+  readonly List<PreGauntletLevelControllerDeleteEffect> effectsPreGauntletLevelControllerDeleteEffect =
+      new List<PreGauntletLevelControllerDeleteEffect>();
+
   readonly SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>> observersForRavashrikeLevelController =
       new SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>>();
   readonly List<RavashrikeLevelControllerCreateEffect> effectsRavashrikeLevelControllerCreateEffect =
@@ -77,6 +91,8 @@ public class Root {
       new List<LevelDeleteEffect>();
   readonly List<LevelSetControllerEffect> effectsLevelSetControllerEffect =
       new List<LevelSetControllerEffect>();
+  readonly List<LevelSetTimeEffect> effectsLevelSetTimeEffect =
+      new List<LevelSetTimeEffect>();
 
   readonly SortedDictionary<int, List<ITimeAnchorTTCEffectObserver>> observersForTimeAnchorTTC =
       new SortedDictionary<int, List<ITimeAnchorTTCEffectObserver>>();
@@ -781,6 +797,12 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsRidgeLevelController) {
       result += GetRidgeLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsGauntletLevelController) {
+      result += GetGauntletLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsPreGauntletLevelController) {
+      result += GetPreGauntletLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsRavashrikeLevelController) {
       result += GetRavashrikeLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1004,6 +1026,12 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllRidgeLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllGauntletLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllPreGauntletLevelController()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllRavashrikeLevelController()) {
@@ -1230,6 +1258,16 @@ public class Root {
       }
     }
     foreach (var obj in this.AllRidgeLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllGauntletLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllPreGauntletLevelController()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1622,6 +1660,28 @@ public class Root {
       copyOfObserversForRidgeLevelController.Add(
           objectId,
           new List<IRidgeLevelControllerEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForGauntletLevelController =
+        new SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>>();
+    foreach (var entry in observersForGauntletLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForGauntletLevelController.Add(
+          objectId,
+          new List<IGauntletLevelControllerEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForPreGauntletLevelController =
+        new SortedDictionary<int, List<IPreGauntletLevelControllerEffectObserver>>();
+    foreach (var entry in observersForPreGauntletLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForPreGauntletLevelController.Add(
+          objectId,
+          new List<IPreGauntletLevelControllerEffectObserver>(
               observers));
     }
 
@@ -2412,6 +2472,12 @@ public class Root {
     BroadcastRidgeLevelControllerEffects(
         copyOfObserversForRidgeLevelController);
            
+    BroadcastGauntletLevelControllerEffects(
+        copyOfObserversForGauntletLevelController);
+           
+    BroadcastPreGauntletLevelControllerEffects(
+        copyOfObserversForPreGauntletLevelController);
+           
     BroadcastRavashrikeLevelControllerEffects(
         copyOfObserversForRavashrikeLevelController);
            
@@ -2658,6 +2724,26 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsRidgeLevelController.ContainsKey(sourceObjId)) {
         EffectInternalCreateRidgeLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGauntletLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsGauntletLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateGauntletLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPreGauntletLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreatePreGauntletLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -4191,6 +4277,48 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGauntletLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsGauntletLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsGauntletLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPreGauntletLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsPreGauntletLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsPreGauntletLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavashrikeLevelController) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -4268,6 +4396,10 @@ public class Root {
 
           if (sourceObjIncarnation.controller != currentObjIncarnation.controller) {
             EffectLevelSetController(objId, GetILevelController(sourceObjIncarnation.controller));
+          }
+
+          if (sourceObjIncarnation.time != currentObjIncarnation.time) {
+            EffectLevelSetTime(objId, sourceObjIncarnation.time);
           }
 
           // Swap out the underlying incarnation. The only visible effect this has is
@@ -5200,6 +5332,20 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>>(rootIncarnation.incarnationsGauntletLevelController)) {
+      if (!sourceIncarnation.incarnationsGauntletLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectGauntletLevelControllerDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>>(rootIncarnation.incarnationsPreGauntletLevelController)) {
+      if (!sourceIncarnation.incarnationsPreGauntletLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectPreGauntletLevelControllerDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RavashrikeLevelControllerIncarnation>>(rootIncarnation.incarnationsRavashrikeLevelController)) {
       if (!sourceIncarnation.incarnationsRavashrikeLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -5961,6 +6107,266 @@ public class Root {
     }
     effectsRidgeLevelControllerCreateEffect.Clear();
   }
+  public GauntletLevelControllerIncarnation GetGauntletLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsGauntletLevelController[id].incarnation;
+  }
+  public bool GauntletLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id);
+  }
+  public GauntletLevelController GetGauntletLevelController(int id) {
+    return new GauntletLevelController(this, id);
+  }
+  public List<GauntletLevelController> AllGauntletLevelController() {
+    List<GauntletLevelController> result = new List<GauntletLevelController>(rootIncarnation.incarnationsGauntletLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsGauntletLevelController.Keys) {
+      result.Add(new GauntletLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<GauntletLevelController> EnumAllGauntletLevelController() {
+    foreach (var id in rootIncarnation.incarnationsGauntletLevelController.Keys) {
+      yield return GetGauntletLevelController(id);
+    }
+  }
+  public void CheckHasGauntletLevelController(GauntletLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasGauntletLevelController(thing.id);
+  }
+  public void CheckHasGauntletLevelController(int id) {
+    if (!rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid GauntletLevelController: " + id);
+    }
+  }
+  public void AddGauntletLevelControllerObserver(int id, IGauntletLevelControllerEffectObserver observer) {
+    List<IGauntletLevelControllerEffectObserver> obsies;
+    if (!observersForGauntletLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IGauntletLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForGauntletLevelController[id] = obsies;
+  }
+
+  public void RemoveGauntletLevelControllerObserver(int id, IGauntletLevelControllerEffectObserver observer) {
+    if (observersForGauntletLevelController.ContainsKey(id)) {
+      var list = observersForGauntletLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForGauntletLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public GauntletLevelController EffectGauntletLevelControllerCreate(
+      Level level) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new GauntletLevelControllerIncarnation(
+            level.id
+            );
+    EffectInternalCreateGauntletLevelController(id, rootIncarnation.version, incarnation);
+    return new GauntletLevelController(this, id);
+  }
+  public void EffectInternalCreateGauntletLevelController(
+      int id,
+      int incarnationVersion,
+      GauntletLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new GauntletLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsGauntletLevelController.Add(
+        id,
+        new VersionAndIncarnation<GauntletLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsGauntletLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectGauntletLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new GauntletLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsGauntletLevelController[id];
+
+    rootIncarnation.incarnationsGauntletLevelController.Remove(id);
+    effectsGauntletLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetGauntletLevelControllerHash(int id, int version, GauntletLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastGauntletLevelControllerEffects(
+      SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsGauntletLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IGauntletLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGauntletLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IGauntletLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGauntletLevelControllerEffect(effect);
+        }
+        observersForGauntletLevelController.Remove(effect.id);
+      }
+    }
+    effectsGauntletLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsGauntletLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<IGauntletLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGauntletLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IGauntletLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGauntletLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsGauntletLevelControllerCreateEffect.Clear();
+  }
+  public PreGauntletLevelControllerIncarnation GetPreGauntletLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsPreGauntletLevelController[id].incarnation;
+  }
+  public bool PreGauntletLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id);
+  }
+  public PreGauntletLevelController GetPreGauntletLevelController(int id) {
+    return new PreGauntletLevelController(this, id);
+  }
+  public List<PreGauntletLevelController> AllPreGauntletLevelController() {
+    List<PreGauntletLevelController> result = new List<PreGauntletLevelController>(rootIncarnation.incarnationsPreGauntletLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsPreGauntletLevelController.Keys) {
+      result.Add(new PreGauntletLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<PreGauntletLevelController> EnumAllPreGauntletLevelController() {
+    foreach (var id in rootIncarnation.incarnationsPreGauntletLevelController.Keys) {
+      yield return GetPreGauntletLevelController(id);
+    }
+  }
+  public void CheckHasPreGauntletLevelController(PreGauntletLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasPreGauntletLevelController(thing.id);
+  }
+  public void CheckHasPreGauntletLevelController(int id) {
+    if (!rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid PreGauntletLevelController: " + id);
+    }
+  }
+  public void AddPreGauntletLevelControllerObserver(int id, IPreGauntletLevelControllerEffectObserver observer) {
+    List<IPreGauntletLevelControllerEffectObserver> obsies;
+    if (!observersForPreGauntletLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IPreGauntletLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForPreGauntletLevelController[id] = obsies;
+  }
+
+  public void RemovePreGauntletLevelControllerObserver(int id, IPreGauntletLevelControllerEffectObserver observer) {
+    if (observersForPreGauntletLevelController.ContainsKey(id)) {
+      var list = observersForPreGauntletLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForPreGauntletLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public PreGauntletLevelController EffectPreGauntletLevelControllerCreate(
+      Level level) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new PreGauntletLevelControllerIncarnation(
+            level.id
+            );
+    EffectInternalCreatePreGauntletLevelController(id, rootIncarnation.version, incarnation);
+    return new PreGauntletLevelController(this, id);
+  }
+  public void EffectInternalCreatePreGauntletLevelController(
+      int id,
+      int incarnationVersion,
+      PreGauntletLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new PreGauntletLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsPreGauntletLevelController.Add(
+        id,
+        new VersionAndIncarnation<PreGauntletLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsPreGauntletLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectPreGauntletLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new PreGauntletLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsPreGauntletLevelController[id];
+
+    rootIncarnation.incarnationsPreGauntletLevelController.Remove(id);
+    effectsPreGauntletLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetPreGauntletLevelControllerHash(int id, int version, PreGauntletLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastPreGauntletLevelControllerEffects(
+      SortedDictionary<int, List<IPreGauntletLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsPreGauntletLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IPreGauntletLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnPreGauntletLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IPreGauntletLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnPreGauntletLevelControllerEffect(effect);
+        }
+        observersForPreGauntletLevelController.Remove(effect.id);
+      }
+    }
+    effectsPreGauntletLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsPreGauntletLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<IPreGauntletLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnPreGauntletLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IPreGauntletLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnPreGauntletLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsPreGauntletLevelControllerCreateEffect.Clear();
+  }
   public RavashrikeLevelControllerIncarnation GetRavashrikeLevelControllerIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -6414,7 +6820,8 @@ public class Root {
       Terrain terrain,
       UnitMutSet units,
       int depth,
-      ILevelController controller) {
+      ILevelController controller,
+      int time) {
     CheckUnlocked();
     CheckHasTerrain(terrain);
     CheckHasUnitMutSet(units);
@@ -6425,7 +6832,8 @@ public class Root {
             terrain.id,
             units.id,
             depth,
-            controller.id
+            controller.id,
+            time
             );
     EffectInternalCreateLevel(id, rootIncarnation.version, incarnation);
     return new Level(this, id);
@@ -6464,6 +6872,7 @@ public class Root {
     if (!object.ReferenceEquals(incarnation.controller, null)) {
       result += id * version * 4 * incarnation.controller.GetDeterministicHashCode();
     }
+    result += id * version * 5 * incarnation.time.GetDeterministicHashCode();
     return result;
   }
      
@@ -6499,6 +6908,20 @@ public class Root {
     }
     effectsLevelSetControllerEffect.Clear();
 
+    foreach (var effect in effectsLevelSetTimeEffect) {
+      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+    }
+    effectsLevelSetTimeEffect.Clear();
+
     foreach (var effect in effectsLevelCreateEffect) {
       if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -6529,7 +6952,8 @@ public class Root {
               oldIncarnationAndVersion.incarnation.terrain,
               oldIncarnationAndVersion.incarnation.units,
               oldIncarnationAndVersion.incarnation.depth,
-              newValue.id);
+              newValue.id,
+              oldIncarnationAndVersion.incarnation.time);
       rootIncarnation.incarnationsLevel[id] =
           new VersionAndIncarnation<LevelIncarnation>(
               rootIncarnation.version,
@@ -6537,6 +6961,32 @@ public class Root {
     }
 
     effectsLevelSetControllerEffect.Add(effect);
+  }
+
+  public void EffectLevelSetTime(int id, int newValue) {
+    CheckUnlocked();
+    CheckHasLevel(id);
+    var effect = new LevelSetTimeEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsLevel[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.time;
+      oldIncarnationAndVersion.incarnation.time = newValue;
+
+    } else {
+      var newIncarnation =
+          new LevelIncarnation(
+              oldIncarnationAndVersion.incarnation.terrain,
+              oldIncarnationAndVersion.incarnation.units,
+              oldIncarnationAndVersion.incarnation.depth,
+              oldIncarnationAndVersion.incarnation.controller,
+              newValue);
+      rootIncarnation.incarnationsLevel[id] =
+          new VersionAndIncarnation<LevelIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsLevelSetTimeEffect.Add(effect);
   }
   public TimeAnchorTTCIncarnation GetTimeAnchorTTCIncarnation(int id) {
     if (id == 0) {
@@ -12431,6 +12881,7 @@ public class Root {
   public Game EffectGameCreate(
       Rand rand,
       bool squareLevelsOnly,
+      bool gauntletMode,
       LevelMutSet levels,
       Unit player,
       IRequest lastPlayerRequest,
@@ -12447,6 +12898,7 @@ public class Root {
         new GameIncarnation(
             rand.id,
             squareLevelsOnly,
+            gauntletMode,
             levels.id,
             player.id,
             lastPlayerRequest,
@@ -12487,18 +12939,19 @@ public class Root {
     int result = id * version;
     result += id * version * 1 * incarnation.rand.GetDeterministicHashCode();
     result += id * version * 2 * incarnation.squareLevelsOnly.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.levels.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.gauntletMode.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.levels.GetDeterministicHashCode();
     if (!object.ReferenceEquals(incarnation.player, null)) {
-      result += id * version * 4 * incarnation.player.GetDeterministicHashCode();
+      result += id * version * 5 * incarnation.player.GetDeterministicHashCode();
     }
     if (!object.ReferenceEquals(incarnation.lastPlayerRequest, null)) {
-      result += id * version * 5 * incarnation.lastPlayerRequest.GetDeterministicHashCode();
+      result += id * version * 6 * incarnation.lastPlayerRequest.GetDeterministicHashCode();
     }
     if (!object.ReferenceEquals(incarnation.level, null)) {
-      result += id * version * 6 * incarnation.level.GetDeterministicHashCode();
+      result += id * version * 7 * incarnation.level.GetDeterministicHashCode();
     }
-    result += id * version * 7 * incarnation.time.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.executionState.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.time.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.executionState.GetDeterministicHashCode();
     return result;
   }
      
@@ -12605,6 +13058,7 @@ public class Root {
           new GameIncarnation(
               oldIncarnationAndVersion.incarnation.rand,
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.gauntletMode,
               oldIncarnationAndVersion.incarnation.levels,
               newValue.id,
               oldIncarnationAndVersion.incarnation.lastPlayerRequest,
@@ -12634,6 +13088,7 @@ public class Root {
           new GameIncarnation(
               oldIncarnationAndVersion.incarnation.rand,
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.gauntletMode,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
               newValue,
@@ -12663,6 +13118,7 @@ public class Root {
           new GameIncarnation(
               oldIncarnationAndVersion.incarnation.rand,
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.gauntletMode,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
               oldIncarnationAndVersion.incarnation.lastPlayerRequest,
@@ -12692,6 +13148,7 @@ public class Root {
           new GameIncarnation(
               oldIncarnationAndVersion.incarnation.rand,
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.gauntletMode,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
               oldIncarnationAndVersion.incarnation.lastPlayerRequest,
@@ -12714,6 +13171,12 @@ public class Root {
     if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
       return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
     }
+    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      return new GauntletLevelControllerAsILevelController(new GauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      return new PreGauntletLevelControllerAsILevelController(new PreGauntletLevelController(this, id));
+    }
     if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
       return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
     }
@@ -12731,6 +13194,12 @@ public class Root {
     }
     if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
       return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      return new GauntletLevelControllerAsILevelController(new GauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      return new PreGauntletLevelControllerAsILevelController(new PreGauntletLevelController(this, id));
     }
     if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
       return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
