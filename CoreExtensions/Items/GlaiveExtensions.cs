@@ -12,9 +12,11 @@ namespace Atharia.Model {
     public static int AffectIncomingDamage(this Glaive glaive, int damage) {
       return damage;
     }
-    public static int AffectOutgoingDamage(this Glaive glaive, int damage) {
-      int newDamage = damage * 2;
-      return newDamage;
+    public static int AffectOutgoingDamage(this Glaive glaive, bool physical, int damage) {
+      if (physical) {
+        damage *= 2;
+      }
+      return damage;
     }
     public static IItem ClonifyAndReturnNewReal(this Glaive glaive, Root newRoot) {
       return newRoot.EffectGlaiveCreate().AsIItem();

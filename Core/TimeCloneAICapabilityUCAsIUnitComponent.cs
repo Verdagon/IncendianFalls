@@ -17,6 +17,27 @@ public class TimeCloneAICapabilityUCAsIUnitComponent : IUnitComponent {
   public void FindReachableObjects(SortedSet<int> foundIds) {
     obj.FindReachableObjects(foundIds);
   }
+  public bool Is(IImpulsePostReactor that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IImpulsePostReactor that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IImpulsePostReactor AsIImpulsePostReactor() {
+    return new TimeCloneAICapabilityUCAsIImpulsePostReactor(obj);
+  }
   public bool Is(IAICapabilityUC that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");

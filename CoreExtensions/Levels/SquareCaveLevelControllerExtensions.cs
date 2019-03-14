@@ -46,6 +46,7 @@ namespace Atharia.Model {
           roomNumbers.Add(entry.Key);
         }
       }
+
       Asserts.Assert(roomNumbers.Count > 0);
       Location upStairsLoc;
       Location downStairsLoc;

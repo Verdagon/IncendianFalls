@@ -17,32 +17,28 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit unit) {
 
-      if (unit.GetDirectiveOrNull().Exists()) {
-        // If there's a directive, we don't want to just be wandering.
-        return obj.root.EffectNoImpulseCreate().AsIImpulse();
-      } else {
-        var adjacentLocations =
-            game.level.terrain.GetAdjacentExistingLocations(
-                unit.location, game.level.ConsiderCornersAdjacent());
-        var adjacentWalkableLocations = new SortedSet<Location>();
-        foreach (var adjacentLocation in adjacentLocations) {
-          if (Actions.CanStep(game, superstate, unit, adjacentLocation)) {
-            adjacentWalkableLocations.Add(adjacentLocation);
-          }
+      var adjacentLocations =
+          game.level.terrain.GetAdjacentExistingLocations(
+              unit.location, game.level.ConsiderCornersAdjacent());
+      var adjacentWalkableLocations = new SortedSet<Location>();
+      foreach (var adjacentLocation in adjacentLocations) {
+        if (Actions.CanStep(game, superstate, unit, adjacentLocation)) {
+          adjacentWalkableLocations.Add(adjacentLocation);
         }
-
-        if (adjacentWalkableLocations.Count == 0) {
-          // Nowhere to walk, so can't wander.
-          return obj.root.EffectNoImpulseCreate().AsIImpulse();
-        }
-
-        var randomAdjacentWalkableLocation =
-          SetUtils.GetRandom(game.rand.Next(), adjacentWalkableLocations);
-
-        return obj.root.EffectMoveImpulseCreate(
-            200, randomAdjacentWalkableLocation)
-            .AsIImpulse();
       }
+
+      if (adjacentWalkableLocations.Count == 0) {
+        // Nowhere to walk, so can't wander.
+        return obj.root.EffectNoImpulseCreate().AsIImpulse();
+      }
+
+      var randomAdjacentWalkableLocation =
+        SetUtils.GetRandom(game.rand.Next(), adjacentWalkableLocations);
+
+      return obj.root.EffectMoveImpulseCreate(
+          200,
+          randomAdjacentWalkableLocation)
+              .AsIImpulse();
     }
   }
 }

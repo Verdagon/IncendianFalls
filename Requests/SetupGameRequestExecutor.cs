@@ -23,7 +23,6 @@ namespace IncendianFalls {
               gauntletMode,
               levels,
               Unit.Null,
-              NullIRequest.Null,
               Level.Null,
               0,
               context.root.EffectExecutionStateCreate(
@@ -37,7 +36,9 @@ namespace IncendianFalls {
             game,
             null,
             new List<RootIncarnation>(),
+            new List<IRequest>(),
             new List<int>(),
+            null,
             null);
 
       MakeLevel.MakeNextLevel(
@@ -70,7 +71,7 @@ namespace IncendianFalls {
           superstate.levelSuperstate,
           player,
           Level.Null,
-          1);
+          -1);
       game.player = player;
 
       return game;

@@ -28,28 +28,38 @@ namespace IncendianFalls {
         return "Error: Cannot anchor move while time shifting!";
       }
 
+      if (destination == game.player.location) {
+        return "Already there!";
+      }
+
+      if (!Actions.CanStep(game, superstate, game.player, destination)) {
+        return "Can't step there!";
+      }
+
       superstate.previousTurns.Add(context.root.Snapshot());
+      superstate.requests.Add(request.AsIRequest());
       var anchorTurnIndex = superstate.previousTurns.Count - 1;
-      game.lastPlayerRequest = request.AsIRequest();
 
       var oldLocation = game.player.location;
-
-      var moveExecutor = MoveRequestExecutor.PrepareToMove(superstate, game, destination);
-
-      if (moveExecutor == null) {
-        return "Could not move there!";
-      }
 
       // Add the PREVIOUS turn to the anchorTurnIndices.
       // (Remember, the current turn hasn't yet been added to the turnsIncludingPresent list)
       superstate.anchorTurnIndices.Add(anchorTurnIndex);
 
-      moveExecutor.Execute();
+      Actions.Step(game, superstate, game.player, destination, false);
 
       var terrainTileAtOldLocation = game.level.terrain.tiles[oldLocation];
       terrainTileAtOldLocation.components.Add(
           context.root.EffectTimeAnchorTTCCreate(context.root.version)
               .AsITerrainTileComponent());
+
+      GameLoop.NoteUnitActed(game, game.player);
+
+      GameLoop.ContinueAfterUnitAction(
+          game,
+          superstate,
+          new PauseCondition(false),
+          new SortedSet<int>());
 
       return "";
     }

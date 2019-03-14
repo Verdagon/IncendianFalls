@@ -17,6 +17,48 @@ public class BideAICapabilityUCAsIDestructible : IDestructible {
   public void FindReachableObjects(SortedSet<int> foundIds) {
     obj.FindReachableObjects(foundIds);
   }
+  public bool Is(IImpulsePreReactor that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IImpulsePreReactor that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IImpulsePreReactor AsIImpulsePreReactor() {
+    return new BideAICapabilityUCAsIImpulsePreReactor(obj);
+  }
+  public bool Is(IAICapabilityUC that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IAICapabilityUC that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IAICapabilityUC AsIAICapabilityUC() {
+    return new BideAICapabilityUCAsIAICapabilityUC(obj);
+  }
   public bool Is(IDestructible that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -59,7 +101,7 @@ public class BideAICapabilityUCAsIDestructible : IDestructible {
   public IUnitComponent AsIUnitComponent() {
     return new BideAICapabilityUCAsIUnitComponent(obj);
   }
-  public bool Is(IAICapabilityUC that) {
+  public bool Is(IDefenseUC that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
     }
@@ -68,7 +110,7 @@ public class BideAICapabilityUCAsIDestructible : IDestructible {
     }
     return root == that.root && obj.id == that.id;
   }
-  public bool NullableIs(IAICapabilityUC that) {
+  public bool NullableIs(IDefenseUC that) {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
@@ -77,8 +119,8 @@ public class BideAICapabilityUCAsIDestructible : IDestructible {
     }
     return this.Is(that);
   }
-  public IAICapabilityUC AsIAICapabilityUC() {
-    return new BideAICapabilityUCAsIAICapabilityUC(obj);
+  public IDefenseUC AsIDefenseUC() {
+    return new BideAICapabilityUCAsIDefenseUC(obj);
   }
 
          public Void Destruct() {

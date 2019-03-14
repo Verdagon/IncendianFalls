@@ -18,7 +18,7 @@ public interface IOffenseItem {
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
   IItem AsIItem();
-  int AffectOutgoingDamage(int outgoingDamage);
+  int AffectOutgoingDamage(bool physical, int outgoingDamage);
   IItem ClonifyAndReturnNewReal(Root newRoot);
   Void Destruct();
 }

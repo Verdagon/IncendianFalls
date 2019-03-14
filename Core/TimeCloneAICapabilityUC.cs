@@ -40,6 +40,9 @@ public class TimeCloneAICapabilityUC {
       return;
     }
     foundIds.Add(id);
+    if (root.IRequestMutListExists(script.id)) {
+      script.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(TimeCloneAICapabilityUC that) {
     if (!this.Exists()) {
@@ -50,5 +53,14 @@ public class TimeCloneAICapabilityUC {
     }
     return this.root == that.root && id == that.id;
   }
-       }
+         public IRequestMutList script {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member script of null!");
+      }
+      return new IRequestMutList(root, incarnation.script);
+    }
+                       }
+}
 }

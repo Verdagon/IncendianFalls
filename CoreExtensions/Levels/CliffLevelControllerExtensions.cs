@@ -11,6 +11,7 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Level levelAbove,
+        int levelAbovePortalIndex,
         int levelIndex,
         int depth) {
 
@@ -78,7 +79,7 @@ namespace Atharia.Model {
                 cliffHalves[0].walkableLocs,
                 new Vec2(0, 1));
       GenerationCommon.PlaceStaircase(
-          terrain, upStaircaseLocation, false, 0, levelAbove, 1);
+          terrain, upStaircaseLocation, false, 0, levelAbove, levelAbovePortalIndex);
 
       Location downStaircaseLocation =
           GenerationCommon.GetFurthestLocationInDirection(

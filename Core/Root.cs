@@ -220,28 +220,12 @@ public class Root {
   readonly List<EvaporateImpulseDeleteEffect> effectsEvaporateImpulseDeleteEffect =
       new List<EvaporateImpulseDeleteEffect>();
 
-  readonly SortedDictionary<int, List<ITimeScriptDirectiveUCEffectObserver>> observersForTimeScriptDirectiveUC =
-      new SortedDictionary<int, List<ITimeScriptDirectiveUCEffectObserver>>();
-  readonly List<TimeScriptDirectiveUCCreateEffect> effectsTimeScriptDirectiveUCCreateEffect =
-      new List<TimeScriptDirectiveUCCreateEffect>();
-  readonly List<TimeScriptDirectiveUCDeleteEffect> effectsTimeScriptDirectiveUCDeleteEffect =
-      new List<TimeScriptDirectiveUCDeleteEffect>();
-
   readonly SortedDictionary<int, List<ITimeCloneAICapabilityUCEffectObserver>> observersForTimeCloneAICapabilityUC =
       new SortedDictionary<int, List<ITimeCloneAICapabilityUCEffectObserver>>();
   readonly List<TimeCloneAICapabilityUCCreateEffect> effectsTimeCloneAICapabilityUCCreateEffect =
       new List<TimeCloneAICapabilityUCCreateEffect>();
   readonly List<TimeCloneAICapabilityUCDeleteEffect> effectsTimeCloneAICapabilityUCDeleteEffect =
       new List<TimeCloneAICapabilityUCDeleteEffect>();
-
-  readonly SortedDictionary<int, List<IBidingOperationUCEffectObserver>> observersForBidingOperationUC =
-      new SortedDictionary<int, List<IBidingOperationUCEffectObserver>>();
-  readonly List<BidingOperationUCCreateEffect> effectsBidingOperationUCCreateEffect =
-      new List<BidingOperationUCCreateEffect>();
-  readonly List<BidingOperationUCDeleteEffect> effectsBidingOperationUCDeleteEffect =
-      new List<BidingOperationUCDeleteEffect>();
-  readonly List<BidingOperationUCSetChargeEffect> effectsBidingOperationUCSetChargeEffect =
-      new List<BidingOperationUCSetChargeEffect>();
 
   readonly SortedDictionary<int, List<IUnleashBideImpulseEffectObserver>> observersForUnleashBideImpulse =
       new SortedDictionary<int, List<IUnleashBideImpulseEffectObserver>>();
@@ -270,6 +254,8 @@ public class Root {
       new List<BideAICapabilityUCCreateEffect>();
   readonly List<BideAICapabilityUCDeleteEffect> effectsBideAICapabilityUCDeleteEffect =
       new List<BideAICapabilityUCDeleteEffect>();
+  readonly List<BideAICapabilityUCSetChargeEffect> effectsBideAICapabilityUCSetChargeEffect =
+      new List<BideAICapabilityUCSetChargeEffect>();
 
   readonly SortedDictionary<int, List<IFireImpulseEffectObserver>> observersForFireImpulse =
       new SortedDictionary<int, List<IFireImpulseEffectObserver>>();
@@ -306,12 +292,12 @@ public class Root {
   readonly List<PursueImpulseDeleteEffect> effectsPursueImpulseDeleteEffect =
       new List<PursueImpulseDeleteEffect>();
 
-  readonly SortedDictionary<int, List<IKillDirectiveUCEffectObserver>> observersForKillDirectiveUC =
-      new SortedDictionary<int, List<IKillDirectiveUCEffectObserver>>();
-  readonly List<KillDirectiveUCCreateEffect> effectsKillDirectiveUCCreateEffect =
-      new List<KillDirectiveUCCreateEffect>();
-  readonly List<KillDirectiveUCDeleteEffect> effectsKillDirectiveUCDeleteEffect =
-      new List<KillDirectiveUCDeleteEffect>();
+  readonly SortedDictionary<int, List<IKillDirectiveEffectObserver>> observersForKillDirective =
+      new SortedDictionary<int, List<IKillDirectiveEffectObserver>>();
+  readonly List<KillDirectiveCreateEffect> effectsKillDirectiveCreateEffect =
+      new List<KillDirectiveCreateEffect>();
+  readonly List<KillDirectiveDeleteEffect> effectsKillDirectiveDeleteEffect =
+      new List<KillDirectiveDeleteEffect>();
 
   readonly SortedDictionary<int, List<IAttackAICapabilityUCEffectObserver>> observersForAttackAICapabilityUC =
       new SortedDictionary<int, List<IAttackAICapabilityUCEffectObserver>>();
@@ -319,6 +305,8 @@ public class Root {
       new List<AttackAICapabilityUCCreateEffect>();
   readonly List<AttackAICapabilityUCDeleteEffect> effectsAttackAICapabilityUCDeleteEffect =
       new List<AttackAICapabilityUCDeleteEffect>();
+  readonly List<AttackAICapabilityUCSetKillDirectiveEffect> effectsAttackAICapabilityUCSetKillDirectiveEffect =
+      new List<AttackAICapabilityUCSetKillDirectiveEffect>();
 
   readonly SortedDictionary<int, List<IMoveImpulseEffectObserver>> observersForMoveImpulse =
       new SortedDictionary<int, List<IMoveImpulseEffectObserver>>();
@@ -326,13 +314,6 @@ public class Root {
       new List<MoveImpulseCreateEffect>();
   readonly List<MoveImpulseDeleteEffect> effectsMoveImpulseDeleteEffect =
       new List<MoveImpulseDeleteEffect>();
-
-  readonly SortedDictionary<int, List<IMoveDirectiveUCEffectObserver>> observersForMoveDirectiveUC =
-      new SortedDictionary<int, List<IMoveDirectiveUCEffectObserver>>();
-  readonly List<MoveDirectiveUCCreateEffect> effectsMoveDirectiveUCCreateEffect =
-      new List<MoveDirectiveUCCreateEffect>();
-  readonly List<MoveDirectiveUCDeleteEffect> effectsMoveDirectiveUCDeleteEffect =
-      new List<MoveDirectiveUCDeleteEffect>();
 
   readonly SortedDictionary<int, List<IUnitEffectObserver>> observersForUnit =
       new SortedDictionary<int, List<IUnitEffectObserver>>();
@@ -404,8 +385,6 @@ public class Root {
       new List<GameDeleteEffect>();
   readonly List<GameSetPlayerEffect> effectsGameSetPlayerEffect =
       new List<GameSetPlayerEffect>();
-  readonly List<GameSetLastPlayerRequestEffect> effectsGameSetLastPlayerRequestEffect =
-      new List<GameSetLastPlayerRequestEffect>();
   readonly List<GameSetLevelEffect> effectsGameSetLevelEffect =
       new List<GameSetLevelEffect>();
   readonly List<GameSetTimeEffect> effectsGameSetTimeEffect =
@@ -554,39 +533,6 @@ public class Root {
   readonly List<HealthPotionMutSetRemoveEffect> effectsHealthPotionMutSetRemoveEffect =
       new List<HealthPotionMutSetRemoveEffect>();
 
-  readonly SortedDictionary<int, List<ITimeScriptDirectiveUCMutSetEffectObserver>> observersForTimeScriptDirectiveUCMutSet =
-      new SortedDictionary<int, List<ITimeScriptDirectiveUCMutSetEffectObserver>>();
-  readonly List<TimeScriptDirectiveUCMutSetCreateEffect> effectsTimeScriptDirectiveUCMutSetCreateEffect =
-      new List<TimeScriptDirectiveUCMutSetCreateEffect>();
-  readonly List<TimeScriptDirectiveUCMutSetDeleteEffect> effectsTimeScriptDirectiveUCMutSetDeleteEffect =
-      new List<TimeScriptDirectiveUCMutSetDeleteEffect>();
-  readonly List<TimeScriptDirectiveUCMutSetAddEffect> effectsTimeScriptDirectiveUCMutSetAddEffect =
-      new List<TimeScriptDirectiveUCMutSetAddEffect>();
-  readonly List<TimeScriptDirectiveUCMutSetRemoveEffect> effectsTimeScriptDirectiveUCMutSetRemoveEffect =
-      new List<TimeScriptDirectiveUCMutSetRemoveEffect>();
-
-  readonly SortedDictionary<int, List<IKillDirectiveUCMutSetEffectObserver>> observersForKillDirectiveUCMutSet =
-      new SortedDictionary<int, List<IKillDirectiveUCMutSetEffectObserver>>();
-  readonly List<KillDirectiveUCMutSetCreateEffect> effectsKillDirectiveUCMutSetCreateEffect =
-      new List<KillDirectiveUCMutSetCreateEffect>();
-  readonly List<KillDirectiveUCMutSetDeleteEffect> effectsKillDirectiveUCMutSetDeleteEffect =
-      new List<KillDirectiveUCMutSetDeleteEffect>();
-  readonly List<KillDirectiveUCMutSetAddEffect> effectsKillDirectiveUCMutSetAddEffect =
-      new List<KillDirectiveUCMutSetAddEffect>();
-  readonly List<KillDirectiveUCMutSetRemoveEffect> effectsKillDirectiveUCMutSetRemoveEffect =
-      new List<KillDirectiveUCMutSetRemoveEffect>();
-
-  readonly SortedDictionary<int, List<IMoveDirectiveUCMutSetEffectObserver>> observersForMoveDirectiveUCMutSet =
-      new SortedDictionary<int, List<IMoveDirectiveUCMutSetEffectObserver>>();
-  readonly List<MoveDirectiveUCMutSetCreateEffect> effectsMoveDirectiveUCMutSetCreateEffect =
-      new List<MoveDirectiveUCMutSetCreateEffect>();
-  readonly List<MoveDirectiveUCMutSetDeleteEffect> effectsMoveDirectiveUCMutSetDeleteEffect =
-      new List<MoveDirectiveUCMutSetDeleteEffect>();
-  readonly List<MoveDirectiveUCMutSetAddEffect> effectsMoveDirectiveUCMutSetAddEffect =
-      new List<MoveDirectiveUCMutSetAddEffect>();
-  readonly List<MoveDirectiveUCMutSetRemoveEffect> effectsMoveDirectiveUCMutSetRemoveEffect =
-      new List<MoveDirectiveUCMutSetRemoveEffect>();
-
   readonly SortedDictionary<int, List<IWanderAICapabilityUCMutSetEffectObserver>> observersForWanderAICapabilityUCMutSet =
       new SortedDictionary<int, List<IWanderAICapabilityUCMutSetEffectObserver>>();
   readonly List<WanderAICapabilityUCMutSetCreateEffect> effectsWanderAICapabilityUCMutSetCreateEffect =
@@ -597,17 +543,6 @@ public class Root {
       new List<WanderAICapabilityUCMutSetAddEffect>();
   readonly List<WanderAICapabilityUCMutSetRemoveEffect> effectsWanderAICapabilityUCMutSetRemoveEffect =
       new List<WanderAICapabilityUCMutSetRemoveEffect>();
-
-  readonly SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>> observersForBideAICapabilityUCMutSet =
-      new SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>>();
-  readonly List<BideAICapabilityUCMutSetCreateEffect> effectsBideAICapabilityUCMutSetCreateEffect =
-      new List<BideAICapabilityUCMutSetCreateEffect>();
-  readonly List<BideAICapabilityUCMutSetDeleteEffect> effectsBideAICapabilityUCMutSetDeleteEffect =
-      new List<BideAICapabilityUCMutSetDeleteEffect>();
-  readonly List<BideAICapabilityUCMutSetAddEffect> effectsBideAICapabilityUCMutSetAddEffect =
-      new List<BideAICapabilityUCMutSetAddEffect>();
-  readonly List<BideAICapabilityUCMutSetRemoveEffect> effectsBideAICapabilityUCMutSetRemoveEffect =
-      new List<BideAICapabilityUCMutSetRemoveEffect>();
 
   readonly SortedDictionary<int, List<ITimeCloneAICapabilityUCMutSetEffectObserver>> observersForTimeCloneAICapabilityUCMutSet =
       new SortedDictionary<int, List<ITimeCloneAICapabilityUCMutSetEffectObserver>>();
@@ -653,16 +588,16 @@ public class Root {
   readonly List<ShieldingUCMutSetRemoveEffect> effectsShieldingUCMutSetRemoveEffect =
       new List<ShieldingUCMutSetRemoveEffect>();
 
-  readonly SortedDictionary<int, List<IBidingOperationUCMutSetEffectObserver>> observersForBidingOperationUCMutSet =
-      new SortedDictionary<int, List<IBidingOperationUCMutSetEffectObserver>>();
-  readonly List<BidingOperationUCMutSetCreateEffect> effectsBidingOperationUCMutSetCreateEffect =
-      new List<BidingOperationUCMutSetCreateEffect>();
-  readonly List<BidingOperationUCMutSetDeleteEffect> effectsBidingOperationUCMutSetDeleteEffect =
-      new List<BidingOperationUCMutSetDeleteEffect>();
-  readonly List<BidingOperationUCMutSetAddEffect> effectsBidingOperationUCMutSetAddEffect =
-      new List<BidingOperationUCMutSetAddEffect>();
-  readonly List<BidingOperationUCMutSetRemoveEffect> effectsBidingOperationUCMutSetRemoveEffect =
-      new List<BidingOperationUCMutSetRemoveEffect>();
+  readonly SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>> observersForBideAICapabilityUCMutSet =
+      new SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>>();
+  readonly List<BideAICapabilityUCMutSetCreateEffect> effectsBideAICapabilityUCMutSetCreateEffect =
+      new List<BideAICapabilityUCMutSetCreateEffect>();
+  readonly List<BideAICapabilityUCMutSetDeleteEffect> effectsBideAICapabilityUCMutSetDeleteEffect =
+      new List<BideAICapabilityUCMutSetDeleteEffect>();
+  readonly List<BideAICapabilityUCMutSetAddEffect> effectsBideAICapabilityUCMutSetAddEffect =
+      new List<BideAICapabilityUCMutSetAddEffect>();
+  readonly List<BideAICapabilityUCMutSetRemoveEffect> effectsBideAICapabilityUCMutSetRemoveEffect =
+      new List<BideAICapabilityUCMutSetRemoveEffect>();
 
   readonly SortedDictionary<int, List<ITimeAnchorTTCMutSetEffectObserver>> observersForTimeAnchorTTCMutSet =
       new SortedDictionary<int, List<ITimeAnchorTTCMutSetEffectObserver>>();
@@ -863,14 +798,8 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsEvaporateImpulse) {
       result += GetEvaporateImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsTimeScriptDirectiveUC) {
-      result += GetTimeScriptDirectiveUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
     foreach (var entry in this.rootIncarnation.incarnationsTimeCloneAICapabilityUC) {
       result += GetTimeCloneAICapabilityUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsBidingOperationUC) {
-      result += GetBidingOperationUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsUnleashBideImpulse) {
       result += GetUnleashBideImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -899,17 +828,14 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsPursueImpulse) {
       result += GetPursueImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsKillDirectiveUC) {
-      result += GetKillDirectiveUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    foreach (var entry in this.rootIncarnation.incarnationsKillDirective) {
+      result += GetKillDirectiveHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsAttackAICapabilityUC) {
       result += GetAttackAICapabilityUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsMoveImpulse) {
       result += GetMoveImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsMoveDirectiveUC) {
-      result += GetMoveDirectiveUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsUnit) {
       result += GetUnitHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -971,20 +897,8 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsHealthPotionMutSet) {
       result += GetHealthPotionMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet) {
-      result += GetTimeScriptDirectiveUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsKillDirectiveUCMutSet) {
-      result += GetKillDirectiveUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsMoveDirectiveUCMutSet) {
-      result += GetMoveDirectiveUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
     foreach (var entry in this.rootIncarnation.incarnationsWanderAICapabilityUCMutSet) {
       result += GetWanderAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsBideAICapabilityUCMutSet) {
-      result += GetBideAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsTimeCloneAICapabilityUCMutSet) {
       result += GetTimeCloneAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -998,8 +912,8 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsShieldingUCMutSet) {
       result += GetShieldingUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsBidingOperationUCMutSet) {
-      result += GetBidingOperationUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    foreach (var entry in this.rootIncarnation.incarnationsBideAICapabilityUCMutSet) {
+      result += GetBideAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsTimeAnchorTTCMutSet) {
       result += GetTimeAnchorTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1094,13 +1008,7 @@ public class Root {
     foreach (var obj in this.AllEvaporateImpulse()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllTimeScriptDirectiveUC()) {
-      obj.CheckForNullViolations(violations);
-    }
     foreach (var obj in this.AllTimeCloneAICapabilityUC()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllBidingOperationUC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllUnleashBideImpulse()) {
@@ -1130,16 +1038,13 @@ public class Root {
     foreach (var obj in this.AllPursueImpulse()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllKillDirectiveUC()) {
+    foreach (var obj in this.AllKillDirective()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllAttackAICapabilityUC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllMoveImpulse()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllMoveDirectiveUC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllUnit()) {
@@ -1202,19 +1107,7 @@ public class Root {
     foreach (var obj in this.AllHealthPotionMutSet()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllTimeScriptDirectiveUCMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllKillDirectiveUCMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllMoveDirectiveUCMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
     foreach (var obj in this.AllWanderAICapabilityUCMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllBideAICapabilityUCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTimeCloneAICapabilityUCMutSet()) {
@@ -1229,7 +1122,7 @@ public class Root {
     foreach (var obj in this.AllShieldingUCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllBidingOperationUCMutSet()) {
+    foreach (var obj in this.AllBideAICapabilityUCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTimeAnchorTTCMutSet()) {
@@ -1372,17 +1265,7 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllTimeScriptDirectiveUC()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
     foreach (var obj in this.AllTimeCloneAICapabilityUC()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllBidingOperationUC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1432,7 +1315,7 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllKillDirectiveUC()) {
+    foreach (var obj in this.AllKillDirective()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1443,11 +1326,6 @@ public class Root {
       }
     }
     foreach (var obj in this.AllMoveImpulse()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllMoveDirectiveUC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1552,27 +1430,7 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllTimeScriptDirectiveUCMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllKillDirectiveUCMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllMoveDirectiveUCMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
     foreach (var obj in this.AllWanderAICapabilityUCMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllBideAICapabilityUCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1597,7 +1455,7 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllBidingOperationUCMutSet()) {
+    foreach (var obj in this.AllBideAICapabilityUCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1638,6 +1496,9 @@ public class Root {
   }
 
   public void FlushEvents() {
+
+
+
     var copyOfObserversForSquareCaveLevelController =
         new SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>>();
     foreach (var entry in observersForSquareCaveLevelController) {
@@ -1902,17 +1763,6 @@ public class Root {
               observers));
     }
 
-    var copyOfObserversForTimeScriptDirectiveUC =
-        new SortedDictionary<int, List<ITimeScriptDirectiveUCEffectObserver>>();
-    foreach (var entry in observersForTimeScriptDirectiveUC) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForTimeScriptDirectiveUC.Add(
-          objectId,
-          new List<ITimeScriptDirectiveUCEffectObserver>(
-              observers));
-    }
-
     var copyOfObserversForTimeCloneAICapabilityUC =
         new SortedDictionary<int, List<ITimeCloneAICapabilityUCEffectObserver>>();
     foreach (var entry in observersForTimeCloneAICapabilityUC) {
@@ -1921,17 +1771,6 @@ public class Root {
       copyOfObserversForTimeCloneAICapabilityUC.Add(
           objectId,
           new List<ITimeCloneAICapabilityUCEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForBidingOperationUC =
-        new SortedDictionary<int, List<IBidingOperationUCEffectObserver>>();
-    foreach (var entry in observersForBidingOperationUC) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForBidingOperationUC.Add(
-          objectId,
-          new List<IBidingOperationUCEffectObserver>(
               observers));
     }
 
@@ -2034,14 +1873,14 @@ public class Root {
               observers));
     }
 
-    var copyOfObserversForKillDirectiveUC =
-        new SortedDictionary<int, List<IKillDirectiveUCEffectObserver>>();
-    foreach (var entry in observersForKillDirectiveUC) {
+    var copyOfObserversForKillDirective =
+        new SortedDictionary<int, List<IKillDirectiveEffectObserver>>();
+    foreach (var entry in observersForKillDirective) {
       var objectId = entry.Key;
       var observers = entry.Value;
-      copyOfObserversForKillDirectiveUC.Add(
+      copyOfObserversForKillDirective.Add(
           objectId,
-          new List<IKillDirectiveUCEffectObserver>(
+          new List<IKillDirectiveEffectObserver>(
               observers));
     }
 
@@ -2064,17 +1903,6 @@ public class Root {
       copyOfObserversForMoveImpulse.Add(
           objectId,
           new List<IMoveImpulseEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForMoveDirectiveUC =
-        new SortedDictionary<int, List<IMoveDirectiveUCEffectObserver>>();
-    foreach (var entry in observersForMoveDirectiveUC) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForMoveDirectiveUC.Add(
-          objectId,
-          new List<IMoveDirectiveUCEffectObserver>(
               observers));
     }
 
@@ -2298,39 +2126,6 @@ public class Root {
               observers));
     }
 
-    var copyOfObserversForTimeScriptDirectiveUCMutSet =
-        new SortedDictionary<int, List<ITimeScriptDirectiveUCMutSetEffectObserver>>();
-    foreach (var entry in observersForTimeScriptDirectiveUCMutSet) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForTimeScriptDirectiveUCMutSet.Add(
-          objectId,
-          new List<ITimeScriptDirectiveUCMutSetEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForKillDirectiveUCMutSet =
-        new SortedDictionary<int, List<IKillDirectiveUCMutSetEffectObserver>>();
-    foreach (var entry in observersForKillDirectiveUCMutSet) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForKillDirectiveUCMutSet.Add(
-          objectId,
-          new List<IKillDirectiveUCMutSetEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForMoveDirectiveUCMutSet =
-        new SortedDictionary<int, List<IMoveDirectiveUCMutSetEffectObserver>>();
-    foreach (var entry in observersForMoveDirectiveUCMutSet) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForMoveDirectiveUCMutSet.Add(
-          objectId,
-          new List<IMoveDirectiveUCMutSetEffectObserver>(
-              observers));
-    }
-
     var copyOfObserversForWanderAICapabilityUCMutSet =
         new SortedDictionary<int, List<IWanderAICapabilityUCMutSetEffectObserver>>();
     foreach (var entry in observersForWanderAICapabilityUCMutSet) {
@@ -2339,17 +2134,6 @@ public class Root {
       copyOfObserversForWanderAICapabilityUCMutSet.Add(
           objectId,
           new List<IWanderAICapabilityUCMutSetEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForBideAICapabilityUCMutSet =
-        new SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>>();
-    foreach (var entry in observersForBideAICapabilityUCMutSet) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForBideAICapabilityUCMutSet.Add(
-          objectId,
-          new List<IBideAICapabilityUCMutSetEffectObserver>(
               observers));
     }
 
@@ -2397,14 +2181,14 @@ public class Root {
               observers));
     }
 
-    var copyOfObserversForBidingOperationUCMutSet =
-        new SortedDictionary<int, List<IBidingOperationUCMutSetEffectObserver>>();
-    foreach (var entry in observersForBidingOperationUCMutSet) {
+    var copyOfObserversForBideAICapabilityUCMutSet =
+        new SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>>();
+    foreach (var entry in observersForBideAICapabilityUCMutSet) {
       var objectId = entry.Key;
       var observers = entry.Value;
-      copyOfObserversForBidingOperationUCMutSet.Add(
+      copyOfObserversForBideAICapabilityUCMutSet.Add(
           objectId,
-          new List<IBidingOperationUCMutSetEffectObserver>(
+          new List<IBideAICapabilityUCMutSetEffectObserver>(
               observers));
     }
 
@@ -2535,14 +2319,8 @@ public class Root {
     BroadcastEvaporateImpulseEffects(
         copyOfObserversForEvaporateImpulse);
            
-    BroadcastTimeScriptDirectiveUCEffects(
-        copyOfObserversForTimeScriptDirectiveUC);
-           
     BroadcastTimeCloneAICapabilityUCEffects(
         copyOfObserversForTimeCloneAICapabilityUC);
-           
-    BroadcastBidingOperationUCEffects(
-        copyOfObserversForBidingOperationUC);
            
     BroadcastUnleashBideImpulseEffects(
         copyOfObserversForUnleashBideImpulse);
@@ -2571,17 +2349,14 @@ public class Root {
     BroadcastPursueImpulseEffects(
         copyOfObserversForPursueImpulse);
            
-    BroadcastKillDirectiveUCEffects(
-        copyOfObserversForKillDirectiveUC);
+    BroadcastKillDirectiveEffects(
+        copyOfObserversForKillDirective);
            
     BroadcastAttackAICapabilityUCEffects(
         copyOfObserversForAttackAICapabilityUC);
            
     BroadcastMoveImpulseEffects(
         copyOfObserversForMoveImpulse);
-           
-    BroadcastMoveDirectiveUCEffects(
-        copyOfObserversForMoveDirectiveUC);
            
     BroadcastUnitEffects(
         copyOfObserversForUnit);
@@ -2643,20 +2418,8 @@ public class Root {
     BroadcastHealthPotionMutSetEffects(
         copyOfObserversForHealthPotionMutSet);
            
-    BroadcastTimeScriptDirectiveUCMutSetEffects(
-        copyOfObserversForTimeScriptDirectiveUCMutSet);
-           
-    BroadcastKillDirectiveUCMutSetEffects(
-        copyOfObserversForKillDirectiveUCMutSet);
-           
-    BroadcastMoveDirectiveUCMutSetEffects(
-        copyOfObserversForMoveDirectiveUCMutSet);
-           
     BroadcastWanderAICapabilityUCMutSetEffects(
         copyOfObserversForWanderAICapabilityUCMutSet);
-           
-    BroadcastBideAICapabilityUCMutSetEffects(
-        copyOfObserversForBideAICapabilityUCMutSet);
            
     BroadcastTimeCloneAICapabilityUCMutSetEffects(
         copyOfObserversForTimeCloneAICapabilityUCMutSet);
@@ -2670,8 +2433,8 @@ public class Root {
     BroadcastShieldingUCMutSetEffects(
         copyOfObserversForShieldingUCMutSet);
            
-    BroadcastBidingOperationUCMutSetEffects(
-        copyOfObserversForBidingOperationUCMutSet);
+    BroadcastBideAICapabilityUCMutSetEffects(
+        copyOfObserversForBideAICapabilityUCMutSet);
            
     BroadcastTimeAnchorTTCMutSetEffects(
         copyOfObserversForTimeAnchorTTCMutSet);
@@ -2687,7 +2450,8 @@ public class Root {
            
     BroadcastTerrainTileByLocationMutMapEffects(
         copyOfObserversForTerrainTileByLocationMutMap);
-    }
+           
+  }
 
   public int GetDeterministicHashCode() {
     // int doubleCheckHash = RecalculateEntireHash();
@@ -2943,16 +2707,6 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeScriptDirectiveUC) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsTimeScriptDirectiveUC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateTimeScriptDirectiveUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeCloneAICapabilityUC) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -2960,16 +2714,6 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(sourceObjId)) {
         EffectInternalCreateTimeCloneAICapabilityUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBidingOperationUC) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsBidingOperationUC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateBidingOperationUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3063,13 +2807,13 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKillDirectiveUC) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKillDirective) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateKillDirectiveUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      if (!rootIncarnation.incarnationsKillDirective.ContainsKey(sourceObjId)) {
+        EffectInternalCreateKillDirective(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3090,16 +2834,6 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsMoveImpulse.ContainsKey(sourceObjId)) {
         EffectInternalCreateMoveImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMoveDirectiveUC) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateMoveDirectiveUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3303,36 +3037,6 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeScriptDirectiveUCMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateTimeScriptDirectiveUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKillDirectiveUCMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsKillDirectiveUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateKillDirectiveUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMoveDirectiveUCMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsMoveDirectiveUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateMoveDirectiveUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsWanderAICapabilityUCMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3340,16 +3044,6 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsWanderAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateWanderAICapabilityUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBideAICapabilityUCMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateBideAICapabilityUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3393,13 +3087,13 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBidingOperationUCMutSet) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBideAICapabilityUCMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsBidingOperationUCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateBidingOperationUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      if (!rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateBideAICapabilityUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3808,90 +3502,6 @@ public class Root {
         }
       }
              
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeScriptDirectiveUCMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectTimeScriptDirectiveUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectTimeScriptDirectiveUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKillDirectiveUCMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsKillDirectiveUCMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKillDirectiveUCMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectKillDirectiveUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectKillDirectiveUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsKillDirectiveUCMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMoveDirectiveUCMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsMoveDirectiveUCMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsMoveDirectiveUCMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectMoveDirectiveUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectMoveDirectiveUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsMoveDirectiveUCMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsWanderAICapabilityUCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3916,34 +3526,6 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsWanderAICapabilityUCMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBideAICapabilityUCMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsBideAICapabilityUCMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectBideAICapabilityUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectBideAICapabilityUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsBideAICapabilityUCMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -4060,30 +3642,30 @@ public class Root {
         }
       }
              
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBidingOperationUCMutSet) {
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBideAICapabilityUCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
         var sourceVersion = sourceVersionAndObjIncarnation.version;
         var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsBidingOperationUCMutSet.ContainsKey(objId)) {
+        if (rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(objId)) {
           // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsBidingOperationUCMutSet[objId];
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsBideAICapabilityUCMutSet[objId];
           var currentVersion = currentVersionAndObjIncarnation.version;
           var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
           if (currentVersion != sourceVersion) {
             foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
               if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectBidingOperationUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+                EffectBideAICapabilityUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
               }
             }
             foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
               if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectBidingOperationUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+                EffectBideAICapabilityUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
               }
             }
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
-            rootIncarnation.incarnationsBidingOperationUCMutSet[objId] = sourceVersionAndObjIncarnation;
+            rootIncarnation.incarnationsBideAICapabilityUCMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -4771,27 +4353,6 @@ public class Root {
       }
     }
 
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeScriptDirectiveUC) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsTimeScriptDirectiveUC.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsTimeScriptDirectiveUC[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation. The only visible effect this has is
-          // changing the version number.
-          
-          rootIncarnation.incarnationsTimeScriptDirectiveUC[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeCloneAICapabilityUC) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -4808,31 +4369,6 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsTimeCloneAICapabilityUC[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBidingOperationUC) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsBidingOperationUC[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          if (sourceObjIncarnation.charge != currentObjIncarnation.charge) {
-            EffectBidingOperationUCSetCharge(objId, sourceObjIncarnation.charge);
-          }
-
-          // Swap out the underlying incarnation. The only visible effect this has is
-          // changing the version number.
-          
-          rootIncarnation.incarnationsBidingOperationUC[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -4912,6 +4448,10 @@ public class Root {
         var currentVersion = currentVersionAndObjIncarnation.version;
         var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
         if (currentVersion != sourceVersion) {
+
+          if (sourceObjIncarnation.charge != currentObjIncarnation.charge) {
+            EffectBideAICapabilityUCSetCharge(objId, sourceObjIncarnation.charge);
+          }
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
@@ -5027,14 +4567,14 @@ public class Root {
       }
     }
 
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKillDirectiveUC) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKillDirective) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(objId)) {
+      if (rootIncarnation.incarnationsKillDirective.ContainsKey(objId)) {
         // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKillDirectiveUC[objId];
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKillDirective[objId];
         var currentVersion = currentVersionAndObjIncarnation.version;
         var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
         if (currentVersion != sourceVersion) {
@@ -5042,7 +4582,7 @@ public class Root {
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
           
-          rootIncarnation.incarnationsKillDirectiveUC[objId] = sourceVersionAndObjIncarnation;
+          rootIncarnation.incarnationsKillDirective[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -5059,6 +4599,10 @@ public class Root {
         var currentVersion = currentVersionAndObjIncarnation.version;
         var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
         if (currentVersion != sourceVersion) {
+
+          if (sourceObjIncarnation.killDirective != currentObjIncarnation.killDirective) {
+            EffectAttackAICapabilityUCSetKillDirective(objId, new KillDirective(this, sourceObjIncarnation.killDirective));
+          }
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
@@ -5085,27 +4629,6 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsMoveImpulse[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMoveDirectiveUC) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsMoveDirectiveUC[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation. The only visible effect this has is
-          // changing the version number.
-          
-          rootIncarnation.incarnationsMoveDirectiveUC[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -5293,10 +4816,6 @@ public class Root {
             EffectGameSetPlayer(objId, new Unit(this, sourceObjIncarnation.player));
           }
 
-          if (sourceObjIncarnation.lastPlayerRequest != currentObjIncarnation.lastPlayerRequest) {
-            EffectGameSetLastPlayerRequest(objId, sourceObjIncarnation.lastPlayerRequest);
-          }
-
           if (sourceObjIncarnation.level != currentObjIncarnation.level) {
             EffectGameSetLevel(objId, new Level(this, sourceObjIncarnation.level));
           }
@@ -5482,24 +5001,10 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TimeScriptDirectiveUCIncarnation>>(rootIncarnation.incarnationsTimeScriptDirectiveUC)) {
-      if (!sourceIncarnation.incarnationsTimeScriptDirectiveUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectTimeScriptDirectiveUCDelete(id);
-      }
-    }
-
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCIncarnation>>(rootIncarnation.incarnationsTimeCloneAICapabilityUC)) {
       if (!sourceIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectTimeCloneAICapabilityUCDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BidingOperationUCIncarnation>>(rootIncarnation.incarnationsBidingOperationUC)) {
-      if (!sourceIncarnation.incarnationsBidingOperationUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectBidingOperationUCDelete(id);
       }
     }
 
@@ -5566,10 +5071,10 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KillDirectiveUCIncarnation>>(rootIncarnation.incarnationsKillDirectiveUC)) {
-      if (!sourceIncarnation.incarnationsKillDirectiveUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KillDirectiveIncarnation>>(rootIncarnation.incarnationsKillDirective)) {
+      if (!sourceIncarnation.incarnationsKillDirective.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectKillDirectiveUCDelete(id);
+        EffectKillDirectiveDelete(id);
       }
     }
 
@@ -5584,13 +5089,6 @@ public class Root {
       if (!sourceIncarnation.incarnationsMoveImpulse.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectMoveImpulseDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<MoveDirectiveUCIncarnation>>(rootIncarnation.incarnationsMoveDirectiveUC)) {
-      if (!sourceIncarnation.incarnationsMoveDirectiveUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectMoveDirectiveUCDelete(id);
       }
     }
 
@@ -5734,38 +5232,10 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TimeScriptDirectiveUCMutSetIncarnation>>(rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet)) {
-      if (!sourceIncarnation.incarnationsTimeScriptDirectiveUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectTimeScriptDirectiveUCMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KillDirectiveUCMutSetIncarnation>>(rootIncarnation.incarnationsKillDirectiveUCMutSet)) {
-      if (!sourceIncarnation.incarnationsKillDirectiveUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectKillDirectiveUCMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<MoveDirectiveUCMutSetIncarnation>>(rootIncarnation.incarnationsMoveDirectiveUCMutSet)) {
-      if (!sourceIncarnation.incarnationsMoveDirectiveUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectMoveDirectiveUCMutSetDelete(id);
-      }
-    }
-
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>>(rootIncarnation.incarnationsWanderAICapabilityUCMutSet)) {
       if (!sourceIncarnation.incarnationsWanderAICapabilityUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectWanderAICapabilityUCMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>>(rootIncarnation.incarnationsBideAICapabilityUCMutSet)) {
-      if (!sourceIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectBideAICapabilityUCMutSetDelete(id);
       }
     }
 
@@ -5797,10 +5267,10 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BidingOperationUCMutSetIncarnation>>(rootIncarnation.incarnationsBidingOperationUCMutSet)) {
-      if (!sourceIncarnation.incarnationsBidingOperationUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>>(rootIncarnation.incarnationsBideAICapabilityUCMutSet)) {
+      if (!sourceIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectBidingOperationUCMutSetDelete(id);
+        EffectBideAICapabilityUCMutSetDelete(id);
       }
     }
 
@@ -9360,136 +8830,6 @@ public class Root {
     }
     effectsEvaporateImpulseCreateEffect.Clear();
   }
-  public TimeScriptDirectiveUCIncarnation GetTimeScriptDirectiveUCIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsTimeScriptDirectiveUC[id].incarnation;
-  }
-  public bool TimeScriptDirectiveUCExists(int id) {
-    return rootIncarnation.incarnationsTimeScriptDirectiveUC.ContainsKey(id);
-  }
-  public TimeScriptDirectiveUC GetTimeScriptDirectiveUC(int id) {
-    return new TimeScriptDirectiveUC(this, id);
-  }
-  public List<TimeScriptDirectiveUC> AllTimeScriptDirectiveUC() {
-    List<TimeScriptDirectiveUC> result = new List<TimeScriptDirectiveUC>(rootIncarnation.incarnationsTimeScriptDirectiveUC.Count);
-    foreach (var id in rootIncarnation.incarnationsTimeScriptDirectiveUC.Keys) {
-      result.Add(new TimeScriptDirectiveUC(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<TimeScriptDirectiveUC> EnumAllTimeScriptDirectiveUC() {
-    foreach (var id in rootIncarnation.incarnationsTimeScriptDirectiveUC.Keys) {
-      yield return GetTimeScriptDirectiveUC(id);
-    }
-  }
-  public void CheckHasTimeScriptDirectiveUC(TimeScriptDirectiveUC thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasTimeScriptDirectiveUC(thing.id);
-  }
-  public void CheckHasTimeScriptDirectiveUC(int id) {
-    if (!rootIncarnation.incarnationsTimeScriptDirectiveUC.ContainsKey(id)) {
-      throw new System.Exception("Invalid TimeScriptDirectiveUC: " + id);
-    }
-  }
-  public void AddTimeScriptDirectiveUCObserver(int id, ITimeScriptDirectiveUCEffectObserver observer) {
-    List<ITimeScriptDirectiveUCEffectObserver> obsies;
-    if (!observersForTimeScriptDirectiveUC.TryGetValue(id, out obsies)) {
-      obsies = new List<ITimeScriptDirectiveUCEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForTimeScriptDirectiveUC[id] = obsies;
-  }
-
-  public void RemoveTimeScriptDirectiveUCObserver(int id, ITimeScriptDirectiveUCEffectObserver observer) {
-    if (observersForTimeScriptDirectiveUC.ContainsKey(id)) {
-      var list = observersForTimeScriptDirectiveUC[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForTimeScriptDirectiveUC.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-  public TimeScriptDirectiveUC EffectTimeScriptDirectiveUCCreate(
-      IRequestMutList script) {
-    CheckUnlocked();
-    CheckHasIRequestMutList(script);
-
-    var id = NewId();
-    var incarnation =
-        new TimeScriptDirectiveUCIncarnation(
-            script.id
-            );
-    EffectInternalCreateTimeScriptDirectiveUC(id, rootIncarnation.version, incarnation);
-    return new TimeScriptDirectiveUC(this, id);
-  }
-  public void EffectInternalCreateTimeScriptDirectiveUC(
-      int id,
-      int incarnationVersion,
-      TimeScriptDirectiveUCIncarnation incarnation) {
-    CheckUnlocked();
-    var effect = new TimeScriptDirectiveUCCreateEffect(id);
-    rootIncarnation.incarnationsTimeScriptDirectiveUC.Add(
-        id,
-        new VersionAndIncarnation<TimeScriptDirectiveUCIncarnation>(
-            incarnationVersion,
-            incarnation));
-    effectsTimeScriptDirectiveUCCreateEffect.Add(effect);
-  }
-
-  public void EffectTimeScriptDirectiveUCDelete(int id) {
-    CheckUnlocked();
-    var effect = new TimeScriptDirectiveUCDeleteEffect(id);
-
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsTimeScriptDirectiveUC[id];
-
-    rootIncarnation.incarnationsTimeScriptDirectiveUC.Remove(id);
-    effectsTimeScriptDirectiveUCDeleteEffect.Add(effect);
-  }
-
-     
-  public int GetTimeScriptDirectiveUCHash(int id, int version, TimeScriptDirectiveUCIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.script.GetDeterministicHashCode();
-    return result;
-  }
-     
-  public void BroadcastTimeScriptDirectiveUCEffects(
-      SortedDictionary<int, List<ITimeScriptDirectiveUCEffectObserver>> observers) {
-    foreach (var effect in effectsTimeScriptDirectiveUCDeleteEffect) {
-      if (observers.TryGetValue(0, out List<ITimeScriptDirectiveUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTimeScriptDirectiveUCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITimeScriptDirectiveUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTimeScriptDirectiveUCEffect(effect);
-        }
-        observersForTimeScriptDirectiveUC.Remove(effect.id);
-      }
-    }
-    effectsTimeScriptDirectiveUCDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsTimeScriptDirectiveUCCreateEffect) {
-      if (observers.TryGetValue(0, out List<ITimeScriptDirectiveUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTimeScriptDirectiveUCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITimeScriptDirectiveUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTimeScriptDirectiveUCEffect(effect);
-        }
-      }
-    }
-    effectsTimeScriptDirectiveUCCreateEffect.Clear();
-  }
   public TimeCloneAICapabilityUCIncarnation GetTimeCloneAICapabilityUCIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -9544,13 +8884,13 @@ public class Root {
     }
   }
   public TimeCloneAICapabilityUC EffectTimeCloneAICapabilityUCCreate(
-) {
+      IRequestMutList script) {
     CheckUnlocked();
 
     var id = NewId();
     var incarnation =
         new TimeCloneAICapabilityUCIncarnation(
-
+            script.id
             );
     EffectInternalCreateTimeCloneAICapabilityUC(id, rootIncarnation.version, incarnation);
     return new TimeCloneAICapabilityUC(this, id);
@@ -9583,6 +8923,9 @@ public class Root {
      
   public int GetTimeCloneAICapabilityUCHash(int id, int version, TimeCloneAICapabilityUCIncarnation incarnation) {
     int result = id * version;
+    if (!object.ReferenceEquals(incarnation.script, null)) {
+      result += id * version * 1 * incarnation.script.GetDeterministicHashCode();
+    }
     return result;
   }
      
@@ -9617,171 +8960,6 @@ public class Root {
       }
     }
     effectsTimeCloneAICapabilityUCCreateEffect.Clear();
-  }
-  public BidingOperationUCIncarnation GetBidingOperationUCIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsBidingOperationUC[id].incarnation;
-  }
-  public bool BidingOperationUCExists(int id) {
-    return rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id);
-  }
-  public BidingOperationUC GetBidingOperationUC(int id) {
-    return new BidingOperationUC(this, id);
-  }
-  public List<BidingOperationUC> AllBidingOperationUC() {
-    List<BidingOperationUC> result = new List<BidingOperationUC>(rootIncarnation.incarnationsBidingOperationUC.Count);
-    foreach (var id in rootIncarnation.incarnationsBidingOperationUC.Keys) {
-      result.Add(new BidingOperationUC(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<BidingOperationUC> EnumAllBidingOperationUC() {
-    foreach (var id in rootIncarnation.incarnationsBidingOperationUC.Keys) {
-      yield return GetBidingOperationUC(id);
-    }
-  }
-  public void CheckHasBidingOperationUC(BidingOperationUC thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasBidingOperationUC(thing.id);
-  }
-  public void CheckHasBidingOperationUC(int id) {
-    if (!rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
-      throw new System.Exception("Invalid BidingOperationUC: " + id);
-    }
-  }
-  public void AddBidingOperationUCObserver(int id, IBidingOperationUCEffectObserver observer) {
-    List<IBidingOperationUCEffectObserver> obsies;
-    if (!observersForBidingOperationUC.TryGetValue(id, out obsies)) {
-      obsies = new List<IBidingOperationUCEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForBidingOperationUC[id] = obsies;
-  }
-
-  public void RemoveBidingOperationUCObserver(int id, IBidingOperationUCEffectObserver observer) {
-    if (observersForBidingOperationUC.ContainsKey(id)) {
-      var list = observersForBidingOperationUC[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForBidingOperationUC.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-  public BidingOperationUC EffectBidingOperationUCCreate(
-      int charge) {
-    CheckUnlocked();
-
-    var id = NewId();
-    var incarnation =
-        new BidingOperationUCIncarnation(
-            charge
-            );
-    EffectInternalCreateBidingOperationUC(id, rootIncarnation.version, incarnation);
-    return new BidingOperationUC(this, id);
-  }
-  public void EffectInternalCreateBidingOperationUC(
-      int id,
-      int incarnationVersion,
-      BidingOperationUCIncarnation incarnation) {
-    CheckUnlocked();
-    var effect = new BidingOperationUCCreateEffect(id);
-    rootIncarnation.incarnationsBidingOperationUC.Add(
-        id,
-        new VersionAndIncarnation<BidingOperationUCIncarnation>(
-            incarnationVersion,
-            incarnation));
-    effectsBidingOperationUCCreateEffect.Add(effect);
-  }
-
-  public void EffectBidingOperationUCDelete(int id) {
-    CheckUnlocked();
-    var effect = new BidingOperationUCDeleteEffect(id);
-
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsBidingOperationUC[id];
-
-    rootIncarnation.incarnationsBidingOperationUC.Remove(id);
-    effectsBidingOperationUCDeleteEffect.Add(effect);
-  }
-
-     
-  public int GetBidingOperationUCHash(int id, int version, BidingOperationUCIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.charge.GetDeterministicHashCode();
-    return result;
-  }
-     
-  public void BroadcastBidingOperationUCEffects(
-      SortedDictionary<int, List<IBidingOperationUCEffectObserver>> observers) {
-    foreach (var effect in effectsBidingOperationUCDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IBidingOperationUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnBidingOperationUCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IBidingOperationUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnBidingOperationUCEffect(effect);
-        }
-        observersForBidingOperationUC.Remove(effect.id);
-      }
-    }
-    effectsBidingOperationUCDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsBidingOperationUCSetChargeEffect) {
-      if (observers.TryGetValue(0, out List<IBidingOperationUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnBidingOperationUCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IBidingOperationUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnBidingOperationUCEffect(effect);
-        }
-      }
-    }
-    effectsBidingOperationUCSetChargeEffect.Clear();
-
-    foreach (var effect in effectsBidingOperationUCCreateEffect) {
-      if (observers.TryGetValue(0, out List<IBidingOperationUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnBidingOperationUCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IBidingOperationUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnBidingOperationUCEffect(effect);
-        }
-      }
-    }
-    effectsBidingOperationUCCreateEffect.Clear();
-  }
-
-  public void EffectBidingOperationUCSetCharge(int id, int newValue) {
-    CheckUnlocked();
-    CheckHasBidingOperationUC(id);
-    var effect = new BidingOperationUCSetChargeEffect(id, newValue);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsBidingOperationUC[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.charge;
-      oldIncarnationAndVersion.incarnation.charge = newValue;
-
-    } else {
-      var newIncarnation =
-          new BidingOperationUCIncarnation(
-              newValue);
-      rootIncarnation.incarnationsBidingOperationUC[id] =
-          new VersionAndIncarnation<BidingOperationUCIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-    effectsBidingOperationUCSetChargeEffect.Add(effect);
   }
   public UnleashBideImpulseIncarnation GetUnleashBideImpulseIncarnation(int id) {
     if (id == 0) {
@@ -10224,13 +9402,13 @@ public class Root {
     }
   }
   public BideAICapabilityUC EffectBideAICapabilityUCCreate(
-) {
+      int charge) {
     CheckUnlocked();
 
     var id = NewId();
     var incarnation =
         new BideAICapabilityUCIncarnation(
-
+            charge
             );
     EffectInternalCreateBideAICapabilityUC(id, rootIncarnation.version, incarnation);
     return new BideAICapabilityUC(this, id);
@@ -10263,6 +9441,7 @@ public class Root {
      
   public int GetBideAICapabilityUCHash(int id, int version, BideAICapabilityUCIncarnation incarnation) {
     int result = id * version;
+    result += id * version * 1 * incarnation.charge.GetDeterministicHashCode();
     return result;
   }
      
@@ -10284,6 +9463,20 @@ public class Root {
     effectsBideAICapabilityUCDeleteEffect.Clear();
 
 
+    foreach (var effect in effectsBideAICapabilityUCSetChargeEffect) {
+      if (observers.TryGetValue(0, out List<IBideAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBideAICapabilityUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IBideAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBideAICapabilityUCEffect(effect);
+        }
+      }
+    }
+    effectsBideAICapabilityUCSetChargeEffect.Clear();
+
     foreach (var effect in effectsBideAICapabilityUCCreateEffect) {
       if (observers.TryGetValue(0, out List<IBideAICapabilityUCEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -10297,6 +9490,28 @@ public class Root {
       }
     }
     effectsBideAICapabilityUCCreateEffect.Clear();
+  }
+
+  public void EffectBideAICapabilityUCSetCharge(int id, int newValue) {
+    CheckUnlocked();
+    CheckHasBideAICapabilityUC(id);
+    var effect = new BideAICapabilityUCSetChargeEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsBideAICapabilityUC[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.charge;
+      oldIncarnationAndVersion.incarnation.charge = newValue;
+
+    } else {
+      var newIncarnation =
+          new BideAICapabilityUCIncarnation(
+              newValue);
+      rootIncarnation.incarnationsBideAICapabilityUC[id] =
+          new VersionAndIncarnation<BideAICapabilityUCIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsBideAICapabilityUCSetChargeEffect.Add(effect);
   }
   public FireImpulseIncarnation GetFireImpulseIncarnation(int id) {
     if (id == 0) {
@@ -10951,60 +10166,60 @@ public class Root {
     }
     effectsPursueImpulseCreateEffect.Clear();
   }
-  public KillDirectiveUCIncarnation GetKillDirectiveUCIncarnation(int id) {
+  public KillDirectiveIncarnation GetKillDirectiveIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
     }
-    return rootIncarnation.incarnationsKillDirectiveUC[id].incarnation;
+    return rootIncarnation.incarnationsKillDirective[id].incarnation;
   }
-  public bool KillDirectiveUCExists(int id) {
-    return rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id);
+  public bool KillDirectiveExists(int id) {
+    return rootIncarnation.incarnationsKillDirective.ContainsKey(id);
   }
-  public KillDirectiveUC GetKillDirectiveUC(int id) {
-    return new KillDirectiveUC(this, id);
+  public KillDirective GetKillDirective(int id) {
+    return new KillDirective(this, id);
   }
-  public List<KillDirectiveUC> AllKillDirectiveUC() {
-    List<KillDirectiveUC> result = new List<KillDirectiveUC>(rootIncarnation.incarnationsKillDirectiveUC.Count);
-    foreach (var id in rootIncarnation.incarnationsKillDirectiveUC.Keys) {
-      result.Add(new KillDirectiveUC(this, id));
+  public List<KillDirective> AllKillDirective() {
+    List<KillDirective> result = new List<KillDirective>(rootIncarnation.incarnationsKillDirective.Count);
+    foreach (var id in rootIncarnation.incarnationsKillDirective.Keys) {
+      result.Add(new KillDirective(this, id));
     }
     return result;
   }
-  public IEnumerator<KillDirectiveUC> EnumAllKillDirectiveUC() {
-    foreach (var id in rootIncarnation.incarnationsKillDirectiveUC.Keys) {
-      yield return GetKillDirectiveUC(id);
+  public IEnumerator<KillDirective> EnumAllKillDirective() {
+    foreach (var id in rootIncarnation.incarnationsKillDirective.Keys) {
+      yield return GetKillDirective(id);
     }
   }
-  public void CheckHasKillDirectiveUC(KillDirectiveUC thing) {
+  public void CheckHasKillDirective(KillDirective thing) {
     CheckRootsEqual(this, thing.root);
-    CheckHasKillDirectiveUC(thing.id);
+    CheckHasKillDirective(thing.id);
   }
-  public void CheckHasKillDirectiveUC(int id) {
-    if (!rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
-      throw new System.Exception("Invalid KillDirectiveUC: " + id);
+  public void CheckHasKillDirective(int id) {
+    if (!rootIncarnation.incarnationsKillDirective.ContainsKey(id)) {
+      throw new System.Exception("Invalid KillDirective: " + id);
     }
   }
-  public void AddKillDirectiveUCObserver(int id, IKillDirectiveUCEffectObserver observer) {
-    List<IKillDirectiveUCEffectObserver> obsies;
-    if (!observersForKillDirectiveUC.TryGetValue(id, out obsies)) {
-      obsies = new List<IKillDirectiveUCEffectObserver>();
+  public void AddKillDirectiveObserver(int id, IKillDirectiveEffectObserver observer) {
+    List<IKillDirectiveEffectObserver> obsies;
+    if (!observersForKillDirective.TryGetValue(id, out obsies)) {
+      obsies = new List<IKillDirectiveEffectObserver>();
     }
     obsies.Add(observer);
-    observersForKillDirectiveUC[id] = obsies;
+    observersForKillDirective[id] = obsies;
   }
 
-  public void RemoveKillDirectiveUCObserver(int id, IKillDirectiveUCEffectObserver observer) {
-    if (observersForKillDirectiveUC.ContainsKey(id)) {
-      var list = observersForKillDirectiveUC[id];
+  public void RemoveKillDirectiveObserver(int id, IKillDirectiveEffectObserver observer) {
+    if (observersForKillDirective.ContainsKey(id)) {
+      var list = observersForKillDirective[id];
       list.Remove(observer);
       if (list.Count == 0) {
-        observersForKillDirectiveUC.Remove(id);
+        observersForKillDirective.Remove(id);
       }
     } else {
       throw new Exception("Couldnt find!");
     }
   }
-  public KillDirectiveUC EffectKillDirectiveUCCreate(
+  public KillDirective EffectKillDirectiveCreate(
       Unit targetUnit,
       LocationMutList pathToLastSeenLocation) {
     CheckUnlocked();
@@ -11013,77 +10228,77 @@ public class Root {
 
     var id = NewId();
     var incarnation =
-        new KillDirectiveUCIncarnation(
+        new KillDirectiveIncarnation(
             targetUnit.id,
             pathToLastSeenLocation.id
             );
-    EffectInternalCreateKillDirectiveUC(id, rootIncarnation.version, incarnation);
-    return new KillDirectiveUC(this, id);
+    EffectInternalCreateKillDirective(id, rootIncarnation.version, incarnation);
+    return new KillDirective(this, id);
   }
-  public void EffectInternalCreateKillDirectiveUC(
+  public void EffectInternalCreateKillDirective(
       int id,
       int incarnationVersion,
-      KillDirectiveUCIncarnation incarnation) {
+      KillDirectiveIncarnation incarnation) {
     CheckUnlocked();
-    var effect = new KillDirectiveUCCreateEffect(id);
-    rootIncarnation.incarnationsKillDirectiveUC.Add(
+    var effect = new KillDirectiveCreateEffect(id);
+    rootIncarnation.incarnationsKillDirective.Add(
         id,
-        new VersionAndIncarnation<KillDirectiveUCIncarnation>(
+        new VersionAndIncarnation<KillDirectiveIncarnation>(
             incarnationVersion,
             incarnation));
-    effectsKillDirectiveUCCreateEffect.Add(effect);
+    effectsKillDirectiveCreateEffect.Add(effect);
   }
 
-  public void EffectKillDirectiveUCDelete(int id) {
+  public void EffectKillDirectiveDelete(int id) {
     CheckUnlocked();
-    var effect = new KillDirectiveUCDeleteEffect(id);
+    var effect = new KillDirectiveDeleteEffect(id);
 
     var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsKillDirectiveUC[id];
+        rootIncarnation.incarnationsKillDirective[id];
 
-    rootIncarnation.incarnationsKillDirectiveUC.Remove(id);
-    effectsKillDirectiveUCDeleteEffect.Add(effect);
+    rootIncarnation.incarnationsKillDirective.Remove(id);
+    effectsKillDirectiveDeleteEffect.Add(effect);
   }
 
      
-  public int GetKillDirectiveUCHash(int id, int version, KillDirectiveUCIncarnation incarnation) {
+  public int GetKillDirectiveHash(int id, int version, KillDirectiveIncarnation incarnation) {
     int result = id * version;
     result += id * version * 1 * incarnation.targetUnit.GetDeterministicHashCode();
     result += id * version * 2 * incarnation.pathToLastSeenLocation.GetDeterministicHashCode();
     return result;
   }
      
-  public void BroadcastKillDirectiveUCEffects(
-      SortedDictionary<int, List<IKillDirectiveUCEffectObserver>> observers) {
-    foreach (var effect in effectsKillDirectiveUCDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IKillDirectiveUCEffectObserver> globalObservers)) {
+  public void BroadcastKillDirectiveEffects(
+      SortedDictionary<int, List<IKillDirectiveEffectObserver>> observers) {
+    foreach (var effect in effectsKillDirectiveDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IKillDirectiveEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnKillDirectiveUCEffect(effect);
+          observer.OnKillDirectiveEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IKillDirectiveUCEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<IKillDirectiveEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnKillDirectiveUCEffect(effect);
+          observer.OnKillDirectiveEffect(effect);
         }
-        observersForKillDirectiveUC.Remove(effect.id);
+        observersForKillDirective.Remove(effect.id);
       }
     }
-    effectsKillDirectiveUCDeleteEffect.Clear();
+    effectsKillDirectiveDeleteEffect.Clear();
 
 
-    foreach (var effect in effectsKillDirectiveUCCreateEffect) {
-      if (observers.TryGetValue(0, out List<IKillDirectiveUCEffectObserver> globalObservers)) {
+    foreach (var effect in effectsKillDirectiveCreateEffect) {
+      if (observers.TryGetValue(0, out List<IKillDirectiveEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnKillDirectiveUCEffect(effect);
+          observer.OnKillDirectiveEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IKillDirectiveUCEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<IKillDirectiveEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnKillDirectiveUCEffect(effect);
+          observer.OnKillDirectiveEffect(effect);
         }
       }
     }
-    effectsKillDirectiveUCCreateEffect.Clear();
+    effectsKillDirectiveCreateEffect.Clear();
   }
   public AttackAICapabilityUCIncarnation GetAttackAICapabilityUCIncarnation(int id) {
     if (id == 0) {
@@ -11139,13 +10354,13 @@ public class Root {
     }
   }
   public AttackAICapabilityUC EffectAttackAICapabilityUCCreate(
-) {
+      KillDirective killDirective) {
     CheckUnlocked();
 
     var id = NewId();
     var incarnation =
         new AttackAICapabilityUCIncarnation(
-
+            killDirective.id
             );
     EffectInternalCreateAttackAICapabilityUC(id, rootIncarnation.version, incarnation);
     return new AttackAICapabilityUC(this, id);
@@ -11178,6 +10393,9 @@ public class Root {
      
   public int GetAttackAICapabilityUCHash(int id, int version, AttackAICapabilityUCIncarnation incarnation) {
     int result = id * version;
+    if (!object.ReferenceEquals(incarnation.killDirective, null)) {
+      result += id * version * 1 * incarnation.killDirective.GetDeterministicHashCode();
+    }
     return result;
   }
      
@@ -11199,6 +10417,20 @@ public class Root {
     effectsAttackAICapabilityUCDeleteEffect.Clear();
 
 
+    foreach (var effect in effectsAttackAICapabilityUCSetKillDirectiveEffect) {
+      if (observers.TryGetValue(0, out List<IAttackAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnAttackAICapabilityUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IAttackAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnAttackAICapabilityUCEffect(effect);
+        }
+      }
+    }
+    effectsAttackAICapabilityUCSetKillDirectiveEffect.Clear();
+
     foreach (var effect in effectsAttackAICapabilityUCCreateEffect) {
       if (observers.TryGetValue(0, out List<IAttackAICapabilityUCEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -11212,6 +10444,28 @@ public class Root {
       }
     }
     effectsAttackAICapabilityUCCreateEffect.Clear();
+  }
+
+  public void EffectAttackAICapabilityUCSetKillDirective(int id, KillDirective newValue) {
+    CheckUnlocked();
+    CheckHasAttackAICapabilityUC(id);
+    var effect = new AttackAICapabilityUCSetKillDirectiveEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackAICapabilityUC[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldId = oldIncarnationAndVersion.incarnation.killDirective;
+      oldIncarnationAndVersion.incarnation.killDirective = newValue.id;
+
+    } else {
+      var newIncarnation =
+          new AttackAICapabilityUCIncarnation(
+              newValue.id);
+      rootIncarnation.incarnationsAttackAICapabilityUC[id] =
+          new VersionAndIncarnation<AttackAICapabilityUCIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsAttackAICapabilityUCSetKillDirectiveEffect.Add(effect);
   }
   public MoveImpulseIncarnation GetMoveImpulseIncarnation(int id) {
     if (id == 0) {
@@ -11344,136 +10598,6 @@ public class Root {
       }
     }
     effectsMoveImpulseCreateEffect.Clear();
-  }
-  public MoveDirectiveUCIncarnation GetMoveDirectiveUCIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsMoveDirectiveUC[id].incarnation;
-  }
-  public bool MoveDirectiveUCExists(int id) {
-    return rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id);
-  }
-  public MoveDirectiveUC GetMoveDirectiveUC(int id) {
-    return new MoveDirectiveUC(this, id);
-  }
-  public List<MoveDirectiveUC> AllMoveDirectiveUC() {
-    List<MoveDirectiveUC> result = new List<MoveDirectiveUC>(rootIncarnation.incarnationsMoveDirectiveUC.Count);
-    foreach (var id in rootIncarnation.incarnationsMoveDirectiveUC.Keys) {
-      result.Add(new MoveDirectiveUC(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<MoveDirectiveUC> EnumAllMoveDirectiveUC() {
-    foreach (var id in rootIncarnation.incarnationsMoveDirectiveUC.Keys) {
-      yield return GetMoveDirectiveUC(id);
-    }
-  }
-  public void CheckHasMoveDirectiveUC(MoveDirectiveUC thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasMoveDirectiveUC(thing.id);
-  }
-  public void CheckHasMoveDirectiveUC(int id) {
-    if (!rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
-      throw new System.Exception("Invalid MoveDirectiveUC: " + id);
-    }
-  }
-  public void AddMoveDirectiveUCObserver(int id, IMoveDirectiveUCEffectObserver observer) {
-    List<IMoveDirectiveUCEffectObserver> obsies;
-    if (!observersForMoveDirectiveUC.TryGetValue(id, out obsies)) {
-      obsies = new List<IMoveDirectiveUCEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForMoveDirectiveUC[id] = obsies;
-  }
-
-  public void RemoveMoveDirectiveUCObserver(int id, IMoveDirectiveUCEffectObserver observer) {
-    if (observersForMoveDirectiveUC.ContainsKey(id)) {
-      var list = observersForMoveDirectiveUC[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForMoveDirectiveUC.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-  public MoveDirectiveUC EffectMoveDirectiveUCCreate(
-      LocationMutList path) {
-    CheckUnlocked();
-    CheckHasLocationMutList(path);
-
-    var id = NewId();
-    var incarnation =
-        new MoveDirectiveUCIncarnation(
-            path.id
-            );
-    EffectInternalCreateMoveDirectiveUC(id, rootIncarnation.version, incarnation);
-    return new MoveDirectiveUC(this, id);
-  }
-  public void EffectInternalCreateMoveDirectiveUC(
-      int id,
-      int incarnationVersion,
-      MoveDirectiveUCIncarnation incarnation) {
-    CheckUnlocked();
-    var effect = new MoveDirectiveUCCreateEffect(id);
-    rootIncarnation.incarnationsMoveDirectiveUC.Add(
-        id,
-        new VersionAndIncarnation<MoveDirectiveUCIncarnation>(
-            incarnationVersion,
-            incarnation));
-    effectsMoveDirectiveUCCreateEffect.Add(effect);
-  }
-
-  public void EffectMoveDirectiveUCDelete(int id) {
-    CheckUnlocked();
-    var effect = new MoveDirectiveUCDeleteEffect(id);
-
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsMoveDirectiveUC[id];
-
-    rootIncarnation.incarnationsMoveDirectiveUC.Remove(id);
-    effectsMoveDirectiveUCDeleteEffect.Add(effect);
-  }
-
-     
-  public int GetMoveDirectiveUCHash(int id, int version, MoveDirectiveUCIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.path.GetDeterministicHashCode();
-    return result;
-  }
-     
-  public void BroadcastMoveDirectiveUCEffects(
-      SortedDictionary<int, List<IMoveDirectiveUCEffectObserver>> observers) {
-    foreach (var effect in effectsMoveDirectiveUCDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IMoveDirectiveUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnMoveDirectiveUCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IMoveDirectiveUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnMoveDirectiveUCEffect(effect);
-        }
-        observersForMoveDirectiveUC.Remove(effect.id);
-      }
-    }
-    effectsMoveDirectiveUCDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsMoveDirectiveUCCreateEffect) {
-      if (observers.TryGetValue(0, out List<IMoveDirectiveUCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnMoveDirectiveUCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IMoveDirectiveUCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnMoveDirectiveUCEffect(effect);
-        }
-      }
-    }
-    effectsMoveDirectiveUCCreateEffect.Clear();
   }
   public UnitIncarnation GetUnitIncarnation(int id) {
     if (id == 0) {
@@ -11998,32 +11122,24 @@ public class Root {
       GlaiveMutSet membersGlaiveMutSet,
       ManaPotionMutSet membersManaPotionMutSet,
       HealthPotionMutSet membersHealthPotionMutSet,
-      TimeScriptDirectiveUCMutSet membersTimeScriptDirectiveUCMutSet,
-      KillDirectiveUCMutSet membersKillDirectiveUCMutSet,
-      MoveDirectiveUCMutSet membersMoveDirectiveUCMutSet,
       WanderAICapabilityUCMutSet membersWanderAICapabilityUCMutSet,
-      BideAICapabilityUCMutSet membersBideAICapabilityUCMutSet,
       TimeCloneAICapabilityUCMutSet membersTimeCloneAICapabilityUCMutSet,
       AttackAICapabilityUCMutSet membersAttackAICapabilityUCMutSet,
       CounteringUCMutSet membersCounteringUCMutSet,
       ShieldingUCMutSet membersShieldingUCMutSet,
-      BidingOperationUCMutSet membersBidingOperationUCMutSet) {
+      BideAICapabilityUCMutSet membersBideAICapabilityUCMutSet) {
     CheckUnlocked();
     CheckHasArmorMutSet(membersArmorMutSet);
     CheckHasInertiaRingMutSet(membersInertiaRingMutSet);
     CheckHasGlaiveMutSet(membersGlaiveMutSet);
     CheckHasManaPotionMutSet(membersManaPotionMutSet);
     CheckHasHealthPotionMutSet(membersHealthPotionMutSet);
-    CheckHasTimeScriptDirectiveUCMutSet(membersTimeScriptDirectiveUCMutSet);
-    CheckHasKillDirectiveUCMutSet(membersKillDirectiveUCMutSet);
-    CheckHasMoveDirectiveUCMutSet(membersMoveDirectiveUCMutSet);
     CheckHasWanderAICapabilityUCMutSet(membersWanderAICapabilityUCMutSet);
-    CheckHasBideAICapabilityUCMutSet(membersBideAICapabilityUCMutSet);
     CheckHasTimeCloneAICapabilityUCMutSet(membersTimeCloneAICapabilityUCMutSet);
     CheckHasAttackAICapabilityUCMutSet(membersAttackAICapabilityUCMutSet);
     CheckHasCounteringUCMutSet(membersCounteringUCMutSet);
     CheckHasShieldingUCMutSet(membersShieldingUCMutSet);
-    CheckHasBidingOperationUCMutSet(membersBidingOperationUCMutSet);
+    CheckHasBideAICapabilityUCMutSet(membersBideAICapabilityUCMutSet);
 
     var id = NewId();
     var incarnation =
@@ -12033,16 +11149,12 @@ public class Root {
             membersGlaiveMutSet.id,
             membersManaPotionMutSet.id,
             membersHealthPotionMutSet.id,
-            membersTimeScriptDirectiveUCMutSet.id,
-            membersKillDirectiveUCMutSet.id,
-            membersMoveDirectiveUCMutSet.id,
             membersWanderAICapabilityUCMutSet.id,
-            membersBideAICapabilityUCMutSet.id,
             membersTimeCloneAICapabilityUCMutSet.id,
             membersAttackAICapabilityUCMutSet.id,
             membersCounteringUCMutSet.id,
             membersShieldingUCMutSet.id,
-            membersBidingOperationUCMutSet.id
+            membersBideAICapabilityUCMutSet.id
             );
     EffectInternalCreateIUnitComponentMutBunch(id, rootIncarnation.version, incarnation);
     return new IUnitComponentMutBunch(this, id);
@@ -12080,16 +11192,12 @@ public class Root {
     result += id * version * 3 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
     result += id * version * 4 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
     result += id * version * 5 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersTimeScriptDirectiveUCMutSet.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.membersKillDirectiveUCMutSet.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.membersMoveDirectiveUCMutSet.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.membersWanderAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.membersShieldingUCMutSet.GetDeterministicHashCode();
-    result += id * version * 15 * incarnation.membersBidingOperationUCMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersWanderAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.membersShieldingUCMutSet.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -12880,7 +11988,6 @@ public class Root {
       bool gauntletMode,
       LevelMutSet levels,
       Unit player,
-      IRequest lastPlayerRequest,
       Level level,
       int time,
       ExecutionState executionState) {
@@ -12897,7 +12004,6 @@ public class Root {
             gauntletMode,
             levels.id,
             player.id,
-            lastPlayerRequest,
             level.id,
             time,
             executionState.id
@@ -12940,14 +12046,11 @@ public class Root {
     if (!object.ReferenceEquals(incarnation.player, null)) {
       result += id * version * 5 * incarnation.player.GetDeterministicHashCode();
     }
-    if (!object.ReferenceEquals(incarnation.lastPlayerRequest, null)) {
-      result += id * version * 6 * incarnation.lastPlayerRequest.GetDeterministicHashCode();
-    }
     if (!object.ReferenceEquals(incarnation.level, null)) {
-      result += id * version * 7 * incarnation.level.GetDeterministicHashCode();
+      result += id * version * 6 * incarnation.level.GetDeterministicHashCode();
     }
-    result += id * version * 8 * incarnation.time.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.executionState.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.time.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.executionState.GetDeterministicHashCode();
     return result;
   }
      
@@ -12982,20 +12085,6 @@ public class Root {
       }
     }
     effectsGameSetPlayerEffect.Clear();
-
-    foreach (var effect in effectsGameSetLastPlayerRequestEffect) {
-      if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnGameEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IGameEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnGameEffect(effect);
-        }
-      }
-    }
-    effectsGameSetLastPlayerRequestEffect.Clear();
 
     foreach (var effect in effectsGameSetLevelEffect) {
       if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
@@ -13057,7 +12146,6 @@ public class Root {
               oldIncarnationAndVersion.incarnation.gauntletMode,
               oldIncarnationAndVersion.incarnation.levels,
               newValue.id,
-              oldIncarnationAndVersion.incarnation.lastPlayerRequest,
               oldIncarnationAndVersion.incarnation.level,
               oldIncarnationAndVersion.incarnation.time,
               oldIncarnationAndVersion.incarnation.executionState);
@@ -13068,36 +12156,6 @@ public class Root {
     }
 
     effectsGameSetPlayerEffect.Add(effect);
-  }
-
-  public void EffectGameSetLastPlayerRequest(int id, IRequest newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = new GameSetLastPlayerRequestEffect(id, newValue);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.lastPlayerRequest;
-      oldIncarnationAndVersion.incarnation.lastPlayerRequest = newValue;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.gauntletMode,
-              oldIncarnationAndVersion.incarnation.levels,
-              oldIncarnationAndVersion.incarnation.player,
-              newValue,
-              oldIncarnationAndVersion.incarnation.level,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-    effectsGameSetLastPlayerRequestEffect.Add(effect);
   }
 
   public void EffectGameSetLevel(int id, Level newValue) {
@@ -13117,7 +12175,6 @@ public class Root {
               oldIncarnationAndVersion.incarnation.gauntletMode,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
-              oldIncarnationAndVersion.incarnation.lastPlayerRequest,
               newValue.id,
               oldIncarnationAndVersion.incarnation.time,
               oldIncarnationAndVersion.incarnation.executionState);
@@ -13147,7 +12204,6 @@ public class Root {
               oldIncarnationAndVersion.incarnation.gauntletMode,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
-              oldIncarnationAndVersion.incarnation.lastPlayerRequest,
               oldIncarnationAndVersion.incarnation.level,
               newValue,
               oldIncarnationAndVersion.incarnation.executionState);
@@ -13422,60 +12478,60 @@ public class Root {
     GetIItem(id);
   }
 
-  public IOperationUC GetIOperationUC(int id) {
-    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
-      return new BidingOperationUCAsIOperationUC(new BidingOperationUC(this, id));
+  public IImpulsePostReactor GetIImpulsePostReactor(int id) {
+    if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
+      return new TimeCloneAICapabilityUCAsIImpulsePostReactor(new TimeCloneAICapabilityUC(this, id));
     }
-    throw new Exception("Unknown IOperationUC: " + id);
-  }
-  public IOperationUC GetIOperationUCOrNull(int id) {
-    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
-      return new BidingOperationUCAsIOperationUC(new BidingOperationUC(this, id));
+    if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
+      return new AttackAICapabilityUCAsIImpulsePostReactor(new AttackAICapabilityUC(this, id));
     }
-    return NullIOperationUC.Null;
+    throw new Exception("Unknown IImpulsePostReactor: " + id);
   }
-  public bool IOperationUCExists(int id) {
-    return GetIOperationUCOrNull(id) != null;
+  public IImpulsePostReactor GetIImpulsePostReactorOrNull(int id) {
+    if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
+      return new TimeCloneAICapabilityUCAsIImpulsePostReactor(new TimeCloneAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
+      return new AttackAICapabilityUCAsIImpulsePostReactor(new AttackAICapabilityUC(this, id));
+    }
+    return NullIImpulsePostReactor.Null;
   }
-  public void CheckHasIOperationUC(IOperationUC thing) {
-    GetIOperationUC(thing.id);
+  public bool IImpulsePostReactorExists(int id) {
+    return GetIImpulsePostReactorOrNull(id) != null;
   }
-  public void CheckHasIOperationUC(int id) {
-    GetIOperationUC(id);
+  public void CheckHasIImpulsePostReactor(IImpulsePostReactor thing) {
+    GetIImpulsePostReactor(thing.id);
+  }
+  public void CheckHasIImpulsePostReactor(int id) {
+    GetIImpulsePostReactor(id);
   }
 
-  public IDirectiveUC GetIDirectiveUC(int id) {
-    if (rootIncarnation.incarnationsTimeScriptDirectiveUC.ContainsKey(id)) {
-      return new TimeScriptDirectiveUCAsIDirectiveUC(new TimeScriptDirectiveUC(this, id));
+  public IImpulsePreReactor GetIImpulsePreReactor(int id) {
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIImpulsePreReactor(new BideAICapabilityUC(this, id));
     }
-    if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
-      return new KillDirectiveUCAsIDirectiveUC(new KillDirectiveUC(this, id));
+    if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
+      return new AttackAICapabilityUCAsIImpulsePreReactor(new AttackAICapabilityUC(this, id));
     }
-    if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
-      return new MoveDirectiveUCAsIDirectiveUC(new MoveDirectiveUC(this, id));
-    }
-    throw new Exception("Unknown IDirectiveUC: " + id);
+    throw new Exception("Unknown IImpulsePreReactor: " + id);
   }
-  public IDirectiveUC GetIDirectiveUCOrNull(int id) {
-    if (rootIncarnation.incarnationsTimeScriptDirectiveUC.ContainsKey(id)) {
-      return new TimeScriptDirectiveUCAsIDirectiveUC(new TimeScriptDirectiveUC(this, id));
+  public IImpulsePreReactor GetIImpulsePreReactorOrNull(int id) {
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIImpulsePreReactor(new BideAICapabilityUC(this, id));
     }
-    if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
-      return new KillDirectiveUCAsIDirectiveUC(new KillDirectiveUC(this, id));
+    if (rootIncarnation.incarnationsAttackAICapabilityUC.ContainsKey(id)) {
+      return new AttackAICapabilityUCAsIImpulsePreReactor(new AttackAICapabilityUC(this, id));
     }
-    if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
-      return new MoveDirectiveUCAsIDirectiveUC(new MoveDirectiveUC(this, id));
-    }
-    return NullIDirectiveUC.Null;
+    return NullIImpulsePreReactor.Null;
   }
-  public bool IDirectiveUCExists(int id) {
-    return GetIDirectiveUCOrNull(id) != null;
+  public bool IImpulsePreReactorExists(int id) {
+    return GetIImpulsePreReactorOrNull(id) != null;
   }
-  public void CheckHasIDirectiveUC(IDirectiveUC thing) {
-    GetIDirectiveUC(thing.id);
+  public void CheckHasIImpulsePreReactor(IImpulsePreReactor thing) {
+    GetIImpulsePreReactor(thing.id);
   }
-  public void CheckHasIDirectiveUC(int id) {
-    GetIDirectiveUC(id);
+  public void CheckHasIImpulsePreReactor(int id) {
+    GetIImpulsePreReactor(id);
   }
 
   public IAICapabilityUC GetIAICapabilityUC(int id) {
@@ -13600,8 +12656,8 @@ public class Root {
     if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
       return new ShieldingUCAsIDefenseUC(new ShieldingUC(this, id));
     }
-    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
-      return new BidingOperationUCAsIDefenseUC(new BidingOperationUC(this, id));
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIDefenseUC(new BideAICapabilityUC(this, id));
     }
     throw new Exception("Unknown IDefenseUC: " + id);
   }
@@ -13609,8 +12665,8 @@ public class Root {
     if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
       return new ShieldingUCAsIDefenseUC(new ShieldingUC(this, id));
     }
-    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
-      return new BidingOperationUCAsIDefenseUC(new BidingOperationUC(this, id));
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIDefenseUC(new BideAICapabilityUC(this, id));
     }
     return NullIDefenseUC.Null;
   }
@@ -13640,20 +12696,8 @@ public class Root {
     if (rootIncarnation.incarnationsHealthPotion.ContainsKey(id)) {
       return new HealthPotionAsIUnitComponent(new HealthPotion(this, id));
     }
-    if (rootIncarnation.incarnationsTimeScriptDirectiveUC.ContainsKey(id)) {
-      return new TimeScriptDirectiveUCAsIUnitComponent(new TimeScriptDirectiveUC(this, id));
-    }
-    if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
-      return new KillDirectiveUCAsIUnitComponent(new KillDirectiveUC(this, id));
-    }
-    if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
-      return new MoveDirectiveUCAsIUnitComponent(new MoveDirectiveUC(this, id));
-    }
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIUnitComponent(new WanderAICapabilityUC(this, id));
-    }
-    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
-      return new BideAICapabilityUCAsIUnitComponent(new BideAICapabilityUC(this, id));
     }
     if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
       return new TimeCloneAICapabilityUCAsIUnitComponent(new TimeCloneAICapabilityUC(this, id));
@@ -13667,8 +12711,8 @@ public class Root {
     if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
       return new ShieldingUCAsIUnitComponent(new ShieldingUC(this, id));
     }
-    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
-      return new BidingOperationUCAsIUnitComponent(new BidingOperationUC(this, id));
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIUnitComponent(new BideAICapabilityUC(this, id));
     }
     throw new Exception("Unknown IUnitComponent: " + id);
   }
@@ -13688,20 +12732,8 @@ public class Root {
     if (rootIncarnation.incarnationsHealthPotion.ContainsKey(id)) {
       return new HealthPotionAsIUnitComponent(new HealthPotion(this, id));
     }
-    if (rootIncarnation.incarnationsTimeScriptDirectiveUC.ContainsKey(id)) {
-      return new TimeScriptDirectiveUCAsIUnitComponent(new TimeScriptDirectiveUC(this, id));
-    }
-    if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
-      return new KillDirectiveUCAsIUnitComponent(new KillDirectiveUC(this, id));
-    }
-    if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
-      return new MoveDirectiveUCAsIUnitComponent(new MoveDirectiveUC(this, id));
-    }
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIUnitComponent(new WanderAICapabilityUC(this, id));
-    }
-    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
-      return new BideAICapabilityUCAsIUnitComponent(new BideAICapabilityUC(this, id));
     }
     if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
       return new TimeCloneAICapabilityUCAsIUnitComponent(new TimeCloneAICapabilityUC(this, id));
@@ -13715,8 +12747,8 @@ public class Root {
     if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
       return new ShieldingUCAsIUnitComponent(new ShieldingUC(this, id));
     }
-    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
-      return new BidingOperationUCAsIUnitComponent(new BidingOperationUC(this, id));
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIUnitComponent(new BideAICapabilityUC(this, id));
     }
     return NullIUnitComponent.Null;
   }
@@ -13837,20 +12869,8 @@ public class Root {
     if (rootIncarnation.incarnationsHealthPotion.ContainsKey(id)) {
       return new HealthPotionAsIDestructible(new HealthPotion(this, id));
     }
-    if (rootIncarnation.incarnationsTimeScriptDirectiveUC.ContainsKey(id)) {
-      return new TimeScriptDirectiveUCAsIDestructible(new TimeScriptDirectiveUC(this, id));
-    }
-    if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
-      return new KillDirectiveUCAsIDestructible(new KillDirectiveUC(this, id));
-    }
-    if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
-      return new MoveDirectiveUCAsIDestructible(new MoveDirectiveUC(this, id));
-    }
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIDestructible(new WanderAICapabilityUC(this, id));
-    }
-    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
-      return new BideAICapabilityUCAsIDestructible(new BideAICapabilityUC(this, id));
     }
     if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
       return new TimeCloneAICapabilityUCAsIDestructible(new TimeCloneAICapabilityUC(this, id));
@@ -13864,8 +12884,8 @@ public class Root {
     if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
       return new ShieldingUCAsIDestructible(new ShieldingUC(this, id));
     }
-    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
-      return new BidingOperationUCAsIDestructible(new BidingOperationUC(this, id));
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIDestructible(new BideAICapabilityUC(this, id));
     }
     if (rootIncarnation.incarnationsEvaporateImpulse.ContainsKey(id)) {
       return new EvaporateImpulseAsIDestructible(new EvaporateImpulse(this, id));
@@ -13930,20 +12950,8 @@ public class Root {
     if (rootIncarnation.incarnationsHealthPotion.ContainsKey(id)) {
       return new HealthPotionAsIDestructible(new HealthPotion(this, id));
     }
-    if (rootIncarnation.incarnationsTimeScriptDirectiveUC.ContainsKey(id)) {
-      return new TimeScriptDirectiveUCAsIDestructible(new TimeScriptDirectiveUC(this, id));
-    }
-    if (rootIncarnation.incarnationsKillDirectiveUC.ContainsKey(id)) {
-      return new KillDirectiveUCAsIDestructible(new KillDirectiveUC(this, id));
-    }
-    if (rootIncarnation.incarnationsMoveDirectiveUC.ContainsKey(id)) {
-      return new MoveDirectiveUCAsIDestructible(new MoveDirectiveUC(this, id));
-    }
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIDestructible(new WanderAICapabilityUC(this, id));
-    }
-    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
-      return new BideAICapabilityUCAsIDestructible(new BideAICapabilityUC(this, id));
     }
     if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
       return new TimeCloneAICapabilityUCAsIDestructible(new TimeCloneAICapabilityUC(this, id));
@@ -13957,8 +12965,8 @@ public class Root {
     if (rootIncarnation.incarnationsShieldingUC.ContainsKey(id)) {
       return new ShieldingUCAsIDestructible(new ShieldingUC(this, id));
     }
-    if (rootIncarnation.incarnationsBidingOperationUC.ContainsKey(id)) {
-      return new BidingOperationUCAsIDestructible(new BidingOperationUC(this, id));
+    if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
+      return new BideAICapabilityUCAsIDestructible(new BideAICapabilityUC(this, id));
     }
     if (rootIncarnation.incarnationsEvaporateImpulse.ContainsKey(id)) {
       return new EvaporateImpulseAsIDestructible(new EvaporateImpulse(this, id));
@@ -16442,567 +15450,6 @@ public class Root {
 
   }
 
-    public int GetTimeScriptDirectiveUCMutSetHash(int id, int version, TimeScriptDirectiveUCMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public TimeScriptDirectiveUCMutSetIncarnation GetTimeScriptDirectiveUCMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet[id].incarnation;
-    }
-    public TimeScriptDirectiveUCMutSet GetTimeScriptDirectiveUCMutSet(int id) {
-      return new TimeScriptDirectiveUCMutSet(this, id);
-    }
-    public List<TimeScriptDirectiveUCMutSet> AllTimeScriptDirectiveUCMutSet() {
-      List<TimeScriptDirectiveUCMutSet> result = new List<TimeScriptDirectiveUCMutSet>(rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet.Keys) {
-        result.Add(new TimeScriptDirectiveUCMutSet(this, id));
-      }
-      return result;
-    }
-    public bool TimeScriptDirectiveUCMutSetExists(int id) {
-      return rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet.ContainsKey(id);
-    }
-    public void CheckHasTimeScriptDirectiveUCMutSet(TimeScriptDirectiveUCMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasTimeScriptDirectiveUCMutSet(thing.id);
-    }
-    public void CheckHasTimeScriptDirectiveUCMutSet(int id) {
-      if (!rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid TimeScriptDirectiveUCMutSet}: " + id);
-      }
-    }
-    public TimeScriptDirectiveUCMutSet EffectTimeScriptDirectiveUCMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new TimeScriptDirectiveUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateTimeScriptDirectiveUCMutSet(id, rootIncarnation.version, incarnation);
-      return new TimeScriptDirectiveUCMutSet(this, id);
-    }
-    public void EffectInternalCreateTimeScriptDirectiveUCMutSet(int id, int incarnationVersion, TimeScriptDirectiveUCMutSetIncarnation incarnation) {
-      var effect = new TimeScriptDirectiveUCMutSetCreateEffect(id);
-      rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<TimeScriptDirectiveUCMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      effectsTimeScriptDirectiveUCMutSetCreateEffect.Add(effect);
-    }
-    public void EffectTimeScriptDirectiveUCMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new TimeScriptDirectiveUCMutSetDeleteEffect(id);
-      effectsTimeScriptDirectiveUCMutSetDeleteEffect.Add(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet[id];
-      rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet.Remove(id);
-    }
-
-       
-    public void EffectTimeScriptDirectiveUCMutSetAdd(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasTimeScriptDirectiveUCMutSet(setId);
-      CheckHasTimeScriptDirectiveUC(elementId);
-
-      var effect = new TimeScriptDirectiveUCMutSetAddEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet[setId];
-      Asserts.Assert(!oldIncarnationAndVersion.incarnation.set.Contains(elementId));
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(elementId);
-        var newIncarnation = new TimeScriptDirectiveUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet[setId] =
-            new VersionAndIncarnation<TimeScriptDirectiveUCMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      effectsTimeScriptDirectiveUCMutSetAddEffect.Add(effect);
-    }
-    public void EffectTimeScriptDirectiveUCMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasTimeScriptDirectiveUCMutSet(setId);
-      CheckHasTimeScriptDirectiveUC(elementId);
-
-      var effect = new TimeScriptDirectiveUCMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet[setId];
-      Asserts.Assert(oldIncarnationAndVersion.incarnation.set.Contains(elementId));
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new TimeScriptDirectiveUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsTimeScriptDirectiveUCMutSet[setId] =
-            new VersionAndIncarnation<TimeScriptDirectiveUCMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      effectsTimeScriptDirectiveUCMutSetRemoveEffect.Add(effect);
-    }
-
-       
-    public void AddTimeScriptDirectiveUCMutSetObserver(int id, ITimeScriptDirectiveUCMutSetEffectObserver observer) {
-      List<ITimeScriptDirectiveUCMutSetEffectObserver> obsies;
-      if (!observersForTimeScriptDirectiveUCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<ITimeScriptDirectiveUCMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForTimeScriptDirectiveUCMutSet[id] = obsies;
-    }
-
-    public void RemoveTimeScriptDirectiveUCMutSetObserver(int id, ITimeScriptDirectiveUCMutSetEffectObserver observer) {
-      if (observersForTimeScriptDirectiveUCMutSet.ContainsKey(id)) {
-        var list = observersForTimeScriptDirectiveUCMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForTimeScriptDirectiveUCMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-       
-  public void BroadcastTimeScriptDirectiveUCMutSetEffects(
-      SortedDictionary<int, List<ITimeScriptDirectiveUCMutSetEffectObserver>> observers) {
-    foreach (var effect in effectsTimeScriptDirectiveUCMutSetDeleteEffect) {
-      if (observers.TryGetValue(0, out List<ITimeScriptDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTimeScriptDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITimeScriptDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTimeScriptDirectiveUCMutSetEffect(effect);
-        }
-        observersForTimeScriptDirectiveUCMutSet.Remove(effect.id);
-      }
-    }
-    effectsTimeScriptDirectiveUCMutSetDeleteEffect.Clear();
-
-    foreach (var effect in effectsTimeScriptDirectiveUCMutSetAddEffect) {
-      if (observers.TryGetValue(0, out List<ITimeScriptDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTimeScriptDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITimeScriptDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTimeScriptDirectiveUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsTimeScriptDirectiveUCMutSetAddEffect.Clear();
-
-    foreach (var effect in effectsTimeScriptDirectiveUCMutSetRemoveEffect) {
-      if (observers.TryGetValue(0, out List<ITimeScriptDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTimeScriptDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITimeScriptDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTimeScriptDirectiveUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsTimeScriptDirectiveUCMutSetRemoveEffect.Clear();
-
-    foreach (var effect in effectsTimeScriptDirectiveUCMutSetCreateEffect) {
-      if (observers.TryGetValue(0, out List<ITimeScriptDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTimeScriptDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITimeScriptDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTimeScriptDirectiveUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsTimeScriptDirectiveUCMutSetCreateEffect.Clear();
-
-  }
-
-    public int GetKillDirectiveUCMutSetHash(int id, int version, KillDirectiveUCMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public KillDirectiveUCMutSetIncarnation GetKillDirectiveUCMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsKillDirectiveUCMutSet[id].incarnation;
-    }
-    public KillDirectiveUCMutSet GetKillDirectiveUCMutSet(int id) {
-      return new KillDirectiveUCMutSet(this, id);
-    }
-    public List<KillDirectiveUCMutSet> AllKillDirectiveUCMutSet() {
-      List<KillDirectiveUCMutSet> result = new List<KillDirectiveUCMutSet>(rootIncarnation.incarnationsKillDirectiveUCMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsKillDirectiveUCMutSet.Keys) {
-        result.Add(new KillDirectiveUCMutSet(this, id));
-      }
-      return result;
-    }
-    public bool KillDirectiveUCMutSetExists(int id) {
-      return rootIncarnation.incarnationsKillDirectiveUCMutSet.ContainsKey(id);
-    }
-    public void CheckHasKillDirectiveUCMutSet(KillDirectiveUCMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasKillDirectiveUCMutSet(thing.id);
-    }
-    public void CheckHasKillDirectiveUCMutSet(int id) {
-      if (!rootIncarnation.incarnationsKillDirectiveUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid KillDirectiveUCMutSet}: " + id);
-      }
-    }
-    public KillDirectiveUCMutSet EffectKillDirectiveUCMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new KillDirectiveUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateKillDirectiveUCMutSet(id, rootIncarnation.version, incarnation);
-      return new KillDirectiveUCMutSet(this, id);
-    }
-    public void EffectInternalCreateKillDirectiveUCMutSet(int id, int incarnationVersion, KillDirectiveUCMutSetIncarnation incarnation) {
-      var effect = new KillDirectiveUCMutSetCreateEffect(id);
-      rootIncarnation.incarnationsKillDirectiveUCMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<KillDirectiveUCMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      effectsKillDirectiveUCMutSetCreateEffect.Add(effect);
-    }
-    public void EffectKillDirectiveUCMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new KillDirectiveUCMutSetDeleteEffect(id);
-      effectsKillDirectiveUCMutSetDeleteEffect.Add(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsKillDirectiveUCMutSet[id];
-      rootIncarnation.incarnationsKillDirectiveUCMutSet.Remove(id);
-    }
-
-       
-    public void EffectKillDirectiveUCMutSetAdd(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasKillDirectiveUCMutSet(setId);
-      CheckHasKillDirectiveUC(elementId);
-
-      var effect = new KillDirectiveUCMutSetAddEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsKillDirectiveUCMutSet[setId];
-      Asserts.Assert(!oldIncarnationAndVersion.incarnation.set.Contains(elementId));
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(elementId);
-        var newIncarnation = new KillDirectiveUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsKillDirectiveUCMutSet[setId] =
-            new VersionAndIncarnation<KillDirectiveUCMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      effectsKillDirectiveUCMutSetAddEffect.Add(effect);
-    }
-    public void EffectKillDirectiveUCMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasKillDirectiveUCMutSet(setId);
-      CheckHasKillDirectiveUC(elementId);
-
-      var effect = new KillDirectiveUCMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsKillDirectiveUCMutSet[setId];
-      Asserts.Assert(oldIncarnationAndVersion.incarnation.set.Contains(elementId));
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new KillDirectiveUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsKillDirectiveUCMutSet[setId] =
-            new VersionAndIncarnation<KillDirectiveUCMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      effectsKillDirectiveUCMutSetRemoveEffect.Add(effect);
-    }
-
-       
-    public void AddKillDirectiveUCMutSetObserver(int id, IKillDirectiveUCMutSetEffectObserver observer) {
-      List<IKillDirectiveUCMutSetEffectObserver> obsies;
-      if (!observersForKillDirectiveUCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IKillDirectiveUCMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForKillDirectiveUCMutSet[id] = obsies;
-    }
-
-    public void RemoveKillDirectiveUCMutSetObserver(int id, IKillDirectiveUCMutSetEffectObserver observer) {
-      if (observersForKillDirectiveUCMutSet.ContainsKey(id)) {
-        var list = observersForKillDirectiveUCMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForKillDirectiveUCMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-       
-  public void BroadcastKillDirectiveUCMutSetEffects(
-      SortedDictionary<int, List<IKillDirectiveUCMutSetEffectObserver>> observers) {
-    foreach (var effect in effectsKillDirectiveUCMutSetDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IKillDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnKillDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IKillDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnKillDirectiveUCMutSetEffect(effect);
-        }
-        observersForKillDirectiveUCMutSet.Remove(effect.id);
-      }
-    }
-    effectsKillDirectiveUCMutSetDeleteEffect.Clear();
-
-    foreach (var effect in effectsKillDirectiveUCMutSetAddEffect) {
-      if (observers.TryGetValue(0, out List<IKillDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnKillDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IKillDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnKillDirectiveUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsKillDirectiveUCMutSetAddEffect.Clear();
-
-    foreach (var effect in effectsKillDirectiveUCMutSetRemoveEffect) {
-      if (observers.TryGetValue(0, out List<IKillDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnKillDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IKillDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnKillDirectiveUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsKillDirectiveUCMutSetRemoveEffect.Clear();
-
-    foreach (var effect in effectsKillDirectiveUCMutSetCreateEffect) {
-      if (observers.TryGetValue(0, out List<IKillDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnKillDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IKillDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnKillDirectiveUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsKillDirectiveUCMutSetCreateEffect.Clear();
-
-  }
-
-    public int GetMoveDirectiveUCMutSetHash(int id, int version, MoveDirectiveUCMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public MoveDirectiveUCMutSetIncarnation GetMoveDirectiveUCMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsMoveDirectiveUCMutSet[id].incarnation;
-    }
-    public MoveDirectiveUCMutSet GetMoveDirectiveUCMutSet(int id) {
-      return new MoveDirectiveUCMutSet(this, id);
-    }
-    public List<MoveDirectiveUCMutSet> AllMoveDirectiveUCMutSet() {
-      List<MoveDirectiveUCMutSet> result = new List<MoveDirectiveUCMutSet>(rootIncarnation.incarnationsMoveDirectiveUCMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsMoveDirectiveUCMutSet.Keys) {
-        result.Add(new MoveDirectiveUCMutSet(this, id));
-      }
-      return result;
-    }
-    public bool MoveDirectiveUCMutSetExists(int id) {
-      return rootIncarnation.incarnationsMoveDirectiveUCMutSet.ContainsKey(id);
-    }
-    public void CheckHasMoveDirectiveUCMutSet(MoveDirectiveUCMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasMoveDirectiveUCMutSet(thing.id);
-    }
-    public void CheckHasMoveDirectiveUCMutSet(int id) {
-      if (!rootIncarnation.incarnationsMoveDirectiveUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid MoveDirectiveUCMutSet}: " + id);
-      }
-    }
-    public MoveDirectiveUCMutSet EffectMoveDirectiveUCMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new MoveDirectiveUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateMoveDirectiveUCMutSet(id, rootIncarnation.version, incarnation);
-      return new MoveDirectiveUCMutSet(this, id);
-    }
-    public void EffectInternalCreateMoveDirectiveUCMutSet(int id, int incarnationVersion, MoveDirectiveUCMutSetIncarnation incarnation) {
-      var effect = new MoveDirectiveUCMutSetCreateEffect(id);
-      rootIncarnation.incarnationsMoveDirectiveUCMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<MoveDirectiveUCMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      effectsMoveDirectiveUCMutSetCreateEffect.Add(effect);
-    }
-    public void EffectMoveDirectiveUCMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new MoveDirectiveUCMutSetDeleteEffect(id);
-      effectsMoveDirectiveUCMutSetDeleteEffect.Add(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsMoveDirectiveUCMutSet[id];
-      rootIncarnation.incarnationsMoveDirectiveUCMutSet.Remove(id);
-    }
-
-       
-    public void EffectMoveDirectiveUCMutSetAdd(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasMoveDirectiveUCMutSet(setId);
-      CheckHasMoveDirectiveUC(elementId);
-
-      var effect = new MoveDirectiveUCMutSetAddEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsMoveDirectiveUCMutSet[setId];
-      Asserts.Assert(!oldIncarnationAndVersion.incarnation.set.Contains(elementId));
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(elementId);
-        var newIncarnation = new MoveDirectiveUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsMoveDirectiveUCMutSet[setId] =
-            new VersionAndIncarnation<MoveDirectiveUCMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      effectsMoveDirectiveUCMutSetAddEffect.Add(effect);
-    }
-    public void EffectMoveDirectiveUCMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasMoveDirectiveUCMutSet(setId);
-      CheckHasMoveDirectiveUC(elementId);
-
-      var effect = new MoveDirectiveUCMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsMoveDirectiveUCMutSet[setId];
-      Asserts.Assert(oldIncarnationAndVersion.incarnation.set.Contains(elementId));
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new MoveDirectiveUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsMoveDirectiveUCMutSet[setId] =
-            new VersionAndIncarnation<MoveDirectiveUCMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      effectsMoveDirectiveUCMutSetRemoveEffect.Add(effect);
-    }
-
-       
-    public void AddMoveDirectiveUCMutSetObserver(int id, IMoveDirectiveUCMutSetEffectObserver observer) {
-      List<IMoveDirectiveUCMutSetEffectObserver> obsies;
-      if (!observersForMoveDirectiveUCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IMoveDirectiveUCMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForMoveDirectiveUCMutSet[id] = obsies;
-    }
-
-    public void RemoveMoveDirectiveUCMutSetObserver(int id, IMoveDirectiveUCMutSetEffectObserver observer) {
-      if (observersForMoveDirectiveUCMutSet.ContainsKey(id)) {
-        var list = observersForMoveDirectiveUCMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForMoveDirectiveUCMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-       
-  public void BroadcastMoveDirectiveUCMutSetEffects(
-      SortedDictionary<int, List<IMoveDirectiveUCMutSetEffectObserver>> observers) {
-    foreach (var effect in effectsMoveDirectiveUCMutSetDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IMoveDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnMoveDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IMoveDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnMoveDirectiveUCMutSetEffect(effect);
-        }
-        observersForMoveDirectiveUCMutSet.Remove(effect.id);
-      }
-    }
-    effectsMoveDirectiveUCMutSetDeleteEffect.Clear();
-
-    foreach (var effect in effectsMoveDirectiveUCMutSetAddEffect) {
-      if (observers.TryGetValue(0, out List<IMoveDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnMoveDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IMoveDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnMoveDirectiveUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsMoveDirectiveUCMutSetAddEffect.Clear();
-
-    foreach (var effect in effectsMoveDirectiveUCMutSetRemoveEffect) {
-      if (observers.TryGetValue(0, out List<IMoveDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnMoveDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IMoveDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnMoveDirectiveUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsMoveDirectiveUCMutSetRemoveEffect.Clear();
-
-    foreach (var effect in effectsMoveDirectiveUCMutSetCreateEffect) {
-      if (observers.TryGetValue(0, out List<IMoveDirectiveUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnMoveDirectiveUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IMoveDirectiveUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnMoveDirectiveUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsMoveDirectiveUCMutSetCreateEffect.Clear();
-
-  }
-
     public int GetWanderAICapabilityUCMutSetHash(int id, int version, WanderAICapabilityUCMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.set) {
@@ -17187,193 +15634,6 @@ public class Root {
       }
     }
     effectsWanderAICapabilityUCMutSetCreateEffect.Clear();
-
-  }
-
-    public int GetBideAICapabilityUCMutSetHash(int id, int version, BideAICapabilityUCMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public BideAICapabilityUCMutSetIncarnation GetBideAICapabilityUCMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsBideAICapabilityUCMutSet[id].incarnation;
-    }
-    public BideAICapabilityUCMutSet GetBideAICapabilityUCMutSet(int id) {
-      return new BideAICapabilityUCMutSet(this, id);
-    }
-    public List<BideAICapabilityUCMutSet> AllBideAICapabilityUCMutSet() {
-      List<BideAICapabilityUCMutSet> result = new List<BideAICapabilityUCMutSet>(rootIncarnation.incarnationsBideAICapabilityUCMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsBideAICapabilityUCMutSet.Keys) {
-        result.Add(new BideAICapabilityUCMutSet(this, id));
-      }
-      return result;
-    }
-    public bool BideAICapabilityUCMutSetExists(int id) {
-      return rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(id);
-    }
-    public void CheckHasBideAICapabilityUCMutSet(BideAICapabilityUCMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasBideAICapabilityUCMutSet(thing.id);
-    }
-    public void CheckHasBideAICapabilityUCMutSet(int id) {
-      if (!rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid BideAICapabilityUCMutSet}: " + id);
-      }
-    }
-    public BideAICapabilityUCMutSet EffectBideAICapabilityUCMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new BideAICapabilityUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateBideAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
-      return new BideAICapabilityUCMutSet(this, id);
-    }
-    public void EffectInternalCreateBideAICapabilityUCMutSet(int id, int incarnationVersion, BideAICapabilityUCMutSetIncarnation incarnation) {
-      var effect = new BideAICapabilityUCMutSetCreateEffect(id);
-      rootIncarnation.incarnationsBideAICapabilityUCMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      effectsBideAICapabilityUCMutSetCreateEffect.Add(effect);
-    }
-    public void EffectBideAICapabilityUCMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new BideAICapabilityUCMutSetDeleteEffect(id);
-      effectsBideAICapabilityUCMutSetDeleteEffect.Add(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsBideAICapabilityUCMutSet[id];
-      rootIncarnation.incarnationsBideAICapabilityUCMutSet.Remove(id);
-    }
-
-       
-    public void EffectBideAICapabilityUCMutSetAdd(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasBideAICapabilityUCMutSet(setId);
-      CheckHasBideAICapabilityUC(elementId);
-
-      var effect = new BideAICapabilityUCMutSetAddEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsBideAICapabilityUCMutSet[setId];
-      Asserts.Assert(!oldIncarnationAndVersion.incarnation.set.Contains(elementId));
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(elementId);
-        var newIncarnation = new BideAICapabilityUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsBideAICapabilityUCMutSet[setId] =
-            new VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      effectsBideAICapabilityUCMutSetAddEffect.Add(effect);
-    }
-    public void EffectBideAICapabilityUCMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasBideAICapabilityUCMutSet(setId);
-      CheckHasBideAICapabilityUC(elementId);
-
-      var effect = new BideAICapabilityUCMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsBideAICapabilityUCMutSet[setId];
-      Asserts.Assert(oldIncarnationAndVersion.incarnation.set.Contains(elementId));
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new BideAICapabilityUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsBideAICapabilityUCMutSet[setId] =
-            new VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      effectsBideAICapabilityUCMutSetRemoveEffect.Add(effect);
-    }
-
-       
-    public void AddBideAICapabilityUCMutSetObserver(int id, IBideAICapabilityUCMutSetEffectObserver observer) {
-      List<IBideAICapabilityUCMutSetEffectObserver> obsies;
-      if (!observersForBideAICapabilityUCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IBideAICapabilityUCMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForBideAICapabilityUCMutSet[id] = obsies;
-    }
-
-    public void RemoveBideAICapabilityUCMutSetObserver(int id, IBideAICapabilityUCMutSetEffectObserver observer) {
-      if (observersForBideAICapabilityUCMutSet.ContainsKey(id)) {
-        var list = observersForBideAICapabilityUCMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForBideAICapabilityUCMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-       
-  public void BroadcastBideAICapabilityUCMutSetEffects(
-      SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>> observers) {
-    foreach (var effect in effectsBideAICapabilityUCMutSetDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IBideAICapabilityUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnBideAICapabilityUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IBideAICapabilityUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnBideAICapabilityUCMutSetEffect(effect);
-        }
-        observersForBideAICapabilityUCMutSet.Remove(effect.id);
-      }
-    }
-    effectsBideAICapabilityUCMutSetDeleteEffect.Clear();
-
-    foreach (var effect in effectsBideAICapabilityUCMutSetAddEffect) {
-      if (observers.TryGetValue(0, out List<IBideAICapabilityUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnBideAICapabilityUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IBideAICapabilityUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnBideAICapabilityUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsBideAICapabilityUCMutSetAddEffect.Clear();
-
-    foreach (var effect in effectsBideAICapabilityUCMutSetRemoveEffect) {
-      if (observers.TryGetValue(0, out List<IBideAICapabilityUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnBideAICapabilityUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IBideAICapabilityUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnBideAICapabilityUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsBideAICapabilityUCMutSetRemoveEffect.Clear();
-
-    foreach (var effect in effectsBideAICapabilityUCMutSetCreateEffect) {
-      if (observers.TryGetValue(0, out List<IBideAICapabilityUCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnBideAICapabilityUCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IBideAICapabilityUCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnBideAICapabilityUCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsBideAICapabilityUCMutSetCreateEffect.Clear();
 
   }
 
@@ -18125,72 +16385,72 @@ public class Root {
 
   }
 
-    public int GetBidingOperationUCMutSetHash(int id, int version, BidingOperationUCMutSetIncarnation incarnation) {
+    public int GetBideAICapabilityUCMutSetHash(int id, int version, BideAICapabilityUCMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.set) {
         result += id * version * element.GetDeterministicHashCode();
       }
       return result;
     }
-    public BidingOperationUCMutSetIncarnation GetBidingOperationUCMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsBidingOperationUCMutSet[id].incarnation;
+    public BideAICapabilityUCMutSetIncarnation GetBideAICapabilityUCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsBideAICapabilityUCMutSet[id].incarnation;
     }
-    public BidingOperationUCMutSet GetBidingOperationUCMutSet(int id) {
-      return new BidingOperationUCMutSet(this, id);
+    public BideAICapabilityUCMutSet GetBideAICapabilityUCMutSet(int id) {
+      return new BideAICapabilityUCMutSet(this, id);
     }
-    public List<BidingOperationUCMutSet> AllBidingOperationUCMutSet() {
-      List<BidingOperationUCMutSet> result = new List<BidingOperationUCMutSet>(rootIncarnation.incarnationsBidingOperationUCMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsBidingOperationUCMutSet.Keys) {
-        result.Add(new BidingOperationUCMutSet(this, id));
+    public List<BideAICapabilityUCMutSet> AllBideAICapabilityUCMutSet() {
+      List<BideAICapabilityUCMutSet> result = new List<BideAICapabilityUCMutSet>(rootIncarnation.incarnationsBideAICapabilityUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsBideAICapabilityUCMutSet.Keys) {
+        result.Add(new BideAICapabilityUCMutSet(this, id));
       }
       return result;
     }
-    public bool BidingOperationUCMutSetExists(int id) {
-      return rootIncarnation.incarnationsBidingOperationUCMutSet.ContainsKey(id);
+    public bool BideAICapabilityUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(id);
     }
-    public void CheckHasBidingOperationUCMutSet(BidingOperationUCMutSet thing) {
+    public void CheckHasBideAICapabilityUCMutSet(BideAICapabilityUCMutSet thing) {
       CheckRootsEqual(this, thing.root);
-      CheckHasBidingOperationUCMutSet(thing.id);
+      CheckHasBideAICapabilityUCMutSet(thing.id);
     }
-    public void CheckHasBidingOperationUCMutSet(int id) {
-      if (!rootIncarnation.incarnationsBidingOperationUCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid BidingOperationUCMutSet}: " + id);
+    public void CheckHasBideAICapabilityUCMutSet(int id) {
+      if (!rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid BideAICapabilityUCMutSet}: " + id);
       }
     }
-    public BidingOperationUCMutSet EffectBidingOperationUCMutSetCreate() {
+    public BideAICapabilityUCMutSet EffectBideAICapabilityUCMutSetCreate() {
       CheckUnlocked();
       var id = NewId();
-      var incarnation = new BidingOperationUCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateBidingOperationUCMutSet(id, rootIncarnation.version, incarnation);
-      return new BidingOperationUCMutSet(this, id);
+      var incarnation = new BideAICapabilityUCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateBideAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
+      return new BideAICapabilityUCMutSet(this, id);
     }
-    public void EffectInternalCreateBidingOperationUCMutSet(int id, int incarnationVersion, BidingOperationUCMutSetIncarnation incarnation) {
-      var effect = new BidingOperationUCMutSetCreateEffect(id);
-      rootIncarnation.incarnationsBidingOperationUCMutSet
+    public void EffectInternalCreateBideAICapabilityUCMutSet(int id, int incarnationVersion, BideAICapabilityUCMutSetIncarnation incarnation) {
+      var effect = new BideAICapabilityUCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsBideAICapabilityUCMutSet
           .Add(
               id,
-              new VersionAndIncarnation<BidingOperationUCMutSetIncarnation>(
+              new VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>(
                   incarnationVersion,
                   incarnation));
-      effectsBidingOperationUCMutSetCreateEffect.Add(effect);
+      effectsBideAICapabilityUCMutSetCreateEffect.Add(effect);
     }
-    public void EffectBidingOperationUCMutSetDelete(int id) {
+    public void EffectBideAICapabilityUCMutSetDelete(int id) {
       CheckUnlocked();
-      var effect = new BidingOperationUCMutSetDeleteEffect(id);
-      effectsBidingOperationUCMutSetDeleteEffect.Add(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsBidingOperationUCMutSet[id];
-      rootIncarnation.incarnationsBidingOperationUCMutSet.Remove(id);
+      var effect = new BideAICapabilityUCMutSetDeleteEffect(id);
+      effectsBideAICapabilityUCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsBideAICapabilityUCMutSet[id];
+      rootIncarnation.incarnationsBideAICapabilityUCMutSet.Remove(id);
     }
 
        
-    public void EffectBidingOperationUCMutSetAdd(int setId, int elementId) {
+    public void EffectBideAICapabilityUCMutSetAdd(int setId, int elementId) {
       CheckUnlocked();
-      CheckHasBidingOperationUCMutSet(setId);
-      CheckHasBidingOperationUC(elementId);
+      CheckHasBideAICapabilityUCMutSet(setId);
+      CheckHasBideAICapabilityUC(elementId);
 
-      var effect = new BidingOperationUCMutSetAddEffect(setId, elementId);
+      var effect = new BideAICapabilityUCMutSetAddEffect(setId, elementId);
 
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsBidingOperationUCMutSet[setId];
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsBideAICapabilityUCMutSet[setId];
       Asserts.Assert(!oldIncarnationAndVersion.incarnation.set.Contains(elementId));
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
         oldIncarnationAndVersion.incarnation.set.Add(elementId);
@@ -18198,22 +16458,22 @@ public class Root {
         var oldMap = oldIncarnationAndVersion.incarnation.set;
         var newMap = new SortedSet<int>(oldMap);
         newMap.Add(elementId);
-        var newIncarnation = new BidingOperationUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsBidingOperationUCMutSet[setId] =
-            new VersionAndIncarnation<BidingOperationUCMutSetIncarnation>(
+        var newIncarnation = new BideAICapabilityUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsBideAICapabilityUCMutSet[setId] =
+            new VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>(
                 rootIncarnation.version,
                 newIncarnation);
       }
-      effectsBidingOperationUCMutSetAddEffect.Add(effect);
+      effectsBideAICapabilityUCMutSetAddEffect.Add(effect);
     }
-    public void EffectBidingOperationUCMutSetRemove(int setId, int elementId) {
+    public void EffectBideAICapabilityUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
-      CheckHasBidingOperationUCMutSet(setId);
-      CheckHasBidingOperationUC(elementId);
+      CheckHasBideAICapabilityUCMutSet(setId);
+      CheckHasBideAICapabilityUC(elementId);
 
-      var effect = new BidingOperationUCMutSetRemoveEffect(setId, elementId);
+      var effect = new BideAICapabilityUCMutSetRemoveEffect(setId, elementId);
 
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsBidingOperationUCMutSet[setId];
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsBideAICapabilityUCMutSet[setId];
       Asserts.Assert(oldIncarnationAndVersion.incarnation.set.Contains(elementId));
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
         oldIncarnationAndVersion.incarnation.set.Remove(elementId);
@@ -18221,94 +16481,94 @@ public class Root {
         var oldMap = oldIncarnationAndVersion.incarnation.set;
         var newMap = new SortedSet<int>(oldMap);
         newMap.Remove(elementId);
-        var newIncarnation = new BidingOperationUCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsBidingOperationUCMutSet[setId] =
-            new VersionAndIncarnation<BidingOperationUCMutSetIncarnation>(
+        var newIncarnation = new BideAICapabilityUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsBideAICapabilityUCMutSet[setId] =
+            new VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>(
                 rootIncarnation.version, newIncarnation);
       }
-      effectsBidingOperationUCMutSetRemoveEffect.Add(effect);
+      effectsBideAICapabilityUCMutSetRemoveEffect.Add(effect);
     }
 
        
-    public void AddBidingOperationUCMutSetObserver(int id, IBidingOperationUCMutSetEffectObserver observer) {
-      List<IBidingOperationUCMutSetEffectObserver> obsies;
-      if (!observersForBidingOperationUCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IBidingOperationUCMutSetEffectObserver>();
+    public void AddBideAICapabilityUCMutSetObserver(int id, IBideAICapabilityUCMutSetEffectObserver observer) {
+      List<IBideAICapabilityUCMutSetEffectObserver> obsies;
+      if (!observersForBideAICapabilityUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IBideAICapabilityUCMutSetEffectObserver>();
       }
       obsies.Add(observer);
-      observersForBidingOperationUCMutSet[id] = obsies;
+      observersForBideAICapabilityUCMutSet[id] = obsies;
     }
 
-    public void RemoveBidingOperationUCMutSetObserver(int id, IBidingOperationUCMutSetEffectObserver observer) {
-      if (observersForBidingOperationUCMutSet.ContainsKey(id)) {
-        var list = observersForBidingOperationUCMutSet[id];
+    public void RemoveBideAICapabilityUCMutSetObserver(int id, IBideAICapabilityUCMutSetEffectObserver observer) {
+      if (observersForBideAICapabilityUCMutSet.ContainsKey(id)) {
+        var list = observersForBideAICapabilityUCMutSet[id];
         list.Remove(observer);
         if (list.Count == 0) {
-          observersForBidingOperationUCMutSet.Remove(id);
+          observersForBideAICapabilityUCMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");
       }
     }
        
-  public void BroadcastBidingOperationUCMutSetEffects(
-      SortedDictionary<int, List<IBidingOperationUCMutSetEffectObserver>> observers) {
-    foreach (var effect in effectsBidingOperationUCMutSetDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IBidingOperationUCMutSetEffectObserver> globalObservers)) {
+  public void BroadcastBideAICapabilityUCMutSetEffects(
+      SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsBideAICapabilityUCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IBideAICapabilityUCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnBidingOperationUCMutSetEffect(effect);
+          observer.OnBideAICapabilityUCMutSetEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IBidingOperationUCMutSetEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<IBideAICapabilityUCMutSetEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnBidingOperationUCMutSetEffect(effect);
+          observer.OnBideAICapabilityUCMutSetEffect(effect);
         }
-        observersForBidingOperationUCMutSet.Remove(effect.id);
+        observersForBideAICapabilityUCMutSet.Remove(effect.id);
       }
     }
-    effectsBidingOperationUCMutSetDeleteEffect.Clear();
+    effectsBideAICapabilityUCMutSetDeleteEffect.Clear();
 
-    foreach (var effect in effectsBidingOperationUCMutSetAddEffect) {
-      if (observers.TryGetValue(0, out List<IBidingOperationUCMutSetEffectObserver> globalObservers)) {
+    foreach (var effect in effectsBideAICapabilityUCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IBideAICapabilityUCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnBidingOperationUCMutSetEffect(effect);
+          observer.OnBideAICapabilityUCMutSetEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IBidingOperationUCMutSetEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<IBideAICapabilityUCMutSetEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnBidingOperationUCMutSetEffect(effect);
+          observer.OnBideAICapabilityUCMutSetEffect(effect);
         }
       }
     }
-    effectsBidingOperationUCMutSetAddEffect.Clear();
+    effectsBideAICapabilityUCMutSetAddEffect.Clear();
 
-    foreach (var effect in effectsBidingOperationUCMutSetRemoveEffect) {
-      if (observers.TryGetValue(0, out List<IBidingOperationUCMutSetEffectObserver> globalObservers)) {
+    foreach (var effect in effectsBideAICapabilityUCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IBideAICapabilityUCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnBidingOperationUCMutSetEffect(effect);
+          observer.OnBideAICapabilityUCMutSetEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IBidingOperationUCMutSetEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<IBideAICapabilityUCMutSetEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnBidingOperationUCMutSetEffect(effect);
+          observer.OnBideAICapabilityUCMutSetEffect(effect);
         }
       }
     }
-    effectsBidingOperationUCMutSetRemoveEffect.Clear();
+    effectsBideAICapabilityUCMutSetRemoveEffect.Clear();
 
-    foreach (var effect in effectsBidingOperationUCMutSetCreateEffect) {
-      if (observers.TryGetValue(0, out List<IBidingOperationUCMutSetEffectObserver> globalObservers)) {
+    foreach (var effect in effectsBideAICapabilityUCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IBideAICapabilityUCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnBidingOperationUCMutSetEffect(effect);
+          observer.OnBideAICapabilityUCMutSetEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IBidingOperationUCMutSetEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<IBideAICapabilityUCMutSetEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnBidingOperationUCMutSetEffect(effect);
+          observer.OnBideAICapabilityUCMutSetEffect(effect);
         }
       }
     }
-    effectsBidingOperationUCMutSetCreateEffect.Clear();
+    effectsBideAICapabilityUCMutSetCreateEffect.Clear();
 
   }
 

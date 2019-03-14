@@ -10,17 +10,16 @@ namespace Atharia.Model {
     }
 
     public static IImpulse ProduceImpulse(
-        this BideAICapabilityUC obj,
+        this BideAICapabilityUC self,
         Game game,
         Superstate superstate,
         Unit unit) {
-      var bidingOperation = unit.components.GetOnlyBidingOperationUCOrNull();
-      if (!bidingOperation.Exists()) {
+      if (self.charge == 0) {
         var nearestEnemy =
             superstate.levelSuperstate.FindNearestLiveUnit(
                 game, unit.location, unit, !unit.good);
         if (!nearestEnemy.Exists()) {
-          return obj.root.EffectNoImpulseCreate().AsIImpulse();
+          return self.root.EffectNoImpulseCreate().AsIImpulse();
         }
 
         var isNextToPlayer =
@@ -29,18 +28,50 @@ namespace Atharia.Model {
                 unit.location,
                 game.level.ConsiderCornersAdjacent());
         if (!isNextToPlayer) {
-          return obj.root.EffectNoImpulseCreate().AsIImpulse();
+          return self.root.EffectNoImpulseCreate().AsIImpulse();
         }
 
         int need = game.rand.Next() % 2 == 0 ? 800 : 400;
-        return obj.root.EffectStartBidingImpulseCreate(need).AsIImpulse();
+        return self.root.EffectStartBidingImpulseCreate(need).AsIImpulse();
+      } else if (self.charge < 3) {
+        return self.root.EffectContinueBidingImpulseCreate(800).AsIImpulse();
       } else {
-        if (bidingOperation.charge < 3) {
-          return obj.root.EffectContinueBidingImpulseCreate(800).AsIImpulse();
-        } else {
-          return obj.root.EffectUnleashBideImpulseCreate(800).AsIImpulse();
-        }
+        return self.root.EffectUnleashBideImpulseCreate(800).AsIImpulse();
       }
+    }
+
+    public static Atharia.Model.Void BeforeImpulse(
+        BideAICapabilityUC self,
+        Game game,
+        Superstate superstate,
+        Unit unit,
+        IAICapabilityUC originatingCapability,
+        IImpulse impulse) {
+      if (!originatingCapability.NullableIs(self.AsIAICapabilityUC()) &&
+          self.charge > 0) {
+        // They're doing something other than unleashing the bide, cancel this operation.
+        self.charge = 0;
+      }
+      return new Atharia.Model.Void();
+    }
+
+    public static Atharia.Model.Void AfterImpulse(
+        BideAICapabilityUC self,
+        Game game,
+        Superstate superstate,
+        Unit unit,
+        IAICapabilityUC originatingCapability,
+        IImpulse impulse) {
+      return new Atharia.Model.Void();
+    }
+
+    public static int AffectIncomingDamage(
+        this BideAICapabilityUC self,
+        int incomingDamage) {
+      if (self.charge > 0) {
+        incomingDamage = incomingDamage * 3 / 2;
+      }
+      return incomingDamage;
     }
   }
 }

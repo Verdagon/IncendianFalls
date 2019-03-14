@@ -19,6 +19,10 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit actingUnit) {
+      var capability = actingUnit.components.GetOnlyBideAICapabilityUCOrNull();
+      Asserts.Assert(capability.Exists());
+      capability.charge = 0;
+
       List<Unit> victims = new List<Unit>();
       foreach (var otherUnit in game.level.units) {
         if (otherUnit.Is(actingUnit)) {
@@ -35,8 +39,6 @@ namespace Atharia.Model {
         }
       }
       Actions.UnleashBide(game, superstate, actingUnit, victims);
-
-      actingUnit.ClearOperation();
 
       return true;
     }

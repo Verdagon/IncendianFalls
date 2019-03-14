@@ -37,8 +37,8 @@ namespace Atharia.Model {
 
       var components = IUnitComponentMutBunch.New(context.root);
       components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
+      components.Add(context.root.EffectBideAICapabilityUCCreate(0).AsIUnitComponent());
       Unit enemy =
           context.root.EffectUnitCreate(
               context.root.EffectIUnitEventMutListCreate(),
@@ -48,11 +48,11 @@ namespace Atharia.Model {
               "Ravashrike",
               600, 600,
               100, 100,
-              500,
+              250,
               game.time + 10,
               components,
               false,
-              27);
+              14);
       level.EnterUnit(game, levelSuperstate, enemy, Level.Null, 0);
     }
 

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmorMutSetEffectVisitor, IInertiaRingMutSetEffectObserver, IInertiaRingMutSetEffectVisitor, IGlaiveMutSetEffectObserver, IGlaiveMutSetEffectVisitor, IManaPotionMutSetEffectObserver, IManaPotionMutSetEffectVisitor, IHealthPotionMutSetEffectObserver, IHealthPotionMutSetEffectVisitor, ITimeScriptDirectiveUCMutSetEffectObserver, ITimeScriptDirectiveUCMutSetEffectVisitor, IKillDirectiveUCMutSetEffectObserver, IKillDirectiveUCMutSetEffectVisitor, IMoveDirectiveUCMutSetEffectObserver, IMoveDirectiveUCMutSetEffectVisitor, IWanderAICapabilityUCMutSetEffectObserver, IWanderAICapabilityUCMutSetEffectVisitor, IBideAICapabilityUCMutSetEffectObserver, IBideAICapabilityUCMutSetEffectVisitor, ITimeCloneAICapabilityUCMutSetEffectObserver, ITimeCloneAICapabilityUCMutSetEffectVisitor, IAttackAICapabilityUCMutSetEffectObserver, IAttackAICapabilityUCMutSetEffectVisitor, ICounteringUCMutSetEffectObserver, ICounteringUCMutSetEffectVisitor, IShieldingUCMutSetEffectObserver, IShieldingUCMutSetEffectVisitor, IBidingOperationUCMutSetEffectObserver, IBidingOperationUCMutSetEffectVisitor {
+public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmorMutSetEffectVisitor, IInertiaRingMutSetEffectObserver, IInertiaRingMutSetEffectVisitor, IGlaiveMutSetEffectObserver, IGlaiveMutSetEffectVisitor, IManaPotionMutSetEffectObserver, IManaPotionMutSetEffectVisitor, IHealthPotionMutSetEffectObserver, IHealthPotionMutSetEffectVisitor, IWanderAICapabilityUCMutSetEffectObserver, IWanderAICapabilityUCMutSetEffectVisitor, ITimeCloneAICapabilityUCMutSetEffectObserver, ITimeCloneAICapabilityUCMutSetEffectVisitor, IAttackAICapabilityUCMutSetEffectObserver, IAttackAICapabilityUCMutSetEffectVisitor, ICounteringUCMutSetEffectObserver, ICounteringUCMutSetEffectVisitor, IShieldingUCMutSetEffectObserver, IShieldingUCMutSetEffectVisitor, IBideAICapabilityUCMutSetEffectObserver, IBideAICapabilityUCMutSetEffectVisitor {
   IUnitComponentMutBunch bunch;
   private List<IIUnitComponentMutBunchObserver> observers;
 
@@ -16,16 +16,12 @@ public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmo
     bunch.membersGlaiveMutSet.AddObserver(this);
     bunch.membersManaPotionMutSet.AddObserver(this);
     bunch.membersHealthPotionMutSet.AddObserver(this);
-    bunch.membersTimeScriptDirectiveUCMutSet.AddObserver(this);
-    bunch.membersKillDirectiveUCMutSet.AddObserver(this);
-    bunch.membersMoveDirectiveUCMutSet.AddObserver(this);
     bunch.membersWanderAICapabilityUCMutSet.AddObserver(this);
-    bunch.membersBideAICapabilityUCMutSet.AddObserver(this);
     bunch.membersTimeCloneAICapabilityUCMutSet.AddObserver(this);
     bunch.membersAttackAICapabilityUCMutSet.AddObserver(this);
     bunch.membersCounteringUCMutSet.AddObserver(this);
     bunch.membersShieldingUCMutSet.AddObserver(this);
-    bunch.membersBidingOperationUCMutSet.AddObserver(this);
+    bunch.membersBideAICapabilityUCMutSet.AddObserver(this);
 
   }
   public void Stop() {
@@ -34,16 +30,12 @@ public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmo
     bunch.membersGlaiveMutSet.RemoveObserver(this);
     bunch.membersManaPotionMutSet.RemoveObserver(this);
     bunch.membersHealthPotionMutSet.RemoveObserver(this);
-    bunch.membersTimeScriptDirectiveUCMutSet.RemoveObserver(this);
-    bunch.membersKillDirectiveUCMutSet.RemoveObserver(this);
-    bunch.membersMoveDirectiveUCMutSet.RemoveObserver(this);
     bunch.membersWanderAICapabilityUCMutSet.RemoveObserver(this);
-    bunch.membersBideAICapabilityUCMutSet.RemoveObserver(this);
     bunch.membersTimeCloneAICapabilityUCMutSet.RemoveObserver(this);
     bunch.membersAttackAICapabilityUCMutSet.RemoveObserver(this);
     bunch.membersCounteringUCMutSet.RemoveObserver(this);
     bunch.membersShieldingUCMutSet.RemoveObserver(this);
-    bunch.membersBidingOperationUCMutSet.RemoveObserver(this);
+    bunch.membersBideAICapabilityUCMutSet.RemoveObserver(this);
 
   }
   public void AddObserver(IIUnitComponentMutBunchObserver observer) {
@@ -117,39 +109,6 @@ public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmo
   }
   public void visitHealthPotionMutSetCreateEffect(HealthPotionMutSetCreateEffect effect) { }
   public void visitHealthPotionMutSetDeleteEffect(HealthPotionMutSetDeleteEffect effect) { }
-  public void OnTimeScriptDirectiveUCMutSetEffect(ITimeScriptDirectiveUCMutSetEffect effect) {
-    effect.visit(this);
-  }
-  public void visitTimeScriptDirectiveUCMutSetAddEffect(TimeScriptDirectiveUCMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
-  }
-  public void visitTimeScriptDirectiveUCMutSetRemoveEffect(TimeScriptDirectiveUCMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
-  }
-  public void visitTimeScriptDirectiveUCMutSetCreateEffect(TimeScriptDirectiveUCMutSetCreateEffect effect) { }
-  public void visitTimeScriptDirectiveUCMutSetDeleteEffect(TimeScriptDirectiveUCMutSetDeleteEffect effect) { }
-  public void OnKillDirectiveUCMutSetEffect(IKillDirectiveUCMutSetEffect effect) {
-    effect.visit(this);
-  }
-  public void visitKillDirectiveUCMutSetAddEffect(KillDirectiveUCMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
-  }
-  public void visitKillDirectiveUCMutSetRemoveEffect(KillDirectiveUCMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
-  }
-  public void visitKillDirectiveUCMutSetCreateEffect(KillDirectiveUCMutSetCreateEffect effect) { }
-  public void visitKillDirectiveUCMutSetDeleteEffect(KillDirectiveUCMutSetDeleteEffect effect) { }
-  public void OnMoveDirectiveUCMutSetEffect(IMoveDirectiveUCMutSetEffect effect) {
-    effect.visit(this);
-  }
-  public void visitMoveDirectiveUCMutSetAddEffect(MoveDirectiveUCMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
-  }
-  public void visitMoveDirectiveUCMutSetRemoveEffect(MoveDirectiveUCMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
-  }
-  public void visitMoveDirectiveUCMutSetCreateEffect(MoveDirectiveUCMutSetCreateEffect effect) { }
-  public void visitMoveDirectiveUCMutSetDeleteEffect(MoveDirectiveUCMutSetDeleteEffect effect) { }
   public void OnWanderAICapabilityUCMutSetEffect(IWanderAICapabilityUCMutSetEffect effect) {
     effect.visit(this);
   }
@@ -161,17 +120,6 @@ public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmo
   }
   public void visitWanderAICapabilityUCMutSetCreateEffect(WanderAICapabilityUCMutSetCreateEffect effect) { }
   public void visitWanderAICapabilityUCMutSetDeleteEffect(WanderAICapabilityUCMutSetDeleteEffect effect) { }
-  public void OnBideAICapabilityUCMutSetEffect(IBideAICapabilityUCMutSetEffect effect) {
-    effect.visit(this);
-  }
-  public void visitBideAICapabilityUCMutSetAddEffect(BideAICapabilityUCMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
-  }
-  public void visitBideAICapabilityUCMutSetRemoveEffect(BideAICapabilityUCMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
-  }
-  public void visitBideAICapabilityUCMutSetCreateEffect(BideAICapabilityUCMutSetCreateEffect effect) { }
-  public void visitBideAICapabilityUCMutSetDeleteEffect(BideAICapabilityUCMutSetDeleteEffect effect) { }
   public void OnTimeCloneAICapabilityUCMutSetEffect(ITimeCloneAICapabilityUCMutSetEffect effect) {
     effect.visit(this);
   }
@@ -216,17 +164,17 @@ public class IUnitComponentMutBunchBroadcaster:IArmorMutSetEffectObserver, IArmo
   }
   public void visitShieldingUCMutSetCreateEffect(ShieldingUCMutSetCreateEffect effect) { }
   public void visitShieldingUCMutSetDeleteEffect(ShieldingUCMutSetDeleteEffect effect) { }
-  public void OnBidingOperationUCMutSetEffect(IBidingOperationUCMutSetEffect effect) {
+  public void OnBideAICapabilityUCMutSetEffect(IBideAICapabilityUCMutSetEffect effect) {
     effect.visit(this);
   }
-  public void visitBidingOperationUCMutSetAddEffect(BidingOperationUCMutSetAddEffect effect) {
+  public void visitBideAICapabilityUCMutSetAddEffect(BideAICapabilityUCMutSetAddEffect effect) {
     BroadcastAdd(effect.elementId);
   }
-  public void visitBidingOperationUCMutSetRemoveEffect(BidingOperationUCMutSetRemoveEffect effect) {
+  public void visitBideAICapabilityUCMutSetRemoveEffect(BideAICapabilityUCMutSetRemoveEffect effect) {
     BroadcastRemove(effect.elementId);
   }
-  public void visitBidingOperationUCMutSetCreateEffect(BidingOperationUCMutSetCreateEffect effect) { }
-  public void visitBidingOperationUCMutSetDeleteEffect(BidingOperationUCMutSetDeleteEffect effect) { }
+  public void visitBideAICapabilityUCMutSetCreateEffect(BideAICapabilityUCMutSetCreateEffect effect) { }
+  public void visitBideAICapabilityUCMutSetDeleteEffect(BideAICapabilityUCMutSetDeleteEffect effect) { }
 
 }
        

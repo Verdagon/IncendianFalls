@@ -18,11 +18,10 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
-      if (unit.GetOperationOrNull() is BidingOperationUCAsIOperationUC bidingI) {
-        bidingI.obj.charge = bidingI.obj.charge + 1;
-      } else {
-        Asserts.Assert(false);
-      }
+
+      var capability = unit.components.GetOnlyBideAICapabilityUCOrNull();
+      Asserts.Assert(capability.Exists());
+      capability.charge = capability.charge + 1;
       unit.nextActionTime = unit.nextActionTime + unit.CalculateInertia();
       return false;
     }

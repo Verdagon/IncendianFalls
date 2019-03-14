@@ -11,7 +11,8 @@ namespace IncendianFalls {
         List<Unit> victims) {
       Eventer.broadcastUnitUnleashBideEvent(game.root, game, attacker, victims);
       foreach (var victim in victims) {
-        AttackInner(game, superstate, attacker, victim, attacker.strength * 3);
+        AttackInner(
+            game, superstate, attacker, victim, attacker.strength * 3, true);
       }
       attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateInertia() * 3 / 2;
     }
@@ -24,7 +25,13 @@ namespace IncendianFalls {
         float multiplier,
         bool takeTime) {
       Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
-      AttackInner(game, superstate, attacker, victim, (int)Math.Floor(attacker.strength * multiplier));
+      AttackInner(
+          game,
+          superstate,
+          attacker,
+          victim,
+          (int)Math.Floor(attacker.strength * multiplier),
+          true);
       if (takeTime) {
         attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateInertia();
       }
@@ -35,9 +42,10 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit attacker,
         Unit victim,
-        int damage) {
+        int damage,
+        bool physical) {
       foreach (var item in attacker.components.GetAllIOffenseItem()) {
-        damage = item.AffectOutgoingDamage(damage);
+        damage = item.AffectOutgoingDamage(physical, damage);
       }
       foreach (var detail in victim.components.GetAllIDefenseUC()) {
         damage = detail.AffectIncomingDamage(damage);
@@ -98,6 +106,12 @@ namespace IncendianFalls {
 
         // Move the player from this level to the next one.
         if (!staircase.destinationLevel.Exists()) {
+          // Unless this is going to -1, which means it's the first level staircase,
+          // so do nothing.
+          if (staircase.destinationLevelPortalIndex == -1) {
+            return "I can't go back, I must go forward!";
+          }
+
           game.level.ExitUnit(game, superstate.levelSuperstate, unit);
 
           MakeLevel.MakeNextLevel(
@@ -223,7 +237,8 @@ namespace IncendianFalls {
         Unit attacker,
         Unit victim) {
       Eventer.broadcastUnitFireEvent(game.root, game, attacker, victim);
-      AttackInner(game, superstate, attacker, victim, FIRE_DAMAGE);
+      AttackInner(
+          game, superstate, attacker, victim, FIRE_DAMAGE, false);
       attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateInertia();
 
       attacker.mp = attacker.mp - FIRE_COST;

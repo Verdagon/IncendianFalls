@@ -8,8 +8,7 @@ namespace Atharia.Model {
     kAfterUnitAction = 2,
     kBeforeEnemyAction = 3,
     kBeforePlayerInput = 4,
-    kPostActingDetail = 5,
-    kBeforePlayerResume = 9,
+    kPostActingDetail = 5
   }
 
   public static class GameExtensions {
@@ -27,11 +26,7 @@ namespace Atharia.Model {
       }
       if (!executionState.actingUnitDidAction) {
         if (game.player.Exists() && executionState.actingUnit.Is(game.player)) {
-          if (game.player.GetDirectiveOrNull().Exists()) {
-            return WorldStateType.kBeforePlayerResume;
-          } else {
-            return WorldStateType.kBeforePlayerInput;
-          }
+          return WorldStateType.kBeforePlayerInput;
         } else {
           return WorldStateType.kBeforeEnemyAction;
         }

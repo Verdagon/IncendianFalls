@@ -7,6 +7,7 @@ namespace Atharia.Model {
 public interface IAttackAICapabilityUCEffectVisitor {
   void visitAttackAICapabilityUCCreateEffect(AttackAICapabilityUCCreateEffect effect);
   void visitAttackAICapabilityUCDeleteEffect(AttackAICapabilityUCDeleteEffect effect);
+  void visitAttackAICapabilityUCSetKillDirectiveEffect(AttackAICapabilityUCSetKillDirectiveEffect effect);
 }
 
 }

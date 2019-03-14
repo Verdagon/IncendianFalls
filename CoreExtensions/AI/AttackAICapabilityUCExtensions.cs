@@ -7,7 +7,11 @@ namespace Atharia.Model {
   public static class AttackAICapabilityUCExtensions {
     public static Atharia.Model.Void Destruct(
         this AttackAICapabilityUC obj) {
+      var killDirective = obj.killDirective;
       obj.Delete();
+      if (killDirective.Exists()) {
+        killDirective.Destruct();
+      }
       return new Atharia.Model.Void();
     }
 
@@ -49,10 +53,11 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
-      var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
+
+      var directive = obj.killDirective;
       if (directive.Exists() && (!directive.targetUnit.Exists() || !directive.targetUnit.alive)) {
         // Target died, and/or was deleted. Stop targeting.
-        unit.ClearDirective();
+        obj.killDirective.Destruct();
       }
 
       // Remember, if we get here, we might still have an existing valid directive.
@@ -90,14 +95,15 @@ namespace Atharia.Model {
         return false;
       }
 
+      if (obj.killDirective.Exists()) {
+        obj.killDirective.Destruct();
+      }
+
       // Can see the enemy. Add directive to pursue.
-      directive =
-          game.root.EffectKillDirectiveUCCreate(
+      obj.killDirective =
+          game.root.EffectKillDirectiveCreate(
               nearestEnemy,
               game.root.EffectLocationMutListCreate(pathToNearestEnemy));
-      Asserts.Assert(directive.Exists());
-      unit.ReplaceDirective(directive.AsIDirectiveUC());
-      Asserts.Assert(unit.GetDirectiveOrNull().Exists());
       return false;
     }
 
@@ -108,7 +114,7 @@ namespace Atharia.Model {
         Unit unit) {
 
       // We only attack if we have a directive.
-      var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
+      var directive = obj.killDirective;
       if (!directive.Exists()) {
         // No directive, do nothing.
         return obj.root.EffectNoImpulseCreate().AsIImpulse();
@@ -132,5 +138,37 @@ namespace Atharia.Model {
         }
       }
     }
+
+    public static Atharia.Model.Void BeforeImpulse(
+        AttackAICapabilityUC self,
+        Game game,
+        Superstate superstate,
+        Unit unit,
+        IAICapabilityUC originatingCapability,
+        IImpulse impulse) {
+      if (!originatingCapability.NullableIs(self.AsIAICapabilityUC()) &&
+          self.killDirective.Exists()) {
+        self.killDirective.Destruct();
+      }
+      return new Atharia.Model.Void();
+    }
+
+    public static Atharia.Model.Void AfterImpulse(
+        AttackAICapabilityUC self,
+        Game game,
+        Superstate superstate,
+        Unit unit,
+        IAICapabilityUC originatingCapability,
+        IImpulse impulse) {
+      if (self.killDirective.Exists()) {
+        if (!self.killDirective.targetUnit.Exists()) {
+          self.killDirective.Destruct();
+          self.killDirective = KillDirective.Null;
+        }
+      }
+      return new Atharia.Model.Void();
+    }
   }
 }
+
+

@@ -50,7 +50,7 @@ namespace IncendianFalls {
               game,
               superstate,
               levelAbove,
-              1,
+              (depth == 0 ? -1 : 1),
               Level.Null,
               0,
               game.levels.Count,
@@ -68,6 +68,7 @@ namespace IncendianFalls {
               game,
               superstate,
               levelAbove,
+              (depth == 0 ? -1 : 1),
               levelIndex,
               depth);
         } else if (levelIndex < caveLevelsEnd) {

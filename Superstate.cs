@@ -32,6 +32,14 @@ namespace Atharia.Model {
       }
     }
 
+    public class NavigatingState {
+      public readonly List<Location> path;
+
+      public NavigatingState(List<Location> path) {
+        this.path = path;
+      }
+    }
+
     public Game game;
 
     // Views
@@ -41,47 +49,37 @@ namespace Atharia.Model {
 
     // 0th element is the first turn of the game.
     public List<RootIncarnation> previousTurns;
+    // The requests to get to each turn. There will be one less element in here
+    // than in previousTurns. For example, if previousTurns has 2, this will have 1.
+    public List<IRequest> requests;
     public List<int> anchorTurnIndices;
 
     // If this is non-null, we are currently timeshifting.
     public TimeShiftingState timeShiftingState;
 
+    public NavigatingState navigatingState;
+
     public Superstate(
         Game game,
         LevelSuperstate liveUnitByLocationMap,
-        List<RootIncarnation> turnsIncludingPresent,
+        List<RootIncarnation> previousTurns,
+        List<IRequest> requests,
         List<int> anchorTurnIndices,
-        TimeShiftingState timeShiftingState) {
+        TimeShiftingState timeShiftingState,
+        NavigatingState navigatingState) {
       this.game = game;
       this.levelSuperstate = liveUnitByLocationMap;
-      this.previousTurns = turnsIncludingPresent;
+      this.previousTurns = previousTurns;
+      this.requests = requests;
       this.anchorTurnIndices = anchorTurnIndices;
       this.timeShiftingState = timeShiftingState;
+      this.navigatingState = navigatingState;
     }
 
     public MultiverseStateType GetStateType() {
       var executionState = game.executionState;
       var player = game.player;
-      if (timeShiftingState == null) {
-        switch (game.GetStateType()) {
-          case WorldStateType.kAfterUnitAction:
-            return MultiverseStateType.kAfterUnitAction;
-          case WorldStateType.kBeforeEnemyAction:
-            return MultiverseStateType.kBeforeEnemyAction;
-          case WorldStateType.kBeforePlayerInput:
-            return MultiverseStateType.kBeforePlayerInput;
-          case WorldStateType.kBeforePlayerResume:
-            return MultiverseStateType.kBeforePlayerResume;
-          case WorldStateType.kBetweenUnits:
-            return MultiverseStateType.kBetweenUnits;
-          case WorldStateType.kPostActingDetail:
-            return MultiverseStateType.kPostActingDetail;
-          case WorldStateType.kPreActingDetail:
-            return MultiverseStateType.kPreActingDetail;
-          default:
-            throw new Exception("Unknown state " + game.GetStateType());
-        }
-      } else {
+      if (timeShiftingState != null) {
         if (timeShiftingState.rewinding) {
           return MultiverseStateType.kTimeshiftingBackward;
         } else {
@@ -101,6 +99,27 @@ namespace Atharia.Model {
 
             return MultiverseStateType.kTimeshiftingAfterCloneMoved;
           }
+        }
+      } else {
+        switch (game.GetStateType()) {
+          case WorldStateType.kAfterUnitAction:
+            return MultiverseStateType.kAfterUnitAction;
+          case WorldStateType.kBeforeEnemyAction:
+            return MultiverseStateType.kBeforeEnemyAction;
+          case WorldStateType.kBeforePlayerInput:
+            if (navigatingState != null) {
+              return MultiverseStateType.kBeforePlayerResume;
+            } else {
+              return MultiverseStateType.kBeforePlayerInput;
+            }
+          case WorldStateType.kBetweenUnits:
+            return MultiverseStateType.kBetweenUnits;
+          case WorldStateType.kPostActingDetail:
+            return MultiverseStateType.kPostActingDetail;
+          case WorldStateType.kPreActingDetail:
+            return MultiverseStateType.kPreActingDetail;
+          default:
+            throw new Exception("Unknown state " + game.GetStateType());
         }
       }
     }

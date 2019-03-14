@@ -61,7 +61,7 @@ public class NullIOffenseItem : IOffenseItem {
     return NullIItem.Null;
   }
 
-  public int AffectOutgoingDamage(int outgoingDamage) {
+  public int AffectOutgoingDamage(bool physical, int outgoingDamage) {
     throw new Exception("Called AffectOutgoingDamage on a null!");
   }
              

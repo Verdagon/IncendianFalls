@@ -19,7 +19,10 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit unit) {
 
-      var directive = unit.components.GetOnlyKillDirectiveUCOrNull();
+      var capability = unit.components.GetOnlyAttackAICapabilityUCOrNull();
+      Asserts.Assert(capability.Exists());
+
+      var directive = capability.killDirective;
       Asserts.Assert(directive.Exists());
 
       Actions.Step(game, superstate, unit, directive.pathToLastSeenLocation[0], false);
@@ -28,7 +31,7 @@ namespace Atharia.Model {
 
       if (directive.pathToLastSeenLocation.Count == 0) {
         // We made it and we can't find the target.
-        unit.ClearDirective();
+        capability.killDirective.Destruct();
       }
 
       return false;

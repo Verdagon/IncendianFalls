@@ -33,26 +33,7 @@ namespace IncendianFalls {
       return "";
     }
 
-    private static void RewindOneTurnAndAddToScript(Superstate superstate, Game game) {
-      var playerRequestFromOlderToNewer = game.lastPlayerRequest;
-
-      // First, get the old steps.
-      var oldDirective = game.player.GetDirectiveOrNull();
-      var previousScript = new List<IRequest>();
-      if (oldDirective is TimeScriptDirectiveUCAsIDirectiveUC followScriptI) {
-        var followScript = followScriptI.obj;
-        previousScript.AddRange(followScript.script);
-      }
-      // Now, add the thing the player did to get to the "future" incarnation.
-      var newScript = new List<IRequest>(previousScript);
-      if (playerRequestFromOlderToNewer is TimeAnchorMoveRequestAsIRequest tamrI) {
-        newScript.Insert(
-            0,
-            new MoveRequest(tamrI.obj.gameId, tamrI.obj.destination).AsIRequest());
-      } else {
-        newScript.Insert(0, playerRequestFromOlderToNewer);
-      }
-
+    private static void RewindOneTurn(Superstate superstate, Game game) {
       var olderIncarnation =
           superstate.previousTurns[superstate.previousTurns.Count - 1];
 
@@ -63,19 +44,29 @@ namespace IncendianFalls {
       // Reconstruct the views.
       superstate.levelSuperstate.Reconstruct(game.level);
 
-      // Now, replace whatever their directive was with the new script.
-      game.player.ReplaceDirective(
-          game.player.root.EffectTimeScriptDirectiveUCCreate(
-              game.player.root.EffectIRequestMutListCreate(
-                  newScript))
-          .AsIDirectiveUC());
+      // Not removing from superstate.requests, we'll do that when timeshifting is done.
     }
 
     private static void TransitionToCloneMoving(Superstate superstate, Game game) {
-      Asserts.Assert(superstate.previousTurns.Count == superstate.timeShiftingState.targetAnchorTurnIndex);
+      var targetAnchorTurnIndex = superstate.timeShiftingState.targetAnchorTurnIndex;
+      Asserts.Assert(superstate.previousTurns.Count == targetAnchorTurnIndex);
+
+      var script = new List<IRequest>();
+      for (int i = targetAnchorTurnIndex; i < superstate.requests.Count; i++) {
+        if (superstate.requests[i] is TimeAnchorMoveRequestAsIRequest tamrI) {
+          script.Add(new MoveRequest(tamrI.obj.gameId, tamrI.obj.destination).AsIRequest());
+        } else {
+          script.Add(superstate.requests[i]);
+        }
+      }
+      superstate.requests.RemoveRange(
+          targetAnchorTurnIndex,
+          superstate.requests.Count - targetAnchorTurnIndex);
+
       superstate.timeShiftingState.rewinding = false;
       game.player.components.Add(
-          game.root.EffectTimeCloneAICapabilityUCCreate()
+          game.root.EffectTimeCloneAICapabilityUCCreate(
+              game.root.EffectIRequestMutListCreate(script))
           .AsIUnitComponent());
       game.player = Unit.Null;
       Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kTimeshiftingCloneMoving);
@@ -97,8 +88,6 @@ namespace IncendianFalls {
             return "Can't time shift, no anchor to time shift back to!";
           }
 
-          var playerRequestFromOlderToNewer = game.lastPlayerRequest;
-          Asserts.Assert(playerRequestFromOlderToNewer != null);
           Asserts.Assert(superstate.timeShiftingState == null);
 
           int mostRecentAnchorTurnIndex =
@@ -131,7 +120,7 @@ namespace IncendianFalls {
                   pastPlayerLocation,
                   true);
 
-          RewindOneTurnAndAddToScript(superstate, game);
+          RewindOneTurn(superstate, game);
 
           if (superstate.previousTurns.Count == superstate.timeShiftingState.targetAnchorTurnIndex) {
             TransitionToCloneMoving(superstate, game);
@@ -145,7 +134,7 @@ namespace IncendianFalls {
           Asserts.Assert(superstate.timeShiftingState != null);
           Asserts.Assert(superstate.timeShiftingState.rewinding);
 
-          RewindOneTurnAndAddToScript(superstate, game);
+          RewindOneTurn(superstate, game);
 
           if (superstate.previousTurns.Count == superstate.timeShiftingState.targetAnchorTurnIndex) {
             TransitionToCloneMoving(superstate, game);

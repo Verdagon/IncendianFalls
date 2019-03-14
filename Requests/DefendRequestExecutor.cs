@@ -29,10 +29,9 @@ namespace IncendianFalls {
       }
 
       superstate.previousTurns.Add(context.root.Snapshot());
+      superstate.requests.Add(request.AsIRequest());
 
-      game.lastPlayerRequest = request.AsIRequest();
-
-      player.ClearDirective();
+      //player.ClearDirective();
 
       Actions.Defend(game, game.player);
 

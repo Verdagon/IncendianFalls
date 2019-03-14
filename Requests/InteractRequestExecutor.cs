@@ -28,10 +28,8 @@ namespace IncendianFalls {
       }
 
       superstate.previousTurns.Add(context.root.Snapshot());
-
-      game.lastPlayerRequest = request.AsIRequest();
-
-      player.ClearDirective();
+      superstate.requests.Add(request.AsIRequest());
+      //player.ClearDirective();
 
       string success = Actions.Interact(context, game, superstate, game.player);
 

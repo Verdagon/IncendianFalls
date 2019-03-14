@@ -24,16 +24,17 @@ namespace IncendianFalls {
         throw new Exception("Player is dead!");
       }
 
-      if (!game.player.GetDirectiveOrNull().Exists()) {
-        return "Error: Player has no directive, can't resume!";
+      if (superstate.navigatingState == null ||
+          superstate.navigatingState.path.Count == 0) {
+        return "Error: Player has no navigation, can't resume!";
       }
 
-      superstate.previousTurns.Add(context.root.Snapshot());
+      if (!Actions.CanStep(game, superstate, game.player, superstate.navigatingState.path[0])) {
+        superstate.navigatingState = null;
+        return "Path blocked!";
+      }
 
-      game.lastPlayerRequest = request.AsIRequest();
-
-      GameLoop.ContinueAtPlayerFollowDirective(game, superstate, new PauseCondition(false));
-
+      MoveRequestExecutor.Continue(context, game, superstate);
       return "";
     }
   }

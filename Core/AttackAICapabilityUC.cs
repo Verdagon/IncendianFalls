@@ -40,6 +40,9 @@ public class AttackAICapabilityUC {
       return;
     }
     foundIds.Add(id);
+    if (root.KillDirectiveExists(killDirective.id)) {
+      killDirective.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(AttackAICapabilityUC that) {
     if (!this.Exists()) {
@@ -50,5 +53,15 @@ public class AttackAICapabilityUC {
     }
     return this.root == that.root && id == that.id;
   }
-       }
+         public KillDirective killDirective {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member killDirective of null!");
+      }
+      return new KillDirective(root, incarnation.killDirective);
+    }
+                         set { root.EffectAttackAICapabilityUCSetKillDirective(id, value); }
+  }
+}
 }

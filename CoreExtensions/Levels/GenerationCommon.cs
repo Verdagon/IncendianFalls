@@ -316,7 +316,7 @@ namespace IncendianFalls {
         int fromLevelPortalIndex) {
       var components = IUnitComponentMutBunch.New(context.root);
       components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
       Unit unit =
           context.root.EffectUnitCreate(
               context.root.EffectIUnitEventMutListCreate(),
@@ -343,8 +343,8 @@ namespace IncendianFalls {
         int fromLevelPortalIndex) {
       var components = IUnitComponentMutBunch.New(context.root);
       components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
+      components.Add(context.root.EffectBideAICapabilityUCCreate(0).AsIUnitComponent());
       Unit unit =
           context.root.EffectUnitCreate(
               context.root.EffectIUnitEventMutListCreate(),
@@ -371,7 +371,7 @@ namespace IncendianFalls {
         int fromLevelPortalIndex) {
       var components = IUnitComponentMutBunch.New(context.root);
       components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
       Unit unit =
           context.root.EffectUnitCreate(
               context.root.EffectIUnitEventMutListCreate(),
@@ -398,8 +398,8 @@ namespace IncendianFalls {
         int fromLevelPortalIndex) {
       var components = IUnitComponentMutBunch.New(context.root);
       components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
+      components.Add(context.root.EffectBideAICapabilityUCCreate(0).AsIUnitComponent());
       Unit unit =
           context.root.EffectUnitCreate(
               context.root.EffectIUnitEventMutListCreate(),
@@ -426,7 +426,7 @@ namespace IncendianFalls {
         int fromLevelPortalIndex) {
       var components = IUnitComponentMutBunch.New(context.root);
       components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
       Unit unit =
           context.root.EffectUnitCreate(
               context.root.EffectIUnitEventMutListCreate(),
@@ -453,7 +453,7 @@ namespace IncendianFalls {
         int fromLevelPortalIndex) {
       var components = IUnitComponentMutBunch.New(context.root);
       components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
       Unit unit =
           context.root.EffectUnitCreate(
               context.root.EffectIUnitEventMutListCreate(),
@@ -481,8 +481,8 @@ namespace IncendianFalls {
         int fromLevelPortalIndex) {
       var components = IUnitComponentMutBunch.New(context.root);
       components.Add(context.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectAttackAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(context.root.EffectBideAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(context.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
+      components.Add(context.root.EffectBideAICapabilityUCCreate(0).AsIUnitComponent());
       Unit unit =
           context.root.EffectUnitCreate(
               context.root.EffectIUnitEventMutListCreate(),

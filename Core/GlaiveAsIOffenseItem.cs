@@ -126,8 +126,8 @@ public class GlaiveAsIOffenseItem : IOffenseItem {
          public Void Destruct() {
     return GlaiveExtensions.Destruct(obj);
   }
-  public int AffectOutgoingDamage(int outgoingDamage) {
-    return GlaiveExtensions.AffectOutgoingDamage(obj, outgoingDamage);
+  public int AffectOutgoingDamage(bool physical, int outgoingDamage) {
+    return GlaiveExtensions.AffectOutgoingDamage(obj, physical, outgoingDamage);
   }
   public IItem ClonifyAndReturnNewReal(Root newRoot) {
     return GlaiveExtensions.ClonifyAndReturnNewReal(obj, newRoot);

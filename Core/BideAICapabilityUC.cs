@@ -50,5 +50,9 @@ public class BideAICapabilityUC {
     }
     return this.root == that.root && id == that.id;
   }
-       }
+         public int charge {
+    get { return incarnation.charge; }
+    set { root.EffectBideAICapabilityUCSetCharge(id, value); }
+  }
+}
 }
