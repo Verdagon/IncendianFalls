@@ -81,9 +81,9 @@ namespace IncendianFalls {
           break;
         case "pentagon9":
           if (patternTile.shapeIndex == 0) {
-            symbolName = "i";
+            symbolName = "0";
           } else if (patternTile.shapeIndex == 1) {
-            symbolName = "h";
+            symbolName = "1";
           }
           break;
       }

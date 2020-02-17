@@ -1,0 +1,77 @@
+SetupGameRequest(1339647076, false, false)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:106: 553012556
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:114: 1780602496
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1780602496
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1020013268
+TimeShiftRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:462: -1020013268
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:465: "Can't time shift, no anchor to time shift back to!"
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:467: -1020013268
+DefendRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:334: -1020013268
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:337: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:339: -646425385
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -646425385
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -427297481
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -427297481
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -48536164
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -48536164
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1723214845
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1723214845
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1723214845
+TimeShiftRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:462: -1723214845
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:465: "Can't time shift, no anchor to time shift back to!"
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:467: -1723214845
+MoveRequest(4, Location(0, 0, 4))
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: -1723214845
+FollowDirectiveRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -1723214845
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: "Path blocked!"
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -1723214845
+MoveRequest(4, Location(-1, 0, 1))
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: -1723214845
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: -756911175
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -756911175
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -378149858
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -378149858
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1494962991
+FollowDirectiveRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 1494962991
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 1714090895
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1714090895
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 2092852212
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 2092852212
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -329002235
+FollowDirectiveRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -329002235
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: "Path blocked!"
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -329002235
+MoveRequest(4, Location(-1, 0, 1))
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: -329002235
+FollowDirectiveRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -329002235
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: "Path blocked!"
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -329002235
+MoveRequest(4, Location(-1, 0, 3))
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: -329002235

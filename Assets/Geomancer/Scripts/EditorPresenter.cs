@@ -44,20 +44,20 @@ namespace Geomancer {
 
       var entries = new Dictionary<string, List<Vivimap.IDescription>>();
       var grassEntries = new List<Vivimap.IDescription>();
-      grassEntries.Add(new Vivimap.SideColorDescriptionForIDescription(new Color(128, 128, 0)));
-      grassEntries.Add(new Vivimap.TopColorDescriptionForIDescription(new Color(0, 0, 128)));
+      grassEntries.Add(new Vivimap.SideColorDescriptionForIDescription(new Color(.5f, .5f, 0)));
+      grassEntries.Add(new Vivimap.TopColorDescriptionForIDescription(new Color(0, 0, .5f)));
       entries.Add("grass", grassEntries);
       var rocksEntries = new List<Vivimap.IDescription>();
       rocksEntries.Add(
         new Vivimap.OverlayDescriptionForIDescription(
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
-            new SymbolDescription("f", new Color(128, 128, 128), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
+            new SymbolDescription("f", new Color(.5f, .5f, .5f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
             false,
             new Color(0, 0, 0))));
       entries.Add("rocks", rocksEntries);
       var dirtEntries = new List<Vivimap.IDescription>();
-      dirtEntries.Add(new Vivimap.SideColorDescriptionForIDescription(new Color(144, 144, 0)));
+      dirtEntries.Add(new Vivimap.SideColorDescriptionForIDescription(new Color(.6f, .6f, 0)));
       entries.Add("dirt", dirtEntries);
       var vivimap = new Vivimap(entries);
 
@@ -71,7 +71,7 @@ namespace Geomancer {
         }
         {
           var tile = ss.EffectTerrainTileCreate(1, ss.EffectStrMutListCreate());
-          tile.members.Add("dirt");
+          //tile.members.Add("dirt");
           tile.members.Add("rocks");
           terrain.tiles.Add(new Location(0, 0, 1), tile);
         }
@@ -89,17 +89,23 @@ namespace Geomancer {
     }
 
     public void Update() {
-      if (Input.GetKey(KeyCode.RightArrow)) {
-        cameraController.MoveRight(Time.deltaTime);
+      if (Input.GetKey(KeyCode.Plus) || Input.GetKey(KeyCode.Equals)) {
+        cameraController.MoveIn(Time.deltaTime);
       }
-      if (Input.GetKey(KeyCode.LeftArrow)) {
-        cameraController.MoveLeft(Time.deltaTime);
+      if (Input.GetKey(KeyCode.Minus) || Input.GetKey(KeyCode.Underscore)) {
+        cameraController.MoveOut(Time.deltaTime);
       }
       if (Input.GetKey(KeyCode.UpArrow)) {
         cameraController.MoveUp(Time.deltaTime);
       }
       if (Input.GetKey(KeyCode.DownArrow)) {
         cameraController.MoveDown(Time.deltaTime);
+      }
+      if (Input.GetKey(KeyCode.RightArrow)) {
+        cameraController.MoveRight(Time.deltaTime);
+      }
+      if (Input.GetKey(KeyCode.LeftArrow)) {
+        cameraController.MoveLeft(Time.deltaTime);
       }
     }
   }

@@ -93,12 +93,12 @@ namespace Geomancer {
                 RenderPriority.TILE,
                 new SymbolDescription(
                     ((char)('0' + patternTile.shapeIndex)).ToString(),
-                    new Color(255, 0, 255),
+                    new Color(1, 0, 1),
                     patternTile.rotateDegrees,
                     OutlineMode.WithOutline,
-                    new Color(0, 255, 255)),
+                    new Color(0, 1.5f, 1.5f)),
                 true,
-                new Color(255, 128, 0)),
+                new Color(1, .5f, 0)),
               null,
               null,
               new SortedDictionary<int, ExtrudedSymbolDescription>());
@@ -106,11 +106,11 @@ namespace Geomancer {
       var defaultUnitDescription =
         new UnitDescription(
           null,
-          new DominoDescription(false, new Color(128, 0, 128)),
+          new DominoDescription(false, new Color(.5f, 0, .5f)),
           new ExtrudedSymbolDescription(
             RenderPriority.DOMINO,
             new SymbolDescription(
-              "a", new Color(0, 255, 0), 45, OutlineMode.WithBackOutline, new Color(0, 0, 0)),
+              "a", new Color(0, 1, 0), 45, OutlineMode.WithBackOutline, new Color(0, 0, 0)),
             true,
             new Color(0, 0, 0)),
           new List<KeyValuePair<int, ExtrudedSymbolDescription>>(),

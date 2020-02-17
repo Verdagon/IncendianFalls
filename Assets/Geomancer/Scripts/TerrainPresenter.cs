@@ -32,18 +32,8 @@ namespace Geomancer {
       foreach (var locationAndTile in terrain.tiles) {
         addTerrainTile(locationAndTile.Key, locationAndTile.Value);
       }
-    }
 
-    public void addTerrainTile(Location location, TerrainTile tile) {
-      var presenter = new TerrainTilePresenter(vivimap, terrain, location, tile, instantiator);
-      tilePresenters.Add(location, presenter);
-      presenter.mouseClick += () => OnMouseClick(location);
-      presenter.mouseIn += () => OnMouseIn(location);
-      presenter.mouseOut += () => OnMouseOut(location);
-      //  TileClicked += (loc) => {
-      //  Debug.Log("tile clicked in terrain pres!");
-      //  TerrainClicked?.Invoke(loc);
-      //};
+      RefreshPhantomTiles();
     }
 
     public void DestroyTerrainPresenter() {
@@ -86,6 +76,51 @@ namespace Geomancer {
       foreach (var observer in observers) {
         observer.OnMouseOut(location);
       }
+    }
+
+    private void RefreshPhantomTiles() {
+      var phantomTileLocations =
+        terrain.pattern.GetAdjacentLocations(new SortedSet<Location>(terrain.tiles.Keys), false, true);
+      var previousPhantomTileLocations = phantomTilePresenters.Keys;
+
+      var addedPhantomTileLocations = new SortedSet<Location>(phantomTileLocations);
+      SetUtils.RemoveAll(addedPhantomTileLocations, previousPhantomTileLocations);
+
+      var removedPhantomTileLocations = new SortedSet<Location>(previousPhantomTileLocations);
+      SetUtils.RemoveAll(removedPhantomTileLocations, phantomTileLocations);
+
+      foreach (var removedPhantomTileLocation in removedPhantomTileLocations) {
+        removePhantomTile(removedPhantomTileLocation);
+      }
+
+      foreach (var addedPhantomTileLocation in addedPhantomTileLocations) {
+        addPhantomTile(addedPhantomTileLocation);
+      }
+    }
+
+    private void removePhantomTile(Location removedPhantomTileLocation) {
+      phantomTilePresenters[removedPhantomTileLocation].DestroyPhantomTilePresenter();
+      phantomTilePresenters.Remove(removedPhantomTileLocation);
+    }
+
+    private void addTerrainTile(Location location, TerrainTile tile) {
+      var presenter = new TerrainTilePresenter(vivimap, terrain, location, tile, instantiator);
+      tilePresenters.Add(location, presenter);
+      presenter.mouseClick += () => OnMouseClick(location);
+      presenter.mouseIn += () => OnMouseIn(location);
+      presenter.mouseOut += () => OnMouseOut(location);
+      //  TileClicked += (loc) => {
+      //  Debug.Log("tile clicked in terrain pres!");
+      //  TerrainClicked?.Invoke(loc);
+      //};
+    }
+
+    private void addPhantomTile(Location location) {
+      var presenter = new PhantomTilePresenter(terrain.pattern, location, instantiator);
+      phantomTilePresenters.Add(location, presenter);
+      presenter.mouseClick += () => OnMouseClick(location);
+      presenter.mouseIn += () => OnMouseIn(location);
+      presenter.mouseOut += () => OnMouseOut(location);
     }
   }
 }

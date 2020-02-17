@@ -11,6 +11,8 @@ namespace Domino {
     // Where it's supposed to be, after all the animations are done.
     private Vector3 cameraEndLookAtPosition;
 
+    public Vector3 endLookAtPosition {  get { return cameraEndLookAtPosition; } }
+
     private readonly static float cameraSpeedPerSecond = 8.0f;
 
     public CameraController(GameObject camera, Vector3 initialLookAtPosition) {
@@ -38,7 +40,7 @@ namespace Domino {
       return animator;
     }
 
-    private void StartMovingCameraTo(Vector3 newCameraEndLookAtPosition, float duration) {
+    public void StartMovingCameraTo(Vector3 newCameraEndLookAtPosition, float duration) {
       var currentCameraEndLookAtPosition = cameraEndLookAtPosition;
       //var currentCameraMatrix = CalculateCameraMatrix(currentCameraEndLookAtPosition);
 
@@ -58,6 +60,20 @@ namespace Domino {
                           Time.time, Time.time + duration, Matrix4x4.Translate(-cameraDifference), Matrix4x4.identity))));
 
       cameraEndLookAtPosition = newCameraEndLookAtPosition;
+    }
+
+    public void MoveIn(float deltaTime) {
+      var newEndLookAtPosition =
+          cameraEndLookAtPosition +
+                cameraObject.transform.forward * deltaTime * cameraSpeedPerSecond;
+      StartMovingCameraTo(newEndLookAtPosition, .05f);
+    }
+
+    public void MoveOut(float deltaTime) {
+      var newEndLookAtPosition =
+          cameraEndLookAtPosition -
+                cameraObject.transform.forward * deltaTime * cameraSpeedPerSecond;
+      StartMovingCameraTo(newEndLookAtPosition, .05f);
     }
 
     public void MoveUp(float deltaTime) {

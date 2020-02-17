@@ -462,6 +462,9 @@
     <Reference Include="IncendianFalls">
       <HintPath>D:/IncendianFalls/Assets/IncendianFalls.dll</HintPath>
     </Reference>
+    <Reference Include="WebAssembly">
+      <HintPath>D:/IncendianFalls/Assets/WebAssembly.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>D:/IncendianFalls/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -476,9 +479,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>D:/IncendianFalls/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="WebAssembly">
-      <HintPath>D:/IncendianFalls/Assets/WebAssembly.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>D:/Unity Editors/2019.2.15f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

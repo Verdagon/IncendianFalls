@@ -9,28 +9,25 @@ namespace Domino {
   public class FollowingCameraController :
       IUnitEffectObserver, IUnitEffectVisitor,
       IGameEffectObserver, IGameEffectVisitor {
-    GameObject cameraObject;
+    CameraController cameraController;
+
     Game game;
     Unit followedUnit;
-
     Location cameraEndLookAtLocation;
-    // Where it's supposed to be, after all the animations are done.
-    Vector3 cameraEndLookAtPosition;
 
     private readonly static float cameraSpeedPerSecond = 8.0f;
 
     public FollowingCameraController(GameObject camera, Game game) {
-      throw new Exception("split this into a basic camera and a unit follower");
 
-      this.cameraObject = camera;
+      cameraEndLookAtLocation = game.player.location;
+      var cameraEndLookAtPosition = game.level.terrain.GetTileCenter(cameraEndLookAtLocation).ToUnity();
+
+      this.cameraController = new CameraController(camera, cameraEndLookAtPosition);
       this.game = game;
 
       this.game.AddObserver(this);
 
       followedUnit = Unit.Null;
-      cameraEndLookAtLocation = game.player.location;
-      cameraEndLookAtPosition = game.level.terrain.GetTileCenter(cameraEndLookAtLocation).ToUnity();
-      camera.transform.FromMatrix(CalculateCameraMatrix(cameraEndLookAtPosition));
 
       RefollowPlayer();
     }
@@ -94,16 +91,6 @@ namespace Domino {
       return builder.matrix;
     }
 
-    private CameraAnimator GetOrCreateCameraAnimator() {
-      var animator = cameraObject.GetComponent<CameraAnimator>();
-      if (animator == null) {
-        animator = cameraObject.AddComponent<CameraAnimator>() as CameraAnimator;
-        animator.Init(cameraObject, new ConstantMatrix4x4Animation(cameraObject.transform.localToWorldMatrix));
-      }
-      return animator;
-    }
-
-
     public void StartMovingCamera() {
       if (!followedUnit.Exists()) {
         Asserts.Assert(false);
@@ -113,64 +100,30 @@ namespace Domino {
         Asserts.Assert(false);
       }
 
-      var currentCameraEndLookAtPosition = cameraEndLookAtPosition;
+      var currentCameraEndLookAtPosition = cameraController.endLookAtPosition;
       //var currentCameraMatrix = CalculateCameraMatrix(currentCameraEndLookAtPosition);
 
       var newCameraEndLookAtPosition =
           game.level.terrain.GetTileCenter(newCameraEndLookAtLocation).ToUnity();
       //var newCameraMatrix = CalculateCameraMatrix(newCameraEndLookAtPosition);
 
-      StartMovingCameraTo(newCameraEndLookAtPosition, .25f);
-    }
-
-    private void StartMovingCameraTo(Vector3 newCameraEndLookAtPosition, float duration) {
-      var currentCameraEndLookAtPosition = cameraEndLookAtPosition;
-      //var currentCameraMatrix = CalculateCameraMatrix(currentCameraEndLookAtPosition);
-
-      //var newCameraMatrix = CalculateCameraMatrix(newCameraEndLookAtPosition);
-
-      var cameraDifference = newCameraEndLookAtPosition - currentCameraEndLookAtPosition;
-
-      var animator = GetOrCreateCameraAnimator();
-      animator.cameraAnimation =
-          new ComposeMatrix4x4Animation(
-              animator.cameraAnimation,
-              new ClampMatrix4x4Animation(
-                  Time.time, Time.time + duration,
-                  new ComposeMatrix4x4Animation(
-                      new ConstantMatrix4x4Animation(Matrix4x4.Translate(cameraDifference)),
-                      new LinearMatrix4x4Animation(
-                          Time.time, Time.time + duration, Matrix4x4.Translate(-cameraDifference), Matrix4x4.identity))));
-
-      cameraEndLookAtPosition = newCameraEndLookAtPosition;
+      cameraController.StartMovingCameraTo(newCameraEndLookAtPosition, .25f);
     }
 
     public void MoveUp(float deltaTime) {
-      var newEndLookAtPosition =
-          cameraEndLookAtPosition +
-                cameraObject.transform.up * deltaTime * cameraSpeedPerSecond;
-      StartMovingCameraTo(newEndLookAtPosition, .05f);
+      cameraController.MoveUp(deltaTime);
     }
 
     public void MoveDown(float deltaTime) {
-      var newEndLookAtPosition =
-          cameraEndLookAtPosition -
-                cameraObject.transform.up * deltaTime * cameraSpeedPerSecond;
-      StartMovingCameraTo(newEndLookAtPosition, .05f);
+      cameraController.MoveDown(deltaTime);
     }
 
     public void MoveLeft(float deltaTime) {
-      var newEndLookAtPosition =
-          cameraEndLookAtPosition -
-              cameraObject.transform.right * deltaTime * cameraSpeedPerSecond;
-      StartMovingCameraTo(newEndLookAtPosition, .05f);
+      cameraController.MoveLeft(deltaTime);
     }
 
     public void MoveRight(float deltaTime) {
-      var newEndLookAtPosition =
-          cameraEndLookAtPosition +
-              cameraObject.transform.right * deltaTime * cameraSpeedPerSecond;
-      StartMovingCameraTo(newEndLookAtPosition, .05f);
+      cameraController.MoveRight(deltaTime);
     }
   }
 }
