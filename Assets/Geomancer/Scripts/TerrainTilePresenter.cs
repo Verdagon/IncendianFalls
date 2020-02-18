@@ -17,7 +17,7 @@ namespace Geomancer {
     }
   }
 
-  public class TerrainTilePresenter : IStrMutListEffectObserver, IStrMutListEffectVisitor {
+  public class TerrainTilePresenter : ITerrainTileEffectObserver, ITerrainTileEffectVisitor, IStrMutListEffectObserver, IStrMutListEffectVisitor {
     public delegate void OnMouseInEvent();
     public delegate void OnMouseOutEvent();
     public delegate void OnMouseClickEvent();
@@ -31,6 +31,9 @@ namespace Geomancer {
     Vector3 tileCenter;
     TileView tileView;
     UnitView unitView;
+
+    bool highlighted;
+    bool selected;
 
     //public event OnMouseInEvent mouseIn;
     //public event OnMouseOutEvent mouseOut;
@@ -49,30 +52,31 @@ namespace Geomancer {
       this.instantiator = instantiator;
 
       terrainTile.members.AddObserver(this);
-
-      var positionVec2 = terrain.pattern.GetTileCenter(location);
-
-      tileCenter =
-        new UnityEngine.Vector3(
-                  positionVec2.x,
-                  terrainTile.elevation * terrain.elevationStepHeight,
-                  positionVec2.y);
+      terrainTile.AddObserver(this);
 
       ResetViews();
     }
-    
+
     public void SetTinted(bool highlighted, bool selected) {
-      var (tileDescription, maybeUnitDescription) = GetDescriptions(highlighted, selected);
-      tileView.SetDescription(tileDescription);
+      this.highlighted = highlighted;
+      this.selected = selected;
+      ResetViews();
     }
 
     private void ResetViews() {
-      var (tileDescription, maybeUnitDescription) = GetDescriptions(false, false);
+      var (tileDescription, maybeUnitDescription) = GetDescriptions();
 
       if (tileView != null) {
         tileView.DestroyTile();
         tileView = null;
       }
+
+      var positionVec2 = terrain.pattern.GetTileCenter(location);
+      tileCenter =
+        new UnityEngine.Vector3(
+                  positionVec2.x,
+                  terrainTile.elevation * terrain.elevationStepHeight,
+                  positionVec2.y);
 
       tileView = instantiator.CreateTileView(tileCenter, tileDescription);
       tileView.gameObject.AddComponent<TerrainTilePresenterTile>().Init(this);
@@ -89,7 +93,7 @@ namespace Geomancer {
       }
     }
 
-    private (TileDescription, UnitDescription) GetDescriptions(bool highlighted, bool selected) {
+    private (TileDescription, UnitDescription) GetDescriptions() {
       int lowestNeighborElevation = int.MaxValue;
       foreach (var adjacentLocation in terrain.GetAdjacentExistingLocations(location, false)) {
         var adjacentTerrainTile = terrain.tiles[adjacentLocation];
@@ -201,6 +205,19 @@ namespace Geomancer {
 
     public void visitStrMutListRemoveEffect(StrMutListRemoveEffect effect) {
       ResetViews();
+    }
+
+    public void visitTerrainTileCreateEffect(TerrainTileCreateEffect effect) {}
+
+    public void visitTerrainTileDeleteEffect(TerrainTileDeleteEffect effect) {}
+
+    public void visitTerrainTileSetElevationEffect(TerrainTileSetElevationEffect effect) {
+      Debug.LogError("elevation changed to " + effect.newValue);
+      ResetViews();
+    }
+
+    public void OnTerrainTileEffect(ITerrainTileEffect effect) {
+      effect.visit(this);
     }
   }
 }

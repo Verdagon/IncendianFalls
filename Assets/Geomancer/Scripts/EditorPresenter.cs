@@ -129,6 +129,25 @@ namespace Geomancer {
       if (Input.GetKey(KeyCode.LeftArrow)) {
         cameraController.MoveLeft(Time.deltaTime);
       }
+      if (Input.GetKeyDown(KeyCode.C)) {
+        terrainPresenter.SetSelection(new SortedSet<Location>());
+      }
+      if (Input.GetKeyDown(KeyCode.T)) {
+        ss.Transact<Geomancer.Model.Void>(delegate () {
+          foreach (var loc in terrainPresenter.GetSelection()) {
+            level.terrain.tiles[loc].elevation = level.terrain.tiles[loc].elevation + 1;
+          }
+          return new Geomancer.Model.Void();
+        });
+      }
+      if (Input.GetKeyDown(KeyCode.G)) {
+        ss.Transact<Geomancer.Model.Void>(delegate () {
+          foreach (var loc in terrainPresenter.GetSelection()) {
+            level.terrain.tiles[loc].elevation = Math.Max(1, level.terrain.tiles[loc].elevation - 1);
+          }
+          return new Geomancer.Model.Void();
+        });
+      }
 
       UnityEngine.Ray ray = cameraObject.GetComponentInChildren<Camera>().ScreenPointToRay(Input.mousePosition);
       terrainPresenter.UpdateMouse(ray);

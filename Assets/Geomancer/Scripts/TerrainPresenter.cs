@@ -19,7 +19,7 @@ namespace Geomancer {
     Dictionary<Location, PhantomTilePresenter> phantomTilePresenters = new Dictionary<Location, PhantomTilePresenter>();
 
     bool isMouseHighlighting = false;
-    Location mouseHighlightedLocation;
+    Location mouseHighlightedLocation = new Location(0, 0, 0);
 
     SortedSet<Location> selectedLocations = new SortedSet<Location>();
 
