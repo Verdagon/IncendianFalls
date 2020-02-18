@@ -62,7 +62,6 @@ GameObject:
   - component: {fileID: 8883912464910861588}
   - component: {fileID: 676215734276536405}
   - component: {fileID: 2131022110638971410}
-  - component: {fileID: 3706109484389232472}
   - component: {fileID: 4137471184762416682}
   - component: {fileID: 2855616703634574589}
   - component: {fileID: 1527069266069952204}
@@ -120,6 +119,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -132,20 +132,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &3706109484389232472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2764709691699560529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 388e11b565dbc474abba2a4a18e8fa25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  regularMaterial: {fileID: 2100000, guid: b4880b4e12ce24022803a97fa9f53e67, type: 2}
-  psychedelicMaterial: {fileID: 2100000, guid: 455998c6ded2742e0af4d470ffe7e0fe, type: 2}
 --- !u!114 &4137471184762416682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +187,6 @@ GameObject:
   - component: {fileID: 326756520994214192}
   - component: {fileID: 3987462635541061358}
   - component: {fileID: 4080671004860259357}
-  - component: {fileID: 2070547844815280924}
   - component: {fileID: 6853746449163618207}
   - component: {fileID: 9196411523557247287}
   - component: {fileID: 7441183497867118043}
@@ -259,6 +244,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -271,20 +257,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2070547844815280924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3238173834198329893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 388e11b565dbc474abba2a4a18e8fa25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  regularMaterial: {fileID: 2100000, guid: b4880b4e12ce24022803a97fa9f53e67, type: 2}
-  psychedelicMaterial: {fileID: 2100000, guid: 455998c6ded2742e0af4d470ffe7e0fe, type: 2}
 --- !u!114 &6853746449163618207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +312,6 @@ GameObject:
   - component: {fileID: 6775642230615811497}
   - component: {fileID: 2520759753436823967}
   - component: {fileID: 146099936881160218}
-  - component: {fileID: 2975223319171783063}
   - component: {fileID: 5829001667435048644}
   - component: {fileID: 8033670861395379340}
   - component: {fileID: 8738063568454422886}
@@ -398,6 +369,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -410,20 +382,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2975223319171783063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4009812470932249329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 388e11b565dbc474abba2a4a18e8fa25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  regularMaterial: {fileID: 2100000, guid: b4880b4e12ce24022803a97fa9f53e67, type: 2}
-  psychedelicMaterial: {fileID: 2100000, guid: 455998c6ded2742e0af4d470ffe7e0fe, type: 2}
 --- !u!114 &5829001667435048644
 MonoBehaviour:
   m_ObjectHideFlags: 0

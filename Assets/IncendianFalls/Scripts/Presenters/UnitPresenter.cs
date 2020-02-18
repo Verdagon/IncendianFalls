@@ -20,8 +20,7 @@ namespace IncendianFalls {
       IIUnitEventMutListEffectObserver,
       IIUnitComponentMutBunchObserver,
       IBideAICapabilityUCEffectObserver,
-      IBideAICapabilityUCEffectVisitor,
-      IButts {
+      IBideAICapabilityUCEffectVisitor {
     public List<IUnitMousedObserver> observers = new List<IUnitMousedObserver>();
 
     ITimer timer;
@@ -73,7 +72,6 @@ namespace IncendianFalls {
               timer,
               terrain.GetTileCenter(unit.location).ToUnity(),
               GetUnitViewDescription(unit));
-      unitView.observers.Add(this);
 
       componentsBroadcaster = new IUnitComponentMutBunchBroadcaster(unit.components);
       componentsBroadcaster.AddObserver(this);
@@ -574,7 +572,7 @@ namespace IncendianFalls {
       }
     }
 
-    public void OnMouseIn() {
+    public void OnMouseEnter() {
       // Otherwise, where would this be called from
       Asserts.Assert(unitView != null);
 
@@ -585,7 +583,7 @@ namespace IncendianFalls {
       }
     }
 
-    public void OnMouseOut() {
+    public void OnMouseExit() {
       // Otherwise, where would this be called from
       Asserts.Assert(unitView != null);
 

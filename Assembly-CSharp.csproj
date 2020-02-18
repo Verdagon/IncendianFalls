@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ClickListener.cs" />
     <Compile Include="Assets\Destroyer.cs" />
     <Compile Include="Assets\Domino\Animations\Float\ClampFloatAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\Float\ConstantFloatAnimation.cs" />
@@ -103,7 +102,6 @@
     <Compile Include="Assets\Domino\Scripts\Views\SymbolView.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\TileView.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\UnitView.cs" />
-    <Compile Include="Assets\DominoClickForwarder.cs" />
     <Compile Include="Assets\Edges\Edger.cs" />
     <Compile Include="Assets\Edges\Edgifier.cs" />
     <Compile Include="Assets\Geomancer\Scripts\EditorPresenter.cs" />
@@ -177,6 +175,7 @@
     <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
+    <Compile Include="Assets\UIClickListener.cs" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Fog.shader" />

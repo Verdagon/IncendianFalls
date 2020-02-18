@@ -6,22 +6,28 @@ using UnityEngine;
 using Domino;
 
 namespace Geomancer {
-  public class PhantomTilePresenter : IButts,
-      IStrMutListEffectObserver, IStrMutListEffectVisitor {
-    public delegate void OnMouseInEvent();
-    public delegate void OnMouseOutEvent();
-    public delegate void OnMouseClickEvent();
+  public class PhantomTilePresenterTile : MonoBehaviour {
+    // PhantomTilePresenter attaches this to the TileView it creates, so that when EditorPresenter
+    // raycasts, it can know the PhantomTilePresenter that owns this TileView.
+    // This approach is an implementation detail of the Editor, and shouldnt enter Domino.
+    public PhantomTilePresenter presenter;
+
+    public void Init(PhantomTilePresenter presenter) {
+      this.presenter = presenter;
+    }
+  }
+
+  public class PhantomTilePresenter : IStrMutListEffectObserver, IStrMutListEffectVisitor {
+    //public delegate void OnMouseInEvent();
+    //public delegate void OnMouseOutEvent();
+    public delegate void OnPhantomTileClickedEvent();
 
     Pattern pattern;
-    Location location;
+    public readonly Location location;
     Instantiator instantiator;
 
     Vector3 tileCenter;
     TileView tileView;
-
-    public event OnMouseInEvent mouseIn;
-    public event OnMouseOutEvent mouseOut;
-    public event OnMouseClickEvent mouseClick;
 
     public PhantomTilePresenter(
         Pattern pattern,
@@ -38,8 +44,12 @@ namespace Geomancer {
       ResetViews();
     }
 
+    public void SetHighlighted(bool highlighted) {
+      tileView.SetDescription(GetTileDescription(pattern, location, highlighted));
+    }
+
     private void ResetViews() {
-      var tileDescription = GetTileDescription(pattern, location);
+      var tileDescription = GetTileDescription(pattern, location, false);
 
       if (tileView != null) {
         tileView.DestroyTile();
@@ -47,14 +57,18 @@ namespace Geomancer {
       }
 
       tileView = instantiator.CreateTileView(tileCenter, tileDescription);
+      tileView.gameObject.AddComponent<PhantomTilePresenterTile>().Init(this);
       tileView.SetDescription(tileDescription);
-      tileView.observers.Add(this);
     }
 
-    private static TileDescription GetTileDescription(Pattern pattern, Location location) {
+    private static TileDescription GetTileDescription(Pattern pattern, Location location, bool highlighted) {
       var patternTile = pattern.patternTiles[location.indexInGroup];
-     return
-          new TileDescription(
+
+      var frontColor = highlighted ? new Color(.1f, .1f, .1f) : new Color(0f, 0, 0f);
+      var sideColor = highlighted ? new Color(.1f, .1f, .1f) : new Color(0f, 0, 0f);
+
+      return
+        new TileDescription(
               1,
               patternTile.rotateDegrees,
               1,
@@ -62,12 +76,12 @@ namespace Geomancer {
                 RenderPriority.TILE,
                 new SymbolDescription(
                     ((char)('0' + patternTile.shapeIndex)).ToString(),
-                    new Color(0f, 0, 0f),
+                    frontColor,
                     patternTile.rotateDegrees,
                     OutlineMode.WithOutline,
                     new Color(.2f, .2f, .2f)),
                 false,
-                new Color(0f, 0f, 0)),
+                sideColor),
               null,
               null,
               new SortedDictionary<int, ExtrudedSymbolDescription>());
@@ -77,25 +91,13 @@ namespace Geomancer {
       tileView.DestroyTile();
     }
 
-    public void OnMouseClick() {
-      mouseClick.Invoke();
-    }
-
-    public void OnMouseIn() {
-      mouseIn.Invoke();
-    }
-
-    public void OnMouseOut() {
-      mouseOut.Invoke();
-    }
-
     public void OnStrMutListEffect(IStrMutListEffect effect) {
       effect.visit(this);
     }
 
-    public void visitStrMutListCreateEffect(StrMutListCreateEffect effect) {}
+    public void visitStrMutListCreateEffect(StrMutListCreateEffect effect) { }
 
-    public void visitStrMutListDeleteEffect(StrMutListDeleteEffect effect) {}
+    public void visitStrMutListDeleteEffect(StrMutListDeleteEffect effect) { }
 
     public void visitStrMutListAddEffect(StrMutListAddEffect effect) {
       ResetViews();

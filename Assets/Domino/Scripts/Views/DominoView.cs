@@ -27,28 +27,8 @@ namespace Domino {
     }
   }
 
-  public class DominoView : MonoBehaviour, IButts {
+  public class DominoView : MonoBehaviour {
     public static readonly int DOMINO_RENDER_QUEUE = 3002;
-
-    public List<IButts> observers = new List<IButts>();
-
-    public void OnMouseClick() {
-      foreach (var observer in observers) {
-        observer.OnMouseClick();
-      }
-    }
-
-    public void OnMouseIn() {
-      foreach (var observer in observers) {
-        observer.OnMouseIn();
-      }
-    }
-
-    public void OnMouseOut() {
-      foreach (var observer in observers) {
-        observer.OnMouseOut();
-      }
-    }
 
     private bool initialized = false;
 
@@ -106,7 +86,6 @@ namespace Domino {
       } else {
         innerObject = instantiator.CreateSmallDomino();
       }
-      innerObject.GetComponent<DominoClickForwarder>().observers.Add(this);
       large_ = newLarge;
       InnerSetColor(color_);
     }

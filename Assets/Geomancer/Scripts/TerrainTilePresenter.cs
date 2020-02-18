@@ -6,15 +6,25 @@ using UnityEngine;
 using Domino;
 
 namespace Geomancer {
-  public class TerrainTilePresenter : IButts,
-      IStrMutListEffectObserver, IStrMutListEffectVisitor {
+  public class TerrainTilePresenterTile : MonoBehaviour {
+    // PhantomTilePresenter attaches this to the TileView it creates, so that when EditorPresenter
+    // raycasts, it can know the PhantomTilePresenter that owns this TileView.
+    // This approach is an implementation detail of the Editor, and shouldnt enter Domino.
+    public TerrainTilePresenter presenter;
+
+    public void Init(TerrainTilePresenter presenter) {
+      this.presenter = presenter;
+    }
+  }
+
+  public class TerrainTilePresenter : IStrMutListEffectObserver, IStrMutListEffectVisitor {
     public delegate void OnMouseInEvent();
     public delegate void OnMouseOutEvent();
     public delegate void OnMouseClickEvent();
 
     Vivimap vivimap;
     Geomancer.Model.Terrain terrain;
-    Location location;
+    public readonly Location location;
     TerrainTile terrainTile;
     Instantiator instantiator;
 
@@ -22,9 +32,9 @@ namespace Geomancer {
     TileView tileView;
     UnitView unitView;
 
-    public event OnMouseInEvent mouseIn;
-    public event OnMouseOutEvent mouseOut;
-    public event OnMouseClickEvent mouseClick;
+    //public event OnMouseInEvent mouseIn;
+    //public event OnMouseOutEvent mouseOut;
+    //public event OnMouseClickEvent mouseClick;
 
     public TerrainTilePresenter(
         Vivimap vivimap,
@@ -50,9 +60,14 @@ namespace Geomancer {
 
       ResetViews();
     }
+    
+    public void SetHighlighted(bool highlighted) {
+      var (tileDescription, maybeUnitDescription) = GetDescriptions(highlighted);
+      tileView.SetDescription(tileDescription);
+    }
 
     private void ResetViews() {
-      var (tileDescription, maybeUnitDescription) = GetDescriptions();
+      var (tileDescription, maybeUnitDescription) = GetDescriptions(false);
 
       if (tileView != null) {
         tileView.DestroyTile();
@@ -60,8 +75,8 @@ namespace Geomancer {
       }
 
       tileView = instantiator.CreateTileView(tileCenter, tileDescription);
+      tileView.gameObject.AddComponent<TerrainTilePresenterTile>().Init(this);
       tileView.SetDescription(tileDescription);
-      tileView.observers.Add(this);
 
       if (unitView) {
         unitView.DestroyUnit();
@@ -74,7 +89,7 @@ namespace Geomancer {
       }
     }
 
-    private (TileDescription, UnitDescription) GetDescriptions() {
+    private (TileDescription, UnitDescription) GetDescriptions(bool highlighted) {
       int lowestNeighborElevation = int.MaxValue;
       foreach (var adjacentLocation in terrain.GetAdjacentExistingLocations(location, false)) {
         var adjacentTerrainTile = terrain.tiles[adjacentLocation];
@@ -121,28 +136,46 @@ namespace Geomancer {
       foreach (var member in this.terrainTile.members) {
         members.Add(member);
       }
-      return vivimap.Vivify(defaultTileDescription, defaultUnitDescription, members);
+      var (tileDescription, unitDescription) =
+        vivimap.Vivify(defaultTileDescription, defaultUnitDescription, members);
+      if (highlighted) {
+        tileDescription =
+          new TileDescription(
+            tileDescription.elevationStepHeight,
+            tileDescription.tileRotationDegrees,
+            tileDescription.depth,
+            new ExtrudedSymbolDescription(
+              tileDescription.tileSymbolDescription.renderPriority,
+              new SymbolDescription(
+                tileDescription.tileSymbolDescription.symbol.symbolId,
+                tileDescription.tileSymbolDescription.symbol.frontColor,
+                tileDescription.tileSymbolDescription.symbol.rotationDegrees,
+                tileDescription.tileSymbolDescription.symbol.withOutline,
+                (tileDescription.tileSymbolDescription.symbol.outlineColor + new Color(1, 1, 1, 1)) / 2),
+              tileDescription.tileSymbolDescription.extruded,
+              tileDescription.tileSymbolDescription.sidesColor),
+            tileDescription.maybeOverlaySymbolDescription,
+            tileDescription.maybeFeatureSymbolDescription,
+            tileDescription.itemSymbolDescriptionByItemId);
+      }
+      return (tileDescription, unitDescription);
     }
 
     public void DestroyTerrainTilePresenter() {
-      if (terrainTile.Exists()) {
-        tileView.observers.Remove(this);
-      }
-
       tileView.DestroyTile();
     }
 
-    public void OnMouseClick() {
-      mouseClick.Invoke();
-    }
+    //public void OnMouseClick() {
+    //  mouseClick.Invoke();
+    //}
 
-    public void OnMouseIn() {
-      mouseIn.Invoke();
-    }
+    //public void OnMouseEnter() {
+    //  mouseIn.Invoke();
+    //}
 
-    public void OnMouseOut() {
-      mouseOut.Invoke();
-    }
+    //public void OnMouseExit() {
+    //  mouseOut.Invoke();
+    //}
 
     public void OnStrMutListEffect(IStrMutListEffect effect) {
       effect.visit(this);

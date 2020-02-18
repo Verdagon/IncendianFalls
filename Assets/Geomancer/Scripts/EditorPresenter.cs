@@ -33,6 +33,7 @@ namespace Geomancer {
 
     public NarrationPanelView messageView;
 
+    Root ss;
     Level level;
 
     TerrainPresenter terrainPresenter;
@@ -40,7 +41,7 @@ namespace Geomancer {
     public void Start() {
       // var timestamp = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
-      var ss = new Root(new EditorLogger());
+      ss = new Root(new EditorLogger());
 
       var entries = new Dictionary<string, List<Vivimap.IDescription>>();
       var grassEntries = new List<Vivimap.IDescription>();
@@ -84,8 +85,17 @@ namespace Geomancer {
       });
 
       terrainPresenter = new TerrainPresenter(vivimap, level.terrain, instantiator);
+      terrainPresenter.PhantomTileClicked += HandlePhantomTileClicked;
 
       cameraController = new CameraController(cameraObject, level.terrain.GetTileCenter(new Location(0, 0, 0)).ToUnity());
+    }
+
+    public void HandlePhantomTileClicked(Location location) {
+      ss.Transact(delegate () {
+        var terrainTile = level.root.EffectTerrainTileCreate(1, level.root.EffectStrMutListCreate());
+        level.terrain.tiles.Add(location, terrainTile);
+        return terrainTile;
+      });
     }
 
     public void Update() {
@@ -107,6 +117,9 @@ namespace Geomancer {
       if (Input.GetKey(KeyCode.LeftArrow)) {
         cameraController.MoveLeft(Time.deltaTime);
       }
+
+      UnityEngine.Ray ray = cameraObject.GetComponentInChildren<Camera>().ScreenPointToRay(Input.mousePosition);
+      terrainPresenter.UpdateMouse(ray);
     }
   }
 }

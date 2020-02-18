@@ -81,29 +81,9 @@ namespace Domino {
     }
   }
 
-  public class TileView : MonoBehaviour, IButts {
-    public List<IButts> observers = new List<IButts>();
-
-    public void OnMouseClick() {
-      foreach (var observer in observers) {
-        observer.OnMouseClick();
-      }
-    }
-
-    public void OnMouseIn() {
-      foreach (var observer in observers) {
-        observer.OnMouseIn();
-      }
-    }
-
-    public void OnMouseOut() {
-      foreach (var observer in observers) {
-        observer.OnMouseOut();
-      }
-    }
-
-
+  public class TileView : MonoBehaviour {
     private bool initialized = false;
+    public bool alive {  get { return initialized;  } }
 
     private List<SymbolView> tileSymbolViews = new List<SymbolView>();
 
@@ -149,6 +129,7 @@ namespace Domino {
     }
 
     public void DestroyTile() {
+      initialized = false;
       Destroy(this.gameObject);
     }
 
@@ -169,7 +150,7 @@ namespace Domino {
 
         tileSymbolView.gameObject.transform.SetParent(transform, false);
 
-        tileSymbolView.observers.Add(this);
+        tileSymbolViews.Add(tileSymbolView);
       }
 
       if (tileDescription.maybeOverlaySymbolDescription != null) {

@@ -67,28 +67,8 @@ namespace Domino {
     }
   }
 
-  public class UnitView : MonoBehaviour, IButts {
+  public class UnitView : MonoBehaviour {
     public static readonly float HOP_DURATION = .3f;
-
-    public List<IButts> observers = new List<IButts>();
-
-    public void OnMouseClick() {
-      foreach (var observer in observers) {
-        observer.OnMouseClick();
-      }
-    }
-
-    public void OnMouseIn() {
-      foreach (var observer in observers) {
-        observer.OnMouseIn();
-      }
-    }
-
-    public void OnMouseOut() {
-      foreach (var observer in observers) {
-        observer.OnMouseOut();
-      }
-    }
 
     Instantiator instantiator;
 
@@ -165,7 +145,6 @@ namespace Domino {
 
       dominoView = instantiator.CreateDominoView(unitDescription.dominoDescription);
       dominoView.gameObject.transform.SetParent(body.transform, false);
-      dominoView.observers.Add(this);
 
       faceSymbolView = instantiator.CreateSymbolView(false, unitDescription.faceSymbolDescription);
       faceSymbolView.gameObject.transform.FromMatrix(

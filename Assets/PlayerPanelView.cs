@@ -18,40 +18,40 @@ public class PlayerPanelView : MonoBehaviour {
   public LookPanelView lookPanelView;
 
   public void Start() {
-    timeAnchorMoveButton.GetComponent<ClickListener>().MouseIn +=
+    timeAnchorMoveButton.GetComponent<UIClickListener>().MouseEnter +=
         () => lookPanelView.ShowMessage(
             "(A) Time Anchor: Place a time anchor, which you can later Rewind to.");
-    timeAnchorMoveButton.GetComponent<ClickListener>().MouseOut +=
+    timeAnchorMoveButton.GetComponent<UIClickListener>().MouseExit +=
         () => lookPanelView.ClearMessage();
 
-    timeShiftButton.GetComponent<ClickListener>().MouseIn +=
+    timeShiftButton.GetComponent<UIClickListener>().MouseEnter +=
         () => lookPanelView.ShowMessage(
             "(R) Rewind Time to your last Time Anchor. MP cost: 2+turns/4.");
-    timeShiftButton.GetComponent<ClickListener>().MouseOut +=
+    timeShiftButton.GetComponent<UIClickListener>().MouseExit +=
         () => lookPanelView.ClearMessage();
 
-    interactButton.GetComponent<ClickListener>().MouseIn +=
+    interactButton.GetComponent<UIClickListener>().MouseEnter +=
         () => lookPanelView.ShowMessage(
             "(I) Interact with something where you're standing.");
-    interactButton.GetComponent<ClickListener>().MouseOut +=
+    interactButton.GetComponent<UIClickListener>().MouseExit +=
         () => lookPanelView.ClearMessage();
 
-    defendButton.GetComponent<ClickListener>().MouseIn +=
+    defendButton.GetComponent<UIClickListener>().MouseEnter +=
         () => lookPanelView.ShowMessage(
             "(D) Defend: Reduce incoming damage by 2/3. Tempts foes.");
-    defendButton.GetComponent<ClickListener>().MouseOut +=
+    defendButton.GetComponent<UIClickListener>().MouseExit +=
         () => lookPanelView.ClearMessage();
 
-    counterButton.GetComponent<ClickListener>().MouseIn +=
+    counterButton.GetComponent<UIClickListener>().MouseEnter +=
         () => lookPanelView.ShowMessage(
             "(C) Counter: Counterattack when hit. Cost 1mp, 2mp more when hit. Tempts foes.");
-    counterButton.GetComponent<ClickListener>().MouseOut +=
+    counterButton.GetComponent<UIClickListener>().MouseExit +=
         () => lookPanelView.ClearMessage();
 
-    fireButton.GetComponent<ClickListener>().MouseIn +=
+    fireButton.GetComponent<UIClickListener>().MouseEnter +=
         () => lookPanelView.ShowMessage(
             "(F) Fire: Cast fireball for " + Actions.FIRE_COST + "mp for " + Actions.FIRE_DAMAGE + " damage.");
-    fireButton.GetComponent<ClickListener>().MouseOut +=
+    fireButton.GetComponent<UIClickListener>().MouseExit +=
         () => lookPanelView.ClearMessage();
   }
 

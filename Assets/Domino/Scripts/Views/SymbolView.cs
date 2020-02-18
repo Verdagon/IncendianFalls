@@ -51,28 +51,8 @@ namespace Domino {
     }
   }
 
-  public class SymbolView : MonoBehaviour, IButts {
+  public class SymbolView : MonoBehaviour {
     private bool initialized = false;
-
-    public List<IButts> observers = new List<IButts>();
-
-    public void OnMouseClick() {
-      foreach (var observer in observers) {
-        observer.OnMouseClick();
-      }
-    }
-
-    public void OnMouseIn() {
-      foreach (var observer in observers) {
-        observer.OnMouseIn();
-      }
-    }
-
-    public void OnMouseOut() {
-      foreach (var observer in observers) {
-        observer.OnMouseOut();
-      }
-    }
 
     // The main object that lives in world space. It has no rotation or scale,
     // just a translation to the center of the tile the unit is in.
@@ -101,10 +81,6 @@ namespace Domino {
         bool mousable,
         ExtrudedSymbolDescription symbolDescription) {
       this.instantiator = instantiator;
-
-      frontObject.GetComponent<ClickListener>().observers.Add(this);
-      frontOutlineObject.GetComponent<ClickListener>().observers.Add(this);
-      sidesObject.GetComponent<ClickListener>().observers.Add(this);
 
       this.renderPriority = symbolDescription.renderPriority;
       frontObject.transform.SetParent(gameObject.transform, false);

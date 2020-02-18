@@ -13,8 +13,7 @@ namespace IncendianFalls {
     void OnMouseOut(Location location);
   }
 
-  public class TerrainTilePresenter : IButts,
-      IITerrainTileComponentMutBunchObserver {
+  public class TerrainTilePresenter : IITerrainTileComponentMutBunchObserver {
     public List<ITileMousedObserver> observers = new List<ITileMousedObserver>();
 
     Atharia.Model.Terrain terrain;
@@ -44,8 +43,6 @@ namespace IncendianFalls {
                   terrainTile.elevation * terrain.elevationStepHeight,
                   positionVec2.y),
               GetDescription());
-
-      tileView.observers.Add(this);
 
       componentsBroadcaster = new ITerrainTileComponentMutBunchBroadcaster(terrainTile.components);
       componentsBroadcaster.AddObserver(this);
@@ -402,13 +399,13 @@ namespace IncendianFalls {
       }
     }
 
-    public void OnMouseIn() {
+    public void OnMouseEnter() {
       foreach (var observer in observers) {
         observer.OnMouseIn(location);
       }
     }
 
-    public void OnMouseOut() {
+    public void OnMouseExit() {
       foreach (var observer in observers) {
         observer.OnMouseOut(location);
       }
