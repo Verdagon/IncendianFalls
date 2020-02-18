@@ -61,13 +61,13 @@ namespace Geomancer {
       ResetViews();
     }
     
-    public void SetHighlighted(bool highlighted) {
-      var (tileDescription, maybeUnitDescription) = GetDescriptions(highlighted);
+    public void SetTinted(bool highlighted, bool selected) {
+      var (tileDescription, maybeUnitDescription) = GetDescriptions(highlighted, selected);
       tileView.SetDescription(tileDescription);
     }
 
     private void ResetViews() {
-      var (tileDescription, maybeUnitDescription) = GetDescriptions(false);
+      var (tileDescription, maybeUnitDescription) = GetDescriptions(false, false);
 
       if (tileView != null) {
         tileView.DestroyTile();
@@ -89,7 +89,7 @@ namespace Geomancer {
       }
     }
 
-    private (TileDescription, UnitDescription) GetDescriptions(bool highlighted) {
+    private (TileDescription, UnitDescription) GetDescriptions(bool highlighted, bool selected) {
       int lowestNeighborElevation = int.MaxValue;
       foreach (var adjacentLocation in terrain.GetAdjacentExistingLocations(location, false)) {
         var adjacentTerrainTile = terrain.tiles[adjacentLocation];
@@ -138,7 +138,17 @@ namespace Geomancer {
       }
       var (tileDescription, unitDescription) =
         vivimap.Vivify(defaultTileDescription, defaultUnitDescription, members);
-      if (highlighted) {
+      if (highlighted || selected) {
+        Color frontColor;
+        if (selected && highlighted) {
+          frontColor = (tileDescription.tileSymbolDescription.symbol.frontColor * 5 + 3 * new Color(1, 1, 1, 1)) / 8;
+        } else if (selected) {
+          frontColor = (tileDescription.tileSymbolDescription.symbol.frontColor * 6 + 2 * new Color(1, 1, 1, 1)) / 8;
+        } else if (highlighted) {
+          frontColor = (tileDescription.tileSymbolDescription.symbol.frontColor * 7 + 1 * new Color(1, 1, 1, 1)) / 8;
+        } else {
+          frontColor = tileDescription.tileSymbolDescription.symbol.frontColor;
+        }
         tileDescription =
           new TileDescription(
             tileDescription.elevationStepHeight,
@@ -148,10 +158,10 @@ namespace Geomancer {
               tileDescription.tileSymbolDescription.renderPriority,
               new SymbolDescription(
                 tileDescription.tileSymbolDescription.symbol.symbolId,
-                tileDescription.tileSymbolDescription.symbol.frontColor,
+                frontColor,
                 tileDescription.tileSymbolDescription.symbol.rotationDegrees,
                 tileDescription.tileSymbolDescription.symbol.withOutline,
-                (tileDescription.tileSymbolDescription.symbol.outlineColor + new Color(1, 1, 1, 1)) / 2),
+                tileDescription.tileSymbolDescription.symbol.outlineColor),
               tileDescription.tileSymbolDescription.extruded,
               tileDescription.tileSymbolDescription.sidesColor),
             tileDescription.maybeOverlaySymbolDescription,

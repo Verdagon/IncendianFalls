@@ -21,6 +21,8 @@ namespace Geomancer {
     bool isMouseHighlighting = false;
     Location mouseHighlightedLocation;
 
+    SortedSet<Location> selectedLocations = new SortedSet<Location>();
+
     public TerrainPresenter(Vivimap vivimap, Geomancer.Model.Terrain terrain, Instantiator instantiator) {
       this.vivimap = vivimap;
       this.terrain = terrain;
@@ -48,26 +50,13 @@ namespace Geomancer {
     }
 
     public void UpdateMouse(UnityEngine.Ray ray) {
+      Location oldLocation = mouseHighlightedLocation;
       bool newMouseIsHighlighting = LocationUnderMouse(ray, out var location);
       if (newMouseIsHighlighting != isMouseHighlighting || location != mouseHighlightedLocation) {
-        if (isMouseHighlighting) {
-          if (tilePresenters.TryGetValue(mouseHighlightedLocation, out var oldMousedTerrainTilePresenter)) {
-            oldMousedTerrainTilePresenter.SetHighlighted(false);
-          }
-          if (phantomTilePresenters.TryGetValue(mouseHighlightedLocation, out var oldMousedPhantomTilePresenter)) {
-            oldMousedPhantomTilePresenter.SetHighlighted(false);
-          }
-        }
         isMouseHighlighting = newMouseIsHighlighting;
         mouseHighlightedLocation = location;
-        if (isMouseHighlighting) {
-          if (tilePresenters.TryGetValue(mouseHighlightedLocation, out var newMousedTerrainTilePresenter)) {
-            newMousedTerrainTilePresenter.SetHighlighted(true);
-          }
-          if (phantomTilePresenters.TryGetValue(mouseHighlightedLocation, out var newMousedPhantomTilePresenter)) {
-            newMousedPhantomTilePresenter.SetHighlighted(true);
-          }
-        }
+        UpdateLocationHighlighted(oldLocation);
+        UpdateLocationHighlighted(location);
       }
 
       if (Input.GetMouseButtonDown(0)) {
@@ -77,6 +66,18 @@ namespace Geomancer {
         if (phantomTilePresenters.TryGetValue(mouseHighlightedLocation, out var newMousedPhantomTilePresenter)) {
           PhantomTileClicked?.Invoke(mouseHighlightedLocation);
         }
+      }
+    }
+
+    private void UpdateLocationHighlighted(Location location) {
+      bool highlighted = isMouseHighlighting && location == mouseHighlightedLocation;
+      bool selected = selectedLocations.Contains(location);
+      if (tilePresenters.TryGetValue(location, out var newMousedTerrainTilePresenter)) {
+        newMousedTerrainTilePresenter.SetTinted(highlighted, selected);
+      }
+      if (phantomTilePresenters.TryGetValue(location, out var newMousedPhantomTilePresenter)) {
+        // Cant select a phantom tile
+        newMousedPhantomTilePresenter.SetHighlighted(highlighted);
       }
     }
 
@@ -148,18 +149,28 @@ namespace Geomancer {
     private void addTerrainTile(Location location, TerrainTile tile) {
       var presenter = new TerrainTilePresenter(vivimap, terrain, location, tile, instantiator);
       tilePresenters.Add(location, presenter);
-      //presenter.mouseClick += () => OnMouseClick(location);
-      //presenter.mouseIn += () => OnMouseIn(location);
-      //presenter.mouseOut += () => OnMouseOut(location);
-      //  TileClicked += (loc) => {
-      //  Debug.Log("tile clicked in terrain pres!");
-      //  TerrainClicked?.Invoke(loc);
-      //};
     }
 
     private void addPhantomTile(Location location) {
       var presenter = new PhantomTilePresenter(terrain.pattern, location, instantiator);
       phantomTilePresenters.Add(location, presenter);
+    }
+
+    public SortedSet<Location> GetSelection() {
+      return new SortedSet<Location>(selectedLocations);
+    }
+
+    public void SetSelection(SortedSet<Location> locations) {
+      var (addedLocations, removedLocations) = Geomancer.Model.SetUtils.Diff(selectedLocations, locations);
+      selectedLocations = locations;
+      foreach (var addedLocation in addedLocations) {
+        Debug.LogError("added " + addedLocation);
+        UpdateLocationHighlighted(addedLocation);
+      }
+      foreach (var removedLocation in removedLocations) {
+        Debug.LogError("removed " + removedLocation);
+        UpdateLocationHighlighted(removedLocation);
+      }
     }
   }
 }

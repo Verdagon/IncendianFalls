@@ -86,6 +86,7 @@ namespace Geomancer {
 
       terrainPresenter = new TerrainPresenter(vivimap, level.terrain, instantiator);
       terrainPresenter.PhantomTileClicked += HandlePhantomTileClicked;
+      terrainPresenter.TerrainTileClicked += HandleTerrainTileClicked;
 
       cameraController = new CameraController(cameraObject, level.terrain.GetTileCenter(new Location(0, 0, 0)).ToUnity());
     }
@@ -96,6 +97,17 @@ namespace Geomancer {
         level.terrain.tiles.Add(location, terrainTile);
         return terrainTile;
       });
+    }
+
+    public void HandleTerrainTileClicked(Location location) {
+      Debug.LogError("clicked " + location);
+      var selection = terrainPresenter.GetSelection();
+      if (selection.Contains(location)) {
+        selection.Remove(location);
+      } else {
+        selection.Add(location);
+      }
+      terrainPresenter.SetSelection(selection);
     }
 
     public void Update() {
