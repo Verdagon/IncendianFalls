@@ -1,551 +1,247 @@
-SetupGameRequest(1342972937, false, false)
+SetupGameRequest(1543193135, false, false)
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:106: 553012556
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:114: -615384781
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:114: 755547376
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -615384781
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 755547376
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 878966751
-MoveRequest(4, Location(0, 2, 4))
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: 878966751
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: -769844760
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -769844760
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1853030572
-AttackRequest(4, 14048)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 1853030572
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 1853030572
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1853030572
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 734853640
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 734853640
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 204219061
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 204219061
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1467872903
-AttackRequest(4, 14048)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: -1467872903
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: -1467872903
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1467872903
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1363783465
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1363783465
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -308308499
-FireRequest(4, 14273)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:270: -308308499
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -2045068388
+FireRequest(4, 15006)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:270: -2045068388
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:273: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:275: -308308499
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:275: -2045068388
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -308308499
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -2045068388
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1771619427
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1907351629
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1771619427
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1907351629
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 851255905
-AttackRequest(4, 14273)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 851255905
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 851255905
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 851255905
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -800142323
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -800142323
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1822733009
-MoveRequest(4, Location(0, 2, 0))
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: 1822733009
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 796934848
+MoveRequest(4, Location(4, 3, 2))
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: 796934848
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: 171334781
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: 1201563335
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 171334781
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1201563335
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1500757183
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 91146554
 FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -1500757183
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 1142811885
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1142811885
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -529280079
-InteractRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:174: -529280079
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:177: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:179: -529280079
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -529280079
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1712247219
-MoveRequest(4, Location(1, 2, 1))
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: 1712247219
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: 60848991
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 60848991
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1611242973
-InteractRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:174: -1611242973
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:177: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:179: -1611242973
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1611242973
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 630284325
-MoveRequest(4, Location(4, 2, 3))
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: 630284325
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: -1021113903
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1021113903
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1601761429
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 1601761429
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -49636799
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -49636799
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1721728763
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -1721728763
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 921840305
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 921840305
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -750251659
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -750251659
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 1893317409
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1893317409
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 221225445
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 221225445
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -682997017
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -682997017
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1939878315
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 1939878315
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 1035655853
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1035655853
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -636436111
-FireRequest(4, 14144)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:270: -636436111
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:273: "Too far, can't fire!"
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:275: -636436111
-MoveRequest(4, Location(4, 2, 5))
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: -636436111
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: -793482807
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -793482807
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1829392525
-FireRequest(4, 14144)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:270: 1829392525
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:273: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:275: 1829392525
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1829392525
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1110670646
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1110670646
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -561421318
-FireRequest(4, 14341)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:270: -561421318
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:273: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:275: -561421318
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -561421318
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1280143197
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1280143197
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1342732135
-MoveRequest(4, Location(4, 2, 7))
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: 1342732135
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: 1371186022
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1371186022
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 446269824
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 446269824
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 1221899477
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1221899477
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 296983279
-DefendRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:334: 296983279
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:337: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:339: 670571162
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 670571162
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1446200815
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1446200815
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 521284617
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 521284617
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 521284617
-DefendRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:334: 521284617
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:337: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:339: 894872500
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 894872500
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1670502153
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1670502153
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -563264994
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -563264994
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 745585955
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 745585955
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 745585955
-AttackRequest(4, 14487)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 745585955
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 745585955
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 745585955
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1706716191
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1706716191
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 967300576
-DefendRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:334: 967300576
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:337: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:339: 1340888459
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1340888459
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1992948601
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1992948601
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1562603080
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1562603080
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1562603080
-DefendRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:334: 1562603080
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:337: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:339: 1936190963
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1936190963
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1397646097
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1397646097
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -2137061712
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -2137061712
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -2137061712
-DefendRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:334: -2137061712
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:337: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:339: -1763473829
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1763473829
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -802343593
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -802343593
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1541759208
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1541759208
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1541759208
-DefendRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:334: -1541759208
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:337: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:339: -1168171325
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1168171325
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -207041089
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -207041089
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -946456704
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -946456704
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -946456704
-AttackRequest(4, 14341)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: -946456704
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: -946456704
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -946456704
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -173413768
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -173413768
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -912829383
-MoveRequest(4, Location(7, 2, 5))
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: -912829383
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: -139786447
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -139786447
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -879202062
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -879202062
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -106159126
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -106159126
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -845574741
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -845574741
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -72531805
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -72531805
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -811947420
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -811947420
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -38904484
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -38904484
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -778320099
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -778320099
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -5277163
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -5277163
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -744692778
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -744692778
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 28350158
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 28350158
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -711065457
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -711065457
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 61977479
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 61977479
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 69737630
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 69737630
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -1957835198
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1957835198
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1950075047
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -1950075047
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 317319421
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 317319421
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 325079572
-MoveRequest(4, Location(7, 2, 2))
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: 325079572
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: -1702493256
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1702493256
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1853058425
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 1853058425
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -921690169
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -921690169
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1661105784
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -1661105784
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -140887082
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -140887082
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -880302697
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -880302697
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 1387091771
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1387091771
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1394851922
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 1394851922
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -632720906
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -632720906
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -624960755
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -624960755
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 91146554
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: "Path blocked!"
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -624960755
-FireRequest(4, 14176)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:270: -624960755
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:273: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:275: -624960755
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 91146554
+AttackRequest(4, 15022)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 91146554
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 91146554
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -624960755
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 91146554
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1827934296
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1428451390
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1827934296
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1428451390
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1835694447
-FireRequest(4, 14439)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:270: 1835694447
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:273: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:275: 1835694447
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1835694447
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 179122785
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 179122785
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 372383519
-MoveRequest(4, Location(7, 2, 2))
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: 372383519
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 503535192
+MoveRequest(4, Location(3, 3, 2))
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: 503535192
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: -1284188143
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: 1840840028
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1284188143
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1840840028
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1090927409
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -1090927409
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 1547468225
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -957189019
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1547468225
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -957189019
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1740728959
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 1740728959
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 84157297
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 84157297
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 277418031
-FollowDirectiveRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 277418031
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -1379153631
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1379153631
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1185892897
-InteractRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:174: -1185892897
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:177: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:179: -1185892897
-ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1185892897
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1055634401
-AttackRequest(4, 13959)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 1055634401
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 915923830
+AttackRequest(4, 14958)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 915923830
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 1055634401
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 915923830
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1055634401
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 915923830
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -407676527
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1856238047
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -407676527
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1856238047
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 164345524
-AttackRequest(4, 13959)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 164345524
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1699313634
+MoveRequest(4, Location(2, 2, 6))
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: 1699313634
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: -1072848243
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1072848243
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1812263858
+FollowDirectiveRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -1812263858
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 457717327
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 457717327
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -281698288
+MoveRequest(4, Location(1, 2, 3))
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: -281698288
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: 1988282897
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1988282897
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1248867282
+FollowDirectiveRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 1248867282
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -776118829
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -776118829
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1515534444
+FollowDirectiveRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -1515534444
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 754446741
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 754446741
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 15031126
+AttackRequest(4, 14774)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 15031126
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 164345524
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 15031126
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 164345524
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 15031126
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1690660306
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1839974704
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1690660306
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1839974704
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1298965404
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -2009954985
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1298965404
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -2009954985
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 20232413
-AttackRequest(4, 13959)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 20232413
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1545596696
+AttackRequest(4, 14774)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 1545596696
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 20232413
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 1545596696
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 20232413
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1545596696
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1834773417
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -293888832
 ResumeRequest(4)
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1834773417
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -293888832
 D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
-D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -695902749
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1033304447
+MoveRequest(4, Location(0, 1, 5))
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:238: -1033304447
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:241: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:243: 1422177321
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1422177321
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 682761706
+FollowDirectiveRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: 682761706
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -1156723822
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1156723822
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1896139437
+FollowDirectiveRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -1896139437
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: 559342331
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 559342331
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -180073284
+FollowDirectiveRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:398: -180073284
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:401: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:403: -2019558812
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -2019558812
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1535992869
+DefendRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:334: 1535992869
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:337: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:339: 1909580752
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1909580752
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 70095224
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 70095224
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -669320391
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -669320391
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -669320391
+AttackRequest(4, 14842)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: -669320391
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: -669320391
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -669320391
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1214139326
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1214139326
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1786161377
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1786161377
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1046745762
+AttackRequest(4, 14842)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 1046745762
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 1046745762
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1046745762
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -792739766
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -792739766
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1532155381
+FireRequest(4, 14842)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:270: -1532155381
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:273: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:275: -1532155381
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -1532155381
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 735239087
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 735239087
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -4176528
+FireRequest(4, 14791)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:270: -4176528
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:273: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:275: -4176528
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -4176528
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -2031749356
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -2031749356
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: 1523802325
+AttackRequest(4, 14791)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:302: 1523802325
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:305: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:307: 1523802325
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: 1523802325
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -691857803
+ResumeRequest(4)
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:495: -691857803
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:498: ""
+D:\Projects\AthModelDLLThing\IncendianFalls\Superstructure.cs:500: -1431273418

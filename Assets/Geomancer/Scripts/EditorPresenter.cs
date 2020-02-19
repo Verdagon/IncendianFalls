@@ -148,6 +148,16 @@ namespace Geomancer {
           return new Geomancer.Model.Void();
         });
       }
+      if (Input.GetKeyDown(KeyCode.Delete)) {
+        ss.Transact<Geomancer.Model.Void>(delegate () {
+          foreach (var loc in terrainPresenter.GetSelection()) {
+            var tile = level.terrain.tiles[loc];
+            level.terrain.tiles.Remove(loc);
+            tile.Destruct();
+          }
+          return new Geomancer.Model.Void();
+        });
+      }
 
       UnityEngine.Ray ray = cameraObject.GetComponentInChildren<Camera>().ScreenPointToRay(Input.mousePosition);
       terrainPresenter.UpdateMouse(ray);

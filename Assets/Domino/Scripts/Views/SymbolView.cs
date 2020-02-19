@@ -31,6 +31,15 @@ namespace Domino {
       this.withOutline = withOutline;
       this.outlineColor = outlineColor;
     }
+
+    public SymbolDescription WithFrontColor(Color newFrontColor) {
+      return new SymbolDescription(
+        symbolId,
+        newFrontColor,
+        rotationDegrees,
+        withOutline,
+        outlineColor);
+    }
   }
 
   public class ExtrudedSymbolDescription {
@@ -48,6 +57,13 @@ namespace Domino {
       this.symbol = symbol;
       this.extruded = extruded;
       this.sidesColor = sidesColor;
+    }
+
+    public ExtrudedSymbolDescription WithSymbol(SymbolDescription newSymbol) {
+      return new ExtrudedSymbolDescription(renderPriority, newSymbol, extruded, sidesColor);
+    }
+    public ExtrudedSymbolDescription WithSidesColor(Color newSidesColor) {
+      return new ExtrudedSymbolDescription(renderPriority, symbol, extruded, newSidesColor);
     }
   }
 

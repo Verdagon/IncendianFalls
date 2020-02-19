@@ -7,23 +7,28 @@ using UnityEngine;
 using Domino;
 
 namespace IncendianFalls {
-  public interface ITileMousedObserver {
-    void OnMouseClick(Location location);
-    void OnMouseIn(Location location);
-    void OnMouseOut(Location location);
+  public class TerrainTilePresenterTile : MonoBehaviour {
+    // PhantomTilePresenter attaches this to the TileView it creates, so that when EditorPresenter
+    // raycasts, it can know the PhantomTilePresenter that owns this TileView.
+    // This approach is an implementation detail of the Editor, and shouldnt enter Domino.
+    public TerrainTilePresenter presenter;
+
+    public void Init(TerrainTilePresenter presenter) {
+      this.presenter = presenter;
+    }
   }
 
   public class TerrainTilePresenter : IITerrainTileComponentMutBunchObserver {
-    public List<ITileMousedObserver> observers = new List<ITileMousedObserver>();
-
     Atharia.Model.Terrain terrain;
-    Location location;
+    public readonly Location location;
     TerrainTile terrainTile;
     Instantiator instantiator;
 
     TileView tileView;
 
     ITerrainTileComponentMutBunchBroadcaster componentsBroadcaster;
+
+    bool highlighted = false;
 
     public TerrainTilePresenter(
         Atharia.Model.Terrain terrain,
@@ -43,10 +48,17 @@ namespace IncendianFalls {
                   terrainTile.elevation * terrain.elevationStepHeight,
                   positionVec2.y),
               GetDescription());
+      tileView.gameObject.AddComponent<TerrainTilePresenterTile>().Init(this);
 
       componentsBroadcaster = new ITerrainTileComponentMutBunchBroadcaster(terrainTile.components);
       componentsBroadcaster.AddObserver(this);
 
+      tileView.SetDescription(GetDescription());
+    }
+
+    public void SetHighlighted(bool highlighted) {
+      this.highlighted = highlighted;
+      Debug.LogError("loc " + location + " now " + highlighted);
       tileView.SetDescription(GetDescription());
     }
 
@@ -106,6 +118,17 @@ namespace IncendianFalls {
               overlayDescription,
               featureDescription,
               itemSymbolDescriptionByItemId);
+
+      if (highlighted) {
+        var frontColor = (description.tileSymbolDescription.symbol.frontColor * 3 + new Color(1, 1, 1)) / 4;
+        var sidesColor = (description.tileSymbolDescription.sidesColor * 5 + new Color(1, 1, 1)) / 6;
+        description =
+          description.WithTileSymbolDescription(
+            description.tileSymbolDescription
+              .WithSymbol(description.tileSymbolDescription.symbol.WithFrontColor(frontColor))
+              .WithSidesColor(sidesColor));
+      }
+
       return description;
     }
 
@@ -390,24 +413,6 @@ namespace IncendianFalls {
         } else {
           Asserts.Assert(false, ttc.ToString());
         }
-      }
-    }
-
-    public void OnMouseClick() {
-      foreach (var observer in observers) {
-        observer.OnMouseClick(location);
-      }
-    }
-
-    public void OnMouseEnter() {
-      foreach (var observer in observers) {
-        observer.OnMouseIn(location);
-      }
-    }
-
-    public void OnMouseExit() {
-      foreach (var observer in observers) {
-        observer.OnMouseOut(location);
       }
     }
 

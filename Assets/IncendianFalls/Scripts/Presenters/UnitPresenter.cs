@@ -7,12 +7,6 @@ using System.Collections.Generic;
 using Domino;
 
 namespace IncendianFalls {
-  public interface IUnitMousedObserver {
-    void OnUnitMouseClick(Unit unit);
-    void OnUnitMouseIn(Unit unit);
-    void OnUnitMouseOut(Unit unit);
-  }
-
   public class UnitPresenter :
       IUnitEffectVisitor,
       IUnitEffectObserver,
@@ -21,14 +15,12 @@ namespace IncendianFalls {
       IIUnitComponentMutBunchObserver,
       IBideAICapabilityUCEffectObserver,
       IBideAICapabilityUCEffectVisitor {
-    public List<IUnitMousedObserver> observers = new List<IUnitMousedObserver>();
-
     ITimer timer;
     SoundPlayer soundPlayer;
     ExecutionStaller resumeStaller;
     ExecutionStaller turnStaller;
     Game game;
-    Unit unit;
+    public readonly Unit unit;
     Instantiator instantiator;
     NarrationPanelView narrator;
     bool isRavashrike;
@@ -558,39 +550,6 @@ namespace IncendianFalls {
             new List<KeyValuePair<int, ExtrudedSymbolDescription>>(),
             hpRatio,
               mpRatio);
-      }
-    }
-
-    public void OnMouseClick() {
-      // Otherwise, where would this be called from
-      Asserts.Assert(unitView != null);
-
-      if (unit.Exists() && unit.alive) {
-        foreach (var observer in observers) {
-          observer.OnUnitMouseClick(unit);
-        }
-      }
-    }
-
-    public void OnMouseEnter() {
-      // Otherwise, where would this be called from
-      Asserts.Assert(unitView != null);
-
-      if (unit.Exists() && unit.alive) {
-        foreach (var observer in observers) {
-          observer.OnUnitMouseIn(unit);
-        }
-      }
-    }
-
-    public void OnMouseExit() {
-      // Otherwise, where would this be called from
-      Asserts.Assert(unitView != null);
-
-      if (unit.Exists() && unit.alive) {
-        foreach (var observer in observers) {
-          observer.OnUnitMouseOut(unit);
-        }
       }
     }
   }

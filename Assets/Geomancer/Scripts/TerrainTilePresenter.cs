@@ -154,23 +154,10 @@ namespace Geomancer {
           frontColor = tileDescription.tileSymbolDescription.symbol.frontColor;
         }
         tileDescription =
-          new TileDescription(
-            tileDescription.elevationStepHeight,
-            tileDescription.tileRotationDegrees,
-            tileDescription.depth,
-            new ExtrudedSymbolDescription(
-              tileDescription.tileSymbolDescription.renderPriority,
-              new SymbolDescription(
-                tileDescription.tileSymbolDescription.symbol.symbolId,
-                frontColor,
-                tileDescription.tileSymbolDescription.symbol.rotationDegrees,
-                tileDescription.tileSymbolDescription.symbol.withOutline,
-                tileDescription.tileSymbolDescription.symbol.outlineColor),
-              tileDescription.tileSymbolDescription.extruded,
-              tileDescription.tileSymbolDescription.sidesColor),
-            tileDescription.maybeOverlaySymbolDescription,
-            tileDescription.maybeFeatureSymbolDescription,
-            tileDescription.itemSymbolDescriptionByItemId);
+          tileDescription.WithTileSymbolDescription(
+            tileDescription.tileSymbolDescription.WithSymbol(
+              tileDescription.tileSymbolDescription.symbol.WithFrontColor(
+                frontColor)));
       }
       return (tileDescription, unitDescription);
     }

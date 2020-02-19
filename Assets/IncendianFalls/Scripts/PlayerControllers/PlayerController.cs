@@ -16,7 +16,7 @@ namespace Domino {
   public class PlayerController :
       IUnitEffectObserver, IUnitEffectVisitor,
       IGameEffectObserver, IGameEffectVisitor,
-      IGameMousedObserver, IModeDelegate {
+      IModeDelegate {
     ISuperstructure ss;
     Superstate superstate;
     Game game;
@@ -60,8 +60,6 @@ namespace Domino {
       this.resumeStaller.unstalledEvent += (sender) => MaybeResume();
       this.turnStaller.unstalledEvent += (sender) => MaybeResume();
 
-      gamePresenter.observers.Add(this);
-
       this.player = this.game.player;
       player.AddObserver(this);
       RefreshPlayerStatusText();
@@ -73,31 +71,40 @@ namespace Domino {
       MaybeResume();
     }
 
-    public void OnUnitMouseClick(Unit unit) {
-      //Debug.Log("Clicked on unit " + unit.id + " at " + unit.location);
-      var location = unit.location;
-      OnTileMouseClick(location);
+    public void LookAt(Unit maybeUnit) {
+      if (maybeUnit == null) {
+        var symbolsAndLabels = new List<KeyValuePair<SymbolDescription, string>>();
+        lookPanelView.SetStuff(false, "", "", symbolsAndLabels);
+      } else {
+        looker.Look(maybeUnit);
+      }
     }
 
-    public void OnUnitMouseIn(Unit unit) {
-      looker.Look(unit);
-    }
+    //public void OnUnitMouseClick(Unit unit) {
+    //  //Debug.Log("Clicked on unit " + unit.id + " at " + unit.location);
+    //  var location = unit.location;
+    //  OnTileMouseClick(location);
+    //}
 
-    public void OnUnitMouseOut(Unit unit) {
-      var symbolsAndLabels = new List<KeyValuePair<SymbolDescription, string>>();
-      lookPanelView.SetStuff(false, "", "", symbolsAndLabels);
-    }
+    //public void OnUnitMouseIn(Unit unit) {
+    //  looker.Look(unit);
+    //}
+
+    //public void OnUnitMouseOut(Unit unit) {
+    //  var symbolsAndLabels = new List<KeyValuePair<SymbolDescription, string>>();
+    //  lookPanelView.SetStuff(false, "", "", symbolsAndLabels);
+    //}
 
     public void OnTileMouseClick(Location newLocation) {
       //Debug.Log("Clicked on tile " + newLocation);
       mode.OnTileMouseClick(newLocation);
     }
 
-    public void OnTileMouseIn(Location location) {
-    }
+    //public void OnTileMouseIn(Location location) {
+    //}
 
-    public void OnTileMouseOut(Location location) {
-    }
+    //public void OnTileMouseOut(Location location) {
+    //}
 
     public void DefendClicked() {
       mode.DefendClicked();

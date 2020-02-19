@@ -32,6 +32,17 @@ namespace Domino {
       this.itemSymbolDescriptionByItemId = itemSymbolDescriptionByItemId;
     }
 
+    public TileDescription WithTileSymbolDescription(ExtrudedSymbolDescription newTileSymbolDescription) {
+      return new TileDescription(
+        elevationStepHeight,
+        tileRotationDegrees,
+        depth,
+        newTileSymbolDescription,
+        maybeOverlaySymbolDescription,
+        maybeFeatureSymbolDescription,
+        itemSymbolDescriptionByItemId);
+    }
+
     public override bool Equals(object obj) {
       if (!(obj is TileDescription))
         return false;

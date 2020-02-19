@@ -8,14 +8,17 @@ using Domino;
 
 namespace IncendianFalls {
   public delegate void OnTerrainClicked(Location location);
+  public delegate void OnTerrainHovered(Location location);
 
-  public class TerrainPresenter : ITerrainEffectVisitor, ITerrainEffectObserver, ITerrainTileByLocationMutMapEffectObserver, ITerrainTileByLocationMutMapEffectVisitor, ITileMousedObserver {
-    public List<ITileMousedObserver> observers = new List<ITileMousedObserver>();
+  public class TerrainPresenter : ITerrainEffectVisitor, ITerrainEffectObserver, ITerrainTileByLocationMutMapEffectObserver, ITerrainTileByLocationMutMapEffectVisitor {
+    public event OnTerrainClicked TerrainClicked;
+    public event OnTerrainHovered TerrainHovered;
 
     Atharia.Model.Terrain terrain;
     Instantiator instantiator;
     Dictionary<Location, TerrainTilePresenter> tilePresenters = new Dictionary<Location, TerrainTilePresenter>();
-    
+    Location maybeHighlightLocation = null;
+
     public TerrainPresenter(Atharia.Model.Terrain terrain, Instantiator instantiator) {
       this.terrain = terrain;
       this.instantiator = instantiator;
@@ -30,11 +33,6 @@ namespace IncendianFalls {
     public void addTerrainTile(Location location, TerrainTile tile) {
       var presenter = new TerrainTilePresenter(terrain, location, tile, instantiator);
       tilePresenters.Add(location, presenter);
-      presenter.observers.Add(this);
-      //  TileClicked += (loc) => {
-      //  Debug.Log("tile clicked in terrain pres!");
-      //  TerrainClicked?.Invoke(loc);
-      //};
     }
 
     public void DestroyTerrainPresenter() {
@@ -62,22 +60,38 @@ namespace IncendianFalls {
     public void visitTerrainTileByLocationMutMapDeleteEffect(TerrainTileByLocationMutMapDeleteEffect effect) { }
     public void visitTerrainTileByLocationMutMapRemoveEffect(TerrainTileByLocationMutMapRemoveEffect effect) { }
 
-    public void OnMouseClick(Location location) {
-      foreach (var observer in observers) {
-        observer.OnMouseClick(location);
+
+    public void SetHighlightLocation(Location location) {
+      Location oldLocation = maybeHighlightLocation;
+      if (location != maybeHighlightLocation) {
+        Debug.LogError("Now over " + location);
+        maybeHighlightLocation = location;
+        if (oldLocation != null)
+          UpdateLocationHighlighted(oldLocation);
+        if (location != null)
+          UpdateLocationHighlighted(location);
+        TerrainHovered?.Invoke(location);
+      }
+
+      if (maybeHighlightLocation != null && Input.GetMouseButtonDown(0)) {
+        if (tilePresenters.TryGetValue(maybeHighlightLocation, out var newMousedPhantomTilePresenter)) {
+          TerrainClicked?.Invoke(maybeHighlightLocation);
+        }
       }
     }
 
-    public void OnMouseIn(Location location) {
-      foreach (var observer in observers) {
-        observer.OnMouseIn(location);
+    private void UpdateLocationHighlighted(Location location) {
+      if (tilePresenters.TryGetValue(location, out var newMousedTerrainTilePresenter)) {
+        newMousedTerrainTilePresenter.SetHighlighted(location == maybeHighlightLocation);
       }
     }
 
-    public void OnMouseOut(Location location) {
-      foreach (var observer in observers) {
-        observer.OnMouseOut(location);
+    public Location LocationFor(GameObject gameObject) {
+      var mousedTerrainTilePresenterTile = gameObject.GetComponentInParent<TerrainTilePresenterTile>();
+      if (mousedTerrainTilePresenterTile) {
+        return mousedTerrainTilePresenterTile.presenter.location;
       }
+      return null;
     }
   }
 }
