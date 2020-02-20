@@ -5,6 +5,7 @@ using Geomancer.Model;
 using UnityEngine;
 using UnityEngine.UI;
 using Domino;
+using System.IO;
 
 namespace Geomancer {
   class EditorLogger : Geomancer.Model.ILogger {
@@ -41,6 +42,14 @@ namespace Geomancer {
     public void Start() {
       // var timestamp = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
+
+      //try {
+      //  writers.Add(new StreamWriter(logFilenames[i], false));
+      //} catch (UnauthorizedAccessException e) {
+      //  externalSS.GetRoot().logger.Error(
+      //      "Couldn't make a log file: " + e.Message);
+      //}
+
       ss = new Root(new EditorLogger());
 
       var entries = new Dictionary<string, List<Vivimap.IDescription>>();
@@ -62,27 +71,38 @@ namespace Geomancer {
       entries.Add("dirt", dirtEntries);
       var vivimap = new Vivimap(entries);
 
+
       var pattern = PentagonPattern9.makePentagon9Pattern();
       level = ss.Transact(delegate () {
         var terrain = ss.EffectTerrainCreate(pattern, 0.2f, ss.EffectTerrainTileByLocationMutMapCreate());
-        {
-          var tile = ss.EffectTerrainTileCreate(1, ss.EffectStrMutListCreate());
-          tile.members.Add("grass");
-          terrain.tiles.Add(new Location(0, 0, 0), tile);
-        }
-        {
-          var tile = ss.EffectTerrainTileCreate(1, ss.EffectStrMutListCreate());
-          //tile.members.Add("dirt");
-          tile.members.Add("rocks");
-          terrain.tiles.Add(new Location(0, 0, 1), tile);
-        }
-        {
-          var tile = ss.EffectTerrainTileCreate(2, ss.EffectStrMutListCreate());
-          tile.members.Add("grass");
-          terrain.tiles.Add(new Location(0, 0, 2), tile);
-        }
         return ss.EffectLevelCreate(terrain);
       });
+
+      FileStream fileStream = new FileStream("level.athlev", FileMode.OpenOrCreate);
+      StreamReader reader = new StreamReader(fileStream);
+
+      while (true) {
+        string line = reader.ReadLine();
+        if (line == null) {
+          break;
+        }
+        string[] parts = line.Split(' ');
+        int groupX = int.Parse(parts[0]);
+        int groupY = int.Parse(parts[1]);
+        int indexInGroup = int.Parse(parts[2]);
+        int elevation = int.Parse(parts[3]);
+
+        ss.Transact(delegate () {
+          var tile = ss.EffectTerrainTileCreate(elevation, ss.EffectStrMutListCreate());
+          level.terrain.tiles.Add(new Location(groupX, groupY, indexInGroup), tile);
+
+          for (int i = 4; i < parts.Length; i++) {
+            tile.members.Add(parts[i]);
+          }
+
+          return new Geomancer.Model.Void();
+        });
+      }
 
       terrainPresenter = new TerrainPresenter(vivimap, level.terrain, instantiator);
       terrainPresenter.PhantomTileClicked += HandlePhantomTileClicked;
@@ -158,9 +178,32 @@ namespace Geomancer {
           return new Geomancer.Model.Void();
         });
       }
+      if (Input.GetKeyDown(KeyCode.S)) {
+        Save();
+      }
 
       UnityEngine.Ray ray = cameraObject.GetComponentInChildren<Camera>().ScreenPointToRay(Input.mousePosition);
       terrainPresenter.UpdateMouse(ray);
+    }
+
+    private void Save() {
+      Save(new StreamWriter(new FileStream("level.athlev", FileMode.OpenOrCreate)));
+
+      var timestamp = (int)new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+      Save(new StreamWriter(new FileStream("level" + timestamp + ".athlev", FileMode.OpenOrCreate)));
+    }
+
+    private void Save(StreamWriter writer) {
+      foreach (var locAndTile in level.terrain.tiles) {
+        var loc = locAndTile.Key;
+        var tile = locAndTile.Value;
+        string line = loc.groupX + " " + loc.groupY + " " + loc.indexInGroup + " " + tile.elevation;
+        foreach (var member in tile.members) {
+          line += " " + member;
+        }
+        writer.WriteLine(line);
+      }
+      writer.Close();
     }
   }
 }
