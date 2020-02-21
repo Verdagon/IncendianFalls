@@ -42,10 +42,14 @@ namespace Geomancer {
     Dictionary<KeyCode, string> memberByKeyCode;
 
     public void Start() {
-      memberByKeyCode = new Dictionary<KeyCode, string>();
-      memberByKeyCode.Add(KeyCode.G, "grass");
-      memberByKeyCode.Add(KeyCode.D, "dirt");
-      memberByKeyCode.Add(KeyCode.R, "rocks");
+      memberByKeyCode = new Dictionary<KeyCode, string>() {
+        [KeyCode.G] = "grass",
+        [KeyCode.M] = "mud",
+        [KeyCode.D] = "dirt",
+        [KeyCode.R] = "rocks",
+        [KeyCode.X] = "marker",
+        [KeyCode.C] = "cave"
+      };
 
       // var timestamp = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
@@ -58,25 +62,6 @@ namespace Geomancer {
       //}
 
       ss = new Root(new EditorLogger());
-
-      var entries = new Dictionary<string, List<Vivimap.IDescription>>();
-      var grassEntries = new List<Vivimap.IDescription>();
-      grassEntries.Add(new Vivimap.SideColorDescriptionForIDescription(new Color(.5f, .5f, 0)));
-      grassEntries.Add(new Vivimap.TopColorDescriptionForIDescription(new Color(0, 0, .5f)));
-      entries.Add("grass", grassEntries);
-      var rocksEntries = new List<Vivimap.IDescription>();
-      rocksEntries.Add(
-        new Vivimap.OverlayDescriptionForIDescription(
-          new ExtrudedSymbolDescription(
-            RenderPriority.TILE,
-            new SymbolDescription("f", new Color(.5f, .5f, .5f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
-            false,
-            new Color(0, 0, 0))));
-      entries.Add("rocks", rocksEntries);
-      var dirtEntries = new List<Vivimap.IDescription>();
-      dirtEntries.Add(new Vivimap.SideColorDescriptionForIDescription(new Color(.6f, .6f, 0)));
-      entries.Add("dirt", dirtEntries);
-      var vivimap = new Vivimap(entries);
 
 
       var pattern = PentagonPattern9.makePentagon9Pattern();
@@ -92,6 +77,9 @@ namespace Geomancer {
             if (line == null) {
               break;
             }
+            if (line == "") {
+              continue;
+            }
             string[] parts = line.Split(' ');
             int groupX = int.Parse(parts[0]);
             int groupY = int.Parse(parts[1]);
@@ -100,6 +88,7 @@ namespace Geomancer {
 
             ss.Transact(delegate () {
               var tile = ss.EffectTerrainTileCreate(elevation, ss.EffectStrMutListCreate());
+              Debug.Log("Adding tile (" + groupX + ", " + groupY + ", " + indexInGroup + ")");
               level.terrain.tiles.Add(new Location(groupX, groupY, indexInGroup), tile);
 
               for (int i = 4; i < parts.Length; i++) {
@@ -112,11 +101,69 @@ namespace Geomancer {
         }
       }
 
-      terrainPresenter = new TerrainPresenter(vivimap, level.terrain, instantiator);
+      if (level.terrain.tiles.Count == 0) {
+      Debug.Log("Adding starting tile");
+        ss.Transact(delegate () {
+          var tile = ss.EffectTerrainTileCreate(1, ss.EffectStrMutListCreate());
+          level.terrain.tiles.Add(new Location(0, 0, 0), tile);
+          return new Geomancer.Model.Void();
+        });
+      }
+
+      terrainPresenter = new TerrainPresenter(MakeVivimap(), level.terrain, instantiator);
       terrainPresenter.PhantomTileClicked += HandlePhantomTileClicked;
       terrainPresenter.TerrainTileClicked += HandleTerrainTileClicked;
 
       cameraController = new CameraController(cameraObject, level.terrain.GetTileCenter(new Location(0, 0, 0)).ToUnity());
+    }
+
+    private Vivimap MakeVivimap() {
+      var entries = new Dictionary<string, List<Vivimap.IDescription>>();
+      entries.Add("grass", new List<Vivimap.IDescription>() {
+        new Vivimap.SideColorDescriptionForIDescription(new Color(0, .3f, 0)),
+        new Vivimap.TopColorDescriptionForIDescription(new Color(0, .5f, 0)),
+        new Vivimap.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
+      });
+      entries.Add("rocks", new List<Vivimap.IDescription>() {
+        new Vivimap.OverlayDescriptionForIDescription(
+          new ExtrudedSymbolDescription(
+            RenderPriority.TILE,
+            new SymbolDescription("f", new Color(.5f, .5f, .5f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
+            false,
+            new Color(0, 0, 0)))
+      });
+      entries.Add("cave", new List<Vivimap.IDescription>() {
+        new Vivimap.FeatureDescriptionForIDescription(
+                  new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          "p",
+                          new Color(0, 0, 0),
+                          0,
+                          OutlineMode.WithOutline,
+                          new Color(1, 1, 1)),
+                      false,
+                      new Color(1f, 1f, 1f)))
+      });
+      entries.Add("dirt", new List<Vivimap.IDescription>() {
+        new Vivimap.TopColorDescriptionForIDescription(new Color(.6f, .3f, 0)),
+        new Vivimap.SideColorDescriptionForIDescription(new Color(.4f, .2f, 0)),
+        new Vivimap.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
+      });
+      entries.Add("mud", new List<Vivimap.IDescription>() {
+        new Vivimap.TopColorDescriptionForIDescription(new Color(.4f, .2f, 0)),
+        new Vivimap.SideColorDescriptionForIDescription(new Color(.27f, .13f, 0)),
+        new Vivimap.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
+      });
+      entries.Add("marker", new List<Vivimap.IDescription>() {
+        new Vivimap.OverlayDescriptionForIDescription(
+          new ExtrudedSymbolDescription(
+            RenderPriority.TILE,
+            new SymbolDescription("i", new Color(1f, 1f, 1f), 0, OutlineMode.WithBackOutline, new Color(0, 0, 0)),
+            false,
+            new Color(0, 0, 0)))
+      });
+      return new Vivimap(entries);
     }
 
     public void HandlePhantomTileClicked(Location location) {
@@ -246,14 +293,14 @@ namespace Geomancer {
     }
 
     private void Save() {
-      using (var fileStream = new FileStream("level.athlev", FileMode.OpenOrCreate)) {
+      using (var fileStream = new FileStream("level.athlev", FileMode.Create)) {
         using (var writer = new StreamWriter(fileStream)) {
           Save(writer);
         }
       }
 
       var timestamp = (int)new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
-      using (var fileStream = new FileStream("level" + timestamp + ".athlev", FileMode.OpenOrCreate)) {
+      using (var fileStream = new FileStream("level" + timestamp + ".athlev", FileMode.Create)) {
         using (var writer = new StreamWriter(fileStream)) {
           Save(writer);
         }
@@ -264,6 +311,7 @@ namespace Geomancer {
       foreach (var locAndTile in level.terrain.tiles) {
         var loc = locAndTile.Key;
         var tile = locAndTile.Value;
+        Debug.Log("Writing (" + loc.groupX + ", " + loc.groupY + ", " + loc.indexInGroup + ")");
         string line = loc.groupX + " " + loc.groupY + " " + loc.indexInGroup + " " + tile.elevation;
         foreach (var member in tile.members) {
           line += " " + member;

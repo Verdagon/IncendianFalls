@@ -367,9 +367,6 @@
     <Reference Include="IncendianFalls">
       <HintPath>D:/IncendianFalls/Assets/IncendianFalls.dll</HintPath>
     </Reference>
-    <Reference Include="WebAssembly">
-      <HintPath>D:/IncendianFalls/Assets/WebAssembly.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>D:/IncendianFalls/Library/PackageCache/com.unity.ads@2.3.1/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>

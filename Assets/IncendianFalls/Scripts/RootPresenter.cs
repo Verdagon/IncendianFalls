@@ -5,10 +5,6 @@ using Atharia.Model;
 using UnityEngine;
 using UnityEngine.UI;
 using Domino;
-using WebAssembly; // Acquire from https://www.nuget.org/packages/WebAssembly
-using WebAssembly.Instructions;
-using WebAssembly.Runtime;
-
 namespace IncendianFalls {
   public class TimerEntry {
     public readonly float time;

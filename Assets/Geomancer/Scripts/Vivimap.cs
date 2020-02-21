@@ -15,6 +15,10 @@ namespace Geomancer {
       public readonly UnityEngine.Color color;
       public SideColorDescriptionForIDescription(UnityEngine.Color color) { this.color = color; }
     }
+    public class OutlineColorDescriptionForIDescription : IDescription {
+      public readonly UnityEngine.Color color;
+      public OutlineColorDescriptionForIDescription(UnityEngine.Color color) { this.color = color; }
+    }
     public class OverlayDescriptionForIDescription : IDescription {
       public readonly Domino.ExtrudedSymbolDescription symbol;
       public OverlayDescriptionForIDescription(Domino.ExtrudedSymbolDescription symbol) { this.symbol = symbol; }
@@ -50,6 +54,8 @@ namespace Geomancer {
         Domino.UnitDescription defaultUnit,
         List<String> members) {
       UnityEngine.Color topColor = defaultTile.tileSymbolDescription.symbol.frontColor;
+      bool specifiedOutline = false;
+      UnityEngine.Color outlineColor = defaultTile.tileSymbolDescription.symbol.outlineColor;
       UnityEngine.Color sideColor = defaultTile.tileSymbolDescription.sidesColor;
       Domino.ExtrudedSymbolDescription maybeOverlay = null;
       Domino.ExtrudedSymbolDescription maybeFeature = null;
@@ -66,6 +72,10 @@ namespace Geomancer {
             }
             if (memberEntry is SideColorDescriptionForIDescription) {
               sideColor = (memberEntry as SideColorDescriptionForIDescription).color;
+            }
+            if (memberEntry is OutlineColorDescriptionForIDescription) {
+              specifiedOutline = true;
+              outlineColor = (memberEntry as OutlineColorDescriptionForIDescription).color;
             }
             if (memberEntry is OverlayDescriptionForIDescription) {
               maybeOverlay = (memberEntry as OverlayDescriptionForIDescription).symbol;
@@ -96,8 +106,8 @@ namespace Geomancer {
                   defaultTile.tileSymbolDescription.symbol.symbolId,
                   topColor,
                   defaultTile.tileRotationDegrees,
-                  defaultTile.tileSymbolDescription.symbol.withOutline,
-                  defaultTile.tileSymbolDescription.symbol.outlineColor),
+                  specifiedOutline ? Domino.OutlineMode.WithOutline : defaultTile.tileSymbolDescription.symbol.withOutline,
+                  outlineColor),
               defaultTile.tileSymbolDescription.extruded,
               sideColor);
 
