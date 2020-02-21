@@ -196,7 +196,9 @@ namespace Geomancer {
 
     public void visitTerrainTileCreateEffect(TerrainTileCreateEffect effect) {}
 
-    public void visitTerrainTileDeleteEffect(TerrainTileDeleteEffect effect) {}
+    public void visitTerrainTileDeleteEffect(TerrainTileDeleteEffect effect) {
+      tileView.DestroyTile();
+    }
 
     public void visitTerrainTileSetElevationEffect(TerrainTileSetElevationEffect effect) {
       Debug.LogError("elevation changed to " + effect.newValue);

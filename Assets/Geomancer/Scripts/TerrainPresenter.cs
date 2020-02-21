@@ -118,7 +118,11 @@ namespace Geomancer {
     public void visitTerrainTileByLocationMutMapCreateEffect(TerrainTileByLocationMutMapCreateEffect effect) { }
     public void visitTerrainTileByLocationMutMapDeleteEffect(TerrainTileByLocationMutMapDeleteEffect effect) { }
     public void visitTerrainTileByLocationMutMapRemoveEffect(TerrainTileByLocationMutMapRemoveEffect effect) {
-
+      tilePresenters.Remove(effect.key);
+      var selection = GetSelection();
+      selection.Remove(effect.key);
+      SetSelection(selection);
+      RefreshPhantomTiles();
     }
 
     private void RefreshPhantomTiles() {
