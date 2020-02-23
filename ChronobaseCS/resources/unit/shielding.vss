@@ -1,0 +1,23 @@
+
+mut struct ShieldingUC {
+  ShieldingUC isa IDefenseUC;
+  ShieldingUC isa IPreActingUC;
+
+  fn Destruct(this: ShieldingUC overrides IDestructible): Void {
+    ShieldingUCExtensions.Destruct
+  }
+  fn AffectIncomingDamage(
+      detail: ShieldingUC overrides IDefenseUC,
+      incomingDamage: Int)
+  : Int {
+    ShieldingUCExtensions.AffectIncomingDamage
+  }
+  fn PreAct(
+      detail: ShieldingUC overrides IPreActingUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool {
+    ShieldingUCExtensions.PreAct
+  }
+}

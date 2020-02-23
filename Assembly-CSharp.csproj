@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{2A32BDEE-1E58-CB67-4006-6CAE14A452A8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -102,11 +103,11 @@
     <Compile Include="Assets\Domino\Scripts\Views\TileView.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\UnitView.cs" />
     <Compile Include="Assets\Geomancer\Scripts\EditorPresenter.cs" />
+    <Compile Include="Assets\Geomancer\Scripts\MemberToViewMapper.cs" />
     <Compile Include="Assets\Geomancer\Scripts\ModelExtensions.cs" />
     <Compile Include="Assets\Geomancer\Scripts\PhantomTilePresenter.cs" />
     <Compile Include="Assets\Geomancer\Scripts\TerrainPresenter.cs" />
     <Compile Include="Assets\Geomancer\Scripts\TerrainTilePresenter.cs" />
-    <Compile Include="Assets\Geomancer\Scripts\Vivimap.cs" />
     <Compile Include="Assets\IncendianFalls\Scripts\ConsoleDriver.cs" />
     <Compile Include="Assets\IncendianFalls\Scripts\GamePresenter.cs" />
     <Compile Include="Assets\IncendianFalls\Scripts\ISuperstructure.cs" />

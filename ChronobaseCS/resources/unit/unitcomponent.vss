@@ -1,0 +1,81 @@
+
+mut interface IUnitComponent {
+  IUnitComponent isa IDestructible;
+}
+
+mut interface IDefenseUC {
+  IDefenseUC isa IUnitComponent;
+  fn AffectIncomingDamage(incomingDamage: Int): Int;
+}
+
+mut interface IReactingToAttacksUC {
+  IReactingToAttacksUC isa IUnitComponent;
+
+  fn React(
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit,
+      attacker: Unit)
+  : Bool;
+}
+
+mut interface IPreActingUC {
+  IPreActingUC isa IUnitComponent;
+
+  fn PreAct(
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool;
+}
+
+mut interface IPostActingUC {
+  IPostActingUC isa IUnitComponent;
+
+  fn PostAct(
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool;
+}
+
+mut interface IAICapabilityUC {
+  IAICapabilityUC isa IUnitComponent;
+
+  fn ProduceImpulse(
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): IImpulse;
+}
+
+mut interface IImpulsePreReactor {
+  IImpulsePreReactor isa IUnitComponent;
+
+  // Imagine if the unit becomes critically injured when biding,
+  // it might have a stronger impulse to flee than to bide, and we'll
+  // want to cancel the bide at that time.
+  // This is how the BidingOperationUC will know to cancel itself.
+  fn BeforeImpulse(
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit,
+      originatingCapability: IAICapabilityUC,
+      impulse: IImpulse)
+  : Void;
+}
+
+mut interface IImpulsePostReactor {
+  IImpulsePostReactor isa IUnitComponent;
+
+  // Imagine if we're doing an AttackImpulse. If the unit dies, we
+  // want to remove the current KillDirective.
+  // The KillDirective itself should do this.
+  // That way, others can reuse the AttackImpulse (like the time script!)
+  fn AfterImpulse(
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit,
+      originatingCapability: IAICapabilityUC,
+      impulse: IImpulse)
+  : Void;
+}

@@ -1,0 +1,20 @@
+
+mut struct CounterImpulse {
+  CounterImpulse isa IImpulse;
+
+  weight: Int;
+
+  fn Destruct(this: CounterImpulse overrides IDestructible): Void {
+    CounterImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: CounterImpulse overrides IImpulse): Int {
+    CounterImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: CounterImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    CounterImpulseExtensions.Enact
+  }
+}

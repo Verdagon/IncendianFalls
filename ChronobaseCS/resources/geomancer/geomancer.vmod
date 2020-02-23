@@ -1,0 +1,7 @@
+output: D:\Projects\Atharia\Geomancer\Model
+namespace: Geomancer.Model
+vstl/rand.vss
+vstl/vec.vss
+pattern/location.vss
+pattern/pattern.vss
+geomancer/level.vss

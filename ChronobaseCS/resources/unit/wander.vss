@@ -1,0 +1,16 @@
+
+mut struct WanderAICapabilityUC {
+  WanderAICapabilityUC isa IAICapabilityUC;
+
+  fn Destruct(this: WanderAICapabilityUC overrides IDestructible): Void {
+    WanderAICapabilityUCExtensions.Destruct
+  }
+  fn ProduceImpulse(
+      this: WanderAICapabilityUC overrides IAICapabilityUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : IImpulse {
+    WanderAICapabilityUCExtensions.ProduceImpulse
+  }
+}

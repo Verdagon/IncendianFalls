@@ -1,0 +1,6 @@
+
+imm struct Location {
+  groupX: Int;
+  groupY: Int;
+  indexInGroup: Int;
+}

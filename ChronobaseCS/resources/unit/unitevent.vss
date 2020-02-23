@@ -1,0 +1,73 @@
+
+imm interface IUnitEvent {
+  fn GetTime(): Int;
+}
+
+imm struct UnitStepEvent {
+  UnitStepEvent isa IUnitEvent;
+
+  time: Int;
+  unitId: Int;
+  from: Location;
+  to: Location;
+
+  fn GetTime(event: UnitStepEvent overrides IUnitEvent): Int {
+    UnitStepEventExtensions.GetTime
+  }
+}
+
+imm struct UnitShieldingEvent {
+  UnitShieldingEvent isa IUnitEvent;
+
+  time: Int;
+
+  fn GetTime(event: UnitShieldingEvent overrides IUnitEvent): Int {
+    UnitShieldingEventExtensions.GetTime
+  }
+}
+
+imm struct UnitCounteringEvent {
+  UnitCounteringEvent isa IUnitEvent;
+
+  time: Int;
+
+  fn GetTime(event: UnitCounteringEvent overrides IUnitEvent): Int {
+    UnitCounteringEventExtensions.GetTime
+  }
+}
+
+imm struct UnitAttackEvent {
+  UnitAttackEvent isa IUnitEvent;
+
+  time: Int;
+  attackerId: Int;
+  victimId: Int;
+
+  fn GetTime(event: UnitAttackEvent overrides IUnitEvent): Int {
+    UnitAttackEventExtensions.GetTime
+  }
+}
+
+imm struct UnitFireEvent {
+  UnitFireEvent isa IUnitEvent;
+
+  time: Int;
+  attackerId: Int;
+  victimId: Int;
+
+  fn GetTime(event: UnitFireEvent overrides IUnitEvent): Int {
+    UnitFireEventExtensions.GetTime
+  }
+}
+
+imm struct UnitUnleashBideEvent {
+  UnitUnleashBideEvent isa IUnitEvent;
+
+  time: Int;
+  attackerId: Int;
+  victimIds: ImmList:Int;
+
+  fn GetTime(event: UnitUnleashBideEvent overrides IUnitEvent): Int {
+    UnitUnleashBideEventExtensions.GetTime
+  }
+}

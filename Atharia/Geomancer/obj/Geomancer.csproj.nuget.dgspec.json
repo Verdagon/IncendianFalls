@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Atharia\\Geomancer\\Geomancer.csproj": {}
+    "D:\\IncendianFalls\\Atharia\\Geomancer\\Geomancer.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Atharia\\Geomancer\\Geomancer.csproj": {
+    "D:\\IncendianFalls\\Atharia\\Geomancer\\Geomancer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Atharia\\Geomancer\\Geomancer.csproj",
+        "projectUniqueName": "D:\\IncendianFalls\\Atharia\\Geomancer\\Geomancer.csproj",
         "projectName": "Geomancer",
-        "projectPath": "D:\\Projects\\Atharia\\Geomancer\\Geomancer.csproj",
+        "projectPath": "D:\\IncendianFalls\\Atharia\\Geomancer\\Geomancer.csproj",
         "packagesPath": "C:\\Users\\Stradivast\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Atharia\\Geomancer\\obj\\",
+        "outputPath": "D:\\IncendianFalls\\Atharia\\Geomancer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Stradivast\\AppData\\Roaming\\NuGet\\NuGet.Config",

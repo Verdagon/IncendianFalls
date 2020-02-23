@@ -1,0 +1,28 @@
+
+mut struct CounteringUC {
+  CounteringUC isa IPreActingUC;
+  CounteringUC isa IReactingToAttacksUC;
+
+  fn Destruct(this: CounteringUC overrides IDestructible): Void {
+    CounteringUCExtensions.Destruct
+  }
+
+  fn React(
+      detail: CounteringUC overrides IReactingToAttacksUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit,
+      attacker: Unit)
+  : Bool {
+    CounteringUCExtensions.React
+  }
+
+  fn PreAct(
+      detail: CounteringUC overrides IPreActingUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool {
+    CounteringUCExtensions.PreAct
+  }
+}

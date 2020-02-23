@@ -1,0 +1,22 @@
+
+// Assumes there's an kill directive right now.
+mut struct FireImpulse {
+  FireImpulse isa IImpulse;
+
+  weight: Int;
+  targetUnit: &Unit;
+
+  fn Destruct(this: FireImpulse overrides IDestructible): Void {
+    FireImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: FireImpulse overrides IImpulse): Int {
+    FireImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: FireImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    FireImpulseExtensions.Enact
+  }
+}

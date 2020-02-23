@@ -1,0 +1,103 @@
+
+mut struct AttackAICapabilityUC {
+  AttackAICapabilityUC isa IPreActingUC;
+  AttackAICapabilityUC isa IAICapabilityUC;
+  AttackAICapabilityUC isa IImpulsePreReactor;
+  AttackAICapabilityUC isa IImpulsePostReactor;
+
+  var killDirective: ?KillDirective;
+
+  fn Destruct(this: AttackAICapabilityUC overrides IDestructible): Void {
+    AttackAICapabilityUCExtensions.Destruct
+  }
+  fn PreAct(
+      detail: AttackAICapabilityUC overrides IPreActingUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool {
+    AttackAICapabilityUCExtensions.PreAct
+  }
+  fn ProduceImpulse(
+      this: AttackAICapabilityUC overrides IAICapabilityUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : IImpulse {
+    AttackAICapabilityUCExtensions.ProduceImpulse
+  }
+
+  fn BeforeImpulse(
+      this: AttackAICapabilityUC overrides IImpulsePreReactor,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit,
+      originatingCapability: IAICapabilityUC,
+      impulse: IImpulse)
+  : Void {
+    AttackAICapabilityUCExtensions.BeforeImpulse
+  }
+
+  fn AfterImpulse(
+      this: AttackAICapabilityUC overrides IImpulsePostReactor,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit,
+      originatingCapability: IAICapabilityUC,
+      impulse: IImpulse)
+  : Void {
+    AttackAICapabilityUCExtensions.AfterImpulse
+}
+}
+
+mut struct KillDirective {
+  targetUnit: &&Unit;
+  pathToLastSeenLocation: MutList:Location;
+
+  fn Destruct(this: KillDirective overrides IDestructible): Void {
+    KillDirectiveUCExtensions.Destruct
+  }
+}
+
+// Assumes there's an kill directive right now.
+mut struct PursueImpulse {
+  PursueImpulse isa IImpulse;
+
+  weight: Int;
+
+  fn Destruct(this: PursueImpulse overrides IDestructible): Void {
+    PursueImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: PursueImpulse overrides IImpulse): Int {
+    PursueImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: PursueImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    PursueImpulseExtensions.Enact
+  }
+}
+
+// Assumes there's an kill directive right now.
+mut struct AttackImpulse {
+  AttackImpulse isa IImpulse;
+
+  weight: Int;
+  targetUnit: &Unit;
+
+  fn Destruct(this: AttackImpulse overrides IDestructible): Void {
+    AttackImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: AttackImpulse overrides IImpulse): Int {
+    AttackImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: AttackImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    AttackImpulseExtensions.Enact
+  }
+}

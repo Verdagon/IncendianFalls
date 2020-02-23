@@ -1,0 +1,15 @@
+
+root mut struct Level {
+  terrain: Terrain;
+}
+
+mut struct Terrain {
+  pattern: Pattern;
+  elevationStepHeight: Float;
+  tiles: MutMap:(Location, TerrainTile);
+}
+
+mut struct TerrainTile {
+  var elevation: Int;
+  members: MutList:Str;
+}

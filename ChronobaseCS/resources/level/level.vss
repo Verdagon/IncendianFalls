@@ -1,0 +1,24 @@
+
+mut struct Level {
+  terrain: Terrain;
+  units: MutSet:Unit;
+  depth: Int;
+  var controller: ?ILevelController;
+
+  // The time for the current level. This isn't necessarily equal to Game.time,
+  // because the player can leave for a while and come back later, in which case
+  // the level time is far behind. This is used for bringing all the units'
+  // nextActionTime up to catch up with Game.time.
+  var time: Int;
+}
+
+mut interface ILevelController {
+  fn GetName(): Str;
+  fn ConsiderCornersAdjacent(): Bool;
+  fn GetEntryLocation(
+      game: &Game,
+      levelSuperstate: $LevelSuperstate,
+      fromLevel: &Level,
+      fromLevelPortalIndex: Int)
+  : Location;
+}

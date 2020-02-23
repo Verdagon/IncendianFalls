@@ -1,0 +1,24 @@
+
+mut struct PreGauntletLevelController {
+  PreGauntletLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: PreGauntletLevelController overrides ILevelController): Str {
+    PreGauntletLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: PreGauntletLevelController overrides ILevelController): Bool {
+    PreGauntletLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn GetEntryLocation(
+      this: PreGauntletLevelController overrides ILevelController,
+      game: &Game,
+      levelSuperstate: $LevelSuperstate,
+      fromLevel: &Level,
+      fromLevelPortalIndex: Int)
+  : Location {
+    PreGauntletLevelControllerExtensions.GetEntryLocation
+  }
+}

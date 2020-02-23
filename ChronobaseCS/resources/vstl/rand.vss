@@ -1,0 +1,4 @@
+
+mut struct Rand {
+   var rand: Int;
+}

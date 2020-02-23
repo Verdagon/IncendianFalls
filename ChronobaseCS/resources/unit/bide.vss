@@ -1,0 +1,98 @@
+
+mut struct BideAICapabilityUC {
+  BideAICapabilityUC isa IDefenseUC;
+  BideAICapabilityUC isa IAICapabilityUC;
+  BideAICapabilityUC isa IImpulsePreReactor;
+
+  // 0 means we are *not* biding.
+  var charge: Int;
+
+  fn Destruct(this: BideAICapabilityUC overrides IDestructible): Void {
+    BideAICapabilityUCExtensions.Destruct
+  }
+  fn AffectIncomingDamage(
+      detail: BideAICapabilityUC overrides IDefenseUC,
+      incomingDamage: Int)
+  : Int {
+    BideAICapabilityUCExtensions.AffectIncomingDamage
+  }
+  fn ProduceImpulse(
+      this: BideAICapabilityUC overrides IAICapabilityUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : IImpulse {
+    BideAICapabilityUCExtensions.ProduceImpulse
+  }
+
+  fn BeforeImpulse(
+      this: BideAICapabilityUC overrides IImpulsePreReactor,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit,
+      originatingCapability: IAICapabilityUC,
+      impulse: IImpulse)
+  : Void {
+    BideAICapabilityUCExtensions.BeforeImpulse
+  }
+}
+
+mut struct StartBidingImpulse {
+  StartBidingImpulse isa IImpulse;
+
+  weight: Int;
+
+  fn Destruct(this: StartBidingImpulse overrides IDestructible): Void {
+    StartBidingImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: StartBidingImpulse overrides IImpulse): Int {
+    StartBidingImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: StartBidingImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    StartBidingImpulseExtensions.Enact
+  }
+}
+
+mut struct ContinueBidingImpulse {
+  ContinueBidingImpulse isa IImpulse;
+
+  weight: Int;
+
+  fn Destruct(this: ContinueBidingImpulse overrides IDestructible): Void {
+    ContinueBidingImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: ContinueBidingImpulse overrides IImpulse): Int {
+    ContinueBidingImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: ContinueBidingImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    ContinueBidingImpulseExtensions.Enact
+  }
+}
+
+mut struct UnleashBideImpulse {
+  UnleashBideImpulse isa IImpulse;
+
+  weight: Int;
+
+  fn Destruct(this: UnleashBideImpulse overrides IDestructible): Void {
+    UnleashBideImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: UnleashBideImpulse overrides IImpulse): Int {
+    UnleashBideImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: UnleashBideImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    UnleashBideImpulseExtensions.Enact
+  }
+}

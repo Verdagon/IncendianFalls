@@ -1,0 +1,57 @@
+
+mut struct TimeCloneAICapabilityUC {
+  TimeCloneAICapabilityUC isa IPostActingUC;
+  TimeCloneAICapabilityUC isa IAICapabilityUC;
+  TimeCloneAICapabilityUC isa IImpulsePostReactor;
+
+  script: ?MutList:IRequest;
+
+  fn Destruct(this: TimeCloneAICapabilityUC overrides IDestructible): Void {
+    TimeCloneAICapabilityUCExtensions.Destruct
+  }
+  fn PostAct(
+      detail: TimeCloneAICapabilityUC overrides IPostActingUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool {
+    TimeCloneAICapabilityUCExtensions.PostAct
+  }
+  fn ProduceImpulse(
+      this: TimeCloneAICapabilityUC overrides IAICapabilityUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : IImpulse {
+    TimeCloneAICapabilityUCExtensions.ProduceImpulse
+  }
+
+  fn AfterImpulse(
+      this: TimeCloneAICapabilityUC overrides IImpulsePostReactor,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit,
+      originatingCapability: IAICapabilityUC,
+      impulse: IImpulse)
+  : Void {
+    TimeCloneAICapabilityUCExtensions.AfterImpulse
+  }
+}
+
+mut struct EvaporateImpulse {
+  EvaporateImpulse isa IImpulse;
+
+  fn Destruct(this: EvaporateImpulse overrides IDestructible): Void {
+    EvaporateImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: EvaporateImpulse overrides IImpulse): Int {
+    EvaporateImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: EvaporateImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    EvaporateImpulseExtensions.Enact
+  }
+}

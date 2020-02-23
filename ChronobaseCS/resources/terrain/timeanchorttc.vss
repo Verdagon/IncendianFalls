@@ -1,0 +1,10 @@
+
+mut struct TimeAnchorTTC {
+  TimeAnchorTTC isa ITerrainTileComponent;
+
+  pastVersion: Int;
+
+  fn Destruct(this: TimeAnchorTTC overrides IDestructible): Void {
+    TimeAnchorTTCExtensions.Destruct
+  }
+}

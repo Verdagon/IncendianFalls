@@ -1,0 +1,24 @@
+
+mut struct RidgeLevelController {
+  RidgeLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: RidgeLevelController overrides ILevelController): Str {
+    RidgeLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: RidgeLevelController overrides ILevelController): Bool {
+    RidgeLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn GetEntryLocation(
+      this: RidgeLevelController overrides ILevelController,
+      game: &Game,
+      levelSuperstate: $LevelSuperstate,
+      fromLevel: &Level,
+      fromLevelPortalIndex: Int)
+  : Location {
+    RidgeLevelControllerExtensions.GetEntryLocation
+  }
+}

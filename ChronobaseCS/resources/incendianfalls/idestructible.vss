@@ -1,0 +1,4 @@
+
+mut interface IDestructible {
+  fn Destruct(): Void;
+}

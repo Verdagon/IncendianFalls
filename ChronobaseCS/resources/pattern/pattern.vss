@@ -1,0 +1,30 @@
+
+imm struct Pattern {
+  name: Str;
+  cornersByShapeIndex: ImmList:ImmList:Vec2;
+  patternTiles: ImmList:PatternTile;
+  xOffset: Vec2;
+  yOffset: Vec2;
+}
+
+imm struct PatternTile {
+  shapeIndex: Int;
+  rotateDegrees: Float;
+  translate: Vec2;
+  sideAdjacenciesBySideIndex: ImmList:PatternSideAdjacency;
+  cornerAdjacenciesByCornerIndex: ImmList:ImmList:PatternCornerAdjacency;
+}
+
+imm struct PatternSideAdjacency {
+  groupRelativeX: Int;
+  groupRelativeY: Int;
+  tileIndex: Int;
+  sideIndex: Int;
+}
+
+imm struct PatternCornerAdjacency {
+  groupRelativeX: Int;
+  groupRelativeY: Int;
+  tileIndex: Int;
+  cornerIndex: Int;
+}

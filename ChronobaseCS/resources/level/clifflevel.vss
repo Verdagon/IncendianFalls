@@ -1,0 +1,25 @@
+
+mut struct CliffLevelController {
+  CliffLevelController isa ILevelController;
+
+  level: &Level;
+  depth: Int;
+
+  fn GetName(this: CliffLevelController overrides ILevelController): Str {
+    CliffLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: CliffLevelController overrides ILevelController): Bool {
+    CliffLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn GetEntryLocation(
+      this: CliffLevelController overrides ILevelController,
+      game: &Game,
+      levelSuperstate: $LevelSuperstate,
+      fromLevel: &Level,
+      fromLevelPortalIndex: Int)
+  : Location {
+    CliffLevelControllerExtensions.GetEntryLocation
+  }
+}

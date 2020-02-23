@@ -1,0 +1,32 @@
+
+// mut struct MoveDirectiveUC {
+//   // The last node in the path is the destination.
+//   // Feel free to change the path, as long as it's going
+//   // the same place.
+//   path: MutList:Location;
+//
+//   fn Destruct(this: MoveDirectiveUC overrides IDestructible): Void {
+//     MoveDirectiveUCExtensions.Destruct
+//   }
+// }
+
+mut struct MoveImpulse {
+  MoveImpulse isa IImpulse;
+
+  weight: Int;
+  stepLocation: Location;
+
+  fn Destruct(this: MoveImpulse overrides IDestructible): Void {
+    MoveImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: MoveImpulse overrides IImpulse): Int {
+    MoveImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: MoveImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    MoveImpulseExtensions.Enact
+  }
+}

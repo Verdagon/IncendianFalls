@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Atharia\\ConsoleDriveyThing\\ConsoleDriveyThing.csproj": {}
+    "D:\\IncendianFalls\\Atharia\\ConsoleDriveyThing\\ConsoleDriveyThing.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Atharia\\ConsoleDriveyThing\\ConsoleDriveyThing.csproj": {
+    "D:\\IncendianFalls\\Atharia\\ConsoleDriveyThing\\ConsoleDriveyThing.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Atharia\\ConsoleDriveyThing\\ConsoleDriveyThing.csproj",
+        "projectUniqueName": "D:\\IncendianFalls\\Atharia\\ConsoleDriveyThing\\ConsoleDriveyThing.csproj",
         "projectName": "ConsoleDriveyThing",
-        "projectPath": "D:\\Projects\\Atharia\\ConsoleDriveyThing\\ConsoleDriveyThing.csproj",
+        "projectPath": "D:\\IncendianFalls\\Atharia\\ConsoleDriveyThing\\ConsoleDriveyThing.csproj",
         "packagesPath": "C:\\Users\\Stradivast\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Atharia\\ConsoleDriveyThing\\obj\\",
+        "outputPath": "D:\\IncendianFalls\\Atharia\\ConsoleDriveyThing\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Stradivast\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,8 +27,8 @@
         "frameworks": {
           "netcoreapp2.1": {
             "projectReferences": {
-              "D:\\Projects\\Atharia\\IncendianFalls\\IncendianFalls.csproj": {
-                "projectPath": "D:\\Projects\\Atharia\\IncendianFalls\\IncendianFalls.csproj"
+              "D:\\IncendianFalls\\Atharia\\IncendianFalls\\IncendianFalls.csproj": {
+                "projectPath": "D:\\IncendianFalls\\Atharia\\IncendianFalls\\IncendianFalls.csproj"
               }
             }
           }
@@ -63,14 +63,14 @@
         }
       }
     },
-    "D:\\Projects\\Atharia\\IncendianFalls\\IncendianFalls.csproj": {
+    "D:\\IncendianFalls\\Atharia\\IncendianFalls\\IncendianFalls.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Atharia\\IncendianFalls\\IncendianFalls.csproj",
+        "projectUniqueName": "D:\\IncendianFalls\\Atharia\\IncendianFalls\\IncendianFalls.csproj",
         "projectName": "IncendianFalls",
-        "projectPath": "D:\\Projects\\Atharia\\IncendianFalls\\IncendianFalls.csproj",
+        "projectPath": "D:\\IncendianFalls\\Atharia\\IncendianFalls\\IncendianFalls.csproj",
         "packagesPath": "C:\\Users\\Stradivast\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Atharia\\IncendianFalls\\obj\\",
+        "outputPath": "D:\\IncendianFalls\\Atharia\\IncendianFalls\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Stradivast\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,0 +1,40 @@
+
+mut interface IImpulse {
+  IImpulse isa IDestructible;
+
+  //  100  bored, might as well
+  //  200  mild interest
+  //  300  interest
+  //  400  very interested
+  //  500  want
+  //  600  really want
+  //  700  need
+  //  800  really need
+  //  900  burning need
+  // 1000  existential need
+  fn GetWeight(): Int;
+
+  fn Enact(
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool;
+}
+
+mut struct NoImpulse {
+  NoImpulse isa IImpulse;
+
+  fn Destruct(this: NoImpulse overrides IDestructible): Void {
+    NoImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: NoImpulse overrides IImpulse): Int {
+    NoImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: NoImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool {
+    NoImpulseExtensions.Enact
+  }
+}

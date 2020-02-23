@@ -23,7 +23,7 @@ namespace Geomancer {
     public delegate void OnMouseClickEvent();
 
     IClock clock;
-    Vivimap vivimap;
+    MemberToViewMapper vivimap;
     Geomancer.Model.Terrain terrain;
     public readonly Location location;
     TerrainTile terrainTile;
@@ -42,7 +42,7 @@ namespace Geomancer {
 
     public TerrainTilePresenter(
       IClock clock,
-        Vivimap vivimap,
+        MemberToViewMapper vivimap,
         Geomancer.Model.Terrain terrain,
         Location location,
         TerrainTile terrainTile,

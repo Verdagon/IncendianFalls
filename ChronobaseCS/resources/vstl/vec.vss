@@ -1,0 +1,11 @@
+
+imm struct Vec2 {
+  x: Float;
+  y: Float;
+}
+
+imm struct Vec3 {
+  x: Float;
+  y: Float;
+  z: Float;
+}
