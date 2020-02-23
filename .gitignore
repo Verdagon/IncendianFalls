@@ -4,3 +4,10 @@ Library/ScriptAssemblies
 Library/ShaderCache
 Library/StateCache
 Temp
+ChronobaseCS/target
+Library/metadata
+Library/ScriptAssemblies
+ChronobaseCS/project/target
+ChronobaseCS/.idea/libraries
+Atharia/Geomancer/obj
+Atharia/ConsoleDriveyThing/obj
