@@ -7,8 +7,6 @@ namespace IncendianFalls {
   // AKA the "Vivimap"
   public class MemberToComponentMapper {
     public Atharia.Model.TerrainTile VivifyTile(Root root, List<String> members) {
-      // Someday, we'll make it so the members progressively add 
-
       var tile =
           root.EffectTerrainTileCreate(
               1, ITerrainTileComponentMutBunch.New(root));
@@ -35,6 +33,9 @@ namespace IncendianFalls {
             break;
           case "falls":
             tile.components.Add(root.EffectFallsTTCCreate().AsITerrainTileComponent());
+            break;
+          default:
+            throw new Exception("Unknown member: " + member);
             break;
         }
       }
