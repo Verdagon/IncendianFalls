@@ -151,6 +151,7 @@ namespace IncendianFalls {
         out ExtrudedSymbolDescription overlay,
         out ExtrudedSymbolDescription feature,
         out SortedDictionary<int, ExtrudedSymbolDescription> itemSymbolDescriptionByItemId) {
+
       bool topColorLocked = false;
       topColor = new UnityEngine.Color(1.0f, 0, 1.0f);
 
@@ -168,17 +169,11 @@ namespace IncendianFalls {
 
       itemSymbolDescriptionByItemId = new SortedDictionary<int, ExtrudedSymbolDescription>();
 
-      switch (terrainTile.classId) {
-        //case "grass":
-          //if (terrainTile.elevation == 1) {
-          //  topColor = new UnityEngine.Color(0, .3f, 0);
-          //  sideColor = new UnityEngine.Color(0, .2f, 0);
-          //} else if (terrainTile.elevation == 2) {
-          //  topColor = new UnityEngine.Color(0, .43f, 0);
-          //  sideColor = new UnityEngine.Color(0, .3f, 0);
-          //}
-          //break;
-        case "grass":
+      foreach (var ttc in terrainTile.components) {
+
+        // someday, we should have these if-else cases just call into a MemberToViewMapper...
+
+        if (ttc is GrassTTCAsITerrainTileComponent) {
           if (terrainTile.elevation == 1) {
             topColor = new UnityEngine.Color(.3f, .15f, 0);
             sideColor = new UnityEngine.Color(.2f, .1f, 0);
@@ -186,8 +181,7 @@ namespace IncendianFalls {
             topColor = new UnityEngine.Color(.43f, .21f, 0);
             sideColor = new UnityEngine.Color(.3f, .15f, 0);
           }
-          break;
-        case "stone":
+        } else if (ttc is StoneTTCAsITerrainTileComponent) {
           if (terrainTile.elevation == 1) {
             topColor = new UnityEngine.Color(.2f, .2f, .2f);
             sideColor = new UnityEngine.Color(.15f, .15f, .15f);
@@ -195,32 +189,22 @@ namespace IncendianFalls {
             topColor = new UnityEngine.Color(.3f, .3f, .3f);
             sideColor = new UnityEngine.Color(.2f, .2f, .2f);
           }
-          break;
-        //case "clifflanding":
-          //topColor = new UnityEngine.Color(.4f, .2f, 0f);
-          //outlineColor = new Color(.6f, 0.4f, .15f);
-          //sideColor = new UnityEngine.Color(.2f, .1f, 0f);
-          //break;
-        case "clifflanding":
+        } else if (ttc is CliffLandingTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.2f, .2f, .2f);
           sideColor = new UnityEngine.Color(.1f, .05f, 0f);
           outlineColor = new UnityEngine.Color(0f, 0f, 0f);
-          break;
-        case "ravanest":
+        } else if (ttc is RavaNestTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.2f, 0, .2f);
           sideColor = new UnityEngine.Color(.2f, 0f, .2f);
           outlineColor = new UnityEngine.Color(0f, 0f, 0f);
-          break;
-        case "cliff":
+        } else if (ttc is CliffTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.2f, .1f, 0f);
           sideColor = new UnityEngine.Color(.1f, .05f, 0f);
           outlineColor = new UnityEngine.Color(0f, 0f, 0f);
-          break;
-        case "magma":
+        } else if (ttc is MagmaTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.4f, 0f, 0f);
           outlineColor = new Color(.2f, 0f, 0.0f);
           sideColor = new UnityEngine.Color(.2f, 0f, 0f);
-
           overlay =
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
@@ -233,8 +217,7 @@ namespace IncendianFalls {
                       new Color(.5f, .1f, 0.0f)),
                   false,
                   new Color(0, 0, 0));
-          break;
-        case "falls":
+        } else if (ttc is FallsTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.2f, .3f, 1.0f);
           outlineColor = new Color(0f, 0f, 1.0f);
           sideColor = new UnityEngine.Color(.2f, .3f, 1.0f);
@@ -251,79 +234,69 @@ namespace IncendianFalls {
                       new Color(0f, 0f, 1.0f)),
                   false,
                   new Color(0, 0, 0));
-          break;
-      }
 
-      foreach (var ttc in terrainTile.components) {
-        if (ttc is DecorativeTTCAsITerrainTileComponent decorationI) {
-          var decoration = decorationI.obj;
-          switch (decoration.symbolId) {
-            case "rocks":
-              if (!overlayLocked) {
-                overlay =
-                    new ExtrudedSymbolDescription(
-                        RenderPriority.SYMBOL,
-                        new SymbolDescription(
-                            "f",
-                            50,
-                            new Color(1f, 1f, 1f, .1f),
-                            0,
-                            OutlineMode.WithOutline,
-                            new Color(0, 0, 0)),
-                        false,
-                        new Color(0, 0, 0));
-              }
-              break;
-            case "blood":
-              if (!overlayLocked) {
-                overlay =
-                    new ExtrudedSymbolDescription(
-                        RenderPriority.SYMBOL,
-                      new SymbolDescription(
-                            "g",
-                            50,
-                            new Color(1f, 0, 0, .3f),
-                            0,
-                            OutlineMode.WithOutline,
-                            new Color(0, 0, 0)),
-                        false,
-                        new Color(0, 0, 0));
-              }
-              break;
-            case "downstairs":
-              topColor = new Color(0, 0, 0);
-              topColorLocked = true;
+        } else if (ttc is RocksTTCAsITerrainTileComponent) {
+          if (!overlayLocked) {
+            overlay =
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "f",
+                        50,
+                        new Color(1f, 1f, 1f, .1f),
+                        0,
+                        OutlineMode.WithOutline,
+                        new Color(0, 0, 0)),
+                    false,
+                    new Color(0, 0, 0));
+          }
+        } else if (ttc is BloodTTCAsITerrainTileComponent) {
+          if (!overlayLocked) {
+            overlay =
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                        "g",
+                        50,
+                        new Color(1f, 0, 0, .3f),
+                        0,
+                        OutlineMode.WithOutline,
+                        new Color(0, 0, 0)),
+                    false,
+                    new Color(0, 0, 0));
+          }
+        } else if (ttc is DownstairsTTCAsITerrainTileComponent) {
+          topColor = new Color(0, 0, 0);
+          topColorLocked = true;
 
-              overlay =
-                  new ExtrudedSymbolDescription(
-                      RenderPriority.SYMBOL,
-                      new SymbolDescription(
-                          "d",
-                            100,
-                          new Color(.5f, .5f, .5f, 1f),
-                          0,
-                          OutlineMode.WithOutline,
-                          new Color(0, 0, 0)),
-                      false,
-                      new Color(0, 0, 0));
-              overlayLocked = true;
-              break;
-            case "upstairs":
-              feature =
-                  new ExtrudedSymbolDescription(
-                      RenderPriority.SYMBOL,
-                      new SymbolDescription(
-                          "c",
-                            100,
-                          new Color(1f, 1f, 1f),
-                          0,
-                          OutlineMode.WithOutline,
-                          new Color(0, 0, 0)),
-                      true,
-                      new Color(1f, 1f, 1f));
-              featureLocked = true;
-              break;
-            case "cave":
+          overlay =
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "d",
+                        100,
+                      new Color(.5f, .5f, .5f, 1f),
+                      0,
+                      OutlineMode.WithOutline,
+                      new Color(0, 0, 0)),
+                  false,
+                  new Color(0, 0, 0));
+          overlayLocked = true;
+        } else if (ttc is UpstairsTTCAsITerrainTileComponent) {
+          feature =
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "c",
+                        100,
+                      new Color(1f, 1f, 1f),
+                      0,
+                      OutlineMode.WithOutline,
+                      new Color(0, 0, 0)),
+                  true,
+                  new Color(1f, 1f, 1f));
+          featureLocked = true;
+        } else if (ttc is CaveTTCAsITerrainTileComponent) {
               feature =
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
@@ -337,8 +310,6 @@ namespace IncendianFalls {
                       false,
                       new Color(1f, 1f, 1f));
               featureLocked = true;
-              break;
-          }
         } else if (ttc is StaircaseTTCAsITerrainTileComponent) {
         } else if (ttc is ArmorAsITerrainTileComponent) {
           itemSymbolDescriptionByItemId.Add(

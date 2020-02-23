@@ -67,9 +67,9 @@ namespace ConsoleDriveyThing {
     public static void Play() {
       var timestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
 
-       int random = (int)timestamp;
+      //int random = (int)timestamp;
       //int random = 134337; // Stairs right next to you
-      //int random = 1525224206;
+      int random = 1525224206;
       Superstructure ss = new Superstructure(new ConsoleLoggers.ConsoleLogger());
       new ReplayLogger(ss, new string[] { "Latest.sslog", timestamp + ".sslog" });
 
@@ -103,8 +103,8 @@ namespace ConsoleDriveyThing {
       //root.Lock();
       //return;
 
-      bool squareLevelsOnly = true;
-      //bool squareLevelsOnly = false;
+      //bool squareLevelsOnly = true;
+      bool squareLevelsOnly = false;
       var game = ss.RequestSetupGame(random, squareLevelsOnly, false);
       var superstate = ss.GetSuperstate(game);
 

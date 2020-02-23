@@ -41,3 +41,16 @@ D:\Projects\Atharia\ConsoleDriveyThing\obj\Debug\netcoreapp2.1\ConsoleDriveyThin
 D:\Projects\Atharia\ConsoleDriveyThing\obj\Debug\netcoreapp2.1\ConsoleDriveyThing.csproj.CopyComplete
 D:\Projects\Atharia\ConsoleDriveyThing\obj\Debug\netcoreapp2.1\ConsoleDriveyThing.dll
 D:\Projects\Atharia\ConsoleDriveyThing\obj\Debug\netcoreapp2.1\ConsoleDriveyThing.pdb
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\obj\Debug\netcoreapp2.1\ConsoleDriveyThing.csprojAssemblyReference.cache
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\obj\Debug\netcoreapp2.1\ConsoleDriveyThing.AssemblyInfoInputs.cache
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\obj\Debug\netcoreapp2.1\ConsoleDriveyThing.AssemblyInfo.cs
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\obj\Debug\netcoreapp2.1\ConsoleDriveyThing.dll
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\obj\Debug\netcoreapp2.1\ConsoleDriveyThing.pdb
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\bin\Debug\netcoreapp2.1\ConsoleDriveyThing.deps.json
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\bin\Debug\netcoreapp2.1\ConsoleDriveyThing.runtimeconfig.json
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\bin\Debug\netcoreapp2.1\ConsoleDriveyThing.runtimeconfig.dev.json
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\bin\Debug\netcoreapp2.1\ConsoleDriveyThing.dll
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\bin\Debug\netcoreapp2.1\ConsoleDriveyThing.pdb
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\bin\Debug\netcoreapp2.1\IncendianFalls.dll
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\bin\Debug\netcoreapp2.1\IncendianFalls.pdb
+D:\IncendianFalls\Atharia\ConsoleDriveyThing\obj\Debug\netcoreapp2.1\ConsoleDriveyThing.csproj.CopyComplete

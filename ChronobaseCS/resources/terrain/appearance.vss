@@ -1,0 +1,107 @@
+
+mut struct GrassTTC {
+  GrassTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: GrassTTC overrides IDestructible): Void {
+    GrassTTCExtensions.Destruct
+  }
+}
+
+mut struct StoneTTC {
+  StoneTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: StoneTTC overrides IDestructible): Void {
+    StoneTTCExtensions.Destruct
+  }
+}
+
+mut struct CliffLandingTTC {
+  CliffLandingTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: CliffLandingTTC overrides IDestructible): Void {
+    CliffLandingTTCExtensions.Destruct
+  }
+}
+
+mut struct RavaNestTTC {
+  RavaNestTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: RavaNestTTC overrides IDestructible): Void {
+    RavaNestTTCExtensions.Destruct
+  }
+}
+
+mut struct CliffTTC {
+  CliffTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: CliffTTC overrides IDestructible): Void {
+    CliffTTCExtensions.Destruct
+  }
+}
+
+mut struct MagmaTTC {
+  MagmaTTC isa ITerrainTileComponent;
+  MagmaTTC isa IUnwalkableTTC;
+
+  fn Destruct(this: MagmaTTC overrides IDestructible): Void {
+    MagmaTTCExtensions.Destruct
+  }
+}
+
+mut struct FallsTTC {
+  FallsTTC isa ITerrainTileComponent;
+  FallsTTC isa IUnwalkableTTC;
+
+  fn Destruct(this: FallsTTC overrides IDestructible): Void {
+    FallsTTCExtensions.Destruct
+  }
+}
+
+mut struct CaveTTC {
+  CaveTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: CaveTTC overrides IDestructible): Void {
+    CaveTTCExtensions.Destruct
+  }
+}
+
+mut struct UpstairsTTC {
+  UpstairsTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: UpstairsTTC overrides IDestructible): Void {
+    UpstairsTTCExtensions.Destruct
+  }
+}
+
+mut struct DownstairsTTC {
+  DownstairsTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: DownstairsTTC overrides IDestructible): Void {
+    DownstairsTTCExtensions.Destruct
+  }
+}
+
+mut struct RocksTTC {
+  RocksTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: RocksTTC overrides IDestructible): Void {
+    RocksTTCExtensions.Destruct
+  }
+}
+
+mut struct BloodTTC {
+  BloodTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: BloodTTC overrides IDestructible): Void {
+    BloodTTCExtensions.Destruct
+  }
+}
+
+mut struct WallTTC {
+  WallTTC isa ITerrainTileComponent;
+  MagmaTTC isa IUnwalkableTTC;
+
+  fn Destruct(this: WallTTC overrides IDestructible): Void {
+    WallTTCExtensions.Destruct
+  }
+}

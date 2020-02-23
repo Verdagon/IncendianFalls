@@ -1,4 +1,4 @@
-output: D:\Projects\Atharia\IncendianFalls\Core
+output: D:\IncendianFalls\Atharia\IncendianFalls\Core
 namespace: Atharia.Model
 incendianfalls/idestructible.vss
 incendianfalls/game.vss
@@ -20,7 +20,7 @@ incendianfalls/requests.vss
 vstl/rand.vss
 pattern/location.vss
 item/items.vss
-terrain/decorativettc.vss
+terrain/appearance.vss
 pattern/pattern.vss
 terrain/staircase.vss
 terrain/terrain.vss

@@ -1,11 +1,13 @@
 
 mut struct TerrainTile {
   var elevation: Int;
-  var walkable: Bool;
-  var classId: Str;
   components: MutBunch:ITerrainTileComponent;
 }
 
 mut interface ITerrainTileComponent {
   ITerrainTileComponent isa IDestructible;
+}
+
+mut interface IUnwalkableTTC {
+  IUnwalkableTTC isa ITerrainTileComponent;
 }

@@ -63,7 +63,7 @@ namespace ConsoleDriveyThing {
       foregroundColor = ConsoleColor.DarkGray;
       backgroundColor = ConsoleColor.Black;
 
-      if (!tile.walkable) {
+      if (!tile.IsWalkable()) {
         c = '#';
         foregroundColor = ConsoleColor.Gray;
         backgroundColor = ConsoleColor.Black;
@@ -71,28 +71,25 @@ namespace ConsoleDriveyThing {
       }
 
       foreach (var tc in tile.components) {
-        if (tc is DecorativeTTCAsITerrainTileComponent decorativeFeature) {
+        if (tc is BloodTTCAsITerrainTileComponent) {
           if (!terrainAndFeaturesMode) {
-            switch (decorativeFeature.obj.symbolId) {
-              case "blood":
-                backgroundColor = ConsoleColor.DarkRed;
-                return;
-              case "rocks":
-                backgroundColor = ConsoleColor.DarkGray;
-                return;
-              case "downstairs":
-                c = '>';
-                return;
-              case "upstairs":
-                c = '<';
-                return;
-              case "cave":
-                c = 'O';
-                return;
-              default:
-                Asserts.Assert(false);
-                break;
-            }
+            backgroundColor = ConsoleColor.DarkRed;
+          }
+        } else if (tc is RocksTTCAsITerrainTileComponent) {
+          if (!terrainAndFeaturesMode) {
+            backgroundColor = ConsoleColor.DarkGray;
+          }
+        } else if (tc is DownstairsTTCAsITerrainTileComponent) {
+          if (!terrainAndFeaturesMode) {
+            c = '>';
+          }
+        } else if (tc is UpstairsTTCAsITerrainTileComponent) {
+          if (!terrainAndFeaturesMode) {
+            c = '<';
+          }
+        } else if (tc is CaveTTCAsITerrainTileComponent) {
+          if (!terrainAndFeaturesMode) {
+            c = 'O';
           }
         } else if (tc is HealthPotionAsITerrainTileComponent) {
           if (!terrainAndFeaturesMode) {
@@ -116,6 +113,24 @@ namespace ConsoleDriveyThing {
         } else if (tc is Atharia.Model.InertiaRingAsITerrainTileComponent) {
           c = '=';
           foregroundColor = ConsoleColor.Yellow;
+        } else if (tc is Atharia.Model.WallTTCAsITerrainTileComponent) {
+          c = '#';
+          foregroundColor = ConsoleColor.Gray;
+        } else if (tc is Atharia.Model.StoneTTCAsITerrainTileComponent) {
+          c = '.';
+          foregroundColor = ConsoleColor.DarkGray;
+        } else if (tc is Atharia.Model.CliffLandingTTCAsITerrainTileComponent) {
+          c = '.';
+          foregroundColor = ConsoleColor.DarkGray;
+        } else if (tc is Atharia.Model.MagmaTTCAsITerrainTileComponent) {
+          c = '~';
+          foregroundColor = ConsoleColor.DarkRed;
+        } else if (tc is Atharia.Model.FallsTTCAsITerrainTileComponent) {
+          c = '~';
+          foregroundColor = ConsoleColor.Blue;
+        } else if (tc is Atharia.Model.CliffTTCAsITerrainTileComponent) {
+          c = '.';
+          foregroundColor = ConsoleColor.DarkYellow;
         } else {
           Asserts.Assert(false, tc.ToString());
         }
