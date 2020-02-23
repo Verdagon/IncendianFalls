@@ -1,0 +1,107 @@
+SetupGameRequest(1552541152, true, false)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:100: 553012556
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:108: -1021884797
+ResumeRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:423: -1021884797
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:426: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:428: 472466735
+TimeAnchorMoveRequest(4, Location(31, 11, 0))
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:364: 472466735
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:367: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:369: 846054618
+MoveRequest(4, Location(31, 14, 0))
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:190: 846054618
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:193: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:195: 506094056
+ResumeRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:423: 506094056
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:426: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:428: 1263616690
+ResumeRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:423: 1263616690
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:426: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:428: -222974691
+ResumeRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:423: -222974691
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:426: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:428: 1109156711
+ResumeRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:423: 1109156711
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:426: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:428: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536
+FollowDirectiveRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:335: -560348536
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:338: "Path blocked!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:340: -560348536

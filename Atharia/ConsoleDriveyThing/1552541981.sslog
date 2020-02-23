@@ -1,0 +1,19 @@
+SetupGameRequest(1552541981, true, false)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:100: 553012556
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:108: -1158237757
+ResumeRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:423: -1158237757
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:426: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:428: 336113775
+MoveRequest(4, Location(17, 3, 0))
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:190: 336113775
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:193: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:195: 356807511
+ResumeRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:423: 356807511
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:426: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:428: -939109853
+ResumeRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:423: -939109853
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:426: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:428: 1866679345

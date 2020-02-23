@@ -289,16 +289,12 @@ namespace Domino {
     }
 
     public void HopTo(Vector3 newBasePosition) {
-      timer.ScheduleTimer(1, delegate () {
-        if (alive) {
-          Vector3 oldBasePosition = basePosition;
-          basePosition = newBasePosition;
+      Vector3 oldBasePosition = basePosition;
+      basePosition = newBasePosition;
 
-          gameObject.transform.localPosition = newBasePosition;
+      gameObject.transform.localPosition = newBasePosition;
 
-          StartHopAnimation(HOP_DURATION_MS, newBasePosition - oldBasePosition, 0.5f);
-        }
-      });
+      StartHopAnimation(HOP_DURATION_MS, newBasePosition - oldBasePosition, 0.5f);
     }
 
     private MovementAnimator GetOrCreateMovementAnimator() {
@@ -324,11 +320,7 @@ namespace Domino {
     }
 
     public void Lunge(Vector3 offset) {
-      timer.ScheduleTimer(1, delegate () {
-        if (alive) {
-          StartLungeAnimation(150, offset);
-        }
-      });
+      StartLungeAnimation(150, offset);
     }
 
     private void StartLungeAnimation(long durationMs, Vector3 offset) {
@@ -340,29 +332,21 @@ namespace Domino {
     }
 
     public void ShowRune(ExtrudedSymbolDescription runeSymbolDescription) {
-      timer.ScheduleTimer(1, delegate () {
-        if (alive) {
-          var symbolView = instantiator.CreateSymbolView(clock, false, runeSymbolDescription);
-          symbolView.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-          symbolView.transform.localScale = new Vector3(1, 1, .1f);
-          if (dominoView.large) {
-            symbolView.transform.localPosition = new Vector3(0, 1f, -.2f);
-          } else {
-            symbolView.transform.localPosition = new Vector3(0, 0.5f, -.2f);
-          }
-          symbolView.transform.SetParent(body.transform, false);
-          symbolView.FadeInThenOut(100, 400);
-          //timer.ScheduleTimer(1.0f, () => symbolView.Destruct());
-        }
-      });
+      var symbolView = instantiator.CreateSymbolView(clock, false, runeSymbolDescription);
+      symbolView.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
+      symbolView.transform.localScale = new Vector3(1, 1, .1f);
+      if (dominoView.large) {
+        symbolView.transform.localPosition = new Vector3(0, 1f, -.2f);
+      } else {
+        symbolView.transform.localPosition = new Vector3(0, 0.5f, -.2f);
+      }
+      symbolView.transform.SetParent(body.transform, false);
+      symbolView.FadeInThenOut(100, 400);
+      timer.ScheduleTimer(1000, () => symbolView.Destruct());
     }
 
     public void Die(long durationMs) {
-      timer.ScheduleTimer(1, delegate () {
-        if (alive) {
           StartDieAnimation(durationMs);
-        }
-      });
     }
 
     private void StartDieAnimation(long durationMs) {

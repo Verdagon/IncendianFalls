@@ -15,6 +15,7 @@ namespace IncendianFalls {
       IIUnitComponentMutBunchObserver,
       IBideAICapabilityUCEffectObserver,
       IBideAICapabilityUCEffectVisitor {
+    bool alive;
     IClock clock;
     ITimer timer;
     SoundPlayer soundPlayer;
@@ -46,6 +47,7 @@ namespace IncendianFalls {
         Unit unit,
         Instantiator instantiator,
         NarrationPanelView narrator) {
+      this.alive = true;
       this.timer = timer;
       this.soundPlayer = soundPlayer;
       this.resumeStaller = resumeStaller;
@@ -90,6 +92,7 @@ namespace IncendianFalls {
       }
 
       DestroyView();
+      alive = false;
     }
 
     public void OnUnitEffect(IUnitEffect effect) {
@@ -112,7 +115,7 @@ namespace IncendianFalls {
       unitView.GetComponent<UnitView>().HopTo(newPosition);
       // If it's the player or a time shift clone, stall the next turn until we're done.
       if (unit.good) {
-        turnStaller.StallForDuration(UnitView.HOP_DURATION_MS);
+            turnStaller.StallForDuration(UnitView.HOP_DURATION_MS);
       }
     }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) {
@@ -198,8 +201,12 @@ namespace IncendianFalls {
                     new Color(0, 0, 0)),
                 true,
                 new Color(0, 0, 1f, 1f)));
-        resumeStaller.StallForDuration(500);
-        turnStaller.StallForDuration(500);
+        timer.ScheduleTimer(1, delegate () {
+          if (alive) {
+            resumeStaller.StallForDuration(500);
+            turnStaller.StallForDuration(500);
+          }
+        });
       } else if (effect.element is UnitCounteringEventAsIUnitEvent) {
         unitView.ShowRune(
             new ExtrudedSymbolDescription(

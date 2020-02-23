@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using Domino;
 namespace IncendianFalls {
   public class RootPresenter : MonoBehaviour {
+
     SlowableTimerClock timer;
     ExecutionStaller resumeStaller;
     ExecutionStaller turnStaller;
@@ -28,7 +29,7 @@ namespace IncendianFalls {
     public SoundPlayer soundPlayer;
 
     public void Start() {
-      timer = new SlowableTimerClock(.1f);
+      timer = new SlowableTimerClock(1f);
 
       resumeStaller = new ExecutionStaller(timer, timer);
       turnStaller = new ExecutionStaller(timer, timer);
@@ -61,7 +62,7 @@ namespace IncendianFalls {
               lookPanelView.GetComponent<LookPanelView>());
       playerController.Start();
 
-      cameraController = new FollowingCameraController(timer, cameraObject, game);
+      cameraController = new FollowingCameraController(timer, timer, cameraObject, game);
     }
 
     public void Update() {

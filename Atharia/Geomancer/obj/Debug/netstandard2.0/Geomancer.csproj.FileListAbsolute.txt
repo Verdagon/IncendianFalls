@@ -1,0 +1,7 @@
+D:\Projects\Atharia\Geomancer\bin\Debug\netstandard2.0\Geomancer.deps.json
+D:\Projects\Atharia\Geomancer\bin\Debug\netstandard2.0\Geomancer.dll
+D:\Projects\Atharia\Geomancer\obj\Debug\netstandard2.0\Geomancer.AssemblyInfoInputs.cache
+D:\Projects\Atharia\Geomancer\obj\Debug\netstandard2.0\Geomancer.AssemblyInfo.cs
+D:\Projects\Atharia\Geomancer\bin\Debug\netstandard2.0\Geomancer.pdb
+D:\Projects\Atharia\Geomancer\obj\Debug\netstandard2.0\Geomancer.dll
+D:\Projects\Atharia\Geomancer\obj\Debug\netstandard2.0\Geomancer.pdb

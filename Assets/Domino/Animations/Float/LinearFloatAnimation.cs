@@ -14,7 +14,7 @@ public class LinearFloatAnimation : IFloatAnimation {
   }
 
   public float Get(long timeMs) {
-    return valueAtStart + timeMs - startTimeMs * slope;
+    return valueAtStart + (timeMs - startTimeMs) * slope;
   }
 
   public IFloatAnimation Simplify(long timeMs) {

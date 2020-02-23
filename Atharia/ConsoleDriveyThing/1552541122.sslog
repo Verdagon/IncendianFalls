@@ -1,0 +1,11 @@
+SetupGameRequest(1552541122, true, false)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:100: 553012556
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:108: -374847953
+ResumeRequest(4)
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:423: -374847953
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:426: ""
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:428: 1119503579
+TimeAnchorMoveRequest(4, Location(26, 11, 0))
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:364: 1119503579
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:367: "Can't step there!"
+/Users/verdagon/Vault/Projects/AthModelDLLThing/IncendianFalls/Superstructure.cs:369: 1119503579

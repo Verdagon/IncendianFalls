@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="netstandard2.0\AthariaModel.dll.deps.json" />
+    <None Remove="netstandard2.0\AthariaModel.dll" />
+    <None Remove="AthariaModel.dll" />
+    <None Remove="AthariaModel.pdb" />
+    <None Remove="1551072905.sslog" />
+    <None Remove="1551204078.sslog" />
+    <None Remove="1551249360.sslog" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IncendianFalls\IncendianFalls.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="UnitSetDirectiveEffect.cs" />
+  </ItemGroup>
+</Project>

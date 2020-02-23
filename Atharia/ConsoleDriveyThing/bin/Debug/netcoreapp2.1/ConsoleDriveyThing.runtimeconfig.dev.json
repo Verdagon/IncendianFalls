@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Stradivast\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Stradivast\\.nuget\\packages"
+    ]
+  }
+}

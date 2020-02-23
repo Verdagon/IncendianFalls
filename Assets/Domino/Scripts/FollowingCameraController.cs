@@ -12,14 +12,16 @@ namespace Domino {
     CameraController cameraController;
 
     IClock clock;
+    ITimer timer;
     Game game;
     Unit followedUnit;
     Location cameraEndLookAtLocation;
 
     private readonly static float cameraSpeedPerSecond = 8.0f;
 
-    public FollowingCameraController(IClock clock, GameObject camera, Game game) {
-
+    public FollowingCameraController(IClock clock, ITimer timer, GameObject camera, Game game) {
+      this.clock = clock;
+      this.timer = timer;
       cameraEndLookAtLocation = game.player.location;
       var cameraEndLookAtPosition = game.level.terrain.GetTileCenter(cameraEndLookAtLocation).ToUnity();
 
