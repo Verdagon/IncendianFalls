@@ -7,6 +7,7 @@ using IncendianFalls;
 
 namespace Domino {
   public class CameraController {
+    private IClock clock;
     private GameObject cameraObject;
     // Where it's supposed to be, after all the animations are done.
     private Vector3 cameraEndLookAtPosition;
@@ -15,7 +16,8 @@ namespace Domino {
 
     private readonly static float cameraSpeedPerSecond = 8.0f;
 
-    public CameraController(GameObject camera, Vector3 initialLookAtPosition) {
+    public CameraController(IClock clock, GameObject camera, Vector3 initialLookAtPosition) {
+      this.clock = clock;
       this.cameraObject = camera;
       
       cameraEndLookAtPosition = initialLookAtPosition;
@@ -35,12 +37,12 @@ namespace Domino {
       var animator = cameraObject.GetComponent<CameraAnimator>();
       if (animator == null) {
         animator = cameraObject.AddComponent<CameraAnimator>() as CameraAnimator;
-        animator.Init(cameraObject, new ConstantMatrix4x4Animation(cameraObject.transform.localToWorldMatrix));
+        animator.Init(clock, cameraObject, new ConstantMatrix4x4Animation(cameraObject.transform.localToWorldMatrix));
       }
       return animator;
     }
 
-    public void StartMovingCameraTo(Vector3 newCameraEndLookAtPosition, float duration) {
+    public void StartMovingCameraTo(Vector3 newCameraEndLookAtPosition, long durationMs) {
       var currentCameraEndLookAtPosition = cameraEndLookAtPosition;
       //var currentCameraMatrix = CalculateCameraMatrix(currentCameraEndLookAtPosition);
 
@@ -53,11 +55,11 @@ namespace Domino {
           new ComposeMatrix4x4Animation(
               animator.cameraAnimation,
               new ClampMatrix4x4Animation(
-                  Time.time, Time.time + duration,
+                  clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
                   new ComposeMatrix4x4Animation(
                       new ConstantMatrix4x4Animation(Matrix4x4.Translate(cameraDifference)),
                       new LinearMatrix4x4Animation(
-                          Time.time, Time.time + duration, Matrix4x4.Translate(-cameraDifference), Matrix4x4.identity))));
+                          clock.GetTimeMs(), clock.GetTimeMs() + durationMs, Matrix4x4.Translate(-cameraDifference), Matrix4x4.identity))));
 
       cameraEndLookAtPosition = newCameraEndLookAtPosition;
     }
@@ -66,42 +68,42 @@ namespace Domino {
       var newEndLookAtPosition =
           cameraEndLookAtPosition +
                 cameraObject.transform.forward * deltaTime * cameraSpeedPerSecond;
-      StartMovingCameraTo(newEndLookAtPosition, .05f);
+      StartMovingCameraTo(newEndLookAtPosition, 50);
     }
 
     public void MoveOut(float deltaTime) {
       var newEndLookAtPosition =
           cameraEndLookAtPosition -
                 cameraObject.transform.forward * deltaTime * cameraSpeedPerSecond;
-      StartMovingCameraTo(newEndLookAtPosition, .05f);
+      StartMovingCameraTo(newEndLookAtPosition, 50);
     }
 
     public void MoveUp(float deltaTime) {
       var newEndLookAtPosition =
           cameraEndLookAtPosition +
                 cameraObject.transform.up * deltaTime * cameraSpeedPerSecond;
-      StartMovingCameraTo(newEndLookAtPosition, .05f);
+      StartMovingCameraTo(newEndLookAtPosition, 50);
     }
 
     public void MoveDown(float deltaTime) {
       var newEndLookAtPosition =
           cameraEndLookAtPosition -
                 cameraObject.transform.up * deltaTime * cameraSpeedPerSecond;
-      StartMovingCameraTo(newEndLookAtPosition, .05f);
+      StartMovingCameraTo(newEndLookAtPosition, 50);
     }
 
     public void MoveLeft(float deltaTime) {
       var newEndLookAtPosition =
           cameraEndLookAtPosition -
               cameraObject.transform.right * deltaTime * cameraSpeedPerSecond;
-      StartMovingCameraTo(newEndLookAtPosition, .05f);
+      StartMovingCameraTo(newEndLookAtPosition, 50);
     }
 
     public void MoveRight(float deltaTime) {
       var newEndLookAtPosition =
           cameraEndLookAtPosition +
               cameraObject.transform.right * deltaTime * cameraSpeedPerSecond;
-      StartMovingCameraTo(newEndLookAtPosition, .05f);
+      StartMovingCameraTo(newEndLookAtPosition, 50);
     }
   }
 }

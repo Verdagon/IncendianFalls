@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HopAnimation : IMatrix4x4Animation {
-  float startTime;
-  float endTime;
+  long startTimeMs;
+  long endTimeMs;
   Vector3 horizontalOffset;
   float height;
 
   public HopAnimation(
-      float startTime,
-      float endTime,
+      long startTimeMs,
+      long endTimeMs,
       Vector3 horizontalOffset,
       float height) {
-    this.startTime = startTime;
-    this.endTime = endTime;
+    this.startTimeMs = startTimeMs;
+    this.endTimeMs = endTimeMs;
     this.horizontalOffset = horizontalOffset;
     this.height = height;
   }
 
-  public Matrix4x4 Get(float time) {
-    float timeRatio = (time - startTime) / (endTime - startTime);
+  public Matrix4x4 Get(long timeMs) {
+    float timeRatio = (float)(timeMs - startTimeMs) / (endTimeMs - startTimeMs);
     timeRatio = Mathf.Clamp01(timeRatio);
     Vector3 translate = horizontalOffset * timeRatio;
 
@@ -31,8 +31,8 @@ public class HopAnimation : IMatrix4x4Animation {
     return Matrix4x4.Translate(translate);
   }
 
-  public IMatrix4x4Animation Simplify(float time) {
-    if (time < endTime) {
+  public IMatrix4x4Animation Simplify(long timeMs) {
+    if (timeMs < endTimeMs) {
       return this;
     } else {
       return new ConstantMatrix4x4Animation(Matrix4x4.Translate(horizontalOffset));

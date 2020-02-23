@@ -9,11 +9,11 @@ public class ConstantFloatAnimation : IFloatAnimation {
     this.value = value;
   }
 
-  public float Get(float time) {
+  public float Get(long timeMs) {
     return value;
   }
 
-  public IFloatAnimation Simplify(float time) {
+  public IFloatAnimation Simplify(long timeMs) {
     return this;
   }
 }

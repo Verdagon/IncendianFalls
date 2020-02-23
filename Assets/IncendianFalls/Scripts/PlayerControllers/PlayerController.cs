@@ -6,13 +6,6 @@ using UnityEngine.UI;
 using IncendianFalls;
 
 namespace Domino {
-  public delegate void ITimerCallback();
-
-  public interface ITimer {
-    float GetTime();
-    void ScheduleTimer(float secondFromNow, ITimerCallback callback);
-  }
-
   public class PlayerController :
       IUnitEffectObserver, IUnitEffectVisitor,
       IGameEffectObserver, IGameEffectVisitor,
@@ -154,8 +147,8 @@ namespace Domino {
           case MultiverseStateType.kTimeshiftingCloneMoving:
           case MultiverseStateType.kTimeshiftingAfterCloneMoved:
             ss.RequestTimeShift(game.id);
-            resumeStaller.StallForDuration(.3f);
-            turnStaller.StallForDuration(.3f);
+            resumeStaller.StallForDuration(300);
+            turnStaller.StallForDuration(300);
             break;
           default:
             Asserts.Assert(false);

@@ -2,23 +2,25 @@
 
 namespace Domino {
   public class ExecutionStaller {
-    float stallUntil;
+    long stallUntilMs;
+    IClock clock;
     ITimer timer;
 
     public delegate void UnstalledHandler(object sender);
     public event UnstalledHandler unstalledEvent;
 
-    public ExecutionStaller(ITimer timer) {
+    public ExecutionStaller(IClock clock, ITimer timer) {
+      this.clock = clock;
       this.timer = timer;
-      this.stallUntil = timer.GetTime();
+      this.stallUntilMs = clock.GetTimeMs();
     }
 
-    public void StallForDuration(float duration) {
-      float currentTime = timer.GetTime();
-      float newStallUntil = currentTime + duration;
-      if (newStallUntil > stallUntil) {
-        stallUntil = newStallUntil;
-        timer.ScheduleTimer(duration, () => OnTimerExpired());
+    public void StallForDuration(long durationMs) {
+      long currentTime = clock.GetTimeMs();
+      long newStallUntilMs = currentTime + durationMs;
+      if (newStallUntilMs > stallUntilMs) {
+        stallUntilMs = newStallUntilMs;
+        timer.ScheduleTimer(durationMs, () => OnTimerExpired());
       }
     }
 
@@ -29,7 +31,7 @@ namespace Domino {
     }
 
     public bool IsStalled() {
-      return timer.GetTime() < stallUntil;
+      return clock.GetTimeMs() < stallUntilMs;
     }
   }
 }

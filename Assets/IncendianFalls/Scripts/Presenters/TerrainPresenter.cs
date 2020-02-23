@@ -14,12 +14,14 @@ namespace IncendianFalls {
     public event OnTerrainClicked TerrainClicked;
     public event OnTerrainHovered TerrainHovered;
 
+    IClock clock;
     Atharia.Model.Terrain terrain;
     Instantiator instantiator;
     Dictionary<Location, TerrainTilePresenter> tilePresenters = new Dictionary<Location, TerrainTilePresenter>();
     Location maybeHighlightLocation = null;
 
-    public TerrainPresenter(Atharia.Model.Terrain terrain, Instantiator instantiator) {
+    public TerrainPresenter(IClock clock, Atharia.Model.Terrain terrain, Instantiator instantiator) {
+      this.clock = clock;
       this.terrain = terrain;
       this.instantiator = instantiator;
       terrain.AddObserver(this);
@@ -31,7 +33,7 @@ namespace IncendianFalls {
     }
 
     public void addTerrainTile(Location location, TerrainTile tile) {
-      var presenter = new TerrainTilePresenter(terrain, location, tile, instantiator);
+      var presenter = new TerrainTilePresenter(clock, terrain, location, tile, instantiator);
       tilePresenters.Add(location, presenter);
     }
 
@@ -64,7 +66,6 @@ namespace IncendianFalls {
     public void SetHighlightLocation(Location location) {
       Location oldLocation = maybeHighlightLocation;
       if (location != maybeHighlightLocation) {
-        Debug.LogError("Now over " + location);
         maybeHighlightLocation = location;
         if (oldLocation != null)
           UpdateLocationHighlighted(oldLocation);

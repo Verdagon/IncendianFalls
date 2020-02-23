@@ -22,6 +22,7 @@ namespace Geomancer {
     public delegate void OnMouseOutEvent();
     public delegate void OnMouseClickEvent();
 
+    IClock clock;
     Vivimap vivimap;
     Geomancer.Model.Terrain terrain;
     public readonly Location location;
@@ -40,11 +41,13 @@ namespace Geomancer {
     //public event OnMouseClickEvent mouseClick;
 
     public TerrainTilePresenter(
+      IClock clock,
         Vivimap vivimap,
         Geomancer.Model.Terrain terrain,
         Location location,
         TerrainTile terrainTile,
         Instantiator instantiator) {
+      this.clock = clock;
       this.vivimap = vivimap;
       this.location = location;
       this.terrain = terrain;
@@ -78,7 +81,7 @@ namespace Geomancer {
                   terrainTile.elevation * terrain.elevationStepHeight,
                   positionVec2.y);
 
-      tileView = instantiator.CreateTileView(tileCenter, tileDescription);
+      tileView = instantiator.CreateTileView(clock, tileCenter, tileDescription);
       tileView.gameObject.AddComponent<TerrainTilePresenterTile>().Init(this);
       tileView.SetDescription(tileDescription);
 
@@ -88,7 +91,7 @@ namespace Geomancer {
       }
 
       if (maybeUnitDescription != null) {
-        unitView = instantiator.CreateUnitView(null, tileCenter, maybeUnitDescription);
+        unitView = instantiator.CreateUnitView(clock, null, tileCenter, maybeUnitDescription);
         unitView.SetDescription(maybeUnitDescription);
       }
     }
@@ -112,6 +115,7 @@ namespace Geomancer {
                 RenderPriority.TILE,
                 new SymbolDescription(
                     ((char)('0' + patternTile.shapeIndex)).ToString(),
+                    100,
                     new Color(1, 0, 1),
                     patternTile.rotateDegrees,
                     OutlineMode.WithOutline,
@@ -129,7 +133,7 @@ namespace Geomancer {
           new ExtrudedSymbolDescription(
             RenderPriority.DOMINO,
             new SymbolDescription(
-              "a", new Color(0, 1, 0), 45, OutlineMode.WithBackOutline, new Color(0, 0, 0)),
+              "a", 100, new Color(0, 1, 0), 45, OutlineMode.WithBackOutline, new Color(0, 0, 0)),
             true,
             new Color(0, 0, 0)),
           new List<KeyValuePair<int, ExtrudedSymbolDescription>>(),
@@ -201,7 +205,6 @@ namespace Geomancer {
     }
 
     public void visitTerrainTileSetElevationEffect(TerrainTileSetElevationEffect effect) {
-      Debug.LogError("elevation changed to " + effect.newValue);
       ResetViews();
     }
 

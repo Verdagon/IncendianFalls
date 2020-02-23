@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LinearMatrix4x4Animation : IMatrix4x4Animation {
-  float startTime;
-  float endTime;
+  long startTimeMs;
+  long endTimeMs;
   Matrix4x4 valueAtStart;
   Matrix4x4 valueAtEnd;
 
-  public LinearMatrix4x4Animation(float startTime, float endTime, Matrix4x4 valueAtStart, Matrix4x4 valueAtEnd) {
-    this.startTime = startTime;
-    this.endTime = endTime;
+  public LinearMatrix4x4Animation(long startTimeMs, long endTimeMs, Matrix4x4 valueAtStart, Matrix4x4 valueAtEnd) {
+    this.startTimeMs = startTimeMs;
+    this.endTimeMs = endTimeMs;
     this.valueAtStart = valueAtStart;
     this.valueAtEnd = valueAtEnd;
   }
 
-  public Matrix4x4 Get(float time) {
-    float ratio = (time - startTime) / (endTime - startTime);
+  public Matrix4x4 Get(long timeMs) {
+    float ratio = (float)(timeMs - startTimeMs) / (endTimeMs - startTimeMs);
 
     var startPosition = valueAtStart.ExtractPosition();
     var startRotation = valueAtStart.ExtractRotation();
@@ -35,7 +35,7 @@ public class LinearMatrix4x4Animation : IMatrix4x4Animation {
     return matrix;
   }
 
-  public IMatrix4x4Animation Simplify(float time) {
+  public IMatrix4x4Animation Simplify(long timeMs) {
     return this;
   }
 }

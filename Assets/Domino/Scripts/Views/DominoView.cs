@@ -32,6 +32,8 @@ namespace Domino {
 
     private bool initialized = false;
 
+    private IClock clock;
+
     // The main object that lives in world space. It has no rotation or scale,
     // just a translation to the center of the tile the unit is in.
     // public GameObject gameObject; (provided by unity)
@@ -46,8 +48,10 @@ namespace Domino {
     Color color_;
 
     public void Init(
+        IClock clock,
         Instantiator instantiator,
         DominoDescription dominoDescription) {
+      this.clock = clock;
       this.instantiator = instantiator;
 
       InnerSetLarge(dominoDescription.large);
@@ -101,17 +105,17 @@ namespace Domino {
       }
     }
 
-    public void Fade(float duration) {
+    public void Fade(long durationMs) {
       GetOrCreateOpacityAnimator().opacityAnimation =
-          new ClampFloatAnimation(Time.time, Time.time + duration,
-              new LinearFloatAnimation(Time.time, 1.0f, -1.0f / duration));
+          new ClampFloatAnimation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
+              new LinearFloatAnimation(clock.GetTimeMs(), 1.0f, -1.0f / durationMs));
     }
 
     private OpacityAnimator GetOrCreateOpacityAnimator() {
       var animator = innerObject.GetComponent<OpacityAnimator>();
       if (animator == null) {
         animator = innerObject.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.renderPriority = RenderPriority.DOMINO;
+        animator.Init(clock, RenderPriority.DOMINO);
       }
       return animator;
     }

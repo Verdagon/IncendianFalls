@@ -13,6 +13,7 @@ namespace IncendianFalls {
     public OnLocationHovered LocationHovered;
     public OnLocationClicked LocationClicked;
 
+    IClock clock;
     ITimer timer;
     SoundPlayer soundPlayer;
     ExecutionStaller resumeStaller;
@@ -28,6 +29,7 @@ namespace IncendianFalls {
     Dictionary<int, UnitPresenter> unitPresenters;
 
     public GamePresenter(
+      IClock clock,
         ITimer timer,
         SoundPlayer soundPlayer,
         ExecutionStaller resumeStaller,
@@ -36,6 +38,7 @@ namespace IncendianFalls {
         Game game,
         Instantiator instantiator,
         NarrationPanelView narrator) {
+      this.clock = clock;
       this.timer = timer;
       this.soundPlayer = soundPlayer;
       this.resumeStaller = resumeStaller;
@@ -62,13 +65,13 @@ namespace IncendianFalls {
       var unit = ss.GetRoot().GetUnit(unitId);
       unitPresenters[unitId] =
           new UnitPresenter(
-              timer, soundPlayer, resumeStaller, turnStaller, game, viewedLevel.terrain, unit, instantiator, narrator);
+              clock, timer, soundPlayer, resumeStaller, turnStaller, game, viewedLevel.terrain, unit, instantiator, narrator);
     }
 
     private void LoadLevel() {
       viewedLevel = game.level;
 
-      this.terrainPresenter = new TerrainPresenter(viewedLevel.terrain, instantiator);
+      this.terrainPresenter = new TerrainPresenter(clock, viewedLevel.terrain, instantiator);
       terrainPresenter.TerrainClicked += (location) => LocationClicked?.Invoke(location);
       terrainPresenter.TerrainHovered += (location) => LocationHovered?.Invoke(location);
 
@@ -116,42 +119,6 @@ namespace IncendianFalls {
       RemoveUnit(effect.id);
     }
     public void OnUnitMutSetEffect(IUnitMutSetEffect effect) { effect.visit(this); }
-
-    //public void OnUnitMouseClick(Unit unit) {
-    //  foreach (var observer in observers) {
-    //    observer.OnUnitMouseClick(unit);
-    //  }
-    //}
-
-    //public void OnUnitMouseIn(Unit unit) {
-    //  foreach (var observer in observers) {
-    //    observer.OnUnitMouseIn(unit);
-    //  }
-    //}
-
-    //public void OnUnitMouseOut(Unit unit) {
-    //  foreach (var observer in observers) {
-    //    observer.OnUnitMouseOut(unit);
-    //  }
-    //}
-
-    //public void OnMouseClick(Location location) {
-    //  foreach (var observer in observers) {
-    //    observer.OnTileMouseClick(location);
-    //  }
-    //}
-
-    //public void OnMouseIn(Location location) {
-    //  foreach (var observer in observers) {
-    //    observer.OnTileMouseIn(location);
-    //  }
-    //}
-
-    //public void OnMouseOut(Location location) {
-    //  foreach (var observer in observers) {
-    //    observer.OnTileMouseOut(location);
-    //  }
-    //}
 
     public Location LocationFor(GameObject obj) {
       Location location = terrainPresenter.LocationFor(obj);

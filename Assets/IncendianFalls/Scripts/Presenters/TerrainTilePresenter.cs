@@ -31,6 +31,7 @@ namespace IncendianFalls {
     bool highlighted = false;
 
     public TerrainTilePresenter(
+      IClock clock,
         Atharia.Model.Terrain terrain,
         Location location,
         TerrainTile terrainTile,
@@ -43,6 +44,7 @@ namespace IncendianFalls {
       var positionVec2 = terrain.pattern.GetTileCenter(location);
       tileView =
           instantiator.CreateTileView(
+            clock,
               new UnityEngine.Vector3(
                   positionVec2.x,
                   terrainTile.elevation * terrain.elevationStepHeight,
@@ -58,7 +60,6 @@ namespace IncendianFalls {
 
     public void SetHighlighted(bool highlighted) {
       this.highlighted = highlighted;
-      Debug.LogError("loc " + location + " now " + highlighted);
       tileView.SetDescription(GetDescription());
     }
 
@@ -90,9 +91,9 @@ namespace IncendianFalls {
           break;
         case "pentagon9":
           if (patternTile.shapeIndex == 0) {
-            symbolName = "0";
+            symbolName = "i";
           } else if (patternTile.shapeIndex == 1) {
-            symbolName = "1";
+            symbolName = "h";
           }
           break;
       }
@@ -102,6 +103,7 @@ namespace IncendianFalls {
               RenderPriority.TILE,
               new SymbolDescription(
                   symbolName,
+                  100,
                   topColor,
                   0,
                   OutlineMode.WithOutline,
@@ -120,7 +122,7 @@ namespace IncendianFalls {
               itemSymbolDescriptionByItemId);
 
       if (highlighted) {
-        var frontColor = (description.tileSymbolDescription.symbol.frontColor * 3 + new Color(1, 1, 1)) / 4;
+        var frontColor = (description.tileSymbolDescription.symbol.frontColor * 7 + new Color(1, 1, 1)) / 8;
         var sidesColor = (description.tileSymbolDescription.sidesColor * 5 + new Color(1, 1, 1)) / 6;
         description =
           description.WithTileSymbolDescription(
@@ -216,7 +218,7 @@ namespace IncendianFalls {
           break;
         case "magma":
           topColor = new UnityEngine.Color(.4f, 0f, 0f);
-          outlineColor = new Color(.5f, 0f, 0.0f);
+          outlineColor = new Color(.2f, 0f, 0.0f);
           sideColor = new UnityEngine.Color(.2f, 0f, 0f);
 
           overlay =
@@ -224,6 +226,7 @@ namespace IncendianFalls {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "f",
+                      50,
                       new Color(.5f, .1f, 0f),
                       0,
                       OutlineMode.WithOutline,
@@ -241,6 +244,7 @@ namespace IncendianFalls {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "o",
+                      50,
                       new Color(.3f, .4f, 1.0f),
                       0,
                       OutlineMode.NoOutline,
@@ -261,6 +265,7 @@ namespace IncendianFalls {
                         RenderPriority.SYMBOL,
                         new SymbolDescription(
                             "f",
+                            50,
                             new Color(1f, 1f, 1f, .1f),
                             0,
                             OutlineMode.WithOutline,
@@ -276,6 +281,7 @@ namespace IncendianFalls {
                         RenderPriority.SYMBOL,
                       new SymbolDescription(
                             "g",
+                            50,
                             new Color(1f, 0, 0, .3f),
                             0,
                             OutlineMode.WithOutline,
@@ -293,6 +299,7 @@ namespace IncendianFalls {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "d",
+                            100,
                           new Color(.5f, .5f, .5f, 1f),
                           0,
                           OutlineMode.WithOutline,
@@ -307,6 +314,7 @@ namespace IncendianFalls {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "c",
+                            100,
                           new Color(1f, 1f, 1f),
                           0,
                           OutlineMode.WithOutline,
@@ -321,6 +329,7 @@ namespace IncendianFalls {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "p",
+                            50,
                           new Color(0, 0, 0),
                           0,
                           OutlineMode.WithOutline,
@@ -338,6 +347,7 @@ namespace IncendianFalls {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "0",
+                            50,
                       new Color(1f, 1f, 1.0f, 1.5f),
                       0,
                       OutlineMode.WithBackOutline,
@@ -351,6 +361,7 @@ namespace IncendianFalls {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "s",
+                            50,
                       new Color(1f, 1f, 1f, 1.5f),
                       0,
                       OutlineMode.WithBackOutline,
@@ -364,6 +375,7 @@ namespace IncendianFalls {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "4",
+                            50,
                       new Color(1f, 1f, 1f, 1.5f),
                       0,
                       OutlineMode.WithBackOutline,
@@ -376,7 +388,8 @@ namespace IncendianFalls {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "+",
+                      "plus",
+                            50,
                       new Color(.8f, 0, .8f, 1.5f),
                       0,
                       OutlineMode.WithBackOutline,
@@ -390,6 +403,7 @@ namespace IncendianFalls {
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
                         "l",
+                            50,
                         new Color(1.0f, 1.0f, 1.0f, 1.5f),
                         0,
                         OutlineMode.WithBackOutline,
@@ -403,7 +417,8 @@ namespace IncendianFalls {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      ",",
+                      "comma",
+                            50,
                       new Color(.25f, .7f, 1.0f, 1.5f),
                       0,
                       OutlineMode.WithBackOutline,

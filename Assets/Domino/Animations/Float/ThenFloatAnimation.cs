@@ -4,35 +4,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ThenFloatAnimation : IFloatAnimation {
-  readonly float firstAnimationEndTime;
+  readonly long firstAnimationEndTimeMs;
   IFloatAnimation firstAnimation;
   IFloatAnimation secondAnimation;
 
   public ThenFloatAnimation(
-      float firstAnimationEndTime,
+      long firstAnimationEndTimeMs,
       IFloatAnimation firstAnimation,
       IFloatAnimation secondAnimation) {
-    this.firstAnimationEndTime = firstAnimationEndTime;
+    this.firstAnimationEndTimeMs = firstAnimationEndTimeMs;
     this.firstAnimation = firstAnimation;
     this.secondAnimation = secondAnimation;
   }
 
-  public float Get(float time) {
+  public float Get(long timeMs) {
     // This shouldnt be necessary actually, cuz once we pass
     // firstAnimationEndTime we'll get simplified away.
-    if (time < firstAnimationEndTime) {
-      return firstAnimation.Get(time);
+    if (timeMs < firstAnimationEndTimeMs) {
+      return firstAnimation.Get(timeMs);
     } else {
-      return secondAnimation.Get(time);
+      return secondAnimation.Get(timeMs);
     }
   }
 
-  public IFloatAnimation Simplify(float time) {
-    firstAnimation = firstAnimation.Simplify(time);
-    if (time < firstAnimationEndTime) {
+  public IFloatAnimation Simplify(long timeMs) {
+    firstAnimation = firstAnimation.Simplify(timeMs);
+    if (timeMs < firstAnimationEndTimeMs) {
       return this;
     }
-    secondAnimation = secondAnimation.Simplify(time);
+    secondAnimation = secondAnimation.Simplify(timeMs);
     return secondAnimation;
   }
 }

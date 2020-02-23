@@ -9,9 +9,11 @@ namespace Domino {
   public class CameraAnimator : MonoBehaviour {
     bool initialized = false;
 
-    public GameObject cameraObject;
+    private IClock clock;
+    private GameObject cameraObject;
 
-    public void Init(GameObject cameraObject, IMatrix4x4Animation initialAnimation) {
+    public void Init(IClock clock, GameObject cameraObject, IMatrix4x4Animation initialAnimation) {
+      this.clock = clock;
       this.cameraObject = cameraObject;
       this.cameraAnimation_ = initialAnimation;
       initialized = true;
@@ -32,9 +34,9 @@ namespace Domino {
     }
 
     void Update() {
-      cameraAnimation_ = cameraAnimation_.Simplify(Time.time);
+      cameraAnimation_ = cameraAnimation_.Simplify(clock.GetTimeMs());
 
-      Matrix4x4 matrix = cameraAnimation_.Get(Time.time);
+      Matrix4x4 matrix = cameraAnimation_.Get(clock.GetTimeMs());
       cameraObject.transform.FromMatrix(matrix);
 
       if (cameraAnimation_ is ConstantMatrix4x4Animation || cameraAnimation_ is IdentityMatrix4x4Animation) {

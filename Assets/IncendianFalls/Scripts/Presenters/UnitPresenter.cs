@@ -15,6 +15,7 @@ namespace IncendianFalls {
       IIUnitComponentMutBunchObserver,
       IBideAICapabilityUCEffectObserver,
       IBideAICapabilityUCEffectVisitor {
+    IClock clock;
     ITimer timer;
     SoundPlayer soundPlayer;
     ExecutionStaller resumeStaller;
@@ -35,6 +36,7 @@ namespace IncendianFalls {
     private UnitDescription description;
 
     public UnitPresenter(
+      IClock clock,
         ITimer timer,
         SoundPlayer soundPlayer,
         ExecutionStaller resumeStaller,
@@ -61,6 +63,7 @@ namespace IncendianFalls {
 
       unitView =
           instantiator.CreateUnitView(
+            clock,
               timer,
               terrain.GetTileCenter(unit.location).ToUnity(),
               GetUnitViewDescription(unit));
@@ -90,10 +93,10 @@ namespace IncendianFalls {
     }
 
     public void OnUnitEffect(IUnitEffect effect) {
-      if (unit.Exists()) {
-        description = GetUnitViewDescription(unit);
-      }
-      effect.visit(this);
+      //if (unit.Exists()) {
+      //  description = GetUnitViewDescription(unit);
+      //}
+        effect.visit(this);
     }
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
@@ -109,7 +112,7 @@ namespace IncendianFalls {
       unitView.GetComponent<UnitView>().HopTo(newPosition);
       // If it's the player or a time shift clone, stall the next turn until we're done.
       if (unit.good) {
-        turnStaller.StallForDuration(UnitView.HOP_DURATION);
+        turnStaller.StallForDuration(UnitView.HOP_DURATION_MS);
       }
     }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) {
@@ -124,8 +127,8 @@ namespace IncendianFalls {
           narrator.ShowMessage("You have slain the Ravashrike and found Volcaetus!\nCongratulations on your glorious victory!");
         }
 
-        unitView.GetComponent<UnitView>().Die(0.5f);
-        timer.ScheduleTimer(0.5f, () => {
+        unitView.GetComponent<UnitView>().Die(500);
+        timer.ScheduleTimer(500, () => {
           if (unitView != null) {
             unitView.SetUnitViewActive(false);
           }
@@ -149,7 +152,9 @@ namespace IncendianFalls {
       unitView.SetDescription(GetUnitViewDescription(unit));
     }
 
-    public void OnIUnitEventMutListEffect(IIUnitEventMutListEffect effect) { effect.visit(this); }
+    public void OnIUnitEventMutListEffect(IIUnitEventMutListEffect effect) {
+        effect.visit(this);
+    }
     public void visitIUnitEventMutListCreateEffect(IUnitEventMutListCreateEffect effect) { }
     public void visitIUnitEventMutListDeleteEffect(IUnitEventMutListDeleteEffect effect) { }
     public void visitIUnitEventMutListAddEffect(IUnitEventMutListAddEffect effect) {
@@ -164,8 +169,8 @@ namespace IncendianFalls {
 
           unitView.Lunge((victimPosition - playerPosition).normalized * .25f);
 
-          resumeStaller.StallForDuration(.15f);
-          turnStaller.StallForDuration(.35f);
+          resumeStaller.StallForDuration(150);
+          turnStaller.StallForDuration(350);
         }
       } else if (effect.element is UnitUnleashBideEventAsIUnitEvent) {
         unitView.ShowRune(
@@ -173,6 +178,7 @@ namespace IncendianFalls {
                 RenderPriority.RUNE,
                 new SymbolDescription(
                     "r",
+                            50,
                     new Color(1.0f, 1f, 1f, 1.5f),
                     0,
                     OutlineMode.WithOutline,
@@ -185,28 +191,30 @@ namespace IncendianFalls {
                 RenderPriority.RUNE,
                 new SymbolDescription(
                     "q",
+                            50,
                     new Color(1.0f, 1f, 1f, 1.5f),
                     0,
                     OutlineMode.WithOutline,
                     new Color(0, 0, 0)),
                 true,
                 new Color(0, 0, 1f, 1f)));
-        resumeStaller.StallForDuration(.5f);
-        turnStaller.StallForDuration(.5f);
+        resumeStaller.StallForDuration(500);
+        turnStaller.StallForDuration(500);
       } else if (effect.element is UnitCounteringEventAsIUnitEvent) {
         unitView.ShowRune(
             new ExtrudedSymbolDescription(
                 RenderPriority.RUNE,
                 new SymbolDescription(
                     "v",
+                            50,
                     new Color(1.0f, 1f, 1f, 1.5f),
                     0,
                     OutlineMode.WithOutline,
                     new Color(0, 0, 0)),
                 true,
                 new Color(0, 0, 1f, 1f)));
-        resumeStaller.StallForDuration(.5f);
-        turnStaller.StallForDuration(.5f);
+        resumeStaller.StallForDuration(500);
+        turnStaller.StallForDuration(500);
       } else if (effect.element is UnitFireEventAsIUnitEvent ufe) {
         if (unit.id == ufe.obj.attackerId) {
           unitView.ShowRune(
@@ -214,6 +222,7 @@ namespace IncendianFalls {
                   RenderPriority.RUNE,
                   new SymbolDescription(
                       "w",
+                            50,
                       new Color(1.0f, 1f, 1f, 1.5f),
                       0,
                       OutlineMode.WithOutline,
@@ -226,6 +235,7 @@ namespace IncendianFalls {
                   RenderPriority.RUNE,
                   new SymbolDescription(
                       "r",
+                            50,
                       new Color(1.0f, .6f, 0, 1.5f),
                       0,
                       OutlineMode.WithOutline,
@@ -292,6 +302,7 @@ namespace IncendianFalls {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "q",
+                            50,
                           new Color(1, 1, 1, 1.5f),
                           0,
                           OutlineMode.WithBackOutline,
@@ -306,6 +317,7 @@ namespace IncendianFalls {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "v",
+                            50,
                           new Color(1, 1, 1, 1.5f),
                           0,
                           OutlineMode.WithBackOutline,
@@ -336,6 +348,7 @@ namespace IncendianFalls {
                         RenderPriority.SYMBOL,
                         new SymbolDescription(
                             "n",
+                            50,
                             color,
                             0,
                             OutlineMode.WithBackOutline,
@@ -351,6 +364,7 @@ namespace IncendianFalls {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "l",
+                            50,
                           new Color(1, 1, 1, 1.5f),
                           0,
                           OutlineMode.WithBackOutline,
@@ -365,6 +379,7 @@ namespace IncendianFalls {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "s",
+                            50,
                           new Color(1, 1, 1, 1.5f),
                           0,
                           OutlineMode.WithBackOutline,
@@ -378,6 +393,7 @@ namespace IncendianFalls {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "4",
+                            50,
                           new Color(1, 1, 1, 1.5f),
                           0,
                           OutlineMode.WithBackOutline,
@@ -391,6 +407,7 @@ namespace IncendianFalls {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "0",
+                            50,
                           new Color(1, 1, 1, 1.5f),
                           0,
                           OutlineMode.WithBackOutline,
@@ -416,7 +433,8 @@ namespace IncendianFalls {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "b", new Color(1, 1, 1, 1.5f), 0, OutlineMode.WithBackOutline,
+                      "b",
+                            50, new Color(1, 1, 1, 1.5f), 0, OutlineMode.WithBackOutline,
                       new Color(0, 0, 0)),
                   true, new Color(0, 0, 0)),
               detailSymbols,
@@ -430,7 +448,8 @@ namespace IncendianFalls {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "x", new Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      "x",
+                            50, new Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new Color(0, 0, 0)),
                   false, new Color(0, 0, 0)),
               detailSymbols,
@@ -444,7 +463,8 @@ namespace IncendianFalls {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "y", new Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      "y",
+                            50, new Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new Color(0, 0, 0)),
                   false, new Color(0, 0, 0)),
               detailSymbols,
@@ -458,7 +478,8 @@ namespace IncendianFalls {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      ")", new Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      "parenright",
+                            50, new Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new Color(0, 0, 0)),
                   false, new Color(0, 0, 0)),
               detailSymbols,
@@ -472,7 +493,8 @@ namespace IncendianFalls {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "&", new Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      "ampersand",
+                            50, new Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new Color(0, 0, 0)),
                   false, new Color(0, 0, 0)),
               detailSymbols,
@@ -486,7 +508,8 @@ namespace IncendianFalls {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "z", new Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      "z",
+                            50, new Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new Color(0, 0, 0)),
                   false, new Color(0, 0, 0)),
               detailSymbols,
@@ -500,7 +523,8 @@ namespace IncendianFalls {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "(", new Color(0, 0, 0, 1f), 0, OutlineMode.WithBackOutline,
+                      "parenleft",
+                            50, new Color(0, 0, 0, 1f), 0, OutlineMode.WithBackOutline,
                       new Color(1, 1, 1)),
                   false, new Color(0, 0, 0)),
               detailSymbols,
@@ -514,7 +538,8 @@ namespace IncendianFalls {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "3", new Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
+                      "3",
+                            50, new Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
                       new Color(1, 1, 1)),
                   false, new Color(0, 0, 0)),
               detailSymbols,
@@ -529,7 +554,8 @@ namespace IncendianFalls {
               RenderPriority.SYMBOL,
 
                 new SymbolDescription(
-              "m", new Color(1, 1, 1, 1.5f), 0, OutlineMode.WithBackOutline,
+              "m",
+                            50, new Color(1, 1, 1, 1.5f), 0, OutlineMode.WithBackOutline,
                     new Color(0, 0, 0)), false, new Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -545,7 +571,8 @@ namespace IncendianFalls {
             RenderPriority.SYMBOL,
 
                 new SymbolDescription(
-            "a", new Color(0, 1f, 1f), 15, OutlineMode.WithOutline,
+            "a",
+                            50, new Color(0, 1f, 1f), 15, OutlineMode.WithOutline,
                     new Color(0, 0, 0)), true, new Color(0, 0, 0)),
             new List<KeyValuePair<int, ExtrudedSymbolDescription>>(),
             hpRatio,

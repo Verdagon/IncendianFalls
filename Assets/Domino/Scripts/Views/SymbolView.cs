@@ -14,6 +14,7 @@ namespace Domino {
 
   public class SymbolDescription {
     public readonly string symbolId;
+    public readonly int qualityPercent;
     public readonly Color frontColor;
     public readonly float rotationDegrees;
     public readonly OutlineMode withOutline;
@@ -21,11 +22,13 @@ namespace Domino {
 
     public SymbolDescription(
         string symbolId,
+        int qualityPercent,
         Color frontColor,
         float rotationDegrees,
         OutlineMode withOutline,
         Color outlineColor) {
       this.symbolId = symbolId;
+      this.qualityPercent = qualityPercent;
       this.frontColor = frontColor;
       this.rotationDegrees = rotationDegrees;
       this.withOutline = withOutline;
@@ -35,6 +38,7 @@ namespace Domino {
     public SymbolDescription WithFrontColor(Color newFrontColor) {
       return new SymbolDescription(
         symbolId,
+        qualityPercent,
         newFrontColor,
         rotationDegrees,
         withOutline,
@@ -70,6 +74,8 @@ namespace Domino {
   public class SymbolView : MonoBehaviour {
     private bool initialized = false;
 
+    private IClock clock;
+
     // The main object that lives in world space. It has no rotation or scale,
     // just a translation to the center of the tile the unit is in.
     // public GameObject gameObject; (provided by unity)
@@ -85,6 +91,7 @@ namespace Domino {
 
     RenderPriority renderPriority;
     string symbolId_;
+    int qualityPercent_;
     bool extruded_;
     Color frontColor_;
     Color sidesColor_;
@@ -93,16 +100,18 @@ namespace Domino {
     Color outlineColor_;
 
     public void Init(
+        IClock clock,
         Instantiator instantiator,
         bool mousable,
         ExtrudedSymbolDescription symbolDescription) {
+      this.clock = clock;
       this.instantiator = instantiator;
 
       this.renderPriority = symbolDescription.renderPriority;
       frontObject.transform.SetParent(gameObject.transform, false);
       frontOutlineObject.transform.SetParent(gameObject.transform, false);
       sidesObject.transform.SetParent(gameObject.transform, false);
-      InnerSetSymbolId(symbolDescription.symbol.symbolId);
+      InnerSetSymbolId(symbolDescription.symbol.symbolId, symbolDescription.symbol.qualityPercent);
       InnerSetExtruded(symbolDescription.extruded);
       InnerSetWithOutline(symbolDescription.symbol.withOutline);
       InnerSetFrontColor(symbolDescription.symbol.frontColor);
@@ -120,7 +129,7 @@ namespace Domino {
       return new ExtrudedSymbolDescription(
           renderPriority,
           new SymbolDescription(
-              symbolId, frontColor, rotationDegrees, withOutline, outlineColor),
+              symbolId, qualityPercent, frontColor, rotationDegrees, withOutline, outlineColor),
           extruded, sidesColor);
     }
 
@@ -147,12 +156,22 @@ namespace Domino {
       rotationDegrees = description.symbol.rotationDegrees;
     }
 
+    public int qualityPercent {
+      get { CheckInitialized(); return qualityPercent_; }
+      set {
+        CheckInitialized();
+        if (qualityPercent_ != value) {
+          InnerSetSymbolId(symbolId, value);
+        }
+      }
+    }
+
     public string symbolId {
       get { CheckInitialized(); return symbolId_; }
       set {
         CheckInitialized();
         if (symbolId_ != value) {
-          InnerSetSymbolId(value);
+          InnerSetSymbolId(value, qualityPercent);
         }
       }
     }
@@ -217,8 +236,8 @@ namespace Domino {
       }
     }
 
-    private void InnerSetSymbolId(string newSymbolId) {
-      SymbolMeshes meshes = instantiator.GetSymbolMeshes(newSymbolId);
+    private void InnerSetSymbolId(string newSymbolId, int qualityPercent) {
+      SymbolMeshes meshes = instantiator.GetSymbolMeshes(newSymbolId, qualityPercent);
       frontObject.GetComponent<MeshFilter>().mesh = meshes.front;
       frontObject.GetComponent<MeshCollider>().sharedMesh = meshes.front;
       frontOutlineObject.GetComponent<MeshFilter>().mesh = meshes.frontOutline;
@@ -326,33 +345,33 @@ namespace Domino {
       CheckInitialized();
     }
 
-    public void FadeInThenOut(float inDuration, float outDuration) {
+    public void FadeInThenOut(long inDurationMs, long outDurationMs) {
       GetOrCreateFrontOpacityAnimator().opacityAnimation =
-          MakeFadeInThenOutAnimation(inDuration, outDuration);
+          MakeFadeInThenOutAnimation(inDurationMs, outDurationMs);
       GetOrCreateFrontOutlineOpacityAnimator().opacityAnimation =
-          MakeFadeInThenOutAnimation(inDuration, outDuration);
+          MakeFadeInThenOutAnimation(inDurationMs, outDurationMs);
       GetOrCreateSidesOpacityAnimator().opacityAnimation =
-          MakeFadeInThenOutAnimation(inDuration, outDuration);
+          MakeFadeInThenOutAnimation(inDurationMs, outDurationMs);
     }
 
-    private IFloatAnimation MakeFadeInThenOutAnimation(float inDuration, float outDuration) {
+    private IFloatAnimation MakeFadeInThenOutAnimation(long inDurationMs, long outDurationMs) {
       return new ClampFloatAnimation(
-          Time.time, Time.time + inDuration + outDuration,
+          clock.GetTimeMs(), clock.GetTimeMs() + inDurationMs + outDurationMs,
           new ThenFloatAnimation(
-              Time.time + inDuration,
-              new LinearFloatAnimation(Time.time, 0.0f, 1.0f / inDuration),
-              new LinearFloatAnimation(Time.time + inDuration, 1.0f, -1.0f / outDuration)));
+              clock.GetTimeMs() + inDurationMs,
+              new LinearFloatAnimation(clock.GetTimeMs(), 0.0f, 1.0f / inDurationMs),
+              new LinearFloatAnimation(clock.GetTimeMs() + inDurationMs, 1.0f, -1.0f / outDurationMs)));
     }
 
-    public void Fade(float duration) {
-      GetOrCreateFrontOpacityAnimator().opacityAnimation = CreateFadeAnimation(duration);
-      GetOrCreateFrontOutlineOpacityAnimator().opacityAnimation = CreateFadeAnimation(duration);
-      GetOrCreateSidesOpacityAnimator().opacityAnimation = CreateFadeAnimation(duration);
+    public void Fade(long durationMs) {
+      GetOrCreateFrontOpacityAnimator().opacityAnimation = CreateFadeAnimation(durationMs);
+      GetOrCreateFrontOutlineOpacityAnimator().opacityAnimation = CreateFadeAnimation(durationMs);
+      GetOrCreateSidesOpacityAnimator().opacityAnimation = CreateFadeAnimation(durationMs);
     }
 
-    private IFloatAnimation CreateFadeAnimation(float duration) {
-      return new ClampFloatAnimation(Time.time, Time.time + duration,
-          new LinearFloatAnimation(Time.time, 1.0f, -1.0f / duration));
+    private IFloatAnimation CreateFadeAnimation(long durationMs) {
+      return new ClampFloatAnimation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
+          new LinearFloatAnimation(clock.GetTimeMs(), 1.0f, -1.0f / durationMs));
     }
 
     private OpacityAnimator GetOrCreateSidesOpacityAnimator() {
@@ -360,7 +379,7 @@ namespace Domino {
       var animator = sidesObject.GetComponent<OpacityAnimator>();
       if (animator == null) {
         animator = sidesObject.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.renderPriority = renderPriority;
+        animator.Init(clock, renderPriority);
       }
       return animator;
     }
@@ -370,7 +389,7 @@ namespace Domino {
       var animator = frontObject.GetComponent<OpacityAnimator>();
       if (animator == null) {
         animator = frontObject.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.renderPriority = renderPriority;
+        animator.Init(clock, renderPriority);
       }
       return animator;
     }
@@ -380,7 +399,7 @@ namespace Domino {
       var animator = frontOutlineObject.GetComponent<OpacityAnimator>();
       if (animator == null) {
         animator = frontOutlineObject.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.renderPriority = renderPriority;
+        animator.Init(clock, renderPriority);
       }
       return animator;
     }

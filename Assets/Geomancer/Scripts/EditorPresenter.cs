@@ -23,6 +23,7 @@ namespace Geomancer {
   }
 
   public class EditorPresenter : MonoBehaviour {
+    private IClock clock;
     public Instantiator instantiator;
     public GameObject cameraObject;
 
@@ -42,6 +43,8 @@ namespace Geomancer {
     Dictionary<KeyCode, string> memberByKeyCode;
 
     public void Start() {
+      clock = null;
+
       memberByKeyCode = new Dictionary<KeyCode, string>() {
         [KeyCode.G] = "grass",
         [KeyCode.M] = "mud",
@@ -88,7 +91,6 @@ namespace Geomancer {
 
             ss.Transact(delegate () {
               var tile = ss.EffectTerrainTileCreate(elevation, ss.EffectStrMutListCreate());
-              Debug.Log("Adding tile (" + groupX + ", " + groupY + ", " + indexInGroup + ")");
               level.terrain.tiles.Add(new Location(groupX, groupY, indexInGroup), tile);
 
               for (int i = 4; i < parts.Length; i++) {
@@ -102,7 +104,6 @@ namespace Geomancer {
       }
 
       if (level.terrain.tiles.Count == 0) {
-      Debug.Log("Adding starting tile");
         ss.Transact(delegate () {
           var tile = ss.EffectTerrainTileCreate(1, ss.EffectStrMutListCreate());
           level.terrain.tiles.Add(new Location(0, 0, 0), tile);
@@ -110,11 +111,11 @@ namespace Geomancer {
         });
       }
 
-      terrainPresenter = new TerrainPresenter(MakeVivimap(), level.terrain, instantiator);
+      terrainPresenter = new TerrainPresenter(clock, MakeVivimap(), level.terrain, instantiator);
       terrainPresenter.PhantomTileClicked += HandlePhantomTileClicked;
       terrainPresenter.TerrainTileClicked += HandleTerrainTileClicked;
 
-      cameraController = new CameraController(cameraObject, level.terrain.GetTileCenter(new Location(0, 0, 0)).ToUnity());
+      cameraController = new CameraController(clock, cameraObject, level.terrain.GetTileCenter(new Location(0, 0, 0)).ToUnity());
     }
 
     private Vivimap MakeVivimap() {
@@ -128,7 +129,8 @@ namespace Geomancer {
         new Vivimap.OverlayDescriptionForIDescription(
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
-            new SymbolDescription("f", new Color(.5f, .5f, .5f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
+            new SymbolDescription("f",
+                            50,new Color(.5f, .5f, .5f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
             false,
             new Color(0, 0, 0)))
       });
@@ -138,6 +140,7 @@ namespace Geomancer {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "p",
+                            50,
                           new Color(0, 0, 0),
                           0,
                           OutlineMode.WithOutline,
@@ -159,7 +162,8 @@ namespace Geomancer {
         new Vivimap.OverlayDescriptionForIDescription(
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
-            new SymbolDescription("i", new Color(1f, 1f, 1f), 0, OutlineMode.WithBackOutline, new Color(0, 0, 0)),
+            new SymbolDescription("i",
+                            50, new Color(1f, 1f, 1f), 0, OutlineMode.WithBackOutline, new Color(0, 0, 0)),
             false,
             new Color(0, 0, 0)))
       });
@@ -175,7 +179,6 @@ namespace Geomancer {
     }
 
     public void HandleTerrainTileClicked(Location location) {
-      Debug.LogError("clicked " + location);
       var selection = terrainPresenter.GetSelection();
       if (selection.Contains(location)) {
         selection.Remove(location);
@@ -311,7 +314,6 @@ namespace Geomancer {
       foreach (var locAndTile in level.terrain.tiles) {
         var loc = locAndTile.Key;
         var tile = locAndTile.Value;
-        Debug.Log("Writing (" + loc.groupX + ", " + loc.groupY + ", " + loc.indexInGroup + ")");
         string line = loc.groupX + " " + loc.groupY + " " + loc.indexInGroup + " " + tile.elevation;
         foreach (var member in tile.members) {
           line += " " + member;

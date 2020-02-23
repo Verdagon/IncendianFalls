@@ -12,6 +12,7 @@ namespace Geomancer {
     public OnTerrainTileClicked TerrainTileClicked;
     public OnPhantomTileClicked PhantomTileClicked;
 
+    IClock clock;
     Vivimap vivimap;
     Geomancer.Model.Terrain terrain;
     Instantiator instantiator;
@@ -23,7 +24,8 @@ namespace Geomancer {
 
     SortedSet<Location> selectedLocations = new SortedSet<Location>();
 
-    public TerrainPresenter(Vivimap vivimap, Geomancer.Model.Terrain terrain, Instantiator instantiator) {
+    public TerrainPresenter(IClock clock, Vivimap vivimap, Geomancer.Model.Terrain terrain, Instantiator instantiator) {
+      this.clock = clock;
       this.vivimap = vivimap;
       this.terrain = terrain;
       this.instantiator = instantiator;
@@ -151,12 +153,12 @@ namespace Geomancer {
     }
 
     private void addTerrainTile(Location location, TerrainTile tile) {
-      var presenter = new TerrainTilePresenter(vivimap, terrain, location, tile, instantiator);
+      var presenter = new TerrainTilePresenter(clock, vivimap, terrain, location, tile, instantiator);
       tilePresenters.Add(location, presenter);
     }
 
     private void addPhantomTile(Location location) {
-      var presenter = new PhantomTilePresenter(terrain.pattern, location, instantiator);
+      var presenter = new PhantomTilePresenter(clock, terrain.pattern, location, instantiator);
       phantomTilePresenters.Add(location, presenter);
     }
 
@@ -168,11 +170,9 @@ namespace Geomancer {
       var (addedLocations, removedLocations) = Geomancer.Model.SetUtils.Diff(selectedLocations, locations);
       selectedLocations = locations;
       foreach (var addedLocation in addedLocations) {
-        Debug.LogError("added " + addedLocation);
         UpdateLocationHighlighted(addedLocation);
       }
       foreach (var removedLocation in removedLocations) {
-        Debug.LogError("removed " + removedLocation);
         UpdateLocationHighlighted(removedLocation);
       }
     }

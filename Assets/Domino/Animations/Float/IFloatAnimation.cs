@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface IFloatAnimation {
-  float Get(float time);
-  IFloatAnimation Simplify(float time);
+  float Get(long timeMs);
+  IFloatAnimation Simplify(long timeMs);
 }

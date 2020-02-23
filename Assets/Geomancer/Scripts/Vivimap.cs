@@ -104,6 +104,7 @@ namespace Geomancer {
               defaultTile.tileSymbolDescription.renderPriority,
               new Domino.SymbolDescription(
                   defaultTile.tileSymbolDescription.symbol.symbolId,
+                  defaultTile.tileSymbolDescription.symbol.qualityPercent,
                   topColor,
                   defaultTile.tileRotationDegrees,
                   specifiedOutline ? Domino.OutlineMode.WithOutline : defaultTile.tileSymbolDescription.symbol.withOutline,

@@ -10,6 +10,8 @@ namespace Domino {
 
     public static readonly int METER_RENDER_QUEUE = 3000;
 
+    private IClock clock;
+
     // The main object that lives in world space. It has no rotation or scale,
     // just a translation to the center of the tile the unit is in.
     // public GameObject gameObject; (provided by unity)
@@ -26,10 +28,12 @@ namespace Domino {
     float ratio_;
 
     public void Init(
+      IClock clock,
         Instantiator instantiator,
         Color filledColor,
         Color emptyColor,
         float ratio) {
+      this.clock = clock;
       this.instantiator = instantiator;
 
       filledPart.GetComponent<ColorChanger>().SetColor(filledColor, RenderPriority.METER);
@@ -81,13 +85,13 @@ namespace Domino {
       CheckInitialized();
     }
 
-    public void Fade(float duration) {
+    public void Fade(long durationMs) {
       GetOrCreateFilledPartOpacityAnimator().opacityAnimation =
-          new ClampFloatAnimation(Time.time, Time.time + duration,
-              new LinearFloatAnimation(Time.time, 1.0f, -1.0f / duration));
+          new ClampFloatAnimation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
+              new LinearFloatAnimation(clock.GetTimeMs(), 1.0f, -1.0f / durationMs));
       GetOrCreateEmptyPartOpacityAnimator().opacityAnimation =
-          new ClampFloatAnimation(Time.time, Time.time + duration,
-              new LinearFloatAnimation(Time.time, 1.0f, -1.0f / duration));
+          new ClampFloatAnimation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
+              new LinearFloatAnimation(clock.GetTimeMs(), 1.0f, -1.0f / durationMs));
     }
 
     private OpacityAnimator GetOrCreateFilledPartOpacityAnimator() {
@@ -95,7 +99,7 @@ namespace Domino {
       var animator = filledPart.GetComponent<OpacityAnimator>();
       if (animator == null) {
         animator = filledPart.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.renderPriority = RenderPriority.SYMBOL;
+        animator.Init(clock, RenderPriority.SYMBOL);
       }
       return animator;
     }
@@ -105,7 +109,7 @@ namespace Domino {
       var animator = emptyPart.GetComponent<OpacityAnimator>();
       if (animator == null) {
         animator = emptyPart.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.renderPriority = RenderPriority.SYMBOL;
+        animator.Init(clock, RenderPriority.SYMBOL);
       }
       return animator;
     }

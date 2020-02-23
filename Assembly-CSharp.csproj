@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Destroyer.cs" />
     <Compile Include="Assets\Domino\Animations\Float\ClampFloatAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\Float\ConstantFloatAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\Float\IdentityFloatAnimation.cs" />
@@ -71,6 +70,7 @@
     <Compile Include="Assets\Domino\Animations\Float\LinearFloatAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\Float\ThenFloatAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\HopAnimation.cs" />
+    <Compile Include="Assets\Domino\Animations\IClock.cs" />
     <Compile Include="Assets\Domino\Animations\LungeAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\Matrix4x4\ClampMatrix4x4Animation.cs" />
     <Compile Include="Assets\Domino\Animations\Matrix4x4\ComposeMatrix4x4Animation.cs" />
@@ -81,7 +81,6 @@
     <Compile Include="Assets\Domino\Animations\MovementAnimator.cs" />
     <Compile Include="Assets\Domino\Animations\OpacityAnimator.cs" />
     <Compile Include="Assets\Domino\Avatar\Nob.cs" />
-    <Compile Include="Assets\Domino\Avatar\Player.cs" />
     <Compile Include="Assets\Domino\Avatar\Raving.cs" />
     <Compile Include="Assets\Domino\Scripts\CameraAnimator.cs" />
     <Compile Include="Assets\Domino\Scripts\CameraController.cs" />
@@ -102,8 +101,6 @@
     <Compile Include="Assets\Domino\Scripts\Views\SymbolView.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\TileView.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\UnitView.cs" />
-    <Compile Include="Assets\Edges\Edger.cs" />
-    <Compile Include="Assets\Edges\Edgifier.cs" />
     <Compile Include="Assets\Geomancer\Scripts\EditorPresenter.cs" />
     <Compile Include="Assets\Geomancer\Scripts\ModelExtensions.cs" />
     <Compile Include="Assets\Geomancer\Scripts\PhantomTilePresenter.cs" />
@@ -113,6 +110,7 @@
     <Compile Include="Assets\IncendianFalls\Scripts\ConsoleDriver.cs" />
     <Compile Include="Assets\IncendianFalls\Scripts\GamePresenter.cs" />
     <Compile Include="Assets\IncendianFalls\Scripts\ISuperstructure.cs" />
+    <Compile Include="Assets\IncendianFalls\Scripts\ITimer.cs" />
     <Compile Include="Assets\IncendianFalls\Scripts\Logger.cs" />
     <Compile Include="Assets\IncendianFalls\Scripts\ModelExtensions.cs" />
     <Compile Include="Assets\IncendianFalls\Scripts\PlayerControllers\FireMode.cs" />
@@ -175,6 +173,7 @@
     <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
+    <Compile Include="Assets\SlowableTimerClock.cs" />
     <Compile Include="Assets\UIClickListener.cs" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
@@ -205,7 +204,6 @@
     <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\Trackball.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.cginc" />
-    <None Include="Assets\Edges\EdgeShader.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\EyeHistogram.compute" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.cginc" />
@@ -248,8 +246,14 @@
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
       <HintPath>D:/IncendianFalls/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
+    <Reference Include="Whinarn.UnityMeshSimplifier.Runtime">
+      <HintPath>D:/IncendianFalls/Library/ScriptAssemblies/Whinarn.UnityMeshSimplifier.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:/IncendianFalls/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Whinarn.UnityMeshSimplifier.Editor">
+      <HintPath>D:/IncendianFalls/Library/ScriptAssemblies/Whinarn.UnityMeshSimplifier.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>D:/IncendianFalls/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>

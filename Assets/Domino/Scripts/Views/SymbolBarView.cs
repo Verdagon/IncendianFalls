@@ -12,13 +12,16 @@ namespace Domino {
     // Nullable. Only non-null when there's details.
     // private GameObject gameObject;
 
+    private IClock clock;
     private Instantiator instantiator;
     private List<KeyValuePair<int, SymbolView>> symbolsIdsAndViews;
 
     public void Init(
+      IClock clock,
         Instantiator instantiator,
         List<KeyValuePair<int, ExtrudedSymbolDescription>> newSymbolsIdsAndDescriptions) {
       this.initialized = true;
+      this.clock = clock;
       this.instantiator = instantiator;
       this.symbolsIdsAndViews = new List<KeyValuePair<int, SymbolView>>();
       SetDescriptions(newSymbolsIdsAndDescriptions);
@@ -51,7 +54,7 @@ namespace Domino {
 
       int i = 0;
       foreach (var entry in newSymbolsIdsAndDescriptions) {
-        var desiredSymbolView = instantiator.CreateSymbolView(false, entry.Value);
+        var desiredSymbolView = instantiator.CreateSymbolView(clock, false, entry.Value);
         desiredSymbolView.gameObject.transform.SetParent(gameObject.transform, false);
         symbolsIdsAndViews.Add(new KeyValuePair<int, SymbolView>(entry.Key, desiredSymbolView));
         SetSymbolViewPosition(entry.Key, desiredSymbolView, i++);

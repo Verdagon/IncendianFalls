@@ -34,6 +34,7 @@ namespace IncendianFalls {
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "q",
+                    50,
                     new Color(1, 1, 1, 1.5f),
                     0,
                     OutlineMode.NoOutline,
@@ -47,6 +48,7 @@ namespace IncendianFalls {
                 new KeyValuePair<SymbolDescription, string>(
                     new SymbolDescription(
                         "n",
+                    50,
                         new Color(1, 1, 1, 1.5f),
                         0,
                         OutlineMode.NoOutline,
@@ -60,6 +62,7 @@ namespace IncendianFalls {
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "/",
+                    50,
                     new Color(1, 1, 1, 1.5f),
                     0,
                     OutlineMode.NoOutline,
@@ -70,6 +73,7 @@ namespace IncendianFalls {
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "s",
+                    50,
                     new Color(1, 1, 1, 1.5f),
                     0,
                     OutlineMode.NoOutline,
@@ -80,6 +84,7 @@ namespace IncendianFalls {
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "4",
+                    50,
                     new Color(1, 1, 1, 1.5f),
                     0,
                     OutlineMode.NoOutline,
@@ -90,6 +95,7 @@ namespace IncendianFalls {
               new KeyValuePair<SymbolDescription, string>(
                   new SymbolDescription(
                       "k",
+                    50,
                       new Color(1, 1, 1, 1.5f),
                       0,
                       OutlineMode.NoOutline,

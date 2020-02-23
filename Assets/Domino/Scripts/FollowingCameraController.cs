@@ -11,18 +11,19 @@ namespace Domino {
       IGameEffectObserver, IGameEffectVisitor {
     CameraController cameraController;
 
+    IClock clock;
     Game game;
     Unit followedUnit;
     Location cameraEndLookAtLocation;
 
     private readonly static float cameraSpeedPerSecond = 8.0f;
 
-    public FollowingCameraController(GameObject camera, Game game) {
+    public FollowingCameraController(IClock clock, GameObject camera, Game game) {
 
       cameraEndLookAtLocation = game.player.location;
       var cameraEndLookAtPosition = game.level.terrain.GetTileCenter(cameraEndLookAtLocation).ToUnity();
 
-      this.cameraController = new CameraController(camera, cameraEndLookAtPosition);
+      this.cameraController = new CameraController(clock, camera, cameraEndLookAtPosition);
       this.game = game;
 
       this.game.AddObserver(this);
@@ -107,7 +108,7 @@ namespace Domino {
           game.level.terrain.GetTileCenter(newCameraEndLookAtLocation).ToUnity();
       //var newCameraMatrix = CalculateCameraMatrix(newCameraEndLookAtPosition);
 
-      cameraController.StartMovingCameraTo(newCameraEndLookAtPosition, .25f);
+      cameraController.StartMovingCameraTo(newCameraEndLookAtPosition, 250);
     }
 
     public void MoveUp(float deltaTime) {

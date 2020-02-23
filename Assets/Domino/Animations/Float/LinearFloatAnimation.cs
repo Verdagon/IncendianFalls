@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LinearFloatAnimation : IFloatAnimation {
-  float startTime;
+  long startTimeMs;
   float valueAtStart;
   float slope;
 
-  public LinearFloatAnimation(float startTime, float valueAtStart, float slope) {
-    this.startTime = startTime;
+  public LinearFloatAnimation(long startTimeMs, float valueAtStart, float slope) {
+    this.startTimeMs = startTimeMs;
     this.valueAtStart = valueAtStart;
     this.slope = slope;
   }
 
-  public float Get(float time) {
-    return valueAtStart + (time - startTime) * slope;
+  public float Get(long timeMs) {
+    return valueAtStart + timeMs - startTimeMs * slope;
   }
 
-  public IFloatAnimation Simplify(float time) {
+  public IFloatAnimation Simplify(long timeMs) {
     return this;
   }
 }

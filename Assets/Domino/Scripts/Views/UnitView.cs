@@ -68,13 +68,15 @@ namespace Domino {
   }
 
   public class UnitView : MonoBehaviour {
-    public static readonly float HOP_DURATION = .3f;
+    public static readonly long HOP_DURATION_MS = 300;
 
     Instantiator instantiator;
 
+    IClock clock;
     ITimer timer;
 
     private bool initialized = false;
+    private bool alive = false;
 
     // The main object that lives in world space. It has no rotation or scale,
     // just a translation to the center of the tile the unit is in.
@@ -123,10 +125,12 @@ namespace Domino {
     private Vector3 basePosition;
 
     public void Init(
+      IClock clock,
         Instantiator instantiator,
         ITimer timer,
         Vector3 basePosition,
         UnitDescription unitDescription) {
+      this.clock = clock;
       this.instantiator = instantiator;
       this.timer = timer;
       this.basePosition = basePosition;
@@ -143,22 +147,22 @@ namespace Domino {
       body.transform.localScale = new Vector3(.8f, .8f, .8f);
       body.transform.localPosition = new Vector3(0, 0, -.25f);
 
-      dominoView = instantiator.CreateDominoView(unitDescription.dominoDescription);
+      dominoView = instantiator.CreateDominoView(clock, unitDescription.dominoDescription);
       dominoView.gameObject.transform.SetParent(body.transform, false);
 
-      faceSymbolView = instantiator.CreateSymbolView(false, unitDescription.faceSymbolDescription);
+      faceSymbolView = instantiator.CreateSymbolView(clock, false, unitDescription.faceSymbolDescription);
       faceSymbolView.gameObject.transform.FromMatrix(
           ScaleToAndCenterInTile(unitDescription.dominoDescription.large));
       faceSymbolView.gameObject.transform.SetParent(body.transform, false);
 
       if (unitDescription.detailSymbolDescriptionById.Count != 0) {
-        symbolBarView = MakeSymbolBarView(instantiator, unitDescription.detailSymbolDescriptionById, unitDescription.dominoDescription.large);
+        symbolBarView = MakeSymbolBarView(clock, instantiator, unitDescription.detailSymbolDescriptionById, unitDescription.dominoDescription.large);
         symbolBarView.gameObject.transform.SetParent(body.transform, false);
       }
 
       bool showHpMeter = unitDescription.hpRatio < .999f;
       if (showHpMeter) {
-        hpMeterView = instantiator.CreateMeterView(unitDescription.hpRatio, Color.green, Color.red);
+        hpMeterView = instantiator.CreateMeterView(clock, unitDescription.hpRatio, Color.green, Color.red);
         hpMeterView.gameObject.transform.FromMatrix(MakeMeterViewTransform(0));
         hpMeterView.transform.SetParent(body.transform, false);
       }
@@ -166,12 +170,13 @@ namespace Domino {
       bool showMpMeter = unitDescription.mpRatio < .999f;
       if (showMpMeter) {
         int position = (showHpMeter ? 1 : 0);
-        mpMeterView = instantiator.CreateMeterView(unitDescription.mpRatio, Color.blue, Color.white);
+        mpMeterView = instantiator.CreateMeterView(clock, unitDescription.mpRatio, Color.blue, Color.white);
         mpMeterView.gameObject.transform.FromMatrix(MakeMeterViewTransform(position));
         mpMeterView.transform.SetParent(body.transform, false);
       }
 
       initialized = true;
+      alive = true;
     }
 
     public void SetUnitViewActive(bool enabled) {
@@ -186,7 +191,7 @@ namespace Domino {
         if (newUnitDescription.detailSymbolDescriptionById.Count == 0) {
           // Dont do anything, its already gone
         } else {
-          symbolBarView = MakeSymbolBarView(instantiator, newUnitDescription.detailSymbolDescriptionById, newUnitDescription.dominoDescription.large);
+          symbolBarView = MakeSymbolBarView(clock, instantiator, newUnitDescription.detailSymbolDescriptionById, newUnitDescription.dominoDescription.large);
           symbolBarView.gameObject.transform.SetParent(body.transform, false);
         }
       } else {
@@ -203,7 +208,7 @@ namespace Domino {
       bool showingHpMeterChanged = (shouldShowHpMeter != didShowHpMeter);
       if (shouldShowHpMeter) {
         if (hpMeterView == null) {
-          hpMeterView = instantiator.CreateMeterView(newUnitDescription.hpRatio, Color.green, Color.red);
+          hpMeterView = instantiator.CreateMeterView(clock, newUnitDescription.hpRatio, Color.green, Color.red);
           hpMeterView.gameObject.transform.FromMatrix(MakeMeterViewTransform(0));
           hpMeterView.transform.SetParent(body.transform, false);
         } else {
@@ -222,7 +227,7 @@ namespace Domino {
       int mpMeterPosition = (shouldShowHpMeter ? 1 : 0);
       if (shouldShowMpMeter) {
         if (mpMeterView == null) {
-          mpMeterView = instantiator.CreateMeterView(newUnitDescription.mpRatio, Color.blue, Color.white);
+          mpMeterView = instantiator.CreateMeterView(clock, newUnitDescription.mpRatio, Color.blue, Color.white);
           mpMeterView.gameObject.transform.FromMatrix(MakeMeterViewTransform(mpMeterPosition));
           mpMeterView.transform.SetParent(body.transform, false);
         } else {
@@ -252,11 +257,12 @@ namespace Domino {
     }
 
     private static SymbolBarView MakeSymbolBarView(
+      IClock clock,
         Instantiator instantiator,
         List<KeyValuePair<int, ExtrudedSymbolDescription>> symbolsIdsAndDescriptions,
         bool large) {
       SymbolBarView symbolBarView =
-          instantiator.CreateSymbolBarView(symbolsIdsAndDescriptions);
+          instantiator.CreateSymbolBarView(clock, symbolsIdsAndDescriptions);
 
       MatrixBuilder symbolBarMatrixBuilder = new MatrixBuilder(Matrix4x4.identity);
 
@@ -272,6 +278,7 @@ namespace Domino {
     }
 
     public void DestroyUnit() {
+      alive = false;
       Destroy(this.gameObject);
     }
 
@@ -282,23 +289,28 @@ namespace Domino {
     }
 
     public void HopTo(Vector3 newBasePosition) {
-      Vector3 oldBasePosition = basePosition;
-      basePosition = newBasePosition;
+      timer.ScheduleTimer(1, delegate () {
+        if (alive) {
+          Vector3 oldBasePosition = basePosition;
+          basePosition = newBasePosition;
 
-      gameObject.transform.localPosition = newBasePosition;
+          gameObject.transform.localPosition = newBasePosition;
 
-      StartHopAnimation(HOP_DURATION, newBasePosition - oldBasePosition, 0.5f);
+          StartHopAnimation(HOP_DURATION_MS, newBasePosition - oldBasePosition, 0.5f);
+        }
+      });
     }
 
     private MovementAnimator GetOrCreateMovementAnimator() {
       var animator = offsetter.GetComponent<MovementAnimator>();
       if (animator == null) {
         animator = offsetter.AddComponent<MovementAnimator>() as MovementAnimator;
+        animator.Init(clock);
       }
       return animator;
     }
 
-    private void StartHopAnimation(float duration, Vector3 offset, float height) {
+    private void StartHopAnimation(long durationMs, Vector3 offset, float height) {
       // We technically just moved the unit to the new position, but we need to compensate
       // for it here to make it look like it's still back there and slowly transitioning.
       var anim = GetOrCreateMovementAnimator();
@@ -308,54 +320,66 @@ namespace Domino {
               new ComposeMatrix4x4Animation(
                   new ConstantMatrix4x4Animation(Matrix4x4.Translate(-offset)),
                   new HopAnimation(
-                      Time.time, Time.time + duration, offset, height)));
+                      clock.GetTimeMs(), clock.GetTimeMs() + durationMs, offset, height)));
     }
 
     public void Lunge(Vector3 offset) {
-      StartLungeAnimation(.15f, offset);
+      timer.ScheduleTimer(1, delegate () {
+        if (alive) {
+          StartLungeAnimation(150, offset);
+        }
+      });
     }
 
-    private void StartLungeAnimation(float duration, Vector3 offset) {
+    private void StartLungeAnimation(long durationMs, Vector3 offset) {
       var anim = GetOrCreateMovementAnimator();
       anim.transformAnimation =
           new ComposeMatrix4x4Animation(
               anim.transformAnimation,
-              new LungeAnimation(Time.time, Time.time + duration, offset));
+              new LungeAnimation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs, offset));
     }
 
     public void ShowRune(ExtrudedSymbolDescription runeSymbolDescription) {
-      var symbolView = instantiator.CreateSymbolView(false, runeSymbolDescription);
-      symbolView.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-      symbolView.transform.localScale = new Vector3(1, 1, .1f);
-      if (dominoView.large) {
-        symbolView.transform.localPosition = new Vector3(0, 1f, -.2f);
-      } else {
-        symbolView.transform.localPosition = new Vector3(0, 0.5f, -.2f);
-      }
-      symbolView.transform.SetParent(body.transform, false);
-      symbolView.FadeInThenOut(0.1f, 0.4f);
-      //timer.ScheduleTimer(1.0f, () => symbolView.Destruct());
+      timer.ScheduleTimer(1, delegate () {
+        if (alive) {
+          var symbolView = instantiator.CreateSymbolView(clock, false, runeSymbolDescription);
+          symbolView.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
+          symbolView.transform.localScale = new Vector3(1, 1, .1f);
+          if (dominoView.large) {
+            symbolView.transform.localPosition = new Vector3(0, 1f, -.2f);
+          } else {
+            symbolView.transform.localPosition = new Vector3(0, 0.5f, -.2f);
+          }
+          symbolView.transform.SetParent(body.transform, false);
+          symbolView.FadeInThenOut(100, 400);
+          //timer.ScheduleTimer(1.0f, () => symbolView.Destruct());
+        }
+      });
     }
 
-    public void Die(float duration) {
-      StartDieAnimation(duration);
+    public void Die(long durationMs) {
+      timer.ScheduleTimer(1, delegate () {
+        if (alive) {
+          StartDieAnimation(durationMs);
+        }
+      });
     }
 
-    private void StartDieAnimation(float duration) {
-      dominoView.Fade(duration);
+    private void StartDieAnimation(long durationMs) {
+      dominoView.Fade(durationMs);
 
-      faceSymbolView.Fade(duration);
+      faceSymbolView.Fade(durationMs);
 
       if (hpMeterView != null) {
-        hpMeterView.Fade(duration);
+        hpMeterView.Fade(durationMs);
       }
 
       var anim = GetOrCreateMovementAnimator();
       anim.transformAnimation =
           new ComposeMatrix4x4Animation(
               anim.transformAnimation,
-              new ClampMatrix4x4Animation(Time.time, Time.time + duration,
-                  new LinearMatrix4x4Animation(Time.time, Time.time + duration,
+              new ClampMatrix4x4Animation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
+                  new LinearMatrix4x4Animation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
                       Matrix4x4.identity,
                       Matrix4x4.Translate(new Vector3(0, -.05f, 0)))));
     }

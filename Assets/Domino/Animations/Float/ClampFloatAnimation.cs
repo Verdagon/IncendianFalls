@@ -4,32 +4,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ClampFloatAnimation : IFloatAnimation {
-  float startTime;
-  float endTime;
+  long startTimeMs;
+  long endTimeMs;
   IFloatAnimation inner;
 
   public ClampFloatAnimation(
-      float startTime,
-      float endTime,
+      long startTimeMs,
+      long endTimeMs,
       IFloatAnimation inner) {
-    this.startTime = startTime;
-    this.endTime = endTime;
+    this.startTimeMs = startTimeMs;
+    this.endTimeMs = endTimeMs;
     this.inner = inner;
   }
 
-  public float Get(float time) {
-    if (time < startTime) {
-      return inner.Get(startTime);
+  public float Get(long timeMs) {
+    if (timeMs < startTimeMs) {
+      return inner.Get(startTimeMs);
     }
-    if (time >= endTime) {
-      return inner.Get(endTime);
+    if (timeMs >= endTimeMs) {
+      return inner.Get(endTimeMs);
     }
-    return inner.Get(time);
+    return inner.Get(timeMs);
   }
 
-  public IFloatAnimation Simplify(float time) {
-    if (time >= endTime) {
-      float value = inner.Get(endTime);
+  public IFloatAnimation Simplify(long timeMs) {
+    if (timeMs >= endTimeMs) {
+      float value = inner.Get(endTimeMs);
       if (Math.Abs(value) < 0.001f) {
         return new IdentityFloatAnimation();
       } else {

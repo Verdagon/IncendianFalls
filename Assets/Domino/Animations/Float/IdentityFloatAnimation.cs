@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class IdentityFloatAnimation : IFloatAnimation {
-  public float Get(float time) {
+  public float Get(long timeMs) {
     return 0;
   }
 
-  public IFloatAnimation Simplify(float time) {
+  public IFloatAnimation Simplify(long timeMs) {
     return this;
   }
 }

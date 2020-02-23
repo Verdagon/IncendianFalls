@@ -124,8 +124,14 @@
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
       <HintPath>D:/IncendianFalls/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
+    <Reference Include="Whinarn.UnityMeshSimplifier.Runtime">
+      <HintPath>D:/IncendianFalls/Library/ScriptAssemblies/Whinarn.UnityMeshSimplifier.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:/IncendianFalls/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Whinarn.UnityMeshSimplifier.Editor">
+      <HintPath>D:/IncendianFalls/Library/ScriptAssemblies/Whinarn.UnityMeshSimplifier.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>D:/IncendianFalls/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>

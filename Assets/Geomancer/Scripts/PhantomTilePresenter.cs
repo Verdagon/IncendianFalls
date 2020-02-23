@@ -22,6 +22,7 @@ namespace Geomancer {
     //public delegate void OnMouseOutEvent();
     public delegate void OnPhantomTileClickedEvent();
 
+    IClock clock;
     Pattern pattern;
     public readonly Location location;
     Instantiator instantiator;
@@ -30,9 +31,11 @@ namespace Geomancer {
     TileView tileView;
 
     public PhantomTilePresenter(
+        IClock clock,
         Pattern pattern,
         Location location,
         Instantiator instantiator) {
+      this.clock = clock;
       this.pattern = pattern;
       this.location = location;
       this.instantiator = instantiator;
@@ -56,7 +59,7 @@ namespace Geomancer {
         tileView = null;
       }
 
-      tileView = instantiator.CreateTileView(tileCenter, tileDescription);
+      tileView = instantiator.CreateTileView(clock, tileCenter, tileDescription);
       tileView.gameObject.AddComponent<PhantomTilePresenterTile>().Init(this);
       tileView.SetDescription(tileDescription);
     }
@@ -76,6 +79,7 @@ namespace Geomancer {
                 RenderPriority.TILE,
                 new SymbolDescription(
                     ((char)('0' + patternTile.shapeIndex)).ToString(),
+                    100,
                     frontColor,
                     patternTile.rotateDegrees,
                     OutlineMode.WithOutline,

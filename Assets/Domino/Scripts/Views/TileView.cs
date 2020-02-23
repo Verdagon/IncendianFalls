@@ -96,6 +96,8 @@ namespace Domino {
     private bool initialized = false;
     public bool alive {  get { return initialized;  } }
 
+    private IClock clock;
+
     private List<SymbolView> tileSymbolViews = new List<SymbolView>();
 
     private SymbolView overlaySymbolView;
@@ -107,9 +109,11 @@ namespace Domino {
     Instantiator instantiator;
 
     public void Init(
+      IClock clock,
         Instantiator instantiator,
         Vector3 basePosition,
         TileDescription tileDescription) {
+      this.clock = clock;
       this.instantiator = instantiator;
 
       gameObject.transform.localPosition = basePosition;
@@ -147,7 +151,7 @@ namespace Domino {
     private void SetStuff(TileDescription tileDescription) {
       for (int i = 0; i < tileDescription.depth; i++) {
         SymbolView tileSymbolView =
-            instantiator.CreateSymbolView(true, tileDescription.tileSymbolDescription);
+            instantiator.CreateSymbolView(clock, true, tileDescription.tileSymbolDescription);
         //MatrixBuilder tileSymbolMatrixBuilder = new MatrixBuilder(Matrix4x4.identity);
 
         // No idea why we need the -90 or the - before the rotation. It has to do with
@@ -166,7 +170,7 @@ namespace Domino {
 
       if (tileDescription.maybeOverlaySymbolDescription != null) {
         var description = tileDescription.maybeOverlaySymbolDescription;
-        overlaySymbolView = instantiator.CreateSymbolView(false, description);
+        overlaySymbolView = instantiator.CreateSymbolView(clock, false, description);
 
         overlaySymbolView.gameObject.transform.localPosition =
             new Vector3(0, .01f, 0);
@@ -183,7 +187,7 @@ namespace Domino {
 
       if (tileDescription.maybeFeatureSymbolDescription != null) {
         var description = tileDescription.maybeFeatureSymbolDescription;
-        featureSymbolView = instantiator.CreateSymbolView(false, description);
+        featureSymbolView = instantiator.CreateSymbolView(clock, false, description);
 
         featureSymbolView.gameObject.transform.localPosition =
             new Vector3(0, .28f, .15f);
@@ -198,7 +202,7 @@ namespace Domino {
       int itemIndex = 0;
       foreach (var entry in tileDescription.itemSymbolDescriptionByItemId) {
         var description = entry.Value;
-        var itemSymbolView = instantiator.CreateSymbolView(false, description);
+        var itemSymbolView = instantiator.CreateSymbolView(clock, false, description);
 
         float inscribeCircleRadius = 0.75f; // chosen cuz it looks about right
                                             // https://math.stackexchange.com/questions/666491/three-circles-within-a-larger-circle
