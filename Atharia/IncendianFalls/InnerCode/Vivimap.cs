@@ -6,7 +6,7 @@ using Atharia.Model;
 namespace IncendianFalls {
   // AKA the "Vivimap"
   public class MemberToComponentMapper {
-    public Atharia.Model.TerrainTile VivifyTile(Root root, List<String> members) {
+    public TerrainTile VivifyTile(Root root, List<String> members) {
       var tile =
           root.EffectTerrainTileCreate(
               1, ITerrainTileComponentMutBunch.New(root));
@@ -36,7 +36,6 @@ namespace IncendianFalls {
             break;
           default:
             throw new Exception("Unknown member: " + member);
-            break;
         }
       }
 
