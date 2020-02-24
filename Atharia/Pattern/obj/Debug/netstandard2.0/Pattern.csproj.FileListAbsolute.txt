@@ -1,3 +1,0 @@
-D:\Projects\Atharia\Pattern\obj\Debug\netstandard2.0\Pattern.csprojAssemblyReference.cache
-D:\Projects\Atharia\Pattern\obj\Debug\netstandard2.0\Pattern.AssemblyInfoInputs.cache
-D:\Projects\Atharia\Pattern\obj\Debug\netstandard2.0\Pattern.AssemblyInfo.cs
