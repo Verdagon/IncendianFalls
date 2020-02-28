@@ -11,7 +11,7 @@ ChronobaseCS/project/target
 ChronobaseCS/.idea/libraries
 Atharia/Geomancer/obj
 Atharia/ConsoleDriveyThing/obj
-
+*.sslog
 
 
 
