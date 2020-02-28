@@ -4,47 +4,47 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class DownstairsTTCMutSet {
+public class DownStairsTTCMutSet {
   public readonly Root root;
   public readonly int id;
-  public DownstairsTTCMutSet(Root root, int id) {
+  public DownStairsTTCMutSet(Root root, int id) {
     this.root = root;
     this.id = id;
   }
-  public DownstairsTTCMutSetIncarnation incarnation {
-    get { return root.GetDownstairsTTCMutSetIncarnation(id); }
+  public DownStairsTTCMutSetIncarnation incarnation {
+    get { return root.GetDownStairsTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IDownstairsTTCMutSetEffectObserver observer) {
-    root.AddDownstairsTTCMutSetObserver(id, observer);
+  public void AddObserver(IDownStairsTTCMutSetEffectObserver observer) {
+    root.AddDownStairsTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IDownstairsTTCMutSetEffectObserver observer) {
-    root.RemoveDownstairsTTCMutSetObserver(id, observer);
+  public void RemoveObserver(IDownStairsTTCMutSetEffectObserver observer) {
+    root.RemoveDownStairsTTCMutSetObserver(id, observer);
   }
-  public void Add(DownstairsTTC element) {
-    root.EffectDownstairsTTCMutSetAdd(id, element.id);
+  public void Add(DownStairsTTC element) {
+    root.EffectDownStairsTTCMutSetAdd(id, element.id);
   }
-  public void Remove(DownstairsTTC element) {
-    root.EffectDownstairsTTCMutSetRemove(id, element.id);
+  public void Remove(DownStairsTTC element) {
+    root.EffectDownStairsTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
-    root.EffectDownstairsTTCMutSetDelete(id);
+    root.EffectDownStairsTTCMutSetDelete(id);
   }
   public void Clear() {
     foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectDownstairsTTCMutSetRemove(id, elementId);
+      root.EffectDownStairsTTCMutSetRemove(id, elementId);
     }
   }
-  public bool Contains(DownstairsTTC element) {
+  public bool Contains(DownStairsTTC element) {
       return incarnation.set.Contains(element.id);
   }
   public int Count { get { return incarnation.set.Count; } }
-  public IEnumerator<DownstairsTTC> GetEnumerator() {
+  public IEnumerator<DownStairsTTC> GetEnumerator() {
     foreach (var element in incarnation.set) {
-      yield return root.GetDownstairsTTC(element);
+      yield return root.GetDownStairsTTC(element);
     }
   }
   public void Destruct() {
-    var elements = new List<DownstairsTTC>();
+    var elements = new List<DownStairsTTC>();
     foreach (var element in this) {
       elements.Add(element);
     }
@@ -55,8 +55,8 @@ public class DownstairsTTCMutSet {
   }
   public void CheckForNullViolations(List<string> violations) {
     foreach (var element in this) {
-      if (!root.DownstairsTTCExists(element.id)) {
-        violations.Add("Null constraint violated! DownstairsTTCMutSet#" + id + "." + element.id);
+      if (!root.DownStairsTTCExists(element.id)) {
+        violations.Add("Null constraint violated! DownStairsTTCMutSet#" + id + "." + element.id);
       }
     }
   }
@@ -66,7 +66,7 @@ public class DownstairsTTCMutSet {
     }
     foundIds.Add(id);
     foreach (var element in this) {
-      if (root.DownstairsTTCExists(element.id)) {
+      if (root.DownStairsTTCExists(element.id)) {
        element.FindReachableObjects(foundIds);
       }
     }

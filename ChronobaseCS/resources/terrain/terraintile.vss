@@ -11,3 +11,14 @@ mut interface ITerrainTileComponent {
 mut interface IUnwalkableTTC {
   IUnwalkableTTC isa ITerrainTileComponent;
 }
+
+mut interface IInteractableTTC {
+  IInteractableTTC isa ITerrainTileComponent;
+
+  fn Interact(
+    game: Game,
+    superstate: $Superstate,
+    interactingUnit: Unit,
+    containingTileLocation: Location
+  ): Str;
+}

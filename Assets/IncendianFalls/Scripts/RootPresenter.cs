@@ -43,7 +43,8 @@ namespace IncendianFalls {
       //var randomSeed = timestamp;
       Debug.LogWarning("Hardcoding random seed!");
       var randomSeed = 1525224206;
-      var game = ss.RequestSetupGame(randomSeed, false, false);
+      //var game = ss.RequestSetupIncendianFallsGame(randomSeed, false);
+      var game = ss.RequestSetupGauntletGame(randomSeed, false);
       gamePresenter =
           new GamePresenter(
               timer, timer, soundPlayer, resumeStaller, turnStaller, ss, game, instantiator, messageView);

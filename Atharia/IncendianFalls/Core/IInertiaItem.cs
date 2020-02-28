@@ -14,7 +14,6 @@ public interface IInertiaItem {
   void FindReachableObjects(SortedSet<int> foundIds);
   bool Is(IInertiaItem that);
   bool NullableIs(IInertiaItem that);
-  ITerrainTileComponent AsITerrainTileComponent();
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
   IItem AsIItem();

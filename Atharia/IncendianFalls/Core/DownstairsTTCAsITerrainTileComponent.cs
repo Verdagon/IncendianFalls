@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public class DownstairsTTCAsITerrainTileComponent : ITerrainTileComponent {
-  public readonly DownstairsTTC obj;
+public class DownStairsTTCAsITerrainTileComponent : ITerrainTileComponent {
+  public readonly DownStairsTTC obj;
   public int id => obj.id;
   public Root root => obj.root;
   public void Delete() { obj.Delete(); }
   public bool Exists() { return obj.Exists(); }
-  public DownstairsTTCAsITerrainTileComponent(DownstairsTTC obj) {
+  public DownStairsTTCAsITerrainTileComponent(DownStairsTTC obj) {
     this.obj = obj;
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
@@ -36,7 +36,7 @@ public class DownstairsTTCAsITerrainTileComponent : ITerrainTileComponent {
     return this.Is(that);
   }
   public IDestructible AsIDestructible() {
-    return new DownstairsTTCAsIDestructible(obj);
+    return new DownStairsTTCAsIDestructible(obj);
   }
   public bool Is(ITerrainTileComponent that) {
     if (!this.Exists()) {
@@ -57,17 +57,17 @@ public class DownstairsTTCAsITerrainTileComponent : ITerrainTileComponent {
     return this.Is(that);
   }
   public ITerrainTileComponent AsITerrainTileComponent() {
-    return new DownstairsTTCAsITerrainTileComponent(obj);
+    return new DownStairsTTCAsITerrainTileComponent(obj);
   }
 
          public Void Destruct() {
-    return DownstairsTTCExtensions.Destruct(obj);
+    return DownStairsTTCExtensions.Destruct(obj);
   }
 
 }
-public static class DownstairsTTCAsITerrainTileComponentCaster {
-  public static DownstairsTTCAsITerrainTileComponent AsITerrainTileComponent(this DownstairsTTC obj) {
-    return new DownstairsTTCAsITerrainTileComponent(obj);
+public static class DownStairsTTCAsITerrainTileComponentCaster {
+  public static DownStairsTTCAsITerrainTileComponent AsITerrainTileComponent(this DownStairsTTC obj) {
+    return new DownStairsTTCAsITerrainTileComponent(obj);
   }
 }
 

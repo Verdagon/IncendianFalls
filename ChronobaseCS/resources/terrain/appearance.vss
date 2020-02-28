@@ -65,22 +65,6 @@ mut struct CaveTTC {
   }
 }
 
-mut struct UpstairsTTC {
-  UpstairsTTC isa ITerrainTileComponent;
-
-  fn Destruct(this: UpstairsTTC overrides IDestructible): Void {
-    UpstairsTTCExtensions.Destruct
-  }
-}
-
-mut struct DownstairsTTC {
-  DownstairsTTC isa ITerrainTileComponent;
-
-  fn Destruct(this: DownstairsTTC overrides IDestructible): Void {
-    DownstairsTTCExtensions.Destruct
-  }
-}
-
 mut struct RocksTTC {
   RocksTTC isa ITerrainTileComponent;
 
@@ -103,5 +87,21 @@ mut struct WallTTC {
 
   fn Destruct(this: WallTTC overrides IDestructible): Void {
     WallTTCExtensions.Destruct
+  }
+}
+
+mut struct UpStairsTTC {
+  UpStairsTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: UpStairsTTC overrides IDestructible): Void {
+    UpStairsTTCExtensions.Destruct
+  }
+}
+
+mut struct DownStairsTTC {
+  DownStairsTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: DownStairsTTC overrides IDestructible): Void {
+    DownStairsTTCExtensions.Destruct
   }
 }

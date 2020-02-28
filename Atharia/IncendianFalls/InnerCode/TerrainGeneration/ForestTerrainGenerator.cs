@@ -7,7 +7,7 @@ namespace IncendianFalls {
     public static void Generate(
         out Terrain terrain,
         out SortedDictionary<int, Room> rooms,
-        SSContext context,
+        Root root,
         Rand rand,
         Pattern pattern,
         int size) {
@@ -73,14 +73,14 @@ namespace IncendianFalls {
 
       ConnectRooms(pattern, rand, roomByNumber);
 
-      var tiles = context.root.EffectTerrainTileByLocationMutMapCreate();
+      var tiles = root.EffectTerrainTileByLocationMutMapCreate();
 
       foreach (var room in roomByNumber.Values) {
         foreach (var roomFloorLocation in room.floors) {
           var tile =
-              context.root.EffectTerrainTileCreate(
-                  1, ITerrainTileComponentMutBunch.New(context.root));
-          tile.components.Add(context.root.EffectGrassTTCCreate().AsITerrainTileComponent());
+              root.EffectTerrainTileCreate(
+                  1, ITerrainTileComponentMutBunch.New(root));
+          tile.components.Add(root.EffectGrassTTCCreate().AsITerrainTileComponent());
           tiles.Add(roomFloorLocation, tile);
         }
       }
@@ -90,13 +90,13 @@ namespace IncendianFalls {
       SetUtils.RemoveAll(allAdjacent, allTiles);
       foreach (var borderLocation in allAdjacent) {
         var tile =
-            context.root.EffectTerrainTileCreate(
-                2, ITerrainTileComponentMutBunch.New(context.root));
-        tile.components.Add(context.root.EffectGrassTTCCreate().AsITerrainTileComponent());
+            root.EffectTerrainTileCreate(
+                2, ITerrainTileComponentMutBunch.New(root));
+        tile.components.Add(root.EffectGrassTTCCreate().AsITerrainTileComponent());
         tiles.Add(borderLocation, tile);
       }
 
-      terrain = context.root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
+      terrain = root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
       rooms = roomByNumber;
     }
 

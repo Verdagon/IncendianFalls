@@ -17,7 +17,7 @@ public class HealthPotionAsIItem : IItem {
   public void FindReachableObjects(SortedSet<int> foundIds) {
     obj.FindReachableObjects(foundIds);
   }
-  public bool Is(ITerrainTileComponent that) {
+  public bool Is(IImmediatelyUseItem that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
     }
@@ -26,7 +26,7 @@ public class HealthPotionAsIItem : IItem {
     }
     return root == that.root && obj.id == that.id;
   }
-  public bool NullableIs(ITerrainTileComponent that) {
+  public bool NullableIs(IImmediatelyUseItem that) {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
@@ -35,8 +35,8 @@ public class HealthPotionAsIItem : IItem {
     }
     return this.Is(that);
   }
-  public ITerrainTileComponent AsITerrainTileComponent() {
-    return new HealthPotionAsITerrainTileComponent(obj);
+  public IImmediatelyUseItem AsIImmediatelyUseItem() {
+    return new HealthPotionAsIImmediatelyUseItem(obj);
   }
   public bool Is(IDestructible that) {
     if (!this.Exists()) {

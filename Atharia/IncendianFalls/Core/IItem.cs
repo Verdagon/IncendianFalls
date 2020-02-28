@@ -14,7 +14,6 @@ public interface IItem {
   void FindReachableObjects(SortedSet<int> foundIds);
   bool Is(IItem that);
   bool NullableIs(IItem that);
-  ITerrainTileComponent AsITerrainTileComponent();
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
   IItem ClonifyAndReturnNewReal(Root newRoot);

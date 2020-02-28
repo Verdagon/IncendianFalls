@@ -4,7 +4,8 @@ using Atharia.Model;
 namespace IncendianFalls {
   public interface ISuperstructure {
     Root GetRoot();
-    Game RequestSetupGame(int randomSeed, bool squareLevelsOnly, bool gauntletMode);
+    Game RequestSetupIncendianFallsGame(int randomSeed, bool squareLevelsOnly);
+    Game RequestSetupGauntletGame(int randomSeed, bool squareLevelsOnly);
     Atharia.Model.Terrain RequestSetupTerrain(Pattern pattern);
     string RequestMove(int gameId, Location newLocation);
     string RequestTimeAnchorMove(int gameId, Location newLocation);

@@ -4,16 +4,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public struct DownstairsTTCMutSetAddEffect : IDownstairsTTCMutSetEffect {
+public struct DownStairsTTCMutSetAddEffect : IDownStairsTTCMutSetEffect {
   public readonly int id;
   public readonly int elementId;
-  public DownstairsTTCMutSetAddEffect(int id, int elementId) {
+  public DownStairsTTCMutSetAddEffect(int id, int elementId) {
     this.id = id;
     this.elementId = elementId;
   }
-  int IDownstairsTTCMutSetEffect.id => id;
-  public void visit(IDownstairsTTCMutSetEffectVisitor visitor) {
-    visitor.visitDownstairsTTCMutSetAddEffect(this);
+  int IDownStairsTTCMutSetEffect.id => id;
+  public void visit(IDownStairsTTCMutSetEffectVisitor visitor) {
+    visitor.visitDownStairsTTCMutSetAddEffect(this);
   }
 }
 

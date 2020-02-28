@@ -33,8 +33,10 @@ public static class IRequestParser {
         return new InteractRequestAsIRequest(InteractRequest.Parse(source));
       case "SetupTerrainRequest":
         return new SetupTerrainRequestAsIRequest(SetupTerrainRequest.Parse(source));
-      case "SetupGameRequest":
-        return new SetupGameRequestAsIRequest(SetupGameRequest.Parse(source));
+      case "SetupGauntletGameRequest":
+        return new SetupGauntletGameRequestAsIRequest(SetupGauntletGameRequest.Parse(source));
+      case "SetupIncendianFallsGameRequest":
+        return new SetupIncendianFallsGameRequestAsIRequest(SetupIncendianFallsGameRequest.Parse(source));
       default:
         throw new Exception("Unexpected: " + nextThingPeek);
     }

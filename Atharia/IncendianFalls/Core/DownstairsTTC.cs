@@ -5,26 +5,26 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public class DownstairsTTC {
+public class DownStairsTTC {
   public readonly Root root;
   public readonly int id;
-  public DownstairsTTC(Root root, int id) {
+  public DownStairsTTC(Root root, int id) {
     this.root = root;
     this.id = id;
   }
-  public DownstairsTTCIncarnation incarnation { get { return root.GetDownstairsTTCIncarnation(id); } }
-  public void AddObserver(IDownstairsTTCEffectObserver observer) {
-    root.AddDownstairsTTCObserver(id, observer);
+  public DownStairsTTCIncarnation incarnation { get { return root.GetDownStairsTTCIncarnation(id); } }
+  public void AddObserver(IDownStairsTTCEffectObserver observer) {
+    root.AddDownStairsTTCObserver(id, observer);
   }
-  public void RemoveObserver(IDownstairsTTCEffectObserver observer) {
-    root.RemoveDownstairsTTCObserver(id, observer);
+  public void RemoveObserver(IDownStairsTTCEffectObserver observer) {
+    root.RemoveDownStairsTTCObserver(id, observer);
   }
   public void Delete() {
-    root.EffectDownstairsTTCDelete(id);
+    root.EffectDownStairsTTCDelete(id);
   }
-  public static DownstairsTTC Null = new DownstairsTTC(null, 0);
-  public bool Exists() { return root != null && root.DownstairsTTCExists(id); }
-  public bool NullableIs(DownstairsTTC that) {
+  public static DownStairsTTC Null = new DownStairsTTC(null, 0);
+  public bool Exists() { return root != null && root.DownStairsTTCExists(id); }
+  public bool NullableIs(DownStairsTTC that) {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
@@ -41,7 +41,7 @@ public class DownstairsTTC {
     }
     foundIds.Add(id);
   }
-  public bool Is(DownstairsTTC that) {
+  public bool Is(DownStairsTTC that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
     }

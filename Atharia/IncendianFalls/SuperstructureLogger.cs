@@ -105,8 +105,10 @@ namespace IncendianFalls {
       this.ss = ss;
     }
     public void Replay(IRequest request) {
-      if (request is SetupGameRequestAsIRequest setupGame) {
-        ss.RequestSetupGame(setupGame.obj.randomSeed, setupGame.obj.squareLevelsOnly, setupGame.obj.gauntletMode);
+      if (request is SetupIncendianFallsGameRequestAsIRequest setupIncendianFallsGame) {
+        ss.RequestSetupIncendianFallsGame(setupIncendianFallsGame.obj.randomSeed, setupIncendianFallsGame.obj.squareLevelsOnly);
+      } else if (request is SetupGauntletGameRequestAsIRequest setupGauntletGame) {
+        ss.RequestSetupGauntletGame(setupGauntletGame.obj.randomSeed, setupGauntletGame.obj.squareLevelsOnly);
       } else if (request is InteractRequestAsIRequest interact) {
         ss.RequestInteract(interact.obj.gameId);
       } else if (request is MoveRequestAsIRequest move) {

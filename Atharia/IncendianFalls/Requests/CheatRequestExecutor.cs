@@ -36,8 +36,8 @@ namespace IncendianFalls {
         case "warptoend":
           Location end = null;
           foreach (var entry in game.level.terrain.tiles) {
-            var stairs = entry.Value.components.GetOnlyStaircaseTTCOrNull();
-            if (stairs.Exists() && stairs.portalIndex == 1) {
+            var levelLinker = entry.Value.components.GetOnlyIncendianFallsLevelLinkerTTCOrNull();
+            if (levelLinker.Exists()) {
               end = entry.Key;
               break;
             }

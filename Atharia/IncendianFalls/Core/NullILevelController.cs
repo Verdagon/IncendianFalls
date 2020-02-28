@@ -32,9 +32,5 @@ public class NullILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     throw new Exception("Called ConsiderCornersAdjacent on a null!");
   }
-             
-  public Location GetEntryLocation(Game game, LevelSuperstate levelSuperstate, Level fromLevel, int fromLevelPortalIndex) {
-    throw new Exception("Called GetEntryLocation on a null!");
-  }
              }
 }

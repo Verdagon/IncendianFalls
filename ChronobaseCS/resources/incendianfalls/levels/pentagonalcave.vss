@@ -1,0 +1,15 @@
+
+mut struct PentagonalCaveLevelController {
+  PentagonalCaveLevelController isa ILevelController;
+
+  level: &Level;
+  depth: Int;
+
+  fn GetName(this: PentagonalCaveLevelController overrides ILevelController): Str {
+    PentagonalCaveLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: PentagonalCaveLevelController overrides ILevelController): Bool {
+    PentagonalCaveLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+}

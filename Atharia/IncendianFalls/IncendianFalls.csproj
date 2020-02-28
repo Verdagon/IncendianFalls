@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -30,8 +30,5 @@
     <Folder Include="InnerCode\Actions\" />
     <Folder Include="InnerCode\TerrainGeneration\" />
     <Folder Include="InnerCode\Patterns\" />
-    <Folder Include="CoreExtensions\AI\" />
-    <Folder Include="CoreExtensions\UnitEvent\" />
-    <Folder Include="CoreExtensions\Items\" />
   </ItemGroup>
 </Project>

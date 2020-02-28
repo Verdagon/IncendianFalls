@@ -45,9 +45,6 @@ public class GauntletLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return GauntletLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Location GetEntryLocation(Game game, LevelSuperstate levelSuperstate, Level fromLevel, int fromLevelPortalIndex) {
-    return GauntletLevelControllerExtensions.GetEntryLocation(obj, game, levelSuperstate, fromLevel, fromLevelPortalIndex);
-  }
 
 }
 public static class GauntletLevelControllerAsILevelControllerCaster {

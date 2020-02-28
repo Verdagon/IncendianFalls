@@ -14,7 +14,6 @@ public interface IDefenseItem {
   void FindReachableObjects(SortedSet<int> foundIds);
   bool Is(IDefenseItem that);
   bool NullableIs(IDefenseItem that);
-  ITerrainTileComponent AsITerrainTileComponent();
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
   IItem AsIItem();

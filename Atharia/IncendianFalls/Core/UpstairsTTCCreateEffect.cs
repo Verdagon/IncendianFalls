@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public struct UpstairsTTCCreateEffect : IUpstairsTTCEffect {
+public struct UpStairsTTCCreateEffect : IUpStairsTTCEffect {
   public readonly int id;
-  public UpstairsTTCCreateEffect(int id) {
+  public UpStairsTTCCreateEffect(int id) {
     this.id = id;
   }
-  int IUpstairsTTCEffect.id => id;
-  public void visit(IUpstairsTTCEffectVisitor visitor) {
-    visitor.visitUpstairsTTCCreateEffect(this);
+  int IUpStairsTTCEffect.id => id;
+  public void visit(IUpStairsTTCEffectVisitor visitor) {
+    visitor.visitUpStairsTTCCreateEffect(this);
   }
 }
 

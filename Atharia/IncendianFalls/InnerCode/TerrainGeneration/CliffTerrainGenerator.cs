@@ -177,7 +177,7 @@ namespace IncendianFalls {
         out Terrain terrain,
         out List<CliffHalf> halves,
         out SortedDictionary<Location, int> preRandifiedElevationByLocation,
-        SSContext context,
+        Root root,
         Rand rand,
         Pattern pattern,
         int size,
@@ -196,19 +196,19 @@ namespace IncendianFalls {
                   2.0f),
               (location, position) => true);
 
-      var tiles = context.root.EffectTerrainTileByLocationMutMapCreate();
+      var tiles = root.EffectTerrainTileByLocationMutMapCreate();
 
       // Find a ton of tiles.
       for (int i = 0; i < size; i++) {
         Location location = canvasSearcher.Next();
         var tile =
-            context.root.EffectTerrainTileCreate(
-                1, ITerrainTileComponentMutBunch.New(context.root));
-        tile.components.Add(context.root.EffectMagmaTTCCreate().AsITerrainTileComponent());
+            root.EffectTerrainTileCreate(
+                1, ITerrainTileComponentMutBunch.New(root));
+        tile.components.Add(root.EffectMagmaTTCCreate().AsITerrainTileComponent());
         tiles.Add(location, tile);
       }
 
-      terrain = context.root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
+      terrain = root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
 
       // Between .74 and .75, pentagonal9 had tiles that had some neighbors with elevation
       // more than 2 above them. Going with .73 to be safe.
@@ -302,7 +302,7 @@ namespace IncendianFalls {
       List<List<Room>> roomsByContiguousArea = new List<List<Room>>();
       for (int i = 0; i < contiguousAreas.Count; i++) {
         var contiguousArea = contiguousAreas[i];
-        var roomByNumber = FindRooms(context, rand, terrain, contiguousArea);
+        var roomByNumber = FindRooms(terrain, contiguousArea);
         FlattenRooms(terrain, roomByNumber);
         ConnectRooms(pattern, rand, contiguousArea, roomByNumber);
         SetRoomsTiles(terrain, roomByNumber);
@@ -405,8 +405,6 @@ namespace IncendianFalls {
     }
 
     private static SortedDictionary<int, Room> FindRooms(
-        SSContext context,
-        Rand rand,
         Terrain terrain,
         SortedSet<Location> initialUnusedLocations) {
       int minNumTilesInRoom = 5;

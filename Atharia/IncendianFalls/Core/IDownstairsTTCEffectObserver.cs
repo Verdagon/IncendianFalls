@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IDownstairsTTCEffectObserver {
-  void OnDownstairsTTCEffect(IDownstairsTTCEffect effect);
+public interface IDownStairsTTCEffectObserver {
+  void OnDownStairsTTCEffect(IDownStairsTTCEffect effect);
 }
 
 }

@@ -99,86 +99,14 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit unit) {
       var tile = game.level.terrain.tiles[unit.location];
-      var staircase = tile.components.GetOnlyStaircaseTTCOrNull();
-      if (staircase.Exists()) {
-        var previousLevel = game.level;
-        var previousLevelPortalIndex = staircase.portalIndex;
 
-        // Move the player from this level to the next one.
-        if (!staircase.destinationLevel.Exists()) {
-          // Unless this is going to -1, which means it's the first level staircase,
-          // so do nothing.
-          if (staircase.destinationLevelPortalIndex == -1) {
-            return "I can't go back, I must go forward!";
-          }
-
-          game.level.ExitUnit(game, superstate.levelSuperstate, unit);
-
-          MakeLevel.MakeNextLevel(
-              out var nextLevel,
-              out var nextLevelSuperstate,
-              context,
-              game,
-              superstate,
-              game.level,
-              game.level.depth + 1);
-
-          game.level = nextLevel;
-          superstate.levelSuperstate = nextLevelSuperstate;
-
-          staircase.destinationLevel = nextLevel;
-          staircase.destinationLevelPortalIndex = 0;
-
-          game.level.EnterUnit(game, superstate.levelSuperstate, unit, previousLevel, previousLevelPortalIndex);
-        } else {
-          game.level.ExitUnit(game, superstate.levelSuperstate, unit);
-
-          game.level = staircase.destinationLevel;
-          superstate.levelSuperstate = new LevelSuperstate(game.level);
-
-          // These will likely be in the distant past, since it's been a while since we've
-          // visited here. We'll want to bump them all up to the near future.
-          Asserts.Assert(game.time >= game.level.time);
-
-          // Add that amount to every unit, so it's as if we just left this level.
-          foreach (var nativeUnit in game.level.units) {
-            nativeUnit.nextActionTime =
-                nativeUnit.nextActionTime + (game.time - game.level.time);
-          }
-
-          game.level.EnterUnit(game, superstate.levelSuperstate, unit, previousLevel, previousLevelPortalIndex);
-        }
-
-        // Note how we are NOT setting unit.nextActionTime here. That's because
-        // we want the player to have the first action after they descend.
-        return "";
+      var interactables = tile.components.GetAllIInteractableTTC();
+      if (interactables.Count > 0) {
+        var interactable = interactables[0];
+        return interactable.Interact(game, superstate, unit, unit.location);
+      } else {
+        return "Nothing to interact with!";
       }
-
-      var items = tile.components.GetAllIItem();
-      if (items.Count > 0) {
-        var item = items[0];
-
-        tile.components.Remove(item.AsITerrainTileComponent());
-
-        if (item is ArmorAsIItem && unit.components.GetOnlyArmorOrNull().Exists()) {
-          item.Destruct();
-        } else if (item is GlaiveAsIItem && unit.components.GetOnlyGlaiveOrNull().Exists()) {
-          item.Destruct();
-        } else if (item is InertiaRingAsIItem && unit.components.GetOnlyInertiaRingOrNull().Exists()) {
-          item.Destruct();
-        } else {
-          unit.components.Add(item.AsIUnitComponent());
-
-          if (item is HealthPotionAsIItem hp) {
-            hp.obj.Use(game, superstate, unit);
-          } else if (item is ManaPotionAsIItem mp) {
-            mp.obj.Use(game, superstate, unit);
-          }
-        }
-        return "";
-      }
-
-      return "Nothing to interact with!";
     }
 
     public static bool CanStep(

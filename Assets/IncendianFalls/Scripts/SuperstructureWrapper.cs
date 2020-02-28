@@ -22,8 +22,14 @@ namespace IncendianFalls {
       return ss.GetSuperstate(GetRoot().GetGame(gameId));
     }
 
-    public Game RequestSetupGame(int randomSeed, bool squareLevelsOnly, bool gauntletMode) {
-      var result = ss.RequestSetupGame(randomSeed, squareLevelsOnly, gauntletMode);
+    public Game RequestSetupGauntletGame(int randomSeed, bool squareLevelsOnly) {
+      var result = ss.RequestSetupGauntletGame(randomSeed, squareLevelsOnly);
+
+      return result;
+    }
+
+    public Game RequestSetupIncendianFallsGame(int randomSeed, bool squareLevelsOnly) {
+      var result = ss.RequestSetupIncendianFallsGame(randomSeed, squareLevelsOnly);
 
       return result;
     }

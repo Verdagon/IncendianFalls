@@ -908,6 +908,33 @@ public class IUnitComponentMutBunch {
         return NullIPostActingUC.Null;
       }
     }
+                 public List<IImmediatelyUseItem> GetAllIImmediatelyUseItem() {
+      var result = new List<IImmediatelyUseItem>();
+      foreach (var obj in this.membersManaPotionMutSet) {
+        result.Add(
+            new ManaPotionAsIImmediatelyUseItem(obj));
+      }
+      foreach (var obj in this.membersHealthPotionMutSet) {
+        result.Add(
+            new HealthPotionAsIImmediatelyUseItem(obj));
+      }
+      return result;
+    }
+    public List<IImmediatelyUseItem> ClearAllIImmediatelyUseItem() {
+      var result = new List<IImmediatelyUseItem>();
+      this.membersManaPotionMutSet.Clear();
+      this.membersHealthPotionMutSet.Clear();
+      return result;
+    }
+    public IImmediatelyUseItem GetOnlyIImmediatelyUseItemOrNull() {
+      var result = GetAllIImmediatelyUseItem();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIImmediatelyUseItem.Null;
+      }
+    }
                  public List<IDefenseUC> GetAllIDefenseUC() {
       var result = new List<IDefenseUC>();
       foreach (var obj in this.membersShieldingUCMutSet) {

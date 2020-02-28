@@ -1,0 +1,15 @@
+
+mut struct SquareCaveLevelController {
+  SquareCaveLevelController isa ILevelController;
+
+  level: &Level;
+  depth: Int;
+
+  fn GetName(this: SquareCaveLevelController overrides ILevelController): Str {
+    SquareCaveLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: SquareCaveLevelController overrides ILevelController): Bool {
+    SquareCaveLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+}

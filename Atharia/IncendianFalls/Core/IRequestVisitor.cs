@@ -18,7 +18,8 @@ public interface IRequestVisitor {
   void Visit(ResumeRequestAsIRequest obj);
   void Visit(InteractRequestAsIRequest obj);
   void Visit(SetupTerrainRequestAsIRequest obj);
-  void Visit(SetupGameRequestAsIRequest obj);
+  void Visit(SetupGauntletGameRequestAsIRequest obj);
+  void Visit(SetupIncendianFallsGameRequestAsIRequest obj);
 }
 
 }

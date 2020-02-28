@@ -1,7 +1,9 @@
 output: D:\IncendianFalls\Atharia\IncendianFalls\Core
 namespace: Atharia.Model
-incendianfalls/idestructible.vss
-incendianfalls/game.vss
+idestructible.vss
+game.vss
+level.vss
+requests.vss
 unit/impulse.vss
 unit/unit.vss
 unit/unitevent.vss
@@ -16,22 +18,21 @@ unit/shielding.vss
 unit/countering.vss
 unit/unitcomponent.vss
 unit/wander.vss
-incendianfalls/requests.vss
 vstl/rand.vss
 pattern/location.vss
+pattern/pattern.vss
 item/items.vss
 terrain/appearance.vss
-pattern/pattern.vss
-terrain/staircase.vss
+terrain/levellink.vss
 terrain/terrain.vss
 terrain/terraintile.vss
 terrain/timeanchorttc.vss
-level/level.vss
-level/clifflevel.vss
-level/pentagonalcave.vss
-level/ravashrikelevel.vss
-level/pregauntletlevel.vss
-level/gauntletlevel.vss
-level/ridgelevel.vss
-level/squarecave.vss
+incendianfalls/levels/clifflevel.vss
+incendianfalls/levels/pentagonalcave.vss
+incendianfalls/levels/ravashrikelevel.vss
+incendianfalls/levels/squarecave.vss
+incendianfalls/levels/incendianfallslevellinker.vss
+gauntlet/levels/pregauntletlevel.vss
+gauntlet/levels/gauntletlevel.vss
+emberdeep/levels/ridgelevel.vss
 vstl/vec.vss

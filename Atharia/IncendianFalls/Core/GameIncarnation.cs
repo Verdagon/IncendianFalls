@@ -7,7 +7,6 @@ namespace Atharia.Model {
 public class GameIncarnation {
   public readonly int rand;
   public readonly bool squareLevelsOnly;
-  public readonly bool gauntletMode;
   public readonly int levels;
   public  int player;
   public  int level;
@@ -16,7 +15,6 @@ public class GameIncarnation {
   public GameIncarnation(
       int rand,
       bool squareLevelsOnly,
-      bool gauntletMode,
       int levels,
       int player,
       int level,
@@ -24,7 +22,6 @@ public class GameIncarnation {
       int executionState) {
     this.rand = rand;
     this.squareLevelsOnly = squareLevelsOnly;
-    this.gauntletMode = gauntletMode;
     this.levels = levels;
     this.player = player;
     this.level = level;

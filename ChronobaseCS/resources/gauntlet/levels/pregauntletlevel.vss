@@ -1,0 +1,14 @@
+
+mut struct PreGauntletLevelController {
+  PreGauntletLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: PreGauntletLevelController overrides ILevelController): Str {
+    PreGauntletLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: PreGauntletLevelController overrides ILevelController): Bool {
+    PreGauntletLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+}

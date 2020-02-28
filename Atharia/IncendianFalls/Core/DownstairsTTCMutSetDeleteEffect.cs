@@ -4,14 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public struct DownstairsTTCMutSetDeleteEffect : IDownstairsTTCMutSetEffect {
+public struct DownStairsTTCMutSetDeleteEffect : IDownStairsTTCMutSetEffect {
   public readonly int id;
-  public DownstairsTTCMutSetDeleteEffect(int id) {
+  public DownStairsTTCMutSetDeleteEffect(int id) {
     this.id = id;
   }
-  int IDownstairsTTCMutSetEffect.id => id;
-  public void visit(IDownstairsTTCMutSetEffectVisitor visitor) {
-    visitor.visitDownstairsTTCMutSetDeleteEffect(this);
+  int IDownStairsTTCMutSetEffect.id => id;
+  public void visit(IDownStairsTTCMutSetEffectVisitor visitor) {
+    visitor.visitDownStairsTTCMutSetDeleteEffect(this);
   }
 }
 

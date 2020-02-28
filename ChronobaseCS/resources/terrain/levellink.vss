@@ -1,0 +1,22 @@
+
+mut struct LevelLinkTTC {
+  LevelLinkTTC isa ITerrainTileComponent;
+  LevelLinkTTC isa IInteractableTTC;
+
+  destinationLevel: &Level;
+  destinationLevelLocation: Location;
+
+  fn Destruct(this: LevelLinkTTC overrides IDestructible): Void {
+    LevelLinkTTCExtensions.Destruct
+  }
+
+  fn Interact(
+    this: LevelLinkTTC overrides IDestructible,
+    game: Game,
+    superstate: $Superstate,
+    interactingUnit: Unit,
+    containingTileLocation: Location):
+  Str {
+    LevelLinkTTCExtensions.Interact
+  }
+}

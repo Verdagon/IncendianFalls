@@ -45,9 +45,6 @@ public class RidgeLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return RidgeLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Location GetEntryLocation(Game game, LevelSuperstate levelSuperstate, Level fromLevel, int fromLevelPortalIndex) {
-    return RidgeLevelControllerExtensions.GetEntryLocation(obj, game, levelSuperstate, fromLevel, fromLevelPortalIndex);
-  }
 
 }
 public static class RidgeLevelControllerAsILevelControllerCaster {

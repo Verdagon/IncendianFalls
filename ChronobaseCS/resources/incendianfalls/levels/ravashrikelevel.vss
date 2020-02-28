@@ -1,0 +1,14 @@
+
+mut struct RavashrikeLevelController {
+  RavashrikeLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: RavashrikeLevelController overrides ILevelController): Str {
+    RavashrikeLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: RavashrikeLevelController overrides ILevelController): Bool {
+    RavashrikeLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+}

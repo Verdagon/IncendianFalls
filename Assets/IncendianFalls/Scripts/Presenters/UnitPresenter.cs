@@ -545,7 +545,7 @@ namespace IncendianFalls {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "3",
+                      "three",
                             50, new Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
                       new Color(1, 1, 1)),
                   false, new Color(0, 0, 0)),

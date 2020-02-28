@@ -4,8 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class UpstairsTTCIncarnation {
-  public UpstairsTTCIncarnation(
+public class UpStairsTTCIncarnation {
+  public UpStairsTTCIncarnation(
 ) {
   }
 }

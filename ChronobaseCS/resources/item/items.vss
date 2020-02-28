@@ -1,9 +1,33 @@
+mut struct ItemTTC {
+  ItemTTC isa IInteractableTTC;
+
+  item: IItem;
+
+  fn Destruct(this: ItemTTC overrides IDestructible): Void {
+    ItemTTCExtensions.Destruct
+  }
+
+  fn Interact(
+    this: ItemTTC overrides IInteractableTTC,
+    game: Game,
+    superstate: $Superstate,
+    interactingUnit: Unit,
+    containingTileLocation: Location):
+  Str {
+    ItemTTCExtensions.Interact
+  }
+}
 
 mut interface IItem {
   IItem isa IUnitComponent;
-  IItem isa ITerrainTileComponent;
 
   fn ClonifyAndReturnNewReal(newRoot: $Root): IItem;
+}
+
+// This is just here to force it to generate a MutBunch:IItem, which we
+// can use to downcast IItem to IImmediatelyUseItem.
+mut struct Wat {
+  items: MutBunch:&IItem;
 }
 
 mut interface IUsableItem {
@@ -14,6 +38,10 @@ mut interface IUsableItem {
       superstate: $Superstate,
       unit: &Unit)
   : Void;
+}
+
+mut interface IImmediatelyUseItem {
+  IImmediatelyUseItem isa IUsableItem;
 }
 
 mut interface IOffenseItem {
@@ -106,6 +134,7 @@ mut struct InertiaRing {
 
 mut struct HealthPotion {
   HealthPotion isa IUsableItem;
+  HealthPotion isa IImmediatelyUseItem;
 
   fn Destruct(this: HealthPotion overrides IDestructible): Void {
     HealthPotionExtensions.Destruct
@@ -130,6 +159,7 @@ mut struct HealthPotion {
 
 mut struct ManaPotion {
   ManaPotion isa IUsableItem;
+  ManaPotion isa IImmediatelyUseItem;
 
   fn Destruct(this: ManaPotion overrides IDestructible): Void {
     ManaPotionExtensions.Destruct

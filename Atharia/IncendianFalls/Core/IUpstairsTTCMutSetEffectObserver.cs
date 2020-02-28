@@ -4,8 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface IUpstairsTTCMutSetEffectObserver {
-  void OnUpstairsTTCMutSetEffect(IUpstairsTTCMutSetEffect effect);
+public interface IUpStairsTTCMutSetEffectObserver {
+  void OnUpStairsTTCMutSetEffect(IUpStairsTTCMutSetEffect effect);
 }
 
 }

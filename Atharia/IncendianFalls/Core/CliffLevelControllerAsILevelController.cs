@@ -45,9 +45,6 @@ public class CliffLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return CliffLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Location GetEntryLocation(Game game, LevelSuperstate levelSuperstate, Level fromLevel, int fromLevelPortalIndex) {
-    return CliffLevelControllerExtensions.GetEntryLocation(obj, game, levelSuperstate, fromLevel, fromLevelPortalIndex);
-  }
 
 }
 public static class CliffLevelControllerAsILevelControllerCaster {

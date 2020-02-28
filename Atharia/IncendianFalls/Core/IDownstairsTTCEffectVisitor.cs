@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface IDownstairsTTCEffectVisitor {
-  void visitDownstairsTTCCreateEffect(DownstairsTTCCreateEffect effect);
-  void visitDownstairsTTCDeleteEffect(DownstairsTTCDeleteEffect effect);
+public interface IDownStairsTTCEffectVisitor {
+  void visitDownStairsTTCCreateEffect(DownStairsTTCCreateEffect effect);
+  void visitDownStairsTTCDeleteEffect(DownStairsTTCDeleteEffect effect);
 }
 
 }

@@ -1,0 +1,61 @@
+
+root mut struct Game {
+  rand: Rand;
+  squareLevelsOnly: Bool;
+  levels: MutSet:Level;
+  var player: ?&Unit;
+
+  var level: ?&Level;
+  var time: Int;
+  executionState: ExecutionState;
+}
+
+mut struct ExecutionState {
+  // To allow the client time to do animations, the superstructure
+  // is coded in such a way that it can pause its simulation of the
+  // world. This isn't anything super new and novel; the usual server
+  // will pause its simulation after each request.
+
+  // However, we need to pause in the middle of requests, to give the
+  // client time to do animations. We need to somehow represent in
+  // the state the fact that we're kind of in the middle of something
+  // (such as a player's turn).
+
+  // We can choose to encode that various ways... the two extremes:
+  // A. We could have every "actor" have a nextActionTime, like how
+  //    unit currently has.
+  // B. We could save the entire stack, in an async/await fashion.
+
+  // We'll do a middle approach for now. We'll represent a lot of
+  // the state, but not so much as to be async/await-ish.
+
+  // if only actingUnit and preTurnActingUnitComponents are non-null:
+  //     we're still doing the pre turn acting details.
+  // if all are null:
+  //     we're inbetween units.
+  // if only actingUnit is non-null:
+  //     we're doing the unit's action.
+  //     if actingUnitDidAction is false:
+  //         we're waiting on the user for their action.
+  //     if actingUnitDidAction is true:
+  //         we're paused after their action.
+  // if only actingUnit and postTurnActingUnitComponents are non-null:
+  //     we're still doing the post turn acting details.
+  // We only need these pieces of data, we don't need a full stack
+  // to be saved. This is admittedly a clever compression of state,
+  // using tricks like nullability. It's brittle, but good enough
+  // for now.
+
+  // Later on, if we want items to act, or items or details to act
+  // independently of their owning units, we can have them be full
+  // actors with their own nextActionTime.
+
+  // The unit that is currently acting (or whose details are acting).
+  var actingUnit: ?Unit;
+  // Whether they've done their action or not.
+  var actingUnitDidAction: Bool;
+  // A list of weak pointers, the details we have yet to process.
+  var remainingPreActingUnitComponents: ?MutBunch:&&IPreActingUC;
+  // A list of weak pointers, the details we have yet to process.
+  var remainingPostActingUnitComponents: ?MutBunch:&&IPostActingUC;
+}

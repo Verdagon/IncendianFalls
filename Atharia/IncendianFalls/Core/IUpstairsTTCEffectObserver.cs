@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IUpstairsTTCEffectObserver {
-  void OnUpstairsTTCEffect(IUpstairsTTCEffect effect);
+public interface IUpStairsTTCEffectObserver {
+  void OnUpStairsTTCEffect(IUpStairsTTCEffect effect);
 }
 
 }

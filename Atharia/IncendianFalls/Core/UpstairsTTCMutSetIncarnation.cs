@@ -4,10 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class UpstairsTTCMutSetIncarnation {
+public class UpStairsTTCMutSetIncarnation {
   public readonly SortedSet<int> set;
 
-  public UpstairsTTCMutSetIncarnation(SortedSet<int> set) {
+  public UpStairsTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
 }

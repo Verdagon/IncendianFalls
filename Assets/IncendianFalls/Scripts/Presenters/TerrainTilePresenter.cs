@@ -265,7 +265,7 @@ namespace IncendianFalls {
                     false,
                     new Color(0, 0, 0));
           }
-        } else if (ttc is DownstairsTTCAsITerrainTileComponent) {
+        } else if (ttc is DownStairsTTCAsITerrainTileComponent) {
           topColor = new Color(0, 0, 0);
           topColorLocked = true;
 
@@ -282,7 +282,7 @@ namespace IncendianFalls {
                   false,
                   new Color(0, 0, 0));
           overlayLocked = true;
-        } else if (ttc is UpstairsTTCAsITerrainTileComponent) {
+        } else if (ttc is UpStairsTTCAsITerrainTileComponent) {
           feature =
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
@@ -310,63 +310,84 @@ namespace IncendianFalls {
                       false,
                       new Color(1f, 1f, 1f));
               featureLocked = true;
-        } else if (ttc is StaircaseTTCAsITerrainTileComponent) {
-        } else if (ttc is ArmorAsITerrainTileComponent) {
-          itemSymbolDescriptionByItemId.Add(
-              ttc.id,
-              new ExtrudedSymbolDescription(
-                  RenderPriority.SYMBOL,
-                  new SymbolDescription(
-                      "0",
-                            50,
-                      new Color(1f, 1f, 1.0f, 1.5f),
-                      0,
-                      OutlineMode.WithBackOutline,
-                      new Color(0, 0, 0)),
-                  true,
-                  new Color(.75f, .75f, 0)));
-        } else if (ttc is GlaiveAsITerrainTileComponent) {
-          itemSymbolDescriptionByItemId.Add(
-              ttc.id,
-              new ExtrudedSymbolDescription(
-                  RenderPriority.SYMBOL,
-                  new SymbolDescription(
-                      "s",
-                            50,
-                      new Color(1f, 1f, 1f, 1.5f),
-                      0,
-                      OutlineMode.WithBackOutline,
-                      new Color(0, 0, 0)),
-                  true,
-                  new Color(.5f, 0f, 0)));
-        } else if (ttc is InertiaRingAsITerrainTileComponent) {
-          itemSymbolDescriptionByItemId.Add(
-              ttc.id,
-              new ExtrudedSymbolDescription(
-                  RenderPriority.SYMBOL,
-                  new SymbolDescription(
-                      "4",
-                            50,
-                      new Color(1f, 1f, 1f, 1.5f),
-                      0,
-                      OutlineMode.WithBackOutline,
-                      new Color(0, 0, 0)),
-                  true,
-                  new Color(.5f, 0f, 0)));
-        } else if (ttc is HealthPotionAsITerrainTileComponent) {
-          itemSymbolDescriptionByItemId.Add(
-              ttc.id,
-              new ExtrudedSymbolDescription(
-                  RenderPriority.SYMBOL,
-                  new SymbolDescription(
-                      "plus",
-                            50,
-                      new Color(.8f, 0, .8f, 1.5f),
-                      0,
-                      OutlineMode.WithBackOutline,
-                      new Color(0, 0, 0)),
-                  true,
-                  new Color(0f, 0f, 0)));
+        } else if (ttc is LevelLinkTTCAsITerrainTileComponent) {
+        } else if (ttc is IncendianFallsLevelLinkerTTCAsITerrainTileComponent) {
+        } else if (ttc is WallTTCAsITerrainTileComponent) {
+        } else if (ttc is ItemTTCAsITerrainTileComponent itemTTC) {
+          var item = itemTTC.obj.item;
+          if (item is ArmorAsIItem) {
+            itemSymbolDescriptionByItemId.Add(
+                ttc.id,
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "zero",
+                              50,
+                        new Color(1f, 1f, 1.0f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new Color(0, 0, 0)),
+                    true,
+                    new Color(.75f, .75f, 0)));
+          } else if (item is GlaiveAsIItem) {
+            itemSymbolDescriptionByItemId.Add(
+                ttc.id,
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "s",
+                              50,
+                        new Color(1f, 1f, 1f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new Color(0, 0, 0)),
+                    true,
+                    new Color(.5f, 0f, 0)));
+          } else if (item is InertiaRingAsIItem) {
+            itemSymbolDescriptionByItemId.Add(
+                ttc.id,
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "four",
+                              50,
+                        new Color(1f, 1f, 1f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new Color(0, 0, 0)),
+                    true,
+                    new Color(.5f, 0f, 0)));
+          } else if (item is HealthPotionAsIItem) {
+            itemSymbolDescriptionByItemId.Add(
+                ttc.id,
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "plus",
+                              50,
+                        new Color(.8f, 0, .8f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new Color(0, 0, 0)),
+                    true,
+                    new Color(0f, 0f, 0)));
+          } else if (item is ManaPotionAsIItem) {
+            itemSymbolDescriptionByItemId.Add(
+                ttc.id,
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "comma",
+                              50,
+                        new Color(.25f, .7f, 1.0f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new Color(0, 0, 0)),
+                    true,
+                    new Color(0f, 0f, 0)));
+          } else {
+            Asserts.Assert(false, "Found item: " + ttc);
+          }
         } else if (ttc is TimeAnchorTTCAsITerrainTileComponent) {
           if (!overlayLocked) {
             overlay =
@@ -382,20 +403,6 @@ namespace IncendianFalls {
                     true,
                     new Color(0f, 0f, 0));
           }
-        } else if (ttc is ManaPotionAsITerrainTileComponent) {
-          itemSymbolDescriptionByItemId.Add(
-              ttc.id,
-              new ExtrudedSymbolDescription(
-                  RenderPriority.SYMBOL,
-                  new SymbolDescription(
-                      "comma",
-                            50,
-                      new Color(.25f, .7f, 1.0f, 1.5f),
-                      0,
-                      OutlineMode.WithBackOutline,
-                      new Color(0, 0, 0)),
-                  true,
-                  new Color(0f, 0f, 0)));
         } else {
           Asserts.Assert(false, ttc.ToString());
         }

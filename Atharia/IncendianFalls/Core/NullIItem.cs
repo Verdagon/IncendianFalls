@@ -24,16 +24,7 @@ public class NullIItem : IItem {
   public IItem AsIItem() {
     return this;
   }
-         public bool Is(ITerrainTileComponent that) {
-    throw new Exception("Called Is on a null!");
-  }
-  public bool NullableIs(ITerrainTileComponent that) {
-    return !that.Exists();
-  }
-  public ITerrainTileComponent AsITerrainTileComponent() {
-    return NullITerrainTileComponent.Null;
-  }
-  public bool Is(IDestructible that) {
+         public bool Is(IDestructible that) {
     throw new Exception("Called Is on a null!");
   }
   public bool NullableIs(IDestructible that) {

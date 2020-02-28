@@ -75,7 +75,7 @@ namespace Atharia.Model {
 
     public SortedSet<Location> GetWalkableLocations(
         Terrain terrain,
-        bool checkStairsPresent,
+        bool checkLevelLinkPresent,
         bool checkUnitPresent) {
       // Gather the candidates
       var candidates = new SortedSet<Location>();
@@ -83,8 +83,8 @@ namespace Atharia.Model {
         if (checkUnitPresent && liveUnitByLocation.ContainsKey(location)) {
           continue;
         }
-        if (checkStairsPresent &&
-            terrain.tiles[location].components.GetOnlyStaircaseTTCOrNull().Exists()) {
+        if (checkLevelLinkPresent &&
+            terrain.tiles[location].components.GetAllLevelLinkTTC().Count > 0) {
           continue;
         }
         candidates.Add(location);
@@ -95,9 +95,9 @@ namespace Atharia.Model {
         Terrain terrain,
         Rand rand,
         int numToGet,
-        bool checkStairsPresent,
+        bool checkLevelLinkPresent,
         bool checkUnitPresent) {
-      var candidates = GetWalkableLocations(terrain, checkStairsPresent, checkUnitPresent);
+      var candidates = GetWalkableLocations(terrain, checkLevelLinkPresent, checkUnitPresent);
       // Shuffle the candidates four times. For some reason if we don't do this
       // most the units are on the left side of the map.
       return ListUtils.GetRandomN(new List<Location>(candidates), rand, 4, numToGet);

@@ -172,8 +172,8 @@ namespace Domino {
     }
 
     public void ActivateCheat(string cheatName) {
-      Debug.Log("Cheats disabled!");
-      //mode.ActivateCheat(cheatName);
+      //Debug.Log("Cheats disabled!");
+      mode.ActivateCheat(cheatName);
     }
 
     public void TimeAnchorMoveClicked() {

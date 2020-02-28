@@ -1,0 +1,21 @@
+
+mut struct IncendianFallsLevelLinkerTTC {
+  IncendianFallsLevelLinkerTTC isa ITerrainTileComponent;
+  IncendianFallsLevelLinkerTTC isa IInteractableTTC;
+
+  thisLevelDepth: Int;
+
+  fn Interact(
+    this: IncendianFallsLevelLinkerTTC overrides IInteractableTTC,
+    game: Game,
+    superstate: $Superstate,
+    interactingUnit: Unit,
+    containingTileLocation: Location):
+  Str {
+    IncendianFallsLevelLinkerTTCExtensions.Interact
+  }
+
+  fn Destruct(this: IncendianFallsLevelLinkerTTC overrides IDestructible): Void {
+    IncendianFallsLevelLinkerTTCExtensions.Destruct
+  }
+}

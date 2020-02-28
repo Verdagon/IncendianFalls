@@ -5,18 +5,15 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class ITerrainTileComponentMutBunchIncarnation {
-  public readonly int membersArmorMutSet;
-  public readonly int membersInertiaRingMutSet;
-  public readonly int membersGlaiveMutSet;
-  public readonly int membersManaPotionMutSet;
-  public readonly int membersHealthPotionMutSet;
+  public readonly int membersItemTTCMutSet;
+  public readonly int membersIncendianFallsLevelLinkerTTCMutSet;
   public readonly int membersTimeAnchorTTCMutSet;
-  public readonly int membersStaircaseTTCMutSet;
+  public readonly int membersLevelLinkTTCMutSet;
+  public readonly int membersDownStairsTTCMutSet;
+  public readonly int membersUpStairsTTCMutSet;
   public readonly int membersWallTTCMutSet;
   public readonly int membersBloodTTCMutSet;
   public readonly int membersRocksTTCMutSet;
-  public readonly int membersDownstairsTTCMutSet;
-  public readonly int membersUpstairsTTCMutSet;
   public readonly int membersCaveTTCMutSet;
   public readonly int membersFallsTTCMutSet;
   public readonly int membersMagmaTTCMutSet;
@@ -26,18 +23,15 @@ public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersStoneTTCMutSet;
   public readonly int membersGrassTTCMutSet;
   public ITerrainTileComponentMutBunchIncarnation(
-      int membersArmorMutSet,
-      int membersInertiaRingMutSet,
-      int membersGlaiveMutSet,
-      int membersManaPotionMutSet,
-      int membersHealthPotionMutSet,
+      int membersItemTTCMutSet,
+      int membersIncendianFallsLevelLinkerTTCMutSet,
       int membersTimeAnchorTTCMutSet,
-      int membersStaircaseTTCMutSet,
+      int membersLevelLinkTTCMutSet,
+      int membersDownStairsTTCMutSet,
+      int membersUpStairsTTCMutSet,
       int membersWallTTCMutSet,
       int membersBloodTTCMutSet,
       int membersRocksTTCMutSet,
-      int membersDownstairsTTCMutSet,
-      int membersUpstairsTTCMutSet,
       int membersCaveTTCMutSet,
       int membersFallsTTCMutSet,
       int membersMagmaTTCMutSet,
@@ -46,18 +40,15 @@ public class ITerrainTileComponentMutBunchIncarnation {
       int membersCliffLandingTTCMutSet,
       int membersStoneTTCMutSet,
       int membersGrassTTCMutSet) {
-    this.membersArmorMutSet = membersArmorMutSet;
-    this.membersInertiaRingMutSet = membersInertiaRingMutSet;
-    this.membersGlaiveMutSet = membersGlaiveMutSet;
-    this.membersManaPotionMutSet = membersManaPotionMutSet;
-    this.membersHealthPotionMutSet = membersHealthPotionMutSet;
+    this.membersItemTTCMutSet = membersItemTTCMutSet;
+    this.membersIncendianFallsLevelLinkerTTCMutSet = membersIncendianFallsLevelLinkerTTCMutSet;
     this.membersTimeAnchorTTCMutSet = membersTimeAnchorTTCMutSet;
-    this.membersStaircaseTTCMutSet = membersStaircaseTTCMutSet;
+    this.membersLevelLinkTTCMutSet = membersLevelLinkTTCMutSet;
+    this.membersDownStairsTTCMutSet = membersDownStairsTTCMutSet;
+    this.membersUpStairsTTCMutSet = membersUpStairsTTCMutSet;
     this.membersWallTTCMutSet = membersWallTTCMutSet;
     this.membersBloodTTCMutSet = membersBloodTTCMutSet;
     this.membersRocksTTCMutSet = membersRocksTTCMutSet;
-    this.membersDownstairsTTCMutSet = membersDownstairsTTCMutSet;
-    this.membersUpstairsTTCMutSet = membersUpstairsTTCMutSet;
     this.membersCaveTTCMutSet = membersCaveTTCMutSet;
     this.membersFallsTTCMutSet = membersFallsTTCMutSet;
     this.membersMagmaTTCMutSet = membersMagmaTTCMutSet;

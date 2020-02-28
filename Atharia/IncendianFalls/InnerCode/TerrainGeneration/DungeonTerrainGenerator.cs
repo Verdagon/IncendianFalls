@@ -88,13 +88,13 @@ namespace IncendianFalls {
     public static void Generate(
         out Terrain terrain,
         out SortedDictionary<int, Room> rooms,
-        SSContext context,
+        Root root,
         int width,
         int height,
         Rand rand) {
       Pattern pattern = SquarePattern.MakeSquarePattern();
 
-      context.root.GetDeterministicHashCode();
+      root.GetDeterministicHashCode();
       float elevationStepHeight = .2f;
 
       var roomByNumber = new SortedDictionary<int, Room>();
@@ -110,7 +110,7 @@ namespace IncendianFalls {
           unusedLocations.Add(new AbsRowCol(row, col));
         }
       }
-      context.root.GetDeterministicHashCode();
+      root.GetDeterministicHashCode();
 
       // 100 attempts to make rooms.
       for (int i = 0; i < 100; i++) {
@@ -244,22 +244,22 @@ namespace IncendianFalls {
 
       ConnectRooms(canvas, rand, roomByNumber);
 
-      context.root.GetDeterministicHashCode();
-      var tiles = context.root.EffectTerrainTileByLocationMutMapCreate();
+      root.GetDeterministicHashCode();
+      var tiles = root.EffectTerrainTileByLocationMutMapCreate();
 
-      context.root.GetDeterministicHashCode();
+      root.GetDeterministicHashCode();
       foreach (var room in roomByNumber.Values) {
         for (int rowI = room.origin.row; rowI < room.origin.row + room.size.row; rowI++) {
           for (int colI = room.origin.col; colI < room.origin.col + room.size.col; colI++) {
             //Logger.Info("Adding " + rowI + " " + colI);
-            context.root.GetDeterministicHashCode();
+            root.GetDeterministicHashCode();
             var tile =
-                context.root.EffectTerrainTileCreate(
-                    1, ITerrainTileComponentMutBunch.New(context.root));
-            tile.components.Add(context.root.EffectStoneTTCCreate().AsITerrainTileComponent());
-            context.root.GetDeterministicHashCode();
+                root.EffectTerrainTileCreate(
+                    1, ITerrainTileComponentMutBunch.New(root));
+            tile.components.Add(root.EffectStoneTTCCreate().AsITerrainTileComponent());
+            root.GetDeterministicHashCode();
             if (rand.Next(0, 19) == 0) {
-              tile.components.Add(context.root.EffectBloodTTCCreate().AsITerrainTileComponent());
+              tile.components.Add(root.EffectBloodTTCCreate().AsITerrainTileComponent());
             }
             tiles.Add(new Location(colI, rowI, 0), tile);
           }
@@ -270,16 +270,16 @@ namespace IncendianFalls {
       var allAdjacent = pattern.GetAdjacentLocations(allTiles, true, true);
       SetUtils.RemoveAll(allAdjacent, allTiles);
       foreach (var borderLocation in allAdjacent) {
-        var mutList = ITerrainTileComponentMutBunch.New(context.root);
-        context.root.GetDeterministicHashCode();
-        var tile = context.root.EffectTerrainTileCreate(2, mutList);
-        tile.components.Add(context.root.EffectWallTTCCreate().AsITerrainTileComponent());
-        context.root.GetDeterministicHashCode();
+        var mutList = ITerrainTileComponentMutBunch.New(root);
+        root.GetDeterministicHashCode();
+        var tile = root.EffectTerrainTileCreate(2, mutList);
+        tile.components.Add(root.EffectWallTTCCreate().AsITerrainTileComponent());
+        root.GetDeterministicHashCode();
         tiles.Add(borderLocation, tile);
       }
-      context.root.GetDeterministicHashCode();
+      root.GetDeterministicHashCode();
 
-      terrain = context.root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
+      terrain = root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
       rooms = roomByNumber;
     }
 

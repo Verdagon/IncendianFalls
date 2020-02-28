@@ -82,15 +82,42 @@ namespace IncendianFalls {
       return superstateByGameId[game.id];
     }
 
-    public Game RequestSetupGame(int randomSeed, bool squareLevelsOnly, bool gauntletMode) {
+    public Game RequestSetupIncendianFallsGame(int randomSeed, bool squareLevelsOnly) {
       //var rollbackPoint = root.Snapshot();
       try {
-        var request = new SetupGameRequest(randomSeed, squareLevelsOnly, gauntletMode);
+        var request = new SetupIncendianFallsGameRequest(randomSeed, squareLevelsOnly);
         //broadcastBeforeRequest(new SetupGameRequestAsIRequest(request));
         // context.Flare(GetDeterministicHashCode());
         Superstate superstate = null;
         var game = context.root.Transact(delegate () {
-          return SetupGameRequestExecutor.Execute(context, out superstate, request);
+          return SetupIncendianFallsGameRequestExecutor.Execute(context, out superstate, request);
+        });
+
+        superstateByGameId.Add(game.id, superstate);
+
+        // context.Flare(game.DStr());
+        //broadcastAfterRequest(new SetupGameRequestAsIRequest(request));
+        // context.Flare(GetDeterministicHashCode());
+        return game;
+      } catch (Exception e) {
+        root.logger.Error(e.Message);
+        throw e;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
+      }
+    }
+
+    public Game RequestSetupGauntletGame(int randomSeed, bool squareLevelsOnly) {
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new SetupGauntletGameRequest(randomSeed, squareLevelsOnly);
+        //broadcastBeforeRequest(new SetupGameRequestAsIRequest(request));
+        // context.Flare(GetDeterministicHashCode());
+        Superstate superstate = null;
+        var game = context.root.Transact(delegate () {
+          return SetupGauntletGameRequestExecutor.Execute(context, out superstate, request);
         });
 
         superstateByGameId.Add(game.id, superstate);
@@ -148,7 +175,7 @@ namespace IncendianFalls {
         // context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + "\n" + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");

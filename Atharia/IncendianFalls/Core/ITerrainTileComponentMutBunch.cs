@@ -35,32 +35,28 @@ public class ITerrainTileComponentMutBunch {
   }
   public void CheckForNullViolations(List<string> violations) {
 
-    if (!root.ArmorMutSetExists(membersArmorMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersArmorMutSet");
+    if (!root.ItemTTCMutSetExists(membersItemTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersItemTTCMutSet");
     }
 
-    if (!root.InertiaRingMutSetExists(membersInertiaRingMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersInertiaRingMutSet");
-    }
-
-    if (!root.GlaiveMutSetExists(membersGlaiveMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersGlaiveMutSet");
-    }
-
-    if (!root.ManaPotionMutSetExists(membersManaPotionMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersManaPotionMutSet");
-    }
-
-    if (!root.HealthPotionMutSetExists(membersHealthPotionMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersHealthPotionMutSet");
+    if (!root.IncendianFallsLevelLinkerTTCMutSetExists(membersIncendianFallsLevelLinkerTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersIncendianFallsLevelLinkerTTCMutSet");
     }
 
     if (!root.TimeAnchorTTCMutSetExists(membersTimeAnchorTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersTimeAnchorTTCMutSet");
     }
 
-    if (!root.StaircaseTTCMutSetExists(membersStaircaseTTCMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersStaircaseTTCMutSet");
+    if (!root.LevelLinkTTCMutSetExists(membersLevelLinkTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersLevelLinkTTCMutSet");
+    }
+
+    if (!root.DownStairsTTCMutSetExists(membersDownStairsTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersDownStairsTTCMutSet");
+    }
+
+    if (!root.UpStairsTTCMutSetExists(membersUpStairsTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersUpStairsTTCMutSet");
     }
 
     if (!root.WallTTCMutSetExists(membersWallTTCMutSet.id)) {
@@ -73,14 +69,6 @@ public class ITerrainTileComponentMutBunch {
 
     if (!root.RocksTTCMutSetExists(membersRocksTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersRocksTTCMutSet");
-    }
-
-    if (!root.DownstairsTTCMutSetExists(membersDownstairsTTCMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersDownstairsTTCMutSet");
-    }
-
-    if (!root.UpstairsTTCMutSetExists(membersUpstairsTTCMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersUpstairsTTCMutSet");
     }
 
     if (!root.CaveTTCMutSetExists(membersCaveTTCMutSet.id)) {
@@ -120,26 +108,23 @@ public class ITerrainTileComponentMutBunch {
       return;
     }
     foundIds.Add(id);
-    if (root.ArmorMutSetExists(membersArmorMutSet.id)) {
-      membersArmorMutSet.FindReachableObjects(foundIds);
+    if (root.ItemTTCMutSetExists(membersItemTTCMutSet.id)) {
+      membersItemTTCMutSet.FindReachableObjects(foundIds);
     }
-    if (root.InertiaRingMutSetExists(membersInertiaRingMutSet.id)) {
-      membersInertiaRingMutSet.FindReachableObjects(foundIds);
-    }
-    if (root.GlaiveMutSetExists(membersGlaiveMutSet.id)) {
-      membersGlaiveMutSet.FindReachableObjects(foundIds);
-    }
-    if (root.ManaPotionMutSetExists(membersManaPotionMutSet.id)) {
-      membersManaPotionMutSet.FindReachableObjects(foundIds);
-    }
-    if (root.HealthPotionMutSetExists(membersHealthPotionMutSet.id)) {
-      membersHealthPotionMutSet.FindReachableObjects(foundIds);
+    if (root.IncendianFallsLevelLinkerTTCMutSetExists(membersIncendianFallsLevelLinkerTTCMutSet.id)) {
+      membersIncendianFallsLevelLinkerTTCMutSet.FindReachableObjects(foundIds);
     }
     if (root.TimeAnchorTTCMutSetExists(membersTimeAnchorTTCMutSet.id)) {
       membersTimeAnchorTTCMutSet.FindReachableObjects(foundIds);
     }
-    if (root.StaircaseTTCMutSetExists(membersStaircaseTTCMutSet.id)) {
-      membersStaircaseTTCMutSet.FindReachableObjects(foundIds);
+    if (root.LevelLinkTTCMutSetExists(membersLevelLinkTTCMutSet.id)) {
+      membersLevelLinkTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.DownStairsTTCMutSetExists(membersDownStairsTTCMutSet.id)) {
+      membersDownStairsTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.UpStairsTTCMutSetExists(membersUpStairsTTCMutSet.id)) {
+      membersUpStairsTTCMutSet.FindReachableObjects(foundIds);
     }
     if (root.WallTTCMutSetExists(membersWallTTCMutSet.id)) {
       membersWallTTCMutSet.FindReachableObjects(foundIds);
@@ -149,12 +134,6 @@ public class ITerrainTileComponentMutBunch {
     }
     if (root.RocksTTCMutSetExists(membersRocksTTCMutSet.id)) {
       membersRocksTTCMutSet.FindReachableObjects(foundIds);
-    }
-    if (root.DownstairsTTCMutSetExists(membersDownstairsTTCMutSet.id)) {
-      membersDownstairsTTCMutSet.FindReachableObjects(foundIds);
-    }
-    if (root.UpstairsTTCMutSetExists(membersUpstairsTTCMutSet.id)) {
-      membersUpstairsTTCMutSet.FindReachableObjects(foundIds);
     }
     if (root.CaveTTCMutSetExists(membersCaveTTCMutSet.id)) {
       membersCaveTTCMutSet.FindReachableObjects(foundIds);
@@ -190,49 +169,22 @@ public class ITerrainTileComponentMutBunch {
     }
     return this.root == that.root && id == that.id;
   }
-         public ArmorMutSet membersArmorMutSet {
+         public ItemTTCMutSet membersItemTTCMutSet {
 
     get {
       if (root == null) {
-        throw new Exception("Tried to get member membersArmorMutSet of null!");
+        throw new Exception("Tried to get member membersItemTTCMutSet of null!");
       }
-      return new ArmorMutSet(root, incarnation.membersArmorMutSet);
+      return new ItemTTCMutSet(root, incarnation.membersItemTTCMutSet);
     }
                        }
-  public InertiaRingMutSet membersInertiaRingMutSet {
+  public IncendianFallsLevelLinkerTTCMutSet membersIncendianFallsLevelLinkerTTCMutSet {
 
     get {
       if (root == null) {
-        throw new Exception("Tried to get member membersInertiaRingMutSet of null!");
+        throw new Exception("Tried to get member membersIncendianFallsLevelLinkerTTCMutSet of null!");
       }
-      return new InertiaRingMutSet(root, incarnation.membersInertiaRingMutSet);
-    }
-                       }
-  public GlaiveMutSet membersGlaiveMutSet {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member membersGlaiveMutSet of null!");
-      }
-      return new GlaiveMutSet(root, incarnation.membersGlaiveMutSet);
-    }
-                       }
-  public ManaPotionMutSet membersManaPotionMutSet {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member membersManaPotionMutSet of null!");
-      }
-      return new ManaPotionMutSet(root, incarnation.membersManaPotionMutSet);
-    }
-                       }
-  public HealthPotionMutSet membersHealthPotionMutSet {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member membersHealthPotionMutSet of null!");
-      }
-      return new HealthPotionMutSet(root, incarnation.membersHealthPotionMutSet);
+      return new IncendianFallsLevelLinkerTTCMutSet(root, incarnation.membersIncendianFallsLevelLinkerTTCMutSet);
     }
                        }
   public TimeAnchorTTCMutSet membersTimeAnchorTTCMutSet {
@@ -244,13 +196,31 @@ public class ITerrainTileComponentMutBunch {
       return new TimeAnchorTTCMutSet(root, incarnation.membersTimeAnchorTTCMutSet);
     }
                        }
-  public StaircaseTTCMutSet membersStaircaseTTCMutSet {
+  public LevelLinkTTCMutSet membersLevelLinkTTCMutSet {
 
     get {
       if (root == null) {
-        throw new Exception("Tried to get member membersStaircaseTTCMutSet of null!");
+        throw new Exception("Tried to get member membersLevelLinkTTCMutSet of null!");
       }
-      return new StaircaseTTCMutSet(root, incarnation.membersStaircaseTTCMutSet);
+      return new LevelLinkTTCMutSet(root, incarnation.membersLevelLinkTTCMutSet);
+    }
+                       }
+  public DownStairsTTCMutSet membersDownStairsTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersDownStairsTTCMutSet of null!");
+      }
+      return new DownStairsTTCMutSet(root, incarnation.membersDownStairsTTCMutSet);
+    }
+                       }
+  public UpStairsTTCMutSet membersUpStairsTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersUpStairsTTCMutSet of null!");
+      }
+      return new UpStairsTTCMutSet(root, incarnation.membersUpStairsTTCMutSet);
     }
                        }
   public WallTTCMutSet membersWallTTCMutSet {
@@ -278,24 +248,6 @@ public class ITerrainTileComponentMutBunch {
         throw new Exception("Tried to get member membersRocksTTCMutSet of null!");
       }
       return new RocksTTCMutSet(root, incarnation.membersRocksTTCMutSet);
-    }
-                       }
-  public DownstairsTTCMutSet membersDownstairsTTCMutSet {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member membersDownstairsTTCMutSet of null!");
-      }
-      return new DownstairsTTCMutSet(root, incarnation.membersDownstairsTTCMutSet);
-    }
-                       }
-  public UpstairsTTCMutSet membersUpstairsTTCMutSet {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member membersUpstairsTTCMutSet of null!");
-      }
-      return new UpstairsTTCMutSet(root, incarnation.membersUpstairsTTCMutSet);
     }
                        }
   public CaveTTCMutSet membersCaveTTCMutSet {
@@ -373,29 +325,23 @@ public class ITerrainTileComponentMutBunch {
 
   public static ITerrainTileComponentMutBunch New(Root root) {
     return root.EffectITerrainTileComponentMutBunchCreate(
-      root.EffectArmorMutSetCreate()
+      root.EffectItemTTCMutSetCreate()
 ,
-      root.EffectInertiaRingMutSetCreate()
-,
-      root.EffectGlaiveMutSetCreate()
-,
-      root.EffectManaPotionMutSetCreate()
-,
-      root.EffectHealthPotionMutSetCreate()
+      root.EffectIncendianFallsLevelLinkerTTCMutSetCreate()
 ,
       root.EffectTimeAnchorTTCMutSetCreate()
 ,
-      root.EffectStaircaseTTCMutSetCreate()
+      root.EffectLevelLinkTTCMutSetCreate()
+,
+      root.EffectDownStairsTTCMutSetCreate()
+,
+      root.EffectUpStairsTTCMutSetCreate()
 ,
       root.EffectWallTTCMutSetCreate()
 ,
       root.EffectBloodTTCMutSetCreate()
 ,
       root.EffectRocksTTCMutSetCreate()
-,
-      root.EffectDownstairsTTCMutSetCreate()
-,
-      root.EffectUpstairsTTCMutSetCreate()
 ,
       root.EffectCaveTTCMutSetCreate()
 ,
@@ -417,32 +363,14 @@ public class ITerrainTileComponentMutBunch {
   public void Add(ITerrainTileComponent elementI) {
 
     // Can optimize, check the type of element directly somehow
-    if (root.ArmorExists(elementI.id)) {
-      this.membersArmorMutSet.Add(root.GetArmor(elementI.id));
+    if (root.ItemTTCExists(elementI.id)) {
+      this.membersItemTTCMutSet.Add(root.GetItemTTC(elementI.id));
       return;
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.InertiaRingExists(elementI.id)) {
-      this.membersInertiaRingMutSet.Add(root.GetInertiaRing(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.GlaiveExists(elementI.id)) {
-      this.membersGlaiveMutSet.Add(root.GetGlaive(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.ManaPotionExists(elementI.id)) {
-      this.membersManaPotionMutSet.Add(root.GetManaPotion(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.HealthPotionExists(elementI.id)) {
-      this.membersHealthPotionMutSet.Add(root.GetHealthPotion(elementI.id));
+    if (root.IncendianFallsLevelLinkerTTCExists(elementI.id)) {
+      this.membersIncendianFallsLevelLinkerTTCMutSet.Add(root.GetIncendianFallsLevelLinkerTTC(elementI.id));
       return;
     }
 
@@ -453,8 +381,20 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.StaircaseTTCExists(elementI.id)) {
-      this.membersStaircaseTTCMutSet.Add(root.GetStaircaseTTC(elementI.id));
+    if (root.LevelLinkTTCExists(elementI.id)) {
+      this.membersLevelLinkTTCMutSet.Add(root.GetLevelLinkTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.DownStairsTTCExists(elementI.id)) {
+      this.membersDownStairsTTCMutSet.Add(root.GetDownStairsTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.UpStairsTTCExists(elementI.id)) {
+      this.membersUpStairsTTCMutSet.Add(root.GetUpStairsTTC(elementI.id));
       return;
     }
 
@@ -473,18 +413,6 @@ public class ITerrainTileComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.RocksTTCExists(elementI.id)) {
       this.membersRocksTTCMutSet.Add(root.GetRocksTTC(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.DownstairsTTCExists(elementI.id)) {
-      this.membersDownstairsTTCMutSet.Add(root.GetDownstairsTTC(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.UpstairsTTCExists(elementI.id)) {
-      this.membersUpstairsTTCMutSet.Add(root.GetUpstairsTTC(elementI.id));
       return;
     }
 
@@ -540,32 +468,14 @@ public class ITerrainTileComponentMutBunch {
   public void Remove(ITerrainTileComponent elementI) {
 
     // Can optimize, check the type of element directly somehow
-    if (root.ArmorExists(elementI.id)) {
-      this.membersArmorMutSet.Remove(root.GetArmor(elementI.id));
+    if (root.ItemTTCExists(elementI.id)) {
+      this.membersItemTTCMutSet.Remove(root.GetItemTTC(elementI.id));
       return;
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.InertiaRingExists(elementI.id)) {
-      this.membersInertiaRingMutSet.Remove(root.GetInertiaRing(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.GlaiveExists(elementI.id)) {
-      this.membersGlaiveMutSet.Remove(root.GetGlaive(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.ManaPotionExists(elementI.id)) {
-      this.membersManaPotionMutSet.Remove(root.GetManaPotion(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.HealthPotionExists(elementI.id)) {
-      this.membersHealthPotionMutSet.Remove(root.GetHealthPotion(elementI.id));
+    if (root.IncendianFallsLevelLinkerTTCExists(elementI.id)) {
+      this.membersIncendianFallsLevelLinkerTTCMutSet.Remove(root.GetIncendianFallsLevelLinkerTTC(elementI.id));
       return;
     }
 
@@ -576,8 +486,20 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.StaircaseTTCExists(elementI.id)) {
-      this.membersStaircaseTTCMutSet.Remove(root.GetStaircaseTTC(elementI.id));
+    if (root.LevelLinkTTCExists(elementI.id)) {
+      this.membersLevelLinkTTCMutSet.Remove(root.GetLevelLinkTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.DownStairsTTCExists(elementI.id)) {
+      this.membersDownStairsTTCMutSet.Remove(root.GetDownStairsTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.UpStairsTTCExists(elementI.id)) {
+      this.membersUpStairsTTCMutSet.Remove(root.GetUpStairsTTC(elementI.id));
       return;
     }
 
@@ -596,18 +518,6 @@ public class ITerrainTileComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.RocksTTCExists(elementI.id)) {
       this.membersRocksTTCMutSet.Remove(root.GetRocksTTC(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.DownstairsTTCExists(elementI.id)) {
-      this.membersDownstairsTTCMutSet.Remove(root.GetDownstairsTTC(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.UpstairsTTCExists(elementI.id)) {
-      this.membersUpstairsTTCMutSet.Remove(root.GetUpstairsTTC(elementI.id));
       return;
     }
 
@@ -661,18 +571,15 @@ public class ITerrainTileComponentMutBunch {
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
-    this.membersArmorMutSet.Clear();
-    this.membersInertiaRingMutSet.Clear();
-    this.membersGlaiveMutSet.Clear();
-    this.membersManaPotionMutSet.Clear();
-    this.membersHealthPotionMutSet.Clear();
+    this.membersItemTTCMutSet.Clear();
+    this.membersIncendianFallsLevelLinkerTTCMutSet.Clear();
     this.membersTimeAnchorTTCMutSet.Clear();
-    this.membersStaircaseTTCMutSet.Clear();
+    this.membersLevelLinkTTCMutSet.Clear();
+    this.membersDownStairsTTCMutSet.Clear();
+    this.membersUpStairsTTCMutSet.Clear();
     this.membersWallTTCMutSet.Clear();
     this.membersBloodTTCMutSet.Clear();
     this.membersRocksTTCMutSet.Clear();
-    this.membersDownstairsTTCMutSet.Clear();
-    this.membersUpstairsTTCMutSet.Clear();
     this.membersCaveTTCMutSet.Clear();
     this.membersFallsTTCMutSet.Clear();
     this.membersMagmaTTCMutSet.Clear();
@@ -685,18 +592,15 @@ public class ITerrainTileComponentMutBunch {
   public int Count {
     get {
       return
-        this.membersArmorMutSet.Count +
-        this.membersInertiaRingMutSet.Count +
-        this.membersGlaiveMutSet.Count +
-        this.membersManaPotionMutSet.Count +
-        this.membersHealthPotionMutSet.Count +
+        this.membersItemTTCMutSet.Count +
+        this.membersIncendianFallsLevelLinkerTTCMutSet.Count +
         this.membersTimeAnchorTTCMutSet.Count +
-        this.membersStaircaseTTCMutSet.Count +
+        this.membersLevelLinkTTCMutSet.Count +
+        this.membersDownStairsTTCMutSet.Count +
+        this.membersUpStairsTTCMutSet.Count +
         this.membersWallTTCMutSet.Count +
         this.membersBloodTTCMutSet.Count +
         this.membersRocksTTCMutSet.Count +
-        this.membersDownstairsTTCMutSet.Count +
-        this.membersUpstairsTTCMutSet.Count +
         this.membersCaveTTCMutSet.Count +
         this.membersFallsTTCMutSet.Count +
         this.membersMagmaTTCMutSet.Count +
@@ -716,18 +620,15 @@ public class ITerrainTileComponentMutBunch {
   }
 
   public void Destruct() {
-    var tempMembersArmorMutSet = this.membersArmorMutSet;
-    var tempMembersInertiaRingMutSet = this.membersInertiaRingMutSet;
-    var tempMembersGlaiveMutSet = this.membersGlaiveMutSet;
-    var tempMembersManaPotionMutSet = this.membersManaPotionMutSet;
-    var tempMembersHealthPotionMutSet = this.membersHealthPotionMutSet;
+    var tempMembersItemTTCMutSet = this.membersItemTTCMutSet;
+    var tempMembersIncendianFallsLevelLinkerTTCMutSet = this.membersIncendianFallsLevelLinkerTTCMutSet;
     var tempMembersTimeAnchorTTCMutSet = this.membersTimeAnchorTTCMutSet;
-    var tempMembersStaircaseTTCMutSet = this.membersStaircaseTTCMutSet;
+    var tempMembersLevelLinkTTCMutSet = this.membersLevelLinkTTCMutSet;
+    var tempMembersDownStairsTTCMutSet = this.membersDownStairsTTCMutSet;
+    var tempMembersUpStairsTTCMutSet = this.membersUpStairsTTCMutSet;
     var tempMembersWallTTCMutSet = this.membersWallTTCMutSet;
     var tempMembersBloodTTCMutSet = this.membersBloodTTCMutSet;
     var tempMembersRocksTTCMutSet = this.membersRocksTTCMutSet;
-    var tempMembersDownstairsTTCMutSet = this.membersDownstairsTTCMutSet;
-    var tempMembersUpstairsTTCMutSet = this.membersUpstairsTTCMutSet;
     var tempMembersCaveTTCMutSet = this.membersCaveTTCMutSet;
     var tempMembersFallsTTCMutSet = this.membersFallsTTCMutSet;
     var tempMembersMagmaTTCMutSet = this.membersMagmaTTCMutSet;
@@ -738,18 +639,15 @@ public class ITerrainTileComponentMutBunch {
     var tempMembersGrassTTCMutSet = this.membersGrassTTCMutSet;
 
     this.Delete();
-    tempMembersArmorMutSet.Destruct();
-    tempMembersInertiaRingMutSet.Destruct();
-    tempMembersGlaiveMutSet.Destruct();
-    tempMembersManaPotionMutSet.Destruct();
-    tempMembersHealthPotionMutSet.Destruct();
+    tempMembersItemTTCMutSet.Destruct();
+    tempMembersIncendianFallsLevelLinkerTTCMutSet.Destruct();
     tempMembersTimeAnchorTTCMutSet.Destruct();
-    tempMembersStaircaseTTCMutSet.Destruct();
+    tempMembersLevelLinkTTCMutSet.Destruct();
+    tempMembersDownStairsTTCMutSet.Destruct();
+    tempMembersUpStairsTTCMutSet.Destruct();
     tempMembersWallTTCMutSet.Destruct();
     tempMembersBloodTTCMutSet.Destruct();
     tempMembersRocksTTCMutSet.Destruct();
-    tempMembersDownstairsTTCMutSet.Destruct();
-    tempMembersUpstairsTTCMutSet.Destruct();
     tempMembersCaveTTCMutSet.Destruct();
     tempMembersFallsTTCMutSet.Destruct();
     tempMembersMagmaTTCMutSet.Destruct();
@@ -760,26 +658,23 @@ public class ITerrainTileComponentMutBunch {
     tempMembersGrassTTCMutSet.Destruct();
   }
   public IEnumerator<ITerrainTileComponent> GetEnumerator() {
-    foreach (var element in this.membersArmorMutSet) {
-      yield return new ArmorAsITerrainTileComponent(element);
+    foreach (var element in this.membersItemTTCMutSet) {
+      yield return new ItemTTCAsITerrainTileComponent(element);
     }
-    foreach (var element in this.membersInertiaRingMutSet) {
-      yield return new InertiaRingAsITerrainTileComponent(element);
-    }
-    foreach (var element in this.membersGlaiveMutSet) {
-      yield return new GlaiveAsITerrainTileComponent(element);
-    }
-    foreach (var element in this.membersManaPotionMutSet) {
-      yield return new ManaPotionAsITerrainTileComponent(element);
-    }
-    foreach (var element in this.membersHealthPotionMutSet) {
-      yield return new HealthPotionAsITerrainTileComponent(element);
+    foreach (var element in this.membersIncendianFallsLevelLinkerTTCMutSet) {
+      yield return new IncendianFallsLevelLinkerTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersTimeAnchorTTCMutSet) {
       yield return new TimeAnchorTTCAsITerrainTileComponent(element);
     }
-    foreach (var element in this.membersStaircaseTTCMutSet) {
-      yield return new StaircaseTTCAsITerrainTileComponent(element);
+    foreach (var element in this.membersLevelLinkTTCMutSet) {
+      yield return new LevelLinkTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersDownStairsTTCMutSet) {
+      yield return new DownStairsTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersUpStairsTTCMutSet) {
+      yield return new UpStairsTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersWallTTCMutSet) {
       yield return new WallTTCAsITerrainTileComponent(element);
@@ -789,12 +684,6 @@ public class ITerrainTileComponentMutBunch {
     }
     foreach (var element in this.membersRocksTTCMutSet) {
       yield return new RocksTTCAsITerrainTileComponent(element);
-    }
-    foreach (var element in this.membersDownstairsTTCMutSet) {
-      yield return new DownstairsTTCAsITerrainTileComponent(element);
-    }
-    foreach (var element in this.membersUpstairsTTCMutSet) {
-      yield return new UpstairsTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersCaveTTCMutSet) {
       yield return new CaveTTCAsITerrainTileComponent(element);
@@ -821,109 +710,46 @@ public class ITerrainTileComponentMutBunch {
       yield return new GrassTTCAsITerrainTileComponent(element);
     }
   }
-    public List<Armor> GetAllArmor() {
-      var result = new List<Armor>();
-      foreach (var thing in this.membersArmorMutSet) {
+    public List<ItemTTC> GetAllItemTTC() {
+      var result = new List<ItemTTC>();
+      foreach (var thing in this.membersItemTTCMutSet) {
         result.Add(thing);
       }
       return result;
     }
-    public List<Armor> ClearAllArmor() {
-      var result = new List<Armor>();
-      this.membersArmorMutSet.Clear();
+    public List<ItemTTC> ClearAllItemTTC() {
+      var result = new List<ItemTTC>();
+      this.membersItemTTCMutSet.Clear();
       return result;
     }
-    public Armor GetOnlyArmorOrNull() {
-      var result = GetAllArmor();
+    public ItemTTC GetOnlyItemTTCOrNull() {
+      var result = GetAllItemTTC();
       Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
-        return Armor.Null;
+        return ItemTTC.Null;
       }
     }
-    public List<InertiaRing> GetAllInertiaRing() {
-      var result = new List<InertiaRing>();
-      foreach (var thing in this.membersInertiaRingMutSet) {
+    public List<IncendianFallsLevelLinkerTTC> GetAllIncendianFallsLevelLinkerTTC() {
+      var result = new List<IncendianFallsLevelLinkerTTC>();
+      foreach (var thing in this.membersIncendianFallsLevelLinkerTTCMutSet) {
         result.Add(thing);
       }
       return result;
     }
-    public List<InertiaRing> ClearAllInertiaRing() {
-      var result = new List<InertiaRing>();
-      this.membersInertiaRingMutSet.Clear();
+    public List<IncendianFallsLevelLinkerTTC> ClearAllIncendianFallsLevelLinkerTTC() {
+      var result = new List<IncendianFallsLevelLinkerTTC>();
+      this.membersIncendianFallsLevelLinkerTTCMutSet.Clear();
       return result;
     }
-    public InertiaRing GetOnlyInertiaRingOrNull() {
-      var result = GetAllInertiaRing();
+    public IncendianFallsLevelLinkerTTC GetOnlyIncendianFallsLevelLinkerTTCOrNull() {
+      var result = GetAllIncendianFallsLevelLinkerTTC();
       Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
-        return InertiaRing.Null;
-      }
-    }
-    public List<Glaive> GetAllGlaive() {
-      var result = new List<Glaive>();
-      foreach (var thing in this.membersGlaiveMutSet) {
-        result.Add(thing);
-      }
-      return result;
-    }
-    public List<Glaive> ClearAllGlaive() {
-      var result = new List<Glaive>();
-      this.membersGlaiveMutSet.Clear();
-      return result;
-    }
-    public Glaive GetOnlyGlaiveOrNull() {
-      var result = GetAllGlaive();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return Glaive.Null;
-      }
-    }
-    public List<ManaPotion> GetAllManaPotion() {
-      var result = new List<ManaPotion>();
-      foreach (var thing in this.membersManaPotionMutSet) {
-        result.Add(thing);
-      }
-      return result;
-    }
-    public List<ManaPotion> ClearAllManaPotion() {
-      var result = new List<ManaPotion>();
-      this.membersManaPotionMutSet.Clear();
-      return result;
-    }
-    public ManaPotion GetOnlyManaPotionOrNull() {
-      var result = GetAllManaPotion();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return ManaPotion.Null;
-      }
-    }
-    public List<HealthPotion> GetAllHealthPotion() {
-      var result = new List<HealthPotion>();
-      foreach (var thing in this.membersHealthPotionMutSet) {
-        result.Add(thing);
-      }
-      return result;
-    }
-    public List<HealthPotion> ClearAllHealthPotion() {
-      var result = new List<HealthPotion>();
-      this.membersHealthPotionMutSet.Clear();
-      return result;
-    }
-    public HealthPotion GetOnlyHealthPotionOrNull() {
-      var result = GetAllHealthPotion();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return HealthPotion.Null;
+        return IncendianFallsLevelLinkerTTC.Null;
       }
     }
     public List<TimeAnchorTTC> GetAllTimeAnchorTTC() {
@@ -947,25 +773,67 @@ public class ITerrainTileComponentMutBunch {
         return TimeAnchorTTC.Null;
       }
     }
-    public List<StaircaseTTC> GetAllStaircaseTTC() {
-      var result = new List<StaircaseTTC>();
-      foreach (var thing in this.membersStaircaseTTCMutSet) {
+    public List<LevelLinkTTC> GetAllLevelLinkTTC() {
+      var result = new List<LevelLinkTTC>();
+      foreach (var thing in this.membersLevelLinkTTCMutSet) {
         result.Add(thing);
       }
       return result;
     }
-    public List<StaircaseTTC> ClearAllStaircaseTTC() {
-      var result = new List<StaircaseTTC>();
-      this.membersStaircaseTTCMutSet.Clear();
+    public List<LevelLinkTTC> ClearAllLevelLinkTTC() {
+      var result = new List<LevelLinkTTC>();
+      this.membersLevelLinkTTCMutSet.Clear();
       return result;
     }
-    public StaircaseTTC GetOnlyStaircaseTTCOrNull() {
-      var result = GetAllStaircaseTTC();
+    public LevelLinkTTC GetOnlyLevelLinkTTCOrNull() {
+      var result = GetAllLevelLinkTTC();
       Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
-        return StaircaseTTC.Null;
+        return LevelLinkTTC.Null;
+      }
+    }
+    public List<DownStairsTTC> GetAllDownStairsTTC() {
+      var result = new List<DownStairsTTC>();
+      foreach (var thing in this.membersDownStairsTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<DownStairsTTC> ClearAllDownStairsTTC() {
+      var result = new List<DownStairsTTC>();
+      this.membersDownStairsTTCMutSet.Clear();
+      return result;
+    }
+    public DownStairsTTC GetOnlyDownStairsTTCOrNull() {
+      var result = GetAllDownStairsTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return DownStairsTTC.Null;
+      }
+    }
+    public List<UpStairsTTC> GetAllUpStairsTTC() {
+      var result = new List<UpStairsTTC>();
+      foreach (var thing in this.membersUpStairsTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<UpStairsTTC> ClearAllUpStairsTTC() {
+      var result = new List<UpStairsTTC>();
+      this.membersUpStairsTTCMutSet.Clear();
+      return result;
+    }
+    public UpStairsTTC GetOnlyUpStairsTTCOrNull() {
+      var result = GetAllUpStairsTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return UpStairsTTC.Null;
       }
     }
     public List<WallTTC> GetAllWallTTC() {
@@ -1029,48 +897,6 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return RocksTTC.Null;
-      }
-    }
-    public List<DownstairsTTC> GetAllDownstairsTTC() {
-      var result = new List<DownstairsTTC>();
-      foreach (var thing in this.membersDownstairsTTCMutSet) {
-        result.Add(thing);
-      }
-      return result;
-    }
-    public List<DownstairsTTC> ClearAllDownstairsTTC() {
-      var result = new List<DownstairsTTC>();
-      this.membersDownstairsTTCMutSet.Clear();
-      return result;
-    }
-    public DownstairsTTC GetOnlyDownstairsTTCOrNull() {
-      var result = GetAllDownstairsTTC();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return DownstairsTTC.Null;
-      }
-    }
-    public List<UpstairsTTC> GetAllUpstairsTTC() {
-      var result = new List<UpstairsTTC>();
-      foreach (var thing in this.membersUpstairsTTCMutSet) {
-        result.Add(thing);
-      }
-      return result;
-    }
-    public List<UpstairsTTC> ClearAllUpstairsTTC() {
-      var result = new List<UpstairsTTC>();
-      this.membersUpstairsTTCMutSet.Clear();
-      return result;
-    }
-    public UpstairsTTC GetOnlyUpstairsTTCOrNull() {
-      var result = GetAllUpstairsTTC();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return UpstairsTTC.Null;
       }
     }
     public List<CaveTTC> GetAllCaveTTC() {
@@ -1241,26 +1067,36 @@ public class ITerrainTileComponentMutBunch {
         return GrassTTC.Null;
       }
     }
-    public List<IOffenseItem> GetAllIOffenseItem() {
-      var result = new List<IOffenseItem>();
-      foreach (var obj in this.membersGlaiveMutSet) {
+    public List<IInteractableTTC> GetAllIInteractableTTC() {
+      var result = new List<IInteractableTTC>();
+      foreach (var obj in this.membersIncendianFallsLevelLinkerTTCMutSet) {
         result.Add(
-            new GlaiveAsIOffenseItem(obj));
+            new IncendianFallsLevelLinkerTTCAsIInteractableTTC(obj));
+      }
+      foreach (var obj in this.membersLevelLinkTTCMutSet) {
+        result.Add(
+            new LevelLinkTTCAsIInteractableTTC(obj));
+      }
+      foreach (var obj in this.membersItemTTCMutSet) {
+        result.Add(
+            new ItemTTCAsIInteractableTTC(obj));
       }
       return result;
     }
-    public List<IOffenseItem> ClearAllIOffenseItem() {
-      var result = new List<IOffenseItem>();
-      this.membersGlaiveMutSet.Clear();
+    public List<IInteractableTTC> ClearAllIInteractableTTC() {
+      var result = new List<IInteractableTTC>();
+      this.membersIncendianFallsLevelLinkerTTCMutSet.Clear();
+      this.membersLevelLinkTTCMutSet.Clear();
+      this.membersItemTTCMutSet.Clear();
       return result;
     }
-    public IOffenseItem GetOnlyIOffenseItemOrNull() {
-      var result = GetAllIOffenseItem();
+    public IInteractableTTC GetOnlyIInteractableTTCOrNull() {
+      var result = GetAllIInteractableTTC();
       Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
-        return NullIOffenseItem.Null;
+        return NullIInteractableTTC.Null;
       }
     }
                  public List<IUnwalkableTTC> GetAllIUnwalkableTTC() {
@@ -1288,119 +1124,6 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return NullIUnwalkableTTC.Null;
-      }
-    }
-                 public List<IItem> GetAllIItem() {
-      var result = new List<IItem>();
-      foreach (var obj in this.membersArmorMutSet) {
-        result.Add(
-            new ArmorAsIItem(obj));
-      }
-      foreach (var obj in this.membersInertiaRingMutSet) {
-        result.Add(
-            new InertiaRingAsIItem(obj));
-      }
-      foreach (var obj in this.membersGlaiveMutSet) {
-        result.Add(
-            new GlaiveAsIItem(obj));
-      }
-      foreach (var obj in this.membersManaPotionMutSet) {
-        result.Add(
-            new ManaPotionAsIItem(obj));
-      }
-      foreach (var obj in this.membersHealthPotionMutSet) {
-        result.Add(
-            new HealthPotionAsIItem(obj));
-      }
-      return result;
-    }
-    public List<IItem> ClearAllIItem() {
-      var result = new List<IItem>();
-      this.membersArmorMutSet.Clear();
-      this.membersInertiaRingMutSet.Clear();
-      this.membersGlaiveMutSet.Clear();
-      this.membersManaPotionMutSet.Clear();
-      this.membersHealthPotionMutSet.Clear();
-      return result;
-    }
-    public IItem GetOnlyIItemOrNull() {
-      var result = GetAllIItem();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return NullIItem.Null;
-      }
-    }
-                 public List<IInertiaItem> GetAllIInertiaItem() {
-      var result = new List<IInertiaItem>();
-      foreach (var obj in this.membersInertiaRingMutSet) {
-        result.Add(
-            new InertiaRingAsIInertiaItem(obj));
-      }
-      return result;
-    }
-    public List<IInertiaItem> ClearAllIInertiaItem() {
-      var result = new List<IInertiaItem>();
-      this.membersInertiaRingMutSet.Clear();
-      return result;
-    }
-    public IInertiaItem GetOnlyIInertiaItemOrNull() {
-      var result = GetAllIInertiaItem();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return NullIInertiaItem.Null;
-      }
-    }
-                 public List<IDefenseItem> GetAllIDefenseItem() {
-      var result = new List<IDefenseItem>();
-      foreach (var obj in this.membersArmorMutSet) {
-        result.Add(
-            new ArmorAsIDefenseItem(obj));
-      }
-      return result;
-    }
-    public List<IDefenseItem> ClearAllIDefenseItem() {
-      var result = new List<IDefenseItem>();
-      this.membersArmorMutSet.Clear();
-      return result;
-    }
-    public IDefenseItem GetOnlyIDefenseItemOrNull() {
-      var result = GetAllIDefenseItem();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return NullIDefenseItem.Null;
-      }
-    }
-                 public List<IUsableItem> GetAllIUsableItem() {
-      var result = new List<IUsableItem>();
-      foreach (var obj in this.membersManaPotionMutSet) {
-        result.Add(
-            new ManaPotionAsIUsableItem(obj));
-      }
-      foreach (var obj in this.membersHealthPotionMutSet) {
-        result.Add(
-            new HealthPotionAsIUsableItem(obj));
-      }
-      return result;
-    }
-    public List<IUsableItem> ClearAllIUsableItem() {
-      var result = new List<IUsableItem>();
-      this.membersManaPotionMutSet.Clear();
-      this.membersHealthPotionMutSet.Clear();
-      return result;
-    }
-    public IUsableItem GetOnlyIUsableItemOrNull() {
-      var result = GetAllIUsableItem();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return NullIUsableItem.Null;
       }
     }
              }

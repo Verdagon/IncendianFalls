@@ -16,6 +16,5 @@ public interface ILevelController {
   bool NullableIs(ILevelController that);
   string GetName();
   bool ConsiderCornersAdjacent();
-  Location GetEntryLocation(Game game, LevelSuperstate levelSuperstate, Level fromLevel, int fromLevelPortalIndex);
 }
 }

@@ -40,13 +40,6 @@ public class Root {
 
   // 0 means everything
 
-  readonly SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>> observersForSquareCaveLevelController =
-      new SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>>();
-  readonly List<SquareCaveLevelControllerCreateEffect> effectsSquareCaveLevelControllerCreateEffect =
-      new List<SquareCaveLevelControllerCreateEffect>();
-  readonly List<SquareCaveLevelControllerDeleteEffect> effectsSquareCaveLevelControllerDeleteEffect =
-      new List<SquareCaveLevelControllerDeleteEffect>();
-
   readonly SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>> observersForRidgeLevelController =
       new SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>>();
   readonly List<RidgeLevelControllerCreateEffect> effectsRidgeLevelControllerCreateEffect =
@@ -68,6 +61,20 @@ public class Root {
   readonly List<PreGauntletLevelControllerDeleteEffect> effectsPreGauntletLevelControllerDeleteEffect =
       new List<PreGauntletLevelControllerDeleteEffect>();
 
+  readonly SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCEffectObserver>> observersForIncendianFallsLevelLinkerTTC =
+      new SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCEffectObserver>>();
+  readonly List<IncendianFallsLevelLinkerTTCCreateEffect> effectsIncendianFallsLevelLinkerTTCCreateEffect =
+      new List<IncendianFallsLevelLinkerTTCCreateEffect>();
+  readonly List<IncendianFallsLevelLinkerTTCDeleteEffect> effectsIncendianFallsLevelLinkerTTCDeleteEffect =
+      new List<IncendianFallsLevelLinkerTTCDeleteEffect>();
+
+  readonly SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>> observersForSquareCaveLevelController =
+      new SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>>();
+  readonly List<SquareCaveLevelControllerCreateEffect> effectsSquareCaveLevelControllerCreateEffect =
+      new List<SquareCaveLevelControllerCreateEffect>();
+  readonly List<SquareCaveLevelControllerDeleteEffect> effectsSquareCaveLevelControllerDeleteEffect =
+      new List<SquareCaveLevelControllerDeleteEffect>();
+
   readonly SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>> observersForRavashrikeLevelController =
       new SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>>();
   readonly List<RavashrikeLevelControllerCreateEffect> effectsRavashrikeLevelControllerCreateEffect =
@@ -88,17 +95,6 @@ public class Root {
       new List<CliffLevelControllerCreateEffect>();
   readonly List<CliffLevelControllerDeleteEffect> effectsCliffLevelControllerDeleteEffect =
       new List<CliffLevelControllerDeleteEffect>();
-
-  readonly SortedDictionary<int, List<ILevelEffectObserver>> observersForLevel =
-      new SortedDictionary<int, List<ILevelEffectObserver>>();
-  readonly List<LevelCreateEffect> effectsLevelCreateEffect =
-      new List<LevelCreateEffect>();
-  readonly List<LevelDeleteEffect> effectsLevelDeleteEffect =
-      new List<LevelDeleteEffect>();
-  readonly List<LevelSetControllerEffect> effectsLevelSetControllerEffect =
-      new List<LevelSetControllerEffect>();
-  readonly List<LevelSetTimeEffect> effectsLevelSetTimeEffect =
-      new List<LevelSetTimeEffect>();
 
   readonly SortedDictionary<int, List<ITimeAnchorTTCEffectObserver>> observersForTimeAnchorTTC =
       new SortedDictionary<int, List<ITimeAnchorTTCEffectObserver>>();
@@ -132,16 +128,26 @@ public class Root {
   readonly List<TerrainSetPatternEffect> effectsTerrainSetPatternEffect =
       new List<TerrainSetPatternEffect>();
 
-  readonly SortedDictionary<int, List<IStaircaseTTCEffectObserver>> observersForStaircaseTTC =
-      new SortedDictionary<int, List<IStaircaseTTCEffectObserver>>();
-  readonly List<StaircaseTTCCreateEffect> effectsStaircaseTTCCreateEffect =
-      new List<StaircaseTTCCreateEffect>();
-  readonly List<StaircaseTTCDeleteEffect> effectsStaircaseTTCDeleteEffect =
-      new List<StaircaseTTCDeleteEffect>();
-  readonly List<StaircaseTTCSetDestinationLevelEffect> effectsStaircaseTTCSetDestinationLevelEffect =
-      new List<StaircaseTTCSetDestinationLevelEffect>();
-  readonly List<StaircaseTTCSetDestinationLevelPortalIndexEffect> effectsStaircaseTTCSetDestinationLevelPortalIndexEffect =
-      new List<StaircaseTTCSetDestinationLevelPortalIndexEffect>();
+  readonly SortedDictionary<int, List<ILevelLinkTTCEffectObserver>> observersForLevelLinkTTC =
+      new SortedDictionary<int, List<ILevelLinkTTCEffectObserver>>();
+  readonly List<LevelLinkTTCCreateEffect> effectsLevelLinkTTCCreateEffect =
+      new List<LevelLinkTTCCreateEffect>();
+  readonly List<LevelLinkTTCDeleteEffect> effectsLevelLinkTTCDeleteEffect =
+      new List<LevelLinkTTCDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IDownStairsTTCEffectObserver>> observersForDownStairsTTC =
+      new SortedDictionary<int, List<IDownStairsTTCEffectObserver>>();
+  readonly List<DownStairsTTCCreateEffect> effectsDownStairsTTCCreateEffect =
+      new List<DownStairsTTCCreateEffect>();
+  readonly List<DownStairsTTCDeleteEffect> effectsDownStairsTTCDeleteEffect =
+      new List<DownStairsTTCDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IUpStairsTTCEffectObserver>> observersForUpStairsTTC =
+      new SortedDictionary<int, List<IUpStairsTTCEffectObserver>>();
+  readonly List<UpStairsTTCCreateEffect> effectsUpStairsTTCCreateEffect =
+      new List<UpStairsTTCCreateEffect>();
+  readonly List<UpStairsTTCDeleteEffect> effectsUpStairsTTCDeleteEffect =
+      new List<UpStairsTTCDeleteEffect>();
 
   readonly SortedDictionary<int, List<IWallTTCEffectObserver>> observersForWallTTC =
       new SortedDictionary<int, List<IWallTTCEffectObserver>>();
@@ -163,20 +169,6 @@ public class Root {
       new List<RocksTTCCreateEffect>();
   readonly List<RocksTTCDeleteEffect> effectsRocksTTCDeleteEffect =
       new List<RocksTTCDeleteEffect>();
-
-  readonly SortedDictionary<int, List<IDownstairsTTCEffectObserver>> observersForDownstairsTTC =
-      new SortedDictionary<int, List<IDownstairsTTCEffectObserver>>();
-  readonly List<DownstairsTTCCreateEffect> effectsDownstairsTTCCreateEffect =
-      new List<DownstairsTTCCreateEffect>();
-  readonly List<DownstairsTTCDeleteEffect> effectsDownstairsTTCDeleteEffect =
-      new List<DownstairsTTCDeleteEffect>();
-
-  readonly SortedDictionary<int, List<IUpstairsTTCEffectObserver>> observersForUpstairsTTC =
-      new SortedDictionary<int, List<IUpstairsTTCEffectObserver>>();
-  readonly List<UpstairsTTCCreateEffect> effectsUpstairsTTCCreateEffect =
-      new List<UpstairsTTCCreateEffect>();
-  readonly List<UpstairsTTCDeleteEffect> effectsUpstairsTTCDeleteEffect =
-      new List<UpstairsTTCDeleteEffect>();
 
   readonly SortedDictionary<int, List<ICaveTTCEffectObserver>> observersForCaveTTC =
       new SortedDictionary<int, List<ICaveTTCEffectObserver>>();
@@ -268,6 +260,27 @@ public class Root {
       new List<ArmorCreateEffect>();
   readonly List<ArmorDeleteEffect> effectsArmorDeleteEffect =
       new List<ArmorDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IWatEffectObserver>> observersForWat =
+      new SortedDictionary<int, List<IWatEffectObserver>>();
+  readonly List<WatCreateEffect> effectsWatCreateEffect =
+      new List<WatCreateEffect>();
+  readonly List<WatDeleteEffect> effectsWatDeleteEffect =
+      new List<WatDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IIItemStrongMutBunchEffectObserver>> observersForIItemStrongMutBunch =
+      new SortedDictionary<int, List<IIItemStrongMutBunchEffectObserver>>();
+  readonly List<IItemStrongMutBunchCreateEffect> effectsIItemStrongMutBunchCreateEffect =
+      new List<IItemStrongMutBunchCreateEffect>();
+  readonly List<IItemStrongMutBunchDeleteEffect> effectsIItemStrongMutBunchDeleteEffect =
+      new List<IItemStrongMutBunchDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IItemTTCEffectObserver>> observersForItemTTC =
+      new SortedDictionary<int, List<IItemTTCEffectObserver>>();
+  readonly List<ItemTTCCreateEffect> effectsItemTTCCreateEffect =
+      new List<ItemTTCCreateEffect>();
+  readonly List<ItemTTCDeleteEffect> effectsItemTTCDeleteEffect =
+      new List<ItemTTCDeleteEffect>();
 
   readonly SortedDictionary<int, List<IRandEffectObserver>> observersForRand =
       new SortedDictionary<int, List<IRandEffectObserver>>();
@@ -434,6 +447,17 @@ public class Root {
   readonly List<NoImpulseDeleteEffect> effectsNoImpulseDeleteEffect =
       new List<NoImpulseDeleteEffect>();
 
+  readonly SortedDictionary<int, List<ILevelEffectObserver>> observersForLevel =
+      new SortedDictionary<int, List<ILevelEffectObserver>>();
+  readonly List<LevelCreateEffect> effectsLevelCreateEffect =
+      new List<LevelCreateEffect>();
+  readonly List<LevelDeleteEffect> effectsLevelDeleteEffect =
+      new List<LevelDeleteEffect>();
+  readonly List<LevelSetControllerEffect> effectsLevelSetControllerEffect =
+      new List<LevelSetControllerEffect>();
+  readonly List<LevelSetTimeEffect> effectsLevelSetTimeEffect =
+      new List<LevelSetTimeEffect>();
+
   readonly SortedDictionary<int, List<IExecutionStateEffectObserver>> observersForExecutionState =
       new SortedDictionary<int, List<IExecutionStateEffectObserver>>();
   readonly List<ExecutionStateCreateEffect> effectsExecutionStateCreateEffect =
@@ -564,6 +588,17 @@ public class Root {
   readonly List<TimeCloneAICapabilityUCWeakMutSetRemoveEffect> effectsTimeCloneAICapabilityUCWeakMutSetRemoveEffect =
       new List<TimeCloneAICapabilityUCWeakMutSetRemoveEffect>();
 
+  readonly SortedDictionary<int, List<IUnitMutSetEffectObserver>> observersForUnitMutSet =
+      new SortedDictionary<int, List<IUnitMutSetEffectObserver>>();
+  readonly List<UnitMutSetCreateEffect> effectsUnitMutSetCreateEffect =
+      new List<UnitMutSetCreateEffect>();
+  readonly List<UnitMutSetDeleteEffect> effectsUnitMutSetDeleteEffect =
+      new List<UnitMutSetDeleteEffect>();
+  readonly List<UnitMutSetAddEffect> effectsUnitMutSetAddEffect =
+      new List<UnitMutSetAddEffect>();
+  readonly List<UnitMutSetRemoveEffect> effectsUnitMutSetRemoveEffect =
+      new List<UnitMutSetRemoveEffect>();
+
   readonly SortedDictionary<int, List<IArmorMutSetEffectObserver>> observersForArmorMutSet =
       new SortedDictionary<int, List<IArmorMutSetEffectObserver>>();
   readonly List<ArmorMutSetCreateEffect> effectsArmorMutSetCreateEffect =
@@ -685,6 +720,83 @@ public class Root {
   readonly List<BideAICapabilityUCMutSetRemoveEffect> effectsBideAICapabilityUCMutSetRemoveEffect =
       new List<BideAICapabilityUCMutSetRemoveEffect>();
 
+  readonly SortedDictionary<int, List<IArmorStrongMutSetEffectObserver>> observersForArmorStrongMutSet =
+      new SortedDictionary<int, List<IArmorStrongMutSetEffectObserver>>();
+  readonly List<ArmorStrongMutSetCreateEffect> effectsArmorStrongMutSetCreateEffect =
+      new List<ArmorStrongMutSetCreateEffect>();
+  readonly List<ArmorStrongMutSetDeleteEffect> effectsArmorStrongMutSetDeleteEffect =
+      new List<ArmorStrongMutSetDeleteEffect>();
+  readonly List<ArmorStrongMutSetAddEffect> effectsArmorStrongMutSetAddEffect =
+      new List<ArmorStrongMutSetAddEffect>();
+  readonly List<ArmorStrongMutSetRemoveEffect> effectsArmorStrongMutSetRemoveEffect =
+      new List<ArmorStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IInertiaRingStrongMutSetEffectObserver>> observersForInertiaRingStrongMutSet =
+      new SortedDictionary<int, List<IInertiaRingStrongMutSetEffectObserver>>();
+  readonly List<InertiaRingStrongMutSetCreateEffect> effectsInertiaRingStrongMutSetCreateEffect =
+      new List<InertiaRingStrongMutSetCreateEffect>();
+  readonly List<InertiaRingStrongMutSetDeleteEffect> effectsInertiaRingStrongMutSetDeleteEffect =
+      new List<InertiaRingStrongMutSetDeleteEffect>();
+  readonly List<InertiaRingStrongMutSetAddEffect> effectsInertiaRingStrongMutSetAddEffect =
+      new List<InertiaRingStrongMutSetAddEffect>();
+  readonly List<InertiaRingStrongMutSetRemoveEffect> effectsInertiaRingStrongMutSetRemoveEffect =
+      new List<InertiaRingStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IGlaiveStrongMutSetEffectObserver>> observersForGlaiveStrongMutSet =
+      new SortedDictionary<int, List<IGlaiveStrongMutSetEffectObserver>>();
+  readonly List<GlaiveStrongMutSetCreateEffect> effectsGlaiveStrongMutSetCreateEffect =
+      new List<GlaiveStrongMutSetCreateEffect>();
+  readonly List<GlaiveStrongMutSetDeleteEffect> effectsGlaiveStrongMutSetDeleteEffect =
+      new List<GlaiveStrongMutSetDeleteEffect>();
+  readonly List<GlaiveStrongMutSetAddEffect> effectsGlaiveStrongMutSetAddEffect =
+      new List<GlaiveStrongMutSetAddEffect>();
+  readonly List<GlaiveStrongMutSetRemoveEffect> effectsGlaiveStrongMutSetRemoveEffect =
+      new List<GlaiveStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IManaPotionStrongMutSetEffectObserver>> observersForManaPotionStrongMutSet =
+      new SortedDictionary<int, List<IManaPotionStrongMutSetEffectObserver>>();
+  readonly List<ManaPotionStrongMutSetCreateEffect> effectsManaPotionStrongMutSetCreateEffect =
+      new List<ManaPotionStrongMutSetCreateEffect>();
+  readonly List<ManaPotionStrongMutSetDeleteEffect> effectsManaPotionStrongMutSetDeleteEffect =
+      new List<ManaPotionStrongMutSetDeleteEffect>();
+  readonly List<ManaPotionStrongMutSetAddEffect> effectsManaPotionStrongMutSetAddEffect =
+      new List<ManaPotionStrongMutSetAddEffect>();
+  readonly List<ManaPotionStrongMutSetRemoveEffect> effectsManaPotionStrongMutSetRemoveEffect =
+      new List<ManaPotionStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IHealthPotionStrongMutSetEffectObserver>> observersForHealthPotionStrongMutSet =
+      new SortedDictionary<int, List<IHealthPotionStrongMutSetEffectObserver>>();
+  readonly List<HealthPotionStrongMutSetCreateEffect> effectsHealthPotionStrongMutSetCreateEffect =
+      new List<HealthPotionStrongMutSetCreateEffect>();
+  readonly List<HealthPotionStrongMutSetDeleteEffect> effectsHealthPotionStrongMutSetDeleteEffect =
+      new List<HealthPotionStrongMutSetDeleteEffect>();
+  readonly List<HealthPotionStrongMutSetAddEffect> effectsHealthPotionStrongMutSetAddEffect =
+      new List<HealthPotionStrongMutSetAddEffect>();
+  readonly List<HealthPotionStrongMutSetRemoveEffect> effectsHealthPotionStrongMutSetRemoveEffect =
+      new List<HealthPotionStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IItemTTCMutSetEffectObserver>> observersForItemTTCMutSet =
+      new SortedDictionary<int, List<IItemTTCMutSetEffectObserver>>();
+  readonly List<ItemTTCMutSetCreateEffect> effectsItemTTCMutSetCreateEffect =
+      new List<ItemTTCMutSetCreateEffect>();
+  readonly List<ItemTTCMutSetDeleteEffect> effectsItemTTCMutSetDeleteEffect =
+      new List<ItemTTCMutSetDeleteEffect>();
+  readonly List<ItemTTCMutSetAddEffect> effectsItemTTCMutSetAddEffect =
+      new List<ItemTTCMutSetAddEffect>();
+  readonly List<ItemTTCMutSetRemoveEffect> effectsItemTTCMutSetRemoveEffect =
+      new List<ItemTTCMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver>> observersForIncendianFallsLevelLinkerTTCMutSet =
+      new SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver>>();
+  readonly List<IncendianFallsLevelLinkerTTCMutSetCreateEffect> effectsIncendianFallsLevelLinkerTTCMutSetCreateEffect =
+      new List<IncendianFallsLevelLinkerTTCMutSetCreateEffect>();
+  readonly List<IncendianFallsLevelLinkerTTCMutSetDeleteEffect> effectsIncendianFallsLevelLinkerTTCMutSetDeleteEffect =
+      new List<IncendianFallsLevelLinkerTTCMutSetDeleteEffect>();
+  readonly List<IncendianFallsLevelLinkerTTCMutSetAddEffect> effectsIncendianFallsLevelLinkerTTCMutSetAddEffect =
+      new List<IncendianFallsLevelLinkerTTCMutSetAddEffect>();
+  readonly List<IncendianFallsLevelLinkerTTCMutSetRemoveEffect> effectsIncendianFallsLevelLinkerTTCMutSetRemoveEffect =
+      new List<IncendianFallsLevelLinkerTTCMutSetRemoveEffect>();
+
   readonly SortedDictionary<int, List<ITimeAnchorTTCMutSetEffectObserver>> observersForTimeAnchorTTCMutSet =
       new SortedDictionary<int, List<ITimeAnchorTTCMutSetEffectObserver>>();
   readonly List<TimeAnchorTTCMutSetCreateEffect> effectsTimeAnchorTTCMutSetCreateEffect =
@@ -696,16 +808,38 @@ public class Root {
   readonly List<TimeAnchorTTCMutSetRemoveEffect> effectsTimeAnchorTTCMutSetRemoveEffect =
       new List<TimeAnchorTTCMutSetRemoveEffect>();
 
-  readonly SortedDictionary<int, List<IStaircaseTTCMutSetEffectObserver>> observersForStaircaseTTCMutSet =
-      new SortedDictionary<int, List<IStaircaseTTCMutSetEffectObserver>>();
-  readonly List<StaircaseTTCMutSetCreateEffect> effectsStaircaseTTCMutSetCreateEffect =
-      new List<StaircaseTTCMutSetCreateEffect>();
-  readonly List<StaircaseTTCMutSetDeleteEffect> effectsStaircaseTTCMutSetDeleteEffect =
-      new List<StaircaseTTCMutSetDeleteEffect>();
-  readonly List<StaircaseTTCMutSetAddEffect> effectsStaircaseTTCMutSetAddEffect =
-      new List<StaircaseTTCMutSetAddEffect>();
-  readonly List<StaircaseTTCMutSetRemoveEffect> effectsStaircaseTTCMutSetRemoveEffect =
-      new List<StaircaseTTCMutSetRemoveEffect>();
+  readonly SortedDictionary<int, List<ILevelLinkTTCMutSetEffectObserver>> observersForLevelLinkTTCMutSet =
+      new SortedDictionary<int, List<ILevelLinkTTCMutSetEffectObserver>>();
+  readonly List<LevelLinkTTCMutSetCreateEffect> effectsLevelLinkTTCMutSetCreateEffect =
+      new List<LevelLinkTTCMutSetCreateEffect>();
+  readonly List<LevelLinkTTCMutSetDeleteEffect> effectsLevelLinkTTCMutSetDeleteEffect =
+      new List<LevelLinkTTCMutSetDeleteEffect>();
+  readonly List<LevelLinkTTCMutSetAddEffect> effectsLevelLinkTTCMutSetAddEffect =
+      new List<LevelLinkTTCMutSetAddEffect>();
+  readonly List<LevelLinkTTCMutSetRemoveEffect> effectsLevelLinkTTCMutSetRemoveEffect =
+      new List<LevelLinkTTCMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IDownStairsTTCMutSetEffectObserver>> observersForDownStairsTTCMutSet =
+      new SortedDictionary<int, List<IDownStairsTTCMutSetEffectObserver>>();
+  readonly List<DownStairsTTCMutSetCreateEffect> effectsDownStairsTTCMutSetCreateEffect =
+      new List<DownStairsTTCMutSetCreateEffect>();
+  readonly List<DownStairsTTCMutSetDeleteEffect> effectsDownStairsTTCMutSetDeleteEffect =
+      new List<DownStairsTTCMutSetDeleteEffect>();
+  readonly List<DownStairsTTCMutSetAddEffect> effectsDownStairsTTCMutSetAddEffect =
+      new List<DownStairsTTCMutSetAddEffect>();
+  readonly List<DownStairsTTCMutSetRemoveEffect> effectsDownStairsTTCMutSetRemoveEffect =
+      new List<DownStairsTTCMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IUpStairsTTCMutSetEffectObserver>> observersForUpStairsTTCMutSet =
+      new SortedDictionary<int, List<IUpStairsTTCMutSetEffectObserver>>();
+  readonly List<UpStairsTTCMutSetCreateEffect> effectsUpStairsTTCMutSetCreateEffect =
+      new List<UpStairsTTCMutSetCreateEffect>();
+  readonly List<UpStairsTTCMutSetDeleteEffect> effectsUpStairsTTCMutSetDeleteEffect =
+      new List<UpStairsTTCMutSetDeleteEffect>();
+  readonly List<UpStairsTTCMutSetAddEffect> effectsUpStairsTTCMutSetAddEffect =
+      new List<UpStairsTTCMutSetAddEffect>();
+  readonly List<UpStairsTTCMutSetRemoveEffect> effectsUpStairsTTCMutSetRemoveEffect =
+      new List<UpStairsTTCMutSetRemoveEffect>();
 
   readonly SortedDictionary<int, List<IWallTTCMutSetEffectObserver>> observersForWallTTCMutSet =
       new SortedDictionary<int, List<IWallTTCMutSetEffectObserver>>();
@@ -739,28 +873,6 @@ public class Root {
       new List<RocksTTCMutSetAddEffect>();
   readonly List<RocksTTCMutSetRemoveEffect> effectsRocksTTCMutSetRemoveEffect =
       new List<RocksTTCMutSetRemoveEffect>();
-
-  readonly SortedDictionary<int, List<IDownstairsTTCMutSetEffectObserver>> observersForDownstairsTTCMutSet =
-      new SortedDictionary<int, List<IDownstairsTTCMutSetEffectObserver>>();
-  readonly List<DownstairsTTCMutSetCreateEffect> effectsDownstairsTTCMutSetCreateEffect =
-      new List<DownstairsTTCMutSetCreateEffect>();
-  readonly List<DownstairsTTCMutSetDeleteEffect> effectsDownstairsTTCMutSetDeleteEffect =
-      new List<DownstairsTTCMutSetDeleteEffect>();
-  readonly List<DownstairsTTCMutSetAddEffect> effectsDownstairsTTCMutSetAddEffect =
-      new List<DownstairsTTCMutSetAddEffect>();
-  readonly List<DownstairsTTCMutSetRemoveEffect> effectsDownstairsTTCMutSetRemoveEffect =
-      new List<DownstairsTTCMutSetRemoveEffect>();
-
-  readonly SortedDictionary<int, List<IUpstairsTTCMutSetEffectObserver>> observersForUpstairsTTCMutSet =
-      new SortedDictionary<int, List<IUpstairsTTCMutSetEffectObserver>>();
-  readonly List<UpstairsTTCMutSetCreateEffect> effectsUpstairsTTCMutSetCreateEffect =
-      new List<UpstairsTTCMutSetCreateEffect>();
-  readonly List<UpstairsTTCMutSetDeleteEffect> effectsUpstairsTTCMutSetDeleteEffect =
-      new List<UpstairsTTCMutSetDeleteEffect>();
-  readonly List<UpstairsTTCMutSetAddEffect> effectsUpstairsTTCMutSetAddEffect =
-      new List<UpstairsTTCMutSetAddEffect>();
-  readonly List<UpstairsTTCMutSetRemoveEffect> effectsUpstairsTTCMutSetRemoveEffect =
-      new List<UpstairsTTCMutSetRemoveEffect>();
 
   readonly SortedDictionary<int, List<ICaveTTCMutSetEffectObserver>> observersForCaveTTCMutSet =
       new SortedDictionary<int, List<ICaveTTCMutSetEffectObserver>>();
@@ -849,17 +961,6 @@ public class Root {
       new List<GrassTTCMutSetAddEffect>();
   readonly List<GrassTTCMutSetRemoveEffect> effectsGrassTTCMutSetRemoveEffect =
       new List<GrassTTCMutSetRemoveEffect>();
-
-  readonly SortedDictionary<int, List<IUnitMutSetEffectObserver>> observersForUnitMutSet =
-      new SortedDictionary<int, List<IUnitMutSetEffectObserver>>();
-  readonly List<UnitMutSetCreateEffect> effectsUnitMutSetCreateEffect =
-      new List<UnitMutSetCreateEffect>();
-  readonly List<UnitMutSetDeleteEffect> effectsUnitMutSetDeleteEffect =
-      new List<UnitMutSetDeleteEffect>();
-  readonly List<UnitMutSetAddEffect> effectsUnitMutSetAddEffect =
-      new List<UnitMutSetAddEffect>();
-  readonly List<UnitMutSetRemoveEffect> effectsUnitMutSetRemoveEffect =
-      new List<UnitMutSetRemoveEffect>();
 
   readonly SortedDictionary<int, List<ITerrainTileByLocationMutMapEffectObserver>> observersForTerrainTileByLocationMutMap =
       new SortedDictionary<int, List<ITerrainTileByLocationMutMapEffectObserver>>();
@@ -970,9 +1071,6 @@ public class Root {
         VERSION_HASH_MULTIPLIER * rootIncarnation.version +
         NEXT_ID_HASH_MULTIPLIER * rootIncarnation.nextId;
 
-    foreach (var entry in this.rootIncarnation.incarnationsSquareCaveLevelController) {
-      result += GetSquareCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
     foreach (var entry in this.rootIncarnation.incarnationsRidgeLevelController) {
       result += GetRidgeLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -982,6 +1080,12 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsPreGauntletLevelController) {
       result += GetPreGauntletLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC) {
+      result += GetIncendianFallsLevelLinkerTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsSquareCaveLevelController) {
+      result += GetSquareCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsRavashrikeLevelController) {
       result += GetRavashrikeLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -990,9 +1094,6 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsCliffLevelController) {
       result += GetCliffLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsLevel) {
-      result += GetLevelHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsTimeAnchorTTC) {
       result += GetTimeAnchorTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1006,8 +1107,14 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsTerrain) {
       result += GetTerrainHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsStaircaseTTC) {
-      result += GetStaircaseTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    foreach (var entry in this.rootIncarnation.incarnationsLevelLinkTTC) {
+      result += GetLevelLinkTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsDownStairsTTC) {
+      result += GetDownStairsTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsUpStairsTTC) {
+      result += GetUpStairsTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsWallTTC) {
       result += GetWallTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1017,12 +1124,6 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsRocksTTC) {
       result += GetRocksTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsDownstairsTTC) {
-      result += GetDownstairsTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsUpstairsTTC) {
-      result += GetUpstairsTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsCaveTTC) {
       result += GetCaveTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1062,6 +1163,15 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsArmor) {
       result += GetArmorHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsWat) {
+      result += GetWatHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsIItemStrongMutBunch) {
+      result += GetIItemStrongMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsItemTTC) {
+      result += GetItemTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsRand) {
       result += GetRandHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1126,6 +1236,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsNoImpulse) {
       result += GetNoImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsLevel) {
+      result += GetLevelHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsExecutionState) {
       result += GetExecutionStateHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1162,6 +1275,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet) {
       result += GetTimeCloneAICapabilityUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsUnitMutSet) {
+      result += GetUnitMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsArmorMutSet) {
       result += GetArmorMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1195,11 +1311,38 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsBideAICapabilityUCMutSet) {
       result += GetBideAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsArmorStrongMutSet) {
+      result += GetArmorStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsInertiaRingStrongMutSet) {
+      result += GetInertiaRingStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsGlaiveStrongMutSet) {
+      result += GetGlaiveStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsManaPotionStrongMutSet) {
+      result += GetManaPotionStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsHealthPotionStrongMutSet) {
+      result += GetHealthPotionStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsItemTTCMutSet) {
+      result += GetItemTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet) {
+      result += GetIncendianFallsLevelLinkerTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsTimeAnchorTTCMutSet) {
       result += GetTimeAnchorTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsStaircaseTTCMutSet) {
-      result += GetStaircaseTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    foreach (var entry in this.rootIncarnation.incarnationsLevelLinkTTCMutSet) {
+      result += GetLevelLinkTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsDownStairsTTCMutSet) {
+      result += GetDownStairsTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsUpStairsTTCMutSet) {
+      result += GetUpStairsTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsWallTTCMutSet) {
       result += GetWallTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1209,12 +1352,6 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsRocksTTCMutSet) {
       result += GetRocksTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsDownstairsTTCMutSet) {
-      result += GetDownstairsTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsUpstairsTTCMutSet) {
-      result += GetUpstairsTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsCaveTTCMutSet) {
       result += GetCaveTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1240,9 +1377,6 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsGrassTTCMutSet) {
       result += GetGrassTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsUnitMutSet) {
-      result += GetUnitMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
     foreach (var entry in this.rootIncarnation.incarnationsTerrainTileByLocationMutMap) {
       result += GetTerrainTileByLocationMutMapHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1252,9 +1386,6 @@ public class Root {
   public void CheckForViolations() {
     List<string> violations = new List<string>();
 
-    foreach (var obj in this.AllSquareCaveLevelController()) {
-      obj.CheckForNullViolations(violations);
-    }
     foreach (var obj in this.AllRidgeLevelController()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1264,6 +1395,12 @@ public class Root {
     foreach (var obj in this.AllPreGauntletLevelController()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllIncendianFallsLevelLinkerTTC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllSquareCaveLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllRavashrikeLevelController()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1271,9 +1408,6 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllCliffLevelController()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllLevel()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTimeAnchorTTC()) {
@@ -1288,7 +1422,13 @@ public class Root {
     foreach (var obj in this.AllTerrain()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllStaircaseTTC()) {
+    foreach (var obj in this.AllLevelLinkTTC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllDownStairsTTC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllUpStairsTTC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllWallTTC()) {
@@ -1298,12 +1438,6 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllRocksTTC()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllDownstairsTTC()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllUpstairsTTC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllCaveTTC()) {
@@ -1343,6 +1477,15 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllArmor()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllWat()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllIItemStrongMutBunch()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllItemTTC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllRand()) {
@@ -1408,6 +1551,9 @@ public class Root {
     foreach (var obj in this.AllNoImpulse()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllLevel()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllExecutionState()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1444,6 +1590,9 @@ public class Root {
     foreach (var obj in this.AllTimeCloneAICapabilityUCWeakMutSet()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllUnitMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllArmorMutSet()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1477,10 +1626,37 @@ public class Root {
     foreach (var obj in this.AllBideAICapabilityUCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllArmorStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllInertiaRingStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllGlaiveStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllManaPotionStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllHealthPotionStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllItemTTCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllIncendianFallsLevelLinkerTTCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllTimeAnchorTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllStaircaseTTCMutSet()) {
+    foreach (var obj in this.AllLevelLinkTTCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllDownStairsTTCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllUpStairsTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllWallTTCMutSet()) {
@@ -1490,12 +1666,6 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllRocksTTCMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllDownstairsTTCMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllUpstairsTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllCaveTTCMutSet()) {
@@ -1520,9 +1690,6 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllGrassTTCMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllUnitMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTerrainTileByLocationMutMap()) {
@@ -1533,11 +1700,6 @@ public class Root {
     foreach (var rootStruct in this.AllGame()) {
       rootStruct.FindReachableObjects(reachableIds);
     }
-    foreach (var obj in this.AllSquareCaveLevelController()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
     foreach (var obj in this.AllRidgeLevelController()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -1553,6 +1715,16 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllIncendianFallsLevelLinkerTTC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllSquareCaveLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllRavashrikeLevelController()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -1564,11 +1736,6 @@ public class Root {
       }
     }
     foreach (var obj in this.AllCliffLevelController()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllLevel()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1593,7 +1760,17 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllStaircaseTTC()) {
+    foreach (var obj in this.AllLevelLinkTTC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllDownStairsTTC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllUpStairsTTC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1609,16 +1786,6 @@ public class Root {
       }
     }
     foreach (var obj in this.AllRocksTTC()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllDownstairsTTC()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllUpstairsTTC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1684,6 +1851,21 @@ public class Root {
       }
     }
     foreach (var obj in this.AllArmor()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllWat()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllIItemStrongMutBunch()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllItemTTC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1793,6 +1975,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllLevel()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllExecutionState()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -1853,6 +2040,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllUnitMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllArmorMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -1908,12 +2100,57 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllArmorStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllInertiaRingStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllGlaiveStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllManaPotionStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllHealthPotionStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllItemTTCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllIncendianFallsLevelLinkerTTCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllTimeAnchorTTCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllStaircaseTTCMutSet()) {
+    foreach (var obj in this.AllLevelLinkTTCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllDownStairsTTCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllUpStairsTTCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1929,16 +2166,6 @@ public class Root {
       }
     }
     foreach (var obj in this.AllRocksTTCMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllDownstairsTTCMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllUpstairsTTCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -1979,11 +2206,6 @@ public class Root {
       }
     }
     foreach (var obj in this.AllGrassTTCMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllUnitMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -2006,17 +2228,6 @@ public class Root {
   public void FlushEvents() {
 
 
-
-    var copyOfObserversForSquareCaveLevelController =
-        new SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>>();
-    foreach (var entry in observersForSquareCaveLevelController) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForSquareCaveLevelController.Add(
-          objectId,
-          new List<ISquareCaveLevelControllerEffectObserver>(
-              observers));
-    }
 
     var copyOfObserversForRidgeLevelController =
         new SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>>();
@@ -2051,6 +2262,28 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForIncendianFallsLevelLinkerTTC =
+        new SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCEffectObserver>>();
+    foreach (var entry in observersForIncendianFallsLevelLinkerTTC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForIncendianFallsLevelLinkerTTC.Add(
+          objectId,
+          new List<IIncendianFallsLevelLinkerTTCEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForSquareCaveLevelController =
+        new SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>>();
+    foreach (var entry in observersForSquareCaveLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForSquareCaveLevelController.Add(
+          objectId,
+          new List<ISquareCaveLevelControllerEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForRavashrikeLevelController =
         new SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>>();
     foreach (var entry in observersForRavashrikeLevelController) {
@@ -2081,17 +2314,6 @@ public class Root {
       copyOfObserversForCliffLevelController.Add(
           objectId,
           new List<ICliffLevelControllerEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForLevel =
-        new SortedDictionary<int, List<ILevelEffectObserver>>();
-    foreach (var entry in observersForLevel) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForLevel.Add(
-          objectId,
-          new List<ILevelEffectObserver>(
               observers));
     }
 
@@ -2139,14 +2361,36 @@ public class Root {
               observers));
     }
 
-    var copyOfObserversForStaircaseTTC =
-        new SortedDictionary<int, List<IStaircaseTTCEffectObserver>>();
-    foreach (var entry in observersForStaircaseTTC) {
+    var copyOfObserversForLevelLinkTTC =
+        new SortedDictionary<int, List<ILevelLinkTTCEffectObserver>>();
+    foreach (var entry in observersForLevelLinkTTC) {
       var objectId = entry.Key;
       var observers = entry.Value;
-      copyOfObserversForStaircaseTTC.Add(
+      copyOfObserversForLevelLinkTTC.Add(
           objectId,
-          new List<IStaircaseTTCEffectObserver>(
+          new List<ILevelLinkTTCEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForDownStairsTTC =
+        new SortedDictionary<int, List<IDownStairsTTCEffectObserver>>();
+    foreach (var entry in observersForDownStairsTTC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForDownStairsTTC.Add(
+          objectId,
+          new List<IDownStairsTTCEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForUpStairsTTC =
+        new SortedDictionary<int, List<IUpStairsTTCEffectObserver>>();
+    foreach (var entry in observersForUpStairsTTC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForUpStairsTTC.Add(
+          objectId,
+          new List<IUpStairsTTCEffectObserver>(
               observers));
     }
 
@@ -2180,28 +2424,6 @@ public class Root {
       copyOfObserversForRocksTTC.Add(
           objectId,
           new List<IRocksTTCEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForDownstairsTTC =
-        new SortedDictionary<int, List<IDownstairsTTCEffectObserver>>();
-    foreach (var entry in observersForDownstairsTTC) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForDownstairsTTC.Add(
-          objectId,
-          new List<IDownstairsTTCEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForUpstairsTTC =
-        new SortedDictionary<int, List<IUpstairsTTCEffectObserver>>();
-    foreach (var entry in observersForUpstairsTTC) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForUpstairsTTC.Add(
-          objectId,
-          new List<IUpstairsTTCEffectObserver>(
               observers));
     }
 
@@ -2345,6 +2567,39 @@ public class Root {
       copyOfObserversForArmor.Add(
           objectId,
           new List<IArmorEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForWat =
+        new SortedDictionary<int, List<IWatEffectObserver>>();
+    foreach (var entry in observersForWat) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForWat.Add(
+          objectId,
+          new List<IWatEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForIItemStrongMutBunch =
+        new SortedDictionary<int, List<IIItemStrongMutBunchEffectObserver>>();
+    foreach (var entry in observersForIItemStrongMutBunch) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForIItemStrongMutBunch.Add(
+          objectId,
+          new List<IIItemStrongMutBunchEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForItemTTC =
+        new SortedDictionary<int, List<IItemTTCEffectObserver>>();
+    foreach (var entry in observersForItemTTC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForItemTTC.Add(
+          objectId,
+          new List<IItemTTCEffectObserver>(
               observers));
     }
 
@@ -2579,6 +2834,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForLevel =
+        new SortedDictionary<int, List<ILevelEffectObserver>>();
+    foreach (var entry in observersForLevel) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForLevel.Add(
+          objectId,
+          new List<ILevelEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForExecutionState =
         new SortedDictionary<int, List<IExecutionStateEffectObserver>>();
     foreach (var entry in observersForExecutionState) {
@@ -2711,6 +2977,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForUnitMutSet =
+        new SortedDictionary<int, List<IUnitMutSetEffectObserver>>();
+    foreach (var entry in observersForUnitMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForUnitMutSet.Add(
+          objectId,
+          new List<IUnitMutSetEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForArmorMutSet =
         new SortedDictionary<int, List<IArmorMutSetEffectObserver>>();
     foreach (var entry in observersForArmorMutSet) {
@@ -2832,6 +3109,83 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForArmorStrongMutSet =
+        new SortedDictionary<int, List<IArmorStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForArmorStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForArmorStrongMutSet.Add(
+          objectId,
+          new List<IArmorStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForInertiaRingStrongMutSet =
+        new SortedDictionary<int, List<IInertiaRingStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForInertiaRingStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForInertiaRingStrongMutSet.Add(
+          objectId,
+          new List<IInertiaRingStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForGlaiveStrongMutSet =
+        new SortedDictionary<int, List<IGlaiveStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForGlaiveStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForGlaiveStrongMutSet.Add(
+          objectId,
+          new List<IGlaiveStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForManaPotionStrongMutSet =
+        new SortedDictionary<int, List<IManaPotionStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForManaPotionStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForManaPotionStrongMutSet.Add(
+          objectId,
+          new List<IManaPotionStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForHealthPotionStrongMutSet =
+        new SortedDictionary<int, List<IHealthPotionStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForHealthPotionStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForHealthPotionStrongMutSet.Add(
+          objectId,
+          new List<IHealthPotionStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForItemTTCMutSet =
+        new SortedDictionary<int, List<IItemTTCMutSetEffectObserver>>();
+    foreach (var entry in observersForItemTTCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForItemTTCMutSet.Add(
+          objectId,
+          new List<IItemTTCMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForIncendianFallsLevelLinkerTTCMutSet =
+        new SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver>>();
+    foreach (var entry in observersForIncendianFallsLevelLinkerTTCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForIncendianFallsLevelLinkerTTCMutSet.Add(
+          objectId,
+          new List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForTimeAnchorTTCMutSet =
         new SortedDictionary<int, List<ITimeAnchorTTCMutSetEffectObserver>>();
     foreach (var entry in observersForTimeAnchorTTCMutSet) {
@@ -2843,14 +3197,36 @@ public class Root {
               observers));
     }
 
-    var copyOfObserversForStaircaseTTCMutSet =
-        new SortedDictionary<int, List<IStaircaseTTCMutSetEffectObserver>>();
-    foreach (var entry in observersForStaircaseTTCMutSet) {
+    var copyOfObserversForLevelLinkTTCMutSet =
+        new SortedDictionary<int, List<ILevelLinkTTCMutSetEffectObserver>>();
+    foreach (var entry in observersForLevelLinkTTCMutSet) {
       var objectId = entry.Key;
       var observers = entry.Value;
-      copyOfObserversForStaircaseTTCMutSet.Add(
+      copyOfObserversForLevelLinkTTCMutSet.Add(
           objectId,
-          new List<IStaircaseTTCMutSetEffectObserver>(
+          new List<ILevelLinkTTCMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForDownStairsTTCMutSet =
+        new SortedDictionary<int, List<IDownStairsTTCMutSetEffectObserver>>();
+    foreach (var entry in observersForDownStairsTTCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForDownStairsTTCMutSet.Add(
+          objectId,
+          new List<IDownStairsTTCMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForUpStairsTTCMutSet =
+        new SortedDictionary<int, List<IUpStairsTTCMutSetEffectObserver>>();
+    foreach (var entry in observersForUpStairsTTCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForUpStairsTTCMutSet.Add(
+          objectId,
+          new List<IUpStairsTTCMutSetEffectObserver>(
               observers));
     }
 
@@ -2884,28 +3260,6 @@ public class Root {
       copyOfObserversForRocksTTCMutSet.Add(
           objectId,
           new List<IRocksTTCMutSetEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForDownstairsTTCMutSet =
-        new SortedDictionary<int, List<IDownstairsTTCMutSetEffectObserver>>();
-    foreach (var entry in observersForDownstairsTTCMutSet) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForDownstairsTTCMutSet.Add(
-          objectId,
-          new List<IDownstairsTTCMutSetEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForUpstairsTTCMutSet =
-        new SortedDictionary<int, List<IUpstairsTTCMutSetEffectObserver>>();
-    foreach (var entry in observersForUpstairsTTCMutSet) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForUpstairsTTCMutSet.Add(
-          objectId,
-          new List<IUpstairsTTCMutSetEffectObserver>(
               observers));
     }
 
@@ -2997,17 +3351,6 @@ public class Root {
               observers));
     }
 
-    var copyOfObserversForUnitMutSet =
-        new SortedDictionary<int, List<IUnitMutSetEffectObserver>>();
-    foreach (var entry in observersForUnitMutSet) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForUnitMutSet.Add(
-          objectId,
-          new List<IUnitMutSetEffectObserver>(
-              observers));
-    }
-
     var copyOfObserversForTerrainTileByLocationMutMap =
         new SortedDictionary<int, List<ITerrainTileByLocationMutMapEffectObserver>>();
     foreach (var entry in observersForTerrainTileByLocationMutMap) {
@@ -3019,9 +3362,6 @@ public class Root {
               observers));
     }
 
-    BroadcastSquareCaveLevelControllerEffects(
-        copyOfObserversForSquareCaveLevelController);
-           
     BroadcastRidgeLevelControllerEffects(
         copyOfObserversForRidgeLevelController);
            
@@ -3031,6 +3371,12 @@ public class Root {
     BroadcastPreGauntletLevelControllerEffects(
         copyOfObserversForPreGauntletLevelController);
            
+    BroadcastIncendianFallsLevelLinkerTTCEffects(
+        copyOfObserversForIncendianFallsLevelLinkerTTC);
+           
+    BroadcastSquareCaveLevelControllerEffects(
+        copyOfObserversForSquareCaveLevelController);
+           
     BroadcastRavashrikeLevelControllerEffects(
         copyOfObserversForRavashrikeLevelController);
            
@@ -3039,9 +3385,6 @@ public class Root {
            
     BroadcastCliffLevelControllerEffects(
         copyOfObserversForCliffLevelController);
-           
-    BroadcastLevelEffects(
-        copyOfObserversForLevel);
            
     BroadcastTimeAnchorTTCEffects(
         copyOfObserversForTimeAnchorTTC);
@@ -3055,8 +3398,14 @@ public class Root {
     BroadcastTerrainEffects(
         copyOfObserversForTerrain);
            
-    BroadcastStaircaseTTCEffects(
-        copyOfObserversForStaircaseTTC);
+    BroadcastLevelLinkTTCEffects(
+        copyOfObserversForLevelLinkTTC);
+           
+    BroadcastDownStairsTTCEffects(
+        copyOfObserversForDownStairsTTC);
+           
+    BroadcastUpStairsTTCEffects(
+        copyOfObserversForUpStairsTTC);
            
     BroadcastWallTTCEffects(
         copyOfObserversForWallTTC);
@@ -3066,12 +3415,6 @@ public class Root {
            
     BroadcastRocksTTCEffects(
         copyOfObserversForRocksTTC);
-           
-    BroadcastDownstairsTTCEffects(
-        copyOfObserversForDownstairsTTC);
-           
-    BroadcastUpstairsTTCEffects(
-        copyOfObserversForUpstairsTTC);
            
     BroadcastCaveTTCEffects(
         copyOfObserversForCaveTTC);
@@ -3111,6 +3454,15 @@ public class Root {
            
     BroadcastArmorEffects(
         copyOfObserversForArmor);
+           
+    BroadcastWatEffects(
+        copyOfObserversForWat);
+           
+    BroadcastIItemStrongMutBunchEffects(
+        copyOfObserversForIItemStrongMutBunch);
+           
+    BroadcastItemTTCEffects(
+        copyOfObserversForItemTTC);
            
     BroadcastRandEffects(
         copyOfObserversForRand);
@@ -3175,6 +3527,9 @@ public class Root {
     BroadcastNoImpulseEffects(
         copyOfObserversForNoImpulse);
            
+    BroadcastLevelEffects(
+        copyOfObserversForLevel);
+           
     BroadcastExecutionStateEffects(
         copyOfObserversForExecutionState);
            
@@ -3211,6 +3566,9 @@ public class Root {
     BroadcastTimeCloneAICapabilityUCWeakMutSetEffects(
         copyOfObserversForTimeCloneAICapabilityUCWeakMutSet);
            
+    BroadcastUnitMutSetEffects(
+        copyOfObserversForUnitMutSet);
+           
     BroadcastArmorMutSetEffects(
         copyOfObserversForArmorMutSet);
            
@@ -3244,11 +3602,38 @@ public class Root {
     BroadcastBideAICapabilityUCMutSetEffects(
         copyOfObserversForBideAICapabilityUCMutSet);
            
+    BroadcastArmorStrongMutSetEffects(
+        copyOfObserversForArmorStrongMutSet);
+           
+    BroadcastInertiaRingStrongMutSetEffects(
+        copyOfObserversForInertiaRingStrongMutSet);
+           
+    BroadcastGlaiveStrongMutSetEffects(
+        copyOfObserversForGlaiveStrongMutSet);
+           
+    BroadcastManaPotionStrongMutSetEffects(
+        copyOfObserversForManaPotionStrongMutSet);
+           
+    BroadcastHealthPotionStrongMutSetEffects(
+        copyOfObserversForHealthPotionStrongMutSet);
+           
+    BroadcastItemTTCMutSetEffects(
+        copyOfObserversForItemTTCMutSet);
+           
+    BroadcastIncendianFallsLevelLinkerTTCMutSetEffects(
+        copyOfObserversForIncendianFallsLevelLinkerTTCMutSet);
+           
     BroadcastTimeAnchorTTCMutSetEffects(
         copyOfObserversForTimeAnchorTTCMutSet);
            
-    BroadcastStaircaseTTCMutSetEffects(
-        copyOfObserversForStaircaseTTCMutSet);
+    BroadcastLevelLinkTTCMutSetEffects(
+        copyOfObserversForLevelLinkTTCMutSet);
+           
+    BroadcastDownStairsTTCMutSetEffects(
+        copyOfObserversForDownStairsTTCMutSet);
+           
+    BroadcastUpStairsTTCMutSetEffects(
+        copyOfObserversForUpStairsTTCMutSet);
            
     BroadcastWallTTCMutSetEffects(
         copyOfObserversForWallTTCMutSet);
@@ -3258,12 +3643,6 @@ public class Root {
            
     BroadcastRocksTTCMutSetEffects(
         copyOfObserversForRocksTTCMutSet);
-           
-    BroadcastDownstairsTTCMutSetEffects(
-        copyOfObserversForDownstairsTTCMutSet);
-           
-    BroadcastUpstairsTTCMutSetEffects(
-        copyOfObserversForUpstairsTTCMutSet);
            
     BroadcastCaveTTCMutSetEffects(
         copyOfObserversForCaveTTCMutSet);
@@ -3289,9 +3668,6 @@ public class Root {
     BroadcastGrassTTCMutSetEffects(
         copyOfObserversForGrassTTCMutSet);
            
-    BroadcastUnitMutSetEffects(
-        copyOfObserversForUnitMutSet);
-           
     BroadcastTerrainTileByLocationMutMapEffects(
         copyOfObserversForTerrainTileByLocationMutMap);
            
@@ -3311,16 +3687,6 @@ public class Root {
     // Then we do all the removes.
 
 
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSquareCaveLevelController) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(sourceObjId)) {
-        EffectInternalCreateSquareCaveLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRidgeLevelController) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3351,6 +3717,26 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateIncendianFallsLevelLinkerTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSquareCaveLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateSquareCaveLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavashrikeLevelController) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3378,16 +3764,6 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsCliffLevelController.ContainsKey(sourceObjId)) {
         EffectInternalCreateCliffLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevel) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsLevel.ContainsKey(sourceObjId)) {
-        EffectInternalCreateLevel(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3431,13 +3807,33 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsStaircaseTTC) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevelLinkTTC) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsStaircaseTTC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateStaircaseTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      if (!rootIncarnation.incarnationsLevelLinkTTC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateLevelLinkTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDownStairsTTC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsDownStairsTTC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateDownStairsTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUpStairsTTC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsUpStairsTTC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateUpStairsTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3468,26 +3864,6 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsRocksTTC.ContainsKey(sourceObjId)) {
         EffectInternalCreateRocksTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDownstairsTTC) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsDownstairsTTC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateDownstairsTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUpstairsTTC) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsUpstairsTTC.ContainsKey(sourceObjId)) {
-        EffectInternalCreateUpstairsTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3618,6 +3994,36 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsArmor.ContainsKey(sourceObjId)) {
         EffectInternalCreateArmor(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsWat) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsWat.ContainsKey(sourceObjId)) {
+        EffectInternalCreateWat(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIItemStrongMutBunch) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsIItemStrongMutBunch.ContainsKey(sourceObjId)) {
+        EffectInternalCreateIItemStrongMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsItemTTC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsItemTTC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateItemTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -3831,6 +4237,16 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevel) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsLevel.ContainsKey(sourceObjId)) {
+        EffectInternalCreateLevel(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExecutionState) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3951,6 +4367,16 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUnitMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsUnitMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateUnitMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsArmorMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -4061,6 +4487,76 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsArmorStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsArmorStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateArmorStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsInertiaRingStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsInertiaRingStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateInertiaRingStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGlaiveStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsGlaiveStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateGlaiveStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsManaPotionStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsManaPotionStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateManaPotionStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsHealthPotionStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsHealthPotionStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateHealthPotionStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsItemTTCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsItemTTCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateItemTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateIncendianFallsLevelLinkerTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeAnchorTTCMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -4071,13 +4567,33 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsStaircaseTTCMutSet) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevelLinkTTCMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsStaircaseTTCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateStaircaseTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      if (!rootIncarnation.incarnationsLevelLinkTTCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateLevelLinkTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDownStairsTTCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsDownStairsTTCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateDownStairsTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUpStairsTTCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsUpStairsTTCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateUpStairsTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -4108,26 +4624,6 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsRocksTTCMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateRocksTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDownstairsTTCMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsDownstairsTTCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateDownstairsTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUpstairsTTCMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsUpstairsTTCMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateUpstairsTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -4208,16 +4704,6 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsGrassTTCMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateGrassTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUnitMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsUnitMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateUnitMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -4442,6 +4928,34 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUnitMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsUnitMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsUnitMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectUnitMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectUnitMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsUnitMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -4754,6 +5268,202 @@ public class Root {
         }
       }
              
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsArmorStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsArmorStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsArmorStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectArmorStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectArmorStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsArmorStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsInertiaRingStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsInertiaRingStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsInertiaRingStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectInertiaRingStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectInertiaRingStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsInertiaRingStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGlaiveStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsGlaiveStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsGlaiveStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectGlaiveStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectGlaiveStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsGlaiveStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsManaPotionStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsManaPotionStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsManaPotionStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectManaPotionStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectManaPotionStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsManaPotionStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsHealthPotionStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsHealthPotionStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsHealthPotionStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectHealthPotionStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectHealthPotionStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsHealthPotionStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsItemTTCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsItemTTCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsItemTTCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectItemTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectItemTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsItemTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectIncendianFallsLevelLinkerTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectIncendianFallsLevelLinkerTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeAnchorTTCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -4782,30 +5492,86 @@ public class Root {
         }
       }
              
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsStaircaseTTCMutSet) {
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevelLinkTTCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
         var sourceVersion = sourceVersionAndObjIncarnation.version;
         var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsStaircaseTTCMutSet.ContainsKey(objId)) {
+        if (rootIncarnation.incarnationsLevelLinkTTCMutSet.ContainsKey(objId)) {
           // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsStaircaseTTCMutSet[objId];
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsLevelLinkTTCMutSet[objId];
           var currentVersion = currentVersionAndObjIncarnation.version;
           var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
           if (currentVersion != sourceVersion) {
             foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
               if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectStaircaseTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+                EffectLevelLinkTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
               }
             }
             foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
               if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectStaircaseTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+                EffectLevelLinkTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
               }
             }
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
-            rootIncarnation.incarnationsStaircaseTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+            rootIncarnation.incarnationsLevelLinkTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDownStairsTTCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsDownStairsTTCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDownStairsTTCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectDownStairsTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectDownStairsTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsDownStairsTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUpStairsTTCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsUpStairsTTCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsUpStairsTTCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectUpStairsTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectUpStairsTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsUpStairsTTCMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -4890,62 +5656,6 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsRocksTTCMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDownstairsTTCMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsDownstairsTTCMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDownstairsTTCMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectDownstairsTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectDownstairsTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsDownstairsTTCMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUpstairsTTCMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsUpstairsTTCMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsUpstairsTTCMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectUpstairsTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectUpstairsTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsUpstairsTTCMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -5174,34 +5884,6 @@ public class Root {
         }
       }
              
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUnitMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsUnitMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsUnitMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectUnitMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectUnitMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsUnitMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTerrainTileByLocationMutMap) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -5233,27 +5915,6 @@ public class Root {
         }
       }
              
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSquareCaveLevelController) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsSquareCaveLevelController[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation. The only visible effect this has is
-          // changing the version number.
-          
-          rootIncarnation.incarnationsSquareCaveLevelController[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRidgeLevelController) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -5317,6 +5978,48 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSquareCaveLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsSquareCaveLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsSquareCaveLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavashrikeLevelController) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -5375,35 +6078,6 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsCliffLevelController[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevel) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsLevel.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsLevel[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          if (sourceObjIncarnation.controller != currentObjIncarnation.controller) {
-            EffectLevelSetController(objId, GetILevelController(sourceObjIncarnation.controller));
-          }
-
-          if (sourceObjIncarnation.time != currentObjIncarnation.time) {
-            EffectLevelSetTime(objId, sourceObjIncarnation.time);
-          }
-
-          // Swap out the underlying incarnation. The only visible effect this has is
-          // changing the version number.
-          
-          rootIncarnation.incarnationsLevel[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -5501,30 +6175,64 @@ public class Root {
       }
     }
 
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsStaircaseTTC) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevelLinkTTC) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsStaircaseTTC.ContainsKey(objId)) {
+      if (rootIncarnation.incarnationsLevelLinkTTC.ContainsKey(objId)) {
         // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsStaircaseTTC[objId];
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsLevelLinkTTC[objId];
         var currentVersion = currentVersionAndObjIncarnation.version;
         var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
         if (currentVersion != sourceVersion) {
 
-          if (sourceObjIncarnation.destinationLevel != currentObjIncarnation.destinationLevel) {
-            EffectStaircaseTTCSetDestinationLevel(objId, new Level(this, sourceObjIncarnation.destinationLevel));
-          }
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsLevelLinkTTC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
 
-          if (sourceObjIncarnation.destinationLevelPortalIndex != currentObjIncarnation.destinationLevelPortalIndex) {
-            EffectStaircaseTTCSetDestinationLevelPortalIndex(objId, sourceObjIncarnation.destinationLevelPortalIndex);
-          }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDownStairsTTC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsDownStairsTTC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDownStairsTTC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
 
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
           
-          rootIncarnation.incarnationsStaircaseTTC[objId] = sourceVersionAndObjIncarnation;
+          rootIncarnation.incarnationsDownStairsTTC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUpStairsTTC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsUpStairsTTC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsUpStairsTTC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsUpStairsTTC[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -5588,48 +6296,6 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsRocksTTC[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDownstairsTTC) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsDownstairsTTC.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDownstairsTTC[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation. The only visible effect this has is
-          // changing the version number.
-          
-          rootIncarnation.incarnationsDownstairsTTC[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUpstairsTTC) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsUpstairsTTC.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsUpstairsTTC[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation. The only visible effect this has is
-          // changing the version number.
-          
-          rootIncarnation.incarnationsUpstairsTTC[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -5903,6 +6569,69 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsArmor[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsWat) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsWat.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsWat[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsWat[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIItemStrongMutBunch) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsIItemStrongMutBunch.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIItemStrongMutBunch[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsIItemStrongMutBunch[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsItemTTC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsItemTTC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsItemTTC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsItemTTC[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -6385,6 +7114,35 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevel) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsLevel.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsLevel[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          if (sourceObjIncarnation.controller != currentObjIncarnation.controller) {
+            EffectLevelSetController(objId, GetILevelController(sourceObjIncarnation.controller));
+          }
+
+          if (sourceObjIncarnation.time != currentObjIncarnation.time) {
+            EffectLevelSetTime(objId, sourceObjIncarnation.time);
+          }
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsLevel[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExecutionState) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -6497,13 +7255,6 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>>(rootIncarnation.incarnationsSquareCaveLevelController)) {
-      if (!sourceIncarnation.incarnationsSquareCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectSquareCaveLevelControllerDelete(id);
-      }
-    }
-
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>(rootIncarnation.incarnationsRidgeLevelController)) {
       if (!sourceIncarnation.incarnationsRidgeLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -6525,6 +7276,20 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IncendianFallsLevelLinkerTTCIncarnation>>(rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC)) {
+      if (!sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectIncendianFallsLevelLinkerTTCDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>>(rootIncarnation.incarnationsSquareCaveLevelController)) {
+      if (!sourceIncarnation.incarnationsSquareCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectSquareCaveLevelControllerDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RavashrikeLevelControllerIncarnation>>(rootIncarnation.incarnationsRavashrikeLevelController)) {
       if (!sourceIncarnation.incarnationsRavashrikeLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -6543,13 +7308,6 @@ public class Root {
       if (!sourceIncarnation.incarnationsCliffLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectCliffLevelControllerDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>>(rootIncarnation.incarnationsLevel)) {
-      if (!sourceIncarnation.incarnationsLevel.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectLevelDelete(id);
       }
     }
 
@@ -6581,10 +7339,24 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<StaircaseTTCIncarnation>>(rootIncarnation.incarnationsStaircaseTTC)) {
-      if (!sourceIncarnation.incarnationsStaircaseTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LevelLinkTTCIncarnation>>(rootIncarnation.incarnationsLevelLinkTTC)) {
+      if (!sourceIncarnation.incarnationsLevelLinkTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectStaircaseTTCDelete(id);
+        EffectLevelLinkTTCDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DownStairsTTCIncarnation>>(rootIncarnation.incarnationsDownStairsTTC)) {
+      if (!sourceIncarnation.incarnationsDownStairsTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectDownStairsTTCDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<UpStairsTTCIncarnation>>(rootIncarnation.incarnationsUpStairsTTC)) {
+      if (!sourceIncarnation.incarnationsUpStairsTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectUpStairsTTCDelete(id);
       }
     }
 
@@ -6606,20 +7378,6 @@ public class Root {
       if (!sourceIncarnation.incarnationsRocksTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectRocksTTCDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DownstairsTTCIncarnation>>(rootIncarnation.incarnationsDownstairsTTC)) {
-      if (!sourceIncarnation.incarnationsDownstairsTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectDownstairsTTCDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<UpstairsTTCIncarnation>>(rootIncarnation.incarnationsUpstairsTTC)) {
-      if (!sourceIncarnation.incarnationsUpstairsTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectUpstairsTTCDelete(id);
       }
     }
 
@@ -6711,6 +7469,27 @@ public class Root {
       if (!sourceIncarnation.incarnationsArmor.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectArmorDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<WatIncarnation>>(rootIncarnation.incarnationsWat)) {
+      if (!sourceIncarnation.incarnationsWat.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectWatDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IItemStrongMutBunchIncarnation>>(rootIncarnation.incarnationsIItemStrongMutBunch)) {
+      if (!sourceIncarnation.incarnationsIItemStrongMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectIItemStrongMutBunchDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ItemTTCIncarnation>>(rootIncarnation.incarnationsItemTTC)) {
+      if (!sourceIncarnation.incarnationsItemTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectItemTTCDelete(id);
       }
     }
 
@@ -6861,6 +7640,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>>(rootIncarnation.incarnationsLevel)) {
+      if (!sourceIncarnation.incarnationsLevel.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectLevelDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ExecutionStateIncarnation>>(rootIncarnation.incarnationsExecutionState)) {
       if (!sourceIncarnation.incarnationsExecutionState.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -6945,6 +7731,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<UnitMutSetIncarnation>>(rootIncarnation.incarnationsUnitMutSet)) {
+      if (!sourceIncarnation.incarnationsUnitMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectUnitMutSetDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>>(rootIncarnation.incarnationsArmorMutSet)) {
       if (!sourceIncarnation.incarnationsArmorMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -7022,6 +7815,55 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ArmorStrongMutSetIncarnation>>(rootIncarnation.incarnationsArmorStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsArmorStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectArmorStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<InertiaRingStrongMutSetIncarnation>>(rootIncarnation.incarnationsInertiaRingStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsInertiaRingStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectInertiaRingStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<GlaiveStrongMutSetIncarnation>>(rootIncarnation.incarnationsGlaiveStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsGlaiveStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectGlaiveStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ManaPotionStrongMutSetIncarnation>>(rootIncarnation.incarnationsManaPotionStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsManaPotionStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectManaPotionStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<HealthPotionStrongMutSetIncarnation>>(rootIncarnation.incarnationsHealthPotionStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsHealthPotionStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectHealthPotionStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ItemTTCMutSetIncarnation>>(rootIncarnation.incarnationsItemTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsItemTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectItemTTCMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IncendianFallsLevelLinkerTTCMutSetIncarnation>>(rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectIncendianFallsLevelLinkerTTCMutSetDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TimeAnchorTTCMutSetIncarnation>>(rootIncarnation.incarnationsTimeAnchorTTCMutSet)) {
       if (!sourceIncarnation.incarnationsTimeAnchorTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -7029,10 +7871,24 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<StaircaseTTCMutSetIncarnation>>(rootIncarnation.incarnationsStaircaseTTCMutSet)) {
-      if (!sourceIncarnation.incarnationsStaircaseTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LevelLinkTTCMutSetIncarnation>>(rootIncarnation.incarnationsLevelLinkTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsLevelLinkTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectStaircaseTTCMutSetDelete(id);
+        EffectLevelLinkTTCMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DownStairsTTCMutSetIncarnation>>(rootIncarnation.incarnationsDownStairsTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsDownStairsTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectDownStairsTTCMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<UpStairsTTCMutSetIncarnation>>(rootIncarnation.incarnationsUpStairsTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsUpStairsTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectUpStairsTTCMutSetDelete(id);
       }
     }
 
@@ -7054,20 +7910,6 @@ public class Root {
       if (!sourceIncarnation.incarnationsRocksTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectRocksTTCMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DownstairsTTCMutSetIncarnation>>(rootIncarnation.incarnationsDownstairsTTCMutSet)) {
-      if (!sourceIncarnation.incarnationsDownstairsTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectDownstairsTTCMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<UpstairsTTCMutSetIncarnation>>(rootIncarnation.incarnationsUpstairsTTCMutSet)) {
-      if (!sourceIncarnation.incarnationsUpstairsTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectUpstairsTTCMutSetDelete(id);
       }
     }
 
@@ -7127,13 +7969,6 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<UnitMutSetIncarnation>>(rootIncarnation.incarnationsUnitMutSet)) {
-      if (!sourceIncarnation.incarnationsUnitMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectUnitMutSetDelete(id);
-      }
-    }
-
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TerrainTileByLocationMutMapIncarnation>>(rootIncarnation.incarnationsTerrainTileByLocationMutMap)) {
       if (!sourceIncarnation.incarnationsTerrainTileByLocationMutMap.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -7142,140 +7977,7 @@ public class Root {
     }
 
   }
-       public SquareCaveLevelControllerIncarnation GetSquareCaveLevelControllerIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsSquareCaveLevelController[id].incarnation;
-  }
-  public bool SquareCaveLevelControllerExists(int id) {
-    return rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id);
-  }
-  public SquareCaveLevelController GetSquareCaveLevelController(int id) {
-    return new SquareCaveLevelController(this, id);
-  }
-  public List<SquareCaveLevelController> AllSquareCaveLevelController() {
-    List<SquareCaveLevelController> result = new List<SquareCaveLevelController>(rootIncarnation.incarnationsSquareCaveLevelController.Count);
-    foreach (var id in rootIncarnation.incarnationsSquareCaveLevelController.Keys) {
-      result.Add(new SquareCaveLevelController(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<SquareCaveLevelController> EnumAllSquareCaveLevelController() {
-    foreach (var id in rootIncarnation.incarnationsSquareCaveLevelController.Keys) {
-      yield return GetSquareCaveLevelController(id);
-    }
-  }
-  public void CheckHasSquareCaveLevelController(SquareCaveLevelController thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasSquareCaveLevelController(thing.id);
-  }
-  public void CheckHasSquareCaveLevelController(int id) {
-    if (!rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
-      throw new System.Exception("Invalid SquareCaveLevelController: " + id);
-    }
-  }
-  public void AddSquareCaveLevelControllerObserver(int id, ISquareCaveLevelControllerEffectObserver observer) {
-    List<ISquareCaveLevelControllerEffectObserver> obsies;
-    if (!observersForSquareCaveLevelController.TryGetValue(id, out obsies)) {
-      obsies = new List<ISquareCaveLevelControllerEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForSquareCaveLevelController[id] = obsies;
-  }
-
-  public void RemoveSquareCaveLevelControllerObserver(int id, ISquareCaveLevelControllerEffectObserver observer) {
-    if (observersForSquareCaveLevelController.ContainsKey(id)) {
-      var list = observersForSquareCaveLevelController[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForSquareCaveLevelController.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-  public SquareCaveLevelController EffectSquareCaveLevelControllerCreate(
-      Level level,
-      int depth) {
-    CheckUnlocked();
-    CheckHasLevel(level);
-
-    var id = NewId();
-    var incarnation =
-        new SquareCaveLevelControllerIncarnation(
-            level.id,
-            depth
-            );
-    EffectInternalCreateSquareCaveLevelController(id, rootIncarnation.version, incarnation);
-    return new SquareCaveLevelController(this, id);
-  }
-  public void EffectInternalCreateSquareCaveLevelController(
-      int id,
-      int incarnationVersion,
-      SquareCaveLevelControllerIncarnation incarnation) {
-    CheckUnlocked();
-    var effect = new SquareCaveLevelControllerCreateEffect(id);
-    rootIncarnation.incarnationsSquareCaveLevelController.Add(
-        id,
-        new VersionAndIncarnation<SquareCaveLevelControllerIncarnation>(
-            incarnationVersion,
-            incarnation));
-    effectsSquareCaveLevelControllerCreateEffect.Add(effect);
-  }
-
-  public void EffectSquareCaveLevelControllerDelete(int id) {
-    CheckUnlocked();
-    var effect = new SquareCaveLevelControllerDeleteEffect(id);
-
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsSquareCaveLevelController[id];
-
-    rootIncarnation.incarnationsSquareCaveLevelController.Remove(id);
-    effectsSquareCaveLevelControllerDeleteEffect.Add(effect);
-  }
-
-     
-  public int GetSquareCaveLevelControllerHash(int id, int version, SquareCaveLevelControllerIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
-    return result;
-  }
-     
-  public void BroadcastSquareCaveLevelControllerEffects(
-      SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>> observers) {
-    foreach (var effect in effectsSquareCaveLevelControllerDeleteEffect) {
-      if (observers.TryGetValue(0, out List<ISquareCaveLevelControllerEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnSquareCaveLevelControllerEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ISquareCaveLevelControllerEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnSquareCaveLevelControllerEffect(effect);
-        }
-        observersForSquareCaveLevelController.Remove(effect.id);
-      }
-    }
-    effectsSquareCaveLevelControllerDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsSquareCaveLevelControllerCreateEffect) {
-      if (observers.TryGetValue(0, out List<ISquareCaveLevelControllerEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnSquareCaveLevelControllerEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ISquareCaveLevelControllerEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnSquareCaveLevelControllerEffect(effect);
-        }
-      }
-    }
-    effectsSquareCaveLevelControllerCreateEffect.Clear();
-  }
-  public RidgeLevelControllerIncarnation GetRidgeLevelControllerIncarnation(int id) {
+       public RidgeLevelControllerIncarnation GetRidgeLevelControllerIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
     }
@@ -7664,6 +8366,268 @@ public class Root {
       }
     }
     effectsPreGauntletLevelControllerCreateEffect.Clear();
+  }
+  public IncendianFallsLevelLinkerTTCIncarnation GetIncendianFallsLevelLinkerTTCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[id].incarnation;
+  }
+  public bool IncendianFallsLevelLinkerTTCExists(int id) {
+    return rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id);
+  }
+  public IncendianFallsLevelLinkerTTC GetIncendianFallsLevelLinkerTTC(int id) {
+    return new IncendianFallsLevelLinkerTTC(this, id);
+  }
+  public List<IncendianFallsLevelLinkerTTC> AllIncendianFallsLevelLinkerTTC() {
+    List<IncendianFallsLevelLinkerTTC> result = new List<IncendianFallsLevelLinkerTTC>(rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Keys) {
+      result.Add(new IncendianFallsLevelLinkerTTC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<IncendianFallsLevelLinkerTTC> EnumAllIncendianFallsLevelLinkerTTC() {
+    foreach (var id in rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Keys) {
+      yield return GetIncendianFallsLevelLinkerTTC(id);
+    }
+  }
+  public void CheckHasIncendianFallsLevelLinkerTTC(IncendianFallsLevelLinkerTTC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasIncendianFallsLevelLinkerTTC(thing.id);
+  }
+  public void CheckHasIncendianFallsLevelLinkerTTC(int id) {
+    if (!rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid IncendianFallsLevelLinkerTTC: " + id);
+    }
+  }
+  public void AddIncendianFallsLevelLinkerTTCObserver(int id, IIncendianFallsLevelLinkerTTCEffectObserver observer) {
+    List<IIncendianFallsLevelLinkerTTCEffectObserver> obsies;
+    if (!observersForIncendianFallsLevelLinkerTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IIncendianFallsLevelLinkerTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForIncendianFallsLevelLinkerTTC[id] = obsies;
+  }
+
+  public void RemoveIncendianFallsLevelLinkerTTCObserver(int id, IIncendianFallsLevelLinkerTTCEffectObserver observer) {
+    if (observersForIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      var list = observersForIncendianFallsLevelLinkerTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForIncendianFallsLevelLinkerTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public IncendianFallsLevelLinkerTTC EffectIncendianFallsLevelLinkerTTCCreate(
+      int thisLevelDepth) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new IncendianFallsLevelLinkerTTCIncarnation(
+            thisLevelDepth
+            );
+    EffectInternalCreateIncendianFallsLevelLinkerTTC(id, rootIncarnation.version, incarnation);
+    return new IncendianFallsLevelLinkerTTC(this, id);
+  }
+  public void EffectInternalCreateIncendianFallsLevelLinkerTTC(
+      int id,
+      int incarnationVersion,
+      IncendianFallsLevelLinkerTTCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new IncendianFallsLevelLinkerTTCCreateEffect(id);
+    rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Add(
+        id,
+        new VersionAndIncarnation<IncendianFallsLevelLinkerTTCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsIncendianFallsLevelLinkerTTCCreateEffect.Add(effect);
+  }
+
+  public void EffectIncendianFallsLevelLinkerTTCDelete(int id) {
+    CheckUnlocked();
+    var effect = new IncendianFallsLevelLinkerTTCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[id];
+
+    rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Remove(id);
+    effectsIncendianFallsLevelLinkerTTCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetIncendianFallsLevelLinkerTTCHash(int id, int version, IncendianFallsLevelLinkerTTCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.thisLevelDepth.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastIncendianFallsLevelLinkerTTCEffects(
+      SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCEffectObserver>> observers) {
+    foreach (var effect in effectsIncendianFallsLevelLinkerTTCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IIncendianFallsLevelLinkerTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIncendianFallsLevelLinkerTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCEffect(effect);
+        }
+        observersForIncendianFallsLevelLinkerTTC.Remove(effect.id);
+      }
+    }
+    effectsIncendianFallsLevelLinkerTTCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsIncendianFallsLevelLinkerTTCCreateEffect) {
+      if (observers.TryGetValue(0, out List<IIncendianFallsLevelLinkerTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIncendianFallsLevelLinkerTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCEffect(effect);
+        }
+      }
+    }
+    effectsIncendianFallsLevelLinkerTTCCreateEffect.Clear();
+  }
+  public SquareCaveLevelControllerIncarnation GetSquareCaveLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsSquareCaveLevelController[id].incarnation;
+  }
+  public bool SquareCaveLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id);
+  }
+  public SquareCaveLevelController GetSquareCaveLevelController(int id) {
+    return new SquareCaveLevelController(this, id);
+  }
+  public List<SquareCaveLevelController> AllSquareCaveLevelController() {
+    List<SquareCaveLevelController> result = new List<SquareCaveLevelController>(rootIncarnation.incarnationsSquareCaveLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsSquareCaveLevelController.Keys) {
+      result.Add(new SquareCaveLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<SquareCaveLevelController> EnumAllSquareCaveLevelController() {
+    foreach (var id in rootIncarnation.incarnationsSquareCaveLevelController.Keys) {
+      yield return GetSquareCaveLevelController(id);
+    }
+  }
+  public void CheckHasSquareCaveLevelController(SquareCaveLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasSquareCaveLevelController(thing.id);
+  }
+  public void CheckHasSquareCaveLevelController(int id) {
+    if (!rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid SquareCaveLevelController: " + id);
+    }
+  }
+  public void AddSquareCaveLevelControllerObserver(int id, ISquareCaveLevelControllerEffectObserver observer) {
+    List<ISquareCaveLevelControllerEffectObserver> obsies;
+    if (!observersForSquareCaveLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<ISquareCaveLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForSquareCaveLevelController[id] = obsies;
+  }
+
+  public void RemoveSquareCaveLevelControllerObserver(int id, ISquareCaveLevelControllerEffectObserver observer) {
+    if (observersForSquareCaveLevelController.ContainsKey(id)) {
+      var list = observersForSquareCaveLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForSquareCaveLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public SquareCaveLevelController EffectSquareCaveLevelControllerCreate(
+      Level level,
+      int depth) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new SquareCaveLevelControllerIncarnation(
+            level.id,
+            depth
+            );
+    EffectInternalCreateSquareCaveLevelController(id, rootIncarnation.version, incarnation);
+    return new SquareCaveLevelController(this, id);
+  }
+  public void EffectInternalCreateSquareCaveLevelController(
+      int id,
+      int incarnationVersion,
+      SquareCaveLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new SquareCaveLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsSquareCaveLevelController.Add(
+        id,
+        new VersionAndIncarnation<SquareCaveLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsSquareCaveLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectSquareCaveLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new SquareCaveLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsSquareCaveLevelController[id];
+
+    rootIncarnation.incarnationsSquareCaveLevelController.Remove(id);
+    effectsSquareCaveLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetSquareCaveLevelControllerHash(int id, int version, SquareCaveLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastSquareCaveLevelControllerEffects(
+      SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsSquareCaveLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ISquareCaveLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSquareCaveLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISquareCaveLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSquareCaveLevelControllerEffect(effect);
+        }
+        observersForSquareCaveLevelController.Remove(effect.id);
+      }
+    }
+    effectsSquareCaveLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsSquareCaveLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<ISquareCaveLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSquareCaveLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISquareCaveLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSquareCaveLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsSquareCaveLevelControllerCreateEffect.Clear();
   }
   public RavashrikeLevelControllerIncarnation GetRavashrikeLevelControllerIncarnation(int id) {
     if (id == 0) {
@@ -8061,231 +9025,6 @@ public class Root {
     }
     effectsCliffLevelControllerCreateEffect.Clear();
   }
-  public LevelIncarnation GetLevelIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsLevel[id].incarnation;
-  }
-  public bool LevelExists(int id) {
-    return rootIncarnation.incarnationsLevel.ContainsKey(id);
-  }
-  public Level GetLevel(int id) {
-    return new Level(this, id);
-  }
-  public List<Level> AllLevel() {
-    List<Level> result = new List<Level>(rootIncarnation.incarnationsLevel.Count);
-    foreach (var id in rootIncarnation.incarnationsLevel.Keys) {
-      result.Add(new Level(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<Level> EnumAllLevel() {
-    foreach (var id in rootIncarnation.incarnationsLevel.Keys) {
-      yield return GetLevel(id);
-    }
-  }
-  public void CheckHasLevel(Level thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasLevel(thing.id);
-  }
-  public void CheckHasLevel(int id) {
-    if (!rootIncarnation.incarnationsLevel.ContainsKey(id)) {
-      throw new System.Exception("Invalid Level: " + id);
-    }
-  }
-  public void AddLevelObserver(int id, ILevelEffectObserver observer) {
-    List<ILevelEffectObserver> obsies;
-    if (!observersForLevel.TryGetValue(id, out obsies)) {
-      obsies = new List<ILevelEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForLevel[id] = obsies;
-  }
-
-  public void RemoveLevelObserver(int id, ILevelEffectObserver observer) {
-    if (observersForLevel.ContainsKey(id)) {
-      var list = observersForLevel[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForLevel.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-  public Level EffectLevelCreate(
-      Terrain terrain,
-      UnitMutSet units,
-      int depth,
-      ILevelController controller,
-      int time) {
-    CheckUnlocked();
-    CheckHasTerrain(terrain);
-    CheckHasUnitMutSet(units);
-
-    var id = NewId();
-    var incarnation =
-        new LevelIncarnation(
-            terrain.id,
-            units.id,
-            depth,
-            controller.id,
-            time
-            );
-    EffectInternalCreateLevel(id, rootIncarnation.version, incarnation);
-    return new Level(this, id);
-  }
-  public void EffectInternalCreateLevel(
-      int id,
-      int incarnationVersion,
-      LevelIncarnation incarnation) {
-    CheckUnlocked();
-    var effect = new LevelCreateEffect(id);
-    rootIncarnation.incarnationsLevel.Add(
-        id,
-        new VersionAndIncarnation<LevelIncarnation>(
-            incarnationVersion,
-            incarnation));
-    effectsLevelCreateEffect.Add(effect);
-  }
-
-  public void EffectLevelDelete(int id) {
-    CheckUnlocked();
-    var effect = new LevelDeleteEffect(id);
-
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsLevel[id];
-
-    rootIncarnation.incarnationsLevel.Remove(id);
-    effectsLevelDeleteEffect.Add(effect);
-  }
-
-     
-  public int GetLevelHash(int id, int version, LevelIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.terrain.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.units.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.depth.GetDeterministicHashCode();
-    if (!object.ReferenceEquals(incarnation.controller, null)) {
-      result += id * version * 4 * incarnation.controller.GetDeterministicHashCode();
-    }
-    result += id * version * 5 * incarnation.time.GetDeterministicHashCode();
-    return result;
-  }
-     
-  public void BroadcastLevelEffects(
-      SortedDictionary<int, List<ILevelEffectObserver>> observers) {
-    foreach (var effect in effectsLevelDeleteEffect) {
-      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnLevelEffect(effect);
-        }
-        observersForLevel.Remove(effect.id);
-      }
-    }
-    effectsLevelDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsLevelSetControllerEffect) {
-      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-    }
-    effectsLevelSetControllerEffect.Clear();
-
-    foreach (var effect in effectsLevelSetTimeEffect) {
-      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-    }
-    effectsLevelSetTimeEffect.Clear();
-
-    foreach (var effect in effectsLevelCreateEffect) {
-      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-    }
-    effectsLevelCreateEffect.Clear();
-  }
-
-  public void EffectLevelSetController(int id, ILevelController newValue) {
-    CheckUnlocked();
-    CheckHasLevel(id);
-    var effect = new LevelSetControllerEffect(id, newValue);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsLevel[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldId = oldIncarnationAndVersion.incarnation.controller;
-      oldIncarnationAndVersion.incarnation.controller = newValue.id;
-
-    } else {
-      var newIncarnation =
-          new LevelIncarnation(
-              oldIncarnationAndVersion.incarnation.terrain,
-              oldIncarnationAndVersion.incarnation.units,
-              oldIncarnationAndVersion.incarnation.depth,
-              newValue.id,
-              oldIncarnationAndVersion.incarnation.time);
-      rootIncarnation.incarnationsLevel[id] =
-          new VersionAndIncarnation<LevelIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-    effectsLevelSetControllerEffect.Add(effect);
-  }
-
-  public void EffectLevelSetTime(int id, int newValue) {
-    CheckUnlocked();
-    CheckHasLevel(id);
-    var effect = new LevelSetTimeEffect(id, newValue);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsLevel[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.time;
-      oldIncarnationAndVersion.incarnation.time = newValue;
-
-    } else {
-      var newIncarnation =
-          new LevelIncarnation(
-              oldIncarnationAndVersion.incarnation.terrain,
-              oldIncarnationAndVersion.incarnation.units,
-              oldIncarnationAndVersion.incarnation.depth,
-              oldIncarnationAndVersion.incarnation.controller,
-              newValue);
-      rootIncarnation.incarnationsLevel[id] =
-          new VersionAndIncarnation<LevelIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-    effectsLevelSetTimeEffect.Add(effect);
-  }
   public TimeAnchorTTCIncarnation GetTimeAnchorTTCIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -8639,18 +9378,15 @@ public class Root {
     }
   }
   public ITerrainTileComponentMutBunch EffectITerrainTileComponentMutBunchCreate(
-      ArmorMutSet membersArmorMutSet,
-      InertiaRingMutSet membersInertiaRingMutSet,
-      GlaiveMutSet membersGlaiveMutSet,
-      ManaPotionMutSet membersManaPotionMutSet,
-      HealthPotionMutSet membersHealthPotionMutSet,
+      ItemTTCMutSet membersItemTTCMutSet,
+      IncendianFallsLevelLinkerTTCMutSet membersIncendianFallsLevelLinkerTTCMutSet,
       TimeAnchorTTCMutSet membersTimeAnchorTTCMutSet,
-      StaircaseTTCMutSet membersStaircaseTTCMutSet,
+      LevelLinkTTCMutSet membersLevelLinkTTCMutSet,
+      DownStairsTTCMutSet membersDownStairsTTCMutSet,
+      UpStairsTTCMutSet membersUpStairsTTCMutSet,
       WallTTCMutSet membersWallTTCMutSet,
       BloodTTCMutSet membersBloodTTCMutSet,
       RocksTTCMutSet membersRocksTTCMutSet,
-      DownstairsTTCMutSet membersDownstairsTTCMutSet,
-      UpstairsTTCMutSet membersUpstairsTTCMutSet,
       CaveTTCMutSet membersCaveTTCMutSet,
       FallsTTCMutSet membersFallsTTCMutSet,
       MagmaTTCMutSet membersMagmaTTCMutSet,
@@ -8660,18 +9396,15 @@ public class Root {
       StoneTTCMutSet membersStoneTTCMutSet,
       GrassTTCMutSet membersGrassTTCMutSet) {
     CheckUnlocked();
-    CheckHasArmorMutSet(membersArmorMutSet);
-    CheckHasInertiaRingMutSet(membersInertiaRingMutSet);
-    CheckHasGlaiveMutSet(membersGlaiveMutSet);
-    CheckHasManaPotionMutSet(membersManaPotionMutSet);
-    CheckHasHealthPotionMutSet(membersHealthPotionMutSet);
+    CheckHasItemTTCMutSet(membersItemTTCMutSet);
+    CheckHasIncendianFallsLevelLinkerTTCMutSet(membersIncendianFallsLevelLinkerTTCMutSet);
     CheckHasTimeAnchorTTCMutSet(membersTimeAnchorTTCMutSet);
-    CheckHasStaircaseTTCMutSet(membersStaircaseTTCMutSet);
+    CheckHasLevelLinkTTCMutSet(membersLevelLinkTTCMutSet);
+    CheckHasDownStairsTTCMutSet(membersDownStairsTTCMutSet);
+    CheckHasUpStairsTTCMutSet(membersUpStairsTTCMutSet);
     CheckHasWallTTCMutSet(membersWallTTCMutSet);
     CheckHasBloodTTCMutSet(membersBloodTTCMutSet);
     CheckHasRocksTTCMutSet(membersRocksTTCMutSet);
-    CheckHasDownstairsTTCMutSet(membersDownstairsTTCMutSet);
-    CheckHasUpstairsTTCMutSet(membersUpstairsTTCMutSet);
     CheckHasCaveTTCMutSet(membersCaveTTCMutSet);
     CheckHasFallsTTCMutSet(membersFallsTTCMutSet);
     CheckHasMagmaTTCMutSet(membersMagmaTTCMutSet);
@@ -8684,18 +9417,15 @@ public class Root {
     var id = NewId();
     var incarnation =
         new ITerrainTileComponentMutBunchIncarnation(
-            membersArmorMutSet.id,
-            membersInertiaRingMutSet.id,
-            membersGlaiveMutSet.id,
-            membersManaPotionMutSet.id,
-            membersHealthPotionMutSet.id,
+            membersItemTTCMutSet.id,
+            membersIncendianFallsLevelLinkerTTCMutSet.id,
             membersTimeAnchorTTCMutSet.id,
-            membersStaircaseTTCMutSet.id,
+            membersLevelLinkTTCMutSet.id,
+            membersDownStairsTTCMutSet.id,
+            membersUpStairsTTCMutSet.id,
             membersWallTTCMutSet.id,
             membersBloodTTCMutSet.id,
             membersRocksTTCMutSet.id,
-            membersDownstairsTTCMutSet.id,
-            membersUpstairsTTCMutSet.id,
             membersCaveTTCMutSet.id,
             membersFallsTTCMutSet.id,
             membersMagmaTTCMutSet.id,
@@ -8736,26 +9466,23 @@ public class Root {
      
   public int GetITerrainTileComponentMutBunchHash(int id, int version, ITerrainTileComponentMutBunchIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.membersInertiaRingMutSet.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersTimeAnchorTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.membersStaircaseTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.membersWallTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.membersBloodTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.membersRocksTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.membersDownstairsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.membersUpstairsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.membersCaveTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.membersFallsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 15 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 16 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 17 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 18 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 19 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 20 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 1 * incarnation.membersItemTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersIncendianFallsLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersTimeAnchorTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersLevelLinkTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersDownStairsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersUpStairsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersWallTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersBloodTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersRocksTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.membersCaveTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.membersFallsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 13 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 16 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 17 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -8965,218 +9692,394 @@ public class Root {
 
     effectsTerrainSetPatternEffect.Add(effect);
   }
-  public StaircaseTTCIncarnation GetStaircaseTTCIncarnation(int id) {
+  public LevelLinkTTCIncarnation GetLevelLinkTTCIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
     }
-    return rootIncarnation.incarnationsStaircaseTTC[id].incarnation;
+    return rootIncarnation.incarnationsLevelLinkTTC[id].incarnation;
   }
-  public bool StaircaseTTCExists(int id) {
-    return rootIncarnation.incarnationsStaircaseTTC.ContainsKey(id);
+  public bool LevelLinkTTCExists(int id) {
+    return rootIncarnation.incarnationsLevelLinkTTC.ContainsKey(id);
   }
-  public StaircaseTTC GetStaircaseTTC(int id) {
-    return new StaircaseTTC(this, id);
+  public LevelLinkTTC GetLevelLinkTTC(int id) {
+    return new LevelLinkTTC(this, id);
   }
-  public List<StaircaseTTC> AllStaircaseTTC() {
-    List<StaircaseTTC> result = new List<StaircaseTTC>(rootIncarnation.incarnationsStaircaseTTC.Count);
-    foreach (var id in rootIncarnation.incarnationsStaircaseTTC.Keys) {
-      result.Add(new StaircaseTTC(this, id));
+  public List<LevelLinkTTC> AllLevelLinkTTC() {
+    List<LevelLinkTTC> result = new List<LevelLinkTTC>(rootIncarnation.incarnationsLevelLinkTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsLevelLinkTTC.Keys) {
+      result.Add(new LevelLinkTTC(this, id));
     }
     return result;
   }
-  public IEnumerator<StaircaseTTC> EnumAllStaircaseTTC() {
-    foreach (var id in rootIncarnation.incarnationsStaircaseTTC.Keys) {
-      yield return GetStaircaseTTC(id);
+  public IEnumerator<LevelLinkTTC> EnumAllLevelLinkTTC() {
+    foreach (var id in rootIncarnation.incarnationsLevelLinkTTC.Keys) {
+      yield return GetLevelLinkTTC(id);
     }
   }
-  public void CheckHasStaircaseTTC(StaircaseTTC thing) {
+  public void CheckHasLevelLinkTTC(LevelLinkTTC thing) {
     CheckRootsEqual(this, thing.root);
-    CheckHasStaircaseTTC(thing.id);
+    CheckHasLevelLinkTTC(thing.id);
   }
-  public void CheckHasStaircaseTTC(int id) {
-    if (!rootIncarnation.incarnationsStaircaseTTC.ContainsKey(id)) {
-      throw new System.Exception("Invalid StaircaseTTC: " + id);
+  public void CheckHasLevelLinkTTC(int id) {
+    if (!rootIncarnation.incarnationsLevelLinkTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid LevelLinkTTC: " + id);
     }
   }
-  public void AddStaircaseTTCObserver(int id, IStaircaseTTCEffectObserver observer) {
-    List<IStaircaseTTCEffectObserver> obsies;
-    if (!observersForStaircaseTTC.TryGetValue(id, out obsies)) {
-      obsies = new List<IStaircaseTTCEffectObserver>();
+  public void AddLevelLinkTTCObserver(int id, ILevelLinkTTCEffectObserver observer) {
+    List<ILevelLinkTTCEffectObserver> obsies;
+    if (!observersForLevelLinkTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<ILevelLinkTTCEffectObserver>();
     }
     obsies.Add(observer);
-    observersForStaircaseTTC[id] = obsies;
+    observersForLevelLinkTTC[id] = obsies;
   }
 
-  public void RemoveStaircaseTTCObserver(int id, IStaircaseTTCEffectObserver observer) {
-    if (observersForStaircaseTTC.ContainsKey(id)) {
-      var list = observersForStaircaseTTC[id];
+  public void RemoveLevelLinkTTCObserver(int id, ILevelLinkTTCEffectObserver observer) {
+    if (observersForLevelLinkTTC.ContainsKey(id)) {
+      var list = observersForLevelLinkTTC[id];
       list.Remove(observer);
       if (list.Count == 0) {
-        observersForStaircaseTTC.Remove(id);
+        observersForLevelLinkTTC.Remove(id);
       }
     } else {
       throw new Exception("Couldnt find!");
     }
   }
-  public StaircaseTTC EffectStaircaseTTCCreate(
-      int portalIndex,
+  public LevelLinkTTC EffectLevelLinkTTCCreate(
       Level destinationLevel,
-      int destinationLevelPortalIndex) {
+      Location destinationLevelLocation) {
+    CheckUnlocked();
+    CheckHasLevel(destinationLevel);
+
+    var id = NewId();
+    var incarnation =
+        new LevelLinkTTCIncarnation(
+            destinationLevel.id,
+            destinationLevelLocation
+            );
+    EffectInternalCreateLevelLinkTTC(id, rootIncarnation.version, incarnation);
+    return new LevelLinkTTC(this, id);
+  }
+  public void EffectInternalCreateLevelLinkTTC(
+      int id,
+      int incarnationVersion,
+      LevelLinkTTCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new LevelLinkTTCCreateEffect(id);
+    rootIncarnation.incarnationsLevelLinkTTC.Add(
+        id,
+        new VersionAndIncarnation<LevelLinkTTCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsLevelLinkTTCCreateEffect.Add(effect);
+  }
+
+  public void EffectLevelLinkTTCDelete(int id) {
+    CheckUnlocked();
+    var effect = new LevelLinkTTCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsLevelLinkTTC[id];
+
+    rootIncarnation.incarnationsLevelLinkTTC.Remove(id);
+    effectsLevelLinkTTCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetLevelLinkTTCHash(int id, int version, LevelLinkTTCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.destinationLevel.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.destinationLevelLocation.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastLevelLinkTTCEffects(
+      SortedDictionary<int, List<ILevelLinkTTCEffectObserver>> observers) {
+    foreach (var effect in effectsLevelLinkTTCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ILevelLinkTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLevelLinkTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILevelLinkTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLevelLinkTTCEffect(effect);
+        }
+        observersForLevelLinkTTC.Remove(effect.id);
+      }
+    }
+    effectsLevelLinkTTCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsLevelLinkTTCCreateEffect) {
+      if (observers.TryGetValue(0, out List<ILevelLinkTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLevelLinkTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILevelLinkTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLevelLinkTTCEffect(effect);
+        }
+      }
+    }
+    effectsLevelLinkTTCCreateEffect.Clear();
+  }
+  public DownStairsTTCIncarnation GetDownStairsTTCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsDownStairsTTC[id].incarnation;
+  }
+  public bool DownStairsTTCExists(int id) {
+    return rootIncarnation.incarnationsDownStairsTTC.ContainsKey(id);
+  }
+  public DownStairsTTC GetDownStairsTTC(int id) {
+    return new DownStairsTTC(this, id);
+  }
+  public List<DownStairsTTC> AllDownStairsTTC() {
+    List<DownStairsTTC> result = new List<DownStairsTTC>(rootIncarnation.incarnationsDownStairsTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsDownStairsTTC.Keys) {
+      result.Add(new DownStairsTTC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<DownStairsTTC> EnumAllDownStairsTTC() {
+    foreach (var id in rootIncarnation.incarnationsDownStairsTTC.Keys) {
+      yield return GetDownStairsTTC(id);
+    }
+  }
+  public void CheckHasDownStairsTTC(DownStairsTTC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasDownStairsTTC(thing.id);
+  }
+  public void CheckHasDownStairsTTC(int id) {
+    if (!rootIncarnation.incarnationsDownStairsTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid DownStairsTTC: " + id);
+    }
+  }
+  public void AddDownStairsTTCObserver(int id, IDownStairsTTCEffectObserver observer) {
+    List<IDownStairsTTCEffectObserver> obsies;
+    if (!observersForDownStairsTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IDownStairsTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForDownStairsTTC[id] = obsies;
+  }
+
+  public void RemoveDownStairsTTCObserver(int id, IDownStairsTTCEffectObserver observer) {
+    if (observersForDownStairsTTC.ContainsKey(id)) {
+      var list = observersForDownStairsTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForDownStairsTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public DownStairsTTC EffectDownStairsTTCCreate(
+) {
     CheckUnlocked();
 
     var id = NewId();
     var incarnation =
-        new StaircaseTTCIncarnation(
-            portalIndex,
-            destinationLevel.id,
-            destinationLevelPortalIndex
+        new DownStairsTTCIncarnation(
+
             );
-    EffectInternalCreateStaircaseTTC(id, rootIncarnation.version, incarnation);
-    return new StaircaseTTC(this, id);
+    EffectInternalCreateDownStairsTTC(id, rootIncarnation.version, incarnation);
+    return new DownStairsTTC(this, id);
   }
-  public void EffectInternalCreateStaircaseTTC(
+  public void EffectInternalCreateDownStairsTTC(
       int id,
       int incarnationVersion,
-      StaircaseTTCIncarnation incarnation) {
+      DownStairsTTCIncarnation incarnation) {
     CheckUnlocked();
-    var effect = new StaircaseTTCCreateEffect(id);
-    rootIncarnation.incarnationsStaircaseTTC.Add(
+    var effect = new DownStairsTTCCreateEffect(id);
+    rootIncarnation.incarnationsDownStairsTTC.Add(
         id,
-        new VersionAndIncarnation<StaircaseTTCIncarnation>(
+        new VersionAndIncarnation<DownStairsTTCIncarnation>(
             incarnationVersion,
             incarnation));
-    effectsStaircaseTTCCreateEffect.Add(effect);
+    effectsDownStairsTTCCreateEffect.Add(effect);
   }
 
-  public void EffectStaircaseTTCDelete(int id) {
+  public void EffectDownStairsTTCDelete(int id) {
     CheckUnlocked();
-    var effect = new StaircaseTTCDeleteEffect(id);
+    var effect = new DownStairsTTCDeleteEffect(id);
 
     var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsStaircaseTTC[id];
+        rootIncarnation.incarnationsDownStairsTTC[id];
 
-    rootIncarnation.incarnationsStaircaseTTC.Remove(id);
-    effectsStaircaseTTCDeleteEffect.Add(effect);
+    rootIncarnation.incarnationsDownStairsTTC.Remove(id);
+    effectsDownStairsTTCDeleteEffect.Add(effect);
   }
 
      
-  public int GetStaircaseTTCHash(int id, int version, StaircaseTTCIncarnation incarnation) {
+  public int GetDownStairsTTCHash(int id, int version, DownStairsTTCIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.portalIndex.GetDeterministicHashCode();
-    if (!object.ReferenceEquals(incarnation.destinationLevel, null)) {
-      result += id * version * 2 * incarnation.destinationLevel.GetDeterministicHashCode();
-    }
-    result += id * version * 3 * incarnation.destinationLevelPortalIndex.GetDeterministicHashCode();
     return result;
   }
      
-  public void BroadcastStaircaseTTCEffects(
-      SortedDictionary<int, List<IStaircaseTTCEffectObserver>> observers) {
-    foreach (var effect in effectsStaircaseTTCDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IStaircaseTTCEffectObserver> globalObservers)) {
+  public void BroadcastDownStairsTTCEffects(
+      SortedDictionary<int, List<IDownStairsTTCEffectObserver>> observers) {
+    foreach (var effect in effectsDownStairsTTCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IDownStairsTTCEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnStaircaseTTCEffect(effect);
+          observer.OnDownStairsTTCEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IStaircaseTTCEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<IDownStairsTTCEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnStaircaseTTCEffect(effect);
+          observer.OnDownStairsTTCEffect(effect);
         }
-        observersForStaircaseTTC.Remove(effect.id);
+        observersForDownStairsTTC.Remove(effect.id);
       }
     }
-    effectsStaircaseTTCDeleteEffect.Clear();
+    effectsDownStairsTTCDeleteEffect.Clear();
 
 
-    foreach (var effect in effectsStaircaseTTCSetDestinationLevelEffect) {
-      if (observers.TryGetValue(0, out List<IStaircaseTTCEffectObserver> globalObservers)) {
+    foreach (var effect in effectsDownStairsTTCCreateEffect) {
+      if (observers.TryGetValue(0, out List<IDownStairsTTCEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnStaircaseTTCEffect(effect);
+          observer.OnDownStairsTTCEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IStaircaseTTCEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<IDownStairsTTCEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnStaircaseTTCEffect(effect);
-        }
-      }
-    }
-    effectsStaircaseTTCSetDestinationLevelEffect.Clear();
-
-    foreach (var effect in effectsStaircaseTTCSetDestinationLevelPortalIndexEffect) {
-      if (observers.TryGetValue(0, out List<IStaircaseTTCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnStaircaseTTCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IStaircaseTTCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnStaircaseTTCEffect(effect);
+          observer.OnDownStairsTTCEffect(effect);
         }
       }
     }
-    effectsStaircaseTTCSetDestinationLevelPortalIndexEffect.Clear();
-
-    foreach (var effect in effectsStaircaseTTCCreateEffect) {
-      if (observers.TryGetValue(0, out List<IStaircaseTTCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnStaircaseTTCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IStaircaseTTCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnStaircaseTTCEffect(effect);
-        }
-      }
+    effectsDownStairsTTCCreateEffect.Clear();
+  }
+  public UpStairsTTCIncarnation GetUpStairsTTCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
     }
-    effectsStaircaseTTCCreateEffect.Clear();
+    return rootIncarnation.incarnationsUpStairsTTC[id].incarnation;
+  }
+  public bool UpStairsTTCExists(int id) {
+    return rootIncarnation.incarnationsUpStairsTTC.ContainsKey(id);
+  }
+  public UpStairsTTC GetUpStairsTTC(int id) {
+    return new UpStairsTTC(this, id);
+  }
+  public List<UpStairsTTC> AllUpStairsTTC() {
+    List<UpStairsTTC> result = new List<UpStairsTTC>(rootIncarnation.incarnationsUpStairsTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsUpStairsTTC.Keys) {
+      result.Add(new UpStairsTTC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<UpStairsTTC> EnumAllUpStairsTTC() {
+    foreach (var id in rootIncarnation.incarnationsUpStairsTTC.Keys) {
+      yield return GetUpStairsTTC(id);
+    }
+  }
+  public void CheckHasUpStairsTTC(UpStairsTTC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasUpStairsTTC(thing.id);
+  }
+  public void CheckHasUpStairsTTC(int id) {
+    if (!rootIncarnation.incarnationsUpStairsTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid UpStairsTTC: " + id);
+    }
+  }
+  public void AddUpStairsTTCObserver(int id, IUpStairsTTCEffectObserver observer) {
+    List<IUpStairsTTCEffectObserver> obsies;
+    if (!observersForUpStairsTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IUpStairsTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForUpStairsTTC[id] = obsies;
   }
 
-  public void EffectStaircaseTTCSetDestinationLevel(int id, Level newValue) {
-    CheckUnlocked();
-    CheckHasStaircaseTTC(id);
-    var effect = new StaircaseTTCSetDestinationLevelEffect(id, newValue);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsStaircaseTTC[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldId = oldIncarnationAndVersion.incarnation.destinationLevel;
-      oldIncarnationAndVersion.incarnation.destinationLevel = newValue.id;
-
+  public void RemoveUpStairsTTCObserver(int id, IUpStairsTTCEffectObserver observer) {
+    if (observersForUpStairsTTC.ContainsKey(id)) {
+      var list = observersForUpStairsTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForUpStairsTTC.Remove(id);
+      }
     } else {
-      var newIncarnation =
-          new StaircaseTTCIncarnation(
-              oldIncarnationAndVersion.incarnation.portalIndex,
-              newValue.id,
-              oldIncarnationAndVersion.incarnation.destinationLevelPortalIndex);
-      rootIncarnation.incarnationsStaircaseTTC[id] =
-          new VersionAndIncarnation<StaircaseTTCIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
+      throw new Exception("Couldnt find!");
     }
+  }
+  public UpStairsTTC EffectUpStairsTTCCreate(
+) {
+    CheckUnlocked();
 
-    effectsStaircaseTTCSetDestinationLevelEffect.Add(effect);
+    var id = NewId();
+    var incarnation =
+        new UpStairsTTCIncarnation(
+
+            );
+    EffectInternalCreateUpStairsTTC(id, rootIncarnation.version, incarnation);
+    return new UpStairsTTC(this, id);
+  }
+  public void EffectInternalCreateUpStairsTTC(
+      int id,
+      int incarnationVersion,
+      UpStairsTTCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new UpStairsTTCCreateEffect(id);
+    rootIncarnation.incarnationsUpStairsTTC.Add(
+        id,
+        new VersionAndIncarnation<UpStairsTTCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsUpStairsTTCCreateEffect.Add(effect);
   }
 
-  public void EffectStaircaseTTCSetDestinationLevelPortalIndex(int id, int newValue) {
+  public void EffectUpStairsTTCDelete(int id) {
     CheckUnlocked();
-    CheckHasStaircaseTTC(id);
-    var effect = new StaircaseTTCSetDestinationLevelPortalIndexEffect(id, newValue);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsStaircaseTTC[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.destinationLevelPortalIndex;
-      oldIncarnationAndVersion.incarnation.destinationLevelPortalIndex = newValue;
+    var effect = new UpStairsTTCDeleteEffect(id);
 
-    } else {
-      var newIncarnation =
-          new StaircaseTTCIncarnation(
-              oldIncarnationAndVersion.incarnation.portalIndex,
-              oldIncarnationAndVersion.incarnation.destinationLevel,
-              newValue);
-      rootIncarnation.incarnationsStaircaseTTC[id] =
-          new VersionAndIncarnation<StaircaseTTCIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsUpStairsTTC[id];
+
+    rootIncarnation.incarnationsUpStairsTTC.Remove(id);
+    effectsUpStairsTTCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetUpStairsTTCHash(int id, int version, UpStairsTTCIncarnation incarnation) {
+    int result = id * version;
+    return result;
+  }
+     
+  public void BroadcastUpStairsTTCEffects(
+      SortedDictionary<int, List<IUpStairsTTCEffectObserver>> observers) {
+    foreach (var effect in effectsUpStairsTTCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IUpStairsTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUpStairsTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUpStairsTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUpStairsTTCEffect(effect);
+        }
+        observersForUpStairsTTC.Remove(effect.id);
+      }
     }
+    effectsUpStairsTTCDeleteEffect.Clear();
 
-    effectsStaircaseTTCSetDestinationLevelPortalIndexEffect.Add(effect);
+
+    foreach (var effect in effectsUpStairsTTCCreateEffect) {
+      if (observers.TryGetValue(0, out List<IUpStairsTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUpStairsTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUpStairsTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUpStairsTTCEffect(effect);
+        }
+      }
+    }
+    effectsUpStairsTTCCreateEffect.Clear();
   }
   public WallTTCIncarnation GetWallTTCIncarnation(int id) {
     if (id == 0) {
@@ -9561,262 +10464,6 @@ public class Root {
       }
     }
     effectsRocksTTCCreateEffect.Clear();
-  }
-  public DownstairsTTCIncarnation GetDownstairsTTCIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsDownstairsTTC[id].incarnation;
-  }
-  public bool DownstairsTTCExists(int id) {
-    return rootIncarnation.incarnationsDownstairsTTC.ContainsKey(id);
-  }
-  public DownstairsTTC GetDownstairsTTC(int id) {
-    return new DownstairsTTC(this, id);
-  }
-  public List<DownstairsTTC> AllDownstairsTTC() {
-    List<DownstairsTTC> result = new List<DownstairsTTC>(rootIncarnation.incarnationsDownstairsTTC.Count);
-    foreach (var id in rootIncarnation.incarnationsDownstairsTTC.Keys) {
-      result.Add(new DownstairsTTC(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<DownstairsTTC> EnumAllDownstairsTTC() {
-    foreach (var id in rootIncarnation.incarnationsDownstairsTTC.Keys) {
-      yield return GetDownstairsTTC(id);
-    }
-  }
-  public void CheckHasDownstairsTTC(DownstairsTTC thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasDownstairsTTC(thing.id);
-  }
-  public void CheckHasDownstairsTTC(int id) {
-    if (!rootIncarnation.incarnationsDownstairsTTC.ContainsKey(id)) {
-      throw new System.Exception("Invalid DownstairsTTC: " + id);
-    }
-  }
-  public void AddDownstairsTTCObserver(int id, IDownstairsTTCEffectObserver observer) {
-    List<IDownstairsTTCEffectObserver> obsies;
-    if (!observersForDownstairsTTC.TryGetValue(id, out obsies)) {
-      obsies = new List<IDownstairsTTCEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForDownstairsTTC[id] = obsies;
-  }
-
-  public void RemoveDownstairsTTCObserver(int id, IDownstairsTTCEffectObserver observer) {
-    if (observersForDownstairsTTC.ContainsKey(id)) {
-      var list = observersForDownstairsTTC[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForDownstairsTTC.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-  public DownstairsTTC EffectDownstairsTTCCreate(
-) {
-    CheckUnlocked();
-
-    var id = NewId();
-    var incarnation =
-        new DownstairsTTCIncarnation(
-
-            );
-    EffectInternalCreateDownstairsTTC(id, rootIncarnation.version, incarnation);
-    return new DownstairsTTC(this, id);
-  }
-  public void EffectInternalCreateDownstairsTTC(
-      int id,
-      int incarnationVersion,
-      DownstairsTTCIncarnation incarnation) {
-    CheckUnlocked();
-    var effect = new DownstairsTTCCreateEffect(id);
-    rootIncarnation.incarnationsDownstairsTTC.Add(
-        id,
-        new VersionAndIncarnation<DownstairsTTCIncarnation>(
-            incarnationVersion,
-            incarnation));
-    effectsDownstairsTTCCreateEffect.Add(effect);
-  }
-
-  public void EffectDownstairsTTCDelete(int id) {
-    CheckUnlocked();
-    var effect = new DownstairsTTCDeleteEffect(id);
-
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsDownstairsTTC[id];
-
-    rootIncarnation.incarnationsDownstairsTTC.Remove(id);
-    effectsDownstairsTTCDeleteEffect.Add(effect);
-  }
-
-     
-  public int GetDownstairsTTCHash(int id, int version, DownstairsTTCIncarnation incarnation) {
-    int result = id * version;
-    return result;
-  }
-     
-  public void BroadcastDownstairsTTCEffects(
-      SortedDictionary<int, List<IDownstairsTTCEffectObserver>> observers) {
-    foreach (var effect in effectsDownstairsTTCDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IDownstairsTTCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnDownstairsTTCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IDownstairsTTCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnDownstairsTTCEffect(effect);
-        }
-        observersForDownstairsTTC.Remove(effect.id);
-      }
-    }
-    effectsDownstairsTTCDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsDownstairsTTCCreateEffect) {
-      if (observers.TryGetValue(0, out List<IDownstairsTTCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnDownstairsTTCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IDownstairsTTCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnDownstairsTTCEffect(effect);
-        }
-      }
-    }
-    effectsDownstairsTTCCreateEffect.Clear();
-  }
-  public UpstairsTTCIncarnation GetUpstairsTTCIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsUpstairsTTC[id].incarnation;
-  }
-  public bool UpstairsTTCExists(int id) {
-    return rootIncarnation.incarnationsUpstairsTTC.ContainsKey(id);
-  }
-  public UpstairsTTC GetUpstairsTTC(int id) {
-    return new UpstairsTTC(this, id);
-  }
-  public List<UpstairsTTC> AllUpstairsTTC() {
-    List<UpstairsTTC> result = new List<UpstairsTTC>(rootIncarnation.incarnationsUpstairsTTC.Count);
-    foreach (var id in rootIncarnation.incarnationsUpstairsTTC.Keys) {
-      result.Add(new UpstairsTTC(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<UpstairsTTC> EnumAllUpstairsTTC() {
-    foreach (var id in rootIncarnation.incarnationsUpstairsTTC.Keys) {
-      yield return GetUpstairsTTC(id);
-    }
-  }
-  public void CheckHasUpstairsTTC(UpstairsTTC thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasUpstairsTTC(thing.id);
-  }
-  public void CheckHasUpstairsTTC(int id) {
-    if (!rootIncarnation.incarnationsUpstairsTTC.ContainsKey(id)) {
-      throw new System.Exception("Invalid UpstairsTTC: " + id);
-    }
-  }
-  public void AddUpstairsTTCObserver(int id, IUpstairsTTCEffectObserver observer) {
-    List<IUpstairsTTCEffectObserver> obsies;
-    if (!observersForUpstairsTTC.TryGetValue(id, out obsies)) {
-      obsies = new List<IUpstairsTTCEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForUpstairsTTC[id] = obsies;
-  }
-
-  public void RemoveUpstairsTTCObserver(int id, IUpstairsTTCEffectObserver observer) {
-    if (observersForUpstairsTTC.ContainsKey(id)) {
-      var list = observersForUpstairsTTC[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForUpstairsTTC.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-  public UpstairsTTC EffectUpstairsTTCCreate(
-) {
-    CheckUnlocked();
-
-    var id = NewId();
-    var incarnation =
-        new UpstairsTTCIncarnation(
-
-            );
-    EffectInternalCreateUpstairsTTC(id, rootIncarnation.version, incarnation);
-    return new UpstairsTTC(this, id);
-  }
-  public void EffectInternalCreateUpstairsTTC(
-      int id,
-      int incarnationVersion,
-      UpstairsTTCIncarnation incarnation) {
-    CheckUnlocked();
-    var effect = new UpstairsTTCCreateEffect(id);
-    rootIncarnation.incarnationsUpstairsTTC.Add(
-        id,
-        new VersionAndIncarnation<UpstairsTTCIncarnation>(
-            incarnationVersion,
-            incarnation));
-    effectsUpstairsTTCCreateEffect.Add(effect);
-  }
-
-  public void EffectUpstairsTTCDelete(int id) {
-    CheckUnlocked();
-    var effect = new UpstairsTTCDeleteEffect(id);
-
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsUpstairsTTC[id];
-
-    rootIncarnation.incarnationsUpstairsTTC.Remove(id);
-    effectsUpstairsTTCDeleteEffect.Add(effect);
-  }
-
-     
-  public int GetUpstairsTTCHash(int id, int version, UpstairsTTCIncarnation incarnation) {
-    int result = id * version;
-    return result;
-  }
-     
-  public void BroadcastUpstairsTTCEffects(
-      SortedDictionary<int, List<IUpstairsTTCEffectObserver>> observers) {
-    foreach (var effect in effectsUpstairsTTCDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IUpstairsTTCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUpstairsTTCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IUpstairsTTCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUpstairsTTCEffect(effect);
-        }
-        observersForUpstairsTTC.Remove(effect.id);
-      }
-    }
-    effectsUpstairsTTCDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsUpstairsTTCCreateEffect) {
-      if (observers.TryGetValue(0, out List<IUpstairsTTCEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUpstairsTTCEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IUpstairsTTCEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUpstairsTTCEffect(effect);
-        }
-      }
-    }
-    effectsUpstairsTTCCreateEffect.Clear();
   }
   public CaveTTCIncarnation GetCaveTTCIncarnation(int id) {
     if (id == 0) {
@@ -11481,6 +12128,412 @@ public class Root {
       }
     }
     effectsArmorCreateEffect.Clear();
+  }
+  public WatIncarnation GetWatIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsWat[id].incarnation;
+  }
+  public bool WatExists(int id) {
+    return rootIncarnation.incarnationsWat.ContainsKey(id);
+  }
+  public Wat GetWat(int id) {
+    return new Wat(this, id);
+  }
+  public List<Wat> AllWat() {
+    List<Wat> result = new List<Wat>(rootIncarnation.incarnationsWat.Count);
+    foreach (var id in rootIncarnation.incarnationsWat.Keys) {
+      result.Add(new Wat(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<Wat> EnumAllWat() {
+    foreach (var id in rootIncarnation.incarnationsWat.Keys) {
+      yield return GetWat(id);
+    }
+  }
+  public void CheckHasWat(Wat thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasWat(thing.id);
+  }
+  public void CheckHasWat(int id) {
+    if (!rootIncarnation.incarnationsWat.ContainsKey(id)) {
+      throw new System.Exception("Invalid Wat: " + id);
+    }
+  }
+  public void AddWatObserver(int id, IWatEffectObserver observer) {
+    List<IWatEffectObserver> obsies;
+    if (!observersForWat.TryGetValue(id, out obsies)) {
+      obsies = new List<IWatEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForWat[id] = obsies;
+  }
+
+  public void RemoveWatObserver(int id, IWatEffectObserver observer) {
+    if (observersForWat.ContainsKey(id)) {
+      var list = observersForWat[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForWat.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public Wat EffectWatCreate(
+      IItemStrongMutBunch items) {
+    CheckUnlocked();
+    CheckHasIItemStrongMutBunch(items);
+
+    var id = NewId();
+    var incarnation =
+        new WatIncarnation(
+            items.id
+            );
+    EffectInternalCreateWat(id, rootIncarnation.version, incarnation);
+    return new Wat(this, id);
+  }
+  public void EffectInternalCreateWat(
+      int id,
+      int incarnationVersion,
+      WatIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new WatCreateEffect(id);
+    rootIncarnation.incarnationsWat.Add(
+        id,
+        new VersionAndIncarnation<WatIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsWatCreateEffect.Add(effect);
+  }
+
+  public void EffectWatDelete(int id) {
+    CheckUnlocked();
+    var effect = new WatDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsWat[id];
+
+    rootIncarnation.incarnationsWat.Remove(id);
+    effectsWatDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetWatHash(int id, int version, WatIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.items.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastWatEffects(
+      SortedDictionary<int, List<IWatEffectObserver>> observers) {
+    foreach (var effect in effectsWatDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IWatEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnWatEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IWatEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnWatEffect(effect);
+        }
+        observersForWat.Remove(effect.id);
+      }
+    }
+    effectsWatDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsWatCreateEffect) {
+      if (observers.TryGetValue(0, out List<IWatEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnWatEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IWatEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnWatEffect(effect);
+        }
+      }
+    }
+    effectsWatCreateEffect.Clear();
+  }
+  public IItemStrongMutBunchIncarnation GetIItemStrongMutBunchIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsIItemStrongMutBunch[id].incarnation;
+  }
+  public bool IItemStrongMutBunchExists(int id) {
+    return rootIncarnation.incarnationsIItemStrongMutBunch.ContainsKey(id);
+  }
+  public IItemStrongMutBunch GetIItemStrongMutBunch(int id) {
+    return new IItemStrongMutBunch(this, id);
+  }
+  public List<IItemStrongMutBunch> AllIItemStrongMutBunch() {
+    List<IItemStrongMutBunch> result = new List<IItemStrongMutBunch>(rootIncarnation.incarnationsIItemStrongMutBunch.Count);
+    foreach (var id in rootIncarnation.incarnationsIItemStrongMutBunch.Keys) {
+      result.Add(new IItemStrongMutBunch(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<IItemStrongMutBunch> EnumAllIItemStrongMutBunch() {
+    foreach (var id in rootIncarnation.incarnationsIItemStrongMutBunch.Keys) {
+      yield return GetIItemStrongMutBunch(id);
+    }
+  }
+  public void CheckHasIItemStrongMutBunch(IItemStrongMutBunch thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasIItemStrongMutBunch(thing.id);
+  }
+  public void CheckHasIItemStrongMutBunch(int id) {
+    if (!rootIncarnation.incarnationsIItemStrongMutBunch.ContainsKey(id)) {
+      throw new System.Exception("Invalid IItemStrongMutBunch: " + id);
+    }
+  }
+  public void AddIItemStrongMutBunchObserver(int id, IIItemStrongMutBunchEffectObserver observer) {
+    List<IIItemStrongMutBunchEffectObserver> obsies;
+    if (!observersForIItemStrongMutBunch.TryGetValue(id, out obsies)) {
+      obsies = new List<IIItemStrongMutBunchEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForIItemStrongMutBunch[id] = obsies;
+  }
+
+  public void RemoveIItemStrongMutBunchObserver(int id, IIItemStrongMutBunchEffectObserver observer) {
+    if (observersForIItemStrongMutBunch.ContainsKey(id)) {
+      var list = observersForIItemStrongMutBunch[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForIItemStrongMutBunch.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public IItemStrongMutBunch EffectIItemStrongMutBunchCreate(
+      ArmorStrongMutSet membersArmorStrongMutSet,
+      InertiaRingStrongMutSet membersInertiaRingStrongMutSet,
+      GlaiveStrongMutSet membersGlaiveStrongMutSet,
+      ManaPotionStrongMutSet membersManaPotionStrongMutSet,
+      HealthPotionStrongMutSet membersHealthPotionStrongMutSet) {
+    CheckUnlocked();
+    CheckHasArmorStrongMutSet(membersArmorStrongMutSet);
+    CheckHasInertiaRingStrongMutSet(membersInertiaRingStrongMutSet);
+    CheckHasGlaiveStrongMutSet(membersGlaiveStrongMutSet);
+    CheckHasManaPotionStrongMutSet(membersManaPotionStrongMutSet);
+    CheckHasHealthPotionStrongMutSet(membersHealthPotionStrongMutSet);
+
+    var id = NewId();
+    var incarnation =
+        new IItemStrongMutBunchIncarnation(
+            membersArmorStrongMutSet.id,
+            membersInertiaRingStrongMutSet.id,
+            membersGlaiveStrongMutSet.id,
+            membersManaPotionStrongMutSet.id,
+            membersHealthPotionStrongMutSet.id
+            );
+    EffectInternalCreateIItemStrongMutBunch(id, rootIncarnation.version, incarnation);
+    return new IItemStrongMutBunch(this, id);
+  }
+  public void EffectInternalCreateIItemStrongMutBunch(
+      int id,
+      int incarnationVersion,
+      IItemStrongMutBunchIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new IItemStrongMutBunchCreateEffect(id);
+    rootIncarnation.incarnationsIItemStrongMutBunch.Add(
+        id,
+        new VersionAndIncarnation<IItemStrongMutBunchIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsIItemStrongMutBunchCreateEffect.Add(effect);
+  }
+
+  public void EffectIItemStrongMutBunchDelete(int id) {
+    CheckUnlocked();
+    var effect = new IItemStrongMutBunchDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsIItemStrongMutBunch[id];
+
+    rootIncarnation.incarnationsIItemStrongMutBunch.Remove(id);
+    effectsIItemStrongMutBunchDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetIItemStrongMutBunchHash(int id, int version, IItemStrongMutBunchIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.membersArmorStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersInertiaRingStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersGlaiveStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersManaPotionStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersHealthPotionStrongMutSet.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastIItemStrongMutBunchEffects(
+      SortedDictionary<int, List<IIItemStrongMutBunchEffectObserver>> observers) {
+    foreach (var effect in effectsIItemStrongMutBunchDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IIItemStrongMutBunchEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIItemStrongMutBunchEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIItemStrongMutBunchEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIItemStrongMutBunchEffect(effect);
+        }
+        observersForIItemStrongMutBunch.Remove(effect.id);
+      }
+    }
+    effectsIItemStrongMutBunchDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsIItemStrongMutBunchCreateEffect) {
+      if (observers.TryGetValue(0, out List<IIItemStrongMutBunchEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIItemStrongMutBunchEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIItemStrongMutBunchEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIItemStrongMutBunchEffect(effect);
+        }
+      }
+    }
+    effectsIItemStrongMutBunchCreateEffect.Clear();
+  }
+  public ItemTTCIncarnation GetItemTTCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsItemTTC[id].incarnation;
+  }
+  public bool ItemTTCExists(int id) {
+    return rootIncarnation.incarnationsItemTTC.ContainsKey(id);
+  }
+  public ItemTTC GetItemTTC(int id) {
+    return new ItemTTC(this, id);
+  }
+  public List<ItemTTC> AllItemTTC() {
+    List<ItemTTC> result = new List<ItemTTC>(rootIncarnation.incarnationsItemTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsItemTTC.Keys) {
+      result.Add(new ItemTTC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<ItemTTC> EnumAllItemTTC() {
+    foreach (var id in rootIncarnation.incarnationsItemTTC.Keys) {
+      yield return GetItemTTC(id);
+    }
+  }
+  public void CheckHasItemTTC(ItemTTC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasItemTTC(thing.id);
+  }
+  public void CheckHasItemTTC(int id) {
+    if (!rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid ItemTTC: " + id);
+    }
+  }
+  public void AddItemTTCObserver(int id, IItemTTCEffectObserver observer) {
+    List<IItemTTCEffectObserver> obsies;
+    if (!observersForItemTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IItemTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForItemTTC[id] = obsies;
+  }
+
+  public void RemoveItemTTCObserver(int id, IItemTTCEffectObserver observer) {
+    if (observersForItemTTC.ContainsKey(id)) {
+      var list = observersForItemTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForItemTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public ItemTTC EffectItemTTCCreate(
+      IItem item) {
+    CheckUnlocked();
+    CheckHasIItem(item);
+
+    var id = NewId();
+    var incarnation =
+        new ItemTTCIncarnation(
+            item.id
+            );
+    EffectInternalCreateItemTTC(id, rootIncarnation.version, incarnation);
+    return new ItemTTC(this, id);
+  }
+  public void EffectInternalCreateItemTTC(
+      int id,
+      int incarnationVersion,
+      ItemTTCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new ItemTTCCreateEffect(id);
+    rootIncarnation.incarnationsItemTTC.Add(
+        id,
+        new VersionAndIncarnation<ItemTTCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsItemTTCCreateEffect.Add(effect);
+  }
+
+  public void EffectItemTTCDelete(int id) {
+    CheckUnlocked();
+    var effect = new ItemTTCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsItemTTC[id];
+
+    rootIncarnation.incarnationsItemTTC.Remove(id);
+    effectsItemTTCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetItemTTCHash(int id, int version, ItemTTCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.item.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastItemTTCEffects(
+      SortedDictionary<int, List<IItemTTCEffectObserver>> observers) {
+    foreach (var effect in effectsItemTTCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IItemTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnItemTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IItemTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnItemTTCEffect(effect);
+        }
+        observersForItemTTC.Remove(effect.id);
+      }
+    }
+    effectsItemTTCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsItemTTCCreateEffect) {
+      if (observers.TryGetValue(0, out List<IItemTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnItemTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IItemTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnItemTTCEffect(effect);
+        }
+      }
+    }
+    effectsItemTTCCreateEffect.Clear();
   }
   public RandIncarnation GetRandIncarnation(int id) {
     if (id == 0) {
@@ -14690,6 +15743,226 @@ public class Root {
     }
     effectsNoImpulseCreateEffect.Clear();
   }
+  public LevelIncarnation GetLevelIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsLevel[id].incarnation;
+  }
+  public bool LevelExists(int id) {
+    return rootIncarnation.incarnationsLevel.ContainsKey(id);
+  }
+  public Level GetLevel(int id) {
+    return new Level(this, id);
+  }
+  public List<Level> AllLevel() {
+    List<Level> result = new List<Level>(rootIncarnation.incarnationsLevel.Count);
+    foreach (var id in rootIncarnation.incarnationsLevel.Keys) {
+      result.Add(new Level(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<Level> EnumAllLevel() {
+    foreach (var id in rootIncarnation.incarnationsLevel.Keys) {
+      yield return GetLevel(id);
+    }
+  }
+  public void CheckHasLevel(Level thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasLevel(thing.id);
+  }
+  public void CheckHasLevel(int id) {
+    if (!rootIncarnation.incarnationsLevel.ContainsKey(id)) {
+      throw new System.Exception("Invalid Level: " + id);
+    }
+  }
+  public void AddLevelObserver(int id, ILevelEffectObserver observer) {
+    List<ILevelEffectObserver> obsies;
+    if (!observersForLevel.TryGetValue(id, out obsies)) {
+      obsies = new List<ILevelEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForLevel[id] = obsies;
+  }
+
+  public void RemoveLevelObserver(int id, ILevelEffectObserver observer) {
+    if (observersForLevel.ContainsKey(id)) {
+      var list = observersForLevel[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForLevel.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public Level EffectLevelCreate(
+      Terrain terrain,
+      UnitMutSet units,
+      ILevelController controller,
+      int time) {
+    CheckUnlocked();
+    CheckHasTerrain(terrain);
+    CheckHasUnitMutSet(units);
+
+    var id = NewId();
+    var incarnation =
+        new LevelIncarnation(
+            terrain.id,
+            units.id,
+            controller.id,
+            time
+            );
+    EffectInternalCreateLevel(id, rootIncarnation.version, incarnation);
+    return new Level(this, id);
+  }
+  public void EffectInternalCreateLevel(
+      int id,
+      int incarnationVersion,
+      LevelIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new LevelCreateEffect(id);
+    rootIncarnation.incarnationsLevel.Add(
+        id,
+        new VersionAndIncarnation<LevelIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsLevelCreateEffect.Add(effect);
+  }
+
+  public void EffectLevelDelete(int id) {
+    CheckUnlocked();
+    var effect = new LevelDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsLevel[id];
+
+    rootIncarnation.incarnationsLevel.Remove(id);
+    effectsLevelDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetLevelHash(int id, int version, LevelIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.terrain.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.units.GetDeterministicHashCode();
+    if (!object.ReferenceEquals(incarnation.controller, null)) {
+      result += id * version * 3 * incarnation.controller.GetDeterministicHashCode();
+    }
+    result += id * version * 4 * incarnation.time.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastLevelEffects(
+      SortedDictionary<int, List<ILevelEffectObserver>> observers) {
+    foreach (var effect in effectsLevelDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLevelEffect(effect);
+        }
+        observersForLevel.Remove(effect.id);
+      }
+    }
+    effectsLevelDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsLevelSetControllerEffect) {
+      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+    }
+    effectsLevelSetControllerEffect.Clear();
+
+    foreach (var effect in effectsLevelSetTimeEffect) {
+      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+    }
+    effectsLevelSetTimeEffect.Clear();
+
+    foreach (var effect in effectsLevelCreateEffect) {
+      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLevelEffect(effect);
+        }
+      }
+    }
+    effectsLevelCreateEffect.Clear();
+  }
+
+  public void EffectLevelSetController(int id, ILevelController newValue) {
+    CheckUnlocked();
+    CheckHasLevel(id);
+    var effect = new LevelSetControllerEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsLevel[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldId = oldIncarnationAndVersion.incarnation.controller;
+      oldIncarnationAndVersion.incarnation.controller = newValue.id;
+
+    } else {
+      var newIncarnation =
+          new LevelIncarnation(
+              oldIncarnationAndVersion.incarnation.terrain,
+              oldIncarnationAndVersion.incarnation.units,
+              newValue.id,
+              oldIncarnationAndVersion.incarnation.time);
+      rootIncarnation.incarnationsLevel[id] =
+          new VersionAndIncarnation<LevelIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsLevelSetControllerEffect.Add(effect);
+  }
+
+  public void EffectLevelSetTime(int id, int newValue) {
+    CheckUnlocked();
+    CheckHasLevel(id);
+    var effect = new LevelSetTimeEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsLevel[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.time;
+      oldIncarnationAndVersion.incarnation.time = newValue;
+
+    } else {
+      var newIncarnation =
+          new LevelIncarnation(
+              oldIncarnationAndVersion.incarnation.terrain,
+              oldIncarnationAndVersion.incarnation.units,
+              oldIncarnationAndVersion.incarnation.controller,
+              newValue);
+      rootIncarnation.incarnationsLevel[id] =
+          new VersionAndIncarnation<LevelIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsLevelSetTimeEffect.Add(effect);
+  }
   public ExecutionStateIncarnation GetExecutionStateIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -15314,7 +16587,6 @@ public class Root {
   public Game EffectGameCreate(
       Rand rand,
       bool squareLevelsOnly,
-      bool gauntletMode,
       LevelMutSet levels,
       Unit player,
       Level level,
@@ -15330,7 +16602,6 @@ public class Root {
         new GameIncarnation(
             rand.id,
             squareLevelsOnly,
-            gauntletMode,
             levels.id,
             player.id,
             level.id,
@@ -15370,16 +16641,15 @@ public class Root {
     int result = id * version;
     result += id * version * 1 * incarnation.rand.GetDeterministicHashCode();
     result += id * version * 2 * incarnation.squareLevelsOnly.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.gauntletMode.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.levels.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.levels.GetDeterministicHashCode();
     if (!object.ReferenceEquals(incarnation.player, null)) {
-      result += id * version * 5 * incarnation.player.GetDeterministicHashCode();
+      result += id * version * 4 * incarnation.player.GetDeterministicHashCode();
     }
     if (!object.ReferenceEquals(incarnation.level, null)) {
-      result += id * version * 6 * incarnation.level.GetDeterministicHashCode();
+      result += id * version * 5 * incarnation.level.GetDeterministicHashCode();
     }
-    result += id * version * 7 * incarnation.time.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.executionState.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.time.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.executionState.GetDeterministicHashCode();
     return result;
   }
      
@@ -15472,7 +16742,6 @@ public class Root {
           new GameIncarnation(
               oldIncarnationAndVersion.incarnation.rand,
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.gauntletMode,
               oldIncarnationAndVersion.incarnation.levels,
               newValue.id,
               oldIncarnationAndVersion.incarnation.level,
@@ -15501,7 +16770,6 @@ public class Root {
           new GameIncarnation(
               oldIncarnationAndVersion.incarnation.rand,
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.gauntletMode,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
               newValue.id,
@@ -15530,7 +16798,6 @@ public class Root {
           new GameIncarnation(
               oldIncarnationAndVersion.incarnation.rand,
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.gauntletMode,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
               oldIncarnationAndVersion.incarnation.level,
@@ -15545,62 +16812,38 @@ public class Root {
     effectsGameSetTimeEffect.Add(effect);
   }
 
-  public ILevelController GetILevelController(int id) {
-    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
-      return new SquareCaveLevelControllerAsILevelController(new SquareCaveLevelController(this, id));
+  public IInteractableTTC GetIInteractableTTC(int id) {
+    if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      return new IncendianFallsLevelLinkerTTCAsIInteractableTTC(new IncendianFallsLevelLinkerTTC(this, id));
     }
-    if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
-      return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
+    if (rootIncarnation.incarnationsLevelLinkTTC.ContainsKey(id)) {
+      return new LevelLinkTTCAsIInteractableTTC(new LevelLinkTTC(this, id));
     }
-    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
-      return new GauntletLevelControllerAsILevelController(new GauntletLevelController(this, id));
+    if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
+      return new ItemTTCAsIInteractableTTC(new ItemTTC(this, id));
     }
-    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
-      return new PreGauntletLevelControllerAsILevelController(new PreGauntletLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
-      return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
-      return new PentagonalCaveLevelControllerAsILevelController(new PentagonalCaveLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
-      return new CliffLevelControllerAsILevelController(new CliffLevelController(this, id));
-    }
-    throw new Exception("Unknown ILevelController: " + id);
+    throw new Exception("Unknown IInteractableTTC: " + id);
   }
-  public ILevelController GetILevelControllerOrNull(int id) {
-    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
-      return new SquareCaveLevelControllerAsILevelController(new SquareCaveLevelController(this, id));
+  public IInteractableTTC GetIInteractableTTCOrNull(int id) {
+    if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      return new IncendianFallsLevelLinkerTTCAsIInteractableTTC(new IncendianFallsLevelLinkerTTC(this, id));
     }
-    if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
-      return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
+    if (rootIncarnation.incarnationsLevelLinkTTC.ContainsKey(id)) {
+      return new LevelLinkTTCAsIInteractableTTC(new LevelLinkTTC(this, id));
     }
-    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
-      return new GauntletLevelControllerAsILevelController(new GauntletLevelController(this, id));
+    if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
+      return new ItemTTCAsIInteractableTTC(new ItemTTC(this, id));
     }
-    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
-      return new PreGauntletLevelControllerAsILevelController(new PreGauntletLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
-      return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
-      return new PentagonalCaveLevelControllerAsILevelController(new PentagonalCaveLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
-      return new CliffLevelControllerAsILevelController(new CliffLevelController(this, id));
-    }
-    return NullILevelController.Null;
+    return NullIInteractableTTC.Null;
   }
-  public bool ILevelControllerExists(int id) {
-    return GetILevelControllerOrNull(id) != null;
+  public bool IInteractableTTCExists(int id) {
+    return GetIInteractableTTCOrNull(id) != null;
   }
-  public void CheckHasILevelController(ILevelController thing) {
-    GetILevelController(thing.id);
+  public void CheckHasIInteractableTTC(IInteractableTTC thing) {
+    GetIInteractableTTC(thing.id);
   }
-  public void CheckHasILevelController(int id) {
-    GetILevelController(id);
+  public void CheckHasIInteractableTTC(int id) {
+    GetIInteractableTTC(id);
   }
 
   public IUnwalkableTTC GetIUnwalkableTTC(int id) {
@@ -15632,26 +16875,23 @@ public class Root {
   }
 
   public ITerrainTileComponent GetITerrainTileComponent(int id) {
-    if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
-      return new ArmorAsITerrainTileComponent(new Armor(this, id));
+    if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
+      return new ItemTTCAsITerrainTileComponent(new ItemTTC(this, id));
     }
-    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
-      return new InertiaRingAsITerrainTileComponent(new InertiaRing(this, id));
-    }
-    if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
-      return new GlaiveAsITerrainTileComponent(new Glaive(this, id));
-    }
-    if (rootIncarnation.incarnationsManaPotion.ContainsKey(id)) {
-      return new ManaPotionAsITerrainTileComponent(new ManaPotion(this, id));
-    }
-    if (rootIncarnation.incarnationsHealthPotion.ContainsKey(id)) {
-      return new HealthPotionAsITerrainTileComponent(new HealthPotion(this, id));
+    if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      return new IncendianFallsLevelLinkerTTCAsITerrainTileComponent(new IncendianFallsLevelLinkerTTC(this, id));
     }
     if (rootIncarnation.incarnationsTimeAnchorTTC.ContainsKey(id)) {
       return new TimeAnchorTTCAsITerrainTileComponent(new TimeAnchorTTC(this, id));
     }
-    if (rootIncarnation.incarnationsStaircaseTTC.ContainsKey(id)) {
-      return new StaircaseTTCAsITerrainTileComponent(new StaircaseTTC(this, id));
+    if (rootIncarnation.incarnationsLevelLinkTTC.ContainsKey(id)) {
+      return new LevelLinkTTCAsITerrainTileComponent(new LevelLinkTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsDownStairsTTC.ContainsKey(id)) {
+      return new DownStairsTTCAsITerrainTileComponent(new DownStairsTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsUpStairsTTC.ContainsKey(id)) {
+      return new UpStairsTTCAsITerrainTileComponent(new UpStairsTTC(this, id));
     }
     if (rootIncarnation.incarnationsWallTTC.ContainsKey(id)) {
       return new WallTTCAsITerrainTileComponent(new WallTTC(this, id));
@@ -15661,12 +16901,6 @@ public class Root {
     }
     if (rootIncarnation.incarnationsRocksTTC.ContainsKey(id)) {
       return new RocksTTCAsITerrainTileComponent(new RocksTTC(this, id));
-    }
-    if (rootIncarnation.incarnationsDownstairsTTC.ContainsKey(id)) {
-      return new DownstairsTTCAsITerrainTileComponent(new DownstairsTTC(this, id));
-    }
-    if (rootIncarnation.incarnationsUpstairsTTC.ContainsKey(id)) {
-      return new UpstairsTTCAsITerrainTileComponent(new UpstairsTTC(this, id));
     }
     if (rootIncarnation.incarnationsCaveTTC.ContainsKey(id)) {
       return new CaveTTCAsITerrainTileComponent(new CaveTTC(this, id));
@@ -15695,26 +16929,23 @@ public class Root {
     throw new Exception("Unknown ITerrainTileComponent: " + id);
   }
   public ITerrainTileComponent GetITerrainTileComponentOrNull(int id) {
-    if (rootIncarnation.incarnationsArmor.ContainsKey(id)) {
-      return new ArmorAsITerrainTileComponent(new Armor(this, id));
+    if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
+      return new ItemTTCAsITerrainTileComponent(new ItemTTC(this, id));
     }
-    if (rootIncarnation.incarnationsInertiaRing.ContainsKey(id)) {
-      return new InertiaRingAsITerrainTileComponent(new InertiaRing(this, id));
-    }
-    if (rootIncarnation.incarnationsGlaive.ContainsKey(id)) {
-      return new GlaiveAsITerrainTileComponent(new Glaive(this, id));
-    }
-    if (rootIncarnation.incarnationsManaPotion.ContainsKey(id)) {
-      return new ManaPotionAsITerrainTileComponent(new ManaPotion(this, id));
-    }
-    if (rootIncarnation.incarnationsHealthPotion.ContainsKey(id)) {
-      return new HealthPotionAsITerrainTileComponent(new HealthPotion(this, id));
+    if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      return new IncendianFallsLevelLinkerTTCAsITerrainTileComponent(new IncendianFallsLevelLinkerTTC(this, id));
     }
     if (rootIncarnation.incarnationsTimeAnchorTTC.ContainsKey(id)) {
       return new TimeAnchorTTCAsITerrainTileComponent(new TimeAnchorTTC(this, id));
     }
-    if (rootIncarnation.incarnationsStaircaseTTC.ContainsKey(id)) {
-      return new StaircaseTTCAsITerrainTileComponent(new StaircaseTTC(this, id));
+    if (rootIncarnation.incarnationsLevelLinkTTC.ContainsKey(id)) {
+      return new LevelLinkTTCAsITerrainTileComponent(new LevelLinkTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsDownStairsTTC.ContainsKey(id)) {
+      return new DownStairsTTCAsITerrainTileComponent(new DownStairsTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsUpStairsTTC.ContainsKey(id)) {
+      return new UpStairsTTCAsITerrainTileComponent(new UpStairsTTC(this, id));
     }
     if (rootIncarnation.incarnationsWallTTC.ContainsKey(id)) {
       return new WallTTCAsITerrainTileComponent(new WallTTC(this, id));
@@ -15724,12 +16955,6 @@ public class Root {
     }
     if (rootIncarnation.incarnationsRocksTTC.ContainsKey(id)) {
       return new RocksTTCAsITerrainTileComponent(new RocksTTC(this, id));
-    }
-    if (rootIncarnation.incarnationsDownstairsTTC.ContainsKey(id)) {
-      return new DownstairsTTCAsITerrainTileComponent(new DownstairsTTC(this, id));
-    }
-    if (rootIncarnation.incarnationsUpstairsTTC.ContainsKey(id)) {
-      return new UpstairsTTCAsITerrainTileComponent(new UpstairsTTC(this, id));
     }
     if (rootIncarnation.incarnationsCaveTTC.ContainsKey(id)) {
       return new CaveTTCAsITerrainTileComponent(new CaveTTC(this, id));
@@ -15831,6 +17056,34 @@ public class Root {
   }
   public void CheckHasIOffenseItem(int id) {
     GetIOffenseItem(id);
+  }
+
+  public IImmediatelyUseItem GetIImmediatelyUseItem(int id) {
+    if (rootIncarnation.incarnationsManaPotion.ContainsKey(id)) {
+      return new ManaPotionAsIImmediatelyUseItem(new ManaPotion(this, id));
+    }
+    if (rootIncarnation.incarnationsHealthPotion.ContainsKey(id)) {
+      return new HealthPotionAsIImmediatelyUseItem(new HealthPotion(this, id));
+    }
+    throw new Exception("Unknown IImmediatelyUseItem: " + id);
+  }
+  public IImmediatelyUseItem GetIImmediatelyUseItemOrNull(int id) {
+    if (rootIncarnation.incarnationsManaPotion.ContainsKey(id)) {
+      return new ManaPotionAsIImmediatelyUseItem(new ManaPotion(this, id));
+    }
+    if (rootIncarnation.incarnationsHealthPotion.ContainsKey(id)) {
+      return new HealthPotionAsIImmediatelyUseItem(new HealthPotion(this, id));
+    }
+    return NullIImmediatelyUseItem.Null;
+  }
+  public bool IImmediatelyUseItemExists(int id) {
+    return GetIImmediatelyUseItemOrNull(id) != null;
+  }
+  public void CheckHasIImmediatelyUseItem(IImmediatelyUseItem thing) {
+    GetIImmediatelyUseItem(thing.id);
+  }
+  public void CheckHasIImmediatelyUseItem(int id) {
+    GetIImmediatelyUseItem(id);
   }
 
   public IUsableItem GetIUsableItem(int id) {
@@ -16273,12 +17526,82 @@ public class Root {
     GetIImpulse(id);
   }
 
+  public ILevelController GetILevelController(int id) {
+    if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
+      return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      return new GauntletLevelControllerAsILevelController(new GauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      return new PreGauntletLevelControllerAsILevelController(new PreGauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      return new SquareCaveLevelControllerAsILevelController(new SquareCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      return new PentagonalCaveLevelControllerAsILevelController(new PentagonalCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      return new CliffLevelControllerAsILevelController(new CliffLevelController(this, id));
+    }
+    throw new Exception("Unknown ILevelController: " + id);
+  }
+  public ILevelController GetILevelControllerOrNull(int id) {
+    if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
+      return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      return new GauntletLevelControllerAsILevelController(new GauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      return new PreGauntletLevelControllerAsILevelController(new PreGauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      return new SquareCaveLevelControllerAsILevelController(new SquareCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      return new PentagonalCaveLevelControllerAsILevelController(new PentagonalCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      return new CliffLevelControllerAsILevelController(new CliffLevelController(this, id));
+    }
+    return NullILevelController.Null;
+  }
+  public bool ILevelControllerExists(int id) {
+    return GetILevelControllerOrNull(id) != null;
+  }
+  public void CheckHasILevelController(ILevelController thing) {
+    GetILevelController(thing.id);
+  }
+  public void CheckHasILevelController(int id) {
+    GetILevelController(id);
+  }
+
   public IDestructible GetIDestructible(int id) {
+    if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
+      return new ItemTTCAsIDestructible(new ItemTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      return new IncendianFallsLevelLinkerTTCAsIDestructible(new IncendianFallsLevelLinkerTTC(this, id));
+    }
     if (rootIncarnation.incarnationsTimeAnchorTTC.ContainsKey(id)) {
       return new TimeAnchorTTCAsIDestructible(new TimeAnchorTTC(this, id));
     }
-    if (rootIncarnation.incarnationsStaircaseTTC.ContainsKey(id)) {
-      return new StaircaseTTCAsIDestructible(new StaircaseTTC(this, id));
+    if (rootIncarnation.incarnationsLevelLinkTTC.ContainsKey(id)) {
+      return new LevelLinkTTCAsIDestructible(new LevelLinkTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsDownStairsTTC.ContainsKey(id)) {
+      return new DownStairsTTCAsIDestructible(new DownStairsTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsUpStairsTTC.ContainsKey(id)) {
+      return new UpStairsTTCAsIDestructible(new UpStairsTTC(this, id));
     }
     if (rootIncarnation.incarnationsWallTTC.ContainsKey(id)) {
       return new WallTTCAsIDestructible(new WallTTC(this, id));
@@ -16288,12 +17611,6 @@ public class Root {
     }
     if (rootIncarnation.incarnationsRocksTTC.ContainsKey(id)) {
       return new RocksTTCAsIDestructible(new RocksTTC(this, id));
-    }
-    if (rootIncarnation.incarnationsDownstairsTTC.ContainsKey(id)) {
-      return new DownstairsTTCAsIDestructible(new DownstairsTTC(this, id));
-    }
-    if (rootIncarnation.incarnationsUpstairsTTC.ContainsKey(id)) {
-      return new UpstairsTTCAsIDestructible(new UpstairsTTC(this, id));
     }
     if (rootIncarnation.incarnationsCaveTTC.ContainsKey(id)) {
       return new CaveTTCAsIDestructible(new CaveTTC(this, id));
@@ -16391,11 +17708,23 @@ public class Root {
     throw new Exception("Unknown IDestructible: " + id);
   }
   public IDestructible GetIDestructibleOrNull(int id) {
+    if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
+      return new ItemTTCAsIDestructible(new ItemTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      return new IncendianFallsLevelLinkerTTCAsIDestructible(new IncendianFallsLevelLinkerTTC(this, id));
+    }
     if (rootIncarnation.incarnationsTimeAnchorTTC.ContainsKey(id)) {
       return new TimeAnchorTTCAsIDestructible(new TimeAnchorTTC(this, id));
     }
-    if (rootIncarnation.incarnationsStaircaseTTC.ContainsKey(id)) {
-      return new StaircaseTTCAsIDestructible(new StaircaseTTC(this, id));
+    if (rootIncarnation.incarnationsLevelLinkTTC.ContainsKey(id)) {
+      return new LevelLinkTTCAsIDestructible(new LevelLinkTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsDownStairsTTC.ContainsKey(id)) {
+      return new DownStairsTTCAsIDestructible(new DownStairsTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsUpStairsTTC.ContainsKey(id)) {
+      return new UpStairsTTCAsIDestructible(new UpStairsTTC(this, id));
     }
     if (rootIncarnation.incarnationsWallTTC.ContainsKey(id)) {
       return new WallTTCAsIDestructible(new WallTTC(this, id));
@@ -16405,12 +17734,6 @@ public class Root {
     }
     if (rootIncarnation.incarnationsRocksTTC.ContainsKey(id)) {
       return new RocksTTCAsIDestructible(new RocksTTC(this, id));
-    }
-    if (rootIncarnation.incarnationsDownstairsTTC.ContainsKey(id)) {
-      return new DownstairsTTCAsIDestructible(new DownstairsTTC(this, id));
-    }
-    if (rootIncarnation.incarnationsUpstairsTTC.ContainsKey(id)) {
-      return new UpstairsTTCAsIDestructible(new UpstairsTTC(this, id));
     }
     if (rootIncarnation.incarnationsCaveTTC.ContainsKey(id)) {
       return new CaveTTCAsIDestructible(new CaveTTC(this, id));
@@ -18033,6 +19356,197 @@ public class Root {
       }
     }
     effectsTimeCloneAICapabilityUCWeakMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetUnitMutSetHash(int id, int version, UnitMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public UnitMutSetIncarnation GetUnitMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsUnitMutSet[id].incarnation;
+    }
+    public UnitMutSet GetUnitMutSet(int id) {
+      return new UnitMutSet(this, id);
+    }
+    public List<UnitMutSet> AllUnitMutSet() {
+      List<UnitMutSet> result = new List<UnitMutSet>(rootIncarnation.incarnationsUnitMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsUnitMutSet.Keys) {
+        result.Add(new UnitMutSet(this, id));
+      }
+      return result;
+    }
+    public bool UnitMutSetExists(int id) {
+      return rootIncarnation.incarnationsUnitMutSet.ContainsKey(id);
+    }
+    public void CheckHasUnitMutSet(UnitMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasUnitMutSet(thing.id);
+    }
+    public void CheckHasUnitMutSet(int id) {
+      if (!rootIncarnation.incarnationsUnitMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid UnitMutSet}: " + id);
+      }
+    }
+    public UnitMutSet EffectUnitMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new UnitMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateUnitMutSet(id, rootIncarnation.version, incarnation);
+      return new UnitMutSet(this, id);
+    }
+    public void EffectInternalCreateUnitMutSet(int id, int incarnationVersion, UnitMutSetIncarnation incarnation) {
+      var effect = new UnitMutSetCreateEffect(id);
+      rootIncarnation.incarnationsUnitMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<UnitMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsUnitMutSetCreateEffect.Add(effect);
+    }
+    public void EffectUnitMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new UnitMutSetDeleteEffect(id);
+      effectsUnitMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsUnitMutSet[id];
+      rootIncarnation.incarnationsUnitMutSet.Remove(id);
+    }
+
+       
+    public void EffectUnitMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasUnitMutSet(setId);
+      CheckHasUnit(elementId);
+
+      var effect = new UnitMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsUnitMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new UnitMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsUnitMutSet[setId] =
+            new VersionAndIncarnation<UnitMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsUnitMutSetAddEffect.Add(effect);
+    }
+    public void EffectUnitMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasUnitMutSet(setId);
+      CheckHasUnit(elementId);
+
+      var effect = new UnitMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsUnitMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new UnitMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsUnitMutSet[setId] =
+            new VersionAndIncarnation<UnitMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsUnitMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddUnitMutSetObserver(int id, IUnitMutSetEffectObserver observer) {
+      List<IUnitMutSetEffectObserver> obsies;
+      if (!observersForUnitMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IUnitMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForUnitMutSet[id] = obsies;
+    }
+
+    public void RemoveUnitMutSetObserver(int id, IUnitMutSetEffectObserver observer) {
+      if (observersForUnitMutSet.ContainsKey(id)) {
+        var list = observersForUnitMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForUnitMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastUnitMutSetEffects(
+      SortedDictionary<int, List<IUnitMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsUnitMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IUnitMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnitMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnitMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnitMutSetEffect(effect);
+        }
+        observersForUnitMutSet.Remove(effect.id);
+      }
+    }
+    effectsUnitMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsUnitMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IUnitMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnitMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnitMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnitMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUnitMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsUnitMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IUnitMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnitMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnitMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnitMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUnitMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsUnitMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IUnitMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnitMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnitMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnitMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUnitMutSetCreateEffect.Clear();
 
   }
 
@@ -20137,6 +21651,1343 @@ public class Root {
 
   }
 
+    public int GetArmorStrongMutSetHash(int id, int version, ArmorStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public ArmorStrongMutSetIncarnation GetArmorStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsArmorStrongMutSet[id].incarnation;
+    }
+    public ArmorStrongMutSet GetArmorStrongMutSet(int id) {
+      return new ArmorStrongMutSet(this, id);
+    }
+    public List<ArmorStrongMutSet> AllArmorStrongMutSet() {
+      List<ArmorStrongMutSet> result = new List<ArmorStrongMutSet>(rootIncarnation.incarnationsArmorStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsArmorStrongMutSet.Keys) {
+        result.Add(new ArmorStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool ArmorStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsArmorStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasArmorStrongMutSet(ArmorStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasArmorStrongMutSet(thing.id);
+    }
+    public void CheckHasArmorStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsArmorStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid ArmorStrongMutSet}: " + id);
+      }
+    }
+    public ArmorStrongMutSet EffectArmorStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new ArmorStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateArmorStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new ArmorStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateArmorStrongMutSet(int id, int incarnationVersion, ArmorStrongMutSetIncarnation incarnation) {
+      var effect = new ArmorStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsArmorStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<ArmorStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsArmorStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectArmorStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new ArmorStrongMutSetDeleteEffect(id);
+      effectsArmorStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsArmorStrongMutSet[id];
+      rootIncarnation.incarnationsArmorStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectArmorStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasArmorStrongMutSet(setId);
+      CheckHasArmor(elementId);
+
+      var effect = new ArmorStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsArmorStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new ArmorStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsArmorStrongMutSet[setId] =
+            new VersionAndIncarnation<ArmorStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsArmorStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectArmorStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasArmorStrongMutSet(setId);
+      CheckHasArmor(elementId);
+
+      var effect = new ArmorStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsArmorStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new ArmorStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsArmorStrongMutSet[setId] =
+            new VersionAndIncarnation<ArmorStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsArmorStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddArmorStrongMutSetObserver(int id, IArmorStrongMutSetEffectObserver observer) {
+      List<IArmorStrongMutSetEffectObserver> obsies;
+      if (!observersForArmorStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IArmorStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForArmorStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveArmorStrongMutSetObserver(int id, IArmorStrongMutSetEffectObserver observer) {
+      if (observersForArmorStrongMutSet.ContainsKey(id)) {
+        var list = observersForArmorStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForArmorStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastArmorStrongMutSetEffects(
+      SortedDictionary<int, List<IArmorStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsArmorStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IArmorStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnArmorStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IArmorStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnArmorStrongMutSetEffect(effect);
+        }
+        observersForArmorStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsArmorStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsArmorStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IArmorStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnArmorStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IArmorStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnArmorStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsArmorStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsArmorStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IArmorStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnArmorStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IArmorStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnArmorStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsArmorStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsArmorStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IArmorStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnArmorStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IArmorStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnArmorStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsArmorStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetInertiaRingStrongMutSetHash(int id, int version, InertiaRingStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public InertiaRingStrongMutSetIncarnation GetInertiaRingStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsInertiaRingStrongMutSet[id].incarnation;
+    }
+    public InertiaRingStrongMutSet GetInertiaRingStrongMutSet(int id) {
+      return new InertiaRingStrongMutSet(this, id);
+    }
+    public List<InertiaRingStrongMutSet> AllInertiaRingStrongMutSet() {
+      List<InertiaRingStrongMutSet> result = new List<InertiaRingStrongMutSet>(rootIncarnation.incarnationsInertiaRingStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsInertiaRingStrongMutSet.Keys) {
+        result.Add(new InertiaRingStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool InertiaRingStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsInertiaRingStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasInertiaRingStrongMutSet(InertiaRingStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasInertiaRingStrongMutSet(thing.id);
+    }
+    public void CheckHasInertiaRingStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsInertiaRingStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid InertiaRingStrongMutSet}: " + id);
+      }
+    }
+    public InertiaRingStrongMutSet EffectInertiaRingStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new InertiaRingStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateInertiaRingStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new InertiaRingStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateInertiaRingStrongMutSet(int id, int incarnationVersion, InertiaRingStrongMutSetIncarnation incarnation) {
+      var effect = new InertiaRingStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsInertiaRingStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<InertiaRingStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsInertiaRingStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectInertiaRingStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new InertiaRingStrongMutSetDeleteEffect(id);
+      effectsInertiaRingStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsInertiaRingStrongMutSet[id];
+      rootIncarnation.incarnationsInertiaRingStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectInertiaRingStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasInertiaRingStrongMutSet(setId);
+      CheckHasInertiaRing(elementId);
+
+      var effect = new InertiaRingStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsInertiaRingStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new InertiaRingStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsInertiaRingStrongMutSet[setId] =
+            new VersionAndIncarnation<InertiaRingStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsInertiaRingStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectInertiaRingStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasInertiaRingStrongMutSet(setId);
+      CheckHasInertiaRing(elementId);
+
+      var effect = new InertiaRingStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsInertiaRingStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new InertiaRingStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsInertiaRingStrongMutSet[setId] =
+            new VersionAndIncarnation<InertiaRingStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsInertiaRingStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddInertiaRingStrongMutSetObserver(int id, IInertiaRingStrongMutSetEffectObserver observer) {
+      List<IInertiaRingStrongMutSetEffectObserver> obsies;
+      if (!observersForInertiaRingStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IInertiaRingStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForInertiaRingStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveInertiaRingStrongMutSetObserver(int id, IInertiaRingStrongMutSetEffectObserver observer) {
+      if (observersForInertiaRingStrongMutSet.ContainsKey(id)) {
+        var list = observersForInertiaRingStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForInertiaRingStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastInertiaRingStrongMutSetEffects(
+      SortedDictionary<int, List<IInertiaRingStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsInertiaRingStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IInertiaRingStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnInertiaRingStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IInertiaRingStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnInertiaRingStrongMutSetEffect(effect);
+        }
+        observersForInertiaRingStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsInertiaRingStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsInertiaRingStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IInertiaRingStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnInertiaRingStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IInertiaRingStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnInertiaRingStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsInertiaRingStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsInertiaRingStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IInertiaRingStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnInertiaRingStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IInertiaRingStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnInertiaRingStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsInertiaRingStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsInertiaRingStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IInertiaRingStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnInertiaRingStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IInertiaRingStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnInertiaRingStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsInertiaRingStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetGlaiveStrongMutSetHash(int id, int version, GlaiveStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public GlaiveStrongMutSetIncarnation GetGlaiveStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsGlaiveStrongMutSet[id].incarnation;
+    }
+    public GlaiveStrongMutSet GetGlaiveStrongMutSet(int id) {
+      return new GlaiveStrongMutSet(this, id);
+    }
+    public List<GlaiveStrongMutSet> AllGlaiveStrongMutSet() {
+      List<GlaiveStrongMutSet> result = new List<GlaiveStrongMutSet>(rootIncarnation.incarnationsGlaiveStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsGlaiveStrongMutSet.Keys) {
+        result.Add(new GlaiveStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool GlaiveStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsGlaiveStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasGlaiveStrongMutSet(GlaiveStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasGlaiveStrongMutSet(thing.id);
+    }
+    public void CheckHasGlaiveStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsGlaiveStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid GlaiveStrongMutSet}: " + id);
+      }
+    }
+    public GlaiveStrongMutSet EffectGlaiveStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new GlaiveStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateGlaiveStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new GlaiveStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateGlaiveStrongMutSet(int id, int incarnationVersion, GlaiveStrongMutSetIncarnation incarnation) {
+      var effect = new GlaiveStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsGlaiveStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<GlaiveStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsGlaiveStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectGlaiveStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new GlaiveStrongMutSetDeleteEffect(id);
+      effectsGlaiveStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsGlaiveStrongMutSet[id];
+      rootIncarnation.incarnationsGlaiveStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectGlaiveStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasGlaiveStrongMutSet(setId);
+      CheckHasGlaive(elementId);
+
+      var effect = new GlaiveStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsGlaiveStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new GlaiveStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsGlaiveStrongMutSet[setId] =
+            new VersionAndIncarnation<GlaiveStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsGlaiveStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectGlaiveStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasGlaiveStrongMutSet(setId);
+      CheckHasGlaive(elementId);
+
+      var effect = new GlaiveStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsGlaiveStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new GlaiveStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsGlaiveStrongMutSet[setId] =
+            new VersionAndIncarnation<GlaiveStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsGlaiveStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddGlaiveStrongMutSetObserver(int id, IGlaiveStrongMutSetEffectObserver observer) {
+      List<IGlaiveStrongMutSetEffectObserver> obsies;
+      if (!observersForGlaiveStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IGlaiveStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForGlaiveStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveGlaiveStrongMutSetObserver(int id, IGlaiveStrongMutSetEffectObserver observer) {
+      if (observersForGlaiveStrongMutSet.ContainsKey(id)) {
+        var list = observersForGlaiveStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForGlaiveStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastGlaiveStrongMutSetEffects(
+      SortedDictionary<int, List<IGlaiveStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsGlaiveStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IGlaiveStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGlaiveStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IGlaiveStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGlaiveStrongMutSetEffect(effect);
+        }
+        observersForGlaiveStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsGlaiveStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsGlaiveStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IGlaiveStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGlaiveStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IGlaiveStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGlaiveStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsGlaiveStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsGlaiveStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IGlaiveStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGlaiveStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IGlaiveStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGlaiveStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsGlaiveStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsGlaiveStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IGlaiveStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGlaiveStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IGlaiveStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGlaiveStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsGlaiveStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetManaPotionStrongMutSetHash(int id, int version, ManaPotionStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public ManaPotionStrongMutSetIncarnation GetManaPotionStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsManaPotionStrongMutSet[id].incarnation;
+    }
+    public ManaPotionStrongMutSet GetManaPotionStrongMutSet(int id) {
+      return new ManaPotionStrongMutSet(this, id);
+    }
+    public List<ManaPotionStrongMutSet> AllManaPotionStrongMutSet() {
+      List<ManaPotionStrongMutSet> result = new List<ManaPotionStrongMutSet>(rootIncarnation.incarnationsManaPotionStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsManaPotionStrongMutSet.Keys) {
+        result.Add(new ManaPotionStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool ManaPotionStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsManaPotionStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasManaPotionStrongMutSet(ManaPotionStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasManaPotionStrongMutSet(thing.id);
+    }
+    public void CheckHasManaPotionStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsManaPotionStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid ManaPotionStrongMutSet}: " + id);
+      }
+    }
+    public ManaPotionStrongMutSet EffectManaPotionStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new ManaPotionStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateManaPotionStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new ManaPotionStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateManaPotionStrongMutSet(int id, int incarnationVersion, ManaPotionStrongMutSetIncarnation incarnation) {
+      var effect = new ManaPotionStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsManaPotionStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<ManaPotionStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsManaPotionStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectManaPotionStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new ManaPotionStrongMutSetDeleteEffect(id);
+      effectsManaPotionStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsManaPotionStrongMutSet[id];
+      rootIncarnation.incarnationsManaPotionStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectManaPotionStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasManaPotionStrongMutSet(setId);
+      CheckHasManaPotion(elementId);
+
+      var effect = new ManaPotionStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsManaPotionStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new ManaPotionStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsManaPotionStrongMutSet[setId] =
+            new VersionAndIncarnation<ManaPotionStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsManaPotionStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectManaPotionStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasManaPotionStrongMutSet(setId);
+      CheckHasManaPotion(elementId);
+
+      var effect = new ManaPotionStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsManaPotionStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new ManaPotionStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsManaPotionStrongMutSet[setId] =
+            new VersionAndIncarnation<ManaPotionStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsManaPotionStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddManaPotionStrongMutSetObserver(int id, IManaPotionStrongMutSetEffectObserver observer) {
+      List<IManaPotionStrongMutSetEffectObserver> obsies;
+      if (!observersForManaPotionStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IManaPotionStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForManaPotionStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveManaPotionStrongMutSetObserver(int id, IManaPotionStrongMutSetEffectObserver observer) {
+      if (observersForManaPotionStrongMutSet.ContainsKey(id)) {
+        var list = observersForManaPotionStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForManaPotionStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastManaPotionStrongMutSetEffects(
+      SortedDictionary<int, List<IManaPotionStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsManaPotionStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IManaPotionStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnManaPotionStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IManaPotionStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnManaPotionStrongMutSetEffect(effect);
+        }
+        observersForManaPotionStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsManaPotionStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsManaPotionStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IManaPotionStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnManaPotionStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IManaPotionStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnManaPotionStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsManaPotionStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsManaPotionStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IManaPotionStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnManaPotionStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IManaPotionStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnManaPotionStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsManaPotionStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsManaPotionStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IManaPotionStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnManaPotionStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IManaPotionStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnManaPotionStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsManaPotionStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetHealthPotionStrongMutSetHash(int id, int version, HealthPotionStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public HealthPotionStrongMutSetIncarnation GetHealthPotionStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsHealthPotionStrongMutSet[id].incarnation;
+    }
+    public HealthPotionStrongMutSet GetHealthPotionStrongMutSet(int id) {
+      return new HealthPotionStrongMutSet(this, id);
+    }
+    public List<HealthPotionStrongMutSet> AllHealthPotionStrongMutSet() {
+      List<HealthPotionStrongMutSet> result = new List<HealthPotionStrongMutSet>(rootIncarnation.incarnationsHealthPotionStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsHealthPotionStrongMutSet.Keys) {
+        result.Add(new HealthPotionStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool HealthPotionStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsHealthPotionStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasHealthPotionStrongMutSet(HealthPotionStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasHealthPotionStrongMutSet(thing.id);
+    }
+    public void CheckHasHealthPotionStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsHealthPotionStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid HealthPotionStrongMutSet}: " + id);
+      }
+    }
+    public HealthPotionStrongMutSet EffectHealthPotionStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new HealthPotionStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateHealthPotionStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new HealthPotionStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateHealthPotionStrongMutSet(int id, int incarnationVersion, HealthPotionStrongMutSetIncarnation incarnation) {
+      var effect = new HealthPotionStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsHealthPotionStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<HealthPotionStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsHealthPotionStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectHealthPotionStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new HealthPotionStrongMutSetDeleteEffect(id);
+      effectsHealthPotionStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsHealthPotionStrongMutSet[id];
+      rootIncarnation.incarnationsHealthPotionStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectHealthPotionStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasHealthPotionStrongMutSet(setId);
+      CheckHasHealthPotion(elementId);
+
+      var effect = new HealthPotionStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsHealthPotionStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new HealthPotionStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsHealthPotionStrongMutSet[setId] =
+            new VersionAndIncarnation<HealthPotionStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsHealthPotionStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectHealthPotionStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasHealthPotionStrongMutSet(setId);
+      CheckHasHealthPotion(elementId);
+
+      var effect = new HealthPotionStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsHealthPotionStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new HealthPotionStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsHealthPotionStrongMutSet[setId] =
+            new VersionAndIncarnation<HealthPotionStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsHealthPotionStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddHealthPotionStrongMutSetObserver(int id, IHealthPotionStrongMutSetEffectObserver observer) {
+      List<IHealthPotionStrongMutSetEffectObserver> obsies;
+      if (!observersForHealthPotionStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IHealthPotionStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForHealthPotionStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveHealthPotionStrongMutSetObserver(int id, IHealthPotionStrongMutSetEffectObserver observer) {
+      if (observersForHealthPotionStrongMutSet.ContainsKey(id)) {
+        var list = observersForHealthPotionStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForHealthPotionStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastHealthPotionStrongMutSetEffects(
+      SortedDictionary<int, List<IHealthPotionStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsHealthPotionStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IHealthPotionStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnHealthPotionStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IHealthPotionStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnHealthPotionStrongMutSetEffect(effect);
+        }
+        observersForHealthPotionStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsHealthPotionStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsHealthPotionStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IHealthPotionStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnHealthPotionStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IHealthPotionStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnHealthPotionStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsHealthPotionStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsHealthPotionStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IHealthPotionStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnHealthPotionStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IHealthPotionStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnHealthPotionStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsHealthPotionStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsHealthPotionStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IHealthPotionStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnHealthPotionStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IHealthPotionStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnHealthPotionStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsHealthPotionStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetItemTTCMutSetHash(int id, int version, ItemTTCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public ItemTTCMutSetIncarnation GetItemTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsItemTTCMutSet[id].incarnation;
+    }
+    public ItemTTCMutSet GetItemTTCMutSet(int id) {
+      return new ItemTTCMutSet(this, id);
+    }
+    public List<ItemTTCMutSet> AllItemTTCMutSet() {
+      List<ItemTTCMutSet> result = new List<ItemTTCMutSet>(rootIncarnation.incarnationsItemTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsItemTTCMutSet.Keys) {
+        result.Add(new ItemTTCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool ItemTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsItemTTCMutSet.ContainsKey(id);
+    }
+    public void CheckHasItemTTCMutSet(ItemTTCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasItemTTCMutSet(thing.id);
+    }
+    public void CheckHasItemTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsItemTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid ItemTTCMutSet}: " + id);
+      }
+    }
+    public ItemTTCMutSet EffectItemTTCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new ItemTTCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateItemTTCMutSet(id, rootIncarnation.version, incarnation);
+      return new ItemTTCMutSet(this, id);
+    }
+    public void EffectInternalCreateItemTTCMutSet(int id, int incarnationVersion, ItemTTCMutSetIncarnation incarnation) {
+      var effect = new ItemTTCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsItemTTCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<ItemTTCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsItemTTCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectItemTTCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new ItemTTCMutSetDeleteEffect(id);
+      effectsItemTTCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsItemTTCMutSet[id];
+      rootIncarnation.incarnationsItemTTCMutSet.Remove(id);
+    }
+
+       
+    public void EffectItemTTCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasItemTTCMutSet(setId);
+      CheckHasItemTTC(elementId);
+
+      var effect = new ItemTTCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsItemTTCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new ItemTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsItemTTCMutSet[setId] =
+            new VersionAndIncarnation<ItemTTCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsItemTTCMutSetAddEffect.Add(effect);
+    }
+    public void EffectItemTTCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasItemTTCMutSet(setId);
+      CheckHasItemTTC(elementId);
+
+      var effect = new ItemTTCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsItemTTCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new ItemTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsItemTTCMutSet[setId] =
+            new VersionAndIncarnation<ItemTTCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsItemTTCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddItemTTCMutSetObserver(int id, IItemTTCMutSetEffectObserver observer) {
+      List<IItemTTCMutSetEffectObserver> obsies;
+      if (!observersForItemTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IItemTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForItemTTCMutSet[id] = obsies;
+    }
+
+    public void RemoveItemTTCMutSetObserver(int id, IItemTTCMutSetEffectObserver observer) {
+      if (observersForItemTTCMutSet.ContainsKey(id)) {
+        var list = observersForItemTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForItemTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastItemTTCMutSetEffects(
+      SortedDictionary<int, List<IItemTTCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsItemTTCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IItemTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnItemTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IItemTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnItemTTCMutSetEffect(effect);
+        }
+        observersForItemTTCMutSet.Remove(effect.id);
+      }
+    }
+    effectsItemTTCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsItemTTCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IItemTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnItemTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IItemTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnItemTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsItemTTCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsItemTTCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IItemTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnItemTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IItemTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnItemTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsItemTTCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsItemTTCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IItemTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnItemTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IItemTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnItemTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsItemTTCMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetIncendianFallsLevelLinkerTTCMutSetHash(int id, int version, IncendianFallsLevelLinkerTTCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public IncendianFallsLevelLinkerTTCMutSetIncarnation GetIncendianFallsLevelLinkerTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet[id].incarnation;
+    }
+    public IncendianFallsLevelLinkerTTCMutSet GetIncendianFallsLevelLinkerTTCMutSet(int id) {
+      return new IncendianFallsLevelLinkerTTCMutSet(this, id);
+    }
+    public List<IncendianFallsLevelLinkerTTCMutSet> AllIncendianFallsLevelLinkerTTCMutSet() {
+      List<IncendianFallsLevelLinkerTTCMutSet> result = new List<IncendianFallsLevelLinkerTTCMutSet>(rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet.Keys) {
+        result.Add(new IncendianFallsLevelLinkerTTCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool IncendianFallsLevelLinkerTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet.ContainsKey(id);
+    }
+    public void CheckHasIncendianFallsLevelLinkerTTCMutSet(IncendianFallsLevelLinkerTTCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasIncendianFallsLevelLinkerTTCMutSet(thing.id);
+    }
+    public void CheckHasIncendianFallsLevelLinkerTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid IncendianFallsLevelLinkerTTCMutSet}: " + id);
+      }
+    }
+    public IncendianFallsLevelLinkerTTCMutSet EffectIncendianFallsLevelLinkerTTCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new IncendianFallsLevelLinkerTTCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateIncendianFallsLevelLinkerTTCMutSet(id, rootIncarnation.version, incarnation);
+      return new IncendianFallsLevelLinkerTTCMutSet(this, id);
+    }
+    public void EffectInternalCreateIncendianFallsLevelLinkerTTCMutSet(int id, int incarnationVersion, IncendianFallsLevelLinkerTTCMutSetIncarnation incarnation) {
+      var effect = new IncendianFallsLevelLinkerTTCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<IncendianFallsLevelLinkerTTCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsIncendianFallsLevelLinkerTTCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectIncendianFallsLevelLinkerTTCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new IncendianFallsLevelLinkerTTCMutSetDeleteEffect(id);
+      effectsIncendianFallsLevelLinkerTTCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet[id];
+      rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet.Remove(id);
+    }
+
+       
+    public void EffectIncendianFallsLevelLinkerTTCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasIncendianFallsLevelLinkerTTCMutSet(setId);
+      CheckHasIncendianFallsLevelLinkerTTC(elementId);
+
+      var effect = new IncendianFallsLevelLinkerTTCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new IncendianFallsLevelLinkerTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet[setId] =
+            new VersionAndIncarnation<IncendianFallsLevelLinkerTTCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsIncendianFallsLevelLinkerTTCMutSetAddEffect.Add(effect);
+    }
+    public void EffectIncendianFallsLevelLinkerTTCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasIncendianFallsLevelLinkerTTCMutSet(setId);
+      CheckHasIncendianFallsLevelLinkerTTC(elementId);
+
+      var effect = new IncendianFallsLevelLinkerTTCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new IncendianFallsLevelLinkerTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet[setId] =
+            new VersionAndIncarnation<IncendianFallsLevelLinkerTTCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsIncendianFallsLevelLinkerTTCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddIncendianFallsLevelLinkerTTCMutSetObserver(int id, IIncendianFallsLevelLinkerTTCMutSetEffectObserver observer) {
+      List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver> obsies;
+      if (!observersForIncendianFallsLevelLinkerTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForIncendianFallsLevelLinkerTTCMutSet[id] = obsies;
+    }
+
+    public void RemoveIncendianFallsLevelLinkerTTCMutSetObserver(int id, IIncendianFallsLevelLinkerTTCMutSetEffectObserver observer) {
+      if (observersForIncendianFallsLevelLinkerTTCMutSet.ContainsKey(id)) {
+        var list = observersForIncendianFallsLevelLinkerTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForIncendianFallsLevelLinkerTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastIncendianFallsLevelLinkerTTCMutSetEffects(
+      SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsIncendianFallsLevelLinkerTTCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCMutSetEffect(effect);
+        }
+        observersForIncendianFallsLevelLinkerTTCMutSet.Remove(effect.id);
+      }
+    }
+    effectsIncendianFallsLevelLinkerTTCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsIncendianFallsLevelLinkerTTCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsIncendianFallsLevelLinkerTTCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsIncendianFallsLevelLinkerTTCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsIncendianFallsLevelLinkerTTCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsIncendianFallsLevelLinkerTTCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIncendianFallsLevelLinkerTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsIncendianFallsLevelLinkerTTCMutSetCreateEffect.Clear();
+
+  }
+
     public int GetTimeAnchorTTCMutSetHash(int id, int version, TimeAnchorTTCMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.set) {
@@ -20328,72 +23179,72 @@ public class Root {
 
   }
 
-    public int GetStaircaseTTCMutSetHash(int id, int version, StaircaseTTCMutSetIncarnation incarnation) {
+    public int GetLevelLinkTTCMutSetHash(int id, int version, LevelLinkTTCMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.set) {
         result += id * version * element.GetDeterministicHashCode();
       }
       return result;
     }
-    public StaircaseTTCMutSetIncarnation GetStaircaseTTCMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsStaircaseTTCMutSet[id].incarnation;
+    public LevelLinkTTCMutSetIncarnation GetLevelLinkTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsLevelLinkTTCMutSet[id].incarnation;
     }
-    public StaircaseTTCMutSet GetStaircaseTTCMutSet(int id) {
-      return new StaircaseTTCMutSet(this, id);
+    public LevelLinkTTCMutSet GetLevelLinkTTCMutSet(int id) {
+      return new LevelLinkTTCMutSet(this, id);
     }
-    public List<StaircaseTTCMutSet> AllStaircaseTTCMutSet() {
-      List<StaircaseTTCMutSet> result = new List<StaircaseTTCMutSet>(rootIncarnation.incarnationsStaircaseTTCMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsStaircaseTTCMutSet.Keys) {
-        result.Add(new StaircaseTTCMutSet(this, id));
+    public List<LevelLinkTTCMutSet> AllLevelLinkTTCMutSet() {
+      List<LevelLinkTTCMutSet> result = new List<LevelLinkTTCMutSet>(rootIncarnation.incarnationsLevelLinkTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsLevelLinkTTCMutSet.Keys) {
+        result.Add(new LevelLinkTTCMutSet(this, id));
       }
       return result;
     }
-    public bool StaircaseTTCMutSetExists(int id) {
-      return rootIncarnation.incarnationsStaircaseTTCMutSet.ContainsKey(id);
+    public bool LevelLinkTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsLevelLinkTTCMutSet.ContainsKey(id);
     }
-    public void CheckHasStaircaseTTCMutSet(StaircaseTTCMutSet thing) {
+    public void CheckHasLevelLinkTTCMutSet(LevelLinkTTCMutSet thing) {
       CheckRootsEqual(this, thing.root);
-      CheckHasStaircaseTTCMutSet(thing.id);
+      CheckHasLevelLinkTTCMutSet(thing.id);
     }
-    public void CheckHasStaircaseTTCMutSet(int id) {
-      if (!rootIncarnation.incarnationsStaircaseTTCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid StaircaseTTCMutSet}: " + id);
+    public void CheckHasLevelLinkTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsLevelLinkTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid LevelLinkTTCMutSet}: " + id);
       }
     }
-    public StaircaseTTCMutSet EffectStaircaseTTCMutSetCreate() {
+    public LevelLinkTTCMutSet EffectLevelLinkTTCMutSetCreate() {
       CheckUnlocked();
       var id = NewId();
-      var incarnation = new StaircaseTTCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateStaircaseTTCMutSet(id, rootIncarnation.version, incarnation);
-      return new StaircaseTTCMutSet(this, id);
+      var incarnation = new LevelLinkTTCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateLevelLinkTTCMutSet(id, rootIncarnation.version, incarnation);
+      return new LevelLinkTTCMutSet(this, id);
     }
-    public void EffectInternalCreateStaircaseTTCMutSet(int id, int incarnationVersion, StaircaseTTCMutSetIncarnation incarnation) {
-      var effect = new StaircaseTTCMutSetCreateEffect(id);
-      rootIncarnation.incarnationsStaircaseTTCMutSet
+    public void EffectInternalCreateLevelLinkTTCMutSet(int id, int incarnationVersion, LevelLinkTTCMutSetIncarnation incarnation) {
+      var effect = new LevelLinkTTCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsLevelLinkTTCMutSet
           .Add(
               id,
-              new VersionAndIncarnation<StaircaseTTCMutSetIncarnation>(
+              new VersionAndIncarnation<LevelLinkTTCMutSetIncarnation>(
                   incarnationVersion,
                   incarnation));
-      effectsStaircaseTTCMutSetCreateEffect.Add(effect);
+      effectsLevelLinkTTCMutSetCreateEffect.Add(effect);
     }
-    public void EffectStaircaseTTCMutSetDelete(int id) {
+    public void EffectLevelLinkTTCMutSetDelete(int id) {
       CheckUnlocked();
-      var effect = new StaircaseTTCMutSetDeleteEffect(id);
-      effectsStaircaseTTCMutSetDeleteEffect.Add(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsStaircaseTTCMutSet[id];
-      rootIncarnation.incarnationsStaircaseTTCMutSet.Remove(id);
+      var effect = new LevelLinkTTCMutSetDeleteEffect(id);
+      effectsLevelLinkTTCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsLevelLinkTTCMutSet[id];
+      rootIncarnation.incarnationsLevelLinkTTCMutSet.Remove(id);
     }
 
        
-    public void EffectStaircaseTTCMutSetAdd(int setId, int elementId) {
+    public void EffectLevelLinkTTCMutSetAdd(int setId, int elementId) {
       CheckUnlocked();
-      CheckHasStaircaseTTCMutSet(setId);
-      CheckHasStaircaseTTC(elementId);
+      CheckHasLevelLinkTTCMutSet(setId);
+      CheckHasLevelLinkTTC(elementId);
 
-      var effect = new StaircaseTTCMutSetAddEffect(setId, elementId);
+      var effect = new LevelLinkTTCMutSetAddEffect(setId, elementId);
 
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsStaircaseTTCMutSet[setId];
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsLevelLinkTTCMutSet[setId];
       if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
         throw new Exception("Element already exists!");
       }
@@ -20403,22 +23254,22 @@ public class Root {
         var oldMap = oldIncarnationAndVersion.incarnation.set;
         var newMap = new SortedSet<int>(oldMap);
         newMap.Add(elementId);
-        var newIncarnation = new StaircaseTTCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsStaircaseTTCMutSet[setId] =
-            new VersionAndIncarnation<StaircaseTTCMutSetIncarnation>(
+        var newIncarnation = new LevelLinkTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsLevelLinkTTCMutSet[setId] =
+            new VersionAndIncarnation<LevelLinkTTCMutSetIncarnation>(
                 rootIncarnation.version,
                 newIncarnation);
       }
-      effectsStaircaseTTCMutSetAddEffect.Add(effect);
+      effectsLevelLinkTTCMutSetAddEffect.Add(effect);
     }
-    public void EffectStaircaseTTCMutSetRemove(int setId, int elementId) {
+    public void EffectLevelLinkTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
-      CheckHasStaircaseTTCMutSet(setId);
-      CheckHasStaircaseTTC(elementId);
+      CheckHasLevelLinkTTCMutSet(setId);
+      CheckHasLevelLinkTTC(elementId);
 
-      var effect = new StaircaseTTCMutSetRemoveEffect(setId, elementId);
+      var effect = new LevelLinkTTCMutSetRemoveEffect(setId, elementId);
 
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsStaircaseTTCMutSet[setId];
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsLevelLinkTTCMutSet[setId];
       if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
         throw new Exception("Element not found! " + elementId);
       }
@@ -20428,94 +23279,476 @@ public class Root {
         var oldMap = oldIncarnationAndVersion.incarnation.set;
         var newMap = new SortedSet<int>(oldMap);
         newMap.Remove(elementId);
-        var newIncarnation = new StaircaseTTCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsStaircaseTTCMutSet[setId] =
-            new VersionAndIncarnation<StaircaseTTCMutSetIncarnation>(
+        var newIncarnation = new LevelLinkTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsLevelLinkTTCMutSet[setId] =
+            new VersionAndIncarnation<LevelLinkTTCMutSetIncarnation>(
                 rootIncarnation.version, newIncarnation);
       }
-      effectsStaircaseTTCMutSetRemoveEffect.Add(effect);
+      effectsLevelLinkTTCMutSetRemoveEffect.Add(effect);
     }
 
        
-    public void AddStaircaseTTCMutSetObserver(int id, IStaircaseTTCMutSetEffectObserver observer) {
-      List<IStaircaseTTCMutSetEffectObserver> obsies;
-      if (!observersForStaircaseTTCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IStaircaseTTCMutSetEffectObserver>();
+    public void AddLevelLinkTTCMutSetObserver(int id, ILevelLinkTTCMutSetEffectObserver observer) {
+      List<ILevelLinkTTCMutSetEffectObserver> obsies;
+      if (!observersForLevelLinkTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ILevelLinkTTCMutSetEffectObserver>();
       }
       obsies.Add(observer);
-      observersForStaircaseTTCMutSet[id] = obsies;
+      observersForLevelLinkTTCMutSet[id] = obsies;
     }
 
-    public void RemoveStaircaseTTCMutSetObserver(int id, IStaircaseTTCMutSetEffectObserver observer) {
-      if (observersForStaircaseTTCMutSet.ContainsKey(id)) {
-        var list = observersForStaircaseTTCMutSet[id];
+    public void RemoveLevelLinkTTCMutSetObserver(int id, ILevelLinkTTCMutSetEffectObserver observer) {
+      if (observersForLevelLinkTTCMutSet.ContainsKey(id)) {
+        var list = observersForLevelLinkTTCMutSet[id];
         list.Remove(observer);
         if (list.Count == 0) {
-          observersForStaircaseTTCMutSet.Remove(id);
+          observersForLevelLinkTTCMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");
       }
     }
        
-  public void BroadcastStaircaseTTCMutSetEffects(
-      SortedDictionary<int, List<IStaircaseTTCMutSetEffectObserver>> observers) {
-    foreach (var effect in effectsStaircaseTTCMutSetDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IStaircaseTTCMutSetEffectObserver> globalObservers)) {
+  public void BroadcastLevelLinkTTCMutSetEffects(
+      SortedDictionary<int, List<ILevelLinkTTCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsLevelLinkTTCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ILevelLinkTTCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnStaircaseTTCMutSetEffect(effect);
+          observer.OnLevelLinkTTCMutSetEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IStaircaseTTCMutSetEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<ILevelLinkTTCMutSetEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnStaircaseTTCMutSetEffect(effect);
+          observer.OnLevelLinkTTCMutSetEffect(effect);
         }
-        observersForStaircaseTTCMutSet.Remove(effect.id);
+        observersForLevelLinkTTCMutSet.Remove(effect.id);
       }
     }
-    effectsStaircaseTTCMutSetDeleteEffect.Clear();
+    effectsLevelLinkTTCMutSetDeleteEffect.Clear();
 
-    foreach (var effect in effectsStaircaseTTCMutSetAddEffect) {
-      if (observers.TryGetValue(0, out List<IStaircaseTTCMutSetEffectObserver> globalObservers)) {
+    foreach (var effect in effectsLevelLinkTTCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<ILevelLinkTTCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnStaircaseTTCMutSetEffect(effect);
+          observer.OnLevelLinkTTCMutSetEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IStaircaseTTCMutSetEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<ILevelLinkTTCMutSetEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnStaircaseTTCMutSetEffect(effect);
+          observer.OnLevelLinkTTCMutSetEffect(effect);
         }
       }
     }
-    effectsStaircaseTTCMutSetAddEffect.Clear();
+    effectsLevelLinkTTCMutSetAddEffect.Clear();
 
-    foreach (var effect in effectsStaircaseTTCMutSetRemoveEffect) {
-      if (observers.TryGetValue(0, out List<IStaircaseTTCMutSetEffectObserver> globalObservers)) {
+    foreach (var effect in effectsLevelLinkTTCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<ILevelLinkTTCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnStaircaseTTCMutSetEffect(effect);
+          observer.OnLevelLinkTTCMutSetEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IStaircaseTTCMutSetEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<ILevelLinkTTCMutSetEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnStaircaseTTCMutSetEffect(effect);
+          observer.OnLevelLinkTTCMutSetEffect(effect);
         }
       }
     }
-    effectsStaircaseTTCMutSetRemoveEffect.Clear();
+    effectsLevelLinkTTCMutSetRemoveEffect.Clear();
 
-    foreach (var effect in effectsStaircaseTTCMutSetCreateEffect) {
-      if (observers.TryGetValue(0, out List<IStaircaseTTCMutSetEffectObserver> globalObservers)) {
+    foreach (var effect in effectsLevelLinkTTCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<ILevelLinkTTCMutSetEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
-          observer.OnStaircaseTTCMutSetEffect(effect);
+          observer.OnLevelLinkTTCMutSetEffect(effect);
         }
       }
-      if (observers.TryGetValue(effect.id, out List<IStaircaseTTCMutSetEffectObserver> objObservers)) {
+      if (observers.TryGetValue(effect.id, out List<ILevelLinkTTCMutSetEffectObserver> objObservers)) {
         foreach (var observer in objObservers) {
-          observer.OnStaircaseTTCMutSetEffect(effect);
+          observer.OnLevelLinkTTCMutSetEffect(effect);
         }
       }
     }
-    effectsStaircaseTTCMutSetCreateEffect.Clear();
+    effectsLevelLinkTTCMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetDownStairsTTCMutSetHash(int id, int version, DownStairsTTCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public DownStairsTTCMutSetIncarnation GetDownStairsTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsDownStairsTTCMutSet[id].incarnation;
+    }
+    public DownStairsTTCMutSet GetDownStairsTTCMutSet(int id) {
+      return new DownStairsTTCMutSet(this, id);
+    }
+    public List<DownStairsTTCMutSet> AllDownStairsTTCMutSet() {
+      List<DownStairsTTCMutSet> result = new List<DownStairsTTCMutSet>(rootIncarnation.incarnationsDownStairsTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsDownStairsTTCMutSet.Keys) {
+        result.Add(new DownStairsTTCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool DownStairsTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsDownStairsTTCMutSet.ContainsKey(id);
+    }
+    public void CheckHasDownStairsTTCMutSet(DownStairsTTCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasDownStairsTTCMutSet(thing.id);
+    }
+    public void CheckHasDownStairsTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsDownStairsTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid DownStairsTTCMutSet}: " + id);
+      }
+    }
+    public DownStairsTTCMutSet EffectDownStairsTTCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new DownStairsTTCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateDownStairsTTCMutSet(id, rootIncarnation.version, incarnation);
+      return new DownStairsTTCMutSet(this, id);
+    }
+    public void EffectInternalCreateDownStairsTTCMutSet(int id, int incarnationVersion, DownStairsTTCMutSetIncarnation incarnation) {
+      var effect = new DownStairsTTCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsDownStairsTTCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<DownStairsTTCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsDownStairsTTCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectDownStairsTTCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new DownStairsTTCMutSetDeleteEffect(id);
+      effectsDownStairsTTCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsDownStairsTTCMutSet[id];
+      rootIncarnation.incarnationsDownStairsTTCMutSet.Remove(id);
+    }
+
+       
+    public void EffectDownStairsTTCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasDownStairsTTCMutSet(setId);
+      CheckHasDownStairsTTC(elementId);
+
+      var effect = new DownStairsTTCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsDownStairsTTCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new DownStairsTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsDownStairsTTCMutSet[setId] =
+            new VersionAndIncarnation<DownStairsTTCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsDownStairsTTCMutSetAddEffect.Add(effect);
+    }
+    public void EffectDownStairsTTCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasDownStairsTTCMutSet(setId);
+      CheckHasDownStairsTTC(elementId);
+
+      var effect = new DownStairsTTCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsDownStairsTTCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new DownStairsTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsDownStairsTTCMutSet[setId] =
+            new VersionAndIncarnation<DownStairsTTCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsDownStairsTTCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddDownStairsTTCMutSetObserver(int id, IDownStairsTTCMutSetEffectObserver observer) {
+      List<IDownStairsTTCMutSetEffectObserver> obsies;
+      if (!observersForDownStairsTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IDownStairsTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForDownStairsTTCMutSet[id] = obsies;
+    }
+
+    public void RemoveDownStairsTTCMutSetObserver(int id, IDownStairsTTCMutSetEffectObserver observer) {
+      if (observersForDownStairsTTCMutSet.ContainsKey(id)) {
+        var list = observersForDownStairsTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForDownStairsTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastDownStairsTTCMutSetEffects(
+      SortedDictionary<int, List<IDownStairsTTCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsDownStairsTTCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IDownStairsTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDownStairsTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IDownStairsTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDownStairsTTCMutSetEffect(effect);
+        }
+        observersForDownStairsTTCMutSet.Remove(effect.id);
+      }
+    }
+    effectsDownStairsTTCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsDownStairsTTCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IDownStairsTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDownStairsTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IDownStairsTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDownStairsTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsDownStairsTTCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsDownStairsTTCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IDownStairsTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDownStairsTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IDownStairsTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDownStairsTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsDownStairsTTCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsDownStairsTTCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IDownStairsTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDownStairsTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IDownStairsTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDownStairsTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsDownStairsTTCMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetUpStairsTTCMutSetHash(int id, int version, UpStairsTTCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public UpStairsTTCMutSetIncarnation GetUpStairsTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsUpStairsTTCMutSet[id].incarnation;
+    }
+    public UpStairsTTCMutSet GetUpStairsTTCMutSet(int id) {
+      return new UpStairsTTCMutSet(this, id);
+    }
+    public List<UpStairsTTCMutSet> AllUpStairsTTCMutSet() {
+      List<UpStairsTTCMutSet> result = new List<UpStairsTTCMutSet>(rootIncarnation.incarnationsUpStairsTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsUpStairsTTCMutSet.Keys) {
+        result.Add(new UpStairsTTCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool UpStairsTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsUpStairsTTCMutSet.ContainsKey(id);
+    }
+    public void CheckHasUpStairsTTCMutSet(UpStairsTTCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasUpStairsTTCMutSet(thing.id);
+    }
+    public void CheckHasUpStairsTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsUpStairsTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid UpStairsTTCMutSet}: " + id);
+      }
+    }
+    public UpStairsTTCMutSet EffectUpStairsTTCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new UpStairsTTCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateUpStairsTTCMutSet(id, rootIncarnation.version, incarnation);
+      return new UpStairsTTCMutSet(this, id);
+    }
+    public void EffectInternalCreateUpStairsTTCMutSet(int id, int incarnationVersion, UpStairsTTCMutSetIncarnation incarnation) {
+      var effect = new UpStairsTTCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsUpStairsTTCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<UpStairsTTCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsUpStairsTTCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectUpStairsTTCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new UpStairsTTCMutSetDeleteEffect(id);
+      effectsUpStairsTTCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsUpStairsTTCMutSet[id];
+      rootIncarnation.incarnationsUpStairsTTCMutSet.Remove(id);
+    }
+
+       
+    public void EffectUpStairsTTCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasUpStairsTTCMutSet(setId);
+      CheckHasUpStairsTTC(elementId);
+
+      var effect = new UpStairsTTCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsUpStairsTTCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new UpStairsTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsUpStairsTTCMutSet[setId] =
+            new VersionAndIncarnation<UpStairsTTCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsUpStairsTTCMutSetAddEffect.Add(effect);
+    }
+    public void EffectUpStairsTTCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasUpStairsTTCMutSet(setId);
+      CheckHasUpStairsTTC(elementId);
+
+      var effect = new UpStairsTTCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsUpStairsTTCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new UpStairsTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsUpStairsTTCMutSet[setId] =
+            new VersionAndIncarnation<UpStairsTTCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsUpStairsTTCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddUpStairsTTCMutSetObserver(int id, IUpStairsTTCMutSetEffectObserver observer) {
+      List<IUpStairsTTCMutSetEffectObserver> obsies;
+      if (!observersForUpStairsTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IUpStairsTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForUpStairsTTCMutSet[id] = obsies;
+    }
+
+    public void RemoveUpStairsTTCMutSetObserver(int id, IUpStairsTTCMutSetEffectObserver observer) {
+      if (observersForUpStairsTTCMutSet.ContainsKey(id)) {
+        var list = observersForUpStairsTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForUpStairsTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastUpStairsTTCMutSetEffects(
+      SortedDictionary<int, List<IUpStairsTTCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsUpStairsTTCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IUpStairsTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUpStairsTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUpStairsTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUpStairsTTCMutSetEffect(effect);
+        }
+        observersForUpStairsTTCMutSet.Remove(effect.id);
+      }
+    }
+    effectsUpStairsTTCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsUpStairsTTCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IUpStairsTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUpStairsTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUpStairsTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUpStairsTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUpStairsTTCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsUpStairsTTCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IUpStairsTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUpStairsTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUpStairsTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUpStairsTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUpStairsTTCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsUpStairsTTCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IUpStairsTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUpStairsTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUpStairsTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUpStairsTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUpStairsTTCMutSetCreateEffect.Clear();
 
   }
 
@@ -21089,388 +24322,6 @@ public class Root {
       }
     }
     effectsRocksTTCMutSetCreateEffect.Clear();
-
-  }
-
-    public int GetDownstairsTTCMutSetHash(int id, int version, DownstairsTTCMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public DownstairsTTCMutSetIncarnation GetDownstairsTTCMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsDownstairsTTCMutSet[id].incarnation;
-    }
-    public DownstairsTTCMutSet GetDownstairsTTCMutSet(int id) {
-      return new DownstairsTTCMutSet(this, id);
-    }
-    public List<DownstairsTTCMutSet> AllDownstairsTTCMutSet() {
-      List<DownstairsTTCMutSet> result = new List<DownstairsTTCMutSet>(rootIncarnation.incarnationsDownstairsTTCMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsDownstairsTTCMutSet.Keys) {
-        result.Add(new DownstairsTTCMutSet(this, id));
-      }
-      return result;
-    }
-    public bool DownstairsTTCMutSetExists(int id) {
-      return rootIncarnation.incarnationsDownstairsTTCMutSet.ContainsKey(id);
-    }
-    public void CheckHasDownstairsTTCMutSet(DownstairsTTCMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasDownstairsTTCMutSet(thing.id);
-    }
-    public void CheckHasDownstairsTTCMutSet(int id) {
-      if (!rootIncarnation.incarnationsDownstairsTTCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid DownstairsTTCMutSet}: " + id);
-      }
-    }
-    public DownstairsTTCMutSet EffectDownstairsTTCMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new DownstairsTTCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateDownstairsTTCMutSet(id, rootIncarnation.version, incarnation);
-      return new DownstairsTTCMutSet(this, id);
-    }
-    public void EffectInternalCreateDownstairsTTCMutSet(int id, int incarnationVersion, DownstairsTTCMutSetIncarnation incarnation) {
-      var effect = new DownstairsTTCMutSetCreateEffect(id);
-      rootIncarnation.incarnationsDownstairsTTCMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<DownstairsTTCMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      effectsDownstairsTTCMutSetCreateEffect.Add(effect);
-    }
-    public void EffectDownstairsTTCMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new DownstairsTTCMutSetDeleteEffect(id);
-      effectsDownstairsTTCMutSetDeleteEffect.Add(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsDownstairsTTCMutSet[id];
-      rootIncarnation.incarnationsDownstairsTTCMutSet.Remove(id);
-    }
-
-       
-    public void EffectDownstairsTTCMutSetAdd(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasDownstairsTTCMutSet(setId);
-      CheckHasDownstairsTTC(elementId);
-
-      var effect = new DownstairsTTCMutSetAddEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsDownstairsTTCMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(elementId);
-        var newIncarnation = new DownstairsTTCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsDownstairsTTCMutSet[setId] =
-            new VersionAndIncarnation<DownstairsTTCMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      effectsDownstairsTTCMutSetAddEffect.Add(effect);
-    }
-    public void EffectDownstairsTTCMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasDownstairsTTCMutSet(setId);
-      CheckHasDownstairsTTC(elementId);
-
-      var effect = new DownstairsTTCMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsDownstairsTTCMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new DownstairsTTCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsDownstairsTTCMutSet[setId] =
-            new VersionAndIncarnation<DownstairsTTCMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      effectsDownstairsTTCMutSetRemoveEffect.Add(effect);
-    }
-
-       
-    public void AddDownstairsTTCMutSetObserver(int id, IDownstairsTTCMutSetEffectObserver observer) {
-      List<IDownstairsTTCMutSetEffectObserver> obsies;
-      if (!observersForDownstairsTTCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IDownstairsTTCMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForDownstairsTTCMutSet[id] = obsies;
-    }
-
-    public void RemoveDownstairsTTCMutSetObserver(int id, IDownstairsTTCMutSetEffectObserver observer) {
-      if (observersForDownstairsTTCMutSet.ContainsKey(id)) {
-        var list = observersForDownstairsTTCMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForDownstairsTTCMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-       
-  public void BroadcastDownstairsTTCMutSetEffects(
-      SortedDictionary<int, List<IDownstairsTTCMutSetEffectObserver>> observers) {
-    foreach (var effect in effectsDownstairsTTCMutSetDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IDownstairsTTCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnDownstairsTTCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IDownstairsTTCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnDownstairsTTCMutSetEffect(effect);
-        }
-        observersForDownstairsTTCMutSet.Remove(effect.id);
-      }
-    }
-    effectsDownstairsTTCMutSetDeleteEffect.Clear();
-
-    foreach (var effect in effectsDownstairsTTCMutSetAddEffect) {
-      if (observers.TryGetValue(0, out List<IDownstairsTTCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnDownstairsTTCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IDownstairsTTCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnDownstairsTTCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsDownstairsTTCMutSetAddEffect.Clear();
-
-    foreach (var effect in effectsDownstairsTTCMutSetRemoveEffect) {
-      if (observers.TryGetValue(0, out List<IDownstairsTTCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnDownstairsTTCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IDownstairsTTCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnDownstairsTTCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsDownstairsTTCMutSetRemoveEffect.Clear();
-
-    foreach (var effect in effectsDownstairsTTCMutSetCreateEffect) {
-      if (observers.TryGetValue(0, out List<IDownstairsTTCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnDownstairsTTCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IDownstairsTTCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnDownstairsTTCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsDownstairsTTCMutSetCreateEffect.Clear();
-
-  }
-
-    public int GetUpstairsTTCMutSetHash(int id, int version, UpstairsTTCMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public UpstairsTTCMutSetIncarnation GetUpstairsTTCMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsUpstairsTTCMutSet[id].incarnation;
-    }
-    public UpstairsTTCMutSet GetUpstairsTTCMutSet(int id) {
-      return new UpstairsTTCMutSet(this, id);
-    }
-    public List<UpstairsTTCMutSet> AllUpstairsTTCMutSet() {
-      List<UpstairsTTCMutSet> result = new List<UpstairsTTCMutSet>(rootIncarnation.incarnationsUpstairsTTCMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsUpstairsTTCMutSet.Keys) {
-        result.Add(new UpstairsTTCMutSet(this, id));
-      }
-      return result;
-    }
-    public bool UpstairsTTCMutSetExists(int id) {
-      return rootIncarnation.incarnationsUpstairsTTCMutSet.ContainsKey(id);
-    }
-    public void CheckHasUpstairsTTCMutSet(UpstairsTTCMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasUpstairsTTCMutSet(thing.id);
-    }
-    public void CheckHasUpstairsTTCMutSet(int id) {
-      if (!rootIncarnation.incarnationsUpstairsTTCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid UpstairsTTCMutSet}: " + id);
-      }
-    }
-    public UpstairsTTCMutSet EffectUpstairsTTCMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new UpstairsTTCMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateUpstairsTTCMutSet(id, rootIncarnation.version, incarnation);
-      return new UpstairsTTCMutSet(this, id);
-    }
-    public void EffectInternalCreateUpstairsTTCMutSet(int id, int incarnationVersion, UpstairsTTCMutSetIncarnation incarnation) {
-      var effect = new UpstairsTTCMutSetCreateEffect(id);
-      rootIncarnation.incarnationsUpstairsTTCMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<UpstairsTTCMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      effectsUpstairsTTCMutSetCreateEffect.Add(effect);
-    }
-    public void EffectUpstairsTTCMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new UpstairsTTCMutSetDeleteEffect(id);
-      effectsUpstairsTTCMutSetDeleteEffect.Add(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsUpstairsTTCMutSet[id];
-      rootIncarnation.incarnationsUpstairsTTCMutSet.Remove(id);
-    }
-
-       
-    public void EffectUpstairsTTCMutSetAdd(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasUpstairsTTCMutSet(setId);
-      CheckHasUpstairsTTC(elementId);
-
-      var effect = new UpstairsTTCMutSetAddEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsUpstairsTTCMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(elementId);
-        var newIncarnation = new UpstairsTTCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsUpstairsTTCMutSet[setId] =
-            new VersionAndIncarnation<UpstairsTTCMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      effectsUpstairsTTCMutSetAddEffect.Add(effect);
-    }
-    public void EffectUpstairsTTCMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasUpstairsTTCMutSet(setId);
-      CheckHasUpstairsTTC(elementId);
-
-      var effect = new UpstairsTTCMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsUpstairsTTCMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new UpstairsTTCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsUpstairsTTCMutSet[setId] =
-            new VersionAndIncarnation<UpstairsTTCMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      effectsUpstairsTTCMutSetRemoveEffect.Add(effect);
-    }
-
-       
-    public void AddUpstairsTTCMutSetObserver(int id, IUpstairsTTCMutSetEffectObserver observer) {
-      List<IUpstairsTTCMutSetEffectObserver> obsies;
-      if (!observersForUpstairsTTCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IUpstairsTTCMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForUpstairsTTCMutSet[id] = obsies;
-    }
-
-    public void RemoveUpstairsTTCMutSetObserver(int id, IUpstairsTTCMutSetEffectObserver observer) {
-      if (observersForUpstairsTTCMutSet.ContainsKey(id)) {
-        var list = observersForUpstairsTTCMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForUpstairsTTCMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-       
-  public void BroadcastUpstairsTTCMutSetEffects(
-      SortedDictionary<int, List<IUpstairsTTCMutSetEffectObserver>> observers) {
-    foreach (var effect in effectsUpstairsTTCMutSetDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IUpstairsTTCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUpstairsTTCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IUpstairsTTCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUpstairsTTCMutSetEffect(effect);
-        }
-        observersForUpstairsTTCMutSet.Remove(effect.id);
-      }
-    }
-    effectsUpstairsTTCMutSetDeleteEffect.Clear();
-
-    foreach (var effect in effectsUpstairsTTCMutSetAddEffect) {
-      if (observers.TryGetValue(0, out List<IUpstairsTTCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUpstairsTTCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IUpstairsTTCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUpstairsTTCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsUpstairsTTCMutSetAddEffect.Clear();
-
-    foreach (var effect in effectsUpstairsTTCMutSetRemoveEffect) {
-      if (observers.TryGetValue(0, out List<IUpstairsTTCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUpstairsTTCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IUpstairsTTCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUpstairsTTCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsUpstairsTTCMutSetRemoveEffect.Clear();
-
-    foreach (var effect in effectsUpstairsTTCMutSetCreateEffect) {
-      if (observers.TryGetValue(0, out List<IUpstairsTTCMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUpstairsTTCMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IUpstairsTTCMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUpstairsTTCMutSetEffect(effect);
-        }
-      }
-    }
-    effectsUpstairsTTCMutSetCreateEffect.Clear();
 
   }
 
@@ -22999,197 +25850,6 @@ public class Root {
       }
     }
     effectsGrassTTCMutSetCreateEffect.Clear();
-
-  }
-
-    public int GetUnitMutSetHash(int id, int version, UnitMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public UnitMutSetIncarnation GetUnitMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsUnitMutSet[id].incarnation;
-    }
-    public UnitMutSet GetUnitMutSet(int id) {
-      return new UnitMutSet(this, id);
-    }
-    public List<UnitMutSet> AllUnitMutSet() {
-      List<UnitMutSet> result = new List<UnitMutSet>(rootIncarnation.incarnationsUnitMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsUnitMutSet.Keys) {
-        result.Add(new UnitMutSet(this, id));
-      }
-      return result;
-    }
-    public bool UnitMutSetExists(int id) {
-      return rootIncarnation.incarnationsUnitMutSet.ContainsKey(id);
-    }
-    public void CheckHasUnitMutSet(UnitMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasUnitMutSet(thing.id);
-    }
-    public void CheckHasUnitMutSet(int id) {
-      if (!rootIncarnation.incarnationsUnitMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid UnitMutSet}: " + id);
-      }
-    }
-    public UnitMutSet EffectUnitMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new UnitMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateUnitMutSet(id, rootIncarnation.version, incarnation);
-      return new UnitMutSet(this, id);
-    }
-    public void EffectInternalCreateUnitMutSet(int id, int incarnationVersion, UnitMutSetIncarnation incarnation) {
-      var effect = new UnitMutSetCreateEffect(id);
-      rootIncarnation.incarnationsUnitMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<UnitMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      effectsUnitMutSetCreateEffect.Add(effect);
-    }
-    public void EffectUnitMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new UnitMutSetDeleteEffect(id);
-      effectsUnitMutSetDeleteEffect.Add(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsUnitMutSet[id];
-      rootIncarnation.incarnationsUnitMutSet.Remove(id);
-    }
-
-       
-    public void EffectUnitMutSetAdd(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasUnitMutSet(setId);
-      CheckHasUnit(elementId);
-
-      var effect = new UnitMutSetAddEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsUnitMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(elementId);
-        var newIncarnation = new UnitMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsUnitMutSet[setId] =
-            new VersionAndIncarnation<UnitMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      effectsUnitMutSetAddEffect.Add(effect);
-    }
-    public void EffectUnitMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasUnitMutSet(setId);
-      CheckHasUnit(elementId);
-
-      var effect = new UnitMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsUnitMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new UnitMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsUnitMutSet[setId] =
-            new VersionAndIncarnation<UnitMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      effectsUnitMutSetRemoveEffect.Add(effect);
-    }
-
-       
-    public void AddUnitMutSetObserver(int id, IUnitMutSetEffectObserver observer) {
-      List<IUnitMutSetEffectObserver> obsies;
-      if (!observersForUnitMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IUnitMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForUnitMutSet[id] = obsies;
-    }
-
-    public void RemoveUnitMutSetObserver(int id, IUnitMutSetEffectObserver observer) {
-      if (observersForUnitMutSet.ContainsKey(id)) {
-        var list = observersForUnitMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForUnitMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-       
-  public void BroadcastUnitMutSetEffects(
-      SortedDictionary<int, List<IUnitMutSetEffectObserver>> observers) {
-    foreach (var effect in effectsUnitMutSetDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IUnitMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUnitMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IUnitMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUnitMutSetEffect(effect);
-        }
-        observersForUnitMutSet.Remove(effect.id);
-      }
-    }
-    effectsUnitMutSetDeleteEffect.Clear();
-
-    foreach (var effect in effectsUnitMutSetAddEffect) {
-      if (observers.TryGetValue(0, out List<IUnitMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUnitMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IUnitMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUnitMutSetEffect(effect);
-        }
-      }
-    }
-    effectsUnitMutSetAddEffect.Clear();
-
-    foreach (var effect in effectsUnitMutSetRemoveEffect) {
-      if (observers.TryGetValue(0, out List<IUnitMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUnitMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IUnitMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUnitMutSetEffect(effect);
-        }
-      }
-    }
-    effectsUnitMutSetRemoveEffect.Clear();
-
-    foreach (var effect in effectsUnitMutSetCreateEffect) {
-      if (observers.TryGetValue(0, out List<IUnitMutSetEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnUnitMutSetEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IUnitMutSetEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnUnitMutSetEffect(effect);
-        }
-      }
-    }
-    effectsUnitMutSetCreateEffect.Clear();
 
   }
 
