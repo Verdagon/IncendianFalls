@@ -62,7 +62,7 @@ namespace IncendianFalls {
       downStaircaseTile.components.Add(
         game.root.EffectLevelLinkTTCCreate(gauntletLevel, upStaircaseLocation).AsITerrainTileComponent());
 
-      var upStaircaseTile = preGauntletLevel.terrain.tiles[upStaircaseLocation];
+      var upStaircaseTile = gauntletLevel.terrain.tiles[upStaircaseLocation];
       upStaircaseTile.components.Add(
         game.root.EffectLevelLinkTTCCreate(preGauntletLevel, downStaircaseLocation).AsITerrainTileComponent());
 
