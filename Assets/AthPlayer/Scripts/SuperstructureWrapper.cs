@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using IncendianFalls;
+using AthPlayer;
 using Domino;
 using UnityEngine;
 using Atharia.Model;
 using System;
+using IncendianFalls;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public class SuperstructureWrapper : ISuperstructure {
     Superstructure ss;
 
@@ -30,6 +31,12 @@ namespace IncendianFalls {
 
     public Game RequestSetupIncendianFallsGame(int randomSeed, bool squareLevelsOnly) {
       var result = ss.RequestSetupIncendianFallsGame(randomSeed, squareLevelsOnly);
+
+      return result;
+    }
+
+    public Game RequestSetupEmberDeepGame(int randomSeed, bool squareLevelsOnly) {
+      var result = ss.RequestSetupEmberDeepGame(randomSeed, squareLevelsOnly);
 
       return result;
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public class Resumer {
     public Resumer() {
     }

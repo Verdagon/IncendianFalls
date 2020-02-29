@@ -6,9 +6,12 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersItemTTCMutSet;
+  public readonly int membersEmberDeepLevelLinkerTTCMutSet;
   public readonly int membersIncendianFallsLevelLinkerTTCMutSet;
   public readonly int membersTimeAnchorTTCMutSet;
   public readonly int membersLevelLinkTTCMutSet;
+  public readonly int membersMudTTCMutSet;
+  public readonly int membersDirtTTCMutSet;
   public readonly int membersDownStairsTTCMutSet;
   public readonly int membersUpStairsTTCMutSet;
   public readonly int membersWallTTCMutSet;
@@ -24,9 +27,12 @@ public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersGrassTTCMutSet;
   public ITerrainTileComponentMutBunchIncarnation(
       int membersItemTTCMutSet,
+      int membersEmberDeepLevelLinkerTTCMutSet,
       int membersIncendianFallsLevelLinkerTTCMutSet,
       int membersTimeAnchorTTCMutSet,
       int membersLevelLinkTTCMutSet,
+      int membersMudTTCMutSet,
+      int membersDirtTTCMutSet,
       int membersDownStairsTTCMutSet,
       int membersUpStairsTTCMutSet,
       int membersWallTTCMutSet,
@@ -41,9 +47,12 @@ public class ITerrainTileComponentMutBunchIncarnation {
       int membersStoneTTCMutSet,
       int membersGrassTTCMutSet) {
     this.membersItemTTCMutSet = membersItemTTCMutSet;
+    this.membersEmberDeepLevelLinkerTTCMutSet = membersEmberDeepLevelLinkerTTCMutSet;
     this.membersIncendianFallsLevelLinkerTTCMutSet = membersIncendianFallsLevelLinkerTTCMutSet;
     this.membersTimeAnchorTTCMutSet = membersTimeAnchorTTCMutSet;
     this.membersLevelLinkTTCMutSet = membersLevelLinkTTCMutSet;
+    this.membersMudTTCMutSet = membersMudTTCMutSet;
+    this.membersDirtTTCMutSet = membersDirtTTCMutSet;
     this.membersDownStairsTTCMutSet = membersDownStairsTTCMutSet;
     this.membersUpStairsTTCMutSet = membersUpStairsTTCMutSet;
     this.membersWallTTCMutSet = membersWallTTCMutSet;

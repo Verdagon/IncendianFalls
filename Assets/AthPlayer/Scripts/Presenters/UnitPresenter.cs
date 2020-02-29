@@ -1,12 +1,12 @@
 ﻿using System;
-using IncendianFalls;
+using AthPlayer;
 using Atharia;
 using Atharia.Model;
 using UnityEngine;
 using System.Collections.Generic;
 using Domino;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public class UnitPresenter :
       IUnitEffectVisitor,
       IUnitEffectObserver,
@@ -413,7 +413,7 @@ namespace IncendianFalls {
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
-                          "0",
+                          "zero",
                             50,
                           new Color(1, 1, 1, 1.5f),
                           0,

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using IncendianFalls;
+using AthPlayer;
 using Atharia.Model;
 using UnityEngine;
 using Domino;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public delegate void OnLocationHovered(Location location);
   public delegate void OnLocationClicked(Location location);
 

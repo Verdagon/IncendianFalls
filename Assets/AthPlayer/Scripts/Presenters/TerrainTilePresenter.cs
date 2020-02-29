@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using IncendianFalls;
+using AthPlayer;
 using Atharia;
 using Atharia.Model;
 using UnityEngine;
 using Domino;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public class TerrainTilePresenterTile : MonoBehaviour {
     // PhantomTilePresenter attaches this to the TileView it creates, so that when EditorPresenter
     // raycasts, it can know the PhantomTilePresenter that owns this TileView.
@@ -189,6 +189,12 @@ namespace IncendianFalls {
             topColor = new UnityEngine.Color(.3f, .3f, .3f);
             sideColor = new UnityEngine.Color(.2f, .2f, .2f);
           }
+        } else if (ttc is DirtTTCAsITerrainTileComponent) {
+          topColor = new UnityEngine.Color(.6f, .3f, 0);
+          sideColor = new UnityEngine.Color(.4f, .2f, 0);
+        } else if (ttc is MudTTCAsITerrainTileComponent) {
+          topColor = new UnityEngine.Color(.4f, .2f, 0f);
+          sideColor = new UnityEngine.Color(.27f, .13f, 0f);
         } else if (ttc is CliffLandingTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.2f, .2f, .2f);
           sideColor = new UnityEngine.Color(.1f, .05f, 0f);

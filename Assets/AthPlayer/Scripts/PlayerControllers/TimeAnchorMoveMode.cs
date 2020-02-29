@@ -2,7 +2,7 @@
 using Atharia.Model;
 using Domino;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public class TimeAnchorMoveMode : IMode {
     ISuperstructure ss;
     Superstate superstate;

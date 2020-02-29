@@ -81,4 +81,16 @@ namespace Atharia.Model {
       return new Atharia.Model.Void();
     }
   }
+  public static class DirtTTCExtensions {
+    public static Atharia.Model.Void Destruct(this DirtTTC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+  }
+  public static class MudTTCExtensions {
+    public static Atharia.Model.Void Destruct(this MudTTC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+  }
 }

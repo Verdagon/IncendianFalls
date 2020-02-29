@@ -8,8 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{2A32BDEE-1E58-CB67-4006-6CAE14A452A8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -64,6 +63,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AthPlayer\Scripts\ConsoleDriver.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\GamePresenter.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\ISuperstructure.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\ITimer.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\Logger.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\ModelExtensions.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\FireMode.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\IMode.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\Looker.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\NormalMode.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\PlayerController.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\Resumer.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\TimeAnchorMoveMode.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\Presenters\TerrainPresenter.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\Presenters\TerrainTilePresenter.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\Presenters\UnitPresenter.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\RootPresenter.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\SuperstructureLogger.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\SuperstructureWrapper.cs" />
     <Compile Include="Assets\Domino\Animations\Float\ClampFloatAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\Float\ConstantFloatAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\Float\IdentityFloatAnimation.cs" />
@@ -103,30 +121,12 @@
     <Compile Include="Assets\Domino\Scripts\Views\TileView.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\UnitView.cs" />
     <Compile Include="Assets\Geomancer\Scripts\EditorPresenter.cs" />
+    <Compile Include="Assets\Geomancer\Scripts\MemberToViewMap.cs" />
     <Compile Include="Assets\Geomancer\Scripts\MemberToViewMapper.cs" />
     <Compile Include="Assets\Geomancer\Scripts\ModelExtensions.cs" />
     <Compile Include="Assets\Geomancer\Scripts\PhantomTilePresenter.cs" />
     <Compile Include="Assets\Geomancer\Scripts\TerrainPresenter.cs" />
     <Compile Include="Assets\Geomancer\Scripts\TerrainTilePresenter.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\ConsoleDriver.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\GamePresenter.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\ISuperstructure.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\ITimer.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\Logger.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\ModelExtensions.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\FireMode.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\IMode.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\Looker.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\NormalMode.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\PlayerController.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\Resumer.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\TimeAnchorMoveMode.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\Presenters\TerrainPresenter.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\Presenters\TerrainTilePresenter.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\Presenters\UnitPresenter.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\RootPresenter.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\SuperstructureLogger.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\SuperstructureWrapper.cs" />
     <Compile Include="Assets\LookPanelView.cs" />
     <Compile Include="Assets\PlayerPanelView.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
@@ -842,7 +842,6 @@
       <HintPath>D:/Unity Editors/2019.2.15f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

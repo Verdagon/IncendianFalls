@@ -53,10 +53,12 @@ namespace Geomancer {
         Domino.TileDescription defaultTile,
         Domino.UnitDescription defaultUnit,
         List<String> members) {
-      UnityEngine.Color topColor = defaultTile.tileSymbolDescription.symbol.frontColor;
-      bool specifiedOutline = false;
-      UnityEngine.Color outlineColor = defaultTile.tileSymbolDescription.symbol.outlineColor;
-      UnityEngine.Color sideColor = defaultTile.tileSymbolDescription.sidesColor;
+      bool specifiedTopColor = false;
+      UnityEngine.Color topColor = new UnityEngine.Color();
+      bool specifiedOutlineColor = false;
+      UnityEngine.Color outlineColor = new UnityEngine.Color();
+      bool specifiedSideColor = false;
+      UnityEngine.Color sideColor = new UnityEngine.Color();
       Domino.ExtrudedSymbolDescription maybeOverlay = null;
       Domino.ExtrudedSymbolDescription maybeFeature = null;
       List<Domino.ExtrudedSymbolDescription> items = new List<Domino.ExtrudedSymbolDescription>();
@@ -69,13 +71,15 @@ namespace Geomancer {
           foreach (var memberEntry in memberEntries) {
             if (memberEntry is TopColorDescriptionForIDescription) {
               topColor = (memberEntry as TopColorDescriptionForIDescription).color;
+              specifiedTopColor = true;
             }
             if (memberEntry is SideColorDescriptionForIDescription) {
               sideColor = (memberEntry as SideColorDescriptionForIDescription).color;
+              specifiedSideColor = true;
             }
             if (memberEntry is OutlineColorDescriptionForIDescription) {
-              specifiedOutline = true;
               outlineColor = (memberEntry as OutlineColorDescriptionForIDescription).color;
+              specifiedOutlineColor = true;
             }
             if (memberEntry is OverlayDescriptionForIDescription) {
               maybeOverlay = (memberEntry as OverlayDescriptionForIDescription).symbol;
@@ -96,8 +100,12 @@ namespace Geomancer {
               unitDetails.Add((memberEntry as DetailDescriptionForIDescription).symbol);
             }
           }
+        } else {
+          items.Add(new Domino.ExtrudedSymbolDescription(Domino.RenderPriority.SYMBOL, new Domino.SymbolDescription("e", 100, new UnityEngine.Color(0, 1.0f, 1.0f), 0, Domino.OutlineMode.WithBackOutline, new UnityEngine.Color(0, 0, 0)), true, new UnityEngine.Color(0, 0, 0)));
         }
       }
+
+      var outlineMode = specifiedOutlineColor ? Domino.OutlineMode.WithOutline : defaultTile.tileSymbolDescription.symbol.withOutline;
 
       var tileSymbolDescription =
           new Domino.ExtrudedSymbolDescription(
@@ -105,12 +113,12 @@ namespace Geomancer {
               new Domino.SymbolDescription(
                   defaultTile.tileSymbolDescription.symbol.symbolId,
                   defaultTile.tileSymbolDescription.symbol.qualityPercent,
-                  topColor,
+                  specifiedTopColor ? topColor : defaultTile.tileSymbolDescription.symbol.frontColor,
                   defaultTile.tileRotationDegrees,
-                  specifiedOutline ? Domino.OutlineMode.WithOutline : defaultTile.tileSymbolDescription.symbol.withOutline,
-                  outlineColor),
+                  outlineMode,
+                  specifiedOutlineColor ? outlineColor : defaultTile.tileSymbolDescription.symbol.outlineColor),
               defaultTile.tileSymbolDescription.extruded,
-              sideColor);
+              specifiedSideColor ? sideColor : defaultTile.tileSymbolDescription.sidesColor);
 
       var itemSymbolDescriptionByItemId = new SortedDictionary<int, Domino.ExtrudedSymbolDescription>();
       for (int i = 0; i < items.Count; i++) {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Atharia.Model;
 using UnityEngine;
 using UnityEngine.UI;
-using IncendianFalls;
+using AthPlayer;
 
 namespace Domino {
   public class CameraController {
@@ -39,6 +39,7 @@ namespace Domino {
         animator = cameraObject.AddComponent<CameraAnimator>() as CameraAnimator;
         animator.Init(clock, cameraObject, new ConstantMatrix4x4Animation(cameraObject.transform.localToWorldMatrix));
       }
+      Asserts.Assert(animator != null);
       return animator;
     }
 

@@ -1,0 +1,17 @@
+
+mut struct TutorialLevelController {
+  TutorialLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: TutorialLevelController overrides ILevelController): Str {
+    TutorialLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: TutorialLevelController overrides ILevelController): Bool {
+    TutorialLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+}
+
+// imm struct ITutorialGeomancy { }
+// imm struct

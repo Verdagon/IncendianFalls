@@ -3,7 +3,7 @@ using Atharia.Model;
 using Domino;
 using UnityEngine;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public class NormalMode : IMode {
     ISuperstructure ss;
     Superstate superstate;

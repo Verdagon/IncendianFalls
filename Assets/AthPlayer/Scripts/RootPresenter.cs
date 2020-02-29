@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using IncendianFalls;
+using AthPlayer;
 using Atharia.Model;
 using UnityEngine;
 using UnityEngine.UI;
 using Domino;
-namespace IncendianFalls {
+using IncendianFalls;
+
+namespace AthPlayer {
   public class RootPresenter : MonoBehaviour {
 
     SlowableTimerClock timer;
@@ -44,7 +46,7 @@ namespace IncendianFalls {
       Debug.LogWarning("Hardcoding random seed!");
       var randomSeed = 1525224206;
       //var game = ss.RequestSetupIncendianFallsGame(randomSeed, false);
-      var game = ss.RequestSetupGauntletGame(randomSeed, false);
+      var game = ss.RequestSetupEmberDeepGame(randomSeed, false);
       gamePresenter =
           new GamePresenter(
               timer, timer, soundPlayer, resumeStaller, turnStaller, ss, game, instantiator, messageView);

@@ -8,6 +8,7 @@ public class RootIncarnation {
   public readonly int version;
   public int nextId;
   public int hash;
+  public readonly SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCIncarnation>> incarnationsEmberDeepLevelLinkerTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>> incarnationsRidgeLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>> incarnationsGauntletLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>> incarnationsPreGauntletLevelController;
@@ -21,6 +22,8 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<ITerrainTileComponentMutBunchIncarnation>> incarnationsITerrainTileComponentMutBunch;
   public readonly SortedDictionary<int, VersionAndIncarnation<TerrainIncarnation>> incarnationsTerrain;
   public readonly SortedDictionary<int, VersionAndIncarnation<LevelLinkTTCIncarnation>> incarnationsLevelLinkTTC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<MudTTCIncarnation>> incarnationsMudTTC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<DirtTTCIncarnation>> incarnationsDirtTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<DownStairsTTCIncarnation>> incarnationsDownStairsTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<UpStairsTTCIncarnation>> incarnationsUpStairsTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<WallTTCIncarnation>> incarnationsWallTTC;
@@ -94,9 +97,12 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<ManaPotionStrongMutSetIncarnation>> incarnationsManaPotionStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<HealthPotionStrongMutSetIncarnation>> incarnationsHealthPotionStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<ItemTTCMutSetIncarnation>> incarnationsItemTTCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>> incarnationsEmberDeepLevelLinkerTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<IncendianFallsLevelLinkerTTCMutSetIncarnation>> incarnationsIncendianFallsLevelLinkerTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<TimeAnchorTTCMutSetIncarnation>> incarnationsTimeAnchorTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<LevelLinkTTCMutSetIncarnation>> incarnationsLevelLinkTTCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<MudTTCMutSetIncarnation>> incarnationsMudTTCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<DirtTTCMutSetIncarnation>> incarnationsDirtTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<DownStairsTTCMutSetIncarnation>> incarnationsDownStairsTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<UpStairsTTCMutSetIncarnation>> incarnationsUpStairsTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<WallTTCMutSetIncarnation>> incarnationsWallTTCMutSet;
@@ -115,6 +121,7 @@ public class RootIncarnation {
     this.version = version;
     this.nextId = nextId;
     this.hash = hash;
+    this.incarnationsEmberDeepLevelLinkerTTC = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCIncarnation>>();
     this.incarnationsRidgeLevelController = new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>();
     this.incarnationsGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>>();
     this.incarnationsPreGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>>();
@@ -128,6 +135,8 @@ public class RootIncarnation {
     this.incarnationsITerrainTileComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<ITerrainTileComponentMutBunchIncarnation>>();
     this.incarnationsTerrain = new SortedDictionary<int, VersionAndIncarnation<TerrainIncarnation>>();
     this.incarnationsLevelLinkTTC = new SortedDictionary<int, VersionAndIncarnation<LevelLinkTTCIncarnation>>();
+    this.incarnationsMudTTC = new SortedDictionary<int, VersionAndIncarnation<MudTTCIncarnation>>();
+    this.incarnationsDirtTTC = new SortedDictionary<int, VersionAndIncarnation<DirtTTCIncarnation>>();
     this.incarnationsDownStairsTTC = new SortedDictionary<int, VersionAndIncarnation<DownStairsTTCIncarnation>>();
     this.incarnationsUpStairsTTC = new SortedDictionary<int, VersionAndIncarnation<UpStairsTTCIncarnation>>();
     this.incarnationsWallTTC = new SortedDictionary<int, VersionAndIncarnation<WallTTCIncarnation>>();
@@ -201,9 +210,12 @@ public class RootIncarnation {
     this.incarnationsManaPotionStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<ManaPotionStrongMutSetIncarnation>>();
     this.incarnationsHealthPotionStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<HealthPotionStrongMutSetIncarnation>>();
     this.incarnationsItemTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<ItemTTCMutSetIncarnation>>();
+    this.incarnationsEmberDeepLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>>();
     this.incarnationsIncendianFallsLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<IncendianFallsLevelLinkerTTCMutSetIncarnation>>();
     this.incarnationsTimeAnchorTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<TimeAnchorTTCMutSetIncarnation>>();
     this.incarnationsLevelLinkTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<LevelLinkTTCMutSetIncarnation>>();
+    this.incarnationsMudTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<MudTTCMutSetIncarnation>>();
+    this.incarnationsDirtTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<DirtTTCMutSetIncarnation>>();
     this.incarnationsDownStairsTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<DownStairsTTCMutSetIncarnation>>();
     this.incarnationsUpStairsTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<UpStairsTTCMutSetIncarnation>>();
     this.incarnationsWallTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<WallTTCMutSetIncarnation>>();
@@ -227,6 +239,7 @@ public class RootIncarnation {
     this.version = newVersion;
     this.nextId = newNextId;
     this.hash = newHash;
+    this.incarnationsEmberDeepLevelLinkerTTC = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCIncarnation>>(that.incarnationsEmberDeepLevelLinkerTTC);
     this.incarnationsRidgeLevelController = new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>(that.incarnationsRidgeLevelController);
     this.incarnationsGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>>(that.incarnationsGauntletLevelController);
     this.incarnationsPreGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>>(that.incarnationsPreGauntletLevelController);
@@ -240,6 +253,8 @@ public class RootIncarnation {
     this.incarnationsITerrainTileComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<ITerrainTileComponentMutBunchIncarnation>>(that.incarnationsITerrainTileComponentMutBunch);
     this.incarnationsTerrain = new SortedDictionary<int, VersionAndIncarnation<TerrainIncarnation>>(that.incarnationsTerrain);
     this.incarnationsLevelLinkTTC = new SortedDictionary<int, VersionAndIncarnation<LevelLinkTTCIncarnation>>(that.incarnationsLevelLinkTTC);
+    this.incarnationsMudTTC = new SortedDictionary<int, VersionAndIncarnation<MudTTCIncarnation>>(that.incarnationsMudTTC);
+    this.incarnationsDirtTTC = new SortedDictionary<int, VersionAndIncarnation<DirtTTCIncarnation>>(that.incarnationsDirtTTC);
     this.incarnationsDownStairsTTC = new SortedDictionary<int, VersionAndIncarnation<DownStairsTTCIncarnation>>(that.incarnationsDownStairsTTC);
     this.incarnationsUpStairsTTC = new SortedDictionary<int, VersionAndIncarnation<UpStairsTTCIncarnation>>(that.incarnationsUpStairsTTC);
     this.incarnationsWallTTC = new SortedDictionary<int, VersionAndIncarnation<WallTTCIncarnation>>(that.incarnationsWallTTC);
@@ -313,9 +328,12 @@ public class RootIncarnation {
     this.incarnationsManaPotionStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<ManaPotionStrongMutSetIncarnation>>(that.incarnationsManaPotionStrongMutSet);
     this.incarnationsHealthPotionStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<HealthPotionStrongMutSetIncarnation>>(that.incarnationsHealthPotionStrongMutSet);
     this.incarnationsItemTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<ItemTTCMutSetIncarnation>>(that.incarnationsItemTTCMutSet);
+    this.incarnationsEmberDeepLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>>(that.incarnationsEmberDeepLevelLinkerTTCMutSet);
     this.incarnationsIncendianFallsLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<IncendianFallsLevelLinkerTTCMutSetIncarnation>>(that.incarnationsIncendianFallsLevelLinkerTTCMutSet);
     this.incarnationsTimeAnchorTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<TimeAnchorTTCMutSetIncarnation>>(that.incarnationsTimeAnchorTTCMutSet);
     this.incarnationsLevelLinkTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<LevelLinkTTCMutSetIncarnation>>(that.incarnationsLevelLinkTTCMutSet);
+    this.incarnationsMudTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<MudTTCMutSetIncarnation>>(that.incarnationsMudTTCMutSet);
+    this.incarnationsDirtTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<DirtTTCMutSetIncarnation>>(that.incarnationsDirtTTCMutSet);
     this.incarnationsDownStairsTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<DownStairsTTCMutSetIncarnation>>(that.incarnationsDownStairsTTCMutSet);
     this.incarnationsUpStairsTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<UpStairsTTCMutSetIncarnation>>(that.incarnationsUpStairsTTCMutSet);
     this.incarnationsWallTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<WallTTCMutSetIncarnation>>(that.incarnationsWallTTCMutSet);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Atharia.Model;
 using Domino;
-using IncendianFalls;
+using AthPlayer;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,7 +50,7 @@ public class PlayerPanelView : MonoBehaviour {
 
     fireButton.GetComponent<UIClickListener>().MouseEnter +=
         () => lookPanelView.ShowMessage(
-            "(F) Fire: Cast fireball for " + Actions.FIRE_COST + "mp for " + Actions.FIRE_DAMAGE + " damage.");
+            "(F) Fire: Cast fireball for " + IncendianFalls.Actions.FIRE_COST + "mp for " + IncendianFalls.Actions.FIRE_DAMAGE + " damage.");
     fireButton.GetComponent<UIClickListener>().MouseExit +=
         () => lookPanelView.ClearMessage();
   }

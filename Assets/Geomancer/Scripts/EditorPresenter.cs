@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Domino;
 using System.IO;
+using AthPlayer;
 
 namespace Geomancer {
   class EditorLogger : Geomancer.Model.ILogger {
@@ -23,7 +24,7 @@ namespace Geomancer {
   }
 
   public class EditorPresenter : MonoBehaviour {
-    private IClock clock;
+    private SlowableTimerClock clock;
     public Instantiator instantiator;
     public GameObject cameraObject;
 
@@ -35,6 +36,7 @@ namespace Geomancer {
 
     public NarrationPanelView messageView;
 
+
     Root ss;
     Level level;
 
@@ -43,7 +45,7 @@ namespace Geomancer {
     Dictionary<KeyCode, string> memberByKeyCode;
 
     public void Start() {
-      clock = null;
+      clock = new SlowableTimerClock(1.0f);
 
       memberByKeyCode = new Dictionary<KeyCode, string>() {
         [KeyCode.G] = "grass",
@@ -111,64 +113,14 @@ namespace Geomancer {
         });
       }
 
-      terrainPresenter = new TerrainPresenter(clock, MakeVivimap(), level.terrain, instantiator);
+      terrainPresenter = new TerrainPresenter(clock, MemberToViewMap.MakeVivimap(), level.terrain, instantiator);
       terrainPresenter.PhantomTileClicked += HandlePhantomTileClicked;
       terrainPresenter.TerrainTileClicked += HandleTerrainTileClicked;
+      terrainPresenter.TerrainTileHovered += HandleTerrainTileHovered;
 
       cameraController = new CameraController(clock, cameraObject, level.terrain.GetTileCenter(new Location(0, 0, 0)).ToUnity());
     }
 
-    private MemberToViewMapper MakeVivimap() {
-      var entries = new Dictionary<string, List<MemberToViewMapper.IDescription>>();
-      entries.Add("grass", new List<MemberToViewMapper.IDescription>() {
-        new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(0, .3f, 0)),
-        new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(0, .5f, 0)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
-      });
-      entries.Add("rocks", new List<MemberToViewMapper.IDescription>() {
-        new MemberToViewMapper.OverlayDescriptionForIDescription(
-          new ExtrudedSymbolDescription(
-            RenderPriority.TILE,
-            new SymbolDescription("f",
-                            50,new Color(.5f, .5f, .5f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
-            false,
-            new Color(0, 0, 0)))
-      });
-      entries.Add("cave", new List<MemberToViewMapper.IDescription>() {
-        new MemberToViewMapper.FeatureDescriptionForIDescription(
-                  new ExtrudedSymbolDescription(
-                      RenderPriority.SYMBOL,
-                      new SymbolDescription(
-                          "p",
-                            50,
-                          new Color(0, 0, 0),
-                          0,
-                          OutlineMode.WithOutline,
-                          new Color(1, 1, 1)),
-                      false,
-                      new Color(1f, 1f, 1f)))
-      });
-      entries.Add("dirt", new List<MemberToViewMapper.IDescription>() {
-        new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(.6f, .3f, 0)),
-        new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(.4f, .2f, 0)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
-      });
-      entries.Add("mud", new List<MemberToViewMapper.IDescription>() {
-        new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(.4f, .2f, 0)),
-        new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(.27f, .13f, 0)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
-      });
-      entries.Add("marker", new List<MemberToViewMapper.IDescription>() {
-        new MemberToViewMapper.OverlayDescriptionForIDescription(
-          new ExtrudedSymbolDescription(
-            RenderPriority.TILE,
-            new SymbolDescription("i",
-                            50, new Color(1f, 1f, 1f), 0, OutlineMode.WithBackOutline, new Color(0, 0, 0)),
-            false,
-            new Color(0, 0, 0)))
-      });
-      return new MemberToViewMapper(entries);
-    }
 
     public void HandlePhantomTileClicked(Location location) {
       ss.Transact(delegate () {
@@ -188,7 +140,34 @@ namespace Geomancer {
       terrainPresenter.SetSelection(selection);
     }
 
+    public void HandleTerrainTileHovered(Location location) {
+      UpdateLookPanelView();
+    }
+
+    private void UpdateLookPanelView() {
+      var location = terrainPresenter.GetMaybeMouseHighlightLocation();
+      if (location == null) {
+        lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
+      } else {
+        var message = "(" + location.groupX + ", " + location.groupY + ", " + location.indexInGroup + ")";
+
+        var symbolsAndDescriptions = new List<KeyValuePair<SymbolDescription, string>>();
+        if (level.terrain.tiles.ContainsKey(location)) {
+          foreach (var member in level.terrain.tiles[location].members) {
+            var symbol =
+              new SymbolDescription(
+                "e", 50, new Color(.5f, .5f, .5f), 0, OutlineMode.WithOutline, new Color(0, 0, 0));
+            symbolsAndDescriptions.Add(new KeyValuePair<SymbolDescription, string>(symbol, member));
+          }
+        }
+
+        lookPanelView.SetStuff(true, message, "", symbolsAndDescriptions);
+      }
+    }
+
     public void Update() {
+      clock.Update();
+
       if (Input.GetKey(KeyCode.RightBracket)) {
         cameraController.MoveIn(Time.deltaTime);
       }
@@ -218,6 +197,7 @@ namespace Geomancer {
           return new Geomancer.Model.Void();
         });
         Save();
+        UpdateLookPanelView();
       }
       if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.Underscore)) {
         ss.Transact<Geomancer.Model.Void>(delegate () {
@@ -227,6 +207,7 @@ namespace Geomancer {
           return new Geomancer.Model.Void();
         });
         Save();
+        UpdateLookPanelView();
       }
       if (Input.GetKeyDown(KeyCode.Delete)) {
         ss.Transact<Geomancer.Model.Void>(delegate () {
@@ -238,12 +219,14 @@ namespace Geomancer {
           return new Geomancer.Model.Void();
         });
         Save();
+        UpdateLookPanelView();
       }
       foreach (var keyCodeAndMember in memberByKeyCode) {
         if (Input.GetKeyDown(keyCodeAndMember.Key)) {
           ToggleMember(keyCodeAndMember.Value);
           Save();
         }
+        UpdateLookPanelView();
       }
 
       UnityEngine.Ray ray = cameraObject.GetComponentInChildren<Camera>().ScreenPointToRay(Input.mousePosition);

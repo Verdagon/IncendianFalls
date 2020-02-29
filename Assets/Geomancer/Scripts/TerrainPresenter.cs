@@ -5,10 +5,12 @@ using UnityEngine;
 using Domino;
 
 namespace Geomancer {
+  public delegate void OnTerrainTileHovered(Location location);
   public delegate void OnTerrainTileClicked(Location location);
   public delegate void OnPhantomTileClicked(Location location);
 
   public class TerrainPresenter : ITerrainEffectVisitor, ITerrainEffectObserver, ITerrainTileByLocationMutMapEffectObserver, ITerrainTileByLocationMutMapEffectVisitor {
+    public OnTerrainTileHovered TerrainTileHovered;
     public OnTerrainTileClicked TerrainTileClicked;
     public OnPhantomTileClicked PhantomTileClicked;
 
@@ -19,8 +21,7 @@ namespace Geomancer {
     Dictionary<Location, TerrainTilePresenter> tilePresenters = new Dictionary<Location, TerrainTilePresenter>();
     Dictionary<Location, PhantomTilePresenter> phantomTilePresenters = new Dictionary<Location, PhantomTilePresenter>();
 
-    bool isMouseHighlighting = false;
-    Location mouseHighlightedLocation = new Location(0, 0, 0);
+    Location maybeMouseHighlightedLocation = null;
 
     SortedSet<Location> selectedLocations = new SortedSet<Location>();
 
@@ -39,6 +40,8 @@ namespace Geomancer {
       RefreshPhantomTiles();
     }
 
+    public Location GetMaybeMouseHighlightLocation() { return maybeMouseHighlightedLocation; }
+
     public void DestroyTerrainPresenter() {
       foreach (var entry in tilePresenters) {
         entry.Value.DestroyTerrainTilePresenter();
@@ -52,56 +55,57 @@ namespace Geomancer {
     }
 
     public void UpdateMouse(UnityEngine.Ray ray) {
-      Location oldLocation = mouseHighlightedLocation;
-      bool newMouseIsHighlighting = LocationUnderMouse(ray, out var location);
-      if (newMouseIsHighlighting != isMouseHighlighting || location != mouseHighlightedLocation) {
-        isMouseHighlighting = newMouseIsHighlighting;
-        mouseHighlightedLocation = location;
+      Location oldLocation = maybeMouseHighlightedLocation;
+      var location = LocationUnderMouse(ray);
+      if (location != maybeMouseHighlightedLocation) {
+        maybeMouseHighlightedLocation = location;
         UpdateLocationHighlighted(oldLocation);
         UpdateLocationHighlighted(location);
+        TerrainTileHovered?.Invoke(maybeMouseHighlightedLocation);
       }
 
       if (Input.GetMouseButtonDown(0)) {
-        if (tilePresenters.TryGetValue(mouseHighlightedLocation, out var newMousedTerrainTilePresenter)) {
-          TerrainTileClicked?.Invoke(mouseHighlightedLocation);
-        }
-        if (phantomTilePresenters.TryGetValue(mouseHighlightedLocation, out var newMousedPhantomTilePresenter)) {
-          PhantomTileClicked?.Invoke(mouseHighlightedLocation);
+        if (maybeMouseHighlightedLocation != null) {
+          if (tilePresenters.TryGetValue(maybeMouseHighlightedLocation, out var newMousedTerrainTilePresenter)) {
+            TerrainTileClicked?.Invoke(maybeMouseHighlightedLocation);
+          }
+          if (phantomTilePresenters.TryGetValue(maybeMouseHighlightedLocation, out var newMousedPhantomTilePresenter)) {
+            PhantomTileClicked?.Invoke(maybeMouseHighlightedLocation);
+          }
         }
       }
     }
 
     private void UpdateLocationHighlighted(Location location) {
-      bool highlighted = isMouseHighlighting && location == mouseHighlightedLocation;
+      bool highlighted = location == maybeMouseHighlightedLocation;
       bool selected = selectedLocations.Contains(location);
-      if (tilePresenters.TryGetValue(location, out var newMousedTerrainTilePresenter)) {
-        newMousedTerrainTilePresenter.SetTinted(highlighted, selected);
-      }
-      if (phantomTilePresenters.TryGetValue(location, out var newMousedPhantomTilePresenter)) {
-        // Cant select a phantom tile
-        newMousedPhantomTilePresenter.SetHighlighted(highlighted);
+      if (location != null) {
+        if (tilePresenters.TryGetValue(location, out var newMousedTerrainTilePresenter)) {
+          newMousedTerrainTilePresenter.SetTinted(highlighted, selected);
+        }
+        if (phantomTilePresenters.TryGetValue(location, out var newMousedPhantomTilePresenter)) {
+          // Cant select a phantom tile
+          newMousedPhantomTilePresenter.SetHighlighted(highlighted);
+        }
       }
     }
 
-    private bool LocationUnderMouse(UnityEngine.Ray ray, out Location location) {
+    private Location LocationUnderMouse(UnityEngine.Ray ray) {
       RaycastHit hit;
       if (Physics.Raycast(ray, out hit)) {
         if (hit.collider != null) {
           var gameObject = hit.collider.gameObject;
           var mousedPhantomTilePresenterTile = gameObject.GetComponentInParent<PhantomTilePresenterTile>();
           if (mousedPhantomTilePresenterTile) {
-            location = mousedPhantomTilePresenterTile.presenter.location;
-            return true;
+            return mousedPhantomTilePresenterTile.presenter.location;
           }
           var mousedTerrainTilePresenterTile = gameObject.GetComponentInParent<TerrainTilePresenterTile>();
           if (mousedTerrainTilePresenterTile) {
-            location = mousedTerrainTilePresenterTile.presenter.location;
-            return true;
+            return mousedTerrainTilePresenterTile.presenter.location;
           }
         }
       }
-      location = new Location(0, 0, 0);
-      return false;
+      return null;
     }
 
     public void OnTerrainEffect(ITerrainEffect effect) { effect.visit(this); }

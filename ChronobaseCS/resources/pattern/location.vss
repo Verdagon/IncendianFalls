@@ -4,3 +4,8 @@ imm struct Location {
   groupY: Int;
   indexInGroup: Int;
 }
+
+imm struct ElevatedLocation {
+  location: Location;
+  elevation: Int;
+}

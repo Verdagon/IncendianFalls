@@ -4,7 +4,7 @@ using Atharia.Model;
 using Domino;
 using UnityEngine;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public class Looker : IUnitEffectObserver, IUnitEffectVisitor {
     LookPanelView lookPanelView;
     Unit lookedUnit = Unit.Null;

@@ -105,3 +105,27 @@ mut struct DownStairsTTC {
     DownStairsTTCExtensions.Destruct
   }
 }
+
+mut struct RocksTTC {
+  RocksTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: RocksTTC overrides IDestructible): Void {
+    RocksTTCExtensions.Destruct
+  }
+}
+
+mut struct DirtTTC {
+  DirtTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: DirtTTC overrides IDestructible): Void {
+    DirtTTCExtensions.Destruct
+  }
+}
+
+mut struct MudTTC {
+  MudTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: MudTTC overrides IDestructible): Void {
+    MudTTCExtensions.Destruct
+  }
+}

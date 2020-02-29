@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using IncendianFalls;
+using AthPlayer;
 using Atharia;
 using Atharia.Model;
 using UnityEngine;
 using Domino;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public delegate void OnTerrainClicked(Location location);
   public delegate void OnTerrainHovered(Location location);
 

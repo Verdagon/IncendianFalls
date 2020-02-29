@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public class SuperstructureLogger {
     long date;
     public SuperstructureLogger(long date) {

@@ -1,0 +1,21 @@
+
+mut struct EmberDeepLevelLinkerTTC {
+  EmberDeepLevelLinkerTTC isa ITerrainTileComponent;
+  EmberDeepLevelLinkerTTC isa IInteractableTTC;
+
+  thisLevelDepth: Int;
+
+  fn Interact(
+    this: EmberDeepLevelLinkerTTC overrides IInteractableTTC,
+    game: Game,
+    superstate: $Superstate,
+    interactingUnit: Unit,
+    containingTileLocation: Location):
+  Str {
+    EmberDeepLevelLinkerTTCExtensions.Interact
+  }
+
+  fn Destruct(this: EmberDeepLevelLinkerTTC overrides IDestructible): Void {
+    EmberDeepLevelLinkerTTCExtensions.Destruct
+  }
+}

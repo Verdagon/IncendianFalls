@@ -19,6 +19,13 @@ imm struct SetupGauntletGameRequest {
   squareLevelsOnly: Bool;
 }
 
+imm struct SetupEmberDeepGameRequest {
+  SetupGauntletGameRequest isa IRequest;
+
+  randomSeed: Int;
+  squareLevelsOnly: Bool;
+}
+
 imm struct SetupTerrainRequest {
   SetupTerrainRequest isa IRequest;
 

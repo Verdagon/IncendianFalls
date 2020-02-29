@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Atharia.Model;
 using UnityEngine;
 using UnityEngine.UI;
-using IncendianFalls;
+using AthPlayer;
 
 namespace Domino {
   public class FollowingCameraController :

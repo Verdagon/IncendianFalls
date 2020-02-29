@@ -1,7 +1,7 @@
 ﻿using System;
 using Atharia.Model;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public interface IModeDelegate {
     void AfterDidSomething();
     void SwitchToNormalMode();

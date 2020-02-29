@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using IncendianFalls;
+using AthPlayer;
 using Geomancer.Model;
 using UnityEngine;
 using Domino;
@@ -78,7 +78,7 @@ namespace Geomancer {
               new ExtrudedSymbolDescription(
                 RenderPriority.TILE,
                 new SymbolDescription(
-                    ((char)('0' + patternTile.shapeIndex)).ToString(),
+                    patternTile.shapeIndex == 0 ? "i" : "h",
                     100,
                     frontColor,
                     patternTile.rotateDegrees,

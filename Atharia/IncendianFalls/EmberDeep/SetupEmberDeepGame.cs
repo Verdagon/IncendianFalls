@@ -1,0 +1,102 @@
+﻿using Atharia.Model;
+using IncendianFalls;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace EmberDeep {
+  class SetupEmberDeepGame {
+    public static Game SetupGame(
+        SSContext context,
+        out Superstate superstate,
+        int randomSeed,
+        bool squareLevelsOnly) {
+      var rand = context.root.EffectRandCreate(randomSeed);
+
+      var levels = context.root.EffectLevelMutSetCreate();
+
+      var game =
+          context.root.EffectGameCreate(
+              rand,
+              squareLevelsOnly,
+              levels,
+              Unit.Null,
+              Level.Null,
+              0,
+              context.root.EffectExecutionStateCreate(
+                  Unit.Null,
+                  false,
+                  IPreActingUCWeakMutBunch.Null,
+                  IPostActingUCWeakMutBunch.Null));
+
+      superstate =
+          new Superstate(
+            game,
+            null,
+            new List<RootIncarnation>(),
+            new List<IRequest>(),
+            new List<int>(),
+            null,
+            null);
+
+      EmberDeepLevelLinkerTTCExtensions.MakeNextLevel(
+          out var firstLevel,
+          out var firstLevelSuperstate,
+          out var entryLocation,
+          game,
+          superstate);
+      game.level = firstLevel;
+      superstate.levelSuperstate = firstLevelSuperstate;
+
+      var player =
+          context.root.EffectUnitCreate(
+              context.root.EffectIUnitEventMutListCreate(),
+              true,
+              0,
+              new Location(0, 0, 0),
+              "chronomancer",
+              90, 90,
+              100, 100,
+              600,
+              0,
+              IUnitComponentMutBunch.New(context.root),
+              true,
+              5);
+      firstLevel.EnterUnit(
+          game,
+          superstate.levelSuperstate,
+          player,
+          entryLocation);
+      game.player = player;
+
+      return game;
+    }
+
+    public static void MakeLevel(
+        out Level level,
+        out LevelSuperstate levelSuperstate,
+        SSContext context,
+        Game game,
+        Superstate superstate,
+        int depth) {
+      ForestTerrainGenerator.Generate(
+          out Terrain terrain,
+          out SortedDictionary<int, Room> rooms,
+          game.root,
+          game.rand,
+          PentagonPattern9.makePentagon9Pattern(),
+          1000);
+
+      var units = context.root.EffectUnitMutSetCreate();
+
+      level =
+          context.root.EffectLevelCreate(
+              terrain, units, NullILevelController.Null, game.time);
+      levelSuperstate = new LevelSuperstate(level);
+
+      var controller = context.root.EffectRidgeLevelControllerCreate(level);
+      level.controller = controller.AsILevelController();
+    }
+
+  }
+}

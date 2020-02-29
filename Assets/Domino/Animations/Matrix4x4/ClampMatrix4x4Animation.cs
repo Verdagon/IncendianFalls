@@ -27,8 +27,8 @@ public class ClampMatrix4x4Animation : IMatrix4x4Animation {
     return inner.Get(timeMs);
   }
 
-  public IMatrix4x4Animation Simplify(long time) {
-    if (time >= endTimeMs) {
+  public IMatrix4x4Animation Simplify(long timeMs) {
+    if (timeMs >= endTimeMs) {
       Matrix4x4 value = inner.Get(endTimeMs);
       if (value.EqualsE(Matrix4x4.identity, .001f)) {
         return new IdentityMatrix4x4Animation();

@@ -1,8 +1,8 @@
 ﻿using System;
 using Atharia.Model;
-using IncendianFalls;
+using AthPlayer;
 
-namespace IncendianFalls {
+namespace AthPlayer {
   public class LoggerImpl : ILogger {
     public LoggerImpl() {
     }
