@@ -11,7 +11,15 @@ mut struct TutorialLevelController {
   fn ConsiderCornersAdjacent(this: TutorialLevelController overrides ILevelController): Bool {
     TutorialLevelControllerExtensions.ConsiderCornersAdjacent
   }
-}
 
-// imm struct ITutorialGeomancy { }
-// imm struct
+  fn SimpleTrigger(
+    this: TutorialLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    TutorialLevelControllerExtensions.SimpleTrigger
+  }
+}

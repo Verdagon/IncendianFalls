@@ -45,6 +45,9 @@ public class SquareCaveLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return SquareCaveLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
+  public Void SimpleTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    return SquareCaveLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
+  }
 
 }
 public static class SquareCaveLevelControllerAsILevelControllerCaster {

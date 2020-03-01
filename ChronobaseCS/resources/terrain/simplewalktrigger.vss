@@ -1,0 +1,22 @@
+
+// Will notify the controller about a certain trigger happening.
+// Someday, perhaps split this into actual subclasses... maybe, if we figure out
+// a desirable way to share TTCs between geomancer and player.
+mut struct SimplePresenceTriggerTTC {
+  SimplePresenceTriggerTTC isa IPresenceTriggerTTC;
+
+  name: Str;
+
+  fn Trigger(
+      this: SimplePresenceTriggerTTC overrides IPresenceTriggerTTC,
+      game: Game,
+      superstate: $Superstate,
+      triggeringUnit: Unit,
+      containingTileLocation: Location): Void {
+    SimplePresenceTriggerTTCExtensions.Trigger
+  }
+
+  fn Destruct(this: SimplePresenceTriggerTTC overrides IDestructible): Void {
+    SimplePresenceTriggerTTCExtensions.Destruct
+  }
+}

@@ -14,4 +14,11 @@ mut struct Level {
 mut interface ILevelController {
   fn GetName(): Str;
   fn ConsiderCornersAdjacent(): Bool;
+  fn SimpleTrigger(
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void;
 }

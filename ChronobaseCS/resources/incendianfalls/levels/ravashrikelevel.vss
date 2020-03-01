@@ -11,4 +11,15 @@ mut struct RavashrikeLevelController {
   fn ConsiderCornersAdjacent(this: RavashrikeLevelController overrides ILevelController): Bool {
     RavashrikeLevelControllerExtensions.ConsiderCornersAdjacent
   }
+
+  fn SimpleTrigger(
+    this: RavashrikeLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    RavashrikeLevelControllerExtensions.SimpleTrigger
+  }
 }

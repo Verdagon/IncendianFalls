@@ -52,7 +52,7 @@ namespace Atharia.Model {
         out Location entryLocation,
         Game game,
         Superstate superstate) {
-      RidgeLevelControllerExtensions.LoadLevel(
+      TutorialLevelControllerExtensions.LoadLevel(
         out level,
         out levelSuperstate,
         out entryLocation,

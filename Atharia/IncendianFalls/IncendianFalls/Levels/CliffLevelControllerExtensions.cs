@@ -11,5 +11,15 @@ namespace Atharia.Model {
     public static bool ConsiderCornersAdjacent(this CliffLevelController obj) {
       return false;
     }
+
+    public static Atharia.Model.Void SimpleTrigger(
+        this CliffLevelController obj,
+        Game game,
+        Superstate superstate,
+        Unit triggeringUnit,
+        Location location,
+        string triggerName) {
+      return new Atharia.Model.Void();
+    }
   }
 }

@@ -105,6 +105,16 @@ namespace Atharia.Model {
       return true;
     }
 
+    public static Atharia.Model.Void SimpleTrigger(
+        this SquareCaveLevelController obj,
+        Game game,
+        Superstate superstate,
+        Unit triggeringUnit,
+        Location location,
+        string triggerName) {
+      return new Atharia.Model.Void();
+    }
+
     //public static Location GetEntryLocation(
     //    this SquareCaveLevelController obj,
     //    Game game,

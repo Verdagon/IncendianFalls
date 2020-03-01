@@ -102,9 +102,13 @@ namespace Atharia.Model {
     //  }
     //}
 
-    public static Atharia.Model.Void Generate(
-        this GauntletLevelController cliffLevelController,
-        Game game) {
+    public static Atharia.Model.Void SimpleTrigger(
+        this GauntletLevelController obj,
+        Game game,
+        Superstate superstate,
+        Unit triggeringUnit,
+        Location location,
+        string triggerName) {
       return new Atharia.Model.Void();
     }
   }

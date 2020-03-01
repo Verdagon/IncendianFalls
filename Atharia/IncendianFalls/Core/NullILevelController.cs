@@ -32,5 +32,9 @@ public class NullILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     throw new Exception("Called ConsiderCornersAdjacent on a null!");
   }
+             
+  public Void SimpleTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    throw new Exception("Called SimpleTrigger on a null!");
+  }
              }
 }

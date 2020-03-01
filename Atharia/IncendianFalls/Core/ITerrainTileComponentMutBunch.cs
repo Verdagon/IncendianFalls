@@ -35,6 +35,10 @@ public class ITerrainTileComponentMutBunch {
   }
   public void CheckForNullViolations(List<string> violations) {
 
+    if (!root.SimplePresenceTriggerTTCMutSetExists(membersSimplePresenceTriggerTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersSimplePresenceTriggerTTCMutSet");
+    }
+
     if (!root.ItemTTCMutSetExists(membersItemTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersItemTTCMutSet");
     }
@@ -120,6 +124,9 @@ public class ITerrainTileComponentMutBunch {
       return;
     }
     foundIds.Add(id);
+    if (root.SimplePresenceTriggerTTCMutSetExists(membersSimplePresenceTriggerTTCMutSet.id)) {
+      membersSimplePresenceTriggerTTCMutSet.FindReachableObjects(foundIds);
+    }
     if (root.ItemTTCMutSetExists(membersItemTTCMutSet.id)) {
       membersItemTTCMutSet.FindReachableObjects(foundIds);
     }
@@ -190,7 +197,16 @@ public class ITerrainTileComponentMutBunch {
     }
     return this.root == that.root && id == that.id;
   }
-         public ItemTTCMutSet membersItemTTCMutSet {
+         public SimplePresenceTriggerTTCMutSet membersSimplePresenceTriggerTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersSimplePresenceTriggerTTCMutSet of null!");
+      }
+      return new SimplePresenceTriggerTTCMutSet(root, incarnation.membersSimplePresenceTriggerTTCMutSet);
+    }
+                       }
+  public ItemTTCMutSet membersItemTTCMutSet {
 
     get {
       if (root == null) {
@@ -373,6 +389,8 @@ public class ITerrainTileComponentMutBunch {
 
   public static ITerrainTileComponentMutBunch New(Root root) {
     return root.EffectITerrainTileComponentMutBunchCreate(
+      root.EffectSimplePresenceTriggerTTCMutSetCreate()
+,
       root.EffectItemTTCMutSetCreate()
 ,
       root.EffectEmberDeepLevelLinkerTTCMutSetCreate()
@@ -415,6 +433,12 @@ public class ITerrainTileComponentMutBunch {
         );
   }
   public void Add(ITerrainTileComponent elementI) {
+
+    // Can optimize, check the type of element directly somehow
+    if (root.SimplePresenceTriggerTTCExists(elementI.id)) {
+      this.membersSimplePresenceTriggerTTCMutSet.Add(root.GetSimplePresenceTriggerTTC(elementI.id));
+      return;
+    }
 
     // Can optimize, check the type of element directly somehow
     if (root.ItemTTCExists(elementI.id)) {
@@ -540,6 +564,12 @@ public class ITerrainTileComponentMutBunch {
   public void Remove(ITerrainTileComponent elementI) {
 
     // Can optimize, check the type of element directly somehow
+    if (root.SimplePresenceTriggerTTCExists(elementI.id)) {
+      this.membersSimplePresenceTriggerTTCMutSet.Remove(root.GetSimplePresenceTriggerTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.ItemTTCExists(elementI.id)) {
       this.membersItemTTCMutSet.Remove(root.GetItemTTC(elementI.id));
       return;
@@ -661,6 +691,7 @@ public class ITerrainTileComponentMutBunch {
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
+    this.membersSimplePresenceTriggerTTCMutSet.Clear();
     this.membersItemTTCMutSet.Clear();
     this.membersEmberDeepLevelLinkerTTCMutSet.Clear();
     this.membersIncendianFallsLevelLinkerTTCMutSet.Clear();
@@ -685,6 +716,7 @@ public class ITerrainTileComponentMutBunch {
   public int Count {
     get {
       return
+        this.membersSimplePresenceTriggerTTCMutSet.Count +
         this.membersItemTTCMutSet.Count +
         this.membersEmberDeepLevelLinkerTTCMutSet.Count +
         this.membersIncendianFallsLevelLinkerTTCMutSet.Count +
@@ -716,6 +748,7 @@ public class ITerrainTileComponentMutBunch {
   }
 
   public void Destruct() {
+    var tempMembersSimplePresenceTriggerTTCMutSet = this.membersSimplePresenceTriggerTTCMutSet;
     var tempMembersItemTTCMutSet = this.membersItemTTCMutSet;
     var tempMembersEmberDeepLevelLinkerTTCMutSet = this.membersEmberDeepLevelLinkerTTCMutSet;
     var tempMembersIncendianFallsLevelLinkerTTCMutSet = this.membersIncendianFallsLevelLinkerTTCMutSet;
@@ -738,6 +771,7 @@ public class ITerrainTileComponentMutBunch {
     var tempMembersGrassTTCMutSet = this.membersGrassTTCMutSet;
 
     this.Delete();
+    tempMembersSimplePresenceTriggerTTCMutSet.Destruct();
     tempMembersItemTTCMutSet.Destruct();
     tempMembersEmberDeepLevelLinkerTTCMutSet.Destruct();
     tempMembersIncendianFallsLevelLinkerTTCMutSet.Destruct();
@@ -760,6 +794,9 @@ public class ITerrainTileComponentMutBunch {
     tempMembersGrassTTCMutSet.Destruct();
   }
   public IEnumerator<ITerrainTileComponent> GetEnumerator() {
+    foreach (var element in this.membersSimplePresenceTriggerTTCMutSet) {
+      yield return new SimplePresenceTriggerTTCAsITerrainTileComponent(element);
+    }
     foreach (var element in this.membersItemTTCMutSet) {
       yield return new ItemTTCAsITerrainTileComponent(element);
     }
@@ -821,6 +858,27 @@ public class ITerrainTileComponentMutBunch {
       yield return new GrassTTCAsITerrainTileComponent(element);
     }
   }
+    public List<SimplePresenceTriggerTTC> GetAllSimplePresenceTriggerTTC() {
+      var result = new List<SimplePresenceTriggerTTC>();
+      foreach (var thing in this.membersSimplePresenceTriggerTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<SimplePresenceTriggerTTC> ClearAllSimplePresenceTriggerTTC() {
+      var result = new List<SimplePresenceTriggerTTC>();
+      this.membersSimplePresenceTriggerTTCMutSet.Clear();
+      return result;
+    }
+    public SimplePresenceTriggerTTC GetOnlySimplePresenceTriggerTTCOrNull() {
+      var result = GetAllSimplePresenceTriggerTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return SimplePresenceTriggerTTC.Null;
+      }
+    }
     public List<ItemTTC> GetAllItemTTC() {
       var result = new List<ItemTTC>();
       foreach (var thing in this.membersItemTTCMutSet) {
@@ -1241,7 +1299,29 @@ public class ITerrainTileComponentMutBunch {
         return GrassTTC.Null;
       }
     }
-    public List<IInteractableTTC> GetAllIInteractableTTC() {
+    public List<IPresenceTriggerTTC> GetAllIPresenceTriggerTTC() {
+      var result = new List<IPresenceTriggerTTC>();
+      foreach (var obj in this.membersSimplePresenceTriggerTTCMutSet) {
+        result.Add(
+            new SimplePresenceTriggerTTCAsIPresenceTriggerTTC(obj));
+      }
+      return result;
+    }
+    public List<IPresenceTriggerTTC> ClearAllIPresenceTriggerTTC() {
+      var result = new List<IPresenceTriggerTTC>();
+      this.membersSimplePresenceTriggerTTCMutSet.Clear();
+      return result;
+    }
+    public IPresenceTriggerTTC GetOnlyIPresenceTriggerTTCOrNull() {
+      var result = GetAllIPresenceTriggerTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIPresenceTriggerTTC.Null;
+      }
+    }
+                 public List<IInteractableTTC> GetAllIInteractableTTC() {
       var result = new List<IInteractableTTC>();
       foreach (var obj in this.membersEmberDeepLevelLinkerTTCMutSet) {
         result.Add(

@@ -12,4 +12,15 @@ mut struct PentagonalCaveLevelController {
   fn ConsiderCornersAdjacent(this: PentagonalCaveLevelController overrides ILevelController): Bool {
     PentagonalCaveLevelControllerExtensions.ConsiderCornersAdjacent
   }
+
+  fn SimpleTrigger(
+    this: PentagonalCaveLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    PentagonalCaveLevelControllerExtensions.SimpleTrigger
+  }
 }

@@ -45,6 +45,9 @@ public class PreGauntletLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return PreGauntletLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
+  public Void SimpleTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    return PreGauntletLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
+  }
 
 }
 public static class PreGauntletLevelControllerAsILevelControllerCaster {

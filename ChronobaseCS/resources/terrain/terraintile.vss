@@ -22,3 +22,14 @@ mut interface IInteractableTTC {
     containingTileLocation: Location
   ): Str;
 }
+
+mut interface IPresenceTriggerTTC {
+  IPresenceTriggerTTC isa ITerrainTileComponent;
+
+  fn Trigger(
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    containingTileLocation: Location
+  ): Void;
+}

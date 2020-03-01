@@ -45,6 +45,9 @@ public class PentagonalCaveLevelControllerAsILevelController : ILevelController 
   public bool ConsiderCornersAdjacent() {
     return PentagonalCaveLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
+  public Void SimpleTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    return PentagonalCaveLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
+  }
 
 }
 public static class PentagonalCaveLevelControllerAsILevelControllerCaster {

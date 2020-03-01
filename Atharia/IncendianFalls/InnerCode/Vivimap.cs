@@ -13,25 +13,25 @@ namespace IncendianFalls {
 
       foreach (var member in members) {
         switch (member) {
-          case "grass":
+          case "Grass":
             tile.components.Add(root.EffectGrassTTCCreate().AsITerrainTileComponent());
             break;
-          case "stone":
+          case "Stone":
             tile.components.Add(root.EffectStoneTTCCreate().AsITerrainTileComponent());
             break;
-          case "clifflanding":
+          case "CliffLanding":
             tile.components.Add(root.EffectCliffLandingTTCCreate().AsITerrainTileComponent());
             break;
-          case "ravanest":
+          case "RavaNest":
             tile.components.Add(root.EffectRavaNestTTCCreate().AsITerrainTileComponent());
             break;
-          case "cliff":
+          case "Cliff":
             tile.components.Add(root.EffectCliffTTCCreate().AsITerrainTileComponent());
             break;
-          case "magma":
+          case "Magma":
             tile.components.Add(root.EffectMagmaTTCCreate().AsITerrainTileComponent());
             break;
-          case "falls":
+          case "Falls":
             tile.components.Add(root.EffectFallsTTCCreate().AsITerrainTileComponent());
             break;
           default:

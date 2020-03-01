@@ -12,4 +12,15 @@ mut struct SquareCaveLevelController {
   fn ConsiderCornersAdjacent(this: SquareCaveLevelController overrides ILevelController): Bool {
     SquareCaveLevelControllerExtensions.ConsiderCornersAdjacent
   }
+
+  fn SimpleTrigger(
+    this: SquareCaveLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    SquareCaveLevelControllerExtensions.SimpleTrigger
+  }
 }

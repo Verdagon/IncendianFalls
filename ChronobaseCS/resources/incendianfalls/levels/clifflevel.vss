@@ -12,4 +12,15 @@ mut struct CliffLevelController {
   fn ConsiderCornersAdjacent(this: CliffLevelController overrides ILevelController): Bool {
     CliffLevelControllerExtensions.ConsiderCornersAdjacent
   }
+
+  fn SimpleTrigger(
+    this: CliffLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    CliffLevelControllerExtensions.SimpleTrigger
+  }
 }

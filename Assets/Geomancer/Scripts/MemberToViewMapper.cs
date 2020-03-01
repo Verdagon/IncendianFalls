@@ -66,8 +66,12 @@ namespace Geomancer {
       Domino.DominoDescription maybeUnitDomino = null;
       List<Domino.ExtrudedSymbolDescription> unitDetails = new List<Domino.ExtrudedSymbolDescription>();
 
-      foreach (var member in members) {
-        if (entries.TryGetValue(member, out var memberEntries)) {
+      foreach (var memberString in members) {
+        var memberClass =
+          memberString.Contains("(") ?
+          memberString.Substring(0, memberString.IndexOf("(")) :
+          memberString;
+        if (entries.TryGetValue(memberClass, out var memberEntries)) {
           foreach (var memberEntry in memberEntries) {
             if (memberEntry is TopColorDescriptionForIDescription) {
               topColor = (memberEntry as TopColorDescriptionForIDescription).color;
@@ -101,7 +105,17 @@ namespace Geomancer {
             }
           }
         } else {
-          items.Add(new Domino.ExtrudedSymbolDescription(Domino.RenderPriority.SYMBOL, new Domino.SymbolDescription("e", 100, new UnityEngine.Color(0, 1.0f, 1.0f), 0, Domino.OutlineMode.WithBackOutline, new UnityEngine.Color(0, 0, 0)), true, new UnityEngine.Color(0, 0, 0)));
+          items.Add(new Domino.ExtrudedSymbolDescription(
+            Domino.RenderPriority.SYMBOL,
+            new Domino.SymbolDescription(
+              "e",
+              100,
+              new UnityEngine.Color(0, 1.0f, 1.0f),
+              0,
+              Domino.OutlineMode.WithBackOutline,
+              new UnityEngine.Color(0, 0, 0)),
+            true,
+            new UnityEngine.Color(0, 0, 0)));
         }
       }
 

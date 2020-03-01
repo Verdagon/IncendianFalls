@@ -394,6 +394,7 @@ namespace AthPlayer {
           } else {
             Asserts.Assert(false, "Found item: " + ttc);
           }
+        } else if (ttc is SimplePresenceTriggerTTCAsITerrainTileComponent) {
         } else if (ttc is TimeAnchorTTCAsITerrainTileComponent) {
           if (!overlayLocked) {
             overlay =

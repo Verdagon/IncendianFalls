@@ -45,6 +45,9 @@ public class CliffLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return CliffLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
+  public Void SimpleTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    return CliffLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
+  }
 
 }
 public static class CliffLevelControllerAsILevelControllerCaster {

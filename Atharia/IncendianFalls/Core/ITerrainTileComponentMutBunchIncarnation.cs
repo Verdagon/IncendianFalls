@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class ITerrainTileComponentMutBunchIncarnation {
+  public readonly int membersSimplePresenceTriggerTTCMutSet;
   public readonly int membersItemTTCMutSet;
   public readonly int membersEmberDeepLevelLinkerTTCMutSet;
   public readonly int membersIncendianFallsLevelLinkerTTCMutSet;
@@ -26,6 +27,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersStoneTTCMutSet;
   public readonly int membersGrassTTCMutSet;
   public ITerrainTileComponentMutBunchIncarnation(
+      int membersSimplePresenceTriggerTTCMutSet,
       int membersItemTTCMutSet,
       int membersEmberDeepLevelLinkerTTCMutSet,
       int membersIncendianFallsLevelLinkerTTCMutSet,
@@ -46,6 +48,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
       int membersCliffLandingTTCMutSet,
       int membersStoneTTCMutSet,
       int membersGrassTTCMutSet) {
+    this.membersSimplePresenceTriggerTTCMutSet = membersSimplePresenceTriggerTTCMutSet;
     this.membersItemTTCMutSet = membersItemTTCMutSet;
     this.membersEmberDeepLevelLinkerTTCMutSet = membersEmberDeepLevelLinkerTTCMutSet;
     this.membersIncendianFallsLevelLinkerTTCMutSet = membersIncendianFallsLevelLinkerTTCMutSet;

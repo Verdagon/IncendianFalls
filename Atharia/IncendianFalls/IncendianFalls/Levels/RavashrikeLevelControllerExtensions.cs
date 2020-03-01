@@ -65,5 +65,15 @@ namespace Atharia.Model {
     public static bool ConsiderCornersAdjacent(this RavashrikeLevelController obj) {
       return false;
     }
+
+    public static Atharia.Model.Void SimpleTrigger(
+        this RavashrikeLevelController obj,
+        Game game,
+        Superstate superstate,
+        Unit triggeringUnit,
+        Location location,
+        string triggerName) {
+      return new Atharia.Model.Void();
+    }
   }
 }

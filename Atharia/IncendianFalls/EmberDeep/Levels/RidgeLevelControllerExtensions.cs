@@ -18,25 +18,15 @@ namespace Atharia.Model {
           root.EffectUnitMutSetCreate(),
           NullILevelController.Null,
           0);
-      level.controller = root.EffectRidgeLevelControllerCreate(level).AsILevelController();
 
       levelSuperstate = new LevelSuperstate(level);
 
       var geomancy =
         Vivifier.Vivify(level, levelSuperstate, Vivifier.ParseGeomancy(LEVEL));
 
-      var ambush4Rocks = Vivifier.ExtractLocation(geomancy, "ambush4Rocks");
-      var ambush4Warning = Vivifier.ExtractLocation(geomancy, "ambush4Warning");
-      var ambush4Trigger = Vivifier.ExtractLocation(geomancy, "ambush4Trigger");
-      var ambush4Summon = Vivifier.ExtractLocation(geomancy, "ambush4Summon");
-      var ambush4IntendedClonePlacement = Vivifier.ExtractLocation(geomancy, "ambush4IntendedClonePlacement");
-      var ambush3Summon = Vivifier.ExtractLocations(geomancy, "ambush3Summon");
-      var ambush3Trigger = Vivifier.ExtractLocations(geomancy, "ambush3Trigger");
-      var ambush2Summon = Vivifier.ExtractLocation(geomancy, "ambush2Summon");
-      var ambush2Trigger = Vivifier.ExtractLocation(geomancy, "ambush2Trigger");
-      var ambush1Trigger = Vivifier.ExtractLocations(geomancy, "ambush1Trigger");
-      var ambush1Summon = Vivifier.ExtractLocation(geomancy, "ambush1Summon");
-      var start = Vivifier.ExtractLocation(geomancy, "start");
+      level.controller = root.EffectRidgeLevelControllerCreate(level).AsILevelController();
+
+      var start = Vivifier.ExtractLocation(geomancy, "Start");
 
       if (geomancy.Count > 0) {
         Asserts.Assert(false, Vivifier.PrintMembers(geomancy));
@@ -51,6 +41,16 @@ namespace Atharia.Model {
 
     public static bool ConsiderCornersAdjacent(this RidgeLevelController obj) {
       return false;
+    }
+
+    public static Atharia.Model.Void SimpleTrigger(
+        this RidgeLevelController obj,
+        Game game,
+        Superstate superstate,
+        Unit triggeringUnit,
+        Location location,
+        string triggerName) {
+      return new Atharia.Model.Void();
     }
 
     private static string LEVEL = @"

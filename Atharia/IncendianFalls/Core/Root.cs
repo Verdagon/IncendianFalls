@@ -47,6 +47,13 @@ public class Root {
   readonly List<EmberDeepLevelLinkerTTCDeleteEffect> effectsEmberDeepLevelLinkerTTCDeleteEffect =
       new List<EmberDeepLevelLinkerTTCDeleteEffect>();
 
+  readonly SortedDictionary<int, List<ITutorialLevelControllerEffectObserver>> observersForTutorialLevelController =
+      new SortedDictionary<int, List<ITutorialLevelControllerEffectObserver>>();
+  readonly List<TutorialLevelControllerCreateEffect> effectsTutorialLevelControllerCreateEffect =
+      new List<TutorialLevelControllerCreateEffect>();
+  readonly List<TutorialLevelControllerDeleteEffect> effectsTutorialLevelControllerDeleteEffect =
+      new List<TutorialLevelControllerDeleteEffect>();
+
   readonly SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>> observersForRidgeLevelController =
       new SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>>();
   readonly List<RidgeLevelControllerCreateEffect> effectsRidgeLevelControllerCreateEffect =
@@ -102,6 +109,13 @@ public class Root {
       new List<CliffLevelControllerCreateEffect>();
   readonly List<CliffLevelControllerDeleteEffect> effectsCliffLevelControllerDeleteEffect =
       new List<CliffLevelControllerDeleteEffect>();
+
+  readonly SortedDictionary<int, List<ISimplePresenceTriggerTTCEffectObserver>> observersForSimplePresenceTriggerTTC =
+      new SortedDictionary<int, List<ISimplePresenceTriggerTTCEffectObserver>>();
+  readonly List<SimplePresenceTriggerTTCCreateEffect> effectsSimplePresenceTriggerTTCCreateEffect =
+      new List<SimplePresenceTriggerTTCCreateEffect>();
+  readonly List<SimplePresenceTriggerTTCDeleteEffect> effectsSimplePresenceTriggerTTCDeleteEffect =
+      new List<SimplePresenceTriggerTTCDeleteEffect>();
 
   readonly SortedDictionary<int, List<ITimeAnchorTTCEffectObserver>> observersForTimeAnchorTTC =
       new SortedDictionary<int, List<ITimeAnchorTTCEffectObserver>>();
@@ -796,6 +810,17 @@ public class Root {
   readonly List<HealthPotionStrongMutSetRemoveEffect> effectsHealthPotionStrongMutSetRemoveEffect =
       new List<HealthPotionStrongMutSetRemoveEffect>();
 
+  readonly SortedDictionary<int, List<ISimplePresenceTriggerTTCMutSetEffectObserver>> observersForSimplePresenceTriggerTTCMutSet =
+      new SortedDictionary<int, List<ISimplePresenceTriggerTTCMutSetEffectObserver>>();
+  readonly List<SimplePresenceTriggerTTCMutSetCreateEffect> effectsSimplePresenceTriggerTTCMutSetCreateEffect =
+      new List<SimplePresenceTriggerTTCMutSetCreateEffect>();
+  readonly List<SimplePresenceTriggerTTCMutSetDeleteEffect> effectsSimplePresenceTriggerTTCMutSetDeleteEffect =
+      new List<SimplePresenceTriggerTTCMutSetDeleteEffect>();
+  readonly List<SimplePresenceTriggerTTCMutSetAddEffect> effectsSimplePresenceTriggerTTCMutSetAddEffect =
+      new List<SimplePresenceTriggerTTCMutSetAddEffect>();
+  readonly List<SimplePresenceTriggerTTCMutSetRemoveEffect> effectsSimplePresenceTriggerTTCMutSetRemoveEffect =
+      new List<SimplePresenceTriggerTTCMutSetRemoveEffect>();
+
   readonly SortedDictionary<int, List<IItemTTCMutSetEffectObserver>> observersForItemTTCMutSet =
       new SortedDictionary<int, List<IItemTTCMutSetEffectObserver>>();
   readonly List<ItemTTCMutSetCreateEffect> effectsItemTTCMutSetCreateEffect =
@@ -1128,6 +1153,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsEmberDeepLevelLinkerTTC) {
       result += GetEmberDeepLevelLinkerTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsTutorialLevelController) {
+      result += GetTutorialLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsRidgeLevelController) {
       result += GetRidgeLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1151,6 +1179,9 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsCliffLevelController) {
       result += GetCliffLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsSimplePresenceTriggerTTC) {
+      result += GetSimplePresenceTriggerTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsTimeAnchorTTC) {
       result += GetTimeAnchorTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1389,6 +1420,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsHealthPotionStrongMutSet) {
       result += GetHealthPotionStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet) {
+      result += GetSimplePresenceTriggerTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsItemTTCMutSet) {
       result += GetItemTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1461,6 +1495,9 @@ public class Root {
     foreach (var obj in this.AllEmberDeepLevelLinkerTTC()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllTutorialLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllRidgeLevelController()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1483,6 +1520,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllCliffLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllSimplePresenceTriggerTTC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTimeAnchorTTC()) {
@@ -1720,6 +1760,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllHealthPotionStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllSimplePresenceTriggerTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllItemTTCMutSet()) {
@@ -1795,6 +1838,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllTutorialLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllRidgeLevelController()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -1831,6 +1879,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllCliffLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllSimplePresenceTriggerTTC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -2226,6 +2279,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllHealthPotionStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllSimplePresenceTriggerTTCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -2360,6 +2418,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForTutorialLevelController =
+        new SortedDictionary<int, List<ITutorialLevelControllerEffectObserver>>();
+    foreach (var entry in observersForTutorialLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForTutorialLevelController.Add(
+          objectId,
+          new List<ITutorialLevelControllerEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForRidgeLevelController =
         new SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>>();
     foreach (var entry in observersForRidgeLevelController) {
@@ -2445,6 +2514,17 @@ public class Root {
       copyOfObserversForCliffLevelController.Add(
           objectId,
           new List<ICliffLevelControllerEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForSimplePresenceTriggerTTC =
+        new SortedDictionary<int, List<ISimplePresenceTriggerTTCEffectObserver>>();
+    foreach (var entry in observersForSimplePresenceTriggerTTC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForSimplePresenceTriggerTTC.Add(
+          objectId,
+          new List<ISimplePresenceTriggerTTCEffectObserver>(
               observers));
     }
 
@@ -3317,6 +3397,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForSimplePresenceTriggerTTCMutSet =
+        new SortedDictionary<int, List<ISimplePresenceTriggerTTCMutSetEffectObserver>>();
+    foreach (var entry in observersForSimplePresenceTriggerTTCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForSimplePresenceTriggerTTCMutSet.Add(
+          objectId,
+          new List<ISimplePresenceTriggerTTCMutSetEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForItemTTCMutSet =
         new SortedDictionary<int, List<IItemTTCMutSetEffectObserver>>();
     foreach (var entry in observersForItemTTCMutSet) {
@@ -3551,6 +3642,9 @@ public class Root {
     BroadcastEmberDeepLevelLinkerTTCEffects(
         copyOfObserversForEmberDeepLevelLinkerTTC);
            
+    BroadcastTutorialLevelControllerEffects(
+        copyOfObserversForTutorialLevelController);
+           
     BroadcastRidgeLevelControllerEffects(
         copyOfObserversForRidgeLevelController);
            
@@ -3574,6 +3668,9 @@ public class Root {
            
     BroadcastCliffLevelControllerEffects(
         copyOfObserversForCliffLevelController);
+           
+    BroadcastSimplePresenceTriggerTTCEffects(
+        copyOfObserversForSimplePresenceTriggerTTC);
            
     BroadcastTimeAnchorTTCEffects(
         copyOfObserversForTimeAnchorTTC);
@@ -3812,6 +3909,9 @@ public class Root {
     BroadcastHealthPotionStrongMutSetEffects(
         copyOfObserversForHealthPotionStrongMutSet);
            
+    BroadcastSimplePresenceTriggerTTCMutSetEffects(
+        copyOfObserversForSimplePresenceTriggerTTCMutSet);
+           
     BroadcastItemTTCMutSetEffects(
         copyOfObserversForItemTTCMutSet);
            
@@ -3901,6 +4001,16 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTutorialLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsTutorialLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateTutorialLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRidgeLevelController) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3978,6 +4088,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsCliffLevelController.ContainsKey(sourceObjId)) {
         EffectInternalCreateCliffLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSimplePresenceTriggerTTC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateSimplePresenceTriggerTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -4768,6 +4888,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsHealthPotionStrongMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateHealthPotionStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSimplePresenceTriggerTTCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateSimplePresenceTriggerTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -5672,6 +5802,34 @@ public class Root {
         }
       }
              
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSimplePresenceTriggerTTCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectSimplePresenceTriggerTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectSimplePresenceTriggerTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsItemTTCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -6284,6 +6442,27 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTutorialLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsTutorialLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsTutorialLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsTutorialLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRidgeLevelController) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -6447,6 +6626,27 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsCliffLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSimplePresenceTriggerTTC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsSimplePresenceTriggerTTC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsSimplePresenceTriggerTTC[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -7673,6 +7873,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TutorialLevelControllerIncarnation>>(rootIncarnation.incarnationsTutorialLevelController)) {
+      if (!sourceIncarnation.incarnationsTutorialLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectTutorialLevelControllerDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>(rootIncarnation.incarnationsRidgeLevelController)) {
       if (!sourceIncarnation.incarnationsRidgeLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -7726,6 +7933,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsCliffLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectCliffLevelControllerDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<SimplePresenceTriggerTTCIncarnation>>(rootIncarnation.incarnationsSimplePresenceTriggerTTC)) {
+      if (!sourceIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectSimplePresenceTriggerTTCDelete(id);
       }
     }
 
@@ -8282,6 +8496,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<SimplePresenceTriggerTTCMutSetIncarnation>>(rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsSimplePresenceTriggerTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectSimplePresenceTriggerTTCMutSetDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ItemTTCMutSetIncarnation>>(rootIncarnation.incarnationsItemTTCMutSet)) {
       if (!sourceIncarnation.incarnationsItemTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -8558,6 +8779,136 @@ public class Root {
       }
     }
     effectsEmberDeepLevelLinkerTTCCreateEffect.Clear();
+  }
+  public TutorialLevelControllerIncarnation GetTutorialLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsTutorialLevelController[id].incarnation;
+  }
+  public bool TutorialLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsTutorialLevelController.ContainsKey(id);
+  }
+  public TutorialLevelController GetTutorialLevelController(int id) {
+    return new TutorialLevelController(this, id);
+  }
+  public List<TutorialLevelController> AllTutorialLevelController() {
+    List<TutorialLevelController> result = new List<TutorialLevelController>(rootIncarnation.incarnationsTutorialLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsTutorialLevelController.Keys) {
+      result.Add(new TutorialLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<TutorialLevelController> EnumAllTutorialLevelController() {
+    foreach (var id in rootIncarnation.incarnationsTutorialLevelController.Keys) {
+      yield return GetTutorialLevelController(id);
+    }
+  }
+  public void CheckHasTutorialLevelController(TutorialLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasTutorialLevelController(thing.id);
+  }
+  public void CheckHasTutorialLevelController(int id) {
+    if (!rootIncarnation.incarnationsTutorialLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid TutorialLevelController: " + id);
+    }
+  }
+  public void AddTutorialLevelControllerObserver(int id, ITutorialLevelControllerEffectObserver observer) {
+    List<ITutorialLevelControllerEffectObserver> obsies;
+    if (!observersForTutorialLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<ITutorialLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForTutorialLevelController[id] = obsies;
+  }
+
+  public void RemoveTutorialLevelControllerObserver(int id, ITutorialLevelControllerEffectObserver observer) {
+    if (observersForTutorialLevelController.ContainsKey(id)) {
+      var list = observersForTutorialLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForTutorialLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public TutorialLevelController EffectTutorialLevelControllerCreate(
+      Level level) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new TutorialLevelControllerIncarnation(
+            level.id
+            );
+    EffectInternalCreateTutorialLevelController(id, rootIncarnation.version, incarnation);
+    return new TutorialLevelController(this, id);
+  }
+  public void EffectInternalCreateTutorialLevelController(
+      int id,
+      int incarnationVersion,
+      TutorialLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new TutorialLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsTutorialLevelController.Add(
+        id,
+        new VersionAndIncarnation<TutorialLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsTutorialLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectTutorialLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new TutorialLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsTutorialLevelController[id];
+
+    rootIncarnation.incarnationsTutorialLevelController.Remove(id);
+    effectsTutorialLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetTutorialLevelControllerHash(int id, int version, TutorialLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastTutorialLevelControllerEffects(
+      SortedDictionary<int, List<ITutorialLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsTutorialLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ITutorialLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTutorialLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ITutorialLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTutorialLevelControllerEffect(effect);
+        }
+        observersForTutorialLevelController.Remove(effect.id);
+      }
+    }
+    effectsTutorialLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsTutorialLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<ITutorialLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTutorialLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ITutorialLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTutorialLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsTutorialLevelControllerCreateEffect.Clear();
   }
   public RidgeLevelControllerIncarnation GetRidgeLevelControllerIncarnation(int id) {
     if (id == 0) {
@@ -9607,6 +9958,135 @@ public class Root {
     }
     effectsCliffLevelControllerCreateEffect.Clear();
   }
+  public SimplePresenceTriggerTTCIncarnation GetSimplePresenceTriggerTTCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsSimplePresenceTriggerTTC[id].incarnation;
+  }
+  public bool SimplePresenceTriggerTTCExists(int id) {
+    return rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(id);
+  }
+  public SimplePresenceTriggerTTC GetSimplePresenceTriggerTTC(int id) {
+    return new SimplePresenceTriggerTTC(this, id);
+  }
+  public List<SimplePresenceTriggerTTC> AllSimplePresenceTriggerTTC() {
+    List<SimplePresenceTriggerTTC> result = new List<SimplePresenceTriggerTTC>(rootIncarnation.incarnationsSimplePresenceTriggerTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsSimplePresenceTriggerTTC.Keys) {
+      result.Add(new SimplePresenceTriggerTTC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<SimplePresenceTriggerTTC> EnumAllSimplePresenceTriggerTTC() {
+    foreach (var id in rootIncarnation.incarnationsSimplePresenceTriggerTTC.Keys) {
+      yield return GetSimplePresenceTriggerTTC(id);
+    }
+  }
+  public void CheckHasSimplePresenceTriggerTTC(SimplePresenceTriggerTTC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasSimplePresenceTriggerTTC(thing.id);
+  }
+  public void CheckHasSimplePresenceTriggerTTC(int id) {
+    if (!rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid SimplePresenceTriggerTTC: " + id);
+    }
+  }
+  public void AddSimplePresenceTriggerTTCObserver(int id, ISimplePresenceTriggerTTCEffectObserver observer) {
+    List<ISimplePresenceTriggerTTCEffectObserver> obsies;
+    if (!observersForSimplePresenceTriggerTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<ISimplePresenceTriggerTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForSimplePresenceTriggerTTC[id] = obsies;
+  }
+
+  public void RemoveSimplePresenceTriggerTTCObserver(int id, ISimplePresenceTriggerTTCEffectObserver observer) {
+    if (observersForSimplePresenceTriggerTTC.ContainsKey(id)) {
+      var list = observersForSimplePresenceTriggerTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForSimplePresenceTriggerTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public SimplePresenceTriggerTTC EffectSimplePresenceTriggerTTCCreate(
+      string name) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new SimplePresenceTriggerTTCIncarnation(
+            name
+            );
+    EffectInternalCreateSimplePresenceTriggerTTC(id, rootIncarnation.version, incarnation);
+    return new SimplePresenceTriggerTTC(this, id);
+  }
+  public void EffectInternalCreateSimplePresenceTriggerTTC(
+      int id,
+      int incarnationVersion,
+      SimplePresenceTriggerTTCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new SimplePresenceTriggerTTCCreateEffect(id);
+    rootIncarnation.incarnationsSimplePresenceTriggerTTC.Add(
+        id,
+        new VersionAndIncarnation<SimplePresenceTriggerTTCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsSimplePresenceTriggerTTCCreateEffect.Add(effect);
+  }
+
+  public void EffectSimplePresenceTriggerTTCDelete(int id) {
+    CheckUnlocked();
+    var effect = new SimplePresenceTriggerTTCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsSimplePresenceTriggerTTC[id];
+
+    rootIncarnation.incarnationsSimplePresenceTriggerTTC.Remove(id);
+    effectsSimplePresenceTriggerTTCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetSimplePresenceTriggerTTCHash(int id, int version, SimplePresenceTriggerTTCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.name.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastSimplePresenceTriggerTTCEffects(
+      SortedDictionary<int, List<ISimplePresenceTriggerTTCEffectObserver>> observers) {
+    foreach (var effect in effectsSimplePresenceTriggerTTCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ISimplePresenceTriggerTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSimplePresenceTriggerTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISimplePresenceTriggerTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSimplePresenceTriggerTTCEffect(effect);
+        }
+        observersForSimplePresenceTriggerTTC.Remove(effect.id);
+      }
+    }
+    effectsSimplePresenceTriggerTTCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsSimplePresenceTriggerTTCCreateEffect) {
+      if (observers.TryGetValue(0, out List<ISimplePresenceTriggerTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSimplePresenceTriggerTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISimplePresenceTriggerTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSimplePresenceTriggerTTCEffect(effect);
+        }
+      }
+    }
+    effectsSimplePresenceTriggerTTCCreateEffect.Clear();
+  }
   public TimeAnchorTTCIncarnation GetTimeAnchorTTCIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -9960,6 +10440,7 @@ public class Root {
     }
   }
   public ITerrainTileComponentMutBunch EffectITerrainTileComponentMutBunchCreate(
+      SimplePresenceTriggerTTCMutSet membersSimplePresenceTriggerTTCMutSet,
       ItemTTCMutSet membersItemTTCMutSet,
       EmberDeepLevelLinkerTTCMutSet membersEmberDeepLevelLinkerTTCMutSet,
       IncendianFallsLevelLinkerTTCMutSet membersIncendianFallsLevelLinkerTTCMutSet,
@@ -9981,6 +10462,7 @@ public class Root {
       StoneTTCMutSet membersStoneTTCMutSet,
       GrassTTCMutSet membersGrassTTCMutSet) {
     CheckUnlocked();
+    CheckHasSimplePresenceTriggerTTCMutSet(membersSimplePresenceTriggerTTCMutSet);
     CheckHasItemTTCMutSet(membersItemTTCMutSet);
     CheckHasEmberDeepLevelLinkerTTCMutSet(membersEmberDeepLevelLinkerTTCMutSet);
     CheckHasIncendianFallsLevelLinkerTTCMutSet(membersIncendianFallsLevelLinkerTTCMutSet);
@@ -10005,6 +10487,7 @@ public class Root {
     var id = NewId();
     var incarnation =
         new ITerrainTileComponentMutBunchIncarnation(
+            membersSimplePresenceTriggerTTCMutSet.id,
             membersItemTTCMutSet.id,
             membersEmberDeepLevelLinkerTTCMutSet.id,
             membersIncendianFallsLevelLinkerTTCMutSet.id,
@@ -10057,26 +10540,27 @@ public class Root {
      
   public int GetITerrainTileComponentMutBunchHash(int id, int version, ITerrainTileComponentMutBunchIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.membersItemTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.membersEmberDeepLevelLinkerTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.membersIncendianFallsLevelLinkerTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.membersTimeAnchorTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.membersLevelLinkTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersMudTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.membersDirtTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.membersDownStairsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.membersUpStairsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.membersWallTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.membersBloodTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.membersRocksTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.membersCaveTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.membersFallsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 15 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 16 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 17 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 18 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 19 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 20 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 1 * incarnation.membersSimplePresenceTriggerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersItemTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersEmberDeepLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersIncendianFallsLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersTimeAnchorTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersLevelLinkTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersMudTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersDirtTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersDownStairsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.membersUpStairsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.membersWallTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.membersBloodTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 13 * incarnation.membersRocksTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.membersCaveTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.membersFallsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 16 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 17 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 18 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 19 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 20 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 21 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -17662,6 +18146,28 @@ public class Root {
     effectsGameSetTimeEffect.Add(effect);
   }
 
+  public IPresenceTriggerTTC GetIPresenceTriggerTTC(int id) {
+    if (rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(id)) {
+      return new SimplePresenceTriggerTTCAsIPresenceTriggerTTC(new SimplePresenceTriggerTTC(this, id));
+    }
+    throw new Exception("Unknown IPresenceTriggerTTC: " + id);
+  }
+  public IPresenceTriggerTTC GetIPresenceTriggerTTCOrNull(int id) {
+    if (rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(id)) {
+      return new SimplePresenceTriggerTTCAsIPresenceTriggerTTC(new SimplePresenceTriggerTTC(this, id));
+    }
+    return NullIPresenceTriggerTTC.Null;
+  }
+  public bool IPresenceTriggerTTCExists(int id) {
+    return GetIPresenceTriggerTTCOrNull(id) != null;
+  }
+  public void CheckHasIPresenceTriggerTTC(IPresenceTriggerTTC thing) {
+    GetIPresenceTriggerTTC(thing.id);
+  }
+  public void CheckHasIPresenceTriggerTTC(int id) {
+    GetIPresenceTriggerTTC(id);
+  }
+
   public IInteractableTTC GetIInteractableTTC(int id) {
     if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
       return new EmberDeepLevelLinkerTTCAsIInteractableTTC(new EmberDeepLevelLinkerTTC(this, id));
@@ -17731,6 +18237,9 @@ public class Root {
   }
 
   public ITerrainTileComponent GetITerrainTileComponent(int id) {
+    if (rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(id)) {
+      return new SimplePresenceTriggerTTCAsITerrainTileComponent(new SimplePresenceTriggerTTC(this, id));
+    }
     if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
       return new ItemTTCAsITerrainTileComponent(new ItemTTC(this, id));
     }
@@ -17794,6 +18303,9 @@ public class Root {
     throw new Exception("Unknown ITerrainTileComponent: " + id);
   }
   public ITerrainTileComponent GetITerrainTileComponentOrNull(int id) {
+    if (rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(id)) {
+      return new SimplePresenceTriggerTTCAsITerrainTileComponent(new SimplePresenceTriggerTTC(this, id));
+    }
     if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
       return new ItemTTCAsITerrainTileComponent(new ItemTTC(this, id));
     }
@@ -18401,6 +18913,9 @@ public class Root {
   }
 
   public ILevelController GetILevelController(int id) {
+    if (rootIncarnation.incarnationsTutorialLevelController.ContainsKey(id)) {
+      return new TutorialLevelControllerAsILevelController(new TutorialLevelController(this, id));
+    }
     if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
       return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
     }
@@ -18425,6 +18940,9 @@ public class Root {
     throw new Exception("Unknown ILevelController: " + id);
   }
   public ILevelController GetILevelControllerOrNull(int id) {
+    if (rootIncarnation.incarnationsTutorialLevelController.ContainsKey(id)) {
+      return new TutorialLevelControllerAsILevelController(new TutorialLevelController(this, id));
+    }
     if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
       return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
     }
@@ -18459,6 +18977,9 @@ public class Root {
   }
 
   public IDestructible GetIDestructible(int id) {
+    if (rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(id)) {
+      return new SimplePresenceTriggerTTCAsIDestructible(new SimplePresenceTriggerTTC(this, id));
+    }
     if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
       return new ItemTTCAsIDestructible(new ItemTTC(this, id));
     }
@@ -18591,6 +19112,9 @@ public class Root {
     throw new Exception("Unknown IDestructible: " + id);
   }
   public IDestructible GetIDestructibleOrNull(int id) {
+    if (rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(id)) {
+      return new SimplePresenceTriggerTTCAsIDestructible(new SimplePresenceTriggerTTC(this, id));
+    }
     if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
       return new ItemTTCAsIDestructible(new ItemTTC(this, id));
     }
@@ -23495,6 +24019,197 @@ public class Root {
       }
     }
     effectsHealthPotionStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetSimplePresenceTriggerTTCMutSetHash(int id, int version, SimplePresenceTriggerTTCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public SimplePresenceTriggerTTCMutSetIncarnation GetSimplePresenceTriggerTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet[id].incarnation;
+    }
+    public SimplePresenceTriggerTTCMutSet GetSimplePresenceTriggerTTCMutSet(int id) {
+      return new SimplePresenceTriggerTTCMutSet(this, id);
+    }
+    public List<SimplePresenceTriggerTTCMutSet> AllSimplePresenceTriggerTTCMutSet() {
+      List<SimplePresenceTriggerTTCMutSet> result = new List<SimplePresenceTriggerTTCMutSet>(rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet.Keys) {
+        result.Add(new SimplePresenceTriggerTTCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool SimplePresenceTriggerTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet.ContainsKey(id);
+    }
+    public void CheckHasSimplePresenceTriggerTTCMutSet(SimplePresenceTriggerTTCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasSimplePresenceTriggerTTCMutSet(thing.id);
+    }
+    public void CheckHasSimplePresenceTriggerTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid SimplePresenceTriggerTTCMutSet}: " + id);
+      }
+    }
+    public SimplePresenceTriggerTTCMutSet EffectSimplePresenceTriggerTTCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new SimplePresenceTriggerTTCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateSimplePresenceTriggerTTCMutSet(id, rootIncarnation.version, incarnation);
+      return new SimplePresenceTriggerTTCMutSet(this, id);
+    }
+    public void EffectInternalCreateSimplePresenceTriggerTTCMutSet(int id, int incarnationVersion, SimplePresenceTriggerTTCMutSetIncarnation incarnation) {
+      var effect = new SimplePresenceTriggerTTCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<SimplePresenceTriggerTTCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsSimplePresenceTriggerTTCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectSimplePresenceTriggerTTCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new SimplePresenceTriggerTTCMutSetDeleteEffect(id);
+      effectsSimplePresenceTriggerTTCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet[id];
+      rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet.Remove(id);
+    }
+
+       
+    public void EffectSimplePresenceTriggerTTCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasSimplePresenceTriggerTTCMutSet(setId);
+      CheckHasSimplePresenceTriggerTTC(elementId);
+
+      var effect = new SimplePresenceTriggerTTCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new SimplePresenceTriggerTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet[setId] =
+            new VersionAndIncarnation<SimplePresenceTriggerTTCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsSimplePresenceTriggerTTCMutSetAddEffect.Add(effect);
+    }
+    public void EffectSimplePresenceTriggerTTCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasSimplePresenceTriggerTTCMutSet(setId);
+      CheckHasSimplePresenceTriggerTTC(elementId);
+
+      var effect = new SimplePresenceTriggerTTCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new SimplePresenceTriggerTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsSimplePresenceTriggerTTCMutSet[setId] =
+            new VersionAndIncarnation<SimplePresenceTriggerTTCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsSimplePresenceTriggerTTCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddSimplePresenceTriggerTTCMutSetObserver(int id, ISimplePresenceTriggerTTCMutSetEffectObserver observer) {
+      List<ISimplePresenceTriggerTTCMutSetEffectObserver> obsies;
+      if (!observersForSimplePresenceTriggerTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ISimplePresenceTriggerTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForSimplePresenceTriggerTTCMutSet[id] = obsies;
+    }
+
+    public void RemoveSimplePresenceTriggerTTCMutSetObserver(int id, ISimplePresenceTriggerTTCMutSetEffectObserver observer) {
+      if (observersForSimplePresenceTriggerTTCMutSet.ContainsKey(id)) {
+        var list = observersForSimplePresenceTriggerTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForSimplePresenceTriggerTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastSimplePresenceTriggerTTCMutSetEffects(
+      SortedDictionary<int, List<ISimplePresenceTriggerTTCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsSimplePresenceTriggerTTCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ISimplePresenceTriggerTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSimplePresenceTriggerTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISimplePresenceTriggerTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSimplePresenceTriggerTTCMutSetEffect(effect);
+        }
+        observersForSimplePresenceTriggerTTCMutSet.Remove(effect.id);
+      }
+    }
+    effectsSimplePresenceTriggerTTCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsSimplePresenceTriggerTTCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<ISimplePresenceTriggerTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSimplePresenceTriggerTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISimplePresenceTriggerTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSimplePresenceTriggerTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsSimplePresenceTriggerTTCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsSimplePresenceTriggerTTCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<ISimplePresenceTriggerTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSimplePresenceTriggerTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISimplePresenceTriggerTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSimplePresenceTriggerTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsSimplePresenceTriggerTTCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsSimplePresenceTriggerTTCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<ISimplePresenceTriggerTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSimplePresenceTriggerTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISimplePresenceTriggerTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSimplePresenceTriggerTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsSimplePresenceTriggerTTCMutSetCreateEffect.Clear();
 
   }
 

@@ -94,9 +94,8 @@ namespace EmberDeep {
               terrain, units, NullILevelController.Null, game.time);
       levelSuperstate = new LevelSuperstate(level);
 
-      var controller = context.root.EffectRidgeLevelControllerCreate(level);
+      var controller = context.root.EffectTutorialLevelControllerCreate(level);
       level.controller = controller.AsILevelController();
     }
-
   }
 }

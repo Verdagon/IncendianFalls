@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace IncendianFalls {
   class Vivifier {
@@ -122,33 +123,46 @@ namespace IncendianFalls {
             elevation, ITerrainTileComponentMutBunch.New(level.root));
         level.terrain.tiles.Add(location, tile);
 
-        foreach (var member in members) {
-          switch (member) {
-            case "mud":
-              tile.components.Add(level.root.EffectMudTTCCreate().AsITerrainTileComponent());
-              break;
-            case "dirt":
-              tile.components.Add(level.root.EffectDirtTTCCreate().AsITerrainTileComponent());
-              break;
-            case "cave":
-              tile.components.Add(level.root.EffectCaveTTCCreate().AsITerrainTileComponent());
-              break;
-            case "rocks":
-              tile.components.Add(level.root.EffectRocksTTCCreate().AsITerrainTileComponent());
-              break;
-            case "grass":
-              tile.components.Add(level.root.EffectGrassTTCCreate().AsITerrainTileComponent());
-              break;
-            default:
-              if (!unknownGeomancy.ContainsKey(location)) {
-                unknownGeomancy.Add(location, new List<string>());
-              }
-              unknownGeomancy[location].Add(member);
-              break;
+        foreach (var memberString in members) {
+          var recognized = DoMemberStringThing(level, tile, memberString);
+          if (!recognized) {
+            if (!unknownGeomancy.ContainsKey(location)) {
+              unknownGeomancy.Add(location, new List<string>());
+            }
+            unknownGeomancy[location].Add(memberString);
           }
         }
       }
       return unknownGeomancy;
+    }
+
+    private static bool DoMemberStringThing(Level level, TerrainTile tile, string memberString) {
+      switch (memberString) {
+        case "Mud":
+          tile.components.Add(level.root.EffectMudTTCCreate().AsITerrainTileComponent());
+          return true;
+        case "Dirt":
+          tile.components.Add(level.root.EffectDirtTTCCreate().AsITerrainTileComponent());
+          return true;
+        case "Cave":
+          tile.components.Add(level.root.EffectCaveTTCCreate().AsITerrainTileComponent());
+          return true;
+        case "Rocks":
+          tile.components.Add(level.root.EffectRocksTTCCreate().AsITerrainTileComponent());
+          return true;
+        case "Grass":
+          tile.components.Add(level.root.EffectGrassTTCCreate().AsITerrainTileComponent());
+          return true;
+      }
+
+      Match triggerMatch = Regex.Match(memberString, "^Trigger\\(\"([A-Za-z0-9_]+)\"\\)$", RegexOptions.IgnoreCase);
+      if (triggerMatch.Success) {
+        string name = triggerMatch.Groups[1].Value;
+        tile.components.Add(level.root.EffectSimplePresenceTriggerTTCCreate(name).AsITerrainTileComponent());
+        return true;
+      }
+
+      return false;
     }
   }
 }

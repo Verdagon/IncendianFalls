@@ -16,5 +16,6 @@ public interface ILevelController {
   bool NullableIs(ILevelController that);
   string GetName();
   bool ConsiderCornersAdjacent();
+  Void SimpleTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName);
 }
 }

@@ -48,12 +48,12 @@ namespace Geomancer {
       clock = new SlowableTimerClock(1.0f);
 
       memberByKeyCode = new Dictionary<KeyCode, string>() {
-        [KeyCode.G] = "grass",
-        [KeyCode.M] = "mud",
-        [KeyCode.D] = "dirt",
-        [KeyCode.R] = "rocks",
-        [KeyCode.X] = "marker",
-        [KeyCode.C] = "cave"
+        [KeyCode.G] = "Grass",
+        [KeyCode.M] = "Mud",
+        [KeyCode.D] = "Dirt",
+        [KeyCode.R] = "Rocks",
+        [KeyCode.X] = "Marker",
+        [KeyCode.C] = "Cave"
       };
 
       // var timestamp = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();

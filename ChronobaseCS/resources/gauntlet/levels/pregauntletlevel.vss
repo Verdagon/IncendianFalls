@@ -11,4 +11,15 @@ mut struct PreGauntletLevelController {
   fn ConsiderCornersAdjacent(this: PreGauntletLevelController overrides ILevelController): Bool {
     PreGauntletLevelControllerExtensions.ConsiderCornersAdjacent
   }
+
+  fn SimpleTrigger(
+    this: PreGauntletLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    PreGauntletLevelControllerExtensions.SimpleTrigger
+  }
 }

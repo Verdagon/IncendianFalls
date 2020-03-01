@@ -45,6 +45,9 @@ public class RavashrikeLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return RavashrikeLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
+  public Void SimpleTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    return RavashrikeLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
+  }
 
 }
 public static class RavashrikeLevelControllerAsILevelControllerCaster {
