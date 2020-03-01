@@ -15,7 +15,7 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit triggeringUnit,
         Location location) {
-      game.level.controller.SimpleTrigger(game, superstate, triggeringUnit, location, walkTrigger.name);
+      game.level.controller.SimpleUnitTrigger(game, superstate, triggeringUnit, location, walkTrigger.name);
       return new Atharia.Model.Void();
     }
   }

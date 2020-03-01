@@ -16,10 +16,19 @@ mut struct RidgeLevelController {
     this: RidgeLevelController overrides ILevelController,
     game: Game,
     superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    RidgeLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: RidgeLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
     triggeringUnit: Unit,
     location: Location,
     triggerName: Str):
   Void {
-    RidgeLevelControllerExtensions.SimpleTrigger
+    RidgeLevelControllerExtensions.SimpleUnitTrigger
   }
 }

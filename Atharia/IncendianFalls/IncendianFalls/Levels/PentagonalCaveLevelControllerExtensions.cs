@@ -72,6 +72,14 @@ namespace Atharia.Model {
         this PentagonalCaveLevelController obj,
         Game game,
         Superstate superstate,
+        string triggerName) {
+      return new Atharia.Model.Void();
+    }
+
+    public static Atharia.Model.Void SimpleUnitTrigger(
+        this PentagonalCaveLevelController obj,
+        Game game,
+        Superstate superstate,
         Unit triggeringUnit,
         Location location,
         string triggerName) {

@@ -163,6 +163,30 @@ namespace IncendianFalls {
       }
     }
 
+    public string RequestOverlayAction(int gameId, int buttonIndex) {
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new OverlayActionRequest(gameId, buttonIndex);
+        //broadcastBeforeRequest(new InteractRequestAsIRequest(request));
+        // context.Flare(GetDeterministicHashCode());
+        var superstate = superstateByGameId[gameId];
+        var success = context.root.Transact(delegate () {
+          return OverlayActionRequestExecutor.Execute(context, superstate, request);
+        });
+        context.Flare(success.DStr());
+        //broadcastAfterRequest(new InteractRequestAsIRequest(request));
+        // context.Flare(GetDeterministicHashCode());
+        return success;
+      } catch (Exception e) {
+        root.logger.Error(e.Message + "\n" + e.StackTrace);
+        throw e;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
+      }
+    }
+
     public Terrain RequestSetupTerrain(Pattern pattern) {
       //var rollbackPoint = root.Snapshot();
       try {

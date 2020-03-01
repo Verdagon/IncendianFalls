@@ -16,10 +16,19 @@ mut struct GauntletLevelController {
     this: GauntletLevelController overrides ILevelController,
     game: Game,
     superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    GauntletLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: GauntletLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
     triggeringUnit: Unit,
     location: Location,
     triggerName: Str):
   Void {
-    GauntletLevelControllerExtensions.SimpleTrigger
+    GauntletLevelControllerExtensions.SimpleUnitTrigger
   }
 }

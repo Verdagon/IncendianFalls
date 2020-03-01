@@ -16,10 +16,19 @@ mut struct RavashrikeLevelController {
     this: RavashrikeLevelController overrides ILevelController,
     game: Game,
     superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    RavashrikeLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: RavashrikeLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
     triggeringUnit: Unit,
     location: Location,
     triggerName: Str):
   Void {
-    RavashrikeLevelControllerExtensions.SimpleTrigger
+    RavashrikeLevelControllerExtensions.SimpleUnitTrigger
   }
 }

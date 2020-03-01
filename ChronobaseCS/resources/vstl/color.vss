@@ -1,0 +1,7 @@
+
+imm struct Color {
+  r: Int;
+  g: Int;
+  b: Int;
+  a: Int;
+}

@@ -52,6 +52,7 @@ namespace Domino {
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) { }
     public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
+    public void visitGameSetOverlayEffect(GameSetOverlayEffect effect) { }
     public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) {
       RefollowPlayer();
     }

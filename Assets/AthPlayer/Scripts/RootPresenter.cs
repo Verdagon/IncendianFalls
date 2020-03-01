@@ -19,6 +19,7 @@ namespace AthPlayer {
     public GameObject cameraObject;
 
     GamePresenter gamePresenter;
+    OverlayPresenter overlayPresenter;
     PlayerController playerController;
     FollowingCameraController cameraController;
 
@@ -27,6 +28,8 @@ namespace AthPlayer {
     public PlayerPanelView playerPanelView;
 
     public NarrationPanelView messageView;
+
+    public OverlayPanelView overlayPanelView;
 
     public SoundPlayer soundPlayer;
 
@@ -50,6 +53,8 @@ namespace AthPlayer {
       gamePresenter =
           new GamePresenter(
               timer, timer, soundPlayer, resumeStaller, turnStaller, ss, game, instantiator, messageView);
+
+      overlayPresenter = new OverlayPresenter(ss, game, overlayPanelView);
 
       playerController =
           new PlayerController(
@@ -126,6 +131,8 @@ namespace AthPlayer {
       if (hoveredLocation != null && Input.GetMouseButtonDown(0)) {
         playerController.OnTileMouseClick(hoveredLocation);
       }
+
+      overlayPresenter.Update();
     }
 
     public void TimeAnchorMoveClicked() {

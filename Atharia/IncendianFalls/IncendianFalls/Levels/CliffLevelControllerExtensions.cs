@@ -16,6 +16,14 @@ namespace Atharia.Model {
         this CliffLevelController obj,
         Game game,
         Superstate superstate,
+        string triggerName) {
+      return new Atharia.Model.Void();
+    }
+
+    public static Atharia.Model.Void SimpleUnitTrigger(
+        this CliffLevelController obj,
+        Game game,
+        Superstate superstate,
         Unit triggeringUnit,
         Location location,
         string triggerName) {

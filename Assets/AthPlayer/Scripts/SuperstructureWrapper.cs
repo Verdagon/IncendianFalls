@@ -139,5 +139,9 @@ namespace AthPlayer {
 
       return result;
     }
+
+    public string RequestOverlayAction(int gameId, int buttonIndex) {
+      return ss.RequestOverlayAction(gameId, buttonIndex);
+    }
   }
 }

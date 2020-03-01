@@ -27,7 +27,8 @@ namespace EmberDeep {
                   Unit.Null,
                   false,
                   IPreActingUCWeakMutBunch.Null,
-                  IPostActingUCWeakMutBunch.Null));
+                  IPostActingUCWeakMutBunch.Null),
+              Overlay.Null);
 
       superstate =
           new Superstate(

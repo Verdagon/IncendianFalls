@@ -17,10 +17,19 @@ mut struct SquareCaveLevelController {
     this: SquareCaveLevelController overrides ILevelController,
     game: Game,
     superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    SquareCaveLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: SquareCaveLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
     triggeringUnit: Unit,
     location: Location,
     triggerName: Str):
   Void {
-    SquareCaveLevelControllerExtensions.SimpleTrigger
+    SquareCaveLevelControllerExtensions.SimpleUnitTrigger
   }
 }

@@ -17,6 +17,11 @@ mut interface ILevelController {
   fn SimpleTrigger(
     game: Game,
     superstate: $Superstate,
+    triggerName: Str):
+  Void;
+  fn SimpleUnitTrigger(
+    game: Game,
+    superstate: $Superstate,
     triggeringUnit: Unit,
     location: Location,
     triggerName: Str):

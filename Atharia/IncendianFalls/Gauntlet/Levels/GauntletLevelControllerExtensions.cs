@@ -106,6 +106,14 @@ namespace Atharia.Model {
         this GauntletLevelController obj,
         Game game,
         Superstate superstate,
+        string triggerName) {
+      return new Atharia.Model.Void();
+    }
+
+    public static Atharia.Model.Void SimpleUnitTrigger(
+        this GauntletLevelController obj,
+        Game game,
+        Superstate superstate,
         Unit triggeringUnit,
         Location location,
         string triggerName) {

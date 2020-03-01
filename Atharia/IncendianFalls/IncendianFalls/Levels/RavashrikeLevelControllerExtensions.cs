@@ -70,6 +70,14 @@ namespace Atharia.Model {
         this RavashrikeLevelController obj,
         Game game,
         Superstate superstate,
+        string triggerName) {
+      return new Atharia.Model.Void();
+    }
+
+    public static Atharia.Model.Void SimpleUnitTrigger(
+        this RavashrikeLevelController obj,
+        Game game,
+        Superstate superstate,
         Unit triggeringUnit,
         Location location,
         string triggerName) {

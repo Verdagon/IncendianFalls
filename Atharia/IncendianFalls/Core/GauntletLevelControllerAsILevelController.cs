@@ -45,8 +45,11 @@ public class GauntletLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return GauntletLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Void SimpleTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
-    return GauntletLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
+  public Void SimpleTrigger(Game game, Superstate superstate, string triggerName) {
+    return GauntletLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggerName);
+  }
+  public Void SimpleUnitTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    return GauntletLevelControllerExtensions.SimpleUnitTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
   }
 
 }

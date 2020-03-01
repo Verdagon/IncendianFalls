@@ -103,6 +103,7 @@ namespace AthPlayer {
     public void OnGameEffect(IGameEffect effect) { effect.visit(this); }
     public void visitGameCreateEffect(GameCreateEffect effect) { }
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
+    public void visitGameSetOverlayEffect(GameSetOverlayEffect effect) { }
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
       UnloadLevel();
       LoadLevel();

@@ -76,6 +76,7 @@
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\PlayerController.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\Resumer.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\TimeAnchorMoveMode.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\Presenters\OverlayPresenter.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\TerrainPresenter.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\TerrainTilePresenter.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\UnitPresenter.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Assets\Geomancer\Scripts\TerrainPresenter.cs" />
     <Compile Include="Assets\Geomancer\Scripts\TerrainTilePresenter.cs" />
     <Compile Include="Assets\LookPanelView.cs" />
+    <Compile Include="Assets\OverlayPanelView.cs" />
     <Compile Include="Assets\PlayerPanelView.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />

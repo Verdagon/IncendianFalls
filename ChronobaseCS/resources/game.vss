@@ -8,6 +8,7 @@ root mut struct Game {
   var level: ?&Level;
   var time: Int;
   executionState: ExecutionState;
+  var overlay: ?Overlay;
 }
 
 mut struct ExecutionState {
@@ -58,4 +59,27 @@ mut struct ExecutionState {
   var remainingPreActingUnitComponents: ?MutBunch:&&IPreActingUC;
   // A list of weak pointers, the details we have yet to process.
   var remainingPostActingUnitComponents: ?MutBunch:&&IPostActingUC;
+}
+
+mut struct Overlay {
+  sizePercent: Int;
+  backgroundColor: Color;
+  overlayText: Str;
+  overlayTextColor: Color;
+  topAligned: Bool;
+  leftAligned: Bool;
+  fadeInMs: Int;
+  fadeOutMs: Int;
+
+  buttons: ImmList:Button;
+
+  // 0 to not automatically dismiss.
+  automaticDismissDelayMs: Int;
+  automaticDismissTriggerName: Str;
+}
+
+imm struct Button {
+  label: Str;
+  backgroundColor: Color;
+  triggerName: Str;
 }

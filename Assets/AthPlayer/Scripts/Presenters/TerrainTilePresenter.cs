@@ -73,9 +73,9 @@ namespace AthPlayer {
 
       DetermineTileAppearance(
           terrainTile,
-          out Color topColor,
-          out Color outlineColor,
-          out Color sideColor,
+          out UnityEngine.Color topColor,
+          out UnityEngine.Color outlineColor,
+          out UnityEngine.Color sideColor,
           out ExtrudedSymbolDescription overlayDescription,
           out ExtrudedSymbolDescription featureDescription,
           out SortedDictionary<int, ExtrudedSymbolDescription> itemSymbolDescriptionByItemId);
@@ -122,8 +122,8 @@ namespace AthPlayer {
               itemSymbolDescriptionByItemId);
 
       if (highlighted) {
-        var frontColor = (description.tileSymbolDescription.symbol.frontColor * 7 + new Color(1, 1, 1)) / 8;
-        var sidesColor = (description.tileSymbolDescription.sidesColor * 5 + new Color(1, 1, 1)) / 6;
+        var frontColor = (description.tileSymbolDescription.symbol.frontColor * 7 + new UnityEngine.Color(1, 1, 1)) / 8;
+        var sidesColor = (description.tileSymbolDescription.sidesColor * 5 + new UnityEngine.Color(1, 1, 1)) / 6;
         description =
           description.WithTileSymbolDescription(
             description.tileSymbolDescription
@@ -145,9 +145,9 @@ namespace AthPlayer {
 
     private static void DetermineTileAppearance(
         TerrainTile terrainTile,
-        out Color topColor,
-        out Color outlineColor,
-        out Color sideColor,
+        out UnityEngine.Color topColor,
+        out UnityEngine.Color outlineColor,
+        out UnityEngine.Color sideColor,
         out ExtrudedSymbolDescription overlay,
         out ExtrudedSymbolDescription feature,
         out SortedDictionary<int, ExtrudedSymbolDescription> itemSymbolDescriptionByItemId) {
@@ -209,7 +209,7 @@ namespace AthPlayer {
           outlineColor = new UnityEngine.Color(0f, 0f, 0f);
         } else if (ttc is MagmaTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.4f, 0f, 0f);
-          outlineColor = new Color(.2f, 0f, 0.0f);
+          outlineColor = new UnityEngine.Color(.2f, 0f, 0.0f);
           sideColor = new UnityEngine.Color(.2f, 0f, 0f);
           overlay =
               new ExtrudedSymbolDescription(
@@ -217,15 +217,15 @@ namespace AthPlayer {
                   new SymbolDescription(
                       "f",
                       50,
-                      new Color(.5f, .1f, 0f),
+                      new UnityEngine.Color(.5f, .1f, 0f),
                       0,
                       OutlineMode.WithOutline,
-                      new Color(.5f, .1f, 0.0f)),
+                      new UnityEngine.Color(.5f, .1f, 0.0f)),
                   false,
-                  new Color(0, 0, 0));
+                  new UnityEngine.Color(0, 0, 0));
         } else if (ttc is FallsTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.2f, .3f, 1.0f);
-          outlineColor = new Color(0f, 0f, 1.0f);
+          outlineColor = new UnityEngine.Color(0f, 0f, 1.0f);
           sideColor = new UnityEngine.Color(.2f, .3f, 1.0f);
 
           overlay =
@@ -234,12 +234,12 @@ namespace AthPlayer {
                   new SymbolDescription(
                       "o",
                       50,
-                      new Color(.3f, .4f, 1.0f),
+                      new UnityEngine.Color(.3f, .4f, 1.0f),
                       0,
                       OutlineMode.NoOutline,
-                      new Color(0f, 0f, 1.0f)),
+                      new UnityEngine.Color(0f, 0f, 1.0f)),
                   false,
-                  new Color(0, 0, 0));
+                  new UnityEngine.Color(0, 0, 0));
 
         } else if (ttc is RocksTTCAsITerrainTileComponent) {
           if (!overlayLocked) {
@@ -249,12 +249,12 @@ namespace AthPlayer {
                     new SymbolDescription(
                         "f",
                         50,
-                        new Color(1f, 1f, 1f, .1f),
+                        new UnityEngine.Color(1f, 1f, 1f, .1f),
                         0,
                         OutlineMode.WithOutline,
-                        new Color(0, 0, 0)),
+                        new UnityEngine.Color(0, 0, 0)),
                     false,
-                    new Color(0, 0, 0));
+                    new UnityEngine.Color(0, 0, 0));
           }
         } else if (ttc is BloodTTCAsITerrainTileComponent) {
           if (!overlayLocked) {
@@ -264,15 +264,15 @@ namespace AthPlayer {
                   new SymbolDescription(
                         "g",
                         50,
-                        new Color(1f, 0, 0, .3f),
+                        new UnityEngine.Color(1f, 0, 0, .3f),
                         0,
                         OutlineMode.WithOutline,
-                        new Color(0, 0, 0)),
+                        new UnityEngine.Color(0, 0, 0)),
                     false,
-                    new Color(0, 0, 0));
+                    new UnityEngine.Color(0, 0, 0));
           }
         } else if (ttc is DownStairsTTCAsITerrainTileComponent) {
-          topColor = new Color(0, 0, 0);
+          topColor = new UnityEngine.Color(0, 0, 0);
           topColorLocked = true;
 
           overlay =
@@ -281,12 +281,12 @@ namespace AthPlayer {
                   new SymbolDescription(
                       "d",
                         100,
-                      new Color(.5f, .5f, .5f, 1f),
+                      new UnityEngine.Color(.5f, .5f, .5f, 1f),
                       0,
                       OutlineMode.WithOutline,
-                      new Color(0, 0, 0)),
+                      new UnityEngine.Color(0, 0, 0)),
                   false,
-                  new Color(0, 0, 0));
+                  new UnityEngine.Color(0, 0, 0));
           overlayLocked = true;
         } else if (ttc is UpStairsTTCAsITerrainTileComponent) {
           feature =
@@ -295,12 +295,12 @@ namespace AthPlayer {
                   new SymbolDescription(
                       "c",
                         100,
-                      new Color(1f, 1f, 1f),
+                      new UnityEngine.Color(1f, 1f, 1f),
                       0,
                       OutlineMode.WithOutline,
-                      new Color(0, 0, 0)),
+                      new UnityEngine.Color(0, 0, 0)),
                   true,
-                  new Color(1f, 1f, 1f));
+                  new UnityEngine.Color(1f, 1f, 1f));
           featureLocked = true;
         } else if (ttc is CaveTTCAsITerrainTileComponent) {
               feature =
@@ -309,12 +309,12 @@ namespace AthPlayer {
                       new SymbolDescription(
                           "p",
                             50,
-                          new Color(0, 0, 0),
+                          new UnityEngine.Color(0, 0, 0),
                           0,
                           OutlineMode.WithOutline,
-                          new Color(1, 1, 1)),
+                          new UnityEngine.Color(1, 1, 1)),
                       false,
-                      new Color(1f, 1f, 1f));
+                      new UnityEngine.Color(1f, 1f, 1f));
               featureLocked = true;
         } else if (ttc is LevelLinkTTCAsITerrainTileComponent) {
         } else if (ttc is IncendianFallsLevelLinkerTTCAsITerrainTileComponent) {
@@ -329,12 +329,12 @@ namespace AthPlayer {
                     new SymbolDescription(
                         "zero",
                               50,
-                        new Color(1f, 1f, 1.0f, 1.5f),
+                        new UnityEngine.Color(1f, 1f, 1.0f, 1.5f),
                         0,
                         OutlineMode.WithBackOutline,
-                        new Color(0, 0, 0)),
+                        new UnityEngine.Color(0, 0, 0)),
                     true,
-                    new Color(.75f, .75f, 0)));
+                    new UnityEngine.Color(.75f, .75f, 0)));
           } else if (item is GlaiveAsIItem) {
             itemSymbolDescriptionByItemId.Add(
                 ttc.id,
@@ -343,12 +343,12 @@ namespace AthPlayer {
                     new SymbolDescription(
                         "s",
                               50,
-                        new Color(1f, 1f, 1f, 1.5f),
+                        new UnityEngine.Color(1f, 1f, 1f, 1.5f),
                         0,
                         OutlineMode.WithBackOutline,
-                        new Color(0, 0, 0)),
+                        new UnityEngine.Color(0, 0, 0)),
                     true,
-                    new Color(.5f, 0f, 0)));
+                    new UnityEngine.Color(.5f, 0f, 0)));
           } else if (item is InertiaRingAsIItem) {
             itemSymbolDescriptionByItemId.Add(
                 ttc.id,
@@ -357,12 +357,12 @@ namespace AthPlayer {
                     new SymbolDescription(
                         "four",
                               50,
-                        new Color(1f, 1f, 1f, 1.5f),
+                        new UnityEngine.Color(1f, 1f, 1f, 1.5f),
                         0,
                         OutlineMode.WithBackOutline,
-                        new Color(0, 0, 0)),
+                        new UnityEngine.Color(0, 0, 0)),
                     true,
-                    new Color(.5f, 0f, 0)));
+                    new UnityEngine.Color(.5f, 0f, 0)));
           } else if (item is HealthPotionAsIItem) {
             itemSymbolDescriptionByItemId.Add(
                 ttc.id,
@@ -371,12 +371,12 @@ namespace AthPlayer {
                     new SymbolDescription(
                         "plus",
                               50,
-                        new Color(.8f, 0, .8f, 1.5f),
+                        new UnityEngine.Color(.8f, 0, .8f, 1.5f),
                         0,
                         OutlineMode.WithBackOutline,
-                        new Color(0, 0, 0)),
+                        new UnityEngine.Color(0, 0, 0)),
                     true,
-                    new Color(0f, 0f, 0)));
+                    new UnityEngine.Color(0f, 0f, 0)));
           } else if (item is ManaPotionAsIItem) {
             itemSymbolDescriptionByItemId.Add(
                 ttc.id,
@@ -385,12 +385,12 @@ namespace AthPlayer {
                     new SymbolDescription(
                         "comma",
                               50,
-                        new Color(.25f, .7f, 1.0f, 1.5f),
+                        new UnityEngine.Color(.25f, .7f, 1.0f, 1.5f),
                         0,
                         OutlineMode.WithBackOutline,
-                        new Color(0, 0, 0)),
+                        new UnityEngine.Color(0, 0, 0)),
                     true,
-                    new Color(0f, 0f, 0)));
+                    new UnityEngine.Color(0f, 0f, 0)));
           } else {
             Asserts.Assert(false, "Found item: " + ttc);
           }
@@ -403,12 +403,12 @@ namespace AthPlayer {
                     new SymbolDescription(
                         "l",
                             50,
-                        new Color(1.0f, 1.0f, 1.0f, 1.5f),
+                        new UnityEngine.Color(1.0f, 1.0f, 1.0f, 1.5f),
                         0,
                         OutlineMode.WithBackOutline,
-                        new Color(0, 0, 0)),
+                        new UnityEngine.Color(0, 0, 0)),
                     true,
-                    new Color(0f, 0f, 0));
+                    new UnityEngine.Color(0f, 0f, 0));
           }
         } else {
           Asserts.Assert(false, ttc.ToString());

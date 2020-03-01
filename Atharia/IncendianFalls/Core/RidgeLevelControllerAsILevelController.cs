@@ -45,8 +45,11 @@ public class RidgeLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return RidgeLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Void SimpleTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
-    return RidgeLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
+  public Void SimpleTrigger(Game game, Superstate superstate, string triggerName) {
+    return RidgeLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggerName);
+  }
+  public Void SimpleUnitTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    return RidgeLevelControllerExtensions.SimpleUnitTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
   }
 
 }

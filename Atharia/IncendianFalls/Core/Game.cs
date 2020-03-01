@@ -67,6 +67,9 @@ public class Game {
     if (root.ExecutionStateExists(executionState.id)) {
       executionState.FindReachableObjects(foundIds);
     }
+    if (root.OverlayExists(overlay.id)) {
+      overlay.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(Game that) {
     if (!this.Exists()) {
@@ -131,5 +134,15 @@ public class Game {
       return new ExecutionState(root, incarnation.executionState);
     }
                        }
+  public Overlay overlay {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member overlay of null!");
+      }
+      return new Overlay(root, incarnation.overlay);
+    }
+                         set { root.EffectGameSetOverlay(id, value); }
+  }
 }
 }

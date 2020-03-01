@@ -102,3 +102,10 @@ imm struct TimeAnchorMoveRequest {
   gameId: Int;
   destination: Location;
 }
+
+imm struct OverlayActionRequest {
+  OverlayActionRequest isa IRequest;
+
+  gameId: Int;
+  buttonIndex: Int;
+}

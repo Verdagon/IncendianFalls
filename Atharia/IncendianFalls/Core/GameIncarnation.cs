@@ -12,6 +12,7 @@ public class GameIncarnation {
   public  int level;
   public  int time;
   public readonly int executionState;
+  public  int overlay;
   public GameIncarnation(
       int rand,
       bool squareLevelsOnly,
@@ -19,7 +20,8 @@ public class GameIncarnation {
       int player,
       int level,
       int time,
-      int executionState) {
+      int executionState,
+      int overlay) {
     this.rand = rand;
     this.squareLevelsOnly = squareLevelsOnly;
     this.levels = levels;
@@ -27,6 +29,7 @@ public class GameIncarnation {
     this.level = level;
     this.time = time;
     this.executionState = executionState;
+    this.overlay = overlay;
   }
 }
 

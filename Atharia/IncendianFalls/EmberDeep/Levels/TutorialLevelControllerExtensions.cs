@@ -47,10 +47,39 @@ namespace Atharia.Model {
         this TutorialLevelController obj,
         Game game,
         Superstate superstate,
+        string triggerName) {
+      game.root.logger.Error("Got trigger! " + triggerName);
+
+      if (triggerName == "dialogDone") {
+        game.overlay = Overlay.Null;
+      }
+
+      return new Atharia.Model.Void();
+    }
+
+    public static Atharia.Model.Void SimpleUnitTrigger(
+        this TutorialLevelController obj,
+        Game game,
+        Superstate superstate,
         Unit triggeringUnit,
         Location location,
         string triggerName) {
       game.root.logger.Error("Got trigger! " + triggerName);
+      if (triggerName == "ambush1Trigger") {
+        game.overlay =
+          game.root.EffectOverlayCreate(
+            100,
+            new Color(0, 128, 255, 128),
+            "this is overlay text",
+            new Color(255, 128, 0, 128),
+            true,
+            true,
+            2000,
+            3000,
+            new ButtonImmList(new List<Button>() { }),
+            8000,
+            "dialogDone");
+      }
       return new Atharia.Model.Void();
     }
 

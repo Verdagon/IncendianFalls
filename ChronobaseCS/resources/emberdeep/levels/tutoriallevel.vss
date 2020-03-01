@@ -16,10 +16,19 @@ mut struct TutorialLevelController {
     this: TutorialLevelController overrides ILevelController,
     game: Game,
     superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    TutorialLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: TutorialLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
     triggeringUnit: Unit,
     location: Location,
     triggerName: Str):
   Void {
-    TutorialLevelControllerExtensions.SimpleTrigger
+    TutorialLevelControllerExtensions.SimpleUnitTrigger
   }
 }

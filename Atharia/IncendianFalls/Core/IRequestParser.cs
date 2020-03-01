@@ -9,6 +9,8 @@ public static class IRequestParser {
   public static IRequest Parse(ParseSource source) {
     var nextThingPeek = source.PeekNextWord();
     switch (nextThingPeek) {
+      case "OverlayActionRequest":
+        return new OverlayActionRequestAsIRequest(OverlayActionRequest.Parse(source));
       case "TimeAnchorMoveRequest":
         return new TimeAnchorMoveRequestAsIRequest(TimeAnchorMoveRequest.Parse(source));
       case "TimeShiftRequest":

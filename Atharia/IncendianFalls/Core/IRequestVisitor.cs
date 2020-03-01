@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public interface IRequestVisitor {
+  void Visit(OverlayActionRequestAsIRequest obj);
   void Visit(TimeAnchorMoveRequestAsIRequest obj);
   void Visit(TimeShiftRequestAsIRequest obj);
   void Visit(FollowDirectiveRequestAsIRequest obj);

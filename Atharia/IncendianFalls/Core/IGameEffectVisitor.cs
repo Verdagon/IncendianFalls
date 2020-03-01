@@ -10,6 +10,7 @@ public interface IGameEffectVisitor {
   void visitGameSetPlayerEffect(GameSetPlayerEffect effect);
   void visitGameSetLevelEffect(GameSetLevelEffect effect);
   void visitGameSetTimeEffect(GameSetTimeEffect effect);
+  void visitGameSetOverlayEffect(GameSetOverlayEffect effect);
 }
 
 }

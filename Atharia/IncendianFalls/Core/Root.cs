@@ -493,6 +493,13 @@ public class Root {
   readonly List<LevelSetTimeEffect> effectsLevelSetTimeEffect =
       new List<LevelSetTimeEffect>();
 
+  readonly SortedDictionary<int, List<IOverlayEffectObserver>> observersForOverlay =
+      new SortedDictionary<int, List<IOverlayEffectObserver>>();
+  readonly List<OverlayCreateEffect> effectsOverlayCreateEffect =
+      new List<OverlayCreateEffect>();
+  readonly List<OverlayDeleteEffect> effectsOverlayDeleteEffect =
+      new List<OverlayDeleteEffect>();
+
   readonly SortedDictionary<int, List<IExecutionStateEffectObserver>> observersForExecutionState =
       new SortedDictionary<int, List<IExecutionStateEffectObserver>>();
   readonly List<ExecutionStateCreateEffect> effectsExecutionStateCreateEffect =
@@ -534,6 +541,8 @@ public class Root {
       new List<GameSetLevelEffect>();
   readonly List<GameSetTimeEffect> effectsGameSetTimeEffect =
       new List<GameSetTimeEffect>();
+  readonly List<GameSetOverlayEffect> effectsGameSetOverlayEffect =
+      new List<GameSetOverlayEffect>();
 
   readonly SortedDictionary<int, List<IIUnitEventMutListEffectObserver>> observersForIUnitEventMutList =
       new SortedDictionary<int, List<IIUnitEventMutListEffectObserver>>();
@@ -1333,6 +1342,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsLevel) {
       result += GetLevelHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsOverlay) {
+      result += GetOverlayHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsExecutionState) {
       result += GetExecutionStateHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1673,6 +1685,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllLevel()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllOverlay()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllExecutionState()) {
@@ -2134,6 +2149,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllLevel()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllOverlay()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -3078,6 +3098,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForOverlay =
+        new SortedDictionary<int, List<IOverlayEffectObserver>>();
+    foreach (var entry in observersForOverlay) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForOverlay.Add(
+          objectId,
+          new List<IOverlayEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForExecutionState =
         new SortedDictionary<int, List<IExecutionStateEffectObserver>>();
     foreach (var entry in observersForExecutionState) {
@@ -3821,6 +3852,9 @@ public class Root {
            
     BroadcastLevelEffects(
         copyOfObserversForLevel);
+           
+    BroadcastOverlayEffects(
+        copyOfObserversForOverlay);
            
     BroadcastExecutionStateEffects(
         copyOfObserversForExecutionState);
@@ -4598,6 +4632,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsLevel.ContainsKey(sourceObjId)) {
         EffectInternalCreateLevel(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsOverlay) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsOverlay.ContainsKey(sourceObjId)) {
+        EffectInternalCreateOverlay(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -7754,6 +7798,27 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsOverlay) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsOverlay.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsOverlay[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsOverlay[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExecutionState) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -7855,6 +7920,10 @@ public class Root {
 
           if (sourceObjIncarnation.time != currentObjIncarnation.time) {
             EffectGameSetTime(objId, sourceObjIncarnation.time);
+          }
+
+          if (sourceObjIncarnation.overlay != currentObjIncarnation.overlay) {
+            EffectGameSetOverlay(objId, new Overlay(this, sourceObjIncarnation.overlay));
           }
 
           // Swap out the underlying incarnation. The only visible effect this has is
@@ -8290,6 +8359,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsLevel.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectLevelDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<OverlayIncarnation>>(rootIncarnation.incarnationsOverlay)) {
+      if (!sourceIncarnation.incarnationsOverlay.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectOverlayDelete(id);
       }
     }
 
@@ -17297,6 +17373,165 @@ public class Root {
 
     effectsLevelSetTimeEffect.Add(effect);
   }
+  public OverlayIncarnation GetOverlayIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsOverlay[id].incarnation;
+  }
+  public bool OverlayExists(int id) {
+    return rootIncarnation.incarnationsOverlay.ContainsKey(id);
+  }
+  public Overlay GetOverlay(int id) {
+    return new Overlay(this, id);
+  }
+  public List<Overlay> AllOverlay() {
+    List<Overlay> result = new List<Overlay>(rootIncarnation.incarnationsOverlay.Count);
+    foreach (var id in rootIncarnation.incarnationsOverlay.Keys) {
+      result.Add(new Overlay(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<Overlay> EnumAllOverlay() {
+    foreach (var id in rootIncarnation.incarnationsOverlay.Keys) {
+      yield return GetOverlay(id);
+    }
+  }
+  public void CheckHasOverlay(Overlay thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasOverlay(thing.id);
+  }
+  public void CheckHasOverlay(int id) {
+    if (!rootIncarnation.incarnationsOverlay.ContainsKey(id)) {
+      throw new System.Exception("Invalid Overlay: " + id);
+    }
+  }
+  public void AddOverlayObserver(int id, IOverlayEffectObserver observer) {
+    List<IOverlayEffectObserver> obsies;
+    if (!observersForOverlay.TryGetValue(id, out obsies)) {
+      obsies = new List<IOverlayEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForOverlay[id] = obsies;
+  }
+
+  public void RemoveOverlayObserver(int id, IOverlayEffectObserver observer) {
+    if (observersForOverlay.ContainsKey(id)) {
+      var list = observersForOverlay[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForOverlay.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public Overlay EffectOverlayCreate(
+      int sizePercent,
+      Color backgroundColor,
+      string overlayText,
+      Color overlayTextColor,
+      bool topAligned,
+      bool leftAligned,
+      int fadeInMs,
+      int fadeOutMs,
+      ButtonImmList buttons,
+      int automaticDismissDelayMs,
+      string automaticDismissTriggerName) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new OverlayIncarnation(
+            sizePercent,
+            backgroundColor,
+            overlayText,
+            overlayTextColor,
+            topAligned,
+            leftAligned,
+            fadeInMs,
+            fadeOutMs,
+            buttons,
+            automaticDismissDelayMs,
+            automaticDismissTriggerName
+            );
+    EffectInternalCreateOverlay(id, rootIncarnation.version, incarnation);
+    return new Overlay(this, id);
+  }
+  public void EffectInternalCreateOverlay(
+      int id,
+      int incarnationVersion,
+      OverlayIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new OverlayCreateEffect(id);
+    rootIncarnation.incarnationsOverlay.Add(
+        id,
+        new VersionAndIncarnation<OverlayIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsOverlayCreateEffect.Add(effect);
+  }
+
+  public void EffectOverlayDelete(int id) {
+    CheckUnlocked();
+    var effect = new OverlayDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsOverlay[id];
+
+    rootIncarnation.incarnationsOverlay.Remove(id);
+    effectsOverlayDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetOverlayHash(int id, int version, OverlayIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.sizePercent.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.backgroundColor.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.overlayText.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.overlayTextColor.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.topAligned.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.leftAligned.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.fadeInMs.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.fadeOutMs.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.buttons.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.automaticDismissDelayMs.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.automaticDismissTriggerName.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastOverlayEffects(
+      SortedDictionary<int, List<IOverlayEffectObserver>> observers) {
+    foreach (var effect in effectsOverlayDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IOverlayEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnOverlayEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IOverlayEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnOverlayEffect(effect);
+        }
+        observersForOverlay.Remove(effect.id);
+      }
+    }
+    effectsOverlayDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsOverlayCreateEffect) {
+      if (observers.TryGetValue(0, out List<IOverlayEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnOverlayEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IOverlayEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnOverlayEffect(effect);
+        }
+      }
+    }
+    effectsOverlayCreateEffect.Clear();
+  }
   public ExecutionStateIncarnation GetExecutionStateIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -17925,7 +18160,8 @@ public class Root {
       Unit player,
       Level level,
       int time,
-      ExecutionState executionState) {
+      ExecutionState executionState,
+      Overlay overlay) {
     CheckUnlocked();
     CheckHasRand(rand);
     CheckHasLevelMutSet(levels);
@@ -17940,7 +18176,8 @@ public class Root {
             player.id,
             level.id,
             time,
-            executionState.id
+            executionState.id,
+            overlay.id
             );
     EffectInternalCreateGame(id, rootIncarnation.version, incarnation);
     return new Game(this, id);
@@ -17984,6 +18221,9 @@ public class Root {
     }
     result += id * version * 6 * incarnation.time.GetDeterministicHashCode();
     result += id * version * 7 * incarnation.executionState.GetDeterministicHashCode();
+    if (!object.ReferenceEquals(incarnation.overlay, null)) {
+      result += id * version * 8 * incarnation.overlay.GetDeterministicHashCode();
+    }
     return result;
   }
      
@@ -18047,6 +18287,20 @@ public class Root {
     }
     effectsGameSetTimeEffect.Clear();
 
+    foreach (var effect in effectsGameSetOverlayEffect) {
+      if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGameEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IGameEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGameEffect(effect);
+        }
+      }
+    }
+    effectsGameSetOverlayEffect.Clear();
+
     foreach (var effect in effectsGameCreateEffect) {
       if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -18080,7 +18334,8 @@ public class Root {
               newValue.id,
               oldIncarnationAndVersion.incarnation.level,
               oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState);
+              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.overlay);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -18108,7 +18363,8 @@ public class Root {
               oldIncarnationAndVersion.incarnation.player,
               newValue.id,
               oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState);
+              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.overlay);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -18136,7 +18392,8 @@ public class Root {
               oldIncarnationAndVersion.incarnation.player,
               oldIncarnationAndVersion.incarnation.level,
               newValue,
-              oldIncarnationAndVersion.incarnation.executionState);
+              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.overlay);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -18144,6 +18401,35 @@ public class Root {
     }
 
     effectsGameSetTimeEffect.Add(effect);
+  }
+
+  public void EffectGameSetOverlay(int id, Overlay newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = new GameSetOverlayEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldId = oldIncarnationAndVersion.incarnation.overlay;
+      oldIncarnationAndVersion.incarnation.overlay = newValue.id;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.executionState,
+              newValue.id);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsGameSetOverlayEffect.Add(effect);
   }
 
   public IPresenceTriggerTTC GetIPresenceTriggerTTC(int id) {

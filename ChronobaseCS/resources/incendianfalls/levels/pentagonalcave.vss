@@ -17,10 +17,19 @@ mut struct PentagonalCaveLevelController {
     this: PentagonalCaveLevelController overrides ILevelController,
     game: Game,
     superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    PentagonalCaveLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: PentagonalCaveLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
     triggeringUnit: Unit,
     location: Location,
     triggerName: Str):
   Void {
-    PentagonalCaveLevelControllerExtensions.SimpleTrigger
+    PentagonalCaveLevelControllerExtensions.SimpleUnitTrigger
   }
 }

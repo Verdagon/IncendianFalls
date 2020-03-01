@@ -125,7 +125,7 @@ namespace Domino {
       return tileView;
     }
 
-    public MeterView CreateMeterView(IClock clock, float ratio, Color filledColor, Color emptyColor) {
+    public MeterView CreateMeterView(IClock clock, float ratio, UnityEngine.Color filledColor, UnityEngine.Color emptyColor) {
       var meterGameObject = Instantiate(meterPrefab);
       var meterView = meterGameObject.GetComponent<MeterView>();
       meterView.Init(clock, this, filledColor, emptyColor, ratio);

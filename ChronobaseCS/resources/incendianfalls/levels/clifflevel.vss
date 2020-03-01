@@ -17,10 +17,19 @@ mut struct CliffLevelController {
     this: CliffLevelController overrides ILevelController,
     game: Game,
     superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    CliffLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: CliffLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
     triggeringUnit: Unit,
     location: Location,
     triggerName: Str):
   Void {
-    CliffLevelControllerExtensions.SimpleTrigger
+    CliffLevelControllerExtensions.SimpleUnitTrigger
   }
 }
