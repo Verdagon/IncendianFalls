@@ -64,18 +64,21 @@ mut struct ExecutionState {
 mut struct Overlay {
   sizePercent: Int;
   backgroundColor: Color;
-  overlayText: Str;
-  overlayTextColor: Color;
+  fadeInEndMs: Int;
+  fadeOutStartMs: Int; // 0 to not automatically dismiss.
+  fadeOutEndMs: Int; // 0 to not automatically dismiss.
+  automaticActionTriggerName: Str;
+
+  text: Str;
+  textColor: Color;
+  textFadeInStartMs: Int;
+  textFadeInEndMs: Int;
+  textFadeOutStartMs: Int;
+  textFadeOutEndMs: Int;
   topAligned: Bool;
   leftAligned: Bool;
-  fadeInMs: Int;
-  fadeOutMs: Int;
 
   buttons: ImmList:Button;
-
-  // 0 to not automatically dismiss.
-  automaticDismissDelayMs: Int;
-  automaticDismissTriggerName: Str;
 }
 
 imm struct Button {

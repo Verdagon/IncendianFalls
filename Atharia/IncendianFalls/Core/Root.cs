@@ -17429,15 +17429,19 @@ public class Root {
   public Overlay EffectOverlayCreate(
       int sizePercent,
       Color backgroundColor,
-      string overlayText,
-      Color overlayTextColor,
+      int fadeInEndMs,
+      int fadeOutStartMs,
+      int fadeOutEndMs,
+      string automaticActionTriggerName,
+      string text,
+      Color textColor,
+      int textFadeInStartMs,
+      int textFadeInEndMs,
+      int textFadeOutStartMs,
+      int textFadeOutEndMs,
       bool topAligned,
       bool leftAligned,
-      int fadeInMs,
-      int fadeOutMs,
-      ButtonImmList buttons,
-      int automaticDismissDelayMs,
-      string automaticDismissTriggerName) {
+      ButtonImmList buttons) {
     CheckUnlocked();
 
     var id = NewId();
@@ -17445,15 +17449,19 @@ public class Root {
         new OverlayIncarnation(
             sizePercent,
             backgroundColor,
-            overlayText,
-            overlayTextColor,
+            fadeInEndMs,
+            fadeOutStartMs,
+            fadeOutEndMs,
+            automaticActionTriggerName,
+            text,
+            textColor,
+            textFadeInStartMs,
+            textFadeInEndMs,
+            textFadeOutStartMs,
+            textFadeOutEndMs,
             topAligned,
             leftAligned,
-            fadeInMs,
-            fadeOutMs,
-            buttons,
-            automaticDismissDelayMs,
-            automaticDismissTriggerName
+            buttons
             );
     EffectInternalCreateOverlay(id, rootIncarnation.version, incarnation);
     return new Overlay(this, id);
@@ -17488,15 +17496,19 @@ public class Root {
     int result = id * version;
     result += id * version * 1 * incarnation.sizePercent.GetDeterministicHashCode();
     result += id * version * 2 * incarnation.backgroundColor.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.overlayText.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.overlayTextColor.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.topAligned.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.leftAligned.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.fadeInMs.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.fadeOutMs.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.buttons.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.automaticDismissDelayMs.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.automaticDismissTriggerName.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.fadeInEndMs.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.fadeOutStartMs.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.fadeOutEndMs.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.automaticActionTriggerName.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.text.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.textColor.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.textFadeInStartMs.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.textFadeInEndMs.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.textFadeOutStartMs.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.textFadeOutEndMs.GetDeterministicHashCode();
+    result += id * version * 13 * incarnation.topAligned.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.leftAligned.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.buttons.GetDeterministicHashCode();
     return result;
   }
      

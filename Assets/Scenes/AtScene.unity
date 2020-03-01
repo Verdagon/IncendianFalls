@@ -542,7 +542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.7001953, y: 200.4}
+  m_AnchoredPosition: {x: 0.69921875, y: 200.4}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &360197426
@@ -849,7 +849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.7001953, y: 120.399994}
+  m_AnchoredPosition: {x: 0.69921875, y: 120.399994}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &587128121
@@ -1441,6 +1441,7 @@ MonoBehaviour:
   lookPanelView: {fileID: 990430266}
   playerPanelView: {fileID: 1781084983}
   messageView: {fileID: 460633232}
+  overlayPanelView: {fileID: 1737464144}
   soundPlayer: {fileID: 900762318}
 --- !u!114 &900762318
 MonoBehaviour:
@@ -1849,7 +1850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.7001953, y: 80.399994}
+  m_AnchoredPosition: {x: 0.69921875, y: 80.399994}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &947940033
@@ -2899,7 +2900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.7001953, y: 40.399998}
+  m_AnchoredPosition: {x: 0.69921875, y: 40.399998}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1722301815
@@ -3041,7 +3042,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.7001953, y: 160.4}
+  m_AnchoredPosition: {x: 0.69921875, y: 160.4}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1737355198
@@ -3158,13 +3159,14 @@ GameObject:
   - component: {fileID: 1737464143}
   - component: {fileID: 1737464142}
   - component: {fileID: 1737464141}
+  - component: {fileID: 1737464144}
   m_Layer: 5
   m_Name: OverlayPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1737464140
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3236,6 +3238,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737464139}
   m_CullTransparentMesh: 0
+--- !u!114 &1737464144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737464139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b29ae1127f872c4f9a346141a44f0d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 1742102233}
+  overlayText: {fileID: 1658266734}
+  buttons:
+  - {fileID: 2067014307}
+  - {fileID: 1170812142}
 --- !u!1 &1742102233
 GameObject:
   m_ObjectHideFlags: 0

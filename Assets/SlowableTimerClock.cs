@@ -44,6 +44,10 @@ class SlowableTimerClock : IClock, ITimer {
     timers = new SortedDictionary<TimerEntry, object>(new TimerEntryComparer());
   }
 
+  public void SetTimeSpeedMultiplier(float timeSpeedMultiplier) {
+    this.timeSpeedMultiplier = timeSpeedMultiplier;
+  }
+
   public long GetTimeMs() {
     return nowGameTimeMs;
   }

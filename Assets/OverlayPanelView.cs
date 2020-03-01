@@ -6,37 +6,120 @@ using AthPlayer;
 using UnityEngine;
 using UnityEngine.UI;
 
+public delegate void OnOverlayClosed(int buttonIndex);
+
 public class OverlayPanelView : MonoBehaviour {
+  public event OnOverlayClosed OverlayClosed;
+
   public GameObject parent;
   public Text overlayText;
   public UnityEngine.UI.Button[] buttons;
 
-  public void SetStuff(
-      float ratio,
-      float size,
+  private float openTimeS;
+
+  private UnityEngine.Color backgroundColor;
+
+  float fadeInEndS;
+  float fadeOutStartS;
+  float fadeOutEndS;
+
+  private UnityEngine.Color textColor;
+  float textFadeInStartS;
+  float textFadeInEndS;
+  float textFadeOutStartS;
+  float textFadeOutEndS;
+
+  public void Init(
+      float sizeRatio,
       UnityEngine.Color backgroundColor,
+      float fadeInEndS,
+      float fadeOutStartS,
+      float fadeOutEndS,
+
       string text,
       UnityEngine.Color textColor,
+      float textFadeInStartS,
+      float textFadeInEndS,
+      float textFadeOutStartS,
+      float textFadeOutEndS,
       bool topAligned,
-      bool leftAligned) {
-    backgroundColor.a *= ratio;
-    GetComponent<Image>().color = backgroundColor;
-    textColor.a *= ratio;
+      bool leftAligned,
+
+      List<string> buttonTexts) {
+
+    this.openTimeS = Time.time;
+
+    this.backgroundColor = backgroundColor;
+    this.fadeInEndS = fadeInEndS;
+    this.fadeOutStartS = fadeOutStartS;
+    this.fadeOutEndS = fadeOutEndS;
+
+    this.textColor = textColor;
+    this.textFadeInStartS = textFadeInStartS;
+    this.textFadeInEndS = textFadeInEndS;
+    this.textFadeOutStartS = textFadeOutStartS;
+    this.textFadeOutEndS = textFadeOutEndS;
+
+    if (fadeInEndS == 0) {
+      GetComponent<Image>().color = backgroundColor;
+      foreach (var button in buttons) {
+        var buttonColors = button.colors;
+        buttonColors.normalColor = new UnityEngine.Color(32, 32, 32, 1);
+        button.colors = buttonColors;
+      }
+    } else {
+      GetComponent<Image>().color = new UnityEngine.Color(0, 0, 0, 0);
+      foreach (var button in buttons) {
+        var buttonColors = button.colors;
+        buttonColors.normalColor = new UnityEngine.Color(0, 0, 0, 0);
+        button.colors = buttonColors;
+      }
+    }
+
+    if (textFadeInEndS == 0) {
+      overlayText.color = textColor;
+    } else {
+      overlayText.color = new UnityEngine.Color(0, 0, 0, 0);
+    }
+
     overlayText.text = text;
-    overlayText.color = textColor;
 
-    overlayText.GetComponent<RectTransform>().localPosition =
+    SetSize(sizeRatio);
+    SetAlignment(topAligned, leftAligned);
+
+    for (int i = 0; i < buttons.Length; i++) {
+      if (i < buttonTexts.Count) {
+        buttons[i].GetComponentInChildren<Text>().text = buttonTexts[buttonTexts.Count - 1 - i];
+        buttons[i].gameObject.SetActive(true);
+      } else {
+        buttons[i].gameObject.SetActive(false);
+      }
+    }
+
+    gameObject.SetActive(true);
+  }
+
+  public void Cancel() {
+    gameObject.SetActive(false);
+  }
+
+  private void SetSize(float sizeRatio) {
+    Debug.Log(parent.GetComponent<RectTransform>().rect.width);
+    GetComponent<RectTransform>().localPosition =
       new Vector3(
-        parent.GetComponent<RectTransform>().rect.width * (1 - size) / 2,
-        - parent.GetComponent<RectTransform>().rect.height * (1 - size) / 2,
+        -parent.GetComponent<RectTransform>().rect.width * sizeRatio / 2,
+        parent.GetComponent<RectTransform>().rect.height * sizeRatio / 2,
         0);
-    overlayText.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(
+    GetComponent<RectTransform>().SetSizeWithCurrentAnchors(
       RectTransform.Axis.Vertical,
-      parent.GetComponent<RectTransform>().rect.height * size);
-    overlayText.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(
+      parent.GetComponent<RectTransform>().rect.height * sizeRatio);
+    GetComponent<RectTransform>().SetSizeWithCurrentAnchors(
       RectTransform.Axis.Horizontal,
-      parent.GetComponent<RectTransform>().rect.width * size);
+      parent.GetComponent<RectTransform>().rect.width * sizeRatio);
 
+  }
+
+  private void SetAlignment(bool topAligned, bool leftAligned) {
     if (topAligned) {
       if (leftAligned) {
         overlayText.alignment = TextAnchor.UpperLeft;
@@ -52,28 +135,77 @@ public class OverlayPanelView : MonoBehaviour {
     }
   }
 
-  public void Start() {
-    for (int i = 0; i < buttons.Length; i++) {
-      //buttons[i].GetComponent<UIClickListener>().MouseEnter +=
-      //    () => lookPanelView.ShowMessage(
-      //        "(A) Time Anchor: Place a time anchor, which you can later Rewind to.");
-      //buttons[i].GetComponent<UIClickListener>().MouseExit +=
-      //    () => lookPanelView.ClearMessage();
+  public void Update() {
+
+    var timeSinceOpenS = Time.time - openTimeS;
+
+    if (timeSinceOpenS < fadeInEndS) {
+      var ratio = timeSinceOpenS / fadeInEndS;
+      SetChromeFadeRatio(ratio);
+    }
+
+    if (fadeOutEndS == 0) {
+      SetChromeFadeRatio(1f);
+    } else {
+      if (timeSinceOpenS < fadeInEndS) {
+      } else if (timeSinceOpenS < fadeOutStartS) {
+        SetChromeFadeRatio(1f);
+      } else if (timeSinceOpenS < fadeOutEndS) {
+        var ratio = 1 - (timeSinceOpenS - fadeOutStartS) / (fadeOutEndS - fadeOutStartS);
+        SetChromeFadeRatio(ratio);
+      }
+    }
+
+    if (timeSinceOpenS < textFadeInStartS) {
+      SetTextFadeRatio(0);
+    } else if (timeSinceOpenS < textFadeInEndS) {
+      var ratio = (timeSinceOpenS - textFadeInStartS) / (textFadeInEndS - textFadeInStartS);
+      SetTextFadeRatio(ratio);
+    }
+
+    if (textFadeOutEndS == 0) {
+      SetTextFadeRatio(1f);
+    } else {
+      if (timeSinceOpenS < textFadeInEndS) {
+      } else if (timeSinceOpenS < textFadeOutStartS) {
+        SetTextFadeRatio(1f);
+      } else if (timeSinceOpenS < textFadeOutEndS) {
+        var ratio = 1 - (timeSinceOpenS - textFadeOutStartS) / (textFadeOutEndS - textFadeOutStartS);
+        SetTextFadeRatio(ratio);
+      } else {
+        SetTextFadeRatio(0f);
+      }
+    }
+
+    if (timeSinceOpenS >= fadeOutEndS) {
+      SetChromeFadeRatio(0);
+      gameObject.SetActive(false);
+      OverlayClosed?.Invoke(0);
     }
   }
 
-  //public void Clear() {
-  //  playerStatusText.SetActive(false);
-  //}
+  private void SetChromeFadeRatio(float ratio) {
+    var fadedBackgroundColor = backgroundColor;
+    fadedBackgroundColor.a *= ratio;
+    GetComponent<Image>().color = fadedBackgroundColor;
 
-  //public void ShowPlayerStatus(Level level, Unit unit) {
-  //  playerStatusText.SetActive(true);
-  //  playerStatusText.GetComponent<Text>().text =
-  //      level.GetName() + "   " +
-  //      "HP " + unit.hp + "/" + unit.maxHp + "   " +
-  //      "MP " + unit.mp + "/" + unit.maxMp;
-  //  var size = playerStatusText.GetComponent<RectTransform>().sizeDelta;
-  //  size.x = playerStatusText.GetComponent<Text>().preferredWidth;
-  //  playerStatusText.GetComponent<RectTransform>().sizeDelta = size; 
-  //}
+    foreach (var button in buttons) {
+      var buttonColors = button.colors;
+      var normalColor = buttonColors.normalColor;
+      normalColor.a = ratio;
+      buttonColors.normalColor = normalColor;
+      button.colors = buttonColors;
+    }
+  }
+
+  private void SetTextFadeRatio(float ratio) {
+    var fadedTextColor = textColor;
+    fadedTextColor.a *= ratio;
+    overlayText.color = fadedTextColor;
+  }
+
+  public void Clicked(int buttonIndex) {
+    gameObject.SetActive(false);
+    OverlayClosed?.Invoke(buttonIndex);
+  }
 }

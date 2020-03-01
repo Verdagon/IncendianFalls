@@ -23,7 +23,7 @@ namespace IncendianFalls {
         game.root.logger.Error("no overlay");
         return "No overlay!";
       }
-      if (game.overlay.automaticDismissDelayMs == 0) {
+      if (game.overlay.fadeOutEndMs == 0) {
         game.root.logger.Error("manual dismiss");
         if (request.buttonIndex >= game.overlay.buttons.Count) {
           game.root.logger.Error("button index out of range!");
@@ -33,7 +33,7 @@ namespace IncendianFalls {
         game.level.controller.SimpleTrigger(game, superstate, buttonTriggerName);
       } else {
         game.root.logger.Error("auto dismiss");
-        var buttonTriggerName = game.overlay.automaticDismissTriggerName;
+        var buttonTriggerName = game.overlay.automaticActionTriggerName;
         game.level.controller.SimpleTrigger(game, superstate, buttonTriggerName);
       }
 

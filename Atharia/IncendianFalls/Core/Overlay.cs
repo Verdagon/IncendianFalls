@@ -56,11 +56,35 @@ public class Overlay {
   public Color backgroundColor {
     get { return incarnation.backgroundColor; }
   }
-  public string overlayText {
-    get { return incarnation.overlayText; }
+  public int fadeInEndMs {
+    get { return incarnation.fadeInEndMs; }
   }
-  public Color overlayTextColor {
-    get { return incarnation.overlayTextColor; }
+  public int fadeOutStartMs {
+    get { return incarnation.fadeOutStartMs; }
+  }
+  public int fadeOutEndMs {
+    get { return incarnation.fadeOutEndMs; }
+  }
+  public string automaticActionTriggerName {
+    get { return incarnation.automaticActionTriggerName; }
+  }
+  public string text {
+    get { return incarnation.text; }
+  }
+  public Color textColor {
+    get { return incarnation.textColor; }
+  }
+  public int textFadeInStartMs {
+    get { return incarnation.textFadeInStartMs; }
+  }
+  public int textFadeInEndMs {
+    get { return incarnation.textFadeInEndMs; }
+  }
+  public int textFadeOutStartMs {
+    get { return incarnation.textFadeOutStartMs; }
+  }
+  public int textFadeOutEndMs {
+    get { return incarnation.textFadeOutEndMs; }
   }
   public bool topAligned {
     get { return incarnation.topAligned; }
@@ -68,20 +92,8 @@ public class Overlay {
   public bool leftAligned {
     get { return incarnation.leftAligned; }
   }
-  public int fadeInMs {
-    get { return incarnation.fadeInMs; }
-  }
-  public int fadeOutMs {
-    get { return incarnation.fadeOutMs; }
-  }
   public ButtonImmList buttons {
     get { return incarnation.buttons; }
-  }
-  public int automaticDismissDelayMs {
-    get { return incarnation.automaticDismissDelayMs; }
-  }
-  public string automaticDismissTriggerName {
-    get { return incarnation.automaticDismissTriggerName; }
   }
 }
 }
