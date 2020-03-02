@@ -50,8 +50,8 @@ namespace AthPlayer {
       Debug.LogWarning("Hardcoding random seed!");
       var randomSeed = 1525224206;
       //var game = ss.RequestSetupIncendianFallsGame(randomSeed, false);
-      //var game = ss.RequestSetupEmberDeepGame(randomSeed, false);
-      var game = ss.RequestSetupGauntletGame(randomSeed, false);
+      var game = ss.RequestSetupEmberDeepGame(randomSeed, false);
+      //var game = ss.RequestSetupGauntletGame(randomSeed, false);
 
       cameraController = new FollowingCameraController(cinematicTimer, cinematicTimer, cameraObject, game);
 
@@ -111,6 +111,12 @@ namespace AthPlayer {
       }
       if (Input.GetKey(KeyCode.DownArrow)) {
         cameraController.MoveDown(Time.deltaTime);
+      }
+      if (Input.GetKey(KeyCode.RightBracket)) {
+        cameraController.MoveIn(Time.deltaTime);
+      }
+      if (Input.GetKey(KeyCode.LeftBracket)) {
+        cameraController.MoveOut(Time.deltaTime);
       }
 
       UnityEngine.Ray ray = cameraObject.GetComponentInChildren<Camera>().ScreenPointToRay(Input.mousePosition);

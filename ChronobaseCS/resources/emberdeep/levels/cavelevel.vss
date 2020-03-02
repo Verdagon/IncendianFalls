@@ -1,0 +1,34 @@
+
+mut struct CaveLevelController {
+  CaveLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: CaveLevelController overrides ILevelController): Str {
+    CaveLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: CaveLevelController overrides ILevelController): Bool {
+    CaveLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: CaveLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    CaveLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: CaveLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    CaveLevelControllerExtensions.SimpleUnitTrigger
+  }
+}

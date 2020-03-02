@@ -69,6 +69,12 @@ namespace Atharia.Model {
       return new Atharia.Model.Void();
     }
   }
+  public static class CaveWallTTCExtensions {
+    public static Atharia.Model.Void Destruct(this CaveWallTTC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+  }
   public static class WallTTCExtensions {
     public static Atharia.Model.Void Destruct(this WallTTC obj) {
       obj.Delete();

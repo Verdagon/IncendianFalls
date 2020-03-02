@@ -54,6 +54,13 @@ public class Root {
   readonly List<TutorialLevelControllerDeleteEffect> effectsTutorialLevelControllerDeleteEffect =
       new List<TutorialLevelControllerDeleteEffect>();
 
+  readonly SortedDictionary<int, List<ICaveLevelControllerEffectObserver>> observersForCaveLevelController =
+      new SortedDictionary<int, List<ICaveLevelControllerEffectObserver>>();
+  readonly List<CaveLevelControllerCreateEffect> effectsCaveLevelControllerCreateEffect =
+      new List<CaveLevelControllerCreateEffect>();
+  readonly List<CaveLevelControllerDeleteEffect> effectsCaveLevelControllerDeleteEffect =
+      new List<CaveLevelControllerDeleteEffect>();
+
   readonly SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>> observersForRidgeLevelController =
       new SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>>();
   readonly List<RidgeLevelControllerCreateEffect> effectsRidgeLevelControllerCreateEffect =
@@ -204,6 +211,13 @@ public class Root {
       new List<RocksTTCCreateEffect>();
   readonly List<RocksTTCDeleteEffect> effectsRocksTTCDeleteEffect =
       new List<RocksTTCDeleteEffect>();
+
+  readonly SortedDictionary<int, List<ICaveWallTTCEffectObserver>> observersForCaveWallTTC =
+      new SortedDictionary<int, List<ICaveWallTTCEffectObserver>>();
+  readonly List<CaveWallTTCCreateEffect> effectsCaveWallTTCCreateEffect =
+      new List<CaveWallTTCCreateEffect>();
+  readonly List<CaveWallTTCDeleteEffect> effectsCaveWallTTCDeleteEffect =
+      new List<CaveWallTTCDeleteEffect>();
 
   readonly SortedDictionary<int, List<ICaveTTCEffectObserver>> observersForCaveTTC =
       new SortedDictionary<int, List<ICaveTTCEffectObserver>>();
@@ -964,6 +978,17 @@ public class Root {
   readonly List<RocksTTCMutSetRemoveEffect> effectsRocksTTCMutSetRemoveEffect =
       new List<RocksTTCMutSetRemoveEffect>();
 
+  readonly SortedDictionary<int, List<ICaveWallTTCMutSetEffectObserver>> observersForCaveWallTTCMutSet =
+      new SortedDictionary<int, List<ICaveWallTTCMutSetEffectObserver>>();
+  readonly List<CaveWallTTCMutSetCreateEffect> effectsCaveWallTTCMutSetCreateEffect =
+      new List<CaveWallTTCMutSetCreateEffect>();
+  readonly List<CaveWallTTCMutSetDeleteEffect> effectsCaveWallTTCMutSetDeleteEffect =
+      new List<CaveWallTTCMutSetDeleteEffect>();
+  readonly List<CaveWallTTCMutSetAddEffect> effectsCaveWallTTCMutSetAddEffect =
+      new List<CaveWallTTCMutSetAddEffect>();
+  readonly List<CaveWallTTCMutSetRemoveEffect> effectsCaveWallTTCMutSetRemoveEffect =
+      new List<CaveWallTTCMutSetRemoveEffect>();
+
   readonly SortedDictionary<int, List<ICaveTTCMutSetEffectObserver>> observersForCaveTTCMutSet =
       new SortedDictionary<int, List<ICaveTTCMutSetEffectObserver>>();
   readonly List<CaveTTCMutSetCreateEffect> effectsCaveTTCMutSetCreateEffect =
@@ -1167,6 +1192,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsTutorialLevelController) {
       result += GetTutorialLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsCaveLevelController) {
+      result += GetCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsRidgeLevelController) {
       result += GetRidgeLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1229,6 +1257,9 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsRocksTTC) {
       result += GetRocksTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsCaveWallTTC) {
+      result += GetCaveWallTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsCaveTTC) {
       result += GetCaveTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1473,6 +1504,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsRocksTTCMutSet) {
       result += GetRocksTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsCaveWallTTCMutSet) {
+      result += GetCaveWallTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsCaveTTCMutSet) {
       result += GetCaveTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1510,6 +1544,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTutorialLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllCaveLevelController()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllRidgeLevelController()) {
@@ -1573,6 +1610,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllRocksTTC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllCaveWallTTC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllCaveTTC()) {
@@ -1816,6 +1856,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllRocksTTCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllCaveWallTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllCaveTTCMutSet()) {
@@ -1860,6 +1903,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllCaveLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllRidgeLevelController()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -1961,6 +2009,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllRocksTTC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllCaveWallTTC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -2366,6 +2419,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllRocksTTCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllCaveWallTTCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -2448,6 +2506,17 @@ public class Root {
       copyOfObserversForTutorialLevelController.Add(
           objectId,
           new List<ITutorialLevelControllerEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForCaveLevelController =
+        new SortedDictionary<int, List<ICaveLevelControllerEffectObserver>>();
+    foreach (var entry in observersForCaveLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForCaveLevelController.Add(
+          objectId,
+          new List<ICaveLevelControllerEffectObserver>(
               observers));
     }
 
@@ -2679,6 +2748,17 @@ public class Root {
       copyOfObserversForRocksTTC.Add(
           objectId,
           new List<IRocksTTCEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForCaveWallTTC =
+        new SortedDictionary<int, List<ICaveWallTTCEffectObserver>>();
+    foreach (var entry in observersForCaveWallTTC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForCaveWallTTC.Add(
+          objectId,
+          new List<ICaveWallTTCEffectObserver>(
               observers));
     }
 
@@ -3573,6 +3653,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForCaveWallTTCMutSet =
+        new SortedDictionary<int, List<ICaveWallTTCMutSetEffectObserver>>();
+    foreach (var entry in observersForCaveWallTTCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForCaveWallTTCMutSet.Add(
+          objectId,
+          new List<ICaveWallTTCMutSetEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForCaveTTCMutSet =
         new SortedDictionary<int, List<ICaveTTCMutSetEffectObserver>>();
     foreach (var entry in observersForCaveTTCMutSet) {
@@ -3678,6 +3769,9 @@ public class Root {
     BroadcastTutorialLevelControllerEffects(
         copyOfObserversForTutorialLevelController);
            
+    BroadcastCaveLevelControllerEffects(
+        copyOfObserversForCaveLevelController);
+           
     BroadcastRidgeLevelControllerEffects(
         copyOfObserversForRidgeLevelController);
            
@@ -3740,6 +3834,9 @@ public class Root {
            
     BroadcastRocksTTCEffects(
         copyOfObserversForRocksTTC);
+           
+    BroadcastCaveWallTTCEffects(
+        copyOfObserversForCaveWallTTC);
            
     BroadcastCaveTTCEffects(
         copyOfObserversForCaveTTC);
@@ -3984,6 +4081,9 @@ public class Root {
     BroadcastRocksTTCMutSetEffects(
         copyOfObserversForRocksTTCMutSet);
            
+    BroadcastCaveWallTTCMutSetEffects(
+        copyOfObserversForCaveWallTTCMutSet);
+           
     BroadcastCaveTTCMutSetEffects(
         copyOfObserversForCaveTTCMutSet);
            
@@ -4044,6 +4144,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsTutorialLevelController.ContainsKey(sourceObjId)) {
         EffectInternalCreateTutorialLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCaveLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsCaveLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateCaveLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -4254,6 +4364,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsRocksTTC.ContainsKey(sourceObjId)) {
         EffectInternalCreateRocksTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCaveWallTTC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsCaveWallTTC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateCaveWallTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -5064,6 +5184,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsRocksTTCMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateRocksTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCaveWallTTCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsCaveWallTTCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateCaveWallTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -6237,6 +6367,34 @@ public class Root {
         }
       }
              
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCaveWallTTCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsCaveWallTTCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsCaveWallTTCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectCaveWallTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectCaveWallTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsCaveWallTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCaveTTCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -6529,6 +6687,27 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsTutorialLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCaveLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsCaveLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsCaveLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsCaveLevelController[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -6978,6 +7157,27 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsRocksTTC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCaveWallTTC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsCaveWallTTC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsCaveWallTTC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsCaveWallTTC[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -7951,6 +8151,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>>(rootIncarnation.incarnationsCaveLevelController)) {
+      if (!sourceIncarnation.incarnationsCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectCaveLevelControllerDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>(rootIncarnation.incarnationsRidgeLevelController)) {
       if (!sourceIncarnation.incarnationsRidgeLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -8095,6 +8302,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsRocksTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectRocksTTCDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CaveWallTTCIncarnation>>(rootIncarnation.incarnationsCaveWallTTC)) {
+      if (!sourceIncarnation.incarnationsCaveWallTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectCaveWallTTCDelete(id);
       }
     }
 
@@ -8665,6 +8879,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CaveWallTTCMutSetIncarnation>>(rootIncarnation.incarnationsCaveWallTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsCaveWallTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectCaveWallTTCMutSetDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CaveTTCMutSetIncarnation>>(rootIncarnation.incarnationsCaveTTCMutSet)) {
       if (!sourceIncarnation.incarnationsCaveTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -8987,6 +9208,136 @@ public class Root {
       }
     }
     effectsTutorialLevelControllerCreateEffect.Clear();
+  }
+  public CaveLevelControllerIncarnation GetCaveLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsCaveLevelController[id].incarnation;
+  }
+  public bool CaveLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsCaveLevelController.ContainsKey(id);
+  }
+  public CaveLevelController GetCaveLevelController(int id) {
+    return new CaveLevelController(this, id);
+  }
+  public List<CaveLevelController> AllCaveLevelController() {
+    List<CaveLevelController> result = new List<CaveLevelController>(rootIncarnation.incarnationsCaveLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsCaveLevelController.Keys) {
+      result.Add(new CaveLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<CaveLevelController> EnumAllCaveLevelController() {
+    foreach (var id in rootIncarnation.incarnationsCaveLevelController.Keys) {
+      yield return GetCaveLevelController(id);
+    }
+  }
+  public void CheckHasCaveLevelController(CaveLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasCaveLevelController(thing.id);
+  }
+  public void CheckHasCaveLevelController(int id) {
+    if (!rootIncarnation.incarnationsCaveLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid CaveLevelController: " + id);
+    }
+  }
+  public void AddCaveLevelControllerObserver(int id, ICaveLevelControllerEffectObserver observer) {
+    List<ICaveLevelControllerEffectObserver> obsies;
+    if (!observersForCaveLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<ICaveLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForCaveLevelController[id] = obsies;
+  }
+
+  public void RemoveCaveLevelControllerObserver(int id, ICaveLevelControllerEffectObserver observer) {
+    if (observersForCaveLevelController.ContainsKey(id)) {
+      var list = observersForCaveLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForCaveLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public CaveLevelController EffectCaveLevelControllerCreate(
+      Level level) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new CaveLevelControllerIncarnation(
+            level.id
+            );
+    EffectInternalCreateCaveLevelController(id, rootIncarnation.version, incarnation);
+    return new CaveLevelController(this, id);
+  }
+  public void EffectInternalCreateCaveLevelController(
+      int id,
+      int incarnationVersion,
+      CaveLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new CaveLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsCaveLevelController.Add(
+        id,
+        new VersionAndIncarnation<CaveLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsCaveLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectCaveLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new CaveLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsCaveLevelController[id];
+
+    rootIncarnation.incarnationsCaveLevelController.Remove(id);
+    effectsCaveLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetCaveLevelControllerHash(int id, int version, CaveLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastCaveLevelControllerEffects(
+      SortedDictionary<int, List<ICaveLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsCaveLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ICaveLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCaveLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICaveLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCaveLevelControllerEffect(effect);
+        }
+        observersForCaveLevelController.Remove(effect.id);
+      }
+    }
+    effectsCaveLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsCaveLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<ICaveLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCaveLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICaveLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCaveLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsCaveLevelControllerCreateEffect.Clear();
   }
   public RidgeLevelControllerIncarnation GetRidgeLevelControllerIncarnation(int id) {
     if (id == 0) {
@@ -10531,6 +10882,7 @@ public class Root {
       WallTTCMutSet membersWallTTCMutSet,
       BloodTTCMutSet membersBloodTTCMutSet,
       RocksTTCMutSet membersRocksTTCMutSet,
+      CaveWallTTCMutSet membersCaveWallTTCMutSet,
       CaveTTCMutSet membersCaveTTCMutSet,
       FallsTTCMutSet membersFallsTTCMutSet,
       MagmaTTCMutSet membersMagmaTTCMutSet,
@@ -10553,6 +10905,7 @@ public class Root {
     CheckHasWallTTCMutSet(membersWallTTCMutSet);
     CheckHasBloodTTCMutSet(membersBloodTTCMutSet);
     CheckHasRocksTTCMutSet(membersRocksTTCMutSet);
+    CheckHasCaveWallTTCMutSet(membersCaveWallTTCMutSet);
     CheckHasCaveTTCMutSet(membersCaveTTCMutSet);
     CheckHasFallsTTCMutSet(membersFallsTTCMutSet);
     CheckHasMagmaTTCMutSet(membersMagmaTTCMutSet);
@@ -10578,6 +10931,7 @@ public class Root {
             membersWallTTCMutSet.id,
             membersBloodTTCMutSet.id,
             membersRocksTTCMutSet.id,
+            membersCaveWallTTCMutSet.id,
             membersCaveTTCMutSet.id,
             membersFallsTTCMutSet.id,
             membersMagmaTTCMutSet.id,
@@ -10631,14 +10985,15 @@ public class Root {
     result += id * version * 11 * incarnation.membersWallTTCMutSet.GetDeterministicHashCode();
     result += id * version * 12 * incarnation.membersBloodTTCMutSet.GetDeterministicHashCode();
     result += id * version * 13 * incarnation.membersRocksTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.membersCaveTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 15 * incarnation.membersFallsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 16 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 17 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 18 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 19 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 20 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 21 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.membersCaveWallTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.membersCaveTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 16 * incarnation.membersFallsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 17 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 18 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 19 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 20 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 21 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 22 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -11876,6 +12231,134 @@ public class Root {
       }
     }
     effectsRocksTTCCreateEffect.Clear();
+  }
+  public CaveWallTTCIncarnation GetCaveWallTTCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsCaveWallTTC[id].incarnation;
+  }
+  public bool CaveWallTTCExists(int id) {
+    return rootIncarnation.incarnationsCaveWallTTC.ContainsKey(id);
+  }
+  public CaveWallTTC GetCaveWallTTC(int id) {
+    return new CaveWallTTC(this, id);
+  }
+  public List<CaveWallTTC> AllCaveWallTTC() {
+    List<CaveWallTTC> result = new List<CaveWallTTC>(rootIncarnation.incarnationsCaveWallTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsCaveWallTTC.Keys) {
+      result.Add(new CaveWallTTC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<CaveWallTTC> EnumAllCaveWallTTC() {
+    foreach (var id in rootIncarnation.incarnationsCaveWallTTC.Keys) {
+      yield return GetCaveWallTTC(id);
+    }
+  }
+  public void CheckHasCaveWallTTC(CaveWallTTC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasCaveWallTTC(thing.id);
+  }
+  public void CheckHasCaveWallTTC(int id) {
+    if (!rootIncarnation.incarnationsCaveWallTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid CaveWallTTC: " + id);
+    }
+  }
+  public void AddCaveWallTTCObserver(int id, ICaveWallTTCEffectObserver observer) {
+    List<ICaveWallTTCEffectObserver> obsies;
+    if (!observersForCaveWallTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<ICaveWallTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForCaveWallTTC[id] = obsies;
+  }
+
+  public void RemoveCaveWallTTCObserver(int id, ICaveWallTTCEffectObserver observer) {
+    if (observersForCaveWallTTC.ContainsKey(id)) {
+      var list = observersForCaveWallTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForCaveWallTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public CaveWallTTC EffectCaveWallTTCCreate(
+) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new CaveWallTTCIncarnation(
+
+            );
+    EffectInternalCreateCaveWallTTC(id, rootIncarnation.version, incarnation);
+    return new CaveWallTTC(this, id);
+  }
+  public void EffectInternalCreateCaveWallTTC(
+      int id,
+      int incarnationVersion,
+      CaveWallTTCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new CaveWallTTCCreateEffect(id);
+    rootIncarnation.incarnationsCaveWallTTC.Add(
+        id,
+        new VersionAndIncarnation<CaveWallTTCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsCaveWallTTCCreateEffect.Add(effect);
+  }
+
+  public void EffectCaveWallTTCDelete(int id) {
+    CheckUnlocked();
+    var effect = new CaveWallTTCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsCaveWallTTC[id];
+
+    rootIncarnation.incarnationsCaveWallTTC.Remove(id);
+    effectsCaveWallTTCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetCaveWallTTCHash(int id, int version, CaveWallTTCIncarnation incarnation) {
+    int result = id * version;
+    return result;
+  }
+     
+  public void BroadcastCaveWallTTCEffects(
+      SortedDictionary<int, List<ICaveWallTTCEffectObserver>> observers) {
+    foreach (var effect in effectsCaveWallTTCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ICaveWallTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCaveWallTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICaveWallTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCaveWallTTCEffect(effect);
+        }
+        observersForCaveWallTTC.Remove(effect.id);
+      }
+    }
+    effectsCaveWallTTCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsCaveWallTTCCreateEffect) {
+      if (observers.TryGetValue(0, out List<ICaveWallTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCaveWallTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICaveWallTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCaveWallTTCEffect(effect);
+        }
+      }
+    }
+    effectsCaveWallTTCCreateEffect.Clear();
   }
   public CaveTTCIncarnation GetCaveTTCIncarnation(int id) {
     if (id == 0) {
@@ -18299,6 +18782,9 @@ public class Root {
   }
 
   public IUnwalkableTTC GetIUnwalkableTTC(int id) {
+    if (rootIncarnation.incarnationsCaveWallTTC.ContainsKey(id)) {
+      return new CaveWallTTCAsIUnwalkableTTC(new CaveWallTTC(this, id));
+    }
     if (rootIncarnation.incarnationsFallsTTC.ContainsKey(id)) {
       return new FallsTTCAsIUnwalkableTTC(new FallsTTC(this, id));
     }
@@ -18308,6 +18794,9 @@ public class Root {
     throw new Exception("Unknown IUnwalkableTTC: " + id);
   }
   public IUnwalkableTTC GetIUnwalkableTTCOrNull(int id) {
+    if (rootIncarnation.incarnationsCaveWallTTC.ContainsKey(id)) {
+      return new CaveWallTTCAsIUnwalkableTTC(new CaveWallTTC(this, id));
+    }
     if (rootIncarnation.incarnationsFallsTTC.ContainsKey(id)) {
       return new FallsTTCAsIUnwalkableTTC(new FallsTTC(this, id));
     }
@@ -18365,6 +18854,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsRocksTTC.ContainsKey(id)) {
       return new RocksTTCAsITerrainTileComponent(new RocksTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsCaveWallTTC.ContainsKey(id)) {
+      return new CaveWallTTCAsITerrainTileComponent(new CaveWallTTC(this, id));
     }
     if (rootIncarnation.incarnationsCaveTTC.ContainsKey(id)) {
       return new CaveTTCAsITerrainTileComponent(new CaveTTC(this, id));
@@ -18431,6 +18923,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsRocksTTC.ContainsKey(id)) {
       return new RocksTTCAsITerrainTileComponent(new RocksTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsCaveWallTTC.ContainsKey(id)) {
+      return new CaveWallTTCAsITerrainTileComponent(new CaveWallTTC(this, id));
     }
     if (rootIncarnation.incarnationsCaveTTC.ContainsKey(id)) {
       return new CaveTTCAsITerrainTileComponent(new CaveTTC(this, id));
@@ -19006,6 +19501,9 @@ public class Root {
     if (rootIncarnation.incarnationsTutorialLevelController.ContainsKey(id)) {
       return new TutorialLevelControllerAsILevelController(new TutorialLevelController(this, id));
     }
+    if (rootIncarnation.incarnationsCaveLevelController.ContainsKey(id)) {
+      return new CaveLevelControllerAsILevelController(new CaveLevelController(this, id));
+    }
     if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
       return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
     }
@@ -19032,6 +19530,9 @@ public class Root {
   public ILevelController GetILevelControllerOrNull(int id) {
     if (rootIncarnation.incarnationsTutorialLevelController.ContainsKey(id)) {
       return new TutorialLevelControllerAsILevelController(new TutorialLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCaveLevelController.ContainsKey(id)) {
+      return new CaveLevelControllerAsILevelController(new CaveLevelController(this, id));
     }
     if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
       return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
@@ -19105,6 +19606,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsRocksTTC.ContainsKey(id)) {
       return new RocksTTCAsIDestructible(new RocksTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsCaveWallTTC.ContainsKey(id)) {
+      return new CaveWallTTCAsIDestructible(new CaveWallTTC(this, id));
     }
     if (rootIncarnation.incarnationsCaveTTC.ContainsKey(id)) {
       return new CaveTTCAsIDestructible(new CaveTTC(this, id));
@@ -19240,6 +19744,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsRocksTTC.ContainsKey(id)) {
       return new RocksTTCAsIDestructible(new RocksTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsCaveWallTTC.ContainsKey(id)) {
+      return new CaveWallTTCAsIDestructible(new CaveWallTTC(this, id));
     }
     if (rootIncarnation.incarnationsCaveTTC.ContainsKey(id)) {
       return new CaveTTCAsIDestructible(new CaveTTC(this, id));
@@ -26780,6 +27287,197 @@ public class Root {
       }
     }
     effectsRocksTTCMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetCaveWallTTCMutSetHash(int id, int version, CaveWallTTCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public CaveWallTTCMutSetIncarnation GetCaveWallTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsCaveWallTTCMutSet[id].incarnation;
+    }
+    public CaveWallTTCMutSet GetCaveWallTTCMutSet(int id) {
+      return new CaveWallTTCMutSet(this, id);
+    }
+    public List<CaveWallTTCMutSet> AllCaveWallTTCMutSet() {
+      List<CaveWallTTCMutSet> result = new List<CaveWallTTCMutSet>(rootIncarnation.incarnationsCaveWallTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsCaveWallTTCMutSet.Keys) {
+        result.Add(new CaveWallTTCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool CaveWallTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsCaveWallTTCMutSet.ContainsKey(id);
+    }
+    public void CheckHasCaveWallTTCMutSet(CaveWallTTCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasCaveWallTTCMutSet(thing.id);
+    }
+    public void CheckHasCaveWallTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsCaveWallTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid CaveWallTTCMutSet}: " + id);
+      }
+    }
+    public CaveWallTTCMutSet EffectCaveWallTTCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new CaveWallTTCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateCaveWallTTCMutSet(id, rootIncarnation.version, incarnation);
+      return new CaveWallTTCMutSet(this, id);
+    }
+    public void EffectInternalCreateCaveWallTTCMutSet(int id, int incarnationVersion, CaveWallTTCMutSetIncarnation incarnation) {
+      var effect = new CaveWallTTCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsCaveWallTTCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<CaveWallTTCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsCaveWallTTCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectCaveWallTTCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new CaveWallTTCMutSetDeleteEffect(id);
+      effectsCaveWallTTCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsCaveWallTTCMutSet[id];
+      rootIncarnation.incarnationsCaveWallTTCMutSet.Remove(id);
+    }
+
+       
+    public void EffectCaveWallTTCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasCaveWallTTCMutSet(setId);
+      CheckHasCaveWallTTC(elementId);
+
+      var effect = new CaveWallTTCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsCaveWallTTCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new CaveWallTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsCaveWallTTCMutSet[setId] =
+            new VersionAndIncarnation<CaveWallTTCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsCaveWallTTCMutSetAddEffect.Add(effect);
+    }
+    public void EffectCaveWallTTCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasCaveWallTTCMutSet(setId);
+      CheckHasCaveWallTTC(elementId);
+
+      var effect = new CaveWallTTCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsCaveWallTTCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new CaveWallTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsCaveWallTTCMutSet[setId] =
+            new VersionAndIncarnation<CaveWallTTCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsCaveWallTTCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddCaveWallTTCMutSetObserver(int id, ICaveWallTTCMutSetEffectObserver observer) {
+      List<ICaveWallTTCMutSetEffectObserver> obsies;
+      if (!observersForCaveWallTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ICaveWallTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForCaveWallTTCMutSet[id] = obsies;
+    }
+
+    public void RemoveCaveWallTTCMutSetObserver(int id, ICaveWallTTCMutSetEffectObserver observer) {
+      if (observersForCaveWallTTCMutSet.ContainsKey(id)) {
+        var list = observersForCaveWallTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForCaveWallTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastCaveWallTTCMutSetEffects(
+      SortedDictionary<int, List<ICaveWallTTCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsCaveWallTTCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ICaveWallTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCaveWallTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICaveWallTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCaveWallTTCMutSetEffect(effect);
+        }
+        observersForCaveWallTTCMutSet.Remove(effect.id);
+      }
+    }
+    effectsCaveWallTTCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsCaveWallTTCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<ICaveWallTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCaveWallTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICaveWallTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCaveWallTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsCaveWallTTCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsCaveWallTTCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<ICaveWallTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCaveWallTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICaveWallTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCaveWallTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsCaveWallTTCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsCaveWallTTCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<ICaveWallTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCaveWallTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICaveWallTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCaveWallTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsCaveWallTTCMutSetCreateEffect.Clear();
 
   }
 

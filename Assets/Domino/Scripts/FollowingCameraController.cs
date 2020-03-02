@@ -120,6 +120,14 @@ namespace Domino {
       cameraController.StartMovingCameraTo(newCameraEndLookAtPosition, 250);
     }
 
+    public void MoveIn(float deltaTime) {
+      cameraController.MoveIn(deltaTime);
+    }
+
+    public void MoveOut(float deltaTime) {
+      cameraController.MoveOut(deltaTime);
+    }
+
     public void MoveUp(float deltaTime) {
       cameraController.MoveUp(deltaTime);
     }

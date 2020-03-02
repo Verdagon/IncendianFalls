@@ -18,6 +18,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersWallTTCMutSet;
   public readonly int membersBloodTTCMutSet;
   public readonly int membersRocksTTCMutSet;
+  public readonly int membersCaveWallTTCMutSet;
   public readonly int membersCaveTTCMutSet;
   public readonly int membersFallsTTCMutSet;
   public readonly int membersMagmaTTCMutSet;
@@ -40,6 +41,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
       int membersWallTTCMutSet,
       int membersBloodTTCMutSet,
       int membersRocksTTCMutSet,
+      int membersCaveWallTTCMutSet,
       int membersCaveTTCMutSet,
       int membersFallsTTCMutSet,
       int membersMagmaTTCMutSet,
@@ -61,6 +63,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
     this.membersWallTTCMutSet = membersWallTTCMutSet;
     this.membersBloodTTCMutSet = membersBloodTTCMutSet;
     this.membersRocksTTCMutSet = membersRocksTTCMutSet;
+    this.membersCaveWallTTCMutSet = membersCaveWallTTCMutSet;
     this.membersCaveTTCMutSet = membersCaveTTCMutSet;
     this.membersFallsTTCMutSet = membersFallsTTCMutSet;
     this.membersMagmaTTCMutSet = membersMagmaTTCMutSet;

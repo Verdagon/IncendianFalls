@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Debug\netstandard2.0</OutputPath>
+    <OutputPath>D:\IncendianFalls\Assets\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\netstandard2.0</OutputPath>
@@ -30,6 +30,5 @@
     <Folder Include="Core\" />
     <Folder Include="InnerCode\AI\" />
     <Folder Include="InnerCode\Actions\" />
-    <Folder Include="InnerCode\TerrainGeneration\" />
   </ItemGroup>
 </Project>

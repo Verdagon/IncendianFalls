@@ -70,6 +70,185 @@ namespace IncendianFalls {
         tile.elevation = height;
       }
     }
+
+    public static List<SortedSet<Location>> IdentifyRooms(Terrain terrain, bool considerCornersAdjacent) {
+      var roomIndexByLocation = new SortedDictionary<Location, int>();
+      var rooms = new List<SortedSet<Location>>();
+
+      foreach (var locationAndTile in terrain.tiles) {
+        var sparkLocation = locationAndTile.Key;
+        if (roomIndexByLocation.ContainsKey(sparkLocation)) {
+          continue;
+        }
+        var connectedLocations = FindAllConnectedLocations(terrain, considerCornersAdjacent, sparkLocation);
+        var newRoomIndex = rooms.Count;
+        rooms.Add(connectedLocations);
+        foreach (var connectedLocation in connectedLocations) {
+          Asserts.Assert(!roomIndexByLocation.ContainsKey(connectedLocation));
+          roomIndexByLocation.Add(connectedLocation, newRoomIndex);
+        }
+      }
+      return rooms;
+    }
+
+    public static SortedSet<Location> FindAllConnectedLocations(Terrain terrain, bool considerCornersAdjacent, Location startLocation) {
+      var connectedWithUnexploredNeighbors = new SortedSet<Location>();
+      var connectedWithExploredNeighbors = new SortedSet<Location>();
+
+      connectedWithUnexploredNeighbors.Add(startLocation);
+
+      while (connectedWithUnexploredNeighbors.Count > 0) {
+        var current = SetUtils.GetFirst(connectedWithUnexploredNeighbors);
+        Asserts.Assert(!connectedWithExploredNeighbors.Contains(current));
+
+        connectedWithUnexploredNeighbors.Remove(current);
+        connectedWithExploredNeighbors.Add(current);
+
+        foreach (var neighbor in terrain.GetAdjacentExistingLocations(current, considerCornersAdjacent)) {
+          if (connectedWithExploredNeighbors.Contains(neighbor)) {
+            continue;
+          }
+          if (connectedWithUnexploredNeighbors.Contains(neighbor)) {
+            continue;
+          }
+          connectedWithUnexploredNeighbors.Add(neighbor);
+        }
+      }
+
+      return connectedWithExploredNeighbors;
+    }
+
+    public static void ConnectRooms(Pattern pattern, Rand rand, List<SortedSet<Location>> rooms) {
+      // This function will be adding the corridors to roomByNumber.
+
+      SortedDictionary<Location, int> roomIndexByLocation = new SortedDictionary<Location, int>();
+
+      for (int roomIndex = 0; roomIndex < rooms.Count; roomIndex++) {
+        var room = rooms[roomIndex];
+        foreach (var roomFloorLocation in room) {
+          roomIndexByLocation.Add(roomFloorLocation, roomIndex);
+        }
+      }
+
+      // I would just use integers but C# has no typedefs >:(
+      var regions = new SortedSet<string>();
+
+      var regionByRoomIndex = new SortedDictionary<int, String>();
+      var roomIndexsByRegion = new SortedDictionary<String, SortedSet<int>>();
+
+      for (int roomIndex = 0; roomIndex < rooms.Count; roomIndex++) {
+        var room = rooms[roomIndex];
+        String region = "region" + roomIndex;
+        regionByRoomIndex.Add(roomIndex, region);
+        var roomIndexsInRegion = new SortedSet<int>();
+        roomIndexsInRegion.Add(roomIndex);
+        roomIndexsByRegion.Add(region, roomIndexsInRegion);
+        regions.Add(region);
+        //Logger.Info("Made region " + region);
+      }
+
+      while (true) {
+        var distinctRegions = new SortedSet<String>(regionByRoomIndex.Values);
+        //Logger.Info(distinctRegions.Count + " distinct regions!");
+        if (distinctRegions.Count < 2) {
+          break;
+        }
+        var twoRegions = SetUtils.GetFirstN(distinctRegions, 2);
+        String regionA = twoRegions[0];
+        String regionB = twoRegions[1];
+        //Logger.Info("Will aim to connect regions " + regionA + " and " + regionB);
+
+        int regionARoomIndex = SetUtils.GetRandom(rand.Next(), roomIndexsByRegion[regionA]);
+        var regionARoom = rooms[regionARoomIndex];
+        var regionALocation = SetUtils.GetRandom(rand.Next(), regionARoom);
+
+        int regionBRoomIndex = SetUtils.GetRandom(rand.Next(), roomIndexsByRegion[regionB]);
+        var regionBRoom = rooms[regionBRoomIndex];
+        var regionBLocation = SetUtils.GetRandom(rand.Next(), regionBRoom);
+
+        // Now lets drive from regionALocation to regionBLocation, and see what happens on the
+        // way there.
+        var explorer =
+            new PatternExplorer(
+                pattern,
+                false,
+                regionALocation,
+                new LinearPrioritizer(pattern.GetTileCenter(regionBLocation)),
+            (location, position) => true);
+        List<Location> path = new List<Location>();
+        while (true) {
+          Location currentLocation = explorer.Next();
+          if (!roomIndexByLocation.ContainsKey(currentLocation)) {
+            // It means we're in open space, keep going.
+            path.Add(currentLocation);
+          } else {
+            int currentRoomIndex = roomIndexByLocation[currentLocation];
+            String currentRegion = regionByRoomIndex[currentRoomIndex];
+            if (currentRegion == regionA) {
+              // Keep going, but restart the path here.
+              path = new List<Location>();
+            } else if (currentRegion != regionA) {
+              // currentRegionNumber is probably regionBNumber, but isn't necessarily... we could
+              // have just come across a random other region.
+              // Either way, we hit something, so we stop now.
+              break;
+            }
+          }
+        }
+
+        String combinedRegion = "region" + regions.Count;
+        regions.Add(combinedRegion);
+
+        int newRoomIndex = rooms.Count;
+        rooms.Add(new SortedSet<Location>(path));
+        foreach (var pathLocation in path) {
+          roomIndexByLocation.Add(pathLocation, newRoomIndex);
+        }
+        regionByRoomIndex.Add(newRoomIndex, combinedRegion);
+        // We'll fill in regionNumberByRoomIndex and roomIndexsByRegionNumber shortly.
+
+        // So, now we have a path that we know connects some regions. However, it might be
+        // accidentally connecting more than two! It could have grazed past another region without
+        // us realizing it.
+        // So now, figure out all the regions that this path touches.
+
+        var pathAdjacentLocations = pattern.GetAdjacentLocations(new SortedSet<Location>(path), true, false);
+        var pathAdjacentRegions = new SortedSet<String>();
+        foreach (var pathAdjacentLocation in pathAdjacentLocations) {
+          if (roomIndexByLocation.ContainsKey(pathAdjacentLocation)) {
+            int roomIndex = roomIndexByLocation[pathAdjacentLocation];
+            String region = regionByRoomIndex[roomIndex];
+            pathAdjacentRegions.Add(region);
+          }
+        }
+
+        var roomIndexsInCombinedRegion = new SortedSet<int>();
+        roomIndexsInCombinedRegion.Add(newRoomIndex);
+        foreach (var pathAdjacentRegion in pathAdjacentRegions) {
+          if (pathAdjacentRegion == combinedRegion) {
+            // The new room is already part of this region
+            continue;
+          }
+          foreach (var pathAdjacentRoomIndex in roomIndexsByRegion[pathAdjacentRegion]) {
+            //Logger.Info("Overwriting " + pathAdjacentRoomIndex + "'s region to " + combinedRegion);
+            regionByRoomIndex[pathAdjacentRoomIndex] = combinedRegion;
+            roomIndexsInCombinedRegion.Add(pathAdjacentRoomIndex);
+          }
+          roomIndexsByRegion.Remove(pathAdjacentRegion);
+        }
+        roomIndexsByRegion.Add(combinedRegion, roomIndexsInCombinedRegion);
+
+        String roomNums = "";
+        foreach (var pathAdjacentRoomIndex in roomIndexsInCombinedRegion) {
+          if (roomNums != "") {
+            roomNums = roomNums + ", ";
+          }
+          roomNums = roomNums + pathAdjacentRoomIndex;
+        }
+        //Logger.Info("Region " + combinedRegion + " now has room numbers: " + roomNums);
+        roomIndexsByRegion[combinedRegion] = roomIndexsInCombinedRegion;
+      }
+    }
   }
 
 

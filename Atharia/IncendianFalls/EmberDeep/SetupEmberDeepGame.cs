@@ -72,32 +72,5 @@ namespace EmberDeep {
 
       return game;
     }
-
-    public static void MakeLevel(
-        out Level level,
-        out LevelSuperstate levelSuperstate,
-        SSContext context,
-        Game game,
-        Superstate superstate,
-        int depth) {
-      ForestTerrainGenerator.Generate(
-          out Terrain terrain,
-          out SortedDictionary<int, Room> rooms,
-          game.root,
-          game.rand,
-          PentagonPattern9.makePentagon9Pattern(),
-          1000);
-
-      var units = context.root.EffectUnitMutSetCreate();
-
-      level =
-          context.root.EffectLevelCreate(
-          new Vec3(0, -8, 16),
-              terrain, units, NullILevelController.Null, game.time);
-      levelSuperstate = new LevelSuperstate(level);
-
-      var controller = context.root.EffectTutorialLevelControllerCreate(level);
-      level.controller = controller.AsILevelController();
-    }
   }
 }

@@ -87,6 +87,10 @@ public class ITerrainTileComponentMutBunch {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersRocksTTCMutSet");
     }
 
+    if (!root.CaveWallTTCMutSetExists(membersCaveWallTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersCaveWallTTCMutSet");
+    }
+
     if (!root.CaveTTCMutSetExists(membersCaveTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersCaveTTCMutSet");
     }
@@ -162,6 +166,9 @@ public class ITerrainTileComponentMutBunch {
     }
     if (root.RocksTTCMutSetExists(membersRocksTTCMutSet.id)) {
       membersRocksTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.CaveWallTTCMutSetExists(membersCaveWallTTCMutSet.id)) {
+      membersCaveWallTTCMutSet.FindReachableObjects(foundIds);
     }
     if (root.CaveTTCMutSetExists(membersCaveTTCMutSet.id)) {
       membersCaveTTCMutSet.FindReachableObjects(foundIds);
@@ -314,6 +321,15 @@ public class ITerrainTileComponentMutBunch {
       return new RocksTTCMutSet(root, incarnation.membersRocksTTCMutSet);
     }
                        }
+  public CaveWallTTCMutSet membersCaveWallTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersCaveWallTTCMutSet of null!");
+      }
+      return new CaveWallTTCMutSet(root, incarnation.membersCaveWallTTCMutSet);
+    }
+                       }
   public CaveTTCMutSet membersCaveTTCMutSet {
 
     get {
@@ -415,6 +431,8 @@ public class ITerrainTileComponentMutBunch {
 ,
       root.EffectRocksTTCMutSetCreate()
 ,
+      root.EffectCaveWallTTCMutSetCreate()
+,
       root.EffectCaveTTCMutSetCreate()
 ,
       root.EffectFallsTTCMutSetCreate()
@@ -509,6 +527,12 @@ public class ITerrainTileComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.RocksTTCExists(elementI.id)) {
       this.membersRocksTTCMutSet.Add(root.GetRocksTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.CaveWallTTCExists(elementI.id)) {
+      this.membersCaveWallTTCMutSet.Add(root.GetCaveWallTTC(elementI.id));
       return;
     }
 
@@ -642,6 +666,12 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.CaveWallTTCExists(elementI.id)) {
+      this.membersCaveWallTTCMutSet.Remove(root.GetCaveWallTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.CaveTTCExists(elementI.id)) {
       this.membersCaveTTCMutSet.Remove(root.GetCaveTTC(elementI.id));
       return;
@@ -704,6 +734,7 @@ public class ITerrainTileComponentMutBunch {
     this.membersWallTTCMutSet.Clear();
     this.membersBloodTTCMutSet.Clear();
     this.membersRocksTTCMutSet.Clear();
+    this.membersCaveWallTTCMutSet.Clear();
     this.membersCaveTTCMutSet.Clear();
     this.membersFallsTTCMutSet.Clear();
     this.membersMagmaTTCMutSet.Clear();
@@ -729,6 +760,7 @@ public class ITerrainTileComponentMutBunch {
         this.membersWallTTCMutSet.Count +
         this.membersBloodTTCMutSet.Count +
         this.membersRocksTTCMutSet.Count +
+        this.membersCaveWallTTCMutSet.Count +
         this.membersCaveTTCMutSet.Count +
         this.membersFallsTTCMutSet.Count +
         this.membersMagmaTTCMutSet.Count +
@@ -761,6 +793,7 @@ public class ITerrainTileComponentMutBunch {
     var tempMembersWallTTCMutSet = this.membersWallTTCMutSet;
     var tempMembersBloodTTCMutSet = this.membersBloodTTCMutSet;
     var tempMembersRocksTTCMutSet = this.membersRocksTTCMutSet;
+    var tempMembersCaveWallTTCMutSet = this.membersCaveWallTTCMutSet;
     var tempMembersCaveTTCMutSet = this.membersCaveTTCMutSet;
     var tempMembersFallsTTCMutSet = this.membersFallsTTCMutSet;
     var tempMembersMagmaTTCMutSet = this.membersMagmaTTCMutSet;
@@ -784,6 +817,7 @@ public class ITerrainTileComponentMutBunch {
     tempMembersWallTTCMutSet.Destruct();
     tempMembersBloodTTCMutSet.Destruct();
     tempMembersRocksTTCMutSet.Destruct();
+    tempMembersCaveWallTTCMutSet.Destruct();
     tempMembersCaveTTCMutSet.Destruct();
     tempMembersFallsTTCMutSet.Destruct();
     tempMembersMagmaTTCMutSet.Destruct();
@@ -832,6 +866,9 @@ public class ITerrainTileComponentMutBunch {
     }
     foreach (var element in this.membersRocksTTCMutSet) {
       yield return new RocksTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersCaveWallTTCMutSet) {
+      yield return new CaveWallTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersCaveTTCMutSet) {
       yield return new CaveTTCAsITerrainTileComponent(element);
@@ -1131,6 +1168,27 @@ public class ITerrainTileComponentMutBunch {
         return RocksTTC.Null;
       }
     }
+    public List<CaveWallTTC> GetAllCaveWallTTC() {
+      var result = new List<CaveWallTTC>();
+      foreach (var thing in this.membersCaveWallTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<CaveWallTTC> ClearAllCaveWallTTC() {
+      var result = new List<CaveWallTTC>();
+      this.membersCaveWallTTCMutSet.Clear();
+      return result;
+    }
+    public CaveWallTTC GetOnlyCaveWallTTCOrNull() {
+      var result = GetAllCaveWallTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return CaveWallTTC.Null;
+      }
+    }
     public List<CaveTTC> GetAllCaveTTC() {
       var result = new List<CaveTTC>();
       foreach (var thing in this.membersCaveTTCMutSet) {
@@ -1360,6 +1418,10 @@ public class ITerrainTileComponentMutBunch {
     }
                  public List<IUnwalkableTTC> GetAllIUnwalkableTTC() {
       var result = new List<IUnwalkableTTC>();
+      foreach (var obj in this.membersCaveWallTTCMutSet) {
+        result.Add(
+            new CaveWallTTCAsIUnwalkableTTC(obj));
+      }
       foreach (var obj in this.membersFallsTTCMutSet) {
         result.Add(
             new FallsTTCAsIUnwalkableTTC(obj));
@@ -1372,6 +1434,7 @@ public class ITerrainTileComponentMutBunch {
     }
     public List<IUnwalkableTTC> ClearAllIUnwalkableTTC() {
       var result = new List<IUnwalkableTTC>();
+      this.membersCaveWallTTCMutSet.Clear();
       this.membersFallsTTCMutSet.Clear();
       this.membersMagmaTTCMutSet.Clear();
       return result;

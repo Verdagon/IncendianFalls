@@ -36,6 +36,7 @@ incendianfalls/levels/incendianfallslevellinker.vss
 gauntlet/levels/pregauntletlevel.vss
 gauntlet/levels/gauntletlevel.vss
 emberdeep/levels/ridgelevel.vss
+emberdeep/levels/cavelevel.vss
 emberdeep/levels/tutoriallevel.vss
 emberdeep/levels/emberdeeplevellinker.vss
 vstl/vec.vss

@@ -52,11 +52,13 @@ namespace Atharia.Model {
         out Location entryLocation,
         Game game,
         Superstate superstate) {
-      TutorialLevelControllerExtensions.LoadLevel(
+      CaveLevelControllerExtensions.LoadLevel(
         out level,
         out levelSuperstate,
         out entryLocation,
-        game.root);
+        game,
+        superstate,
+        0);
     }
   }
 }

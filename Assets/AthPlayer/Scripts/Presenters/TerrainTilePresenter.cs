@@ -197,9 +197,12 @@ namespace AthPlayer {
         } else if (ttc is DirtTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.6f, .3f, 0);
           sideColor = new UnityEngine.Color(.4f, .2f, 0);
+        } else if (ttc is CaveWallTTCAsITerrainTileComponent) {
+          topColor = new UnityEngine.Color(.35f, .125f, 0);
+          sideColor = new UnityEngine.Color(.25f, .083f, 0);
         } else if (ttc is MudTTCAsITerrainTileComponent) {
-          topColor = new UnityEngine.Color(.4f, .2f, 0f);
-          sideColor = new UnityEngine.Color(.27f, .13f, 0f);
+          topColor = new UnityEngine.Color(.3f, .1f, 0f);
+          sideColor = new UnityEngine.Color(.2f, .067f, 0f);
         } else if (ttc is CliffLandingTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.2f, .2f, .2f);
           sideColor = new UnityEngine.Color(.1f, .05f, 0f);
