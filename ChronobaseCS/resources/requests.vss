@@ -20,7 +20,7 @@ imm struct SetupGauntletGameRequest {
 }
 
 imm struct SetupEmberDeepGameRequest {
-  SetupGauntletGameRequest isa IRequest;
+  SetupEmberDeepGameRequest isa IRequest;
 
   randomSeed: Int;
   squareLevelsOnly: Bool;
@@ -103,9 +103,9 @@ imm struct TimeAnchorMoveRequest {
   destination: Location;
 }
 
-imm struct OverlayActionRequest {
-  OverlayActionRequest isa IRequest;
+imm struct TriggerRequest {
+  TriggerRequest isa IRequest;
 
   gameId: Int;
-  buttonIndex: Int;
+  triggerName: Str;
 }

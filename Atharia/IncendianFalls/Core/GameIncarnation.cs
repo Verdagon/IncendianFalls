@@ -9,27 +9,27 @@ public class GameIncarnation {
   public readonly bool squareLevelsOnly;
   public readonly int levels;
   public  int player;
+  public readonly int events;
   public  int level;
   public  int time;
   public readonly int executionState;
-  public  int overlay;
   public GameIncarnation(
       int rand,
       bool squareLevelsOnly,
       int levels,
       int player,
+      int events,
       int level,
       int time,
-      int executionState,
-      int overlay) {
+      int executionState) {
     this.rand = rand;
     this.squareLevelsOnly = squareLevelsOnly;
     this.levels = levels;
     this.player = player;
+    this.events = events;
     this.level = level;
     this.time = time;
     this.executionState = executionState;
-    this.overlay = overlay;
   }
 }
 

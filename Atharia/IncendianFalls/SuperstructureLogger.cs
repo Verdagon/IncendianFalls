@@ -10,7 +10,7 @@ namespace IncendianFalls {
     public void Warning(string str) { }
   }
 
-  public class ReplayLogger : ISuperstructureObserver {
+  public class ReplayLogger : ISuperstructureObserver, IDisposable {
     private Superstructure externalSS;
     //private Superstructure duplicateSS;
     List<StreamWriter> writers;
@@ -26,6 +26,12 @@ namespace IncendianFalls {
           externalSS.GetRoot().logger.Error(
               "Couldn't make a log file: " + e.Message);
         }
+      }
+    }
+
+    public void Dispose() {
+      foreach (var writer in writers) {
+        writer.Dispose();
       }
     }
 

@@ -31,6 +31,5 @@
     <Folder Include="InnerCode\AI\" />
     <Folder Include="InnerCode\Actions\" />
     <Folder Include="InnerCode\TerrainGeneration\" />
-    <Folder Include="InnerCode\Patterns\" />
   </ItemGroup>
 </Project>

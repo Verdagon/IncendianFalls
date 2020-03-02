@@ -22,14 +22,14 @@ namespace Gauntlet {
               squareLevelsOnly,
               levels,
               Unit.Null,
+              context.root.EffectIGameEventMutListCreate(new List<IGameEvent>()),
               Level.Null,
               0,
               context.root.EffectExecutionStateCreate(
                   Unit.Null,
                   false,
                   IPreActingUCWeakMutBunch.Null,
-                  IPostActingUCWeakMutBunch.Null),
-              Overlay.Null);
+                  IPostActingUCWeakMutBunch.Null));
 
       superstate =
           new Superstate(
@@ -47,6 +47,7 @@ namespace Gauntlet {
           out var preGauntletLevelSuperstate,
           out var downStaircaseLocation,
           game.root,
+          squareLevelsOnly,
           game.rand,
           game.time);
       game.levels.Add(preGauntletLevel);
@@ -55,7 +56,8 @@ namespace Gauntlet {
           out var gauntletLevel,
           out var gauntletLevelSuperstate,
           out var upStaircaseLocation,
-          game);
+          game,
+          squareLevelsOnly);
       game.levels.Add(gauntletLevel);
 
 
@@ -84,6 +86,7 @@ namespace Gauntlet {
               IUnitComponentMutBunch.New(context.root),
               true,
               5);
+      player.components.Add(context.root.EffectTriggererUCCreate().AsIUnitComponent());
       preGauntletLevel.EnterUnit(
           game,
           superstate.levelSuperstate,

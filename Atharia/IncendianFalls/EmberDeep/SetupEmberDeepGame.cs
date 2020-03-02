@@ -21,14 +21,14 @@ namespace EmberDeep {
               squareLevelsOnly,
               levels,
               Unit.Null,
+              context.root.EffectIGameEventMutListCreate(new List<IGameEvent>()),
               Level.Null,
               0,
               context.root.EffectExecutionStateCreate(
                   Unit.Null,
                   false,
                   IPreActingUCWeakMutBunch.Null,
-                  IPostActingUCWeakMutBunch.Null),
-              Overlay.Null);
+                  IPostActingUCWeakMutBunch.Null));
 
       superstate =
           new Superstate(
@@ -63,6 +63,7 @@ namespace EmberDeep {
               IUnitComponentMutBunch.New(context.root),
               true,
               5);
+      player.components.Add(context.root.EffectTriggererUCCreate().AsIUnitComponent());
       firstLevel.EnterUnit(
           game,
           superstate.levelSuperstate,

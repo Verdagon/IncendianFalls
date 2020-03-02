@@ -9,10 +9,15 @@ namespace Atharia.Model {
         out LevelSuperstate levelSuperstate,
         out Location exitLocation,
         Root root,
+        bool squareLevelsOnly,
         Rand rand,
         int time) {
       var terrain =
-          CircleTerrainGenerator.Generate(root, PentagonPattern9.makePentagon9Pattern(), rand, 4.0f);
+          CircleTerrainGenerator.Generate(
+            root,
+            squareLevelsOnly ? SquarePattern.MakeSquarePattern() : HexPattern.MakeHexPattern(),
+            rand,
+            4.0f);
 
       var units = root.EffectUnitMutSetCreate();
 

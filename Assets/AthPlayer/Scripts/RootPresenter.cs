@@ -11,6 +11,7 @@ namespace AthPlayer {
   public class RootPresenter : MonoBehaviour {
 
     SlowableTimerClock timer;
+    SlowableTimerClock cinematicTimer;
     ExecutionStaller resumeStaller;
     ExecutionStaller turnStaller;
 
@@ -19,7 +20,6 @@ namespace AthPlayer {
     public GameObject cameraObject;
 
     GamePresenter gamePresenter;
-    OverlayPresenter overlayPresenter;
     PlayerController playerController;
     FollowingCameraController cameraController;
 
@@ -35,6 +35,7 @@ namespace AthPlayer {
 
     public void Start() {
       timer = new SlowableTimerClock(1f);
+      cinematicTimer = new SlowableTimerClock(1f);
 
       resumeStaller = new ExecutionStaller(timer, timer);
       turnStaller = new ExecutionStaller(timer, timer);
@@ -50,11 +51,13 @@ namespace AthPlayer {
       var randomSeed = 1525224206;
       //var game = ss.RequestSetupIncendianFallsGame(randomSeed, false);
       var game = ss.RequestSetupEmberDeepGame(randomSeed, false);
+      //var game = ss.RequestSetupGauntletGame(randomSeed, false);
+
+      cameraController = new FollowingCameraController(cinematicTimer, cinematicTimer, cameraObject, game);
+
       gamePresenter =
           new GamePresenter(
-              timer, timer, soundPlayer, resumeStaller, turnStaller, ss, game, instantiator, messageView);
-
-      overlayPresenter = new OverlayPresenter(timer, ss, game, overlayPanelView);
+              timer, cinematicTimer, soundPlayer, resumeStaller, turnStaller, ss, game, instantiator, messageView, overlayPanelView, cameraController);
 
       playerController =
           new PlayerController(
@@ -69,12 +72,11 @@ namespace AthPlayer {
               messageView,
               lookPanelView.GetComponent<LookPanelView>());
       playerController.Start();
-
-      cameraController = new FollowingCameraController(timer, timer, cameraObject, game);
     }
 
     public void Update() {
       timer.Update();
+      cinematicTimer.Update();
 
       if (Input.GetKeyUp(KeyCode.A)) {
         TimeAnchorMoveClicked();

@@ -9,12 +9,12 @@ namespace AthPlayer {
   public delegate void OnLocationHovered(Location location);
   public delegate void OnLocationClicked(Location location);
 
-  public class GamePresenter : IGameEffectVisitor, IGameEffectObserver, IUnitMutSetEffectVisitor, IUnitMutSetEffectObserver {
+  public class GamePresenter : IGameEffectVisitor, IGameEffectObserver, IUnitMutSetEffectVisitor, IUnitMutSetEffectObserver, IGameEventVisitor, IIGameEventMutListEffectVisitor, IIGameEventMutListEffectObserver {
     public OnLocationHovered LocationHovered;
     public OnLocationClicked LocationClicked;
 
-    IClock clock;
-    ITimer timer;
+    SlowableTimerClock timer;
+    SlowableTimerClock cinematicTimer;
     SoundPlayer soundPlayer;
     ExecutionStaller resumeStaller;
     ExecutionStaller turnStaller;
@@ -23,23 +23,27 @@ namespace AthPlayer {
     Level viewedLevel;
     Instantiator instantiator;
     NarrationPanelView narrator;
+    FollowingCameraController cameraController;
 
     TerrainPresenter terrainPresenter;
+    OverlayPresenter overlayPresenter;
 
     Dictionary<int, UnitPresenter> unitPresenters;
 
     public GamePresenter(
-      IClock clock,
-        ITimer timer,
+      SlowableTimerClock timer,
+        SlowableTimerClock cinematicTimer,
         SoundPlayer soundPlayer,
         ExecutionStaller resumeStaller,
         ExecutionStaller turnStaller,
         ISuperstructure ss,
         Game game,
         Instantiator instantiator,
-        NarrationPanelView narrator) {
-      this.clock = clock;
+        NarrationPanelView narrator,
+        OverlayPanelView overlayPanelView,
+        FollowingCameraController cameraController) {
       this.timer = timer;
+      this.cinematicTimer = cinematicTimer;
       this.soundPlayer = soundPlayer;
       this.resumeStaller = resumeStaller;
       this.turnStaller = turnStaller;
@@ -47,7 +51,12 @@ namespace AthPlayer {
       this.game = game;
       this.narrator = narrator;
       this.instantiator = instantiator;
+      this.cameraController = cameraController;
+
+      overlayPresenter = new OverlayPresenter(timer, cinematicTimer, ss, game, overlayPanelView);
+
       game.AddObserver(this);
+      game.events.AddObserver(this);
 
       LoadLevel();
     }
@@ -65,13 +74,13 @@ namespace AthPlayer {
       var unit = ss.GetRoot().GetUnit(unitId);
       unitPresenters[unitId] =
           new UnitPresenter(
-              clock, timer, soundPlayer, resumeStaller, turnStaller, game, viewedLevel.terrain, unit, instantiator, narrator);
+              timer, timer, soundPlayer, resumeStaller, turnStaller, game, viewedLevel.terrain, unit, instantiator, narrator);
     }
 
     private void LoadLevel() {
       viewedLevel = game.level;
 
-      this.terrainPresenter = new TerrainPresenter(clock, viewedLevel.terrain, instantiator);
+      this.terrainPresenter = new TerrainPresenter(timer, viewedLevel.terrain, instantiator);
       terrainPresenter.TerrainClicked += (location) => LocationClicked?.Invoke(location);
       terrainPresenter.TerrainHovered += (location) => LocationHovered?.Invoke(location);
 
@@ -103,7 +112,6 @@ namespace AthPlayer {
     public void OnGameEffect(IGameEffect effect) { effect.visit(this); }
     public void visitGameCreateEffect(GameCreateEffect effect) { }
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
-    public void visitGameSetOverlayEffect(GameSetOverlayEffect effect) { }
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
       UnloadLevel();
       LoadLevel();
@@ -151,5 +159,26 @@ namespace AthPlayer {
     //  }
     //  return null;
     //}
+
+
+    public void OnIGameEventMutListEffect(IIGameEventMutListEffect effect) { effect.visit(this);  }
+    public void visitIGameEventMutListCreateEffect(IGameEventMutListCreateEffect effect) { }
+    public void visitIGameEventMutListDeleteEffect(IGameEventMutListDeleteEffect effect) { }
+    public void visitIGameEventMutListRemoveEffect(IGameEventMutListRemoveEffect effect) { }
+    public void visitIGameEventMutListAddEffect(IGameEventMutListAddEffect effect) { effect.element.Visit(this); }
+    public void Visit(FlyCameraEventAsIGameEvent obj) {
+      var cameraEndLookAtPosition = game.level.terrain.GetTileCenter(obj.obj.lookAt).ToUnity();
+      cameraController.StartMovingCameraTo(cameraEndLookAtPosition, obj.obj.transitionTimeMs);
+      timer.SetTimeSpeedMultiplier(0f);
+      cinematicTimer.ScheduleTimer(
+        obj.obj.transitionTimeMs,
+        () => {
+          timer.SetTimeSpeedMultiplier(1f);
+          ss.RequestTrigger(game.id, obj.obj.endTriggerName);
+        });
+    }
+    public void Visit(ShowOverlayEventAsIGameEvent obj) {
+      overlayPresenter.ShowOverlay(obj.obj);
+    }
   }
 }

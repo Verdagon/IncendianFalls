@@ -207,6 +207,18 @@ namespace IncendianFalls {
       // There were no existing remaining pre-acting details. Go on to the unit's acting.
       executionState.remainingPostActingUnitComponents.Destruct();
 
+      // Figure out a way for a trigger to interrupt, and then we could resume after that trigger.
+      // Similar to what we did with the post acting unit components.
+      // This is so we can trigger a cinematic or camera movement and pause simulation while it's
+      // going.
+      // Presumably we'd need a trigger to resume simulation...
+      var presenceTriggers = game.level.terrain.tiles[unit.location].components.GetAllIPresenceTriggerTTC();
+      Asserts.Assert(presenceTriggers.Count <= 1); // dont support multiple yet. we could just fire both of them at once.
+      // but we should probably have some sort of stop/resume between each trigger.
+      foreach (var presenceTrigger in presenceTriggers) {
+        presenceTrigger.Trigger(game, superstate, unit, unit.location);
+      }
+
       executionState.actingUnit = new Unit(game.root, 0);
       executionState.actingUnitDidAction = false;
 

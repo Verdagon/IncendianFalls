@@ -114,6 +114,9 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit unit,
         Location destination) {
+      if (!game.level.terrain.tiles.ContainsKey(destination)) {
+        return false;
+      }
       if (!game.level.terrain.tiles[destination].IsWalkable()) {
         return false;
       }
@@ -145,11 +148,6 @@ namespace IncendianFalls {
       superstate.levelSuperstate.Add(unit);
 
       unit.nextActionTime = unit.nextActionTime + unit.CalculateInertia();
-
-      var presenceTriggers = game.level.terrain.tiles[unit.location].components.GetAllIPresenceTriggerTTC();
-      foreach (var presenceTrigger in presenceTriggers) {
-        presenceTrigger.Trigger(game, superstate, unit, unit.location);
-      }
     }
 
     public static void Evaporate(

@@ -140,8 +140,8 @@ namespace AthPlayer {
       return result;
     }
 
-    public string RequestOverlayAction(int gameId, int buttonIndex) {
-      return ss.RequestOverlayAction(gameId, buttonIndex);
+    public string RequestTrigger(int gameId, string triggerName) {
+      return ss.RequestTrigger(gameId, triggerName);
     }
   }
 }

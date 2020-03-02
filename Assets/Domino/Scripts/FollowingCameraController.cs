@@ -52,7 +52,6 @@ namespace Domino {
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) { }
     public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
-    public void visitGameSetOverlayEffect(GameSetOverlayEffect effect) { }
     public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) {
       RefollowPlayer();
     }
@@ -86,14 +85,14 @@ namespace Domino {
       }
     }
 
-    private Matrix4x4 CalculateCameraMatrix(Vector3 lookAtPosition) {
-      MatrixBuilder builder = new MatrixBuilder(Matrix4x4.identity);
-      builder.Rotate(Quaternion.AngleAxis(90 - 26.6f, Vector3.right));
-      builder.Translate(
-          new Vector3(lookAtPosition.x, lookAtPosition.y + 16, lookAtPosition.z - 8));
-      // 26.6f is atan(5/10)
-      return builder.matrix;
-    }
+    //private Matrix4x4 CalculateCameraMatrix(Vector3 lookAtPosition) {
+    //  MatrixBuilder builder = new MatrixBuilder(Matrix4x4.identity);
+    //  builder.Rotate(Quaternion.AngleAxis(90 - 26.6f, Vector3.right));
+    //  builder.Translate(
+    //      new Vector3(lookAtPosition.x, lookAtPosition.y + 16, lookAtPosition.z - 8));
+    //  // 26.6f is atan(5/10)
+    //  return builder.matrix;
+    //}
 
     public void StartMovingCamera() {
       if (!followedUnit.Exists()) {
@@ -128,6 +127,10 @@ namespace Domino {
 
     public void MoveRight(float deltaTime) {
       cameraController.MoveRight(deltaTime);
+    }
+
+    public void StartMovingCameraTo(Vector3 newCameraEndLookAtPosition, long durationMs) {
+      cameraController.StartMovingCameraTo(newCameraEndLookAtPosition, durationMs);
     }
   }
 }

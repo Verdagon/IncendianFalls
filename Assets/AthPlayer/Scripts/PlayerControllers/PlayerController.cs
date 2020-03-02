@@ -223,7 +223,6 @@ namespace Domino {
     public void visitGameCreateEffect(GameCreateEffect effect) { }
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
     public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
-    public void visitGameSetOverlayEffect(GameSetOverlayEffect effect) { }
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
       RefreshPlayerStatusText();
     }

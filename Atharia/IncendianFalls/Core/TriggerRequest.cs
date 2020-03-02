@@ -4,41 +4,41 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class OverlayActionRequest : IComparable<OverlayActionRequest> {
-  public static readonly string NAME = "OverlayActionRequest";
-  public class EqualityComparer : IEqualityComparer<OverlayActionRequest> {
-    public bool Equals(OverlayActionRequest a, OverlayActionRequest b) {
+public class TriggerRequest : IComparable<TriggerRequest> {
+  public static readonly string NAME = "TriggerRequest";
+  public class EqualityComparer : IEqualityComparer<TriggerRequest> {
+    public bool Equals(TriggerRequest a, TriggerRequest b) {
       return a.Equals(b);
     }
-    public int GetHashCode(OverlayActionRequest a) {
+    public int GetHashCode(TriggerRequest a) {
       return a.GetDeterministicHashCode();
     }
   }
-  public class Comparer : IComparer<OverlayActionRequest> {
-    public int Compare(OverlayActionRequest a, OverlayActionRequest b) {
+  public class Comparer : IComparer<TriggerRequest> {
+    public int Compare(TriggerRequest a, TriggerRequest b) {
       return a.CompareTo(b);
     }
   }
   private readonly int hashCode;
          public readonly int gameId;
-  public readonly int buttonIndex;
-  public OverlayActionRequest(
+  public readonly string triggerName;
+  public TriggerRequest(
       int gameId,
-      int buttonIndex) {
+      string triggerName) {
     this.gameId = gameId;
-    this.buttonIndex = buttonIndex;
+    this.triggerName = triggerName;
     int hash = 0;
     hash = hash * 37 + gameId.GetDeterministicHashCode();
-    hash = hash * 37 + buttonIndex.GetDeterministicHashCode();
+    hash = hash * 37 + triggerName.GetDeterministicHashCode();
     this.hashCode = hash;
 
   }
-  public static bool operator==(OverlayActionRequest a, OverlayActionRequest b) {
+  public static bool operator==(TriggerRequest a, TriggerRequest b) {
     if (object.ReferenceEquals(a, null))
       return object.ReferenceEquals(b, null);
     return a.Equals(b);
   }
-  public static bool operator!=(OverlayActionRequest a, OverlayActionRequest b) {
+  public static bool operator!=(TriggerRequest a, TriggerRequest b) {
     if (object.ReferenceEquals(a, null))
       return !object.ReferenceEquals(b, null);
     return !a.Equals(b);
@@ -47,44 +47,44 @@ public class OverlayActionRequest : IComparable<OverlayActionRequest> {
     if (obj == null) {
       return false;
     }
-    if (!(obj is OverlayActionRequest)) {
+    if (!(obj is TriggerRequest)) {
       return false;
     }
-    var that = obj as OverlayActionRequest;
+    var that = obj as TriggerRequest;
     return true
                && gameId.Equals(that.gameId)
-        && buttonIndex.Equals(that.buttonIndex)
+        && triggerName.Equals(that.triggerName)
         ;
   }
   public override int GetHashCode() {
     return GetDeterministicHashCode();
   }
   public int GetDeterministicHashCode() { return hashCode; }
-  public int CompareTo(OverlayActionRequest that) {
+  public int CompareTo(TriggerRequest that) {
     if (gameId != that.gameId) {
       return gameId.CompareTo(that.gameId);
     }
-    if (buttonIndex != that.buttonIndex) {
-      return buttonIndex.CompareTo(that.buttonIndex);
+    if (triggerName != that.triggerName) {
+      return triggerName.CompareTo(that.triggerName);
     }
     return 0;
   }
   public override string ToString() { return DStr(); }
   public string DStr() {
-    return "OverlayActionRequest(" +
+    return "TriggerRequest(" +
         gameId.DStr() + ", " +
-        buttonIndex.DStr()
+        triggerName.DStr()
         + ")";
 
     }
-    public static OverlayActionRequest Parse(ParseSource source) {
+    public static TriggerRequest Parse(ParseSource source) {
       source.Expect(NAME);
       source.Expect("(");
       var gameId = source.ParseInt();
       source.Expect(",");
-      var buttonIndex = source.ParseInt();
+      var triggerName = source.ParseStr();
       source.Expect(")");
-      return new OverlayActionRequest(gameId, buttonIndex);
+      return new TriggerRequest(gameId, triggerName);
   }
 }
        

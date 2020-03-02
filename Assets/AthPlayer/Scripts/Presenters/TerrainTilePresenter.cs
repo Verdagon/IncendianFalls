@@ -96,6 +96,11 @@ namespace AthPlayer {
             symbolName = "h";
           }
           break;
+        case "hex":
+          if (patternTile.shapeIndex == 0) {
+            symbolName = "A";
+          }
+          break;
       }
 
       ExtrudedSymbolDescription tileSymbolDescription =

@@ -5,10 +5,11 @@ root mut struct Game {
   levels: MutSet:Level;
   var player: ?&Unit;
 
+  events: MutList:IGameEvent;
+
   var level: ?&Level;
   var time: Int;
   executionState: ExecutionState;
-  var overlay: ?Overlay;
 }
 
 mut struct ExecutionState {
@@ -61,7 +62,11 @@ mut struct ExecutionState {
   var remainingPostActingUnitComponents: ?MutBunch:&&IPostActingUC;
 }
 
-mut struct Overlay {
+imm interface IGameEvent { }
+
+imm struct ShowOverlayEvent {
+  ShowOverlayEvent isa IGameEvent;
+
   sizePercent: Int;
   backgroundColor: Color;
   fadeInEndMs: Int;
@@ -85,4 +90,13 @@ imm struct Button {
   label: Str;
   backgroundColor: Color;
   triggerName: Str;
+}
+
+imm struct FlyCameraEvent {
+  FlyCameraEvent isa IGameEvent;
+
+  lookAt: Location;
+  relativeCameraPosition: Vec3;
+  transitionTimeMs: Int; // Time to get to the specified camera
+  endTriggerName: Str;
 }

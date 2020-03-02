@@ -86,8 +86,8 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new SetupIncendianFallsGameRequest(randomSeed, squareLevelsOnly);
-        //broadcastBeforeRequest(new SetupGameRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
         Superstate superstate = null;
         var game = context.root.Transact(delegate () {
           return SetupIncendianFallsGameRequestExecutor.Execute(context, out superstate, request);
@@ -95,9 +95,8 @@ namespace IncendianFalls {
 
         superstateByGameId.Add(game.id, superstate);
 
-        // context.Flare(game.DStr());
-        //broadcastAfterRequest(new SetupGameRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
         return game;
       } catch (Exception e) {
         root.logger.Error(e.Message);
@@ -113,8 +112,8 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new SetupGauntletGameRequest(randomSeed, squareLevelsOnly);
-        //broadcastBeforeRequest(new SetupGameRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
         Superstate superstate = null;
         var game = context.root.Transact(delegate () {
           return SetupGauntletGameRequestExecutor.Execute(context, out superstate, request);
@@ -123,8 +122,8 @@ namespace IncendianFalls {
         superstateByGameId.Add(game.id, superstate);
 
         // context.Flare(game.DStr());
-        //broadcastAfterRequest(new SetupGameRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
         return game;
       } catch (Exception e) {
         root.logger.Error(e.Message);
@@ -140,8 +139,8 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new SetupEmberDeepGameRequest(randomSeed, squareLevelsOnly);
-        //broadcastBeforeRequest(new SetupGameRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
         Superstate superstate = null;
         var game = context.root.Transact(delegate () {
           return SetupEmberDeepGameRequestExecutor.Execute(context, out superstate, request);
@@ -150,8 +149,8 @@ namespace IncendianFalls {
         superstateByGameId.Add(game.id, superstate);
 
         // context.Flare(game.DStr());
-        //broadcastAfterRequest(new SetupGameRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
         return game;
       } catch (Exception e) {
         root.logger.Error(e.Message);
@@ -163,19 +162,19 @@ namespace IncendianFalls {
       }
     }
 
-    public string RequestOverlayAction(int gameId, int buttonIndex) {
+    public string RequestTrigger(int gameId, string triggerName) {
       //var rollbackPoint = root.Snapshot();
       try {
-        var request = new OverlayActionRequest(gameId, buttonIndex);
-        //broadcastBeforeRequest(new InteractRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        var request = new TriggerRequest(gameId, triggerName);
+        broadcastBeforeRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         var success = context.root.Transact(delegate () {
-          return OverlayActionRequestExecutor.Execute(context, superstate, request);
+          return TriggerRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(success.DStr());
-        //broadcastAfterRequest(new InteractRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
         root.logger.Error(e.Message + "\n" + e.StackTrace);
@@ -191,15 +190,15 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new SetupTerrainRequest(pattern);
-        //broadcastBeforeRequest(new SetupTerrainRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(new SetupTerrainRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         var terrain = context.root.Transact(delegate () {
           return SetupTerrainRequestExecutor.Execute(context, request);
         });
 
         // context.Flare(game.DStr());
-        //broadcastAfterRequest(new SetupTerrainRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(new SetupTerrainRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         return terrain;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -215,15 +214,15 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new InteractRequest(gameId);
-        //broadcastBeforeRequest(new InteractRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(new InteractRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         var success = context.root.Transact(delegate () {
           return InteractRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(success.DStr());
-        //broadcastAfterRequest(new InteractRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(new InteractRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
         root.logger.Error(e.Message + "\n" + e.StackTrace);
@@ -239,15 +238,15 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new CheatRequest(gameId, cheatName);
-        //broadcastBeforeRequest(new CheatRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(new CheatRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         var success = context.root.Transact(delegate () {
           return CheatRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(success.DStr());
-        //broadcastAfterRequest(new CheatRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(new CheatRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
         root.logger.Error(e.Message);
@@ -263,18 +262,18 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new MoveRequest(gameId, newLocation);
-        //broadcastBeforeRequest(new MoveRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(new MoveRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         string success = context.root.Transact(delegate () {
           return MoveRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(success.DStr());
-        //broadcastAfterRequest(new MoveRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(new MoveRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -289,15 +288,15 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new FireRequest(gameId, targetUnitId);
-        //broadcastBeforeRequest(new FireRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(new FireRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         string result = context.root.Transact(delegate () {
           return FireRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(result.DStr());
-        //broadcastAfterRequest(new FireRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(new FireRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         return result;
       } catch (Exception e) {
         root.logger.Error(e.Message);
@@ -314,15 +313,15 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new AttackRequest(gameId, targetUnitId);
-        //broadcastBeforeRequest(new AttackRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(new AttackRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         string success = context.root.Transact(delegate () {
           return AttackRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(success.DStr());
-        //broadcastAfterRequest(new AttackRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(new AttackRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
         root.logger.Error(e.Message);
@@ -338,15 +337,15 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new DefendRequest(gameId);
-        //broadcastBeforeRequest(new DefendRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(new DefendRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         string success = context.root.Transact(delegate () {
           return DefendRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(success.DStr());
-        //broadcastAfterRequest(new DefendRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(new DefendRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
         root.logger.Error(e.Message);
@@ -362,15 +361,15 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new CounterRequest(gameId);
-        //broadcastBeforeRequest(new CounterRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(new CounterRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         string result = context.root.Transact(delegate () {
           return CounterRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(result.DStr());
-        //broadcastAfterRequest(new CounterRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(new CounterRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         return result;
       } catch (Exception e) {
         root.logger.Error(e.Message);
@@ -386,15 +385,15 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new FollowDirectiveRequest(gameId);
-        //broadcastBeforeRequest(new FollowDirectiveRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(new FollowDirectiveRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         string success = context.root.Transact(delegate () {
           return FollowDirectiveRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(success.DStr());
-        //broadcastAfterRequest(new FollowDirectiveRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(new FollowDirectiveRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
         root.logger.Error(e.Message);
@@ -410,15 +409,15 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new TimeAnchorMoveRequest(gameId, destination);
-        //broadcastBeforeRequest(request.AsIRequest());
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         string success = context.root.Transact(delegate () {
           return TimeAnchorMoveRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(success.DStr());
-        //broadcastAfterRequest(request.AsIRequest());
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
         root.logger.Error(e.Message);
@@ -434,15 +433,15 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new TimeShiftRequest(gameId);
-        //broadcastBeforeRequest(new TimeShiftRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(new TimeShiftRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         string result = context.root.Transact(delegate () {
           return TimeShiftRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(result.DStr());
-        //broadcastAfterRequest(new TimeShiftRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(new TimeShiftRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         return result;
       } catch (Exception e) {
         root.logger.Error(e.Message);
@@ -459,15 +458,15 @@ namespace IncendianFalls {
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new ResumeRequest(gameId);
-        //broadcastBeforeRequest(new ResumeRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastBeforeRequest(new ResumeRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         string success = context.root.Transact(delegate () {
           return ResumeRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(success.DStr());
-        //broadcastAfterRequest(new ResumeRequestAsIRequest(request));
-        // context.Flare(GetDeterministicHashCode());
+        broadcastAfterRequest(new ResumeRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
         root.logger.Error(e.Message);

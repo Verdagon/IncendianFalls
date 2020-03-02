@@ -30,7 +30,7 @@ namespace ConsoleDriveyThing {
 
       var root = ss.GetRoot();
 
-      var game = ss.RequestSetupGame(seed, false, false);
+      var game = ss.RequestSetupGauntletGame(seed, false);
       var superstate = ss.GetSuperstate(game);
       var player = game.player;
 

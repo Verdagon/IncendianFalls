@@ -50,26 +50,49 @@ namespace Atharia.Model {
         string triggerName) {
       game.root.logger.Error("Got trigger! " + triggerName);
 
+      if (triggerName == "cameraMovementDone") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            100, // sizePercent
+            new Color(0, 0, 0, 224), // backgroundColor
+            1000, // fadeInEnd
+            5000, // fadeOutStart
+            5000, // fadeOutEnd,
+            "introLine1Done",
+
+            "My brother was an explorer...",
+            new Color(0, 255, 255, 255), // textColor
+            1000, // textFadeInStartS
+            2000, // textFadeInEndS
+            4000, // textFadeOutStartS
+            5000, // textFadeOutEndS
+            true, // topAligned
+            false, // leftAligned
+
+            new ButtonImmList(new List<Button>() { }))
+          .AsIGameEvent());
+      }
       if (triggerName == "introLine1Done") {
-        game.overlay =
-          game.root.EffectOverlayCreate(
-          100, // sizePercent
-          new Color(0, 0, 0, 224), // backgroundColor
-          0, // fadeInEnd
-          4000, // fadeOutStart
-          5000, // fadeOutEnd,
-          "introLine2Done",
+        game.events.Add(
+          new ShowOverlayEvent(
+            100, // sizePercent
+            new Color(0, 0, 0, 224), // backgroundColor
+            0, // fadeInEnd
+            4000, // fadeOutStart
+            5000, // fadeOutEnd,
+            "introLine2Done",
 
-          "Finest in the seven kingdoms!",
-          new Color(255, 255, 0, 255), // textColor
-          0, // textFadeInStartS
-          1000, // textFadeInEndS
-          3000, // textFadeOutStartS
-          4000, // textFadeOutEndS
-          true, // topAligned
-          true, // leftAligned
+            "Finest in the seven kingdoms!",
+            new Color(255, 255, 0, 255), // textColor
+            0, // textFadeInStartS
+            1000, // textFadeInEndS
+            3000, // textFadeOutStartS
+            4000, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
 
-          new ButtonImmList(new List<Button>() { }));
+            new ButtonImmList(new List<Button>() { }))
+          .AsIGameEvent());
       }
 
       return new Atharia.Model.Void();
@@ -84,25 +107,9 @@ namespace Atharia.Model {
         string triggerName) {
       game.root.logger.Error("Got trigger! " + triggerName);
       if (triggerName == "ambush1Trigger") {
-        game.overlay =
-          game.root.EffectOverlayCreate(
-          100, // sizePercent
-          new Color(0, 0, 0, 224), // backgroundColor
-          1000, // fadeInEnd
-          5000, // fadeOutStart
-          5000, // fadeOutEnd,
-          "introLine1Done",
-
-          "My brother was an explorer...",
-          new Color(0, 255, 255, 255), // textColor
-          1000, // textFadeInStartS
-          2000, // textFadeInEndS
-          4000, // textFadeOutStartS
-          5000, // textFadeOutEndS
-          true, // topAligned
-          false, // leftAligned
-
-          new ButtonImmList(new List<Button>() { }));
+        game.events.Add(
+          new FlyCameraEvent(new Location(0, 0, 0), new Vec3(0, -10, 20), 1500, "cameraMovementDone")
+          .AsIGameEvent());
       }
       return new Atharia.Model.Void();
     }

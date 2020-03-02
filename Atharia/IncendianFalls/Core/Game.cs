@@ -43,6 +43,10 @@ public class Game {
       violations.Add("Null constraint violated! Game#" + id + ".levels");
     }
 
+    if (!root.IGameEventMutListExists(events.id)) {
+      violations.Add("Null constraint violated! Game#" + id + ".events");
+    }
+
     if (!root.ExecutionStateExists(executionState.id)) {
       violations.Add("Null constraint violated! Game#" + id + ".executionState");
     }
@@ -61,14 +65,14 @@ public class Game {
     if (root.UnitExists(player.id)) {
       player.FindReachableObjects(foundIds);
     }
+    if (root.IGameEventMutListExists(events.id)) {
+      events.FindReachableObjects(foundIds);
+    }
     if (root.LevelExists(level.id)) {
       level.FindReachableObjects(foundIds);
     }
     if (root.ExecutionStateExists(executionState.id)) {
       executionState.FindReachableObjects(foundIds);
-    }
-    if (root.OverlayExists(overlay.id)) {
-      overlay.FindReachableObjects(foundIds);
     }
   }
   public bool Is(Game that) {
@@ -111,6 +115,15 @@ public class Game {
     }
                          set { root.EffectGameSetPlayer(id, value); }
   }
+  public IGameEventMutList events {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member events of null!");
+      }
+      return new IGameEventMutList(root, incarnation.events);
+    }
+                       }
   public Level level {
 
     get {
@@ -134,15 +147,5 @@ public class Game {
       return new ExecutionState(root, incarnation.executionState);
     }
                        }
-  public Overlay overlay {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member overlay of null!");
-      }
-      return new Overlay(root, incarnation.overlay);
-    }
-                         set { root.EffectGameSetOverlay(id, value); }
-  }
 }
 }

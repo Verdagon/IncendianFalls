@@ -493,13 +493,6 @@ public class Root {
   readonly List<LevelSetTimeEffect> effectsLevelSetTimeEffect =
       new List<LevelSetTimeEffect>();
 
-  readonly SortedDictionary<int, List<IOverlayEffectObserver>> observersForOverlay =
-      new SortedDictionary<int, List<IOverlayEffectObserver>>();
-  readonly List<OverlayCreateEffect> effectsOverlayCreateEffect =
-      new List<OverlayCreateEffect>();
-  readonly List<OverlayDeleteEffect> effectsOverlayDeleteEffect =
-      new List<OverlayDeleteEffect>();
-
   readonly SortedDictionary<int, List<IExecutionStateEffectObserver>> observersForExecutionState =
       new SortedDictionary<int, List<IExecutionStateEffectObserver>>();
   readonly List<ExecutionStateCreateEffect> effectsExecutionStateCreateEffect =
@@ -541,8 +534,17 @@ public class Root {
       new List<GameSetLevelEffect>();
   readonly List<GameSetTimeEffect> effectsGameSetTimeEffect =
       new List<GameSetTimeEffect>();
-  readonly List<GameSetOverlayEffect> effectsGameSetOverlayEffect =
-      new List<GameSetOverlayEffect>();
+
+  readonly SortedDictionary<int, List<IIGameEventMutListEffectObserver>> observersForIGameEventMutList =
+      new SortedDictionary<int, List<IIGameEventMutListEffectObserver>>();
+  readonly List<IGameEventMutListCreateEffect> effectsIGameEventMutListCreateEffect =
+      new List<IGameEventMutListCreateEffect>();
+  readonly List<IGameEventMutListDeleteEffect> effectsIGameEventMutListDeleteEffect =
+      new List<IGameEventMutListDeleteEffect>();
+  readonly List<IGameEventMutListAddEffect> effectsIGameEventMutListAddEffect =
+      new List<IGameEventMutListAddEffect>();
+  readonly List<IGameEventMutListRemoveEffect> effectsIGameEventMutListRemoveEffect =
+      new List<IGameEventMutListRemoveEffect>();
 
   readonly SortedDictionary<int, List<IIUnitEventMutListEffectObserver>> observersForIUnitEventMutList =
       new SortedDictionary<int, List<IIUnitEventMutListEffectObserver>>();
@@ -1342,9 +1344,6 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsLevel) {
       result += GetLevelHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsOverlay) {
-      result += GetOverlayHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
     foreach (var entry in this.rootIncarnation.incarnationsExecutionState) {
       result += GetExecutionStateHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1356,6 +1355,9 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsGame) {
       result += GetGameHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsIGameEventMutList) {
+      result += GetIGameEventMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsIUnitEventMutList) {
       result += GetIUnitEventMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1687,9 +1689,6 @@ public class Root {
     foreach (var obj in this.AllLevel()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllOverlay()) {
-      obj.CheckForNullViolations(violations);
-    }
     foreach (var obj in this.AllExecutionState()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1700,6 +1699,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllGame()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllIGameEventMutList()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllIUnitEventMutList()) {
@@ -2153,11 +2155,6 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllOverlay()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
     foreach (var obj in this.AllExecutionState()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -2174,6 +2171,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllGame()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllIGameEventMutList()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -3098,17 +3100,6 @@ public class Root {
               observers));
     }
 
-    var copyOfObserversForOverlay =
-        new SortedDictionary<int, List<IOverlayEffectObserver>>();
-    foreach (var entry in observersForOverlay) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForOverlay.Add(
-          objectId,
-          new List<IOverlayEffectObserver>(
-              observers));
-    }
-
     var copyOfObserversForExecutionState =
         new SortedDictionary<int, List<IExecutionStateEffectObserver>>();
     foreach (var entry in observersForExecutionState) {
@@ -3150,6 +3141,17 @@ public class Root {
       copyOfObserversForGame.Add(
           objectId,
           new List<IGameEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForIGameEventMutList =
+        new SortedDictionary<int, List<IIGameEventMutListEffectObserver>>();
+    foreach (var entry in observersForIGameEventMutList) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForIGameEventMutList.Add(
+          objectId,
+          new List<IIGameEventMutListEffectObserver>(
               observers));
     }
 
@@ -3853,9 +3855,6 @@ public class Root {
     BroadcastLevelEffects(
         copyOfObserversForLevel);
            
-    BroadcastOverlayEffects(
-        copyOfObserversForOverlay);
-           
     BroadcastExecutionStateEffects(
         copyOfObserversForExecutionState);
            
@@ -3867,6 +3866,9 @@ public class Root {
            
     BroadcastGameEffects(
         copyOfObserversForGame);
+           
+    BroadcastIGameEventMutListEffects(
+        copyOfObserversForIGameEventMutList);
            
     BroadcastIUnitEventMutListEffects(
         copyOfObserversForIUnitEventMutList);
@@ -4635,16 +4637,6 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsOverlay) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsOverlay.ContainsKey(sourceObjId)) {
-        EffectInternalCreateOverlay(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExecutionState) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -4682,6 +4674,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsGame.ContainsKey(sourceObjId)) {
         EffectInternalCreateGame(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIGameEventMutList) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsIGameEventMutList.ContainsKey(sourceObjId)) {
+        EffectInternalCreateIGameEventMutList(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -5155,6 +5157,31 @@ public class Root {
       }
     }
          
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIGameEventMutList) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsIGameEventMutList.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIGameEventMutList[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            for (int i = currentObjIncarnation.list.Count - 1; i >= 0; i--) {
+              EffectIGameEventMutListRemoveAt(objId, i);
+            }
+            foreach (var objIdInSourceObjIncarnation in sourceObjIncarnation.list) {
+              EffectIGameEventMutListAdd(objId, objIdInSourceObjIncarnation);
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+                  rootIncarnation.incarnationsIGameEventMutList[objId] = sourceVersionAndObjIncarnation;
+
+          }
+        }
+      }
+             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIUnitEventMutList) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -7798,27 +7825,6 @@ public class Root {
       }
     }
 
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsOverlay) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsOverlay.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsOverlay[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation. The only visible effect this has is
-          // changing the version number.
-          
-          rootIncarnation.incarnationsOverlay[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExecutionState) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -7920,10 +7926,6 @@ public class Root {
 
           if (sourceObjIncarnation.time != currentObjIncarnation.time) {
             EffectGameSetTime(objId, sourceObjIncarnation.time);
-          }
-
-          if (sourceObjIncarnation.overlay != currentObjIncarnation.overlay) {
-            EffectGameSetOverlay(objId, new Overlay(this, sourceObjIncarnation.overlay));
           }
 
           // Swap out the underlying incarnation. The only visible effect this has is
@@ -8362,13 +8364,6 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<OverlayIncarnation>>(rootIncarnation.incarnationsOverlay)) {
-      if (!sourceIncarnation.incarnationsOverlay.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectOverlayDelete(id);
-      }
-    }
-
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ExecutionStateIncarnation>>(rootIncarnation.incarnationsExecutionState)) {
       if (!sourceIncarnation.incarnationsExecutionState.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -8394,6 +8389,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsGame.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectGameDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IGameEventMutListIncarnation>>(rootIncarnation.incarnationsIGameEventMutList)) {
+      if (!sourceIncarnation.incarnationsIGameEventMutList.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectIGameEventMutListDelete(id);
       }
     }
 
@@ -17373,177 +17375,6 @@ public class Root {
 
     effectsLevelSetTimeEffect.Add(effect);
   }
-  public OverlayIncarnation GetOverlayIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsOverlay[id].incarnation;
-  }
-  public bool OverlayExists(int id) {
-    return rootIncarnation.incarnationsOverlay.ContainsKey(id);
-  }
-  public Overlay GetOverlay(int id) {
-    return new Overlay(this, id);
-  }
-  public List<Overlay> AllOverlay() {
-    List<Overlay> result = new List<Overlay>(rootIncarnation.incarnationsOverlay.Count);
-    foreach (var id in rootIncarnation.incarnationsOverlay.Keys) {
-      result.Add(new Overlay(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<Overlay> EnumAllOverlay() {
-    foreach (var id in rootIncarnation.incarnationsOverlay.Keys) {
-      yield return GetOverlay(id);
-    }
-  }
-  public void CheckHasOverlay(Overlay thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasOverlay(thing.id);
-  }
-  public void CheckHasOverlay(int id) {
-    if (!rootIncarnation.incarnationsOverlay.ContainsKey(id)) {
-      throw new System.Exception("Invalid Overlay: " + id);
-    }
-  }
-  public void AddOverlayObserver(int id, IOverlayEffectObserver observer) {
-    List<IOverlayEffectObserver> obsies;
-    if (!observersForOverlay.TryGetValue(id, out obsies)) {
-      obsies = new List<IOverlayEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForOverlay[id] = obsies;
-  }
-
-  public void RemoveOverlayObserver(int id, IOverlayEffectObserver observer) {
-    if (observersForOverlay.ContainsKey(id)) {
-      var list = observersForOverlay[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForOverlay.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-  public Overlay EffectOverlayCreate(
-      int sizePercent,
-      Color backgroundColor,
-      int fadeInEndMs,
-      int fadeOutStartMs,
-      int fadeOutEndMs,
-      string automaticActionTriggerName,
-      string text,
-      Color textColor,
-      int textFadeInStartMs,
-      int textFadeInEndMs,
-      int textFadeOutStartMs,
-      int textFadeOutEndMs,
-      bool topAligned,
-      bool leftAligned,
-      ButtonImmList buttons) {
-    CheckUnlocked();
-
-    var id = NewId();
-    var incarnation =
-        new OverlayIncarnation(
-            sizePercent,
-            backgroundColor,
-            fadeInEndMs,
-            fadeOutStartMs,
-            fadeOutEndMs,
-            automaticActionTriggerName,
-            text,
-            textColor,
-            textFadeInStartMs,
-            textFadeInEndMs,
-            textFadeOutStartMs,
-            textFadeOutEndMs,
-            topAligned,
-            leftAligned,
-            buttons
-            );
-    EffectInternalCreateOverlay(id, rootIncarnation.version, incarnation);
-    return new Overlay(this, id);
-  }
-  public void EffectInternalCreateOverlay(
-      int id,
-      int incarnationVersion,
-      OverlayIncarnation incarnation) {
-    CheckUnlocked();
-    var effect = new OverlayCreateEffect(id);
-    rootIncarnation.incarnationsOverlay.Add(
-        id,
-        new VersionAndIncarnation<OverlayIncarnation>(
-            incarnationVersion,
-            incarnation));
-    effectsOverlayCreateEffect.Add(effect);
-  }
-
-  public void EffectOverlayDelete(int id) {
-    CheckUnlocked();
-    var effect = new OverlayDeleteEffect(id);
-
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsOverlay[id];
-
-    rootIncarnation.incarnationsOverlay.Remove(id);
-    effectsOverlayDeleteEffect.Add(effect);
-  }
-
-     
-  public int GetOverlayHash(int id, int version, OverlayIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.sizePercent.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.backgroundColor.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.fadeInEndMs.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.fadeOutStartMs.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.fadeOutEndMs.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.automaticActionTriggerName.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.text.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.textColor.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.textFadeInStartMs.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.textFadeInEndMs.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.textFadeOutStartMs.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.textFadeOutEndMs.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.topAligned.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.leftAligned.GetDeterministicHashCode();
-    result += id * version * 15 * incarnation.buttons.GetDeterministicHashCode();
-    return result;
-  }
-     
-  public void BroadcastOverlayEffects(
-      SortedDictionary<int, List<IOverlayEffectObserver>> observers) {
-    foreach (var effect in effectsOverlayDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IOverlayEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnOverlayEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IOverlayEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnOverlayEffect(effect);
-        }
-        observersForOverlay.Remove(effect.id);
-      }
-    }
-    effectsOverlayDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsOverlayCreateEffect) {
-      if (observers.TryGetValue(0, out List<IOverlayEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnOverlayEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IOverlayEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnOverlayEffect(effect);
-        }
-      }
-    }
-    effectsOverlayCreateEffect.Clear();
-  }
   public ExecutionStateIncarnation GetExecutionStateIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -18170,13 +18001,14 @@ public class Root {
       bool squareLevelsOnly,
       LevelMutSet levels,
       Unit player,
+      IGameEventMutList events,
       Level level,
       int time,
-      ExecutionState executionState,
-      Overlay overlay) {
+      ExecutionState executionState) {
     CheckUnlocked();
     CheckHasRand(rand);
     CheckHasLevelMutSet(levels);
+    CheckHasIGameEventMutList(events);
     CheckHasExecutionState(executionState);
 
     var id = NewId();
@@ -18186,10 +18018,10 @@ public class Root {
             squareLevelsOnly,
             levels.id,
             player.id,
+            events.id,
             level.id,
             time,
-            executionState.id,
-            overlay.id
+            executionState.id
             );
     EffectInternalCreateGame(id, rootIncarnation.version, incarnation);
     return new Game(this, id);
@@ -18228,14 +18060,12 @@ public class Root {
     if (!object.ReferenceEquals(incarnation.player, null)) {
       result += id * version * 4 * incarnation.player.GetDeterministicHashCode();
     }
+    result += id * version * 5 * incarnation.events.GetDeterministicHashCode();
     if (!object.ReferenceEquals(incarnation.level, null)) {
-      result += id * version * 5 * incarnation.level.GetDeterministicHashCode();
+      result += id * version * 6 * incarnation.level.GetDeterministicHashCode();
     }
-    result += id * version * 6 * incarnation.time.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.executionState.GetDeterministicHashCode();
-    if (!object.ReferenceEquals(incarnation.overlay, null)) {
-      result += id * version * 8 * incarnation.overlay.GetDeterministicHashCode();
-    }
+    result += id * version * 7 * incarnation.time.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.executionState.GetDeterministicHashCode();
     return result;
   }
      
@@ -18299,20 +18129,6 @@ public class Root {
     }
     effectsGameSetTimeEffect.Clear();
 
-    foreach (var effect in effectsGameSetOverlayEffect) {
-      if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnGameEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IGameEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnGameEffect(effect);
-        }
-      }
-    }
-    effectsGameSetOverlayEffect.Clear();
-
     foreach (var effect in effectsGameCreateEffect) {
       if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -18344,10 +18160,10 @@ public class Root {
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
               oldIncarnationAndVersion.incarnation.levels,
               newValue.id,
+              oldIncarnationAndVersion.incarnation.events,
               oldIncarnationAndVersion.incarnation.level,
               oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState,
-              oldIncarnationAndVersion.incarnation.overlay);
+              oldIncarnationAndVersion.incarnation.executionState);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -18373,10 +18189,10 @@ public class Root {
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.events,
               newValue.id,
               oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState,
-              oldIncarnationAndVersion.incarnation.overlay);
+              oldIncarnationAndVersion.incarnation.executionState);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -18402,10 +18218,10 @@ public class Root {
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.events,
               oldIncarnationAndVersion.incarnation.level,
               newValue,
-              oldIncarnationAndVersion.incarnation.executionState,
-              oldIncarnationAndVersion.incarnation.overlay);
+              oldIncarnationAndVersion.incarnation.executionState);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -18413,35 +18229,6 @@ public class Root {
     }
 
     effectsGameSetTimeEffect.Add(effect);
-  }
-
-  public void EffectGameSetOverlay(int id, Overlay newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = new GameSetOverlayEffect(id, newValue);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldId = oldIncarnationAndVersion.incarnation.overlay;
-      oldIncarnationAndVersion.incarnation.overlay = newValue.id;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.levels,
-              oldIncarnationAndVersion.incarnation.player,
-              oldIncarnationAndVersion.incarnation.level,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState,
-              newValue.id);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-    effectsGameSetOverlayEffect.Add(effect);
   }
 
   public IPresenceTriggerTTC GetIPresenceTriggerTTC(int id) {
@@ -19552,6 +19339,194 @@ public class Root {
   }
   public void CheckHasIDestructible(int id) {
     GetIDestructible(id);
+  }
+
+    public int GetIGameEventMutListHash(int id, int version, IGameEventMutListIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.list) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public IGameEventMutListIncarnation GetIGameEventMutListIncarnation(int id) {
+      return rootIncarnation.incarnationsIGameEventMutList[id].incarnation;
+    }
+    public IGameEventMutList GetIGameEventMutList(int id) {
+      return new IGameEventMutList(this, id);
+    }
+    public List<IGameEventMutList> AllIGameEventMutList() {
+      List<IGameEventMutList> result = new List<IGameEventMutList>(rootIncarnation.incarnationsIGameEventMutList.Count);
+      foreach (var id in rootIncarnation.incarnationsIGameEventMutList.Keys) {
+        result.Add(new IGameEventMutList(this, id));
+      }
+      return result;
+    }
+    public bool IGameEventMutListExists(int id) {
+      return rootIncarnation.incarnationsIGameEventMutList.ContainsKey(id);
+    }
+    public void CheckHasIGameEventMutList(IGameEventMutList thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasIGameEventMutList(thing.id);
+    }
+    public void CheckHasIGameEventMutList(int id) {
+      if (!rootIncarnation.incarnationsIGameEventMutList.ContainsKey(id)) {
+        throw new System.Exception("Invalid IGameEventMutList}: " + id);
+      }
+    }
+    public IGameEventMutList EffectIGameEventMutListCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      EffectInternalCreateIGameEventMutList(id, rootIncarnation.version, new IGameEventMutListIncarnation(new List<IGameEvent>()));
+      return new IGameEventMutList(this, id);
+    }
+    public IGameEventMutList EffectIGameEventMutListCreate(IEnumerable<IGameEvent> elements) {
+      var id = NewId();
+      var incarnation = new IGameEventMutListIncarnation(new List<IGameEvent>(elements));
+      EffectInternalCreateIGameEventMutList(id, rootIncarnation.version, incarnation);
+      return new IGameEventMutList(this, id);
+    }
+    public void EffectInternalCreateIGameEventMutList(int id, int incarnationVersion, IGameEventMutListIncarnation incarnation) {
+      var effect = new IGameEventMutListCreateEffect(id);
+      rootIncarnation.incarnationsIGameEventMutList
+          .Add(
+              id,
+              new VersionAndIncarnation<IGameEventMutListIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsIGameEventMutListCreateEffect.Add(effect);
+    }
+    public void EffectIGameEventMutListDelete(int id) {
+      CheckUnlocked();
+      var effect = new IGameEventMutListDeleteEffect(id);
+      effectsIGameEventMutListDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsIGameEventMutList[id];
+      rootIncarnation.incarnationsIGameEventMutList.Remove(id);
+    }
+    public void EffectIGameEventMutListAdd(int listId, IGameEvent element) {
+      CheckUnlocked();
+      CheckHasIGameEventMutList(listId);
+
+    
+      var effect = new IGameEventMutListAddEffect(listId, element);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsIGameEventMutList[listId];
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.list.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.list;
+        var newMap = new List<IGameEvent>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new IGameEventMutListIncarnation(newMap);
+        rootIncarnation.incarnationsIGameEventMutList[listId] =
+            new VersionAndIncarnation<IGameEventMutListIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsIGameEventMutListAddEffect.Add(effect);
+    }
+    public void EffectIGameEventMutListRemoveAt(int listId, int index) {
+      CheckUnlocked();
+      CheckHasIGameEventMutList(listId);
+
+      var effect = new IGameEventMutListRemoveEffect(listId, index);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsIGameEventMutList[listId];
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        var oldElement = oldIncarnationAndVersion.incarnation.list[index];
+        oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.list;
+        var newMap = new List<IGameEvent>(oldMap);
+        newMap.RemoveAt(index);
+        var newIncarnation = new IGameEventMutListIncarnation(newMap);
+        rootIncarnation.incarnationsIGameEventMutList[listId] =
+            new VersionAndIncarnation<IGameEventMutListIncarnation>(
+                rootIncarnation.version, newIncarnation);
+
+      }
+      effectsIGameEventMutListRemoveEffect.Add(effect);
+    }
+       
+    public void AddIGameEventMutListObserver(int id, IIGameEventMutListEffectObserver observer) {
+      List<IIGameEventMutListEffectObserver> obsies;
+      if (!observersForIGameEventMutList.TryGetValue(id, out obsies)) {
+        obsies = new List<IIGameEventMutListEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForIGameEventMutList[id] = obsies;
+    }
+
+    public void RemoveIGameEventMutListObserver(int id, IIGameEventMutListEffectObserver observer) {
+      if (observersForIGameEventMutList.ContainsKey(id)) {
+        var list = observersForIGameEventMutList[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForIGameEventMutList.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+  public void BroadcastIGameEventMutListEffects(
+      SortedDictionary<int, List<IIGameEventMutListEffectObserver>> observers) {
+    foreach (var effect in effectsIGameEventMutListDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IIGameEventMutListEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIGameEventMutListEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIGameEventMutListEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIGameEventMutListEffect(effect);
+        }
+        observersForIGameEventMutList.Remove(effect.id);
+      }
+    }
+    effectsIGameEventMutListDeleteEffect.Clear();
+
+    foreach (var effect in effectsIGameEventMutListAddEffect) {
+      if (observers.TryGetValue(0, out List<IIGameEventMutListEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIGameEventMutListEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIGameEventMutListEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIGameEventMutListEffect(effect);
+        }
+      }
+    }
+    effectsIGameEventMutListAddEffect.Clear();
+
+    foreach (var effect in effectsIGameEventMutListRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IIGameEventMutListEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIGameEventMutListEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIGameEventMutListEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIGameEventMutListEffect(effect);
+        }
+      }
+    }
+    effectsIGameEventMutListRemoveEffect.Clear();
+
+    foreach (var effect in effectsIGameEventMutListCreateEffect) {
+      if (observers.TryGetValue(0, out List<IIGameEventMutListEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIGameEventMutListEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIGameEventMutListEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIGameEventMutListEffect(effect);
+        }
+      }
+    }
+    effectsIGameEventMutListCreateEffect.Clear();
+
   }
 
     public int GetIUnitEventMutListHash(int id, int version, IUnitEventMutListIncarnation incarnation) {

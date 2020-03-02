@@ -423,6 +423,7 @@ namespace AthPlayer {
                       new UnityEngine.Color(1, 1, 1, 1.5f))));
         } else if (detail is HealthPotionAsIUnitComponent) {
         } else if (detail is ManaPotionAsIUnitComponent) {
+        } else if (detail is TriggererUCAsIUnitComponent) {
         } else {
           Debug.LogError("Unknown detail type: " + detail);
         }

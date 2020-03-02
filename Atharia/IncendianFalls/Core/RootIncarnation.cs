@@ -69,11 +69,11 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<IUnitComponentMutBunchIncarnation>> incarnationsIUnitComponentMutBunch;
   public readonly SortedDictionary<int, VersionAndIncarnation<NoImpulseIncarnation>> incarnationsNoImpulse;
   public readonly SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>> incarnationsLevel;
-  public readonly SortedDictionary<int, VersionAndIncarnation<OverlayIncarnation>> incarnationsOverlay;
   public readonly SortedDictionary<int, VersionAndIncarnation<ExecutionStateIncarnation>> incarnationsExecutionState;
   public readonly SortedDictionary<int, VersionAndIncarnation<IPostActingUCWeakMutBunchIncarnation>> incarnationsIPostActingUCWeakMutBunch;
   public readonly SortedDictionary<int, VersionAndIncarnation<IPreActingUCWeakMutBunchIncarnation>> incarnationsIPreActingUCWeakMutBunch;
   public readonly SortedDictionary<int, VersionAndIncarnation<GameIncarnation>> incarnationsGame;
+  public readonly SortedDictionary<int, VersionAndIncarnation<IGameEventMutListIncarnation>> incarnationsIGameEventMutList;
   public readonly SortedDictionary<int, VersionAndIncarnation<IUnitEventMutListIncarnation>> incarnationsIUnitEventMutList;
   public readonly SortedDictionary<int, VersionAndIncarnation<LocationMutListIncarnation>> incarnationsLocationMutList;
   public readonly SortedDictionary<int, VersionAndIncarnation<IRequestMutListIncarnation>> incarnationsIRequestMutList;
@@ -186,11 +186,11 @@ public class RootIncarnation {
     this.incarnationsIUnitComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<IUnitComponentMutBunchIncarnation>>();
     this.incarnationsNoImpulse = new SortedDictionary<int, VersionAndIncarnation<NoImpulseIncarnation>>();
     this.incarnationsLevel = new SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>>();
-    this.incarnationsOverlay = new SortedDictionary<int, VersionAndIncarnation<OverlayIncarnation>>();
     this.incarnationsExecutionState = new SortedDictionary<int, VersionAndIncarnation<ExecutionStateIncarnation>>();
     this.incarnationsIPostActingUCWeakMutBunch = new SortedDictionary<int, VersionAndIncarnation<IPostActingUCWeakMutBunchIncarnation>>();
     this.incarnationsIPreActingUCWeakMutBunch = new SortedDictionary<int, VersionAndIncarnation<IPreActingUCWeakMutBunchIncarnation>>();
     this.incarnationsGame = new SortedDictionary<int, VersionAndIncarnation<GameIncarnation>>();
+    this.incarnationsIGameEventMutList = new SortedDictionary<int, VersionAndIncarnation<IGameEventMutListIncarnation>>();
     this.incarnationsIUnitEventMutList = new SortedDictionary<int, VersionAndIncarnation<IUnitEventMutListIncarnation>>();
     this.incarnationsLocationMutList = new SortedDictionary<int, VersionAndIncarnation<LocationMutListIncarnation>>();
     this.incarnationsIRequestMutList = new SortedDictionary<int, VersionAndIncarnation<IRequestMutListIncarnation>>();
@@ -308,11 +308,11 @@ public class RootIncarnation {
     this.incarnationsIUnitComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<IUnitComponentMutBunchIncarnation>>(that.incarnationsIUnitComponentMutBunch);
     this.incarnationsNoImpulse = new SortedDictionary<int, VersionAndIncarnation<NoImpulseIncarnation>>(that.incarnationsNoImpulse);
     this.incarnationsLevel = new SortedDictionary<int, VersionAndIncarnation<LevelIncarnation>>(that.incarnationsLevel);
-    this.incarnationsOverlay = new SortedDictionary<int, VersionAndIncarnation<OverlayIncarnation>>(that.incarnationsOverlay);
     this.incarnationsExecutionState = new SortedDictionary<int, VersionAndIncarnation<ExecutionStateIncarnation>>(that.incarnationsExecutionState);
     this.incarnationsIPostActingUCWeakMutBunch = new SortedDictionary<int, VersionAndIncarnation<IPostActingUCWeakMutBunchIncarnation>>(that.incarnationsIPostActingUCWeakMutBunch);
     this.incarnationsIPreActingUCWeakMutBunch = new SortedDictionary<int, VersionAndIncarnation<IPreActingUCWeakMutBunchIncarnation>>(that.incarnationsIPreActingUCWeakMutBunch);
     this.incarnationsGame = new SortedDictionary<int, VersionAndIncarnation<GameIncarnation>>(that.incarnationsGame);
+    this.incarnationsIGameEventMutList = new SortedDictionary<int, VersionAndIncarnation<IGameEventMutListIncarnation>>(that.incarnationsIGameEventMutList);
     this.incarnationsIUnitEventMutList = new SortedDictionary<int, VersionAndIncarnation<IUnitEventMutListIncarnation>>(that.incarnationsIUnitEventMutList);
     this.incarnationsLocationMutList = new SortedDictionary<int, VersionAndIncarnation<LocationMutListIncarnation>>(that.incarnationsLocationMutList);
     this.incarnationsIRequestMutList = new SortedDictionary<int, VersionAndIncarnation<IRequestMutListIncarnation>>(that.incarnationsIRequestMutList);
