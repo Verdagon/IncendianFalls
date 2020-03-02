@@ -11,25 +11,40 @@ namespace Domino {
     private GameObject cameraObject;
     // Where it's supposed to be, after all the animations are done.
     private Vector3 cameraEndLookAtPosition;
+    private Vector3 cameraAngle;
 
     public Vector3 endLookAtPosition {  get { return cameraEndLookAtPosition; } }
 
     private readonly static float cameraSpeedPerSecond = 8.0f;
 
-    public CameraController(IClock clock, GameObject camera, Vector3 initialLookAtPosition) {
+    public CameraController(IClock clock, GameObject camera, Vector3 initialLookAtPosition, Vector3 cameraAngle) {
       this.clock = clock;
       this.cameraObject = camera;
       
       cameraEndLookAtPosition = initialLookAtPosition;
+      this.cameraAngle = cameraAngle;
       camera.transform.FromMatrix(CalculateCameraMatrix(cameraEndLookAtPosition));
     }
 
     private Matrix4x4 CalculateCameraMatrix(Vector3 lookAtPosition) {
       MatrixBuilder builder = new MatrixBuilder(Matrix4x4.identity);
-      builder.Rotate(Quaternion.AngleAxis(90 - 26.6f, Vector3.right));
-      builder.Translate(
-          new Vector3(lookAtPosition.x, lookAtPosition.y + 16, lookAtPosition.z - 8));
       // 26.6f is atan(5/10)
+      builder.Rotate(Quaternion.AngleAxis(90 - 26.6f, Vector3.right));
+
+
+      //float pitch = Vector3.Angle(-cameraAngle, Vector3.forward);
+      //float yaw = (float)(Math.Atan2(cameraAngle.x, cameraAngle.z) / Math.PI * 180);
+      //builder.Rotate(Quaternion.Euler(pitch, yaw, 0));
+
+      builder.Translate(
+    new Vector3(lookAtPosition.x, lookAtPosition.y + 16, lookAtPosition.z - 8));
+
+
+      //builder.Translate(
+      //    new Vector3(
+      //      lookAtPosition.x + cameraAngle.x,
+      //      lookAtPosition.y + cameraAngle.y,
+      //      lookAtPosition.z + cameraAngle.z));
       return builder.matrix;
     }
 

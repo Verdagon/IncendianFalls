@@ -91,7 +91,7 @@ namespace Geomancer {
       }
 
       if (maybeUnitDescription != null) {
-        unitView = instantiator.CreateUnitView(clock, null, tileCenter, maybeUnitDescription);
+        unitView = instantiator.CreateUnitView(clock, null, tileCenter, maybeUnitDescription, new Vector3(0, -8, 16));
         unitView.SetDescription(maybeUnitDescription);
       }
     }

@@ -99,7 +99,8 @@ namespace Domino {
       IClock clock,
         ITimer timer,
         Vector3 basePosition,
-        UnitDescription description) {
+        UnitDescription description,
+        Vector3 cameraAngle) {
       var unitGameObject = Instantiate(unitPrefab);
       var unitView = unitGameObject.GetComponent<UnitView>();
       unitView.Init(
@@ -107,7 +108,8 @@ namespace Domino {
           this,
           timer,
           basePosition,
-          description);
+          description,
+          cameraAngle);
       return unitView;
     }
 

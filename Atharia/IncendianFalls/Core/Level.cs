@@ -67,7 +67,10 @@ public class Level {
     }
     return this.root == that.root && id == that.id;
   }
-         public Terrain terrain {
+         public Vec3 cameraAngle {
+    get { return incarnation.cameraAngle; }
+  }
+  public Terrain terrain {
 
     get {
       if (root == null) {

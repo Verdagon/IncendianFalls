@@ -1,5 +1,6 @@
 
 mut struct Level {
+  cameraAngle: Vec3; // Vector from the look-at position to the camera.
   terrain: Terrain;
   units: MutSet:Unit;
   var controller: ?ILevelController;

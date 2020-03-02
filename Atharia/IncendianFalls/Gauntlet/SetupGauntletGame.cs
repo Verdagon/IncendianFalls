@@ -86,7 +86,6 @@ namespace Gauntlet {
               IUnitComponentMutBunch.New(context.root),
               true,
               5);
-      player.components.Add(context.root.EffectTriggererUCCreate().AsIUnitComponent());
       preGauntletLevel.EnterUnit(
           game,
           superstate.levelSuperstate,

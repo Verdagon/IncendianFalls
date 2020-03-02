@@ -129,7 +129,8 @@ namespace Domino {
         Instantiator instantiator,
         ITimer timer,
         Vector3 basePosition,
-        UnitDescription unitDescription) {
+        UnitDescription unitDescription,
+        Vector3 cameraAngle) {
       this.clock = clock;
       this.instantiator = instantiator;
       this.timer = timer;
@@ -144,6 +145,13 @@ namespace Domino {
       body.transform.SetParent(offsetter.transform, false);
 
       body.transform.localRotation = Quaternion.AngleAxis(50, new Vector3(1, 0, 0));
+      //body.transform.localRotation = Quaternion.FromToRotation(Vector3.back, cameraAngle);
+
+      //float pitch = Vector3.Angle(-cameraAngle, Vector3.forward);
+      //float yaw = (float)(Math.Atan2(-cameraAngle.x, -cameraAngle.z) / Math.PI * 180);
+      //body.transform.localRotation = Quaternion.Euler(pitch, yaw, 0);
+
+
       body.transform.localScale = new Vector3(.8f, .8f, .8f);
       body.transform.localPosition = new Vector3(0, 0, -.25f);
 

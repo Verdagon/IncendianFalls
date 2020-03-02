@@ -118,7 +118,12 @@ namespace Geomancer {
       terrainPresenter.TerrainTileClicked += HandleTerrainTileClicked;
       terrainPresenter.TerrainTileHovered += HandleTerrainTileHovered;
 
-      cameraController = new CameraController(clock, cameraObject, level.terrain.GetTileCenter(new Location(0, 0, 0)).ToUnity());
+      cameraController =
+        new CameraController(
+          clock,
+          cameraObject,
+          level.terrain.GetTileCenter(new Location(0, 0, 0)).ToUnity(),
+          new Vector3(0, 5, -10));
     }
 
 

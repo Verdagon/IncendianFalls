@@ -34,6 +34,7 @@ namespace IncendianFalls {
 
       cliffLevel =
           game.root.EffectLevelCreate(
+          new Vec3(0, -8, 16),
               terrain, units, NullILevelController.Null, game.time);
       levelSuperstate = new LevelSuperstate(cliffLevel);
 

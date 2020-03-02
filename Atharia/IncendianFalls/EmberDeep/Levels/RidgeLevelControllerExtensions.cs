@@ -11,6 +11,7 @@ namespace Atharia.Model {
         Root root) {
       level =
         root.EffectLevelCreate(
+          new Vec3(0, -8, 16),
           root.EffectTerrainCreate(
             PentagonPattern9.makePentagon9Pattern(),
             0.3f,

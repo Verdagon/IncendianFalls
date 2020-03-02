@@ -27,6 +27,7 @@ namespace Atharia.Model {
 
       level =
           game.root.EffectLevelCreate(
+              new Vec3(5.6f, -5.6f, 16),
               terrain, units, NullILevelController.Null, game.time);
       levelSuperstate = new LevelSuperstate(level);
 

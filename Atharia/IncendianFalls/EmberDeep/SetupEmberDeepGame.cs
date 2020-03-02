@@ -63,7 +63,6 @@ namespace EmberDeep {
               IUnitComponentMutBunch.New(context.root),
               true,
               5);
-      player.components.Add(context.root.EffectTriggererUCCreate().AsIUnitComponent());
       firstLevel.EnterUnit(
           game,
           superstate.levelSuperstate,
@@ -93,6 +92,7 @@ namespace EmberDeep {
 
       level =
           context.root.EffectLevelCreate(
+          new Vec3(0, -8, 16),
               terrain, units, NullILevelController.Null, game.time);
       levelSuperstate = new LevelSuperstate(level);
 

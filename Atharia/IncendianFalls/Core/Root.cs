@@ -17209,6 +17209,7 @@ public class Root {
     }
   }
   public Level EffectLevelCreate(
+      Vec3 cameraAngle,
       Terrain terrain,
       UnitMutSet units,
       ILevelController controller,
@@ -17220,6 +17221,7 @@ public class Root {
     var id = NewId();
     var incarnation =
         new LevelIncarnation(
+            cameraAngle,
             terrain.id,
             units.id,
             controller.id,
@@ -17256,12 +17258,13 @@ public class Root {
      
   public int GetLevelHash(int id, int version, LevelIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.terrain.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.units.GetDeterministicHashCode();
+    result += id * version * 1 * incarnation.cameraAngle.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.terrain.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.units.GetDeterministicHashCode();
     if (!object.ReferenceEquals(incarnation.controller, null)) {
-      result += id * version * 3 * incarnation.controller.GetDeterministicHashCode();
+      result += id * version * 4 * incarnation.controller.GetDeterministicHashCode();
     }
-    result += id * version * 4 * incarnation.time.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.time.GetDeterministicHashCode();
     return result;
   }
      
@@ -17338,6 +17341,7 @@ public class Root {
     } else {
       var newIncarnation =
           new LevelIncarnation(
+              oldIncarnationAndVersion.incarnation.cameraAngle,
               oldIncarnationAndVersion.incarnation.terrain,
               oldIncarnationAndVersion.incarnation.units,
               newValue.id,
@@ -17363,6 +17367,7 @@ public class Root {
     } else {
       var newIncarnation =
           new LevelIncarnation(
+              oldIncarnationAndVersion.incarnation.cameraAngle,
               oldIncarnationAndVersion.incarnation.terrain,
               oldIncarnationAndVersion.incarnation.units,
               oldIncarnationAndVersion.incarnation.controller,

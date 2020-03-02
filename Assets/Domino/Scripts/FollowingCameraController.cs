@@ -25,7 +25,12 @@ namespace Domino {
       cameraEndLookAtLocation = game.player.location;
       var cameraEndLookAtPosition = game.level.terrain.GetTileCenter(cameraEndLookAtLocation).ToUnity();
 
-      this.cameraController = new CameraController(clock, camera, cameraEndLookAtPosition);
+      this.cameraController =
+        new CameraController(
+          clock,
+          camera,
+          cameraEndLookAtPosition,
+          game.level.cameraAngle.ToUnity());
       this.game = game;
 
       this.game.AddObserver(this);
@@ -50,7 +55,9 @@ namespace Domino {
     public void OnGameEffect(IGameEffect effect) { effect.visit(this); }
     public void visitGameCreateEffect(GameCreateEffect effect) { }
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
-    public void visitGameSetLevelEffect(GameSetLevelEffect effect) { }
+    public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
+      //cameraController.SetCameraAngle(game.level.cameraAngle.ToUnity());
+    }
     public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
     public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) {
       RefollowPlayer();
