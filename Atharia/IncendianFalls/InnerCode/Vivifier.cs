@@ -211,5 +211,25 @@ namespace IncendianFalls {
               14);
       level.EnterUnit(levelSuperstate, enemy, location);
     }
+    public static void AddIrkling(Level level, LevelSuperstate levelSuperstate, Location location) {
+      var components = IUnitComponentMutBunch.New(level.root);
+      components.Add(level.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(level.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
+      Unit enemy =
+          level.root.EffectUnitCreate(
+              level.root.EffectIUnitEventMutListCreate(),
+              true,
+              0,
+              location,
+              "Irkling",
+              4, 4,
+              0, 0,
+              600,
+              level.time,
+              components,
+              false,
+              4);
+      level.EnterUnit(levelSuperstate, enemy, location);
+    }
   }
 }

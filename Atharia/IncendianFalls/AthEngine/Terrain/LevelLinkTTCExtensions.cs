@@ -15,7 +15,7 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit interactingUnit,
         Location containingTileLocation) {
-      Travel(game, superstate, unit:, levelLink.destinationLevel, levelLink.destinationLevelLocation);
+      Travel(game, superstate, interactingUnit, levelLink.destinationLevel, levelLink.destinationLevelLocation);
 
       return "";
     }

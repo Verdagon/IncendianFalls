@@ -125,16 +125,53 @@ namespace Atharia.Model {
       return Unit.Null;
     }
 
-    public Location FindMarker(string name) {
+    public void RemoveSimplePresenceTriggers(string name, int expectAtLeast) {
+      foreach (var locationAndTrigger in FindSimplePresenceTriggers(name, expectAtLeast)) {
+        level.terrain.tiles[locationAndTrigger.Key].components.Remove(locationAndTrigger.Value.AsITerrainTileComponent());
+        locationAndTrigger.Value.Destruct();
+      }
+    }
+
+    public Location FindMarkerLocation(string name) {
+      return FindMarker(name).Key;
+    }
+
+    public KeyValuePair<Location, MarkerTTC> FindMarker(string name) {
+      return FindMarkers(name, 1)[0];
+    }
+
+    public List<KeyValuePair<Location, MarkerTTC>> FindMarkers(string name, int expectAtLeast) {
+      var locationsAndMarkers = new List<KeyValuePair<Location, MarkerTTC>>();
       foreach (var locationAndTile in level.terrain.tiles) {
         foreach (var marker in locationAndTile.Value.components.GetAllMarkerTTC()) {
           if (marker.name == name) {
-            return locationAndTile.Key;
+            locationsAndMarkers.Add(new KeyValuePair<Location, MarkerTTC>(locationAndTile.Key, marker));
           }
         }
       }
-      Asserts.Assert(false);
-      return null;
+      Asserts.Assert(locationsAndMarkers.Count >= expectAtLeast, "Couldn't find enough markers with name " + name);
+      return locationsAndMarkers;
+    }
+
+    public Location FindSimplePresenceTriggerLocation(string name) {
+      return FindSimplePresenceTrigger(name).Key;
+    }
+
+    public KeyValuePair<Location, SimplePresenceTriggerTTC> FindSimplePresenceTrigger(string name) {
+      return FindSimplePresenceTriggers(name, 1)[0];
+    }
+
+    public List<KeyValuePair<Location, SimplePresenceTriggerTTC>> FindSimplePresenceTriggers(string name, int expectAtLeast) {
+      var locationsAndTriggers = new List<KeyValuePair<Location, SimplePresenceTriggerTTC>>();
+      foreach (var locationAndTile in level.terrain.tiles) {
+        foreach (var trigger in locationAndTile.Value.components.GetAllSimplePresenceTriggerTTC()) {
+          if (trigger.name == name) {
+            locationsAndTriggers.Add(new KeyValuePair<Location, SimplePresenceTriggerTTC>(locationAndTile.Key, trigger));
+          }
+        }
+      }
+      Asserts.Assert(locationsAndTriggers.Count >= expectAtLeast, "Couldn't find enough markers with name " + name);
+      return locationsAndTriggers;
     }
 
     public Unit FindNearestLiveUnit(

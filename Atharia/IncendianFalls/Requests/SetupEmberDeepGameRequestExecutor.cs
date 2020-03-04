@@ -11,7 +11,11 @@ namespace IncendianFalls {
         SSContext context,
         out Superstate superstate,
         SetupEmberDeepGameRequest request) {
-      return SetupEmberDeepGame.SetupGame(context, out superstate, request.randomSeed, request.squareLevelsOnly);
+      return SetupEmberDeepGame.SetupGame(
+        context,
+        out superstate,
+        request.randomSeed,
+        request.squareLevelsOnly);
     }
 
   }

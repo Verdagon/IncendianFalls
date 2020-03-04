@@ -94,6 +94,7 @@ namespace AthPlayer {
     }
 
     private void OverlayClosed(int buttonIndex) {
+      Debug.Log("Clicked " + buttonIndex);
       timer.SetTimeSpeedMultiplier(1f);
       ss.RequestTrigger(game.id, triggerNames[buttonIndex]);
     }

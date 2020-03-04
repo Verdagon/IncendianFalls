@@ -554,6 +554,21 @@ namespace AthPlayer {
               hpRatio,
               mpRatio));
       detailsByClassId.Add(
+          "Irkling",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, new UnityEngine.Color(0.0f, 0.6f, 0.0f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "v",
+                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  false, new UnityEngine.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
           "Ravashrike",
           new UnitDescription(
               unit.id,

@@ -181,10 +181,8 @@ public class OverlayPanelView : MonoBehaviour {
       }
     }
 
-    if (timeSinceOpenMs >= fadeOutEndMs) {
-      SetChromeFadeRatio(0);
-      gameObject.SetActive(false);
-      OverlayClosed?.Invoke(0);
+    if (fadeOutEndMs != 0 && timeSinceOpenMs >= fadeOutEndMs) {
+      Close(0);
     }
   }
 
@@ -209,6 +207,11 @@ public class OverlayPanelView : MonoBehaviour {
   }
 
   public void Clicked(int buttonIndex) {
+    Close(buttonIndex);
+  }
+
+  private void Close(int buttonIndex) {
+    SetChromeFadeRatio(0);
     gameObject.SetActive(false);
     OverlayClosed?.Invoke(buttonIndex);
   }

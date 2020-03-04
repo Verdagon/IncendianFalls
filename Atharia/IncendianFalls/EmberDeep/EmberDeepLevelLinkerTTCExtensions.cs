@@ -30,7 +30,8 @@ namespace Atharia.Model {
           out var nextLevelSuperstate,
           out var nextLevelEntryLocation,
           game,
-          superstate);
+          superstate,
+          thisLevelDepth + 1);
 
       // Link to the next level.
       var levelLink = game.root.EffectLevelLinkTTCCreate(nextLevel, nextLevelEntryLocation);
@@ -51,7 +52,9 @@ namespace Atharia.Model {
         out LevelSuperstate levelSuperstate,
         out Location entryLocation,
         Game game,
-        Superstate superstate) {
+        Superstate superstate,
+        int depth) {
+      Asserts.Assert(depth == 0);
       CaveLevelControllerExtensions.LoadLevel(
         out level,
         out levelSuperstate,

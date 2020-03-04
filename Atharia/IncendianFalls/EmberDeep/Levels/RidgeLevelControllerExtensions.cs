@@ -42,8 +42,8 @@ namespace Atharia.Model {
 
       level.controller = root.EffectRidgeLevelControllerCreate(level).AsILevelController();
 
-      entryLocation = levelSuperstate.FindMarker("start");
-      exitLocation = levelSuperstate.FindMarker("retreatTo");
+      entryLocation = levelSuperstate.FindMarkerLocation("start");
+      exitLocation = levelSuperstate.FindMarkerLocation("retreatTo");
     }
 
     public static string GetName(this RidgeLevelController obj) {
@@ -126,7 +126,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "introLine3Done") {
-        var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarker("ravashrikeHopTo1");
+        var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo1");
         game.events.Add(new FlyCameraEvent(ravashrikeHopTo1, new Vec3(5, 5, 5), 300, "flyCameraToRavashrikeDone").AsIGameEvent());
       }
       if (triggerName == "flyCameraToRavashrikeDone") {
@@ -139,7 +139,7 @@ namespace Atharia.Model {
       if (triggerName == "flyToBrother1Done") {
         game.events.Add(new SetGameSpeedEvent(40).AsIGameEvent());
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
-        var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarker("ravashrikeHopTo1");
+        var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo1");
         Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true);
         game.events.Add(new WaitEvent(1000, "fire1").AsIGameEvent());
       }
@@ -151,7 +151,7 @@ namespace Atharia.Model {
       }
       if (triggerName == "step2") {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
-        var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarker("ravashrikeHopTo2");
+        var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo2");
         Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true);
         game.events.Add(new WaitEvent(1000, "fire2").AsIGameEvent());
       }
@@ -163,7 +163,7 @@ namespace Atharia.Model {
       }
       if (triggerName == "step3") {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
-        var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarker("ravashrikeHopTo3");
+        var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo3");
         Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true);
         game.events.Add(new WaitEvent(1000, "fire3").AsIGameEvent());
       }
@@ -176,7 +176,7 @@ namespace Atharia.Model {
       if (triggerName == "ravashrikeAttack") {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
         var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
-        var retreatTo = superstate.levelSuperstate.FindMarker("retreatTo");
+        var retreatTo = superstate.levelSuperstate.FindMarkerLocation("retreatTo");
         Actions.Bump(game, superstate, ravashrike, chronomancer, 1.0f, true);
         Actions.Step(game, superstate, chronomancer, retreatTo, true);
         game.events.Add(new WaitEvent(1000, "ravashrikeAttackDone").AsIGameEvent());

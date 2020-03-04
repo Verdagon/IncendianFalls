@@ -40,26 +40,83 @@ namespace EmberDeep {
             null,
             null);
 
-      RidgeLevelControllerExtensions.LoadLevel(
-        out var firstLevel,
-        out var firstLevelSuperstate,
-        out var ridgeEntryLocation,
-        out var ridgeExitLocation,
-        game,
-        superstate);
+      bool playBackstory = false;
+      bool playTutorial = true;
+      bool playGame = false;
 
-      TutorialLevelControllerExtensions.LoadLevel(
-        out var tutorialLevel, out var tutorialLevelSuperstate, out var tutorialEntryLocation, game);
+      Level startLevel = Level.Null;
+      LevelSuperstate startLevelSuperstate = null;
+      Location startLevelEntryLocation = null;
 
-      //EmberDeepLevelLinkerTTCExtensions.MakeNextLevel(
-      //    out var firstLevel,
-      //    out var firstLevelSuperstate,
-      //    out var entryLocation,
-      //    game,
-      //    superstate);
+      Level previousLevel = Level.Null;
+      Location previousLevelExitLocation = null;
 
-      game.level = firstLevel;
-      superstate.levelSuperstate = firstLevelSuperstate;
+      if (playBackstory) {
+        RidgeLevelControllerExtensions.LoadLevel(
+          out var level,
+          out var levelSuperstate,
+          out var entryLocation,
+          out var exitLocation,
+          game.root);
+        if (!startLevel.Exists()) {
+          startLevel = level;
+          startLevelSuperstate = levelSuperstate;
+          startLevelEntryLocation = entryLocation;
+        }
+        if (previousLevel.Exists()) {
+          previousLevel.terrain.tiles[previousLevelExitLocation].components.Add(
+            game.root.EffectLevelLinkTTCCreate(level, entryLocation).AsITerrainTileComponent());
+        }
+        previousLevel = level;
+        previousLevelExitLocation = exitLocation;
+      }
+
+      if (playTutorial) {
+        TutorialLevelControllerExtensions.LoadLevel(
+          out var level,
+          out var levelSuperstate,
+          out var entryLocation,
+          out var exitLocation,
+          game.root);
+        if (!startLevel.Exists()) {
+          startLevel = level;
+          startLevelSuperstate = levelSuperstate;
+          startLevelEntryLocation = entryLocation;
+        }
+        if (previousLevel.Exists()) {
+          previousLevel.terrain.tiles[previousLevelExitLocation].components.Add(
+            game.root.EffectLevelLinkTTCCreate(level, entryLocation).AsITerrainTileComponent());
+        }
+        previousLevel = level;
+        previousLevelExitLocation = exitLocation;
+      }
+
+      if (playGame) {
+        EmberDeepLevelLinkerTTCExtensions.MakeNextLevel(
+            out var level,
+            out var levelSuperstate,
+            out var entryLocation,
+            game,
+            superstate,
+            0);
+        Location exitLocation = null;
+        if (!startLevel.Exists()) {
+          startLevel = level;
+          startLevelSuperstate = levelSuperstate;
+          startLevelEntryLocation = entryLocation;
+        }
+        if (previousLevel.Exists()) {
+          previousLevel.terrain.tiles[previousLevelExitLocation].components.Add(
+            game.root.EffectLevelLinkTTCCreate(level, entryLocation).AsITerrainTileComponent());
+        }
+        previousLevel = level;
+        previousLevelExitLocation = exitLocation;
+      }
+
+      Asserts.Assert(startLevel.Exists());
+
+      game.level = startLevel;
+      superstate.levelSuperstate = startLevelSuperstate;
 
       var player =
           context.root.EffectUnitCreate(
@@ -75,10 +132,10 @@ namespace EmberDeep {
               IUnitComponentMutBunch.New(context.root),
               true,
               5);
-      firstLevel.EnterUnit(
+      game.level.EnterUnit(
           superstate.levelSuperstate,
           player,
-          entryLocation);
+          startLevelEntryLocation);
       game.player = player;
 
       game.level.controller.SimpleTrigger(game, superstate, "levelStart");
