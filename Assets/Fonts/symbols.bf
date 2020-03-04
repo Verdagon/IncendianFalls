@@ -171,6 +171,24 @@
 	</glyph>
 </collection>
 
+<collection unicode="U+35" svg="false" auto_generate="false">
+	<selected id="1"/>
+	<glyph id="1" left="0" right="72">
+		<layer name= "Layer" visible="true">
+			<path data="B 15.2153903092,-2.6845175456 L -8.6690332369,36.0000000000 L 13.6654833815,74.6845175456 L 58.3345166185,74.6845175456 L 80.6690332369,36.0000000000 L 58.3345166185,-2.6845175456 L 15.2153903092,-2.6845175456" />
+		</layer>
+	</glyph>
+</collection>
+
+<collection unicode="U+36" svg="false" auto_generate="false">
+	<selected id="1"/>
+	<glyph id="1" left="0" right="72">
+		<layer name= "Layer" visible="true">
+			<path data="S 86.9040000000,36.0000000000 L 36.0000000000,-13.6970000000 L -13.6970000000,36.0000000000 L 36.0000000000,86.9040000000 L 86.9040000000,36.0000000000" />
+		</layer>
+	</glyph>
+</collection>
+
 <collection unicode="U+61" svg="false" auto_generate="false">
 	<selected id="1"/>
 	<glyph id="1" left="0" right="72">

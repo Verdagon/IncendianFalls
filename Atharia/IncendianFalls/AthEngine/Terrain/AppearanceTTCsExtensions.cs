@@ -15,6 +15,24 @@ namespace Atharia.Model {
       return new Atharia.Model.Void();
     }
   }
+  public static class TreeTTCExtensions {
+    public static Atharia.Model.Void Destruct(this TreeTTC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+  }
+  public static class WaterTTCExtensions {
+    public static Atharia.Model.Void Destruct(this WaterTTC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+  }
+  public static class FloorTTCExtensions {
+    public static Atharia.Model.Void Destruct(this FloorTTC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+  }
   public static class DownStairsTTCExtensions {
     public static Atharia.Model.Void Destruct(this DownStairsTTC obj) {
       obj.Delete();

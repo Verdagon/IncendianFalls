@@ -13,7 +13,7 @@ namespace Atharia.Model {
         int depth) {
       bool considerCornersAdjacent = true;
 
-      var terrain = CellularAutomataTerrainGenerator.Generate(game.root, PentagonPattern9.makePentagon9Pattern(), game.rand, considerCornersAdjacent, 20.0f);
+      var terrain = CellularAutomataTerrainGenerator.Generate(game.root, PentagonPattern9.makePentagon9Pattern(), game.rand, considerCornersAdjacent, 48.0f);
       foreach (var locationAndTile in terrain.tiles) {
         locationAndTile.Value.components.Add(game.root.EffectMudTTCCreate().AsITerrainTileComponent());
       }

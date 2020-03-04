@@ -100,3 +100,22 @@ imm struct FlyCameraEvent {
   transitionTimeMs: Int; // Time to get to the specified camera
   endTriggerName: Str;
 }
+
+imm struct WaitEvent {
+  WaitEvent isa IGameEvent;
+
+  timeMs: Int; // Time until it calls the trigger again
+  endTriggerName: Str;
+}
+
+imm struct SetGameSpeedEvent {
+  SetGameSpeedEvent isa IGameEvent;
+
+  percent: Int; // 100 for normal speed, 0 for paused, 200 for double speed.
+}
+
+imm struct NarrateEvent {
+  NarrateEvent isa IGameEvent;
+
+  text: Str; // 100 for normal speed, 0 for paused, 200 for double speed.
+}

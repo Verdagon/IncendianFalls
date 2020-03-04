@@ -86,7 +86,7 @@ namespace AthPlayer {
       switch (terrain.pattern.name) {
         case "square":
           if (patternTile.shapeIndex == 0) {
-            symbolName = "j";
+            symbolName = "six";
           }
           break;
         case "pentagon9":
@@ -98,7 +98,7 @@ namespace AthPlayer {
           break;
         case "hex":
           if (patternTile.shapeIndex == 0) {
-            symbolName = "A";
+            symbolName = "five";
           }
           break;
       }
@@ -179,13 +179,8 @@ namespace AthPlayer {
         // someday, we should have these if-else cases just call into a MemberToViewMapper...
 
         if (ttc is GrassTTCAsITerrainTileComponent) {
-          if (terrainTile.elevation == 1) {
-            topColor = new UnityEngine.Color(.3f, .15f, 0);
-            sideColor = new UnityEngine.Color(.2f, .1f, 0);
-          } else if (terrainTile.elevation == 2) {
-            topColor = new UnityEngine.Color(.43f, .21f, 0);
-            sideColor = new UnityEngine.Color(.3f, .15f, 0);
-          }
+            topColor = new UnityEngine.Color(0f, .3f, 0);
+            sideColor = new UnityEngine.Color(0f, .2f, 0);
         } else if (ttc is StoneTTCAsITerrainTileComponent) {
           if (terrainTile.elevation == 1) {
             topColor = new UnityEngine.Color(.2f, .2f, .2f);
@@ -195,8 +190,8 @@ namespace AthPlayer {
             sideColor = new UnityEngine.Color(.2f, .2f, .2f);
           }
         } else if (ttc is DirtTTCAsITerrainTileComponent) {
-          topColor = new UnityEngine.Color(.6f, .3f, 0);
-          sideColor = new UnityEngine.Color(.4f, .2f, 0);
+          topColor = new UnityEngine.Color(.4f, .133f, 0);
+          sideColor = new UnityEngine.Color(.266f, .1f, 0);
         } else if (ttc is CaveWallTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.35f, .125f, 0);
           sideColor = new UnityEngine.Color(.25f, .083f, 0);
@@ -214,6 +209,14 @@ namespace AthPlayer {
         } else if (ttc is CliffTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.2f, .1f, 0f);
           sideColor = new UnityEngine.Color(.1f, .05f, 0f);
+          outlineColor = new UnityEngine.Color(0f, 0f, 0f);
+        } else if (ttc is WaterTTCAsITerrainTileComponent) {
+          topColor = new UnityEngine.Color(0f, .4f, .8f);
+          sideColor = new UnityEngine.Color(0f, .45f, .85f);
+          outlineColor = new UnityEngine.Color(0f, 0f, 0f);
+        } else if (ttc is FloorTTCAsITerrainTileComponent) {
+          topColor = new UnityEngine.Color(.2f, .2f, .2f);
+          sideColor = new UnityEngine.Color(.15f, .15f, .15f);
           outlineColor = new UnityEngine.Color(0f, 0f, 0f);
         } else if (ttc is MagmaTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.4f, 0f, 0f);
@@ -310,6 +313,19 @@ namespace AthPlayer {
                   true,
                   new UnityEngine.Color(1f, 1f, 1f));
           featureLocked = true;
+        } else if (ttc is TreeTTCAsITerrainTileComponent) {
+          feature =
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "n",
+                        50,
+                      new UnityEngine.Color(0, .5f, 0),
+                      0,
+                      OutlineMode.WithOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  false,
+                  new UnityEngine.Color(0f, .3f, 0f));
         } else if (ttc is CaveTTCAsITerrainTileComponent) {
               feature =
                   new ExtrudedSymbolDescription(
@@ -327,6 +343,7 @@ namespace AthPlayer {
         } else if (ttc is LevelLinkTTCAsITerrainTileComponent) {
         } else if (ttc is IncendianFallsLevelLinkerTTCAsITerrainTileComponent) {
         } else if (ttc is WallTTCAsITerrainTileComponent) {
+        } else if (ttc is MarkerTTCAsITerrainTileComponent) {
         } else if (ttc is ItemTTCAsITerrainTileComponent itemTTC) {
           var item = itemTTC.obj.item;
           if (item is ArmorAsIItem) {

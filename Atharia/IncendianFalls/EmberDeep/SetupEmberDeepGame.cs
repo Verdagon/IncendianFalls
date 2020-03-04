@@ -40,12 +40,24 @@ namespace EmberDeep {
             null,
             null);
 
-      EmberDeepLevelLinkerTTCExtensions.MakeNextLevel(
-          out var firstLevel,
-          out var firstLevelSuperstate,
-          out var entryLocation,
-          game,
-          superstate);
+      RidgeLevelControllerExtensions.LoadLevel(
+        out var firstLevel,
+        out var firstLevelSuperstate,
+        out var ridgeEntryLocation,
+        out var ridgeExitLocation,
+        game,
+        superstate);
+
+      TutorialLevelControllerExtensions.LoadLevel(
+        out var tutorialLevel, out var tutorialLevelSuperstate, out var tutorialEntryLocation, game);
+
+      //EmberDeepLevelLinkerTTCExtensions.MakeNextLevel(
+      //    out var firstLevel,
+      //    out var firstLevelSuperstate,
+      //    out var entryLocation,
+      //    game,
+      //    superstate);
+
       game.level = firstLevel;
       superstate.levelSuperstate = firstLevelSuperstate;
 
@@ -55,7 +67,7 @@ namespace EmberDeep {
               true,
               0,
               new Location(0, 0, 0),
-              "chronomancer",
+              "Chronomancer",
               90, 90,
               100, 100,
               600,
@@ -64,11 +76,12 @@ namespace EmberDeep {
               true,
               5);
       firstLevel.EnterUnit(
-          game,
           superstate.levelSuperstate,
           player,
           entryLocation);
       game.player = player;
+
+      game.level.controller.SimpleTrigger(game, superstate, "levelStart");
 
       return game;
     }

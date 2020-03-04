@@ -70,6 +70,27 @@ namespace Geomancer {
       var frontColor = highlighted ? new Color(.1f, .1f, .1f) : new Color(0f, 0, 0f);
       var sideColor = highlighted ? new Color(.1f, .1f, .1f) : new Color(0f, 0, 0f);
 
+      string symbolName = "a";
+      switch (pattern.name) {
+        case "square":
+          if (patternTile.shapeIndex == 0) {
+            symbolName = "six";
+          }
+          break;
+        case "pentagon9":
+          if (patternTile.shapeIndex == 0) {
+            symbolName = "i";
+          } else if (patternTile.shapeIndex == 1) {
+            symbolName = "h";
+          }
+          break;
+        case "hex":
+          if (patternTile.shapeIndex == 0) {
+            symbolName = "five";
+          }
+          break;
+      }
+
       return
         new TileDescription(
               1,
@@ -78,7 +99,7 @@ namespace Geomancer {
               new ExtrudedSymbolDescription(
                 RenderPriority.TILE,
                 new SymbolDescription(
-                    patternTile.shapeIndex == 0 ? "i" : "h",
+                    symbolName,
                     100,
                     frontColor,
                     patternTile.rotateDegrees,

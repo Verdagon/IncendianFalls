@@ -335,7 +335,7 @@ namespace IncendianFalls {
       var location =
         levelSuperstate.GetNRandomWalkableLocations(
             level.terrain, game.rand, 1, true, true)[0];
-      level.EnterUnit(game, levelSuperstate, unit, location);
+      level.EnterUnit(levelSuperstate, unit, location);
     }
 
     public static void PlaceNovafaire(
@@ -364,7 +364,7 @@ namespace IncendianFalls {
       var location =
         levelSuperstate.GetNRandomWalkableLocations(
             level.terrain, game.rand, 1, true, true)[0];
-      level.EnterUnit(game, levelSuperstate, unit, location);
+      level.EnterUnit(levelSuperstate, unit, location);
     }
 
     public static void PlaceDraxling(
@@ -394,7 +394,7 @@ namespace IncendianFalls {
       var location =
         levelSuperstate.GetNRandomWalkableLocations(
             level.terrain, game.rand, 1, true, true)[0];
-      level.EnterUnit(game, levelSuperstate, unit, location);
+      level.EnterUnit(levelSuperstate, unit, location);
     }
 
     public static void PlaceLornix(
@@ -425,7 +425,7 @@ namespace IncendianFalls {
       var location =
         levelSuperstate.GetNRandomWalkableLocations(
             level.terrain, game.rand, 1, true, true)[0];
-      level.EnterUnit(game, levelSuperstate, unit, location);
+      level.EnterUnit(levelSuperstate, unit, location);
     }
 
     public static void PlaceYoten(
@@ -455,7 +455,7 @@ namespace IncendianFalls {
       var location =
         levelSuperstate.GetNRandomWalkableLocations(
             level.terrain, game.rand, 1, true, true)[0];
-      level.EnterUnit(game, levelSuperstate, unit, location);
+      level.EnterUnit(levelSuperstate, unit, location);
     }
 
     public static void PlaceSpiriad(
@@ -485,7 +485,7 @@ namespace IncendianFalls {
       var location =
         levelSuperstate.GetNRandomWalkableLocations(
             level.terrain, game.rand, 1, true, true)[0];
-      level.EnterUnit(game, levelSuperstate, unit, location);
+      level.EnterUnit(levelSuperstate, unit, location);
     }
 
 
@@ -517,7 +517,7 @@ namespace IncendianFalls {
       var location =
         levelSuperstate.GetNRandomWalkableLocations(
             level.terrain, game.rand, 1, true, true)[0];
-      level.EnterUnit(game, levelSuperstate, unit, location);
+      level.EnterUnit(levelSuperstate, unit, location);
     }
 
     public static void FillWithUnits(

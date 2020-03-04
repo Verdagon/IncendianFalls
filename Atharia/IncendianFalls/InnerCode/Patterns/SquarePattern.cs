@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Atharia.Model;
+using System;
 using System.Collections.Generic;
-using Atharia.Model;
 
 namespace IncendianFalls {
   public class SquarePattern {
@@ -9,10 +9,15 @@ namespace IncendianFalls {
         "square",
         new Vec2ImmListImmList(new Vec2ImmList[] { // cornersByShapeIndex
           new Vec2ImmList(new Vec2[] { // corner for shape 0
-            new Vec2(-0.5f, 0.5f), // top left
-            new Vec2(-0.5f, -0.5f), // low left
-            new Vec2(0.5f, -0.5f), // low right
-            new Vec2(0.5f, 0.5f), // top right
+            //new Vec2(-0.5f, 0.5f), // top left
+            //new Vec2(-0.5f, -0.5f), // low left
+            //new Vec2(0.5f, -0.5f), // low right
+            //new Vec2(0.5f, 0.5f), // top right
+            
+            new Vec2(0f, 1f), // top
+            new Vec2(-1f, 0f), // left
+            new Vec2(0f, -1f), // bottom
+            new Vec2(1f, 0f), // right
           }),
         }),
         new PatternTileImmList(new PatternTile[] { // patternTiles
@@ -48,8 +53,10 @@ namespace IncendianFalls {
             })
           )
         }),
-        new Vec2(1f, 0), // xOffset
-        new Vec2(0, 1f) // yOffset
+        //new Vec2(1f, 0), // xOffset
+        //new Vec2(0, 1f) // yOffset
+        new Vec2(1.41f / 2, -1.41f / 2), // xOffset
+        new Vec2(1.41f / 2, 1.41f / 2) // yOffset
       );
     }
   }

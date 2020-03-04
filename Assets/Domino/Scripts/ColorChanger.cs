@@ -29,7 +29,9 @@ public class ColorChanger : MonoBehaviour {
       return materialClone;
     } else {
       Material materialClone = Instantiate(opaqueMaterial);
+      //Debug.Log("Setting color to " + color.r + " " + color.g + " " + color.b);
       materialClone.color = color;
+      //Debug.Log("Now color is " + materialClone.color.r + " " + materialClone.color.g + " " + materialClone.color.b);
       return materialClone;
     }
   }

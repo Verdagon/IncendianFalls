@@ -1,39 +1,67 @@
 SetupEmberDeepGameRequest(1525224206, false)
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:143: 553012556
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:153: -1452896176
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:153: 601802585
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:462: -1452896176
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:462: 601802585
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:467: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:469: 41455356
-MoveRequest(5, Location(-25, -6, 1))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 41455356
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -2011984642
-FollowDirectiveRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:389: -2011984642
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:396: 229542656
-FollowDirectiveRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:389: 229542656
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:396: -1823897342
-FollowDirectiveRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:389: -1823897342
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:396: 417629956
-FollowDirectiveRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:389: 417629956
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:396: -1635810042
-FollowDirectiveRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:389: -1635810042
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:396: 605717256
-FollowDirectiveRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:389: 605717256
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:396: -1447722742
-FollowDirectiveRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:389: -1447722742
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:396: 793804556
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:469: 416302002
+TriggerRequest(5, "introLine1Done")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "introLine2Done")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "introLine3Done")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "flyCameraToRavashrikeDone")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "wait1Done")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "flyToBrother1Done")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "fire1")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "step2")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "fire2")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "step3")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "fire3")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "fireAndStep3Done")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "ravashrikeAttackDone")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "realizationDone")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002
+TriggerRequest(5, "cinematicDone")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 416302002
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 416302002

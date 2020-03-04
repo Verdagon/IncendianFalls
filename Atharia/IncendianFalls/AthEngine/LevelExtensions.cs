@@ -31,7 +31,6 @@ namespace Atharia.Model {
 
     public static void EnterUnit(
         this Level obj,
-        Game game,
         LevelSuperstate levelSuperstate,
         Unit unit,
         Location location) {

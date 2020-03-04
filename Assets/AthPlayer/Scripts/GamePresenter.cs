@@ -59,6 +59,10 @@ namespace AthPlayer {
       game.events.AddObserver(this);
 
       LoadLevel();
+
+      foreach (var e in game.events) {
+        e.Visit(this);
+      }
     }
 
     public TerrainPresenter GetTerrainPresenter() { return terrainPresenter; }
@@ -169,16 +173,22 @@ namespace AthPlayer {
     public void Visit(FlyCameraEventAsIGameEvent obj) {
       var cameraEndLookAtPosition = game.level.terrain.GetTileCenter(obj.obj.lookAt).ToUnity();
       cameraController.StartMovingCameraTo(cameraEndLookAtPosition, obj.obj.transitionTimeMs);
-      timer.SetTimeSpeedMultiplier(0f);
-      cinematicTimer.ScheduleTimer(
-        obj.obj.transitionTimeMs,
-        () => {
-          timer.SetTimeSpeedMultiplier(1f);
-          ss.RequestTrigger(game.id, obj.obj.endTriggerName);
-        });
+      cinematicTimer.ScheduleTimer(obj.obj.transitionTimeMs, () => ss.RequestTrigger(game.id, obj.obj.endTriggerName));
     }
     public void Visit(ShowOverlayEventAsIGameEvent obj) {
       overlayPresenter.ShowOverlay(obj.obj);
+    }
+
+    public void Visit(SetGameSpeedEventAsIGameEvent obj) {
+      timer.SetTimeSpeedMultiplier(obj.obj.percent / 100f);
+    }
+
+    public void Visit(WaitEventAsIGameEvent obj) {
+      cinematicTimer.ScheduleTimer(obj.obj.timeMs, () => ss.RequestTrigger(game.id, obj.obj.endTriggerName));
+    }
+
+    public void Visit(NarrateEventAsIGameEvent obj) {
+      narrator.ShowMessage(obj.obj.text);
     }
   }
 }

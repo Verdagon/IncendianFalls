@@ -106,6 +106,27 @@ namespace Geomancer {
 
       var patternTile = terrain.pattern.patternTiles[location.indexInGroup];
 
+      string symbolName = "a";
+      switch (terrain.pattern.name) {
+        case "square":
+          if (patternTile.shapeIndex == 0) {
+            symbolName = "six";
+          }
+          break;
+        case "pentagon9":
+          if (patternTile.shapeIndex == 0) {
+            symbolName = "i";
+          } else if (patternTile.shapeIndex == 1) {
+            symbolName = "h";
+          }
+          break;
+        case "hex":
+          if (patternTile.shapeIndex == 0) {
+            symbolName = "five";
+          }
+          break;
+      }
+
       var defaultTileDescription =
           new TileDescription(
               terrain.elevationStepHeight,
@@ -114,7 +135,7 @@ namespace Geomancer {
               new ExtrudedSymbolDescription(
                 RenderPriority.TILE,
                 new SymbolDescription(
-                    patternTile.shapeIndex == 0 ? "i" : "h",
+                    symbolName,
                     100,
                     new Color(1, 0, 1),
                     patternTile.rotateDegrees,

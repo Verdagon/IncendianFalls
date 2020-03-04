@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using Atharia.Model;
 
 namespace Atharia.Model {
+  // Serves as a caching mechanism for the level.
   public class LevelSuperstate {
+    Level level;
+
     // Even if a unit is on that location, the location will be in here.
     SortedSet<Location> walkableLocations;
 
     SortedDictionary<Location, Unit> liveUnitByLocation;
 
-    public LevelSuperstate() {
+    //public LevelSuperstate() {
+    //}
+
+    public LevelSuperstate(Level level) {
+      this.level = level;
       walkableLocations = new SortedSet<Location>();
       liveUnitByLocation = new SortedDictionary<Location, Unit>();
-    }
-
-    public LevelSuperstate(Level level) : this() {
       Reconstruct(level);
     }
 
@@ -109,6 +113,28 @@ namespace Atharia.Model {
       } else {
         return Unit.Null;
       }
+    }
+
+    public Unit FindLiveUnit(string classId) {
+      foreach (var locationAndUnit in liveUnitByLocation) {
+        if (locationAndUnit.Value.classId == classId) {
+          return locationAndUnit.Value;
+        }
+      }
+      Asserts.Assert(false);
+      return Unit.Null;
+    }
+
+    public Location FindMarker(string name) {
+      foreach (var locationAndTile in level.terrain.tiles) {
+        foreach (var marker in locationAndTile.Value.components.GetAllMarkerTTC()) {
+          if (marker.name == name) {
+            return locationAndTile.Key;
+          }
+        }
+      }
+      Asserts.Assert(false);
+      return null;
     }
 
     public Unit FindNearestLiveUnit(

@@ -15,52 +15,56 @@ public class OverlayPanelView : MonoBehaviour {
   public Text overlayText;
   public UnityEngine.UI.Button[] buttons;
 
-  private float openTimeS;
+  IClock cinematicTimer;
+
+  private long openTimeMs;
 
   private UnityEngine.Color backgroundColor;
 
-  float fadeInEndS;
-  float fadeOutStartS;
-  float fadeOutEndS;
+  long fadeInEndMs;
+  long fadeOutStartMs;
+  long fadeOutEndMs;
 
   private UnityEngine.Color textColor;
-  float textFadeInStartS;
-  float textFadeInEndS;
-  float textFadeOutStartS;
-  float textFadeOutEndS;
+  long textFadeInStartMs;
+  long textFadeInEndMs;
+  long textFadeOutStartMs;
+  long textFadeOutEndMs;
 
   public void Init(
+      IClock cinematicTimer,
+
       float sizeRatio,
       UnityEngine.Color backgroundColor,
-      float fadeInEndS,
-      float fadeOutStartS,
-      float fadeOutEndS,
+      long fadeInEndMs,
+      long fadeOutStartMs,
+      long fadeOutEndMs,
 
       string text,
       UnityEngine.Color textColor,
-      float textFadeInStartS,
-      float textFadeInEndS,
-      float textFadeOutStartS,
-      float textFadeOutEndS,
+      long textFadeInStartMs,
+      long textFadeInEndMs,
+      long textFadeOutStartS,
+      long textFadeOutEndS,
       bool topAligned,
       bool leftAligned,
 
       List<string> buttonTexts) {
-
-    this.openTimeS = Time.time;
+    this.cinematicTimer = cinematicTimer;
+    this.openTimeMs = cinematicTimer.GetTimeMs();
 
     this.backgroundColor = backgroundColor;
-    this.fadeInEndS = fadeInEndS;
-    this.fadeOutStartS = fadeOutStartS;
-    this.fadeOutEndS = fadeOutEndS;
+    this.fadeInEndMs = fadeInEndMs;
+    this.fadeOutStartMs = fadeOutStartMs;
+    this.fadeOutEndMs = fadeOutEndMs;
 
     this.textColor = textColor;
-    this.textFadeInStartS = textFadeInStartS;
-    this.textFadeInEndS = textFadeInEndS;
-    this.textFadeOutStartS = textFadeOutStartS;
-    this.textFadeOutEndS = textFadeOutEndS;
+    this.textFadeInStartMs = textFadeInStartMs;
+    this.textFadeInEndMs = textFadeInEndMs;
+    this.textFadeOutStartMs = textFadeOutStartS;
+    this.textFadeOutEndMs = textFadeOutEndS;
 
-    if (fadeInEndS == 0) {
+    if (fadeInEndMs == 0) {
       GetComponent<Image>().color = backgroundColor;
       foreach (var button in buttons) {
         var buttonColors = button.colors;
@@ -76,7 +80,7 @@ public class OverlayPanelView : MonoBehaviour {
       }
     }
 
-    if (textFadeInEndS == 0) {
+    if (textFadeInEndMs == 0) {
       overlayText.color = textColor;
     } else {
       overlayText.color = new UnityEngine.Color(0, 0, 0, 0);
@@ -137,47 +141,47 @@ public class OverlayPanelView : MonoBehaviour {
 
   public void Update() {
 
-    var timeSinceOpenS = Time.time - openTimeS;
+    var timeSinceOpenMs = cinematicTimer.GetTimeMs() - openTimeMs;
 
-    if (timeSinceOpenS < fadeInEndS) {
-      var ratio = timeSinceOpenS / fadeInEndS;
+    if (timeSinceOpenMs < fadeInEndMs) {
+      var ratio = (float)timeSinceOpenMs / fadeInEndMs;
       SetChromeFadeRatio(ratio);
     }
 
-    if (fadeOutEndS == 0) {
+    if (fadeOutEndMs == 0) {
       SetChromeFadeRatio(1f);
     } else {
-      if (timeSinceOpenS < fadeInEndS) {
-      } else if (timeSinceOpenS < fadeOutStartS) {
+      if (timeSinceOpenMs < fadeInEndMs) {
+      } else if (timeSinceOpenMs < fadeOutStartMs) {
         SetChromeFadeRatio(1f);
-      } else if (timeSinceOpenS < fadeOutEndS) {
-        var ratio = 1 - (timeSinceOpenS - fadeOutStartS) / (fadeOutEndS - fadeOutStartS);
+      } else if (timeSinceOpenMs < fadeOutEndMs) {
+        var ratio = 1 - (float)(timeSinceOpenMs - fadeOutStartMs) / (fadeOutEndMs - fadeOutStartMs);
         SetChromeFadeRatio(ratio);
       }
     }
 
-    if (timeSinceOpenS < textFadeInStartS) {
+    if (timeSinceOpenMs < textFadeInStartMs) {
       SetTextFadeRatio(0);
-    } else if (timeSinceOpenS < textFadeInEndS) {
-      var ratio = (timeSinceOpenS - textFadeInStartS) / (textFadeInEndS - textFadeInStartS);
+    } else if (timeSinceOpenMs < textFadeInEndMs) {
+      var ratio = (float)(timeSinceOpenMs - textFadeInStartMs) / (textFadeInEndMs - textFadeInStartMs);
       SetTextFadeRatio(ratio);
     }
 
-    if (textFadeOutEndS == 0) {
+    if (textFadeOutEndMs == 0) {
       SetTextFadeRatio(1f);
     } else {
-      if (timeSinceOpenS < textFadeInEndS) {
-      } else if (timeSinceOpenS < textFadeOutStartS) {
+      if (timeSinceOpenMs < textFadeInEndMs) {
+      } else if (timeSinceOpenMs < textFadeOutStartMs) {
         SetTextFadeRatio(1f);
-      } else if (timeSinceOpenS < textFadeOutEndS) {
-        var ratio = 1 - (timeSinceOpenS - textFadeOutStartS) / (textFadeOutEndS - textFadeOutStartS);
+      } else if (timeSinceOpenMs < textFadeOutEndMs) {
+        var ratio = 1 - (float)(timeSinceOpenMs - textFadeOutStartMs) / (textFadeOutEndMs - textFadeOutStartMs);
         SetTextFadeRatio(ratio);
       } else {
         SetTextFadeRatio(0f);
       }
     }
 
-    if (timeSinceOpenS >= fadeOutEndS) {
+    if (timeSinceOpenMs >= fadeOutEndMs) {
       SetChromeFadeRatio(0);
       gameObject.SetActive(false);
       OverlayClosed?.Invoke(0);

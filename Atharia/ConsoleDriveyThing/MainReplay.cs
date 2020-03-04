@@ -10,7 +10,7 @@ namespace ConsoleDriveyThing {
       var sw = new System.Diagnostics.Stopwatch();
       sw.Start();
 
-      bool sanityChecking = true;
+      bool sanityChecking = false;
 
       while (replayer.ReadAndReplayNext()) {
         if (sanityChecking) {

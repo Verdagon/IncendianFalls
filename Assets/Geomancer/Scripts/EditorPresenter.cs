@@ -53,7 +53,11 @@ namespace Geomancer {
         [KeyCode.D] = "Dirt",
         [KeyCode.R] = "Rocks",
         [KeyCode.X] = "Marker",
-        [KeyCode.C] = "Cave"
+        [KeyCode.C] = "Cave",
+        [KeyCode.F] = "Floor",
+        [KeyCode.T] = "Tree",
+        [KeyCode.Hash] = "Wall",
+        [KeyCode.BackQuote] = "Water",
       };
 
       // var timestamp = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -69,7 +73,9 @@ namespace Geomancer {
       ss = new Root(new EditorLogger());
 
 
-      var pattern = PentagonPattern9.makePentagon9Pattern();
+      //var pattern = PentagonPattern9.makePentagon9Pattern();
+      var pattern = SquarePattern.MakeSquarePattern();
+      //var pattern = HexPattern.MakeHexPattern();
       level = ss.Transact(delegate () {
         var terrain = ss.EffectTerrainCreate(pattern, 0.2f, ss.EffectTerrainTileByLocationMutMapCreate());
         return ss.EffectLevelCreate(terrain);

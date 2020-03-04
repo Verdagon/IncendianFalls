@@ -9,6 +9,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersItemTTCMutSet;
   public readonly int membersEmberDeepLevelLinkerTTCMutSet;
   public readonly int membersIncendianFallsLevelLinkerTTCMutSet;
+  public readonly int membersMarkerTTCMutSet;
   public readonly int membersTimeAnchorTTCMutSet;
   public readonly int membersLevelLinkTTCMutSet;
   public readonly int membersMudTTCMutSet;
@@ -18,6 +19,9 @@ public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersWallTTCMutSet;
   public readonly int membersBloodTTCMutSet;
   public readonly int membersRocksTTCMutSet;
+  public readonly int membersTreeTTCMutSet;
+  public readonly int membersWaterTTCMutSet;
+  public readonly int membersFloorTTCMutSet;
   public readonly int membersCaveWallTTCMutSet;
   public readonly int membersCaveTTCMutSet;
   public readonly int membersFallsTTCMutSet;
@@ -32,6 +36,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
       int membersItemTTCMutSet,
       int membersEmberDeepLevelLinkerTTCMutSet,
       int membersIncendianFallsLevelLinkerTTCMutSet,
+      int membersMarkerTTCMutSet,
       int membersTimeAnchorTTCMutSet,
       int membersLevelLinkTTCMutSet,
       int membersMudTTCMutSet,
@@ -41,6 +46,9 @@ public class ITerrainTileComponentMutBunchIncarnation {
       int membersWallTTCMutSet,
       int membersBloodTTCMutSet,
       int membersRocksTTCMutSet,
+      int membersTreeTTCMutSet,
+      int membersWaterTTCMutSet,
+      int membersFloorTTCMutSet,
       int membersCaveWallTTCMutSet,
       int membersCaveTTCMutSet,
       int membersFallsTTCMutSet,
@@ -54,6 +62,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
     this.membersItemTTCMutSet = membersItemTTCMutSet;
     this.membersEmberDeepLevelLinkerTTCMutSet = membersEmberDeepLevelLinkerTTCMutSet;
     this.membersIncendianFallsLevelLinkerTTCMutSet = membersIncendianFallsLevelLinkerTTCMutSet;
+    this.membersMarkerTTCMutSet = membersMarkerTTCMutSet;
     this.membersTimeAnchorTTCMutSet = membersTimeAnchorTTCMutSet;
     this.membersLevelLinkTTCMutSet = membersLevelLinkTTCMutSet;
     this.membersMudTTCMutSet = membersMudTTCMutSet;
@@ -63,6 +72,9 @@ public class ITerrainTileComponentMutBunchIncarnation {
     this.membersWallTTCMutSet = membersWallTTCMutSet;
     this.membersBloodTTCMutSet = membersBloodTTCMutSet;
     this.membersRocksTTCMutSet = membersRocksTTCMutSet;
+    this.membersTreeTTCMutSet = membersTreeTTCMutSet;
+    this.membersWaterTTCMutSet = membersWaterTTCMutSet;
+    this.membersFloorTTCMutSet = membersFloorTTCMutSet;
     this.membersCaveWallTTCMutSet = membersCaveWallTTCMutSet;
     this.membersCaveTTCMutSet = membersCaveTTCMutSet;
     this.membersFallsTTCMutSet = membersFallsTTCMutSet;

@@ -15,10 +15,20 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit interactingUnit,
         Location containingTileLocation) {
+      Travel(game, superstate, unit:, levelLink.destinationLevel, levelLink.destinationLevelLocation);
 
-      game.level.ExitUnit(game, superstate.levelSuperstate, interactingUnit);
+      return "";
+    }
 
-      game.level = levelLink.destinationLevel;
+    public static void Travel(
+        Game game,
+        Superstate superstate,
+        Unit unit,
+        Level destinationLevel,
+        Location destinationLevelLocation) {
+      game.level.ExitUnit(game, superstate.levelSuperstate, unit);
+
+      game.level = destinationLevel;
       superstate.levelSuperstate = new LevelSuperstate(game.level);
 
       // These will likely be in the distant past, since it's been a while since we've
@@ -31,9 +41,7 @@ namespace Atharia.Model {
             nativeUnit.nextActionTime + (game.time - game.level.time);
       }
 
-      game.level.EnterUnit(game, superstate.levelSuperstate, interactingUnit, levelLink.destinationLevelLocation);
-
-      return "";
+      game.level.EnterUnit(superstate.levelSuperstate, unit, destinationLevelLocation);
     }
   }
 }

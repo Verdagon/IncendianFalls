@@ -124,7 +124,7 @@ namespace IncendianFalls {
         level.terrain.tiles.Add(location, tile);
 
         foreach (var memberString in members) {
-          var recognized = DoMemberStringThing(level, tile, memberString);
+          var recognized = DoMemberStringThing(level, levelSuperstate, location, tile, memberString);
           if (!recognized) {
             if (!unknownGeomancy.ContainsKey(location)) {
               unknownGeomancy.Add(location, new List<string>());
@@ -136,7 +136,7 @@ namespace IncendianFalls {
       return unknownGeomancy;
     }
 
-    private static bool DoMemberStringThing(Level level, TerrainTile tile, string memberString) {
+    private static bool DoMemberStringThing(Level level, LevelSuperstate levelSuperstate, Location location, TerrainTile tile, string memberString) {
       switch (memberString) {
         case "Mud":
           tile.components.Add(level.root.EffectMudTTCCreate().AsITerrainTileComponent());
@@ -153,16 +153,63 @@ namespace IncendianFalls {
         case "Grass":
           tile.components.Add(level.root.EffectGrassTTCCreate().AsITerrainTileComponent());
           return true;
+        case "Floor":
+          tile.components.Add(level.root.EffectFloorTTCCreate().AsITerrainTileComponent());
+          return true;
+        case "Tree":
+          tile.components.Add(level.root.EffectTreeTTCCreate().AsITerrainTileComponent());
+          return true;
+        case "Water":
+          tile.components.Add(level.root.EffectWaterTTCCreate().AsITerrainTileComponent());
+          return true;
+        case "Ravashrike":
+          AddRavashrike(level, levelSuperstate, location);
+          return true;
       }
 
-      Match triggerMatch = Regex.Match(memberString, "^Trigger\\(\"([A-Za-z0-9_]+)\"\\)$", RegexOptions.IgnoreCase);
+      // Put quotes back in once we have a nice way to load levels from files, so we dont have
+      // to hardcode them in strings, which quotes dont do well in.
+      //Match triggerMatch = Regex.Match(memberString, "^Trigger\\(\"([A-Za-z0-9_]+)\"\\)$", RegexOptions.IgnoreCase);
+      Match triggerMatch = Regex.Match(memberString, "^Trigger\\(([A-Za-z0-9_]+)\\)$", RegexOptions.IgnoreCase);
       if (triggerMatch.Success) {
         string name = triggerMatch.Groups[1].Value;
         tile.components.Add(level.root.EffectSimplePresenceTriggerTTCCreate(name).AsITerrainTileComponent());
         return true;
       }
 
+      // Put quotes back in once we have a nice way to load levels from files, so we dont have
+      // to hardcode them in strings, which quotes dont do well in.
+      //Match markerMatch = Regex.Match(memberString, "^Marker\\(\"([A-Za-z0-9_]+)\"\\)$", RegexOptions.IgnoreCase);
+      Match markerMatch = Regex.Match(memberString, "^Marker\\(([A-Za-z0-9_]+)\\)$", RegexOptions.IgnoreCase);
+      if (markerMatch.Success) {
+        string name = markerMatch.Groups[1].Value;
+        tile.components.Add(level.root.EffectMarkerTTCCreate(name).AsITerrainTileComponent());
+        return true;
+      }
+
       return false;
+    }
+
+    public static void AddRavashrike(Level level, LevelSuperstate levelSuperstate, Location location) {
+      var components = IUnitComponentMutBunch.New(level.root);
+      components.Add(level.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
+      components.Add(level.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
+      components.Add(level.root.EffectBideAICapabilityUCCreate(0).AsIUnitComponent());
+      Unit enemy =
+          level.root.EffectUnitCreate(
+              level.root.EffectIUnitEventMutListCreate(),
+              true,
+              0,
+              location,
+              "Ravashrike",
+              600, 600,
+              100, 100,
+              250,
+              level.time,
+              components,
+              false,
+              14);
+      level.EnterUnit(levelSuperstate, enemy, location);
     }
   }
 }

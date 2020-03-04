@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Atharia.Model;
 using UnityEngine;
-using UnityEngine.UI;
 using AthPlayer;
 
 namespace Domino {
@@ -60,7 +59,6 @@ namespace Domino {
     }
 
     public void Start() {
-      narrator.ShowMessage("The Incendian Falls! I've finally made it.\nIf I can find Volcaetus, I can save my brother!");
       MaybeResume();
     }
 

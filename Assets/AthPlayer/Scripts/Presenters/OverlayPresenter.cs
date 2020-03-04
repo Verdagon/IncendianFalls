@@ -42,18 +42,20 @@ namespace AthPlayer {
       triggerNames.Add(overlay.automaticActionTriggerName);
 
       overlayPanelView.Init(
+        cinematicTimer,
+
         overlay.sizePercent / 100f,
         overlay.backgroundColor.ToUnity(),
-        overlay.fadeInEndMs / 1000f,
-        overlay.fadeOutStartMs / 1000f,
-        overlay.fadeOutEndMs / 1000f,
+        overlay.fadeInEndMs,
+        overlay.fadeOutStartMs,
+        overlay.fadeOutEndMs,
 
         overlay.text,
         overlay.textColor.ToUnity(),
-        overlay.textFadeInStartMs / 1000f,
-        overlay.textFadeInEndMs / 1000f,
-        overlay.textFadeOutStartMs / 1000f,
-        overlay.textFadeOutEndMs / 1000f,
+        overlay.textFadeInStartMs,
+        overlay.textFadeInEndMs,
+        overlay.textFadeOutStartMs,
+        overlay.textFadeOutEndMs,
         overlay.topAligned,
         overlay.leftAligned,
 

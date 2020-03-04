@@ -434,7 +434,7 @@ namespace AthPlayer {
 
       var detailsByClassId = new Dictionary<string, UnitDescription>();
       detailsByClassId.Add(
-          "chronomancer",
+          "Chronomancer",
           new UnitDescription(
               unit.id,
               new DominoDescription(true, new UnityEngine.Color(0.7f, 0, 0)),

@@ -28,6 +28,7 @@ terrain/terrain.vss
 terrain/terraintile.vss
 terrain/timeanchorttc.vss
 terrain/simplewalktrigger.vss
+terrain/marker.vss
 incendianfalls/levels/clifflevel.vss
 incendianfalls/levels/pentagonalcave.vss
 incendianfalls/levels/ravashrikelevel.vss

@@ -36,25 +36,7 @@ namespace Atharia.Model {
           levelSuperstate.GetNRandomWalkableLocations(
               level.terrain, game.rand, 1, true, true)[0];
 
-      var components = IUnitComponentMutBunch.New(game.root);
-      components.Add(game.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(game.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
-      components.Add(game.root.EffectBideAICapabilityUCCreate(0).AsIUnitComponent());
-      Unit enemy =
-          game.root.EffectUnitCreate(
-              game.root.EffectIUnitEventMutListCreate(),
-              true,
-              0,
-              enemyLocation,
-              "Ravashrike",
-              600, 600,
-              100, 100,
-              250,
-              game.time + 10,
-              components,
-              false,
-              14);
-      level.EnterUnit(game, levelSuperstate, enemy, enemyLocation);
+      Vivifier.AddRavashrike(level, levelSuperstate, enemyLocation);
 
       entryLocation = new Location(0, 0, 0);
     }

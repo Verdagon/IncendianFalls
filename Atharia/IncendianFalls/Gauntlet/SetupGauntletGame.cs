@@ -78,7 +78,7 @@ namespace Gauntlet {
               true,
               0,
               new Location(0, 0, 0),
-              "chronomancer",
+              "Chronomancer",
               90, 90,
               100, 100,
               600,
@@ -87,7 +87,6 @@ namespace Gauntlet {
               true,
               5);
       preGauntletLevel.EnterUnit(
-          game,
           superstate.levelSuperstate,
           player,
           downStaircaseLocation);

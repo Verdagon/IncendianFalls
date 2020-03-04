@@ -23,7 +23,7 @@ namespace Atharia.Model {
       levelSuperstate = new LevelSuperstate(level);
 
       var geomancy =
-        Vivifier.Vivify(level, levelSuperstate, Vivifier.ParseGeomancy(LEVEL.Replace("'", "\"")));
+        Vivifier.Vivify(level, levelSuperstate, Vivifier.ParseGeomancy(LEVEL));
 
       level.controller = root.EffectTutorialLevelControllerCreate(level).AsILevelController();
 

@@ -160,7 +160,7 @@ namespace IncendianFalls {
                   true,
                   0,
                   superstate.timeShiftingState.targetAnchorLocation,
-                  "chronomancer",
+                  "Chronomancer",
                   futurePlayer.hp, futurePlayer.maxHp,
                   futurePlayer.mp, futurePlayer.maxMp,
                   600,

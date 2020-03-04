@@ -1,0 +1,13 @@
+
+// Will notify the controller about a certain trigger happening.
+// Someday, perhaps split this into actual subclasses... maybe, if we figure out
+// a desirable way to share TTCs between geomancer and player.
+mut struct MarkerTTC {
+  MarkerTTC isa ITerrainTileComponent;
+
+  name: Str;
+
+  fn Destruct(this: MarkerTTC overrides IDestructible): Void {
+    MarkerTTCExtensions.Destruct
+  }
+}

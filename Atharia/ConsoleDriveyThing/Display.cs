@@ -54,7 +54,7 @@ namespace ConsoleDriveyThing {
 
     static char GetUnitChar(Unit unit) {
       switch (unit.classId) {
-        case "chronomancer":
+        case "Chronomancer":
           return '@';
         case "avelisk":
           return 'a';

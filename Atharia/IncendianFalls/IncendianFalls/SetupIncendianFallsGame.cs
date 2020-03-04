@@ -55,7 +55,7 @@ namespace IncendianFalls {
               true,
               0,
               new Location(0, 0, 0),
-              "chronomancer",
+              "Chronomancer",
               90, 90,
               100, 100,
               600,
@@ -64,11 +64,12 @@ namespace IncendianFalls {
               true,
               5);
       firstLevel.EnterUnit(
-          game,
           superstate.levelSuperstate,
           player,
           entryLocation);
       game.player = player;
+
+      game.events.Add(new NarrateEvent("The Incendian Falls! I've finally made it.\nIf I can find Volcaetus, I can save my brother!").AsIGameEvent());
 
       return game;
     }
