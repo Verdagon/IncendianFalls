@@ -569,6 +569,51 @@ namespace AthPlayer {
               hpRatio,
               mpRatio));
       detailsByClassId.Add(
+          "Baug",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, new UnityEngine.Color(0.3f, 0.3f, 0.3f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "f",
+                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  false, new UnityEngine.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "Spirient",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, new UnityEngine.Color(0.0f, 0.0f, 0.8f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "parenleft",
+                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  false, new UnityEngine.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "RavagianTrask",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "ampersand",
+                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  false, new UnityEngine.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
           "Ravashrike",
           new UnitDescription(
               unit.id,

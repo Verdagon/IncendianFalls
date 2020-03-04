@@ -132,6 +132,13 @@ namespace Atharia.Model {
       }
     }
 
+    public void RemoveMarkers(string name, int expectAtLeast) {
+      foreach (var locationAndMarker in FindMarkers(name, expectAtLeast)) {
+        level.terrain.tiles[locationAndMarker.Key].components.Remove(locationAndMarker.Value.AsITerrainTileComponent());
+        locationAndMarker.Value.Destruct();
+      }
+    }
+
     public Location FindMarkerLocation(string name) {
       return FindMarker(name).Key;
     }

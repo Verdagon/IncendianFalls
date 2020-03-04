@@ -36,7 +36,7 @@ namespace Atharia.Model {
           levelSuperstate.GetNRandomWalkableLocations(
               level.terrain, game.rand, 1, true, true)[0];
 
-      Vivifier.AddRavashrike(level, levelSuperstate, enemyLocation);
+      Vivifier.AddRavashrike(level, levelSuperstate, enemyLocation, level.time);
 
       entryLocation = new Location(0, 0, 0);
     }

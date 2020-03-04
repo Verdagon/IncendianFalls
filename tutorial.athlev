@@ -4,25 +4,22 @@
 -8 -2 7 1 Dirt
 -7 -2 0 4 Mud
 -7 -2 2 4 Mud
--7 -2 3 4 Mud
--7 -2 4 1 Dirt Marker(ambush4Rocks)
+-7 -2 4 4 Mud
 -7 -2 5 4 Mud
--7 -2 6 1 Dirt
--7 -2 7 1 Dirt Marker(ambush4Summon)
+-7 -2 6 1 Dirt Marker(ambush4Summon)
+-7 -2 7 1 Dirt
 -7 -1 0 1 Dirt
 -7 -1 1 4 Mud
 -7 -1 2 1 Dirt Cave Marker(exit)
 -7 -1 3 4 Mud
 -7 -1 4 4 Mud
--6 -3 6 4 Mud
--6 -3 7 4 Mud
 -6 -2 0 4 Mud
 -6 -2 1 4 Mud
 -6 -2 2 1 Dirt
 -6 -2 3 1 Dirt
 -6 -2 4 4 Mud
 -6 -2 5 1 Dirt Trigger(ambush4Trigger)
--6 -2 6 1 Dirt Marker(ambush4IntendedClonePlacement)
+-6 -2 6 1 Dirt Trigger(ambush4DefendSpot)
 -6 -2 7 4 Mud
 -6 -1 0 4 Mud
 -6 -1 1 1 Dirt
@@ -30,10 +27,8 @@
 -6 -1 3 1 Dirt
 -6 -1 4 4 Mud
 -6 -1 5 4 Mud
--5 -3 6 4 Mud
--5 -3 7 4 Mud
--5 -2 0 1 Dirt
--5 -2 1 1 Dirt
+-5 -2 0 4 Mud
+-5 -2 1 4 Mud
 -5 -2 2 1 Dirt
 -5 -2 3 1 Dirt Trigger(ambush4Warning)
 -5 -2 4 4 Mud
@@ -43,13 +38,13 @@
 -5 -1 3 4 Mud
 -5 -1 5 4 Mud
 -4 -2 0 4 Mud
--4 -2 1 1 Dirt
+-4 -2 1 4 Mud
 -4 -2 2 1 Dirt
--4 -2 3 1 Dirt
+-4 -2 3 1 Dirt HealthPotion Trigger(healthPotion)
 -4 -2 4 1 Dirt
 -4 -2 5 4 Mud
 -4 -2 6 4 Mud
--4 -2 7 1 Dirt Marker(ambush3Summon)
+-4 -2 7 1 Dirt
 -3 -2 1 4 Mud
 -3 -2 3 4 Mud
 -3 -2 4 4 Mud

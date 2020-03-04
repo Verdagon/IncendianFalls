@@ -13,7 +13,7 @@ public class OverlayPanelView : MonoBehaviour {
 
   public GameObject parent;
   public Text overlayText;
-  public UnityEngine.UI.Button[] buttons;
+  public GameObject[] buttonGameObjects;
 
   IClock cinematicTimer;
 
@@ -66,24 +66,20 @@ public class OverlayPanelView : MonoBehaviour {
 
     if (fadeInEndMs == 0) {
       GetComponent<Image>().color = backgroundColor;
-      foreach (var button in buttons) {
+      foreach (var buttonGameObject in buttonGameObjects) {
+        var button = buttonGameObject.GetComponent<UnityEngine.UI.Button>();
         var buttonColors = button.colors;
         buttonColors.normalColor = new UnityEngine.Color(32, 32, 32, 1);
         button.colors = buttonColors;
       }
     } else {
-      GetComponent<Image>().color = new UnityEngine.Color(0, 0, 0, 0);
-      foreach (var button in buttons) {
-        var buttonColors = button.colors;
-        buttonColors.normalColor = new UnityEngine.Color(0, 0, 0, 0);
-        button.colors = buttonColors;
-      }
+      SetChromeFadeRatio(0);
     }
 
     if (textFadeInEndMs == 0) {
       overlayText.color = textColor;
     } else {
-      overlayText.color = new UnityEngine.Color(0, 0, 0, 0);
+      SetTextFadeRatio(0);
     }
 
     overlayText.text = text;
@@ -91,12 +87,14 @@ public class OverlayPanelView : MonoBehaviour {
     SetSize(sizeRatio);
     SetAlignment(topAligned, leftAligned);
 
-    for (int i = 0; i < buttons.Length; i++) {
+    for (int i = 0; i < buttonGameObjects.Length; i++) {
+      var buttonGameObject = buttonGameObjects[i];
+      var button = buttonGameObject.GetComponent<UnityEngine.UI.Button>();
       if (i < buttonTexts.Count) {
-        buttons[i].GetComponentInChildren<Text>().text = buttonTexts[buttonTexts.Count - 1 - i];
-        buttons[i].gameObject.SetActive(true);
+        buttonGameObject.GetComponentInChildren<Text>().text = buttonTexts[buttonTexts.Count - 1 - i];
+        buttonGameObject.SetActive(true);
       } else {
-        buttons[i].gameObject.SetActive(false);
+        buttonGameObject.SetActive(false);
       }
     }
 
@@ -146,17 +144,16 @@ public class OverlayPanelView : MonoBehaviour {
     if (timeSinceOpenMs < fadeInEndMs) {
       var ratio = (float)timeSinceOpenMs / fadeInEndMs;
       SetChromeFadeRatio(ratio);
-    }
-
-    if (fadeOutEndMs == 0) {
-      SetChromeFadeRatio(1f);
     } else {
-      if (timeSinceOpenMs < fadeInEndMs) {
-      } else if (timeSinceOpenMs < fadeOutStartMs) {
+      if (fadeOutEndMs == 0) {
         SetChromeFadeRatio(1f);
-      } else if (timeSinceOpenMs < fadeOutEndMs) {
-        var ratio = 1 - (float)(timeSinceOpenMs - fadeOutStartMs) / (fadeOutEndMs - fadeOutStartMs);
-        SetChromeFadeRatio(ratio);
+      } else {
+        if (timeSinceOpenMs < fadeOutStartMs) {
+          SetChromeFadeRatio(1f);
+        } else if (timeSinceOpenMs < fadeOutEndMs) {
+          var ratio = 1 - (float)(timeSinceOpenMs - fadeOutStartMs) / (fadeOutEndMs - fadeOutStartMs);
+          SetChromeFadeRatio(ratio);
+        }
       }
     }
 
@@ -165,19 +162,18 @@ public class OverlayPanelView : MonoBehaviour {
     } else if (timeSinceOpenMs < textFadeInEndMs) {
       var ratio = (float)(timeSinceOpenMs - textFadeInStartMs) / (textFadeInEndMs - textFadeInStartMs);
       SetTextFadeRatio(ratio);
-    }
-
-    if (textFadeOutEndMs == 0) {
-      SetTextFadeRatio(1f);
     } else {
-      if (timeSinceOpenMs < textFadeInEndMs) {
-      } else if (timeSinceOpenMs < textFadeOutStartMs) {
+      if (textFadeOutEndMs == 0) {
         SetTextFadeRatio(1f);
-      } else if (timeSinceOpenMs < textFadeOutEndMs) {
-        var ratio = 1 - (float)(timeSinceOpenMs - textFadeOutStartMs) / (textFadeOutEndMs - textFadeOutStartMs);
-        SetTextFadeRatio(ratio);
       } else {
-        SetTextFadeRatio(0f);
+        if (timeSinceOpenMs < textFadeOutStartMs) {
+          SetTextFadeRatio(1f);
+        } else if (timeSinceOpenMs < textFadeOutEndMs) {
+          var ratio = 1 - (float)(timeSinceOpenMs - textFadeOutStartMs) / (textFadeOutEndMs - textFadeOutStartMs);
+          SetTextFadeRatio(ratio);
+        } else {
+          SetTextFadeRatio(0f);
+        }
       }
     }
 
@@ -191,7 +187,18 @@ public class OverlayPanelView : MonoBehaviour {
     fadedBackgroundColor.a *= ratio;
     GetComponent<Image>().color = fadedBackgroundColor;
 
-    foreach (var button in buttons) {
+    foreach (var buttonGameObject in buttonGameObjects) {
+      var text = buttonGameObject.GetComponentInChildren<Text>();
+      var textColor = text.color;
+      textColor.a = ratio;
+      text.color = textColor;
+
+      var image = buttonGameObject.GetComponent<Image>();
+      var imageColor = image.color;
+      imageColor.a = ratio;
+      image.color = imageColor;
+
+      var button = buttonGameObject.GetComponent<UnityEngine.UI.Button>();
       var buttonColors = button.colors;
       var normalColor = buttonColors.normalColor;
       normalColor.a = ratio;

@@ -49,36 +49,254 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         string triggerName) {
-      game.root.logger.Error("Got trigger! " + triggerName);
+      game.root.logger.Error("Got simple trigger: " + triggerName);
 
       if (triggerName == "ambush1b") {
-        game.root.logger.Error("showing overlay!");
         game.events.Add(
           new ShowOverlayEvent(
             50, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
-            100, // fadeInEnd
+            300, // fadeInEnd
             0, // fadeOutStart
             0, // fadeOutEnd,
             "",
 
             "You see an Irkling!\n\nTo attack, click on it while next to it.",
             new Color(255, 255, 255, 255), // textColor
-            100, // textFadeInStartS
-            200, // textFadeInEndS
+            0, // textFadeInStartS
+            300, // textFadeInEndS
             0, // textFadeOutStartS
             0, // textFadeOutEndS
             true, // topAligned
             true, // leftAligned
 
             new ButtonImmList(new List<Button>() {
-              new Button("OK!", new Color(64, 64, 64, 255), "")
+              new Button("Forward to glory!", new Color(64, 64, 64, 255), "")
             }))
           .AsIGameEvent());
+      }
 
-        //game.events.Add(
-        //  new FlyCameraEvent(new Location(0, 0, 0), new Vec3(0, -10, 20), 1500, "cameraMovementDone")
-        //  .AsIGameEvent());
+      if (triggerName == "ambush2b") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            50, // sizePercent
+            new Color(0, 0, 0, 224), // backgroundColor
+            300, // fadeInEnd
+            0, // fadeOutStart
+            0, // fadeOutEnd,
+            "",
+
+            "You see a Baug!\n\nBaugs have a lot of life points. You'll need to hit it several times.",
+            new Color(255, 255, 255, 255), // textColor
+            0, // textFadeInStartS
+            300, // textFadeInEndS
+            0, // textFadeOutStartS
+            0, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() {
+              new Button("Forward to battle!", new Color(64, 64, 64, 255), "")
+            }))
+          .AsIGameEvent());
+      }
+
+      if (triggerName == "ambush3b") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            70, // sizePercent
+            new Color(0, 0, 0, 224), // backgroundColor
+            300, // fadeInEnd
+            0, // fadeOutStart
+            0, // fadeOutEnd,
+            "",
+
+            "You see a Spiriant!\n\nSpiriants are incredibly dangerous.\n\nHowever, they die with one hit.\n\nUse Defy ('D') to wait for it to come to you.",
+            new Color(255, 255, 255, 255), // textColor
+            0, // textFadeInStartS
+            300, // textFadeInEndS
+            0, // textFadeOutStartS
+            0, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() {
+              new Button("For valor!", new Color(64, 64, 64, 255), "")
+            }))
+          .AsIGameEvent());
+      }
+
+      if (triggerName == "healthPotionB") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            70, // sizePercent
+            new Color(0, 0, 0, 224), // backgroundColor
+            300, // fadeInEnd
+            0, // fadeOutStart
+            0, // fadeOutEnd,
+            "",
+
+            "You've found a health potion!\n\nYou can't take it with you, but you can use it now.\n\nUse Interact ('I') to use it.",
+            new Color(255, 255, 255, 255), // textColor
+            0, // textFadeInStartS
+            300, // textFadeInEndS
+            0, // textFadeOutStartS
+            0, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() {
+              new Button("For prosperity!", new Color(64, 64, 64, 255), "")
+            }))
+          .AsIGameEvent());
+      }
+      if (triggerName == "ambush4b") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            60, // sizePercent
+            new Color(0, 0, 0, 224), // backgroundColor
+            300, // fadeInEnd
+            0, // fadeOutStart
+            0, // fadeOutEnd,
+            "",
+
+            "You see a Ravagian Trask!\n\nThese attack very fast.\n\nYou'll need help!",
+            new Color(255, 255, 255, 255), // textColor
+            0, // textFadeInStartS
+            300, // textFadeInEndS
+            0, // textFadeOutStartS
+            0, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() {
+              new Button("Help? How?", new Color(64, 64, 64, 255), "ambush4c")
+            }))
+          .AsIGameEvent());
+      }
+      if (triggerName == "ambush4c") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            60, // sizePercent
+            new Color(0, 0, 0, 224), // backgroundColor
+            300, // fadeInEnd
+            0, // fadeOutStart
+            0, // fadeOutEnd,
+            "",
+
+            "You must help your future self, so that in the future, you'll receive help from your past self.",
+            new Color(255, 255, 255, 255), // textColor
+            0, // textFadeInStartS
+            300, // textFadeInEndS
+            0, // textFadeOutStartS
+            0, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() {
+              new Button("Nonsense!", new Color(64, 64, 64, 255), "ambush4d")
+            }))
+          .AsIGameEvent());
+      }
+
+      if (triggerName == "ambush4d") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            60, // sizePercent
+            new Color(0, 0, 0, 224), // backgroundColor
+            300, // fadeInEnd
+            0, // fadeOutStart
+            0, // fadeOutEnd,
+            "",
+
+            "Let's see it in action.\n\nFirst, select Time Anchor ('A') and then step in any direction.\n\n(In this case, go right.)",
+            new Color(255, 255, 255, 255), // textColor
+            0, // textFadeInStartS
+            300, // textFadeInEndS
+            0, // textFadeOutStartS
+            0, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() {
+              new Button("Will do!", new Color(64, 64, 64, 255), "")
+            }))
+          .AsIGameEvent());
+      }
+
+      if (triggerName == "ambush4e") {
+        if (superstate.anchorTurnIndices.Count == 0) {
+          game.events.Add(
+            new ShowOverlayEvent(
+              60, // sizePercent
+              new Color(0, 0, 0, 224), // backgroundColor
+              300, // fadeInEnd
+              0, // fadeOutStart
+              0, // fadeOutEnd,
+              "",
+
+              "Uh oh! You didn't create a time anchor.\n\nYou're probably going to die now.\n\nNext time, use Time Anchor ('A')!",
+              new Color(255, 255, 255, 255), // textColor
+              0, // textFadeInStartS
+              300, // textFadeInEndS
+              0, // textFadeOutStartS
+              0, // textFadeOutEndS
+              true, // topAligned
+              true, // leftAligned
+
+              new ButtonImmList(new List<Button>() {
+                new Button("Alas...", new Color(64, 64, 64, 255), "")
+              }))
+            .AsIGameEvent());
+        } else {
+          game.events.Add(
+            new ShowOverlayEvent(
+              60, // sizePercent
+              new Color(0, 0, 0, 224), // backgroundColor
+              300, // fadeInEnd
+              0, // fadeOutStart
+              0, // fadeOutEnd,
+              "",
+
+              "Now, use Defy ('D') about 10 times.\n\n(Your future self will thank you.)\n\nAfter that, use Time Revert ('R') to go back in time.",
+              new Color(255, 255, 255, 255), // textColor
+              0, // textFadeInStartS
+              300, // textFadeInEndS
+              0, // textFadeOutStartS
+              0, // textFadeOutEndS
+              true, // topAligned
+              true, // leftAligned
+
+              new ButtonImmList(new List<Button>() {
+                new Button("Alas...", new Color(64, 64, 64, 255), "")
+              }))
+            .AsIGameEvent());
+        }
+      }
+
+      if (triggerName == "ambush4f") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            70, // sizePercent
+            new Color(0, 0, 0, 224), // backgroundColor
+            300, // fadeInEnd
+            0, // fadeOutStart
+            0, // fadeOutEnd,
+            "",
+
+            "Now, your past self is here to help you!\n\nIt will do the same things you did.\n\nWait for the Ravagian Trask to charge it, then attack!",
+            new Color(255, 255, 255, 255), // textColor
+            0, // textFadeInStartS
+            300, // textFadeInEndS
+            0, // textFadeOutStartS
+            0, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() {
+              new Button("For vengeance!", new Color(64, 64, 64, 255), "")
+            }))
+          .AsIGameEvent());
       }
 
       return new Atharia.Model.Void();
@@ -91,11 +309,51 @@ namespace Atharia.Model {
         Unit triggeringUnit,
         Location location,
         string triggerName) {
-      if (triggeringUnit.Is(game.player) && triggerName == "ambush1Trigger") {
+      game.root.logger.Info("Got simple unit trigger: " + triggerName);
+      if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush1Trigger") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush1Trigger", 1);
         var summonLocation = superstate.levelSuperstate.FindMarkerLocation("ambush1Summon");
-        Vivifier.AddIrkling(game.level, superstate.levelSuperstate, summonLocation);
-        game.events.Add(new WaitEvent(300, "ambush1b").AsIGameEvent());
+        Vivifier.AddIrkling(game.level, superstate.levelSuperstate, summonLocation, game.player.nextActionTime + 10);
+        game.events.Add(new WaitEvent(400, "ambush1b").AsIGameEvent());
+        superstate.navigatingState = null;
+      }
+      if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush2Trigger") {
+        superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush2Trigger", 1);
+        var summonLocation = superstate.levelSuperstate.FindMarkerLocation("ambush2Summon");
+        Vivifier.AddBaug(game.level, superstate.levelSuperstate, summonLocation, game.player.nextActionTime + 10);
+        game.events.Add(new WaitEvent(400, "ambush2b").AsIGameEvent());
+        superstate.navigatingState = null;
+      }
+      if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush3Trigger") {
+        superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush3Trigger", 1);
+        var summonLocation = superstate.levelSuperstate.FindMarkerLocation("ambush3Summon");
+        Vivifier.AddSpirient(game.level, superstate.levelSuperstate, summonLocation, game.player.nextActionTime + 10);
+        game.events.Add(new WaitEvent(400, "ambush3b").AsIGameEvent());
+        superstate.navigatingState = null;
+      }
+      if (triggeringUnit.NullableIs(game.player) && triggerName == "healthPotion") {
+        superstate.levelSuperstate.RemoveSimplePresenceTriggers("healthPotion", 1);
+        game.events.Add(new WaitEvent(400, "healthPotionB").AsIGameEvent());
+        superstate.navigatingState = null;
+      }
+      if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush4Trigger") {
+        superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4Trigger", 1);
+        var summonLocation = superstate.levelSuperstate.FindMarkerLocation("ambush4Summon");
+        Vivifier.AddRavagianTrask(game.level, superstate.levelSuperstate, summonLocation, game.player.nextActionTime + game.player.inertia + 10);
+        game.events.Add(new WaitEvent(400, "ambush4b").AsIGameEvent());
+        superstate.navigatingState = null;
+      }
+      if (triggerName == "ambush4DefendSpot" &&
+          triggeringUnit.NullableIs(game.player)) {
+        superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefendSpot", 1);
+        game.events.Add(new WaitEvent(400, "ambush4e").AsIGameEvent());
+        superstate.navigatingState = null;
+      }
+      if (triggerName == "ambush4DefendSpot" &&
+          triggeringUnit.components.GetAllTimeCloneAICapabilityUC().Count > 0) {
+        superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefendSpot", 1);
+        game.events.Add(new WaitEvent(600, "ambush4f").AsIGameEvent());
+        superstate.navigatingState = null;
       }
       return new Atharia.Model.Void();
     }
@@ -107,25 +365,22 @@ namespace Atharia.Model {
 -8 -2 7 1 Dirt
 -7 -2 0 4 Mud
 -7 -2 2 4 Mud
--7 -2 3 4 Mud
--7 -2 4 1 Dirt Marker(ambush4Rocks)
+-7 -2 4 4 Mud
 -7 -2 5 4 Mud
--7 -2 6 1 Dirt
--7 -2 7 1 Dirt Marker(ambush4Summon)
+-7 -2 6 1 Dirt Marker(ambush4Summon)
+-7 -2 7 1 Dirt
 -7 -1 0 1 Dirt
 -7 -1 1 4 Mud
 -7 -1 2 1 Dirt Cave Marker(exit)
 -7 -1 3 4 Mud
 -7 -1 4 4 Mud
--6 -3 6 4 Mud
--6 -3 7 4 Mud
 -6 -2 0 4 Mud
 -6 -2 1 4 Mud
 -6 -2 2 1 Dirt
 -6 -2 3 1 Dirt
 -6 -2 4 4 Mud
 -6 -2 5 1 Dirt Trigger(ambush4Trigger)
--6 -2 6 1 Dirt Marker(ambush4IntendedClonePlacement)
+-6 -2 6 1 Dirt Trigger(ambush4DefendSpot)
 -6 -2 7 4 Mud
 -6 -1 0 4 Mud
 -6 -1 1 1 Dirt
@@ -133,10 +388,8 @@ namespace Atharia.Model {
 -6 -1 3 1 Dirt
 -6 -1 4 4 Mud
 -6 -1 5 4 Mud
--5 -3 6 4 Mud
--5 -3 7 4 Mud
--5 -2 0 1 Dirt
--5 -2 1 1 Dirt
+-5 -2 0 4 Mud
+-5 -2 1 4 Mud
 -5 -2 2 1 Dirt
 -5 -2 3 1 Dirt Trigger(ambush4Warning)
 -5 -2 4 4 Mud
@@ -146,13 +399,13 @@ namespace Atharia.Model {
 -5 -1 3 4 Mud
 -5 -1 5 4 Mud
 -4 -2 0 4 Mud
--4 -2 1 1 Dirt
+-4 -2 1 4 Mud
 -4 -2 2 1 Dirt
--4 -2 3 1 Dirt
+-4 -2 3 1 Dirt HealthPotion Trigger(healthPotion)
 -4 -2 4 1 Dirt
 -4 -2 5 4 Mud
 -4 -2 6 4 Mud
--4 -2 7 1 Dirt Marker(ambush3Summon)
+-4 -2 7 1 Dirt
 -3 -2 1 4 Mud
 -3 -2 3 4 Mud
 -3 -2 4 4 Mud
@@ -240,6 +493,7 @@ namespace Atharia.Model {
 2 0 2 5 Mud
 2 0 3 5 Mud
 2 0 5 5 Mud
+
 ";
   }
 }

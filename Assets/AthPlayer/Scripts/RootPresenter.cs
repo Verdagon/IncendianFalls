@@ -136,7 +136,7 @@ namespace AthPlayer {
       }
       playerController.LookAt(unit);
 
-      if (hoveredLocation != null && Input.GetMouseButtonDown(0)) {
+      if (hoveredLocation != null && Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) {
         playerController.OnTileMouseClick(hoveredLocation);
       }
     }

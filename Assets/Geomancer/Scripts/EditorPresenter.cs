@@ -56,6 +56,8 @@ namespace Geomancer {
         [KeyCode.C] = "Cave",
         [KeyCode.F] = "Floor",
         [KeyCode.T] = "Tree",
+        [KeyCode.H] = "HealthPotion",
+        [KeyCode.P] = "ManaPotion",
         [KeyCode.Hash] = "Wall",
         [KeyCode.BackQuote] = "Water",
       };
@@ -73,8 +75,8 @@ namespace Geomancer {
       ss = new Root(new EditorLogger());
 
 
-      //var pattern = PentagonPattern9.makePentagon9Pattern();
-      var pattern = SquarePattern.MakeSquarePattern();
+      var pattern = PentagonPattern9.makePentagon9Pattern();
+      //var pattern = SquarePattern.MakeSquarePattern();
       //var pattern = HexPattern.MakeHexPattern();
       level = ss.Transact(delegate () {
         var terrain = ss.EffectTerrainCreate(pattern, 0.2f, ss.EffectTerrainTileByLocationMutMapCreate());
@@ -164,6 +166,7 @@ namespace Geomancer {
 
         var symbolsAndDescriptions = new List<KeyValuePair<SymbolDescription, string>>();
         if (level.terrain.tiles.ContainsKey(location)) {
+          message += " elevation " + level.terrain.tiles[location].elevation;
           foreach (var member in level.terrain.tiles[location].members) {
             var symbol =
               new SymbolDescription(

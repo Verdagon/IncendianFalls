@@ -24,6 +24,34 @@ namespace Geomancer {
             false,
             new Color(0, 0, 0)))
       });
+      entries.Add("HealthPotion", new List<MemberToViewMapper.IDescription>() {
+        new MemberToViewMapper.OverlayDescriptionForIDescription(
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "plus",
+                              50,
+                        new UnityEngine.Color(.8f, 0, .8f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+                    true,
+                    new UnityEngine.Color(0f, 0f, 0)))
+      });
+      entries.Add("ManaPotion", new List<MemberToViewMapper.IDescription>() {
+        new MemberToViewMapper.OverlayDescriptionForIDescription(
+          new ExtrudedSymbolDescription(
+              RenderPriority.SYMBOL,
+              new SymbolDescription(
+                  "comma",
+                        50,
+                  new UnityEngine.Color(.25f, .7f, 1.0f, 1.5f),
+                  0,
+                  OutlineMode.WithBackOutline,
+                  new UnityEngine.Color(0, 0, 0)),
+              true,
+              new UnityEngine.Color(0f, 0f, 0)))
+      });
       entries.Add("Cave", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.FeatureDescriptionForIDescription(
                   new ExtrudedSymbolDescription(
