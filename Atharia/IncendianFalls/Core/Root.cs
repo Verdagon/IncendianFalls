@@ -89,12 +89,26 @@ public class Root {
   readonly List<TutorialLevelControllerDeleteEffect> effectsTutorialLevelControllerDeleteEffect =
       new List<TutorialLevelControllerDeleteEffect>();
 
+  readonly SortedDictionary<int, List<INestLevelControllerEffectObserver>> observersForNestLevelController =
+      new SortedDictionary<int, List<INestLevelControllerEffectObserver>>();
+  readonly List<NestLevelControllerCreateEffect> effectsNestLevelControllerCreateEffect =
+      new List<NestLevelControllerCreateEffect>();
+  readonly List<NestLevelControllerDeleteEffect> effectsNestLevelControllerDeleteEffect =
+      new List<NestLevelControllerDeleteEffect>();
+
   readonly SortedDictionary<int, List<ICaveLevelControllerEffectObserver>> observersForCaveLevelController =
       new SortedDictionary<int, List<ICaveLevelControllerEffectObserver>>();
   readonly List<CaveLevelControllerCreateEffect> effectsCaveLevelControllerCreateEffect =
       new List<CaveLevelControllerCreateEffect>();
   readonly List<CaveLevelControllerDeleteEffect> effectsCaveLevelControllerDeleteEffect =
       new List<CaveLevelControllerDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IIslandLevelControllerEffectObserver>> observersForIslandLevelController =
+      new SortedDictionary<int, List<IIslandLevelControllerEffectObserver>>();
+  readonly List<IslandLevelControllerCreateEffect> effectsIslandLevelControllerCreateEffect =
+      new List<IslandLevelControllerCreateEffect>();
+  readonly List<IslandLevelControllerDeleteEffect> effectsIslandLevelControllerDeleteEffect =
+      new List<IslandLevelControllerDeleteEffect>();
 
   readonly SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>> observersForRidgeLevelController =
       new SortedDictionary<int, List<IRidgeLevelControllerEffectObserver>>();
@@ -420,6 +434,22 @@ public class Root {
       new List<CounteringUCCreateEffect>();
   readonly List<CounteringUCDeleteEffect> effectsCounteringUCDeleteEffect =
       new List<CounteringUCDeleteEffect>();
+
+  readonly SortedDictionary<int, List<ISummonImpulseEffectObserver>> observersForSummonImpulse =
+      new SortedDictionary<int, List<ISummonImpulseEffectObserver>>();
+  readonly List<SummonImpulseCreateEffect> effectsSummonImpulseCreateEffect =
+      new List<SummonImpulseCreateEffect>();
+  readonly List<SummonImpulseDeleteEffect> effectsSummonImpulseDeleteEffect =
+      new List<SummonImpulseDeleteEffect>();
+
+  readonly SortedDictionary<int, List<ISummonAICapabilityUCEffectObserver>> observersForSummonAICapabilityUC =
+      new SortedDictionary<int, List<ISummonAICapabilityUCEffectObserver>>();
+  readonly List<SummonAICapabilityUCCreateEffect> effectsSummonAICapabilityUCCreateEffect =
+      new List<SummonAICapabilityUCCreateEffect>();
+  readonly List<SummonAICapabilityUCDeleteEffect> effectsSummonAICapabilityUCDeleteEffect =
+      new List<SummonAICapabilityUCDeleteEffect>();
+  readonly List<SummonAICapabilityUCSetChargesEffect> effectsSummonAICapabilityUCSetChargesEffect =
+      new List<SummonAICapabilityUCSetChargesEffect>();
 
   readonly SortedDictionary<int, List<IShieldingUCEffectObserver>> observersForShieldingUC =
       new SortedDictionary<int, List<IShieldingUCEffectObserver>>();
@@ -811,6 +841,17 @@ public class Root {
       new List<WanderAICapabilityUCMutSetAddEffect>();
   readonly List<WanderAICapabilityUCMutSetRemoveEffect> effectsWanderAICapabilityUCMutSetRemoveEffect =
       new List<WanderAICapabilityUCMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<ISummonAICapabilityUCMutSetEffectObserver>> observersForSummonAICapabilityUCMutSet =
+      new SortedDictionary<int, List<ISummonAICapabilityUCMutSetEffectObserver>>();
+  readonly List<SummonAICapabilityUCMutSetCreateEffect> effectsSummonAICapabilityUCMutSetCreateEffect =
+      new List<SummonAICapabilityUCMutSetCreateEffect>();
+  readonly List<SummonAICapabilityUCMutSetDeleteEffect> effectsSummonAICapabilityUCMutSetDeleteEffect =
+      new List<SummonAICapabilityUCMutSetDeleteEffect>();
+  readonly List<SummonAICapabilityUCMutSetAddEffect> effectsSummonAICapabilityUCMutSetAddEffect =
+      new List<SummonAICapabilityUCMutSetAddEffect>();
+  readonly List<SummonAICapabilityUCMutSetRemoveEffect> effectsSummonAICapabilityUCMutSetRemoveEffect =
+      new List<SummonAICapabilityUCMutSetRemoveEffect>();
 
   readonly SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>> observersForBideAICapabilityUCMutSet =
       new SortedDictionary<int, List<IBideAICapabilityUCMutSetEffectObserver>>();
@@ -1371,8 +1412,14 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsTutorialLevelController) {
       result += GetTutorialLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsNestLevelController) {
+      result += GetNestLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsCaveLevelController) {
       result += GetCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsIslandLevelController) {
+      result += GetIslandLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsRidgeLevelController) {
       result += GetRidgeLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1509,6 +1556,12 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsCounteringUC) {
       result += GetCounteringUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsSummonImpulse) {
+      result += GetSummonImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsSummonAICapabilityUC) {
+      result += GetSummonAICapabilityUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsShieldingUC) {
       result += GetShieldingUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1631,6 +1684,9 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsWanderAICapabilityUCMutSet) {
       result += GetWanderAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsSummonAICapabilityUCMutSet) {
+      result += GetSummonAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsBideAICapabilityUCMutSet) {
       result += GetBideAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1779,7 +1835,13 @@ public class Root {
     foreach (var obj in this.AllTutorialLevelController()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllNestLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllCaveLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllIslandLevelController()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllRidgeLevelController()) {
@@ -1917,6 +1979,12 @@ public class Root {
     foreach (var obj in this.AllCounteringUC()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllSummonImpulse()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllSummonAICapabilityUC()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllShieldingUC()) {
       obj.CheckForNullViolations(violations);
     }
@@ -2038,6 +2106,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllWanderAICapabilityUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllSummonAICapabilityUCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllBideAICapabilityUCMutSet()) {
@@ -2200,7 +2271,17 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllNestLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllCaveLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllIslandLevelController()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -2430,6 +2511,16 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllSummonImpulse()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllSummonAICapabilityUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllShieldingUC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -2631,6 +2722,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllWanderAICapabilityUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllSummonAICapabilityUCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -2926,6 +3022,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForNestLevelController =
+        new SortedDictionary<int, List<INestLevelControllerEffectObserver>>();
+    foreach (var entry in observersForNestLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForNestLevelController.Add(
+          objectId,
+          new List<INestLevelControllerEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForCaveLevelController =
         new SortedDictionary<int, List<ICaveLevelControllerEffectObserver>>();
     foreach (var entry in observersForCaveLevelController) {
@@ -2934,6 +3041,17 @@ public class Root {
       copyOfObserversForCaveLevelController.Add(
           objectId,
           new List<ICaveLevelControllerEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForIslandLevelController =
+        new SortedDictionary<int, List<IIslandLevelControllerEffectObserver>>();
+    foreach (var entry in observersForIslandLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForIslandLevelController.Add(
+          objectId,
+          new List<IIslandLevelControllerEffectObserver>(
               observers));
     }
 
@@ -3432,6 +3550,28 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForSummonImpulse =
+        new SortedDictionary<int, List<ISummonImpulseEffectObserver>>();
+    foreach (var entry in observersForSummonImpulse) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForSummonImpulse.Add(
+          objectId,
+          new List<ISummonImpulseEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForSummonAICapabilityUC =
+        new SortedDictionary<int, List<ISummonAICapabilityUCEffectObserver>>();
+    foreach (var entry in observersForSummonAICapabilityUC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForSummonAICapabilityUC.Add(
+          objectId,
+          new List<ISummonAICapabilityUCEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForShieldingUC =
         new SortedDictionary<int, List<IShieldingUCEffectObserver>>();
     foreach (var entry in observersForShieldingUC) {
@@ -3880,6 +4020,17 @@ public class Root {
       copyOfObserversForWanderAICapabilityUCMutSet.Add(
           objectId,
           new List<IWanderAICapabilityUCMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForSummonAICapabilityUCMutSet =
+        new SortedDictionary<int, List<ISummonAICapabilityUCMutSetEffectObserver>>();
+    foreach (var entry in observersForSummonAICapabilityUCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForSummonAICapabilityUCMutSet.Add(
+          objectId,
+          new List<ISummonAICapabilityUCMutSetEffectObserver>(
               observers));
     }
 
@@ -4344,8 +4495,14 @@ public class Root {
     BroadcastTutorialLevelControllerEffects(
         copyOfObserversForTutorialLevelController);
            
+    BroadcastNestLevelControllerEffects(
+        copyOfObserversForNestLevelController);
+           
     BroadcastCaveLevelControllerEffects(
         copyOfObserversForCaveLevelController);
+           
+    BroadcastIslandLevelControllerEffects(
+        copyOfObserversForIslandLevelController);
            
     BroadcastRidgeLevelControllerEffects(
         copyOfObserversForRidgeLevelController);
@@ -4482,6 +4639,12 @@ public class Root {
     BroadcastCounteringUCEffects(
         copyOfObserversForCounteringUC);
            
+    BroadcastSummonImpulseEffects(
+        copyOfObserversForSummonImpulse);
+           
+    BroadcastSummonAICapabilityUCEffects(
+        copyOfObserversForSummonAICapabilityUC);
+           
     BroadcastShieldingUCEffects(
         copyOfObserversForShieldingUC);
            
@@ -4604,6 +4767,9 @@ public class Root {
            
     BroadcastWanderAICapabilityUCMutSetEffects(
         copyOfObserversForWanderAICapabilityUCMutSet);
+           
+    BroadcastSummonAICapabilityUCMutSetEffects(
+        copyOfObserversForSummonAICapabilityUCMutSet);
            
     BroadcastBideAICapabilityUCMutSetEffects(
         copyOfObserversForBideAICapabilityUCMutSet);
@@ -4811,6 +4977,16 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsNestLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsNestLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateNestLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCaveLevelController) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -4818,6 +4994,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsCaveLevelController.ContainsKey(sourceObjId)) {
         EffectInternalCreateCaveLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIslandLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsIslandLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateIslandLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -5271,6 +5457,26 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSummonImpulse) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsSummonImpulse.ContainsKey(sourceObjId)) {
+        EffectInternalCreateSummonImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSummonAICapabilityUC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateSummonAICapabilityUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsShieldingUC) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -5678,6 +5884,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsWanderAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateWanderAICapabilityUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSummonAICapabilityUCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsSummonAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateSummonAICapabilityUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -6569,6 +6785,34 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsWanderAICapabilityUCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSummonAICapabilityUCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsSummonAICapabilityUCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsSummonAICapabilityUCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectSummonAICapabilityUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectSummonAICapabilityUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsSummonAICapabilityUCMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -7843,6 +8087,27 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsNestLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsNestLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsNestLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsNestLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCaveLevelController) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -7859,6 +8124,27 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsCaveLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIslandLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsIslandLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIslandLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsIslandLevelController[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -8829,6 +9115,52 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSummonImpulse) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsSummonImpulse.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsSummonImpulse[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsSummonImpulse[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSummonAICapabilityUC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsSummonAICapabilityUC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          if (sourceObjIncarnation.charges != currentObjIncarnation.charges) {
+            EffectSummonAICapabilityUCSetCharges(objId, sourceObjIncarnation.charges);
+          }
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsSummonAICapabilityUC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsShieldingUC) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -9425,10 +9757,24 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<NestLevelControllerIncarnation>>(rootIncarnation.incarnationsNestLevelController)) {
+      if (!sourceIncarnation.incarnationsNestLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectNestLevelControllerDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>>(rootIncarnation.incarnationsCaveLevelController)) {
       if (!sourceIncarnation.incarnationsCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectCaveLevelControllerDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IslandLevelControllerIncarnation>>(rootIncarnation.incarnationsIslandLevelController)) {
+      if (!sourceIncarnation.incarnationsIslandLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectIslandLevelControllerDelete(id);
       }
     }
 
@@ -9747,6 +10093,20 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<SummonImpulseIncarnation>>(rootIncarnation.incarnationsSummonImpulse)) {
+      if (!sourceIncarnation.incarnationsSummonImpulse.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectSummonImpulseDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCIncarnation>>(rootIncarnation.incarnationsSummonAICapabilityUC)) {
+      if (!sourceIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectSummonAICapabilityUCDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ShieldingUCIncarnation>>(rootIncarnation.incarnationsShieldingUC)) {
       if (!sourceIncarnation.incarnationsShieldingUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -10031,6 +10391,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsWanderAICapabilityUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectWanderAICapabilityUCMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCMutSetIncarnation>>(rootIncarnation.incarnationsSummonAICapabilityUCMutSet)) {
+      if (!sourceIncarnation.incarnationsSummonAICapabilityUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectSummonAICapabilityUCMutSetDelete(id);
       }
     }
 
@@ -11214,6 +11581,136 @@ public class Root {
     }
     effectsTutorialLevelControllerCreateEffect.Clear();
   }
+  public NestLevelControllerIncarnation GetNestLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsNestLevelController[id].incarnation;
+  }
+  public bool NestLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsNestLevelController.ContainsKey(id);
+  }
+  public NestLevelController GetNestLevelController(int id) {
+    return new NestLevelController(this, id);
+  }
+  public List<NestLevelController> AllNestLevelController() {
+    List<NestLevelController> result = new List<NestLevelController>(rootIncarnation.incarnationsNestLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsNestLevelController.Keys) {
+      result.Add(new NestLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<NestLevelController> EnumAllNestLevelController() {
+    foreach (var id in rootIncarnation.incarnationsNestLevelController.Keys) {
+      yield return GetNestLevelController(id);
+    }
+  }
+  public void CheckHasNestLevelController(NestLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasNestLevelController(thing.id);
+  }
+  public void CheckHasNestLevelController(int id) {
+    if (!rootIncarnation.incarnationsNestLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid NestLevelController: " + id);
+    }
+  }
+  public void AddNestLevelControllerObserver(int id, INestLevelControllerEffectObserver observer) {
+    List<INestLevelControllerEffectObserver> obsies;
+    if (!observersForNestLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<INestLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForNestLevelController[id] = obsies;
+  }
+
+  public void RemoveNestLevelControllerObserver(int id, INestLevelControllerEffectObserver observer) {
+    if (observersForNestLevelController.ContainsKey(id)) {
+      var list = observersForNestLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForNestLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public NestLevelController EffectNestLevelControllerCreate(
+      Level level) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new NestLevelControllerIncarnation(
+            level.id
+            );
+    EffectInternalCreateNestLevelController(id, rootIncarnation.version, incarnation);
+    return new NestLevelController(this, id);
+  }
+  public void EffectInternalCreateNestLevelController(
+      int id,
+      int incarnationVersion,
+      NestLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new NestLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsNestLevelController.Add(
+        id,
+        new VersionAndIncarnation<NestLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsNestLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectNestLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new NestLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsNestLevelController[id];
+
+    rootIncarnation.incarnationsNestLevelController.Remove(id);
+    effectsNestLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetNestLevelControllerHash(int id, int version, NestLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastNestLevelControllerEffects(
+      SortedDictionary<int, List<INestLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsNestLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<INestLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnNestLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<INestLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnNestLevelControllerEffect(effect);
+        }
+        observersForNestLevelController.Remove(effect.id);
+      }
+    }
+    effectsNestLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsNestLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<INestLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnNestLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<INestLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnNestLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsNestLevelControllerCreateEffect.Clear();
+  }
   public CaveLevelControllerIncarnation GetCaveLevelControllerIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -11343,6 +11840,136 @@ public class Root {
       }
     }
     effectsCaveLevelControllerCreateEffect.Clear();
+  }
+  public IslandLevelControllerIncarnation GetIslandLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsIslandLevelController[id].incarnation;
+  }
+  public bool IslandLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsIslandLevelController.ContainsKey(id);
+  }
+  public IslandLevelController GetIslandLevelController(int id) {
+    return new IslandLevelController(this, id);
+  }
+  public List<IslandLevelController> AllIslandLevelController() {
+    List<IslandLevelController> result = new List<IslandLevelController>(rootIncarnation.incarnationsIslandLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsIslandLevelController.Keys) {
+      result.Add(new IslandLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<IslandLevelController> EnumAllIslandLevelController() {
+    foreach (var id in rootIncarnation.incarnationsIslandLevelController.Keys) {
+      yield return GetIslandLevelController(id);
+    }
+  }
+  public void CheckHasIslandLevelController(IslandLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasIslandLevelController(thing.id);
+  }
+  public void CheckHasIslandLevelController(int id) {
+    if (!rootIncarnation.incarnationsIslandLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid IslandLevelController: " + id);
+    }
+  }
+  public void AddIslandLevelControllerObserver(int id, IIslandLevelControllerEffectObserver observer) {
+    List<IIslandLevelControllerEffectObserver> obsies;
+    if (!observersForIslandLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IIslandLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForIslandLevelController[id] = obsies;
+  }
+
+  public void RemoveIslandLevelControllerObserver(int id, IIslandLevelControllerEffectObserver observer) {
+    if (observersForIslandLevelController.ContainsKey(id)) {
+      var list = observersForIslandLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForIslandLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public IslandLevelController EffectIslandLevelControllerCreate(
+      Level level) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new IslandLevelControllerIncarnation(
+            level.id
+            );
+    EffectInternalCreateIslandLevelController(id, rootIncarnation.version, incarnation);
+    return new IslandLevelController(this, id);
+  }
+  public void EffectInternalCreateIslandLevelController(
+      int id,
+      int incarnationVersion,
+      IslandLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new IslandLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsIslandLevelController.Add(
+        id,
+        new VersionAndIncarnation<IslandLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsIslandLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectIslandLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new IslandLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsIslandLevelController[id];
+
+    rootIncarnation.incarnationsIslandLevelController.Remove(id);
+    effectsIslandLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetIslandLevelControllerHash(int id, int version, IslandLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastIslandLevelControllerEffects(
+      SortedDictionary<int, List<IIslandLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsIslandLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IIslandLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIslandLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIslandLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIslandLevelControllerEffect(effect);
+        }
+        observersForIslandLevelController.Remove(effect.id);
+      }
+    }
+    effectsIslandLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsIslandLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<IIslandLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIslandLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIslandLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIslandLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsIslandLevelControllerCreateEffect.Clear();
   }
   public RidgeLevelControllerIncarnation GetRidgeLevelControllerIncarnation(int id) {
     if (id == 0) {
@@ -17479,6 +18106,310 @@ public class Root {
     }
     effectsCounteringUCCreateEffect.Clear();
   }
+  public SummonImpulseIncarnation GetSummonImpulseIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsSummonImpulse[id].incarnation;
+  }
+  public bool SummonImpulseExists(int id) {
+    return rootIncarnation.incarnationsSummonImpulse.ContainsKey(id);
+  }
+  public SummonImpulse GetSummonImpulse(int id) {
+    return new SummonImpulse(this, id);
+  }
+  public List<SummonImpulse> AllSummonImpulse() {
+    List<SummonImpulse> result = new List<SummonImpulse>(rootIncarnation.incarnationsSummonImpulse.Count);
+    foreach (var id in rootIncarnation.incarnationsSummonImpulse.Keys) {
+      result.Add(new SummonImpulse(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<SummonImpulse> EnumAllSummonImpulse() {
+    foreach (var id in rootIncarnation.incarnationsSummonImpulse.Keys) {
+      yield return GetSummonImpulse(id);
+    }
+  }
+  public void CheckHasSummonImpulse(SummonImpulse thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasSummonImpulse(thing.id);
+  }
+  public void CheckHasSummonImpulse(int id) {
+    if (!rootIncarnation.incarnationsSummonImpulse.ContainsKey(id)) {
+      throw new System.Exception("Invalid SummonImpulse: " + id);
+    }
+  }
+  public void AddSummonImpulseObserver(int id, ISummonImpulseEffectObserver observer) {
+    List<ISummonImpulseEffectObserver> obsies;
+    if (!observersForSummonImpulse.TryGetValue(id, out obsies)) {
+      obsies = new List<ISummonImpulseEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForSummonImpulse[id] = obsies;
+  }
+
+  public void RemoveSummonImpulseObserver(int id, ISummonImpulseEffectObserver observer) {
+    if (observersForSummonImpulse.ContainsKey(id)) {
+      var list = observersForSummonImpulse[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForSummonImpulse.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public SummonImpulse EffectSummonImpulseCreate(
+      int weight,
+      string blueprintName,
+      Location location) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new SummonImpulseIncarnation(
+            weight,
+            blueprintName,
+            location
+            );
+    EffectInternalCreateSummonImpulse(id, rootIncarnation.version, incarnation);
+    return new SummonImpulse(this, id);
+  }
+  public void EffectInternalCreateSummonImpulse(
+      int id,
+      int incarnationVersion,
+      SummonImpulseIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new SummonImpulseCreateEffect(id);
+    rootIncarnation.incarnationsSummonImpulse.Add(
+        id,
+        new VersionAndIncarnation<SummonImpulseIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsSummonImpulseCreateEffect.Add(effect);
+  }
+
+  public void EffectSummonImpulseDelete(int id) {
+    CheckUnlocked();
+    var effect = new SummonImpulseDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsSummonImpulse[id];
+
+    rootIncarnation.incarnationsSummonImpulse.Remove(id);
+    effectsSummonImpulseDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetSummonImpulseHash(int id, int version, SummonImpulseIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.weight.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.blueprintName.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.location.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastSummonImpulseEffects(
+      SortedDictionary<int, List<ISummonImpulseEffectObserver>> observers) {
+    foreach (var effect in effectsSummonImpulseDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ISummonImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonImpulseEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonImpulseEffect(effect);
+        }
+        observersForSummonImpulse.Remove(effect.id);
+      }
+    }
+    effectsSummonImpulseDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsSummonImpulseCreateEffect) {
+      if (observers.TryGetValue(0, out List<ISummonImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonImpulseEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonImpulseEffect(effect);
+        }
+      }
+    }
+    effectsSummonImpulseCreateEffect.Clear();
+  }
+  public SummonAICapabilityUCIncarnation GetSummonAICapabilityUCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsSummonAICapabilityUC[id].incarnation;
+  }
+  public bool SummonAICapabilityUCExists(int id) {
+    return rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id);
+  }
+  public SummonAICapabilityUC GetSummonAICapabilityUC(int id) {
+    return new SummonAICapabilityUC(this, id);
+  }
+  public List<SummonAICapabilityUC> AllSummonAICapabilityUC() {
+    List<SummonAICapabilityUC> result = new List<SummonAICapabilityUC>(rootIncarnation.incarnationsSummonAICapabilityUC.Count);
+    foreach (var id in rootIncarnation.incarnationsSummonAICapabilityUC.Keys) {
+      result.Add(new SummonAICapabilityUC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<SummonAICapabilityUC> EnumAllSummonAICapabilityUC() {
+    foreach (var id in rootIncarnation.incarnationsSummonAICapabilityUC.Keys) {
+      yield return GetSummonAICapabilityUC(id);
+    }
+  }
+  public void CheckHasSummonAICapabilityUC(SummonAICapabilityUC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasSummonAICapabilityUC(thing.id);
+  }
+  public void CheckHasSummonAICapabilityUC(int id) {
+    if (!rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id)) {
+      throw new System.Exception("Invalid SummonAICapabilityUC: " + id);
+    }
+  }
+  public void AddSummonAICapabilityUCObserver(int id, ISummonAICapabilityUCEffectObserver observer) {
+    List<ISummonAICapabilityUCEffectObserver> obsies;
+    if (!observersForSummonAICapabilityUC.TryGetValue(id, out obsies)) {
+      obsies = new List<ISummonAICapabilityUCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForSummonAICapabilityUC[id] = obsies;
+  }
+
+  public void RemoveSummonAICapabilityUCObserver(int id, ISummonAICapabilityUCEffectObserver observer) {
+    if (observersForSummonAICapabilityUC.ContainsKey(id)) {
+      var list = observersForSummonAICapabilityUC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForSummonAICapabilityUC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public SummonAICapabilityUC EffectSummonAICapabilityUCCreate(
+      string blueprintName,
+      int charges) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new SummonAICapabilityUCIncarnation(
+            blueprintName,
+            charges
+            );
+    EffectInternalCreateSummonAICapabilityUC(id, rootIncarnation.version, incarnation);
+    return new SummonAICapabilityUC(this, id);
+  }
+  public void EffectInternalCreateSummonAICapabilityUC(
+      int id,
+      int incarnationVersion,
+      SummonAICapabilityUCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new SummonAICapabilityUCCreateEffect(id);
+    rootIncarnation.incarnationsSummonAICapabilityUC.Add(
+        id,
+        new VersionAndIncarnation<SummonAICapabilityUCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsSummonAICapabilityUCCreateEffect.Add(effect);
+  }
+
+  public void EffectSummonAICapabilityUCDelete(int id) {
+    CheckUnlocked();
+    var effect = new SummonAICapabilityUCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsSummonAICapabilityUC[id];
+
+    rootIncarnation.incarnationsSummonAICapabilityUC.Remove(id);
+    effectsSummonAICapabilityUCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetSummonAICapabilityUCHash(int id, int version, SummonAICapabilityUCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.blueprintName.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.charges.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastSummonAICapabilityUCEffects(
+      SortedDictionary<int, List<ISummonAICapabilityUCEffectObserver>> observers) {
+    foreach (var effect in effectsSummonAICapabilityUCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ISummonAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonAICapabilityUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonAICapabilityUCEffect(effect);
+        }
+        observersForSummonAICapabilityUC.Remove(effect.id);
+      }
+    }
+    effectsSummonAICapabilityUCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsSummonAICapabilityUCSetChargesEffect) {
+      if (observers.TryGetValue(0, out List<ISummonAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonAICapabilityUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonAICapabilityUCEffect(effect);
+        }
+      }
+    }
+    effectsSummonAICapabilityUCSetChargesEffect.Clear();
+
+    foreach (var effect in effectsSummonAICapabilityUCCreateEffect) {
+      if (observers.TryGetValue(0, out List<ISummonAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonAICapabilityUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonAICapabilityUCEffect(effect);
+        }
+      }
+    }
+    effectsSummonAICapabilityUCCreateEffect.Clear();
+  }
+
+  public void EffectSummonAICapabilityUCSetCharges(int id, int newValue) {
+    CheckUnlocked();
+    CheckHasSummonAICapabilityUC(id);
+    var effect = new SummonAICapabilityUCSetChargesEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsSummonAICapabilityUC[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.charges;
+      oldIncarnationAndVersion.incarnation.charges = newValue;
+
+    } else {
+      var newIncarnation =
+          new SummonAICapabilityUCIncarnation(
+              oldIncarnationAndVersion.incarnation.blueprintName,
+              newValue);
+      rootIncarnation.incarnationsSummonAICapabilityUC[id] =
+          new VersionAndIncarnation<SummonAICapabilityUCIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsSummonAICapabilityUCSetChargesEffect.Add(effect);
+  }
   public ShieldingUCIncarnation GetShieldingUCIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -19949,6 +20880,7 @@ public class Root {
       GlaiveMutSet membersGlaiveMutSet,
       ArmorMutSet membersArmorMutSet,
       WanderAICapabilityUCMutSet membersWanderAICapabilityUCMutSet,
+      SummonAICapabilityUCMutSet membersSummonAICapabilityUCMutSet,
       BideAICapabilityUCMutSet membersBideAICapabilityUCMutSet,
       TimeCloneAICapabilityUCMutSet membersTimeCloneAICapabilityUCMutSet,
       ShieldingUCMutSet membersShieldingUCMutSet,
@@ -19966,6 +20898,7 @@ public class Root {
     CheckHasGlaiveMutSet(membersGlaiveMutSet);
     CheckHasArmorMutSet(membersArmorMutSet);
     CheckHasWanderAICapabilityUCMutSet(membersWanderAICapabilityUCMutSet);
+    CheckHasSummonAICapabilityUCMutSet(membersSummonAICapabilityUCMutSet);
     CheckHasBideAICapabilityUCMutSet(membersBideAICapabilityUCMutSet);
     CheckHasTimeCloneAICapabilityUCMutSet(membersTimeCloneAICapabilityUCMutSet);
     CheckHasShieldingUCMutSet(membersShieldingUCMutSet);
@@ -19986,6 +20919,7 @@ public class Root {
             membersGlaiveMutSet.id,
             membersArmorMutSet.id,
             membersWanderAICapabilityUCMutSet.id,
+            membersSummonAICapabilityUCMutSet.id,
             membersBideAICapabilityUCMutSet.id,
             membersTimeCloneAICapabilityUCMutSet.id,
             membersShieldingUCMutSet.id,
@@ -20034,14 +20968,15 @@ public class Root {
     result += id * version * 6 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
     result += id * version * 7 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
     result += id * version * 8 * incarnation.membersWanderAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.membersShieldingUCMutSet.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
-    result += id * version * 15 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
-    result += id * version * 16 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersSummonAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.membersShieldingUCMutSet.GetDeterministicHashCode();
+    result += id * version * 13 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
+    result += id * version * 16 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 17 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -21916,6 +22851,9 @@ public class Root {
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIAICapabilityUC(new WanderAICapabilityUC(this, id));
     }
+    if (rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id)) {
+      return new SummonAICapabilityUCAsIAICapabilityUC(new SummonAICapabilityUC(this, id));
+    }
     if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
       return new TimeCloneAICapabilityUCAsIAICapabilityUC(new TimeCloneAICapabilityUC(this, id));
     }
@@ -21930,6 +22868,9 @@ public class Root {
   public IAICapabilityUC GetIAICapabilityUCOrNull(int id) {
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIAICapabilityUC(new WanderAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id)) {
+      return new SummonAICapabilityUCAsIAICapabilityUC(new SummonAICapabilityUC(this, id));
     }
     if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
       return new TimeCloneAICapabilityUCAsIAICapabilityUC(new TimeCloneAICapabilityUC(this, id));
@@ -22055,6 +22996,9 @@ public class Root {
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIUnitComponent(new WanderAICapabilityUC(this, id));
     }
+    if (rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id)) {
+      return new SummonAICapabilityUCAsIUnitComponent(new SummonAICapabilityUC(this, id));
+    }
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIUnitComponent(new BideAICapabilityUC(this, id));
     }
@@ -22106,6 +23050,9 @@ public class Root {
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIUnitComponent(new WanderAICapabilityUC(this, id));
     }
+    if (rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id)) {
+      return new SummonAICapabilityUCAsIUnitComponent(new SummonAICapabilityUC(this, id));
+    }
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIUnitComponent(new BideAICapabilityUC(this, id));
     }
@@ -22143,6 +23090,9 @@ public class Root {
   }
 
   public IImpulse GetIImpulse(int id) {
+    if (rootIncarnation.incarnationsSummonImpulse.ContainsKey(id)) {
+      return new SummonImpulseAsIImpulse(new SummonImpulse(this, id));
+    }
     if (rootIncarnation.incarnationsEvaporateImpulse.ContainsKey(id)) {
       return new EvaporateImpulseAsIImpulse(new EvaporateImpulse(this, id));
     }
@@ -22179,6 +23129,9 @@ public class Root {
     throw new Exception("Unknown IImpulse: " + id);
   }
   public IImpulse GetIImpulseOrNull(int id) {
+    if (rootIncarnation.incarnationsSummonImpulse.ContainsKey(id)) {
+      return new SummonImpulseAsIImpulse(new SummonImpulse(this, id));
+    }
     if (rootIncarnation.incarnationsEvaporateImpulse.ContainsKey(id)) {
       return new EvaporateImpulseAsIImpulse(new EvaporateImpulse(this, id));
     }
@@ -22228,8 +23181,14 @@ public class Root {
     if (rootIncarnation.incarnationsTutorialLevelController.ContainsKey(id)) {
       return new TutorialLevelControllerAsILevelController(new TutorialLevelController(this, id));
     }
+    if (rootIncarnation.incarnationsNestLevelController.ContainsKey(id)) {
+      return new NestLevelControllerAsILevelController(new NestLevelController(this, id));
+    }
     if (rootIncarnation.incarnationsCaveLevelController.ContainsKey(id)) {
       return new CaveLevelControllerAsILevelController(new CaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsIslandLevelController.ContainsKey(id)) {
+      return new IslandLevelControllerAsILevelController(new IslandLevelController(this, id));
     }
     if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
       return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
@@ -22258,8 +23217,14 @@ public class Root {
     if (rootIncarnation.incarnationsTutorialLevelController.ContainsKey(id)) {
       return new TutorialLevelControllerAsILevelController(new TutorialLevelController(this, id));
     }
+    if (rootIncarnation.incarnationsNestLevelController.ContainsKey(id)) {
+      return new NestLevelControllerAsILevelController(new NestLevelController(this, id));
+    }
     if (rootIncarnation.incarnationsCaveLevelController.ContainsKey(id)) {
       return new CaveLevelControllerAsILevelController(new CaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsIslandLevelController.ContainsKey(id)) {
+      return new IslandLevelControllerAsILevelController(new IslandLevelController(this, id));
     }
     if (rootIncarnation.incarnationsRidgeLevelController.ContainsKey(id)) {
       return new RidgeLevelControllerAsILevelController(new RidgeLevelController(this, id));
@@ -22397,6 +23362,9 @@ public class Root {
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIDestructible(new WanderAICapabilityUC(this, id));
     }
+    if (rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id)) {
+      return new SummonAICapabilityUCAsIDestructible(new SummonAICapabilityUC(this, id));
+    }
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIDestructible(new BideAICapabilityUC(this, id));
     }
@@ -22420,6 +23388,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsBaseDefenseUC.ContainsKey(id)) {
       return new BaseDefenseUCAsIDestructible(new BaseDefenseUC(this, id));
+    }
+    if (rootIncarnation.incarnationsSummonImpulse.ContainsKey(id)) {
+      return new SummonImpulseAsIDestructible(new SummonImpulse(this, id));
     }
     if (rootIncarnation.incarnationsEvaporateImpulse.ContainsKey(id)) {
       return new EvaporateImpulseAsIDestructible(new EvaporateImpulse(this, id));
@@ -22562,6 +23533,9 @@ public class Root {
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIDestructible(new WanderAICapabilityUC(this, id));
     }
+    if (rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id)) {
+      return new SummonAICapabilityUCAsIDestructible(new SummonAICapabilityUC(this, id));
+    }
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIDestructible(new BideAICapabilityUC(this, id));
     }
@@ -22585,6 +23559,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsBaseDefenseUC.ContainsKey(id)) {
       return new BaseDefenseUCAsIDestructible(new BaseDefenseUC(this, id));
+    }
+    if (rootIncarnation.incarnationsSummonImpulse.ContainsKey(id)) {
+      return new SummonImpulseAsIDestructible(new SummonImpulse(this, id));
     }
     if (rootIncarnation.incarnationsEvaporateImpulse.ContainsKey(id)) {
       return new EvaporateImpulseAsIDestructible(new EvaporateImpulse(this, id));
@@ -26057,6 +27034,197 @@ public class Root {
       }
     }
     effectsWanderAICapabilityUCMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetSummonAICapabilityUCMutSetHash(int id, int version, SummonAICapabilityUCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public SummonAICapabilityUCMutSetIncarnation GetSummonAICapabilityUCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsSummonAICapabilityUCMutSet[id].incarnation;
+    }
+    public SummonAICapabilityUCMutSet GetSummonAICapabilityUCMutSet(int id) {
+      return new SummonAICapabilityUCMutSet(this, id);
+    }
+    public List<SummonAICapabilityUCMutSet> AllSummonAICapabilityUCMutSet() {
+      List<SummonAICapabilityUCMutSet> result = new List<SummonAICapabilityUCMutSet>(rootIncarnation.incarnationsSummonAICapabilityUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsSummonAICapabilityUCMutSet.Keys) {
+        result.Add(new SummonAICapabilityUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool SummonAICapabilityUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsSummonAICapabilityUCMutSet.ContainsKey(id);
+    }
+    public void CheckHasSummonAICapabilityUCMutSet(SummonAICapabilityUCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasSummonAICapabilityUCMutSet(thing.id);
+    }
+    public void CheckHasSummonAICapabilityUCMutSet(int id) {
+      if (!rootIncarnation.incarnationsSummonAICapabilityUCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid SummonAICapabilityUCMutSet}: " + id);
+      }
+    }
+    public SummonAICapabilityUCMutSet EffectSummonAICapabilityUCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new SummonAICapabilityUCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateSummonAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
+      return new SummonAICapabilityUCMutSet(this, id);
+    }
+    public void EffectInternalCreateSummonAICapabilityUCMutSet(int id, int incarnationVersion, SummonAICapabilityUCMutSetIncarnation incarnation) {
+      var effect = new SummonAICapabilityUCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsSummonAICapabilityUCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<SummonAICapabilityUCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsSummonAICapabilityUCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectSummonAICapabilityUCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new SummonAICapabilityUCMutSetDeleteEffect(id);
+      effectsSummonAICapabilityUCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsSummonAICapabilityUCMutSet[id];
+      rootIncarnation.incarnationsSummonAICapabilityUCMutSet.Remove(id);
+    }
+
+       
+    public void EffectSummonAICapabilityUCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasSummonAICapabilityUCMutSet(setId);
+      CheckHasSummonAICapabilityUC(elementId);
+
+      var effect = new SummonAICapabilityUCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsSummonAICapabilityUCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new SummonAICapabilityUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsSummonAICapabilityUCMutSet[setId] =
+            new VersionAndIncarnation<SummonAICapabilityUCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsSummonAICapabilityUCMutSetAddEffect.Add(effect);
+    }
+    public void EffectSummonAICapabilityUCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasSummonAICapabilityUCMutSet(setId);
+      CheckHasSummonAICapabilityUC(elementId);
+
+      var effect = new SummonAICapabilityUCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsSummonAICapabilityUCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new SummonAICapabilityUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsSummonAICapabilityUCMutSet[setId] =
+            new VersionAndIncarnation<SummonAICapabilityUCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsSummonAICapabilityUCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddSummonAICapabilityUCMutSetObserver(int id, ISummonAICapabilityUCMutSetEffectObserver observer) {
+      List<ISummonAICapabilityUCMutSetEffectObserver> obsies;
+      if (!observersForSummonAICapabilityUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ISummonAICapabilityUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForSummonAICapabilityUCMutSet[id] = obsies;
+    }
+
+    public void RemoveSummonAICapabilityUCMutSetObserver(int id, ISummonAICapabilityUCMutSetEffectObserver observer) {
+      if (observersForSummonAICapabilityUCMutSet.ContainsKey(id)) {
+        var list = observersForSummonAICapabilityUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForSummonAICapabilityUCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastSummonAICapabilityUCMutSetEffects(
+      SortedDictionary<int, List<ISummonAICapabilityUCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsSummonAICapabilityUCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ISummonAICapabilityUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonAICapabilityUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonAICapabilityUCMutSetEffect(effect);
+        }
+        observersForSummonAICapabilityUCMutSet.Remove(effect.id);
+      }
+    }
+    effectsSummonAICapabilityUCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsSummonAICapabilityUCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<ISummonAICapabilityUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonAICapabilityUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonAICapabilityUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsSummonAICapabilityUCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsSummonAICapabilityUCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<ISummonAICapabilityUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonAICapabilityUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonAICapabilityUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsSummonAICapabilityUCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsSummonAICapabilityUCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<ISummonAICapabilityUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonAICapabilityUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonAICapabilityUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsSummonAICapabilityUCMutSetCreateEffect.Clear();
 
   }
 

@@ -4,6 +4,49 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public static class TerrainUtils {
+
+    public static Location GetLocationClosestTo(
+        Terrain terrain,
+        Vec2 targetPos) {
+      Location closestLocation = new Location(0, 0, 0);
+      float closestLocationDistance =
+          terrain.pattern.GetTileCenter(closestLocation)
+          .distance(targetPos);
+
+      foreach (var hay in terrain.tiles) {
+        var hayLoc = hay.Key;
+        var hayCenter = terrain.pattern.GetTileCenter(hayLoc);
+        var hayDistance = hayCenter.distance(targetPos);
+        if (hayDistance < closestLocationDistance) {
+          closestLocation = hayLoc;
+          closestLocationDistance = hayDistance;
+        }
+      }
+
+      return closestLocation;
+    }
+
+    public static void GetMapBounds(
+        out float mapMinX,
+        out float mapMinY,
+        out float mapMaxX,
+        out float mapMaxY,
+        Terrain terrain) {
+      mapMinX = 0;
+      mapMinY = 0;
+      mapMaxX = 0;
+      mapMaxY = 0;
+
+      foreach (var entry in terrain.tiles) {
+        var location = entry.Key;
+        var center = terrain.pattern.GetTileCenter(location);
+        mapMinX = Math.Min(mapMinX, center.x);
+        mapMinY = Math.Min(mapMinY, center.y);
+        mapMaxX = Math.Max(mapMaxX, center.x);
+        mapMaxY = Math.Max(mapMaxY, center.y);
+      }
+    }
+
     // Returns all this-room spaces that are touching anything not in this room.
     public static SortedSet<Location> FindBorderLocations(
         Pattern pattern,

@@ -80,10 +80,10 @@ namespace Atharia.Model {
         Asserts.Assert(entryLocation != exitLocation);
       }
 
-      GenerationCommon.FillWithUnits(
+      IncendianFallsUnitsAndItems.FillWithUnits(
           game, level, levelSuperstate, depth);
 
-      GenerationCommon.PlaceItems(
+      IncendianFallsUnitsAndItems.PlaceItems(
           game.rand, level, levelSuperstate, depth, entryLocation, .02f, .02f);
     }
 

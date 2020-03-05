@@ -24,8 +24,8 @@ namespace Atharia.Model {
 
       game.levels.Add(level);
 
-      GenerationCommon.PlaceRocks(game.rand, level, levelSuperstate);
-      GenerationCommon.PlaceItems(
+      IncendianFallsUnitsAndItems.PlaceRocks(game.rand, level, levelSuperstate);
+      IncendianFallsUnitsAndItems.PlaceItems(
           game.rand, level, levelSuperstate, levelIndex, new Location(0, 0, 0), .03f, .02f);
       //GenerationCommon.PlaceStaircases(context, game.rand, level, levelSuperstate);
 

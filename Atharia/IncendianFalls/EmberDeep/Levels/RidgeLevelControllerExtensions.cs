@@ -59,6 +59,8 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         string triggerName) {
+      game.root.logger.Info("Got trigger: " + triggerName);
+
       if (triggerName == "levelStart") {
         game.events.Add(
           new ShowOverlayEvent(
@@ -214,7 +216,7 @@ namespace Atharia.Model {
             7000, // fadeOutEnd,
             "cinematicDone", // end trigger
 
-            "He cast an Eternal Stasis on the Ravashrike... but he caught himself in it too.",
+            "He used a black incendium staff to cast an Eternal Stasis on the Ravashrike...\n\nBut he caught himself in it too.",
             new Color(255, 64, 0, 255), // textColor
             1000, // textFadeInStartS
             2000, // textFadeInEndS

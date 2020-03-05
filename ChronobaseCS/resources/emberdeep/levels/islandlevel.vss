@@ -1,0 +1,34 @@
+
+mut struct IslandLevelController {
+  IslandLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: IslandLevelController overrides ILevelController): Str {
+    IslandLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: IslandLevelController overrides ILevelController): Bool {
+    IslandLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: IslandLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    IslandLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: IslandLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    IslandLevelControllerExtensions.SimpleUnitTrigger
+  }
+}

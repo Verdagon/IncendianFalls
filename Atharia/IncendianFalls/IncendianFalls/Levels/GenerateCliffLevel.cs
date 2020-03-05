@@ -82,7 +82,7 @@ namespace IncendianFalls {
 
       //if (cliffHalves.Count == 2) {
       Location upStaircaseLocation =
-            GenerationCommon.GetFurthestLocationInDirection(
+            PatternUtils.GetFurthestLocationInDirection(
                 terrain.pattern,
                 cliffHalves[0].walkableLocs,
                 new Vec2(0, 1));
@@ -94,7 +94,7 @@ namespace IncendianFalls {
         terrain.root.EffectUpStairsTTCCreate().AsITerrainTileComponent());
 
       Location downStaircaseLocation =
-          GenerationCommon.GetFurthestLocationInDirection(
+          PatternUtils.GetFurthestLocationInDirection(
               terrain.pattern,
               cliffHalves[1].walkableLocs,
               new Vec2(0, -1));
@@ -142,10 +142,10 @@ namespace IncendianFalls {
         Asserts.Assert(CanReachLimited(cliffLevel, downStaircaseLocation, lowHalfCaveLocation));
       }
 
-      GenerationCommon.PlaceItems(
+      IncendianFallsUnitsAndItems.PlaceItems(
           game.rand, cliffLevel, levelSuperstate, depth, upStaircaseLocation, .02f, .02f);
 
-      GenerationCommon.FillWithUnits(
+      IncendianFallsUnitsAndItems.FillWithUnits(
           game, cliffLevel, levelSuperstate, depth);
 
       //}
@@ -222,7 +222,7 @@ namespace IncendianFalls {
       var randomRoomNum = SetUtils.GetRandom(rand.Next(), roomNumCandidates);
       var randomRoom = rooms[randomRoomNum];
       var highestSpaceInLowHalfRoom =
-          GenerationCommon.GetFurthestLocationInDirection(
+          PatternUtils.GetFurthestLocationInDirection(
               terrain.pattern, randomRoom.floors, new Vec2(0, 1));
       var caveTile = terrain.tiles[highestSpaceInLowHalfRoom];
       caveTile.components.Add(

@@ -100,6 +100,11 @@ namespace Geomancer {
         new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(.2f, .2f, .2f)),
         new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
       });
+      entries.Add("CaveWall", new List<MemberToViewMapper.IDescription>() {
+        new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(.35f, .125f, 0f)),
+        new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(.25f, .083f, 0f)),
+        new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
+      });
       entries.Add("Water", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(0f, .4f, .8f)),
         new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(0f, .45f, .85f)),
@@ -119,7 +124,7 @@ namespace Geomancer {
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
             new SymbolDescription("a",
-                            50, new Color(1f, 1f, 1f, 0), 180, OutlineMode.WithBackOutline, new Color(1, 1, 1)),
+                            50, new Color(1f, 1f, 1f, 0), 180, OutlineMode.WithOutline, new Color(1, 1, 1)),
             false,
             new Color(0, 0, 0)))
       });

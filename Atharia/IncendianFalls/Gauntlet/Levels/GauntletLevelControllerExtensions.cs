@@ -25,8 +25,8 @@ namespace Atharia.Model {
               terrain, units, NullILevelController.Null, game.time);
       levelSuperstate = new LevelSuperstate(level);
 
-      GenerationCommon.PlaceRocks(game.rand, level, levelSuperstate);
-      GenerationCommon.PlaceItems(
+      IncendianFallsUnitsAndItems.PlaceRocks(game.rand, level, levelSuperstate);
+      IncendianFallsUnitsAndItems.PlaceItems(
           game.rand, level, levelSuperstate, 0, new Location(0, 0, 0), .2f, .2f);
 
       var controller = game.root.EffectGauntletLevelControllerCreate(level);

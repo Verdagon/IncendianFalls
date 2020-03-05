@@ -54,10 +54,10 @@ namespace Atharia.Model {
       exitLocation = downStairsLoc;
       //GenerationCommon.PlaceStaircase(terrain, downStairsLoc, true, 1, levelBelow, levelBelowPortalIndex);
 
-      GenerationCommon.FillWithUnits(
+      IncendianFallsUnitsAndItems.FillWithUnits(
           game, level, levelSuperstate, depth);
 
-      GenerationCommon.PlaceItems(
+      IncendianFallsUnitsAndItems.PlaceItems(
           game.rand, level, levelSuperstate, depth, upStairsLoc, .02f, .02f);
     }
 

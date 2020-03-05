@@ -60,10 +60,10 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         int depth) {
-      int numCliffLevels = GenerationCommon.TOTAL_NUM_LEVELS_BEFORE_BOSS * 2 / 3;
+      int numCliffLevels = IncendianFallsUnitsAndItems.TOTAL_NUM_LEVELS_BEFORE_BOSS * 2 / 3;
       int cliffLevelsEnd = numCliffLevels;
       int caveLevelsStart = cliffLevelsEnd;
-      int numCaveLevels = GenerationCommon.TOTAL_NUM_LEVELS_BEFORE_BOSS - numCliffLevels;
+      int numCaveLevels = IncendianFallsUnitsAndItems.TOTAL_NUM_LEVELS_BEFORE_BOSS - numCliffLevels;
       int caveLevelsEnd = caveLevelsStart + numCaveLevels;
       int volcaetusLevel = caveLevelsEnd;
 

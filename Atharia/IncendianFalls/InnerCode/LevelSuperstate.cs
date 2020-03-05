@@ -147,6 +147,14 @@ namespace Atharia.Model {
       return FindMarkers(name, 1)[0];
     }
 
+    public List<Location> FindMarkersLocations(string name, int expectAtLeast) {
+      var locations = new List<Location>();
+      foreach (var locationAndTile in FindMarkers(name, expectAtLeast)) {
+        locations.Add(locationAndTile.Key);
+      }
+      return locations;
+    }
+
     public List<KeyValuePair<Location, MarkerTTC>> FindMarkers(string name, int expectAtLeast) {
       var locationsAndMarkers = new List<KeyValuePair<Location, MarkerTTC>>();
       foreach (var locationAndTile in level.terrain.tiles) {

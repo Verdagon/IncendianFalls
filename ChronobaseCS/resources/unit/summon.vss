@@ -1,0 +1,42 @@
+
+mut struct SummonAICapabilityUC {
+  SummonAICapabilityUC isa IAICapabilityUC;
+
+  blueprintName: Str;
+  var charges: Int;
+
+  fn Destruct(this: SummonAICapabilityUC overrides IDestructible): Void {
+    SummonAICapabilityUCExtensions.Destruct
+  }
+  fn ProduceImpulse(
+      this: SummonAICapabilityUC overrides IAICapabilityUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : IImpulse {
+    SummonAICapabilityUCExtensions.ProduceImpulse
+  }
+}
+
+// Assumes there's an kill directive right now.
+mut struct SummonImpulse {
+  SummonImpulse isa IImpulse;
+
+  weight: Int;
+  blueprintName: Str;
+  location: Location;
+
+  fn Destruct(this: SummonImpulse overrides IDestructible): Void {
+    SummonImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: SummonImpulse overrides IImpulse): Int {
+    SummonImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: SummonImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    SummonImpulseExtensions.Enact
+  }
+}

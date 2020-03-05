@@ -13,6 +13,7 @@ public class IUnitComponentMutBunchIncarnation {
   public readonly int membersGlaiveMutSet;
   public readonly int membersArmorMutSet;
   public readonly int membersWanderAICapabilityUCMutSet;
+  public readonly int membersSummonAICapabilityUCMutSet;
   public readonly int membersBideAICapabilityUCMutSet;
   public readonly int membersTimeCloneAICapabilityUCMutSet;
   public readonly int membersShieldingUCMutSet;
@@ -30,6 +31,7 @@ public class IUnitComponentMutBunchIncarnation {
       int membersGlaiveMutSet,
       int membersArmorMutSet,
       int membersWanderAICapabilityUCMutSet,
+      int membersSummonAICapabilityUCMutSet,
       int membersBideAICapabilityUCMutSet,
       int membersTimeCloneAICapabilityUCMutSet,
       int membersShieldingUCMutSet,
@@ -46,6 +48,7 @@ public class IUnitComponentMutBunchIncarnation {
     this.membersGlaiveMutSet = membersGlaiveMutSet;
     this.membersArmorMutSet = membersArmorMutSet;
     this.membersWanderAICapabilityUCMutSet = membersWanderAICapabilityUCMutSet;
+    this.membersSummonAICapabilityUCMutSet = membersSummonAICapabilityUCMutSet;
     this.membersBideAICapabilityUCMutSet = membersBideAICapabilityUCMutSet;
     this.membersTimeCloneAICapabilityUCMutSet = membersTimeCloneAICapabilityUCMutSet;
     this.membersShieldingUCMutSet = membersShieldingUCMutSet;

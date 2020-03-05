@@ -58,6 +58,7 @@ namespace Geomancer {
         [KeyCode.T] = "Tree",
         [KeyCode.H] = "HealthPotion",
         [KeyCode.P] = "ManaPotion",
+        [KeyCode.W] = "CaveWall",
         [KeyCode.Hash] = "Wall",
         [KeyCode.BackQuote] = "Water",
       };
@@ -126,11 +127,19 @@ namespace Geomancer {
       terrainPresenter.TerrainTileClicked += HandleTerrainTileClicked;
       terrainPresenter.TerrainTileHovered += HandleTerrainTileHovered;
 
+      Location startLocation = new Location(0, 0, 0);
+      if (!level.terrain.tiles.ContainsKey(startLocation)) {
+        foreach (var locationAndTile in level.terrain.tiles) {
+          startLocation = locationAndTile.Key;
+          break;
+        }
+      }
+
       cameraController =
         new CameraController(
           clock,
           cameraObject,
-          level.terrain.GetTileCenter(new Location(0, 0, 0)).ToUnity(),
+          level.terrain.GetTileCenter(startLocation).ToUnity(),
           new Vector3(0, 5, -10));
     }
 
@@ -180,6 +189,7 @@ namespace Geomancer {
     }
 
     public void Update() {
+
       clock.Update();
 
       if (Input.GetKey(KeyCode.RightBracket)) {

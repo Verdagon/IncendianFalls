@@ -13,21 +13,27 @@ namespace IncendianFalls {
               elevationStepHeight,
               root.EffectTerrainTileByLocationMutMapCreate());
 
-      var searcher = new PatternExplorer(terrain.pattern, false, new Location(0, 0, 0));
+      AddCircle(terrain, new Location(0, 0, 0), radius);
+
+      CellularAutomata(rand, terrain, considerCornersAdjacent);
+
+      return terrain;
+    }
+
+    public static void AddCircle(Terrain terrain, Location originLocation, float radius) {
+      var searcher = new PatternExplorer(terrain.pattern, false, originLocation);
 
       while (true) {
         Location loc = searcher.Next();
         Vec2 center = terrain.pattern.GetTileCenter(loc);
         if (center.distance(new Vec2(0, 0)) <= radius) {
-          AddTile(terrain, loc, 0);
+          if (!terrain.tiles.ContainsKey(loc)) {
+            AddTile(terrain, loc, 0);
+          }
         } else {
           break;
         }
       }
-
-      CellularAutomata(rand, terrain, considerCornersAdjacent);
-
-      return terrain;
     }
 
     private static void CellularAutomata(Rand rand, Terrain terrain, bool considerCornersAdjacent) {
@@ -38,7 +44,10 @@ namespace IncendianFalls {
       }
 
       //CellularAutomataAverageIteration(terrain);
+      FinishUp(rand, terrain, considerCornersAdjacent);
+    }
 
+    public static void FinishUp(Rand rand, Terrain terrain, bool considerCornersAdjacent) {
       var locationsToRemove = new List<Location>();
       foreach (var locationAndTile in terrain.tiles) {
         if (locationAndTile.Value.elevation == 0) {
@@ -71,7 +80,7 @@ namespace IncendianFalls {
       terrain.tiles.Add(location, tile);
     }
 
-    private static void CellularAutomataModeIteration(Terrain terrain, bool considerCornersAdjacent) {
+    public static void CellularAutomataModeIteration(Terrain terrain, bool considerCornersAdjacent) {
       var newElevationByLocation = new Dictionary<Location, int>();
 
       foreach (var locationAndTile in terrain.tiles) {

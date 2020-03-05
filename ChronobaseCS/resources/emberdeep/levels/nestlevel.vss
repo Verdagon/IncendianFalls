@@ -1,0 +1,34 @@
+
+mut struct NestLevelController {
+  NestLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: NestLevelController overrides ILevelController): Str {
+    NestLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: NestLevelController overrides ILevelController): Bool {
+    NestLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: NestLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    NestLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: NestLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    NestLevelControllerExtensions.SimpleUnitTrigger
+  }
+}

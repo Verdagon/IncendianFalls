@@ -324,7 +324,7 @@ namespace IncendianFalls {
     private static SortedSet<Location> GetWaterfallLocations(
         Rand rand, Terrain terrain, bool topLeftToBottomRight) {
 
-      GenerationCommon.GetMapBounds(
+      TerrainUtils.GetMapBounds(
           out float mapMinX,
           out float mapMinY,
           out float mapMaxX,
@@ -376,7 +376,7 @@ namespace IncendianFalls {
       var riverElbowLocations = new Location[riverElbowPositions.Length];
       for (int i = 0; i < riverElbowPositions.Length; i++) {
         riverElbowLocations[i] =
-            GenerationCommon.GetLocationClosestTo(terrain, riverElbowPositions[i]);
+            TerrainUtils.GetLocationClosestTo(terrain, riverElbowPositions[i]);
       }
 
       var waterLocations = new SortedSet<Location>();

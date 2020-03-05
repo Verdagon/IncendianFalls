@@ -54,14 +54,34 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         int depth) {
-      Asserts.Assert(depth == 0);
-      CaveLevelControllerExtensions.LoadLevel(
-        out level,
-        out levelSuperstate,
-        out entryLocation,
-        game,
-        superstate,
-        0);
+      game.root.logger.Info("in MakeNextLevel! depth " + depth);
+      if (depth == 0) {
+        game.root.logger.Info("making nest!");
+        NestLevelControllerExtensions.LoadLevel(
+          out level,
+          out levelSuperstate,
+          out entryLocation,
+          game,
+          superstate,
+          depth);
+      } else if (depth == 2) {
+        IslandLevelControllerExtensions.LoadLevel(
+          out level,
+          out levelSuperstate,
+          out entryLocation,
+          out var exitLocation,
+          game,
+          superstate,
+          depth);
+      } else {
+        CaveLevelControllerExtensions.LoadLevel(
+          out level,
+          out levelSuperstate,
+          out entryLocation,
+          game,
+          superstate,
+          depth);
+      }
     }
   }
 }

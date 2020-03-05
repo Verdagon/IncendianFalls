@@ -41,8 +41,9 @@ namespace EmberDeep {
             null);
 
       bool playBackstory = false;
-      bool playTutorial = true;
-      bool playGame = false;
+      bool playTutorial = false;
+      bool playGame = true;
+      int startingDepth = 2;
 
       Level startLevel = Level.Null;
       LevelSuperstate startLevelSuperstate = null;
@@ -92,13 +93,14 @@ namespace EmberDeep {
       }
 
       if (playGame) {
+        game.root.logger.Info("in setup!");
         EmberDeepLevelLinkerTTCExtensions.MakeNextLevel(
             out var level,
             out var levelSuperstate,
             out var entryLocation,
             game,
             superstate,
-            0);
+            startingDepth);
         Location exitLocation = null;
         if (!startLevel.Exists()) {
           startLevel = level;
@@ -115,6 +117,7 @@ namespace EmberDeep {
 
       Asserts.Assert(startLevel.Exists());
 
+      game.root.logger.Info("setup derp!");
       game.level = startLevel;
       superstate.levelSuperstate = startLevelSuperstate;
 
@@ -126,6 +129,7 @@ namespace EmberDeep {
           player);
       game.player = player;
 
+      game.root.logger.Info("sending trigger!");
       game.level.controller.SimpleTrigger(game, superstate, "levelStart");
 
       return game;

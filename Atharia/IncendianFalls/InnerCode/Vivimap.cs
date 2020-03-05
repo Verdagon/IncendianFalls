@@ -16,6 +16,9 @@ namespace IncendianFalls {
           case "Grass":
             tile.components.Add(root.EffectGrassTTCCreate().AsITerrainTileComponent());
             break;
+          case "CaveWall":
+            tile.components.Add(root.EffectCaveWallTTCCreate().AsITerrainTileComponent());
+            break;
           case "Stone":
             tile.components.Add(root.EffectStoneTTCCreate().AsITerrainTileComponent());
             break;

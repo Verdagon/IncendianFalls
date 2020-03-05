@@ -30,7 +30,7 @@ namespace Atharia.Model {
       var controller = root.EffectPreGauntletLevelControllerCreate(level);
       level.controller = controller.AsILevelController();
 
-      GenerationCommon.PlaceItems(
+      IncendianFallsUnitsAndItems.PlaceItems(
           rand, level, levelSuperstate, 0, new Location(0, 0, 0), .1f, .1f);
 
       var downStaircaseLocation = new Location(0, 0, 0);

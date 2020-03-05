@@ -15,7 +15,9 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<ArmorIncarnation>> incarnationsArmor;
   public readonly SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCIncarnation>> incarnationsEmberDeepLevelLinkerTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<TutorialLevelControllerIncarnation>> incarnationsTutorialLevelController;
+  public readonly SortedDictionary<int, VersionAndIncarnation<NestLevelControllerIncarnation>> incarnationsNestLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>> incarnationsCaveLevelController;
+  public readonly SortedDictionary<int, VersionAndIncarnation<IslandLevelControllerIncarnation>> incarnationsIslandLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>> incarnationsRidgeLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>> incarnationsGauntletLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>> incarnationsPreGauntletLevelController;
@@ -61,6 +63,8 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<BaseDefenseUCIncarnation>> incarnationsBaseDefenseUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCIncarnation>> incarnationsWanderAICapabilityUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<CounteringUCIncarnation>> incarnationsCounteringUC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<SummonImpulseIncarnation>> incarnationsSummonImpulse;
+  public readonly SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCIncarnation>> incarnationsSummonAICapabilityUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<ShieldingUCIncarnation>> incarnationsShieldingUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<EvaporateImpulseIncarnation>> incarnationsEvaporateImpulse;
   public readonly SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCIncarnation>> incarnationsTimeCloneAICapabilityUC;
@@ -102,6 +106,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>> incarnationsGlaiveMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>> incarnationsArmorMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>> incarnationsWanderAICapabilityUCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCMutSetIncarnation>> incarnationsSummonAICapabilityUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>> incarnationsBideAICapabilityUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCMutSetIncarnation>> incarnationsTimeCloneAICapabilityUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<ShieldingUCMutSetIncarnation>> incarnationsShieldingUCMutSet;
@@ -153,7 +158,9 @@ public class RootIncarnation {
     this.incarnationsArmor = new SortedDictionary<int, VersionAndIncarnation<ArmorIncarnation>>();
     this.incarnationsEmberDeepLevelLinkerTTC = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCIncarnation>>();
     this.incarnationsTutorialLevelController = new SortedDictionary<int, VersionAndIncarnation<TutorialLevelControllerIncarnation>>();
+    this.incarnationsNestLevelController = new SortedDictionary<int, VersionAndIncarnation<NestLevelControllerIncarnation>>();
     this.incarnationsCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>>();
+    this.incarnationsIslandLevelController = new SortedDictionary<int, VersionAndIncarnation<IslandLevelControllerIncarnation>>();
     this.incarnationsRidgeLevelController = new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>();
     this.incarnationsGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>>();
     this.incarnationsPreGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>>();
@@ -199,6 +206,8 @@ public class RootIncarnation {
     this.incarnationsBaseDefenseUC = new SortedDictionary<int, VersionAndIncarnation<BaseDefenseUCIncarnation>>();
     this.incarnationsWanderAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCIncarnation>>();
     this.incarnationsCounteringUC = new SortedDictionary<int, VersionAndIncarnation<CounteringUCIncarnation>>();
+    this.incarnationsSummonImpulse = new SortedDictionary<int, VersionAndIncarnation<SummonImpulseIncarnation>>();
+    this.incarnationsSummonAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCIncarnation>>();
     this.incarnationsShieldingUC = new SortedDictionary<int, VersionAndIncarnation<ShieldingUCIncarnation>>();
     this.incarnationsEvaporateImpulse = new SortedDictionary<int, VersionAndIncarnation<EvaporateImpulseIncarnation>>();
     this.incarnationsTimeCloneAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCIncarnation>>();
@@ -240,6 +249,7 @@ public class RootIncarnation {
     this.incarnationsGlaiveMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>>();
     this.incarnationsArmorMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>>();
     this.incarnationsWanderAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>>();
+    this.incarnationsSummonAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCMutSetIncarnation>>();
     this.incarnationsBideAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>>();
     this.incarnationsTimeCloneAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCMutSetIncarnation>>();
     this.incarnationsShieldingUCMutSet = new SortedDictionary<int, VersionAndIncarnation<ShieldingUCMutSetIncarnation>>();
@@ -296,7 +306,9 @@ public class RootIncarnation {
     this.incarnationsArmor = new SortedDictionary<int, VersionAndIncarnation<ArmorIncarnation>>(that.incarnationsArmor);
     this.incarnationsEmberDeepLevelLinkerTTC = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCIncarnation>>(that.incarnationsEmberDeepLevelLinkerTTC);
     this.incarnationsTutorialLevelController = new SortedDictionary<int, VersionAndIncarnation<TutorialLevelControllerIncarnation>>(that.incarnationsTutorialLevelController);
+    this.incarnationsNestLevelController = new SortedDictionary<int, VersionAndIncarnation<NestLevelControllerIncarnation>>(that.incarnationsNestLevelController);
     this.incarnationsCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>>(that.incarnationsCaveLevelController);
+    this.incarnationsIslandLevelController = new SortedDictionary<int, VersionAndIncarnation<IslandLevelControllerIncarnation>>(that.incarnationsIslandLevelController);
     this.incarnationsRidgeLevelController = new SortedDictionary<int, VersionAndIncarnation<RidgeLevelControllerIncarnation>>(that.incarnationsRidgeLevelController);
     this.incarnationsGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>>(that.incarnationsGauntletLevelController);
     this.incarnationsPreGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>>(that.incarnationsPreGauntletLevelController);
@@ -342,6 +354,8 @@ public class RootIncarnation {
     this.incarnationsBaseDefenseUC = new SortedDictionary<int, VersionAndIncarnation<BaseDefenseUCIncarnation>>(that.incarnationsBaseDefenseUC);
     this.incarnationsWanderAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCIncarnation>>(that.incarnationsWanderAICapabilityUC);
     this.incarnationsCounteringUC = new SortedDictionary<int, VersionAndIncarnation<CounteringUCIncarnation>>(that.incarnationsCounteringUC);
+    this.incarnationsSummonImpulse = new SortedDictionary<int, VersionAndIncarnation<SummonImpulseIncarnation>>(that.incarnationsSummonImpulse);
+    this.incarnationsSummonAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCIncarnation>>(that.incarnationsSummonAICapabilityUC);
     this.incarnationsShieldingUC = new SortedDictionary<int, VersionAndIncarnation<ShieldingUCIncarnation>>(that.incarnationsShieldingUC);
     this.incarnationsEvaporateImpulse = new SortedDictionary<int, VersionAndIncarnation<EvaporateImpulseIncarnation>>(that.incarnationsEvaporateImpulse);
     this.incarnationsTimeCloneAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCIncarnation>>(that.incarnationsTimeCloneAICapabilityUC);
@@ -383,6 +397,7 @@ public class RootIncarnation {
     this.incarnationsGlaiveMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>>(that.incarnationsGlaiveMutSet);
     this.incarnationsArmorMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>>(that.incarnationsArmorMutSet);
     this.incarnationsWanderAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>>(that.incarnationsWanderAICapabilityUCMutSet);
+    this.incarnationsSummonAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCMutSetIncarnation>>(that.incarnationsSummonAICapabilityUCMutSet);
     this.incarnationsBideAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>>(that.incarnationsBideAICapabilityUCMutSet);
     this.incarnationsTimeCloneAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCMutSetIncarnation>>(that.incarnationsTimeCloneAICapabilityUCMutSet);
     this.incarnationsShieldingUCMutSet = new SortedDictionary<int, VersionAndIncarnation<ShieldingUCMutSetIncarnation>>(that.incarnationsShieldingUCMutSet);
