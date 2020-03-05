@@ -126,9 +126,6 @@ public class HealthPotionAsIItem : IItem {
          public Void Destruct() {
     return HealthPotionExtensions.Destruct(obj);
   }
-  public IItem ClonifyAndReturnNewReal(Root newRoot) {
-    return HealthPotionExtensions.ClonifyAndReturnNewReal(obj, newRoot);
-  }
 
 }
 public static class HealthPotionAsIItemCaster {

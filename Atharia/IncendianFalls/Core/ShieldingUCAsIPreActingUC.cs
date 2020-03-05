@@ -80,7 +80,7 @@ public class ShieldingUCAsIPreActingUC : IPreActingUC {
   public IUnitComponent AsIUnitComponent() {
     return new ShieldingUCAsIUnitComponent(obj);
   }
-  public bool Is(IDefenseUC that) {
+  public bool Is(IDefenseFactorUC that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
     }
@@ -89,7 +89,7 @@ public class ShieldingUCAsIPreActingUC : IPreActingUC {
     }
     return root == that.root && obj.id == that.id;
   }
-  public bool NullableIs(IDefenseUC that) {
+  public bool NullableIs(IDefenseFactorUC that) {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
@@ -98,8 +98,8 @@ public class ShieldingUCAsIPreActingUC : IPreActingUC {
     }
     return this.Is(that);
   }
-  public IDefenseUC AsIDefenseUC() {
-    return new ShieldingUCAsIDefenseUC(obj);
+  public IDefenseFactorUC AsIDefenseFactorUC() {
+    return new ShieldingUCAsIDefenseFactorUC(obj);
   }
 
          public Void Destruct() {

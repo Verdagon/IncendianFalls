@@ -19,7 +19,6 @@ public interface IImmediatelyUseItem {
   IItem AsIItem();
   IUsableItem AsIUsableItem();
   Void Use(Game game, Superstate superstate, Unit unit);
-  IItem ClonifyAndReturnNewReal(Root newRoot);
   Void Destruct();
 }
 }

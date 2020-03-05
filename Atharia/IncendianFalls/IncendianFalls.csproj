@@ -14,21 +14,11 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="ArconicFalls\AStarExplorer.cs.meta" />
-    <None Remove="ArconicFalls\InnerCode\PlayerAI.cs.meta" />
     <None Remove="AthariaModel.pdb" />
     <None Remove="AthariaModel.dll" />
     <None Remove="AthariaModel.pdb" />
     <None Remove="IncendianFalls.deps.json" />
     <None Remove="IncendianFalls.dll" />
     <None Remove="IncendianFalls.pdb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\" />
-    <Folder Include="Core\" />
-    <Folder Include="InnerCode\AI\" />
-    <Folder Include="InnerCode\Actions\" />
   </ItemGroup>
 </Project>

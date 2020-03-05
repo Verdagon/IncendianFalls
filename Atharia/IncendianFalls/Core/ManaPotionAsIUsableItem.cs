@@ -129,9 +129,6 @@ public class ManaPotionAsIUsableItem : IUsableItem {
   public Void Use(Game game, Superstate superstate, Unit unit) {
     return ManaPotionExtensions.Use(obj, game, superstate, unit);
   }
-  public IItem ClonifyAndReturnNewReal(Root newRoot) {
-    return ManaPotionExtensions.ClonifyAndReturnNewReal(obj, newRoot);
-  }
 
 }
 public static class ManaPotionAsIUsableItemCaster {

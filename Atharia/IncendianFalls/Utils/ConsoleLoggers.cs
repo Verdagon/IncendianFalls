@@ -61,9 +61,9 @@ namespace IncendianFalls {
       public void visitUnitSetHpEffect(UnitSetHpEffect effect) {
         Console.WriteLine("HP changed to " + effect.newValue);
       }
-      public void visitUnitSetMpEffect(UnitSetMpEffect effect) {
-        Console.WriteLine("MP changed to " + effect.newValue);
-      }
+      //public void visitUnitSetMpEffect(UnitSetMpEffect effect) {
+      //  Console.WriteLine("MP changed to " + effect.newValue);
+      //}
 
       public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
 

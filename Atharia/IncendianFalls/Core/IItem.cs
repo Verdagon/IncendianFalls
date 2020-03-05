@@ -16,7 +16,6 @@ public interface IItem {
   bool NullableIs(IItem that);
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
-  IItem ClonifyAndReturnNewReal(Root newRoot);
   Void Destruct();
 }
 }

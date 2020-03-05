@@ -57,6 +57,11 @@ namespace AthPlayer {
           }
         } else if (detail is HealthPotionAsIUnitComponent) {
         } else if (detail is ManaPotionAsIUnitComponent) {
+        } else if (detail is SorcerousUCAsIUnitComponent) {
+        } else if (detail is BaseCombatTimeUCAsIUnitComponent) {
+        } else if (detail is BaseMovementTimeUCAsIUnitComponent) {
+        } else if (detail is BaseOffenseUCAsIUnitComponent) {
+        } else if (detail is BaseDefenseUCAsIUnitComponent) {
         } else if (detail is ArmorAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
@@ -79,7 +84,7 @@ namespace AthPlayer {
                     OutlineMode.NoOutline,
                     new UnityEngine.Color(0, 0, 0)),
                 "Obsidian Sword"));
-        } else if (detail is InertiaRingAsIUnitComponent) {
+        } else if (detail is SpeedRingAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
@@ -117,7 +122,6 @@ namespace AthPlayer {
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) { }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) { }
-    public void visitUnitSetMpEffect(UnitSetMpEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
       if (!lookedUnit.Exists()) {

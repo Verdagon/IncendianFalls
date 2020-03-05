@@ -35,25 +35,53 @@ namespace Atharia.Model {
       entryLocation = new Location(0, 0, 0);
 
       for (int i = 0; i < 5; i++) {
-        GenerationCommon.PlaceAvelisk(game, level, levelSuperstate);
+        level.EnterUnit(
+          levelSuperstate,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          level.time,
+          Avelisk.Make(level.root));
       }
       for (int i = 0; i < 8; i++) {
-        GenerationCommon.PlaceNovafaire(game, level, levelSuperstate);
+        level.EnterUnit(
+          levelSuperstate,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          level.time,
+          Novafaire.Make(level.root));
       }
       for (int i = 0; i < 4; i++) {
-        GenerationCommon.PlaceDraxling(game, level, levelSuperstate);
+        level.EnterUnit(
+          levelSuperstate,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          level.time,
+          Draxling.Make(level.root));
       }
       for (int i = 0; i < 3; i++) {
-        GenerationCommon.PlaceLornix(game, level, levelSuperstate);
+        level.EnterUnit(
+          levelSuperstate,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          level.time,
+          Lornix.Make(level.root));
       }
       for (int i = 0; i < 3; i++) {
-        GenerationCommon.PlaceYoten(game, level, levelSuperstate);
+        level.EnterUnit(
+          levelSuperstate,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          level.time,
+          Yoten.Make(level.root));
       }
       for (int i = 0; i < 3; i++) {
-        GenerationCommon.PlaceSpiriad(game, level, levelSuperstate);
+        level.EnterUnit(
+          levelSuperstate,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          level.time,
+          Spiriad.Make(level.root));
       }
       for (int i = 0; i < 4; i++) {
-        GenerationCommon.PlaceMordranth(game, level, levelSuperstate);
+        level.EnterUnit(
+          levelSuperstate,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          level.time,
+          Mordranth.Make(level.root));
       }
     }
 

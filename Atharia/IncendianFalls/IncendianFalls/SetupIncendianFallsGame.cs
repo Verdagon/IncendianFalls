@@ -49,24 +49,12 @@ namespace IncendianFalls {
       game.level = firstLevel;
       superstate.levelSuperstate = firstLevelSuperstate;
 
-      var player =
-          context.root.EffectUnitCreate(
-              context.root.EffectIUnitEventMutListCreate(),
-              true,
-              0,
-              new Location(0, 0, 0),
-              "Chronomancer",
-              90, 90,
-              100, 100,
-              600,
-              0,
-              IUnitComponentMutBunch.New(context.root),
-              true,
-              5);
+      var player = Chronomancer.Make(context.root);
       firstLevel.EnterUnit(
           superstate.levelSuperstate,
-          player,
-          entryLocation);
+          entryLocation,
+          0,
+          player);
       game.player = player;
 
       game.events.Add(new NarrateEvent("The Incendian Falls! I've finally made it.\nIf I can find Volcaetus, I can save my brother!").AsIGameEvent());

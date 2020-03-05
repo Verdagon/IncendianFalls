@@ -15,14 +15,14 @@ namespace Atharia.Model {
         Unit unit) {
       Asserts.Assert(unit.components.membersManaPotionMutSet.Contains(potion));
 
-      unit.mp = unit.maxMp;
+      var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
+      Asserts.Assert(sorcerous != null, "Cant use potion, dont have sorcerous!");
 
+      sorcerous.mp = sorcerous.maxMp;
       unit.components.Remove(potion.AsIUnitComponent());
       potion.Destruct();
+
       return new Atharia.Model.Void();
-    }
-    public static IItem ClonifyAndReturnNewReal(this ManaPotion potion, Root newRoot) {
-      return NullIItem.Null;
     }
   }
 }

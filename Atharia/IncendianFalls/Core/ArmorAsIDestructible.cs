@@ -17,6 +17,48 @@ public class ArmorAsIDestructible : IDestructible {
   public void FindReachableObjects(SortedSet<int> foundIds) {
     obj.FindReachableObjects(foundIds);
   }
+  public bool Is(ICloneableUC that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(ICloneableUC that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public ICloneableUC AsICloneableUC() {
+    return new ArmorAsICloneableUC(obj);
+  }
+  public bool Is(IDefenseFactorUC that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IDefenseFactorUC that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IDefenseFactorUC AsIDefenseFactorUC() {
+    return new ArmorAsIDefenseFactorUC(obj);
+  }
   public bool Is(IDestructible that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -79,27 +121,6 @@ public class ArmorAsIDestructible : IDestructible {
   }
   public IItem AsIItem() {
     return new ArmorAsIItem(obj);
-  }
-  public bool Is(IDefenseItem that) {
-    if (!this.Exists()) {
-      throw new Exception("Called Is on a null!");
-    }
-    if (!that.Exists()) {
-      throw new Exception("Called Is on a null!");
-    }
-    return root == that.root && obj.id == that.id;
-  }
-  public bool NullableIs(IDefenseItem that) {
-    if (!this.Exists() && !that.Exists()) {
-      return true;
-    }
-    if (!this.Exists() || !that.Exists()) {
-      return false;
-    }
-    return this.Is(that);
-  }
-  public IDefenseItem AsIDefenseItem() {
-    return new ArmorAsIDefenseItem(obj);
   }
 
          public Void Destruct() {

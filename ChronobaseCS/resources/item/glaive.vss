@@ -1,0 +1,29 @@
+
+mut struct Glaive {
+  Glaive isa IItem;
+  Glaive isa IOffenseFactorUC;
+  Glaive isa ICloneableUC;
+
+  fn Destruct(this: Glaive overrides IDestructible): Void {
+    GlaiveExtensions.Destruct
+  }
+
+  fn GetOutgoingDamageAddConstant(
+      this: Glaive overrides IOffenseFactorUC)
+  : Int {
+    GlaiveExtensions.GetOutgoingDamageAddConstant
+  }
+
+  fn GetOutgoingDamageMultiplierPercent(
+      this: Glaive overrides IOffenseFactorUC)
+  : Int {
+    GlaiveExtensions.GetOutgoingDamageMultiplierPercent
+  }
+
+  fn ClonifyAndReturnNewReal(
+      glaive: Glaive overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    GlaiveExtensions.ClonifyAndReturnNewReal
+  }
+}

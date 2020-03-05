@@ -24,7 +24,12 @@ namespace ConsoleDriveyThing {
         } else if (detail is AttackAICapabilityUCAsIUnitComponent) {
         } else if (detail is GlaiveAsIUnitComponent) {
         } else if (detail is ArmorAsIUnitComponent) {
-        } else if (detail is InertiaRingAsIUnitComponent) {
+        } else if (detail is SorcerousUCAsIUnitComponent) {
+        } else if (detail is BaseCombatTimeUCAsIUnitComponent) {
+        } else if (detail is BaseMovementTimeUCAsIUnitComponent) {
+        } else if (detail is BaseOffenseUCAsIUnitComponent) {
+        } else if (detail is BaseDefenseUCAsIUnitComponent) {
+        } else if (detail is SpeedRingAsIUnitComponent) {
         } else if (detail is BideAICapabilityUCAsIUnitComponent bideI) {
           if (bideI.obj.charge > 0) {
             isUsingSpecialAbility = true;
@@ -36,8 +41,8 @@ namespace ConsoleDriveyThing {
         }
       }
 
-      bool hasArmor = unit.components.GetAllIDefenseItem().Count > 0;
-      bool hasGlaive = unit.components.GetAllIOffenseItem().Count > 0;
+      bool hasArmor = unit.components.GetAllArmor().Count > 0;
+      bool hasGlaive = unit.components.GetAllGlaive().Count > 0;
 
       bool boostedDefense = isDefending || hasArmor;
       bool boostedOffense = hasGlaive;
@@ -178,7 +183,7 @@ namespace ConsoleDriveyThing {
             } else if (item is ArmorAsIItem) {
               itemPainters.Add(() => cell.Paint(']', ConsoleColor.Blue));
               recognized = true;
-            } else if (item is InertiaRingAsIItem) {
+            } else if (item is SpeedRingAsIItem) {
               itemPainters.Add(() => cell.Paint('=', ConsoleColor.Yellow));
               recognized = true;
             }
@@ -313,8 +318,11 @@ namespace ConsoleDriveyThing {
       int mp = 0;
       int maxMp = 0;
       if (game.player.Exists()) {
-        mp = game.player.mp;
-        maxMp = game.player.maxMp;
+        var sorcerous = game.player.components.GetOnlySorcerousUCOrNull();
+        if (sorcerous != null) {
+          mp = sorcerous.mp;
+          maxMp = sorcerous.maxMp;
+        }
       }
       bottomBar += "MP: " + mp + " / " + maxMp;
       while (bottomBar.Length < 39) {

@@ -1,0 +1,35 @@
+
+mut interface IOffenseFactorUC {
+  IOffenseFactorUC isa IUnitComponent;
+
+  fn GetOutgoingDamageAddConstant(): Int;
+  fn GetOutgoingDamageMultiplierPercent(): Int;
+}
+
+mut struct BaseOffenseUC {
+  BaseOffenseUC isa IUnitComponent;
+  BaseOffenseUC isa ICloneableUC;
+  BaseOffenseUC isa IOffenseFactorUC;
+
+  outgoingDamageAddConstant: Int;
+  outgoingDamageMultiplierPercent: Int;
+
+  fn Destruct(this: BaseOffenseUC overrides IDestructible): Void {
+    BaseOffenseUCExtensions.Destruct
+  }
+
+  fn GetOutgoingDamageAddConstant(this: BaseOffenseUC overrides IDestructible): Int {
+    BaseOffenseUCExtensions.GetOutgoingDamageAddConstant
+  }
+
+  fn GetOutgoingDamageMultiplierPercent(this: BaseOffenseUC overrides IDestructible): Int {
+    BaseOffenseUCExtensions.GetOutgoingDamageMultiplierPercent
+  }
+
+  fn ClonifyAndReturnNewReal(
+      potion: BaseOffenseUC overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    BaseOffenseUCExtensions.ClonifyAndReturnNewReal
+  }
+}

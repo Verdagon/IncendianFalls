@@ -32,9 +32,14 @@ namespace Atharia.Model {
     public static void EnterUnit(
         this Level obj,
         LevelSuperstate levelSuperstate,
-        Unit unit,
-        Location location) {
+
+        Location location,
+        // This param is just in here to make us think about it.
+        // If it's proving irksome, just provide unit.nextActionTime.
+        int nextActionTime,
+        Unit unit) {
       unit.location = location;
+      unit.nextActionTime = nextActionTime;
       obj.units.Add(unit);
       levelSuperstate.Add(unit);
     }

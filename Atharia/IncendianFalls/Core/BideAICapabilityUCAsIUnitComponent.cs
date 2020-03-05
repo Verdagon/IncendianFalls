@@ -101,7 +101,7 @@ public class BideAICapabilityUCAsIUnitComponent : IUnitComponent {
   public IUnitComponent AsIUnitComponent() {
     return new BideAICapabilityUCAsIUnitComponent(obj);
   }
-  public bool Is(IDefenseUC that) {
+  public bool Is(IDefenseFactorUC that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
     }
@@ -110,7 +110,7 @@ public class BideAICapabilityUCAsIUnitComponent : IUnitComponent {
     }
     return root == that.root && obj.id == that.id;
   }
-  public bool NullableIs(IDefenseUC that) {
+  public bool NullableIs(IDefenseFactorUC that) {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
@@ -119,8 +119,8 @@ public class BideAICapabilityUCAsIUnitComponent : IUnitComponent {
     }
     return this.Is(that);
   }
-  public IDefenseUC AsIDefenseUC() {
-    return new BideAICapabilityUCAsIDefenseUC(obj);
+  public IDefenseFactorUC AsIDefenseFactorUC() {
+    return new BideAICapabilityUCAsIDefenseFactorUC(obj);
   }
 
          public Void Destruct() {

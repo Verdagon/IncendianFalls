@@ -18,6 +18,11 @@ unit/shielding.vss
 unit/countering.vss
 unit/unitcomponent.vss
 unit/wander.vss
+unit/stats/defense.vss
+unit/stats/offense.vss
+unit/stats/sorcerous.vss
+unit/stats/movementtime.vss
+unit/stats/combattime.vss
 vstl/rand.vss
 pattern/location.vss
 pattern/pattern.vss
@@ -42,3 +47,9 @@ emberdeep/levels/tutoriallevel.vss
 emberdeep/levels/emberdeeplevellinker.vss
 vstl/vec.vss
 vstl/color.vss
+item/armor.vss
+item/glaive.vss
+item/healthpotion.vss
+item/items.vss
+item/manapotion.vss
+item/speedring.vss

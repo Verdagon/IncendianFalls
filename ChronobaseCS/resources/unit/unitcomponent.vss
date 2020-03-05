@@ -3,11 +3,6 @@ mut interface IUnitComponent {
   IUnitComponent isa IDestructible;
 }
 
-mut interface IDefenseUC {
-  IDefenseUC isa IUnitComponent;
-  fn AffectIncomingDamage(incomingDamage: Int): Int;
-}
-
 mut interface IReactingToAttacksUC {
   IReactingToAttacksUC isa IUnitComponent;
 

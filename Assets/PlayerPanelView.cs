@@ -61,10 +61,17 @@ public class PlayerPanelView : MonoBehaviour {
 
   public void ShowPlayerStatus(Level level, Unit unit) {
     playerStatusText.SetActive(true);
-    playerStatusText.GetComponent<Text>().text =
+
+    string message =
         level.GetName() + "   " +
-        "HP " + unit.hp + "/" + unit.maxHp + "   " +
-        "MP " + unit.mp + "/" + unit.maxMp;
+        "HP " + unit.hp + "/" + unit.maxHp;
+
+    var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
+    if (sorcerous.Exists()) {
+      message += "   " + "MP " + sorcerous.mp + "/" + sorcerous.maxMp;
+    }
+
+    playerStatusText.GetComponent<Text>().text = message;
     var size = playerStatusText.GetComponent<RectTransform>().sizeDelta;
     size.x = playerStatusText.GetComponent<Text>().preferredWidth;
     playerStatusText.GetComponent<RectTransform>().sizeDelta = size; 

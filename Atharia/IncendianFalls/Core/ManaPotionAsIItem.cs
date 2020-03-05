@@ -126,9 +126,6 @@ public class ManaPotionAsIItem : IItem {
          public Void Destruct() {
     return ManaPotionExtensions.Destruct(obj);
   }
-  public IItem ClonifyAndReturnNewReal(Root newRoot) {
-    return ManaPotionExtensions.ClonifyAndReturnNewReal(obj, newRoot);
-  }
 
 }
 public static class ManaPotionAsIItemCaster {

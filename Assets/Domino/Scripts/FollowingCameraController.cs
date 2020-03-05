@@ -44,7 +44,6 @@ namespace Domino {
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) { }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) { }
-    public void visitUnitSetMpEffect(UnitSetMpEffect effect) { }
     public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) { }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }

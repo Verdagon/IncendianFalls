@@ -14,7 +14,9 @@ namespace AthPlayer {
       IIUnitEventMutListEffectObserver,
       IIUnitComponentMutBunchObserver,
       IBideAICapabilityUCEffectObserver,
-      IBideAICapabilityUCEffectVisitor {
+      IBideAICapabilityUCEffectVisitor,
+      ISorcerousUCEffectObserver,
+      ISorcerousUCEffectVisitor {
     bool alive;
     IClock clock;
     ITimer timer;
@@ -60,6 +62,10 @@ namespace AthPlayer {
 
       unit.AddObserver(this);
       unit.events.AddObserver(this);
+      var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
+      if (sorcerous.Exists()) {
+        sorcerous.AddObserver(this);
+      }
 
       this.description = GetUnitViewDescription(unit);
 
@@ -88,6 +94,10 @@ namespace AthPlayer {
         componentsBroadcaster.RemoveObserver(this);
         componentsBroadcaster.Stop();
 
+        var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
+        if (sorcerous.Exists()) {
+          sorcerous.RemoveObserver(this);
+        }
         unit.events.RemoveObserver(this);
         unit.RemoveObserver(this);
       }
@@ -122,9 +132,6 @@ namespace AthPlayer {
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) {
       unitView.SetDescription(GetUnitViewDescription(unit));
     }
-    public void visitUnitSetMpEffect(UnitSetMpEffect effect) {
-      unitView.SetDescription(GetUnitViewDescription(unit));
-    }
     public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) {
       if (!effect.newValue) {
         if (isRavashrike) {
@@ -141,6 +148,15 @@ namespace AthPlayer {
     }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
+    public void OnSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visit(this); }
+    public void visitSorcerousUCCreateEffect(SorcerousUCCreateEffect effect) { }
+    public void visitSorcerousUCDeleteEffect(SorcerousUCDeleteEffect effect) { }
+    public void visitSorcerousUCSetMpEffect(SorcerousUCSetMpEffect effect) {
+      unitView.SetDescription(GetUnitViewDescription(unit));
+    }
+    public void visitSorcerousUCSetMaxMpEffect(SorcerousUCSetMaxMpEffect effect) {
+      unitView.SetDescription(GetUnitViewDescription(unit));
+    }
 
     private void DestroyView() {
       unitView.DestroyUnit();
@@ -269,6 +285,11 @@ namespace AthPlayer {
       } else if (component is WanderAICapabilityUCAsIUnitComponent) {
       } else if (component is AttackAICapabilityUCAsIUnitComponent) {
       } else if (component is BideAICapabilityUCAsIUnitComponent) {
+      } else if (component is SorcerousUCAsIUnitComponent) {
+      } else if (component is BaseCombatTimeUCAsIUnitComponent) {
+      } else if (component is BaseMovementTimeUCAsIUnitComponent) {
+      } else if (component is BaseOffenseUCAsIUnitComponent) {
+      } else if (component is BaseDefenseUCAsIUnitComponent) {
       } else if (component is TimeCloneAICapabilityUCAsIUnitComponent) {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is ManaPotionAsIUnitComponent) {
@@ -277,7 +298,7 @@ namespace AthPlayer {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is GlaiveAsIUnitComponent) {
         unitView.SetDescription(GetUnitViewDescription(unit));
-      } else if (component is InertiaRingAsIUnitComponent) {
+      } else if (component is SpeedRingAsIUnitComponent) {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else {
         Asserts.Assert(false, "Unknown component: " + component);
@@ -334,6 +355,11 @@ namespace AthPlayer {
                       new UnityEngine.Color(1, 1, 1, 1.5f))));
         } else if (detail is WanderAICapabilityUCAsIUnitComponent) {
         } else if (detail is AttackAICapabilityUCAsIUnitComponent) {
+        } else if (detail is SorcerousUCAsIUnitComponent) {
+        } else if (detail is BaseCombatTimeUCAsIUnitComponent) {
+        } else if (detail is BaseMovementTimeUCAsIUnitComponent) {
+        } else if (detail is BaseOffenseUCAsIUnitComponent) {
+        } else if (detail is BaseDefenseUCAsIUnitComponent) {
         } else if (detail is BideAICapabilityUCAsIUnitComponent bideI) {
           var bide = bideI.obj;
           if (bide.charge > 0) {
@@ -393,7 +419,7 @@ namespace AthPlayer {
                           OutlineMode.WithBackOutline,
                     new UnityEngine.Color(0, 0, 0)),
                       true, new UnityEngine.Color(1, 1, 1, 1.5f))));
-        } else if (detail is InertiaRingAsIUnitComponent) {
+        } else if (detail is SpeedRingAsIUnitComponent) {
           detailSymbols.Add(
               new KeyValuePair<int, ExtrudedSymbolDescription>(
                   detail.id,
@@ -430,7 +456,11 @@ namespace AthPlayer {
       }
 
       float hpRatio = Mathf.Clamp01((float)unit.hp / unit.maxHp);
-      float mpRatio = Mathf.Clamp01((float)unit.mp / unit.maxMp);
+      float mpRatio = 1;
+      var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
+      if (sorcerous.Exists()) {
+        mpRatio = Mathf.Clamp01((float)sorcerous.mp / sorcerous.maxMp);
+      }
 
       var detailsByClassId = new Dictionary<string, UnitDescription>();
       detailsByClassId.Add(
@@ -647,5 +677,6 @@ namespace AthPlayer {
               mpRatio);
       }
     }
+
   }
 }

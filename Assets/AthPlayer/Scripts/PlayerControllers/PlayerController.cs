@@ -8,6 +8,7 @@ namespace Domino {
   public class PlayerController :
       IUnitEffectObserver, IUnitEffectVisitor,
       IGameEffectObserver, IGameEffectVisitor,
+    ISorcerousUCEffectObserver, ISorcerousUCEffectVisitor,
       IModeDelegate {
     ISuperstructure ss;
     Superstate superstate;
@@ -54,6 +55,10 @@ namespace Domino {
 
       this.player = this.game.player;
       player.AddObserver(this);
+      var sorcerous = player.components.GetOnlySorcerousUCOrNull();
+      if (sorcerous.Exists()) {
+        sorcerous.AddObserver(this);
+      }
       RefreshPlayerStatusText();
       SwitchToNormalMode();
     }
@@ -200,7 +205,13 @@ namespace Domino {
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) {
       RefreshPlayerStatusText();
     }
-    public void visitUnitSetMpEffect(UnitSetMpEffect effect) {
+    public void OnSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visit(this); }
+    public void visitSorcerousUCCreateEffect(SorcerousUCCreateEffect effect) { }
+    public void visitSorcerousUCDeleteEffect(SorcerousUCDeleteEffect effect) { }
+    public void visitSorcerousUCSetMpEffect(SorcerousUCSetMpEffect effect) {
+      RefreshPlayerStatusText();
+    }
+    public void visitSorcerousUCSetMaxMpEffect(SorcerousUCSetMaxMpEffect effect) {
       RefreshPlayerStatusText();
     }
 

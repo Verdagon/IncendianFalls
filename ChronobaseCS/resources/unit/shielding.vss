@@ -1,16 +1,20 @@
 
 mut struct ShieldingUC {
-  ShieldingUC isa IDefenseUC;
+  ShieldingUC isa IDefenseFactorUC;
   ShieldingUC isa IPreActingUC;
 
   fn Destruct(this: ShieldingUC overrides IDestructible): Void {
     ShieldingUCExtensions.Destruct
   }
-  fn AffectIncomingDamage(
-      detail: ShieldingUC overrides IDefenseUC,
-      incomingDamage: Int)
+  fn GetIncomingDamageAddConstant(
+      this: ShieldingUC overrides IDefenseFactorUC)
   : Int {
-    ShieldingUCExtensions.AffectIncomingDamage
+    ShieldingUCExtensions.GetIncomingDamageAddConstant
+  }
+  fn GetIncomingDamageMultiplierPercent(
+      this: ShieldingUC overrides IDefenseFactorUC)
+  : Int {
+    ShieldingUCExtensions.GetIncomingDamageMultiplierPercent
   }
   fn PreAct(
       detail: ShieldingUC overrides IPreActingUC,

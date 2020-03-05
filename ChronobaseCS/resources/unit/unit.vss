@@ -7,18 +7,13 @@ mut struct Unit {
   var lifeEndTime: Int;
   var location: Location;
   classId: Str;
+  var nextActionTime: Int;
   var hp: Int;
   maxHp: Int;
-  var mp: Int;
-  maxMp: Int;
-  inertia: Int;
-  var nextActionTime: Int;
   components: MutBunch:IUnitComponent;
 
   // True if theyre player or a time clone, false if enemy.
   good: Bool;
-
-  strength: Int;
 
   fn Destruct(this: Unit overrides IDestructible): Void {
     UnitExtensions.Destruct

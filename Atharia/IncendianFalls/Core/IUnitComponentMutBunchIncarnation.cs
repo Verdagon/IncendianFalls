@@ -5,40 +5,55 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class IUnitComponentMutBunchIncarnation {
-  public readonly int membersArmorMutSet;
-  public readonly int membersInertiaRingMutSet;
-  public readonly int membersGlaiveMutSet;
   public readonly int membersManaPotionMutSet;
   public readonly int membersHealthPotionMutSet;
+  public readonly int membersBaseCombatTimeUCMutSet;
+  public readonly int membersSpeedRingMutSet;
+  public readonly int membersBaseMovementTimeUCMutSet;
+  public readonly int membersGlaiveMutSet;
+  public readonly int membersArmorMutSet;
   public readonly int membersWanderAICapabilityUCMutSet;
+  public readonly int membersBideAICapabilityUCMutSet;
   public readonly int membersTimeCloneAICapabilityUCMutSet;
+  public readonly int membersShieldingUCMutSet;
   public readonly int membersAttackAICapabilityUCMutSet;
   public readonly int membersCounteringUCMutSet;
-  public readonly int membersShieldingUCMutSet;
-  public readonly int membersBideAICapabilityUCMutSet;
+  public readonly int membersSorcerousUCMutSet;
+  public readonly int membersBaseOffenseUCMutSet;
+  public readonly int membersBaseDefenseUCMutSet;
   public IUnitComponentMutBunchIncarnation(
-      int membersArmorMutSet,
-      int membersInertiaRingMutSet,
-      int membersGlaiveMutSet,
       int membersManaPotionMutSet,
       int membersHealthPotionMutSet,
+      int membersBaseCombatTimeUCMutSet,
+      int membersSpeedRingMutSet,
+      int membersBaseMovementTimeUCMutSet,
+      int membersGlaiveMutSet,
+      int membersArmorMutSet,
       int membersWanderAICapabilityUCMutSet,
+      int membersBideAICapabilityUCMutSet,
       int membersTimeCloneAICapabilityUCMutSet,
+      int membersShieldingUCMutSet,
       int membersAttackAICapabilityUCMutSet,
       int membersCounteringUCMutSet,
-      int membersShieldingUCMutSet,
-      int membersBideAICapabilityUCMutSet) {
-    this.membersArmorMutSet = membersArmorMutSet;
-    this.membersInertiaRingMutSet = membersInertiaRingMutSet;
-    this.membersGlaiveMutSet = membersGlaiveMutSet;
+      int membersSorcerousUCMutSet,
+      int membersBaseOffenseUCMutSet,
+      int membersBaseDefenseUCMutSet) {
     this.membersManaPotionMutSet = membersManaPotionMutSet;
     this.membersHealthPotionMutSet = membersHealthPotionMutSet;
+    this.membersBaseCombatTimeUCMutSet = membersBaseCombatTimeUCMutSet;
+    this.membersSpeedRingMutSet = membersSpeedRingMutSet;
+    this.membersBaseMovementTimeUCMutSet = membersBaseMovementTimeUCMutSet;
+    this.membersGlaiveMutSet = membersGlaiveMutSet;
+    this.membersArmorMutSet = membersArmorMutSet;
     this.membersWanderAICapabilityUCMutSet = membersWanderAICapabilityUCMutSet;
+    this.membersBideAICapabilityUCMutSet = membersBideAICapabilityUCMutSet;
     this.membersTimeCloneAICapabilityUCMutSet = membersTimeCloneAICapabilityUCMutSet;
+    this.membersShieldingUCMutSet = membersShieldingUCMutSet;
     this.membersAttackAICapabilityUCMutSet = membersAttackAICapabilityUCMutSet;
     this.membersCounteringUCMutSet = membersCounteringUCMutSet;
-    this.membersShieldingUCMutSet = membersShieldingUCMutSet;
-    this.membersBideAICapabilityUCMutSet = membersBideAICapabilityUCMutSet;
+    this.membersSorcerousUCMutSet = membersSorcerousUCMutSet;
+    this.membersBaseOffenseUCMutSet = membersBaseOffenseUCMutSet;
+    this.membersBaseDefenseUCMutSet = membersBaseDefenseUCMutSet;
   }
 }
 

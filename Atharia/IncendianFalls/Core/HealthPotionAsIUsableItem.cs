@@ -129,9 +129,6 @@ public class HealthPotionAsIUsableItem : IUsableItem {
   public Void Use(Game game, Superstate superstate, Unit unit) {
     return HealthPotionExtensions.Use(obj, game, superstate, unit);
   }
-  public IItem ClonifyAndReturnNewReal(Root newRoot) {
-    return HealthPotionExtensions.ClonifyAndReturnNewReal(obj, newRoot);
-  }
 
 }
 public static class HealthPotionAsIUsableItemCaster {

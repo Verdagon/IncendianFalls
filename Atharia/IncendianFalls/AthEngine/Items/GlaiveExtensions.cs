@@ -9,17 +9,14 @@ namespace Atharia.Model {
       obj.Delete();
       return new Atharia.Model.Void();
     }
-    public static int AffectIncomingDamage(this Glaive glaive, int damage) {
-      return damage;
+    public static int GetOutgoingDamageAddConstant(this Glaive armor) {
+      return 0;
     }
-    public static int AffectOutgoingDamage(this Glaive glaive, bool physical, int damage) {
-      if (physical) {
-        damage *= 2;
-      }
-      return damage;
+    public static int GetOutgoingDamageMultiplierPercent(this Glaive armor) {
+      return 200;
     }
-    public static IItem ClonifyAndReturnNewReal(this Glaive glaive, Root newRoot) {
-      return newRoot.EffectGlaiveCreate().AsIItem();
+    public static ICloneableUC ClonifyAndReturnNewReal(this Glaive glaive, Root newRoot) {
+      return newRoot.EffectGlaiveCreate().AsICloneableUC();
     }
   }
 }

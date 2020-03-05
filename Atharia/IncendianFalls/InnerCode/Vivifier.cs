@@ -163,7 +163,7 @@ namespace IncendianFalls {
           tile.components.Add(level.root.EffectWaterTTCCreate().AsITerrainTileComponent());
           return true;
         case "Ravashrike":
-          AddRavashrike(level, levelSuperstate, location, level.time);
+          level.EnterUnit(levelSuperstate, location, level.time, Ravashrike.Make(level.root));
           return true;
         case "HealthPotion":
           tile.components.Add(
@@ -200,108 +200,6 @@ namespace IncendianFalls {
       }
 
       return false;
-    }
-
-    public static void AddRavashrike(Level level, LevelSuperstate levelSuperstate, Location location, int nextActionTime) {
-      var components = IUnitComponentMutBunch.New(level.root);
-      components.Add(level.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(level.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
-      components.Add(level.root.EffectBideAICapabilityUCCreate(0).AsIUnitComponent());
-      Unit enemy =
-          level.root.EffectUnitCreate(
-              level.root.EffectIUnitEventMutListCreate(),
-              true,
-              0,
-              location,
-              "Ravashrike",
-              600, 600,
-              100, 100,
-              250,
-              nextActionTime,
-              components,
-              false,
-              14);
-      level.EnterUnit(levelSuperstate, enemy, location);
-    }
-    public static void AddIrkling(Level level, LevelSuperstate levelSuperstate, Location location, int nextActionTime) {
-      var components = IUnitComponentMutBunch.New(level.root);
-      components.Add(level.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(level.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
-      Unit enemy =
-          level.root.EffectUnitCreate(
-              level.root.EffectIUnitEventMutListCreate(),
-              true,
-              0,
-              location,
-              "Irkling",
-              4, 4,
-              0, 0,
-              600,
-              nextActionTime,
-              components,
-              false,
-              4);
-      level.EnterUnit(levelSuperstate, enemy, location);
-    }
-    public static void AddBaug(Level level, LevelSuperstate levelSuperstate, Location location, int nextActionTime) {
-      var components = IUnitComponentMutBunch.New(level.root);
-      components.Add(level.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(level.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
-      Unit enemy =
-          level.root.EffectUnitCreate(
-              level.root.EffectIUnitEventMutListCreate(),
-              true,
-              0,
-              location,
-              "Baug",
-              24, 24,
-              0, 0,
-              600,
-              nextActionTime,
-              components,
-              false,
-              5);
-      level.EnterUnit(levelSuperstate, enemy, location);
-    }
-    public static void AddSpirient(Level level, LevelSuperstate levelSuperstate, Location location, int nextActionTime) {
-      var components = IUnitComponentMutBunch.New(level.root);
-      components.Add(level.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(level.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
-      Unit enemy =
-          level.root.EffectUnitCreate(
-              level.root.EffectIUnitEventMutListCreate(),
-              true,
-              0,
-              location,
-              "Spirient",
-              3, 3,
-              0, 0,
-              600,
-              nextActionTime,
-              components,
-              false,
-              130);
-      level.EnterUnit(levelSuperstate, enemy, location);
-    }
-    public static void AddRavagianTrask(Level level, LevelSuperstate levelSuperstate, Location location, int nextActionTime) {
-      var components = IUnitComponentMutBunch.New(level.root);
-      components.Add(level.root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(level.root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
-      Unit enemy =
-          level.root.EffectUnitCreate(
-              level.root.EffectIUnitEventMutListCreate(),
-              true,
-              0,
-              location,
-              "RavagianTrask",
-              34, 34,
-              0, 0,
-              100,
-              nextActionTime,
-              components,
-              false,
-              5);
-      level.EnterUnit(levelSuperstate, enemy, location);
     }
   }
 }

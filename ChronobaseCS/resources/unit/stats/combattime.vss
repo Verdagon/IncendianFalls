@@ -1,0 +1,32 @@
+
+mut interface ICombatTimeFactorUC {
+  ICombatTimeFactorUC isa IUnitComponent;
+
+  fn GetCombatTimeAddConstant(): Int;
+  fn GetCombatTimeMultiplierPercent(): Int;
+}
+
+mut struct BaseCombatTimeUC {
+  BaseCombatTimeUC isa ICombatTimeFactorUC;
+  BaseCombatTimeUC isa ICloneableUC;
+
+  combatTimeAddConstant: Int;
+  combatTimeMultiplierPercent: Int;
+
+  fn Destruct(this: BaseCombatTimeUC overrides IDestructible): Void {
+    BaseCombatTimeUCExtensions.Destruct
+  }
+
+  fn GetCombatTimeAddConstant(this: BaseCombatTimeUC overrides ICombatTimeFactorUC): Int {
+    BaseCombatTimeUCExtensions.GetCombatTimeAddConstant
+  }
+  fn GetCombatTimeMultiplierPercent(this: BaseCombatTimeUC overrides ICombatTimeFactorUC): Int {
+    BaseCombatTimeUCExtensions.GetCombatTimeMultiplierPercent
+  }
+  fn ClonifyAndReturnNewReal(
+      potion: BaseCombatTimeUC overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    BaseCombatTimeUCExtensions.ClonifyAndReturnNewReal
+  }
+}

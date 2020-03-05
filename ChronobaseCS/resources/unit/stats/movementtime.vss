@@ -1,0 +1,32 @@
+
+mut interface IMovementTimeFactorUC {
+  IMovementTimeFactorUC isa IUnitComponent;
+
+  fn GetMovementTimeAddConstant(): Int;
+  fn GetMovementTimeMultiplierPercent(): Int;
+}
+
+mut struct BaseMovementTimeUC {
+  BaseMovementTimeUC isa IMovementTimeFactorUC;
+  BaseMovementTimeUC isa ICloneableUC;
+
+  movementTimeAddConstant: Int;
+  movementTimeMultiplierPercent: Int;
+
+  fn Destruct(this: BaseMovementTimeUC overrides IDestructible): Void {
+    BaseMovementTimeUCExtensions.Destruct
+  }
+
+  fn GetMovementTimeAddConstant(this: BaseMovementTimeUC overrides IMovementTimeFactorUC): Int {
+    BaseMovementTimeUCExtensions.GetMovementTimeAddConstant
+  }
+  fn GetMovementTimeMultiplierPercent(this: BaseMovementTimeUC overrides IMovementTimeFactorUC): Int {
+    BaseMovementTimeUCExtensions.GetMovementTimeMultiplierPercent
+  }
+  fn ClonifyAndReturnNewReal(
+      potion: BaseMovementTimeUC overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    BaseMovementTimeUCExtensions.ClonifyAndReturnNewReal
+  }
+}

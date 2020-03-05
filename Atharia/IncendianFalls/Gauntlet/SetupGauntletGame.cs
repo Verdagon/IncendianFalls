@@ -72,24 +72,12 @@ namespace Gauntlet {
       game.level = preGauntletLevel;
       superstate.levelSuperstate = preGauntletLevelSuperstate;
 
-      var player =
-          context.root.EffectUnitCreate(
-              context.root.EffectIUnitEventMutListCreate(),
-              true,
-              0,
-              new Location(0, 0, 0),
-              "Chronomancer",
-              90, 90,
-              100, 100,
-              600,
-              0,
-              IUnitComponentMutBunch.New(context.root),
-              true,
-              5);
+      var player = Chronomancer.Make(context.root);
       preGauntletLevel.EnterUnit(
           superstate.levelSuperstate,
-          player,
-          downStaircaseLocation);
+          downStaircaseLocation,
+          0,
+          player);
       game.player = player;
 
       return game;

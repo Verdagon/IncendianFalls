@@ -43,7 +43,9 @@ namespace IncendianFalls {
         return "Too far, can't fire!";
       }
 
-      if (player.mp < Actions.FIRE_COST) {
+      var sorcerous = game.player.components.GetOnlySorcerousUCOrNull();
+      Asserts.Assert(sorcerous != null, "Cant use potion, dont have sorcerous!");
+      if (sorcerous.mp < Actions.FIRE_COST) {
         return "Can't fire, need " + Actions.FIRE_COST + "mp!";
       }
 

@@ -12,9 +12,9 @@ namespace IncendianFalls {
       Eventer.broadcastUnitUnleashBideEvent(game.root, game, attacker, victims);
       foreach (var victim in victims) {
         AttackInner(
-            game, superstate, attacker, victim, attacker.strength * 3, true);
+            game, superstate, attacker, victim, 15, true);
       }
-      attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateInertia() * 3 / 2;
+      attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(900);
     }
 
     public static void Bump(
@@ -25,15 +25,16 @@ namespace IncendianFalls {
         float multiplier,
         bool takeTime) {
       Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
+      int initialDamage = 5;
       AttackInner(
           game,
           superstate,
           attacker,
           victim,
-          (int)Math.Floor(attacker.strength * multiplier),
+          initialDamage,
           true);
       if (takeTime) {
-        attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateInertia();
+        attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(600);
       }
     }
 
@@ -42,19 +43,13 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit attacker,
         Unit victim,
-        int damage,
+        // A strong human's punch is about 5 damage.
+        int initialDamage,
         bool physical) {
-      foreach (var item in attacker.components.GetAllIOffenseItem()) {
-        damage = item.AffectOutgoingDamage(physical, damage);
-      }
-      foreach (var detail in victim.components.GetAllIDefenseUC()) {
-        damage = detail.AffectIncomingDamage(damage);
-      }
-      foreach (var detail in victim.components.GetAllIDefenseItem()) {
-        damage = detail.AffectIncomingDamage(damage);
-      }
+      int outgoingDamage = attacker.CalculateOutgoingDamage(initialDamage);
+      int incomingDamage = victim.CalculateIncomingDamage(initialDamage);
       //game.root.logger.Info((attacker.Is(game.player) ? "Player" : "Enemy") + " does " + damage + " damage to " + (victim.Is(game.player) ? "player" : "enemy") + "!");
-      victim.hp = victim.hp - damage;
+      victim.hp = victim.hp - incomingDamage;
 
       if (victim.hp <= 0) {
         victim.alive = false;
@@ -77,7 +72,7 @@ namespace IncendianFalls {
       var detail = game.root.EffectShieldingUCCreate();
       unit.components.Add(detail.AsIUnitComponent());
 
-      unit.nextActionTime = unit.nextActionTime + unit.CalculateInertia();
+      unit.nextActionTime = unit.nextActionTime + unit.CalculateCombatTimeCost(600);
       Eventer.broadcastUnitShieldingEvent(game.root, game, unit);
     }
 
@@ -87,9 +82,11 @@ namespace IncendianFalls {
       var detail = game.root.EffectCounteringUCCreate();
       unit.components.Add(detail.AsIUnitComponent());
 
-      unit.mp = unit.mp - 1;
+      var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
+      Asserts.Assert(sorcerous != null);
+      sorcerous.mp = sorcerous.mp - 1;
 
-      unit.nextActionTime = unit.nextActionTime + unit.CalculateInertia();
+      unit.nextActionTime = unit.nextActionTime + unit.CalculateCombatTimeCost(600);
       Eventer.broadcastUnitCounteringEvent(game.root, game, unit);
     }
 
@@ -147,7 +144,7 @@ namespace IncendianFalls {
       unit.location = destination;
       superstate.levelSuperstate.Add(unit);
 
-      unit.nextActionTime = unit.nextActionTime + unit.CalculateInertia();
+      unit.nextActionTime = unit.nextActionTime + unit.CalculateMovementTimeCost(600);
     }
 
     public static void Evaporate(
@@ -170,9 +167,11 @@ namespace IncendianFalls {
       Eventer.broadcastUnitFireEvent(game.root, game, attacker, victim);
       AttackInner(
           game, superstate, attacker, victim, FIRE_DAMAGE, false);
-      attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateInertia();
+      attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(600);
 
-      attacker.mp = attacker.mp - FIRE_COST;
+      var sorcerous = attacker.components.GetOnlySorcerousUCOrNull();
+      Asserts.Assert(sorcerous != null);
+      sorcerous.mp = sorcerous.mp - FIRE_COST;
     }
   }
 }

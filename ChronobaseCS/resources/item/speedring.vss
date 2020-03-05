@@ -1,0 +1,24 @@
+
+mut struct SpeedRing {
+  SpeedRing isa IItem;
+  SpeedRing isa IMovementTimeFactorUC;
+  SpeedRing isa ICloneableUC;
+
+  fn Destruct(obj: SpeedRing overrides IDestructible): Void {
+    SpeedRingExtensions.Destruct
+  }
+
+  fn GetMovementTimeAddConstant(this: SpeedRing overrides IMovementTimeFactorUC): Int {
+    SpeedRingExtensions.GetMovementTimeAddConstant
+  }
+  fn GetMovementTimeMultiplierPercent(this: SpeedRing overrides IMovementTimeFactorUC): Int {
+    SpeedRingExtensions.GetMovementTimeMultiplierPercent
+  }
+
+  fn ClonifyAndReturnNewReal(
+      obj: SpeedRing overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    SpeedRingExtensions.ClonifyAndReturnNewReal
+  }
+}

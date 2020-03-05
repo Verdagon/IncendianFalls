@@ -5,7 +5,7 @@ using Atharia.Model;
 namespace Atharia.Model {
   // Serves as a caching mechanism for the level.
   public class LevelSuperstate {
-    Level level;
+    public readonly Level level;
 
     // Even if a unit is on that location, the location will be in here.
     SortedSet<Location> walkableLocations;

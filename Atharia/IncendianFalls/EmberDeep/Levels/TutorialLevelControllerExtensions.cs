@@ -312,22 +312,31 @@ namespace Atharia.Model {
       game.root.logger.Info("Got simple unit trigger: " + triggerName);
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush1Trigger") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush1Trigger", 1);
-        var summonLocation = superstate.levelSuperstate.FindMarkerLocation("ambush1Summon");
-        Vivifier.AddIrkling(game.level, superstate.levelSuperstate, summonLocation, game.player.nextActionTime + 10);
+        game.level.EnterUnit(
+          superstate.levelSuperstate,
+          superstate.levelSuperstate.FindMarkerLocation("ambush1Summon"),
+          game.player.nextActionTime + 300,
+          Irkling.Make(game.root));
         game.events.Add(new WaitEvent(400, "ambush1b").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush2Trigger") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush2Trigger", 1);
-        var summonLocation = superstate.levelSuperstate.FindMarkerLocation("ambush2Summon");
-        Vivifier.AddBaug(game.level, superstate.levelSuperstate, summonLocation, game.player.nextActionTime + 10);
+        game.level.EnterUnit(
+          superstate.levelSuperstate,
+          superstate.levelSuperstate.FindMarkerLocation("ambush2Summon"),
+          game.player.nextActionTime + 300,
+          Baug.Make(game.root));
         game.events.Add(new WaitEvent(400, "ambush2b").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush3Trigger") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush3Trigger", 1);
-        var summonLocation = superstate.levelSuperstate.FindMarkerLocation("ambush3Summon");
-        Vivifier.AddSpirient(game.level, superstate.levelSuperstate, summonLocation, game.player.nextActionTime + 10);
+        game.level.EnterUnit(
+          superstate.levelSuperstate,
+          superstate.levelSuperstate.FindMarkerLocation("ambush3Summon"),
+          game.player.nextActionTime + 300,
+          Spirient.Make(game.root));
         game.events.Add(new WaitEvent(400, "ambush3b").AsIGameEvent());
         superstate.navigatingState = null;
       }
@@ -338,8 +347,12 @@ namespace Atharia.Model {
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush4Trigger") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4Trigger", 1);
-        var summonLocation = superstate.levelSuperstate.FindMarkerLocation("ambush4Summon");
-        Vivifier.AddRavagianTrask(game.level, superstate.levelSuperstate, summonLocation, game.player.nextActionTime + game.player.inertia + 10);
+        game.level.EnterUnit(
+          superstate.levelSuperstate,
+          superstate.levelSuperstate.FindMarkerLocation("ambush4Summon"),
+          game.player.nextActionTime + 300,
+          RavagianTrask.Make(game.root));
+
         game.events.Add(new WaitEvent(400, "ambush4b").AsIGameEvent());
         superstate.navigatingState = null;
       }

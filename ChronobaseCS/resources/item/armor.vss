@@ -1,0 +1,29 @@
+
+mut struct Armor {
+  Armor isa IItem;
+  Armor isa IDefenseFactorUC;
+  Armor isa ICloneableUC;
+
+  fn Destruct(this: Armor overrides IDestructible): Void {
+    ArmorExtensions.Destruct
+  }
+
+  fn GetIncomingDamageAddConstant(
+      this: Armor overrides IDefenseFactorUC)
+  : Int {
+    ArmorExtensions.GetIncomingDamageAddConstant
+  }
+
+  fn GetIncomingDamageMultiplierPercent(
+      this: Armor overrides IDefenseFactorUC)
+  : Int {
+    ArmorExtensions.GetIncomingDamageMultiplierPercent
+  }
+
+  fn ClonifyAndReturnNewReal(
+      armor: Armor overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    ArmorExtensions.ClonifyAndReturnNewReal
+  }
+}

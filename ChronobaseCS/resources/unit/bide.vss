@@ -1,6 +1,6 @@
 
 mut struct BideAICapabilityUC {
-  BideAICapabilityUC isa IDefenseUC;
+  BideAICapabilityUC isa IDefenseFactorUC;
   BideAICapabilityUC isa IAICapabilityUC;
   BideAICapabilityUC isa IImpulsePreReactor;
 
@@ -10,11 +10,16 @@ mut struct BideAICapabilityUC {
   fn Destruct(this: BideAICapabilityUC overrides IDestructible): Void {
     BideAICapabilityUCExtensions.Destruct
   }
-  fn AffectIncomingDamage(
-      detail: BideAICapabilityUC overrides IDefenseUC,
-      incomingDamage: Int)
+  fn GetIncomingDamageAddConstant(
+      this: BideAICapabilityUC overrides IDefenseFactorUC)
   : Int {
-    BideAICapabilityUCExtensions.AffectIncomingDamage
+    BideAICapabilityUCExtensions.GetIncomingDamageAddConstant
+  }
+
+  fn GetIncomingDamageMultiplierPercent(
+      this: BideAICapabilityUC overrides IDefenseFactorUC)
+  : Int {
+    BideAICapabilityUCExtensions.GetIncomingDamageMultiplierPercent
   }
   fn ProduceImpulse(
       this: BideAICapabilityUC overrides IAICapabilityUC,

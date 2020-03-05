@@ -26,7 +26,7 @@ namespace Atharia.Model {
         return "You already have armor!";
       } else if (item is GlaiveAsIItem && interactingUnit.components.GetOnlyGlaiveOrNull().Exists()) {
         return "You already have a weapon!";
-      } else if (item is InertiaRingAsIItem && interactingUnit.components.GetOnlyInertiaRingOrNull().Exists()) {
+      } else if (item is SpeedRingAsIItem && interactingUnit.components.GetOnlySpeedRingOrNull().Exists()) {
         return "You already have a speed ring!";
       } else {
         // Give it to the unit.

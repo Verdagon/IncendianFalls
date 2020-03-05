@@ -10,25 +10,25 @@ namespace IncendianFalls {
     // When shifting backwards by one incarnation, we're going from the "older"
     // turn to the "newer" turn.
 
-    private static int GetMpCost(int timeDifference) {
-      return 2 + timeDifference / 2400;
-    }
+    //private static int GetMpCost(int timeDifference) {
+    //  return 2 + timeDifference / 2400;
+    //}
 
     private static string CheckCanTimeshift(Game presentGame, RootIncarnation destinationIncarnation) {
-      var pastGame = destinationIncarnation.incarnationsGame[presentGame.id].incarnation;
-      var pastTime = pastGame.time;
-      int timeDifference = presentGame.time - pastTime;
-      // time shift costs 5 now, and 5 + timeDifference / 100 from your past self.
-      int mpCost = GetMpCost(presentGame.time - pastGame.time);
+      //var pastGame = destinationIncarnation.incarnationsGame[presentGame.id].incarnation;
+      //var pastTime = pastGame.time;
+      //int timeDifference = presentGame.time - pastTime;
+      //// time shift costs 5 now, and 5 + timeDifference / 100 from your past self.
+      //int mpCost = GetMpCost(presentGame.time - pastGame.time);
 
-      if (presentGame.player.mp < 2) {
-        return "Not enough mp now to cast the spell, need at least 2!";
-      }
+      //if (presentGame.player.mp < 2) {
+      //  return "Not enough mp now to cast the spell, need at least 2!";
+      //}
 
-      var pastPlayerId = destinationIncarnation.incarnationsGame[presentGame.id].incarnation.player;
-      if (destinationIncarnation.incarnationsUnit[pastPlayerId].incarnation.mp < mpCost) {
-        return "Not enough mp in past to cast the spell, need " + mpCost;
-      }
+      //var pastPlayerId = destinationIncarnation.incarnationsGame[presentGame.id].incarnation.player;
+      //if (destinationIncarnation.incarnationsUnit[pastPlayerId].incarnation.mp < mpCost) {
+      //  return "Not enough mp in past to cast the spell, need " + mpCost;
+      //}
 
       return "";
     }
@@ -160,18 +160,13 @@ namespace IncendianFalls {
                   true,
                   0,
                   superstate.timeShiftingState.targetAnchorLocation,
-                  "Chronomancer",
-                  futurePlayer.hp, futurePlayer.maxHp,
-                  futurePlayer.mp, futurePlayer.maxMp,
-                  600,
+                  futurePlayer.classId,
                   game.time, // Act now
+                  futurePlayer.hp, futurePlayer.maxHp,
                   IUnitComponentMutBunch.New(context.root),
-                  true,
-                  5);
-          newPlayer.mp = newPlayer.mp - GetMpCost(futureGame.time - game.time);
-
-          foreach (var item in futurePlayer.components.GetAllIItem()) {
-            var newReal = item.ClonifyAndReturnNewReal(newPlayer.root);
+                  true);
+          foreach (var component in futurePlayer.components.GetAllICloneableUC()) {
+            var newReal = component.ClonifyAndReturnNewReal(newPlayer.root);
             if (newReal.Exists()) {
               newPlayer.components.Add(newReal.AsIUnitComponent());
             }

@@ -88,26 +88,16 @@ public class Unit {
   public string classId {
     get { return incarnation.classId; }
   }
+  public int nextActionTime {
+    get { return incarnation.nextActionTime; }
+    set { root.EffectUnitSetNextActionTime(id, value); }
+  }
   public int hp {
     get { return incarnation.hp; }
     set { root.EffectUnitSetHp(id, value); }
   }
   public int maxHp {
     get { return incarnation.maxHp; }
-  }
-  public int mp {
-    get { return incarnation.mp; }
-    set { root.EffectUnitSetMp(id, value); }
-  }
-  public int maxMp {
-    get { return incarnation.maxMp; }
-  }
-  public int inertia {
-    get { return incarnation.inertia; }
-  }
-  public int nextActionTime {
-    get { return incarnation.nextActionTime; }
-    set { root.EffectUnitSetNextActionTime(id, value); }
   }
   public IUnitComponentMutBunch components {
 
@@ -120,9 +110,6 @@ public class Unit {
                        }
   public bool good {
     get { return incarnation.good; }
-  }
-  public int strength {
-    get { return incarnation.strength; }
   }
 }
 }

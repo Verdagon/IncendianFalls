@@ -17,6 +17,48 @@ public class GlaiveAsIUnitComponent : IUnitComponent {
   public void FindReachableObjects(SortedSet<int> foundIds) {
     obj.FindReachableObjects(foundIds);
   }
+  public bool Is(ICloneableUC that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(ICloneableUC that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public ICloneableUC AsICloneableUC() {
+    return new GlaiveAsICloneableUC(obj);
+  }
+  public bool Is(IOffenseFactorUC that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IOffenseFactorUC that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IOffenseFactorUC AsIOffenseFactorUC() {
+    return new GlaiveAsIOffenseFactorUC(obj);
+  }
   public bool Is(IDestructible that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -79,27 +121,6 @@ public class GlaiveAsIUnitComponent : IUnitComponent {
   }
   public IItem AsIItem() {
     return new GlaiveAsIItem(obj);
-  }
-  public bool Is(IOffenseItem that) {
-    if (!this.Exists()) {
-      throw new Exception("Called Is on a null!");
-    }
-    if (!that.Exists()) {
-      throw new Exception("Called Is on a null!");
-    }
-    return root == that.root && obj.id == that.id;
-  }
-  public bool NullableIs(IOffenseItem that) {
-    if (!this.Exists() && !that.Exists()) {
-      return true;
-    }
-    if (!this.Exists() || !that.Exists()) {
-      return false;
-    }
-    return this.Is(that);
-  }
-  public IOffenseItem AsIOffenseItem() {
-    return new GlaiveAsIOffenseItem(obj);
   }
 
          public Void Destruct() {

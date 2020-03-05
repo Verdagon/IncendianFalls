@@ -1,0 +1,18 @@
+
+mut struct ManaPotion {
+  ManaPotion isa IUsableItem;
+  ManaPotion isa IImmediatelyUseItem;
+
+  fn Destruct(obj: ManaPotion overrides IDestructible): Void {
+    ManaPotionExtensions.Destruct
+  }
+
+  fn Use(
+      self: ManaPotion overrides IUsableItem,
+      game: &Game,
+      superstate: $Superstate,
+      unit: &Unit)
+  : Void {
+    ManaPotionExtensions.Use
+  }
+}

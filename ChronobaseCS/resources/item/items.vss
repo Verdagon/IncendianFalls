@@ -1,3 +1,9 @@
+
+// What makes something an "item"?
+// - I can use it.
+// - I can see it on the ground.
+// Perhaps someday we should split these into their own components?
+
 mut struct ItemTTC {
   ItemTTC isa IInteractableTTC;
 
@@ -20,8 +26,13 @@ mut struct ItemTTC {
 
 mut interface IItem {
   IItem isa IUnitComponent;
+}
 
-  fn ClonifyAndReturnNewReal(newRoot: $Root): IItem;
+
+mut interface ICloneableUC {
+  ICloneableUC isa IUnitComponent;
+
+  fn ClonifyAndReturnNewReal(newRoot: $Root): ICloneableUC;
 }
 
 // This is just here to force it to generate a MutBunch:IItem, which we
@@ -42,142 +53,4 @@ mut interface IUsableItem {
 
 mut interface IImmediatelyUseItem {
   IImmediatelyUseItem isa IUsableItem;
-}
-
-mut interface IOffenseItem {
-  IOffenseItem isa IItem;
-
-  fn AffectOutgoingDamage(
-      physical: Bool,
-      outgoingDamage: Int)
-  : Int;
-}
-
-mut interface IInertiaItem {
-  IInertiaItem isa IItem;
-
-  fn AffectInertia(inertia: Int): Int;
-}
-
-mut interface IDefenseItem {
-  IDefenseItem isa IItem;
-
-  fn AffectIncomingDamage(incomingDamage: Int): Int;
-}
-
-mut struct Armor {
-  Armor isa IDefenseItem;
-
-  fn Destruct(this: Armor overrides IDestructible): Void {
-    ArmorExtensions.Destruct
-  }
-
-  fn AffectIncomingDamage(
-      armor: Armor overrides IDefenseItem,
-      incomingDamage: Int)
-  : Int {
-    ArmorExtensions.AffectIncomingDamage
-  }
-
-  fn ClonifyAndReturnNewReal(
-      armor: Armor overrides IItem,
-      newRoot: $Root)
-  : IItem {
-    ArmorExtensions.ClonifyAndReturnNewReal
-  }
-}
-
-mut struct Glaive {
-  Glaive isa IOffenseItem;
-
-  fn Destruct(this: Glaive overrides IDestructible): Void {
-    GlaiveExtensions.Destruct
-  }
-
-  fn AffectOutgoingDamage(
-      glaive: Glaive overrides IOffenseItem,
-      physical: Bool,
-      outgoingDamage: Int)
-  : Int {
-    GlaiveExtensions.AffectOutgoingDamage
-  }
-
-  fn ClonifyAndReturnNewReal(
-      glaive: Glaive overrides IItem,
-      newRoot: $Root)
-  : IItem {
-    GlaiveExtensions.ClonifyAndReturnNewReal
-  }
-}
-
-mut struct InertiaRing {
-  InertiaRing isa IInertiaItem;
-
-  fn Destruct(this: InertiaRing overrides IDestructible): Void {
-    InertiaRingExtensions.Destruct
-  }
-
-  fn AffectInertia(
-      ring: InertiaRing overrides IInertiaItem,
-      inertia: Int)
-  : Int {
-    InertiaRingExtensions.AffectInertia
-  }
-
-  fn ClonifyAndReturnNewReal(
-      ring: InertiaRing overrides IItem,
-      newRoot: $Root)
-  : IItem {
-    InertiaRingExtensions.ClonifyAndReturnNewReal
-  }
-}
-
-mut struct HealthPotion {
-  HealthPotion isa IUsableItem;
-  HealthPotion isa IImmediatelyUseItem;
-
-  fn Destruct(this: HealthPotion overrides IDestructible): Void {
-    HealthPotionExtensions.Destruct
-  }
-
-  fn Use(
-      self: HealthPotion overrides IUsableItem,
-      game: &Game,
-      superstate: $Superstate,
-      unit: &Unit)
-  : Void {
-    HealthPotionExtensions.Use
-  }
-
-  fn ClonifyAndReturnNewReal(
-      potion: HealthPotion overrides IItem,
-      newRoot: $Root)
-  : IItem {
-    HealthPotionExtensions.ClonifyAndReturnNewReal
-  }
-}
-
-mut struct ManaPotion {
-  ManaPotion isa IUsableItem;
-  ManaPotion isa IImmediatelyUseItem;
-
-  fn Destruct(this: ManaPotion overrides IDestructible): Void {
-    ManaPotionExtensions.Destruct
-  }
-
-  fn Use(
-      self: ManaPotion overrides IUsableItem,
-      game: &Game,
-      superstate: $Superstate,
-      unit: &Unit)
-  : Void {
-    ManaPotionExtensions.Use
-  }
-
-  fn ClonifyAndReturnNewReal(
-      potion: ManaPotion overrides IItem,
-      newRoot: $Root)
-  : IItem {
-    ManaPotionExtensions.ClonifyAndReturnNewReal
-  }
 }

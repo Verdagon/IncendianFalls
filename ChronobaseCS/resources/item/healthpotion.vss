@@ -1,0 +1,18 @@
+
+mut struct HealthPotion {
+  HealthPotion isa IUsableItem;
+  HealthPotion isa IImmediatelyUseItem;
+
+  fn Destruct(this: HealthPotion overrides IDestructible): Void {
+    HealthPotionExtensions.Destruct
+  }
+
+  fn Use(
+      self: HealthPotion overrides IUsableItem,
+      game: &Game,
+      superstate: $Superstate,
+      unit: &Unit)
+  : Void {
+    HealthPotionExtensions.Use
+  }
+}

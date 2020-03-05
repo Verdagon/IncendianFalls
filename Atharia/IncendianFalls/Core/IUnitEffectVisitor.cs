@@ -10,9 +10,8 @@ public interface IUnitEffectVisitor {
   void visitUnitSetAliveEffect(UnitSetAliveEffect effect);
   void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect);
   void visitUnitSetLocationEffect(UnitSetLocationEffect effect);
-  void visitUnitSetHpEffect(UnitSetHpEffect effect);
-  void visitUnitSetMpEffect(UnitSetMpEffect effect);
   void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect);
+  void visitUnitSetHpEffect(UnitSetHpEffect effect);
 }
 
 }

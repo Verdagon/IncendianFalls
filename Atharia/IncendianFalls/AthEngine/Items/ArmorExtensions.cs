@@ -8,12 +8,14 @@ namespace Atharia.Model {
       obj.Delete();
       return new Atharia.Model.Void();
     }
-    public static int AffectIncomingDamage(this Armor armor, int damage) {
-      int newDamage = damage / 2;
-      return newDamage;
+    public static int GetIncomingDamageAddConstant(this Armor armor) {
+      return 0;
     }
-    public static IItem ClonifyAndReturnNewReal(this Armor armor, Root newRoot) {
-      return newRoot.EffectArmorCreate().AsIItem();
+    public static int GetIncomingDamageMultiplierPercent(this Armor armor) {
+      return 50;
+    }
+    public static ICloneableUC ClonifyAndReturnNewReal(this Armor armor, Root newRoot) {
+      return newRoot.EffectArmorCreate().AsICloneableUC();
     }
   }
 }

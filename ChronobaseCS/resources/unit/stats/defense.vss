@@ -1,0 +1,35 @@
+
+mut interface IDefenseFactorUC {
+  IDefenseFactorUC isa IUnitComponent;
+
+  fn GetIncomingDamageAddConstant(): Int;
+  fn GetIncomingDamageMultiplierPercent(): Int;
+}
+
+mut struct BaseDefenseUC {
+  BaseDefenseUC isa IUnitComponent;
+  BaseDefenseUC isa ICloneableUC;
+  BaseDefenseUC isa IDefenseFactorUC;
+
+  incomingDamageAddConstant: Int;
+  incomingDamageMultiplierPercent: Int;
+
+  fn Destruct(this: BaseDefenseUC overrides IDestructible): Void {
+    BaseDefenseUCExtensions.Destruct
+  }
+
+  fn GetIncomingDamageAddConstant(this: BaseDefenseUC overrides IDestructible): Int {
+    BaseDefenseUCExtensions.GetIncomingDamageAddConstant
+  }
+
+  fn GetIncomingDamageMultiplierPercent(this: BaseDefenseUC overrides IDestructible): Int {
+    BaseDefenseUCExtensions.GetIncomingDamageMultiplierPercent
+  }
+
+  fn ClonifyAndReturnNewReal(
+      potion: BaseDefenseUC overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    BaseDefenseUCExtensions.ClonifyAndReturnNewReal
+  }
+}

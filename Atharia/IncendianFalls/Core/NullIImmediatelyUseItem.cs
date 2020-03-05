@@ -65,10 +65,6 @@ public class NullIImmediatelyUseItem : IImmediatelyUseItem {
     throw new Exception("Called Use on a null!");
   }
              
-  public IItem ClonifyAndReturnNewReal(Root newRoot) {
-    throw new Exception("Called ClonifyAndReturnNewReal on a null!");
-  }
-             
   public Void Destruct() {
     throw new Exception("Called Destruct on a null!");
   }

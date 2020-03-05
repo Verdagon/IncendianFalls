@@ -374,7 +374,7 @@ namespace AthPlayer {
                         new UnityEngine.Color(0, 0, 0)),
                     true,
                     new UnityEngine.Color(.5f, 0f, 0)));
-          } else if (item is InertiaRingAsIItem) {
+          } else if (item is SpeedRingAsIItem) {
             itemSymbolDescriptionByItemId.Add(
                 ttc.id,
                 new ExtrudedSymbolDescription(

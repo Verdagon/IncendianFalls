@@ -5,22 +5,22 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class IItemStrongMutBunchIncarnation {
-  public readonly int membersArmorStrongMutSet;
-  public readonly int membersInertiaRingStrongMutSet;
-  public readonly int membersGlaiveStrongMutSet;
   public readonly int membersManaPotionStrongMutSet;
   public readonly int membersHealthPotionStrongMutSet;
+  public readonly int membersSpeedRingStrongMutSet;
+  public readonly int membersGlaiveStrongMutSet;
+  public readonly int membersArmorStrongMutSet;
   public IItemStrongMutBunchIncarnation(
-      int membersArmorStrongMutSet,
-      int membersInertiaRingStrongMutSet,
-      int membersGlaiveStrongMutSet,
       int membersManaPotionStrongMutSet,
-      int membersHealthPotionStrongMutSet) {
-    this.membersArmorStrongMutSet = membersArmorStrongMutSet;
-    this.membersInertiaRingStrongMutSet = membersInertiaRingStrongMutSet;
-    this.membersGlaiveStrongMutSet = membersGlaiveStrongMutSet;
+      int membersHealthPotionStrongMutSet,
+      int membersSpeedRingStrongMutSet,
+      int membersGlaiveStrongMutSet,
+      int membersArmorStrongMutSet) {
     this.membersManaPotionStrongMutSet = membersManaPotionStrongMutSet;
     this.membersHealthPotionStrongMutSet = membersHealthPotionStrongMutSet;
+    this.membersSpeedRingStrongMutSet = membersSpeedRingStrongMutSet;
+    this.membersGlaiveStrongMutSet = membersGlaiveStrongMutSet;
+    this.membersArmorStrongMutSet = membersArmorStrongMutSet;
   }
 }
 

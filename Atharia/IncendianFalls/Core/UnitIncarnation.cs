@@ -10,44 +10,32 @@ public class UnitIncarnation {
   public  int lifeEndTime;
   public  Location location;
   public readonly string classId;
+  public  int nextActionTime;
   public  int hp;
   public readonly int maxHp;
-  public  int mp;
-  public readonly int maxMp;
-  public readonly int inertia;
-  public  int nextActionTime;
   public readonly int components;
   public readonly bool good;
-  public readonly int strength;
   public UnitIncarnation(
       int events,
       bool alive,
       int lifeEndTime,
       Location location,
       string classId,
+      int nextActionTime,
       int hp,
       int maxHp,
-      int mp,
-      int maxMp,
-      int inertia,
-      int nextActionTime,
       int components,
-      bool good,
-      int strength) {
+      bool good) {
     this.events = events;
     this.alive = alive;
     this.lifeEndTime = lifeEndTime;
     this.location = location;
     this.classId = classId;
+    this.nextActionTime = nextActionTime;
     this.hp = hp;
     this.maxHp = maxHp;
-    this.mp = mp;
-    this.maxMp = maxMp;
-    this.inertia = inertia;
-    this.nextActionTime = nextActionTime;
     this.components = components;
     this.good = good;
-    this.strength = strength;
   }
 }
 

@@ -41,7 +41,7 @@ namespace Atharia.Model {
             nativeUnit.nextActionTime + (game.time - game.level.time);
       }
 
-      game.level.EnterUnit(superstate.levelSuperstate, unit, destinationLevelLocation);
+      game.level.EnterUnit(superstate.levelSuperstate, destinationLevelLocation, game.level.time, unit);
     }
   }
 }

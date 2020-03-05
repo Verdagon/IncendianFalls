@@ -1,0 +1,18 @@
+
+mut struct SorcerousUC {
+  SorcerousUC isa IUnitComponent;
+  SorcerousUC isa ICloneableUC;
+
+  var mp: Int;
+  var maxMp: Int;
+
+  fn Destruct(this: SorcerousUC overrides IDestructible): Void {
+    SorcerousUCExtensions.Destruct
+  }
+  fn ClonifyAndReturnNewReal(
+      potion: SorcerousUC overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    SorcerousUCExtensions.ClonifyAndReturnNewReal
+  }
+}

@@ -28,7 +28,9 @@ namespace IncendianFalls {
         return "Error: Cannot counter while time shifting!";
       }
 
-      if (player.mp < 3) {
+      var sorcerous = player.components.GetOnlySorcerousUCOrNull();
+      Asserts.Assert(sorcerous != null);
+      if (sorcerous.mp < 3) {
         return "Can't counter, requires 1mp up-front, and 2mp more if attacked!";
       }
 
