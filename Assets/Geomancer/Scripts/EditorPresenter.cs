@@ -48,17 +48,22 @@ namespace Geomancer {
       clock = new SlowableTimerClock(1.0f);
 
       memberByKeyCode = new Dictionary<KeyCode, string>() {
+        [KeyCode.B] = "Fire",
         [KeyCode.G] = "Grass",
         [KeyCode.M] = "Mud",
         [KeyCode.D] = "Dirt",
         [KeyCode.R] = "Rocks",
+        [KeyCode.O] = "Obsidian",
+        [KeyCode.S] = "DarkRocks",
         [KeyCode.X] = "Marker",
         [KeyCode.C] = "Cave",
         [KeyCode.F] = "Floor",
         [KeyCode.T] = "Tree",
+        [KeyCode.L] = "Magma",
         [KeyCode.H] = "HealthPotion",
         [KeyCode.P] = "ManaPotion",
         [KeyCode.W] = "CaveWall",
+        [KeyCode.Z] = "ObsidianFloor",
         [KeyCode.Hash] = "Wall",
         [KeyCode.BackQuote] = "Water",
       };
@@ -150,6 +155,11 @@ namespace Geomancer {
         level.terrain.tiles.Add(location, terrainTile);
         return terrainTile;
       });
+      Save();
+
+      var selection = terrainPresenter.GetSelection();
+      selection.Add(location);
+      terrainPresenter.SetSelection(selection);
     }
 
     public void HandleTerrainTileClicked(Location location) {
@@ -213,7 +223,14 @@ namespace Geomancer {
       if (Input.GetKeyDown(KeyCode.Escape)) {
         terrainPresenter.SetSelection(new SortedSet<Location>());
       }
-      if (Input.GetKeyDown(KeyCode.Equals) || Input.GetKeyDown(KeyCode.Plus)) {
+      if (Input.GetKeyDown(KeyCode.Slash)) {
+        var allLocations = new SortedSet<Location>();
+        foreach (var locationAndTile in level.terrain.tiles) {
+          allLocations.Add(locationAndTile.Key);
+        }
+        terrainPresenter.SetSelection(allLocations);
+      }
+      if (Input.GetKeyDown(KeyCode.Equals) || Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.Mouse2)) {
         ss.Transact<Geomancer.Model.Void>(delegate () {
           foreach (var loc in terrainPresenter.GetSelection()) {
             level.terrain.tiles[loc].elevation = level.terrain.tiles[loc].elevation + 1;
@@ -223,7 +240,7 @@ namespace Geomancer {
         Save();
         UpdateLookPanelView();
       }
-      if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.Underscore)) {
+      if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.Underscore) || Input.GetKeyDown(KeyCode.Mouse1)) {
         ss.Transact<Geomancer.Model.Void>(delegate () {
           foreach (var loc in terrainPresenter.GetSelection()) {
             level.terrain.tiles[loc].elevation = Math.Max(1, level.terrain.tiles[loc].elevation - 1);

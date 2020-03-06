@@ -20,7 +20,16 @@ namespace Geomancer {
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
             new SymbolDescription("f",
-                            50,new Color(.5f, .5f, .5f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
+                            50,new Color(.5f, .5f, .5f, .2f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
+            false,
+            new Color(0, 0, 0)))
+      });
+      entries.Add("Obsidian", new List<MemberToViewMapper.IDescription>() {
+        new MemberToViewMapper.OverlayDescriptionForIDescription(
+          new ExtrudedSymbolDescription(
+            RenderPriority.TILE,
+            new SymbolDescription("f",
+                            50, new Color(0f, 0f, 0f, .8f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
             false,
             new Color(0, 0, 0)))
       });
@@ -80,14 +89,33 @@ namespace Geomancer {
                       false,
                       new Color(0f, .3f, 0f)))
       });
+      entries.Add("Fire", new List<MemberToViewMapper.IDescription>() {
+        new MemberToViewMapper.FeatureDescriptionForIDescription(
+                  new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          "r",
+                            50,
+                          new Color(.8f, .4f, 0, .5f),
+                          0,
+                          OutlineMode.WithOutline,
+                          new Color(0, 0, 0)),
+                      false,
+                      new Color(0f, .3f, 0f)))
+      });
       entries.Add("Dirt", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(.4f, .133f, 0)),
         new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(.266f, .1f, 0)),
         new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
       });
       entries.Add("Mud", new List<MemberToViewMapper.IDescription>() {
-        new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(104f / 255f, 44f / 255f, 0)),
-        new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(104f * 2/3 / 255f, 44f * 2/3 / 255f, 0)),
+        new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(.35f, .11f, 0)),
+        new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(.23f, .08f, 0)),
+        new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
+      });
+      entries.Add("ObsidianFloor", new List<MemberToViewMapper.IDescription>() {
+        new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(.1f, .1f, .05f)),
+        new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(.05f, .05f, .05f)),
         new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
       });
       entries.Add("Floor", new List<MemberToViewMapper.IDescription>() {
@@ -110,6 +138,23 @@ namespace Geomancer {
         new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(0f, .45f, .85f)),
         new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
       });
+      entries.Add("Magma", new List<MemberToViewMapper.IDescription>() {
+        new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(.4f, 0f, 0f)),
+        new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(.2f, 0f, 0f)),
+        new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0)),
+        new MemberToViewMapper.OverlayDescriptionForIDescription(
+          new ExtrudedSymbolDescription(
+              RenderPriority.SYMBOL,
+              new SymbolDescription(
+                  "f",
+                  50,
+                  new UnityEngine.Color(.5f, .0f, 0f),
+                  0,
+                  OutlineMode.NoOutline,
+                  new UnityEngine.Color(0, 0, 0)),
+              false,
+              new UnityEngine.Color(0, 0, 0)))
+    });
       entries.Add("Trigger", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.ItemDescriptionForIDescription(
           new ExtrudedSymbolDescription(

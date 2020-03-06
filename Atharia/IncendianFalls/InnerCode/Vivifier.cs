@@ -162,6 +162,9 @@ namespace IncendianFalls {
         case "Water":
           tile.components.Add(level.root.EffectWaterTTCCreate().AsITerrainTileComponent());
           return true;
+        case "Magma":
+          tile.components.Add(level.root.EffectMagmaTTCCreate().AsITerrainTileComponent());
+          return true;
         case "Ravashrike":
           level.EnterUnit(levelSuperstate, location, level.time, Ravashrike.Make(level.root));
           return true;
