@@ -1,0 +1,21 @@
+
+mut struct WarperTTC {
+  WarperTTC isa ITerrainTileComponent;
+  WarperTTC isa IInteractableTTC;
+
+  destinationLocation: Location;
+
+  fn Destruct(this: WarperTTC overrides IDestructible): Void {
+    WarperTTCExtensions.Destruct
+  }
+
+  fn Interact(
+    this: WarperTTC overrides IDestructible,
+    game: Game,
+    superstate: $Superstate,
+    interactingUnit: Unit,
+    containingTileLocation: Location):
+  Str {
+    WarperTTCExtensions.Interact
+  }
+}

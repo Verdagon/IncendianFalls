@@ -1,0 +1,19 @@
+
+mut struct GuardAICapabilityUC {
+  GuardAICapabilityUC isa IAICapabilityUC;
+
+  guardCenterLocation: Location;
+  guardRadius: Int;
+
+  fn Destruct(this: GuardAICapabilityUC overrides IDestructible): Void {
+    GuardAICapabilityUCExtensions.Destruct
+  }
+  fn ProduceImpulse(
+      this: GuardAICapabilityUC overrides IAICapabilityUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : IImpulse {
+    GuardAICapabilityUCExtensions.ProduceImpulse
+  }
+}

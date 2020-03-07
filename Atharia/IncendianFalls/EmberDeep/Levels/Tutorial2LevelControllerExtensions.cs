@@ -21,13 +21,13 @@ namespace Atharia.Model {
           NullILevelController.Null,
           game.time);
 
-      levelSuperstate = new LevelSuperstate(level);
-
       var geomancy =
-        Vivifier.Vivify(level, levelSuperstate, Vivifier.ParseGeomancy(LEVEL));
+        Vivifier.Vivify(level, Vivifier.ParseGeomancy(LEVEL));
       if (geomancy.Count > 0) {
         Asserts.Assert(false, Vivifier.PrintMembers(geomancy));
       }
+
+      levelSuperstate = new LevelSuperstate(level);
 
       foreach (var summonLocation in levelSuperstate.FindMarkersLocations("summon", 2)) {
         var randNum = game.rand.Next() % 6;

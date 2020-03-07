@@ -43,6 +43,10 @@ public class ITerrainTileComponentMutBunch {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersItemTTCMutSet");
     }
 
+    if (!root.WarperTTCMutSetExists(membersWarperTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersWarperTTCMutSet");
+    }
+
     if (!root.TimeAnchorTTCMutSetExists(membersTimeAnchorTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersTimeAnchorTTCMutSet");
     }
@@ -61,6 +65,10 @@ public class ITerrainTileComponentMutBunch {
 
     if (!root.DirtTTCMutSetExists(membersDirtTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersDirtTTCMutSet");
+    }
+
+    if (!root.ObsidianTTCMutSetExists(membersObsidianTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersObsidianTTCMutSet");
     }
 
     if (!root.DownStairsTTCMutSetExists(membersDownStairsTTCMutSet.id)) {
@@ -150,6 +158,9 @@ public class ITerrainTileComponentMutBunch {
     if (root.ItemTTCMutSetExists(membersItemTTCMutSet.id)) {
       membersItemTTCMutSet.FindReachableObjects(foundIds);
     }
+    if (root.WarperTTCMutSetExists(membersWarperTTCMutSet.id)) {
+      membersWarperTTCMutSet.FindReachableObjects(foundIds);
+    }
     if (root.TimeAnchorTTCMutSetExists(membersTimeAnchorTTCMutSet.id)) {
       membersTimeAnchorTTCMutSet.FindReachableObjects(foundIds);
     }
@@ -164,6 +175,9 @@ public class ITerrainTileComponentMutBunch {
     }
     if (root.DirtTTCMutSetExists(membersDirtTTCMutSet.id)) {
       membersDirtTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.ObsidianTTCMutSetExists(membersObsidianTTCMutSet.id)) {
+      membersObsidianTTCMutSet.FindReachableObjects(foundIds);
     }
     if (root.DownStairsTTCMutSetExists(membersDownStairsTTCMutSet.id)) {
       membersDownStairsTTCMutSet.FindReachableObjects(foundIds);
@@ -250,6 +264,15 @@ public class ITerrainTileComponentMutBunch {
       return new ItemTTCMutSet(root, incarnation.membersItemTTCMutSet);
     }
                        }
+  public WarperTTCMutSet membersWarperTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersWarperTTCMutSet of null!");
+      }
+      return new WarperTTCMutSet(root, incarnation.membersWarperTTCMutSet);
+    }
+                       }
   public TimeAnchorTTCMutSet membersTimeAnchorTTCMutSet {
 
     get {
@@ -293,6 +316,15 @@ public class ITerrainTileComponentMutBunch {
         throw new Exception("Tried to get member membersDirtTTCMutSet of null!");
       }
       return new DirtTTCMutSet(root, incarnation.membersDirtTTCMutSet);
+    }
+                       }
+  public ObsidianTTCMutSet membersObsidianTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersObsidianTTCMutSet of null!");
+      }
+      return new ObsidianTTCMutSet(root, incarnation.membersObsidianTTCMutSet);
     }
                        }
   public DownStairsTTCMutSet membersDownStairsTTCMutSet {
@@ -473,6 +505,8 @@ public class ITerrainTileComponentMutBunch {
 ,
       root.EffectItemTTCMutSetCreate()
 ,
+      root.EffectWarperTTCMutSetCreate()
+,
       root.EffectTimeAnchorTTCMutSetCreate()
 ,
       root.EffectMarkerTTCMutSetCreate()
@@ -482,6 +516,8 @@ public class ITerrainTileComponentMutBunch {
       root.EffectMudTTCMutSetCreate()
 ,
       root.EffectDirtTTCMutSetCreate()
+,
+      root.EffectObsidianTTCMutSetCreate()
 ,
       root.EffectDownStairsTTCMutSetCreate()
 ,
@@ -537,6 +573,12 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.WarperTTCExists(elementI.id)) {
+      this.membersWarperTTCMutSet.Add(root.GetWarperTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.TimeAnchorTTCExists(elementI.id)) {
       this.membersTimeAnchorTTCMutSet.Add(root.GetTimeAnchorTTC(elementI.id));
       return;
@@ -563,6 +605,12 @@ public class ITerrainTileComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.DirtTTCExists(elementI.id)) {
       this.membersDirtTTCMutSet.Add(root.GetDirtTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.ObsidianTTCExists(elementI.id)) {
+      this.membersObsidianTTCMutSet.Add(root.GetObsidianTTC(elementI.id));
       return;
     }
 
@@ -696,6 +744,12 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.WarperTTCExists(elementI.id)) {
+      this.membersWarperTTCMutSet.Remove(root.GetWarperTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.TimeAnchorTTCExists(elementI.id)) {
       this.membersTimeAnchorTTCMutSet.Remove(root.GetTimeAnchorTTC(elementI.id));
       return;
@@ -722,6 +776,12 @@ public class ITerrainTileComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.DirtTTCExists(elementI.id)) {
       this.membersDirtTTCMutSet.Remove(root.GetDirtTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.ObsidianTTCExists(elementI.id)) {
+      this.membersObsidianTTCMutSet.Remove(root.GetObsidianTTC(elementI.id));
       return;
     }
 
@@ -843,11 +903,13 @@ public class ITerrainTileComponentMutBunch {
   public void Clear() {
     this.membersSimplePresenceTriggerTTCMutSet.Clear();
     this.membersItemTTCMutSet.Clear();
+    this.membersWarperTTCMutSet.Clear();
     this.membersTimeAnchorTTCMutSet.Clear();
     this.membersMarkerTTCMutSet.Clear();
     this.membersLevelLinkTTCMutSet.Clear();
     this.membersMudTTCMutSet.Clear();
     this.membersDirtTTCMutSet.Clear();
+    this.membersObsidianTTCMutSet.Clear();
     this.membersDownStairsTTCMutSet.Clear();
     this.membersUpStairsTTCMutSet.Clear();
     this.membersWallTTCMutSet.Clear();
@@ -873,11 +935,13 @@ public class ITerrainTileComponentMutBunch {
       return
         this.membersSimplePresenceTriggerTTCMutSet.Count +
         this.membersItemTTCMutSet.Count +
+        this.membersWarperTTCMutSet.Count +
         this.membersTimeAnchorTTCMutSet.Count +
         this.membersMarkerTTCMutSet.Count +
         this.membersLevelLinkTTCMutSet.Count +
         this.membersMudTTCMutSet.Count +
         this.membersDirtTTCMutSet.Count +
+        this.membersObsidianTTCMutSet.Count +
         this.membersDownStairsTTCMutSet.Count +
         this.membersUpStairsTTCMutSet.Count +
         this.membersWallTTCMutSet.Count +
@@ -910,11 +974,13 @@ public class ITerrainTileComponentMutBunch {
   public void Destruct() {
     var tempMembersSimplePresenceTriggerTTCMutSet = this.membersSimplePresenceTriggerTTCMutSet;
     var tempMembersItemTTCMutSet = this.membersItemTTCMutSet;
+    var tempMembersWarperTTCMutSet = this.membersWarperTTCMutSet;
     var tempMembersTimeAnchorTTCMutSet = this.membersTimeAnchorTTCMutSet;
     var tempMembersMarkerTTCMutSet = this.membersMarkerTTCMutSet;
     var tempMembersLevelLinkTTCMutSet = this.membersLevelLinkTTCMutSet;
     var tempMembersMudTTCMutSet = this.membersMudTTCMutSet;
     var tempMembersDirtTTCMutSet = this.membersDirtTTCMutSet;
+    var tempMembersObsidianTTCMutSet = this.membersObsidianTTCMutSet;
     var tempMembersDownStairsTTCMutSet = this.membersDownStairsTTCMutSet;
     var tempMembersUpStairsTTCMutSet = this.membersUpStairsTTCMutSet;
     var tempMembersWallTTCMutSet = this.membersWallTTCMutSet;
@@ -938,11 +1004,13 @@ public class ITerrainTileComponentMutBunch {
     this.Delete();
     tempMembersSimplePresenceTriggerTTCMutSet.Destruct();
     tempMembersItemTTCMutSet.Destruct();
+    tempMembersWarperTTCMutSet.Destruct();
     tempMembersTimeAnchorTTCMutSet.Destruct();
     tempMembersMarkerTTCMutSet.Destruct();
     tempMembersLevelLinkTTCMutSet.Destruct();
     tempMembersMudTTCMutSet.Destruct();
     tempMembersDirtTTCMutSet.Destruct();
+    tempMembersObsidianTTCMutSet.Destruct();
     tempMembersDownStairsTTCMutSet.Destruct();
     tempMembersUpStairsTTCMutSet.Destruct();
     tempMembersWallTTCMutSet.Destruct();
@@ -970,6 +1038,9 @@ public class ITerrainTileComponentMutBunch {
     foreach (var element in this.membersItemTTCMutSet) {
       yield return new ItemTTCAsITerrainTileComponent(element);
     }
+    foreach (var element in this.membersWarperTTCMutSet) {
+      yield return new WarperTTCAsITerrainTileComponent(element);
+    }
     foreach (var element in this.membersTimeAnchorTTCMutSet) {
       yield return new TimeAnchorTTCAsITerrainTileComponent(element);
     }
@@ -984,6 +1055,9 @@ public class ITerrainTileComponentMutBunch {
     }
     foreach (var element in this.membersDirtTTCMutSet) {
       yield return new DirtTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersObsidianTTCMutSet) {
+      yield return new ObsidianTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersDownStairsTTCMutSet) {
       yield return new DownStairsTTCAsITerrainTileComponent(element);
@@ -1083,6 +1157,27 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return ItemTTC.Null;
+      }
+    }
+    public List<WarperTTC> GetAllWarperTTC() {
+      var result = new List<WarperTTC>();
+      foreach (var thing in this.membersWarperTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<WarperTTC> ClearAllWarperTTC() {
+      var result = new List<WarperTTC>();
+      this.membersWarperTTCMutSet.Clear();
+      return result;
+    }
+    public WarperTTC GetOnlyWarperTTCOrNull() {
+      var result = GetAllWarperTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return WarperTTC.Null;
       }
     }
     public List<TimeAnchorTTC> GetAllTimeAnchorTTC() {
@@ -1188,6 +1283,27 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return DirtTTC.Null;
+      }
+    }
+    public List<ObsidianTTC> GetAllObsidianTTC() {
+      var result = new List<ObsidianTTC>();
+      foreach (var thing in this.membersObsidianTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<ObsidianTTC> ClearAllObsidianTTC() {
+      var result = new List<ObsidianTTC>();
+      this.membersObsidianTTCMutSet.Clear();
+      return result;
+    }
+    public ObsidianTTC GetOnlyObsidianTTCOrNull() {
+      var result = GetAllObsidianTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return ObsidianTTC.Null;
       }
     }
     public List<DownStairsTTC> GetAllDownStairsTTC() {
@@ -1613,6 +1729,10 @@ public class ITerrainTileComponentMutBunch {
     }
                  public List<IInteractableTTC> GetAllIInteractableTTC() {
       var result = new List<IInteractableTTC>();
+      foreach (var obj in this.membersWarperTTCMutSet) {
+        result.Add(
+            new WarperTTCAsIInteractableTTC(obj));
+      }
       foreach (var obj in this.membersLevelLinkTTCMutSet) {
         result.Add(
             new LevelLinkTTCAsIInteractableTTC(obj));
@@ -1633,6 +1753,7 @@ public class ITerrainTileComponentMutBunch {
     }
     public List<IInteractableTTC> ClearAllIInteractableTTC() {
       var result = new List<IInteractableTTC>();
+      this.membersWarperTTCMutSet.Clear();
       this.membersLevelLinkTTCMutSet.Clear();
       this.membersItemTTCMutSet.Clear();
       this.membersIncendianFallsLevelLinkerTTCMutSet.Clear();

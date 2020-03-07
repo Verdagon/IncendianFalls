@@ -196,8 +196,8 @@ namespace AthPlayer {
           topColor = new UnityEngine.Color(.35f, .125f, 0);
           sideColor = new UnityEngine.Color(.25f, .083f, 0);
         } else if (ttc is MudTTCAsITerrainTileComponent) {
-          topColor = new UnityEngine.Color(.3f, .1f, 0f);
-          sideColor = new UnityEngine.Color(.2f, .067f, 0f);
+          topColor = new UnityEngine.Color(.35f, .11f, 0f);
+          sideColor = new UnityEngine.Color(.23f, .08f, 0f);
         } else if (ttc is CliffLandingTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.2f, .2f, .2f);
           sideColor = new UnityEngine.Color(.1f, .05f, 0f);
@@ -252,7 +252,6 @@ namespace AthPlayer {
                       new UnityEngine.Color(0f, 0f, 1.0f)),
                   false,
                   new UnityEngine.Color(0, 0, 0));
-
         } else if (ttc is RocksTTCAsITerrainTileComponent) {
           if (!overlayLocked) {
             overlay =
@@ -267,6 +266,16 @@ namespace AthPlayer {
                         new UnityEngine.Color(0, 0, 0)),
                     false,
                     new UnityEngine.Color(0, 0, 0));
+          }
+        } else if (ttc is ObsidianTTCAsITerrainTileComponent) {
+          if (!overlayLocked) {
+            overlay =
+                new ExtrudedSymbolDescription(
+            RenderPriority.TILE,
+            new SymbolDescription("f",
+                            50, new UnityEngine.Color(0f, 0f, 0f, .8f), 0, OutlineMode.WithOutline, new UnityEngine.Color(0, 0, 0)),
+            false,
+            new UnityEngine.Color(0, 0, 0));
           }
         } else if (ttc is BloodTTCAsITerrainTileComponent) {
           if (!overlayLocked) {
@@ -342,6 +351,7 @@ namespace AthPlayer {
                       new UnityEngine.Color(1f, 1f, 1f));
               featureLocked = true;
         } else if (ttc is LevelLinkTTCAsITerrainTileComponent) {
+        } else if (ttc is WarperTTCAsITerrainTileComponent) {
         } else if (ttc is IncendianFallsLevelLinkerTTCAsITerrainTileComponent) {
         } else if (ttc is WallTTCAsITerrainTileComponent) {
         } else if (ttc is MarkerTTCAsITerrainTileComponent) {
@@ -354,6 +364,20 @@ namespace AthPlayer {
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
                         "zero",
+                              50,
+                        new UnityEngine.Color(1f, 1f, 1.0f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+                    true,
+                    new UnityEngine.Color(.75f, .75f, 0)));
+          } else if (item is BlastRodAsIItem) {
+            itemSymbolDescriptionByItemId.Add(
+                ttc.id,
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "w",
                               50,
                         new UnityEngine.Color(1f, 1f, 1.0f, 1.5f),
                         0,
@@ -410,6 +434,20 @@ namespace AthPlayer {
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
                         "comma",
+                              50,
+                        new UnityEngine.Color(.25f, .7f, 1.0f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+                    true,
+                    new UnityEngine.Color(0f, 0f, 0)));
+          } else if (item is BlastRodAsIItem) {
+            itemSymbolDescriptionByItemId.Add(
+                ttc.id,
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "w",
                               50,
                         new UnityEngine.Color(.25f, .7f, 1.0f, 1.5f),
                         0,

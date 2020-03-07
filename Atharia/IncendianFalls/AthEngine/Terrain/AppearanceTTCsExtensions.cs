@@ -75,6 +75,12 @@ namespace Atharia.Model {
       return new Atharia.Model.Void();
     }
   }
+  public static class ObsidianTTCExtensions {
+    public static Atharia.Model.Void Destruct(this ObsidianTTC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+  }
   public static class StoneTTCExtensions {
     public static Atharia.Model.Void Destruct(this StoneTTC obj) {
       obj.Delete();

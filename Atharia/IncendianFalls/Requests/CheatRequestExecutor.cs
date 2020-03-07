@@ -70,6 +70,10 @@ namespace IncendianFalls {
           }
           Actions.Step(game, superstate, game.player, end, true);
           break;
+        case "poweroverwhelming":
+          game.player.components.Add(
+            game.root.EffectInvincibilityUCCreate().AsIUnitComponent());
+          break;
         default:
           return "Unknown cheat: " + request.cheatName;
       }
@@ -80,4 +84,3 @@ namespace IncendianFalls {
     }
   }
 }
-

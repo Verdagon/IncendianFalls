@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IPreActingUCWeakMutBunchBroadcaster:IMiredUCWeakMutSetEffectObserver, IMiredUCWeakMutSetEffectVisitor, IDefyingUCWeakMutSetEffectObserver, IDefyingUCWeakMutSetEffectVisitor, ICounteringUCWeakMutSetEffectObserver, ICounteringUCWeakMutSetEffectVisitor, IAttackAICapabilityUCWeakMutSetEffectObserver, IAttackAICapabilityUCWeakMutSetEffectVisitor {
+public class IPreActingUCWeakMutBunchBroadcaster:IMiredUCWeakMutSetEffectObserver, IMiredUCWeakMutSetEffectVisitor, IInvincibilityUCWeakMutSetEffectObserver, IInvincibilityUCWeakMutSetEffectVisitor, IDefyingUCWeakMutSetEffectObserver, IDefyingUCWeakMutSetEffectVisitor, ICounteringUCWeakMutSetEffectObserver, ICounteringUCWeakMutSetEffectVisitor, IAttackAICapabilityUCWeakMutSetEffectObserver, IAttackAICapabilityUCWeakMutSetEffectVisitor {
   IPreActingUCWeakMutBunch bunch;
   private List<IIPreActingUCWeakMutBunchObserver> observers;
 
@@ -12,6 +12,7 @@ public class IPreActingUCWeakMutBunchBroadcaster:IMiredUCWeakMutSetEffectObserve
     this.bunch = bunch;
     this.observers = new List<IIPreActingUCWeakMutBunchObserver>();
     bunch.membersMiredUCWeakMutSet.AddObserver(this);
+    bunch.membersInvincibilityUCWeakMutSet.AddObserver(this);
     bunch.membersDefyingUCWeakMutSet.AddObserver(this);
     bunch.membersCounteringUCWeakMutSet.AddObserver(this);
     bunch.membersAttackAICapabilityUCWeakMutSet.AddObserver(this);
@@ -19,6 +20,7 @@ public class IPreActingUCWeakMutBunchBroadcaster:IMiredUCWeakMutSetEffectObserve
   }
   public void Stop() {
     bunch.membersMiredUCWeakMutSet.RemoveObserver(this);
+    bunch.membersInvincibilityUCWeakMutSet.RemoveObserver(this);
     bunch.membersDefyingUCWeakMutSet.RemoveObserver(this);
     bunch.membersCounteringUCWeakMutSet.RemoveObserver(this);
     bunch.membersAttackAICapabilityUCWeakMutSet.RemoveObserver(this);
@@ -51,6 +53,17 @@ public class IPreActingUCWeakMutBunchBroadcaster:IMiredUCWeakMutSetEffectObserve
   }
   public void visitMiredUCWeakMutSetCreateEffect(MiredUCWeakMutSetCreateEffect effect) { }
   public void visitMiredUCWeakMutSetDeleteEffect(MiredUCWeakMutSetDeleteEffect effect) { }
+  public void OnInvincibilityUCWeakMutSetEffect(IInvincibilityUCWeakMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitInvincibilityUCWeakMutSetAddEffect(InvincibilityUCWeakMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitInvincibilityUCWeakMutSetRemoveEffect(InvincibilityUCWeakMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitInvincibilityUCWeakMutSetCreateEffect(InvincibilityUCWeakMutSetCreateEffect effect) { }
+  public void visitInvincibilityUCWeakMutSetDeleteEffect(InvincibilityUCWeakMutSetDeleteEffect effect) { }
   public void OnDefyingUCWeakMutSetEffect(IDefyingUCWeakMutSetEffect effect) {
     effect.visit(this);
   }

@@ -30,6 +30,10 @@ namespace IncendianFalls {
       }
       var player = game.player;
 
+      if (player.components.GetAllBlastRod().Count == 0) {
+        return "Can't fire without Blast Rod!";
+      }
+
       Unit victim = context.root.GetUnit(targetUnitId);
       if (!victim.alive) {
         return "Victim is already dead!";

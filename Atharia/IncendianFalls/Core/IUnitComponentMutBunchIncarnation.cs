@@ -7,10 +7,12 @@ namespace Atharia.Model {
 public class IUnitComponentMutBunchIncarnation {
   public readonly int membersWanderAICapabilityUCMutSet;
   public readonly int membersSummonAICapabilityUCMutSet;
+  public readonly int membersGuardAICapabilityUCMutSet;
   public readonly int membersTimeCloneAICapabilityUCMutSet;
   public readonly int membersMiredUCMutSet;
   public readonly int membersAttackAICapabilityUCMutSet;
   public readonly int membersCounteringUCMutSet;
+  public readonly int membersInvincibilityUCMutSet;
   public readonly int membersDefyingUCMutSet;
   public readonly int membersBideAICapabilityUCMutSet;
   public readonly int membersBaseMovementTimeUCMutSet;
@@ -19,6 +21,7 @@ public class IUnitComponentMutBunchIncarnation {
   public readonly int membersHealthPotionMutSet;
   public readonly int membersSpeedRingMutSet;
   public readonly int membersGlaiveMutSet;
+  public readonly int membersBlastRodMutSet;
   public readonly int membersArmorMutSet;
   public readonly int membersSorcerousUCMutSet;
   public readonly int membersBaseOffenseUCMutSet;
@@ -26,10 +29,12 @@ public class IUnitComponentMutBunchIncarnation {
   public IUnitComponentMutBunchIncarnation(
       int membersWanderAICapabilityUCMutSet,
       int membersSummonAICapabilityUCMutSet,
+      int membersGuardAICapabilityUCMutSet,
       int membersTimeCloneAICapabilityUCMutSet,
       int membersMiredUCMutSet,
       int membersAttackAICapabilityUCMutSet,
       int membersCounteringUCMutSet,
+      int membersInvincibilityUCMutSet,
       int membersDefyingUCMutSet,
       int membersBideAICapabilityUCMutSet,
       int membersBaseMovementTimeUCMutSet,
@@ -38,16 +43,19 @@ public class IUnitComponentMutBunchIncarnation {
       int membersHealthPotionMutSet,
       int membersSpeedRingMutSet,
       int membersGlaiveMutSet,
+      int membersBlastRodMutSet,
       int membersArmorMutSet,
       int membersSorcerousUCMutSet,
       int membersBaseOffenseUCMutSet,
       int membersBaseDefenseUCMutSet) {
     this.membersWanderAICapabilityUCMutSet = membersWanderAICapabilityUCMutSet;
     this.membersSummonAICapabilityUCMutSet = membersSummonAICapabilityUCMutSet;
+    this.membersGuardAICapabilityUCMutSet = membersGuardAICapabilityUCMutSet;
     this.membersTimeCloneAICapabilityUCMutSet = membersTimeCloneAICapabilityUCMutSet;
     this.membersMiredUCMutSet = membersMiredUCMutSet;
     this.membersAttackAICapabilityUCMutSet = membersAttackAICapabilityUCMutSet;
     this.membersCounteringUCMutSet = membersCounteringUCMutSet;
+    this.membersInvincibilityUCMutSet = membersInvincibilityUCMutSet;
     this.membersDefyingUCMutSet = membersDefyingUCMutSet;
     this.membersBideAICapabilityUCMutSet = membersBideAICapabilityUCMutSet;
     this.membersBaseMovementTimeUCMutSet = membersBaseMovementTimeUCMutSet;
@@ -56,6 +64,7 @@ public class IUnitComponentMutBunchIncarnation {
     this.membersHealthPotionMutSet = membersHealthPotionMutSet;
     this.membersSpeedRingMutSet = membersSpeedRingMutSet;
     this.membersGlaiveMutSet = membersGlaiveMutSet;
+    this.membersBlastRodMutSet = membersBlastRodMutSet;
     this.membersArmorMutSet = membersArmorMutSet;
     this.membersSorcerousUCMutSet = membersSorcerousUCMutSet;
     this.membersBaseOffenseUCMutSet = membersBaseOffenseUCMutSet;

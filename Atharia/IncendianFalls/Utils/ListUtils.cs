@@ -5,7 +5,7 @@ using Atharia.Model;
 public static class ListUtils {
   public static List<T> GetRandomN<T>(List<T> list, Rand rand, int numShuffles, int numToGet) {
     if (list.Count < numToGet) {
-      throw new Exception("wat");
+      throw new Exception("Can't get " + numToGet + " from a list of only " + list.Count);
     }
     List<T> shuffled = ListUtils.Shuffled(list, rand, numShuffles);
     shuffled.RemoveRange(numToGet, shuffled.Count - numToGet);

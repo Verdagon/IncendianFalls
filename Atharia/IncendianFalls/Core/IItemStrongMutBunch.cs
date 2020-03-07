@@ -51,6 +51,10 @@ public class IItemStrongMutBunch {
       violations.Add("Null constraint violated! IItemStrongMutBunch#" + id + ".membersGlaiveStrongMutSet");
     }
 
+    if (!root.BlastRodStrongMutSetExists(membersBlastRodStrongMutSet.id)) {
+      violations.Add("Null constraint violated! IItemStrongMutBunch#" + id + ".membersBlastRodStrongMutSet");
+    }
+
     if (!root.ArmorStrongMutSetExists(membersArmorStrongMutSet.id)) {
       violations.Add("Null constraint violated! IItemStrongMutBunch#" + id + ".membersArmorStrongMutSet");
     }
@@ -71,6 +75,9 @@ public class IItemStrongMutBunch {
     }
     if (root.GlaiveStrongMutSetExists(membersGlaiveStrongMutSet.id)) {
       membersGlaiveStrongMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.BlastRodStrongMutSetExists(membersBlastRodStrongMutSet.id)) {
+      membersBlastRodStrongMutSet.FindReachableObjects(foundIds);
     }
     if (root.ArmorStrongMutSetExists(membersArmorStrongMutSet.id)) {
       membersArmorStrongMutSet.FindReachableObjects(foundIds);
@@ -121,6 +128,15 @@ public class IItemStrongMutBunch {
       return new GlaiveStrongMutSet(root, incarnation.membersGlaiveStrongMutSet);
     }
                        }
+  public BlastRodStrongMutSet membersBlastRodStrongMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersBlastRodStrongMutSet of null!");
+      }
+      return new BlastRodStrongMutSet(root, incarnation.membersBlastRodStrongMutSet);
+    }
+                       }
   public ArmorStrongMutSet membersArmorStrongMutSet {
 
     get {
@@ -140,6 +156,8 @@ public class IItemStrongMutBunch {
       root.EffectSpeedRingStrongMutSetCreate()
 ,
       root.EffectGlaiveStrongMutSetCreate()
+,
+      root.EffectBlastRodStrongMutSetCreate()
 ,
       root.EffectArmorStrongMutSetCreate()
         );
@@ -167,6 +185,12 @@ public class IItemStrongMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.GlaiveExists(elementI.id)) {
       this.membersGlaiveStrongMutSet.Add(root.GetGlaive(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.BlastRodExists(elementI.id)) {
+      this.membersBlastRodStrongMutSet.Add(root.GetBlastRod(elementI.id));
       return;
     }
 
@@ -204,6 +228,12 @@ public class IItemStrongMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.BlastRodExists(elementI.id)) {
+      this.membersBlastRodStrongMutSet.Remove(root.GetBlastRod(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.ArmorExists(elementI.id)) {
       this.membersArmorStrongMutSet.Remove(root.GetArmor(elementI.id));
       return;
@@ -215,6 +245,7 @@ public class IItemStrongMutBunch {
     this.membersHealthPotionStrongMutSet.Clear();
     this.membersSpeedRingStrongMutSet.Clear();
     this.membersGlaiveStrongMutSet.Clear();
+    this.membersBlastRodStrongMutSet.Clear();
     this.membersArmorStrongMutSet.Clear();
   }
   public int Count {
@@ -224,6 +255,7 @@ public class IItemStrongMutBunch {
         this.membersHealthPotionStrongMutSet.Count +
         this.membersSpeedRingStrongMutSet.Count +
         this.membersGlaiveStrongMutSet.Count +
+        this.membersBlastRodStrongMutSet.Count +
         this.membersArmorStrongMutSet.Count
         ;
     }
@@ -240,6 +272,7 @@ public class IItemStrongMutBunch {
     var tempMembersHealthPotionStrongMutSet = this.membersHealthPotionStrongMutSet;
     var tempMembersSpeedRingStrongMutSet = this.membersSpeedRingStrongMutSet;
     var tempMembersGlaiveStrongMutSet = this.membersGlaiveStrongMutSet;
+    var tempMembersBlastRodStrongMutSet = this.membersBlastRodStrongMutSet;
     var tempMembersArmorStrongMutSet = this.membersArmorStrongMutSet;
 
     this.Delete();
@@ -247,6 +280,7 @@ public class IItemStrongMutBunch {
     tempMembersHealthPotionStrongMutSet.Destruct();
     tempMembersSpeedRingStrongMutSet.Destruct();
     tempMembersGlaiveStrongMutSet.Destruct();
+    tempMembersBlastRodStrongMutSet.Destruct();
     tempMembersArmorStrongMutSet.Destruct();
   }
   public IEnumerator<IItem> GetEnumerator() {
@@ -261,6 +295,9 @@ public class IItemStrongMutBunch {
     }
     foreach (var element in this.membersGlaiveStrongMutSet) {
       yield return new GlaiveAsIItem(element);
+    }
+    foreach (var element in this.membersBlastRodStrongMutSet) {
+      yield return new BlastRodAsIItem(element);
     }
     foreach (var element in this.membersArmorStrongMutSet) {
       yield return new ArmorAsIItem(element);
@@ -348,6 +385,27 @@ public class IItemStrongMutBunch {
         return result[0];
       } else {
         return Glaive.Null;
+      }
+    }
+    public List<BlastRod> GetAllBlastRod() {
+      var result = new List<BlastRod>();
+      foreach (var thing in this.membersBlastRodStrongMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<BlastRod> ClearAllBlastRod() {
+      var result = new List<BlastRod>();
+      this.membersBlastRodStrongMutSet.Clear();
+      return result;
+    }
+    public BlastRod GetOnlyBlastRodOrNull() {
+      var result = GetAllBlastRod();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return BlastRod.Null;
       }
     }
     public List<Armor> GetAllArmor() {

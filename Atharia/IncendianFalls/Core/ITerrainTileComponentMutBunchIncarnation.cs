@@ -7,11 +7,13 @@ namespace Atharia.Model {
 public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersSimplePresenceTriggerTTCMutSet;
   public readonly int membersItemTTCMutSet;
+  public readonly int membersWarperTTCMutSet;
   public readonly int membersTimeAnchorTTCMutSet;
   public readonly int membersMarkerTTCMutSet;
   public readonly int membersLevelLinkTTCMutSet;
   public readonly int membersMudTTCMutSet;
   public readonly int membersDirtTTCMutSet;
+  public readonly int membersObsidianTTCMutSet;
   public readonly int membersDownStairsTTCMutSet;
   public readonly int membersUpStairsTTCMutSet;
   public readonly int membersWallTTCMutSet;
@@ -34,11 +36,13 @@ public class ITerrainTileComponentMutBunchIncarnation {
   public ITerrainTileComponentMutBunchIncarnation(
       int membersSimplePresenceTriggerTTCMutSet,
       int membersItemTTCMutSet,
+      int membersWarperTTCMutSet,
       int membersTimeAnchorTTCMutSet,
       int membersMarkerTTCMutSet,
       int membersLevelLinkTTCMutSet,
       int membersMudTTCMutSet,
       int membersDirtTTCMutSet,
+      int membersObsidianTTCMutSet,
       int membersDownStairsTTCMutSet,
       int membersUpStairsTTCMutSet,
       int membersWallTTCMutSet,
@@ -60,11 +64,13 @@ public class ITerrainTileComponentMutBunchIncarnation {
       int membersEmberDeepLevelLinkerTTCMutSet) {
     this.membersSimplePresenceTriggerTTCMutSet = membersSimplePresenceTriggerTTCMutSet;
     this.membersItemTTCMutSet = membersItemTTCMutSet;
+    this.membersWarperTTCMutSet = membersWarperTTCMutSet;
     this.membersTimeAnchorTTCMutSet = membersTimeAnchorTTCMutSet;
     this.membersMarkerTTCMutSet = membersMarkerTTCMutSet;
     this.membersLevelLinkTTCMutSet = membersLevelLinkTTCMutSet;
     this.membersMudTTCMutSet = membersMudTTCMutSet;
     this.membersDirtTTCMutSet = membersDirtTTCMutSet;
+    this.membersObsidianTTCMutSet = membersObsidianTTCMutSet;
     this.membersDownStairsTTCMutSet = membersDownStairsTTCMutSet;
     this.membersUpStairsTTCMutSet = membersUpStairsTTCMutSet;
     this.membersWallTTCMutSet = membersWallTTCMutSet;

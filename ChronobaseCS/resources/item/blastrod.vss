@@ -1,0 +1,16 @@
+
+mut struct BlastRod {
+  BlastRod isa IItem;
+  BlastRod isa ICloneableUC;
+
+  fn Destruct(this: BlastRod overrides IDestructible): Void {
+    BlastRodExtensions.Destruct
+  }
+
+  fn ClonifyAndReturnNewReal(
+      armor: BlastRod overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    BlastRodExtensions.ClonifyAndReturnNewReal
+  }
+}

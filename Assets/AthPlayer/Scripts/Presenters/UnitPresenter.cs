@@ -30,6 +30,7 @@ namespace AthPlayer {
     bool isRavashrike;
 
     UnitView unitView;
+    HashSet<int> invincibilityIds = new HashSet<int>();
     HashSet<int> defyingIds = new HashSet<int>();
     HashSet<int> miredIds = new HashSet<int>();
     HashSet<int> counteringIds = new HashSet<int>();
@@ -277,6 +278,9 @@ namespace AthPlayer {
     public void OnIUnitComponentMutBunchAdd(int id) {
       var component = game.root.GetIUnitComponentOrNull(id);
       if (!component.Exists()) {
+      } else if (component is InvincibilityUCAsIUnitComponent invincibility) {
+        invincibilityIds.Add(id);
+        unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is DefyingUCAsIUnitComponent defying) {
         defyingIds.Add(id);
         unitView.SetDescription(GetUnitViewDescription(unit));
@@ -298,6 +302,8 @@ namespace AthPlayer {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is ManaPotionAsIUnitComponent) {
       } else if (component is HealthPotionAsIUnitComponent) {
+      } else if (component is BlastRodAsIUnitComponent) {
+        unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is ArmorAsIUnitComponent) {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is GlaiveAsIUnitComponent) {
@@ -310,7 +316,11 @@ namespace AthPlayer {
     }
 
     public void OnIUnitComponentMutBunchRemove(int id) {
-      if (defyingIds.Contains(id)) {
+      if (invincibilityIds.Contains(id)) {
+        invincibilityIds.Remove(id);
+        description = GetUnitViewDescription(unit);
+        unitView.SetDescription(description);
+      } else if (defyingIds.Contains(id)) {
         defyingIds.Remove(id);
         description = GetUnitViewDescription(unit);
         unitView.SetDescription(description);
@@ -341,6 +351,21 @@ namespace AthPlayer {
                           "q",
                             50,
                           new UnityEngine.Color(1, 1, 1, 1.5f),
+                          0,
+                          OutlineMode.WithBackOutline,
+                          new UnityEngine.Color(0, 0, 0)),
+                      true,
+                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+        } else if (detail is InvincibilityUCAsIUnitComponent inv) {
+          detailSymbols.Add(
+              new KeyValuePair<int, ExtrudedSymbolDescription>(
+                  inv.id,
+                  new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          "q",
+                            50,
+                          new UnityEngine.Color(0, .5f, 1, 1.5f),
                           0,
                           OutlineMode.WithBackOutline,
                           new UnityEngine.Color(0, 0, 0)),
@@ -378,6 +403,7 @@ namespace AthPlayer {
                       new UnityEngine.Color(1, 1, 1, 1.5f))));
         } else if (detail is WanderAICapabilityUCAsIUnitComponent) {
         } else if (detail is AttackAICapabilityUCAsIUnitComponent) {
+        } else if (detail is GuardAICapabilityUCAsIUnitComponent) {
         } else if (detail is SorcerousUCAsIUnitComponent) {
         } else if (detail is BaseCombatTimeUCAsIUnitComponent) {
         } else if (detail is BaseMovementTimeUCAsIUnitComponent) {
@@ -464,6 +490,21 @@ namespace AthPlayer {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "zero",
+                            50,
+                          new UnityEngine.Color(1, 1, 1, 1.5f),
+                          0,
+                          OutlineMode.WithBackOutline,
+                          new UnityEngine.Color(0, 0, 0)),
+                      true,
+                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+        } else if (detail is BlastRodAsIUnitComponent) {
+          detailSymbols.Add(
+              new KeyValuePair<int, ExtrudedSymbolDescription>(
+                  detail.id,
+                  new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          "w",
                             50,
                           new UnityEngine.Color(1, 1, 1, 1.5f),
                           0,

@@ -29,7 +29,18 @@ namespace AthPlayer {
       var symbolsAndLabels = new List<KeyValuePair<SymbolDescription, string>>();
 
       foreach (var detail in unit.components) {
-        if (detail is DefyingUCAsIUnitComponent Defying) {
+        if (detail is InvincibilityUCAsIUnitComponent) {
+          symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                new SymbolDescription(
+                    "q",
+                    50,
+                    new UnityEngine.Color(0, .5f, 1, 1.5f),
+                    0,
+                    OutlineMode.NoOutline,
+                    new UnityEngine.Color(0, 0, 0)),
+                "Defying"));
+        } else if (detail is DefyingUCAsIUnitComponent Defying) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
@@ -52,6 +63,7 @@ namespace AthPlayer {
                     new UnityEngine.Color(0, 0, 0)),
                 "Mired"));
         } else if (detail is WanderAICapabilityUCAsIUnitComponent) {
+        } else if (detail is GuardAICapabilityUCAsIUnitComponent) {
         } else if (detail is AttackAICapabilityUCAsIUnitComponent) {
         } else if (detail is BideAICapabilityUCAsIUnitComponent bideI) {
           if (bideI.obj.charge > 0) {
@@ -73,6 +85,17 @@ namespace AthPlayer {
         } else if (detail is BaseMovementTimeUCAsIUnitComponent) {
         } else if (detail is BaseOffenseUCAsIUnitComponent) {
         } else if (detail is BaseDefenseUCAsIUnitComponent) {
+        } else if (detail is BlastRodAsIUnitComponent) {
+          symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                new SymbolDescription(
+                    "w",
+                    50,
+                    new UnityEngine.Color(1, 1, 1, 1.5f),
+                    0,
+                    OutlineMode.NoOutline,
+                    new UnityEngine.Color(0, 0, 0)),
+                "Blast Rod"));
         } else if (detail is ArmorAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(

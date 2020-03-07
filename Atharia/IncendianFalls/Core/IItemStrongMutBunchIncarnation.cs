@@ -9,17 +9,20 @@ public class IItemStrongMutBunchIncarnation {
   public readonly int membersHealthPotionStrongMutSet;
   public readonly int membersSpeedRingStrongMutSet;
   public readonly int membersGlaiveStrongMutSet;
+  public readonly int membersBlastRodStrongMutSet;
   public readonly int membersArmorStrongMutSet;
   public IItemStrongMutBunchIncarnation(
       int membersManaPotionStrongMutSet,
       int membersHealthPotionStrongMutSet,
       int membersSpeedRingStrongMutSet,
       int membersGlaiveStrongMutSet,
+      int membersBlastRodStrongMutSet,
       int membersArmorStrongMutSet) {
     this.membersManaPotionStrongMutSet = membersManaPotionStrongMutSet;
     this.membersHealthPotionStrongMutSet = membersHealthPotionStrongMutSet;
     this.membersSpeedRingStrongMutSet = membersSpeedRingStrongMutSet;
     this.membersGlaiveStrongMutSet = membersGlaiveStrongMutSet;
+    this.membersBlastRodStrongMutSet = membersBlastRodStrongMutSet;
     this.membersArmorStrongMutSet = membersArmorStrongMutSet;
   }
 }

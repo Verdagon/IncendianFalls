@@ -49,10 +49,8 @@ namespace Atharia.Model {
           NullILevelController.Null,
           game.time);
 
-      levelSuperstate = new LevelSuperstate(level);
-
       var geomancy =
-        Vivifier.Vivify(level, levelSuperstate, Vivifier.ParseGeomancy(LEVEL));
+        Vivifier.Vivify(level, Vivifier.ParseGeomancy(LEVEL));
       var (floors, walls) = GetFloorsAndNearbyWalls(level.terrain);
 
       foreach (var wall in walls) {
@@ -108,6 +106,8 @@ namespace Atharia.Model {
       game.levels.Add(level);
 
       level.controller = game.root.EffectNestLevelControllerCreate(level).AsILevelController();
+
+      levelSuperstate = new LevelSuperstate(level);
 
       entryLocation = levelSuperstate.FindMarkerLocation("start");
     }

@@ -131,10 +131,9 @@ namespace IncendianFalls {
       }
     }
 
-    public static bool CanStep(
+    public static bool CanTeleportTo(
         Game game,
         Superstate superstate,
-        Unit unit,
         Location destination) {
       if (!game.level.terrain.tiles.ContainsKey(destination)) {
         return false;
@@ -142,13 +141,24 @@ namespace IncendianFalls {
       if (!game.level.terrain.tiles[destination].IsWalkable()) {
         return false;
       }
+      if (superstate.levelSuperstate.ContainsKey(destination)) {
+        return false;
+      }
+      return true;
+    }
+
+    public static bool CanStep(
+        Game game,
+        Superstate superstate,
+        Unit unit,
+        Location destination) {
       if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent())) {
         return false;
       }
       if (game.level.terrain.GetElevationDifference(unit.location, destination) > 2) {
         return false;
       }
-      if (superstate.levelSuperstate.ContainsKey(destination)) {
+      if (!CanTeleportTo(game, superstate, destination)) {
         return false;
       }
       return true;
@@ -160,12 +170,14 @@ namespace IncendianFalls {
           Unit unit,
           Location destination,
           bool overrideAdjacentCheck) {
-      Asserts.Assert(game.level.terrain.tiles[destination].IsWalkable());
-      Asserts.Assert(overrideAdjacentCheck || game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent()));
-      Asserts.Assert(!superstate.levelSuperstate.ContainsKey(destination));
+      Asserts.Assert(game.level.terrain.tiles[destination].IsWalkable(), "Not walkable!");
+      Asserts.Assert(
+        overrideAdjacentCheck || game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent()),
+        "Adjacent check failed!");
+      Asserts.Assert(!superstate.levelSuperstate.ContainsKey(destination), "Unknown destination!");
 
       bool removed = superstate.levelSuperstate.Remove(unit);
-      Asserts.Assert(removed);
+      Asserts.Assert(removed, "Not removed!");
       unit.location = destination;
       superstate.levelSuperstate.Add(unit);
 

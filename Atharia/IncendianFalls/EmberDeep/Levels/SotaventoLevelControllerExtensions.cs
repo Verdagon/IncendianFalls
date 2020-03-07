@@ -21,10 +21,10 @@ namespace Atharia.Model {
           NullILevelController.Null,
           game.time);
 
-      levelSuperstate = new LevelSuperstate(level);
-
       var geomancy =
-        Vivifier.Vivify(level, levelSuperstate, Vivifier.ParseGeomancy(LEVEL));
+        Vivifier.Vivify(level, Vivifier.ParseGeomancy(LEVEL));
+
+      levelSuperstate = new LevelSuperstate(level);
 
       var ravashrike = levelSuperstate.FindLiveUnit("Ravashrike");
       var components = new List<IUnitComponent>();

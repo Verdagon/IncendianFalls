@@ -150,6 +150,14 @@ mut struct RocksTTC {
   }
 }
 
+mut struct ObsidianTTC {
+  ObsidianTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: ObsidianTTC overrides IDestructible): Void {
+    ObsidianTTCExtensions.Destruct
+  }
+}
+
 mut struct DirtTTC {
   DirtTTC isa ITerrainTileComponent;
 

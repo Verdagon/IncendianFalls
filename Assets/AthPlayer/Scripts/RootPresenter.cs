@@ -102,6 +102,9 @@ namespace AthPlayer {
       if (Input.GetKeyUp(KeyCode.Slash)) {
         playerController.ActivateCheat("warptoend");
       }
+      if (Input.GetKeyUp(KeyCode.Equals)) {
+        playerController.ActivateCheat("poweroverwhelming");
+      }
 
       if (Input.GetKey(KeyCode.RightArrow)) {
         cameraController.MoveRight(Time.deltaTime);

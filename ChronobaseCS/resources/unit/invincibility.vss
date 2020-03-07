@@ -1,0 +1,38 @@
+
+mut struct InvincibilityUC {
+  InvincibilityUC isa IDefenseFactorUC;
+  InvincibilityUC isa IOffenseFactorUC;
+  InvincibilityUC isa IPreActingUC;
+
+  fn Destruct(this: InvincibilityUC overrides IDestructible): Void {
+    InvincibilityUCExtensions.Destruct
+  }
+  fn GetOutgoingDamageAddConstant(
+      this: InvincibilityUC overrides IOffenseFactorUC)
+  : Int {
+    InvincibilityUCExtensions.GetOutgoingDamageAddConstant
+  }
+  fn GetOutgoingDamageMultiplierPercent(
+      this: InvincibilityUC overrides IOffenseFactorUC)
+  : Int {
+    InvincibilityUCExtensions.GetOutgoingDamageMultiplierPercent
+  }
+  fn GetIncomingDamageAddConstant(
+      this: InvincibilityUC overrides IDefenseFactorUC)
+  : Int {
+    InvincibilityUCExtensions.GetIncomingDamageAddConstant
+  }
+  fn GetIncomingDamageMultiplierPercent(
+      this: InvincibilityUC overrides IDefenseFactorUC)
+  : Int {
+    InvincibilityUCExtensions.GetIncomingDamageMultiplierPercent
+  }
+  fn PreAct(
+      detail: InvincibilityUC overrides IPreActingUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool {
+    InvincibilityUCExtensions.PreAct
+  }
+}

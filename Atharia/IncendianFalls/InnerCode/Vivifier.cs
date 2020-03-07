@@ -109,7 +109,6 @@ namespace IncendianFalls {
     public static Dictionary<Location, List<string>>
     Vivify(
         Level level,
-        LevelSuperstate levelSuperstate,
         Dictionary<ElevatedLocation, List<string>> geomancy) {
       var unknownGeomancy = new Dictionary<Location, List<string>>();
       foreach (var elevatedLocationAndMembers in geomancy) {
@@ -124,7 +123,7 @@ namespace IncendianFalls {
         level.terrain.tiles.Add(location, tile);
 
         foreach (var memberString in members) {
-          var recognized = DoMemberStringThing(level, levelSuperstate, location, tile, memberString);
+          var recognized = DoMemberStringThing(level, location, tile, memberString);
           if (!recognized) {
             if (!unknownGeomancy.ContainsKey(location)) {
               unknownGeomancy.Add(location, new List<string>());
@@ -136,7 +135,7 @@ namespace IncendianFalls {
       return unknownGeomancy;
     }
 
-    private static bool DoMemberStringThing(Level level, LevelSuperstate levelSuperstate, Location location, TerrainTile tile, string memberString) {
+    private static bool DoMemberStringThing(Level level, Location location, TerrainTile tile, string memberString) {
       switch (memberString) {
         case "Mud":
           tile.components.Add(level.root.EffectMudTTCCreate().AsITerrainTileComponent());
@@ -149,6 +148,9 @@ namespace IncendianFalls {
           return true;
         case "Rocks":
           tile.components.Add(level.root.EffectRocksTTCCreate().AsITerrainTileComponent());
+          return true;
+        case "Obsidian":
+          tile.components.Add(level.root.EffectObsidianTTCCreate().AsITerrainTileComponent());
           return true;
         case "Grass":
           tile.components.Add(level.root.EffectGrassTTCCreate().AsITerrainTileComponent());
@@ -166,7 +168,10 @@ namespace IncendianFalls {
           tile.components.Add(level.root.EffectMagmaTTCCreate().AsITerrainTileComponent());
           return true;
         case "Ravashrike":
-          level.EnterUnit(levelSuperstate, location, level.time, Ravashrike.Make(level.root));
+          var unit = Ravashrike.Make(level.root);
+          unit.location = location;
+          unit.nextActionTime = level.time;
+          level.units.Add(unit);
           return true;
         case "HealthPotion":
           tile.components.Add(

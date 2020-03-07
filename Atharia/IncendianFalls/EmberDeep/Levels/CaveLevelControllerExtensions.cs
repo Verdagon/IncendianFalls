@@ -19,7 +19,7 @@ namespace Atharia.Model {
           PentagonPattern9.makePentagon9Pattern(),
           game.rand,
           considerCornersAdjacent,
-          15.0f);
+          8.0f);
       foreach (var locationAndTile in terrain.tiles) {
         locationAndTile.Value.components.Add(game.root.EffectMudTTCCreate().AsITerrainTileComponent());
       }
@@ -52,6 +52,8 @@ namespace Atharia.Model {
               (loc) => true, false, false);
       entryLocation = entryAndExitLocations[0];
       var exitLocation = entryAndExitLocations[1];
+      level.terrain.tiles[exitLocation].components.Add(
+        game.root.EffectCaveTTCCreate().AsITerrainTileComponent());
       level.terrain.tiles[exitLocation].components.Add(
         game.root.EffectEmberDeepLevelLinkerTTCCreate(depth + 1).AsITerrainTileComponent());
 

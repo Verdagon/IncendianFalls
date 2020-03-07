@@ -150,6 +150,12 @@ namespace ConsoleDriveyThing {
           }
           recognized = true;
         }
+        if (tc is ObsidianTTCAsITerrainTileComponent) {
+          if (!terrainAndFeaturesMode) {
+            featurePainters.Add(() => cell.Paint(ConsoleColor.Black));
+          }
+          recognized = true;
+        }
         if (tc is DownStairsTTCAsITerrainTileComponent) {
           if (!terrainAndFeaturesMode) {
             featurePainters.Add(() => cell.Paint('>', ConsoleColor.Gray));

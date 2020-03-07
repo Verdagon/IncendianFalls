@@ -20,6 +20,7 @@ incendianfalls/levels/pentagonalcave.vss
 incendianfalls/levels/ravashrikelevel.vss
 incendianfalls/levels/squarecave.vss
 item/armor.vss
+item/blastrod.vss
 item/glaive.vss
 item/healthpotion.vss
 item/items.vss
@@ -37,6 +38,7 @@ terrain/simplewalktrigger.vss
 terrain/terrain.vss
 terrain/terraintile.vss
 terrain/timeanchorttc.vss
+terrain/warper.vss
 unit/attack.vss
 unit/bide.vss
 unit/counter.vss
@@ -44,6 +46,8 @@ unit/countering.vss
 unit/defy.vss
 unit/fire.vss
 unit/impulse.vss
+unit/guard.vss
+unit/invincibility.vss
 unit/move.vss
 unit/script.vss
 unit/mire.vss

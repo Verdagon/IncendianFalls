@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IItemStrongMutBunchBroadcaster:IManaPotionStrongMutSetEffectObserver, IManaPotionStrongMutSetEffectVisitor, IHealthPotionStrongMutSetEffectObserver, IHealthPotionStrongMutSetEffectVisitor, ISpeedRingStrongMutSetEffectObserver, ISpeedRingStrongMutSetEffectVisitor, IGlaiveStrongMutSetEffectObserver, IGlaiveStrongMutSetEffectVisitor, IArmorStrongMutSetEffectObserver, IArmorStrongMutSetEffectVisitor {
+public class IItemStrongMutBunchBroadcaster:IManaPotionStrongMutSetEffectObserver, IManaPotionStrongMutSetEffectVisitor, IHealthPotionStrongMutSetEffectObserver, IHealthPotionStrongMutSetEffectVisitor, ISpeedRingStrongMutSetEffectObserver, ISpeedRingStrongMutSetEffectVisitor, IGlaiveStrongMutSetEffectObserver, IGlaiveStrongMutSetEffectVisitor, IBlastRodStrongMutSetEffectObserver, IBlastRodStrongMutSetEffectVisitor, IArmorStrongMutSetEffectObserver, IArmorStrongMutSetEffectVisitor {
   IItemStrongMutBunch bunch;
   private List<IIItemStrongMutBunchObserver> observers;
 
@@ -15,6 +15,7 @@ public class IItemStrongMutBunchBroadcaster:IManaPotionStrongMutSetEffectObserve
     bunch.membersHealthPotionStrongMutSet.AddObserver(this);
     bunch.membersSpeedRingStrongMutSet.AddObserver(this);
     bunch.membersGlaiveStrongMutSet.AddObserver(this);
+    bunch.membersBlastRodStrongMutSet.AddObserver(this);
     bunch.membersArmorStrongMutSet.AddObserver(this);
 
   }
@@ -23,6 +24,7 @@ public class IItemStrongMutBunchBroadcaster:IManaPotionStrongMutSetEffectObserve
     bunch.membersHealthPotionStrongMutSet.RemoveObserver(this);
     bunch.membersSpeedRingStrongMutSet.RemoveObserver(this);
     bunch.membersGlaiveStrongMutSet.RemoveObserver(this);
+    bunch.membersBlastRodStrongMutSet.RemoveObserver(this);
     bunch.membersArmorStrongMutSet.RemoveObserver(this);
 
   }
@@ -86,6 +88,17 @@ public class IItemStrongMutBunchBroadcaster:IManaPotionStrongMutSetEffectObserve
   }
   public void visitGlaiveStrongMutSetCreateEffect(GlaiveStrongMutSetCreateEffect effect) { }
   public void visitGlaiveStrongMutSetDeleteEffect(GlaiveStrongMutSetDeleteEffect effect) { }
+  public void OnBlastRodStrongMutSetEffect(IBlastRodStrongMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitBlastRodStrongMutSetAddEffect(BlastRodStrongMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitBlastRodStrongMutSetRemoveEffect(BlastRodStrongMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitBlastRodStrongMutSetCreateEffect(BlastRodStrongMutSetCreateEffect effect) { }
+  public void visitBlastRodStrongMutSetDeleteEffect(BlastRodStrongMutSetDeleteEffect effect) { }
   public void OnArmorStrongMutSetEffect(IArmorStrongMutSetEffect effect) {
     effect.visit(this);
   }
