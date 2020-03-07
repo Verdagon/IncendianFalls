@@ -4,6 +4,12 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class Actions {
+    public static readonly int FIRE_COST = 18;
+    public static readonly int FIRE_BOMB_COST = 10;
+    public static readonly int MIRE_COST = 2;
+    public static readonly int FIRE_DAMAGE = 23;
+    public static readonly int FIRE_BOMB_DAMAGE = 32;
+
     public static void UnleashBide(
         Game game,
         Superstate superstate,
@@ -47,6 +53,23 @@ namespace IncendianFalls {
         int initialDamage,
         bool physical) {
       int outgoingDamage = attacker.CalculateOutgoingDamage(initialDamage);
+      AttackedInner(game, superstate, victim, outgoingDamage, physical);
+      if (victim.alive) {
+        foreach (var reactor in new List<IReactingToAttacksUC>(victim.components.GetAllIReactingToAttacksUC())) {
+          if (victim.Exists()) {
+            reactor.React(game, superstate, victim, attacker);
+          }
+        }
+      }
+    }
+
+    private static void AttackedInner(
+        Game game,
+        Superstate superstate,
+        Unit victim,
+        // A strong human's punch is about 5 damage.
+        int outgoingDamage,
+        bool physical) {
       int incomingDamage = victim.CalculateIncomingDamage(outgoingDamage);
       //game.root.logger.Info((attacker.Is(game.player) ? "Player" : "Enemy") + " does " + damage + " damage to " + (victim.Is(game.player) ? "player" : "enemy") + "!");
       victim.hp = victim.hp - incomingDamage;
@@ -56,13 +79,7 @@ namespace IncendianFalls {
         victim.lifeEndTime = game.time;
         // Bump the victim up to be the next acting unit.
         victim.nextActionTime = game.time;
-        superstate.levelSuperstate.Remove(victim);
-      } else {
-        foreach (var reactor in new List<IReactingToAttacksUC>(victim.components.GetAllIReactingToAttacksUC())) {
-          if (victim.Exists()) {
-            reactor.React(game, superstate, victim, attacker);
-          }
-        }
+        superstate.levelSuperstate.RemoveUnit(victim);
       }
     }
 
@@ -141,7 +158,7 @@ namespace IncendianFalls {
       if (!game.level.terrain.tiles[destination].IsWalkable()) {
         return false;
       }
-      if (superstate.levelSuperstate.ContainsKey(destination)) {
+      if (superstate.levelSuperstate.ContainsUnit(destination)) {
         return false;
       }
       return true;
@@ -174,12 +191,12 @@ namespace IncendianFalls {
       Asserts.Assert(
         overrideAdjacentCheck || game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent()),
         "Adjacent check failed!");
-      Asserts.Assert(!superstate.levelSuperstate.ContainsKey(destination), "Unknown destination!");
+      Asserts.Assert(!superstate.levelSuperstate.ContainsUnit(destination), "Unknown destination!");
 
-      bool removed = superstate.levelSuperstate.Remove(unit);
+      bool removed = superstate.levelSuperstate.RemoveUnit(unit);
       Asserts.Assert(removed, "Not removed!");
       unit.location = destination;
-      superstate.levelSuperstate.Add(unit);
+      superstate.levelSuperstate.AddUnit(unit);
 
       unit.nextActionTime = unit.nextActionTime + unit.CalculateMovementTimeCost(600);
     }
@@ -190,12 +207,8 @@ namespace IncendianFalls {
         Unit unit) {
       unit.alive = false;
       unit.lifeEndTime = game.time;
-      superstate.levelSuperstate.Remove(unit);
+      superstate.levelSuperstate.RemoveUnit(unit);
     }
-
-    public static readonly int FIRE_COST = 18;
-    public static readonly int MIRE_COST = 2;
-    public static readonly int FIRE_DAMAGE = 23;
 
     public static void Fire(
         Game game,
@@ -210,6 +223,33 @@ namespace IncendianFalls {
       var sorcerous = attacker.components.GetOnlySorcerousUCOrNull();
       Asserts.Assert(sorcerous != null);
       sorcerous.mp = sorcerous.mp - FIRE_COST;
+    }
+
+    public static void PlaceFireBomb(
+        Game game,
+        Superstate superstate,
+        Unit attacker,
+        Location location) {
+      game.root.logger.Error("placing fire bomb!");
+      game.level.terrain.tiles[location].components.Add(
+        game.root.EffectFireBombTTCCreate(2).AsITerrainTileComponent());
+      superstate.levelSuperstate.AddedActingTTC(location);
+      attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(600);
+
+      var sorcerous = attacker.components.GetOnlySorcerousUCOrNull();
+      Asserts.Assert(sorcerous != null);
+      sorcerous.mp = sorcerous.mp - FIRE_BOMB_COST;
+    }
+
+    public static void ExplodeFireBomb(
+        Game game,
+        Superstate superstate,
+        Location location) {
+      Unit poorSuckerOnThisTile = superstate.levelSuperstate.GetLiveUnitAt(location);
+      if (poorSuckerOnThisTile.Exists()) {
+        Eventer.broadcastUnitFireBombedEvent(game.root, game, poorSuckerOnThisTile);
+        AttackedInner(game, superstate, poorSuckerOnThisTile, FIRE_BOMB_DAMAGE, false);
+      }
     }
   }
 }

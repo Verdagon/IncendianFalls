@@ -34,6 +34,7 @@ requests.vss
 terrain/appearance.vss
 terrain/levellink.vss
 terrain/marker.vss
+terrain/firebomb.vss
 terrain/simplewalktrigger.vss
 terrain/terrain.vss
 terrain/terraintile.vss

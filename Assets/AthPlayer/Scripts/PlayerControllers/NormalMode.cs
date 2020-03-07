@@ -122,6 +122,17 @@ namespace AthPlayer {
       delegat.SwitchToFireMode();
     }
 
+    public void FireBombClicked() {
+      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
+        ss.GetRoot().logger.Error("Not your turn!");
+        delegat.AfterDidSomething();
+        return;
+      }
+
+      narrator.ClearMessage();
+      delegat.SwitchToFireBombMode();
+    }
+
     public void MireClicked() {
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
         ss.GetRoot().logger.Error("Not your turn!");

@@ -69,6 +69,7 @@
     <Compile Include="Assets\AthPlayer\Scripts\ITimer.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Logger.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\ModelExtensions.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\FireBombMode.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\FireMode.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\IMode.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\Looker.cs" />

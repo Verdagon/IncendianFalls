@@ -58,6 +58,13 @@ imm struct FireRequest {
   targetUnitId: Int;
 }
 
+imm struct FireBombRequest {
+  FireBombRequest isa IRequest;
+
+  gameId: Int;
+  location: Location;
+}
+
 imm struct MireRequest {
   MireRequest isa IRequest;
 

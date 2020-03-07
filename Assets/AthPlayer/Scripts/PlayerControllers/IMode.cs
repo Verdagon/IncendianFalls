@@ -7,6 +7,7 @@ namespace AthPlayer {
     void SwitchToNormalMode();
     void SwitchToTimeAnchorMoveMode();
     void SwitchToFireMode();
+    void SwitchToFireBombMode();
     void SwitchToMireMode();
   }
 
@@ -15,6 +16,7 @@ namespace AthPlayer {
 
     void DefyClicked();
     void FireClicked();
+    void FireBombClicked();
     void MireClicked();
     void CounterClicked();
     void InteractClicked();  

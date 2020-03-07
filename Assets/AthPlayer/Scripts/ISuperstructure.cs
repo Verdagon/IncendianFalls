@@ -19,6 +19,7 @@ namespace AthPlayer {
     string RequestCounter(int gameId);
     string RequestCheat(int gameId, string cheatName);
     string RequestFire(int gameId, int targetUnitId);
+    string RequestFireBomb(int gameId, Location location);
     string RequestMire(int gameId, int targetUnitId);
     string RequestInteract(int gameId);
     Superstate GetSuperstate(int gameId);

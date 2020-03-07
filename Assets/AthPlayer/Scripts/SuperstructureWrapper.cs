@@ -68,6 +68,15 @@ namespace AthPlayer {
       return result;
     }
 
+    public string RequestFireBomb(int gameId, Location location) {
+      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+      //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);
+
+      var result = ss.RequestFireBomb(gameId, location);
+
+      return result;
+    }
+
     public string RequestMire(int gameId, int targetUnitId) {
       //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
       //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);

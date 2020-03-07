@@ -1,0 +1,20 @@
+
+mut struct FireBombTTC {
+  FireBombTTC isa ITerrainTileComponent;
+  FireBombTTC isa IActingTTC;
+
+  var turnsUntilExplosion: Int;
+
+  fn Destruct(this: FireBombTTC overrides IDestructible): Void {
+    FireBombTTCExtensions.Destruct
+  }
+
+  fn Act(
+    this: FireBombTTC overrides IActingTTC,
+    game: Game,
+    superstate: $Superstate,
+    containingTileLocation: Location):
+  Void {
+    FireBombTTCExtensions.Act
+  }
+}

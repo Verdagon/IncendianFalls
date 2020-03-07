@@ -51,6 +51,10 @@ public class ITerrainTileComponentMutBunch {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersTimeAnchorTTCMutSet");
     }
 
+    if (!root.FireBombTTCMutSetExists(membersFireBombTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersFireBombTTCMutSet");
+    }
+
     if (!root.MarkerTTCMutSetExists(membersMarkerTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersMarkerTTCMutSet");
     }
@@ -163,6 +167,9 @@ public class ITerrainTileComponentMutBunch {
     }
     if (root.TimeAnchorTTCMutSetExists(membersTimeAnchorTTCMutSet.id)) {
       membersTimeAnchorTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.FireBombTTCMutSetExists(membersFireBombTTCMutSet.id)) {
+      membersFireBombTTCMutSet.FindReachableObjects(foundIds);
     }
     if (root.MarkerTTCMutSetExists(membersMarkerTTCMutSet.id)) {
       membersMarkerTTCMutSet.FindReachableObjects(foundIds);
@@ -280,6 +287,15 @@ public class ITerrainTileComponentMutBunch {
         throw new Exception("Tried to get member membersTimeAnchorTTCMutSet of null!");
       }
       return new TimeAnchorTTCMutSet(root, incarnation.membersTimeAnchorTTCMutSet);
+    }
+                       }
+  public FireBombTTCMutSet membersFireBombTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersFireBombTTCMutSet of null!");
+      }
+      return new FireBombTTCMutSet(root, incarnation.membersFireBombTTCMutSet);
     }
                        }
   public MarkerTTCMutSet membersMarkerTTCMutSet {
@@ -509,6 +525,8 @@ public class ITerrainTileComponentMutBunch {
 ,
       root.EffectTimeAnchorTTCMutSetCreate()
 ,
+      root.EffectFireBombTTCMutSetCreate()
+,
       root.EffectMarkerTTCMutSetCreate()
 ,
       root.EffectLevelLinkTTCMutSetCreate()
@@ -581,6 +599,12 @@ public class ITerrainTileComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.TimeAnchorTTCExists(elementI.id)) {
       this.membersTimeAnchorTTCMutSet.Add(root.GetTimeAnchorTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.FireBombTTCExists(elementI.id)) {
+      this.membersFireBombTTCMutSet.Add(root.GetFireBombTTC(elementI.id));
       return;
     }
 
@@ -756,6 +780,12 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.FireBombTTCExists(elementI.id)) {
+      this.membersFireBombTTCMutSet.Remove(root.GetFireBombTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.MarkerTTCExists(elementI.id)) {
       this.membersMarkerTTCMutSet.Remove(root.GetMarkerTTC(elementI.id));
       return;
@@ -905,6 +935,7 @@ public class ITerrainTileComponentMutBunch {
     this.membersItemTTCMutSet.Clear();
     this.membersWarperTTCMutSet.Clear();
     this.membersTimeAnchorTTCMutSet.Clear();
+    this.membersFireBombTTCMutSet.Clear();
     this.membersMarkerTTCMutSet.Clear();
     this.membersLevelLinkTTCMutSet.Clear();
     this.membersMudTTCMutSet.Clear();
@@ -937,6 +968,7 @@ public class ITerrainTileComponentMutBunch {
         this.membersItemTTCMutSet.Count +
         this.membersWarperTTCMutSet.Count +
         this.membersTimeAnchorTTCMutSet.Count +
+        this.membersFireBombTTCMutSet.Count +
         this.membersMarkerTTCMutSet.Count +
         this.membersLevelLinkTTCMutSet.Count +
         this.membersMudTTCMutSet.Count +
@@ -976,6 +1008,7 @@ public class ITerrainTileComponentMutBunch {
     var tempMembersItemTTCMutSet = this.membersItemTTCMutSet;
     var tempMembersWarperTTCMutSet = this.membersWarperTTCMutSet;
     var tempMembersTimeAnchorTTCMutSet = this.membersTimeAnchorTTCMutSet;
+    var tempMembersFireBombTTCMutSet = this.membersFireBombTTCMutSet;
     var tempMembersMarkerTTCMutSet = this.membersMarkerTTCMutSet;
     var tempMembersLevelLinkTTCMutSet = this.membersLevelLinkTTCMutSet;
     var tempMembersMudTTCMutSet = this.membersMudTTCMutSet;
@@ -1006,6 +1039,7 @@ public class ITerrainTileComponentMutBunch {
     tempMembersItemTTCMutSet.Destruct();
     tempMembersWarperTTCMutSet.Destruct();
     tempMembersTimeAnchorTTCMutSet.Destruct();
+    tempMembersFireBombTTCMutSet.Destruct();
     tempMembersMarkerTTCMutSet.Destruct();
     tempMembersLevelLinkTTCMutSet.Destruct();
     tempMembersMudTTCMutSet.Destruct();
@@ -1043,6 +1077,9 @@ public class ITerrainTileComponentMutBunch {
     }
     foreach (var element in this.membersTimeAnchorTTCMutSet) {
       yield return new TimeAnchorTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersFireBombTTCMutSet) {
+      yield return new FireBombTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersMarkerTTCMutSet) {
       yield return new MarkerTTCAsITerrainTileComponent(element);
@@ -1199,6 +1236,27 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return TimeAnchorTTC.Null;
+      }
+    }
+    public List<FireBombTTC> GetAllFireBombTTC() {
+      var result = new List<FireBombTTC>();
+      foreach (var thing in this.membersFireBombTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<FireBombTTC> ClearAllFireBombTTC() {
+      var result = new List<FireBombTTC>();
+      this.membersFireBombTTCMutSet.Clear();
+      return result;
+    }
+    public FireBombTTC GetOnlyFireBombTTCOrNull() {
+      var result = GetAllFireBombTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return FireBombTTC.Null;
       }
     }
     public List<MarkerTTC> GetAllMarkerTTC() {
@@ -1705,7 +1763,29 @@ public class ITerrainTileComponentMutBunch {
         return EmberDeepLevelLinkerTTC.Null;
       }
     }
-    public List<IPresenceTriggerTTC> GetAllIPresenceTriggerTTC() {
+    public List<IActingTTC> GetAllIActingTTC() {
+      var result = new List<IActingTTC>();
+      foreach (var obj in this.membersFireBombTTCMutSet) {
+        result.Add(
+            new FireBombTTCAsIActingTTC(obj));
+      }
+      return result;
+    }
+    public List<IActingTTC> ClearAllIActingTTC() {
+      var result = new List<IActingTTC>();
+      this.membersFireBombTTCMutSet.Clear();
+      return result;
+    }
+    public IActingTTC GetOnlyIActingTTCOrNull() {
+      var result = GetAllIActingTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIActingTTC.Null;
+      }
+    }
+                 public List<IPresenceTriggerTTC> GetAllIPresenceTriggerTTC() {
       var result = new List<IPresenceTriggerTTC>();
       foreach (var obj in this.membersSimplePresenceTriggerTTCMutSet) {
         result.Add(

@@ -174,7 +174,7 @@ namespace IncendianFalls {
 
           game.level.units.Add(newPlayer);
           game.player = newPlayer;
-          superstate.levelSuperstate.Add(game.player);
+          superstate.levelSuperstate.AddUnit(game.player);
 
           Asserts.Assert(
               superstate.anchorTurnIndices[superstate.anchorTurnIndices.Count - 1] ==

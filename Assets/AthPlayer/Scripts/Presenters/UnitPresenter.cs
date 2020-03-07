@@ -132,7 +132,9 @@ namespace AthPlayer {
       }
     }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) {
-      unitView.SetDescription(GetUnitViewDescription(unit));
+      if (unit.Exists()) {
+        unitView.SetDescription(GetUnitViewDescription(unit));
+      }
     }
     public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) {
       if (!effect.newValue) {
@@ -269,6 +271,20 @@ namespace AthPlayer {
                   true,
                   new UnityEngine.Color(0, 0, 1f, 1f)));
         }
+      } else if (effect.element is UnitFireBombedEventAsIUnitEvent ufbe) {
+        Debug.LogError("Got fire bombed event, showing rune!");
+        unitView.ShowRune(
+            new ExtrudedSymbolDescription(
+                RenderPriority.RUNE,
+                new SymbolDescription(
+                    "r",
+                          50,
+                    new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
+                    0,
+                    OutlineMode.WithOutline,
+                    new UnityEngine.Color(0.8f, .4f, 0, 1.5f)),
+                true,
+                new UnityEngine.Color(0, 0, 1f, 1f)));
       } else {
 
       }

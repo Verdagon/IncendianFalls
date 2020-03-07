@@ -12,6 +12,8 @@ namespace Atharia.Model {
 
     SortedDictionary<Location, Unit> liveUnitByLocation;
 
+    SortedSet<Location> locationsWithActingTTCs;
+
     //public LevelSuperstate() {
     //}
 
@@ -19,28 +21,55 @@ namespace Atharia.Model {
       this.level = level;
       walkableLocations = new SortedSet<Location>();
       liveUnitByLocation = new SortedDictionary<Location, Unit>();
+      locationsWithActingTTCs = new SortedSet<Location>();
       Reconstruct(level);
     }
 
-    public void Add(Unit unit) {
+    public void AddedActingTTC(Location location) {
+      if (!locationsWithActingTTCs.Contains(location)) {
+        locationsWithActingTTCs.Add(location);
+      }
+    }
+
+    public void RemovedActingTTC(Location location) {
+      if (level.terrain.tiles[location].components.GetAllIActingTTC().Count == 1) {
+        locationsWithActingTTCs.Remove(location);
+      }
+    }
+
+    public List<KeyValuePair<Location, IActingTTC>> GetAllActingTTCs() {
+      var actingTTCs = new List<KeyValuePair<Location, IActingTTC>>();
+      foreach (var location in locationsWithActingTTCs) {
+        foreach (var actingTTC in level.terrain.tiles[location].components.GetAllIActingTTC()) {
+          actingTTCs.Add(new KeyValuePair<Location, IActingTTC>(location, actingTTC));
+        }
+      }
+      return actingTTCs;
+    }
+
+    public void AddUnit(Unit unit) {
       liveUnitByLocation.Add(unit.location, unit);
     }
 
-    public bool Remove(Unit unit) {
+    public bool RemoveUnit(Unit unit) {
       return liveUnitByLocation.Remove(unit.location);
     }
 
-    public bool ContainsKey(Location location) {
+    public bool ContainsUnit(Location location) {
       return liveUnitByLocation.ContainsKey(location);
     }
 
     public void Reconstruct(Level level) {
       walkableLocations.Clear();
+      locationsWithActingTTCs.Clear();
       foreach (var entry in level.terrain.tiles) {
         var location = entry.Key;
         var terrainTile = entry.Value;
         if (terrainTile.IsWalkable()) {
           walkableLocations.Add(location);
+        }
+        if (terrainTile.components.GetAllIActingTTC().Count > 0) {
+          locationsWithActingTTCs.Add(location);
         }
       }
 

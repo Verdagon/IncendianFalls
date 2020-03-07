@@ -9,6 +9,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersItemTTCMutSet;
   public readonly int membersWarperTTCMutSet;
   public readonly int membersTimeAnchorTTCMutSet;
+  public readonly int membersFireBombTTCMutSet;
   public readonly int membersMarkerTTCMutSet;
   public readonly int membersLevelLinkTTCMutSet;
   public readonly int membersMudTTCMutSet;
@@ -38,6 +39,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
       int membersItemTTCMutSet,
       int membersWarperTTCMutSet,
       int membersTimeAnchorTTCMutSet,
+      int membersFireBombTTCMutSet,
       int membersMarkerTTCMutSet,
       int membersLevelLinkTTCMutSet,
       int membersMudTTCMutSet,
@@ -66,6 +68,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
     this.membersItemTTCMutSet = membersItemTTCMutSet;
     this.membersWarperTTCMutSet = membersWarperTTCMutSet;
     this.membersTimeAnchorTTCMutSet = membersTimeAnchorTTCMutSet;
+    this.membersFireBombTTCMutSet = membersFireBombTTCMutSet;
     this.membersMarkerTTCMutSet = membersMarkerTTCMutSet;
     this.membersLevelLinkTTCMutSet = membersLevelLinkTTCMutSet;
     this.membersMudTTCMutSet = membersMudTTCMutSet;

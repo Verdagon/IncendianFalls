@@ -332,6 +332,15 @@ public class Root {
   readonly List<SimplePresenceTriggerTTCDeleteEffect> effectsSimplePresenceTriggerTTCDeleteEffect =
       new List<SimplePresenceTriggerTTCDeleteEffect>();
 
+  readonly SortedDictionary<int, List<IFireBombTTCEffectObserver>> observersForFireBombTTC =
+      new SortedDictionary<int, List<IFireBombTTCEffectObserver>>();
+  readonly List<FireBombTTCCreateEffect> effectsFireBombTTCCreateEffect =
+      new List<FireBombTTCCreateEffect>();
+  readonly List<FireBombTTCDeleteEffect> effectsFireBombTTCDeleteEffect =
+      new List<FireBombTTCDeleteEffect>();
+  readonly List<FireBombTTCSetTurnsUntilExplosionEffect> effectsFireBombTTCSetTurnsUntilExplosionEffect =
+      new List<FireBombTTCSetTurnsUntilExplosionEffect>();
+
   readonly SortedDictionary<int, List<IMarkerTTCEffectObserver>> observersForMarkerTTC =
       new SortedDictionary<int, List<IMarkerTTCEffectObserver>>();
   readonly List<MarkerTTCCreateEffect> effectsMarkerTTCCreateEffect =
@@ -962,6 +971,17 @@ public class Root {
       new List<TimeAnchorTTCMutSetAddEffect>();
   readonly List<TimeAnchorTTCMutSetRemoveEffect> effectsTimeAnchorTTCMutSetRemoveEffect =
       new List<TimeAnchorTTCMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IFireBombTTCMutSetEffectObserver>> observersForFireBombTTCMutSet =
+      new SortedDictionary<int, List<IFireBombTTCMutSetEffectObserver>>();
+  readonly List<FireBombTTCMutSetCreateEffect> effectsFireBombTTCMutSetCreateEffect =
+      new List<FireBombTTCMutSetCreateEffect>();
+  readonly List<FireBombTTCMutSetDeleteEffect> effectsFireBombTTCMutSetDeleteEffect =
+      new List<FireBombTTCMutSetDeleteEffect>();
+  readonly List<FireBombTTCMutSetAddEffect> effectsFireBombTTCMutSetAddEffect =
+      new List<FireBombTTCMutSetAddEffect>();
+  readonly List<FireBombTTCMutSetRemoveEffect> effectsFireBombTTCMutSetRemoveEffect =
+      new List<FireBombTTCMutSetRemoveEffect>();
 
   readonly SortedDictionary<int, List<IMarkerTTCMutSetEffectObserver>> observersForMarkerTTCMutSet =
       new SortedDictionary<int, List<IMarkerTTCMutSetEffectObserver>>();
@@ -1681,6 +1701,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsSimplePresenceTriggerTTC) {
       result += GetSimplePresenceTriggerTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsFireBombTTC) {
+      result += GetFireBombTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsMarkerTTC) {
       result += GetMarkerTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1905,6 +1928,9 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsTimeAnchorTTCMutSet) {
       result += GetTimeAnchorTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsFireBombTTCMutSet) {
+      result += GetFireBombTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsMarkerTTCMutSet) {
       result += GetMarkerTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -2164,6 +2190,9 @@ public class Root {
     foreach (var obj in this.AllSimplePresenceTriggerTTC()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllFireBombTTC()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllMarkerTTC()) {
       obj.CheckForNullViolations(violations);
     }
@@ -2387,6 +2416,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTimeAnchorTTCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllFireBombTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllMarkerTTCMutSet()) {
@@ -2722,6 +2754,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllFireBombTTC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllMarkerTTC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -3093,6 +3130,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllTimeAnchorTTCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllFireBombTTCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -3756,6 +3798,17 @@ public class Root {
       copyOfObserversForSimplePresenceTriggerTTC.Add(
           objectId,
           new List<ISimplePresenceTriggerTTCEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForFireBombTTC =
+        new SortedDictionary<int, List<IFireBombTTCEffectObserver>>();
+    foreach (var entry in observersForFireBombTTC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForFireBombTTC.Add(
+          objectId,
+          new List<IFireBombTTCEffectObserver>(
               observers));
     }
 
@@ -4584,6 +4637,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForFireBombTTCMutSet =
+        new SortedDictionary<int, List<IFireBombTTCMutSetEffectObserver>>();
+    foreach (var entry in observersForFireBombTTCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForFireBombTTCMutSet.Add(
+          objectId,
+          new List<IFireBombTTCMutSetEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForMarkerTTCMutSet =
         new SortedDictionary<int, List<IMarkerTTCMutSetEffectObserver>>();
     foreach (var entry in observersForMarkerTTCMutSet) {
@@ -5204,6 +5268,9 @@ public class Root {
     BroadcastSimplePresenceTriggerTTCEffects(
         copyOfObserversForSimplePresenceTriggerTTC);
            
+    BroadcastFireBombTTCEffects(
+        copyOfObserversForFireBombTTC);
+           
     BroadcastMarkerTTCEffects(
         copyOfObserversForMarkerTTC);
            
@@ -5428,6 +5495,9 @@ public class Root {
            
     BroadcastTimeAnchorTTCMutSetEffects(
         copyOfObserversForTimeAnchorTTCMutSet);
+           
+    BroadcastFireBombTTCMutSetEffects(
+        copyOfObserversForFireBombTTCMutSet);
            
     BroadcastMarkerTTCMutSetEffects(
         copyOfObserversForMarkerTTCMutSet);
@@ -5960,6 +6030,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(sourceObjId)) {
         EffectInternalCreateSimplePresenceTriggerTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsFireBombTTC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsFireBombTTC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateFireBombTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -6710,6 +6790,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsTimeAnchorTTCMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateTimeAnchorTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsFireBombTTCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsFireBombTTCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateFireBombTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -7773,6 +7863,34 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsTimeAnchorTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsFireBombTTCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsFireBombTTCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsFireBombTTCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectFireBombTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectFireBombTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsFireBombTTCMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -9918,6 +10036,31 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsFireBombTTC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsFireBombTTC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsFireBombTTC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          if (sourceObjIncarnation.turnsUntilExplosion != currentObjIncarnation.turnsUntilExplosion) {
+            EffectFireBombTTCSetTurnsUntilExplosion(objId, sourceObjIncarnation.turnsUntilExplosion);
+          }
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsFireBombTTC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMarkerTTC) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -11333,6 +11476,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<FireBombTTCIncarnation>>(rootIncarnation.incarnationsFireBombTTC)) {
+      if (!sourceIncarnation.incarnationsFireBombTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectFireBombTTCDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<MarkerTTCIncarnation>>(rootIncarnation.incarnationsMarkerTTC)) {
       if (!sourceIncarnation.incarnationsMarkerTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -11855,6 +12005,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsTimeAnchorTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectTimeAnchorTTCMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<FireBombTTCMutSetIncarnation>>(rootIncarnation.incarnationsFireBombTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsFireBombTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectFireBombTTCMutSetDelete(id);
       }
     }
 
@@ -17393,6 +17550,7 @@ public class Root {
       ItemTTCMutSet membersItemTTCMutSet,
       WarperTTCMutSet membersWarperTTCMutSet,
       TimeAnchorTTCMutSet membersTimeAnchorTTCMutSet,
+      FireBombTTCMutSet membersFireBombTTCMutSet,
       MarkerTTCMutSet membersMarkerTTCMutSet,
       LevelLinkTTCMutSet membersLevelLinkTTCMutSet,
       MudTTCMutSet membersMudTTCMutSet,
@@ -17422,6 +17580,7 @@ public class Root {
     CheckHasItemTTCMutSet(membersItemTTCMutSet);
     CheckHasWarperTTCMutSet(membersWarperTTCMutSet);
     CheckHasTimeAnchorTTCMutSet(membersTimeAnchorTTCMutSet);
+    CheckHasFireBombTTCMutSet(membersFireBombTTCMutSet);
     CheckHasMarkerTTCMutSet(membersMarkerTTCMutSet);
     CheckHasLevelLinkTTCMutSet(membersLevelLinkTTCMutSet);
     CheckHasMudTTCMutSet(membersMudTTCMutSet);
@@ -17454,6 +17613,7 @@ public class Root {
             membersItemTTCMutSet.id,
             membersWarperTTCMutSet.id,
             membersTimeAnchorTTCMutSet.id,
+            membersFireBombTTCMutSet.id,
             membersMarkerTTCMutSet.id,
             membersLevelLinkTTCMutSet.id,
             membersMudTTCMutSet.id,
@@ -17514,30 +17674,31 @@ public class Root {
     result += id * version * 2 * incarnation.membersItemTTCMutSet.GetDeterministicHashCode();
     result += id * version * 3 * incarnation.membersWarperTTCMutSet.GetDeterministicHashCode();
     result += id * version * 4 * incarnation.membersTimeAnchorTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.membersMarkerTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersLevelLinkTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.membersMudTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.membersDirtTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.membersObsidianTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.membersDownStairsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.membersUpStairsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.membersWallTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.membersBloodTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.membersRocksTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 15 * incarnation.membersTreeTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 16 * incarnation.membersWaterTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 17 * incarnation.membersFloorTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 18 * incarnation.membersCaveWallTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 19 * incarnation.membersCaveTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 20 * incarnation.membersFallsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 21 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 22 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 23 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 24 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 25 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 26 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 27 * incarnation.membersIncendianFallsLevelLinkerTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 28 * incarnation.membersEmberDeepLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersFireBombTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersMarkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersLevelLinkTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersMudTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersDirtTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.membersObsidianTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.membersDownStairsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.membersUpStairsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 13 * incarnation.membersWallTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.membersBloodTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.membersRocksTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 16 * incarnation.membersTreeTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 17 * incarnation.membersWaterTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 18 * incarnation.membersFloorTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 19 * incarnation.membersCaveWallTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 20 * incarnation.membersCaveTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 21 * incarnation.membersFallsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 22 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 23 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 24 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 25 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 26 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 27 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 28 * incarnation.membersIncendianFallsLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 29 * incarnation.membersEmberDeepLevelLinkerTTCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -17875,6 +18036,171 @@ public class Root {
       }
     }
     effectsSimplePresenceTriggerTTCCreateEffect.Clear();
+  }
+  public FireBombTTCIncarnation GetFireBombTTCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsFireBombTTC[id].incarnation;
+  }
+  public bool FireBombTTCExists(int id) {
+    return rootIncarnation.incarnationsFireBombTTC.ContainsKey(id);
+  }
+  public FireBombTTC GetFireBombTTC(int id) {
+    return new FireBombTTC(this, id);
+  }
+  public List<FireBombTTC> AllFireBombTTC() {
+    List<FireBombTTC> result = new List<FireBombTTC>(rootIncarnation.incarnationsFireBombTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsFireBombTTC.Keys) {
+      result.Add(new FireBombTTC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<FireBombTTC> EnumAllFireBombTTC() {
+    foreach (var id in rootIncarnation.incarnationsFireBombTTC.Keys) {
+      yield return GetFireBombTTC(id);
+    }
+  }
+  public void CheckHasFireBombTTC(FireBombTTC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasFireBombTTC(thing.id);
+  }
+  public void CheckHasFireBombTTC(int id) {
+    if (!rootIncarnation.incarnationsFireBombTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid FireBombTTC: " + id);
+    }
+  }
+  public void AddFireBombTTCObserver(int id, IFireBombTTCEffectObserver observer) {
+    List<IFireBombTTCEffectObserver> obsies;
+    if (!observersForFireBombTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IFireBombTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForFireBombTTC[id] = obsies;
+  }
+
+  public void RemoveFireBombTTCObserver(int id, IFireBombTTCEffectObserver observer) {
+    if (observersForFireBombTTC.ContainsKey(id)) {
+      var list = observersForFireBombTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForFireBombTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public FireBombTTC EffectFireBombTTCCreate(
+      int turnsUntilExplosion) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new FireBombTTCIncarnation(
+            turnsUntilExplosion
+            );
+    EffectInternalCreateFireBombTTC(id, rootIncarnation.version, incarnation);
+    return new FireBombTTC(this, id);
+  }
+  public void EffectInternalCreateFireBombTTC(
+      int id,
+      int incarnationVersion,
+      FireBombTTCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new FireBombTTCCreateEffect(id);
+    rootIncarnation.incarnationsFireBombTTC.Add(
+        id,
+        new VersionAndIncarnation<FireBombTTCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsFireBombTTCCreateEffect.Add(effect);
+  }
+
+  public void EffectFireBombTTCDelete(int id) {
+    CheckUnlocked();
+    var effect = new FireBombTTCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsFireBombTTC[id];
+
+    rootIncarnation.incarnationsFireBombTTC.Remove(id);
+    effectsFireBombTTCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetFireBombTTCHash(int id, int version, FireBombTTCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.turnsUntilExplosion.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastFireBombTTCEffects(
+      SortedDictionary<int, List<IFireBombTTCEffectObserver>> observers) {
+    foreach (var effect in effectsFireBombTTCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombTTCEffect(effect);
+        }
+        observersForFireBombTTC.Remove(effect.id);
+      }
+    }
+    effectsFireBombTTCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsFireBombTTCSetTurnsUntilExplosionEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombTTCEffect(effect);
+        }
+      }
+    }
+    effectsFireBombTTCSetTurnsUntilExplosionEffect.Clear();
+
+    foreach (var effect in effectsFireBombTTCCreateEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombTTCEffect(effect);
+        }
+      }
+    }
+    effectsFireBombTTCCreateEffect.Clear();
+  }
+
+  public void EffectFireBombTTCSetTurnsUntilExplosion(int id, int newValue) {
+    CheckUnlocked();
+    CheckHasFireBombTTC(id);
+    var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsFireBombTTC[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.turnsUntilExplosion;
+      oldIncarnationAndVersion.incarnation.turnsUntilExplosion = newValue;
+
+    } else {
+      var newIncarnation =
+          new FireBombTTCIncarnation(
+              newValue);
+      rootIncarnation.incarnationsFireBombTTC[id] =
+          new VersionAndIncarnation<FireBombTTCIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsFireBombTTCSetTurnsUntilExplosionEffect.Add(effect);
   }
   public MarkerTTCIncarnation GetMarkerTTCIncarnation(int id) {
     if (id == 0) {
@@ -25749,6 +26075,28 @@ public class Root {
     GetIImpulse(id);
   }
 
+  public IActingTTC GetIActingTTC(int id) {
+    if (rootIncarnation.incarnationsFireBombTTC.ContainsKey(id)) {
+      return new FireBombTTCAsIActingTTC(new FireBombTTC(this, id));
+    }
+    throw new Exception("Unknown IActingTTC: " + id);
+  }
+  public IActingTTC GetIActingTTCOrNull(int id) {
+    if (rootIncarnation.incarnationsFireBombTTC.ContainsKey(id)) {
+      return new FireBombTTCAsIActingTTC(new FireBombTTC(this, id));
+    }
+    return NullIActingTTC.Null;
+  }
+  public bool IActingTTCExists(int id) {
+    return GetIActingTTCOrNull(id) != null;
+  }
+  public void CheckHasIActingTTC(IActingTTC thing) {
+    GetIActingTTC(thing.id);
+  }
+  public void CheckHasIActingTTC(int id) {
+    GetIActingTTC(id);
+  }
+
   public IPresenceTriggerTTC GetIPresenceTriggerTTC(int id) {
     if (rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(id)) {
       return new SimplePresenceTriggerTTCAsIPresenceTriggerTTC(new SimplePresenceTriggerTTC(this, id));
@@ -25882,6 +26230,9 @@ public class Root {
     if (rootIncarnation.incarnationsTimeAnchorTTC.ContainsKey(id)) {
       return new TimeAnchorTTCAsITerrainTileComponent(new TimeAnchorTTC(this, id));
     }
+    if (rootIncarnation.incarnationsFireBombTTC.ContainsKey(id)) {
+      return new FireBombTTCAsITerrainTileComponent(new FireBombTTC(this, id));
+    }
     if (rootIncarnation.incarnationsMarkerTTC.ContainsKey(id)) {
       return new MarkerTTCAsITerrainTileComponent(new MarkerTTC(this, id));
     }
@@ -25968,6 +26319,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsTimeAnchorTTC.ContainsKey(id)) {
       return new TimeAnchorTTCAsITerrainTileComponent(new TimeAnchorTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsFireBombTTC.ContainsKey(id)) {
+      return new FireBombTTCAsITerrainTileComponent(new FireBombTTC(this, id));
     }
     if (rootIncarnation.incarnationsMarkerTTC.ContainsKey(id)) {
       return new MarkerTTCAsITerrainTileComponent(new MarkerTTC(this, id));
@@ -26452,6 +26806,9 @@ public class Root {
     if (rootIncarnation.incarnationsTimeAnchorTTC.ContainsKey(id)) {
       return new TimeAnchorTTCAsIDestructible(new TimeAnchorTTC(this, id));
     }
+    if (rootIncarnation.incarnationsFireBombTTC.ContainsKey(id)) {
+      return new FireBombTTCAsIDestructible(new FireBombTTC(this, id));
+    }
     if (rootIncarnation.incarnationsMarkerTTC.ContainsKey(id)) {
       return new MarkerTTCAsIDestructible(new MarkerTTC(this, id));
     }
@@ -26643,6 +27000,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsTimeAnchorTTC.ContainsKey(id)) {
       return new TimeAnchorTTCAsIDestructible(new TimeAnchorTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsFireBombTTC.ContainsKey(id)) {
+      return new FireBombTTCAsIDestructible(new FireBombTTC(this, id));
     }
     if (rootIncarnation.incarnationsMarkerTTC.ContainsKey(id)) {
       return new MarkerTTCAsIDestructible(new MarkerTTC(this, id));
@@ -30918,6 +31278,197 @@ public class Root {
       }
     }
     effectsTimeAnchorTTCMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetFireBombTTCMutSetHash(int id, int version, FireBombTTCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public FireBombTTCMutSetIncarnation GetFireBombTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsFireBombTTCMutSet[id].incarnation;
+    }
+    public FireBombTTCMutSet GetFireBombTTCMutSet(int id) {
+      return new FireBombTTCMutSet(this, id);
+    }
+    public List<FireBombTTCMutSet> AllFireBombTTCMutSet() {
+      List<FireBombTTCMutSet> result = new List<FireBombTTCMutSet>(rootIncarnation.incarnationsFireBombTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsFireBombTTCMutSet.Keys) {
+        result.Add(new FireBombTTCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool FireBombTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsFireBombTTCMutSet.ContainsKey(id);
+    }
+    public void CheckHasFireBombTTCMutSet(FireBombTTCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasFireBombTTCMutSet(thing.id);
+    }
+    public void CheckHasFireBombTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsFireBombTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid FireBombTTCMutSet}: " + id);
+      }
+    }
+    public FireBombTTCMutSet EffectFireBombTTCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new FireBombTTCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateFireBombTTCMutSet(id, rootIncarnation.version, incarnation);
+      return new FireBombTTCMutSet(this, id);
+    }
+    public void EffectInternalCreateFireBombTTCMutSet(int id, int incarnationVersion, FireBombTTCMutSetIncarnation incarnation) {
+      var effect = new FireBombTTCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsFireBombTTCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<FireBombTTCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsFireBombTTCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectFireBombTTCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new FireBombTTCMutSetDeleteEffect(id);
+      effectsFireBombTTCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsFireBombTTCMutSet[id];
+      rootIncarnation.incarnationsFireBombTTCMutSet.Remove(id);
+    }
+
+       
+    public void EffectFireBombTTCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasFireBombTTCMutSet(setId);
+      CheckHasFireBombTTC(elementId);
+
+      var effect = new FireBombTTCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsFireBombTTCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new FireBombTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsFireBombTTCMutSet[setId] =
+            new VersionAndIncarnation<FireBombTTCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsFireBombTTCMutSetAddEffect.Add(effect);
+    }
+    public void EffectFireBombTTCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasFireBombTTCMutSet(setId);
+      CheckHasFireBombTTC(elementId);
+
+      var effect = new FireBombTTCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsFireBombTTCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new FireBombTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsFireBombTTCMutSet[setId] =
+            new VersionAndIncarnation<FireBombTTCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsFireBombTTCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddFireBombTTCMutSetObserver(int id, IFireBombTTCMutSetEffectObserver observer) {
+      List<IFireBombTTCMutSetEffectObserver> obsies;
+      if (!observersForFireBombTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IFireBombTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForFireBombTTCMutSet[id] = obsies;
+    }
+
+    public void RemoveFireBombTTCMutSetObserver(int id, IFireBombTTCMutSetEffectObserver observer) {
+      if (observersForFireBombTTCMutSet.ContainsKey(id)) {
+        var list = observersForFireBombTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForFireBombTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastFireBombTTCMutSetEffects(
+      SortedDictionary<int, List<IFireBombTTCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsFireBombTTCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombTTCMutSetEffect(effect);
+        }
+        observersForFireBombTTCMutSet.Remove(effect.id);
+      }
+    }
+    effectsFireBombTTCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsFireBombTTCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsFireBombTTCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsFireBombTTCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsFireBombTTCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsFireBombTTCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsFireBombTTCMutSetCreateEffect.Clear();
 
   }
 

@@ -81,6 +81,12 @@ namespace AthPlayer {
       delegat.AfterDidSomething();
     }
 
+    public void FireBombClicked() {
+      narrator.ShowMessage("You must select a unit to slow them. Canceling slow!");
+      delegat.SwitchToNormalMode();
+      delegat.AfterDidSomething();
+    }
+
     public void MireClicked() {
       narrator.ShowMessage("You must select a unit to slow them. Canceling slow!");
       delegat.SwitchToNormalMode();

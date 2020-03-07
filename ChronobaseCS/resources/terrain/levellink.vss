@@ -12,7 +12,7 @@ mut struct LevelLinkTTC {
   }
 
   fn Interact(
-    this: LevelLinkTTC overrides IDestructible,
+    this: LevelLinkTTC overrides IInteractableTTC,
     game: Game,
     superstate: $Superstate,
     interactingUnit: Unit,

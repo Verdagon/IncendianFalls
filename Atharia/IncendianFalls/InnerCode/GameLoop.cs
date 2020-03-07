@@ -219,8 +219,16 @@ namespace IncendianFalls {
         presenceTrigger.Trigger(game, superstate, unit, unit.location);
       }
 
+      var wasPlayer = game.player.Exists() && unit.NullableIs(game.player);
       executionState.actingUnit = new Unit(game.root, 0);
       executionState.actingUnitDidAction = false;
+
+      if (wasPlayer) {
+        foreach (var locationAndActingTTC in superstate.levelSuperstate.GetAllActingTTCs()) {
+          Asserts.Assert(locationAndActingTTC.Value.Exists(), "exists curiosity");
+          locationAndActingTTC.Value.Act(game, superstate, locationAndActingTTC.Key);
+        }
+      }
 
       if (pauseCondition.betweenUnits) {
         return; // To be continued... via ContinueBeforeEnemyAction.

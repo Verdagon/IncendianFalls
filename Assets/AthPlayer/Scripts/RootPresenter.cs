@@ -96,6 +96,9 @@ namespace AthPlayer {
       if (Input.GetKeyUp(KeyCode.F)) {
         FireClicked();
       }
+      if (Input.GetKeyUp(KeyCode.B)) {
+        FireBombClicked();
+      }
       if (Input.GetKeyUp(KeyCode.S)) {
         MireClicked();
       }
@@ -104,6 +107,9 @@ namespace AthPlayer {
       }
       if (Input.GetKeyUp(KeyCode.Equals)) {
         playerController.ActivateCheat("poweroverwhelming");
+      }
+      if (Input.GetKeyUp(KeyCode.Asterisk)) {
+        playerController.ActivateCheat("gimmeblastrod");
       }
 
       if (Input.GetKey(KeyCode.RightArrow)) {
@@ -169,6 +175,10 @@ namespace AthPlayer {
 
     public void FireClicked() {
       playerController.FireClicked();
+    }
+
+    public void FireBombClicked() {
+      playerController.FireBombClicked();
     }
 
     public void MireClicked() {

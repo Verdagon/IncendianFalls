@@ -33,3 +33,13 @@ mut interface IPresenceTriggerTTC {
     containingTileLocation: Location
   ): Void;
 }
+
+mut interface IActingTTC {
+  IActingTTC isa ITerrainTileComponent;
+
+  fn Act(
+    game: Game,
+    superstate: $Superstate,
+    containingTileLocation: Location
+  ): Void;
+}

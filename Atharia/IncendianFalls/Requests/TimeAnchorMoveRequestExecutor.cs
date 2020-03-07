@@ -55,11 +55,11 @@ namespace IncendianFalls {
 
       GameLoop.NoteUnitActed(game, game.player);
 
-      GameLoop.ContinueAfterUnitAction(
-          game,
-          superstate,
-          new PauseCondition(false),
-          new SortedSet<int>());
+      //GameLoop.ContinueAfterUnitAction(
+      //    game,
+      //    superstate,
+      //    new PauseCondition(false),
+      //    new SortedSet<int>());
 
       return "";
     }

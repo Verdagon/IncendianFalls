@@ -95,7 +95,7 @@ namespace AthPlayer {
                     0,
                     OutlineMode.NoOutline,
                     new UnityEngine.Color(0, 0, 0)),
-                "Blast Rod"));
+                "Fire Rod"));
         } else if (detail is ArmorAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(

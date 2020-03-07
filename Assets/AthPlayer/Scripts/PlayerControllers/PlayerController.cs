@@ -114,6 +114,10 @@ namespace Domino {
       mode.FireClicked();
     }
 
+    public void FireBombClicked() {
+      mode.FireBombClicked();
+    }
+
     public void MireClicked() {
       mode.MireClicked();
     }
@@ -228,10 +232,14 @@ namespace Domino {
     }
 
     public void SwitchToFireMode() {
-      if (game.player.components.GetAllBlastRod().Count == 0) {
-        narrator.ShowMessage("Can't fire, find a Blast Rod first!");
-      }
       mode = new FireMode(ss, superstate, game, this, narrator);
+    }
+
+    public void SwitchToFireBombMode() {
+      if (game.player.components.GetAllBlastRod().Count == 0) {
+        narrator.ShowMessage("Can't fire bomb, find a Fire Rod first!");
+      }
+      mode = new FireBombMode(ss, superstate, game, this, narrator);
     }
 
     public void SwitchToMireMode() {

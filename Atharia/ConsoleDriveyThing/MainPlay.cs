@@ -186,7 +186,7 @@ namespace ConsoleDriveyThing {
                     Console.WriteLine(result);
                   }
                   break;
-                case ConsoleKey.M:
+                case ConsoleKey.Backspace:
                   terrainAndFeaturesMode = !terrainAndFeaturesMode;
                   break;
                 case ConsoleKey.T:

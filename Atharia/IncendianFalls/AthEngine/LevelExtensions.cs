@@ -41,7 +41,7 @@ namespace Atharia.Model {
       unit.location = location;
       unit.nextActionTime = nextActionTime;
       obj.units.Add(unit);
-      levelSuperstate.Add(unit);
+      levelSuperstate.AddUnit(unit);
     }
 
     public static void ExitUnit(
@@ -49,7 +49,7 @@ namespace Atharia.Model {
         Game game,
         LevelSuperstate levelSuperstate,
         Unit unit) {
-      levelSuperstate.Remove(unit);
+      levelSuperstate.RemoveUnit(unit);
       game.level.units.Remove(unit);
     }
   }

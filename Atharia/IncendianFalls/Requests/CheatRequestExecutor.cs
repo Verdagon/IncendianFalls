@@ -74,6 +74,10 @@ namespace IncendianFalls {
           game.player.components.Add(
             game.root.EffectInvincibilityUCCreate().AsIUnitComponent());
           break;
+        case "gimmeblastrod":
+          game.player.components.Add(
+            game.root.EffectBlastRodCreate().AsIUnitComponent());
+          break;
         default:
           return "Unknown cheat: " + request.cheatName;
       }

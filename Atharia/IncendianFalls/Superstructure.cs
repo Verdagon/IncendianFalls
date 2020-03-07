@@ -306,6 +306,30 @@ namespace IncendianFalls {
       }
     }
 
+    public string RequestFireBomb(int gameId, Location location) {
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new FireBombRequest(gameId, location);
+        broadcastBeforeRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
+        var superstate = superstateByGameId[gameId];
+        string result = context.root.Transact(delegate () {
+          return FireBombRequestExecutor.Execute(context, superstate, request);
+        });
+        context.Flare(result.DStr());
+        broadcastAfterRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
+        return result;
+      } catch (Exception e) {
+        root.logger.Error(e.Message);
+        throw e;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
+      }
+    }
+
     public string RequestMire(int gameId, int targetUnitId) {
       //var rollbackPoint = root.Snapshot();
       try {
@@ -491,7 +515,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + "\n" + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
