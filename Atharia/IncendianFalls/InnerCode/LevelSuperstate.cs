@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Atharia.Model;
 
 namespace Atharia.Model {
+  public delegate bool LocationPredicate(Location location);
+
   // Serves as a caching mechanism for the level.
   public class LevelSuperstate {
     public readonly Level level;
@@ -106,7 +108,6 @@ namespace Atharia.Model {
       }
     }
 
-    public delegate bool LocationPredicate(Location location);
     public SortedSet<Location> GetWalkableLocations(
         Terrain terrain,
         LocationPredicate filter,

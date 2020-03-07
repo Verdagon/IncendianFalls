@@ -50,7 +50,7 @@ namespace Atharia.Model {
         .AsITerrainTileComponent());
 
       var mordranthLocation = levelSuperstate.FindMarkerLocation("guard");
-      var mordranth = Lornix.Make(game.root);
+      var mordranth = Emberfolk.Make(game.root);
       mordranth.components.Add(
         game.root.EffectGuardAICapabilityUCCreate(mordranthLocation, 1).AsIUnitComponent());
       level.EnterUnit(levelSuperstate, mordranthLocation, level.time, mordranth);
@@ -71,6 +71,8 @@ namespace Atharia.Model {
       }
 
       levelSuperstate.Reconstruct(level);
+
+      EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, depth, entryLoc, .008f, 0f);
 
       game.levels.Add(level);
 

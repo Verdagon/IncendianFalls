@@ -133,6 +133,8 @@ namespace EmberDeep {
 
       LevelLinkTTCExtensions.Travel(game, superstate, game.player, startLevel, startLevelEntryLocation, false);
 
+      game.level.controller.SimpleTrigger(game, superstate, "firstLevelStart");
+
       return game;
     }
   }

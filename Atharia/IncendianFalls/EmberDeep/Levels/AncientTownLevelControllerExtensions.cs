@@ -7,7 +7,7 @@ namespace Atharia.Model {
     public static void LoadLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,
-        out Location entryLocation,
+        out Location entryLocationRet,
         Game game,
         Superstate superstate,
         int depth) {
@@ -33,11 +33,14 @@ namespace Atharia.Model {
       level.terrain.tiles[levelSuperstate.FindMarkerLocation("exit")].components.Add(
         game.root.EffectEmberDeepLevelLinkerTTCCreate(depth + 1).AsITerrainTileComponent());
 
+      var entryLocation = levelSuperstate.FindMarkerLocation("start");
+
+      EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .008f, .005f);
+
       level.controller = game.root.EffectAncientTownLevelControllerCreate(level).AsILevelController();
 
       game.levels.Add(level);
-
-      entryLocation = levelSuperstate.FindMarkerLocation("start");
+      entryLocationRet = entryLocation;
     }
 
     public static string GetName(this AncientTownLevelController obj) {

@@ -32,7 +32,7 @@ namespace Atharia.Model {
     public static void LoadLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,
-        out Location entryLocation,
+        out Location entryLocationRet,
         Game game,
         Superstate superstate,
         int depth) {
@@ -51,9 +51,9 @@ namespace Atharia.Model {
 
       var geomancy =
         Vivifier.Vivify(level, Vivifier.ParseGeomancy(LEVEL));
-      var (floors, walls) = GetFloorsAndNearbyWalls(level.terrain);
+      var (ambushAreaFloors, ambushAreaWalls) = GetFloorsAndNearbyWalls(level.terrain);
 
-      foreach (var wall in walls) {
+      foreach (var wall in ambushAreaWalls) {
         level.terrain.tiles.Add(
           wall,
           level.root.EffectTerrainTileCreate(0, ITerrainTileComponentMutBunch.New(level.root)));
@@ -64,19 +64,19 @@ namespace Atharia.Model {
       TerrainUtils.randify(game.rand, level.terrain, 2);
 
       for (int i = 0; i < 2; i++) {
-        foreach (var floor in floors) {
+        foreach (var floor in ambushAreaFloors) {
           level.terrain.tiles[floor].elevation = 1;
         }
-        foreach (var wall in walls) {
+        foreach (var wall in ambushAreaWalls) {
           level.terrain.tiles[wall].elevation = 0;
         }
 
         CellularAutomataTerrainGenerator.CellularAutomataModeIteration(level.terrain, considerCornersAdjacent);
 
-        foreach (var floor in floors) {
+        foreach (var floor in ambushAreaFloors) {
           level.terrain.tiles[floor].elevation = 1;
         }
-        foreach (var wall in walls) {
+        foreach (var wall in ambushAreaWalls) {
           level.terrain.tiles[wall].elevation = 0;
         }
       }
@@ -103,13 +103,38 @@ namespace Atharia.Model {
         }
       }
 
+      levelSuperstate = new LevelSuperstate(level);
+
+      var entryLocation = levelSuperstate.FindMarkerLocation("start");
+      entryLocationRet = entryLocation;
+
+      EmberDeepUnitsAndItems.PlaceRocks(game.rand, level, levelSuperstate);
+
+      if (depth < 2) {
+        EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .008f, 0f);
+      } else {
+        EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .008f, .005f);
+      }
+
+      EmberDeepUnitsAndItems.FillWithUnits(
+        game,
+        level,
+        levelSuperstate,
+        (loc) => !ambushAreaFloors.Contains(loc),
+        /*numIrkling=*/ 3,
+        /*numDraxling=*/ 3,
+        /*numRavagianTrask=*/ 3,
+        /*numBaug=*/ 1,
+        /*numSpirient=*/ 1,
+        /*numIrklingKing=*/ 0,
+        /*numEmberfolk=*/ 1,
+        /*numChronolisk=*/ 0,
+        /*numMantisBombardier=*/ 0,
+        /*numLightningTrask=*/ 0);
+
       game.levels.Add(level);
 
       level.controller = game.root.EffectNestLevelControllerCreate(level).AsILevelController();
-
-      levelSuperstate = new LevelSuperstate(level);
-
-      entryLocation = levelSuperstate.FindMarkerLocation("start");
     }
 
     public static string GetName(this NestLevelController obj) {
@@ -231,13 +256,23 @@ namespace Atharia.Model {
       if (triggerName == "cameraDoneFlying") {
         game.player.nextActionTime = game.level.time;
         var summonLocations = superstate.levelSuperstate.FindMarkersLocations("summon", 1);
-        foreach (var summonLocation in summonLocations) {
-          game.level.EnterUnit(
-            superstate.levelSuperstate,
-            summonLocation,
-            game.level.time + 300,
-            Irkling.Make(game.root));
-        }
+
+        EmberDeepUnitsAndItems.FillWithUnits(
+          game,
+          game.level,
+          superstate.levelSuperstate,
+          (loc) => summonLocations.Contains(loc),
+          /*numIrkling=*/ summonLocations.Count / 2,
+          /*numDraxling=*/ summonLocations.Count / 8,
+          /*numRavagianTrask=*/ summonLocations.Count / 8,
+          /*numBaug=*/ summonLocations.Count / 8,
+          /*numSpirient=*/ summonLocations.Count / 16,
+          /*numIrklingKing=*/ 0,
+          /*numEmberfolk=*/ summonLocations.Count / 16,
+          /*numChronolisk=*/ 0,
+          /*numMantisBombardier=*/ 0,
+          /*numLightningTrask=*/ 0);
+
         game.events.Add(
           new ShowOverlayEvent(
             60, // sizePercent
