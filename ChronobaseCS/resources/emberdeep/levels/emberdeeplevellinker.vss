@@ -3,7 +3,7 @@ mut struct EmberDeepLevelLinkerTTC {
   EmberDeepLevelLinkerTTC isa ITerrainTileComponent;
   EmberDeepLevelLinkerTTC isa IInteractableTTC;
 
-  thisLevelDepth: Int;
+  nextLevelDepth: Int;
 
   fn Interact(
     this: EmberDeepLevelLinkerTTC overrides IInteractableTTC,

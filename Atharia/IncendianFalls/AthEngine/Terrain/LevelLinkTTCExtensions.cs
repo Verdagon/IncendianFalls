@@ -15,7 +15,7 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit interactingUnit,
         Location containingTileLocation) {
-      Travel(game, superstate, interactingUnit, levelLink.destinationLevel, levelLink.destinationLevelLocation);
+      Travel(game, superstate, interactingUnit, levelLink.destinationLevel, levelLink.destinationLevelLocation, levelLink.destroyThisLevel);
 
       return "";
     }
@@ -25,8 +25,18 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit unit,
         Level destinationLevel,
-        Location destinationLevelLocation) {
-      game.level.ExitUnit(game, superstate.levelSuperstate, unit);
+        Location destinationLevelLocation,
+        bool destroyOldLevel) {
+      if (game.level.Exists()) {
+        var oldLevel = game.level;
+
+        game.level.ExitUnit(game, superstate.levelSuperstate, unit);
+
+        if (destroyOldLevel) {
+          game.levels.Remove(oldLevel);
+          oldLevel.Destruct();
+        }
+      }
 
       game.level = destinationLevel;
       superstate.levelSuperstate = new LevelSuperstate(game.level);
@@ -35,13 +45,25 @@ namespace Atharia.Model {
       // visited here. We'll want to bump them all up to the near future.
       Asserts.Assert(game.time >= game.level.time);
 
+      game.root.logger.Error("Player next action time: " + game.player.nextActionTime);
+      game.root.logger.Error("Level time: " + game.level.time);
+      game.root.logger.Error("game time: " + game.time);
+
+      int levelLastTime = game.level.time;
+      int timeNow = game.time;
+      int timeSinceLevelLastTime = timeNow - levelLastTime;
+      game.level.time = game.time;
       // Add that amount to every unit, so it's as if we just left this level.
       foreach (var nativeUnit in game.level.units) {
         nativeUnit.nextActionTime =
-            nativeUnit.nextActionTime + (game.time - game.level.time);
+            nativeUnit.nextActionTime + timeSinceLevelLastTime;
+        game.root.logger.Error("Unit " + nativeUnit.classId + " next action time: " + nativeUnit.nextActionTime);
       }
 
+      // Make player start immediately.
       game.level.EnterUnit(superstate.levelSuperstate, destinationLevelLocation, game.level.time, unit);
+
+      game.level.controller.SimpleTrigger(game, superstate, "levelStart");
     }
   }
 }

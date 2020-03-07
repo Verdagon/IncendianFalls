@@ -47,7 +47,7 @@ namespace Atharia.Model {
             game.root.EffectTerrainTileByLocationMutMapCreate()),
           game.root.EffectUnitMutSetCreate(),
           NullILevelController.Null,
-          0);
+          game.time);
 
       levelSuperstate = new LevelSuperstate(level);
 

@@ -68,6 +68,7 @@ namespace IncendianFalls {
         var newRoom = rooms[i];
         foreach (var location in newRoom) {
           AddTile(terrain, location, 1);
+          //terrain.tiles[location].components.Add(terrain.root.EffectRocksTTCCreate().AsITerrainTileComponent());
         }
       }
     }

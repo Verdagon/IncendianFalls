@@ -7,10 +7,8 @@ namespace Atharia.Model {
 public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersSimplePresenceTriggerTTCMutSet;
   public readonly int membersItemTTCMutSet;
-  public readonly int membersEmberDeepLevelLinkerTTCMutSet;
-  public readonly int membersIncendianFallsLevelLinkerTTCMutSet;
-  public readonly int membersMarkerTTCMutSet;
   public readonly int membersTimeAnchorTTCMutSet;
+  public readonly int membersMarkerTTCMutSet;
   public readonly int membersLevelLinkTTCMutSet;
   public readonly int membersMudTTCMutSet;
   public readonly int membersDirtTTCMutSet;
@@ -31,13 +29,13 @@ public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersCliffLandingTTCMutSet;
   public readonly int membersStoneTTCMutSet;
   public readonly int membersGrassTTCMutSet;
+  public readonly int membersIncendianFallsLevelLinkerTTCMutSet;
+  public readonly int membersEmberDeepLevelLinkerTTCMutSet;
   public ITerrainTileComponentMutBunchIncarnation(
       int membersSimplePresenceTriggerTTCMutSet,
       int membersItemTTCMutSet,
-      int membersEmberDeepLevelLinkerTTCMutSet,
-      int membersIncendianFallsLevelLinkerTTCMutSet,
-      int membersMarkerTTCMutSet,
       int membersTimeAnchorTTCMutSet,
+      int membersMarkerTTCMutSet,
       int membersLevelLinkTTCMutSet,
       int membersMudTTCMutSet,
       int membersDirtTTCMutSet,
@@ -57,13 +55,13 @@ public class ITerrainTileComponentMutBunchIncarnation {
       int membersRavaNestTTCMutSet,
       int membersCliffLandingTTCMutSet,
       int membersStoneTTCMutSet,
-      int membersGrassTTCMutSet) {
+      int membersGrassTTCMutSet,
+      int membersIncendianFallsLevelLinkerTTCMutSet,
+      int membersEmberDeepLevelLinkerTTCMutSet) {
     this.membersSimplePresenceTriggerTTCMutSet = membersSimplePresenceTriggerTTCMutSet;
     this.membersItemTTCMutSet = membersItemTTCMutSet;
-    this.membersEmberDeepLevelLinkerTTCMutSet = membersEmberDeepLevelLinkerTTCMutSet;
-    this.membersIncendianFallsLevelLinkerTTCMutSet = membersIncendianFallsLevelLinkerTTCMutSet;
-    this.membersMarkerTTCMutSet = membersMarkerTTCMutSet;
     this.membersTimeAnchorTTCMutSet = membersTimeAnchorTTCMutSet;
+    this.membersMarkerTTCMutSet = membersMarkerTTCMutSet;
     this.membersLevelLinkTTCMutSet = membersLevelLinkTTCMutSet;
     this.membersMudTTCMutSet = membersMudTTCMutSet;
     this.membersDirtTTCMutSet = membersDirtTTCMutSet;
@@ -84,6 +82,8 @@ public class ITerrainTileComponentMutBunchIncarnation {
     this.membersCliffLandingTTCMutSet = membersCliffLandingTTCMutSet;
     this.membersStoneTTCMutSet = membersStoneTTCMutSet;
     this.membersGrassTTCMutSet = membersGrassTTCMutSet;
+    this.membersIncendianFallsLevelLinkerTTCMutSet = membersIncendianFallsLevelLinkerTTCMutSet;
+    this.membersEmberDeepLevelLinkerTTCMutSet = membersEmberDeepLevelLinkerTTCMutSet;
   }
 }
 

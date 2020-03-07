@@ -3,6 +3,7 @@ mut struct LevelLinkTTC {
   LevelLinkTTC isa ITerrainTileComponent;
   LevelLinkTTC isa IInteractableTTC;
 
+  destroyThisLevel: Bool;
   destinationLevel: &Level;
   destinationLevelLocation: Location;
 

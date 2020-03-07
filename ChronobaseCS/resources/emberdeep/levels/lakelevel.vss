@@ -1,0 +1,34 @@
+
+mut struct LakeLevelController {
+  LakeLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: LakeLevelController overrides ILevelController): Str {
+    LakeLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: LakeLevelController overrides ILevelController): Bool {
+    LakeLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: LakeLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    LakeLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: LakeLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    LakeLevelControllerExtensions.SimpleUnitTrigger
+  }
+}

@@ -1,0 +1,34 @@
+
+mut struct VolcaetusLevelController {
+  VolcaetusLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: VolcaetusLevelController overrides ILevelController): Str {
+    VolcaetusLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: VolcaetusLevelController overrides ILevelController): Bool {
+    VolcaetusLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: VolcaetusLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    VolcaetusLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: VolcaetusLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    VolcaetusLevelControllerExtensions.SimpleUnitTrigger
+  }
+}

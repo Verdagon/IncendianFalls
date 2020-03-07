@@ -1,0 +1,34 @@
+
+mut struct AncientTownLevelController {
+  AncientTownLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: AncientTownLevelController overrides ILevelController): Str {
+    AncientTownLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: AncientTownLevelController overrides ILevelController): Bool {
+    AncientTownLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: AncientTownLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    AncientTownLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: AncientTownLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    AncientTownLevelControllerExtensions.SimpleUnitTrigger
+  }
+}

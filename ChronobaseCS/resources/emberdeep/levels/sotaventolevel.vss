@@ -1,0 +1,34 @@
+
+mut struct SotaventoLevelController {
+  SotaventoLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: SotaventoLevelController overrides ILevelController): Str {
+    SotaventoLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: SotaventoLevelController overrides ILevelController): Bool {
+    SotaventoLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: SotaventoLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    SotaventoLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: SotaventoLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    SotaventoLevelControllerExtensions.SimpleUnitTrigger
+  }
+}

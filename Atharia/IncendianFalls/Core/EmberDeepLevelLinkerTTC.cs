@@ -50,8 +50,8 @@ public class EmberDeepLevelLinkerTTC {
     }
     return this.root == that.root && id == that.id;
   }
-         public int thisLevelDepth {
-    get { return incarnation.thisLevelDepth; }
+         public int nextLevelDepth {
+    get { return incarnation.nextLevelDepth; }
   }
 }
 }

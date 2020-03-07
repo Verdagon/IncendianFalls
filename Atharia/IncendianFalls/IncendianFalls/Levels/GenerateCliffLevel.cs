@@ -226,7 +226,7 @@ namespace IncendianFalls {
               terrain.pattern, randomRoom.floors, new Vec2(0, 1));
       var caveTile = terrain.tiles[highestSpaceInLowHalfRoom];
       caveTile.components.Add(
-          terrain.root.EffectLevelLinkTTCCreate(caveLevel, caveLevelEntry)
+          terrain.root.EffectLevelLinkTTCCreate(false, caveLevel, caveLevelEntry)
           .AsITerrainTileComponent());
 
       caveTile.components.Add(terrain.root.EffectCaveTTCCreate().AsITerrainTileComponent());

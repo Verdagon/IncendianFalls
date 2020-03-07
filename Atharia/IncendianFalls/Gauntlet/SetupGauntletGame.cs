@@ -63,11 +63,11 @@ namespace Gauntlet {
 
       var downStaircaseTile = preGauntletLevel.terrain.tiles[downStaircaseLocation];
       downStaircaseTile.components.Add(
-        game.root.EffectLevelLinkTTCCreate(gauntletLevel, upStaircaseLocation).AsITerrainTileComponent());
+        game.root.EffectLevelLinkTTCCreate(false, gauntletLevel, upStaircaseLocation).AsITerrainTileComponent());
 
       var upStaircaseTile = gauntletLevel.terrain.tiles[upStaircaseLocation];
       upStaircaseTile.components.Add(
-        game.root.EffectLevelLinkTTCCreate(preGauntletLevel, downStaircaseLocation).AsITerrainTileComponent());
+        game.root.EffectLevelLinkTTCCreate(false, preGauntletLevel, downStaircaseLocation).AsITerrainTileComponent());
 
       game.level = preGauntletLevel;
       superstate.levelSuperstate = preGauntletLevelSuperstate;

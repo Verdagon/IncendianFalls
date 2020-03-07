@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class EmberDeepLevelLinkerTTCIncarnation {
-  public readonly int thisLevelDepth;
+  public readonly int nextLevelDepth;
   public EmberDeepLevelLinkerTTCIncarnation(
-      int thisLevelDepth) {
-    this.thisLevelDepth = thisLevelDepth;
+      int nextLevelDepth) {
+    this.nextLevelDepth = nextLevelDepth;
   }
 }
 

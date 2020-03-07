@@ -1,0 +1,34 @@
+
+mut struct BridgesLevelController {
+  BridgesLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: BridgesLevelController overrides ILevelController): Str {
+    BridgesLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: BridgesLevelController overrides ILevelController): Bool {
+    BridgesLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: BridgesLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    BridgesLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: BridgesLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    BridgesLevelControllerExtensions.SimpleUnitTrigger
+  }
+}

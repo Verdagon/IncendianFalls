@@ -40,13 +40,13 @@ namespace Atharia.Model {
           thisLevelDepth + 1);
 
       // Link to the next level.
-      var levelLink = game.root.EffectLevelLinkTTCCreate(nextLevel, nextLevelEntryLocation);
+      var levelLink = game.root.EffectLevelLinkTTCCreate(false, nextLevel, nextLevelEntryLocation);
       game.level.terrain.tiles[containingTileLocation].components.Add(levelLink.AsITerrainTileComponent());
 
       // Make the next level link back to here.
       var nextLevelEntryTile = nextLevel.terrain.tiles[nextLevelEntryLocation];
       nextLevelEntryTile.components.Add(
-        game.root.EffectLevelLinkTTCCreate(game.level, containingTileLocation).AsITerrainTileComponent());
+        game.root.EffectLevelLinkTTCCreate(false, game.level, containingTileLocation).AsITerrainTileComponent());
 
       // Travel the level link, to switch levels.
       return levelLink.Interact(game, superstate, interactingUnit, containingTileLocation);

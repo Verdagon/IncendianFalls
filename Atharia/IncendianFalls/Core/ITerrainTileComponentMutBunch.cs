@@ -43,20 +43,12 @@ public class ITerrainTileComponentMutBunch {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersItemTTCMutSet");
     }
 
-    if (!root.EmberDeepLevelLinkerTTCMutSetExists(membersEmberDeepLevelLinkerTTCMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersEmberDeepLevelLinkerTTCMutSet");
-    }
-
-    if (!root.IncendianFallsLevelLinkerTTCMutSetExists(membersIncendianFallsLevelLinkerTTCMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersIncendianFallsLevelLinkerTTCMutSet");
+    if (!root.TimeAnchorTTCMutSetExists(membersTimeAnchorTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersTimeAnchorTTCMutSet");
     }
 
     if (!root.MarkerTTCMutSetExists(membersMarkerTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersMarkerTTCMutSet");
-    }
-
-    if (!root.TimeAnchorTTCMutSetExists(membersTimeAnchorTTCMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersTimeAnchorTTCMutSet");
     }
 
     if (!root.LevelLinkTTCMutSetExists(membersLevelLinkTTCMutSet.id)) {
@@ -138,6 +130,14 @@ public class ITerrainTileComponentMutBunch {
     if (!root.GrassTTCMutSetExists(membersGrassTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersGrassTTCMutSet");
     }
+
+    if (!root.IncendianFallsLevelLinkerTTCMutSetExists(membersIncendianFallsLevelLinkerTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersIncendianFallsLevelLinkerTTCMutSet");
+    }
+
+    if (!root.EmberDeepLevelLinkerTTCMutSetExists(membersEmberDeepLevelLinkerTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersEmberDeepLevelLinkerTTCMutSet");
+    }
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
     if (foundIds.Contains(id)) {
@@ -150,17 +150,11 @@ public class ITerrainTileComponentMutBunch {
     if (root.ItemTTCMutSetExists(membersItemTTCMutSet.id)) {
       membersItemTTCMutSet.FindReachableObjects(foundIds);
     }
-    if (root.EmberDeepLevelLinkerTTCMutSetExists(membersEmberDeepLevelLinkerTTCMutSet.id)) {
-      membersEmberDeepLevelLinkerTTCMutSet.FindReachableObjects(foundIds);
-    }
-    if (root.IncendianFallsLevelLinkerTTCMutSetExists(membersIncendianFallsLevelLinkerTTCMutSet.id)) {
-      membersIncendianFallsLevelLinkerTTCMutSet.FindReachableObjects(foundIds);
+    if (root.TimeAnchorTTCMutSetExists(membersTimeAnchorTTCMutSet.id)) {
+      membersTimeAnchorTTCMutSet.FindReachableObjects(foundIds);
     }
     if (root.MarkerTTCMutSetExists(membersMarkerTTCMutSet.id)) {
       membersMarkerTTCMutSet.FindReachableObjects(foundIds);
-    }
-    if (root.TimeAnchorTTCMutSetExists(membersTimeAnchorTTCMutSet.id)) {
-      membersTimeAnchorTTCMutSet.FindReachableObjects(foundIds);
     }
     if (root.LevelLinkTTCMutSetExists(membersLevelLinkTTCMutSet.id)) {
       membersLevelLinkTTCMutSet.FindReachableObjects(foundIds);
@@ -222,6 +216,12 @@ public class ITerrainTileComponentMutBunch {
     if (root.GrassTTCMutSetExists(membersGrassTTCMutSet.id)) {
       membersGrassTTCMutSet.FindReachableObjects(foundIds);
     }
+    if (root.IncendianFallsLevelLinkerTTCMutSetExists(membersIncendianFallsLevelLinkerTTCMutSet.id)) {
+      membersIncendianFallsLevelLinkerTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.EmberDeepLevelLinkerTTCMutSetExists(membersEmberDeepLevelLinkerTTCMutSet.id)) {
+      membersEmberDeepLevelLinkerTTCMutSet.FindReachableObjects(foundIds);
+    }
   }
   public bool Is(ITerrainTileComponentMutBunch that) {
     if (!this.Exists()) {
@@ -250,22 +250,13 @@ public class ITerrainTileComponentMutBunch {
       return new ItemTTCMutSet(root, incarnation.membersItemTTCMutSet);
     }
                        }
-  public EmberDeepLevelLinkerTTCMutSet membersEmberDeepLevelLinkerTTCMutSet {
+  public TimeAnchorTTCMutSet membersTimeAnchorTTCMutSet {
 
     get {
       if (root == null) {
-        throw new Exception("Tried to get member membersEmberDeepLevelLinkerTTCMutSet of null!");
+        throw new Exception("Tried to get member membersTimeAnchorTTCMutSet of null!");
       }
-      return new EmberDeepLevelLinkerTTCMutSet(root, incarnation.membersEmberDeepLevelLinkerTTCMutSet);
-    }
-                       }
-  public IncendianFallsLevelLinkerTTCMutSet membersIncendianFallsLevelLinkerTTCMutSet {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member membersIncendianFallsLevelLinkerTTCMutSet of null!");
-      }
-      return new IncendianFallsLevelLinkerTTCMutSet(root, incarnation.membersIncendianFallsLevelLinkerTTCMutSet);
+      return new TimeAnchorTTCMutSet(root, incarnation.membersTimeAnchorTTCMutSet);
     }
                        }
   public MarkerTTCMutSet membersMarkerTTCMutSet {
@@ -275,15 +266,6 @@ public class ITerrainTileComponentMutBunch {
         throw new Exception("Tried to get member membersMarkerTTCMutSet of null!");
       }
       return new MarkerTTCMutSet(root, incarnation.membersMarkerTTCMutSet);
-    }
-                       }
-  public TimeAnchorTTCMutSet membersTimeAnchorTTCMutSet {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member membersTimeAnchorTTCMutSet of null!");
-      }
-      return new TimeAnchorTTCMutSet(root, incarnation.membersTimeAnchorTTCMutSet);
     }
                        }
   public LevelLinkTTCMutSet membersLevelLinkTTCMutSet {
@@ -466,6 +448,24 @@ public class ITerrainTileComponentMutBunch {
       return new GrassTTCMutSet(root, incarnation.membersGrassTTCMutSet);
     }
                        }
+  public IncendianFallsLevelLinkerTTCMutSet membersIncendianFallsLevelLinkerTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersIncendianFallsLevelLinkerTTCMutSet of null!");
+      }
+      return new IncendianFallsLevelLinkerTTCMutSet(root, incarnation.membersIncendianFallsLevelLinkerTTCMutSet);
+    }
+                       }
+  public EmberDeepLevelLinkerTTCMutSet membersEmberDeepLevelLinkerTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersEmberDeepLevelLinkerTTCMutSet of null!");
+      }
+      return new EmberDeepLevelLinkerTTCMutSet(root, incarnation.membersEmberDeepLevelLinkerTTCMutSet);
+    }
+                       }
 
   public static ITerrainTileComponentMutBunch New(Root root) {
     return root.EffectITerrainTileComponentMutBunchCreate(
@@ -473,13 +473,9 @@ public class ITerrainTileComponentMutBunch {
 ,
       root.EffectItemTTCMutSetCreate()
 ,
-      root.EffectEmberDeepLevelLinkerTTCMutSetCreate()
-,
-      root.EffectIncendianFallsLevelLinkerTTCMutSetCreate()
+      root.EffectTimeAnchorTTCMutSetCreate()
 ,
       root.EffectMarkerTTCMutSetCreate()
-,
-      root.EffectTimeAnchorTTCMutSetCreate()
 ,
       root.EffectLevelLinkTTCMutSetCreate()
 ,
@@ -520,6 +516,10 @@ public class ITerrainTileComponentMutBunch {
       root.EffectStoneTTCMutSetCreate()
 ,
       root.EffectGrassTTCMutSetCreate()
+,
+      root.EffectIncendianFallsLevelLinkerTTCMutSetCreate()
+,
+      root.EffectEmberDeepLevelLinkerTTCMutSetCreate()
         );
   }
   public void Add(ITerrainTileComponent elementI) {
@@ -537,26 +537,14 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.EmberDeepLevelLinkerTTCExists(elementI.id)) {
-      this.membersEmberDeepLevelLinkerTTCMutSet.Add(root.GetEmberDeepLevelLinkerTTC(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.IncendianFallsLevelLinkerTTCExists(elementI.id)) {
-      this.membersIncendianFallsLevelLinkerTTCMutSet.Add(root.GetIncendianFallsLevelLinkerTTC(elementI.id));
+    if (root.TimeAnchorTTCExists(elementI.id)) {
+      this.membersTimeAnchorTTCMutSet.Add(root.GetTimeAnchorTTC(elementI.id));
       return;
     }
 
     // Can optimize, check the type of element directly somehow
     if (root.MarkerTTCExists(elementI.id)) {
       this.membersMarkerTTCMutSet.Add(root.GetMarkerTTC(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.TimeAnchorTTCExists(elementI.id)) {
-      this.membersTimeAnchorTTCMutSet.Add(root.GetTimeAnchorTTC(elementI.id));
       return;
     }
 
@@ -679,6 +667,18 @@ public class ITerrainTileComponentMutBunch {
       this.membersGrassTTCMutSet.Add(root.GetGrassTTC(elementI.id));
       return;
     }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.IncendianFallsLevelLinkerTTCExists(elementI.id)) {
+      this.membersIncendianFallsLevelLinkerTTCMutSet.Add(root.GetIncendianFallsLevelLinkerTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.EmberDeepLevelLinkerTTCExists(elementI.id)) {
+      this.membersEmberDeepLevelLinkerTTCMutSet.Add(root.GetEmberDeepLevelLinkerTTC(elementI.id));
+      return;
+    }
     throw new Exception("Unknown type " + elementI);
   }
   public void Remove(ITerrainTileComponent elementI) {
@@ -696,26 +696,14 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.EmberDeepLevelLinkerTTCExists(elementI.id)) {
-      this.membersEmberDeepLevelLinkerTTCMutSet.Remove(root.GetEmberDeepLevelLinkerTTC(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.IncendianFallsLevelLinkerTTCExists(elementI.id)) {
-      this.membersIncendianFallsLevelLinkerTTCMutSet.Remove(root.GetIncendianFallsLevelLinkerTTC(elementI.id));
+    if (root.TimeAnchorTTCExists(elementI.id)) {
+      this.membersTimeAnchorTTCMutSet.Remove(root.GetTimeAnchorTTC(elementI.id));
       return;
     }
 
     // Can optimize, check the type of element directly somehow
     if (root.MarkerTTCExists(elementI.id)) {
       this.membersMarkerTTCMutSet.Remove(root.GetMarkerTTC(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
-    if (root.TimeAnchorTTCExists(elementI.id)) {
-      this.membersTimeAnchorTTCMutSet.Remove(root.GetTimeAnchorTTC(elementI.id));
       return;
     }
 
@@ -838,15 +826,25 @@ public class ITerrainTileComponentMutBunch {
       this.membersGrassTTCMutSet.Remove(root.GetGrassTTC(elementI.id));
       return;
     }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.IncendianFallsLevelLinkerTTCExists(elementI.id)) {
+      this.membersIncendianFallsLevelLinkerTTCMutSet.Remove(root.GetIncendianFallsLevelLinkerTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.EmberDeepLevelLinkerTTCExists(elementI.id)) {
+      this.membersEmberDeepLevelLinkerTTCMutSet.Remove(root.GetEmberDeepLevelLinkerTTC(elementI.id));
+      return;
+    }
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
     this.membersSimplePresenceTriggerTTCMutSet.Clear();
     this.membersItemTTCMutSet.Clear();
-    this.membersEmberDeepLevelLinkerTTCMutSet.Clear();
-    this.membersIncendianFallsLevelLinkerTTCMutSet.Clear();
-    this.membersMarkerTTCMutSet.Clear();
     this.membersTimeAnchorTTCMutSet.Clear();
+    this.membersMarkerTTCMutSet.Clear();
     this.membersLevelLinkTTCMutSet.Clear();
     this.membersMudTTCMutSet.Clear();
     this.membersDirtTTCMutSet.Clear();
@@ -867,16 +865,16 @@ public class ITerrainTileComponentMutBunch {
     this.membersCliffLandingTTCMutSet.Clear();
     this.membersStoneTTCMutSet.Clear();
     this.membersGrassTTCMutSet.Clear();
+    this.membersIncendianFallsLevelLinkerTTCMutSet.Clear();
+    this.membersEmberDeepLevelLinkerTTCMutSet.Clear();
   }
   public int Count {
     get {
       return
         this.membersSimplePresenceTriggerTTCMutSet.Count +
         this.membersItemTTCMutSet.Count +
-        this.membersEmberDeepLevelLinkerTTCMutSet.Count +
-        this.membersIncendianFallsLevelLinkerTTCMutSet.Count +
-        this.membersMarkerTTCMutSet.Count +
         this.membersTimeAnchorTTCMutSet.Count +
+        this.membersMarkerTTCMutSet.Count +
         this.membersLevelLinkTTCMutSet.Count +
         this.membersMudTTCMutSet.Count +
         this.membersDirtTTCMutSet.Count +
@@ -896,7 +894,9 @@ public class ITerrainTileComponentMutBunch {
         this.membersRavaNestTTCMutSet.Count +
         this.membersCliffLandingTTCMutSet.Count +
         this.membersStoneTTCMutSet.Count +
-        this.membersGrassTTCMutSet.Count
+        this.membersGrassTTCMutSet.Count +
+        this.membersIncendianFallsLevelLinkerTTCMutSet.Count +
+        this.membersEmberDeepLevelLinkerTTCMutSet.Count
         ;
     }
   }
@@ -910,10 +910,8 @@ public class ITerrainTileComponentMutBunch {
   public void Destruct() {
     var tempMembersSimplePresenceTriggerTTCMutSet = this.membersSimplePresenceTriggerTTCMutSet;
     var tempMembersItemTTCMutSet = this.membersItemTTCMutSet;
-    var tempMembersEmberDeepLevelLinkerTTCMutSet = this.membersEmberDeepLevelLinkerTTCMutSet;
-    var tempMembersIncendianFallsLevelLinkerTTCMutSet = this.membersIncendianFallsLevelLinkerTTCMutSet;
-    var tempMembersMarkerTTCMutSet = this.membersMarkerTTCMutSet;
     var tempMembersTimeAnchorTTCMutSet = this.membersTimeAnchorTTCMutSet;
+    var tempMembersMarkerTTCMutSet = this.membersMarkerTTCMutSet;
     var tempMembersLevelLinkTTCMutSet = this.membersLevelLinkTTCMutSet;
     var tempMembersMudTTCMutSet = this.membersMudTTCMutSet;
     var tempMembersDirtTTCMutSet = this.membersDirtTTCMutSet;
@@ -934,14 +932,14 @@ public class ITerrainTileComponentMutBunch {
     var tempMembersCliffLandingTTCMutSet = this.membersCliffLandingTTCMutSet;
     var tempMembersStoneTTCMutSet = this.membersStoneTTCMutSet;
     var tempMembersGrassTTCMutSet = this.membersGrassTTCMutSet;
+    var tempMembersIncendianFallsLevelLinkerTTCMutSet = this.membersIncendianFallsLevelLinkerTTCMutSet;
+    var tempMembersEmberDeepLevelLinkerTTCMutSet = this.membersEmberDeepLevelLinkerTTCMutSet;
 
     this.Delete();
     tempMembersSimplePresenceTriggerTTCMutSet.Destruct();
     tempMembersItemTTCMutSet.Destruct();
-    tempMembersEmberDeepLevelLinkerTTCMutSet.Destruct();
-    tempMembersIncendianFallsLevelLinkerTTCMutSet.Destruct();
-    tempMembersMarkerTTCMutSet.Destruct();
     tempMembersTimeAnchorTTCMutSet.Destruct();
+    tempMembersMarkerTTCMutSet.Destruct();
     tempMembersLevelLinkTTCMutSet.Destruct();
     tempMembersMudTTCMutSet.Destruct();
     tempMembersDirtTTCMutSet.Destruct();
@@ -962,6 +960,8 @@ public class ITerrainTileComponentMutBunch {
     tempMembersCliffLandingTTCMutSet.Destruct();
     tempMembersStoneTTCMutSet.Destruct();
     tempMembersGrassTTCMutSet.Destruct();
+    tempMembersIncendianFallsLevelLinkerTTCMutSet.Destruct();
+    tempMembersEmberDeepLevelLinkerTTCMutSet.Destruct();
   }
   public IEnumerator<ITerrainTileComponent> GetEnumerator() {
     foreach (var element in this.membersSimplePresenceTriggerTTCMutSet) {
@@ -970,17 +970,11 @@ public class ITerrainTileComponentMutBunch {
     foreach (var element in this.membersItemTTCMutSet) {
       yield return new ItemTTCAsITerrainTileComponent(element);
     }
-    foreach (var element in this.membersEmberDeepLevelLinkerTTCMutSet) {
-      yield return new EmberDeepLevelLinkerTTCAsITerrainTileComponent(element);
-    }
-    foreach (var element in this.membersIncendianFallsLevelLinkerTTCMutSet) {
-      yield return new IncendianFallsLevelLinkerTTCAsITerrainTileComponent(element);
+    foreach (var element in this.membersTimeAnchorTTCMutSet) {
+      yield return new TimeAnchorTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersMarkerTTCMutSet) {
       yield return new MarkerTTCAsITerrainTileComponent(element);
-    }
-    foreach (var element in this.membersTimeAnchorTTCMutSet) {
-      yield return new TimeAnchorTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersLevelLinkTTCMutSet) {
       yield return new LevelLinkTTCAsITerrainTileComponent(element);
@@ -1042,6 +1036,12 @@ public class ITerrainTileComponentMutBunch {
     foreach (var element in this.membersGrassTTCMutSet) {
       yield return new GrassTTCAsITerrainTileComponent(element);
     }
+    foreach (var element in this.membersIncendianFallsLevelLinkerTTCMutSet) {
+      yield return new IncendianFallsLevelLinkerTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersEmberDeepLevelLinkerTTCMutSet) {
+      yield return new EmberDeepLevelLinkerTTCAsITerrainTileComponent(element);
+    }
   }
     public List<SimplePresenceTriggerTTC> GetAllSimplePresenceTriggerTTC() {
       var result = new List<SimplePresenceTriggerTTC>();
@@ -1085,46 +1085,25 @@ public class ITerrainTileComponentMutBunch {
         return ItemTTC.Null;
       }
     }
-    public List<EmberDeepLevelLinkerTTC> GetAllEmberDeepLevelLinkerTTC() {
-      var result = new List<EmberDeepLevelLinkerTTC>();
-      foreach (var thing in this.membersEmberDeepLevelLinkerTTCMutSet) {
+    public List<TimeAnchorTTC> GetAllTimeAnchorTTC() {
+      var result = new List<TimeAnchorTTC>();
+      foreach (var thing in this.membersTimeAnchorTTCMutSet) {
         result.Add(thing);
       }
       return result;
     }
-    public List<EmberDeepLevelLinkerTTC> ClearAllEmberDeepLevelLinkerTTC() {
-      var result = new List<EmberDeepLevelLinkerTTC>();
-      this.membersEmberDeepLevelLinkerTTCMutSet.Clear();
+    public List<TimeAnchorTTC> ClearAllTimeAnchorTTC() {
+      var result = new List<TimeAnchorTTC>();
+      this.membersTimeAnchorTTCMutSet.Clear();
       return result;
     }
-    public EmberDeepLevelLinkerTTC GetOnlyEmberDeepLevelLinkerTTCOrNull() {
-      var result = GetAllEmberDeepLevelLinkerTTC();
+    public TimeAnchorTTC GetOnlyTimeAnchorTTCOrNull() {
+      var result = GetAllTimeAnchorTTC();
       Asserts.Assert(result.Count <= 1);
       if (result.Count > 0) {
         return result[0];
       } else {
-        return EmberDeepLevelLinkerTTC.Null;
-      }
-    }
-    public List<IncendianFallsLevelLinkerTTC> GetAllIncendianFallsLevelLinkerTTC() {
-      var result = new List<IncendianFallsLevelLinkerTTC>();
-      foreach (var thing in this.membersIncendianFallsLevelLinkerTTCMutSet) {
-        result.Add(thing);
-      }
-      return result;
-    }
-    public List<IncendianFallsLevelLinkerTTC> ClearAllIncendianFallsLevelLinkerTTC() {
-      var result = new List<IncendianFallsLevelLinkerTTC>();
-      this.membersIncendianFallsLevelLinkerTTCMutSet.Clear();
-      return result;
-    }
-    public IncendianFallsLevelLinkerTTC GetOnlyIncendianFallsLevelLinkerTTCOrNull() {
-      var result = GetAllIncendianFallsLevelLinkerTTC();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return IncendianFallsLevelLinkerTTC.Null;
+        return TimeAnchorTTC.Null;
       }
     }
     public List<MarkerTTC> GetAllMarkerTTC() {
@@ -1146,27 +1125,6 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return MarkerTTC.Null;
-      }
-    }
-    public List<TimeAnchorTTC> GetAllTimeAnchorTTC() {
-      var result = new List<TimeAnchorTTC>();
-      foreach (var thing in this.membersTimeAnchorTTCMutSet) {
-        result.Add(thing);
-      }
-      return result;
-    }
-    public List<TimeAnchorTTC> ClearAllTimeAnchorTTC() {
-      var result = new List<TimeAnchorTTC>();
-      this.membersTimeAnchorTTCMutSet.Clear();
-      return result;
-    }
-    public TimeAnchorTTC GetOnlyTimeAnchorTTCOrNull() {
-      var result = GetAllTimeAnchorTTC();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return TimeAnchorTTC.Null;
       }
     }
     public List<LevelLinkTTC> GetAllLevelLinkTTC() {
@@ -1589,6 +1547,48 @@ public class ITerrainTileComponentMutBunch {
         return GrassTTC.Null;
       }
     }
+    public List<IncendianFallsLevelLinkerTTC> GetAllIncendianFallsLevelLinkerTTC() {
+      var result = new List<IncendianFallsLevelLinkerTTC>();
+      foreach (var thing in this.membersIncendianFallsLevelLinkerTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<IncendianFallsLevelLinkerTTC> ClearAllIncendianFallsLevelLinkerTTC() {
+      var result = new List<IncendianFallsLevelLinkerTTC>();
+      this.membersIncendianFallsLevelLinkerTTCMutSet.Clear();
+      return result;
+    }
+    public IncendianFallsLevelLinkerTTC GetOnlyIncendianFallsLevelLinkerTTCOrNull() {
+      var result = GetAllIncendianFallsLevelLinkerTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return IncendianFallsLevelLinkerTTC.Null;
+      }
+    }
+    public List<EmberDeepLevelLinkerTTC> GetAllEmberDeepLevelLinkerTTC() {
+      var result = new List<EmberDeepLevelLinkerTTC>();
+      foreach (var thing in this.membersEmberDeepLevelLinkerTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<EmberDeepLevelLinkerTTC> ClearAllEmberDeepLevelLinkerTTC() {
+      var result = new List<EmberDeepLevelLinkerTTC>();
+      this.membersEmberDeepLevelLinkerTTCMutSet.Clear();
+      return result;
+    }
+    public EmberDeepLevelLinkerTTC GetOnlyEmberDeepLevelLinkerTTCOrNull() {
+      var result = GetAllEmberDeepLevelLinkerTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return EmberDeepLevelLinkerTTC.Null;
+      }
+    }
     public List<IPresenceTriggerTTC> GetAllIPresenceTriggerTTC() {
       var result = new List<IPresenceTriggerTTC>();
       foreach (var obj in this.membersSimplePresenceTriggerTTCMutSet) {
@@ -1613,14 +1613,6 @@ public class ITerrainTileComponentMutBunch {
     }
                  public List<IInteractableTTC> GetAllIInteractableTTC() {
       var result = new List<IInteractableTTC>();
-      foreach (var obj in this.membersEmberDeepLevelLinkerTTCMutSet) {
-        result.Add(
-            new EmberDeepLevelLinkerTTCAsIInteractableTTC(obj));
-      }
-      foreach (var obj in this.membersIncendianFallsLevelLinkerTTCMutSet) {
-        result.Add(
-            new IncendianFallsLevelLinkerTTCAsIInteractableTTC(obj));
-      }
       foreach (var obj in this.membersLevelLinkTTCMutSet) {
         result.Add(
             new LevelLinkTTCAsIInteractableTTC(obj));
@@ -1629,14 +1621,22 @@ public class ITerrainTileComponentMutBunch {
         result.Add(
             new ItemTTCAsIInteractableTTC(obj));
       }
+      foreach (var obj in this.membersIncendianFallsLevelLinkerTTCMutSet) {
+        result.Add(
+            new IncendianFallsLevelLinkerTTCAsIInteractableTTC(obj));
+      }
+      foreach (var obj in this.membersEmberDeepLevelLinkerTTCMutSet) {
+        result.Add(
+            new EmberDeepLevelLinkerTTCAsIInteractableTTC(obj));
+      }
       return result;
     }
     public List<IInteractableTTC> ClearAllIInteractableTTC() {
       var result = new List<IInteractableTTC>();
-      this.membersEmberDeepLevelLinkerTTCMutSet.Clear();
-      this.membersIncendianFallsLevelLinkerTTCMutSet.Clear();
       this.membersLevelLinkTTCMutSet.Clear();
       this.membersItemTTCMutSet.Clear();
+      this.membersIncendianFallsLevelLinkerTTCMutSet.Clear();
+      this.membersEmberDeepLevelLinkerTTCMutSet.Clear();
       return result;
     }
     public IInteractableTTC GetOnlyIInteractableTTCOrNull() {

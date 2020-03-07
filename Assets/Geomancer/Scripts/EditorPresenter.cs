@@ -188,8 +188,8 @@ namespace Geomancer {
           message += " elevation " + level.terrain.tiles[location].elevation;
           foreach (var member in level.terrain.tiles[location].members) {
             var symbol =
-              new SymbolDescription(
-                "e", 50, new Color(.5f, .5f, .5f), 0, OutlineMode.WithOutline, new Color(0, 0, 0));
+            new SymbolDescription("a",
+                            50, new Color(1f, 1f, 1f, 0), 180, OutlineMode.WithOutline, new Color(1, 1, 1));
             symbolsAndDescriptions.Add(new KeyValuePair<SymbolDescription, string>(symbol, member));
           }
         }

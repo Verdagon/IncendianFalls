@@ -168,8 +168,8 @@ namespace Geomancer {
         new MemberToViewMapper.ItemDescriptionForIDescription(
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
-            new SymbolDescription("a",
-                            50, new Color(1f, 1f, 1f, 0), 180, OutlineMode.WithOutline, new Color(1, 1, 1)),
+            new SymbolDescription(
+                "e", 50, new Color(1f, .75f, .5f, 1.2f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
             false,
             new Color(0, 0, 0)))
       });

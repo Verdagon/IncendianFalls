@@ -1,0 +1,34 @@
+
+mut struct Tutorial1LevelController {
+  Tutorial1LevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: Tutorial1LevelController overrides ILevelController): Str {
+    Tutorial1LevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: Tutorial1LevelController overrides ILevelController): Bool {
+    Tutorial1LevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: Tutorial1LevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    Tutorial1LevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: Tutorial1LevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    Tutorial1LevelControllerExtensions.SimpleUnitTrigger
+  }
+}

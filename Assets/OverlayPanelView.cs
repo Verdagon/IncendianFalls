@@ -65,19 +65,13 @@ public class OverlayPanelView : MonoBehaviour {
     this.textFadeOutEndMs = textFadeOutEndS;
 
     if (fadeInEndMs == 0) {
-      GetComponent<Image>().color = backgroundColor;
-      foreach (var buttonGameObject in buttonGameObjects) {
-        var button = buttonGameObject.GetComponent<UnityEngine.UI.Button>();
-        var buttonColors = button.colors;
-        buttonColors.normalColor = new UnityEngine.Color(32, 32, 32, 1);
-        button.colors = buttonColors;
-      }
+      SetChromeFadeRatio(1);
     } else {
       SetChromeFadeRatio(0);
     }
 
     if (textFadeInEndMs == 0) {
-      overlayText.color = textColor;
+      SetTextFadeRatio(1);
     } else {
       SetTextFadeRatio(0);
     }

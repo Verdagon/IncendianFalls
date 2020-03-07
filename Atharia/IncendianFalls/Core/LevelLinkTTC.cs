@@ -57,7 +57,10 @@ public class LevelLinkTTC {
     }
     return this.root == that.root && id == that.id;
   }
-         public Level destinationLevel {
+         public bool destroyThisLevel {
+    get { return incarnation.destroyThisLevel; }
+  }
+  public Level destinationLevel {
 
     get {
       if (root == null) {

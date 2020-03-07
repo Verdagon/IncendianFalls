@@ -350,7 +350,11 @@ namespace Domino {
       }
       symbolView.transform.SetParent(body.transform, false);
       symbolView.FadeInThenOut(100, 400);
-      timer.ScheduleTimer(1000, () => symbolView.Destruct());
+      timer.ScheduleTimer(1000, () => {
+        if (alive) {
+          symbolView.Destruct();
+        }
+      });
     }
 
     public void Die(long durationMs) {

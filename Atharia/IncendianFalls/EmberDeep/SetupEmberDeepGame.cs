@@ -41,96 +41,97 @@ namespace EmberDeep {
             null);
 
       bool playBackstory = false;
-      bool playTutorial = false;
-      bool playGame = true;
-      int startingDepth = 2;
+      bool playTutorial1 = false;
+      bool playTutorial2 = false;
+      int startingDepth = 0;
 
       Level startLevel = Level.Null;
-      LevelSuperstate startLevelSuperstate = null;
       Location startLevelEntryLocation = null;
 
       Level previousLevel = Level.Null;
       Location previousLevelExitLocation = null;
 
       if (playBackstory) {
-        RidgeLevelControllerExtensions.LoadLevel(
+        SotaventoLevelControllerExtensions.LoadLevel(
           out var level,
           out var levelSuperstate,
           out var entryLocation,
           out var exitLocation,
-          game.root);
+          game);
         if (!startLevel.Exists()) {
           startLevel = level;
-          startLevelSuperstate = levelSuperstate;
           startLevelEntryLocation = entryLocation;
         }
         if (previousLevel.Exists()) {
           previousLevel.terrain.tiles[previousLevelExitLocation].components.Add(
-            game.root.EffectLevelLinkTTCCreate(level, entryLocation).AsITerrainTileComponent());
+            game.root.EffectLevelLinkTTCCreate(true, level, entryLocation).AsITerrainTileComponent());
         }
         previousLevel = level;
         previousLevelExitLocation = exitLocation;
       }
 
-      if (playTutorial) {
-        TutorialLevelControllerExtensions.LoadLevel(
+      if (playTutorial1) {
+        Tutorial1LevelControllerExtensions.LoadLevel(
           out var level,
           out var levelSuperstate,
           out var entryLocation,
           out var exitLocation,
-          game.root);
+          game);
         if (!startLevel.Exists()) {
           startLevel = level;
-          startLevelSuperstate = levelSuperstate;
           startLevelEntryLocation = entryLocation;
         }
         if (previousLevel.Exists()) {
           previousLevel.terrain.tiles[previousLevelExitLocation].components.Add(
-            game.root.EffectLevelLinkTTCCreate(level, entryLocation).AsITerrainTileComponent());
+            game.root.EffectLevelLinkTTCCreate(true, level, entryLocation).AsITerrainTileComponent());
         }
         previousLevel = level;
         previousLevelExitLocation = exitLocation;
       }
 
-      if (playGame) {
-        game.root.logger.Info("in setup!");
+      if (playTutorial2) {
+        Tutorial2LevelControllerExtensions.LoadLevel(
+          out var level,
+          out var levelSuperstate,
+          out var entryLocation,
+          out var exitLocation,
+          game);
+        if (!startLevel.Exists()) {
+          startLevel = level;
+          startLevelEntryLocation = entryLocation;
+        }
+        if (previousLevel.Exists()) {
+          previousLevel.terrain.tiles[previousLevelExitLocation].components.Add(
+            game.root.EffectLevelLinkTTCCreate(true, level, entryLocation).AsITerrainTileComponent());
+        }
+        previousLevel = level;
+        previousLevelExitLocation = exitLocation;
+      }
+
+      game.player = Chronomancer.Make(game.root);
+
+      if (previousLevel.Exists()) {
+        previousLevel.terrain.tiles[previousLevelExitLocation].components.Add(
+          game.root.EffectEmberDeepLevelLinkerTTCCreate(startingDepth).AsITerrainTileComponent());
+      } else {
         EmberDeepLevelLinkerTTCExtensions.MakeNextLevel(
-            out var level,
-            out var levelSuperstate,
-            out var entryLocation,
-            game,
-            superstate,
-            startingDepth);
-        Location exitLocation = null;
+          out var level,
+          out var levelSuperstate,
+          out var entryLocation,
+          game,
+          superstate,
+          startingDepth);
         if (!startLevel.Exists()) {
           startLevel = level;
-          startLevelSuperstate = levelSuperstate;
           startLevelEntryLocation = entryLocation;
         }
-        if (previousLevel.Exists()) {
-          previousLevel.terrain.tiles[previousLevelExitLocation].components.Add(
-            game.root.EffectLevelLinkTTCCreate(level, entryLocation).AsITerrainTileComponent());
-        }
         previousLevel = level;
-        previousLevelExitLocation = exitLocation;
+        previousLevelExitLocation = null;
       }
 
       Asserts.Assert(startLevel.Exists());
 
-      game.root.logger.Info("setup derp!");
-      game.level = startLevel;
-      superstate.levelSuperstate = startLevelSuperstate;
-
-      var player = Chronomancer.Make(game.root);
-      game.level.EnterUnit(
-          superstate.levelSuperstate,
-          startLevelEntryLocation,
-          0,
-          player);
-      game.player = player;
-
-      game.root.logger.Info("sending trigger!");
-      game.level.controller.SimpleTrigger(game, superstate, "levelStart");
+      LevelLinkTTCExtensions.Travel(game, superstate, game.player, startLevel, startLevelEntryLocation, false);
 
       return game;
     }

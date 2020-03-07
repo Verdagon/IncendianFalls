@@ -35,11 +35,31 @@ namespace IncendianFalls {
       switch (request.cheatName) {
         case "warptoend":
           Location end = null;
-          foreach (var entry in game.level.terrain.tiles) {
-            var levelLinker = entry.Value.components.GetOnlyIncendianFallsLevelLinkerTTCOrNull();
-            if (levelLinker.Exists()) {
-              end = entry.Key;
-              break;
+          if (end == null) {
+            foreach (var entry in game.level.terrain.tiles) {
+              var found = entry.Value.components.GetOnlyIncendianFallsLevelLinkerTTCOrNull();
+              if (found.Exists()) {
+                end = entry.Key;
+                break;
+              }
+            }
+          }
+          if (end == null) {
+            foreach (var entry in game.level.terrain.tiles) {
+              var found = entry.Value.components.GetOnlyEmberDeepLevelLinkerTTCOrNull();
+              if (found.Exists()) {
+                end = entry.Key;
+                break;
+              }
+            }
+          }
+          if (end == null) {
+            foreach (var entry in game.level.terrain.tiles) {
+              var found = entry.Value.components.GetAllLevelLinkTTC();
+              if (found.Count > 0) {
+                end = entry.Key;
+                break;
+              }
             }
           }
           if (end == null) {

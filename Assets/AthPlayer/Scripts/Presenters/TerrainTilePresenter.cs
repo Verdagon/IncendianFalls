@@ -218,6 +218,7 @@ namespace AthPlayer {
           topColor = new UnityEngine.Color(.2f, .2f, .2f);
           sideColor = new UnityEngine.Color(.15f, .15f, .15f);
           outlineColor = new UnityEngine.Color(0f, 0f, 0f);
+        } else if (ttc is EmberDeepLevelLinkerTTCAsITerrainTileComponent) {
         } else if (ttc is MagmaTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.4f, 0f, 0f);
           outlineColor = new UnityEngine.Color(.2f, 0f, 0.0f);

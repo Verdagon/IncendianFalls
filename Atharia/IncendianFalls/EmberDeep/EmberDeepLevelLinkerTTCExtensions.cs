@@ -21,7 +21,7 @@ namespace Atharia.Model {
       Asserts.Assert(game.level.units.Contains(game.player));
 
       // Replace this linker with a regular LevelLink.
-      var thisLevelDepth = linker.thisLevelDepth;
+      var nextLevelDepth = linker.nextLevelDepth;
       game.level.terrain.tiles[containingTileLocation].components.Remove(linker.AsITerrainTileComponent());
       linker.Destruct();
 
@@ -31,21 +31,20 @@ namespace Atharia.Model {
           out var nextLevelEntryLocation,
           game,
           superstate,
-          thisLevelDepth + 1);
+          nextLevelDepth);
 
       // Link to the next level.
-      var levelLink = game.root.EffectLevelLinkTTCCreate(nextLevel, nextLevelEntryLocation);
+      var levelLink = game.root.EffectLevelLinkTTCCreate(false, nextLevel, nextLevelEntryLocation);
       game.level.terrain.tiles[containingTileLocation].components.Add(levelLink.AsITerrainTileComponent());
 
       // Make the next level link back to here.
       var nextLevelEntryTile = nextLevel.terrain.tiles[nextLevelEntryLocation];
       nextLevelEntryTile.components.Add(
-        game.root.EffectLevelLinkTTCCreate(game.level, containingTileLocation).AsITerrainTileComponent());
+        game.root.EffectLevelLinkTTCCreate(false, game.level, containingTileLocation).AsITerrainTileComponent());
 
       // Travel the level link, to switch levels.
       return levelLink.Interact(game, superstate, interactingUnit, containingTileLocation);
     }
-
 
     public static void MakeNextLevel(
         out Level level,
@@ -56,31 +55,73 @@ namespace Atharia.Model {
         int depth) {
       game.root.logger.Info("in MakeNextLevel! depth " + depth);
       if (depth == 0) {
-        game.root.logger.Info("making nest!");
-        NestLevelControllerExtensions.LoadLevel(
-          out level,
-          out levelSuperstate,
-          out entryLocation,
-          game,
-          superstate,
-          depth);
-      } else if (depth == 2) {
-        IslandLevelControllerExtensions.LoadLevel(
-          out level,
-          out levelSuperstate,
-          out entryLocation,
-          out var exitLocation,
-          game,
-          superstate,
-          depth);
-      } else {
-        CaveLevelControllerExtensions.LoadLevel(
-          out level,
-          out levelSuperstate,
-          out entryLocation,
-          game,
-          superstate,
-          depth);
+        // Heal the player before they go onto the first level.
+        var sorcerous = game.player.components.GetOnlySorcerousUCOrNull();
+        if (sorcerous.Exists()) {
+          sorcerous.mp = sorcerous.maxMp;
+        }
+        game.player.hp = game.player.maxHp;
+      }
+      switch (depth) {
+        case 0:
+        case 2:
+        case 4:
+        case 6:
+          CaveLevelControllerExtensions.LoadLevel(
+            out level,
+            out levelSuperstate,
+            out entryLocation,
+            game,
+            superstate,
+            depth);
+          break;
+        case 1:
+          BridgesLevelControllerExtensions.LoadLevel(
+            out level,
+            out levelSuperstate,
+            out entryLocation,
+            game,
+            superstate,
+            depth);
+          break;
+        case 3:
+          NestLevelControllerExtensions.LoadLevel(
+            out level,
+            out levelSuperstate,
+            out entryLocation,
+            game,
+            superstate,
+            depth);
+          break;
+        case 5:
+          LakeLevelControllerExtensions.LoadLevel(
+            out level,
+            out levelSuperstate,
+            out entryLocation,
+            game,
+            superstate,
+            depth);
+          break;
+        case 7:
+          AncientTownLevelControllerExtensions.LoadLevel(
+            out level,
+            out levelSuperstate,
+            out entryLocation,
+            game,
+            superstate,
+            depth);
+          break;
+        case 8:
+          VolcaetusLevelControllerExtensions.LoadLevel(
+            out level,
+            out levelSuperstate,
+            out entryLocation,
+            game,
+            superstate,
+            depth);
+          break;
+        default:
+          throw new Exception("Unexpected depth!");
       }
     }
   }

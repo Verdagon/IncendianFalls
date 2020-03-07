@@ -1,0 +1,117 @@
+-4 -1 4 5 Mud
+-4 -1 7 5 Mud
+-3 -1 0 7 Mud
+-3 -1 2 7 Mud
+-3 -1 4 4 Mud
+-3 -1 5 5 Mud
+-3 -1 6 1 Mud
+-3 -1 7 1 Magma
+-3 0 0 4 Mud
+-3 0 2 5 Mud
+-3 0 4 6 Mud
+-3 0 7 7 Mud
+-2 -1 0 7 Mud
+-2 -1 1 6 Mud
+-2 -1 2 1 Mud
+-2 -1 3 3 Mud
+-2 -1 4 2 Mud Rocks Marker(summon)
+-2 -1 5 2 Mud
+-2 -1 6 3 Mud Marker(summon)
+-2 -1 7 3 Dirt Rocks
+-2 0 0 3 Mud
+-2 0 1 1 Mud
+-2 0 2 3 Dirt Marker(summon)
+-2 0 3 2 Mud
+-2 0 4 3 Mud
+-2 0 5 2 Mud
+-2 0 6 1 Magma
+-2 0 7 2 Mud Marker(summon)
+-2 1 0 6 Mud
+-1 -1 2 7 Mud
+-1 -1 3 5 Mud
+-1 -1 4 1 Magma
+-1 -1 5 2 Mud
+-1 -1 6 2 Mud
+-1 -1 7 3 Mud Rocks
+-1 0 0 2 Mud
+-1 0 1 3 Mud Marker(summon)
+-1 0 2 1 Magma
+-1 0 3 2 Mud Marker(summon)
+-1 0 4 3 Mud
+-1 0 5 3 Mud
+-1 0 6 2 Mud Rocks
+-1 0 7 2 Mud
+-1 1 0 1 Mud Cave Marker(exit)
+-1 1 1 6 Mud
+-1 1 2 7 Mud
+0 -1 2 6 Mud
+0 -1 3 7 Mud
+0 -1 4 2 Mud
+0 -1 5 3 Dirt
+0 -1 6 2 Dirt
+0 -1 7 3 Mud
+0 0 0 1 Magma
+0 0 1 3 Mud
+0 0 2 2 Mud
+0 0 3 2 Mud
+0 0 4 3 Mud Marker(summon)
+0 0 5 3 Dirt Rocks Marker(summon)
+0 0 6 2 Mud
+0 0 7 3 Mud Marker(summon)
+0 1 0 1 Magma
+0 1 1 2 Mud Marker(summon)
+0 1 2 2 Mud
+0 1 3 1 Mud
+0 1 4 3 Mud
+0 1 5 6 Mud
+0 1 6 7 Mud
+0 1 7 7 Mud
+1 -1 3 7 Mud
+1 -1 4 6 Mud
+1 -1 5 3 Mud HealthPotion
+1 -1 6 2 Mud Rocks
+1 -1 7 6 Mud
+1 0 0 3 Mud
+1 0 1 2 Dirt
+1 0 2 3 Dirt Marker(start)
+1 0 3 3 Mud Rocks
+1 0 4 2 Dirt
+1 0 5 1 Magma
+1 0 6 1 Magma
+1 0 7 2 Dirt
+1 1 0 2 Mud Marker(summon)
+1 1 1 3 Mud
+1 1 2 3 Mud Rocks
+1 1 3 3 Dirt Marker(summon)
+1 1 4 2 Mud
+1 1 5 2 Mud
+1 1 6 7 Mud
+1 1 7 6 Mud
+2 0 0 7 Mud
+2 0 1 2 Mud HealthPotion
+2 0 2 6 Mud
+2 0 3 2 Mud
+2 0 4 2 Mud HealthPotion
+2 0 5 3 Mud
+2 0 6 3 Dirt
+2 0 7 2 Mud Rocks HealthPotion
+2 1 0 3 Mud Rocks
+2 1 1 3 Mud
+2 1 2 2 Mud
+2 1 3 3 Mud Marker(summon)
+2 1 4 2 Mud Marker(summon)
+2 1 5 3 Dirt
+2 1 6 7 Mud
+2 1 7 7 Mud
+3 0 3 7 Mud
+3 0 5 7 Mud
+3 0 6 6 Mud
+3 1 0 2 Mud
+3 1 1 2 Dirt
+3 1 2 7 Mud
+3 1 3 3 Mud
+3 1 4 7 Mud
+3 1 5 6 Mud
+4 1 1 6 Mud
+4 1 2 7 Mud
+4 1 3 7 Mud
