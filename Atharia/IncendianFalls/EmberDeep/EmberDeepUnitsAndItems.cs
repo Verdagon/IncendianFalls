@@ -56,6 +56,7 @@ namespace IncendianFalls {
               level.terrain,
               rand,
               (int)(levelSuperstate.NumWalkableLocations(false) * healthPotionDensity),
+              (loc) => true,
               true,
               false);
 
@@ -72,6 +73,7 @@ namespace IncendianFalls {
             level.terrain,
               rand,
               (int)(levelSuperstate.NumWalkableLocations(false) * manaPotionDensity),
+              (loc) => true,
               true, 
               false);
 
@@ -90,6 +92,7 @@ namespace IncendianFalls {
               level.terrain,
               rand,
               levelSuperstate.NumWalkableLocations(false) / 20,
+              (loc) => true,
               true,
               false);
 
@@ -246,7 +249,7 @@ namespace IncendianFalls {
       for (int i = 0; i < numIrkling; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1,(loc) => true, true, true)[0],
           game.time + 10,
           Irkling.Make(level.root));
       }
@@ -254,7 +257,8 @@ namespace IncendianFalls {
       for (int i = 0; i < numBaug; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1,
+              (loc) => true, true, true)[0],
           game.time + 10,
           Baug.Make(level.root));
       }

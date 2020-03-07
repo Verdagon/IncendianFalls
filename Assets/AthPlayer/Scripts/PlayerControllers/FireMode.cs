@@ -63,7 +63,7 @@ namespace AthPlayer {
       delegat.AfterDidSomething();
     }
 
-    public void DefendClicked() {
+    public void DefyClicked() {
       narrator.ShowMessage("You must select a unit to fire on them. Canceling fire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
@@ -77,6 +77,12 @@ namespace AthPlayer {
 
     public void FireClicked() {
       narrator.ShowMessage("Canceled fire!");
+      delegat.SwitchToNormalMode();
+      delegat.AfterDidSomething();
+    }
+
+    public void MireClicked() {
+      narrator.ShowMessage("You must select a unit to fire on them. Canceling fire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }

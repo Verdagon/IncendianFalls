@@ -25,7 +25,7 @@ namespace Atharia.Model {
           var otherUnit = superstate.levelSuperstate.GetLiveUnitAt(adjLoc);
           if (otherUnit.Exists() && unit.good != otherUnit.good) {
             // Prioritize shielding and countering units
-            if (otherUnit.components.GetOnlyShieldingUCOrNull().Exists()) {
+            if (otherUnit.components.GetOnlyDefyingUCOrNull().Exists()) {
               adjacentEnemies.Insert(0, otherUnit);
             } else if (otherUnit.components.GetOnlyCounteringUCOrNull().Exists()) {
               adjacentEnemies.Insert(0, otherUnit);

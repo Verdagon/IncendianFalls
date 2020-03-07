@@ -236,8 +236,23 @@ namespace ConsoleDriveyThing {
                     Console.WriteLine("Not firing!");
                   }
                   break;
+                case ConsoleKey.M:
+                  if (cursorMode) {
+                    var unitThere = FindUnitAt(ss, game, cursor);
+                    if (!unitThere.Exists()) {
+                      Console.WriteLine("No unit there!");
+                    } else {
+                      string fireResult = ss.RequestMire(game.id, unitThere.id);
+                      if (fireResult.Length > 0) {
+                        Console.WriteLine(fireResult);
+                      }
+                    }
+                  } else {
+                    Console.WriteLine("Not firing!");
+                  }
+                  break;
                 case ConsoleKey.S:
-                  string resultD = ss.RequestDefend(game.id);
+                  string resultD = ss.RequestDefy(game.id);
                   if (resultD != "") {
                     Console.WriteLine(resultD);
                   }

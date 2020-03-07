@@ -30,7 +30,8 @@ namespace AthPlayer {
     bool isRavashrike;
 
     UnitView unitView;
-    HashSet<int> shieldingIds = new HashSet<int>();
+    HashSet<int> defyingIds = new HashSet<int>();
+    HashSet<int> miredIds = new HashSet<int>();
     HashSet<int> counteringIds = new HashSet<int>();
     HashSet<int> bidingIds = new HashSet<int>();
 
@@ -205,7 +206,7 @@ namespace AthPlayer {
                     new UnityEngine.Color(0, 0, 0)),
                 true,
                 new UnityEngine.Color(0, 0, 1f, 1f)));
-      } else if (effect.element is UnitShieldingEventAsIUnitEvent) {
+      } else if (effect.element is UnitDefyingEventAsIUnitEvent) {
         unitView.ShowRune(
             new ExtrudedSymbolDescription(
                 RenderPriority.RUNE,
@@ -276,8 +277,11 @@ namespace AthPlayer {
     public void OnIUnitComponentMutBunchAdd(int id) {
       var component = game.root.GetIUnitComponentOrNull(id);
       if (!component.Exists()) {
-      } else if (component is ShieldingUCAsIUnitComponent shielding) {
-        shieldingIds.Add(id);
+      } else if (component is DefyingUCAsIUnitComponent defying) {
+        defyingIds.Add(id);
+        unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is MiredUCAsIUnitComponent mired) {
+        miredIds.Add(id);
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is CounteringUCAsIUnitComponent countering) {
         counteringIds.Add(id);
@@ -306,8 +310,12 @@ namespace AthPlayer {
     }
 
     public void OnIUnitComponentMutBunchRemove(int id) {
-      if (shieldingIds.Contains(id)) {
-        shieldingIds.Remove(id);
+      if (defyingIds.Contains(id)) {
+        defyingIds.Remove(id);
+        description = GetUnitViewDescription(unit);
+        unitView.SetDescription(description);
+      } else if (miredIds.Contains(id)) {
+        miredIds.Remove(id);
         description = GetUnitViewDescription(unit);
         unitView.SetDescription(description);
       } else if (counteringIds.Contains(id)) {
@@ -323,14 +331,29 @@ namespace AthPlayer {
     public static UnitDescription GetUnitViewDescription(Unit unit) {
       var detailSymbols = new List<KeyValuePair<int, ExtrudedSymbolDescription>>();
       foreach (var detail in unit.components) {
-        if (detail is ShieldingUCAsIUnitComponent shielding) {
+        if (detail is DefyingUCAsIUnitComponent defying) {
           detailSymbols.Add(
               new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  shielding.id,
+                  defying.id,
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "q",
+                            50,
+                          new UnityEngine.Color(1, 1, 1, 1.5f),
+                          0,
+                          OutlineMode.WithBackOutline,
+                          new UnityEngine.Color(0, 0, 0)),
+                      true,
+                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+        } else if (detail is MiredUCAsIUnitComponent mired) {
+          detailSymbols.Add(
+              new KeyValuePair<int, ExtrudedSymbolDescription>(
+                  mired.id,
+                  new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          "e",
                             50,
                           new UnityEngine.Color(1, 1, 1, 1.5f),
                           0,

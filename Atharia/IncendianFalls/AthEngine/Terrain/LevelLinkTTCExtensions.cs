@@ -45,10 +45,6 @@ namespace Atharia.Model {
       // visited here. We'll want to bump them all up to the near future.
       Asserts.Assert(game.time >= game.level.time);
 
-      game.root.logger.Error("Player next action time: " + game.player.nextActionTime);
-      game.root.logger.Error("Level time: " + game.level.time);
-      game.root.logger.Error("game time: " + game.time);
-
       int levelLastTime = game.level.time;
       int timeNow = game.time;
       int timeSinceLevelLastTime = timeNow - levelLastTime;
@@ -57,7 +53,6 @@ namespace Atharia.Model {
       foreach (var nativeUnit in game.level.units) {
         nativeUnit.nextActionTime =
             nativeUnit.nextActionTime + timeSinceLevelLastTime;
-        game.root.logger.Error("Unit " + nativeUnit.classId + " next action time: " + nativeUnit.nextActionTime);
       }
 
       // Make player start immediately.

@@ -156,7 +156,7 @@ namespace IncendianFalls {
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    // Only called from the inside, from ContinueAfterUnitAction, PlayerDefend, etc.
+    // Only called from the inside, from ContinueAfterUnitAction, PlayerDefy, etc.
     private static void StartPostActions(
         Game game,
         Superstate superstate,

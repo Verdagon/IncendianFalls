@@ -14,6 +14,7 @@ public class PlayerPanelView : MonoBehaviour {
   public GameObject defendButton;
   public GameObject counterButton;
   public GameObject fireButton;
+  public GameObject mireButton;
 
   public LookPanelView lookPanelView;
 
@@ -38,7 +39,7 @@ public class PlayerPanelView : MonoBehaviour {
 
     defendButton.GetComponent<UIClickListener>().MouseEnter +=
         () => lookPanelView.ShowMessage(
-            "(D) Defend: Reduce incoming damage by 2/3. Tempts foes.");
+            "(D) Defy: Reduce incoming damage by 2/3. Tempts foes.");
     defendButton.GetComponent<UIClickListener>().MouseExit +=
         () => lookPanelView.ClearMessage();
 
@@ -52,6 +53,12 @@ public class PlayerPanelView : MonoBehaviour {
         () => lookPanelView.ShowMessage(
             "(F) Fire: Cast fireball for " + IncendianFalls.Actions.FIRE_COST + "mp for " + IncendianFalls.Actions.FIRE_DAMAGE + " damage.");
     fireButton.GetComponent<UIClickListener>().MouseExit +=
+        () => lookPanelView.ClearMessage();
+
+    mireButton.GetComponent<UIClickListener>().MouseEnter +=
+        () => lookPanelView.ShowMessage(
+            "(S) Slow: Freeze enemy for one turn. Cost " + IncendianFalls.Actions.MIRE_COST + "mp. Stacks by half each time.");
+    mireButton.GetComponent<UIClickListener>().MouseExit +=
         () => lookPanelView.ClearMessage();
   }
 

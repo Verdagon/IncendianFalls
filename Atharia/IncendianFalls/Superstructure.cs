@@ -283,8 +283,6 @@ namespace IncendianFalls {
     }
 
     public string RequestFire(int gameId, int targetUnitId) {
-      
-
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new FireRequest(gameId, targetUnitId);
@@ -296,6 +294,30 @@ namespace IncendianFalls {
         });
         context.Flare(result.DStr());
         broadcastAfterRequest(new FireRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return result;
+      } catch (Exception e) {
+        root.logger.Error(e.Message);
+        throw e;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
+      }
+    }
+
+    public string RequestMire(int gameId, int targetUnitId) {
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new MireRequest(gameId, targetUnitId);
+        broadcastBeforeRequest(new MireRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        var superstate = superstateByGameId[gameId];
+        string result = context.root.Transact(delegate () {
+          return MireRequestExecutor.Execute(context, superstate, request);
+        });
+        context.Flare(result.DStr());
+        broadcastAfterRequest(new MireRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return result;
       } catch (Exception e) {
@@ -333,18 +355,18 @@ namespace IncendianFalls {
       }
     }
 
-    public string RequestDefend(int gameId) {
+    public string RequestDefy(int gameId) {
       //var rollbackPoint = root.Snapshot();
       try {
-        var request = new DefendRequest(gameId);
-        broadcastBeforeRequest(new DefendRequestAsIRequest(request));
+        var request = new DefyRequest(gameId);
+        broadcastBeforeRequest(new DefyRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         string success = context.root.Transact(delegate () {
-          return DefendRequestExecutor.Execute(context, superstate, request);
+          return DefyRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(success.DStr());
-        broadcastAfterRequest(new DefendRequestAsIRequest(request));
+        broadcastAfterRequest(new DefyRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {

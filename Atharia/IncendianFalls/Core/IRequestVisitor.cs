@@ -11,9 +11,10 @@ public interface IRequestVisitor {
   void Visit(TimeShiftRequestAsIRequest obj);
   void Visit(FollowDirectiveRequestAsIRequest obj);
   void Visit(CounterRequestAsIRequest obj);
-  void Visit(DefendRequestAsIRequest obj);
+  void Visit(DefyRequestAsIRequest obj);
   void Visit(MoveRequestAsIRequest obj);
   void Visit(CheatRequestAsIRequest obj);
+  void Visit(MireRequestAsIRequest obj);
   void Visit(FireRequestAsIRequest obj);
   void Visit(AttackRequestAsIRequest obj);
   void Visit(ResumeRequestAsIRequest obj);

@@ -68,6 +68,15 @@ namespace AthPlayer {
       return result;
     }
 
+    public string RequestMire(int gameId, int targetUnitId) {
+      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+      //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);
+
+      var result = ss.RequestMire(gameId, targetUnitId);
+
+      return result;
+    }
+
     public string RequestMove(int gameId, Location newLocation) {
       //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
       //ss.GetRoot().logger.Error("RequestMove State: " + executionStateStr);
@@ -104,18 +113,18 @@ namespace AthPlayer {
       return result;
     }
 
-    public string RequestDefend(int gameId) {
+    public string RequestDefy(int gameId) {
       //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestDefend State: " + executionStateStr);
+      //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
 
-      var result = ss.RequestDefend(gameId);
+      var result = ss.RequestDefy(gameId);
 
       return result;
     }
 
     public string RequestCounter(int gameId) {
       //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestDefend State: " + executionStateStr);
+      //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
 
       var result = ss.RequestCounter(gameId);
 
@@ -124,7 +133,7 @@ namespace AthPlayer {
 
     public string RequestInteract(int gameId) {
       //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestDefend State: " + executionStateStr);
+      //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
 
       var result = ss.RequestInteract(gameId);
 

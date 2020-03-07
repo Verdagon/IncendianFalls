@@ -58,6 +58,13 @@ imm struct FireRequest {
   targetUnitId: Int;
 }
 
+imm struct MireRequest {
+  MireRequest isa IRequest;
+
+  gameId: Int;
+  targetUnitId: Int;
+}
+
 imm struct CheatRequest {
   CheatRequest isa IRequest;
 
@@ -72,8 +79,8 @@ imm struct MoveRequest {
   destination: Location;
 }
 
-imm struct DefendRequest {
-  DefendRequest isa IRequest;
+imm struct DefyRequest {
+  DefyRequest isa IRequest;
 
   gameId: Int;
 }

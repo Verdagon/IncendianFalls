@@ -408,15 +408,15 @@ namespace Atharia.Model {
         game.events.Add(new WaitEvent(400, "ambush4b").AsIGameEvent());
         superstate.navigatingState = null;
       }
-      if (triggerName == "ambush4DefendSpot" &&
+      if (triggerName == "ambush4DefySpot" &&
           triggeringUnit.NullableIs(game.player)) {
-        superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefendSpot", 1);
+        superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefySpot", 1);
         game.events.Add(new WaitEvent(400, "ambush4e").AsIGameEvent());
         superstate.navigatingState = null;
       }
-      if (triggerName == "ambush4DefendSpot" &&
+      if (triggerName == "ambush4DefySpot" &&
           triggeringUnit.components.GetAllTimeCloneAICapabilityUC().Count > 0) {
-        superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefendSpot", 1);
+        superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefySpot", 1);
         game.events.Add(new WaitEvent(600, "ambush4f").AsIGameEvent());
         superstate.navigatingState = null;
       }
@@ -445,7 +445,7 @@ namespace Atharia.Model {
 -6 -2 3 1 Dirt
 -6 -2 4 4 Mud
 -6 -2 5 1 Dirt Trigger(ambush4Trigger)
--6 -2 6 1 Dirt Trigger(ambush4DefendSpot)
+-6 -2 6 1 Dirt Trigger(ambush4DefySpot)
 -6 -2 7 4 Mud
 -6 -1 0 4 Mud
 -6 -1 1 1 Dirt

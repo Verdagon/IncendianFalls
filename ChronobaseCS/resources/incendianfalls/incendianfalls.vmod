@@ -41,12 +41,12 @@ unit/attack.vss
 unit/bide.vss
 unit/counter.vss
 unit/countering.vss
-unit/defend.vss
+unit/defy.vss
 unit/fire.vss
 unit/impulse.vss
 unit/move.vss
 unit/script.vss
-unit/shielding.vss
+unit/mire.vss
 unit/stats/combattime.vss
 unit/stats/defense.vss
 unit/stats/movementtime.vss

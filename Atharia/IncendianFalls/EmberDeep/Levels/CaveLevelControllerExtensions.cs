@@ -13,7 +13,13 @@ namespace Atharia.Model {
         int depth) {
       bool considerCornersAdjacent = false;
 
-      var terrain = CellularAutomataTerrainGenerator.Generate(game.root, PentagonPattern9.makePentagon9Pattern(), game.rand, considerCornersAdjacent, 15.0f);
+      var terrain =
+        CellularAutomataTerrainGenerator.Generate(
+          game.root,
+          PentagonPattern9.makePentagon9Pattern(),
+          game.rand,
+          considerCornersAdjacent,
+          15.0f);
       foreach (var locationAndTile in terrain.tiles) {
         locationAndTile.Value.components.Add(game.root.EffectMudTTCCreate().AsITerrainTileComponent());
       }
@@ -42,13 +48,25 @@ namespace Atharia.Model {
               game.time);
       levelSuperstate = new LevelSuperstate(level);
 
-      var entryAndExitLocations = levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 2, false, false);
+      var entryAndExitLocations = levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 2,
+              (loc) => true, false, false);
       entryLocation = entryAndExitLocations[0];
       var exitLocation = entryAndExitLocations[1];
       level.terrain.tiles[exitLocation].components.Add(
         game.root.EffectEmberDeepLevelLinkerTTCCreate(depth + 1).AsITerrainTileComponent());
 
       level.controller = game.root.EffectCaveLevelControllerCreate(level).AsILevelController();
+
+      var unitLocations = levelSuperstate.GetNRandomWalkableLocations(
+        level.terrain,
+        game.rand,
+        10,
+        (loc) => !entryAndExitLocations.Contains(loc),
+        true,
+        true);
+      foreach (var unitLocation in unitLocations) {
+        level.EnterUnit(levelSuperstate, unitLocation, level.time, Irkling.Make(game.root));
+      }
 
       game.levels.Add(level);
     }

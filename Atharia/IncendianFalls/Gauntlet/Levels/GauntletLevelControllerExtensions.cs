@@ -37,49 +37,49 @@ namespace Atharia.Model {
       for (int i = 0; i < 5; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           level.time,
           Avelisk.Make(level.root));
       }
       for (int i = 0; i < 8; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           level.time,
           Novafaire.Make(level.root));
       }
       for (int i = 0; i < 4; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           level.time,
           Draxling.Make(level.root));
       }
       for (int i = 0; i < 3; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           level.time,
           Lornix.Make(level.root));
       }
       for (int i = 0; i < 3; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           level.time,
           Yoten.Make(level.root));
       }
       for (int i = 0; i < 3; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           level.time,
           Spiriad.Make(level.root));
       }
       for (int i = 0; i < 4; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           level.time,
           Mordranth.Make(level.root));
       }

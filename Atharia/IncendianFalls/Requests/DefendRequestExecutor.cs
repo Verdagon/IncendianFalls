@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Atharia.Model;
 
 namespace IncendianFalls {
-  public class DefendRequestExecutor {
+  public class DefyRequestExecutor {
     public static string Execute(
         SSContext context,
         Superstate superstate,
-        DefendRequest request) {
+        DefyRequest request) {
       int gameId = request.gameId;
       var game = context.root.GetGame(gameId);
 
@@ -33,7 +33,7 @@ namespace IncendianFalls {
 
       //player.ClearDirective();
 
-      Actions.Defend(game, game.player);
+      Actions.Defy(game, game.player);
 
       GameLoop.NoteUnitActed(game, game.player);
 

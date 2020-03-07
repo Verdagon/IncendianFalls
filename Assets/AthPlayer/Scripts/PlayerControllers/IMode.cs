@@ -7,13 +7,15 @@ namespace AthPlayer {
     void SwitchToNormalMode();
     void SwitchToTimeAnchorMoveMode();
     void SwitchToFireMode();
+    void SwitchToMireMode();
   }
 
   public interface IMode {
     void OnTileMouseClick(Location newLocation);
 
-    void DefendClicked();
+    void DefyClicked();
     void FireClicked();
+    void MireClicked();
     void CounterClicked();
     void InteractClicked();  
 

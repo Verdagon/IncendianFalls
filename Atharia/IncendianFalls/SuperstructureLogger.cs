@@ -129,8 +129,8 @@ namespace IncendianFalls {
         ss.RequestTimeShift(timeShift.obj.gameId);
       } else if (request is CounterRequestAsIRequest counter) {
         ss.RequestCounter(counter.obj.gameId);
-      } else if (request is DefendRequestAsIRequest defend) {
-        ss.RequestDefend(defend.obj.gameId);
+      } else if (request is DefyRequestAsIRequest defend) {
+        ss.RequestDefy(defend.obj.gameId);
       } else if (request is ResumeRequestAsIRequest resume) {
         ss.RequestResume(resume.obj.gameId);
       } else if (request is FollowDirectiveRequestAsIRequest follow) {

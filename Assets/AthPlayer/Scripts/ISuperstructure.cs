@@ -14,11 +14,12 @@ namespace AthPlayer {
     string RequestFollowDirective(int gameId);
     string RequestAttack(int gameId, int targetUnitId);
     string RequestTimeShift(int gameId);
-    string RequestDefend(int gameId);
+    string RequestDefy(int gameId);
     string RequestTrigger(int gameId, string triggerName);
     string RequestCounter(int gameId);
     string RequestCheat(int gameId, string cheatName);
     string RequestFire(int gameId, int targetUnitId);
+    string RequestMire(int gameId, int targetUnitId);
     string RequestInteract(int gameId);
     Superstate GetSuperstate(int gameId);
   }

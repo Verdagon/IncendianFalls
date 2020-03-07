@@ -88,13 +88,16 @@ namespace AthPlayer {
         InteractClicked();
       }
       if (Input.GetKeyUp(KeyCode.D)) {
-        DefendClicked();
+        DefyClicked();
       }
       if (Input.GetKeyUp(KeyCode.C)) {
         CounterClicked();
       }
       if (Input.GetKeyUp(KeyCode.F)) {
         FireClicked();
+      }
+      if (Input.GetKeyUp(KeyCode.S)) {
+        MireClicked();
       }
       if (Input.GetKeyUp(KeyCode.Slash)) {
         playerController.ActivateCheat("warptoend");
@@ -153,8 +156,8 @@ namespace AthPlayer {
       playerController.InteractClicked();
     }
 
-    public void DefendClicked() {
-      playerController.DefendClicked();
+    public void DefyClicked() {
+      playerController.DefyClicked();
     }
 
     public void CounterClicked() {
@@ -163,6 +166,10 @@ namespace AthPlayer {
 
     public void FireClicked() {
       playerController.FireClicked();
+    }
+
+    public void MireClicked() {
+      playerController.MireClicked();
     }
 
   }

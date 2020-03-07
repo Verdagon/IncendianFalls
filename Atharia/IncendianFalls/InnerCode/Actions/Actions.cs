@@ -47,7 +47,7 @@ namespace IncendianFalls {
         int initialDamage,
         bool physical) {
       int outgoingDamage = attacker.CalculateOutgoingDamage(initialDamage);
-      int incomingDamage = victim.CalculateIncomingDamage(initialDamage);
+      int incomingDamage = victim.CalculateIncomingDamage(outgoingDamage);
       //game.root.logger.Info((attacker.Is(game.player) ? "Player" : "Enemy") + " does " + damage + " damage to " + (victim.Is(game.player) ? "player" : "enemy") + "!");
       victim.hp = victim.hp - incomingDamage;
 
@@ -66,14 +66,39 @@ namespace IncendianFalls {
       }
     }
 
-    public static void Defend(
+    public static void Defy(
         Game game,
         Unit unit) {
-      var detail = game.root.EffectShieldingUCCreate();
+      var detail = game.root.EffectDefyingUCCreate();
       unit.components.Add(detail.AsIUnitComponent());
 
       unit.nextActionTime = unit.nextActionTime + unit.CalculateCombatTimeCost(600);
-      Eventer.broadcastUnitShieldingEvent(game.root, game, unit);
+      Eventer.broadcastUnitDefyingEvent(game.root, game, unit);
+    }
+
+    public static void Mire(
+        Game game,
+        Superstate superstate,
+        Unit attacker,
+        Unit victim) {
+      // If they're already mired, then make it half as effective. We can
+      // never completely time-stop them.
+      int delay = 600;
+      for (int i = 0; i < victim.components.GetAllMiredUC().Count; i++) {
+        delay /= 2;
+      }
+
+      var detail = game.root.EffectMiredUCCreate();
+      victim.components.Add(detail.AsIUnitComponent());
+      // ...but DO delay their nextActionTime.
+
+      var sorcerous = attacker.components.GetOnlySorcerousUCOrNull();
+      Asserts.Assert(sorcerous != null);
+      sorcerous.mp = sorcerous.mp - MIRE_COST;
+
+      attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(600);
+      victim.nextActionTime = victim.nextActionTime + victim.CalculateCombatTimeCost(delay);
+      Eventer.broadcastUnitMiredEvent(game.root, game, attacker, victim);
     }
 
     public static void Counter(
@@ -157,6 +182,7 @@ namespace IncendianFalls {
     }
 
     public static readonly int FIRE_COST = 18;
+    public static readonly int MIRE_COST = 2;
     public static readonly int FIRE_DAMAGE = 23;
 
     public static void Fire(

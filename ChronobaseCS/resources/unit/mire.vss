@@ -1,0 +1,38 @@
+
+mut struct MireImpulse {
+  MireImpulse isa IImpulse;
+
+  weight: Int;
+  targetUnit: &Unit;
+
+  fn Destruct(this: MireImpulse overrides IDestructible): Void {
+    MireImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: MireImpulse overrides IImpulse): Int {
+    MireImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: MireImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    MireImpulseExtensions.Enact
+  }
+}
+
+// Really just for display purposes. The impulse will bump their nextActionTime for us.
+mut struct MiredUC {
+  MiredUC isa IPreActingUC;
+
+  fn Destruct(this: MiredUC overrides IDestructible): Void {
+    MiredUCExtensions.Destruct
+  }
+  fn PreAct(
+      detail: MiredUC overrides IPreActingUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool {
+    MiredUCExtensions.PreAct
+  }
+}

@@ -16,13 +16,13 @@ imm struct UnitStepEvent {
   }
 }
 
-imm struct UnitShieldingEvent {
-  UnitShieldingEvent isa IUnitEvent;
+imm struct UnitDefyingEvent {
+  UnitDefyingEvent isa IUnitEvent;
 
   time: Int;
 
-  fn GetTime(event: UnitShieldingEvent overrides IUnitEvent): Int {
-    UnitShieldingEventExtensions.GetTime
+  fn GetTime(event: UnitDefyingEvent overrides IUnitEvent): Int {
+    UnitDefyingEventExtensions.GetTime
   }
 }
 
@@ -45,6 +45,18 @@ imm struct UnitAttackEvent {
 
   fn GetTime(event: UnitAttackEvent overrides IUnitEvent): Int {
     UnitAttackEventExtensions.GetTime
+  }
+}
+
+imm struct UnitMireEvent {
+  UnitMireEvent isa IUnitEvent;
+
+  time: Int;
+  attackerId: Int;
+  victimId: Int;
+
+  fn GetTime(event: UnitMireEvent overrides IUnitEvent): Int {
+    UnitMireEventExtensions.GetTime
   }
 }
 

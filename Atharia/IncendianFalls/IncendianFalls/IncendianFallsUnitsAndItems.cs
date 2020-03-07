@@ -56,6 +56,7 @@ namespace IncendianFalls {
               level.terrain,
               rand,
               (int)(levelSuperstate.NumWalkableLocations(false) * healthPotionDensity),
+              (loc) => true,
               true,
               false);
 
@@ -72,6 +73,7 @@ namespace IncendianFalls {
             level.terrain,
               rand,
               (int)(levelSuperstate.NumWalkableLocations(false) * manaPotionDensity),
+              (loc) => true,
               true, 
               false);
 
@@ -90,6 +92,7 @@ namespace IncendianFalls {
               level.terrain,
               rand,
               levelSuperstate.NumWalkableLocations(false) / 20,
+              (loc) => true,
               true,
               false);
 
@@ -246,7 +249,8 @@ namespace IncendianFalls {
       for (int i = 0; i < numAvelisk; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1,
+              (loc) => true, true, true)[0],
           game.time + 10,
           Avelisk.Make(level.root));
       }
@@ -254,7 +258,7 @@ namespace IncendianFalls {
       for (int i = 0; i < numNovafaire; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           game.time + 10,
           Novafaire.Make(level.root));
       }
@@ -262,7 +266,7 @@ namespace IncendianFalls {
       for (int i = 0; i < numDraxling; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           game.time + 10,
           Draxling.Make(level.root));
       }
@@ -270,7 +274,7 @@ namespace IncendianFalls {
       for (int i = 0; i < numLornix; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           game.time + 10,
           Lornix.Make(level.root));
       }
@@ -278,7 +282,7 @@ namespace IncendianFalls {
       for (int i = 0; i < numYoten; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           game.time + 10,
           Yoten.Make(level.root));
       }
@@ -286,7 +290,7 @@ namespace IncendianFalls {
       for (int i = 0; i < numSpiriad; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           game.time + 10,
           Spiriad.Make(level.root));
       }
@@ -294,7 +298,7 @@ namespace IncendianFalls {
       for (int i = 0; i < numMordranth; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, true, true)[0],
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => true, true, true)[0],
           game.time + 10,
           Mordranth.Make(level.root));
       }

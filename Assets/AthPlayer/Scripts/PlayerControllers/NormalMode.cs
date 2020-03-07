@@ -66,14 +66,14 @@ namespace AthPlayer {
       return "No unit there!";
     }
 
-    public void DefendClicked() {
+    public void DefyClicked() {
       narrator.ClearMessage();
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
         ss.GetRoot().logger.Error("Not your turn!");
         delegat.AfterDidSomething();
         return;
       }
-      string defendResult = ss.RequestDefend(game.id);
+      string defendResult = ss.RequestDefy(game.id);
       if (defendResult != "") {
         narrator.ShowMessage(defendResult);
         delegat.AfterDidSomething();
@@ -120,6 +120,17 @@ namespace AthPlayer {
 
       narrator.ClearMessage();
       delegat.SwitchToFireMode();
+    }
+
+    public void MireClicked() {
+      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
+        ss.GetRoot().logger.Error("Not your turn!");
+        delegat.AfterDidSomething();
+        return;
+      }
+
+      narrator.ClearMessage();
+      delegat.SwitchToMireMode();
     }
 
     public void InteractClicked() {

@@ -72,6 +72,7 @@
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\FireMode.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\IMode.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\Looker.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\MireMode.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\NormalMode.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\PlayerController.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\Resumer.cs" />

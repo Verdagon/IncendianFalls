@@ -14,12 +14,12 @@ namespace ConsoleDriveyThing {
 
       bool isUsingSpecialAbility = false;
 
-      bool isDefending = false;
+      bool isDefying = false;
       foreach (var detail in unit.components) {
-        if (detail is ShieldingUCAsIUnitComponent) {
-          isDefending = true;
+        if (detail is DefyingUCAsIUnitComponent) {
+          isDefying = true;
         } else if (detail is CounteringUCAsIUnitComponent) {
-          isDefending = true;
+          isDefying = true;
         } else if (detail is WanderAICapabilityUCAsIUnitComponent) {
         } else if (detail is AttackAICapabilityUCAsIUnitComponent) {
         } else if (detail is GlaiveAsIUnitComponent) {
@@ -44,7 +44,7 @@ namespace ConsoleDriveyThing {
       bool hasArmor = unit.components.GetAllArmor().Count > 0;
       bool hasGlaive = unit.components.GetAllGlaive().Count > 0;
 
-      bool boostedDefense = isDefending || hasArmor;
+      bool boostedDefense = isDefying || hasArmor;
       bool boostedOffense = hasGlaive;
       if (isUsingSpecialAbility) {
         backgroundColor = ConsoleColor.Red;

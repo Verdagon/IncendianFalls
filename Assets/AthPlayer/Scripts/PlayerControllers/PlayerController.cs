@@ -102,8 +102,8 @@ namespace Domino {
     //public void OnTileMouseOut(Location location) {
     //}
 
-    public void DefendClicked() {
-      mode.DefendClicked();
+    public void DefyClicked() {
+      mode.DefyClicked();
     }
 
     public void CounterClicked() {
@@ -112,6 +112,10 @@ namespace Domino {
 
     public void FireClicked() {
       mode.FireClicked();
+    }
+
+    public void MireClicked() {
+      mode.MireClicked();
     }
 
     public void InteractClicked() {
@@ -225,6 +229,10 @@ namespace Domino {
 
     public void SwitchToFireMode() {
       mode = new FireMode(ss, superstate, game, this, narrator);
+    }
+
+    public void SwitchToMireMode() {
+      mode = new MireMode(ss, superstate, game, this, narrator);
     }
 
     public void OnGameEffect(IGameEffect effect) { effect.visit(this);  }

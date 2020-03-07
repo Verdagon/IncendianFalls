@@ -5,14 +5,17 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class IPreActingUCWeakMutBunchIncarnation {
-  public readonly int membersShieldingUCWeakMutSet;
+  public readonly int membersMiredUCWeakMutSet;
+  public readonly int membersDefyingUCWeakMutSet;
   public readonly int membersCounteringUCWeakMutSet;
   public readonly int membersAttackAICapabilityUCWeakMutSet;
   public IPreActingUCWeakMutBunchIncarnation(
-      int membersShieldingUCWeakMutSet,
+      int membersMiredUCWeakMutSet,
+      int membersDefyingUCWeakMutSet,
       int membersCounteringUCWeakMutSet,
       int membersAttackAICapabilityUCWeakMutSet) {
-    this.membersShieldingUCWeakMutSet = membersShieldingUCWeakMutSet;
+    this.membersMiredUCWeakMutSet = membersMiredUCWeakMutSet;
+    this.membersDefyingUCWeakMutSet = membersDefyingUCWeakMutSet;
     this.membersCounteringUCWeakMutSet = membersCounteringUCWeakMutSet;
     this.membersAttackAICapabilityUCWeakMutSet = membersAttackAICapabilityUCWeakMutSet;
   }

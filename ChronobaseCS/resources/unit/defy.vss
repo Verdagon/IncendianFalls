@@ -1,0 +1,47 @@
+
+mut struct DefyImpulse {
+  DefyImpulse isa IImpulse;
+
+  weight: Int;
+
+  fn Destruct(this: DefyImpulse overrides IDestructible): Void {
+    DefyImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: DefyImpulse overrides IImpulse): Int {
+    DefyImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: DefyImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    DefyImpulseExtensions.Enact
+  }
+}
+
+mut struct DefyingUC {
+  DefyingUC isa IDefenseFactorUC;
+  DefyingUC isa IPreActingUC;
+
+  fn Destruct(this: DefyingUC overrides IDestructible): Void {
+    DefyingUCExtensions.Destruct
+  }
+  fn GetIncomingDamageAddConstant(
+      this: DefyingUC overrides IDefenseFactorUC)
+  : Int {
+    DefyingUCExtensions.GetIncomingDamageAddConstant
+  }
+  fn GetIncomingDamageMultiplierPercent(
+      this: DefyingUC overrides IDefenseFactorUC)
+  : Int {
+    DefyingUCExtensions.GetIncomingDamageMultiplierPercent
+  }
+  fn PreAct(
+      detail: DefyingUC overrides IPreActingUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool {
+    DefyingUCExtensions.PreAct
+  }
+}

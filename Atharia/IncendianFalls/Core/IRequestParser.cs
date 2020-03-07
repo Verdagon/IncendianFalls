@@ -19,12 +19,14 @@ public static class IRequestParser {
         return new FollowDirectiveRequestAsIRequest(FollowDirectiveRequest.Parse(source));
       case "CounterRequest":
         return new CounterRequestAsIRequest(CounterRequest.Parse(source));
-      case "DefendRequest":
-        return new DefendRequestAsIRequest(DefendRequest.Parse(source));
+      case "DefyRequest":
+        return new DefyRequestAsIRequest(DefyRequest.Parse(source));
       case "MoveRequest":
         return new MoveRequestAsIRequest(MoveRequest.Parse(source));
       case "CheatRequest":
         return new CheatRequestAsIRequest(CheatRequest.Parse(source));
+      case "MireRequest":
+        return new MireRequestAsIRequest(MireRequest.Parse(source));
       case "FireRequest":
         return new FireRequestAsIRequest(FireRequest.Parse(source));
       case "AttackRequest":

@@ -8,9 +8,10 @@ public class IUnitComponentMutBunchIncarnation {
   public readonly int membersWanderAICapabilityUCMutSet;
   public readonly int membersSummonAICapabilityUCMutSet;
   public readonly int membersTimeCloneAICapabilityUCMutSet;
+  public readonly int membersMiredUCMutSet;
   public readonly int membersAttackAICapabilityUCMutSet;
   public readonly int membersCounteringUCMutSet;
-  public readonly int membersShieldingUCMutSet;
+  public readonly int membersDefyingUCMutSet;
   public readonly int membersBideAICapabilityUCMutSet;
   public readonly int membersBaseMovementTimeUCMutSet;
   public readonly int membersBaseCombatTimeUCMutSet;
@@ -26,9 +27,10 @@ public class IUnitComponentMutBunchIncarnation {
       int membersWanderAICapabilityUCMutSet,
       int membersSummonAICapabilityUCMutSet,
       int membersTimeCloneAICapabilityUCMutSet,
+      int membersMiredUCMutSet,
       int membersAttackAICapabilityUCMutSet,
       int membersCounteringUCMutSet,
-      int membersShieldingUCMutSet,
+      int membersDefyingUCMutSet,
       int membersBideAICapabilityUCMutSet,
       int membersBaseMovementTimeUCMutSet,
       int membersBaseCombatTimeUCMutSet,
@@ -43,9 +45,10 @@ public class IUnitComponentMutBunchIncarnation {
     this.membersWanderAICapabilityUCMutSet = membersWanderAICapabilityUCMutSet;
     this.membersSummonAICapabilityUCMutSet = membersSummonAICapabilityUCMutSet;
     this.membersTimeCloneAICapabilityUCMutSet = membersTimeCloneAICapabilityUCMutSet;
+    this.membersMiredUCMutSet = membersMiredUCMutSet;
     this.membersAttackAICapabilityUCMutSet = membersAttackAICapabilityUCMutSet;
     this.membersCounteringUCMutSet = membersCounteringUCMutSet;
-    this.membersShieldingUCMutSet = membersShieldingUCMutSet;
+    this.membersDefyingUCMutSet = membersDefyingUCMutSet;
     this.membersBideAICapabilityUCMutSet = membersBideAICapabilityUCMutSet;
     this.membersBaseMovementTimeUCMutSet = membersBaseMovementTimeUCMutSet;
     this.membersBaseCombatTimeUCMutSet = membersBaseCombatTimeUCMutSet;

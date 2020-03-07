@@ -1,8 +1,8 @@
 ﻿using System;
 
 namespace Atharia.Model {
-  public static class UnitShieldingEventExtensions {
-    public static int GetTime(this Atharia.Model.UnitShieldingEvent e) {
+  public static class UnitDefyingEventExtensions {
+    public static int GetTime(this Atharia.Model.UnitDefyingEvent e) {
       return e.time;
     }
   }

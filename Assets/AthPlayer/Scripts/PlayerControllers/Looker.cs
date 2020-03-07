@@ -29,7 +29,7 @@ namespace AthPlayer {
       var symbolsAndLabels = new List<KeyValuePair<SymbolDescription, string>>();
 
       foreach (var detail in unit.components) {
-        if (detail is ShieldingUCAsIUnitComponent shielding) {
+        if (detail is DefyingUCAsIUnitComponent Defying) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
@@ -39,7 +39,18 @@ namespace AthPlayer {
                     0,
                     OutlineMode.NoOutline,
                     new UnityEngine.Color(0, 0, 0)),
-                "Shielding"));
+                "Defying"));
+        } else if (detail is MiredUCAsIUnitComponent mired) {
+          symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                new SymbolDescription(
+                    "e",
+                    50,
+                    new UnityEngine.Color(1, 1, 1, 1.5f),
+                    0,
+                    OutlineMode.NoOutline,
+                    new UnityEngine.Color(0, 0, 0)),
+                "Mired"));
         } else if (detail is WanderAICapabilityUCAsIUnitComponent) {
         } else if (detail is AttackAICapabilityUCAsIUnitComponent) {
         } else if (detail is BideAICapabilityUCAsIUnitComponent bideI) {

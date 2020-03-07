@@ -66,7 +66,7 @@ namespace ConsoleDriveyThing {
           int action = random.Next() % numPossibleActions;
 
           if (action == 0) {
-            string defendResult = ss.RequestDefend(game.id);
+            string defendResult = ss.RequestDefy(game.id);
             if (defendResult == "") {
               ss.RequestResume(game.id);
             } else { 

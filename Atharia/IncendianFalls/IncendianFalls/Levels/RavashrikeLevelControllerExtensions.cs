@@ -34,7 +34,7 @@ namespace Atharia.Model {
 
       var enemyLocation =
           levelSuperstate.GetNRandomWalkableLocations(
-              level.terrain, game.rand, 1, true, true)[0];
+              level.terrain, game.rand, 1, (loc) => true, true, true)[0];
 
       level.EnterUnit(
         levelSuperstate,
