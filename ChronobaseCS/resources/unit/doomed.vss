@@ -1,0 +1,19 @@
+
+mut struct DoomedUC {
+  DoomedUC isa IPreActingUC;
+
+  deathTime: Int;
+
+  fn Destruct(this: DoomedUC overrides IDestructible): Void {
+    DoomedUCExtensions.Destruct
+  }
+
+  fn PreAct(
+      detail: DoomedUC overrides IPreActingUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool {
+    DoomedUCExtensions.PreAct
+  }
+}

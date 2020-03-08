@@ -189,12 +189,15 @@ namespace IncendianFalls {
       var executionState = game.executionState;
       var unit = executionState.actingUnit;
       var remainingPostActingDetails = executionState.remainingPostActingUnitComponents;
-      Asserts.Assert(remainingPostActingDetails.Exists());
-      Asserts.Assert(executionState.actingUnitDidAction);
+      Asserts.Assert(remainingPostActingDetails.Exists(), "details dont exist!");
+      Asserts.Assert(executionState.actingUnitDidAction, "acting unit didnt do action!");
 
       while (remainingPostActingDetails.Count > 0) {
         var detail = remainingPostActingDetails.GetArbitrary();
         remainingPostActingDetails.Remove(detail);
+        if (!unit.alive) {
+          continue;
+        }
         if (!detail.Exists()) {
           continue;
         }
@@ -287,6 +290,8 @@ namespace IncendianFalls {
           if (nextUnit.NullableIs(game.player)) {
             return; // To be continued... via ContinueAtStartTurn.
           } else {
+            Asserts.Assert(!superstate.levelSuperstate.ContainsUnit(nextUnit.location)); // curiosity, we might need a:
+            //superstate.levelSuperstate.RemoveUnit(nextUnit);
             game.level.units.Remove(nextUnit);
             nextUnit.Destruct();
             continue;
@@ -344,6 +349,9 @@ namespace IncendianFalls {
       while (remainingPreActingDetails.Count > 0) {
         var detail = remainingPreActingDetails.GetArbitrary();
         remainingPreActingDetails.Remove(detail);
+        if (!unit.alive) {
+          continue;
+        }
         if (!detail.Exists()) {
           continue;
         }
@@ -407,12 +415,18 @@ namespace IncendianFalls {
         //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
         return; // To be continued... via PlayerAttack, PlayerMove, etc.
       } else {
-        bool ret = EnemyAI.AI(game, superstate, unit);
-        executionState.actingUnitDidAction = true;
-        //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        if (unit.alive) {
+          bool ret = EnemyAI.AI(game, superstate, unit);
+          executionState.actingUnitDidAction = true;
+          //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-        if (ret) {
-          return; // To be continued... via ContinueAfterUnitAction.
+          if (ret) {
+            return; // To be continued... via ContinueAfterUnitAction.
+          }
+        } else {
+          // If its not alive, itll skip its post actions and be cleaned up in the next transition to
+          // this unit's turn.
+          executionState.actingUnitDidAction = true;
         }
       }
 

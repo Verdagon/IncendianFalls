@@ -1,0 +1,43 @@
+
+mut struct TemporaryCloneAICapabilityUC {
+  TemporaryCloneAICapabilityUC isa IAICapabilityUC;
+
+  blueprintName: Str;
+  var charges: Int;
+
+  fn Destruct(this: TemporaryCloneAICapabilityUC overrides IDestructible): Void {
+    TemporaryCloneAICapabilityUCExtensions.Destruct
+  }
+  fn ProduceImpulse(
+      this: TemporaryCloneAICapabilityUC overrides IAICapabilityUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : IImpulse {
+    TemporaryCloneAICapabilityUCExtensions.ProduceImpulse
+  }
+}
+
+// Assumes there's an kill directive right now.
+mut struct TemporaryCloneImpulse {
+  TemporaryCloneImpulse isa IImpulse;
+
+  weight: Int;
+  blueprintName: Str;
+  location: Location;
+  hp: Int;
+
+  fn Destruct(this: TemporaryCloneImpulse overrides IDestructible): Void {
+    TemporaryCloneImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: TemporaryCloneImpulse overrides IImpulse): Int {
+    TemporaryCloneImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: TemporaryCloneImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    TemporaryCloneImpulseExtensions.Enact
+  }
+}

@@ -64,7 +64,7 @@ namespace Atharia.Model {
         game,
         level,
         levelSuperstate,
-        (loc) => true,
+        (loc) => !loc.Equals(entryLoc),
         /*numIrkling=*/ 10 * numSpaces / 200,
         /*numDraxling=*/ 8 * numSpaces / 200,
         /*numRavagianTrask=*/ 3 * numSpaces / 200,

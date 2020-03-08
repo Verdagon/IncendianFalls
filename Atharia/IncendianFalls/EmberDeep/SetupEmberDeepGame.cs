@@ -40,7 +40,7 @@ namespace EmberDeep {
             null,
             null);
 
-      bool playDirtRoad = false;
+      bool playDirtRoad = true;
       bool playBackstory = false;
       bool playTutorial1 = false;
       bool playTutorial2 = false;

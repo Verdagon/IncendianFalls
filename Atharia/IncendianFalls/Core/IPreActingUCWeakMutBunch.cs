@@ -35,6 +35,10 @@ public class IPreActingUCWeakMutBunch {
   }
   public void CheckForNullViolations(List<string> violations) {
 
+    if (!root.DoomedUCWeakMutSetExists(membersDoomedUCWeakMutSet.id)) {
+      violations.Add("Null constraint violated! IPreActingUCWeakMutBunch#" + id + ".membersDoomedUCWeakMutSet");
+    }
+
     if (!root.MiredUCWeakMutSetExists(membersMiredUCWeakMutSet.id)) {
       violations.Add("Null constraint violated! IPreActingUCWeakMutBunch#" + id + ".membersMiredUCWeakMutSet");
     }
@@ -60,6 +64,9 @@ public class IPreActingUCWeakMutBunch {
       return;
     }
     foundIds.Add(id);
+    if (root.DoomedUCWeakMutSetExists(membersDoomedUCWeakMutSet.id)) {
+      membersDoomedUCWeakMutSet.FindReachableObjects(foundIds);
+    }
     if (root.MiredUCWeakMutSetExists(membersMiredUCWeakMutSet.id)) {
       membersMiredUCWeakMutSet.FindReachableObjects(foundIds);
     }
@@ -85,7 +92,16 @@ public class IPreActingUCWeakMutBunch {
     }
     return this.root == that.root && id == that.id;
   }
-         public MiredUCWeakMutSet membersMiredUCWeakMutSet {
+         public DoomedUCWeakMutSet membersDoomedUCWeakMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersDoomedUCWeakMutSet of null!");
+      }
+      return new DoomedUCWeakMutSet(root, incarnation.membersDoomedUCWeakMutSet);
+    }
+                       }
+  public MiredUCWeakMutSet membersMiredUCWeakMutSet {
 
     get {
       if (root == null) {
@@ -133,6 +149,8 @@ public class IPreActingUCWeakMutBunch {
 
   public static IPreActingUCWeakMutBunch New(Root root) {
     return root.EffectIPreActingUCWeakMutBunchCreate(
+      root.EffectDoomedUCWeakMutSetCreate()
+,
       root.EffectMiredUCWeakMutSetCreate()
 ,
       root.EffectInvincibilityUCWeakMutSetCreate()
@@ -145,6 +163,12 @@ public class IPreActingUCWeakMutBunch {
         );
   }
   public void Add(IPreActingUC elementI) {
+
+    // Can optimize, check the type of element directly somehow
+    if (root.DoomedUCExists(elementI.id)) {
+      this.membersDoomedUCWeakMutSet.Add(root.GetDoomedUC(elementI.id));
+      return;
+    }
 
     // Can optimize, check the type of element directly somehow
     if (root.MiredUCExists(elementI.id)) {
@@ -180,6 +204,12 @@ public class IPreActingUCWeakMutBunch {
   public void Remove(IPreActingUC elementI) {
 
     // Can optimize, check the type of element directly somehow
+    if (root.DoomedUCExists(elementI.id)) {
+      this.membersDoomedUCWeakMutSet.Remove(root.GetDoomedUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.MiredUCExists(elementI.id)) {
       this.membersMiredUCWeakMutSet.Remove(root.GetMiredUC(elementI.id));
       return;
@@ -211,6 +241,7 @@ public class IPreActingUCWeakMutBunch {
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
+    this.membersDoomedUCWeakMutSet.Clear();
     this.membersMiredUCWeakMutSet.Clear();
     this.membersInvincibilityUCWeakMutSet.Clear();
     this.membersDefyingUCWeakMutSet.Clear();
@@ -220,6 +251,7 @@ public class IPreActingUCWeakMutBunch {
   public int Count {
     get {
       return
+        this.membersDoomedUCWeakMutSet.Count +
         this.membersMiredUCWeakMutSet.Count +
         this.membersInvincibilityUCWeakMutSet.Count +
         this.membersDefyingUCWeakMutSet.Count +
@@ -236,6 +268,7 @@ public class IPreActingUCWeakMutBunch {
   }
 
   public void Destruct() {
+    var tempMembersDoomedUCWeakMutSet = this.membersDoomedUCWeakMutSet;
     var tempMembersMiredUCWeakMutSet = this.membersMiredUCWeakMutSet;
     var tempMembersInvincibilityUCWeakMutSet = this.membersInvincibilityUCWeakMutSet;
     var tempMembersDefyingUCWeakMutSet = this.membersDefyingUCWeakMutSet;
@@ -243,6 +276,7 @@ public class IPreActingUCWeakMutBunch {
     var tempMembersAttackAICapabilityUCWeakMutSet = this.membersAttackAICapabilityUCWeakMutSet;
 
     this.Delete();
+    tempMembersDoomedUCWeakMutSet.Destruct();
     tempMembersMiredUCWeakMutSet.Destruct();
     tempMembersInvincibilityUCWeakMutSet.Destruct();
     tempMembersDefyingUCWeakMutSet.Destruct();
@@ -250,6 +284,9 @@ public class IPreActingUCWeakMutBunch {
     tempMembersAttackAICapabilityUCWeakMutSet.Destruct();
   }
   public IEnumerator<IPreActingUC> GetEnumerator() {
+    foreach (var element in this.membersDoomedUCWeakMutSet) {
+      yield return new DoomedUCAsIPreActingUC(element);
+    }
     foreach (var element in this.membersMiredUCWeakMutSet) {
       yield return new MiredUCAsIPreActingUC(element);
     }
@@ -266,6 +303,27 @@ public class IPreActingUCWeakMutBunch {
       yield return new AttackAICapabilityUCAsIPreActingUC(element);
     }
   }
+    public List<DoomedUC> GetAllDoomedUC() {
+      var result = new List<DoomedUC>();
+      foreach (var thing in this.membersDoomedUCWeakMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<DoomedUC> ClearAllDoomedUC() {
+      var result = new List<DoomedUC>();
+      this.membersDoomedUCWeakMutSet.Clear();
+      return result;
+    }
+    public DoomedUC GetOnlyDoomedUCOrNull() {
+      var result = GetAllDoomedUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return DoomedUC.Null;
+      }
+    }
     public List<MiredUC> GetAllMiredUC() {
       var result = new List<MiredUC>();
       foreach (var thing in this.membersMiredUCWeakMutSet) {

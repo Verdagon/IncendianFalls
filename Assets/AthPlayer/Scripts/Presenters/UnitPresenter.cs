@@ -312,9 +312,13 @@ namespace AthPlayer {
       } else if (component is SorcerousUCAsIUnitComponent) {
       } else if (component is BaseCombatTimeUCAsIUnitComponent) {
       } else if (component is SummonAICapabilityUCAsIUnitComponent) {
+      } else if (component is TemporaryCloneAICapabilityUC) {
       } else if (component is BaseMovementTimeUCAsIUnitComponent) {
       } else if (component is BaseOffenseUCAsIUnitComponent) {
       } else if (component is BaseDefenseUCAsIUnitComponent) {
+      } else if (component is DoomedUCAsIUnitComponent) {
+        unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is TemporaryCloneAICapabilityUCAsIUnitComponent) {
       } else if (component is TimeCloneAICapabilityUCAsIUnitComponent) {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is ManaPotionAsIUnitComponent) {
@@ -458,6 +462,22 @@ namespace AthPlayer {
                         false,
                         new UnityEngine.Color(1, 1, 1, 1.5f))));
           }
+        } else if (detail is TemporaryCloneAICapabilityUCAsIUnitComponent tca) {
+        } else if (detail is DoomedUCAsIUnitComponent d) {
+          detailSymbols.Add(
+              new KeyValuePair<int, ExtrudedSymbolDescription>(
+                  d.id,
+                  new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          "l",
+                            50,
+                          new UnityEngine.Color(1, 1, 1, 1.5f),
+                          0,
+                          OutlineMode.WithBackOutline,
+                          new UnityEngine.Color(0, 0, 0)),
+                      false,
+                      new UnityEngine.Color(1, 1, 1, 1.5f))));
         } else if (detail is TimeCloneAICapabilityUCAsIUnitComponent tc) {
           detailSymbols.Add(
               new KeyValuePair<int, ExtrudedSymbolDescription>(
@@ -743,6 +763,21 @@ namespace AthPlayer {
               mpRatio));
       detailsByClassId.Add(
           "MantisBombardier",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "e",
+                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  false, new UnityEngine.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "Chronolisk",
           new UnitDescription(
               unit.id,
               new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),

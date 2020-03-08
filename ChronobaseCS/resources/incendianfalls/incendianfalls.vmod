@@ -60,7 +60,8 @@ unit/stats/movementtime.vss
 unit/stats/offense.vss
 unit/stats/sorcerous.vss
 unit/summon.vss
-unit/summon.vss
+unit/temporaryclone.vss
+unit/doomed.vss
 unit/unit.vss
 unit/unitcomponent.vss
 unit/unitevent.vss

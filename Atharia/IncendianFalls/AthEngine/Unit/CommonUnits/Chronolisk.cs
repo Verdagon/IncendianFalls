@@ -9,7 +9,8 @@ namespace IncendianFalls {
       var components = IUnitComponentMutBunch.New(root);
       components.Add(root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
       components.Add(root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
-      components.Add(root.EffectBaseOffenseUCCreate(25, 100).AsIUnitComponent());
+      components.Add(root.EffectTemporaryCloneAICapabilityUCCreate("Chronolisk", 3).AsIUnitComponent());
+      components.Add(root.EffectBaseOffenseUCCreate(9, 100).AsIUnitComponent());
       return
           root.EffectUnitCreate(
               root.EffectIUnitEventMutListCreate(),
@@ -18,7 +19,7 @@ namespace IncendianFalls {
               new Location(0, 0, 0),
               "Chronolisk",
               0,
-              100, 100,
+              40, 40,
               components,
               false);
     }

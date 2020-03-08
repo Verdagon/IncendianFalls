@@ -84,6 +84,7 @@ namespace AthPlayer {
         } else if (detail is SorcerousUCAsIUnitComponent) {
         } else if (detail is BaseCombatTimeUCAsIUnitComponent) {
         } else if (detail is BaseMovementTimeUCAsIUnitComponent) {
+        } else if (detail is SummonAICapabilityUCAsIUnitComponent) {
         } else if (detail is BaseOffenseUCAsIUnitComponent) {
         } else if (detail is BaseDefenseUCAsIUnitComponent) {
         } else if (detail is BlastRodAsIUnitComponent) {
@@ -130,6 +131,7 @@ namespace AthPlayer {
                     OutlineMode.NoOutline,
                     new UnityEngine.Color(0, 0, 0)),
                 "Ring of Speed"));
+        } else if (detail is TemporaryCloneAICapabilityUCAsIUnitComponent) {
         } else if (detail is TimeCloneAICapabilityUCAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
@@ -140,7 +142,18 @@ namespace AthPlayer {
                       0,
                       OutlineMode.NoOutline,
                       new UnityEngine.Color(0, 0, 0)),
-                  "Previous Self"));
+                  "Previous Incarnation"));
+        } else if (detail is DoomedUCAsIUnitComponent) {
+          symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                  new SymbolDescription(
+                      "k",
+                    50,
+                      new UnityEngine.Color(1, 1, 1, 1.5f),
+                      0,
+                      OutlineMode.NoOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  "Previous Incarnation"));
         } else {
           Debug.LogError("Unknown detail type: " + detail);
         }

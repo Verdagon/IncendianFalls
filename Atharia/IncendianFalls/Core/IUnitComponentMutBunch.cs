@@ -39,6 +39,10 @@ public class IUnitComponentMutBunch {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersWanderAICapabilityUCMutSet");
     }
 
+    if (!root.TemporaryCloneAICapabilityUCMutSetExists(membersTemporaryCloneAICapabilityUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersTemporaryCloneAICapabilityUCMutSet");
+    }
+
     if (!root.SummonAICapabilityUCMutSetExists(membersSummonAICapabilityUCMutSet.id)) {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersSummonAICapabilityUCMutSet");
     }
@@ -53,6 +57,10 @@ public class IUnitComponentMutBunch {
 
     if (!root.TimeCloneAICapabilityUCMutSetExists(membersTimeCloneAICapabilityUCMutSet.id)) {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersTimeCloneAICapabilityUCMutSet");
+    }
+
+    if (!root.DoomedUCMutSetExists(membersDoomedUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersDoomedUCMutSet");
     }
 
     if (!root.MiredUCMutSetExists(membersMiredUCMutSet.id)) {
@@ -131,6 +139,9 @@ public class IUnitComponentMutBunch {
     if (root.WanderAICapabilityUCMutSetExists(membersWanderAICapabilityUCMutSet.id)) {
       membersWanderAICapabilityUCMutSet.FindReachableObjects(foundIds);
     }
+    if (root.TemporaryCloneAICapabilityUCMutSetExists(membersTemporaryCloneAICapabilityUCMutSet.id)) {
+      membersTemporaryCloneAICapabilityUCMutSet.FindReachableObjects(foundIds);
+    }
     if (root.SummonAICapabilityUCMutSetExists(membersSummonAICapabilityUCMutSet.id)) {
       membersSummonAICapabilityUCMutSet.FindReachableObjects(foundIds);
     }
@@ -142,6 +153,9 @@ public class IUnitComponentMutBunch {
     }
     if (root.TimeCloneAICapabilityUCMutSetExists(membersTimeCloneAICapabilityUCMutSet.id)) {
       membersTimeCloneAICapabilityUCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.DoomedUCMutSetExists(membersDoomedUCMutSet.id)) {
+      membersDoomedUCMutSet.FindReachableObjects(foundIds);
     }
     if (root.MiredUCMutSetExists(membersMiredUCMutSet.id)) {
       membersMiredUCMutSet.FindReachableObjects(foundIds);
@@ -213,6 +227,15 @@ public class IUnitComponentMutBunch {
       return new WanderAICapabilityUCMutSet(root, incarnation.membersWanderAICapabilityUCMutSet);
     }
                        }
+  public TemporaryCloneAICapabilityUCMutSet membersTemporaryCloneAICapabilityUCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersTemporaryCloneAICapabilityUCMutSet of null!");
+      }
+      return new TemporaryCloneAICapabilityUCMutSet(root, incarnation.membersTemporaryCloneAICapabilityUCMutSet);
+    }
+                       }
   public SummonAICapabilityUCMutSet membersSummonAICapabilityUCMutSet {
 
     get {
@@ -247,6 +270,15 @@ public class IUnitComponentMutBunch {
         throw new Exception("Tried to get member membersTimeCloneAICapabilityUCMutSet of null!");
       }
       return new TimeCloneAICapabilityUCMutSet(root, incarnation.membersTimeCloneAICapabilityUCMutSet);
+    }
+                       }
+  public DoomedUCMutSet membersDoomedUCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersDoomedUCMutSet of null!");
+      }
+      return new DoomedUCMutSet(root, incarnation.membersDoomedUCMutSet);
     }
                        }
   public MiredUCMutSet membersMiredUCMutSet {
@@ -407,6 +439,8 @@ public class IUnitComponentMutBunch {
     return root.EffectIUnitComponentMutBunchCreate(
       root.EffectWanderAICapabilityUCMutSetCreate()
 ,
+      root.EffectTemporaryCloneAICapabilityUCMutSetCreate()
+,
       root.EffectSummonAICapabilityUCMutSetCreate()
 ,
       root.EffectKamikazeAICapabilityUCMutSetCreate()
@@ -414,6 +448,8 @@ public class IUnitComponentMutBunch {
       root.EffectGuardAICapabilityUCMutSetCreate()
 ,
       root.EffectTimeCloneAICapabilityUCMutSetCreate()
+,
+      root.EffectDoomedUCMutSetCreate()
 ,
       root.EffectMiredUCMutSetCreate()
 ,
@@ -459,6 +495,12 @@ public class IUnitComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.TemporaryCloneAICapabilityUCExists(elementI.id)) {
+      this.membersTemporaryCloneAICapabilityUCMutSet.Add(root.GetTemporaryCloneAICapabilityUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.SummonAICapabilityUCExists(elementI.id)) {
       this.membersSummonAICapabilityUCMutSet.Add(root.GetSummonAICapabilityUC(elementI.id));
       return;
@@ -479,6 +521,12 @@ public class IUnitComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.TimeCloneAICapabilityUCExists(elementI.id)) {
       this.membersTimeCloneAICapabilityUCMutSet.Add(root.GetTimeCloneAICapabilityUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.DoomedUCExists(elementI.id)) {
+      this.membersDoomedUCMutSet.Add(root.GetDoomedUC(elementI.id));
       return;
     }
 
@@ -594,6 +642,12 @@ public class IUnitComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.TemporaryCloneAICapabilityUCExists(elementI.id)) {
+      this.membersTemporaryCloneAICapabilityUCMutSet.Remove(root.GetTemporaryCloneAICapabilityUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.SummonAICapabilityUCExists(elementI.id)) {
       this.membersSummonAICapabilityUCMutSet.Remove(root.GetSummonAICapabilityUC(elementI.id));
       return;
@@ -614,6 +668,12 @@ public class IUnitComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.TimeCloneAICapabilityUCExists(elementI.id)) {
       this.membersTimeCloneAICapabilityUCMutSet.Remove(root.GetTimeCloneAICapabilityUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.DoomedUCExists(elementI.id)) {
+      this.membersDoomedUCMutSet.Remove(root.GetDoomedUC(elementI.id));
       return;
     }
 
@@ -722,10 +782,12 @@ public class IUnitComponentMutBunch {
   }
   public void Clear() {
     this.membersWanderAICapabilityUCMutSet.Clear();
+    this.membersTemporaryCloneAICapabilityUCMutSet.Clear();
     this.membersSummonAICapabilityUCMutSet.Clear();
     this.membersKamikazeAICapabilityUCMutSet.Clear();
     this.membersGuardAICapabilityUCMutSet.Clear();
     this.membersTimeCloneAICapabilityUCMutSet.Clear();
+    this.membersDoomedUCMutSet.Clear();
     this.membersMiredUCMutSet.Clear();
     this.membersAttackAICapabilityUCMutSet.Clear();
     this.membersCounteringUCMutSet.Clear();
@@ -748,10 +810,12 @@ public class IUnitComponentMutBunch {
     get {
       return
         this.membersWanderAICapabilityUCMutSet.Count +
+        this.membersTemporaryCloneAICapabilityUCMutSet.Count +
         this.membersSummonAICapabilityUCMutSet.Count +
         this.membersKamikazeAICapabilityUCMutSet.Count +
         this.membersGuardAICapabilityUCMutSet.Count +
         this.membersTimeCloneAICapabilityUCMutSet.Count +
+        this.membersDoomedUCMutSet.Count +
         this.membersMiredUCMutSet.Count +
         this.membersAttackAICapabilityUCMutSet.Count +
         this.membersCounteringUCMutSet.Count +
@@ -781,10 +845,12 @@ public class IUnitComponentMutBunch {
 
   public void Destruct() {
     var tempMembersWanderAICapabilityUCMutSet = this.membersWanderAICapabilityUCMutSet;
+    var tempMembersTemporaryCloneAICapabilityUCMutSet = this.membersTemporaryCloneAICapabilityUCMutSet;
     var tempMembersSummonAICapabilityUCMutSet = this.membersSummonAICapabilityUCMutSet;
     var tempMembersKamikazeAICapabilityUCMutSet = this.membersKamikazeAICapabilityUCMutSet;
     var tempMembersGuardAICapabilityUCMutSet = this.membersGuardAICapabilityUCMutSet;
     var tempMembersTimeCloneAICapabilityUCMutSet = this.membersTimeCloneAICapabilityUCMutSet;
+    var tempMembersDoomedUCMutSet = this.membersDoomedUCMutSet;
     var tempMembersMiredUCMutSet = this.membersMiredUCMutSet;
     var tempMembersAttackAICapabilityUCMutSet = this.membersAttackAICapabilityUCMutSet;
     var tempMembersCounteringUCMutSet = this.membersCounteringUCMutSet;
@@ -805,10 +871,12 @@ public class IUnitComponentMutBunch {
 
     this.Delete();
     tempMembersWanderAICapabilityUCMutSet.Destruct();
+    tempMembersTemporaryCloneAICapabilityUCMutSet.Destruct();
     tempMembersSummonAICapabilityUCMutSet.Destruct();
     tempMembersKamikazeAICapabilityUCMutSet.Destruct();
     tempMembersGuardAICapabilityUCMutSet.Destruct();
     tempMembersTimeCloneAICapabilityUCMutSet.Destruct();
+    tempMembersDoomedUCMutSet.Destruct();
     tempMembersMiredUCMutSet.Destruct();
     tempMembersAttackAICapabilityUCMutSet.Destruct();
     tempMembersCounteringUCMutSet.Destruct();
@@ -831,6 +899,9 @@ public class IUnitComponentMutBunch {
     foreach (var element in this.membersWanderAICapabilityUCMutSet) {
       yield return new WanderAICapabilityUCAsIUnitComponent(element);
     }
+    foreach (var element in this.membersTemporaryCloneAICapabilityUCMutSet) {
+      yield return new TemporaryCloneAICapabilityUCAsIUnitComponent(element);
+    }
     foreach (var element in this.membersSummonAICapabilityUCMutSet) {
       yield return new SummonAICapabilityUCAsIUnitComponent(element);
     }
@@ -842,6 +913,9 @@ public class IUnitComponentMutBunch {
     }
     foreach (var element in this.membersTimeCloneAICapabilityUCMutSet) {
       yield return new TimeCloneAICapabilityUCAsIUnitComponent(element);
+    }
+    foreach (var element in this.membersDoomedUCMutSet) {
+      yield return new DoomedUCAsIUnitComponent(element);
     }
     foreach (var element in this.membersMiredUCMutSet) {
       yield return new MiredUCAsIUnitComponent(element);
@@ -914,6 +988,27 @@ public class IUnitComponentMutBunch {
         return result[0];
       } else {
         return WanderAICapabilityUC.Null;
+      }
+    }
+    public List<TemporaryCloneAICapabilityUC> GetAllTemporaryCloneAICapabilityUC() {
+      var result = new List<TemporaryCloneAICapabilityUC>();
+      foreach (var thing in this.membersTemporaryCloneAICapabilityUCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<TemporaryCloneAICapabilityUC> ClearAllTemporaryCloneAICapabilityUC() {
+      var result = new List<TemporaryCloneAICapabilityUC>();
+      this.membersTemporaryCloneAICapabilityUCMutSet.Clear();
+      return result;
+    }
+    public TemporaryCloneAICapabilityUC GetOnlyTemporaryCloneAICapabilityUCOrNull() {
+      var result = GetAllTemporaryCloneAICapabilityUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return TemporaryCloneAICapabilityUC.Null;
       }
     }
     public List<SummonAICapabilityUC> GetAllSummonAICapabilityUC() {
@@ -998,6 +1093,27 @@ public class IUnitComponentMutBunch {
         return result[0];
       } else {
         return TimeCloneAICapabilityUC.Null;
+      }
+    }
+    public List<DoomedUC> GetAllDoomedUC() {
+      var result = new List<DoomedUC>();
+      foreach (var thing in this.membersDoomedUCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<DoomedUC> ClearAllDoomedUC() {
+      var result = new List<DoomedUC>();
+      this.membersDoomedUCMutSet.Clear();
+      return result;
+    }
+    public DoomedUC GetOnlyDoomedUCOrNull() {
+      var result = GetAllDoomedUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return DoomedUC.Null;
       }
     }
     public List<MiredUC> GetAllMiredUC() {
@@ -1533,6 +1649,10 @@ public class IUnitComponentMutBunch {
         result.Add(
             new WanderAICapabilityUCAsIAICapabilityUC(obj));
       }
+      foreach (var obj in this.membersTemporaryCloneAICapabilityUCMutSet) {
+        result.Add(
+            new TemporaryCloneAICapabilityUCAsIAICapabilityUC(obj));
+      }
       foreach (var obj in this.membersSummonAICapabilityUCMutSet) {
         result.Add(
             new SummonAICapabilityUCAsIAICapabilityUC(obj));
@@ -1562,6 +1682,7 @@ public class IUnitComponentMutBunch {
     public List<IAICapabilityUC> ClearAllIAICapabilityUC() {
       var result = new List<IAICapabilityUC>();
       this.membersWanderAICapabilityUCMutSet.Clear();
+      this.membersTemporaryCloneAICapabilityUCMutSet.Clear();
       this.membersSummonAICapabilityUCMutSet.Clear();
       this.membersTimeCloneAICapabilityUCMutSet.Clear();
       this.membersKamikazeAICapabilityUCMutSet.Clear();
@@ -1655,6 +1776,10 @@ public class IUnitComponentMutBunch {
     }
                  public List<IPreActingUC> GetAllIPreActingUC() {
       var result = new List<IPreActingUC>();
+      foreach (var obj in this.membersDoomedUCMutSet) {
+        result.Add(
+            new DoomedUCAsIPreActingUC(obj));
+      }
       foreach (var obj in this.membersMiredUCMutSet) {
         result.Add(
             new MiredUCAsIPreActingUC(obj));
@@ -1679,6 +1804,7 @@ public class IUnitComponentMutBunch {
     }
     public List<IPreActingUC> ClearAllIPreActingUC() {
       var result = new List<IPreActingUC>();
+      this.membersDoomedUCMutSet.Clear();
       this.membersMiredUCMutSet.Clear();
       this.membersInvincibilityUCMutSet.Clear();
       this.membersDefyingUCMutSet.Clear();
