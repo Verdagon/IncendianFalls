@@ -27,7 +27,7 @@ namespace AthPlayer {
     public void OnTileMouseClick(Location newLocation) {
       narrator.ClearMessage();
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        ss.GetRoot().logger.Error("Not your turn!");
+        narrator.ShowMessage("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
@@ -69,7 +69,7 @@ namespace AthPlayer {
     public void DefyClicked() {
       narrator.ClearMessage();
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        ss.GetRoot().logger.Error("Not your turn!");
+        narrator.ShowMessage("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
@@ -97,7 +97,7 @@ namespace AthPlayer {
     public void CounterClicked() {
       narrator.ClearMessage();
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        ss.GetRoot().logger.Error("Not your turn!");
+        narrator.ShowMessage("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
@@ -121,7 +121,7 @@ namespace AthPlayer {
 
     public void FireClicked() {
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        ss.GetRoot().logger.Error("Not your turn!");
+        narrator.ShowMessage("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
@@ -132,7 +132,7 @@ namespace AthPlayer {
 
     public void FireBombClicked() {
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        ss.GetRoot().logger.Error("Not your turn!");
+        narrator.ShowMessage("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
@@ -143,7 +143,7 @@ namespace AthPlayer {
 
     public void MireClicked() {
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        ss.GetRoot().logger.Error("Not your turn!");
+        narrator.ShowMessage("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
@@ -155,7 +155,7 @@ namespace AthPlayer {
     public void InteractClicked() {
       narrator.ClearMessage();
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        ss.GetRoot().logger.Error("Not your turn!");
+        narrator.ShowMessage("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
@@ -172,7 +172,7 @@ namespace AthPlayer {
     public void TimeShiftClicked() {
       narrator.ClearMessage();
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        ss.GetRoot().logger.Error("Not your turn!");
+        narrator.ShowMessage("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }

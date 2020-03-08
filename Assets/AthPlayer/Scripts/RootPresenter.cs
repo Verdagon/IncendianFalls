@@ -21,6 +21,8 @@ namespace AthPlayer {
     ReplayLogger replayLogger;
     public Instantiator instantiator;
     public GameObject cameraObject;
+    public GameObject stalledIndicator;
+    public GameObject thinkingIndicator;
 
     OverlayPresenter overlayPresenter;
     GamePresenter gamePresenter;
@@ -43,6 +45,13 @@ namespace AthPlayer {
 
       resumeStaller = new ExecutionStaller(timer, timer);
       turnStaller = new ExecutionStaller(timer, timer);
+
+      turnStaller.stalledEvent += (x) => {
+        stalledIndicator.SetActive(true);
+      };
+      turnStaller.unstalledEvent += (x) => {
+        stalledIndicator.SetActive(false);
+      };
 
       var timestamp = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
@@ -68,7 +77,7 @@ namespace AthPlayer {
 
       gamePresenter =
           new GamePresenter(
-              timer, cinematicTimer, soundPlayer, resumeStaller, turnStaller, ss, game, instantiator, messageView, overlayPresenter, cameraController);
+              timer, cinematicTimer, soundPlayer, resumeStaller, turnStaller, thinkingIndicator, ss, game, instantiator, messageView, overlayPresenter, cameraController);
 
       playerController =
           new PlayerController(
@@ -178,39 +187,75 @@ namespace AthPlayer {
     }
 
     public void TimeAnchorMoveClicked() {
-      playerController.TimeAnchorMoveClicked();
+      thinkingIndicator.SetActive(true);
+      timer.ScheduleTimer(0, () => {
+        playerController.TimeAnchorMoveClicked();
+        thinkingIndicator.SetActive(false);
+      });
     }
 
     public void TimeShiftClicked() {
-      playerController.TimeShiftClicked();
+      thinkingIndicator.SetActive(true);
+      timer.ScheduleTimer(0, () => {
+        playerController.TimeShiftClicked();
+        thinkingIndicator.SetActive(false);
+      });
     }
 
     public void InteractClicked() {
-      playerController.InteractClicked();
+      thinkingIndicator.SetActive(true);
+      timer.ScheduleTimer(0, () => {
+        playerController.InteractClicked();
+        thinkingIndicator.SetActive(false);
+      });
     }
 
     public void DefyClicked() {
-      playerController.DefyClicked();
+      thinkingIndicator.SetActive(true);
+      timer.ScheduleTimer(0, () => {
+        playerController.DefyClicked();
+        thinkingIndicator.SetActive(false);
+      });
     }
 
     public void CounterClicked() {
-      playerController.CounterClicked();
+      thinkingIndicator.SetActive(true);
+      timer.ScheduleTimer(0, () => {
+        playerController.CounterClicked();
+        thinkingIndicator.SetActive(false);
+      });
     }
 
     public void FireClicked() {
-      playerController.FireClicked();
+      thinkingIndicator.SetActive(true);
+      timer.ScheduleTimer(0, () => {
+        playerController.FireClicked();
+        thinkingIndicator.SetActive(false);
+      });
     }
 
     public void FireBombClicked() {
-      playerController.FireBombClicked();
+      thinkingIndicator.SetActive(true);
+      timer.ScheduleTimer(0, () => {
+        playerController.FireBombClicked();
+        thinkingIndicator.SetActive(false);
+      });
     }
 
     public void MireClicked() {
-      playerController.MireClicked();
+      thinkingIndicator.SetActive(true);
+      timer.ScheduleTimer(0, () => {
+        playerController.MireClicked();
+        thinkingIndicator.SetActive(false);
+      });
     }
 
     public void CancelClicked() {
-      playerController.CancelClicked();
+      thinkingIndicator.SetActive(true);
+      timer.ScheduleTimer(0, () => {
+        playerController.CancelClicked();
+        thinkingIndicator.SetActive(false);
+      });
     }
 
   }

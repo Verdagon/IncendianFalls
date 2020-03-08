@@ -8,6 +8,8 @@ namespace Domino {
 
     public delegate void UnstalledHandler(object sender);
     public event UnstalledHandler unstalledEvent;
+    public delegate void StalledHandler(object sender);
+    public event StalledHandler stalledEvent;
 
     public ExecutionStaller(IClock clock, ITimer timer) {
       this.clock = clock;
@@ -16,6 +18,9 @@ namespace Domino {
     }
 
     public void StallForDuration(long durationMs) {
+      if (!IsStalled()) {
+        stalledEvent?.Invoke(new object());
+      }
       long currentTime = clock.GetTimeMs();
       long newStallUntilMs = currentTime + durationMs;
       if (newStallUntilMs > stallUntilMs) {

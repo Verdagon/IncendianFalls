@@ -18,6 +18,7 @@ namespace AthPlayer {
     SoundPlayer soundPlayer;
     ExecutionStaller resumeStaller;
     ExecutionStaller turnStaller;
+    GameObject thinkingIndicator;
     ISuperstructure ss;
     Game game;
     Level viewedLevel;
@@ -36,6 +37,7 @@ namespace AthPlayer {
         SoundPlayer soundPlayer,
         ExecutionStaller resumeStaller,
         ExecutionStaller turnStaller,
+        GameObject thinkingIndicator,
         ISuperstructure ss,
         Game game,
         Instantiator instantiator,
@@ -53,6 +55,7 @@ namespace AthPlayer {
       this.instantiator = instantiator;
       this.cameraController = cameraController;
       this.overlayPresenter = overlayPresenter;
+      this.thinkingIndicator = thinkingIndicator;
 
       game.AddObserver(this);
       game.events.AddObserver(this);
