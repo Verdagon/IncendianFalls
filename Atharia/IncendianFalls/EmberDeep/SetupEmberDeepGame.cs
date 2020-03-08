@@ -40,6 +40,7 @@ namespace EmberDeep {
             null,
             null);
 
+      bool playDirtRoad = false;
       bool playBackstory = false;
       bool playTutorial1 = false;
       bool playTutorial2 = false;
@@ -50,6 +51,25 @@ namespace EmberDeep {
 
       Level previousLevel = Level.Null;
       Location previousLevelExitLocation = null;
+
+      if (playDirtRoad) {
+        DirtRoadLevelControllerExtensions.LoadLevel(
+          out var level,
+          out var levelSuperstate,
+          out var entryLocation,
+          out var exitLocation,
+          game);
+        if (!startLevel.Exists()) {
+          startLevel = level;
+          startLevelEntryLocation = entryLocation;
+        }
+        if (previousLevel.Exists()) {
+          previousLevel.terrain.tiles[previousLevelExitLocation].components.Add(
+            game.root.EffectLevelLinkTTCCreate(true, level, entryLocation).AsITerrainTileComponent());
+        }
+        previousLevel = level;
+        previousLevelExitLocation = exitLocation;
+      }
 
       if (playBackstory) {
         SotaventoLevelControllerExtensions.LoadLevel(
@@ -131,6 +151,7 @@ namespace EmberDeep {
 
       Asserts.Assert(startLevel.Exists());
 
+      game.root.logger.Info("starting level: " + startLevel.controller.GetName());
       LevelLinkTTCExtensions.Travel(game, superstate, game.player, startLevel, startLevelEntryLocation, false);
 
       game.level.controller.SimpleTrigger(game, superstate, "firstLevelStart");

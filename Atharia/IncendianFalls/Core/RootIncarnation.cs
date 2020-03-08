@@ -24,6 +24,10 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<EvaporateImpulseIncarnation>> incarnationsEvaporateImpulse;
   public readonly SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCIncarnation>> incarnationsTimeCloneAICapabilityUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<MoveImpulseIncarnation>> incarnationsMoveImpulse;
+  public readonly SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCIncarnation>> incarnationsKamikazeTargetTTC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<KamikazeJumpImpulseIncarnation>> incarnationsKamikazeJumpImpulse;
+  public readonly SortedDictionary<int, VersionAndIncarnation<KamikazeTargetImpulseIncarnation>> incarnationsKamikazeTargetImpulse;
+  public readonly SortedDictionary<int, VersionAndIncarnation<KamikazeAICapabilityUCIncarnation>> incarnationsKamikazeAICapabilityUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<InvincibilityUCIncarnation>> incarnationsInvincibilityUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<GuardAICapabilityUCIncarnation>> incarnationsGuardAICapabilityUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<NoImpulseIncarnation>> incarnationsNoImpulse;
@@ -46,6 +50,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<ITerrainTileComponentMutBunchIncarnation>> incarnationsITerrainTileComponentMutBunch;
   public readonly SortedDictionary<int, VersionAndIncarnation<TerrainIncarnation>> incarnationsTerrain;
   public readonly SortedDictionary<int, VersionAndIncarnation<SimplePresenceTriggerTTCIncarnation>> incarnationsSimplePresenceTriggerTTC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<FireBombImpulseIncarnation>> incarnationsFireBombImpulse;
   public readonly SortedDictionary<int, VersionAndIncarnation<FireBombTTCIncarnation>> incarnationsFireBombTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<MarkerTTCIncarnation>> incarnationsMarkerTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<LevelLinkTTCIncarnation>> incarnationsLevelLinkTTC;
@@ -97,6 +102,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<NestLevelControllerIncarnation>> incarnationsNestLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<LakeLevelControllerIncarnation>> incarnationsLakeLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCIncarnation>> incarnationsEmberDeepLevelLinkerTTC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<DirtRoadLevelControllerIncarnation>> incarnationsDirtRoadLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>> incarnationsCaveLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<BridgesLevelControllerIncarnation>> incarnationsBridgesLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<AncientTownLevelControllerIncarnation>> incarnationsAncientTownLevelController;
@@ -120,6 +126,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<UnitMutSetIncarnation>> incarnationsUnitMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<SimplePresenceTriggerTTCMutSetIncarnation>> incarnationsSimplePresenceTriggerTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<ItemTTCMutSetIncarnation>> incarnationsItemTTCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCMutSetIncarnation>> incarnationsKamikazeTargetTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<WarperTTCMutSetIncarnation>> incarnationsWarperTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<TimeAnchorTTCMutSetIncarnation>> incarnationsTimeAnchorTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<FireBombTTCMutSetIncarnation>> incarnationsFireBombTTCMutSet;
@@ -149,6 +156,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>> incarnationsEmberDeepLevelLinkerTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>> incarnationsWanderAICapabilityUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCMutSetIncarnation>> incarnationsSummonAICapabilityUCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<KamikazeAICapabilityUCMutSetIncarnation>> incarnationsKamikazeAICapabilityUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<GuardAICapabilityUCMutSetIncarnation>> incarnationsGuardAICapabilityUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCMutSetIncarnation>> incarnationsTimeCloneAICapabilityUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<MiredUCMutSetIncarnation>> incarnationsMiredUCMutSet;
@@ -169,6 +177,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<BaseOffenseUCMutSetIncarnation>> incarnationsBaseOffenseUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<BaseDefenseUCMutSetIncarnation>> incarnationsBaseDefenseUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<TerrainTileByLocationMutMapIncarnation>> incarnationsTerrainTileByLocationMutMap;
+  public readonly SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCStrongByLocationMutMapIncarnation>> incarnationsKamikazeTargetTTCStrongByLocationMutMap;
   public RootIncarnation(int version, int nextId, int hash) {
     this.version = version;
     this.nextId = nextId;
@@ -189,6 +198,10 @@ public class RootIncarnation {
     this.incarnationsEvaporateImpulse = new SortedDictionary<int, VersionAndIncarnation<EvaporateImpulseIncarnation>>();
     this.incarnationsTimeCloneAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCIncarnation>>();
     this.incarnationsMoveImpulse = new SortedDictionary<int, VersionAndIncarnation<MoveImpulseIncarnation>>();
+    this.incarnationsKamikazeTargetTTC = new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCIncarnation>>();
+    this.incarnationsKamikazeJumpImpulse = new SortedDictionary<int, VersionAndIncarnation<KamikazeJumpImpulseIncarnation>>();
+    this.incarnationsKamikazeTargetImpulse = new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetImpulseIncarnation>>();
+    this.incarnationsKamikazeAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<KamikazeAICapabilityUCIncarnation>>();
     this.incarnationsInvincibilityUC = new SortedDictionary<int, VersionAndIncarnation<InvincibilityUCIncarnation>>();
     this.incarnationsGuardAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<GuardAICapabilityUCIncarnation>>();
     this.incarnationsNoImpulse = new SortedDictionary<int, VersionAndIncarnation<NoImpulseIncarnation>>();
@@ -211,6 +224,7 @@ public class RootIncarnation {
     this.incarnationsITerrainTileComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<ITerrainTileComponentMutBunchIncarnation>>();
     this.incarnationsTerrain = new SortedDictionary<int, VersionAndIncarnation<TerrainIncarnation>>();
     this.incarnationsSimplePresenceTriggerTTC = new SortedDictionary<int, VersionAndIncarnation<SimplePresenceTriggerTTCIncarnation>>();
+    this.incarnationsFireBombImpulse = new SortedDictionary<int, VersionAndIncarnation<FireBombImpulseIncarnation>>();
     this.incarnationsFireBombTTC = new SortedDictionary<int, VersionAndIncarnation<FireBombTTCIncarnation>>();
     this.incarnationsMarkerTTC = new SortedDictionary<int, VersionAndIncarnation<MarkerTTCIncarnation>>();
     this.incarnationsLevelLinkTTC = new SortedDictionary<int, VersionAndIncarnation<LevelLinkTTCIncarnation>>();
@@ -262,6 +276,7 @@ public class RootIncarnation {
     this.incarnationsNestLevelController = new SortedDictionary<int, VersionAndIncarnation<NestLevelControllerIncarnation>>();
     this.incarnationsLakeLevelController = new SortedDictionary<int, VersionAndIncarnation<LakeLevelControllerIncarnation>>();
     this.incarnationsEmberDeepLevelLinkerTTC = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCIncarnation>>();
+    this.incarnationsDirtRoadLevelController = new SortedDictionary<int, VersionAndIncarnation<DirtRoadLevelControllerIncarnation>>();
     this.incarnationsCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>>();
     this.incarnationsBridgesLevelController = new SortedDictionary<int, VersionAndIncarnation<BridgesLevelControllerIncarnation>>();
     this.incarnationsAncientTownLevelController = new SortedDictionary<int, VersionAndIncarnation<AncientTownLevelControllerIncarnation>>();
@@ -285,6 +300,7 @@ public class RootIncarnation {
     this.incarnationsUnitMutSet = new SortedDictionary<int, VersionAndIncarnation<UnitMutSetIncarnation>>();
     this.incarnationsSimplePresenceTriggerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<SimplePresenceTriggerTTCMutSetIncarnation>>();
     this.incarnationsItemTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<ItemTTCMutSetIncarnation>>();
+    this.incarnationsKamikazeTargetTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCMutSetIncarnation>>();
     this.incarnationsWarperTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<WarperTTCMutSetIncarnation>>();
     this.incarnationsTimeAnchorTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<TimeAnchorTTCMutSetIncarnation>>();
     this.incarnationsFireBombTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<FireBombTTCMutSetIncarnation>>();
@@ -314,6 +330,7 @@ public class RootIncarnation {
     this.incarnationsEmberDeepLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>>();
     this.incarnationsWanderAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>>();
     this.incarnationsSummonAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCMutSetIncarnation>>();
+    this.incarnationsKamikazeAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<KamikazeAICapabilityUCMutSetIncarnation>>();
     this.incarnationsGuardAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<GuardAICapabilityUCMutSetIncarnation>>();
     this.incarnationsTimeCloneAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCMutSetIncarnation>>();
     this.incarnationsMiredUCMutSet = new SortedDictionary<int, VersionAndIncarnation<MiredUCMutSetIncarnation>>();
@@ -334,6 +351,7 @@ public class RootIncarnation {
     this.incarnationsBaseOffenseUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BaseOffenseUCMutSetIncarnation>>();
     this.incarnationsBaseDefenseUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BaseDefenseUCMutSetIncarnation>>();
     this.incarnationsTerrainTileByLocationMutMap = new SortedDictionary<int, VersionAndIncarnation<TerrainTileByLocationMutMapIncarnation>>();
+    this.incarnationsKamikazeTargetTTCStrongByLocationMutMap = new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCStrongByLocationMutMapIncarnation>>();
   }
   public RootIncarnation(
       int newVersion,
@@ -359,6 +377,10 @@ public class RootIncarnation {
     this.incarnationsEvaporateImpulse = new SortedDictionary<int, VersionAndIncarnation<EvaporateImpulseIncarnation>>(that.incarnationsEvaporateImpulse);
     this.incarnationsTimeCloneAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCIncarnation>>(that.incarnationsTimeCloneAICapabilityUC);
     this.incarnationsMoveImpulse = new SortedDictionary<int, VersionAndIncarnation<MoveImpulseIncarnation>>(that.incarnationsMoveImpulse);
+    this.incarnationsKamikazeTargetTTC = new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCIncarnation>>(that.incarnationsKamikazeTargetTTC);
+    this.incarnationsKamikazeJumpImpulse = new SortedDictionary<int, VersionAndIncarnation<KamikazeJumpImpulseIncarnation>>(that.incarnationsKamikazeJumpImpulse);
+    this.incarnationsKamikazeTargetImpulse = new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetImpulseIncarnation>>(that.incarnationsKamikazeTargetImpulse);
+    this.incarnationsKamikazeAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<KamikazeAICapabilityUCIncarnation>>(that.incarnationsKamikazeAICapabilityUC);
     this.incarnationsInvincibilityUC = new SortedDictionary<int, VersionAndIncarnation<InvincibilityUCIncarnation>>(that.incarnationsInvincibilityUC);
     this.incarnationsGuardAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<GuardAICapabilityUCIncarnation>>(that.incarnationsGuardAICapabilityUC);
     this.incarnationsNoImpulse = new SortedDictionary<int, VersionAndIncarnation<NoImpulseIncarnation>>(that.incarnationsNoImpulse);
@@ -381,6 +403,7 @@ public class RootIncarnation {
     this.incarnationsITerrainTileComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<ITerrainTileComponentMutBunchIncarnation>>(that.incarnationsITerrainTileComponentMutBunch);
     this.incarnationsTerrain = new SortedDictionary<int, VersionAndIncarnation<TerrainIncarnation>>(that.incarnationsTerrain);
     this.incarnationsSimplePresenceTriggerTTC = new SortedDictionary<int, VersionAndIncarnation<SimplePresenceTriggerTTCIncarnation>>(that.incarnationsSimplePresenceTriggerTTC);
+    this.incarnationsFireBombImpulse = new SortedDictionary<int, VersionAndIncarnation<FireBombImpulseIncarnation>>(that.incarnationsFireBombImpulse);
     this.incarnationsFireBombTTC = new SortedDictionary<int, VersionAndIncarnation<FireBombTTCIncarnation>>(that.incarnationsFireBombTTC);
     this.incarnationsMarkerTTC = new SortedDictionary<int, VersionAndIncarnation<MarkerTTCIncarnation>>(that.incarnationsMarkerTTC);
     this.incarnationsLevelLinkTTC = new SortedDictionary<int, VersionAndIncarnation<LevelLinkTTCIncarnation>>(that.incarnationsLevelLinkTTC);
@@ -432,6 +455,7 @@ public class RootIncarnation {
     this.incarnationsNestLevelController = new SortedDictionary<int, VersionAndIncarnation<NestLevelControllerIncarnation>>(that.incarnationsNestLevelController);
     this.incarnationsLakeLevelController = new SortedDictionary<int, VersionAndIncarnation<LakeLevelControllerIncarnation>>(that.incarnationsLakeLevelController);
     this.incarnationsEmberDeepLevelLinkerTTC = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCIncarnation>>(that.incarnationsEmberDeepLevelLinkerTTC);
+    this.incarnationsDirtRoadLevelController = new SortedDictionary<int, VersionAndIncarnation<DirtRoadLevelControllerIncarnation>>(that.incarnationsDirtRoadLevelController);
     this.incarnationsCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>>(that.incarnationsCaveLevelController);
     this.incarnationsBridgesLevelController = new SortedDictionary<int, VersionAndIncarnation<BridgesLevelControllerIncarnation>>(that.incarnationsBridgesLevelController);
     this.incarnationsAncientTownLevelController = new SortedDictionary<int, VersionAndIncarnation<AncientTownLevelControllerIncarnation>>(that.incarnationsAncientTownLevelController);
@@ -455,6 +479,7 @@ public class RootIncarnation {
     this.incarnationsUnitMutSet = new SortedDictionary<int, VersionAndIncarnation<UnitMutSetIncarnation>>(that.incarnationsUnitMutSet);
     this.incarnationsSimplePresenceTriggerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<SimplePresenceTriggerTTCMutSetIncarnation>>(that.incarnationsSimplePresenceTriggerTTCMutSet);
     this.incarnationsItemTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<ItemTTCMutSetIncarnation>>(that.incarnationsItemTTCMutSet);
+    this.incarnationsKamikazeTargetTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCMutSetIncarnation>>(that.incarnationsKamikazeTargetTTCMutSet);
     this.incarnationsWarperTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<WarperTTCMutSetIncarnation>>(that.incarnationsWarperTTCMutSet);
     this.incarnationsTimeAnchorTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<TimeAnchorTTCMutSetIncarnation>>(that.incarnationsTimeAnchorTTCMutSet);
     this.incarnationsFireBombTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<FireBombTTCMutSetIncarnation>>(that.incarnationsFireBombTTCMutSet);
@@ -484,6 +509,7 @@ public class RootIncarnation {
     this.incarnationsEmberDeepLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>>(that.incarnationsEmberDeepLevelLinkerTTCMutSet);
     this.incarnationsWanderAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>>(that.incarnationsWanderAICapabilityUCMutSet);
     this.incarnationsSummonAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCMutSetIncarnation>>(that.incarnationsSummonAICapabilityUCMutSet);
+    this.incarnationsKamikazeAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<KamikazeAICapabilityUCMutSetIncarnation>>(that.incarnationsKamikazeAICapabilityUCMutSet);
     this.incarnationsGuardAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<GuardAICapabilityUCMutSetIncarnation>>(that.incarnationsGuardAICapabilityUCMutSet);
     this.incarnationsTimeCloneAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCMutSetIncarnation>>(that.incarnationsTimeCloneAICapabilityUCMutSet);
     this.incarnationsMiredUCMutSet = new SortedDictionary<int, VersionAndIncarnation<MiredUCMutSetIncarnation>>(that.incarnationsMiredUCMutSet);
@@ -504,6 +530,7 @@ public class RootIncarnation {
     this.incarnationsBaseOffenseUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BaseOffenseUCMutSetIncarnation>>(that.incarnationsBaseOffenseUCMutSet);
     this.incarnationsBaseDefenseUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BaseDefenseUCMutSetIncarnation>>(that.incarnationsBaseDefenseUCMutSet);
     this.incarnationsTerrainTileByLocationMutMap = new SortedDictionary<int, VersionAndIncarnation<TerrainTileByLocationMutMapIncarnation>>(that.incarnationsTerrainTileByLocationMutMap);
+    this.incarnationsKamikazeTargetTTCStrongByLocationMutMap = new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCStrongByLocationMutMapIncarnation>>(that.incarnationsKamikazeTargetTTCStrongByLocationMutMap);
   }
 }
 

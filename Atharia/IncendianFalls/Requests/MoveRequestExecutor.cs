@@ -18,7 +18,7 @@ namespace IncendianFalls {
     }
 
     public void Execute() {
-      Actions.Step(game, superstate, game.player, destination, false);
+      Actions.Step(game, superstate, game.player, destination, false, true);
       GameLoop.NoteUnitActed(game, game.player);
     }
   }
@@ -49,7 +49,7 @@ namespace IncendianFalls {
 
       superstate.previousTurns.Add(context.root.Snapshot());
       superstate.requests.Add(new MoveRequest(game.id, destination).AsIRequest());
-      Actions.Step(game, superstate, game.player, destination, false);
+      Actions.Step(game, superstate, game.player, destination, false, true);
 
       GameLoop.NoteUnitActed(game, game.player);
 

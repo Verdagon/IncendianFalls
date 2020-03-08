@@ -283,6 +283,22 @@ namespace AthPlayer {
                     new UnityEngine.Color(0, 0, 0));
             overlayLocked = true;
           }
+        } else if (ttc is KamikazeTargetTTCAsITerrainTileComponent) {
+          if (!overlayLocked) {
+            overlay =
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "e",
+                        50,
+                        new UnityEngine.Color(.5f, 0f, 0f, 1.2f),
+                        0,
+                        OutlineMode.WithOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+                    false,
+                    new UnityEngine.Color(0, 0, 0));
+            overlayLocked = true;
+          }
         } else if (ttc is ObsidianTTCAsITerrainTileComponent) {
           if (!overlayLocked) {
             overlay =

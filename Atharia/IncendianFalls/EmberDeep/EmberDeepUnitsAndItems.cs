@@ -38,6 +38,7 @@ namespace IncendianFalls {
               locationFilter,
               true,
               false);
+      level.root.logger.Info("placed " + healthLocs.Count);
 
       foreach (var healthLoc in healthLocs) {
         var rockTile = level.terrain.tiles[healthLoc];

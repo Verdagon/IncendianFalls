@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using Atharia.Model;
 
 public class DictionaryUtils {
+  public static K GetFirstKey<K, V>(SortedDictionary<K, V> dict) {
+    foreach (var key in dict.Keys) {
+      return key;
+    }
+    throw new Exception("Dict is empty!");
+  }
+
   public static T GetFirstKey<T>(SortedDictionary<T, object> dict) {
     foreach (var key in dict.Keys) {
       return key;

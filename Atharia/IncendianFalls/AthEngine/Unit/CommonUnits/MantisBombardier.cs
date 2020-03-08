@@ -10,6 +10,9 @@ namespace IncendianFalls {
       components.Add(root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
       components.Add(root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
       components.Add(root.EffectBaseOffenseUCCreate(25, 100).AsIUnitComponent());
+      components.Add(root.EffectKamikazeAICapabilityUCCreate(
+        root.EffectKamikazeTargetTTCStrongByLocationMutMapCreate(),
+        new Location(0, 0, 0)).AsIUnitComponent());
       return
           root.EffectUnitCreate(
               root.EffectIUnitEventMutListCreate(),

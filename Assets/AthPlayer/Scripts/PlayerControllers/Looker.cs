@@ -63,6 +63,7 @@ namespace AthPlayer {
                     new UnityEngine.Color(0, 0, 0)),
                 "Mired"));
         } else if (detail is WanderAICapabilityUCAsIUnitComponent) {
+        } else if (detail is KamikazeAICapabilityUCAsIUnitComponent) {
         } else if (detail is GuardAICapabilityUCAsIUnitComponent) {
         } else if (detail is AttackAICapabilityUCAsIUnitComponent) {
         } else if (detail is BideAICapabilityUCAsIUnitComponent bideI) {

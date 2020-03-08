@@ -29,6 +29,7 @@ namespace Atharia.Model {
       }
 
       levelSuperstate = new LevelSuperstate(level);
+      int numSpaces = levelSuperstate.NumWalkableLocations(false);
 
       var exitLocation = levelSuperstate.FindMarkerLocation("exit");
       level.terrain.tiles[exitLocation].components.Add(
@@ -59,20 +60,25 @@ namespace Atharia.Model {
 
       var entryLoc = levelSuperstate.FindMarkerLocation("entry");
 
-      var unitLocations = levelSuperstate.GetNRandomWalkableLocations(
-        level.terrain,
-        game.rand,
-        10,
-        (loc) => !loc.Equals(entryLoc) && !loc.Equals(exitLocation),
-        true,
-        true);
-      foreach (var unitLocation in unitLocations) {
-        level.EnterUnit(levelSuperstate, unitLocation, level.time, Irkling.Make(game.root));
-      }
+      EmberDeepUnitsAndItems.FillWithUnits(
+        game,
+        level,
+        levelSuperstate,
+        (loc) => true,
+        /*numIrkling=*/ 10 * numSpaces / 200,
+        /*numDraxling=*/ 8 * numSpaces / 200,
+        /*numRavagianTrask=*/ 3 * numSpaces / 200,
+        /*numBaug=*/ 2 * numSpaces / 200,
+        /*numSpirient=*/ 1 * numSpaces / 200,
+        /*numIrklingKing=*/ 0 * numSpaces / 200,
+        /*numEmberfolk=*/ 0 * numSpaces / 200,
+        /*numChronolisk=*/ 0 * numSpaces / 200,
+        /*numMantisBombardier=*/ 0 * numSpaces / 200,
+        /*numLightningTrask=*/ 0 * numSpaces / 200);
 
       levelSuperstate.Reconstruct(level);
 
-      EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, depth, entryLoc, .008f, 0f);
+      EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLoc), .03f, 0f);
 
       game.levels.Add(level);
 

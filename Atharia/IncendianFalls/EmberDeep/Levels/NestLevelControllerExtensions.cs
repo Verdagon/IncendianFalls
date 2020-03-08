@@ -110,27 +110,25 @@ namespace Atharia.Model {
 
       EmberDeepUnitsAndItems.PlaceRocks(game.rand, level, levelSuperstate);
 
-      if (depth < 2) {
-        EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .008f, 0f);
-      } else {
-        EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .008f, .005f);
-      }
+      EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .04f, .04f);
+      
 
+      int numSpacesInRestOfLevel = levelSuperstate.NumWalkableLocations(false) - ambushAreaFloors.Count;
       EmberDeepUnitsAndItems.FillWithUnits(
         game,
         level,
         levelSuperstate,
         (loc) => !ambushAreaFloors.Contains(loc),
-        /*numIrkling=*/ 3,
-        /*numDraxling=*/ 3,
-        /*numRavagianTrask=*/ 3,
-        /*numBaug=*/ 1,
-        /*numSpirient=*/ 1,
-        /*numIrklingKing=*/ 0,
-        /*numEmberfolk=*/ 1,
-        /*numChronolisk=*/ 0,
-        /*numMantisBombardier=*/ 0,
-        /*numLightningTrask=*/ 0);
+        /*numIrkling=*/ 3 * numSpacesInRestOfLevel / 200,
+        /*numDraxling=*/ 3 * numSpacesInRestOfLevel / 200,
+        /*numRavagianTrask=*/ 3 * numSpacesInRestOfLevel / 200,
+        /*numBaug=*/ 1 * numSpacesInRestOfLevel / 200,
+        /*numSpirient=*/ 1 * numSpacesInRestOfLevel / 200,
+        /*numIrklingKing=*/ 0 * numSpacesInRestOfLevel / 200,
+        /*numEmberfolk=*/ 1 * numSpacesInRestOfLevel / 200,
+        /*numChronolisk=*/ 0 * numSpacesInRestOfLevel / 200,
+        /*numMantisBombardier=*/ 0 * numSpacesInRestOfLevel / 200,
+        /*numLightningTrask=*/ 0 * numSpacesInRestOfLevel / 200);
 
       game.levels.Add(level);
 
@@ -176,7 +174,7 @@ namespace Atharia.Model {
       }
       if (triggerName == "introLine1Done") {
         var hopTo = superstate.levelSuperstate.FindMarkerLocation("playerHop");
-        Actions.Step(game, superstate, game.player, hopTo, true);
+        Actions.Step(game, superstate, game.player, hopTo, true, false);
         game.events.Add(new WaitEvent(1000, "playerEntryHopDone").AsIGameEvent());
       }
       if (triggerName == "playerEntryHopDone") {
@@ -219,7 +217,7 @@ namespace Atharia.Model {
         //superstate.navigatingState = new Superstate.NavigatingState(steps);
 
         var hopTo = superstate.levelSuperstate.FindSimplePresenceTriggerLocation("ambushTrigger");
-        Actions.Step(game, superstate, game.player, hopTo, true);
+        Actions.Step(game, superstate, game.player, hopTo, true, false);
         game.events.Add(new WaitEvent(1000, "reachedAmbush").AsIGameEvent());
       }
       if (triggerName == "reachedAmbush") {

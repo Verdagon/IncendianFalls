@@ -19,7 +19,7 @@ namespace Atharia.Model {
           PentagonPattern9.makePentagon9Pattern(),
           game.rand,
           considerCornersAdjacent,
-          8.0f);
+          12.0f);
       foreach (var locationAndTile in terrain.tiles) {
         locationAndTile.Value.components.Add(game.root.EffectMudTTCCreate().AsITerrainTileComponent());
       }
@@ -60,58 +60,59 @@ namespace Atharia.Model {
       level.controller = game.root.EffectCaveLevelControllerCreate(level).AsILevelController();
 
       if (depth < 2) {
-        EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .008f, 0f);
+        EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .02f, 0f);
       } else {
-        EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .008f, .005f);
+        EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .02f, .02f);
       }
 
+      int numSpaces = levelSuperstate.NumWalkableLocations(false);
       if (depth < 2) {
         EmberDeepUnitsAndItems.FillWithUnits(
           game,
           level,
           levelSuperstate,
           (loc) => true,
-          /*numIrkling=*/ 20,
-          /*numDraxling=*/ 7,
-          /*numRavagianTrask=*/ 2,
-          /*numBaug=*/ 4,
-          /*numSpirient=*/ 1,
-          /*numIrklingKing=*/ 0,
-          /*numEmberfolk=*/ 0,
-          /*numChronolisk=*/ 0,
-          /*numMantisBombardier=*/ 0,
-          /*numLightningTrask=*/ 0);
+          /*numIrkling=*/ 20 * numSpaces / 200,
+          /*numDraxling=*/ 7 * numSpaces / 200,
+          /*numRavagianTrask=*/ 2 * numSpaces / 200,
+          /*numBaug=*/ 4 * numSpaces / 200,
+          /*numSpirient=*/ 1 * numSpaces / 200,
+          /*numIrklingKing=*/ 0 * numSpaces / 200,
+          /*numEmberfolk=*/ 0 * numSpaces / 200,
+          /*numChronolisk=*/ 0 * numSpaces / 200,
+          /*numMantisBombardier=*/ 0 * numSpaces / 200,
+          /*numLightningTrask=*/ 0 * numSpaces / 200);
       } else if (depth < 4) {
         EmberDeepUnitsAndItems.FillWithUnits(
           game,
           level,
           levelSuperstate,
           (loc) => true,
-          /*numIrkling=*/ 10,
-          /*numDraxling=*/ 7,
-          /*numRavagianTrask=*/ 3,
-          /*numBaug=*/ 3,
-          /*numSpirient=*/ 2,
-          /*numIrklingKing=*/ 1,
-          /*numEmberfolk=*/ 2,
-          /*numChronolisk=*/ 1,
-          /*numMantisBombardier=*/ 0,
-          /*numLightningTrask=*/ 0);
+          /*numIrkling=*/ 10 * numSpaces / 200,
+          /*numDraxling=*/ 7 * numSpaces / 200,
+          /*numRavagianTrask=*/ 3 * numSpaces / 200,
+          /*numBaug=*/ 3 * numSpaces / 200,
+          /*numSpirient=*/ 2 * numSpaces / 200,
+          /*numIrklingKing=*/ 1 * numSpaces / 200,
+          /*numEmberfolk=*/ 2 * numSpaces / 200,
+          /*numChronolisk=*/ 1 * numSpaces / 200,
+          /*numMantisBombardier=*/ 0 * numSpaces / 200,
+          /*numLightningTrask=*/ 0 * numSpaces / 200);
       } else if (depth < 6) {
         EmberDeepUnitsAndItems.FillWithUnits(
           game,
           level,
           levelSuperstate,
           (loc) => true,
-          /*numIrkling=*/ 4,
-          /*numDraxling=*/ 4,
-          /*numRavagianTrask=*/ 3,
-          /*numBaug=*/ 2,
-          /*numSpirient=*/ 1,
-          /*numIrklingKing=*/ 2,
-          /*numEmberfolk=*/ 3,
-          /*numChronolisk=*/ 1,
-          /*numMantisBombardier=*/ 1,
+          /*numIrkling=*/ 4 * numSpaces / 200,
+          /*numDraxling=*/ 4 * numSpaces / 200,
+          /*numRavagianTrask=*/ 3 * numSpaces / 200,
+          /*numBaug=*/ 2 * numSpaces / 200,
+          /*numSpirient=*/ 1 * numSpaces / 200,
+          /*numIrklingKing=*/ 2 * numSpaces / 200,
+          /*numEmberfolk=*/ 3 * numSpaces / 200,
+          /*numChronolisk=*/ 1 * numSpaces / 200,
+          /*numMantisBombardier=*/ 1 * numSpaces / 200,
           /*numLightningTrask=*/ 0);
       } else if (depth < 8) {
         EmberDeepUnitsAndItems.FillWithUnits(
@@ -119,16 +120,16 @@ namespace Atharia.Model {
           level,
           levelSuperstate,
           (loc) => true,
-          /*numIrkling=*/ 2,
-          /*numDraxling=*/ 2,
-          /*numRavagianTrask=*/ 3,
-          /*numBaug=*/ 1,
-          /*numSpirient=*/ 0,
-          /*numIrklingKing=*/ 4,
-          /*numEmberfolk=*/ 5,
-          /*numChronolisk=*/ 3,
-          /*numMantisBombardier=*/ 3,
-          /*numLightningTrask=*/ 0);
+          /*numIrkling=*/ 2 * numSpaces / 200,
+          /*numDraxling=*/ 2 * numSpaces / 200,
+          /*numRavagianTrask=*/ 3 * numSpaces / 200,
+          /*numBaug=*/ 1 * numSpaces / 200,
+          /*numSpirient=*/ 0 * numSpaces / 200,
+          /*numIrklingKing=*/ 4 * numSpaces / 200,
+          /*numEmberfolk=*/ 5 * numSpaces / 200,
+          /*numChronolisk=*/ 3 * numSpaces / 200,
+          /*numMantisBombardier=*/ 3 * numSpaces / 200,
+          /*numLightningTrask=*/ 0 * numSpaces / 200);
       }
 
       game.levels.Add(level);
@@ -175,21 +176,21 @@ namespace Atharia.Model {
         var locationsNextToPlayer = game.level.terrain.GetAdjacentExistingLocations(game.player.location, false);
         var hopToPossibilities = superstate.levelSuperstate.GetNRandomWalkableLocations(game.level.terrain, game.rand, 1, (loc) => locationsNextToPlayer.Contains(loc), true, true);
         if (hopToPossibilities.Count > 0) {
-          Actions.Step(game, superstate, game.player, hopToPossibilities[0], true);
+          Actions.Step(game, superstate, game.player, hopToPossibilities[0], true, false);
         }
         game.events.Add(new WaitEvent(1000, "playerEntryHopDone").AsIGameEvent());
       }
       if (triggerName == "playerEntryHopDone") {
         game.events.Add(
           new ShowOverlayEvent(
-            50, // sizePercent
+            40, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
             500,// fadeInEnd
             3000, // fadeOutStart
             3500, // fadeOutEnd,
             "objectiveMusingDone",
 
-            "Let's go!",
+            "I've made it to Ember Deep! Forward!",
             new Color(255, 64, 0, 255), // textColor
             500, // textFadeInStartS
             1000, // textFadeInEndS

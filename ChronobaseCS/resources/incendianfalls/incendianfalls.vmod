@@ -3,6 +3,7 @@ namespace: Atharia.Model
 emberdeep/levels/ancienttownlevel.vss
 emberdeep/levels/bridgeslevel.vss
 emberdeep/levels/cavelevel.vss
+emberdeep/levels/dirtroadlevel.vss
 emberdeep/levels/emberdeeplevellinker.vss
 emberdeep/levels/lakelevel.vss
 emberdeep/levels/nestlevel.vss
@@ -49,6 +50,7 @@ unit/fire.vss
 unit/impulse.vss
 unit/guard.vss
 unit/invincibility.vss
+unit/kamikaze.vss
 unit/move.vss
 unit/script.vss
 unit/mire.vss

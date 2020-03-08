@@ -46,7 +46,7 @@ namespace IncendianFalls {
       // (Remember, the current turn hasn't yet been added to the turnsIncludingPresent list)
       superstate.anchorTurnIndices.Add(anchorTurnIndex);
 
-      Actions.Step(game, superstate, game.player, destination, false);
+      Actions.Step(game, superstate, game.player, destination, false, true);
 
       var terrainTileAtOldLocation = game.level.terrain.tiles[oldLocation];
       terrainTileAtOldLocation.components.Add(

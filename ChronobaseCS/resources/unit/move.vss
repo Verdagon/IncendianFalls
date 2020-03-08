@@ -1,15 +1,4 @@
 
-// mut struct MoveDirectiveUC {
-//   // The last node in the path is the destination.
-//   // Feel free to change the path, as long as it's going
-//   // the same place.
-//   path: MutList:Location;
-//
-//   fn Destruct(this: MoveDirectiveUC overrides IDestructible): Void {
-//     MoveDirectiveUCExtensions.Destruct
-//   }
-// }
-
 mut struct MoveImpulse {
   MoveImpulse isa IImpulse;
 

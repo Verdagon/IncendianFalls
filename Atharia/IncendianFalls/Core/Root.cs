@@ -170,6 +170,38 @@ public class Root {
   readonly List<MoveImpulseDeleteEffect> effectsMoveImpulseDeleteEffect =
       new List<MoveImpulseDeleteEffect>();
 
+  readonly SortedDictionary<int, List<IKamikazeTargetTTCEffectObserver>> observersForKamikazeTargetTTC =
+      new SortedDictionary<int, List<IKamikazeTargetTTCEffectObserver>>();
+  readonly List<KamikazeTargetTTCCreateEffect> effectsKamikazeTargetTTCCreateEffect =
+      new List<KamikazeTargetTTCCreateEffect>();
+  readonly List<KamikazeTargetTTCDeleteEffect> effectsKamikazeTargetTTCDeleteEffect =
+      new List<KamikazeTargetTTCDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IKamikazeJumpImpulseEffectObserver>> observersForKamikazeJumpImpulse =
+      new SortedDictionary<int, List<IKamikazeJumpImpulseEffectObserver>>();
+  readonly List<KamikazeJumpImpulseCreateEffect> effectsKamikazeJumpImpulseCreateEffect =
+      new List<KamikazeJumpImpulseCreateEffect>();
+  readonly List<KamikazeJumpImpulseDeleteEffect> effectsKamikazeJumpImpulseDeleteEffect =
+      new List<KamikazeJumpImpulseDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IKamikazeTargetImpulseEffectObserver>> observersForKamikazeTargetImpulse =
+      new SortedDictionary<int, List<IKamikazeTargetImpulseEffectObserver>>();
+  readonly List<KamikazeTargetImpulseCreateEffect> effectsKamikazeTargetImpulseCreateEffect =
+      new List<KamikazeTargetImpulseCreateEffect>();
+  readonly List<KamikazeTargetImpulseDeleteEffect> effectsKamikazeTargetImpulseDeleteEffect =
+      new List<KamikazeTargetImpulseDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IKamikazeAICapabilityUCEffectObserver>> observersForKamikazeAICapabilityUC =
+      new SortedDictionary<int, List<IKamikazeAICapabilityUCEffectObserver>>();
+  readonly List<KamikazeAICapabilityUCCreateEffect> effectsKamikazeAICapabilityUCCreateEffect =
+      new List<KamikazeAICapabilityUCCreateEffect>();
+  readonly List<KamikazeAICapabilityUCDeleteEffect> effectsKamikazeAICapabilityUCDeleteEffect =
+      new List<KamikazeAICapabilityUCDeleteEffect>();
+  readonly List<KamikazeAICapabilityUCSetTargetByLocationEffect> effectsKamikazeAICapabilityUCSetTargetByLocationEffect =
+      new List<KamikazeAICapabilityUCSetTargetByLocationEffect>();
+  readonly List<KamikazeAICapabilityUCSetTargetLocationCenterEffect> effectsKamikazeAICapabilityUCSetTargetLocationCenterEffect =
+      new List<KamikazeAICapabilityUCSetTargetLocationCenterEffect>();
+
   readonly SortedDictionary<int, List<IInvincibilityUCEffectObserver>> observersForInvincibilityUC =
       new SortedDictionary<int, List<IInvincibilityUCEffectObserver>>();
   readonly List<InvincibilityUCCreateEffect> effectsInvincibilityUCCreateEffect =
@@ -331,6 +363,13 @@ public class Root {
       new List<SimplePresenceTriggerTTCCreateEffect>();
   readonly List<SimplePresenceTriggerTTCDeleteEffect> effectsSimplePresenceTriggerTTCDeleteEffect =
       new List<SimplePresenceTriggerTTCDeleteEffect>();
+
+  readonly SortedDictionary<int, List<IFireBombImpulseEffectObserver>> observersForFireBombImpulse =
+      new SortedDictionary<int, List<IFireBombImpulseEffectObserver>>();
+  readonly List<FireBombImpulseCreateEffect> effectsFireBombImpulseCreateEffect =
+      new List<FireBombImpulseCreateEffect>();
+  readonly List<FireBombImpulseDeleteEffect> effectsFireBombImpulseDeleteEffect =
+      new List<FireBombImpulseDeleteEffect>();
 
   readonly SortedDictionary<int, List<IFireBombTTCEffectObserver>> observersForFireBombTTC =
       new SortedDictionary<int, List<IFireBombTTCEffectObserver>>();
@@ -709,6 +748,13 @@ public class Root {
   readonly List<EmberDeepLevelLinkerTTCDeleteEffect> effectsEmberDeepLevelLinkerTTCDeleteEffect =
       new List<EmberDeepLevelLinkerTTCDeleteEffect>();
 
+  readonly SortedDictionary<int, List<IDirtRoadLevelControllerEffectObserver>> observersForDirtRoadLevelController =
+      new SortedDictionary<int, List<IDirtRoadLevelControllerEffectObserver>>();
+  readonly List<DirtRoadLevelControllerCreateEffect> effectsDirtRoadLevelControllerCreateEffect =
+      new List<DirtRoadLevelControllerCreateEffect>();
+  readonly List<DirtRoadLevelControllerDeleteEffect> effectsDirtRoadLevelControllerDeleteEffect =
+      new List<DirtRoadLevelControllerDeleteEffect>();
+
   readonly SortedDictionary<int, List<ICaveLevelControllerEffectObserver>> observersForCaveLevelController =
       new SortedDictionary<int, List<ICaveLevelControllerEffectObserver>>();
   readonly List<CaveLevelControllerCreateEffect> effectsCaveLevelControllerCreateEffect =
@@ -949,6 +995,17 @@ public class Root {
       new List<ItemTTCMutSetAddEffect>();
   readonly List<ItemTTCMutSetRemoveEffect> effectsItemTTCMutSetRemoveEffect =
       new List<ItemTTCMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IKamikazeTargetTTCMutSetEffectObserver>> observersForKamikazeTargetTTCMutSet =
+      new SortedDictionary<int, List<IKamikazeTargetTTCMutSetEffectObserver>>();
+  readonly List<KamikazeTargetTTCMutSetCreateEffect> effectsKamikazeTargetTTCMutSetCreateEffect =
+      new List<KamikazeTargetTTCMutSetCreateEffect>();
+  readonly List<KamikazeTargetTTCMutSetDeleteEffect> effectsKamikazeTargetTTCMutSetDeleteEffect =
+      new List<KamikazeTargetTTCMutSetDeleteEffect>();
+  readonly List<KamikazeTargetTTCMutSetAddEffect> effectsKamikazeTargetTTCMutSetAddEffect =
+      new List<KamikazeTargetTTCMutSetAddEffect>();
+  readonly List<KamikazeTargetTTCMutSetRemoveEffect> effectsKamikazeTargetTTCMutSetRemoveEffect =
+      new List<KamikazeTargetTTCMutSetRemoveEffect>();
 
   readonly SortedDictionary<int, List<IWarperTTCMutSetEffectObserver>> observersForWarperTTCMutSet =
       new SortedDictionary<int, List<IWarperTTCMutSetEffectObserver>>();
@@ -1269,6 +1326,17 @@ public class Root {
   readonly List<SummonAICapabilityUCMutSetRemoveEffect> effectsSummonAICapabilityUCMutSetRemoveEffect =
       new List<SummonAICapabilityUCMutSetRemoveEffect>();
 
+  readonly SortedDictionary<int, List<IKamikazeAICapabilityUCMutSetEffectObserver>> observersForKamikazeAICapabilityUCMutSet =
+      new SortedDictionary<int, List<IKamikazeAICapabilityUCMutSetEffectObserver>>();
+  readonly List<KamikazeAICapabilityUCMutSetCreateEffect> effectsKamikazeAICapabilityUCMutSetCreateEffect =
+      new List<KamikazeAICapabilityUCMutSetCreateEffect>();
+  readonly List<KamikazeAICapabilityUCMutSetDeleteEffect> effectsKamikazeAICapabilityUCMutSetDeleteEffect =
+      new List<KamikazeAICapabilityUCMutSetDeleteEffect>();
+  readonly List<KamikazeAICapabilityUCMutSetAddEffect> effectsKamikazeAICapabilityUCMutSetAddEffect =
+      new List<KamikazeAICapabilityUCMutSetAddEffect>();
+  readonly List<KamikazeAICapabilityUCMutSetRemoveEffect> effectsKamikazeAICapabilityUCMutSetRemoveEffect =
+      new List<KamikazeAICapabilityUCMutSetRemoveEffect>();
+
   readonly SortedDictionary<int, List<IGuardAICapabilityUCMutSetEffectObserver>> observersForGuardAICapabilityUCMutSet =
       new SortedDictionary<int, List<IGuardAICapabilityUCMutSetEffectObserver>>();
   readonly List<GuardAICapabilityUCMutSetCreateEffect> effectsGuardAICapabilityUCMutSetCreateEffect =
@@ -1489,6 +1557,17 @@ public class Root {
   readonly List<TerrainTileByLocationMutMapRemoveEffect> effectsTerrainTileByLocationMutMapRemoveEffect =
       new List<TerrainTileByLocationMutMapRemoveEffect>();
 
+  readonly SortedDictionary<int, List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver>> observersForKamikazeTargetTTCStrongByLocationMutMap =
+      new SortedDictionary<int, List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver>>();
+  readonly List<KamikazeTargetTTCStrongByLocationMutMapCreateEffect> effectsKamikazeTargetTTCStrongByLocationMutMapCreateEffect =
+      new List<KamikazeTargetTTCStrongByLocationMutMapCreateEffect>();
+  readonly List<KamikazeTargetTTCStrongByLocationMutMapDeleteEffect> effectsKamikazeTargetTTCStrongByLocationMutMapDeleteEffect =
+      new List<KamikazeTargetTTCStrongByLocationMutMapDeleteEffect>();
+  readonly List<KamikazeTargetTTCStrongByLocationMutMapAddEffect> effectsKamikazeTargetTTCStrongByLocationMutMapAddEffect =
+      new List<KamikazeTargetTTCStrongByLocationMutMapAddEffect>();
+  readonly List<KamikazeTargetTTCStrongByLocationMutMapRemoveEffect> effectsKamikazeTargetTTCStrongByLocationMutMapRemoveEffect =
+      new List<KamikazeTargetTTCStrongByLocationMutMapRemoveEffect>();
+
   public Root(ILogger logger) {
     this.logger = logger;
     int initialVersion = 1;
@@ -1635,6 +1714,18 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsMoveImpulse) {
       result += GetMoveImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsKamikazeTargetTTC) {
+      result += GetKamikazeTargetTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsKamikazeJumpImpulse) {
+      result += GetKamikazeJumpImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsKamikazeTargetImpulse) {
+      result += GetKamikazeTargetImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsKamikazeAICapabilityUC) {
+      result += GetKamikazeAICapabilityUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsInvincibilityUC) {
       result += GetInvincibilityUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1700,6 +1791,9 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsSimplePresenceTriggerTTC) {
       result += GetSimplePresenceTriggerTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsFireBombImpulse) {
+      result += GetFireBombImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsFireBombTTC) {
       result += GetFireBombTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1854,6 +1948,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsEmberDeepLevelLinkerTTC) {
       result += GetEmberDeepLevelLinkerTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsDirtRoadLevelController) {
+      result += GetDirtRoadLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsCaveLevelController) {
       result += GetCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1922,6 +2019,9 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsItemTTCMutSet) {
       result += GetItemTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsKamikazeTargetTTCMutSet) {
+      result += GetKamikazeTargetTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsWarperTTCMutSet) {
       result += GetWarperTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -2010,6 +2110,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsSummonAICapabilityUCMutSet) {
       result += GetSummonAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet) {
+      result += GetKamikazeAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsGuardAICapabilityUCMutSet) {
       result += GetGuardAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -2070,6 +2173,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsTerrainTileByLocationMutMap) {
       result += GetTerrainTileByLocationMutMapHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap) {
+      result += GetKamikazeTargetTTCStrongByLocationMutMapHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     return result;
   }
 
@@ -2122,6 +2228,18 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllMoveImpulse()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllKamikazeTargetTTC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllKamikazeJumpImpulse()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllKamikazeTargetImpulse()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllKamikazeAICapabilityUC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllInvincibilityUC()) {
@@ -2188,6 +2306,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllSimplePresenceTriggerTTC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllFireBombImpulse()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllFireBombTTC()) {
@@ -2343,6 +2464,9 @@ public class Root {
     foreach (var obj in this.AllEmberDeepLevelLinkerTTC()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllDirtRoadLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllCaveLevelController()) {
       obj.CheckForNullViolations(violations);
     }
@@ -2410,6 +2534,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllItemTTCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllKamikazeTargetTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllWarperTTCMutSet()) {
@@ -2499,6 +2626,9 @@ public class Root {
     foreach (var obj in this.AllSummonAICapabilityUCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllKamikazeAICapabilityUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllGuardAICapabilityUCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
@@ -2557,6 +2687,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTerrainTileByLocationMutMap()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllKamikazeTargetTTCStrongByLocationMutMap()) {
       obj.CheckForNullViolations(violations);
     }
 
@@ -2644,6 +2777,26 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllKamikazeTargetTTC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllKamikazeJumpImpulse()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllKamikazeTargetImpulse()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllKamikazeAICapabilityUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllInvincibilityUC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -2750,6 +2903,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllSimplePresenceTriggerTTC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllFireBombImpulse()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -3009,6 +3167,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllDirtRoadLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllCaveLevelController()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -3120,6 +3283,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllItemTTCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllKamikazeTargetTTCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -3269,6 +3437,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllKamikazeAICapabilityUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllGuardAICapabilityUCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -3365,6 +3538,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllTerrainTileByLocationMutMap()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllKamikazeTargetTTCStrongByLocationMutMap()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -3556,6 +3734,50 @@ public class Root {
       copyOfObserversForMoveImpulse.Add(
           objectId,
           new List<IMoveImpulseEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForKamikazeTargetTTC =
+        new SortedDictionary<int, List<IKamikazeTargetTTCEffectObserver>>();
+    foreach (var entry in observersForKamikazeTargetTTC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForKamikazeTargetTTC.Add(
+          objectId,
+          new List<IKamikazeTargetTTCEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForKamikazeJumpImpulse =
+        new SortedDictionary<int, List<IKamikazeJumpImpulseEffectObserver>>();
+    foreach (var entry in observersForKamikazeJumpImpulse) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForKamikazeJumpImpulse.Add(
+          objectId,
+          new List<IKamikazeJumpImpulseEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForKamikazeTargetImpulse =
+        new SortedDictionary<int, List<IKamikazeTargetImpulseEffectObserver>>();
+    foreach (var entry in observersForKamikazeTargetImpulse) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForKamikazeTargetImpulse.Add(
+          objectId,
+          new List<IKamikazeTargetImpulseEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForKamikazeAICapabilityUC =
+        new SortedDictionary<int, List<IKamikazeAICapabilityUCEffectObserver>>();
+    foreach (var entry in observersForKamikazeAICapabilityUC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForKamikazeAICapabilityUC.Add(
+          objectId,
+          new List<IKamikazeAICapabilityUCEffectObserver>(
               observers));
     }
 
@@ -3798,6 +4020,17 @@ public class Root {
       copyOfObserversForSimplePresenceTriggerTTC.Add(
           objectId,
           new List<ISimplePresenceTriggerTTCEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForFireBombImpulse =
+        new SortedDictionary<int, List<IFireBombImpulseEffectObserver>>();
+    foreach (var entry in observersForFireBombImpulse) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForFireBombImpulse.Add(
+          objectId,
+          new List<IFireBombImpulseEffectObserver>(
               observers));
     }
 
@@ -4362,6 +4595,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForDirtRoadLevelController =
+        new SortedDictionary<int, List<IDirtRoadLevelControllerEffectObserver>>();
+    foreach (var entry in observersForDirtRoadLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForDirtRoadLevelController.Add(
+          objectId,
+          new List<IDirtRoadLevelControllerEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForCaveLevelController =
         new SortedDictionary<int, List<ICaveLevelControllerEffectObserver>>();
     foreach (var entry in observersForCaveLevelController) {
@@ -4612,6 +4856,17 @@ public class Root {
       copyOfObserversForItemTTCMutSet.Add(
           objectId,
           new List<IItemTTCMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForKamikazeTargetTTCMutSet =
+        new SortedDictionary<int, List<IKamikazeTargetTTCMutSetEffectObserver>>();
+    foreach (var entry in observersForKamikazeTargetTTCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForKamikazeTargetTTCMutSet.Add(
+          objectId,
+          new List<IKamikazeTargetTTCMutSetEffectObserver>(
               observers));
     }
 
@@ -4934,6 +5189,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForKamikazeAICapabilityUCMutSet =
+        new SortedDictionary<int, List<IKamikazeAICapabilityUCMutSetEffectObserver>>();
+    foreach (var entry in observersForKamikazeAICapabilityUCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForKamikazeAICapabilityUCMutSet.Add(
+          objectId,
+          new List<IKamikazeAICapabilityUCMutSetEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForGuardAICapabilityUCMutSet =
         new SortedDictionary<int, List<IGuardAICapabilityUCMutSetEffectObserver>>();
     foreach (var entry in observersForGuardAICapabilityUCMutSet) {
@@ -5154,6 +5420,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForKamikazeTargetTTCStrongByLocationMutMap =
+        new SortedDictionary<int, List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver>>();
+    foreach (var entry in observersForKamikazeTargetTTCStrongByLocationMutMap) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForKamikazeTargetTTCStrongByLocationMutMap.Add(
+          objectId,
+          new List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver>(
+              observers));
+    }
+
     BroadcastRandEffects(
         copyOfObserversForRand);
            
@@ -5201,6 +5478,18 @@ public class Root {
            
     BroadcastMoveImpulseEffects(
         copyOfObserversForMoveImpulse);
+           
+    BroadcastKamikazeTargetTTCEffects(
+        copyOfObserversForKamikazeTargetTTC);
+           
+    BroadcastKamikazeJumpImpulseEffects(
+        copyOfObserversForKamikazeJumpImpulse);
+           
+    BroadcastKamikazeTargetImpulseEffects(
+        copyOfObserversForKamikazeTargetImpulse);
+           
+    BroadcastKamikazeAICapabilityUCEffects(
+        copyOfObserversForKamikazeAICapabilityUC);
            
     BroadcastInvincibilityUCEffects(
         copyOfObserversForInvincibilityUC);
@@ -5267,6 +5556,9 @@ public class Root {
            
     BroadcastSimplePresenceTriggerTTCEffects(
         copyOfObserversForSimplePresenceTriggerTTC);
+           
+    BroadcastFireBombImpulseEffects(
+        copyOfObserversForFireBombImpulse);
            
     BroadcastFireBombTTCEffects(
         copyOfObserversForFireBombTTC);
@@ -5421,6 +5713,9 @@ public class Root {
     BroadcastEmberDeepLevelLinkerTTCEffects(
         copyOfObserversForEmberDeepLevelLinkerTTC);
            
+    BroadcastDirtRoadLevelControllerEffects(
+        copyOfObserversForDirtRoadLevelController);
+           
     BroadcastCaveLevelControllerEffects(
         copyOfObserversForCaveLevelController);
            
@@ -5489,6 +5784,9 @@ public class Root {
            
     BroadcastItemTTCMutSetEffects(
         copyOfObserversForItemTTCMutSet);
+           
+    BroadcastKamikazeTargetTTCMutSetEffects(
+        copyOfObserversForKamikazeTargetTTCMutSet);
            
     BroadcastWarperTTCMutSetEffects(
         copyOfObserversForWarperTTCMutSet);
@@ -5577,6 +5875,9 @@ public class Root {
     BroadcastSummonAICapabilityUCMutSetEffects(
         copyOfObserversForSummonAICapabilityUCMutSet);
            
+    BroadcastKamikazeAICapabilityUCMutSetEffects(
+        copyOfObserversForKamikazeAICapabilityUCMutSet);
+           
     BroadcastGuardAICapabilityUCMutSetEffects(
         copyOfObserversForGuardAICapabilityUCMutSet);
            
@@ -5636,6 +5937,9 @@ public class Root {
            
     BroadcastTerrainTileByLocationMutMapEffects(
         copyOfObserversForTerrainTileByLocationMutMap);
+           
+    BroadcastKamikazeTargetTTCStrongByLocationMutMapEffects(
+        copyOfObserversForKamikazeTargetTTCStrongByLocationMutMap);
            
   }
 
@@ -5810,6 +6114,46 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsMoveImpulse.ContainsKey(sourceObjId)) {
         EffectInternalCreateMoveImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeTargetTTC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsKamikazeTargetTTC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateKamikazeTargetTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeJumpImpulse) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsKamikazeJumpImpulse.ContainsKey(sourceObjId)) {
+        EffectInternalCreateKamikazeJumpImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeTargetImpulse) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsKamikazeTargetImpulse.ContainsKey(sourceObjId)) {
+        EffectInternalCreateKamikazeTargetImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeAICapabilityUC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateKamikazeAICapabilityUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -6030,6 +6374,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(sourceObjId)) {
         EffectInternalCreateSimplePresenceTriggerTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsFireBombImpulse) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsFireBombImpulse.ContainsKey(sourceObjId)) {
+        EffectInternalCreateFireBombImpulse(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -6543,6 +6897,16 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDirtRoadLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsDirtRoadLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateDirtRoadLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCaveLevelController) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -6770,6 +7134,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsItemTTCMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateItemTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeTargetTTCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsKamikazeTargetTTCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateKamikazeTargetTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -7063,6 +7437,16 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeAICapabilityUCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateKamikazeAICapabilityUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGuardAICapabilityUCMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -7260,6 +7644,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsTerrainTileByLocationMutMap.ContainsKey(sourceObjId)) {
         EffectInternalCreateTerrainTileByLocationMutMap(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap.ContainsKey(sourceObjId)) {
+        EffectInternalCreateKamikazeTargetTTCStrongByLocationMutMap(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -7807,6 +8201,34 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsItemTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeTargetTTCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsKamikazeTargetTTCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKamikazeTargetTTCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectKamikazeTargetTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectKamikazeTargetTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsKamikazeTargetTTCMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -8623,6 +9045,34 @@ public class Root {
         }
       }
              
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeAICapabilityUCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectKamikazeAICapabilityUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectKamikazeAICapabilityUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGuardAICapabilityUCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -9186,6 +9636,37 @@ public class Root {
         }
       }
              
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var entryInCurrentObjIncarnation in new SortedDictionary<Location, int>(currentObjIncarnation.map)) {
+              var key = entryInCurrentObjIncarnation.Key;
+              if (!sourceObjIncarnation.map.ContainsKey(key)) {
+                EffectKamikazeTargetTTCStrongByLocationMutMapRemove(objId, key);
+              }
+            }
+            foreach (var entryInSourceObjIncarnation in sourceObjIncarnation.map) {
+              var key = entryInSourceObjIncarnation.Key;
+              var element = entryInSourceObjIncarnation.Value;
+              if (!currentObjIncarnation.map.ContainsKey(key)) {
+                EffectKamikazeTargetTTCStrongByLocationMutMapAdd(objId, key, element);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRand) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -9553,6 +10034,98 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsMoveImpulse[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeTargetTTC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsKamikazeTargetTTC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKamikazeTargetTTC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsKamikazeTargetTTC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeJumpImpulse) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsKamikazeJumpImpulse.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKamikazeJumpImpulse[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsKamikazeJumpImpulse[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeTargetImpulse) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsKamikazeTargetImpulse.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKamikazeTargetImpulse[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsKamikazeTargetImpulse[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeAICapabilityUC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKamikazeAICapabilityUC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          if (sourceObjIncarnation.targetByLocation != currentObjIncarnation.targetByLocation) {
+            EffectKamikazeAICapabilityUCSetTargetByLocation(objId, new KamikazeTargetTTCStrongByLocationMutMap(this, sourceObjIncarnation.targetByLocation));
+          }
+
+          if (sourceObjIncarnation.targetLocationCenter != currentObjIncarnation.targetLocationCenter) {
+            EffectKamikazeAICapabilityUCSetTargetLocationCenter(objId, sourceObjIncarnation.targetLocationCenter);
+          }
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsKamikazeAICapabilityUC[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -10031,6 +10604,27 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsSimplePresenceTriggerTTC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsFireBombImpulse) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsFireBombImpulse.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsFireBombImpulse[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsFireBombImpulse[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -11147,6 +11741,27 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDirtRoadLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsDirtRoadLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDirtRoadLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsDirtRoadLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCaveLevelController) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -11322,6 +11937,34 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCIncarnation>>(rootIncarnation.incarnationsKamikazeTargetTTC)) {
+      if (!sourceIncarnation.incarnationsKamikazeTargetTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectKamikazeTargetTTCDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KamikazeJumpImpulseIncarnation>>(rootIncarnation.incarnationsKamikazeJumpImpulse)) {
+      if (!sourceIncarnation.incarnationsKamikazeJumpImpulse.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectKamikazeJumpImpulseDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetImpulseIncarnation>>(rootIncarnation.incarnationsKamikazeTargetImpulse)) {
+      if (!sourceIncarnation.incarnationsKamikazeTargetImpulse.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectKamikazeTargetImpulseDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KamikazeAICapabilityUCIncarnation>>(rootIncarnation.incarnationsKamikazeAICapabilityUC)) {
+      if (!sourceIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectKamikazeAICapabilityUCDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<InvincibilityUCIncarnation>>(rootIncarnation.incarnationsInvincibilityUC)) {
       if (!sourceIncarnation.incarnationsInvincibilityUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -11473,6 +12116,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectSimplePresenceTriggerTTCDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<FireBombImpulseIncarnation>>(rootIncarnation.incarnationsFireBombImpulse)) {
+      if (!sourceIncarnation.incarnationsFireBombImpulse.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectFireBombImpulseDelete(id);
       }
     }
 
@@ -11833,6 +12483,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DirtRoadLevelControllerIncarnation>>(rootIncarnation.incarnationsDirtRoadLevelController)) {
+      if (!sourceIncarnation.incarnationsDirtRoadLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectDirtRoadLevelControllerDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>>(rootIncarnation.incarnationsCaveLevelController)) {
       if (!sourceIncarnation.incarnationsCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -11991,6 +12648,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsItemTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectItemTTCMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCMutSetIncarnation>>(rootIncarnation.incarnationsKamikazeTargetTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsKamikazeTargetTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectKamikazeTargetTTCMutSetDelete(id);
       }
     }
 
@@ -12197,6 +12861,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KamikazeAICapabilityUCMutSetIncarnation>>(rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet)) {
+      if (!sourceIncarnation.incarnationsKamikazeAICapabilityUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectKamikazeAICapabilityUCMutSetDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<GuardAICapabilityUCMutSetIncarnation>>(rootIncarnation.incarnationsGuardAICapabilityUCMutSet)) {
       if (!sourceIncarnation.incarnationsGuardAICapabilityUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -12334,6 +13005,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsTerrainTileByLocationMutMap.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectTerrainTileByLocationMutMapDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetTTCStrongByLocationMutMapIncarnation>>(rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap)) {
+      if (!sourceIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectKamikazeTargetTTCStrongByLocationMutMapDelete(id);
       }
     }
 
@@ -13070,6 +13748,7 @@ public class Root {
   public IUnitComponentMutBunch EffectIUnitComponentMutBunchCreate(
       WanderAICapabilityUCMutSet membersWanderAICapabilityUCMutSet,
       SummonAICapabilityUCMutSet membersSummonAICapabilityUCMutSet,
+      KamikazeAICapabilityUCMutSet membersKamikazeAICapabilityUCMutSet,
       GuardAICapabilityUCMutSet membersGuardAICapabilityUCMutSet,
       TimeCloneAICapabilityUCMutSet membersTimeCloneAICapabilityUCMutSet,
       MiredUCMutSet membersMiredUCMutSet,
@@ -13092,6 +13771,7 @@ public class Root {
     CheckUnlocked();
     CheckHasWanderAICapabilityUCMutSet(membersWanderAICapabilityUCMutSet);
     CheckHasSummonAICapabilityUCMutSet(membersSummonAICapabilityUCMutSet);
+    CheckHasKamikazeAICapabilityUCMutSet(membersKamikazeAICapabilityUCMutSet);
     CheckHasGuardAICapabilityUCMutSet(membersGuardAICapabilityUCMutSet);
     CheckHasTimeCloneAICapabilityUCMutSet(membersTimeCloneAICapabilityUCMutSet);
     CheckHasMiredUCMutSet(membersMiredUCMutSet);
@@ -13117,6 +13797,7 @@ public class Root {
         new IUnitComponentMutBunchIncarnation(
             membersWanderAICapabilityUCMutSet.id,
             membersSummonAICapabilityUCMutSet.id,
+            membersKamikazeAICapabilityUCMutSet.id,
             membersGuardAICapabilityUCMutSet.id,
             membersTimeCloneAICapabilityUCMutSet.id,
             membersMiredUCMutSet.id,
@@ -13170,25 +13851,26 @@ public class Root {
     int result = id * version;
     result += id * version * 1 * incarnation.membersWanderAICapabilityUCMutSet.GetDeterministicHashCode();
     result += id * version * 2 * incarnation.membersSummonAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.membersGuardAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.membersMiredUCMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.membersInvincibilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.membersDefyingUCMutSet.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.membersBaseMovementTimeUCMutSet.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.membersBaseCombatTimeUCMutSet.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 15 * incarnation.membersSpeedRingMutSet.GetDeterministicHashCode();
-    result += id * version * 16 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
-    result += id * version * 17 * incarnation.membersBlastRodMutSet.GetDeterministicHashCode();
-    result += id * version * 18 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
-    result += id * version * 19 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
-    result += id * version * 20 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
-    result += id * version * 21 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersKamikazeAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersGuardAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersMiredUCMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersInvincibilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.membersDefyingUCMutSet.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.membersBaseMovementTimeUCMutSet.GetDeterministicHashCode();
+    result += id * version * 13 * incarnation.membersBaseCombatTimeUCMutSet.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 16 * incarnation.membersSpeedRingMutSet.GetDeterministicHashCode();
+    result += id * version * 17 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
+    result += id * version * 18 * incarnation.membersBlastRodMutSet.GetDeterministicHashCode();
+    result += id * version * 19 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
+    result += id * version * 20 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
+    result += id * version * 21 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 22 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -14913,6 +15595,618 @@ public class Root {
       }
     }
     effectsMoveImpulseCreateEffect.Clear();
+  }
+  public KamikazeTargetTTCIncarnation GetKamikazeTargetTTCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsKamikazeTargetTTC[id].incarnation;
+  }
+  public bool KamikazeTargetTTCExists(int id) {
+    return rootIncarnation.incarnationsKamikazeTargetTTC.ContainsKey(id);
+  }
+  public KamikazeTargetTTC GetKamikazeTargetTTC(int id) {
+    return new KamikazeTargetTTC(this, id);
+  }
+  public List<KamikazeTargetTTC> AllKamikazeTargetTTC() {
+    List<KamikazeTargetTTC> result = new List<KamikazeTargetTTC>(rootIncarnation.incarnationsKamikazeTargetTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsKamikazeTargetTTC.Keys) {
+      result.Add(new KamikazeTargetTTC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<KamikazeTargetTTC> EnumAllKamikazeTargetTTC() {
+    foreach (var id in rootIncarnation.incarnationsKamikazeTargetTTC.Keys) {
+      yield return GetKamikazeTargetTTC(id);
+    }
+  }
+  public void CheckHasKamikazeTargetTTC(KamikazeTargetTTC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasKamikazeTargetTTC(thing.id);
+  }
+  public void CheckHasKamikazeTargetTTC(int id) {
+    if (!rootIncarnation.incarnationsKamikazeTargetTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid KamikazeTargetTTC: " + id);
+    }
+  }
+  public void AddKamikazeTargetTTCObserver(int id, IKamikazeTargetTTCEffectObserver observer) {
+    List<IKamikazeTargetTTCEffectObserver> obsies;
+    if (!observersForKamikazeTargetTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IKamikazeTargetTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForKamikazeTargetTTC[id] = obsies;
+  }
+
+  public void RemoveKamikazeTargetTTCObserver(int id, IKamikazeTargetTTCEffectObserver observer) {
+    if (observersForKamikazeTargetTTC.ContainsKey(id)) {
+      var list = observersForKamikazeTargetTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForKamikazeTargetTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public KamikazeTargetTTC EffectKamikazeTargetTTCCreate(
+      KamikazeAICapabilityUC capability) {
+    CheckUnlocked();
+    CheckHasKamikazeAICapabilityUC(capability);
+
+    var id = NewId();
+    var incarnation =
+        new KamikazeTargetTTCIncarnation(
+            capability.id
+            );
+    EffectInternalCreateKamikazeTargetTTC(id, rootIncarnation.version, incarnation);
+    return new KamikazeTargetTTC(this, id);
+  }
+  public void EffectInternalCreateKamikazeTargetTTC(
+      int id,
+      int incarnationVersion,
+      KamikazeTargetTTCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new KamikazeTargetTTCCreateEffect(id);
+    rootIncarnation.incarnationsKamikazeTargetTTC.Add(
+        id,
+        new VersionAndIncarnation<KamikazeTargetTTCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsKamikazeTargetTTCCreateEffect.Add(effect);
+  }
+
+  public void EffectKamikazeTargetTTCDelete(int id) {
+    CheckUnlocked();
+    var effect = new KamikazeTargetTTCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsKamikazeTargetTTC[id];
+
+    rootIncarnation.incarnationsKamikazeTargetTTC.Remove(id);
+    effectsKamikazeTargetTTCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetKamikazeTargetTTCHash(int id, int version, KamikazeTargetTTCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.capability.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastKamikazeTargetTTCEffects(
+      SortedDictionary<int, List<IKamikazeTargetTTCEffectObserver>> observers) {
+    foreach (var effect in effectsKamikazeTargetTTCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetTTCEffect(effect);
+        }
+        observersForKamikazeTargetTTC.Remove(effect.id);
+      }
+    }
+    effectsKamikazeTargetTTCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsKamikazeTargetTTCCreateEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetTTCEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeTargetTTCCreateEffect.Clear();
+  }
+  public KamikazeJumpImpulseIncarnation GetKamikazeJumpImpulseIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsKamikazeJumpImpulse[id].incarnation;
+  }
+  public bool KamikazeJumpImpulseExists(int id) {
+    return rootIncarnation.incarnationsKamikazeJumpImpulse.ContainsKey(id);
+  }
+  public KamikazeJumpImpulse GetKamikazeJumpImpulse(int id) {
+    return new KamikazeJumpImpulse(this, id);
+  }
+  public List<KamikazeJumpImpulse> AllKamikazeJumpImpulse() {
+    List<KamikazeJumpImpulse> result = new List<KamikazeJumpImpulse>(rootIncarnation.incarnationsKamikazeJumpImpulse.Count);
+    foreach (var id in rootIncarnation.incarnationsKamikazeJumpImpulse.Keys) {
+      result.Add(new KamikazeJumpImpulse(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<KamikazeJumpImpulse> EnumAllKamikazeJumpImpulse() {
+    foreach (var id in rootIncarnation.incarnationsKamikazeJumpImpulse.Keys) {
+      yield return GetKamikazeJumpImpulse(id);
+    }
+  }
+  public void CheckHasKamikazeJumpImpulse(KamikazeJumpImpulse thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasKamikazeJumpImpulse(thing.id);
+  }
+  public void CheckHasKamikazeJumpImpulse(int id) {
+    if (!rootIncarnation.incarnationsKamikazeJumpImpulse.ContainsKey(id)) {
+      throw new System.Exception("Invalid KamikazeJumpImpulse: " + id);
+    }
+  }
+  public void AddKamikazeJumpImpulseObserver(int id, IKamikazeJumpImpulseEffectObserver observer) {
+    List<IKamikazeJumpImpulseEffectObserver> obsies;
+    if (!observersForKamikazeJumpImpulse.TryGetValue(id, out obsies)) {
+      obsies = new List<IKamikazeJumpImpulseEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForKamikazeJumpImpulse[id] = obsies;
+  }
+
+  public void RemoveKamikazeJumpImpulseObserver(int id, IKamikazeJumpImpulseEffectObserver observer) {
+    if (observersForKamikazeJumpImpulse.ContainsKey(id)) {
+      var list = observersForKamikazeJumpImpulse[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForKamikazeJumpImpulse.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public KamikazeJumpImpulse EffectKamikazeJumpImpulseCreate(
+      int weight,
+      KamikazeAICapabilityUC capability,
+      Location jumpTarget) {
+    CheckUnlocked();
+    CheckHasKamikazeAICapabilityUC(capability);
+
+    var id = NewId();
+    var incarnation =
+        new KamikazeJumpImpulseIncarnation(
+            weight,
+            capability.id,
+            jumpTarget
+            );
+    EffectInternalCreateKamikazeJumpImpulse(id, rootIncarnation.version, incarnation);
+    return new KamikazeJumpImpulse(this, id);
+  }
+  public void EffectInternalCreateKamikazeJumpImpulse(
+      int id,
+      int incarnationVersion,
+      KamikazeJumpImpulseIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new KamikazeJumpImpulseCreateEffect(id);
+    rootIncarnation.incarnationsKamikazeJumpImpulse.Add(
+        id,
+        new VersionAndIncarnation<KamikazeJumpImpulseIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsKamikazeJumpImpulseCreateEffect.Add(effect);
+  }
+
+  public void EffectKamikazeJumpImpulseDelete(int id) {
+    CheckUnlocked();
+    var effect = new KamikazeJumpImpulseDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsKamikazeJumpImpulse[id];
+
+    rootIncarnation.incarnationsKamikazeJumpImpulse.Remove(id);
+    effectsKamikazeJumpImpulseDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetKamikazeJumpImpulseHash(int id, int version, KamikazeJumpImpulseIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.weight.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.capability.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.jumpTarget.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastKamikazeJumpImpulseEffects(
+      SortedDictionary<int, List<IKamikazeJumpImpulseEffectObserver>> observers) {
+    foreach (var effect in effectsKamikazeJumpImpulseDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeJumpImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeJumpImpulseEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeJumpImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeJumpImpulseEffect(effect);
+        }
+        observersForKamikazeJumpImpulse.Remove(effect.id);
+      }
+    }
+    effectsKamikazeJumpImpulseDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsKamikazeJumpImpulseCreateEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeJumpImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeJumpImpulseEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeJumpImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeJumpImpulseEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeJumpImpulseCreateEffect.Clear();
+  }
+  public KamikazeTargetImpulseIncarnation GetKamikazeTargetImpulseIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsKamikazeTargetImpulse[id].incarnation;
+  }
+  public bool KamikazeTargetImpulseExists(int id) {
+    return rootIncarnation.incarnationsKamikazeTargetImpulse.ContainsKey(id);
+  }
+  public KamikazeTargetImpulse GetKamikazeTargetImpulse(int id) {
+    return new KamikazeTargetImpulse(this, id);
+  }
+  public List<KamikazeTargetImpulse> AllKamikazeTargetImpulse() {
+    List<KamikazeTargetImpulse> result = new List<KamikazeTargetImpulse>(rootIncarnation.incarnationsKamikazeTargetImpulse.Count);
+    foreach (var id in rootIncarnation.incarnationsKamikazeTargetImpulse.Keys) {
+      result.Add(new KamikazeTargetImpulse(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<KamikazeTargetImpulse> EnumAllKamikazeTargetImpulse() {
+    foreach (var id in rootIncarnation.incarnationsKamikazeTargetImpulse.Keys) {
+      yield return GetKamikazeTargetImpulse(id);
+    }
+  }
+  public void CheckHasKamikazeTargetImpulse(KamikazeTargetImpulse thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasKamikazeTargetImpulse(thing.id);
+  }
+  public void CheckHasKamikazeTargetImpulse(int id) {
+    if (!rootIncarnation.incarnationsKamikazeTargetImpulse.ContainsKey(id)) {
+      throw new System.Exception("Invalid KamikazeTargetImpulse: " + id);
+    }
+  }
+  public void AddKamikazeTargetImpulseObserver(int id, IKamikazeTargetImpulseEffectObserver observer) {
+    List<IKamikazeTargetImpulseEffectObserver> obsies;
+    if (!observersForKamikazeTargetImpulse.TryGetValue(id, out obsies)) {
+      obsies = new List<IKamikazeTargetImpulseEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForKamikazeTargetImpulse[id] = obsies;
+  }
+
+  public void RemoveKamikazeTargetImpulseObserver(int id, IKamikazeTargetImpulseEffectObserver observer) {
+    if (observersForKamikazeTargetImpulse.ContainsKey(id)) {
+      var list = observersForKamikazeTargetImpulse[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForKamikazeTargetImpulse.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public KamikazeTargetImpulse EffectKamikazeTargetImpulseCreate(
+      int weight,
+      KamikazeAICapabilityUC capability,
+      Location targetLocationCenter,
+      LocationImmList targetLocations) {
+    CheckUnlocked();
+    CheckHasKamikazeAICapabilityUC(capability);
+
+    var id = NewId();
+    var incarnation =
+        new KamikazeTargetImpulseIncarnation(
+            weight,
+            capability.id,
+            targetLocationCenter,
+            targetLocations
+            );
+    EffectInternalCreateKamikazeTargetImpulse(id, rootIncarnation.version, incarnation);
+    return new KamikazeTargetImpulse(this, id);
+  }
+  public void EffectInternalCreateKamikazeTargetImpulse(
+      int id,
+      int incarnationVersion,
+      KamikazeTargetImpulseIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new KamikazeTargetImpulseCreateEffect(id);
+    rootIncarnation.incarnationsKamikazeTargetImpulse.Add(
+        id,
+        new VersionAndIncarnation<KamikazeTargetImpulseIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsKamikazeTargetImpulseCreateEffect.Add(effect);
+  }
+
+  public void EffectKamikazeTargetImpulseDelete(int id) {
+    CheckUnlocked();
+    var effect = new KamikazeTargetImpulseDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsKamikazeTargetImpulse[id];
+
+    rootIncarnation.incarnationsKamikazeTargetImpulse.Remove(id);
+    effectsKamikazeTargetImpulseDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetKamikazeTargetImpulseHash(int id, int version, KamikazeTargetImpulseIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.weight.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.capability.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.targetLocationCenter.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.targetLocations.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastKamikazeTargetImpulseEffects(
+      SortedDictionary<int, List<IKamikazeTargetImpulseEffectObserver>> observers) {
+    foreach (var effect in effectsKamikazeTargetImpulseDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetImpulseEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetImpulseEffect(effect);
+        }
+        observersForKamikazeTargetImpulse.Remove(effect.id);
+      }
+    }
+    effectsKamikazeTargetImpulseDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsKamikazeTargetImpulseCreateEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetImpulseEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetImpulseEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeTargetImpulseCreateEffect.Clear();
+  }
+  public KamikazeAICapabilityUCIncarnation GetKamikazeAICapabilityUCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsKamikazeAICapabilityUC[id].incarnation;
+  }
+  public bool KamikazeAICapabilityUCExists(int id) {
+    return rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id);
+  }
+  public KamikazeAICapabilityUC GetKamikazeAICapabilityUC(int id) {
+    return new KamikazeAICapabilityUC(this, id);
+  }
+  public List<KamikazeAICapabilityUC> AllKamikazeAICapabilityUC() {
+    List<KamikazeAICapabilityUC> result = new List<KamikazeAICapabilityUC>(rootIncarnation.incarnationsKamikazeAICapabilityUC.Count);
+    foreach (var id in rootIncarnation.incarnationsKamikazeAICapabilityUC.Keys) {
+      result.Add(new KamikazeAICapabilityUC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<KamikazeAICapabilityUC> EnumAllKamikazeAICapabilityUC() {
+    foreach (var id in rootIncarnation.incarnationsKamikazeAICapabilityUC.Keys) {
+      yield return GetKamikazeAICapabilityUC(id);
+    }
+  }
+  public void CheckHasKamikazeAICapabilityUC(KamikazeAICapabilityUC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasKamikazeAICapabilityUC(thing.id);
+  }
+  public void CheckHasKamikazeAICapabilityUC(int id) {
+    if (!rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
+      throw new System.Exception("Invalid KamikazeAICapabilityUC: " + id);
+    }
+  }
+  public void AddKamikazeAICapabilityUCObserver(int id, IKamikazeAICapabilityUCEffectObserver observer) {
+    List<IKamikazeAICapabilityUCEffectObserver> obsies;
+    if (!observersForKamikazeAICapabilityUC.TryGetValue(id, out obsies)) {
+      obsies = new List<IKamikazeAICapabilityUCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForKamikazeAICapabilityUC[id] = obsies;
+  }
+
+  public void RemoveKamikazeAICapabilityUCObserver(int id, IKamikazeAICapabilityUCEffectObserver observer) {
+    if (observersForKamikazeAICapabilityUC.ContainsKey(id)) {
+      var list = observersForKamikazeAICapabilityUC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForKamikazeAICapabilityUC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public KamikazeAICapabilityUC EffectKamikazeAICapabilityUCCreate(
+      KamikazeTargetTTCStrongByLocationMutMap targetByLocation,
+      Location targetLocationCenter) {
+    CheckUnlocked();
+    CheckHasKamikazeTargetTTCStrongByLocationMutMap(targetByLocation);
+
+    var id = NewId();
+    var incarnation =
+        new KamikazeAICapabilityUCIncarnation(
+            targetByLocation.id,
+            targetLocationCenter
+            );
+    EffectInternalCreateKamikazeAICapabilityUC(id, rootIncarnation.version, incarnation);
+    return new KamikazeAICapabilityUC(this, id);
+  }
+  public void EffectInternalCreateKamikazeAICapabilityUC(
+      int id,
+      int incarnationVersion,
+      KamikazeAICapabilityUCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new KamikazeAICapabilityUCCreateEffect(id);
+    rootIncarnation.incarnationsKamikazeAICapabilityUC.Add(
+        id,
+        new VersionAndIncarnation<KamikazeAICapabilityUCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsKamikazeAICapabilityUCCreateEffect.Add(effect);
+  }
+
+  public void EffectKamikazeAICapabilityUCDelete(int id) {
+    CheckUnlocked();
+    var effect = new KamikazeAICapabilityUCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsKamikazeAICapabilityUC[id];
+
+    rootIncarnation.incarnationsKamikazeAICapabilityUC.Remove(id);
+    effectsKamikazeAICapabilityUCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetKamikazeAICapabilityUCHash(int id, int version, KamikazeAICapabilityUCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.targetByLocation.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.targetLocationCenter.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastKamikazeAICapabilityUCEffects(
+      SortedDictionary<int, List<IKamikazeAICapabilityUCEffectObserver>> observers) {
+    foreach (var effect in effectsKamikazeAICapabilityUCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeAICapabilityUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeAICapabilityUCEffect(effect);
+        }
+        observersForKamikazeAICapabilityUC.Remove(effect.id);
+      }
+    }
+    effectsKamikazeAICapabilityUCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsKamikazeAICapabilityUCSetTargetByLocationEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeAICapabilityUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeAICapabilityUCEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeAICapabilityUCSetTargetByLocationEffect.Clear();
+
+    foreach (var effect in effectsKamikazeAICapabilityUCSetTargetLocationCenterEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeAICapabilityUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeAICapabilityUCEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeAICapabilityUCSetTargetLocationCenterEffect.Clear();
+
+    foreach (var effect in effectsKamikazeAICapabilityUCCreateEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeAICapabilityUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeAICapabilityUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeAICapabilityUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeAICapabilityUCEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeAICapabilityUCCreateEffect.Clear();
+  }
+
+  public void EffectKamikazeAICapabilityUCSetTargetByLocation(int id, KamikazeTargetTTCStrongByLocationMutMap newValue) {
+    CheckUnlocked();
+    CheckHasKamikazeAICapabilityUC(id);
+    var effect = new KamikazeAICapabilityUCSetTargetByLocationEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeAICapabilityUC[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldId = oldIncarnationAndVersion.incarnation.targetByLocation;
+      oldIncarnationAndVersion.incarnation.targetByLocation = newValue.id;
+
+    } else {
+      var newIncarnation =
+          new KamikazeAICapabilityUCIncarnation(
+              newValue.id,
+              oldIncarnationAndVersion.incarnation.targetLocationCenter);
+      rootIncarnation.incarnationsKamikazeAICapabilityUC[id] =
+          new VersionAndIncarnation<KamikazeAICapabilityUCIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsKamikazeAICapabilityUCSetTargetByLocationEffect.Add(effect);
+  }
+
+  public void EffectKamikazeAICapabilityUCSetTargetLocationCenter(int id, Location newValue) {
+    CheckUnlocked();
+    CheckHasKamikazeAICapabilityUC(id);
+    var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeAICapabilityUC[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.targetLocationCenter;
+      oldIncarnationAndVersion.incarnation.targetLocationCenter = newValue;
+
+    } else {
+      var newIncarnation =
+          new KamikazeAICapabilityUCIncarnation(
+              oldIncarnationAndVersion.incarnation.targetByLocation,
+              newValue);
+      rootIncarnation.incarnationsKamikazeAICapabilityUC[id] =
+          new VersionAndIncarnation<KamikazeAICapabilityUCIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsKamikazeAICapabilityUCSetTargetLocationCenterEffect.Add(effect);
   }
   public InvincibilityUCIncarnation GetInvincibilityUCIncarnation(int id) {
     if (id == 0) {
@@ -17548,6 +18842,7 @@ public class Root {
   public ITerrainTileComponentMutBunch EffectITerrainTileComponentMutBunchCreate(
       SimplePresenceTriggerTTCMutSet membersSimplePresenceTriggerTTCMutSet,
       ItemTTCMutSet membersItemTTCMutSet,
+      KamikazeTargetTTCMutSet membersKamikazeTargetTTCMutSet,
       WarperTTCMutSet membersWarperTTCMutSet,
       TimeAnchorTTCMutSet membersTimeAnchorTTCMutSet,
       FireBombTTCMutSet membersFireBombTTCMutSet,
@@ -17578,6 +18873,7 @@ public class Root {
     CheckUnlocked();
     CheckHasSimplePresenceTriggerTTCMutSet(membersSimplePresenceTriggerTTCMutSet);
     CheckHasItemTTCMutSet(membersItemTTCMutSet);
+    CheckHasKamikazeTargetTTCMutSet(membersKamikazeTargetTTCMutSet);
     CheckHasWarperTTCMutSet(membersWarperTTCMutSet);
     CheckHasTimeAnchorTTCMutSet(membersTimeAnchorTTCMutSet);
     CheckHasFireBombTTCMutSet(membersFireBombTTCMutSet);
@@ -17611,6 +18907,7 @@ public class Root {
         new ITerrainTileComponentMutBunchIncarnation(
             membersSimplePresenceTriggerTTCMutSet.id,
             membersItemTTCMutSet.id,
+            membersKamikazeTargetTTCMutSet.id,
             membersWarperTTCMutSet.id,
             membersTimeAnchorTTCMutSet.id,
             membersFireBombTTCMutSet.id,
@@ -17672,33 +18969,34 @@ public class Root {
     int result = id * version;
     result += id * version * 1 * incarnation.membersSimplePresenceTriggerTTCMutSet.GetDeterministicHashCode();
     result += id * version * 2 * incarnation.membersItemTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.membersWarperTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.membersTimeAnchorTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.membersFireBombTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersMarkerTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.membersLevelLinkTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.membersMudTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.membersDirtTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.membersObsidianTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.membersDownStairsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.membersUpStairsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.membersWallTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.membersBloodTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 15 * incarnation.membersRocksTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 16 * incarnation.membersTreeTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 17 * incarnation.membersWaterTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 18 * incarnation.membersFloorTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 19 * incarnation.membersCaveWallTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 20 * incarnation.membersCaveTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 21 * incarnation.membersFallsTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 22 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 23 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 24 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 25 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 26 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 27 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 28 * incarnation.membersIncendianFallsLevelLinkerTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 29 * incarnation.membersEmberDeepLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersKamikazeTargetTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersWarperTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersTimeAnchorTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersFireBombTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersMarkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersLevelLinkTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersMudTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.membersDirtTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.membersObsidianTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.membersDownStairsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 13 * incarnation.membersUpStairsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.membersWallTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.membersBloodTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 16 * incarnation.membersRocksTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 17 * incarnation.membersTreeTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 18 * incarnation.membersWaterTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 19 * incarnation.membersFloorTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 20 * incarnation.membersCaveWallTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 21 * incarnation.membersCaveTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 22 * incarnation.membersFallsTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 23 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 24 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 25 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 26 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 27 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 28 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 29 * incarnation.membersIncendianFallsLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 30 * incarnation.membersEmberDeepLevelLinkerTTCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -18036,6 +19334,138 @@ public class Root {
       }
     }
     effectsSimplePresenceTriggerTTCCreateEffect.Clear();
+  }
+  public FireBombImpulseIncarnation GetFireBombImpulseIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsFireBombImpulse[id].incarnation;
+  }
+  public bool FireBombImpulseExists(int id) {
+    return rootIncarnation.incarnationsFireBombImpulse.ContainsKey(id);
+  }
+  public FireBombImpulse GetFireBombImpulse(int id) {
+    return new FireBombImpulse(this, id);
+  }
+  public List<FireBombImpulse> AllFireBombImpulse() {
+    List<FireBombImpulse> result = new List<FireBombImpulse>(rootIncarnation.incarnationsFireBombImpulse.Count);
+    foreach (var id in rootIncarnation.incarnationsFireBombImpulse.Keys) {
+      result.Add(new FireBombImpulse(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<FireBombImpulse> EnumAllFireBombImpulse() {
+    foreach (var id in rootIncarnation.incarnationsFireBombImpulse.Keys) {
+      yield return GetFireBombImpulse(id);
+    }
+  }
+  public void CheckHasFireBombImpulse(FireBombImpulse thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasFireBombImpulse(thing.id);
+  }
+  public void CheckHasFireBombImpulse(int id) {
+    if (!rootIncarnation.incarnationsFireBombImpulse.ContainsKey(id)) {
+      throw new System.Exception("Invalid FireBombImpulse: " + id);
+    }
+  }
+  public void AddFireBombImpulseObserver(int id, IFireBombImpulseEffectObserver observer) {
+    List<IFireBombImpulseEffectObserver> obsies;
+    if (!observersForFireBombImpulse.TryGetValue(id, out obsies)) {
+      obsies = new List<IFireBombImpulseEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForFireBombImpulse[id] = obsies;
+  }
+
+  public void RemoveFireBombImpulseObserver(int id, IFireBombImpulseEffectObserver observer) {
+    if (observersForFireBombImpulse.ContainsKey(id)) {
+      var list = observersForFireBombImpulse[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForFireBombImpulse.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public FireBombImpulse EffectFireBombImpulseCreate(
+      int weight,
+      Location location) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new FireBombImpulseIncarnation(
+            weight,
+            location
+            );
+    EffectInternalCreateFireBombImpulse(id, rootIncarnation.version, incarnation);
+    return new FireBombImpulse(this, id);
+  }
+  public void EffectInternalCreateFireBombImpulse(
+      int id,
+      int incarnationVersion,
+      FireBombImpulseIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new FireBombImpulseCreateEffect(id);
+    rootIncarnation.incarnationsFireBombImpulse.Add(
+        id,
+        new VersionAndIncarnation<FireBombImpulseIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsFireBombImpulseCreateEffect.Add(effect);
+  }
+
+  public void EffectFireBombImpulseDelete(int id) {
+    CheckUnlocked();
+    var effect = new FireBombImpulseDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsFireBombImpulse[id];
+
+    rootIncarnation.incarnationsFireBombImpulse.Remove(id);
+    effectsFireBombImpulseDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetFireBombImpulseHash(int id, int version, FireBombImpulseIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.weight.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.location.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastFireBombImpulseEffects(
+      SortedDictionary<int, List<IFireBombImpulseEffectObserver>> observers) {
+    foreach (var effect in effectsFireBombImpulseDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombImpulseEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombImpulseEffect(effect);
+        }
+        observersForFireBombImpulse.Remove(effect.id);
+      }
+    }
+    effectsFireBombImpulseDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsFireBombImpulseCreateEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombImpulseEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombImpulseEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombImpulseEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombImpulseEffect(effect);
+        }
+      }
+    }
+    effectsFireBombImpulseCreateEffect.Clear();
   }
   public FireBombTTCIncarnation GetFireBombTTCIncarnation(int id) {
     if (id == 0) {
@@ -25120,6 +26550,136 @@ public class Root {
     }
     effectsEmberDeepLevelLinkerTTCCreateEffect.Clear();
   }
+  public DirtRoadLevelControllerIncarnation GetDirtRoadLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsDirtRoadLevelController[id].incarnation;
+  }
+  public bool DirtRoadLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsDirtRoadLevelController.ContainsKey(id);
+  }
+  public DirtRoadLevelController GetDirtRoadLevelController(int id) {
+    return new DirtRoadLevelController(this, id);
+  }
+  public List<DirtRoadLevelController> AllDirtRoadLevelController() {
+    List<DirtRoadLevelController> result = new List<DirtRoadLevelController>(rootIncarnation.incarnationsDirtRoadLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsDirtRoadLevelController.Keys) {
+      result.Add(new DirtRoadLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<DirtRoadLevelController> EnumAllDirtRoadLevelController() {
+    foreach (var id in rootIncarnation.incarnationsDirtRoadLevelController.Keys) {
+      yield return GetDirtRoadLevelController(id);
+    }
+  }
+  public void CheckHasDirtRoadLevelController(DirtRoadLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasDirtRoadLevelController(thing.id);
+  }
+  public void CheckHasDirtRoadLevelController(int id) {
+    if (!rootIncarnation.incarnationsDirtRoadLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid DirtRoadLevelController: " + id);
+    }
+  }
+  public void AddDirtRoadLevelControllerObserver(int id, IDirtRoadLevelControllerEffectObserver observer) {
+    List<IDirtRoadLevelControllerEffectObserver> obsies;
+    if (!observersForDirtRoadLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IDirtRoadLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForDirtRoadLevelController[id] = obsies;
+  }
+
+  public void RemoveDirtRoadLevelControllerObserver(int id, IDirtRoadLevelControllerEffectObserver observer) {
+    if (observersForDirtRoadLevelController.ContainsKey(id)) {
+      var list = observersForDirtRoadLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForDirtRoadLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public DirtRoadLevelController EffectDirtRoadLevelControllerCreate(
+      Level level) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new DirtRoadLevelControllerIncarnation(
+            level.id
+            );
+    EffectInternalCreateDirtRoadLevelController(id, rootIncarnation.version, incarnation);
+    return new DirtRoadLevelController(this, id);
+  }
+  public void EffectInternalCreateDirtRoadLevelController(
+      int id,
+      int incarnationVersion,
+      DirtRoadLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new DirtRoadLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsDirtRoadLevelController.Add(
+        id,
+        new VersionAndIncarnation<DirtRoadLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsDirtRoadLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectDirtRoadLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new DirtRoadLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsDirtRoadLevelController[id];
+
+    rootIncarnation.incarnationsDirtRoadLevelController.Remove(id);
+    effectsDirtRoadLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetDirtRoadLevelControllerHash(int id, int version, DirtRoadLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastDirtRoadLevelControllerEffects(
+      SortedDictionary<int, List<IDirtRoadLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsDirtRoadLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IDirtRoadLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDirtRoadLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IDirtRoadLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDirtRoadLevelControllerEffect(effect);
+        }
+        observersForDirtRoadLevelController.Remove(effect.id);
+      }
+    }
+    effectsDirtRoadLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsDirtRoadLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<IDirtRoadLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDirtRoadLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IDirtRoadLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDirtRoadLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsDirtRoadLevelControllerCreateEffect.Clear();
+  }
   public CaveLevelControllerIncarnation GetCaveLevelControllerIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -25540,6 +27100,9 @@ public class Root {
   }
 
   public IImpulsePreReactor GetIImpulsePreReactor(int id) {
+    if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
+      return new KamikazeAICapabilityUCAsIImpulsePreReactor(new KamikazeAICapabilityUC(this, id));
+    }
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIImpulsePreReactor(new BideAICapabilityUC(this, id));
     }
@@ -25549,6 +27112,9 @@ public class Root {
     throw new Exception("Unknown IImpulsePreReactor: " + id);
   }
   public IImpulsePreReactor GetIImpulsePreReactorOrNull(int id) {
+    if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
+      return new KamikazeAICapabilityUCAsIImpulsePreReactor(new KamikazeAICapabilityUC(this, id));
+    }
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIImpulsePreReactor(new BideAICapabilityUC(this, id));
     }
@@ -25577,6 +27143,9 @@ public class Root {
     if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
       return new TimeCloneAICapabilityUCAsIAICapabilityUC(new TimeCloneAICapabilityUC(this, id));
     }
+    if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
+      return new KamikazeAICapabilityUCAsIAICapabilityUC(new KamikazeAICapabilityUC(this, id));
+    }
     if (rootIncarnation.incarnationsGuardAICapabilityUC.ContainsKey(id)) {
       return new GuardAICapabilityUCAsIAICapabilityUC(new GuardAICapabilityUC(this, id));
     }
@@ -25597,6 +27166,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
       return new TimeCloneAICapabilityUCAsIAICapabilityUC(new TimeCloneAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
+      return new KamikazeAICapabilityUCAsIAICapabilityUC(new KamikazeAICapabilityUC(this, id));
     }
     if (rootIncarnation.incarnationsGuardAICapabilityUC.ContainsKey(id)) {
       return new GuardAICapabilityUCAsIAICapabilityUC(new GuardAICapabilityUC(this, id));
@@ -25716,6 +27288,9 @@ public class Root {
     if (rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id)) {
       return new SummonAICapabilityUCAsIUnitComponent(new SummonAICapabilityUC(this, id));
     }
+    if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
+      return new KamikazeAICapabilityUCAsIUnitComponent(new KamikazeAICapabilityUC(this, id));
+    }
     if (rootIncarnation.incarnationsGuardAICapabilityUC.ContainsKey(id)) {
       return new GuardAICapabilityUCAsIUnitComponent(new GuardAICapabilityUC(this, id));
     }
@@ -25781,6 +27356,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id)) {
       return new SummonAICapabilityUCAsIUnitComponent(new SummonAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
+      return new KamikazeAICapabilityUCAsIUnitComponent(new KamikazeAICapabilityUC(this, id));
     }
     if (rootIncarnation.incarnationsGuardAICapabilityUC.ContainsKey(id)) {
       return new GuardAICapabilityUCAsIUnitComponent(new GuardAICapabilityUC(this, id));
@@ -25994,6 +27572,12 @@ public class Root {
     if (rootIncarnation.incarnationsMoveImpulse.ContainsKey(id)) {
       return new MoveImpulseAsIImpulse(new MoveImpulse(this, id));
     }
+    if (rootIncarnation.incarnationsKamikazeJumpImpulse.ContainsKey(id)) {
+      return new KamikazeJumpImpulseAsIImpulse(new KamikazeJumpImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsKamikazeTargetImpulse.ContainsKey(id)) {
+      return new KamikazeTargetImpulseAsIImpulse(new KamikazeTargetImpulse(this, id));
+    }
     if (rootIncarnation.incarnationsNoImpulse.ContainsKey(id)) {
       return new NoImpulseAsIImpulse(new NoImpulse(this, id));
     }
@@ -26020,6 +27604,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsPursueImpulse.ContainsKey(id)) {
       return new PursueImpulseAsIImpulse(new PursueImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsFireBombImpulse.ContainsKey(id)) {
+      return new FireBombImpulseAsIImpulse(new FireBombImpulse(this, id));
     }
     throw new Exception("Unknown IImpulse: " + id);
   }
@@ -26036,6 +27623,12 @@ public class Root {
     if (rootIncarnation.incarnationsMoveImpulse.ContainsKey(id)) {
       return new MoveImpulseAsIImpulse(new MoveImpulse(this, id));
     }
+    if (rootIncarnation.incarnationsKamikazeJumpImpulse.ContainsKey(id)) {
+      return new KamikazeJumpImpulseAsIImpulse(new KamikazeJumpImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsKamikazeTargetImpulse.ContainsKey(id)) {
+      return new KamikazeTargetImpulseAsIImpulse(new KamikazeTargetImpulse(this, id));
+    }
     if (rootIncarnation.incarnationsNoImpulse.ContainsKey(id)) {
       return new NoImpulseAsIImpulse(new NoImpulse(this, id));
     }
@@ -26062,6 +27655,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsPursueImpulse.ContainsKey(id)) {
       return new PursueImpulseAsIImpulse(new PursueImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsFireBombImpulse.ContainsKey(id)) {
+      return new FireBombImpulseAsIImpulse(new FireBombImpulse(this, id));
     }
     return NullIImpulse.Null;
   }
@@ -26224,6 +27820,9 @@ public class Root {
     if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
       return new ItemTTCAsITerrainTileComponent(new ItemTTC(this, id));
     }
+    if (rootIncarnation.incarnationsKamikazeTargetTTC.ContainsKey(id)) {
+      return new KamikazeTargetTTCAsITerrainTileComponent(new KamikazeTargetTTC(this, id));
+    }
     if (rootIncarnation.incarnationsWarperTTC.ContainsKey(id)) {
       return new WarperTTCAsITerrainTileComponent(new WarperTTC(this, id));
     }
@@ -26313,6 +27912,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
       return new ItemTTCAsITerrainTileComponent(new ItemTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsKamikazeTargetTTC.ContainsKey(id)) {
+      return new KamikazeTargetTTCAsITerrainTileComponent(new KamikazeTargetTTC(this, id));
     }
     if (rootIncarnation.incarnationsWarperTTC.ContainsKey(id)) {
       return new WarperTTCAsITerrainTileComponent(new WarperTTC(this, id));
@@ -26444,6 +28046,9 @@ public class Root {
     if (rootIncarnation.incarnationsLakeLevelController.ContainsKey(id)) {
       return new LakeLevelControllerAsILevelController(new LakeLevelController(this, id));
     }
+    if (rootIncarnation.incarnationsDirtRoadLevelController.ContainsKey(id)) {
+      return new DirtRoadLevelControllerAsILevelController(new DirtRoadLevelController(this, id));
+    }
     if (rootIncarnation.incarnationsCaveLevelController.ContainsKey(id)) {
       return new CaveLevelControllerAsILevelController(new CaveLevelController(this, id));
     }
@@ -26491,6 +28096,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsLakeLevelController.ContainsKey(id)) {
       return new LakeLevelControllerAsILevelController(new LakeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsDirtRoadLevelController.ContainsKey(id)) {
+      return new DirtRoadLevelControllerAsILevelController(new DirtRoadLevelController(this, id));
     }
     if (rootIncarnation.incarnationsCaveLevelController.ContainsKey(id)) {
       return new CaveLevelControllerAsILevelController(new CaveLevelController(this, id));
@@ -26698,6 +28306,9 @@ public class Root {
     if (rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id)) {
       return new SummonAICapabilityUCAsIDestructible(new SummonAICapabilityUC(this, id));
     }
+    if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
+      return new KamikazeAICapabilityUCAsIDestructible(new KamikazeAICapabilityUC(this, id));
+    }
     if (rootIncarnation.incarnationsGuardAICapabilityUC.ContainsKey(id)) {
       return new GuardAICapabilityUCAsIDestructible(new GuardAICapabilityUC(this, id));
     }
@@ -26767,6 +28378,12 @@ public class Root {
     if (rootIncarnation.incarnationsMoveImpulse.ContainsKey(id)) {
       return new MoveImpulseAsIDestructible(new MoveImpulse(this, id));
     }
+    if (rootIncarnation.incarnationsKamikazeJumpImpulse.ContainsKey(id)) {
+      return new KamikazeJumpImpulseAsIDestructible(new KamikazeJumpImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsKamikazeTargetImpulse.ContainsKey(id)) {
+      return new KamikazeTargetImpulseAsIDestructible(new KamikazeTargetImpulse(this, id));
+    }
     if (rootIncarnation.incarnationsNoImpulse.ContainsKey(id)) {
       return new NoImpulseAsIDestructible(new NoImpulse(this, id));
     }
@@ -26794,11 +28411,17 @@ public class Root {
     if (rootIncarnation.incarnationsPursueImpulse.ContainsKey(id)) {
       return new PursueImpulseAsIDestructible(new PursueImpulse(this, id));
     }
+    if (rootIncarnation.incarnationsFireBombImpulse.ContainsKey(id)) {
+      return new FireBombImpulseAsIDestructible(new FireBombImpulse(this, id));
+    }
     if (rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(id)) {
       return new SimplePresenceTriggerTTCAsIDestructible(new SimplePresenceTriggerTTC(this, id));
     }
     if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
       return new ItemTTCAsIDestructible(new ItemTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsKamikazeTargetTTC.ContainsKey(id)) {
+      return new KamikazeTargetTTCAsIDestructible(new KamikazeTargetTTC(this, id));
     }
     if (rootIncarnation.incarnationsWarperTTC.ContainsKey(id)) {
       return new WarperTTCAsIDestructible(new WarperTTC(this, id));
@@ -26893,6 +28516,9 @@ public class Root {
     if (rootIncarnation.incarnationsSummonAICapabilityUC.ContainsKey(id)) {
       return new SummonAICapabilityUCAsIDestructible(new SummonAICapabilityUC(this, id));
     }
+    if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
+      return new KamikazeAICapabilityUCAsIDestructible(new KamikazeAICapabilityUC(this, id));
+    }
     if (rootIncarnation.incarnationsGuardAICapabilityUC.ContainsKey(id)) {
       return new GuardAICapabilityUCAsIDestructible(new GuardAICapabilityUC(this, id));
     }
@@ -26962,6 +28588,12 @@ public class Root {
     if (rootIncarnation.incarnationsMoveImpulse.ContainsKey(id)) {
       return new MoveImpulseAsIDestructible(new MoveImpulse(this, id));
     }
+    if (rootIncarnation.incarnationsKamikazeJumpImpulse.ContainsKey(id)) {
+      return new KamikazeJumpImpulseAsIDestructible(new KamikazeJumpImpulse(this, id));
+    }
+    if (rootIncarnation.incarnationsKamikazeTargetImpulse.ContainsKey(id)) {
+      return new KamikazeTargetImpulseAsIDestructible(new KamikazeTargetImpulse(this, id));
+    }
     if (rootIncarnation.incarnationsNoImpulse.ContainsKey(id)) {
       return new NoImpulseAsIDestructible(new NoImpulse(this, id));
     }
@@ -26989,11 +28621,17 @@ public class Root {
     if (rootIncarnation.incarnationsPursueImpulse.ContainsKey(id)) {
       return new PursueImpulseAsIDestructible(new PursueImpulse(this, id));
     }
+    if (rootIncarnation.incarnationsFireBombImpulse.ContainsKey(id)) {
+      return new FireBombImpulseAsIDestructible(new FireBombImpulse(this, id));
+    }
     if (rootIncarnation.incarnationsSimplePresenceTriggerTTC.ContainsKey(id)) {
       return new SimplePresenceTriggerTTCAsIDestructible(new SimplePresenceTriggerTTC(this, id));
     }
     if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
       return new ItemTTCAsIDestructible(new ItemTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsKamikazeTargetTTC.ContainsKey(id)) {
+      return new KamikazeTargetTTCAsIDestructible(new KamikazeTargetTTC(this, id));
     }
     if (rootIncarnation.incarnationsWarperTTC.ContainsKey(id)) {
       return new WarperTTCAsIDestructible(new WarperTTC(this, id));
@@ -30896,6 +32534,197 @@ public class Root {
       }
     }
     effectsItemTTCMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetKamikazeTargetTTCMutSetHash(int id, int version, KamikazeTargetTTCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public KamikazeTargetTTCMutSetIncarnation GetKamikazeTargetTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsKamikazeTargetTTCMutSet[id].incarnation;
+    }
+    public KamikazeTargetTTCMutSet GetKamikazeTargetTTCMutSet(int id) {
+      return new KamikazeTargetTTCMutSet(this, id);
+    }
+    public List<KamikazeTargetTTCMutSet> AllKamikazeTargetTTCMutSet() {
+      List<KamikazeTargetTTCMutSet> result = new List<KamikazeTargetTTCMutSet>(rootIncarnation.incarnationsKamikazeTargetTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsKamikazeTargetTTCMutSet.Keys) {
+        result.Add(new KamikazeTargetTTCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool KamikazeTargetTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsKamikazeTargetTTCMutSet.ContainsKey(id);
+    }
+    public void CheckHasKamikazeTargetTTCMutSet(KamikazeTargetTTCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasKamikazeTargetTTCMutSet(thing.id);
+    }
+    public void CheckHasKamikazeTargetTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsKamikazeTargetTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid KamikazeTargetTTCMutSet}: " + id);
+      }
+    }
+    public KamikazeTargetTTCMutSet EffectKamikazeTargetTTCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new KamikazeTargetTTCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateKamikazeTargetTTCMutSet(id, rootIncarnation.version, incarnation);
+      return new KamikazeTargetTTCMutSet(this, id);
+    }
+    public void EffectInternalCreateKamikazeTargetTTCMutSet(int id, int incarnationVersion, KamikazeTargetTTCMutSetIncarnation incarnation) {
+      var effect = new KamikazeTargetTTCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsKamikazeTargetTTCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<KamikazeTargetTTCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsKamikazeTargetTTCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectKamikazeTargetTTCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new KamikazeTargetTTCMutSetDeleteEffect(id);
+      effectsKamikazeTargetTTCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsKamikazeTargetTTCMutSet[id];
+      rootIncarnation.incarnationsKamikazeTargetTTCMutSet.Remove(id);
+    }
+
+       
+    public void EffectKamikazeTargetTTCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasKamikazeTargetTTCMutSet(setId);
+      CheckHasKamikazeTargetTTC(elementId);
+
+      var effect = new KamikazeTargetTTCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeTargetTTCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new KamikazeTargetTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsKamikazeTargetTTCMutSet[setId] =
+            new VersionAndIncarnation<KamikazeTargetTTCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsKamikazeTargetTTCMutSetAddEffect.Add(effect);
+    }
+    public void EffectKamikazeTargetTTCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasKamikazeTargetTTCMutSet(setId);
+      CheckHasKamikazeTargetTTC(elementId);
+
+      var effect = new KamikazeTargetTTCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeTargetTTCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new KamikazeTargetTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsKamikazeTargetTTCMutSet[setId] =
+            new VersionAndIncarnation<KamikazeTargetTTCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsKamikazeTargetTTCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddKamikazeTargetTTCMutSetObserver(int id, IKamikazeTargetTTCMutSetEffectObserver observer) {
+      List<IKamikazeTargetTTCMutSetEffectObserver> obsies;
+      if (!observersForKamikazeTargetTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IKamikazeTargetTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForKamikazeTargetTTCMutSet[id] = obsies;
+    }
+
+    public void RemoveKamikazeTargetTTCMutSetObserver(int id, IKamikazeTargetTTCMutSetEffectObserver observer) {
+      if (observersForKamikazeTargetTTCMutSet.ContainsKey(id)) {
+        var list = observersForKamikazeTargetTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForKamikazeTargetTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastKamikazeTargetTTCMutSetEffects(
+      SortedDictionary<int, List<IKamikazeTargetTTCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsKamikazeTargetTTCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetTTCMutSetEffect(effect);
+        }
+        observersForKamikazeTargetTTCMutSet.Remove(effect.id);
+      }
+    }
+    effectsKamikazeTargetTTCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsKamikazeTargetTTCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeTargetTTCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsKamikazeTargetTTCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeTargetTTCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsKamikazeTargetTTCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeTargetTTCMutSetCreateEffect.Clear();
 
   }
 
@@ -36438,6 +38267,197 @@ public class Root {
 
   }
 
+    public int GetKamikazeAICapabilityUCMutSetHash(int id, int version, KamikazeAICapabilityUCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public KamikazeAICapabilityUCMutSetIncarnation GetKamikazeAICapabilityUCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet[id].incarnation;
+    }
+    public KamikazeAICapabilityUCMutSet GetKamikazeAICapabilityUCMutSet(int id) {
+      return new KamikazeAICapabilityUCMutSet(this, id);
+    }
+    public List<KamikazeAICapabilityUCMutSet> AllKamikazeAICapabilityUCMutSet() {
+      List<KamikazeAICapabilityUCMutSet> result = new List<KamikazeAICapabilityUCMutSet>(rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet.Keys) {
+        result.Add(new KamikazeAICapabilityUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool KamikazeAICapabilityUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet.ContainsKey(id);
+    }
+    public void CheckHasKamikazeAICapabilityUCMutSet(KamikazeAICapabilityUCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasKamikazeAICapabilityUCMutSet(thing.id);
+    }
+    public void CheckHasKamikazeAICapabilityUCMutSet(int id) {
+      if (!rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid KamikazeAICapabilityUCMutSet}: " + id);
+      }
+    }
+    public KamikazeAICapabilityUCMutSet EffectKamikazeAICapabilityUCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new KamikazeAICapabilityUCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateKamikazeAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
+      return new KamikazeAICapabilityUCMutSet(this, id);
+    }
+    public void EffectInternalCreateKamikazeAICapabilityUCMutSet(int id, int incarnationVersion, KamikazeAICapabilityUCMutSetIncarnation incarnation) {
+      var effect = new KamikazeAICapabilityUCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<KamikazeAICapabilityUCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsKamikazeAICapabilityUCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectKamikazeAICapabilityUCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new KamikazeAICapabilityUCMutSetDeleteEffect(id);
+      effectsKamikazeAICapabilityUCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet[id];
+      rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet.Remove(id);
+    }
+
+       
+    public void EffectKamikazeAICapabilityUCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasKamikazeAICapabilityUCMutSet(setId);
+      CheckHasKamikazeAICapabilityUC(elementId);
+
+      var effect = new KamikazeAICapabilityUCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new KamikazeAICapabilityUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet[setId] =
+            new VersionAndIncarnation<KamikazeAICapabilityUCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsKamikazeAICapabilityUCMutSetAddEffect.Add(effect);
+    }
+    public void EffectKamikazeAICapabilityUCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasKamikazeAICapabilityUCMutSet(setId);
+      CheckHasKamikazeAICapabilityUC(elementId);
+
+      var effect = new KamikazeAICapabilityUCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new KamikazeAICapabilityUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsKamikazeAICapabilityUCMutSet[setId] =
+            new VersionAndIncarnation<KamikazeAICapabilityUCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsKamikazeAICapabilityUCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddKamikazeAICapabilityUCMutSetObserver(int id, IKamikazeAICapabilityUCMutSetEffectObserver observer) {
+      List<IKamikazeAICapabilityUCMutSetEffectObserver> obsies;
+      if (!observersForKamikazeAICapabilityUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IKamikazeAICapabilityUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForKamikazeAICapabilityUCMutSet[id] = obsies;
+    }
+
+    public void RemoveKamikazeAICapabilityUCMutSetObserver(int id, IKamikazeAICapabilityUCMutSetEffectObserver observer) {
+      if (observersForKamikazeAICapabilityUCMutSet.ContainsKey(id)) {
+        var list = observersForKamikazeAICapabilityUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForKamikazeAICapabilityUCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastKamikazeAICapabilityUCMutSetEffects(
+      SortedDictionary<int, List<IKamikazeAICapabilityUCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsKamikazeAICapabilityUCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeAICapabilityUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeAICapabilityUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeAICapabilityUCMutSetEffect(effect);
+        }
+        observersForKamikazeAICapabilityUCMutSet.Remove(effect.id);
+      }
+    }
+    effectsKamikazeAICapabilityUCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsKamikazeAICapabilityUCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeAICapabilityUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeAICapabilityUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeAICapabilityUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeAICapabilityUCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsKamikazeAICapabilityUCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeAICapabilityUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeAICapabilityUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeAICapabilityUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeAICapabilityUCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsKamikazeAICapabilityUCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeAICapabilityUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeAICapabilityUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeAICapabilityUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeAICapabilityUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeAICapabilityUCMutSetCreateEffect.Clear();
+
+  }
+
     public int GetGuardAICapabilityUCMutSetHash(int id, int version, GuardAICapabilityUCMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.set) {
@@ -40256,6 +42276,198 @@ public class Root {
       }
     }
     effectsTerrainTileByLocationMutMapCreateEffect.Clear();
+
+  }
+
+    public int GetKamikazeTargetTTCStrongByLocationMutMapHash(int id, int version, KamikazeTargetTTCStrongByLocationMutMapIncarnation incarnation) {
+      int result = id * version;
+      foreach (var entry in incarnation.map) {
+        result += id * version * entry.Key.GetDeterministicHashCode() * entry.Value.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public KamikazeTargetTTCStrongByLocationMutMapIncarnation GetKamikazeTargetTTCStrongByLocationMutMapIncarnation(int id) {
+      return rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap[id].incarnation;
+    }
+    public KamikazeTargetTTCStrongByLocationMutMap GetKamikazeTargetTTCStrongByLocationMutMap(int id) {
+      return new KamikazeTargetTTCStrongByLocationMutMap(this, id);
+    }
+    public List<KamikazeTargetTTCStrongByLocationMutMap> AllKamikazeTargetTTCStrongByLocationMutMap() {
+      List<KamikazeTargetTTCStrongByLocationMutMap> result = new List<KamikazeTargetTTCStrongByLocationMutMap>(rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap.Count);
+      foreach (var id in rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap.Keys) {
+        result.Add(new KamikazeTargetTTCStrongByLocationMutMap(this, id));
+      }
+      return result;
+    }
+    public bool KamikazeTargetTTCStrongByLocationMutMapExists(int id) {
+      return rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap.ContainsKey(id);
+    }
+    public void CheckHasKamikazeTargetTTCStrongByLocationMutMap(KamikazeTargetTTCStrongByLocationMutMap thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasKamikazeTargetTTCStrongByLocationMutMap(thing.id);
+    }
+    public void CheckHasKamikazeTargetTTCStrongByLocationMutMap(int id) {
+      if (!rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap.ContainsKey(id)) {
+        throw new System.Exception("Invalid KamikazeTargetTTCStrongByLocationMutMap}: " + id);
+      }
+    }
+    public KamikazeTargetTTCStrongByLocationMutMap EffectKamikazeTargetTTCStrongByLocationMutMapCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      EffectInternalCreateKamikazeTargetTTCStrongByLocationMutMap(
+          id,
+          rootIncarnation.version,
+          new KamikazeTargetTTCStrongByLocationMutMapIncarnation(
+              new SortedDictionary<Location, int>()));
+      return new KamikazeTargetTTCStrongByLocationMutMap(this, id);
+    }
+       
+    public void EffectInternalCreateKamikazeTargetTTCStrongByLocationMutMap(int id, int incarnationVersion, KamikazeTargetTTCStrongByLocationMutMapIncarnation incarnation) {
+      var effect = new KamikazeTargetTTCStrongByLocationMutMapCreateEffect(id);
+      rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap
+          .Add(
+              id,
+              new VersionAndIncarnation<KamikazeTargetTTCStrongByLocationMutMapIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsKamikazeTargetTTCStrongByLocationMutMapCreateEffect.Add(effect);
+    }
+    public void EffectKamikazeTargetTTCStrongByLocationMutMapDelete(int id) {
+      CheckUnlocked();
+      var effect = new KamikazeTargetTTCStrongByLocationMutMapDeleteEffect(id);
+      effectsKamikazeTargetTTCStrongByLocationMutMapDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap[id];
+      rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap.Remove(id);
+    }
+    public void EffectKamikazeTargetTTCStrongByLocationMutMapAdd(int mapId, Location key, int value) {
+      CheckUnlocked();
+      CheckHasKamikazeTargetTTCStrongByLocationMutMap(mapId);
+      CheckHasKamikazeTargetTTC(value);
+
+      var effect = new KamikazeTargetTTCStrongByLocationMutMapAddEffect(mapId, key, value);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap[mapId];
+      if (oldIncarnationAndVersion.incarnation.map.ContainsKey(key)) {
+        throw new Exception("Key exists! " + key);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.map.Add(key, value);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.map;
+        var newMap = new SortedDictionary<Location, int>(oldMap);
+        newMap.Add(key, value);
+        var newIncarnation = new KamikazeTargetTTCStrongByLocationMutMapIncarnation(newMap);
+        rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap[mapId] =
+            new VersionAndIncarnation<KamikazeTargetTTCStrongByLocationMutMapIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsKamikazeTargetTTCStrongByLocationMutMapAddEffect.Add(effect);
+    }
+       
+    public void EffectKamikazeTargetTTCStrongByLocationMutMapRemove(int mapId, Location key) {
+      CheckUnlocked();
+      CheckHasKamikazeTargetTTCStrongByLocationMutMap(mapId);
+
+      var effect = new KamikazeTargetTTCStrongByLocationMutMapRemoveEffect(mapId, key);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap[mapId];
+      if (!oldIncarnationAndVersion.incarnation.map.ContainsKey(key)) {
+        throw new Exception("Key doesnt exist! " + key);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        var oldValue = oldIncarnationAndVersion.incarnation.map[key];
+        oldIncarnationAndVersion.incarnation.map.Remove(key);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.map;
+        var newMap = new SortedDictionary<Location, int>(oldMap);
+        newMap.Remove(key);
+        var newIncarnation = new KamikazeTargetTTCStrongByLocationMutMapIncarnation(newMap);
+        rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap[mapId] =
+            new VersionAndIncarnation<KamikazeTargetTTCStrongByLocationMutMapIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsKamikazeTargetTTCStrongByLocationMutMapRemoveEffect.Add(effect);
+    }
+    public void AddKamikazeTargetTTCStrongByLocationMutMapObserver(int id, IKamikazeTargetTTCStrongByLocationMutMapEffectObserver observer) {
+      List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver> obsies;
+      if (!observersForKamikazeTargetTTCStrongByLocationMutMap.TryGetValue(id, out obsies)) {
+        obsies = new List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForKamikazeTargetTTCStrongByLocationMutMap[id] = obsies;
+    }
+
+    public void RemoveKamikazeTargetTTCStrongByLocationMutMapObserver(int id, IKamikazeTargetTTCStrongByLocationMutMapEffectObserver observer) {
+      if (observersForKamikazeTargetTTCStrongByLocationMutMap.ContainsKey(id)) {
+        var map = observersForKamikazeTargetTTCStrongByLocationMutMap[id];
+        map.Remove(observer);
+        if (map.Count == 0) {
+          observersForKamikazeTargetTTCStrongByLocationMutMap.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+  public void BroadcastKamikazeTargetTTCStrongByLocationMutMapEffects(
+      SortedDictionary<int, List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver>> observers) {
+    foreach (var effect in effectsKamikazeTargetTTCStrongByLocationMutMapDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetTTCStrongByLocationMutMapEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetTTCStrongByLocationMutMapEffect(effect);
+        }
+        observersForKamikazeTargetTTCStrongByLocationMutMap.Remove(effect.id);
+      }
+    }
+    effectsKamikazeTargetTTCStrongByLocationMutMapDeleteEffect.Clear();
+
+    foreach (var effect in effectsKamikazeTargetTTCStrongByLocationMutMapAddEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetTTCStrongByLocationMutMapEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetTTCStrongByLocationMutMapEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeTargetTTCStrongByLocationMutMapAddEffect.Clear();
+
+    foreach (var effect in effectsKamikazeTargetTTCStrongByLocationMutMapRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetTTCStrongByLocationMutMapEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetTTCStrongByLocationMutMapEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeTargetTTCStrongByLocationMutMapRemoveEffect.Clear();
+
+    foreach (var effect in effectsKamikazeTargetTTCStrongByLocationMutMapCreateEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetTTCStrongByLocationMutMapEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetTTCStrongByLocationMutMapEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeTargetTTCStrongByLocationMutMapCreateEffect.Clear();
 
   }
 }

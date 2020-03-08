@@ -18,7 +18,7 @@ namespace Atharia.Model {
       if (!IncendianFalls.Actions.CanTeleportTo(game, superstate, warper.destinationLocation)) {
         return "Can't teleport there!";
       }
-      IncendianFalls.Actions.Step(game, superstate, interactingUnit, warper.destinationLocation, true);
+      IncendianFalls.Actions.Step(game, superstate, interactingUnit, warper.destinationLocation, true, false);
       return "";
     }
   }

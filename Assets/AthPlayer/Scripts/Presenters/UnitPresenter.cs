@@ -272,7 +272,6 @@ namespace AthPlayer {
                   new UnityEngine.Color(0, 0, 1f, 1f)));
         }
       } else if (effect.element is UnitFireBombedEventAsIUnitEvent ufbe) {
-        Debug.LogError("Got fire bombed event, showing rune!");
         unitView.ShowRune(
             new ExtrudedSymbolDescription(
                 RenderPriority.RUNE,
@@ -307,10 +306,12 @@ namespace AthPlayer {
         counteringIds.Add(id);
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is WanderAICapabilityUCAsIUnitComponent) {
+      } else if (component is KamikazeAICapabilityUCAsIUnitComponent) {
       } else if (component is AttackAICapabilityUCAsIUnitComponent) {
       } else if (component is BideAICapabilityUCAsIUnitComponent) {
       } else if (component is SorcerousUCAsIUnitComponent) {
       } else if (component is BaseCombatTimeUCAsIUnitComponent) {
+      } else if (component is SummonAICapabilityUCAsIUnitComponent) {
       } else if (component is BaseMovementTimeUCAsIUnitComponent) {
       } else if (component is BaseOffenseUCAsIUnitComponent) {
       } else if (component is BaseDefenseUCAsIUnitComponent) {
@@ -418,10 +419,12 @@ namespace AthPlayer {
                       true,
                       new UnityEngine.Color(1, 1, 1, 1.5f))));
         } else if (detail is WanderAICapabilityUCAsIUnitComponent) {
+        } else if (detail is KamikazeAICapabilityUCAsIUnitComponent) {
         } else if (detail is AttackAICapabilityUCAsIUnitComponent) {
         } else if (detail is GuardAICapabilityUCAsIUnitComponent) {
         } else if (detail is SorcerousUCAsIUnitComponent) {
         } else if (detail is BaseCombatTimeUCAsIUnitComponent) {
+        } else if (detail is SummonAICapabilityUCAsIUnitComponent) {
         } else if (detail is BaseMovementTimeUCAsIUnitComponent) {
         } else if (detail is BaseOffenseUCAsIUnitComponent) {
         } else if (detail is BaseDefenseUCAsIUnitComponent) {
@@ -664,6 +667,21 @@ namespace AthPlayer {
               hpRatio,
               mpRatio));
       detailsByClassId.Add(
+          "Emberfolk",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, new UnityEngine.Color(0.0f, 0f, 0f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "three",
+                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
+                      new UnityEngine.Color(1, 1, 1)),
+                  false, new UnityEngine.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
           "Irkling",
           new UnitDescription(
               unit.id,
@@ -717,6 +735,21 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "ampersand",
+                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  false, new UnityEngine.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "MantisBombardier",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "e",
                             50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new UnityEngine.Color(0, 0, 0)),
                   false, new UnityEngine.Color(0, 0, 0)),

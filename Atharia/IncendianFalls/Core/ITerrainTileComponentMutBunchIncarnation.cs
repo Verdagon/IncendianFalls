@@ -7,6 +7,7 @@ namespace Atharia.Model {
 public class ITerrainTileComponentMutBunchIncarnation {
   public readonly int membersSimplePresenceTriggerTTCMutSet;
   public readonly int membersItemTTCMutSet;
+  public readonly int membersKamikazeTargetTTCMutSet;
   public readonly int membersWarperTTCMutSet;
   public readonly int membersTimeAnchorTTCMutSet;
   public readonly int membersFireBombTTCMutSet;
@@ -37,6 +38,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
   public ITerrainTileComponentMutBunchIncarnation(
       int membersSimplePresenceTriggerTTCMutSet,
       int membersItemTTCMutSet,
+      int membersKamikazeTargetTTCMutSet,
       int membersWarperTTCMutSet,
       int membersTimeAnchorTTCMutSet,
       int membersFireBombTTCMutSet,
@@ -66,6 +68,7 @@ public class ITerrainTileComponentMutBunchIncarnation {
       int membersEmberDeepLevelLinkerTTCMutSet) {
     this.membersSimplePresenceTriggerTTCMutSet = membersSimplePresenceTriggerTTCMutSet;
     this.membersItemTTCMutSet = membersItemTTCMutSet;
+    this.membersKamikazeTargetTTCMutSet = membersKamikazeTargetTTCMutSet;
     this.membersWarperTTCMutSet = membersWarperTTCMutSet;
     this.membersTimeAnchorTTCMutSet = membersTimeAnchorTTCMutSet;
     this.membersFireBombTTCMutSet = membersFireBombTTCMutSet;

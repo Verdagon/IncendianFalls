@@ -1,0 +1,85 @@
+
+mut struct KamikazeAICapabilityUC {
+  KamikazeAICapabilityUC isa IAICapabilityUC;
+  KamikazeAICapabilityUC isa IImpulsePreReactor;
+
+  var targetByLocation: MutMap:(Location, &KamikazeTargetTTC);
+  var targetLocationCenter: Location;
+
+  fn Destruct(this: KamikazeAICapabilityUC overrides IDestructible): Void {
+    KamikazeAICapabilityUCExtensions.Destruct
+  }
+  fn ProduceImpulse(
+      this: KamikazeAICapabilityUC overrides IAICapabilityUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : IImpulse {
+    KamikazeAICapabilityUCExtensions.ProduceImpulse
+  }
+  fn BeforeImpulse(
+      this: KamikazeAICapabilityUC overrides IImpulsePreReactor,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit,
+      originatingCapability: IAICapabilityUC,
+      impulse: IImpulse)
+  : Void {
+    KamikazeAICapabilityUCExtensions.BeforeImpulse
+  }
+}
+
+mut struct KamikazeTargetImpulse {
+  KamikazeTargetImpulse isa IImpulse;
+
+  weight: Int;
+  capability: &KamikazeAICapabilityUC;
+  targetLocationCenter: Location;
+  targetLocations: ImmList:Location;
+
+  fn Destruct(this: KamikazeTargetImpulse overrides IDestructible): Void {
+    KamikazeTargetImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: KamikazeTargetImpulse overrides IImpulse): Int {
+    KamikazeTargetImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: KamikazeTargetImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    KamikazeTargetImpulseExtensions.Enact
+  }
+}
+
+mut struct KamikazeJumpImpulse {
+  KamikazeJumpImpulse isa IImpulse;
+
+  weight: Int;
+  capability: &KamikazeAICapabilityUC;
+  jumpTarget: Location;
+
+  fn Destruct(this: KamikazeJumpImpulse overrides IDestructible): Void {
+    KamikazeJumpImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: KamikazeJumpImpulse overrides IImpulse): Int {
+    KamikazeJumpImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: KamikazeJumpImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    KamikazeJumpImpulseExtensions.Enact
+  }
+}
+
+mut struct KamikazeTargetTTC {
+  KamikazeTargetTTC isa ITerrainTileComponent;
+
+  capability: &KamikazeAICapabilityUC;
+
+  fn Destruct(this: KamikazeTargetTTC overrides IDestructible): Void {
+    KamikazeTargetTTCExtensions.Destruct
+  }
+}

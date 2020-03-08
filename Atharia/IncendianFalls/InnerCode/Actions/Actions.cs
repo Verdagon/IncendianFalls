@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using Atharia.Model;
 
@@ -186,7 +187,8 @@ namespace IncendianFalls {
           Superstate superstate,
           Unit unit,
           Location destination,
-          bool overrideAdjacentCheck) {
+          bool overrideAdjacentCheck,
+          bool costsTime) {
       Asserts.Assert(game.level.terrain.tiles[destination].IsWalkable(), "Not walkable!");
       Asserts.Assert(
         overrideAdjacentCheck || game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent()),
@@ -198,7 +200,9 @@ namespace IncendianFalls {
       unit.location = destination;
       superstate.levelSuperstate.AddUnit(unit);
 
-      unit.nextActionTime = unit.nextActionTime + unit.CalculateMovementTimeCost(600);
+      if (costsTime) {
+        unit.nextActionTime = unit.nextActionTime + unit.CalculateMovementTimeCost(600);
+      }
     }
 
     public static void Evaporate(
@@ -230,7 +234,6 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit attacker,
         Location location) {
-      game.root.logger.Error("placing fire bomb!");
       game.level.terrain.tiles[location].components.Add(
         game.root.EffectFireBombTTCCreate(2).AsITerrainTileComponent());
       superstate.levelSuperstate.AddedActingTTC(location);

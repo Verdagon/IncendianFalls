@@ -16,6 +16,23 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
+      if (obj.charges <= 0) {
+        return obj.root.EffectNoImpulseCreate().AsIImpulse();
+      }
+
+      // Let's see if theres an enemy near.
+      Unit nearestEnemy = DetermineTarget.Determine(game, superstate, unit);
+      if (!nearestEnemy.Exists()) {
+        // There are no enemies.
+        return game.root.EffectNoImpulseCreate().AsIImpulse();
+      }
+
+      // Check if we can see them.
+      if (!Sight.CanSee(game, unit, nearestEnemy.location, out List<Location> sightPath)) {
+        // Can't see the enemy. Don't update directive.
+        return game.root.EffectNoImpulseCreate().AsIImpulse();
+      }
+
 
       var adjacentLocations =
           game.level.terrain.GetAdjacentExistingLocations(
@@ -26,20 +43,13 @@ namespace Atharia.Model {
           adjacentWalkableLocations.Add(adjacentLocation);
         }
       }
-
       if (adjacentWalkableLocations.Count == 0) {
-        // Nowhere to walk, so can't wander.
+        // Nowhere to summon, so don't.
         return obj.root.EffectNoImpulseCreate().AsIImpulse();
       }
+      var randomAdjacentWalkableLocation = SetUtils.GetRandom(game.rand.Next(), adjacentWalkableLocations);
 
-      var randomAdjacentWalkableLocation =
-        SetUtils.GetRandom(game.rand.Next(), adjacentWalkableLocations);
-
-      if (obj.charges > 0) {
-        return obj.root.EffectSummonImpulseCreate(900, obj.blueprintName, randomAdjacentWalkableLocation).AsIImpulse();
-      } else {
-        return obj.root.EffectNoImpulseCreate().AsIImpulse();
-      }
+      return obj.root.EffectSummonImpulseCreate(900, obj.blueprintName, randomAdjacentWalkableLocation).AsIImpulse();
     }
   }
 }

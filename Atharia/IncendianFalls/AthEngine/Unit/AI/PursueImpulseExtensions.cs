@@ -25,7 +25,7 @@ namespace Atharia.Model {
       var directive = capability.killDirective;
       Asserts.Assert(directive.Exists());
 
-      Actions.Step(game, superstate, unit, directive.pathToLastSeenLocation[0], false);
+      Actions.Step(game, superstate, unit, directive.pathToLastSeenLocation[0], false, true);
 
       directive.pathToLastSeenLocation.RemoveAt(0);
 

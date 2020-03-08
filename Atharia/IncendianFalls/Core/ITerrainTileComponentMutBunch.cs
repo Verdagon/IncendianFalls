@@ -43,6 +43,10 @@ public class ITerrainTileComponentMutBunch {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersItemTTCMutSet");
     }
 
+    if (!root.KamikazeTargetTTCMutSetExists(membersKamikazeTargetTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersKamikazeTargetTTCMutSet");
+    }
+
     if (!root.WarperTTCMutSetExists(membersWarperTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersWarperTTCMutSet");
     }
@@ -162,6 +166,9 @@ public class ITerrainTileComponentMutBunch {
     if (root.ItemTTCMutSetExists(membersItemTTCMutSet.id)) {
       membersItemTTCMutSet.FindReachableObjects(foundIds);
     }
+    if (root.KamikazeTargetTTCMutSetExists(membersKamikazeTargetTTCMutSet.id)) {
+      membersKamikazeTargetTTCMutSet.FindReachableObjects(foundIds);
+    }
     if (root.WarperTTCMutSetExists(membersWarperTTCMutSet.id)) {
       membersWarperTTCMutSet.FindReachableObjects(foundIds);
     }
@@ -269,6 +276,15 @@ public class ITerrainTileComponentMutBunch {
         throw new Exception("Tried to get member membersItemTTCMutSet of null!");
       }
       return new ItemTTCMutSet(root, incarnation.membersItemTTCMutSet);
+    }
+                       }
+  public KamikazeTargetTTCMutSet membersKamikazeTargetTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersKamikazeTargetTTCMutSet of null!");
+      }
+      return new KamikazeTargetTTCMutSet(root, incarnation.membersKamikazeTargetTTCMutSet);
     }
                        }
   public WarperTTCMutSet membersWarperTTCMutSet {
@@ -521,6 +537,8 @@ public class ITerrainTileComponentMutBunch {
 ,
       root.EffectItemTTCMutSetCreate()
 ,
+      root.EffectKamikazeTargetTTCMutSetCreate()
+,
       root.EffectWarperTTCMutSetCreate()
 ,
       root.EffectTimeAnchorTTCMutSetCreate()
@@ -587,6 +605,12 @@ public class ITerrainTileComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.ItemTTCExists(elementI.id)) {
       this.membersItemTTCMutSet.Add(root.GetItemTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.KamikazeTargetTTCExists(elementI.id)) {
+      this.membersKamikazeTargetTTCMutSet.Add(root.GetKamikazeTargetTTC(elementI.id));
       return;
     }
 
@@ -768,6 +792,12 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.KamikazeTargetTTCExists(elementI.id)) {
+      this.membersKamikazeTargetTTCMutSet.Remove(root.GetKamikazeTargetTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.WarperTTCExists(elementI.id)) {
       this.membersWarperTTCMutSet.Remove(root.GetWarperTTC(elementI.id));
       return;
@@ -933,6 +963,7 @@ public class ITerrainTileComponentMutBunch {
   public void Clear() {
     this.membersSimplePresenceTriggerTTCMutSet.Clear();
     this.membersItemTTCMutSet.Clear();
+    this.membersKamikazeTargetTTCMutSet.Clear();
     this.membersWarperTTCMutSet.Clear();
     this.membersTimeAnchorTTCMutSet.Clear();
     this.membersFireBombTTCMutSet.Clear();
@@ -966,6 +997,7 @@ public class ITerrainTileComponentMutBunch {
       return
         this.membersSimplePresenceTriggerTTCMutSet.Count +
         this.membersItemTTCMutSet.Count +
+        this.membersKamikazeTargetTTCMutSet.Count +
         this.membersWarperTTCMutSet.Count +
         this.membersTimeAnchorTTCMutSet.Count +
         this.membersFireBombTTCMutSet.Count +
@@ -1006,6 +1038,7 @@ public class ITerrainTileComponentMutBunch {
   public void Destruct() {
     var tempMembersSimplePresenceTriggerTTCMutSet = this.membersSimplePresenceTriggerTTCMutSet;
     var tempMembersItemTTCMutSet = this.membersItemTTCMutSet;
+    var tempMembersKamikazeTargetTTCMutSet = this.membersKamikazeTargetTTCMutSet;
     var tempMembersWarperTTCMutSet = this.membersWarperTTCMutSet;
     var tempMembersTimeAnchorTTCMutSet = this.membersTimeAnchorTTCMutSet;
     var tempMembersFireBombTTCMutSet = this.membersFireBombTTCMutSet;
@@ -1037,6 +1070,7 @@ public class ITerrainTileComponentMutBunch {
     this.Delete();
     tempMembersSimplePresenceTriggerTTCMutSet.Destruct();
     tempMembersItemTTCMutSet.Destruct();
+    tempMembersKamikazeTargetTTCMutSet.Destruct();
     tempMembersWarperTTCMutSet.Destruct();
     tempMembersTimeAnchorTTCMutSet.Destruct();
     tempMembersFireBombTTCMutSet.Destruct();
@@ -1071,6 +1105,9 @@ public class ITerrainTileComponentMutBunch {
     }
     foreach (var element in this.membersItemTTCMutSet) {
       yield return new ItemTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersKamikazeTargetTTCMutSet) {
+      yield return new KamikazeTargetTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersWarperTTCMutSet) {
       yield return new WarperTTCAsITerrainTileComponent(element);
@@ -1194,6 +1231,27 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return ItemTTC.Null;
+      }
+    }
+    public List<KamikazeTargetTTC> GetAllKamikazeTargetTTC() {
+      var result = new List<KamikazeTargetTTC>();
+      foreach (var thing in this.membersKamikazeTargetTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<KamikazeTargetTTC> ClearAllKamikazeTargetTTC() {
+      var result = new List<KamikazeTargetTTC>();
+      this.membersKamikazeTargetTTCMutSet.Clear();
+      return result;
+    }
+    public KamikazeTargetTTC GetOnlyKamikazeTargetTTCOrNull() {
+      var result = GetAllKamikazeTargetTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return KamikazeTargetTTC.Null;
       }
     }
     public List<WarperTTC> GetAllWarperTTC() {

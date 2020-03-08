@@ -144,7 +144,7 @@ namespace Atharia.Model {
         game.events.Add(new SetGameSpeedEvent(40).AsIGameEvent());
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
         var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo1");
-        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true);
+        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
         game.events.Add(new WaitEvent(1000, "fire1").AsIGameEvent());
       }
       if (triggerName == "fire1") {
@@ -156,7 +156,7 @@ namespace Atharia.Model {
       if (triggerName == "step2") {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
         var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo2");
-        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true);
+        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
         game.events.Add(new WaitEvent(1000, "fire2").AsIGameEvent());
       }
       if (triggerName == "fire2") {
@@ -168,7 +168,7 @@ namespace Atharia.Model {
       if (triggerName == "step3") {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
         var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo3");
-        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true);
+        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
         game.events.Add(new WaitEvent(1000, "fire3").AsIGameEvent());
       }
       if (triggerName == "fire3") {
@@ -182,7 +182,7 @@ namespace Atharia.Model {
         var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
         var retreatTo = superstate.levelSuperstate.FindMarkerLocation("retreatTo");
         Actions.Bump(game, superstate, ravashrike, chronomancer, 1.0f, true);
-        Actions.Step(game, superstate, chronomancer, retreatTo, true);
+        Actions.Step(game, superstate, chronomancer, retreatTo, true, false);
         game.events.Add(new WaitEvent(1000, "ravashrikeAttackDone").AsIGameEvent());
       }
       if (triggerName == "ravashrikeAttackDone") {

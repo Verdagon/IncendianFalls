@@ -1,0 +1,34 @@
+
+mut struct DirtRoadLevelController {
+  DirtRoadLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: DirtRoadLevelController overrides ILevelController): Str {
+    DirtRoadLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: DirtRoadLevelController overrides ILevelController): Bool {
+    DirtRoadLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: DirtRoadLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    DirtRoadLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: DirtRoadLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    DirtRoadLevelControllerExtensions.SimpleUnitTrigger
+  }
+}

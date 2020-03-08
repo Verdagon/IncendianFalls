@@ -18,3 +18,25 @@ mut struct FireBombTTC {
     FireBombTTCExtensions.Act
   }
 }
+
+// Assumes there's an kill directive right now.
+mut struct FireBombImpulse {
+  FireBombImpulse isa IImpulse;
+
+  weight: Int;
+  location: Location;
+
+  fn Destruct(this: FireBombImpulse overrides IDestructible): Void {
+    FireBombImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: FireBombImpulse overrides IImpulse): Int {
+    FireBombImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: FireBombImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Bool {
+    FireBombImpulseExtensions.Enact
+  }
+}
