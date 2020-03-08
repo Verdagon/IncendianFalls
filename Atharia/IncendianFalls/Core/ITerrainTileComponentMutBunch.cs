@@ -127,6 +127,10 @@ public class ITerrainTileComponentMutBunch {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersFireTTCMutSet");
     }
 
+    if (!root.ObsidianFloorTTCMutSetExists(membersObsidianFloorTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersObsidianFloorTTCMutSet");
+    }
+
     if (!root.MagmaTTCMutSetExists(membersMagmaTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersMagmaTTCMutSet");
     }
@@ -232,6 +236,9 @@ public class ITerrainTileComponentMutBunch {
     }
     if (root.FireTTCMutSetExists(membersFireTTCMutSet.id)) {
       membersFireTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.ObsidianFloorTTCMutSetExists(membersObsidianFloorTTCMutSet.id)) {
+      membersObsidianFloorTTCMutSet.FindReachableObjects(foundIds);
     }
     if (root.MagmaTTCMutSetExists(membersMagmaTTCMutSet.id)) {
       membersMagmaTTCMutSet.FindReachableObjects(foundIds);
@@ -474,6 +481,15 @@ public class ITerrainTileComponentMutBunch {
       return new FireTTCMutSet(root, incarnation.membersFireTTCMutSet);
     }
                        }
+  public ObsidianFloorTTCMutSet membersObsidianFloorTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersObsidianFloorTTCMutSet of null!");
+      }
+      return new ObsidianFloorTTCMutSet(root, incarnation.membersObsidianFloorTTCMutSet);
+    }
+                       }
   public MagmaTTCMutSet membersMagmaTTCMutSet {
 
     get {
@@ -594,6 +610,8 @@ public class ITerrainTileComponentMutBunch {
       root.EffectFallsTTCMutSetCreate()
 ,
       root.EffectFireTTCMutSetCreate()
+,
+      root.EffectObsidianFloorTTCMutSetCreate()
 ,
       root.EffectMagmaTTCMutSetCreate()
 ,
@@ -749,6 +767,12 @@ public class ITerrainTileComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.FireTTCExists(elementI.id)) {
       this.membersFireTTCMutSet.Add(root.GetFireTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.ObsidianFloorTTCExists(elementI.id)) {
+      this.membersObsidianFloorTTCMutSet.Add(root.GetObsidianFloorTTC(elementI.id));
       return;
     }
 
@@ -942,6 +966,12 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.ObsidianFloorTTCExists(elementI.id)) {
+      this.membersObsidianFloorTTCMutSet.Remove(root.GetObsidianFloorTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.MagmaTTCExists(elementI.id)) {
       this.membersMagmaTTCMutSet.Remove(root.GetMagmaTTC(elementI.id));
       return;
@@ -1014,6 +1044,7 @@ public class ITerrainTileComponentMutBunch {
     this.membersCaveTTCMutSet.Clear();
     this.membersFallsTTCMutSet.Clear();
     this.membersFireTTCMutSet.Clear();
+    this.membersObsidianFloorTTCMutSet.Clear();
     this.membersMagmaTTCMutSet.Clear();
     this.membersCliffTTCMutSet.Clear();
     this.membersRavaNestTTCMutSet.Clear();
@@ -1049,6 +1080,7 @@ public class ITerrainTileComponentMutBunch {
         this.membersCaveTTCMutSet.Count +
         this.membersFallsTTCMutSet.Count +
         this.membersFireTTCMutSet.Count +
+        this.membersObsidianFloorTTCMutSet.Count +
         this.membersMagmaTTCMutSet.Count +
         this.membersCliffTTCMutSet.Count +
         this.membersRavaNestTTCMutSet.Count +
@@ -1091,6 +1123,7 @@ public class ITerrainTileComponentMutBunch {
     var tempMembersCaveTTCMutSet = this.membersCaveTTCMutSet;
     var tempMembersFallsTTCMutSet = this.membersFallsTTCMutSet;
     var tempMembersFireTTCMutSet = this.membersFireTTCMutSet;
+    var tempMembersObsidianFloorTTCMutSet = this.membersObsidianFloorTTCMutSet;
     var tempMembersMagmaTTCMutSet = this.membersMagmaTTCMutSet;
     var tempMembersCliffTTCMutSet = this.membersCliffTTCMutSet;
     var tempMembersRavaNestTTCMutSet = this.membersRavaNestTTCMutSet;
@@ -1124,6 +1157,7 @@ public class ITerrainTileComponentMutBunch {
     tempMembersCaveTTCMutSet.Destruct();
     tempMembersFallsTTCMutSet.Destruct();
     tempMembersFireTTCMutSet.Destruct();
+    tempMembersObsidianFloorTTCMutSet.Destruct();
     tempMembersMagmaTTCMutSet.Destruct();
     tempMembersCliffTTCMutSet.Destruct();
     tempMembersRavaNestTTCMutSet.Destruct();
@@ -1202,6 +1236,9 @@ public class ITerrainTileComponentMutBunch {
     }
     foreach (var element in this.membersFireTTCMutSet) {
       yield return new FireTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersObsidianFloorTTCMutSet) {
+      yield return new ObsidianFloorTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersMagmaTTCMutSet) {
       yield return new MagmaTTCAsITerrainTileComponent(element);
@@ -1709,6 +1746,27 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return FireTTC.Null;
+      }
+    }
+    public List<ObsidianFloorTTC> GetAllObsidianFloorTTC() {
+      var result = new List<ObsidianFloorTTC>();
+      foreach (var thing in this.membersObsidianFloorTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<ObsidianFloorTTC> ClearAllObsidianFloorTTC() {
+      var result = new List<ObsidianFloorTTC>();
+      this.membersObsidianFloorTTCMutSet.Clear();
+      return result;
+    }
+    public ObsidianFloorTTC GetOnlyObsidianFloorTTCOrNull() {
+      var result = GetAllObsidianFloorTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return ObsidianFloorTTC.Null;
       }
     }
     public List<MagmaTTC> GetAllMagmaTTC() {

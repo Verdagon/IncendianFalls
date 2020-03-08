@@ -7,7 +7,7 @@ namespace Atharia.Model {
     public static void LoadLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,
-        out Location entryLocation,
+        out Location entryLocationRet,
         Game game,
         Superstate superstate,
         int depth) {
@@ -28,13 +28,21 @@ namespace Atharia.Model {
         Asserts.Assert(false, Vivifier.PrintMembers(geomancy));
       }
 
+      levelSuperstate = new LevelSuperstate(level);
+
+      level.terrain.tiles[levelSuperstate.FindSimplePresenceTriggerLocation("volcaetus")].components.Add(
+        level.root.EffectItemTTCCreate(
+          level.root.EffectGlaiveCreate().AsIItem())
+        .AsITerrainTileComponent());
+
+      var entryLocation = levelSuperstate.FindMarkerLocation("entry");
+      entryLocationRet = entryLocation;
+
       level.controller = game.root.EffectVolcaetusLevelControllerCreate(level).AsILevelController();
 
       game.levels.Add(level);
 
-      levelSuperstate = new LevelSuperstate(level);
-
-      entryLocation = levelSuperstate.FindMarkerLocation("start");
+      entryLocation = levelSuperstate.FindMarkerLocation("entry");
     }
 
     public static string GetName(this VolcaetusLevelController obj) {
@@ -51,6 +59,52 @@ namespace Atharia.Model {
         Superstate superstate,
         string triggerName) {
       game.root.logger.Info("Got simple trigger: " + triggerName);
+
+      if (triggerName == "line2") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            100, // sizePercent
+            new Color(16, 16, 16, 224), // backgroundColor
+            300,// fadeInEnd
+            3800, // fadeOutStart
+            3800, // fadeOutEnd,
+            "line3",
+
+            "I can finally rescue my brother!",
+            new Color(255, 64, 0, 255), // textColor
+            300, // textFadeInStartS
+            600, // textFadeInEndS
+            3500, // textFadeOutStartS
+            3800, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() { }))
+          .AsIGameEvent());
+      }
+      if (triggerName == "line3") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            100, // sizePercent
+            new Color(16, 16, 16, 224), // backgroundColor
+            0,// fadeInEnd
+            0, // fadeOutStart
+            0, // fadeOutEnd,
+            "",
+
+            "Congratulations, you have won the game!",
+            new Color(255, 255, 255, 255), // textColor
+            000, // textFadeInStartS
+            300, // textFadeInEndS
+            0, // textFadeOutStartS
+            0, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() { }))
+          .AsIGameEvent());
+      }
+
       return new Atharia.Model.Void();
     }
 
@@ -62,6 +116,30 @@ namespace Atharia.Model {
         Location location,
         string triggerName) {
       game.root.logger.Info("Got simple unit trigger: " + triggerName);
+
+      if (triggeringUnit.NullableIs(game.player) && triggerName == "volcaetus") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            40, // sizePercent
+            new Color(16, 16, 16, 224), // backgroundColor
+            300,// fadeInEnd
+            4800, // fadeOutStart
+            5100, // fadeOutEnd,
+            "line2",
+
+            "This is... this is Volcaetus!\n\nThe black incendium spear!",
+            new Color(255, 64, 0, 255), // textColor
+            300, // textFadeInStartS
+            600, // textFadeInEndS
+            4500, // textFadeOutStartS
+            4800, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() { }))
+          .AsIGameEvent());
+      }
+
       return new Atharia.Model.Void();
     }
 
@@ -150,7 +228,7 @@ namespace Atharia.Model {
 1 1 0 7 ObsidianFloor Obsidian
 1 1 1 7 ObsidianFloor
 1 1 2 7 ObsidianFloor
-1 1 3 7 ObsidianFloor Marker(volcaetus)
+1 1 3 7 ObsidianFloor Trigger(volcaetus)
 1 1 4 7 ObsidianFloor
 1 1 5 7 ObsidianFloor
 1 1 6 5 ObsidianFloor Obsidian

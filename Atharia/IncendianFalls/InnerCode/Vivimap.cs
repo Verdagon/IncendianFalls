@@ -37,6 +37,9 @@ namespace IncendianFalls {
           case "Falls":
             tile.components.Add(root.EffectFallsTTCCreate().AsITerrainTileComponent());
             break;
+          case "ObsidianFloor":
+            tile.components.Add(root.EffectObsidianFloorTTCCreate().AsITerrainTileComponent());
+            break;
           default:
             throw new Exception("Unknown member: " + member);
         }

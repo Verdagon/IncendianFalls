@@ -543,6 +543,13 @@ public class Root {
   readonly List<FireTTCDeleteEffect> effectsFireTTCDeleteEffect =
       new List<FireTTCDeleteEffect>();
 
+  readonly SortedDictionary<int, List<IObsidianFloorTTCEffectObserver>> observersForObsidianFloorTTC =
+      new SortedDictionary<int, List<IObsidianFloorTTCEffectObserver>>();
+  readonly List<ObsidianFloorTTCCreateEffect> effectsObsidianFloorTTCCreateEffect =
+      new List<ObsidianFloorTTCCreateEffect>();
+  readonly List<ObsidianFloorTTCDeleteEffect> effectsObsidianFloorTTCDeleteEffect =
+      new List<ObsidianFloorTTCDeleteEffect>();
+
   readonly SortedDictionary<int, List<IMagmaTTCEffectObserver>> observersForMagmaTTC =
       new SortedDictionary<int, List<IMagmaTTCEffectObserver>>();
   readonly List<MagmaTTCCreateEffect> effectsMagmaTTCCreateEffect =
@@ -1505,6 +1512,17 @@ public class Root {
   readonly List<FireTTCMutSetRemoveEffect> effectsFireTTCMutSetRemoveEffect =
       new List<FireTTCMutSetRemoveEffect>();
 
+  readonly SortedDictionary<int, List<IObsidianFloorTTCMutSetEffectObserver>> observersForObsidianFloorTTCMutSet =
+      new SortedDictionary<int, List<IObsidianFloorTTCMutSetEffectObserver>>();
+  readonly List<ObsidianFloorTTCMutSetCreateEffect> effectsObsidianFloorTTCMutSetCreateEffect =
+      new List<ObsidianFloorTTCMutSetCreateEffect>();
+  readonly List<ObsidianFloorTTCMutSetDeleteEffect> effectsObsidianFloorTTCMutSetDeleteEffect =
+      new List<ObsidianFloorTTCMutSetDeleteEffect>();
+  readonly List<ObsidianFloorTTCMutSetAddEffect> effectsObsidianFloorTTCMutSetAddEffect =
+      new List<ObsidianFloorTTCMutSetAddEffect>();
+  readonly List<ObsidianFloorTTCMutSetRemoveEffect> effectsObsidianFloorTTCMutSetRemoveEffect =
+      new List<ObsidianFloorTTCMutSetRemoveEffect>();
+
   readonly SortedDictionary<int, List<IMagmaTTCMutSetEffectObserver>> observersForMagmaTTCMutSet =
       new SortedDictionary<int, List<IMagmaTTCMutSetEffectObserver>>();
   readonly List<MagmaTTCMutSetCreateEffect> effectsMagmaTTCMutSetCreateEffect =
@@ -2200,6 +2218,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsFireTTC) {
       result += GetFireTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsObsidianFloorTTC) {
+      result += GetObsidianFloorTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsMagmaTTC) {
       result += GetMagmaTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -2499,6 +2520,9 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsFireTTCMutSet) {
       result += GetFireTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsObsidianFloorTTCMutSet) {
+      result += GetObsidianFloorTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsMagmaTTCMutSet) {
       result += GetMagmaTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -2815,6 +2839,9 @@ public class Root {
     foreach (var obj in this.AllFireTTC()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllObsidianFloorTTC()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllMagmaTTC()) {
       obj.CheckForNullViolations(violations);
     }
@@ -3113,6 +3140,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllFireTTCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllObsidianFloorTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllMagmaTTCMutSet()) {
@@ -3563,6 +3593,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllObsidianFloorTTC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllMagmaTTC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -4059,6 +4094,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllFireTTCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllObsidianFloorTTCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -4991,6 +5031,17 @@ public class Root {
       copyOfObserversForFireTTC.Add(
           objectId,
           new List<IFireTTCEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForObsidianFloorTTC =
+        new SortedDictionary<int, List<IObsidianFloorTTCEffectObserver>>();
+    foreach (var entry in observersForObsidianFloorTTC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForObsidianFloorTTC.Add(
+          objectId,
+          new List<IObsidianFloorTTCEffectObserver>(
               observers));
     }
 
@@ -6094,6 +6145,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForObsidianFloorTTCMutSet =
+        new SortedDictionary<int, List<IObsidianFloorTTCMutSetEffectObserver>>();
+    foreach (var entry in observersForObsidianFloorTTCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForObsidianFloorTTCMutSet.Add(
+          objectId,
+          new List<IObsidianFloorTTCMutSetEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForMagmaTTCMutSet =
         new SortedDictionary<int, List<IMagmaTTCMutSetEffectObserver>>();
     foreach (var entry in observersForMagmaTTCMutSet) {
@@ -6691,6 +6753,9 @@ public class Root {
     BroadcastFireTTCEffects(
         copyOfObserversForFireTTC);
            
+    BroadcastObsidianFloorTTCEffects(
+        copyOfObserversForObsidianFloorTTC);
+           
     BroadcastMagmaTTCEffects(
         copyOfObserversForMagmaTTC);
            
@@ -6990,6 +7055,9 @@ public class Root {
            
     BroadcastFireTTCMutSetEffects(
         copyOfObserversForFireTTCMutSet);
+           
+    BroadcastObsidianFloorTTCMutSetEffects(
+        copyOfObserversForObsidianFloorTTCMutSet);
            
     BroadcastMagmaTTCMutSetEffects(
         copyOfObserversForMagmaTTCMutSet);
@@ -7782,6 +7850,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsFireTTC.ContainsKey(sourceObjId)) {
         EffectInternalCreateFireTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsObsidianFloorTTC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsObsidianFloorTTC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateObsidianFloorTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -8782,6 +8860,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsFireTTCMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateFireTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsObsidianFloorTTCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsObsidianFloorTTCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateObsidianFloorTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -10837,6 +10925,34 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsFireTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsObsidianFloorTTCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsObsidianFloorTTCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsObsidianFloorTTCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectObsidianFloorTTCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectObsidianFloorTTCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsObsidianFloorTTCMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -13330,6 +13446,27 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsObsidianFloorTTC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsObsidianFloorTTC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsObsidianFloorTTC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsObsidianFloorTTC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMagmaTTC) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -14654,6 +14791,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ObsidianFloorTTCIncarnation>>(rootIncarnation.incarnationsObsidianFloorTTC)) {
+      if (!sourceIncarnation.incarnationsObsidianFloorTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectObsidianFloorTTCDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<MagmaTTCIncarnation>>(rootIncarnation.incarnationsMagmaTTC)) {
       if (!sourceIncarnation.incarnationsMagmaTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -15351,6 +15495,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsFireTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectFireTTCMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ObsidianFloorTTCMutSetIncarnation>>(rootIncarnation.incarnationsObsidianFloorTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsObsidianFloorTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectObsidianFloorTTCMutSetDelete(id);
       }
     }
 
@@ -22297,6 +22448,7 @@ public class Root {
       CaveTTCMutSet membersCaveTTCMutSet,
       FallsTTCMutSet membersFallsTTCMutSet,
       FireTTCMutSet membersFireTTCMutSet,
+      ObsidianFloorTTCMutSet membersObsidianFloorTTCMutSet,
       MagmaTTCMutSet membersMagmaTTCMutSet,
       CliffTTCMutSet membersCliffTTCMutSet,
       RavaNestTTCMutSet membersRavaNestTTCMutSet,
@@ -22329,6 +22481,7 @@ public class Root {
     CheckHasCaveTTCMutSet(membersCaveTTCMutSet);
     CheckHasFallsTTCMutSet(membersFallsTTCMutSet);
     CheckHasFireTTCMutSet(membersFireTTCMutSet);
+    CheckHasObsidianFloorTTCMutSet(membersObsidianFloorTTCMutSet);
     CheckHasMagmaTTCMutSet(membersMagmaTTCMutSet);
     CheckHasCliffTTCMutSet(membersCliffTTCMutSet);
     CheckHasRavaNestTTCMutSet(membersRavaNestTTCMutSet);
@@ -22364,6 +22517,7 @@ public class Root {
             membersCaveTTCMutSet.id,
             membersFallsTTCMutSet.id,
             membersFireTTCMutSet.id,
+            membersObsidianFloorTTCMutSet.id,
             membersMagmaTTCMutSet.id,
             membersCliffTTCMutSet.id,
             membersRavaNestTTCMutSet.id,
@@ -22427,14 +22581,15 @@ public class Root {
     result += id * version * 21 * incarnation.membersCaveTTCMutSet.GetDeterministicHashCode();
     result += id * version * 22 * incarnation.membersFallsTTCMutSet.GetDeterministicHashCode();
     result += id * version * 23 * incarnation.membersFireTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 24 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 25 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 26 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 27 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 28 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 29 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 30 * incarnation.membersIncendianFallsLevelLinkerTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 31 * incarnation.membersEmberDeepLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 24 * incarnation.membersObsidianFloorTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 25 * incarnation.membersMagmaTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 26 * incarnation.membersCliffTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 27 * incarnation.membersRavaNestTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 28 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 29 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 30 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 31 * incarnation.membersIncendianFallsLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 32 * incarnation.membersEmberDeepLevelLinkerTTCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -25254,6 +25409,134 @@ public class Root {
       }
     }
     effectsFireTTCCreateEffect.Clear();
+  }
+  public ObsidianFloorTTCIncarnation GetObsidianFloorTTCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsObsidianFloorTTC[id].incarnation;
+  }
+  public bool ObsidianFloorTTCExists(int id) {
+    return rootIncarnation.incarnationsObsidianFloorTTC.ContainsKey(id);
+  }
+  public ObsidianFloorTTC GetObsidianFloorTTC(int id) {
+    return new ObsidianFloorTTC(this, id);
+  }
+  public List<ObsidianFloorTTC> AllObsidianFloorTTC() {
+    List<ObsidianFloorTTC> result = new List<ObsidianFloorTTC>(rootIncarnation.incarnationsObsidianFloorTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsObsidianFloorTTC.Keys) {
+      result.Add(new ObsidianFloorTTC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<ObsidianFloorTTC> EnumAllObsidianFloorTTC() {
+    foreach (var id in rootIncarnation.incarnationsObsidianFloorTTC.Keys) {
+      yield return GetObsidianFloorTTC(id);
+    }
+  }
+  public void CheckHasObsidianFloorTTC(ObsidianFloorTTC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasObsidianFloorTTC(thing.id);
+  }
+  public void CheckHasObsidianFloorTTC(int id) {
+    if (!rootIncarnation.incarnationsObsidianFloorTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid ObsidianFloorTTC: " + id);
+    }
+  }
+  public void AddObsidianFloorTTCObserver(int id, IObsidianFloorTTCEffectObserver observer) {
+    List<IObsidianFloorTTCEffectObserver> obsies;
+    if (!observersForObsidianFloorTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IObsidianFloorTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForObsidianFloorTTC[id] = obsies;
+  }
+
+  public void RemoveObsidianFloorTTCObserver(int id, IObsidianFloorTTCEffectObserver observer) {
+    if (observersForObsidianFloorTTC.ContainsKey(id)) {
+      var list = observersForObsidianFloorTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForObsidianFloorTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public ObsidianFloorTTC EffectObsidianFloorTTCCreate(
+) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new ObsidianFloorTTCIncarnation(
+
+            );
+    EffectInternalCreateObsidianFloorTTC(id, rootIncarnation.version, incarnation);
+    return new ObsidianFloorTTC(this, id);
+  }
+  public void EffectInternalCreateObsidianFloorTTC(
+      int id,
+      int incarnationVersion,
+      ObsidianFloorTTCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new ObsidianFloorTTCCreateEffect(id);
+    rootIncarnation.incarnationsObsidianFloorTTC.Add(
+        id,
+        new VersionAndIncarnation<ObsidianFloorTTCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsObsidianFloorTTCCreateEffect.Add(effect);
+  }
+
+  public void EffectObsidianFloorTTCDelete(int id) {
+    CheckUnlocked();
+    var effect = new ObsidianFloorTTCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsObsidianFloorTTC[id];
+
+    rootIncarnation.incarnationsObsidianFloorTTC.Remove(id);
+    effectsObsidianFloorTTCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetObsidianFloorTTCHash(int id, int version, ObsidianFloorTTCIncarnation incarnation) {
+    int result = id * version;
+    return result;
+  }
+     
+  public void BroadcastObsidianFloorTTCEffects(
+      SortedDictionary<int, List<IObsidianFloorTTCEffectObserver>> observers) {
+    foreach (var effect in effectsObsidianFloorTTCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IObsidianFloorTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnObsidianFloorTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IObsidianFloorTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnObsidianFloorTTCEffect(effect);
+        }
+        observersForObsidianFloorTTC.Remove(effect.id);
+      }
+    }
+    effectsObsidianFloorTTCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsObsidianFloorTTCCreateEffect) {
+      if (observers.TryGetValue(0, out List<IObsidianFloorTTCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnObsidianFloorTTCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IObsidianFloorTTCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnObsidianFloorTTCEffect(effect);
+        }
+      }
+    }
+    effectsObsidianFloorTTCCreateEffect.Clear();
   }
   public MagmaTTCIncarnation GetMagmaTTCIncarnation(int id) {
     if (id == 0) {
@@ -31725,6 +32008,9 @@ public class Root {
     if (rootIncarnation.incarnationsFireTTC.ContainsKey(id)) {
       return new FireTTCAsITerrainTileComponent(new FireTTC(this, id));
     }
+    if (rootIncarnation.incarnationsObsidianFloorTTC.ContainsKey(id)) {
+      return new ObsidianFloorTTCAsITerrainTileComponent(new ObsidianFloorTTC(this, id));
+    }
     if (rootIncarnation.incarnationsMagmaTTC.ContainsKey(id)) {
       return new MagmaTTCAsITerrainTileComponent(new MagmaTTC(this, id));
     }
@@ -31820,6 +32106,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsFireTTC.ContainsKey(id)) {
       return new FireTTCAsITerrainTileComponent(new FireTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsObsidianFloorTTC.ContainsKey(id)) {
+      return new ObsidianFloorTTCAsITerrainTileComponent(new ObsidianFloorTTC(this, id));
     }
     if (rootIncarnation.incarnationsMagmaTTC.ContainsKey(id)) {
       return new MagmaTTCAsITerrainTileComponent(new MagmaTTC(this, id));
@@ -32349,6 +32638,9 @@ public class Root {
     if (rootIncarnation.incarnationsFireTTC.ContainsKey(id)) {
       return new FireTTCAsIDestructible(new FireTTC(this, id));
     }
+    if (rootIncarnation.incarnationsObsidianFloorTTC.ContainsKey(id)) {
+      return new ObsidianFloorTTCAsIDestructible(new ObsidianFloorTTC(this, id));
+    }
     if (rootIncarnation.incarnationsMagmaTTC.ContainsKey(id)) {
       return new MagmaTTCAsIDestructible(new MagmaTTC(this, id));
     }
@@ -32579,6 +32871,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsFireTTC.ContainsKey(id)) {
       return new FireTTCAsIDestructible(new FireTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsObsidianFloorTTC.ContainsKey(id)) {
+      return new ObsidianFloorTTCAsIDestructible(new ObsidianFloorTTC(this, id));
     }
     if (rootIncarnation.incarnationsMagmaTTC.ContainsKey(id)) {
       return new MagmaTTCAsIDestructible(new MagmaTTC(this, id));
@@ -44255,6 +44550,197 @@ public class Root {
       }
     }
     effectsFireTTCMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetObsidianFloorTTCMutSetHash(int id, int version, ObsidianFloorTTCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public ObsidianFloorTTCMutSetIncarnation GetObsidianFloorTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsObsidianFloorTTCMutSet[id].incarnation;
+    }
+    public ObsidianFloorTTCMutSet GetObsidianFloorTTCMutSet(int id) {
+      return new ObsidianFloorTTCMutSet(this, id);
+    }
+    public List<ObsidianFloorTTCMutSet> AllObsidianFloorTTCMutSet() {
+      List<ObsidianFloorTTCMutSet> result = new List<ObsidianFloorTTCMutSet>(rootIncarnation.incarnationsObsidianFloorTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsObsidianFloorTTCMutSet.Keys) {
+        result.Add(new ObsidianFloorTTCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool ObsidianFloorTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsObsidianFloorTTCMutSet.ContainsKey(id);
+    }
+    public void CheckHasObsidianFloorTTCMutSet(ObsidianFloorTTCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasObsidianFloorTTCMutSet(thing.id);
+    }
+    public void CheckHasObsidianFloorTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsObsidianFloorTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid ObsidianFloorTTCMutSet}: " + id);
+      }
+    }
+    public ObsidianFloorTTCMutSet EffectObsidianFloorTTCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new ObsidianFloorTTCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateObsidianFloorTTCMutSet(id, rootIncarnation.version, incarnation);
+      return new ObsidianFloorTTCMutSet(this, id);
+    }
+    public void EffectInternalCreateObsidianFloorTTCMutSet(int id, int incarnationVersion, ObsidianFloorTTCMutSetIncarnation incarnation) {
+      var effect = new ObsidianFloorTTCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsObsidianFloorTTCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<ObsidianFloorTTCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsObsidianFloorTTCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectObsidianFloorTTCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new ObsidianFloorTTCMutSetDeleteEffect(id);
+      effectsObsidianFloorTTCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsObsidianFloorTTCMutSet[id];
+      rootIncarnation.incarnationsObsidianFloorTTCMutSet.Remove(id);
+    }
+
+       
+    public void EffectObsidianFloorTTCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasObsidianFloorTTCMutSet(setId);
+      CheckHasObsidianFloorTTC(elementId);
+
+      var effect = new ObsidianFloorTTCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsObsidianFloorTTCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new ObsidianFloorTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsObsidianFloorTTCMutSet[setId] =
+            new VersionAndIncarnation<ObsidianFloorTTCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsObsidianFloorTTCMutSetAddEffect.Add(effect);
+    }
+    public void EffectObsidianFloorTTCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasObsidianFloorTTCMutSet(setId);
+      CheckHasObsidianFloorTTC(elementId);
+
+      var effect = new ObsidianFloorTTCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsObsidianFloorTTCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new ObsidianFloorTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsObsidianFloorTTCMutSet[setId] =
+            new VersionAndIncarnation<ObsidianFloorTTCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsObsidianFloorTTCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddObsidianFloorTTCMutSetObserver(int id, IObsidianFloorTTCMutSetEffectObserver observer) {
+      List<IObsidianFloorTTCMutSetEffectObserver> obsies;
+      if (!observersForObsidianFloorTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IObsidianFloorTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForObsidianFloorTTCMutSet[id] = obsies;
+    }
+
+    public void RemoveObsidianFloorTTCMutSetObserver(int id, IObsidianFloorTTCMutSetEffectObserver observer) {
+      if (observersForObsidianFloorTTCMutSet.ContainsKey(id)) {
+        var list = observersForObsidianFloorTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForObsidianFloorTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastObsidianFloorTTCMutSetEffects(
+      SortedDictionary<int, List<IObsidianFloorTTCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsObsidianFloorTTCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IObsidianFloorTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnObsidianFloorTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IObsidianFloorTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnObsidianFloorTTCMutSetEffect(effect);
+        }
+        observersForObsidianFloorTTCMutSet.Remove(effect.id);
+      }
+    }
+    effectsObsidianFloorTTCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsObsidianFloorTTCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IObsidianFloorTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnObsidianFloorTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IObsidianFloorTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnObsidianFloorTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsObsidianFloorTTCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsObsidianFloorTTCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IObsidianFloorTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnObsidianFloorTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IObsidianFloorTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnObsidianFloorTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsObsidianFloorTTCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsObsidianFloorTTCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IObsidianFloorTTCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnObsidianFloorTTCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IObsidianFloorTTCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnObsidianFloorTTCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsObsidianFloorTTCMutSetCreateEffect.Clear();
 
   }
 

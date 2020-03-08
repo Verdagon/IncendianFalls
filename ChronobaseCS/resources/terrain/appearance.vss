@@ -48,6 +48,14 @@ mut struct MagmaTTC {
   }
 }
 
+mut struct ObsidianFloorTTC {
+  ObsidianFloorTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: ObsidianFloorTTC overrides IDestructible): Void {
+    ObsidianFloorTTCExtensions.Destruct
+  }
+}
+
 mut struct FireTTC {
   FireTTC isa ITerrainTileComponent;
 

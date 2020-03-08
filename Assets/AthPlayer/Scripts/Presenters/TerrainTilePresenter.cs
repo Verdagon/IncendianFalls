@@ -202,6 +202,10 @@ namespace AthPlayer {
           topColor = new UnityEngine.Color(.2f, .2f, .2f);
           sideColor = new UnityEngine.Color(.1f, .05f, 0f);
           outlineColor = new UnityEngine.Color(0f, 0f, 0f);
+        } else if (ttc is ObsidianFloorTTCAsITerrainTileComponent) {
+          topColor = new UnityEngine.Color(.1f, .1f, .05f);
+          sideColor = new UnityEngine.Color(.05f, .05f, .05f);
+          outlineColor = new UnityEngine.Color(0f, 0f, 0f);
         } else if (ttc is RavaNestTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.2f, 0, .2f);
           sideColor = new UnityEngine.Color(.2f, 0f, .2f);

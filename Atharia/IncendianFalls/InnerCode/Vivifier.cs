@@ -152,6 +152,9 @@ namespace IncendianFalls {
         case "Obsidian":
           tile.components.Add(level.root.EffectObsidianTTCCreate().AsITerrainTileComponent());
           return true;
+        case "ObsidianFloor":
+          tile.components.Add(level.root.EffectObsidianFloorTTCCreate().AsITerrainTileComponent());
+          return true;
         case "Grass":
           tile.components.Add(level.root.EffectGrassTTCCreate().AsITerrainTileComponent());
           return true;
