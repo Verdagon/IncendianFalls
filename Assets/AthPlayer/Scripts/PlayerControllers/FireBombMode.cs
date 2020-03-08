@@ -73,6 +73,12 @@ namespace AthPlayer {
       delegat.AfterDidSomething();
     }
 
+    public void CancelClicked() {
+      narrator.ShowMessage("Canceled fire bomb!");
+      delegat.SwitchToNormalMode();
+      delegat.AfterDidSomething();
+    }
+
     public void FireClicked() {
       narrator.ShowMessage("You must select a location to fire bomb on. Canceling fire bomb!");
       delegat.SwitchToNormalMode();

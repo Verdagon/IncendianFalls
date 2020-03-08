@@ -59,6 +59,12 @@ namespace AthPlayer {
       return result;
     }
 
+    public string RequestCancel(int gameId) {
+      var result = ss.RequestCancel(gameId);
+
+      return result;
+    }
+
     public string RequestFire(int gameId, int targetUnitId) {
       //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
       //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);

@@ -18,6 +18,7 @@ namespace AthPlayer {
     void FireClicked();
     void FireBombClicked();
     void MireClicked();
+    void CancelClicked();
     void CounterClicked();
     void InteractClicked();  
 

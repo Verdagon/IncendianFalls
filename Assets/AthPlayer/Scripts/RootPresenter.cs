@@ -114,6 +114,9 @@ namespace AthPlayer {
       if (Input.GetKeyUp(KeyCode.S)) {
         MireClicked();
       }
+      if (Input.GetKeyUp(KeyCode.Escape)) {
+        CancelClicked();
+      }
       if (Input.GetKeyUp(KeyCode.Slash)) {
         playerController.ActivateCheat("warptoend");
       }
@@ -204,6 +207,10 @@ namespace AthPlayer {
 
     public void MireClicked() {
       playerController.MireClicked();
+    }
+
+    public void CancelClicked() {
+      playerController.CancelClicked();
     }
 
   }

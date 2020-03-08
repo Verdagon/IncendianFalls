@@ -125,6 +125,10 @@ namespace Domino {
       mode.MireClicked();
     }
 
+    public void CancelClicked() {
+      mode.CancelClicked();
+    }
+
     public void InteractClicked() {
       mode.InteractClicked();
     }

@@ -75,11 +75,18 @@ namespace AthPlayer {
       delegat.AfterDidSomething();
     }
 
-    public void FireClicked() {
-      narrator.ShowMessage("Canceled fire!");
+    public void MireClicked() {
+      narrator.ShowMessage("Canceled Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
+
+    public void CancelClicked() {
+      narrator.ShowMessage("Canceled Mire!");
+      delegat.SwitchToNormalMode();
+      delegat.AfterDidSomething();
+    }
+
 
     public void FireBombClicked() {
       narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
@@ -87,7 +94,7 @@ namespace AthPlayer {
       delegat.AfterDidSomething();
     }
 
-    public void MireClicked() {
+    public void FireClicked() {
       narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();

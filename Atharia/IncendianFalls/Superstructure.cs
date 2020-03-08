@@ -379,6 +379,31 @@ namespace IncendianFalls {
       }
     }
 
+    public string RequestCancel(int gameId) {
+
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new CancelRequest(gameId);
+        broadcastBeforeRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
+        var superstate = superstateByGameId[gameId];
+        string success = context.root.Transact(delegate () {
+          return CancelRequestExecutor.Execute(context, superstate, request);
+        });
+        context.Flare(success.DStr());
+        broadcastAfterRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
+        return success;
+      } catch (Exception e) {
+        root.logger.Error(e.Message);
+        throw e;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
+      }
+    }
+
     public string RequestDefy(int gameId) {
       //var rollbackPoint = root.Snapshot();
       try {

@@ -81,6 +81,12 @@ namespace AthPlayer {
       delegat.AfterDidSomething();
     }
 
+    public void CancelClicked() {
+      narrator.ShowMessage("Canceled fire!");
+      delegat.SwitchToNormalMode();
+      delegat.AfterDidSomething();
+    }
+
     public void FireBombClicked() {
       narrator.ShowMessage("You must select a unit to fire on them. Canceling fire!");
       delegat.SwitchToNormalMode();

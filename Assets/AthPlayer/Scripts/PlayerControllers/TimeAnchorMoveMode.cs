@@ -51,6 +51,12 @@ namespace AthPlayer {
       delegat.AfterDidSomething();
     }
 
+    public void CancelClicked() {
+      narrator.ShowMessage("Canceling time anchor!");
+      delegat.SwitchToNormalMode();
+      delegat.AfterDidSomething();
+    }
+
     public void ActivateCheat(string cheatName) {
       narrator.ShowMessage("You must move off the time anchor to place it. Canceling time anchor!");
       delegat.SwitchToNormalMode();

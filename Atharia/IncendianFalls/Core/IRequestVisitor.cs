@@ -17,6 +17,7 @@ public interface IRequestVisitor {
   void Visit(MireRequestAsIRequest obj);
   void Visit(FireBombRequestAsIRequest obj);
   void Visit(FireRequestAsIRequest obj);
+  void Visit(CancelRequestAsIRequest obj);
   void Visit(AttackRequestAsIRequest obj);
   void Visit(ResumeRequestAsIRequest obj);
   void Visit(InteractRequestAsIRequest obj);

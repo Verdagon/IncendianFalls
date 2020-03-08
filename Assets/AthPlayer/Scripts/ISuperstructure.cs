@@ -17,6 +17,7 @@ namespace AthPlayer {
     string RequestDefy(int gameId);
     string RequestTrigger(int gameId, string triggerName);
     string RequestCounter(int gameId);
+    string RequestCancel(int gameId);
     string RequestCheat(int gameId, string cheatName);
     string RequestFire(int gameId, int targetUnitId);
     string RequestFireBomb(int gameId, Location location);

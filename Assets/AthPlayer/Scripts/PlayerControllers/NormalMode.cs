@@ -111,6 +111,14 @@ namespace AthPlayer {
       delegat.AfterDidSomething();
     }
 
+    public void CancelClicked() {
+      string cancelResult = ss.RequestCancel(game.id);
+      if (cancelResult.Length > 0) {
+        narrator.ShowMessage(cancelResult);
+        return;
+      }
+    }
+
     public void FireClicked() {
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
         ss.GetRoot().logger.Error("Not your turn!");

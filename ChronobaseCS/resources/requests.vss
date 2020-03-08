@@ -52,6 +52,12 @@ imm struct AttackRequest {
   targetUnitId: Int;
 }
 
+imm struct CancelRequest {
+  CancelRequest isa IRequest;
+
+  gameId: Int;
+}
+
 imm struct FireRequest {
   FireRequest isa IRequest;
 
