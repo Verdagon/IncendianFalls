@@ -22,13 +22,14 @@ namespace Atharia.Model {
       if (unit.hp > Actions.LIGHTNING_CHARGE_DAMAGE + 1 && unit.hp >= unit.maxHp / 4) {
         var bunch = IImpulseStrongMutBunch.New(game.root);
         bunch.Add(impulse);
-
         var pursueImpulse = bunch.GetOnlyPursueImpulseOrNull();
+        var attackImpulse = bunch.GetOnlyAttackImpulseOrNull();
+        bunch.Destruct();
+
         if (pursueImpulse.Exists() && pursueImpulse.isClearPath) {
           IncendianFalls.Actions.LightningCharge(game, superstate, unit);
         }
 
-        var attackImpulse = bunch.GetOnlyAttackImpulseOrNull();
         if (attackImpulse.Exists()) {
           IncendianFalls.Actions.LightningCharge(game, superstate, unit);
         }

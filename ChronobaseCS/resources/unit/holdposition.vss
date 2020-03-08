@@ -1,0 +1,22 @@
+
+mut struct HoldPositionImpulse {
+  HoldPositionImpulse isa IImpulse;
+
+  weight: Int;
+  duration: Int;
+
+  fn Destruct(this: HoldPositionImpulse overrides IDestructible): Void {
+    HoldPositionImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: HoldPositionImpulse overrides IImpulse): Int {
+    HoldPositionImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: HoldPositionImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool {
+    HoldPositionImpulseExtensions.Enact
+  }
+}

@@ -67,6 +67,7 @@ unit/unit.vss
 unit/unitcomponent.vss
 unit/unitevent.vss
 unit/wander.vss
+unit/holdposition.vss
 vstl/color.vss
 vstl/rand.vss
 vstl/vec.vss

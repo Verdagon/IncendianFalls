@@ -61,7 +61,7 @@ namespace Atharia.Model {
       var entryLoc = levelSuperstate.FindMarkerLocation("entry");
 
       EmberDeepUnitsAndItems.FillWithUnits(
-        game,
+        game.rand,
         level,
         levelSuperstate,
         (loc) => !loc.Equals(entryLoc),

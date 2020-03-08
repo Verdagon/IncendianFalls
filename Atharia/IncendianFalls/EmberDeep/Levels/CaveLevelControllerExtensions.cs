@@ -68,7 +68,7 @@ namespace Atharia.Model {
       int numSpaces = levelSuperstate.NumWalkableLocations(false);
       if (depth < 2) {
         EmberDeepUnitsAndItems.FillWithUnits(
-          game,
+          game.rand,
           level,
           levelSuperstate,
         (loc) => !loc.Equals(entryLocation),
@@ -84,7 +84,7 @@ namespace Atharia.Model {
           /*numLightningTrask=*/ 0 * numSpaces / 200);
       } else if (depth < 4) {
         EmberDeepUnitsAndItems.FillWithUnits(
-          game,
+          game.rand,
           level,
           levelSuperstate,
         (loc) => !loc.Equals(entryLocation),
@@ -100,7 +100,7 @@ namespace Atharia.Model {
           /*numLightningTrask=*/ 0 * numSpaces / 200);
       } else if (depth < 6) {
         EmberDeepUnitsAndItems.FillWithUnits(
-          game,
+          game.rand,
           level,
           levelSuperstate,
         (loc) => !loc.Equals(entryLocation),
@@ -116,7 +116,7 @@ namespace Atharia.Model {
           /*numLightningTrask=*/ 0);
       } else if (depth < 8) {
         EmberDeepUnitsAndItems.FillWithUnits(
-          game,
+          game.rand,
           level,
           levelSuperstate,
         (loc) => !loc.Equals(entryLocation),
@@ -129,7 +129,7 @@ namespace Atharia.Model {
           /*numEmberfolk=*/ 5 * numSpaces / 200,
           /*numChronolisk=*/ 3 * numSpaces / 200,
           /*numMantisBombardier=*/ 3 * numSpaces / 200,
-          /*numLightningTrask=*/ 0 * numSpaces / 200);
+          /*numLightningTrask=*/ 1);
       }
 
       game.levels.Add(level);

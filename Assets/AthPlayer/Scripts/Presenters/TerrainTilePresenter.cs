@@ -382,6 +382,19 @@ namespace AthPlayer {
                       false,
                       new UnityEngine.Color(1f, 1f, 1f));
               featureLocked = true;
+        } else if (ttc is FireTTCAsITerrainTileComponent) {
+          feature =
+              new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          "r",
+                            50,
+                          new UnityEngine.Color(.8f, .4f, 0, 1.2f),
+                          0,
+                          OutlineMode.WithOutline,
+                          new UnityEngine.Color(0, 0, 0)),
+                      false,
+                      new UnityEngine.Color(0f, .3f, 0f));
         } else if (ttc is LevelLinkTTCAsITerrainTileComponent) {
         } else if (ttc is WarperTTCAsITerrainTileComponent) {
         } else if (ttc is IncendianFallsLevelLinkerTTCAsITerrainTileComponent) {

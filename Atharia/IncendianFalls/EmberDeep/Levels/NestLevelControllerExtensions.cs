@@ -108,14 +108,24 @@ namespace Atharia.Model {
       var entryLocation = levelSuperstate.FindMarkerLocation("start");
       entryLocationRet = entryLocation;
 
+      var exitLocation = levelSuperstate.FindMarkerLocation("exit");
+      level.terrain.tiles[exitLocation].components.Add(
+        level.root.EffectEmberDeepLevelLinkerTTCCreate(depth + 1).AsITerrainTileComponent());
+      level.terrain.tiles[exitLocation].components.Add(
+        level.root.EffectCaveTTCCreate().AsITerrainTileComponent());
+
       EmberDeepUnitsAndItems.PlaceRocks(game.rand, level, levelSuperstate);
 
-      EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .04f, .04f);
-      
+      EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .01f, .01f);
+
+      level.terrain.tiles[levelSuperstate.FindMarkerLocation("sword")].components.Add(
+        level.root.EffectItemTTCCreate(
+          level.root.EffectGlaiveCreate().AsIItem())
+        .AsITerrainTileComponent());
 
       int numSpacesInRestOfLevel = levelSuperstate.NumWalkableLocations(false) - ambushAreaFloors.Count;
       EmberDeepUnitsAndItems.FillWithUnits(
-        game,
+        game.rand,
         level,
         levelSuperstate,
         (loc) => !ambushAreaFloors.Contains(loc),
@@ -129,6 +139,23 @@ namespace Atharia.Model {
         /*numChronolisk=*/ 0 * numSpacesInRestOfLevel / 200,
         /*numMantisBombardier=*/ 0 * numSpacesInRestOfLevel / 200,
         /*numLightningTrask=*/ 0 * numSpacesInRestOfLevel / 200);
+
+      var summonLocations = levelSuperstate.FindMarkersLocations("summon", 1);
+      EmberDeepUnitsAndItems.FillWithUnits(
+        game.rand,
+        level,
+        levelSuperstate,
+        (loc) => summonLocations.Contains(loc),
+        /*numIrkling=*/ summonLocations.Count / 2,
+        /*numDraxling=*/ summonLocations.Count / 4,
+        /*numRavagianTrask=*/ summonLocations.Count / 8 - 1,
+        /*numBaug=*/ summonLocations.Count / 8,
+        /*numSpirient=*/ 1,
+        /*numIrklingKing=*/ 0,
+        /*numEmberfolk=*/ 0,
+        /*numChronolisk=*/ 0,
+        /*numMantisBombardier=*/ 0,
+        /*numLightningTrask=*/ 0);
 
       game.levels.Add(level);
 
@@ -151,141 +178,72 @@ namespace Atharia.Model {
       game.root.logger.Info("Got trigger: " + triggerName);
 
       if (triggerName == "levelStart") {
-        game.events.Add(
-          new ShowOverlayEvent(
-            100, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            0,// fadeInEnd
-            7000, // fadeOutStart
-            7000, // fadeOutEnd,
-            "introLine1Done",
-
-            "To undo it, I need to dive into Ember Deep, find the Emberdrift, and follow it until I find a similar black incendium artifact.",
-            new Color(255, 64, 0, 255), // textColor
-            1000, // textFadeInStartS
-            2000, // textFadeInEndS
-            6000, // textFadeOutStartS
-            7000, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "introLine1Done") {
-        var hopTo = superstate.levelSuperstate.FindMarkerLocation("playerHop");
+        var hopTo = superstate.levelSuperstate.FindMarkerLocation("playerHopTo");
         Actions.Step(game, superstate, game.player, hopTo, true, false);
         game.events.Add(new WaitEvent(1000, "playerEntryHopDone").AsIGameEvent());
       }
       if (triggerName == "playerEntryHopDone") {
         game.events.Add(
           new ShowOverlayEvent(
-            80, // sizePercent
+            30, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
-            500,// fadeInEnd
-            7000, // fadeOutStart
-            7000, // fadeOutEnd,
-            "objectiveMusingDone",
+            300,// fadeInEnd
+            2400, // fadeOutStart
+            2700, // fadeOutEnd,
+            "uhOhDone",
 
-            "Finally, Ember Deep! I need to go deep...\n\nWhen embers fill the air, I've found the Emberdrift, and I'll follow it to find the black incendium I need.",
+            "Uh oh...",
             new Color(255, 64, 0, 255), // textColor
-            1000, // textFadeInStartS
-            2000, // textFadeInEndS
-            6000, // textFadeOutStartS
-            7000, // textFadeOutEndS
+            300, // textFadeInStartS
+            600, // textFadeInEndS
+            2100, // textFadeOutStartS
+            2400, // textFadeOutEndS
             true, // topAligned
             true, // leftAligned
 
             new ButtonImmList(new List<Button>() { }))
           .AsIGameEvent());
       }
-      if (triggerName == "objectiveMusingDone") {
-        //var destination = superstate.levelSuperstate.FindSimplePresenceTriggerLocation("ambushTrigger");
-        //var terrain = game.level.terrain;
-        //var steps =
-        //    AStarExplorer.Go(
-        //        terrain.pattern,
-        //        game.player.location,
-        //        destination,
-        //        game.level.ConsiderCornersAdjacent(),
-        //        (Location from, Location to) => {
-        //          return terrain.tiles.ContainsKey(to) &&
-        //              terrain.tiles[to].IsWalkable() &&
-        //              terrain.GetElevationDifference(from, to) <= 2;
-        //        });
-        //Asserts.Assert(steps.Count > 0);
-        //superstate.navigatingState = new Superstate.NavigatingState(steps);
-
-        var hopTo = superstate.levelSuperstate.FindSimplePresenceTriggerLocation("ambushTrigger");
-        Actions.Step(game, superstate, game.player, hopTo, true, false);
-        game.events.Add(new WaitEvent(1000, "reachedAmbush").AsIGameEvent());
-      }
-      if (triggerName == "reachedAmbush") {
-        game.events.Add(
-          new ShowOverlayEvent(
-            80, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            500,// fadeInEnd
-            4000, // fadeOutStart
-            5000, // fadeOutEnd,
-            "startSummons",
-
-            "Seems quiet... my brother's journals described it as a lively place.",
-            new Color(255, 64, 0, 255), // textColor
-            1000, // textFadeInStartS
-            2000, // textFadeInEndS
-            4000, // textFadeOutStartS
-            5000, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "startSummons") {
+      if (triggerName == "uhOhDone") {
         game.events.Add(
           new FlyCameraEvent(
             superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"),
             new Vec3(0, 8, 8),
             1000,
-            "cameraDoneFlying")
+            "cameraReachedPanTo")
           .AsIGameEvent());
       }
-      if (triggerName == "cameraDoneFlying") {
+      if (triggerName == "cameraReachedPanTo") {
+        game.events.Add(
+          new WaitEvent(1000, "cameraWaitDone").AsIGameEvent());
+      }
+      if (triggerName == "cameraWaitDone") {
+        game.events.Add(
+          new FlyCameraEvent(
+            superstate.levelSuperstate.FindMarkerLocation("playerHopTo"),
+            new Vec3(0, 8, 8),
+            1000,
+            "cameraDone")
+          .AsIGameEvent());
+      }
+      if (triggerName == "cameraDone") {
         game.player.nextActionTime = game.level.time;
-        var summonLocations = superstate.levelSuperstate.FindMarkersLocations("summon", 1);
-
-        EmberDeepUnitsAndItems.FillWithUnits(
-          game,
-          game.level,
-          superstate.levelSuperstate,
-          (loc) => summonLocations.Contains(loc),
-          /*numIrkling=*/ summonLocations.Count / 2,
-          /*numDraxling=*/ summonLocations.Count / 8,
-          /*numRavagianTrask=*/ summonLocations.Count / 8,
-          /*numBaug=*/ summonLocations.Count / 8,
-          /*numSpirient=*/ summonLocations.Count / 16,
-          /*numIrklingKing=*/ 0,
-          /*numEmberfolk=*/ summonLocations.Count / 16,
-          /*numChronolisk=*/ 0,
-          /*numMantisBombardier=*/ 0,
-          /*numLightningTrask=*/ 0);
 
         game.events.Add(
           new ShowOverlayEvent(
-            60, // sizePercent
+            40, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
-            500,// fadeInEnd
-            7000, // fadeOutStart
-            7000, // fadeOutEnd,
+            300,// fadeInEnd
+            3400, // fadeOutStart
+            3700, // fadeOutEnd,
             "",
 
-            "Spoke too soon. An Irkling nest!\n\nWith chronomancy, I might be able to survive this!",
+            "It's a nest of some sort!\n\nTime for some chronomancy!",
             new Color(255, 64, 0, 255), // textColor
-            1000, // textFadeInStartS
-            2000, // textFadeInEndS
-            6000, // textFadeOutStartS
-            7000, // textFadeOutEndS
+            300, // textFadeInStartS
+            600, // textFadeInEndS
+            3100, // textFadeOutStartS
+            3400, // textFadeOutEndS
             true, // topAligned
             true, // leftAligned
 
@@ -330,16 +288,16 @@ namespace Atharia.Model {
 
   private static string LEVEL = @"
 -6 -6 2 1 Marker(summon)
--6 -6 4 1 Marker(summon)
+-6 -6 4 1 Marker(summon) HealthPotion
 -6 -6 7 1 Marker(summon)
 -6 -5 4 1
 -6 -5 6 1
--6 -5 7 1
--5 -6 3 1 Marker(summon)
+-6 -5 7 1 HealthPotion
+-5 -6 3 1 Marker(summon) HealthPotion
 -5 -6 4 1 Marker(summon)
--5 -6 5 1 Marker(summon)
+-5 -6 5 1 Marker(summon) ManaPotion
 -5 -6 6 1 Marker(summon)
--5 -6 7 1 Marker(summon)
+-5 -6 7 1 Marker(summon) ManaPotion
 -5 -5 0 1
 -5 -5 1 1
 -5 -5 2 1
@@ -355,42 +313,42 @@ namespace Atharia.Model {
 -5 -4 4 1
 -5 -4 5 1
 -5 -4 6 1
--5 -4 7 1 Marker(summon)
+-5 -4 7 1 Marker(summon) HealthPotion
 -4 -5 3 1
 -4 -5 4 1
 -4 -5 5 1
--4 -5 6 1
+-4 -5 6 1 HealthPotion
 -4 -5 7 1
--4 -4 0 1
--4 -4 1 1 Marker(cameraPanTo)
+-4 -4 0 1 Marker(playerHopTo)
+-4 -4 1 1
 -4 -4 2 1
 -4 -4 3 1
 -4 -4 4 1
 -4 -4 5 1
 -4 -4 6 1 Marker(summon)
--4 -4 7 1
+-4 -4 7 1 HealthPotion
 -4 -3 0 1 Marker(summon)
--4 -3 1 1 Marker(summon)
+-4 -3 1 1 Marker(summon) ManaPotion
 -4 -3 2 1 Marker(summon)
--3 -5 4 1
+-3 -5 4 1 ManaPotion
 -3 -5 5 1
 -3 -5 6 1
 -3 -5 7 1
 -3 -4 0 1
--3 -4 1 1
+-3 -4 1 1 Marker(start)
 -3 -4 2 1
--3 -4 3 1 Trigger(ambushTrigger)
+-3 -4 3 1 ManaPotion
 -3 -4 4 1
 -3 -4 5 1
 -3 -4 6 1
--3 -4 7 1
+-3 -4 7 1 ManaPotion
 -3 -3 0 1
 -3 -3 1 1 Marker(summon)
--3 -3 2 1
+-3 -3 2 1 HealthPotion
 -3 -3 3 1
 -2 -5 5 1
 -2 -5 6 1
--2 -4 0 1
+-2 -4 0 1 ManaPotion
 -2 -4 1 1
 -2 -4 2 1
 -2 -4 3 1
@@ -410,7 +368,7 @@ namespace Atharia.Model {
 -2 3 7 1 Marker(exit)
 -1 -4 1 1
 -1 -4 2 1
--1 -4 3 1
+-1 -4 3 1 HealthPotion
 -1 -4 4 1
 -1 -4 5 1
 -1 -4 6 1
@@ -419,9 +377,9 @@ namespace Atharia.Model {
 -1 -3 1 1
 -1 -3 2 1
 -1 -3 3 1
--1 -3 4 1
+-1 -3 4 1 HealthPotion
 -1 -3 5 1
--1 -3 6 1
+-1 -3 6 1 HealthPotion
 -1 -3 7 1
 -1 3 3 1
 -1 3 4 1
@@ -431,25 +389,25 @@ namespace Atharia.Model {
 -1 4 0 1
 -1 4 1 1
 0 -4 2 1
-0 -4 3 1
+0 -4 3 1 HealthPotion
 0 -4 4 1
 0 -4 5 1
 0 -4 6 1
-0 -4 7 1
+0 -4 7 1 HealthPotion
 0 -3 1 1
-0 -2 0 1 Marker(summon)
+0 -2 0 1 Marker(summon) ManaPotion
 0 -2 1 1
-0 -2 2 1 Marker(summon)
+0 -2 2 1 Marker(summon) ManaPotion
 0 -2 3 1 Marker(summon)
 0 -2 4 1 Marker(summon)
 0 4 1 1
 1 -5 7 1
 1 -4 2 1
 1 -4 3 1
-1 -4 4 1
+1 -4 4 1 Marker(cameraPanTo)
 1 -4 5 1
-1 -4 6 1 Marker(playerHop)
-1 -4 7 1 Marker(start)
+1 -4 6 1
+1 -4 7 1 Marker(sword)
 1 -3 0 1
 1 -3 2 1
 1 -3 4 1

@@ -48,6 +48,14 @@ mut struct MagmaTTC {
   }
 }
 
+mut struct FireTTC {
+  FireTTC isa ITerrainTileComponent;
+
+  fn Destruct(this: FireTTC overrides IDestructible): Void {
+    FireTTCExtensions.Destruct
+  }
+}
+
 mut struct FallsTTC {
   FallsTTC isa ITerrainTileComponent;
   FallsTTC isa IUnwalkableTTC;

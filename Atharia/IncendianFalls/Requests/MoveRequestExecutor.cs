@@ -29,10 +29,10 @@ namespace IncendianFalls {
         Game game,
         Superstate superstate) {
       var steps = superstate.navigatingState.path;
-      Asserts.Assert(steps.Count > 0);
+      Asserts.Assert(steps.Count > 0, "No steps!");
       var nextStep = steps[0];
       steps.RemoveAt(0);
-      Asserts.Assert(Actions.CanStep(game, superstate, game.player, nextStep));
+      Asserts.Assert(Actions.CanStep(game, superstate, game.player, nextStep), "Can't step!");
       Move(context, game, superstate, nextStep);
       if (steps.Count == 0) {
         superstate.navigatingState = null;
@@ -103,6 +103,9 @@ namespace IncendianFalls {
                 });
         if (steps.Count == 0) {
           return "Can't go there!";
+        }
+        if (!Actions.CanStep(game, superstate, game.player, steps[0])) {
+          return "Can't step that way!";
         }
         superstate.navigatingState = new Superstate.NavigatingState(steps);
         Continue(context, game, superstate);

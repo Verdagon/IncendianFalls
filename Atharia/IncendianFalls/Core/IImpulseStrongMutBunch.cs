@@ -35,6 +35,10 @@ public class IImpulseStrongMutBunch {
   }
   public void CheckForNullViolations(List<string> violations) {
 
+    if (!root.HoldPositionImpulseStrongMutSetExists(membersHoldPositionImpulseStrongMutSet.id)) {
+      violations.Add("Null constraint violated! IImpulseStrongMutBunch#" + id + ".membersHoldPositionImpulseStrongMutSet");
+    }
+
     if (!root.TemporaryCloneImpulseStrongMutSetExists(membersTemporaryCloneImpulseStrongMutSet.id)) {
       violations.Add("Null constraint violated! IImpulseStrongMutBunch#" + id + ".membersTemporaryCloneImpulseStrongMutSet");
     }
@@ -108,6 +112,9 @@ public class IImpulseStrongMutBunch {
       return;
     }
     foundIds.Add(id);
+    if (root.HoldPositionImpulseStrongMutSetExists(membersHoldPositionImpulseStrongMutSet.id)) {
+      membersHoldPositionImpulseStrongMutSet.FindReachableObjects(foundIds);
+    }
     if (root.TemporaryCloneImpulseStrongMutSetExists(membersTemporaryCloneImpulseStrongMutSet.id)) {
       membersTemporaryCloneImpulseStrongMutSet.FindReachableObjects(foundIds);
     }
@@ -169,7 +176,16 @@ public class IImpulseStrongMutBunch {
     }
     return this.root == that.root && id == that.id;
   }
-         public TemporaryCloneImpulseStrongMutSet membersTemporaryCloneImpulseStrongMutSet {
+         public HoldPositionImpulseStrongMutSet membersHoldPositionImpulseStrongMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersHoldPositionImpulseStrongMutSet of null!");
+      }
+      return new HoldPositionImpulseStrongMutSet(root, incarnation.membersHoldPositionImpulseStrongMutSet);
+    }
+                       }
+  public TemporaryCloneImpulseStrongMutSet membersTemporaryCloneImpulseStrongMutSet {
 
     get {
       if (root == null) {
@@ -325,6 +341,8 @@ public class IImpulseStrongMutBunch {
 
   public static IImpulseStrongMutBunch New(Root root) {
     return root.EffectIImpulseStrongMutBunchCreate(
+      root.EffectHoldPositionImpulseStrongMutSetCreate()
+,
       root.EffectTemporaryCloneImpulseStrongMutSetCreate()
 ,
       root.EffectSummonImpulseStrongMutSetCreate()
@@ -361,6 +379,12 @@ public class IImpulseStrongMutBunch {
         );
   }
   public void Add(IImpulse elementI) {
+
+    // Can optimize, check the type of element directly somehow
+    if (root.HoldPositionImpulseExists(elementI.id)) {
+      this.membersHoldPositionImpulseStrongMutSet.Add(root.GetHoldPositionImpulse(elementI.id));
+      return;
+    }
 
     // Can optimize, check the type of element directly somehow
     if (root.TemporaryCloneImpulseExists(elementI.id)) {
@@ -468,6 +492,12 @@ public class IImpulseStrongMutBunch {
   public void Remove(IImpulse elementI) {
 
     // Can optimize, check the type of element directly somehow
+    if (root.HoldPositionImpulseExists(elementI.id)) {
+      this.membersHoldPositionImpulseStrongMutSet.Remove(root.GetHoldPositionImpulse(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.TemporaryCloneImpulseExists(elementI.id)) {
       this.membersTemporaryCloneImpulseStrongMutSet.Remove(root.GetTemporaryCloneImpulse(elementI.id));
       return;
@@ -571,6 +601,7 @@ public class IImpulseStrongMutBunch {
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
+    this.membersHoldPositionImpulseStrongMutSet.Clear();
     this.membersTemporaryCloneImpulseStrongMutSet.Clear();
     this.membersSummonImpulseStrongMutSet.Clear();
     this.membersMireImpulseStrongMutSet.Clear();
@@ -592,6 +623,7 @@ public class IImpulseStrongMutBunch {
   public int Count {
     get {
       return
+        this.membersHoldPositionImpulseStrongMutSet.Count +
         this.membersTemporaryCloneImpulseStrongMutSet.Count +
         this.membersSummonImpulseStrongMutSet.Count +
         this.membersMireImpulseStrongMutSet.Count +
@@ -620,6 +652,7 @@ public class IImpulseStrongMutBunch {
   }
 
   public void Destruct() {
+    var tempMembersHoldPositionImpulseStrongMutSet = this.membersHoldPositionImpulseStrongMutSet;
     var tempMembersTemporaryCloneImpulseStrongMutSet = this.membersTemporaryCloneImpulseStrongMutSet;
     var tempMembersSummonImpulseStrongMutSet = this.membersSummonImpulseStrongMutSet;
     var tempMembersMireImpulseStrongMutSet = this.membersMireImpulseStrongMutSet;
@@ -639,6 +672,7 @@ public class IImpulseStrongMutBunch {
     var tempMembersFireBombImpulseStrongMutSet = this.membersFireBombImpulseStrongMutSet;
 
     this.Delete();
+    tempMembersHoldPositionImpulseStrongMutSet.Destruct();
     tempMembersTemporaryCloneImpulseStrongMutSet.Destruct();
     tempMembersSummonImpulseStrongMutSet.Destruct();
     tempMembersMireImpulseStrongMutSet.Destruct();
@@ -658,6 +692,9 @@ public class IImpulseStrongMutBunch {
     tempMembersFireBombImpulseStrongMutSet.Destruct();
   }
   public IEnumerator<IImpulse> GetEnumerator() {
+    foreach (var element in this.membersHoldPositionImpulseStrongMutSet) {
+      yield return new HoldPositionImpulseAsIImpulse(element);
+    }
     foreach (var element in this.membersTemporaryCloneImpulseStrongMutSet) {
       yield return new TemporaryCloneImpulseAsIImpulse(element);
     }
@@ -710,6 +747,27 @@ public class IImpulseStrongMutBunch {
       yield return new FireBombImpulseAsIImpulse(element);
     }
   }
+    public List<HoldPositionImpulse> GetAllHoldPositionImpulse() {
+      var result = new List<HoldPositionImpulse>();
+      foreach (var thing in this.membersHoldPositionImpulseStrongMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<HoldPositionImpulse> ClearAllHoldPositionImpulse() {
+      var result = new List<HoldPositionImpulse>();
+      this.membersHoldPositionImpulseStrongMutSet.Clear();
+      return result;
+    }
+    public HoldPositionImpulse GetOnlyHoldPositionImpulseOrNull() {
+      var result = GetAllHoldPositionImpulse();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return HoldPositionImpulse.Null;
+      }
+    }
     public List<TemporaryCloneImpulse> GetAllTemporaryCloneImpulse() {
       var result = new List<TemporaryCloneImpulse>();
       foreach (var thing in this.membersTemporaryCloneImpulseStrongMutSet) {

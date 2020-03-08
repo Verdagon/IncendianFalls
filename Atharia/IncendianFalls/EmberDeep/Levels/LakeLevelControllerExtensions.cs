@@ -33,7 +33,15 @@ namespace Atharia.Model {
       level.terrain.tiles[levelSuperstate.FindMarkerLocation("exit")].components.Add(
         game.root.EffectEmberDeepLevelLinkerTTCCreate(depth + 1).AsITerrainTileComponent());
 
-      var entryLocation = levelSuperstate.FindMarkerLocation("start");
+      level.terrain.tiles[levelSuperstate.FindMarkerLocation("armor")].components.Add(
+        level.root.EffectItemTTCCreate(
+          level.root.EffectArmorCreate().AsIItem())
+        .AsITerrainTileComponent());
+
+      var mysteriousManLoc = levelSuperstate.FindMarkerLocation("mysteriousMan");
+      level.EnterUnit(levelSuperstate, mysteriousManLoc, int.MaxValue, MysteriousMan.Make(level.root));
+
+      var entryLocation = levelSuperstate.FindMarkerLocation("entry");
       entryLocationRet = entryLocation;
 
       EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .002f, .002f);
@@ -57,6 +65,105 @@ namespace Atharia.Model {
         Superstate superstate,
         string triggerName) {
       game.root.logger.Info("Got simple trigger: " + triggerName);
+
+
+      if (triggerName == "levelStart") {
+        game.events.Add(new WaitEvent(1500, "startCamera").AsIGameEvent());
+      }
+      if (triggerName == "startCamera") {
+        game.events.Add(
+          new FlyCameraEvent(
+            superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"),
+            new Vec3(0, 8, 8),
+            1000,
+            "cameraReachedPanTo")
+          .AsIGameEvent());
+      }
+      if (triggerName == "cameraReachedPanTo") {
+        game.events.Add(
+          new WaitEvent(1000, "cameraWaitDone").AsIGameEvent());
+      }
+      if (triggerName == "cameraWaitDone") {
+        game.events.Add(
+          new FlyCameraEvent(
+            superstate.levelSuperstate.FindMarkerLocation("entry"),
+            new Vec3(0, 8, 8),
+            1500,
+            "cameraDone")
+          .AsIGameEvent());
+      }
+      if (triggerName == "cameraDone") {
+        game.player.nextActionTime = game.level.time;
+
+        game.events.Add(
+          new ShowOverlayEvent(
+            40, // sizePercent
+            new Color(16, 16, 16, 224), // backgroundColor
+            300,// fadeInEnd
+            2800, // fadeOutStart
+            3100, // fadeOutEnd,
+            "",
+
+            "It's eerily silent in here.",
+            new Color(255, 64, 0, 255), // textColor
+            300, // textFadeInStartS
+            600, // textFadeInEndS
+            2500, // textFadeOutStartS
+            2800, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() { }))
+          .AsIGameEvent());
+      }
+
+      if (triggerName == "line2") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            50, // sizePercent
+            new Color(16, 16, 16, 224), // backgroundColor
+            0,// fadeInEnd
+            3800, // fadeOutStart
+            3800, // fadeOutEnd,
+            "line3",
+
+            "He slowly turns and looks at you, into your eyes, through them, as if into your soul.",
+            new Color(255, 64, 0, 255), // textColor
+            0, // textFadeInStartS
+            300, // textFadeInEndS
+            3500, // textFadeOutStartS
+            3800, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() { }))
+          .AsIGameEvent());
+      }
+
+      if (triggerName == "line3") {
+        game.events.Add(
+          new ShowOverlayEvent(
+            50, // sizePercent
+            new Color(16, 16, 16, 224), // backgroundColor
+            0,// fadeInEnd
+            2200, // fadeOutStart
+            2500, // fadeOutEnd,
+            "",
+
+            "He turns away and is still again.",
+            new Color(255, 64, 0, 255), // textColor
+            0, // textFadeInStartS
+            300, // textFadeInEndS
+            1900, // textFadeOutStartS
+            2200, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() { }))
+          .AsIGameEvent());
+      }
+
+
       return new Atharia.Model.Void();
     }
 
@@ -68,6 +175,33 @@ namespace Atharia.Model {
         Location location,
         string triggerName) {
       game.root.logger.Info("Got simple unit trigger: " + triggerName);
+
+      if (triggeringUnit.NullableIs(game.player) && triggerName == "nextToMysteriousMan") {
+        superstate.levelSuperstate.RemoveSimplePresenceTriggers("nextToMysteriousMan", 1);
+
+        game.events.Add(
+          new ShowOverlayEvent(
+            50, // sizePercent
+            new Color(16, 16, 16, 224), // backgroundColor
+            300,// fadeInEnd
+            2800, // fadeOutStart
+            2800, // fadeOutEnd,
+            "line2",
+
+            "You see a man, still as a statue.",
+            new Color(255, 64, 0, 255), // textColor
+            300, // textFadeInStartS
+            600, // textFadeInEndS
+            2500, // textFadeOutStartS
+            2800, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() { }))
+          .AsIGameEvent());
+      }
+
+
       return new Atharia.Model.Void();
     }
 
@@ -120,7 +254,7 @@ namespace Atharia.Model {
 -7 0 4 1 Mud
 -7 0 5 3 Mud
 -7 0 6 1 Mud
--7 0 7 1 Mud Dirt
+-7 0 7 1 Mud Dirt Marker(armor)
 -7 1 0 2 Mud Dirt Obsidian
 -7 1 1 1 Mud
 -7 1 2 1 Mud
@@ -283,9 +417,9 @@ namespace Atharia.Model {
 -2 -1 5 1 Dirt
 -2 -1 6 1 Mud
 -2 -1 7 1 Mud
--2 0 0 1 Mud
+-2 0 0 1 Mud Trigger(nextToMysteriousMan)
 -2 0 1 1 Mud Rocks
--2 0 2 1 Mud Obsidian
+-2 0 2 1 Mud Obsidian Trigger(nextToMysteriousMan)
 -2 0 3 1 Mud
 -2 0 4 1 Magma
 -2 0 5 1 Magma
@@ -328,9 +462,9 @@ namespace Atharia.Model {
 -1 -1 6 3 Dirt Rocks
 -1 -1 7 7 Mud
 -1 0 0 1 Mud
--1 0 1 1 Dirt
--1 0 2 1 Mud
--1 0 3 1 Mud Obsidian
+-1 0 1 1 Dirt Trigger(nextToMysteriousMan)
+-1 0 2 1 Mud Trigger(nextToMysteriousMan)
+-1 0 3 1 Obsidian Mud Marker(mysteriousMan)
 -1 0 4 1 Magma Fire
 -1 0 5 1 Magma
 -1 0 6 1 Magma
@@ -466,7 +600,7 @@ namespace Atharia.Model {
 2 -1 7 1 Mud
 2 0 0 2 Mud Rocks
 2 0 1 1 Dirt
-2 0 2 1 Obsidian Mud Marker(mysteriousMan)
+2 0 2 1 Obsidian Mud
 2 0 3 1 Magma
 2 0 4 1 Magma
 2 0 5 1 Magma
@@ -522,7 +656,7 @@ namespace Atharia.Model {
 3 1 1 1 Magma
 3 1 2 1 Magma
 3 1 3 1 Magma
-3 1 4 1 Magma
+3 1 4 1 Magma Marker(cameraPanTo)
 3 1 5 1 Magma
 3 1 6 1 Magma
 3 1 7 1 Magma

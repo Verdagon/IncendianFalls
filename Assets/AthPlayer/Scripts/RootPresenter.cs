@@ -108,8 +108,14 @@ namespace AthPlayer {
       if (Input.GetKeyUp(KeyCode.Equals)) {
         playerController.ActivateCheat("poweroverwhelming");
       }
-      if (Input.GetKeyUp(KeyCode.Asterisk)) {
+      if (Input.GetKeyUp(KeyCode.Alpha8)) {
         playerController.ActivateCheat("gimmeblastrod");
+      }
+      if (Input.GetKeyUp(KeyCode.Alpha7)) {
+        playerController.ActivateCheat("gimmearmor");
+      }
+      if (Input.GetKeyUp(KeyCode.Alpha9)) {
+        playerController.ActivateCheat("gimmesword");
       }
 
       if (Input.GetKey(KeyCode.RightArrow)) {

@@ -33,7 +33,31 @@ namespace Atharia.Model {
       level.terrain.tiles[levelSuperstate.FindMarkerLocation("exit")].components.Add(
         game.root.EffectEmberDeepLevelLinkerTTCCreate(depth + 1).AsITerrainTileComponent());
 
-      var entryLocation = levelSuperstate.FindMarkerLocation("start");
+      foreach (var loc in levelSuperstate.FindMarkersLocations("lightningTrask", 3)) {
+        var lightningTrask = LightningTrask.Make(level.root);
+        lightningTrask.components.Add(
+          level.root.EffectGuardAICapabilityUCCreate(loc, 4).AsIUnitComponent());
+        level.EnterUnit(levelSuperstate, loc, level.time, lightningTrask);
+      }
+
+      var entryLocation = levelSuperstate.FindMarkerLocation("entry");
+
+      int numSpaces = levelSuperstate.NumWalkableLocations(false);
+      EmberDeepUnitsAndItems.FillWithUnits(
+        game.rand,
+        level,
+        levelSuperstate,
+        (loc) => !loc.Equals(entryLocation),
+        /*numIrkling=*/ 0 * numSpaces / 200,
+        /*numDraxling=*/ 10 * numSpaces / 200,
+        /*numRavagianTrask=*/ 3 * numSpaces / 200,
+        /*numBaug=*/ 0 * numSpaces / 200,
+        /*numSpirient=*/ 1 * numSpaces / 200,
+        /*numIrklingKing=*/ 3 * numSpaces / 200,
+        /*numEmberfolk=*/ 5 * numSpaces / 200,
+        /*numChronolisk=*/ 3 * numSpaces / 200,
+        /*numMantisBombardier=*/ 2 * numSpaces / 200,
+        /*numLightningTrask=*/ 0 * numSpaces / 200);
 
       EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .008f, .005f);
 
@@ -57,6 +81,57 @@ namespace Atharia.Model {
         Superstate superstate,
         string triggerName) {
       game.root.logger.Info("Got simple trigger: " + triggerName);
+
+      if (triggerName == "levelStart") {
+        game.events.Add(new WaitEvent(1500, "startCamera").AsIGameEvent());
+      }
+      if (triggerName == "startCamera") {
+        game.events.Add(
+          new FlyCameraEvent(
+            superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"),
+            new Vec3(0, 8, 8),
+            1000,
+            "cameraReachedPanTo")
+          .AsIGameEvent());
+      }
+      if (triggerName == "cameraReachedPanTo") {
+        game.events.Add(
+          new WaitEvent(1000, "cameraWaitDone").AsIGameEvent());
+      }
+      if (triggerName == "cameraWaitDone") {
+        game.events.Add(
+          new FlyCameraEvent(
+            superstate.levelSuperstate.FindMarkerLocation("entry"),
+            new Vec3(0, 8, 8),
+            1500,
+            "cameraDone")
+          .AsIGameEvent());
+      }
+      if (triggerName == "cameraDone") {
+        game.player.nextActionTime = game.level.time;
+
+        game.events.Add(
+          new ShowOverlayEvent(
+            40, // sizePercent
+            new Color(16, 16, 16, 224), // backgroundColor
+            300,// fadeInEnd
+            3100, // fadeOutStart
+            3400, // fadeOutEnd,
+            "",
+
+            "Some sort of ancient abandoned town...?",
+            new Color(255, 64, 0, 255), // textColor
+            300, // textFadeInStartS
+            600, // textFadeInEndS
+            2800, // textFadeOutStartS
+            3100, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() { }))
+          .AsIGameEvent());
+      }
+
       return new Atharia.Model.Void();
     }
 
@@ -99,7 +174,7 @@ namespace Atharia.Model {
 -6 0 3 20 Mud
 -6 0 4 19 Mud
 -6 0 5 21 Mud
--6 0 6 18 Rocks Dirt Cave
+-6 0 6 18 Rocks Dirt
 -6 0 7 17 Rocks Dirt
 -6 1 0 22 Floor
 -6 1 1 22 Floor
@@ -120,7 +195,7 @@ namespace Atharia.Model {
 -5 -2 3 9 Mud
 -5 -2 4 8 Mud
 -5 -2 5 10 Mud
--5 -2 6 10 Dirt Rocks Cave
+-5 -2 6 10 Dirt Rocks
 -5 -2 7 8 Mud
 -5 -1 0 15 Floor
 -5 -1 1 15 Floor
@@ -130,7 +205,7 @@ namespace Atharia.Model {
 -5 -1 5 15 Floor
 -5 -1 6 15 Mud
 -5 -1 7 14 Mud
--5 0 0 16 Rocks Dirt Cave
+-5 0 0 16 Rocks Dirt
 -5 0 1 21 Floor
 -5 0 2 16 Rocks Dirt
 -5 0 3 21 Floor
@@ -146,7 +221,7 @@ namespace Atharia.Model {
 -5 1 5 18 Mud
 -5 1 6 17 Rocks Dirt
 -5 1 7 17 Rocks Dirt
--5 2 0 16 Mud Cave Rocks
+-5 2 0 16 Mud Rocks
 -5 2 1 20 Mud
 -5 2 2 21 Floor
 -5 2 3 21 Floor
@@ -209,7 +284,7 @@ namespace Atharia.Model {
 -3 -3 6 1 Mud
 -3 -3 7 1 Mud
 -3 -2 0 2 Mud
--3 -2 1 2 Rocks Dirt
+-3 -2 1 2 Rocks Dirt Marker(entry)
 -3 -2 2 3 Mud
 -3 -2 3 3 Rocks Dirt
 -3 -2 4 4 Mud
@@ -249,15 +324,15 @@ namespace Atharia.Model {
 -3 2 6 16 Mud
 -3 2 7 16 Mud
 -3 3 0 16 Mud
--3 3 1 16 Mud
--3 3 2 16 Mud
+-3 3 1 16 Mud Marker(lightningTrask)
+-3 3 2 16 Mud Marker(lightningTrask)
 -3 3 3 16 Mud
--3 3 4 16 Mud
+-3 3 4 16 Mud Marker(lightningTrask)
 -3 3 5 16 Mud
 -3 3 6 16 Mud
 -3 3 7 16 Mud
 -3 4 0 16 Mud
--3 4 1 16 Mud
+-3 4 1 16 Mud Cave Marker(exit)
 -2 -2 0 1 Mud
 -2 -2 1 1 Mud
 -2 -2 2 6 Floor
@@ -269,11 +344,11 @@ namespace Atharia.Model {
 -2 -1 0 6 Rocks Dirt
 -2 -1 1 6 Rocks Dirt
 -2 -1 2 6 Rocks Dirt
--2 -1 3 7 Rocks Dirt Cave
+-2 -1 3 7 Rocks Dirt
 -2 -1 4 8 Rocks Dirt
 -2 -1 5 12 Floor
 -2 -1 6 9 Rocks Dirt
--2 -1 7 8 Rocks Dirt
+-2 -1 7 8 Rocks Dirt Marker(cameraPanTo)
 -2 0 0 9 Rocks Dirt
 -2 0 1 10 Rocks Dirt
 -2 0 2 10 Rocks Dirt
@@ -301,7 +376,7 @@ namespace Atharia.Model {
 -2 3 0 16 Mud
 -2 3 1 16 Mud
 -2 3 2 16 Mud
--2 3 3 16 Mud
+-2 3 3 16 Mud Marker(lightningTrask)
 -2 3 4 17 Mud
 -2 3 5 16 Mud
 -2 3 6 20 Mud
@@ -312,7 +387,7 @@ namespace Atharia.Model {
 -2 4 3 23 Mud
 -1 -2 0 1 Mud
 -1 -2 1 1 Mud
--1 -2 2 1 Dirt Rocks Cave
+-1 -2 2 1 Dirt Rocks
 -1 -2 3 6 Floor
 -1 -2 4 6 Floor
 -1 -2 5 6 Floor
@@ -347,7 +422,7 @@ namespace Atharia.Model {
 -1 2 2 14 Dirt Rocks
 -1 2 3 14 Dirt Rocks
 -1 2 4 14 Dirt Rocks
--1 2 5 14 Dirt Rocks Cave
+-1 2 5 14 Dirt Rocks
 -1 2 6 15 Mud
 -1 2 7 15 Mud
 -1 3 0 15 Mud
@@ -377,7 +452,7 @@ namespace Atharia.Model {
 0 -1 5 6 Mud
 0 -1 6 5 Mud
 0 -1 7 5 Mud
-0 0 0 4 Mud Rocks Cave
+0 0 0 4 Mud Rocks
 0 0 1 9 Floor
 0 0 2 9 Floor
 0 0 3 9 Floor
@@ -406,7 +481,7 @@ namespace Atharia.Model {
 0 3 2 17 Dirt Rocks
 0 3 3 17 Mud
 0 3 4 17 Dirt Rocks
-0 3 5 17 Dirt Rocks Cave
+0 3 5 17 Dirt Rocks
 0 3 6 22 Floor
 0 3 7 22 Floor
 0 4 0 22 Floor
@@ -464,7 +539,7 @@ namespace Atharia.Model {
 1 4 3 28 Mud
 2 -1 0 1 Mud
 2 -1 1 6 Floor
-2 -1 2 1 Dirt Rocks Cave
+2 -1 2 1 Dirt Rocks
 2 -1 3 6 Floor
 2 -1 4 6 Floor
 2 -1 5 6 Floor
@@ -527,7 +602,7 @@ namespace Atharia.Model {
 3 1 5 11 Mud
 3 1 6 12 Dirt Rocks
 3 1 7 13 Mud Floor
-3 2 0 13 Dirt Rocks Cave
+3 2 0 13 Dirt Rocks
 3 2 1 17 Floor
 3 2 2 17 Floor
 3 2 3 17 Floor
@@ -538,7 +613,7 @@ namespace Atharia.Model {
 3 3 0 17 Mud
 3 3 1 17 Mud Dirt Rocks
 3 3 2 17 Mud
-3 3 3 17 Dirt Rocks Cave Mud
+3 3 3 17 Dirt Rocks Mud
 3 3 4 21 Floor
 3 3 5 21 Floor
 3 3 6 25 Mud
@@ -554,14 +629,14 @@ namespace Atharia.Model {
 4 0 1 4 Dirt Rocks
 4 0 2 4 Dirt Rocks
 4 0 3 5 Dirt Rocks
-4 0 4 6 Dirt Rocks Cave
+4 0 4 6 Dirt Rocks
 4 0 5 6 Mud
 4 0 6 10 Floor
 4 0 7 10 Floor
 4 1 0 10 Floor
 4 1 1 8 Mud
 4 1 2 8 Mud
-4 1 3 9 Dirt Rocks Cave
+4 1 3 9 Dirt Rocks
 4 1 4 13 Mud Floor
 4 1 5 13 Mud Floor
 4 1 6 13 Mud Floor
@@ -602,7 +677,7 @@ namespace Atharia.Model {
 5 2 0 12 Mud
 5 2 1 12 Mud
 5 2 2 15 Mud
-5 2 3 15 Dirt Rocks Cave
+5 2 3 15 Dirt Rocks
 5 2 4 20 Floor
 5 2 5 20 Floor
 5 2 6 20 Floor

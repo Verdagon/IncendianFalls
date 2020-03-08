@@ -9,6 +9,7 @@ public class RootIncarnation {
   public int nextId;
   public int hash;
   public readonly SortedDictionary<int, VersionAndIncarnation<RandIncarnation>> incarnationsRand;
+  public readonly SortedDictionary<int, VersionAndIncarnation<HoldPositionImpulseIncarnation>> incarnationsHoldPositionImpulse;
   public readonly SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCIncarnation>> incarnationsWanderAICapabilityUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<UnitIncarnation>> incarnationsUnit;
   public readonly SortedDictionary<int, VersionAndIncarnation<IUnitComponentMutBunchIncarnation>> incarnationsIUnitComponentMutBunch;
@@ -73,6 +74,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<CaveWallTTCIncarnation>> incarnationsCaveWallTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<CaveTTCIncarnation>> incarnationsCaveTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<FallsTTCIncarnation>> incarnationsFallsTTC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<FireTTCIncarnation>> incarnationsFireTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<MagmaTTCIncarnation>> incarnationsMagmaTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<CliffTTCIncarnation>> incarnationsCliffTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<RavaNestTTCIncarnation>> incarnationsRavaNestTTC;
@@ -131,6 +133,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<GlaiveStrongMutSetIncarnation>> incarnationsGlaiveStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<BlastRodStrongMutSetIncarnation>> incarnationsBlastRodStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<ArmorStrongMutSetIncarnation>> incarnationsArmorStrongMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<HoldPositionImpulseStrongMutSetIncarnation>> incarnationsHoldPositionImpulseStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<TemporaryCloneImpulseStrongMutSetIncarnation>> incarnationsTemporaryCloneImpulseStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<SummonImpulseStrongMutSetIncarnation>> incarnationsSummonImpulseStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<MireImpulseStrongMutSetIncarnation>> incarnationsMireImpulseStrongMutSet;
@@ -171,6 +174,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<CaveWallTTCMutSetIncarnation>> incarnationsCaveWallTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<CaveTTCMutSetIncarnation>> incarnationsCaveTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<FallsTTCMutSetIncarnation>> incarnationsFallsTTCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<FireTTCMutSetIncarnation>> incarnationsFireTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<MagmaTTCMutSetIncarnation>> incarnationsMagmaTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<CliffTTCMutSetIncarnation>> incarnationsCliffTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<RavaNestTTCMutSetIncarnation>> incarnationsRavaNestTTCMutSet;
@@ -212,6 +216,7 @@ public class RootIncarnation {
     this.nextId = nextId;
     this.hash = hash;
     this.incarnationsRand = new SortedDictionary<int, VersionAndIncarnation<RandIncarnation>>();
+    this.incarnationsHoldPositionImpulse = new SortedDictionary<int, VersionAndIncarnation<HoldPositionImpulseIncarnation>>();
     this.incarnationsWanderAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCIncarnation>>();
     this.incarnationsUnit = new SortedDictionary<int, VersionAndIncarnation<UnitIncarnation>>();
     this.incarnationsIUnitComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<IUnitComponentMutBunchIncarnation>>();
@@ -276,6 +281,7 @@ public class RootIncarnation {
     this.incarnationsCaveWallTTC = new SortedDictionary<int, VersionAndIncarnation<CaveWallTTCIncarnation>>();
     this.incarnationsCaveTTC = new SortedDictionary<int, VersionAndIncarnation<CaveTTCIncarnation>>();
     this.incarnationsFallsTTC = new SortedDictionary<int, VersionAndIncarnation<FallsTTCIncarnation>>();
+    this.incarnationsFireTTC = new SortedDictionary<int, VersionAndIncarnation<FireTTCIncarnation>>();
     this.incarnationsMagmaTTC = new SortedDictionary<int, VersionAndIncarnation<MagmaTTCIncarnation>>();
     this.incarnationsCliffTTC = new SortedDictionary<int, VersionAndIncarnation<CliffTTCIncarnation>>();
     this.incarnationsRavaNestTTC = new SortedDictionary<int, VersionAndIncarnation<RavaNestTTCIncarnation>>();
@@ -334,6 +340,7 @@ public class RootIncarnation {
     this.incarnationsGlaiveStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveStrongMutSetIncarnation>>();
     this.incarnationsBlastRodStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<BlastRodStrongMutSetIncarnation>>();
     this.incarnationsArmorStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorStrongMutSetIncarnation>>();
+    this.incarnationsHoldPositionImpulseStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<HoldPositionImpulseStrongMutSetIncarnation>>();
     this.incarnationsTemporaryCloneImpulseStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<TemporaryCloneImpulseStrongMutSetIncarnation>>();
     this.incarnationsSummonImpulseStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<SummonImpulseStrongMutSetIncarnation>>();
     this.incarnationsMireImpulseStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<MireImpulseStrongMutSetIncarnation>>();
@@ -374,6 +381,7 @@ public class RootIncarnation {
     this.incarnationsCaveWallTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<CaveWallTTCMutSetIncarnation>>();
     this.incarnationsCaveTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<CaveTTCMutSetIncarnation>>();
     this.incarnationsFallsTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<FallsTTCMutSetIncarnation>>();
+    this.incarnationsFireTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<FireTTCMutSetIncarnation>>();
     this.incarnationsMagmaTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<MagmaTTCMutSetIncarnation>>();
     this.incarnationsCliffTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<CliffTTCMutSetIncarnation>>();
     this.incarnationsRavaNestTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<RavaNestTTCMutSetIncarnation>>();
@@ -420,6 +428,7 @@ public class RootIncarnation {
     this.nextId = newNextId;
     this.hash = newHash;
     this.incarnationsRand = new SortedDictionary<int, VersionAndIncarnation<RandIncarnation>>(that.incarnationsRand);
+    this.incarnationsHoldPositionImpulse = new SortedDictionary<int, VersionAndIncarnation<HoldPositionImpulseIncarnation>>(that.incarnationsHoldPositionImpulse);
     this.incarnationsWanderAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCIncarnation>>(that.incarnationsWanderAICapabilityUC);
     this.incarnationsUnit = new SortedDictionary<int, VersionAndIncarnation<UnitIncarnation>>(that.incarnationsUnit);
     this.incarnationsIUnitComponentMutBunch = new SortedDictionary<int, VersionAndIncarnation<IUnitComponentMutBunchIncarnation>>(that.incarnationsIUnitComponentMutBunch);
@@ -484,6 +493,7 @@ public class RootIncarnation {
     this.incarnationsCaveWallTTC = new SortedDictionary<int, VersionAndIncarnation<CaveWallTTCIncarnation>>(that.incarnationsCaveWallTTC);
     this.incarnationsCaveTTC = new SortedDictionary<int, VersionAndIncarnation<CaveTTCIncarnation>>(that.incarnationsCaveTTC);
     this.incarnationsFallsTTC = new SortedDictionary<int, VersionAndIncarnation<FallsTTCIncarnation>>(that.incarnationsFallsTTC);
+    this.incarnationsFireTTC = new SortedDictionary<int, VersionAndIncarnation<FireTTCIncarnation>>(that.incarnationsFireTTC);
     this.incarnationsMagmaTTC = new SortedDictionary<int, VersionAndIncarnation<MagmaTTCIncarnation>>(that.incarnationsMagmaTTC);
     this.incarnationsCliffTTC = new SortedDictionary<int, VersionAndIncarnation<CliffTTCIncarnation>>(that.incarnationsCliffTTC);
     this.incarnationsRavaNestTTC = new SortedDictionary<int, VersionAndIncarnation<RavaNestTTCIncarnation>>(that.incarnationsRavaNestTTC);
@@ -542,6 +552,7 @@ public class RootIncarnation {
     this.incarnationsGlaiveStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveStrongMutSetIncarnation>>(that.incarnationsGlaiveStrongMutSet);
     this.incarnationsBlastRodStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<BlastRodStrongMutSetIncarnation>>(that.incarnationsBlastRodStrongMutSet);
     this.incarnationsArmorStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorStrongMutSetIncarnation>>(that.incarnationsArmorStrongMutSet);
+    this.incarnationsHoldPositionImpulseStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<HoldPositionImpulseStrongMutSetIncarnation>>(that.incarnationsHoldPositionImpulseStrongMutSet);
     this.incarnationsTemporaryCloneImpulseStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<TemporaryCloneImpulseStrongMutSetIncarnation>>(that.incarnationsTemporaryCloneImpulseStrongMutSet);
     this.incarnationsSummonImpulseStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<SummonImpulseStrongMutSetIncarnation>>(that.incarnationsSummonImpulseStrongMutSet);
     this.incarnationsMireImpulseStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<MireImpulseStrongMutSetIncarnation>>(that.incarnationsMireImpulseStrongMutSet);
@@ -582,6 +593,7 @@ public class RootIncarnation {
     this.incarnationsCaveWallTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<CaveWallTTCMutSetIncarnation>>(that.incarnationsCaveWallTTCMutSet);
     this.incarnationsCaveTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<CaveTTCMutSetIncarnation>>(that.incarnationsCaveTTCMutSet);
     this.incarnationsFallsTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<FallsTTCMutSetIncarnation>>(that.incarnationsFallsTTCMutSet);
+    this.incarnationsFireTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<FireTTCMutSetIncarnation>>(that.incarnationsFireTTCMutSet);
     this.incarnationsMagmaTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<MagmaTTCMutSetIncarnation>>(that.incarnationsMagmaTTCMutSet);
     this.incarnationsCliffTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<CliffTTCMutSetIncarnation>>(that.incarnationsCliffTTCMutSet);
     this.incarnationsRavaNestTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<RavaNestTTCMutSetIncarnation>>(that.incarnationsRavaNestTTCMutSet);

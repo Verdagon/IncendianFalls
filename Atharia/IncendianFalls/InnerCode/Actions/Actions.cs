@@ -11,6 +11,7 @@ namespace IncendianFalls {
     public static readonly int FIRE_DAMAGE = 23;
     public static readonly int FIRE_BOMB_DAMAGE = 32;
     public static readonly int LIGHTNING_CHARGE_DAMAGE = 4;
+    public static readonly int BUMP_TIME_COST = 600;
 
     public static void UnleashBide(
         Game game,
@@ -42,7 +43,7 @@ namespace IncendianFalls {
           initialDamage,
           true);
       if (takeTime) {
-        attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(600);
+        attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(BUMP_TIME_COST);
       }
     }
 

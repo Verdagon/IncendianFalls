@@ -204,6 +204,14 @@ namespace Atharia.Model {
       return locationsAndMarkers;
     }
 
+    public List<Location> FindSimplePresenceTriggerLocations(string name, int expectAtLeast) {
+      var locations = new List<Location>();
+      foreach (var locationAndTile in FindSimplePresenceTriggers(name, expectAtLeast)) {
+        locations.Add(locationAndTile.Key);
+      }
+      return locations;
+    }
+
     public Location FindSimplePresenceTriggerLocation(string name) {
       return FindSimplePresenceTrigger(name).Key;
     }

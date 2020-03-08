@@ -4,13 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IImpulseStrongMutBunchBroadcaster:ITemporaryCloneImpulseStrongMutSetEffectObserver, ITemporaryCloneImpulseStrongMutSetEffectVisitor, ISummonImpulseStrongMutSetEffectObserver, ISummonImpulseStrongMutSetEffectVisitor, IMireImpulseStrongMutSetEffectObserver, IMireImpulseStrongMutSetEffectVisitor, IEvaporateImpulseStrongMutSetEffectObserver, IEvaporateImpulseStrongMutSetEffectVisitor, IMoveImpulseStrongMutSetEffectObserver, IMoveImpulseStrongMutSetEffectVisitor, IKamikazeJumpImpulseStrongMutSetEffectObserver, IKamikazeJumpImpulseStrongMutSetEffectVisitor, IKamikazeTargetImpulseStrongMutSetEffectObserver, IKamikazeTargetImpulseStrongMutSetEffectVisitor, INoImpulseStrongMutSetEffectObserver, INoImpulseStrongMutSetEffectVisitor, IFireImpulseStrongMutSetEffectObserver, IFireImpulseStrongMutSetEffectVisitor, IDefyImpulseStrongMutSetEffectObserver, IDefyImpulseStrongMutSetEffectVisitor, ICounterImpulseStrongMutSetEffectObserver, ICounterImpulseStrongMutSetEffectVisitor, IUnleashBideImpulseStrongMutSetEffectObserver, IUnleashBideImpulseStrongMutSetEffectVisitor, IContinueBidingImpulseStrongMutSetEffectObserver, IContinueBidingImpulseStrongMutSetEffectVisitor, IStartBidingImpulseStrongMutSetEffectObserver, IStartBidingImpulseStrongMutSetEffectVisitor, IAttackImpulseStrongMutSetEffectObserver, IAttackImpulseStrongMutSetEffectVisitor, IPursueImpulseStrongMutSetEffectObserver, IPursueImpulseStrongMutSetEffectVisitor, IFireBombImpulseStrongMutSetEffectObserver, IFireBombImpulseStrongMutSetEffectVisitor {
+public class IImpulseStrongMutBunchBroadcaster:IHoldPositionImpulseStrongMutSetEffectObserver, IHoldPositionImpulseStrongMutSetEffectVisitor, ITemporaryCloneImpulseStrongMutSetEffectObserver, ITemporaryCloneImpulseStrongMutSetEffectVisitor, ISummonImpulseStrongMutSetEffectObserver, ISummonImpulseStrongMutSetEffectVisitor, IMireImpulseStrongMutSetEffectObserver, IMireImpulseStrongMutSetEffectVisitor, IEvaporateImpulseStrongMutSetEffectObserver, IEvaporateImpulseStrongMutSetEffectVisitor, IMoveImpulseStrongMutSetEffectObserver, IMoveImpulseStrongMutSetEffectVisitor, IKamikazeJumpImpulseStrongMutSetEffectObserver, IKamikazeJumpImpulseStrongMutSetEffectVisitor, IKamikazeTargetImpulseStrongMutSetEffectObserver, IKamikazeTargetImpulseStrongMutSetEffectVisitor, INoImpulseStrongMutSetEffectObserver, INoImpulseStrongMutSetEffectVisitor, IFireImpulseStrongMutSetEffectObserver, IFireImpulseStrongMutSetEffectVisitor, IDefyImpulseStrongMutSetEffectObserver, IDefyImpulseStrongMutSetEffectVisitor, ICounterImpulseStrongMutSetEffectObserver, ICounterImpulseStrongMutSetEffectVisitor, IUnleashBideImpulseStrongMutSetEffectObserver, IUnleashBideImpulseStrongMutSetEffectVisitor, IContinueBidingImpulseStrongMutSetEffectObserver, IContinueBidingImpulseStrongMutSetEffectVisitor, IStartBidingImpulseStrongMutSetEffectObserver, IStartBidingImpulseStrongMutSetEffectVisitor, IAttackImpulseStrongMutSetEffectObserver, IAttackImpulseStrongMutSetEffectVisitor, IPursueImpulseStrongMutSetEffectObserver, IPursueImpulseStrongMutSetEffectVisitor, IFireBombImpulseStrongMutSetEffectObserver, IFireBombImpulseStrongMutSetEffectVisitor {
   IImpulseStrongMutBunch bunch;
   private List<IIImpulseStrongMutBunchObserver> observers;
 
   public IImpulseStrongMutBunchBroadcaster(IImpulseStrongMutBunch bunch) {
     this.bunch = bunch;
     this.observers = new List<IIImpulseStrongMutBunchObserver>();
+    bunch.membersHoldPositionImpulseStrongMutSet.AddObserver(this);
     bunch.membersTemporaryCloneImpulseStrongMutSet.AddObserver(this);
     bunch.membersSummonImpulseStrongMutSet.AddObserver(this);
     bunch.membersMireImpulseStrongMutSet.AddObserver(this);
@@ -31,6 +32,7 @@ public class IImpulseStrongMutBunchBroadcaster:ITemporaryCloneImpulseStrongMutSe
 
   }
   public void Stop() {
+    bunch.membersHoldPositionImpulseStrongMutSet.RemoveObserver(this);
     bunch.membersTemporaryCloneImpulseStrongMutSet.RemoveObserver(this);
     bunch.membersSummonImpulseStrongMutSet.RemoveObserver(this);
     bunch.membersMireImpulseStrongMutSet.RemoveObserver(this);
@@ -66,6 +68,17 @@ public class IImpulseStrongMutBunchBroadcaster:ITemporaryCloneImpulseStrongMutSe
       observer.OnIImpulseStrongMutBunchRemove(id);
     }
   }
+  public void OnHoldPositionImpulseStrongMutSetEffect(IHoldPositionImpulseStrongMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitHoldPositionImpulseStrongMutSetAddEffect(HoldPositionImpulseStrongMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitHoldPositionImpulseStrongMutSetRemoveEffect(HoldPositionImpulseStrongMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitHoldPositionImpulseStrongMutSetCreateEffect(HoldPositionImpulseStrongMutSetCreateEffect effect) { }
+  public void visitHoldPositionImpulseStrongMutSetDeleteEffect(HoldPositionImpulseStrongMutSetDeleteEffect effect) { }
   public void OnTemporaryCloneImpulseStrongMutSetEffect(ITemporaryCloneImpulseStrongMutSetEffect effect) {
     effect.visit(this);
   }

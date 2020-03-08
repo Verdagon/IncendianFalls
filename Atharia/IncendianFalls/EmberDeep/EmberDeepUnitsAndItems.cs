@@ -84,7 +84,7 @@ namespace IncendianFalls {
     }
 
     public static void FillWithUnits(
-        Game game,
+        Rand rand,
         Level level,
         LevelSuperstate levelSuperstate,
         LocationPredicate locationFilter,
@@ -101,71 +101,71 @@ namespace IncendianFalls {
       for (int i = 0; i < numIrkling; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, locationFilter, true, true)[0],
-          game.time + 10,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, rand, 1, locationFilter, true, true)[0],
+          level.time + 10,
           Irkling.Make(level.root));
       }
       for (int i = 0; i < numDraxling; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, locationFilter, true, true)[0],
-          game.time + 10,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, rand, 1, locationFilter, true, true)[0],
+          level.time + 10,
           Draxling.Make(level.root));
       }
       for (int i = 0; i < numRavagianTrask; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, locationFilter, true, true)[0],
-          game.time + 10,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, rand, 1, locationFilter, true, true)[0],
+          level.time + 10,
           RavagianTrask.Make(level.root));
       }
       for (int i = 0; i < numBaug; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, locationFilter, true, true)[0],
-          game.time + 10,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, rand, 1, locationFilter, true, true)[0],
+          level.time + 10,
           Baug.Make(level.root));
       }
       for (int i = 0; i < numSpirient; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, locationFilter, true, true)[0],
-          game.time + 10,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, rand, 1, locationFilter, true, true)[0],
+          level.time + 10,
           Spirient.Make(level.root));
       }
       for (int i = 0; i < numIrklingKing; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, locationFilter, true, true)[0],
-          game.time + 10,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, rand, 1, locationFilter, true, true)[0],
+          level.time + 10,
           IrklingKing.Make(level.root));
       }
       for (int i = 0; i < numEmberfolk; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, locationFilter, true, true)[0],
-          game.time + 10,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, rand, 1, locationFilter, true, true)[0],
+          level.time + 10,
           Emberfolk.Make(level.root));
       }
       for (int i = 0; i < numChronolisk; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, locationFilter, true, true)[0],
-          game.time + 10,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, rand, 1, locationFilter, true, true)[0],
+          level.time + 10,
           Chronolisk.Make(level.root));
       }
       for (int i = 0; i < numMantisBombardier; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, locationFilter, true, true)[0],
-          game.time + 10,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, rand, 1, locationFilter, true, true)[0],
+          level.time + 10,
           MantisBombardier.Make(level.root));
       }
       for (int i = 0; i < numLightningTrask; i++) {
         level.EnterUnit(
           levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, locationFilter, true, true)[0],
-          game.time + 10,
+          levelSuperstate.GetNRandomWalkableLocations(level.terrain, rand, 1, locationFilter, true, true)[0],
+          level.time + 10,
           LightningTrask.Make(level.root));
       }
 

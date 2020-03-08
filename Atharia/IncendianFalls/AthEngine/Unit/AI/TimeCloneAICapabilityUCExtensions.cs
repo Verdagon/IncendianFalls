@@ -28,9 +28,15 @@ namespace Atharia.Model {
         Unit unit,
         IAICapabilityUC originatingCapability,
         IImpulse impulse) {
-      Asserts.Assert(originatingCapability.NullableIs(self.AsIAICapabilityUC()));
-      Asserts.Assert(self.script.Count > 0);
-      self.script.RemoveAt(0);
+      Asserts.Assert(originatingCapability.NullableIs(self.AsIAICapabilityUC()), "Off script!");
+      if (self.script.Count == 0) {
+        var bunch = IImpulseStrongMutBunch.New(game.root);
+        Asserts.Assert(bunch.GetOnlyEvaporateImpulseOrNull().Exists());
+        bunch.Destruct();
+        return new Atharia.Model.Void();
+      } else {
+        self.script.RemoveAt(0);
+      }
       return new Atharia.Model.Void();
     }
 
@@ -40,9 +46,13 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit unit) {
       var script = obj.script;
-      if (script.Count > 0) {
+      while (script.Count > 0) {
         var request = script[0];
-        if (request is MoveRequestAsIRequest mrI) {
+        int holdTime = 600; // soon, build this into the script.
+        if (request is CheatRequestAsIRequest crI) {
+          script.RemoveAt(0);
+          continue;
+        } else if (request is MoveRequestAsIRequest mrI) {
           var mr = mrI.obj;
           var destination = mr.destination;
           if (Actions.CanStep(game, superstate, unit, destination)) {
@@ -54,23 +64,23 @@ namespace Atharia.Model {
           var targetUnitId = arI.obj.targetUnitId;
           var targetUnit = game.root.GetUnit(targetUnitId);
           if (!targetUnit.Exists()) {
-            return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            return game.root.EffectHoldPositionImpulseCreate(1000, holdTime).AsIImpulse();
           }
           if (!game.level.units.Contains(targetUnit)) {
-            return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            return game.root.EffectHoldPositionImpulseCreate(1000, holdTime).AsIImpulse();
           }
           if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, targetUnit.location, game.level.ConsiderCornersAdjacent())) {
-            return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            return game.root.EffectHoldPositionImpulseCreate(1000, holdTime).AsIImpulse();
           }
           return game.root.EffectAttackImpulseCreate(1000, targetUnit).AsIImpulse();
         } else if (request is MireRequestAsIRequest srI) {
           var targetUnitId = srI.obj.targetUnitId;
           var targetUnit = game.root.GetUnit(targetUnitId);
           if (!targetUnit.Exists()) {
-            return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            return game.root.EffectHoldPositionImpulseCreate(1000, holdTime).AsIImpulse();
           }
           if (!game.level.units.Contains(targetUnit)) {
-            return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            return game.root.EffectHoldPositionImpulseCreate(1000, holdTime).AsIImpulse();
           }
           return game.root.EffectMireImpulseCreate(1000, targetUnit).AsIImpulse();
         } else if (request is FireBombRequestAsIRequest fbrI) {
@@ -80,26 +90,24 @@ namespace Atharia.Model {
           return game.root.EffectCounterImpulseCreate(1000).AsIImpulse();
         } else if (request is InteractRequestAsIRequest irI) {
           // Deciding time clones can't interact.
-          return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+          return game.root.EffectHoldPositionImpulseCreate(1000, holdTime).AsIImpulse();
         } else if (request is DefyRequestAsIRequest drI) {
           return game.root.EffectDefyImpulseCreate(1000).AsIImpulse();
         } else if (request is FireRequestAsIRequest frI) {
           var targetUnitId = frI.obj.targetUnitId;
           var targetUnit = game.root.GetUnit(targetUnitId);
           if (!targetUnit.Exists()) {
-            return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            return game.root.EffectHoldPositionImpulseCreate(1000, holdTime).AsIImpulse();
           }
           if (!game.level.units.Contains(targetUnit)) {
-            return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
+            return game.root.EffectHoldPositionImpulseCreate(1000, holdTime).AsIImpulse();
           }
           return game.root.EffectFireImpulseCreate(1000, targetUnit).AsIImpulse();
         } else {
-          Asserts.Assert(false, request.DStr());
-          return null;
+          throw new Exception("Unknown request: " + request.DStr());
         }
-      } else {
-        return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
       }
+      return game.root.EffectEvaporateImpulseCreate().AsIImpulse();
     }
   }
 }

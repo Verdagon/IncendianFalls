@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class IImpulseStrongMutBunchIncarnation {
+  public readonly int membersHoldPositionImpulseStrongMutSet;
   public readonly int membersTemporaryCloneImpulseStrongMutSet;
   public readonly int membersSummonImpulseStrongMutSet;
   public readonly int membersMireImpulseStrongMutSet;
@@ -23,6 +24,7 @@ public class IImpulseStrongMutBunchIncarnation {
   public readonly int membersPursueImpulseStrongMutSet;
   public readonly int membersFireBombImpulseStrongMutSet;
   public IImpulseStrongMutBunchIncarnation(
+      int membersHoldPositionImpulseStrongMutSet,
       int membersTemporaryCloneImpulseStrongMutSet,
       int membersSummonImpulseStrongMutSet,
       int membersMireImpulseStrongMutSet,
@@ -40,6 +42,7 @@ public class IImpulseStrongMutBunchIncarnation {
       int membersAttackImpulseStrongMutSet,
       int membersPursueImpulseStrongMutSet,
       int membersFireBombImpulseStrongMutSet) {
+    this.membersHoldPositionImpulseStrongMutSet = membersHoldPositionImpulseStrongMutSet;
     this.membersTemporaryCloneImpulseStrongMutSet = membersTemporaryCloneImpulseStrongMutSet;
     this.membersSummonImpulseStrongMutSet = membersSummonImpulseStrongMutSet;
     this.membersMireImpulseStrongMutSet = membersMireImpulseStrongMutSet;

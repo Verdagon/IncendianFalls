@@ -810,7 +810,37 @@ namespace AthPlayer {
               hpRatio,
               mpRatio));
       detailsByClassId.Add(
+          "MysteriousMan",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "e",
+                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  false, new UnityEngine.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
           "LightningTrask",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "e",
+                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  false, new UnityEngine.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "IrklingKing",
           new UnitDescription(
               unit.id,
               new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),

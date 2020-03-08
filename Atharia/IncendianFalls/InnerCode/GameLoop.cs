@@ -265,9 +265,9 @@ namespace IncendianFalls {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
       var executionState = game.executionState;
-      Asserts.Assert(!executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
-      Asserts.Assert(!executionState.actingUnitDidAction);
+      Asserts.Assert(!executionState.actingUnit.Exists(), "Doesnt exist!");
+      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists(), "No remaining post?");
+      Asserts.Assert(!executionState.actingUnitDidAction, "Unit did action?");
 
       if (game.level.units.Count == 0) {
         //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
@@ -290,7 +290,7 @@ namespace IncendianFalls {
           if (nextUnit.NullableIs(game.player)) {
             return; // To be continued... via ContinueAtStartTurn.
           } else {
-            Asserts.Assert(!superstate.levelSuperstate.ContainsUnit(nextUnit.location)); // curiosity, we might need a:
+            Asserts.Assert(!superstate.levelSuperstate.ContainsUnit(nextUnit.location), "curiosity"); // curiosity, we might need a:
             //superstate.levelSuperstate.RemoveUnit(nextUnit);
             game.level.units.Remove(nextUnit);
             nextUnit.Destruct();
