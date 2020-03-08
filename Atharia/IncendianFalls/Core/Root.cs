@@ -801,6 +801,13 @@ public class Root {
   readonly List<Tutorial1LevelControllerDeleteEffect> effectsTutorial1LevelControllerDeleteEffect =
       new List<Tutorial1LevelControllerDeleteEffect>();
 
+  readonly SortedDictionary<int, List<IRetreatLevelControllerEffectObserver>> observersForRetreatLevelController =
+      new SortedDictionary<int, List<IRetreatLevelControllerEffectObserver>>();
+  readonly List<RetreatLevelControllerCreateEffect> effectsRetreatLevelControllerCreateEffect =
+      new List<RetreatLevelControllerCreateEffect>();
+  readonly List<RetreatLevelControllerDeleteEffect> effectsRetreatLevelControllerDeleteEffect =
+      new List<RetreatLevelControllerDeleteEffect>();
+
   readonly SortedDictionary<int, List<ISotaventoLevelControllerEffectObserver>> observersForSotaventoLevelController =
       new SortedDictionary<int, List<ISotaventoLevelControllerEffectObserver>>();
   readonly List<SotaventoLevelControllerCreateEffect> effectsSotaventoLevelControllerCreateEffect =
@@ -2369,6 +2376,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsTutorial1LevelController) {
       result += GetTutorial1LevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsRetreatLevelController) {
+      result += GetRetreatLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsSotaventoLevelController) {
       result += GetSotaventoLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -3003,6 +3013,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTutorial1LevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllRetreatLevelController()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllSotaventoLevelController()) {
@@ -3838,6 +3851,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllTutorial1LevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllRetreatLevelController()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -5512,6 +5530,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForRetreatLevelController =
+        new SortedDictionary<int, List<IRetreatLevelControllerEffectObserver>>();
+    foreach (var entry in observersForRetreatLevelController) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForRetreatLevelController.Add(
+          objectId,
+          new List<IRetreatLevelControllerEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForSotaventoLevelController =
         new SortedDictionary<int, List<ISotaventoLevelControllerEffectObserver>>();
     foreach (var entry in observersForSotaventoLevelController) {
@@ -7014,6 +7043,9 @@ public class Root {
     BroadcastTutorial1LevelControllerEffects(
         copyOfObserversForTutorial1LevelController);
            
+    BroadcastRetreatLevelControllerEffects(
+        copyOfObserversForRetreatLevelController);
+           
     BroadcastSotaventoLevelControllerEffects(
         copyOfObserversForSotaventoLevelController);
            
@@ -8364,6 +8396,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsTutorial1LevelController.ContainsKey(sourceObjId)) {
         EffectInternalCreateTutorial1LevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRetreatLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsRetreatLevelController.ContainsKey(sourceObjId)) {
+        EffectInternalCreateRetreatLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -14508,6 +14550,27 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRetreatLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsRetreatLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsRetreatLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsRetreatLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSotaventoLevelController) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -15380,6 +15443,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsTutorial1LevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectTutorial1LevelControllerDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RetreatLevelControllerIncarnation>>(rootIncarnation.incarnationsRetreatLevelController)) {
+      if (!sourceIncarnation.incarnationsRetreatLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectRetreatLevelControllerDelete(id);
       }
     }
 
@@ -30788,6 +30858,136 @@ public class Root {
     }
     effectsTutorial1LevelControllerCreateEffect.Clear();
   }
+  public RetreatLevelControllerIncarnation GetRetreatLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsRetreatLevelController[id].incarnation;
+  }
+  public bool RetreatLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsRetreatLevelController.ContainsKey(id);
+  }
+  public RetreatLevelController GetRetreatLevelController(int id) {
+    return new RetreatLevelController(this, id);
+  }
+  public List<RetreatLevelController> AllRetreatLevelController() {
+    List<RetreatLevelController> result = new List<RetreatLevelController>(rootIncarnation.incarnationsRetreatLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsRetreatLevelController.Keys) {
+      result.Add(new RetreatLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<RetreatLevelController> EnumAllRetreatLevelController() {
+    foreach (var id in rootIncarnation.incarnationsRetreatLevelController.Keys) {
+      yield return GetRetreatLevelController(id);
+    }
+  }
+  public void CheckHasRetreatLevelController(RetreatLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasRetreatLevelController(thing.id);
+  }
+  public void CheckHasRetreatLevelController(int id) {
+    if (!rootIncarnation.incarnationsRetreatLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid RetreatLevelController: " + id);
+    }
+  }
+  public void AddRetreatLevelControllerObserver(int id, IRetreatLevelControllerEffectObserver observer) {
+    List<IRetreatLevelControllerEffectObserver> obsies;
+    if (!observersForRetreatLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IRetreatLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForRetreatLevelController[id] = obsies;
+  }
+
+  public void RemoveRetreatLevelControllerObserver(int id, IRetreatLevelControllerEffectObserver observer) {
+    if (observersForRetreatLevelController.ContainsKey(id)) {
+      var list = observersForRetreatLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForRetreatLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public RetreatLevelController EffectRetreatLevelControllerCreate(
+      Level level) {
+    CheckUnlocked();
+    CheckHasLevel(level);
+
+    var id = NewId();
+    var incarnation =
+        new RetreatLevelControllerIncarnation(
+            level.id
+            );
+    EffectInternalCreateRetreatLevelController(id, rootIncarnation.version, incarnation);
+    return new RetreatLevelController(this, id);
+  }
+  public void EffectInternalCreateRetreatLevelController(
+      int id,
+      int incarnationVersion,
+      RetreatLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new RetreatLevelControllerCreateEffect(id);
+    rootIncarnation.incarnationsRetreatLevelController.Add(
+        id,
+        new VersionAndIncarnation<RetreatLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsRetreatLevelControllerCreateEffect.Add(effect);
+  }
+
+  public void EffectRetreatLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = new RetreatLevelControllerDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsRetreatLevelController[id];
+
+    rootIncarnation.incarnationsRetreatLevelController.Remove(id);
+    effectsRetreatLevelControllerDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetRetreatLevelControllerHash(int id, int version, RetreatLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastRetreatLevelControllerEffects(
+      SortedDictionary<int, List<IRetreatLevelControllerEffectObserver>> observers) {
+    foreach (var effect in effectsRetreatLevelControllerDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IRetreatLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnRetreatLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IRetreatLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnRetreatLevelControllerEffect(effect);
+        }
+        observersForRetreatLevelController.Remove(effect.id);
+      }
+    }
+    effectsRetreatLevelControllerDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsRetreatLevelControllerCreateEffect) {
+      if (observers.TryGetValue(0, out List<IRetreatLevelControllerEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnRetreatLevelControllerEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IRetreatLevelControllerEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnRetreatLevelControllerEffect(effect);
+        }
+      }
+    }
+    effectsRetreatLevelControllerCreateEffect.Clear();
+  }
   public SotaventoLevelControllerIncarnation GetSotaventoLevelControllerIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -32890,6 +33090,9 @@ public class Root {
     if (rootIncarnation.incarnationsTutorial1LevelController.ContainsKey(id)) {
       return new Tutorial1LevelControllerAsILevelController(new Tutorial1LevelController(this, id));
     }
+    if (rootIncarnation.incarnationsRetreatLevelController.ContainsKey(id)) {
+      return new RetreatLevelControllerAsILevelController(new RetreatLevelController(this, id));
+    }
     if (rootIncarnation.incarnationsSotaventoLevelController.ContainsKey(id)) {
       return new SotaventoLevelControllerAsILevelController(new SotaventoLevelController(this, id));
     }
@@ -32940,6 +33143,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsTutorial1LevelController.ContainsKey(id)) {
       return new Tutorial1LevelControllerAsILevelController(new Tutorial1LevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRetreatLevelController.ContainsKey(id)) {
+      return new RetreatLevelControllerAsILevelController(new RetreatLevelController(this, id));
     }
     if (rootIncarnation.incarnationsSotaventoLevelController.ContainsKey(id)) {
       return new SotaventoLevelControllerAsILevelController(new SotaventoLevelController(this, id));

@@ -13,11 +13,16 @@ public class MainMenuView : MonoBehaviour
   }
 
   public void OnBackstoryClicked() {
-    RootPresenter.sceneInitParamStartLevel = -3;
+    RootPresenter.sceneInitParamStartLevel = -4;
     SceneManager.LoadScene("AtScene");
   }
 
   public void OnIntroductionClicked() {
+    RootPresenter.sceneInitParamStartLevel = -3;
+    SceneManager.LoadScene("AtScene");
+  }
+
+  public void OnRetreatChallengeClicked() {
     RootPresenter.sceneInitParamStartLevel = -2;
     SceneManager.LoadScene("AtScene");
   }

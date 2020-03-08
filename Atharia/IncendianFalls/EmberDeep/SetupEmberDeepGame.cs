@@ -47,7 +47,7 @@ namespace EmberDeep {
       Level previousLevel = Level.Null;
       Location previousLevelExitLocation = null;
 
-      if (startingDepth <= -4) {
+      if (startingDepth <= -5) {
         DirtRoadLevelControllerExtensions.LoadLevel(
           out var level,
           out var levelSuperstate,
@@ -66,7 +66,7 @@ namespace EmberDeep {
         previousLevelExitLocation = exitLocation;
       }
 
-      if (startingDepth <= -3) {
+      if (startingDepth <= -4) {
         SotaventoLevelControllerExtensions.LoadLevel(
           out var level,
           out var levelSuperstate,
@@ -85,8 +85,27 @@ namespace EmberDeep {
         previousLevelExitLocation = exitLocation;
       }
 
-      if (startingDepth <= -2) {
+      if (startingDepth <= -3) {
         Tutorial1LevelControllerExtensions.LoadLevel(
+          out var level,
+          out var levelSuperstate,
+          out var entryLocation,
+          out var exitLocation,
+          game);
+        if (!startLevel.Exists()) {
+          startLevel = level;
+          startLevelEntryLocation = entryLocation;
+        }
+        if (previousLevel.Exists()) {
+          previousLevel.terrain.tiles[previousLevelExitLocation].components.Add(
+            game.root.EffectLevelLinkTTCCreate(true, level, entryLocation).AsITerrainTileComponent());
+        }
+        previousLevel = level;
+        previousLevelExitLocation = exitLocation;
+      }
+
+      if (startingDepth <= -2) {
+        RetreatLevelControllerExtensions.LoadLevel(
           out var level,
           out var levelSuperstate,
           out var entryLocation,

@@ -109,6 +109,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<VolcaetusLevelControllerIncarnation>> incarnationsVolcaetusLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<Tutorial2LevelControllerIncarnation>> incarnationsTutorial2LevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<Tutorial1LevelControllerIncarnation>> incarnationsTutorial1LevelController;
+  public readonly SortedDictionary<int, VersionAndIncarnation<RetreatLevelControllerIncarnation>> incarnationsRetreatLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<SotaventoLevelControllerIncarnation>> incarnationsSotaventoLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<NestLevelControllerIncarnation>> incarnationsNestLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<LakeLevelControllerIncarnation>> incarnationsLakeLevelController;
@@ -323,6 +324,7 @@ public class RootIncarnation {
     this.incarnationsVolcaetusLevelController = new SortedDictionary<int, VersionAndIncarnation<VolcaetusLevelControllerIncarnation>>();
     this.incarnationsTutorial2LevelController = new SortedDictionary<int, VersionAndIncarnation<Tutorial2LevelControllerIncarnation>>();
     this.incarnationsTutorial1LevelController = new SortedDictionary<int, VersionAndIncarnation<Tutorial1LevelControllerIncarnation>>();
+    this.incarnationsRetreatLevelController = new SortedDictionary<int, VersionAndIncarnation<RetreatLevelControllerIncarnation>>();
     this.incarnationsSotaventoLevelController = new SortedDictionary<int, VersionAndIncarnation<SotaventoLevelControllerIncarnation>>();
     this.incarnationsNestLevelController = new SortedDictionary<int, VersionAndIncarnation<NestLevelControllerIncarnation>>();
     this.incarnationsLakeLevelController = new SortedDictionary<int, VersionAndIncarnation<LakeLevelControllerIncarnation>>();
@@ -542,6 +544,7 @@ public class RootIncarnation {
     this.incarnationsVolcaetusLevelController = new SortedDictionary<int, VersionAndIncarnation<VolcaetusLevelControllerIncarnation>>(that.incarnationsVolcaetusLevelController);
     this.incarnationsTutorial2LevelController = new SortedDictionary<int, VersionAndIncarnation<Tutorial2LevelControllerIncarnation>>(that.incarnationsTutorial2LevelController);
     this.incarnationsTutorial1LevelController = new SortedDictionary<int, VersionAndIncarnation<Tutorial1LevelControllerIncarnation>>(that.incarnationsTutorial1LevelController);
+    this.incarnationsRetreatLevelController = new SortedDictionary<int, VersionAndIncarnation<RetreatLevelControllerIncarnation>>(that.incarnationsRetreatLevelController);
     this.incarnationsSotaventoLevelController = new SortedDictionary<int, VersionAndIncarnation<SotaventoLevelControllerIncarnation>>(that.incarnationsSotaventoLevelController);
     this.incarnationsNestLevelController = new SortedDictionary<int, VersionAndIncarnation<NestLevelControllerIncarnation>>(that.incarnationsNestLevelController);
     this.incarnationsLakeLevelController = new SortedDictionary<int, VersionAndIncarnation<LakeLevelControllerIncarnation>>(that.incarnationsLakeLevelController);

@@ -1,0 +1,34 @@
+
+mut struct RetreatLevelController {
+  RetreatLevelController isa ILevelController;
+
+  level: &Level;
+
+  fn GetName(this: RetreatLevelController overrides ILevelController): Str {
+    RetreatLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: RetreatLevelController overrides ILevelController): Bool {
+    RetreatLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: RetreatLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    RetreatLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: RetreatLevelController overrides ILevelController,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    RetreatLevelControllerExtensions.SimpleUnitTrigger
+  }
+}

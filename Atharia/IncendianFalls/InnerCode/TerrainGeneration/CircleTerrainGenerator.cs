@@ -23,7 +23,6 @@ namespace IncendianFalls {
             root.EffectTerrainTileCreate(
                   1,
                   ITerrainTileComponentMutBunch.New(root));
-          tile.components.Add(root.EffectRavaNestTTCCreate().AsITerrainTileComponent());
           terrain.tiles.Add(loc, tile);
         } else {
           break;

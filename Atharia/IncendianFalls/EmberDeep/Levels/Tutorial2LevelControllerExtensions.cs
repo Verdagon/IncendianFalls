@@ -82,7 +82,7 @@ namespace Atharia.Model {
             2500, // fadeOutEnd,
             "showHint",
 
-            "Ambush Introduction",
+            "Ambush Challenge",
             new Color(255, 255, 255, 255), // textColor
             500, // textFadeInStartS
             1000, // textFadeInEndS
