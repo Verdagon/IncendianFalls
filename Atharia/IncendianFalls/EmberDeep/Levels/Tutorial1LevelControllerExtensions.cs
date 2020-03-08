@@ -189,7 +189,7 @@ namespace Atharia.Model {
             0, // fadeOutEnd,
             "",
 
-            "You've found a health potion!\n\nYou can't take it with you, but you can use it now.\n\nUse Interact ('I') to use it.",
+            "You've found a health potion!\n\nYou can't take it with you, but you can use it now.\n\nUse Interact ('e') to use it.",
             new Color(255, 255, 255, 255), // textColor
             0, // textFadeInStartS
             300, // textFadeInEndS

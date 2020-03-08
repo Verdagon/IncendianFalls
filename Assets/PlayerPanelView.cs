@@ -33,7 +33,7 @@ public class PlayerPanelView : MonoBehaviour {
 
     interactButton.GetComponent<UIClickListener>().MouseEnter +=
         () => lookPanelView.ShowMessage(
-            "(I) Interact with something where you're standing.");
+            "(E) Interact with something where you're standing.");
     interactButton.GetComponent<UIClickListener>().MouseExit +=
         () => lookPanelView.ClearMessage();
 
