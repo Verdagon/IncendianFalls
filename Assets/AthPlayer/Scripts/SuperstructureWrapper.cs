@@ -35,8 +35,8 @@ namespace AthPlayer {
       return result;
     }
 
-    public Game RequestSetupEmberDeepGame(int randomSeed, bool squareLevelsOnly) {
-      var result = ss.RequestSetupEmberDeepGame(randomSeed, squareLevelsOnly);
+    public Game RequestSetupEmberDeepGame(int randomSeed, int startLevel, bool squareLevelsOnly) {
+      var result = ss.RequestSetupEmberDeepGame(randomSeed, startLevel, squareLevelsOnly);
 
       return result;
     }

@@ -40,7 +40,7 @@ namespace AthPlayer {
         Game game,
         Instantiator instantiator,
         NarrationPanelView narrator,
-        OverlayPanelView overlayPanelView,
+        OverlayPresenter overlayPresenter,
         FollowingCameraController cameraController) {
       this.timer = timer;
       this.cinematicTimer = cinematicTimer;
@@ -52,8 +52,7 @@ namespace AthPlayer {
       this.narrator = narrator;
       this.instantiator = instantiator;
       this.cameraController = cameraController;
-
-      overlayPresenter = new OverlayPresenter(timer, cinematicTimer, ss, game, overlayPanelView);
+      this.overlayPresenter = overlayPresenter;
 
       game.AddObserver(this);
       game.events.AddObserver(this);

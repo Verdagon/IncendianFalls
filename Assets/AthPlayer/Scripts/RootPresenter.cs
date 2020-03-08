@@ -6,9 +6,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using Domino;
 using IncendianFalls;
+using UnityEngine.SceneManagement;
 
 namespace AthPlayer {
   public class RootPresenter : MonoBehaviour {
+    public static int sceneInitParamStartLevel = 0;
 
     SlowableTimerClock timer;
     SlowableTimerClock cinematicTimer;
@@ -16,9 +18,11 @@ namespace AthPlayer {
     ExecutionStaller turnStaller;
 
     ISuperstructure ss;
+    ReplayLogger replayLogger;
     public Instantiator instantiator;
     public GameObject cameraObject;
 
+    OverlayPresenter overlayPresenter;
     GamePresenter gamePresenter;
     PlayerController playerController;
     FollowingCameraController cameraController;
@@ -43,21 +47,27 @@ namespace AthPlayer {
       var timestamp = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
       var modelSS = new Superstructure(new LoggerImpl());
-      new ReplayLogger(modelSS, new string[] { "Latest.sslog", timestamp + ".sslog" });
+      replayLogger = new ReplayLogger(modelSS, new string[] { "Latest.sslog", timestamp + ".sslog" });
       ss = new SuperstructureWrapper(modelSS);
 
       //var randomSeed = timestamp;
       Debug.LogWarning("Hardcoding random seed!");
       var randomSeed = 1525224206;
       //var game = ss.RequestSetupIncendianFallsGame(randomSeed, false);
-      var game = ss.RequestSetupEmberDeepGame(randomSeed, false);
+      var game = ss.RequestSetupEmberDeepGame(randomSeed, sceneInitParamStartLevel, false);
       //var game = ss.RequestSetupGauntletGame(randomSeed, false);
 
       cameraController = new FollowingCameraController(cinematicTimer, cinematicTimer, cameraObject, game);
 
+      overlayPresenter = new OverlayPresenter(timer, cinematicTimer, ss, game, overlayPanelView);
+      overlayPresenter.Exit += () => {
+        replayLogger.Dispose();
+        SceneManager.LoadScene("MainMenu");
+      };
+
       gamePresenter =
           new GamePresenter(
-              timer, cinematicTimer, soundPlayer, resumeStaller, turnStaller, ss, game, instantiator, messageView, overlayPanelView, cameraController);
+              timer, cinematicTimer, soundPlayer, resumeStaller, turnStaller, ss, game, instantiator, messageView, overlayPresenter, cameraController);
 
       playerController =
           new PlayerController(
@@ -70,7 +80,8 @@ namespace AthPlayer {
               gamePresenter,
               playerPanelView,
               messageView,
-              lookPanelView.GetComponent<LookPanelView>());
+              lookPanelView.GetComponent<LookPanelView>(),
+              overlayPresenter);
       playerController.Start();
     }
 

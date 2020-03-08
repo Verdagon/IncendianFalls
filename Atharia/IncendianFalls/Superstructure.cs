@@ -135,10 +135,10 @@ namespace IncendianFalls {
       }
     }
 
-    public Game RequestSetupEmberDeepGame(int randomSeed, bool squareLevelsOnly) {
+    public Game RequestSetupEmberDeepGame(int randomSeed, int startLevel, bool squareLevelsOnly) {
       //var rollbackPoint = root.Snapshot();
       try {
-        var request = new SetupEmberDeepGameRequest(randomSeed, squareLevelsOnly);
+        var request = new SetupEmberDeepGameRequest(randomSeed, startLevel, squareLevelsOnly);
         broadcastBeforeRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
         Superstate superstate = null;

@@ -15,6 +15,7 @@ namespace IncendianFalls {
         context,
         out superstate,
         request.randomSeed,
+        request.startLevel,
         request.squareLevelsOnly);
     }
 

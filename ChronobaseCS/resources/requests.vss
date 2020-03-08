@@ -23,6 +23,7 @@ imm struct SetupEmberDeepGameRequest {
   SetupEmberDeepGameRequest isa IRequest;
 
   randomSeed: Int;
+  startLevel: Int;
   squareLevelsOnly: Bool;
 }
 

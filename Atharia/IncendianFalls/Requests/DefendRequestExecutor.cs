@@ -35,7 +35,6 @@ namespace IncendianFalls {
 
       Actions.Defy(game, game.player);
 
-      game.root.logger.Error("Complete hack, redo player impulse post reactors!");
       var impulse = game.root.EffectDefyImpulseCreate(1000);
       foreach (var postReactor in game.player.components.GetAllIImpulsePostReactor()) {
         postReactor.AfterImpulse(game, superstate, game.player, NullIAICapabilityUC.Null, impulse.AsIImpulse());

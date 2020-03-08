@@ -116,7 +116,7 @@ namespace IncendianFalls {
       } else if (request is SetupGauntletGameRequestAsIRequest setupGauntletGame) {
         ss.RequestSetupGauntletGame(setupGauntletGame.obj.randomSeed, setupGauntletGame.obj.squareLevelsOnly);
       } else if (request is SetupEmberDeepGameRequestAsIRequest setupEmberDeepGame) {
-        ss.RequestSetupEmberDeepGame(setupEmberDeepGame.obj.randomSeed, setupEmberDeepGame.obj.squareLevelsOnly);
+        ss.RequestSetupEmberDeepGame(setupEmberDeepGame.obj.randomSeed, setupEmberDeepGame.obj.startLevel, setupEmberDeepGame.obj.squareLevelsOnly);
       } else if (request is InteractRequestAsIRequest interact) {
         ss.RequestInteract(interact.obj.gameId);
       } else if (request is MoveRequestAsIRequest move) {

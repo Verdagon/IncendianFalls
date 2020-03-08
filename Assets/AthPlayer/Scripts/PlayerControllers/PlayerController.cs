@@ -20,6 +20,7 @@ namespace Domino {
     PlayerPanelView playerPanelView;
     NarrationPanelView narrator;
     LookPanelView lookPanelView;
+    OverlayPresenter overlayPresenter;
     Looker looker;
     IMode mode;
     Unit player;
@@ -34,7 +35,8 @@ namespace Domino {
         GamePresenter gamePresenter,
         PlayerPanelView playerPanelView,
         NarrationPanelView messageView,
-        LookPanelView lookPanelView) {
+        LookPanelView lookPanelView,
+        OverlayPresenter overlayPresenter) {
       this.ss = ss;
       this.superstate = superstate;
       this.game = game;
@@ -45,6 +47,7 @@ namespace Domino {
       this.playerPanelView = playerPanelView;
       this.narrator = messageView;
       this.lookPanelView = lookPanelView;
+      this.overlayPresenter = overlayPresenter;
 
       this.game.AddObserver(this);
 
@@ -205,7 +208,11 @@ namespace Domino {
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) { }
     public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) {
       if (effect.newValue == false) {
-        narrator.ShowMessage("You have been slain, game over!\nRestart app and try again!");
+        overlayPresenter.ShowOverlay(
+          new ShowOverlayEvent(
+            40, new Atharia.Model.Color(64, 0, 0, 224), 300, 0, 0, "",
+            "You have died!", new Atharia.Model.Color(255, 255, 255, 255), 300, 600, 0, 0, true, true,
+            new ButtonImmList(new List<Button>() { new Button("Alas...", new Atharia.Model.Color(16, 16, 16, 255), "_exitGame") })));
       }
     }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }

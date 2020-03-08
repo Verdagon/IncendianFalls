@@ -5,10 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace AthPlayer {
-  class OverlayPresenter {
+  public delegate void OnExit();
+  public class OverlayPresenter {
+    public event OnExit Exit;
+
     SlowableTimerClock timer;
     SlowableTimerClock cinematicTimer;
     ISuperstructure ss;
@@ -96,7 +100,12 @@ namespace AthPlayer {
     private void OverlayClosed(int buttonIndex) {
       Debug.Log("Clicked " + buttonIndex);
       timer.SetTimeSpeedMultiplier(1f);
-      ss.RequestTrigger(game.id, triggerNames[buttonIndex]);
+      var triggerName = triggerNames[buttonIndex];
+      if (triggerName == "_exitGame") {
+        Exit?.Invoke();
+      } else {
+        ss.RequestTrigger(game.id, triggerName);
+      }
     }
   }
 }

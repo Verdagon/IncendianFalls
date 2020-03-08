@@ -10,6 +10,7 @@ namespace EmberDeep {
         SSContext context,
         out Superstate superstate,
         int randomSeed,
+        int startingDepth,
         bool squareLevelsOnly) {
       var rand = context.root.EffectRandCreate(randomSeed);
 
@@ -40,19 +41,13 @@ namespace EmberDeep {
             null,
             null);
 
-      bool playDirtRoad = false;
-      bool playBackstory = false;
-      bool playTutorial1 = true;
-      bool playTutorial2 = false;
-      int startingDepth = 2;
-
       Level startLevel = Level.Null;
       Location startLevelEntryLocation = null;
 
       Level previousLevel = Level.Null;
       Location previousLevelExitLocation = null;
 
-      if (playDirtRoad) {
+      if (startingDepth <= -4) {
         DirtRoadLevelControllerExtensions.LoadLevel(
           out var level,
           out var levelSuperstate,
@@ -71,7 +66,7 @@ namespace EmberDeep {
         previousLevelExitLocation = exitLocation;
       }
 
-      if (playBackstory) {
+      if (startingDepth <= -3) {
         SotaventoLevelControllerExtensions.LoadLevel(
           out var level,
           out var levelSuperstate,
@@ -90,7 +85,7 @@ namespace EmberDeep {
         previousLevelExitLocation = exitLocation;
       }
 
-      if (playTutorial1) {
+      if (startingDepth <= -2) {
         Tutorial1LevelControllerExtensions.LoadLevel(
           out var level,
           out var levelSuperstate,
@@ -109,7 +104,7 @@ namespace EmberDeep {
         previousLevelExitLocation = exitLocation;
       }
 
-      if (playTutorial2) {
+      if (startingDepth <= -1) {
         Tutorial2LevelControllerExtensions.LoadLevel(
           out var level,
           out var levelSuperstate,

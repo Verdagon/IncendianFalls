@@ -21,14 +21,18 @@ public class SetupEmberDeepGameRequest : IComparable<SetupEmberDeepGameRequest> 
   }
   private readonly int hashCode;
          public readonly int randomSeed;
+  public readonly int startLevel;
   public readonly bool squareLevelsOnly;
   public SetupEmberDeepGameRequest(
       int randomSeed,
+      int startLevel,
       bool squareLevelsOnly) {
     this.randomSeed = randomSeed;
+    this.startLevel = startLevel;
     this.squareLevelsOnly = squareLevelsOnly;
     int hash = 0;
     hash = hash * 37 + randomSeed.GetDeterministicHashCode();
+    hash = hash * 37 + startLevel.GetDeterministicHashCode();
     hash = hash * 37 + squareLevelsOnly.GetDeterministicHashCode();
     this.hashCode = hash;
 
@@ -53,6 +57,7 @@ public class SetupEmberDeepGameRequest : IComparable<SetupEmberDeepGameRequest> 
     var that = obj as SetupEmberDeepGameRequest;
     return true
                && randomSeed.Equals(that.randomSeed)
+        && startLevel.Equals(that.startLevel)
         && squareLevelsOnly.Equals(that.squareLevelsOnly)
         ;
   }
@@ -64,6 +69,9 @@ public class SetupEmberDeepGameRequest : IComparable<SetupEmberDeepGameRequest> 
     if (randomSeed != that.randomSeed) {
       return randomSeed.CompareTo(that.randomSeed);
     }
+    if (startLevel != that.startLevel) {
+      return startLevel.CompareTo(that.startLevel);
+    }
     if (squareLevelsOnly != that.squareLevelsOnly) {
       return squareLevelsOnly.CompareTo(that.squareLevelsOnly);
     }
@@ -73,6 +81,7 @@ public class SetupEmberDeepGameRequest : IComparable<SetupEmberDeepGameRequest> 
   public string DStr() {
     return "SetupEmberDeepGameRequest(" +
         randomSeed.DStr() + ", " +
+        startLevel.DStr() + ", " +
         squareLevelsOnly.DStr()
         + ")";
 
@@ -82,9 +91,11 @@ public class SetupEmberDeepGameRequest : IComparable<SetupEmberDeepGameRequest> 
       source.Expect("(");
       var randomSeed = source.ParseInt();
       source.Expect(",");
+      var startLevel = source.ParseInt();
+      source.Expect(",");
       var squareLevelsOnly = source.ParseBool();
       source.Expect(")");
-      return new SetupEmberDeepGameRequest(randomSeed, squareLevelsOnly);
+      return new SetupEmberDeepGameRequest(randomSeed, startLevel, squareLevelsOnly);
   }
 }
        
