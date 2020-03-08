@@ -161,7 +161,7 @@ namespace IncendianFalls {
       if (!game.level.terrain.tiles[destination].IsWalkable()) {
         return false;
       }
-      if (superstate.levelSuperstate.ContainsUnit(destination)) {
+      if (superstate.levelSuperstate.LocationContainsUnit(destination)) {
         return false;
       }
       return true;
@@ -195,7 +195,7 @@ namespace IncendianFalls {
       Asserts.Assert(
         overrideAdjacentCheck || game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent()),
         "Adjacent check failed!");
-      Asserts.Assert(!superstate.levelSuperstate.ContainsUnit(destination), "Unknown destination!");
+      Asserts.Assert(!superstate.levelSuperstate.LocationContainsUnit(destination), "Unit is there!");
 
       bool removed = superstate.levelSuperstate.RemoveUnit(unit);
       Asserts.Assert(removed, "Not removed!");
@@ -213,6 +213,8 @@ namespace IncendianFalls {
         Unit unit) {
       unit.alive = false;
       unit.lifeEndTime = game.time;
+      // Bump the victim up to be the next acting unit.
+      unit.nextActionTime = game.time;
       superstate.levelSuperstate.RemoveUnit(unit);
     }
 

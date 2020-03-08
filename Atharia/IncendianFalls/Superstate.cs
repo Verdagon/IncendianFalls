@@ -94,8 +94,8 @@ namespace Atharia.Model {
                 !game.player.Exists() ||
                 game.player.location != timeShiftingState.targetAnchorLocation);
             Asserts.Assert(
-                !levelSuperstate.ContainsUnit(
-                    timeShiftingState.targetAnchorLocation));
+                !levelSuperstate.LocationContainsUnit(timeShiftingState.targetAnchorLocation),
+                "Unit already there!");
 
             return MultiverseStateType.kTimeshiftingAfterCloneMoved;
           }

@@ -33,7 +33,58 @@ namespace Atharia.Model {
       var exitLocation = levelSuperstate.FindMarkerLocation("exit");
       level.terrain.tiles[exitLocation].components.Add(game.root.EffectDownStairsTTCCreate().AsITerrainTileComponent());
 
-      level.EnterUnit(levelSuperstate, levelSuperstate.FindMarkerLocation("enemy"), level.time, LightningTrask.Make(game.root));
+      level.EnterUnit(
+        levelSuperstate,
+        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+        level.time,
+        Irkling.Make(game.root));
+      level.EnterUnit(
+        levelSuperstate,
+        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+        level.time,
+        Baug.Make(game.root));
+      level.EnterUnit(
+        levelSuperstate,
+        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+        level.time,
+        Chronolisk.Make(game.root));
+      level.EnterUnit(
+        levelSuperstate,
+        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+        level.time,
+        Draxling.Make(game.root));
+      level.EnterUnit(
+        levelSuperstate,
+        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+        level.time,
+        Emberfolk.Make(game.root));
+      level.EnterUnit(
+        levelSuperstate,
+        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+        level.time,
+        IrklingKing.Make(game.root));
+      level.EnterUnit(
+        levelSuperstate,
+        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+        level.time,
+        LightningTrask.Make(game.root));
+      level.EnterUnit(
+        levelSuperstate,
+        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+        level.time,
+        MantisBombardier.Make(game.root));
+      level.EnterUnit(
+        levelSuperstate,
+        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+        level.time,
+        RavagianTrask.Make(game.root));
+      level.EnterUnit(
+        levelSuperstate,
+        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+        level.time,
+        Spirient.Make(game.root));
+
+      //level.EnterUnit(levelSuperstate, levelSuperstate.FindMarkerLocation("enemy"), level.time, LightningTrask.Make(game.root));
 
       level.controller = game.root.EffectDirtRoadLevelControllerCreate(level).AsILevelController();
 

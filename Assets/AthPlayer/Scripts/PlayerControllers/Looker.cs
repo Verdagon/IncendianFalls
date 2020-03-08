@@ -55,7 +55,7 @@ namespace AthPlayer {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
-                    "e",
+                    "f",
                     50,
                     new UnityEngine.Color(1, 1, 1, 1.5f),
                     0,
@@ -137,7 +137,7 @@ namespace AthPlayer {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                   new SymbolDescription(
-                      "e",
+                      "r",
                     50,
                       new UnityEngine.Color(1, 1, 1, 1.5f),
                       0,

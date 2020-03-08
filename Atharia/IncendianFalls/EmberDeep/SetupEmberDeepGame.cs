@@ -40,10 +40,10 @@ namespace EmberDeep {
             null,
             null);
 
-      bool playDirtRoad = false;
-      bool playBackstory = false;
-      bool playTutorial1 = false;
-      bool playTutorial2 = false;
+      bool playDirtRoad = true;
+      bool playBackstory = true;
+      bool playTutorial1 = true;
+      bool playTutorial2 = true;
       int startingDepth = 0;
 
       Level startLevel = Level.Null;

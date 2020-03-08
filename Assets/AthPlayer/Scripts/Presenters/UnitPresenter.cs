@@ -401,7 +401,7 @@ namespace AthPlayer {
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
-                          "e",
+                          "f",
                             50,
                           new UnityEngine.Color(1, 1, 1, 1.5f),
                           0,
@@ -432,7 +432,7 @@ namespace AthPlayer {
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
-                          "e",
+                          "r",
                             50,
                           new UnityEngine.Color(1, 1, 1, 1.5f),
                           0,
@@ -588,7 +588,7 @@ namespace AthPlayer {
           "Chronomancer",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, new UnityEngine.Color(0.7f, 0, 0)),
+              new DominoDescription(true, new UnityEngine.Color(0.0f, 0.2f, 1f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
@@ -633,11 +633,11 @@ namespace AthPlayer {
           "draxling",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.7f, 0.0f, 0.0f)),
+              new DominoDescription(false, new UnityEngine.Color(0.2f, 0.4f, 0.5f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "parenright",
+                      "percent",
                             50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new UnityEngine.Color(0, 0, 0)),
                   false, new UnityEngine.Color(0, 0, 0)),
@@ -708,11 +708,11 @@ namespace AthPlayer {
           "Emberfolk",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.0f, 0f, 0f)),
+              new DominoDescription(false, new UnityEngine.Color(0.7f, 0.35f, 0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "three",
+                      "r",
                             50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
                       new UnityEngine.Color(1, 1, 1)),
                   false, new UnityEngine.Color(0, 0, 0)),
@@ -723,12 +723,12 @@ namespace AthPlayer {
           "Irkling",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.0f, 0.6f, 0.0f)),
+              new DominoDescription(false, new UnityEngine.Color(0.5f, 0.2f, 0)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "v",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      "ampersand",
+                            50, new UnityEngine.Color(1f,1f,1f, 1f), 0, OutlineMode.WithBackOutline,
                       new UnityEngine.Color(0, 0, 0)),
                   false, new UnityEngine.Color(0, 0, 0)),
               detailSymbols,
@@ -753,7 +753,7 @@ namespace AthPlayer {
           "Spirient",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.0f, 0.0f, 0.8f)),
+              new DominoDescription(false, new UnityEngine.Color(0.0f, 0.0f, 0.0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
@@ -768,11 +768,11 @@ namespace AthPlayer {
           "RavagianTrask",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new DominoDescription(false, new UnityEngine.Color(0f, 0.5f, 0.0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "ampersand",
+                      "x",
                             50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new UnityEngine.Color(0, 0, 0)),
                   false, new UnityEngine.Color(0, 0, 0)),
@@ -783,11 +783,11 @@ namespace AthPlayer {
           "MantisBombardier",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new DominoDescription(true, new UnityEngine.Color(0.0f, 0.4f, 0.0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "e",
+                      "three",
                             50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new UnityEngine.Color(0, 0, 0)),
                   false, new UnityEngine.Color(0, 0, 0)),
@@ -798,11 +798,11 @@ namespace AthPlayer {
           "Chronolisk",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new DominoDescription(false, new UnityEngine.Color(0.5f, 0.5f, 0.5f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "e",
+                      "k",
                             50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new UnityEngine.Color(0, 0, 0)),
                   false, new UnityEngine.Color(0, 0, 0)),
@@ -813,11 +813,11 @@ namespace AthPlayer {
           "MysteriousMan",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new DominoDescription(true, new UnityEngine.Color(0.5f, 0.5f, 0.5f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "e",
+                      "y",
                             50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new UnityEngine.Color(0, 0, 0)),
                   false, new UnityEngine.Color(0, 0, 0)),
@@ -828,11 +828,11 @@ namespace AthPlayer {
           "LightningTrask",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new DominoDescription(true, new UnityEngine.Color(0.7f, 0f, 0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "e",
+                      "x",
                             50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new UnityEngine.Color(0, 0, 0)),
                   false, new UnityEngine.Color(0, 0, 0)),
@@ -843,11 +843,11 @@ namespace AthPlayer {
           "IrklingKing",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new DominoDescription(true, new UnityEngine.Color(.7f, 0, .6f, 1f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "e",
+                      "ampersand",
                             50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new UnityEngine.Color(0, 0, 0)),
                   false, new UnityEngine.Color(0, 0, 0)),

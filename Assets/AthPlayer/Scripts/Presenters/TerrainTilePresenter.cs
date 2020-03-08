@@ -277,9 +277,9 @@ namespace AthPlayer {
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
-                        "e",
+                        "k",
                         50,
-                        new UnityEngine.Color(.5f, 0f, 0f, 1.2f),
+                        new UnityEngine.Color(1.0f, 0.5f, 0f, 1.0f),
                         0,
                         OutlineMode.WithOutline,
                         new UnityEngine.Color(0, 0, 0)),
@@ -293,9 +293,9 @@ namespace AthPlayer {
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
-                        "e",
+                        "k",
                         50,
-                        new UnityEngine.Color(.5f, 0f, 0f, 1.2f),
+                        new UnityEngine.Color(1.0f, 0f, 0f, 0.5f),
                         0,
                         OutlineMode.WithOutline,
                         new UnityEngine.Color(0, 0, 0)),
@@ -514,7 +514,7 @@ namespace AthPlayer {
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
-                        "l",
+                        "k",
                             50,
                         new UnityEngine.Color(1.0f, 1.0f, 1.0f, 1.5f),
                         0,

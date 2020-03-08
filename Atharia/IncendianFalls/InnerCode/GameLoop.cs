@@ -290,7 +290,10 @@ namespace IncendianFalls {
           if (nextUnit.NullableIs(game.player)) {
             return; // To be continued... via ContinueAtStartTurn.
           } else {
-            Asserts.Assert(!superstate.levelSuperstate.ContainsUnit(nextUnit.location), "curiosity"); // curiosity, we might need a:
+            if (superstate.levelSuperstate.LocationContainsUnit(nextUnit.location)) {
+              // curiosity, we might need a:
+              game.root.logger.Error("next unit isnt alive, but doesnt exist in superstate?");
+            }
             //superstate.levelSuperstate.RemoveUnit(nextUnit);
             game.level.units.Remove(nextUnit);
             nextUnit.Destruct();

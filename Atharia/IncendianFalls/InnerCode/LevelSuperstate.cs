@@ -57,7 +57,11 @@ namespace Atharia.Model {
       return liveUnitByLocation.Remove(unit.location);
     }
 
-    public bool ContainsUnit(Location location) {
+    public bool ContainsUnit(Unit unit) {
+      return liveUnitByLocation.ContainsKey(unit.location) && liveUnitByLocation[unit.location].NullableIs(unit);
+    }
+
+    public bool LocationContainsUnit(Location location) {
       return liveUnitByLocation.ContainsKey(location);
     }
 
