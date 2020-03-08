@@ -129,8 +129,8 @@ namespace Geomancer {
         new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
       });
       entries.Add("CaveWall", new List<MemberToViewMapper.IDescription>() {
-        new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(.35f, .125f, 0f)),
-        new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(.25f, .083f, 0f)),
+      new MemberToViewMapper.TopColorDescriptionForIDescription(new Color(.24f, .08f, 0)),
+        new MemberToViewMapper.SideColorDescriptionForIDescription(new Color(.16f, .05f, 0)),
         new MemberToViewMapper.OutlineColorDescriptionForIDescription(new Color(0, 0, 0))
       });
       entries.Add("Water", new List<MemberToViewMapper.IDescription>() {

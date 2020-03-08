@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class IUnitComponentMutBunchIncarnation {
+  public readonly int membersTutorialDefyCounterUCMutSet;
   public readonly int membersLightningChargingUCMutSet;
   public readonly int membersWanderAICapabilityUCMutSet;
   public readonly int membersTemporaryCloneAICapabilityUCMutSet;
@@ -32,6 +33,7 @@ public class IUnitComponentMutBunchIncarnation {
   public readonly int membersBaseOffenseUCMutSet;
   public readonly int membersBaseDefenseUCMutSet;
   public IUnitComponentMutBunchIncarnation(
+      int membersTutorialDefyCounterUCMutSet,
       int membersLightningChargingUCMutSet,
       int membersWanderAICapabilityUCMutSet,
       int membersTemporaryCloneAICapabilityUCMutSet,
@@ -58,6 +60,7 @@ public class IUnitComponentMutBunchIncarnation {
       int membersSorcerousUCMutSet,
       int membersBaseOffenseUCMutSet,
       int membersBaseDefenseUCMutSet) {
+    this.membersTutorialDefyCounterUCMutSet = membersTutorialDefyCounterUCMutSet;
     this.membersLightningChargingUCMutSet = membersLightningChargingUCMutSet;
     this.membersWanderAICapabilityUCMutSet = membersWanderAICapabilityUCMutSet;
     this.membersTemporaryCloneAICapabilityUCMutSet = membersTemporaryCloneAICapabilityUCMutSet;

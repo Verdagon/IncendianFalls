@@ -35,6 +35,10 @@ public class IUnitComponentMutBunch {
   }
   public void CheckForNullViolations(List<string> violations) {
 
+    if (!root.TutorialDefyCounterUCMutSetExists(membersTutorialDefyCounterUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersTutorialDefyCounterUCMutSet");
+    }
+
     if (!root.LightningChargingUCMutSetExists(membersLightningChargingUCMutSet.id)) {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersLightningChargingUCMutSet");
     }
@@ -144,6 +148,9 @@ public class IUnitComponentMutBunch {
       return;
     }
     foundIds.Add(id);
+    if (root.TutorialDefyCounterUCMutSetExists(membersTutorialDefyCounterUCMutSet.id)) {
+      membersTutorialDefyCounterUCMutSet.FindReachableObjects(foundIds);
+    }
     if (root.LightningChargingUCMutSetExists(membersLightningChargingUCMutSet.id)) {
       membersLightningChargingUCMutSet.FindReachableObjects(foundIds);
     }
@@ -232,7 +239,16 @@ public class IUnitComponentMutBunch {
     }
     return this.root == that.root && id == that.id;
   }
-         public LightningChargingUCMutSet membersLightningChargingUCMutSet {
+         public TutorialDefyCounterUCMutSet membersTutorialDefyCounterUCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersTutorialDefyCounterUCMutSet of null!");
+      }
+      return new TutorialDefyCounterUCMutSet(root, incarnation.membersTutorialDefyCounterUCMutSet);
+    }
+                       }
+  public LightningChargingUCMutSet membersLightningChargingUCMutSet {
 
     get {
       if (root == null) {
@@ -469,6 +485,8 @@ public class IUnitComponentMutBunch {
 
   public static IUnitComponentMutBunch New(Root root) {
     return root.EffectIUnitComponentMutBunchCreate(
+      root.EffectTutorialDefyCounterUCMutSetCreate()
+,
       root.EffectLightningChargingUCMutSetCreate()
 ,
       root.EffectWanderAICapabilityUCMutSetCreate()
@@ -523,6 +541,12 @@ public class IUnitComponentMutBunch {
         );
   }
   public void Add(IUnitComponent elementI) {
+
+    // Can optimize, check the type of element directly somehow
+    if (root.TutorialDefyCounterUCExists(elementI.id)) {
+      this.membersTutorialDefyCounterUCMutSet.Add(root.GetTutorialDefyCounterUC(elementI.id));
+      return;
+    }
 
     // Can optimize, check the type of element directly somehow
     if (root.LightningChargingUCExists(elementI.id)) {
@@ -684,6 +708,12 @@ public class IUnitComponentMutBunch {
   public void Remove(IUnitComponent elementI) {
 
     // Can optimize, check the type of element directly somehow
+    if (root.TutorialDefyCounterUCExists(elementI.id)) {
+      this.membersTutorialDefyCounterUCMutSet.Remove(root.GetTutorialDefyCounterUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.LightningChargingUCExists(elementI.id)) {
       this.membersLightningChargingUCMutSet.Remove(root.GetLightningChargingUC(elementI.id));
       return;
@@ -841,6 +871,7 @@ public class IUnitComponentMutBunch {
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
+    this.membersTutorialDefyCounterUCMutSet.Clear();
     this.membersLightningChargingUCMutSet.Clear();
     this.membersWanderAICapabilityUCMutSet.Clear();
     this.membersTemporaryCloneAICapabilityUCMutSet.Clear();
@@ -871,6 +902,7 @@ public class IUnitComponentMutBunch {
   public int Count {
     get {
       return
+        this.membersTutorialDefyCounterUCMutSet.Count +
         this.membersLightningChargingUCMutSet.Count +
         this.membersWanderAICapabilityUCMutSet.Count +
         this.membersTemporaryCloneAICapabilityUCMutSet.Count +
@@ -908,6 +940,7 @@ public class IUnitComponentMutBunch {
   }
 
   public void Destruct() {
+    var tempMembersTutorialDefyCounterUCMutSet = this.membersTutorialDefyCounterUCMutSet;
     var tempMembersLightningChargingUCMutSet = this.membersLightningChargingUCMutSet;
     var tempMembersWanderAICapabilityUCMutSet = this.membersWanderAICapabilityUCMutSet;
     var tempMembersTemporaryCloneAICapabilityUCMutSet = this.membersTemporaryCloneAICapabilityUCMutSet;
@@ -936,6 +969,7 @@ public class IUnitComponentMutBunch {
     var tempMembersBaseDefenseUCMutSet = this.membersBaseDefenseUCMutSet;
 
     this.Delete();
+    tempMembersTutorialDefyCounterUCMutSet.Destruct();
     tempMembersLightningChargingUCMutSet.Destruct();
     tempMembersWanderAICapabilityUCMutSet.Destruct();
     tempMembersTemporaryCloneAICapabilityUCMutSet.Destruct();
@@ -964,6 +998,9 @@ public class IUnitComponentMutBunch {
     tempMembersBaseDefenseUCMutSet.Destruct();
   }
   public IEnumerator<IUnitComponent> GetEnumerator() {
+    foreach (var element in this.membersTutorialDefyCounterUCMutSet) {
+      yield return new TutorialDefyCounterUCAsIUnitComponent(element);
+    }
     foreach (var element in this.membersLightningChargingUCMutSet) {
       yield return new LightningChargingUCAsIUnitComponent(element);
     }
@@ -1043,6 +1080,27 @@ public class IUnitComponentMutBunch {
       yield return new BaseDefenseUCAsIUnitComponent(element);
     }
   }
+    public List<TutorialDefyCounterUC> GetAllTutorialDefyCounterUC() {
+      var result = new List<TutorialDefyCounterUC>();
+      foreach (var thing in this.membersTutorialDefyCounterUCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<TutorialDefyCounterUC> ClearAllTutorialDefyCounterUC() {
+      var result = new List<TutorialDefyCounterUC>();
+      this.membersTutorialDefyCounterUCMutSet.Clear();
+      return result;
+    }
+    public TutorialDefyCounterUC GetOnlyTutorialDefyCounterUCOrNull() {
+      var result = GetAllTutorialDefyCounterUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return TutorialDefyCounterUC.Null;
+      }
+    }
     public List<LightningChargingUC> GetAllLightningChargingUC() {
       var result = new List<LightningChargingUC>();
       foreach (var thing in this.membersLightningChargingUCMutSet) {
@@ -1591,6 +1649,10 @@ public class IUnitComponentMutBunch {
     }
     public List<IImpulsePostReactor> GetAllIImpulsePostReactor() {
       var result = new List<IImpulsePostReactor>();
+      foreach (var obj in this.membersTutorialDefyCounterUCMutSet) {
+        result.Add(
+            new TutorialDefyCounterUCAsIImpulsePostReactor(obj));
+      }
       foreach (var obj in this.membersTimeCloneAICapabilityUCMutSet) {
         result.Add(
             new TimeCloneAICapabilityUCAsIImpulsePostReactor(obj));
@@ -1603,6 +1665,7 @@ public class IUnitComponentMutBunch {
     }
     public List<IImpulsePostReactor> ClearAllIImpulsePostReactor() {
       var result = new List<IImpulsePostReactor>();
+      this.membersTutorialDefyCounterUCMutSet.Clear();
       this.membersTimeCloneAICapabilityUCMutSet.Clear();
       this.membersAttackAICapabilityUCMutSet.Clear();
       return result;

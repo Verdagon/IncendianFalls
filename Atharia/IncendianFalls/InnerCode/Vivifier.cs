@@ -140,6 +140,9 @@ namespace IncendianFalls {
         case "Mud":
           tile.components.Add(level.root.EffectMudTTCCreate().AsITerrainTileComponent());
           return true;
+        case "CaveWall":
+          tile.components.Add(level.root.EffectCaveWallTTCCreate().AsITerrainTileComponent());
+          return true;
         case "Dirt":
           tile.components.Add(level.root.EffectDirtTTCCreate().AsITerrainTileComponent());
           return true;

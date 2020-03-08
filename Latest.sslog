@@ -1,947 +1,831 @@
 SetupEmberDeepGameRequest(1525224206, false)
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:143: 553012556
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:153: -1897983113
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:153: 1835638741
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1897983113
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1835638741
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -753939011
-CheatRequest(5, "poweroverwhelming")
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:242: -753939011
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 155786626
+TriggerRequest(5, "showTitle")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 155786626
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 155786626
+TriggerRequest(5, "")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 155786626
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 155786626
+CheatRequest(5, "warptoend")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:242: 155786626
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:247: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:249: -380351128
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:249: 155786626
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -380351128
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 155786626
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -939439594
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -939439594
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -192263828
-MoveRequest(5, Location(-3, -3, 5))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: -192263828
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -403301840
+MoveRequest(5, Location(-6, -2, 5))
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: -403301840
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -192263828
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -403301840
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -192263828
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -403301840
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 562672089
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -962390306
+FollowDirectiveRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:435: -962390306
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:440: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:442: -962390306
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 562672089
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -962390306
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -362244109
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1521478772
+FollowDirectiveRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:435: -1521478772
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:440: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:442: -1521478772
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -362244109
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1521478772
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 763692974
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2080567238
+FollowDirectiveRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:435: -2080567238
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:440: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:442: -2080567238
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 763692974
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2080567238
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1510868740
-AttackRequest(5, 5465)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1510868740
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1510868740
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1510868740
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1086139422
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1086139422
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -511530654
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -511530654
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 235645112
-AttackRequest(5, 5465)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 235645112
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 235645112
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 235645112
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1616774001
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1616774001
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1753277097
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1753277097
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1794514433
-AttackRequest(5, 5332)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -1794514433
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -1794514433
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1794514433
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1400382950
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1400382950
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2147408580
-AttackRequest(5, 5529)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -2147408580
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -2147408580
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2147408580
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1577973246
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1577973246
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2126714844
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2126714844
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1050075520
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1050075520
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1797251286
-DefyRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: 1797251286
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: -2124128127
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2124128127
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1554692793
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1554692793
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1070769256
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1070769256
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2103434391
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2103434391
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1073355973
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1073355973
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1073355973
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1073355973
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1820531739
-AttackRequest(5, 5431)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1820531739
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1820531739
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1820531739
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1647964741
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1647964741
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1650551458
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1650551458
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1897240072
-AttackRequest(5, 5431)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -1897240072
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -1897240072
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1897240072
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 918895994
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 918895994
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1666071760
-DefyRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: 1666071760
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: 2039659643
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 2039659643
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 560828413
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 560828413
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 560828413
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 560828413
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1308004179
-AttackRequest(5, 5298)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1308004179
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1308004179
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1308004179
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1106090117
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1106090117
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -358914351
-DefyRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: -358914351
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: 14673532
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 14673532
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -544414934
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -544414934
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 27607117
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 27607117
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 27607117
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 27607117
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 774782883
-DefyRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: 774782883
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: 1148370766
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1148370766
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1898133249
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1898133249
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 599629168
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 599629168
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 599629168
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 599629168
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1346804934
-DefyRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: 1346804934
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: 1720392817
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1720392817
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1161304351
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1161304351
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -137199730
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -137199730
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -137199730
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -137199730
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -137199730
-TimeAnchorMoveRequest(5, Location(-3, -3, 6))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:459: -137199730
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1845985609
+TriggerRequest(5, "ambush4b")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 1845985609
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 1845985609
+TriggerRequest(5, "ambush4c")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 1845985609
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 1845985609
+TriggerRequest(5, "ambush4d")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 1845985609
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 1845985609
+TriggerRequest(5, "")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 1845985609
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 1845985609
+TimeAnchorMoveRequest(5, Location(-6, -2, 6))
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:459: 1845985609
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:464: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:466: 236388153
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:466: -2075393804
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 236388153
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2075393804
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1062115928
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1062115928
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1062115928
-MoveRequest(5, Location(-2, -2, 1))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: -1062115928
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -1062115928
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1062115928
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1934347287
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1934347287
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1934347287
-MoveRequest(5, Location(-2, -2, 2))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 1934347287
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 1934347287
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1934347287
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 635843206
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 635843206
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 635843206
-MoveRequest(5, Location(-1, -2, 3))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 635843206
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 635843206
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 635843206
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -662660875
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -662660875
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -662660875
-MoveRequest(5, Location(-1, -2, 4))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: -662660875
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -662660875
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -662660875
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1961164956
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1961164956
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1213989190
-TimeShiftRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -1213989190
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -1213989190
-TimeShiftRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -1213989190
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -1213989190
-TimeShiftRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -1213989190
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -1213989190
-TimeShiftRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -1213989190
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -1213989190
-TimeShiftRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -1213989190
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -466813424
-TimeShiftRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -466813424
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -2146665539
-TimeShiftRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -2146665539
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: 844624242
-MoveRequest(5, Location(-4, -3, 7))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 844624242
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 844624242
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 844624242
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -453879839
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -453879839
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 481383227
-MoveRequest(5, Location(-3, -2, 0))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 481383227
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 481383227
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 481383227
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -817120854
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -817120854
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 118142212
-MoveRequest(5, Location(-2, -2, 3))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 118142212
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 118142212
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 118142212
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1180361869
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1180361869
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -245098803
-FollowDirectiveRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:435: -245098803
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:440: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:442: -245098803
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -245098803
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1726516750
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1726516750
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -44077918
-MoveRequest(5, Location(-2, -2, 4))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: -44077918
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -44077918
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -44077918
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2084584331
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2084584331
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1844555233
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1844555233
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -208884765
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -208884765
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -767973231
-MoveRequest(5, Location(-1, -2, 5))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: -767973231
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -767973231
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -767973231
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -190777746
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -190777746
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -556605478
-MoveRequest(5, Location(-1, -2, 6))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: -556605478
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -556605478
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -556605478
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1656675391
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1656675391
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2022503123
-MoveRequest(5, Location(-1, -2, 7))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: -2022503123
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -2022503123
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2022503123
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1736656160
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1736656160
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1370828428
-CheatRequest(5, "poweroverwhelming")
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:242: 1370828428
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:247: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:249: 1744416311
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1744416311
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1185327845
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1185327845
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1185327845
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -578455555
+TriggerRequest(5, "ambush4e")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: -578455555
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: -204867672
+TriggerRequest(5, "")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: -204867672
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: -204867672
 DefyRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: 1185327845
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: -204867672
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: 1558915728
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: -949456721
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1558915728
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -949456721
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 832433698
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 359394228
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 832433698
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 359394228
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1205485998
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1668245177
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1205485998
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1668245177
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1205485998
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1317871170
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1205485998
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1317871170
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1205485998
-AttackRequest(5, 24539)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -1205485998
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1876959636
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1876959636
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1129783870
+DefyRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: -1129783870
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: -1874372919
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1874372919
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -565521970
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -565521970
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 743328979
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 743328979
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 2052179928
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 2052179928
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -933936419
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -933936419
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 374914530
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 374914530
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -184173936
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -184173936
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 563001830
+DefyRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: 563001830
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: -181587219
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -181587219
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1127263730
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1127263730
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1858852617
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1858852617
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -550001668
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -550001668
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 758849281
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 758849281
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 2067700230
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 2067700230
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1508611764
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1508611764
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2039179766
+DefyRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: -2039179766
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: 1511198481
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1511198481
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1474917866
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1474917866
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -166066917
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -166066917
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1142784032
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1142784032
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1843332315
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1843332315
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -534481366
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -534481366
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1093569832
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1093569832
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -346394066
+DefyRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: -346394066
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: -1090983115
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1090983115
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 217867834
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 217867834
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1526718783
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1526718783
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1459397564
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1459397564
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -150546615
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -150546615
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1158304334
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1158304334
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 599215868
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 599215868
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1346391634
+DefyRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: 1346391634
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: 601802585
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 601802585
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1910653534
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1910653534
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1075462813
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1075462813
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 233388136
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 233388136
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1542239085
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1542239085
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1443877262
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1443877262
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2002965728
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2002965728
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1255789962
+DefyRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: -1255789962
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: -2000379011
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2000379011
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -691528062
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -691528062
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 617322887
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 617322887
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1926173836
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1926173836
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1059942511
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1059942511
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 248908438
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 248908438
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -310180028
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -310180028
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 436995738
+AttackRequest(5, 4846)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 436995738
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -1205485998
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 436995738
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1205485998
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 436995738
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 124058687
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1745846687
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 124058687
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1745846687
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1913861009
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1240269660
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1913861009
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1240269660
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1913861009
-AttackRequest(5, 24641)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -1913861009
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 68581289
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 68581289
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1377432238
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1377432238
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1608684109
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1608684109
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1420596809
+DefyRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: -1420596809
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: 2129781438
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 2129781438
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -856334909
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -856334909
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 452516040
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 452516040
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1761366989
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1761366989
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1224749358
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1224749358
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 84101591
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 84101591
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -474986875
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -474986875
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 272188891
+DefyRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: 272188891
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: -472400158
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -472400158
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 836450791
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 836450791
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 2145301740
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 2145301740
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -840814607
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -840814607
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 468036342
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 468036342
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1776887291
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1776887291
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1217798825
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1217798825
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1964974591
+DefyRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: 1964974591
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: 1220385542
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1220385542
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1765730805
+TriggerRequest(5, "")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: -1765730805
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: -1765730805
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1765730805
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -456879856
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -456879856
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 851971093
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 851971093
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2134145254
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2134145254
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -825294305
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -825294305
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1384382771
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1384382771
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -637207005
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -637207005
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: 109968761
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: 109968761
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: -1569883354
+TimeShiftRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:483: -1569883354
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:488: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:490: 1421406427
+TriggerRequest(5, "ambush4f")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 1421406427
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 1421406427
+TriggerRequest(5, "")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 1421406427
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 1421406427
+DefyRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:387: 1421406427
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:392: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:394: -2126385103
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2126385103
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 679404095
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 679404095
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 679404095
+AttackRequest(5, 4846)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 679404095
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -1913861009
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 679404095
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1913861009
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 679404095
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 703840889
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1988255044
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 703840889
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1988255044
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -202968290
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -997861303
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -202968290
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -997861303
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -568796022
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 310989646
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -568796022
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 310989646
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -568796022
-AttackRequest(5, 24979)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -568796022
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -248098820
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -248098820
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1807927895
+AttackRequest(5, 4846)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1807927895
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -568796022
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1807927895
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -568796022
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1807927895
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1703771880
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1178188452
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1703771880
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1178188452
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1337944148
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 130662497
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1337944148
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 130662497
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1337944148
-AttackRequest(5, 25359)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1337944148
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1439513446
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1439513446
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1546602901
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1546602901
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -237751952
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -237751952
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -796840418
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -796840418
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1259186297
+AttackRequest(5, 4846)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1259186297
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1337944148
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1259186297
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1337944148
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1259186297
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1632651897
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1726930050
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1632651897
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1726930050
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1752919503
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -418079101
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1752919503
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -418079101
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1752919503
-AttackRequest(5, 24861)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1752919503
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 890771848
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 890771848
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2095344499
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2095344499
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -786493550
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -786493550
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1345582016
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1345582016
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 710444699
+AttackRequest(5, 4846)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 710444699
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1752919503
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 710444699
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1752919503
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 710444699
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1776199956
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 2019295648
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1776199956
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 2019295648
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1382483389
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -966820699
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1382483389
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -966820699
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1382483389
-AttackRequest(5, 25995)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -1382483389
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 342030250
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 342030250
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1650881199
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1650881199
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1335235148
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1335235148
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1894323614
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1894323614
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 161703101
+AttackRequest(5, 4846)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 161703101
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -1382483389
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 161703101
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1382483389
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 161703101
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1263672396
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1470554050
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1263672396
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1470554050
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1263672396
-AttackRequest(5, 5365)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1263672396
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1515562297
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1515562297
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -206711348
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -206711348
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1102139601
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1102139601
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1883976746
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1883976746
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1851902084
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1851902084
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -387038497
+AttackRequest(5, 4846)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -387038497
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1263672396
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -387038497
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1263672396
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -387038497
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 148082181
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 921812452
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 148082181
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 921812452
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1322988898
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2064303895
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1322988898
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2064303895
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 362036651
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -755452946
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 362036651
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -755452946
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 362036651
-AttackRequest(5, 5365)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 362036651
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 553398003
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 553398003
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1862248952
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1862248952
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1303160486
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1303160486
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -935780095
+AttackRequest(5, 4846)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -935780095
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 362036651
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -935780095
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 362036651
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -935780095
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2062404513
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1494868561
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2062404513
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1494868561
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -753553564
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -753553564
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -727686394
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -727686394
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -727686394
-AttackRequest(5, 25228)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -727686394
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -727686394
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -727686394
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1142839738
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1142839738
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 421531142
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 421531142
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 421531142
-AttackRequest(5, 25513)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 421531142
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 421531142
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 421531142
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2002910022
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2002910022
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 261897729
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 261897729
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 261897729
-MoveRequest(5, Location(0, -1, 1))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 261897729
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: "Can't step that way!"
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 261897729
-MoveRequest(5, Location(0, -1, 1))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 261897729
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: "Can't step that way!"
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 261897729
-AttackRequest(5, 26194)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 261897729
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 261897729
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 261897729
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1953762399
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1953762399
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1953762399
-AttackRequest(5, 27250)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -1953762399
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -1953762399
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1953762399
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1795050016
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1795050016
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1183306180
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1183306180
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1183306180
-AttackRequest(5, 27042)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -1183306180
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -1183306180
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1183306180
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -974525144
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -974525144
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -974525144
-AttackRequest(5, 26675)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -974525144
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -974525144
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -974525144
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2074595057
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2074595057
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2074595057
-AttackRequest(5, 5265)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -2074595057
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -2074595057
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2074595057
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -938311106
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -938311106
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -188548623
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -188548623
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -188548623
-AttackRequest(5, 5398)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -188548623
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -188548623
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -188548623
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 15058979
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 15058979
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 15058979
-AttackRequest(5, 27426)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 15058979
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 15058979
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 15058979
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1090184368
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1090184368
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1090184368
-AttackRequest(5, 26881)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -1090184368
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -1090184368
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1090184368
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1537864398
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1537864398
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1537864398
-AttackRequest(5, 5234)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1537864398
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1537864398
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1537864398
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1625992381
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1625992381
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 2109886449
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 2109886449
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 2109886449
-AttackRequest(5, 5497)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 2109886449
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 2109886449
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 2109886449
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 808795651
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 808795651
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1373057551
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1373057551
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1373057551
-AttackRequest(5, 25669)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1373057551
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1373057551
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1373057551
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -672622296
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -672622296
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -672622296
-MoveRequest(5, Location(0, -2, 5))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: -672622296
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -559605495
+MoveRequest(5, Location(-7, -2, 7))
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: -559605495
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -672622296
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -559605495
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -672622296
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -559605495
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1973713094
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1973713094
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1971126377
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1971126377
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1971126377
-AttackRequest(5, 25851)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -1971126377
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -1971126377
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1971126377
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1210837421
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1210837421
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1210837421
-MoveRequest(5, Location(-1, -2, 7))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 1210837421
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 190156988
+MoveRequest(5, Location(-7, -2, 6))
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 190156988
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 1210837421
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 190156988
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1210837421
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 190156988
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -649341843
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -368931478
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -649341843
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -368931478
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -649341843
-MoveRequest(5, Location(0, -1, 1))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: -649341843
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 939919471
+MoveRequest(5, Location(-7, -1, 0))
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 939919471
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: -649341843
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 939919471
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -649341843
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 939919471
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1762345341
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 380831005
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1762345341
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 380831005
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1762345341
-FollowDirectiveRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:435: -1762345341
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:440: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:442: -1762345341
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1762345341
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1419618457
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1419618457
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1419618457
-AttackRequest(5, 25093)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1419618457
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1419618457
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1419618457
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -257646941
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -257646941
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -255060224
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -255060224
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -255060224
-AttackRequest(5, 26531)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -255060224
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -255060224
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -255060224
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1056377442
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1056377442
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1056377442
-AttackRequest(5, 24744)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: 1056377442
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: 1056377442
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1056377442
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1058964159
-ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1058964159
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1058964159
-MoveRequest(5, Location(1, -1, 5))
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 1058964159
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1689681954
+MoveRequest(5, Location(-7, -1, 2))
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 1689681954
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 1058964159
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 1689681954
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1058964159
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1689681954
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1808726642
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1130593488
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1808726642
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1130593488
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1808726642
-FollowDirectiveRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:435: 1808726642
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:440: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:442: 1808726642
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1670022276
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1808726642
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1670022276
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1736478171
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 2065856554
+InteractRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:218: 2065856554
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:223: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:225: 669855974
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1736478171
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 669855974
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1736478171
-FollowDirectiveRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:435: -1736478171
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:440: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:442: -1736478171
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 110767508
+MoveRequest(5, Location(11, -7, 0))
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 110767508
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 110767508
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1736478171
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 110767508
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -986715688
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 528329580
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -986715688
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 528329580
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -986715688
-AttackRequest(5, 26338)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -986715688
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -767587784
+AttackRequest(5, 30352)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:363: -767587784
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:368: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -986715688
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:370: -767587784
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -986715688
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -767587784
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1545804154
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -911700895
 ResumeRequest(5)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1545804154
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -911700895
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1545804154
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -350025712
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -350025712
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 211649471
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 211649471
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 773324654
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 773324654
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 1157259405
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 1157259405
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 39082473
+MoveRequest(5, Location(12, -8, 0))
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:266: 39082473
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:271: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:273: 39082473
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: 39082473
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -666705821
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -666705821
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1962623185
+TimeAnchorMoveRequest(5, Location(11, -8, 0))
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:459: -1962623185
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:464: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:466: -1589035302
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1589035302
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -1375080832
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -1375080832
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -2106736296
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -2106736296
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: -797885347
+ResumeRequest(5)
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:508: -797885347
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:513: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:515: 894900353

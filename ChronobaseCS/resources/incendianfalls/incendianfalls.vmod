@@ -65,6 +65,7 @@ unit/doomed.vss
 unit/lightningcharge.vss
 unit/unit.vss
 unit/unitcomponent.vss
+unit/tutorialdefycounter.vss
 unit/unitevent.vss
 unit/wander.vss
 unit/holdposition.vss

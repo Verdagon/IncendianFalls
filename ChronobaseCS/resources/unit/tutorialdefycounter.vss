@@ -1,0 +1,22 @@
+
+mut struct TutorialDefyCounterUC {
+  TutorialDefyCounterUC isa IImpulsePostReactor;
+
+  var numDefiesRemaining: Int;
+  onChangeTriggerName: Str;
+
+  fn Destruct(this: TutorialDefyCounterUC overrides IDestructible): Void {
+    TutorialDefyCounterUCExtensions.Destruct
+  }
+
+  fn AfterImpulse(
+      this: TutorialDefyCounterUC overrides IImpulsePostReactor,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit,
+      originatingCapability: IAICapabilityUC,
+      impulse: IImpulse)
+  : Void {
+    TutorialDefyCounterUCExtensions.AfterImpulse
+  }
+}

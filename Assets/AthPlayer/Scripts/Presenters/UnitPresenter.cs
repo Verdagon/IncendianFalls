@@ -316,6 +316,7 @@ namespace AthPlayer {
       } else if (component is BaseMovementTimeUCAsIUnitComponent) {
       } else if (component is LightningChargingUCAsIUnitComponent) {
       } else if (component is LightningChargedUCAsIUnitComponent) {
+      } else if (component is TutorialDefyCounterUCAsIUnitComponent) {
       } else if (component is BaseOffenseUCAsIUnitComponent) {
       } else if (component is BaseDefenseUCAsIUnitComponent) {
       } else if (component is DoomedUCAsIUnitComponent) {
@@ -424,6 +425,7 @@ namespace AthPlayer {
                           new UnityEngine.Color(0, 0, 0)),
                       true,
                       new UnityEngine.Color(1, 1, 1, 1.5f))));
+        } else if (detail is TutorialDefyCounterUCAsIUnitComponent) {
         } else if (detail is LightningChargingUCAsIUnitComponent charging) {
         } else if (detail is LightningChargedUCAsIUnitComponent charged) {
           detailSymbols.Add(

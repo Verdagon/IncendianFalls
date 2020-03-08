@@ -13,10 +13,14 @@ namespace Atharia.Model {
         int depth) {
       bool considerCornersAdjacent = false;
 
+      Pattern pattern = PentagonPattern9.makePentagon9Pattern();
+      if (depth == 2) {
+        pattern = HexPattern.MakeHexPattern();
+      }
       var terrain =
         CellularAutomataTerrainGenerator.Generate(
           game.root,
-          PentagonPattern9.makePentagon9Pattern(),
+          pattern,
           game.rand,
           considerCornersAdjacent,
           12.0f);
@@ -66,7 +70,7 @@ namespace Atharia.Model {
       }
 
       int numSpaces = levelSuperstate.NumWalkableLocations(false);
-      if (depth < 2) {
+      if (depth == 0) {
         EmberDeepUnitsAndItems.FillWithUnits(
           game.rand,
           level,
@@ -82,7 +86,7 @@ namespace Atharia.Model {
           /*numChronolisk=*/ 0 * numSpaces / 200,
           /*numMantisBombardier=*/ 0 * numSpaces / 200,
           /*numLightningTrask=*/ 0 * numSpaces / 200);
-      } else if (depth < 4) {
+      } else if (depth == 2) {
         EmberDeepUnitsAndItems.FillWithUnits(
           game.rand,
           level,
@@ -98,7 +102,7 @@ namespace Atharia.Model {
           /*numChronolisk=*/ 1 * numSpaces / 200,
           /*numMantisBombardier=*/ 0 * numSpaces / 200,
           /*numLightningTrask=*/ 0 * numSpaces / 200);
-      } else if (depth < 6) {
+      } else if (depth == 4) {
         EmberDeepUnitsAndItems.FillWithUnits(
           game.rand,
           level,
@@ -114,7 +118,7 @@ namespace Atharia.Model {
           /*numChronolisk=*/ 1 * numSpaces / 200,
           /*numMantisBombardier=*/ 1 * numSpaces / 200,
           /*numLightningTrask=*/ 0);
-      } else if (depth < 8) {
+      } else if (depth == 8) {
         EmberDeepUnitsAndItems.FillWithUnits(
           game.rand,
           level,
