@@ -30,6 +30,10 @@ namespace IncendianFalls {
       }
       var player = game.player;
 
+      if (player.components.GetAllSlowRod().Count == 0) {
+        return "Can't mire without Mire Staff!";
+      }
+
       Unit victim = context.root.GetUnit(targetUnitId);
       if (!victim.alive) {
         return "Victim is already dead!";

@@ -326,14 +326,15 @@ namespace AthPlayer {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is ManaPotionAsIUnitComponent) {
       } else if (component is HealthPotionAsIUnitComponent) {
+      } else if (component is SlowRodAsIUnitComponent) {
       } else if (component is BlastRodAsIUnitComponent) {
-        unitView.SetDescription(GetUnitViewDescription(unit));
+        //unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is ArmorAsIUnitComponent) {
-        unitView.SetDescription(GetUnitViewDescription(unit));
+        //unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is GlaiveAsIUnitComponent) {
-        unitView.SetDescription(GetUnitViewDescription(unit));
+        //unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is SpeedRingAsIUnitComponent) {
-        unitView.SetDescription(GetUnitViewDescription(unit));
+        //unitView.SetDescription(GetUnitViewDescription(unit));
       } else {
         Asserts.Assert(false, "Unknown component: " + component);
       }
@@ -514,63 +515,64 @@ namespace AthPlayer {
                       false,
                       new UnityEngine.Color(1, 1, 1, 1.5f))));
         } else if (detail is GlaiveAsIUnitComponent) {
-          detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  detail.id,
-                  new ExtrudedSymbolDescription(
-                      RenderPriority.SYMBOL,
-                      new SymbolDescription(
-                          "s",
-                            50,
-                          new UnityEngine.Color(1, 1, 1, 1.5f),
-                          0,
-                          OutlineMode.WithBackOutline,
-                    new UnityEngine.Color(0, 0, 0)),
-                      true, new UnityEngine.Color(1, 1, 1, 1.5f))));
+          //detailSymbols.Add(
+          //    new KeyValuePair<int, ExtrudedSymbolDescription>(
+          //        detail.id,
+          //        new ExtrudedSymbolDescription(
+          //            RenderPriority.SYMBOL,
+          //            new SymbolDescription(
+          //                "s",
+          //                  50,
+          //                new UnityEngine.Color(1, 1, 1, 1.5f),
+          //                0,
+          //                OutlineMode.WithBackOutline,
+          //          new UnityEngine.Color(0, 0, 0)),
+          //            true, new UnityEngine.Color(1, 1, 1, 1.5f))));
         } else if (detail is SpeedRingAsIUnitComponent) {
-          detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  detail.id,
-                  new ExtrudedSymbolDescription(
-                      RenderPriority.SYMBOL,
-                      new SymbolDescription(
-                          "4",
-                            50,
-                          new UnityEngine.Color(1, 1, 1, 1.5f),
-                          0,
-                          OutlineMode.WithBackOutline,
-                    new UnityEngine.Color(0, 0, 0)),
-                      true, new UnityEngine.Color(1, 1, 1, 1.5f))));
+          //detailSymbols.Add(
+          //    new KeyValuePair<int, ExtrudedSymbolDescription>(
+          //        detail.id,
+          //        new ExtrudedSymbolDescription(
+          //            RenderPriority.SYMBOL,
+          //            new SymbolDescription(
+          //                "4",
+          //                  50,
+          //                new UnityEngine.Color(1, 1, 1, 1.5f),
+          //                0,
+          //                OutlineMode.WithBackOutline,
+          //          new UnityEngine.Color(0, 0, 0)),
+          //            true, new UnityEngine.Color(1, 1, 1, 1.5f))));
         } else if (detail is ArmorAsIUnitComponent) {
-          detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  detail.id,
-                  new ExtrudedSymbolDescription(
-                      RenderPriority.SYMBOL,
-                      new SymbolDescription(
-                          "zero",
-                            50,
-                          new UnityEngine.Color(1, 1, 1, 1.5f),
-                          0,
-                          OutlineMode.WithBackOutline,
-                          new UnityEngine.Color(0, 0, 0)),
-                      true,
-                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+          //detailSymbols.Add(
+          //    new KeyValuePair<int, ExtrudedSymbolDescription>(
+          //        detail.id,
+          //        new ExtrudedSymbolDescription(
+          //            RenderPriority.SYMBOL,
+          //            new SymbolDescription(
+          //                "zero",
+          //                  50,
+          //                new UnityEngine.Color(1, 1, 1, 1.5f),
+          //                0,
+          //                OutlineMode.WithBackOutline,
+          //                new UnityEngine.Color(0, 0, 0)),
+          //            true,
+          //            new UnityEngine.Color(1, 1, 1, 1.5f))));
+        } else if (detail is SlowRodAsIUnitComponent) {
         } else if (detail is BlastRodAsIUnitComponent) {
-          detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  detail.id,
-                  new ExtrudedSymbolDescription(
-                      RenderPriority.SYMBOL,
-                      new SymbolDescription(
-                          "w",
-                            50,
-                          new UnityEngine.Color(1, 1, 1, 1.5f),
-                          0,
-                          OutlineMode.WithBackOutline,
-                          new UnityEngine.Color(0, 0, 0)),
-                      true,
-                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+          //detailSymbols.Add(
+          //    new KeyValuePair<int, ExtrudedSymbolDescription>(
+          //        detail.id,
+          //        new ExtrudedSymbolDescription(
+          //            RenderPriority.SYMBOL,
+          //            new SymbolDescription(
+          //                "w",
+          //                  50,
+          //                new UnityEngine.Color(1, 1, 1, 1.5f),
+          //                0,
+          //                OutlineMode.WithBackOutline,
+          //                new UnityEngine.Color(0, 0, 0)),
+          //            true,
+          //            new UnityEngine.Color(1, 1, 1, 1.5f))));
         } else if (detail is HealthPotionAsIUnitComponent) {
         } else if (detail is ManaPotionAsIUnitComponent) {
         } else {

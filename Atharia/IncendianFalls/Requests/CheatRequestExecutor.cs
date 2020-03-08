@@ -78,6 +78,10 @@ namespace IncendianFalls {
           game.player.components.Add(
             game.root.EffectBlastRodCreate().AsIUnitComponent());
           break;
+        case "gimmeslowrod":
+          game.player.components.Add(
+            game.root.EffectSlowRodCreate().AsIUnitComponent());
+          break;
         case "gimmearmor":
           game.player.components.Add(
             game.root.EffectArmorCreate().AsIUnitComponent());

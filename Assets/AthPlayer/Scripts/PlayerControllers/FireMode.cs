@@ -22,7 +22,7 @@ namespace AthPlayer {
       this.delegat = delegat;
       this.narrator = narrator;
 
-      narrator.ShowMessage("Preparing to fire! Select an unit to fire at.");
+      narrator.ShowMessage("Preparing to fire! Select a unit to fire at.");
     }
 
     private Unit FindUnitAtLocation(Location location) {

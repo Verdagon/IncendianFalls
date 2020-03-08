@@ -17,6 +17,27 @@ public class BlastRodAsIUnitComponent : IUnitComponent {
   public void FindReachableObjects(SortedSet<int> foundIds) {
     obj.FindReachableObjects(foundIds);
   }
+  public bool Is(IPickUpReactorItem that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IPickUpReactorItem that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IPickUpReactorItem AsIPickUpReactorItem() {
+    return new BlastRodAsIPickUpReactorItem(obj);
+  }
   public bool Is(ICloneableUC that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");

@@ -56,3 +56,13 @@ mut interface IUsableItem {
 mut interface IImmediatelyUseItem {
   IImmediatelyUseItem isa IUsableItem;
 }
+
+mut interface IPickUpReactorItem {
+  IPickUpReactorItem isa IItem;
+
+  fn ReactToPickUp(
+    game: &Game,
+    superstate: $Superstate,
+    unit: &Unit)
+  : Void;
+}

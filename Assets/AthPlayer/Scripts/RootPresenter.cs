@@ -50,9 +50,10 @@ namespace AthPlayer {
       replayLogger = new ReplayLogger(modelSS, new string[] { "Latest.sslog", timestamp + ".sslog" });
       ss = new SuperstructureWrapper(modelSS);
 
-      //var randomSeed = timestamp;
-      Debug.LogWarning("Hardcoding random seed!");
-      var randomSeed = 1525224206;
+      var randomSeed = timestamp;
+      Debug.Log("Random seed: " + randomSeed);
+      //Debug.LogWarning("Hardcoding random seed!");
+      //var randomSeed = 1525224206;
       //var game = ss.RequestSetupIncendianFallsGame(randomSeed, false);
       var game = ss.RequestSetupEmberDeepGame(randomSeed, sceneInitParamStartLevel, false);
       //var game = ss.RequestSetupGauntletGame(randomSeed, false);
@@ -121,6 +122,9 @@ namespace AthPlayer {
       }
       if (Input.GetKeyUp(KeyCode.Alpha8)) {
         playerController.ActivateCheat("gimmeblastrod");
+      }
+      if (Input.GetKeyUp(KeyCode.Alpha6)) {
+        playerController.ActivateCheat("gimmeslowrod");
       }
       if (Input.GetKeyUp(KeyCode.Alpha7)) {
         playerController.ActivateCheat("gimmearmor");

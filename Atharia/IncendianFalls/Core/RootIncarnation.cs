@@ -92,6 +92,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<ItemTTCIncarnation>> incarnationsItemTTC;
   public readonly SortedDictionary<int, VersionAndIncarnation<HealthPotionIncarnation>> incarnationsHealthPotion;
   public readonly SortedDictionary<int, VersionAndIncarnation<GlaiveIncarnation>> incarnationsGlaive;
+  public readonly SortedDictionary<int, VersionAndIncarnation<SlowRodIncarnation>> incarnationsSlowRod;
   public readonly SortedDictionary<int, VersionAndIncarnation<BlastRodIncarnation>> incarnationsBlastRod;
   public readonly SortedDictionary<int, VersionAndIncarnation<ArmorIncarnation>> incarnationsArmor;
   public readonly SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>> incarnationsSquareCaveLevelController;
@@ -133,6 +134,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<HealthPotionStrongMutSetIncarnation>> incarnationsHealthPotionStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<SpeedRingStrongMutSetIncarnation>> incarnationsSpeedRingStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<GlaiveStrongMutSetIncarnation>> incarnationsGlaiveStrongMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<SlowRodStrongMutSetIncarnation>> incarnationsSlowRodStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<BlastRodStrongMutSetIncarnation>> incarnationsBlastRodStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<ArmorStrongMutSetIncarnation>> incarnationsArmorStrongMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<HoldPositionImpulseStrongMutSetIncarnation>> incarnationsHoldPositionImpulseStrongMutSet;
@@ -208,6 +210,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<HealthPotionMutSetIncarnation>> incarnationsHealthPotionMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<SpeedRingMutSetIncarnation>> incarnationsSpeedRingMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>> incarnationsGlaiveMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<SlowRodMutSetIncarnation>> incarnationsSlowRodMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<BlastRodMutSetIncarnation>> incarnationsBlastRodMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>> incarnationsArmorMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<SorcerousUCMutSetIncarnation>> incarnationsSorcerousUCMutSet;
@@ -303,6 +306,7 @@ public class RootIncarnation {
     this.incarnationsItemTTC = new SortedDictionary<int, VersionAndIncarnation<ItemTTCIncarnation>>();
     this.incarnationsHealthPotion = new SortedDictionary<int, VersionAndIncarnation<HealthPotionIncarnation>>();
     this.incarnationsGlaive = new SortedDictionary<int, VersionAndIncarnation<GlaiveIncarnation>>();
+    this.incarnationsSlowRod = new SortedDictionary<int, VersionAndIncarnation<SlowRodIncarnation>>();
     this.incarnationsBlastRod = new SortedDictionary<int, VersionAndIncarnation<BlastRodIncarnation>>();
     this.incarnationsArmor = new SortedDictionary<int, VersionAndIncarnation<ArmorIncarnation>>();
     this.incarnationsSquareCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>>();
@@ -344,6 +348,7 @@ public class RootIncarnation {
     this.incarnationsHealthPotionStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<HealthPotionStrongMutSetIncarnation>>();
     this.incarnationsSpeedRingStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<SpeedRingStrongMutSetIncarnation>>();
     this.incarnationsGlaiveStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveStrongMutSetIncarnation>>();
+    this.incarnationsSlowRodStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<SlowRodStrongMutSetIncarnation>>();
     this.incarnationsBlastRodStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<BlastRodStrongMutSetIncarnation>>();
     this.incarnationsArmorStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorStrongMutSetIncarnation>>();
     this.incarnationsHoldPositionImpulseStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<HoldPositionImpulseStrongMutSetIncarnation>>();
@@ -419,6 +424,7 @@ public class RootIncarnation {
     this.incarnationsHealthPotionMutSet = new SortedDictionary<int, VersionAndIncarnation<HealthPotionMutSetIncarnation>>();
     this.incarnationsSpeedRingMutSet = new SortedDictionary<int, VersionAndIncarnation<SpeedRingMutSetIncarnation>>();
     this.incarnationsGlaiveMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>>();
+    this.incarnationsSlowRodMutSet = new SortedDictionary<int, VersionAndIncarnation<SlowRodMutSetIncarnation>>();
     this.incarnationsBlastRodMutSet = new SortedDictionary<int, VersionAndIncarnation<BlastRodMutSetIncarnation>>();
     this.incarnationsArmorMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>>();
     this.incarnationsSorcerousUCMutSet = new SortedDictionary<int, VersionAndIncarnation<SorcerousUCMutSetIncarnation>>();
@@ -519,6 +525,7 @@ public class RootIncarnation {
     this.incarnationsItemTTC = new SortedDictionary<int, VersionAndIncarnation<ItemTTCIncarnation>>(that.incarnationsItemTTC);
     this.incarnationsHealthPotion = new SortedDictionary<int, VersionAndIncarnation<HealthPotionIncarnation>>(that.incarnationsHealthPotion);
     this.incarnationsGlaive = new SortedDictionary<int, VersionAndIncarnation<GlaiveIncarnation>>(that.incarnationsGlaive);
+    this.incarnationsSlowRod = new SortedDictionary<int, VersionAndIncarnation<SlowRodIncarnation>>(that.incarnationsSlowRod);
     this.incarnationsBlastRod = new SortedDictionary<int, VersionAndIncarnation<BlastRodIncarnation>>(that.incarnationsBlastRod);
     this.incarnationsArmor = new SortedDictionary<int, VersionAndIncarnation<ArmorIncarnation>>(that.incarnationsArmor);
     this.incarnationsSquareCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>>(that.incarnationsSquareCaveLevelController);
@@ -560,6 +567,7 @@ public class RootIncarnation {
     this.incarnationsHealthPotionStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<HealthPotionStrongMutSetIncarnation>>(that.incarnationsHealthPotionStrongMutSet);
     this.incarnationsSpeedRingStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<SpeedRingStrongMutSetIncarnation>>(that.incarnationsSpeedRingStrongMutSet);
     this.incarnationsGlaiveStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveStrongMutSetIncarnation>>(that.incarnationsGlaiveStrongMutSet);
+    this.incarnationsSlowRodStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<SlowRodStrongMutSetIncarnation>>(that.incarnationsSlowRodStrongMutSet);
     this.incarnationsBlastRodStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<BlastRodStrongMutSetIncarnation>>(that.incarnationsBlastRodStrongMutSet);
     this.incarnationsArmorStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorStrongMutSetIncarnation>>(that.incarnationsArmorStrongMutSet);
     this.incarnationsHoldPositionImpulseStrongMutSet = new SortedDictionary<int, VersionAndIncarnation<HoldPositionImpulseStrongMutSetIncarnation>>(that.incarnationsHoldPositionImpulseStrongMutSet);
@@ -635,6 +643,7 @@ public class RootIncarnation {
     this.incarnationsHealthPotionMutSet = new SortedDictionary<int, VersionAndIncarnation<HealthPotionMutSetIncarnation>>(that.incarnationsHealthPotionMutSet);
     this.incarnationsSpeedRingMutSet = new SortedDictionary<int, VersionAndIncarnation<SpeedRingMutSetIncarnation>>(that.incarnationsSpeedRingMutSet);
     this.incarnationsGlaiveMutSet = new SortedDictionary<int, VersionAndIncarnation<GlaiveMutSetIncarnation>>(that.incarnationsGlaiveMutSet);
+    this.incarnationsSlowRodMutSet = new SortedDictionary<int, VersionAndIncarnation<SlowRodMutSetIncarnation>>(that.incarnationsSlowRodMutSet);
     this.incarnationsBlastRodMutSet = new SortedDictionary<int, VersionAndIncarnation<BlastRodMutSetIncarnation>>(that.incarnationsBlastRodMutSet);
     this.incarnationsArmorMutSet = new SortedDictionary<int, VersionAndIncarnation<ArmorMutSetIncarnation>>(that.incarnationsArmorMutSet);
     this.incarnationsSorcerousUCMutSet = new SortedDictionary<int, VersionAndIncarnation<SorcerousUCMutSetIncarnation>>(that.incarnationsSorcerousUCMutSet);

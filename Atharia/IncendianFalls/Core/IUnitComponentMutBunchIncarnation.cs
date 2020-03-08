@@ -27,6 +27,7 @@ public class IUnitComponentMutBunchIncarnation {
   public readonly int membersHealthPotionMutSet;
   public readonly int membersSpeedRingMutSet;
   public readonly int membersGlaiveMutSet;
+  public readonly int membersSlowRodMutSet;
   public readonly int membersBlastRodMutSet;
   public readonly int membersArmorMutSet;
   public readonly int membersSorcerousUCMutSet;
@@ -55,6 +56,7 @@ public class IUnitComponentMutBunchIncarnation {
       int membersHealthPotionMutSet,
       int membersSpeedRingMutSet,
       int membersGlaiveMutSet,
+      int membersSlowRodMutSet,
       int membersBlastRodMutSet,
       int membersArmorMutSet,
       int membersSorcerousUCMutSet,
@@ -82,6 +84,7 @@ public class IUnitComponentMutBunchIncarnation {
     this.membersHealthPotionMutSet = membersHealthPotionMutSet;
     this.membersSpeedRingMutSet = membersSpeedRingMutSet;
     this.membersGlaiveMutSet = membersGlaiveMutSet;
+    this.membersSlowRodMutSet = membersSlowRodMutSet;
     this.membersBlastRodMutSet = membersBlastRodMutSet;
     this.membersArmorMutSet = membersArmorMutSet;
     this.membersSorcerousUCMutSet = membersSorcerousUCMutSet;

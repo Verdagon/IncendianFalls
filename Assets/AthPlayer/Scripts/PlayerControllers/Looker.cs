@@ -87,13 +87,24 @@ namespace AthPlayer {
         } else if (detail is SummonAICapabilityUCAsIUnitComponent) {
         } else if (detail is BaseOffenseUCAsIUnitComponent) {
         } else if (detail is BaseDefenseUCAsIUnitComponent) {
+        } else if (detail is SlowRodAsIUnitComponent) {
+          symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                new SymbolDescription(
+                    "w",
+                    50,
+                    new UnityEngine.Color(0, .5f, 1, 1.5f),
+                    0,
+                    OutlineMode.NoOutline,
+                    new UnityEngine.Color(0, 0, 0)),
+                "Mire Staff"));
         } else if (detail is BlastRodAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "w",
                     50,
-                    new UnityEngine.Color(1, 1, 1, 1.5f),
+                    new UnityEngine.Color(1, .5f, 0, 1.5f),
                     0,
                     OutlineMode.NoOutline,
                     new UnityEngine.Color(0, 0, 0)),

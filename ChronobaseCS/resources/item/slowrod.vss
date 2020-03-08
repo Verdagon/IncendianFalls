@@ -1,0 +1,26 @@
+
+mut struct SlowRod {
+  SlowRod isa IItem;
+  SlowRod isa ICloneableUC;
+  SlowRod isa IPickUpReactorItem;
+
+  fn Destruct(this: SlowRod overrides IDestructible): Void {
+    SlowRodExtensions.Destruct
+  }
+
+  fn ClonifyAndReturnNewReal(
+      armor: SlowRod overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    SlowRodExtensions.ClonifyAndReturnNewReal
+  }
+
+  fn ReactToPickUp(
+    this: SlowRod overrides IPickUpReactorItem,
+    game: &Game,
+    superstate: $Superstate,
+    unit: &Unit)
+  : Void {
+    SlowRodExtensions.ReactToPickUp
+  }
+}

@@ -250,6 +250,9 @@ namespace Domino {
     }
 
     public void SwitchToMireMode() {
+      if (game.player.components.GetAllSlowRod().Count == 0) {
+        narrator.ShowMessage("Can't mire, find a Mire Staff first!");
+      }
       mode = new MireMode(ss, superstate, game, this, narrator);
     }
 

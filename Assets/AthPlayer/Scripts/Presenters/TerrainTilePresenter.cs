@@ -428,7 +428,21 @@ namespace AthPlayer {
                     new SymbolDescription(
                         "w",
                               50,
-                        new UnityEngine.Color(1f, 1f, 1.0f, 1.5f),
+                        new UnityEngine.Color(1f, .5f, 0f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+                    true,
+                    new UnityEngine.Color(.75f, .75f, 0)));
+          } else if (item is SlowRodAsIItem) {
+            itemSymbolDescriptionByItemId.Add(
+                ttc.id,
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "w",
+                              50,
+                        new UnityEngine.Color(0f, .5f, 1f, 1.5f),
                         0,
                         OutlineMode.WithBackOutline,
                         new UnityEngine.Color(0, 0, 0)),
@@ -483,20 +497,6 @@ namespace AthPlayer {
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
                         "comma",
-                              50,
-                        new UnityEngine.Color(.25f, .7f, 1.0f, 1.5f),
-                        0,
-                        OutlineMode.WithBackOutline,
-                        new UnityEngine.Color(0, 0, 0)),
-                    true,
-                    new UnityEngine.Color(0f, 0f, 0)));
-          } else if (item is BlastRodAsIItem) {
-            itemSymbolDescriptionByItemId.Add(
-                ttc.id,
-                new ExtrudedSymbolDescription(
-                    RenderPriority.SYMBOL,
-                    new SymbolDescription(
-                        "w",
                               50,
                         new UnityEngine.Color(.25f, .7f, 1.0f, 1.5f),
                         0,

@@ -22,7 +22,7 @@ namespace AthPlayer {
       this.delegat = delegat;
       this.narrator = narrator;
 
-      narrator.ShowMessage("Preparing to fire! Select an unit to fire at.");
+      narrator.ShowMessage("Preparing to cast Mire! Select a unit to Mire.");
     }
 
     private Unit FindUnitAtLocation(Location location) {
@@ -44,7 +44,7 @@ namespace AthPlayer {
 
       var unit = FindUnitAtLocation(location);
       if (!unit.Exists()) {
-        narrator.ShowMessage("No unit there. Canceling slow!");
+        narrator.ShowMessage("No unit there. Canceling Mire!");
         delegat.SwitchToNormalMode();
         delegat.AfterDidSomething();
         return;
@@ -64,13 +64,13 @@ namespace AthPlayer {
     }
 
     public void DefyClicked() {
-      narrator.ShowMessage("You must select a unit to slow them. Canceling slow!");
+      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void ActivateCheat(string cheatName) {
-      narrator.ShowMessage("You must select a unit to slow them. Canceling slow!");
+      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
@@ -82,37 +82,37 @@ namespace AthPlayer {
     }
 
     public void FireBombClicked() {
-      narrator.ShowMessage("You must select a unit to slow them. Canceling slow!");
+      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void MireClicked() {
-      narrator.ShowMessage("You must select a unit to slow them. Canceling slow!");
+      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void CounterClicked() {
-      narrator.ShowMessage("You must select a unit to slow them. Canceling slow!");
+      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void InteractClicked() {
-      narrator.ShowMessage("You must select a unit to slow them. Canceling slow!");
+      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void TimeShiftClicked() {
-      narrator.ShowMessage("You must select a unit to slow them. Canceling slow!");
+      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void TimeAnchorMoveClicked() {
-      narrator.ShowMessage("You must select a unit to slow them. Canceling slow!");
+      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }

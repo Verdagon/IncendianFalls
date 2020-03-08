@@ -2,6 +2,7 @@
 mut struct BlastRod {
   BlastRod isa IItem;
   BlastRod isa ICloneableUC;
+  BlastRod isa IPickUpReactorItem;
 
   fn Destruct(this: BlastRod overrides IDestructible): Void {
     BlastRodExtensions.Destruct
@@ -12,5 +13,14 @@ mut struct BlastRod {
       newRoot: $Root)
   : ICloneableUC {
     BlastRodExtensions.ClonifyAndReturnNewReal
+  }
+
+  fn ReactToPickUp(
+    this: BlastRod overrides IPickUpReactorItem,
+    game: &Game,
+    superstate: $Superstate,
+    unit: &Unit)
+  : Void {
+    BlastRodExtensions.ReactToPickUp
   }
 }

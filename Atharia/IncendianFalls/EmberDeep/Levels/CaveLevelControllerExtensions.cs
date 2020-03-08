@@ -5,7 +5,7 @@ using IncendianFalls;
 namespace Atharia.Model {
   public static class CaveLevelControllerExtensions {
     public static void LoadLevel(
-        out Level level,
+        out Level levelRet,
         out LevelSuperstate levelSuperstate,
         out Location entryLocationRet,
         Game game,
@@ -35,13 +35,13 @@ namespace Atharia.Model {
       var borderLocations = terrain.pattern.GetAdjacentLocations(locations, false, true);
       foreach (var borderLocation in borderLocations) {
         if (!terrain.tiles.ContainsKey(borderLocation)) {
-          var tile = game.root.EffectTerrainTileCreate(3, ITerrainTileComponentMutBunch.New(game.root));
+          var tile = game.root.EffectTerrainTileCreate(2, ITerrainTileComponentMutBunch.New(game.root));
           tile.components.Add(game.root.EffectCaveWallTTCCreate().AsITerrainTileComponent());
           terrain.tiles.Add(borderLocation, tile);
         }
       }
 
-      level =
+      var level =
           game.root.EffectLevelCreate(
           new Vec3(0, -8, 16),
               terrain,
@@ -63,7 +63,18 @@ namespace Atharia.Model {
 
       level.controller = game.root.EffectCaveLevelControllerCreate(level).AsILevelController();
 
-      if (depth < 2) {
+      if (depth == 0) {
+        var nextToExitLocation =
+          levelSuperstate.GetNRandomWalkableLocations(
+            level.terrain,
+            game.rand,
+            1,
+            (loc) => level.terrain.pattern.LocationsAreAdjacent(loc, exitLocation, false), true, true)[0];
+        level.terrain.tiles[nextToExitLocation].components.Add(
+          game.root.EffectItemTTCCreate(
+            game.root.EffectSlowRodCreate().AsIItem())
+          .AsITerrainTileComponent());
+
         EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .02f, 0f);
       } else {
         EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .02f, .02f);
@@ -138,6 +149,7 @@ namespace Atharia.Model {
 
       game.levels.Add(level);
 
+      levelRet = level;
       entryLocationRet = entryLocation;
     }
 

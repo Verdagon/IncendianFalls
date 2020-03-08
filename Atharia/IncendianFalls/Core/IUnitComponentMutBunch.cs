@@ -123,6 +123,10 @@ public class IUnitComponentMutBunch {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersGlaiveMutSet");
     }
 
+    if (!root.SlowRodMutSetExists(membersSlowRodMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersSlowRodMutSet");
+    }
+
     if (!root.BlastRodMutSetExists(membersBlastRodMutSet.id)) {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersBlastRodMutSet");
     }
@@ -213,6 +217,9 @@ public class IUnitComponentMutBunch {
     }
     if (root.GlaiveMutSetExists(membersGlaiveMutSet.id)) {
       membersGlaiveMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.SlowRodMutSetExists(membersSlowRodMutSet.id)) {
+      membersSlowRodMutSet.FindReachableObjects(foundIds);
     }
     if (root.BlastRodMutSetExists(membersBlastRodMutSet.id)) {
       membersBlastRodMutSet.FindReachableObjects(foundIds);
@@ -437,6 +444,15 @@ public class IUnitComponentMutBunch {
       return new GlaiveMutSet(root, incarnation.membersGlaiveMutSet);
     }
                        }
+  public SlowRodMutSet membersSlowRodMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersSlowRodMutSet of null!");
+      }
+      return new SlowRodMutSet(root, incarnation.membersSlowRodMutSet);
+    }
+                       }
   public BlastRodMutSet membersBlastRodMutSet {
 
     get {
@@ -528,6 +544,8 @@ public class IUnitComponentMutBunch {
       root.EffectSpeedRingMutSetCreate()
 ,
       root.EffectGlaiveMutSetCreate()
+,
+      root.EffectSlowRodMutSetCreate()
 ,
       root.EffectBlastRodMutSetCreate()
 ,
@@ -671,6 +689,12 @@ public class IUnitComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.GlaiveExists(elementI.id)) {
       this.membersGlaiveMutSet.Add(root.GetGlaive(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.SlowRodExists(elementI.id)) {
+      this.membersSlowRodMutSet.Add(root.GetSlowRod(elementI.id));
       return;
     }
 
@@ -840,6 +864,12 @@ public class IUnitComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.SlowRodExists(elementI.id)) {
+      this.membersSlowRodMutSet.Remove(root.GetSlowRod(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.BlastRodExists(elementI.id)) {
       this.membersBlastRodMutSet.Remove(root.GetBlastRod(elementI.id));
       return;
@@ -893,6 +923,7 @@ public class IUnitComponentMutBunch {
     this.membersHealthPotionMutSet.Clear();
     this.membersSpeedRingMutSet.Clear();
     this.membersGlaiveMutSet.Clear();
+    this.membersSlowRodMutSet.Clear();
     this.membersBlastRodMutSet.Clear();
     this.membersArmorMutSet.Clear();
     this.membersSorcerousUCMutSet.Clear();
@@ -924,6 +955,7 @@ public class IUnitComponentMutBunch {
         this.membersHealthPotionMutSet.Count +
         this.membersSpeedRingMutSet.Count +
         this.membersGlaiveMutSet.Count +
+        this.membersSlowRodMutSet.Count +
         this.membersBlastRodMutSet.Count +
         this.membersArmorMutSet.Count +
         this.membersSorcerousUCMutSet.Count +
@@ -962,6 +994,7 @@ public class IUnitComponentMutBunch {
     var tempMembersHealthPotionMutSet = this.membersHealthPotionMutSet;
     var tempMembersSpeedRingMutSet = this.membersSpeedRingMutSet;
     var tempMembersGlaiveMutSet = this.membersGlaiveMutSet;
+    var tempMembersSlowRodMutSet = this.membersSlowRodMutSet;
     var tempMembersBlastRodMutSet = this.membersBlastRodMutSet;
     var tempMembersArmorMutSet = this.membersArmorMutSet;
     var tempMembersSorcerousUCMutSet = this.membersSorcerousUCMutSet;
@@ -991,6 +1024,7 @@ public class IUnitComponentMutBunch {
     tempMembersHealthPotionMutSet.Destruct();
     tempMembersSpeedRingMutSet.Destruct();
     tempMembersGlaiveMutSet.Destruct();
+    tempMembersSlowRodMutSet.Destruct();
     tempMembersBlastRodMutSet.Destruct();
     tempMembersArmorMutSet.Destruct();
     tempMembersSorcerousUCMutSet.Destruct();
@@ -1063,6 +1097,9 @@ public class IUnitComponentMutBunch {
     }
     foreach (var element in this.membersGlaiveMutSet) {
       yield return new GlaiveAsIUnitComponent(element);
+    }
+    foreach (var element in this.membersSlowRodMutSet) {
+      yield return new SlowRodAsIUnitComponent(element);
     }
     foreach (var element in this.membersBlastRodMutSet) {
       yield return new BlastRodAsIUnitComponent(element);
@@ -1542,6 +1579,27 @@ public class IUnitComponentMutBunch {
         return Glaive.Null;
       }
     }
+    public List<SlowRod> GetAllSlowRod() {
+      var result = new List<SlowRod>();
+      foreach (var thing in this.membersSlowRodMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<SlowRod> ClearAllSlowRod() {
+      var result = new List<SlowRod>();
+      this.membersSlowRodMutSet.Clear();
+      return result;
+    }
+    public SlowRod GetOnlySlowRodOrNull() {
+      var result = GetAllSlowRod();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return SlowRod.Null;
+      }
+    }
     public List<BlastRod> GetAllBlastRod() {
       var result = new List<BlastRod>();
       foreach (var thing in this.membersBlastRodMutSet) {
@@ -1709,6 +1767,10 @@ public class IUnitComponentMutBunch {
         result.Add(
             new GlaiveAsICloneableUC(obj));
       }
+      foreach (var obj in this.membersSlowRodMutSet) {
+        result.Add(
+            new SlowRodAsICloneableUC(obj));
+      }
       foreach (var obj in this.membersBlastRodMutSet) {
         result.Add(
             new BlastRodAsICloneableUC(obj));
@@ -1728,6 +1790,7 @@ public class IUnitComponentMutBunch {
       this.membersBaseCombatTimeUCMutSet.Clear();
       this.membersSpeedRingMutSet.Clear();
       this.membersGlaiveMutSet.Clear();
+      this.membersSlowRodMutSet.Clear();
       this.membersBlastRodMutSet.Clear();
       this.membersArmorMutSet.Clear();
       return result;
@@ -1963,6 +2026,33 @@ public class IUnitComponentMutBunch {
         return NullIOffenseFactorUC.Null;
       }
     }
+                 public List<IPickUpReactorItem> GetAllIPickUpReactorItem() {
+      var result = new List<IPickUpReactorItem>();
+      foreach (var obj in this.membersSlowRodMutSet) {
+        result.Add(
+            new SlowRodAsIPickUpReactorItem(obj));
+      }
+      foreach (var obj in this.membersBlastRodMutSet) {
+        result.Add(
+            new BlastRodAsIPickUpReactorItem(obj));
+      }
+      return result;
+    }
+    public List<IPickUpReactorItem> ClearAllIPickUpReactorItem() {
+      var result = new List<IPickUpReactorItem>();
+      this.membersSlowRodMutSet.Clear();
+      this.membersBlastRodMutSet.Clear();
+      return result;
+    }
+    public IPickUpReactorItem GetOnlyIPickUpReactorItemOrNull() {
+      var result = GetAllIPickUpReactorItem();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIPickUpReactorItem.Null;
+      }
+    }
                  public List<IPreActingUC> GetAllIPreActingUC() {
       var result = new List<IPreActingUC>();
       foreach (var obj in this.membersDoomedUCMutSet) {
@@ -2082,6 +2172,10 @@ public class IUnitComponentMutBunch {
         result.Add(
             new GlaiveAsIItem(obj));
       }
+      foreach (var obj in this.membersSlowRodMutSet) {
+        result.Add(
+            new SlowRodAsIItem(obj));
+      }
       foreach (var obj in this.membersBlastRodMutSet) {
         result.Add(
             new BlastRodAsIItem(obj));
@@ -2098,6 +2192,7 @@ public class IUnitComponentMutBunch {
       this.membersHealthPotionMutSet.Clear();
       this.membersSpeedRingMutSet.Clear();
       this.membersGlaiveMutSet.Clear();
+      this.membersSlowRodMutSet.Clear();
       this.membersBlastRodMutSet.Clear();
       this.membersArmorMutSet.Clear();
       return result;
