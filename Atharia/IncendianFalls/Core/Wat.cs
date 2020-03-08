@@ -38,6 +38,10 @@ public class Wat {
     if (!root.IItemStrongMutBunchExists(items.id)) {
       violations.Add("Null constraint violated! Wat#" + id + ".items");
     }
+
+    if (!root.IImpulseStrongMutBunchExists(impulses.id)) {
+      violations.Add("Null constraint violated! Wat#" + id + ".impulses");
+    }
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
     if (foundIds.Contains(id)) {
@@ -46,6 +50,9 @@ public class Wat {
     foundIds.Add(id);
     if (root.IItemStrongMutBunchExists(items.id)) {
       items.FindReachableObjects(foundIds);
+    }
+    if (root.IImpulseStrongMutBunchExists(impulses.id)) {
+      impulses.FindReachableObjects(foundIds);
     }
   }
   public bool Is(Wat that) {
@@ -64,6 +71,15 @@ public class Wat {
         throw new Exception("Tried to get member items of null!");
       }
       return new IItemStrongMutBunch(root, incarnation.items);
+    }
+                       }
+  public IImpulseStrongMutBunch impulses {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member impulses of null!");
+      }
+      return new IImpulseStrongMutBunch(root, incarnation.impulses);
     }
                        }
 }

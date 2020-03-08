@@ -53,5 +53,8 @@ public class PursueImpulse {
          public int weight {
     get { return incarnation.weight; }
   }
+  public bool isClearPath {
+    get { return incarnation.isClearPath; }
+  }
 }
 }

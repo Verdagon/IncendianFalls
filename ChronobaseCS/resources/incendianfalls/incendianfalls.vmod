@@ -62,6 +62,7 @@ unit/stats/sorcerous.vss
 unit/summon.vss
 unit/temporaryclone.vss
 unit/doomed.vss
+unit/lightningcharge.vss
 unit/unit.vss
 unit/unitcomponent.vss
 unit/unitevent.vss

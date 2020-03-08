@@ -132,6 +132,18 @@ namespace AthPlayer {
                     new UnityEngine.Color(0, 0, 0)),
                 "Ring of Speed"));
         } else if (detail is TemporaryCloneAICapabilityUCAsIUnitComponent) {
+        } else if (detail is LightningChargingUCAsIUnitComponent) {
+        } else if (detail is LightningChargedUCAsIUnitComponent) {
+          symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                  new SymbolDescription(
+                      "e",
+                    50,
+                      new UnityEngine.Color(1, 1, 1, 1.5f),
+                      0,
+                      OutlineMode.NoOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  "Lightning Charged"));
         } else if (detail is TimeCloneAICapabilityUCAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(

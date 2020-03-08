@@ -37,8 +37,10 @@ mut interface ICloneableUC {
 
 // This is just here to force it to generate a MutBunch:IItem, which we
 // can use to downcast IItem to IImmediatelyUseItem.
+// Same with impulses.
 mut struct Wat {
   items: MutBunch:&IItem;
+  impulses: MutBunch:&IImpulse;
 }
 
 mut interface IUsableItem {

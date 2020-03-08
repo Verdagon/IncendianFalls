@@ -9,7 +9,8 @@ namespace IncendianFalls {
       var components = IUnitComponentMutBunch.New(root);
       components.Add(root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
       components.Add(root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
-      components.Add(root.EffectBaseOffenseUCCreate(25, 100).AsIUnitComponent());
+      components.Add(root.EffectBaseOffenseUCCreate(9, 100).AsIUnitComponent());
+      components.Add(root.EffectLightningChargingUCCreate().AsIUnitComponent());
       return
           root.EffectUnitCreate(
               root.EffectIUnitEventMutListCreate(),

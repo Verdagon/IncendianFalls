@@ -35,6 +35,10 @@ public class IPostActingUCWeakMutBunch {
   }
   public void CheckForNullViolations(List<string> violations) {
 
+    if (!root.LightningChargedUCWeakMutSetExists(membersLightningChargedUCWeakMutSet.id)) {
+      violations.Add("Null constraint violated! IPostActingUCWeakMutBunch#" + id + ".membersLightningChargedUCWeakMutSet");
+    }
+
     if (!root.TimeCloneAICapabilityUCWeakMutSetExists(membersTimeCloneAICapabilityUCWeakMutSet.id)) {
       violations.Add("Null constraint violated! IPostActingUCWeakMutBunch#" + id + ".membersTimeCloneAICapabilityUCWeakMutSet");
     }
@@ -44,6 +48,9 @@ public class IPostActingUCWeakMutBunch {
       return;
     }
     foundIds.Add(id);
+    if (root.LightningChargedUCWeakMutSetExists(membersLightningChargedUCWeakMutSet.id)) {
+      membersLightningChargedUCWeakMutSet.FindReachableObjects(foundIds);
+    }
     if (root.TimeCloneAICapabilityUCWeakMutSetExists(membersTimeCloneAICapabilityUCWeakMutSet.id)) {
       membersTimeCloneAICapabilityUCWeakMutSet.FindReachableObjects(foundIds);
     }
@@ -57,7 +64,16 @@ public class IPostActingUCWeakMutBunch {
     }
     return this.root == that.root && id == that.id;
   }
-         public TimeCloneAICapabilityUCWeakMutSet membersTimeCloneAICapabilityUCWeakMutSet {
+         public LightningChargedUCWeakMutSet membersLightningChargedUCWeakMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersLightningChargedUCWeakMutSet of null!");
+      }
+      return new LightningChargedUCWeakMutSet(root, incarnation.membersLightningChargedUCWeakMutSet);
+    }
+                       }
+  public TimeCloneAICapabilityUCWeakMutSet membersTimeCloneAICapabilityUCWeakMutSet {
 
     get {
       if (root == null) {
@@ -69,10 +85,18 @@ public class IPostActingUCWeakMutBunch {
 
   public static IPostActingUCWeakMutBunch New(Root root) {
     return root.EffectIPostActingUCWeakMutBunchCreate(
+      root.EffectLightningChargedUCWeakMutSetCreate()
+,
       root.EffectTimeCloneAICapabilityUCWeakMutSetCreate()
         );
   }
   public void Add(IPostActingUC elementI) {
+
+    // Can optimize, check the type of element directly somehow
+    if (root.LightningChargedUCExists(elementI.id)) {
+      this.membersLightningChargedUCWeakMutSet.Add(root.GetLightningChargedUC(elementI.id));
+      return;
+    }
 
     // Can optimize, check the type of element directly somehow
     if (root.TimeCloneAICapabilityUCExists(elementI.id)) {
@@ -84,6 +108,12 @@ public class IPostActingUCWeakMutBunch {
   public void Remove(IPostActingUC elementI) {
 
     // Can optimize, check the type of element directly somehow
+    if (root.LightningChargedUCExists(elementI.id)) {
+      this.membersLightningChargedUCWeakMutSet.Remove(root.GetLightningChargedUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.TimeCloneAICapabilityUCExists(elementI.id)) {
       this.membersTimeCloneAICapabilityUCWeakMutSet.Remove(root.GetTimeCloneAICapabilityUC(elementI.id));
       return;
@@ -91,11 +121,13 @@ public class IPostActingUCWeakMutBunch {
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
+    this.membersLightningChargedUCWeakMutSet.Clear();
     this.membersTimeCloneAICapabilityUCWeakMutSet.Clear();
   }
   public int Count {
     get {
       return
+        this.membersLightningChargedUCWeakMutSet.Count +
         this.membersTimeCloneAICapabilityUCWeakMutSet.Count
         ;
     }
@@ -108,16 +140,42 @@ public class IPostActingUCWeakMutBunch {
   }
 
   public void Destruct() {
+    var tempMembersLightningChargedUCWeakMutSet = this.membersLightningChargedUCWeakMutSet;
     var tempMembersTimeCloneAICapabilityUCWeakMutSet = this.membersTimeCloneAICapabilityUCWeakMutSet;
 
     this.Delete();
+    tempMembersLightningChargedUCWeakMutSet.Destruct();
     tempMembersTimeCloneAICapabilityUCWeakMutSet.Destruct();
   }
   public IEnumerator<IPostActingUC> GetEnumerator() {
+    foreach (var element in this.membersLightningChargedUCWeakMutSet) {
+      yield return new LightningChargedUCAsIPostActingUC(element);
+    }
     foreach (var element in this.membersTimeCloneAICapabilityUCWeakMutSet) {
       yield return new TimeCloneAICapabilityUCAsIPostActingUC(element);
     }
   }
+    public List<LightningChargedUC> GetAllLightningChargedUC() {
+      var result = new List<LightningChargedUC>();
+      foreach (var thing in this.membersLightningChargedUCWeakMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<LightningChargedUC> ClearAllLightningChargedUC() {
+      var result = new List<LightningChargedUC>();
+      this.membersLightningChargedUCWeakMutSet.Clear();
+      return result;
+    }
+    public LightningChargedUC GetOnlyLightningChargedUCOrNull() {
+      var result = GetAllLightningChargedUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return LightningChargedUC.Null;
+      }
+    }
     public List<TimeCloneAICapabilityUC> GetAllTimeCloneAICapabilityUC() {
       var result = new List<TimeCloneAICapabilityUC>();
       foreach (var thing in this.membersTimeCloneAICapabilityUCWeakMutSet) {

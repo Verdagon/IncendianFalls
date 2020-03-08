@@ -33,7 +33,7 @@ namespace Atharia.Model {
       var exitLocation = levelSuperstate.FindMarkerLocation("exit");
       level.terrain.tiles[exitLocation].components.Add(game.root.EffectDownStairsTTCCreate().AsITerrainTileComponent());
 
-      level.EnterUnit(levelSuperstate, levelSuperstate.FindMarkerLocation("enemy"), level.time, Chronolisk.Make(game.root));
+      level.EnterUnit(levelSuperstate, levelSuperstate.FindMarkerLocation("enemy"), level.time, LightningTrask.Make(game.root));
 
       level.controller = game.root.EffectDirtRoadLevelControllerCreate(level).AsILevelController();
 

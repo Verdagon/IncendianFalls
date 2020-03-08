@@ -8,10 +8,6 @@ namespace Atharia.Model {
       obj.Delete();
       return new Atharia.Model.Void();
     }
-    public static int AffectInertia(this SpeedRing armor, int inertia) {
-      int newInertia = inertia * 5 / 6;
-      return newInertia;
-    }
     public static int GetMovementTimeAddConstant(this SpeedRing armor) {
       return 0;
     }

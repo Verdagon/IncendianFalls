@@ -4,17 +4,19 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IPostActingUCWeakMutBunchBroadcaster:ITimeCloneAICapabilityUCWeakMutSetEffectObserver, ITimeCloneAICapabilityUCWeakMutSetEffectVisitor {
+public class IPostActingUCWeakMutBunchBroadcaster:ILightningChargedUCWeakMutSetEffectObserver, ILightningChargedUCWeakMutSetEffectVisitor, ITimeCloneAICapabilityUCWeakMutSetEffectObserver, ITimeCloneAICapabilityUCWeakMutSetEffectVisitor {
   IPostActingUCWeakMutBunch bunch;
   private List<IIPostActingUCWeakMutBunchObserver> observers;
 
   public IPostActingUCWeakMutBunchBroadcaster(IPostActingUCWeakMutBunch bunch) {
     this.bunch = bunch;
     this.observers = new List<IIPostActingUCWeakMutBunchObserver>();
+    bunch.membersLightningChargedUCWeakMutSet.AddObserver(this);
     bunch.membersTimeCloneAICapabilityUCWeakMutSet.AddObserver(this);
 
   }
   public void Stop() {
+    bunch.membersLightningChargedUCWeakMutSet.RemoveObserver(this);
     bunch.membersTimeCloneAICapabilityUCWeakMutSet.RemoveObserver(this);
 
   }
@@ -34,6 +36,17 @@ public class IPostActingUCWeakMutBunchBroadcaster:ITimeCloneAICapabilityUCWeakMu
       observer.OnIPostActingUCWeakMutBunchRemove(id);
     }
   }
+  public void OnLightningChargedUCWeakMutSetEffect(ILightningChargedUCWeakMutSetEffect effect) {
+    effect.visit(this);
+  }
+  public void visitLightningChargedUCWeakMutSetAddEffect(LightningChargedUCWeakMutSetAddEffect effect) {
+    BroadcastAdd(effect.elementId);
+  }
+  public void visitLightningChargedUCWeakMutSetRemoveEffect(LightningChargedUCWeakMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.elementId);
+  }
+  public void visitLightningChargedUCWeakMutSetCreateEffect(LightningChargedUCWeakMutSetCreateEffect effect) { }
+  public void visitLightningChargedUCWeakMutSetDeleteEffect(LightningChargedUCWeakMutSetDeleteEffect effect) { }
   public void OnTimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffect effect) {
     effect.visit(this);
   }

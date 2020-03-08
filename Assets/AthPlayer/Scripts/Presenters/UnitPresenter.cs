@@ -314,6 +314,8 @@ namespace AthPlayer {
       } else if (component is SummonAICapabilityUCAsIUnitComponent) {
       } else if (component is TemporaryCloneAICapabilityUC) {
       } else if (component is BaseMovementTimeUCAsIUnitComponent) {
+      } else if (component is LightningChargingUCAsIUnitComponent) {
+      } else if (component is LightningChargedUCAsIUnitComponent) {
       } else if (component is BaseOffenseUCAsIUnitComponent) {
       } else if (component is BaseDefenseUCAsIUnitComponent) {
       } else if (component is DoomedUCAsIUnitComponent) {
@@ -415,6 +417,22 @@ namespace AthPlayer {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "v",
+                            50,
+                          new UnityEngine.Color(1, 1, 1, 1.5f),
+                          0,
+                          OutlineMode.WithBackOutline,
+                          new UnityEngine.Color(0, 0, 0)),
+                      true,
+                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+        } else if (detail is LightningChargingUCAsIUnitComponent charging) {
+        } else if (detail is LightningChargedUCAsIUnitComponent charged) {
+          detailSymbols.Add(
+              new KeyValuePair<int, ExtrudedSymbolDescription>(
+                  charged.id,
+                  new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          "e",
                             50,
                           new UnityEngine.Color(1, 1, 1, 1.5f),
                           0,
@@ -778,6 +796,21 @@ namespace AthPlayer {
               mpRatio));
       detailsByClassId.Add(
           "Chronolisk",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "e",
+                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  false, new UnityEngine.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "LightningTrask",
           new UnitDescription(
               unit.id,
               new DominoDescription(false, new UnityEngine.Color(0.8f, 0.8f, 0.0f)),

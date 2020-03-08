@@ -10,6 +10,7 @@ namespace IncendianFalls {
     public static readonly int MIRE_COST = 2;
     public static readonly int FIRE_DAMAGE = 23;
     public static readonly int FIRE_BOMB_DAMAGE = 32;
+    public static readonly int LIGHTNING_CHARGE_DAMAGE = 4;
 
     public static void UnleashBide(
         Game game,
@@ -253,6 +254,15 @@ namespace IncendianFalls {
         Eventer.broadcastUnitFireBombedEvent(game.root, game, poorSuckerOnThisTile);
         AttackedInner(game, superstate, poorSuckerOnThisTile, FIRE_BOMB_DAMAGE, false);
       }
+    }
+
+    public static void LightningCharge(
+        Game game,
+        Superstate superstate,
+        Unit unit) {
+      unit.components.Add(game.root.EffectLightningChargedUCCreate().AsIUnitComponent());
+      Eventer.broadcastUnitFireBombedEvent(game.root, game, unit);
+      AttackedInner(game, superstate, unit, LIGHTNING_CHARGE_DAMAGE, false);
     }
   }
 }

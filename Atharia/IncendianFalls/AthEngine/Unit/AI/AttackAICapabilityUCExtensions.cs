@@ -99,8 +99,20 @@ namespace Atharia.Model {
             // by half a turn.
             return obj.root.EffectNoImpulseCreate().AsIImpulse();
           } else {
+            // We calculate isClearPath to know whether we can lightning charge.
+            bool isClearPath = true;
+            foreach (var location in directive.pathToLastSeenLocation) {
+              if (location.Equals(directive.targetUnit.location)) {
+                continue;
+              }
+              if (!Actions.CanTeleportTo(game, superstate, location)) {
+                isClearPath = false;
+                break;
+              }
+            }
+
             // Can make the next step! Go for it!
-            return obj.root.EffectPursueImpulseCreate(600).AsIImpulse();
+            return obj.root.EffectPursueImpulseCreate(600, isClearPath).AsIImpulse();
           }
         }
       }

@@ -1,0 +1,44 @@
+
+mut struct LightningChargingUC {
+  LightningChargingUC isa IImpulsePreReactor;
+
+  fn Destruct(this: LightningChargingUC overrides IDestructible): Void {
+    LightningChargingUCExtensions.Destruct
+  }
+
+  fn BeforeImpulse(
+      this: LightningChargingUC overrides IImpulsePreReactor,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit,
+      originatingCapability: IAICapabilityUC,
+      impulse: IImpulse)
+  : Void {
+    LightningChargingUCExtensions.BeforeImpulse
+  }
+}
+
+mut struct LightningChargedUC {
+  LightningChargedUC isa IMovementTimeFactorUC;
+  LightningChargedUC isa IPostActingUC;
+
+  fn Destruct(this: LightningChargedUC overrides IDestructible): Void {
+    LightningChargedUCExtensions.Destruct
+  }
+
+  fn GetMovementTimeAddConstant(this: LightningChargedUC overrides IMovementTimeFactorUC): Int {
+    LightningChargedUCExtensions.GetMovementTimeAddConstant
+  }
+  fn GetMovementTimeMultiplierPercent(this: LightningChargedUC overrides IMovementTimeFactorUC): Int {
+    LightningChargedUCExtensions.GetMovementTimeMultiplierPercent
+  }
+
+  fn PostAct(
+      detail: LightningChargedUC overrides IPostActingUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Bool {
+    LightningChargedUCExtensions.PostAct
+  }
+}

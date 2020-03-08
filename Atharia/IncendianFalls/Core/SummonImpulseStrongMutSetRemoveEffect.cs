@@ -1,0 +1,20 @@
+using System;
+using System.Collections;
+
+using System.Collections.Generic;
+
+namespace Atharia.Model {
+public struct SummonImpulseStrongMutSetRemoveEffect : ISummonImpulseStrongMutSetEffect {
+  public readonly int id;
+  public readonly int elementId;
+  public SummonImpulseStrongMutSetRemoveEffect(int id, int elementId) {
+    this.id = id;
+    this.elementId = elementId;
+  }
+  int ISummonImpulseStrongMutSetEffect.id => id;
+  public void visit(ISummonImpulseStrongMutSetEffectVisitor visitor) {
+    visitor.visitSummonImpulseStrongMutSetRemoveEffect(this);
+  }
+}
+
+}

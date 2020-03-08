@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class IUnitComponentMutBunchIncarnation {
+  public readonly int membersLightningChargingUCMutSet;
   public readonly int membersWanderAICapabilityUCMutSet;
   public readonly int membersTemporaryCloneAICapabilityUCMutSet;
   public readonly int membersSummonAICapabilityUCMutSet;
@@ -15,6 +16,7 @@ public class IUnitComponentMutBunchIncarnation {
   public readonly int membersMiredUCMutSet;
   public readonly int membersAttackAICapabilityUCMutSet;
   public readonly int membersCounteringUCMutSet;
+  public readonly int membersLightningChargedUCMutSet;
   public readonly int membersInvincibilityUCMutSet;
   public readonly int membersDefyingUCMutSet;
   public readonly int membersBideAICapabilityUCMutSet;
@@ -30,6 +32,7 @@ public class IUnitComponentMutBunchIncarnation {
   public readonly int membersBaseOffenseUCMutSet;
   public readonly int membersBaseDefenseUCMutSet;
   public IUnitComponentMutBunchIncarnation(
+      int membersLightningChargingUCMutSet,
       int membersWanderAICapabilityUCMutSet,
       int membersTemporaryCloneAICapabilityUCMutSet,
       int membersSummonAICapabilityUCMutSet,
@@ -40,6 +43,7 @@ public class IUnitComponentMutBunchIncarnation {
       int membersMiredUCMutSet,
       int membersAttackAICapabilityUCMutSet,
       int membersCounteringUCMutSet,
+      int membersLightningChargedUCMutSet,
       int membersInvincibilityUCMutSet,
       int membersDefyingUCMutSet,
       int membersBideAICapabilityUCMutSet,
@@ -54,6 +58,7 @@ public class IUnitComponentMutBunchIncarnation {
       int membersSorcerousUCMutSet,
       int membersBaseOffenseUCMutSet,
       int membersBaseDefenseUCMutSet) {
+    this.membersLightningChargingUCMutSet = membersLightningChargingUCMutSet;
     this.membersWanderAICapabilityUCMutSet = membersWanderAICapabilityUCMutSet;
     this.membersTemporaryCloneAICapabilityUCMutSet = membersTemporaryCloneAICapabilityUCMutSet;
     this.membersSummonAICapabilityUCMutSet = membersSummonAICapabilityUCMutSet;
@@ -64,6 +69,7 @@ public class IUnitComponentMutBunchIncarnation {
     this.membersMiredUCMutSet = membersMiredUCMutSet;
     this.membersAttackAICapabilityUCMutSet = membersAttackAICapabilityUCMutSet;
     this.membersCounteringUCMutSet = membersCounteringUCMutSet;
+    this.membersLightningChargedUCMutSet = membersLightningChargedUCMutSet;
     this.membersInvincibilityUCMutSet = membersInvincibilityUCMutSet;
     this.membersDefyingUCMutSet = membersDefyingUCMutSet;
     this.membersBideAICapabilityUCMutSet = membersBideAICapabilityUCMutSet;

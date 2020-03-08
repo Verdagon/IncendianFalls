@@ -64,6 +64,7 @@ mut struct PursueImpulse {
   PursueImpulse isa IImpulse;
 
   weight: Int;
+  isClearPath: Bool; // LightningChargingUC pays attention to this
 
   fn Destruct(this: PursueImpulse overrides IDestructible): Void {
     PursueImpulseExtensions.Destruct

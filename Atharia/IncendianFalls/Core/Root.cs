@@ -80,6 +80,20 @@ public class Root {
   readonly List<IUnitComponentMutBunchDeleteEffect> effectsIUnitComponentMutBunchDeleteEffect =
       new List<IUnitComponentMutBunchDeleteEffect>();
 
+  readonly SortedDictionary<int, List<ILightningChargedUCEffectObserver>> observersForLightningChargedUC =
+      new SortedDictionary<int, List<ILightningChargedUCEffectObserver>>();
+  readonly List<LightningChargedUCCreateEffect> effectsLightningChargedUCCreateEffect =
+      new List<LightningChargedUCCreateEffect>();
+  readonly List<LightningChargedUCDeleteEffect> effectsLightningChargedUCDeleteEffect =
+      new List<LightningChargedUCDeleteEffect>();
+
+  readonly SortedDictionary<int, List<ILightningChargingUCEffectObserver>> observersForLightningChargingUC =
+      new SortedDictionary<int, List<ILightningChargingUCEffectObserver>>();
+  readonly List<LightningChargingUCCreateEffect> effectsLightningChargingUCCreateEffect =
+      new List<LightningChargingUCCreateEffect>();
+  readonly List<LightningChargingUCDeleteEffect> effectsLightningChargingUCDeleteEffect =
+      new List<LightningChargingUCDeleteEffect>();
+
   readonly SortedDictionary<int, List<IDoomedUCEffectObserver>> observersForDoomedUC =
       new SortedDictionary<int, List<IDoomedUCEffectObserver>>();
   readonly List<DoomedUCCreateEffect> effectsDoomedUCCreateEffect =
@@ -589,6 +603,13 @@ public class Root {
   readonly List<WatDeleteEffect> effectsWatDeleteEffect =
       new List<WatDeleteEffect>();
 
+  readonly SortedDictionary<int, List<IIImpulseStrongMutBunchEffectObserver>> observersForIImpulseStrongMutBunch =
+      new SortedDictionary<int, List<IIImpulseStrongMutBunchEffectObserver>>();
+  readonly List<IImpulseStrongMutBunchCreateEffect> effectsIImpulseStrongMutBunchCreateEffect =
+      new List<IImpulseStrongMutBunchCreateEffect>();
+  readonly List<IImpulseStrongMutBunchDeleteEffect> effectsIImpulseStrongMutBunchDeleteEffect =
+      new List<IImpulseStrongMutBunchDeleteEffect>();
+
   readonly SortedDictionary<int, List<IIItemStrongMutBunchEffectObserver>> observersForIItemStrongMutBunch =
       new SortedDictionary<int, List<IIItemStrongMutBunchEffectObserver>>();
   readonly List<IItemStrongMutBunchCreateEffect> effectsIItemStrongMutBunchCreateEffect =
@@ -920,6 +941,17 @@ public class Root {
   readonly List<AttackAICapabilityUCWeakMutSetRemoveEffect> effectsAttackAICapabilityUCWeakMutSetRemoveEffect =
       new List<AttackAICapabilityUCWeakMutSetRemoveEffect>();
 
+  readonly SortedDictionary<int, List<ILightningChargedUCWeakMutSetEffectObserver>> observersForLightningChargedUCWeakMutSet =
+      new SortedDictionary<int, List<ILightningChargedUCWeakMutSetEffectObserver>>();
+  readonly List<LightningChargedUCWeakMutSetCreateEffect> effectsLightningChargedUCWeakMutSetCreateEffect =
+      new List<LightningChargedUCWeakMutSetCreateEffect>();
+  readonly List<LightningChargedUCWeakMutSetDeleteEffect> effectsLightningChargedUCWeakMutSetDeleteEffect =
+      new List<LightningChargedUCWeakMutSetDeleteEffect>();
+  readonly List<LightningChargedUCWeakMutSetAddEffect> effectsLightningChargedUCWeakMutSetAddEffect =
+      new List<LightningChargedUCWeakMutSetAddEffect>();
+  readonly List<LightningChargedUCWeakMutSetRemoveEffect> effectsLightningChargedUCWeakMutSetRemoveEffect =
+      new List<LightningChargedUCWeakMutSetRemoveEffect>();
+
   readonly SortedDictionary<int, List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver>> observersForTimeCloneAICapabilityUCWeakMutSet =
       new SortedDictionary<int, List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver>>();
   readonly List<TimeCloneAICapabilityUCWeakMutSetCreateEffect> effectsTimeCloneAICapabilityUCWeakMutSetCreateEffect =
@@ -996,6 +1028,193 @@ public class Root {
       new List<ArmorStrongMutSetAddEffect>();
   readonly List<ArmorStrongMutSetRemoveEffect> effectsArmorStrongMutSetRemoveEffect =
       new List<ArmorStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<ITemporaryCloneImpulseStrongMutSetEffectObserver>> observersForTemporaryCloneImpulseStrongMutSet =
+      new SortedDictionary<int, List<ITemporaryCloneImpulseStrongMutSetEffectObserver>>();
+  readonly List<TemporaryCloneImpulseStrongMutSetCreateEffect> effectsTemporaryCloneImpulseStrongMutSetCreateEffect =
+      new List<TemporaryCloneImpulseStrongMutSetCreateEffect>();
+  readonly List<TemporaryCloneImpulseStrongMutSetDeleteEffect> effectsTemporaryCloneImpulseStrongMutSetDeleteEffect =
+      new List<TemporaryCloneImpulseStrongMutSetDeleteEffect>();
+  readonly List<TemporaryCloneImpulseStrongMutSetAddEffect> effectsTemporaryCloneImpulseStrongMutSetAddEffect =
+      new List<TemporaryCloneImpulseStrongMutSetAddEffect>();
+  readonly List<TemporaryCloneImpulseStrongMutSetRemoveEffect> effectsTemporaryCloneImpulseStrongMutSetRemoveEffect =
+      new List<TemporaryCloneImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<ISummonImpulseStrongMutSetEffectObserver>> observersForSummonImpulseStrongMutSet =
+      new SortedDictionary<int, List<ISummonImpulseStrongMutSetEffectObserver>>();
+  readonly List<SummonImpulseStrongMutSetCreateEffect> effectsSummonImpulseStrongMutSetCreateEffect =
+      new List<SummonImpulseStrongMutSetCreateEffect>();
+  readonly List<SummonImpulseStrongMutSetDeleteEffect> effectsSummonImpulseStrongMutSetDeleteEffect =
+      new List<SummonImpulseStrongMutSetDeleteEffect>();
+  readonly List<SummonImpulseStrongMutSetAddEffect> effectsSummonImpulseStrongMutSetAddEffect =
+      new List<SummonImpulseStrongMutSetAddEffect>();
+  readonly List<SummonImpulseStrongMutSetRemoveEffect> effectsSummonImpulseStrongMutSetRemoveEffect =
+      new List<SummonImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IMireImpulseStrongMutSetEffectObserver>> observersForMireImpulseStrongMutSet =
+      new SortedDictionary<int, List<IMireImpulseStrongMutSetEffectObserver>>();
+  readonly List<MireImpulseStrongMutSetCreateEffect> effectsMireImpulseStrongMutSetCreateEffect =
+      new List<MireImpulseStrongMutSetCreateEffect>();
+  readonly List<MireImpulseStrongMutSetDeleteEffect> effectsMireImpulseStrongMutSetDeleteEffect =
+      new List<MireImpulseStrongMutSetDeleteEffect>();
+  readonly List<MireImpulseStrongMutSetAddEffect> effectsMireImpulseStrongMutSetAddEffect =
+      new List<MireImpulseStrongMutSetAddEffect>();
+  readonly List<MireImpulseStrongMutSetRemoveEffect> effectsMireImpulseStrongMutSetRemoveEffect =
+      new List<MireImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IEvaporateImpulseStrongMutSetEffectObserver>> observersForEvaporateImpulseStrongMutSet =
+      new SortedDictionary<int, List<IEvaporateImpulseStrongMutSetEffectObserver>>();
+  readonly List<EvaporateImpulseStrongMutSetCreateEffect> effectsEvaporateImpulseStrongMutSetCreateEffect =
+      new List<EvaporateImpulseStrongMutSetCreateEffect>();
+  readonly List<EvaporateImpulseStrongMutSetDeleteEffect> effectsEvaporateImpulseStrongMutSetDeleteEffect =
+      new List<EvaporateImpulseStrongMutSetDeleteEffect>();
+  readonly List<EvaporateImpulseStrongMutSetAddEffect> effectsEvaporateImpulseStrongMutSetAddEffect =
+      new List<EvaporateImpulseStrongMutSetAddEffect>();
+  readonly List<EvaporateImpulseStrongMutSetRemoveEffect> effectsEvaporateImpulseStrongMutSetRemoveEffect =
+      new List<EvaporateImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IMoveImpulseStrongMutSetEffectObserver>> observersForMoveImpulseStrongMutSet =
+      new SortedDictionary<int, List<IMoveImpulseStrongMutSetEffectObserver>>();
+  readonly List<MoveImpulseStrongMutSetCreateEffect> effectsMoveImpulseStrongMutSetCreateEffect =
+      new List<MoveImpulseStrongMutSetCreateEffect>();
+  readonly List<MoveImpulseStrongMutSetDeleteEffect> effectsMoveImpulseStrongMutSetDeleteEffect =
+      new List<MoveImpulseStrongMutSetDeleteEffect>();
+  readonly List<MoveImpulseStrongMutSetAddEffect> effectsMoveImpulseStrongMutSetAddEffect =
+      new List<MoveImpulseStrongMutSetAddEffect>();
+  readonly List<MoveImpulseStrongMutSetRemoveEffect> effectsMoveImpulseStrongMutSetRemoveEffect =
+      new List<MoveImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IKamikazeJumpImpulseStrongMutSetEffectObserver>> observersForKamikazeJumpImpulseStrongMutSet =
+      new SortedDictionary<int, List<IKamikazeJumpImpulseStrongMutSetEffectObserver>>();
+  readonly List<KamikazeJumpImpulseStrongMutSetCreateEffect> effectsKamikazeJumpImpulseStrongMutSetCreateEffect =
+      new List<KamikazeJumpImpulseStrongMutSetCreateEffect>();
+  readonly List<KamikazeJumpImpulseStrongMutSetDeleteEffect> effectsKamikazeJumpImpulseStrongMutSetDeleteEffect =
+      new List<KamikazeJumpImpulseStrongMutSetDeleteEffect>();
+  readonly List<KamikazeJumpImpulseStrongMutSetAddEffect> effectsKamikazeJumpImpulseStrongMutSetAddEffect =
+      new List<KamikazeJumpImpulseStrongMutSetAddEffect>();
+  readonly List<KamikazeJumpImpulseStrongMutSetRemoveEffect> effectsKamikazeJumpImpulseStrongMutSetRemoveEffect =
+      new List<KamikazeJumpImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IKamikazeTargetImpulseStrongMutSetEffectObserver>> observersForKamikazeTargetImpulseStrongMutSet =
+      new SortedDictionary<int, List<IKamikazeTargetImpulseStrongMutSetEffectObserver>>();
+  readonly List<KamikazeTargetImpulseStrongMutSetCreateEffect> effectsKamikazeTargetImpulseStrongMutSetCreateEffect =
+      new List<KamikazeTargetImpulseStrongMutSetCreateEffect>();
+  readonly List<KamikazeTargetImpulseStrongMutSetDeleteEffect> effectsKamikazeTargetImpulseStrongMutSetDeleteEffect =
+      new List<KamikazeTargetImpulseStrongMutSetDeleteEffect>();
+  readonly List<KamikazeTargetImpulseStrongMutSetAddEffect> effectsKamikazeTargetImpulseStrongMutSetAddEffect =
+      new List<KamikazeTargetImpulseStrongMutSetAddEffect>();
+  readonly List<KamikazeTargetImpulseStrongMutSetRemoveEffect> effectsKamikazeTargetImpulseStrongMutSetRemoveEffect =
+      new List<KamikazeTargetImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<INoImpulseStrongMutSetEffectObserver>> observersForNoImpulseStrongMutSet =
+      new SortedDictionary<int, List<INoImpulseStrongMutSetEffectObserver>>();
+  readonly List<NoImpulseStrongMutSetCreateEffect> effectsNoImpulseStrongMutSetCreateEffect =
+      new List<NoImpulseStrongMutSetCreateEffect>();
+  readonly List<NoImpulseStrongMutSetDeleteEffect> effectsNoImpulseStrongMutSetDeleteEffect =
+      new List<NoImpulseStrongMutSetDeleteEffect>();
+  readonly List<NoImpulseStrongMutSetAddEffect> effectsNoImpulseStrongMutSetAddEffect =
+      new List<NoImpulseStrongMutSetAddEffect>();
+  readonly List<NoImpulseStrongMutSetRemoveEffect> effectsNoImpulseStrongMutSetRemoveEffect =
+      new List<NoImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IFireImpulseStrongMutSetEffectObserver>> observersForFireImpulseStrongMutSet =
+      new SortedDictionary<int, List<IFireImpulseStrongMutSetEffectObserver>>();
+  readonly List<FireImpulseStrongMutSetCreateEffect> effectsFireImpulseStrongMutSetCreateEffect =
+      new List<FireImpulseStrongMutSetCreateEffect>();
+  readonly List<FireImpulseStrongMutSetDeleteEffect> effectsFireImpulseStrongMutSetDeleteEffect =
+      new List<FireImpulseStrongMutSetDeleteEffect>();
+  readonly List<FireImpulseStrongMutSetAddEffect> effectsFireImpulseStrongMutSetAddEffect =
+      new List<FireImpulseStrongMutSetAddEffect>();
+  readonly List<FireImpulseStrongMutSetRemoveEffect> effectsFireImpulseStrongMutSetRemoveEffect =
+      new List<FireImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IDefyImpulseStrongMutSetEffectObserver>> observersForDefyImpulseStrongMutSet =
+      new SortedDictionary<int, List<IDefyImpulseStrongMutSetEffectObserver>>();
+  readonly List<DefyImpulseStrongMutSetCreateEffect> effectsDefyImpulseStrongMutSetCreateEffect =
+      new List<DefyImpulseStrongMutSetCreateEffect>();
+  readonly List<DefyImpulseStrongMutSetDeleteEffect> effectsDefyImpulseStrongMutSetDeleteEffect =
+      new List<DefyImpulseStrongMutSetDeleteEffect>();
+  readonly List<DefyImpulseStrongMutSetAddEffect> effectsDefyImpulseStrongMutSetAddEffect =
+      new List<DefyImpulseStrongMutSetAddEffect>();
+  readonly List<DefyImpulseStrongMutSetRemoveEffect> effectsDefyImpulseStrongMutSetRemoveEffect =
+      new List<DefyImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<ICounterImpulseStrongMutSetEffectObserver>> observersForCounterImpulseStrongMutSet =
+      new SortedDictionary<int, List<ICounterImpulseStrongMutSetEffectObserver>>();
+  readonly List<CounterImpulseStrongMutSetCreateEffect> effectsCounterImpulseStrongMutSetCreateEffect =
+      new List<CounterImpulseStrongMutSetCreateEffect>();
+  readonly List<CounterImpulseStrongMutSetDeleteEffect> effectsCounterImpulseStrongMutSetDeleteEffect =
+      new List<CounterImpulseStrongMutSetDeleteEffect>();
+  readonly List<CounterImpulseStrongMutSetAddEffect> effectsCounterImpulseStrongMutSetAddEffect =
+      new List<CounterImpulseStrongMutSetAddEffect>();
+  readonly List<CounterImpulseStrongMutSetRemoveEffect> effectsCounterImpulseStrongMutSetRemoveEffect =
+      new List<CounterImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IUnleashBideImpulseStrongMutSetEffectObserver>> observersForUnleashBideImpulseStrongMutSet =
+      new SortedDictionary<int, List<IUnleashBideImpulseStrongMutSetEffectObserver>>();
+  readonly List<UnleashBideImpulseStrongMutSetCreateEffect> effectsUnleashBideImpulseStrongMutSetCreateEffect =
+      new List<UnleashBideImpulseStrongMutSetCreateEffect>();
+  readonly List<UnleashBideImpulseStrongMutSetDeleteEffect> effectsUnleashBideImpulseStrongMutSetDeleteEffect =
+      new List<UnleashBideImpulseStrongMutSetDeleteEffect>();
+  readonly List<UnleashBideImpulseStrongMutSetAddEffect> effectsUnleashBideImpulseStrongMutSetAddEffect =
+      new List<UnleashBideImpulseStrongMutSetAddEffect>();
+  readonly List<UnleashBideImpulseStrongMutSetRemoveEffect> effectsUnleashBideImpulseStrongMutSetRemoveEffect =
+      new List<UnleashBideImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IContinueBidingImpulseStrongMutSetEffectObserver>> observersForContinueBidingImpulseStrongMutSet =
+      new SortedDictionary<int, List<IContinueBidingImpulseStrongMutSetEffectObserver>>();
+  readonly List<ContinueBidingImpulseStrongMutSetCreateEffect> effectsContinueBidingImpulseStrongMutSetCreateEffect =
+      new List<ContinueBidingImpulseStrongMutSetCreateEffect>();
+  readonly List<ContinueBidingImpulseStrongMutSetDeleteEffect> effectsContinueBidingImpulseStrongMutSetDeleteEffect =
+      new List<ContinueBidingImpulseStrongMutSetDeleteEffect>();
+  readonly List<ContinueBidingImpulseStrongMutSetAddEffect> effectsContinueBidingImpulseStrongMutSetAddEffect =
+      new List<ContinueBidingImpulseStrongMutSetAddEffect>();
+  readonly List<ContinueBidingImpulseStrongMutSetRemoveEffect> effectsContinueBidingImpulseStrongMutSetRemoveEffect =
+      new List<ContinueBidingImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IStartBidingImpulseStrongMutSetEffectObserver>> observersForStartBidingImpulseStrongMutSet =
+      new SortedDictionary<int, List<IStartBidingImpulseStrongMutSetEffectObserver>>();
+  readonly List<StartBidingImpulseStrongMutSetCreateEffect> effectsStartBidingImpulseStrongMutSetCreateEffect =
+      new List<StartBidingImpulseStrongMutSetCreateEffect>();
+  readonly List<StartBidingImpulseStrongMutSetDeleteEffect> effectsStartBidingImpulseStrongMutSetDeleteEffect =
+      new List<StartBidingImpulseStrongMutSetDeleteEffect>();
+  readonly List<StartBidingImpulseStrongMutSetAddEffect> effectsStartBidingImpulseStrongMutSetAddEffect =
+      new List<StartBidingImpulseStrongMutSetAddEffect>();
+  readonly List<StartBidingImpulseStrongMutSetRemoveEffect> effectsStartBidingImpulseStrongMutSetRemoveEffect =
+      new List<StartBidingImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IAttackImpulseStrongMutSetEffectObserver>> observersForAttackImpulseStrongMutSet =
+      new SortedDictionary<int, List<IAttackImpulseStrongMutSetEffectObserver>>();
+  readonly List<AttackImpulseStrongMutSetCreateEffect> effectsAttackImpulseStrongMutSetCreateEffect =
+      new List<AttackImpulseStrongMutSetCreateEffect>();
+  readonly List<AttackImpulseStrongMutSetDeleteEffect> effectsAttackImpulseStrongMutSetDeleteEffect =
+      new List<AttackImpulseStrongMutSetDeleteEffect>();
+  readonly List<AttackImpulseStrongMutSetAddEffect> effectsAttackImpulseStrongMutSetAddEffect =
+      new List<AttackImpulseStrongMutSetAddEffect>();
+  readonly List<AttackImpulseStrongMutSetRemoveEffect> effectsAttackImpulseStrongMutSetRemoveEffect =
+      new List<AttackImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IPursueImpulseStrongMutSetEffectObserver>> observersForPursueImpulseStrongMutSet =
+      new SortedDictionary<int, List<IPursueImpulseStrongMutSetEffectObserver>>();
+  readonly List<PursueImpulseStrongMutSetCreateEffect> effectsPursueImpulseStrongMutSetCreateEffect =
+      new List<PursueImpulseStrongMutSetCreateEffect>();
+  readonly List<PursueImpulseStrongMutSetDeleteEffect> effectsPursueImpulseStrongMutSetDeleteEffect =
+      new List<PursueImpulseStrongMutSetDeleteEffect>();
+  readonly List<PursueImpulseStrongMutSetAddEffect> effectsPursueImpulseStrongMutSetAddEffect =
+      new List<PursueImpulseStrongMutSetAddEffect>();
+  readonly List<PursueImpulseStrongMutSetRemoveEffect> effectsPursueImpulseStrongMutSetRemoveEffect =
+      new List<PursueImpulseStrongMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IFireBombImpulseStrongMutSetEffectObserver>> observersForFireBombImpulseStrongMutSet =
+      new SortedDictionary<int, List<IFireBombImpulseStrongMutSetEffectObserver>>();
+  readonly List<FireBombImpulseStrongMutSetCreateEffect> effectsFireBombImpulseStrongMutSetCreateEffect =
+      new List<FireBombImpulseStrongMutSetCreateEffect>();
+  readonly List<FireBombImpulseStrongMutSetDeleteEffect> effectsFireBombImpulseStrongMutSetDeleteEffect =
+      new List<FireBombImpulseStrongMutSetDeleteEffect>();
+  readonly List<FireBombImpulseStrongMutSetAddEffect> effectsFireBombImpulseStrongMutSetAddEffect =
+      new List<FireBombImpulseStrongMutSetAddEffect>();
+  readonly List<FireBombImpulseStrongMutSetRemoveEffect> effectsFireBombImpulseStrongMutSetRemoveEffect =
+      new List<FireBombImpulseStrongMutSetRemoveEffect>();
 
   readonly SortedDictionary<int, List<IUnitMutSetEffectObserver>> observersForUnitMutSet =
       new SortedDictionary<int, List<IUnitMutSetEffectObserver>>();
@@ -1338,6 +1557,17 @@ public class Root {
   readonly List<EmberDeepLevelLinkerTTCMutSetRemoveEffect> effectsEmberDeepLevelLinkerTTCMutSetRemoveEffect =
       new List<EmberDeepLevelLinkerTTCMutSetRemoveEffect>();
 
+  readonly SortedDictionary<int, List<ILightningChargingUCMutSetEffectObserver>> observersForLightningChargingUCMutSet =
+      new SortedDictionary<int, List<ILightningChargingUCMutSetEffectObserver>>();
+  readonly List<LightningChargingUCMutSetCreateEffect> effectsLightningChargingUCMutSetCreateEffect =
+      new List<LightningChargingUCMutSetCreateEffect>();
+  readonly List<LightningChargingUCMutSetDeleteEffect> effectsLightningChargingUCMutSetDeleteEffect =
+      new List<LightningChargingUCMutSetDeleteEffect>();
+  readonly List<LightningChargingUCMutSetAddEffect> effectsLightningChargingUCMutSetAddEffect =
+      new List<LightningChargingUCMutSetAddEffect>();
+  readonly List<LightningChargingUCMutSetRemoveEffect> effectsLightningChargingUCMutSetRemoveEffect =
+      new List<LightningChargingUCMutSetRemoveEffect>();
+
   readonly SortedDictionary<int, List<IWanderAICapabilityUCMutSetEffectObserver>> observersForWanderAICapabilityUCMutSet =
       new SortedDictionary<int, List<IWanderAICapabilityUCMutSetEffectObserver>>();
   readonly List<WanderAICapabilityUCMutSetCreateEffect> effectsWanderAICapabilityUCMutSetCreateEffect =
@@ -1447,6 +1677,17 @@ public class Root {
       new List<CounteringUCMutSetAddEffect>();
   readonly List<CounteringUCMutSetRemoveEffect> effectsCounteringUCMutSetRemoveEffect =
       new List<CounteringUCMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<ILightningChargedUCMutSetEffectObserver>> observersForLightningChargedUCMutSet =
+      new SortedDictionary<int, List<ILightningChargedUCMutSetEffectObserver>>();
+  readonly List<LightningChargedUCMutSetCreateEffect> effectsLightningChargedUCMutSetCreateEffect =
+      new List<LightningChargedUCMutSetCreateEffect>();
+  readonly List<LightningChargedUCMutSetDeleteEffect> effectsLightningChargedUCMutSetDeleteEffect =
+      new List<LightningChargedUCMutSetDeleteEffect>();
+  readonly List<LightningChargedUCMutSetAddEffect> effectsLightningChargedUCMutSetAddEffect =
+      new List<LightningChargedUCMutSetAddEffect>();
+  readonly List<LightningChargedUCMutSetRemoveEffect> effectsLightningChargedUCMutSetRemoveEffect =
+      new List<LightningChargedUCMutSetRemoveEffect>();
 
   readonly SortedDictionary<int, List<IInvincibilityUCMutSetEffectObserver>> observersForInvincibilityUCMutSet =
       new SortedDictionary<int, List<IInvincibilityUCMutSetEffectObserver>>();
@@ -1734,6 +1975,12 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsIUnitComponentMutBunch) {
       result += GetIUnitComponentMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsLightningChargedUC) {
+      result += GetLightningChargedUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsLightningChargingUC) {
+      result += GetLightningChargingUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsDoomedUC) {
       result += GetDoomedUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1941,6 +2188,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsWat) {
       result += GetWatHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsIImpulseStrongMutBunch) {
+      result += GetIImpulseStrongMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsIItemStrongMutBunch) {
       result += GetIItemStrongMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -2058,6 +2308,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet) {
       result += GetAttackAICapabilityUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsLightningChargedUCWeakMutSet) {
+      result += GetLightningChargedUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet) {
       result += GetTimeCloneAICapabilityUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -2078,6 +2331,57 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsArmorStrongMutSet) {
       result += GetArmorStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet) {
+      result += GetTemporaryCloneImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsSummonImpulseStrongMutSet) {
+      result += GetSummonImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsMireImpulseStrongMutSet) {
+      result += GetMireImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsEvaporateImpulseStrongMutSet) {
+      result += GetEvaporateImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsMoveImpulseStrongMutSet) {
+      result += GetMoveImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet) {
+      result += GetKamikazeJumpImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet) {
+      result += GetKamikazeTargetImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsNoImpulseStrongMutSet) {
+      result += GetNoImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsFireImpulseStrongMutSet) {
+      result += GetFireImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsDefyImpulseStrongMutSet) {
+      result += GetDefyImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsCounterImpulseStrongMutSet) {
+      result += GetCounterImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet) {
+      result += GetUnleashBideImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet) {
+      result += GetContinueBidingImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsStartBidingImpulseStrongMutSet) {
+      result += GetStartBidingImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsAttackImpulseStrongMutSet) {
+      result += GetAttackImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsPursueImpulseStrongMutSet) {
+      result += GetPursueImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsFireBombImpulseStrongMutSet) {
+      result += GetFireBombImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsUnitMutSet) {
       result += GetUnitMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -2172,6 +2476,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet) {
       result += GetEmberDeepLevelLinkerTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsLightningChargingUCMutSet) {
+      result += GetLightningChargingUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsWanderAICapabilityUCMutSet) {
       result += GetWanderAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -2201,6 +2508,9 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsCounteringUCMutSet) {
       result += GetCounteringUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsLightningChargedUCMutSet) {
+      result += GetLightningChargedUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsInvincibilityUCMutSet) {
       result += GetInvincibilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -2266,6 +2576,12 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllIUnitComponentMutBunch()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllLightningChargedUC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllLightningChargingUC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllDoomedUC()) {
@@ -2475,6 +2791,9 @@ public class Root {
     foreach (var obj in this.AllWat()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllIImpulseStrongMutBunch()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllIItemStrongMutBunch()) {
       obj.CheckForNullViolations(violations);
     }
@@ -2592,6 +2911,9 @@ public class Root {
     foreach (var obj in this.AllAttackAICapabilityUCWeakMutSet()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllLightningChargedUCWeakMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllTimeCloneAICapabilityUCWeakMutSet()) {
       obj.CheckForNullViolations(violations);
     }
@@ -2611,6 +2933,57 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllArmorStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllTemporaryCloneImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllSummonImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllMireImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllEvaporateImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllMoveImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllKamikazeJumpImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllKamikazeTargetImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllNoImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllFireImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllDefyImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllCounterImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllUnleashBideImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllContinueBidingImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllStartBidingImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllAttackImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllPursueImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllFireBombImpulseStrongMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllUnitMutSet()) {
@@ -2706,6 +3079,9 @@ public class Root {
     foreach (var obj in this.AllEmberDeepLevelLinkerTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllLightningChargingUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllWanderAICapabilityUCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
@@ -2734,6 +3110,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllCounteringUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllLightningChargedUCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllInvincibilityUCMutSet()) {
@@ -2809,6 +3188,16 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllLightningChargedUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllLightningChargingUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllDoomedUC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -3154,6 +3543,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllIImpulseStrongMutBunch()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllIItemStrongMutBunch()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -3349,6 +3743,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllLightningChargedUCWeakMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllTimeCloneAICapabilityUCWeakMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -3380,6 +3779,91 @@ public class Root {
       }
     }
     foreach (var obj in this.AllArmorStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllTemporaryCloneImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllSummonImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllMireImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllEvaporateImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllMoveImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllKamikazeJumpImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllKamikazeTargetImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllNoImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllFireImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllDefyImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllCounterImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllUnleashBideImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllContinueBidingImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllStartBidingImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllAttackImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllPursueImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllFireBombImpulseStrongMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -3539,6 +4023,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllLightningChargingUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllWanderAICapabilityUCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -3585,6 +4074,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllCounteringUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllLightningChargedUCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -3724,6 +4218,28 @@ public class Root {
       copyOfObserversForIUnitComponentMutBunch.Add(
           objectId,
           new List<IIUnitComponentMutBunchEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForLightningChargedUC =
+        new SortedDictionary<int, List<ILightningChargedUCEffectObserver>>();
+    foreach (var entry in observersForLightningChargedUC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForLightningChargedUC.Add(
+          objectId,
+          new List<ILightningChargedUCEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForLightningChargingUC =
+        new SortedDictionary<int, List<ILightningChargingUCEffectObserver>>();
+    foreach (var entry in observersForLightningChargingUC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForLightningChargingUC.Add(
+          objectId,
+          new List<ILightningChargingUCEffectObserver>(
               observers));
     }
 
@@ -4486,6 +5002,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForIImpulseStrongMutBunch =
+        new SortedDictionary<int, List<IIImpulseStrongMutBunchEffectObserver>>();
+    foreach (var entry in observersForIImpulseStrongMutBunch) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForIImpulseStrongMutBunch.Add(
+          objectId,
+          new List<IIImpulseStrongMutBunchEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForIItemStrongMutBunch =
         new SortedDictionary<int, List<IIItemStrongMutBunchEffectObserver>>();
     foreach (var entry in observersForIItemStrongMutBunch) {
@@ -4915,6 +5442,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForLightningChargedUCWeakMutSet =
+        new SortedDictionary<int, List<ILightningChargedUCWeakMutSetEffectObserver>>();
+    foreach (var entry in observersForLightningChargedUCWeakMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForLightningChargedUCWeakMutSet.Add(
+          objectId,
+          new List<ILightningChargedUCWeakMutSetEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForTimeCloneAICapabilityUCWeakMutSet =
         new SortedDictionary<int, List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver>>();
     foreach (var entry in observersForTimeCloneAICapabilityUCWeakMutSet) {
@@ -4989,6 +5527,193 @@ public class Root {
       copyOfObserversForArmorStrongMutSet.Add(
           objectId,
           new List<IArmorStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForTemporaryCloneImpulseStrongMutSet =
+        new SortedDictionary<int, List<ITemporaryCloneImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForTemporaryCloneImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForTemporaryCloneImpulseStrongMutSet.Add(
+          objectId,
+          new List<ITemporaryCloneImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForSummonImpulseStrongMutSet =
+        new SortedDictionary<int, List<ISummonImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForSummonImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForSummonImpulseStrongMutSet.Add(
+          objectId,
+          new List<ISummonImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForMireImpulseStrongMutSet =
+        new SortedDictionary<int, List<IMireImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForMireImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForMireImpulseStrongMutSet.Add(
+          objectId,
+          new List<IMireImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForEvaporateImpulseStrongMutSet =
+        new SortedDictionary<int, List<IEvaporateImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForEvaporateImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForEvaporateImpulseStrongMutSet.Add(
+          objectId,
+          new List<IEvaporateImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForMoveImpulseStrongMutSet =
+        new SortedDictionary<int, List<IMoveImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForMoveImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForMoveImpulseStrongMutSet.Add(
+          objectId,
+          new List<IMoveImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForKamikazeJumpImpulseStrongMutSet =
+        new SortedDictionary<int, List<IKamikazeJumpImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForKamikazeJumpImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForKamikazeJumpImpulseStrongMutSet.Add(
+          objectId,
+          new List<IKamikazeJumpImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForKamikazeTargetImpulseStrongMutSet =
+        new SortedDictionary<int, List<IKamikazeTargetImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForKamikazeTargetImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForKamikazeTargetImpulseStrongMutSet.Add(
+          objectId,
+          new List<IKamikazeTargetImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForNoImpulseStrongMutSet =
+        new SortedDictionary<int, List<INoImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForNoImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForNoImpulseStrongMutSet.Add(
+          objectId,
+          new List<INoImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForFireImpulseStrongMutSet =
+        new SortedDictionary<int, List<IFireImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForFireImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForFireImpulseStrongMutSet.Add(
+          objectId,
+          new List<IFireImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForDefyImpulseStrongMutSet =
+        new SortedDictionary<int, List<IDefyImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForDefyImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForDefyImpulseStrongMutSet.Add(
+          objectId,
+          new List<IDefyImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForCounterImpulseStrongMutSet =
+        new SortedDictionary<int, List<ICounterImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForCounterImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForCounterImpulseStrongMutSet.Add(
+          objectId,
+          new List<ICounterImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForUnleashBideImpulseStrongMutSet =
+        new SortedDictionary<int, List<IUnleashBideImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForUnleashBideImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForUnleashBideImpulseStrongMutSet.Add(
+          objectId,
+          new List<IUnleashBideImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForContinueBidingImpulseStrongMutSet =
+        new SortedDictionary<int, List<IContinueBidingImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForContinueBidingImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForContinueBidingImpulseStrongMutSet.Add(
+          objectId,
+          new List<IContinueBidingImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForStartBidingImpulseStrongMutSet =
+        new SortedDictionary<int, List<IStartBidingImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForStartBidingImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForStartBidingImpulseStrongMutSet.Add(
+          objectId,
+          new List<IStartBidingImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForAttackImpulseStrongMutSet =
+        new SortedDictionary<int, List<IAttackImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForAttackImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForAttackImpulseStrongMutSet.Add(
+          objectId,
+          new List<IAttackImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForPursueImpulseStrongMutSet =
+        new SortedDictionary<int, List<IPursueImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForPursueImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForPursueImpulseStrongMutSet.Add(
+          objectId,
+          new List<IPursueImpulseStrongMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForFireBombImpulseStrongMutSet =
+        new SortedDictionary<int, List<IFireBombImpulseStrongMutSetEffectObserver>>();
+    foreach (var entry in observersForFireBombImpulseStrongMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForFireBombImpulseStrongMutSet.Add(
+          objectId,
+          new List<IFireBombImpulseStrongMutSetEffectObserver>(
               observers));
     }
 
@@ -5333,6 +6058,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForLightningChargingUCMutSet =
+        new SortedDictionary<int, List<ILightningChargingUCMutSetEffectObserver>>();
+    foreach (var entry in observersForLightningChargingUCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForLightningChargingUCMutSet.Add(
+          objectId,
+          new List<ILightningChargingUCMutSetEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForWanderAICapabilityUCMutSet =
         new SortedDictionary<int, List<IWanderAICapabilityUCMutSetEffectObserver>>();
     foreach (var entry in observersForWanderAICapabilityUCMutSet) {
@@ -5440,6 +6176,17 @@ public class Root {
       copyOfObserversForCounteringUCMutSet.Add(
           objectId,
           new List<ICounteringUCMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForLightningChargedUCMutSet =
+        new SortedDictionary<int, List<ILightningChargedUCMutSetEffectObserver>>();
+    foreach (var entry in observersForLightningChargedUCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForLightningChargedUCMutSet.Add(
+          objectId,
+          new List<ILightningChargedUCMutSetEffectObserver>(
               observers));
     }
 
@@ -5630,6 +6377,12 @@ public class Root {
            
     BroadcastIUnitComponentMutBunchEffects(
         copyOfObserversForIUnitComponentMutBunch);
+           
+    BroadcastLightningChargedUCEffects(
+        copyOfObserversForLightningChargedUC);
+           
+    BroadcastLightningChargingUCEffects(
+        copyOfObserversForLightningChargingUC);
            
     BroadcastDoomedUCEffects(
         copyOfObserversForDoomedUC);
@@ -5838,6 +6591,9 @@ public class Root {
     BroadcastWatEffects(
         copyOfObserversForWat);
            
+    BroadcastIImpulseStrongMutBunchEffects(
+        copyOfObserversForIImpulseStrongMutBunch);
+           
     BroadcastIItemStrongMutBunchEffects(
         copyOfObserversForIItemStrongMutBunch);
            
@@ -5955,6 +6711,9 @@ public class Root {
     BroadcastAttackAICapabilityUCWeakMutSetEffects(
         copyOfObserversForAttackAICapabilityUCWeakMutSet);
            
+    BroadcastLightningChargedUCWeakMutSetEffects(
+        copyOfObserversForLightningChargedUCWeakMutSet);
+           
     BroadcastTimeCloneAICapabilityUCWeakMutSetEffects(
         copyOfObserversForTimeCloneAICapabilityUCWeakMutSet);
            
@@ -5975,6 +6734,57 @@ public class Root {
            
     BroadcastArmorStrongMutSetEffects(
         copyOfObserversForArmorStrongMutSet);
+           
+    BroadcastTemporaryCloneImpulseStrongMutSetEffects(
+        copyOfObserversForTemporaryCloneImpulseStrongMutSet);
+           
+    BroadcastSummonImpulseStrongMutSetEffects(
+        copyOfObserversForSummonImpulseStrongMutSet);
+           
+    BroadcastMireImpulseStrongMutSetEffects(
+        copyOfObserversForMireImpulseStrongMutSet);
+           
+    BroadcastEvaporateImpulseStrongMutSetEffects(
+        copyOfObserversForEvaporateImpulseStrongMutSet);
+           
+    BroadcastMoveImpulseStrongMutSetEffects(
+        copyOfObserversForMoveImpulseStrongMutSet);
+           
+    BroadcastKamikazeJumpImpulseStrongMutSetEffects(
+        copyOfObserversForKamikazeJumpImpulseStrongMutSet);
+           
+    BroadcastKamikazeTargetImpulseStrongMutSetEffects(
+        copyOfObserversForKamikazeTargetImpulseStrongMutSet);
+           
+    BroadcastNoImpulseStrongMutSetEffects(
+        copyOfObserversForNoImpulseStrongMutSet);
+           
+    BroadcastFireImpulseStrongMutSetEffects(
+        copyOfObserversForFireImpulseStrongMutSet);
+           
+    BroadcastDefyImpulseStrongMutSetEffects(
+        copyOfObserversForDefyImpulseStrongMutSet);
+           
+    BroadcastCounterImpulseStrongMutSetEffects(
+        copyOfObserversForCounterImpulseStrongMutSet);
+           
+    BroadcastUnleashBideImpulseStrongMutSetEffects(
+        copyOfObserversForUnleashBideImpulseStrongMutSet);
+           
+    BroadcastContinueBidingImpulseStrongMutSetEffects(
+        copyOfObserversForContinueBidingImpulseStrongMutSet);
+           
+    BroadcastStartBidingImpulseStrongMutSetEffects(
+        copyOfObserversForStartBidingImpulseStrongMutSet);
+           
+    BroadcastAttackImpulseStrongMutSetEffects(
+        copyOfObserversForAttackImpulseStrongMutSet);
+           
+    BroadcastPursueImpulseStrongMutSetEffects(
+        copyOfObserversForPursueImpulseStrongMutSet);
+           
+    BroadcastFireBombImpulseStrongMutSetEffects(
+        copyOfObserversForFireBombImpulseStrongMutSet);
            
     BroadcastUnitMutSetEffects(
         copyOfObserversForUnitMutSet);
@@ -6069,6 +6879,9 @@ public class Root {
     BroadcastEmberDeepLevelLinkerTTCMutSetEffects(
         copyOfObserversForEmberDeepLevelLinkerTTCMutSet);
            
+    BroadcastLightningChargingUCMutSetEffects(
+        copyOfObserversForLightningChargingUCMutSet);
+           
     BroadcastWanderAICapabilityUCMutSetEffects(
         copyOfObserversForWanderAICapabilityUCMutSet);
            
@@ -6098,6 +6911,9 @@ public class Root {
            
     BroadcastCounteringUCMutSetEffects(
         copyOfObserversForCounteringUCMutSet);
+           
+    BroadcastLightningChargedUCMutSetEffects(
+        copyOfObserversForLightningChargedUCMutSet);
            
     BroadcastInvincibilityUCMutSetEffects(
         copyOfObserversForInvincibilityUCMutSet);
@@ -6200,6 +7016,26 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsIUnitComponentMutBunch.ContainsKey(sourceObjId)) {
         EffectInternalCreateIUnitComponentMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargedUC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsLightningChargedUC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateLightningChargedUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargingUC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsLightningChargingUC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateLightningChargingUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -6893,6 +7729,16 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIImpulseStrongMutBunch) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsIImpulseStrongMutBunch.ContainsKey(sourceObjId)) {
+        EffectInternalCreateIImpulseStrongMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIItemStrongMutBunch) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -7283,6 +8129,16 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargedUCWeakMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateLightningChargedUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -7350,6 +8206,176 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsArmorStrongMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateArmorStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateTemporaryCloneImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSummonImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsSummonImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateSummonImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMireImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsMireImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateMireImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsEvaporateImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsEvaporateImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateEvaporateImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMoveImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsMoveImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateMoveImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateKamikazeJumpImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateKamikazeTargetImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsNoImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsNoImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateNoImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsFireImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsFireImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateFireImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDefyImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsDefyImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateDefyImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCounterImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsCounterImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateCounterImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUnleashBideImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateUnleashBideImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsContinueBidingImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateContinueBidingImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsStartBidingImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsStartBidingImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateStartBidingImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsAttackImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateAttackImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPursueImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsPursueImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreatePursueImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsFireBombImpulseStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsFireBombImpulseStrongMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateFireBombImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -7663,6 +8689,16 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargingUCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsLightningChargingUCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateLightningChargingUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsWanderAICapabilityUCMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -7760,6 +8796,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsCounteringUCMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateCounteringUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargedUCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsLightningChargedUCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateLightningChargedUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -8219,6 +9265,34 @@ public class Root {
         }
       }
              
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargedUCWeakMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectLightningChargedUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectLightningChargedUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsLightningChargedUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -8411,6 +9485,482 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsArmorStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectTemporaryCloneImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectTemporaryCloneImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSummonImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsSummonImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsSummonImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectSummonImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectSummonImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsSummonImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMireImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsMireImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsMireImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectMireImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectMireImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsMireImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsEvaporateImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsEvaporateImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsEvaporateImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectEvaporateImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectEvaporateImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsEvaporateImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMoveImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsMoveImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsMoveImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectMoveImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectMoveImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsMoveImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectKamikazeJumpImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectKamikazeJumpImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectKamikazeTargetImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectKamikazeTargetImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsNoImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsNoImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsNoImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectNoImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectNoImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsNoImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsFireImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsFireImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsFireImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectFireImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectFireImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsFireImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDefyImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsDefyImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDefyImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectDefyImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectDefyImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsDefyImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCounterImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsCounterImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsCounterImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectCounterImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectCounterImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsCounterImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUnleashBideImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectUnleashBideImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectUnleashBideImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsContinueBidingImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectContinueBidingImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectContinueBidingImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsStartBidingImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsStartBidingImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsStartBidingImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectStartBidingImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectStartBidingImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsStartBidingImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsAttackImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsAttackImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectAttackImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectAttackImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsAttackImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPursueImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsPursueImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsPursueImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectPursueImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectPursueImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsPursueImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsFireBombImpulseStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsFireBombImpulseStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsFireBombImpulseStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectFireBombImpulseStrongMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectFireBombImpulseStrongMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsFireBombImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -9283,6 +10833,34 @@ public class Root {
         }
       }
              
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargingUCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsLightningChargingUCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsLightningChargingUCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectLightningChargingUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectLightningChargingUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsLightningChargingUCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsWanderAICapabilityUCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -9559,6 +11137,34 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsCounteringUCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargedUCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsLightningChargedUCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsLightningChargedUCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectLightningChargedUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectLightningChargedUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsLightningChargedUCMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -10120,6 +11726,48 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsIUnitComponentMutBunch[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargedUC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsLightningChargedUC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsLightningChargedUC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsLightningChargedUC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargingUC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsLightningChargingUC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsLightningChargingUC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsLightningChargingUC[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -11626,6 +13274,27 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIImpulseStrongMutBunch) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsIImpulseStrongMutBunch.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIImpulseStrongMutBunch[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsIImpulseStrongMutBunch[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIItemStrongMutBunch) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -12270,6 +13939,20 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LightningChargedUCIncarnation>>(rootIncarnation.incarnationsLightningChargedUC)) {
+      if (!sourceIncarnation.incarnationsLightningChargedUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectLightningChargedUCDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LightningChargingUCIncarnation>>(rootIncarnation.incarnationsLightningChargingUC)) {
+      if (!sourceIncarnation.incarnationsLightningChargingUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectLightningChargingUCDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DoomedUCIncarnation>>(rootIncarnation.incarnationsDoomedUC)) {
       if (!sourceIncarnation.incarnationsDoomedUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -12753,6 +14436,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IImpulseStrongMutBunchIncarnation>>(rootIncarnation.incarnationsIImpulseStrongMutBunch)) {
+      if (!sourceIncarnation.incarnationsIImpulseStrongMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectIImpulseStrongMutBunchDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IItemStrongMutBunchIncarnation>>(rootIncarnation.incarnationsIItemStrongMutBunch)) {
       if (!sourceIncarnation.incarnationsIItemStrongMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -13026,6 +14716,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsLightningChargedUCWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectLightningChargedUCWeakMutSetDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet)) {
       if (!sourceIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -13072,6 +14769,125 @@ public class Root {
       if (!sourceIncarnation.incarnationsArmorStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectArmorStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TemporaryCloneImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectTemporaryCloneImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<SummonImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsSummonImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsSummonImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectSummonImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<MireImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsMireImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsMireImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectMireImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<EvaporateImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsEvaporateImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsEvaporateImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectEvaporateImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<MoveImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsMoveImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsMoveImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectMoveImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KamikazeJumpImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectKamikazeJumpImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<KamikazeTargetImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectKamikazeTargetImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<NoImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsNoImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsNoImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectNoImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<FireImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsFireImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsFireImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectFireImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DefyImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsDefyImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsDefyImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectDefyImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CounterImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsCounterImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsCounterImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectCounterImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<UnleashBideImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsUnleashBideImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectUnleashBideImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ContinueBidingImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsContinueBidingImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectContinueBidingImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<StartBidingImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsStartBidingImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsStartBidingImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectStartBidingImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<AttackImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsAttackImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsAttackImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectAttackImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<PursueImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsPursueImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsPursueImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectPursueImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<FireBombImpulseStrongMutSetIncarnation>>(rootIncarnation.incarnationsFireBombImpulseStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsFireBombImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectFireBombImpulseStrongMutSetDelete(id);
       }
     }
 
@@ -13292,6 +15108,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LightningChargingUCMutSetIncarnation>>(rootIncarnation.incarnationsLightningChargingUCMutSet)) {
+      if (!sourceIncarnation.incarnationsLightningChargingUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectLightningChargingUCMutSetDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>>(rootIncarnation.incarnationsWanderAICapabilityUCMutSet)) {
       if (!sourceIncarnation.incarnationsWanderAICapabilityUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -13359,6 +15182,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsCounteringUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectCounteringUCMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LightningChargedUCMutSetIncarnation>>(rootIncarnation.incarnationsLightningChargedUCMutSet)) {
+      if (!sourceIncarnation.incarnationsLightningChargedUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectLightningChargedUCMutSetDelete(id);
       }
     }
 
@@ -14205,6 +16035,7 @@ public class Root {
     }
   }
   public IUnitComponentMutBunch EffectIUnitComponentMutBunchCreate(
+      LightningChargingUCMutSet membersLightningChargingUCMutSet,
       WanderAICapabilityUCMutSet membersWanderAICapabilityUCMutSet,
       TemporaryCloneAICapabilityUCMutSet membersTemporaryCloneAICapabilityUCMutSet,
       SummonAICapabilityUCMutSet membersSummonAICapabilityUCMutSet,
@@ -14215,6 +16046,7 @@ public class Root {
       MiredUCMutSet membersMiredUCMutSet,
       AttackAICapabilityUCMutSet membersAttackAICapabilityUCMutSet,
       CounteringUCMutSet membersCounteringUCMutSet,
+      LightningChargedUCMutSet membersLightningChargedUCMutSet,
       InvincibilityUCMutSet membersInvincibilityUCMutSet,
       DefyingUCMutSet membersDefyingUCMutSet,
       BideAICapabilityUCMutSet membersBideAICapabilityUCMutSet,
@@ -14230,6 +16062,7 @@ public class Root {
       BaseOffenseUCMutSet membersBaseOffenseUCMutSet,
       BaseDefenseUCMutSet membersBaseDefenseUCMutSet) {
     CheckUnlocked();
+    CheckHasLightningChargingUCMutSet(membersLightningChargingUCMutSet);
     CheckHasWanderAICapabilityUCMutSet(membersWanderAICapabilityUCMutSet);
     CheckHasTemporaryCloneAICapabilityUCMutSet(membersTemporaryCloneAICapabilityUCMutSet);
     CheckHasSummonAICapabilityUCMutSet(membersSummonAICapabilityUCMutSet);
@@ -14240,6 +16073,7 @@ public class Root {
     CheckHasMiredUCMutSet(membersMiredUCMutSet);
     CheckHasAttackAICapabilityUCMutSet(membersAttackAICapabilityUCMutSet);
     CheckHasCounteringUCMutSet(membersCounteringUCMutSet);
+    CheckHasLightningChargedUCMutSet(membersLightningChargedUCMutSet);
     CheckHasInvincibilityUCMutSet(membersInvincibilityUCMutSet);
     CheckHasDefyingUCMutSet(membersDefyingUCMutSet);
     CheckHasBideAICapabilityUCMutSet(membersBideAICapabilityUCMutSet);
@@ -14258,6 +16092,7 @@ public class Root {
     var id = NewId();
     var incarnation =
         new IUnitComponentMutBunchIncarnation(
+            membersLightningChargingUCMutSet.id,
             membersWanderAICapabilityUCMutSet.id,
             membersTemporaryCloneAICapabilityUCMutSet.id,
             membersSummonAICapabilityUCMutSet.id,
@@ -14268,6 +16103,7 @@ public class Root {
             membersMiredUCMutSet.id,
             membersAttackAICapabilityUCMutSet.id,
             membersCounteringUCMutSet.id,
+            membersLightningChargedUCMutSet.id,
             membersInvincibilityUCMutSet.id,
             membersDefyingUCMutSet.id,
             membersBideAICapabilityUCMutSet.id,
@@ -14314,30 +16150,32 @@ public class Root {
      
   public int GetIUnitComponentMutBunchHash(int id, int version, IUnitComponentMutBunchIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.membersWanderAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.membersTemporaryCloneAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.membersSummonAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.membersKamikazeAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.membersGuardAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.membersDoomedUCMutSet.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.membersMiredUCMutSet.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.membersInvincibilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.membersDefyingUCMutSet.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.membersBaseMovementTimeUCMutSet.GetDeterministicHashCode();
-    result += id * version * 15 * incarnation.membersBaseCombatTimeUCMutSet.GetDeterministicHashCode();
-    result += id * version * 16 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 17 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 18 * incarnation.membersSpeedRingMutSet.GetDeterministicHashCode();
-    result += id * version * 19 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
-    result += id * version * 20 * incarnation.membersBlastRodMutSet.GetDeterministicHashCode();
-    result += id * version * 21 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
-    result += id * version * 22 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
-    result += id * version * 23 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
-    result += id * version * 24 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 1 * incarnation.membersLightningChargingUCMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersWanderAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersTemporaryCloneAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersSummonAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersKamikazeAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersGuardAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersDoomedUCMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersMiredUCMutSet.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.membersLightningChargedUCMutSet.GetDeterministicHashCode();
+    result += id * version * 13 * incarnation.membersInvincibilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.membersDefyingUCMutSet.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 16 * incarnation.membersBaseMovementTimeUCMutSet.GetDeterministicHashCode();
+    result += id * version * 17 * incarnation.membersBaseCombatTimeUCMutSet.GetDeterministicHashCode();
+    result += id * version * 18 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 19 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 20 * incarnation.membersSpeedRingMutSet.GetDeterministicHashCode();
+    result += id * version * 21 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
+    result += id * version * 22 * incarnation.membersBlastRodMutSet.GetDeterministicHashCode();
+    result += id * version * 23 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
+    result += id * version * 24 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
+    result += id * version * 25 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 26 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -14372,6 +16210,262 @@ public class Root {
       }
     }
     effectsIUnitComponentMutBunchCreateEffect.Clear();
+  }
+  public LightningChargedUCIncarnation GetLightningChargedUCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsLightningChargedUC[id].incarnation;
+  }
+  public bool LightningChargedUCExists(int id) {
+    return rootIncarnation.incarnationsLightningChargedUC.ContainsKey(id);
+  }
+  public LightningChargedUC GetLightningChargedUC(int id) {
+    return new LightningChargedUC(this, id);
+  }
+  public List<LightningChargedUC> AllLightningChargedUC() {
+    List<LightningChargedUC> result = new List<LightningChargedUC>(rootIncarnation.incarnationsLightningChargedUC.Count);
+    foreach (var id in rootIncarnation.incarnationsLightningChargedUC.Keys) {
+      result.Add(new LightningChargedUC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<LightningChargedUC> EnumAllLightningChargedUC() {
+    foreach (var id in rootIncarnation.incarnationsLightningChargedUC.Keys) {
+      yield return GetLightningChargedUC(id);
+    }
+  }
+  public void CheckHasLightningChargedUC(LightningChargedUC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasLightningChargedUC(thing.id);
+  }
+  public void CheckHasLightningChargedUC(int id) {
+    if (!rootIncarnation.incarnationsLightningChargedUC.ContainsKey(id)) {
+      throw new System.Exception("Invalid LightningChargedUC: " + id);
+    }
+  }
+  public void AddLightningChargedUCObserver(int id, ILightningChargedUCEffectObserver observer) {
+    List<ILightningChargedUCEffectObserver> obsies;
+    if (!observersForLightningChargedUC.TryGetValue(id, out obsies)) {
+      obsies = new List<ILightningChargedUCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForLightningChargedUC[id] = obsies;
+  }
+
+  public void RemoveLightningChargedUCObserver(int id, ILightningChargedUCEffectObserver observer) {
+    if (observersForLightningChargedUC.ContainsKey(id)) {
+      var list = observersForLightningChargedUC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForLightningChargedUC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public LightningChargedUC EffectLightningChargedUCCreate(
+) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new LightningChargedUCIncarnation(
+
+            );
+    EffectInternalCreateLightningChargedUC(id, rootIncarnation.version, incarnation);
+    return new LightningChargedUC(this, id);
+  }
+  public void EffectInternalCreateLightningChargedUC(
+      int id,
+      int incarnationVersion,
+      LightningChargedUCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new LightningChargedUCCreateEffect(id);
+    rootIncarnation.incarnationsLightningChargedUC.Add(
+        id,
+        new VersionAndIncarnation<LightningChargedUCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsLightningChargedUCCreateEffect.Add(effect);
+  }
+
+  public void EffectLightningChargedUCDelete(int id) {
+    CheckUnlocked();
+    var effect = new LightningChargedUCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsLightningChargedUC[id];
+
+    rootIncarnation.incarnationsLightningChargedUC.Remove(id);
+    effectsLightningChargedUCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetLightningChargedUCHash(int id, int version, LightningChargedUCIncarnation incarnation) {
+    int result = id * version;
+    return result;
+  }
+     
+  public void BroadcastLightningChargedUCEffects(
+      SortedDictionary<int, List<ILightningChargedUCEffectObserver>> observers) {
+    foreach (var effect in effectsLightningChargedUCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargedUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargedUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargedUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargedUCEffect(effect);
+        }
+        observersForLightningChargedUC.Remove(effect.id);
+      }
+    }
+    effectsLightningChargedUCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsLightningChargedUCCreateEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargedUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargedUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargedUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargedUCEffect(effect);
+        }
+      }
+    }
+    effectsLightningChargedUCCreateEffect.Clear();
+  }
+  public LightningChargingUCIncarnation GetLightningChargingUCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsLightningChargingUC[id].incarnation;
+  }
+  public bool LightningChargingUCExists(int id) {
+    return rootIncarnation.incarnationsLightningChargingUC.ContainsKey(id);
+  }
+  public LightningChargingUC GetLightningChargingUC(int id) {
+    return new LightningChargingUC(this, id);
+  }
+  public List<LightningChargingUC> AllLightningChargingUC() {
+    List<LightningChargingUC> result = new List<LightningChargingUC>(rootIncarnation.incarnationsLightningChargingUC.Count);
+    foreach (var id in rootIncarnation.incarnationsLightningChargingUC.Keys) {
+      result.Add(new LightningChargingUC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<LightningChargingUC> EnumAllLightningChargingUC() {
+    foreach (var id in rootIncarnation.incarnationsLightningChargingUC.Keys) {
+      yield return GetLightningChargingUC(id);
+    }
+  }
+  public void CheckHasLightningChargingUC(LightningChargingUC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasLightningChargingUC(thing.id);
+  }
+  public void CheckHasLightningChargingUC(int id) {
+    if (!rootIncarnation.incarnationsLightningChargingUC.ContainsKey(id)) {
+      throw new System.Exception("Invalid LightningChargingUC: " + id);
+    }
+  }
+  public void AddLightningChargingUCObserver(int id, ILightningChargingUCEffectObserver observer) {
+    List<ILightningChargingUCEffectObserver> obsies;
+    if (!observersForLightningChargingUC.TryGetValue(id, out obsies)) {
+      obsies = new List<ILightningChargingUCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForLightningChargingUC[id] = obsies;
+  }
+
+  public void RemoveLightningChargingUCObserver(int id, ILightningChargingUCEffectObserver observer) {
+    if (observersForLightningChargingUC.ContainsKey(id)) {
+      var list = observersForLightningChargingUC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForLightningChargingUC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public LightningChargingUC EffectLightningChargingUCCreate(
+) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new LightningChargingUCIncarnation(
+
+            );
+    EffectInternalCreateLightningChargingUC(id, rootIncarnation.version, incarnation);
+    return new LightningChargingUC(this, id);
+  }
+  public void EffectInternalCreateLightningChargingUC(
+      int id,
+      int incarnationVersion,
+      LightningChargingUCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new LightningChargingUCCreateEffect(id);
+    rootIncarnation.incarnationsLightningChargingUC.Add(
+        id,
+        new VersionAndIncarnation<LightningChargingUCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsLightningChargingUCCreateEffect.Add(effect);
+  }
+
+  public void EffectLightningChargingUCDelete(int id) {
+    CheckUnlocked();
+    var effect = new LightningChargingUCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsLightningChargingUC[id];
+
+    rootIncarnation.incarnationsLightningChargingUC.Remove(id);
+    effectsLightningChargingUCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetLightningChargingUCHash(int id, int version, LightningChargingUCIncarnation incarnation) {
+    int result = id * version;
+    return result;
+  }
+     
+  public void BroadcastLightningChargingUCEffects(
+      SortedDictionary<int, List<ILightningChargingUCEffectObserver>> observers) {
+    foreach (var effect in effectsLightningChargingUCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargingUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargingUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargingUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargingUCEffect(effect);
+        }
+        observersForLightningChargingUC.Remove(effect.id);
+      }
+    }
+    effectsLightningChargingUCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsLightningChargingUCCreateEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargingUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargingUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargingUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargingUCEffect(effect);
+        }
+      }
+    }
+    effectsLightningChargingUCCreateEffect.Clear();
   }
   public DoomedUCIncarnation GetDoomedUCIncarnation(int id) {
     if (id == 0) {
@@ -18885,13 +20979,15 @@ public class Root {
     }
   }
   public PursueImpulse EffectPursueImpulseCreate(
-      int weight) {
+      int weight,
+      bool isClearPath) {
     CheckUnlocked();
 
     var id = NewId();
     var incarnation =
         new PursueImpulseIncarnation(
-            weight
+            weight,
+            isClearPath
             );
     EffectInternalCreatePursueImpulse(id, rootIncarnation.version, incarnation);
     return new PursueImpulse(this, id);
@@ -18925,6 +21021,7 @@ public class Root {
   public int GetPursueImpulseHash(int id, int version, PursueImpulseIncarnation incarnation) {
     int result = id * version;
     result += id * version * 1 * incarnation.weight.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.isClearPath.GetDeterministicHashCode();
     return result;
   }
      
@@ -23895,14 +25992,17 @@ public class Root {
     }
   }
   public Wat EffectWatCreate(
-      IItemStrongMutBunch items) {
+      IItemStrongMutBunch items,
+      IImpulseStrongMutBunch impulses) {
     CheckUnlocked();
     CheckHasIItemStrongMutBunch(items);
+    CheckHasIImpulseStrongMutBunch(impulses);
 
     var id = NewId();
     var incarnation =
         new WatIncarnation(
-            items.id
+            items.id,
+            impulses.id
             );
     EffectInternalCreateWat(id, rootIncarnation.version, incarnation);
     return new Wat(this, id);
@@ -23936,6 +26036,7 @@ public class Root {
   public int GetWatHash(int id, int version, WatIncarnation incarnation) {
     int result = id * version;
     result += id * version * 1 * incarnation.items.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.impulses.GetDeterministicHashCode();
     return result;
   }
      
@@ -23970,6 +26071,200 @@ public class Root {
       }
     }
     effectsWatCreateEffect.Clear();
+  }
+  public IImpulseStrongMutBunchIncarnation GetIImpulseStrongMutBunchIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsIImpulseStrongMutBunch[id].incarnation;
+  }
+  public bool IImpulseStrongMutBunchExists(int id) {
+    return rootIncarnation.incarnationsIImpulseStrongMutBunch.ContainsKey(id);
+  }
+  public IImpulseStrongMutBunch GetIImpulseStrongMutBunch(int id) {
+    return new IImpulseStrongMutBunch(this, id);
+  }
+  public List<IImpulseStrongMutBunch> AllIImpulseStrongMutBunch() {
+    List<IImpulseStrongMutBunch> result = new List<IImpulseStrongMutBunch>(rootIncarnation.incarnationsIImpulseStrongMutBunch.Count);
+    foreach (var id in rootIncarnation.incarnationsIImpulseStrongMutBunch.Keys) {
+      result.Add(new IImpulseStrongMutBunch(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<IImpulseStrongMutBunch> EnumAllIImpulseStrongMutBunch() {
+    foreach (var id in rootIncarnation.incarnationsIImpulseStrongMutBunch.Keys) {
+      yield return GetIImpulseStrongMutBunch(id);
+    }
+  }
+  public void CheckHasIImpulseStrongMutBunch(IImpulseStrongMutBunch thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasIImpulseStrongMutBunch(thing.id);
+  }
+  public void CheckHasIImpulseStrongMutBunch(int id) {
+    if (!rootIncarnation.incarnationsIImpulseStrongMutBunch.ContainsKey(id)) {
+      throw new System.Exception("Invalid IImpulseStrongMutBunch: " + id);
+    }
+  }
+  public void AddIImpulseStrongMutBunchObserver(int id, IIImpulseStrongMutBunchEffectObserver observer) {
+    List<IIImpulseStrongMutBunchEffectObserver> obsies;
+    if (!observersForIImpulseStrongMutBunch.TryGetValue(id, out obsies)) {
+      obsies = new List<IIImpulseStrongMutBunchEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForIImpulseStrongMutBunch[id] = obsies;
+  }
+
+  public void RemoveIImpulseStrongMutBunchObserver(int id, IIImpulseStrongMutBunchEffectObserver observer) {
+    if (observersForIImpulseStrongMutBunch.ContainsKey(id)) {
+      var list = observersForIImpulseStrongMutBunch[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForIImpulseStrongMutBunch.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public IImpulseStrongMutBunch EffectIImpulseStrongMutBunchCreate(
+      TemporaryCloneImpulseStrongMutSet membersTemporaryCloneImpulseStrongMutSet,
+      SummonImpulseStrongMutSet membersSummonImpulseStrongMutSet,
+      MireImpulseStrongMutSet membersMireImpulseStrongMutSet,
+      EvaporateImpulseStrongMutSet membersEvaporateImpulseStrongMutSet,
+      MoveImpulseStrongMutSet membersMoveImpulseStrongMutSet,
+      KamikazeJumpImpulseStrongMutSet membersKamikazeJumpImpulseStrongMutSet,
+      KamikazeTargetImpulseStrongMutSet membersKamikazeTargetImpulseStrongMutSet,
+      NoImpulseStrongMutSet membersNoImpulseStrongMutSet,
+      FireImpulseStrongMutSet membersFireImpulseStrongMutSet,
+      DefyImpulseStrongMutSet membersDefyImpulseStrongMutSet,
+      CounterImpulseStrongMutSet membersCounterImpulseStrongMutSet,
+      UnleashBideImpulseStrongMutSet membersUnleashBideImpulseStrongMutSet,
+      ContinueBidingImpulseStrongMutSet membersContinueBidingImpulseStrongMutSet,
+      StartBidingImpulseStrongMutSet membersStartBidingImpulseStrongMutSet,
+      AttackImpulseStrongMutSet membersAttackImpulseStrongMutSet,
+      PursueImpulseStrongMutSet membersPursueImpulseStrongMutSet,
+      FireBombImpulseStrongMutSet membersFireBombImpulseStrongMutSet) {
+    CheckUnlocked();
+    CheckHasTemporaryCloneImpulseStrongMutSet(membersTemporaryCloneImpulseStrongMutSet);
+    CheckHasSummonImpulseStrongMutSet(membersSummonImpulseStrongMutSet);
+    CheckHasMireImpulseStrongMutSet(membersMireImpulseStrongMutSet);
+    CheckHasEvaporateImpulseStrongMutSet(membersEvaporateImpulseStrongMutSet);
+    CheckHasMoveImpulseStrongMutSet(membersMoveImpulseStrongMutSet);
+    CheckHasKamikazeJumpImpulseStrongMutSet(membersKamikazeJumpImpulseStrongMutSet);
+    CheckHasKamikazeTargetImpulseStrongMutSet(membersKamikazeTargetImpulseStrongMutSet);
+    CheckHasNoImpulseStrongMutSet(membersNoImpulseStrongMutSet);
+    CheckHasFireImpulseStrongMutSet(membersFireImpulseStrongMutSet);
+    CheckHasDefyImpulseStrongMutSet(membersDefyImpulseStrongMutSet);
+    CheckHasCounterImpulseStrongMutSet(membersCounterImpulseStrongMutSet);
+    CheckHasUnleashBideImpulseStrongMutSet(membersUnleashBideImpulseStrongMutSet);
+    CheckHasContinueBidingImpulseStrongMutSet(membersContinueBidingImpulseStrongMutSet);
+    CheckHasStartBidingImpulseStrongMutSet(membersStartBidingImpulseStrongMutSet);
+    CheckHasAttackImpulseStrongMutSet(membersAttackImpulseStrongMutSet);
+    CheckHasPursueImpulseStrongMutSet(membersPursueImpulseStrongMutSet);
+    CheckHasFireBombImpulseStrongMutSet(membersFireBombImpulseStrongMutSet);
+
+    var id = NewId();
+    var incarnation =
+        new IImpulseStrongMutBunchIncarnation(
+            membersTemporaryCloneImpulseStrongMutSet.id,
+            membersSummonImpulseStrongMutSet.id,
+            membersMireImpulseStrongMutSet.id,
+            membersEvaporateImpulseStrongMutSet.id,
+            membersMoveImpulseStrongMutSet.id,
+            membersKamikazeJumpImpulseStrongMutSet.id,
+            membersKamikazeTargetImpulseStrongMutSet.id,
+            membersNoImpulseStrongMutSet.id,
+            membersFireImpulseStrongMutSet.id,
+            membersDefyImpulseStrongMutSet.id,
+            membersCounterImpulseStrongMutSet.id,
+            membersUnleashBideImpulseStrongMutSet.id,
+            membersContinueBidingImpulseStrongMutSet.id,
+            membersStartBidingImpulseStrongMutSet.id,
+            membersAttackImpulseStrongMutSet.id,
+            membersPursueImpulseStrongMutSet.id,
+            membersFireBombImpulseStrongMutSet.id
+            );
+    EffectInternalCreateIImpulseStrongMutBunch(id, rootIncarnation.version, incarnation);
+    return new IImpulseStrongMutBunch(this, id);
+  }
+  public void EffectInternalCreateIImpulseStrongMutBunch(
+      int id,
+      int incarnationVersion,
+      IImpulseStrongMutBunchIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new IImpulseStrongMutBunchCreateEffect(id);
+    rootIncarnation.incarnationsIImpulseStrongMutBunch.Add(
+        id,
+        new VersionAndIncarnation<IImpulseStrongMutBunchIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsIImpulseStrongMutBunchCreateEffect.Add(effect);
+  }
+
+  public void EffectIImpulseStrongMutBunchDelete(int id) {
+    CheckUnlocked();
+    var effect = new IImpulseStrongMutBunchDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsIImpulseStrongMutBunch[id];
+
+    rootIncarnation.incarnationsIImpulseStrongMutBunch.Remove(id);
+    effectsIImpulseStrongMutBunchDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetIImpulseStrongMutBunchHash(int id, int version, IImpulseStrongMutBunchIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.membersTemporaryCloneImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersSummonImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersMireImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersEvaporateImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersMoveImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersKamikazeJumpImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersKamikazeTargetImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersNoImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersFireImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.membersDefyImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.membersCounterImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.membersUnleashBideImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 13 * incarnation.membersContinueBidingImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.membersStartBidingImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.membersAttackImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 16 * incarnation.membersPursueImpulseStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 17 * incarnation.membersFireBombImpulseStrongMutSet.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastIImpulseStrongMutBunchEffects(
+      SortedDictionary<int, List<IIImpulseStrongMutBunchEffectObserver>> observers) {
+    foreach (var effect in effectsIImpulseStrongMutBunchDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IIImpulseStrongMutBunchEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIImpulseStrongMutBunchEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIImpulseStrongMutBunchEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIImpulseStrongMutBunchEffect(effect);
+        }
+        observersForIImpulseStrongMutBunch.Remove(effect.id);
+      }
+    }
+    effectsIImpulseStrongMutBunchDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsIImpulseStrongMutBunchCreateEffect) {
+      if (observers.TryGetValue(0, out List<IIImpulseStrongMutBunchEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnIImpulseStrongMutBunchEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IIImpulseStrongMutBunchEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnIImpulseStrongMutBunchEffect(effect);
+        }
+      }
+    }
+    effectsIImpulseStrongMutBunchCreateEffect.Clear();
   }
   public IItemStrongMutBunchIncarnation GetIItemStrongMutBunchIncarnation(int id) {
     if (id == 0) {
@@ -26035,13 +28330,16 @@ public class Root {
     }
   }
   public IPostActingUCWeakMutBunch EffectIPostActingUCWeakMutBunchCreate(
+      LightningChargedUCWeakMutSet membersLightningChargedUCWeakMutSet,
       TimeCloneAICapabilityUCWeakMutSet membersTimeCloneAICapabilityUCWeakMutSet) {
     CheckUnlocked();
+    CheckHasLightningChargedUCWeakMutSet(membersLightningChargedUCWeakMutSet);
     CheckHasTimeCloneAICapabilityUCWeakMutSet(membersTimeCloneAICapabilityUCWeakMutSet);
 
     var id = NewId();
     var incarnation =
         new IPostActingUCWeakMutBunchIncarnation(
+            membersLightningChargedUCWeakMutSet.id,
             membersTimeCloneAICapabilityUCWeakMutSet.id
             );
     EffectInternalCreateIPostActingUCWeakMutBunch(id, rootIncarnation.version, incarnation);
@@ -26075,7 +28373,8 @@ public class Root {
      
   public int GetIPostActingUCWeakMutBunchHash(int id, int version, IPostActingUCWeakMutBunchIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.membersTimeCloneAICapabilityUCWeakMutSet.GetDeterministicHashCode();
+    result += id * version * 1 * incarnation.membersLightningChargedUCWeakMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersTimeCloneAICapabilityUCWeakMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -28007,6 +30306,9 @@ public class Root {
   }
 
   public IImpulsePreReactor GetIImpulsePreReactor(int id) {
+    if (rootIncarnation.incarnationsLightningChargingUC.ContainsKey(id)) {
+      return new LightningChargingUCAsIImpulsePreReactor(new LightningChargingUC(this, id));
+    }
     if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
       return new KamikazeAICapabilityUCAsIImpulsePreReactor(new KamikazeAICapabilityUC(this, id));
     }
@@ -28019,6 +30321,9 @@ public class Root {
     throw new Exception("Unknown IImpulsePreReactor: " + id);
   }
   public IImpulsePreReactor GetIImpulsePreReactorOrNull(int id) {
+    if (rootIncarnation.incarnationsLightningChargingUC.ContainsKey(id)) {
+      return new LightningChargingUCAsIImpulsePreReactor(new LightningChargingUC(this, id));
+    }
     if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
       return new KamikazeAICapabilityUCAsIImpulsePreReactor(new KamikazeAICapabilityUC(this, id));
     }
@@ -28105,12 +30410,18 @@ public class Root {
   }
 
   public IPostActingUC GetIPostActingUC(int id) {
+    if (rootIncarnation.incarnationsLightningChargedUC.ContainsKey(id)) {
+      return new LightningChargedUCAsIPostActingUC(new LightningChargedUC(this, id));
+    }
     if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
       return new TimeCloneAICapabilityUCAsIPostActingUC(new TimeCloneAICapabilityUC(this, id));
     }
     throw new Exception("Unknown IPostActingUC: " + id);
   }
   public IPostActingUC GetIPostActingUCOrNull(int id) {
+    if (rootIncarnation.incarnationsLightningChargedUC.ContainsKey(id)) {
+      return new LightningChargedUCAsIPostActingUC(new LightningChargedUC(this, id));
+    }
     if (rootIncarnation.incarnationsTimeCloneAICapabilityUC.ContainsKey(id)) {
       return new TimeCloneAICapabilityUCAsIPostActingUC(new TimeCloneAICapabilityUC(this, id));
     }
@@ -28201,6 +30512,9 @@ public class Root {
   }
 
   public IUnitComponent GetIUnitComponent(int id) {
+    if (rootIncarnation.incarnationsLightningChargingUC.ContainsKey(id)) {
+      return new LightningChargingUCAsIUnitComponent(new LightningChargingUC(this, id));
+    }
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIUnitComponent(new WanderAICapabilityUC(this, id));
     }
@@ -28230,6 +30544,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsCounteringUC.ContainsKey(id)) {
       return new CounteringUCAsIUnitComponent(new CounteringUC(this, id));
+    }
+    if (rootIncarnation.incarnationsLightningChargedUC.ContainsKey(id)) {
+      return new LightningChargedUCAsIUnitComponent(new LightningChargedUC(this, id));
     }
     if (rootIncarnation.incarnationsInvincibilityUC.ContainsKey(id)) {
       return new InvincibilityUCAsIUnitComponent(new InvincibilityUC(this, id));
@@ -28276,6 +30593,9 @@ public class Root {
     throw new Exception("Unknown IUnitComponent: " + id);
   }
   public IUnitComponent GetIUnitComponentOrNull(int id) {
+    if (rootIncarnation.incarnationsLightningChargingUC.ContainsKey(id)) {
+      return new LightningChargingUCAsIUnitComponent(new LightningChargingUC(this, id));
+    }
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIUnitComponent(new WanderAICapabilityUC(this, id));
     }
@@ -28305,6 +30625,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsCounteringUC.ContainsKey(id)) {
       return new CounteringUCAsIUnitComponent(new CounteringUC(this, id));
+    }
+    if (rootIncarnation.incarnationsLightningChargedUC.ContainsKey(id)) {
+      return new LightningChargedUCAsIUnitComponent(new LightningChargedUC(this, id));
     }
     if (rootIncarnation.incarnationsInvincibilityUC.ContainsKey(id)) {
       return new InvincibilityUCAsIUnitComponent(new InvincibilityUC(this, id));
@@ -28395,6 +30718,9 @@ public class Root {
   }
 
   public IMovementTimeFactorUC GetIMovementTimeFactorUC(int id) {
+    if (rootIncarnation.incarnationsLightningChargedUC.ContainsKey(id)) {
+      return new LightningChargedUCAsIMovementTimeFactorUC(new LightningChargedUC(this, id));
+    }
     if (rootIncarnation.incarnationsBaseMovementTimeUC.ContainsKey(id)) {
       return new BaseMovementTimeUCAsIMovementTimeFactorUC(new BaseMovementTimeUC(this, id));
     }
@@ -28404,6 +30730,9 @@ public class Root {
     throw new Exception("Unknown IMovementTimeFactorUC: " + id);
   }
   public IMovementTimeFactorUC GetIMovementTimeFactorUCOrNull(int id) {
+    if (rootIncarnation.incarnationsLightningChargedUC.ContainsKey(id)) {
+      return new LightningChargedUCAsIMovementTimeFactorUC(new LightningChargedUC(this, id));
+    }
     if (rootIncarnation.incarnationsBaseMovementTimeUC.ContainsKey(id)) {
       return new BaseMovementTimeUCAsIMovementTimeFactorUC(new BaseMovementTimeUC(this, id));
     }
@@ -29237,6 +31566,9 @@ public class Root {
   }
 
   public IDestructible GetIDestructible(int id) {
+    if (rootIncarnation.incarnationsLightningChargingUC.ContainsKey(id)) {
+      return new LightningChargingUCAsIDestructible(new LightningChargingUC(this, id));
+    }
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIDestructible(new WanderAICapabilityUC(this, id));
     }
@@ -29266,6 +31598,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsCounteringUC.ContainsKey(id)) {
       return new CounteringUCAsIDestructible(new CounteringUC(this, id));
+    }
+    if (rootIncarnation.incarnationsLightningChargedUC.ContainsKey(id)) {
+      return new LightningChargedUCAsIDestructible(new LightningChargedUC(this, id));
     }
     if (rootIncarnation.incarnationsInvincibilityUC.ContainsKey(id)) {
       return new InvincibilityUCAsIDestructible(new InvincibilityUC(this, id));
@@ -29456,6 +31791,9 @@ public class Root {
     throw new Exception("Unknown IDestructible: " + id);
   }
   public IDestructible GetIDestructibleOrNull(int id) {
+    if (rootIncarnation.incarnationsLightningChargingUC.ContainsKey(id)) {
+      return new LightningChargingUCAsIDestructible(new LightningChargingUC(this, id));
+    }
     if (rootIncarnation.incarnationsWanderAICapabilityUC.ContainsKey(id)) {
       return new WanderAICapabilityUCAsIDestructible(new WanderAICapabilityUC(this, id));
     }
@@ -29485,6 +31823,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsCounteringUC.ContainsKey(id)) {
       return new CounteringUCAsIDestructible(new CounteringUC(this, id));
+    }
+    if (rootIncarnation.incarnationsLightningChargedUC.ContainsKey(id)) {
+      return new LightningChargedUCAsIDestructible(new LightningChargedUC(this, id));
     }
     if (rootIncarnation.incarnationsInvincibilityUC.ContainsKey(id)) {
       return new InvincibilityUCAsIDestructible(new InvincibilityUC(this, id));
@@ -31773,6 +34114,197 @@ public class Root {
 
   }
 
+    public int GetLightningChargedUCWeakMutSetHash(int id, int version, LightningChargedUCWeakMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public LightningChargedUCWeakMutSetIncarnation GetLightningChargedUCWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsLightningChargedUCWeakMutSet[id].incarnation;
+    }
+    public LightningChargedUCWeakMutSet GetLightningChargedUCWeakMutSet(int id) {
+      return new LightningChargedUCWeakMutSet(this, id);
+    }
+    public List<LightningChargedUCWeakMutSet> AllLightningChargedUCWeakMutSet() {
+      List<LightningChargedUCWeakMutSet> result = new List<LightningChargedUCWeakMutSet>(rootIncarnation.incarnationsLightningChargedUCWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsLightningChargedUCWeakMutSet.Keys) {
+        result.Add(new LightningChargedUCWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool LightningChargedUCWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasLightningChargedUCWeakMutSet(LightningChargedUCWeakMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasLightningChargedUCWeakMutSet(thing.id);
+    }
+    public void CheckHasLightningChargedUCWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid LightningChargedUCWeakMutSet}: " + id);
+      }
+    }
+    public LightningChargedUCWeakMutSet EffectLightningChargedUCWeakMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new LightningChargedUCWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateLightningChargedUCWeakMutSet(id, rootIncarnation.version, incarnation);
+      return new LightningChargedUCWeakMutSet(this, id);
+    }
+    public void EffectInternalCreateLightningChargedUCWeakMutSet(int id, int incarnationVersion, LightningChargedUCWeakMutSetIncarnation incarnation) {
+      var effect = new LightningChargedUCWeakMutSetCreateEffect(id);
+      rootIncarnation.incarnationsLightningChargedUCWeakMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsLightningChargedUCWeakMutSetCreateEffect.Add(effect);
+    }
+    public void EffectLightningChargedUCWeakMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new LightningChargedUCWeakMutSetDeleteEffect(id);
+      effectsLightningChargedUCWeakMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[id];
+      rootIncarnation.incarnationsLightningChargedUCWeakMutSet.Remove(id);
+    }
+
+       
+    public void EffectLightningChargedUCWeakMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasLightningChargedUCWeakMutSet(setId);
+      CheckHasLightningChargedUC(elementId);
+
+      var effect = new LightningChargedUCWeakMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new LightningChargedUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId] =
+            new VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsLightningChargedUCWeakMutSetAddEffect.Add(effect);
+    }
+    public void EffectLightningChargedUCWeakMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasLightningChargedUCWeakMutSet(setId);
+      CheckHasLightningChargedUC(elementId);
+
+      var effect = new LightningChargedUCWeakMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new LightningChargedUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId] =
+            new VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsLightningChargedUCWeakMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddLightningChargedUCWeakMutSetObserver(int id, ILightningChargedUCWeakMutSetEffectObserver observer) {
+      List<ILightningChargedUCWeakMutSetEffectObserver> obsies;
+      if (!observersForLightningChargedUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ILightningChargedUCWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForLightningChargedUCWeakMutSet[id] = obsies;
+    }
+
+    public void RemoveLightningChargedUCWeakMutSetObserver(int id, ILightningChargedUCWeakMutSetEffectObserver observer) {
+      if (observersForLightningChargedUCWeakMutSet.ContainsKey(id)) {
+        var list = observersForLightningChargedUCWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForLightningChargedUCWeakMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastLightningChargedUCWeakMutSetEffects(
+      SortedDictionary<int, List<ILightningChargedUCWeakMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsLightningChargedUCWeakMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargedUCWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargedUCWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargedUCWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargedUCWeakMutSetEffect(effect);
+        }
+        observersForLightningChargedUCWeakMutSet.Remove(effect.id);
+      }
+    }
+    effectsLightningChargedUCWeakMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsLightningChargedUCWeakMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargedUCWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargedUCWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargedUCWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargedUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    effectsLightningChargedUCWeakMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsLightningChargedUCWeakMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargedUCWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargedUCWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargedUCWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargedUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    effectsLightningChargedUCWeakMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsLightningChargedUCWeakMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargedUCWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargedUCWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargedUCWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargedUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    effectsLightningChargedUCWeakMutSetCreateEffect.Clear();
+
+  }
+
     public int GetTimeCloneAICapabilityUCWeakMutSetHash(int id, int version, TimeCloneAICapabilityUCWeakMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.set) {
@@ -33107,6 +35639,3253 @@ public class Root {
       }
     }
     effectsArmorStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetTemporaryCloneImpulseStrongMutSetHash(int id, int version, TemporaryCloneImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public TemporaryCloneImpulseStrongMutSetIncarnation GetTemporaryCloneImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet[id].incarnation;
+    }
+    public TemporaryCloneImpulseStrongMutSet GetTemporaryCloneImpulseStrongMutSet(int id) {
+      return new TemporaryCloneImpulseStrongMutSet(this, id);
+    }
+    public List<TemporaryCloneImpulseStrongMutSet> AllTemporaryCloneImpulseStrongMutSet() {
+      List<TemporaryCloneImpulseStrongMutSet> result = new List<TemporaryCloneImpulseStrongMutSet>(rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet.Keys) {
+        result.Add(new TemporaryCloneImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool TemporaryCloneImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasTemporaryCloneImpulseStrongMutSet(TemporaryCloneImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasTemporaryCloneImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasTemporaryCloneImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid TemporaryCloneImpulseStrongMutSet}: " + id);
+      }
+    }
+    public TemporaryCloneImpulseStrongMutSet EffectTemporaryCloneImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new TemporaryCloneImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateTemporaryCloneImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new TemporaryCloneImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateTemporaryCloneImpulseStrongMutSet(int id, int incarnationVersion, TemporaryCloneImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new TemporaryCloneImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<TemporaryCloneImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsTemporaryCloneImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectTemporaryCloneImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new TemporaryCloneImpulseStrongMutSetDeleteEffect(id);
+      effectsTemporaryCloneImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectTemporaryCloneImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasTemporaryCloneImpulseStrongMutSet(setId);
+      CheckHasTemporaryCloneImpulse(elementId);
+
+      var effect = new TemporaryCloneImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new TemporaryCloneImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<TemporaryCloneImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsTemporaryCloneImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectTemporaryCloneImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasTemporaryCloneImpulseStrongMutSet(setId);
+      CheckHasTemporaryCloneImpulse(elementId);
+
+      var effect = new TemporaryCloneImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new TemporaryCloneImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsTemporaryCloneImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<TemporaryCloneImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsTemporaryCloneImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddTemporaryCloneImpulseStrongMutSetObserver(int id, ITemporaryCloneImpulseStrongMutSetEffectObserver observer) {
+      List<ITemporaryCloneImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForTemporaryCloneImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ITemporaryCloneImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForTemporaryCloneImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveTemporaryCloneImpulseStrongMutSetObserver(int id, ITemporaryCloneImpulseStrongMutSetEffectObserver observer) {
+      if (observersForTemporaryCloneImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForTemporaryCloneImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForTemporaryCloneImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastTemporaryCloneImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<ITemporaryCloneImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsTemporaryCloneImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ITemporaryCloneImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTemporaryCloneImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ITemporaryCloneImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTemporaryCloneImpulseStrongMutSetEffect(effect);
+        }
+        observersForTemporaryCloneImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsTemporaryCloneImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsTemporaryCloneImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<ITemporaryCloneImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTemporaryCloneImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ITemporaryCloneImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTemporaryCloneImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsTemporaryCloneImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsTemporaryCloneImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<ITemporaryCloneImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTemporaryCloneImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ITemporaryCloneImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTemporaryCloneImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsTemporaryCloneImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsTemporaryCloneImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<ITemporaryCloneImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTemporaryCloneImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ITemporaryCloneImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTemporaryCloneImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsTemporaryCloneImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetSummonImpulseStrongMutSetHash(int id, int version, SummonImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public SummonImpulseStrongMutSetIncarnation GetSummonImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsSummonImpulseStrongMutSet[id].incarnation;
+    }
+    public SummonImpulseStrongMutSet GetSummonImpulseStrongMutSet(int id) {
+      return new SummonImpulseStrongMutSet(this, id);
+    }
+    public List<SummonImpulseStrongMutSet> AllSummonImpulseStrongMutSet() {
+      List<SummonImpulseStrongMutSet> result = new List<SummonImpulseStrongMutSet>(rootIncarnation.incarnationsSummonImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsSummonImpulseStrongMutSet.Keys) {
+        result.Add(new SummonImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool SummonImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsSummonImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasSummonImpulseStrongMutSet(SummonImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasSummonImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasSummonImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsSummonImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid SummonImpulseStrongMutSet}: " + id);
+      }
+    }
+    public SummonImpulseStrongMutSet EffectSummonImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new SummonImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateSummonImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new SummonImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateSummonImpulseStrongMutSet(int id, int incarnationVersion, SummonImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new SummonImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsSummonImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<SummonImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsSummonImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectSummonImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new SummonImpulseStrongMutSetDeleteEffect(id);
+      effectsSummonImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsSummonImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsSummonImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectSummonImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasSummonImpulseStrongMutSet(setId);
+      CheckHasSummonImpulse(elementId);
+
+      var effect = new SummonImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsSummonImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new SummonImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsSummonImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<SummonImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsSummonImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectSummonImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasSummonImpulseStrongMutSet(setId);
+      CheckHasSummonImpulse(elementId);
+
+      var effect = new SummonImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsSummonImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new SummonImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsSummonImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<SummonImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsSummonImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddSummonImpulseStrongMutSetObserver(int id, ISummonImpulseStrongMutSetEffectObserver observer) {
+      List<ISummonImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForSummonImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ISummonImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForSummonImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveSummonImpulseStrongMutSetObserver(int id, ISummonImpulseStrongMutSetEffectObserver observer) {
+      if (observersForSummonImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForSummonImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForSummonImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastSummonImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<ISummonImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsSummonImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ISummonImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonImpulseStrongMutSetEffect(effect);
+        }
+        observersForSummonImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsSummonImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsSummonImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<ISummonImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsSummonImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsSummonImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<ISummonImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsSummonImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsSummonImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<ISummonImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnSummonImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ISummonImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnSummonImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsSummonImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetMireImpulseStrongMutSetHash(int id, int version, MireImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public MireImpulseStrongMutSetIncarnation GetMireImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsMireImpulseStrongMutSet[id].incarnation;
+    }
+    public MireImpulseStrongMutSet GetMireImpulseStrongMutSet(int id) {
+      return new MireImpulseStrongMutSet(this, id);
+    }
+    public List<MireImpulseStrongMutSet> AllMireImpulseStrongMutSet() {
+      List<MireImpulseStrongMutSet> result = new List<MireImpulseStrongMutSet>(rootIncarnation.incarnationsMireImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsMireImpulseStrongMutSet.Keys) {
+        result.Add(new MireImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool MireImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsMireImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasMireImpulseStrongMutSet(MireImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasMireImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasMireImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsMireImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid MireImpulseStrongMutSet}: " + id);
+      }
+    }
+    public MireImpulseStrongMutSet EffectMireImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new MireImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateMireImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new MireImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateMireImpulseStrongMutSet(int id, int incarnationVersion, MireImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new MireImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsMireImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<MireImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsMireImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectMireImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new MireImpulseStrongMutSetDeleteEffect(id);
+      effectsMireImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsMireImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsMireImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectMireImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasMireImpulseStrongMutSet(setId);
+      CheckHasMireImpulse(elementId);
+
+      var effect = new MireImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsMireImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new MireImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsMireImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<MireImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsMireImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectMireImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasMireImpulseStrongMutSet(setId);
+      CheckHasMireImpulse(elementId);
+
+      var effect = new MireImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsMireImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new MireImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsMireImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<MireImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsMireImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddMireImpulseStrongMutSetObserver(int id, IMireImpulseStrongMutSetEffectObserver observer) {
+      List<IMireImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForMireImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IMireImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForMireImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveMireImpulseStrongMutSetObserver(int id, IMireImpulseStrongMutSetEffectObserver observer) {
+      if (observersForMireImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForMireImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForMireImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastMireImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IMireImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsMireImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IMireImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnMireImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IMireImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnMireImpulseStrongMutSetEffect(effect);
+        }
+        observersForMireImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsMireImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsMireImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IMireImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnMireImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IMireImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnMireImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsMireImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsMireImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IMireImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnMireImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IMireImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnMireImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsMireImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsMireImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IMireImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnMireImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IMireImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnMireImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsMireImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetEvaporateImpulseStrongMutSetHash(int id, int version, EvaporateImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public EvaporateImpulseStrongMutSetIncarnation GetEvaporateImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsEvaporateImpulseStrongMutSet[id].incarnation;
+    }
+    public EvaporateImpulseStrongMutSet GetEvaporateImpulseStrongMutSet(int id) {
+      return new EvaporateImpulseStrongMutSet(this, id);
+    }
+    public List<EvaporateImpulseStrongMutSet> AllEvaporateImpulseStrongMutSet() {
+      List<EvaporateImpulseStrongMutSet> result = new List<EvaporateImpulseStrongMutSet>(rootIncarnation.incarnationsEvaporateImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsEvaporateImpulseStrongMutSet.Keys) {
+        result.Add(new EvaporateImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool EvaporateImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsEvaporateImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasEvaporateImpulseStrongMutSet(EvaporateImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasEvaporateImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasEvaporateImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsEvaporateImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid EvaporateImpulseStrongMutSet}: " + id);
+      }
+    }
+    public EvaporateImpulseStrongMutSet EffectEvaporateImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new EvaporateImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateEvaporateImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new EvaporateImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateEvaporateImpulseStrongMutSet(int id, int incarnationVersion, EvaporateImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new EvaporateImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsEvaporateImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<EvaporateImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsEvaporateImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectEvaporateImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new EvaporateImpulseStrongMutSetDeleteEffect(id);
+      effectsEvaporateImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsEvaporateImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsEvaporateImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectEvaporateImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasEvaporateImpulseStrongMutSet(setId);
+      CheckHasEvaporateImpulse(elementId);
+
+      var effect = new EvaporateImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsEvaporateImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new EvaporateImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsEvaporateImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<EvaporateImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsEvaporateImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectEvaporateImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasEvaporateImpulseStrongMutSet(setId);
+      CheckHasEvaporateImpulse(elementId);
+
+      var effect = new EvaporateImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsEvaporateImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new EvaporateImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsEvaporateImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<EvaporateImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsEvaporateImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddEvaporateImpulseStrongMutSetObserver(int id, IEvaporateImpulseStrongMutSetEffectObserver observer) {
+      List<IEvaporateImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForEvaporateImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IEvaporateImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForEvaporateImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveEvaporateImpulseStrongMutSetObserver(int id, IEvaporateImpulseStrongMutSetEffectObserver observer) {
+      if (observersForEvaporateImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForEvaporateImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForEvaporateImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastEvaporateImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IEvaporateImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsEvaporateImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IEvaporateImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnEvaporateImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IEvaporateImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnEvaporateImpulseStrongMutSetEffect(effect);
+        }
+        observersForEvaporateImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsEvaporateImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsEvaporateImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IEvaporateImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnEvaporateImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IEvaporateImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnEvaporateImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsEvaporateImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsEvaporateImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IEvaporateImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnEvaporateImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IEvaporateImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnEvaporateImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsEvaporateImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsEvaporateImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IEvaporateImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnEvaporateImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IEvaporateImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnEvaporateImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsEvaporateImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetMoveImpulseStrongMutSetHash(int id, int version, MoveImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public MoveImpulseStrongMutSetIncarnation GetMoveImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsMoveImpulseStrongMutSet[id].incarnation;
+    }
+    public MoveImpulseStrongMutSet GetMoveImpulseStrongMutSet(int id) {
+      return new MoveImpulseStrongMutSet(this, id);
+    }
+    public List<MoveImpulseStrongMutSet> AllMoveImpulseStrongMutSet() {
+      List<MoveImpulseStrongMutSet> result = new List<MoveImpulseStrongMutSet>(rootIncarnation.incarnationsMoveImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsMoveImpulseStrongMutSet.Keys) {
+        result.Add(new MoveImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool MoveImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsMoveImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasMoveImpulseStrongMutSet(MoveImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasMoveImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasMoveImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsMoveImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid MoveImpulseStrongMutSet}: " + id);
+      }
+    }
+    public MoveImpulseStrongMutSet EffectMoveImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new MoveImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateMoveImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new MoveImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateMoveImpulseStrongMutSet(int id, int incarnationVersion, MoveImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new MoveImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsMoveImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<MoveImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsMoveImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectMoveImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new MoveImpulseStrongMutSetDeleteEffect(id);
+      effectsMoveImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsMoveImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsMoveImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectMoveImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasMoveImpulseStrongMutSet(setId);
+      CheckHasMoveImpulse(elementId);
+
+      var effect = new MoveImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsMoveImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new MoveImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsMoveImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<MoveImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsMoveImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectMoveImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasMoveImpulseStrongMutSet(setId);
+      CheckHasMoveImpulse(elementId);
+
+      var effect = new MoveImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsMoveImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new MoveImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsMoveImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<MoveImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsMoveImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddMoveImpulseStrongMutSetObserver(int id, IMoveImpulseStrongMutSetEffectObserver observer) {
+      List<IMoveImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForMoveImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IMoveImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForMoveImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveMoveImpulseStrongMutSetObserver(int id, IMoveImpulseStrongMutSetEffectObserver observer) {
+      if (observersForMoveImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForMoveImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForMoveImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastMoveImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IMoveImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsMoveImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IMoveImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnMoveImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IMoveImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnMoveImpulseStrongMutSetEffect(effect);
+        }
+        observersForMoveImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsMoveImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsMoveImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IMoveImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnMoveImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IMoveImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnMoveImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsMoveImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsMoveImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IMoveImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnMoveImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IMoveImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnMoveImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsMoveImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsMoveImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IMoveImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnMoveImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IMoveImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnMoveImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsMoveImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetKamikazeJumpImpulseStrongMutSetHash(int id, int version, KamikazeJumpImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public KamikazeJumpImpulseStrongMutSetIncarnation GetKamikazeJumpImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet[id].incarnation;
+    }
+    public KamikazeJumpImpulseStrongMutSet GetKamikazeJumpImpulseStrongMutSet(int id) {
+      return new KamikazeJumpImpulseStrongMutSet(this, id);
+    }
+    public List<KamikazeJumpImpulseStrongMutSet> AllKamikazeJumpImpulseStrongMutSet() {
+      List<KamikazeJumpImpulseStrongMutSet> result = new List<KamikazeJumpImpulseStrongMutSet>(rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet.Keys) {
+        result.Add(new KamikazeJumpImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool KamikazeJumpImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasKamikazeJumpImpulseStrongMutSet(KamikazeJumpImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasKamikazeJumpImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasKamikazeJumpImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid KamikazeJumpImpulseStrongMutSet}: " + id);
+      }
+    }
+    public KamikazeJumpImpulseStrongMutSet EffectKamikazeJumpImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new KamikazeJumpImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateKamikazeJumpImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new KamikazeJumpImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateKamikazeJumpImpulseStrongMutSet(int id, int incarnationVersion, KamikazeJumpImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new KamikazeJumpImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<KamikazeJumpImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsKamikazeJumpImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectKamikazeJumpImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new KamikazeJumpImpulseStrongMutSetDeleteEffect(id);
+      effectsKamikazeJumpImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectKamikazeJumpImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasKamikazeJumpImpulseStrongMutSet(setId);
+      CheckHasKamikazeJumpImpulse(elementId);
+
+      var effect = new KamikazeJumpImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new KamikazeJumpImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<KamikazeJumpImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsKamikazeJumpImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectKamikazeJumpImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasKamikazeJumpImpulseStrongMutSet(setId);
+      CheckHasKamikazeJumpImpulse(elementId);
+
+      var effect = new KamikazeJumpImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new KamikazeJumpImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsKamikazeJumpImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<KamikazeJumpImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsKamikazeJumpImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddKamikazeJumpImpulseStrongMutSetObserver(int id, IKamikazeJumpImpulseStrongMutSetEffectObserver observer) {
+      List<IKamikazeJumpImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForKamikazeJumpImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IKamikazeJumpImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForKamikazeJumpImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveKamikazeJumpImpulseStrongMutSetObserver(int id, IKamikazeJumpImpulseStrongMutSetEffectObserver observer) {
+      if (observersForKamikazeJumpImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForKamikazeJumpImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForKamikazeJumpImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastKamikazeJumpImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IKamikazeJumpImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsKamikazeJumpImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeJumpImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeJumpImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeJumpImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeJumpImpulseStrongMutSetEffect(effect);
+        }
+        observersForKamikazeJumpImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsKamikazeJumpImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsKamikazeJumpImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeJumpImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeJumpImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeJumpImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeJumpImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeJumpImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsKamikazeJumpImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeJumpImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeJumpImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeJumpImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeJumpImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeJumpImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsKamikazeJumpImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeJumpImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeJumpImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeJumpImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeJumpImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeJumpImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetKamikazeTargetImpulseStrongMutSetHash(int id, int version, KamikazeTargetImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public KamikazeTargetImpulseStrongMutSetIncarnation GetKamikazeTargetImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet[id].incarnation;
+    }
+    public KamikazeTargetImpulseStrongMutSet GetKamikazeTargetImpulseStrongMutSet(int id) {
+      return new KamikazeTargetImpulseStrongMutSet(this, id);
+    }
+    public List<KamikazeTargetImpulseStrongMutSet> AllKamikazeTargetImpulseStrongMutSet() {
+      List<KamikazeTargetImpulseStrongMutSet> result = new List<KamikazeTargetImpulseStrongMutSet>(rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet.Keys) {
+        result.Add(new KamikazeTargetImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool KamikazeTargetImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasKamikazeTargetImpulseStrongMutSet(KamikazeTargetImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasKamikazeTargetImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasKamikazeTargetImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid KamikazeTargetImpulseStrongMutSet}: " + id);
+      }
+    }
+    public KamikazeTargetImpulseStrongMutSet EffectKamikazeTargetImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new KamikazeTargetImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateKamikazeTargetImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new KamikazeTargetImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateKamikazeTargetImpulseStrongMutSet(int id, int incarnationVersion, KamikazeTargetImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new KamikazeTargetImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<KamikazeTargetImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsKamikazeTargetImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectKamikazeTargetImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new KamikazeTargetImpulseStrongMutSetDeleteEffect(id);
+      effectsKamikazeTargetImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectKamikazeTargetImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasKamikazeTargetImpulseStrongMutSet(setId);
+      CheckHasKamikazeTargetImpulse(elementId);
+
+      var effect = new KamikazeTargetImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new KamikazeTargetImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<KamikazeTargetImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsKamikazeTargetImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectKamikazeTargetImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasKamikazeTargetImpulseStrongMutSet(setId);
+      CheckHasKamikazeTargetImpulse(elementId);
+
+      var effect = new KamikazeTargetImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new KamikazeTargetImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsKamikazeTargetImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<KamikazeTargetImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsKamikazeTargetImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddKamikazeTargetImpulseStrongMutSetObserver(int id, IKamikazeTargetImpulseStrongMutSetEffectObserver observer) {
+      List<IKamikazeTargetImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForKamikazeTargetImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IKamikazeTargetImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForKamikazeTargetImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveKamikazeTargetImpulseStrongMutSetObserver(int id, IKamikazeTargetImpulseStrongMutSetEffectObserver observer) {
+      if (observersForKamikazeTargetImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForKamikazeTargetImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForKamikazeTargetImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastKamikazeTargetImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IKamikazeTargetImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsKamikazeTargetImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetImpulseStrongMutSetEffect(effect);
+        }
+        observersForKamikazeTargetImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsKamikazeTargetImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsKamikazeTargetImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeTargetImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsKamikazeTargetImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeTargetImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsKamikazeTargetImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IKamikazeTargetImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnKamikazeTargetImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IKamikazeTargetImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnKamikazeTargetImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsKamikazeTargetImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetNoImpulseStrongMutSetHash(int id, int version, NoImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public NoImpulseStrongMutSetIncarnation GetNoImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsNoImpulseStrongMutSet[id].incarnation;
+    }
+    public NoImpulseStrongMutSet GetNoImpulseStrongMutSet(int id) {
+      return new NoImpulseStrongMutSet(this, id);
+    }
+    public List<NoImpulseStrongMutSet> AllNoImpulseStrongMutSet() {
+      List<NoImpulseStrongMutSet> result = new List<NoImpulseStrongMutSet>(rootIncarnation.incarnationsNoImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsNoImpulseStrongMutSet.Keys) {
+        result.Add(new NoImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool NoImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsNoImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasNoImpulseStrongMutSet(NoImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasNoImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasNoImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsNoImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid NoImpulseStrongMutSet}: " + id);
+      }
+    }
+    public NoImpulseStrongMutSet EffectNoImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new NoImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateNoImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new NoImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateNoImpulseStrongMutSet(int id, int incarnationVersion, NoImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new NoImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsNoImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<NoImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsNoImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectNoImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new NoImpulseStrongMutSetDeleteEffect(id);
+      effectsNoImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsNoImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsNoImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectNoImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasNoImpulseStrongMutSet(setId);
+      CheckHasNoImpulse(elementId);
+
+      var effect = new NoImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsNoImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new NoImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsNoImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<NoImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsNoImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectNoImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasNoImpulseStrongMutSet(setId);
+      CheckHasNoImpulse(elementId);
+
+      var effect = new NoImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsNoImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new NoImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsNoImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<NoImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsNoImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddNoImpulseStrongMutSetObserver(int id, INoImpulseStrongMutSetEffectObserver observer) {
+      List<INoImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForNoImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<INoImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForNoImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveNoImpulseStrongMutSetObserver(int id, INoImpulseStrongMutSetEffectObserver observer) {
+      if (observersForNoImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForNoImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForNoImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastNoImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<INoImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsNoImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<INoImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnNoImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<INoImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnNoImpulseStrongMutSetEffect(effect);
+        }
+        observersForNoImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsNoImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsNoImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<INoImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnNoImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<INoImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnNoImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsNoImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsNoImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<INoImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnNoImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<INoImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnNoImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsNoImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsNoImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<INoImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnNoImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<INoImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnNoImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsNoImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetFireImpulseStrongMutSetHash(int id, int version, FireImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public FireImpulseStrongMutSetIncarnation GetFireImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsFireImpulseStrongMutSet[id].incarnation;
+    }
+    public FireImpulseStrongMutSet GetFireImpulseStrongMutSet(int id) {
+      return new FireImpulseStrongMutSet(this, id);
+    }
+    public List<FireImpulseStrongMutSet> AllFireImpulseStrongMutSet() {
+      List<FireImpulseStrongMutSet> result = new List<FireImpulseStrongMutSet>(rootIncarnation.incarnationsFireImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsFireImpulseStrongMutSet.Keys) {
+        result.Add(new FireImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool FireImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsFireImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasFireImpulseStrongMutSet(FireImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasFireImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasFireImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsFireImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid FireImpulseStrongMutSet}: " + id);
+      }
+    }
+    public FireImpulseStrongMutSet EffectFireImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new FireImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateFireImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new FireImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateFireImpulseStrongMutSet(int id, int incarnationVersion, FireImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new FireImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsFireImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<FireImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsFireImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectFireImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new FireImpulseStrongMutSetDeleteEffect(id);
+      effectsFireImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsFireImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsFireImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectFireImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasFireImpulseStrongMutSet(setId);
+      CheckHasFireImpulse(elementId);
+
+      var effect = new FireImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsFireImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new FireImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsFireImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<FireImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsFireImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectFireImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasFireImpulseStrongMutSet(setId);
+      CheckHasFireImpulse(elementId);
+
+      var effect = new FireImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsFireImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new FireImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsFireImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<FireImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsFireImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddFireImpulseStrongMutSetObserver(int id, IFireImpulseStrongMutSetEffectObserver observer) {
+      List<IFireImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForFireImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IFireImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForFireImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveFireImpulseStrongMutSetObserver(int id, IFireImpulseStrongMutSetEffectObserver observer) {
+      if (observersForFireImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForFireImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForFireImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastFireImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IFireImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsFireImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IFireImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireImpulseStrongMutSetEffect(effect);
+        }
+        observersForFireImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsFireImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsFireImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IFireImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsFireImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsFireImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IFireImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsFireImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsFireImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IFireImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsFireImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetDefyImpulseStrongMutSetHash(int id, int version, DefyImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public DefyImpulseStrongMutSetIncarnation GetDefyImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsDefyImpulseStrongMutSet[id].incarnation;
+    }
+    public DefyImpulseStrongMutSet GetDefyImpulseStrongMutSet(int id) {
+      return new DefyImpulseStrongMutSet(this, id);
+    }
+    public List<DefyImpulseStrongMutSet> AllDefyImpulseStrongMutSet() {
+      List<DefyImpulseStrongMutSet> result = new List<DefyImpulseStrongMutSet>(rootIncarnation.incarnationsDefyImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsDefyImpulseStrongMutSet.Keys) {
+        result.Add(new DefyImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool DefyImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsDefyImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasDefyImpulseStrongMutSet(DefyImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasDefyImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasDefyImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsDefyImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid DefyImpulseStrongMutSet}: " + id);
+      }
+    }
+    public DefyImpulseStrongMutSet EffectDefyImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new DefyImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateDefyImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new DefyImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateDefyImpulseStrongMutSet(int id, int incarnationVersion, DefyImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new DefyImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsDefyImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<DefyImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsDefyImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectDefyImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new DefyImpulseStrongMutSetDeleteEffect(id);
+      effectsDefyImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsDefyImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsDefyImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectDefyImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasDefyImpulseStrongMutSet(setId);
+      CheckHasDefyImpulse(elementId);
+
+      var effect = new DefyImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsDefyImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new DefyImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsDefyImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<DefyImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsDefyImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectDefyImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasDefyImpulseStrongMutSet(setId);
+      CheckHasDefyImpulse(elementId);
+
+      var effect = new DefyImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsDefyImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new DefyImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsDefyImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<DefyImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsDefyImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddDefyImpulseStrongMutSetObserver(int id, IDefyImpulseStrongMutSetEffectObserver observer) {
+      List<IDefyImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForDefyImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IDefyImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForDefyImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveDefyImpulseStrongMutSetObserver(int id, IDefyImpulseStrongMutSetEffectObserver observer) {
+      if (observersForDefyImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForDefyImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForDefyImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastDefyImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IDefyImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsDefyImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IDefyImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDefyImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IDefyImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDefyImpulseStrongMutSetEffect(effect);
+        }
+        observersForDefyImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsDefyImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsDefyImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IDefyImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDefyImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IDefyImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDefyImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsDefyImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsDefyImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IDefyImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDefyImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IDefyImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDefyImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsDefyImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsDefyImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IDefyImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnDefyImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IDefyImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnDefyImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsDefyImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetCounterImpulseStrongMutSetHash(int id, int version, CounterImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public CounterImpulseStrongMutSetIncarnation GetCounterImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsCounterImpulseStrongMutSet[id].incarnation;
+    }
+    public CounterImpulseStrongMutSet GetCounterImpulseStrongMutSet(int id) {
+      return new CounterImpulseStrongMutSet(this, id);
+    }
+    public List<CounterImpulseStrongMutSet> AllCounterImpulseStrongMutSet() {
+      List<CounterImpulseStrongMutSet> result = new List<CounterImpulseStrongMutSet>(rootIncarnation.incarnationsCounterImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsCounterImpulseStrongMutSet.Keys) {
+        result.Add(new CounterImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool CounterImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsCounterImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasCounterImpulseStrongMutSet(CounterImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasCounterImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasCounterImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsCounterImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid CounterImpulseStrongMutSet}: " + id);
+      }
+    }
+    public CounterImpulseStrongMutSet EffectCounterImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new CounterImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateCounterImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new CounterImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateCounterImpulseStrongMutSet(int id, int incarnationVersion, CounterImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new CounterImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsCounterImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<CounterImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsCounterImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectCounterImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new CounterImpulseStrongMutSetDeleteEffect(id);
+      effectsCounterImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsCounterImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsCounterImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectCounterImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasCounterImpulseStrongMutSet(setId);
+      CheckHasCounterImpulse(elementId);
+
+      var effect = new CounterImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsCounterImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new CounterImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsCounterImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<CounterImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsCounterImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectCounterImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasCounterImpulseStrongMutSet(setId);
+      CheckHasCounterImpulse(elementId);
+
+      var effect = new CounterImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsCounterImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new CounterImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsCounterImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<CounterImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsCounterImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddCounterImpulseStrongMutSetObserver(int id, ICounterImpulseStrongMutSetEffectObserver observer) {
+      List<ICounterImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForCounterImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ICounterImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForCounterImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveCounterImpulseStrongMutSetObserver(int id, ICounterImpulseStrongMutSetEffectObserver observer) {
+      if (observersForCounterImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForCounterImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForCounterImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastCounterImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<ICounterImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsCounterImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ICounterImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCounterImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICounterImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCounterImpulseStrongMutSetEffect(effect);
+        }
+        observersForCounterImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsCounterImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsCounterImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<ICounterImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCounterImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICounterImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCounterImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsCounterImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsCounterImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<ICounterImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCounterImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICounterImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCounterImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsCounterImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsCounterImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<ICounterImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnCounterImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ICounterImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnCounterImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsCounterImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetUnleashBideImpulseStrongMutSetHash(int id, int version, UnleashBideImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public UnleashBideImpulseStrongMutSetIncarnation GetUnleashBideImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet[id].incarnation;
+    }
+    public UnleashBideImpulseStrongMutSet GetUnleashBideImpulseStrongMutSet(int id) {
+      return new UnleashBideImpulseStrongMutSet(this, id);
+    }
+    public List<UnleashBideImpulseStrongMutSet> AllUnleashBideImpulseStrongMutSet() {
+      List<UnleashBideImpulseStrongMutSet> result = new List<UnleashBideImpulseStrongMutSet>(rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet.Keys) {
+        result.Add(new UnleashBideImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool UnleashBideImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasUnleashBideImpulseStrongMutSet(UnleashBideImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasUnleashBideImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasUnleashBideImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid UnleashBideImpulseStrongMutSet}: " + id);
+      }
+    }
+    public UnleashBideImpulseStrongMutSet EffectUnleashBideImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new UnleashBideImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateUnleashBideImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new UnleashBideImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateUnleashBideImpulseStrongMutSet(int id, int incarnationVersion, UnleashBideImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new UnleashBideImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<UnleashBideImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsUnleashBideImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectUnleashBideImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new UnleashBideImpulseStrongMutSetDeleteEffect(id);
+      effectsUnleashBideImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectUnleashBideImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasUnleashBideImpulseStrongMutSet(setId);
+      CheckHasUnleashBideImpulse(elementId);
+
+      var effect = new UnleashBideImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new UnleashBideImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<UnleashBideImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsUnleashBideImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectUnleashBideImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasUnleashBideImpulseStrongMutSet(setId);
+      CheckHasUnleashBideImpulse(elementId);
+
+      var effect = new UnleashBideImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new UnleashBideImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsUnleashBideImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<UnleashBideImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsUnleashBideImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddUnleashBideImpulseStrongMutSetObserver(int id, IUnleashBideImpulseStrongMutSetEffectObserver observer) {
+      List<IUnleashBideImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForUnleashBideImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IUnleashBideImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForUnleashBideImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveUnleashBideImpulseStrongMutSetObserver(int id, IUnleashBideImpulseStrongMutSetEffectObserver observer) {
+      if (observersForUnleashBideImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForUnleashBideImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForUnleashBideImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastUnleashBideImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IUnleashBideImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsUnleashBideImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IUnleashBideImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnleashBideImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnleashBideImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnleashBideImpulseStrongMutSetEffect(effect);
+        }
+        observersForUnleashBideImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsUnleashBideImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsUnleashBideImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IUnleashBideImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnleashBideImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnleashBideImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnleashBideImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUnleashBideImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsUnleashBideImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IUnleashBideImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnleashBideImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnleashBideImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnleashBideImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUnleashBideImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsUnleashBideImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IUnleashBideImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnleashBideImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnleashBideImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnleashBideImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUnleashBideImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetContinueBidingImpulseStrongMutSetHash(int id, int version, ContinueBidingImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public ContinueBidingImpulseStrongMutSetIncarnation GetContinueBidingImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet[id].incarnation;
+    }
+    public ContinueBidingImpulseStrongMutSet GetContinueBidingImpulseStrongMutSet(int id) {
+      return new ContinueBidingImpulseStrongMutSet(this, id);
+    }
+    public List<ContinueBidingImpulseStrongMutSet> AllContinueBidingImpulseStrongMutSet() {
+      List<ContinueBidingImpulseStrongMutSet> result = new List<ContinueBidingImpulseStrongMutSet>(rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet.Keys) {
+        result.Add(new ContinueBidingImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool ContinueBidingImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasContinueBidingImpulseStrongMutSet(ContinueBidingImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasContinueBidingImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasContinueBidingImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid ContinueBidingImpulseStrongMutSet}: " + id);
+      }
+    }
+    public ContinueBidingImpulseStrongMutSet EffectContinueBidingImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new ContinueBidingImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateContinueBidingImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new ContinueBidingImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateContinueBidingImpulseStrongMutSet(int id, int incarnationVersion, ContinueBidingImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new ContinueBidingImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<ContinueBidingImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsContinueBidingImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectContinueBidingImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new ContinueBidingImpulseStrongMutSetDeleteEffect(id);
+      effectsContinueBidingImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectContinueBidingImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasContinueBidingImpulseStrongMutSet(setId);
+      CheckHasContinueBidingImpulse(elementId);
+
+      var effect = new ContinueBidingImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new ContinueBidingImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<ContinueBidingImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsContinueBidingImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectContinueBidingImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasContinueBidingImpulseStrongMutSet(setId);
+      CheckHasContinueBidingImpulse(elementId);
+
+      var effect = new ContinueBidingImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new ContinueBidingImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsContinueBidingImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<ContinueBidingImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsContinueBidingImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddContinueBidingImpulseStrongMutSetObserver(int id, IContinueBidingImpulseStrongMutSetEffectObserver observer) {
+      List<IContinueBidingImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForContinueBidingImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IContinueBidingImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForContinueBidingImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveContinueBidingImpulseStrongMutSetObserver(int id, IContinueBidingImpulseStrongMutSetEffectObserver observer) {
+      if (observersForContinueBidingImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForContinueBidingImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForContinueBidingImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastContinueBidingImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IContinueBidingImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsContinueBidingImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IContinueBidingImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnContinueBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IContinueBidingImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnContinueBidingImpulseStrongMutSetEffect(effect);
+        }
+        observersForContinueBidingImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsContinueBidingImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsContinueBidingImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IContinueBidingImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnContinueBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IContinueBidingImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnContinueBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsContinueBidingImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsContinueBidingImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IContinueBidingImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnContinueBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IContinueBidingImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnContinueBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsContinueBidingImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsContinueBidingImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IContinueBidingImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnContinueBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IContinueBidingImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnContinueBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsContinueBidingImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetStartBidingImpulseStrongMutSetHash(int id, int version, StartBidingImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public StartBidingImpulseStrongMutSetIncarnation GetStartBidingImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsStartBidingImpulseStrongMutSet[id].incarnation;
+    }
+    public StartBidingImpulseStrongMutSet GetStartBidingImpulseStrongMutSet(int id) {
+      return new StartBidingImpulseStrongMutSet(this, id);
+    }
+    public List<StartBidingImpulseStrongMutSet> AllStartBidingImpulseStrongMutSet() {
+      List<StartBidingImpulseStrongMutSet> result = new List<StartBidingImpulseStrongMutSet>(rootIncarnation.incarnationsStartBidingImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsStartBidingImpulseStrongMutSet.Keys) {
+        result.Add(new StartBidingImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool StartBidingImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsStartBidingImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasStartBidingImpulseStrongMutSet(StartBidingImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasStartBidingImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasStartBidingImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsStartBidingImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid StartBidingImpulseStrongMutSet}: " + id);
+      }
+    }
+    public StartBidingImpulseStrongMutSet EffectStartBidingImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new StartBidingImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateStartBidingImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new StartBidingImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateStartBidingImpulseStrongMutSet(int id, int incarnationVersion, StartBidingImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new StartBidingImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsStartBidingImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<StartBidingImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsStartBidingImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectStartBidingImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new StartBidingImpulseStrongMutSetDeleteEffect(id);
+      effectsStartBidingImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsStartBidingImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsStartBidingImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectStartBidingImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasStartBidingImpulseStrongMutSet(setId);
+      CheckHasStartBidingImpulse(elementId);
+
+      var effect = new StartBidingImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsStartBidingImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new StartBidingImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsStartBidingImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<StartBidingImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsStartBidingImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectStartBidingImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasStartBidingImpulseStrongMutSet(setId);
+      CheckHasStartBidingImpulse(elementId);
+
+      var effect = new StartBidingImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsStartBidingImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new StartBidingImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsStartBidingImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<StartBidingImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsStartBidingImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddStartBidingImpulseStrongMutSetObserver(int id, IStartBidingImpulseStrongMutSetEffectObserver observer) {
+      List<IStartBidingImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForStartBidingImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IStartBidingImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForStartBidingImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveStartBidingImpulseStrongMutSetObserver(int id, IStartBidingImpulseStrongMutSetEffectObserver observer) {
+      if (observersForStartBidingImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForStartBidingImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForStartBidingImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastStartBidingImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IStartBidingImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsStartBidingImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IStartBidingImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnStartBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IStartBidingImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnStartBidingImpulseStrongMutSetEffect(effect);
+        }
+        observersForStartBidingImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsStartBidingImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsStartBidingImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IStartBidingImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnStartBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IStartBidingImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnStartBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsStartBidingImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsStartBidingImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IStartBidingImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnStartBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IStartBidingImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnStartBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsStartBidingImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsStartBidingImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IStartBidingImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnStartBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IStartBidingImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnStartBidingImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsStartBidingImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetAttackImpulseStrongMutSetHash(int id, int version, AttackImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public AttackImpulseStrongMutSetIncarnation GetAttackImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsAttackImpulseStrongMutSet[id].incarnation;
+    }
+    public AttackImpulseStrongMutSet GetAttackImpulseStrongMutSet(int id) {
+      return new AttackImpulseStrongMutSet(this, id);
+    }
+    public List<AttackImpulseStrongMutSet> AllAttackImpulseStrongMutSet() {
+      List<AttackImpulseStrongMutSet> result = new List<AttackImpulseStrongMutSet>(rootIncarnation.incarnationsAttackImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsAttackImpulseStrongMutSet.Keys) {
+        result.Add(new AttackImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool AttackImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsAttackImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasAttackImpulseStrongMutSet(AttackImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasAttackImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasAttackImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsAttackImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid AttackImpulseStrongMutSet}: " + id);
+      }
+    }
+    public AttackImpulseStrongMutSet EffectAttackImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new AttackImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateAttackImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new AttackImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateAttackImpulseStrongMutSet(int id, int incarnationVersion, AttackImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new AttackImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsAttackImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<AttackImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsAttackImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectAttackImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new AttackImpulseStrongMutSetDeleteEffect(id);
+      effectsAttackImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsAttackImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsAttackImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectAttackImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasAttackImpulseStrongMutSet(setId);
+      CheckHasAttackImpulse(elementId);
+
+      var effect = new AttackImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new AttackImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsAttackImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<AttackImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsAttackImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectAttackImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasAttackImpulseStrongMutSet(setId);
+      CheckHasAttackImpulse(elementId);
+
+      var effect = new AttackImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new AttackImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsAttackImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<AttackImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsAttackImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddAttackImpulseStrongMutSetObserver(int id, IAttackImpulseStrongMutSetEffectObserver observer) {
+      List<IAttackImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForAttackImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IAttackImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForAttackImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveAttackImpulseStrongMutSetObserver(int id, IAttackImpulseStrongMutSetEffectObserver observer) {
+      if (observersForAttackImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForAttackImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForAttackImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastAttackImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IAttackImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsAttackImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IAttackImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnAttackImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IAttackImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnAttackImpulseStrongMutSetEffect(effect);
+        }
+        observersForAttackImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsAttackImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsAttackImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IAttackImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnAttackImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IAttackImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnAttackImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsAttackImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsAttackImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IAttackImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnAttackImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IAttackImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnAttackImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsAttackImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsAttackImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IAttackImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnAttackImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IAttackImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnAttackImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsAttackImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetPursueImpulseStrongMutSetHash(int id, int version, PursueImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public PursueImpulseStrongMutSetIncarnation GetPursueImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsPursueImpulseStrongMutSet[id].incarnation;
+    }
+    public PursueImpulseStrongMutSet GetPursueImpulseStrongMutSet(int id) {
+      return new PursueImpulseStrongMutSet(this, id);
+    }
+    public List<PursueImpulseStrongMutSet> AllPursueImpulseStrongMutSet() {
+      List<PursueImpulseStrongMutSet> result = new List<PursueImpulseStrongMutSet>(rootIncarnation.incarnationsPursueImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsPursueImpulseStrongMutSet.Keys) {
+        result.Add(new PursueImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool PursueImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsPursueImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasPursueImpulseStrongMutSet(PursueImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasPursueImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasPursueImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsPursueImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid PursueImpulseStrongMutSet}: " + id);
+      }
+    }
+    public PursueImpulseStrongMutSet EffectPursueImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new PursueImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreatePursueImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new PursueImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreatePursueImpulseStrongMutSet(int id, int incarnationVersion, PursueImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new PursueImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsPursueImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<PursueImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsPursueImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectPursueImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new PursueImpulseStrongMutSetDeleteEffect(id);
+      effectsPursueImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsPursueImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsPursueImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectPursueImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasPursueImpulseStrongMutSet(setId);
+      CheckHasPursueImpulse(elementId);
+
+      var effect = new PursueImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsPursueImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new PursueImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsPursueImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<PursueImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsPursueImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectPursueImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasPursueImpulseStrongMutSet(setId);
+      CheckHasPursueImpulse(elementId);
+
+      var effect = new PursueImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsPursueImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new PursueImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsPursueImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<PursueImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsPursueImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddPursueImpulseStrongMutSetObserver(int id, IPursueImpulseStrongMutSetEffectObserver observer) {
+      List<IPursueImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForPursueImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IPursueImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForPursueImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemovePursueImpulseStrongMutSetObserver(int id, IPursueImpulseStrongMutSetEffectObserver observer) {
+      if (observersForPursueImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForPursueImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForPursueImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastPursueImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IPursueImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsPursueImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IPursueImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnPursueImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IPursueImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnPursueImpulseStrongMutSetEffect(effect);
+        }
+        observersForPursueImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsPursueImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsPursueImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IPursueImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnPursueImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IPursueImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnPursueImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsPursueImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsPursueImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IPursueImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnPursueImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IPursueImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnPursueImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsPursueImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsPursueImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IPursueImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnPursueImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IPursueImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnPursueImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsPursueImpulseStrongMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetFireBombImpulseStrongMutSetHash(int id, int version, FireBombImpulseStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public FireBombImpulseStrongMutSetIncarnation GetFireBombImpulseStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsFireBombImpulseStrongMutSet[id].incarnation;
+    }
+    public FireBombImpulseStrongMutSet GetFireBombImpulseStrongMutSet(int id) {
+      return new FireBombImpulseStrongMutSet(this, id);
+    }
+    public List<FireBombImpulseStrongMutSet> AllFireBombImpulseStrongMutSet() {
+      List<FireBombImpulseStrongMutSet> result = new List<FireBombImpulseStrongMutSet>(rootIncarnation.incarnationsFireBombImpulseStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsFireBombImpulseStrongMutSet.Keys) {
+        result.Add(new FireBombImpulseStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool FireBombImpulseStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsFireBombImpulseStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasFireBombImpulseStrongMutSet(FireBombImpulseStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasFireBombImpulseStrongMutSet(thing.id);
+    }
+    public void CheckHasFireBombImpulseStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsFireBombImpulseStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid FireBombImpulseStrongMutSet}: " + id);
+      }
+    }
+    public FireBombImpulseStrongMutSet EffectFireBombImpulseStrongMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new FireBombImpulseStrongMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateFireBombImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
+      return new FireBombImpulseStrongMutSet(this, id);
+    }
+    public void EffectInternalCreateFireBombImpulseStrongMutSet(int id, int incarnationVersion, FireBombImpulseStrongMutSetIncarnation incarnation) {
+      var effect = new FireBombImpulseStrongMutSetCreateEffect(id);
+      rootIncarnation.incarnationsFireBombImpulseStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<FireBombImpulseStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsFireBombImpulseStrongMutSetCreateEffect.Add(effect);
+    }
+    public void EffectFireBombImpulseStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new FireBombImpulseStrongMutSetDeleteEffect(id);
+      effectsFireBombImpulseStrongMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsFireBombImpulseStrongMutSet[id];
+      rootIncarnation.incarnationsFireBombImpulseStrongMutSet.Remove(id);
+    }
+
+       
+    public void EffectFireBombImpulseStrongMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasFireBombImpulseStrongMutSet(setId);
+      CheckHasFireBombImpulse(elementId);
+
+      var effect = new FireBombImpulseStrongMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsFireBombImpulseStrongMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new FireBombImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsFireBombImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<FireBombImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsFireBombImpulseStrongMutSetAddEffect.Add(effect);
+    }
+    public void EffectFireBombImpulseStrongMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasFireBombImpulseStrongMutSet(setId);
+      CheckHasFireBombImpulse(elementId);
+
+      var effect = new FireBombImpulseStrongMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsFireBombImpulseStrongMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new FireBombImpulseStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsFireBombImpulseStrongMutSet[setId] =
+            new VersionAndIncarnation<FireBombImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsFireBombImpulseStrongMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddFireBombImpulseStrongMutSetObserver(int id, IFireBombImpulseStrongMutSetEffectObserver observer) {
+      List<IFireBombImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForFireBombImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IFireBombImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForFireBombImpulseStrongMutSet[id] = obsies;
+    }
+
+    public void RemoveFireBombImpulseStrongMutSetObserver(int id, IFireBombImpulseStrongMutSetEffectObserver observer) {
+      if (observersForFireBombImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForFireBombImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForFireBombImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastFireBombImpulseStrongMutSetEffects(
+      SortedDictionary<int, List<IFireBombImpulseStrongMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsFireBombImpulseStrongMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombImpulseStrongMutSetEffect(effect);
+        }
+        observersForFireBombImpulseStrongMutSet.Remove(effect.id);
+      }
+    }
+    effectsFireBombImpulseStrongMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsFireBombImpulseStrongMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsFireBombImpulseStrongMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsFireBombImpulseStrongMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsFireBombImpulseStrongMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsFireBombImpulseStrongMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IFireBombImpulseStrongMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnFireBombImpulseStrongMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IFireBombImpulseStrongMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnFireBombImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    effectsFireBombImpulseStrongMutSetCreateEffect.Clear();
 
   }
 
@@ -39031,6 +44810,197 @@ public class Root {
 
   }
 
+    public int GetLightningChargingUCMutSetHash(int id, int version, LightningChargingUCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public LightningChargingUCMutSetIncarnation GetLightningChargingUCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsLightningChargingUCMutSet[id].incarnation;
+    }
+    public LightningChargingUCMutSet GetLightningChargingUCMutSet(int id) {
+      return new LightningChargingUCMutSet(this, id);
+    }
+    public List<LightningChargingUCMutSet> AllLightningChargingUCMutSet() {
+      List<LightningChargingUCMutSet> result = new List<LightningChargingUCMutSet>(rootIncarnation.incarnationsLightningChargingUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsLightningChargingUCMutSet.Keys) {
+        result.Add(new LightningChargingUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool LightningChargingUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsLightningChargingUCMutSet.ContainsKey(id);
+    }
+    public void CheckHasLightningChargingUCMutSet(LightningChargingUCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasLightningChargingUCMutSet(thing.id);
+    }
+    public void CheckHasLightningChargingUCMutSet(int id) {
+      if (!rootIncarnation.incarnationsLightningChargingUCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid LightningChargingUCMutSet}: " + id);
+      }
+    }
+    public LightningChargingUCMutSet EffectLightningChargingUCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new LightningChargingUCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateLightningChargingUCMutSet(id, rootIncarnation.version, incarnation);
+      return new LightningChargingUCMutSet(this, id);
+    }
+    public void EffectInternalCreateLightningChargingUCMutSet(int id, int incarnationVersion, LightningChargingUCMutSetIncarnation incarnation) {
+      var effect = new LightningChargingUCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsLightningChargingUCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<LightningChargingUCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsLightningChargingUCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectLightningChargingUCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new LightningChargingUCMutSetDeleteEffect(id);
+      effectsLightningChargingUCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsLightningChargingUCMutSet[id];
+      rootIncarnation.incarnationsLightningChargingUCMutSet.Remove(id);
+    }
+
+       
+    public void EffectLightningChargingUCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasLightningChargingUCMutSet(setId);
+      CheckHasLightningChargingUC(elementId);
+
+      var effect = new LightningChargingUCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsLightningChargingUCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new LightningChargingUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsLightningChargingUCMutSet[setId] =
+            new VersionAndIncarnation<LightningChargingUCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsLightningChargingUCMutSetAddEffect.Add(effect);
+    }
+    public void EffectLightningChargingUCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasLightningChargingUCMutSet(setId);
+      CheckHasLightningChargingUC(elementId);
+
+      var effect = new LightningChargingUCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsLightningChargingUCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new LightningChargingUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsLightningChargingUCMutSet[setId] =
+            new VersionAndIncarnation<LightningChargingUCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsLightningChargingUCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddLightningChargingUCMutSetObserver(int id, ILightningChargingUCMutSetEffectObserver observer) {
+      List<ILightningChargingUCMutSetEffectObserver> obsies;
+      if (!observersForLightningChargingUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ILightningChargingUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForLightningChargingUCMutSet[id] = obsies;
+    }
+
+    public void RemoveLightningChargingUCMutSetObserver(int id, ILightningChargingUCMutSetEffectObserver observer) {
+      if (observersForLightningChargingUCMutSet.ContainsKey(id)) {
+        var list = observersForLightningChargingUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForLightningChargingUCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastLightningChargingUCMutSetEffects(
+      SortedDictionary<int, List<ILightningChargingUCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsLightningChargingUCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargingUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargingUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargingUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargingUCMutSetEffect(effect);
+        }
+        observersForLightningChargingUCMutSet.Remove(effect.id);
+      }
+    }
+    effectsLightningChargingUCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsLightningChargingUCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargingUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargingUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargingUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargingUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsLightningChargingUCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsLightningChargingUCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargingUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargingUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargingUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargingUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsLightningChargingUCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsLightningChargingUCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargingUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargingUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargingUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargingUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsLightningChargingUCMutSetCreateEffect.Clear();
+
+  }
+
     public int GetWanderAICapabilityUCMutSetHash(int id, int version, WanderAICapabilityUCMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.set) {
@@ -40938,6 +46908,197 @@ public class Root {
       }
     }
     effectsCounteringUCMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetLightningChargedUCMutSetHash(int id, int version, LightningChargedUCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public LightningChargedUCMutSetIncarnation GetLightningChargedUCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsLightningChargedUCMutSet[id].incarnation;
+    }
+    public LightningChargedUCMutSet GetLightningChargedUCMutSet(int id) {
+      return new LightningChargedUCMutSet(this, id);
+    }
+    public List<LightningChargedUCMutSet> AllLightningChargedUCMutSet() {
+      List<LightningChargedUCMutSet> result = new List<LightningChargedUCMutSet>(rootIncarnation.incarnationsLightningChargedUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsLightningChargedUCMutSet.Keys) {
+        result.Add(new LightningChargedUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool LightningChargedUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsLightningChargedUCMutSet.ContainsKey(id);
+    }
+    public void CheckHasLightningChargedUCMutSet(LightningChargedUCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasLightningChargedUCMutSet(thing.id);
+    }
+    public void CheckHasLightningChargedUCMutSet(int id) {
+      if (!rootIncarnation.incarnationsLightningChargedUCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid LightningChargedUCMutSet}: " + id);
+      }
+    }
+    public LightningChargedUCMutSet EffectLightningChargedUCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new LightningChargedUCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateLightningChargedUCMutSet(id, rootIncarnation.version, incarnation);
+      return new LightningChargedUCMutSet(this, id);
+    }
+    public void EffectInternalCreateLightningChargedUCMutSet(int id, int incarnationVersion, LightningChargedUCMutSetIncarnation incarnation) {
+      var effect = new LightningChargedUCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsLightningChargedUCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<LightningChargedUCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsLightningChargedUCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectLightningChargedUCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new LightningChargedUCMutSetDeleteEffect(id);
+      effectsLightningChargedUCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsLightningChargedUCMutSet[id];
+      rootIncarnation.incarnationsLightningChargedUCMutSet.Remove(id);
+    }
+
+       
+    public void EffectLightningChargedUCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasLightningChargedUCMutSet(setId);
+      CheckHasLightningChargedUC(elementId);
+
+      var effect = new LightningChargedUCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsLightningChargedUCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new LightningChargedUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsLightningChargedUCMutSet[setId] =
+            new VersionAndIncarnation<LightningChargedUCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsLightningChargedUCMutSetAddEffect.Add(effect);
+    }
+    public void EffectLightningChargedUCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasLightningChargedUCMutSet(setId);
+      CheckHasLightningChargedUC(elementId);
+
+      var effect = new LightningChargedUCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsLightningChargedUCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new LightningChargedUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsLightningChargedUCMutSet[setId] =
+            new VersionAndIncarnation<LightningChargedUCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsLightningChargedUCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddLightningChargedUCMutSetObserver(int id, ILightningChargedUCMutSetEffectObserver observer) {
+      List<ILightningChargedUCMutSetEffectObserver> obsies;
+      if (!observersForLightningChargedUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ILightningChargedUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForLightningChargedUCMutSet[id] = obsies;
+    }
+
+    public void RemoveLightningChargedUCMutSetObserver(int id, ILightningChargedUCMutSetEffectObserver observer) {
+      if (observersForLightningChargedUCMutSet.ContainsKey(id)) {
+        var list = observersForLightningChargedUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForLightningChargedUCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastLightningChargedUCMutSetEffects(
+      SortedDictionary<int, List<ILightningChargedUCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsLightningChargedUCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargedUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargedUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargedUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargedUCMutSetEffect(effect);
+        }
+        observersForLightningChargedUCMutSet.Remove(effect.id);
+      }
+    }
+    effectsLightningChargedUCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsLightningChargedUCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargedUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargedUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargedUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargedUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsLightningChargedUCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsLightningChargedUCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargedUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargedUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargedUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargedUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsLightningChargedUCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsLightningChargedUCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<ILightningChargedUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnLightningChargedUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ILightningChargedUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnLightningChargedUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsLightningChargedUCMutSetCreateEffect.Clear();
 
   }
 
