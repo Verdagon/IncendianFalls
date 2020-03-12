@@ -68,10 +68,10 @@ namespace Atharia.Model {
 
 
       if (triggerName == "levelStart") {
-        game.events.Add(new WaitEvent(1500, "startCamera").AsIGameEvent());
+        game.AddEvent(new WaitEvent(1500, "startCamera").AsIGameEvent());
       }
       if (triggerName == "startCamera") {
-        game.events.Add(
+        game.AddEvent(
           new FlyCameraEvent(
             superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"),
             new Vec3(0, 8, 8),
@@ -80,11 +80,11 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "cameraReachedPanTo") {
-        game.events.Add(
+        game.AddEvent(
           new WaitEvent(1000, "cameraWaitDone").AsIGameEvent());
       }
       if (triggerName == "cameraWaitDone") {
-        game.events.Add(
+        game.AddEvent(
           new FlyCameraEvent(
             superstate.levelSuperstate.FindMarkerLocation("entry"),
             new Vec3(0, 8, 8),
@@ -95,7 +95,7 @@ namespace Atharia.Model {
       if (triggerName == "cameraDone") {
         game.player.nextActionTime = game.level.time;
 
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             40, // sizePercent
             new Color(16, 16, 16, 224), // backgroundColor
@@ -118,7 +118,7 @@ namespace Atharia.Model {
       }
 
       if (triggerName == "line2") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             50, // sizePercent
             new Color(16, 16, 16, 224), // backgroundColor
@@ -141,7 +141,7 @@ namespace Atharia.Model {
       }
 
       if (triggerName == "line3") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             50, // sizePercent
             new Color(16, 16, 16, 224), // backgroundColor
@@ -179,7 +179,7 @@ namespace Atharia.Model {
       if (triggeringUnit.NullableIs(game.player) && triggerName == "nextToMysteriousMan") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("nextToMysteriousMan", 1);
 
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             50, // sizePercent
             new Color(16, 16, 16, 224), // backgroundColor

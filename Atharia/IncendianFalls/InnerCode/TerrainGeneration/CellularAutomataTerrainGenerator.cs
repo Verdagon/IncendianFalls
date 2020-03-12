@@ -76,6 +76,7 @@ namespace IncendianFalls {
     private static void AddTile(Terrain terrain, Location location, int elevation) {
       var tile =
         terrain.root.EffectTerrainTileCreate(
+              terrain.root.EffectITerrainTileEventMutListCreate(),
               elevation,
               ITerrainTileComponentMutBunch.New(terrain.root));
       terrain.tiles.Add(location, tile);

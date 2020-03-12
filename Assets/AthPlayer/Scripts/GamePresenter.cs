@@ -86,7 +86,7 @@ namespace AthPlayer {
     private void LoadLevel() {
       viewedLevel = game.level;
 
-      this.terrainPresenter = new TerrainPresenter(timer, viewedLevel.terrain, instantiator);
+      this.terrainPresenter = new TerrainPresenter(timer, timer, viewedLevel.terrain, instantiator);
       terrainPresenter.TerrainClicked += (location) => LocationClicked?.Invoke(location);
       terrainPresenter.TerrainHovered += (location) => LocationHovered?.Invoke(location);
 

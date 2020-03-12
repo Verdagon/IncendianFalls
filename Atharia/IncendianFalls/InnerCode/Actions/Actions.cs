@@ -16,13 +16,27 @@ namespace IncendianFalls {
     public static void UnleashBide(
         Game game,
         Superstate superstate,
-        Unit attacker,
-        List<Unit> victims) {
-      Eventer.broadcastUnitUnleashBideEvent(game.root, game, attacker, victims);
-      foreach (var victim in victims) {
-        AttackInner(
-            game, superstate, attacker, victim, 15, true);
+        Unit attacker) {
+      // Get this, all surrounding, and all surrounding those.
+      var affectedTileLocations = new SortedSet<Location>() { attacker.location };
+      affectedTileLocations = game.level.terrain.pattern.GetAdjacentLocations(affectedTileLocations, true, game.level.ConsiderCornersAdjacent());
+      affectedTileLocations = game.level.terrain.pattern.GetAdjacentLocations(affectedTileLocations, true, game.level.ConsiderCornersAdjacent());
+
+      List<Unit> victims = new List<Unit>();
+      List<Location> otherLocations = new List<Location>();
+      foreach (var affectedTileLocation in affectedTileLocations) {
+        if (game.level.terrain.tiles.ContainsKey(affectedTileLocation)) {
+          var victim = superstate.levelSuperstate.GetLiveUnitAt(affectedTileLocation);
+          if (victim.Exists() && !victim.Is(attacker) && victim.alive) {
+            victims.Add(victim);
+            AttackInner(game, superstate, attacker, victim, 15, true);
+          } else {
+            otherLocations.Add(affectedTileLocation);
+          }
+        }
       }
+      Eventer.broadcastUnitUnleashBideEvent(game.root, game, attacker, victims, otherLocations);
+
       attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(900);
     }
 

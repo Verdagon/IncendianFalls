@@ -85,10 +85,12 @@ imm struct UnitFireBombedEvent {
 
 imm struct UnitUnleashBideEvent {
   UnitUnleashBideEvent isa IUnitEvent;
+  UnitUnleashBideEvent isa ITerrainTileEvent;
 
   time: Int;
   attackerId: Int;
   victimIds: ImmList:Int;
+  otherLocations: ImmList:Location;
 
   fn GetTime(event: UnitUnleashBideEvent overrides IUnitEvent): Int {
     UnitUnleashBideEventExtensions.GetTime

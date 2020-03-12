@@ -25,7 +25,7 @@ namespace Atharia.Model {
 
       self.numDefiesRemaining = self.numDefiesRemaining - 1;
 
-      game.root.logger.Error("In afterimpulse! " + defyImpulse + " " + self.numDefiesRemaining + " remaining");
+      //game.root.logger.Error("In afterimpulse! " + defyImpulse + " " + self.numDefiesRemaining + " remaining");
 
       if (defyImpulse.Exists()) {
         game.level.controller.SimpleTrigger(game, superstate, self.onChangeTriggerName);

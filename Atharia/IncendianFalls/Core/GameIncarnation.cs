@@ -10,6 +10,8 @@ public class GameIncarnation {
   public readonly int levels;
   public  int player;
   public readonly int events;
+  public readonly int eventedUnits;
+  public readonly int eventedTerrainTiles;
   public  int level;
   public  int time;
   public readonly int executionState;
@@ -19,6 +21,8 @@ public class GameIncarnation {
       int levels,
       int player,
       int events,
+      int eventedUnits,
+      int eventedTerrainTiles,
       int level,
       int time,
       int executionState) {
@@ -27,6 +31,8 @@ public class GameIncarnation {
     this.levels = levels;
     this.player = player;
     this.events = events;
+    this.eventedUnits = eventedUnits;
+    this.eventedTerrainTiles = eventedTerrainTiles;
     this.level = level;
     this.time = time;
     this.executionState = executionState;

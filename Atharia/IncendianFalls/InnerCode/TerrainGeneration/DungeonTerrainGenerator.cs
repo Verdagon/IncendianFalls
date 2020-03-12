@@ -256,6 +256,7 @@ namespace IncendianFalls {
             root.GetDeterministicHashCode();
             var tile =
                 root.EffectTerrainTileCreate(
+              root.EffectITerrainTileEventMutListCreate(),
                     1, ITerrainTileComponentMutBunch.New(root));
             tile.components.Add(root.EffectStoneTTCCreate().AsITerrainTileComponent());
             root.GetDeterministicHashCode();
@@ -273,7 +274,8 @@ namespace IncendianFalls {
       foreach (var borderLocation in allAdjacent) {
         var mutList = ITerrainTileComponentMutBunch.New(root);
         root.GetDeterministicHashCode();
-        var tile = root.EffectTerrainTileCreate(2, mutList);
+        var tile = root.EffectTerrainTileCreate(
+              root.EffectITerrainTileEventMutListCreate(), 2, mutList);
         tile.components.Add(root.EffectWallTTCCreate().AsITerrainTileComponent());
         root.GetDeterministicHashCode();
         tiles.Add(borderLocation, tile);

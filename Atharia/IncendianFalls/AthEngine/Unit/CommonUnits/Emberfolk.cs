@@ -19,7 +19,7 @@ namespace IncendianFalls {
               new Location(0, 0, 0),
               "Emberfolk",
               0,
-              120, 120,
+              80, 80,
               components,
               false);
     }

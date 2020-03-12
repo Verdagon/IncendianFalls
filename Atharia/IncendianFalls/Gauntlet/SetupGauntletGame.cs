@@ -23,6 +23,8 @@ namespace Gauntlet {
               levels,
               Unit.Null,
               context.root.EffectIGameEventMutListCreate(new List<IGameEvent>()),
+              context.root.EffectUnitWeakMutSetCreate(),
+              context.root.EffectTerrainTileWeakMutSetCreate(),
               Level.Null,
               0,
               context.root.EffectExecutionStateCreate(

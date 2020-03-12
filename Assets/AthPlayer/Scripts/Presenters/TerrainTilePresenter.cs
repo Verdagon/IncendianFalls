@@ -18,7 +18,10 @@ namespace AthPlayer {
     }
   }
 
-  public class TerrainTilePresenter : IITerrainTileComponentMutBunchObserver {
+  public class TerrainTilePresenter :
+      IITerrainTileComponentMutBunchObserver,
+      IITerrainTileEventMutListEffectObserver,
+      IITerrainTileEventMutListEffectVisitor {
     Atharia.Model.Terrain terrain;
     public readonly Location location;
     TerrainTile terrainTile;
@@ -32,6 +35,7 @@ namespace AthPlayer {
 
     public TerrainTilePresenter(
       IClock clock,
+      ITimer timer,
         Atharia.Model.Terrain terrain,
         Location location,
         TerrainTile terrainTile,
@@ -45,6 +49,7 @@ namespace AthPlayer {
       tileView =
           instantiator.CreateTileView(
             clock,
+              timer,
               new UnityEngine.Vector3(
                   positionVec2.x,
                   terrainTile.elevation * terrain.elevationStepHeight,
@@ -52,6 +57,7 @@ namespace AthPlayer {
               GetDescription());
       tileView.gameObject.AddComponent<TerrainTilePresenterTile>().Init(this);
 
+      terrainTile.events.AddObserver(this);
       componentsBroadcaster = new ITerrainTileComponentMutBunchBroadcaster(terrainTile.components);
       componentsBroadcaster.AddObserver(this);
 
@@ -141,6 +147,7 @@ namespace AthPlayer {
 
     public void DestroyTerrainTilePresenter() {
       if (terrainTile.Exists()) {
+        terrainTile.events.RemoveObserver(this);
         componentsBroadcaster.RemoveObserver(this);
         componentsBroadcaster.Stop();
       }
@@ -550,5 +557,31 @@ namespace AthPlayer {
     public void OnITerrainTileComponentMutBunchRemove(int id) {
       tileView.SetDescription(GetDescription());
     }
+
+    public void OnITerrainTileEventMutListEffect(IITerrainTileEventMutListEffect effect) {
+      effect.visit(this);
+    }
+
+    public void visitITerrainTileEventMutListCreateEffect(ITerrainTileEventMutListCreateEffect effect) { }
+
+    public void visitITerrainTileEventMutListDeleteEffect(ITerrainTileEventMutListDeleteEffect effect) { }
+
+    public void visitITerrainTileEventMutListAddEffect(ITerrainTileEventMutListAddEffect effect) {
+      if (effect.element is UnitUnleashBideEventAsITerrainTileEvent) {
+        tileView.ShowRune(
+            new ExtrudedSymbolDescription(
+                RenderPriority.RUNE,
+                new SymbolDescription(
+                    "r-3",
+                            50,
+                      new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
+                    0,
+                    OutlineMode.WithOutline,
+                    new UnityEngine.Color(0, 0, 0)),
+                true,
+                new UnityEngine.Color(0, 0, 1f, 1f)));
+      }
+    }
+    public void visitITerrainTileEventMutListRemoveEffect(ITerrainTileEventMutListRemoveEffect effect) { }
   }
 }

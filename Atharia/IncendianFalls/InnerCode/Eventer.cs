@@ -8,7 +8,8 @@ namespace IncendianFalls {
         Root root,
         Game game,
         Unit attacker,
-        List<Unit> victims) {
+        List<Unit> victims,
+        List<Location> otherLocations) {
       List<int> victimsIds = new List<int>();
       foreach (var victim in victims) {
         victimsIds.Add(victim.id);
@@ -17,10 +18,14 @@ namespace IncendianFalls {
           new UnitUnleashBideEvent(
               game.time,
               attacker.id,
-              new IntImmList(victimsIds));
+              new IntImmList(victimsIds),
+              new LocationImmList(otherLocations));
       attacker.events.Add(unleashBideEvent.AsIUnitEvent());
       foreach (var victim in victims) {
         victim.events.Add(unleashBideEvent.AsIUnitEvent());
+      }
+      foreach (var location in otherLocations) {
+        game.level.terrain.tiles[location].AddEvent(game, unleashBideEvent.AsITerrainTileEvent());
       }
     }
     public static void broadcastUnitAttackEvent(

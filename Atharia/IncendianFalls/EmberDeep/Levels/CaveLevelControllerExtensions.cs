@@ -32,7 +32,8 @@ namespace Atharia.Model {
       var borderLocations = terrain.pattern.GetAdjacentLocations(floors, false, true);
       foreach (var borderLocation in borderLocations) {
         if (!terrain.tiles.ContainsKey(borderLocation)) {
-          var tile = game.root.EffectTerrainTileCreate(2, ITerrainTileComponentMutBunch.New(game.root));
+          var tile = game.root.EffectTerrainTileCreate(
+              game.root.EffectITerrainTileEventMutListCreate(), 2, ITerrainTileComponentMutBunch.New(game.root));
           tile.components.Add(game.root.EffectCaveWallTTCCreate().AsITerrainTileComponent());
           terrain.tiles.Add(borderLocation, tile);
         }
@@ -58,17 +59,24 @@ namespace Atharia.Model {
         entryAndExitCandidateLocations = superWideOpenLocations;
       }
       
-      var entryAndExitLocations =
+      var entryLocation =
         levelSuperstate.GetNRandomWalkableLocations(
           level.terrain,
           game.rand,
-          2,
+          1,
           (loc) => entryAndExitCandidateLocations.Contains(loc),
           false,
-          false);
-      var entryLocation = entryAndExitLocations[0];
+          false)[0];
       Asserts.Assert(wideOpenLocations.Contains(entryLocation), "wat");
-      var exitLocation = entryAndExitLocations[1];
+
+      var exitLocation =
+        levelSuperstate.GetNRandomWalkableLocations(
+          level.terrain,
+          game.rand,
+          1,
+          (loc) => !loc.Equals(entryLocation),
+          false,
+          false)[0];
       level.terrain.tiles[exitLocation].components.Add(
         game.root.EffectCaveTTCCreate().AsITerrainTileComponent());
       level.terrain.tiles[exitLocation].components.Add(
@@ -187,7 +195,7 @@ namespace Atharia.Model {
         Superstate superstate,
         string triggerName) {
       if (self.depth == 0 && triggerName == "levelStart") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             100, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -214,10 +222,10 @@ namespace Atharia.Model {
         if (hopToPossibilities.Count > 0) {
           Actions.Step(game, superstate, game.player, hopToPossibilities[0], true, false);
         }
-        game.events.Add(new WaitEvent(1000, "playerEntryHopDone").AsIGameEvent());
+        game.AddEvent(new WaitEvent(1000, "playerEntryHopDone").AsIGameEvent());
       }
       if (triggerName == "playerEntryHopDone") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             40, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor

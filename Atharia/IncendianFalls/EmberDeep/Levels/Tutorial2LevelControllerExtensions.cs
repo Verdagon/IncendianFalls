@@ -78,7 +78,7 @@ namespace Atharia.Model {
         }
         //game.player.components.Add(game.root.EffectBlastRodCreate().AsIUnitComponent());
 
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             30, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -100,7 +100,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "showHint") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             50, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor

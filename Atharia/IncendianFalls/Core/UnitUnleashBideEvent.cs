@@ -23,17 +23,21 @@ public class UnitUnleashBideEvent : IComparable<UnitUnleashBideEvent> {
          public readonly int time;
   public readonly int attackerId;
   public readonly IntImmList victimIds;
+  public readonly LocationImmList otherLocations;
   public UnitUnleashBideEvent(
       int time,
       int attackerId,
-      IntImmList victimIds) {
+      IntImmList victimIds,
+      LocationImmList otherLocations) {
     this.time = time;
     this.attackerId = attackerId;
     this.victimIds = victimIds;
+    this.otherLocations = otherLocations;
     int hash = 0;
     hash = hash * 37 + time.GetDeterministicHashCode();
     hash = hash * 37 + attackerId.GetDeterministicHashCode();
     hash = hash * 37 + victimIds.GetDeterministicHashCode();
+    hash = hash * 37 + otherLocations.GetDeterministicHashCode();
     this.hashCode = hash;
 
   }
@@ -59,6 +63,7 @@ public class UnitUnleashBideEvent : IComparable<UnitUnleashBideEvent> {
                && time.Equals(that.time)
         && attackerId.Equals(that.attackerId)
         && victimIds.Equals(that.victimIds)
+        && otherLocations.Equals(that.otherLocations)
         ;
   }
   public override int GetHashCode() {
@@ -75,6 +80,9 @@ public class UnitUnleashBideEvent : IComparable<UnitUnleashBideEvent> {
     if (victimIds != that.victimIds) {
       return victimIds.CompareTo(that.victimIds);
     }
+    if (otherLocations != that.otherLocations) {
+      return otherLocations.CompareTo(that.otherLocations);
+    }
     return 0;
   }
   public override string ToString() { return DStr(); }
@@ -82,7 +90,8 @@ public class UnitUnleashBideEvent : IComparable<UnitUnleashBideEvent> {
     return "UnitUnleashBideEvent(" +
         time.DStr() + ", " +
         attackerId.DStr() + ", " +
-        victimIds.DStr()
+        victimIds.DStr() + ", " +
+        otherLocations.DStr()
         + ")";
 
     }
@@ -94,8 +103,10 @@ public class UnitUnleashBideEvent : IComparable<UnitUnleashBideEvent> {
       var attackerId = source.ParseInt();
       source.Expect(",");
       var victimIds = IntImmList.Parse(source);
+      source.Expect(",");
+      var otherLocations = LocationImmList.Parse(source);
       source.Expect(")");
-      return new UnitUnleashBideEvent(time, attackerId, victimIds);
+      return new UnitUnleashBideEvent(time, attackerId, victimIds, otherLocations);
   }
 }
        

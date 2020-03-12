@@ -80,6 +80,7 @@ namespace IncendianFalls {
         foreach (var roomFloorLocation in room.floors) {
           var tile =
               root.EffectTerrainTileCreate(
+              root.EffectITerrainTileEventMutListCreate(),
                   1, ITerrainTileComponentMutBunch.New(root));
           tile.components.Add(root.EffectGrassTTCCreate().AsITerrainTileComponent());
           tiles.Add(roomFloorLocation, tile);
@@ -92,6 +93,7 @@ namespace IncendianFalls {
       foreach (var borderLocation in allAdjacent) {
         var tile =
             root.EffectTerrainTileCreate(
+              root.EffectITerrainTileEventMutListCreate(),
                 2, ITerrainTileComponentMutBunch.New(root));
         tile.components.Add(root.EffectGrassTTCCreate().AsITerrainTileComponent());
         tiles.Add(borderLocation, tile);

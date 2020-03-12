@@ -15,7 +15,8 @@ namespace Geomancer {
     public OnPhantomTileClicked PhantomTileClicked;
 
     IClock clock;
-    MemberToViewMapper vivimap;
+    ITimer timer;
+  MemberToViewMapper vivimap;
     Geomancer.Model.Terrain terrain;
     Instantiator instantiator;
     Dictionary<Location, TerrainTilePresenter> tilePresenters = new Dictionary<Location, TerrainTilePresenter>();
@@ -25,8 +26,10 @@ namespace Geomancer {
 
     SortedSet<Location> selectedLocations = new SortedSet<Location>();
 
-    public TerrainPresenter(IClock clock, MemberToViewMapper vivimap, Geomancer.Model.Terrain terrain, Instantiator instantiator) {
+    public TerrainPresenter(IClock clock,
+      ITimer timer, MemberToViewMapper vivimap, Geomancer.Model.Terrain terrain, Instantiator instantiator) {
       this.clock = clock;
+      this.timer = timer;
       this.vivimap = vivimap;
       this.terrain = terrain;
       this.instantiator = instantiator;
@@ -157,12 +160,12 @@ namespace Geomancer {
     }
 
     private void addTerrainTile(Location location, TerrainTile tile) {
-      var presenter = new TerrainTilePresenter(clock, vivimap, terrain, location, tile, instantiator);
+      var presenter = new TerrainTilePresenter(clock, timer, vivimap, terrain, location, tile, instantiator);
       tilePresenters.Add(location, presenter);
     }
 
     private void addPhantomTile(Location location) {
-      var presenter = new PhantomTilePresenter(clock, terrain.pattern, location, instantiator);
+      var presenter = new PhantomTilePresenter(clock, timer, terrain.pattern, location, instantiator);
       phantomTilePresenters.Add(location, presenter);
     }
 

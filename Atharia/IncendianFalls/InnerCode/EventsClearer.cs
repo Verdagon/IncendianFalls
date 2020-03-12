@@ -7,13 +7,14 @@ namespace IncendianFalls {
   public class EventsClearer {
     public static void Clear(Game game) {
       game.events.Clear();
-      // If we can have an index on which units have events, that'd be pretty cool.
-      // Not sure how to generalize that though...
-      foreach (var unitMaybeWithEvents in game.level.units) {
-        if (unitMaybeWithEvents.events.Count > 0) {
-          unitMaybeWithEvents.events.Clear();
-        }
+      foreach (var eventedUnit in game.eventedUnits) {
+        eventedUnit.events.Clear();
       }
+      game.eventedUnits.Clear();
+      foreach (var eventedTerrainTile in game.eventedTerrainTiles) {
+        eventedTerrainTile.events.Clear();
+      }
+      game.eventedTerrainTiles.Clear();
     }
   }
 }

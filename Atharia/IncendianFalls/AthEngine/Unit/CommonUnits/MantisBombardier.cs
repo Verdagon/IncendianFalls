@@ -21,7 +21,7 @@ namespace IncendianFalls {
               new Location(0, 0, 0),
               "MantisBombardier",
               0,
-              100, 100,
+              70, 70,
               components,
               false);
     }

@@ -115,12 +115,14 @@ namespace Domino {
 
     public TileView CreateTileView(
       IClock clock,
+      ITimer timer,
         Vector3 basePosition,
         TileDescription description) {
       var tileGameObject = Instantiate(tilePrefab);
       var tileView = tileGameObject.GetComponent<TileView>();
       tileView.Init(
         clock,
+        timer,
           this,
           basePosition,
           description);

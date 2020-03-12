@@ -97,6 +97,7 @@ namespace Domino {
     public bool alive {  get { return initialized;  } }
 
     private IClock clock;
+    private ITimer timer;
 
     private List<SymbolView> tileSymbolViews = new List<SymbolView>();
 
@@ -110,10 +111,12 @@ namespace Domino {
 
     public void Init(
       IClock clock,
+      ITimer timer,
         Instantiator instantiator,
         Vector3 basePosition,
         TileDescription tileDescription) {
       this.clock = clock;
+      this.timer = timer;
       this.instantiator = instantiator;
 
       gameObject.transform.localPosition = basePosition;
@@ -269,6 +272,20 @@ namespace Domino {
         }
       }
 
+    }
+
+    public void ShowRune(ExtrudedSymbolDescription runeSymbolDescription) {
+      var symbolView = instantiator.CreateSymbolView(clock, false, runeSymbolDescription);
+      symbolView.transform.localRotation = Quaternion.Euler(new Vector3(-50, 180, 0));
+      symbolView.transform.localScale = new Vector3(1, 1, .1f);
+      symbolView.transform.localPosition = new Vector3(0, 0.5f, -.2f);
+      symbolView.transform.SetParent(gameObject.transform, false);
+      symbolView.FadeInThenOut(100, 400);
+      timer.ScheduleTimer(1000, () => {
+        if (alive) {
+          symbolView.Destruct();
+        }
+      });
     }
 
     public void Start() {

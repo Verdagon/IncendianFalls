@@ -15,13 +15,15 @@ namespace AthPlayer {
     public event OnTerrainHovered TerrainHovered;
 
     IClock clock;
-    Atharia.Model.Terrain terrain;
+    ITimer timer;
+  Atharia.Model.Terrain terrain;
     Instantiator instantiator;
     Dictionary<Location, TerrainTilePresenter> tilePresenters = new Dictionary<Location, TerrainTilePresenter>();
     Location maybeHighlightLocation = null;
 
-    public TerrainPresenter(IClock clock, Atharia.Model.Terrain terrain, Instantiator instantiator) {
+    public TerrainPresenter(IClock clock, ITimer timer, Atharia.Model.Terrain terrain, Instantiator instantiator) {
       this.clock = clock;
+      this.timer = timer;
       this.terrain = terrain;
       this.instantiator = instantiator;
       terrain.AddObserver(this);
@@ -33,7 +35,7 @@ namespace AthPlayer {
     }
 
     public void addTerrainTile(Location location, TerrainTile tile) {
-      var presenter = new TerrainTilePresenter(clock, terrain, location, tile, instantiator);
+      var presenter = new TerrainTilePresenter(clock, timer, terrain, location, tile, instantiator);
       tilePresenters.Add(location, presenter);
     }
 

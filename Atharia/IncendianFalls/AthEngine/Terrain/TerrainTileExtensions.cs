@@ -21,5 +21,10 @@ namespace Atharia.Model {
     public static bool IsWalkable(this TerrainTile obj) {
       return obj.components.GetAllIUnwalkableTTC().Count == 0;
     }
+
+    public static void AddEvent(this TerrainTile terrainTile, Game game, ITerrainTileEvent e) {
+      game.eventedTerrainTiles.Add(terrainTile);
+      terrainTile.events.Add(e);
+    }
   }
 }

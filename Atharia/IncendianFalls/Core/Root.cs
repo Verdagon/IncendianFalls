@@ -877,6 +877,17 @@ public class Root {
   readonly List<IGameEventMutListRemoveEffect> effectsIGameEventMutListRemoveEffect =
       new List<IGameEventMutListRemoveEffect>();
 
+  readonly SortedDictionary<int, List<IITerrainTileEventMutListEffectObserver>> observersForITerrainTileEventMutList =
+      new SortedDictionary<int, List<IITerrainTileEventMutListEffectObserver>>();
+  readonly List<ITerrainTileEventMutListCreateEffect> effectsITerrainTileEventMutListCreateEffect =
+      new List<ITerrainTileEventMutListCreateEffect>();
+  readonly List<ITerrainTileEventMutListDeleteEffect> effectsITerrainTileEventMutListDeleteEffect =
+      new List<ITerrainTileEventMutListDeleteEffect>();
+  readonly List<ITerrainTileEventMutListAddEffect> effectsITerrainTileEventMutListAddEffect =
+      new List<ITerrainTileEventMutListAddEffect>();
+  readonly List<ITerrainTileEventMutListRemoveEffect> effectsITerrainTileEventMutListRemoveEffect =
+      new List<ITerrainTileEventMutListRemoveEffect>();
+
   readonly SortedDictionary<int, List<ILocationMutListEffectObserver>> observersForLocationMutList =
       new SortedDictionary<int, List<ILocationMutListEffectObserver>>();
   readonly List<LocationMutListCreateEffect> effectsLocationMutListCreateEffect =
@@ -920,6 +931,28 @@ public class Root {
       new List<LevelMutSetAddEffect>();
   readonly List<LevelMutSetRemoveEffect> effectsLevelMutSetRemoveEffect =
       new List<LevelMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<IUnitWeakMutSetEffectObserver>> observersForUnitWeakMutSet =
+      new SortedDictionary<int, List<IUnitWeakMutSetEffectObserver>>();
+  readonly List<UnitWeakMutSetCreateEffect> effectsUnitWeakMutSetCreateEffect =
+      new List<UnitWeakMutSetCreateEffect>();
+  readonly List<UnitWeakMutSetDeleteEffect> effectsUnitWeakMutSetDeleteEffect =
+      new List<UnitWeakMutSetDeleteEffect>();
+  readonly List<UnitWeakMutSetAddEffect> effectsUnitWeakMutSetAddEffect =
+      new List<UnitWeakMutSetAddEffect>();
+  readonly List<UnitWeakMutSetRemoveEffect> effectsUnitWeakMutSetRemoveEffect =
+      new List<UnitWeakMutSetRemoveEffect>();
+
+  readonly SortedDictionary<int, List<ITerrainTileWeakMutSetEffectObserver>> observersForTerrainTileWeakMutSet =
+      new SortedDictionary<int, List<ITerrainTileWeakMutSetEffectObserver>>();
+  readonly List<TerrainTileWeakMutSetCreateEffect> effectsTerrainTileWeakMutSetCreateEffect =
+      new List<TerrainTileWeakMutSetCreateEffect>();
+  readonly List<TerrainTileWeakMutSetDeleteEffect> effectsTerrainTileWeakMutSetDeleteEffect =
+      new List<TerrainTileWeakMutSetDeleteEffect>();
+  readonly List<TerrainTileWeakMutSetAddEffect> effectsTerrainTileWeakMutSetAddEffect =
+      new List<TerrainTileWeakMutSetAddEffect>();
+  readonly List<TerrainTileWeakMutSetRemoveEffect> effectsTerrainTileWeakMutSetRemoveEffect =
+      new List<TerrainTileWeakMutSetRemoveEffect>();
 
   readonly SortedDictionary<int, List<IDoomedUCWeakMutSetEffectObserver>> observersForDoomedUCWeakMutSet =
       new SortedDictionary<int, List<IDoomedUCWeakMutSetEffectObserver>>();
@@ -2408,6 +2441,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsIGameEventMutList) {
       result += GetIGameEventMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsITerrainTileEventMutList) {
+      result += GetITerrainTileEventMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsLocationMutList) {
       result += GetLocationMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -2419,6 +2455,12 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsLevelMutSet) {
       result += GetLevelMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsUnitWeakMutSet) {
+      result += GetUnitWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsTerrainTileWeakMutSet) {
+      result += GetTerrainTileWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsDoomedUCWeakMutSet) {
       result += GetDoomedUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -3047,6 +3089,9 @@ public class Root {
     foreach (var obj in this.AllIGameEventMutList()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllITerrainTileEventMutList()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllLocationMutList()) {
       obj.CheckForNullViolations(violations);
     }
@@ -3057,6 +3102,12 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllLevelMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllUnitWeakMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllTerrainTileWeakMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllDoomedUCWeakMutSet()) {
@@ -3907,6 +3958,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllITerrainTileEventMutList()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllLocationMutList()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -3923,6 +3979,16 @@ public class Root {
       }
     }
     foreach (var obj in this.AllLevelMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllUnitWeakMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllTerrainTileWeakMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -5642,6 +5708,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForITerrainTileEventMutList =
+        new SortedDictionary<int, List<IITerrainTileEventMutListEffectObserver>>();
+    foreach (var entry in observersForITerrainTileEventMutList) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForITerrainTileEventMutList.Add(
+          objectId,
+          new List<IITerrainTileEventMutListEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForLocationMutList =
         new SortedDictionary<int, List<ILocationMutListEffectObserver>>();
     foreach (var entry in observersForLocationMutList) {
@@ -5683,6 +5760,28 @@ public class Root {
       copyOfObserversForLevelMutSet.Add(
           objectId,
           new List<ILevelMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForUnitWeakMutSet =
+        new SortedDictionary<int, List<IUnitWeakMutSetEffectObserver>>();
+    foreach (var entry in observersForUnitWeakMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForUnitWeakMutSet.Add(
+          objectId,
+          new List<IUnitWeakMutSetEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForTerrainTileWeakMutSet =
+        new SortedDictionary<int, List<ITerrainTileWeakMutSetEffectObserver>>();
+    foreach (var entry in observersForTerrainTileWeakMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForTerrainTileWeakMutSet.Add(
+          objectId,
+          new List<ITerrainTileWeakMutSetEffectObserver>(
               observers));
     }
 
@@ -7075,6 +7174,9 @@ public class Root {
     BroadcastIGameEventMutListEffects(
         copyOfObserversForIGameEventMutList);
            
+    BroadcastITerrainTileEventMutListEffects(
+        copyOfObserversForITerrainTileEventMutList);
+           
     BroadcastLocationMutListEffects(
         copyOfObserversForLocationMutList);
            
@@ -7086,6 +7188,12 @@ public class Root {
            
     BroadcastLevelMutSetEffects(
         copyOfObserversForLevelMutSet);
+           
+    BroadcastUnitWeakMutSetEffects(
+        copyOfObserversForUnitWeakMutSet);
+           
+    BroadcastTerrainTileWeakMutSetEffects(
+        copyOfObserversForTerrainTileWeakMutSet);
            
     BroadcastDoomedUCWeakMutSetEffects(
         copyOfObserversForDoomedUCWeakMutSet);
@@ -8501,6 +8609,16 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsITerrainTileEventMutList) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsITerrainTileEventMutList.ContainsKey(sourceObjId)) {
+        EffectInternalCreateITerrainTileEventMutList(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLocationMutList) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -8538,6 +8656,26 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsLevelMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateLevelMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUnitWeakMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsUnitWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateUnitWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTerrainTileWeakMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsTerrainTileWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateTerrainTileWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -9526,6 +9664,31 @@ public class Root {
         }
       }
              
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsITerrainTileEventMutList) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsITerrainTileEventMutList.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsITerrainTileEventMutList[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            for (int i = currentObjIncarnation.list.Count - 1; i >= 0; i--) {
+              EffectITerrainTileEventMutListRemoveAt(objId, i);
+            }
+            foreach (var objIdInSourceObjIncarnation in sourceObjIncarnation.list) {
+              EffectITerrainTileEventMutListAdd(objId, objIdInSourceObjIncarnation);
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+                  rootIncarnation.incarnationsITerrainTileEventMutList[objId] = sourceVersionAndObjIncarnation;
+
+          }
+        }
+      }
+             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLocationMutList) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -9625,6 +9788,62 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsLevelMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUnitWeakMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsUnitWeakMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsUnitWeakMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectUnitWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectUnitWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsUnitWeakMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTerrainTileWeakMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsTerrainTileWeakMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsTerrainTileWeakMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectTerrainTileWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectTerrainTileWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsTerrainTileWeakMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -15522,6 +15741,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ITerrainTileEventMutListIncarnation>>(rootIncarnation.incarnationsITerrainTileEventMutList)) {
+      if (!sourceIncarnation.incarnationsITerrainTileEventMutList.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectITerrainTileEventMutListDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LocationMutListIncarnation>>(rootIncarnation.incarnationsLocationMutList)) {
       if (!sourceIncarnation.incarnationsLocationMutList.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -15547,6 +15773,20 @@ public class Root {
       if (!sourceIncarnation.incarnationsLevelMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectLevelMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<UnitWeakMutSetIncarnation>>(rootIncarnation.incarnationsUnitWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsUnitWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectUnitWeakMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TerrainTileWeakMutSetIncarnation>>(rootIncarnation.incarnationsTerrainTileWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsTerrainTileWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectTerrainTileWeakMutSetDelete(id);
       }
     }
 
@@ -22942,14 +23182,17 @@ public class Root {
     }
   }
   public TerrainTile EffectTerrainTileCreate(
+      ITerrainTileEventMutList events,
       int elevation,
       ITerrainTileComponentMutBunch components) {
     CheckUnlocked();
+    CheckHasITerrainTileEventMutList(events);
     CheckHasITerrainTileComponentMutBunch(components);
 
     var id = NewId();
     var incarnation =
         new TerrainTileIncarnation(
+            events.id,
             elevation,
             components.id
             );
@@ -22984,8 +23227,9 @@ public class Root {
      
   public int GetTerrainTileHash(int id, int version, TerrainTileIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.elevation.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.components.GetDeterministicHashCode();
+    result += id * version * 1 * incarnation.events.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.elevation.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.components.GetDeterministicHashCode();
     return result;
   }
      
@@ -23048,6 +23292,7 @@ public class Root {
     } else {
       var newIncarnation =
           new TerrainTileIncarnation(
+              oldIncarnationAndVersion.incarnation.events,
               newValue,
               oldIncarnationAndVersion.incarnation.components);
       rootIncarnation.incarnationsTerrainTile[id] =
@@ -30291,6 +30536,8 @@ public class Root {
       LevelMutSet levels,
       Unit player,
       IGameEventMutList events,
+      UnitWeakMutSet eventedUnits,
+      TerrainTileWeakMutSet eventedTerrainTiles,
       Level level,
       int time,
       ExecutionState executionState) {
@@ -30298,6 +30545,8 @@ public class Root {
     CheckHasRand(rand);
     CheckHasLevelMutSet(levels);
     CheckHasIGameEventMutList(events);
+    CheckHasUnitWeakMutSet(eventedUnits);
+    CheckHasTerrainTileWeakMutSet(eventedTerrainTiles);
     CheckHasExecutionState(executionState);
 
     var id = NewId();
@@ -30308,6 +30557,8 @@ public class Root {
             levels.id,
             player.id,
             events.id,
+            eventedUnits.id,
+            eventedTerrainTiles.id,
             level.id,
             time,
             executionState.id
@@ -30350,11 +30601,13 @@ public class Root {
       result += id * version * 4 * incarnation.player.GetDeterministicHashCode();
     }
     result += id * version * 5 * incarnation.events.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.eventedUnits.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.eventedTerrainTiles.GetDeterministicHashCode();
     if (!object.ReferenceEquals(incarnation.level, null)) {
-      result += id * version * 6 * incarnation.level.GetDeterministicHashCode();
+      result += id * version * 8 * incarnation.level.GetDeterministicHashCode();
     }
-    result += id * version * 7 * incarnation.time.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.executionState.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.time.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.executionState.GetDeterministicHashCode();
     return result;
   }
      
@@ -30450,6 +30703,8 @@ public class Root {
               oldIncarnationAndVersion.incarnation.levels,
               newValue.id,
               oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.eventedUnits,
+              oldIncarnationAndVersion.incarnation.eventedTerrainTiles,
               oldIncarnationAndVersion.incarnation.level,
               oldIncarnationAndVersion.incarnation.time,
               oldIncarnationAndVersion.incarnation.executionState);
@@ -30479,6 +30734,8 @@ public class Root {
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
               oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.eventedUnits,
+              oldIncarnationAndVersion.incarnation.eventedTerrainTiles,
               newValue.id,
               oldIncarnationAndVersion.incarnation.time,
               oldIncarnationAndVersion.incarnation.executionState);
@@ -30508,6 +30765,8 @@ public class Root {
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
               oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.eventedUnits,
+              oldIncarnationAndVersion.incarnation.eventedTerrainTiles,
               oldIncarnationAndVersion.incarnation.level,
               newValue,
               oldIncarnationAndVersion.incarnation.executionState);
@@ -34130,6 +34389,194 @@ public class Root {
 
   }
 
+    public int GetITerrainTileEventMutListHash(int id, int version, ITerrainTileEventMutListIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.list) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public ITerrainTileEventMutListIncarnation GetITerrainTileEventMutListIncarnation(int id) {
+      return rootIncarnation.incarnationsITerrainTileEventMutList[id].incarnation;
+    }
+    public ITerrainTileEventMutList GetITerrainTileEventMutList(int id) {
+      return new ITerrainTileEventMutList(this, id);
+    }
+    public List<ITerrainTileEventMutList> AllITerrainTileEventMutList() {
+      List<ITerrainTileEventMutList> result = new List<ITerrainTileEventMutList>(rootIncarnation.incarnationsITerrainTileEventMutList.Count);
+      foreach (var id in rootIncarnation.incarnationsITerrainTileEventMutList.Keys) {
+        result.Add(new ITerrainTileEventMutList(this, id));
+      }
+      return result;
+    }
+    public bool ITerrainTileEventMutListExists(int id) {
+      return rootIncarnation.incarnationsITerrainTileEventMutList.ContainsKey(id);
+    }
+    public void CheckHasITerrainTileEventMutList(ITerrainTileEventMutList thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasITerrainTileEventMutList(thing.id);
+    }
+    public void CheckHasITerrainTileEventMutList(int id) {
+      if (!rootIncarnation.incarnationsITerrainTileEventMutList.ContainsKey(id)) {
+        throw new System.Exception("Invalid ITerrainTileEventMutList}: " + id);
+      }
+    }
+    public ITerrainTileEventMutList EffectITerrainTileEventMutListCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      EffectInternalCreateITerrainTileEventMutList(id, rootIncarnation.version, new ITerrainTileEventMutListIncarnation(new List<ITerrainTileEvent>()));
+      return new ITerrainTileEventMutList(this, id);
+    }
+    public ITerrainTileEventMutList EffectITerrainTileEventMutListCreate(IEnumerable<ITerrainTileEvent> elements) {
+      var id = NewId();
+      var incarnation = new ITerrainTileEventMutListIncarnation(new List<ITerrainTileEvent>(elements));
+      EffectInternalCreateITerrainTileEventMutList(id, rootIncarnation.version, incarnation);
+      return new ITerrainTileEventMutList(this, id);
+    }
+    public void EffectInternalCreateITerrainTileEventMutList(int id, int incarnationVersion, ITerrainTileEventMutListIncarnation incarnation) {
+      var effect = new ITerrainTileEventMutListCreateEffect(id);
+      rootIncarnation.incarnationsITerrainTileEventMutList
+          .Add(
+              id,
+              new VersionAndIncarnation<ITerrainTileEventMutListIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsITerrainTileEventMutListCreateEffect.Add(effect);
+    }
+    public void EffectITerrainTileEventMutListDelete(int id) {
+      CheckUnlocked();
+      var effect = new ITerrainTileEventMutListDeleteEffect(id);
+      effectsITerrainTileEventMutListDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsITerrainTileEventMutList[id];
+      rootIncarnation.incarnationsITerrainTileEventMutList.Remove(id);
+    }
+    public void EffectITerrainTileEventMutListAdd(int listId, ITerrainTileEvent element) {
+      CheckUnlocked();
+      CheckHasITerrainTileEventMutList(listId);
+
+    
+      var effect = new ITerrainTileEventMutListAddEffect(listId, element);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsITerrainTileEventMutList[listId];
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.list.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.list;
+        var newMap = new List<ITerrainTileEvent>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new ITerrainTileEventMutListIncarnation(newMap);
+        rootIncarnation.incarnationsITerrainTileEventMutList[listId] =
+            new VersionAndIncarnation<ITerrainTileEventMutListIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsITerrainTileEventMutListAddEffect.Add(effect);
+    }
+    public void EffectITerrainTileEventMutListRemoveAt(int listId, int index) {
+      CheckUnlocked();
+      CheckHasITerrainTileEventMutList(listId);
+
+      var effect = new ITerrainTileEventMutListRemoveEffect(listId, index);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsITerrainTileEventMutList[listId];
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        var oldElement = oldIncarnationAndVersion.incarnation.list[index];
+        oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.list;
+        var newMap = new List<ITerrainTileEvent>(oldMap);
+        newMap.RemoveAt(index);
+        var newIncarnation = new ITerrainTileEventMutListIncarnation(newMap);
+        rootIncarnation.incarnationsITerrainTileEventMutList[listId] =
+            new VersionAndIncarnation<ITerrainTileEventMutListIncarnation>(
+                rootIncarnation.version, newIncarnation);
+
+      }
+      effectsITerrainTileEventMutListRemoveEffect.Add(effect);
+    }
+       
+    public void AddITerrainTileEventMutListObserver(int id, IITerrainTileEventMutListEffectObserver observer) {
+      List<IITerrainTileEventMutListEffectObserver> obsies;
+      if (!observersForITerrainTileEventMutList.TryGetValue(id, out obsies)) {
+        obsies = new List<IITerrainTileEventMutListEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForITerrainTileEventMutList[id] = obsies;
+    }
+
+    public void RemoveITerrainTileEventMutListObserver(int id, IITerrainTileEventMutListEffectObserver observer) {
+      if (observersForITerrainTileEventMutList.ContainsKey(id)) {
+        var list = observersForITerrainTileEventMutList[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForITerrainTileEventMutList.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+  public void BroadcastITerrainTileEventMutListEffects(
+      SortedDictionary<int, List<IITerrainTileEventMutListEffectObserver>> observers) {
+    foreach (var effect in effectsITerrainTileEventMutListDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IITerrainTileEventMutListEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnITerrainTileEventMutListEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IITerrainTileEventMutListEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnITerrainTileEventMutListEffect(effect);
+        }
+        observersForITerrainTileEventMutList.Remove(effect.id);
+      }
+    }
+    effectsITerrainTileEventMutListDeleteEffect.Clear();
+
+    foreach (var effect in effectsITerrainTileEventMutListAddEffect) {
+      if (observers.TryGetValue(0, out List<IITerrainTileEventMutListEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnITerrainTileEventMutListEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IITerrainTileEventMutListEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnITerrainTileEventMutListEffect(effect);
+        }
+      }
+    }
+    effectsITerrainTileEventMutListAddEffect.Clear();
+
+    foreach (var effect in effectsITerrainTileEventMutListRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IITerrainTileEventMutListEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnITerrainTileEventMutListEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IITerrainTileEventMutListEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnITerrainTileEventMutListEffect(effect);
+        }
+      }
+    }
+    effectsITerrainTileEventMutListRemoveEffect.Clear();
+
+    foreach (var effect in effectsITerrainTileEventMutListCreateEffect) {
+      if (observers.TryGetValue(0, out List<IITerrainTileEventMutListEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnITerrainTileEventMutListEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IITerrainTileEventMutListEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnITerrainTileEventMutListEffect(effect);
+        }
+      }
+    }
+    effectsITerrainTileEventMutListCreateEffect.Clear();
+
+  }
+
     public int GetLocationMutListHash(int id, int version, LocationMutListIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.list) {
@@ -34882,6 +35329,388 @@ public class Root {
       }
     }
     effectsLevelMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetUnitWeakMutSetHash(int id, int version, UnitWeakMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public UnitWeakMutSetIncarnation GetUnitWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsUnitWeakMutSet[id].incarnation;
+    }
+    public UnitWeakMutSet GetUnitWeakMutSet(int id) {
+      return new UnitWeakMutSet(this, id);
+    }
+    public List<UnitWeakMutSet> AllUnitWeakMutSet() {
+      List<UnitWeakMutSet> result = new List<UnitWeakMutSet>(rootIncarnation.incarnationsUnitWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsUnitWeakMutSet.Keys) {
+        result.Add(new UnitWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool UnitWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsUnitWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasUnitWeakMutSet(UnitWeakMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasUnitWeakMutSet(thing.id);
+    }
+    public void CheckHasUnitWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsUnitWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid UnitWeakMutSet}: " + id);
+      }
+    }
+    public UnitWeakMutSet EffectUnitWeakMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new UnitWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateUnitWeakMutSet(id, rootIncarnation.version, incarnation);
+      return new UnitWeakMutSet(this, id);
+    }
+    public void EffectInternalCreateUnitWeakMutSet(int id, int incarnationVersion, UnitWeakMutSetIncarnation incarnation) {
+      var effect = new UnitWeakMutSetCreateEffect(id);
+      rootIncarnation.incarnationsUnitWeakMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<UnitWeakMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsUnitWeakMutSetCreateEffect.Add(effect);
+    }
+    public void EffectUnitWeakMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new UnitWeakMutSetDeleteEffect(id);
+      effectsUnitWeakMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsUnitWeakMutSet[id];
+      rootIncarnation.incarnationsUnitWeakMutSet.Remove(id);
+    }
+
+       
+    public void EffectUnitWeakMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasUnitWeakMutSet(setId);
+      CheckHasUnit(elementId);
+
+      var effect = new UnitWeakMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsUnitWeakMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new UnitWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsUnitWeakMutSet[setId] =
+            new VersionAndIncarnation<UnitWeakMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsUnitWeakMutSetAddEffect.Add(effect);
+    }
+    public void EffectUnitWeakMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasUnitWeakMutSet(setId);
+      CheckHasUnit(elementId);
+
+      var effect = new UnitWeakMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsUnitWeakMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new UnitWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsUnitWeakMutSet[setId] =
+            new VersionAndIncarnation<UnitWeakMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsUnitWeakMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddUnitWeakMutSetObserver(int id, IUnitWeakMutSetEffectObserver observer) {
+      List<IUnitWeakMutSetEffectObserver> obsies;
+      if (!observersForUnitWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IUnitWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForUnitWeakMutSet[id] = obsies;
+    }
+
+    public void RemoveUnitWeakMutSetObserver(int id, IUnitWeakMutSetEffectObserver observer) {
+      if (observersForUnitWeakMutSet.ContainsKey(id)) {
+        var list = observersForUnitWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForUnitWeakMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastUnitWeakMutSetEffects(
+      SortedDictionary<int, List<IUnitWeakMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsUnitWeakMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IUnitWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnitWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnitWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnitWeakMutSetEffect(effect);
+        }
+        observersForUnitWeakMutSet.Remove(effect.id);
+      }
+    }
+    effectsUnitWeakMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsUnitWeakMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IUnitWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnitWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnitWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnitWeakMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUnitWeakMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsUnitWeakMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IUnitWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnitWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnitWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnitWeakMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUnitWeakMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsUnitWeakMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IUnitWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnitWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnitWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnitWeakMutSetEffect(effect);
+        }
+      }
+    }
+    effectsUnitWeakMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetTerrainTileWeakMutSetHash(int id, int version, TerrainTileWeakMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public TerrainTileWeakMutSetIncarnation GetTerrainTileWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsTerrainTileWeakMutSet[id].incarnation;
+    }
+    public TerrainTileWeakMutSet GetTerrainTileWeakMutSet(int id) {
+      return new TerrainTileWeakMutSet(this, id);
+    }
+    public List<TerrainTileWeakMutSet> AllTerrainTileWeakMutSet() {
+      List<TerrainTileWeakMutSet> result = new List<TerrainTileWeakMutSet>(rootIncarnation.incarnationsTerrainTileWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsTerrainTileWeakMutSet.Keys) {
+        result.Add(new TerrainTileWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool TerrainTileWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsTerrainTileWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasTerrainTileWeakMutSet(TerrainTileWeakMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasTerrainTileWeakMutSet(thing.id);
+    }
+    public void CheckHasTerrainTileWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsTerrainTileWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid TerrainTileWeakMutSet}: " + id);
+      }
+    }
+    public TerrainTileWeakMutSet EffectTerrainTileWeakMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new TerrainTileWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateTerrainTileWeakMutSet(id, rootIncarnation.version, incarnation);
+      return new TerrainTileWeakMutSet(this, id);
+    }
+    public void EffectInternalCreateTerrainTileWeakMutSet(int id, int incarnationVersion, TerrainTileWeakMutSetIncarnation incarnation) {
+      var effect = new TerrainTileWeakMutSetCreateEffect(id);
+      rootIncarnation.incarnationsTerrainTileWeakMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<TerrainTileWeakMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsTerrainTileWeakMutSetCreateEffect.Add(effect);
+    }
+    public void EffectTerrainTileWeakMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new TerrainTileWeakMutSetDeleteEffect(id);
+      effectsTerrainTileWeakMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsTerrainTileWeakMutSet[id];
+      rootIncarnation.incarnationsTerrainTileWeakMutSet.Remove(id);
+    }
+
+       
+    public void EffectTerrainTileWeakMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasTerrainTileWeakMutSet(setId);
+      CheckHasTerrainTile(elementId);
+
+      var effect = new TerrainTileWeakMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsTerrainTileWeakMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new TerrainTileWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsTerrainTileWeakMutSet[setId] =
+            new VersionAndIncarnation<TerrainTileWeakMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsTerrainTileWeakMutSetAddEffect.Add(effect);
+    }
+    public void EffectTerrainTileWeakMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasTerrainTileWeakMutSet(setId);
+      CheckHasTerrainTile(elementId);
+
+      var effect = new TerrainTileWeakMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsTerrainTileWeakMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new TerrainTileWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsTerrainTileWeakMutSet[setId] =
+            new VersionAndIncarnation<TerrainTileWeakMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsTerrainTileWeakMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddTerrainTileWeakMutSetObserver(int id, ITerrainTileWeakMutSetEffectObserver observer) {
+      List<ITerrainTileWeakMutSetEffectObserver> obsies;
+      if (!observersForTerrainTileWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ITerrainTileWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForTerrainTileWeakMutSet[id] = obsies;
+    }
+
+    public void RemoveTerrainTileWeakMutSetObserver(int id, ITerrainTileWeakMutSetEffectObserver observer) {
+      if (observersForTerrainTileWeakMutSet.ContainsKey(id)) {
+        var list = observersForTerrainTileWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForTerrainTileWeakMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastTerrainTileWeakMutSetEffects(
+      SortedDictionary<int, List<ITerrainTileWeakMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsTerrainTileWeakMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<ITerrainTileWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTerrainTileWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ITerrainTileWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTerrainTileWeakMutSetEffect(effect);
+        }
+        observersForTerrainTileWeakMutSet.Remove(effect.id);
+      }
+    }
+    effectsTerrainTileWeakMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsTerrainTileWeakMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<ITerrainTileWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTerrainTileWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ITerrainTileWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTerrainTileWeakMutSetEffect(effect);
+        }
+      }
+    }
+    effectsTerrainTileWeakMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsTerrainTileWeakMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<ITerrainTileWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTerrainTileWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ITerrainTileWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTerrainTileWeakMutSetEffect(effect);
+        }
+      }
+    }
+    effectsTerrainTileWeakMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsTerrainTileWeakMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<ITerrainTileWeakMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnTerrainTileWeakMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<ITerrainTileWeakMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnTerrainTileWeakMutSetEffect(effect);
+        }
+      }
+    }
+    effectsTerrainTileWeakMutSetCreateEffect.Clear();
 
   }
 

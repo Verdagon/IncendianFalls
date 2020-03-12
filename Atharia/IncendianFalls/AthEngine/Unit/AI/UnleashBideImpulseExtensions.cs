@@ -23,22 +23,7 @@ namespace Atharia.Model {
       Asserts.Assert(capability.Exists());
       capability.charge = 0;
 
-      List<Unit> victims = new List<Unit>();
-      foreach (var otherUnit in game.level.units) {
-        if (otherUnit.Is(actingUnit)) {
-          continue;
-        }
-        if (!otherUnit.alive) {
-          continue;
-        }
-        var distance =
-          game.level.terrain.pattern.GetTileCenter(otherUnit.location)
-          .distance(game.level.terrain.pattern.GetTileCenter(actingUnit.location));
-        if (distance <= 2) {
-          victims.Add(otherUnit);
-        }
-      }
-      Actions.UnleashBide(game, superstate, actingUnit, victims);
+      Actions.UnleashBide(game, superstate, actingUnit);
 
       return true;
     }

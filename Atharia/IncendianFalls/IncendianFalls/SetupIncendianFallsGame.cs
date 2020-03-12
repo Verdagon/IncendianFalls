@@ -21,6 +21,8 @@ namespace IncendianFalls {
               levels,
               Unit.Null,
               context.root.EffectIGameEventMutListCreate(new List<IGameEvent>()),
+              context.root.EffectUnitWeakMutSetCreate(),
+              context.root.EffectTerrainTileWeakMutSetCreate(),
               Level.Null,
               0,
               context.root.EffectExecutionStateCreate(
@@ -57,7 +59,7 @@ namespace IncendianFalls {
           player);
       game.player = player;
 
-      game.events.Add(new NarrateEvent("The Incendian Falls! I've finally made it.\nIf I can find Volcaetus, I can save my brother!").AsIGameEvent());
+      game.AddEvent(new NarrateEvent("The Incendian Falls! I've finally made it.\nIf I can find Volcaetus, I can save my brother!").AsIGameEvent());
 
       return game;
     }

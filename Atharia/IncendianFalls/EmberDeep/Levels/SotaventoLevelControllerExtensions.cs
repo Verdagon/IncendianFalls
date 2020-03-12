@@ -64,7 +64,7 @@ namespace Atharia.Model {
       game.root.logger.Info("Got trigger: " + triggerName);
 
       if (triggerName == "levelStart") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             100, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -86,7 +86,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "introLine1Done") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             100, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -108,7 +108,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "introLine2Done") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             100, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -131,51 +131,51 @@ namespace Atharia.Model {
       }
       if (triggerName == "introLine3Done") {
         var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo1");
-        game.events.Add(new FlyCameraEvent(ravashrikeHopTo1, new Vec3(5, 5, 5), 300, "flyCameraToRavashrikeDone").AsIGameEvent());
+        game.AddEvent(new FlyCameraEvent(ravashrikeHopTo1, new Vec3(5, 5, 5), 300, "flyCameraToRavashrikeDone").AsIGameEvent());
       }
       if (triggerName == "flyCameraToRavashrikeDone") {
-        game.events.Add(new WaitEvent(500, "wait1Done").AsIGameEvent());
+        game.AddEvent(new WaitEvent(500, "wait1Done").AsIGameEvent());
       }
       if (triggerName == "wait1Done") {
         var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
-        game.events.Add(new FlyCameraEvent(chronomancer.location, new Vec3(5, 5, 5), 300, "flyToBrother1Done").AsIGameEvent());
+        game.AddEvent(new FlyCameraEvent(chronomancer.location, new Vec3(5, 5, 5), 300, "flyToBrother1Done").AsIGameEvent());
       }
       if (triggerName == "flyToBrother1Done") {
-        game.events.Add(new SetGameSpeedEvent(40).AsIGameEvent());
+        game.AddEvent(new SetGameSpeedEvent(40).AsIGameEvent());
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
         var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo1");
         Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
-        game.events.Add(new WaitEvent(1000, "fire1").AsIGameEvent());
+        game.AddEvent(new WaitEvent(1000, "fire1").AsIGameEvent());
       }
       if (triggerName == "fire1") {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
         var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
         Actions.Fire(game, superstate, chronomancer, ravashrike);
-        game.events.Add(new WaitEvent(500, "step2").AsIGameEvent());
+        game.AddEvent(new WaitEvent(500, "step2").AsIGameEvent());
       }
       if (triggerName == "step2") {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
         var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo2");
         Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
-        game.events.Add(new WaitEvent(1000, "fire2").AsIGameEvent());
+        game.AddEvent(new WaitEvent(1000, "fire2").AsIGameEvent());
       }
       if (triggerName == "fire2") {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
         var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
         Actions.Fire(game, superstate, chronomancer, ravashrike);
-        game.events.Add(new WaitEvent(500, "step3").AsIGameEvent());
+        game.AddEvent(new WaitEvent(500, "step3").AsIGameEvent());
       }
       if (triggerName == "step3") {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
         var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo3");
         Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
-        game.events.Add(new WaitEvent(1000, "fire3").AsIGameEvent());
+        game.AddEvent(new WaitEvent(1000, "fire3").AsIGameEvent());
       }
       if (triggerName == "fire3") {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
         var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
         Actions.Fire(game, superstate, chronomancer, ravashrike);
-        game.events.Add(new WaitEvent(500, "ravashrikeAttack").AsIGameEvent());
+        game.AddEvent(new WaitEvent(500, "ravashrikeAttack").AsIGameEvent());
       }
       if (triggerName == "ravashrikeAttack") {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
@@ -183,10 +183,10 @@ namespace Atharia.Model {
         var retreatTo = superstate.levelSuperstate.FindMarkerLocation("retreatTo");
         Actions.Bump(game, superstate, ravashrike, chronomancer, 1.0f, true);
         Actions.Step(game, superstate, chronomancer, retreatTo, true, false);
-        game.events.Add(new WaitEvent(1000, "ravashrikeAttackDone").AsIGameEvent());
+        game.AddEvent(new WaitEvent(1000, "ravashrikeAttackDone").AsIGameEvent());
       }
       if (triggerName == "ravashrikeAttackDone") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             50, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -209,7 +209,7 @@ namespace Atharia.Model {
       }
       if (triggerName == "realizationDone") {
         //Actions.Stasis(game, superstate, chronomancer, ravashrike);
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             100, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -231,7 +231,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "cinematicFadeOut") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             100, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -253,7 +253,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "cinematicDone") {
-        game.events.Add(new SetGameSpeedEvent(100).AsIGameEvent());
+        game.AddEvent(new SetGameSpeedEvent(100).AsIGameEvent());
         var linkLocation = game.player.location;
         game.level.terrain.tiles[linkLocation].components.GetOnlyLevelLinkTTCOrNull()
           .Interact(game, superstate, game.player, linkLocation);

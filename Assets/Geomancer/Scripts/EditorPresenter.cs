@@ -127,7 +127,7 @@ namespace Geomancer {
         });
       }
 
-      terrainPresenter = new TerrainPresenter(clock, MemberToViewMap.MakeVivimap(), level.terrain, instantiator);
+      terrainPresenter = new TerrainPresenter(clock, clock, MemberToViewMap.MakeVivimap(), level.terrain, instantiator);
       terrainPresenter.PhantomTileClicked += HandlePhantomTileClicked;
       terrainPresenter.TerrainTileClicked += HandleTerrainTileClicked;
       terrainPresenter.TerrainTileHovered += HandleTerrainTileHovered;

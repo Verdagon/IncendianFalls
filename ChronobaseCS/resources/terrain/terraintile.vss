@@ -47,7 +47,3 @@ mut interface IActingTTC {
 
 
 imm interface ITerrainTileEvent { }
-
-imm struct TerrainTileFireEvent {
-  TerrainTileFireEvent isa ITerrainTileEvent;
-}

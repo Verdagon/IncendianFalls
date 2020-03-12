@@ -47,6 +47,14 @@ public class Game {
       violations.Add("Null constraint violated! Game#" + id + ".events");
     }
 
+    if (!root.UnitWeakMutSetExists(eventedUnits.id)) {
+      violations.Add("Null constraint violated! Game#" + id + ".eventedUnits");
+    }
+
+    if (!root.TerrainTileWeakMutSetExists(eventedTerrainTiles.id)) {
+      violations.Add("Null constraint violated! Game#" + id + ".eventedTerrainTiles");
+    }
+
     if (!root.ExecutionStateExists(executionState.id)) {
       violations.Add("Null constraint violated! Game#" + id + ".executionState");
     }
@@ -67,6 +75,12 @@ public class Game {
     }
     if (root.IGameEventMutListExists(events.id)) {
       events.FindReachableObjects(foundIds);
+    }
+    if (root.UnitWeakMutSetExists(eventedUnits.id)) {
+      eventedUnits.FindReachableObjects(foundIds);
+    }
+    if (root.TerrainTileWeakMutSetExists(eventedTerrainTiles.id)) {
+      eventedTerrainTiles.FindReachableObjects(foundIds);
     }
     if (root.LevelExists(level.id)) {
       level.FindReachableObjects(foundIds);
@@ -122,6 +136,24 @@ public class Game {
         throw new Exception("Tried to get member events of null!");
       }
       return new IGameEventMutList(root, incarnation.events);
+    }
+                       }
+  public UnitWeakMutSet eventedUnits {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member eventedUnits of null!");
+      }
+      return new UnitWeakMutSet(root, incarnation.eventedUnits);
+    }
+                       }
+  public TerrainTileWeakMutSet eventedTerrainTiles {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member eventedTerrainTiles of null!");
+      }
+      return new TerrainTileWeakMutSet(root, incarnation.eventedTerrainTiles);
     }
                        }
   public Level level {

@@ -83,7 +83,7 @@ namespace Atharia.Model {
           item.Destruct();
         }
 
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             30, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -106,7 +106,7 @@ namespace Atharia.Model {
       }
 
       if (triggerName == "startTalking") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             70, // sizePercent
             new Color(16, 16, 16, 224), // backgroundColor
@@ -128,7 +128,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "startCamera") {
-        game.events.Add(
+        game.AddEvent(
           new FlyCameraEvent(
             new Location(15, 0, 0),
             new Vec3(0, 8, 8),
@@ -137,11 +137,11 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "cameraReachedPanTo") {
-        game.events.Add(
+        game.AddEvent(
           new WaitEvent(500, "cameraWaitDone").AsIGameEvent());
       }
       if (triggerName == "cameraWaitDone") {
-        game.events.Add(
+        game.AddEvent(
           new FlyCameraEvent(
             new Location(-10, 0, 0),
             new Vec3(0, 8, 8),
@@ -150,7 +150,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "showHints") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             70, // sizePercent
             new Color(16, 16, 16, 224), // backgroundColor

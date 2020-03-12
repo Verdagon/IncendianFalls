@@ -14,7 +14,7 @@ namespace Atharia.Model {
     }
 
     public static Void ReactToPickUp(this SlowRod self, Game game, Superstate superstate, Unit unit) {
-      game.events.Add(
+      game.AddEvent(
         new ShowOverlayEvent(
           70, new Color(16, 16, 16, 224), 300, 0, 0, "",
           "You've found the Mire Staff!\n\nUse 'S' and click on an enemy to use it.\n\nFor " + Actions.MIRE_COST + "mp, it will slightly delay their next action... but only a bit.\n\nBest have a time clone cast it!",

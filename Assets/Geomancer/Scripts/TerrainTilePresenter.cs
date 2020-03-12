@@ -23,7 +23,8 @@ namespace Geomancer {
     public delegate void OnMouseClickEvent();
 
     IClock clock;
-    MemberToViewMapper vivimap;
+    ITimer timer;
+  MemberToViewMapper vivimap;
     Geomancer.Model.Terrain terrain;
     public readonly Location location;
     TerrainTile terrainTile;
@@ -42,12 +43,14 @@ namespace Geomancer {
 
     public TerrainTilePresenter(
       IClock clock,
+      ITimer timer,
         MemberToViewMapper vivimap,
         Geomancer.Model.Terrain terrain,
         Location location,
         TerrainTile terrainTile,
         Instantiator instantiator) {
       this.clock = clock;
+      this.timer = timer;
       this.vivimap = vivimap;
       this.location = location;
       this.terrain = terrain;
@@ -81,7 +84,7 @@ namespace Geomancer {
                   terrainTile.elevation * terrain.elevationStepHeight,
                   positionVec2.y);
 
-      tileView = instantiator.CreateTileView(clock, tileCenter, tileDescription);
+      tileView = instantiator.CreateTileView(clock, timer, tileCenter, tileDescription);
       tileView.gameObject.AddComponent<TerrainTilePresenterTile>().Init(this);
       tileView.SetDescription(tileDescription);
 

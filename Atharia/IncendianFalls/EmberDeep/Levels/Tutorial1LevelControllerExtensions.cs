@@ -64,7 +64,7 @@ namespace Atharia.Model {
           item.Destruct();
         }
 
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             100, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -86,7 +86,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "showTitle") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             30, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -109,7 +109,7 @@ namespace Atharia.Model {
       }
 
       if (triggerName == "ambush1b") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             50, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -134,7 +134,7 @@ namespace Atharia.Model {
       }
 
       if (triggerName == "ambush2b") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             50, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -159,8 +159,8 @@ namespace Atharia.Model {
       }
 
       if (triggerName == "ambush3b") {
-        game.events.Add(new NarrateEvent(1 + " Defy remaining!").AsIGameEvent());
-        game.events.Add(
+        game.AddEvent(new NarrateEvent(1 + " Defy remaining!").AsIGameEvent());
+        game.AddEvent(
           new ShowOverlayEvent(
             70, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -185,7 +185,7 @@ namespace Atharia.Model {
       }
 
       if (triggerName == "healthPotionB") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             70, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -209,7 +209,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "ambush4b") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             60, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -233,7 +233,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "ambush4c") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             60, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -258,7 +258,7 @@ namespace Atharia.Model {
       }
 
       if (triggerName == "ambush4d") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             60, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -284,7 +284,7 @@ namespace Atharia.Model {
 
       if (triggerName == "ambush4e") {
         if (superstate.anchorTurnIndices.Count == 0) {
-          game.events.Add(
+          game.AddEvent(
             new ShowOverlayEvent(
               60, // sizePercent
               new Color(0, 0, 0, 224), // backgroundColor
@@ -308,8 +308,8 @@ namespace Atharia.Model {
             .AsIGameEvent());
         } else {
           game.player.components.Add(game.root.EffectTutorialDefyCounterUCCreate(10, "firstSelfDefied").AsIUnitComponent());
-          game.events.Add(new NarrateEvent(10 + " Defy remaining!").AsIGameEvent());
-          game.events.Add(
+          game.AddEvent(new NarrateEvent(10 + " Defy remaining!").AsIGameEvent());
+          game.AddEvent(
             new ShowOverlayEvent(
               60, // sizePercent
               new Color(0, 0, 0, 224), // backgroundColor
@@ -340,7 +340,7 @@ namespace Atharia.Model {
         if (defyCounter.numDefiesRemaining == 0) {
           game.player.components.Remove(defyCounter.AsIUnitComponent());
           defyCounter.Destruct();
-          game.events.Add(
+          game.AddEvent(
             new ShowOverlayEvent(
               50, // sizePercent
               new Color(0, 0, 0, 224), // backgroundColor
@@ -363,13 +363,13 @@ namespace Atharia.Model {
               }))
             .AsIGameEvent());
         } else {
-          game.events.Add(new NarrateEvent(defyCounter.numDefiesRemaining + " Defy remaining!").AsIGameEvent());
+          game.AddEvent(new NarrateEvent(defyCounter.numDefiesRemaining + " Defy remaining!").AsIGameEvent());
         }
       }
 
       if (triggerName == "ambush4f") {
-        game.events.Add(new NarrateEvent(1 + " Defy remaining!").AsIGameEvent());
-        game.events.Add(
+        game.AddEvent(new NarrateEvent(1 + " Defy remaining!").AsIGameEvent());
+        game.AddEvent(
           new ShowOverlayEvent(
             70, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -411,7 +411,7 @@ namespace Atharia.Model {
           superstate.levelSuperstate.FindMarkerLocation("ambush1Summon"),
           game.player.nextActionTime + 300,
           Irkling.Make(game.root));
-        game.events.Add(new WaitEvent(400, "ambush1b").AsIGameEvent());
+        game.AddEvent(new WaitEvent(400, "ambush1b").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush2Trigger") {
@@ -421,7 +421,7 @@ namespace Atharia.Model {
           superstate.levelSuperstate.FindMarkerLocation("ambush2Summon"),
           game.player.nextActionTime + 300,
           Baug.Make(game.root));
-        game.events.Add(new WaitEvent(400, "ambush2b").AsIGameEvent());
+        game.AddEvent(new WaitEvent(400, "ambush2b").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush3Trigger") {
@@ -431,12 +431,12 @@ namespace Atharia.Model {
           superstate.levelSuperstate.FindMarkerLocation("ambush3Summon"),
           game.player.nextActionTime + 300,
           Spirient.Make(game.root));
-        game.events.Add(new WaitEvent(400, "ambush3b").AsIGameEvent());
+        game.AddEvent(new WaitEvent(400, "ambush3b").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "defyHint") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("defyHint", 1);
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             50, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -462,7 +462,7 @@ namespace Atharia.Model {
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "healthPotion") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("healthPotion", 1);
-        game.events.Add(new WaitEvent(400, "healthPotionB").AsIGameEvent());
+        game.AddEvent(new WaitEvent(400, "healthPotionB").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush4Trigger") {
@@ -473,24 +473,24 @@ namespace Atharia.Model {
           game.player.nextActionTime + 300,
           RavagianTrask.Make(game.root));
 
-        game.events.Add(new WaitEvent(400, "ambush4b").AsIGameEvent());
+        game.AddEvent(new WaitEvent(400, "ambush4b").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggerName == "ambush4DefySpot" &&
           triggeringUnit.NullableIs(game.player)) {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefySpot", 1);
-        game.events.Add(new WaitEvent(400, "ambush4e").AsIGameEvent());
+        game.AddEvent(new WaitEvent(400, "ambush4e").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggerName == "ambush4DefySpot" &&
           triggeringUnit.components.GetAllTimeCloneAICapabilityUC().Count > 0) {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefySpot", 1);
-        game.events.Add(new WaitEvent(600, "ambush4f").AsIGameEvent());
+        game.AddEvent(new WaitEvent(600, "ambush4f").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "multipleHint") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("multipleHint", 1);
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             60, // sizePercent
             new Color(16, 16, 16, 224), // backgroundColor

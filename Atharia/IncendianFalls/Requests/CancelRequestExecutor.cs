@@ -16,10 +16,10 @@ namespace IncendianFalls {
 
       if (superstate.navigatingState != null) {
         superstate.navigatingState = null;
-        game.events.Add(
+        game.AddEvent(
           new NarrateEvent("Canceled movement!").AsIGameEvent());
       } else {
-        game.events.Add(
+        game.AddEvent(
           new NarrateEvent("No movement to cancel!").AsIGameEvent());
       }
 

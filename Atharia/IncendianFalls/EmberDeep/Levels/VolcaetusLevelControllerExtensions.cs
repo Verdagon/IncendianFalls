@@ -61,7 +61,7 @@ namespace Atharia.Model {
       game.root.logger.Info("Got simple trigger: " + triggerName);
 
       if (triggerName == "line2") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             100, // sizePercent
             new Color(16, 16, 16, 224), // backgroundColor
@@ -83,7 +83,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "line3") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             100, // sizePercent
             new Color(16, 16, 16, 224), // backgroundColor
@@ -118,7 +118,7 @@ namespace Atharia.Model {
       game.root.logger.Info("Got simple unit trigger: " + triggerName);
 
       if (triggeringUnit.NullableIs(game.player) && triggerName == "volcaetus") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             40, // sizePercent
             new Color(16, 16, 16, 224), // backgroundColor

@@ -54,6 +54,10 @@ namespace Atharia.Model {
       }
       return damage;
     }
+    public static void AddEvent(this Unit unit, Game game, IUnitEvent e) {
+      game.eventedUnits.Add(unit);
+      unit.events.Add(e);
+    }
     //public static IDirectiveUC GetDirectiveOrNull(this Unit unit) {
     //  return unit.components.GetOnlyIDirectiveUCOrNull();
     //}

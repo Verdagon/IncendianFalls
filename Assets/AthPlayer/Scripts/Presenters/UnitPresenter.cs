@@ -187,7 +187,13 @@ namespace AthPlayer {
         var evt = ((UnitAttackEventAsIUnitEvent)effect.element).obj;
         if (evt.attackerId == unit.id) {
           var victim = unit.root.GetUnit(evt.victimId);
+          if (!victim.Exists()) {
+            return;
+          }
           var victimPosition = game.level.terrain.GetTileCenter(victim.location).ToUnity();
+          if (!unit.Exists()) {
+            return;
+          }
           var playerPosition = game.level.terrain.GetTileCenter(unit.location).ToUnity();
 
           soundPlayer.Play("attack");

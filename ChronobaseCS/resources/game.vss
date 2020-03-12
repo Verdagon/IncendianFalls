@@ -6,6 +6,8 @@ root mut struct Game {
   var player: ?&Unit;
 
   events: MutList:IGameEvent;
+  eventedUnits: MutSet:&&Unit;
+  eventedTerrainTiles: MutSet:&&TerrainTile;
 
   var level: ?&Level;
   var time: Int;

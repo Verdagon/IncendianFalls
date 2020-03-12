@@ -14,7 +14,7 @@ namespace Atharia.Model {
     }
 
     public static Void ReactToPickUp(this BlastRod self, Game game, Superstate superstate, Unit unit) {
-      game.events.Add(
+      game.AddEvent(
         new ShowOverlayEvent(
           70, new Color(16, 16, 16, 224), 300, 0, 0, "",
           "You've found the Fire Bomb Staff!\n\nUse 'F' and click on a location to use it, for " + Actions.FIRE_BOMB_COST + "mp.\n\nIt will explode after 2 more turns, for " + Actions.FIRE_BOMB_DAMAGE + " damage!",

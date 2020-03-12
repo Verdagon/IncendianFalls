@@ -56,7 +56,8 @@ namespace Atharia.Model {
       foreach (var wall in ambushAreaWalls) {
         level.terrain.tiles.Add(
           wall,
-          level.root.EffectTerrainTileCreate(0, ITerrainTileComponentMutBunch.New(level.root)));
+          level.root.EffectTerrainTileCreate(
+              game.root.EffectITerrainTileEventMutListCreate(), 0, ITerrainTileComponentMutBunch.New(level.root)));
       }
 
       CellularAutomataTerrainGenerator.AddCircle(level.terrain, new Location(0, 0, 0), 16.0f);
@@ -97,7 +98,8 @@ namespace Atharia.Model {
       var borderLocations = level.terrain.pattern.GetAdjacentLocations(locations, false, true);
       foreach (var borderLocation in borderLocations) {
         if (!level.terrain.tiles.ContainsKey(borderLocation)) {
-          var tile = game.root.EffectTerrainTileCreate(3, ITerrainTileComponentMutBunch.New(game.root));
+          var tile = game.root.EffectTerrainTileCreate(
+              game.root.EffectITerrainTileEventMutListCreate(), 3, ITerrainTileComponentMutBunch.New(game.root));
           tile.components.Add(game.root.EffectCaveWallTTCCreate().AsITerrainTileComponent());
           level.terrain.tiles.Add(borderLocation, tile);
         }
@@ -185,10 +187,10 @@ namespace Atharia.Model {
       if (triggerName == "levelStart") {
         var hopTo = superstate.levelSuperstate.FindMarkerLocation("playerHopTo");
         Actions.Step(game, superstate, game.player, hopTo, true, false);
-        game.events.Add(new WaitEvent(1000, "playerEntryHopDone").AsIGameEvent());
+        game.AddEvent(new WaitEvent(1000, "playerEntryHopDone").AsIGameEvent());
       }
       if (triggerName == "playerEntryHopDone") {
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             30, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -210,7 +212,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "uhOhDone") {
-        game.events.Add(
+        game.AddEvent(
           new FlyCameraEvent(
             superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"),
             new Vec3(0, 8, 8),
@@ -219,11 +221,11 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "cameraReachedPanTo") {
-        game.events.Add(
+        game.AddEvent(
           new WaitEvent(1000, "cameraWaitDone").AsIGameEvent());
       }
       if (triggerName == "cameraWaitDone") {
-        game.events.Add(
+        game.AddEvent(
           new FlyCameraEvent(
             superstate.levelSuperstate.FindMarkerLocation("playerHopTo"),
             new Vec3(0, 8, 8),
@@ -234,7 +236,7 @@ namespace Atharia.Model {
       if (triggerName == "cameraDone") {
         game.player.nextActionTime = game.level.time;
 
-        game.events.Add(
+        game.AddEvent(
           new ShowOverlayEvent(
             40, // sizePercent
             new Color(0, 0, 0, 224), // backgroundColor
@@ -267,7 +269,7 @@ namespace Atharia.Model {
         Location location,
         string triggerName) {
       //if (triggerName == "ambushTrigger") {
-      //  game.events.Add(
+      //  game.AddEvent(
       //    new ShowOverlayEvent(
       //      80, // sizePercent
       //      new Color(0, 0, 0, 224), // backgroundColor

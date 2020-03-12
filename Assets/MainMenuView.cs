@@ -40,4 +40,11 @@ public class MainMenuView : MonoBehaviour
   public void OnExitClicked() {
     Application.Quit();
   }
+
+  public void Update() {
+    if (Input.GetKeyDown(KeyCode.Alpha5)) {
+      RootPresenter.sceneInitParamStartLevel = -5;
+      SceneManager.LoadScene("AtScene");
+    }
+  }
 }

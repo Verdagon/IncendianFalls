@@ -34,5 +34,9 @@ namespace Atharia.Model {
         return WorldStateType.kAfterUnitAction;
       }
     }
+
+    public static void AddEvent(this Game game, IGameEvent e) {
+      game.events.Add(e);
+    }
   }
 }
