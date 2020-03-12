@@ -19,7 +19,7 @@ namespace Geomancer {
         new MemberToViewMapper.OverlayDescriptionForIDescription(
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
-            new SymbolDescription("f",
+            new SymbolDescription("f-3",
                             50,new Color(.5f, .5f, .5f, .2f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
             false,
             new Color(0, 0, 0)))
@@ -28,7 +28,7 @@ namespace Geomancer {
         new MemberToViewMapper.OverlayDescriptionForIDescription(
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
-            new SymbolDescription("f",
+            new SymbolDescription("f-3",
                             50, new Color(0f, 0f, 0f, .8f), 0, OutlineMode.WithOutline, new Color(0, 0, 0)),
             false,
             new Color(0, 0, 0)))
@@ -94,7 +94,7 @@ namespace Geomancer {
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
-                          "r",
+                          "r-3",
                             50,
                           new Color(.8f, .4f, 0, .5f),
                           0,
@@ -146,7 +146,7 @@ namespace Geomancer {
           new ExtrudedSymbolDescription(
               RenderPriority.SYMBOL,
               new SymbolDescription(
-                  "f",
+                  "f-3",
                   50,
                   new UnityEngine.Color(.5f, .0f, 0f),
                   0,

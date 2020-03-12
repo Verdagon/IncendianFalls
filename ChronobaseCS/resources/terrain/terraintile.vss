@@ -1,5 +1,6 @@
 
 mut struct TerrainTile {
+  events: MutList:ITerrainTileEvent;
   var elevation: Int;
   components: MutBunch:ITerrainTileComponent;
 }
@@ -42,4 +43,11 @@ mut interface IActingTTC {
     superstate: $Superstate,
     containingTileLocation: Location
   ): Void;
+}
+
+
+imm interface ITerrainTileEvent { }
+
+imm struct TerrainTileFireEvent {
+  TerrainTileFireEvent isa ITerrainTileEvent;
 }

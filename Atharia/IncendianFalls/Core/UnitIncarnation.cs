@@ -12,7 +12,7 @@ public class UnitIncarnation {
   public readonly string classId;
   public  int nextActionTime;
   public  int hp;
-  public readonly int maxHp;
+  public  int maxHp;
   public readonly int components;
   public readonly bool good;
   public UnitIncarnation(

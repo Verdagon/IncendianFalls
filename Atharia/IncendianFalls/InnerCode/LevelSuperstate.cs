@@ -13,6 +13,7 @@ namespace Atharia.Model {
     SortedSet<Location> walkableLocations;
 
     SortedDictionary<Location, Unit> liveUnitByLocation;
+    SortedSet<Location> noUnitLocations;
 
     SortedSet<Location> locationsWithActingTTCs;
 
@@ -24,6 +25,7 @@ namespace Atharia.Model {
       walkableLocations = new SortedSet<Location>();
       liveUnitByLocation = new SortedDictionary<Location, Unit>();
       locationsWithActingTTCs = new SortedSet<Location>();
+      noUnitLocations = new SortedSet<Location>();
       Reconstruct(level);
     }
 
@@ -34,9 +36,22 @@ namespace Atharia.Model {
     }
 
     public void RemovedActingTTC(Location location) {
-      if (level.terrain.tiles[location].components.GetAllIActingTTC().Count == 1) {
+      if (level.terrain.tiles[location].components.GetAllIActingTTC().Count == 0) {
         locationsWithActingTTCs.Remove(location);
       }
+    }
+
+    public bool IsNoUnitLocation(Location loc) {
+      return noUnitLocations.Contains(loc);
+    }
+
+    public void AddNoUnitZone(Location loc, int radiusIncludingCenter) {
+      var noUnitZone = new SortedSet<Location>();
+      noUnitZone.Add(loc);
+      for (int i = 1; i < radiusIncludingCenter; i++) {
+        noUnitZone = level.terrain.GetAdjacentExistingLocations(noUnitZone, true, false);
+      }
+      SetUtils.AddAll(noUnitLocations, noUnitZone);
     }
 
     public List<KeyValuePair<Location, IActingTTC>> GetAllActingTTCs() {
@@ -115,7 +130,7 @@ namespace Atharia.Model {
     public SortedSet<Location> GetWalkableLocations(
         Terrain terrain,
         LocationPredicate filter,
-        bool checkLevelLinkPresent,
+        bool checkNoUnitLocation,
         bool checkUnitPresent) {
       // Gather the candidates
       var candidates = new SortedSet<Location>();
@@ -126,8 +141,7 @@ namespace Atharia.Model {
         if (checkUnitPresent && liveUnitByLocation.ContainsKey(location)) {
           continue;
         }
-        if (checkLevelLinkPresent &&
-            terrain.tiles[location].components.GetAllLevelLinkTTC().Count > 0) {
+        if (checkNoUnitLocation && IsNoUnitLocation(location)) {
           continue;
         }
         candidates.Add(location);
@@ -139,9 +153,9 @@ namespace Atharia.Model {
         Rand rand,
         int numToGet,
         LocationPredicate filter,
-        bool checkLevelLinkPresent,
+        bool checkNoUnitLocation,
         bool checkUnitPresent) {
-      var candidates = GetWalkableLocations(terrain, filter, checkLevelLinkPresent, checkUnitPresent);
+      var candidates = GetWalkableLocations(terrain, filter, checkNoUnitLocation, checkUnitPresent);
       // Shuffle the candidates four times. For some reason if we don't do this
       // most the units are on the left side of the map.
       return ListUtils.GetRandomN(new List<Location>(candidates), rand, 4, numToGet);

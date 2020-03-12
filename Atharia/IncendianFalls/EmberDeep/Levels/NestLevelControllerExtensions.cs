@@ -123,6 +123,9 @@ namespace Atharia.Model {
           level.root.EffectGlaiveCreate().AsIItem())
         .AsITerrainTileComponent());
 
+      levelSuperstate.Reconstruct(level);
+      levelSuperstate.AddNoUnitZone(entryLocation, 3);
+
       int numSpacesInRestOfLevel = levelSuperstate.NumWalkableLocations(false) - ambushAreaFloors.Count;
       EmberDeepUnitsAndItems.FillWithUnits(
         game.rand,
@@ -156,6 +159,8 @@ namespace Atharia.Model {
         /*numChronolisk=*/ 0,
         /*numMantisBombardier=*/ 0,
         /*numLightningTrask=*/ 0);
+
+      levelSuperstate.Reconstruct(level);
 
       game.levels.Add(level);
 

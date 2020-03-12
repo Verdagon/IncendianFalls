@@ -146,7 +146,7 @@ namespace EmberDeep {
 
       if (previousLevel.Exists()) {
         previousLevel.terrain.tiles[previousLevelExitLocation].components.Add(
-          game.root.EffectEmberDeepLevelLinkerTTCCreate(startingDepth).AsITerrainTileComponent());
+          game.root.EffectEmberDeepLevelLinkerTTCCreate(0).AsITerrainTileComponent());
       } else {
         EmberDeepLevelLinkerTTCExtensions.MakeNextLevel(
           out var level,
@@ -154,7 +154,7 @@ namespace EmberDeep {
           out var entryLocation,
           game,
           superstate,
-          startingDepth);
+          0);
         if (!startLevel.Exists()) {
           startLevel = level;
           startLevelEntryLocation = entryLocation;
@@ -167,8 +167,6 @@ namespace EmberDeep {
 
       game.root.logger.Info("starting level: " + startLevel.controller.GetName());
       LevelLinkTTCExtensions.Travel(game, superstate, game.player, startLevel, startLevelEntryLocation, false);
-
-      game.level.controller.SimpleTrigger(game, superstate, "firstLevelStart");
 
       return game;
     }

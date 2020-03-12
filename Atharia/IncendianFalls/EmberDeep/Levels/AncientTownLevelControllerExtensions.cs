@@ -42,6 +42,8 @@ namespace Atharia.Model {
 
       var entryLocation = levelSuperstate.FindMarkerLocation("entry");
 
+      levelSuperstate.AddNoUnitZone(entryLocation, 5);
+
       int numSpaces = levelSuperstate.NumWalkableLocations(false);
       EmberDeepUnitsAndItems.FillWithUnits(
         game.rand,
@@ -59,7 +61,7 @@ namespace Atharia.Model {
         /*numMantisBombardier=*/ 2 * numSpaces / 200,
         /*numLightningTrask=*/ 0 * numSpaces / 200);
 
-      EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .008f, .005f);
+      EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .04f, .04f);
 
       level.controller = game.root.EffectAncientTownLevelControllerCreate(level).AsILevelController();
 

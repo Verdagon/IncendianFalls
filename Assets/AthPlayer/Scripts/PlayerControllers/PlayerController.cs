@@ -70,13 +70,8 @@ namespace Domino {
       MaybeResume();
     }
 
-    public void LookAt(Unit maybeUnit) {
-      if (maybeUnit == null) {
-        var symbolsAndLabels = new List<KeyValuePair<SymbolDescription, string>>();
-        lookPanelView.SetStuff(false, "", "", symbolsAndLabels);
-      } else {
-        looker.Look(maybeUnit);
-      }
+    public void LookAt(Unit maybeUnit, TerrainTile maybeTerrainTile) {
+      looker.Look(maybeUnit, maybeTerrainTile);
     }
 
     //public void OnUnitMouseClick(Unit unit) {
@@ -210,6 +205,7 @@ namespace Domino {
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) { }
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) { }
+    public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) {}
     public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) {
       if (effect.newValue == false) {
         overlayPresenter.ShowOverlay(

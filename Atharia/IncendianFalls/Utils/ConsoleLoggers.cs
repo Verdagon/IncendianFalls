@@ -72,6 +72,8 @@ namespace IncendianFalls {
       }
       public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) {
       }
+      public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) {
+      }
     }
 
     public class PlayerEventLogger : IIUnitEventMutListEffectObserver, IIUnitEventMutListEffectVisitor {

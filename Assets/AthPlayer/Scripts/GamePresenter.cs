@@ -151,7 +151,15 @@ namespace AthPlayer {
           }
         }
       }
-      return null;
+      return Unit.Null;
+    }
+
+    public TerrainTile TileAtLocation(Location location) {
+      if (game.level.terrain.tiles.ContainsKey(location)) {
+        return game.level.terrain.tiles[location];
+      } else {
+        return TerrainTile.Null;
+      }
     }
 
     public void SetHighlightedLocation(Location location) {

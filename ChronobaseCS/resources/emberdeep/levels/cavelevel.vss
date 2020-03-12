@@ -3,6 +3,7 @@ mut struct CaveLevelController {
   CaveLevelController isa ILevelController;
 
   level: &Level;
+  depth: Int;
 
   fn GetName(this: CaveLevelController overrides ILevelController): Str {
     CaveLevelControllerExtensions.GetName

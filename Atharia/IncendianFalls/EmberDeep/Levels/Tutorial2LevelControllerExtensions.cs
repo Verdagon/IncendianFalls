@@ -67,11 +67,16 @@ namespace Atharia.Model {
       game.root.logger.Error("Got simple trigger: " + triggerName);
 
       if (triggerName == "levelStart") {
+        game.player.hp = game.player.maxHp;
         var sorcerous = game.player.components.GetOnlySorcerousUCOrNull();
         if (sorcerous.Exists()) {
           sorcerous.mp = sorcerous.maxMp;
         }
-        game.player.hp = game.player.maxHp;
+        foreach (var item in game.player.components.GetAllIItem()) {
+          game.player.components.Remove(item.AsIUnitComponent());
+          item.Destruct();
+        }
+        //game.player.components.Add(game.root.EffectBlastRodCreate().AsIUnitComponent());
 
         game.events.Add(
           new ShowOverlayEvent(

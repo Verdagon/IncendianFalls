@@ -99,7 +99,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return game;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -126,7 +126,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return game;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -153,7 +153,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return game;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -249,7 +249,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -297,7 +297,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return result;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -321,7 +321,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return result;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -345,7 +345,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return result;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -370,7 +370,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -395,7 +395,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -419,7 +419,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -443,7 +443,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return result;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -467,7 +467,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -491,7 +491,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return success;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
@@ -515,7 +515,7 @@ namespace IncendianFalls {
         context.Flare(GetDeterministicHashCode());
         return result;
       } catch (Exception e) {
-        root.logger.Error(e.Message);
+        root.logger.Error(e.Message + " " + e.StackTrace);
         throw e;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");

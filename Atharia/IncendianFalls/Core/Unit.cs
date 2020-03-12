@@ -98,6 +98,7 @@ public class Unit {
   }
   public int maxHp {
     get { return incarnation.maxHp; }
+    set { root.EffectUnitSetMaxHp(id, value); }
   }
   public IUnitComponentMutBunch components {
 

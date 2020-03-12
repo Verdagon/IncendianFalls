@@ -8,7 +8,7 @@
 -7 -2 5 2 CaveWall
 -7 -2 6 1 Dirt Marker(ambush4Summon)
 -7 -2 7 1 Dirt
--7 -1 0 1 Dirt Trigger(multipleHint)
+-7 -1 0 1 Dirt Marker
 -7 -1 1 2 CaveWall
 -7 -1 2 1 Dirt Cave Marker(exit)
 -7 -1 3 2 CaveWall
@@ -22,7 +22,7 @@
 -6 -2 6 1 Dirt Trigger(ambush4DefySpot)
 -6 -2 7 2 CaveWall
 -6 -1 0 2 CaveWall
--6 -1 1 1 Dirt Trigger(multipleHint)
+-6 -1 1 1 Dirt Marker
 -6 -1 2 1 Dirt
 -6 -1 3 1 Dirt
 -6 -1 4 2 CaveWall

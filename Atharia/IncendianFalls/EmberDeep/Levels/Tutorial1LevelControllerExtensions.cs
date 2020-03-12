@@ -54,11 +54,16 @@ namespace Atharia.Model {
       game.root.logger.Error("Got simple trigger: " + triggerName);
 
       if (triggerName == "levelStart") {
+        game.player.hp = game.player.maxHp;
         var sorcerous = game.player.components.GetOnlySorcerousUCOrNull();
         if (sorcerous.Exists()) {
           sorcerous.mp = sorcerous.maxMp;
         }
-        game.player.hp = game.player.maxHp;
+        foreach (var item in game.player.components.GetAllIItem()) {
+          game.player.components.Remove(item.AsIUnitComponent());
+          item.Destruct();
+        }
+
         game.events.Add(
           new ShowOverlayEvent(
             100, // sizePercent
@@ -483,6 +488,31 @@ namespace Atharia.Model {
         game.events.Add(new WaitEvent(600, "ambush4f").AsIGameEvent());
         superstate.navigatingState = null;
       }
+      if (triggeringUnit.NullableIs(game.player) && triggerName == "multipleHint") {
+        superstate.levelSuperstate.RemoveSimplePresenceTriggers("multipleHint", 1);
+        game.events.Add(
+          new ShowOverlayEvent(
+            60, // sizePercent
+            new Color(16, 16, 16, 224), // backgroundColor
+            300, // fadeInEnd
+            0, // fadeOutStart
+            0, // fadeOutEnd,
+            "",
+
+            "You can have several past selves active at the same time.\n\nSometimes, it's the only way to survive!",
+            new Color(255, 255, 255, 255), // textColor
+            0, // textFadeInStartS
+            300, // textFadeInEndS
+            0, // textFadeOutStartS
+            0, // textFadeOutEndS
+            true, // topAligned
+            true, // leftAligned
+
+            new ButtonImmList(new List<Button>() {
+              new Button("Together I stand!", new Color(64, 64, 64, 255), "")
+            }))
+          .AsIGameEvent());
+      }
       return new Atharia.Model.Void();
     }
     
@@ -497,7 +527,7 @@ namespace Atharia.Model {
 -7 -2 5 2 CaveWall
 -7 -2 6 1 Dirt Marker(ambush4Summon)
 -7 -2 7 1 Dirt
--7 -1 0 1 Dirt
+-7 -1 0 1 Dirt Trigger(multipleHint)
 -7 -1 1 2 CaveWall
 -7 -1 2 1 Dirt Cave Marker(exit)
 -7 -1 3 2 CaveWall
@@ -511,7 +541,7 @@ namespace Atharia.Model {
 -6 -2 6 1 Dirt Trigger(ambush4DefySpot)
 -6 -2 7 2 CaveWall
 -6 -1 0 2 CaveWall
--6 -1 1 1 Dirt
+-6 -1 1 1 Dirt Trigger(multipleHint)
 -6 -1 2 1 Dirt
 -6 -1 3 1 Dirt
 -6 -1 4 2 CaveWall
@@ -621,7 +651,6 @@ namespace Atharia.Model {
 2 0 2 3 CaveWall
 2 0 3 3 CaveWall
 2 0 5 3 CaveWall
-
 ";
   }
 }

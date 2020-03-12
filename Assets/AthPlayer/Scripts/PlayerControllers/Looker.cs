@@ -8,24 +8,131 @@ namespace AthPlayer {
   public class Looker : IUnitEffectObserver, IUnitEffectVisitor {
     LookPanelView lookPanelView;
     Unit lookedUnit = Unit.Null;
+    TerrainTile lookedTile = TerrainTile.Null;
 
     public Looker(LookPanelView lookPanelView) {
       this.lookPanelView = lookPanelView;
-
-      this.Look(Unit.Null);
     }
 
-    public void Look(Unit unit) {
+    public void Clear() {
+      lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
+    }
+
+    public void Look(Unit unit, TerrainTile tile) {
       if (lookedUnit.Exists()) {
         lookedUnit.RemoveObserver(this);
-        lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
       }
 
-      if (!unit.Exists()) {
-        lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
-        return;
+      Clear();
+      lookedUnit = unit;
+      lookedTile = tile;
+
+      if (unit.Exists()) {
+        Look(unit);
+      } else if (tile.Exists()) {
+        Look(tile);
+      } else {
+        Clear();
+      }
+    }
+
+    private void Look(TerrainTile tile) {
+      var symbolsAndLabels = new List<KeyValuePair<SymbolDescription, string>>();
+
+      foreach (var detail in tile.components) {
+        if (detail is ItemTTCAsITerrainTileComponent itemTTC) {
+          var item = itemTTC.obj.item;
+
+          if (item is ArmorAsIItem) {
+            symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                    new SymbolDescription(
+                        "0",
+                              50,
+                        new UnityEngine.Color(1f, 1f, 1.0f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+              "Igneous Armor"));
+          } else if (item is BlastRodAsIItem) {
+            symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                    new SymbolDescription(
+                        "w",
+                              50,
+                        new UnityEngine.Color(1f, .5f, 0f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+              "Fire Rod"));
+          } else if (item is SlowRodAsIItem) {
+            symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                    new SymbolDescription(
+                        "w",
+                              50,
+                        new UnityEngine.Color(0f, .5f, 1f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+              "Mire Staff"));
+          } else if (item is GlaiveAsIItem) {
+            symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                    new SymbolDescription(
+                        "s",
+                              50,
+                        new UnityEngine.Color(1f, 1f, 1f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+              "Glaive"));
+          } else if (item is SpeedRingAsIItem) {
+            symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                    new SymbolDescription(
+                        "4",
+                              50,
+                        new UnityEngine.Color(1f, 1f, 1f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+              "Speed Ring"));
+          } else if (item is HealthPotionAsIItem) {
+            symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                    new SymbolDescription(
+                        "+",
+                              50,
+                        new UnityEngine.Color(.8f, 0, .8f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+              "Life Potion"));
+          } else if (item is ManaPotionAsIItem) {
+            symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                    new SymbolDescription(
+                        ",",
+                              50,
+                        new UnityEngine.Color(.25f, .7f, 1.0f, 1.5f),
+                        0,
+                        OutlineMode.WithBackOutline,
+                        new UnityEngine.Color(0, 0, 0)),
+              "Mana Potion"));
+          } else {
+            Asserts.Assert(false, "Found item: " + item);
+          }
+        }
       }
 
+      if (symbolsAndLabels.Count > 0) {
+        lookPanelView.SetStuff(true, "", "", symbolsAndLabels);
+      }
+    }
+
+
+    private void Look(Unit unit) {
       var symbolsAndLabels = new List<KeyValuePair<SymbolDescription, string>>();
 
       foreach (var detail in unit.components) {
@@ -55,7 +162,7 @@ namespace AthPlayer {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
-                    "f",
+                    "f-3",
                     50,
                     new UnityEngine.Color(1, 1, 1, 1.5f),
                     0,
@@ -149,7 +256,7 @@ namespace AthPlayer {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                   new SymbolDescription(
-                      "r",
+                      "r-3",
                     50,
                       new UnityEngine.Color(1, 1, 1, 1.5f),
                       0,
@@ -192,12 +299,13 @@ namespace AthPlayer {
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) { }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) { }
+    public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
       if (!lookedUnit.Exists()) {
-        Look(Unit.Null);
+        Clear();
       }
     }
   }

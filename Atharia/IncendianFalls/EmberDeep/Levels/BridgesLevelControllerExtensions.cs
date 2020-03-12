@@ -60,6 +60,9 @@ namespace Atharia.Model {
 
       var entryLoc = levelSuperstate.FindMarkerLocation("entry");
 
+      levelSuperstate.Reconstruct(level);
+      levelSuperstate.AddNoUnitZone(entryLoc, 3);
+
       EmberDeepUnitsAndItems.FillWithUnits(
         game.rand,
         level,
@@ -78,7 +81,7 @@ namespace Atharia.Model {
 
       levelSuperstate.Reconstruct(level);
 
-      EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLoc), .03f, 0f);
+      EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLoc), .04f, 0f);
 
       game.levels.Add(level);
 
@@ -115,12 +118,12 @@ namespace Atharia.Model {
 
     private static string LEVEL = @"
 -9 0 4 1 Magma
--9 0 6 1 Magma
+-9 0 6 1 Magma Fire
 -9 0 7 1 Magma
 -9 1 0 1 Magma
 -9 1 2 1 Magma
 -9 1 4 1 Magma
--9 1 7 1 Magma
+-9 1 7 1 Magma Fire
 -8 -2 7 1 Magma
 -8 -1 7 1 Magma
 -8 0 4 1 Magma
@@ -128,7 +131,7 @@ namespace Atharia.Model {
 -8 0 6 1 Magma
 -8 0 7 1 Magma
 -8 1 0 4 Mud Cave Marker(exit)
--8 1 1 1 Magma
+-8 1 1 1 Magma Fire
 -8 1 2 4 Mud
 -8 1 3 1 Magma
 -8 1 4 4 Mud Obsidian
@@ -140,25 +143,27 @@ namespace Atharia.Model {
 -8 2 2 1 Magma
 -8 2 3 1 Magma
 -8 2 4 1 Magma
--8 2 5 1 Magma
+-8 2 5 1 Magma Fire
 -8 2 6 1 Magma
 -8 2 7 1 Magma
+-7 -2 4 1 Magma
+-7 -2 5 1 Magma
 -7 -2 6 1 Magma
--7 -2 7 1 Magma
+-7 -2 7 1 Magma Fire
 -7 -1 0 1 Magma
--7 -1 1 1 Magma
+-7 -1 1 1 Magma Fire
 -7 -1 2 1 Magma
 -7 -1 3 1 Magma
--7 -1 4 1 Magma
+-7 -1 4 1 Magma Fire
 -7 -1 5 1 Magma
--7 -1 6 1 Magma
+-7 -1 6 1 Magma Fire
 -7 -1 7 6 Dirt
 -7 0 0 1 Magma
--7 0 1 1 Magma
+-7 0 1 1 Magma Fire
 -7 0 2 1 Magma
 -7 0 3 1 Magma
 -7 0 4 1 Magma
--7 0 5 1 Magma
+-7 0 5 1 Magma Fire
 -7 0 6 1 Magma
 -7 0 7 1 Magma
 -7 1 0 4 Mud
@@ -170,18 +175,21 @@ namespace Atharia.Model {
 -7 1 6 4 Mud
 -7 1 7 4 Mud
 -7 2 0 4 Mud Obsidian
--7 2 1 1 Magma
+-7 2 1 1 Magma Fire
 -7 2 2 5 Mud
--7 2 3 1 Magma
+-7 2 3 1 Magma Fire
 -7 2 4 5 Mud Rocks
 -7 2 5 5 Mud Obsidian
 -7 2 6 5 Mud
 -7 2 7 5 Mud
--7 3 0 1 Magma
+-7 3 0 1 Magma Fire
 -7 3 1 1 Magma
 -7 3 2 1 Magma
 -7 3 4 1 Magma
--7 3 7 1 Magma
+-7 3 7 1 Magma Fire
+-6 -2 2 1 Magma
+-6 -2 4 1 Magma
+-6 -2 5 1 Magma
 -6 -2 6 2 Magma
 -6 -2 7 2 Magma
 -6 -1 0 6 Dirt
@@ -197,17 +205,17 @@ namespace Atharia.Model {
 -6 0 2 6 Dirt Rocks
 -6 0 3 1 Magma
 -6 0 4 6 Dirt
--6 0 5 1 Magma
+-6 0 5 1 Magma Fire
 -6 0 6 1 Magma
 -6 0 7 6 Mud Rocks
 -6 1 0 2 Magma
 -6 1 1 1 Magma
 -6 1 2 1 Magma
--6 1 3 2 Magma
+-6 1 3 2 Magma Fire
 -6 1 4 1 Magma
 -6 1 5 2 Magma
 -6 1 6 2 Magma
--6 1 7 1 Magma
+-6 1 7 1 Magma Fire
 -6 2 0 2 Magma
 -6 2 1 4 Mud Rocks
 -6 2 2 2 Magma
@@ -222,42 +230,46 @@ namespace Atharia.Model {
 -6 3 3 5 Mud
 -6 3 4 5 Mud
 -6 3 5 1 Magma
--6 3 6 1 Magma
+-6 3 6 1 Magma Fire
 -6 3 7 1 Magma
 -6 4 0 1 Magma
--5 -2 6 2 Magma
--5 -2 7 2 Magma
+-5 -2 2 1 Magma
+-5 -2 3 1 Magma Fire
+-5 -2 4 1 Magma
+-5 -2 5 1 Magma Fire
+-5 -2 6 7 Dirt
+-5 -2 7 7 Dirt
 -5 -1 0 7 Dirt Rocks
 -5 -1 1 7 Dirt
 -5 -1 2 7 Dirt
 -5 -1 3 7 Dirt Rocks
--5 -1 4 2 Magma
+-5 -1 4 7 Dirt
 -5 -1 5 7 Mud
 -5 -1 6 2 Magma
--5 -1 7 2 Magma
--5 0 0 2 Magma
+-5 -1 7 2 Magma Fire
+-5 0 0 6 Dirt
 -5 0 1 6 Dirt
--5 0 2 2 Magma
+-5 0 2 6 Mud
 -5 0 3 6 Mud
 -5 0 4 6 Dirt
 -5 0 5 6 Mud Rocks
 -5 0 6 5 Mud
 -5 0 7 5 Mud
 -5 1 0 6 Mud Obsidian
--5 1 1 2 Magma
--5 1 2 1 Magma
+-5 1 1 2 Magma Fire
+-5 1 2 1 Magma Fire
 -5 1 6 1 Magma
 -5 1 7 2 Magma
 -5 2 0 2 Magma
 -5 2 1 2 Magma
 -5 2 2 4 Mud Obsidian
--5 2 3 2 Magma
+-5 2 3 2 Magma Fire
 -5 2 4 4 Mud
 -5 2 5 2 Magma
 -5 2 6 4 Mud Dirt Obsidian
 -5 2 7 4 Mud Marker(item)
 -5 3 0 2 Magma
--5 3 1 2 Magma
+-5 3 1 2 Magma Fire
 -5 3 2 2 Magma
 -5 3 3 5 Mud
 -5 3 4 5 Dirt
@@ -269,24 +281,26 @@ namespace Atharia.Model {
 -5 4 2 1 Magma
 -5 4 3 1 Magma
 -5 4 4 1 Magma
--4 -2 4 2 Magma
+-4 -2 2 1 Magma
+-4 -2 3 1 Magma
+-4 -2 4 2 Magma Fire
 -4 -2 5 2 Magma
--4 -2 6 2 Magma
+-4 -2 6 7 Dirt Rocks
 -4 -2 7 2 Magma
 -4 -1 0 7 Dirt
 -4 -1 1 7 Dirt
 -4 -1 2 7 Dirt
 -4 -1 3 7 Dirt Rocks
 -4 -1 4 1 Magma
--4 -1 5 2 Magma
+-4 -1 5 2 Magma Fire
 -4 -1 6 1 Magma
 -4 -1 7 1 Magma
 -4 0 0 1 Magma
 -4 0 1 1 Magma
--4 0 2 1 Magma
+-4 0 2 1 Magma Fire
 -4 0 3 1 Magma
--4 0 4 1 Magma
--4 0 5 2 Magma
+-4 0 4 5 Mud
+-4 0 5 5 Dirt
 -4 0 6 5 Mud Obsidian
 -4 0 7 4 Mud
 -4 1 0 5 Mud
@@ -296,12 +310,12 @@ namespace Atharia.Model {
 -4 1 4 1 Magma
 -4 1 5 1 Magma
 -4 1 6 2 Magma
--4 1 7 1 Magma
--4 2 0 2 Magma
+-4 1 7 1 Magma Fire
+-4 2 0 2 Magma Fire
 -4 2 1 2 Magma
 -4 2 2 4 Mud
 -4 2 3 4 Mud
--4 2 4 4 Mud
+-4 2 4 4 Mud Rocks
 -4 2 5 4 Mud
 -4 2 6 4 Mud Obsidian Marker(guard)
 -4 2 7 4 Mud
@@ -320,7 +334,7 @@ namespace Atharia.Model {
 -4 4 4 1 Magma
 -4 4 5 1 Magma
 -4 4 6 1 Magma
--4 4 7 1 Magma
+-4 4 7 1 Magma Fire
 -3 -2 0 4 Magma
 -3 -2 2 4 Magma
 -3 -2 3 4 Magma
@@ -328,18 +342,18 @@ namespace Atharia.Model {
 -3 -2 5 2 Magma
 -3 -2 6 4 Magma
 -3 -2 7 3 Magma
--3 -1 0 4 Magma
+-3 -1 0 7 Dirt
 -3 -1 1 7 Dirt
 -3 -1 2 7 Dirt Rocks
 -3 -1 3 7 Dirt
 -3 -1 4 7 Dirt
 -3 -1 5 1 Magma
--3 -1 6 1 Magma
+-3 -1 6 1 Magma Fire
 -3 -1 7 7 Dirt
 -3 0 0 4 Mud Obsidian
 -3 0 1 1 Magma
 -3 0 2 4 Mud
--3 0 3 1 Magma
+-3 0 3 4 Mud
 -3 0 4 4 Mud Rocks
 -3 0 5 4 Mud
 -3 0 6 4 Mud Rocks
@@ -349,12 +363,12 @@ namespace Atharia.Model {
 -3 1 2 1 Magma
 -3 1 3 5 Mud
 -3 1 4 1 Magma
--3 1 5 1 Magma
+-3 1 5 1 Magma Fire
 -3 1 6 2 Magma
 -3 1 7 1 Magma
 -3 2 0 1 Magma
--3 2 1 2 Magma
--3 2 2 1 Magma
+-3 2 1 4 Mud Obsidian
+-3 2 2 4 Mud
 -3 2 3 4 Mud Obsidian
 -3 2 4 5 Mud Rocks
 -3 2 5 4 Mud
@@ -365,9 +379,9 @@ namespace Atharia.Model {
 -3 3 2 4 Mud Rocks
 -3 3 3 4 Mud
 -3 3 4 2 Magma
--3 3 5 2 Magma
+-3 3 5 2 Magma Fire
 -3 3 6 3 Magma
--3 3 7 3 Magma
+-3 3 7 3 Magma Fire
 -3 4 0 7 Dirt Rocks
 -3 4 1 7 Mud
 -3 4 2 7 Mud Dirt
@@ -378,14 +392,14 @@ namespace Atharia.Model {
 -3 4 7 1 Magma
 -2 -2 0 4 Magma
 -2 -2 1 4 Magma
--2 -2 2 3 Magma
+-2 -2 2 3 Magma Fire
 -2 -2 3 3 Magma
 -2 -2 4 1 Magma
 -2 -2 5 2 Magma
 -2 -2 6 2 Magma
--2 -1 0 3 Magma
+-2 -1 0 3 Magma Fire
 -2 -1 1 4 Magma
--2 -1 2 4 Magma
+-2 -1 2 4 Magma Fire
 -2 -1 3 7 Dirt
 -2 -1 4 7 Dirt
 -2 -1 5 7 Dirt
@@ -395,13 +409,13 @@ namespace Atharia.Model {
 -2 0 1 4 Mud Rocks
 -2 0 2 4 Mud
 -2 0 3 4 Mud
--2 0 4 2 Magma
+-2 0 4 4 Mud
 -2 0 5 4 Mud
 -2 0 6 2 Magma
--2 0 7 2 Magma
+-2 0 7 2 Magma Fire
 -2 1 0 2 Magma
 -2 1 1 1 Magma
--2 1 2 2 Magma
+-2 1 2 2 Magma Fire
 -2 1 3 1 Magma
 -2 1 4 7 Dirt Rocks
 -2 1 5 7 Dirt Rocks
@@ -409,12 +423,12 @@ namespace Atharia.Model {
 -2 1 7 7 Dirt
 -2 2 0 7 Dirt
 -2 2 1 1 Magma
--2 2 2 1 Magma
--2 2 3 1 Magma
--2 2 4 1 Magma
--2 2 5 1 Magma
+-2 2 2 1 Magma Fire
+-2 2 3 4 Mud
+-2 2 4 3 Mud
+-2 2 5 4 Mud
 -2 2 6 4 Mud
--2 2 7 2 Magma
+-2 2 7 4 Mud Obsidian
 -2 3 0 5 Mud
 -2 3 1 5 Mud Obsidian
 -2 3 2 5 Mud
@@ -429,12 +443,12 @@ namespace Atharia.Model {
 -2 4 3 7 Mud
 -2 4 4 7 Dirt
 -2 4 5 7 Mud
--2 4 6 1 Magma
--2 4 7 1 Magma
--1 -2 1 4 Magma
+-2 4 6 1 Magma Fire
+-2 4 7 1 Magma Fire
+-1 -2 1 4 Magma Fire
 -1 -2 2 4 Magma
 -1 -2 3 3 Magma
--1 -2 4 2 Magma
+-1 -2 4 2 Magma Fire
 -1 -2 7 1 Magma
 -1 -1 0 1 Magma
 -1 -1 1 2 Magma
@@ -472,7 +486,7 @@ namespace Atharia.Model {
 -1 3 1 5 Mud Rocks
 -1 3 2 4 Mud
 -1 3 3 5 Mud Obsidian
--1 3 4 2 Magma
+-1 3 4 2 Magma Fire
 -1 3 5 2 Magma
 -1 3 6 2 Magma
 -1 3 7 9 Dirt
@@ -480,7 +494,7 @@ namespace Atharia.Model {
 -1 4 1 8 Dirt
 -1 4 2 8 Mud Rocks
 -1 4 3 7 Dirt
--1 4 4 1 Magma
+-1 4 4 1 Magma Fire
 -1 4 5 1 Magma
 -1 4 6 1 Magma
 -1 4 7 1 Magma
@@ -489,10 +503,10 @@ namespace Atharia.Model {
 0 -2 5 3 Magma
 0 -2 6 3 Magma
 0 -2 7 4 Magma
-0 -1 0 3 Magma
+0 -1 0 3 Magma Fire
 0 -1 1 1 Magma
 0 -1 2 4 Magma
-0 -1 3 2 Magma
+0 -1 3 2 Magma Fire
 0 -1 4 3 Magma
 0 -1 5 3 Magma
 0 -1 6 4 Mud
@@ -500,16 +514,16 @@ namespace Atharia.Model {
 0 0 0 4 Mud Obsidian
 0 0 1 4 Mud Cave Marker(teleport1a)
 0 0 2 3 Magma
-0 0 3 3 Magma
-0 0 4 4 Magma
+0 0 3 7 Dirt
+0 0 4 8 Dirt
 0 0 5 7 Dirt
 0 0 6 7 Dirt
-0 0 7 4 Magma
+0 0 7 8 Dirt
 0 1 0 7 Dirt
 0 1 1 7 Dirt
 0 1 2 7 Dirt Rocks
 0 1 3 7 Dirt
-0 1 4 4 Magma
+0 1 4 4 Magma Fire
 0 1 5 7 Dirt
 0 1 6 4 Magma
 0 1 7 3 Magma
@@ -519,7 +533,7 @@ namespace Atharia.Model {
 0 2 3 7 Dirt
 0 2 4 3 Magma
 0 2 5 4 Magma
-0 2 6 3 Magma
+0 2 6 3 Magma Fire
 0 2 7 3 Magma
 0 3 0 9 Dirt Rocks
 0 3 1 8 Dirt
@@ -535,9 +549,9 @@ namespace Atharia.Model {
 0 4 3 8 Dirt
 0 4 4 1 Magma
 0 4 5 1 Magma
-0 4 6 1 Magma
+0 4 6 1 Magma Fire
 0 4 7 1 Magma
-1 -1 0 4 Magma
+1 -1 0 4 Magma Fire
 1 -1 1 3 Magma
 1 -1 2 3 Magma
 1 -1 3 3 Magma
@@ -550,7 +564,7 @@ namespace Atharia.Model {
 1 0 2 3 Magma
 1 0 3 3 Magma
 1 0 4 4 Magma
-1 0 5 4 Magma
+1 0 5 4 Magma Fire
 1 0 6 4 Magma
 1 0 7 4 Magma
 1 1 0 7 Dirt
@@ -561,16 +575,16 @@ namespace Atharia.Model {
 1 1 5 4 Magma
 1 1 6 3 Magma
 1 1 7 4 Magma
-1 2 0 2 Magma
+1 2 0 2 Magma Fire
 1 2 1 2 Magma
 1 2 2 1 Magma
 1 2 3 1 Magma
-1 2 4 1 Magma
+1 2 4 1 Magma Fire
 1 2 5 2 Magma
-1 2 6 4 Magma
+1 2 6 4 Magma Fire
 1 2 7 7 Dirt
-1 3 0 3 Magma
-1 3 1 3 Magma
+1 3 0 5 Mud
+1 3 1 5 Mud
 1 3 2 5 Dirt
 1 3 3 6 Mud Rocks
 1 3 4 6 Mud
@@ -580,8 +594,8 @@ namespace Atharia.Model {
 1 4 0 1 Magma
 1 4 1 1 Magma
 1 4 2 1 Magma
-1 4 3 1 Magma
-1 4 4 1 Magma
+1 4 3 1 Magma Fire
+1 4 4 1 Magma Fire
 1 4 5 1 Magma
 2 -1 4 4 Mud Marker(entry)
 2 -1 5 4 Mud
@@ -591,7 +605,7 @@ namespace Atharia.Model {
 2 0 1 3 Magma
 2 0 2 2 Magma
 2 0 3 2 Magma
-2 0 4 1 Magma
+2 0 4 1 Magma Fire
 2 0 5 2 Magma
 2 0 6 3 Magma
 2 1 0 4 Magma
@@ -602,10 +616,10 @@ namespace Atharia.Model {
 2 1 5 7 Dirt Rocks
 2 1 6 7 Dirt Rocks
 2 1 7 7 Dirt
-2 2 0 4 Magma
+2 2 0 7 Dirt
 2 2 1 3 Magma
 2 2 2 7 Dirt
-2 2 3 2 Magma
+2 2 3 6 Mud
 2 2 4 7 Dirt
 2 2 5 6 Mud
 2 2 6 7 Dirt Rocks
@@ -619,40 +633,40 @@ namespace Atharia.Model {
 2 3 6 1 Magma
 2 3 7 1 Magma
 2 4 0 1 Magma
-2 4 1 1 Magma
-3 0 1 3 Magma
+2 4 1 1 Magma Fire
+3 0 1 3 Magma Fire
 3 0 2 4 Magma
 3 0 3 1 Magma
 3 0 4 2 Magma
 3 0 7 3 Magma
 3 1 0 2 Magma
 3 1 1 4 Magma
-3 1 2 4 Magma
-3 1 3 4 Magma
-3 1 4 4 Magma
+3 1 2 4 Magma Fire
+3 1 3 4 Magma Fire
+3 1 4 4 Magma Fire
 3 1 5 7 Dirt
 3 1 6 4 Magma
 3 1 7 4 Magma
-3 2 0 6 Dirt
+3 2 0 6 Dirt Rocks
 3 2 1 7 Dirt
 3 2 2 7 Dirt
 3 2 3 7 Dirt
 3 2 4 7 Dirt Rocks
 3 2 5 6 Mud Rocks
 3 2 6 6 Dirt
-3 2 7 3 Magma
+3 2 7 3 Magma Fire
 3 3 0 3 Magma
 3 3 1 3 Magma
-3 3 2 1 Magma
+3 3 2 1 Magma Fire
 3 3 3 2 Magma
 3 3 4 1 Magma
 3 3 5 1 Magma
 3 3 6 1 Magma
-3 4 0 1 Magma
+3 4 0 1 Magma Fire
 3 4 1 1 Magma
 4 0 5 4 Magma
-4 0 6 4 Magma
-4 1 0 4 Magma
+4 0 6 4 Magma Fire
+4 1 0 4 Magma Fire
 4 1 1 3 Magma
 4 1 2 4 Magma
 4 1 3 4 Magma
@@ -661,7 +675,7 @@ namespace Atharia.Model {
 4 1 6 1 Magma
 4 2 0 1 Magma
 4 2 1 4 Magma
-4 2 2 1 Magma
+4 2 2 1 Magma Fire
 4 2 3 4 Magma
 4 2 4 1 Magma
 4 2 5 3 Magma
@@ -669,7 +683,7 @@ namespace Atharia.Model {
 4 3 0 2 Magma
 4 3 1 2 Magma
 4 3 2 1 Magma
-4 3 3 1 Magma
+4 3 3 1 Magma Fire
 ";
   }
 }

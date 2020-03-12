@@ -108,6 +108,28 @@ namespace Atharia.Model {
       return result;
     }
 
+    // Removes any locations that are at the edge of the given group of locations.
+    public static SortedSet<Location> GetInnerLocations(
+        this Pattern pattern,
+        SortedSet<Location> sourceLocs,
+        bool considerCornersAdjacent) {
+      var result = new SortedSet<Location>();
+      foreach (var originalLocation in sourceLocs) {
+        var adjacents = pattern.GetAdjacentLocations(originalLocation, considerCornersAdjacent);
+        bool nextToAnyNonSourceLocs = false;
+        foreach (var adjacentLocation in adjacents) {
+          if (!sourceLocs.Contains(adjacentLocation)) {
+            nextToAnyNonSourceLocs = true;
+            break;
+          }
+        }
+        if (!nextToAnyNonSourceLocs) {
+          result.Add(originalLocation);
+        }
+      }
+      return result;
+    }
+
     public static bool LocationsAreAdjacent(this Pattern pattern, Location a, Location b, bool considerCornersAdjacent) {
       var locsAdjacentToA = pattern.GetAdjacentLocations(a, considerCornersAdjacent);
       return 0 <= locsAdjacentToA.FindIndex(delegate (Location hay) { return hay == b; });

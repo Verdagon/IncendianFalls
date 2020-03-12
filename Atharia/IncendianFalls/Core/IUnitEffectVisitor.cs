@@ -12,6 +12,7 @@ public interface IUnitEffectVisitor {
   void visitUnitSetLocationEffect(UnitSetLocationEffect effect);
   void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect);
   void visitUnitSetHpEffect(UnitSetHpEffect effect);
+  void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect);
 }
 
 }

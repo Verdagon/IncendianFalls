@@ -66,5 +66,8 @@ public class CaveLevelController {
       return new Level(root, incarnation.level);
     }
                        }
+  public int depth {
+    get { return incarnation.depth; }
+  }
 }
 }

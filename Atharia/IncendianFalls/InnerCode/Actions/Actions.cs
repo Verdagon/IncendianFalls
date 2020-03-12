@@ -117,7 +117,7 @@ namespace IncendianFalls {
       sorcerous.mp = sorcerous.mp - MIRE_COST;
 
       attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(600);
-      victim.nextActionTime = victim.nextActionTime + victim.CalculateCombatTimeCost(delay);
+      victim.nextActionTime = victim.nextActionTime + delay;
       Eventer.broadcastUnitMiredEvent(game.root, game, attacker, victim);
     }
 

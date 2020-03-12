@@ -105,7 +105,7 @@ namespace AthPlayer {
       if (Input.GetKeyUp(KeyCode.R)) {
         TimeShiftClicked();
       }
-      if (Input.GetKeyUp(KeyCode.I)) {
+      if (Input.GetKeyUp(KeyCode.E)) {
         InteractClicked();
       }
       if (Input.GetKeyUp(KeyCode.D)) {
@@ -115,7 +115,7 @@ namespace AthPlayer {
         CounterClicked();
       }
       if (Input.GetKeyUp(KeyCode.F)) {
-        FireClicked();
+        FireBombClicked();
       }
       if (Input.GetKeyUp(KeyCode.B)) {
         FireBombClicked();
@@ -175,11 +175,13 @@ namespace AthPlayer {
       }
       gamePresenter.SetHighlightedLocation(hoveredLocation);
 
-      Unit unit = null;
+      Unit unit = Unit.Null;
+      TerrainTile tile = TerrainTile.Null;
       if (hoveredLocation != null) {
         unit = gamePresenter.UnitAtLocation(hoveredLocation);
+        tile = gamePresenter.TileAtLocation(hoveredLocation);
       }
-      playerController.LookAt(unit);
+      playerController.LookAt(unit, tile);
 
       if (hoveredLocation != null && Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) {
         playerController.OnTileMouseClick(hoveredLocation);

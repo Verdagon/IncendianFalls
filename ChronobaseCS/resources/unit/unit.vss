@@ -9,7 +9,7 @@ mut struct Unit {
   classId: Str;
   var nextActionTime: Int;
   var hp: Int;
-  maxHp: Int;
+  var maxHp: Int;
   components: MutBunch:IUnitComponent;
 
   // True if theyre player or a time clone, false if enemy.

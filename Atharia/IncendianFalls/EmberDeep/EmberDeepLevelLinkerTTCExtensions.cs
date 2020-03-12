@@ -42,6 +42,20 @@ namespace Atharia.Model {
       nextLevelEntryTile.components.Add(
         game.root.EffectLevelLinkTTCCreate(false, game.level, containingTileLocation).AsITerrainTileComponent());
 
+      if (nextLevelDepth == 0) {
+        if (game.player.Exists()) {
+          game.player.hp = game.player.maxHp;
+          var sorcerous = game.player.components.GetOnlySorcerousUCOrNull();
+          if (sorcerous.Exists()) {
+            sorcerous.mp = sorcerous.maxMp;
+          }
+          foreach (var item in game.player.components.GetAllIItem()) {
+            game.player.components.Remove(item.AsIUnitComponent());
+            item.Destruct();
+          }
+        }
+      }
+
       // Travel the level link, to switch levels.
       return levelLink.Interact(game, superstate, interactingUnit, containingTileLocation);
     }
@@ -121,7 +135,7 @@ namespace Atharia.Model {
             depth);
           break;
         default:
-          throw new Exception("Unexpected depth!");
+          throw new Exception("Unexpected depth: " + depth);
       }
     }
   }

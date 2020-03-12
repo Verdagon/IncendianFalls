@@ -215,9 +215,22 @@ namespace AthPlayer {
           sideColor = new UnityEngine.Color(.1f, .05f, 0f);
           outlineColor = new UnityEngine.Color(0f, 0f, 0f);
         } else if (ttc is WaterTTCAsITerrainTileComponent) {
-          topColor = new UnityEngine.Color(0f, .4f, .8f);
-          sideColor = new UnityEngine.Color(0f, .45f, .85f);
-          outlineColor = new UnityEngine.Color(0f, 0f, 0f);
+          topColor = new UnityEngine.Color(.2f, .3f, 1.0f);
+          outlineColor = new UnityEngine.Color(0f, 0f, 1.0f);
+          sideColor = new UnityEngine.Color(.2f, .3f, 1.0f);
+
+          overlay =
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "o",
+                      50,
+                      new UnityEngine.Color(.3f, .4f, 1.0f),
+                      0,
+                      OutlineMode.NoOutline,
+                      new UnityEngine.Color(0f, 0f, 1.0f)),
+                  false,
+                  new UnityEngine.Color(0, 0, 0));
         } else if (ttc is FloorTTCAsITerrainTileComponent) {
           topColor = new UnityEngine.Color(.2f, .2f, .2f);
           sideColor = new UnityEngine.Color(.15f, .15f, .15f);
@@ -231,7 +244,7 @@ namespace AthPlayer {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "f",
+                      "f-3",
                       50,
                       new UnityEngine.Color(.5f, .1f, 0f),
                       0,
@@ -262,7 +275,7 @@ namespace AthPlayer {
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
-                        "f",
+                        "f-3",
                         50,
                         new UnityEngine.Color(1f, 1f, 1f, .1f),
                         0,
@@ -308,7 +321,7 @@ namespace AthPlayer {
             overlay =
                 new ExtrudedSymbolDescription(
             RenderPriority.TILE,
-            new SymbolDescription("f",
+            new SymbolDescription("f-3",
                             50, new UnityEngine.Color(0f, 0f, 0f, .8f), 0, OutlineMode.WithOutline, new UnityEngine.Color(0, 0, 0)),
             false,
             new UnityEngine.Color(0, 0, 0));
@@ -391,9 +404,9 @@ namespace AthPlayer {
               new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
-                          "r",
+                          "r-3",
                             50,
-                          new UnityEngine.Color(.8f, .4f, 0, 1.2f),
+                          new UnityEngine.Color(.3f, .1f, 0, 1.2f),
                           0,
                           OutlineMode.WithOutline,
                           new UnityEngine.Color(0, 0, 0)),
@@ -522,6 +535,7 @@ namespace AthPlayer {
                         new UnityEngine.Color(0, 0, 0)),
                     true,
                     new UnityEngine.Color(0f, 0f, 0));
+            overlayLocked = true;
           }
         } else {
           Asserts.Assert(false, ttc.ToString());

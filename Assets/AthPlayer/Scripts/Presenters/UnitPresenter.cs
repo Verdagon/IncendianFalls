@@ -151,6 +151,7 @@ namespace AthPlayer {
       }
     }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
+    public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
     public void OnSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visit(this); }
     public void visitSorcerousUCCreateEffect(SorcerousUCCreateEffect effect) { }
@@ -201,7 +202,7 @@ namespace AthPlayer {
             new ExtrudedSymbolDescription(
                 RenderPriority.RUNE,
                 new SymbolDescription(
-                    "r",
+                    "r-3",
                             50,
                     new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
                     0,
@@ -262,7 +263,7 @@ namespace AthPlayer {
               new ExtrudedSymbolDescription(
                   RenderPriority.RUNE,
                   new SymbolDescription(
-                      "r",
+                      "r-3",
                             50,
                       new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
                       0,
@@ -276,7 +277,7 @@ namespace AthPlayer {
             new ExtrudedSymbolDescription(
                 RenderPriority.RUNE,
                 new SymbolDescription(
-                    "r",
+                    "r-3",
                           50,
                     new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
                     0,
@@ -403,7 +404,7 @@ namespace AthPlayer {
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
-                          "f",
+                          "f-8",
                             50,
                           new UnityEngine.Color(1, 1, 1, 1.5f),
                           0,
@@ -435,7 +436,7 @@ namespace AthPlayer {
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
-                          "r",
+                          "r-3",
                             50,
                           new UnityEngine.Color(1, 1, 1, 1.5f),
                           0,
@@ -597,7 +598,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "b",
-                            50, new UnityEngine.Color(1, 1, 1, 1.5f), 0, OutlineMode.WithBackOutline,
+                            50, new UnityEngine.Color(1, 1, 1, 1.2f), 0, OutlineMode.WithBackOutline,
                       new UnityEngine.Color(0, 0, 0)),
                   true, new UnityEngine.Color(0, 0, 0)),
               detailSymbols,
@@ -716,7 +717,7 @@ namespace AthPlayer {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "r",
+                      "r-8",
                             50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
                       new UnityEngine.Color(1, 1, 1)),
                   false, new UnityEngine.Color(0, 0, 0)),
@@ -746,7 +747,7 @@ namespace AthPlayer {
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
-                      "f",
+                      "f-8",
                             50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
                       new UnityEngine.Color(0, 0, 0)),
                   false, new UnityEngine.Color(0, 0, 0)),

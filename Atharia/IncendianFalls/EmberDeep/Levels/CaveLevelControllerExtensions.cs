@@ -28,11 +28,8 @@ namespace Atharia.Model {
         locationAndTile.Value.components.Add(game.root.EffectMudTTCCreate().AsITerrainTileComponent());
       }
 
-      var locations = new SortedSet<Location>();
-      foreach (var locationAndTile in terrain.tiles) {
-        locations.Add(locationAndTile.Key);
-      }
-      var borderLocations = terrain.pattern.GetAdjacentLocations(locations, false, true);
+      var floors = new SortedSet<Location>(terrain.tiles.Keys);
+      var borderLocations = terrain.pattern.GetAdjacentLocations(floors, false, true);
       foreach (var borderLocation in borderLocations) {
         if (!terrain.tiles.ContainsKey(borderLocation)) {
           var tile = game.root.EffectTerrainTileCreate(2, ITerrainTileComponentMutBunch.New(game.root));
@@ -50,9 +47,27 @@ namespace Atharia.Model {
               game.time);
       levelSuperstate = new LevelSuperstate(level);
 
-      var entryAndExitLocations = levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 2,
-              (loc) => true, false, false);
+
+      var entryAndExitCandidateLocations = floors;
+      var wideOpenLocations = level.terrain.pattern.GetInnerLocations(floors, considerCornersAdjacent);
+      if (wideOpenLocations.Count >= 2) {
+        entryAndExitCandidateLocations = wideOpenLocations;
+      }
+      var superWideOpenLocations = level.terrain.pattern.GetInnerLocations(wideOpenLocations, considerCornersAdjacent);
+      if (superWideOpenLocations.Count >= 2) {
+        entryAndExitCandidateLocations = superWideOpenLocations;
+      }
+      
+      var entryAndExitLocations =
+        levelSuperstate.GetNRandomWalkableLocations(
+          level.terrain,
+          game.rand,
+          2,
+          (loc) => entryAndExitCandidateLocations.Contains(loc),
+          false,
+          false);
       var entryLocation = entryAndExitLocations[0];
+      Asserts.Assert(wideOpenLocations.Contains(entryLocation), "wat");
       var exitLocation = entryAndExitLocations[1];
       level.terrain.tiles[exitLocation].components.Add(
         game.root.EffectCaveTTCCreate().AsITerrainTileComponent());
@@ -61,7 +76,7 @@ namespace Atharia.Model {
 
       EmberDeepUnitsAndItems.PlaceRocks(game.rand, level, levelSuperstate);
 
-      level.controller = game.root.EffectCaveLevelControllerCreate(level).AsILevelController();
+      level.controller = game.root.EffectCaveLevelControllerCreate(level, depth).AsILevelController();
 
       if (depth == 0) {
         var nextToExitLocation =
@@ -79,6 +94,9 @@ namespace Atharia.Model {
       } else {
         EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .02f, .02f);
       }
+
+      levelSuperstate.Reconstruct(level);
+      levelSuperstate.AddNoUnitZone(entryLocation, 3);
 
       int numSpaces = levelSuperstate.NumWalkableLocations(false);
       if (depth == 0) {
@@ -129,7 +147,7 @@ namespace Atharia.Model {
           /*numChronolisk=*/ 1 * numSpaces / 200,
           /*numMantisBombardier=*/ 1 * numSpaces / 200,
           /*numLightningTrask=*/ 0);
-      } else if (depth == 8) {
+      } else if (depth == 6) {
         EmberDeepUnitsAndItems.FillWithUnits(
           game.rand,
           level,
@@ -147,6 +165,8 @@ namespace Atharia.Model {
           /*numLightningTrask=*/ 1);
       }
 
+      levelSuperstate.Reconstruct(level);
+
       game.levels.Add(level);
 
       levelRet = level;
@@ -162,11 +182,11 @@ namespace Atharia.Model {
     }
 
     public static Atharia.Model.Void SimpleTrigger(
-        this CaveLevelController obj,
+        this CaveLevelController self,
         Game game,
         Superstate superstate,
         string triggerName) {
-      if (triggerName == "firstLevelStart") {
+      if (self.depth == 0 && triggerName == "levelStart") {
         game.events.Add(
           new ShowOverlayEvent(
             100, // sizePercent

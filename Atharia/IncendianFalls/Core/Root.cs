@@ -88,6 +88,8 @@ public class Root {
       new List<UnitSetNextActionTimeEffect>();
   readonly List<UnitSetHpEffect> effectsUnitSetHpEffect =
       new List<UnitSetHpEffect>();
+  readonly List<UnitSetMaxHpEffect> effectsUnitSetMaxHpEffect =
+      new List<UnitSetMaxHpEffect>();
 
   readonly SortedDictionary<int, List<IIUnitComponentMutBunchEffectObserver>> observersForIUnitComponentMutBunch =
       new SortedDictionary<int, List<IIUnitComponentMutBunchEffectObserver>>();
@@ -12445,6 +12447,10 @@ public class Root {
             EffectUnitSetHp(objId, sourceObjIncarnation.hp);
           }
 
+          if (sourceObjIncarnation.maxHp != currentObjIncarnation.maxHp) {
+            EffectUnitSetMaxHp(objId, sourceObjIncarnation.maxHp);
+          }
+
           // Swap out the underlying incarnation. The only visible effect this has is
           // changing the version number.
           
@@ -17025,6 +17031,20 @@ public class Root {
     }
     effectsUnitSetHpEffect.Clear();
 
+    foreach (var effect in effectsUnitSetMaxHpEffect) {
+      if (observers.TryGetValue(0, out List<IUnitEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnUnitEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IUnitEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnUnitEffect(effect);
+        }
+      }
+    }
+    effectsUnitSetMaxHpEffect.Clear();
+
     foreach (var effect in effectsUnitCreateEffect) {
       if (observers.TryGetValue(0, out List<IUnitEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -17193,6 +17213,37 @@ public class Root {
     }
 
     effectsUnitSetHpEffect.Add(effect);
+  }
+
+  public void EffectUnitSetMaxHp(int id, int newValue) {
+    CheckUnlocked();
+    CheckHasUnit(id);
+    var effect = new UnitSetMaxHpEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsUnit[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.maxHp;
+      oldIncarnationAndVersion.incarnation.maxHp = newValue;
+
+    } else {
+      var newIncarnation =
+          new UnitIncarnation(
+              oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.alive,
+              oldIncarnationAndVersion.incarnation.lifeEndTime,
+              oldIncarnationAndVersion.incarnation.location,
+              oldIncarnationAndVersion.incarnation.classId,
+              oldIncarnationAndVersion.incarnation.nextActionTime,
+              oldIncarnationAndVersion.incarnation.hp,
+              newValue,
+              oldIncarnationAndVersion.incarnation.components,
+              oldIncarnationAndVersion.incarnation.good);
+      rootIncarnation.incarnationsUnit[id] =
+          new VersionAndIncarnation<UnitIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsUnitSetMaxHpEffect.Add(effect);
   }
   public IUnitComponentMutBunchIncarnation GetIUnitComponentMutBunchIncarnation(int id) {
     if (id == 0) {
@@ -31691,14 +31742,16 @@ public class Root {
     }
   }
   public CaveLevelController EffectCaveLevelControllerCreate(
-      Level level) {
+      Level level,
+      int depth) {
     CheckUnlocked();
     CheckHasLevel(level);
 
     var id = NewId();
     var incarnation =
         new CaveLevelControllerIncarnation(
-            level.id
+            level.id,
+            depth
             );
     EffectInternalCreateCaveLevelController(id, rootIncarnation.version, incarnation);
     return new CaveLevelController(this, id);
@@ -31732,6 +31785,7 @@ public class Root {
   public int GetCaveLevelControllerHash(int id, int version, CaveLevelControllerIncarnation incarnation) {
     int result = id * version;
     result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
     return result;
   }
      

@@ -36,12 +36,19 @@ namespace Atharia.Model {
       level.terrain.tiles[exitLocation].components.Add(game.root.EffectDownStairsTTCCreate().AsITerrainTileComponent());
 
       var draxling = Draxling.Make(game.root);
+      draxling.hp = 300;
+      draxling.maxHp = 300;
       draxling.components.Add(game.root.EffectBaseOffenseUCCreate(10, 100 * 100 / 60).AsIUnitComponent());
       level.EnterUnit(
         levelSuperstate,
         new Location(-15, 0, 0),
         level.time,
         draxling);
+
+      level.terrain.tiles[new Location(1, 0, 0)].components.Add(
+        game.root.EffectItemTTCCreate(
+          game.root.EffectSlowRodCreate().AsIItem())
+        .AsITerrainTileComponent());
 
       level.controller = game.root.EffectRetreatLevelControllerCreate(level).AsILevelController();
 
@@ -66,6 +73,15 @@ namespace Atharia.Model {
       game.root.logger.Info("Got simple trigger: " + triggerName);
 
       if (triggerName == "levelStart") {
+        game.player.hp = game.player.maxHp;
+        var sorcerous = game.player.components.GetOnlySorcerousUCOrNull();
+        if (sorcerous.Exists()) {
+          sorcerous.mp = sorcerous.maxMp;
+        }
+        foreach (var item in game.player.components.GetAllIItem()) {
+          game.player.components.Remove(item.AsIUnitComponent());
+          item.Destruct();
+        }
 
         game.events.Add(
           new ShowOverlayEvent(
