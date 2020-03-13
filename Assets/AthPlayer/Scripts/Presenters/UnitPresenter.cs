@@ -185,20 +185,20 @@ namespace AthPlayer {
     public void visitIUnitEventMutListAddEffect(IUnitEventMutListAddEffect effect) {
       if (effect.element is UnitAttackEventAsIUnitEvent) {
         var evt = ((UnitAttackEventAsIUnitEvent)effect.element).obj;
+        if (!unit.Exists()) {
+          return;
+        }
         if (evt.attackerId == unit.id) {
           var victim = unit.root.GetUnit(evt.victimId);
           if (!victim.Exists()) {
             return;
           }
           var victimPosition = game.level.terrain.GetTileCenter(victim.location).ToUnity();
-          if (!unit.Exists()) {
-            return;
-          }
-          var playerPosition = game.level.terrain.GetTileCenter(unit.location).ToUnity();
+          var attackerPosition = game.level.terrain.GetTileCenter(unit.location).ToUnity();
 
           soundPlayer.Play("attack");
 
-          unitView.Lunge((victimPosition - playerPosition).normalized * .25f);
+          unitView.Lunge((victimPosition - attackerPosition).normalized * .25f);
 
           resumeStaller.StallForDuration(150);
           turnStaller.StallForDuration(350);
