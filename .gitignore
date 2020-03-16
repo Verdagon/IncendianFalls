@@ -3,6 +3,9 @@ Library/PlayerDataCache
 Library/ScriptAssemblies
 Library/ShaderCache
 Library/StateCache
+Library/assetDatabase3
+Library/CurrentLayout-default.dwlt
+Library/EditorInstance.json
 Temp
 ChronobaseCS/target
 Library/metadata
