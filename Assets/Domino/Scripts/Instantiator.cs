@@ -27,6 +27,12 @@ namespace Domino {
 
     public GameObject detailPrefab;
 
+    public GameObject emptyUiObject;
+
+    public Font symbolsFont;
+    public Font cascadiaFont;
+    public Font proseFont;
+
     private Dictionary<string, Dictionary<int, SymbolMeshes>> meshes;
 
     public class SymbolMeshes {
@@ -44,6 +50,22 @@ namespace Domino {
         this.frontOutline = frontOutline;
         this.sides = sides;
         this.sidesOutline = sidesOutline;
+      }
+    }
+
+    public GameObject CreateEmptyUiObject() {
+      return Instantiate(emptyUiObject);
+    }
+
+    public Font GetFont(string font) {
+      if (font == "symbols") {
+        return symbolsFont;
+      } else if (font == "cascadia") {
+        return cascadiaFont;
+      } else if (font == "prose") {
+        return proseFont;
+      } else {
+        return symbolsFont;
       }
     }
 
@@ -166,6 +188,28 @@ namespace Domino {
 
     public GameObject CreateSquare() {
       return Instantiate(squarePrefab);
+    }
+
+    public NewOverlayPanelView CreateOverlayPanelView(
+        GameObject parent,
+        int horizontalAlignmentPercent,
+        int verticalAlignmentPercent,
+        int widthPercent,
+        int heightPercent,
+        int symbolsWide,
+        int symbolsHigh) {
+      var obj = Instantiate(emptyUiObject);
+      var spv = obj.AddComponent<NewOverlayPanelView>();
+      spv.Init(
+        this,
+        parent,
+        horizontalAlignmentPercent,
+        verticalAlignmentPercent,
+        widthPercent,
+        heightPercent,
+        symbolsWide,
+        symbolsHigh);
+      return spv;
     }
 
     //private Mesh Simplify(Mesh sourceMesh, int qualityPercent) {

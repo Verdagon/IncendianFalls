@@ -27,7 +27,7 @@ namespace AthPlayer {
     FollowingCameraController cameraController;
 
     TerrainPresenter terrainPresenter;
-    OverlayPresenter overlayPresenter;
+    OldOverlayPresenter overlayPresenter;
 
     Dictionary<int, UnitPresenter> unitPresenters;
 
@@ -42,7 +42,7 @@ namespace AthPlayer {
         Game game,
         Instantiator instantiator,
         NarrationPanelView narrator,
-        OverlayPresenter overlayPresenter,
+        OldOverlayPresenter overlayPresenter,
         FollowingCameraController cameraController) {
       this.timer = timer;
       this.cinematicTimer = cinematicTimer;

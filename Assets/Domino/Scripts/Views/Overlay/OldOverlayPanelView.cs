@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public delegate void OnOverlayClosed(int buttonIndex);
 
-public class OverlayPanelView : MonoBehaviour {
+public class OldOverlayPanelView : MonoBehaviour {
   public event OnOverlayClosed OverlayClosed;
 
   public GameObject parent;

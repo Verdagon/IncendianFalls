@@ -24,7 +24,7 @@ namespace AthPlayer {
     public GameObject stalledIndicator;
     public GameObject thinkingIndicator;
 
-    OverlayPresenter overlayPresenter;
+    OldOverlayPresenter overlayPresenter;
     GamePresenter gamePresenter;
     PlayerController playerController;
     FollowingCameraController cameraController;
@@ -35,9 +35,11 @@ namespace AthPlayer {
 
     public NarrationPanelView messageView;
 
-    public OverlayPanelView overlayPanelView;
+    public OldOverlayPanelView overlayPanelView;
 
     public SoundPlayer soundPlayer;
+
+    public OverlayPaneler overlayPaneler;
 
     public void Start() {
       timer = new SlowableTimerClock(1f);
@@ -69,7 +71,7 @@ namespace AthPlayer {
 
       cameraController = new FollowingCameraController(cinematicTimer, cinematicTimer, cameraObject, game);
 
-      overlayPresenter = new OverlayPresenter(timer, cinematicTimer, ss, game, overlayPanelView);
+      overlayPresenter = new OldOverlayPresenter(timer, cinematicTimer, ss, game, overlayPaneler, overlayPanelView);
       overlayPresenter.Exit += () => {
         replayLogger.Dispose();
         SceneManager.LoadScene("MainMenu");
@@ -93,6 +95,9 @@ namespace AthPlayer {
               lookPanelView.GetComponent<LookPanelView>(),
               overlayPresenter);
       playerController.Start();
+
+      overlayPresenter.ShowTopOverlayWithConfirmButton(
+        "A long time ago, before the phoenix flew the skies, before the volcanoes roamed the coasts, and before the sylvans raised their towers, there was only the Chronicler.\n\nAges passed, mountains rose, and the first trees and animals woke for the first time. The Chronicler recorded it all.");
     }
 
     public void Update() {

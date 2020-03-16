@@ -20,7 +20,7 @@ namespace Domino {
     PlayerPanelView playerPanelView;
     NarrationPanelView narrator;
     LookPanelView lookPanelView;
-    OverlayPresenter overlayPresenter;
+    OldOverlayPresenter overlayPresenter;
     Looker looker;
     IMode mode;
     Unit player;
@@ -36,7 +36,7 @@ namespace Domino {
         PlayerPanelView playerPanelView,
         NarrationPanelView messageView,
         LookPanelView lookPanelView,
-        OverlayPresenter overlayPresenter) {
+        OldOverlayPresenter overlayPresenter) {
       this.ss = ss;
       this.superstate = superstate;
       this.game = game;
