@@ -197,23 +197,9 @@ namespace Atharia.Model {
       if (self.depth == 0 && triggerName == "levelStart") {
         game.AddEvent(
           new ShowOverlayEvent(
-            100, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            0,// fadeInEnd
-            7000, // fadeOutStart
-            7000, // fadeOutEnd,
-            "introLine1Done",
-
             "To undo my brother's stasis, I need to follow the caves until I find something made of black incendium.",
-            new Color(255, 64, 0, 255), // textColor
-            1000, // textFadeInStartS
-            2000, // textFadeInEndS
-            6000, // textFadeOutStartS
-            7000, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "dramatic",
+            new ButtonImmList(new List<Button>() { new Button("...", "introLine1Done") }))
           .AsIGameEvent());
       }
       if (triggerName == "introLine1Done") {
@@ -227,23 +213,9 @@ namespace Atharia.Model {
       if (triggerName == "playerEntryHopDone") {
         game.AddEvent(
           new ShowOverlayEvent(
-            40, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            500,// fadeInEnd
-            3000, // fadeOutStart
-            3500, // fadeOutEnd,
-            "objectiveMusingDone",
-
             "I've made it to Ember Deep! Forward!",
-            new Color(255, 64, 0, 255), // textColor
-            500, // textFadeInStartS
-            1000, // textFadeInEndS
-            2500, // textFadeOutStartS
-            3000, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "normal",
+            new ButtonImmList(new List<Button>() { new Button("...", "objectiveMusingDone") }))
           .AsIGameEvent());
       }
       return new Atharia.Model.Void();

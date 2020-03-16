@@ -114,23 +114,9 @@ namespace Atharia.Model {
 
         game.AddEvent(
           new ShowOverlayEvent(
-            40, // sizePercent
-            new Color(16, 16, 16, 224), // backgroundColor
-            300,// fadeInEnd
-            3100, // fadeOutStart
-            3400, // fadeOutEnd,
-            "",
-
             "Some sort of ancient abandoned town...?",
-            new Color(255, 64, 0, 255), // textColor
-            300, // textFadeInStartS
-            600, // textFadeInEndS
-            2800, // textFadeOutStartS
-            3100, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "aside",
+            new ButtonImmList(new List<Button>() { new Button("", "") }))
           .AsIGameEvent());
       }
 

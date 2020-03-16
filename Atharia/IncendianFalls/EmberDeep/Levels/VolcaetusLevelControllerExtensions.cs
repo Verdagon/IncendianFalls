@@ -63,45 +63,17 @@ namespace Atharia.Model {
       if (triggerName == "line2") {
         game.AddEvent(
           new ShowOverlayEvent(
-            100, // sizePercent
-            new Color(16, 16, 16, 224), // backgroundColor
-            300,// fadeInEnd
-            3800, // fadeOutStart
-            3800, // fadeOutEnd,
-            "line3",
-
             "I can finally rescue my brother!",
-            new Color(255, 64, 0, 255), // textColor
-            300, // textFadeInStartS
-            600, // textFadeInEndS
-            3500, // textFadeOutStartS
-            3800, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "dramatic",
+            new ButtonImmList(new List<Button>() { new Button("Hope lives!", "line3") }))
           .AsIGameEvent());
       }
       if (triggerName == "line3") {
         game.AddEvent(
           new ShowOverlayEvent(
-            100, // sizePercent
-            new Color(16, 16, 16, 224), // backgroundColor
-            0,// fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
-
             "Congratulations, you have won the game!",
-            new Color(255, 255, 255, 255), // textColor
-            000, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "dramatic",
+            new ButtonImmList(new List<Button>() { new Button("Huzzah!", "_exitGame") }))
           .AsIGameEvent());
       }
 
@@ -120,23 +92,9 @@ namespace Atharia.Model {
       if (triggeringUnit.NullableIs(game.player) && triggerName == "volcaetus") {
         game.AddEvent(
           new ShowOverlayEvent(
-            40, // sizePercent
-            new Color(16, 16, 16, 224), // backgroundColor
-            300,// fadeInEnd
-            4800, // fadeOutStart
-            5100, // fadeOutEnd,
-            "line2",
-
             "This is... this is Volcaetus!\n\nThe black incendium spear!",
-            new Color(255, 64, 0, 255), // textColor
-            300, // textFadeInStartS
-            600, // textFadeInEndS
-            4500, // textFadeOutStartS
-            4800, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "normal",
+            new ButtonImmList(new List<Button>() { new Button("Behold!", "line2") }))
           .AsIGameEvent());
       }
 

@@ -66,44 +66,18 @@ namespace Atharia.Model {
 
         game.AddEvent(
           new ShowOverlayEvent(
-            100, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            0000, // fadeInEnd
-            0000, // fadeOutStart
-            1000, // fadeOutEnd,
-            "showTitle", // end trigger
-
             "",
-            new Color(255, 64, 0, 255), // textColor
-            1000, // textFadeInStartS
-            1000, // textFadeInEndS
-            1000, // textFadeOutStartS
-            1000, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "dramatic",
+            new ButtonImmList(new List<Button>() { new Button("", "showTitle") }))
           .AsIGameEvent());
       }
       if (triggerName == "showTitle") {
         game.AddEvent(
           new ShowOverlayEvent(
-            30, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            500, // fadeInEnd
-            2000, // fadeOutStart
-            2500, // fadeOutEnd,
-            "",
 
             "Introduction",
-            new Color(255, 255, 255, 255), // textColor
-            500, // textFadeInStartS
-            1000, // textFadeInEndS
-            2000, // textFadeOutStartS
-            2500, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
 
+            "normal",
             new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
       }
@@ -111,24 +85,12 @@ namespace Atharia.Model {
       if (triggerName == "ambush1b") {
         game.AddEvent(
           new ShowOverlayEvent(
-            50, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300, // fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
 
             "You see an Irkling!\n\nTo attack, click on it while next to it.",
-            new Color(255, 255, 255, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
 
+            "normal",
             new ButtonImmList(new List<Button>() {
-              new Button("Forward to glory!", new Color(64, 64, 64, 255), "")
+              new Button("Forward to glory!", "")
             }))
           .AsIGameEvent());
       }
@@ -136,24 +98,12 @@ namespace Atharia.Model {
       if (triggerName == "ambush2b") {
         game.AddEvent(
           new ShowOverlayEvent(
-            50, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300, // fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
 
             "You see a Baug!\n\nBaugs have a lot of life points. You'll need to hit it several times.",
-            new Color(255, 255, 255, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
 
+            "normal",
             new ButtonImmList(new List<Button>() {
-              new Button("Forward to battle!", new Color(64, 64, 64, 255), "")
+              new Button("Forward to battle!", "")
             }))
           .AsIGameEvent());
       }
@@ -162,24 +112,13 @@ namespace Atharia.Model {
         game.AddEvent(new NarrateEvent(1 + " Defy remaining!").AsIGameEvent());
         game.AddEvent(
           new ShowOverlayEvent(
-            70, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300, // fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
 
             "You see a Spiriant!\n\nSpiriants are incredibly dangerous.\n\nHowever, they die with one hit.\n\nUse Defy ('D') to wait for it to come to you.",
-            new Color(255, 255, 255, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
+
+            "normal",
 
             new ButtonImmList(new List<Button>() {
-              new Button("For valor!", new Color(64, 64, 64, 255), "")
+              new Button("For valor!", "")
             }))
           .AsIGameEvent());
       }
@@ -187,72 +126,37 @@ namespace Atharia.Model {
       if (triggerName == "healthPotionB") {
         game.AddEvent(
           new ShowOverlayEvent(
-            70, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300, // fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
 
             "You've found a health potion!\n\nYou can't take it with you, but you can use it now.\n\nUse Interact ('e') to use it.",
-            new Color(255, 255, 255, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
 
+            "normal",
             new ButtonImmList(new List<Button>() {
-              new Button("For prosperity!", new Color(64, 64, 64, 255), "")
+              new Button("For prosperity!", "")
             }))
           .AsIGameEvent());
       }
       if (triggerName == "ambush4b") {
         game.AddEvent(
           new ShowOverlayEvent(
-            60, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300, // fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
 
             "You see a Ravagian Trask!\n\nThese attack very fast.\n\nYou'll need help!",
-            new Color(255, 255, 255, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
+
+            "normal",
 
             new ButtonImmList(new List<Button>() {
-              new Button("Help? How?", new Color(64, 64, 64, 255), "ambush4c")
+              new Button("Help? How?", "ambush4c")
             }))
           .AsIGameEvent());
       }
       if (triggerName == "ambush4c") {
         game.AddEvent(
           new ShowOverlayEvent(
-            60, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300, // fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
 
             "You must help your future self, so that in the future, you'll receive help from your past self.",
-            new Color(255, 255, 255, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
 
+            "normal",
             new ButtonImmList(new List<Button>() {
-              new Button("Nonsense!", new Color(64, 64, 64, 255), "ambush4d")
+              new Button("Nonsense!", "ambush4d")
             }))
           .AsIGameEvent());
       }
@@ -260,24 +164,11 @@ namespace Atharia.Model {
       if (triggerName == "ambush4d") {
         game.AddEvent(
           new ShowOverlayEvent(
-            60, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300, // fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
-
             "Let's see it in action.\n\nFirst, select Time Anchor ('A') and then step in any direction.\n\n(In this case, go right.)",
-            new Color(255, 255, 255, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
 
+            "normal",
             new ButtonImmList(new List<Button>() {
-              new Button("Will do!", new Color(64, 64, 64, 255), "")
+              new Button("Will do!", "")
             }))
           .AsIGameEvent());
       }
@@ -286,24 +177,10 @@ namespace Atharia.Model {
         if (superstate.anchorTurnIndices.Count == 0) {
           game.AddEvent(
             new ShowOverlayEvent(
-              60, // sizePercent
-              new Color(0, 0, 0, 224), // backgroundColor
-              300, // fadeInEnd
-              0, // fadeOutStart
-              0, // fadeOutEnd,
-              "",
-
               "Uh oh! You didn't create a time anchor.\n\nYou're probably going to die now.\n\nNext time, use Time Anchor ('A')!",
-              new Color(255, 255, 255, 255), // textColor
-              0, // textFadeInStartS
-              300, // textFadeInEndS
-              0, // textFadeOutStartS
-              0, // textFadeOutEndS
-              true, // topAligned
-              true, // leftAligned
-
+            "normal",
               new ButtonImmList(new List<Button>() {
-                new Button("Alas...", new Color(64, 64, 64, 255), "")
+                new Button("Alas...", "")
               }))
             .AsIGameEvent());
         } else {
@@ -311,25 +188,9 @@ namespace Atharia.Model {
           game.AddEvent(new NarrateEvent(10 + " Defy remaining!").AsIGameEvent());
           game.AddEvent(
             new ShowOverlayEvent(
-              60, // sizePercent
-              new Color(0, 0, 0, 224), // backgroundColor
-              300, // fadeInEnd
-              0, // fadeOutStart
-              0, // fadeOutEnd,
-              "",
-
               "Now, use Defy ('D') about 10 times.\n\nYour future self will thank you, because you are distracting the Ravagian Trask.",
-              new Color(255, 255, 255, 255), // textColor
-              0, // textFadeInStartS
-              300, // textFadeInEndS
-              0, // textFadeOutStartS
-              0, // textFadeOutEndS
-              true, // topAligned
-              true, // leftAligned
-
-              new ButtonImmList(new List<Button>() {
-                new Button("For valor!", new Color(64, 64, 64, 255), "")
-              }))
+            "normal",
+              new ButtonImmList(new List<Button>() { new Button("For valor!", "") }))
             .AsIGameEvent());
         }
       }
@@ -342,25 +203,9 @@ namespace Atharia.Model {
           defyCounter.Destruct();
           game.AddEvent(
             new ShowOverlayEvent(
-              50, // sizePercent
-              new Color(0, 0, 0, 224), // backgroundColor
-              300, // fadeInEnd
-              0, // fadeOutStart
-              0, // fadeOutEnd,
-              "",
-
               "Now, use Time Revert ('R') to go back in time.",
-              new Color(255, 255, 255, 255), // textColor
-              0, // textFadeInStartS
-              300, // textFadeInEndS
-              0, // textFadeOutStartS
-              0, // textFadeOutEndS
-              true, // topAligned
-              true, // leftAligned
-
-              new ButtonImmList(new List<Button>() {
-                new Button("Backward to glory!", new Color(64, 64, 64, 255), "")
-              }))
+            "normal",
+              new ButtonImmList(new List<Button>() { new Button("Backward to glory!", "") }))
             .AsIGameEvent());
         } else {
           game.AddEvent(new NarrateEvent(defyCounter.numDefiesRemaining + " Defy remaining!").AsIGameEvent());
@@ -371,24 +216,10 @@ namespace Atharia.Model {
         game.AddEvent(new NarrateEvent(1 + " Defy remaining!").AsIGameEvent());
         game.AddEvent(
           new ShowOverlayEvent(
-            70, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300, // fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
-
             "Now, your past self is here to help you!\n\nIt will do the same things you did.\n\nDefy ('D') once, then attack the Ravagian Trask while it attacks your past self!",
-            new Color(255, 255, 255, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
+            "normal",
             new ButtonImmList(new List<Button>() {
-              new Button("For vengeance!", new Color(64, 64, 64, 255), "")
+              new Button("For vengeance!", "")
             }))
           .AsIGameEvent());
       }
@@ -438,24 +269,10 @@ namespace Atharia.Model {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("defyHint", 1);
         game.AddEvent(
           new ShowOverlayEvent(
-            50, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300, // fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
-
             "Pro tip: Defy also taunts adjacent enemies to attack you.",
-            new Color(255, 255, 255, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
+            "normal",
             new ButtonImmList(new List<Button>() {
-              new Button("Got it!", new Color(64, 64, 64, 255), "")
+              new Button("Got it!", "")
             }))
           .AsIGameEvent());
         superstate.navigatingState = null;
@@ -492,24 +309,10 @@ namespace Atharia.Model {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("multipleHint", 1);
         game.AddEvent(
           new ShowOverlayEvent(
-            60, // sizePercent
-            new Color(16, 16, 16, 224), // backgroundColor
-            300, // fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
-
             "You can have several past selves active at the same time.\n\nSometimes, it's the only way to survive!",
-            new Color(255, 255, 255, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
+            "normal",
             new ButtonImmList(new List<Button>() {
-              new Button("Together I stand!", new Color(64, 64, 64, 255), "")
+              new Button("Together I stand!", "")
             }))
           .AsIGameEvent());
       }

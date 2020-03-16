@@ -96,7 +96,7 @@ namespace AthPlayer {
               overlayPresenter);
       playerController.Start();
 
-      overlayPresenter.ShowTopOverlayWithConfirmButton(
+      overlayPresenter.ShowTopOverlayWithButtons(
         "A long time ago, before the phoenix flew the skies, before the volcanoes roamed the coasts, and before the sylvans raised their towers, there was only the Chronicler.\n\nAges passed, mountains rose, and the first trees and animals woke for the first time. The Chronicler recorded it all.");
     }
 

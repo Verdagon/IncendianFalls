@@ -21,18 +21,14 @@ public class Button : IComparable<Button> {
   }
   private readonly int hashCode;
          public readonly string label;
-  public readonly Color backgroundColor;
   public readonly string triggerName;
   public Button(
       string label,
-      Color backgroundColor,
       string triggerName) {
     this.label = label;
-    this.backgroundColor = backgroundColor;
     this.triggerName = triggerName;
     int hash = 0;
     hash = hash * 37 + label.GetDeterministicHashCode();
-    hash = hash * 37 + backgroundColor.GetDeterministicHashCode();
     hash = hash * 37 + triggerName.GetDeterministicHashCode();
     this.hashCode = hash;
 
@@ -57,7 +53,6 @@ public class Button : IComparable<Button> {
     var that = obj as Button;
     return true
                && label.Equals(that.label)
-        && backgroundColor.Equals(that.backgroundColor)
         && triggerName.Equals(that.triggerName)
         ;
   }
@@ -69,9 +64,6 @@ public class Button : IComparable<Button> {
     if (label != that.label) {
       return label.CompareTo(that.label);
     }
-    if (backgroundColor != that.backgroundColor) {
-      return backgroundColor.CompareTo(that.backgroundColor);
-    }
     if (triggerName != that.triggerName) {
       return triggerName.CompareTo(that.triggerName);
     }
@@ -81,7 +73,6 @@ public class Button : IComparable<Button> {
   public string DStr() {
     return "Button(" +
         label.DStr() + ", " +
-        backgroundColor.DStr() + ", " +
         triggerName.DStr()
         + ")";
 
@@ -91,11 +82,9 @@ public class Button : IComparable<Button> {
       source.Expect("(");
       var label = source.ParseStr();
       source.Expect(",");
-      var backgroundColor = Color.Parse(source);
-      source.Expect(",");
       var triggerName = source.ParseStr();
       source.Expect(")");
-      return new Button(label, backgroundColor, triggerName);
+      return new Button(label, triggerName);
   }
 }
        

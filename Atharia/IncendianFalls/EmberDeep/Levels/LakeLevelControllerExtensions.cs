@@ -97,69 +97,81 @@ namespace Atharia.Model {
 
         game.AddEvent(
           new ShowOverlayEvent(
-            40, // sizePercent
-            new Color(16, 16, 16, 224), // backgroundColor
-            300,// fadeInEnd
-            2800, // fadeOutStart
-            3100, // fadeOutEnd,
-            "",
-
             "It's eerily silent in here.",
-            new Color(255, 64, 0, 255), // textColor
-            300, // textFadeInStartS
-            600, // textFadeInEndS
-            2500, // textFadeOutStartS
-            2800, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
+            "aside",
             new ButtonImmList(new List<Button>() { }))
+          //new ShowOverlayEvent(
+          //  40, // sizePercent
+          //  new Color(16, 16, 16, 224), // backgroundColor
+          //  300,// fadeInEnd
+          //  2800, // fadeOutStart
+          //  3100, // fadeOutEnd,
+          //  "",
+
+          //  "It's eerily silent in here.",
+          //  new Color(255, 64, 0, 255), // textColor
+          //  300, // textFadeInStartS
+          //  600, // textFadeInEndS
+          //  2500, // textFadeOutStartS
+          //  2800, // textFadeOutEndS
+          //  true, // topAligned
+          //  true, // leftAligned
+
+          //  new ButtonImmList(new List<Button>() { }))
           .AsIGameEvent());
       }
 
       if (triggerName == "line2") {
         game.AddEvent(
           new ShowOverlayEvent(
-            50, // sizePercent
-            new Color(16, 16, 16, 224), // backgroundColor
-            0,// fadeInEnd
-            3800, // fadeOutStart
-            3800, // fadeOutEnd,
-            "line3",
-
             "He slowly turns and looks at you, into your eyes, through them, as if into your soul.",
-            new Color(255, 64, 0, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            3500, // textFadeOutStartS
-            3800, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
+            "normal",
+            new ButtonImmList(new List<Button>() { new Button("...", "line3") }))
+          //new ShowOverlayEvent(
+          //  50, // sizePercent
+          //  new Color(16, 16, 16, 224), // backgroundColor
+          //  0,// fadeInEnd
+          //  3800, // fadeOutStart
+          //  3800, // fadeOutEnd,
+          //  "line3",
 
-            new ButtonImmList(new List<Button>() { }))
+          //  "He slowly turns and looks at you, into your eyes, through them, as if into your soul.",
+          //  new Color(255, 64, 0, 255), // textColor
+          //  0, // textFadeInStartS
+          //  300, // textFadeInEndS
+          //  3500, // textFadeOutStartS
+          //  3800, // textFadeOutEndS
+          //  true, // topAligned
+          //  true, // leftAligned
+
+          //  new ButtonImmList(new List<Button>() { }))
           .AsIGameEvent());
       }
 
       if (triggerName == "line3") {
         game.AddEvent(
           new ShowOverlayEvent(
-            50, // sizePercent
-            new Color(16, 16, 16, 224), // backgroundColor
-            0,// fadeInEnd
-            2200, // fadeOutStart
-            2500, // fadeOutEnd,
-            "",
-
             "He turns away and is still again.",
-            new Color(255, 64, 0, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            1900, // textFadeOutStartS
-            2200, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
+            "normal",
+            new ButtonImmList(new List<Button>() { new Button("...", "") }))
+          //new ShowOverlayEvent(
+          //  50, // sizePercent
+          //  new Color(16, 16, 16, 224), // backgroundColor
+          //  0,// fadeInEnd
+          //  2200, // fadeOutStart
+          //  2500, // fadeOutEnd,
+          //  "",
 
-            new ButtonImmList(new List<Button>() { }))
+          //  "He turns away and is still again.",
+          //  new Color(255, 64, 0, 255), // textColor
+          //  0, // textFadeInStartS
+          //  300, // textFadeInEndS
+          //  1900, // textFadeOutStartS
+          //  2200, // textFadeOutEndS
+          //  true, // topAligned
+          //  true, // leftAligned
+
+          //  new ButtonImmList(new List<Button>() { }))
           .AsIGameEvent());
       }
 
@@ -181,23 +193,27 @@ namespace Atharia.Model {
 
         game.AddEvent(
           new ShowOverlayEvent(
-            50, // sizePercent
-            new Color(16, 16, 16, 224), // backgroundColor
-            300,// fadeInEnd
-            2800, // fadeOutStart
-            2800, // fadeOutEnd,
-            "line2",
-
             "You see a man, still as a statue.",
-            new Color(255, 64, 0, 255), // textColor
-            300, // textFadeInStartS
-            600, // textFadeInEndS
-            2500, // textFadeOutStartS
-            2800, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
+            "normal",
+            new ButtonImmList(new List<Button>() { new Button("...", "line2") }))
+          //new ShowOverlayEvent(
+          //  50, // sizePercent
+          //  new Color(16, 16, 16, 224), // backgroundColor
+          //  300,// fadeInEnd
+          //  2800, // fadeOutStart
+          //  2800, // fadeOutEnd,
+          //  "line2",
 
-            new ButtonImmList(new List<Button>() { }))
+          //  "You see a man, still as a statue.",
+          //  new Color(255, 64, 0, 255), // textColor
+          //  300, // textFadeInStartS
+          //  600, // textFadeInEndS
+          //  2500, // textFadeOutStartS
+          //  2800, // textFadeOutEndS
+          //  true, // topAligned
+          //  true, // leftAligned
+
+          //  new ButtonImmList(new List<Button>() { }))
           .AsIGameEvent());
       }
 

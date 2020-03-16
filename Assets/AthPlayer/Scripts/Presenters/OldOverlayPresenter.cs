@@ -37,86 +37,39 @@ namespace AthPlayer {
       this.overlayPaneler = overlayPaneler;
       this.overlayPanelView = overlayPanelView;
 
-      overlayPanelView.OverlayClosed += OverlayClosed;
+      //overlayPanelView.OverlayClosed += OverlayClosed;
     }
 
     public void ShowOverlay(ShowOverlayEvent overlay) {
-      triggerNames = new List<string>();
-      var buttonTexts = new List<string>();
-      foreach (var button in overlay.buttons) {
-        buttonTexts.Add(button.label);
-        triggerNames.Add(button.triggerName);
-      }
-      triggerNames.Add(overlay.automaticActionTriggerName);
 
-      overlayPanelView.Init(
-        cinematicTimer,
+      // ignore this, the presenter should determine it, perhaps based on some sort of
+      // "this is cinematic and dramatic" vs "this is in-game" thing.
+      //public readonly int fadeInEndMs;
 
-        overlay.sizePercent / 100f,
-        overlay.backgroundColor.ToUnity(),
-        overlay.fadeInEndMs,
-        overlay.fadeOutStartMs,
-        overlay.fadeOutEndMs,
+      // ignore this, we should determine this in the presenter, based on semantic
+      // information.
+      //public readonly Color backgroundColor;
 
-        overlay.text,
-        overlay.textColor.ToUnity(),
-        overlay.textFadeInStartMs,
-        overlay.textFadeInEndMs,
-        overlay.textFadeOutStartMs,
-        overlay.textFadeOutEndMs,
-        overlay.topAligned,
-        overlay.leftAligned,
+      // ignore this, determine this in the presenter based on semantic info.
+      //public readonly int sizePercent;
 
-        buttonTexts);
+      //public readonly string text;
+      // ignore this, determine this in the presenter based on semantic info.
+      //public readonly int textFadeOutEndMs;
+      //public readonly int textFadeOutStartMs;
+      //public readonly int textFadeInEndMs;
+      //public readonly int textFadeInStartMs;
+      // ignore this, determine this in the presenter based on semantic info.
+      //public readonly Color textColor;
+      //public readonly bool leftAligned;
+      //public readonly bool topAligned;
 
-      //overlayPanelView.Init(
-      //  .55f, // game.overlay.sizePercent / 100f,
-      //  new UnityEngine.Color(.5f, 0, 0, .9f), //game.overlay.backgroundColor.ToUnity(),
-      //  "What is the meaning of life?", // game.overlay.overlayText,
-      //  new UnityEngine.Color(1, 1, 1, 1), // game.overlay.overlayTextColor.ToUnity(),
-      //  game.overlay.topAligned,
-      //  game.overlay.leftAligned,
-      //  0,//game.overlay.automaticDismissDelayMs,
-      //  50,//game.overlay.fadeInMs,
-      //  50,//game.overlay.fadeOutMs,
-      //  new List<string>() { "butts", "more butts" });//buttonTexts);
 
-      //overlayPanelView.Init(
-      //  1f, // game.overlay.sizePercent / 100f,
-      //  new UnityEngine.Color(0, 0, 0, .9f), //game.overlay.backgroundColor.ToUnity(),
-      //  1f, // fadeInEnd
-      //  5f, // fadeOutStart
-      //  6f, // fadeOutEnd,
 
-      //  "My brother was an explorer...", // game.overlay.overlayText,
-      //  new UnityEngine.Color(0, 1, 1, 1), // game.overlay.overlayTextColor.ToUnity(),
-      //  1f, // textFadeInStartS
-      //  2f, // textFadeInEndS
-      //  4f, // textFadeOutStartS
-      //  5f, // textFadeOutEndS
-      //  true,
-      //  false,
-      //  new List<string>());//buttonTexts);
-
-      timer.SetTimeSpeedMultiplier(0f);
-    }
-
-    private void OverlayClosed(int buttonIndex) {
-      Debug.Log("Clicked " + buttonIndex);
-      timer.SetTimeSpeedMultiplier(1f);
-      var triggerName = triggerNames[buttonIndex];
-      if (triggerName == "_exitGame") {
-        Exit?.Invoke();
-      } else {
-        ss.RequestTrigger(game.id, triggerName);
-      }
-    }
-
-    public void ShowTopOverlayWithConfirmButton(string unwrapped) {
       var font = new OverlayFont("cascadia", 1.75f);
       int panelWidth = 30;
       int maxHeight = 15;
-      string[] textLines = LineWrapper.Wrap(unwrapped, panelWidth - 1);
+      string[] textLines = LineWrapper.Wrap(overlay.text, panelWidth - 1);
 
       // - 1 line for borders
       // - as many lines for text as we can fit
@@ -128,7 +81,7 @@ namespace AthPlayer {
       int rightBorderWidth = 1;
       int numLinesForButtons = 3; // 1 for top border, 1 for the text, 1 for bottom border.
       int numLinesForText = maxHeight - numLinesForTopBorder - numLinesBetweenTextAndButtons - numLinesForButtons - numLinesForBottomBorder;
-      int ellipsisWidth = 3;
+      //int ellipsisWidth = 3;
       Debug.LogError(numLinesForText);
 
       //bool wrapped;
@@ -145,15 +98,139 @@ namespace AthPlayer {
 
       int panelHeight = adjustedTextLines.Count + numLinesForTopBorder + numLinesBetweenTextAndButtons + numLinesForButtons + numLinesForBottomBorder;
 
-      var panelView = overlayPaneler.MakePanel(50, 100, 100, 50, panelWidth, panelHeight);
+      var panelView =
+        overlayPaneler.MakePanel(
+          cinematicTimer,
+          50,
+          100,
+          100,
+          50,
+          panelWidth,
+          panelHeight);
       //panelView.AddBackgroundAndBorder(new UnityEngine.Color(0, 0, 0, .9f), new UnityEngine.Color(0f, .25f, .5f, 1));
-      panelView.AddBackground(new UnityEngine.Color(0, 0, 0, .9f));
+      int backgroundId = panelView.AddBackground(new UnityEngine.Color(0, 0, 0, .9f));
+      panelView.SetFadeIn(backgroundId, new NewOverlayPanelView.FadeIn(0, 300));
+      panelView.SetFadeOut(backgroundId, new NewOverlayPanelView.FadeOut(-300, 0));
 
       for (int i = 0; i < panelView.symbolsHigh && i < adjustedTextLines.Count; i++) {
+        var textIds =
+          panelView.AddString(
+            0, 1f, panelView.symbolsHigh - 2 - i, panelView.symbolsWide,
+            new UnityEngine.Color(0, .5f, 1, 1), font,
+            adjustedTextLines[i]);
+        foreach (var textId in textIds) {
+          panelView.SetFadeIn(textId, new NewOverlayPanelView.FadeIn(300, 600));
+          panelView.SetFadeOut(textId, new NewOverlayPanelView.FadeOut(-600, -300));
+        }
+      }
+
+      foreach (var button in overlay.buttons) {
+        var buttonTrigger = button.triggerName;
+        var buttonText = button.label;
+        int buttonTextWidth = buttonText.Length;
+        int buttonTextHeight = 1;
+        int buttonBorderWidth = 1;
+        int buttonWidth = buttonBorderWidth + buttonTextWidth + buttonBorderWidth;
+        int buttonHeight = buttonBorderWidth + buttonTextHeight + buttonBorderWidth;
+
+        int buttonId =
+          panelView.AddButton(
+            0,
+            panelWidth - rightBorderWidth - buttonWidth,
+            1,
+            buttonWidth,
+            buttonHeight,
+            1,
+            new UnityEngine.Color(.4f, .4f, .4f, 1),
+            new UnityEngine.Color(.3f, .3f, .3f, 1),
+            () => {
+              panelView.ScheduleClose(() => {
+                timer.SetTimeSpeedMultiplier(1f);
+                if (buttonTrigger == "_exitGame") {
+                  Exit?.Invoke();
+                } else {
+                  ss.RequestTrigger(game.id, buttonTrigger);
+                }
+              });
+            });
+        panelView.SetFadeIn(buttonId, new NewOverlayPanelView.FadeIn(0, 300));
+        panelView.SetFadeOut(buttonId, new NewOverlayPanelView.FadeOut(-300, 0));
         panelView.AddString(
-          0, 1f, panelView.symbolsHigh - 2 - i, panelView.symbolsWide,
-          new UnityEngine.Color(0, .5f, 1, 1), font,
-          adjustedTextLines[i]);
+          buttonId,
+          panelWidth - rightBorderWidth - buttonWidth + buttonBorderWidth,
+          2f,
+          buttonTextWidth,
+          new UnityEngine.Color(1f, 1f, 1f, 1),
+            font, buttonText);
+      }
+
+      // ignore these. we shouldnt have automatic hiding.
+      //public readonly string automaticActionTriggerName;
+      //public readonly int fadeOutEndMs;
+      //public readonly int fadeOutStartMs;
+
+      timer.SetTimeSpeedMultiplier(0f);
+    }
+
+    //private void OverlayClosed(int buttonIndex) {
+    //  timer.SetTimeSpeedMultiplier(1f);
+    //  var triggerName = triggerNames[buttonIndex];
+    //  if (triggerName == "_exitGame") {
+    //    Exit?.Invoke();
+    //  } else {
+    //    ss.RequestTrigger(game.id, triggerName);
+    //  }
+    //}
+
+    public void ShowTopOverlayWithButtons(string unwrapped) {
+      var font = new OverlayFont("cascadia", 1.75f);
+      int panelWidth = 30;
+      int maxHeight = 15;
+      string[] textLines = LineWrapper.Wrap(unwrapped, panelWidth - 1);
+
+      // - 1 line for borders
+      // - as many lines for text as we can fit
+      // - 1 line for space between text and buttons
+      // - 2 lines for buttons
+      int numLinesForTopBorder = 1;
+      int numLinesForBottomBorder = 1;
+      int numLinesBetweenTextAndButtons = 1;
+      int rightBorderWidth = 1;
+      int numLinesForButtons = 3; // 1 for top border, 1 for the text, 1 for bottom border.
+      int numLinesForText = maxHeight - numLinesForTopBorder - numLinesBetweenTextAndButtons - numLinesForButtons - numLinesForBottomBorder;
+      //int ellipsisWidth = 3;
+      Debug.LogError(numLinesForText);
+
+      //bool wrapped;
+      var adjustedTextLines = new List<string>();
+      if (textLines.Length <= numLinesForText) {
+        adjustedTextLines.AddRange(textLines);
+        //wrapped = false;
+      } else {
+        for (int i = 0; i < numLinesForText; i++) {
+          adjustedTextLines.Add(textLines[i]);
+        }
+        //wrapped = true;
+      }
+
+      int panelHeight = adjustedTextLines.Count + numLinesForTopBorder + numLinesBetweenTextAndButtons + numLinesForButtons + numLinesForBottomBorder;
+
+      var panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 100, 100, 50, panelWidth, panelHeight);
+      //panelView.AddBackgroundAndBorder(new UnityEngine.Color(0, 0, 0, .9f), new UnityEngine.Color(0f, .25f, .5f, 1));
+      int backgroundId = panelView.AddBackground(new UnityEngine.Color(0, 0, 0, .9f));
+      panelView.SetFadeIn(backgroundId, new NewOverlayPanelView.FadeIn(0, 300));
+      panelView.SetFadeOut(backgroundId, new NewOverlayPanelView.FadeOut(-300, 0));
+
+      for (int i = 0; i < panelView.symbolsHigh && i < adjustedTextLines.Count; i++) {
+        var textIds =
+          panelView.AddString(
+            0, 1f, panelView.symbolsHigh - 2 - i, panelView.symbolsWide,
+            new UnityEngine.Color(0, .5f, 1, 1), font,
+            adjustedTextLines[i]);
+        foreach (var textId in textIds) {
+          panelView.SetFadeIn(textId, new NewOverlayPanelView.FadeIn(300, 600));
+          panelView.SetFadeOut(textId, new NewOverlayPanelView.FadeOut(-600, -300));
+        }
       }
 
       //if (wrapped) {
@@ -182,7 +259,15 @@ namespace AthPlayer {
           buttonHeight,
           1,
           new UnityEngine.Color(.4f, .4f, .4f, 1),
-          new UnityEngine.Color(.3f, .3f, .3f, 1));
+          new UnityEngine.Color(.3f, .3f, .3f, 1),
+          () => {
+            Debug.Log("Got button click!");
+            panelView.ScheduleClose(() => {
+              Debug.Log("Got close!");
+            });
+          });
+      panelView.SetFadeIn(buttonId, new NewOverlayPanelView.FadeIn(0, 300));
+      panelView.SetFadeOut(buttonId, new NewOverlayPanelView.FadeOut(-300, 0));
       panelView.AddString(
         buttonId,
         panelWidth - rightBorderWidth - buttonWidth + buttonBorderWidth,
@@ -190,12 +275,6 @@ namespace AthPlayer {
         buttonTextWidth,
         new UnityEngine.Color(1f, 1f, 1f, 1),
           font, buttonText);
-
-      panelView.Clicked += (id) => {
-        if (id == buttonId) {
-          Debug.LogError("clicked!");
-        }
-      };
     }
   }
 }

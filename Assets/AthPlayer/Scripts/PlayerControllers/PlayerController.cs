@@ -210,9 +210,9 @@ namespace Domino {
       if (effect.newValue == false) {
         overlayPresenter.ShowOverlay(
           new ShowOverlayEvent(
-            40, new Atharia.Model.Color(64, 0, 0, 224), 300, 0, 0, "",
-            "You have died!", new Atharia.Model.Color(255, 255, 255, 255), 300, 600, 0, 0, true, true,
-            new ButtonImmList(new List<Button>() { new Button("Alas...", new Atharia.Model.Color(16, 16, 16, 255), "_exitGame") })));
+            "You have died!",
+            "normal",
+            new ButtonImmList(new List<Button>() { new Button("Alas...", "_exitGame") })));
       }
     }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }

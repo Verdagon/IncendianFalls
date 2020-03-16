@@ -85,46 +85,19 @@ namespace Atharia.Model {
 
         game.AddEvent(
           new ShowOverlayEvent(
-            30, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            500, // fadeInEnd
-            2000, // fadeOutStart
-            2500, // fadeOutEnd,
-            "startTalking",
-
             "Retreat Challenge",
-            new Color(255, 255, 255, 255), // textColor
-            500, // textFadeInStartS
-            1000, // textFadeInEndS
-            2000, // textFadeOutStartS
-            2500, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>()))
+            "aside",
+            new ButtonImmList(new List<Button>() { new Button("", "startTalking") }))
           .AsIGameEvent());
       }
 
       if (triggerName == "startTalking") {
         game.AddEvent(
           new ShowOverlayEvent(
-            70, // sizePercent
-            new Color(16, 16, 16, 224), // backgroundColor
-            300,// fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
-
             "There's a superpowered Draxling chasing you!\n\nIf you just run, it will catch you and kill you.\n\nDistract it with time clones!",
-            new Color(255, 255, 255, 255), // textColor
-            300, // textFadeInStartS
-            600, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
 
-            new ButtonImmList(new Button[] { new Button("Uh oh!", new Color(32, 32, 32, 255), "startCamera") }))
+            "normal",
+            new ButtonImmList(new Button[] { new Button("Uh oh!", "startCamera") }))
           .AsIGameEvent());
       }
       if (triggerName == "startCamera") {
@@ -152,23 +125,10 @@ namespace Atharia.Model {
       if (triggerName == "showHints") {
         game.AddEvent(
           new ShowOverlayEvent(
-            70, // sizePercent
-            new Color(16, 16, 16, 224), // backgroundColor
-            300,// fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
-
             "Keep in mind, enemies usually attack whoever is closest to them.\n\nYour past self should be close enough to distract the enemy, and buy you time to get away!\n\nHint: Try drawing the Draxling away and then reverting before it attacks.",
-            new Color(255, 255, 255, 255), // textColor
-            300, // textFadeInStartS
-            600, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
 
-            new ButtonImmList(new Button[] { new Button("Got it!", new Color(32, 32, 32, 255), "") }))
+            "normal",
+            new ButtonImmList(new Button[] { new Button("Got it!", "") }))
           .AsIGameEvent());
       }
 

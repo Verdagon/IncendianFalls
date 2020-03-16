@@ -66,67 +66,28 @@ namespace Atharia.Model {
       if (triggerName == "levelStart") {
         game.AddEvent(
           new ShowOverlayEvent(
-            100, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            0,// fadeInEnd
-            7000, // fadeOutStart
-            7000, // fadeOutEnd,
-            "introLine1Done",
 
             "My brother was an explorer.\n\nOne of the only people to explore Ember Deep and survive, thanks to his mastery of chronomancy.",
-            new Color(255, 64, 0, 255), // textColor
-            1000, // textFadeInStartS
-            2000, // textFadeInEndS
-            6000, // textFadeOutStartS
-            7000, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
 
-            new ButtonImmList(new List<Button>() { }))
+            "dramatic",
+
+            new ButtonImmList(new List<Button>() { new Button("...", "introLine1Done") }))
           .AsIGameEvent());
       }
       if (triggerName == "introLine1Done") {
         game.AddEvent(
           new ShowOverlayEvent(
-            100, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            0, // fadeInEnd
-            10000, // fadeOutStart
-            10000, // fadeOutEnd,
-            "introLine2Done",
-
             "\"Ember Deep is a dangerous place, ravaged by time magic since millenia ago.\n\nPeople fear it, and call it evil. I don't think it is.\n\nPast the danger, there are wonders to discover down there, answers to the deeper mysteries of our realm.\"",
-            new Color(64, 192, 255, 255), // textColor
-            0, // textFadeInStartS
-            1000, // textFadeInEndS
-            9000, // textFadeOutStartS
-            10000, // textFadeOutEndS
-            true, // topAligned
-            false, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "dramatic",
+            new ButtonImmList(new List<Button>() { new Button("...", "introLine2Done") }))
           .AsIGameEvent());
       }
       if (triggerName == "introLine2Done") {
         game.AddEvent(
           new ShowOverlayEvent(
-            100, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            0, // fadeInEnd
-            5000, // fadeOutStart
-            6000, // fadeOutEnd,
-            "introLine3Done",
-
             "Seven years ago, when the terrible Ravashrike attacked our town, he stood against it.",
-            new Color(255, 64, 0, 255), // textColor
-            0, // textFadeInStartS
-            1000, // textFadeInEndS
-            4000, // textFadeOutStartS
-            5000, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "dramatic",
+            new ButtonImmList(new List<Button>() { new Button("...", "introLine3Done") }))
           .AsIGameEvent());
       }
       if (triggerName == "introLine3Done") {
@@ -188,68 +149,26 @@ namespace Atharia.Model {
       if (triggerName == "ravashrikeAttackDone") {
         game.AddEvent(
           new ShowOverlayEvent(
-            50, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            500, // fadeInEnd
-            3000, // fadeOutStart
-            4000, // fadeOutEnd,
-            "realizationDone",
-
             "\"I can't fight it! Time to do something desperate...\"",
-            new Color(64, 192, 255, 255), // textColor
-            0, // textFadeInStartS
-            1000, // textFadeInEndS
-            3000, // textFadeOutStartS
-            4000, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "normal",
+            new ButtonImmList(new List<Button>() { new Button("...", "realizationDone") }))
           .AsIGameEvent());
       }
       if (triggerName == "realizationDone") {
         //Actions.Stasis(game, superstate, chronomancer, ravashrike);
         game.AddEvent(
           new ShowOverlayEvent(
-            100, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            1000, // fadeInEnd
-            6000, // fadeOutStart
-            6000, // fadeOutEnd,
-            "cinematicFadeOut", // end trigger
-
             "He used a black incendium staff to cast an Eternal Stasis on the Ravashrike...\n\nBut he caught himself in it too.",
-            new Color(255, 64, 0, 255), // textColor
-            1000, // textFadeInStartS
-            2000, // textFadeInEndS
-            5000, // textFadeOutStartS
-            6000, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "dramatic",
+            new ButtonImmList(new List<Button>() { new Button("...", "cinematicFadeOut") }))
           .AsIGameEvent());
       }
       if (triggerName == "cinematicFadeOut") {
         game.AddEvent(
           new ShowOverlayEvent(
-            100, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            0000, // fadeInEnd
-            4000, // fadeOutStart
-            4000, // fadeOutEnd,
-            "cinematicDone", // end trigger
-
             "Now, my journey begins.",
-            new Color(255, 64, 0, 255), // textColor
-            1000, // textFadeInStartS
-            2000, // textFadeInEndS
-            3000, // textFadeOutStartS
-            4000, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "dramatic",
+            new ButtonImmList(new List<Button>() { new Button("...", "cinematicDone") }))
           .AsIGameEvent());
       }
       if (triggerName == "cinematicDone") {

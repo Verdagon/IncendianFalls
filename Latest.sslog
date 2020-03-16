@@ -1,7 +1,15 @@
-SetupEmberDeepGameRequest(-519019399, 0, false)
+SetupEmberDeepGameRequest(-502838105, 0, false)
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:143: 553012556
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:153: -916516735
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:153: -1648172199
 ResumeRequest(7)
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:533: -916516735
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:533: -1648172199
 D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:538: ""
-D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:540: -1849193084
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:540: 1714118748
+TriggerRequest(7, "introLine1Done")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 1714118748
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 1714118748
+TriggerRequest(7, "playerEntryHopDone")
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:170: 1714118748
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:175: ""
+D:\IncendianFalls\Atharia\IncendianFalls\Superstructure.cs:177: 1714118748

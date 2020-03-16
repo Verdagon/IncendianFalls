@@ -80,47 +80,17 @@ namespace Atharia.Model {
 
         game.AddEvent(
           new ShowOverlayEvent(
-            30, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            500, // fadeInEnd
-            2000, // fadeOutStart
-            2500, // fadeOutEnd,
-            "showHint",
-
             "Ambush Challenge",
-            new Color(255, 255, 255, 255), // textColor
-            500, // textFadeInStartS
-            1000, // textFadeInEndS
-            2000, // textFadeOutStartS
-            2500, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>()))
+            "aside",
+            new ButtonImmList(new List<Button>() { new Button("", "showHint") }))
           .AsIGameEvent());
       }
       if (triggerName == "showHint") {
         game.AddEvent(
           new ShowOverlayEvent(
-            50, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300, // fadeInEnd
-            0, // fadeOutStart
-            0, // fadeOutEnd,
-            "",
-
             "An ambush! Perhaps I can use the terrain and chronomancy to survive.",
-            new Color(255, 255, 255, 255), // textColor
-            0, // textFadeInStartS
-            300, // textFadeInEndS
-            0, // textFadeOutStartS
-            0, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() {
-              new Button("For valor!", new Color(64, 64, 64, 255), "")
-            }))
+            "normal",
+            new ButtonImmList(new List<Button>() { new Button("For valor!", "") }))
           .AsIGameEvent());
       }
 

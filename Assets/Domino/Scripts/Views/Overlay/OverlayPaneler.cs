@@ -7,6 +7,7 @@ namespace Domino {
     public Instantiator instantiator;
 
     public NewOverlayPanelView MakePanel(
+        IClock cinematicTimer,
         int horizontalAlignmentPercent,
         int verticalAlignmentPercent,
         int widthPercent,
@@ -16,6 +17,7 @@ namespace Domino {
       var spv =
         instantiator.CreateOverlayPanelView(
           gameObject,
+        cinematicTimer,
           horizontalAlignmentPercent,
           verticalAlignmentPercent,
           widthPercent,

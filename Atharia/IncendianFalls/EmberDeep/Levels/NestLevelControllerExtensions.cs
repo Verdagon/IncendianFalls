@@ -192,23 +192,9 @@ namespace Atharia.Model {
       if (triggerName == "playerEntryHopDone") {
         game.AddEvent(
           new ShowOverlayEvent(
-            30, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300,// fadeInEnd
-            2400, // fadeOutStart
-            2700, // fadeOutEnd,
-            "uhOhDone",
-
             "Uh oh...",
-            new Color(255, 64, 0, 255), // textColor
-            300, // textFadeInStartS
-            600, // textFadeInEndS
-            2100, // textFadeOutStartS
-            2400, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
-
-            new ButtonImmList(new List<Button>() { }))
+            "normal",
+            new ButtonImmList(new List<Button>() { new Button("...", "uhOhDone") }))
           .AsIGameEvent());
       }
       if (triggerName == "uhOhDone") {
@@ -238,23 +224,10 @@ namespace Atharia.Model {
 
         game.AddEvent(
           new ShowOverlayEvent(
-            40, // sizePercent
-            new Color(0, 0, 0, 224), // backgroundColor
-            300,// fadeInEnd
-            3400, // fadeOutStart
-            3700, // fadeOutEnd,
-            "",
-
             "It's a nest of some sort!\n\nTime for some chronomancy!",
-            new Color(255, 64, 0, 255), // textColor
-            300, // textFadeInStartS
-            600, // textFadeInEndS
-            3100, // textFadeOutStartS
-            3400, // textFadeOutEndS
-            true, // topAligned
-            true, // leftAligned
+            "normal",
 
-            new ButtonImmList(new List<Button>() { }))
+            new ButtonImmList(new List<Button>() { new Button("Go!", "") }))
           .AsIGameEvent());
       }
 
