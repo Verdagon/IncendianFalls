@@ -38,6 +38,12 @@ namespace AthPlayer {
         bool isFirstPage,
         bool isLastPage,
         bool isPortrait) {
+
+      if (buttons.Count == 0) {
+        // Do nothing. It'll close itself and nothing else.
+        buttons.Add(new OverlayPresenter.PageButton(" ", () => { }));
+      }
+
       // Will be unlocked by the buttons being clicked.
       inputSemaphore.Lock();
 
@@ -70,7 +76,10 @@ namespace AthPlayer {
       } else {
         panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 80, 80, 50, panelWidth, panelHeight);
       }
-      int backgroundId = panelView.AddBackground(new UnityEngine.Color(0, 0, 0, .9f));
+      int backgroundId =
+        panelView.AddBackground(
+          new UnityEngine.Color(0, 0, 0, .85f),
+          new UnityEngine.Color(.2f, .2f, .2f, .85f));
       if (isFirstPage) {
         panelView.SetFadeIn(backgroundId, new OverlayPanelView.FadeIn(0, 300));
       }
@@ -112,6 +121,7 @@ namespace AthPlayer {
             buttonHeight,
             1,
             new UnityEngine.Color(.4f, .4f, .4f, 1),
+            new UnityEngine.Color(.6f, .6f, .6f, 1),
             new UnityEngine.Color(.3f, .3f, .3f, 1),
             () => {
               panelView.ScheduleClose(

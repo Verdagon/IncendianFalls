@@ -71,10 +71,13 @@ namespace AthPlayer {
 
       int panelHeight = pageLines.Count + panelTopPadding + panelBottomPadding;
 
-      int widthPercent = isPortrait ? 100 : 50;
+      int widthPercent = isPortrait ? 94 : 44;
       OverlayPanelView panelView =
-        overlayPaneler.MakePanel(cinematicTimer, 0, 100, widthPercent, 50, panelWidth, panelHeight);
-      int backgroundId = panelView.AddBackground(new UnityEngine.Color(0, 0, 0, .9f));
+        overlayPaneler.MakePanel(cinematicTimer, 3, 97, widthPercent, 44, panelWidth, panelHeight);
+      int backgroundId =
+        panelView.AddBackground(
+          new UnityEngine.Color(0, 0, 0, .9f),
+          new UnityEngine.Color(.1f, .1f, .1f, .9f));
       if (isFirstPage) {
         panelView.SetFadeIn(backgroundId, new OverlayPanelView.FadeIn(0, 300));
       }
@@ -116,6 +119,7 @@ namespace AthPlayer {
             buttonHeight,
             1,
             new UnityEngine.Color(.4f, .4f, .4f, 1),
+            new UnityEngine.Color(.5f, .5f, .5f, 1),
             new UnityEngine.Color(.3f, .3f, .3f, 1),
             () => panelView.ScheduleClose(0, () => buttonCallback()));
         panelView.SetFadeIn(buttonId, new OverlayPanelView.FadeIn(300, 600));

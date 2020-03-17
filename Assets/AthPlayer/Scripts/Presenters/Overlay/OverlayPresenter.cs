@@ -60,10 +60,6 @@ namespace AthPlayer {
       }
 
       finalButtons = buttons;
-      if (finalButtons.Count == 0) {
-        // Do nothing. It'll close itself and nothing else.
-        finalButtons.Add(new PageButton(" ", () => { }));
-      }
 
       isPortrait = Screen.height > Screen.width;
 

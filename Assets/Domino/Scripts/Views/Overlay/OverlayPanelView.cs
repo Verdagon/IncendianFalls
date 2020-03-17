@@ -22,10 +22,12 @@ namespace Domino {
       public readonly int id;
       public readonly GameObject gameObject;
       public readonly HashSet<int> childIds;
+      public GameObject[] borderRectGameObjects = new GameObject[0];
       public FadeIn fadeIn; // Null if no fade in
       public FadeOut fadeOut; // Null if no fade out
       public Color color;
-      public Color buttonPressedColor; // Or null if not button
+      public Color buttonPressedColor; // Or a=0 if not button
+      public Color borderColor; // Or a=0 if not button
 
       public OverlayObject(int id, GameObject gameObject) {
         this.id = id;
@@ -227,11 +229,58 @@ namespace Domino {
         float width,
         float height,
         int z,
-        Color color) {
+        Color color,
+        Color borderColor) {
       var unityX = x * symbolWidth;
       var unityY = y * symbolHeight;
       var unityWidth = width * symbolWidth;
       var unityHeight = height * symbolHeight;
+
+      GameObject[] borderRectGameObjects = new GameObject[0];
+      if (borderColor.a > 0) {
+        borderRectGameObjects = new GameObject[4];
+        for (int i = 0; i < 4; i++) {
+          float borderX;
+          float borderY;
+          float borderWidth;
+          float borderHeight;
+          if (i == 0) {
+            borderX = unityX - symbolWidth / 4;
+            borderY = unityX - symbolHeight / 4;
+            borderWidth = symbolWidth / 4;
+            borderHeight = unityHeight + symbolHeight / 2;
+          } else if (i == 1) {
+            borderX = unityX - symbolWidth / 4;
+            borderY = unityX - symbolHeight / 4;
+            borderWidth = unityWidth + symbolWidth / 2;
+            borderHeight = symbolHeight / 4;
+          } else if (i == 2) {
+            borderX = unityX + unityWidth;
+            borderY = unityX - symbolHeight / 4;
+            borderWidth = symbolWidth / 4;
+            borderHeight = unityHeight + symbolHeight / 2;
+          } else {
+            borderX = unityX - symbolWidth / 4;
+            borderY = unityX + unityHeight;
+            borderWidth = unityWidth + symbolWidth / 2;
+            borderHeight = symbolHeight / 4;
+          }
+
+          var borderRectGameObject = instantiator.CreateEmptyUiObject();
+          borderRectGameObject.transform.parent = gameObject.transform;
+          var borderRectTransform = borderRectGameObject.GetComponent<RectTransform>();
+          borderRectTransform.pivot = new Vector2(0, 0);
+          borderRectTransform.localScale = new Vector3(1, 1, 1);
+          borderRectTransform.anchorMin = new Vector2(0, 0);
+          borderRectTransform.anchorMax = new Vector2(0, 0);
+          borderRectTransform.anchoredPosition = new Vector2(borderX, borderY);
+          borderRectTransform.position = new Vector3(borderRectTransform.position.x, borderRectTransform.position.y, z);
+          borderRectTransform.sizeDelta = new Vector2(borderWidth, borderHeight);
+          var borderRectImage = borderRectGameObject.AddComponent<Image>();
+          borderRectImage.color = borderColor;
+          borderRectGameObjects[i] = borderRectGameObject;
+        }
+      }
 
       var rectGameObject = instantiator.CreateEmptyUiObject();
       rectGameObject.transform.parent = gameObject.transform;
@@ -249,10 +298,13 @@ namespace Domino {
       int id = nextId++;
       var overlayObject = new OverlayObject(id, rectGameObject);
       overlayObject.color = color;
+      overlayObject.borderRectGameObjects = borderRectGameObjects;
+      overlayObject.borderColor = borderColor;
       overlayObjects.Add(id, overlayObject);
       parentIdByChildId.Add(id, parentId);
       overlayObjects[parentId].childIds.Add(id);
 
+      Asserts.Assert(overlayObjects.ContainsKey(id));
       return id;
     }
 
@@ -264,9 +316,10 @@ namespace Domino {
         float height,
         int z,
         Color color,
+        Color borderColor,
         Color pressedColor,
         OnClicked onClicked) {
-      var rectangleId = AddRectangle(parentId, x, y, width, height, z, color);
+      var rectangleId = AddRectangle(parentId, x, y, width, height, z, color, borderColor);
       var overlayObject = overlayObjects[rectangleId];
 
       var button = overlayObject.gameObject.AddComponent<Button>();
@@ -285,15 +338,15 @@ namespace Domino {
       return rectangleId;
     }
 
-    public int AddBackground(Color color) {
-      return AddRectangle(0, 0, 0, symbolsWide, symbolsHigh, 1, color);
+    public int AddBackground(Color color, Color borderColor) {
+      return AddRectangle(0, 0, 0, symbolsWide, symbolsHigh, 1, color, borderColor);
     }
 
-    public int AddBackgroundAndBorder(Color backgroundColor, Color borderColor) {
-      int borderId = AddBackground(borderColor);
-      AddRectangle(borderId, .5f, .5f, symbolsWide - 1, symbolsHigh - 1, 1, backgroundColor);
-      return borderId;
-    }
+    //public int AddBackgroundAndBorder(Color backgroundColor, Color borderColor) {
+    //  int borderId = AddBackground(borderColor);
+    //  AddRectangle(borderId, .5f, .5f, symbolsWide - 1, symbolsHigh - 1, 1, backgroundColor);
+    //  return borderId;
+    //}
 
     public List<int> AddString(int parentId, float x, float y, int maxWide, Color color, OverlayFont font, string str) {
       var ids = new List<int>();
@@ -376,6 +429,15 @@ namespace Domino {
         image.color = fadedBackgroundColor;
       }
 
+      foreach (var borderRectGameObject in overlayObject.borderRectGameObjects) {
+        var borderImage = borderRectGameObject.GetComponent<Image>();
+        if (borderImage != null) {
+          var fadedBackgroundColor = overlayObject.borderColor;
+          fadedBackgroundColor.a *= ratio;
+          borderImage.color = fadedBackgroundColor;
+        }
+      }
+
       var button = overlayObjectGameObject.GetComponent<UnityEngine.UI.Button>();
       if (button != null) {
         var color = overlayObject.color;
@@ -397,14 +459,18 @@ namespace Domino {
       Asserts.Assert(id != 0);
       Asserts.Assert(parentIdByChildId.ContainsKey(id));
       Asserts.Assert(overlayObjects.ContainsKey(id));
+      var overlayObject = overlayObjects[id];
 
-      foreach (var childId in overlayObjects[id].childIds) {
+      foreach (var childId in overlayObject.childIds) {
         Remove(childId);
       }
 
       Asserts.Assert(overlayObjects[id].childIds.Count == 0);
 
-      Destroy(overlayObjects[id].gameObject);
+      Destroy(overlayObject.gameObject);
+      foreach (var borderRectGameObject in overlayObject.borderRectGameObjects) {
+        Destroy(borderRectGameObject);
+      }
       overlayObjects.Remove(id);
 
       int parentId = parentIdByChildId[id];
