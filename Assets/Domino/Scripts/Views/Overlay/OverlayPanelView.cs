@@ -72,19 +72,6 @@ namespace Domino {
     private long closeTimeAfterOpenMs;
     private OnClicked closeCallback;
 
-    //long fadeInEndMs;
-    //long fadeOutStartMs;
-    //long fadeOutEndMs;
-
-    //long textFadeInStartMs;
-    //long textFadeInEndMs;
-    //long textFadeOutStartMs;
-    //long textFadeOutEndMs;
-
-    //int horizontalAlignmentPercent;
-    //int verticalAlignmentPercent;
-    //int widthPercent;
-    //int heightPercent;
     int symbolsWide_;
     int symbolsHigh_;
 
@@ -93,6 +80,7 @@ namespace Domino {
 
     float symbolWidth;
     float symbolHeight;
+    float widthToHeightRatio;
 
     int nextId = 1000;
     private Dictionary<int, OverlayObject> overlayObjects;
@@ -108,12 +96,11 @@ namespace Domino {
         int widthPercent,
         int heightPercent,
         int symbolsWide,
-        int symbolsHigh) {
+        int symbolsHigh,
+        // eg .6667 for something thats tall and thin.
+        float widthToHeightRatio) {
       this.instantiator = instantiator;
-      //this.horizontalAlignmentPercent = horizontalAlignmentPercent;
-      //this.verticalAlignmentPercent = verticalAlignmentPercent;
-      //this.widthPercent = widthPercent;
-      //this.heightPercent = heightPercent;
+      this.widthToHeightRatio = widthToHeightRatio;
       this.symbolsWide_ = symbolsWide;
       this.symbolsHigh_ = symbolsHigh;
       parentIdByChildId = new Dictionary<int, int>();
@@ -147,8 +134,9 @@ namespace Domino {
       symbolWidth = panelWidth / symbolsWide;
       symbolHeight = panelHeight / symbolsHigh;
       // Enforce squareness.
-      symbolWidth = Mathf.Min(symbolWidth, symbolHeight);
-      symbolHeight = symbolWidth;
+      
+      symbolWidth = Mathf.Min(symbolWidth, symbolHeight * widthToHeightRatio);
+      symbolHeight = symbolWidth / widthToHeightRatio;
 
       panelWidth = symbolWidth * symbolsWide;
       panelHeight = symbolHeight * symbolsHigh;
@@ -204,7 +192,7 @@ namespace Domino {
       textView.raycastTarget = false;
       textView.font = instantiator.GetFont(font.font);
       textView.alignment = TextAnchor.MiddleCenter;
-      textView.fontSize = (int)(symbolHeight * size * font.fontSizeMultiplier);
+      textView.fontSize = (int)(symbolHeight * size * font.fontSizeMultiplier * widthToHeightRatio);
       textView.color = color;
       textView.resizeTextForBestFit = false;
       //textView.
@@ -236,6 +224,8 @@ namespace Domino {
       var unityWidth = width * symbolWidth;
       var unityHeight = height * symbolHeight;
 
+      float borderSize = symbolWidth / 4;
+
       GameObject[] borderRectGameObjects = new GameObject[0];
       if (borderColor.a > 0) {
         borderRectGameObjects = new GameObject[4];
@@ -245,25 +235,25 @@ namespace Domino {
           float borderWidth;
           float borderHeight;
           if (i == 0) {
-            borderX = unityX - symbolWidth / 4;
-            borderY = unityX - symbolHeight / 4;
-            borderWidth = symbolWidth / 4;
-            borderHeight = unityHeight + symbolHeight / 2;
+            borderX = unityX - borderSize;
+            borderY = unityX - borderSize;
+            borderWidth = borderSize;
+            borderHeight = unityHeight + borderSize * 2;
           } else if (i == 1) {
-            borderX = unityX - symbolWidth / 4;
-            borderY = unityX - symbolHeight / 4;
-            borderWidth = unityWidth + symbolWidth / 2;
-            borderHeight = symbolHeight / 4;
+            borderX = unityX - borderSize;
+            borderY = unityX - borderSize;
+            borderWidth = unityWidth + borderSize * 2;
+            borderHeight = borderSize;
           } else if (i == 2) {
             borderX = unityX + unityWidth;
-            borderY = unityX - symbolHeight / 4;
-            borderWidth = symbolWidth / 4;
-            borderHeight = unityHeight + symbolHeight / 2;
+            borderY = unityX - borderSize;
+            borderWidth = borderSize;
+            borderHeight = unityHeight + borderSize * 2;
           } else {
-            borderX = unityX - symbolWidth / 4;
+            borderX = unityX - borderSize;
             borderY = unityX + unityHeight;
-            borderWidth = unityWidth + symbolWidth / 2;
-            borderHeight = symbolHeight / 4;
+            borderWidth = unityWidth + borderSize * 2;
+            borderHeight = borderSize;
           }
 
           var borderRectGameObject = instantiator.CreateEmptyUiObject();

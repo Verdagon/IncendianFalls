@@ -47,7 +47,7 @@ namespace AthPlayer {
       // Will be unlocked by the buttons being clicked.
       inputSemaphore.Lock();
 
-      var font = new OverlayFont("cascadia", 1.75f);
+      var font = new OverlayFont("cascadia", 2f);
 
       var (textMaxWidth, textMaxHeight) = GetPageTextMaxWidthAndHeight(isPortrait, buttons);
       if (pageLines.Count > textMaxHeight) {
@@ -72,9 +72,9 @@ namespace AthPlayer {
 
       OverlayPanelView panelView;
       if (isPortrait) {
-        panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 100, 100, 50, panelWidth, panelHeight);
+        panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 100, 100, 50, panelWidth, panelHeight, .6667f);
       } else {
-        panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 80, 80, 50, panelWidth, panelHeight);
+        panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 80, 80, 50, panelWidth, panelHeight, .6667f);
       }
       int backgroundId =
         panelView.AddBackground(

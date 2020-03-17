@@ -62,7 +62,7 @@ namespace AthPlayer {
         bool isFirstPage,
         bool isLastPage,
         bool isPortrait) {
-      var font = new OverlayFont("cascadia", 1.75f);
+      var font = new OverlayFont("cascadia", 2f);
 
       var (textMaxWidth, textMaxHeight) = GetPageTextMaxWidthAndHeight(isPortrait, buttons);
       if (pageLines.Count > textMaxHeight) {
@@ -73,7 +73,7 @@ namespace AthPlayer {
 
       int widthPercent = isPortrait ? 94 : 44;
       OverlayPanelView panelView =
-        overlayPaneler.MakePanel(cinematicTimer, 3, 97, widthPercent, 44, panelWidth, panelHeight);
+        overlayPaneler.MakePanel(cinematicTimer, 3, 97, widthPercent, 44, panelWidth, panelHeight, .6667f);
       int backgroundId =
         panelView.AddBackground(
           new UnityEngine.Color(0, 0, 0, .9f),

@@ -198,7 +198,8 @@ namespace Domino {
         int widthPercent,
         int heightPercent,
         int symbolsWide,
-        int symbolsHigh) {
+        int symbolsHigh,
+        float widthToHeightRatio) {
       var obj = Instantiate(emptyUiObject);
       var spv = obj.AddComponent<OverlayPanelView>();
       spv.Init(
@@ -210,7 +211,8 @@ namespace Domino {
         widthPercent,
         heightPercent,
         symbolsWide,
-        symbolsHigh);
+        symbolsHigh,
+        widthToHeightRatio);
         //500, -500, -0, 500, 1000, -1000, -500);
       return spv;
     }

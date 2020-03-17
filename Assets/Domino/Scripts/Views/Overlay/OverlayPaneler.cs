@@ -13,17 +13,19 @@ namespace Domino {
         int widthPercent,
         int heightPercent,
         int symbolsWide,
-        int symbolsHigh) {
+        int symbolsHigh,
+        float widthToHeightRatio) {
       var spv =
         instantiator.CreateOverlayPanelView(
           gameObject,
-        cinematicTimer,
+          cinematicTimer,
           horizontalAlignmentPercent,
           verticalAlignmentPercent,
           widthPercent,
           heightPercent,
           symbolsWide,
-          symbolsHigh);
+          symbolsHigh,
+          widthToHeightRatio);
       return spv;
     }
 
