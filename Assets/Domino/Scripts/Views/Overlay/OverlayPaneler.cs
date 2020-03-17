@@ -6,7 +6,7 @@ namespace Domino {
   public class OverlayPaneler : MonoBehaviour {
     public Instantiator instantiator;
 
-    public NewOverlayPanelView MakePanel(
+    public OverlayPanelView MakePanel(
         IClock cinematicTimer,
         int horizontalAlignmentPercent,
         int verticalAlignmentPercent,

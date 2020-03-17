@@ -187,15 +187,16 @@ namespace Atharia.Model {
       if (triggerName == "levelStart") {
         var hopTo = superstate.levelSuperstate.FindMarkerLocation("playerHopTo");
         Actions.Step(game, superstate, game.player, hopTo, true, false);
-        game.AddEvent(new WaitEvent(1000, "playerEntryHopDone").AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 1000, "playerEntryHopDone").AsIGameEvent());
       }
       if (triggerName == "playerEntryHopDone") {
         game.AddEvent(
           new ShowOverlayEvent(
             "Uh oh...",
-            "normal",
-            new ButtonImmList(new List<Button>() { new Button("...", "uhOhDone") }))
+            "aside",
+            new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 2000, "uhOhDone").AsIGameEvent());
       }
       if (triggerName == "uhOhDone") {
         game.AddEvent(
@@ -208,7 +209,7 @@ namespace Atharia.Model {
       }
       if (triggerName == "cameraReachedPanTo") {
         game.AddEvent(
-          new WaitEvent(1000, "cameraWaitDone").AsIGameEvent());
+          new WaitEvent(true, 1000, "cameraWaitDone").AsIGameEvent());
       }
       if (triggerName == "cameraWaitDone") {
         game.AddEvent(
@@ -224,10 +225,10 @@ namespace Atharia.Model {
 
         game.AddEvent(
           new ShowOverlayEvent(
-            "It's a nest of some sort!\n\nTime for some chronomancy!",
-            "normal",
+            "It's a nest of some sort! Time for some chronomancy!",
+            "aside",
 
-            new ButtonImmList(new List<Button>() { new Button("Go!", "") }))
+            new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
       }
 

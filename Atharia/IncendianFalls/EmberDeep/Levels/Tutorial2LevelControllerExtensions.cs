@@ -82,8 +82,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Ambush Challenge",
             "aside",
-            new ButtonImmList(new List<Button>() { new Button("", "showHint") }))
+            new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
+        game.AddEvent(
+          new WaitEvent(true, 1000, "showHint").AsIGameEvent());
       }
       if (triggerName == "showHint") {
         game.AddEvent(

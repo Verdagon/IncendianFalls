@@ -17,7 +17,7 @@ namespace Domino {
     }
   }
 
-  public class NewOverlayPanelView : MonoBehaviour {
+  public class OverlayPanelView : MonoBehaviour {
     private class OverlayObject {
       public readonly int id;
       public readonly GameObject gameObject;
@@ -67,7 +67,7 @@ namespace Domino {
     IClock cinematicTimer;
 
     private long openTimeMs;
-    private long closeTimeMs;
+    private long closeTimeAfterOpenMs;
     private OnClicked closeCallback;
 
     //long fadeInEndMs;
@@ -121,7 +121,7 @@ namespace Domino {
 
       this.cinematicTimer = cinematicTimer;
       this.openTimeMs = cinematicTimer.GetTimeMs();
-      this.closeTimeMs = -1;
+      this.closeTimeAfterOpenMs = -1;
 
       //this.fadeInEndMs = fadeInEndMs;
       //this.fadeOutStartMs = fadeOutStartMs;
@@ -232,7 +232,6 @@ namespace Domino {
       var unityY = y * symbolHeight;
       var unityWidth = width * symbolWidth;
       var unityHeight = height * symbolHeight;
-      Debug.LogError("width " + height + " symwid " + symbolHeight + " unitywid " + unityHeight);
 
       var rectGameObject = instantiator.CreateEmptyUiObject();
       rectGameObject.transform.parent = gameObject.transform;
@@ -310,8 +309,8 @@ namespace Domino {
         UpdateOpacity(overlayObjects[id]);
 
       var timeSinceOpenMs = cinematicTimer.GetTimeMs() - openTimeMs;
-      if (closeTimeMs >= 0 && timeSinceOpenMs >= closeTimeMs) {
-        closeTimeMs = 0;
+      if (closeTimeAfterOpenMs > 0 && timeSinceOpenMs >= closeTimeAfterOpenMs) {
+        closeTimeAfterOpenMs = 0;
         closeCallback();
         closeCallback = null;
         Destroy(gameObject);
@@ -335,12 +334,12 @@ namespace Domino {
         }
       }
 
-      if (closeTimeMs >= 0) {
+      if (closeTimeAfterOpenMs > 0) {
         if (overlayObject.fadeOut != null) {
           var fadeOut = overlayObject.fadeOut;
           // Remember, fadeOut.fadeOutStart/EndTimeS are negative.
-          var fadeOutStartTimeMs = closeTimeMs + fadeOut.fadeOutStartTimeMs;
-          var fadeOutEndTimeMs = closeTimeMs + fadeOut.fadeOutEndTimeMs;
+          var fadeOutStartTimeMs = closeTimeAfterOpenMs + fadeOut.fadeOutStartTimeMs;
+          var fadeOutEndTimeMs = closeTimeAfterOpenMs + fadeOut.fadeOutEndTimeMs;
 
           if (timeSinceOpenMs < fadeOutStartTimeMs) {
             // Do nothing, they should already be opaque.
@@ -422,7 +421,7 @@ namespace Domino {
     //  gameObject.SetActive(false);
     //}
 
-    public void ScheduleClose(OnClicked onClose) {
+    public void ScheduleClose(long startMsFromNow, OnClicked onClose) {
       long earliestFadeOutBeginMs = 0;
       foreach (var fadingObjectId in fadingObjectIds) {
         var overlayObject = overlayObjects[fadingObjectId];
@@ -432,7 +431,9 @@ namespace Domino {
       }
       Asserts.Assert(earliestFadeOutBeginMs <= 0);
       long delayUntilCloseMs = -earliestFadeOutBeginMs;
-      closeTimeMs = cinematicTimer.GetTimeMs() + delayUntilCloseMs;
+      var nowMs = cinematicTimer.GetTimeMs();
+      var timeSinceOpenMs = nowMs - openTimeMs;
+      closeTimeAfterOpenMs = timeSinceOpenMs + startMsFromNow + delayUntilCloseMs;
       closeCallback = onClose;
     }
   }

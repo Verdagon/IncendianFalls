@@ -74,10 +74,8 @@ namespace Atharia.Model {
       if (triggerName == "showTitle") {
         game.AddEvent(
           new ShowOverlayEvent(
-
             "Introduction",
-
-            "normal",
+            "aside",
             new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
       }
@@ -242,7 +240,7 @@ namespace Atharia.Model {
           superstate.levelSuperstate.FindMarkerLocation("ambush1Summon"),
           game.player.nextActionTime + 300,
           Irkling.Make(game.root));
-        game.AddEvent(new WaitEvent(400, "ambush1b").AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 400, "ambush1b").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush2Trigger") {
@@ -252,7 +250,7 @@ namespace Atharia.Model {
           superstate.levelSuperstate.FindMarkerLocation("ambush2Summon"),
           game.player.nextActionTime + 300,
           Baug.Make(game.root));
-        game.AddEvent(new WaitEvent(400, "ambush2b").AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 400, "ambush2b").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush3Trigger") {
@@ -262,7 +260,7 @@ namespace Atharia.Model {
           superstate.levelSuperstate.FindMarkerLocation("ambush3Summon"),
           game.player.nextActionTime + 300,
           Spirient.Make(game.root));
-        game.AddEvent(new WaitEvent(400, "ambush3b").AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 400, "ambush3b").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "defyHint") {
@@ -279,7 +277,7 @@ namespace Atharia.Model {
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "healthPotion") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("healthPotion", 1);
-        game.AddEvent(new WaitEvent(400, "healthPotionB").AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 400, "healthPotionB").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush4Trigger") {
@@ -290,19 +288,19 @@ namespace Atharia.Model {
           game.player.nextActionTime + 300,
           RavagianTrask.Make(game.root));
 
-        game.AddEvent(new WaitEvent(400, "ambush4b").AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 400, "ambush4b").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggerName == "ambush4DefySpot" &&
           triggeringUnit.NullableIs(game.player)) {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefySpot", 1);
-        game.AddEvent(new WaitEvent(400, "ambush4e").AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 400, "ambush4e").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggerName == "ambush4DefySpot" &&
           triggeringUnit.components.GetAllTimeCloneAICapabilityUC().Count > 0) {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefySpot", 1);
-        game.AddEvent(new WaitEvent(600, "ambush4f").AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 600, "ambush4f").AsIGameEvent());
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "multipleHint") {

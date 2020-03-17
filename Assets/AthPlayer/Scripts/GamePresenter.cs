@@ -10,6 +10,8 @@ namespace AthPlayer {
   public delegate void OnLocationClicked(Location location);
 
   public class GamePresenter : IGameEffectVisitor, IGameEffectObserver, IUnitMutSetEffectVisitor, IUnitMutSetEffectObserver, IGameEventVisitor, IIGameEventMutListEffectVisitor, IIGameEventMutListEffectObserver {
+    public delegate OverlayPresenter OverlayPresenterFactory(ShowOverlayEvent overlay);
+
     public OnLocationHovered LocationHovered;
     public OnLocationClicked LocationClicked;
 
@@ -27,7 +29,7 @@ namespace AthPlayer {
     FollowingCameraController cameraController;
 
     TerrainPresenter terrainPresenter;
-    OldOverlayPresenter overlayPresenter;
+    OverlayPresenterFactory overlayPresenterFactory;
 
     Dictionary<int, UnitPresenter> unitPresenters;
 
@@ -42,7 +44,7 @@ namespace AthPlayer {
         Game game,
         Instantiator instantiator,
         NarrationPanelView narrator,
-        OldOverlayPresenter overlayPresenter,
+        OverlayPresenterFactory overlayPresenterFactory,
         FollowingCameraController cameraController) {
       this.timer = timer;
       this.cinematicTimer = cinematicTimer;
@@ -54,7 +56,7 @@ namespace AthPlayer {
       this.narrator = narrator;
       this.instantiator = instantiator;
       this.cameraController = cameraController;
-      this.overlayPresenter = overlayPresenter;
+      this.overlayPresenterFactory = overlayPresenterFactory;
       this.thinkingIndicator = thinkingIndicator;
 
       game.AddObserver(this);
@@ -186,7 +188,8 @@ namespace AthPlayer {
       cinematicTimer.ScheduleTimer(obj.obj.transitionTimeMs, () => ss.RequestTrigger(game.id, obj.obj.endTriggerName));
     }
     public void Visit(ShowOverlayEventAsIGameEvent obj) {
-      overlayPresenter.ShowOverlay(obj.obj);
+      var overlayPresenter = overlayPresenterFactory(obj.obj);
+      // do nothing, itll kill itself.
     }
 
     public void Visit(SetGameSpeedEventAsIGameEvent obj) {

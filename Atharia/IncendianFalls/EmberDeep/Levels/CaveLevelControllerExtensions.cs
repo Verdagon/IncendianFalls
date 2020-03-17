@@ -208,14 +208,14 @@ namespace Atharia.Model {
         if (hopToPossibilities.Count > 0) {
           Actions.Step(game, superstate, game.player, hopToPossibilities[0], true, false);
         }
-        game.AddEvent(new WaitEvent(1000, "playerEntryHopDone").AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 1000, "playerEntryHopDone").AsIGameEvent());
       }
       if (triggerName == "playerEntryHopDone") {
         game.AddEvent(
           new ShowOverlayEvent(
             "I've made it to Ember Deep! Forward!",
-            "normal",
-            new ButtonImmList(new List<Button>() { new Button("...", "objectiveMusingDone") }))
+            "aside",
+            new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
       }
       return new Atharia.Model.Void();

@@ -190,7 +190,7 @@ namespace Domino {
       return Instantiate(squarePrefab);
     }
 
-    public NewOverlayPanelView CreateOverlayPanelView(
+    public OverlayPanelView CreateOverlayPanelView(
         GameObject parent,
         IClock cinematicTimer,
         int horizontalAlignmentPercent,
@@ -200,7 +200,7 @@ namespace Domino {
         int symbolsWide,
         int symbolsHigh) {
       var obj = Instantiate(emptyUiObject);
-      var spv = obj.AddComponent<NewOverlayPanelView>();
+      var spv = obj.AddComponent<OverlayPanelView>();
       spv.Init(
         this,
         cinematicTimer,

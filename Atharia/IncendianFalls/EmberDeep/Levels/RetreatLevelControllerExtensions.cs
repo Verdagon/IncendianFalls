@@ -87,8 +87,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Retreat Challenge",
             "aside",
-            new ButtonImmList(new List<Button>() { new Button("", "startTalking") }))
+            new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
+        game.AddEvent(
+          new WaitEvent(true, 2000, "startTalking").AsIGameEvent());
       }
 
       if (triggerName == "startTalking") {
@@ -111,7 +113,7 @@ namespace Atharia.Model {
       }
       if (triggerName == "cameraReachedPanTo") {
         game.AddEvent(
-          new WaitEvent(500, "cameraWaitDone").AsIGameEvent());
+          new WaitEvent(true, 500, "cameraWaitDone").AsIGameEvent());
       }
       if (triggerName == "cameraWaitDone") {
         game.AddEvent(

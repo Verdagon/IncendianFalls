@@ -10,6 +10,8 @@ namespace Domino {
       IGameEffectObserver, IGameEffectVisitor,
     ISorcerousUCEffectObserver, ISorcerousUCEffectVisitor,
       IModeDelegate {
+    public delegate OverlayPresenter OverlayPresenterFactory(ShowOverlayEvent overlay);
+
     ISuperstructure ss;
     Superstate superstate;
     Game game;
@@ -20,7 +22,7 @@ namespace Domino {
     PlayerPanelView playerPanelView;
     NarrationPanelView narrator;
     LookPanelView lookPanelView;
-    OldOverlayPresenter overlayPresenter;
+    OverlayPresenterFactory overlayPresenterFactory;
     Looker looker;
     IMode mode;
     Unit player;
@@ -36,7 +38,7 @@ namespace Domino {
         PlayerPanelView playerPanelView,
         NarrationPanelView messageView,
         LookPanelView lookPanelView,
-        OldOverlayPresenter overlayPresenter) {
+        OverlayPresenterFactory overlayPresenterFactory) {
       this.ss = ss;
       this.superstate = superstate;
       this.game = game;
@@ -47,7 +49,7 @@ namespace Domino {
       this.playerPanelView = playerPanelView;
       this.narrator = messageView;
       this.lookPanelView = lookPanelView;
-      this.overlayPresenter = overlayPresenter;
+      this.overlayPresenterFactory = overlayPresenterFactory;
 
       this.game.AddObserver(this);
 
@@ -208,11 +210,12 @@ namespace Domino {
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) {}
     public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) {
       if (effect.newValue == false) {
-        overlayPresenter.ShowOverlay(
+        var overlayPresenter = overlayPresenterFactory(
           new ShowOverlayEvent(
             "You have died!",
             "normal",
             new ButtonImmList(new List<Button>() { new Button("Alas...", "_exitGame") })));
+        // Do nothing with it, itll kill itself.
       }
     }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }

@@ -9,6 +9,31 @@ using IncendianFalls;
 using UnityEngine.SceneManagement;
 
 namespace AthPlayer {
+  public class InputSemaphore {
+    public delegate void Locked();
+    public event Locked OnLocked;
+    public delegate void Unlocked();
+    public event Unlocked OnUnlocked;
+
+    private int count = 0;
+
+    public bool locked { get { return count > 0; } }
+
+    public void Lock() {
+      if (count == 0) {
+        OnLocked?.Invoke();
+      }
+      count++;
+    }
+    public void Unlock() {
+      Asserts.Assert(count > 0);
+      count--;
+      if (count == 0) {
+        OnUnlocked?.Invoke();
+      }
+    }
+  }
+
   public class RootPresenter : MonoBehaviour {
     public static int sceneInitParamStartLevel = 0;
 
@@ -24,18 +49,18 @@ namespace AthPlayer {
     public GameObject stalledIndicator;
     public GameObject thinkingIndicator;
 
-    OldOverlayPresenter overlayPresenter;
     GamePresenter gamePresenter;
     PlayerController playerController;
+    Game game;
     FollowingCameraController cameraController;
+
+    InputSemaphore inputSemaphore;
 
     public LookPanelView lookPanelView;
 
     public PlayerPanelView playerPanelView;
 
     public NarrationPanelView messageView;
-
-    public OldOverlayPanelView overlayPanelView;
 
     public SoundPlayer soundPlayer;
 
@@ -44,6 +69,10 @@ namespace AthPlayer {
     public void Start() {
       timer = new SlowableTimerClock(1f);
       cinematicTimer = new SlowableTimerClock(1f);
+
+      inputSemaphore = new InputSemaphore();
+      inputSemaphore.OnLocked += () => timer.SetTimeSpeedMultiplier(0f);
+      inputSemaphore.OnUnlocked += () => timer.SetTimeSpeedMultiplier(1f);
 
       resumeStaller = new ExecutionStaller(timer, timer);
       turnStaller = new ExecutionStaller(timer, timer);
@@ -66,20 +95,25 @@ namespace AthPlayer {
       //Debug.LogWarning("Hardcoding random seed!");
       //var randomSeed = 1525224206;
       //var game = ss.RequestSetupIncendianFallsGame(randomSeed, false);
-      var game = ss.RequestSetupEmberDeepGame(randomSeed, sceneInitParamStartLevel, false);
+      game = ss.RequestSetupEmberDeepGame(randomSeed, sceneInitParamStartLevel, false);
       //var game = ss.RequestSetupGauntletGame(randomSeed, false);
 
       cameraController = new FollowingCameraController(cinematicTimer, cinematicTimer, cameraObject, game);
 
-      overlayPresenter = new OldOverlayPresenter(timer, cinematicTimer, ss, game, overlayPaneler, overlayPanelView);
-      overlayPresenter.Exit += () => {
-        replayLogger.Dispose();
-        SceneManager.LoadScene("MainMenu");
-      };
-
       gamePresenter =
           new GamePresenter(
-              timer, cinematicTimer, soundPlayer, resumeStaller, turnStaller, thinkingIndicator, ss, game, instantiator, messageView, overlayPresenter, cameraController);
+              timer,
+              cinematicTimer,
+              soundPlayer,
+              resumeStaller,
+              turnStaller,
+              thinkingIndicator,
+              ss,
+              game,
+              instantiator,
+              messageView,
+              NewOverlayPresenter,
+              cameraController);
 
       playerController =
           new PlayerController(
@@ -93,11 +127,32 @@ namespace AthPlayer {
               playerPanelView,
               messageView,
               lookPanelView.GetComponent<LookPanelView>(),
-              overlayPresenter);
+              NewOverlayPresenter);
       playerController.Start();
+    }
 
-      overlayPresenter.ShowTopOverlayWithButtons(
-        "A long time ago, before the phoenix flew the skies, before the volcanoes roamed the coasts, and before the sylvans raised their towers, there was only the Chronicler.\n\nAges passed, mountains rose, and the first trees and animals woke for the first time. The Chronicler recorded it all.");
+    private OverlayPresenter NewOverlayPresenter(ShowOverlayEvent overlay) {
+      var buttons = new List<OverlayPresenter.PageButton>();
+      foreach (var button in overlay.buttons) {
+        buttons.Add(
+          new OverlayPresenter.PageButton(
+            button.label,
+            () => {
+              if (button.triggerName == "_exitGame") {
+                replayLogger.Dispose();
+                SceneManager.LoadScene("MainMenu");
+              } else {
+                ss.RequestTrigger(game.id, button.triggerName);
+              }
+            }));
+      }
+      return new OverlayPresenter(
+        cinematicTimer,
+        overlayPaneler,
+        inputSemaphore,
+        overlay.template,
+        overlay.text,
+        buttons);
     }
 
     public void Update() {
@@ -105,68 +160,153 @@ namespace AthPlayer {
       cinematicTimer.Update();
 
       if (Input.GetKeyUp(KeyCode.A)) {
-        TimeAnchorMoveClicked();
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          TimeAnchorMoveClicked();
+
+        }
       }
       if (Input.GetKeyUp(KeyCode.R)) {
-        TimeShiftClicked();
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          TimeShiftClicked();
+        }
       }
       if (Input.GetKeyUp(KeyCode.E)) {
-        InteractClicked();
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          InteractClicked();
+        }
       }
       if (Input.GetKeyUp(KeyCode.D)) {
-        DefyClicked();
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          DefyClicked();
+        }
       }
       if (Input.GetKeyUp(KeyCode.C)) {
-        CounterClicked();
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          CounterClicked();
+        }
       }
       if (Input.GetKeyUp(KeyCode.F)) {
-        FireBombClicked();
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          FireBombClicked();
+        }
       }
       if (Input.GetKeyUp(KeyCode.B)) {
-        FireBombClicked();
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          FireBombClicked();
+        }
       }
       if (Input.GetKeyUp(KeyCode.S)) {
-        MireClicked();
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          MireClicked();
+        }
       }
       if (Input.GetKeyUp(KeyCode.Escape)) {
-        CancelClicked();
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          CancelClicked();
+        }
       }
       if (Input.GetKeyUp(KeyCode.Slash)) {
-        playerController.ActivateCheat("warptoend");
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          playerController.ActivateCheat("warptoend");
+        }
       }
       if (Input.GetKeyUp(KeyCode.Equals)) {
-        playerController.ActivateCheat("poweroverwhelming");
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          playerController.ActivateCheat("poweroverwhelming");
+        }
       }
       if (Input.GetKeyUp(KeyCode.Alpha8)) {
-        playerController.ActivateCheat("gimmeblastrod");
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          playerController.ActivateCheat("gimmeblastrod");
+        }
       }
       if (Input.GetKeyUp(KeyCode.Alpha6)) {
-        playerController.ActivateCheat("gimmeslowrod");
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          playerController.ActivateCheat("gimmeslowrod");
+        }
       }
       if (Input.GetKeyUp(KeyCode.Alpha7)) {
-        playerController.ActivateCheat("gimmearmor");
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          playerController.ActivateCheat("gimmearmor");
+        }
       }
       if (Input.GetKeyUp(KeyCode.Alpha9)) {
-        playerController.ActivateCheat("gimmesword");
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          playerController.ActivateCheat("gimmesword");
+        }
       }
 
       if (Input.GetKey(KeyCode.RightArrow)) {
-        cameraController.MoveRight(Time.deltaTime);
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          cameraController.MoveRight(Time.deltaTime);
+        }
       }
       if (Input.GetKey(KeyCode.LeftArrow)) {
-        cameraController.MoveLeft(Time.deltaTime);
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          cameraController.MoveLeft(Time.deltaTime);
+        }
       }
       if (Input.GetKey(KeyCode.UpArrow)) {
-        cameraController.MoveUp(Time.deltaTime);
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          cameraController.MoveUp(Time.deltaTime);
+        }
       }
       if (Input.GetKey(KeyCode.DownArrow)) {
-        cameraController.MoveDown(Time.deltaTime);
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          cameraController.MoveDown(Time.deltaTime);
+        }
       }
       if (Input.GetKey(KeyCode.RightBracket)) {
-        cameraController.MoveIn(Time.deltaTime);
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          cameraController.MoveIn(Time.deltaTime);
+        }
       }
       if (Input.GetKey(KeyCode.LeftBracket)) {
-        cameraController.MoveOut(Time.deltaTime);
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          cameraController.MoveOut(Time.deltaTime);
+        }
       }
 
       UnityEngine.Ray ray = cameraObject.GetComponentInChildren<Camera>().ScreenPointToRay(Input.mousePosition);
@@ -189,7 +329,11 @@ namespace AthPlayer {
       playerController.LookAt(unit, tile);
 
       if (hoveredLocation != null && Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) {
-        playerController.OnTileMouseClick(hoveredLocation);
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          playerController.OnTileMouseClick(hoveredLocation);
+        }
       }
     }
 

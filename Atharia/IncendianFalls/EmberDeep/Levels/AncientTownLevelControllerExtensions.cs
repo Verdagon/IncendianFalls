@@ -85,7 +85,7 @@ namespace Atharia.Model {
       game.root.logger.Info("Got simple trigger: " + triggerName);
 
       if (triggerName == "levelStart") {
-        game.AddEvent(new WaitEvent(1500, "startCamera").AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 1500, "startCamera").AsIGameEvent());
       }
       if (triggerName == "startCamera") {
         game.AddEvent(
@@ -98,7 +98,7 @@ namespace Atharia.Model {
       }
       if (triggerName == "cameraReachedPanTo") {
         game.AddEvent(
-          new WaitEvent(1000, "cameraWaitDone").AsIGameEvent());
+          new WaitEvent(true, 1000, "cameraWaitDone").AsIGameEvent());
       }
       if (triggerName == "cameraWaitDone") {
         game.AddEvent(
@@ -116,7 +116,7 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Some sort of ancient abandoned town...?",
             "aside",
-            new ButtonImmList(new List<Button>() { new Button("", "") }))
+            new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
       }
 

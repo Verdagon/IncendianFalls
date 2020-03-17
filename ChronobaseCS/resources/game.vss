@@ -107,6 +107,7 @@ imm struct FlyCameraEvent {
 imm struct WaitEvent {
   WaitEvent isa IGameEvent;
 
+  lockInput: Bool;
   timeMs: Int; // Time until it calls the trigger again
   endTriggerName: Str;
 }
