@@ -72,8 +72,9 @@ namespace AthPlayer {
       int panelHeight = pageLines.Count + panelTopPadding + panelBottomPadding;
 
       int widthPercent = isPortrait ? 94 : 44;
+      int horizontalAlignmentPercent = isPortrait ? 50 : 3;
       OverlayPanelView panelView =
-        overlayPaneler.MakePanel(cinematicTimer, 3, 97, widthPercent, 44, panelWidth, panelHeight, .6667f);
+        overlayPaneler.MakePanel(cinematicTimer, horizontalAlignmentPercent, 97, widthPercent, 44, panelWidth, panelHeight, .6667f);
       int backgroundId =
         panelView.AddBackground(
           new UnityEngine.Color(0, 0, 0, .9f),
