@@ -69,8 +69,9 @@ namespace Domino {
     IClock cinematicTimer;
 
     private long openTimeMs;
-    private long closeTimeAfterOpenMs;
-    private OnClicked closeCallback;
+    private long startFadeOutTimeAfterOpenMs;
+    private OnClicked startFadeOutCallback;
+    private OnClicked finishFadeOutCallback;
 
     int symbolsWide_;
     int symbolsHigh_;
@@ -110,7 +111,7 @@ namespace Domino {
 
       this.cinematicTimer = cinematicTimer;
       this.openTimeMs = cinematicTimer.GetTimeMs();
-      this.closeTimeAfterOpenMs = -1;
+      this.startFadeOutTimeAfterOpenMs = -1;
 
       //this.fadeInEndMs = fadeInEndMs;
       //this.fadeOutStartMs = fadeOutStartMs;
@@ -223,6 +224,18 @@ namespace Domino {
       var unityY = y * symbolHeight;
       var unityWidth = width * symbolWidth;
       var unityHeight = height * symbolHeight;
+      return AddRectangleUnityCoords(parentId, unityX, unityY, unityWidth, unityHeight, z, color, borderColor);
+    }
+
+    public int AddRectangleUnityCoords(
+        int parentId,
+        float unityX,
+        float unityY,
+        float unityWidth,
+        float unityHeight,
+        int z,
+        Color color,
+        Color borderColor) { 
 
       float borderSize = symbolWidth / 4;
 
@@ -236,22 +249,22 @@ namespace Domino {
           float borderHeight;
           if (i == 0) {
             borderX = unityX - borderSize;
-            borderY = unityX - borderSize;
+            borderY = unityY - borderSize;
             borderWidth = borderSize;
             borderHeight = unityHeight + borderSize * 2;
           } else if (i == 1) {
             borderX = unityX - borderSize;
-            borderY = unityX - borderSize;
+            borderY = unityY - borderSize;
             borderWidth = unityWidth + borderSize * 2;
             borderHeight = borderSize;
           } else if (i == 2) {
             borderX = unityX + unityWidth;
-            borderY = unityX - borderSize;
+            borderY = unityY - borderSize;
             borderWidth = borderSize;
             borderHeight = unityHeight + borderSize * 2;
           } else {
             borderX = unityX - borderSize;
-            borderY = unityX + unityHeight;
+            borderY = unityY + unityHeight;
             borderWidth = unityWidth + borderSize * 2;
             borderHeight = borderSize;
           }
@@ -298,6 +311,25 @@ namespace Domino {
       return id;
     }
 
+    public int AddFullscreenRect(Color color) {
+      var parent = gameObject.transform.parent.gameObject;
+      var parentRectTransform = parent.GetComponent<RectTransform>();
+      var parentWidth = parentRectTransform.rect.width;
+      var parentHeight = parentRectTransform.rect.height;
+
+      var panelRectTransform = gameObject.GetComponent<RectTransform>();
+
+      return AddRectangleUnityCoords(
+        0,
+        -panelRectTransform.anchoredPosition.x,
+        -panelRectTransform.anchoredPosition.y,
+        parentWidth,
+        parentHeight,
+        1,
+        color,
+        new Color(0, 0, 0, 0));
+    }
+
     public int AddButton(
         int parentId,
         float x,
@@ -321,7 +353,9 @@ namespace Domino {
       colors.selectedColor = color;
       colors.disabledColor = color;
       button.colors = colors;
-      button.onClick.AddListener(() => onClicked());
+      button.onClick.AddListener(() => {
+        onClicked();
+      });
 
       overlayObject.buttonPressedColor = pressedColor;
 
@@ -352,11 +386,25 @@ namespace Domino {
         UpdateOpacity(overlayObjects[id]);
 
       var timeSinceOpenMs = cinematicTimer.GetTimeMs() - openTimeMs;
-      if (closeTimeAfterOpenMs > 0 && timeSinceOpenMs >= closeTimeAfterOpenMs) {
-        closeTimeAfterOpenMs = 0;
-        closeCallback();
-        closeCallback = null;
-        Destroy(gameObject);
+      if (startFadeOutTimeAfterOpenMs > 0 && timeSinceOpenMs >= startFadeOutTimeAfterOpenMs) {
+        startFadeOutTimeAfterOpenMs = 0;
+
+        // If we're closing, and we have a startFadeOutCallback, call it.
+        if (startFadeOutCallback != null) {
+          var cb = startFadeOutCallback;
+          startFadeOutCallback = null;
+          cb();
+        }
+
+        if (fadingObjectIds.Count == 0) {
+          if (finishFadeOutCallback != null) {
+            var cb = finishFadeOutCallback;
+            finishFadeOutCallback = null;
+            cb();
+          }
+
+          Destroy(gameObject);
+        }
       }
     }
 
@@ -377,12 +425,12 @@ namespace Domino {
         }
       }
 
-      if (closeTimeAfterOpenMs > 0) {
+      if (startFadeOutTimeAfterOpenMs > 0) {
         if (overlayObject.fadeOut != null) {
           var fadeOut = overlayObject.fadeOut;
           // Remember, fadeOut.fadeOutStart/EndTimeS are negative.
-          var fadeOutStartTimeMs = closeTimeAfterOpenMs + fadeOut.fadeOutStartTimeMs;
-          var fadeOutEndTimeMs = closeTimeAfterOpenMs + fadeOut.fadeOutEndTimeMs;
+          var fadeOutStartTimeMs = startFadeOutTimeAfterOpenMs + fadeOut.fadeOutStartTimeMs;
+          var fadeOutEndTimeMs = startFadeOutTimeAfterOpenMs + fadeOut.fadeOutEndTimeMs;
 
           if (timeSinceOpenMs < fadeOutStartTimeMs) {
             // Do nothing, they should already be opaque.
@@ -477,20 +525,18 @@ namespace Domino {
     //  gameObject.SetActive(false);
     //}
 
-    public void ScheduleClose(long startMsFromNow, OnClicked onClose) {
-      long earliestFadeOutBeginMs = 0;
-      foreach (var fadingObjectId in fadingObjectIds) {
-        var overlayObject = overlayObjects[fadingObjectId];
-        if (overlayObject.fadeOut != null) {
-          earliestFadeOutBeginMs = Math.Min(earliestFadeOutBeginMs, overlayObject.fadeOut.fadeOutStartTimeMs);
-        }
-      }
-      Asserts.Assert(earliestFadeOutBeginMs <= 0);
-      long delayUntilCloseMs = -earliestFadeOutBeginMs;
+    public void SetOnStartHideCallback(OnClicked startFadeOutCallback) {
+      this.startFadeOutCallback = startFadeOutCallback;
+    }
+
+    public void SetOnFinishHideCallback(OnClicked finishFadeOutCallback) {
+      this.finishFadeOutCallback = finishFadeOutCallback;
+    }
+
+    public void ScheduleClose(long startMsFromNow) {
       var nowMs = cinematicTimer.GetTimeMs();
       var timeSinceOpenMs = nowMs - openTimeMs;
-      closeTimeAfterOpenMs = timeSinceOpenMs + startMsFromNow + delayUntilCloseMs;
-      closeCallback = onClose;
+      startFadeOutTimeAfterOpenMs = timeSinceOpenMs + startMsFromNow;
     }
   }
 }

@@ -70,6 +70,10 @@ namespace Atharia.Model {
             "My brother was an explorer.\n\nOne of the only people to explore Ember Deep and survive, thanks to his mastery of chronomancy.",
 
             "dramatic",
+            "kylin",
+          true,
+          false,
+          false,
 
             new ButtonImmList(new List<Button>() { new Button("...", "introLine1Done") }))
           .AsIGameEvent());
@@ -79,6 +83,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "\"Ember Deep is a dangerous place, ravaged by time magic since millenia ago.\n\nPeople fear it, and call it evil. I don't think it is.\n\nPast the danger, there are wonders to discover down there, answers to the deeper mysteries of our realm.\"",
             "dramatic",
+            "kylinBrother",
+          false,
+          false,
+          false,
             new ButtonImmList(new List<Button>() { new Button("...", "introLine2Done") }))
           .AsIGameEvent());
       }
@@ -87,6 +95,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Seven years ago, when the terrible Ravashrike attacked our town, he stood against it.",
             "dramatic",
+          "kylin",
+          false,
+          true,
+          false,
             new ButtonImmList(new List<Button>() { new Button("...", "introLine3Done") }))
           .AsIGameEvent());
       }
@@ -151,6 +163,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "\"I can't fight it! Time to do something desperate...\"",
             "normal",
+            "kylinBrother",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() { new Button("...", "realizationDone") }))
           .AsIGameEvent());
       }
@@ -160,6 +176,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "He used a black incendium staff to cast an Eternal Stasis on the Ravashrike...\n\nBut he caught himself in it too.",
             "dramatic",
+            "kylin",
+          true,
+          false,
+          false,
             new ButtonImmList(new List<Button>() { new Button("...", "cinematicFadeOut") }))
           .AsIGameEvent());
       }
@@ -168,6 +188,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Now, my journey begins.",
             "dramatic",
+            "kylin",
+          false,
+          false,
+          true,
             new ButtonImmList(new List<Button>() { new Button("...", "cinematicDone") }))
           .AsIGameEvent());
       }

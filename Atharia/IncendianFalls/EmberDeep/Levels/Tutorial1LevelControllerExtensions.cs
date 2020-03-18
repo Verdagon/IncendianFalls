@@ -64,18 +64,26 @@ namespace Atharia.Model {
           item.Destruct();
         }
 
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "",
-            "dramatic",
-            new ButtonImmList(new List<Button>() { new Button("", "showTitle") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "showTitle") {
+      //  game.AddEvent(
+      //    new ShowOverlayEvent(
+      //      "",
+      //      "dramatic",
+      //      "narrator",
+      //    false,
+      //    true,
+      //    false,
+      //      new ButtonImmList(new List<Button>() { new Button("", "showTitle") }))
+      //    .AsIGameEvent());
+      //}
+      //if (triggerName == "showTitle") {
         game.AddEvent(
           new ShowOverlayEvent(
             "Introduction",
             "aside",
+            "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
       }
@@ -87,6 +95,10 @@ namespace Atharia.Model {
             "You see an Irkling!\n\nTo attack, click on it while next to it.",
 
             "normal",
+            "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() {
               new Button("Forward to glory!", "")
             }))
@@ -100,6 +112,10 @@ namespace Atharia.Model {
             "You see a Baug!\n\nBaugs have a lot of life points. You'll need to hit it several times.",
 
             "normal",
+            "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() {
               new Button("Forward to battle!", "")
             }))
@@ -114,7 +130,11 @@ namespace Atharia.Model {
             "You see a Spiriant!\n\nSpiriants are incredibly dangerous.\n\nHowever, they die with one hit.\n\nUse Defy ('D') to wait for it to come to you.",
 
             "normal",
+            "narrator",
+          true,
+          true,
 
+          false,
             new ButtonImmList(new List<Button>() {
               new Button("For valor!", "")
             }))
@@ -128,6 +148,10 @@ namespace Atharia.Model {
             "You've found a health potion!\n\nYou can't take it with you, but you can use it now.\n\nUse Interact ('e') to use it.",
 
             "normal",
+            "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() {
               new Button("For prosperity!", "")
             }))
@@ -140,7 +164,11 @@ namespace Atharia.Model {
             "You see a Ravagian Trask!\n\nThese attack very fast.\n\nYou'll need help!",
 
             "normal",
+            "narrator",
+          true,
+          true,
 
+          false,
             new ButtonImmList(new List<Button>() {
               new Button("Help? How?", "ambush4c")
             }))
@@ -153,6 +181,10 @@ namespace Atharia.Model {
             "You must help your future self, so that in the future, you'll receive help from your past self.",
 
             "normal",
+            "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() {
               new Button("Nonsense!", "ambush4d")
             }))
@@ -165,6 +197,10 @@ namespace Atharia.Model {
             "Let's see it in action.\n\nFirst, select Time Anchor ('A') and then step in any direction.\n\n(In this case, go right.)",
 
             "normal",
+            "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() {
               new Button("Will do!", "")
             }))
@@ -177,6 +213,10 @@ namespace Atharia.Model {
             new ShowOverlayEvent(
               "Uh oh! You didn't create a time anchor.\n\nYou're probably going to die now.\n\nNext time, use Time Anchor ('A')!",
             "normal",
+            "narrator",
+          true,
+          true,
+          false,
               new ButtonImmList(new List<Button>() {
                 new Button("Alas...", "")
               }))
@@ -188,6 +228,10 @@ namespace Atharia.Model {
             new ShowOverlayEvent(
               "Now, use Defy ('D') about 10 times.\n\nYour future self will thank you, because you are distracting the Ravagian Trask.",
             "normal",
+            "narrator",
+          true,
+          true,
+          false,
               new ButtonImmList(new List<Button>() { new Button("For valor!", "") }))
             .AsIGameEvent());
         }
@@ -203,6 +247,10 @@ namespace Atharia.Model {
             new ShowOverlayEvent(
               "Now, use Time Revert ('R') to go back in time.",
             "normal",
+            "narrator",
+          true,
+          true,
+          false,
               new ButtonImmList(new List<Button>() { new Button("Backward to glory!", "") }))
             .AsIGameEvent());
         } else {
@@ -216,6 +264,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Now, your past self is here to help you!\n\nIt will do the same things you did.\n\nDefy ('D') once, then attack the Ravagian Trask while it attacks your past self!",
             "normal",
+            "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() {
               new Button("For vengeance!", "")
             }))
@@ -269,6 +321,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Pro tip: Defy also taunts adjacent enemies to attack you.",
             "normal",
+            "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() {
               new Button("Got it!", "")
             }))
@@ -309,6 +365,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "You can have several past selves active at the same time.\n\nSometimes, it's the only way to survive!",
             "normal",
+            "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() {
               new Button("Together I stand!", "")
             }))

@@ -69,29 +69,20 @@ imm interface IGameEvent { }
 imm struct ShowOverlayEvent {
   ShowOverlayEvent isa IGameEvent;
 
-  // sizePercent: Int;
-  // backgroundColor: Color;
-  // fadeInEndMs: Int;
-  // fadeOutStartMs: Int; // 0 to not automatically dismiss.
-  // fadeOutEndMs: Int; // 0 to not automatically dismiss.
-  // automaticActionTriggerName: Str;
-
   text: Str;
   template: Str; // "normal", "dramatic", "aside"
-  // textColor: Color;
-  // textFadeInStartMs: Int;
-  // textFadeInEndMs: Int;
-  // textFadeOutStartMs: Int;
-  // textFadeOutEndMs: Int;
-  // topAligned: Bool;
-  // leftAligned: Bool;
+  speakerRole: Str; // "kylin", "kylinBrother", "narrator", "halohadrian"
+  isFirstInSequence: Bool;
+  isLastInSequence: Bool;
+  // Whether this dialog is hiding something. If so, we want to send the button trigger
+  // *before* things fade out.
+  isObscuring: Bool;
 
   buttons: ImmList:Button;
 }
 
 imm struct Button {
   label: Str;
-  // backgroundColor: Color;
   triggerName: Str;
 }
 

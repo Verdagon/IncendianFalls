@@ -199,6 +199,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "To undo my brother's stasis, I need to follow the caves until I find something made of black incendium.",
             "dramatic",
+            "kylin",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() { new Button("...", "introLine1Done") }))
           .AsIGameEvent());
       }
@@ -215,6 +219,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "I've made it to Ember Deep! Forward!",
             "aside",
+            "kylin",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
       }

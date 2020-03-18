@@ -65,6 +65,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "I can finally rescue my brother!",
             "dramatic",
+            "kylin",
+          true,
+          false,
+          false,
             new ButtonImmList(new List<Button>() { new Button("Hope lives!", "line3") }))
           .AsIGameEvent());
       }
@@ -73,6 +77,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Congratulations, you have won the game!",
             "dramatic",
+          "narrator",
+          false,
+          true,
+          false,
             new ButtonImmList(new List<Button>() { new Button("Huzzah!", "_exitGame") }))
           .AsIGameEvent());
       }
@@ -94,6 +102,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "This is... this is Volcaetus!\n\nThe black incendium spear!",
             "normal",
+            "kylin",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() { new Button("Behold!", "line2") }))
           .AsIGameEvent());
       }

@@ -18,6 +18,10 @@ namespace Atharia.Model {
         new ShowOverlayEvent(
           "You've found the Fire Bomb Staff!\n\nUse 'F' and click on a location to use it, for " + Actions.FIRE_BOMB_COST + "mp.\n\nIt will explode after 2 more turns, for " + Actions.FIRE_BOMB_DAMAGE + " damage!",
           "normal",
+          "narrator",
+          true,
+          true,
+          false,
           new ButtonImmList(new Button[] { new Button("Got it!", "") }))
         //new ShowOverlayEvent(
         //  70, new Color(16, 16, 16, 224), 300, 0, 0, "",

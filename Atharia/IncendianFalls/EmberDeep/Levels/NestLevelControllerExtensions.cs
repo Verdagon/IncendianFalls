@@ -194,6 +194,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Uh oh...",
             "aside",
+            "kylin",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
         game.AddEvent(new WaitEvent(true, 2000, "uhOhDone").AsIGameEvent());
@@ -227,7 +231,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "It's a nest of some sort! Time for some chronomancy!",
             "aside",
-
+            "kylin",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
       }

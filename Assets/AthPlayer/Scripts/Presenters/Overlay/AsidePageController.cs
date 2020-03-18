@@ -58,11 +58,13 @@ namespace AthPlayer {
     // Aside overlay takes up a 2x1 at top of screen, wide as screen.
     public void ShowPage(
         List<string> pageLines,
+        UnityEngine.Color textColor,
         List<OverlayPresenter.PageButton> buttons,
-        bool isFirstPage,
-        bool isLastPage,
-        bool isPortrait) {
-      var font = new OverlayFont("cascadia", 2f);
+        bool fadeInBackground,
+        bool fadeOutBackground,
+        bool isPortrait,
+        bool callCallbackAfterFadeOut) {
+      var font = new OverlayFont("prose", 2f);
 
       var (textMaxWidth, textMaxHeight) = GetPageTextMaxWidthAndHeight(isPortrait, buttons);
       if (pageLines.Count > textMaxHeight) {
@@ -79,10 +81,10 @@ namespace AthPlayer {
         panelView.AddBackground(
           new UnityEngine.Color(0, 0, 0, .9f),
           new UnityEngine.Color(.1f, .1f, .1f, .9f));
-      if (isFirstPage) {
+      if (fadeInBackground) {
         panelView.SetFadeIn(backgroundId, new OverlayPanelView.FadeIn(0, 300));
       }
-      if (isLastPage) {
+      if (fadeOutBackground) {
         panelView.SetFadeOut(backgroundId, new OverlayPanelView.FadeOut(-300, 0));
       }
 
@@ -90,10 +92,10 @@ namespace AthPlayer {
         var textIds =
           panelView.AddString(
             0, 1f, panelView.symbolsHigh - 2 - i, panelView.symbolsWide,
-            new UnityEngine.Color(.3f, 1, 1, 1), font,
+          textColor, font,
             pageLines[i]);
         foreach (var textId in textIds) {
-          if (isFirstPage) {
+          if (fadeInBackground) {
             panelView.SetFadeIn(textId, new OverlayPanelView.FadeIn(300, 600));
           } else {
             panelView.SetFadeIn(textId, new OverlayPanelView.FadeIn(0, 300));
@@ -122,7 +124,13 @@ namespace AthPlayer {
             new UnityEngine.Color(.4f, .4f, .4f, 1),
             new UnityEngine.Color(.5f, .5f, .5f, 1),
             new UnityEngine.Color(.3f, .3f, .3f, 1),
-            () => panelView.ScheduleClose(0, () => buttonCallback()));
+            () => {
+              if (!callCallbackAfterFadeOut) {
+                panelView.SetOnStartHideCallback(buttonCallback);
+              } else {
+                panelView.SetOnFinishHideCallback(buttonCallback);
+              }
+            });
         panelView.SetFadeIn(buttonId, new OverlayPanelView.FadeIn(300, 600));
         panelView.SetFadeOut(buttonId, new OverlayPanelView.FadeOut(-300, 0));
         panelView.AddString(
@@ -142,8 +150,7 @@ namespace AthPlayer {
       }
       // 600 for animations, 1000 to orient oneself to the dialog, and then time per word.
       int startClosingAfterMs = 600 + 1000 + numChars * 1000 / 20;
-      panelView.ScheduleClose(startClosingAfterMs, () => { });
-
+      panelView.ScheduleClose(startClosingAfterMs);
 
       //if (wrapped) {
       //  panelView.AddString(

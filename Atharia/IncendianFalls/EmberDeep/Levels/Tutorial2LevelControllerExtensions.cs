@@ -82,6 +82,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Ambush Challenge",
             "aside",
+            "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
         game.AddEvent(
@@ -92,6 +96,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "An ambush! Perhaps I can use the terrain and chronomancy to survive.",
             "normal",
+            "kylin",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>() { new Button("For valor!", "") }))
           .AsIGameEvent());
       }

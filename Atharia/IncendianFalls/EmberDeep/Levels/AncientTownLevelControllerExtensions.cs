@@ -116,6 +116,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Some sort of ancient abandoned town...?",
             "aside",
+            "kylin",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
       }

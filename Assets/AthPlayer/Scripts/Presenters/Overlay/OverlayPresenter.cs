@@ -27,35 +27,64 @@ namespace AthPlayer {
 
     public delegate void OnExit();
 
-    SlowableTimerClock cinematicTimer;
-    OverlayPaneler overlayPaneler;
-    InputSemaphore inputSemaphore;
+    //SlowableTimerClock cinematicTimer;
+    //OverlayPaneler overlayPaneler;
+    //InputSemaphore inputSemaphore;
 
     IPageController pageController;
+    bool isFirstInSequence;
+    bool isLastInSequence;
+    UnityEngine.Color textColor;
     string[] wrappedOriginalLines;
     List<PageButton> finalButtons;
     bool isPortrait;
+    bool isObscuring;
 
     public OverlayPresenter(
         SlowableTimerClock cinematicTimer,
         OverlayPaneler overlayPaneler,
         InputSemaphore inputSemaphore,
         string template,
+        string role,
+        bool isFirstInSequence,
+        bool isLastInSequence,
+        bool isObscuring,
         string unwrappedText,
         List<PageButton> buttons) {
-      this.cinematicTimer = cinematicTimer;
-      this.overlayPaneler = overlayPaneler;
-      this.inputSemaphore = inputSemaphore;
+      //this.cinematicTimer = cinematicTimer;
+      //this.overlayPaneler = overlayPaneler;
+      //this.inputSemaphore = inputSemaphore;
+
+      this.isFirstInSequence = isFirstInSequence;
+      this.isLastInSequence = isLastInSequence;
+      this.isObscuring = isObscuring;
+
+      switch (role) {
+        case "kylin":
+          textColor = new UnityEngine.Color(1, .2f, 0, 1);
+          break;
+        case "kylinBrother":
+          textColor = new UnityEngine.Color(.5f, 1, 1, 1);
+          break;
+        case "narrator":
+          textColor = new UnityEngine.Color(1, 1, 1, 1);
+          break;
+        default:
+          Debug.LogWarning("Unknown role: " + role);
+          textColor = new UnityEngine.Color(1, 1, 1, 1);
+          break;
+      }
 
       switch (template) {
-        case "normal":
-          pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore);
+        case "dramatic":
+          pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore, true);
           break;
         case "aside":
           pageController = new AsidePageController(overlayPaneler, cinematicTimer);
           break;
+        case "normal":
         default:
-          pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore);
+          pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore, false);
           break;
       }
 
@@ -70,7 +99,6 @@ namespace AthPlayer {
     }
 
     private void ShowPage(int pageIndex) {
-      Debug.Log("Showing page " + pageIndex);
       var (textMaxWidth, textMaxHeight) = pageController.GetPageTextMaxWidthAndHeight(isPortrait, finalButtons);
 
       List<string> pageLines = new List<string>();
@@ -85,13 +113,28 @@ namespace AthPlayer {
 
       Debug.Log(numPages + " " + isFirstPage + " " + isLastPage + " " + pageIndex + " " + pageLines.Count);
 
-      List<PageButton> buttons = new List<PageButton>();
+      List<PageButton> buttons = finalButtons;// new List<PageButton>();
       if (isLastPage) {
-        buttons = finalButtons;
+        //foreach (var finalButton in finalButtons) {
+        //  buttons.Add(new PageButton(finalButton.label, () => {
+        //    finalButton.clicked();
+        //  }));
+        //}
       } else {
         buttons.Add(new PageButton("...", () => ShowPage(pageIndex + 1)));
       }
-      pageController.ShowPage(pageLines, buttons, isFirstPage, isLastPage, isPortrait);
+
+      var fadeInBackground = isFirstInSequence && isFirstPage;
+      var fadeOutBackground = isLastInSequence && isLastPage;
+      var callCallbackAfterFadeOut = !isObscuring;
+      pageController.ShowPage(
+        pageLines,
+        textColor,
+        buttons,
+        fadeInBackground,
+        fadeOutBackground,
+        isPortrait,
+        callCallbackAfterFadeOut);
     }
   }
 }

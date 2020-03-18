@@ -99,6 +99,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "It's eerily silent in here.",
             "aside",
+          "kylin",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>()))
           //new ShowOverlayEvent(
           //  40, // sizePercent
@@ -126,6 +130,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "He slowly turns and looks at you, into your eyes, through them, as if into your soul.",
             "normal",
+          "narrator",
+          false,
+          false,
+          false,
             new ButtonImmList(new List<Button>() { new Button("...", "line3") }))
           //new ShowOverlayEvent(
           //  50, // sizePercent
@@ -153,6 +161,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "He turns away and is still again.",
             "normal",
+          "narrator",
+          false,
+          true,
+          false,
             new ButtonImmList(new List<Button>() { new Button("...", "") }))
           //new ShowOverlayEvent(
           //  50, // sizePercent
@@ -195,6 +207,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "You see a man, still as a statue.",
             "normal",
+          "narrator",
+          true,
+          false,
+          false,
             new ButtonImmList(new List<Button>() { new Button("...", "line2") }))
           //new ShowOverlayEvent(
           //  50, // sizePercent

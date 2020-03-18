@@ -151,6 +151,10 @@ namespace AthPlayer {
         overlayPaneler,
         inputSemaphore,
         overlay.template,
+        overlay.speakerRole,
+        overlay.isFirstInSequence,
+        overlay.isLastInSequence,
+        overlay.isObscuring,
         overlay.text,
         buttons);
     }

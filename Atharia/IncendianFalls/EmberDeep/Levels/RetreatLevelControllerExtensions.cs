@@ -87,6 +87,10 @@ namespace Atharia.Model {
           new ShowOverlayEvent(
             "Retreat Challenge",
             "aside",
+          "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
         game.AddEvent(
@@ -97,8 +101,11 @@ namespace Atharia.Model {
         game.AddEvent(
           new ShowOverlayEvent(
             "There's a superpowered Draxling chasing you!\n\nIf you just run, it will catch you and kill you.\n\nDistract it with time clones!",
-
             "normal",
+          "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new Button[] { new Button("Uh oh!", "startCamera") }))
           .AsIGameEvent());
       }
@@ -130,6 +137,10 @@ namespace Atharia.Model {
             "Keep in mind, enemies usually attack whoever is closest to them.\n\nYour past self should be close enough to distract the enemy, and buy you time to get away!\n\nHint: Try drawing the Draxling away and then reverting before it attacks.",
 
             "normal",
+          "narrator",
+          true,
+          true,
+          false,
             new ButtonImmList(new Button[] { new Button("Got it!", "") }))
           .AsIGameEvent());
       }

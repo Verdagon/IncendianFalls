@@ -22,17 +22,33 @@ public class ShowOverlayEvent : IComparable<ShowOverlayEvent> {
   private readonly int hashCode;
          public readonly string text;
   public readonly string template;
+  public readonly string speakerRole;
+  public readonly bool isFirstInSequence;
+  public readonly bool isLastInSequence;
+  public readonly bool isObscuring;
   public readonly ButtonImmList buttons;
   public ShowOverlayEvent(
       string text,
       string template,
+      string speakerRole,
+      bool isFirstInSequence,
+      bool isLastInSequence,
+      bool isObscuring,
       ButtonImmList buttons) {
     this.text = text;
     this.template = template;
+    this.speakerRole = speakerRole;
+    this.isFirstInSequence = isFirstInSequence;
+    this.isLastInSequence = isLastInSequence;
+    this.isObscuring = isObscuring;
     this.buttons = buttons;
     int hash = 0;
     hash = hash * 37 + text.GetDeterministicHashCode();
     hash = hash * 37 + template.GetDeterministicHashCode();
+    hash = hash * 37 + speakerRole.GetDeterministicHashCode();
+    hash = hash * 37 + isFirstInSequence.GetDeterministicHashCode();
+    hash = hash * 37 + isLastInSequence.GetDeterministicHashCode();
+    hash = hash * 37 + isObscuring.GetDeterministicHashCode();
     hash = hash * 37 + buttons.GetDeterministicHashCode();
     this.hashCode = hash;
 
@@ -58,6 +74,10 @@ public class ShowOverlayEvent : IComparable<ShowOverlayEvent> {
     return true
                && text.Equals(that.text)
         && template.Equals(that.template)
+        && speakerRole.Equals(that.speakerRole)
+        && isFirstInSequence.Equals(that.isFirstInSequence)
+        && isLastInSequence.Equals(that.isLastInSequence)
+        && isObscuring.Equals(that.isObscuring)
         && buttons.Equals(that.buttons)
         ;
   }
@@ -72,6 +92,18 @@ public class ShowOverlayEvent : IComparable<ShowOverlayEvent> {
     if (template != that.template) {
       return template.CompareTo(that.template);
     }
+    if (speakerRole != that.speakerRole) {
+      return speakerRole.CompareTo(that.speakerRole);
+    }
+    if (isFirstInSequence != that.isFirstInSequence) {
+      return isFirstInSequence.CompareTo(that.isFirstInSequence);
+    }
+    if (isLastInSequence != that.isLastInSequence) {
+      return isLastInSequence.CompareTo(that.isLastInSequence);
+    }
+    if (isObscuring != that.isObscuring) {
+      return isObscuring.CompareTo(that.isObscuring);
+    }
     if (buttons != that.buttons) {
       return buttons.CompareTo(that.buttons);
     }
@@ -82,6 +114,10 @@ public class ShowOverlayEvent : IComparable<ShowOverlayEvent> {
     return "ShowOverlayEvent(" +
         text.DStr() + ", " +
         template.DStr() + ", " +
+        speakerRole.DStr() + ", " +
+        isFirstInSequence.DStr() + ", " +
+        isLastInSequence.DStr() + ", " +
+        isObscuring.DStr() + ", " +
         buttons.DStr()
         + ")";
 
@@ -93,9 +129,17 @@ public class ShowOverlayEvent : IComparable<ShowOverlayEvent> {
       source.Expect(",");
       var template = source.ParseStr();
       source.Expect(",");
+      var speakerRole = source.ParseStr();
+      source.Expect(",");
+      var isFirstInSequence = source.ParseBool();
+      source.Expect(",");
+      var isLastInSequence = source.ParseBool();
+      source.Expect(",");
+      var isObscuring = source.ParseBool();
+      source.Expect(",");
       var buttons = ButtonImmList.Parse(source);
       source.Expect(")");
-      return new ShowOverlayEvent(text, template, buttons);
+      return new ShowOverlayEvent(text, template, speakerRole, isFirstInSequence, isLastInSequence, isObscuring, buttons);
   }
 }
        

@@ -14,30 +14,47 @@ namespace AthPlayer {
     OverlayPaneler overlayPaneler;
     IClock cinematicTimer;
     InputSemaphore inputSemaphore;
+    bool isFullscreen;
     public NormalPageController(
         OverlayPaneler overlayPaneler,
         IClock cinematicTimer,
-        InputSemaphore inputSemaphore) {
+        InputSemaphore inputSemaphore,
+        bool isFullscreen) {
       this.overlayPaneler = overlayPaneler;
       this.cinematicTimer = cinematicTimer;
       this.inputSemaphore = inputSemaphore;
+      this.isFullscreen = isFullscreen;
     }
 
     public (int, int) GetPageTextMaxWidthAndHeight(bool isPortrait, List<OverlayPresenter.PageButton> buttons) {
-      if (isPortrait) {
-        return (28, 9);
+      if (isFullscreen) {
+        if (isPortrait) {
+          // 30 - 2 padding = 28
+          // 45 - 2 padding - 1 margin - 3 button = 39
+          return (28, 39);
+        } else {
+          // 60 - 2 padding = 58
+          // 40 - 2 padding - 1 margin - 3 button = 34
+          return (78, 54);
+        }
       } else {
-        return (43, 14);
+        if (isPortrait) {
+          return (28, 9);
+        } else {
+          return (43, 14);
+        }
       }
     }
 
     // Normal overlay takes up a 2x1 at top of screen, wide as screen.
     public void ShowPage(
         List<string> pageLines,
+        UnityEngine.Color textColor,
         List<OverlayPresenter.PageButton> buttons,
-        bool isFirstPage,
-        bool isLastPage,
-        bool isPortrait) {
+        bool fadeInBackground,
+        bool fadeOutBackground,
+        bool isPortrait,
+        bool callCallbackAfterFadeOut) {
 
       if (buttons.Count == 0) {
         // Do nothing. It'll close itself and nothing else.
@@ -47,7 +64,7 @@ namespace AthPlayer {
       // Will be unlocked by the buttons being clicked.
       inputSemaphore.Lock();
 
-      var font = new OverlayFont("cascadia", 2f);
+      var font = new OverlayFont("prose", 2f);
 
       var (textMaxWidth, textMaxHeight) = GetPageTextMaxWidthAndHeight(isPortrait, buttons);
       if (pageLines.Count > textMaxHeight) {
@@ -71,19 +88,30 @@ namespace AthPlayer {
       int panelHeight = pageLines.Count + numLinesForTopBorder + numLinesBetweenTextAndButtons + numLinesForButtons + numLinesForBottomBorder;
 
       OverlayPanelView panelView;
-      if (isPortrait) {
-        panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 100, 100, 50, panelWidth, panelHeight, .6667f);
+      if (isFullscreen) {
+        panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 50, 94, 94, panelWidth, panelHeight, .6667f);
       } else {
-        panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 80, 80, 50, panelWidth, panelHeight, .6667f);
+        if (isPortrait) {
+          panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 97, 94, 47, panelWidth, panelHeight, .6667f);
+        } else {
+          panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 80, 80, 50, panelWidth, panelHeight, .6667f);
+        }
       }
-      int backgroundId =
-        panelView.AddBackground(
-          new UnityEngine.Color(0, 0, 0, .85f),
-          new UnityEngine.Color(.2f, .2f, .2f, .85f));
-      if (isFirstPage) {
+
+      int backgroundId;
+      if (isFullscreen) {
+        backgroundId =
+        panelView.AddFullscreenRect(new UnityEngine.Color(0, 0, 0, 1));
+      } else {
+        backgroundId =
+          panelView.AddBackground(
+            new UnityEngine.Color(0, 0, 0, .85f),
+            new UnityEngine.Color(.2f, .2f, .2f, .85f));
+      }
+      if (fadeInBackground) {
         panelView.SetFadeIn(backgroundId, new OverlayPanelView.FadeIn(0, 300));
       }
-      if (isLastPage) {
+      if (fadeOutBackground) {
         panelView.SetFadeOut(backgroundId, new OverlayPanelView.FadeOut(-300, 0));
       }
 
@@ -91,10 +119,10 @@ namespace AthPlayer {
         var textIds =
           panelView.AddString(
             0, 1f, panelView.symbolsHigh - 2 - i, panelView.symbolsWide,
-            new UnityEngine.Color(.3f, 1, 1, 1), font,
+          textColor, font,
             pageLines[i]);
         foreach (var textId in textIds) {
-          if (isFirstPage) {
+          if (fadeInBackground) {
             panelView.SetFadeIn(textId, new OverlayPanelView.FadeIn(300, 600));
           } else {
             panelView.SetFadeIn(textId, new OverlayPanelView.FadeIn(0, 300));
@@ -120,16 +148,20 @@ namespace AthPlayer {
             buttonWidth,
             buttonHeight,
             1,
-            new UnityEngine.Color(.4f, .4f, .4f, 1),
-            new UnityEngine.Color(.6f, .6f, .6f, 1),
             new UnityEngine.Color(.3f, .3f, .3f, 1),
+            new UnityEngine.Color(.1f, .1f, .1f, 1),
+            new UnityEngine.Color(1f, 1f, 1f, 1),
             () => {
-              panelView.ScheduleClose(
-                0,
-                () => {
+              if (!callCallbackAfterFadeOut) {
+                panelView.SetOnStartHideCallback(buttonCallback);
+              }
+              panelView.SetOnFinishHideCallback(() => {
+                if (callCallbackAfterFadeOut) {
                   buttonCallback();
-                  inputSemaphore.Unlock();
-                });
+                }
+                inputSemaphore.Unlock();
+              });
+              panelView.ScheduleClose(0);
             });
         panelView.SetFadeIn(buttonId, new OverlayPanelView.FadeIn(0, 300));
         panelView.SetFadeOut(buttonId, new OverlayPanelView.FadeOut(-300, 0));
@@ -138,10 +170,9 @@ namespace AthPlayer {
           panelWidth - rightBorderWidth - buttonWidth + buttonBorderWidth,
           2f,
           buttonTextWidth,
-          new UnityEngine.Color(1f, 1f, 1f, 1),
+          new UnityEngine.Color(1, 1, 1, 1),
             font, buttonText);
       }
-
 
       //if (wrapped) {
       //  panelView.AddString(

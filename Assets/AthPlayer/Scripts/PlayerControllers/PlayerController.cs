@@ -214,6 +214,10 @@ namespace Domino {
           new ShowOverlayEvent(
             "You have died!",
             "normal",
+            "narrator",
+            false,
+            false,
+            false,
             new ButtonImmList(new List<Button>() { new Button("Alas...", "_exitGame") })));
         // Do nothing with it, itll kill itself.
       }

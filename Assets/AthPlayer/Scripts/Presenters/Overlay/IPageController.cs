@@ -15,9 +15,11 @@ namespace AthPlayer {
 
     void ShowPage(
         List<string> pageLines,
+        UnityEngine.Color textColor,
         List<OverlayPresenter.PageButton> buttons,
-        bool isFirstPage,
-        bool isLastPage,
-        bool isPortrait);
+        bool fadeInBackground,
+        bool fadeOutBackground,
+        bool isPortrait,
+        bool callCallbackAfterFadeOut);
   }
 }
