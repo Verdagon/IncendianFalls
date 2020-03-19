@@ -19,6 +19,10 @@ namespace AthPlayer {
     }
 
     public void Look(Unit unit, TerrainTile tile) {
+      if (unit.NullableIs(lookedUnit) && tile.NullableIs(lookedTile)) {
+        return;
+      }
+
       if (lookedUnit.Exists()) {
         lookedUnit.RemoveObserver(this);
       }
@@ -220,7 +224,7 @@ namespace AthPlayer {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
-                    "/",
+                    "0",
                     50,
                     new UnityEngine.Color(1, 1, 1, 1.5f),
                     0,

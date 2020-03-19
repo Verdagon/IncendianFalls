@@ -60,7 +60,7 @@ namespace AthPlayer {
 
     InputSemaphore inputSemaphore;
 
-    public LookPanelView lookPanelView;
+    LookPanelView lookPanelView;
 
     public PlayerPanelView playerPanelView;
 
@@ -94,6 +94,8 @@ namespace AthPlayer {
       var modelSS = new Superstructure(new LoggerImpl());
       replayLogger = new ReplayLogger(modelSS, new string[] { "Latest.sslog", timestamp + ".sslog" });
       ss = new SuperstructureWrapper(modelSS);
+
+      lookPanelView = new LookPanelView(cinematicTimer, overlayPaneler);
 
       var randomSeed = timestamp;
       Debug.Log("Random seed: " + randomSeed);
@@ -131,7 +133,7 @@ namespace AthPlayer {
               game,
               gamePresenter,
               playerPanelView,
-              lookPanelView.GetComponent<LookPanelView>(),
+              lookPanelView,
               NewOverlayPresenter,
               this.ShowError);
       playerController.Start();

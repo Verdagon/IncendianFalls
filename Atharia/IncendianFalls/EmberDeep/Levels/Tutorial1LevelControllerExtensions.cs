@@ -273,9 +273,9 @@ namespace Atharia.Model {
             "Now, your past self is here to help you!\n\nIt will do the same things you did.\n\nDefy ('D') once, then attack the Ravagian Trask while it attacks your past self!",
             "normal",
             "narrator",
-          true,
-          true,
-          false,
+            true,
+            true,
+            false,
             new ButtonImmList(new List<Button>() {
               new Button("For vengeance!", "")
             }))

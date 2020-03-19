@@ -70,6 +70,7 @@ namespace Domino {
 
     private long openTimeMs;
     private long startFadeOutTimeAfterOpenMs;
+    private long finishFadeOutTimeAfterOpenMs;
     private OnClicked startFadeOutCallback;
     private OnClicked finishFadeOutCallback;
 
@@ -109,6 +110,7 @@ namespace Domino {
       this.cinematicTimer = cinematicTimer;
       this.openTimeMs = cinematicTimer.GetTimeMs();
       this.startFadeOutTimeAfterOpenMs = long.MaxValue;
+      this.finishFadeOutTimeAfterOpenMs = long.MaxValue;
 
       float horizontalAlignment = horizontalAlignmentPercent / 100.0f;
       float verticalAlignment = verticalAlignmentPercent / 100.0f;
@@ -419,8 +421,8 @@ namespace Domino {
         if (overlayObject.fadeOut != null) {
           var fadeOut = overlayObject.fadeOut;
           // Remember, fadeOut.fadeOutStart/EndTimeS are negative.
-          var fadeOutStartTimeMs = startFadeOutTimeAfterOpenMs + fadeOut.fadeOutStartTimeMs;
-          var fadeOutEndTimeMs = startFadeOutTimeAfterOpenMs + fadeOut.fadeOutEndTimeMs;
+          var fadeOutStartTimeMs = finishFadeOutTimeAfterOpenMs + fadeOut.fadeOutStartTimeMs;
+          var fadeOutEndTimeMs = finishFadeOutTimeAfterOpenMs + fadeOut.fadeOutEndTimeMs;
 
           if (timeSinceOpenMs < fadeOutStartTimeMs) {
             // Do nothing, they should already be opaque.
@@ -527,6 +529,14 @@ namespace Domino {
       var nowMs = cinematicTimer.GetTimeMs();
       var timeSinceOpenMs = nowMs - openTimeMs;
       startFadeOutTimeAfterOpenMs = timeSinceOpenMs + startMsFromNow;
+
+      long earliestFadeOutStart = 0;
+      foreach (var id in fadingObjectIds) {
+        earliestFadeOutStart = Math.Min(earliestFadeOutStart, overlayObjects[id].fadeOut.fadeOutStartTimeMs);
+      }
+      Asserts.Assert(earliestFadeOutStart <= 0); // fade outs are phrased as negative numbers where 0 is final close time.
+      long allFadeOutsDuration = -earliestFadeOutStart;
+      finishFadeOutTimeAfterOpenMs = startFadeOutTimeAfterOpenMs + allFadeOutsDuration;
     }
   }
 }
