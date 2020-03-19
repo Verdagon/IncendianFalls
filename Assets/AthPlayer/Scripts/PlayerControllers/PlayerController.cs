@@ -10,8 +10,6 @@ namespace Domino {
       IGameEffectObserver, IGameEffectVisitor,
     ISorcerousUCEffectObserver, ISorcerousUCEffectVisitor,
       IModeDelegate {
-    public delegate OverlayPresenter OverlayPresenterFactory(ShowOverlayEvent overlay);
-
     ISuperstructure ss;
     Superstate superstate;
     Game game;
@@ -20,9 +18,9 @@ namespace Domino {
     ExecutionStaller resumeStaller;
     ExecutionStaller turnStaller;
     PlayerPanelView playerPanelView;
-    NarrationPanelView narrator;
     LookPanelView lookPanelView;
     OverlayPresenterFactory overlayPresenterFactory;
+    ShowError showError;
     Looker looker;
     IMode mode;
     Unit player;
@@ -36,9 +34,9 @@ namespace Domino {
         Game game,
         GamePresenter gamePresenter,
         PlayerPanelView playerPanelView,
-        NarrationPanelView messageView,
         LookPanelView lookPanelView,
-        OverlayPresenterFactory overlayPresenterFactory) {
+        OverlayPresenterFactory overlayPresenterFactory,
+        ShowError showError) {
       this.ss = ss;
       this.superstate = superstate;
       this.game = game;
@@ -47,9 +45,9 @@ namespace Domino {
       this.resumeStaller = resumeStaller;
       this.turnStaller = turnStaller;
       this.playerPanelView = playerPanelView;
-      this.narrator = messageView;
       this.lookPanelView = lookPanelView;
       this.overlayPresenterFactory = overlayPresenterFactory;
+      this.showError = showError;
 
       this.game.AddObserver(this);
 
@@ -238,29 +236,31 @@ namespace Domino {
     }
 
     public void SwitchToNormalMode() {
-      mode = new NormalMode(ss, superstate, game, this, narrator);
+      mode = new NormalMode(ss, superstate, game, this, showError);
     }
 
     public void SwitchToTimeAnchorMoveMode() {
-      mode = new TimeAnchorMoveMode(ss, superstate, game, this, narrator);
+      mode = new TimeAnchorMoveMode(ss, superstate, game, this, overlayPresenterFactory, showError);
     }
 
     public void SwitchToFireMode() {
-      mode = new FireMode(ss, superstate, game, this, narrator);
+      mode = new FireMode(ss, superstate, game, this, overlayPresenterFactory, showError);
     }
 
     public void SwitchToFireBombMode() {
       if (game.player.components.GetAllBlastRod().Count == 0) {
-        narrator.ShowMessage("Can't fire bomb, find a Fire Rod first!");
+        overlayPresenterFactory(new ShowOverlayEvent("Can't fire bomb, find a Fire Rod first!", "error", "narrator", false, false, false, new ButtonImmList()));
+        return;
       }
-      mode = new FireBombMode(ss, superstate, game, this, narrator);
+      mode = new FireBombMode(ss, superstate, game, this, overlayPresenterFactory, showError);
     }
 
     public void SwitchToMireMode() {
       if (game.player.components.GetAllSlowRod().Count == 0) {
-        narrator.ShowMessage("Can't mire, find a Mire Staff first!");
+        overlayPresenterFactory(new ShowOverlayEvent("Can't mire, find a Mire Staff first!", "error", "narrator", false, false, false, new ButtonImmList()));
+        return;
       }
-      mode = new MireMode(ss, superstate, game, this, narrator);
+      mode = new MireMode(ss, superstate, game, this, overlayPresenterFactory, showError);
     }
 
     public void OnGameEffect(IGameEffect effect) { effect.visit(this);  }
@@ -268,6 +268,7 @@ namespace Domino {
     public void visitGameCreateEffect(GameCreateEffect effect) { }
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
     public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
+    public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) { }
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
       RefreshPlayerStatusText();
     }

@@ -39,6 +39,7 @@ namespace AthPlayer {
     List<PageButton> finalButtons;
     bool isPortrait;
     bool isObscuring;
+    OverlayPanelView currentPageOverlayPanelView;
 
     public OverlayPresenter(
         SlowableTimerClock cinematicTimer,
@@ -77,14 +78,20 @@ namespace AthPlayer {
 
       switch (template) {
         case "dramatic":
-          pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore, true);
+          pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore, true, true);
           break;
         case "aside":
-          pageController = new AsidePageController(overlayPaneler, cinematicTimer);
+          pageController = new AsidePageController(overlayPaneler, cinematicTimer, false);
+          break;
+        case "error":
+          pageController = new AsidePageController(overlayPaneler, cinematicTimer, true);
+          break;
+        case "instructions":
+          pageController = new InstructionsPageController(overlayPaneler, cinematicTimer);
           break;
         case "normal":
         default:
-          pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore, false);
+          pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore, false, false);
           break;
       }
 
@@ -127,14 +134,19 @@ namespace AthPlayer {
       var fadeInBackground = isFirstInSequence && isFirstPage;
       var fadeOutBackground = isLastInSequence && isLastPage;
       var callCallbackAfterFadeOut = !isObscuring;
-      pageController.ShowPage(
-        pageLines,
-        textColor,
-        buttons,
-        fadeInBackground,
-        fadeOutBackground,
-        isPortrait,
-        callCallbackAfterFadeOut);
+      currentPageOverlayPanelView =
+        pageController.ShowPage(
+          pageLines,
+          textColor,
+          buttons,
+          fadeInBackground,
+          fadeOutBackground,
+          isPortrait,
+          callCallbackAfterFadeOut);
+    }
+
+    public void Close() {
+      currentPageOverlayPanelView.ScheduleClose(0);
     }
   }
 }

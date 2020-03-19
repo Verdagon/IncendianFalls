@@ -123,22 +123,28 @@ namespace Atharia.Model {
       }
 
       if (triggerName == "ambush3b") {
-        game.AddEvent(new NarrateEvent(1 + " Defy remaining!").AsIGameEvent());
+        game.instructions = 1 + " Defy remaining!";
+        game.player.components.Add(game.root.EffectTutorialDefyCounterUCCreate(1, "ambush3bDefied").AsIUnitComponent());
         game.AddEvent(
           new ShowOverlayEvent(
-
             "You see a Spiriant!\n\nSpiriants are incredibly dangerous.\n\nHowever, they die with one hit.\n\nUse Defy ('D') to wait for it to come to you.",
-
             "normal",
             "narrator",
-          true,
-          true,
-
-          false,
+            true,
+            true,
+            false,
             new ButtonImmList(new List<Button>() {
               new Button("For valor!", "")
             }))
           .AsIGameEvent());
+      }
+      if (triggerName == "ambush3bDefied") {
+        var defyCounter = game.player.components.GetOnlyTutorialDefyCounterUCOrNull();
+        Asserts.Assert(defyCounter.Exists());
+        Asserts.Assert(defyCounter.numDefiesRemaining == 0);
+        game.player.components.Remove(defyCounter.AsIUnitComponent());
+        defyCounter.Destruct();
+        game.instructions = "";
       }
 
       if (triggerName == "healthPotionB") {
@@ -223,7 +229,7 @@ namespace Atharia.Model {
             .AsIGameEvent());
         } else {
           game.player.components.Add(game.root.EffectTutorialDefyCounterUCCreate(10, "firstSelfDefied").AsIUnitComponent());
-          game.AddEvent(new NarrateEvent(10 + " Defy remaining!").AsIGameEvent());
+          game.instructions = 10 + " Defy remaining!";
           game.AddEvent(
             new ShowOverlayEvent(
               "Now, use Defy ('D') about 10 times.\n\nYour future self will thank you, because you are distracting the Ravagian Trask.",
@@ -243,6 +249,7 @@ namespace Atharia.Model {
         if (defyCounter.numDefiesRemaining == 0) {
           game.player.components.Remove(defyCounter.AsIUnitComponent());
           defyCounter.Destruct();
+          game.instructions = "";
           game.AddEvent(
             new ShowOverlayEvent(
               "Now, use Time Revert ('R') to go back in time.",
@@ -254,12 +261,13 @@ namespace Atharia.Model {
               new ButtonImmList(new List<Button>() { new Button("Backward to glory!", "") }))
             .AsIGameEvent());
         } else {
-          game.AddEvent(new NarrateEvent(defyCounter.numDefiesRemaining + " Defy remaining!").AsIGameEvent());
+          game.instructions = defyCounter.numDefiesRemaining + " Defies remaining!";
         }
       }
 
       if (triggerName == "ambush4f") {
-        game.AddEvent(new NarrateEvent(1 + " Defy remaining!").AsIGameEvent());
+        game.instructions = 1 + " Defy remaining!";
+        game.player.components.Add(game.root.EffectTutorialDefyCounterUCCreate(1, "ambush4fDefied").AsIUnitComponent());
         game.AddEvent(
           new ShowOverlayEvent(
             "Now, your past self is here to help you!\n\nIt will do the same things you did.\n\nDefy ('D') once, then attack the Ravagian Trask while it attacks your past self!",
@@ -273,6 +281,15 @@ namespace Atharia.Model {
             }))
           .AsIGameEvent());
       }
+      if (triggerName == "ambush4fDefied") {
+        var defyCounter = game.player.components.GetOnlyTutorialDefyCounterUCOrNull();
+        Asserts.Assert(defyCounter.Exists());
+        Asserts.Assert(defyCounter.numDefiesRemaining == 0);
+        game.player.components.Remove(defyCounter.AsIUnitComponent());
+        defyCounter.Destruct();
+        game.instructions = "";
+      }
+
 
       return new Atharia.Model.Void();
     }

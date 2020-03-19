@@ -9,6 +9,10 @@ using IncendianFalls;
 using UnityEngine.SceneManagement;
 
 namespace AthPlayer {
+  public delegate OverlayPresenter OverlayPresenterFactory(ShowOverlayEvent overlay);
+  public delegate void ShowError(string error);
+  public delegate void ShowInstructions(string error);
+
   public class InputSemaphore {
     public delegate void Locked();
     public event Locked OnLocked;
@@ -60,11 +64,12 @@ namespace AthPlayer {
 
     public PlayerPanelView playerPanelView;
 
-    public NarrationPanelView messageView;
-
     public SoundPlayer soundPlayer;
 
     public OverlayPaneler overlayPaneler;
+
+    private OverlayPresenter currentErrorOverlay;
+    private OverlayPresenter currentInstructionsOverlay;
 
     public void Start() {
       timer = new SlowableTimerClock(1f);
@@ -111,8 +116,9 @@ namespace AthPlayer {
               ss,
               game,
               instantiator,
-              messageView,
               NewOverlayPresenter,
+              this.ShowError,
+              this.ShowInstructions,
               cameraController);
 
       playerController =
@@ -125,9 +131,9 @@ namespace AthPlayer {
               game,
               gamePresenter,
               playerPanelView,
-              messageView,
               lookPanelView.GetComponent<LookPanelView>(),
-              NewOverlayPresenter);
+              NewOverlayPresenter,
+              this.ShowError);
       playerController.Start();
     }
 
@@ -157,6 +163,30 @@ namespace AthPlayer {
         overlay.isObscuring,
         overlay.text,
         buttons);
+    }
+
+    private void ShowError(string errorText) {
+      if (currentErrorOverlay != null) {
+        currentErrorOverlay.Close();
+      }
+      currentErrorOverlay =
+        NewOverlayPresenter(
+          new ShowOverlayEvent(
+            errorText, "error", "narrator", true, true, false, new ButtonImmList()));
+    }
+
+    private void ShowInstructions(string errorText) {
+      Debug.LogError("Showing instructions: " + errorText);
+      if (currentInstructionsOverlay != null) {
+        currentInstructionsOverlay.Close();
+        currentInstructionsOverlay = null;
+      }
+      if (errorText.Length > 0) {
+        currentInstructionsOverlay =
+          NewOverlayPresenter(
+            new ShowOverlayEvent(
+              errorText, "instructions", "narrator", true, true, false, new ButtonImmList()));
+      }
     }
 
     public void Update() {

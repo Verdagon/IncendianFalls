@@ -37,11 +37,14 @@ namespace AthPlayer {
 
     OverlayPaneler overlayPaneler;
     IClock cinematicTimer;
+    bool isError;
     public AsidePageController(
         OverlayPaneler overlayPaneler,
-        IClock cinematicTimer) {
+        IClock cinematicTimer,
+        bool isError) {
       this.overlayPaneler = overlayPaneler;
       this.cinematicTimer = cinematicTimer;
+      this.isError = isError;
     }
 
     public (int, int) GetPageTextMaxWidthAndHeight(bool isPortrait, List<OverlayPresenter.PageButton> buttons) {
@@ -56,7 +59,7 @@ namespace AthPlayer {
     }
 
     // Aside overlay takes up a 2x1 at top of screen, wide as screen.
-    public void ShowPage(
+    public OverlayPanelView ShowPage(
         List<string> pageLines,
         UnityEngine.Color textColor,
         List<OverlayPresenter.PageButton> buttons,
@@ -77,10 +80,18 @@ namespace AthPlayer {
       int horizontalAlignmentPercent = isPortrait ? 50 : 3;
       OverlayPanelView panelView =
         overlayPaneler.MakePanel(cinematicTimer, horizontalAlignmentPercent, 97, widthPercent, 44, panelWidth, panelHeight, .6667f);
-      int backgroundId =
+      int backgroundId;
+      if (isError) {
+        backgroundId =
+          panelView.AddBackground(
+            new UnityEngine.Color(.3f, 0, 0, .9f),
+            new UnityEngine.Color(.4f, .1f, .1f, .9f));
+      } else {
+        backgroundId =
         panelView.AddBackground(
           new UnityEngine.Color(0, 0, 0, .9f),
           new UnityEngine.Color(.1f, .1f, .1f, .9f));
+      }
       if (fadeInBackground) {
         panelView.SetFadeIn(backgroundId, new OverlayPanelView.FadeIn(0, 300));
       }
@@ -152,15 +163,7 @@ namespace AthPlayer {
       int startClosingAfterMs = 600 + 1000 + numChars * 1000 / 20;
       panelView.ScheduleClose(startClosingAfterMs);
 
-      //if (wrapped) {
-      //  panelView.AddString(
-      //    0,
-      //    panelWidth - ellipsisWidth - rightBorderWidth,
-      //    numLinesForBottomBorder + numLinesForButtons + 0.4f,
-      //    3,
-      //    new UnityEngine.Color(1, 1, 1, 1), font,
-      //    "...");
-      //}
+      return panelView;
     }
   }
 }

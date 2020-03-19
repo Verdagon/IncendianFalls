@@ -17,10 +17,26 @@ namespace IncendianFalls {
       if (superstate.navigatingState != null) {
         superstate.navigatingState = null;
         game.AddEvent(
-          new NarrateEvent("Canceled movement!").AsIGameEvent());
+          new ShowOverlayEvent(
+            "Canceled movement!",
+            "error",
+            "narrator",
+            true,
+            true,
+            false,
+            new ButtonImmList())
+          .AsIGameEvent());
       } else {
         game.AddEvent(
-          new NarrateEvent("No movement to cancel!").AsIGameEvent());
+          new ShowOverlayEvent(
+            "No movement to cancel!",
+            "error",
+            "narrator",
+            true,
+            true,
+            false,
+            new ButtonImmList())
+          .AsIGameEvent());
       }
 
       return "";

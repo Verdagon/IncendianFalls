@@ -166,6 +166,10 @@ public class Game {
     }
                          set { root.EffectGameSetLevel(id, value); }
   }
+  public string instructions {
+    get { return incarnation.instructions; }
+    set { root.EffectGameSetInstructions(id, value); }
+  }
   public int time {
     get { return incarnation.time; }
     set { root.EffectGameSetTime(id, value); }

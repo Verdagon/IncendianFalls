@@ -1,6 +1,7 @@
 ﻿using System;
 using Atharia.Model;
 using Domino;
+using UnityEngine;
 
 namespace AthPlayer {
   public class FireBombMode : IMode {
@@ -8,33 +9,32 @@ namespace AthPlayer {
     Superstate superstate;
     Game game;
     IModeDelegate delegat;
-    NarrationPanelView narrator;
+    ShowError showError;
+    OverlayPresenter instructionsOverlay;
 
     public FireBombMode(
         ISuperstructure ss,
         Superstate superstate,
         Game game,
         IModeDelegate delegat,
-        NarrationPanelView narrator) {
+        OverlayPresenterFactory overlayPresenterFactory,
+        ShowError showError) {
       this.ss = ss;
       this.superstate = superstate;
       this.game = game;
       this.delegat = delegat;
-      this.narrator = narrator;
+      this.showError = showError;
 
-      narrator.ShowMessage("Preparing to fire bomb! Select a location.");
-    }
-
-    private Unit FindUnitAtLocation(Location location) {
-      foreach (var unit in game.level.units) {
-        if (unit.location.Equals(location)) {
-          return unit;
-        }
-      }
-      return Unit.Null;
+      instructionsOverlay =
+        overlayPresenterFactory(
+          new ShowOverlayEvent(
+            "Preparing to fire bomb! Select a location.",
+            "instructions", "narrator", true, true, false, new ButtonImmList()));
     }
 
     public void OnTileMouseClick(Location location) {
+      instructionsOverlay.Close();
+
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
         ss.GetRoot().logger.Error("Not your turn!");
         delegat.AfterDidSomething();
@@ -44,73 +44,82 @@ namespace AthPlayer {
 
       string result = ss.RequestFireBomb(game.id, location);
       if (result.Length > 0) {
-        narrator.ShowMessage(result);
+        showError(result);
         delegat.SwitchToNormalMode();
         delegat.AfterDidSomething();
         return;
       }
 
-      narrator.ClearMessage();
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void DefyClicked() {
-      narrator.ShowMessage("You must select a location to fire bomb on. Canceling fire bomb!");
+      instructionsOverlay.Close();
+      showError("You must select a location to fire bomb on. Canceling fire bomb!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void ActivateCheat(string cheatName) {
-      narrator.ShowMessage("You must select a location to fire bomb on. Canceling fire bomb!");
+      instructionsOverlay.Close();
+      showError("You must select a location to fire bomb on. Canceling fire bomb!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void FireBombClicked() {
-      narrator.ShowMessage("Canceled fire bomb!");
+      instructionsOverlay.Close();
+      showError("Canceled fire bomb!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void CancelClicked() {
-      narrator.ShowMessage("Canceled fire bomb!");
+      instructionsOverlay.Close();
+      showError("Canceled fire bomb!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void FireClicked() {
-      narrator.ShowMessage("You must select a location to fire bomb on. Canceling fire bomb!");
+      instructionsOverlay.Close();
+      showError("You must select a location to fire bomb on. Canceling fire bomb!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void MireClicked() {
-      narrator.ShowMessage("You must select a location to fire bomb on. Canceling fire bomb!");
+      instructionsOverlay.Close();
+      showError("You must select a location to fire bomb on. Canceling fire bomb!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void CounterClicked() {
-      narrator.ShowMessage("You must select a location to fire bomb on. Canceling fire bomb!");
+      instructionsOverlay.Close();
+      showError("You must select a location to fire bomb on. Canceling fire bomb!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void InteractClicked() {
-      narrator.ShowMessage("You must select a location to fire bomb on. Canceling fire bomb!");
+      instructionsOverlay.Close();
+      showError("You must select a location to fire bomb on. Canceling fire bomb!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void TimeShiftClicked() {
-      narrator.ShowMessage("You must select a location to fire bomb on. Canceling fire bomb!");
+      instructionsOverlay.Close();
+      showError("You must select a location to fire bomb on. Canceling fire bomb!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void TimeAnchorMoveClicked() {
-      narrator.ShowMessage("You must select a location to fire bomb on. Canceling fire bomb!");
+      instructionsOverlay.Close();
+      showError("You must select a location to fire bomb on. Canceling fire bomb!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }

@@ -8,24 +8,32 @@ namespace AthPlayer {
     Superstate superstate;
     Game game;
     IModeDelegate delegat;
-    NarrationPanelView narrator;
+    ShowError showError;
+    OverlayPresenter instructionsOverlay;
 
     public TimeAnchorMoveMode(
         ISuperstructure ss,
         Superstate superstate,
         Game game,
         IModeDelegate delegat,
-        NarrationPanelView narrator) {
+        OverlayPresenterFactory overlayPresenterFactory,
+        ShowError showError) {
       this.ss = ss;
       this.superstate = superstate;
       this.game = game;
       this.delegat = delegat;
-      this.narrator = narrator;
+      this.showError = showError;
 
-      narrator.ShowMessage("Placing a time anchor! Select an adjacent space to move to, to make room for it.");
+      instructionsOverlay =
+        overlayPresenterFactory(
+          new ShowOverlayEvent(
+            "Placing a time anchor! Select an adjacent space to move to, to make room for it.",
+            "instructions", "narrator", true, true, false, new ButtonImmList()));
     }
 
     public void OnTileMouseClick(Location newLocation) {
+      instructionsOverlay.Close();
+
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
         ss.GetRoot().logger.Error("Not your turn!");
         delegat.AfterDidSomething();
@@ -34,73 +42,82 @@ namespace AthPlayer {
 
       string result = ss.RequestTimeAnchorMove(game.id, newLocation);
       if (result != "") {
-        narrator.ShowMessage(result);
+        showError(result);
         delegat.SwitchToNormalMode();
         delegat.AfterDidSomething();
         return;
       }
 
-      narrator.ClearMessage();
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void DefyClicked() {
-      narrator.ShowMessage("You must move off the time anchor to place it. Canceling time anchor!");
+      instructionsOverlay.Close();
+      showError("You must move off the time anchor to place it. Canceling time anchor!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void CancelClicked() {
-      narrator.ShowMessage("Canceling time anchor!");
+      instructionsOverlay.Close();
+      showError("Canceling time anchor!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void ActivateCheat(string cheatName) {
-      narrator.ShowMessage("You must move off the time anchor to place it. Canceling time anchor!");
+      instructionsOverlay.Close();
+      showError("You must move off the time anchor to place it. Canceling time anchor!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void FireClicked() {
-      narrator.ShowMessage("You must move off the time anchor to place it. Canceling time anchor!");
+      instructionsOverlay.Close();
+      showError("You must move off the time anchor to place it. Canceling time anchor!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void FireBombClicked() {
-      narrator.ShowMessage("You must move off the time anchor to place it. Canceling time anchor!");
+      instructionsOverlay.Close();
+      showError("You must move off the time anchor to place it. Canceling time anchor!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void MireClicked() {
-      narrator.ShowMessage("You must move off the time anchor to place it. Canceling time anchor!");
+      instructionsOverlay.Close();
+      showError("You must move off the time anchor to place it. Canceling time anchor!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void CounterClicked() {
-      narrator.ShowMessage("You must move off the time anchor to place it. Canceling time anchor!");
+      instructionsOverlay.Close();
+      showError("You must move off the time anchor to place it. Canceling time anchor!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void InteractClicked() {
-      narrator.ShowMessage("You must move off the time anchor to place it. Canceling time anchor!");
+      instructionsOverlay.Close();
+      showError("You must move off the time anchor to place it. Canceling time anchor!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void TimeShiftClicked() {
-      narrator.ShowMessage("You must move off the time anchor to place it. Canceling time anchor!");
+      instructionsOverlay.Close();
+      showError("You must move off the time anchor to place it. Canceling time anchor!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void TimeAnchorMoveClicked() {
-      narrator.ShowMessage("Canceled time anchor!");
+      instructionsOverlay.Close();
+      showError("Canceled time anchor!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }

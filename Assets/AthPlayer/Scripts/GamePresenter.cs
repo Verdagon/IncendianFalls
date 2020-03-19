@@ -10,8 +10,6 @@ namespace AthPlayer {
   public delegate void OnLocationClicked(Location location);
 
   public class GamePresenter : IGameEffectVisitor, IGameEffectObserver, IUnitMutSetEffectVisitor, IUnitMutSetEffectObserver, IGameEventVisitor, IIGameEventMutListEffectVisitor, IIGameEventMutListEffectObserver {
-    public delegate OverlayPresenter OverlayPresenterFactory(ShowOverlayEvent overlay);
-
     public OnLocationHovered LocationHovered;
     public OnLocationClicked LocationClicked;
 
@@ -25,11 +23,12 @@ namespace AthPlayer {
     Game game;
     Level viewedLevel;
     Instantiator instantiator;
-    NarrationPanelView narrator;
     FollowingCameraController cameraController;
 
     TerrainPresenter terrainPresenter;
     OverlayPresenterFactory overlayPresenterFactory;
+    ShowError showError;
+    ShowInstructions showInstructions;
 
     Dictionary<int, UnitPresenter> unitPresenters;
 
@@ -43,9 +42,10 @@ namespace AthPlayer {
         ISuperstructure ss,
         Game game,
         Instantiator instantiator,
-        NarrationPanelView narrator,
         OverlayPresenterFactory overlayPresenterFactory,
-        FollowingCameraController cameraController) {
+    ShowError showError,
+    ShowInstructions showInstructions,
+    FollowingCameraController cameraController) {
       this.timer = timer;
       this.cinematicTimer = cinematicTimer;
       this.soundPlayer = soundPlayer;
@@ -53,10 +53,12 @@ namespace AthPlayer {
       this.turnStaller = turnStaller;
       this.ss = ss;
       this.game = game;
-      this.narrator = narrator;
+      this.overlayPresenterFactory = overlayPresenterFactory;
       this.instantiator = instantiator;
       this.cameraController = cameraController;
       this.overlayPresenterFactory = overlayPresenterFactory;
+      this.showError = showError;
+      this.showInstructions = showInstructions;
       this.thinkingIndicator = thinkingIndicator;
 
       game.AddObserver(this);
@@ -82,7 +84,7 @@ namespace AthPlayer {
       var unit = ss.GetRoot().GetUnit(unitId);
       unitPresenters[unitId] =
           new UnitPresenter(
-              timer, timer, soundPlayer, resumeStaller, turnStaller, game, viewedLevel.terrain, unit, instantiator, narrator);
+              timer, timer, soundPlayer, resumeStaller, turnStaller, game, viewedLevel.terrain, unit, instantiator);
     }
 
     private void LoadLevel() {
@@ -126,6 +128,9 @@ namespace AthPlayer {
     }
     public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) { }
     public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
+    public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) {
+      showInstructions(effect.newValue);
+    }
 
     public void visitUnitMutSetCreateEffect(UnitMutSetCreateEffect effect) { }
     public void visitUnitMutSetDeleteEffect(UnitMutSetDeleteEffect effect) { }
@@ -198,10 +203,6 @@ namespace AthPlayer {
 
     public void Visit(WaitEventAsIGameEvent obj) {
       cinematicTimer.ScheduleTimer(obj.obj.timeMs, () => ss.RequestTrigger(game.id, obj.obj.endTriggerName));
-    }
-
-    public void Visit(NarrateEventAsIGameEvent obj) {
-      narrator.ShowMessage(obj.obj.text);
     }
   }
 }

@@ -1,7 +1,7 @@
 package net.verdagon.chronobasecs.generator.chronobase.set
 
 import net.verdagon.chronobasecs.generator.chronobase.Generator.toCS
-import net.verdagon.chronobasecs.compiled.{ListS, MutableS, SetS}
+import net.verdagon.chronobasecs.compiled.{ListS, MutableS, SetS, WeakS}
 import net.verdagon.chronobasecs.generator.chronobase.ChronobaseOptions
 
 object MutSetRootMethods {
@@ -128,7 +128,13 @@ object MutSetRootMethods {
        |    public void Effect${setName}Remove(int setId, int elementId) {
        |      CheckUnlocked();
        |      CheckHas${setName}(setId);
-       |      CheckHas${elementTypeCSName}(elementId);
+       |""".stripMargin +
+      (if (elementType.ownership != WeakS) {
+        s"""
+        CheckHas${elementTypeCSName}(elementId);
+           |""".stripMargin
+      } else "") +
+    s"""
        |
        |      var effect = new ${setName}RemoveEffect(setId, elementId);
        |

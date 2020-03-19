@@ -26,8 +26,6 @@ namespace AthPlayer {
     Game game;
     public readonly Unit unit;
     Instantiator instantiator;
-    NarrationPanelView narrator;
-    bool isRavashrike;
 
     UnitView unitView;
     HashSet<int> invincibilityIds = new HashSet<int>();
@@ -49,8 +47,7 @@ namespace AthPlayer {
         Game game,
         Atharia.Model.Terrain terrain,
         Unit unit,
-        Instantiator instantiator,
-        NarrationPanelView narrator) {
+        Instantiator instantiator) {
       this.alive = true;
       this.timer = timer;
       this.soundPlayer = soundPlayer;
@@ -59,8 +56,6 @@ namespace AthPlayer {
       this.game = game;
       this.unit = unit;
       this.instantiator = instantiator;
-      this.narrator = narrator;
-      this.isRavashrike = (unit.classId == "Ravashrike");
 
       unit.AddObserver(this);
       unit.events.AddObserver(this);
@@ -116,10 +111,6 @@ namespace AthPlayer {
     }
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
-      if (isRavashrike) {
-        narrator.ShowMessage("You have slain the Ravashrike and found Volcaetus!\nCongratulations on your glorious victory!");
-      }
-
       // Note the lack of a DestroyUnitPresenter() here, that's done by GamePresenter when
       // it's removed from the level's units set.
     }
@@ -138,10 +129,6 @@ namespace AthPlayer {
     }
     public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) {
       if (!effect.newValue) {
-        if (isRavashrike) {
-          narrator.ShowMessage("You have slain the Ravashrike and found Volcaetus!\nCongratulations on your glorious victory!");
-        }
-
         unitView.GetComponent<UnitView>().Die(500);
         timer.ScheduleTimer(500, () => {
           if (unitView != null) {

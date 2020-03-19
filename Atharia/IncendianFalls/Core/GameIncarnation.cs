@@ -13,6 +13,7 @@ public class GameIncarnation {
   public readonly int eventedUnits;
   public readonly int eventedTerrainTiles;
   public  int level;
+  public  string instructions;
   public  int time;
   public readonly int executionState;
   public GameIncarnation(
@@ -24,6 +25,7 @@ public class GameIncarnation {
       int eventedUnits,
       int eventedTerrainTiles,
       int level,
+      string instructions,
       int time,
       int executionState) {
     this.rand = rand;
@@ -34,6 +36,7 @@ public class GameIncarnation {
     this.eventedUnits = eventedUnits;
     this.eventedTerrainTiles = eventedTerrainTiles;
     this.level = level;
+    this.instructions = instructions;
     this.time = time;
     this.executionState = executionState;
   }

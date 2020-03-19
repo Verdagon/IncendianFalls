@@ -32,7 +32,7 @@ namespace IncendianFalls {
       var player = game.player;
 
       if (player.components.GetAllBlastRod().Count == 0) {
-        return "Can't fire bomb without Blast Rod!";
+        return "Can't fire bomb without Fire Rod!";
       }
 
       if (game.level.terrain.pattern.GetDistanceBetween(location, player.location) > 5) {

@@ -15,15 +15,18 @@ namespace AthPlayer {
     IClock cinematicTimer;
     InputSemaphore inputSemaphore;
     bool isFullscreen;
+    bool longBackgroundFade;
     public NormalPageController(
         OverlayPaneler overlayPaneler,
         IClock cinematicTimer,
         InputSemaphore inputSemaphore,
-        bool isFullscreen) {
+        bool isFullscreen,
+        bool longBackgroundFade) {
       this.overlayPaneler = overlayPaneler;
       this.cinematicTimer = cinematicTimer;
       this.inputSemaphore = inputSemaphore;
       this.isFullscreen = isFullscreen;
+      this.longBackgroundFade = longBackgroundFade;
     }
 
     public (int, int) GetPageTextMaxWidthAndHeight(bool isPortrait, List<OverlayPresenter.PageButton> buttons) {
@@ -33,9 +36,9 @@ namespace AthPlayer {
           // 45 - 2 padding - 1 margin - 3 button = 39
           return (28, 39);
         } else {
-          // 60 - 2 padding = 58
-          // 40 - 2 padding - 1 margin - 3 button = 34
-          return (78, 54);
+          // 70 - 2 padding = 68
+          // 50 - 2 padding - 1 margin - 3 button = 44
+          return (68, 44);
         }
       } else {
         if (isPortrait) {
@@ -47,7 +50,7 @@ namespace AthPlayer {
     }
 
     // Normal overlay takes up a 2x1 at top of screen, wide as screen.
-    public void ShowPage(
+    public OverlayPanelView ShowPage(
         List<string> pageLines,
         UnityEngine.Color textColor,
         List<OverlayPresenter.PageButton> buttons,
@@ -55,6 +58,8 @@ namespace AthPlayer {
         bool fadeOutBackground,
         bool isPortrait,
         bool callCallbackAfterFadeOut) {
+
+      int fadeTimeMultiplier = longBackgroundFade ? 3 : 1;
 
       if (buttons.Count == 0) {
         // Do nothing. It'll close itself and nothing else.
@@ -109,10 +114,10 @@ namespace AthPlayer {
             new UnityEngine.Color(.2f, .2f, .2f, .85f));
       }
       if (fadeInBackground) {
-        panelView.SetFadeIn(backgroundId, new OverlayPanelView.FadeIn(0, 300));
+        panelView.SetFadeIn(backgroundId, new OverlayPanelView.FadeIn(0, 300 * fadeTimeMultiplier));
       }
       if (fadeOutBackground) {
-        panelView.SetFadeOut(backgroundId, new OverlayPanelView.FadeOut(-300, 0));
+        panelView.SetFadeOut(backgroundId, new OverlayPanelView.FadeOut(-300 * fadeTimeMultiplier, 0));
       }
 
       for (int i = 0; i < panelView.symbolsHigh && i < pageLines.Count; i++) {
@@ -123,11 +128,11 @@ namespace AthPlayer {
             pageLines[i]);
         foreach (var textId in textIds) {
           if (fadeInBackground) {
-            panelView.SetFadeIn(textId, new OverlayPanelView.FadeIn(300, 600));
+            panelView.SetFadeIn(textId, new OverlayPanelView.FadeIn(300 * fadeTimeMultiplier, 600 * fadeTimeMultiplier));
           } else {
-            panelView.SetFadeIn(textId, new OverlayPanelView.FadeIn(0, 300));
+            panelView.SetFadeIn(textId, new OverlayPanelView.FadeIn(0, 300 * fadeTimeMultiplier));
           }
-          panelView.SetFadeOut(textId, new OverlayPanelView.FadeOut(-300, 0));
+          panelView.SetFadeOut(textId, new OverlayPanelView.FadeOut(-300 * fadeTimeMultiplier, 0));
         }
       }
 
@@ -163,8 +168,6 @@ namespace AthPlayer {
               });
               panelView.ScheduleClose(0);
             });
-        panelView.SetFadeIn(buttonId, new OverlayPanelView.FadeIn(0, 300));
-        panelView.SetFadeOut(buttonId, new OverlayPanelView.FadeOut(-300, 0));
         panelView.AddString(
           buttonId,
           panelWidth - rightBorderWidth - buttonWidth + buttonBorderWidth,
@@ -172,7 +175,15 @@ namespace AthPlayer {
           buttonTextWidth,
           new UnityEngine.Color(1, 1, 1, 1),
             font, buttonText);
+        if (fadeInBackground) {
+          panelView.SetFadeIn(buttonId, new OverlayPanelView.FadeIn(300 * fadeTimeMultiplier, 600 * fadeTimeMultiplier));
+        } else {
+          panelView.SetFadeIn(buttonId, new OverlayPanelView.FadeIn(0, 300 * fadeTimeMultiplier));
+        }
+        panelView.SetFadeOut(buttonId, new OverlayPanelView.FadeOut(-300 * fadeTimeMultiplier, 0));
       }
+
+      return panelView;
 
       //if (wrapped) {
       //  panelView.AddString(

@@ -13,7 +13,7 @@ namespace AthPlayer {
   public interface IPageController {
     (int, int) GetPageTextMaxWidthAndHeight(bool isPortrait, List<OverlayPresenter.PageButton> buttons);
 
-    void ShowPage(
+    OverlayPanelView ShowPage(
         List<string> pageLines,
         UnityEngine.Color textColor,
         List<OverlayPresenter.PageButton> buttons,

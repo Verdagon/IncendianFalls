@@ -79,6 +79,7 @@
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\Resumer.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\PlayerControllers\TimeAnchorMoveMode.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\Overlay\AsidePageController.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\Presenters\Overlay\InstructionsPageController.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\Overlay\IPageController.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\Overlay\NormalPageController.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\Overlay\OverlayPresenter.cs" />
@@ -121,7 +122,6 @@
     <Compile Include="Assets\Domino\Scripts\Vector3Extensions.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\DominoView.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\MeterView.cs" />
-    <Compile Include="Assets\Domino\Scripts\Views\NarrationPanelView.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\Overlay\LineWrapper.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\Overlay\OverlayPaneler.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\Overlay\OverlayPanelView.cs" />

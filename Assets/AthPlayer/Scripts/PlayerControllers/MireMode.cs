@@ -8,21 +8,27 @@ namespace AthPlayer {
     Superstate superstate;
     Game game;
     IModeDelegate delegat;
-    NarrationPanelView narrator;
+    ShowError showError;
+    OverlayPresenter instructionsOverlay;
 
     public MireMode(
         ISuperstructure ss,
         Superstate superstate,
         Game game,
         IModeDelegate delegat,
-        NarrationPanelView narrator) {
+        OverlayPresenterFactory overlayPresenterFactory,
+        ShowError showError) {
       this.ss = ss;
       this.superstate = superstate;
       this.game = game;
       this.delegat = delegat;
-      this.narrator = narrator;
+      this.showError = showError;
 
-      narrator.ShowMessage("Preparing to cast Mire! Select a unit to Mire.");
+      instructionsOverlay =
+        overlayPresenterFactory(
+          new ShowOverlayEvent(
+            "Preparing to cast Mire! Select unit to Mire.",
+            "instructions", "narrator", true, true, false, new ButtonImmList()));
     }
 
     private Unit FindUnitAtLocation(Location location) {
@@ -35,6 +41,8 @@ namespace AthPlayer {
     }
 
     public void OnTileMouseClick(Location location) {
+      instructionsOverlay.Close();
+
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
         ss.GetRoot().logger.Error("Not your turn!");
         delegat.AfterDidSomething();
@@ -44,7 +52,7 @@ namespace AthPlayer {
 
       var unit = FindUnitAtLocation(location);
       if (!unit.Exists()) {
-        narrator.ShowMessage("No unit there. Canceling Mire!");
+        showError("No unit there. Canceling Mire!");
         delegat.SwitchToNormalMode();
         delegat.AfterDidSomething();
         return;
@@ -52,74 +60,73 @@ namespace AthPlayer {
 
       string result = ss.RequestMire(game.id, unit.id);
       if (result.Length > 0) {
-        narrator.ShowMessage(result);
+        showError(result);
         delegat.SwitchToNormalMode();
         delegat.AfterDidSomething();
         return;
       }
 
-      narrator.ClearMessage();
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void DefyClicked() {
-      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
+      showError("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void ActivateCheat(string cheatName) {
-      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
+      showError("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void MireClicked() {
-      narrator.ShowMessage("Canceled Mire!");
+      showError("Canceled Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void CancelClicked() {
-      narrator.ShowMessage("Canceled Mire!");
+      showError("Canceled Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
 
     public void FireBombClicked() {
-      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
+      showError("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void FireClicked() {
-      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
+      showError("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void CounterClicked() {
-      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
+      showError("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void InteractClicked() {
-      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
+      showError("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void TimeShiftClicked() {
-      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
+      showError("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
 
     public void TimeAnchorMoveClicked() {
-      narrator.ShowMessage("You must select a unit to Mire them. Canceling Mire!");
+      showError("You must select a unit to Mire them. Canceling Mire!");
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }

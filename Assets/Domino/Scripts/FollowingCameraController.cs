@@ -58,6 +58,7 @@ namespace Domino {
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
       //cameraController.SetCameraAngle(game.level.cameraAngle.ToUnity());
     }
+    public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) { }
     public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
     public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) {
       RefollowPlayer();

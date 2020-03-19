@@ -779,6 +779,8 @@ public class Root {
       new List<GameSetPlayerEffect>();
   readonly List<GameSetLevelEffect> effectsGameSetLevelEffect =
       new List<GameSetLevelEffect>();
+  readonly List<GameSetInstructionsEffect> effectsGameSetInstructionsEffect =
+      new List<GameSetInstructionsEffect>();
   readonly List<GameSetTimeEffect> effectsGameSetTimeEffect =
       new List<GameSetTimeEffect>();
 
@@ -14697,6 +14699,10 @@ public class Root {
 
           if (sourceObjIncarnation.level != currentObjIncarnation.level) {
             EffectGameSetLevel(objId, new Level(this, sourceObjIncarnation.level));
+          }
+
+          if (sourceObjIncarnation.instructions != currentObjIncarnation.instructions) {
+            EffectGameSetInstructions(objId, sourceObjIncarnation.instructions);
           }
 
           if (sourceObjIncarnation.time != currentObjIncarnation.time) {
@@ -30539,6 +30545,7 @@ public class Root {
       UnitWeakMutSet eventedUnits,
       TerrainTileWeakMutSet eventedTerrainTiles,
       Level level,
+      string instructions,
       int time,
       ExecutionState executionState) {
     CheckUnlocked();
@@ -30560,6 +30567,7 @@ public class Root {
             eventedUnits.id,
             eventedTerrainTiles.id,
             level.id,
+            instructions,
             time,
             executionState.id
             );
@@ -30606,8 +30614,9 @@ public class Root {
     if (!object.ReferenceEquals(incarnation.level, null)) {
       result += id * version * 8 * incarnation.level.GetDeterministicHashCode();
     }
-    result += id * version * 9 * incarnation.time.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.executionState.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.instructions.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.time.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.executionState.GetDeterministicHashCode();
     return result;
   }
      
@@ -30656,6 +30665,20 @@ public class Root {
       }
     }
     effectsGameSetLevelEffect.Clear();
+
+    foreach (var effect in effectsGameSetInstructionsEffect) {
+      if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGameEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IGameEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGameEffect(effect);
+        }
+      }
+    }
+    effectsGameSetInstructionsEffect.Clear();
 
     foreach (var effect in effectsGameSetTimeEffect) {
       if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
@@ -30706,6 +30729,7 @@ public class Root {
               oldIncarnationAndVersion.incarnation.eventedUnits,
               oldIncarnationAndVersion.incarnation.eventedTerrainTiles,
               oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.time,
               oldIncarnationAndVersion.incarnation.executionState);
       rootIncarnation.incarnationsGame[id] =
@@ -30737,6 +30761,7 @@ public class Root {
               oldIncarnationAndVersion.incarnation.eventedUnits,
               oldIncarnationAndVersion.incarnation.eventedTerrainTiles,
               newValue.id,
+              oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.time,
               oldIncarnationAndVersion.incarnation.executionState);
       rootIncarnation.incarnationsGame[id] =
@@ -30746,6 +30771,38 @@ public class Root {
     }
 
     effectsGameSetLevelEffect.Add(effect);
+  }
+
+  public void EffectGameSetInstructions(int id, string newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = new GameSetInstructionsEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.instructions;
+      oldIncarnationAndVersion.incarnation.instructions = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.eventedUnits,
+              oldIncarnationAndVersion.incarnation.eventedTerrainTiles,
+              oldIncarnationAndVersion.incarnation.level,
+              newValue,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.executionState);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsGameSetInstructionsEffect.Add(effect);
   }
 
   public void EffectGameSetTime(int id, int newValue) {
@@ -30768,6 +30825,7 @@ public class Root {
               oldIncarnationAndVersion.incarnation.eventedUnits,
               oldIncarnationAndVersion.incarnation.eventedTerrainTiles,
               oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.instructions,
               newValue,
               oldIncarnationAndVersion.incarnation.executionState);
       rootIncarnation.incarnationsGame[id] =
@@ -35227,7 +35285,9 @@ public class Root {
     public void EffectLevelMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasLevelMutSet(setId);
-      CheckHasLevel(elementId);
+
+        CheckHasLevel(elementId);
+
 
       var effect = new LevelMutSetRemoveEffect(setId, elementId);
 
@@ -35418,7 +35478,7 @@ public class Root {
     public void EffectUnitWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasUnitWeakMutSet(setId);
-      CheckHasUnit(elementId);
+
 
       var effect = new UnitWeakMutSetRemoveEffect(setId, elementId);
 
@@ -35609,7 +35669,7 @@ public class Root {
     public void EffectTerrainTileWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasTerrainTileWeakMutSet(setId);
-      CheckHasTerrainTile(elementId);
+
 
       var effect = new TerrainTileWeakMutSetRemoveEffect(setId, elementId);
 
@@ -35800,7 +35860,7 @@ public class Root {
     public void EffectDoomedUCWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasDoomedUCWeakMutSet(setId);
-      CheckHasDoomedUC(elementId);
+
 
       var effect = new DoomedUCWeakMutSetRemoveEffect(setId, elementId);
 
@@ -35991,7 +36051,7 @@ public class Root {
     public void EffectMiredUCWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasMiredUCWeakMutSet(setId);
-      CheckHasMiredUC(elementId);
+
 
       var effect = new MiredUCWeakMutSetRemoveEffect(setId, elementId);
 
@@ -36182,7 +36242,7 @@ public class Root {
     public void EffectInvincibilityUCWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasInvincibilityUCWeakMutSet(setId);
-      CheckHasInvincibilityUC(elementId);
+
 
       var effect = new InvincibilityUCWeakMutSetRemoveEffect(setId, elementId);
 
@@ -36373,7 +36433,7 @@ public class Root {
     public void EffectDefyingUCWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasDefyingUCWeakMutSet(setId);
-      CheckHasDefyingUC(elementId);
+
 
       var effect = new DefyingUCWeakMutSetRemoveEffect(setId, elementId);
 
@@ -36564,7 +36624,7 @@ public class Root {
     public void EffectCounteringUCWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasCounteringUCWeakMutSet(setId);
-      CheckHasCounteringUC(elementId);
+
 
       var effect = new CounteringUCWeakMutSetRemoveEffect(setId, elementId);
 
@@ -36755,7 +36815,7 @@ public class Root {
     public void EffectAttackAICapabilityUCWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasAttackAICapabilityUCWeakMutSet(setId);
-      CheckHasAttackAICapabilityUC(elementId);
+
 
       var effect = new AttackAICapabilityUCWeakMutSetRemoveEffect(setId, elementId);
 
@@ -36946,7 +37006,7 @@ public class Root {
     public void EffectLightningChargedUCWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasLightningChargedUCWeakMutSet(setId);
-      CheckHasLightningChargedUC(elementId);
+
 
       var effect = new LightningChargedUCWeakMutSetRemoveEffect(setId, elementId);
 
@@ -37137,7 +37197,7 @@ public class Root {
     public void EffectTimeCloneAICapabilityUCWeakMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasTimeCloneAICapabilityUCWeakMutSet(setId);
-      CheckHasTimeCloneAICapabilityUC(elementId);
+
 
       var effect = new TimeCloneAICapabilityUCWeakMutSetRemoveEffect(setId, elementId);
 
@@ -37328,7 +37388,9 @@ public class Root {
     public void EffectManaPotionStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasManaPotionStrongMutSet(setId);
-      CheckHasManaPotion(elementId);
+
+        CheckHasManaPotion(elementId);
+
 
       var effect = new ManaPotionStrongMutSetRemoveEffect(setId, elementId);
 
@@ -37519,7 +37581,9 @@ public class Root {
     public void EffectHealthPotionStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasHealthPotionStrongMutSet(setId);
-      CheckHasHealthPotion(elementId);
+
+        CheckHasHealthPotion(elementId);
+
 
       var effect = new HealthPotionStrongMutSetRemoveEffect(setId, elementId);
 
@@ -37710,7 +37774,9 @@ public class Root {
     public void EffectSpeedRingStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasSpeedRingStrongMutSet(setId);
-      CheckHasSpeedRing(elementId);
+
+        CheckHasSpeedRing(elementId);
+
 
       var effect = new SpeedRingStrongMutSetRemoveEffect(setId, elementId);
 
@@ -37901,7 +37967,9 @@ public class Root {
     public void EffectGlaiveStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasGlaiveStrongMutSet(setId);
-      CheckHasGlaive(elementId);
+
+        CheckHasGlaive(elementId);
+
 
       var effect = new GlaiveStrongMutSetRemoveEffect(setId, elementId);
 
@@ -38092,7 +38160,9 @@ public class Root {
     public void EffectSlowRodStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasSlowRodStrongMutSet(setId);
-      CheckHasSlowRod(elementId);
+
+        CheckHasSlowRod(elementId);
+
 
       var effect = new SlowRodStrongMutSetRemoveEffect(setId, elementId);
 
@@ -38283,7 +38353,9 @@ public class Root {
     public void EffectBlastRodStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasBlastRodStrongMutSet(setId);
-      CheckHasBlastRod(elementId);
+
+        CheckHasBlastRod(elementId);
+
 
       var effect = new BlastRodStrongMutSetRemoveEffect(setId, elementId);
 
@@ -38474,7 +38546,9 @@ public class Root {
     public void EffectArmorStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasArmorStrongMutSet(setId);
-      CheckHasArmor(elementId);
+
+        CheckHasArmor(elementId);
+
 
       var effect = new ArmorStrongMutSetRemoveEffect(setId, elementId);
 
@@ -38665,7 +38739,9 @@ public class Root {
     public void EffectHoldPositionImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasHoldPositionImpulseStrongMutSet(setId);
-      CheckHasHoldPositionImpulse(elementId);
+
+        CheckHasHoldPositionImpulse(elementId);
+
 
       var effect = new HoldPositionImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -38856,7 +38932,9 @@ public class Root {
     public void EffectTemporaryCloneImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasTemporaryCloneImpulseStrongMutSet(setId);
-      CheckHasTemporaryCloneImpulse(elementId);
+
+        CheckHasTemporaryCloneImpulse(elementId);
+
 
       var effect = new TemporaryCloneImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -39047,7 +39125,9 @@ public class Root {
     public void EffectSummonImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasSummonImpulseStrongMutSet(setId);
-      CheckHasSummonImpulse(elementId);
+
+        CheckHasSummonImpulse(elementId);
+
 
       var effect = new SummonImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -39238,7 +39318,9 @@ public class Root {
     public void EffectMireImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasMireImpulseStrongMutSet(setId);
-      CheckHasMireImpulse(elementId);
+
+        CheckHasMireImpulse(elementId);
+
 
       var effect = new MireImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -39429,7 +39511,9 @@ public class Root {
     public void EffectEvaporateImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasEvaporateImpulseStrongMutSet(setId);
-      CheckHasEvaporateImpulse(elementId);
+
+        CheckHasEvaporateImpulse(elementId);
+
 
       var effect = new EvaporateImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -39620,7 +39704,9 @@ public class Root {
     public void EffectMoveImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasMoveImpulseStrongMutSet(setId);
-      CheckHasMoveImpulse(elementId);
+
+        CheckHasMoveImpulse(elementId);
+
 
       var effect = new MoveImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -39811,7 +39897,9 @@ public class Root {
     public void EffectKamikazeJumpImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasKamikazeJumpImpulseStrongMutSet(setId);
-      CheckHasKamikazeJumpImpulse(elementId);
+
+        CheckHasKamikazeJumpImpulse(elementId);
+
 
       var effect = new KamikazeJumpImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -40002,7 +40090,9 @@ public class Root {
     public void EffectKamikazeTargetImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasKamikazeTargetImpulseStrongMutSet(setId);
-      CheckHasKamikazeTargetImpulse(elementId);
+
+        CheckHasKamikazeTargetImpulse(elementId);
+
 
       var effect = new KamikazeTargetImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -40193,7 +40283,9 @@ public class Root {
     public void EffectNoImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasNoImpulseStrongMutSet(setId);
-      CheckHasNoImpulse(elementId);
+
+        CheckHasNoImpulse(elementId);
+
 
       var effect = new NoImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -40384,7 +40476,9 @@ public class Root {
     public void EffectFireImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasFireImpulseStrongMutSet(setId);
-      CheckHasFireImpulse(elementId);
+
+        CheckHasFireImpulse(elementId);
+
 
       var effect = new FireImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -40575,7 +40669,9 @@ public class Root {
     public void EffectDefyImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasDefyImpulseStrongMutSet(setId);
-      CheckHasDefyImpulse(elementId);
+
+        CheckHasDefyImpulse(elementId);
+
 
       var effect = new DefyImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -40766,7 +40862,9 @@ public class Root {
     public void EffectCounterImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasCounterImpulseStrongMutSet(setId);
-      CheckHasCounterImpulse(elementId);
+
+        CheckHasCounterImpulse(elementId);
+
 
       var effect = new CounterImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -40957,7 +41055,9 @@ public class Root {
     public void EffectUnleashBideImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasUnleashBideImpulseStrongMutSet(setId);
-      CheckHasUnleashBideImpulse(elementId);
+
+        CheckHasUnleashBideImpulse(elementId);
+
 
       var effect = new UnleashBideImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -41148,7 +41248,9 @@ public class Root {
     public void EffectContinueBidingImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasContinueBidingImpulseStrongMutSet(setId);
-      CheckHasContinueBidingImpulse(elementId);
+
+        CheckHasContinueBidingImpulse(elementId);
+
 
       var effect = new ContinueBidingImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -41339,7 +41441,9 @@ public class Root {
     public void EffectStartBidingImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasStartBidingImpulseStrongMutSet(setId);
-      CheckHasStartBidingImpulse(elementId);
+
+        CheckHasStartBidingImpulse(elementId);
+
 
       var effect = new StartBidingImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -41530,7 +41634,9 @@ public class Root {
     public void EffectAttackImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasAttackImpulseStrongMutSet(setId);
-      CheckHasAttackImpulse(elementId);
+
+        CheckHasAttackImpulse(elementId);
+
 
       var effect = new AttackImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -41721,7 +41827,9 @@ public class Root {
     public void EffectPursueImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasPursueImpulseStrongMutSet(setId);
-      CheckHasPursueImpulse(elementId);
+
+        CheckHasPursueImpulse(elementId);
+
 
       var effect = new PursueImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -41912,7 +42020,9 @@ public class Root {
     public void EffectFireBombImpulseStrongMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasFireBombImpulseStrongMutSet(setId);
-      CheckHasFireBombImpulse(elementId);
+
+        CheckHasFireBombImpulse(elementId);
+
 
       var effect = new FireBombImpulseStrongMutSetRemoveEffect(setId, elementId);
 
@@ -42103,7 +42213,9 @@ public class Root {
     public void EffectUnitMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasUnitMutSet(setId);
-      CheckHasUnit(elementId);
+
+        CheckHasUnit(elementId);
+
 
       var effect = new UnitMutSetRemoveEffect(setId, elementId);
 
@@ -42294,7 +42406,9 @@ public class Root {
     public void EffectSimplePresenceTriggerTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasSimplePresenceTriggerTTCMutSet(setId);
-      CheckHasSimplePresenceTriggerTTC(elementId);
+
+        CheckHasSimplePresenceTriggerTTC(elementId);
+
 
       var effect = new SimplePresenceTriggerTTCMutSetRemoveEffect(setId, elementId);
 
@@ -42485,7 +42599,9 @@ public class Root {
     public void EffectItemTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasItemTTCMutSet(setId);
-      CheckHasItemTTC(elementId);
+
+        CheckHasItemTTC(elementId);
+
 
       var effect = new ItemTTCMutSetRemoveEffect(setId, elementId);
 
@@ -42676,7 +42792,9 @@ public class Root {
     public void EffectKamikazeTargetTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasKamikazeTargetTTCMutSet(setId);
-      CheckHasKamikazeTargetTTC(elementId);
+
+        CheckHasKamikazeTargetTTC(elementId);
+
 
       var effect = new KamikazeTargetTTCMutSetRemoveEffect(setId, elementId);
 
@@ -42867,7 +42985,9 @@ public class Root {
     public void EffectWarperTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasWarperTTCMutSet(setId);
-      CheckHasWarperTTC(elementId);
+
+        CheckHasWarperTTC(elementId);
+
 
       var effect = new WarperTTCMutSetRemoveEffect(setId, elementId);
 
@@ -43058,7 +43178,9 @@ public class Root {
     public void EffectTimeAnchorTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasTimeAnchorTTCMutSet(setId);
-      CheckHasTimeAnchorTTC(elementId);
+
+        CheckHasTimeAnchorTTC(elementId);
+
 
       var effect = new TimeAnchorTTCMutSetRemoveEffect(setId, elementId);
 
@@ -43249,7 +43371,9 @@ public class Root {
     public void EffectFireBombTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasFireBombTTCMutSet(setId);
-      CheckHasFireBombTTC(elementId);
+
+        CheckHasFireBombTTC(elementId);
+
 
       var effect = new FireBombTTCMutSetRemoveEffect(setId, elementId);
 
@@ -43440,7 +43564,9 @@ public class Root {
     public void EffectMarkerTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasMarkerTTCMutSet(setId);
-      CheckHasMarkerTTC(elementId);
+
+        CheckHasMarkerTTC(elementId);
+
 
       var effect = new MarkerTTCMutSetRemoveEffect(setId, elementId);
 
@@ -43631,7 +43757,9 @@ public class Root {
     public void EffectLevelLinkTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasLevelLinkTTCMutSet(setId);
-      CheckHasLevelLinkTTC(elementId);
+
+        CheckHasLevelLinkTTC(elementId);
+
 
       var effect = new LevelLinkTTCMutSetRemoveEffect(setId, elementId);
 
@@ -43822,7 +43950,9 @@ public class Root {
     public void EffectMudTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasMudTTCMutSet(setId);
-      CheckHasMudTTC(elementId);
+
+        CheckHasMudTTC(elementId);
+
 
       var effect = new MudTTCMutSetRemoveEffect(setId, elementId);
 
@@ -44013,7 +44143,9 @@ public class Root {
     public void EffectDirtTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasDirtTTCMutSet(setId);
-      CheckHasDirtTTC(elementId);
+
+        CheckHasDirtTTC(elementId);
+
 
       var effect = new DirtTTCMutSetRemoveEffect(setId, elementId);
 
@@ -44204,7 +44336,9 @@ public class Root {
     public void EffectObsidianTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasObsidianTTCMutSet(setId);
-      CheckHasObsidianTTC(elementId);
+
+        CheckHasObsidianTTC(elementId);
+
 
       var effect = new ObsidianTTCMutSetRemoveEffect(setId, elementId);
 
@@ -44395,7 +44529,9 @@ public class Root {
     public void EffectDownStairsTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasDownStairsTTCMutSet(setId);
-      CheckHasDownStairsTTC(elementId);
+
+        CheckHasDownStairsTTC(elementId);
+
 
       var effect = new DownStairsTTCMutSetRemoveEffect(setId, elementId);
 
@@ -44586,7 +44722,9 @@ public class Root {
     public void EffectUpStairsTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasUpStairsTTCMutSet(setId);
-      CheckHasUpStairsTTC(elementId);
+
+        CheckHasUpStairsTTC(elementId);
+
 
       var effect = new UpStairsTTCMutSetRemoveEffect(setId, elementId);
 
@@ -44777,7 +44915,9 @@ public class Root {
     public void EffectWallTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasWallTTCMutSet(setId);
-      CheckHasWallTTC(elementId);
+
+        CheckHasWallTTC(elementId);
+
 
       var effect = new WallTTCMutSetRemoveEffect(setId, elementId);
 
@@ -44968,7 +45108,9 @@ public class Root {
     public void EffectBloodTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasBloodTTCMutSet(setId);
-      CheckHasBloodTTC(elementId);
+
+        CheckHasBloodTTC(elementId);
+
 
       var effect = new BloodTTCMutSetRemoveEffect(setId, elementId);
 
@@ -45159,7 +45301,9 @@ public class Root {
     public void EffectRocksTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasRocksTTCMutSet(setId);
-      CheckHasRocksTTC(elementId);
+
+        CheckHasRocksTTC(elementId);
+
 
       var effect = new RocksTTCMutSetRemoveEffect(setId, elementId);
 
@@ -45350,7 +45494,9 @@ public class Root {
     public void EffectTreeTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasTreeTTCMutSet(setId);
-      CheckHasTreeTTC(elementId);
+
+        CheckHasTreeTTC(elementId);
+
 
       var effect = new TreeTTCMutSetRemoveEffect(setId, elementId);
 
@@ -45541,7 +45687,9 @@ public class Root {
     public void EffectWaterTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasWaterTTCMutSet(setId);
-      CheckHasWaterTTC(elementId);
+
+        CheckHasWaterTTC(elementId);
+
 
       var effect = new WaterTTCMutSetRemoveEffect(setId, elementId);
 
@@ -45732,7 +45880,9 @@ public class Root {
     public void EffectFloorTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasFloorTTCMutSet(setId);
-      CheckHasFloorTTC(elementId);
+
+        CheckHasFloorTTC(elementId);
+
 
       var effect = new FloorTTCMutSetRemoveEffect(setId, elementId);
 
@@ -45923,7 +46073,9 @@ public class Root {
     public void EffectCaveWallTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasCaveWallTTCMutSet(setId);
-      CheckHasCaveWallTTC(elementId);
+
+        CheckHasCaveWallTTC(elementId);
+
 
       var effect = new CaveWallTTCMutSetRemoveEffect(setId, elementId);
 
@@ -46114,7 +46266,9 @@ public class Root {
     public void EffectCaveTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasCaveTTCMutSet(setId);
-      CheckHasCaveTTC(elementId);
+
+        CheckHasCaveTTC(elementId);
+
 
       var effect = new CaveTTCMutSetRemoveEffect(setId, elementId);
 
@@ -46305,7 +46459,9 @@ public class Root {
     public void EffectFallsTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasFallsTTCMutSet(setId);
-      CheckHasFallsTTC(elementId);
+
+        CheckHasFallsTTC(elementId);
+
 
       var effect = new FallsTTCMutSetRemoveEffect(setId, elementId);
 
@@ -46496,7 +46652,9 @@ public class Root {
     public void EffectFireTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasFireTTCMutSet(setId);
-      CheckHasFireTTC(elementId);
+
+        CheckHasFireTTC(elementId);
+
 
       var effect = new FireTTCMutSetRemoveEffect(setId, elementId);
 
@@ -46687,7 +46845,9 @@ public class Root {
     public void EffectObsidianFloorTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasObsidianFloorTTCMutSet(setId);
-      CheckHasObsidianFloorTTC(elementId);
+
+        CheckHasObsidianFloorTTC(elementId);
+
 
       var effect = new ObsidianFloorTTCMutSetRemoveEffect(setId, elementId);
 
@@ -46878,7 +47038,9 @@ public class Root {
     public void EffectMagmaTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasMagmaTTCMutSet(setId);
-      CheckHasMagmaTTC(elementId);
+
+        CheckHasMagmaTTC(elementId);
+
 
       var effect = new MagmaTTCMutSetRemoveEffect(setId, elementId);
 
@@ -47069,7 +47231,9 @@ public class Root {
     public void EffectCliffTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasCliffTTCMutSet(setId);
-      CheckHasCliffTTC(elementId);
+
+        CheckHasCliffTTC(elementId);
+
 
       var effect = new CliffTTCMutSetRemoveEffect(setId, elementId);
 
@@ -47260,7 +47424,9 @@ public class Root {
     public void EffectRavaNestTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasRavaNestTTCMutSet(setId);
-      CheckHasRavaNestTTC(elementId);
+
+        CheckHasRavaNestTTC(elementId);
+
 
       var effect = new RavaNestTTCMutSetRemoveEffect(setId, elementId);
 
@@ -47451,7 +47617,9 @@ public class Root {
     public void EffectCliffLandingTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasCliffLandingTTCMutSet(setId);
-      CheckHasCliffLandingTTC(elementId);
+
+        CheckHasCliffLandingTTC(elementId);
+
 
       var effect = new CliffLandingTTCMutSetRemoveEffect(setId, elementId);
 
@@ -47642,7 +47810,9 @@ public class Root {
     public void EffectStoneTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasStoneTTCMutSet(setId);
-      CheckHasStoneTTC(elementId);
+
+        CheckHasStoneTTC(elementId);
+
 
       var effect = new StoneTTCMutSetRemoveEffect(setId, elementId);
 
@@ -47833,7 +48003,9 @@ public class Root {
     public void EffectGrassTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasGrassTTCMutSet(setId);
-      CheckHasGrassTTC(elementId);
+
+        CheckHasGrassTTC(elementId);
+
 
       var effect = new GrassTTCMutSetRemoveEffect(setId, elementId);
 
@@ -48024,7 +48196,9 @@ public class Root {
     public void EffectIncendianFallsLevelLinkerTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasIncendianFallsLevelLinkerTTCMutSet(setId);
-      CheckHasIncendianFallsLevelLinkerTTC(elementId);
+
+        CheckHasIncendianFallsLevelLinkerTTC(elementId);
+
 
       var effect = new IncendianFallsLevelLinkerTTCMutSetRemoveEffect(setId, elementId);
 
@@ -48215,7 +48389,9 @@ public class Root {
     public void EffectEmberDeepLevelLinkerTTCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasEmberDeepLevelLinkerTTCMutSet(setId);
-      CheckHasEmberDeepLevelLinkerTTC(elementId);
+
+        CheckHasEmberDeepLevelLinkerTTC(elementId);
+
 
       var effect = new EmberDeepLevelLinkerTTCMutSetRemoveEffect(setId, elementId);
 
@@ -48406,7 +48582,9 @@ public class Root {
     public void EffectTutorialDefyCounterUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasTutorialDefyCounterUCMutSet(setId);
-      CheckHasTutorialDefyCounterUC(elementId);
+
+        CheckHasTutorialDefyCounterUC(elementId);
+
 
       var effect = new TutorialDefyCounterUCMutSetRemoveEffect(setId, elementId);
 
@@ -48597,7 +48775,9 @@ public class Root {
     public void EffectLightningChargingUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasLightningChargingUCMutSet(setId);
-      CheckHasLightningChargingUC(elementId);
+
+        CheckHasLightningChargingUC(elementId);
+
 
       var effect = new LightningChargingUCMutSetRemoveEffect(setId, elementId);
 
@@ -48788,7 +48968,9 @@ public class Root {
     public void EffectWanderAICapabilityUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasWanderAICapabilityUCMutSet(setId);
-      CheckHasWanderAICapabilityUC(elementId);
+
+        CheckHasWanderAICapabilityUC(elementId);
+
 
       var effect = new WanderAICapabilityUCMutSetRemoveEffect(setId, elementId);
 
@@ -48979,7 +49161,9 @@ public class Root {
     public void EffectTemporaryCloneAICapabilityUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasTemporaryCloneAICapabilityUCMutSet(setId);
-      CheckHasTemporaryCloneAICapabilityUC(elementId);
+
+        CheckHasTemporaryCloneAICapabilityUC(elementId);
+
 
       var effect = new TemporaryCloneAICapabilityUCMutSetRemoveEffect(setId, elementId);
 
@@ -49170,7 +49354,9 @@ public class Root {
     public void EffectSummonAICapabilityUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasSummonAICapabilityUCMutSet(setId);
-      CheckHasSummonAICapabilityUC(elementId);
+
+        CheckHasSummonAICapabilityUC(elementId);
+
 
       var effect = new SummonAICapabilityUCMutSetRemoveEffect(setId, elementId);
 
@@ -49361,7 +49547,9 @@ public class Root {
     public void EffectKamikazeAICapabilityUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasKamikazeAICapabilityUCMutSet(setId);
-      CheckHasKamikazeAICapabilityUC(elementId);
+
+        CheckHasKamikazeAICapabilityUC(elementId);
+
 
       var effect = new KamikazeAICapabilityUCMutSetRemoveEffect(setId, elementId);
 
@@ -49552,7 +49740,9 @@ public class Root {
     public void EffectGuardAICapabilityUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasGuardAICapabilityUCMutSet(setId);
-      CheckHasGuardAICapabilityUC(elementId);
+
+        CheckHasGuardAICapabilityUC(elementId);
+
 
       var effect = new GuardAICapabilityUCMutSetRemoveEffect(setId, elementId);
 
@@ -49743,7 +49933,9 @@ public class Root {
     public void EffectTimeCloneAICapabilityUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasTimeCloneAICapabilityUCMutSet(setId);
-      CheckHasTimeCloneAICapabilityUC(elementId);
+
+        CheckHasTimeCloneAICapabilityUC(elementId);
+
 
       var effect = new TimeCloneAICapabilityUCMutSetRemoveEffect(setId, elementId);
 
@@ -49934,7 +50126,9 @@ public class Root {
     public void EffectDoomedUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasDoomedUCMutSet(setId);
-      CheckHasDoomedUC(elementId);
+
+        CheckHasDoomedUC(elementId);
+
 
       var effect = new DoomedUCMutSetRemoveEffect(setId, elementId);
 
@@ -50125,7 +50319,9 @@ public class Root {
     public void EffectMiredUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasMiredUCMutSet(setId);
-      CheckHasMiredUC(elementId);
+
+        CheckHasMiredUC(elementId);
+
 
       var effect = new MiredUCMutSetRemoveEffect(setId, elementId);
 
@@ -50316,7 +50512,9 @@ public class Root {
     public void EffectAttackAICapabilityUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasAttackAICapabilityUCMutSet(setId);
-      CheckHasAttackAICapabilityUC(elementId);
+
+        CheckHasAttackAICapabilityUC(elementId);
+
 
       var effect = new AttackAICapabilityUCMutSetRemoveEffect(setId, elementId);
 
@@ -50507,7 +50705,9 @@ public class Root {
     public void EffectCounteringUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasCounteringUCMutSet(setId);
-      CheckHasCounteringUC(elementId);
+
+        CheckHasCounteringUC(elementId);
+
 
       var effect = new CounteringUCMutSetRemoveEffect(setId, elementId);
 
@@ -50698,7 +50898,9 @@ public class Root {
     public void EffectLightningChargedUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasLightningChargedUCMutSet(setId);
-      CheckHasLightningChargedUC(elementId);
+
+        CheckHasLightningChargedUC(elementId);
+
 
       var effect = new LightningChargedUCMutSetRemoveEffect(setId, elementId);
 
@@ -50889,7 +51091,9 @@ public class Root {
     public void EffectInvincibilityUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasInvincibilityUCMutSet(setId);
-      CheckHasInvincibilityUC(elementId);
+
+        CheckHasInvincibilityUC(elementId);
+
 
       var effect = new InvincibilityUCMutSetRemoveEffect(setId, elementId);
 
@@ -51080,7 +51284,9 @@ public class Root {
     public void EffectDefyingUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasDefyingUCMutSet(setId);
-      CheckHasDefyingUC(elementId);
+
+        CheckHasDefyingUC(elementId);
+
 
       var effect = new DefyingUCMutSetRemoveEffect(setId, elementId);
 
@@ -51271,7 +51477,9 @@ public class Root {
     public void EffectBideAICapabilityUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasBideAICapabilityUCMutSet(setId);
-      CheckHasBideAICapabilityUC(elementId);
+
+        CheckHasBideAICapabilityUC(elementId);
+
 
       var effect = new BideAICapabilityUCMutSetRemoveEffect(setId, elementId);
 
@@ -51462,7 +51670,9 @@ public class Root {
     public void EffectBaseMovementTimeUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasBaseMovementTimeUCMutSet(setId);
-      CheckHasBaseMovementTimeUC(elementId);
+
+        CheckHasBaseMovementTimeUC(elementId);
+
 
       var effect = new BaseMovementTimeUCMutSetRemoveEffect(setId, elementId);
 
@@ -51653,7 +51863,9 @@ public class Root {
     public void EffectBaseCombatTimeUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasBaseCombatTimeUCMutSet(setId);
-      CheckHasBaseCombatTimeUC(elementId);
+
+        CheckHasBaseCombatTimeUC(elementId);
+
 
       var effect = new BaseCombatTimeUCMutSetRemoveEffect(setId, elementId);
 
@@ -51844,7 +52056,9 @@ public class Root {
     public void EffectManaPotionMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasManaPotionMutSet(setId);
-      CheckHasManaPotion(elementId);
+
+        CheckHasManaPotion(elementId);
+
 
       var effect = new ManaPotionMutSetRemoveEffect(setId, elementId);
 
@@ -52035,7 +52249,9 @@ public class Root {
     public void EffectHealthPotionMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasHealthPotionMutSet(setId);
-      CheckHasHealthPotion(elementId);
+
+        CheckHasHealthPotion(elementId);
+
 
       var effect = new HealthPotionMutSetRemoveEffect(setId, elementId);
 
@@ -52226,7 +52442,9 @@ public class Root {
     public void EffectSpeedRingMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasSpeedRingMutSet(setId);
-      CheckHasSpeedRing(elementId);
+
+        CheckHasSpeedRing(elementId);
+
 
       var effect = new SpeedRingMutSetRemoveEffect(setId, elementId);
 
@@ -52417,7 +52635,9 @@ public class Root {
     public void EffectGlaiveMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasGlaiveMutSet(setId);
-      CheckHasGlaive(elementId);
+
+        CheckHasGlaive(elementId);
+
 
       var effect = new GlaiveMutSetRemoveEffect(setId, elementId);
 
@@ -52608,7 +52828,9 @@ public class Root {
     public void EffectSlowRodMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasSlowRodMutSet(setId);
-      CheckHasSlowRod(elementId);
+
+        CheckHasSlowRod(elementId);
+
 
       var effect = new SlowRodMutSetRemoveEffect(setId, elementId);
 
@@ -52799,7 +53021,9 @@ public class Root {
     public void EffectBlastRodMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasBlastRodMutSet(setId);
-      CheckHasBlastRod(elementId);
+
+        CheckHasBlastRod(elementId);
+
 
       var effect = new BlastRodMutSetRemoveEffect(setId, elementId);
 
@@ -52990,7 +53214,9 @@ public class Root {
     public void EffectArmorMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasArmorMutSet(setId);
-      CheckHasArmor(elementId);
+
+        CheckHasArmor(elementId);
+
 
       var effect = new ArmorMutSetRemoveEffect(setId, elementId);
 
@@ -53181,7 +53407,9 @@ public class Root {
     public void EffectSorcerousUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasSorcerousUCMutSet(setId);
-      CheckHasSorcerousUC(elementId);
+
+        CheckHasSorcerousUC(elementId);
+
 
       var effect = new SorcerousUCMutSetRemoveEffect(setId, elementId);
 
@@ -53372,7 +53600,9 @@ public class Root {
     public void EffectBaseOffenseUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasBaseOffenseUCMutSet(setId);
-      CheckHasBaseOffenseUC(elementId);
+
+        CheckHasBaseOffenseUC(elementId);
+
 
       var effect = new BaseOffenseUCMutSetRemoveEffect(setId, elementId);
 
@@ -53563,7 +53793,9 @@ public class Root {
     public void EffectBaseDefenseUCMutSetRemove(int setId, int elementId) {
       CheckUnlocked();
       CheckHasBaseDefenseUCMutSet(setId);
-      CheckHasBaseDefenseUC(elementId);
+
+        CheckHasBaseDefenseUC(elementId);
+
 
       var effect = new BaseDefenseUCMutSetRemoveEffect(setId, elementId);
 

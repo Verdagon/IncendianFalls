@@ -9,25 +9,24 @@ namespace AthPlayer {
     Superstate superstate;
     Game game;
     IModeDelegate delegat;
-    NarrationPanelView narrator;
+    ShowError showError;
 
     public NormalMode(
         ISuperstructure ss,
         Superstate superstate,
         Game game,
         IModeDelegate delegat,
-        NarrationPanelView narrator) {
+    ShowError showError) {
       this.ss = ss;
       this.superstate = superstate;
       this.game = game;
       this.delegat = delegat;
-      this.narrator = narrator;
+      this.showError = showError;
     }
 
     public void OnTileMouseClick(Location newLocation) {
-      narrator.ClearMessage();
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        narrator.ShowMessage("(Player not ready to act yet.)");
+        showError("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
@@ -44,7 +43,7 @@ namespace AthPlayer {
         return;
       }
 
-      narrator.ShowMessage(moveResult);
+      showError(moveResult);
       delegat.AfterDidSomething();
     }
 
@@ -67,15 +66,14 @@ namespace AthPlayer {
     }
 
     public void DefyClicked() {
-      narrator.ClearMessage();
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        narrator.ShowMessage("(Player not ready to act yet.)");
+        showError("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
       string defendResult = ss.RequestDefy(game.id);
       if (defendResult != "") {
-        narrator.ShowMessage(defendResult);
+        showError(defendResult);
         delegat.AfterDidSomething();
         return;
       }
@@ -84,10 +82,9 @@ namespace AthPlayer {
     }
 
     public void ActivateCheat(string cheatName) {
-      narrator.ClearMessage();
       string result = ss.RequestCheat(game.id, cheatName);
       if (result.Length > 0) {
-        narrator.ShowMessage(result);
+        showError(result);
         delegat.AfterDidSomething();
         return;
       }
@@ -95,15 +92,15 @@ namespace AthPlayer {
     }
 
     public void CounterClicked() {
-      narrator.ClearMessage();
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        narrator.ShowMessage("(Player not ready to act yet.)");
+
+        showError("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
       string counterResult = ss.RequestCounter(game.id);
       if (counterResult.Length > 0) {
-        narrator.ShowMessage(counterResult);
+        showError(counterResult);
         delegat.AfterDidSomething();
         return;
       }
@@ -114,54 +111,54 @@ namespace AthPlayer {
     public void CancelClicked() {
       string cancelResult = ss.RequestCancel(game.id);
       if (cancelResult.Length > 0) {
-        narrator.ShowMessage(cancelResult);
+        showError(cancelResult);
         return;
       }
     }
 
     public void FireClicked() {
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        narrator.ShowMessage("(Player not ready to act yet.)");
+        
+        showError("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
 
-      narrator.ClearMessage();
       delegat.SwitchToFireMode();
     }
 
     public void FireBombClicked() {
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        narrator.ShowMessage("(Player not ready to act yet.)");
+        
+        showError("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
 
-      narrator.ClearMessage();
       delegat.SwitchToFireBombMode();
     }
 
     public void MireClicked() {
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        narrator.ShowMessage("(Player not ready to act yet.)");
+        
+        showError("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
 
-      narrator.ClearMessage();
       delegat.SwitchToMireMode();
     }
 
     public void InteractClicked() {
-      narrator.ClearMessage();
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        narrator.ShowMessage("(Player not ready to act yet.)");
+        
+        showError("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
       string interactResult = ss.RequestInteract(game.id);
       if (interactResult != "") {
-        narrator.ShowMessage(interactResult);
+        showError(interactResult);
         delegat.AfterDidSomething();
         return;
       }
@@ -170,15 +167,15 @@ namespace AthPlayer {
     }
 
     public void TimeShiftClicked() {
-      narrator.ClearMessage();
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        narrator.ShowMessage("(Player not ready to act yet.)");
+        
+        showError("(Player not ready to act yet.)");
         delegat.AfterDidSomething();
         return;
       }
       string timeShiftResult = ss.RequestTimeShift(game.id);
       if (timeShiftResult != "") {
-        narrator.ShowMessage(timeShiftResult);
+        showError(timeShiftResult);
         delegat.AfterDidSomething();
         return;
       }
@@ -187,7 +184,6 @@ namespace AthPlayer {
     }
 
     public void TimeAnchorMoveClicked() {
-      narrator.ClearMessage();
       delegat.SwitchToTimeAnchorMoveMode();
     }
 

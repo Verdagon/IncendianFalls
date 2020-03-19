@@ -73,11 +73,8 @@ namespace Domino {
     private OnClicked startFadeOutCallback;
     private OnClicked finishFadeOutCallback;
 
-    int symbolsWide_;
-    int symbolsHigh_;
-
-    public int symbolsWide { get { return symbolsWide_; } }
-    public int symbolsHigh { get { return symbolsHigh_; } }
+    public int symbolsWide { get; private set; }
+    public int symbolsHigh { get; private set; }
 
     float symbolWidth;
     float symbolHeight;
@@ -102,8 +99,8 @@ namespace Domino {
         float widthToHeightRatio) {
       this.instantiator = instantiator;
       this.widthToHeightRatio = widthToHeightRatio;
-      this.symbolsWide_ = symbolsWide;
-      this.symbolsHigh_ = symbolsHigh;
+      this.symbolsWide = symbolsWide;
+      this.symbolsHigh = symbolsHigh;
       parentIdByChildId = new Dictionary<int, int>();
       overlayObjects = new Dictionary<int, OverlayObject>();
       overlayObjects.Add(0, new OverlayObject(0, gameObject));
@@ -111,16 +108,7 @@ namespace Domino {
 
       this.cinematicTimer = cinematicTimer;
       this.openTimeMs = cinematicTimer.GetTimeMs();
-      this.startFadeOutTimeAfterOpenMs = -1;
-
-      //this.fadeInEndMs = fadeInEndMs;
-      //this.fadeOutStartMs = fadeOutStartMs;
-      //this.fadeOutEndMs = fadeOutEndMs;
-
-      //this.textFadeInStartMs = textFadeInStartMs;
-      //this.textFadeInEndMs = textFadeInEndMs;
-      //this.textFadeOutStartMs = textFadeOutStartS;
-      //this.textFadeOutEndMs = textFadeOutEndS;
+      this.startFadeOutTimeAfterOpenMs = long.MaxValue;
 
       float horizontalAlignment = horizontalAlignmentPercent / 100.0f;
       float verticalAlignment = verticalAlignmentPercent / 100.0f;
@@ -134,8 +122,11 @@ namespace Domino {
 
       symbolWidth = panelWidth / symbolsWide;
       symbolHeight = panelHeight / symbolsHigh;
-      // Enforce squareness.
-      
+
+      // Reduce symbol width or height such that it's square (assuming widthToHeightRatio is 1)
+      // If widthToHeightRatio is eg .6667, and we have a 50x60 symbol, then reduce it to 40x60
+      // but if we had a 50x90 then reduce it to 50x75.
+      // Reduce it to the biggest we can while still conforming to the width/height ratio.
       symbolWidth = Mathf.Min(symbolWidth, symbolHeight * widthToHeightRatio);
       symbolHeight = symbolWidth / widthToHeightRatio;
 
@@ -147,6 +138,7 @@ namespace Domino {
 
       var panelRectTransform = gameObject.GetComponent<RectTransform>();
       panelRectTransform.parent = parent.transform;
+      panelRectTransform.SetAsFirstSibling(); // Move to back
       panelRectTransform.anchorMin = new Vector2(0, 0);
       panelRectTransform.anchorMax = new Vector2(0, 0);
       panelRectTransform.localScale = new Vector3(1, 1, 1);
@@ -386,9 +378,7 @@ namespace Domino {
         UpdateOpacity(overlayObjects[id]);
 
       var timeSinceOpenMs = cinematicTimer.GetTimeMs() - openTimeMs;
-      if (startFadeOutTimeAfterOpenMs > 0 && timeSinceOpenMs >= startFadeOutTimeAfterOpenMs) {
-        startFadeOutTimeAfterOpenMs = 0;
-
+      if (timeSinceOpenMs >= startFadeOutTimeAfterOpenMs) {
         // If we're closing, and we have a startFadeOutCallback, call it.
         if (startFadeOutCallback != null) {
           var cb = startFadeOutCallback;
@@ -425,7 +415,7 @@ namespace Domino {
         }
       }
 
-      if (startFadeOutTimeAfterOpenMs > 0) {
+      if (timeSinceOpenMs >= startFadeOutTimeAfterOpenMs) {
         if (overlayObject.fadeOut != null) {
           var fadeOut = overlayObject.fadeOut;
           // Remember, fadeOut.fadeOutStart/EndTimeS are negative.

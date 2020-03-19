@@ -34,9 +34,6 @@ namespace Geomancer {
 
     public PlayerPanelView playerPanelView;
 
-    public NarrationPanelView messageView;
-
-
     Root ss;
     Level level;
 

@@ -71,7 +71,12 @@ namespace Atharia.Model {
 
             "dramatic",
             "kylin",
-          true,
+          // We tell the view that this isnt the first in the series because we dont want it to fade in.
+          // It's a bit of a hack. We could instead throw in another boolean to say "but its the first in the
+          // entire game" or something...
+          // Or, we can think of it like we've already started the sequence in the intro screen, we would
+          // just need to add an auto-closing fade-out from there. Maybe with some text.
+          false,
           false,
           false,
 

@@ -10,6 +10,7 @@ root mut struct Game {
   eventedTerrainTiles: MutSet:&&TerrainTile;
 
   var level: ?&Level;
+  var instructions: Str; // "" for nothing. Someday will want to make a mutable wrapper.
   var time: Int;
   executionState: ExecutionState;
 }
@@ -107,10 +108,4 @@ imm struct SetGameSpeedEvent {
   SetGameSpeedEvent isa IGameEvent;
 
   percent: Int; // 100 for normal speed, 0 for paused, 200 for double speed.
-}
-
-imm struct NarrateEvent {
-  NarrateEvent isa IGameEvent;
-
-  text: Str; // 100 for normal speed, 0 for paused, 200 for double speed.
 }
