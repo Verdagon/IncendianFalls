@@ -174,9 +174,21 @@ namespace Domino {
         Color color,
         OverlayFont font,
         string symbol) {
-      var unityX = x * symbolWidth + symbolWidth / 2;
-      var unityY = y * symbolHeight + symbolHeight / 2;
-
+      return AddSymbol(parentId, x, y, size, z, color, font, symbol);
+    }
+    public int AddSymbol(
+        int parentId,
+        float x,
+        float y,
+        float size,
+        int z,
+        Color color,
+        OverlayFont font,
+        string symbol,
+        bool centered) {
+      throw new Exception("ye");
+      var unityX = x * symbolWidth + (centered ? symbolWidth / 2 : 0);
+      var unityY = y * symbolHeight + (centered ? symbolHeight / 2 : 0);
       var textGameObject = instantiator.CreateEmptyUiObject();
       textGameObject.transform.parent = gameObject.transform;
       var rectTransform = textGameObject.GetComponent<RectTransform>();
@@ -186,7 +198,7 @@ namespace Domino {
       var textView = textGameObject.AddComponent<Text>();
       textView.raycastTarget = false;
       textView.font = instantiator.GetFont(font.font);
-      textView.alignment = TextAnchor.MiddleCenter;
+      textView.alignment = centered ? TextAnchor.MiddleCenter : TextAnchor.LowerLeft;
       textView.fontSize = (int)(symbolHeight * size * font.fontSizeMultiplier * widthToHeightRatio);
       textView.color = color;
       textView.resizeTextForBestFit = false;
@@ -334,7 +346,9 @@ namespace Domino {
         Color color,
         Color borderColor,
         Color pressedColor,
-        OnClicked onClicked) {
+        OnClicked onClicked,
+        OnClicked onMouseIn,
+        OnClicked onMouseOut) {
       var rectangleId = AddRectangle(parentId, x, y, width, height, z, color, borderColor);
       var overlayObject = overlayObjects[rectangleId];
 
@@ -440,6 +454,11 @@ namespace Domino {
       if (overlayObject.fadeIn == null && overlayObject.fadeOut == null) {
         fadingObjectIds.Remove(overlayObject.id);
       }
+    }
+
+    public void SetOpacity(int id, float ratio) {
+      Asserts.Assert(overlayObjects.ContainsKey(id));
+      SetOpacity(overlayObjects[id], ratio);
     }
 
     private void SetOpacity(OverlayObject overlayObject, float ratio) {

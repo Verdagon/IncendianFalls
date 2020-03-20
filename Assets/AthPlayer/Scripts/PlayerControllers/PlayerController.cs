@@ -10,6 +10,7 @@ namespace Domino {
       IGameEffectObserver, IGameEffectVisitor,
     ISorcerousUCEffectObserver, ISorcerousUCEffectVisitor,
       IModeDelegate {
+    IClock cinematicTimer;
     ISuperstructure ss;
     Superstate superstate;
     Game game;
@@ -22,29 +23,32 @@ namespace Domino {
     OverlayPresenterFactory overlayPresenterFactory;
     ShowError showError;
     Looker looker;
+    OverlayPaneler overlayPaneler;
     IMode mode;
     Unit player;
 
     public PlayerController(
         ITimer timer,
+        IClock cinematicTimer,
         ExecutionStaller resumeStaller,
         ExecutionStaller turnStaller,
         ISuperstructure ss,
         Superstate superstate,
         Game game,
         GamePresenter gamePresenter,
-        PlayerPanelView playerPanelView,
         LookPanelView lookPanelView,
+        OverlayPaneler overlayPaneler,
         OverlayPresenterFactory overlayPresenterFactory,
         ShowError showError) {
       this.ss = ss;
       this.superstate = superstate;
+      this.cinematicTimer = cinematicTimer;
       this.game = game;
+      this.overlayPaneler = overlayPaneler;
       this.gamePresenter = gamePresenter;
       this.timer = timer;
       this.resumeStaller = resumeStaller;
       this.turnStaller = turnStaller;
-      this.playerPanelView = playerPanelView;
       this.lookPanelView = lookPanelView;
       this.overlayPresenterFactory = overlayPresenterFactory;
       this.showError = showError;
@@ -62,7 +66,8 @@ namespace Domino {
       if (sorcerous.Exists()) {
         sorcerous.AddObserver(this);
       }
-      RefreshPlayerStatusText();
+      playerPanelView = new PlayerPanelView(cinematicTimer, overlayPaneler, looker, player);
+
       SwitchToNormalMode();
     }
 
@@ -193,14 +198,6 @@ namespace Domino {
       mode.TimeAnchorMoveClicked();
     }
 
-    private void RefreshPlayerStatusText() {
-      if (game.player.Exists()) {
-        playerPanelView.ShowPlayerStatus(game.level, game.player);
-      } else {
-        playerPanelView.Clear();
-      }
-    }
-
     public void OnUnitEffect(IUnitEffect effect) { effect.visit(this); }
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) { }
@@ -223,16 +220,22 @@ namespace Domino {
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) {
-      RefreshPlayerStatusText();
+      if (playerPanelView != null) {
+        playerPanelView.UpdatePlayerStatus();
+      }
     }
     public void OnSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visit(this); }
     public void visitSorcerousUCCreateEffect(SorcerousUCCreateEffect effect) { }
     public void visitSorcerousUCDeleteEffect(SorcerousUCDeleteEffect effect) { }
     public void visitSorcerousUCSetMpEffect(SorcerousUCSetMpEffect effect) {
-      RefreshPlayerStatusText();
+      if (playerPanelView != null) {
+        playerPanelView.UpdatePlayerStatus();
+      }
     }
     public void visitSorcerousUCSetMaxMpEffect(SorcerousUCSetMaxMpEffect effect) {
-      RefreshPlayerStatusText();
+      if (playerPanelView != null) {
+        playerPanelView.UpdatePlayerStatus();
+      }
     }
 
     public void SwitchToNormalMode() {
@@ -270,16 +273,20 @@ namespace Domino {
     public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
     public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) { }
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
-      RefreshPlayerStatusText();
+      if (playerPanelView != null) {
+        playerPanelView.UpdatePlayerStatus();
+      }
     }
     public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) {
       if (player.Exists()) {
+        playerPanelView.Clear();
+        playerPanelView = null;
         player.RemoveObserver(this);
       }
-      RefreshPlayerStatusText();
       player = game.player;
       if (player.Exists()) {
         player.AddObserver(this);
+        playerPanelView = new PlayerPanelView(cinematicTimer, overlayPaneler, looker, player);
       }
     }
   }

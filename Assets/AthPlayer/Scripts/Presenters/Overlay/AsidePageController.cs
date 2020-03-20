@@ -141,7 +141,8 @@ namespace AthPlayer {
               } else {
                 panelView.SetOnFinishHideCallback(buttonCallback);
               }
-            });
+            },
+            () => { }, () => { });
         panelView.SetFadeIn(buttonId, new OverlayPanelView.FadeIn(300, 600));
         panelView.SetFadeOut(buttonId, new OverlayPanelView.FadeOut(-300, 0));
         panelView.AddString(

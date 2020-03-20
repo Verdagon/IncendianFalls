@@ -9,25 +9,40 @@ namespace AthPlayer {
     LookPanelView lookPanelView;
     Unit lookedUnit = Unit.Null;
     TerrainTile lookedTile = TerrainTile.Null;
+    string lookedText;
 
     public Looker(LookPanelView lookPanelView) {
       this.lookPanelView = lookPanelView;
     }
 
     public void Clear() {
+      if (lookedUnit.Exists()) {
+        lookedUnit.RemoveObserver(this);
+        lookedUnit = Unit.Null;
+      }
+      lookedTile = TerrainTile.Null;
+      lookedText = "";
       lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
     }
 
-    public void Look(Unit unit, TerrainTile tile) {
-      if (unit.NullableIs(lookedUnit) && tile.NullableIs(lookedTile)) {
+    public void Look(string newLookedText) {
+      Unit newUnit = Unit.Null;
+      TerrainTile newTile = TerrainTile.Null;
+      if (newUnit.NullableIs(lookedUnit) && newTile.NullableIs(lookedTile) && newLookedText == lookedText) {
         return;
       }
-
-      if (lookedUnit.Exists()) {
-        lookedUnit.RemoveObserver(this);
-      }
-
       Clear();
+
+      lookPanelView.SetStuff(true, newLookedText, "", new List<KeyValuePair<SymbolDescription, string>>());
+    }
+
+    public void Look(Unit unit, TerrainTile tile) {
+      string newLookedText = "";
+      if (unit.NullableIs(lookedUnit) && tile.NullableIs(lookedTile) && newLookedText == lookedText) {
+        return;
+      }
+      Clear();
+
       lookedUnit = unit;
       lookedTile = tile;
 

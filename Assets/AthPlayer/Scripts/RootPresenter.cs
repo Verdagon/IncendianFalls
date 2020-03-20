@@ -62,8 +62,6 @@ namespace AthPlayer {
 
     LookPanelView lookPanelView;
 
-    public PlayerPanelView playerPanelView;
-
     public SoundPlayer soundPlayer;
 
     public OverlayPaneler overlayPaneler;
@@ -72,6 +70,8 @@ namespace AthPlayer {
     private OverlayPresenter currentInstructionsOverlay;
 
     public void Start() {
+      throw new System.Exception("le");
+
       timer = new SlowableTimerClock(1f);
       cinematicTimer = new SlowableTimerClock(1f);
 
@@ -126,14 +126,15 @@ namespace AthPlayer {
       playerController =
           new PlayerController(
               timer,
+              cinematicTimer,
               resumeStaller,
               turnStaller,
               ss,
               ss.GetSuperstate(game.id),
               game,
               gamePresenter,
-              playerPanelView,
               lookPanelView,
+              overlayPaneler,
               NewOverlayPresenter,
               this.ShowError);
       playerController.Start();
@@ -192,6 +193,8 @@ namespace AthPlayer {
     }
 
     public void Update() {
+      throw new System.Exception("le");
+
       timer.Update();
       cinematicTimer.Update();
 

@@ -167,7 +167,8 @@ namespace AthPlayer {
                 inputSemaphore.Unlock();
               });
               panelView.ScheduleClose(0);
-            });
+            },
+            () => { }, () => { });
         panelView.AddString(
           buttonId,
           panelWidth - rightBorderWidth - buttonWidth + buttonBorderWidth,
