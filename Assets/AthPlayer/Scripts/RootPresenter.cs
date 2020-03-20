@@ -70,8 +70,6 @@ namespace AthPlayer {
     private OverlayPresenter currentInstructionsOverlay;
 
     public void Start() {
-      throw new System.Exception("le");
-
       timer = new SlowableTimerClock(1f);
       cinematicTimer = new SlowableTimerClock(1f);
 
@@ -193,8 +191,6 @@ namespace AthPlayer {
     }
 
     public void Update() {
-      throw new System.Exception("le");
-
       timer.Update();
       cinematicTimer.Update();
 

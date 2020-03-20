@@ -174,7 +174,7 @@ namespace Domino {
         Color color,
         OverlayFont font,
         string symbol) {
-      return AddSymbol(parentId, x, y, size, z, color, font, symbol);
+      return AddSymbol(parentId, x, y, size, z, color, font, symbol, false);
     }
     public int AddSymbol(
         int parentId,
@@ -186,12 +186,12 @@ namespace Domino {
         OverlayFont font,
         string symbol,
         bool centered) {
-      throw new Exception("ye");
       var unityX = x * symbolWidth + (centered ? symbolWidth / 2 : 0);
       var unityY = y * symbolHeight + (centered ? symbolHeight / 2 : 0);
       var textGameObject = instantiator.CreateEmptyUiObject();
       textGameObject.transform.parent = gameObject.transform;
       var rectTransform = textGameObject.GetComponent<RectTransform>();
+      rectTransform.pivot = centered ? new Vector2(0.5f, 0.5f) : new Vector2(0, 0);
       rectTransform.anchorMin = new Vector2(0, 0);
       rectTransform.anchorMax = new Vector2(0, 0);
       rectTransform.anchoredPosition = new Vector2(unityX, unityY);

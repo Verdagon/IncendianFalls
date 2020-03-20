@@ -29,7 +29,6 @@ namespace Domino {
     List<int> textOverlayObjectIds = new List<int>();
 
     public PlayerPanelView(IClock cinematicTimer, OverlayPaneler overlayPaneler, Looker looker, Unit unit) {
-      throw new System.Exception("le");
       this.cinematicTimer = cinematicTimer;
       this.overlayPaneler = overlayPaneler;
       this.unit = unit;
@@ -75,15 +74,21 @@ namespace Domino {
     }
 
     private int AddButton(int position, string symbol, string hoverText) {
+      float marginBetweenButtons = .2f;
+      float paddingInsideButton = .25f;
+      float buttonSize = 2f;
       int timeAnchorMoveButtonId =
         playerStatusView.AddButton(
-          0, 70 - 3, 3 + position * 3, 3, 2, 0,
-          new UnityEngine.Color(.2f, .2f, 1f), new UnityEngine.Color(0, 0, 0, 0), new UnityEngine.Color(.3f, .3f, .3f),
+          0, 70 - 3, 3 + position * 2 + (position + 1) * .2f, 3, 2, 0,
+          new UnityEngine.Color(.4f, .4f, .4f), new UnityEngine.Color(0, 0, 0, 0), new UnityEngine.Color(1.2f, 1.2f, 1.2f),
           () => CapabilityButtonClicked?.Invoke(TIME_ANCHOR_MOVE_CAPABILITY_ID),
           () => looker.Look(hoverText),
           () => looker.Look(""));
+      float symbolX = 70 - buttonSize - 1 + paddingInsideButton;
+      float symbolY = 3 + position * buttonSize + (position + 1) * marginBetweenButtons + paddingInsideButton;
+      float symbolSize = buttonSize - paddingInsideButton * 2;
       playerStatusView.AddSymbol(
-        timeAnchorMoveButtonId, 70 - 3, 3 + position * 3, 10f * 2, 1, new UnityEngine.Color(1, 1, 1), new OverlayFont("symbols", .3f), symbol);
+        timeAnchorMoveButtonId, symbolX, symbolY, symbolSize, 1, new UnityEngine.Color(1, 1, 1), new OverlayFont("symbols", 2.8f), symbol); ; ;
       return timeAnchorMoveButtonId;
     }
 
@@ -93,7 +98,6 @@ namespace Domino {
     }
 
     public void UpdatePlayerStatus() {
-      throw new System.Exception("le");
       foreach (var id in textOverlayObjectIds) {
         playerStatusView.Remove(id);
       }
