@@ -4,6 +4,10 @@ mut struct BridgesLevelController {
 
   level: &Level;
 
+  fn Destruct(this: BridgesLevelController overrides IDestructible): Void {
+    BridgesLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: BridgesLevelController overrides ILevelController): Str {
     BridgesLevelControllerExtensions.GetName
   }

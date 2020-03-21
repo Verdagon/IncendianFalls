@@ -21,7 +21,7 @@ namespace Atharia.Model {
       }
       unit.components.Remove(detail.AsIUnitComponent());
       detail.Destruct();
-      Actions.Bump(game, superstate, unit, attacker, 2.0f, false);
+      Actions.Bump(game, superstate, unit, attacker, 200, false);
 
       var sorcerous = attacker.components.GetOnlySorcerousUCOrNull();
       Asserts.Assert(sorcerous != null, "Must be sorcerous to counter");

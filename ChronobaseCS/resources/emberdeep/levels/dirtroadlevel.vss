@@ -4,6 +4,10 @@ mut struct DirtRoadLevelController {
 
   level: &Level;
 
+  fn Destruct(this: DirtRoadLevelController overrides IDestructible): Void {
+    DirtRoadLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: DirtRoadLevelController overrides ILevelController): Str {
     DirtRoadLevelControllerExtensions.GetName
   }

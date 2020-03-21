@@ -4,6 +4,11 @@ using IncendianFalls;
 
 namespace Atharia.Model {
   public static class Tutorial1LevelControllerExtensions {
+    public static Atharia.Model.Void Destruct(this Tutorial1LevelController self) {
+      self.Delete();
+      return new Atharia.Model.Void();
+    }
+
     public static void LoadLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,
@@ -148,6 +153,14 @@ namespace Atharia.Model {
       }
 
       if (triggerName == "healthPotionB") {
+        // Player might not have defied.
+        var defyCounter = game.player.components.GetOnlyTutorialDefyCounterUCOrNull();
+        if (defyCounter.Exists()) {
+          game.player.components.Remove(defyCounter.AsIUnitComponent());
+          defyCounter.Destruct();
+          game.instructions = "";
+        }
+
         game.AddEvent(
           new ShowOverlayEvent(
 
@@ -266,6 +279,14 @@ namespace Atharia.Model {
       }
 
       if (triggerName == "ambush4f") {
+        // Player might not have finished defying the whole 10 previous ones.
+        var defyCounter = game.player.components.GetOnlyTutorialDefyCounterUCOrNull();
+        if (defyCounter.Exists()) {
+          game.player.components.Remove(defyCounter.AsIUnitComponent());
+          defyCounter.Destruct();
+          game.instructions = "";
+        }
+
         game.instructions = 1 + " Defy remaining!";
         game.player.components.Add(game.root.EffectTutorialDefyCounterUCCreate(1, "ambush4fDefied").AsIUnitComponent());
         game.AddEvent(
@@ -377,6 +398,15 @@ namespace Atharia.Model {
         superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "multipleHint") {
+        // Make sure there arent any defy counters leftover, in case the player won the entire
+        // thing without defying somehow.
+        var defyCounter = game.player.components.GetOnlyTutorialDefyCounterUCOrNull();
+        if (defyCounter.Exists()) {
+          game.player.components.Remove(defyCounter.AsIUnitComponent());
+          defyCounter.Destruct();
+          game.instructions = "";
+        }
+
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("multipleHint", 1);
         game.AddEvent(
           new ShowOverlayEvent(

@@ -5,6 +5,10 @@ mut struct CliffLevelController {
   level: &Level;
   depth: Int;
 
+  fn Destruct(this: CliffLevelController overrides IDestructible): Void {
+    CliffLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: CliffLevelController overrides ILevelController): Str {
     CliffLevelControllerExtensions.GetName
   }

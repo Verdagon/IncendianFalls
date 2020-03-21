@@ -6,7 +6,6 @@ using System.Text;
 
 namespace IncendianFalls {
   class GenerateCliffLevel {
-
     public static void MakeLevel(
         out Level cliffLevel,
         out LevelSuperstate levelSuperstate,

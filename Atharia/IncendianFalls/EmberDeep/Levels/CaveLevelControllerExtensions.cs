@@ -4,6 +4,11 @@ using IncendianFalls;
 
 namespace Atharia.Model {
   public static class CaveLevelControllerExtensions {
+    public static Atharia.Model.Void Destruct(this CaveLevelController self) {
+      self.Delete();
+      return new Atharia.Model.Void();
+    }
+
     public static void LoadLevel(
         out Level levelRet,
         out LevelSuperstate levelSuperstate,
@@ -195,18 +200,6 @@ namespace Atharia.Model {
         Superstate superstate,
         string triggerName) {
       if (self.depth == 0 && triggerName == "levelStart") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "To undo my brother's stasis, I need to follow the caves until I find something made of black incendium.",
-            "dramatic",
-            "kylin",
-          true,
-          true,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("...", "introLine1Done") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "introLine1Done") {
         var locationsNextToPlayer = game.level.terrain.GetAdjacentExistingLocations(game.player.location, false);
         var hopToPossibilities = superstate.levelSuperstate.GetNRandomWalkableLocations(game.level.terrain, game.rand, 1, (loc) => locationsNextToPlayer.Contains(loc), true, true);
         if (hopToPossibilities.Count > 0) {

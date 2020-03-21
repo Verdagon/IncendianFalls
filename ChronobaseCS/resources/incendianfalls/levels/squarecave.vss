@@ -5,6 +5,10 @@ mut struct SquareCaveLevelController {
   level: &Level;
   depth: Int;
 
+  fn Destruct(this: SquareCaveLevelController overrides IDestructible): Void {
+    SquareCaveLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: SquareCaveLevelController overrides ILevelController): Str {
     SquareCaveLevelControllerExtensions.GetName
   }

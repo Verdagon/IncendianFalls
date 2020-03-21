@@ -5,6 +5,10 @@ mut struct CaveLevelController {
   level: &Level;
   depth: Int;
 
+  fn Destruct(this: CaveLevelController overrides IDestructible): Void {
+    CaveLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: CaveLevelController overrides ILevelController): Str {
     CaveLevelControllerExtensions.GetName
   }

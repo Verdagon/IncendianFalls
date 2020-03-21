@@ -4,6 +4,10 @@ mut struct PreGauntletLevelController {
 
   level: &Level;
 
+  fn Destruct(this: PreGauntletLevelController overrides IDestructible): Void {
+    PreGauntletLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: PreGauntletLevelController overrides ILevelController): Str {
     PreGauntletLevelControllerExtensions.GetName
   }

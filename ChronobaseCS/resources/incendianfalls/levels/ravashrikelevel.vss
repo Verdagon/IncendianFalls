@@ -4,6 +4,10 @@ mut struct RavashrikeLevelController {
 
   level: &Level;
 
+  fn Destruct(this: RavashrikeLevelController overrides IDestructible): Void {
+    RavashrikeLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: RavashrikeLevelController overrides ILevelController): Str {
     RavashrikeLevelControllerExtensions.GetName
   }

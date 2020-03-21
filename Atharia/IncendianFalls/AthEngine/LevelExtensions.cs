@@ -14,8 +14,18 @@ namespace Atharia.Model {
 
   public static class LevelExtensions {
     public static Atharia.Model.Void Destruct(
-        this Level obj) {
-      obj.Delete();
+        this Level self) {
+      var terrain = self.terrain;
+      var units = self.units;
+      var controller = self.controller;
+      self.Delete();
+
+      if (controller.Exists()) {
+        controller.Destruct();
+      }
+      units.Destruct();
+      terrain.Destruct();
+
       return new Atharia.Model.Void();
     }
 

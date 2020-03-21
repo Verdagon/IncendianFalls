@@ -4,6 +4,11 @@ using IncendianFalls;
 
 namespace Atharia.Model {
   public static class SotaventoLevelControllerExtensions {
+    public static Atharia.Model.Void Destruct(this SotaventoLevelController self) {
+      self.Delete();
+      return new Atharia.Model.Void();
+    }
+
     public static void LoadLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,
@@ -64,6 +69,7 @@ namespace Atharia.Model {
       game.root.logger.Info("Got trigger: " + triggerName);
 
       if (triggerName == "levelStart") {
+        game.EnterCinematic();
         game.AddEvent(
           new ShowOverlayEvent(
 
@@ -159,7 +165,7 @@ namespace Atharia.Model {
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
         var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
         var retreatTo = superstate.levelSuperstate.FindMarkerLocation("retreatTo");
-        Actions.Bump(game, superstate, ravashrike, chronomancer, 1.0f, true);
+        Actions.Bump(game, superstate, ravashrike, chronomancer, 1300, true);
         Actions.Step(game, superstate, chronomancer, retreatTo, true, false);
         game.AddEvent(new WaitEvent(true, 1000, "ravashrikeAttackDone").AsIGameEvent());
       }
@@ -185,10 +191,22 @@ namespace Atharia.Model {
           true,
           false,
           false,
-            new ButtonImmList(new List<Button>() { new Button("...", "cinematicFadeOut") }))
+            new ButtonImmList(new List<Button>() { new Button("...", "iMust") }))
           .AsIGameEvent());
       }
-      if (triggerName == "cinematicFadeOut") {
+      if (triggerName == "iMust") {
+        game.AddEvent(
+          new ShowOverlayEvent(
+            "To undo my brother's stasis, I need to follow the caves until I find something made of black incendium.",
+            "dramatic",
+            "kylin",
+          false,
+          false,
+          false,
+            new ButtonImmList(new List<Button>() { new Button("...", "journeyBegin") }))
+          .AsIGameEvent());
+      }
+      if (triggerName == "journeyBegin") {
         game.AddEvent(
           new ShowOverlayEvent(
             "Now, my journey begins.",
@@ -201,6 +219,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "cinematicDone") {
+        game.ExitCinematic();
         game.AddEvent(new SetGameSpeedEvent(100).AsIGameEvent());
         var linkLocation = game.player.location;
         game.level.terrain.tiles[linkLocation].components.GetOnlyLevelLinkTTCOrNull()

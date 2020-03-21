@@ -55,6 +55,7 @@ namespace AthPlayer {
     }
 
     public void Cancel(bool purposeful) {
+      instructionsOverlay.Close();
       if (purposeful) {
         showError("Canceled fire bomb!");
       } else {

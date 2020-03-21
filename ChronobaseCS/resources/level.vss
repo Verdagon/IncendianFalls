@@ -13,6 +13,9 @@ mut struct Level {
 }
 
 mut interface ILevelController {
+  ILevelController isa IDestructible;
+
+  fn Destruct(): Void;
   fn GetName(): Str;
   fn ConsiderCornersAdjacent(): Bool;
   fn SimpleTrigger(

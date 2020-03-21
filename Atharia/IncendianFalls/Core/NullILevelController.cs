@@ -24,7 +24,20 @@ public class NullILevelController : ILevelController {
   public ILevelController AsILevelController() {
     return this;
   }
-       
+         public bool Is(IDestructible that) {
+    throw new Exception("Called Is on a null!");
+  }
+  public bool NullableIs(IDestructible that) {
+    return !that.Exists();
+  }
+  public IDestructible AsIDestructible() {
+    return NullIDestructible.Null;
+  }
+
+  public Void Destruct() {
+    throw new Exception("Called Destruct on a null!");
+  }
+             
   public string GetName() {
     throw new Exception("Called GetName on a null!");
   }

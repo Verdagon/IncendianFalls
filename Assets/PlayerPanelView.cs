@@ -92,7 +92,7 @@ namespace Domino {
       return timeAnchorMoveButtonId;
     }
 
-    public void Clear() {
+    public void Destroy() {
       playerStatusView.ScheduleClose(0);
       playerStatusView = null;
     }
@@ -107,7 +107,7 @@ namespace Domino {
       if (sorcerous.Exists()) {
         message += "   " + "MP " + sorcerous.mp + "/" + sorcerous.maxMp;
       }
-      playerStatusView.AddString(0, 1, 1, 0, new UnityEngine.Color(1, 1, 1), new OverlayFont("prose", 2f), message);
+      textOverlayObjectIds = playerStatusView.AddString(0, 1, 1, 0, new UnityEngine.Color(1, 1, 1), new OverlayFont("prose", 2f), message);
     }
   }
 }

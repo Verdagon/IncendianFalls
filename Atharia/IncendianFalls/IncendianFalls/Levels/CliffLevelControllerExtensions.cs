@@ -4,6 +4,11 @@ using IncendianFalls;
 
 namespace Atharia.Model {
   public static class CliffLevelControllerExtensions {
+    public static Atharia.Model.Void Destruct(this CliffLevelController self) {
+      self.Delete();
+      return new Atharia.Model.Void();
+    }
+
     public static string GetName(this CliffLevelController obj) {
       return "Cliff" + obj.depth;
     }

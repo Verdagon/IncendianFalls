@@ -308,6 +308,7 @@ namespace AthPlayer {
       } else if (component is SummonAICapabilityUCAsIUnitComponent) {
       } else if (component is TemporaryCloneAICapabilityUC) {
       } else if (component is BaseMovementTimeUCAsIUnitComponent) {
+      } else if (component is BaseSightRangeUCAsIUnitComponent) {
       } else if (component is LightningChargingUCAsIUnitComponent) {
       } else if (component is LightningChargedUCAsIUnitComponent) {
       } else if (component is TutorialDefyCounterUCAsIUnitComponent) {
@@ -445,6 +446,7 @@ namespace AthPlayer {
         } else if (detail is BaseCombatTimeUCAsIUnitComponent) {
         } else if (detail is SummonAICapabilityUCAsIUnitComponent) {
         } else if (detail is BaseMovementTimeUCAsIUnitComponent) {
+        } else if (detail is BaseSightRangeUCAsIUnitComponent) {
         } else if (detail is BaseOffenseUCAsIUnitComponent) {
         } else if (detail is BaseDefenseUCAsIUnitComponent) {
         } else if (detail is BideAICapabilityUCAsIUnitComponent bideI) {

@@ -786,10 +786,12 @@ public class Root {
       new List<GameSetPlayerEffect>();
   readonly List<GameSetLevelEffect> effectsGameSetLevelEffect =
       new List<GameSetLevelEffect>();
-  readonly List<GameSetInstructionsEffect> effectsGameSetInstructionsEffect =
-      new List<GameSetInstructionsEffect>();
   readonly List<GameSetTimeEffect> effectsGameSetTimeEffect =
       new List<GameSetTimeEffect>();
+  readonly List<GameSetInstructionsEffect> effectsGameSetInstructionsEffect =
+      new List<GameSetInstructionsEffect>();
+  readonly List<GameSetHideInputEffect> effectsGameSetHideInputEffect =
+      new List<GameSetHideInputEffect>();
 
   readonly SortedDictionary<int, List<IVolcaetusLevelControllerEffectObserver>> observersForVolcaetusLevelController =
       new SortedDictionary<int, List<IVolcaetusLevelControllerEffectObserver>>();
@@ -14838,12 +14840,16 @@ public class Root {
             EffectGameSetLevel(objId, new Level(this, sourceObjIncarnation.level));
           }
 
+          if (sourceObjIncarnation.time != currentObjIncarnation.time) {
+            EffectGameSetTime(objId, sourceObjIncarnation.time);
+          }
+
           if (sourceObjIncarnation.instructions != currentObjIncarnation.instructions) {
             EffectGameSetInstructions(objId, sourceObjIncarnation.instructions);
           }
 
-          if (sourceObjIncarnation.time != currentObjIncarnation.time) {
-            EffectGameSetTime(objId, sourceObjIncarnation.time);
+          if (sourceObjIncarnation.hideInput != currentObjIncarnation.hideInput) {
+            EffectGameSetHideInput(objId, sourceObjIncarnation.hideInput);
           }
 
           // Swap out the underlying incarnation. The only visible effect this has is
@@ -30828,20 +30834,21 @@ public class Root {
       bool squareLevelsOnly,
       LevelMutSet levels,
       Unit player,
+      Level level,
+      int time,
+      ExecutionState executionState,
+      string instructions,
+      bool hideInput,
       IGameEventMutList events,
       UnitWeakMutSet eventedUnits,
-      TerrainTileWeakMutSet eventedTerrainTiles,
-      Level level,
-      string instructions,
-      int time,
-      ExecutionState executionState) {
+      TerrainTileWeakMutSet eventedTerrainTiles) {
     CheckUnlocked();
     CheckHasRand(rand);
     CheckHasLevelMutSet(levels);
+    CheckHasExecutionState(executionState);
     CheckHasIGameEventMutList(events);
     CheckHasUnitWeakMutSet(eventedUnits);
     CheckHasTerrainTileWeakMutSet(eventedTerrainTiles);
-    CheckHasExecutionState(executionState);
 
     var id = NewId();
     var incarnation =
@@ -30850,13 +30857,14 @@ public class Root {
             squareLevelsOnly,
             levels.id,
             player.id,
+            level.id,
+            time,
+            executionState.id,
+            instructions,
+            hideInput,
             events.id,
             eventedUnits.id,
-            eventedTerrainTiles.id,
-            level.id,
-            instructions,
-            time,
-            executionState.id
+            eventedTerrainTiles.id
             );
     EffectInternalCreateGame(id, rootIncarnation.version, incarnation);
     return new Game(this, id);
@@ -30895,15 +30903,16 @@ public class Root {
     if (!object.ReferenceEquals(incarnation.player, null)) {
       result += id * version * 4 * incarnation.player.GetDeterministicHashCode();
     }
-    result += id * version * 5 * incarnation.events.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.eventedUnits.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.eventedTerrainTiles.GetDeterministicHashCode();
     if (!object.ReferenceEquals(incarnation.level, null)) {
-      result += id * version * 8 * incarnation.level.GetDeterministicHashCode();
+      result += id * version * 5 * incarnation.level.GetDeterministicHashCode();
     }
-    result += id * version * 9 * incarnation.instructions.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.time.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.executionState.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.time.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.executionState.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.instructions.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.hideInput.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.events.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.eventedUnits.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.eventedTerrainTiles.GetDeterministicHashCode();
     return result;
   }
      
@@ -30953,6 +30962,20 @@ public class Root {
     }
     effectsGameSetLevelEffect.Clear();
 
+    foreach (var effect in effectsGameSetTimeEffect) {
+      if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnGameEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IGameEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnGameEffect(effect);
+        }
+      }
+    }
+    effectsGameSetTimeEffect.Clear();
+
     foreach (var effect in effectsGameSetInstructionsEffect) {
       if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
@@ -30967,7 +30990,7 @@ public class Root {
     }
     effectsGameSetInstructionsEffect.Clear();
 
-    foreach (var effect in effectsGameSetTimeEffect) {
+    foreach (var effect in effectsGameSetHideInputEffect) {
       if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
         foreach (var observer in globalObservers) {
           observer.OnGameEffect(effect);
@@ -30979,7 +31002,7 @@ public class Root {
         }
       }
     }
-    effectsGameSetTimeEffect.Clear();
+    effectsGameSetHideInputEffect.Clear();
 
     foreach (var effect in effectsGameCreateEffect) {
       if (observers.TryGetValue(0, out List<IGameEffectObserver> globalObservers)) {
@@ -31012,13 +31035,14 @@ public class Root {
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
               oldIncarnationAndVersion.incarnation.levels,
               newValue.id,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
               oldIncarnationAndVersion.incarnation.events,
               oldIncarnationAndVersion.incarnation.eventedUnits,
-              oldIncarnationAndVersion.incarnation.eventedTerrainTiles,
-              oldIncarnationAndVersion.incarnation.level,
-              oldIncarnationAndVersion.incarnation.instructions,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState);
+              oldIncarnationAndVersion.incarnation.eventedTerrainTiles);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -31044,13 +31068,14 @@ public class Root {
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
+              newValue.id,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
               oldIncarnationAndVersion.incarnation.events,
               oldIncarnationAndVersion.incarnation.eventedUnits,
-              oldIncarnationAndVersion.incarnation.eventedTerrainTiles,
-              newValue.id,
-              oldIncarnationAndVersion.incarnation.instructions,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState);
+              oldIncarnationAndVersion.incarnation.eventedTerrainTiles);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -31058,38 +31083,6 @@ public class Root {
     }
 
     effectsGameSetLevelEffect.Add(effect);
-  }
-
-  public void EffectGameSetInstructions(int id, string newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = new GameSetInstructionsEffect(id, newValue);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.instructions;
-      oldIncarnationAndVersion.incarnation.instructions = newValue;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.levels,
-              oldIncarnationAndVersion.incarnation.player,
-              oldIncarnationAndVersion.incarnation.events,
-              oldIncarnationAndVersion.incarnation.eventedUnits,
-              oldIncarnationAndVersion.incarnation.eventedTerrainTiles,
-              oldIncarnationAndVersion.incarnation.level,
-              newValue,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-    effectsGameSetInstructionsEffect.Add(effect);
   }
 
   public void EffectGameSetTime(int id, int newValue) {
@@ -31108,13 +31101,14 @@ public class Root {
               oldIncarnationAndVersion.incarnation.squareLevelsOnly,
               oldIncarnationAndVersion.incarnation.levels,
               oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              newValue,
+              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
               oldIncarnationAndVersion.incarnation.events,
               oldIncarnationAndVersion.incarnation.eventedUnits,
-              oldIncarnationAndVersion.incarnation.eventedTerrainTiles,
-              oldIncarnationAndVersion.incarnation.level,
-              oldIncarnationAndVersion.incarnation.instructions,
-              newValue,
-              oldIncarnationAndVersion.incarnation.executionState);
+              oldIncarnationAndVersion.incarnation.eventedTerrainTiles);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -31122,6 +31116,72 @@ public class Root {
     }
 
     effectsGameSetTimeEffect.Add(effect);
+  }
+
+  public void EffectGameSetInstructions(int id, string newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = new GameSetInstructionsEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.instructions;
+      oldIncarnationAndVersion.incarnation.instructions = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.executionState,
+              newValue,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.eventedUnits,
+              oldIncarnationAndVersion.incarnation.eventedTerrainTiles);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsGameSetInstructionsEffect.Add(effect);
+  }
+
+  public void EffectGameSetHideInput(int id, bool newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = new GameSetHideInputEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.hideInput;
+      oldIncarnationAndVersion.incarnation.hideInput = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.instructions,
+              newValue,
+              oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.eventedUnits,
+              oldIncarnationAndVersion.incarnation.eventedTerrainTiles);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    effectsGameSetHideInputEffect.Add(effect);
   }
   public VolcaetusLevelControllerIncarnation GetVolcaetusLevelControllerIncarnation(int id) {
     if (id == 0) {
@@ -34378,6 +34438,57 @@ public class Root {
     if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
       return new EmberDeepLevelLinkerTTCAsIDestructible(new EmberDeepLevelLinkerTTC(this, id));
     }
+    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      return new SquareCaveLevelControllerAsIDestructible(new SquareCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      return new RavashrikeLevelControllerAsIDestructible(new RavashrikeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      return new PentagonalCaveLevelControllerAsIDestructible(new PentagonalCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      return new CliffLevelControllerAsIDestructible(new CliffLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      return new PreGauntletLevelControllerAsIDestructible(new PreGauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      return new GauntletLevelControllerAsIDestructible(new GauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsVolcaetusLevelController.ContainsKey(id)) {
+      return new VolcaetusLevelControllerAsIDestructible(new VolcaetusLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsTutorial2LevelController.ContainsKey(id)) {
+      return new Tutorial2LevelControllerAsIDestructible(new Tutorial2LevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsTutorial1LevelController.ContainsKey(id)) {
+      return new Tutorial1LevelControllerAsIDestructible(new Tutorial1LevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRetreatLevelController.ContainsKey(id)) {
+      return new RetreatLevelControllerAsIDestructible(new RetreatLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsSotaventoLevelController.ContainsKey(id)) {
+      return new SotaventoLevelControllerAsIDestructible(new SotaventoLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsNestLevelController.ContainsKey(id)) {
+      return new NestLevelControllerAsIDestructible(new NestLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsLakeLevelController.ContainsKey(id)) {
+      return new LakeLevelControllerAsIDestructible(new LakeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsDirtRoadLevelController.ContainsKey(id)) {
+      return new DirtRoadLevelControllerAsIDestructible(new DirtRoadLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCaveLevelController.ContainsKey(id)) {
+      return new CaveLevelControllerAsIDestructible(new CaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsBridgesLevelController.ContainsKey(id)) {
+      return new BridgesLevelControllerAsIDestructible(new BridgesLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsAncientTownLevelController.ContainsKey(id)) {
+      return new AncientTownLevelControllerAsIDestructible(new AncientTownLevelController(this, id));
+    }
     if (rootIncarnation.incarnationsUnit.ContainsKey(id)) {
       return new UnitAsIDestructible(new Unit(this, id));
     }
@@ -34620,6 +34731,57 @@ public class Root {
     }
     if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
       return new EmberDeepLevelLinkerTTCAsIDestructible(new EmberDeepLevelLinkerTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      return new SquareCaveLevelControllerAsIDestructible(new SquareCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      return new RavashrikeLevelControllerAsIDestructible(new RavashrikeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      return new PentagonalCaveLevelControllerAsIDestructible(new PentagonalCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      return new CliffLevelControllerAsIDestructible(new CliffLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      return new PreGauntletLevelControllerAsIDestructible(new PreGauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      return new GauntletLevelControllerAsIDestructible(new GauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsVolcaetusLevelController.ContainsKey(id)) {
+      return new VolcaetusLevelControllerAsIDestructible(new VolcaetusLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsTutorial2LevelController.ContainsKey(id)) {
+      return new Tutorial2LevelControllerAsIDestructible(new Tutorial2LevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsTutorial1LevelController.ContainsKey(id)) {
+      return new Tutorial1LevelControllerAsIDestructible(new Tutorial1LevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRetreatLevelController.ContainsKey(id)) {
+      return new RetreatLevelControllerAsIDestructible(new RetreatLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsSotaventoLevelController.ContainsKey(id)) {
+      return new SotaventoLevelControllerAsIDestructible(new SotaventoLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsNestLevelController.ContainsKey(id)) {
+      return new NestLevelControllerAsIDestructible(new NestLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsLakeLevelController.ContainsKey(id)) {
+      return new LakeLevelControllerAsIDestructible(new LakeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsDirtRoadLevelController.ContainsKey(id)) {
+      return new DirtRoadLevelControllerAsIDestructible(new DirtRoadLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCaveLevelController.ContainsKey(id)) {
+      return new CaveLevelControllerAsIDestructible(new CaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsBridgesLevelController.ContainsKey(id)) {
+      return new BridgesLevelControllerAsIDestructible(new BridgesLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsAncientTownLevelController.ContainsKey(id)) {
+      return new AncientTownLevelControllerAsIDestructible(new AncientTownLevelController(this, id));
     }
     if (rootIncarnation.incarnationsUnit.ContainsKey(id)) {
       return new UnitAsIDestructible(new Unit(this, id));

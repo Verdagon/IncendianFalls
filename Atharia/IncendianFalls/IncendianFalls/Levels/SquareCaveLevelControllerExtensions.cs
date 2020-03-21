@@ -4,6 +4,11 @@ using IncendianFalls;
 
 namespace Atharia.Model {
   public static class SquareCaveLevelControllerExtensions {
+    public static Atharia.Model.Void Destruct(this SquareCaveLevelController self) {
+      self.Delete();
+      return new Atharia.Model.Void();
+    }
+
     public static void MakeLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,

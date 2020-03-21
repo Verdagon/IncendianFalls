@@ -5,14 +5,16 @@ root mut struct Game {
   levels: MutSet:Level;
   var player: ?&Unit;
 
+  var level: ?&Level;
+  var time: Int;
+  executionState: ExecutionState;
+
+  var instructions: Str; // "" for nothing. Someday will want to make a mutable wrapper.
+  var hideInput: Bool;
+
   events: MutList:IGameEvent;
   eventedUnits: MutSet:&&Unit;
   eventedTerrainTiles: MutSet:&&TerrainTile;
-
-  var level: ?&Level;
-  var instructions: Str; // "" for nothing. Someday will want to make a mutable wrapper.
-  var time: Int;
-  executionState: ExecutionState;
 }
 
 mut struct ExecutionState {

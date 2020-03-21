@@ -4,6 +4,10 @@ mut struct AncientTownLevelController {
 
   level: &Level;
 
+  fn Destruct(this: AncientTownLevelController overrides IDestructible): Void {
+    AncientTownLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: AncientTownLevelController overrides ILevelController): Str {
     AncientTownLevelControllerExtensions.GetName
   }

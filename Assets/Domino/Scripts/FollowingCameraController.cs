@@ -55,6 +55,7 @@ namespace Domino {
     public void OnGameEffect(IGameEffect effect) { effect.visit(this); }
     public void visitGameCreateEffect(GameCreateEffect effect) { }
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
+    public void visitGameSetHideInputEffect(GameSetHideInputEffect effect) { }
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
       //cameraController.SetCameraAngle(game.level.cameraAngle.ToUnity());
     }

@@ -22,17 +22,20 @@ namespace Gauntlet {
               squareLevelsOnly,
               levels,
               Unit.Null,
-              context.root.EffectIGameEventMutListCreate(new List<IGameEvent>()),
-              context.root.EffectUnitWeakMutSetCreate(),
-              context.root.EffectTerrainTileWeakMutSetCreate(),
               Level.Null,
-              "",
               0,
               context.root.EffectExecutionStateCreate(
                   Unit.Null,
                   false,
                   IPreActingUCWeakMutBunch.Null,
-                  IPostActingUCWeakMutBunch.Null));
+                  IPostActingUCWeakMutBunch.Null),
+
+              "",
+              false,
+
+              context.root.EffectIGameEventMutListCreate(new List<IGameEvent>()),
+              context.root.EffectUnitWeakMutSetCreate(),
+              context.root.EffectTerrainTileWeakMutSetCreate());
 
       superstate =
           new Superstate(

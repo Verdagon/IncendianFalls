@@ -4,6 +4,10 @@ mut struct VolcaetusLevelController {
 
   level: &Level;
 
+  fn Destruct(this: VolcaetusLevelController overrides IDestructible): Void {
+    VolcaetusLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: VolcaetusLevelController overrides ILevelController): Str {
     VolcaetusLevelControllerExtensions.GetName
   }

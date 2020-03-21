@@ -4,6 +4,11 @@ using IncendianFalls;
 
 namespace Atharia.Model {
   public static class BridgesLevelControllerExtensions {
+    public static Atharia.Model.Void Destruct(this BridgesLevelController self) {
+      self.Delete();
+      return new Atharia.Model.Void();
+    }
+
     public static void LoadLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,

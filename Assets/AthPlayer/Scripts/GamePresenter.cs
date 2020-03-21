@@ -128,6 +128,7 @@ namespace AthPlayer {
     }
     public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) { }
     public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
+    public void visitGameSetHideInputEffect(GameSetHideInputEffect effect) { }
     public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) {
       showInstructions(effect.newValue);
     }

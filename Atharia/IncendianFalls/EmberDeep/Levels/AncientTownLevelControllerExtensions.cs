@@ -4,6 +4,11 @@ using IncendianFalls;
 
 namespace Atharia.Model {
   public static class AncientTownLevelControllerExtensions {
+    public static Atharia.Model.Void Destruct(this AncientTownLevelController self) {
+      self.Delete();
+      return new Atharia.Model.Void();
+    }
+
     public static void LoadLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,
@@ -85,6 +90,7 @@ namespace Atharia.Model {
       game.root.logger.Info("Got simple trigger: " + triggerName);
 
       if (triggerName == "levelStart") {
+        game.EnterCinematic();
         game.AddEvent(new WaitEvent(true, 1500, "startCamera").AsIGameEvent());
       }
       if (triggerName == "startCamera") {
@@ -111,6 +117,7 @@ namespace Atharia.Model {
       }
       if (triggerName == "cameraDone") {
         game.player.nextActionTime = game.level.time;
+        game.ExitCinematic();
 
         game.AddEvent(
           new ShowOverlayEvent(

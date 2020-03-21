@@ -4,6 +4,11 @@ using IncendianFalls;
 
 namespace Atharia.Model {
   public static class NestLevelControllerExtensions {
+    public static Atharia.Model.Void Destruct(this NestLevelController self) {
+      self.Delete();
+      return new Atharia.Model.Void();
+    }
+
     private static (SortedSet<Location>, SortedSet<Location>) GetFloorsAndNearbyWalls(Terrain terrain) {
       // This level contains floors where we want floors.
       // The stuff around the floors should be walls though.
@@ -185,6 +190,7 @@ namespace Atharia.Model {
       game.root.logger.Info("Got trigger: " + triggerName);
 
       if (triggerName == "levelStart") {
+        game.EnterCinematic();
         var hopTo = superstate.levelSuperstate.FindMarkerLocation("playerHopTo");
         Actions.Step(game, superstate, game.player, hopTo, true, false);
         game.AddEvent(new WaitEvent(true, 1000, "playerEntryHopDone").AsIGameEvent());
@@ -225,6 +231,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "cameraDone") {
+        game.ExitCinematic();
         game.player.nextActionTime = game.level.time;
 
         game.AddEvent(

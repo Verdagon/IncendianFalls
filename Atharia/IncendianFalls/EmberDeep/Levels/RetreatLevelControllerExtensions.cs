@@ -4,6 +4,11 @@ using IncendianFalls;
 
 namespace Atharia.Model {
   public static class RetreatLevelControllerExtensions {
+    public static Atharia.Model.Void Destruct(this RetreatLevelController self) {
+      self.Delete();
+      return new Atharia.Model.Void();
+    }
+
     public static void LoadLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,
@@ -75,6 +80,7 @@ namespace Atharia.Model {
       game.root.logger.Info("Got simple trigger: " + triggerName);
 
       if (triggerName == "levelStart") {
+        game.EnterCinematic();
         game.player.hp = game.player.maxHp;
         var sorcerous = game.player.components.GetOnlySorcerousUCOrNull();
         if (sorcerous.Exists()) {
@@ -134,6 +140,7 @@ namespace Atharia.Model {
           .AsIGameEvent());
       }
       if (triggerName == "showHints") {
+        game.ExitCinematic();
         game.AddEvent(
           new ShowOverlayEvent(
             "Keep in mind, enemies usually attack whoever is closest to them.\n\nYour past self should be close enough to distract the enemy, and buy you time to get away!\n\nHint: Try drawing the Draxling away and then reverting before it attacks.",

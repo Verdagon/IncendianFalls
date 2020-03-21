@@ -4,6 +4,10 @@ mut struct RetreatLevelController {
 
   level: &Level;
 
+  fn Destruct(this: RetreatLevelController overrides IDestructible): Void {
+    RetreatLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: RetreatLevelController overrides ILevelController): Str {
     RetreatLevelControllerExtensions.GetName
   }

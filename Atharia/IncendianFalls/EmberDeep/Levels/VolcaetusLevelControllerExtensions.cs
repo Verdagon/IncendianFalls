@@ -4,6 +4,11 @@ using IncendianFalls;
 
 namespace Atharia.Model {
   public static class VolcaetusLevelControllerExtensions {
+    public static Atharia.Model.Void Destruct(this VolcaetusLevelController self) {
+      self.Delete();
+      return new Atharia.Model.Void();
+    }
+
     public static void LoadLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,
@@ -98,6 +103,7 @@ namespace Atharia.Model {
       game.root.logger.Info("Got simple unit trigger: " + triggerName);
 
       if (triggeringUnit.NullableIs(game.player) && triggerName == "volcaetus") {
+        game.EnterCinematic();
         game.AddEvent(
           new ShowOverlayEvent(
             "This is... this is Volcaetus!\n\nThe black incendium spear!",

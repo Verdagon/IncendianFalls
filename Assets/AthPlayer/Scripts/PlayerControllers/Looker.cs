@@ -212,6 +212,7 @@ namespace AthPlayer {
         } else if (detail is SorcerousUCAsIUnitComponent) {
         } else if (detail is BaseCombatTimeUCAsIUnitComponent) {
         } else if (detail is BaseMovementTimeUCAsIUnitComponent) {
+        } else if (detail is BaseSightRangeUCAsIUnitComponent) {
         } else if (detail is SummonAICapabilityUCAsIUnitComponent) {
         } else if (detail is BaseOffenseUCAsIUnitComponent) {
         } else if (detail is BaseDefenseUCAsIUnitComponent) {

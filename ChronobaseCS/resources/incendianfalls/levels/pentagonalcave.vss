@@ -5,6 +5,10 @@ mut struct PentagonalCaveLevelController {
   level: &Level;
   depth: Int;
 
+  fn Destruct(this: PentagonalCaveLevelController overrides IDestructible): Void {
+    PentagonalCaveLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: PentagonalCaveLevelController overrides ILevelController): Str {
     PentagonalCaveLevelControllerExtensions.GetName
   }

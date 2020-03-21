@@ -14,6 +14,8 @@ public interface ILevelController {
   void FindReachableObjects(SortedSet<int> foundIds);
   bool Is(ILevelController that);
   bool NullableIs(ILevelController that);
+  IDestructible AsIDestructible();
+  Void Destruct();
   string GetName();
   bool ConsiderCornersAdjacent();
   Void SimpleTrigger(Game game, Superstate superstate, string triggerName);

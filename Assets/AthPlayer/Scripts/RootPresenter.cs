@@ -39,7 +39,7 @@ namespace AthPlayer {
   }
 
   public class RootPresenter : MonoBehaviour {
-    public static int sceneInitParamStartLevel = 0;
+    public static int sceneInitParamStartLevel = 7;
 
     SlowableTimerClock timer;
     SlowableTimerClock cinematicTimer;

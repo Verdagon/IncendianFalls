@@ -4,6 +4,10 @@ mut struct NestLevelController {
 
   level: &Level;
 
+  fn Destruct(this: NestLevelController overrides IDestructible): Void {
+    NestLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: NestLevelController overrides ILevelController): Str {
     NestLevelControllerExtensions.GetName
   }

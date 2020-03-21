@@ -4,6 +4,10 @@ mut struct Tutorial1LevelController {
 
   level: &Level;
 
+  fn Destruct(this: Tutorial1LevelController overrides IDestructible): Void {
+    Tutorial1LevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: Tutorial1LevelController overrides ILevelController): Str {
     Tutorial1LevelControllerExtensions.GetName
   }

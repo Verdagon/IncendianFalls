@@ -38,5 +38,19 @@ namespace Atharia.Model {
     public static void AddEvent(this Game game, IGameEvent e) {
       game.events.Add(e);
     }
+
+    public static void EnterCinematic(this Game game) {
+      if (game.hideInput) {
+        game.root.logger.Error("Entering cinematic but we were already in one!");
+      }
+      game.hideInput = true;
+    }
+
+    public static void ExitCinematic(this Game game) {
+      if (!game.hideInput) {
+        game.root.logger.Error("Exiting cinematic but we werent in one!");
+      }
+      game.hideInput = false;
+    }
   }
 }

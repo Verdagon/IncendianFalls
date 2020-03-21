@@ -4,6 +4,10 @@ mut struct SotaventoLevelController {
 
   level: &Level;
 
+  fn Destruct(this: SotaventoLevelController overrides IDestructible): Void {
+    SotaventoLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: SotaventoLevelController overrides ILevelController): Str {
     SotaventoLevelControllerExtensions.GetName
   }

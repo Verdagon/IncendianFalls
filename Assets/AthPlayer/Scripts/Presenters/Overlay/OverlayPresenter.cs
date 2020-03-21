@@ -118,8 +118,6 @@ namespace AthPlayer {
       int numPages = (wrappedOriginalLines.Length + textMaxHeight - 1) / textMaxHeight; // Rounds up
       bool isLastPage = pageIndex == numPages - 1;
 
-      Debug.Log(numPages + " " + isFirstPage + " " + isLastPage + " " + pageIndex + " " + pageLines.Count);
-
       List<PageButton> buttons = finalButtons;// new List<PageButton>();
       if (isLastPage) {
         //foreach (var finalButton in finalButtons) {

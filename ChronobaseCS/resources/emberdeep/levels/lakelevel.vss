@@ -4,6 +4,10 @@ mut struct LakeLevelController {
 
   level: &Level;
 
+  fn Destruct(this: LakeLevelController overrides IDestructible): Void {
+    LakeLevelControllerExtensions.Destruct
+  }
+
   fn GetName(this: LakeLevelController overrides ILevelController): Str {
     LakeLevelControllerExtensions.GetName
   }

@@ -17,6 +17,27 @@ public class RetreatLevelControllerAsILevelController : ILevelController {
   public void FindReachableObjects(SortedSet<int> foundIds) {
     obj.FindReachableObjects(foundIds);
   }
+  public bool Is(IDestructible that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IDestructible that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IDestructible AsIDestructible() {
+    return new RetreatLevelControllerAsIDestructible(obj);
+  }
   public bool Is(ILevelController that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
@@ -39,7 +60,10 @@ public class RetreatLevelControllerAsILevelController : ILevelController {
     return new RetreatLevelControllerAsILevelController(obj);
   }
 
-         public string GetName() {
+         public Void Destruct() {
+    return RetreatLevelControllerExtensions.Destruct(obj);
+  }
+  public string GetName() {
     return RetreatLevelControllerExtensions.GetName(obj);
   }
   public bool ConsiderCornersAdjacent() {

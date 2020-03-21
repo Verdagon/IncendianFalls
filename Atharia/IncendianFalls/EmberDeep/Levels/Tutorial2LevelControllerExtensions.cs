@@ -4,6 +4,11 @@ using IncendianFalls;
 
 namespace Atharia.Model {
   public static class Tutorial2LevelControllerExtensions {
+    public static Atharia.Model.Void Destruct(this Tutorial2LevelController self) {
+      self.Delete();
+      return new Atharia.Model.Void();
+    }
+
     public static void LoadLevel(
         out Level level,
         out LevelSuperstate levelSuperstate,
@@ -29,12 +34,21 @@ namespace Atharia.Model {
 
       levelSuperstate = new LevelSuperstate(level);
 
-      foreach (var summonLocation in levelSuperstate.FindMarkersLocations("summon", 2)) {
+      var summonLocations = new SortedSet<Location>(levelSuperstate.FindMarkersLocations("summon", 2));
+
+      var traskLocations = SetUtils.GetRandomN(summonLocations, game.rand, 3, 2);
+      foreach (var traskLocation in traskLocations) {
         var randNum = game.rand.Next() % 6;
+        Unit unit = RavagianTrask.Make(game.root);
+        int time = level.time + 300;
+        level.EnterUnit(levelSuperstate, traskLocation, time, unit);
+        summonLocations.Remove(traskLocation);
+      }
+
+      foreach (var summonLocation in summonLocations) {
+        var randNum = game.rand.Next() % 5;
         Unit unit;
-        if (randNum == 0) {
-          unit = RavagianTrask.Make(game.root);
-        } else if (randNum == 1) {
+        if (randNum == 1) {
           unit = Baug.Make(game.root);
         } else {
           unit = Irkling.Make(game.root);
@@ -89,9 +103,9 @@ namespace Atharia.Model {
             new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
         game.AddEvent(
-          new WaitEvent(true, 1000, "showHint").AsIGameEvent());
+          new WaitEvent(true, 1000, "entrySpeech").AsIGameEvent());
       }
-      if (triggerName == "showHint") {
+      if (triggerName == "entrySpeech") {
         game.AddEvent(
           new ShowOverlayEvent(
             "An ambush! Perhaps I can use the terrain and chronomancy to survive.",
@@ -100,7 +114,19 @@ namespace Atharia.Model {
           true,
           true,
           false,
-            new ButtonImmList(new List<Button>() { new Button("For valor!", "") }))
+            new ButtonImmList(new List<Button>() { new Button("For valor!", "showHint") }))
+          .AsIGameEvent());
+      }
+      if (triggerName == "showHint") {
+        game.AddEvent(
+          new ShowOverlayEvent(
+            "Hint: to survive ambushes, you often need several past selves at once.",
+            "aside",
+            "narrator",
+          true,
+          true,
+          false,
+            new ButtonImmList(new List<Button>()))
           .AsIGameEvent());
       }
 

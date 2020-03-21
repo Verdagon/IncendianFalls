@@ -26,6 +26,7 @@ namespace Domino {
     Looker looker;
     OverlayPaneler overlayPaneler;
     Unit player;
+    bool hideInput;
 
     IMode mode;
     int modeCapabilityId; // 0 means theres no capability associated with the current mode.
@@ -65,14 +66,12 @@ namespace Domino {
       this.resumeStaller.unstalledEvent += (sender) => MaybeResume();
       this.turnStaller.unstalledEvent += (sender) => MaybeResume();
 
-      this.player = this.game.player;
-      player.AddObserver(this);
-      var sorcerous = player.components.GetOnlySorcerousUCOrNull();
-      if (sorcerous.Exists()) {
-        sorcerous.AddObserver(this);
-      }
-      playerPanelView = new PlayerPanelView(cinematicTimer, overlayPaneler, looker, player);
-      playerPanelView.CapabilityButtonClicked += ActivateCapability;
+      this.hideInput = false;
+      this.player = Unit.Null;
+
+      UpdateHideInput();
+      UpdatePlayer();
+      UpdatePlayerPanel();
 
       SwitchToNormalMode();
     }
@@ -356,6 +355,9 @@ namespace Domino {
     public void visitGameCreateEffect(GameCreateEffect effect) { }
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
     public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
+    public void visitGameSetHideInputEffect(GameSetHideInputEffect effect) {
+      UpdateHideInput();
+    }
     public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) { }
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
       if (playerPanelView != null) {
@@ -363,15 +365,52 @@ namespace Domino {
       }
     }
     public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) {
+      UpdatePlayer();
+    }
+
+    private void UpdateHideInput() {
+      bool newHideInput = game.hideInput;
+      if (hideInput != newHideInput) {
+        if (newHideInput) {
+          inputSemaphore.Lock();
+        } else {
+          inputSemaphore.Unlock();
+        }
+        hideInput = newHideInput;
+      }
+      UpdatePlayerPanel();
+    }
+
+    private void UpdatePlayer() {
       if (player.Exists()) {
-        playerPanelView.Clear();
-        playerPanelView = null;
+        var sorcerous = player.components.GetOnlySorcerousUCOrNull();
+        if (sorcerous.Exists()) {
+          sorcerous.RemoveObserver(this);
+        }
         player.RemoveObserver(this);
       }
       player = game.player;
       if (player.Exists()) {
         player.AddObserver(this);
-        playerPanelView = new PlayerPanelView(cinematicTimer, overlayPaneler, looker, player);
+        var sorcerous = player.components.GetOnlySorcerousUCOrNull();
+        if (sorcerous.Exists()) {
+          sorcerous.AddObserver(this);
+        }
+      }
+      UpdatePlayerPanel();
+    }
+
+    private void UpdatePlayerPanel() {
+      bool shouldHavePlayerPanel = player.Exists() && !hideInput;
+      bool havePlayerPanel = (playerPanelView != null);
+      if (shouldHavePlayerPanel != havePlayerPanel) {
+        if (shouldHavePlayerPanel) {
+          playerPanelView = new PlayerPanelView(cinematicTimer, overlayPaneler, looker, player);
+          playerPanelView.CapabilityButtonClicked += ActivateCapability;
+        } else {
+          playerPanelView.Destroy();
+          playerPanelView = null;
+        }
       }
     }
   }

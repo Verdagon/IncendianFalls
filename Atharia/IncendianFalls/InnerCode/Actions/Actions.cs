@@ -41,10 +41,10 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit attacker,
         Unit victim,
-        float multiplier,
+        int multiplierPercent,
         bool takeTime) {
       Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
-      int initialDamage = 5;
+      int initialDamage = 5 * multiplierPercent / 100;
       AttackInner(
           game,
           superstate,
