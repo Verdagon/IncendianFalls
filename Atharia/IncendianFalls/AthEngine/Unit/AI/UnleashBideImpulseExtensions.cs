@@ -23,7 +23,12 @@ namespace Atharia.Model {
       Asserts.Assert(capability.Exists());
       capability.charge = 0;
 
-      Actions.UnleashBide(game, superstate, actingUnit);
+      // Get this, all surrounding, and all surrounding those.
+      var affectedTileLocations = new SortedSet<Location>() { actingUnit.location };
+      affectedTileLocations = game.level.terrain.pattern.GetAdjacentLocations(affectedTileLocations, true, game.level.ConsiderCornersAdjacent());
+      affectedTileLocations = game.level.terrain.pattern.GetAdjacentLocations(affectedTileLocations, true, game.level.ConsiderCornersAdjacent());
+      
+      Actions.UnleashBide(game, superstate, actingUnit, affectedTileLocations);
 
       return true;
     }

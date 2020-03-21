@@ -157,7 +157,7 @@ namespace EmberDeep {
           out var entryLocation,
           game,
           superstate,
-          0);
+          startingDepth);
         if (!startLevel.Exists()) {
           startLevel = level;
           startLevelEntryLocation = entryLocation;

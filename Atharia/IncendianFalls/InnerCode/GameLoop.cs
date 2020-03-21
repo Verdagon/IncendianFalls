@@ -287,6 +287,10 @@ namespace IncendianFalls {
         game.time = nextUnit.nextActionTime;
 
         if (nextUnit.alive == false) {
+          foreach (var deathPreactor in nextUnit.components.GetAllIDeathPreReactor()) {
+            deathPreactor.BeforeDeath(game, superstate, nextUnit);
+          }
+
           if (nextUnit.NullableIs(game.player)) {
             return; // To be continued... via ContinueAtStartTurn.
           } else {

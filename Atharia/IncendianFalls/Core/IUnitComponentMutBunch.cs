@@ -2127,6 +2127,28 @@ public class IUnitComponentMutBunch {
         return NullIPostActingUC.Null;
       }
     }
+                 public List<IDeathPreReactor> GetAllIDeathPreReactor() {
+      var result = new List<IDeathPreReactor>();
+      foreach (var obj in this.membersKamikazeAICapabilityUCMutSet) {
+        result.Add(
+            new KamikazeAICapabilityUCAsIDeathPreReactor(obj));
+      }
+      return result;
+    }
+    public List<IDeathPreReactor> ClearAllIDeathPreReactor() {
+      var result = new List<IDeathPreReactor>();
+      this.membersKamikazeAICapabilityUCMutSet.Clear();
+      return result;
+    }
+    public IDeathPreReactor GetOnlyIDeathPreReactorOrNull() {
+      var result = GetAllIDeathPreReactor();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIDeathPreReactor.Null;
+      }
+    }
                  public List<IImmediatelyUseItem> GetAllIImmediatelyUseItem() {
       var result = new List<IImmediatelyUseItem>();
       foreach (var obj in this.membersManaPotionMutSet) {

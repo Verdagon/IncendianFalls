@@ -132,10 +132,12 @@ namespace Domino {
 
       if (overlaySymbolView != null) {
         overlaySymbolView.Destruct();
+        overlaySymbolView = null;
       }
 
       if (featureSymbolView != null) {
         featureSymbolView.Destruct();
+        featureSymbolView = null;
       }
 
       foreach (var entry in itemSymbolViewByItemId) {

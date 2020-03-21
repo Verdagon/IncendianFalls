@@ -580,6 +580,19 @@ namespace AthPlayer {
                     new UnityEngine.Color(0, 0, 0)),
                 true,
                 new UnityEngine.Color(0, 0, 1f, 1f)));
+      } else if (effect.element is UnitFireBombedEventAsITerrainTileEvent ufbe) {
+        tileView.ShowRune(
+            new ExtrudedSymbolDescription(
+                RenderPriority.RUNE,
+                new SymbolDescription(
+                    "r-3",
+                            50,
+                      new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
+                    0,
+                    OutlineMode.WithOutline,
+                    new UnityEngine.Color(0, 0, 0)),
+                true,
+                new UnityEngine.Color(0, 0, 1f, 1f)));
       }
     }
     public void visitITerrainTileEventMutListRemoveEffect(ITerrainTileEventMutListRemoveEffect effect) { }

@@ -74,9 +74,11 @@ imm struct UnitFireEvent {
 
 imm struct UnitFireBombedEvent {
   UnitFireBombedEvent isa IUnitEvent;
+  UnitFireBombedEvent isa ITerrainTileEvent;
 
   time: Int;
   victimId: Int;
+  location: Location;
 
   fn GetTime(event: UnitFireBombedEvent overrides IUnitEvent): Int {
     UnitFireBombedEventExtensions.GetTime

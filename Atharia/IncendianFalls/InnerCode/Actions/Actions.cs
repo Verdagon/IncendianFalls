@@ -16,12 +16,8 @@ namespace IncendianFalls {
     public static void UnleashBide(
         Game game,
         Superstate superstate,
-        Unit attacker) {
-      // Get this, all surrounding, and all surrounding those.
-      var affectedTileLocations = new SortedSet<Location>() { attacker.location };
-      affectedTileLocations = game.level.terrain.pattern.GetAdjacentLocations(affectedTileLocations, true, game.level.ConsiderCornersAdjacent());
-      affectedTileLocations = game.level.terrain.pattern.GetAdjacentLocations(affectedTileLocations, true, game.level.ConsiderCornersAdjacent());
-
+        Unit attacker,
+        SortedSet<Location> affectedTileLocations) {
       List<Unit> victims = new List<Unit>();
       List<Location> otherLocations = new List<Location>();
       foreach (var affectedTileLocation in affectedTileLocations) {
@@ -267,8 +263,8 @@ namespace IncendianFalls {
         Superstate superstate,
         Location location) {
       Unit poorSuckerOnThisTile = superstate.levelSuperstate.GetLiveUnitAt(location);
+      Eventer.broadcastUnitFireBombedEvent(game.root, game, poorSuckerOnThisTile, location);
       if (poorSuckerOnThisTile.Exists()) {
-        Eventer.broadcastUnitFireBombedEvent(game.root, game, poorSuckerOnThisTile);
         AttackedInner(game, superstate, poorSuckerOnThisTile, FIRE_BOMB_DAMAGE, false);
       }
     }
@@ -278,7 +274,7 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit unit) {
       unit.components.Add(game.root.EffectLightningChargedUCCreate().AsIUnitComponent());
-      Eventer.broadcastUnitFireBombedEvent(game.root, game, unit);
+      Eventer.broadcastUnitFireBombedEvent(game.root, game, unit, unit.location);
       AttackedInner(game, superstate, unit, LIGHTNING_CHARGE_DAMAGE, false);
     }
   }

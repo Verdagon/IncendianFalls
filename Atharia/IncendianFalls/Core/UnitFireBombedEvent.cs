@@ -22,14 +22,18 @@ public class UnitFireBombedEvent : IComparable<UnitFireBombedEvent> {
   private readonly int hashCode;
          public readonly int time;
   public readonly int victimId;
+  public readonly Location location;
   public UnitFireBombedEvent(
       int time,
-      int victimId) {
+      int victimId,
+      Location location) {
     this.time = time;
     this.victimId = victimId;
+    this.location = location;
     int hash = 0;
     hash = hash * 37 + time.GetDeterministicHashCode();
     hash = hash * 37 + victimId.GetDeterministicHashCode();
+    hash = hash * 37 + location.GetDeterministicHashCode();
     this.hashCode = hash;
 
   }
@@ -54,6 +58,7 @@ public class UnitFireBombedEvent : IComparable<UnitFireBombedEvent> {
     return true
                && time.Equals(that.time)
         && victimId.Equals(that.victimId)
+        && location.Equals(that.location)
         ;
   }
   public override int GetHashCode() {
@@ -67,13 +72,17 @@ public class UnitFireBombedEvent : IComparable<UnitFireBombedEvent> {
     if (victimId != that.victimId) {
       return victimId.CompareTo(that.victimId);
     }
+    if (location != that.location) {
+      return location.CompareTo(that.location);
+    }
     return 0;
   }
   public override string ToString() { return DStr(); }
   public string DStr() {
     return "UnitFireBombedEvent(" +
         time.DStr() + ", " +
-        victimId.DStr()
+        victimId.DStr() + ", " +
+        location.DStr()
         + ")";
 
     }
@@ -83,8 +92,10 @@ public class UnitFireBombedEvent : IComparable<UnitFireBombedEvent> {
       var time = source.ParseInt();
       source.Expect(",");
       var victimId = source.ParseInt();
+      source.Expect(",");
+      var location = Location.Parse(source);
       source.Expect(")");
-      return new UnitFireBombedEvent(time, victimId);
+      return new UnitFireBombedEvent(time, victimId, location);
   }
 }
        

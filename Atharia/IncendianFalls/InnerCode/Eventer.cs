@@ -53,9 +53,14 @@ namespace IncendianFalls {
     public static void broadcastUnitFireBombedEvent(
         Root root,
         Game game,
-        Unit victim) {
-      var e = new UnitFireBombedEvent(game.time, victim.id).AsIUnitEvent();
-      victim.AddEvent(game, e);
+        Unit victim,
+        Location location) {
+      var e = new UnitFireBombedEvent(game.time, victim.id, location);
+      if (victim.Exists()) {
+        victim.AddEvent(game, e.AsIUnitEvent());
+      } else {
+        game.level.terrain.tiles[location].AddEvent(game, e.AsITerrainTileEvent());
+      }
     }
     public static void broadcastUnitStepEvent(
         Root root,

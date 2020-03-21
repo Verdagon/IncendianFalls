@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public class KamikazeAICapabilityUCAsIUnitComponent : IUnitComponent {
+public class KamikazeAICapabilityUCAsIDeathPreReactor : IDeathPreReactor {
   public readonly KamikazeAICapabilityUC obj;
   public int id => obj.id;
   public Root root => obj.root;
   public void Delete() { obj.Delete(); }
   public bool Exists() { return obj.Exists(); }
-  public KamikazeAICapabilityUCAsIUnitComponent(KamikazeAICapabilityUC obj) {
+  public KamikazeAICapabilityUCAsIDeathPreReactor(KamikazeAICapabilityUC obj) {
     this.obj = obj;
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
@@ -126,11 +126,14 @@ public class KamikazeAICapabilityUCAsIUnitComponent : IUnitComponent {
          public Void Destruct() {
     return KamikazeAICapabilityUCExtensions.Destruct(obj);
   }
+  public Void BeforeDeath(Game game, Superstate superstate, Unit unit) {
+    return KamikazeAICapabilityUCExtensions.BeforeDeath(obj, game, superstate, unit);
+  }
 
 }
-public static class KamikazeAICapabilityUCAsIUnitComponentCaster {
-  public static KamikazeAICapabilityUCAsIUnitComponent AsIUnitComponent(this KamikazeAICapabilityUC obj) {
-    return new KamikazeAICapabilityUCAsIUnitComponent(obj);
+public static class KamikazeAICapabilityUCAsIDeathPreReactorCaster {
+  public static KamikazeAICapabilityUCAsIDeathPreReactor AsIDeathPreReactor(this KamikazeAICapabilityUC obj) {
+    return new KamikazeAICapabilityUCAsIDeathPreReactor(obj);
   }
 }
 

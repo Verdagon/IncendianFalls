@@ -11,6 +11,8 @@ public static class ITerrainTileEventParser {
     switch (nextThingPeek) {
       case "UnitUnleashBideEvent":
         return new UnitUnleashBideEventAsITerrainTileEvent(UnitUnleashBideEvent.Parse(source));
+      case "UnitFireBombedEvent":
+        return new UnitFireBombedEventAsITerrainTileEvent(UnitFireBombedEvent.Parse(source));
       default:
         throw new Exception("Unexpected: " + nextThingPeek);
     }

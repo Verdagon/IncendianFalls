@@ -74,3 +74,13 @@ mut interface IImpulsePostReactor {
       impulse: IImpulse)
   : Void;
 }
+
+mut interface IDeathPreReactor {
+  IDeathPreReactor isa IUnitComponent;
+
+  fn BeforeDeath(
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Void;
+}

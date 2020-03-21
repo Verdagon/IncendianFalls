@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atharia.Model;
 using IncendianFalls;
 
@@ -19,15 +20,16 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
-      foreach (var location in self.capability.targetByLocation.Keys) {
+      var targetLocations = new SortedSet<Location>(self.capability.targetByLocation.Keys);
+      foreach (var location in targetLocations) {
         var target = self.capability.targetByLocation[location];
         self.capability.targetByLocation.Remove(location);
         game.level.terrain.tiles[location].components.Remove(
           target.AsITerrainTileComponent());
         target.Destruct();
-
-        Actions.ExplodeFireBomb(game, superstate, location);
       }
+
+      Actions.UnleashBide(game, superstate, unit, targetLocations);
 
       Actions.Step(game, superstate, unit, self.jumpTarget, true, false);
       // We told step to take no time. Let's take double here.

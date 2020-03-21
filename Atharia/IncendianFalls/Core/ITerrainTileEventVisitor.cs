@@ -7,6 +7,7 @@ namespace Atharia.Model {
 
 public interface ITerrainTileEventVisitor {
   void Visit(UnitUnleashBideEventAsITerrainTileEvent obj);
+  void Visit(UnitFireBombedEventAsITerrainTileEvent obj);
 }
 
 }

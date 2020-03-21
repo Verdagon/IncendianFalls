@@ -2,6 +2,7 @@
 mut struct KamikazeAICapabilityUC {
   KamikazeAICapabilityUC isa IAICapabilityUC;
   KamikazeAICapabilityUC isa IImpulsePreReactor;
+  KamikazeAICapabilityUC isa IDeathPreReactor;
 
   var targetByLocation: MutMap:(Location, &KamikazeTargetTTC);
   var targetLocationCenter: Location;
@@ -26,6 +27,14 @@ mut struct KamikazeAICapabilityUC {
       impulse: IImpulse)
   : Void {
     KamikazeAICapabilityUCExtensions.BeforeImpulse
+  }
+  fn BeforeDeath(
+      this: KamikazeAICapabilityUC overrides IDeathPreReactor,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Void {
+    KamikazeAICapabilityUCExtensions.BeforeDeath
   }
 }
 

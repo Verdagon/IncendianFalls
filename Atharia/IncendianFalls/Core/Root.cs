@@ -32399,6 +32399,28 @@ public class Root {
     effectsAncientTownLevelControllerCreateEffect.Clear();
   }
 
+  public IDeathPreReactor GetIDeathPreReactor(int id) {
+    if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
+      return new KamikazeAICapabilityUCAsIDeathPreReactor(new KamikazeAICapabilityUC(this, id));
+    }
+    throw new Exception("Unknown IDeathPreReactor: " + id);
+  }
+  public IDeathPreReactor GetIDeathPreReactorOrNull(int id) {
+    if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
+      return new KamikazeAICapabilityUCAsIDeathPreReactor(new KamikazeAICapabilityUC(this, id));
+    }
+    return NullIDeathPreReactor.Null;
+  }
+  public bool IDeathPreReactorExists(int id) {
+    return GetIDeathPreReactorOrNull(id) != null;
+  }
+  public void CheckHasIDeathPreReactor(IDeathPreReactor thing) {
+    GetIDeathPreReactor(thing.id);
+  }
+  public void CheckHasIDeathPreReactor(int id) {
+    GetIDeathPreReactor(id);
+  }
+
   public IImpulsePostReactor GetIImpulsePostReactor(int id) {
     if (rootIncarnation.incarnationsTutorialDefyCounterUC.ContainsKey(id)) {
       return new TutorialDefyCounterUCAsIImpulsePostReactor(new TutorialDefyCounterUC(this, id));

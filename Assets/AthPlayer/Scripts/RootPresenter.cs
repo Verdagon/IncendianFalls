@@ -95,6 +95,7 @@ namespace AthPlayer {
 
       lookPanelView = new LookPanelView(cinematicTimer, overlayPaneler);
 
+      Debug.Log("Setting up level: " + sceneInitParamStartLevel);
       var randomSeed = timestamp;
       Debug.Log("Random seed: " + randomSeed);
       //Debug.LogWarning("Hardcoding random seed!");

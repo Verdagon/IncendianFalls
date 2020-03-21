@@ -6,8 +6,10 @@ using IncendianFalls;
 namespace Atharia.Model {
   public static class KamikazeAICapabilityUCExtensions {
     public static Atharia.Model.Void Destruct(
-        this KamikazeAICapabilityUC obj) {
-      obj.Delete();
+        this KamikazeAICapabilityUC self) {
+      Asserts.Assert(self.targetByLocation.Count == 0); // should have cleared in the DeathPreactor
+
+      self.Delete();
       return new Atharia.Model.Void();
     }
 
@@ -77,6 +79,23 @@ namespace Atharia.Model {
           target.Destruct();
         }
         Asserts.Assert(self.targetByLocation.Count == 0);
+      }
+      return new Atharia.Model.Void();
+    }
+
+    public static Atharia.Model.Void BeforeDeath(
+        KamikazeAICapabilityUC self,
+        Game game,
+        Superstate superstate,
+        Unit unit) {
+      Asserts.Assert(!unit.alive, "curiosity");
+      var targetLocations = new SortedSet<Location>(self.targetByLocation.Keys);
+      foreach (var location in targetLocations) {
+        var target = self.targetByLocation[location];
+        self.targetByLocation.Remove(location);
+        game.level.terrain.tiles[location].components.Remove(
+          target.AsITerrainTileComponent());
+        target.Destruct();
       }
       return new Atharia.Model.Void();
     }
