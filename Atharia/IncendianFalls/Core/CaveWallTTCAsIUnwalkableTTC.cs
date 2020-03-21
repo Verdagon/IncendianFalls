@@ -17,6 +17,27 @@ public class CaveWallTTCAsIUnwalkableTTC : IUnwalkableTTC {
   public void FindReachableObjects(SortedSet<int> foundIds) {
     obj.FindReachableObjects(foundIds);
   }
+  public bool Is(IBlocksSightTTC that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(IBlocksSightTTC that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public IBlocksSightTTC AsIBlocksSightTTC() {
+    return new CaveWallTTCAsIBlocksSightTTC(obj);
+  }
   public bool Is(IUnwalkableTTC that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");

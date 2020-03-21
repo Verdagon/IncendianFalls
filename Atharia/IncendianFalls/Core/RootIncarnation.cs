@@ -23,6 +23,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCIncarnation>> incarnationsSummonAICapabilityUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<SorcerousUCIncarnation>> incarnationsSorcerousUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<BaseOffenseUCIncarnation>> incarnationsBaseOffenseUC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<BaseSightRangeUCIncarnation>> incarnationsBaseSightRangeUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<BaseMovementTimeUCIncarnation>> incarnationsBaseMovementTimeUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<BaseDefenseUCIncarnation>> incarnationsBaseDefenseUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<BaseCombatTimeUCIncarnation>> incarnationsBaseCombatTimeUC;
@@ -208,6 +209,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<InvincibilityUCMutSetIncarnation>> incarnationsInvincibilityUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<DefyingUCMutSetIncarnation>> incarnationsDefyingUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>> incarnationsBideAICapabilityUCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<BaseSightRangeUCMutSetIncarnation>> incarnationsBaseSightRangeUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<BaseMovementTimeUCMutSetIncarnation>> incarnationsBaseMovementTimeUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<BaseCombatTimeUCMutSetIncarnation>> incarnationsBaseCombatTimeUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<ManaPotionMutSetIncarnation>> incarnationsManaPotionMutSet;
@@ -241,6 +243,7 @@ public class RootIncarnation {
     this.incarnationsSummonAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCIncarnation>>();
     this.incarnationsSorcerousUC = new SortedDictionary<int, VersionAndIncarnation<SorcerousUCIncarnation>>();
     this.incarnationsBaseOffenseUC = new SortedDictionary<int, VersionAndIncarnation<BaseOffenseUCIncarnation>>();
+    this.incarnationsBaseSightRangeUC = new SortedDictionary<int, VersionAndIncarnation<BaseSightRangeUCIncarnation>>();
     this.incarnationsBaseMovementTimeUC = new SortedDictionary<int, VersionAndIncarnation<BaseMovementTimeUCIncarnation>>();
     this.incarnationsBaseDefenseUC = new SortedDictionary<int, VersionAndIncarnation<BaseDefenseUCIncarnation>>();
     this.incarnationsBaseCombatTimeUC = new SortedDictionary<int, VersionAndIncarnation<BaseCombatTimeUCIncarnation>>();
@@ -426,6 +429,7 @@ public class RootIncarnation {
     this.incarnationsInvincibilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<InvincibilityUCMutSetIncarnation>>();
     this.incarnationsDefyingUCMutSet = new SortedDictionary<int, VersionAndIncarnation<DefyingUCMutSetIncarnation>>();
     this.incarnationsBideAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>>();
+    this.incarnationsBaseSightRangeUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BaseSightRangeUCMutSetIncarnation>>();
     this.incarnationsBaseMovementTimeUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BaseMovementTimeUCMutSetIncarnation>>();
     this.incarnationsBaseCombatTimeUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BaseCombatTimeUCMutSetIncarnation>>();
     this.incarnationsManaPotionMutSet = new SortedDictionary<int, VersionAndIncarnation<ManaPotionMutSetIncarnation>>();
@@ -464,6 +468,7 @@ public class RootIncarnation {
     this.incarnationsSummonAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCIncarnation>>(that.incarnationsSummonAICapabilityUC);
     this.incarnationsSorcerousUC = new SortedDictionary<int, VersionAndIncarnation<SorcerousUCIncarnation>>(that.incarnationsSorcerousUC);
     this.incarnationsBaseOffenseUC = new SortedDictionary<int, VersionAndIncarnation<BaseOffenseUCIncarnation>>(that.incarnationsBaseOffenseUC);
+    this.incarnationsBaseSightRangeUC = new SortedDictionary<int, VersionAndIncarnation<BaseSightRangeUCIncarnation>>(that.incarnationsBaseSightRangeUC);
     this.incarnationsBaseMovementTimeUC = new SortedDictionary<int, VersionAndIncarnation<BaseMovementTimeUCIncarnation>>(that.incarnationsBaseMovementTimeUC);
     this.incarnationsBaseDefenseUC = new SortedDictionary<int, VersionAndIncarnation<BaseDefenseUCIncarnation>>(that.incarnationsBaseDefenseUC);
     this.incarnationsBaseCombatTimeUC = new SortedDictionary<int, VersionAndIncarnation<BaseCombatTimeUCIncarnation>>(that.incarnationsBaseCombatTimeUC);
@@ -649,6 +654,7 @@ public class RootIncarnation {
     this.incarnationsInvincibilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<InvincibilityUCMutSetIncarnation>>(that.incarnationsInvincibilityUCMutSet);
     this.incarnationsDefyingUCMutSet = new SortedDictionary<int, VersionAndIncarnation<DefyingUCMutSetIncarnation>>(that.incarnationsDefyingUCMutSet);
     this.incarnationsBideAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BideAICapabilityUCMutSetIncarnation>>(that.incarnationsBideAICapabilityUCMutSet);
+    this.incarnationsBaseSightRangeUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BaseSightRangeUCMutSetIncarnation>>(that.incarnationsBaseSightRangeUCMutSet);
     this.incarnationsBaseMovementTimeUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BaseMovementTimeUCMutSetIncarnation>>(that.incarnationsBaseMovementTimeUCMutSet);
     this.incarnationsBaseCombatTimeUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BaseCombatTimeUCMutSetIncarnation>>(that.incarnationsBaseCombatTimeUCMutSet);
     this.incarnationsManaPotionMutSet = new SortedDictionary<int, VersionAndIncarnation<ManaPotionMutSetIncarnation>>(that.incarnationsManaPotionMutSet);

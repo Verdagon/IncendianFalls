@@ -21,6 +21,7 @@ public class IUnitComponentMutBunchIncarnation {
   public readonly int membersInvincibilityUCMutSet;
   public readonly int membersDefyingUCMutSet;
   public readonly int membersBideAICapabilityUCMutSet;
+  public readonly int membersBaseSightRangeUCMutSet;
   public readonly int membersBaseMovementTimeUCMutSet;
   public readonly int membersBaseCombatTimeUCMutSet;
   public readonly int membersManaPotionMutSet;
@@ -50,6 +51,7 @@ public class IUnitComponentMutBunchIncarnation {
       int membersInvincibilityUCMutSet,
       int membersDefyingUCMutSet,
       int membersBideAICapabilityUCMutSet,
+      int membersBaseSightRangeUCMutSet,
       int membersBaseMovementTimeUCMutSet,
       int membersBaseCombatTimeUCMutSet,
       int membersManaPotionMutSet,
@@ -78,6 +80,7 @@ public class IUnitComponentMutBunchIncarnation {
     this.membersInvincibilityUCMutSet = membersInvincibilityUCMutSet;
     this.membersDefyingUCMutSet = membersDefyingUCMutSet;
     this.membersBideAICapabilityUCMutSet = membersBideAICapabilityUCMutSet;
+    this.membersBaseSightRangeUCMutSet = membersBaseSightRangeUCMutSet;
     this.membersBaseMovementTimeUCMutSet = membersBaseMovementTimeUCMutSet;
     this.membersBaseCombatTimeUCMutSet = membersBaseCombatTimeUCMutSet;
     this.membersManaPotionMutSet = membersManaPotionMutSet;

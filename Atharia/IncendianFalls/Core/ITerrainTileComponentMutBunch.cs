@@ -1937,51 +1937,7 @@ public class ITerrainTileComponentMutBunch {
         return EmberDeepLevelLinkerTTC.Null;
       }
     }
-    public List<IActingTTC> GetAllIActingTTC() {
-      var result = new List<IActingTTC>();
-      foreach (var obj in this.membersFireBombTTCMutSet) {
-        result.Add(
-            new FireBombTTCAsIActingTTC(obj));
-      }
-      return result;
-    }
-    public List<IActingTTC> ClearAllIActingTTC() {
-      var result = new List<IActingTTC>();
-      this.membersFireBombTTCMutSet.Clear();
-      return result;
-    }
-    public IActingTTC GetOnlyIActingTTCOrNull() {
-      var result = GetAllIActingTTC();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return NullIActingTTC.Null;
-      }
-    }
-                 public List<IPresenceTriggerTTC> GetAllIPresenceTriggerTTC() {
-      var result = new List<IPresenceTriggerTTC>();
-      foreach (var obj in this.membersSimplePresenceTriggerTTCMutSet) {
-        result.Add(
-            new SimplePresenceTriggerTTCAsIPresenceTriggerTTC(obj));
-      }
-      return result;
-    }
-    public List<IPresenceTriggerTTC> ClearAllIPresenceTriggerTTC() {
-      var result = new List<IPresenceTriggerTTC>();
-      this.membersSimplePresenceTriggerTTCMutSet.Clear();
-      return result;
-    }
-    public IPresenceTriggerTTC GetOnlyIPresenceTriggerTTCOrNull() {
-      var result = GetAllIPresenceTriggerTTC();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return NullIPresenceTriggerTTC.Null;
-      }
-    }
-                 public List<IInteractableTTC> GetAllIInteractableTTC() {
+    public List<IInteractableTTC> GetAllIInteractableTTC() {
       var result = new List<IInteractableTTC>();
       foreach (var obj in this.membersWarperTTCMutSet) {
         result.Add(
@@ -2021,6 +1977,28 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return NullIInteractableTTC.Null;
+      }
+    }
+                 public List<IActingTTC> GetAllIActingTTC() {
+      var result = new List<IActingTTC>();
+      foreach (var obj in this.membersFireBombTTCMutSet) {
+        result.Add(
+            new FireBombTTCAsIActingTTC(obj));
+      }
+      return result;
+    }
+    public List<IActingTTC> ClearAllIActingTTC() {
+      var result = new List<IActingTTC>();
+      this.membersFireBombTTCMutSet.Clear();
+      return result;
+    }
+    public IActingTTC GetOnlyIActingTTCOrNull() {
+      var result = GetAllIActingTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIActingTTC.Null;
       }
     }
                  public List<IUnwalkableTTC> GetAllIUnwalkableTTC() {
@@ -2068,6 +2046,55 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return NullIUnwalkableTTC.Null;
+      }
+    }
+                 public List<IBlocksSightTTC> GetAllIBlocksSightTTC() {
+      var result = new List<IBlocksSightTTC>();
+      foreach (var obj in this.membersTreeTTCMutSet) {
+        result.Add(
+            new TreeTTCAsIBlocksSightTTC(obj));
+      }
+      foreach (var obj in this.membersCaveWallTTCMutSet) {
+        result.Add(
+            new CaveWallTTCAsIBlocksSightTTC(obj));
+      }
+      return result;
+    }
+    public List<IBlocksSightTTC> ClearAllIBlocksSightTTC() {
+      var result = new List<IBlocksSightTTC>();
+      this.membersTreeTTCMutSet.Clear();
+      this.membersCaveWallTTCMutSet.Clear();
+      return result;
+    }
+    public IBlocksSightTTC GetOnlyIBlocksSightTTCOrNull() {
+      var result = GetAllIBlocksSightTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIBlocksSightTTC.Null;
+      }
+    }
+                 public List<IPresenceTriggerTTC> GetAllIPresenceTriggerTTC() {
+      var result = new List<IPresenceTriggerTTC>();
+      foreach (var obj in this.membersSimplePresenceTriggerTTCMutSet) {
+        result.Add(
+            new SimplePresenceTriggerTTCAsIPresenceTriggerTTC(obj));
+      }
+      return result;
+    }
+    public List<IPresenceTriggerTTC> ClearAllIPresenceTriggerTTC() {
+      var result = new List<IPresenceTriggerTTC>();
+      this.membersSimplePresenceTriggerTTCMutSet.Clear();
+      return result;
+    }
+    public IPresenceTriggerTTC GetOnlyIPresenceTriggerTTCOrNull() {
+      var result = GetAllIPresenceTriggerTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIPresenceTriggerTTC.Null;
       }
     }
              }

@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
+public class CaveWallTTCAsIBlocksSightTTC : IBlocksSightTTC {
   public readonly CaveWallTTC obj;
   public int id => obj.id;
   public Root root => obj.root;
   public void Delete() { obj.Delete(); }
   public bool Exists() { return obj.Exists(); }
-  public CaveWallTTCAsITerrainTileComponent(CaveWallTTC obj) {
+  public CaveWallTTCAsIBlocksSightTTC(CaveWallTTC obj) {
     this.obj = obj;
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
@@ -107,9 +107,9 @@ public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
   }
 
 }
-public static class CaveWallTTCAsITerrainTileComponentCaster {
-  public static CaveWallTTCAsITerrainTileComponent AsITerrainTileComponent(this CaveWallTTC obj) {
-    return new CaveWallTTCAsITerrainTileComponent(obj);
+public static class CaveWallTTCAsIBlocksSightTTCCaster {
+  public static CaveWallTTCAsIBlocksSightTTC AsIBlocksSightTTC(this CaveWallTTC obj) {
+    return new CaveWallTTCAsIBlocksSightTTC(obj);
   }
 }
 

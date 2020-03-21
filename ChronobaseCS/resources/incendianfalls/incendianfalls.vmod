@@ -59,6 +59,7 @@ unit/mire.vss
 unit/stats/combattime.vss
 unit/stats/defense.vss
 unit/stats/movementtime.vss
+unit/stats/sightrange.vss
 unit/stats/offense.vss
 unit/stats/sorcerous.vss
 unit/summon.vss

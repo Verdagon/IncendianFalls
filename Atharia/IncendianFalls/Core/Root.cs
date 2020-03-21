@@ -169,6 +169,13 @@ public class Root {
   readonly List<BaseOffenseUCDeleteEffect> effectsBaseOffenseUCDeleteEffect =
       new List<BaseOffenseUCDeleteEffect>();
 
+  readonly SortedDictionary<int, List<IBaseSightRangeUCEffectObserver>> observersForBaseSightRangeUC =
+      new SortedDictionary<int, List<IBaseSightRangeUCEffectObserver>>();
+  readonly List<BaseSightRangeUCCreateEffect> effectsBaseSightRangeUCCreateEffect =
+      new List<BaseSightRangeUCCreateEffect>();
+  readonly List<BaseSightRangeUCDeleteEffect> effectsBaseSightRangeUCDeleteEffect =
+      new List<BaseSightRangeUCDeleteEffect>();
+
   readonly SortedDictionary<int, List<IBaseMovementTimeUCEffectObserver>> observersForBaseMovementTimeUC =
       new SortedDictionary<int, List<IBaseMovementTimeUCEffectObserver>>();
   readonly List<BaseMovementTimeUCCreateEffect> effectsBaseMovementTimeUCCreateEffect =
@@ -1858,6 +1865,17 @@ public class Root {
   readonly List<BideAICapabilityUCMutSetRemoveEffect> effectsBideAICapabilityUCMutSetRemoveEffect =
       new List<BideAICapabilityUCMutSetRemoveEffect>();
 
+  readonly SortedDictionary<int, List<IBaseSightRangeUCMutSetEffectObserver>> observersForBaseSightRangeUCMutSet =
+      new SortedDictionary<int, List<IBaseSightRangeUCMutSetEffectObserver>>();
+  readonly List<BaseSightRangeUCMutSetCreateEffect> effectsBaseSightRangeUCMutSetCreateEffect =
+      new List<BaseSightRangeUCMutSetCreateEffect>();
+  readonly List<BaseSightRangeUCMutSetDeleteEffect> effectsBaseSightRangeUCMutSetDeleteEffect =
+      new List<BaseSightRangeUCMutSetDeleteEffect>();
+  readonly List<BaseSightRangeUCMutSetAddEffect> effectsBaseSightRangeUCMutSetAddEffect =
+      new List<BaseSightRangeUCMutSetAddEffect>();
+  readonly List<BaseSightRangeUCMutSetRemoveEffect> effectsBaseSightRangeUCMutSetRemoveEffect =
+      new List<BaseSightRangeUCMutSetRemoveEffect>();
+
   readonly SortedDictionary<int, List<IBaseMovementTimeUCMutSetEffectObserver>> observersForBaseMovementTimeUCMutSet =
       new SortedDictionary<int, List<IBaseMovementTimeUCMutSetEffectObserver>>();
   readonly List<BaseMovementTimeUCMutSetCreateEffect> effectsBaseMovementTimeUCMutSetCreateEffect =
@@ -2154,6 +2172,9 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsBaseOffenseUC) {
       result += GetBaseOffenseUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsBaseSightRangeUC) {
+      result += GetBaseSightRangeUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsBaseMovementTimeUC) {
       result += GetBaseMovementTimeUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -2710,6 +2731,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsBideAICapabilityUCMutSet) {
       result += GetBideAICapabilityUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsBaseSightRangeUCMutSet) {
+      result += GetBaseSightRangeUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsBaseMovementTimeUCMutSet) {
       result += GetBaseMovementTimeUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -2801,6 +2825,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllBaseOffenseUC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllBaseSightRangeUC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllBaseMovementTimeUC()) {
@@ -3356,6 +3383,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllBideAICapabilityUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllBaseSightRangeUCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllBaseMovementTimeUCMutSet()) {
@@ -3480,6 +3510,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllBaseSightRangeUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllBaseMovementTimeUC()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -4401,6 +4436,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllBideAICapabilityUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllBaseSightRangeUCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -4651,6 +4691,17 @@ public class Root {
       copyOfObserversForBaseOffenseUC.Add(
           objectId,
           new List<IBaseOffenseUCEffectObserver>(
+              observers));
+    }
+
+    var copyOfObserversForBaseSightRangeUC =
+        new SortedDictionary<int, List<IBaseSightRangeUCEffectObserver>>();
+    foreach (var entry in observersForBaseSightRangeUC) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForBaseSightRangeUC.Add(
+          objectId,
+          new List<IBaseSightRangeUCEffectObserver>(
               observers));
     }
 
@@ -6689,6 +6740,17 @@ public class Root {
               observers));
     }
 
+    var copyOfObserversForBaseSightRangeUCMutSet =
+        new SortedDictionary<int, List<IBaseSightRangeUCMutSetEffectObserver>>();
+    foreach (var entry in observersForBaseSightRangeUCMutSet) {
+      var objectId = entry.Key;
+      var observers = entry.Value;
+      copyOfObserversForBaseSightRangeUCMutSet.Add(
+          objectId,
+          new List<IBaseSightRangeUCMutSetEffectObserver>(
+              observers));
+    }
+
     var copyOfObserversForBaseMovementTimeUCMutSet =
         new SortedDictionary<int, List<IBaseMovementTimeUCMutSetEffectObserver>>();
     foreach (var entry in observersForBaseMovementTimeUCMutSet) {
@@ -6887,6 +6949,9 @@ public class Root {
            
     BroadcastBaseOffenseUCEffects(
         copyOfObserversForBaseOffenseUC);
+           
+    BroadcastBaseSightRangeUCEffects(
+        copyOfObserversForBaseSightRangeUC);
            
     BroadcastBaseMovementTimeUCEffects(
         copyOfObserversForBaseMovementTimeUC);
@@ -7443,6 +7508,9 @@ public class Root {
     BroadcastBideAICapabilityUCMutSetEffects(
         copyOfObserversForBideAICapabilityUCMutSet);
            
+    BroadcastBaseSightRangeUCMutSetEffects(
+        copyOfObserversForBaseSightRangeUCMutSet);
+           
     BroadcastBaseMovementTimeUCMutSetEffects(
         copyOfObserversForBaseMovementTimeUCMutSet);
            
@@ -7648,6 +7716,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsBaseOffenseUC.ContainsKey(sourceObjId)) {
         EffectInternalCreateBaseOffenseUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBaseSightRangeUC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(sourceObjId)) {
+        EffectInternalCreateBaseSightRangeUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -9498,6 +9576,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsBideAICapabilityUCMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateBideAICapabilityUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBaseSightRangeUCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsBaseSightRangeUCMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateBaseSightRangeUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -12146,6 +12234,34 @@ public class Root {
         }
       }
              
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBaseSightRangeUCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsBaseSightRangeUCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsBaseSightRangeUCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectBaseSightRangeUCMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectBaseSightRangeUCMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsBaseSightRangeUCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBaseMovementTimeUCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -12902,6 +13018,27 @@ public class Root {
           // changing the version number.
           
           rootIncarnation.incarnationsBaseOffenseUC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBaseSightRangeUC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsBaseSightRangeUC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsBaseSightRangeUC[objId] = sourceVersionAndObjIncarnation;
           
         }
       }
@@ -15075,6 +15212,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BaseSightRangeUCIncarnation>>(rootIncarnation.incarnationsBaseSightRangeUC)) {
+      if (!sourceIncarnation.incarnationsBaseSightRangeUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectBaseSightRangeUCDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BaseMovementTimeUCIncarnation>>(rootIncarnation.incarnationsBaseMovementTimeUC)) {
       if (!sourceIncarnation.incarnationsBaseMovementTimeUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -16370,6 +16514,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BaseSightRangeUCMutSetIncarnation>>(rootIncarnation.incarnationsBaseSightRangeUCMutSet)) {
+      if (!sourceIncarnation.incarnationsBaseSightRangeUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectBaseSightRangeUCMutSetDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BaseMovementTimeUCMutSetIncarnation>>(rootIncarnation.incarnationsBaseMovementTimeUCMutSet)) {
       if (!sourceIncarnation.incarnationsBaseMovementTimeUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -17561,6 +17712,7 @@ public class Root {
       InvincibilityUCMutSet membersInvincibilityUCMutSet,
       DefyingUCMutSet membersDefyingUCMutSet,
       BideAICapabilityUCMutSet membersBideAICapabilityUCMutSet,
+      BaseSightRangeUCMutSet membersBaseSightRangeUCMutSet,
       BaseMovementTimeUCMutSet membersBaseMovementTimeUCMutSet,
       BaseCombatTimeUCMutSet membersBaseCombatTimeUCMutSet,
       ManaPotionMutSet membersManaPotionMutSet,
@@ -17590,6 +17742,7 @@ public class Root {
     CheckHasInvincibilityUCMutSet(membersInvincibilityUCMutSet);
     CheckHasDefyingUCMutSet(membersDefyingUCMutSet);
     CheckHasBideAICapabilityUCMutSet(membersBideAICapabilityUCMutSet);
+    CheckHasBaseSightRangeUCMutSet(membersBaseSightRangeUCMutSet);
     CheckHasBaseMovementTimeUCMutSet(membersBaseMovementTimeUCMutSet);
     CheckHasBaseCombatTimeUCMutSet(membersBaseCombatTimeUCMutSet);
     CheckHasManaPotionMutSet(membersManaPotionMutSet);
@@ -17622,6 +17775,7 @@ public class Root {
             membersInvincibilityUCMutSet.id,
             membersDefyingUCMutSet.id,
             membersBideAICapabilityUCMutSet.id,
+            membersBaseSightRangeUCMutSet.id,
             membersBaseMovementTimeUCMutSet.id,
             membersBaseCombatTimeUCMutSet.id,
             membersManaPotionMutSet.id,
@@ -17682,18 +17836,19 @@ public class Root {
     result += id * version * 14 * incarnation.membersInvincibilityUCMutSet.GetDeterministicHashCode();
     result += id * version * 15 * incarnation.membersDefyingUCMutSet.GetDeterministicHashCode();
     result += id * version * 16 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 17 * incarnation.membersBaseMovementTimeUCMutSet.GetDeterministicHashCode();
-    result += id * version * 18 * incarnation.membersBaseCombatTimeUCMutSet.GetDeterministicHashCode();
-    result += id * version * 19 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 20 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 21 * incarnation.membersSpeedRingMutSet.GetDeterministicHashCode();
-    result += id * version * 22 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
-    result += id * version * 23 * incarnation.membersSlowRodMutSet.GetDeterministicHashCode();
-    result += id * version * 24 * incarnation.membersBlastRodMutSet.GetDeterministicHashCode();
-    result += id * version * 25 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
-    result += id * version * 26 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
-    result += id * version * 27 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
-    result += id * version * 28 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 17 * incarnation.membersBaseSightRangeUCMutSet.GetDeterministicHashCode();
+    result += id * version * 18 * incarnation.membersBaseMovementTimeUCMutSet.GetDeterministicHashCode();
+    result += id * version * 19 * incarnation.membersBaseCombatTimeUCMutSet.GetDeterministicHashCode();
+    result += id * version * 20 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 21 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 22 * incarnation.membersSpeedRingMutSet.GetDeterministicHashCode();
+    result += id * version * 23 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
+    result += id * version * 24 * incarnation.membersSlowRodMutSet.GetDeterministicHashCode();
+    result += id * version * 25 * incarnation.membersBlastRodMutSet.GetDeterministicHashCode();
+    result += id * version * 26 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
+    result += id * version * 27 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
+    result += id * version * 28 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 29 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
     return result;
   }
      
@@ -19062,6 +19217,138 @@ public class Root {
       }
     }
     effectsBaseOffenseUCCreateEffect.Clear();
+  }
+  public BaseSightRangeUCIncarnation GetBaseSightRangeUCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsBaseSightRangeUC[id].incarnation;
+  }
+  public bool BaseSightRangeUCExists(int id) {
+    return rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(id);
+  }
+  public BaseSightRangeUC GetBaseSightRangeUC(int id) {
+    return new BaseSightRangeUC(this, id);
+  }
+  public List<BaseSightRangeUC> AllBaseSightRangeUC() {
+    List<BaseSightRangeUC> result = new List<BaseSightRangeUC>(rootIncarnation.incarnationsBaseSightRangeUC.Count);
+    foreach (var id in rootIncarnation.incarnationsBaseSightRangeUC.Keys) {
+      result.Add(new BaseSightRangeUC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<BaseSightRangeUC> EnumAllBaseSightRangeUC() {
+    foreach (var id in rootIncarnation.incarnationsBaseSightRangeUC.Keys) {
+      yield return GetBaseSightRangeUC(id);
+    }
+  }
+  public void CheckHasBaseSightRangeUC(BaseSightRangeUC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasBaseSightRangeUC(thing.id);
+  }
+  public void CheckHasBaseSightRangeUC(int id) {
+    if (!rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(id)) {
+      throw new System.Exception("Invalid BaseSightRangeUC: " + id);
+    }
+  }
+  public void AddBaseSightRangeUCObserver(int id, IBaseSightRangeUCEffectObserver observer) {
+    List<IBaseSightRangeUCEffectObserver> obsies;
+    if (!observersForBaseSightRangeUC.TryGetValue(id, out obsies)) {
+      obsies = new List<IBaseSightRangeUCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForBaseSightRangeUC[id] = obsies;
+  }
+
+  public void RemoveBaseSightRangeUCObserver(int id, IBaseSightRangeUCEffectObserver observer) {
+    if (observersForBaseSightRangeUC.ContainsKey(id)) {
+      var list = observersForBaseSightRangeUC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForBaseSightRangeUC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+  public BaseSightRangeUC EffectBaseSightRangeUCCreate(
+      int sightRangeAddConstant,
+      int sightRangeMultiplierPercent) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new BaseSightRangeUCIncarnation(
+            sightRangeAddConstant,
+            sightRangeMultiplierPercent
+            );
+    EffectInternalCreateBaseSightRangeUC(id, rootIncarnation.version, incarnation);
+    return new BaseSightRangeUC(this, id);
+  }
+  public void EffectInternalCreateBaseSightRangeUC(
+      int id,
+      int incarnationVersion,
+      BaseSightRangeUCIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new BaseSightRangeUCCreateEffect(id);
+    rootIncarnation.incarnationsBaseSightRangeUC.Add(
+        id,
+        new VersionAndIncarnation<BaseSightRangeUCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    effectsBaseSightRangeUCCreateEffect.Add(effect);
+  }
+
+  public void EffectBaseSightRangeUCDelete(int id) {
+    CheckUnlocked();
+    var effect = new BaseSightRangeUCDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsBaseSightRangeUC[id];
+
+    rootIncarnation.incarnationsBaseSightRangeUC.Remove(id);
+    effectsBaseSightRangeUCDeleteEffect.Add(effect);
+  }
+
+     
+  public int GetBaseSightRangeUCHash(int id, int version, BaseSightRangeUCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.sightRangeAddConstant.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.sightRangeMultiplierPercent.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void BroadcastBaseSightRangeUCEffects(
+      SortedDictionary<int, List<IBaseSightRangeUCEffectObserver>> observers) {
+    foreach (var effect in effectsBaseSightRangeUCDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IBaseSightRangeUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBaseSightRangeUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IBaseSightRangeUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBaseSightRangeUCEffect(effect);
+        }
+        observersForBaseSightRangeUC.Remove(effect.id);
+      }
+    }
+    effectsBaseSightRangeUCDeleteEffect.Clear();
+
+
+    foreach (var effect in effectsBaseSightRangeUCCreateEffect) {
+      if (observers.TryGetValue(0, out List<IBaseSightRangeUCEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBaseSightRangeUCEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IBaseSightRangeUCEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBaseSightRangeUCEffect(effect);
+        }
+      }
+    }
+    effectsBaseSightRangeUCCreateEffect.Clear();
   }
   public BaseMovementTimeUCIncarnation GetBaseMovementTimeUCIncarnation(int id) {
     if (id == 0) {
@@ -32710,6 +32997,9 @@ public class Root {
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIUnitComponent(new BideAICapabilityUC(this, id));
     }
+    if (rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(id)) {
+      return new BaseSightRangeUCAsIUnitComponent(new BaseSightRangeUC(this, id));
+    }
     if (rootIncarnation.incarnationsBaseMovementTimeUC.ContainsKey(id)) {
       return new BaseMovementTimeUCAsIUnitComponent(new BaseMovementTimeUC(this, id));
     }
@@ -32797,6 +33087,9 @@ public class Root {
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIUnitComponent(new BideAICapabilityUC(this, id));
     }
+    if (rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(id)) {
+      return new BaseSightRangeUCAsIUnitComponent(new BaseSightRangeUC(this, id));
+    }
     if (rootIncarnation.incarnationsBaseMovementTimeUC.ContainsKey(id)) {
       return new BaseMovementTimeUCAsIUnitComponent(new BaseMovementTimeUC(this, id));
     }
@@ -32877,6 +33170,28 @@ public class Root {
   }
   public void CheckHasIOffenseFactorUC(int id) {
     GetIOffenseFactorUC(id);
+  }
+
+  public ISightRangeFactorUC GetISightRangeFactorUC(int id) {
+    if (rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(id)) {
+      return new BaseSightRangeUCAsISightRangeFactorUC(new BaseSightRangeUC(this, id));
+    }
+    throw new Exception("Unknown ISightRangeFactorUC: " + id);
+  }
+  public ISightRangeFactorUC GetISightRangeFactorUCOrNull(int id) {
+    if (rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(id)) {
+      return new BaseSightRangeUCAsISightRangeFactorUC(new BaseSightRangeUC(this, id));
+    }
+    return NullISightRangeFactorUC.Null;
+  }
+  public bool ISightRangeFactorUCExists(int id) {
+    return GetISightRangeFactorUCOrNull(id) != null;
+  }
+  public void CheckHasISightRangeFactorUC(ISightRangeFactorUC thing) {
+    GetISightRangeFactorUC(thing.id);
+  }
+  public void CheckHasISightRangeFactorUC(int id) {
+    GetISightRangeFactorUC(id);
   }
 
   public IMovementTimeFactorUC GetIMovementTimeFactorUC(int id) {
@@ -33193,6 +33508,34 @@ public class Root {
   }
   public void CheckHasIInteractableTTC(int id) {
     GetIInteractableTTC(id);
+  }
+
+  public IBlocksSightTTC GetIBlocksSightTTC(int id) {
+    if (rootIncarnation.incarnationsTreeTTC.ContainsKey(id)) {
+      return new TreeTTCAsIBlocksSightTTC(new TreeTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsCaveWallTTC.ContainsKey(id)) {
+      return new CaveWallTTCAsIBlocksSightTTC(new CaveWallTTC(this, id));
+    }
+    throw new Exception("Unknown IBlocksSightTTC: " + id);
+  }
+  public IBlocksSightTTC GetIBlocksSightTTCOrNull(int id) {
+    if (rootIncarnation.incarnationsTreeTTC.ContainsKey(id)) {
+      return new TreeTTCAsIBlocksSightTTC(new TreeTTC(this, id));
+    }
+    if (rootIncarnation.incarnationsCaveWallTTC.ContainsKey(id)) {
+      return new CaveWallTTCAsIBlocksSightTTC(new CaveWallTTC(this, id));
+    }
+    return NullIBlocksSightTTC.Null;
+  }
+  public bool IBlocksSightTTCExists(int id) {
+    return GetIBlocksSightTTCOrNull(id) != null;
+  }
+  public void CheckHasIBlocksSightTTC(IBlocksSightTTC thing) {
+    GetIBlocksSightTTC(thing.id);
+  }
+  public void CheckHasIBlocksSightTTC(int id) {
+    GetIBlocksSightTTC(id);
   }
 
   public IUnwalkableTTC GetIUnwalkableTTC(int id) {
@@ -33664,6 +34007,9 @@ public class Root {
     if (rootIncarnation.incarnationsBaseOffenseUC.ContainsKey(id)) {
       return new BaseOffenseUCAsICloneableUC(new BaseOffenseUC(this, id));
     }
+    if (rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(id)) {
+      return new BaseSightRangeUCAsICloneableUC(new BaseSightRangeUC(this, id));
+    }
     if (rootIncarnation.incarnationsBaseMovementTimeUC.ContainsKey(id)) {
       return new BaseMovementTimeUCAsICloneableUC(new BaseMovementTimeUC(this, id));
     }
@@ -33696,6 +34042,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsBaseOffenseUC.ContainsKey(id)) {
       return new BaseOffenseUCAsICloneableUC(new BaseOffenseUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(id)) {
+      return new BaseSightRangeUCAsICloneableUC(new BaseSightRangeUC(this, id));
     }
     if (rootIncarnation.incarnationsBaseMovementTimeUC.ContainsKey(id)) {
       return new BaseMovementTimeUCAsICloneableUC(new BaseMovementTimeUC(this, id));
@@ -33839,6 +34188,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIDestructible(new BideAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(id)) {
+      return new BaseSightRangeUCAsIDestructible(new BaseSightRangeUC(this, id));
     }
     if (rootIncarnation.incarnationsBaseMovementTimeUC.ContainsKey(id)) {
       return new BaseMovementTimeUCAsIDestructible(new BaseMovementTimeUC(this, id));
@@ -34079,6 +34431,9 @@ public class Root {
     }
     if (rootIncarnation.incarnationsBideAICapabilityUC.ContainsKey(id)) {
       return new BideAICapabilityUCAsIDestructible(new BideAICapabilityUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBaseSightRangeUC.ContainsKey(id)) {
+      return new BaseSightRangeUCAsIDestructible(new BaseSightRangeUC(this, id));
     }
     if (rootIncarnation.incarnationsBaseMovementTimeUC.ContainsKey(id)) {
       return new BaseMovementTimeUCAsIDestructible(new BaseMovementTimeUC(this, id));
@@ -51603,6 +51958,199 @@ public class Root {
       }
     }
     effectsBideAICapabilityUCMutSetCreateEffect.Clear();
+
+  }
+
+    public int GetBaseSightRangeUCMutSetHash(int id, int version, BaseSightRangeUCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public BaseSightRangeUCMutSetIncarnation GetBaseSightRangeUCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsBaseSightRangeUCMutSet[id].incarnation;
+    }
+    public BaseSightRangeUCMutSet GetBaseSightRangeUCMutSet(int id) {
+      return new BaseSightRangeUCMutSet(this, id);
+    }
+    public List<BaseSightRangeUCMutSet> AllBaseSightRangeUCMutSet() {
+      List<BaseSightRangeUCMutSet> result = new List<BaseSightRangeUCMutSet>(rootIncarnation.incarnationsBaseSightRangeUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsBaseSightRangeUCMutSet.Keys) {
+        result.Add(new BaseSightRangeUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool BaseSightRangeUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsBaseSightRangeUCMutSet.ContainsKey(id);
+    }
+    public void CheckHasBaseSightRangeUCMutSet(BaseSightRangeUCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasBaseSightRangeUCMutSet(thing.id);
+    }
+    public void CheckHasBaseSightRangeUCMutSet(int id) {
+      if (!rootIncarnation.incarnationsBaseSightRangeUCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid BaseSightRangeUCMutSet}: " + id);
+      }
+    }
+    public BaseSightRangeUCMutSet EffectBaseSightRangeUCMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new BaseSightRangeUCMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateBaseSightRangeUCMutSet(id, rootIncarnation.version, incarnation);
+      return new BaseSightRangeUCMutSet(this, id);
+    }
+    public void EffectInternalCreateBaseSightRangeUCMutSet(int id, int incarnationVersion, BaseSightRangeUCMutSetIncarnation incarnation) {
+      var effect = new BaseSightRangeUCMutSetCreateEffect(id);
+      rootIncarnation.incarnationsBaseSightRangeUCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<BaseSightRangeUCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      effectsBaseSightRangeUCMutSetCreateEffect.Add(effect);
+    }
+    public void EffectBaseSightRangeUCMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new BaseSightRangeUCMutSetDeleteEffect(id);
+      effectsBaseSightRangeUCMutSetDeleteEffect.Add(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsBaseSightRangeUCMutSet[id];
+      rootIncarnation.incarnationsBaseSightRangeUCMutSet.Remove(id);
+    }
+
+       
+    public void EffectBaseSightRangeUCMutSetAdd(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasBaseSightRangeUCMutSet(setId);
+      CheckHasBaseSightRangeUC(elementId);
+
+      var effect = new BaseSightRangeUCMutSetAddEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsBaseSightRangeUCMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(elementId);
+        var newIncarnation = new BaseSightRangeUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsBaseSightRangeUCMutSet[setId] =
+            new VersionAndIncarnation<BaseSightRangeUCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      effectsBaseSightRangeUCMutSetAddEffect.Add(effect);
+    }
+    public void EffectBaseSightRangeUCMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasBaseSightRangeUCMutSet(setId);
+
+        CheckHasBaseSightRangeUC(elementId);
+
+
+      var effect = new BaseSightRangeUCMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsBaseSightRangeUCMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new BaseSightRangeUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsBaseSightRangeUCMutSet[setId] =
+            new VersionAndIncarnation<BaseSightRangeUCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      effectsBaseSightRangeUCMutSetRemoveEffect.Add(effect);
+    }
+
+       
+    public void AddBaseSightRangeUCMutSetObserver(int id, IBaseSightRangeUCMutSetEffectObserver observer) {
+      List<IBaseSightRangeUCMutSetEffectObserver> obsies;
+      if (!observersForBaseSightRangeUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IBaseSightRangeUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForBaseSightRangeUCMutSet[id] = obsies;
+    }
+
+    public void RemoveBaseSightRangeUCMutSetObserver(int id, IBaseSightRangeUCMutSetEffectObserver observer) {
+      if (observersForBaseSightRangeUCMutSet.ContainsKey(id)) {
+        var list = observersForBaseSightRangeUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForBaseSightRangeUCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+       
+  public void BroadcastBaseSightRangeUCMutSetEffects(
+      SortedDictionary<int, List<IBaseSightRangeUCMutSetEffectObserver>> observers) {
+    foreach (var effect in effectsBaseSightRangeUCMutSetDeleteEffect) {
+      if (observers.TryGetValue(0, out List<IBaseSightRangeUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBaseSightRangeUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IBaseSightRangeUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBaseSightRangeUCMutSetEffect(effect);
+        }
+        observersForBaseSightRangeUCMutSet.Remove(effect.id);
+      }
+    }
+    effectsBaseSightRangeUCMutSetDeleteEffect.Clear();
+
+    foreach (var effect in effectsBaseSightRangeUCMutSetAddEffect) {
+      if (observers.TryGetValue(0, out List<IBaseSightRangeUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBaseSightRangeUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IBaseSightRangeUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBaseSightRangeUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsBaseSightRangeUCMutSetAddEffect.Clear();
+
+    foreach (var effect in effectsBaseSightRangeUCMutSetRemoveEffect) {
+      if (observers.TryGetValue(0, out List<IBaseSightRangeUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBaseSightRangeUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IBaseSightRangeUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBaseSightRangeUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsBaseSightRangeUCMutSetRemoveEffect.Clear();
+
+    foreach (var effect in effectsBaseSightRangeUCMutSetCreateEffect) {
+      if (observers.TryGetValue(0, out List<IBaseSightRangeUCMutSetEffectObserver> globalObservers)) {
+        foreach (var observer in globalObservers) {
+          observer.OnBaseSightRangeUCMutSetEffect(effect);
+        }
+      }
+      if (observers.TryGetValue(effect.id, out List<IBaseSightRangeUCMutSetEffectObserver> objObservers)) {
+        foreach (var observer in objObservers) {
+          observer.OnBaseSightRangeUCMutSetEffect(effect);
+        }
+      }
+    }
+    effectsBaseSightRangeUCMutSetCreateEffect.Clear();
 
   }
 

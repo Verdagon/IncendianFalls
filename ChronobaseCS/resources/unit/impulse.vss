@@ -10,8 +10,8 @@ mut interface IImpulse {
   //  600  really want
   //  700  need
   //  800  really need
-  //  900  burning need
-  // 1000  existential need
+  //  900  existential need
+  // 1000  directive from the universe
   fn GetWeight(): Int;
 
   fn Enact(

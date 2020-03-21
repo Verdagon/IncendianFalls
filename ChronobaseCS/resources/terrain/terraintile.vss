@@ -13,6 +13,10 @@ mut interface IUnwalkableTTC {
   IUnwalkableTTC isa ITerrainTileComponent;
 }
 
+mut interface IBlocksSightTTC {
+  IBlocksSightTTC isa ITerrainTileComponent;
+}
+
 mut interface IInteractableTTC {
   IInteractableTTC isa ITerrainTileComponent;
 

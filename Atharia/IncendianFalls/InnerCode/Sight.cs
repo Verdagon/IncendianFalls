@@ -7,7 +7,7 @@ namespace IncendianFalls {
     public static bool CanSee(Game game, Unit unit, Location destinationLoc, out List<Location> outPath) {
       var unitPos = game.level.terrain.pattern.GetTileCenter(unit.location);
       var destinationPos = game.level.terrain.pattern.GetTileCenter(destinationLoc);
-      if (unitPos.distance(destinationPos) <= 8) {
+      if (unitPos.distance(destinationPos) <= unit.CalculateSightRange()) {
         if (CanSee(game, unit.location, destinationLoc, out outPath)) {
           return true;
         }
@@ -25,7 +25,7 @@ namespace IncendianFalls {
           outPath = new List<Location>();
           return false;
         }
-        if (!game.level.terrain.tiles[step].IsWalkable()) {
+        if (game.level.terrain.tiles[step].BlocksSight()) {
           outPath = new List<Location>();
           return false;
         }

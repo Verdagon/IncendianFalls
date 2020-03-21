@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
-  public readonly CaveWallTTC obj;
+public class TreeTTCAsIBlocksSightTTC : IBlocksSightTTC {
+  public readonly TreeTTC obj;
   public int id => obj.id;
   public Root root => obj.root;
   public void Delete() { obj.Delete(); }
   public bool Exists() { return obj.Exists(); }
-  public CaveWallTTCAsITerrainTileComponent(CaveWallTTC obj) {
+  public TreeTTCAsIBlocksSightTTC(TreeTTC obj) {
     this.obj = obj;
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
@@ -36,7 +36,7 @@ public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
     return this.Is(that);
   }
   public IBlocksSightTTC AsIBlocksSightTTC() {
-    return new CaveWallTTCAsIBlocksSightTTC(obj);
+    return new TreeTTCAsIBlocksSightTTC(obj);
   }
   public bool Is(IUnwalkableTTC that) {
     if (!this.Exists()) {
@@ -57,7 +57,7 @@ public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
     return this.Is(that);
   }
   public IUnwalkableTTC AsIUnwalkableTTC() {
-    return new CaveWallTTCAsIUnwalkableTTC(obj);
+    return new TreeTTCAsIUnwalkableTTC(obj);
   }
   public bool Is(IDestructible that) {
     if (!this.Exists()) {
@@ -78,7 +78,7 @@ public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
     return this.Is(that);
   }
   public IDestructible AsIDestructible() {
-    return new CaveWallTTCAsIDestructible(obj);
+    return new TreeTTCAsIDestructible(obj);
   }
   public bool Is(ITerrainTileComponent that) {
     if (!this.Exists()) {
@@ -99,17 +99,17 @@ public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
     return this.Is(that);
   }
   public ITerrainTileComponent AsITerrainTileComponent() {
-    return new CaveWallTTCAsITerrainTileComponent(obj);
+    return new TreeTTCAsITerrainTileComponent(obj);
   }
 
          public Void Destruct() {
-    return CaveWallTTCExtensions.Destruct(obj);
+    return TreeTTCExtensions.Destruct(obj);
   }
 
 }
-public static class CaveWallTTCAsITerrainTileComponentCaster {
-  public static CaveWallTTCAsITerrainTileComponent AsITerrainTileComponent(this CaveWallTTC obj) {
-    return new CaveWallTTCAsITerrainTileComponent(obj);
+public static class TreeTTCAsIBlocksSightTTCCaster {
+  public static TreeTTCAsIBlocksSightTTC AsIBlocksSightTTC(this TreeTTC obj) {
+    return new TreeTTCAsIBlocksSightTTC(obj);
   }
 }
 

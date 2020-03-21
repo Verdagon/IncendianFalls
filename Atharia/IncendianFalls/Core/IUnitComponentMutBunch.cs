@@ -99,6 +99,10 @@ public class IUnitComponentMutBunch {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersBideAICapabilityUCMutSet");
     }
 
+    if (!root.BaseSightRangeUCMutSetExists(membersBaseSightRangeUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersBaseSightRangeUCMutSet");
+    }
+
     if (!root.BaseMovementTimeUCMutSetExists(membersBaseMovementTimeUCMutSet.id)) {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersBaseMovementTimeUCMutSet");
     }
@@ -199,6 +203,9 @@ public class IUnitComponentMutBunch {
     }
     if (root.BideAICapabilityUCMutSetExists(membersBideAICapabilityUCMutSet.id)) {
       membersBideAICapabilityUCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.BaseSightRangeUCMutSetExists(membersBaseSightRangeUCMutSet.id)) {
+      membersBaseSightRangeUCMutSet.FindReachableObjects(foundIds);
     }
     if (root.BaseMovementTimeUCMutSetExists(membersBaseMovementTimeUCMutSet.id)) {
       membersBaseMovementTimeUCMutSet.FindReachableObjects(foundIds);
@@ -390,6 +397,15 @@ public class IUnitComponentMutBunch {
       return new BideAICapabilityUCMutSet(root, incarnation.membersBideAICapabilityUCMutSet);
     }
                        }
+  public BaseSightRangeUCMutSet membersBaseSightRangeUCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersBaseSightRangeUCMutSet of null!");
+      }
+      return new BaseSightRangeUCMutSet(root, incarnation.membersBaseSightRangeUCMutSet);
+    }
+                       }
   public BaseMovementTimeUCMutSet membersBaseMovementTimeUCMutSet {
 
     get {
@@ -533,6 +549,8 @@ public class IUnitComponentMutBunch {
 ,
       root.EffectBideAICapabilityUCMutSetCreate()
 ,
+      root.EffectBaseSightRangeUCMutSetCreate()
+,
       root.EffectBaseMovementTimeUCMutSetCreate()
 ,
       root.EffectBaseCombatTimeUCMutSetCreate()
@@ -653,6 +671,12 @@ public class IUnitComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.BideAICapabilityUCExists(elementI.id)) {
       this.membersBideAICapabilityUCMutSet.Add(root.GetBideAICapabilityUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.BaseSightRangeUCExists(elementI.id)) {
+      this.membersBaseSightRangeUCMutSet.Add(root.GetBaseSightRangeUC(elementI.id));
       return;
     }
 
@@ -828,6 +852,12 @@ public class IUnitComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.BaseSightRangeUCExists(elementI.id)) {
+      this.membersBaseSightRangeUCMutSet.Remove(root.GetBaseSightRangeUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.BaseMovementTimeUCExists(elementI.id)) {
       this.membersBaseMovementTimeUCMutSet.Remove(root.GetBaseMovementTimeUC(elementI.id));
       return;
@@ -917,6 +947,7 @@ public class IUnitComponentMutBunch {
     this.membersInvincibilityUCMutSet.Clear();
     this.membersDefyingUCMutSet.Clear();
     this.membersBideAICapabilityUCMutSet.Clear();
+    this.membersBaseSightRangeUCMutSet.Clear();
     this.membersBaseMovementTimeUCMutSet.Clear();
     this.membersBaseCombatTimeUCMutSet.Clear();
     this.membersManaPotionMutSet.Clear();
@@ -949,6 +980,7 @@ public class IUnitComponentMutBunch {
         this.membersInvincibilityUCMutSet.Count +
         this.membersDefyingUCMutSet.Count +
         this.membersBideAICapabilityUCMutSet.Count +
+        this.membersBaseSightRangeUCMutSet.Count +
         this.membersBaseMovementTimeUCMutSet.Count +
         this.membersBaseCombatTimeUCMutSet.Count +
         this.membersManaPotionMutSet.Count +
@@ -988,6 +1020,7 @@ public class IUnitComponentMutBunch {
     var tempMembersInvincibilityUCMutSet = this.membersInvincibilityUCMutSet;
     var tempMembersDefyingUCMutSet = this.membersDefyingUCMutSet;
     var tempMembersBideAICapabilityUCMutSet = this.membersBideAICapabilityUCMutSet;
+    var tempMembersBaseSightRangeUCMutSet = this.membersBaseSightRangeUCMutSet;
     var tempMembersBaseMovementTimeUCMutSet = this.membersBaseMovementTimeUCMutSet;
     var tempMembersBaseCombatTimeUCMutSet = this.membersBaseCombatTimeUCMutSet;
     var tempMembersManaPotionMutSet = this.membersManaPotionMutSet;
@@ -1018,6 +1051,7 @@ public class IUnitComponentMutBunch {
     tempMembersInvincibilityUCMutSet.Destruct();
     tempMembersDefyingUCMutSet.Destruct();
     tempMembersBideAICapabilityUCMutSet.Destruct();
+    tempMembersBaseSightRangeUCMutSet.Destruct();
     tempMembersBaseMovementTimeUCMutSet.Destruct();
     tempMembersBaseCombatTimeUCMutSet.Destruct();
     tempMembersManaPotionMutSet.Destruct();
@@ -1079,6 +1113,9 @@ public class IUnitComponentMutBunch {
     }
     foreach (var element in this.membersBideAICapabilityUCMutSet) {
       yield return new BideAICapabilityUCAsIUnitComponent(element);
+    }
+    foreach (var element in this.membersBaseSightRangeUCMutSet) {
+      yield return new BaseSightRangeUCAsIUnitComponent(element);
     }
     foreach (var element in this.membersBaseMovementTimeUCMutSet) {
       yield return new BaseMovementTimeUCAsIUnitComponent(element);
@@ -1453,6 +1490,27 @@ public class IUnitComponentMutBunch {
         return BideAICapabilityUC.Null;
       }
     }
+    public List<BaseSightRangeUC> GetAllBaseSightRangeUC() {
+      var result = new List<BaseSightRangeUC>();
+      foreach (var thing in this.membersBaseSightRangeUCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<BaseSightRangeUC> ClearAllBaseSightRangeUC() {
+      var result = new List<BaseSightRangeUC>();
+      this.membersBaseSightRangeUCMutSet.Clear();
+      return result;
+    }
+    public BaseSightRangeUC GetOnlyBaseSightRangeUCOrNull() {
+      var result = GetAllBaseSightRangeUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return BaseSightRangeUC.Null;
+      }
+    }
     public List<BaseMovementTimeUC> GetAllBaseMovementTimeUC() {
       var result = new List<BaseMovementTimeUC>();
       foreach (var thing in this.membersBaseMovementTimeUCMutSet) {
@@ -1747,6 +1805,10 @@ public class IUnitComponentMutBunch {
         result.Add(
             new BaseOffenseUCAsICloneableUC(obj));
       }
+      foreach (var obj in this.membersBaseSightRangeUCMutSet) {
+        result.Add(
+            new BaseSightRangeUCAsICloneableUC(obj));
+      }
       foreach (var obj in this.membersBaseMovementTimeUCMutSet) {
         result.Add(
             new BaseMovementTimeUCAsICloneableUC(obj));
@@ -1785,6 +1847,7 @@ public class IUnitComponentMutBunch {
       var result = new List<ICloneableUC>();
       this.membersSorcerousUCMutSet.Clear();
       this.membersBaseOffenseUCMutSet.Clear();
+      this.membersBaseSightRangeUCMutSet.Clear();
       this.membersBaseMovementTimeUCMutSet.Clear();
       this.membersBaseDefenseUCMutSet.Clear();
       this.membersBaseCombatTimeUCMutSet.Clear();
@@ -1861,6 +1924,28 @@ public class IUnitComponentMutBunch {
         return result[0];
       } else {
         return NullIImpulsePreReactor.Null;
+      }
+    }
+                 public List<ISightRangeFactorUC> GetAllISightRangeFactorUC() {
+      var result = new List<ISightRangeFactorUC>();
+      foreach (var obj in this.membersBaseSightRangeUCMutSet) {
+        result.Add(
+            new BaseSightRangeUCAsISightRangeFactorUC(obj));
+      }
+      return result;
+    }
+    public List<ISightRangeFactorUC> ClearAllISightRangeFactorUC() {
+      var result = new List<ISightRangeFactorUC>();
+      this.membersBaseSightRangeUCMutSet.Clear();
+      return result;
+    }
+    public ISightRangeFactorUC GetOnlyISightRangeFactorUCOrNull() {
+      var result = GetAllISightRangeFactorUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullISightRangeFactorUC.Null;
       }
     }
                  public List<IMovementTimeFactorUC> GetAllIMovementTimeFactorUC() {

@@ -39,6 +39,8 @@ namespace Atharia.Model {
       draxling.hp = 300;
       draxling.maxHp = 300;
       draxling.components.Add(game.root.EffectBaseOffenseUCCreate(10, 100 * 100 / 60).AsIUnitComponent());
+      // Can see 1000 spaces away.
+      draxling.components.Add(game.root.EffectBaseSightRangeUCCreate(1000, 100).AsIUnitComponent());
       level.EnterUnit(
         levelSuperstate,
         new Location(-15, 0, 0),

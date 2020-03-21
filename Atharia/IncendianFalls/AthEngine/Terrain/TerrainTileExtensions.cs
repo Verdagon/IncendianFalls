@@ -22,6 +22,10 @@ namespace Atharia.Model {
       return obj.components.GetAllIUnwalkableTTC().Count == 0;
     }
 
+    public static bool BlocksSight(this TerrainTile obj) {
+      return obj.components.GetAllIBlocksSightTTC().Count > 0;
+    }
+
     public static void AddEvent(this TerrainTile terrainTile, Game game, ITerrainTileEvent e) {
       game.eventedTerrainTiles.Add(terrainTile);
       terrainTile.events.Add(e);

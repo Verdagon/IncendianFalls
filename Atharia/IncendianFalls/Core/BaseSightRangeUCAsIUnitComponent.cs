@@ -5,19 +5,19 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
-  public readonly CaveWallTTC obj;
+public class BaseSightRangeUCAsIUnitComponent : IUnitComponent {
+  public readonly BaseSightRangeUC obj;
   public int id => obj.id;
   public Root root => obj.root;
   public void Delete() { obj.Delete(); }
   public bool Exists() { return obj.Exists(); }
-  public CaveWallTTCAsITerrainTileComponent(CaveWallTTC obj) {
+  public BaseSightRangeUCAsIUnitComponent(BaseSightRangeUC obj) {
     this.obj = obj;
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
     obj.FindReachableObjects(foundIds);
   }
-  public bool Is(IBlocksSightTTC that) {
+  public bool Is(ICloneableUC that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
     }
@@ -26,7 +26,7 @@ public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
     }
     return root == that.root && obj.id == that.id;
   }
-  public bool NullableIs(IBlocksSightTTC that) {
+  public bool NullableIs(ICloneableUC that) {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
@@ -35,29 +35,8 @@ public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
     }
     return this.Is(that);
   }
-  public IBlocksSightTTC AsIBlocksSightTTC() {
-    return new CaveWallTTCAsIBlocksSightTTC(obj);
-  }
-  public bool Is(IUnwalkableTTC that) {
-    if (!this.Exists()) {
-      throw new Exception("Called Is on a null!");
-    }
-    if (!that.Exists()) {
-      throw new Exception("Called Is on a null!");
-    }
-    return root == that.root && obj.id == that.id;
-  }
-  public bool NullableIs(IUnwalkableTTC that) {
-    if (!this.Exists() && !that.Exists()) {
-      return true;
-    }
-    if (!this.Exists() || !that.Exists()) {
-      return false;
-    }
-    return this.Is(that);
-  }
-  public IUnwalkableTTC AsIUnwalkableTTC() {
-    return new CaveWallTTCAsIUnwalkableTTC(obj);
+  public ICloneableUC AsICloneableUC() {
+    return new BaseSightRangeUCAsICloneableUC(obj);
   }
   public bool Is(IDestructible that) {
     if (!this.Exists()) {
@@ -78,9 +57,9 @@ public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
     return this.Is(that);
   }
   public IDestructible AsIDestructible() {
-    return new CaveWallTTCAsIDestructible(obj);
+    return new BaseSightRangeUCAsIDestructible(obj);
   }
-  public bool Is(ITerrainTileComponent that) {
+  public bool Is(IUnitComponent that) {
     if (!this.Exists()) {
       throw new Exception("Called Is on a null!");
     }
@@ -89,7 +68,7 @@ public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
     }
     return root == that.root && obj.id == that.id;
   }
-  public bool NullableIs(ITerrainTileComponent that) {
+  public bool NullableIs(IUnitComponent that) {
     if (!this.Exists() && !that.Exists()) {
       return true;
     }
@@ -98,18 +77,39 @@ public class CaveWallTTCAsITerrainTileComponent : ITerrainTileComponent {
     }
     return this.Is(that);
   }
-  public ITerrainTileComponent AsITerrainTileComponent() {
-    return new CaveWallTTCAsITerrainTileComponent(obj);
+  public IUnitComponent AsIUnitComponent() {
+    return new BaseSightRangeUCAsIUnitComponent(obj);
+  }
+  public bool Is(ISightRangeFactorUC that) {
+    if (!this.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    if (!that.Exists()) {
+      throw new Exception("Called Is on a null!");
+    }
+    return root == that.root && obj.id == that.id;
+  }
+  public bool NullableIs(ISightRangeFactorUC that) {
+    if (!this.Exists() && !that.Exists()) {
+      return true;
+    }
+    if (!this.Exists() || !that.Exists()) {
+      return false;
+    }
+    return this.Is(that);
+  }
+  public ISightRangeFactorUC AsISightRangeFactorUC() {
+    return new BaseSightRangeUCAsISightRangeFactorUC(obj);
   }
 
          public Void Destruct() {
-    return CaveWallTTCExtensions.Destruct(obj);
+    return BaseSightRangeUCExtensions.Destruct(obj);
   }
 
 }
-public static class CaveWallTTCAsITerrainTileComponentCaster {
-  public static CaveWallTTCAsITerrainTileComponent AsITerrainTileComponent(this CaveWallTTC obj) {
-    return new CaveWallTTCAsITerrainTileComponent(obj);
+public static class BaseSightRangeUCAsIUnitComponentCaster {
+  public static BaseSightRangeUCAsIUnitComponent AsIUnitComponent(this BaseSightRangeUC obj) {
+    return new BaseSightRangeUCAsIUnitComponent(obj);
   }
 }
 

@@ -54,6 +54,16 @@ namespace Atharia.Model {
       }
       return damage;
     }
+    public static int CalculateSightRange(this Unit unit) {
+      int sightRange = 8;
+      foreach (var component in unit.components.GetAllISightRangeFactorUC()) {
+        sightRange += component.GetSightRangeAddConstant();
+      }
+      foreach (var component in unit.components.GetAllISightRangeFactorUC()) {
+        sightRange = sightRange * component.GetSightRangeMultiplierPercent() / 100;
+      }
+      return sightRange;
+    }
     public static void AddEvent(this Unit unit, Game game, IUnitEvent e) {
       game.eventedUnits.Add(unit);
       unit.events.Add(e);

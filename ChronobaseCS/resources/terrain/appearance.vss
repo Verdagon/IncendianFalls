@@ -84,6 +84,7 @@ mut struct CaveTTC {
 mut struct CaveWallTTC {
   CaveWallTTC isa ITerrainTileComponent;
   CaveWallTTC isa IUnwalkableTTC;
+  CaveWallTTC isa IBlocksSightTTC;
 
   fn Destruct(this: CaveWallTTC overrides IDestructible): Void {
     CaveWallTTCExtensions.Destruct
@@ -111,6 +112,7 @@ mut struct WaterTTC {
 mut struct TreeTTC {
   TreeTTC isa ITerrainTileComponent;
   TreeTTC isa IUnwalkableTTC;
+  TreeTTC isa IBlocksSightTTC;
 
   fn Destruct(this: TreeTTC overrides IDestructible): Void {
     TreeTTCExtensions.Destruct

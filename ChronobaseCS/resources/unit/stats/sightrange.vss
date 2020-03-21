@@ -1,0 +1,32 @@
+
+mut interface ISightRangeFactorUC {
+  ISightRangeFactorUC isa IUnitComponent;
+
+  fn GetSightRangeAddConstant(): Int;
+  fn GetSightRangeMultiplierPercent(): Int;
+}
+
+mut struct BaseSightRangeUC {
+  BaseSightRangeUC isa ISightRangeFactorUC;
+  BaseSightRangeUC isa ICloneableUC;
+
+  sightRangeAddConstant: Int;
+  sightRangeMultiplierPercent: Int;
+
+  fn Destruct(this: BaseSightRangeUC overrides IDestructible): Void {
+    BaseSightRangeUCExtensions.Destruct
+  }
+
+  fn GetSightRangeAddConstant(this: BaseSightRangeUC overrides ISightRangeFactorUC): Int {
+    BaseSightRangeUCExtensions.GetSightRangeAddConstant
+  }
+  fn GetSightRangeMultiplierPercent(this: BaseSightRangeUC overrides ISightRangeFactorUC): Int {
+    BaseSightRangeUCExtensions.GetSightRangeMultiplierPercent
+  }
+  fn ClonifyAndReturnNewReal(
+      potion: BaseSightRangeUC overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    BaseSightRangeUCExtensions.ClonifyAndReturnNewReal
+  }
+}
