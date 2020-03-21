@@ -220,29 +220,24 @@ namespace Domino {
     }
 
     private void ActivateCapability(int capabilityId) {
-      Debug.LogError("activating a");
       if (capabilityId == 0) {
         Cancel(true);
         return;
       }
-      Debug.LogError("activating b");
       if (modeCapabilityId == capabilityId) {
         // They clicked the same button, cancel.
         Cancel(true);
         return;
       }
-      Debug.LogError("activating c");
       if (modeCapabilityId != 0) {
         Cancel(false);
         // continue
       }
-      Debug.LogError("activating d");
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
         showError("(Player not ready to act yet.)");
         AfterDidSomething();
         return;
       }
-      Debug.LogError("activating e");
       switch (capabilityId) {
         case PlayerPanelView.TIME_ANCHOR_MOVE_CAPABILITY_ID:
           modeCapabilityId = capabilityId;

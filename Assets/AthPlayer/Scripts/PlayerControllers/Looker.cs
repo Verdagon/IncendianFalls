@@ -13,6 +13,9 @@ namespace AthPlayer {
 
     public Looker(LookPanelView lookPanelView) {
       this.lookPanelView = lookPanelView;
+
+      lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
+      SetTooltip("");
     }
 
     public void SetTooltip(string newTooltip) {
@@ -39,16 +42,19 @@ namespace AthPlayer {
       lookedUnit = unit;
       lookedTile = tile;
 
+      bool displayedAnything = false;
       if (unit.Exists()) {
-        Look(unit);
+        displayedAnything = Look(unit);
       } else if (tile.Exists()) {
-        Look(tile);
-      } else {
+        displayedAnything = Look(tile);
+      }
+      
+      if (!displayedAnything) {
         lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
       }
     }
 
-    private void Look(TerrainTile tile) {
+    private bool Look(TerrainTile tile) {
       var symbolsAndLabels = new List<KeyValuePair<SymbolDescription, string>>();
 
       foreach (var detail in tile.components) {
@@ -140,11 +146,14 @@ namespace AthPlayer {
 
       if (symbolsAndLabels.Count > 0) {
         lookPanelView.SetStuff(true, "", "", symbolsAndLabels);
+        return true;
+      } else {
+        return false;
       }
     }
 
 
-    private void Look(Unit unit) {
+    private bool Look(Unit unit) {
       var symbolsAndLabels = new List<KeyValuePair<SymbolDescription, string>>();
 
       foreach (var detail in unit.components) {
@@ -305,6 +314,8 @@ namespace AthPlayer {
       lookPanelView.SetStuff(true, unit.classId, unit.hp + " / " + unit.maxHp, symbolsAndLabels);
 
       unit.AddObserver(this);
+
+      return true;
     }
 
     public void OnUnitEffect(IUnitEffect effect) { effect.visit(this); }
