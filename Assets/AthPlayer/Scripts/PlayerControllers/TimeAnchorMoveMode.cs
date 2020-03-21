@@ -52,78 +52,12 @@ namespace AthPlayer {
       delegat.AfterDidSomething();
     }
 
-    public void DefyClicked() {
-      instructionsOverlay.Close();
-      showError("You must move off the time anchor to place it. Canceling time anchor!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void CancelClicked() {
-      instructionsOverlay.Close();
-      showError("Canceling time anchor!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void ActivateCheat(string cheatName) {
-      instructionsOverlay.Close();
-      showError("You must move off the time anchor to place it. Canceling time anchor!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void FireClicked() {
-      instructionsOverlay.Close();
-      showError("You must move off the time anchor to place it. Canceling time anchor!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void FireBombClicked() {
-      instructionsOverlay.Close();
-      showError("You must move off the time anchor to place it. Canceling time anchor!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void MireClicked() {
-      instructionsOverlay.Close();
-      showError("You must move off the time anchor to place it. Canceling time anchor!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void CounterClicked() {
-      instructionsOverlay.Close();
-      showError("You must move off the time anchor to place it. Canceling time anchor!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void InteractClicked() {
-      instructionsOverlay.Close();
-      showError("You must move off the time anchor to place it. Canceling time anchor!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void TimeShiftClicked() {
-      instructionsOverlay.Close();
-      showError("You must move off the time anchor to place it. Canceling time anchor!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void TimeAnchorMoveClicked() {
-      instructionsOverlay.Close();
-      showError("Canceled time anchor!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void ReadyForTurn() {
-      Asserts.Assert(false); // curiosity
+    public void Cancel(bool purposeful) {
+      if (purposeful) {
+        showError("Canceled time anchor!");
+      } else {
+        showError("You must move off the time anchor to place it. Canceling time anchor!");
+      }
     }
   }
 }

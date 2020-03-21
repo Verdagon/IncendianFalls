@@ -127,6 +127,7 @@ namespace AthPlayer {
               cinematicTimer,
               resumeStaller,
               turnStaller,
+              inputSemaphore,
               ss,
               ss.GetSuperstate(game.id),
               game,
@@ -194,112 +195,7 @@ namespace AthPlayer {
       timer.Update();
       cinematicTimer.Update();
 
-      if (Input.GetKeyUp(KeyCode.A)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          TimeAnchorMoveClicked();
-
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.R)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          TimeShiftClicked();
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.E)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          InteractClicked();
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.D)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          DefyClicked();
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.C)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          CounterClicked();
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.F)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          FireBombClicked();
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.B)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          FireBombClicked();
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.S)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          MireClicked();
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.Escape)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          CancelClicked();
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.Slash)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          playerController.ActivateCheat("warptoend");
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.Equals)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          playerController.ActivateCheat("poweroverwhelming");
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.Alpha8)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          playerController.ActivateCheat("gimmeblastrod");
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.Alpha6)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          playerController.ActivateCheat("gimmeslowrod");
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.Alpha7)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          playerController.ActivateCheat("gimmearmor");
-        }
-      }
-      if (Input.GetKeyUp(KeyCode.Alpha9)) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          playerController.ActivateCheat("gimmesword");
-        }
-      }
+      playerController.Update();
 
       if (Input.GetKey(KeyCode.RightArrow)) {
         if (inputSemaphore.locked) {
@@ -372,77 +268,77 @@ namespace AthPlayer {
       }
     }
 
-    public void TimeAnchorMoveClicked() {
-      thinkingIndicator.SetActive(true);
-      timer.ScheduleTimer(0, () => {
-        playerController.TimeAnchorMoveClicked();
-        thinkingIndicator.SetActive(false);
-      });
-    }
+    //public void TimeAnchorMoveClicked() {
+    //  thinkingIndicator.SetActive(true);
+    //  timer.ScheduleTimer(0, () => {
+    //    playerController.TimeAnchorMoveClicked();
+    //    thinkingIndicator.SetActive(false);
+    //  });
+    //}
 
-    public void TimeShiftClicked() {
-      thinkingIndicator.SetActive(true);
-      timer.ScheduleTimer(0, () => {
-        playerController.TimeShiftClicked();
-        thinkingIndicator.SetActive(false);
-      });
-    }
+    //public void TimeShiftClicked() {
+    //  thinkingIndicator.SetActive(true);
+    //  timer.ScheduleTimer(0, () => {
+    //    playerController.TimeShiftClicked();
+    //    thinkingIndicator.SetActive(false);
+    //  });
+    //}
 
-    public void InteractClicked() {
-      thinkingIndicator.SetActive(true);
-      timer.ScheduleTimer(0, () => {
-        playerController.InteractClicked();
-        thinkingIndicator.SetActive(false);
-      });
-    }
+    //public void InteractClicked() {
+    //  thinkingIndicator.SetActive(true);
+    //  timer.ScheduleTimer(0, () => {
+    //    playerController.InteractClicked();
+    //    thinkingIndicator.SetActive(false);
+    //  });
+    //}
 
-    public void DefyClicked() {
-      thinkingIndicator.SetActive(true);
-      timer.ScheduleTimer(0, () => {
-        playerController.DefyClicked();
-        thinkingIndicator.SetActive(false);
-      });
-    }
+    //public void DefyClicked() {
+    //  thinkingIndicator.SetActive(true);
+    //  timer.ScheduleTimer(0, () => {
+    //    playerController.DefyClicked();
+    //    thinkingIndicator.SetActive(false);
+    //  });
+    //}
 
-    public void CounterClicked() {
-      thinkingIndicator.SetActive(true);
-      timer.ScheduleTimer(0, () => {
-        playerController.CounterClicked();
-        thinkingIndicator.SetActive(false);
-      });
-    }
+    //public void CounterClicked() {
+    //  thinkingIndicator.SetActive(true);
+    //  timer.ScheduleTimer(0, () => {
+    //    playerController.CounterClicked();
+    //    thinkingIndicator.SetActive(false);
+    //  });
+    //}
 
-    public void FireClicked() {
-      thinkingIndicator.SetActive(true);
-      timer.ScheduleTimer(0, () => {
-        playerController.FireClicked();
-        thinkingIndicator.SetActive(false);
-      });
-    }
+    //public void FireClicked() {
+    //  thinkingIndicator.SetActive(true);
+    //  timer.ScheduleTimer(0, () => {
+    //    playerController.FireClicked();
+    //    thinkingIndicator.SetActive(false);
+    //  });
+    //}
 
-    public void FireBombClicked() {
-      thinkingIndicator.SetActive(true);
-      timer.ScheduleTimer(0, () => {
-        playerController.FireBombClicked();
-        thinkingIndicator.SetActive(false);
-      });
-    }
+    //public void FireBombClicked() {
+    //  thinkingIndicator.SetActive(true);
+    //  timer.ScheduleTimer(0, () => {
+    //    playerController.FireBombClicked();
+    //    thinkingIndicator.SetActive(false);
+    //  });
+    //}
 
-    public void MireClicked() {
-      thinkingIndicator.SetActive(true);
-      timer.ScheduleTimer(0, () => {
-        playerController.MireClicked();
-        thinkingIndicator.SetActive(false);
-      });
-    }
+    //public void MireClicked() {
+    //  thinkingIndicator.SetActive(true);
+    //  timer.ScheduleTimer(0, () => {
+    //    playerController.MireClicked();
+    //    thinkingIndicator.SetActive(false);
+    //  });
+    //}
 
-    public void CancelClicked() {
-      thinkingIndicator.SetActive(true);
-      timer.ScheduleTimer(0, () => {
-        playerController.CancelClicked();
-        thinkingIndicator.SetActive(false);
-      });
-    }
+    //public void CancelClicked() {
+    //  thinkingIndicator.SetActive(true);
+    //  timer.ScheduleTimer(0, () => {
+    //    playerController.CancelClicked();
+    //    thinkingIndicator.SetActive(false);
+    //  });
+    //}
 
   }
 }

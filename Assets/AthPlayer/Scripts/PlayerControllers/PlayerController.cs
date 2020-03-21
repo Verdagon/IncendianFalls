@@ -11,6 +11,7 @@ namespace Domino {
     ISorcerousUCEffectObserver, ISorcerousUCEffectVisitor,
       IModeDelegate {
     IClock cinematicTimer;
+    InputSemaphore inputSemaphore;
     ISuperstructure ss;
     Superstate superstate;
     Game game;
@@ -24,15 +25,18 @@ namespace Domino {
     ShowError showError;
     Looker looker;
     OverlayPaneler overlayPaneler;
-    IMode mode;
     Unit player;
+
+    IMode mode;
+    int modeCapabilityId; // 0 means theres no capability associated with the current mode.
 
     public PlayerController(
         ITimer timer,
         IClock cinematicTimer,
         ExecutionStaller resumeStaller,
         ExecutionStaller turnStaller,
-        ISuperstructure ss,
+    InputSemaphore inputSemaphore,
+    ISuperstructure ss,
         Superstate superstate,
         Game game,
         GamePresenter gamePresenter,
@@ -41,6 +45,7 @@ namespace Domino {
         OverlayPresenterFactory overlayPresenterFactory,
         ShowError showError) {
       this.ss = ss;
+      this.inputSemaphore = inputSemaphore;
       this.superstate = superstate;
       this.cinematicTimer = cinematicTimer;
       this.game = game;
@@ -67,6 +72,7 @@ namespace Domino {
         sorcerous.AddObserver(this);
       }
       playerPanelView = new PlayerPanelView(cinematicTimer, overlayPaneler, looker, player);
+      playerPanelView.CapabilityButtonClicked += ActivateCapability;
 
       SwitchToNormalMode();
     }
@@ -104,34 +110,6 @@ namespace Domino {
 
     //public void OnTileMouseOut(Location location) {
     //}
-
-    public void DefyClicked() {
-      mode.DefyClicked();
-    }
-
-    public void CounterClicked() {
-      mode.CounterClicked();
-    }
-
-    public void FireClicked() {
-      mode.FireClicked();
-    }
-
-    public void FireBombClicked() {
-      mode.FireBombClicked();
-    }
-
-    public void MireClicked() {
-      mode.MireClicked();
-    }
-
-    public void CancelClicked() {
-      mode.CancelClicked();
-    }
-
-    public void InteractClicked() {
-      mode.InteractClicked();
-    }
 
     public void AfterDidSomething() {
       MaybeResume();
@@ -182,20 +160,155 @@ namespace Domino {
         return; // To be continued... via a staller getting unstalled.
       }
 
-      mode.ReadyForTurn();
-    }
-
-    public void TimeShiftClicked() {
-      mode.TimeShiftClicked();
+      if (superstate.GetStateType() == MultiverseStateType.kBeforePlayerResume) {
+        ss.RequestFollowDirective(game.id);
+        AfterDidSomething();
+      } else {
+        return; // To be continued... via a player action.
+      }
     }
 
     public void ActivateCheat(string cheatName) {
-      //Debug.Log("Cheats disabled!");
-      mode.ActivateCheat(cheatName);
+      string result = ss.RequestCheat(game.id, cheatName);
+      if (result.Length > 0) {
+        showError(result);
+        AfterDidSomething();
+        return;
+      }
+      AfterDidSomething();
     }
 
-    public void TimeAnchorMoveClicked() {
-      mode.TimeAnchorMoveClicked();
+    private delegate void KeyAction();
+    public void Update() {
+      var lambdaByKey = new Dictionary<KeyCode, KeyAction>() {
+        { KeyCode.A, () => ActivateCapability(PlayerPanelView.TIME_ANCHOR_MOVE_CAPABILITY_ID) },
+        { KeyCode.R, () => ActivateCapability(PlayerPanelView.REVERT_CAPABILITY_ID) },
+        { KeyCode.E, () => ActivateCapability(PlayerPanelView.INTERACT_CAPABILITY_ID) },
+        { KeyCode.D, () => ActivateCapability(PlayerPanelView.DEFEND_CAPABILITY_ID) },
+        { KeyCode.C, () => ActivateCapability(PlayerPanelView.COUNTER_CAPABILITY_ID) },
+        { KeyCode.F, () => ActivateCapability(PlayerPanelView.FIRE_BOMB_CAPABILITY_ID) },
+        { KeyCode.B, () => ActivateCapability(PlayerPanelView.FIRE_BOMB_CAPABILITY_ID) },
+        { KeyCode.S, () => ActivateCapability(PlayerPanelView.MIRE_CAPABILITY_ID) },
+        { KeyCode.Escape, () => Cancel(true) },
+        { KeyCode.Slash, () => ActivateCheat("warptoend") },
+        { KeyCode.Equals, () => ActivateCheat("poweroverwhelming") },
+        { KeyCode.Alpha8, () => ActivateCheat("gimmeblastrod") },
+        { KeyCode.Alpha6, () => ActivateCheat("gimmeslowrod") },
+        { KeyCode.Alpha7, () => ActivateCheat("gimmearmor") },
+        { KeyCode.Alpha9, () => ActivateCheat("gimmesword") },
+      };
+      foreach (var keyAndLambda in lambdaByKey) {
+        var key = keyAndLambda.Key;
+        var lambda = keyAndLambda.Value;
+        if (Input.GetKeyDown(key)) {
+          if (inputSemaphore.locked) {
+            Debug.LogError("Rejecting input, locked!");
+          } else {
+            lambda();
+          }
+        }
+      }
+    }
+
+    public void SwitchToCapability(int capabilityId) {
+      ActivateCapability(capabilityId);
+    }
+
+    private void Cancel(bool purposeful) {
+      mode.Cancel(purposeful);
+      SwitchToNormalMode();
+    }
+
+    private void ActivateCapability(int capabilityId) {
+      Debug.LogError("activating a");
+      if (capabilityId == 0) {
+        Cancel(true);
+        return;
+      }
+      Debug.LogError("activating b");
+      if (modeCapabilityId == capabilityId) {
+        // They clicked the same button, cancel.
+        Cancel(true);
+        return;
+      }
+      Debug.LogError("activating c");
+      if (modeCapabilityId != 0) {
+        Cancel(false);
+        // continue
+      }
+      Debug.LogError("activating d");
+      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
+        showError("(Player not ready to act yet.)");
+        AfterDidSomething();
+        return;
+      }
+      Debug.LogError("activating e");
+      switch (capabilityId) {
+        case PlayerPanelView.TIME_ANCHOR_MOVE_CAPABILITY_ID:
+          modeCapabilityId = capabilityId;
+          mode = new TimeAnchorMoveMode(ss, superstate, game, this, overlayPresenterFactory, showError);
+          break;
+        case PlayerPanelView.REVERT_CAPABILITY_ID:
+          string timeShiftResult = ss.RequestTimeShift(game.id);
+          if (timeShiftResult != "") {
+            showError(timeShiftResult);
+            AfterDidSomething();
+            return;
+          }
+          ss.GetRoot().logger.Info("time shifted, new state: " + superstate.GetStateType());
+          AfterDidSomething();
+          break;
+        case PlayerPanelView.INTERACT_CAPABILITY_ID:
+          string interactResult = ss.RequestInteract(game.id);
+          if (interactResult != "") {
+            showError(interactResult);
+            AfterDidSomething();
+            return;
+          }
+          AfterDidSomething();
+          break;
+        case PlayerPanelView.DEFEND_CAPABILITY_ID:
+          string defendResult = ss.RequestDefy(game.id);
+          if (defendResult != "") {
+            showError(defendResult);
+            AfterDidSomething();
+            return;
+          }
+          AfterDidSomething();
+          break;
+        case PlayerPanelView.COUNTER_CAPABILITY_ID:
+          string counterResult = ss.RequestCounter(game.id);
+          if (counterResult.Length > 0) {
+            showError(counterResult);
+            AfterDidSomething();
+            return;
+          }
+          AfterDidSomething();
+          break;
+        case PlayerPanelView.FIRE_BOMB_CAPABILITY_ID:
+          if (game.player.components.GetAllBlastRod().Count == 0) {
+            overlayPresenterFactory(new ShowOverlayEvent("Can't fire bomb, find a Fire Rod first!", "error", "narrator", false, false, false, new ButtonImmList()));
+            return;
+          }
+          modeCapabilityId = capabilityId;
+          mode = new FireBombMode(ss, superstate, game, this, overlayPresenterFactory, showError);
+          break;
+        case PlayerPanelView.FIRE_CAPABILITY_ID:
+          modeCapabilityId = capabilityId;
+          mode = new FireMode(ss, superstate, game, this, overlayPresenterFactory, showError);
+          break;
+        case PlayerPanelView.MIRE_CAPABILITY_ID:
+          if (game.player.components.GetAllSlowRod().Count == 0) {
+            overlayPresenterFactory(new ShowOverlayEvent("Can't mire, find a Mire Staff first!", "error", "narrator", false, false, false, new ButtonImmList()));
+            return;
+          }
+          modeCapabilityId = capabilityId;
+          mode = new MireMode(ss, superstate, game, this, overlayPresenterFactory, showError);
+          break;
+        default:
+          Debug.LogError("unknown capability id!");
+          break;
+      }
     }
 
     public void OnUnitEffect(IUnitEffect effect) { effect.visit(this); }
@@ -240,30 +353,7 @@ namespace Domino {
 
     public void SwitchToNormalMode() {
       mode = new NormalMode(ss, superstate, game, this, showError);
-    }
-
-    public void SwitchToTimeAnchorMoveMode() {
-      mode = new TimeAnchorMoveMode(ss, superstate, game, this, overlayPresenterFactory, showError);
-    }
-
-    public void SwitchToFireMode() {
-      mode = new FireMode(ss, superstate, game, this, overlayPresenterFactory, showError);
-    }
-
-    public void SwitchToFireBombMode() {
-      if (game.player.components.GetAllBlastRod().Count == 0) {
-        overlayPresenterFactory(new ShowOverlayEvent("Can't fire bomb, find a Fire Rod first!", "error", "narrator", false, false, false, new ButtonImmList()));
-        return;
-      }
-      mode = new FireBombMode(ss, superstate, game, this, overlayPresenterFactory, showError);
-    }
-
-    public void SwitchToMireMode() {
-      if (game.player.components.GetAllSlowRod().Count == 0) {
-        overlayPresenterFactory(new ShowOverlayEvent("Can't mire, find a Mire Staff first!", "error", "narrator", false, false, false, new ButtonImmList()));
-        return;
-      }
-      mode = new MireMode(ss, superstate, game, this, overlayPresenterFactory, showError);
+      modeCapabilityId = 0;
     }
 
     public void OnGameEffect(IGameEffect effect) { effect.visit(this);  }

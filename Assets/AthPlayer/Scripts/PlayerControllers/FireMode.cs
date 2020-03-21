@@ -69,69 +69,13 @@ namespace AthPlayer {
       delegat.SwitchToNormalMode();
       delegat.AfterDidSomething();
     }
-
-    public void DefyClicked() {
-      showError("You must select a unit to fire on them. Canceling fire!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void ActivateCheat(string cheatName) {
-      showError("You must select a unit to fire on them. Canceling fire!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void FireClicked() {
-      showError("Canceled fire!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void CancelClicked() {
-      showError("Canceled fire!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void FireBombClicked() {
-      showError("You must select a unit to fire on them. Canceling fire!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void MireClicked() {
-      showError("You must select a unit to fire on them. Canceling fire!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void CounterClicked() {
-      showError("You must select a unit to fire on them. Canceling fire!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void InteractClicked() {
-      showError("You must select a unit to fire on them. Canceling fire!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void TimeShiftClicked() {
-      showError("You must select a unit to fire on them. Canceling fire!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void TimeAnchorMoveClicked() {
-      showError("You must select a unit to fire on them. Canceling fire!");
-      delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
-    }
-
-    public void ReadyForTurn() {
-      Asserts.Assert(false); // curiosity
+    
+    public void Cancel(bool purposeful) {
+      if (purposeful) {
+        showError("Canceled fire!");
+      } else {
+        showError("You must select a unit to fire on them. Canceling fire!");
+      }
     }
   }
 }

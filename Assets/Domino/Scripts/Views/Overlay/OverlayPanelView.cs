@@ -353,6 +353,7 @@ namespace Domino {
       var overlayObject = overlayObjects[rectangleId];
 
       var button = overlayObject.gameObject.AddComponent<Button>();
+      button.onClick.AddListener(() => onClicked());
       var colors = new ColorBlock();
       colors.colorMultiplier = 1;
       colors.normalColor = color;
@@ -361,9 +362,9 @@ namespace Domino {
       colors.selectedColor = color;
       colors.disabledColor = color;
       button.colors = colors;
-      button.onClick.AddListener(() => {
-        onClicked();
-      });
+      var uiClickListener = overlayObject.gameObject.AddComponent<UIClickListener>();
+      uiClickListener.MouseEnter += () => onMouseIn();
+      uiClickListener.MouseExit += () => onMouseOut();
 
       overlayObject.buttonPressedColor = pressedColor;
 

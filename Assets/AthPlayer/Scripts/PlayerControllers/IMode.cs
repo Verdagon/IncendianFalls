@@ -4,28 +4,15 @@ using Atharia.Model;
 namespace AthPlayer {
   public interface IModeDelegate {
     void AfterDidSomething();
+    void SwitchToCapability(int capabilityId);
     void SwitchToNormalMode();
-    void SwitchToTimeAnchorMoveMode();
-    void SwitchToFireMode();
-    void SwitchToFireBombMode();
-    void SwitchToMireMode();
   }
 
   public interface IMode {
     void OnTileMouseClick(Location newLocation);
-
-    void DefyClicked();
-    void FireClicked();
-    void FireBombClicked();
-    void MireClicked();
-    void CancelClicked();
-    void CounterClicked();
-    void InteractClicked();  
-
-    void TimeShiftClicked();
-    void TimeAnchorMoveClicked();
-    void ActivateCheat(string cheatName);
-
-    void ReadyForTurn();
+    // purposeful true means they explicitly hit cancel. false means they did
+    // something unexpected, and we should tell them that they did the thing
+    // wrong.
+    void Cancel(bool purposeful);
   }
 }

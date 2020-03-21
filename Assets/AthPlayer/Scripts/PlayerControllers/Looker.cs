@@ -9,40 +9,33 @@ namespace AthPlayer {
     LookPanelView lookPanelView;
     Unit lookedUnit = Unit.Null;
     TerrainTile lookedTile = TerrainTile.Null;
-    string lookedText;
+    string tooltip;
 
     public Looker(LookPanelView lookPanelView) {
       this.lookPanelView = lookPanelView;
     }
 
-    public void Clear() {
-      if (lookedUnit.Exists()) {
-        lookedUnit.RemoveObserver(this);
-        lookedUnit = Unit.Null;
+    public void SetTooltip(string newTooltip) {
+      tooltip = newTooltip;
+      if (tooltip.Length > 0) {
+        lookPanelView.SetStuff(true, newTooltip, "", new List<KeyValuePair<SymbolDescription, string>>());
+      } else {
+        Look(lookedUnit, lookedTile);
       }
-      lookedTile = TerrainTile.Null;
-      lookedText = "";
-      lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
-    }
-
-    public void Look(string newLookedText) {
-      Unit newUnit = Unit.Null;
-      TerrainTile newTile = TerrainTile.Null;
-      if (newUnit.NullableIs(lookedUnit) && newTile.NullableIs(lookedTile) && newLookedText == lookedText) {
-        return;
-      }
-      Clear();
-
-      lookPanelView.SetStuff(true, newLookedText, "", new List<KeyValuePair<SymbolDescription, string>>());
     }
 
     public void Look(Unit unit, TerrainTile tile) {
-      string newLookedText = "";
-      if (unit.NullableIs(lookedUnit) && tile.NullableIs(lookedTile) && newLookedText == lookedText) {
+      if (unit.NullableIs(lookedUnit) && tile.NullableIs(lookedTile)) {
         return;
       }
-      Clear();
+      if (tooltip != "") {
+        return;
+      }
 
+
+      if (lookedUnit.Exists()) {
+        lookedUnit.RemoveObserver(this);
+      }
       lookedUnit = unit;
       lookedTile = tile;
 
@@ -51,7 +44,7 @@ namespace AthPlayer {
       } else if (tile.Exists()) {
         Look(tile);
       } else {
-        Clear();
+        lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
       }
     }
 
@@ -324,7 +317,7 @@ namespace AthPlayer {
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
       if (!lookedUnit.Exists()) {
-        Clear();
+        Look(Unit.Null, lookedTile);
       }
     }
   }
