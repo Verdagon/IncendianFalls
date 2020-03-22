@@ -136,7 +136,8 @@ namespace AthPlayer {
               lookPanelView,
               overlayPaneler,
               NewOverlayPresenter,
-              this.ShowError);
+              this.ShowError,
+              thinkingIndicator);
       playerController.Start();
     }
 
@@ -268,78 +269,5 @@ namespace AthPlayer {
         }
       }
     }
-
-    //public void TimeAnchorMoveClicked() {
-    //  thinkingIndicator.SetActive(true);
-    //  timer.ScheduleTimer(0, () => {
-    //    playerController.TimeAnchorMoveClicked();
-    //    thinkingIndicator.SetActive(false);
-    //  });
-    //}
-
-    //public void TimeShiftClicked() {
-    //  thinkingIndicator.SetActive(true);
-    //  timer.ScheduleTimer(0, () => {
-    //    playerController.TimeShiftClicked();
-    //    thinkingIndicator.SetActive(false);
-    //  });
-    //}
-
-    //public void InteractClicked() {
-    //  thinkingIndicator.SetActive(true);
-    //  timer.ScheduleTimer(0, () => {
-    //    playerController.InteractClicked();
-    //    thinkingIndicator.SetActive(false);
-    //  });
-    //}
-
-    //public void DefyClicked() {
-    //  thinkingIndicator.SetActive(true);
-    //  timer.ScheduleTimer(0, () => {
-    //    playerController.DefyClicked();
-    //    thinkingIndicator.SetActive(false);
-    //  });
-    //}
-
-    //public void CounterClicked() {
-    //  thinkingIndicator.SetActive(true);
-    //  timer.ScheduleTimer(0, () => {
-    //    playerController.CounterClicked();
-    //    thinkingIndicator.SetActive(false);
-    //  });
-    //}
-
-    //public void FireClicked() {
-    //  thinkingIndicator.SetActive(true);
-    //  timer.ScheduleTimer(0, () => {
-    //    playerController.FireClicked();
-    //    thinkingIndicator.SetActive(false);
-    //  });
-    //}
-
-    //public void FireBombClicked() {
-    //  thinkingIndicator.SetActive(true);
-    //  timer.ScheduleTimer(0, () => {
-    //    playerController.FireBombClicked();
-    //    thinkingIndicator.SetActive(false);
-    //  });
-    //}
-
-    //public void MireClicked() {
-    //  thinkingIndicator.SetActive(true);
-    //  timer.ScheduleTimer(0, () => {
-    //    playerController.MireClicked();
-    //    thinkingIndicator.SetActive(false);
-    //  });
-    //}
-
-    //public void CancelClicked() {
-    //  thinkingIndicator.SetActive(true);
-    //  timer.ScheduleTimer(0, () => {
-    //    playerController.CancelClicked();
-    //    thinkingIndicator.SetActive(false);
-    //  });
-    //}
-
   }
 }

@@ -296,7 +296,7 @@ namespace IncendianFalls {
           } else {
             if (superstate.levelSuperstate.LocationContainsUnit(nextUnit.location)) {
               // curiosity, we might need a:
-              game.root.logger.Error("next unit isnt alive, but doesnt exist in superstate?");
+              game.root.logger.Warning("next unit isnt alive, but doesnt exist in superstate?");
             }
             //superstate.levelSuperstate.RemoveUnit(nextUnit);
             game.level.units.Remove(nextUnit);

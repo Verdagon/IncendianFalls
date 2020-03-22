@@ -10,6 +10,8 @@ namespace Domino {
       IGameEffectObserver, IGameEffectVisitor,
     ISorcerousUCEffectObserver, ISorcerousUCEffectVisitor,
       IModeDelegate {
+    private delegate void WaitingInput();
+
     IClock cinematicTimer;
     InputSemaphore inputSemaphore;
     ISuperstructure ss;
@@ -25,8 +27,10 @@ namespace Domino {
     ShowError showError;
     Looker looker;
     OverlayPaneler overlayPaneler;
+    GameObject thinkingIndicator;
     Unit player;
     bool hideInput;
+    WaitingInput waitingInput;
 
     IMode mode;
     int modeCapabilityId; // 0 means theres no capability associated with the current mode.
@@ -44,7 +48,8 @@ namespace Domino {
         LookPanelView lookPanelView,
         OverlayPaneler overlayPaneler,
         OverlayPresenterFactory overlayPresenterFactory,
-        ShowError showError) {
+        ShowError showError,
+        GameObject thinkingIndicator) {
       this.ss = ss;
       this.inputSemaphore = inputSemaphore;
       this.superstate = superstate;
@@ -58,6 +63,7 @@ namespace Domino {
       this.lookPanelView = lookPanelView;
       this.overlayPresenterFactory = overlayPresenterFactory;
       this.showError = showError;
+      this.thinkingIndicator = thinkingIndicator;
 
       this.game.AddObserver(this);
 
@@ -99,9 +105,39 @@ namespace Domino {
     //  lookPanelView.SetStuff(false, "", "", symbolsAndLabels);
     //}
 
+    private void DoIfAllowedAndWhenReady(WaitingInput inputCallback) {
+      if (inputSemaphore.locked) {
+        Debug.LogError("Rejecting input, locked!");
+      } else {
+        // We might be timeshifting or something, told by superstate.
+        // But even if the core is ready for input, we might be finishing up
+        // some animations, told by turnStaller.
+        if (superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput && !turnStaller.IsStalled()) {
+          thinkingIndicator.SetActive(true);
+          timer.ScheduleTimer(0, () => {
+            Asserts.Assert(!inputSemaphore.locked, "curiosity a");
+            // If this gets triggered, then perhaps we're sending input from somewhere else, in this 0ms window?
+            Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput, "curiosity b");
+            Asserts.Assert(!turnStaller.IsStalled(), "curiosity c");
+            inputCallback();
+            thinkingIndicator.SetActive(false);
+          });
+        } else {
+          waitingInput = () => {
+            thinkingIndicator.SetActive(true);
+            timer.ScheduleTimer(0, () => {
+              inputCallback();
+              thinkingIndicator.SetActive(false);
+            });
+          };
+        }
+      }
+    }
+
     public void OnTileMouseClick(Location newLocation) {
       //Debug.Log("Clicked on tile " + newLocation);
-      mode.OnTileMouseClick(newLocation);
+
+      DoIfAllowedAndWhenReady(() => mode.OnTileMouseClick(newLocation));
     }
 
     //public void OnTileMouseIn(Location location) {
@@ -163,7 +199,13 @@ namespace Domino {
         ss.RequestFollowDirective(game.id);
         AfterDidSomething();
       } else {
-        return; // To be continued... via a player action.
+        if (waitingInput != null) {
+          var lam = waitingInput;
+          waitingInput = null;
+          lam();
+        } else {
+          return; // To be continued... via a player action.
+        }
       }
     }
 
@@ -201,11 +243,7 @@ namespace Domino {
         var key = keyAndLambda.Key;
         var lambda = keyAndLambda.Value;
         if (Input.GetKeyDown(key)) {
-          if (inputSemaphore.locked) {
-            Debug.LogError("Rejecting input, locked!");
-          } else {
-            lambda();
-          }
+          DoIfAllowedAndWhenReady(() => lambda());
         }
       }
     }
@@ -234,6 +272,7 @@ namespace Domino {
         // continue
       }
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
+        Asserts.Assert(false, "wat");
         showError("(Player not ready to act yet.)");
         AfterDidSomething();
         return;

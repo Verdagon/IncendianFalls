@@ -25,11 +25,7 @@ namespace AthPlayer {
     }
 
     public void OnTileMouseClick(Location newLocation) {
-      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        showError("(Player not ready to act yet.)");
-        delegat.AfterDidSomething();
-        return;
-      }
+      Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput, "Player not ready to act yet.");
 
       string attackResult = AttackAt(newLocation);
       if (attackResult == "") {

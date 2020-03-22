@@ -77,12 +77,27 @@ namespace AthPlayer {
     }
 
     void RemoveUnit(int unitId) {
+      var unit = game.root.GetUnit(unitId);
+      if (game.player.Exists()) {
+        if (unit.NullableIs(game.player)) {
+          return;
+        }
+      }
+      Debug.LogError("removing unit " + unitId);
       this.unitPresenters[unitId].DestroyUnitPresenter();
       this.unitPresenters.Remove(unitId);
     }
 
     void AddUnit(int unitId) {
-      var unit = ss.GetRoot().GetUnit(unitId);
+      var unit = game.root.GetUnit(unitId);
+      if (game.player.Exists()) {
+        if (unit.NullableIs(game.player)) {
+          if (unitPresenters.ContainsKey(unitId)) {
+            return;
+          }
+        }
+      }
+      Debug.LogError("adding unit " + unitId);
       unitPresenters[unitId] =
           new UnitPresenter(
               timer, timer, soundPlayer, resumeStaller, turnStaller, game, viewedLevel.terrain, unit, instantiator);
