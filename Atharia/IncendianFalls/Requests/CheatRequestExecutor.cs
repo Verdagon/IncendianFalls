@@ -90,6 +90,9 @@ namespace IncendianFalls {
           game.player.components.Add(
             game.root.EffectGlaiveCreate().AsIUnitComponent());
           break;
+        case "healinglove":
+          game.player.hp = game.player.maxHp;
+          break;
         default:
           return "Unknown cheat: " + request.cheatName;
       }

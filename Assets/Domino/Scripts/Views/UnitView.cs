@@ -76,7 +76,7 @@ namespace Domino {
     ITimer timer;
 
     private bool initialized = false;
-    private bool alive = false;
+    private bool instanceAlive = false;
 
     // The main object that lives in world space. It has no rotation or scale,
     // just a translation to the center of the tile the unit is in.
@@ -124,6 +124,10 @@ namespace Domino {
     // This should probably just be the center of the tile below us.
     private Vector3 basePosition;
 
+    // We have timers active to destroy these when theyre done, but we might
+    // also destroy them if we need to Destruct fast.
+    private List<KeyValuePair<SymbolView, int>> transientRunesAndTimerIds;
+
     public void Init(
       IClock clock,
         Instantiator instantiator,
@@ -135,6 +139,7 @@ namespace Domino {
       this.instantiator = instantiator;
       this.timer = timer;
       this.basePosition = basePosition;
+      transientRunesAndTimerIds = new List<KeyValuePair<SymbolView, int>>();
 
       gameObject.transform.position = basePosition;
 
@@ -184,7 +189,7 @@ namespace Domino {
       }
 
       initialized = true;
-      alive = true;
+      instanceAlive = true;
     }
 
     public void SetUnitViewActive(bool enabled) {
@@ -285,8 +290,14 @@ namespace Domino {
       return symbolBarView;
     }
 
-    public void DestroyUnit() {
-      alive = false;
+    public void Destruct() {
+      instanceAlive = false;
+      foreach (var transientRuneAndTimerId in transientRunesAndTimerIds) {
+        var rune = transientRuneAndTimerId.Key;
+        var timerId = transientRuneAndTimerId.Value;
+        timer.CancelTimer(timerId);
+        rune.Destruct();
+      }
       Destroy(this.gameObject);
     }
 
@@ -350,18 +361,21 @@ namespace Domino {
       }
       symbolView.transform.SetParent(body.transform, false);
       symbolView.FadeInThenOut(100, 400);
-      timer.ScheduleTimer(1000, () => {
-        if (alive) {
-          symbolView.Destruct();
-        }
-      });
+      int timerId =
+        timer.ScheduleTimer(1000, () => {
+          for (int i = 0; i < transientRunesAndTimerIds.Count; i++) {
+            if (transientRunesAndTimerIds[i].Key == symbolView) {
+              transientRunesAndTimerIds.RemoveAt(i);
+              symbolView.Destruct();
+              return;
+            }
+          }
+          Asserts.Assert(false, "Couldnt find!");
+        });
+      transientRunesAndTimerIds.Add(new KeyValuePair<SymbolView, int>(symbolView, timerId));
     }
 
-    public void Die(long durationMs) {
-          StartDieAnimation(durationMs);
-    }
-
-    private void StartDieAnimation(long durationMs) {
+    public void StartFadeAnimation(long durationMs) {
       dominoView.Fade(durationMs);
 
       faceSymbolView.Fade(durationMs);

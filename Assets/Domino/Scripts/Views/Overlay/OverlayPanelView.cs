@@ -139,7 +139,7 @@ namespace Domino {
       float panelY = verticalAlignment * parentHeight - verticalAlignment * panelHeight;
 
       var panelRectTransform = gameObject.GetComponent<RectTransform>();
-      panelRectTransform.parent = parent.transform;
+      panelRectTransform.SetParent(parent.transform, false);
       panelRectTransform.SetAsFirstSibling(); // Move to back
       panelRectTransform.anchorMin = new Vector2(0, 0);
       panelRectTransform.anchorMax = new Vector2(0, 0);
@@ -189,8 +189,13 @@ namespace Domino {
       var unityX = x * symbolWidth + (centered ? symbolWidth / 2 : 0);
       var unityY = y * symbolHeight + (centered ? symbolHeight / 2 : 0);
       var textGameObject = instantiator.CreateEmptyUiObject();
-      textGameObject.transform.parent = gameObject.transform;
+      textGameObject.transform.SetParent(gameObject.transform, false);
+      textGameObject.transform.localScale = new Vector3(1, 1, 1);
+      textGameObject.transform.localPosition = new Vector3(0, 0, 0);
       var rectTransform = textGameObject.GetComponent<RectTransform>();
+      rectTransform.localPosition = new Vector3(0, 0, 0);
+      // .333s here, and * 3 on font size, so unity renders it with more resolution.
+      rectTransform.localScale = new Vector3(.333f, .333f, 1);
       rectTransform.pivot = centered ? new Vector2(0.5f, 0.5f) : new Vector2(0, 0);
       rectTransform.anchorMin = new Vector2(0, 0);
       rectTransform.anchorMax = new Vector2(0, 0);
@@ -199,7 +204,8 @@ namespace Domino {
       textView.raycastTarget = false;
       textView.font = instantiator.GetFont(font.font);
       textView.alignment = centered ? TextAnchor.MiddleCenter : TextAnchor.LowerLeft;
-      textView.fontSize = (int)(symbolHeight * size * font.fontSizeMultiplier * widthToHeightRatio);
+      // * 3 and then we scale by .333 so that unity renders it with more resolution.
+      textView.fontSize = (int)(symbolHeight * size * font.fontSizeMultiplier * widthToHeightRatio * 3);
       textView.color = color;
       textView.resizeTextForBestFit = false;
       //textView.
@@ -276,7 +282,7 @@ namespace Domino {
           }
 
           var borderRectGameObject = instantiator.CreateEmptyUiObject();
-          borderRectGameObject.transform.parent = gameObject.transform;
+          borderRectGameObject.transform.SetParent(gameObject.transform, false);
           var borderRectTransform = borderRectGameObject.GetComponent<RectTransform>();
           borderRectTransform.pivot = new Vector2(0, 0);
           borderRectTransform.localScale = new Vector3(1, 1, 1);
@@ -292,7 +298,7 @@ namespace Domino {
       }
 
       var rectGameObject = instantiator.CreateEmptyUiObject();
-      rectGameObject.transform.parent = gameObject.transform;
+      rectGameObject.transform.SetParent(gameObject.transform, false);
       var rectTransform = rectGameObject.GetComponent<RectTransform>();
       rectTransform.pivot = new Vector2(0, 0);
       rectTransform.localScale = new Vector3(1, 1, 1);

@@ -48,21 +48,21 @@ namespace Atharia.Model {
       //  levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
       //  level.time,
       //  Baug.Make(game.root));
-      //level.EnterUnit(
-      //  levelSuperstate,
-      //  levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
-      //  level.time,
-      //  Chronolisk.Make(game.root));
+      level.EnterUnit(
+        levelSuperstate,
+        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+        level.time,
+        Chronolisk.Make(game.root));
       //level.EnterUnit(
       //  levelSuperstate,
       //  levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
       //  level.time,
       //  Draxling.Make(game.root));
-      level.EnterUnit(
-        levelSuperstate,
-        levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
-        level.time,
-        Emberfolk.Make(game.root));
+      //level.EnterUnit(
+      //  levelSuperstate,
+      //  levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+      //  level.time,
+      //  Emberfolk.Make(game.root));
       //level.EnterUnit(
       //  levelSuperstate,
       //  levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
@@ -73,13 +73,13 @@ namespace Atharia.Model {
       //  levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
       //  level.time,
       //  LightningTrask.Make(game.root));
-      for (int i = 0; i < 4; i++) {
-        level.EnterUnit(
-          levelSuperstate,
-          levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
-          level.time,
-          MantisBombardier.Make(game.root));
-      }
+      //for (int i = 0; i < 4; i++) {
+      //  level.EnterUnit(
+      //    levelSuperstate,
+      //    levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],
+      //    level.time,
+      //    MantisBombardier.Make(game.root));
+      //}
       //level.EnterUnit(
       //  levelSuperstate,
       //  levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (loc) => !loc.Equals(entryLocation), true, true)[0],

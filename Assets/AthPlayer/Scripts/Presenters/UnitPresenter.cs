@@ -129,7 +129,8 @@ namespace AthPlayer {
     }
     public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) {
       if (!effect.newValue) {
-        unitView.GetComponent<UnitView>().Die(500);
+        unitView.GetComponent<UnitView>().StartFadeAnimation(500);
+        resumeStaller.StallForDuration(500);
         timer.ScheduleTimer(500, () => {
           if (unitView != null) {
             unitView.SetUnitViewActive(false);
@@ -151,10 +152,9 @@ namespace AthPlayer {
     }
 
     private void DestroyView() {
-      unitView.DestroyUnit();
+      unitView.Destruct();
       unitView = null;
     }
-
 
     public void OnBideAICapabilityUCEffect(IBideAICapabilityUCEffect effect) { effect.visit(this); }
     public void visitBideAICapabilityUCCreateEffect(BideAICapabilityUCCreateEffect effect) { }

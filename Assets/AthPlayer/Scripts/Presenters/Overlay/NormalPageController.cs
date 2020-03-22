@@ -69,7 +69,7 @@ namespace AthPlayer {
       // Will be unlocked by the buttons being clicked.
       inputSemaphore.Lock();
 
-      var font = new OverlayFont("prose", 2f);
+      var font = new OverlayFont("prose", 1.4f);
 
       var (textMaxWidth, textMaxHeight) = GetPageTextMaxWidthAndHeight(isPortrait, buttons);
       if (pageLines.Count > textMaxHeight) {

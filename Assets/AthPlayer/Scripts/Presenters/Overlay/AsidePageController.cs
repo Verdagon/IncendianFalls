@@ -67,7 +67,7 @@ namespace AthPlayer {
         bool fadeOutBackground,
         bool isPortrait,
         bool callCallbackAfterFadeOut) {
-      var font = new OverlayFont("prose", 2f);
+      var font = new OverlayFont("prose", 1.4f);
 
       var (textMaxWidth, textMaxHeight) = GetPageTextMaxWidthAndHeight(isPortrait, buttons);
       if (pageLines.Count > textMaxHeight) {

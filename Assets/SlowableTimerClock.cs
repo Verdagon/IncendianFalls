@@ -52,9 +52,22 @@ public class SlowableTimerClock : IClock, ITimer {
     return nowGameTimeMs;
   }
 
-  public void ScheduleTimer(long gameMsFromNow, ITimerCallback callback) {
+  public int ScheduleTimer(long gameMsFromNow, ITimerCallback callback) {
     int timerId = nextTimerId++;
     timers.Add(new TimerEntry(GetTimeMs() + gameMsFromNow, timerId, callback), new object());
+    return timerId;
+  }
+
+  public void CancelTimer(int timerId) {
+    TimerEntry matchingEntry = null;
+    foreach (var x in timers) {
+      if (x.Key.id == timerId) {
+        matchingEntry = x.Key;
+        break;
+      }
+    }
+    Asserts.Assert(matchingEntry != null);
+    timers.Remove(matchingEntry);
   }
 
 

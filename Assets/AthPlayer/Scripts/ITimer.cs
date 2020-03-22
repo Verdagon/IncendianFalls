@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 public delegate void ITimerCallback();
 
 public interface ITimer {
-  void ScheduleTimer(long msFromNow, ITimerCallback callback);
+  int ScheduleTimer(long msFromNow, ITimerCallback callback);
+  void CancelTimer(int timerId);
 }

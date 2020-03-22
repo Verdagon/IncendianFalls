@@ -195,6 +195,7 @@ namespace Domino {
         { KeyCode.Alpha6, () => ActivateCheat("gimmeslowrod") },
         { KeyCode.Alpha7, () => ActivateCheat("gimmearmor") },
         { KeyCode.Alpha9, () => ActivateCheat("gimmesword") },
+        { KeyCode.Insert, () => ActivateCheat("healinglove") },
       };
       foreach (var keyAndLambda in lambdaByKey) {
         var key = keyAndLambda.Key;

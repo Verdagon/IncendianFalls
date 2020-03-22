@@ -72,9 +72,10 @@ namespace Domino {
   }
 
   public class SymbolView : MonoBehaviour {
-    private bool initialized = false;
+    public bool instanceAlive { get; private set; }
 
     private IClock clock;
+    private ITimer timer;
 
     // The main object that lives in world space. It has no rotation or scale,
     // just a translation to the center of the tile the unit is in.
@@ -117,7 +118,7 @@ namespace Domino {
       InnerSetFrontColor(symbolDescription.symbol.frontColor);
       InnerSetSidesColor(symbolDescription.sidesColor);
       InnerSetOutlineColor(symbolDescription.symbol.outlineColor);
-      initialized = true;
+      instanceAlive = true;
 
       frontObject.GetComponent<MeshCollider>().enabled = mousable;
       frontOutlineObject.GetComponent<MeshCollider>().enabled = mousable;
@@ -134,19 +135,19 @@ namespace Domino {
     }
 
     public void Destruct() {
-      CheckInitialized();
+      CheckInstanceAlive();
       Destroy(gameObject);
-      initialized = false;
+      instanceAlive = false;
     }
 
-    public void CheckInitialized() {
-      if (!initialized) {
+    public void CheckInstanceAlive() {
+      if (!instanceAlive) {
         throw new System.Exception("SymbolView component not initialized!");
       }
     }
 
     public void SetDescription(ExtrudedSymbolDescription description) {
-      CheckInitialized();
+      CheckInstanceAlive();
       symbolId = description.symbol.symbolId;
       extruded = description.extruded;
       withOutline = description.symbol.withOutline;
@@ -157,9 +158,9 @@ namespace Domino {
     }
 
     public int qualityPercent {
-      get { CheckInitialized(); return qualityPercent_; }
+      get { CheckInstanceAlive(); return qualityPercent_; }
       set {
-        CheckInitialized();
+        CheckInstanceAlive();
         if (qualityPercent_ != value) {
           InnerSetSymbolId(symbolId, value);
         }
@@ -167,9 +168,9 @@ namespace Domino {
     }
 
     public string symbolId {
-      get { CheckInitialized(); return symbolId_; }
+      get { CheckInstanceAlive(); return symbolId_; }
       set {
-        CheckInitialized();
+        CheckInstanceAlive();
         if (symbolId_ != value) {
           InnerSetSymbolId(value, qualityPercent);
         }
@@ -177,9 +178,9 @@ namespace Domino {
     }
 
     public bool extruded {
-      get { CheckInitialized(); return extruded_; }
+      get { CheckInstanceAlive(); return extruded_; }
       set {
-        CheckInitialized();
+        CheckInstanceAlive();
         if (extruded_ != value) {
           InnerSetExtruded(value);
         }
@@ -187,9 +188,9 @@ namespace Domino {
     }
 
     public OutlineMode withOutline {
-      get { CheckInitialized(); return withOutline_; }
+      get { CheckInstanceAlive(); return withOutline_; }
       set {
-        CheckInitialized();
+        CheckInstanceAlive();
         if (withOutline_ != value) {
           InnerSetWithOutline(value);
         }
@@ -197,9 +198,9 @@ namespace Domino {
     }
 
     public Color frontColor {
-      get { CheckInitialized(); return frontColor_; }
+      get { CheckInstanceAlive(); return frontColor_; }
       set {
-        CheckInitialized();
+        CheckInstanceAlive();
         if (!frontColor_.Equals(value)) {
           InnerSetFrontColor(value);
         }
@@ -207,9 +208,9 @@ namespace Domino {
     }
 
     public Color outlineColor {
-      get { CheckInitialized(); return outlineColor_; }
+      get { CheckInstanceAlive(); return outlineColor_; }
       set {
-        CheckInitialized();
+        CheckInstanceAlive();
         if (!outlineColor_.Equals(value)) {
           InnerSetOutlineColor(value);
         }
@@ -217,9 +218,9 @@ namespace Domino {
     }
 
     public Color sidesColor {
-      get { CheckInitialized(); return sidesColor_; }
+      get { CheckInstanceAlive(); return sidesColor_; }
       set {
-        CheckInitialized();
+        CheckInstanceAlive();
         if (!sidesColor_.Equals(value)) {
           InnerSetSidesColor(value);
         }
@@ -227,9 +228,9 @@ namespace Domino {
     }
 
     public float rotationDegrees {
-      get { CheckInitialized(); return rotationDegrees_; }
+      get { CheckInstanceAlive(); return rotationDegrees_; }
       set {
-        CheckInitialized();
+        CheckInstanceAlive();
         if (rotationDegrees_ != value) {
           InnerSetRotationDegrees(rotationDegrees_);
         }
@@ -342,7 +343,7 @@ namespace Domino {
     }
 
     public void Start() {
-      CheckInitialized();
+      CheckInstanceAlive();
     }
 
     public void FadeInThenOut(long inDurationMs, long outDurationMs) {
@@ -375,7 +376,7 @@ namespace Domino {
     }
 
     private OpacityAnimator GetOrCreateSidesOpacityAnimator() {
-      CheckInitialized();
+      CheckInstanceAlive();
       var animator = sidesObject.GetComponent<OpacityAnimator>();
       if (animator == null) {
         animator = sidesObject.AddComponent<OpacityAnimator>() as OpacityAnimator;
@@ -385,7 +386,7 @@ namespace Domino {
     }
 
     private OpacityAnimator GetOrCreateFrontOpacityAnimator() {
-      CheckInitialized();
+      CheckInstanceAlive();
       var animator = frontObject.GetComponent<OpacityAnimator>();
       if (animator == null) {
         animator = frontObject.AddComponent<OpacityAnimator>() as OpacityAnimator;
@@ -395,7 +396,7 @@ namespace Domino {
     }
 
     private OpacityAnimator GetOrCreateFrontOutlineOpacityAnimator() {
-      CheckInitialized();
+      CheckInstanceAlive();
       var animator = frontOutlineObject.GetComponent<OpacityAnimator>();
       if (animator == null) {
         animator = frontOutlineObject.AddComponent<OpacityAnimator>() as OpacityAnimator;

@@ -89,7 +89,7 @@ namespace Geomancer {
       tileView.SetDescription(tileDescription);
 
       if (unitView) {
-        unitView.DestroyUnit();
+        unitView.Destruct();
         unitView = null;
       }
 

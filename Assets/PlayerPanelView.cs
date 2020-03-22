@@ -88,7 +88,7 @@ namespace Domino {
       float symbolY = 3 + position * buttonSize + (position + 1) * marginBetweenButtons + paddingInsideButton;
       float symbolSize = buttonSize - paddingInsideButton * 2;
       playerStatusView.AddSymbol(
-        timeAnchorMoveButtonId, symbolX, symbolY, symbolSize, 1, new UnityEngine.Color(1, 1, 1), new OverlayFont("symbols", 2.8f), symbol); ; ;
+        timeAnchorMoveButtonId, symbolX, symbolY, symbolSize, 1, new UnityEngine.Color(1, 1, 1), new OverlayFont("symbols", 2f), symbol); ; ;
       return timeAnchorMoveButtonId;
     }
 
@@ -107,7 +107,7 @@ namespace Domino {
       if (sorcerous.Exists()) {
         message += "   " + "MP " + sorcerous.mp + "/" + sorcerous.maxMp;
       }
-      textOverlayObjectIds = playerStatusView.AddString(0, 1, 1, 0, new UnityEngine.Color(1, 1, 1), new OverlayFont("prose", 2f), message);
+      textOverlayObjectIds = playerStatusView.AddString(0, 1, 1, 0, new UnityEngine.Color(1, 1, 1), new OverlayFont("prose", 1.4f), message);
     }
   }
 }

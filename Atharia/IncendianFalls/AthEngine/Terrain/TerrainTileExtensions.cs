@@ -27,7 +27,9 @@ namespace Atharia.Model {
     }
 
     public static void AddEvent(this TerrainTile terrainTile, Game game, ITerrainTileEvent e) {
-      game.eventedTerrainTiles.Add(terrainTile);
+      if (!game.eventedTerrainTiles.Contains(terrainTile)) {
+        game.eventedTerrainTiles.Add(terrainTile);
+      }
       terrainTile.events.Add(e);
     }
   }

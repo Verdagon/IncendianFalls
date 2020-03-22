@@ -77,6 +77,7 @@ namespace AthPlayer {
     }
 
     void RemoveUnit(int unitId) {
+      this.unitPresenters[unitId].DestroyUnitPresenter();
       this.unitPresenters.Remove(unitId);
     }
 
@@ -139,7 +140,7 @@ namespace AthPlayer {
       AddUnit(effect.elementId);
     }
     public void visitUnitMutSetRemoveEffect(UnitMutSetRemoveEffect effect) {
-      RemoveUnit(effect.id);
+      RemoveUnit(effect.elementId);
     }
     public void OnUnitMutSetEffect(IUnitMutSetEffect effect) { effect.visit(this); }
 
