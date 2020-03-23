@@ -9,6 +9,7 @@ mut struct SimplePresenceTriggerTTC {
 
   fn Trigger(
       this: SimplePresenceTriggerTTC overrides IPresenceTriggerTTC,
+    context: $IncendianFalls.SSContext,
       game: Game,
       superstate: $Superstate,
       triggeringUnit: Unit,

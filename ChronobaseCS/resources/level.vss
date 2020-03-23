@@ -19,11 +19,13 @@ mut interface ILevelController {
   fn GetName(): Str;
   fn ConsiderCornersAdjacent(): Bool;
   fn SimpleTrigger(
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggerName: Str):
   Void;
   fn SimpleUnitTrigger(
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggeringUnit: Unit,

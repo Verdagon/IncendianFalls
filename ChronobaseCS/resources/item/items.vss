@@ -15,6 +15,7 @@ mut struct ItemTTC {
 
   fn Interact(
     this: ItemTTC overrides IInteractableTTC,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     interactingUnit: Unit,

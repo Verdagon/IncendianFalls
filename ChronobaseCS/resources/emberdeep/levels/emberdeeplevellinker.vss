@@ -7,6 +7,7 @@ mut struct EmberDeepLevelLinkerTTC {
 
   fn Interact(
     this: EmberDeepLevelLinkerTTC overrides IInteractableTTC,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     interactingUnit: Unit,

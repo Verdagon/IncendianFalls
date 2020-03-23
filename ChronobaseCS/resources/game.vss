@@ -102,7 +102,11 @@ imm struct WaitEvent {
   WaitEvent isa IGameEvent;
 
   lockInput: Bool;
-  timeMs: Int; // Time until it calls the trigger again
+
+  // Time until it calls the trigger again.
+  // If 0, will run when there's no more animations.
+  timeMs: Int;
+
   endTriggerName: Str;
 }
 

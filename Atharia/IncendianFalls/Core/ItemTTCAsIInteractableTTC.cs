@@ -84,8 +84,8 @@ public class ItemTTCAsIInteractableTTC : IInteractableTTC {
          public Void Destruct() {
     return ItemTTCExtensions.Destruct(obj);
   }
-  public string Interact(Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
-    return ItemTTCExtensions.Interact(obj, game, superstate, interactingUnit, containingTileLocation);
+  public string Interact(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
+    return ItemTTCExtensions.Interact(obj, context, game, superstate, interactingUnit, containingTileLocation);
   }
 
 }

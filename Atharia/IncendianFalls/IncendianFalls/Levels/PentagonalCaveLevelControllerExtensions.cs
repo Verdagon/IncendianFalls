@@ -14,12 +14,14 @@ namespace Atharia.Model {
         out LevelSuperstate levelSuperstate,
         out Location entryLocation,
         out Location exitLocation,
+        SSContext context,
         Game game,
         Superstate superstate,
         int depth) {
       ForestTerrainGenerator.Generate(
           out Terrain terrain,
           out SortedDictionary<int, Room> rooms,
+          context,
           game.root,
           game.rand,
           PentagonPattern9.makePentagon9Pattern(),
@@ -76,6 +78,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleTrigger(
         this PentagonalCaveLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         string triggerName) {
@@ -84,6 +87,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleUnitTrigger(
         this PentagonalCaveLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit triggeringUnit,

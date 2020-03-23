@@ -145,7 +145,7 @@ namespace IncendianFalls {
         case MultiverseStateType.kTimeshiftingCloneMoving:
           // We're not between units yet; the time clone should do things until we're
           // between units.
-          GameLoop.Continue(game, superstate, new PauseCondition(true));
+          GameLoop.Continue(context, game, superstate, new PauseCondition(true));
 
           return "";
 

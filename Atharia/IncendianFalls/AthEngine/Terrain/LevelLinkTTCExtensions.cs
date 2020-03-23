@@ -11,16 +11,18 @@ namespace Atharia.Model {
 
     public static string Interact(
         this LevelLinkTTC levelLink,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit interactingUnit,
         Location containingTileLocation) {
-      Travel(game, superstate, interactingUnit, levelLink.destinationLevel, levelLink.destinationLevelLocation, levelLink.destroyThisLevel);
+      Travel(context, game, superstate, interactingUnit, levelLink.destinationLevel, levelLink.destinationLevelLocation, levelLink.destroyThisLevel);
 
       return "";
     }
 
     public static void Travel(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit unit,
@@ -58,7 +60,7 @@ namespace Atharia.Model {
       // Make player start immediately.
       game.level.EnterUnit(superstate.levelSuperstate, destinationLevelLocation, game.level.time, unit);
 
-      game.level.controller.SimpleTrigger(game, superstate, "levelStart");
+      game.level.controller.SimpleTrigger(context, game, superstate, "levelStart");
     }
   }
 }

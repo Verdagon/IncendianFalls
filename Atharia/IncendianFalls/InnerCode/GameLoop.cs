@@ -16,31 +16,32 @@ namespace IncendianFalls {
       //game.root.logger.Info(message);
     }
 
-    public static void Continue(Game game, Superstate superstate, PauseCondition pauseCondition) {
+    public static void Continue(
+        IncendianFalls.SSContext context, Game game, Superstate superstate, PauseCondition pauseCondition) {
       SortedSet<int> thisSpreeStartedUnitIds = new SortedSet<int>();
 
       switch (game.GetStateType()) {
         case WorldStateType.kBetweenUnits:
           ContinueAtStartTurn(
-              game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+              context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
           break;
         case WorldStateType.kAfterUnitAction:
           ContinueAfterUnitAction(
-              game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+              context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
           break;
         case WorldStateType.kPreActingDetail:
           ContinueAfterPreActingDetail(
-              game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+              context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
           break;
         case WorldStateType.kPostActingDetail:
           ContinueAfterPostActingDetail(
-              game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+              context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
           break;
         case WorldStateType.kBeforeEnemyAction:
           // If we timeshifted, and just finished rewinding, the player just
           // got reclassified as a time clone, who's about to do their action.
           ContinueBeforeUnitAction(
-              game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+              context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
           break;
         case WorldStateType.kBeforePlayerInput:
           Asserts.Assert(false, "at beforeplayerinput! " + superstate.GetStateType() + " <-");
@@ -90,6 +91,7 @@ namespace IncendianFalls {
 
     // Called from the outside.
     public static void ContinueAtStartTurn(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         PauseCondition pauseCondition,
@@ -102,7 +104,7 @@ namespace IncendianFalls {
       Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
       Asserts.Assert(!executionState.actingUnitDidAction);
 
-      StartNextUnit(game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+      StartNextUnit(context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
@@ -139,6 +141,7 @@ namespace IncendianFalls {
 
     // Called from the outside
     public static void ContinueAfterUnitAction(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         PauseCondition pauseCondition,
@@ -151,13 +154,14 @@ namespace IncendianFalls {
       Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
 
       StartPostActions(
-          game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Only called from the inside, from ContinueAfterUnitAction, PlayerDefy, etc.
     private static void StartPostActions(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         PauseCondition pauseCondition,
@@ -173,13 +177,14 @@ namespace IncendianFalls {
       executionState.remainingPostActingUnitComponents = postActingDetails;
 
       DoNextPostActingDetailOrContinue(
-          game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Can be called from StartPostActions or ContinueAfterPreActingDetail.
     private static void DoNextPostActingDetailOrContinue(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         PauseCondition pauseCondition,
@@ -219,7 +224,7 @@ namespace IncendianFalls {
       Asserts.Assert(presenceTriggers.Count <= 1); // dont support multiple yet. we could just fire both of them at once.
       // but we should probably have some sort of stop/resume between each trigger.
       foreach (var presenceTrigger in presenceTriggers) {
-        presenceTrigger.Trigger(game, superstate, unit, unit.location);
+        presenceTrigger.Trigger(context, game, superstate, unit, unit.location);
       }
 
       var wasPlayer = game.player.Exists() && unit.NullableIs(game.player);
@@ -236,7 +241,7 @@ namespace IncendianFalls {
       if (pauseCondition.betweenUnits) {
         return; // To be continued... via ContinueBeforeEnemyAction.
       } else {
-        StartNextUnit(game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+        StartNextUnit(context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
       }
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
@@ -244,6 +249,7 @@ namespace IncendianFalls {
 
     // Called from the outside, after we do a pre-acting detail.
     public static void ContinueAfterPostActingDetail(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         PauseCondition pauseCondition,
@@ -251,13 +257,14 @@ namespace IncendianFalls {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
       DoNextPostActingDetailOrContinue(
-          game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Called from ContinueAtStartTurn or ContinueAtNextPostActingDetail.
     private static void StartNextUnit(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         PauseCondition pauseCondition,
@@ -309,13 +316,14 @@ namespace IncendianFalls {
 
       executionState.actingUnit = nextUnit;
 
-      StartPreActions(game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+      StartPreActions(context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Never called from the outside, always called by StartNextUnit
     private static void StartPreActions(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         PauseCondition pauseCondition,
@@ -335,13 +343,14 @@ namespace IncendianFalls {
       executionState.remainingPreActingUnitComponents = preActingDetails;
 
       DoNextPreActingDetailOrContinue(
-          game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Can be called from StartPreActions or ContinueAfterPreActingDetail.
     private static void DoNextPreActingDetailOrContinue(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         PauseCondition pauseCondition,
@@ -373,13 +382,14 @@ namespace IncendianFalls {
       executionState.remainingPreActingUnitComponents.Destruct();
 
       DoUnitAction(
-          game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Called from the oustide, after we do a pre-acting detail.
     public static void ContinueAfterPreActingDetail(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         PauseCondition pauseCondition,
@@ -387,12 +397,13 @@ namespace IncendianFalls {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
       DoNextPreActingDetailOrContinue(
-          game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
 
       //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     public static void ContinueBeforeUnitAction(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         PauseCondition pauseCondition,
@@ -400,10 +411,11 @@ namespace IncendianFalls {
       Asserts.Assert(game.GetStateType() == WorldStateType.kBeforeEnemyAction);
 
       DoUnitAction(
-        game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+        context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
     }
 
     private static void DoUnitAction(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         PauseCondition pauseCondition,
@@ -423,7 +435,7 @@ namespace IncendianFalls {
         return; // To be continued... via PlayerAttack, PlayerMove, etc.
       } else {
         if (unit.alive) {
-          bool ret = EnemyAI.AI(game, superstate, unit);
+          bool ret = EnemyAI.AI(context, game, superstate, unit);
           executionState.actingUnitDidAction = true;
           //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
@@ -438,7 +450,7 @@ namespace IncendianFalls {
       }
 
       ContinueAfterUnitAction(
-          game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
     }
 
   }

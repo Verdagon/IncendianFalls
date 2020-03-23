@@ -16,6 +16,7 @@ namespace AthPlayer {
     InputSemaphore inputSemaphore;
     bool isFullscreen;
     bool longBackgroundFade;
+
     public NormalPageController(
         OverlayPaneler overlayPaneler,
         IClock cinematicTimer,
@@ -68,8 +69,6 @@ namespace AthPlayer {
 
       // Will be unlocked by the buttons being clicked.
       inputSemaphore.Lock();
-
-      var font = new OverlayFont("prose", 1.4f);
 
       var (textMaxWidth, textMaxHeight) = GetPageTextMaxWidthAndHeight(isPortrait, buttons);
       if (pageLines.Count > textMaxHeight) {
@@ -124,7 +123,7 @@ namespace AthPlayer {
         var textIds =
           panelView.AddString(
             0, 1f, panelView.symbolsHigh - 2 - i, panelView.symbolsWide,
-          textColor, font,
+          textColor, Fonts.PROSE_OVERLAY_FONT,
             pageLines[i]);
         foreach (var textId in textIds) {
           if (fadeInBackground) {
@@ -175,7 +174,7 @@ namespace AthPlayer {
           2f,
           buttonTextWidth,
           new UnityEngine.Color(1, 1, 1, 1),
-            font, buttonText);
+            Fonts.PROSE_OVERLAY_FONT, buttonText);
         if (fadeInBackground) {
           panelView.SetFadeIn(buttonId, new OverlayPanelView.FadeIn(300 * fadeTimeMultiplier, 600 * fadeTimeMultiplier));
         } else {

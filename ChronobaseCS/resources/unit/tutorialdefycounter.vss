@@ -11,6 +11,7 @@ mut struct TutorialDefyCounterUC {
 
   fn AfterImpulse(
       this: TutorialDefyCounterUC overrides IImpulsePostReactor,
+    context: $IncendianFalls.SSContext,
       game: Game,
       superstate: $Superstate,
       unit: Unit,

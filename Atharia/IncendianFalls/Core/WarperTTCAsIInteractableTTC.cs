@@ -84,8 +84,8 @@ public class WarperTTCAsIInteractableTTC : IInteractableTTC {
          public Void Destruct() {
     return WarperTTCExtensions.Destruct(obj);
   }
-  public string Interact(Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
-    return WarperTTCExtensions.Interact(obj, game, superstate, interactingUnit, containingTileLocation);
+  public string Interact(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
+    return WarperTTCExtensions.Interact(obj, context, game, superstate, interactingUnit, containingTileLocation);
   }
 
 }

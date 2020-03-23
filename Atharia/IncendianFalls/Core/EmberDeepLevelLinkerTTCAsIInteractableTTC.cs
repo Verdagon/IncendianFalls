@@ -81,8 +81,8 @@ public class EmberDeepLevelLinkerTTCAsIInteractableTTC : IInteractableTTC {
     return new EmberDeepLevelLinkerTTCAsITerrainTileComponent(obj);
   }
 
-         public string Interact(Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
-    return EmberDeepLevelLinkerTTCExtensions.Interact(obj, game, superstate, interactingUnit, containingTileLocation);
+         public string Interact(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
+    return EmberDeepLevelLinkerTTCExtensions.Interact(obj, context, game, superstate, interactingUnit, containingTileLocation);
   }
   public Void Destruct() {
     return EmberDeepLevelLinkerTTCExtensions.Destruct(obj);

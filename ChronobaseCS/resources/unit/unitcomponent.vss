@@ -67,6 +67,7 @@ mut interface IImpulsePostReactor {
   // The KillDirective itself should do this.
   // That way, others can reuse the AttackImpulse (like the time script!)
   fn AfterImpulse(
+    context: $IncendianFalls.SSContext,
       game: Game,
       superstate: $Superstate,
       unit: Unit,

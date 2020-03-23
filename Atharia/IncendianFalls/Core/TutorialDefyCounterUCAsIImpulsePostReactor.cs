@@ -84,8 +84,8 @@ public class TutorialDefyCounterUCAsIImpulsePostReactor : IImpulsePostReactor {
          public Void Destruct() {
     return TutorialDefyCounterUCExtensions.Destruct(obj);
   }
-  public Void AfterImpulse(Game game, Superstate superstate, Unit unit, IAICapabilityUC originatingCapability, IImpulse impulse) {
-    return TutorialDefyCounterUCExtensions.AfterImpulse(obj, game, superstate, unit, originatingCapability, impulse);
+  public Void AfterImpulse(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit unit, IAICapabilityUC originatingCapability, IImpulse impulse) {
+    return TutorialDefyCounterUCExtensions.AfterImpulse(obj, context, game, superstate, unit, originatingCapability, impulse);
   }
 
 }

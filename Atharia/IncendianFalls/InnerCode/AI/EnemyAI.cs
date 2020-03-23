@@ -7,6 +7,7 @@ namespace IncendianFalls {
   public class EnemyAI {
     // Returns true if we should return
     public static bool AI(
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit unit) {
@@ -43,6 +44,7 @@ namespace IncendianFalls {
       if (unit.alive) {
         foreach (var postReactor in unit.components.GetAllIImpulsePostReactor()) {
           postReactor.AfterImpulse(
+            context,
               game,
               superstate,
               unit,

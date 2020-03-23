@@ -14,9 +14,10 @@ namespace Atharia.Model {
         out LevelSuperstate levelSuperstate,
         out Location entryLocationRet,
         out Location exitLocationRet,
+        SSContext context,
         Game game) {
       var terrain =
-        CircleTerrainGenerator.Generate(game.root, HexPattern.MakeHexPattern(), game.rand, 18.0f);
+        CircleTerrainGenerator.Generate(context, game.root, HexPattern.MakeHexPattern(), game.rand, 18.0f);
       TerrainUtils.randify(game.rand, terrain, 2);
       foreach (var locationAndTile in terrain.tiles) {
         locationAndTile.Value.components.Add(
@@ -74,6 +75,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleTrigger(
         this RetreatLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         string triggerName) {
@@ -159,6 +161,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleUnitTrigger(
         this RetreatLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit triggeringUnit,

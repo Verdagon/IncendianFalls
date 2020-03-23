@@ -69,11 +69,11 @@ public class LakeLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return LakeLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Void SimpleTrigger(Game game, Superstate superstate, string triggerName) {
-    return LakeLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggerName);
+  public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
+    return LakeLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }
-  public Void SimpleUnitTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
-    return LakeLevelControllerExtensions.SimpleUnitTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
+  public Void SimpleUnitTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    return LakeLevelControllerExtensions.SimpleUnitTrigger(obj, context, game, superstate, triggeringUnit, location, triggerName);
   }
 
 }

@@ -226,7 +226,7 @@ namespace IncendianFalls {
         return success;
       } catch (Exception e) {
         root.logger.Error(e.Message + "\n" + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);

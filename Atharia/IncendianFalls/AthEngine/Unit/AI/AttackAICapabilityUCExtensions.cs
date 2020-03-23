@@ -133,7 +133,8 @@ namespace Atharia.Model {
     }
 
     public static Atharia.Model.Void AfterImpulse(
-        AttackAICapabilityUC self,
+        this AttackAICapabilityUC self,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit unit,

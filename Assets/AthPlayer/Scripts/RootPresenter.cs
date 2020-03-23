@@ -24,6 +24,7 @@ namespace AthPlayer {
     public bool locked { get { return count > 0; } }
 
     public void Lock() {
+      Debug.Log("Locking!");
       if (count == 0) {
         OnLocked?.Invoke();
       }
@@ -39,12 +40,7 @@ namespace AthPlayer {
   }
 
   public class RootPresenter : MonoBehaviour {
-    public static int sceneInitParamStartLevel = 7;
-
-    SlowableTimerClock timer;
-    SlowableTimerClock cinematicTimer;
-    ExecutionStaller resumeStaller;
-    ExecutionStaller turnStaller;
+    public static int sceneInitParamStartLevel = -5;
 
     ISuperstructure ss;
     ReplayLogger replayLogger;
@@ -53,14 +49,16 @@ namespace AthPlayer {
     public GameObject stalledIndicator;
     public GameObject thinkingIndicator;
 
-    GamePresenter gamePresenter;
-    PlayerController playerController;
-    Game game;
-    FollowingCameraController cameraController;
+    SlowableTimerClock uiTimer;
+    SlowableTimerClock cameraTimer;
 
-    InputSemaphore inputSemaphore;
+    GamePresenter gamePresenter;
+    Game game;
+    CameraController cameraController;
 
     LookPanelView lookPanelView;
+
+    InputSemaphore inputSemaphore;
 
     public SoundPlayer soundPlayer;
 
@@ -68,24 +66,11 @@ namespace AthPlayer {
 
     private OverlayPresenter currentErrorOverlay;
     private OverlayPresenter currentInstructionsOverlay;
+    private Looker looker;
 
     public void Start() {
-      timer = new SlowableTimerClock(1f);
-      cinematicTimer = new SlowableTimerClock(1f);
-
-      inputSemaphore = new InputSemaphore();
-      inputSemaphore.OnLocked += () => timer.SetTimeSpeedMultiplier(0f);
-      inputSemaphore.OnUnlocked += () => timer.SetTimeSpeedMultiplier(1f);
-
-      resumeStaller = new ExecutionStaller(timer, timer);
-      turnStaller = new ExecutionStaller(timer, timer);
-
-      turnStaller.stalledEvent += (x) => {
-        stalledIndicator.SetActive(true);
-      };
-      turnStaller.unstalledEvent += (x) => {
-        stalledIndicator.SetActive(false);
-      };
+      uiTimer = new SlowableTimerClock(1.0f);
+      cameraTimer = new SlowableTimerClock(1.0f);
 
       var timestamp = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
@@ -93,7 +78,11 @@ namespace AthPlayer {
       replayLogger = new ReplayLogger(modelSS, new string[] { "Latest.sslog", timestamp + ".sslog" });
       ss = new SuperstructureWrapper(modelSS);
 
-      lookPanelView = new LookPanelView(cinematicTimer, overlayPaneler);
+      lookPanelView = new LookPanelView(uiTimer, overlayPaneler);
+
+      looker = new Looker(lookPanelView);
+
+      inputSemaphore = new InputSemaphore();
 
       Debug.Log("Setting up level: " + sceneInitParamStartLevel);
       var randomSeed = timestamp;
@@ -104,41 +93,29 @@ namespace AthPlayer {
       game = ss.RequestSetupEmberDeepGame(randomSeed, sceneInitParamStartLevel, false);
       //var game = ss.RequestSetupGauntletGame(randomSeed, false);
 
-      cameraController = new FollowingCameraController(cinematicTimer, cinematicTimer, cameraObject, game);
+      this.cameraController =
+        new CameraController(
+          cameraTimer,
+          cameraObject,
+          new Vector3(0, 0, 0),
+          new Vector3(0, -10, 5));
 
       gamePresenter =
           new GamePresenter(
-              timer,
-              cinematicTimer,
+              cameraTimer,
               soundPlayer,
-              resumeStaller,
-              turnStaller,
               thinkingIndicator,
               ss,
+              inputSemaphore,
               game,
               instantiator,
               NewOverlayPresenter,
               this.ShowError,
               this.ShowInstructions,
-              cameraController);
-
-      playerController =
-          new PlayerController(
-              timer,
-              cinematicTimer,
-              resumeStaller,
-              turnStaller,
-              inputSemaphore,
-              ss,
-              ss.GetSuperstate(game.id),
-              game,
-              gamePresenter,
-              lookPanelView,
-              overlayPaneler,
-              NewOverlayPresenter,
-              this.ShowError,
-              thinkingIndicator);
-      playerController.Start();
+              cameraController,
+              stalledIndicator,
+              looker,
+              overlayPaneler);
     }
 
     private OverlayPresenter NewOverlayPresenter(ShowOverlayEvent overlay) {
@@ -157,7 +134,7 @@ namespace AthPlayer {
             }));
       }
       return new OverlayPresenter(
-        cinematicTimer,
+        uiTimer,
         overlayPaneler,
         inputSemaphore,
         overlay.template,
@@ -194,11 +171,8 @@ namespace AthPlayer {
     }
 
     public void Update() {
-      timer.Update();
-      cinematicTimer.Update();
-
-      playerController.Update();
-
+      uiTimer.Update();
+      cameraTimer.Update();
       if (Input.GetKey(KeyCode.RightArrow)) {
         if (inputSemaphore.locked) {
           Debug.LogError("Rejecting input, locked!");
@@ -244,30 +218,7 @@ namespace AthPlayer {
 
       UnityEngine.Ray ray = cameraObject.GetComponentInChildren<Camera>().ScreenPointToRay(Input.mousePosition);
 
-      Location hoveredLocation = null;
-      RaycastHit hit;
-      if (Physics.Raycast(ray, out hit)) {
-        if (hit.collider != null) {
-          hoveredLocation = gamePresenter.LocationFor(hit.collider.gameObject);
-        }
-      }
-      gamePresenter.SetHighlightedLocation(hoveredLocation);
-
-      Unit unit = Unit.Null;
-      TerrainTile tile = TerrainTile.Null;
-      if (hoveredLocation != null) {
-        unit = gamePresenter.UnitAtLocation(hoveredLocation);
-        tile = gamePresenter.TileAtLocation(hoveredLocation);
-      }
-      playerController.LookAt(unit, tile);
-
-      if (hoveredLocation != null && Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) {
-        if (inputSemaphore.locked) {
-          Debug.LogError("Rejecting input, locked!");
-        } else {
-          playerController.OnTileMouseClick(hoveredLocation);
-        }
-      }
+      gamePresenter.Update(ray);
     }
   }
 }

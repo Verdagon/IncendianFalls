@@ -52,6 +52,7 @@ namespace Gauntlet {
           out var preGauntletLevel,
           out var preGauntletLevelSuperstate,
           out var downStaircaseLocation,
+          context,
           game.root,
           squareLevelsOnly,
           game.rand,
@@ -62,6 +63,7 @@ namespace Gauntlet {
           out var gauntletLevel,
           out var gauntletLevelSuperstate,
           out var upStaircaseLocation,
+          context,
           game,
           squareLevelsOnly);
       game.levels.Add(gauntletLevel);

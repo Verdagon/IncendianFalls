@@ -81,8 +81,8 @@ public class IncendianFallsLevelLinkerTTCAsIInteractableTTC : IInteractableTTC {
     return new IncendianFallsLevelLinkerTTCAsITerrainTileComponent(obj);
   }
 
-         public string Interact(Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
-    return IncendianFallsLevelLinkerTTCExtensions.Interact(obj, game, superstate, interactingUnit, containingTileLocation);
+         public string Interact(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
+    return IncendianFallsLevelLinkerTTCExtensions.Interact(obj, context, game, superstate, interactingUnit, containingTileLocation);
   }
   public Void Destruct() {
     return IncendianFallsLevelLinkerTTCExtensions.Destruct(obj);

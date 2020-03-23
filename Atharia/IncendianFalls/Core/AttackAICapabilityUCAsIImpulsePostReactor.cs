@@ -147,8 +147,8 @@ public class AttackAICapabilityUCAsIImpulsePostReactor : IImpulsePostReactor {
          public Void Destruct() {
     return AttackAICapabilityUCExtensions.Destruct(obj);
   }
-  public Void AfterImpulse(Game game, Superstate superstate, Unit unit, IAICapabilityUC originatingCapability, IImpulse impulse) {
-    return AttackAICapabilityUCExtensions.AfterImpulse(obj, game, superstate, unit, originatingCapability, impulse);
+  public Void AfterImpulse(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit unit, IAICapabilityUC originatingCapability, IImpulse impulse) {
+    return AttackAICapabilityUCExtensions.AfterImpulse(obj, context, game, superstate, unit, originatingCapability, impulse);
   }
 
 }

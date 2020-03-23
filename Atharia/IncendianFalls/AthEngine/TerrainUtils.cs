@@ -161,7 +161,7 @@ namespace IncendianFalls {
       return connectedWithExploredNeighbors;
     }
 
-    public static void ConnectRooms(Pattern pattern, Rand rand, List<SortedSet<Location>> rooms) {
+    public static void ConnectRooms(SSContext context, Pattern pattern, Rand rand, List<SortedSet<Location>> rooms) {
       // This function will be adding the corridors to roomByNumber.
 
       SortedDictionary<Location, int> roomIndexByLocation = new SortedDictionary<Location, int>();
@@ -213,6 +213,7 @@ namespace IncendianFalls {
         // way there.
         var explorer =
             new PatternExplorer(
+              context,
                 pattern,
                 false,
                 regionALocation,
@@ -220,7 +221,7 @@ namespace IncendianFalls {
             (location, position) => true);
         List<Location> path = new List<Location>();
         while (true) {
-          Location currentLocation = explorer.Next();
+          Location currentLocation = explorer.Next(context);
           if (!roomIndexByLocation.ContainsKey(currentLocation)) {
             // It means we're in open space, keep going.
             path.Add(currentLocation);

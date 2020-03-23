@@ -22,7 +22,8 @@ namespace Atharia.Model {
     }
 
     public static Atharia.Model.Void AfterImpulse(
-        TimeCloneAICapabilityUC self,
+        this TimeCloneAICapabilityUC self,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit unit,

@@ -13,12 +13,14 @@ namespace Atharia.Model {
         out Level level,
         out LevelSuperstate levelSuperstate,
         out Location exitLocation,
+        SSContext context,
         Root root,
         bool squareLevelsOnly,
         Rand rand,
         int time) {
       var terrain =
           CircleTerrainGenerator.Generate(
+            context,
             root,
             squareLevelsOnly ? SquarePattern.MakeSquarePattern() : HexPattern.MakeHexPattern(),
             rand,
@@ -70,6 +72,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleTrigger(
         this PreGauntletLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         string triggerName) {
@@ -78,6 +81,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleUnitTrigger(
         this PreGauntletLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit triggeringUnit,

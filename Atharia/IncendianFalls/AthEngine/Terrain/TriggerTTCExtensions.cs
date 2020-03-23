@@ -11,11 +11,12 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void Trigger(
         this SimplePresenceTriggerTTC walkTrigger,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit triggeringUnit,
         Location location) {
-      game.level.controller.SimpleUnitTrigger(game, superstate, triggeringUnit, location, walkTrigger.name);
+      game.level.controller.SimpleUnitTrigger(context, game, superstate, triggeringUnit, location, walkTrigger.name);
       return new Atharia.Model.Void();
     }
   }

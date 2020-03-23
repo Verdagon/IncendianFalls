@@ -18,6 +18,7 @@ mut struct LakeLevelController {
 
   fn SimpleTrigger(
     this: LakeLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggerName: Str):
@@ -27,6 +28,7 @@ mut struct LakeLevelController {
 
   fn SimpleUnitTrigger(
     this: LakeLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggeringUnit: Unit,

@@ -7,6 +7,7 @@ namespace IncendianFalls {
     public static void Generate(
         out Terrain terrain,
         out SortedDictionary<int, Room> rooms,
+        SSContext context,
         Root root,
         Rand rand,
         Pattern pattern,
@@ -17,6 +18,7 @@ namespace IncendianFalls {
       // paint our layout of rooms and corridors.
       var canvasSearcher =
           new PatternExplorer(
+            context,
               pattern,
               false,
               new Location(0, 0, 0),
@@ -31,7 +33,7 @@ namespace IncendianFalls {
 
       // Find a ton of tiles.
       for (int i = 0; i < size; i++) {
-        Location loc = canvasSearcher.Next();
+        Location loc = canvasSearcher.Next(context);
         Vec2 center = pattern.GetTileCenter(loc);
         unusedLocations.Add(loc);
       }
@@ -46,13 +48,14 @@ namespace IncendianFalls {
           break;
         }
         Location startLocation = SetUtils.GetRandom(rand.Next(), unusedLocations);
-        var roomSearcher = new PatternExplorer(pattern, false, startLocation);
+        var roomSearcher = new PatternExplorer(context, pattern, false, startLocation);
         int minNumTilesInRoom = 15;
         int maxNumTilesInRoom = 100;
 
         var roomFloorLocations =
             new SortedSet<Location>(
                 roomSearcher.ExploreWhile(
+                  context,
                     delegate (Location loc) { return unusedLocations.Contains(loc); },
                     maxNumTilesInRoom));
 

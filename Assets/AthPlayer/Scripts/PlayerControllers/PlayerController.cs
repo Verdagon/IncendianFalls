@@ -16,13 +16,12 @@ namespace Domino {
     InputSemaphore inputSemaphore;
     ISuperstructure ss;
     Superstate superstate;
+    FollowingCameraController cameraController;
     Game game;
-    GamePresenter gamePresenter;
     ITimer timer;
     ExecutionStaller resumeStaller;
     ExecutionStaller turnStaller;
     PlayerPanelView playerPanelView;
-    LookPanelView lookPanelView;
     OverlayPresenterFactory overlayPresenterFactory;
     ShowError showError;
     Looker looker;
@@ -40,14 +39,14 @@ namespace Domino {
         IClock cinematicTimer,
         ExecutionStaller resumeStaller,
         ExecutionStaller turnStaller,
-    InputSemaphore inputSemaphore,
-    ISuperstructure ss,
+        InputSemaphore inputSemaphore,
+        ISuperstructure ss,
         Superstate superstate,
         Game game,
-        GamePresenter gamePresenter,
-        LookPanelView lookPanelView,
+        Looker looker,
         OverlayPaneler overlayPaneler,
         OverlayPresenterFactory overlayPresenterFactory,
+        CameraController innerCameraController,
         ShowError showError,
         GameObject thinkingIndicator) {
       this.ss = ss;
@@ -56,18 +55,17 @@ namespace Domino {
       this.cinematicTimer = cinematicTimer;
       this.game = game;
       this.overlayPaneler = overlayPaneler;
-      this.gamePresenter = gamePresenter;
       this.timer = timer;
       this.resumeStaller = resumeStaller;
       this.turnStaller = turnStaller;
-      this.lookPanelView = lookPanelView;
+      this.looker = looker;
       this.overlayPresenterFactory = overlayPresenterFactory;
       this.showError = showError;
       this.thinkingIndicator = thinkingIndicator;
 
-      this.game.AddObserver(this);
+      cameraController = new FollowingCameraController(innerCameraController, game);
 
-      looker = new Looker(lookPanelView);
+      this.game.AddObserver(this);
 
       this.resumeStaller.unstalledEvent += (sender) => MaybeResume();
       this.turnStaller.unstalledEvent += (sender) => MaybeResume();
@@ -80,9 +78,7 @@ namespace Domino {
       UpdatePlayerPanel();
 
       SwitchToNormalMode();
-    }
-
-    public void Start() {
+      
       MaybeResume();
     }
 
@@ -90,20 +86,11 @@ namespace Domino {
       looker.Look(maybeUnit, maybeTerrainTile);
     }
 
-    //public void OnUnitMouseClick(Unit unit) {
-    //  //Debug.Log("Clicked on unit " + unit.id + " at " + unit.location);
-    //  var location = unit.location;
-    //  OnTileMouseClick(location);
-    //}
-
-    //public void OnUnitMouseIn(Unit unit) {
-    //  looker.Look(unit);
-    //}
-
-    //public void OnUnitMouseOut(Unit unit) {
-    //  var symbolsAndLabels = new List<KeyValuePair<SymbolDescription, string>>();
-    //  lookPanelView.SetStuff(false, "", "", symbolsAndLabels);
-    //}
+    public void OnLevelLoaded() {
+      if (game.player.Exists()) {
+        cameraController.StartMovingCameraTo(game.level.terrain.GetTileCenter(game.player.location).ToUnity(), 0);
+      }
+    }
 
     private void DoIfAllowedAndWhenReady(WaitingInput inputCallback) {
       if (inputSemaphore.locked) {
@@ -139,12 +126,6 @@ namespace Domino {
 
       DoIfAllowedAndWhenReady(() => mode.OnTileMouseClick(newLocation));
     }
-
-    //public void OnTileMouseIn(Location location) {
-    //}
-
-    //public void OnTileMouseOut(Location location) {
-    //}
 
     public void AfterDidSomething() {
       MaybeResume();
@@ -411,6 +392,7 @@ namespace Domino {
     private void UpdateHideInput() {
       bool newHideInput = game.hideInput;
       if (hideInput != newHideInput) {
+        Debug.Log("hideInput changed: " + hideInput + " to " + newHideInput);
         if (newHideInput) {
           inputSemaphore.Lock();
         } else {

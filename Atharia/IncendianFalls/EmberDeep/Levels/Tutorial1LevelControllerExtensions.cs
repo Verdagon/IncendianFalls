@@ -53,6 +53,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleTrigger(
         this Tutorial1LevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         string triggerName) {
@@ -317,6 +318,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleUnitTrigger(
         this Tutorial1LevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit triggeringUnit,

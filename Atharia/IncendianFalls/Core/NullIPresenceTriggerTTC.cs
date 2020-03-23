@@ -43,7 +43,7 @@ public class NullIPresenceTriggerTTC : IPresenceTriggerTTC {
     return NullITerrainTileComponent.Null;
   }
 
-  public Void Trigger(Game game, Superstate superstate, Unit triggeringUnit, Location containingTileLocation) {
+  public Void Trigger(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit triggeringUnit, Location containingTileLocation) {
     throw new Exception("Called Trigger on a null!");
   }
              

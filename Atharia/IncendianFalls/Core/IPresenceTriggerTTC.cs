@@ -16,7 +16,7 @@ public interface IPresenceTriggerTTC {
   bool NullableIs(IPresenceTriggerTTC that);
   IDestructible AsIDestructible();
   ITerrainTileComponent AsITerrainTileComponent();
-  Void Trigger(Game game, Superstate superstate, Unit triggeringUnit, Location containingTileLocation);
+  Void Trigger(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit triggeringUnit, Location containingTileLocation);
   Void Destruct();
 }
 }

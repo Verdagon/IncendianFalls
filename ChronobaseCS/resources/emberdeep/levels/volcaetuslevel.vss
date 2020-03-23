@@ -18,6 +18,7 @@ mut struct VolcaetusLevelController {
 
   fn SimpleTrigger(
     this: VolcaetusLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggerName: Str):
@@ -27,6 +28,7 @@ mut struct VolcaetusLevelController {
 
   fn SimpleUnitTrigger(
     this: VolcaetusLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggeringUnit: Unit,

@@ -177,6 +177,7 @@ namespace IncendianFalls {
         out Terrain terrain,
         out List<CliffHalf> halves,
         out SortedDictionary<Location, int> preRandifiedElevationByLocation,
+        SSContext context,
         Root root,
         Rand rand,
         Pattern pattern,
@@ -188,6 +189,7 @@ namespace IncendianFalls {
       // paint our layout of rooms and corridors.
       var canvasSearcher =
           new PatternExplorer(
+            context,
               pattern,
               false,
               new Location(0, 0, 0),
@@ -200,7 +202,7 @@ namespace IncendianFalls {
 
       // Find a ton of tiles.
       for (int i = 0; i < size; i++) {
-        Location location = canvasSearcher.Next();
+        Location location = canvasSearcher.Next(context);
         var tile =
             root.EffectTerrainTileCreate(
               root.EffectITerrainTileEventMutListCreate(),
@@ -303,9 +305,9 @@ namespace IncendianFalls {
       List<List<Room>> roomsByContiguousArea = new List<List<Room>>();
       for (int i = 0; i < contiguousAreas.Count; i++) {
         var contiguousArea = contiguousAreas[i];
-        var roomByNumber = FindRooms(terrain, contiguousArea);
+        var roomByNumber = FindRooms(context, terrain, contiguousArea);
         FlattenRooms(terrain, roomByNumber);
-        ConnectRooms(pattern, rand, contiguousArea, roomByNumber);
+        ConnectRooms(context, pattern, rand, contiguousArea, roomByNumber);
         SetRoomsTiles(terrain, roomByNumber);
 
         SortedSet<Location> walkableLocsInThisArea = new SortedSet<Location>();
@@ -406,6 +408,7 @@ namespace IncendianFalls {
     }
 
     private static SortedDictionary<int, Room> FindRooms(
+      SSContext context,
         Terrain terrain,
         SortedSet<Location> initialUnusedLocations) {
       int minNumTilesInRoom = 5;
@@ -442,6 +445,7 @@ namespace IncendianFalls {
 
         var roomSearcher =
             new PatternExplorer(
+              context,
                 terrain.pattern,
                 false,
                 startLocation,
@@ -452,6 +456,7 @@ namespace IncendianFalls {
         var roomFloorLocations =
             new SortedSet<Location>(
                 roomSearcher.ExploreWhile(
+                  context,
                     delegate (Location loc) { return roomThing.unusedLocations.Contains(loc); },
                     maxNumTilesInRoomIncludingBorder));
 
@@ -519,6 +524,7 @@ namespace IncendianFalls {
     }
 
     static void ConnectRooms(
+      SSContext context,
         Pattern pattern,
         Rand rand,
         SortedSet<Location> allLocations,
@@ -578,6 +584,7 @@ namespace IncendianFalls {
         // way there.
         var explorer =
             new PatternExplorer(
+              context,
                 pattern,
                 false,
                 regionALocation,
@@ -585,7 +592,7 @@ namespace IncendianFalls {
                 (location, position) => allLocations.Contains(location));
         List<Location> path = new List<Location>();
         while (true) {
-          Location currentLocation = explorer.Next();
+          Location currentLocation = explorer.Next(context);
           if (!roomNumberByLocation.ContainsKey(currentLocation)) {
             // It means we're in open space, keep going.
             Asserts.Assert(allLocations.Contains(currentLocation));

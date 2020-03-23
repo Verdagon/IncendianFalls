@@ -52,8 +52,6 @@ namespace AthPlayer {
         bool fadeOutBackground,
         bool isPortrait,
         bool callCallbackAfterFadeOut) {
-      var font = new OverlayFont("prose", 1.4f);
-
       int panelHeight = pageLines.Count + panelTopPadding + panelBottomPadding;
 
       int widthPercent = isPortrait ? 94 : 44;
@@ -75,7 +73,7 @@ namespace AthPlayer {
         var textIds =
           panelView.AddString(
             0, 1f, panelView.symbolsHigh - 2 - i, panelView.symbolsWide,
-          textColor, font,
+          textColor, Fonts.PROSE_OVERLAY_FONT,
             pageLines[i]);
         foreach (var textId in textIds) {
           if (fadeInBackground) {

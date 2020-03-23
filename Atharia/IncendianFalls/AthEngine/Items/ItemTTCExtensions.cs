@@ -12,6 +12,7 @@ namespace Atharia.Model {
 
     public static string Interact(
         this ItemTTC itemTTC,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit interactingUnit,

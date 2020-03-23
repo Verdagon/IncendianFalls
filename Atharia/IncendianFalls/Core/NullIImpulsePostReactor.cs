@@ -43,7 +43,7 @@ public class NullIImpulsePostReactor : IImpulsePostReactor {
     return NullIUnitComponent.Null;
   }
 
-  public Void AfterImpulse(Game game, Superstate superstate, Unit unit, IAICapabilityUC originatingCapability, IImpulse impulse) {
+  public Void AfterImpulse(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit unit, IAICapabilityUC originatingCapability, IImpulse impulse) {
     throw new Exception("Called AfterImpulse on a null!");
   }
              

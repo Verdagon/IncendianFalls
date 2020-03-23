@@ -11,6 +11,7 @@ mut struct WarperTTC {
 
   fn Interact(
     this: WarperTTC overrides IDestructible,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     interactingUnit: Unit,

@@ -12,7 +12,8 @@ namespace Atharia.Model {
     }
 
     public static Atharia.Model.Void AfterImpulse(
-        TutorialDefyCounterUC self,
+        this TutorialDefyCounterUC self,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit unit,
@@ -28,7 +29,7 @@ namespace Atharia.Model {
       //game.root.logger.Error("In afterimpulse! " + defyImpulse + " " + self.numDefiesRemaining + " remaining");
 
       if (defyImpulse.Exists()) {
-        game.level.controller.SimpleTrigger(game, superstate, self.onChangeTriggerName);
+        game.level.controller.SimpleTrigger(context, game, superstate, self.onChangeTriggerName);
       }
 
       return new Atharia.Model.Void();

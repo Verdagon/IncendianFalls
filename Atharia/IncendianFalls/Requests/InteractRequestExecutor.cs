@@ -31,7 +31,11 @@ namespace IncendianFalls {
       superstate.requests.Add(request.AsIRequest());
       //player.ClearDirective();
 
+      context.Flare(game.root.GetDeterministicHashCode());
+
       string success = Actions.Interact(context, game, superstate, game.player);
+
+      context.Flare(game.root.GetDeterministicHashCode());
 
       if (success == "") {
         GameLoop.NoteUnitActed(game, game.player);

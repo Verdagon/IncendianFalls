@@ -142,7 +142,7 @@ namespace Geomancer {
           clock,
           cameraObject,
           level.terrain.GetTileCenter(startLocation).ToUnity(),
-          new Vector3(0, 5, -10));
+          new Vector3(0, 10, 5));
     }
 
 

@@ -21,16 +21,12 @@ namespace Domino {
 
     public event OnCapabilityButtonClicked CapabilityButtonClicked;
 
-    IClock cinematicTimer;
-    OverlayPaneler overlayPaneler;
     Unit unit;
     OverlayPanelView playerStatusView;
     Looker looker;
     List<int> textOverlayObjectIds = new List<int>();
 
     public PlayerPanelView(IClock cinematicTimer, OverlayPaneler overlayPaneler, Looker looker, Unit unit) {
-      this.cinematicTimer = cinematicTimer;
-      this.overlayPaneler = overlayPaneler;
       this.unit = unit;
       this.looker = looker;
 
@@ -88,7 +84,7 @@ namespace Domino {
       float symbolY = 3 + position * buttonSize + (position + 1) * marginBetweenButtons + paddingInsideButton;
       float symbolSize = buttonSize - paddingInsideButton * 2;
       playerStatusView.AddSymbol(
-        timeAnchorMoveButtonId, symbolX, symbolY, symbolSize, 1, new UnityEngine.Color(1, 1, 1), new OverlayFont("symbols", 2f), symbol); ; ;
+        timeAnchorMoveButtonId, symbolX, symbolY, symbolSize, 1, new UnityEngine.Color(1, 1, 1), Fonts.SYMBOLS_OVERLAY_FONT, symbol); ; ;
       return timeAnchorMoveButtonId;
     }
 
@@ -107,7 +103,7 @@ namespace Domino {
       if (sorcerous.Exists()) {
         message += "   " + "MP " + sorcerous.mp + "/" + sorcerous.maxMp;
       }
-      textOverlayObjectIds = playerStatusView.AddString(0, 1, 1, 0, new UnityEngine.Color(1, 1, 1), new OverlayFont("prose", 1.4f), message);
+      textOverlayObjectIds = playerStatusView.AddString(0, 1, 1, 0, new UnityEngine.Color(1, 1, 1), Fonts.PROSE_OVERLAY_FONT, message);
     }
   }
 }

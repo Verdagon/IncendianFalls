@@ -116,6 +116,7 @@ namespace EmberDeep {
           out var levelSuperstate,
           out var entryLocation,
           out var exitLocation,
+          context,
           game);
         if (!startLevel.Exists()) {
           startLevel = level;
@@ -158,6 +159,7 @@ namespace EmberDeep {
           out var level,
           out var levelSuperstate,
           out var entryLocation,
+          context,
           game,
           superstate,
           startingDepth);
@@ -172,7 +174,7 @@ namespace EmberDeep {
       Asserts.Assert(startLevel.Exists());
 
       game.root.logger.Info("starting level: " + startLevel.controller.GetName());
-      LevelLinkTTCExtensions.Travel(game, superstate, game.player, startLevel, startLevelEntryLocation, false);
+      LevelLinkTTCExtensions.Travel(context, game, superstate, game.player, startLevel, startLevelEntryLocation, false);
 
       return game;
     }

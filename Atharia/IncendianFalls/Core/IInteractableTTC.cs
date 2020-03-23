@@ -16,7 +16,7 @@ public interface IInteractableTTC {
   bool NullableIs(IInteractableTTC that);
   IDestructible AsIDestructible();
   ITerrainTileComponent AsITerrainTileComponent();
-  string Interact(Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation);
+  string Interact(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation);
   Void Destruct();
 }
 }

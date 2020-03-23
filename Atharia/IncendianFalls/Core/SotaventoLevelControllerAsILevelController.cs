@@ -69,11 +69,11 @@ public class SotaventoLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return SotaventoLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Void SimpleTrigger(Game game, Superstate superstate, string triggerName) {
-    return SotaventoLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggerName);
+  public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
+    return SotaventoLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }
-  public Void SimpleUnitTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
-    return SotaventoLevelControllerExtensions.SimpleUnitTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
+  public Void SimpleUnitTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    return SotaventoLevelControllerExtensions.SimpleUnitTrigger(obj, context, game, superstate, triggeringUnit, location, triggerName);
   }
 
 }

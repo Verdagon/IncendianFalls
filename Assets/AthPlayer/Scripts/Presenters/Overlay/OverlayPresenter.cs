@@ -27,10 +27,6 @@ namespace AthPlayer {
 
     public delegate void OnExit();
 
-    //SlowableTimerClock cinematicTimer;
-    //OverlayPaneler overlayPaneler;
-    //InputSemaphore inputSemaphore;
-
     IPageController pageController;
     bool isFirstInSequence;
     bool isLastInSequence;
@@ -45,7 +41,7 @@ namespace AthPlayer {
         SlowableTimerClock cinematicTimer,
         OverlayPaneler overlayPaneler,
         InputSemaphore inputSemaphore,
-        string template,
+    string template,
         string role,
         bool isFirstInSequence,
         bool isLastInSequence,

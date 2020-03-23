@@ -8,6 +8,7 @@ namespace IncendianFalls {
     public void Error(string str) { }
     public void Info(string str) { }
     public void Warning(string str) { }
+    public void Flare(string str) { }
   }
 
   public class ReplayLogger : ISuperstructureObserver, IDisposable {
@@ -125,6 +126,8 @@ namespace IncendianFalls {
         ss.RequestAttack(attack.obj.gameId, attack.obj.targetUnitId);
       } else if (request is FireRequestAsIRequest fire) {
         ss.RequestFire(fire.obj.gameId, fire.obj.targetUnitId);
+      } else if (request is MireRequestAsIRequest mire) {
+        ss.RequestMire(mire.obj.gameId, mire.obj.targetUnitId);
       } else if (request is TimeShiftRequestAsIRequest timeShift) {
         ss.RequestTimeShift(timeShift.obj.gameId);
       } else if (request is CounterRequestAsIRequest counter) {
@@ -141,6 +144,10 @@ namespace IncendianFalls {
         ss.RequestCheat(crI.obj.gameId, crI.obj.cheatName);
       } else if (request is TimeShiftRequestAsIRequest tsrI) {
         ss.RequestTimeShift(tsrI.obj.gameId);
+      } else if (request is TriggerRequestAsIRequest trI) {
+        ss.RequestTrigger(trI.obj.gameId, trI.obj.triggerName);
+      } else if (request is FireBombRequestAsIRequest fbI) {
+        ss.RequestFireBomb(fbI.obj.gameId, fbI.obj.location);
       } else {
         Asserts.Assert(false);
       }

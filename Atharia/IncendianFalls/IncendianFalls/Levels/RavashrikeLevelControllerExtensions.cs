@@ -13,11 +13,12 @@ namespace Atharia.Model {
         out Level level,
         out LevelSuperstate levelSuperstate,
         out Location entryLocation,
+        SSContext context,
         Game game,
         Superstate superstate,
         int depth,
         int levelIndex) {
-      var terrain = CircleTerrainGenerator.Generate(game.root, PentagonPattern9.makePentagon9Pattern(), game.rand, 8.0f);
+      var terrain = CircleTerrainGenerator.Generate(context, game.root, PentagonPattern9.makePentagon9Pattern(), game.rand, 8.0f);
 
       var units = game.root.EffectUnitMutSetCreate();
 
@@ -60,6 +61,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleTrigger(
         this RavashrikeLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         string triggerName) {
@@ -68,6 +70,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleUnitTrigger(
         this RavashrikeLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit triggeringUnit,

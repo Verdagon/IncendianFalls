@@ -28,6 +28,10 @@ object VCSParser extends RegexParsers {
     """[^\s\.\!\?\#\$\&\,\:\|\;\(\)\[\]\{\}=]+""".r
   }
 
+  def externIdentifier: Parser[String] = {
+    """[^\s\!\?\#\$\&\,\:\|\;\(\)\[\]\{\}=]+""".r
+  }
+
   def stringOr[T](string: String, parser: Parser[T]): Parser[Option[T]] = {
     (string ^^^ { val x: Option[T] = None; x } | parser ^^ (a => Some(a)))
   }
@@ -77,7 +81,7 @@ object VCSParser extends RegexParsers {
       ("Float" ^^^ FloatKindP) |
       ("Str" ^^^ StrKindP) |
       ("Bool" ^^^ BoolKindP) |
-      ("$" ~> typeIdentifier ^^ ExternKindP) |
+      ("$" ~> externIdentifier ^^ ExternKindP) |
       (typeIdentifier ^^ NameKindP)) ^^ {
       case nullable ~ weak ~ strong ~ kind => {
         val ownership = if (weak) { WeakP } else if (strong) StrongP else OwnP

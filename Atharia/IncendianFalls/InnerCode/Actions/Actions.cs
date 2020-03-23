@@ -155,7 +155,7 @@ namespace IncendianFalls {
       var interactables = tile.components.GetAllIInteractableTTC();
       if (interactables.Count > 0) {
         var interactable = interactables[0];
-        return interactable.Interact(game, superstate, unit, unit.location);
+        return interactable.Interact(context, game, superstate, unit, unit.location);
       } else {
         return "Nothing to interact with!";
       }

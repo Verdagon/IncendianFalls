@@ -11,33 +11,23 @@ namespace Domino {
       IGameEffectObserver, IGameEffectVisitor {
     CameraController cameraController;
 
-    IClock clock;
-    ITimer timer;
     Game game;
     Unit followedUnit;
     Location cameraEndLookAtLocation;
 
     private readonly static float cameraSpeedPerSecond = 8.0f;
 
-    public FollowingCameraController(IClock clock, ITimer timer, GameObject camera, Game game) {
-      this.clock = clock;
-      this.timer = timer;
+    public FollowingCameraController(CameraController cameraController, Game game) {
+      this.cameraController = cameraController;
       cameraEndLookAtLocation = game.player.location;
-      var cameraEndLookAtPosition = game.level.terrain.GetTileCenter(cameraEndLookAtLocation).ToUnity();
 
-      this.cameraController =
-        new CameraController(
-          clock,
-          camera,
-          cameraEndLookAtPosition,
-          game.level.cameraAngle.ToUnity());
       this.game = game;
 
       this.game.AddObserver(this);
 
       followedUnit = Unit.Null;
 
-      RefollowPlayer();
+      RefollowPlayer(0);
     }
 
     public void OnUnitEffect(IUnitEffect effect) { effect.visit(this); }
@@ -49,7 +39,7 @@ namespace Domino {
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) {
-      RefollowPlayer();
+      RefollowPlayer(250);
     }
 
     public void OnGameEffect(IGameEffect effect) { effect.visit(this); }
@@ -62,10 +52,10 @@ namespace Domino {
     public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) { }
     public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
     public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) {
-      RefollowPlayer();
+      RefollowPlayer(0);
     }
 
-    private void RefollowPlayer() {
+    private void RefollowPlayer(long durationMs) {
       if (followedUnit.Exists()) {
         if (game.player.Exists()) {
           if (followedUnit.NullableIs(game.player)) {
@@ -90,7 +80,7 @@ namespace Domino {
 
       if (followedUnit.Exists() &&
           followedUnit.location != cameraEndLookAtLocation) {
-        StartMovingCamera();
+        StartMovingCamera(durationMs);
       }
     }
 
@@ -103,7 +93,7 @@ namespace Domino {
     //  return builder.matrix;
     //}
 
-    public void StartMovingCamera() {
+    public void StartMovingCamera(long durationMs) {
       if (!followedUnit.Exists()) {
         Asserts.Assert(false);
       }
@@ -119,7 +109,7 @@ namespace Domino {
           game.level.terrain.GetTileCenter(newCameraEndLookAtLocation).ToUnity();
       //var newCameraMatrix = CalculateCameraMatrix(newCameraEndLookAtPosition);
 
-      cameraController.StartMovingCameraTo(newCameraEndLookAtPosition, 250);
+      cameraController.StartMovingCameraTo(newCameraEndLookAtPosition, durationMs);
     }
 
     public void MoveIn(float deltaTime) {

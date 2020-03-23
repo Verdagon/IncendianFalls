@@ -38,6 +38,7 @@ namespace AthPlayer {
     OverlayPaneler overlayPaneler;
     IClock cinematicTimer;
     bool isError;
+
     public AsidePageController(
         OverlayPaneler overlayPaneler,
         IClock cinematicTimer,
@@ -67,8 +68,6 @@ namespace AthPlayer {
         bool fadeOutBackground,
         bool isPortrait,
         bool callCallbackAfterFadeOut) {
-      var font = new OverlayFont("prose", 1.4f);
-
       var (textMaxWidth, textMaxHeight) = GetPageTextMaxWidthAndHeight(isPortrait, buttons);
       if (pageLines.Count > textMaxHeight) {
         Debug.LogError("Too many lines for this kind of overlay!");
@@ -103,7 +102,7 @@ namespace AthPlayer {
         var textIds =
           panelView.AddString(
             0, 1f, panelView.symbolsHigh - 2 - i, panelView.symbolsWide,
-          textColor, font,
+          textColor, Fonts.PROSE_OVERLAY_FONT,
             pageLines[i]);
         foreach (var textId in textIds) {
           if (fadeInBackground) {
@@ -151,7 +150,7 @@ namespace AthPlayer {
           2f,
           buttonTextWidth,
           new UnityEngine.Color(1f, 1f, 1f, 1),
-            font, buttonText);
+            Fonts.PROSE_OVERLAY_FONT, buttonText);
 
         nextButtonDistanceFromRight += buttonWidth + buttonBetweenMargin;
       }

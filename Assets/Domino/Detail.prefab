@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2600543476940170801}
   - component: {fileID: 2600543476940170800}
   - component: {fileID: 2600543476940170815}
-  - component: {fileID: 6044429472825931890}
   - component: {fileID: 3090733430592010174}
   m_Layer: 0
   m_Name: Detail
@@ -68,6 +67,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -93,18 +93,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6044429472825931890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2600543476940170813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4334514d056054aaeb9dce946d1fdb44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3090733430592010174
 MonoBehaviour:
   m_ObjectHideFlags: 0

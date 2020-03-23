@@ -23,7 +23,9 @@ namespace AthPlayer {
     Game game;
     Level viewedLevel;
     Instantiator instantiator;
-    FollowingCameraController cameraController;
+    CameraController cameraController;
+
+    InputSemaphore inputSemaphore;
 
     TerrainPresenter terrainPresenter;
     OverlayPresenterFactory overlayPresenterFactory;
@@ -32,43 +34,76 @@ namespace AthPlayer {
 
     Dictionary<int, UnitPresenter> unitPresenters;
 
+    PlayerController playerController;
+
     public GamePresenter(
-      SlowableTimerClock timer,
-        SlowableTimerClock cinematicTimer,
+        ITimer cameraTimer,
         SoundPlayer soundPlayer,
-        ExecutionStaller resumeStaller,
-        ExecutionStaller turnStaller,
         GameObject thinkingIndicator,
         ISuperstructure ss,
+        InputSemaphore inputSemaphore,
         Game game,
         Instantiator instantiator,
         OverlayPresenterFactory overlayPresenterFactory,
-    ShowError showError,
-    ShowInstructions showInstructions,
-    FollowingCameraController cameraController) {
-      this.timer = timer;
-      this.cinematicTimer = cinematicTimer;
+        ShowError showError,
+        ShowInstructions showInstructions,
+        CameraController cameraController,
+        GameObject stalledIndicator,
+        Looker looker,
+        OverlayPaneler overlayPaneler) {
       this.soundPlayer = soundPlayer;
-      this.resumeStaller = resumeStaller;
-      this.turnStaller = turnStaller;
       this.ss = ss;
       this.game = game;
       this.overlayPresenterFactory = overlayPresenterFactory;
+      this.inputSemaphore = inputSemaphore;
       this.instantiator = instantiator;
-      this.cameraController = cameraController;
-      this.overlayPresenterFactory = overlayPresenterFactory;
       this.showError = showError;
       this.showInstructions = showInstructions;
       this.thinkingIndicator = thinkingIndicator;
+      this.cameraController = cameraController;
+
+
+      timer = new SlowableTimerClock(1f);
+      cinematicTimer = new SlowableTimerClock(1f);
+
+      inputSemaphore.OnLocked += () => timer.SetTimeSpeedMultiplier(0f);
+      inputSemaphore.OnUnlocked += () => timer.SetTimeSpeedMultiplier(1f);
+
+      resumeStaller = new ExecutionStaller(timer, timer);
+      turnStaller = new ExecutionStaller(timer, timer);
+
+      turnStaller.stalledEvent += (x) => {
+        stalledIndicator.SetActive(true);
+      };
+      turnStaller.unstalledEvent += (x) => {
+        stalledIndicator.SetActive(false);
+      };
 
       game.AddObserver(this);
       game.events.AddObserver(this);
 
-      LoadLevel();
-
       foreach (var e in game.events) {
         e.Visit(this);
       }
+
+      playerController =
+          new PlayerController(
+              timer,
+              cinematicTimer,
+              resumeStaller,
+              turnStaller,
+              inputSemaphore,
+              ss,
+              ss.GetSuperstate(game.id),
+              game,
+              looker,
+              overlayPaneler,
+              overlayPresenterFactory,
+              cameraController,
+              showError,
+              thinkingIndicator);
+
+      LoadLevel();
     }
 
     public TerrainPresenter GetTerrainPresenter() { return terrainPresenter; }
@@ -83,7 +118,6 @@ namespace AthPlayer {
           return;
         }
       }
-      Debug.LogError("removing unit " + unitId);
       this.unitPresenters[unitId].DestroyUnitPresenter();
       this.unitPresenters.Remove(unitId);
     }
@@ -97,7 +131,6 @@ namespace AthPlayer {
           }
         }
       }
-      Debug.LogError("adding unit " + unitId);
       unitPresenters[unitId] =
           new UnitPresenter(
               timer, timer, soundPlayer, resumeStaller, turnStaller, game, viewedLevel.terrain, unit, instantiator);
@@ -115,6 +148,8 @@ namespace AthPlayer {
       foreach (var unit in viewedLevel.units) {
         AddUnit(unit.id);
       }
+
+      playerController.OnLevelLoaded();
     }
 
     private void UnloadLevel() {
@@ -199,7 +234,7 @@ namespace AthPlayer {
     //}
 
 
-    public void OnIGameEventMutListEffect(IIGameEventMutListEffect effect) { effect.visit(this);  }
+    public void OnIGameEventMutListEffect(IIGameEventMutListEffect effect) { effect.visit(this); }
     public void visitIGameEventMutListCreateEffect(IGameEventMutListCreateEffect effect) { }
     public void visitIGameEventMutListDeleteEffect(IGameEventMutListDeleteEffect effect) { }
     public void visitIGameEventMutListRemoveEffect(IGameEventMutListRemoveEffect effect) { }
@@ -207,6 +242,7 @@ namespace AthPlayer {
     public void Visit(FlyCameraEventAsIGameEvent obj) {
       var cameraEndLookAtPosition = game.level.terrain.GetTileCenter(obj.obj.lookAt).ToUnity();
       cameraController.StartMovingCameraTo(cameraEndLookAtPosition, obj.obj.transitionTimeMs);
+      Debug.Log("Moving camera!");
       cinematicTimer.ScheduleTimer(obj.obj.transitionTimeMs, () => ss.RequestTrigger(game.id, obj.obj.endTriggerName));
     }
     public void Visit(ShowOverlayEventAsIGameEvent obj) {
@@ -219,7 +255,43 @@ namespace AthPlayer {
     }
 
     public void Visit(WaitEventAsIGameEvent obj) {
-      cinematicTimer.ScheduleTimer(obj.obj.timeMs, () => ss.RequestTrigger(game.id, obj.obj.endTriggerName));
+      if (obj.obj.timeMs == 0) {
+
+      } else {
+        cinematicTimer.ScheduleTimer(obj.obj.timeMs, () => ss.RequestTrigger(game.id, obj.obj.endTriggerName));
+      }
+    }
+
+    public void Update(UnityEngine.Ray ray) {
+      timer.Update();
+      cinematicTimer.Update();
+
+      Location hoveredLocation = null;
+      RaycastHit hit;
+      if (Physics.Raycast(ray, out hit)) {
+        if (hit.collider != null) {
+          hoveredLocation = LocationFor(hit.collider.gameObject);
+        }
+      }
+      SetHighlightedLocation(hoveredLocation);
+
+      playerController.Update();
+
+      Unit unit = Unit.Null;
+      TerrainTile tile = TerrainTile.Null;
+      if (hoveredLocation != null) {
+        unit = UnitAtLocation(hoveredLocation);
+        tile = TileAtLocation(hoveredLocation);
+      }
+      playerController.LookAt(unit, tile);
+
+      if (hoveredLocation != null && Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) {
+        if (inputSemaphore.locked) {
+          Debug.LogError("Rejecting input, locked!");
+        } else {
+          playerController.OnTileMouseClick(hoveredLocation);
+        }
+      }
     }
   }
 }

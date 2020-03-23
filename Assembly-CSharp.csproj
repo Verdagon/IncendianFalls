@@ -106,6 +106,12 @@
     <Compile Include="Assets\Domino\Animations\Matrix4x4\LinearMatrix4x4Animation.cs" />
     <Compile Include="Assets\Domino\Animations\MovementAnimator.cs" />
     <Compile Include="Assets\Domino\Animations\OpacityAnimator.cs" />
+    <Compile Include="Assets\Domino\Animations\Vector3\AddVector3Animation.cs" />
+    <Compile Include="Assets\Domino\Animations\Vector3\ClampVector3Animation.cs" />
+    <Compile Include="Assets\Domino\Animations\Vector3\ConstantVector3Animation.cs" />
+    <Compile Include="Assets\Domino\Animations\Vector3\IdentityVector3Animation.cs" />
+    <Compile Include="Assets\Domino\Animations\Vector3\IVector3Animation.cs" />
+    <Compile Include="Assets\Domino\Animations\Vector3\LinearVector3Animation.cs" />
     <Compile Include="Assets\Domino\Avatar\Nob.cs" />
     <Compile Include="Assets\Domino\Avatar\Raving.cs" />
     <Compile Include="Assets\Domino\Scripts\CameraAnimator.cs" />
@@ -129,6 +135,7 @@
     <Compile Include="Assets\Domino\Scripts\Views\SymbolView.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\TileView.cs" />
     <Compile Include="Assets\Domino\Scripts\Views\UnitView.cs" />
+    <Compile Include="Assets\Fonts.cs" />
     <Compile Include="Assets\Geomancer\Scripts\EditorPresenter.cs" />
     <Compile Include="Assets\Geomancer\Scripts\MemberToViewMap.cs" />
     <Compile Include="Assets\Geomancer\Scripts\MemberToViewMapper.cs" />

@@ -43,7 +43,7 @@ public class NullIInteractableTTC : IInteractableTTC {
     return NullITerrainTileComponent.Null;
   }
 
-  public string Interact(Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
+  public string Interact(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
     throw new Exception("Called Interact on a null!");
   }
              

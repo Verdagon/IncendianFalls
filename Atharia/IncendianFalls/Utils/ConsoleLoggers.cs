@@ -113,6 +113,9 @@ namespace IncendianFalls {
       public void Warning(string str) {
         Console.WriteLine(str);
       }
+      public void Flare(string str) {
+        Console.WriteLine(str);
+      }
     }
 
   }

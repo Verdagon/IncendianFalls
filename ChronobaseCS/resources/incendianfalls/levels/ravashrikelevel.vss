@@ -18,6 +18,7 @@ mut struct RavashrikeLevelController {
 
   fn SimpleTrigger(
     this: RavashrikeLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggerName: Str):
@@ -27,6 +28,7 @@ mut struct RavashrikeLevelController {
 
   fn SimpleUnitTrigger(
     this: RavashrikeLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggeringUnit: Unit,

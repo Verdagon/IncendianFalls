@@ -13,6 +13,7 @@ namespace Atharia.Model {
 
     public static string Interact(
       this IncendianFallsLevelLinkerTTC linker,
+        IncendianFalls.SSContext context,
       Game game,
       Superstate superstate,
       Unit interactingUnit,
@@ -35,6 +36,7 @@ namespace Atharia.Model {
           out var nextLevel,
           out var nextLevelSuperstate,
           out var nextLevelEntryLocation,
+          context,
           game,
           superstate,
           thisLevelDepth + 1);
@@ -49,7 +51,7 @@ namespace Atharia.Model {
         game.root.EffectLevelLinkTTCCreate(false, game.level, containingTileLocation).AsITerrainTileComponent());
 
       // Travel the level link, to switch levels.
-      return levelLink.Interact(game, superstate, interactingUnit, containingTileLocation);
+      return levelLink.Interact(context, game, superstate, interactingUnit, containingTileLocation);
     }
 
 
@@ -57,6 +59,7 @@ namespace Atharia.Model {
         out Level level,
         out LevelSuperstate levelSuperstate,
         out Location entryLocation,
+        SSContext context,
         Game game,
         Superstate superstate,
         int depth) {
@@ -91,6 +94,7 @@ namespace Atharia.Model {
             out level,
             out levelSuperstate,
             out entryLocation,
+            context,
             game,
             superstate,
             //levelAbove,
@@ -104,6 +108,7 @@ namespace Atharia.Model {
               out levelSuperstate,
               out entryLocation,
               out var exitLocation,
+              context,
               game,
               superstate,
               //1,
@@ -131,6 +136,7 @@ namespace Atharia.Model {
             out level,
             out levelSuperstate,
             out entryLocation,
+            context,
             game,
             superstate,
             depth,

@@ -71,8 +71,9 @@ namespace IncendianFalls {
     SortedDictionary<Location, object> unexploredPoints = new SortedDictionary<Location, object>();
     SortedDictionary<PriorityAndLocation, object> unexploredPointsPrioritized;
 
-    public PatternExplorer(Pattern pattern, bool considerCornersAdjacent, Location originLocation) :
+    public PatternExplorer(SSContext context, Pattern pattern, bool considerCornersAdjacent, Location originLocation) :
     this(
+      context,
         pattern,
         considerCornersAdjacent,
         originLocation,
@@ -81,40 +82,63 @@ namespace IncendianFalls {
     }
 
     public PatternExplorer(
+      SSContext context,
         Pattern pattern,
         bool considerCornersAdjacent,
         Location originLocation,
         IPatternExplorerPrioritizer prioritizer,
         PatternExplorerFilter filter) {
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       this.pattern = pattern;
       this.considerCornersAdjacent = considerCornersAdjacent;
       this.prioritizer = prioritizer;
       this.filter = filter;
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       unexploredPointsPrioritized =
           new SortedDictionary<PriorityAndLocation, object>(
               new PriorityAndLocation.Comparer());
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       unexploredPoints.Add(originLocation, new object());
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       unexploredPointsPrioritized.Add(
           new PriorityAndLocation(0, originLocation),
           new object());
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       Asserts.Assert(filter(originLocation, pattern.GetTileCenter(originLocation)));
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
     }
 
-    public bool Next(out Location outLocation, out float outPriority) {
+    public bool Next(out Location outLocation, out float outPriority, SSContext context) {
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       // This only has one iteration
       PriorityAndLocation priorityAndLocation = new PriorityAndLocation(0, new Location(0, 0, 0));
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       if (unexploredPointsPrioritized.Count == 0) {
         outLocation = null;
         outPriority = 0;
         return false;
       }
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       foreach (var locEntry in unexploredPointsPrioritized) {
         priorityAndLocation = locEntry.Key;
         break;
       }
       var loc = priorityAndLocation.location;
 
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       foreach (Location adjacentLoc in pattern.GetAdjacentLocations(loc, considerCornersAdjacent)) {
+        context.Flare(context.root.GetDeterministicHashCode().ToString());
+
         var center = pattern.GetTileCenter(adjacentLoc);
         if (!filter(adjacentLoc, center))
           continue;
@@ -128,20 +152,35 @@ namespace IncendianFalls {
         }
       }
 
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       exploredPoints.Add(loc, new object());
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       unexploredPointsPrioritized.Remove(priorityAndLocation);
       unexploredPoints.Remove(loc);
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       outLocation = loc;
       outPriority = priorityAndLocation.priority;
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       return true;
     }
 
-    public Location Next() {
+    public Location Next(SSContext context) {
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       Location loc = new Location(0, 0, 0);
       float priority = 0;
-      if (Next(out loc, out priority)) {
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
+      if (Next(out loc, out priority, context)) {
+        context.Flare(context.root.GetDeterministicHashCode().ToString());
         return loc;
       } else {
+        context.Flare(context.root.GetDeterministicHashCode().ToString());
+
         throw new Exception("No next element!");
       }
     }
@@ -149,29 +188,42 @@ namespace IncendianFalls {
     public delegate bool ILocationPredicate(Location location);
 
     public List<Location> ExploreWhile(
+      SSContext context,
         ILocationPredicate predicate,
         int maxLocations = -1,
         float scoreThreshold = float.NegativeInfinity) {
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       List<Location> foundLocations = new List<Location>();
       for (int j = 0; ; j++) {
+        context.Flare(context.root.GetDeterministicHashCode().ToString());
+
         if (foundLocations.Count > 10000) {
           throw new Exception("Pattern explorer out of control!");
         }
         if (maxLocations != -1 && j >= maxLocations) {
           break;
         }
+        context.Flare(context.root.GetDeterministicHashCode().ToString());
+
         Location nextLocation = new Location(0, 0, 0);
         float nextScore = 0;
-        Next(out nextLocation, out nextScore);
+        Next(out nextLocation, out nextScore, context);
         if (nextScore < scoreThreshold) {
           break;
         }
+        context.Flare(context.root.GetDeterministicHashCode().ToString());
+
         if (predicate(nextLocation)) {
           foundLocations.Add(nextLocation);
         } else {
           break;
         }
+        context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       }
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       return foundLocations;
     }
   }

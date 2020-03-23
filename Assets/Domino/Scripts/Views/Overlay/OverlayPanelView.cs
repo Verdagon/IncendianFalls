@@ -194,8 +194,8 @@ namespace Domino {
       textGameObject.transform.localPosition = new Vector3(0, 0, 0);
       var rectTransform = textGameObject.GetComponent<RectTransform>();
       rectTransform.localPosition = new Vector3(0, 0, 0);
-      // .333s here, and * 3 on font size, so unity renders it with more resolution.
-      rectTransform.localScale = new Vector3(.333f, .333f, 1);
+      // .5s here, and * 2 on font size, so unity renders it with more resolution.
+      rectTransform.localScale = new Vector3(.5f, .5f, 1);
       rectTransform.pivot = centered ? new Vector2(0.5f, 0.5f) : new Vector2(0, 0);
       rectTransform.anchorMin = new Vector2(0, 0);
       rectTransform.anchorMax = new Vector2(0, 0);
@@ -204,8 +204,8 @@ namespace Domino {
       textView.raycastTarget = false;
       textView.font = instantiator.GetFont(font.font);
       textView.alignment = centered ? TextAnchor.MiddleCenter : TextAnchor.LowerLeft;
-      // * 3 and then we scale by .333 so that unity renders it with more resolution.
-      textView.fontSize = (int)(symbolHeight * size * font.fontSizeMultiplier * widthToHeightRatio * 3);
+      // * 2 and then we scale by .5 so that unity renders it with more resolution.
+      textView.fontSize = (int)(symbolHeight * size * font.fontSizeMultiplier * widthToHeightRatio * 2);
       textView.color = color;
       textView.resizeTextForBestFit = false;
       //textView.

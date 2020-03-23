@@ -9,7 +9,7 @@ namespace IncendianFalls {
         SetupTerrainRequest request) {
       var pattern = request.pattern;
       var rand = context.root.EffectRandCreate(1337);
-      var terrain = CircleTerrainGenerator.Generate(context.root, pattern, rand, 8.0f);
+      var terrain = CircleTerrainGenerator.Generate(context, context.root, pattern, rand, 8.0f);
       return terrain;
     }
   }

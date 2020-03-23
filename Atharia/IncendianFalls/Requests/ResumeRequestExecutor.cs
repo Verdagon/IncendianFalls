@@ -19,7 +19,7 @@ namespace IncendianFalls {
 
       Asserts.Assert(game.player.Exists() && game.player.alive, "Can't resume if player's not alive");
 
-      GameLoop.Continue(game, superstate, new PauseCondition(false));
+      GameLoop.Continue(context, game, superstate, new PauseCondition(false));
 
       return "";
     }

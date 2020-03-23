@@ -17,7 +17,7 @@ namespace IncendianFalls {
 
       EventsClearer.Clear(game);
 
-      game.level.controller.SimpleTrigger(game, superstate, request.triggerName);
+      game.level.controller.SimpleTrigger(context, game, superstate, request.triggerName);
 
       return "";
     }

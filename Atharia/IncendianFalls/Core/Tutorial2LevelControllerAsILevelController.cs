@@ -69,11 +69,11 @@ public class Tutorial2LevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return Tutorial2LevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Void SimpleTrigger(Game game, Superstate superstate, string triggerName) {
-    return Tutorial2LevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggerName);
+  public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
+    return Tutorial2LevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }
-  public Void SimpleUnitTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
-    return Tutorial2LevelControllerExtensions.SimpleUnitTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
+  public Void SimpleUnitTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    return Tutorial2LevelControllerExtensions.SimpleUnitTrigger(obj, context, game, superstate, triggeringUnit, location, triggerName);
   }
 
 }

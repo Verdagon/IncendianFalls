@@ -21,6 +21,7 @@ mut interface IInteractableTTC {
   IInteractableTTC isa ITerrainTileComponent;
 
   fn Interact(
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     interactingUnit: Unit,
@@ -32,6 +33,7 @@ mut interface IPresenceTriggerTTC {
   IPresenceTriggerTTC isa ITerrainTileComponent;
 
   fn Trigger(
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggeringUnit: Unit,

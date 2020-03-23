@@ -19,6 +19,7 @@ mut struct CliffLevelController {
 
   fn SimpleTrigger(
     this: CliffLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggerName: Str):
@@ -28,6 +29,7 @@ mut struct CliffLevelController {
 
   fn SimpleUnitTrigger(
     this: CliffLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggeringUnit: Unit,

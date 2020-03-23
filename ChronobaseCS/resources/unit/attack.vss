@@ -40,6 +40,7 @@ mut struct AttackAICapabilityUC {
 
   fn AfterImpulse(
       this: AttackAICapabilityUC overrides IImpulsePostReactor,
+    context: $IncendianFalls.SSContext,
       game: Game,
       superstate: $Superstate,
       unit: Unit,

@@ -11,48 +11,33 @@ namespace Domino {
     private GameObject cameraObject;
     // Where it's supposed to be, after all the animations are done.
     private Vector3 cameraEndLookAtPosition;
-    private Vector3 cameraAngle;
+    private Vector3 cameraOffsetToLookAt;
 
     public Vector3 endLookAtPosition {  get { return cameraEndLookAtPosition; } }
 
     private readonly static float cameraSpeedPerSecond = 8.0f;
 
-    public CameraController(IClock clock, GameObject camera, Vector3 initialLookAtPosition, Vector3 cameraAngle) {
+    public CameraController(IClock clock, GameObject camera, Vector3 initialLookAtPosition, Vector3 initialCameraOffsetToLookAt) {
       this.clock = clock;
       this.cameraObject = camera;
-      
+
       cameraEndLookAtPosition = initialLookAtPosition;
-      this.cameraAngle = cameraAngle;
-      camera.transform.FromMatrix(CalculateCameraMatrix(cameraEndLookAtPosition));
-    }
+      cameraOffsetToLookAt = initialCameraOffsetToLookAt;
 
-    private Matrix4x4 CalculateCameraMatrix(Vector3 lookAtPosition) {
-      MatrixBuilder builder = new MatrixBuilder(Matrix4x4.identity);
-      // 26.6f is atan(5/10)
-      builder.Rotate(Quaternion.AngleAxis(90 - 26.6f, Vector3.right));
-
-
-      //float pitch = Vector3.Angle(-cameraAngle, Vector3.forward);
-      //float yaw = (float)(Math.Atan2(cameraAngle.x, cameraAngle.z) / Math.PI * 180);
-      //builder.Rotate(Quaternion.Euler(pitch, yaw, 0));
-
-      builder.Translate(
-    new Vector3(lookAtPosition.x, lookAtPosition.y + 16, lookAtPosition.z - 8));
-
-
-      //builder.Translate(
-      //    new Vector3(
-      //      lookAtPosition.x + cameraAngle.x,
-      //      lookAtPosition.y + cameraAngle.y,
-      //      lookAtPosition.z + cameraAngle.z));
-      return builder.matrix;
+      GetOrCreateCameraAnimator().lookAtAnimation = new ConstantVector3Animation(cameraEndLookAtPosition);
+      GetOrCreateCameraAnimator().offsetToLookAtAnimation = new ConstantVector3Animation(cameraOffsetToLookAt);
+      //camera.transform.FromMatrix(CalculateCameraMatrix(cameraEndLookAtPosition, cameraOffsetFromLookAt));
     }
 
     private CameraAnimator GetOrCreateCameraAnimator() {
       var animator = cameraObject.GetComponent<CameraAnimator>();
       if (animator == null) {
-        animator = cameraObject.AddComponent<CameraAnimator>() as CameraAnimator;
-        animator.Init(clock, cameraObject, new ConstantMatrix4x4Animation(cameraObject.transform.localToWorldMatrix));
+        animator = cameraObject.AddComponent<CameraAnimator>();
+        animator.Init(
+          clock,
+          cameraObject,
+          new IdentityVector3Animation(),
+          new IdentityVector3Animation());
       }
       Asserts.Assert(animator != null);
       return animator;
@@ -60,23 +45,23 @@ namespace Domino {
 
     public void StartMovingCameraTo(Vector3 newCameraEndLookAtPosition, long durationMs) {
       var currentCameraEndLookAtPosition = cameraEndLookAtPosition;
-      //var currentCameraMatrix = CalculateCameraMatrix(currentCameraEndLookAtPosition);
-
-      //var newCameraMatrix = CalculateCameraMatrix(newCameraEndLookAtPosition);
-
       var cameraDifference = newCameraEndLookAtPosition - currentCameraEndLookAtPosition;
 
       var animator = GetOrCreateCameraAnimator();
-      animator.cameraAnimation =
-          new ComposeMatrix4x4Animation(
-              animator.cameraAnimation,
-              new ClampMatrix4x4Animation(
-                  clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
-                  new ComposeMatrix4x4Animation(
-                      new ConstantMatrix4x4Animation(Matrix4x4.Translate(cameraDifference)),
-                      new LinearMatrix4x4Animation(
-                          clock.GetTimeMs(), clock.GetTimeMs() + durationMs, Matrix4x4.Translate(-cameraDifference), Matrix4x4.identity))));
-
+      if (durationMs == 0) {
+        animator.lookAtAnimation =
+          new ConstantVector3Animation(newCameraEndLookAtPosition);
+      } else {
+        animator.lookAtAnimation =
+            new AddVector3Animation(
+                animator.lookAtAnimation,
+                new ClampVector3Animation(
+                    clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
+                    new AddVector3Animation(
+                        new ConstantVector3Animation(cameraDifference),
+                        new LinearVector3Animation(
+                            clock.GetTimeMs(), clock.GetTimeMs() + durationMs, -cameraDifference, new Vector3(0, 0, 0)))));
+      }
       cameraEndLookAtPosition = newCameraEndLookAtPosition;
     }
 

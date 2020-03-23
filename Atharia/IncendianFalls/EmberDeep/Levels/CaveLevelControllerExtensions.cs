@@ -13,10 +13,13 @@ namespace Atharia.Model {
         out Level levelRet,
         out LevelSuperstate levelSuperstate,
         out Location entryLocationRet,
+        SSContext context,
         Game game,
         Superstate superstate,
         int depth) {
       bool considerCornersAdjacent = false;
+
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
 
       Pattern pattern = PentagonPattern9.makePentagon9Pattern();
       if (depth == 2) {
@@ -24,14 +27,19 @@ namespace Atharia.Model {
       }
       var terrain =
         CellularAutomataTerrainGenerator.Generate(
+          context,
           game.root,
           pattern,
           game.rand,
           considerCornersAdjacent,
           12.0f);
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       foreach (var locationAndTile in terrain.tiles) {
         locationAndTile.Value.components.Add(game.root.EffectMudTTCCreate().AsITerrainTileComponent());
       }
+
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
 
       var floors = new SortedSet<Location>(terrain.tiles.Keys);
       var borderLocations = terrain.pattern.GetAdjacentLocations(floors, false, true);
@@ -44,6 +52,8 @@ namespace Atharia.Model {
         }
       }
 
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       var level =
           game.root.EffectLevelCreate(
           new Vec3(0, -8, 16),
@@ -52,6 +62,8 @@ namespace Atharia.Model {
               NullILevelController.Null,
               game.time);
       levelSuperstate = new LevelSuperstate(level);
+
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
 
 
       var entryAndExitCandidateLocations = floors;
@@ -63,7 +75,9 @@ namespace Atharia.Model {
       if (superWideOpenLocations.Count >= 2) {
         entryAndExitCandidateLocations = superWideOpenLocations;
       }
-      
+
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       var entryLocation =
         levelSuperstate.GetNRandomWalkableLocations(
           level.terrain,
@@ -73,6 +87,8 @@ namespace Atharia.Model {
           false,
           false)[0];
       Asserts.Assert(wideOpenLocations.Contains(entryLocation), "wat");
+
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
 
       var exitLocation =
         levelSuperstate.GetNRandomWalkableLocations(
@@ -87,7 +103,11 @@ namespace Atharia.Model {
       level.terrain.tiles[exitLocation].components.Add(
         game.root.EffectEmberDeepLevelLinkerTTCCreate(depth + 1).AsITerrainTileComponent());
 
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       EmberDeepUnitsAndItems.PlaceRocks(game.rand, level, levelSuperstate);
+
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
 
       level.controller = game.root.EffectCaveLevelControllerCreate(level, depth).AsILevelController();
 
@@ -108,8 +128,12 @@ namespace Atharia.Model {
         EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .02f, .02f);
       }
 
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       levelSuperstate.Reconstruct(level);
       levelSuperstate.AddNoUnitZone(entryLocation, 3);
+
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
 
       int numSpaces = levelSuperstate.NumWalkableLocations(false);
       if (depth == 0) {
@@ -178,9 +202,13 @@ namespace Atharia.Model {
           /*numLightningTrask=*/ 1);
       }
 
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
+
       levelSuperstate.Reconstruct(level);
 
       game.levels.Add(level);
+
+      context.Flare(context.root.GetDeterministicHashCode().ToString());
 
       levelRet = level;
       entryLocationRet = entryLocation;
@@ -196,6 +224,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleTrigger(
         this CaveLevelController self,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         string triggerName) {
@@ -205,7 +234,7 @@ namespace Atharia.Model {
         if (hopToPossibilities.Count > 0) {
           Actions.Step(game, superstate, game.player, hopToPossibilities[0], true, false);
         }
-        game.AddEvent(new WaitEvent(true, 1000, "playerEntryHopDone").AsIGameEvent());
+        game.AddEvent(new WaitEvent(true, 0, "playerEntryHopDone").AsIGameEvent());
       }
       if (triggerName == "playerEntryHopDone") {
         game.AddEvent(
@@ -224,6 +253,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleUnitTrigger(
         this CaveLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit triggeringUnit,

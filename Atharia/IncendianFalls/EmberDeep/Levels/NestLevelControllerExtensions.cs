@@ -38,6 +38,7 @@ namespace Atharia.Model {
         out Level level,
         out LevelSuperstate levelSuperstate,
         out Location entryLocationRet,
+        SSContext context,
         Game game,
         Superstate superstate,
         int depth) {
@@ -65,7 +66,7 @@ namespace Atharia.Model {
               game.root.EffectITerrainTileEventMutListCreate(), 0, ITerrainTileComponentMutBunch.New(level.root)));
       }
 
-      CellularAutomataTerrainGenerator.AddCircle(level.terrain, new Location(0, 0, 0), 16.0f);
+      CellularAutomataTerrainGenerator.AddCircle(context, level.terrain, new Location(0, 0, 0), 16.0f);
 
       TerrainUtils.randify(game.rand, level.terrain, 2);
 
@@ -77,7 +78,7 @@ namespace Atharia.Model {
           level.terrain.tiles[wall].elevation = 0;
         }
 
-        CellularAutomataTerrainGenerator.CellularAutomataModeIteration(level.terrain, considerCornersAdjacent);
+        CellularAutomataTerrainGenerator.CellularAutomataModeIteration(context, level.terrain, considerCornersAdjacent);
 
         foreach (var floor in ambushAreaFloors) {
           level.terrain.tiles[floor].elevation = 1;
@@ -88,7 +89,7 @@ namespace Atharia.Model {
       }
 
       // This will remove the 0-tiles and connect things.
-      CellularAutomataTerrainGenerator.FinishUp(game.rand, level.terrain, considerCornersAdjacent);
+      CellularAutomataTerrainGenerator.FinishUp(context, game.rand, level.terrain, considerCornersAdjacent);
 
       // Now fill the floors with mud
       foreach (var locationAndTile in level.terrain.tiles) {
@@ -184,6 +185,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleTrigger(
         this NestLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         string triggerName) {
@@ -251,6 +253,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleUnitTrigger(
         this NestLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit triggeringUnit,

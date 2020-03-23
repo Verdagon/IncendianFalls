@@ -37,7 +37,7 @@ namespace IncendianFalls {
 
       var impulse = game.root.EffectDefyImpulseCreate(1000);
       foreach (var postReactor in game.player.components.GetAllIImpulsePostReactor()) {
-        postReactor.AfterImpulse(game, superstate, game.player, NullIAICapabilityUC.Null, impulse.AsIImpulse());
+        postReactor.AfterImpulse(context, game, superstate, game.player, NullIAICapabilityUC.Null, impulse.AsIImpulse());
       }
       impulse.Destruct();
 

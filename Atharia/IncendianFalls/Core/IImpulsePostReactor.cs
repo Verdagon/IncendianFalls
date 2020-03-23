@@ -16,7 +16,7 @@ public interface IImpulsePostReactor {
   bool NullableIs(IImpulsePostReactor that);
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
-  Void AfterImpulse(Game game, Superstate superstate, Unit unit, IAICapabilityUC originatingCapability, IImpulse impulse);
+  Void AfterImpulse(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit unit, IAICapabilityUC originatingCapability, IImpulse impulse);
   Void Destruct();
 }
 }

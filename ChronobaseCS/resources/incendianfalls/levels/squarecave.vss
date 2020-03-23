@@ -19,6 +19,7 @@ mut struct SquareCaveLevelController {
 
   fn SimpleTrigger(
     this: SquareCaveLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggerName: Str):
@@ -28,6 +29,7 @@ mut struct SquareCaveLevelController {
 
   fn SimpleUnitTrigger(
     this: SquareCaveLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     triggeringUnit: Unit,

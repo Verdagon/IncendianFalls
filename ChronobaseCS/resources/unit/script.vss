@@ -28,6 +28,7 @@ mut struct TimeCloneAICapabilityUC {
 
   fn AfterImpulse(
       this: TimeCloneAICapabilityUC overrides IImpulsePostReactor,
+    context: $IncendianFalls.SSContext,
       game: Game,
       superstate: $Superstate,
       unit: Unit,

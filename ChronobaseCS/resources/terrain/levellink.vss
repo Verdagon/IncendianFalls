@@ -13,6 +13,7 @@ mut struct LevelLinkTTC {
 
   fn Interact(
     this: LevelLinkTTC overrides IInteractableTTC,
+    context: $IncendianFalls.SSContext,
     game: Game,
     superstate: $Superstate,
     interactingUnit: Unit,

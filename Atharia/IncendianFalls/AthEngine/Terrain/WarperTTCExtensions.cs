@@ -11,6 +11,7 @@ namespace Atharia.Model {
 
     public static string Interact(
         this WarperTTC warper,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit interactingUnit,

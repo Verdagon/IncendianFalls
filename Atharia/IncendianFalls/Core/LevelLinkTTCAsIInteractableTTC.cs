@@ -84,8 +84,8 @@ public class LevelLinkTTCAsIInteractableTTC : IInteractableTTC {
          public Void Destruct() {
     return LevelLinkTTCExtensions.Destruct(obj);
   }
-  public string Interact(Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
-    return LevelLinkTTCExtensions.Interact(obj, game, superstate, interactingUnit, containingTileLocation);
+  public string Interact(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit interactingUnit, Location containingTileLocation) {
+    return LevelLinkTTCExtensions.Interact(obj, context, game, superstate, interactingUnit, containingTileLocation);
   }
 
 }

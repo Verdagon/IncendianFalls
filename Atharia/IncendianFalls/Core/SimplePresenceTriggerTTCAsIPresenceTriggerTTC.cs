@@ -81,8 +81,8 @@ public class SimplePresenceTriggerTTCAsIPresenceTriggerTTC : IPresenceTriggerTTC
     return new SimplePresenceTriggerTTCAsIPresenceTriggerTTC(obj);
   }
 
-         public Void Trigger(Game game, Superstate superstate, Unit triggeringUnit, Location containingTileLocation) {
-    return SimplePresenceTriggerTTCExtensions.Trigger(obj, game, superstate, triggeringUnit, containingTileLocation);
+         public Void Trigger(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit triggeringUnit, Location containingTileLocation) {
+    return SimplePresenceTriggerTTCExtensions.Trigger(obj, context, game, superstate, triggeringUnit, containingTileLocation);
   }
   public Void Destruct() {
     return SimplePresenceTriggerTTCExtensions.Destruct(obj);

@@ -108,6 +108,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleTrigger(
         this DirtRoadLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         string triggerName) {
@@ -123,6 +124,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleUnitTrigger(
         this DirtRoadLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit triggeringUnit,
@@ -221,7 +223,7 @@ namespace Atharia.Model {
 0 -1 5 1 Mud
 0 -1 6 1 Mud
 0 -1 7 1 Mud
-0 0 0 1 Grass
+0 0 0 1 ObsidianFloor
 0 0 1 2 Grass
 0 0 2 1 Grass Tree
 0 0 3 1 Grass

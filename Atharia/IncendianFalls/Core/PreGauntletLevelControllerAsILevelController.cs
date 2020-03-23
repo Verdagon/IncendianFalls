@@ -69,11 +69,11 @@ public class PreGauntletLevelControllerAsILevelController : ILevelController {
   public bool ConsiderCornersAdjacent() {
     return PreGauntletLevelControllerExtensions.ConsiderCornersAdjacent(obj);
   }
-  public Void SimpleTrigger(Game game, Superstate superstate, string triggerName) {
-    return PreGauntletLevelControllerExtensions.SimpleTrigger(obj, game, superstate, triggerName);
+  public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
+    return PreGauntletLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }
-  public Void SimpleUnitTrigger(Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
-    return PreGauntletLevelControllerExtensions.SimpleUnitTrigger(obj, game, superstate, triggeringUnit, location, triggerName);
+  public Void SimpleUnitTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName) {
+    return PreGauntletLevelControllerExtensions.SimpleUnitTrigger(obj, context, game, superstate, triggeringUnit, location, triggerName);
   }
 
 }

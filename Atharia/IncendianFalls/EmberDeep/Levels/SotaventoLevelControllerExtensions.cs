@@ -63,6 +63,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void SimpleTrigger(
         this SotaventoLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         string triggerName) {
@@ -223,13 +224,14 @@ namespace Atharia.Model {
         game.AddEvent(new SetGameSpeedEvent(100).AsIGameEvent());
         var linkLocation = game.player.location;
         game.level.terrain.tiles[linkLocation].components.GetOnlyLevelLinkTTCOrNull()
-          .Interact(game, superstate, game.player, linkLocation);
+          .Interact(context, game, superstate, game.player, linkLocation);
       }
       return new Atharia.Model.Void();
     }
 
     public static Atharia.Model.Void SimpleUnitTrigger(
         this SotaventoLevelController obj,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit triggeringUnit,
