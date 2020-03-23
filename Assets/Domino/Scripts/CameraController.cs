@@ -13,20 +13,17 @@ namespace Domino {
     private Vector3 cameraEndLookAtPosition;
     private Vector3 cameraOffsetToLookAt;
 
-    public Vector3 endLookAtPosition {  get { return cameraEndLookAtPosition; } }
-
     private readonly static float cameraSpeedPerSecond = 8.0f;
 
-    public CameraController(IClock clock, GameObject camera, Vector3 initialLookAtPosition, Vector3 initialCameraOffsetToLookAt) {
+    public CameraController(IClock clock, GameObject cameraObject, Vector3 initialLookAtPosition, Vector3 initialCameraOffsetToLookAt) {
       this.clock = clock;
-      this.cameraObject = camera;
+      this.cameraObject = cameraObject;
 
       cameraEndLookAtPosition = initialLookAtPosition;
       cameraOffsetToLookAt = initialCameraOffsetToLookAt;
 
       GetOrCreateCameraAnimator().lookAtAnimation = new ConstantVector3Animation(cameraEndLookAtPosition);
       GetOrCreateCameraAnimator().offsetToLookAtAnimation = new ConstantVector3Animation(cameraOffsetToLookAt);
-      //camera.transform.FromMatrix(CalculateCameraMatrix(cameraEndLookAtPosition, cameraOffsetFromLookAt));
     }
 
     private CameraAnimator GetOrCreateCameraAnimator() {
@@ -43,15 +40,35 @@ namespace Domino {
       return animator;
     }
 
-    public void StartMovingCameraTo(Vector3 newCameraEndLookAtPosition, long durationMs) {
-      var currentCameraEndLookAtPosition = cameraEndLookAtPosition;
-      var cameraDifference = newCameraEndLookAtPosition - currentCameraEndLookAtPosition;
+    public void StartRotatingCameraTo(Vector3 new_offsetToLookAt, long durationMs) {
+      var animator = GetOrCreateCameraAnimator();
+      if (durationMs == 0) {
+        animator.lookAtAnimation =
+          new ConstantVector3Animation(new_offsetToLookAt);
+      } else {
+        var currentCameraOffsetToLookAt = cameraOffsetToLookAt;
+        var offsetToLookAtDifference = new_offsetToLookAt - currentCameraOffsetToLookAt;
+        animator.offsetToLookAtAnimation =
+            new AddVector3Animation(
+                animator.offsetToLookAtAnimation,
+                new ClampVector3Animation(
+                    clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
+                    new AddVector3Animation(
+                        new ConstantVector3Animation(offsetToLookAtDifference),
+                        new LinearVector3Animation(
+                            clock.GetTimeMs(), clock.GetTimeMs() + durationMs, -offsetToLookAtDifference, new Vector3(0, 0, 0)))));
+      }
+      cameraOffsetToLookAt = new_offsetToLookAt;
+    }
 
+    public void StartMovingCameraTo(Vector3 newCameraEndLookAtPosition, long durationMs) {
       var animator = GetOrCreateCameraAnimator();
       if (durationMs == 0) {
         animator.lookAtAnimation =
           new ConstantVector3Animation(newCameraEndLookAtPosition);
       } else {
+        var currentCameraEndLookAtPosition = cameraEndLookAtPosition;
+        var cameraDifference = newCameraEndLookAtPosition - currentCameraEndLookAtPosition;
         animator.lookAtAnimation =
             new AddVector3Animation(
                 animator.lookAtAnimation,

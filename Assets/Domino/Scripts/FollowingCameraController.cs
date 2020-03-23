@@ -102,7 +102,7 @@ namespace Domino {
         Asserts.Assert(false);
       }
 
-      var currentCameraEndLookAtPosition = cameraController.endLookAtPosition;
+      //var currentCameraEndLookAtPosition = cameraController.endLookAtPosition;
       //var currentCameraMatrix = CalculateCameraMatrix(currentCameraEndLookAtPosition);
 
       var newCameraEndLookAtPosition =

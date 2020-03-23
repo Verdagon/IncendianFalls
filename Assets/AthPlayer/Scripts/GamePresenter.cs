@@ -16,8 +16,20 @@ namespace AthPlayer {
     SlowableTimerClock timer;
     SlowableTimerClock cinematicTimer;
     SoundPlayer soundPlayer;
+
+    // resumeStaller is for GamePresenter to pay attention to, so it can tell the game
+    // to resume the other units (and player's pre-acting and post-acting things).
     ExecutionStaller resumeStaller;
+    // turnStaller is for the PlayerController to pay attention to, so it can delay the
+    // player's input.
     ExecutionStaller turnStaller;
+    // If we delay the resumeStaller but not the turnStaller, that means we just did an
+    // animation where we're okay if the player interrupts it. Don't know if any of
+    // these cases exist.
+    // If we delay the turnStaller but not the resumeStaller, that means we just did an
+    // animation where we're okay if we do more animations and stuff, we just dont want
+    // the player to act yet. Most basic case is a unit moving.
+
     GameObject thinkingIndicator;
     ISuperstructure ss;
     Game game;

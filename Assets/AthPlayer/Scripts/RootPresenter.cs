@@ -98,7 +98,7 @@ namespace AthPlayer {
           cameraTimer,
           cameraObject,
           new Vector3(0, 0, 0),
-          new Vector3(0, -10, 5));
+          new Vector3(0, -16, 8));
 
       gamePresenter =
           new GamePresenter(
