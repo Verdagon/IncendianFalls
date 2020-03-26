@@ -10,8 +10,11 @@ public struct CounterImpulseStrongMutSetCreateEffect : ICounterImpulseStrongMutS
     this.id = id;
   }
   int ICounterImpulseStrongMutSetEffect.id => id;
-  public void visit(ICounterImpulseStrongMutSetEffectVisitor visitor) {
+  public void visitICounterImpulseStrongMutSetEffect(ICounterImpulseStrongMutSetEffectVisitor visitor) {
     visitor.visitCounterImpulseStrongMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitCounterImpulseStrongMutSetEffect(this);
   }
 }
 

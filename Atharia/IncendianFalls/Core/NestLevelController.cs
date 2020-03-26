@@ -13,11 +13,11 @@ public class NestLevelController {
     this.id = id;
   }
   public NestLevelControllerIncarnation incarnation { get { return root.GetNestLevelControllerIncarnation(id); } }
-  public void AddObserver(INestLevelControllerEffectObserver observer) {
-    root.AddNestLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, INestLevelControllerEffectObserver observer) {
+    broadcaster.AddNestLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(INestLevelControllerEffectObserver observer) {
-    root.RemoveNestLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, INestLevelControllerEffectObserver observer) {
+    broadcaster.RemoveNestLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectNestLevelControllerDelete(id);

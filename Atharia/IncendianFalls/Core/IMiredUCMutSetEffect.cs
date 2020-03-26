@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface IMiredUCMutSetEffect {
+public interface IMiredUCMutSetEffect : IEffect {
   int id { get; }
-  void visit(IMiredUCMutSetEffectVisitor visitor);
+  void visitIMiredUCMutSetEffect(IMiredUCMutSetEffectVisitor visitor);
 }
 
 }

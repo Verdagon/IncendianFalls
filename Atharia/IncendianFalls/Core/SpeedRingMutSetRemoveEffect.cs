@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct SpeedRingMutSetRemoveEffect : ISpeedRingMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public SpeedRingMutSetRemoveEffect(int id, int elementId) {
+  public readonly int element;
+  public SpeedRingMutSetRemoveEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int ISpeedRingMutSetEffect.id => id;
-  public void visit(ISpeedRingMutSetEffectVisitor visitor) {
+  public void visitISpeedRingMutSetEffect(ISpeedRingMutSetEffectVisitor visitor) {
     visitor.visitSpeedRingMutSetRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSpeedRingMutSetEffect(this);
   }
 }
 

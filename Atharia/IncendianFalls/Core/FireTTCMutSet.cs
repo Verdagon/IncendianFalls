@@ -14,24 +14,24 @@ public class FireTTCMutSet {
   public FireTTCMutSetIncarnation incarnation {
     get { return root.GetFireTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IFireTTCMutSetEffectObserver observer) {
-    root.AddFireTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IFireTTCMutSetEffectObserver observer) {
+    broadcaster.AddFireTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IFireTTCMutSetEffectObserver observer) {
-    root.RemoveFireTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IFireTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveFireTTCMutSetObserver(id, observer);
   }
   public void Add(FireTTC element) {
-    root.EffectFireTTCMutSetAdd(id, element.id);
+      root.EffectFireTTCMutSetAdd(id, element.id);
   }
   public void Remove(FireTTC element) {
-    root.EffectFireTTCMutSetRemove(id, element.id);
+      root.EffectFireTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectFireTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectFireTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectFireTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(FireTTC element) {

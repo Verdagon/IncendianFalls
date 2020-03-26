@@ -13,11 +13,11 @@ public class Rand {
     this.id = id;
   }
   public RandIncarnation incarnation { get { return root.GetRandIncarnation(id); } }
-  public void AddObserver(IRandEffectObserver observer) {
-    root.AddRandObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IRandEffectObserver observer) {
+    broadcaster.AddRandObserver(id, observer);
   }
-  public void RemoveObserver(IRandEffectObserver observer) {
-    root.RemoveRandObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IRandEffectObserver observer) {
+    broadcaster.RemoveRandObserver(id, observer);
   }
   public void Delete() {
     root.EffectRandDelete(id);

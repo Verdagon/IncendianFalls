@@ -13,11 +13,11 @@ public class RavashrikeLevelController {
     this.id = id;
   }
   public RavashrikeLevelControllerIncarnation incarnation { get { return root.GetRavashrikeLevelControllerIncarnation(id); } }
-  public void AddObserver(IRavashrikeLevelControllerEffectObserver observer) {
-    root.AddRavashrikeLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IRavashrikeLevelControllerEffectObserver observer) {
+    broadcaster.AddRavashrikeLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(IRavashrikeLevelControllerEffectObserver observer) {
-    root.RemoveRavashrikeLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IRavashrikeLevelControllerEffectObserver observer) {
+    broadcaster.RemoveRavashrikeLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectRavashrikeLevelControllerDelete(id);

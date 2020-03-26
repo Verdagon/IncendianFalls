@@ -13,11 +13,11 @@ public class NoImpulse {
     this.id = id;
   }
   public NoImpulseIncarnation incarnation { get { return root.GetNoImpulseIncarnation(id); } }
-  public void AddObserver(INoImpulseEffectObserver observer) {
-    root.AddNoImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, INoImpulseEffectObserver observer) {
+    broadcaster.AddNoImpulseObserver(id, observer);
   }
-  public void RemoveObserver(INoImpulseEffectObserver observer) {
-    root.RemoveNoImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, INoImpulseEffectObserver observer) {
+    broadcaster.RemoveNoImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectNoImpulseDelete(id);

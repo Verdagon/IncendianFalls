@@ -11,8 +11,11 @@ public struct IGameEventMutListDeleteEffect : IIGameEventMutListEffect {
     this.id = id;
   }
   int IIGameEventMutListEffect.id => id;
-  public void visit(IIGameEventMutListEffectVisitor visitor) {
+  public void visitIIGameEventMutListEffect(IIGameEventMutListEffectVisitor visitor) {
     visitor.visitIGameEventMutListDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitIGameEventMutListEffect(this);
   }
 }
 

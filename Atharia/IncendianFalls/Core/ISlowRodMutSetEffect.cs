@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface ISlowRodMutSetEffect {
+public interface ISlowRodMutSetEffect : IEffect {
   int id { get; }
-  void visit(ISlowRodMutSetEffectVisitor visitor);
+  void visitISlowRodMutSetEffect(ISlowRodMutSetEffectVisitor visitor);
 }
 
 }

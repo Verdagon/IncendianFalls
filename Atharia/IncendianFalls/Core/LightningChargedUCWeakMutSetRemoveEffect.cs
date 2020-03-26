@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct LightningChargedUCWeakMutSetRemoveEffect : ILightningChargedUCWeakMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public LightningChargedUCWeakMutSetRemoveEffect(int id, int elementId) {
+  public readonly int element;
+  public LightningChargedUCWeakMutSetRemoveEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int ILightningChargedUCWeakMutSetEffect.id => id;
-  public void visit(ILightningChargedUCWeakMutSetEffectVisitor visitor) {
+  public void visitILightningChargedUCWeakMutSetEffect(ILightningChargedUCWeakMutSetEffectVisitor visitor) {
     visitor.visitLightningChargedUCWeakMutSetRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLightningChargedUCWeakMutSetEffect(this);
   }
 }
 

@@ -11,6 +11,10 @@ public class IUnitEventMutListIncarnation {
   public IUnitEventMutListIncarnation(List<IUnitEvent> list) {
     this.list = list;
   }
+
+  public IUnitEventMutListIncarnation Copy() {
+    return new IUnitEventMutListIncarnation(new List<IUnitEvent>(list));
+  }
 }
          
 }

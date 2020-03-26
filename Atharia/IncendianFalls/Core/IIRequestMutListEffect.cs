@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IIRequestMutListEffect {
+public interface IIRequestMutListEffect : IEffect {
   int id { get; }
-  void visit(IIRequestMutListEffectVisitor visitor);
+  void visitIIRequestMutListEffect(IIRequestMutListEffectVisitor visitor);
 }
 
 }

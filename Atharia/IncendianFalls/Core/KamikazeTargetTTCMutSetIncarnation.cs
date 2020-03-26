@@ -10,6 +10,10 @@ public class KamikazeTargetTTCMutSetIncarnation {
   public KamikazeTargetTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public KamikazeTargetTTCMutSetIncarnation Copy() {
+    return new KamikazeTargetTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

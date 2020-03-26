@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct FireTTCCreateEffect : IFireTTCEffect {
   public readonly int id;
-  public FireTTCCreateEffect(int id) {
+  public readonly FireTTCIncarnation incarnation;
+  public FireTTCCreateEffect(int id, FireTTCIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IFireTTCEffect.id => id;
-  public void visit(IFireTTCEffectVisitor visitor) {
+  public void visitIFireTTCEffect(IFireTTCEffectVisitor visitor) {
     visitor.visitFireTTCCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitFireTTCEffect(this);
   }
 }
 

@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct BlastRodMutSetRemoveEffect : IBlastRodMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public BlastRodMutSetRemoveEffect(int id, int elementId) {
+  public readonly int element;
+  public BlastRodMutSetRemoveEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IBlastRodMutSetEffect.id => id;
-  public void visit(IBlastRodMutSetEffectVisitor visitor) {
+  public void visitIBlastRodMutSetEffect(IBlastRodMutSetEffectVisitor visitor) {
     visitor.visitBlastRodMutSetRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBlastRodMutSetEffect(this);
   }
 }
 

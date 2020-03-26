@@ -10,6 +10,10 @@ public class AttackAICapabilityUCWeakMutSetIncarnation {
   public AttackAICapabilityUCWeakMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public AttackAICapabilityUCWeakMutSetIncarnation Copy() {
+    return new AttackAICapabilityUCWeakMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

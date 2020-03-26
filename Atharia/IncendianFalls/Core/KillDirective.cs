@@ -13,11 +13,11 @@ public class KillDirective {
     this.id = id;
   }
   public KillDirectiveIncarnation incarnation { get { return root.GetKillDirectiveIncarnation(id); } }
-  public void AddObserver(IKillDirectiveEffectObserver observer) {
-    root.AddKillDirectiveObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IKillDirectiveEffectObserver observer) {
+    broadcaster.AddKillDirectiveObserver(id, observer);
   }
-  public void RemoveObserver(IKillDirectiveEffectObserver observer) {
-    root.RemoveKillDirectiveObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IKillDirectiveEffectObserver observer) {
+    broadcaster.RemoveKillDirectiveObserver(id, observer);
   }
   public void Delete() {
     root.EffectKillDirectiveDelete(id);

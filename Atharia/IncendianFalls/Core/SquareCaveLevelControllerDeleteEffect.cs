@@ -11,8 +11,11 @@ public struct SquareCaveLevelControllerDeleteEffect : ISquareCaveLevelController
     this.id = id;
   }
   int ISquareCaveLevelControllerEffect.id => id;
-  public void visit(ISquareCaveLevelControllerEffectVisitor visitor) {
+  public void visitISquareCaveLevelControllerEffect(ISquareCaveLevelControllerEffectVisitor visitor) {
     visitor.visitSquareCaveLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSquareCaveLevelControllerEffect(this);
   }
 }
 

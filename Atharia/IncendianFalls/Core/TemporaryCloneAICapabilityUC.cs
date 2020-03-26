@@ -13,11 +13,11 @@ public class TemporaryCloneAICapabilityUC {
     this.id = id;
   }
   public TemporaryCloneAICapabilityUCIncarnation incarnation { get { return root.GetTemporaryCloneAICapabilityUCIncarnation(id); } }
-  public void AddObserver(ITemporaryCloneAICapabilityUCEffectObserver observer) {
-    root.AddTemporaryCloneAICapabilityUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITemporaryCloneAICapabilityUCEffectObserver observer) {
+    broadcaster.AddTemporaryCloneAICapabilityUCObserver(id, observer);
   }
-  public void RemoveObserver(ITemporaryCloneAICapabilityUCEffectObserver observer) {
-    root.RemoveTemporaryCloneAICapabilityUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITemporaryCloneAICapabilityUCEffectObserver observer) {
+    broadcaster.RemoveTemporaryCloneAICapabilityUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectTemporaryCloneAICapabilityUCDelete(id);

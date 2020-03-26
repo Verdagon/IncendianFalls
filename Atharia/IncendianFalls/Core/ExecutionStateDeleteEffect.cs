@@ -11,8 +11,11 @@ public struct ExecutionStateDeleteEffect : IExecutionStateEffect {
     this.id = id;
   }
   int IExecutionStateEffect.id => id;
-  public void visit(IExecutionStateEffectVisitor visitor) {
+  public void visitIExecutionStateEffect(IExecutionStateEffectVisitor visitor) {
     visitor.visitExecutionStateDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitExecutionStateEffect(this);
   }
 }
 

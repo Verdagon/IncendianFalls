@@ -14,7 +14,7 @@ public class DefyRequestAsIRequest : IRequest {
   public int GetDeterministicHashCode() { return obj.GetDeterministicHashCode(); }
   public override int GetHashCode() { return GetDeterministicHashCode(); }
        
-  public void Visit(IRequestVisitor visitor) { visitor.Visit(this); }
+  public void VisitIRequest(IRequestVisitor visitor) { visitor.VisitIRequest(this); }
 }
 public static class DefyRequestAsIRequestCaster {
   public static DefyRequestAsIRequest AsIRequest(this DefyRequest obj) {

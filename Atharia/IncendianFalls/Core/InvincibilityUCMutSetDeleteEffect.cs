@@ -10,8 +10,11 @@ public struct InvincibilityUCMutSetDeleteEffect : IInvincibilityUCMutSetEffect {
     this.id = id;
   }
   int IInvincibilityUCMutSetEffect.id => id;
-  public void visit(IInvincibilityUCMutSetEffectVisitor visitor) {
+  public void visitIInvincibilityUCMutSetEffect(IInvincibilityUCMutSetEffectVisitor visitor) {
     visitor.visitInvincibilityUCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitInvincibilityUCMutSetEffect(this);
   }
 }
 

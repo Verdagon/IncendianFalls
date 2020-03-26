@@ -14,24 +14,24 @@ public class StoneTTCMutSet {
   public StoneTTCMutSetIncarnation incarnation {
     get { return root.GetStoneTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IStoneTTCMutSetEffectObserver observer) {
-    root.AddStoneTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IStoneTTCMutSetEffectObserver observer) {
+    broadcaster.AddStoneTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IStoneTTCMutSetEffectObserver observer) {
-    root.RemoveStoneTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IStoneTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveStoneTTCMutSetObserver(id, observer);
   }
   public void Add(StoneTTC element) {
-    root.EffectStoneTTCMutSetAdd(id, element.id);
+      root.EffectStoneTTCMutSetAdd(id, element.id);
   }
   public void Remove(StoneTTC element) {
-    root.EffectStoneTTCMutSetRemove(id, element.id);
+      root.EffectStoneTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectStoneTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectStoneTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectStoneTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(StoneTTC element) {

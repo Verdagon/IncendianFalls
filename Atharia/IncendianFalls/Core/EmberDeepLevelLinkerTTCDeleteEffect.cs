@@ -11,8 +11,11 @@ public struct EmberDeepLevelLinkerTTCDeleteEffect : IEmberDeepLevelLinkerTTCEffe
     this.id = id;
   }
   int IEmberDeepLevelLinkerTTCEffect.id => id;
-  public void visit(IEmberDeepLevelLinkerTTCEffectVisitor visitor) {
+  public void visitIEmberDeepLevelLinkerTTCEffect(IEmberDeepLevelLinkerTTCEffectVisitor visitor) {
     visitor.visitEmberDeepLevelLinkerTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitEmberDeepLevelLinkerTTCEffect(this);
   }
 }
 

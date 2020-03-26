@@ -14,24 +14,24 @@ public class ArmorMutSet {
   public ArmorMutSetIncarnation incarnation {
     get { return root.GetArmorMutSetIncarnation(id); }
   }
-  public void AddObserver(IArmorMutSetEffectObserver observer) {
-    root.AddArmorMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IArmorMutSetEffectObserver observer) {
+    broadcaster.AddArmorMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IArmorMutSetEffectObserver observer) {
-    root.RemoveArmorMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IArmorMutSetEffectObserver observer) {
+    broadcaster.RemoveArmorMutSetObserver(id, observer);
   }
   public void Add(Armor element) {
-    root.EffectArmorMutSetAdd(id, element.id);
+      root.EffectArmorMutSetAdd(id, element.id);
   }
   public void Remove(Armor element) {
-    root.EffectArmorMutSetRemove(id, element.id);
+      root.EffectArmorMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectArmorMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectArmorMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectArmorMutSetRemove(id, element);
     }
   }
   public bool Contains(Armor element) {

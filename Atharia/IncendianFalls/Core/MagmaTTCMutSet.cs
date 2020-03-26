@@ -14,24 +14,24 @@ public class MagmaTTCMutSet {
   public MagmaTTCMutSetIncarnation incarnation {
     get { return root.GetMagmaTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IMagmaTTCMutSetEffectObserver observer) {
-    root.AddMagmaTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMagmaTTCMutSetEffectObserver observer) {
+    broadcaster.AddMagmaTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IMagmaTTCMutSetEffectObserver observer) {
-    root.RemoveMagmaTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMagmaTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveMagmaTTCMutSetObserver(id, observer);
   }
   public void Add(MagmaTTC element) {
-    root.EffectMagmaTTCMutSetAdd(id, element.id);
+      root.EffectMagmaTTCMutSetAdd(id, element.id);
   }
   public void Remove(MagmaTTC element) {
-    root.EffectMagmaTTCMutSetRemove(id, element.id);
+      root.EffectMagmaTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectMagmaTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectMagmaTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectMagmaTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(MagmaTTC element) {

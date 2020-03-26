@@ -36,12 +36,19 @@ object StructGenerator {
     }
   }
 
-  def generateRootMembers(opt: ChronobaseOptions, struct: StructS): String = {
-    val structCSType = toCS(struct.tyype)
-    s"""
-       |  readonly SortedDictionary<int, List<I${structCSType}EffectObserver>> observersFor${structCSType} =
-       |      new SortedDictionary<int, List<I${structCSType}EffectObserver>>();
-       |""".stripMargin +
-      MutStructEffects.generateRootMembers(opt, struct)
+  def generateEffectBroadcasterMembers(opt: ChronobaseOptions, struct: StructS): String = {
+    MutStructEffects.generateEffectBroadcasterMembers(struct)
+  }
+
+  def generateGlobalVisitorInterfaceMethods(struct: StructS) = {
+    MutStructEffects.generateGlobalVisitorInterfaceMethods(struct)
+  }
+
+  def generateEffectBroadcasterMethods(struct: StructS) = {
+    MutStructEffects.generateEffectBroadcasterMethods(struct)
+  }
+
+  def generateEffectApplierMethods(struct: StructS): String = {
+    MutStructEffects.generateEffectApplierMethods(struct)
   }
 }

@@ -10,8 +10,11 @@ public struct CliffTTCMutSetDeleteEffect : ICliffTTCMutSetEffect {
     this.id = id;
   }
   int ICliffTTCMutSetEffect.id => id;
-  public void visit(ICliffTTCMutSetEffectVisitor visitor) {
+  public void visitICliffTTCMutSetEffect(ICliffTTCMutSetEffectVisitor visitor) {
     visitor.visitCliffTTCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitCliffTTCMutSetEffect(this);
   }
 }
 

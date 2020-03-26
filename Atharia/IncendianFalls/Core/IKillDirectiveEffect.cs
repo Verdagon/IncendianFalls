@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IKillDirectiveEffect {
+public interface IKillDirectiveEffect : IEffect {
   int id { get; }
-  void visit(IKillDirectiveEffectVisitor visitor);
+  void visitIKillDirectiveEffect(IKillDirectiveEffectVisitor visitor);
 }
        
 }

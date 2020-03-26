@@ -10,6 +10,10 @@ public class BideAICapabilityUCMutSetIncarnation {
   public BideAICapabilityUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public BideAICapabilityUCMutSetIncarnation Copy() {
+    return new BideAICapabilityUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

@@ -13,11 +13,11 @@ public class BideAICapabilityUC {
     this.id = id;
   }
   public BideAICapabilityUCIncarnation incarnation { get { return root.GetBideAICapabilityUCIncarnation(id); } }
-  public void AddObserver(IBideAICapabilityUCEffectObserver observer) {
-    root.AddBideAICapabilityUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBideAICapabilityUCEffectObserver observer) {
+    broadcaster.AddBideAICapabilityUCObserver(id, observer);
   }
-  public void RemoveObserver(IBideAICapabilityUCEffectObserver observer) {
-    root.RemoveBideAICapabilityUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBideAICapabilityUCEffectObserver observer) {
+    broadcaster.RemoveBideAICapabilityUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectBideAICapabilityUCDelete(id);

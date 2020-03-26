@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct SlowRodCreateEffect : ISlowRodEffect {
   public readonly int id;
-  public SlowRodCreateEffect(int id) {
+  public readonly SlowRodIncarnation incarnation;
+  public SlowRodCreateEffect(int id, SlowRodIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int ISlowRodEffect.id => id;
-  public void visit(ISlowRodEffectVisitor visitor) {
+  public void visitISlowRodEffect(ISlowRodEffectVisitor visitor) {
     visitor.visitSlowRodCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSlowRodEffect(this);
   }
 }
 

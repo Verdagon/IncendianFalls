@@ -11,8 +11,11 @@ public struct AncientTownLevelControllerDeleteEffect : IAncientTownLevelControll
     this.id = id;
   }
   int IAncientTownLevelControllerEffect.id => id;
-  public void visit(IAncientTownLevelControllerEffectVisitor visitor) {
+  public void visitIAncientTownLevelControllerEffect(IAncientTownLevelControllerEffectVisitor visitor) {
     visitor.visitAncientTownLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitAncientTownLevelControllerEffect(this);
   }
 }
 

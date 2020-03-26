@@ -13,11 +13,11 @@ public class PreGauntletLevelController {
     this.id = id;
   }
   public PreGauntletLevelControllerIncarnation incarnation { get { return root.GetPreGauntletLevelControllerIncarnation(id); } }
-  public void AddObserver(IPreGauntletLevelControllerEffectObserver observer) {
-    root.AddPreGauntletLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IPreGauntletLevelControllerEffectObserver observer) {
+    broadcaster.AddPreGauntletLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(IPreGauntletLevelControllerEffectObserver observer) {
-    root.RemovePreGauntletLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IPreGauntletLevelControllerEffectObserver observer) {
+    broadcaster.RemovePreGauntletLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectPreGauntletLevelControllerDelete(id);

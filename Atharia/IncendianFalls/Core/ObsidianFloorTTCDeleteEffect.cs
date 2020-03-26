@@ -11,8 +11,11 @@ public struct ObsidianFloorTTCDeleteEffect : IObsidianFloorTTCEffect {
     this.id = id;
   }
   int IObsidianFloorTTCEffect.id => id;
-  public void visit(IObsidianFloorTTCEffectVisitor visitor) {
+  public void visitIObsidianFloorTTCEffect(IObsidianFloorTTCEffectVisitor visitor) {
     visitor.visitObsidianFloorTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitObsidianFloorTTCEffect(this);
   }
 }
 

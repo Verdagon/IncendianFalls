@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface ISlowRodEffect {
+public interface ISlowRodEffect : IEffect {
   int id { get; }
-  void visit(ISlowRodEffectVisitor visitor);
+  void visitISlowRodEffect(ISlowRodEffectVisitor visitor);
 }
        
 }

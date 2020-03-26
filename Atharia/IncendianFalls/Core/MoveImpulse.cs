@@ -13,11 +13,11 @@ public class MoveImpulse {
     this.id = id;
   }
   public MoveImpulseIncarnation incarnation { get { return root.GetMoveImpulseIncarnation(id); } }
-  public void AddObserver(IMoveImpulseEffectObserver observer) {
-    root.AddMoveImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMoveImpulseEffectObserver observer) {
+    broadcaster.AddMoveImpulseObserver(id, observer);
   }
-  public void RemoveObserver(IMoveImpulseEffectObserver observer) {
-    root.RemoveMoveImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMoveImpulseEffectObserver observer) {
+    broadcaster.RemoveMoveImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectMoveImpulseDelete(id);

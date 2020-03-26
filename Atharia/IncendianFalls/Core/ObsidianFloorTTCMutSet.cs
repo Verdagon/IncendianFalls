@@ -14,24 +14,24 @@ public class ObsidianFloorTTCMutSet {
   public ObsidianFloorTTCMutSetIncarnation incarnation {
     get { return root.GetObsidianFloorTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IObsidianFloorTTCMutSetEffectObserver observer) {
-    root.AddObsidianFloorTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IObsidianFloorTTCMutSetEffectObserver observer) {
+    broadcaster.AddObsidianFloorTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IObsidianFloorTTCMutSetEffectObserver observer) {
-    root.RemoveObsidianFloorTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IObsidianFloorTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveObsidianFloorTTCMutSetObserver(id, observer);
   }
   public void Add(ObsidianFloorTTC element) {
-    root.EffectObsidianFloorTTCMutSetAdd(id, element.id);
+      root.EffectObsidianFloorTTCMutSetAdd(id, element.id);
   }
   public void Remove(ObsidianFloorTTC element) {
-    root.EffectObsidianFloorTTCMutSetRemove(id, element.id);
+      root.EffectObsidianFloorTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectObsidianFloorTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectObsidianFloorTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectObsidianFloorTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(ObsidianFloorTTC element) {

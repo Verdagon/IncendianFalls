@@ -10,8 +10,11 @@ public struct UnitWeakMutSetCreateEffect : IUnitWeakMutSetEffect {
     this.id = id;
   }
   int IUnitWeakMutSetEffect.id => id;
-  public void visit(IUnitWeakMutSetEffectVisitor visitor) {
+  public void visitIUnitWeakMutSetEffect(IUnitWeakMutSetEffectVisitor visitor) {
     visitor.visitUnitWeakMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitUnitWeakMutSetEffect(this);
   }
 }
 

@@ -11,8 +11,11 @@ public struct KamikazeTargetTTCDeleteEffect : IKamikazeTargetTTCEffect {
     this.id = id;
   }
   int IKamikazeTargetTTCEffect.id => id;
-  public void visit(IKamikazeTargetTTCEffectVisitor visitor) {
+  public void visitIKamikazeTargetTTCEffect(IKamikazeTargetTTCEffectVisitor visitor) {
     visitor.visitKamikazeTargetTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitKamikazeTargetTTCEffect(this);
   }
 }
 

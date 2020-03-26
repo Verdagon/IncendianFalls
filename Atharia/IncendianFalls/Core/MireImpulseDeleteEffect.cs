@@ -11,8 +11,11 @@ public struct MireImpulseDeleteEffect : IMireImpulseEffect {
     this.id = id;
   }
   int IMireImpulseEffect.id => id;
-  public void visit(IMireImpulseEffectVisitor visitor) {
+  public void visitIMireImpulseEffect(IMireImpulseEffectVisitor visitor) {
     visitor.visitMireImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitMireImpulseEffect(this);
   }
 }
 

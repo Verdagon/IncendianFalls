@@ -10,8 +10,11 @@ public struct GuardAICapabilityUCMutSetCreateEffect : IGuardAICapabilityUCMutSet
     this.id = id;
   }
   int IGuardAICapabilityUCMutSetEffect.id => id;
-  public void visit(IGuardAICapabilityUCMutSetEffectVisitor visitor) {
+  public void visitIGuardAICapabilityUCMutSetEffect(IGuardAICapabilityUCMutSetEffectVisitor visitor) {
     visitor.visitGuardAICapabilityUCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitGuardAICapabilityUCMutSetEffect(this);
   }
 }
 

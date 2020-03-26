@@ -11,8 +11,11 @@ public struct RavaNestTTCDeleteEffect : IRavaNestTTCEffect {
     this.id = id;
   }
   int IRavaNestTTCEffect.id => id;
-  public void visit(IRavaNestTTCEffectVisitor visitor) {
+  public void visitIRavaNestTTCEffect(IRavaNestTTCEffectVisitor visitor) {
     visitor.visitRavaNestTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitRavaNestTTCEffect(this);
   }
 }
 

@@ -10,8 +10,11 @@ public struct LightningChargingUCMutSetCreateEffect : ILightningChargingUCMutSet
     this.id = id;
   }
   int ILightningChargingUCMutSetEffect.id => id;
-  public void visit(ILightningChargingUCMutSetEffectVisitor visitor) {
+  public void visitILightningChargingUCMutSetEffect(ILightningChargingUCMutSetEffectVisitor visitor) {
     visitor.visitLightningChargingUCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLightningChargingUCMutSetEffect(this);
   }
 }
 

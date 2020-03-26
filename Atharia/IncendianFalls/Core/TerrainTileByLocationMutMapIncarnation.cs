@@ -11,6 +11,10 @@ public class TerrainTileByLocationMutMapIncarnation {
   public TerrainTileByLocationMutMapIncarnation(SortedDictionary<Location, int> map) {
     this.map = map;
   }
+
+  public TerrainTileByLocationMutMapIncarnation Copy() {
+    return new TerrainTileByLocationMutMapIncarnation(new SortedDictionary<Location, int>(map));
+  }
 }
          
 }

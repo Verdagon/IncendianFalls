@@ -10,6 +10,10 @@ public class MagmaTTCMutSetIncarnation {
   public MagmaTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public MagmaTTCMutSetIncarnation Copy() {
+    return new MagmaTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

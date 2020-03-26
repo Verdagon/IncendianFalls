@@ -10,8 +10,11 @@ public struct MudTTCMutSetCreateEffect : IMudTTCMutSetEffect {
     this.id = id;
   }
   int IMudTTCMutSetEffect.id => id;
-  public void visit(IMudTTCMutSetEffectVisitor visitor) {
+  public void visitIMudTTCMutSetEffect(IMudTTCMutSetEffectVisitor visitor) {
     visitor.visitMudTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitMudTTCMutSetEffect(this);
   }
 }
 

@@ -7,7 +7,7 @@ namespace Atharia.Model {
 public interface IGameEvent {
   string DStr();
   int GetDeterministicHashCode();
-  void Visit(IGameEventVisitor visitor);
+  void VisitIGameEvent(IGameEventVisitor visitor);
 }
 
 }

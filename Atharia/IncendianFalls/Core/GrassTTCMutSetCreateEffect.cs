@@ -10,8 +10,11 @@ public struct GrassTTCMutSetCreateEffect : IGrassTTCMutSetEffect {
     this.id = id;
   }
   int IGrassTTCMutSetEffect.id => id;
-  public void visit(IGrassTTCMutSetEffectVisitor visitor) {
+  public void visitIGrassTTCMutSetEffect(IGrassTTCMutSetEffectVisitor visitor) {
     visitor.visitGrassTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitGrassTTCMutSetEffect(this);
   }
 }
 

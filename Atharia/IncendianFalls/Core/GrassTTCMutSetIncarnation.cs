@@ -10,6 +10,10 @@ public class GrassTTCMutSetIncarnation {
   public GrassTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public GrassTTCMutSetIncarnation Copy() {
+    return new GrassTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

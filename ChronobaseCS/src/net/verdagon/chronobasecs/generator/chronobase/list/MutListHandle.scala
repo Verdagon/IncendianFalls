@@ -33,11 +33,11 @@ object MutListHandle {
            |  public ${listName}Incarnation incarnation {
            |    get { return root.Get${listName}Incarnation(id); }
            |  }
-           |  public void AddObserver(I${listName}EffectObserver observer) {
-           |    root.Add${listName}Observer(id, observer);
+           |  public void AddObserver(EffectBroadcaster broadcaster, I${listName}EffectObserver observer) {
+           |    broadcaster.Add${listName}Observer(id, observer);
            |  }
-           |  public void RemoveObserver(I${listName}EffectObserver observer) {
-           |    root.Remove${listName}Observer(id, observer);
+           |  public void RemoveObserver(EffectBroadcaster broadcaster, I${listName}EffectObserver observer) {
+           |    broadcaster.Remove${listName}Observer(id, observer);
            |  }
            |  public void Delete() {
            |    root.Effect${listName}Delete(id);
@@ -65,8 +65,8 @@ object MutListHandle {
            |  public void Add(${elementCSType} element) {
            |""".stripMargin +
         (elementType.kind.mutability match {
-          case MutableS => s"    root.Effect${listName}Add(id, element.id);"
-          case ImmutableS => s"    root.Effect${listName}Add(id, element);"
+          case MutableS => s"    root.Effect${listName}Add(id, Count, element.id);"
+          case ImmutableS => s"    root.Effect${listName}Add(id, Count, element);"
         }) +
         s"""
            |  }

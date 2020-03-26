@@ -10,8 +10,11 @@ public struct TerrainTileWeakMutSetDeleteEffect : ITerrainTileWeakMutSetEffect {
     this.id = id;
   }
   int ITerrainTileWeakMutSetEffect.id => id;
-  public void visit(ITerrainTileWeakMutSetEffectVisitor visitor) {
+  public void visitITerrainTileWeakMutSetEffect(ITerrainTileWeakMutSetEffectVisitor visitor) {
     visitor.visitTerrainTileWeakMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTerrainTileWeakMutSetEffect(this);
   }
 }
 

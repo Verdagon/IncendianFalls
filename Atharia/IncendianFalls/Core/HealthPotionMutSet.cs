@@ -14,24 +14,24 @@ public class HealthPotionMutSet {
   public HealthPotionMutSetIncarnation incarnation {
     get { return root.GetHealthPotionMutSetIncarnation(id); }
   }
-  public void AddObserver(IHealthPotionMutSetEffectObserver observer) {
-    root.AddHealthPotionMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IHealthPotionMutSetEffectObserver observer) {
+    broadcaster.AddHealthPotionMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IHealthPotionMutSetEffectObserver observer) {
-    root.RemoveHealthPotionMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IHealthPotionMutSetEffectObserver observer) {
+    broadcaster.RemoveHealthPotionMutSetObserver(id, observer);
   }
   public void Add(HealthPotion element) {
-    root.EffectHealthPotionMutSetAdd(id, element.id);
+      root.EffectHealthPotionMutSetAdd(id, element.id);
   }
   public void Remove(HealthPotion element) {
-    root.EffectHealthPotionMutSetRemove(id, element.id);
+      root.EffectHealthPotionMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectHealthPotionMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectHealthPotionMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectHealthPotionMutSetRemove(id, element);
     }
   }
   public bool Contains(HealthPotion element) {

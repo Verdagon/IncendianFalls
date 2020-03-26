@@ -11,8 +11,11 @@ public struct TerrainTileDeleteEffect : ITerrainTileEffect {
     this.id = id;
   }
   int ITerrainTileEffect.id => id;
-  public void visit(ITerrainTileEffectVisitor visitor) {
+  public void visitITerrainTileEffect(ITerrainTileEffectVisitor visitor) {
     visitor.visitTerrainTileDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTerrainTileEffect(this);
   }
 }
 

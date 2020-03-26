@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct AttackAICapabilityUCCreateEffect : IAttackAICapabilityUCEffect {
   public readonly int id;
-  public AttackAICapabilityUCCreateEffect(int id) {
+  public readonly AttackAICapabilityUCIncarnation incarnation;
+  public AttackAICapabilityUCCreateEffect(int id, AttackAICapabilityUCIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IAttackAICapabilityUCEffect.id => id;
-  public void visit(IAttackAICapabilityUCEffectVisitor visitor) {
+  public void visitIAttackAICapabilityUCEffect(IAttackAICapabilityUCEffectVisitor visitor) {
     visitor.visitAttackAICapabilityUCCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitAttackAICapabilityUCEffect(this);
   }
 }
 

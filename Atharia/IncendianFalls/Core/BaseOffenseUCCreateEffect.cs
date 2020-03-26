@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct BaseOffenseUCCreateEffect : IBaseOffenseUCEffect {
   public readonly int id;
-  public BaseOffenseUCCreateEffect(int id) {
+  public readonly BaseOffenseUCIncarnation incarnation;
+  public BaseOffenseUCCreateEffect(int id, BaseOffenseUCIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IBaseOffenseUCEffect.id => id;
-  public void visit(IBaseOffenseUCEffectVisitor visitor) {
+  public void visitIBaseOffenseUCEffect(IBaseOffenseUCEffectVisitor visitor) {
     visitor.visitBaseOffenseUCCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBaseOffenseUCEffect(this);
   }
 }
 

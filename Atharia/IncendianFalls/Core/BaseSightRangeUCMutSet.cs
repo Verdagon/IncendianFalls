@@ -14,24 +14,24 @@ public class BaseSightRangeUCMutSet {
   public BaseSightRangeUCMutSetIncarnation incarnation {
     get { return root.GetBaseSightRangeUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IBaseSightRangeUCMutSetEffectObserver observer) {
-    root.AddBaseSightRangeUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBaseSightRangeUCMutSetEffectObserver observer) {
+    broadcaster.AddBaseSightRangeUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IBaseSightRangeUCMutSetEffectObserver observer) {
-    root.RemoveBaseSightRangeUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBaseSightRangeUCMutSetEffectObserver observer) {
+    broadcaster.RemoveBaseSightRangeUCMutSetObserver(id, observer);
   }
   public void Add(BaseSightRangeUC element) {
-    root.EffectBaseSightRangeUCMutSetAdd(id, element.id);
+      root.EffectBaseSightRangeUCMutSetAdd(id, element.id);
   }
   public void Remove(BaseSightRangeUC element) {
-    root.EffectBaseSightRangeUCMutSetRemove(id, element.id);
+      root.EffectBaseSightRangeUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectBaseSightRangeUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectBaseSightRangeUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectBaseSightRangeUCMutSetRemove(id, element);
     }
   }
   public bool Contains(BaseSightRangeUC element) {

@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface ISpeedRingStrongMutSetEffect {
+public interface ISpeedRingStrongMutSetEffect : IEffect {
   int id { get; }
-  void visit(ISpeedRingStrongMutSetEffectVisitor visitor);
+  void visitISpeedRingStrongMutSetEffect(ISpeedRingStrongMutSetEffectVisitor visitor);
 }
 
 }

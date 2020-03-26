@@ -14,24 +14,24 @@ public class BaseMovementTimeUCMutSet {
   public BaseMovementTimeUCMutSetIncarnation incarnation {
     get { return root.GetBaseMovementTimeUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IBaseMovementTimeUCMutSetEffectObserver observer) {
-    root.AddBaseMovementTimeUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBaseMovementTimeUCMutSetEffectObserver observer) {
+    broadcaster.AddBaseMovementTimeUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IBaseMovementTimeUCMutSetEffectObserver observer) {
-    root.RemoveBaseMovementTimeUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBaseMovementTimeUCMutSetEffectObserver observer) {
+    broadcaster.RemoveBaseMovementTimeUCMutSetObserver(id, observer);
   }
   public void Add(BaseMovementTimeUC element) {
-    root.EffectBaseMovementTimeUCMutSetAdd(id, element.id);
+      root.EffectBaseMovementTimeUCMutSetAdd(id, element.id);
   }
   public void Remove(BaseMovementTimeUC element) {
-    root.EffectBaseMovementTimeUCMutSetRemove(id, element.id);
+      root.EffectBaseMovementTimeUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectBaseMovementTimeUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectBaseMovementTimeUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectBaseMovementTimeUCMutSetRemove(id, element);
     }
   }
   public bool Contains(BaseMovementTimeUC element) {

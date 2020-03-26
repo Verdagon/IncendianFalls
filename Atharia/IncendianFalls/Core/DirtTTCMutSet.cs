@@ -14,24 +14,24 @@ public class DirtTTCMutSet {
   public DirtTTCMutSetIncarnation incarnation {
     get { return root.GetDirtTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IDirtTTCMutSetEffectObserver observer) {
-    root.AddDirtTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IDirtTTCMutSetEffectObserver observer) {
+    broadcaster.AddDirtTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IDirtTTCMutSetEffectObserver observer) {
-    root.RemoveDirtTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IDirtTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveDirtTTCMutSetObserver(id, observer);
   }
   public void Add(DirtTTC element) {
-    root.EffectDirtTTCMutSetAdd(id, element.id);
+      root.EffectDirtTTCMutSetAdd(id, element.id);
   }
   public void Remove(DirtTTC element) {
-    root.EffectDirtTTCMutSetRemove(id, element.id);
+      root.EffectDirtTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectDirtTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectDirtTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectDirtTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(DirtTTC element) {

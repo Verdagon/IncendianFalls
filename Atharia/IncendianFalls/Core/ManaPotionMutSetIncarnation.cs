@@ -10,6 +10,10 @@ public class ManaPotionMutSetIncarnation {
   public ManaPotionMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public ManaPotionMutSetIncarnation Copy() {
+    return new ManaPotionMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

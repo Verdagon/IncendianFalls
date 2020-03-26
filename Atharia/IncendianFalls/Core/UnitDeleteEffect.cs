@@ -11,8 +11,11 @@ public struct UnitDeleteEffect : IUnitEffect {
     this.id = id;
   }
   int IUnitEffect.id => id;
-  public void visit(IUnitEffectVisitor visitor) {
+  public void visitIUnitEffect(IUnitEffectVisitor visitor) {
     visitor.visitUnitDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitUnitEffect(this);
   }
 }
 

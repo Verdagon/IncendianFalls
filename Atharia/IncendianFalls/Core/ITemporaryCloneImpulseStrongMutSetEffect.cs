@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface ITemporaryCloneImpulseStrongMutSetEffect {
+public interface ITemporaryCloneImpulseStrongMutSetEffect : IEffect {
   int id { get; }
-  void visit(ITemporaryCloneImpulseStrongMutSetEffectVisitor visitor);
+  void visitITemporaryCloneImpulseStrongMutSetEffect(ITemporaryCloneImpulseStrongMutSetEffectVisitor visitor);
 }
 
 }

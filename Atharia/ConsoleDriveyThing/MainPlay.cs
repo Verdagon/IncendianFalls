@@ -6,7 +6,7 @@ using IncendianFalls;
 
 namespace ConsoleDriveyThing {
   public class MainPlay {
-    static Unit FindUnitAt(Superstructure ss, Game game, Location destination) {
+    static Unit FindUnitAt(Game game, Location destination) {
       foreach (var unit in game.level.units) {
         if (unit.location == destination) {
           return unit;
@@ -15,19 +15,20 @@ namespace ConsoleDriveyThing {
       return Unit.Null;
     }
 
-    static void HandleDirection(Superstructure ss, Game game, Location destination) {
-      var unit = FindUnitAt(ss, game, destination);
+    static List<IEffect> HandleDirection(Superstructure serverSS, Game game, Location destination) {
+      var unit = FindUnitAt(game, destination);
       if (unit.Exists()) {
-        string result = ss.RequestAttack(game.id, unit.id);
+        var (effects, result) = serverSS.RequestAttack(game.id, unit.id);
         if (result == "") {
-          return;
+          return effects;
         }
       }
 
-      string moveResult = ss.RequestMove(game.id, destination);
+      var (moveEffects, moveResult) = serverSS.RequestMove(game.id, destination);
       if (moveResult.Length > 0) {
         Console.WriteLine(moveResult);
       }
+      return moveEffects;
     }
 
     static bool KeyToDirection(ConsoleKey key, out Location direction) {
@@ -64,86 +65,82 @@ namespace ConsoleDriveyThing {
       return false;
     }
 
+    private static List<IEffect> FilterRelevantEffects(List<IEffect> sourceEffects) {
+      var result = new List<IEffect>();
+      foreach (var sourceEffect in sourceEffects) {
+        if (sourceEffect is RandSetRandEffect)
+          continue;
+        result.Add(sourceEffect);
+      }
+      return result;
+    }
+
+    private delegate void IDisplay();
+    private static void ApplyEffectsAndDisplay(Game game, List<IEffect> effects, bool slowly, IDisplay display) {
+      int currentActionNum = game.actionNum;
+
+      game.root.Transact(delegate () {
+        bool anyEffectsSinceLastDisplay = false;
+        var applier = new EffectApplier(game.root);
+        for (int i = 0; i < effects.Count; i++) {
+          if (game.actionNum != currentActionNum) {
+            if (slowly) {
+              System.Threading.Thread.Sleep(100);
+              display();
+            }
+            currentActionNum = game.actionNum;
+          }
+          Console.WriteLine("Applying " + effects[i]);
+          applier.Apply(effects[i]);
+          anyEffectsSinceLastDisplay = true;
+        }
+
+        if (anyEffectsSinceLastDisplay) {
+          display();
+        }
+        return 0;
+      });
+    }
+
     public static void Play() {
       var timestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
 
       //int random = (int)timestamp;
       //int random = 134337; // Stairs right next to you
       int random = 1525224206;
-      Superstructure ss = new Superstructure(new ConsoleLoggers.ConsoleLogger());
-      using (new ReplayLogger(ss, new string[] { "Latest.sslog", timestamp + ".sslog" })) {
-
-        var root = ss.GetRoot();
-
-        //root.Unlock();
-        //for (int l = 0; l < GenerationCommon.TOTAL_NUM_LEVELS_BEFORE_BOSS; l++) {
-        //  float[] distTotals = new float[7];
-        //  for (int r = 0; r < 1000; r++) {
-        //    int[] dist =
-        //        GenerationCommon.DetermineUnitsForLevel(
-        //            root.EffectRandCreate(random), l, GenerationCommon.NUM_UNITS_PER_LEVEL);
-        //    for (int i = 0; i < 7; i++) {
-        //      distTotals[i] += dist[i];
-        //    }
-        //  }
-        //  for (int i = 0; i < 7; i++) {
-        //    distTotals[i] /= 1000;
-        //  }
-
-        //  Console.WriteLine(
-        //      l + "\t" +
-        //      "av: " + Math.Round(distTotals[0], 2) + "\t" +
-        //      "ra: " + Math.Round(distTotals[1], 2) + "\t" +
-        //      "dr: " + Math.Round(distTotals[2], 2) + "\t" +
-        //      "lo: " + Math.Round(distTotals[3], 2) + "\t" +
-        //      "yo: " + Math.Round(distTotals[4], 2) + "\t" +
-        //      "sp: " + Math.Round(distTotals[5], 2) + "\t" +
-        //      "mo: " + Math.Round(distTotals[6], 2));
-        //}
-        //root.Lock();
-        //return;
+      Superstructure serverSS = new Superstructure(new ConsoleLoggers.ConsoleLogger());
+      Root clientRoot = new Root(new ConsoleLoggers.ConsoleLogger());
+      using (new ReplayLogger(serverSS, new string[] { "Latest.sslog", timestamp + ".sslog" })) {
 
         bool squareLevelsOnly = true;
         //bool squareLevelsOnly = false;
-        var game = ss.RequestSetupGauntletGame(random, squareLevelsOnly);
-        var superstate = ss.GetSuperstate(game);
+        var (setupEffects, serverGame) = serverSS.RequestSetupGauntletGame(random, squareLevelsOnly);
+        clientRoot.Transact(delegate () {
+          foreach (var effect in FilterRelevantEffects(setupEffects)) {
+            Console.WriteLine("Applying " + effect);
+            new EffectApplier(clientRoot).Apply(effect);
+          }
+          return 0;
+        });
+        var game = clientRoot.GetGame(serverGame.id);
 
-        game.level.units.AddObserver(new ConsoleLoggers.UnitsLogger());
         Location cursor = game.player.location;
 
         bool cursorMode = false;
         bool terrainAndFeaturesMode = false;
         bool timeAnchoring = false;
 
-        Displayer.Display(game, cursorMode, cursor, new Vec2(0, 0), terrainAndFeaturesMode);
+        IDisplay display = () => Displayer.Display(game, cursorMode, cursor, new Vec2(0, 0), terrainAndFeaturesMode);
 
         for (bool running = true; running;) {
           Stopwatch sw = new Stopwatch();
           sw.Start();
-
-          for (bool crunching = true; crunching;) {
-            if (game.player.Exists() && !game.player.alive) {
-              return;
-            }
-
-            switch (superstate.GetStateType()) {
-              case MultiverseStateType.kAfterUnitAction:
-              case MultiverseStateType.kBeforeEnemyAction:
-              case MultiverseStateType.kPreActingDetail:
-              case MultiverseStateType.kPostActingDetail:
-              case MultiverseStateType.kBetweenUnits:
-                ss.RequestResume(game.id);
-                break;
-              default:
-                crunching = false;
-                break;
-            }
-          }
-
+          var (continuousResumeEffects, continuousResumeStatus) = serverSS.RequestContinuousResume(game.id);
+          Asserts.Assert(continuousResumeStatus == "");
           sw.Stop();
           Console.WriteLine("Total elapsed time for turn: " + sw.Elapsed.TotalMilliseconds);
 
-          Displayer.Display(game, cursorMode, cursor, new Vec2(0, 0), terrainAndFeaturesMode);
+          ApplyEffectsAndDisplay(game, FilterRelevantEffects(continuousResumeEffects), true, display);
 
           if (game.player.Exists() && !game.player.alive) {
             break;
@@ -151,155 +148,143 @@ namespace ConsoleDriveyThing {
 
           float gameTimeBeforeAction = game.time;
 
-          switch (superstate.GetStateType()) {
-            case MultiverseStateType.kTimeshiftingBackward:
-            case MultiverseStateType.kTimeshiftingCloneMoving:
-            case MultiverseStateType.kTimeshiftingAfterCloneMoved:
-              System.Threading.Thread.Sleep(300);
-              string resultT = ss.RequestTimeShift(game.id);
-              if (resultT != "") {
-                Console.WriteLine(resultT);
+          var key = Console.ReadKey();
+          // For some reason, doing this after an input makes the terminal print
+          // much smoother on my mac.
+          System.Threading.Thread.Sleep(33);
+
+          Console.WriteLine();
+
+          switch (key.Key) {
+            case ConsoleKey.Delete:
+              running = false;
+              break;
+            case ConsoleKey.I:
+              var (interactEffects, result) = serverSS.RequestInteract(game.id);
+              ApplyEffectsAndDisplay(game, FilterRelevantEffects(interactEffects), true, display);
+              if (result != "") {
+                Console.WriteLine(result);
               }
               break;
-            case MultiverseStateType.kBeforePlayerResume:
-              System.Threading.Thread.Sleep(300);
-              string resultF = ss.RequestFollowDirective(game.id);
-              if (resultF != "") {
-                Console.WriteLine(resultF);
+            case ConsoleKey.Backspace:
+              terrainAndFeaturesMode = !terrainAndFeaturesMode;
+              break;
+            case ConsoleKey.T:
+              var (timeShiftEffects, timeShiftResult) = serverSS.RequestTimeShift(game.id);
+              ApplyEffectsAndDisplay(game, FilterRelevantEffects(timeShiftEffects), true, display);
+              if (timeShiftResult.Length > 0) {
+                Console.WriteLine(timeShiftResult);
               }
               break;
-            case MultiverseStateType.kBeforePlayerInput:
-              var key = Console.ReadKey();
-              // For some reason, doing this after an input makes the terminal print
-              // much smoother on my mac.
-              System.Threading.Thread.Sleep(33);
-
-              Console.WriteLine();
-
-              switch (key.Key) {
-                case ConsoleKey.Delete:
-                  running = false;
-                  break;
-                case ConsoleKey.I:
-                  string result = ss.RequestInteract(game.id);
-                  if (result != "") {
-                    Console.WriteLine(result);
+            case ConsoleKey.B:
+              Asserts.Assert(!timeAnchoring);
+              timeAnchoring = true;
+              break;
+            case ConsoleKey.L:
+              cursorMode = !cursorMode;
+              cursor = game.player.location;
+              break;
+            case ConsoleKey.N:
+              if (cursorMode) {
+                if (timeAnchoring) {
+                  var (tamEffects, resultTAM) = serverSS.RequestTimeAnchorMove(game.id, cursor);
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(tamEffects), true, display);
+                  if (resultTAM != "") {
+                    Console.WriteLine(resultTAM);
+                    timeAnchoring = false;
                   }
-                  break;
-                case ConsoleKey.Backspace:
-                  terrainAndFeaturesMode = !terrainAndFeaturesMode;
-                  break;
-                case ConsoleKey.T:
-                  string timeShiftResult = ss.RequestTimeShift(game.id);
-                  if (timeShiftResult.Length > 0) {
-                    Console.WriteLine(timeShiftResult);
+                } else {
+                  var (moveEffects, resultM) = serverSS.RequestMove(game.id, cursor);
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(moveEffects), true, display);
+                  if (resultM != "") {
+                    Console.WriteLine(resultM);
                   }
-                  break;
-                case ConsoleKey.B:
-                  Asserts.Assert(!timeAnchoring);
-                  timeAnchoring = true;
-                  break;
-                case ConsoleKey.L:
-                  cursorMode = !cursorMode;
-                  cursor = game.player.location;
-                  break;
-                case ConsoleKey.N:
-                  if (cursorMode) {
-                    if (timeAnchoring) {
-                      string resultTAM = ss.RequestTimeAnchorMove(game.id, cursor);
-                      if (resultTAM != "") {
-                        Console.WriteLine(resultTAM);
-                        timeAnchoring = false;
-                      }
-                    } else {
-                      string resultM = ss.RequestMove(game.id, cursor);
-                      if (resultM != "") {
-                        Console.WriteLine(resultM);
-                      }
-                    }
-                  } else {
-                    Console.WriteLine("Not navigating!");
-                  }
-                  break;
-                case ConsoleKey.F:
-                  if (cursorMode) {
-                    var unitThere = FindUnitAt(ss, game, cursor);
-                    if (!unitThere.Exists()) {
-                      Console.WriteLine("No unit there!");
-                    } else {
-                      string fireResult = ss.RequestFire(game.id, unitThere.id);
-                      if (fireResult.Length > 0) {
-                        Console.WriteLine(fireResult);
-                      }
-                    }
-                  } else {
-                    Console.WriteLine("Not firing!");
-                  }
-                  break;
-                case ConsoleKey.M:
-                  if (cursorMode) {
-                    var unitThere = FindUnitAt(ss, game, cursor);
-                    if (!unitThere.Exists()) {
-                      Console.WriteLine("No unit there!");
-                    } else {
-                      string fireResult = ss.RequestMire(game.id, unitThere.id);
-                      if (fireResult.Length > 0) {
-                        Console.WriteLine(fireResult);
-                      }
-                    }
-                  } else {
-                    Console.WriteLine("Not firing!");
-                  }
-                  break;
-                case ConsoleKey.S:
-                  string resultD = ss.RequestDefy(game.id);
-                  if (resultD != "") {
-                    Console.WriteLine(resultD);
-                  }
-                  ss.RequestResume(game.id);
-                  break;
-                case ConsoleKey.P:
-                  var counterResult = ss.RequestCounter(game.id);
-                  if (counterResult.Length > 0) {
-                    Console.WriteLine(counterResult);
-                  }
-                  ss.RequestResume(game.id);
-                  break;
-                default:
-                  Location direction;
-                  if (KeyToDirection(key.Key, out direction)) {
-                    if (cursorMode) {
-                      cursor =
-                          new Location(
-                              cursor.groupX + direction.groupX,
-                              cursor.groupY + direction.groupY,
-                              cursor.indexInGroup + direction.indexInGroup);
-                    } else if (timeAnchoring) {
-                      var destination =
-                          new Location(
-                              game.player.location.groupX + direction.groupX,
-                              game.player.location.groupY + direction.groupY,
-                              game.player.location.indexInGroup + direction.indexInGroup);
-                      string resultA = ss.RequestTimeAnchorMove(game.id, destination);
-                      if (resultA != "") {
-                        Console.WriteLine(resultA);
-                      }
-                      timeAnchoring = false;
-                    } else {
-                      HandleDirection(
-                          ss,
-                          game,
-                          new Location(
-                              game.player.location.groupX + direction.groupX,
-                              game.player.location.groupY + direction.groupY,
-                              game.player.location.indexInGroup + direction.indexInGroup));
-                    }
-                  } else {
-                    Console.WriteLine("Unknown key: " + key.Key);
-                  }
-                  break;
+                }
+              } else {
+                Console.WriteLine("Not navigating!");
               }
-
+              break;
+            case ConsoleKey.F:
+              if (cursorMode) {
+                var unitThere = FindUnitAt(game, cursor);
+                if (!unitThere.Exists()) {
+                  Console.WriteLine("No unit there!");
+                } else {
+                  var (fireEffects, fireResult) = serverSS.RequestFire(game.id, unitThere.id);
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(fireEffects), true, display);
+                  if (fireResult.Length > 0) {
+                    Console.WriteLine(fireResult);
+                  }
+                }
+              } else {
+                Console.WriteLine("Not firing!");
+              }
+              break;
+            case ConsoleKey.M:
+              if (cursorMode) {
+                var unitThere = FindUnitAt(game, cursor);
+                if (!unitThere.Exists()) {
+                  Console.WriteLine("No unit there!");
+                } else {
+                  var (mireEffects, mireResult) = serverSS.RequestMire(game.id, unitThere.id);
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(mireEffects), true, display);
+                  if (mireResult.Length > 0) {
+                    Console.WriteLine(mireResult);
+                  }
+                }
+              } else {
+                Console.WriteLine("Not firing!");
+              }
+              break;
+            case ConsoleKey.S:
+              var (defyEffects, resultD) = serverSS.RequestDefy(game.id);
+              ApplyEffectsAndDisplay(game, FilterRelevantEffects(defyEffects), true, display);
+              if (resultD != "") {
+                Console.WriteLine(resultD);
+              }
+              break;
+            case ConsoleKey.P:
+              var (counterEffects, counterResult) = serverSS.RequestCounter(game.id);
+              ApplyEffectsAndDisplay(game, FilterRelevantEffects(counterEffects), true, display);
+              if (counterResult.Length > 0) {
+                Console.WriteLine(counterResult);
+              }
+              break;
+            default:
+              Location direction;
+              if (KeyToDirection(key.Key, out direction)) {
+                if (cursorMode) {
+                  cursor =
+                      new Location(
+                          cursor.groupX + direction.groupX,
+                          cursor.groupY + direction.groupY,
+                          cursor.indexInGroup + direction.indexInGroup);
+                } else if (timeAnchoring) {
+                  var destination =
+                      new Location(
+                          game.player.location.groupX + direction.groupX,
+                          game.player.location.groupY + direction.groupY,
+                          game.player.location.indexInGroup + direction.indexInGroup);
+                  var (tamEffects, resultA) = serverSS.RequestTimeAnchorMove(game.id, destination);
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(tamEffects), true, display);
+                  if (resultA != "") {
+                    Console.WriteLine(resultA);
+                  }
+                  timeAnchoring = false;
+                } else {
+                  var directionEffects =
+                  HandleDirection(
+                      serverSS,
+                      game,
+                      new Location(
+                          game.player.location.groupX + direction.groupX,
+                          game.player.location.groupY + direction.groupY,
+                          game.player.location.indexInGroup + direction.indexInGroup));
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(directionEffects), true, display);
+                }
+              } else {
+                Console.WriteLine("Unknown key: " + key.Key);
+              }
               break;
           }
         }

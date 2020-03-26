@@ -10,8 +10,11 @@ public struct SorcerousUCMutSetCreateEffect : ISorcerousUCMutSetEffect {
     this.id = id;
   }
   int ISorcerousUCMutSetEffect.id => id;
-  public void visit(ISorcerousUCMutSetEffectVisitor visitor) {
+  public void visitISorcerousUCMutSetEffect(ISorcerousUCMutSetEffectVisitor visitor) {
     visitor.visitSorcerousUCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSorcerousUCMutSetEffect(this);
   }
 }
 

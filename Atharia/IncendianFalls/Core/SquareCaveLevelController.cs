@@ -13,11 +13,11 @@ public class SquareCaveLevelController {
     this.id = id;
   }
   public SquareCaveLevelControllerIncarnation incarnation { get { return root.GetSquareCaveLevelControllerIncarnation(id); } }
-  public void AddObserver(ISquareCaveLevelControllerEffectObserver observer) {
-    root.AddSquareCaveLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISquareCaveLevelControllerEffectObserver observer) {
+    broadcaster.AddSquareCaveLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(ISquareCaveLevelControllerEffectObserver observer) {
-    root.RemoveSquareCaveLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISquareCaveLevelControllerEffectObserver observer) {
+    broadcaster.RemoveSquareCaveLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectSquareCaveLevelControllerDelete(id);

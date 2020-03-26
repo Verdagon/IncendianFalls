@@ -13,11 +13,11 @@ public class SotaventoLevelController {
     this.id = id;
   }
   public SotaventoLevelControllerIncarnation incarnation { get { return root.GetSotaventoLevelControllerIncarnation(id); } }
-  public void AddObserver(ISotaventoLevelControllerEffectObserver observer) {
-    root.AddSotaventoLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISotaventoLevelControllerEffectObserver observer) {
+    broadcaster.AddSotaventoLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(ISotaventoLevelControllerEffectObserver observer) {
-    root.RemoveSotaventoLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISotaventoLevelControllerEffectObserver observer) {
+    broadcaster.RemoveSotaventoLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectSotaventoLevelControllerDelete(id);

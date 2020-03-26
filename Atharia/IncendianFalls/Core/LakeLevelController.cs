@@ -13,11 +13,11 @@ public class LakeLevelController {
     this.id = id;
   }
   public LakeLevelControllerIncarnation incarnation { get { return root.GetLakeLevelControllerIncarnation(id); } }
-  public void AddObserver(ILakeLevelControllerEffectObserver observer) {
-    root.AddLakeLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ILakeLevelControllerEffectObserver observer) {
+    broadcaster.AddLakeLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(ILakeLevelControllerEffectObserver observer) {
-    root.RemoveLakeLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ILakeLevelControllerEffectObserver observer) {
+    broadcaster.RemoveLakeLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectLakeLevelControllerDelete(id);

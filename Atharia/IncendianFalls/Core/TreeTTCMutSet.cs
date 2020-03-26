@@ -14,24 +14,24 @@ public class TreeTTCMutSet {
   public TreeTTCMutSetIncarnation incarnation {
     get { return root.GetTreeTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(ITreeTTCMutSetEffectObserver observer) {
-    root.AddTreeTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITreeTTCMutSetEffectObserver observer) {
+    broadcaster.AddTreeTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ITreeTTCMutSetEffectObserver observer) {
-    root.RemoveTreeTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITreeTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveTreeTTCMutSetObserver(id, observer);
   }
   public void Add(TreeTTC element) {
-    root.EffectTreeTTCMutSetAdd(id, element.id);
+      root.EffectTreeTTCMutSetAdd(id, element.id);
   }
   public void Remove(TreeTTC element) {
-    root.EffectTreeTTCMutSetRemove(id, element.id);
+      root.EffectTreeTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectTreeTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectTreeTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectTreeTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(TreeTTC element) {

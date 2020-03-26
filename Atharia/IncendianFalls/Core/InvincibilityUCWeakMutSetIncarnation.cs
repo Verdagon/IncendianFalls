@@ -10,6 +10,10 @@ public class InvincibilityUCWeakMutSetIncarnation {
   public InvincibilityUCWeakMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public InvincibilityUCWeakMutSetIncarnation Copy() {
+    return new InvincibilityUCWeakMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

@@ -11,8 +11,11 @@ public struct KillDirectiveDeleteEffect : IKillDirectiveEffect {
     this.id = id;
   }
   int IKillDirectiveEffect.id => id;
-  public void visit(IKillDirectiveEffectVisitor visitor) {
+  public void visitIKillDirectiveEffect(IKillDirectiveEffectVisitor visitor) {
     visitor.visitKillDirectiveDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitKillDirectiveEffect(this);
   }
 }
 

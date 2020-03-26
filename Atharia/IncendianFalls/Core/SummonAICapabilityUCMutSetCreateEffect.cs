@@ -10,8 +10,11 @@ public struct SummonAICapabilityUCMutSetCreateEffect : ISummonAICapabilityUCMutS
     this.id = id;
   }
   int ISummonAICapabilityUCMutSetEffect.id => id;
-  public void visit(ISummonAICapabilityUCMutSetEffectVisitor visitor) {
+  public void visitISummonAICapabilityUCMutSetEffect(ISummonAICapabilityUCMutSetEffectVisitor visitor) {
     visitor.visitSummonAICapabilityUCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSummonAICapabilityUCMutSetEffect(this);
   }
 }
 

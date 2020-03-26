@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct GlaiveStrongMutSetRemoveEffect : IGlaiveStrongMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public GlaiveStrongMutSetRemoveEffect(int id, int elementId) {
+  public readonly int element;
+  public GlaiveStrongMutSetRemoveEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IGlaiveStrongMutSetEffect.id => id;
-  public void visit(IGlaiveStrongMutSetEffectVisitor visitor) {
+  public void visitIGlaiveStrongMutSetEffect(IGlaiveStrongMutSetEffectVisitor visitor) {
     visitor.visitGlaiveStrongMutSetRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitGlaiveStrongMutSetEffect(this);
   }
 }
 

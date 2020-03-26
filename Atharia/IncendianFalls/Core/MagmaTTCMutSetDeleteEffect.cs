@@ -10,8 +10,11 @@ public struct MagmaTTCMutSetDeleteEffect : IMagmaTTCMutSetEffect {
     this.id = id;
   }
   int IMagmaTTCMutSetEffect.id => id;
-  public void visit(IMagmaTTCMutSetEffectVisitor visitor) {
+  public void visitIMagmaTTCMutSetEffect(IMagmaTTCMutSetEffectVisitor visitor) {
     visitor.visitMagmaTTCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitMagmaTTCMutSetEffect(this);
   }
 }
 

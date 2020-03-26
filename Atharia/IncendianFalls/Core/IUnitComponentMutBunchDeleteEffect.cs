@@ -11,8 +11,11 @@ public struct IUnitComponentMutBunchDeleteEffect : IIUnitComponentMutBunchEffect
     this.id = id;
   }
   int IIUnitComponentMutBunchEffect.id => id;
-  public void visit(IIUnitComponentMutBunchEffectVisitor visitor) {
+  public void visitIIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffectVisitor visitor) {
     visitor.visitIUnitComponentMutBunchDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitIUnitComponentMutBunchEffect(this);
   }
 }
 

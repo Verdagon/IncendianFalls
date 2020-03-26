@@ -14,24 +14,24 @@ public class WanderAICapabilityUCMutSet {
   public WanderAICapabilityUCMutSetIncarnation incarnation {
     get { return root.GetWanderAICapabilityUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IWanderAICapabilityUCMutSetEffectObserver observer) {
-    root.AddWanderAICapabilityUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IWanderAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.AddWanderAICapabilityUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IWanderAICapabilityUCMutSetEffectObserver observer) {
-    root.RemoveWanderAICapabilityUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IWanderAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.RemoveWanderAICapabilityUCMutSetObserver(id, observer);
   }
   public void Add(WanderAICapabilityUC element) {
-    root.EffectWanderAICapabilityUCMutSetAdd(id, element.id);
+      root.EffectWanderAICapabilityUCMutSetAdd(id, element.id);
   }
   public void Remove(WanderAICapabilityUC element) {
-    root.EffectWanderAICapabilityUCMutSetRemove(id, element.id);
+      root.EffectWanderAICapabilityUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectWanderAICapabilityUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectWanderAICapabilityUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectWanderAICapabilityUCMutSetRemove(id, element);
     }
   }
   public bool Contains(WanderAICapabilityUC element) {

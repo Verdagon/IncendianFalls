@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IPreActingUCWeakMutBunchIncarnation {
+public class IPreActingUCWeakMutBunchIncarnation : IIPreActingUCWeakMutBunchEffectVisitor {
   public readonly int membersDoomedUCWeakMutSet;
   public readonly int membersMiredUCWeakMutSet;
   public readonly int membersInvincibilityUCWeakMutSet;
@@ -25,6 +25,25 @@ public class IPreActingUCWeakMutBunchIncarnation {
     this.membersCounteringUCWeakMutSet = membersCounteringUCWeakMutSet;
     this.membersAttackAICapabilityUCWeakMutSet = membersAttackAICapabilityUCWeakMutSet;
   }
+  public IPreActingUCWeakMutBunchIncarnation Copy() {
+    return new IPreActingUCWeakMutBunchIncarnation(
+membersDoomedUCWeakMutSet,
+membersMiredUCWeakMutSet,
+membersInvincibilityUCWeakMutSet,
+membersDefyingUCWeakMutSet,
+membersCounteringUCWeakMutSet,
+membersAttackAICapabilityUCWeakMutSet    );
+  }
+
+  public void visitIPreActingUCWeakMutBunchCreateEffect(IPreActingUCWeakMutBunchCreateEffect e) {}
+  public void visitIPreActingUCWeakMutBunchDeleteEffect(IPreActingUCWeakMutBunchDeleteEffect e) {}
+
+
+
+
+
+
+  public void ApplyEffect(IIPreActingUCWeakMutBunchEffect effect) { effect.visitIIPreActingUCWeakMutBunchEffect(this); }
 }
 
 }

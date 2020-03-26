@@ -31,9 +31,9 @@ object MutMapEffects {
 
     val ieffectDefinition =
         s"""
-           |public interface ${ieffectName} {
+           |public interface ${ieffectName} : IEffect {
            |  int id { get; }
-           |  void visit(${visitorName} visitor);
+           |  void visit${ieffectName}(${visitorName} visitor);
            |}
            |""".stripMargin
 
@@ -55,8 +55,11 @@ object MutMapEffects {
            |    this.id = id;
            |  }
            |  int ${ieffectName}.id => id;
-           |  public void visit(${visitorName} visitor) {
+           |  public void visit${ieffectName}(${visitorName} visitor) {
            |    visitor.visit${createEffectName}(this);
+           |  }
+           |  public void visitIEffect(IEffectVisitor visitor) {
+           |    visitor.visit${mapName}Effect(this);
            |  }
            |}
            |""".stripMargin
@@ -69,8 +72,11 @@ object MutMapEffects {
            |    this.id = id;
            |  }
            |  int ${ieffectName}.id => id;
-           |  public void visit(${visitorName} visitor) {
+           |  public void visit${ieffectName}(${visitorName} visitor) {
            |    visitor.visit${deleteEffectName}(this);
+           |  }
+           |  public void visitIEffect(IEffectVisitor visitor) {
+           |    visitor.visit${mapName}Effect(this);
            |  }
            |}
            |""".stripMargin
@@ -87,8 +93,11 @@ object MutMapEffects {
            |    this.value = value;
            |  }
            |  int ${ieffectName}.id => id;
-           |  public void visit(${visitorName} visitor) {
+           |  public void visit${ieffectName}(${visitorName} visitor) {
            |    visitor.visit${addEffectName}(this);
+           |  }
+           |  public void visitIEffect(IEffectVisitor visitor) {
+           |    visitor.visit${mapName}Effect(this);
            |  }
            |}
            |""".stripMargin
@@ -103,8 +112,11 @@ object MutMapEffects {
            |    this.key = key;
            |  }
            |  int ${ieffectName}.id => id;
-           |  public void visit(${visitorName} visitor) {
+           |  public void visit${ieffectName}(${visitorName} visitor) {
            |    visitor.visit${removeEffectName}(this);
+           |  }
+           |  public void visitIEffect(IEffectVisitor visitor) {
+           |    visitor.visit${mapName}Effect(this);
            |  }
            |}
            |""".stripMargin
@@ -134,5 +146,81 @@ object MutMapEffects {
            |""".stripMargin
       })
       .mkString("")
+  }
+
+  def generateGlobalVisitorInterfaceMethods(map: MapS) = {
+    val MapS(mapName, MutableS, keyType, elementType) = map
+
+    val ieffectName = s"I${mapName}Effect"
+
+    s"void visit${mapName}Effect(${ieffectName} effect);\n"
+  }
+
+  def generateEffectBroadcasterMethods(map: MapS) = {
+    val MapS(mapName, MutableS, keyType, elementType) = map
+
+    val mapCSType = toCS(map.tyype)
+    val ieffectName = s"I${mapName}Effect"
+
+    s"""
+       |  public void visit${mapName}Effect(${ieffectName} effect) {
+       |    if (observersFor${mapCSType}.TryGetValue(effect.id, out var observers)) {
+       |      foreach (var observer in new List<I${mapCSType}EffectObserver>(observers)) {
+       |        observer.On${mapCSType}Effect(effect);
+       |      }
+       |    }
+       |  }
+       |    public void Add${mapName}Observer(int id, I${mapName}EffectObserver observer) {
+       |      List<I${mapName}EffectObserver> obsies;
+       |      if (!observersFor${mapName}.TryGetValue(id, out obsies)) {
+       |        obsies = new List<I${mapName}EffectObserver>();
+       |      }
+       |      obsies.Add(observer);
+       |      observersFor${mapName}[id] = obsies;
+       |    }
+       |    public void Remove${mapName}Observer(int id, I${mapName}EffectObserver observer) {
+       |      if (observersFor${mapName}.ContainsKey(id)) {
+       |        var map = observersFor${mapName}[id];
+       |        map.Remove(observer);
+       |        if (map.Count == 0) {
+       |          observersFor${mapName}.Remove(id);
+       |        }
+       |      } else {
+       |        throw new Exception("Couldnt find!");
+       |      }
+       |    }
+       |""".stripMargin
+  }
+
+  def generateEffectApplierMethods(map: MapS): String = {
+    val MapS(mapName, MutableS, keyType, elementType) = map
+
+    val createEffectName = s"${mapName}CreateEffect"
+    val deleteEffectName = s"${mapName}DeleteEffect"
+    val addEffectName = s"${mapName}AddEffect"
+    val removeEffectName = s"${mapName}RemoveEffect"
+    val elementCSType = toCS(elementType)
+    val ieffectName = s"I${mapName}Effect"
+
+    s"""
+       |    public void visit${mapName}Effect(I${mapName}Effect effect) { effect.visit${ieffectName}(this); }
+       |    public void visit${createEffectName}(${createEffectName} effect) {
+       |      var list = root.Effect${mapName}Create();
+       |      // If this fails, then we have to add a translation layer.
+       |      // We shouldn't allow the user to specify the internal ID, because that's
+       |      // core to a bunch of optimizations (such as how it's a generational index).
+       |      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+       |    }
+       |    public void visit${deleteEffectName}(${deleteEffectName} effect) {
+       |      root.Effect${mapName}Delete(effect.id);
+       |    }
+       |    public void visit${addEffectName}(${addEffectName} effect) {
+       |      root.Effect${mapName}Add(effect.id, effect.key, effect.value);
+       |    }
+       |    public void visit${removeEffectName}(${removeEffectName} effect) {
+       |      root.CheckUnlocked();
+       |      root.Effect${mapName}Remove(effect.id, effect.key);
+       |    }
+     """.stripMargin
   }
 }

@@ -10,8 +10,11 @@ public struct KamikazeAICapabilityUCMutSetCreateEffect : IKamikazeAICapabilityUC
     this.id = id;
   }
   int IKamikazeAICapabilityUCMutSetEffect.id => id;
-  public void visit(IKamikazeAICapabilityUCMutSetEffectVisitor visitor) {
+  public void visitIKamikazeAICapabilityUCMutSetEffect(IKamikazeAICapabilityUCMutSetEffectVisitor visitor) {
     visitor.visitKamikazeAICapabilityUCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitKamikazeAICapabilityUCMutSetEffect(this);
   }
 }
 

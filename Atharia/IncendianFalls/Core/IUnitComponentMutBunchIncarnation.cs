@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IUnitComponentMutBunchIncarnation {
+public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVisitor {
   public readonly int membersTutorialDefyCounterUCMutSet;
   public readonly int membersLightningChargingUCMutSet;
   public readonly int membersWanderAICapabilityUCMutSet;
@@ -94,6 +94,71 @@ public class IUnitComponentMutBunchIncarnation {
     this.membersBaseOffenseUCMutSet = membersBaseOffenseUCMutSet;
     this.membersBaseDefenseUCMutSet = membersBaseDefenseUCMutSet;
   }
+  public IUnitComponentMutBunchIncarnation Copy() {
+    return new IUnitComponentMutBunchIncarnation(
+membersTutorialDefyCounterUCMutSet,
+membersLightningChargingUCMutSet,
+membersWanderAICapabilityUCMutSet,
+membersTemporaryCloneAICapabilityUCMutSet,
+membersSummonAICapabilityUCMutSet,
+membersKamikazeAICapabilityUCMutSet,
+membersGuardAICapabilityUCMutSet,
+membersTimeCloneAICapabilityUCMutSet,
+membersDoomedUCMutSet,
+membersMiredUCMutSet,
+membersAttackAICapabilityUCMutSet,
+membersCounteringUCMutSet,
+membersLightningChargedUCMutSet,
+membersInvincibilityUCMutSet,
+membersDefyingUCMutSet,
+membersBideAICapabilityUCMutSet,
+membersBaseSightRangeUCMutSet,
+membersBaseMovementTimeUCMutSet,
+membersBaseCombatTimeUCMutSet,
+membersManaPotionMutSet,
+membersHealthPotionMutSet,
+membersSpeedRingMutSet,
+membersGlaiveMutSet,
+membersSlowRodMutSet,
+membersBlastRodMutSet,
+membersArmorMutSet,
+membersSorcerousUCMutSet,
+membersBaseOffenseUCMutSet,
+membersBaseDefenseUCMutSet    );
+  }
+
+  public void visitIUnitComponentMutBunchCreateEffect(IUnitComponentMutBunchCreateEffect e) {}
+  public void visitIUnitComponentMutBunchDeleteEffect(IUnitComponentMutBunchDeleteEffect e) {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public void ApplyEffect(IIUnitComponentMutBunchEffect effect) { effect.visitIIUnitComponentMutBunchEffect(this); }
 }
 
 }

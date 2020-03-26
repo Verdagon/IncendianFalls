@@ -7,17 +7,20 @@ namespace Atharia.Model {
 
 public struct ExecutionStateSetActingUnitEffect : IExecutionStateEffect {
   public readonly int id;
-  public readonly Unit newValue;
+  public readonly int newValue;
   public ExecutionStateSetActingUnitEffect(
       int id,
-      Unit newValue) {
+      int newValue) {
     this.id = id;
     this.newValue = newValue;
   }
   int IExecutionStateEffect.id => id;
 
-  public void visit(IExecutionStateEffectVisitor visitor) {
+  public void visitIExecutionStateEffect(IExecutionStateEffectVisitor visitor) {
     visitor.visitExecutionStateSetActingUnitEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitExecutionStateEffect(this);
   }
 }
 

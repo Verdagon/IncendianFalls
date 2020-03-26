@@ -10,8 +10,11 @@ public struct TutorialDefyCounterUCMutSetCreateEffect : ITutorialDefyCounterUCMu
     this.id = id;
   }
   int ITutorialDefyCounterUCMutSetEffect.id => id;
-  public void visit(ITutorialDefyCounterUCMutSetEffectVisitor visitor) {
+  public void visitITutorialDefyCounterUCMutSetEffect(ITutorialDefyCounterUCMutSetEffectVisitor visitor) {
     visitor.visitTutorialDefyCounterUCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTutorialDefyCounterUCMutSetEffect(this);
   }
 }
 

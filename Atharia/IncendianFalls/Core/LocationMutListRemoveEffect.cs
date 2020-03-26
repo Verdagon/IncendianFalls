@@ -7,14 +7,17 @@ namespace Atharia.Model {
 
 public struct LocationMutListRemoveEffect : ILocationMutListEffect {
   public readonly int id;
-  public readonly int elementId;
-  public LocationMutListRemoveEffect(int id, int elementId) {
+  public readonly int index;
+  public LocationMutListRemoveEffect(int id, int index) {
     this.id = id;
-    this.elementId = elementId;
+    this.index = index;
   }
   int ILocationMutListEffect.id => id;
-  public void visit(ILocationMutListEffectVisitor visitor) {
+  public void visitILocationMutListEffect(ILocationMutListEffectVisitor visitor) {
     visitor.visitLocationMutListRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLocationMutListEffect(this);
   }
 }
 

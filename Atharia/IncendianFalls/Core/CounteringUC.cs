@@ -13,11 +13,11 @@ public class CounteringUC {
     this.id = id;
   }
   public CounteringUCIncarnation incarnation { get { return root.GetCounteringUCIncarnation(id); } }
-  public void AddObserver(ICounteringUCEffectObserver observer) {
-    root.AddCounteringUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICounteringUCEffectObserver observer) {
+    broadcaster.AddCounteringUCObserver(id, observer);
   }
-  public void RemoveObserver(ICounteringUCEffectObserver observer) {
-    root.RemoveCounteringUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICounteringUCEffectObserver observer) {
+    broadcaster.RemoveCounteringUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectCounteringUCDelete(id);

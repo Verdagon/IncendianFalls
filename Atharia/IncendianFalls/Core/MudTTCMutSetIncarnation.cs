@@ -10,6 +10,10 @@ public class MudTTCMutSetIncarnation {
   public MudTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public MudTTCMutSetIncarnation Copy() {
+    return new MudTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

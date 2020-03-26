@@ -10,6 +10,10 @@ public class GlaiveMutSetIncarnation {
   public GlaiveMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public GlaiveMutSetIncarnation Copy() {
+    return new GlaiveMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

@@ -10,8 +10,11 @@ public struct LevelMutSetDeleteEffect : ILevelMutSetEffect {
     this.id = id;
   }
   int ILevelMutSetEffect.id => id;
-  public void visit(ILevelMutSetEffectVisitor visitor) {
+  public void visitILevelMutSetEffect(ILevelMutSetEffectVisitor visitor) {
     visitor.visitLevelMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLevelMutSetEffect(this);
   }
 }
 

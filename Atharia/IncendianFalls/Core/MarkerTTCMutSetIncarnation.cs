@@ -10,6 +10,10 @@ public class MarkerTTCMutSetIncarnation {
   public MarkerTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public MarkerTTCMutSetIncarnation Copy() {
+    return new MarkerTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

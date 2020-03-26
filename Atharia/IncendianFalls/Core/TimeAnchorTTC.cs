@@ -13,11 +13,11 @@ public class TimeAnchorTTC {
     this.id = id;
   }
   public TimeAnchorTTCIncarnation incarnation { get { return root.GetTimeAnchorTTCIncarnation(id); } }
-  public void AddObserver(ITimeAnchorTTCEffectObserver observer) {
-    root.AddTimeAnchorTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITimeAnchorTTCEffectObserver observer) {
+    broadcaster.AddTimeAnchorTTCObserver(id, observer);
   }
-  public void RemoveObserver(ITimeAnchorTTCEffectObserver observer) {
-    root.RemoveTimeAnchorTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITimeAnchorTTCEffectObserver observer) {
+    broadcaster.RemoveTimeAnchorTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectTimeAnchorTTCDelete(id);

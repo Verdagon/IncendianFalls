@@ -11,8 +11,11 @@ public struct IImpulseStrongMutBunchDeleteEffect : IIImpulseStrongMutBunchEffect
     this.id = id;
   }
   int IIImpulseStrongMutBunchEffect.id => id;
-  public void visit(IIImpulseStrongMutBunchEffectVisitor visitor) {
+  public void visitIIImpulseStrongMutBunchEffect(IIImpulseStrongMutBunchEffectVisitor visitor) {
     visitor.visitIImpulseStrongMutBunchDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitIImpulseStrongMutBunchEffect(this);
   }
 }
 

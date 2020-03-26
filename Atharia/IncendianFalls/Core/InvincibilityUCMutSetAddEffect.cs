@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct InvincibilityUCMutSetAddEffect : IInvincibilityUCMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public InvincibilityUCMutSetAddEffect(int id, int elementId) {
+  public readonly int element;
+  public InvincibilityUCMutSetAddEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IInvincibilityUCMutSetEffect.id => id;
-  public void visit(IInvincibilityUCMutSetEffectVisitor visitor) {
+  public void visitIInvincibilityUCMutSetEffect(IInvincibilityUCMutSetEffectVisitor visitor) {
     visitor.visitInvincibilityUCMutSetAddEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitInvincibilityUCMutSetEffect(this);
   }
 }
 

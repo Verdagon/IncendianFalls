@@ -49,6 +49,7 @@ object MutMapRootMethods {
        |    public ${mapName} Effect${mapName}Create() {
        |      CheckUnlocked();
        |      var id = NewId();
+       |      Asserts.Assert(!rootIncarnation.incarnations${mapName}.ContainsKey(id));
        |      EffectInternalCreate${mapName}(
        |          id,
        |          rootIncarnation.version,
@@ -72,12 +73,12 @@ object MutMapRootMethods {
        |
            |""".stripMargin
       } else "") +
-      s"""      effects${mapName}CreateEffect.Add(effect);
+      s"""      NotifyEffect(effect);
        |    }
        |    public void Effect${mapName}Delete(int id) {
        |      CheckUnlocked();
        |      var effect = new ${mapName}DeleteEffect(id);
-       |      effects${mapName}DeleteEffect.Add(effect);
+       |      NotifyEffect(effect);
        |      var versionAndIncarnation = rootIncarnation.incarnations${mapName}[id];
        |""".stripMargin +
       (if (opt.hash) {
@@ -124,7 +125,7 @@ object MutMapRootMethods {
            |""".stripMargin
       } else "") +
       s"""      }
-       |      effects${mapName}AddEffect.Add(effect);
+       |      NotifyEffect(effect);
        |    }
        """.stripMargin +
     s"""
@@ -163,87 +164,8 @@ object MutMapRootMethods {
            |""".stripMargin
       } else "") +
       s"""      }
-       |      effects${mapName}RemoveEffect.Add(effect);
+       |      NotifyEffect(effect);
        |    }
-       |    public void Add${mapName}Observer(int id, I${mapName}EffectObserver observer) {
-       |      List<I${mapName}EffectObserver> obsies;
-       |      if (!observersFor${mapName}.TryGetValue(id, out obsies)) {
-       |        obsies = new List<I${mapName}EffectObserver>();
-       |      }
-       |      obsies.Add(observer);
-       |      observersFor${mapName}[id] = obsies;
-       |    }
-       |""".stripMargin +
-    s"""
-       |    public void Remove${mapName}Observer(int id, I${mapName}EffectObserver observer) {
-       |      if (observersFor${mapName}.ContainsKey(id)) {
-       |        var map = observersFor${mapName}[id];
-       |        map.Remove(observer);
-       |        if (map.Count == 0) {
-       |          observersFor${mapName}.Remove(id);
-       |        }
-       |      } else {
-       |        throw new Exception("Couldnt find!");
-       |      }
-       |    }
-       |""".stripMargin +
-    generateBroadcastings(map)
-  }
-
-  def generateBroadcastings(map: MapS): String = {
-    val MapS(mapName, MutableS, keyType, elementType) = map
-
-    val mapCSType = toCS(map.tyype)
-
-    val observerName = s"I${mapName}EffectObserver"
-    val createEffectName = s"${mapName}CreateEffect"
-    val deleteEffectName = s"${mapName}DeleteEffect"
-    val addEffectName = s"${mapName}AddEffect"
-    val removeEffectName = s"${mapName}RemoveEffect"
-
-    // Delete has to be first. This is so it can clear away all those
-    // observers observing this object, so they don't have to remove
-    // themselves, and if something is ressurrected via revert, the
-    // observers for the old existence won't be notified.
-    s"""
-       |  public void Broadcast${mapCSType}Effects(
-       |      SortedDictionary<int, List<I${mapCSType}EffectObserver>> observers) {
-       |    foreach (var effect in effects${deleteEffectName}) {
-       |      if (observers.TryGetValue(0, out List<${observerName}> globalObservers)) {
-       |        foreach (var observer in globalObservers) {
-       |          observer.On${mapCSType}Effect(effect);
-       |        }
-       |      }
-       |      if (observers.TryGetValue(effect.id, out List<${observerName}> objObservers)) {
-       |        foreach (var observer in objObservers) {
-       |          observer.On${mapCSType}Effect(effect);
-       |        }
-       |        observersFor${mapCSType}.Remove(effect.id);
-       |      }
-       |    }
-       |    effects${deleteEffectName}.Clear();
-       |""".stripMargin +
-    List(addEffectName, removeEffectName, createEffectName)
-      .map(effectCSType => {
-        s"""
-           |    foreach (var effect in effects${effectCSType}) {
-           |      if (observers.TryGetValue(0, out List<${observerName}> globalObservers)) {
-           |        foreach (var observer in globalObservers) {
-           |          observer.On${mapCSType}Effect(effect);
-           |        }
-           |      }
-           |      if (observers.TryGetValue(effect.id, out List<${observerName}> objObservers)) {
-           |        foreach (var observer in objObservers) {
-           |          observer.On${mapCSType}Effect(effect);
-           |        }
-           |      }
-           |    }
-           |    effects${effectCSType}.Clear();
-           |""".stripMargin
-      })
-      .mkString("") +
-    s"""
-       |  }
        |""".stripMargin
   }
 }

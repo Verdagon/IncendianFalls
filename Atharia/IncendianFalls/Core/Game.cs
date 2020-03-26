@@ -13,11 +13,11 @@ public class Game {
     this.id = id;
   }
   public GameIncarnation incarnation { get { return root.GetGameIncarnation(id); } }
-  public void AddObserver(IGameEffectObserver observer) {
-    root.AddGameObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IGameEffectObserver observer) {
+    broadcaster.AddGameObserver(id, observer);
   }
-  public void RemoveObserver(IGameEffectObserver observer) {
-    root.RemoveGameObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IGameEffectObserver observer) {
+    broadcaster.RemoveGameObserver(id, observer);
   }
   public void Delete() {
     root.EffectGameDelete(id);
@@ -152,6 +152,10 @@ public class Game {
       return new ExecutionState(root, incarnation.executionState);
     }
                        }
+  public int actionNum {
+    get { return incarnation.actionNum; }
+    set { root.EffectGameSetActionNum(id, value); }
+  }
   public string instructions {
     get { return incarnation.instructions; }
     set { root.EffectGameSetInstructions(id, value); }

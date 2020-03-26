@@ -34,7 +34,7 @@ object ImmStructImpl {
           s"  public ${signatureStr} { return ${externFunction}(obj${argsStr}); }\n"
         }).mkString("") +
       s"""
-         |  public void Visit(${interfaceName}Visitor visitor) { visitor.Visit(this); }
+         |  public void Visit${interfaceName}(${interfaceName}Visitor visitor) { visitor.Visit${interfaceName}(this); }
          |}
          |public static class ${typeclassName}Caster {
          |  public static ${typeclassName} As${interfaceName}(this ${structName} obj) {

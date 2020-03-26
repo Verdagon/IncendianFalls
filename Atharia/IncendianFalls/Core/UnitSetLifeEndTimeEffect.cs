@@ -16,8 +16,11 @@ public struct UnitSetLifeEndTimeEffect : IUnitEffect {
   }
   int IUnitEffect.id => id;
 
-  public void visit(IUnitEffectVisitor visitor) {
+  public void visitIUnitEffect(IUnitEffectVisitor visitor) {
     visitor.visitUnitSetLifeEndTimeEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitUnitEffect(this);
   }
 }
 

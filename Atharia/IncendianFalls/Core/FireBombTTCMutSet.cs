@@ -14,24 +14,24 @@ public class FireBombTTCMutSet {
   public FireBombTTCMutSetIncarnation incarnation {
     get { return root.GetFireBombTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IFireBombTTCMutSetEffectObserver observer) {
-    root.AddFireBombTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IFireBombTTCMutSetEffectObserver observer) {
+    broadcaster.AddFireBombTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IFireBombTTCMutSetEffectObserver observer) {
-    root.RemoveFireBombTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IFireBombTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveFireBombTTCMutSetObserver(id, observer);
   }
   public void Add(FireBombTTC element) {
-    root.EffectFireBombTTCMutSetAdd(id, element.id);
+      root.EffectFireBombTTCMutSetAdd(id, element.id);
   }
   public void Remove(FireBombTTC element) {
-    root.EffectFireBombTTCMutSetRemove(id, element.id);
+      root.EffectFireBombTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectFireBombTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectFireBombTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectFireBombTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(FireBombTTC element) {

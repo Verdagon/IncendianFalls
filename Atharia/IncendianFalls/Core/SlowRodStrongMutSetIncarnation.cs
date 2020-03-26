@@ -10,6 +10,10 @@ public class SlowRodStrongMutSetIncarnation {
   public SlowRodStrongMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public SlowRodStrongMutSetIncarnation Copy() {
+    return new SlowRodStrongMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

@@ -11,6 +11,10 @@ public class KamikazeTargetTTCStrongByLocationMutMapIncarnation {
   public KamikazeTargetTTCStrongByLocationMutMapIncarnation(SortedDictionary<Location, int> map) {
     this.map = map;
   }
+
+  public KamikazeTargetTTCStrongByLocationMutMapIncarnation Copy() {
+    return new KamikazeTargetTTCStrongByLocationMutMapIncarnation(new SortedDictionary<Location, int>(map));
+  }
 }
          
 }

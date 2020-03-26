@@ -16,8 +16,11 @@ public struct KamikazeAICapabilityUCSetTargetLocationCenterEffect : IKamikazeAIC
   }
   int IKamikazeAICapabilityUCEffect.id => id;
 
-  public void visit(IKamikazeAICapabilityUCEffectVisitor visitor) {
+  public void visitIKamikazeAICapabilityUCEffect(IKamikazeAICapabilityUCEffectVisitor visitor) {
     visitor.visitKamikazeAICapabilityUCSetTargetLocationCenterEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitKamikazeAICapabilityUCEffect(this);
   }
 }
 

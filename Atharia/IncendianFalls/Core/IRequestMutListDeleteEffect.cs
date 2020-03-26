@@ -11,8 +11,11 @@ public struct IRequestMutListDeleteEffect : IIRequestMutListEffect {
     this.id = id;
   }
   int IIRequestMutListEffect.id => id;
-  public void visit(IIRequestMutListEffectVisitor visitor) {
+  public void visitIIRequestMutListEffect(IIRequestMutListEffectVisitor visitor) {
     visitor.visitIRequestMutListDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitIRequestMutListEffect(this);
   }
 }
 

@@ -10,8 +10,11 @@ public struct InvincibilityUCWeakMutSetCreateEffect : IInvincibilityUCWeakMutSet
     this.id = id;
   }
   int IInvincibilityUCWeakMutSetEffect.id => id;
-  public void visit(IInvincibilityUCWeakMutSetEffectVisitor visitor) {
+  public void visitIInvincibilityUCWeakMutSetEffect(IInvincibilityUCWeakMutSetEffectVisitor visitor) {
     visitor.visitInvincibilityUCWeakMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitInvincibilityUCWeakMutSetEffect(this);
   }
 }
 

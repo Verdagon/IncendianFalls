@@ -11,8 +11,11 @@ public struct SummonImpulseDeleteEffect : ISummonImpulseEffect {
     this.id = id;
   }
   int ISummonImpulseEffect.id => id;
-  public void visit(ISummonImpulseEffectVisitor visitor) {
+  public void visitISummonImpulseEffect(ISummonImpulseEffectVisitor visitor) {
     visitor.visitSummonImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSummonImpulseEffect(this);
   }
 }
 

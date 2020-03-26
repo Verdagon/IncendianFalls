@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct ContinueBidingImpulseCreateEffect : IContinueBidingImpulseEffect {
   public readonly int id;
-  public ContinueBidingImpulseCreateEffect(int id) {
+  public readonly ContinueBidingImpulseIncarnation incarnation;
+  public ContinueBidingImpulseCreateEffect(int id, ContinueBidingImpulseIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IContinueBidingImpulseEffect.id => id;
-  public void visit(IContinueBidingImpulseEffectVisitor visitor) {
+  public void visitIContinueBidingImpulseEffect(IContinueBidingImpulseEffectVisitor visitor) {
     visitor.visitContinueBidingImpulseCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitContinueBidingImpulseEffect(this);
   }
 }
 

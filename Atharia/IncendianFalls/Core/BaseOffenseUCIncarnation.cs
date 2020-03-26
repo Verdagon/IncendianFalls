@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class BaseOffenseUCIncarnation {
+public class BaseOffenseUCIncarnation : IBaseOffenseUCEffectVisitor {
   public readonly int outgoingDamageAddConstant;
   public readonly int outgoingDamageMultiplierPercent;
   public BaseOffenseUCIncarnation(
@@ -13,6 +13,17 @@ public class BaseOffenseUCIncarnation {
     this.outgoingDamageAddConstant = outgoingDamageAddConstant;
     this.outgoingDamageMultiplierPercent = outgoingDamageMultiplierPercent;
   }
+  public BaseOffenseUCIncarnation Copy() {
+    return new BaseOffenseUCIncarnation(
+outgoingDamageAddConstant,
+outgoingDamageMultiplierPercent    );
+  }
+
+  public void visitBaseOffenseUCCreateEffect(BaseOffenseUCCreateEffect e) {}
+  public void visitBaseOffenseUCDeleteEffect(BaseOffenseUCDeleteEffect e) {}
+
+
+  public void ApplyEffect(IBaseOffenseUCEffect effect) { effect.visitIBaseOffenseUCEffect(this); }
 }
 
 }

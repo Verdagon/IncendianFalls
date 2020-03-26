@@ -14,24 +14,24 @@ public class TimeAnchorTTCMutSet {
   public TimeAnchorTTCMutSetIncarnation incarnation {
     get { return root.GetTimeAnchorTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(ITimeAnchorTTCMutSetEffectObserver observer) {
-    root.AddTimeAnchorTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITimeAnchorTTCMutSetEffectObserver observer) {
+    broadcaster.AddTimeAnchorTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ITimeAnchorTTCMutSetEffectObserver observer) {
-    root.RemoveTimeAnchorTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITimeAnchorTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveTimeAnchorTTCMutSetObserver(id, observer);
   }
   public void Add(TimeAnchorTTC element) {
-    root.EffectTimeAnchorTTCMutSetAdd(id, element.id);
+      root.EffectTimeAnchorTTCMutSetAdd(id, element.id);
   }
   public void Remove(TimeAnchorTTC element) {
-    root.EffectTimeAnchorTTCMutSetRemove(id, element.id);
+      root.EffectTimeAnchorTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectTimeAnchorTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectTimeAnchorTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectTimeAnchorTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(TimeAnchorTTC element) {

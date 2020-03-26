@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct IncendianFallsLevelLinkerTTCMutSetAddEffect : IIncendianFallsLevelLinkerTTCMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public IncendianFallsLevelLinkerTTCMutSetAddEffect(int id, int elementId) {
+  public readonly int element;
+  public IncendianFallsLevelLinkerTTCMutSetAddEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IIncendianFallsLevelLinkerTTCMutSetEffect.id => id;
-  public void visit(IIncendianFallsLevelLinkerTTCMutSetEffectVisitor visitor) {
+  public void visitIIncendianFallsLevelLinkerTTCMutSetEffect(IIncendianFallsLevelLinkerTTCMutSetEffectVisitor visitor) {
     visitor.visitIncendianFallsLevelLinkerTTCMutSetAddEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitIncendianFallsLevelLinkerTTCMutSetEffect(this);
   }
 }
 

@@ -11,8 +11,11 @@ public struct WanderAICapabilityUCDeleteEffect : IWanderAICapabilityUCEffect {
     this.id = id;
   }
   int IWanderAICapabilityUCEffect.id => id;
-  public void visit(IWanderAICapabilityUCEffectVisitor visitor) {
+  public void visitIWanderAICapabilityUCEffect(IWanderAICapabilityUCEffectVisitor visitor) {
     visitor.visitWanderAICapabilityUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitWanderAICapabilityUCEffect(this);
   }
 }
 

@@ -14,24 +14,24 @@ public class WaterTTCMutSet {
   public WaterTTCMutSetIncarnation incarnation {
     get { return root.GetWaterTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IWaterTTCMutSetEffectObserver observer) {
-    root.AddWaterTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IWaterTTCMutSetEffectObserver observer) {
+    broadcaster.AddWaterTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IWaterTTCMutSetEffectObserver observer) {
-    root.RemoveWaterTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IWaterTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveWaterTTCMutSetObserver(id, observer);
   }
   public void Add(WaterTTC element) {
-    root.EffectWaterTTCMutSetAdd(id, element.id);
+      root.EffectWaterTTCMutSetAdd(id, element.id);
   }
   public void Remove(WaterTTC element) {
-    root.EffectWaterTTCMutSetRemove(id, element.id);
+      root.EffectWaterTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectWaterTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectWaterTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectWaterTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(WaterTTC element) {

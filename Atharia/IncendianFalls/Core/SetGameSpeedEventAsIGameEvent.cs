@@ -14,7 +14,7 @@ public class SetGameSpeedEventAsIGameEvent : IGameEvent {
   public int GetDeterministicHashCode() { return obj.GetDeterministicHashCode(); }
   public override int GetHashCode() { return GetDeterministicHashCode(); }
        
-  public void Visit(IGameEventVisitor visitor) { visitor.Visit(this); }
+  public void VisitIGameEvent(IGameEventVisitor visitor) { visitor.VisitIGameEvent(this); }
 }
 public static class SetGameSpeedEventAsIGameEventCaster {
   public static SetGameSpeedEventAsIGameEvent AsIGameEvent(this SetGameSpeedEvent obj) {

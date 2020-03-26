@@ -11,8 +11,11 @@ public struct NestLevelControllerDeleteEffect : INestLevelControllerEffect {
     this.id = id;
   }
   int INestLevelControllerEffect.id => id;
-  public void visit(INestLevelControllerEffectVisitor visitor) {
+  public void visitINestLevelControllerEffect(INestLevelControllerEffectVisitor visitor) {
     visitor.visitNestLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitNestLevelControllerEffect(this);
   }
 }
 

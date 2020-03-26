@@ -9,6 +9,10 @@ root mut struct Game {
   var time: Int;
   executionState: ExecutionState;
 
+  // Whenever a unit starts taking an action, it should increment this number.
+  // This is how the view knows what effects are part of the same action.
+  var actionNum: Int;
+
   var instructions: Str; // "" for nothing. Someday will want to make a mutable wrapper.
   var hideInput: Bool;
 

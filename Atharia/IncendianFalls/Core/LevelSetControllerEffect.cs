@@ -7,17 +7,20 @@ namespace Atharia.Model {
 
 public struct LevelSetControllerEffect : ILevelEffect {
   public readonly int id;
-  public readonly ILevelController newValue;
+  public readonly int newValue;
   public LevelSetControllerEffect(
       int id,
-      ILevelController newValue) {
+      int newValue) {
     this.id = id;
     this.newValue = newValue;
   }
   int ILevelEffect.id => id;
 
-  public void visit(ILevelEffectVisitor visitor) {
+  public void visitILevelEffect(ILevelEffectVisitor visitor) {
     visitor.visitLevelSetControllerEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLevelEffect(this);
   }
 }
 

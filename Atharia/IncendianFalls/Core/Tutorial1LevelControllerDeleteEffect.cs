@@ -11,8 +11,11 @@ public struct Tutorial1LevelControllerDeleteEffect : ITutorial1LevelControllerEf
     this.id = id;
   }
   int ITutorial1LevelControllerEffect.id => id;
-  public void visit(ITutorial1LevelControllerEffectVisitor visitor) {
+  public void visitITutorial1LevelControllerEffect(ITutorial1LevelControllerEffectVisitor visitor) {
     visitor.visitTutorial1LevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTutorial1LevelControllerEffect(this);
   }
 }
 

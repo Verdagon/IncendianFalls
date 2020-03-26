@@ -13,11 +13,11 @@ public class DirtTTC {
     this.id = id;
   }
   public DirtTTCIncarnation incarnation { get { return root.GetDirtTTCIncarnation(id); } }
-  public void AddObserver(IDirtTTCEffectObserver observer) {
-    root.AddDirtTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IDirtTTCEffectObserver observer) {
+    broadcaster.AddDirtTTCObserver(id, observer);
   }
-  public void RemoveObserver(IDirtTTCEffectObserver observer) {
-    root.RemoveDirtTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IDirtTTCEffectObserver observer) {
+    broadcaster.RemoveDirtTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectDirtTTCDelete(id);

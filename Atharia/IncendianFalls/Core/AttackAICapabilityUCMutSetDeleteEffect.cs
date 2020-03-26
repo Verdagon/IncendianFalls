@@ -10,8 +10,11 @@ public struct AttackAICapabilityUCMutSetDeleteEffect : IAttackAICapabilityUCMutS
     this.id = id;
   }
   int IAttackAICapabilityUCMutSetEffect.id => id;
-  public void visit(IAttackAICapabilityUCMutSetEffectVisitor visitor) {
+  public void visitIAttackAICapabilityUCMutSetEffect(IAttackAICapabilityUCMutSetEffectVisitor visitor) {
     visitor.visitAttackAICapabilityUCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitAttackAICapabilityUCMutSetEffect(this);
   }
 }
 

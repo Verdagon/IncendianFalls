@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IDirtRoadLevelControllerEffect {
+public interface IDirtRoadLevelControllerEffect : IEffect {
   int id { get; }
-  void visit(IDirtRoadLevelControllerEffectVisitor visitor);
+  void visitIDirtRoadLevelControllerEffect(IDirtRoadLevelControllerEffectVisitor visitor);
 }
        
 }

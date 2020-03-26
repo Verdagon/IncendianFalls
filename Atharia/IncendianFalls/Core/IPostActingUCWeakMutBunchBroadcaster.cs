@@ -5,19 +5,21 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class IPostActingUCWeakMutBunchBroadcaster:ILightningChargedUCWeakMutSetEffectObserver, ILightningChargedUCWeakMutSetEffectVisitor, ITimeCloneAICapabilityUCWeakMutSetEffectObserver, ITimeCloneAICapabilityUCWeakMutSetEffectVisitor {
+  EffectBroadcaster broadcaster;
   IPostActingUCWeakMutBunch bunch;
   private List<IIPostActingUCWeakMutBunchObserver> observers;
 
-  public IPostActingUCWeakMutBunchBroadcaster(IPostActingUCWeakMutBunch bunch) {
+  public IPostActingUCWeakMutBunchBroadcaster(EffectBroadcaster broadcaster, IPostActingUCWeakMutBunch bunch) {
+    this.broadcaster = broadcaster;
     this.bunch = bunch;
     this.observers = new List<IIPostActingUCWeakMutBunchObserver>();
-    bunch.membersLightningChargedUCWeakMutSet.AddObserver(this);
-    bunch.membersTimeCloneAICapabilityUCWeakMutSet.AddObserver(this);
+    bunch.membersLightningChargedUCWeakMutSet.AddObserver(broadcaster, this);
+    bunch.membersTimeCloneAICapabilityUCWeakMutSet.AddObserver(broadcaster, this);
 
   }
   public void Stop() {
-    bunch.membersLightningChargedUCWeakMutSet.RemoveObserver(this);
-    bunch.membersTimeCloneAICapabilityUCWeakMutSet.RemoveObserver(this);
+    bunch.membersLightningChargedUCWeakMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersTimeCloneAICapabilityUCWeakMutSet.RemoveObserver(broadcaster, this);
 
   }
   public void AddObserver(IIPostActingUCWeakMutBunchObserver observer) {
@@ -37,24 +39,24 @@ public class IPostActingUCWeakMutBunchBroadcaster:ILightningChargedUCWeakMutSetE
     }
   }
   public void OnLightningChargedUCWeakMutSetEffect(ILightningChargedUCWeakMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitILightningChargedUCWeakMutSetEffect(this);
   }
   public void visitLightningChargedUCWeakMutSetAddEffect(LightningChargedUCWeakMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitLightningChargedUCWeakMutSetRemoveEffect(LightningChargedUCWeakMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitLightningChargedUCWeakMutSetCreateEffect(LightningChargedUCWeakMutSetCreateEffect effect) { }
   public void visitLightningChargedUCWeakMutSetDeleteEffect(LightningChargedUCWeakMutSetDeleteEffect effect) { }
   public void OnTimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitITimeCloneAICapabilityUCWeakMutSetEffect(this);
   }
   public void visitTimeCloneAICapabilityUCWeakMutSetAddEffect(TimeCloneAICapabilityUCWeakMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitTimeCloneAICapabilityUCWeakMutSetRemoveEffect(TimeCloneAICapabilityUCWeakMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitTimeCloneAICapabilityUCWeakMutSetCreateEffect(TimeCloneAICapabilityUCWeakMutSetCreateEffect effect) { }
   public void visitTimeCloneAICapabilityUCWeakMutSetDeleteEffect(TimeCloneAICapabilityUCWeakMutSetDeleteEffect effect) { }

@@ -29,6 +29,10 @@ object MutMapIncarnation {
          |  public ${mapName}Incarnation(SortedDictionary<${flattenedKeyCSType}, int> map) {
          |    this.map = map;
          |  }
+         |
+         |  public ${mapName}Incarnation Copy() {
+         |    return new ${mapName}Incarnation(new SortedDictionary<${flattenedKeyCSType}, int>(map));
+         |  }
          |}
          """.stripMargin
 

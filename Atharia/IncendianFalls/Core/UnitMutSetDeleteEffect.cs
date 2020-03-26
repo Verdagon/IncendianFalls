@@ -10,8 +10,11 @@ public struct UnitMutSetDeleteEffect : IUnitMutSetEffect {
     this.id = id;
   }
   int IUnitMutSetEffect.id => id;
-  public void visit(IUnitMutSetEffectVisitor visitor) {
+  public void visitIUnitMutSetEffect(IUnitMutSetEffectVisitor visitor) {
     visitor.visitUnitMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitUnitMutSetEffect(this);
   }
 }
 

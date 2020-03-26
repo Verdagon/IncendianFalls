@@ -37,41 +37,53 @@ object Root {
        |  }
        |}
        |
-       |public class Root {
-       |  private static readonly int VERSION_HASH_MULTIPLIER = 179424673;
-       |  private static readonly int NEXT_ID_HASH_MULTIPLIER = 373587883;
+       |public delegate void IEffectObserver(IEffect effect);
        |
-       |  private void CheckRootsEqual(Root a, Root b) {
-       |    if (a != b) {
-       |      throw new System.Exception("Given objects aren't from the same root!");
-       |    }
-       |  }
+       |public interface IEffect {
+       |  void visitIEffect(IEffectVisitor visitor);
+       |}
        |
-       |  public readonly ILogger logger;
-       |
-       |  // This *always* points to a live RootIncarnation. When we snapshot, we eagerly
-       |  // make a new one of these.
-       |  private RootIncarnation rootIncarnation;
-       |
-       |  bool locked;
-       |
-       |  // 0 means everything
+       |public interface IEffectVisitor {
        |""".stripMargin +
       ss.structs.filter(_.mutability == MutableS).map(struct => {
-        StructGenerator.generateRootMembers(opt, struct)
+        StructGenerator.generateGlobalVisitorInterfaceMethods(struct)
       }).mkString("") +
       ss.lists.filter(_.mutability == MutableS).map(list => {
-        ListGenerator.generateRootMembers(opt, list)
+        ListGenerator.generateGlobalVisitorInterfaceMethods(list)
       }).mkString("") +
       ss.sets.filter(_.mutability == MutableS).map(set => {
-        SetGenerator.generateRootMembers(opt, set)
+        SetGenerator.generateGlobalVisitorInterfaceMethods(set)
       }).mkString("") +
       ss.maps.filter(_.mutability == MutableS).map(map => {
-        MapGenerator.generateRootMembers(opt, map)
+        MapGenerator.generateGlobalVisitorInterfaceMethods(map)
       }).mkString("") +
       s"""
+         |}
+         |
+         |public class Root {
+         |  private static readonly int VERSION_HASH_MULTIPLIER = 179424673;
+         |  private static readonly int NEXT_ID_HASH_MULTIPLIER = 373587883;
+         |
+         |  private void CheckRootsEqual(Root a, Root b) {
+         |    if (a != b) {
+         |      throw new System.Exception("Given objects aren't from the same root!");
+         |    }
+         |  }
+         |
+         |  public readonly ILogger logger;
+         |
+         |  public List<IEffectObserver> effectObservers;
+         |
+         |  // This *always* points to a live RootIncarnation. When we snapshot, we eagerly
+         |  // make a new one of these.
+         |  private RootIncarnation rootIncarnation;
+         |
+         |  bool locked;
+         |
+         |  // 0 means everything
          |  public Root(ILogger logger) {
          |    this.logger = logger;
+         |    this.effectObservers = new List<IEffectObserver>();
          |    int initialVersion = 1;
          |    int initialNextId = 1;
          |    int initialHash = VERSION_HASH_MULTIPLIER * initialVersion + NEXT_ID_HASH_MULTIPLIER * initialNextId;
@@ -88,6 +100,20 @@ object Root {
          |  }
          |
          |  public int version { get { return rootIncarnation.version; } }
+         |
+         |  public void AddObserver(IEffectObserver obs) {
+         |    effectObservers.Add(obs);
+         |  }
+         |
+         |  public void RemoveObserver(IEffectObserver obs) {
+         |    effectObservers.Remove(obs);
+         |  }
+         |
+         |  private void NotifyEffect(IEffect effect) {
+         |    foreach (var obs in effectObservers) {
+         |      obs(effect);
+         |    }
+         |  }
          |
          |  public RootIncarnation Snapshot() {
          |    CheckUnlocked();
@@ -108,7 +134,7 @@ object Root {
          |
          |  public delegate T ITransaction<T>();
          |
-         |  public T Transact<T>(ITransaction<T> transaction) {
+         |  public (List<IEffect>, T) Transact<T>(ITransaction<T> transaction) {
          |    var stopwatch = new System.Diagnostics.Stopwatch();
          |    stopwatch.Start();
          |
@@ -117,14 +143,21 @@ object Root {
          |    }
          |    locked = false;
          |    // var rollbackPoint = Snapshot();
+         |
+         |    var effects = new List<IEffect>();
+         |    IEffectObserver effectObserver = (effect) => effects.Add(effect);
+         |    AddObserver(effectObserver);
+         |
          |    try {
-         |      return transaction();
+         |      var result = transaction();
+         |      return (effects, result);
          |    } catch (Exception e) {
          |      // logger.Error("Rolling back because of error: " + e.Message + "\\n" + e.StackTrace);
          |      // Revert(rollbackPoint);
          |      logger.Error("Encountered error in transaction: " + e.Message + "\\n" + e.StackTrace);
          |      throw;
          |    } finally {
+         |      RemoveObserver(effectObserver);
          |      if (locked) {
          |        logger.Error("Can't lock, already locked!");
          |        Environment.Exit(1);
@@ -135,13 +168,7 @@ object Root {
          |      stopwatch.Stop();
          |      var calculationDuration = stopwatch.Elapsed.TotalMilliseconds;
          |
-         |      stopwatch = new System.Diagnostics.Stopwatch();
-         |      stopwatch.Start();
-         |      FlushEvents();
-         |      stopwatch.Stop();
-         |      var flushEventsDuration = stopwatch.Elapsed.TotalMilliseconds;
-         |
-         |      logger.Info("Transaction run time " + calculationDuration + ", observers run time " + flushEventsDuration);
+         |      logger.Info("Transaction run time " + calculationDuration);
          |    }
          |  }
          |
@@ -222,37 +249,6 @@ object Root {
          |      }
          |      throw new Exception(message);
          |    }
-         |  }
-         |
-         |  public void FlushEvents() {
-         |
-         |
-         |""".stripMargin +
-      instanceTypeNames
-        .map(instanceTypeName => {
-          s"""
-             |    var copyOfObserversFor${instanceTypeName} =
-             |        new SortedDictionary<int, List<I${instanceTypeName}EffectObserver>>();
-             |    foreach (var entry in observersFor${instanceTypeName}) {
-             |      var objectId = entry.Key;
-             |      var observers = entry.Value;
-             |      copyOfObserversFor${instanceTypeName}.Add(
-             |          objectId,
-             |          new List<I${instanceTypeName}EffectObserver>(
-             |              observers));
-             |    }
-             |""".stripMargin
-        })
-        .mkString("") +
-      instanceTypeNames
-        .map(instanceTypeName => {
-          s"""
-             |    Broadcast${instanceTypeName}Effects(
-             |        copyOfObserversFor${instanceTypeName});
-           """.stripMargin
-        })
-        .mkString("") +
-      s"""
          |  }
          |
          |  public int GetDeterministicHashCode() {

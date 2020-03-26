@@ -11,8 +11,11 @@ public struct TutorialDefyCounterUCDeleteEffect : ITutorialDefyCounterUCEffect {
     this.id = id;
   }
   int ITutorialDefyCounterUCEffect.id => id;
-  public void visit(ITutorialDefyCounterUCEffectVisitor visitor) {
+  public void visitITutorialDefyCounterUCEffect(ITutorialDefyCounterUCEffectVisitor visitor) {
     visitor.visitTutorialDefyCounterUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTutorialDefyCounterUCEffect(this);
   }
 }
 

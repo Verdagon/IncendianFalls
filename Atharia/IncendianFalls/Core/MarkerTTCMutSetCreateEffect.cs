@@ -10,8 +10,11 @@ public struct MarkerTTCMutSetCreateEffect : IMarkerTTCMutSetEffect {
     this.id = id;
   }
   int IMarkerTTCMutSetEffect.id => id;
-  public void visit(IMarkerTTCMutSetEffectVisitor visitor) {
+  public void visitIMarkerTTCMutSetEffect(IMarkerTTCMutSetEffectVisitor visitor) {
     visitor.visitMarkerTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitMarkerTTCMutSetEffect(this);
   }
 }
 

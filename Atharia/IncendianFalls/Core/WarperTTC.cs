@@ -13,11 +13,11 @@ public class WarperTTC {
     this.id = id;
   }
   public WarperTTCIncarnation incarnation { get { return root.GetWarperTTCIncarnation(id); } }
-  public void AddObserver(IWarperTTCEffectObserver observer) {
-    root.AddWarperTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IWarperTTCEffectObserver observer) {
+    broadcaster.AddWarperTTCObserver(id, observer);
   }
-  public void RemoveObserver(IWarperTTCEffectObserver observer) {
-    root.RemoveWarperTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IWarperTTCEffectObserver observer) {
+    broadcaster.RemoveWarperTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectWarperTTCDelete(id);

@@ -13,11 +13,11 @@ public class TemporaryCloneImpulse {
     this.id = id;
   }
   public TemporaryCloneImpulseIncarnation incarnation { get { return root.GetTemporaryCloneImpulseIncarnation(id); } }
-  public void AddObserver(ITemporaryCloneImpulseEffectObserver observer) {
-    root.AddTemporaryCloneImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITemporaryCloneImpulseEffectObserver observer) {
+    broadcaster.AddTemporaryCloneImpulseObserver(id, observer);
   }
-  public void RemoveObserver(ITemporaryCloneImpulseEffectObserver observer) {
-    root.RemoveTemporaryCloneImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITemporaryCloneImpulseEffectObserver observer) {
+    broadcaster.RemoveTemporaryCloneImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectTemporaryCloneImpulseDelete(id);

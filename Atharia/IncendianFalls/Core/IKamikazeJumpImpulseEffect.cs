@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IKamikazeJumpImpulseEffect {
+public interface IKamikazeJumpImpulseEffect : IEffect {
   int id { get; }
-  void visit(IKamikazeJumpImpulseEffectVisitor visitor);
+  void visitIKamikazeJumpImpulseEffect(IKamikazeJumpImpulseEffectVisitor visitor);
 }
        
 }

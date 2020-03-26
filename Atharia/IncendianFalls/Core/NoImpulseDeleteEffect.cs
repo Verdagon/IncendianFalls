@@ -11,8 +11,11 @@ public struct NoImpulseDeleteEffect : INoImpulseEffect {
     this.id = id;
   }
   int INoImpulseEffect.id => id;
-  public void visit(INoImpulseEffectVisitor visitor) {
+  public void visitINoImpulseEffect(INoImpulseEffectVisitor visitor) {
     visitor.visitNoImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitNoImpulseEffect(this);
   }
 }
 

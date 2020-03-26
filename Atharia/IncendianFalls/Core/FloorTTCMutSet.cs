@@ -14,24 +14,24 @@ public class FloorTTCMutSet {
   public FloorTTCMutSetIncarnation incarnation {
     get { return root.GetFloorTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IFloorTTCMutSetEffectObserver observer) {
-    root.AddFloorTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IFloorTTCMutSetEffectObserver observer) {
+    broadcaster.AddFloorTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IFloorTTCMutSetEffectObserver observer) {
-    root.RemoveFloorTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IFloorTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveFloorTTCMutSetObserver(id, observer);
   }
   public void Add(FloorTTC element) {
-    root.EffectFloorTTCMutSetAdd(id, element.id);
+      root.EffectFloorTTCMutSetAdd(id, element.id);
   }
   public void Remove(FloorTTC element) {
-    root.EffectFloorTTCMutSetRemove(id, element.id);
+      root.EffectFloorTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectFloorTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectFloorTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectFloorTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(FloorTTC element) {

@@ -11,8 +11,11 @@ public struct FloorTTCDeleteEffect : IFloorTTCEffect {
     this.id = id;
   }
   int IFloorTTCEffect.id => id;
-  public void visit(IFloorTTCEffectVisitor visitor) {
+  public void visitIFloorTTCEffect(IFloorTTCEffectVisitor visitor) {
     visitor.visitFloorTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitFloorTTCEffect(this);
   }
 }
 

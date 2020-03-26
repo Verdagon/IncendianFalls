@@ -10,6 +10,10 @@ public class IncendianFallsLevelLinkerTTCMutSetIncarnation {
   public IncendianFallsLevelLinkerTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public IncendianFallsLevelLinkerTTCMutSetIncarnation Copy() {
+    return new IncendianFallsLevelLinkerTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

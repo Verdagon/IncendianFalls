@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IMagmaTTCEffect {
+public interface IMagmaTTCEffect : IEffect {
   int id { get; }
-  void visit(IMagmaTTCEffectVisitor visitor);
+  void visitIMagmaTTCEffect(IMagmaTTCEffectVisitor visitor);
 }
        
 }

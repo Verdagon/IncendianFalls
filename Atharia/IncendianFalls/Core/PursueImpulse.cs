@@ -13,11 +13,11 @@ public class PursueImpulse {
     this.id = id;
   }
   public PursueImpulseIncarnation incarnation { get { return root.GetPursueImpulseIncarnation(id); } }
-  public void AddObserver(IPursueImpulseEffectObserver observer) {
-    root.AddPursueImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IPursueImpulseEffectObserver observer) {
+    broadcaster.AddPursueImpulseObserver(id, observer);
   }
-  public void RemoveObserver(IPursueImpulseEffectObserver observer) {
-    root.RemovePursueImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IPursueImpulseEffectObserver observer) {
+    broadcaster.RemovePursueImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectPursueImpulseDelete(id);

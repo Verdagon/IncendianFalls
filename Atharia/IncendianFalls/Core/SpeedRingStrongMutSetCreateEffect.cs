@@ -10,8 +10,11 @@ public struct SpeedRingStrongMutSetCreateEffect : ISpeedRingStrongMutSetEffect {
     this.id = id;
   }
   int ISpeedRingStrongMutSetEffect.id => id;
-  public void visit(ISpeedRingStrongMutSetEffectVisitor visitor) {
+  public void visitISpeedRingStrongMutSetEffect(ISpeedRingStrongMutSetEffectVisitor visitor) {
     visitor.visitSpeedRingStrongMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSpeedRingStrongMutSetEffect(this);
   }
 }
 

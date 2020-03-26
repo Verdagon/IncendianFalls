@@ -6,10 +6,10 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public interface IGameEventVisitor {
-  void Visit(SetGameSpeedEventAsIGameEvent obj);
-  void Visit(WaitEventAsIGameEvent obj);
-  void Visit(FlyCameraEventAsIGameEvent obj);
-  void Visit(ShowOverlayEventAsIGameEvent obj);
+  void VisitIGameEvent(SetGameSpeedEventAsIGameEvent obj);
+  void VisitIGameEvent(WaitEventAsIGameEvent obj);
+  void VisitIGameEvent(FlyCameraEventAsIGameEvent obj);
+  void VisitIGameEvent(ShowOverlayEventAsIGameEvent obj);
 }
 
 }

@@ -11,8 +11,11 @@ public struct CliffLevelControllerDeleteEffect : ICliffLevelControllerEffect {
     this.id = id;
   }
   int ICliffLevelControllerEffect.id => id;
-  public void visit(ICliffLevelControllerEffectVisitor visitor) {
+  public void visitICliffLevelControllerEffect(ICliffLevelControllerEffectVisitor visitor) {
     visitor.visitCliffLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitCliffLevelControllerEffect(this);
   }
 }
 

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IImpulseStrongMutBunchIncarnation {
+public class IImpulseStrongMutBunchIncarnation : IIImpulseStrongMutBunchEffectVisitor {
   public readonly int membersHoldPositionImpulseStrongMutSet;
   public readonly int membersTemporaryCloneImpulseStrongMutSet;
   public readonly int membersSummonImpulseStrongMutSet;
@@ -61,6 +61,49 @@ public class IImpulseStrongMutBunchIncarnation {
     this.membersPursueImpulseStrongMutSet = membersPursueImpulseStrongMutSet;
     this.membersFireBombImpulseStrongMutSet = membersFireBombImpulseStrongMutSet;
   }
+  public IImpulseStrongMutBunchIncarnation Copy() {
+    return new IImpulseStrongMutBunchIncarnation(
+membersHoldPositionImpulseStrongMutSet,
+membersTemporaryCloneImpulseStrongMutSet,
+membersSummonImpulseStrongMutSet,
+membersMireImpulseStrongMutSet,
+membersEvaporateImpulseStrongMutSet,
+membersMoveImpulseStrongMutSet,
+membersKamikazeJumpImpulseStrongMutSet,
+membersKamikazeTargetImpulseStrongMutSet,
+membersNoImpulseStrongMutSet,
+membersFireImpulseStrongMutSet,
+membersDefyImpulseStrongMutSet,
+membersCounterImpulseStrongMutSet,
+membersUnleashBideImpulseStrongMutSet,
+membersContinueBidingImpulseStrongMutSet,
+membersStartBidingImpulseStrongMutSet,
+membersAttackImpulseStrongMutSet,
+membersPursueImpulseStrongMutSet,
+membersFireBombImpulseStrongMutSet    );
+  }
+
+  public void visitIImpulseStrongMutBunchCreateEffect(IImpulseStrongMutBunchCreateEffect e) {}
+  public void visitIImpulseStrongMutBunchDeleteEffect(IImpulseStrongMutBunchDeleteEffect e) {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public void ApplyEffect(IIImpulseStrongMutBunchEffect effect) { effect.visitIIImpulseStrongMutBunchEffect(this); }
 }
 
 }

@@ -13,11 +13,11 @@ public class ItemTTC {
     this.id = id;
   }
   public ItemTTCIncarnation incarnation { get { return root.GetItemTTCIncarnation(id); } }
-  public void AddObserver(IItemTTCEffectObserver observer) {
-    root.AddItemTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IItemTTCEffectObserver observer) {
+    broadcaster.AddItemTTCObserver(id, observer);
   }
-  public void RemoveObserver(IItemTTCEffectObserver observer) {
-    root.RemoveItemTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IItemTTCEffectObserver observer) {
+    broadcaster.RemoveItemTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectItemTTCDelete(id);

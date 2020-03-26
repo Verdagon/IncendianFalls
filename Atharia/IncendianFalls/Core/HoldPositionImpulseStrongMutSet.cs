@@ -14,24 +14,24 @@ public class HoldPositionImpulseStrongMutSet {
   public HoldPositionImpulseStrongMutSetIncarnation incarnation {
     get { return root.GetHoldPositionImpulseStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(IHoldPositionImpulseStrongMutSetEffectObserver observer) {
-    root.AddHoldPositionImpulseStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IHoldPositionImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.AddHoldPositionImpulseStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IHoldPositionImpulseStrongMutSetEffectObserver observer) {
-    root.RemoveHoldPositionImpulseStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IHoldPositionImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveHoldPositionImpulseStrongMutSetObserver(id, observer);
   }
   public void Add(HoldPositionImpulse element) {
-    root.EffectHoldPositionImpulseStrongMutSetAdd(id, element.id);
+      root.EffectHoldPositionImpulseStrongMutSetAdd(id, element.id);
   }
   public void Remove(HoldPositionImpulse element) {
-    root.EffectHoldPositionImpulseStrongMutSetRemove(id, element.id);
+      root.EffectHoldPositionImpulseStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectHoldPositionImpulseStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectHoldPositionImpulseStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectHoldPositionImpulseStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(HoldPositionImpulse element) {

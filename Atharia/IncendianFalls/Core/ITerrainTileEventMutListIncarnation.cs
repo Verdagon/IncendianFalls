@@ -11,6 +11,10 @@ public class ITerrainTileEventMutListIncarnation {
   public ITerrainTileEventMutListIncarnation(List<ITerrainTileEvent> list) {
     this.list = list;
   }
+
+  public ITerrainTileEventMutListIncarnation Copy() {
+    return new ITerrainTileEventMutListIncarnation(new List<ITerrainTileEvent>(list));
+  }
 }
          
 }

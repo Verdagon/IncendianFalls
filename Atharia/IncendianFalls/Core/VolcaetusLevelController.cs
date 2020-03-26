@@ -13,11 +13,11 @@ public class VolcaetusLevelController {
     this.id = id;
   }
   public VolcaetusLevelControllerIncarnation incarnation { get { return root.GetVolcaetusLevelControllerIncarnation(id); } }
-  public void AddObserver(IVolcaetusLevelControllerEffectObserver observer) {
-    root.AddVolcaetusLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IVolcaetusLevelControllerEffectObserver observer) {
+    broadcaster.AddVolcaetusLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(IVolcaetusLevelControllerEffectObserver observer) {
-    root.RemoveVolcaetusLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IVolcaetusLevelControllerEffectObserver observer) {
+    broadcaster.RemoveVolcaetusLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectVolcaetusLevelControllerDelete(id);

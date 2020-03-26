@@ -21,11 +21,11 @@ public class KamikazeTargetTTCStrongByLocationMutMap {
 
   public bool Exists() { return root != null && root.KamikazeTargetTTCStrongByLocationMutMapExists(id); }
 
-  public void AddObserver(IKamikazeTargetTTCStrongByLocationMutMapEffectObserver observer) {
-    root.AddKamikazeTargetTTCStrongByLocationMutMapObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IKamikazeTargetTTCStrongByLocationMutMapEffectObserver observer) {
+    broadcaster.AddKamikazeTargetTTCStrongByLocationMutMapObserver(id, observer);
   }
-  public void RemoveObserver(IKamikazeTargetTTCStrongByLocationMutMapEffectObserver observer) {
-    root.RemoveKamikazeTargetTTCStrongByLocationMutMapObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IKamikazeTargetTTCStrongByLocationMutMapEffectObserver observer) {
+    broadcaster.RemoveKamikazeTargetTTCStrongByLocationMutMapObserver(id, observer);
   }
 
   public void Add(Location key, KamikazeTargetTTC value) {

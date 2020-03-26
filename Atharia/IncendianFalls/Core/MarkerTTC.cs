@@ -13,11 +13,11 @@ public class MarkerTTC {
     this.id = id;
   }
   public MarkerTTCIncarnation incarnation { get { return root.GetMarkerTTCIncarnation(id); } }
-  public void AddObserver(IMarkerTTCEffectObserver observer) {
-    root.AddMarkerTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMarkerTTCEffectObserver observer) {
+    broadcaster.AddMarkerTTCObserver(id, observer);
   }
-  public void RemoveObserver(IMarkerTTCEffectObserver observer) {
-    root.RemoveMarkerTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMarkerTTCEffectObserver observer) {
+    broadcaster.RemoveMarkerTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectMarkerTTCDelete(id);

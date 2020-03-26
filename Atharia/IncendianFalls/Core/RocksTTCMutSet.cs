@@ -14,24 +14,24 @@ public class RocksTTCMutSet {
   public RocksTTCMutSetIncarnation incarnation {
     get { return root.GetRocksTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IRocksTTCMutSetEffectObserver observer) {
-    root.AddRocksTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IRocksTTCMutSetEffectObserver observer) {
+    broadcaster.AddRocksTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IRocksTTCMutSetEffectObserver observer) {
-    root.RemoveRocksTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IRocksTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveRocksTTCMutSetObserver(id, observer);
   }
   public void Add(RocksTTC element) {
-    root.EffectRocksTTCMutSetAdd(id, element.id);
+      root.EffectRocksTTCMutSetAdd(id, element.id);
   }
   public void Remove(RocksTTC element) {
-    root.EffectRocksTTCMutSetRemove(id, element.id);
+      root.EffectRocksTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectRocksTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectRocksTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectRocksTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(RocksTTC element) {

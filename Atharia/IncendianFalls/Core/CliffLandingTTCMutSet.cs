@@ -14,24 +14,24 @@ public class CliffLandingTTCMutSet {
   public CliffLandingTTCMutSetIncarnation incarnation {
     get { return root.GetCliffLandingTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(ICliffLandingTTCMutSetEffectObserver observer) {
-    root.AddCliffLandingTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICliffLandingTTCMutSetEffectObserver observer) {
+    broadcaster.AddCliffLandingTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ICliffLandingTTCMutSetEffectObserver observer) {
-    root.RemoveCliffLandingTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICliffLandingTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveCliffLandingTTCMutSetObserver(id, observer);
   }
   public void Add(CliffLandingTTC element) {
-    root.EffectCliffLandingTTCMutSetAdd(id, element.id);
+      root.EffectCliffLandingTTCMutSetAdd(id, element.id);
   }
   public void Remove(CliffLandingTTC element) {
-    root.EffectCliffLandingTTCMutSetRemove(id, element.id);
+      root.EffectCliffLandingTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectCliffLandingTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectCliffLandingTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectCliffLandingTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(CliffLandingTTC element) {

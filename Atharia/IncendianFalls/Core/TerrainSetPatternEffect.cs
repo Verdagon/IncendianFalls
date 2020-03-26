@@ -16,8 +16,11 @@ public struct TerrainSetPatternEffect : ITerrainEffect {
   }
   int ITerrainEffect.id => id;
 
-  public void visit(ITerrainEffectVisitor visitor) {
+  public void visitITerrainEffect(ITerrainEffectVisitor visitor) {
     visitor.visitTerrainSetPatternEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTerrainEffect(this);
   }
 }
 

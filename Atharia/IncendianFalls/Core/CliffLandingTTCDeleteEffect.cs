@@ -11,8 +11,11 @@ public struct CliffLandingTTCDeleteEffect : ICliffLandingTTCEffect {
     this.id = id;
   }
   int ICliffLandingTTCEffect.id => id;
-  public void visit(ICliffLandingTTCEffectVisitor visitor) {
+  public void visitICliffLandingTTCEffect(ICliffLandingTTCEffectVisitor visitor) {
     visitor.visitCliffLandingTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitCliffLandingTTCEffect(this);
   }
 }
 

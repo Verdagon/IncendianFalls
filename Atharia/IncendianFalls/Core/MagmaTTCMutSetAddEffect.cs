@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct MagmaTTCMutSetAddEffect : IMagmaTTCMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public MagmaTTCMutSetAddEffect(int id, int elementId) {
+  public readonly int element;
+  public MagmaTTCMutSetAddEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IMagmaTTCMutSetEffect.id => id;
-  public void visit(IMagmaTTCMutSetEffectVisitor visitor) {
+  public void visitIMagmaTTCMutSetEffect(IMagmaTTCMutSetEffectVisitor visitor) {
     visitor.visitMagmaTTCMutSetAddEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitMagmaTTCMutSetEffect(this);
   }
 }
 

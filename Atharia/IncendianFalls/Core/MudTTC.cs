@@ -13,11 +13,11 @@ public class MudTTC {
     this.id = id;
   }
   public MudTTCIncarnation incarnation { get { return root.GetMudTTCIncarnation(id); } }
-  public void AddObserver(IMudTTCEffectObserver observer) {
-    root.AddMudTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMudTTCEffectObserver observer) {
+    broadcaster.AddMudTTCObserver(id, observer);
   }
-  public void RemoveObserver(IMudTTCEffectObserver observer) {
-    root.RemoveMudTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMudTTCEffectObserver observer) {
+    broadcaster.RemoveMudTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectMudTTCDelete(id);

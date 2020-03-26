@@ -10,8 +10,11 @@ public struct IncendianFallsLevelLinkerTTCMutSetCreateEffect : IIncendianFallsLe
     this.id = id;
   }
   int IIncendianFallsLevelLinkerTTCMutSetEffect.id => id;
-  public void visit(IIncendianFallsLevelLinkerTTCMutSetEffectVisitor visitor) {
+  public void visitIIncendianFallsLevelLinkerTTCMutSetEffect(IIncendianFallsLevelLinkerTTCMutSetEffectVisitor visitor) {
     visitor.visitIncendianFallsLevelLinkerTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitIncendianFallsLevelLinkerTTCMutSetEffect(this);
   }
 }
 

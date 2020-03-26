@@ -18,6 +18,9 @@ namespace Atharia.Model {
         bool squareLevelsOnly,
         Rand rand,
         int time) {
+
+      context.logger.Info("in makelevel " + squareLevelsOnly);
+
       var terrain =
           CircleTerrainGenerator.Generate(
             context,

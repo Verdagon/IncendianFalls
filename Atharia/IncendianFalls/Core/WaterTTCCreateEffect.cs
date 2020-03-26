@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct WaterTTCCreateEffect : IWaterTTCEffect {
   public readonly int id;
-  public WaterTTCCreateEffect(int id) {
+  public readonly WaterTTCIncarnation incarnation;
+  public WaterTTCCreateEffect(int id, WaterTTCIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IWaterTTCEffect.id => id;
-  public void visit(IWaterTTCEffectVisitor visitor) {
+  public void visitIWaterTTCEffect(IWaterTTCEffectVisitor visitor) {
     visitor.visitWaterTTCCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitWaterTTCEffect(this);
   }
 }
 

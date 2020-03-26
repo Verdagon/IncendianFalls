@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface IBaseSightRangeUCMutSetEffect {
+public interface IBaseSightRangeUCMutSetEffect : IEffect {
   int id { get; }
-  void visit(IBaseSightRangeUCMutSetEffectVisitor visitor);
+  void visitIBaseSightRangeUCMutSetEffect(IBaseSightRangeUCMutSetEffectVisitor visitor);
 }
 
 }

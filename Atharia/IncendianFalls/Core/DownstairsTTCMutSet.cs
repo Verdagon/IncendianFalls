@@ -14,24 +14,24 @@ public class DownStairsTTCMutSet {
   public DownStairsTTCMutSetIncarnation incarnation {
     get { return root.GetDownStairsTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IDownStairsTTCMutSetEffectObserver observer) {
-    root.AddDownStairsTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IDownStairsTTCMutSetEffectObserver observer) {
+    broadcaster.AddDownStairsTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IDownStairsTTCMutSetEffectObserver observer) {
-    root.RemoveDownStairsTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IDownStairsTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveDownStairsTTCMutSetObserver(id, observer);
   }
   public void Add(DownStairsTTC element) {
-    root.EffectDownStairsTTCMutSetAdd(id, element.id);
+      root.EffectDownStairsTTCMutSetAdd(id, element.id);
   }
   public void Remove(DownStairsTTC element) {
-    root.EffectDownStairsTTCMutSetRemove(id, element.id);
+      root.EffectDownStairsTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectDownStairsTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectDownStairsTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectDownStairsTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(DownStairsTTC element) {

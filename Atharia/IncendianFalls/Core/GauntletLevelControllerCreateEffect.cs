@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct GauntletLevelControllerCreateEffect : IGauntletLevelControllerEffect {
   public readonly int id;
-  public GauntletLevelControllerCreateEffect(int id) {
+  public readonly GauntletLevelControllerIncarnation incarnation;
+  public GauntletLevelControllerCreateEffect(int id, GauntletLevelControllerIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IGauntletLevelControllerEffect.id => id;
-  public void visit(IGauntletLevelControllerEffectVisitor visitor) {
+  public void visitIGauntletLevelControllerEffect(IGauntletLevelControllerEffectVisitor visitor) {
     visitor.visitGauntletLevelControllerCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitGauntletLevelControllerEffect(this);
   }
 }
 

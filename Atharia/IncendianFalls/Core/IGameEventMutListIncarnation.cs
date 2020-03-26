@@ -11,6 +11,10 @@ public class IGameEventMutListIncarnation {
   public IGameEventMutListIncarnation(List<IGameEvent> list) {
     this.list = list;
   }
+
+  public IGameEventMutListIncarnation Copy() {
+    return new IGameEventMutListIncarnation(new List<IGameEvent>(list));
+  }
 }
          
 }

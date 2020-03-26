@@ -13,11 +13,11 @@ public class DirtRoadLevelController {
     this.id = id;
   }
   public DirtRoadLevelControllerIncarnation incarnation { get { return root.GetDirtRoadLevelControllerIncarnation(id); } }
-  public void AddObserver(IDirtRoadLevelControllerEffectObserver observer) {
-    root.AddDirtRoadLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IDirtRoadLevelControllerEffectObserver observer) {
+    broadcaster.AddDirtRoadLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(IDirtRoadLevelControllerEffectObserver observer) {
-    root.RemoveDirtRoadLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IDirtRoadLevelControllerEffectObserver observer) {
+    broadcaster.RemoveDirtRoadLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectDirtRoadLevelControllerDelete(id);

@@ -10,8 +10,11 @@ public struct EvaporateImpulseStrongMutSetCreateEffect : IEvaporateImpulseStrong
     this.id = id;
   }
   int IEvaporateImpulseStrongMutSetEffect.id => id;
-  public void visit(IEvaporateImpulseStrongMutSetEffectVisitor visitor) {
+  public void visitIEvaporateImpulseStrongMutSetEffect(IEvaporateImpulseStrongMutSetEffectVisitor visitor) {
     visitor.visitEvaporateImpulseStrongMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitEvaporateImpulseStrongMutSetEffect(this);
   }
 }
 

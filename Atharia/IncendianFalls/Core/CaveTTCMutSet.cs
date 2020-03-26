@@ -14,24 +14,24 @@ public class CaveTTCMutSet {
   public CaveTTCMutSetIncarnation incarnation {
     get { return root.GetCaveTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(ICaveTTCMutSetEffectObserver observer) {
-    root.AddCaveTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICaveTTCMutSetEffectObserver observer) {
+    broadcaster.AddCaveTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ICaveTTCMutSetEffectObserver observer) {
-    root.RemoveCaveTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICaveTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveCaveTTCMutSetObserver(id, observer);
   }
   public void Add(CaveTTC element) {
-    root.EffectCaveTTCMutSetAdd(id, element.id);
+      root.EffectCaveTTCMutSetAdd(id, element.id);
   }
   public void Remove(CaveTTC element) {
-    root.EffectCaveTTCMutSetRemove(id, element.id);
+      root.EffectCaveTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectCaveTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectCaveTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectCaveTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(CaveTTC element) {

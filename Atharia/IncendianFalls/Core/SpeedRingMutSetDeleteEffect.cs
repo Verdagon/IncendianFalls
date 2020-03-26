@@ -10,8 +10,11 @@ public struct SpeedRingMutSetDeleteEffect : ISpeedRingMutSetEffect {
     this.id = id;
   }
   int ISpeedRingMutSetEffect.id => id;
-  public void visit(ISpeedRingMutSetEffectVisitor visitor) {
+  public void visitISpeedRingMutSetEffect(ISpeedRingMutSetEffectVisitor visitor) {
     visitor.visitSpeedRingMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSpeedRingMutSetEffect(this);
   }
 }
 

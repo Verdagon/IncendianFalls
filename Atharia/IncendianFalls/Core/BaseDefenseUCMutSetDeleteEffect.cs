@@ -10,8 +10,11 @@ public struct BaseDefenseUCMutSetDeleteEffect : IBaseDefenseUCMutSetEffect {
     this.id = id;
   }
   int IBaseDefenseUCMutSetEffect.id => id;
-  public void visit(IBaseDefenseUCMutSetEffectVisitor visitor) {
+  public void visitIBaseDefenseUCMutSetEffect(IBaseDefenseUCMutSetEffectVisitor visitor) {
     visitor.visitBaseDefenseUCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBaseDefenseUCMutSetEffect(this);
   }
 }
 

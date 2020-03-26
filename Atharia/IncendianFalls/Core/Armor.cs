@@ -13,11 +13,11 @@ public class Armor {
     this.id = id;
   }
   public ArmorIncarnation incarnation { get { return root.GetArmorIncarnation(id); } }
-  public void AddObserver(IArmorEffectObserver observer) {
-    root.AddArmorObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IArmorEffectObserver observer) {
+    broadcaster.AddArmorObserver(id, observer);
   }
-  public void RemoveObserver(IArmorEffectObserver observer) {
-    root.RemoveArmorObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IArmorEffectObserver observer) {
+    broadcaster.RemoveArmorObserver(id, observer);
   }
   public void Delete() {
     root.EffectArmorDelete(id);

@@ -11,8 +11,11 @@ public struct GameDeleteEffect : IGameEffect {
     this.id = id;
   }
   int IGameEffect.id => id;
-  public void visit(IGameEffectVisitor visitor) {
+  public void visitIGameEffect(IGameEffectVisitor visitor) {
     visitor.visitGameDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitGameEffect(this);
   }
 }
 

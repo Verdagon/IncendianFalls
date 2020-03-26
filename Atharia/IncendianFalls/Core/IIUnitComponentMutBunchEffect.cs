@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IIUnitComponentMutBunchEffect {
+public interface IIUnitComponentMutBunchEffect : IEffect {
   int id { get; }
-  void visit(IIUnitComponentMutBunchEffectVisitor visitor);
+  void visitIIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffectVisitor visitor);
 }
        
 }

@@ -56,8 +56,8 @@ object RootRevert {
                |            for (int i = currentObjIncarnation.list.Count - 1; i >= 0; i--) {
                |              Effect${listName}RemoveAt(objId, i);
                |            }
-               |            foreach (var objIdInSourceObjIncarnation in sourceObjIncarnation.list) {
-               |              Effect${listName}Add(objId, objIdInSourceObjIncarnation);
+               |            for (int i = 0; i < sourceObjIncarnation.list.Count; i++) {
+               |              Effect${listName}Add(objId, i, sourceObjIncarnation.list[i]);
                |            }
                |            // Swap out the underlying incarnation. The only visible effect this has is
                |            // changing the version number.

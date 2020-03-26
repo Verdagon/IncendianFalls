@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IItemStrongMutBunchIncarnation {
+public class IItemStrongMutBunchIncarnation : IIItemStrongMutBunchEffectVisitor {
   public readonly int membersManaPotionStrongMutSet;
   public readonly int membersHealthPotionStrongMutSet;
   public readonly int membersSpeedRingStrongMutSet;
@@ -28,6 +28,27 @@ public class IItemStrongMutBunchIncarnation {
     this.membersBlastRodStrongMutSet = membersBlastRodStrongMutSet;
     this.membersArmorStrongMutSet = membersArmorStrongMutSet;
   }
+  public IItemStrongMutBunchIncarnation Copy() {
+    return new IItemStrongMutBunchIncarnation(
+membersManaPotionStrongMutSet,
+membersHealthPotionStrongMutSet,
+membersSpeedRingStrongMutSet,
+membersGlaiveStrongMutSet,
+membersSlowRodStrongMutSet,
+membersBlastRodStrongMutSet,
+membersArmorStrongMutSet    );
+  }
+
+  public void visitIItemStrongMutBunchCreateEffect(IItemStrongMutBunchCreateEffect e) {}
+  public void visitIItemStrongMutBunchDeleteEffect(IItemStrongMutBunchDeleteEffect e) {}
+
+
+
+
+
+
+
+  public void ApplyEffect(IIItemStrongMutBunchEffect effect) { effect.visitIIItemStrongMutBunchEffect(this); }
 }
 
 }

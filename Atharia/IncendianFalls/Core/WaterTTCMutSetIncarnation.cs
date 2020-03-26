@@ -10,6 +10,10 @@ public class WaterTTCMutSetIncarnation {
   public WaterTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public WaterTTCMutSetIncarnation Copy() {
+    return new WaterTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

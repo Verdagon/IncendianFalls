@@ -11,8 +11,11 @@ public struct ManaPotionDeleteEffect : IManaPotionEffect {
     this.id = id;
   }
   int IManaPotionEffect.id => id;
-  public void visit(IManaPotionEffectVisitor visitor) {
+  public void visitIManaPotionEffect(IManaPotionEffectVisitor visitor) {
     visitor.visitManaPotionDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitManaPotionEffect(this);
   }
 }
 

@@ -10,6 +10,10 @@ public class BlastRodMutSetIncarnation {
   public BlastRodMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public BlastRodMutSetIncarnation Copy() {
+    return new BlastRodMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

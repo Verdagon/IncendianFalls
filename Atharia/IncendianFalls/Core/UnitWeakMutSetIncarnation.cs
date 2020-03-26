@@ -10,6 +10,10 @@ public class UnitWeakMutSetIncarnation {
   public UnitWeakMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public UnitWeakMutSetIncarnation Copy() {
+    return new UnitWeakMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

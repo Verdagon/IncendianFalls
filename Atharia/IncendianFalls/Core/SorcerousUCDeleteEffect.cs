@@ -11,8 +11,11 @@ public struct SorcerousUCDeleteEffect : ISorcerousUCEffect {
     this.id = id;
   }
   int ISorcerousUCEffect.id => id;
-  public void visit(ISorcerousUCEffectVisitor visitor) {
+  public void visitISorcerousUCEffect(ISorcerousUCEffectVisitor visitor) {
     visitor.visitSorcerousUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSorcerousUCEffect(this);
   }
 }
 

@@ -10,6 +10,10 @@ public class CliffLandingTTCMutSetIncarnation {
   public CliffLandingTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public CliffLandingTTCMutSetIncarnation Copy() {
+    return new CliffLandingTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

@@ -10,6 +10,10 @@ public class SpeedRingMutSetIncarnation {
   public SpeedRingMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public SpeedRingMutSetIncarnation Copy() {
+    return new SpeedRingMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

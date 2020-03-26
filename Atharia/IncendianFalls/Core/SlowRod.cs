@@ -13,11 +13,11 @@ public class SlowRod {
     this.id = id;
   }
   public SlowRodIncarnation incarnation { get { return root.GetSlowRodIncarnation(id); } }
-  public void AddObserver(ISlowRodEffectObserver observer) {
-    root.AddSlowRodObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISlowRodEffectObserver observer) {
+    broadcaster.AddSlowRodObserver(id, observer);
   }
-  public void RemoveObserver(ISlowRodEffectObserver observer) {
-    root.RemoveSlowRodObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISlowRodEffectObserver observer) {
+    broadcaster.RemoveSlowRodObserver(id, observer);
   }
   public void Delete() {
     root.EffectSlowRodDelete(id);

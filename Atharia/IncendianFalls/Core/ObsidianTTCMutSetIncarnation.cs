@@ -10,6 +10,10 @@ public class ObsidianTTCMutSetIncarnation {
   public ObsidianTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public ObsidianTTCMutSetIncarnation Copy() {
+    return new ObsidianTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

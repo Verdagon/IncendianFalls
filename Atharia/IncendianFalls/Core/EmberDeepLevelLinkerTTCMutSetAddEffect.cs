@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct EmberDeepLevelLinkerTTCMutSetAddEffect : IEmberDeepLevelLinkerTTCMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public EmberDeepLevelLinkerTTCMutSetAddEffect(int id, int elementId) {
+  public readonly int element;
+  public EmberDeepLevelLinkerTTCMutSetAddEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IEmberDeepLevelLinkerTTCMutSetEffect.id => id;
-  public void visit(IEmberDeepLevelLinkerTTCMutSetEffectVisitor visitor) {
+  public void visitIEmberDeepLevelLinkerTTCMutSetEffect(IEmberDeepLevelLinkerTTCMutSetEffectVisitor visitor) {
     visitor.visitEmberDeepLevelLinkerTTCMutSetAddEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitEmberDeepLevelLinkerTTCMutSetEffect(this);
   }
 }
 

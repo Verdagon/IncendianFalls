@@ -14,24 +14,24 @@ public class TemporaryCloneImpulseStrongMutSet {
   public TemporaryCloneImpulseStrongMutSetIncarnation incarnation {
     get { return root.GetTemporaryCloneImpulseStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(ITemporaryCloneImpulseStrongMutSetEffectObserver observer) {
-    root.AddTemporaryCloneImpulseStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITemporaryCloneImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.AddTemporaryCloneImpulseStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ITemporaryCloneImpulseStrongMutSetEffectObserver observer) {
-    root.RemoveTemporaryCloneImpulseStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITemporaryCloneImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveTemporaryCloneImpulseStrongMutSetObserver(id, observer);
   }
   public void Add(TemporaryCloneImpulse element) {
-    root.EffectTemporaryCloneImpulseStrongMutSetAdd(id, element.id);
+      root.EffectTemporaryCloneImpulseStrongMutSetAdd(id, element.id);
   }
   public void Remove(TemporaryCloneImpulse element) {
-    root.EffectTemporaryCloneImpulseStrongMutSetRemove(id, element.id);
+      root.EffectTemporaryCloneImpulseStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectTemporaryCloneImpulseStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectTemporaryCloneImpulseStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectTemporaryCloneImpulseStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(TemporaryCloneImpulse element) {

@@ -10,6 +10,10 @@ public class UnleashBideImpulseStrongMutSetIncarnation {
   public UnleashBideImpulseStrongMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public UnleashBideImpulseStrongMutSetIncarnation Copy() {
+    return new UnleashBideImpulseStrongMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

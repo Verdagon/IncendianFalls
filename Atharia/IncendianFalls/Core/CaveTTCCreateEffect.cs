@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct CaveTTCCreateEffect : ICaveTTCEffect {
   public readonly int id;
-  public CaveTTCCreateEffect(int id) {
+  public readonly CaveTTCIncarnation incarnation;
+  public CaveTTCCreateEffect(int id, CaveTTCIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int ICaveTTCEffect.id => id;
-  public void visit(ICaveTTCEffectVisitor visitor) {
+  public void visitICaveTTCEffect(ICaveTTCEffectVisitor visitor) {
     visitor.visitCaveTTCCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitCaveTTCEffect(this);
   }
 }
 

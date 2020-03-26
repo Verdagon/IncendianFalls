@@ -10,8 +10,11 @@ public struct ObsidianTTCMutSetCreateEffect : IObsidianTTCMutSetEffect {
     this.id = id;
   }
   int IObsidianTTCMutSetEffect.id => id;
-  public void visit(IObsidianTTCMutSetEffectVisitor visitor) {
+  public void visitIObsidianTTCMutSetEffect(IObsidianTTCMutSetEffectVisitor visitor) {
     visitor.visitObsidianTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitObsidianTTCMutSetEffect(this);
   }
 }
 

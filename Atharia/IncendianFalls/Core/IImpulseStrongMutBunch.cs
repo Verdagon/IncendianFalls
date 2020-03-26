@@ -13,11 +13,11 @@ public class IImpulseStrongMutBunch {
     this.id = id;
   }
   public IImpulseStrongMutBunchIncarnation incarnation { get { return root.GetIImpulseStrongMutBunchIncarnation(id); } }
-  public void AddObserver(IIImpulseStrongMutBunchEffectObserver observer) {
-    root.AddIImpulseStrongMutBunchObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IIImpulseStrongMutBunchEffectObserver observer) {
+    broadcaster.AddIImpulseStrongMutBunchObserver(id, observer);
   }
-  public void RemoveObserver(IIImpulseStrongMutBunchEffectObserver observer) {
-    root.RemoveIImpulseStrongMutBunchObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IIImpulseStrongMutBunchEffectObserver observer) {
+    broadcaster.RemoveIImpulseStrongMutBunchObserver(id, observer);
   }
   public void Delete() {
     root.EffectIImpulseStrongMutBunchDelete(id);

@@ -10,6 +10,10 @@ public class TemporaryCloneAICapabilityUCMutSetIncarnation {
   public TemporaryCloneAICapabilityUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public TemporaryCloneAICapabilityUCMutSetIncarnation Copy() {
+    return new TemporaryCloneAICapabilityUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

@@ -10,6 +10,10 @@ public class ContinueBidingImpulseStrongMutSetIncarnation {
   public ContinueBidingImpulseStrongMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public ContinueBidingImpulseStrongMutSetIncarnation Copy() {
+    return new ContinueBidingImpulseStrongMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

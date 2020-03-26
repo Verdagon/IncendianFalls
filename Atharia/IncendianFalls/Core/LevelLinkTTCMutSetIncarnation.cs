@@ -10,6 +10,10 @@ public class LevelLinkTTCMutSetIncarnation {
   public LevelLinkTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public LevelLinkTTCMutSetIncarnation Copy() {
+    return new LevelLinkTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

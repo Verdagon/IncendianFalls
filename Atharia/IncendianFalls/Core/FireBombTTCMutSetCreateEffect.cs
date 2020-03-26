@@ -10,8 +10,11 @@ public struct FireBombTTCMutSetCreateEffect : IFireBombTTCMutSetEffect {
     this.id = id;
   }
   int IFireBombTTCMutSetEffect.id => id;
-  public void visit(IFireBombTTCMutSetEffectVisitor visitor) {
+  public void visitIFireBombTTCMutSetEffect(IFireBombTTCMutSetEffectVisitor visitor) {
     visitor.visitFireBombTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitFireBombTTCMutSetEffect(this);
   }
 }
 

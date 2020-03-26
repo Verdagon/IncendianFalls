@@ -13,11 +13,11 @@ public class SimplePresenceTriggerTTC {
     this.id = id;
   }
   public SimplePresenceTriggerTTCIncarnation incarnation { get { return root.GetSimplePresenceTriggerTTCIncarnation(id); } }
-  public void AddObserver(ISimplePresenceTriggerTTCEffectObserver observer) {
-    root.AddSimplePresenceTriggerTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISimplePresenceTriggerTTCEffectObserver observer) {
+    broadcaster.AddSimplePresenceTriggerTTCObserver(id, observer);
   }
-  public void RemoveObserver(ISimplePresenceTriggerTTCEffectObserver observer) {
-    root.RemoveSimplePresenceTriggerTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISimplePresenceTriggerTTCEffectObserver observer) {
+    broadcaster.RemoveSimplePresenceTriggerTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectSimplePresenceTriggerTTCDelete(id);

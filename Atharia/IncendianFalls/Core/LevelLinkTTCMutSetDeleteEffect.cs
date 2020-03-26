@@ -10,8 +10,11 @@ public struct LevelLinkTTCMutSetDeleteEffect : ILevelLinkTTCMutSetEffect {
     this.id = id;
   }
   int ILevelLinkTTCMutSetEffect.id => id;
-  public void visit(ILevelLinkTTCMutSetEffectVisitor visitor) {
+  public void visitILevelLinkTTCMutSetEffect(ILevelLinkTTCMutSetEffectVisitor visitor) {
     visitor.visitLevelLinkTTCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLevelLinkTTCMutSetEffect(this);
   }
 }
 

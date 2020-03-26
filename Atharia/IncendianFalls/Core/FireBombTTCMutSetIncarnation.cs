@@ -10,6 +10,10 @@ public class FireBombTTCMutSetIncarnation {
   public FireBombTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public FireBombTTCMutSetIncarnation Copy() {
+    return new FireBombTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IWarperTTCEffect {
+public interface IWarperTTCEffect : IEffect {
   int id { get; }
-  void visit(IWarperTTCEffectVisitor visitor);
+  void visitIWarperTTCEffect(IWarperTTCEffectVisitor visitor);
 }
        
 }

@@ -14,24 +14,24 @@ public class GrassTTCMutSet {
   public GrassTTCMutSetIncarnation incarnation {
     get { return root.GetGrassTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IGrassTTCMutSetEffectObserver observer) {
-    root.AddGrassTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IGrassTTCMutSetEffectObserver observer) {
+    broadcaster.AddGrassTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IGrassTTCMutSetEffectObserver observer) {
-    root.RemoveGrassTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IGrassTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveGrassTTCMutSetObserver(id, observer);
   }
   public void Add(GrassTTC element) {
-    root.EffectGrassTTCMutSetAdd(id, element.id);
+      root.EffectGrassTTCMutSetAdd(id, element.id);
   }
   public void Remove(GrassTTC element) {
-    root.EffectGrassTTCMutSetRemove(id, element.id);
+      root.EffectGrassTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectGrassTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectGrassTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectGrassTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(GrassTTC element) {

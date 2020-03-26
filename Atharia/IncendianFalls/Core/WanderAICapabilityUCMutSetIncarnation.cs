@@ -10,6 +10,10 @@ public class WanderAICapabilityUCMutSetIncarnation {
   public WanderAICapabilityUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public WanderAICapabilityUCMutSetIncarnation Copy() {
+    return new WanderAICapabilityUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

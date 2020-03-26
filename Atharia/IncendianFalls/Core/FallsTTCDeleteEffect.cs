@@ -11,8 +11,11 @@ public struct FallsTTCDeleteEffect : IFallsTTCEffect {
     this.id = id;
   }
   int IFallsTTCEffect.id => id;
-  public void visit(IFallsTTCEffectVisitor visitor) {
+  public void visitIFallsTTCEffect(IFallsTTCEffectVisitor visitor) {
     visitor.visitFallsTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitFallsTTCEffect(this);
   }
 }
 

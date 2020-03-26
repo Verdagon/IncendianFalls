@@ -10,6 +10,10 @@ public class WarperTTCMutSetIncarnation {
   public WarperTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public WarperTTCMutSetIncarnation Copy() {
+    return new WarperTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

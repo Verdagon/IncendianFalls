@@ -14,24 +14,24 @@ public class BaseDefenseUCMutSet {
   public BaseDefenseUCMutSetIncarnation incarnation {
     get { return root.GetBaseDefenseUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IBaseDefenseUCMutSetEffectObserver observer) {
-    root.AddBaseDefenseUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBaseDefenseUCMutSetEffectObserver observer) {
+    broadcaster.AddBaseDefenseUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IBaseDefenseUCMutSetEffectObserver observer) {
-    root.RemoveBaseDefenseUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBaseDefenseUCMutSetEffectObserver observer) {
+    broadcaster.RemoveBaseDefenseUCMutSetObserver(id, observer);
   }
   public void Add(BaseDefenseUC element) {
-    root.EffectBaseDefenseUCMutSetAdd(id, element.id);
+      root.EffectBaseDefenseUCMutSetAdd(id, element.id);
   }
   public void Remove(BaseDefenseUC element) {
-    root.EffectBaseDefenseUCMutSetRemove(id, element.id);
+      root.EffectBaseDefenseUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectBaseDefenseUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectBaseDefenseUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectBaseDefenseUCMutSetRemove(id, element);
     }
   }
   public bool Contains(BaseDefenseUC element) {

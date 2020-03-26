@@ -10,6 +10,10 @@ public class LightningChargedUCMutSetIncarnation {
   public LightningChargedUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public LightningChargedUCMutSetIncarnation Copy() {
+    return new LightningChargedUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

@@ -14,24 +14,24 @@ public class SpeedRingMutSet {
   public SpeedRingMutSetIncarnation incarnation {
     get { return root.GetSpeedRingMutSetIncarnation(id); }
   }
-  public void AddObserver(ISpeedRingMutSetEffectObserver observer) {
-    root.AddSpeedRingMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISpeedRingMutSetEffectObserver observer) {
+    broadcaster.AddSpeedRingMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ISpeedRingMutSetEffectObserver observer) {
-    root.RemoveSpeedRingMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISpeedRingMutSetEffectObserver observer) {
+    broadcaster.RemoveSpeedRingMutSetObserver(id, observer);
   }
   public void Add(SpeedRing element) {
-    root.EffectSpeedRingMutSetAdd(id, element.id);
+      root.EffectSpeedRingMutSetAdd(id, element.id);
   }
   public void Remove(SpeedRing element) {
-    root.EffectSpeedRingMutSetRemove(id, element.id);
+      root.EffectSpeedRingMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectSpeedRingMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectSpeedRingMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectSpeedRingMutSetRemove(id, element);
     }
   }
   public bool Contains(SpeedRing element) {

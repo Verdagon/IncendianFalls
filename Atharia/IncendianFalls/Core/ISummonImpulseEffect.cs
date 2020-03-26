@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface ISummonImpulseEffect {
+public interface ISummonImpulseEffect : IEffect {
   int id { get; }
-  void visit(ISummonImpulseEffectVisitor visitor);
+  void visitISummonImpulseEffect(ISummonImpulseEffectVisitor visitor);
 }
        
 }

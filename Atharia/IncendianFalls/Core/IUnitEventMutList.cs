@@ -16,11 +16,11 @@ public class IUnitEventMutList : IEnumerable<IUnitEvent> {
   public IUnitEventMutListIncarnation incarnation {
     get { return root.GetIUnitEventMutListIncarnation(id); }
   }
-  public void AddObserver(IIUnitEventMutListEffectObserver observer) {
-    root.AddIUnitEventMutListObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IIUnitEventMutListEffectObserver observer) {
+    broadcaster.AddIUnitEventMutListObserver(id, observer);
   }
-  public void RemoveObserver(IIUnitEventMutListEffectObserver observer) {
-    root.RemoveIUnitEventMutListObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IIUnitEventMutListEffectObserver observer) {
+    broadcaster.RemoveIUnitEventMutListObserver(id, observer);
   }
   public void Delete() {
     root.EffectIUnitEventMutListDelete(id);
@@ -46,7 +46,7 @@ public class IUnitEventMutList : IEnumerable<IUnitEvent> {
     return this.root == that.root && id == that.id;
   }
   public void Add(IUnitEvent element) {
-    root.EffectIUnitEventMutListAdd(id, element);
+    root.EffectIUnitEventMutListAdd(id, Count, element);
   }
   public void RemoveAt(int index) {
     root.EffectIUnitEventMutListRemoveAt(id, index);

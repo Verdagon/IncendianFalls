@@ -11,8 +11,11 @@ public struct DirtTTCDeleteEffect : IDirtTTCEffect {
     this.id = id;
   }
   int IDirtTTCEffect.id => id;
-  public void visit(IDirtTTCEffectVisitor visitor) {
+  public void visitIDirtTTCEffect(IDirtTTCEffectVisitor visitor) {
     visitor.visitDirtTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitDirtTTCEffect(this);
   }
 }
 

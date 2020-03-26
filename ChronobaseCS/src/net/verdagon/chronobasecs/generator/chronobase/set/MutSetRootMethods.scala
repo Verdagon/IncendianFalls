@@ -1,7 +1,7 @@
 package net.verdagon.chronobasecs.generator.chronobase.set
 
 import net.verdagon.chronobasecs.generator.chronobase.Generator.toCS
-import net.verdagon.chronobasecs.compiled.{ListS, MutableS, SetS, WeakS}
+import net.verdagon.chronobasecs.compiled.{ImmutableS, ListS, MutableS, SetS, WeakS}
 import net.verdagon.chronobasecs.generator.chronobase.ChronobaseOptions
 
 object MutSetRootMethods {
@@ -13,6 +13,7 @@ object MutSetRootMethods {
     val SetS(setName, MutableS, elementType) = set
 
     val elementTypeCSName = toCS(elementType)
+    val flattenedElementTypeCSName = toCS(elementType.flatten)
 
     s"""
        |    public int Get${setName}Hash(int id, int version, ${setName}Incarnation incarnation) {
@@ -68,12 +69,12 @@ object MutSetRootMethods {
        |
            |""".stripMargin
       } else "") +
-      s"""      effects${setName}CreateEffect.Add(effect);
+      s"""      NotifyEffect(effect);
        |    }
        |    public void Effect${setName}Delete(int id) {
        |      CheckUnlocked();
        |      var effect = new ${setName}DeleteEffect(id);
-       |      effects${setName}DeleteEffect.Add(effect);
+       |      NotifyEffect(effect);
        |      var versionAndIncarnation = rootIncarnation.incarnations${setName}[id];
        |""".stripMargin +
       (if (opt.hash) {
@@ -87,29 +88,28 @@ object MutSetRootMethods {
        |
        """.stripMargin +
     s"""
-       |    public void Effect${setName}Add(int setId, int elementId) {
+       |    public void Effect${setName}Add(int setId, ${flattenedElementTypeCSName} element) {
        |      CheckUnlocked();
        |      CheckHas${setName}(setId);
-       |      CheckHas${elementTypeCSName}(elementId);
+       |      CheckHas${elementTypeCSName}(element);
        |
-       |      var effect = new ${setName}AddEffect(setId, elementId);
+       |      var effect = new ${setName}AddEffect(setId, element);
        |
        |      var oldIncarnationAndVersion = rootIncarnation.incarnations${setName}[setId];
-       |      if (oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+       |      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
        |        throw new Exception("Element already exists!");
        |      }
        |      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-       |        oldIncarnationAndVersion.incarnation.set.Add(elementId);
+       |        oldIncarnationAndVersion.incarnation.set.Add(element);
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash += setId * rootIncarnation.version * elementId.GetDeterministicHashCode();
-       |
-           |""".stripMargin
+        s"""        this.rootIncarnation.hash += setId * rootIncarnation.version * element.GetDeterministicHashCode();
+          |""".stripMargin
       } else "") +
       s"""      } else {
        |        var oldMap = oldIncarnationAndVersion.incarnation.set;
        |        var newMap = new SortedSet<int>(oldMap);
-       |        newMap.Add(elementId);
+       |        newMap.Add(element);
        |        var newIncarnation = new ${setName}Incarnation(newMap);
        |        rootIncarnation.incarnations${setName}[setId] =
        |            new VersionAndIncarnation<${setName}Incarnation>(
@@ -123,7 +123,7 @@ object MutSetRootMethods {
            |""".stripMargin
       } else "") +
       s"""      }
-       |      effects${setName}AddEffect.Add(effect);
+       |      NotifyEffect(effect);
        |    }
        |    public void Effect${setName}Remove(int setId, int elementId) {
        |      CheckUnlocked();
@@ -166,89 +166,9 @@ object MutSetRootMethods {
            |""".stripMargin
       } else "") +
       s"""      }
-       |      effects${setName}RemoveEffect.Add(effect);
+       |      NotifyEffect(effect);
        |    }
        |
-       """.stripMargin +
-    s"""
-       |    public void Add${setName}Observer(int id, I${setName}EffectObserver observer) {
-       |      List<I${setName}EffectObserver> obsies;
-       |      if (!observersFor${setName}.TryGetValue(id, out obsies)) {
-       |        obsies = new List<I${setName}EffectObserver>();
-       |      }
-       |      obsies.Add(observer);
-       |      observersFor${setName}[id] = obsies;
-       |    }
-       |
-       |    public void Remove${setName}Observer(int id, I${setName}EffectObserver observer) {
-       |      if (observersFor${setName}.ContainsKey(id)) {
-       |        var list = observersFor${setName}[id];
-       |        list.Remove(observer);
-       |        if (list.Count == 0) {
-       |          observersFor${setName}.Remove(id);
-       |        }
-       |      } else {
-       |        throw new Exception("Couldnt find!");
-       |      }
-       |    }
-       """.stripMargin +
-    generateBroadcaster(opt, set)
-  }
-
-  def generateBroadcaster(opt: ChronobaseOptions, set: SetS): String = {
-    val SetS(setName, MutableS, elementType) = set
-
-    val setCSType = toCS(set.tyype)
-
-    val observerName = s"I${setName}EffectObserver"
-    val createEffectName = s"${setName}CreateEffect"
-    val deleteEffectName = s"${setName}DeleteEffect"
-    val addEffectName = s"${setName}AddEffect"
-    val removeEffectName = s"${setName}RemoveEffect"
-
-    // Delete has to be first. This is so it can clear away all those
-    // observers observing this object, so they don't have to remove
-    // themselves, and if something is ressurrected via revert, the
-    // observers for the old existence won't be notified.
-    s"""
-       |  public void Broadcast${setCSType}Effects(
-       |      SortedDictionary<int, List<I${setCSType}EffectObserver>> observers) {
-       |    foreach (var effect in effects${deleteEffectName}) {
-       |      if (observers.TryGetValue(0, out List<${observerName}> globalObservers)) {
-       |        foreach (var observer in globalObservers) {
-       |          observer.On${setCSType}Effect(effect);
-       |        }
-       |      }
-       |      if (observers.TryGetValue(effect.id, out List<${observerName}> objObservers)) {
-       |        foreach (var observer in objObservers) {
-       |          observer.On${setCSType}Effect(effect);
-       |        }
-       |        observersFor${setCSType}.Remove(effect.id);
-       |      }
-       |    }
-       |    effects${deleteEffectName}.Clear();
-       |""".stripMargin +
-    List(addEffectName, removeEffectName, createEffectName)
-        .map(effectCSType => {
-          s"""
-             |    foreach (var effect in effects${effectCSType}) {
-             |      if (observers.TryGetValue(0, out List<${observerName}> globalObservers)) {
-             |        foreach (var observer in globalObservers) {
-             |          observer.On${setCSType}Effect(effect);
-             |        }
-             |      }
-             |      if (observers.TryGetValue(effect.id, out List<${observerName}> objObservers)) {
-             |        foreach (var observer in objObservers) {
-             |          observer.On${setCSType}Effect(effect);
-             |        }
-             |      }
-             |    }
-             |    effects${effectCSType}.Clear();
-             |""".stripMargin
-        })
-        .mkString("") +
-      s"""
-         |  }
-         |""".stripMargin
+       """.stripMargin
   }
 }

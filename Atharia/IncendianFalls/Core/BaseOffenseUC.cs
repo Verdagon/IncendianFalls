@@ -13,11 +13,11 @@ public class BaseOffenseUC {
     this.id = id;
   }
   public BaseOffenseUCIncarnation incarnation { get { return root.GetBaseOffenseUCIncarnation(id); } }
-  public void AddObserver(IBaseOffenseUCEffectObserver observer) {
-    root.AddBaseOffenseUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBaseOffenseUCEffectObserver observer) {
+    broadcaster.AddBaseOffenseUCObserver(id, observer);
   }
-  public void RemoveObserver(IBaseOffenseUCEffectObserver observer) {
-    root.RemoveBaseOffenseUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBaseOffenseUCEffectObserver observer) {
+    broadcaster.RemoveBaseOffenseUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectBaseOffenseUCDelete(id);

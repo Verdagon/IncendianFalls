@@ -11,8 +11,11 @@ public struct CounterImpulseDeleteEffect : ICounterImpulseEffect {
     this.id = id;
   }
   int ICounterImpulseEffect.id => id;
-  public void visit(ICounterImpulseEffectVisitor visitor) {
+  public void visitICounterImpulseEffect(ICounterImpulseEffectVisitor visitor) {
     visitor.visitCounterImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitCounterImpulseEffect(this);
   }
 }
 

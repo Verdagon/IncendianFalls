@@ -14,24 +14,24 @@ public class MarkerTTCMutSet {
   public MarkerTTCMutSetIncarnation incarnation {
     get { return root.GetMarkerTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IMarkerTTCMutSetEffectObserver observer) {
-    root.AddMarkerTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMarkerTTCMutSetEffectObserver observer) {
+    broadcaster.AddMarkerTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IMarkerTTCMutSetEffectObserver observer) {
-    root.RemoveMarkerTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMarkerTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveMarkerTTCMutSetObserver(id, observer);
   }
   public void Add(MarkerTTC element) {
-    root.EffectMarkerTTCMutSetAdd(id, element.id);
+      root.EffectMarkerTTCMutSetAdd(id, element.id);
   }
   public void Remove(MarkerTTC element) {
-    root.EffectMarkerTTCMutSetRemove(id, element.id);
+      root.EffectMarkerTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectMarkerTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectMarkerTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectMarkerTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(MarkerTTC element) {

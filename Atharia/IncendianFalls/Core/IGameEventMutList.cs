@@ -16,11 +16,11 @@ public class IGameEventMutList : IEnumerable<IGameEvent> {
   public IGameEventMutListIncarnation incarnation {
     get { return root.GetIGameEventMutListIncarnation(id); }
   }
-  public void AddObserver(IIGameEventMutListEffectObserver observer) {
-    root.AddIGameEventMutListObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IIGameEventMutListEffectObserver observer) {
+    broadcaster.AddIGameEventMutListObserver(id, observer);
   }
-  public void RemoveObserver(IIGameEventMutListEffectObserver observer) {
-    root.RemoveIGameEventMutListObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IIGameEventMutListEffectObserver observer) {
+    broadcaster.RemoveIGameEventMutListObserver(id, observer);
   }
   public void Delete() {
     root.EffectIGameEventMutListDelete(id);
@@ -46,7 +46,7 @@ public class IGameEventMutList : IEnumerable<IGameEvent> {
     return this.root == that.root && id == that.id;
   }
   public void Add(IGameEvent element) {
-    root.EffectIGameEventMutListAdd(id, element);
+    root.EffectIGameEventMutListAdd(id, Count, element);
   }
   public void RemoveAt(int index) {
     root.EffectIGameEventMutListRemoveAt(id, index);

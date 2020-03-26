@@ -10,6 +10,10 @@ public class TreeTTCMutSetIncarnation {
   public TreeTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public TreeTTCMutSetIncarnation Copy() {
+    return new TreeTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct CounteringUCCreateEffect : ICounteringUCEffect {
   public readonly int id;
-  public CounteringUCCreateEffect(int id) {
+  public readonly CounteringUCIncarnation incarnation;
+  public CounteringUCCreateEffect(int id, CounteringUCIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int ICounteringUCEffect.id => id;
-  public void visit(ICounteringUCEffectVisitor visitor) {
+  public void visitICounteringUCEffect(ICounteringUCEffectVisitor visitor) {
     visitor.visitCounteringUCCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitCounteringUCEffect(this);
   }
 }
 

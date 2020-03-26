@@ -16,8 +16,11 @@ public struct TutorialDefyCounterUCSetNumDefiesRemainingEffect : ITutorialDefyCo
   }
   int ITutorialDefyCounterUCEffect.id => id;
 
-  public void visit(ITutorialDefyCounterUCEffectVisitor visitor) {
+  public void visitITutorialDefyCounterUCEffect(ITutorialDefyCounterUCEffectVisitor visitor) {
     visitor.visitTutorialDefyCounterUCSetNumDefiesRemainingEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTutorialDefyCounterUCEffect(this);
   }
 }
 

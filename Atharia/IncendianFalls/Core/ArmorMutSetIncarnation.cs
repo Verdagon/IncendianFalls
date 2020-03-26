@@ -10,6 +10,10 @@ public class ArmorMutSetIncarnation {
   public ArmorMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public ArmorMutSetIncarnation Copy() {
+    return new ArmorMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

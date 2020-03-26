@@ -13,11 +13,11 @@ public class FallsTTC {
     this.id = id;
   }
   public FallsTTCIncarnation incarnation { get { return root.GetFallsTTCIncarnation(id); } }
-  public void AddObserver(IFallsTTCEffectObserver observer) {
-    root.AddFallsTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IFallsTTCEffectObserver observer) {
+    broadcaster.AddFallsTTCObserver(id, observer);
   }
-  public void RemoveObserver(IFallsTTCEffectObserver observer) {
-    root.RemoveFallsTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IFallsTTCEffectObserver observer) {
+    broadcaster.RemoveFallsTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectFallsTTCDelete(id);

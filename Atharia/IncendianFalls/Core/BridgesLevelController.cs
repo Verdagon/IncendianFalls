@@ -13,11 +13,11 @@ public class BridgesLevelController {
     this.id = id;
   }
   public BridgesLevelControllerIncarnation incarnation { get { return root.GetBridgesLevelControllerIncarnation(id); } }
-  public void AddObserver(IBridgesLevelControllerEffectObserver observer) {
-    root.AddBridgesLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBridgesLevelControllerEffectObserver observer) {
+    broadcaster.AddBridgesLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(IBridgesLevelControllerEffectObserver observer) {
-    root.RemoveBridgesLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBridgesLevelControllerEffectObserver observer) {
+    broadcaster.RemoveBridgesLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectBridgesLevelControllerDelete(id);

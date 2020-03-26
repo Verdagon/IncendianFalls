@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface IBaseMovementTimeUCMutSetEffect {
+public interface IBaseMovementTimeUCMutSetEffect : IEffect {
   int id { get; }
-  void visit(IBaseMovementTimeUCMutSetEffectVisitor visitor);
+  void visitIBaseMovementTimeUCMutSetEffect(IBaseMovementTimeUCMutSetEffectVisitor visitor);
 }
 
 }

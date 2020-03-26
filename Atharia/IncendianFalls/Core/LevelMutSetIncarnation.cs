@@ -10,6 +10,10 @@ public class LevelMutSetIncarnation {
   public LevelMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public LevelMutSetIncarnation Copy() {
+    return new LevelMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

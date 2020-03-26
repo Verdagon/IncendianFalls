@@ -6,25 +6,25 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public interface IRequestVisitor {
-  void Visit(TriggerRequestAsIRequest obj);
-  void Visit(TimeAnchorMoveRequestAsIRequest obj);
-  void Visit(TimeShiftRequestAsIRequest obj);
-  void Visit(FollowDirectiveRequestAsIRequest obj);
-  void Visit(CounterRequestAsIRequest obj);
-  void Visit(DefyRequestAsIRequest obj);
-  void Visit(MoveRequestAsIRequest obj);
-  void Visit(CheatRequestAsIRequest obj);
-  void Visit(MireRequestAsIRequest obj);
-  void Visit(FireBombRequestAsIRequest obj);
-  void Visit(FireRequestAsIRequest obj);
-  void Visit(CancelRequestAsIRequest obj);
-  void Visit(AttackRequestAsIRequest obj);
-  void Visit(ResumeRequestAsIRequest obj);
-  void Visit(InteractRequestAsIRequest obj);
-  void Visit(SetupTerrainRequestAsIRequest obj);
-  void Visit(SetupEmberDeepGameRequestAsIRequest obj);
-  void Visit(SetupGauntletGameRequestAsIRequest obj);
-  void Visit(SetupIncendianFallsGameRequestAsIRequest obj);
+  void VisitIRequest(TriggerRequestAsIRequest obj);
+  void VisitIRequest(TimeAnchorMoveRequestAsIRequest obj);
+  void VisitIRequest(TimeShiftRequestAsIRequest obj);
+  void VisitIRequest(FollowDirectiveRequestAsIRequest obj);
+  void VisitIRequest(CounterRequestAsIRequest obj);
+  void VisitIRequest(DefyRequestAsIRequest obj);
+  void VisitIRequest(MoveRequestAsIRequest obj);
+  void VisitIRequest(CheatRequestAsIRequest obj);
+  void VisitIRequest(MireRequestAsIRequest obj);
+  void VisitIRequest(FireBombRequestAsIRequest obj);
+  void VisitIRequest(FireRequestAsIRequest obj);
+  void VisitIRequest(CancelRequestAsIRequest obj);
+  void VisitIRequest(AttackRequestAsIRequest obj);
+  void VisitIRequest(ResumeRequestAsIRequest obj);
+  void VisitIRequest(InteractRequestAsIRequest obj);
+  void VisitIRequest(SetupTerrainRequestAsIRequest obj);
+  void VisitIRequest(SetupEmberDeepGameRequestAsIRequest obj);
+  void VisitIRequest(SetupGauntletGameRequestAsIRequest obj);
+  void VisitIRequest(SetupIncendianFallsGameRequestAsIRequest obj);
 }
 
 }

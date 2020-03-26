@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface ITutorial2LevelControllerEffect {
+public interface ITutorial2LevelControllerEffect : IEffect {
   int id { get; }
-  void visit(ITutorial2LevelControllerEffectVisitor visitor);
+  void visitITutorial2LevelControllerEffect(ITutorial2LevelControllerEffectVisitor visitor);
 }
        
 }

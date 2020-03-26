@@ -13,11 +13,11 @@ public class DownStairsTTC {
     this.id = id;
   }
   public DownStairsTTCIncarnation incarnation { get { return root.GetDownStairsTTCIncarnation(id); } }
-  public void AddObserver(IDownStairsTTCEffectObserver observer) {
-    root.AddDownStairsTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IDownStairsTTCEffectObserver observer) {
+    broadcaster.AddDownStairsTTCObserver(id, observer);
   }
-  public void RemoveObserver(IDownStairsTTCEffectObserver observer) {
-    root.RemoveDownStairsTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IDownStairsTTCEffectObserver observer) {
+    broadcaster.RemoveDownStairsTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectDownStairsTTCDelete(id);

@@ -16,8 +16,11 @@ public struct SummonAICapabilityUCSetChargesEffect : ISummonAICapabilityUCEffect
   }
   int ISummonAICapabilityUCEffect.id => id;
 
-  public void visit(ISummonAICapabilityUCEffectVisitor visitor) {
+  public void visitISummonAICapabilityUCEffect(ISummonAICapabilityUCEffectVisitor visitor) {
     visitor.visitSummonAICapabilityUCSetChargesEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSummonAICapabilityUCEffect(this);
   }
 }
 

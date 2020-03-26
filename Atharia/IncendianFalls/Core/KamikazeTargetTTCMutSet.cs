@@ -14,24 +14,24 @@ public class KamikazeTargetTTCMutSet {
   public KamikazeTargetTTCMutSetIncarnation incarnation {
     get { return root.GetKamikazeTargetTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IKamikazeTargetTTCMutSetEffectObserver observer) {
-    root.AddKamikazeTargetTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IKamikazeTargetTTCMutSetEffectObserver observer) {
+    broadcaster.AddKamikazeTargetTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IKamikazeTargetTTCMutSetEffectObserver observer) {
-    root.RemoveKamikazeTargetTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IKamikazeTargetTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveKamikazeTargetTTCMutSetObserver(id, observer);
   }
   public void Add(KamikazeTargetTTC element) {
-    root.EffectKamikazeTargetTTCMutSetAdd(id, element.id);
+      root.EffectKamikazeTargetTTCMutSetAdd(id, element.id);
   }
   public void Remove(KamikazeTargetTTC element) {
-    root.EffectKamikazeTargetTTCMutSetRemove(id, element.id);
+      root.EffectKamikazeTargetTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectKamikazeTargetTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectKamikazeTargetTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectKamikazeTargetTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(KamikazeTargetTTC element) {

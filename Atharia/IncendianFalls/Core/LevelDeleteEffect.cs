@@ -11,8 +11,11 @@ public struct LevelDeleteEffect : ILevelEffect {
     this.id = id;
   }
   int ILevelEffect.id => id;
-  public void visit(ILevelEffectVisitor visitor) {
+  public void visitILevelEffect(ILevelEffectVisitor visitor) {
     visitor.visitLevelDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLevelEffect(this);
   }
 }
 

@@ -10,6 +10,10 @@ public class GuardAICapabilityUCMutSetIncarnation {
   public GuardAICapabilityUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public GuardAICapabilityUCMutSetIncarnation Copy() {
+    return new GuardAICapabilityUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

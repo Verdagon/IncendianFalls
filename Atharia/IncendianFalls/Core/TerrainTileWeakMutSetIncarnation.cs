@@ -10,6 +10,10 @@ public class TerrainTileWeakMutSetIncarnation {
   public TerrainTileWeakMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public TerrainTileWeakMutSetIncarnation Copy() {
+    return new TerrainTileWeakMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

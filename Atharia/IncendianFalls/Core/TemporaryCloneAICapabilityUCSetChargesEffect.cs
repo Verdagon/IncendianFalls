@@ -16,8 +16,11 @@ public struct TemporaryCloneAICapabilityUCSetChargesEffect : ITemporaryCloneAICa
   }
   int ITemporaryCloneAICapabilityUCEffect.id => id;
 
-  public void visit(ITemporaryCloneAICapabilityUCEffectVisitor visitor) {
+  public void visitITemporaryCloneAICapabilityUCEffect(ITemporaryCloneAICapabilityUCEffectVisitor visitor) {
     visitor.visitTemporaryCloneAICapabilityUCSetChargesEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTemporaryCloneAICapabilityUCEffect(this);
   }
 }
 

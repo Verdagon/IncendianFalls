@@ -13,11 +13,11 @@ public class MagmaTTC {
     this.id = id;
   }
   public MagmaTTCIncarnation incarnation { get { return root.GetMagmaTTCIncarnation(id); } }
-  public void AddObserver(IMagmaTTCEffectObserver observer) {
-    root.AddMagmaTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMagmaTTCEffectObserver observer) {
+    broadcaster.AddMagmaTTCObserver(id, observer);
   }
-  public void RemoveObserver(IMagmaTTCEffectObserver observer) {
-    root.RemoveMagmaTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMagmaTTCEffectObserver observer) {
+    broadcaster.RemoveMagmaTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectMagmaTTCDelete(id);

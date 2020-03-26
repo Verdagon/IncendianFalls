@@ -11,8 +11,11 @@ public struct TimeCloneAICapabilityUCDeleteEffect : ITimeCloneAICapabilityUCEffe
     this.id = id;
   }
   int ITimeCloneAICapabilityUCEffect.id => id;
-  public void visit(ITimeCloneAICapabilityUCEffectVisitor visitor) {
+  public void visitITimeCloneAICapabilityUCEffect(ITimeCloneAICapabilityUCEffectVisitor visitor) {
     visitor.visitTimeCloneAICapabilityUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTimeCloneAICapabilityUCEffect(this);
   }
 }
 

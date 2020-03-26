@@ -16,8 +16,11 @@ public struct BideAICapabilityUCSetChargeEffect : IBideAICapabilityUCEffect {
   }
   int IBideAICapabilityUCEffect.id => id;
 
-  public void visit(IBideAICapabilityUCEffectVisitor visitor) {
+  public void visitIBideAICapabilityUCEffect(IBideAICapabilityUCEffectVisitor visitor) {
     visitor.visitBideAICapabilityUCSetChargeEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBideAICapabilityUCEffect(this);
   }
 }
 

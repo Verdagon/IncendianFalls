@@ -16,8 +16,11 @@ public struct GameSetTimeEffect : IGameEffect {
   }
   int IGameEffect.id => id;
 
-  public void visit(IGameEffectVisitor visitor) {
+  public void visitIGameEffect(IGameEffectVisitor visitor) {
     visitor.visitGameSetTimeEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitGameEffect(this);
   }
 }
 

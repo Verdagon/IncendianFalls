@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct BaseSightRangeUCMutSetAddEffect : IBaseSightRangeUCMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public BaseSightRangeUCMutSetAddEffect(int id, int elementId) {
+  public readonly int element;
+  public BaseSightRangeUCMutSetAddEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IBaseSightRangeUCMutSetEffect.id => id;
-  public void visit(IBaseSightRangeUCMutSetEffectVisitor visitor) {
+  public void visitIBaseSightRangeUCMutSetEffect(IBaseSightRangeUCMutSetEffectVisitor visitor) {
     visitor.visitBaseSightRangeUCMutSetAddEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBaseSightRangeUCMutSetEffect(this);
   }
 }
 

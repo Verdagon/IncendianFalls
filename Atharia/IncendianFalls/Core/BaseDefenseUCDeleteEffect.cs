@@ -11,8 +11,11 @@ public struct BaseDefenseUCDeleteEffect : IBaseDefenseUCEffect {
     this.id = id;
   }
   int IBaseDefenseUCEffect.id => id;
-  public void visit(IBaseDefenseUCEffectVisitor visitor) {
+  public void visitIBaseDefenseUCEffect(IBaseDefenseUCEffectVisitor visitor) {
     visitor.visitBaseDefenseUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBaseDefenseUCEffect(this);
   }
 }
 

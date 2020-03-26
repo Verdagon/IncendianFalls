@@ -10,8 +10,11 @@ public struct FireBombImpulseStrongMutSetDeleteEffect : IFireBombImpulseStrongMu
     this.id = id;
   }
   int IFireBombImpulseStrongMutSetEffect.id => id;
-  public void visit(IFireBombImpulseStrongMutSetEffectVisitor visitor) {
+  public void visitIFireBombImpulseStrongMutSetEffect(IFireBombImpulseStrongMutSetEffectVisitor visitor) {
     visitor.visitFireBombImpulseStrongMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitFireBombImpulseStrongMutSetEffect(this);
   }
 }
 

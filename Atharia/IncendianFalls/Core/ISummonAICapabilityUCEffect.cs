@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface ISummonAICapabilityUCEffect {
+public interface ISummonAICapabilityUCEffect : IEffect {
   int id { get; }
-  void visit(ISummonAICapabilityUCEffectVisitor visitor);
+  void visitISummonAICapabilityUCEffect(ISummonAICapabilityUCEffectVisitor visitor);
 }
        
 }

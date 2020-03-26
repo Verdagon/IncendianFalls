@@ -10,6 +10,10 @@ public class SorcerousUCMutSetIncarnation {
   public SorcerousUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public SorcerousUCMutSetIncarnation Copy() {
+    return new SorcerousUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

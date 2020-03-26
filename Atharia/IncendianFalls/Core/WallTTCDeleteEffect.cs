@@ -11,8 +11,11 @@ public struct WallTTCDeleteEffect : IWallTTCEffect {
     this.id = id;
   }
   int IWallTTCEffect.id => id;
-  public void visit(IWallTTCEffectVisitor visitor) {
+  public void visitIWallTTCEffect(IWallTTCEffectVisitor visitor) {
     visitor.visitWallTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitWallTTCEffect(this);
   }
 }
 

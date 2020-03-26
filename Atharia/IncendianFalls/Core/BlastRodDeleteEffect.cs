@@ -11,8 +11,11 @@ public struct BlastRodDeleteEffect : IBlastRodEffect {
     this.id = id;
   }
   int IBlastRodEffect.id => id;
-  public void visit(IBlastRodEffectVisitor visitor) {
+  public void visitIBlastRodEffect(IBlastRodEffectVisitor visitor) {
     visitor.visitBlastRodDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBlastRodEffect(this);
   }
 }
 

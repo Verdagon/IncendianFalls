@@ -14,24 +14,24 @@ public class HealthPotionStrongMutSet {
   public HealthPotionStrongMutSetIncarnation incarnation {
     get { return root.GetHealthPotionStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(IHealthPotionStrongMutSetEffectObserver observer) {
-    root.AddHealthPotionStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IHealthPotionStrongMutSetEffectObserver observer) {
+    broadcaster.AddHealthPotionStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IHealthPotionStrongMutSetEffectObserver observer) {
-    root.RemoveHealthPotionStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IHealthPotionStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveHealthPotionStrongMutSetObserver(id, observer);
   }
   public void Add(HealthPotion element) {
-    root.EffectHealthPotionStrongMutSetAdd(id, element.id);
+      root.EffectHealthPotionStrongMutSetAdd(id, element.id);
   }
   public void Remove(HealthPotion element) {
-    root.EffectHealthPotionStrongMutSetRemove(id, element.id);
+      root.EffectHealthPotionStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectHealthPotionStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectHealthPotionStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectHealthPotionStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(HealthPotion element) {

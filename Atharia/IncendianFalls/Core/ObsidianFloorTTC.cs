@@ -13,11 +13,11 @@ public class ObsidianFloorTTC {
     this.id = id;
   }
   public ObsidianFloorTTCIncarnation incarnation { get { return root.GetObsidianFloorTTCIncarnation(id); } }
-  public void AddObserver(IObsidianFloorTTCEffectObserver observer) {
-    root.AddObsidianFloorTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IObsidianFloorTTCEffectObserver observer) {
+    broadcaster.AddObsidianFloorTTCObserver(id, observer);
   }
-  public void RemoveObserver(IObsidianFloorTTCEffectObserver observer) {
-    root.RemoveObsidianFloorTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IObsidianFloorTTCEffectObserver observer) {
+    broadcaster.RemoveObsidianFloorTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectObsidianFloorTTCDelete(id);

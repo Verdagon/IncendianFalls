@@ -11,8 +11,11 @@ public struct BaseMovementTimeUCDeleteEffect : IBaseMovementTimeUCEffect {
     this.id = id;
   }
   int IBaseMovementTimeUCEffect.id => id;
-  public void visit(IBaseMovementTimeUCEffectVisitor visitor) {
+  public void visitIBaseMovementTimeUCEffect(IBaseMovementTimeUCEffectVisitor visitor) {
     visitor.visitBaseMovementTimeUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBaseMovementTimeUCEffect(this);
   }
 }
 

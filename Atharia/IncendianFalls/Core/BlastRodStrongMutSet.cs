@@ -14,24 +14,24 @@ public class BlastRodStrongMutSet {
   public BlastRodStrongMutSetIncarnation incarnation {
     get { return root.GetBlastRodStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(IBlastRodStrongMutSetEffectObserver observer) {
-    root.AddBlastRodStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBlastRodStrongMutSetEffectObserver observer) {
+    broadcaster.AddBlastRodStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IBlastRodStrongMutSetEffectObserver observer) {
-    root.RemoveBlastRodStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBlastRodStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveBlastRodStrongMutSetObserver(id, observer);
   }
   public void Add(BlastRod element) {
-    root.EffectBlastRodStrongMutSetAdd(id, element.id);
+      root.EffectBlastRodStrongMutSetAdd(id, element.id);
   }
   public void Remove(BlastRod element) {
-    root.EffectBlastRodStrongMutSetRemove(id, element.id);
+      root.EffectBlastRodStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectBlastRodStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectBlastRodStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectBlastRodStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(BlastRod element) {

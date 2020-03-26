@@ -11,8 +11,11 @@ public struct SotaventoLevelControllerDeleteEffect : ISotaventoLevelControllerEf
     this.id = id;
   }
   int ISotaventoLevelControllerEffect.id => id;
-  public void visit(ISotaventoLevelControllerEffectVisitor visitor) {
+  public void visitISotaventoLevelControllerEffect(ISotaventoLevelControllerEffectVisitor visitor) {
     visitor.visitSotaventoLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSotaventoLevelControllerEffect(this);
   }
 }
 

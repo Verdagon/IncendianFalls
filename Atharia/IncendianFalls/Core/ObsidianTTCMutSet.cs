@@ -14,24 +14,24 @@ public class ObsidianTTCMutSet {
   public ObsidianTTCMutSetIncarnation incarnation {
     get { return root.GetObsidianTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IObsidianTTCMutSetEffectObserver observer) {
-    root.AddObsidianTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IObsidianTTCMutSetEffectObserver observer) {
+    broadcaster.AddObsidianTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IObsidianTTCMutSetEffectObserver observer) {
-    root.RemoveObsidianTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IObsidianTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveObsidianTTCMutSetObserver(id, observer);
   }
   public void Add(ObsidianTTC element) {
-    root.EffectObsidianTTCMutSetAdd(id, element.id);
+      root.EffectObsidianTTCMutSetAdd(id, element.id);
   }
   public void Remove(ObsidianTTC element) {
-    root.EffectObsidianTTCMutSetRemove(id, element.id);
+      root.EffectObsidianTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectObsidianTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectObsidianTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectObsidianTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(ObsidianTTC element) {

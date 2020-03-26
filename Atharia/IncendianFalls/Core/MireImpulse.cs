@@ -13,11 +13,11 @@ public class MireImpulse {
     this.id = id;
   }
   public MireImpulseIncarnation incarnation { get { return root.GetMireImpulseIncarnation(id); } }
-  public void AddObserver(IMireImpulseEffectObserver observer) {
-    root.AddMireImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMireImpulseEffectObserver observer) {
+    broadcaster.AddMireImpulseObserver(id, observer);
   }
-  public void RemoveObserver(IMireImpulseEffectObserver observer) {
-    root.RemoveMireImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMireImpulseEffectObserver observer) {
+    broadcaster.RemoveMireImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectMireImpulseDelete(id);

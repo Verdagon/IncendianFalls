@@ -10,8 +10,11 @@ public struct BlastRodMutSetDeleteEffect : IBlastRodMutSetEffect {
     this.id = id;
   }
   int IBlastRodMutSetEffect.id => id;
-  public void visit(IBlastRodMutSetEffectVisitor visitor) {
+  public void visitIBlastRodMutSetEffect(IBlastRodMutSetEffectVisitor visitor) {
     visitor.visitBlastRodMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBlastRodMutSetEffect(this);
   }
 }
 

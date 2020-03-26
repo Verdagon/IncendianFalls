@@ -10,6 +10,10 @@ public class EmberDeepLevelLinkerTTCMutSetIncarnation {
   public EmberDeepLevelLinkerTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public EmberDeepLevelLinkerTTCMutSetIncarnation Copy() {
+    return new EmberDeepLevelLinkerTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

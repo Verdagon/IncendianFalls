@@ -13,11 +13,11 @@ public class KamikazeAICapabilityUC {
     this.id = id;
   }
   public KamikazeAICapabilityUCIncarnation incarnation { get { return root.GetKamikazeAICapabilityUCIncarnation(id); } }
-  public void AddObserver(IKamikazeAICapabilityUCEffectObserver observer) {
-    root.AddKamikazeAICapabilityUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IKamikazeAICapabilityUCEffectObserver observer) {
+    broadcaster.AddKamikazeAICapabilityUCObserver(id, observer);
   }
-  public void RemoveObserver(IKamikazeAICapabilityUCEffectObserver observer) {
-    root.RemoveKamikazeAICapabilityUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IKamikazeAICapabilityUCEffectObserver observer) {
+    broadcaster.RemoveKamikazeAICapabilityUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectKamikazeAICapabilityUCDelete(id);

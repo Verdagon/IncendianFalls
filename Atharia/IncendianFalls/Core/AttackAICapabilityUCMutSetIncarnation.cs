@@ -10,6 +10,10 @@ public class AttackAICapabilityUCMutSetIncarnation {
   public AttackAICapabilityUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public AttackAICapabilityUCMutSetIncarnation Copy() {
+    return new AttackAICapabilityUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

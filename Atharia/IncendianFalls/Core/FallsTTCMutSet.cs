@@ -14,24 +14,24 @@ public class FallsTTCMutSet {
   public FallsTTCMutSetIncarnation incarnation {
     get { return root.GetFallsTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IFallsTTCMutSetEffectObserver observer) {
-    root.AddFallsTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IFallsTTCMutSetEffectObserver observer) {
+    broadcaster.AddFallsTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IFallsTTCMutSetEffectObserver observer) {
-    root.RemoveFallsTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IFallsTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveFallsTTCMutSetObserver(id, observer);
   }
   public void Add(FallsTTC element) {
-    root.EffectFallsTTCMutSetAdd(id, element.id);
+      root.EffectFallsTTCMutSetAdd(id, element.id);
   }
   public void Remove(FallsTTC element) {
-    root.EffectFallsTTCMutSetRemove(id, element.id);
+      root.EffectFallsTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectFallsTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectFallsTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectFallsTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(FallsTTC element) {

@@ -13,11 +13,11 @@ public class TreeTTC {
     this.id = id;
   }
   public TreeTTCIncarnation incarnation { get { return root.GetTreeTTCIncarnation(id); } }
-  public void AddObserver(ITreeTTCEffectObserver observer) {
-    root.AddTreeTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITreeTTCEffectObserver observer) {
+    broadcaster.AddTreeTTCObserver(id, observer);
   }
-  public void RemoveObserver(ITreeTTCEffectObserver observer) {
-    root.RemoveTreeTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITreeTTCEffectObserver observer) {
+    broadcaster.RemoveTreeTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectTreeTTCDelete(id);

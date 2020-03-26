@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface IInvincibilityUCWeakMutSetEffect {
+public interface IInvincibilityUCWeakMutSetEffect : IEffect {
   int id { get; }
-  void visit(IInvincibilityUCWeakMutSetEffectVisitor visitor);
+  void visitIInvincibilityUCWeakMutSetEffect(IInvincibilityUCWeakMutSetEffectVisitor visitor);
 }
 
 }

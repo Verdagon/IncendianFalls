@@ -11,8 +11,11 @@ public struct SummonAICapabilityUCDeleteEffect : ISummonAICapabilityUCEffect {
     this.id = id;
   }
   int ISummonAICapabilityUCEffect.id => id;
-  public void visit(ISummonAICapabilityUCEffectVisitor visitor) {
+  public void visitISummonAICapabilityUCEffect(ISummonAICapabilityUCEffectVisitor visitor) {
     visitor.visitSummonAICapabilityUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSummonAICapabilityUCEffect(this);
   }
 }
 

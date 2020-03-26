@@ -11,8 +11,11 @@ public struct GlaiveDeleteEffect : IGlaiveEffect {
     this.id = id;
   }
   int IGlaiveEffect.id => id;
-  public void visit(IGlaiveEffectVisitor visitor) {
+  public void visitIGlaiveEffect(IGlaiveEffectVisitor visitor) {
     visitor.visitGlaiveDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitGlaiveEffect(this);
   }
 }
 

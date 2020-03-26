@@ -16,8 +16,11 @@ public struct ExecutionStateSetActingUnitDidActionEffect : IExecutionStateEffect
   }
   int IExecutionStateEffect.id => id;
 
-  public void visit(IExecutionStateEffectVisitor visitor) {
+  public void visitIExecutionStateEffect(IExecutionStateEffectVisitor visitor) {
     visitor.visitExecutionStateSetActingUnitDidActionEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitExecutionStateEffect(this);
   }
 }
 

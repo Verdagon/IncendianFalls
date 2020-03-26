@@ -11,8 +11,11 @@ public struct LightningChargingUCDeleteEffect : ILightningChargingUCEffect {
     this.id = id;
   }
   int ILightningChargingUCEffect.id => id;
-  public void visit(ILightningChargingUCEffectVisitor visitor) {
+  public void visitILightningChargingUCEffect(ILightningChargingUCEffectVisitor visitor) {
     visitor.visitLightningChargingUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLightningChargingUCEffect(this);
   }
 }
 

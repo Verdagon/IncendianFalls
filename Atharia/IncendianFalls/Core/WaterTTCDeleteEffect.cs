@@ -11,8 +11,11 @@ public struct WaterTTCDeleteEffect : IWaterTTCEffect {
     this.id = id;
   }
   int IWaterTTCEffect.id => id;
-  public void visit(IWaterTTCEffectVisitor visitor) {
+  public void visitIWaterTTCEffect(IWaterTTCEffectVisitor visitor) {
     visitor.visitWaterTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitWaterTTCEffect(this);
   }
 }
 

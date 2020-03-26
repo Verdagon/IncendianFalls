@@ -15,8 +15,11 @@ public struct TerrainTileByLocationMutMapAddEffect : ITerrainTileByLocationMutMa
     this.value = value;
   }
   int ITerrainTileByLocationMutMapEffect.id => id;
-  public void visit(ITerrainTileByLocationMutMapEffectVisitor visitor) {
+  public void visitITerrainTileByLocationMutMapEffect(ITerrainTileByLocationMutMapEffectVisitor visitor) {
     visitor.visitTerrainTileByLocationMutMapAddEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTerrainTileByLocationMutMapEffect(this);
   }
 }
 

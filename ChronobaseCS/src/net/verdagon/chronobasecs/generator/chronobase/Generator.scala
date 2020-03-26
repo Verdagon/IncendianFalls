@@ -51,6 +51,8 @@ object Generator {
     Map[String, String](
       "Root" -> Root.generateRoot(opt, ss),
       "RootIncarnation" -> RootIncarnation.generateRootIncarnation(opt, ss),
+      "EffectApplier" -> EffectApplier.generateEffectApplier(opt, ss),
+      "EffectBroadcaster" -> EffectBroadcaster.generateEffectBroadcaster(opt, ss),
       "PrimitivesExtensions" -> Primitives.definition) ++
       ParseSource.files ++
       ss.structs.flatMap(s => StructGenerator.generateHandles(opt, ss, s)).toMap ++

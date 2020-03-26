@@ -11,8 +11,11 @@ public struct InvincibilityUCDeleteEffect : IInvincibilityUCEffect {
     this.id = id;
   }
   int IInvincibilityUCEffect.id => id;
-  public void visit(IInvincibilityUCEffectVisitor visitor) {
+  public void visitIInvincibilityUCEffect(IInvincibilityUCEffectVisitor visitor) {
     visitor.visitInvincibilityUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitInvincibilityUCEffect(this);
   }
 }
 

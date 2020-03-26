@@ -14,24 +14,24 @@ public class BideAICapabilityUCMutSet {
   public BideAICapabilityUCMutSetIncarnation incarnation {
     get { return root.GetBideAICapabilityUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IBideAICapabilityUCMutSetEffectObserver observer) {
-    root.AddBideAICapabilityUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBideAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.AddBideAICapabilityUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IBideAICapabilityUCMutSetEffectObserver observer) {
-    root.RemoveBideAICapabilityUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBideAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.RemoveBideAICapabilityUCMutSetObserver(id, observer);
   }
   public void Add(BideAICapabilityUC element) {
-    root.EffectBideAICapabilityUCMutSetAdd(id, element.id);
+      root.EffectBideAICapabilityUCMutSetAdd(id, element.id);
   }
   public void Remove(BideAICapabilityUC element) {
-    root.EffectBideAICapabilityUCMutSetRemove(id, element.id);
+      root.EffectBideAICapabilityUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectBideAICapabilityUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectBideAICapabilityUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectBideAICapabilityUCMutSetRemove(id, element);
     }
   }
   public bool Contains(BideAICapabilityUC element) {

@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct WaterTTCMutSetRemoveEffect : IWaterTTCMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public WaterTTCMutSetRemoveEffect(int id, int elementId) {
+  public readonly int element;
+  public WaterTTCMutSetRemoveEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IWaterTTCMutSetEffect.id => id;
-  public void visit(IWaterTTCMutSetEffectVisitor visitor) {
+  public void visitIWaterTTCMutSetEffect(IWaterTTCMutSetEffectVisitor visitor) {
     visitor.visitWaterTTCMutSetRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitWaterTTCMutSetEffect(this);
   }
 }
 

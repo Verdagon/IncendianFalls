@@ -10,6 +10,10 @@ public class TutorialDefyCounterUCMutSetIncarnation {
   public TutorialDefyCounterUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public TutorialDefyCounterUCMutSetIncarnation Copy() {
+    return new TutorialDefyCounterUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

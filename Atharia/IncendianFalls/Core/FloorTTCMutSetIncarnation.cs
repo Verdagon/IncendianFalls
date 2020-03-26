@@ -10,6 +10,10 @@ public class FloorTTCMutSetIncarnation {
   public FloorTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public FloorTTCMutSetIncarnation Copy() {
+    return new FloorTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

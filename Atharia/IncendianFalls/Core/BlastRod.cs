@@ -13,11 +13,11 @@ public class BlastRod {
     this.id = id;
   }
   public BlastRodIncarnation incarnation { get { return root.GetBlastRodIncarnation(id); } }
-  public void AddObserver(IBlastRodEffectObserver observer) {
-    root.AddBlastRodObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBlastRodEffectObserver observer) {
+    broadcaster.AddBlastRodObserver(id, observer);
   }
-  public void RemoveObserver(IBlastRodEffectObserver observer) {
-    root.RemoveBlastRodObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBlastRodEffectObserver observer) {
+    broadcaster.RemoveBlastRodObserver(id, observer);
   }
   public void Delete() {
     root.EffectBlastRodDelete(id);

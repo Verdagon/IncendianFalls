@@ -16,8 +16,11 @@ public struct LevelSetTimeEffect : ILevelEffect {
   }
   int ILevelEffect.id => id;
 
-  public void visit(ILevelEffectVisitor visitor) {
+  public void visitILevelEffect(ILevelEffectVisitor visitor) {
     visitor.visitLevelSetTimeEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLevelEffect(this);
   }
 }
 

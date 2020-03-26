@@ -14,24 +14,24 @@ public class MiredUCWeakMutSet {
   public MiredUCWeakMutSetIncarnation incarnation {
     get { return root.GetMiredUCWeakMutSetIncarnation(id); }
   }
-  public void AddObserver(IMiredUCWeakMutSetEffectObserver observer) {
-    root.AddMiredUCWeakMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMiredUCWeakMutSetEffectObserver observer) {
+    broadcaster.AddMiredUCWeakMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IMiredUCWeakMutSetEffectObserver observer) {
-    root.RemoveMiredUCWeakMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMiredUCWeakMutSetEffectObserver observer) {
+    broadcaster.RemoveMiredUCWeakMutSetObserver(id, observer);
   }
   public void Add(MiredUC element) {
-    root.EffectMiredUCWeakMutSetAdd(id, element.id);
+      root.EffectMiredUCWeakMutSetAdd(id, element.id);
   }
   public void Remove(MiredUC element) {
-    root.EffectMiredUCWeakMutSetRemove(id, element.id);
+      root.EffectMiredUCWeakMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectMiredUCWeakMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectMiredUCWeakMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectMiredUCWeakMutSetRemove(id, element);
     }
   }
   public bool Contains(MiredUC element) {

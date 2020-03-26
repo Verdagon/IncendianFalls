@@ -13,11 +13,11 @@ public class UnleashBideImpulse {
     this.id = id;
   }
   public UnleashBideImpulseIncarnation incarnation { get { return root.GetUnleashBideImpulseIncarnation(id); } }
-  public void AddObserver(IUnleashBideImpulseEffectObserver observer) {
-    root.AddUnleashBideImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IUnleashBideImpulseEffectObserver observer) {
+    broadcaster.AddUnleashBideImpulseObserver(id, observer);
   }
-  public void RemoveObserver(IUnleashBideImpulseEffectObserver observer) {
-    root.RemoveUnleashBideImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IUnleashBideImpulseEffectObserver observer) {
+    broadcaster.RemoveUnleashBideImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectUnleashBideImpulseDelete(id);

@@ -11,8 +11,11 @@ public struct DoomedUCDeleteEffect : IDoomedUCEffect {
     this.id = id;
   }
   int IDoomedUCEffect.id => id;
-  public void visit(IDoomedUCEffectVisitor visitor) {
+  public void visitIDoomedUCEffect(IDoomedUCEffectVisitor visitor) {
     visitor.visitDoomedUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitDoomedUCEffect(this);
   }
 }
 

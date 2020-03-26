@@ -10,8 +10,11 @@ public struct ArmorMutSetDeleteEffect : IArmorMutSetEffect {
     this.id = id;
   }
   int IArmorMutSetEffect.id => id;
-  public void visit(IArmorMutSetEffectVisitor visitor) {
+  public void visitIArmorMutSetEffect(IArmorMutSetEffectVisitor visitor) {
     visitor.visitArmorMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitArmorMutSetEffect(this);
   }
 }
 

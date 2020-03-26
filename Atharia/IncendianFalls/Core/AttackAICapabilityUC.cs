@@ -13,11 +13,11 @@ public class AttackAICapabilityUC {
     this.id = id;
   }
   public AttackAICapabilityUCIncarnation incarnation { get { return root.GetAttackAICapabilityUCIncarnation(id); } }
-  public void AddObserver(IAttackAICapabilityUCEffectObserver observer) {
-    root.AddAttackAICapabilityUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IAttackAICapabilityUCEffectObserver observer) {
+    broadcaster.AddAttackAICapabilityUCObserver(id, observer);
   }
-  public void RemoveObserver(IAttackAICapabilityUCEffectObserver observer) {
-    root.RemoveAttackAICapabilityUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IAttackAICapabilityUCEffectObserver observer) {
+    broadcaster.RemoveAttackAICapabilityUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectAttackAICapabilityUCDelete(id);

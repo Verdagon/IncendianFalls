@@ -10,8 +10,11 @@ public struct SimplePresenceTriggerTTCMutSetCreateEffect : ISimplePresenceTrigge
     this.id = id;
   }
   int ISimplePresenceTriggerTTCMutSetEffect.id => id;
-  public void visit(ISimplePresenceTriggerTTCMutSetEffectVisitor visitor) {
+  public void visitISimplePresenceTriggerTTCMutSetEffect(ISimplePresenceTriggerTTCMutSetEffectVisitor visitor) {
     visitor.visitSimplePresenceTriggerTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSimplePresenceTriggerTTCMutSetEffect(this);
   }
 }
 

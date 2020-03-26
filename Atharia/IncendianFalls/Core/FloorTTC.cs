@@ -13,11 +13,11 @@ public class FloorTTC {
     this.id = id;
   }
   public FloorTTCIncarnation incarnation { get { return root.GetFloorTTCIncarnation(id); } }
-  public void AddObserver(IFloorTTCEffectObserver observer) {
-    root.AddFloorTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IFloorTTCEffectObserver observer) {
+    broadcaster.AddFloorTTCObserver(id, observer);
   }
-  public void RemoveObserver(IFloorTTCEffectObserver observer) {
-    root.RemoveFloorTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IFloorTTCEffectObserver observer) {
+    broadcaster.RemoveFloorTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectFloorTTCDelete(id);

@@ -23,7 +23,7 @@ object ImmInterface {
       s"public interface ${interfaceName} {\n" +
         s"  string DStr();\n" +
         s"  int GetDeterministicHashCode();\n" +
-        s"  void Visit(${interfaceName}Visitor visitor);\n" +
+        s"  void Visit${interfaceName}(${interfaceName}Visitor visitor);\n" +
         methods.map("  " + signatureToString(_) + ";\n").mkString("") +
         "}\n"
 
@@ -34,7 +34,7 @@ object ImmInterface {
          |  public static ${nullClassName} Null = new Null${interfaceName}();
          |  public string DStr() { return "null"; }
          |  public int GetDeterministicHashCode() { return 0; }
-         |  public void Visit(${interfaceName}Visitor visitor) { throw new Exception("Called method on a null!"); }
+         |  public void Visit${interfaceName}(${interfaceName}Visitor visitor) { throw new Exception("Called method on a null!"); }
          |""".stripMargin +
         methods.map({ method =>
           "  public " + signatureToString(method) + "{ throw new Exception(\"Called method on a null!\"); }\n"
@@ -47,10 +47,10 @@ object ImmInterface {
          |public interface ${visitorName} {
          |""".stripMargin +
         childInterfaces.map(_.name).map({ subInterfaceName =>
-          s"  void Visit(${subInterfaceName} obj);\n"
+          s"  void Visit${interfaceName}(${subInterfaceName} obj);\n"
         }).mkString("") +
         childStructs.map(_.name).map({ structName =>
-          s"  void Visit(${structName}As${interfaceName} obj);\n"
+          s"  void Visit${interfaceName}(${structName}As${interfaceName} obj);\n"
         }).mkString("") +
         "}\n"
 

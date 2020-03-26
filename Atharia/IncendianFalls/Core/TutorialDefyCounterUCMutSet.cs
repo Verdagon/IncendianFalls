@@ -14,24 +14,24 @@ public class TutorialDefyCounterUCMutSet {
   public TutorialDefyCounterUCMutSetIncarnation incarnation {
     get { return root.GetTutorialDefyCounterUCMutSetIncarnation(id); }
   }
-  public void AddObserver(ITutorialDefyCounterUCMutSetEffectObserver observer) {
-    root.AddTutorialDefyCounterUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITutorialDefyCounterUCMutSetEffectObserver observer) {
+    broadcaster.AddTutorialDefyCounterUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ITutorialDefyCounterUCMutSetEffectObserver observer) {
-    root.RemoveTutorialDefyCounterUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITutorialDefyCounterUCMutSetEffectObserver observer) {
+    broadcaster.RemoveTutorialDefyCounterUCMutSetObserver(id, observer);
   }
   public void Add(TutorialDefyCounterUC element) {
-    root.EffectTutorialDefyCounterUCMutSetAdd(id, element.id);
+      root.EffectTutorialDefyCounterUCMutSetAdd(id, element.id);
   }
   public void Remove(TutorialDefyCounterUC element) {
-    root.EffectTutorialDefyCounterUCMutSetRemove(id, element.id);
+      root.EffectTutorialDefyCounterUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectTutorialDefyCounterUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectTutorialDefyCounterUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectTutorialDefyCounterUCMutSetRemove(id, element);
     }
   }
   public bool Contains(TutorialDefyCounterUC element) {

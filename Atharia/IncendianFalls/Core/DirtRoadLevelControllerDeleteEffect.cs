@@ -11,8 +11,11 @@ public struct DirtRoadLevelControllerDeleteEffect : IDirtRoadLevelControllerEffe
     this.id = id;
   }
   int IDirtRoadLevelControllerEffect.id => id;
-  public void visit(IDirtRoadLevelControllerEffectVisitor visitor) {
+  public void visitIDirtRoadLevelControllerEffect(IDirtRoadLevelControllerEffectVisitor visitor) {
     visitor.visitDirtRoadLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitDirtRoadLevelControllerEffect(this);
   }
 }
 

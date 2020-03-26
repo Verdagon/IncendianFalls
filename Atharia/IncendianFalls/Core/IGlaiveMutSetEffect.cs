@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface IGlaiveMutSetEffect {
+public interface IGlaiveMutSetEffect : IEffect {
   int id { get; }
-  void visit(IGlaiveMutSetEffectVisitor visitor);
+  void visitIGlaiveMutSetEffect(IGlaiveMutSetEffectVisitor visitor);
 }
 
 }

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface ICliffLevelControllerEffect {
+public interface ICliffLevelControllerEffect : IEffect {
   int id { get; }
-  void visit(ICliffLevelControllerEffectVisitor visitor);
+  void visitICliffLevelControllerEffect(ICliffLevelControllerEffectVisitor visitor);
 }
        
 }

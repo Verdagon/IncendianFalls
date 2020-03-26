@@ -11,8 +11,11 @@ public struct ContinueBidingImpulseDeleteEffect : IContinueBidingImpulseEffect {
     this.id = id;
   }
   int IContinueBidingImpulseEffect.id => id;
-  public void visit(IContinueBidingImpulseEffectVisitor visitor) {
+  public void visitIContinueBidingImpulseEffect(IContinueBidingImpulseEffectVisitor visitor) {
     visitor.visitContinueBidingImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitContinueBidingImpulseEffect(this);
   }
 }
 

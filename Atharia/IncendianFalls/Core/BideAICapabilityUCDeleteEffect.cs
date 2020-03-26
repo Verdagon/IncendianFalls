@@ -11,8 +11,11 @@ public struct BideAICapabilityUCDeleteEffect : IBideAICapabilityUCEffect {
     this.id = id;
   }
   int IBideAICapabilityUCEffect.id => id;
-  public void visit(IBideAICapabilityUCEffectVisitor visitor) {
+  public void visitIBideAICapabilityUCEffect(IBideAICapabilityUCEffectVisitor visitor) {
     visitor.visitBideAICapabilityUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBideAICapabilityUCEffect(this);
   }
 }
 

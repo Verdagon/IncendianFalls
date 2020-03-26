@@ -14,24 +14,24 @@ public class TimeCloneAICapabilityUCWeakMutSet {
   public TimeCloneAICapabilityUCWeakMutSetIncarnation incarnation {
     get { return root.GetTimeCloneAICapabilityUCWeakMutSetIncarnation(id); }
   }
-  public void AddObserver(ITimeCloneAICapabilityUCWeakMutSetEffectObserver observer) {
-    root.AddTimeCloneAICapabilityUCWeakMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITimeCloneAICapabilityUCWeakMutSetEffectObserver observer) {
+    broadcaster.AddTimeCloneAICapabilityUCWeakMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ITimeCloneAICapabilityUCWeakMutSetEffectObserver observer) {
-    root.RemoveTimeCloneAICapabilityUCWeakMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITimeCloneAICapabilityUCWeakMutSetEffectObserver observer) {
+    broadcaster.RemoveTimeCloneAICapabilityUCWeakMutSetObserver(id, observer);
   }
   public void Add(TimeCloneAICapabilityUC element) {
-    root.EffectTimeCloneAICapabilityUCWeakMutSetAdd(id, element.id);
+      root.EffectTimeCloneAICapabilityUCWeakMutSetAdd(id, element.id);
   }
   public void Remove(TimeCloneAICapabilityUC element) {
-    root.EffectTimeCloneAICapabilityUCWeakMutSetRemove(id, element.id);
+      root.EffectTimeCloneAICapabilityUCWeakMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectTimeCloneAICapabilityUCWeakMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectTimeCloneAICapabilityUCWeakMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectTimeCloneAICapabilityUCWeakMutSetRemove(id, element);
     }
   }
   public bool Contains(TimeCloneAICapabilityUC element) {

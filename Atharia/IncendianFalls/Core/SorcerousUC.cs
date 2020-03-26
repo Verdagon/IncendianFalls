@@ -13,11 +13,11 @@ public class SorcerousUC {
     this.id = id;
   }
   public SorcerousUCIncarnation incarnation { get { return root.GetSorcerousUCIncarnation(id); } }
-  public void AddObserver(ISorcerousUCEffectObserver observer) {
-    root.AddSorcerousUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISorcerousUCEffectObserver observer) {
+    broadcaster.AddSorcerousUCObserver(id, observer);
   }
-  public void RemoveObserver(ISorcerousUCEffectObserver observer) {
-    root.RemoveSorcerousUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISorcerousUCEffectObserver observer) {
+    broadcaster.RemoveSorcerousUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectSorcerousUCDelete(id);

@@ -13,11 +13,11 @@ public class EmberDeepLevelLinkerTTC {
     this.id = id;
   }
   public EmberDeepLevelLinkerTTCIncarnation incarnation { get { return root.GetEmberDeepLevelLinkerTTCIncarnation(id); } }
-  public void AddObserver(IEmberDeepLevelLinkerTTCEffectObserver observer) {
-    root.AddEmberDeepLevelLinkerTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IEmberDeepLevelLinkerTTCEffectObserver observer) {
+    broadcaster.AddEmberDeepLevelLinkerTTCObserver(id, observer);
   }
-  public void RemoveObserver(IEmberDeepLevelLinkerTTCEffectObserver observer) {
-    root.RemoveEmberDeepLevelLinkerTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IEmberDeepLevelLinkerTTCEffectObserver observer) {
+    broadcaster.RemoveEmberDeepLevelLinkerTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectEmberDeepLevelLinkerTTCDelete(id);

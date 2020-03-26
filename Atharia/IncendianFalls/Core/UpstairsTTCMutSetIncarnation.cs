@@ -10,6 +10,10 @@ public class UpStairsTTCMutSetIncarnation {
   public UpStairsTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public UpStairsTTCMutSetIncarnation Copy() {
+    return new UpStairsTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

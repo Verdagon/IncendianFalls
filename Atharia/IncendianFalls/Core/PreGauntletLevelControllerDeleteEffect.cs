@@ -11,8 +11,11 @@ public struct PreGauntletLevelControllerDeleteEffect : IPreGauntletLevelControll
     this.id = id;
   }
   int IPreGauntletLevelControllerEffect.id => id;
-  public void visit(IPreGauntletLevelControllerEffectVisitor visitor) {
+  public void visitIPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEffectVisitor visitor) {
     visitor.visitPreGauntletLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitPreGauntletLevelControllerEffect(this);
   }
 }
 

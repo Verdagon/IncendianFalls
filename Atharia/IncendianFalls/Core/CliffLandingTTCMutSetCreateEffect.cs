@@ -10,8 +10,11 @@ public struct CliffLandingTTCMutSetCreateEffect : ICliffLandingTTCMutSetEffect {
     this.id = id;
   }
   int ICliffLandingTTCMutSetEffect.id => id;
-  public void visit(ICliffLandingTTCMutSetEffectVisitor visitor) {
+  public void visitICliffLandingTTCMutSetEffect(ICliffLandingTTCMutSetEffectVisitor visitor) {
     visitor.visitCliffLandingTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitCliffLandingTTCMutSetEffect(this);
   }
 }
 

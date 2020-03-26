@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct DirtTTCCreateEffect : IDirtTTCEffect {
   public readonly int id;
-  public DirtTTCCreateEffect(int id) {
+  public readonly DirtTTCIncarnation incarnation;
+  public DirtTTCCreateEffect(int id, DirtTTCIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IDirtTTCEffect.id => id;
-  public void visit(IDirtTTCEffectVisitor visitor) {
+  public void visitIDirtTTCEffect(IDirtTTCEffectVisitor visitor) {
     visitor.visitDirtTTCCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitDirtTTCEffect(this);
   }
 }
 

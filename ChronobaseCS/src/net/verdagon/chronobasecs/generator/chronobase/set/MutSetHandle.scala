@@ -19,6 +19,7 @@ object MutSetHandle {
     val removeEffectName = s"${setName}RemoveEffect"
 
     val elementCSType = toCS(elementType)
+    val flattenedElementCSType = toCS(elementType.flatten)
 
     val instanceDefinition =
       s"""public class ${setName} {
@@ -31,24 +32,34 @@ object MutSetHandle {
          |  public ${setName}Incarnation incarnation {
          |    get { return root.Get${setName}Incarnation(id); }
          |  }
-         |  public void AddObserver(I${setName}EffectObserver observer) {
-         |    root.Add${setName}Observer(id, observer);
+         |  public void AddObserver(EffectBroadcaster broadcaster, I${setName}EffectObserver observer) {
+         |    broadcaster.Add${setName}Observer(id, observer);
          |  }
-         |  public void RemoveObserver(I${setName}EffectObserver observer) {
-         |    root.Remove${setName}Observer(id, observer);
+         |  public void RemoveObserver(EffectBroadcaster broadcaster, I${setName}EffectObserver observer) {
+         |    broadcaster.Remove${setName}Observer(id, observer);
          |  }
          |  public void Add(${elementCSType} element) {
-         |    root.Effect${setName}Add(id, element.id);
+         |  """.stripMargin +
+      (elementType.kind.mutability match {
+        case MutableS => s"    root.Effect${setName}Add(id, element.id);"
+        case ImmutableS => s"    root.Effect${setName}Add(id, element);"
+      }) +
+      s"""
          |  }
          |  public void Remove(${elementCSType} element) {
-         |    root.Effect${setName}Remove(id, element.id);
+         |  """.stripMargin +
+      (elementType.kind.mutability match {
+        case MutableS => s"    root.Effect${setName}Remove(id, element.id);"
+        case ImmutableS => s"    root.Effect${setName}Remove(id, element);"
+      }) +
+      s"""
          |  }
          |  public void Delete() {
          |    root.Effect${setName}Delete(id);
          |  }
          |  public void Clear() {
-         |    foreach (var elementId in new List<int>(incarnation.set)) {
-         |      root.Effect${setName}Remove(id, elementId);
+         |    foreach (var element in new List<${flattenedElementCSType}>(incarnation.set)) {
+         |      root.Effect${setName}Remove(id, element);
          |    }
          |  }
          |  public bool Contains(${elementCSType} element) {
@@ -139,97 +150,8 @@ object MutSetHandle {
          |}
        """.stripMargin
 
-    val observerDefinition =
-      s"""public interface ${observerName} {
-         |  void On${setName}Effect(I${setName}Effect effect);
-         |}
-         |""".stripMargin
-
-    val ieffectDefinition =
-      s"""public interface ${ieffectName} {
-         |  int id { get; }
-         |  void visit(${visitorName} visitor);
-         |}
-         |""".stripMargin
-
-    val visitorDefinition =
-      s"""public interface ${visitorName} {
-         |  void visit${createEffectName}(${createEffectName} effect);
-         |  void visit${deleteEffectName}(${deleteEffectName} effect);
-         |  void visit${addEffectName}(${addEffectName} effect);
-         |  void visit${removeEffectName}(${removeEffectName} effect);
-         |}
-         """.stripMargin
-
-    val createEffectDefinition =
-      s"""public struct ${createEffectName} : ${ieffectName} {
-         |  public readonly int id;
-         |  public readonly ${setName}Incarnation incarnation;
-         |  public ${createEffectName}(
-         |      int id,
-         |      ${setName}Incarnation incarnation) {
-         |    this.id = id;
-         |    this.incarnation = incarnation;
-         |  }
-         |  int ${ieffectName}.id => id;
-         |  public void visit(${visitorName} visitor) {
-         |    visitor.visit${createEffectName}(this);
-         |  }
-         |}
-         |""".stripMargin
-
-    val deleteEffectDefinition =
-      s"""public struct ${deleteEffectName} : ${ieffectName} {
-         |  public readonly int id;
-         |  public ${deleteEffectName}(int id) {
-         |    this.id = id;
-         |  }
-         |  int ${ieffectName}.id => id;
-         |  public void visit(${visitorName} visitor) {
-         |    visitor.visit${deleteEffectName}(this);
-         |  }
-         |}
-         |""".stripMargin
-
-    val addEffectDefinition =
-      s"""public struct ${addEffectName} : ${ieffectName} {
-         |  public readonly int id;
-         |  public readonly int elementId;
-         |  public ${addEffectName}(int id, int elementId) {
-         |    this.id = id;
-         |    this.elementId = elementId;
-         |  }
-         |  int ${ieffectName}.id => id;
-         |  public void visit(${visitorName} visitor) {
-         |    visitor.visit${addEffectName}(this);
-         |  }
-         |}
-         |""".stripMargin
-
-    val removeEffectDefinition =
-      s"""public struct ${removeEffectName} : ${ieffectName} {
-         |  public readonly int id;
-         |  public readonly int elementId;
-         |  public ${removeEffectName}(int id, int elementId) {
-         |    this.id = id;
-         |    this.elementId = elementId;
-         |  }
-         |  int ${ieffectName}.id => id;
-         |  public void visit(${visitorName} visitor) {
-         |    visitor.visit${removeEffectName}(this);
-         |  }
-         |}
-         |""".stripMargin
-
     Map(
-      ieffectName -> ieffectDefinition,
-      setName -> instanceDefinition,
-      observerName -> observerDefinition,
-      visitorName -> visitorDefinition,
-      createEffectName -> createEffectDefinition,
-      deleteEffectName -> deleteEffectDefinition,
-      addEffectName -> addEffectDefinition,
-      removeEffectName -> removeEffectDefinition)
+      setName -> instanceDefinition)
   }
 
 }

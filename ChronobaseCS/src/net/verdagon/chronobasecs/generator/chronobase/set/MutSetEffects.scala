@@ -27,9 +27,9 @@ object MutSetEffects {
          |""".stripMargin
 
     val ieffectDefinition =
-      s"""public interface ${ieffectName} {
+      s"""public interface ${ieffectName} : IEffect {
          |  int id { get; }
-         |  void visit(${visitorName} visitor);
+         |  void visit${ieffectName}(${visitorName} visitor);
          |}
          |""".stripMargin
 
@@ -49,8 +49,11 @@ object MutSetEffects {
          |    this.id = id;
          |  }
          |  int ${ieffectName}.id => id;
-         |  public void visit(${visitorName} visitor) {
+         |  public void visit${ieffectName}(${visitorName} visitor) {
          |    visitor.visit${createEffectName}(this);
+         |  }
+         |  public void visitIEffect(IEffectVisitor visitor) {
+         |    visitor.visit${setName}Effect(this);
          |  }
          |}
          |""".stripMargin
@@ -62,8 +65,11 @@ object MutSetEffects {
          |    this.id = id;
          |  }
          |  int ${ieffectName}.id => id;
-         |  public void visit(${visitorName} visitor) {
+         |  public void visit${ieffectName}(${visitorName} visitor) {
          |    visitor.visit${deleteEffectName}(this);
+         |  }
+         |  public void visitIEffect(IEffectVisitor visitor) {
+         |    visitor.visit${setName}Effect(this);
          |  }
          |}
          |""".stripMargin
@@ -71,14 +77,17 @@ object MutSetEffects {
     val addEffectDefinition =
       s"""public struct ${addEffectName} : ${ieffectName} {
          |  public readonly int id;
-         |  public readonly int elementId;
-         |  public ${addEffectName}(int id, int elementId) {
+         |  public readonly int element;
+         |  public ${addEffectName}(int id, int element) {
          |    this.id = id;
-         |    this.elementId = elementId;
+         |    this.element = element;
          |  }
          |  int ${ieffectName}.id => id;
-         |  public void visit(${visitorName} visitor) {
+         |  public void visit${ieffectName}(${visitorName} visitor) {
          |    visitor.visit${addEffectName}(this);
+         |  }
+         |  public void visitIEffect(IEffectVisitor visitor) {
+         |    visitor.visit${setName}Effect(this);
          |  }
          |}
          |""".stripMargin
@@ -86,14 +95,17 @@ object MutSetEffects {
     val removeEffectDefinition =
       s"""public struct ${removeEffectName} : ${ieffectName} {
          |  public readonly int id;
-         |  public readonly int elementId;
-         |  public ${removeEffectName}(int id, int elementId) {
+         |  public readonly int element;
+         |  public ${removeEffectName}(int id, int element) {
          |    this.id = id;
-         |    this.elementId = elementId;
+         |    this.element = element;
          |  }
          |  int ${ieffectName}.id => id;
-         |  public void visit(${visitorName} visitor) {
+         |  public void visit${ieffectName}(${visitorName} visitor) {
          |    visitor.visit${removeEffectName}(this);
+         |  }
+         |  public void visitIEffect(IEffectVisitor visitor) {
+         |    visitor.visit${setName}Effect(this);
          |  }
          |}
          |""".stripMargin
@@ -108,20 +120,77 @@ object MutSetEffects {
       removeEffectName -> removeEffectDefinition)
   }
 
-  def generateRootMembers(opt: ChronobaseOptions, set: SetS): String = {
+  def generateGlobalVisitorInterfaceMethods(set: SetS) = {
+    val SetS(setName, MutableS, elementType) = set
+
+    val ieffectName = s"I${setName}Effect"
+
+    s"void visit${setName}Effect(${ieffectName} effect);\n"
+  }
+
+  def generateEffectBroadcasterMethods(set: SetS) = {
+    val SetS(setName, MutableS, elementType) = set
+
+    val ieffectName = s"I${setName}Effect"
+    val setCSType = toCS(set.tyype)
+
+    s"""
+       |    public void visit${setName}Effect(${ieffectName} effect) {
+       |      if (observersFor${setCSType}.TryGetValue(effect.id, out var observers)) {
+       |        foreach (var observer in new List<I${setCSType}EffectObserver>(observers)) {
+       |          observer.On${setCSType}Effect(effect);
+       |        }
+       |      }
+       |    }
+       |    public void Add${setName}Observer(int id, I${setName}EffectObserver observer) {
+       |      List<I${setName}EffectObserver> obsies;
+       |      if (!observersFor${setName}.TryGetValue(id, out obsies)) {
+       |        obsies = new List<I${setName}EffectObserver>();
+       |      }
+       |      obsies.Add(observer);
+       |      observersFor${setName}[id] = obsies;
+       |    }
+       |    public void Remove${setName}Observer(int id, I${setName}EffectObserver observer) {
+       |      if (observersFor${setName}.ContainsKey(id)) {
+       |        var list = observersFor${setName}[id];
+       |        list.Remove(observer);
+       |        if (list.Count == 0) {
+       |          observersFor${setName}.Remove(id);
+       |        }
+       |      } else {
+       |        throw new Exception("Couldnt find!");
+       |      }
+       |    }
+       |""".stripMargin
+  }
+  def generateEffectApplierMethods(set: SetS): String = {
     val SetS(setName, MutableS, elementType) = set
 
     val createEffectName = s"${setName}CreateEffect"
     val deleteEffectName = s"${setName}DeleteEffect"
     val addEffectName = s"${setName}AddEffect"
     val removeEffectName = s"${setName}RemoveEffect"
+    val elementCSType = toCS(elementType)
 
-    List(createEffectName, deleteEffectName, addEffectName, removeEffectName)
-      .map(effectCSType => {
-        s"""  readonly List<${effectCSType}> effects${effectCSType} =
-           |      new List<${effectCSType}>();
-           |""".stripMargin
-      })
-      .mkString("")
+    s"""
+       |    public void visit${setName}Effect(I${setName}Effect effect) { effect.visitI${setName}Effect(this); }
+       |    public void visit${createEffectName}(${createEffectName} effect) {
+       |      var list = root.Effect${setName}Create();
+       |      // If this fails, then we have to add a translation layer.
+       |      // We shouldn't allow the user to specify the internal ID, because that's
+       |      // core to a bunch of optimizations (such as how it's a generational index).
+       |      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+       |    }
+       |    public void visit${deleteEffectName}(${deleteEffectName} effect) {
+       |      root.Effect${setName}Delete(effect.id);
+       |    }
+       |    public void visit${addEffectName}(${addEffectName} effect) {
+        |     root.Effect${setName}Add(effect.id, effect.element);
+        | }
+         |    public void visit${removeEffectName}(${removeEffectName} effect) {
+         |      root.CheckUnlocked();
+         |      root.Effect${setName}Remove(effect.id, effect.element);
+         |    }
+       """.stripMargin
   }
 }

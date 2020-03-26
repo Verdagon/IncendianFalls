@@ -11,8 +11,11 @@ public struct RavashrikeLevelControllerDeleteEffect : IRavashrikeLevelController
     this.id = id;
   }
   int IRavashrikeLevelControllerEffect.id => id;
-  public void visit(IRavashrikeLevelControllerEffectVisitor visitor) {
+  public void visitIRavashrikeLevelControllerEffect(IRavashrikeLevelControllerEffectVisitor visitor) {
     visitor.visitRavashrikeLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitRavashrikeLevelControllerEffect(this);
   }
 }
 

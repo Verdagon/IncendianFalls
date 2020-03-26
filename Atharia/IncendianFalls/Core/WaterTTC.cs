@@ -13,11 +13,11 @@ public class WaterTTC {
     this.id = id;
   }
   public WaterTTCIncarnation incarnation { get { return root.GetWaterTTCIncarnation(id); } }
-  public void AddObserver(IWaterTTCEffectObserver observer) {
-    root.AddWaterTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IWaterTTCEffectObserver observer) {
+    broadcaster.AddWaterTTCObserver(id, observer);
   }
-  public void RemoveObserver(IWaterTTCEffectObserver observer) {
-    root.RemoveWaterTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IWaterTTCEffectObserver observer) {
+    broadcaster.RemoveWaterTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectWaterTTCDelete(id);

@@ -13,11 +13,11 @@ public class FireImpulse {
     this.id = id;
   }
   public FireImpulseIncarnation incarnation { get { return root.GetFireImpulseIncarnation(id); } }
-  public void AddObserver(IFireImpulseEffectObserver observer) {
-    root.AddFireImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IFireImpulseEffectObserver observer) {
+    broadcaster.AddFireImpulseObserver(id, observer);
   }
-  public void RemoveObserver(IFireImpulseEffectObserver observer) {
-    root.RemoveFireImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IFireImpulseEffectObserver observer) {
+    broadcaster.RemoveFireImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectFireImpulseDelete(id);

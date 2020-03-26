@@ -11,8 +11,11 @@ public struct SlowRodDeleteEffect : ISlowRodEffect {
     this.id = id;
   }
   int ISlowRodEffect.id => id;
-  public void visit(ISlowRodEffectVisitor visitor) {
+  public void visitISlowRodEffect(ISlowRodEffectVisitor visitor) {
     visitor.visitSlowRodDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSlowRodEffect(this);
   }
 }
 

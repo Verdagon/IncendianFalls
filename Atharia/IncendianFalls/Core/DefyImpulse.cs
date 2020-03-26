@@ -13,11 +13,11 @@ public class DefyImpulse {
     this.id = id;
   }
   public DefyImpulseIncarnation incarnation { get { return root.GetDefyImpulseIncarnation(id); } }
-  public void AddObserver(IDefyImpulseEffectObserver observer) {
-    root.AddDefyImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IDefyImpulseEffectObserver observer) {
+    broadcaster.AddDefyImpulseObserver(id, observer);
   }
-  public void RemoveObserver(IDefyImpulseEffectObserver observer) {
-    root.RemoveDefyImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IDefyImpulseEffectObserver observer) {
+    broadcaster.RemoveDefyImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectDefyImpulseDelete(id);

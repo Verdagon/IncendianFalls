@@ -10,8 +10,11 @@ public struct CaveWallTTCMutSetDeleteEffect : ICaveWallTTCMutSetEffect {
     this.id = id;
   }
   int ICaveWallTTCMutSetEffect.id => id;
-  public void visit(ICaveWallTTCMutSetEffectVisitor visitor) {
+  public void visitICaveWallTTCMutSetEffect(ICaveWallTTCMutSetEffectVisitor visitor) {
     visitor.visitCaveWallTTCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitCaveWallTTCMutSetEffect(this);
   }
 }
 

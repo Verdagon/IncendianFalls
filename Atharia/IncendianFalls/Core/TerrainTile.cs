@@ -13,11 +13,11 @@ public class TerrainTile {
     this.id = id;
   }
   public TerrainTileIncarnation incarnation { get { return root.GetTerrainTileIncarnation(id); } }
-  public void AddObserver(ITerrainTileEffectObserver observer) {
-    root.AddTerrainTileObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITerrainTileEffectObserver observer) {
+    broadcaster.AddTerrainTileObserver(id, observer);
   }
-  public void RemoveObserver(ITerrainTileEffectObserver observer) {
-    root.RemoveTerrainTileObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITerrainTileEffectObserver observer) {
+    broadcaster.RemoveTerrainTileObserver(id, observer);
   }
   public void Delete() {
     root.EffectTerrainTileDelete(id);

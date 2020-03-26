@@ -11,8 +11,11 @@ public struct TreeTTCDeleteEffect : ITreeTTCEffect {
     this.id = id;
   }
   int ITreeTTCEffect.id => id;
-  public void visit(ITreeTTCEffectVisitor visitor) {
+  public void visitITreeTTCEffect(ITreeTTCEffectVisitor visitor) {
     visitor.visitTreeTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTreeTTCEffect(this);
   }
 }
 

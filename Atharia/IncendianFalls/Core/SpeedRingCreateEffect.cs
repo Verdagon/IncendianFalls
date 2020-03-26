@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct SpeedRingCreateEffect : ISpeedRingEffect {
   public readonly int id;
-  public SpeedRingCreateEffect(int id) {
+  public readonly SpeedRingIncarnation incarnation;
+  public SpeedRingCreateEffect(int id, SpeedRingIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int ISpeedRingEffect.id => id;
-  public void visit(ISpeedRingEffectVisitor visitor) {
+  public void visitISpeedRingEffect(ISpeedRingEffectVisitor visitor) {
     visitor.visitSpeedRingCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSpeedRingEffect(this);
   }
 }
 

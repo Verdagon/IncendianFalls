@@ -11,8 +11,11 @@ public struct BaseCombatTimeUCDeleteEffect : IBaseCombatTimeUCEffect {
     this.id = id;
   }
   int IBaseCombatTimeUCEffect.id => id;
-  public void visit(IBaseCombatTimeUCEffectVisitor visitor) {
+  public void visitIBaseCombatTimeUCEffect(IBaseCombatTimeUCEffectVisitor visitor) {
     visitor.visitBaseCombatTimeUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBaseCombatTimeUCEffect(this);
   }
 }
 

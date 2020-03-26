@@ -11,8 +11,11 @@ public struct ITerrainTileEventMutListDeleteEffect : IITerrainTileEventMutListEf
     this.id = id;
   }
   int IITerrainTileEventMutListEffect.id => id;
-  public void visit(IITerrainTileEventMutListEffectVisitor visitor) {
+  public void visitIITerrainTileEventMutListEffect(IITerrainTileEventMutListEffectVisitor visitor) {
     visitor.visitITerrainTileEventMutListDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitITerrainTileEventMutListEffect(this);
   }
 }
 

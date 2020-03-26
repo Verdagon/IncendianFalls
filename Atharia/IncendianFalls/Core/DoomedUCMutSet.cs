@@ -14,24 +14,24 @@ public class DoomedUCMutSet {
   public DoomedUCMutSetIncarnation incarnation {
     get { return root.GetDoomedUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IDoomedUCMutSetEffectObserver observer) {
-    root.AddDoomedUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IDoomedUCMutSetEffectObserver observer) {
+    broadcaster.AddDoomedUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IDoomedUCMutSetEffectObserver observer) {
-    root.RemoveDoomedUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IDoomedUCMutSetEffectObserver observer) {
+    broadcaster.RemoveDoomedUCMutSetObserver(id, observer);
   }
   public void Add(DoomedUC element) {
-    root.EffectDoomedUCMutSetAdd(id, element.id);
+      root.EffectDoomedUCMutSetAdd(id, element.id);
   }
   public void Remove(DoomedUC element) {
-    root.EffectDoomedUCMutSetRemove(id, element.id);
+      root.EffectDoomedUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectDoomedUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectDoomedUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectDoomedUCMutSetRemove(id, element);
     }
   }
   public bool Contains(DoomedUC element) {

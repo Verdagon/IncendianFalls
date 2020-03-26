@@ -10,8 +10,11 @@ public struct StartBidingImpulseStrongMutSetDeleteEffect : IStartBidingImpulseSt
     this.id = id;
   }
   int IStartBidingImpulseStrongMutSetEffect.id => id;
-  public void visit(IStartBidingImpulseStrongMutSetEffectVisitor visitor) {
+  public void visitIStartBidingImpulseStrongMutSetEffect(IStartBidingImpulseStrongMutSetEffectVisitor visitor) {
     visitor.visitStartBidingImpulseStrongMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitStartBidingImpulseStrongMutSetEffect(this);
   }
 }
 

@@ -14,24 +14,24 @@ public class PursueImpulseStrongMutSet {
   public PursueImpulseStrongMutSetIncarnation incarnation {
     get { return root.GetPursueImpulseStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(IPursueImpulseStrongMutSetEffectObserver observer) {
-    root.AddPursueImpulseStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IPursueImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.AddPursueImpulseStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IPursueImpulseStrongMutSetEffectObserver observer) {
-    root.RemovePursueImpulseStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IPursueImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.RemovePursueImpulseStrongMutSetObserver(id, observer);
   }
   public void Add(PursueImpulse element) {
-    root.EffectPursueImpulseStrongMutSetAdd(id, element.id);
+      root.EffectPursueImpulseStrongMutSetAdd(id, element.id);
   }
   public void Remove(PursueImpulse element) {
-    root.EffectPursueImpulseStrongMutSetRemove(id, element.id);
+      root.EffectPursueImpulseStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectPursueImpulseStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectPursueImpulseStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectPursueImpulseStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(PursueImpulse element) {

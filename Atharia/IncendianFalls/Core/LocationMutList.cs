@@ -16,11 +16,11 @@ public class LocationMutList : IEnumerable<Location> {
   public LocationMutListIncarnation incarnation {
     get { return root.GetLocationMutListIncarnation(id); }
   }
-  public void AddObserver(ILocationMutListEffectObserver observer) {
-    root.AddLocationMutListObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ILocationMutListEffectObserver observer) {
+    broadcaster.AddLocationMutListObserver(id, observer);
   }
-  public void RemoveObserver(ILocationMutListEffectObserver observer) {
-    root.RemoveLocationMutListObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ILocationMutListEffectObserver observer) {
+    broadcaster.RemoveLocationMutListObserver(id, observer);
   }
   public void Delete() {
     root.EffectLocationMutListDelete(id);
@@ -46,7 +46,7 @@ public class LocationMutList : IEnumerable<Location> {
     return this.root == that.root && id == that.id;
   }
   public void Add(Location element) {
-    root.EffectLocationMutListAdd(id, element);
+    root.EffectLocationMutListAdd(id, Count, element);
   }
   public void RemoveAt(int index) {
     root.EffectLocationMutListRemoveAt(id, index);

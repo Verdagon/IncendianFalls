@@ -6,8 +6,8 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public interface ITerrainTileEventVisitor {
-  void Visit(UnitUnleashBideEventAsITerrainTileEvent obj);
-  void Visit(UnitFireBombedEventAsITerrainTileEvent obj);
+  void VisitITerrainTileEvent(UnitUnleashBideEventAsITerrainTileEvent obj);
+  void VisitITerrainTileEvent(UnitFireBombedEventAsITerrainTileEvent obj);
 }
 
 }

@@ -14,24 +14,24 @@ public class KamikazeAICapabilityUCMutSet {
   public KamikazeAICapabilityUCMutSetIncarnation incarnation {
     get { return root.GetKamikazeAICapabilityUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IKamikazeAICapabilityUCMutSetEffectObserver observer) {
-    root.AddKamikazeAICapabilityUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IKamikazeAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.AddKamikazeAICapabilityUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IKamikazeAICapabilityUCMutSetEffectObserver observer) {
-    root.RemoveKamikazeAICapabilityUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IKamikazeAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.RemoveKamikazeAICapabilityUCMutSetObserver(id, observer);
   }
   public void Add(KamikazeAICapabilityUC element) {
-    root.EffectKamikazeAICapabilityUCMutSetAdd(id, element.id);
+      root.EffectKamikazeAICapabilityUCMutSetAdd(id, element.id);
   }
   public void Remove(KamikazeAICapabilityUC element) {
-    root.EffectKamikazeAICapabilityUCMutSetRemove(id, element.id);
+      root.EffectKamikazeAICapabilityUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectKamikazeAICapabilityUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectKamikazeAICapabilityUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectKamikazeAICapabilityUCMutSetRemove(id, element);
     }
   }
   public bool Contains(KamikazeAICapabilityUC element) {

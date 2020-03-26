@@ -14,24 +14,24 @@ public class SlowRodStrongMutSet {
   public SlowRodStrongMutSetIncarnation incarnation {
     get { return root.GetSlowRodStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(ISlowRodStrongMutSetEffectObserver observer) {
-    root.AddSlowRodStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISlowRodStrongMutSetEffectObserver observer) {
+    broadcaster.AddSlowRodStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ISlowRodStrongMutSetEffectObserver observer) {
-    root.RemoveSlowRodStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISlowRodStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveSlowRodStrongMutSetObserver(id, observer);
   }
   public void Add(SlowRod element) {
-    root.EffectSlowRodStrongMutSetAdd(id, element.id);
+      root.EffectSlowRodStrongMutSetAdd(id, element.id);
   }
   public void Remove(SlowRod element) {
-    root.EffectSlowRodStrongMutSetRemove(id, element.id);
+      root.EffectSlowRodStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectSlowRodStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectSlowRodStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectSlowRodStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(SlowRod element) {

@@ -14,24 +14,24 @@ public class BaseCombatTimeUCMutSet {
   public BaseCombatTimeUCMutSetIncarnation incarnation {
     get { return root.GetBaseCombatTimeUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IBaseCombatTimeUCMutSetEffectObserver observer) {
-    root.AddBaseCombatTimeUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBaseCombatTimeUCMutSetEffectObserver observer) {
+    broadcaster.AddBaseCombatTimeUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IBaseCombatTimeUCMutSetEffectObserver observer) {
-    root.RemoveBaseCombatTimeUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBaseCombatTimeUCMutSetEffectObserver observer) {
+    broadcaster.RemoveBaseCombatTimeUCMutSetObserver(id, observer);
   }
   public void Add(BaseCombatTimeUC element) {
-    root.EffectBaseCombatTimeUCMutSetAdd(id, element.id);
+      root.EffectBaseCombatTimeUCMutSetAdd(id, element.id);
   }
   public void Remove(BaseCombatTimeUC element) {
-    root.EffectBaseCombatTimeUCMutSetRemove(id, element.id);
+      root.EffectBaseCombatTimeUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectBaseCombatTimeUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectBaseCombatTimeUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectBaseCombatTimeUCMutSetRemove(id, element);
     }
   }
   public bool Contains(BaseCombatTimeUC element) {

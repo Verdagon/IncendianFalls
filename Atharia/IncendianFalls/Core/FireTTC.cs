@@ -13,11 +13,11 @@ public class FireTTC {
     this.id = id;
   }
   public FireTTCIncarnation incarnation { get { return root.GetFireTTCIncarnation(id); } }
-  public void AddObserver(IFireTTCEffectObserver observer) {
-    root.AddFireTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IFireTTCEffectObserver observer) {
+    broadcaster.AddFireTTCObserver(id, observer);
   }
-  public void RemoveObserver(IFireTTCEffectObserver observer) {
-    root.RemoveFireTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IFireTTCEffectObserver observer) {
+    broadcaster.RemoveFireTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectFireTTCDelete(id);

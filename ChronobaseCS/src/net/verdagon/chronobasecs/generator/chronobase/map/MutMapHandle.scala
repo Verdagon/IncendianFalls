@@ -42,11 +42,11 @@ object MutMapHandle {
            |
            |  public bool Exists() { return root != null && root.${mapName}Exists(id); }
            |
-           |  public void AddObserver(I${mapName}EffectObserver observer) {
-           |    root.Add${mapName}Observer(id, observer);
+           |  public void AddObserver(EffectBroadcaster broadcaster, I${mapName}EffectObserver observer) {
+           |    broadcaster.Add${mapName}Observer(id, observer);
            |  }
-           |  public void RemoveObserver(I${mapName}EffectObserver observer) {
-           |    root.Remove${mapName}Observer(id, observer);
+           |  public void RemoveObserver(EffectBroadcaster broadcaster, I${mapName}EffectObserver observer) {
+           |    broadcaster.Remove${mapName}Observer(id, observer);
            |  }
            |
            |  public void Add(${keyCSType} key, ${elementCSType} value) {

@@ -16,11 +16,11 @@ public class IRequestMutList : IEnumerable<IRequest> {
   public IRequestMutListIncarnation incarnation {
     get { return root.GetIRequestMutListIncarnation(id); }
   }
-  public void AddObserver(IIRequestMutListEffectObserver observer) {
-    root.AddIRequestMutListObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IIRequestMutListEffectObserver observer) {
+    broadcaster.AddIRequestMutListObserver(id, observer);
   }
-  public void RemoveObserver(IIRequestMutListEffectObserver observer) {
-    root.RemoveIRequestMutListObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IIRequestMutListEffectObserver observer) {
+    broadcaster.RemoveIRequestMutListObserver(id, observer);
   }
   public void Delete() {
     root.EffectIRequestMutListDelete(id);
@@ -46,7 +46,7 @@ public class IRequestMutList : IEnumerable<IRequest> {
     return this.root == that.root && id == that.id;
   }
   public void Add(IRequest element) {
-    root.EffectIRequestMutListAdd(id, element);
+    root.EffectIRequestMutListAdd(id, Count, element);
   }
   public void RemoveAt(int index) {
     root.EffectIRequestMutListRemoveAt(id, index);

@@ -13,11 +13,11 @@ public class SpeedRing {
     this.id = id;
   }
   public SpeedRingIncarnation incarnation { get { return root.GetSpeedRingIncarnation(id); } }
-  public void AddObserver(ISpeedRingEffectObserver observer) {
-    root.AddSpeedRingObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISpeedRingEffectObserver observer) {
+    broadcaster.AddSpeedRingObserver(id, observer);
   }
-  public void RemoveObserver(ISpeedRingEffectObserver observer) {
-    root.RemoveSpeedRingObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISpeedRingEffectObserver observer) {
+    broadcaster.RemoveSpeedRingObserver(id, observer);
   }
   public void Delete() {
     root.EffectSpeedRingDelete(id);

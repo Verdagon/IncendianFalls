@@ -14,24 +14,24 @@ public class BloodTTCMutSet {
   public BloodTTCMutSetIncarnation incarnation {
     get { return root.GetBloodTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IBloodTTCMutSetEffectObserver observer) {
-    root.AddBloodTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBloodTTCMutSetEffectObserver observer) {
+    broadcaster.AddBloodTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IBloodTTCMutSetEffectObserver observer) {
-    root.RemoveBloodTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBloodTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveBloodTTCMutSetObserver(id, observer);
   }
   public void Add(BloodTTC element) {
-    root.EffectBloodTTCMutSetAdd(id, element.id);
+      root.EffectBloodTTCMutSetAdd(id, element.id);
   }
   public void Remove(BloodTTC element) {
-    root.EffectBloodTTCMutSetRemove(id, element.id);
+      root.EffectBloodTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectBloodTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectBloodTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectBloodTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(BloodTTC element) {

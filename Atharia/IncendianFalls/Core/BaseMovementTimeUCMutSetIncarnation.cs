@@ -10,6 +10,10 @@ public class BaseMovementTimeUCMutSetIncarnation {
   public BaseMovementTimeUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public BaseMovementTimeUCMutSetIncarnation Copy() {
+    return new BaseMovementTimeUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

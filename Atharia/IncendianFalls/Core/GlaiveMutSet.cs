@@ -14,24 +14,24 @@ public class GlaiveMutSet {
   public GlaiveMutSetIncarnation incarnation {
     get { return root.GetGlaiveMutSetIncarnation(id); }
   }
-  public void AddObserver(IGlaiveMutSetEffectObserver observer) {
-    root.AddGlaiveMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IGlaiveMutSetEffectObserver observer) {
+    broadcaster.AddGlaiveMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IGlaiveMutSetEffectObserver observer) {
-    root.RemoveGlaiveMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IGlaiveMutSetEffectObserver observer) {
+    broadcaster.RemoveGlaiveMutSetObserver(id, observer);
   }
   public void Add(Glaive element) {
-    root.EffectGlaiveMutSetAdd(id, element.id);
+      root.EffectGlaiveMutSetAdd(id, element.id);
   }
   public void Remove(Glaive element) {
-    root.EffectGlaiveMutSetRemove(id, element.id);
+      root.EffectGlaiveMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectGlaiveMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectGlaiveMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectGlaiveMutSetRemove(id, element);
     }
   }
   public bool Contains(Glaive element) {

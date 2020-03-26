@@ -13,11 +13,11 @@ public class LevelLinkTTC {
     this.id = id;
   }
   public LevelLinkTTCIncarnation incarnation { get { return root.GetLevelLinkTTCIncarnation(id); } }
-  public void AddObserver(ILevelLinkTTCEffectObserver observer) {
-    root.AddLevelLinkTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ILevelLinkTTCEffectObserver observer) {
+    broadcaster.AddLevelLinkTTCObserver(id, observer);
   }
-  public void RemoveObserver(ILevelLinkTTCEffectObserver observer) {
-    root.RemoveLevelLinkTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ILevelLinkTTCEffectObserver observer) {
+    broadcaster.RemoveLevelLinkTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectLevelLinkTTCDelete(id);

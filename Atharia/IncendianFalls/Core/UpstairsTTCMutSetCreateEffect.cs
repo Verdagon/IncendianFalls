@@ -10,8 +10,11 @@ public struct UpStairsTTCMutSetCreateEffect : IUpStairsTTCMutSetEffect {
     this.id = id;
   }
   int IUpStairsTTCMutSetEffect.id => id;
-  public void visit(IUpStairsTTCMutSetEffectVisitor visitor) {
+  public void visitIUpStairsTTCMutSetEffect(IUpStairsTTCMutSetEffectVisitor visitor) {
     visitor.visitUpStairsTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitUpStairsTTCMutSetEffect(this);
   }
 }
 

@@ -14,24 +14,24 @@ public class IncendianFallsLevelLinkerTTCMutSet {
   public IncendianFallsLevelLinkerTTCMutSetIncarnation incarnation {
     get { return root.GetIncendianFallsLevelLinkerTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IIncendianFallsLevelLinkerTTCMutSetEffectObserver observer) {
-    root.AddIncendianFallsLevelLinkerTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IIncendianFallsLevelLinkerTTCMutSetEffectObserver observer) {
+    broadcaster.AddIncendianFallsLevelLinkerTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IIncendianFallsLevelLinkerTTCMutSetEffectObserver observer) {
-    root.RemoveIncendianFallsLevelLinkerTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IIncendianFallsLevelLinkerTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveIncendianFallsLevelLinkerTTCMutSetObserver(id, observer);
   }
   public void Add(IncendianFallsLevelLinkerTTC element) {
-    root.EffectIncendianFallsLevelLinkerTTCMutSetAdd(id, element.id);
+      root.EffectIncendianFallsLevelLinkerTTCMutSetAdd(id, element.id);
   }
   public void Remove(IncendianFallsLevelLinkerTTC element) {
-    root.EffectIncendianFallsLevelLinkerTTCMutSetRemove(id, element.id);
+      root.EffectIncendianFallsLevelLinkerTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectIncendianFallsLevelLinkerTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectIncendianFallsLevelLinkerTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectIncendianFallsLevelLinkerTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(IncendianFallsLevelLinkerTTC element) {

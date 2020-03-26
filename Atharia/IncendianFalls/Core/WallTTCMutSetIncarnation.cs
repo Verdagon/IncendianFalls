@@ -10,6 +10,10 @@ public class WallTTCMutSetIncarnation {
   public WallTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public WallTTCMutSetIncarnation Copy() {
+    return new WallTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

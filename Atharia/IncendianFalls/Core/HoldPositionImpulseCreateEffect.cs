@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct HoldPositionImpulseCreateEffect : IHoldPositionImpulseEffect {
   public readonly int id;
-  public HoldPositionImpulseCreateEffect(int id) {
+  public readonly HoldPositionImpulseIncarnation incarnation;
+  public HoldPositionImpulseCreateEffect(int id, HoldPositionImpulseIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IHoldPositionImpulseEffect.id => id;
-  public void visit(IHoldPositionImpulseEffectVisitor visitor) {
+  public void visitIHoldPositionImpulseEffect(IHoldPositionImpulseEffectVisitor visitor) {
     visitor.visitHoldPositionImpulseCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitHoldPositionImpulseEffect(this);
   }
 }
 

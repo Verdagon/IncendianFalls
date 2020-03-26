@@ -11,8 +11,11 @@ public struct DefyImpulseDeleteEffect : IDefyImpulseEffect {
     this.id = id;
   }
   int IDefyImpulseEffect.id => id;
-  public void visit(IDefyImpulseEffectVisitor visitor) {
+  public void visitIDefyImpulseEffect(IDefyImpulseEffectVisitor visitor) {
     visitor.visitDefyImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitDefyImpulseEffect(this);
   }
 }
 

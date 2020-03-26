@@ -7,14 +7,17 @@ namespace Atharia.Model {
 
 public struct ITerrainTileEventMutListRemoveEffect : IITerrainTileEventMutListEffect {
   public readonly int id;
-  public readonly int elementId;
-  public ITerrainTileEventMutListRemoveEffect(int id, int elementId) {
+  public readonly int index;
+  public ITerrainTileEventMutListRemoveEffect(int id, int index) {
     this.id = id;
-    this.elementId = elementId;
+    this.index = index;
   }
   int IITerrainTileEventMutListEffect.id => id;
-  public void visit(IITerrainTileEventMutListEffectVisitor visitor) {
+  public void visitIITerrainTileEventMutListEffect(IITerrainTileEventMutListEffectVisitor visitor) {
     visitor.visitITerrainTileEventMutListRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitITerrainTileEventMutListEffect(this);
   }
 }
 

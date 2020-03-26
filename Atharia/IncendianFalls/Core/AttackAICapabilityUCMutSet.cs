@@ -14,24 +14,24 @@ public class AttackAICapabilityUCMutSet {
   public AttackAICapabilityUCMutSetIncarnation incarnation {
     get { return root.GetAttackAICapabilityUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IAttackAICapabilityUCMutSetEffectObserver observer) {
-    root.AddAttackAICapabilityUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IAttackAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.AddAttackAICapabilityUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IAttackAICapabilityUCMutSetEffectObserver observer) {
-    root.RemoveAttackAICapabilityUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IAttackAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.RemoveAttackAICapabilityUCMutSetObserver(id, observer);
   }
   public void Add(AttackAICapabilityUC element) {
-    root.EffectAttackAICapabilityUCMutSetAdd(id, element.id);
+      root.EffectAttackAICapabilityUCMutSetAdd(id, element.id);
   }
   public void Remove(AttackAICapabilityUC element) {
-    root.EffectAttackAICapabilityUCMutSetRemove(id, element.id);
+      root.EffectAttackAICapabilityUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectAttackAICapabilityUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectAttackAICapabilityUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectAttackAICapabilityUCMutSetRemove(id, element);
     }
   }
   public bool Contains(AttackAICapabilityUC element) {

@@ -14,24 +14,24 @@ public class UnitWeakMutSet {
   public UnitWeakMutSetIncarnation incarnation {
     get { return root.GetUnitWeakMutSetIncarnation(id); }
   }
-  public void AddObserver(IUnitWeakMutSetEffectObserver observer) {
-    root.AddUnitWeakMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IUnitWeakMutSetEffectObserver observer) {
+    broadcaster.AddUnitWeakMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IUnitWeakMutSetEffectObserver observer) {
-    root.RemoveUnitWeakMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IUnitWeakMutSetEffectObserver observer) {
+    broadcaster.RemoveUnitWeakMutSetObserver(id, observer);
   }
   public void Add(Unit element) {
-    root.EffectUnitWeakMutSetAdd(id, element.id);
+      root.EffectUnitWeakMutSetAdd(id, element.id);
   }
   public void Remove(Unit element) {
-    root.EffectUnitWeakMutSetRemove(id, element.id);
+      root.EffectUnitWeakMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectUnitWeakMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectUnitWeakMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectUnitWeakMutSetRemove(id, element);
     }
   }
   public bool Contains(Unit element) {

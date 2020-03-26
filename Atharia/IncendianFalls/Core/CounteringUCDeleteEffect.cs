@@ -11,8 +11,11 @@ public struct CounteringUCDeleteEffect : ICounteringUCEffect {
     this.id = id;
   }
   int ICounteringUCEffect.id => id;
-  public void visit(ICounteringUCEffectVisitor visitor) {
+  public void visitICounteringUCEffect(ICounteringUCEffectVisitor visitor) {
     visitor.visitCounteringUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitCounteringUCEffect(this);
   }
 }
 

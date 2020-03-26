@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IIPreActingUCWeakMutBunchEffect {
+public interface IIPreActingUCWeakMutBunchEffect : IEffect {
   int id { get; }
-  void visit(IIPreActingUCWeakMutBunchEffectVisitor visitor);
+  void visitIIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffectVisitor visitor);
 }
        
 }

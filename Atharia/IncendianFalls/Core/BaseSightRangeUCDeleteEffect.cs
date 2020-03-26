@@ -11,8 +11,11 @@ public struct BaseSightRangeUCDeleteEffect : IBaseSightRangeUCEffect {
     this.id = id;
   }
   int IBaseSightRangeUCEffect.id => id;
-  public void visit(IBaseSightRangeUCEffectVisitor visitor) {
+  public void visitIBaseSightRangeUCEffect(IBaseSightRangeUCEffectVisitor visitor) {
     visitor.visitBaseSightRangeUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBaseSightRangeUCEffect(this);
   }
 }
 

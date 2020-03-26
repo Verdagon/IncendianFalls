@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct SimplePresenceTriggerTTCMutSetAddEffect : ISimplePresenceTriggerTTCMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public SimplePresenceTriggerTTCMutSetAddEffect(int id, int elementId) {
+  public readonly int element;
+  public SimplePresenceTriggerTTCMutSetAddEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int ISimplePresenceTriggerTTCMutSetEffect.id => id;
-  public void visit(ISimplePresenceTriggerTTCMutSetEffectVisitor visitor) {
+  public void visitISimplePresenceTriggerTTCMutSetEffect(ISimplePresenceTriggerTTCMutSetEffectVisitor visitor) {
     visitor.visitSimplePresenceTriggerTTCMutSetAddEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSimplePresenceTriggerTTCMutSetEffect(this);
   }
 }
 

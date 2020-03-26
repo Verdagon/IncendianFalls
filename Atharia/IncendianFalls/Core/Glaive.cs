@@ -13,11 +13,11 @@ public class Glaive {
     this.id = id;
   }
   public GlaiveIncarnation incarnation { get { return root.GetGlaiveIncarnation(id); } }
-  public void AddObserver(IGlaiveEffectObserver observer) {
-    root.AddGlaiveObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IGlaiveEffectObserver observer) {
+    broadcaster.AddGlaiveObserver(id, observer);
   }
-  public void RemoveObserver(IGlaiveEffectObserver observer) {
-    root.RemoveGlaiveObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IGlaiveEffectObserver observer) {
+    broadcaster.RemoveGlaiveObserver(id, observer);
   }
   public void Delete() {
     root.EffectGlaiveDelete(id);

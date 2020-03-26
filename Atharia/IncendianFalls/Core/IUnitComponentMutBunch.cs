@@ -13,11 +13,11 @@ public class IUnitComponentMutBunch {
     this.id = id;
   }
   public IUnitComponentMutBunchIncarnation incarnation { get { return root.GetIUnitComponentMutBunchIncarnation(id); } }
-  public void AddObserver(IIUnitComponentMutBunchEffectObserver observer) {
-    root.AddIUnitComponentMutBunchObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IIUnitComponentMutBunchEffectObserver observer) {
+    broadcaster.AddIUnitComponentMutBunchObserver(id, observer);
   }
-  public void RemoveObserver(IIUnitComponentMutBunchEffectObserver observer) {
-    root.RemoveIUnitComponentMutBunchObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IIUnitComponentMutBunchEffectObserver observer) {
+    broadcaster.RemoveIUnitComponentMutBunchObserver(id, observer);
   }
   public void Delete() {
     root.EffectIUnitComponentMutBunchDelete(id);

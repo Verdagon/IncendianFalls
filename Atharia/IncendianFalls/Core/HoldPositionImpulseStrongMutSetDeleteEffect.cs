@@ -10,8 +10,11 @@ public struct HoldPositionImpulseStrongMutSetDeleteEffect : IHoldPositionImpulse
     this.id = id;
   }
   int IHoldPositionImpulseStrongMutSetEffect.id => id;
-  public void visit(IHoldPositionImpulseStrongMutSetEffectVisitor visitor) {
+  public void visitIHoldPositionImpulseStrongMutSetEffect(IHoldPositionImpulseStrongMutSetEffectVisitor visitor) {
     visitor.visitHoldPositionImpulseStrongMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitHoldPositionImpulseStrongMutSetEffect(this);
   }
 }
 

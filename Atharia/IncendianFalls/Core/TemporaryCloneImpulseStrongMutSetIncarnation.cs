@@ -10,6 +10,10 @@ public class TemporaryCloneImpulseStrongMutSetIncarnation {
   public TemporaryCloneImpulseStrongMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public TemporaryCloneImpulseStrongMutSetIncarnation Copy() {
+    return new TemporaryCloneImpulseStrongMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

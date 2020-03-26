@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct BaseMovementTimeUCCreateEffect : IBaseMovementTimeUCEffect {
   public readonly int id;
-  public BaseMovementTimeUCCreateEffect(int id) {
+  public readonly BaseMovementTimeUCIncarnation incarnation;
+  public BaseMovementTimeUCCreateEffect(int id, BaseMovementTimeUCIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IBaseMovementTimeUCEffect.id => id;
-  public void visit(IBaseMovementTimeUCEffectVisitor visitor) {
+  public void visitIBaseMovementTimeUCEffect(IBaseMovementTimeUCEffectVisitor visitor) {
     visitor.visitBaseMovementTimeUCCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBaseMovementTimeUCEffect(this);
   }
 }
 

@@ -50,7 +50,7 @@ object MutStructRootMethods {
        |      int incarnationVersion,
        |      ${structName}Incarnation incarnation) {
        |    CheckUnlocked();
-       |    var effect = new ${structName}CreateEffect(id);
+       |    var effect = new ${structName}CreateEffect(id, incarnation.Copy());
        |    rootIncarnation.incarnations${structName}.Add(
        |        id,
        |        new VersionAndIncarnation<${structName}Incarnation>(
@@ -62,7 +62,7 @@ object MutStructRootMethods {
        |
            |""".stripMargin
       } else "") +
-      s"""    effects${structName}CreateEffect.Add(effect);
+      s"""    NotifyEffect(effect);
        |  }
        |""".stripMargin
   }
@@ -113,7 +113,7 @@ object MutStructRootMethods {
       } else "") +
       s"""
        |    rootIncarnation.incarnations${structName}.Remove(id);
-       |    effects${structName}DeleteEffect.Add(effect);
+       |    NotifyEffect(effect);
        |  }
        |
      """.stripMargin
@@ -130,7 +130,12 @@ object MutStructRootMethods {
        |  public void Effect${struct.name}Set${memberName.capitalize}(int id, ${toCS(memberType)} newValue) {
        |    CheckUnlocked();
        |    CheckHas${structName}(id);
-       |    var effect = new ${structName}Set${memberName.capitalize}Effect(id, newValue);
+       |""".stripMargin +
+      (memberType.kind.mutability match {
+        case MutableS => s"var effect = new ${structName}Set${memberName.capitalize}Effect(id, newValue.id);"
+        case ImmutableS => s"var effect = new ${structName}Set${memberName.capitalize}Effect(id, newValue);"
+      }) +
+    s"""
        |    var oldIncarnationAndVersion = rootIncarnation.incarnations${structName}[id];
        |    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
        |""".stripMargin +
@@ -192,7 +197,7 @@ object MutStructRootMethods {
       } else "") +
       s"""    }
          |
-         |    effects${structName}Set${memberName.capitalize}Effect.Add(effect);
+         |    NotifyEffect(effect);
          |  }
          |""".stripMargin
   }
@@ -202,7 +207,6 @@ object MutStructRootMethods {
                                          struct: StructS
   ): String = {
     val StructS(structName, _, MutableS, members, _, _, _) = struct
-
 
     s"""  public ${structName}Incarnation Get${structName}Incarnation(int id) {
        |    if (id == 0) {
@@ -214,7 +218,15 @@ object MutStructRootMethods {
        |    return rootIncarnation.incarnations${structName}.ContainsKey(id);
        |  }
        |  public ${structName} Get${structName}(int id) {
+       |    CheckHas${structName}(id);
        |    return new ${structName}(this, id);
+       |  }
+       |  public ${structName} Get${structName}OrNull(int id) {
+       |    if (${structName}Exists(id)) {
+       |      return new ${structName}(this, id);
+       |    } else {
+       |      return new ${structName}(this, 0);
+       |    }
        |  }
        |  public List<${structName}> All${structName}() {
        |    List<${structName}> result = new List<${structName}>(rootIncarnation.incarnations${structName}.Count);
@@ -237,106 +249,14 @@ object MutStructRootMethods {
        |      throw new System.Exception("Invalid ${structName}: " + id);
        |    }
        |  }
-       |  public void Add${structName}Observer(int id, I${structName}EffectObserver observer) {
-       |    List<I${structName}EffectObserver> obsies;
-       |    if (!observersFor${structName}.TryGetValue(id, out obsies)) {
-       |      obsies = new List<I${structName}EffectObserver>();
-       |    }
-       |    obsies.Add(observer);
-       |    observersFor${structName}[id] = obsies;
-       |  }
-       |
-       |  public void Remove${structName}Observer(int id, I${structName}EffectObserver observer) {
-       |    if (observersFor${structName}.ContainsKey(id)) {
-       |      var list = observersFor${structName}[id];
-       |      list.Remove(observer);
-       |      if (list.Count == 0) {
-       |        observersFor${structName}.Remove(id);
-       |      }
-       |    } else {
-       |      throw new Exception("Couldnt find!");
-       |    }
-       |  }
        |""".stripMargin +
       generateRootStructInstanceCreateMethod(opt, struct) +
       generateRootStructInstanceDeleteMethod(opt, struct) +
       generateRootStructInstanceHashMethod(opt, struct) +
-      generateBroadcaster(opt, struct) +
       members.zipWithIndex.map({
         case (StructMemberS(memberName, FinalS, memberType), memberIndex) => ""
         case (StructMemberS(memberName, VaryingS, memberType), memberIndex) =>
           generateRootStructInstanceSetterMethod(opt, struct, memberIndex, memberName, memberType)
       }).mkString("")
   }
-
-  def generateBroadcaster(opt: ChronobaseOptions, struct: StructS): String = {
-    val StructS(structName, _, MutableS, members, _, _, _) = struct
-
-    val observerName = s"I${structName}EffectObserver"
-    val structCSType = toCS(struct.tyype)
-
-    val deleteEffectName = s"${structCSType}DeleteEffect"
-    val createEffectName = s"${structCSType}CreateEffect"
-
-    // Delete has to be first. This is so it can clear away all those
-    // observers observing this object, so they don't have to remove
-    // themselves, and if something is ressurrected via revert, the
-    // observers for the old existence won't be notified.
-    s"""
-       |  public void Broadcast${structName}Effects(
-       |      SortedDictionary<int, List<I${structCSType}EffectObserver>> observers) {
-       |    foreach (var effect in effects${deleteEffectName}) {
-       |      if (observers.TryGetValue(0, out List<${observerName}> globalObservers)) {
-       |        foreach (var observer in globalObservers) {
-       |          observer.On${structCSType}Effect(effect);
-       |        }
-       |      }
-       |      if (observers.TryGetValue(effect.id, out List<${observerName}> objObservers)) {
-       |        foreach (var observer in objObservers) {
-       |          observer.On${structCSType}Effect(effect);
-       |        }
-       |        observersFor${structCSType}.Remove(effect.id);
-       |      }
-       |    }
-       |    effects${deleteEffectName}.Clear();
-       |
-       |""".stripMargin +
-      struct.members.filter(_.variability == VaryingS).map(_.name)
-      .map(memberName => {
-        val effectCSType = s"${structCSType}Set${memberName.capitalize}Effect";
-        s"""
-           |    foreach (var effect in effects${effectCSType}) {
-           |      if (observers.TryGetValue(0, out List<${observerName}> globalObservers)) {
-           |        foreach (var observer in globalObservers) {
-           |          observer.On${structCSType}Effect(effect);
-           |        }
-           |      }
-           |      if (observers.TryGetValue(effect.id, out List<${observerName}> objObservers)) {
-           |        foreach (var observer in objObservers) {
-           |          observer.On${structCSType}Effect(effect);
-           |        }
-           |      }
-           |    }
-           |    effects${effectCSType}.Clear();
-           |""".stripMargin
-      })
-      .mkString("") +
-    s"""
-       |    foreach (var effect in effects${createEffectName}) {
-       |      if (observers.TryGetValue(0, out List<${observerName}> globalObservers)) {
-       |        foreach (var observer in globalObservers) {
-       |          observer.On${structCSType}Effect(effect);
-       |        }
-       |      }
-       |      if (observers.TryGetValue(effect.id, out List<${observerName}> objObservers)) {
-       |        foreach (var observer in objObservers) {
-       |          observer.On${structCSType}Effect(effect);
-       |        }
-       |      }
-       |    }
-       |    effects${createEffectName}.Clear();
-       |  }
-       |""".stripMargin
-  }
-
 }

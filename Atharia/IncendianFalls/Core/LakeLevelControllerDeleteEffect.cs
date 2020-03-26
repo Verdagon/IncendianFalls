@@ -11,8 +11,11 @@ public struct LakeLevelControllerDeleteEffect : ILakeLevelControllerEffect {
     this.id = id;
   }
   int ILakeLevelControllerEffect.id => id;
-  public void visit(ILakeLevelControllerEffectVisitor visitor) {
+  public void visitILakeLevelControllerEffect(ILakeLevelControllerEffectVisitor visitor) {
     visitor.visitLakeLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLakeLevelControllerEffect(this);
   }
 }
 

@@ -14,24 +14,24 @@ public class SimplePresenceTriggerTTCMutSet {
   public SimplePresenceTriggerTTCMutSetIncarnation incarnation {
     get { return root.GetSimplePresenceTriggerTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(ISimplePresenceTriggerTTCMutSetEffectObserver observer) {
-    root.AddSimplePresenceTriggerTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISimplePresenceTriggerTTCMutSetEffectObserver observer) {
+    broadcaster.AddSimplePresenceTriggerTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ISimplePresenceTriggerTTCMutSetEffectObserver observer) {
-    root.RemoveSimplePresenceTriggerTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISimplePresenceTriggerTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveSimplePresenceTriggerTTCMutSetObserver(id, observer);
   }
   public void Add(SimplePresenceTriggerTTC element) {
-    root.EffectSimplePresenceTriggerTTCMutSetAdd(id, element.id);
+      root.EffectSimplePresenceTriggerTTCMutSetAdd(id, element.id);
   }
   public void Remove(SimplePresenceTriggerTTC element) {
-    root.EffectSimplePresenceTriggerTTCMutSetRemove(id, element.id);
+      root.EffectSimplePresenceTriggerTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectSimplePresenceTriggerTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectSimplePresenceTriggerTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectSimplePresenceTriggerTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(SimplePresenceTriggerTTC element) {

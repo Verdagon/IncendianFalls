@@ -13,11 +13,11 @@ public class CounterImpulse {
     this.id = id;
   }
   public CounterImpulseIncarnation incarnation { get { return root.GetCounterImpulseIncarnation(id); } }
-  public void AddObserver(ICounterImpulseEffectObserver observer) {
-    root.AddCounterImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICounterImpulseEffectObserver observer) {
+    broadcaster.AddCounterImpulseObserver(id, observer);
   }
-  public void RemoveObserver(ICounterImpulseEffectObserver observer) {
-    root.RemoveCounterImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICounterImpulseEffectObserver observer) {
+    broadcaster.RemoveCounterImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectCounterImpulseDelete(id);

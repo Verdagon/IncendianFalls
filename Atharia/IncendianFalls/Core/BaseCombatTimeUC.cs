@@ -13,11 +13,11 @@ public class BaseCombatTimeUC {
     this.id = id;
   }
   public BaseCombatTimeUCIncarnation incarnation { get { return root.GetBaseCombatTimeUCIncarnation(id); } }
-  public void AddObserver(IBaseCombatTimeUCEffectObserver observer) {
-    root.AddBaseCombatTimeUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBaseCombatTimeUCEffectObserver observer) {
+    broadcaster.AddBaseCombatTimeUCObserver(id, observer);
   }
-  public void RemoveObserver(IBaseCombatTimeUCEffectObserver observer) {
-    root.RemoveBaseCombatTimeUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBaseCombatTimeUCEffectObserver observer) {
+    broadcaster.RemoveBaseCombatTimeUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectBaseCombatTimeUCDelete(id);

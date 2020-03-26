@@ -16,8 +16,11 @@ public struct SorcerousUCSetMpEffect : ISorcerousUCEffect {
   }
   int ISorcerousUCEffect.id => id;
 
-  public void visit(ISorcerousUCEffectVisitor visitor) {
+  public void visitISorcerousUCEffect(ISorcerousUCEffectVisitor visitor) {
     visitor.visitSorcerousUCSetMpEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSorcerousUCEffect(this);
   }
 }
 

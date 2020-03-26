@@ -13,11 +13,11 @@ public class CaveTTC {
     this.id = id;
   }
   public CaveTTCIncarnation incarnation { get { return root.GetCaveTTCIncarnation(id); } }
-  public void AddObserver(ICaveTTCEffectObserver observer) {
-    root.AddCaveTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICaveTTCEffectObserver observer) {
+    broadcaster.AddCaveTTCObserver(id, observer);
   }
-  public void RemoveObserver(ICaveTTCEffectObserver observer) {
-    root.RemoveCaveTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICaveTTCEffectObserver observer) {
+    broadcaster.RemoveCaveTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectCaveTTCDelete(id);

@@ -13,11 +13,11 @@ public class RetreatLevelController {
     this.id = id;
   }
   public RetreatLevelControllerIncarnation incarnation { get { return root.GetRetreatLevelControllerIncarnation(id); } }
-  public void AddObserver(IRetreatLevelControllerEffectObserver observer) {
-    root.AddRetreatLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IRetreatLevelControllerEffectObserver observer) {
+    broadcaster.AddRetreatLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(IRetreatLevelControllerEffectObserver observer) {
-    root.RemoveRetreatLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IRetreatLevelControllerEffectObserver observer) {
+    broadcaster.RemoveRetreatLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectRetreatLevelControllerDelete(id);

@@ -13,11 +13,11 @@ public class GrassTTC {
     this.id = id;
   }
   public GrassTTCIncarnation incarnation { get { return root.GetGrassTTCIncarnation(id); } }
-  public void AddObserver(IGrassTTCEffectObserver observer) {
-    root.AddGrassTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IGrassTTCEffectObserver observer) {
+    broadcaster.AddGrassTTCObserver(id, observer);
   }
-  public void RemoveObserver(IGrassTTCEffectObserver observer) {
-    root.RemoveGrassTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IGrassTTCEffectObserver observer) {
+    broadcaster.RemoveGrassTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectGrassTTCDelete(id);

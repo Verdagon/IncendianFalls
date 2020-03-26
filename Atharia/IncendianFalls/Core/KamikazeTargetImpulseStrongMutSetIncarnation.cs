@@ -10,6 +10,10 @@ public class KamikazeTargetImpulseStrongMutSetIncarnation {
   public KamikazeTargetImpulseStrongMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public KamikazeTargetImpulseStrongMutSetIncarnation Copy() {
+    return new KamikazeTargetImpulseStrongMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

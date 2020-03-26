@@ -11,8 +11,11 @@ public struct UnleashBideImpulseDeleteEffect : IUnleashBideImpulseEffect {
     this.id = id;
   }
   int IUnleashBideImpulseEffect.id => id;
-  public void visit(IUnleashBideImpulseEffectVisitor visitor) {
+  public void visitIUnleashBideImpulseEffect(IUnleashBideImpulseEffectVisitor visitor) {
     visitor.visitUnleashBideImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitUnleashBideImpulseEffect(this);
   }
 }
 

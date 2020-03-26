@@ -10,8 +10,11 @@ public struct HealthPotionMutSetDeleteEffect : IHealthPotionMutSetEffect {
     this.id = id;
   }
   int IHealthPotionMutSetEffect.id => id;
-  public void visit(IHealthPotionMutSetEffectVisitor visitor) {
+  public void visitIHealthPotionMutSetEffect(IHealthPotionMutSetEffectVisitor visitor) {
     visitor.visitHealthPotionMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitHealthPotionMutSetEffect(this);
   }
 }
 

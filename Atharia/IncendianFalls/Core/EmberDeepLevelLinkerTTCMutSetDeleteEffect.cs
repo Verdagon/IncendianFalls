@@ -10,8 +10,11 @@ public struct EmberDeepLevelLinkerTTCMutSetDeleteEffect : IEmberDeepLevelLinkerT
     this.id = id;
   }
   int IEmberDeepLevelLinkerTTCMutSetEffect.id => id;
-  public void visit(IEmberDeepLevelLinkerTTCMutSetEffectVisitor visitor) {
+  public void visitIEmberDeepLevelLinkerTTCMutSetEffect(IEmberDeepLevelLinkerTTCMutSetEffectVisitor visitor) {
     visitor.visitEmberDeepLevelLinkerTTCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitEmberDeepLevelLinkerTTCMutSetEffect(this);
   }
 }
 

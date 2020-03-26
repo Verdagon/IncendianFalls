@@ -11,8 +11,11 @@ public struct IPreActingUCWeakMutBunchDeleteEffect : IIPreActingUCWeakMutBunchEf
     this.id = id;
   }
   int IIPreActingUCWeakMutBunchEffect.id => id;
-  public void visit(IIPreActingUCWeakMutBunchEffectVisitor visitor) {
+  public void visitIIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffectVisitor visitor) {
     visitor.visitIPreActingUCWeakMutBunchDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitIPreActingUCWeakMutBunchEffect(this);
   }
 }
 

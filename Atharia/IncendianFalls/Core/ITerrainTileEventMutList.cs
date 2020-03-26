@@ -16,11 +16,11 @@ public class ITerrainTileEventMutList : IEnumerable<ITerrainTileEvent> {
   public ITerrainTileEventMutListIncarnation incarnation {
     get { return root.GetITerrainTileEventMutListIncarnation(id); }
   }
-  public void AddObserver(IITerrainTileEventMutListEffectObserver observer) {
-    root.AddITerrainTileEventMutListObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IITerrainTileEventMutListEffectObserver observer) {
+    broadcaster.AddITerrainTileEventMutListObserver(id, observer);
   }
-  public void RemoveObserver(IITerrainTileEventMutListEffectObserver observer) {
-    root.RemoveITerrainTileEventMutListObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IITerrainTileEventMutListEffectObserver observer) {
+    broadcaster.RemoveITerrainTileEventMutListObserver(id, observer);
   }
   public void Delete() {
     root.EffectITerrainTileEventMutListDelete(id);
@@ -46,7 +46,7 @@ public class ITerrainTileEventMutList : IEnumerable<ITerrainTileEvent> {
     return this.root == that.root && id == that.id;
   }
   public void Add(ITerrainTileEvent element) {
-    root.EffectITerrainTileEventMutListAdd(id, element);
+    root.EffectITerrainTileEventMutListAdd(id, Count, element);
   }
   public void RemoveAt(int index) {
     root.EffectITerrainTileEventMutListRemoveAt(id, index);

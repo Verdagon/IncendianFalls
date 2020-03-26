@@ -13,11 +13,11 @@ public class Tutorial1LevelController {
     this.id = id;
   }
   public Tutorial1LevelControllerIncarnation incarnation { get { return root.GetTutorial1LevelControllerIncarnation(id); } }
-  public void AddObserver(ITutorial1LevelControllerEffectObserver observer) {
-    root.AddTutorial1LevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITutorial1LevelControllerEffectObserver observer) {
+    broadcaster.AddTutorial1LevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(ITutorial1LevelControllerEffectObserver observer) {
-    root.RemoveTutorial1LevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITutorial1LevelControllerEffectObserver observer) {
+    broadcaster.RemoveTutorial1LevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectTutorial1LevelControllerDelete(id);

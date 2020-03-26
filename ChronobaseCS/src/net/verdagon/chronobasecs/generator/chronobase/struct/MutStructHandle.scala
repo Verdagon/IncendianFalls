@@ -22,11 +22,11 @@ object MutStructHandle {
          |    this.id = id;
          |  }
          |  public ${structName}Incarnation incarnation { get { return root.Get${structName}Incarnation(id); } }
-         |  public void AddObserver(I${structName}EffectObserver observer) {
-         |    root.Add${structName}Observer(id, observer);
+         |  public void AddObserver(EffectBroadcaster broadcaster, I${structName}EffectObserver observer) {
+         |    broadcaster.Add${structName}Observer(id, observer);
          |  }
-         |  public void RemoveObserver(I${structName}EffectObserver observer) {
-         |    root.Remove${structName}Observer(id, observer);
+         |  public void RemoveObserver(EffectBroadcaster broadcaster, I${structName}EffectObserver observer) {
+         |    broadcaster.Remove${structName}Observer(id, observer);
          |  }
          |  public void Delete() {
          |    root.Effect${structName}Delete(id);

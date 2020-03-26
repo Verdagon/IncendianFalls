@@ -11,8 +11,11 @@ public struct GrassTTCDeleteEffect : IGrassTTCEffect {
     this.id = id;
   }
   int IGrassTTCEffect.id => id;
-  public void visit(IGrassTTCEffectVisitor visitor) {
+  public void visitIGrassTTCEffect(IGrassTTCEffectVisitor visitor) {
     visitor.visitGrassTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitGrassTTCEffect(this);
   }
 }
 

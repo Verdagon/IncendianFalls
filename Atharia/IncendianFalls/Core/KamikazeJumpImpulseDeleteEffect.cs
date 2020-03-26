@@ -11,8 +11,11 @@ public struct KamikazeJumpImpulseDeleteEffect : IKamikazeJumpImpulseEffect {
     this.id = id;
   }
   int IKamikazeJumpImpulseEffect.id => id;
-  public void visit(IKamikazeJumpImpulseEffectVisitor visitor) {
+  public void visitIKamikazeJumpImpulseEffect(IKamikazeJumpImpulseEffectVisitor visitor) {
     visitor.visitKamikazeJumpImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitKamikazeJumpImpulseEffect(this);
   }
 }
 

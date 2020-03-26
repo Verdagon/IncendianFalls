@@ -11,8 +11,11 @@ public struct LocationMutListCreateEffect : ILocationMutListEffect {
     this.id = id;
   }
   int ILocationMutListEffect.id => id;
-  public void visit(ILocationMutListEffectVisitor visitor) {
+  public void visitILocationMutListEffect(ILocationMutListEffectVisitor visitor) {
     visitor.visitLocationMutListCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLocationMutListEffect(this);
   }
 }
 

@@ -10,8 +10,11 @@ public struct SlowRodMutSetCreateEffect : ISlowRodMutSetEffect {
     this.id = id;
   }
   int ISlowRodMutSetEffect.id => id;
-  public void visit(ISlowRodMutSetEffectVisitor visitor) {
+  public void visitISlowRodMutSetEffect(ISlowRodMutSetEffectVisitor visitor) {
     visitor.visitSlowRodMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSlowRodMutSetEffect(this);
   }
 }
 

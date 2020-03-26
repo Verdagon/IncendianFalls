@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IKamikazeTargetTTCStrongByLocationMutMapEffect {
+public interface IKamikazeTargetTTCStrongByLocationMutMapEffect : IEffect {
   int id { get; }
-  void visit(IKamikazeTargetTTCStrongByLocationMutMapEffectVisitor visitor);
+  void visitIKamikazeTargetTTCStrongByLocationMutMapEffect(IKamikazeTargetTTCStrongByLocationMutMapEffectVisitor visitor);
 }
 
 }

@@ -10,6 +10,10 @@ public class MoveImpulseStrongMutSetIncarnation {
   public MoveImpulseStrongMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public MoveImpulseStrongMutSetIncarnation Copy() {
+    return new MoveImpulseStrongMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

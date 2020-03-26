@@ -14,24 +14,24 @@ public class CounteringUCWeakMutSet {
   public CounteringUCWeakMutSetIncarnation incarnation {
     get { return root.GetCounteringUCWeakMutSetIncarnation(id); }
   }
-  public void AddObserver(ICounteringUCWeakMutSetEffectObserver observer) {
-    root.AddCounteringUCWeakMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICounteringUCWeakMutSetEffectObserver observer) {
+    broadcaster.AddCounteringUCWeakMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ICounteringUCWeakMutSetEffectObserver observer) {
-    root.RemoveCounteringUCWeakMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICounteringUCWeakMutSetEffectObserver observer) {
+    broadcaster.RemoveCounteringUCWeakMutSetObserver(id, observer);
   }
   public void Add(CounteringUC element) {
-    root.EffectCounteringUCWeakMutSetAdd(id, element.id);
+      root.EffectCounteringUCWeakMutSetAdd(id, element.id);
   }
   public void Remove(CounteringUC element) {
-    root.EffectCounteringUCWeakMutSetRemove(id, element.id);
+      root.EffectCounteringUCWeakMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectCounteringUCWeakMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectCounteringUCWeakMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectCounteringUCWeakMutSetRemove(id, element);
     }
   }
   public bool Contains(CounteringUC element) {

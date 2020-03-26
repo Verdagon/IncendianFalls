@@ -11,8 +11,11 @@ public struct WarperTTCDeleteEffect : IWarperTTCEffect {
     this.id = id;
   }
   int IWarperTTCEffect.id => id;
-  public void visit(IWarperTTCEffectVisitor visitor) {
+  public void visitIWarperTTCEffect(IWarperTTCEffectVisitor visitor) {
     visitor.visitWarperTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitWarperTTCEffect(this);
   }
 }
 

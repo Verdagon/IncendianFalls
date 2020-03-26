@@ -13,11 +13,11 @@ public class InvincibilityUC {
     this.id = id;
   }
   public InvincibilityUCIncarnation incarnation { get { return root.GetInvincibilityUCIncarnation(id); } }
-  public void AddObserver(IInvincibilityUCEffectObserver observer) {
-    root.AddInvincibilityUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IInvincibilityUCEffectObserver observer) {
+    broadcaster.AddInvincibilityUCObserver(id, observer);
   }
-  public void RemoveObserver(IInvincibilityUCEffectObserver observer) {
-    root.RemoveInvincibilityUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IInvincibilityUCEffectObserver observer) {
+    broadcaster.RemoveInvincibilityUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectInvincibilityUCDelete(id);

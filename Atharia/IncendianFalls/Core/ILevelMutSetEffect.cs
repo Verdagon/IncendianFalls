@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface ILevelMutSetEffect {
+public interface ILevelMutSetEffect : IEffect {
   int id { get; }
-  void visit(ILevelMutSetEffectVisitor visitor);
+  void visitILevelMutSetEffect(ILevelMutSetEffectVisitor visitor);
 }
 
 }

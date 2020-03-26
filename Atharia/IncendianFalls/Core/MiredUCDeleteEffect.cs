@@ -11,8 +11,11 @@ public struct MiredUCDeleteEffect : IMiredUCEffect {
     this.id = id;
   }
   int IMiredUCEffect.id => id;
-  public void visit(IMiredUCEffectVisitor visitor) {
+  public void visitIMiredUCEffect(IMiredUCEffectVisitor visitor) {
     visitor.visitMiredUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitMiredUCEffect(this);
   }
 }
 

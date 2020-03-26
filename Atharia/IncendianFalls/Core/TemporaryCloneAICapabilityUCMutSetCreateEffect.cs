@@ -10,8 +10,11 @@ public struct TemporaryCloneAICapabilityUCMutSetCreateEffect : ITemporaryCloneAI
     this.id = id;
   }
   int ITemporaryCloneAICapabilityUCMutSetEffect.id => id;
-  public void visit(ITemporaryCloneAICapabilityUCMutSetEffectVisitor visitor) {
+  public void visitITemporaryCloneAICapabilityUCMutSetEffect(ITemporaryCloneAICapabilityUCMutSetEffectVisitor visitor) {
     visitor.visitTemporaryCloneAICapabilityUCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTemporaryCloneAICapabilityUCMutSetEffect(this);
   }
 }
 

@@ -10,8 +10,11 @@ public struct StoneTTCMutSetCreateEffect : IStoneTTCMutSetEffect {
     this.id = id;
   }
   int IStoneTTCMutSetEffect.id => id;
-  public void visit(IStoneTTCMutSetEffectVisitor visitor) {
+  public void visitIStoneTTCMutSetEffect(IStoneTTCMutSetEffectVisitor visitor) {
     visitor.visitStoneTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitStoneTTCMutSetEffect(this);
   }
 }
 

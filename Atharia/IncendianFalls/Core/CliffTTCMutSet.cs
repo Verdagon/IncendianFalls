@@ -14,24 +14,24 @@ public class CliffTTCMutSet {
   public CliffTTCMutSetIncarnation incarnation {
     get { return root.GetCliffTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(ICliffTTCMutSetEffectObserver observer) {
-    root.AddCliffTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICliffTTCMutSetEffectObserver observer) {
+    broadcaster.AddCliffTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ICliffTTCMutSetEffectObserver observer) {
-    root.RemoveCliffTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICliffTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveCliffTTCMutSetObserver(id, observer);
   }
   public void Add(CliffTTC element) {
-    root.EffectCliffTTCMutSetAdd(id, element.id);
+      root.EffectCliffTTCMutSetAdd(id, element.id);
   }
   public void Remove(CliffTTC element) {
-    root.EffectCliffTTCMutSetRemove(id, element.id);
+      root.EffectCliffTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectCliffTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectCliffTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectCliffTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(CliffTTC element) {

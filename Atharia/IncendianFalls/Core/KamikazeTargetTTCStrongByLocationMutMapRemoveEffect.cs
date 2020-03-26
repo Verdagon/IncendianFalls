@@ -13,8 +13,11 @@ public struct KamikazeTargetTTCStrongByLocationMutMapRemoveEffect : IKamikazeTar
     this.key = key;
   }
   int IKamikazeTargetTTCStrongByLocationMutMapEffect.id => id;
-  public void visit(IKamikazeTargetTTCStrongByLocationMutMapEffectVisitor visitor) {
+  public void visitIKamikazeTargetTTCStrongByLocationMutMapEffect(IKamikazeTargetTTCStrongByLocationMutMapEffectVisitor visitor) {
     visitor.visitKamikazeTargetTTCStrongByLocationMutMapRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitKamikazeTargetTTCStrongByLocationMutMapEffect(this);
   }
 }
 

@@ -11,8 +11,11 @@ public struct GuardAICapabilityUCDeleteEffect : IGuardAICapabilityUCEffect {
     this.id = id;
   }
   int IGuardAICapabilityUCEffect.id => id;
-  public void visit(IGuardAICapabilityUCEffectVisitor visitor) {
+  public void visitIGuardAICapabilityUCEffect(IGuardAICapabilityUCEffectVisitor visitor) {
     visitor.visitGuardAICapabilityUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitGuardAICapabilityUCEffect(this);
   }
 }
 

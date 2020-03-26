@@ -11,8 +11,11 @@ public struct KamikazeTargetTTCStrongByLocationMutMapDeleteEffect : IKamikazeTar
     this.id = id;
   }
   int IKamikazeTargetTTCStrongByLocationMutMapEffect.id => id;
-  public void visit(IKamikazeTargetTTCStrongByLocationMutMapEffectVisitor visitor) {
+  public void visitIKamikazeTargetTTCStrongByLocationMutMapEffect(IKamikazeTargetTTCStrongByLocationMutMapEffectVisitor visitor) {
     visitor.visitKamikazeTargetTTCStrongByLocationMutMapDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitKamikazeTargetTTCStrongByLocationMutMapEffect(this);
   }
 }
 

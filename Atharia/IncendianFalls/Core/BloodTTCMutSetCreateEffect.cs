@@ -10,8 +10,11 @@ public struct BloodTTCMutSetCreateEffect : IBloodTTCMutSetEffect {
     this.id = id;
   }
   int IBloodTTCMutSetEffect.id => id;
-  public void visit(IBloodTTCMutSetEffectVisitor visitor) {
+  public void visitIBloodTTCMutSetEffect(IBloodTTCMutSetEffectVisitor visitor) {
     visitor.visitBloodTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBloodTTCMutSetEffect(this);
   }
 }
 

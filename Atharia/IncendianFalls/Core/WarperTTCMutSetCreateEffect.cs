@@ -10,8 +10,11 @@ public struct WarperTTCMutSetCreateEffect : IWarperTTCMutSetEffect {
     this.id = id;
   }
   int IWarperTTCMutSetEffect.id => id;
-  public void visit(IWarperTTCMutSetEffectVisitor visitor) {
+  public void visitIWarperTTCMutSetEffect(IWarperTTCMutSetEffectVisitor visitor) {
     visitor.visitWarperTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitWarperTTCMutSetEffect(this);
   }
 }
 

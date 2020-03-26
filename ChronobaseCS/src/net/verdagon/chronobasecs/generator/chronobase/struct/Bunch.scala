@@ -42,10 +42,12 @@ object Bunch {
         })
         .mkString(", ") +
       s""" {
+         |  EffectBroadcaster broadcaster;
          |  ${bunchCSType} bunch;
          |  private List<${observerName}> observers;
          |
-         |  public ${broadcasterName}(${bunchCSType} bunch) {
+         |  public ${broadcasterName}(EffectBroadcaster broadcaster, ${bunchCSType} bunch) {
+         |    this.broadcaster = broadcaster;
          |    this.bunch = bunch;
          |    this.observers = new List<${observerName}>();
          |""".stripMargin +
@@ -53,7 +55,7 @@ object Bunch {
         .map(structSetByStruct)
         .map(structSet => {
           val structSetCSType = toCS(structSet)
-          s"    bunch.members${structSetCSType}.AddObserver(this);\n"
+          s"    bunch.members${structSetCSType}.AddObserver(broadcaster, this);\n"
         })
         .mkString("") +
       s"""
@@ -64,7 +66,7 @@ object Bunch {
         .map(structSetByStruct)
         .map(structSet => {
           val structSetCSType = toCS(structSet)
-          s"    bunch.members${structSetCSType}.RemoveObserver(this);\n"
+          s"    bunch.members${structSetCSType}.RemoveObserver(broadcaster, this);\n"
         })
         .mkString("") +
       s"""
@@ -91,13 +93,13 @@ object Bunch {
         .map(structSet => {
           val structSetCSType = toCS(structSet)
           s"""  public void On${structSetCSType}Effect(I${structSetCSType}Effect effect) {
-             |    effect.visit(this);
+             |    effect.visitI${structSetCSType}Effect(this);
              |  }
              |  public void visit${structSetCSType}AddEffect(${structSetCSType}AddEffect effect) {
-             |    BroadcastAdd(effect.elementId);
+             |    BroadcastAdd(effect.element);
              |  }
              |  public void visit${structSetCSType}RemoveEffect(${structSetCSType}RemoveEffect effect) {
-             |    BroadcastRemove(effect.elementId);
+             |    BroadcastRemove(effect.element);
              |  }
              |  public void visit${structSetCSType}CreateEffect(${structSetCSType}CreateEffect effect) { }
              |  public void visit${structSetCSType}DeleteEffect(${structSetCSType}DeleteEffect effect) { }

@@ -11,8 +11,11 @@ public struct SimplePresenceTriggerTTCDeleteEffect : ISimplePresenceTriggerTTCEf
     this.id = id;
   }
   int ISimplePresenceTriggerTTCEffect.id => id;
-  public void visit(ISimplePresenceTriggerTTCEffectVisitor visitor) {
+  public void visitISimplePresenceTriggerTTCEffect(ISimplePresenceTriggerTTCEffectVisitor visitor) {
     visitor.visitSimplePresenceTriggerTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitSimplePresenceTriggerTTCEffect(this);
   }
 }
 

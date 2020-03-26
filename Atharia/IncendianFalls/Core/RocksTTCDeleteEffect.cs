@@ -11,8 +11,11 @@ public struct RocksTTCDeleteEffect : IRocksTTCEffect {
     this.id = id;
   }
   int IRocksTTCEffect.id => id;
-  public void visit(IRocksTTCEffectVisitor visitor) {
+  public void visitIRocksTTCEffect(IRocksTTCEffectVisitor visitor) {
     visitor.visitRocksTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitRocksTTCEffect(this);
   }
 }
 

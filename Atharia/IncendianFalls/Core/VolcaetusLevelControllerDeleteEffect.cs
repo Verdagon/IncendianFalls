@@ -11,8 +11,11 @@ public struct VolcaetusLevelControllerDeleteEffect : IVolcaetusLevelControllerEf
     this.id = id;
   }
   int IVolcaetusLevelControllerEffect.id => id;
-  public void visit(IVolcaetusLevelControllerEffectVisitor visitor) {
+  public void visitIVolcaetusLevelControllerEffect(IVolcaetusLevelControllerEffectVisitor visitor) {
     visitor.visitVolcaetusLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitVolcaetusLevelControllerEffect(this);
   }
 }
 

@@ -10,8 +10,11 @@ public struct BaseSightRangeUCMutSetDeleteEffect : IBaseSightRangeUCMutSetEffect
     this.id = id;
   }
   int IBaseSightRangeUCMutSetEffect.id => id;
-  public void visit(IBaseSightRangeUCMutSetEffectVisitor visitor) {
+  public void visitIBaseSightRangeUCMutSetEffect(IBaseSightRangeUCMutSetEffectVisitor visitor) {
     visitor.visitBaseSightRangeUCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBaseSightRangeUCMutSetEffect(this);
   }
 }
 

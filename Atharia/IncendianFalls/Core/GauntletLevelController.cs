@@ -13,11 +13,11 @@ public class GauntletLevelController {
     this.id = id;
   }
   public GauntletLevelControllerIncarnation incarnation { get { return root.GetGauntletLevelControllerIncarnation(id); } }
-  public void AddObserver(IGauntletLevelControllerEffectObserver observer) {
-    root.AddGauntletLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IGauntletLevelControllerEffectObserver observer) {
+    broadcaster.AddGauntletLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(IGauntletLevelControllerEffectObserver observer) {
-    root.RemoveGauntletLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IGauntletLevelControllerEffectObserver observer) {
+    broadcaster.RemoveGauntletLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectGauntletLevelControllerDelete(id);

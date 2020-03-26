@@ -5,51 +5,53 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class IImpulseStrongMutBunchBroadcaster:IHoldPositionImpulseStrongMutSetEffectObserver, IHoldPositionImpulseStrongMutSetEffectVisitor, ITemporaryCloneImpulseStrongMutSetEffectObserver, ITemporaryCloneImpulseStrongMutSetEffectVisitor, ISummonImpulseStrongMutSetEffectObserver, ISummonImpulseStrongMutSetEffectVisitor, IMireImpulseStrongMutSetEffectObserver, IMireImpulseStrongMutSetEffectVisitor, IEvaporateImpulseStrongMutSetEffectObserver, IEvaporateImpulseStrongMutSetEffectVisitor, IMoveImpulseStrongMutSetEffectObserver, IMoveImpulseStrongMutSetEffectVisitor, IKamikazeJumpImpulseStrongMutSetEffectObserver, IKamikazeJumpImpulseStrongMutSetEffectVisitor, IKamikazeTargetImpulseStrongMutSetEffectObserver, IKamikazeTargetImpulseStrongMutSetEffectVisitor, INoImpulseStrongMutSetEffectObserver, INoImpulseStrongMutSetEffectVisitor, IFireImpulseStrongMutSetEffectObserver, IFireImpulseStrongMutSetEffectVisitor, IDefyImpulseStrongMutSetEffectObserver, IDefyImpulseStrongMutSetEffectVisitor, ICounterImpulseStrongMutSetEffectObserver, ICounterImpulseStrongMutSetEffectVisitor, IUnleashBideImpulseStrongMutSetEffectObserver, IUnleashBideImpulseStrongMutSetEffectVisitor, IContinueBidingImpulseStrongMutSetEffectObserver, IContinueBidingImpulseStrongMutSetEffectVisitor, IStartBidingImpulseStrongMutSetEffectObserver, IStartBidingImpulseStrongMutSetEffectVisitor, IAttackImpulseStrongMutSetEffectObserver, IAttackImpulseStrongMutSetEffectVisitor, IPursueImpulseStrongMutSetEffectObserver, IPursueImpulseStrongMutSetEffectVisitor, IFireBombImpulseStrongMutSetEffectObserver, IFireBombImpulseStrongMutSetEffectVisitor {
+  EffectBroadcaster broadcaster;
   IImpulseStrongMutBunch bunch;
   private List<IIImpulseStrongMutBunchObserver> observers;
 
-  public IImpulseStrongMutBunchBroadcaster(IImpulseStrongMutBunch bunch) {
+  public IImpulseStrongMutBunchBroadcaster(EffectBroadcaster broadcaster, IImpulseStrongMutBunch bunch) {
+    this.broadcaster = broadcaster;
     this.bunch = bunch;
     this.observers = new List<IIImpulseStrongMutBunchObserver>();
-    bunch.membersHoldPositionImpulseStrongMutSet.AddObserver(this);
-    bunch.membersTemporaryCloneImpulseStrongMutSet.AddObserver(this);
-    bunch.membersSummonImpulseStrongMutSet.AddObserver(this);
-    bunch.membersMireImpulseStrongMutSet.AddObserver(this);
-    bunch.membersEvaporateImpulseStrongMutSet.AddObserver(this);
-    bunch.membersMoveImpulseStrongMutSet.AddObserver(this);
-    bunch.membersKamikazeJumpImpulseStrongMutSet.AddObserver(this);
-    bunch.membersKamikazeTargetImpulseStrongMutSet.AddObserver(this);
-    bunch.membersNoImpulseStrongMutSet.AddObserver(this);
-    bunch.membersFireImpulseStrongMutSet.AddObserver(this);
-    bunch.membersDefyImpulseStrongMutSet.AddObserver(this);
-    bunch.membersCounterImpulseStrongMutSet.AddObserver(this);
-    bunch.membersUnleashBideImpulseStrongMutSet.AddObserver(this);
-    bunch.membersContinueBidingImpulseStrongMutSet.AddObserver(this);
-    bunch.membersStartBidingImpulseStrongMutSet.AddObserver(this);
-    bunch.membersAttackImpulseStrongMutSet.AddObserver(this);
-    bunch.membersPursueImpulseStrongMutSet.AddObserver(this);
-    bunch.membersFireBombImpulseStrongMutSet.AddObserver(this);
+    bunch.membersHoldPositionImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersTemporaryCloneImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersSummonImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersMireImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersEvaporateImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersMoveImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersKamikazeJumpImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersKamikazeTargetImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersNoImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersFireImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersDefyImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersCounterImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersUnleashBideImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersContinueBidingImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersStartBidingImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersAttackImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersPursueImpulseStrongMutSet.AddObserver(broadcaster, this);
+    bunch.membersFireBombImpulseStrongMutSet.AddObserver(broadcaster, this);
 
   }
   public void Stop() {
-    bunch.membersHoldPositionImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersTemporaryCloneImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersSummonImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersMireImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersEvaporateImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersMoveImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersKamikazeJumpImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersKamikazeTargetImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersNoImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersFireImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersDefyImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersCounterImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersUnleashBideImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersContinueBidingImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersStartBidingImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersAttackImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersPursueImpulseStrongMutSet.RemoveObserver(this);
-    bunch.membersFireBombImpulseStrongMutSet.RemoveObserver(this);
+    bunch.membersHoldPositionImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersTemporaryCloneImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersSummonImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersMireImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersEvaporateImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersMoveImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersKamikazeJumpImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersKamikazeTargetImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersNoImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersFireImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersDefyImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersCounterImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersUnleashBideImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersContinueBidingImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersStartBidingImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersAttackImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersPursueImpulseStrongMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersFireBombImpulseStrongMutSet.RemoveObserver(broadcaster, this);
 
   }
   public void AddObserver(IIImpulseStrongMutBunchObserver observer) {
@@ -69,200 +71,200 @@ public class IImpulseStrongMutBunchBroadcaster:IHoldPositionImpulseStrongMutSetE
     }
   }
   public void OnHoldPositionImpulseStrongMutSetEffect(IHoldPositionImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIHoldPositionImpulseStrongMutSetEffect(this);
   }
   public void visitHoldPositionImpulseStrongMutSetAddEffect(HoldPositionImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitHoldPositionImpulseStrongMutSetRemoveEffect(HoldPositionImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitHoldPositionImpulseStrongMutSetCreateEffect(HoldPositionImpulseStrongMutSetCreateEffect effect) { }
   public void visitHoldPositionImpulseStrongMutSetDeleteEffect(HoldPositionImpulseStrongMutSetDeleteEffect effect) { }
   public void OnTemporaryCloneImpulseStrongMutSetEffect(ITemporaryCloneImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitITemporaryCloneImpulseStrongMutSetEffect(this);
   }
   public void visitTemporaryCloneImpulseStrongMutSetAddEffect(TemporaryCloneImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitTemporaryCloneImpulseStrongMutSetRemoveEffect(TemporaryCloneImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitTemporaryCloneImpulseStrongMutSetCreateEffect(TemporaryCloneImpulseStrongMutSetCreateEffect effect) { }
   public void visitTemporaryCloneImpulseStrongMutSetDeleteEffect(TemporaryCloneImpulseStrongMutSetDeleteEffect effect) { }
   public void OnSummonImpulseStrongMutSetEffect(ISummonImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitISummonImpulseStrongMutSetEffect(this);
   }
   public void visitSummonImpulseStrongMutSetAddEffect(SummonImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitSummonImpulseStrongMutSetRemoveEffect(SummonImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitSummonImpulseStrongMutSetCreateEffect(SummonImpulseStrongMutSetCreateEffect effect) { }
   public void visitSummonImpulseStrongMutSetDeleteEffect(SummonImpulseStrongMutSetDeleteEffect effect) { }
   public void OnMireImpulseStrongMutSetEffect(IMireImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIMireImpulseStrongMutSetEffect(this);
   }
   public void visitMireImpulseStrongMutSetAddEffect(MireImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitMireImpulseStrongMutSetRemoveEffect(MireImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitMireImpulseStrongMutSetCreateEffect(MireImpulseStrongMutSetCreateEffect effect) { }
   public void visitMireImpulseStrongMutSetDeleteEffect(MireImpulseStrongMutSetDeleteEffect effect) { }
   public void OnEvaporateImpulseStrongMutSetEffect(IEvaporateImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIEvaporateImpulseStrongMutSetEffect(this);
   }
   public void visitEvaporateImpulseStrongMutSetAddEffect(EvaporateImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitEvaporateImpulseStrongMutSetRemoveEffect(EvaporateImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitEvaporateImpulseStrongMutSetCreateEffect(EvaporateImpulseStrongMutSetCreateEffect effect) { }
   public void visitEvaporateImpulseStrongMutSetDeleteEffect(EvaporateImpulseStrongMutSetDeleteEffect effect) { }
   public void OnMoveImpulseStrongMutSetEffect(IMoveImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIMoveImpulseStrongMutSetEffect(this);
   }
   public void visitMoveImpulseStrongMutSetAddEffect(MoveImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitMoveImpulseStrongMutSetRemoveEffect(MoveImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitMoveImpulseStrongMutSetCreateEffect(MoveImpulseStrongMutSetCreateEffect effect) { }
   public void visitMoveImpulseStrongMutSetDeleteEffect(MoveImpulseStrongMutSetDeleteEffect effect) { }
   public void OnKamikazeJumpImpulseStrongMutSetEffect(IKamikazeJumpImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIKamikazeJumpImpulseStrongMutSetEffect(this);
   }
   public void visitKamikazeJumpImpulseStrongMutSetAddEffect(KamikazeJumpImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitKamikazeJumpImpulseStrongMutSetRemoveEffect(KamikazeJumpImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitKamikazeJumpImpulseStrongMutSetCreateEffect(KamikazeJumpImpulseStrongMutSetCreateEffect effect) { }
   public void visitKamikazeJumpImpulseStrongMutSetDeleteEffect(KamikazeJumpImpulseStrongMutSetDeleteEffect effect) { }
   public void OnKamikazeTargetImpulseStrongMutSetEffect(IKamikazeTargetImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIKamikazeTargetImpulseStrongMutSetEffect(this);
   }
   public void visitKamikazeTargetImpulseStrongMutSetAddEffect(KamikazeTargetImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitKamikazeTargetImpulseStrongMutSetRemoveEffect(KamikazeTargetImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitKamikazeTargetImpulseStrongMutSetCreateEffect(KamikazeTargetImpulseStrongMutSetCreateEffect effect) { }
   public void visitKamikazeTargetImpulseStrongMutSetDeleteEffect(KamikazeTargetImpulseStrongMutSetDeleteEffect effect) { }
   public void OnNoImpulseStrongMutSetEffect(INoImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitINoImpulseStrongMutSetEffect(this);
   }
   public void visitNoImpulseStrongMutSetAddEffect(NoImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitNoImpulseStrongMutSetRemoveEffect(NoImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitNoImpulseStrongMutSetCreateEffect(NoImpulseStrongMutSetCreateEffect effect) { }
   public void visitNoImpulseStrongMutSetDeleteEffect(NoImpulseStrongMutSetDeleteEffect effect) { }
   public void OnFireImpulseStrongMutSetEffect(IFireImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIFireImpulseStrongMutSetEffect(this);
   }
   public void visitFireImpulseStrongMutSetAddEffect(FireImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitFireImpulseStrongMutSetRemoveEffect(FireImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitFireImpulseStrongMutSetCreateEffect(FireImpulseStrongMutSetCreateEffect effect) { }
   public void visitFireImpulseStrongMutSetDeleteEffect(FireImpulseStrongMutSetDeleteEffect effect) { }
   public void OnDefyImpulseStrongMutSetEffect(IDefyImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIDefyImpulseStrongMutSetEffect(this);
   }
   public void visitDefyImpulseStrongMutSetAddEffect(DefyImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitDefyImpulseStrongMutSetRemoveEffect(DefyImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitDefyImpulseStrongMutSetCreateEffect(DefyImpulseStrongMutSetCreateEffect effect) { }
   public void visitDefyImpulseStrongMutSetDeleteEffect(DefyImpulseStrongMutSetDeleteEffect effect) { }
   public void OnCounterImpulseStrongMutSetEffect(ICounterImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitICounterImpulseStrongMutSetEffect(this);
   }
   public void visitCounterImpulseStrongMutSetAddEffect(CounterImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitCounterImpulseStrongMutSetRemoveEffect(CounterImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitCounterImpulseStrongMutSetCreateEffect(CounterImpulseStrongMutSetCreateEffect effect) { }
   public void visitCounterImpulseStrongMutSetDeleteEffect(CounterImpulseStrongMutSetDeleteEffect effect) { }
   public void OnUnleashBideImpulseStrongMutSetEffect(IUnleashBideImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIUnleashBideImpulseStrongMutSetEffect(this);
   }
   public void visitUnleashBideImpulseStrongMutSetAddEffect(UnleashBideImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitUnleashBideImpulseStrongMutSetRemoveEffect(UnleashBideImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitUnleashBideImpulseStrongMutSetCreateEffect(UnleashBideImpulseStrongMutSetCreateEffect effect) { }
   public void visitUnleashBideImpulseStrongMutSetDeleteEffect(UnleashBideImpulseStrongMutSetDeleteEffect effect) { }
   public void OnContinueBidingImpulseStrongMutSetEffect(IContinueBidingImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIContinueBidingImpulseStrongMutSetEffect(this);
   }
   public void visitContinueBidingImpulseStrongMutSetAddEffect(ContinueBidingImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitContinueBidingImpulseStrongMutSetRemoveEffect(ContinueBidingImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitContinueBidingImpulseStrongMutSetCreateEffect(ContinueBidingImpulseStrongMutSetCreateEffect effect) { }
   public void visitContinueBidingImpulseStrongMutSetDeleteEffect(ContinueBidingImpulseStrongMutSetDeleteEffect effect) { }
   public void OnStartBidingImpulseStrongMutSetEffect(IStartBidingImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIStartBidingImpulseStrongMutSetEffect(this);
   }
   public void visitStartBidingImpulseStrongMutSetAddEffect(StartBidingImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitStartBidingImpulseStrongMutSetRemoveEffect(StartBidingImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitStartBidingImpulseStrongMutSetCreateEffect(StartBidingImpulseStrongMutSetCreateEffect effect) { }
   public void visitStartBidingImpulseStrongMutSetDeleteEffect(StartBidingImpulseStrongMutSetDeleteEffect effect) { }
   public void OnAttackImpulseStrongMutSetEffect(IAttackImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIAttackImpulseStrongMutSetEffect(this);
   }
   public void visitAttackImpulseStrongMutSetAddEffect(AttackImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitAttackImpulseStrongMutSetRemoveEffect(AttackImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitAttackImpulseStrongMutSetCreateEffect(AttackImpulseStrongMutSetCreateEffect effect) { }
   public void visitAttackImpulseStrongMutSetDeleteEffect(AttackImpulseStrongMutSetDeleteEffect effect) { }
   public void OnPursueImpulseStrongMutSetEffect(IPursueImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIPursueImpulseStrongMutSetEffect(this);
   }
   public void visitPursueImpulseStrongMutSetAddEffect(PursueImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitPursueImpulseStrongMutSetRemoveEffect(PursueImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitPursueImpulseStrongMutSetCreateEffect(PursueImpulseStrongMutSetCreateEffect effect) { }
   public void visitPursueImpulseStrongMutSetDeleteEffect(PursueImpulseStrongMutSetDeleteEffect effect) { }
   public void OnFireBombImpulseStrongMutSetEffect(IFireBombImpulseStrongMutSetEffect effect) {
-    effect.visit(this);
+    effect.visitIFireBombImpulseStrongMutSetEffect(this);
   }
   public void visitFireBombImpulseStrongMutSetAddEffect(FireBombImpulseStrongMutSetAddEffect effect) {
-    BroadcastAdd(effect.elementId);
+    BroadcastAdd(effect.element);
   }
   public void visitFireBombImpulseStrongMutSetRemoveEffect(FireBombImpulseStrongMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.elementId);
+    BroadcastRemove(effect.element);
   }
   public void visitFireBombImpulseStrongMutSetCreateEffect(FireBombImpulseStrongMutSetCreateEffect effect) { }
   public void visitFireBombImpulseStrongMutSetDeleteEffect(FireBombImpulseStrongMutSetDeleteEffect effect) { }

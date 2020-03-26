@@ -13,11 +13,11 @@ public class BaseSightRangeUC {
     this.id = id;
   }
   public BaseSightRangeUCIncarnation incarnation { get { return root.GetBaseSightRangeUCIncarnation(id); } }
-  public void AddObserver(IBaseSightRangeUCEffectObserver observer) {
-    root.AddBaseSightRangeUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBaseSightRangeUCEffectObserver observer) {
+    broadcaster.AddBaseSightRangeUCObserver(id, observer);
   }
-  public void RemoveObserver(IBaseSightRangeUCEffectObserver observer) {
-    root.RemoveBaseSightRangeUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBaseSightRangeUCEffectObserver observer) {
+    broadcaster.RemoveBaseSightRangeUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectBaseSightRangeUCDelete(id);

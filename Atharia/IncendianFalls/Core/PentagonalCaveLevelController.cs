@@ -13,11 +13,11 @@ public class PentagonalCaveLevelController {
     this.id = id;
   }
   public PentagonalCaveLevelControllerIncarnation incarnation { get { return root.GetPentagonalCaveLevelControllerIncarnation(id); } }
-  public void AddObserver(IPentagonalCaveLevelControllerEffectObserver observer) {
-    root.AddPentagonalCaveLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IPentagonalCaveLevelControllerEffectObserver observer) {
+    broadcaster.AddPentagonalCaveLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(IPentagonalCaveLevelControllerEffectObserver observer) {
-    root.RemovePentagonalCaveLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IPentagonalCaveLevelControllerEffectObserver observer) {
+    broadcaster.RemovePentagonalCaveLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectPentagonalCaveLevelControllerDelete(id);

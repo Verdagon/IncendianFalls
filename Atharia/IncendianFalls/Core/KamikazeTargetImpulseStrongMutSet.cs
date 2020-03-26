@@ -14,24 +14,24 @@ public class KamikazeTargetImpulseStrongMutSet {
   public KamikazeTargetImpulseStrongMutSetIncarnation incarnation {
     get { return root.GetKamikazeTargetImpulseStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(IKamikazeTargetImpulseStrongMutSetEffectObserver observer) {
-    root.AddKamikazeTargetImpulseStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IKamikazeTargetImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.AddKamikazeTargetImpulseStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IKamikazeTargetImpulseStrongMutSetEffectObserver observer) {
-    root.RemoveKamikazeTargetImpulseStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IKamikazeTargetImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveKamikazeTargetImpulseStrongMutSetObserver(id, observer);
   }
   public void Add(KamikazeTargetImpulse element) {
-    root.EffectKamikazeTargetImpulseStrongMutSetAdd(id, element.id);
+      root.EffectKamikazeTargetImpulseStrongMutSetAdd(id, element.id);
   }
   public void Remove(KamikazeTargetImpulse element) {
-    root.EffectKamikazeTargetImpulseStrongMutSetRemove(id, element.id);
+      root.EffectKamikazeTargetImpulseStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectKamikazeTargetImpulseStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectKamikazeTargetImpulseStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectKamikazeTargetImpulseStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(KamikazeTargetImpulse element) {

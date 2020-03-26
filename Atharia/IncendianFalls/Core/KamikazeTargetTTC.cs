@@ -13,11 +13,11 @@ public class KamikazeTargetTTC {
     this.id = id;
   }
   public KamikazeTargetTTCIncarnation incarnation { get { return root.GetKamikazeTargetTTCIncarnation(id); } }
-  public void AddObserver(IKamikazeTargetTTCEffectObserver observer) {
-    root.AddKamikazeTargetTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IKamikazeTargetTTCEffectObserver observer) {
+    broadcaster.AddKamikazeTargetTTCObserver(id, observer);
   }
-  public void RemoveObserver(IKamikazeTargetTTCEffectObserver observer) {
-    root.RemoveKamikazeTargetTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IKamikazeTargetTTCEffectObserver observer) {
+    broadcaster.RemoveKamikazeTargetTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectKamikazeTargetTTCDelete(id);

@@ -13,11 +13,11 @@ public class FireBombTTC {
     this.id = id;
   }
   public FireBombTTCIncarnation incarnation { get { return root.GetFireBombTTCIncarnation(id); } }
-  public void AddObserver(IFireBombTTCEffectObserver observer) {
-    root.AddFireBombTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IFireBombTTCEffectObserver observer) {
+    broadcaster.AddFireBombTTCObserver(id, observer);
   }
-  public void RemoveObserver(IFireBombTTCEffectObserver observer) {
-    root.RemoveFireBombTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IFireBombTTCEffectObserver observer) {
+    broadcaster.RemoveFireBombTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectFireBombTTCDelete(id);

@@ -13,11 +13,11 @@ public class Unit {
     this.id = id;
   }
   public UnitIncarnation incarnation { get { return root.GetUnitIncarnation(id); } }
-  public void AddObserver(IUnitEffectObserver observer) {
-    root.AddUnitObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IUnitEffectObserver observer) {
+    broadcaster.AddUnitObserver(id, observer);
   }
-  public void RemoveObserver(IUnitEffectObserver observer) {
-    root.RemoveUnitObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IUnitEffectObserver observer) {
+    broadcaster.RemoveUnitObserver(id, observer);
   }
   public void Delete() {
     root.EffectUnitDelete(id);

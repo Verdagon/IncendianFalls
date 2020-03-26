@@ -10,6 +10,10 @@ public class BloodTTCMutSetIncarnation {
   public BloodTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public BloodTTCMutSetIncarnation Copy() {
+    return new BloodTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

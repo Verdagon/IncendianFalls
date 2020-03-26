@@ -13,11 +13,11 @@ public class CaveWallTTC {
     this.id = id;
   }
   public CaveWallTTCIncarnation incarnation { get { return root.GetCaveWallTTCIncarnation(id); } }
-  public void AddObserver(ICaveWallTTCEffectObserver observer) {
-    root.AddCaveWallTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICaveWallTTCEffectObserver observer) {
+    broadcaster.AddCaveWallTTCObserver(id, observer);
   }
-  public void RemoveObserver(ICaveWallTTCEffectObserver observer) {
-    root.RemoveCaveWallTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICaveWallTTCEffectObserver observer) {
+    broadcaster.RemoveCaveWallTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectCaveWallTTCDelete(id);

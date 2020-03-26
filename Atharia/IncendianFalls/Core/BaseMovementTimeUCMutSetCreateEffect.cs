@@ -10,8 +10,11 @@ public struct BaseMovementTimeUCMutSetCreateEffect : IBaseMovementTimeUCMutSetEf
     this.id = id;
   }
   int IBaseMovementTimeUCMutSetEffect.id => id;
-  public void visit(IBaseMovementTimeUCMutSetEffectVisitor visitor) {
+  public void visitIBaseMovementTimeUCMutSetEffect(IBaseMovementTimeUCMutSetEffectVisitor visitor) {
     visitor.visitBaseMovementTimeUCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBaseMovementTimeUCMutSetEffect(this);
   }
 }
 

@@ -11,8 +11,11 @@ public struct WatDeleteEffect : IWatEffect {
     this.id = id;
   }
   int IWatEffect.id => id;
-  public void visit(IWatEffectVisitor visitor) {
+  public void visitIWatEffect(IWatEffectVisitor visitor) {
     visitor.visitWatDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitWatEffect(this);
   }
 }
 

@@ -13,11 +13,11 @@ public class KamikazeTargetImpulse {
     this.id = id;
   }
   public KamikazeTargetImpulseIncarnation incarnation { get { return root.GetKamikazeTargetImpulseIncarnation(id); } }
-  public void AddObserver(IKamikazeTargetImpulseEffectObserver observer) {
-    root.AddKamikazeTargetImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IKamikazeTargetImpulseEffectObserver observer) {
+    broadcaster.AddKamikazeTargetImpulseObserver(id, observer);
   }
-  public void RemoveObserver(IKamikazeTargetImpulseEffectObserver observer) {
-    root.RemoveKamikazeTargetImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IKamikazeTargetImpulseEffectObserver observer) {
+    broadcaster.RemoveKamikazeTargetImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectKamikazeTargetImpulseDelete(id);

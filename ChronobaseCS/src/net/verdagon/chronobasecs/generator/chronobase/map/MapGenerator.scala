@@ -23,12 +23,23 @@ object MapGenerator {
     }
   }
 
-  def generateRootMembers(opt: ChronobaseOptions, map: MapS): String = {
+  def generateEffectBroadcasterMembers(opt: ChronobaseOptions, map: MapS): String = {
     val structCSType = toCS(map.tyype)
     s"""
        |  readonly SortedDictionary<int, List<I${structCSType}EffectObserver>> observersFor${structCSType} =
        |      new SortedDictionary<int, List<I${structCSType}EffectObserver>>();
-       |""".stripMargin +
-      MutMapEffects.generateRootMembers(opt, map)
+       |""".stripMargin
+  }
+
+  def generateGlobalVisitorInterfaceMethods(map: MapS) = {
+    MutMapEffects.generateGlobalVisitorInterfaceMethods(map)
+  }
+
+  def generateEffectBroadcasterMethods(map: MapS) = {
+    MutMapEffects.generateEffectBroadcasterMethods(map)
+  }
+
+  def generateEffectApplierMethods(map: MapS): String = {
+    MutMapEffects.generateEffectApplierMethods(map)
   }
 }

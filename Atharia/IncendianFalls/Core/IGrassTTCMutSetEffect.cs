@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface IGrassTTCMutSetEffect {
+public interface IGrassTTCMutSetEffect : IEffect {
   int id { get; }
-  void visit(IGrassTTCMutSetEffectVisitor visitor);
+  void visitIGrassTTCMutSetEffect(IGrassTTCMutSetEffectVisitor visitor);
 }
 
 }

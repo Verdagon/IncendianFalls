@@ -14,7 +14,7 @@ public class UnitFireBombedEventAsITerrainTileEvent : ITerrainTileEvent {
   public int GetDeterministicHashCode() { return obj.GetDeterministicHashCode(); }
   public override int GetHashCode() { return GetDeterministicHashCode(); }
        
-  public void Visit(ITerrainTileEventVisitor visitor) { visitor.Visit(this); }
+  public void VisitITerrainTileEvent(ITerrainTileEventVisitor visitor) { visitor.VisitITerrainTileEvent(this); }
 }
 public static class UnitFireBombedEventAsITerrainTileEventCaster {
   public static UnitFireBombedEventAsITerrainTileEvent AsITerrainTileEvent(this UnitFireBombedEvent obj) {

@@ -13,11 +13,11 @@ public class CliffLandingTTC {
     this.id = id;
   }
   public CliffLandingTTCIncarnation incarnation { get { return root.GetCliffLandingTTCIncarnation(id); } }
-  public void AddObserver(ICliffLandingTTCEffectObserver observer) {
-    root.AddCliffLandingTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICliffLandingTTCEffectObserver observer) {
+    broadcaster.AddCliffLandingTTCObserver(id, observer);
   }
-  public void RemoveObserver(ICliffLandingTTCEffectObserver observer) {
-    root.RemoveCliffLandingTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICliffLandingTTCEffectObserver observer) {
+    broadcaster.RemoveCliffLandingTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectCliffLandingTTCDelete(id);

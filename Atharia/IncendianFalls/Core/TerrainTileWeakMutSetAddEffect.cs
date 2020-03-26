@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct TerrainTileWeakMutSetAddEffect : ITerrainTileWeakMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public TerrainTileWeakMutSetAddEffect(int id, int elementId) {
+  public readonly int element;
+  public TerrainTileWeakMutSetAddEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int ITerrainTileWeakMutSetEffect.id => id;
-  public void visit(ITerrainTileWeakMutSetEffectVisitor visitor) {
+  public void visitITerrainTileWeakMutSetEffect(ITerrainTileWeakMutSetEffectVisitor visitor) {
     visitor.visitTerrainTileWeakMutSetAddEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTerrainTileWeakMutSetEffect(this);
   }
 }
 

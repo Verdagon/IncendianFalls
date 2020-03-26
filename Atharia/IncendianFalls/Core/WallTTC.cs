@@ -13,11 +13,11 @@ public class WallTTC {
     this.id = id;
   }
   public WallTTCIncarnation incarnation { get { return root.GetWallTTCIncarnation(id); } }
-  public void AddObserver(IWallTTCEffectObserver observer) {
-    root.AddWallTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IWallTTCEffectObserver observer) {
+    broadcaster.AddWallTTCObserver(id, observer);
   }
-  public void RemoveObserver(IWallTTCEffectObserver observer) {
-    root.RemoveWallTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IWallTTCEffectObserver observer) {
+    broadcaster.RemoveWallTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectWallTTCDelete(id);

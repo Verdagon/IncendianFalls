@@ -7,17 +7,20 @@ namespace Atharia.Model {
 
 public struct AttackAICapabilityUCSetKillDirectiveEffect : IAttackAICapabilityUCEffect {
   public readonly int id;
-  public readonly KillDirective newValue;
+  public readonly int newValue;
   public AttackAICapabilityUCSetKillDirectiveEffect(
       int id,
-      KillDirective newValue) {
+      int newValue) {
     this.id = id;
     this.newValue = newValue;
   }
   int IAttackAICapabilityUCEffect.id => id;
 
-  public void visit(IAttackAICapabilityUCEffectVisitor visitor) {
+  public void visitIAttackAICapabilityUCEffect(IAttackAICapabilityUCEffectVisitor visitor) {
     visitor.visitAttackAICapabilityUCSetKillDirectiveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitAttackAICapabilityUCEffect(this);
   }
 }
 

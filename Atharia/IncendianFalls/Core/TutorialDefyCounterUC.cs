@@ -13,11 +13,11 @@ public class TutorialDefyCounterUC {
     this.id = id;
   }
   public TutorialDefyCounterUCIncarnation incarnation { get { return root.GetTutorialDefyCounterUCIncarnation(id); } }
-  public void AddObserver(ITutorialDefyCounterUCEffectObserver observer) {
-    root.AddTutorialDefyCounterUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITutorialDefyCounterUCEffectObserver observer) {
+    broadcaster.AddTutorialDefyCounterUCObserver(id, observer);
   }
-  public void RemoveObserver(ITutorialDefyCounterUCEffectObserver observer) {
-    root.RemoveTutorialDefyCounterUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITutorialDefyCounterUCEffectObserver observer) {
+    broadcaster.RemoveTutorialDefyCounterUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectTutorialDefyCounterUCDelete(id);

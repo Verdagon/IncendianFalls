@@ -14,24 +14,24 @@ public class NoImpulseStrongMutSet {
   public NoImpulseStrongMutSetIncarnation incarnation {
     get { return root.GetNoImpulseStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(INoImpulseStrongMutSetEffectObserver observer) {
-    root.AddNoImpulseStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, INoImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.AddNoImpulseStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(INoImpulseStrongMutSetEffectObserver observer) {
-    root.RemoveNoImpulseStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, INoImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveNoImpulseStrongMutSetObserver(id, observer);
   }
   public void Add(NoImpulse element) {
-    root.EffectNoImpulseStrongMutSetAdd(id, element.id);
+      root.EffectNoImpulseStrongMutSetAdd(id, element.id);
   }
   public void Remove(NoImpulse element) {
-    root.EffectNoImpulseStrongMutSetRemove(id, element.id);
+      root.EffectNoImpulseStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectNoImpulseStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectNoImpulseStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectNoImpulseStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(NoImpulse element) {

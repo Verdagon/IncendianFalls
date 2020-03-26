@@ -13,11 +13,11 @@ public class CliffLevelController {
     this.id = id;
   }
   public CliffLevelControllerIncarnation incarnation { get { return root.GetCliffLevelControllerIncarnation(id); } }
-  public void AddObserver(ICliffLevelControllerEffectObserver observer) {
-    root.AddCliffLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICliffLevelControllerEffectObserver observer) {
+    broadcaster.AddCliffLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(ICliffLevelControllerEffectObserver observer) {
-    root.RemoveCliffLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICliffLevelControllerEffectObserver observer) {
+    broadcaster.RemoveCliffLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectCliffLevelControllerDelete(id);

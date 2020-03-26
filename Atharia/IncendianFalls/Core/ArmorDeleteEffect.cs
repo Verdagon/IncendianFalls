@@ -11,8 +11,11 @@ public struct ArmorDeleteEffect : IArmorEffect {
     this.id = id;
   }
   int IArmorEffect.id => id;
-  public void visit(IArmorEffectVisitor visitor) {
+  public void visitIArmorEffect(IArmorEffectVisitor visitor) {
     visitor.visitArmorDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitArmorEffect(this);
   }
 }
 

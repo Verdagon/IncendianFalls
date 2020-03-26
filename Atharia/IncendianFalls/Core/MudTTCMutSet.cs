@@ -14,24 +14,24 @@ public class MudTTCMutSet {
   public MudTTCMutSetIncarnation incarnation {
     get { return root.GetMudTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IMudTTCMutSetEffectObserver observer) {
-    root.AddMudTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMudTTCMutSetEffectObserver observer) {
+    broadcaster.AddMudTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IMudTTCMutSetEffectObserver observer) {
-    root.RemoveMudTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMudTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveMudTTCMutSetObserver(id, observer);
   }
   public void Add(MudTTC element) {
-    root.EffectMudTTCMutSetAdd(id, element.id);
+      root.EffectMudTTCMutSetAdd(id, element.id);
   }
   public void Remove(MudTTC element) {
-    root.EffectMudTTCMutSetRemove(id, element.id);
+      root.EffectMudTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectMudTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectMudTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectMudTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(MudTTC element) {

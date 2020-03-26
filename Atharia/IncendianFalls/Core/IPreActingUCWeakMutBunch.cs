@@ -13,11 +13,11 @@ public class IPreActingUCWeakMutBunch {
     this.id = id;
   }
   public IPreActingUCWeakMutBunchIncarnation incarnation { get { return root.GetIPreActingUCWeakMutBunchIncarnation(id); } }
-  public void AddObserver(IIPreActingUCWeakMutBunchEffectObserver observer) {
-    root.AddIPreActingUCWeakMutBunchObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IIPreActingUCWeakMutBunchEffectObserver observer) {
+    broadcaster.AddIPreActingUCWeakMutBunchObserver(id, observer);
   }
-  public void RemoveObserver(IIPreActingUCWeakMutBunchEffectObserver observer) {
-    root.RemoveIPreActingUCWeakMutBunchObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IIPreActingUCWeakMutBunchEffectObserver observer) {
+    broadcaster.RemoveIPreActingUCWeakMutBunchObserver(id, observer);
   }
   public void Delete() {
     root.EffectIPreActingUCWeakMutBunchDelete(id);

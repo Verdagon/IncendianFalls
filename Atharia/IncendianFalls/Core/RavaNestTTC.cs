@@ -13,11 +13,11 @@ public class RavaNestTTC {
     this.id = id;
   }
   public RavaNestTTCIncarnation incarnation { get { return root.GetRavaNestTTCIncarnation(id); } }
-  public void AddObserver(IRavaNestTTCEffectObserver observer) {
-    root.AddRavaNestTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IRavaNestTTCEffectObserver observer) {
+    broadcaster.AddRavaNestTTCObserver(id, observer);
   }
-  public void RemoveObserver(IRavaNestTTCEffectObserver observer) {
-    root.RemoveRavaNestTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IRavaNestTTCEffectObserver observer) {
+    broadcaster.RemoveRavaNestTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectRavaNestTTCDelete(id);

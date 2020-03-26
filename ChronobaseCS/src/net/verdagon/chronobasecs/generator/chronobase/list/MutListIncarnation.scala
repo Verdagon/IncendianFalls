@@ -13,16 +13,8 @@ object MutListIncarnation {
     val ListS(listName, MutableS, elementType) = list
 
     val incarnationName = s"${listName}Incarnation"
-    val ieffectName = s"I${listName}Effect"
-    val observerName = s"I${listName}EffectObserver"
-    val visitorName = s"I${listName}EffectVisitor"
-    val createEffectName = s"${listName}CreateEffect"
-    val deleteEffectName = s"${listName}DeleteEffect"
-    val addEffectName = s"${listName}AddEffect"
-    val removeEffectName = s"${listName}RemoveEffect"
 
     val flattenedElementCSType = toCS(elementType.flatten)
-    val elementCSType = toCS(elementType)
 
     val incarnationDefinition =
       s"""
@@ -31,6 +23,10 @@ object MutListIncarnation {
          |
          |  public ${listName}Incarnation(List<${flattenedElementCSType}> list) {
          |    this.list = list;
+         |  }
+         |
+         |  public ${listName}Incarnation Copy() {
+         |    return new ${listName}Incarnation(new List<${flattenedElementCSType}>(list));
          |  }
          |}
          """.stripMargin

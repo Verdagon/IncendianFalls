@@ -15,7 +15,7 @@ public class UnitMireEventAsIUnitEvent : IUnitEvent {
   public override int GetHashCode() { return GetDeterministicHashCode(); }
          public int GetTime() { return UnitMireEventExtensions.GetTime(obj); }
 
-  public void Visit(IUnitEventVisitor visitor) { visitor.Visit(this); }
+  public void VisitIUnitEvent(IUnitEventVisitor visitor) { visitor.VisitIUnitEvent(this); }
 }
 public static class UnitMireEventAsIUnitEventCaster {
   public static UnitMireEventAsIUnitEvent AsIUnitEvent(this UnitMireEvent obj) {

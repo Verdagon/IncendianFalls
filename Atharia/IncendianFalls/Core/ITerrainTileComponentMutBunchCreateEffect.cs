@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct ITerrainTileComponentMutBunchCreateEffect : IITerrainTileComponentMutBunchEffect {
   public readonly int id;
-  public ITerrainTileComponentMutBunchCreateEffect(int id) {
+  public readonly ITerrainTileComponentMutBunchIncarnation incarnation;
+  public ITerrainTileComponentMutBunchCreateEffect(int id, ITerrainTileComponentMutBunchIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IITerrainTileComponentMutBunchEffect.id => id;
-  public void visit(IITerrainTileComponentMutBunchEffectVisitor visitor) {
+  public void visitIITerrainTileComponentMutBunchEffect(IITerrainTileComponentMutBunchEffectVisitor visitor) {
     visitor.visitITerrainTileComponentMutBunchCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitITerrainTileComponentMutBunchEffect(this);
   }
 }
 

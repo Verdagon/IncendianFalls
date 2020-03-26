@@ -10,6 +10,10 @@ public class MiredUCMutSetIncarnation {
   public MiredUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public MiredUCMutSetIncarnation Copy() {
+    return new MiredUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

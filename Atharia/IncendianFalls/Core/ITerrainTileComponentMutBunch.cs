@@ -13,11 +13,11 @@ public class ITerrainTileComponentMutBunch {
     this.id = id;
   }
   public ITerrainTileComponentMutBunchIncarnation incarnation { get { return root.GetITerrainTileComponentMutBunchIncarnation(id); } }
-  public void AddObserver(IITerrainTileComponentMutBunchEffectObserver observer) {
-    root.AddITerrainTileComponentMutBunchObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IITerrainTileComponentMutBunchEffectObserver observer) {
+    broadcaster.AddITerrainTileComponentMutBunchObserver(id, observer);
   }
-  public void RemoveObserver(IITerrainTileComponentMutBunchEffectObserver observer) {
-    root.RemoveITerrainTileComponentMutBunchObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IITerrainTileComponentMutBunchEffectObserver observer) {
+    broadcaster.RemoveITerrainTileComponentMutBunchObserver(id, observer);
   }
   public void Delete() {
     root.EffectITerrainTileComponentMutBunchDelete(id);

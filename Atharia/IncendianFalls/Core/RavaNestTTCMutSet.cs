@@ -14,24 +14,24 @@ public class RavaNestTTCMutSet {
   public RavaNestTTCMutSetIncarnation incarnation {
     get { return root.GetRavaNestTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IRavaNestTTCMutSetEffectObserver observer) {
-    root.AddRavaNestTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IRavaNestTTCMutSetEffectObserver observer) {
+    broadcaster.AddRavaNestTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IRavaNestTTCMutSetEffectObserver observer) {
-    root.RemoveRavaNestTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IRavaNestTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveRavaNestTTCMutSetObserver(id, observer);
   }
   public void Add(RavaNestTTC element) {
-    root.EffectRavaNestTTCMutSetAdd(id, element.id);
+      root.EffectRavaNestTTCMutSetAdd(id, element.id);
   }
   public void Remove(RavaNestTTC element) {
-    root.EffectRavaNestTTCMutSetRemove(id, element.id);
+      root.EffectRavaNestTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectRavaNestTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectRavaNestTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectRavaNestTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(RavaNestTTC element) {

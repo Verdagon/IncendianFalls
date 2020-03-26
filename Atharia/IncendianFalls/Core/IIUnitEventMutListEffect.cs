@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IIUnitEventMutListEffect {
+public interface IIUnitEventMutListEffect : IEffect {
   int id { get; }
-  void visit(IIUnitEventMutListEffectVisitor visitor);
+  void visitIIUnitEventMutListEffect(IIUnitEventMutListEffectVisitor visitor);
 }
 
 }

@@ -13,11 +13,11 @@ public class LightningChargedUC {
     this.id = id;
   }
   public LightningChargedUCIncarnation incarnation { get { return root.GetLightningChargedUCIncarnation(id); } }
-  public void AddObserver(ILightningChargedUCEffectObserver observer) {
-    root.AddLightningChargedUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ILightningChargedUCEffectObserver observer) {
+    broadcaster.AddLightningChargedUCObserver(id, observer);
   }
-  public void RemoveObserver(ILightningChargedUCEffectObserver observer) {
-    root.RemoveLightningChargedUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ILightningChargedUCEffectObserver observer) {
+    broadcaster.RemoveLightningChargedUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectLightningChargedUCDelete(id);

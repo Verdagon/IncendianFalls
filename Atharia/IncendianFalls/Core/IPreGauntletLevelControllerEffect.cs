@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IPreGauntletLevelControllerEffect {
+public interface IPreGauntletLevelControllerEffect : IEffect {
   int id { get; }
-  void visit(IPreGauntletLevelControllerEffectVisitor visitor);
+  void visitIPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEffectVisitor visitor);
 }
        
 }

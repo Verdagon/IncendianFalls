@@ -14,24 +14,24 @@ public class SlowRodMutSet {
   public SlowRodMutSetIncarnation incarnation {
     get { return root.GetSlowRodMutSetIncarnation(id); }
   }
-  public void AddObserver(ISlowRodMutSetEffectObserver observer) {
-    root.AddSlowRodMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISlowRodMutSetEffectObserver observer) {
+    broadcaster.AddSlowRodMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ISlowRodMutSetEffectObserver observer) {
-    root.RemoveSlowRodMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISlowRodMutSetEffectObserver observer) {
+    broadcaster.RemoveSlowRodMutSetObserver(id, observer);
   }
   public void Add(SlowRod element) {
-    root.EffectSlowRodMutSetAdd(id, element.id);
+      root.EffectSlowRodMutSetAdd(id, element.id);
   }
   public void Remove(SlowRod element) {
-    root.EffectSlowRodMutSetRemove(id, element.id);
+      root.EffectSlowRodMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectSlowRodMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectSlowRodMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectSlowRodMutSetRemove(id, element);
     }
   }
   public bool Contains(SlowRod element) {

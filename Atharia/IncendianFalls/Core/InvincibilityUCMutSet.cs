@@ -14,24 +14,24 @@ public class InvincibilityUCMutSet {
   public InvincibilityUCMutSetIncarnation incarnation {
     get { return root.GetInvincibilityUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IInvincibilityUCMutSetEffectObserver observer) {
-    root.AddInvincibilityUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IInvincibilityUCMutSetEffectObserver observer) {
+    broadcaster.AddInvincibilityUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IInvincibilityUCMutSetEffectObserver observer) {
-    root.RemoveInvincibilityUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IInvincibilityUCMutSetEffectObserver observer) {
+    broadcaster.RemoveInvincibilityUCMutSetObserver(id, observer);
   }
   public void Add(InvincibilityUC element) {
-    root.EffectInvincibilityUCMutSetAdd(id, element.id);
+      root.EffectInvincibilityUCMutSetAdd(id, element.id);
   }
   public void Remove(InvincibilityUC element) {
-    root.EffectInvincibilityUCMutSetRemove(id, element.id);
+      root.EffectInvincibilityUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectInvincibilityUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectInvincibilityUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectInvincibilityUCMutSetRemove(id, element);
     }
   }
   public bool Contains(InvincibilityUC element) {

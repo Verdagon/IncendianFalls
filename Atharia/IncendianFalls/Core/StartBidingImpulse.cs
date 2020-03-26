@@ -13,11 +13,11 @@ public class StartBidingImpulse {
     this.id = id;
   }
   public StartBidingImpulseIncarnation incarnation { get { return root.GetStartBidingImpulseIncarnation(id); } }
-  public void AddObserver(IStartBidingImpulseEffectObserver observer) {
-    root.AddStartBidingImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IStartBidingImpulseEffectObserver observer) {
+    broadcaster.AddStartBidingImpulseObserver(id, observer);
   }
-  public void RemoveObserver(IStartBidingImpulseEffectObserver observer) {
-    root.RemoveStartBidingImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IStartBidingImpulseEffectObserver observer) {
+    broadcaster.RemoveStartBidingImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectStartBidingImpulseDelete(id);

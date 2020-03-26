@@ -13,11 +13,11 @@ public class Terrain {
     this.id = id;
   }
   public TerrainIncarnation incarnation { get { return root.GetTerrainIncarnation(id); } }
-  public void AddObserver(ITerrainEffectObserver observer) {
-    root.AddTerrainObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITerrainEffectObserver observer) {
+    broadcaster.AddTerrainObserver(id, observer);
   }
-  public void RemoveObserver(ITerrainEffectObserver observer) {
-    root.RemoveTerrainObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITerrainEffectObserver observer) {
+    broadcaster.RemoveTerrainObserver(id, observer);
   }
   public void Delete() {
     root.EffectTerrainDelete(id);

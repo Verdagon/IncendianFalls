@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct PursueImpulseCreateEffect : IPursueImpulseEffect {
   public readonly int id;
-  public PursueImpulseCreateEffect(int id) {
+  public readonly PursueImpulseIncarnation incarnation;
+  public PursueImpulseCreateEffect(int id, PursueImpulseIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IPursueImpulseEffect.id => id;
-  public void visit(IPursueImpulseEffectVisitor visitor) {
+  public void visitIPursueImpulseEffect(IPursueImpulseEffectVisitor visitor) {
     visitor.visitPursueImpulseCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitPursueImpulseEffect(this);
   }
 }
 

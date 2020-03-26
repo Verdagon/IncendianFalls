@@ -10,6 +10,10 @@ public class BaseSightRangeUCMutSetIncarnation {
   public BaseSightRangeUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public BaseSightRangeUCMutSetIncarnation Copy() {
+    return new BaseSightRangeUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

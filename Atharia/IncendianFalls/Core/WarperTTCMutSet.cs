@@ -14,24 +14,24 @@ public class WarperTTCMutSet {
   public WarperTTCMutSetIncarnation incarnation {
     get { return root.GetWarperTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IWarperTTCMutSetEffectObserver observer) {
-    root.AddWarperTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IWarperTTCMutSetEffectObserver observer) {
+    broadcaster.AddWarperTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IWarperTTCMutSetEffectObserver observer) {
-    root.RemoveWarperTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IWarperTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveWarperTTCMutSetObserver(id, observer);
   }
   public void Add(WarperTTC element) {
-    root.EffectWarperTTCMutSetAdd(id, element.id);
+      root.EffectWarperTTCMutSetAdd(id, element.id);
   }
   public void Remove(WarperTTC element) {
-    root.EffectWarperTTCMutSetRemove(id, element.id);
+      root.EffectWarperTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectWarperTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectWarperTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectWarperTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(WarperTTC element) {

@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct MireImpulseCreateEffect : IMireImpulseEffect {
   public readonly int id;
-  public MireImpulseCreateEffect(int id) {
+  public readonly MireImpulseIncarnation incarnation;
+  public MireImpulseCreateEffect(int id, MireImpulseIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IMireImpulseEffect.id => id;
-  public void visit(IMireImpulseEffectVisitor visitor) {
+  public void visitIMireImpulseEffect(IMireImpulseEffectVisitor visitor) {
     visitor.visitMireImpulseCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitMireImpulseEffect(this);
   }
 }
 

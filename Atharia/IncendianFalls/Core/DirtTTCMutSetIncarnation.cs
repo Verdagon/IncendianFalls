@@ -10,6 +10,10 @@ public class DirtTTCMutSetIncarnation {
   public DirtTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public DirtTTCMutSetIncarnation Copy() {
+    return new DirtTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

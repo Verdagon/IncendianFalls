@@ -11,8 +11,11 @@ public struct TemporaryCloneImpulseDeleteEffect : ITemporaryCloneImpulseEffect {
     this.id = id;
   }
   int ITemporaryCloneImpulseEffect.id => id;
-  public void visit(ITemporaryCloneImpulseEffectVisitor visitor) {
+  public void visitITemporaryCloneImpulseEffect(ITemporaryCloneImpulseEffectVisitor visitor) {
     visitor.visitTemporaryCloneImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTemporaryCloneImpulseEffect(this);
   }
 }
 

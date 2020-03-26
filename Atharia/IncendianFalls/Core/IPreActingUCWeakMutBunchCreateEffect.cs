@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct IPreActingUCWeakMutBunchCreateEffect : IIPreActingUCWeakMutBunchEffect {
   public readonly int id;
-  public IPreActingUCWeakMutBunchCreateEffect(int id) {
+  public readonly IPreActingUCWeakMutBunchIncarnation incarnation;
+  public IPreActingUCWeakMutBunchCreateEffect(int id, IPreActingUCWeakMutBunchIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IIPreActingUCWeakMutBunchEffect.id => id;
-  public void visit(IIPreActingUCWeakMutBunchEffectVisitor visitor) {
+  public void visitIIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffectVisitor visitor) {
     visitor.visitIPreActingUCWeakMutBunchCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitIPreActingUCWeakMutBunchEffect(this);
   }
 }
 

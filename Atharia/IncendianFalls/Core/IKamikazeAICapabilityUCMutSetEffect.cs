@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface IKamikazeAICapabilityUCMutSetEffect {
+public interface IKamikazeAICapabilityUCMutSetEffect : IEffect {
   int id { get; }
-  void visit(IKamikazeAICapabilityUCMutSetEffectVisitor visitor);
+  void visitIKamikazeAICapabilityUCMutSetEffect(IKamikazeAICapabilityUCMutSetEffectVisitor visitor);
 }
 
 }

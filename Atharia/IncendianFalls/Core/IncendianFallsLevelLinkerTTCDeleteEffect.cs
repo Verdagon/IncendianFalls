@@ -11,8 +11,11 @@ public struct IncendianFallsLevelLinkerTTCDeleteEffect : IIncendianFallsLevelLin
     this.id = id;
   }
   int IIncendianFallsLevelLinkerTTCEffect.id => id;
-  public void visit(IIncendianFallsLevelLinkerTTCEffectVisitor visitor) {
+  public void visitIIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTTCEffectVisitor visitor) {
     visitor.visitIncendianFallsLevelLinkerTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitIncendianFallsLevelLinkerTTCEffect(this);
   }
 }
 

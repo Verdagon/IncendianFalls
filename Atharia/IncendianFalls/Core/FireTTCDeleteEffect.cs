@@ -11,8 +11,11 @@ public struct FireTTCDeleteEffect : IFireTTCEffect {
     this.id = id;
   }
   int IFireTTCEffect.id => id;
-  public void visit(IFireTTCEffectVisitor visitor) {
+  public void visitIFireTTCEffect(IFireTTCEffectVisitor visitor) {
     visitor.visitFireTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitFireTTCEffect(this);
   }
 }
 

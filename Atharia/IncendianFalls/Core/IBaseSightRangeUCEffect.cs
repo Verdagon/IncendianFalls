@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IBaseSightRangeUCEffect {
+public interface IBaseSightRangeUCEffect : IEffect {
   int id { get; }
-  void visit(IBaseSightRangeUCEffectVisitor visitor);
+  void visitIBaseSightRangeUCEffect(IBaseSightRangeUCEffectVisitor visitor);
 }
        
 }

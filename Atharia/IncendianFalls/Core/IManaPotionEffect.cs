@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IManaPotionEffect {
+public interface IManaPotionEffect : IEffect {
   int id { get; }
-  void visit(IManaPotionEffectVisitor visitor);
+  void visitIManaPotionEffect(IManaPotionEffectVisitor visitor);
 }
        
 }

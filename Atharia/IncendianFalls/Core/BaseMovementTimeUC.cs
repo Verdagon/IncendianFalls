@@ -13,11 +13,11 @@ public class BaseMovementTimeUC {
     this.id = id;
   }
   public BaseMovementTimeUCIncarnation incarnation { get { return root.GetBaseMovementTimeUCIncarnation(id); } }
-  public void AddObserver(IBaseMovementTimeUCEffectObserver observer) {
-    root.AddBaseMovementTimeUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBaseMovementTimeUCEffectObserver observer) {
+    broadcaster.AddBaseMovementTimeUCObserver(id, observer);
   }
-  public void RemoveObserver(IBaseMovementTimeUCEffectObserver observer) {
-    root.RemoveBaseMovementTimeUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBaseMovementTimeUCEffectObserver observer) {
+    broadcaster.RemoveBaseMovementTimeUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectBaseMovementTimeUCDelete(id);

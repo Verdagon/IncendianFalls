@@ -13,11 +13,11 @@ public class RocksTTC {
     this.id = id;
   }
   public RocksTTCIncarnation incarnation { get { return root.GetRocksTTCIncarnation(id); } }
-  public void AddObserver(IRocksTTCEffectObserver observer) {
-    root.AddRocksTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IRocksTTCEffectObserver observer) {
+    broadcaster.AddRocksTTCObserver(id, observer);
   }
-  public void RemoveObserver(IRocksTTCEffectObserver observer) {
-    root.RemoveRocksTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IRocksTTCEffectObserver observer) {
+    broadcaster.RemoveRocksTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectRocksTTCDelete(id);

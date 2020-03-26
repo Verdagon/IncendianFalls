@@ -14,24 +14,24 @@ public class DoomedUCWeakMutSet {
   public DoomedUCWeakMutSetIncarnation incarnation {
     get { return root.GetDoomedUCWeakMutSetIncarnation(id); }
   }
-  public void AddObserver(IDoomedUCWeakMutSetEffectObserver observer) {
-    root.AddDoomedUCWeakMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IDoomedUCWeakMutSetEffectObserver observer) {
+    broadcaster.AddDoomedUCWeakMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IDoomedUCWeakMutSetEffectObserver observer) {
-    root.RemoveDoomedUCWeakMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IDoomedUCWeakMutSetEffectObserver observer) {
+    broadcaster.RemoveDoomedUCWeakMutSetObserver(id, observer);
   }
   public void Add(DoomedUC element) {
-    root.EffectDoomedUCWeakMutSetAdd(id, element.id);
+      root.EffectDoomedUCWeakMutSetAdd(id, element.id);
   }
   public void Remove(DoomedUC element) {
-    root.EffectDoomedUCWeakMutSetRemove(id, element.id);
+      root.EffectDoomedUCWeakMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectDoomedUCWeakMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectDoomedUCWeakMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectDoomedUCWeakMutSetRemove(id, element);
     }
   }
   public bool Contains(DoomedUC element) {

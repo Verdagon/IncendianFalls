@@ -11,8 +11,11 @@ public struct ITerrainTileComponentMutBunchDeleteEffect : IITerrainTileComponent
     this.id = id;
   }
   int IITerrainTileComponentMutBunchEffect.id => id;
-  public void visit(IITerrainTileComponentMutBunchEffectVisitor visitor) {
+  public void visitIITerrainTileComponentMutBunchEffect(IITerrainTileComponentMutBunchEffectVisitor visitor) {
     visitor.visitITerrainTileComponentMutBunchDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitITerrainTileComponentMutBunchEffect(this);
   }
 }
 

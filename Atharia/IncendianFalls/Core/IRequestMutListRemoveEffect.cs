@@ -7,14 +7,17 @@ namespace Atharia.Model {
 
 public struct IRequestMutListRemoveEffect : IIRequestMutListEffect {
   public readonly int id;
-  public readonly int elementId;
-  public IRequestMutListRemoveEffect(int id, int elementId) {
+  public readonly int index;
+  public IRequestMutListRemoveEffect(int id, int index) {
     this.id = id;
-    this.elementId = elementId;
+    this.index = index;
   }
   int IIRequestMutListEffect.id => id;
-  public void visit(IIRequestMutListEffectVisitor visitor) {
+  public void visitIIRequestMutListEffect(IIRequestMutListEffectVisitor visitor) {
     visitor.visitIRequestMutListRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitIRequestMutListEffect(this);
   }
 }
 

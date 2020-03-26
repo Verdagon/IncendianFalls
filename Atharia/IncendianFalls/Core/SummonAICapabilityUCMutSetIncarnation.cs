@@ -10,6 +10,10 @@ public class SummonAICapabilityUCMutSetIncarnation {
   public SummonAICapabilityUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public SummonAICapabilityUCMutSetIncarnation Copy() {
+    return new SummonAICapabilityUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

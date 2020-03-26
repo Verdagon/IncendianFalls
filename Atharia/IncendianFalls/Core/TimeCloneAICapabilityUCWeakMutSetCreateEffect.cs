@@ -10,8 +10,11 @@ public struct TimeCloneAICapabilityUCWeakMutSetCreateEffect : ITimeCloneAICapabi
     this.id = id;
   }
   int ITimeCloneAICapabilityUCWeakMutSetEffect.id => id;
-  public void visit(ITimeCloneAICapabilityUCWeakMutSetEffectVisitor visitor) {
+  public void visitITimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffectVisitor visitor) {
     visitor.visitTimeCloneAICapabilityUCWeakMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTimeCloneAICapabilityUCWeakMutSetEffect(this);
   }
 }
 

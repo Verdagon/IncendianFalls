@@ -24,12 +24,23 @@ object SetGenerator {
     }
   }
 
-  def generateRootMembers(opt: ChronobaseOptions, set: SetS): String = {
+  def generateEffectBroadcasterMembers(opt: ChronobaseOptions, set: SetS): String = {
     val setCSType = toCS(set.tyype)
     s"""
-       |  readonly SortedDictionary<int, List<I${setCSType}EffectObserver>> observersFor${setCSType} =
-       |      new SortedDictionary<int, List<I${setCSType}EffectObserver>>();
-       |""".stripMargin +
-      MutSetEffects.generateRootMembers(opt, set)
+       |  readonly Dictionary<int, List<I${setCSType}EffectObserver>> observersFor${setCSType} =
+       |      new Dictionary<int, List<I${setCSType}EffectObserver>>();
+       |""".stripMargin
+  }
+
+  def generateGlobalVisitorInterfaceMethods(set: SetS) = {
+    MutSetEffects.generateGlobalVisitorInterfaceMethods(set)
+  }
+
+  def generateEffectBroadcasterMethods(set: SetS) = {
+    MutSetEffects.generateEffectBroadcasterMethods(set)
+  }
+
+  def generateEffectApplierMethods(set: SetS) = {
+    MutSetEffects.generateEffectApplierMethods(set)
   }
 }

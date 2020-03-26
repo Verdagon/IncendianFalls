@@ -13,11 +13,11 @@ public class EvaporateImpulse {
     this.id = id;
   }
   public EvaporateImpulseIncarnation incarnation { get { return root.GetEvaporateImpulseIncarnation(id); } }
-  public void AddObserver(IEvaporateImpulseEffectObserver observer) {
-    root.AddEvaporateImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IEvaporateImpulseEffectObserver observer) {
+    broadcaster.AddEvaporateImpulseObserver(id, observer);
   }
-  public void RemoveObserver(IEvaporateImpulseEffectObserver observer) {
-    root.RemoveEvaporateImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IEvaporateImpulseEffectObserver observer) {
+    broadcaster.RemoveEvaporateImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectEvaporateImpulseDelete(id);

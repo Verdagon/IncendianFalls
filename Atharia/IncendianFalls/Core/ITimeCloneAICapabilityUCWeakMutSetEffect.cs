@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface ITimeCloneAICapabilityUCWeakMutSetEffect {
+public interface ITimeCloneAICapabilityUCWeakMutSetEffect : IEffect {
   int id { get; }
-  void visit(ITimeCloneAICapabilityUCWeakMutSetEffectVisitor visitor);
+  void visitITimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffectVisitor visitor);
 }
 
 }

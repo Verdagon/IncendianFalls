@@ -14,24 +14,24 @@ public class SorcerousUCMutSet {
   public SorcerousUCMutSetIncarnation incarnation {
     get { return root.GetSorcerousUCMutSetIncarnation(id); }
   }
-  public void AddObserver(ISorcerousUCMutSetEffectObserver observer) {
-    root.AddSorcerousUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISorcerousUCMutSetEffectObserver observer) {
+    broadcaster.AddSorcerousUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ISorcerousUCMutSetEffectObserver observer) {
-    root.RemoveSorcerousUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISorcerousUCMutSetEffectObserver observer) {
+    broadcaster.RemoveSorcerousUCMutSetObserver(id, observer);
   }
   public void Add(SorcerousUC element) {
-    root.EffectSorcerousUCMutSetAdd(id, element.id);
+      root.EffectSorcerousUCMutSetAdd(id, element.id);
   }
   public void Remove(SorcerousUC element) {
-    root.EffectSorcerousUCMutSetRemove(id, element.id);
+      root.EffectSorcerousUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectSorcerousUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectSorcerousUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectSorcerousUCMutSetRemove(id, element);
     }
   }
   public bool Contains(SorcerousUC element) {

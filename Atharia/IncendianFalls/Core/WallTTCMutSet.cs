@@ -14,24 +14,24 @@ public class WallTTCMutSet {
   public WallTTCMutSetIncarnation incarnation {
     get { return root.GetWallTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IWallTTCMutSetEffectObserver observer) {
-    root.AddWallTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IWallTTCMutSetEffectObserver observer) {
+    broadcaster.AddWallTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IWallTTCMutSetEffectObserver observer) {
-    root.RemoveWallTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IWallTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveWallTTCMutSetObserver(id, observer);
   }
   public void Add(WallTTC element) {
-    root.EffectWallTTCMutSetAdd(id, element.id);
+      root.EffectWallTTCMutSetAdd(id, element.id);
   }
   public void Remove(WallTTC element) {
-    root.EffectWallTTCMutSetRemove(id, element.id);
+      root.EffectWallTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectWallTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectWallTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectWallTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(WallTTC element) {

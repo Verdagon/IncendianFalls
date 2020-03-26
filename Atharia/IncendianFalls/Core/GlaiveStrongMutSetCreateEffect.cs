@@ -10,8 +10,11 @@ public struct GlaiveStrongMutSetCreateEffect : IGlaiveStrongMutSetEffect {
     this.id = id;
   }
   int IGlaiveStrongMutSetEffect.id => id;
-  public void visit(IGlaiveStrongMutSetEffectVisitor visitor) {
+  public void visitIGlaiveStrongMutSetEffect(IGlaiveStrongMutSetEffectVisitor visitor) {
     visitor.visitGlaiveStrongMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitGlaiveStrongMutSetEffect(this);
   }
 }
 

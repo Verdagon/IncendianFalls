@@ -10,6 +10,10 @@ public class HoldPositionImpulseStrongMutSetIncarnation {
   public HoldPositionImpulseStrongMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public HoldPositionImpulseStrongMutSetIncarnation Copy() {
+    return new HoldPositionImpulseStrongMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

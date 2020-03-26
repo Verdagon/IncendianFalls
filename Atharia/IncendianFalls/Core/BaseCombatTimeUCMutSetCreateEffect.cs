@@ -10,8 +10,11 @@ public struct BaseCombatTimeUCMutSetCreateEffect : IBaseCombatTimeUCMutSetEffect
     this.id = id;
   }
   int IBaseCombatTimeUCMutSetEffect.id => id;
-  public void visit(IBaseCombatTimeUCMutSetEffectVisitor visitor) {
+  public void visitIBaseCombatTimeUCMutSetEffect(IBaseCombatTimeUCMutSetEffectVisitor visitor) {
     visitor.visitBaseCombatTimeUCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBaseCombatTimeUCMutSetEffect(this);
   }
 }
 

@@ -10,6 +10,10 @@ public class SimplePresenceTriggerTTCMutSetIncarnation {
   public SimplePresenceTriggerTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public SimplePresenceTriggerTTCMutSetIncarnation Copy() {
+    return new SimplePresenceTriggerTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

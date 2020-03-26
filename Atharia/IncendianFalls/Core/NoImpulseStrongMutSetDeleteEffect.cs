@@ -10,8 +10,11 @@ public struct NoImpulseStrongMutSetDeleteEffect : INoImpulseStrongMutSetEffect {
     this.id = id;
   }
   int INoImpulseStrongMutSetEffect.id => id;
-  public void visit(INoImpulseStrongMutSetEffectVisitor visitor) {
+  public void visitINoImpulseStrongMutSetEffect(INoImpulseStrongMutSetEffectVisitor visitor) {
     visitor.visitNoImpulseStrongMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitNoImpulseStrongMutSetEffect(this);
   }
 }
 

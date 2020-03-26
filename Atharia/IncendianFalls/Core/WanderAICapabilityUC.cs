@@ -13,11 +13,11 @@ public class WanderAICapabilityUC {
     this.id = id;
   }
   public WanderAICapabilityUCIncarnation incarnation { get { return root.GetWanderAICapabilityUCIncarnation(id); } }
-  public void AddObserver(IWanderAICapabilityUCEffectObserver observer) {
-    root.AddWanderAICapabilityUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IWanderAICapabilityUCEffectObserver observer) {
+    broadcaster.AddWanderAICapabilityUCObserver(id, observer);
   }
-  public void RemoveObserver(IWanderAICapabilityUCEffectObserver observer) {
-    root.RemoveWanderAICapabilityUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IWanderAICapabilityUCEffectObserver observer) {
+    broadcaster.RemoveWanderAICapabilityUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectWanderAICapabilityUCDelete(id);

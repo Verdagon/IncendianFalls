@@ -10,8 +10,11 @@ public struct DefyingUCMutSetCreateEffect : IDefyingUCMutSetEffect {
     this.id = id;
   }
   int IDefyingUCMutSetEffect.id => id;
-  public void visit(IDefyingUCMutSetEffectVisitor visitor) {
+  public void visitIDefyingUCMutSetEffect(IDefyingUCMutSetEffectVisitor visitor) {
     visitor.visitDefyingUCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitDefyingUCMutSetEffect(this);
   }
 }
 

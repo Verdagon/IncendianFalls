@@ -14,24 +14,24 @@ public class LevelLinkTTCMutSet {
   public LevelLinkTTCMutSetIncarnation incarnation {
     get { return root.GetLevelLinkTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(ILevelLinkTTCMutSetEffectObserver observer) {
-    root.AddLevelLinkTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ILevelLinkTTCMutSetEffectObserver observer) {
+    broadcaster.AddLevelLinkTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ILevelLinkTTCMutSetEffectObserver observer) {
-    root.RemoveLevelLinkTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ILevelLinkTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveLevelLinkTTCMutSetObserver(id, observer);
   }
   public void Add(LevelLinkTTC element) {
-    root.EffectLevelLinkTTCMutSetAdd(id, element.id);
+      root.EffectLevelLinkTTCMutSetAdd(id, element.id);
   }
   public void Remove(LevelLinkTTC element) {
-    root.EffectLevelLinkTTCMutSetRemove(id, element.id);
+      root.EffectLevelLinkTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectLevelLinkTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectLevelLinkTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectLevelLinkTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(LevelLinkTTC element) {

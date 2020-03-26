@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface IEmberDeepLevelLinkerTTCMutSetEffect {
+public interface IEmberDeepLevelLinkerTTCMutSetEffect : IEffect {
   int id { get; }
-  void visit(IEmberDeepLevelLinkerTTCMutSetEffectVisitor visitor);
+  void visitIEmberDeepLevelLinkerTTCMutSetEffect(IEmberDeepLevelLinkerTTCMutSetEffectVisitor visitor);
 }
 
 }

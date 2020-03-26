@@ -13,11 +13,11 @@ public class ManaPotion {
     this.id = id;
   }
   public ManaPotionIncarnation incarnation { get { return root.GetManaPotionIncarnation(id); } }
-  public void AddObserver(IManaPotionEffectObserver observer) {
-    root.AddManaPotionObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IManaPotionEffectObserver observer) {
+    broadcaster.AddManaPotionObserver(id, observer);
   }
-  public void RemoveObserver(IManaPotionEffectObserver observer) {
-    root.RemoveManaPotionObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IManaPotionEffectObserver observer) {
+    broadcaster.RemoveManaPotionObserver(id, observer);
   }
   public void Delete() {
     root.EffectManaPotionDelete(id);

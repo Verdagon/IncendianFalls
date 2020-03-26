@@ -13,11 +13,11 @@ public class HoldPositionImpulse {
     this.id = id;
   }
   public HoldPositionImpulseIncarnation incarnation { get { return root.GetHoldPositionImpulseIncarnation(id); } }
-  public void AddObserver(IHoldPositionImpulseEffectObserver observer) {
-    root.AddHoldPositionImpulseObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IHoldPositionImpulseEffectObserver observer) {
+    broadcaster.AddHoldPositionImpulseObserver(id, observer);
   }
-  public void RemoveObserver(IHoldPositionImpulseEffectObserver observer) {
-    root.RemoveHoldPositionImpulseObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IHoldPositionImpulseEffectObserver observer) {
+    broadcaster.RemoveHoldPositionImpulseObserver(id, observer);
   }
   public void Delete() {
     root.EffectHoldPositionImpulseDelete(id);

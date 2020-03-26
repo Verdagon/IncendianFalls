@@ -14,24 +14,24 @@ public class GuardAICapabilityUCMutSet {
   public GuardAICapabilityUCMutSetIncarnation incarnation {
     get { return root.GetGuardAICapabilityUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IGuardAICapabilityUCMutSetEffectObserver observer) {
-    root.AddGuardAICapabilityUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IGuardAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.AddGuardAICapabilityUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IGuardAICapabilityUCMutSetEffectObserver observer) {
-    root.RemoveGuardAICapabilityUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IGuardAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.RemoveGuardAICapabilityUCMutSetObserver(id, observer);
   }
   public void Add(GuardAICapabilityUC element) {
-    root.EffectGuardAICapabilityUCMutSetAdd(id, element.id);
+      root.EffectGuardAICapabilityUCMutSetAdd(id, element.id);
   }
   public void Remove(GuardAICapabilityUC element) {
-    root.EffectGuardAICapabilityUCMutSetRemove(id, element.id);
+      root.EffectGuardAICapabilityUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectGuardAICapabilityUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectGuardAICapabilityUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectGuardAICapabilityUCMutSetRemove(id, element);
     }
   }
   public bool Contains(GuardAICapabilityUC element) {

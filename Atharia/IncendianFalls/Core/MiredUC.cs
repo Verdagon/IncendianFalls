@@ -13,11 +13,11 @@ public class MiredUC {
     this.id = id;
   }
   public MiredUCIncarnation incarnation { get { return root.GetMiredUCIncarnation(id); } }
-  public void AddObserver(IMiredUCEffectObserver observer) {
-    root.AddMiredUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMiredUCEffectObserver observer) {
+    broadcaster.AddMiredUCObserver(id, observer);
   }
-  public void RemoveObserver(IMiredUCEffectObserver observer) {
-    root.RemoveMiredUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMiredUCEffectObserver observer) {
+    broadcaster.RemoveMiredUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectMiredUCDelete(id);

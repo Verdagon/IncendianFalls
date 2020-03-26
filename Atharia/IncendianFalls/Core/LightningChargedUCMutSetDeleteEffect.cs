@@ -10,8 +10,11 @@ public struct LightningChargedUCMutSetDeleteEffect : ILightningChargedUCMutSetEf
     this.id = id;
   }
   int ILightningChargedUCMutSetEffect.id => id;
-  public void visit(ILightningChargedUCMutSetEffectVisitor visitor) {
+  public void visitILightningChargedUCMutSetEffect(ILightningChargedUCMutSetEffectVisitor visitor) {
     visitor.visitLightningChargedUCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitLightningChargedUCMutSetEffect(this);
   }
 }
 

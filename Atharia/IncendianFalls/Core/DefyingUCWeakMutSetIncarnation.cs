@@ -10,6 +10,10 @@ public class DefyingUCWeakMutSetIncarnation {
   public DefyingUCWeakMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public DefyingUCWeakMutSetIncarnation Copy() {
+    return new DefyingUCWeakMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

@@ -10,8 +10,11 @@ public struct ManaPotionStrongMutSetDeleteEffect : IManaPotionStrongMutSetEffect
     this.id = id;
   }
   int IManaPotionStrongMutSetEffect.id => id;
-  public void visit(IManaPotionStrongMutSetEffectVisitor visitor) {
+  public void visitIManaPotionStrongMutSetEffect(IManaPotionStrongMutSetEffectVisitor visitor) {
     visitor.visitManaPotionStrongMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitManaPotionStrongMutSetEffect(this);
   }
 }
 

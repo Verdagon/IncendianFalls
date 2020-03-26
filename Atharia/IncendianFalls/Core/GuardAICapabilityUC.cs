@@ -13,11 +13,11 @@ public class GuardAICapabilityUC {
     this.id = id;
   }
   public GuardAICapabilityUCIncarnation incarnation { get { return root.GetGuardAICapabilityUCIncarnation(id); } }
-  public void AddObserver(IGuardAICapabilityUCEffectObserver observer) {
-    root.AddGuardAICapabilityUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IGuardAICapabilityUCEffectObserver observer) {
+    broadcaster.AddGuardAICapabilityUCObserver(id, observer);
   }
-  public void RemoveObserver(IGuardAICapabilityUCEffectObserver observer) {
-    root.RemoveGuardAICapabilityUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IGuardAICapabilityUCEffectObserver observer) {
+    broadcaster.RemoveGuardAICapabilityUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectGuardAICapabilityUCDelete(id);

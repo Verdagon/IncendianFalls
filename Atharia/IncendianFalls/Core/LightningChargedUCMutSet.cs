@@ -14,24 +14,24 @@ public class LightningChargedUCMutSet {
   public LightningChargedUCMutSetIncarnation incarnation {
     get { return root.GetLightningChargedUCMutSetIncarnation(id); }
   }
-  public void AddObserver(ILightningChargedUCMutSetEffectObserver observer) {
-    root.AddLightningChargedUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ILightningChargedUCMutSetEffectObserver observer) {
+    broadcaster.AddLightningChargedUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ILightningChargedUCMutSetEffectObserver observer) {
-    root.RemoveLightningChargedUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ILightningChargedUCMutSetEffectObserver observer) {
+    broadcaster.RemoveLightningChargedUCMutSetObserver(id, observer);
   }
   public void Add(LightningChargedUC element) {
-    root.EffectLightningChargedUCMutSetAdd(id, element.id);
+      root.EffectLightningChargedUCMutSetAdd(id, element.id);
   }
   public void Remove(LightningChargedUC element) {
-    root.EffectLightningChargedUCMutSetRemove(id, element.id);
+      root.EffectLightningChargedUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectLightningChargedUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectLightningChargedUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectLightningChargedUCMutSetRemove(id, element);
     }
   }
   public bool Contains(LightningChargedUC element) {

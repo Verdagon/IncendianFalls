@@ -14,24 +14,24 @@ public class LevelMutSet {
   public LevelMutSetIncarnation incarnation {
     get { return root.GetLevelMutSetIncarnation(id); }
   }
-  public void AddObserver(ILevelMutSetEffectObserver observer) {
-    root.AddLevelMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ILevelMutSetEffectObserver observer) {
+    broadcaster.AddLevelMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ILevelMutSetEffectObserver observer) {
-    root.RemoveLevelMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ILevelMutSetEffectObserver observer) {
+    broadcaster.RemoveLevelMutSetObserver(id, observer);
   }
   public void Add(Level element) {
-    root.EffectLevelMutSetAdd(id, element.id);
+      root.EffectLevelMutSetAdd(id, element.id);
   }
   public void Remove(Level element) {
-    root.EffectLevelMutSetRemove(id, element.id);
+      root.EffectLevelMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectLevelMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectLevelMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectLevelMutSetRemove(id, element);
     }
   }
   public bool Contains(Level element) {

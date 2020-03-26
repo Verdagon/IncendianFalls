@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct KamikazeJumpImpulseStrongMutSetAddEffect : IKamikazeJumpImpulseStrongMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public KamikazeJumpImpulseStrongMutSetAddEffect(int id, int elementId) {
+  public readonly int element;
+  public KamikazeJumpImpulseStrongMutSetAddEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IKamikazeJumpImpulseStrongMutSetEffect.id => id;
-  public void visit(IKamikazeJumpImpulseStrongMutSetEffectVisitor visitor) {
+  public void visitIKamikazeJumpImpulseStrongMutSetEffect(IKamikazeJumpImpulseStrongMutSetEffectVisitor visitor) {
     visitor.visitKamikazeJumpImpulseStrongMutSetAddEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitKamikazeJumpImpulseStrongMutSetEffect(this);
   }
 }
 

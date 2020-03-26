@@ -10,8 +10,11 @@ public struct ItemTTCMutSetDeleteEffect : IItemTTCMutSetEffect {
     this.id = id;
   }
   int IItemTTCMutSetEffect.id => id;
-  public void visit(IItemTTCMutSetEffectVisitor visitor) {
+  public void visitIItemTTCMutSetEffect(IItemTTCMutSetEffectVisitor visitor) {
     visitor.visitItemTTCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitItemTTCMutSetEffect(this);
   }
 }
 

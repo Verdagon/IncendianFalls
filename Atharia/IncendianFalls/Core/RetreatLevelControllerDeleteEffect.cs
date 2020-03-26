@@ -11,8 +11,11 @@ public struct RetreatLevelControllerDeleteEffect : IRetreatLevelControllerEffect
     this.id = id;
   }
   int IRetreatLevelControllerEffect.id => id;
-  public void visit(IRetreatLevelControllerEffectVisitor visitor) {
+  public void visitIRetreatLevelControllerEffect(IRetreatLevelControllerEffectVisitor visitor) {
     visitor.visitRetreatLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitRetreatLevelControllerEffect(this);
   }
 }
 

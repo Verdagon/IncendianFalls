@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface ITerrainTileWeakMutSetEffect {
+public interface ITerrainTileWeakMutSetEffect : IEffect {
   int id { get; }
-  void visit(ITerrainTileWeakMutSetEffectVisitor visitor);
+  void visitITerrainTileWeakMutSetEffect(ITerrainTileWeakMutSetEffectVisitor visitor);
 }
 
 }

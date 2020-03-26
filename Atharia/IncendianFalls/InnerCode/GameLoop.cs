@@ -12,10 +12,6 @@ namespace IncendianFalls {
   }
 
   public class GameLoop {
-    private static void flare(Game game, string message) {
-      //game.root.logger.Info(message);
-    }
-
     public static void Continue(
         IncendianFalls.SSContext context, Game game, Superstate superstate, PauseCondition pauseCondition) {
       SortedSet<int> thisSpreeStartedUnitIds = new SortedSet<int>();

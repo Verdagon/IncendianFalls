@@ -10,8 +10,11 @@ public struct KamikazeTargetImpulseStrongMutSetCreateEffect : IKamikazeTargetImp
     this.id = id;
   }
   int IKamikazeTargetImpulseStrongMutSetEffect.id => id;
-  public void visit(IKamikazeTargetImpulseStrongMutSetEffectVisitor visitor) {
+  public void visitIKamikazeTargetImpulseStrongMutSetEffect(IKamikazeTargetImpulseStrongMutSetEffectVisitor visitor) {
     visitor.visitKamikazeTargetImpulseStrongMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitKamikazeTargetImpulseStrongMutSetEffect(this);
   }
 }
 

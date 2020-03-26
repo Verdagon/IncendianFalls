@@ -11,8 +11,11 @@ public struct AttackAICapabilityUCDeleteEffect : IAttackAICapabilityUCEffect {
     this.id = id;
   }
   int IAttackAICapabilityUCEffect.id => id;
-  public void visit(IAttackAICapabilityUCEffectVisitor visitor) {
+  public void visitIAttackAICapabilityUCEffect(IAttackAICapabilityUCEffectVisitor visitor) {
     visitor.visitAttackAICapabilityUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitAttackAICapabilityUCEffect(this);
   }
 }
 

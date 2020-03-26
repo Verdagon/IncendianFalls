@@ -15,7 +15,7 @@ public class UnitUnleashBideEventAsIUnitEvent : IUnitEvent {
   public override int GetHashCode() { return GetDeterministicHashCode(); }
          public int GetTime() { return UnitUnleashBideEventExtensions.GetTime(obj); }
 
-  public void Visit(IUnitEventVisitor visitor) { visitor.Visit(this); }
+  public void VisitIUnitEvent(IUnitEventVisitor visitor) { visitor.VisitIUnitEvent(this); }
 }
 public static class UnitUnleashBideEventAsIUnitEventCaster {
   public static UnitUnleashBideEventAsIUnitEvent AsIUnitEvent(this UnitUnleashBideEvent obj) {

@@ -11,8 +11,11 @@ public struct DefyingUCDeleteEffect : IDefyingUCEffect {
     this.id = id;
   }
   int IDefyingUCEffect.id => id;
-  public void visit(IDefyingUCEffectVisitor visitor) {
+  public void visitIDefyingUCEffect(IDefyingUCEffectVisitor visitor) {
     visitor.visitDefyingUCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitDefyingUCEffect(this);
   }
 }
 

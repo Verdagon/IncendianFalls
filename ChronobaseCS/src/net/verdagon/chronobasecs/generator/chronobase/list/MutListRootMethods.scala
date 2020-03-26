@@ -23,7 +23,15 @@ object MutListRootMethods {
        |      return rootIncarnation.incarnations${listName}[id].incarnation;
        |    }
        |    public ${listName} Get${listName}(int id) {
+       |      CheckHas${listName}(id);
        |      return new ${listName}(this, id);
+       |    }
+       |    public ${listName} Get${listName}OrNull(int id) {
+       |      if (${listName}Exists(id)) {
+       |        return new ${listName}(this, id);
+       |      } else {
+       |        return new ${listName}(this, 0);
+       |      }
        |    }
        |    public List<${listName}> All${listName}() {
        |      List<${listName}> result = new List<${listName}>(rootIncarnation.incarnations${listName}.Count);
@@ -47,6 +55,7 @@ object MutListRootMethods {
        |    public ${listName} Effect${listName}Create() {
        |      CheckUnlocked();
        |      var id = NewId();
+       |      Asserts.Assert(!rootIncarnation.incarnations${listName}.ContainsKey(id));
        |      EffectInternalCreate${listName}(id, rootIncarnation.version, new ${listName}Incarnation(new List<${flattenedElementCSType}>()));
        |      return new ${listName}(this, id);
        |    }
@@ -85,12 +94,12 @@ object MutListRootMethods {
        |
            |""".stripMargin
       } else "") +
-      s"""      effects${listName}CreateEffect.Add(effect);
+      s"""      NotifyEffect(effect);
        |    }
        |    public void Effect${listName}Delete(int id) {
        |      CheckUnlocked();
        |      var effect = new ${listName}DeleteEffect(id);
-       |      effects${listName}DeleteEffect.Add(effect);
+       |      NotifyEffect(effect);
        |      var versionAndIncarnation = rootIncarnation.incarnations${listName}[id];
        |""".stripMargin +
       (if (opt.hash) {
@@ -101,7 +110,7 @@ object MutListRootMethods {
       } else "") +
       s"""      rootIncarnation.incarnations${listName}.Remove(id);
        |    }
-       |    public void Effect${listName}Add(int listId, ${flattenedElementCSType} element) {
+       |    public void Effect${listName}Add(int listId, int addIndex, ${elementCSType} element) {
        |      CheckUnlocked();
        |      CheckHas${listName}(listId);
        |
@@ -111,11 +120,17 @@ object MutListRootMethods {
       case ImmutableS => ""
     }) +
     s"""
-       |      var effect = new ${listName}AddEffect(listId, element);
+       |
+       |      var flattenedElement =
+       |""".stripMargin+
+    (elementType.kind.mutability match {case MutableS => s"      element.id;" case ImmutableS => "element;" }) +
+    s"""
        |
        |      var oldIncarnationAndVersion = rootIncarnation.incarnations${listName}[listId];
+       |      var effect = new ${listName}AddEffect(listId, addIndex, flattenedElement);
+       |
        |      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-       |        oldIncarnationAndVersion.incarnation.list.Add(element);
+       |        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, flattenedElement);
        |""".stripMargin +
       (if (opt.hash) {
         s"""        this.rootIncarnation.hash += listId * rootIncarnation.version * element.GetDeterministicHashCode();
@@ -125,7 +140,7 @@ object MutListRootMethods {
       s"""      } else {
        |        var oldMap = oldIncarnationAndVersion.incarnation.list;
        |        var newMap = new List<${flattenedElementCSType}>(oldMap);
-       |        newMap.Add(element);
+       |        newMap.Add(flattenedElement);
        |        var newIncarnation = new ${listName}Incarnation(newMap);
        |        rootIncarnation.incarnations${listName}[listId] =
        |            new VersionAndIncarnation<${listName}Incarnation>(
@@ -139,7 +154,7 @@ object MutListRootMethods {
            |""".stripMargin
       } else "") +
       s"""      }
-       |      effects${listName}AddEffect.Add(effect);
+       |      NotifyEffect(effect);
        |    }
        |    public void Effect${listName}RemoveAt(int listId, int index) {
        |      CheckUnlocked();
@@ -173,89 +188,8 @@ object MutListRootMethods {
       } else "") +
       s"""
        |      }
-       |      effects${listName}RemoveEffect.Add(effect);
+       |      NotifyEffect(effect);
        |    }
-       """.stripMargin +
-    s"""
-       |    public void Add${listName}Observer(int id, I${listName}EffectObserver observer) {
-       |      List<I${listName}EffectObserver> obsies;
-       |      if (!observersFor${listName}.TryGetValue(id, out obsies)) {
-       |        obsies = new List<I${listName}EffectObserver>();
-       |      }
-       |      obsies.Add(observer);
-       |      observersFor${listName}[id] = obsies;
-       |    }
-       |
-       |    public void Remove${listName}Observer(int id, I${listName}EffectObserver observer) {
-       |      if (observersFor${listName}.ContainsKey(id)) {
-       |        var list = observersFor${listName}[id];
-       |        list.Remove(observer);
-       |        if (list.Count == 0) {
-       |          observersFor${listName}.Remove(id);
-       |        }
-       |      } else {
-       |        throw new Exception("Couldnt find!");
-       |      }
-       |    }
-       |""".stripMargin +
-    generateBroadcaster(opt, list)
+       """.stripMargin
   }
-
-  def generateBroadcaster(opt: ChronobaseOptions, list: ListS): String = {
-    val ListS(listName, MutableS, elementType) = list
-
-    val listCSType = toCS(list.tyype)
-
-    val observerName = s"I${listName}EffectObserver"
-    val createEffectName = s"${listName}CreateEffect"
-    val deleteEffectName = s"${listName}DeleteEffect"
-    val addEffectName = s"${listName}AddEffect"
-    val removeEffectName = s"${listName}RemoveEffect"
-
-    // Delete has to be first. This is so it can clear away all those
-    // observers observing this object, so they don't have to remove
-    // themselves, and if something is ressurrected via revert, the
-    // observers for the old existence won't be notified.
-    s"""
-       |  public void Broadcast${listCSType}Effects(
-       |      SortedDictionary<int, List<I${listCSType}EffectObserver>> observers) {
-       |    foreach (var effect in effects${deleteEffectName}) {
-       |      if (observers.TryGetValue(0, out List<${observerName}> globalObservers)) {
-       |        foreach (var observer in globalObservers) {
-       |          observer.On${listCSType}Effect(effect);
-       |        }
-       |      }
-       |      if (observers.TryGetValue(effect.id, out List<${observerName}> objObservers)) {
-       |        foreach (var observer in objObservers) {
-       |          observer.On${listCSType}Effect(effect);
-       |        }
-       |        observersFor${listCSType}.Remove(effect.id);
-       |      }
-       |    }
-       |    effects${deleteEffectName}.Clear();
-       |""".stripMargin +
-      List(addEffectName, removeEffectName, createEffectName)
-        .map(effectCSType => {
-          s"""
-             |    foreach (var effect in effects${effectCSType}) {
-             |      if (observers.TryGetValue(0, out List<${observerName}> globalObservers)) {
-             |        foreach (var observer in globalObservers) {
-             |          observer.On${listCSType}Effect(effect);
-             |        }
-             |      }
-             |      if (observers.TryGetValue(effect.id, out List<${observerName}> objObservers)) {
-             |        foreach (var observer in objObservers) {
-             |          observer.On${listCSType}Effect(effect);
-             |        }
-             |      }
-             |    }
-             |    effects${effectCSType}.Clear();
-             |""".stripMargin
-        })
-        .mkString("") +
-      s"""
-         |  }
-         |""".stripMargin
-  }
-
 }

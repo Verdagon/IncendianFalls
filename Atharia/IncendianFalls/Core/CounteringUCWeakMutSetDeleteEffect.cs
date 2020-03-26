@@ -10,8 +10,11 @@ public struct CounteringUCWeakMutSetDeleteEffect : ICounteringUCWeakMutSetEffect
     this.id = id;
   }
   int ICounteringUCWeakMutSetEffect.id => id;
-  public void visit(ICounteringUCWeakMutSetEffectVisitor visitor) {
+  public void visitICounteringUCWeakMutSetEffect(ICounteringUCWeakMutSetEffectVisitor visitor) {
     visitor.visitCounteringUCWeakMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitCounteringUCWeakMutSetEffect(this);
   }
 }
 

@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct HealthPotionMutSetRemoveEffect : IHealthPotionMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public HealthPotionMutSetRemoveEffect(int id, int elementId) {
+  public readonly int element;
+  public HealthPotionMutSetRemoveEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IHealthPotionMutSetEffect.id => id;
-  public void visit(IHealthPotionMutSetEffectVisitor visitor) {
+  public void visitIHealthPotionMutSetEffect(IHealthPotionMutSetEffectVisitor visitor) {
     visitor.visitHealthPotionMutSetRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitHealthPotionMutSetEffect(this);
   }
 }
 

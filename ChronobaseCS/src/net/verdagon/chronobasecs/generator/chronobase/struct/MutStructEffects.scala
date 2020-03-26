@@ -3,12 +3,30 @@ package net.verdagon.chronobasecs.generator
 import net.verdagon.chronobasecs.compiled._
 import net.verdagon.chronobasecs.generator.chronobase.Generator.toCS
 import net.verdagon.chronobasecs.generator.chronobase.ChronobaseOptions
+import net.verdagon.chronobasecs.generator.chronobase.struct.MutStructRootMethods.generateRootStructInstanceSetterMethod
 
 object MutStructEffects {
+
+  def generateVisitorMethods(struct: StructS): String = {
+    val StructS(structName, _, MutableS, members, _, _, _) = struct
+    val createEffectName = s"${structName}CreateEffect";
+    val deleteEffectName = s"${structName}DeleteEffect";
+
+    s"  void visit${createEffectName}(${createEffectName} effect);\n" +
+      s"  void visit${deleteEffectName}(${deleteEffectName} effect);\n" +
+      members.map({
+        case StructMemberS(_, FinalS, _) => ""
+        case StructMemberS(memberName, VaryingS, _) => {
+          val effectName = s"${structName}Set${memberName.capitalize}Effect"
+          s"  void visit${effectName}(${effectName} effect);\n"
+        }
+      }).mkString("")
+  }
 
   def generateEffects(opt: ChronobaseOptions, struct: StructS): Map[String, String] = {
     val StructS(structName, _, MutableS, members, _, _, _) = struct
 
+    val incarnationName = s"${structName}Incarnation";
     val ieffectName = s"I${structName}Effect";
     val observerName = s"I${structName}EffectObserver"
     val visitorName = s"I${structName}EffectVisitor";
@@ -17,9 +35,9 @@ object MutStructEffects {
 
     val ieffectDefinition =
       s"""
-         |public interface ${ieffectName} {
+         |public interface ${ieffectName} : IEffect {
          |  int id { get; }
-         |  void visit(${visitorName} visitor);
+         |  void visit${ieffectName}(${visitorName} visitor);
          |}
        """.stripMargin
 
@@ -32,27 +50,24 @@ object MutStructEffects {
 
     val visitorDefinition =
       s"public interface ${visitorName} {\n" +
-      s"  void visit${createEffectName}(${createEffectName} effect);\n" +
-      s"  void visit${deleteEffectName}(${deleteEffectName} effect);\n" +
-        members.map({
-          case StructMemberS(_, FinalS, _) => ""
-          case StructMemberS(memberName, VaryingS, _) => {
-            val effectName = s"${structName}Set${memberName.capitalize}Effect"
-            s"  void visit${effectName}(${effectName} effect);\n"
-          }
-        }).mkString("") +
+        generateVisitorMethods(struct) +
         s"}\n"
 
     val createEffectDefinition =
       s"""
          |public struct ${createEffectName} : ${ieffectName} {
          |  public readonly int id;
-         |  public ${createEffectName}(int id) {
+         |  public readonly ${incarnationName} incarnation;
+         |  public ${createEffectName}(int id, ${incarnationName} incarnation) {
          |    this.id = id;
+         |    this.incarnation = incarnation;
          |  }
          |  int ${ieffectName}.id => id;
-         |  public void visit(${visitorName} visitor) {
+         |  public void visit${ieffectName}(${visitorName} visitor) {
          |    visitor.visit${createEffectName}(this);
+         |  }
+         |  public void visitIEffect(IEffectVisitor visitor) {
+         |    visitor.visit${structName}Effect(this);
          |  }
          |}
          |""".stripMargin
@@ -65,8 +80,11 @@ object MutStructEffects {
          |    this.id = id;
          |  }
          |  int ${ieffectName}.id => id;
-         |  public void visit(${visitorName} visitor) {
+         |  public void visit${ieffectName}(${visitorName} visitor) {
          |    visitor.visit${deleteEffectName}(this);
+         |  }
+         |  public void visitIEffect(IEffectVisitor visitor) {
+         |    visitor.visit${structName}Effect(this);
          |  }
          |}
          |""".stripMargin
@@ -85,17 +103,20 @@ object MutStructEffects {
             s"""
                |public struct ${effectName} : ${ieffectName} {
                |  public readonly int id;
-               |  public readonly ${toCS(memberType)} newValue;
+               |  public readonly ${toCS(memberType.flatten)} newValue;
                |  public ${effectName}(
                |      int id,
-               |      ${toCS(memberType)} newValue) {
+               |      ${toCS(memberType.flatten)} newValue) {
                |    this.id = id;
                |    this.newValue = newValue;
                |  }
                |  int ${ieffectName}.id => id;
                |
-               |  public void visit(${visitorName} visitor) {
+               |  public void visit${ieffectName}(${visitorName} visitor) {
                |    visitor.visit${effectName}(this);
+               |  }
+               |  public void visitIEffect(IEffectVisitor visitor) {
+               |    visitor.visit${structName}Effect(this);
                |  }
                |}
                |""".stripMargin
@@ -117,13 +138,154 @@ object MutStructEffects {
       })
   }
 
-  def generateRootMembers(opt: ChronobaseOptions, struct: StructS): String = {
-    getEffectsCSTypes(struct)
-      .map(effectCSType => {
-        s"""  readonly List<${effectCSType}> effects${effectCSType} =
-           |      new List<${effectCSType}>();
-           |""".stripMargin
-      })
-      .mkString("")
+
+  def generateGlobalVisitorInterfaceMethods(struct: StructS) = {
+    val StructS(structName, _, MutableS, members, _, _, _) = struct
+
+    val ieffectName = s"I${structName}Effect"
+
+    s"void visit${structName}Effect(${ieffectName} effect);\n"
+  }
+  def generateEffectBroadcasterMembers(struct: StructS): String = {
+    val structCSType = toCS(struct.tyype)
+    s"""
+       |  readonly SortedDictionary<int, List<I${structCSType}EffectObserver>> observersFor${structCSType} =
+       |      new SortedDictionary<int, List<I${structCSType}EffectObserver>>();
+       |""".stripMargin
+  }
+
+  def generateRootApplierMethods(struct: StructS) = {
+    val StructS(structName, _, MutableS, members, _, _, _) = struct
+
+    val structCSType = toCS(struct.tyype)
+    val ieffectName = s"I${structName}Effect"
+
+    s"""
+       |  public void visit${structName}Effect(${ieffectName} effect) {
+       |    if (observersFor${structCSType}.TryGetValue(effect.id, out var observers)) {
+       |      foreach (var observer in new List<I${structCSType}EffectObserver>(observers)) {
+       |        observer.On${structName}Effect(effect);
+       |      }
+       |    }
+       |  }
+       |""".stripMargin
+  }
+
+  def generateEffectBroadcasterMethods(struct: StructS) = {
+    val StructS(structName, _, MutableS, members, _, _, _) = struct
+
+    val structCSType = toCS(struct.tyype)
+    val ieffectName = s"I${structName}Effect"
+
+    s"""
+       |  public void visit${structName}Effect(${ieffectName} effect) {
+       |    if (observersFor${structCSType}.TryGetValue(effect.id, out var observers)) {
+       |      foreach (var observer in new List<I${structCSType}EffectObserver>(observers)) {
+       |        observer.On${structName}Effect(effect);
+       |      }
+       |    }
+       |  }
+       |  public void Add${structName}Observer(int id, I${structName}EffectObserver observer) {
+       |    List<I${structName}EffectObserver> obsies;
+       |    if (!observersFor${structName}.TryGetValue(id, out obsies)) {
+       |      obsies = new List<I${structName}EffectObserver>();
+       |    }
+       |    obsies.Add(observer);
+       |    observersFor${structName}[id] = obsies;
+       |  }
+       |
+       |  public void Remove${structName}Observer(int id, I${structName}EffectObserver observer) {
+       |    if (observersFor${structName}.ContainsKey(id)) {
+       |      var list = observersFor${structName}[id];
+       |      list.Remove(observer);
+       |      if (list.Count == 0) {
+       |        observersFor${structName}.Remove(id);
+       |      }
+       |    } else {
+       |      throw new Exception("Couldnt find!");
+       |    }
+       |  }
+       |""".stripMargin
+  }
+  def generateEffectApplierMethods(struct: StructS): String = {
+    val StructS(structName, _, MutableS, members, _, _, _) = struct
+    s"""
+       |public void visit${structName}Effect(I${structName}Effect effect) { effect.visitI${structName}Effect(this); }
+       |""".stripMargin +
+    generateEffectApplierCreateMethod(struct) +
+      generateEffectApplierDeleteMethod(struct) +
+      members.zipWithIndex.map({
+        case (StructMemberS(memberName, FinalS, memberType), memberIndex) => ""
+        case (StructMemberS(memberName, VaryingS, memberType), memberIndex) =>
+          generateEffectApplierSetterMethod(struct, memberIndex, memberName, memberType)
+      }).mkString("")
+  }
+
+
+  def generateEffectApplierCreateMethod(struct: StructS): String = {
+    val StructS(structName, _, MutableS, members, _, _, _) = struct
+    val createEffect = s"${structName}CreateEffect"
+    s"  public void visit${createEffect}(${createEffect} effect) {\n" +
+      s"    var instance = root.Effect${structName}Create(\n" +
+      members.map({ case StructMemberS(memberName, variability, memberType) =>
+        (memberType.kind.mutability match {
+          case MutableS => {
+            if (memberType.ownership == WeakS || memberType.nullable) {
+              s"  root.Get${memberType.name}OrNull(effect.incarnation.${memberName})"
+            } else {
+              s"  root.Get${memberType.name}(effect.incarnation.${memberName})"
+            }
+          }
+          case ImmutableS => s"  effect.incarnation.${memberName}"
+        })
+      }).mkString(",\n") +
+      s"    );\n" +
+      s"""
+        |  // If this fails, then we have to add a translation layer.
+        |  // We shouldn't allow the user to specify the internal ID, because that's
+        |  // core to a bunch of optimizations (such as how it's a generational index).
+        |  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
+        |}
+        |""".stripMargin
+  }
+  def generateEffectApplierDeleteMethod(
+                                              struct: StructS
+                                            ): String = {
+    val StructS(structName, _, MutableS, members, _, _, _) = struct
+    val deleteEffect = s"${structName}DeleteEffect"
+    s"""
+       |  public void visit${deleteEffect}(${deleteEffect} effect) {
+       |    root.Effect${structName}Delete(effect.id);
+       |  }
+       |
+     """.stripMargin
+  }
+
+  def generateEffectApplierSetterMethod(
+                                              struct: StructS,
+                                              memberIndex: Int,
+                                              memberName: String,
+                                              memberType: TypeS[IKindS]): String = {
+    val StructS(structName, _, MutableS, members, _, _, _) = struct
+    val setEffectName = s"${struct.name}Set${memberName.capitalize}Effect"
+    s"""
+       |  public void visit${setEffectName}(${setEffectName} effect) {
+       |    root.Effect${struct.name}Set${memberName.capitalize}(
+       |      effect.id,
+       |""".stripMargin +
+      (memberType.kind.mutability match {
+        case MutableS => {
+          if (memberType.ownership == WeakS || memberType.nullable) {
+            s"  root.Get${memberType.name}OrNull(effect.newValue)"
+          } else {
+            s"  root.Get${memberType.name}(effect.newValue)"
+          }
+        }
+        case ImmutableS => s"  effect.newValue"
+      }) +
+    s"""
+       |    );
+       |  }
+       |""".stripMargin
   }
 }

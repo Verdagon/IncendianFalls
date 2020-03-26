@@ -10,6 +10,10 @@ public class StoneTTCMutSetIncarnation {
   public StoneTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public StoneTTCMutSetIncarnation Copy() {
+    return new StoneTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

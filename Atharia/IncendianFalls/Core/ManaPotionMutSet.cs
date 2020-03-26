@@ -14,24 +14,24 @@ public class ManaPotionMutSet {
   public ManaPotionMutSetIncarnation incarnation {
     get { return root.GetManaPotionMutSetIncarnation(id); }
   }
-  public void AddObserver(IManaPotionMutSetEffectObserver observer) {
-    root.AddManaPotionMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IManaPotionMutSetEffectObserver observer) {
+    broadcaster.AddManaPotionMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IManaPotionMutSetEffectObserver observer) {
-    root.RemoveManaPotionMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IManaPotionMutSetEffectObserver observer) {
+    broadcaster.RemoveManaPotionMutSetObserver(id, observer);
   }
   public void Add(ManaPotion element) {
-    root.EffectManaPotionMutSetAdd(id, element.id);
+      root.EffectManaPotionMutSetAdd(id, element.id);
   }
   public void Remove(ManaPotion element) {
-    root.EffectManaPotionMutSetRemove(id, element.id);
+      root.EffectManaPotionMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectManaPotionMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectManaPotionMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectManaPotionMutSetRemove(id, element);
     }
   }
   public bool Contains(ManaPotion element) {

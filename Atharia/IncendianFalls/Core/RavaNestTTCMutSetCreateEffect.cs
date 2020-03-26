@@ -10,8 +10,11 @@ public struct RavaNestTTCMutSetCreateEffect : IRavaNestTTCMutSetEffect {
     this.id = id;
   }
   int IRavaNestTTCMutSetEffect.id => id;
-  public void visit(IRavaNestTTCMutSetEffectVisitor visitor) {
+  public void visitIRavaNestTTCMutSetEffect(IRavaNestTTCMutSetEffectVisitor visitor) {
     visitor.visitRavaNestTTCMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitRavaNestTTCMutSetEffect(this);
   }
 }
 

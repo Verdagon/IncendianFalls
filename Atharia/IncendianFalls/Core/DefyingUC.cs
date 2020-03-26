@@ -13,11 +13,11 @@ public class DefyingUC {
     this.id = id;
   }
   public DefyingUCIncarnation incarnation { get { return root.GetDefyingUCIncarnation(id); } }
-  public void AddObserver(IDefyingUCEffectObserver observer) {
-    root.AddDefyingUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IDefyingUCEffectObserver observer) {
+    broadcaster.AddDefyingUCObserver(id, observer);
   }
-  public void RemoveObserver(IDefyingUCEffectObserver observer) {
-    root.RemoveDefyingUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IDefyingUCEffectObserver observer) {
+    broadcaster.RemoveDefyingUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectDefyingUCDelete(id);

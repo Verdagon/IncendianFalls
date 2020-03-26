@@ -14,24 +14,24 @@ public class GlaiveStrongMutSet {
   public GlaiveStrongMutSetIncarnation incarnation {
     get { return root.GetGlaiveStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(IGlaiveStrongMutSetEffectObserver observer) {
-    root.AddGlaiveStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IGlaiveStrongMutSetEffectObserver observer) {
+    broadcaster.AddGlaiveStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IGlaiveStrongMutSetEffectObserver observer) {
-    root.RemoveGlaiveStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IGlaiveStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveGlaiveStrongMutSetObserver(id, observer);
   }
   public void Add(Glaive element) {
-    root.EffectGlaiveStrongMutSetAdd(id, element.id);
+      root.EffectGlaiveStrongMutSetAdd(id, element.id);
   }
   public void Remove(Glaive element) {
-    root.EffectGlaiveStrongMutSetRemove(id, element.id);
+      root.EffectGlaiveStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectGlaiveStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectGlaiveStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectGlaiveStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(Glaive element) {

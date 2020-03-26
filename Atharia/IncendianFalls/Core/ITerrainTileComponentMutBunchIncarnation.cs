@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class ITerrainTileComponentMutBunchIncarnation {
+public class ITerrainTileComponentMutBunchIncarnation : IITerrainTileComponentMutBunchEffectVisitor {
   public readonly int membersSimplePresenceTriggerTTCMutSet;
   public readonly int membersItemTTCMutSet;
   public readonly int membersKamikazeTargetTTCMutSet;
@@ -103,6 +103,77 @@ public class ITerrainTileComponentMutBunchIncarnation {
     this.membersIncendianFallsLevelLinkerTTCMutSet = membersIncendianFallsLevelLinkerTTCMutSet;
     this.membersEmberDeepLevelLinkerTTCMutSet = membersEmberDeepLevelLinkerTTCMutSet;
   }
+  public ITerrainTileComponentMutBunchIncarnation Copy() {
+    return new ITerrainTileComponentMutBunchIncarnation(
+membersSimplePresenceTriggerTTCMutSet,
+membersItemTTCMutSet,
+membersKamikazeTargetTTCMutSet,
+membersWarperTTCMutSet,
+membersTimeAnchorTTCMutSet,
+membersFireBombTTCMutSet,
+membersMarkerTTCMutSet,
+membersLevelLinkTTCMutSet,
+membersMudTTCMutSet,
+membersDirtTTCMutSet,
+membersObsidianTTCMutSet,
+membersDownStairsTTCMutSet,
+membersUpStairsTTCMutSet,
+membersWallTTCMutSet,
+membersBloodTTCMutSet,
+membersRocksTTCMutSet,
+membersTreeTTCMutSet,
+membersWaterTTCMutSet,
+membersFloorTTCMutSet,
+membersCaveWallTTCMutSet,
+membersCaveTTCMutSet,
+membersFallsTTCMutSet,
+membersFireTTCMutSet,
+membersObsidianFloorTTCMutSet,
+membersMagmaTTCMutSet,
+membersCliffTTCMutSet,
+membersRavaNestTTCMutSet,
+membersCliffLandingTTCMutSet,
+membersStoneTTCMutSet,
+membersGrassTTCMutSet,
+membersIncendianFallsLevelLinkerTTCMutSet,
+membersEmberDeepLevelLinkerTTCMutSet    );
+  }
+
+  public void visitITerrainTileComponentMutBunchCreateEffect(ITerrainTileComponentMutBunchCreateEffect e) {}
+  public void visitITerrainTileComponentMutBunchDeleteEffect(ITerrainTileComponentMutBunchDeleteEffect e) {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public void ApplyEffect(IITerrainTileComponentMutBunchEffect effect) { effect.visitIITerrainTileComponentMutBunchEffect(this); }
 }
 
 }

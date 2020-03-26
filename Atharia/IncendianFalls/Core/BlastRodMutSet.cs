@@ -14,24 +14,24 @@ public class BlastRodMutSet {
   public BlastRodMutSetIncarnation incarnation {
     get { return root.GetBlastRodMutSetIncarnation(id); }
   }
-  public void AddObserver(IBlastRodMutSetEffectObserver observer) {
-    root.AddBlastRodMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBlastRodMutSetEffectObserver observer) {
+    broadcaster.AddBlastRodMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IBlastRodMutSetEffectObserver observer) {
-    root.RemoveBlastRodMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBlastRodMutSetEffectObserver observer) {
+    broadcaster.RemoveBlastRodMutSetObserver(id, observer);
   }
   public void Add(BlastRod element) {
-    root.EffectBlastRodMutSetAdd(id, element.id);
+      root.EffectBlastRodMutSetAdd(id, element.id);
   }
   public void Remove(BlastRod element) {
-    root.EffectBlastRodMutSetRemove(id, element.id);
+      root.EffectBlastRodMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectBlastRodMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectBlastRodMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectBlastRodMutSetRemove(id, element);
     }
   }
   public bool Contains(BlastRod element) {

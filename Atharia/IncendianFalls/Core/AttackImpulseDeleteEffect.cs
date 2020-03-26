@@ -11,8 +11,11 @@ public struct AttackImpulseDeleteEffect : IAttackImpulseEffect {
     this.id = id;
   }
   int IAttackImpulseEffect.id => id;
-  public void visit(IAttackImpulseEffectVisitor visitor) {
+  public void visitIAttackImpulseEffect(IAttackImpulseEffectVisitor visitor) {
     visitor.visitAttackImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitAttackImpulseEffect(this);
   }
 }
 

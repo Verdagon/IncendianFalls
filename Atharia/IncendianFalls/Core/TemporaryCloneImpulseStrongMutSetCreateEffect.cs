@@ -10,8 +10,11 @@ public struct TemporaryCloneImpulseStrongMutSetCreateEffect : ITemporaryCloneImp
     this.id = id;
   }
   int ITemporaryCloneImpulseStrongMutSetEffect.id => id;
-  public void visit(ITemporaryCloneImpulseStrongMutSetEffectVisitor visitor) {
+  public void visitITemporaryCloneImpulseStrongMutSetEffect(ITemporaryCloneImpulseStrongMutSetEffectVisitor visitor) {
     visitor.visitTemporaryCloneImpulseStrongMutSetCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTemporaryCloneImpulseStrongMutSetEffect(this);
   }
 }
 

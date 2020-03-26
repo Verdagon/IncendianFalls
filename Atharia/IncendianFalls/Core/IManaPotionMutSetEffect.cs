@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface IManaPotionMutSetEffect {
+public interface IManaPotionMutSetEffect : IEffect {
   int id { get; }
-  void visit(IManaPotionMutSetEffectVisitor visitor);
+  void visitIManaPotionMutSetEffect(IManaPotionMutSetEffectVisitor visitor);
 }
 
 }

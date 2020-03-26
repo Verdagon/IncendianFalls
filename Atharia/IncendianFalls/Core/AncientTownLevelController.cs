@@ -13,11 +13,11 @@ public class AncientTownLevelController {
     this.id = id;
   }
   public AncientTownLevelControllerIncarnation incarnation { get { return root.GetAncientTownLevelControllerIncarnation(id); } }
-  public void AddObserver(IAncientTownLevelControllerEffectObserver observer) {
-    root.AddAncientTownLevelControllerObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IAncientTownLevelControllerEffectObserver observer) {
+    broadcaster.AddAncientTownLevelControllerObserver(id, observer);
   }
-  public void RemoveObserver(IAncientTownLevelControllerEffectObserver observer) {
-    root.RemoveAncientTownLevelControllerObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IAncientTownLevelControllerEffectObserver observer) {
+    broadcaster.RemoveAncientTownLevelControllerObserver(id, observer);
   }
   public void Delete() {
     root.EffectAncientTownLevelControllerDelete(id);

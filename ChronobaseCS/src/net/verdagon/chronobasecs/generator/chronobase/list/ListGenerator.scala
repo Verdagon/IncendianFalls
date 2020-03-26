@@ -29,12 +29,23 @@ object ListGenerator {
     }
   }
 
-  def generateRootMembers(opt: ChronobaseOptions, list: ListS): String = {
+  def generateEffectBroadcasterMembers(opt: ChronobaseOptions, list: ListS): String = {
     val structCSType = toCS(list.tyype)
     s"""
        |  readonly SortedDictionary<int, List<I${structCSType}EffectObserver>> observersFor${structCSType} =
        |      new SortedDictionary<int, List<I${structCSType}EffectObserver>>();
-       |""".stripMargin +
-      MutListEffects.generateRootMembers(opt, list)
+       |""".stripMargin
+  }
+
+  def generateGlobalVisitorInterfaceMethods(list: ListS) = {
+    MutListEffects.generateGlobalVisitorInterfaceMethods(list)
+  }
+
+  def generateEffectBroadcasterMethods(list: ListS) = {
+    MutListEffects.generateEffectBroadcasterMethods(list)
+  }
+
+  def generateEffectApplierMethods(list: ListS) = {
+    MutListEffects.generateEffectApplierMethods(list)
   }
 }

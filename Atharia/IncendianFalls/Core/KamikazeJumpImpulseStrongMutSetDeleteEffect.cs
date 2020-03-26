@@ -10,8 +10,11 @@ public struct KamikazeJumpImpulseStrongMutSetDeleteEffect : IKamikazeJumpImpulse
     this.id = id;
   }
   int IKamikazeJumpImpulseStrongMutSetEffect.id => id;
-  public void visit(IKamikazeJumpImpulseStrongMutSetEffectVisitor visitor) {
+  public void visitIKamikazeJumpImpulseStrongMutSetEffect(IKamikazeJumpImpulseStrongMutSetEffectVisitor visitor) {
     visitor.visitKamikazeJumpImpulseStrongMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitKamikazeJumpImpulseStrongMutSetEffect(this);
   }
 }
 

@@ -13,11 +13,11 @@ public class CliffTTC {
     this.id = id;
   }
   public CliffTTCIncarnation incarnation { get { return root.GetCliffTTCIncarnation(id); } }
-  public void AddObserver(ICliffTTCEffectObserver observer) {
-    root.AddCliffTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICliffTTCEffectObserver observer) {
+    broadcaster.AddCliffTTCObserver(id, observer);
   }
-  public void RemoveObserver(ICliffTTCEffectObserver observer) {
-    root.RemoveCliffTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICliffTTCEffectObserver observer) {
+    broadcaster.RemoveCliffTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectCliffTTCDelete(id);

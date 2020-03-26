@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct GuardAICapabilityUCMutSetAddEffect : IGuardAICapabilityUCMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public GuardAICapabilityUCMutSetAddEffect(int id, int elementId) {
+  public readonly int element;
+  public GuardAICapabilityUCMutSetAddEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IGuardAICapabilityUCMutSetEffect.id => id;
-  public void visit(IGuardAICapabilityUCMutSetEffectVisitor visitor) {
+  public void visitIGuardAICapabilityUCMutSetEffect(IGuardAICapabilityUCMutSetEffectVisitor visitor) {
     visitor.visitGuardAICapabilityUCMutSetAddEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitGuardAICapabilityUCMutSetEffect(this);
   }
 }
 

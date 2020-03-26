@@ -11,8 +11,11 @@ public struct EvaporateImpulseDeleteEffect : IEvaporateImpulseEffect {
     this.id = id;
   }
   int IEvaporateImpulseEffect.id => id;
-  public void visit(IEvaporateImpulseEffectVisitor visitor) {
+  public void visitIEvaporateImpulseEffect(IEvaporateImpulseEffectVisitor visitor) {
     visitor.visitEvaporateImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitEvaporateImpulseEffect(this);
   }
 }
 

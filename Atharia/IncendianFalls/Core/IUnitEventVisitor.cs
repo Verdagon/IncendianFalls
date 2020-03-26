@@ -6,14 +6,14 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public interface IUnitEventVisitor {
-  void Visit(UnitUnleashBideEventAsIUnitEvent obj);
-  void Visit(UnitFireBombedEventAsIUnitEvent obj);
-  void Visit(UnitFireEventAsIUnitEvent obj);
-  void Visit(UnitMireEventAsIUnitEvent obj);
-  void Visit(UnitAttackEventAsIUnitEvent obj);
-  void Visit(UnitCounteringEventAsIUnitEvent obj);
-  void Visit(UnitDefyingEventAsIUnitEvent obj);
-  void Visit(UnitStepEventAsIUnitEvent obj);
+  void VisitIUnitEvent(UnitUnleashBideEventAsIUnitEvent obj);
+  void VisitIUnitEvent(UnitFireBombedEventAsIUnitEvent obj);
+  void VisitIUnitEvent(UnitFireEventAsIUnitEvent obj);
+  void VisitIUnitEvent(UnitMireEventAsIUnitEvent obj);
+  void VisitIUnitEvent(UnitAttackEventAsIUnitEvent obj);
+  void VisitIUnitEvent(UnitCounteringEventAsIUnitEvent obj);
+  void VisitIUnitEvent(UnitDefyingEventAsIUnitEvent obj);
+  void VisitIUnitEvent(UnitStepEventAsIUnitEvent obj);
 }
 
 }

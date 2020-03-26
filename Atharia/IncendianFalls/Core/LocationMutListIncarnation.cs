@@ -11,6 +11,10 @@ public class LocationMutListIncarnation {
   public LocationMutListIncarnation(List<Location> list) {
     this.list = list;
   }
+
+  public LocationMutListIncarnation Copy() {
+    return new LocationMutListIncarnation(new List<Location>(list));
+  }
 }
          
 }

@@ -10,6 +10,10 @@ public class EvaporateImpulseStrongMutSetIncarnation {
   public EvaporateImpulseStrongMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public EvaporateImpulseStrongMutSetIncarnation Copy() {
+    return new EvaporateImpulseStrongMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

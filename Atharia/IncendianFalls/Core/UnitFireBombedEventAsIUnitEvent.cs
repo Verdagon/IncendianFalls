@@ -15,7 +15,7 @@ public class UnitFireBombedEventAsIUnitEvent : IUnitEvent {
   public override int GetHashCode() { return GetDeterministicHashCode(); }
          public int GetTime() { return UnitFireBombedEventExtensions.GetTime(obj); }
 
-  public void Visit(IUnitEventVisitor visitor) { visitor.Visit(this); }
+  public void VisitIUnitEvent(IUnitEventVisitor visitor) { visitor.VisitIUnitEvent(this); }
 }
 public static class UnitFireBombedEventAsIUnitEventCaster {
   public static UnitFireBombedEventAsIUnitEvent AsIUnitEvent(this UnitFireBombedEvent obj) {

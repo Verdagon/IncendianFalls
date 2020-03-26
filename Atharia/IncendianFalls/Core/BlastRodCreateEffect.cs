@@ -7,12 +7,17 @@ namespace Atharia.Model {
 
 public struct BlastRodCreateEffect : IBlastRodEffect {
   public readonly int id;
-  public BlastRodCreateEffect(int id) {
+  public readonly BlastRodIncarnation incarnation;
+  public BlastRodCreateEffect(int id, BlastRodIncarnation incarnation) {
     this.id = id;
+    this.incarnation = incarnation;
   }
   int IBlastRodEffect.id => id;
-  public void visit(IBlastRodEffectVisitor visitor) {
+  public void visitIBlastRodEffect(IBlastRodEffectVisitor visitor) {
     visitor.visitBlastRodCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBlastRodEffect(this);
   }
 }
 

@@ -10,6 +10,10 @@ public class TimeAnchorTTCMutSetIncarnation {
   public TimeAnchorTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public TimeAnchorTTCMutSetIncarnation Copy() {
+    return new TimeAnchorTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

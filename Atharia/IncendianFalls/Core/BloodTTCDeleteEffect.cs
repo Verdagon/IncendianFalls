@@ -11,8 +11,11 @@ public struct BloodTTCDeleteEffect : IBloodTTCEffect {
     this.id = id;
   }
   int IBloodTTCEffect.id => id;
-  public void visit(IBloodTTCEffectVisitor visitor) {
+  public void visitIBloodTTCEffect(IBloodTTCEffectVisitor visitor) {
     visitor.visitBloodTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBloodTTCEffect(this);
   }
 }
 

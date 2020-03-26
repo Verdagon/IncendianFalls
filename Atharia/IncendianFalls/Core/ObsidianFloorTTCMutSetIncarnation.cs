@@ -10,6 +10,10 @@ public class ObsidianFloorTTCMutSetIncarnation {
   public ObsidianFloorTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public ObsidianFloorTTCMutSetIncarnation Copy() {
+    return new ObsidianFloorTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

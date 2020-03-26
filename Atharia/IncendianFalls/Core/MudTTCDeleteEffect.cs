@@ -11,8 +11,11 @@ public struct MudTTCDeleteEffect : IMudTTCEffect {
     this.id = id;
   }
   int IMudTTCEffect.id => id;
-  public void visit(IMudTTCEffectVisitor visitor) {
+  public void visitIMudTTCEffect(IMudTTCEffectVisitor visitor) {
     visitor.visitMudTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitMudTTCEffect(this);
   }
 }
 

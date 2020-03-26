@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface ILocationMutListEffect {
+public interface ILocationMutListEffect : IEffect {
   int id { get; }
-  void visit(ILocationMutListEffectVisitor visitor);
+  void visitILocationMutListEffect(ILocationMutListEffectVisitor visitor);
 }
 
 }

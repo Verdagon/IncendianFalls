@@ -13,11 +13,11 @@ public class HealthPotion {
     this.id = id;
   }
   public HealthPotionIncarnation incarnation { get { return root.GetHealthPotionIncarnation(id); } }
-  public void AddObserver(IHealthPotionEffectObserver observer) {
-    root.AddHealthPotionObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IHealthPotionEffectObserver observer) {
+    broadcaster.AddHealthPotionObserver(id, observer);
   }
-  public void RemoveObserver(IHealthPotionEffectObserver observer) {
-    root.RemoveHealthPotionObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IHealthPotionEffectObserver observer) {
+    broadcaster.RemoveHealthPotionObserver(id, observer);
   }
   public void Delete() {
     root.EffectHealthPotionDelete(id);

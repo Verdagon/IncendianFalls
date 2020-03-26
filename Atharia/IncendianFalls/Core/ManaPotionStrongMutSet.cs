@@ -14,24 +14,24 @@ public class ManaPotionStrongMutSet {
   public ManaPotionStrongMutSetIncarnation incarnation {
     get { return root.GetManaPotionStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(IManaPotionStrongMutSetEffectObserver observer) {
-    root.AddManaPotionStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IManaPotionStrongMutSetEffectObserver observer) {
+    broadcaster.AddManaPotionStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IManaPotionStrongMutSetEffectObserver observer) {
-    root.RemoveManaPotionStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IManaPotionStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveManaPotionStrongMutSetObserver(id, observer);
   }
   public void Add(ManaPotion element) {
-    root.EffectManaPotionStrongMutSetAdd(id, element.id);
+      root.EffectManaPotionStrongMutSetAdd(id, element.id);
   }
   public void Remove(ManaPotion element) {
-    root.EffectManaPotionStrongMutSetRemove(id, element.id);
+      root.EffectManaPotionStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectManaPotionStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectManaPotionStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectManaPotionStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(ManaPotion element) {

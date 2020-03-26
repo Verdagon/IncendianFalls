@@ -14,24 +14,24 @@ public class MoveImpulseStrongMutSet {
   public MoveImpulseStrongMutSetIncarnation incarnation {
     get { return root.GetMoveImpulseStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(IMoveImpulseStrongMutSetEffectObserver observer) {
-    root.AddMoveImpulseStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMoveImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.AddMoveImpulseStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IMoveImpulseStrongMutSetEffectObserver observer) {
-    root.RemoveMoveImpulseStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMoveImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveMoveImpulseStrongMutSetObserver(id, observer);
   }
   public void Add(MoveImpulse element) {
-    root.EffectMoveImpulseStrongMutSetAdd(id, element.id);
+      root.EffectMoveImpulseStrongMutSetAdd(id, element.id);
   }
   public void Remove(MoveImpulse element) {
-    root.EffectMoveImpulseStrongMutSetRemove(id, element.id);
+      root.EffectMoveImpulseStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectMoveImpulseStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectMoveImpulseStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectMoveImpulseStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(MoveImpulse element) {

@@ -14,24 +14,24 @@ public class EmberDeepLevelLinkerTTCMutSet {
   public EmberDeepLevelLinkerTTCMutSetIncarnation incarnation {
     get { return root.GetEmberDeepLevelLinkerTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(IEmberDeepLevelLinkerTTCMutSetEffectObserver observer) {
-    root.AddEmberDeepLevelLinkerTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IEmberDeepLevelLinkerTTCMutSetEffectObserver observer) {
+    broadcaster.AddEmberDeepLevelLinkerTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IEmberDeepLevelLinkerTTCMutSetEffectObserver observer) {
-    root.RemoveEmberDeepLevelLinkerTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IEmberDeepLevelLinkerTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveEmberDeepLevelLinkerTTCMutSetObserver(id, observer);
   }
   public void Add(EmberDeepLevelLinkerTTC element) {
-    root.EffectEmberDeepLevelLinkerTTCMutSetAdd(id, element.id);
+      root.EffectEmberDeepLevelLinkerTTCMutSetAdd(id, element.id);
   }
   public void Remove(EmberDeepLevelLinkerTTC element) {
-    root.EffectEmberDeepLevelLinkerTTCMutSetRemove(id, element.id);
+      root.EffectEmberDeepLevelLinkerTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectEmberDeepLevelLinkerTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectEmberDeepLevelLinkerTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectEmberDeepLevelLinkerTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(EmberDeepLevelLinkerTTC element) {

@@ -10,8 +10,11 @@ public struct WaterTTCMutSetDeleteEffect : IWaterTTCMutSetEffect {
     this.id = id;
   }
   int IWaterTTCMutSetEffect.id => id;
-  public void visit(IWaterTTCMutSetEffectVisitor visitor) {
+  public void visitIWaterTTCMutSetEffect(IWaterTTCMutSetEffectVisitor visitor) {
     visitor.visitWaterTTCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitWaterTTCMutSetEffect(this);
   }
 }
 

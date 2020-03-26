@@ -13,11 +13,11 @@ public class StoneTTC {
     this.id = id;
   }
   public StoneTTCIncarnation incarnation { get { return root.GetStoneTTCIncarnation(id); } }
-  public void AddObserver(IStoneTTCEffectObserver observer) {
-    root.AddStoneTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IStoneTTCEffectObserver observer) {
+    broadcaster.AddStoneTTCObserver(id, observer);
   }
-  public void RemoveObserver(IStoneTTCEffectObserver observer) {
-    root.RemoveStoneTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IStoneTTCEffectObserver observer) {
+    broadcaster.RemoveStoneTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectStoneTTCDelete(id);

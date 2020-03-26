@@ -14,24 +14,24 @@ public class CaveWallTTCMutSet {
   public CaveWallTTCMutSetIncarnation incarnation {
     get { return root.GetCaveWallTTCMutSetIncarnation(id); }
   }
-  public void AddObserver(ICaveWallTTCMutSetEffectObserver observer) {
-    root.AddCaveWallTTCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ICaveWallTTCMutSetEffectObserver observer) {
+    broadcaster.AddCaveWallTTCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ICaveWallTTCMutSetEffectObserver observer) {
-    root.RemoveCaveWallTTCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ICaveWallTTCMutSetEffectObserver observer) {
+    broadcaster.RemoveCaveWallTTCMutSetObserver(id, observer);
   }
   public void Add(CaveWallTTC element) {
-    root.EffectCaveWallTTCMutSetAdd(id, element.id);
+      root.EffectCaveWallTTCMutSetAdd(id, element.id);
   }
   public void Remove(CaveWallTTC element) {
-    root.EffectCaveWallTTCMutSetRemove(id, element.id);
+      root.EffectCaveWallTTCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectCaveWallTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectCaveWallTTCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectCaveWallTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(CaveWallTTC element) {

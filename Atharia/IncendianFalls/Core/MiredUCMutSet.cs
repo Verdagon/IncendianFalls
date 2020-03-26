@@ -14,24 +14,24 @@ public class MiredUCMutSet {
   public MiredUCMutSetIncarnation incarnation {
     get { return root.GetMiredUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IMiredUCMutSetEffectObserver observer) {
-    root.AddMiredUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IMiredUCMutSetEffectObserver observer) {
+    broadcaster.AddMiredUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IMiredUCMutSetEffectObserver observer) {
-    root.RemoveMiredUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IMiredUCMutSetEffectObserver observer) {
+    broadcaster.RemoveMiredUCMutSetObserver(id, observer);
   }
   public void Add(MiredUC element) {
-    root.EffectMiredUCMutSetAdd(id, element.id);
+      root.EffectMiredUCMutSetAdd(id, element.id);
   }
   public void Remove(MiredUC element) {
-    root.EffectMiredUCMutSetRemove(id, element.id);
+      root.EffectMiredUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectMiredUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectMiredUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectMiredUCMutSetRemove(id, element);
     }
   }
   public bool Contains(MiredUC element) {

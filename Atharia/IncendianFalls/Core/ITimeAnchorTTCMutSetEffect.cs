@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public interface ITimeAnchorTTCMutSetEffect {
+public interface ITimeAnchorTTCMutSetEffect : IEffect {
   int id { get; }
-  void visit(ITimeAnchorTTCMutSetEffectVisitor visitor);
+  void visitITimeAnchorTTCMutSetEffect(ITimeAnchorTTCMutSetEffectVisitor visitor);
 }
 
 }

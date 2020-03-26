@@ -15,7 +15,7 @@ public class UnitCounteringEventAsIUnitEvent : IUnitEvent {
   public override int GetHashCode() { return GetDeterministicHashCode(); }
          public int GetTime() { return UnitCounteringEventExtensions.GetTime(obj); }
 
-  public void Visit(IUnitEventVisitor visitor) { visitor.Visit(this); }
+  public void VisitIUnitEvent(IUnitEventVisitor visitor) { visitor.VisitIUnitEvent(this); }
 }
 public static class UnitCounteringEventAsIUnitEventCaster {
   public static UnitCounteringEventAsIUnitEvent AsIUnitEvent(this UnitCounteringEvent obj) {

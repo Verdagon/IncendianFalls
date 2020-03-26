@@ -13,11 +13,11 @@ public class ExecutionState {
     this.id = id;
   }
   public ExecutionStateIncarnation incarnation { get { return root.GetExecutionStateIncarnation(id); } }
-  public void AddObserver(IExecutionStateEffectObserver observer) {
-    root.AddExecutionStateObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IExecutionStateEffectObserver observer) {
+    broadcaster.AddExecutionStateObserver(id, observer);
   }
-  public void RemoveObserver(IExecutionStateEffectObserver observer) {
-    root.RemoveExecutionStateObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IExecutionStateEffectObserver observer) {
+    broadcaster.RemoveExecutionStateObserver(id, observer);
   }
   public void Delete() {
     root.EffectExecutionStateDelete(id);

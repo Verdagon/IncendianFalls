@@ -13,11 +13,11 @@ public class SummonAICapabilityUC {
     this.id = id;
   }
   public SummonAICapabilityUCIncarnation incarnation { get { return root.GetSummonAICapabilityUCIncarnation(id); } }
-  public void AddObserver(ISummonAICapabilityUCEffectObserver observer) {
-    root.AddSummonAICapabilityUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ISummonAICapabilityUCEffectObserver observer) {
+    broadcaster.AddSummonAICapabilityUCObserver(id, observer);
   }
-  public void RemoveObserver(ISummonAICapabilityUCEffectObserver observer) {
-    root.RemoveSummonAICapabilityUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ISummonAICapabilityUCEffectObserver observer) {
+    broadcaster.RemoveSummonAICapabilityUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectSummonAICapabilityUCDelete(id);

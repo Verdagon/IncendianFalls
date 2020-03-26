@@ -14,24 +14,24 @@ public class TerrainTileWeakMutSet {
   public TerrainTileWeakMutSetIncarnation incarnation {
     get { return root.GetTerrainTileWeakMutSetIncarnation(id); }
   }
-  public void AddObserver(ITerrainTileWeakMutSetEffectObserver observer) {
-    root.AddTerrainTileWeakMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITerrainTileWeakMutSetEffectObserver observer) {
+    broadcaster.AddTerrainTileWeakMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ITerrainTileWeakMutSetEffectObserver observer) {
-    root.RemoveTerrainTileWeakMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITerrainTileWeakMutSetEffectObserver observer) {
+    broadcaster.RemoveTerrainTileWeakMutSetObserver(id, observer);
   }
   public void Add(TerrainTile element) {
-    root.EffectTerrainTileWeakMutSetAdd(id, element.id);
+      root.EffectTerrainTileWeakMutSetAdd(id, element.id);
   }
   public void Remove(TerrainTile element) {
-    root.EffectTerrainTileWeakMutSetRemove(id, element.id);
+      root.EffectTerrainTileWeakMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectTerrainTileWeakMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectTerrainTileWeakMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectTerrainTileWeakMutSetRemove(id, element);
     }
   }
   public bool Contains(TerrainTile element) {

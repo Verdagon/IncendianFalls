@@ -14,24 +14,24 @@ public class ArmorStrongMutSet {
   public ArmorStrongMutSetIncarnation incarnation {
     get { return root.GetArmorStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(IArmorStrongMutSetEffectObserver observer) {
-    root.AddArmorStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IArmorStrongMutSetEffectObserver observer) {
+    broadcaster.AddArmorStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IArmorStrongMutSetEffectObserver observer) {
-    root.RemoveArmorStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IArmorStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveArmorStrongMutSetObserver(id, observer);
   }
   public void Add(Armor element) {
-    root.EffectArmorStrongMutSetAdd(id, element.id);
+      root.EffectArmorStrongMutSetAdd(id, element.id);
   }
   public void Remove(Armor element) {
-    root.EffectArmorStrongMutSetRemove(id, element.id);
+      root.EffectArmorStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectArmorStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectArmorStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectArmorStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(Armor element) {

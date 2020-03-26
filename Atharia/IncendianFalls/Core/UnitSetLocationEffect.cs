@@ -16,8 +16,11 @@ public struct UnitSetLocationEffect : IUnitEffect {
   }
   int IUnitEffect.id => id;
 
-  public void visit(IUnitEffectVisitor visitor) {
+  public void visitIUnitEffect(IUnitEffectVisitor visitor) {
     visitor.visitUnitSetLocationEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitUnitEffect(this);
   }
 }
 

@@ -10,6 +10,10 @@ public class HealthPotionStrongMutSetIncarnation {
   public HealthPotionStrongMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public HealthPotionStrongMutSetIncarnation Copy() {
+    return new HealthPotionStrongMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

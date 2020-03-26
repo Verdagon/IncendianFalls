@@ -13,11 +13,11 @@ public class Wat {
     this.id = id;
   }
   public WatIncarnation incarnation { get { return root.GetWatIncarnation(id); } }
-  public void AddObserver(IWatEffectObserver observer) {
-    root.AddWatObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IWatEffectObserver observer) {
+    broadcaster.AddWatObserver(id, observer);
   }
-  public void RemoveObserver(IWatEffectObserver observer) {
-    root.RemoveWatObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IWatEffectObserver observer) {
+    broadcaster.RemoveWatObserver(id, observer);
   }
   public void Delete() {
     root.EffectWatDelete(id);

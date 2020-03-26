@@ -10,8 +10,11 @@ public struct TreeTTCMutSetDeleteEffect : ITreeTTCMutSetEffect {
     this.id = id;
   }
   int ITreeTTCMutSetEffect.id => id;
-  public void visit(ITreeTTCMutSetEffectVisitor visitor) {
+  public void visitITreeTTCMutSetEffect(ITreeTTCMutSetEffectVisitor visitor) {
     visitor.visitTreeTTCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTreeTTCMutSetEffect(this);
   }
 }
 

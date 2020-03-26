@@ -13,11 +13,11 @@ public class IncendianFallsLevelLinkerTTC {
     this.id = id;
   }
   public IncendianFallsLevelLinkerTTCIncarnation incarnation { get { return root.GetIncendianFallsLevelLinkerTTCIncarnation(id); } }
-  public void AddObserver(IIncendianFallsLevelLinkerTTCEffectObserver observer) {
-    root.AddIncendianFallsLevelLinkerTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IIncendianFallsLevelLinkerTTCEffectObserver observer) {
+    broadcaster.AddIncendianFallsLevelLinkerTTCObserver(id, observer);
   }
-  public void RemoveObserver(IIncendianFallsLevelLinkerTTCEffectObserver observer) {
-    root.RemoveIncendianFallsLevelLinkerTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IIncendianFallsLevelLinkerTTCEffectObserver observer) {
+    broadcaster.RemoveIncendianFallsLevelLinkerTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectIncendianFallsLevelLinkerTTCDelete(id);

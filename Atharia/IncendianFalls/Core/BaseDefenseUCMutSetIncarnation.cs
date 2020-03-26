@@ -10,6 +10,10 @@ public class BaseDefenseUCMutSetIncarnation {
   public BaseDefenseUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public BaseDefenseUCMutSetIncarnation Copy() {
+    return new BaseDefenseUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

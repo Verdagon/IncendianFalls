@@ -18,6 +18,10 @@ object MutSetIncarnation {
          |  public ${setName}Incarnation(SortedSet<int> set) {
          |    this.set = new SortedSet<int>(set);
          |  }
+         |
+         |  public ${setName}Incarnation Copy() {
+         |    return new ${setName}Incarnation(new SortedSet<int>(set));
+         |  }
          |}
          |""".stripMargin
 

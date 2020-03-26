@@ -10,6 +10,10 @@ public class CaveWallTTCMutSetIncarnation {
   public CaveWallTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public CaveWallTTCMutSetIncarnation Copy() {
+    return new CaveWallTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

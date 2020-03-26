@@ -16,8 +16,11 @@ public struct FireBombTTCSetTurnsUntilExplosionEffect : IFireBombTTCEffect {
   }
   int IFireBombTTCEffect.id => id;
 
-  public void visit(IFireBombTTCEffectVisitor visitor) {
+  public void visitIFireBombTTCEffect(IFireBombTTCEffectVisitor visitor) {
     visitor.visitFireBombTTCSetTurnsUntilExplosionEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitFireBombTTCEffect(this);
   }
 }
 

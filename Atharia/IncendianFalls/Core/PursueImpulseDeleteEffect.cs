@@ -11,8 +11,11 @@ public struct PursueImpulseDeleteEffect : IPursueImpulseEffect {
     this.id = id;
   }
   int IPursueImpulseEffect.id => id;
-  public void visit(IPursueImpulseEffectVisitor visitor) {
+  public void visitIPursueImpulseEffect(IPursueImpulseEffectVisitor visitor) {
     visitor.visitPursueImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitPursueImpulseEffect(this);
   }
 }
 

@@ -10,6 +10,10 @@ public class RavaNestTTCMutSetIncarnation {
   public RavaNestTTCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public RavaNestTTCMutSetIncarnation Copy() {
+    return new RavaNestTTCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

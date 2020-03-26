@@ -14,24 +14,24 @@ public class TemporaryCloneAICapabilityUCMutSet {
   public TemporaryCloneAICapabilityUCMutSetIncarnation incarnation {
     get { return root.GetTemporaryCloneAICapabilityUCMutSetIncarnation(id); }
   }
-  public void AddObserver(ITemporaryCloneAICapabilityUCMutSetEffectObserver observer) {
-    root.AddTemporaryCloneAICapabilityUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITemporaryCloneAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.AddTemporaryCloneAICapabilityUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(ITemporaryCloneAICapabilityUCMutSetEffectObserver observer) {
-    root.RemoveTemporaryCloneAICapabilityUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITemporaryCloneAICapabilityUCMutSetEffectObserver observer) {
+    broadcaster.RemoveTemporaryCloneAICapabilityUCMutSetObserver(id, observer);
   }
   public void Add(TemporaryCloneAICapabilityUC element) {
-    root.EffectTemporaryCloneAICapabilityUCMutSetAdd(id, element.id);
+      root.EffectTemporaryCloneAICapabilityUCMutSetAdd(id, element.id);
   }
   public void Remove(TemporaryCloneAICapabilityUC element) {
-    root.EffectTemporaryCloneAICapabilityUCMutSetRemove(id, element.id);
+      root.EffectTemporaryCloneAICapabilityUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectTemporaryCloneAICapabilityUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectTemporaryCloneAICapabilityUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectTemporaryCloneAICapabilityUCMutSetRemove(id, element);
     }
   }
   public bool Contains(TemporaryCloneAICapabilityUC element) {

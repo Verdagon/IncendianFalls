@@ -14,24 +14,24 @@ public class DefyingUCMutSet {
   public DefyingUCMutSetIncarnation incarnation {
     get { return root.GetDefyingUCMutSetIncarnation(id); }
   }
-  public void AddObserver(IDefyingUCMutSetEffectObserver observer) {
-    root.AddDefyingUCMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IDefyingUCMutSetEffectObserver observer) {
+    broadcaster.AddDefyingUCMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IDefyingUCMutSetEffectObserver observer) {
-    root.RemoveDefyingUCMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IDefyingUCMutSetEffectObserver observer) {
+    broadcaster.RemoveDefyingUCMutSetObserver(id, observer);
   }
   public void Add(DefyingUC element) {
-    root.EffectDefyingUCMutSetAdd(id, element.id);
+      root.EffectDefyingUCMutSetAdd(id, element.id);
   }
   public void Remove(DefyingUC element) {
-    root.EffectDefyingUCMutSetRemove(id, element.id);
+      root.EffectDefyingUCMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectDefyingUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectDefyingUCMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectDefyingUCMutSetRemove(id, element);
     }
   }
   public bool Contains(DefyingUC element) {

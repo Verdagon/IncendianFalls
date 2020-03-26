@@ -11,6 +11,10 @@ public class IRequestMutListIncarnation {
   public IRequestMutListIncarnation(List<IRequest> list) {
     this.list = list;
   }
+
+  public IRequestMutListIncarnation Copy() {
+    return new IRequestMutListIncarnation(new List<IRequest>(list));
+  }
 }
          
 }

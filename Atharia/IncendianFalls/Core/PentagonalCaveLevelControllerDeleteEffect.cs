@@ -11,8 +11,11 @@ public struct PentagonalCaveLevelControllerDeleteEffect : IPentagonalCaveLevelCo
     this.id = id;
   }
   int IPentagonalCaveLevelControllerEffect.id => id;
-  public void visit(IPentagonalCaveLevelControllerEffectVisitor visitor) {
+  public void visitIPentagonalCaveLevelControllerEffect(IPentagonalCaveLevelControllerEffectVisitor visitor) {
     visitor.visitPentagonalCaveLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitPentagonalCaveLevelControllerEffect(this);
   }
 }
 

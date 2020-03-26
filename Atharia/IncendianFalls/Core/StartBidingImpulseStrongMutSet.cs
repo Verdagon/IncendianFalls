@@ -14,24 +14,24 @@ public class StartBidingImpulseStrongMutSet {
   public StartBidingImpulseStrongMutSetIncarnation incarnation {
     get { return root.GetStartBidingImpulseStrongMutSetIncarnation(id); }
   }
-  public void AddObserver(IStartBidingImpulseStrongMutSetEffectObserver observer) {
-    root.AddStartBidingImpulseStrongMutSetObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IStartBidingImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.AddStartBidingImpulseStrongMutSetObserver(id, observer);
   }
-  public void RemoveObserver(IStartBidingImpulseStrongMutSetEffectObserver observer) {
-    root.RemoveStartBidingImpulseStrongMutSetObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IStartBidingImpulseStrongMutSetEffectObserver observer) {
+    broadcaster.RemoveStartBidingImpulseStrongMutSetObserver(id, observer);
   }
   public void Add(StartBidingImpulse element) {
-    root.EffectStartBidingImpulseStrongMutSetAdd(id, element.id);
+      root.EffectStartBidingImpulseStrongMutSetAdd(id, element.id);
   }
   public void Remove(StartBidingImpulse element) {
-    root.EffectStartBidingImpulseStrongMutSetRemove(id, element.id);
+      root.EffectStartBidingImpulseStrongMutSetRemove(id, element.id);
   }
   public void Delete() {
     root.EffectStartBidingImpulseStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var elementId in new List<int>(incarnation.set)) {
-      root.EffectStartBidingImpulseStrongMutSetRemove(id, elementId);
+    foreach (var element in new List<int>(incarnation.set)) {
+      root.EffectStartBidingImpulseStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(StartBidingImpulse element) {

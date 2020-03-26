@@ -10,8 +10,11 @@ public struct TimeAnchorTTCMutSetDeleteEffect : ITimeAnchorTTCMutSetEffect {
     this.id = id;
   }
   int ITimeAnchorTTCMutSetEffect.id => id;
-  public void visit(ITimeAnchorTTCMutSetEffectVisitor visitor) {
+  public void visitITimeAnchorTTCMutSetEffect(ITimeAnchorTTCMutSetEffectVisitor visitor) {
     visitor.visitTimeAnchorTTCMutSetDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitTimeAnchorTTCMutSetEffect(this);
   }
 }
 

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public interface IStartBidingImpulseEffect {
+public interface IStartBidingImpulseEffect : IEffect {
   int id { get; }
-  void visit(IStartBidingImpulseEffectVisitor visitor);
+  void visitIStartBidingImpulseEffect(IStartBidingImpulseEffectVisitor visitor);
 }
        
 }

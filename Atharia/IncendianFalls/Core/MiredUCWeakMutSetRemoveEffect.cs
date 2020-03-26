@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct MiredUCWeakMutSetRemoveEffect : IMiredUCWeakMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public MiredUCWeakMutSetRemoveEffect(int id, int elementId) {
+  public readonly int element;
+  public MiredUCWeakMutSetRemoveEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IMiredUCWeakMutSetEffect.id => id;
-  public void visit(IMiredUCWeakMutSetEffectVisitor visitor) {
+  public void visitIMiredUCWeakMutSetEffect(IMiredUCWeakMutSetEffectVisitor visitor) {
     visitor.visitMiredUCWeakMutSetRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitMiredUCWeakMutSetEffect(this);
   }
 }
 

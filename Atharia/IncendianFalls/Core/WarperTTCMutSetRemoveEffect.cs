@@ -6,14 +6,17 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public struct WarperTTCMutSetRemoveEffect : IWarperTTCMutSetEffect {
   public readonly int id;
-  public readonly int elementId;
-  public WarperTTCMutSetRemoveEffect(int id, int elementId) {
+  public readonly int element;
+  public WarperTTCMutSetRemoveEffect(int id, int element) {
     this.id = id;
-    this.elementId = elementId;
+    this.element = element;
   }
   int IWarperTTCMutSetEffect.id => id;
-  public void visit(IWarperTTCMutSetEffectVisitor visitor) {
+  public void visitIWarperTTCMutSetEffect(IWarperTTCMutSetEffectVisitor visitor) {
     visitor.visitWarperTTCMutSetRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitWarperTTCMutSetEffect(this);
   }
 }
 

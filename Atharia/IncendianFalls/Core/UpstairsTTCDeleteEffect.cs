@@ -11,8 +11,11 @@ public struct UpStairsTTCDeleteEffect : IUpStairsTTCEffect {
     this.id = id;
   }
   int IUpStairsTTCEffect.id => id;
-  public void visit(IUpStairsTTCEffectVisitor visitor) {
+  public void visitIUpStairsTTCEffect(IUpStairsTTCEffectVisitor visitor) {
     visitor.visitUpStairsTTCDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitUpStairsTTCEffect(this);
   }
 }
 

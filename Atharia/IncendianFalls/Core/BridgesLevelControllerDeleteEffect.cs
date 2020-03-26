@@ -11,8 +11,11 @@ public struct BridgesLevelControllerDeleteEffect : IBridgesLevelControllerEffect
     this.id = id;
   }
   int IBridgesLevelControllerEffect.id => id;
-  public void visit(IBridgesLevelControllerEffectVisitor visitor) {
+  public void visitIBridgesLevelControllerEffect(IBridgesLevelControllerEffectVisitor visitor) {
     visitor.visitBridgesLevelControllerDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitBridgesLevelControllerEffect(this);
   }
 }
 

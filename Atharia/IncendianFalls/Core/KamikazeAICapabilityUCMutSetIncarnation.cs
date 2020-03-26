@@ -10,6 +10,10 @@ public class KamikazeAICapabilityUCMutSetIncarnation {
   public KamikazeAICapabilityUCMutSetIncarnation(SortedSet<int> set) {
     this.set = new SortedSet<int>(set);
   }
+
+  public KamikazeAICapabilityUCMutSetIncarnation Copy() {
+    return new KamikazeAICapabilityUCMutSetIncarnation(new SortedSet<int>(set));
+  }
 }
 
 }

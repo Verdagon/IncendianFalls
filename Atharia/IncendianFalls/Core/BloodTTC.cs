@@ -13,11 +13,11 @@ public class BloodTTC {
     this.id = id;
   }
   public BloodTTCIncarnation incarnation { get { return root.GetBloodTTCIncarnation(id); } }
-  public void AddObserver(IBloodTTCEffectObserver observer) {
-    root.AddBloodTTCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IBloodTTCEffectObserver observer) {
+    broadcaster.AddBloodTTCObserver(id, observer);
   }
-  public void RemoveObserver(IBloodTTCEffectObserver observer) {
-    root.RemoveBloodTTCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IBloodTTCEffectObserver observer) {
+    broadcaster.RemoveBloodTTCObserver(id, observer);
   }
   public void Delete() {
     root.EffectBloodTTCDelete(id);

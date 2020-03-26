@@ -11,8 +11,11 @@ public struct FireImpulseDeleteEffect : IFireImpulseEffect {
     this.id = id;
   }
   int IFireImpulseEffect.id => id;
-  public void visit(IFireImpulseEffectVisitor visitor) {
+  public void visitIFireImpulseEffect(IFireImpulseEffectVisitor visitor) {
     visitor.visitFireImpulseDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitFireImpulseEffect(this);
   }
 }
 

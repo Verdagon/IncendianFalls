@@ -13,11 +13,11 @@ public class DoomedUC {
     this.id = id;
   }
   public DoomedUCIncarnation incarnation { get { return root.GetDoomedUCIncarnation(id); } }
-  public void AddObserver(IDoomedUCEffectObserver observer) {
-    root.AddDoomedUCObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IDoomedUCEffectObserver observer) {
+    broadcaster.AddDoomedUCObserver(id, observer);
   }
-  public void RemoveObserver(IDoomedUCEffectObserver observer) {
-    root.RemoveDoomedUCObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IDoomedUCEffectObserver observer) {
+    broadcaster.RemoveDoomedUCObserver(id, observer);
   }
   public void Delete() {
     root.EffectDoomedUCDelete(id);
