@@ -12,6 +12,5 @@ namespace IncendianFalls {
         SetupGauntletGameRequest request) {
       return SetupGauntletGame.SetupGame(context, out superstate, request.randomSeed, request.squareLevelsOnly);
     }
-
   }
 }

@@ -13,7 +13,7 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static bool Enact(
+    public static Void Enact(
         this ContinueBidingImpulse obj,
         Game game,
         Superstate superstate,
@@ -23,7 +23,7 @@ namespace Atharia.Model {
       Asserts.Assert(capability.Exists());
       capability.charge = capability.charge + 1;
       unit.nextActionTime = unit.nextActionTime + unit.CalculateCombatTimeCost(600);
-      return false;
+      return new Atharia.Model.Void();
     }
   }
 }

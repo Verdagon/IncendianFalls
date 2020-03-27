@@ -15,7 +15,7 @@ mut struct AttackAICapabilityUC {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool {
+  : Void {
     AttackAICapabilityUCExtensions.PreAct
   }
   fn ProduceImpulse(
@@ -77,7 +77,7 @@ mut struct PursueImpulse {
       this: PursueImpulse overrides IImpulse,
       game: Game,
       superstate: $Superstate,
-      unit: Unit): Bool {
+      unit: Unit): Void {
     PursueImpulseExtensions.Enact
   }
 }
@@ -99,7 +99,7 @@ mut struct AttackImpulse {
       this: AttackImpulse overrides IImpulse,
       game: Game,
       superstate: $Superstate,
-      unit: Unit): Bool {
+      unit: Unit): Void {
     AttackImpulseExtensions.Enact
   }
 }

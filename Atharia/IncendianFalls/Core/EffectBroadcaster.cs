@@ -247,6 +247,12 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly SortedDictionary<int, List<IWatEffectObserver>> observersForWat =
       new SortedDictionary<int, List<IWatEffectObserver>>();
 
+  readonly SortedDictionary<int, List<IIPreActingUCWeakMutBunchEffectObserver>> observersForIPreActingUCWeakMutBunch =
+      new SortedDictionary<int, List<IIPreActingUCWeakMutBunchEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IIPostActingUCWeakMutBunchEffectObserver>> observersForIPostActingUCWeakMutBunch =
+      new SortedDictionary<int, List<IIPostActingUCWeakMutBunchEffectObserver>>();
+
   readonly SortedDictionary<int, List<IIImpulseStrongMutBunchEffectObserver>> observersForIImpulseStrongMutBunch =
       new SortedDictionary<int, List<IIImpulseStrongMutBunchEffectObserver>>();
 
@@ -292,15 +298,6 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>> observersForGauntletLevelController =
       new SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>>();
 
-  readonly SortedDictionary<int, List<IExecutionStateEffectObserver>> observersForExecutionState =
-      new SortedDictionary<int, List<IExecutionStateEffectObserver>>();
-
-  readonly SortedDictionary<int, List<IIPostActingUCWeakMutBunchEffectObserver>> observersForIPostActingUCWeakMutBunch =
-      new SortedDictionary<int, List<IIPostActingUCWeakMutBunchEffectObserver>>();
-
-  readonly SortedDictionary<int, List<IIPreActingUCWeakMutBunchEffectObserver>> observersForIPreActingUCWeakMutBunch =
-      new SortedDictionary<int, List<IIPreActingUCWeakMutBunchEffectObserver>>();
-
   readonly SortedDictionary<int, List<IGameEffectObserver>> observersForGame =
       new SortedDictionary<int, List<IGameEffectObserver>>();
 
@@ -340,53 +337,14 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly SortedDictionary<int, List<IAncientTownLevelControllerEffectObserver>> observersForAncientTownLevelController =
       new SortedDictionary<int, List<IAncientTownLevelControllerEffectObserver>>();
 
-  readonly SortedDictionary<int, List<IIGameEventMutListEffectObserver>> observersForIGameEventMutList =
-      new SortedDictionary<int, List<IIGameEventMutListEffectObserver>>();
-
-  readonly SortedDictionary<int, List<IITerrainTileEventMutListEffectObserver>> observersForITerrainTileEventMutList =
-      new SortedDictionary<int, List<IITerrainTileEventMutListEffectObserver>>();
-
   readonly SortedDictionary<int, List<ILocationMutListEffectObserver>> observersForLocationMutList =
       new SortedDictionary<int, List<ILocationMutListEffectObserver>>();
 
   readonly SortedDictionary<int, List<IIRequestMutListEffectObserver>> observersForIRequestMutList =
       new SortedDictionary<int, List<IIRequestMutListEffectObserver>>();
 
-  readonly SortedDictionary<int, List<IIUnitEventMutListEffectObserver>> observersForIUnitEventMutList =
-      new SortedDictionary<int, List<IIUnitEventMutListEffectObserver>>();
-
   readonly Dictionary<int, List<ILevelMutSetEffectObserver>> observersForLevelMutSet =
       new Dictionary<int, List<ILevelMutSetEffectObserver>>();
-
-  readonly Dictionary<int, List<IUnitWeakMutSetEffectObserver>> observersForUnitWeakMutSet =
-      new Dictionary<int, List<IUnitWeakMutSetEffectObserver>>();
-
-  readonly Dictionary<int, List<ITerrainTileWeakMutSetEffectObserver>> observersForTerrainTileWeakMutSet =
-      new Dictionary<int, List<ITerrainTileWeakMutSetEffectObserver>>();
-
-  readonly Dictionary<int, List<IDoomedUCWeakMutSetEffectObserver>> observersForDoomedUCWeakMutSet =
-      new Dictionary<int, List<IDoomedUCWeakMutSetEffectObserver>>();
-
-  readonly Dictionary<int, List<IMiredUCWeakMutSetEffectObserver>> observersForMiredUCWeakMutSet =
-      new Dictionary<int, List<IMiredUCWeakMutSetEffectObserver>>();
-
-  readonly Dictionary<int, List<IInvincibilityUCWeakMutSetEffectObserver>> observersForInvincibilityUCWeakMutSet =
-      new Dictionary<int, List<IInvincibilityUCWeakMutSetEffectObserver>>();
-
-  readonly Dictionary<int, List<IDefyingUCWeakMutSetEffectObserver>> observersForDefyingUCWeakMutSet =
-      new Dictionary<int, List<IDefyingUCWeakMutSetEffectObserver>>();
-
-  readonly Dictionary<int, List<ICounteringUCWeakMutSetEffectObserver>> observersForCounteringUCWeakMutSet =
-      new Dictionary<int, List<ICounteringUCWeakMutSetEffectObserver>>();
-
-  readonly Dictionary<int, List<IAttackAICapabilityUCWeakMutSetEffectObserver>> observersForAttackAICapabilityUCWeakMutSet =
-      new Dictionary<int, List<IAttackAICapabilityUCWeakMutSetEffectObserver>>();
-
-  readonly Dictionary<int, List<ILightningChargedUCWeakMutSetEffectObserver>> observersForLightningChargedUCWeakMutSet =
-      new Dictionary<int, List<ILightningChargedUCWeakMutSetEffectObserver>>();
-
-  readonly Dictionary<int, List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver>> observersForTimeCloneAICapabilityUCWeakMutSet =
-      new Dictionary<int, List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver>>();
 
   readonly Dictionary<int, List<IManaPotionStrongMutSetEffectObserver>> observersForManaPotionStrongMutSet =
       new Dictionary<int, List<IManaPotionStrongMutSetEffectObserver>>();
@@ -462,6 +420,30 @@ public class EffectBroadcaster : IEffectVisitor {
 
   readonly Dictionary<int, List<IFireBombImpulseStrongMutSetEffectObserver>> observersForFireBombImpulseStrongMutSet =
       new Dictionary<int, List<IFireBombImpulseStrongMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<ILightningChargedUCWeakMutSetEffectObserver>> observersForLightningChargedUCWeakMutSet =
+      new Dictionary<int, List<ILightningChargedUCWeakMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver>> observersForTimeCloneAICapabilityUCWeakMutSet =
+      new Dictionary<int, List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IDoomedUCWeakMutSetEffectObserver>> observersForDoomedUCWeakMutSet =
+      new Dictionary<int, List<IDoomedUCWeakMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IMiredUCWeakMutSetEffectObserver>> observersForMiredUCWeakMutSet =
+      new Dictionary<int, List<IMiredUCWeakMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IInvincibilityUCWeakMutSetEffectObserver>> observersForInvincibilityUCWeakMutSet =
+      new Dictionary<int, List<IInvincibilityUCWeakMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IDefyingUCWeakMutSetEffectObserver>> observersForDefyingUCWeakMutSet =
+      new Dictionary<int, List<IDefyingUCWeakMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<ICounteringUCWeakMutSetEffectObserver>> observersForCounteringUCWeakMutSet =
+      new Dictionary<int, List<ICounteringUCWeakMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IAttackAICapabilityUCWeakMutSetEffectObserver>> observersForAttackAICapabilityUCWeakMutSet =
+      new Dictionary<int, List<IAttackAICapabilityUCWeakMutSetEffectObserver>>();
 
   readonly Dictionary<int, List<IUnitMutSetEffectObserver>> observersForUnitMutSet =
       new Dictionary<int, List<IUnitMutSetEffectObserver>>();
@@ -2899,6 +2881,62 @@ public class EffectBroadcaster : IEffectVisitor {
     }
   }
 
+  public void visitIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffect effect) {
+    if (observersForIPreActingUCWeakMutBunch.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IIPreActingUCWeakMutBunchEffectObserver>(observers)) {
+        observer.OnIPreActingUCWeakMutBunchEffect(effect);
+      }
+    }
+  }
+  public void AddIPreActingUCWeakMutBunchObserver(int id, IIPreActingUCWeakMutBunchEffectObserver observer) {
+    List<IIPreActingUCWeakMutBunchEffectObserver> obsies;
+    if (!observersForIPreActingUCWeakMutBunch.TryGetValue(id, out obsies)) {
+      obsies = new List<IIPreActingUCWeakMutBunchEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForIPreActingUCWeakMutBunch[id] = obsies;
+  }
+
+  public void RemoveIPreActingUCWeakMutBunchObserver(int id, IIPreActingUCWeakMutBunchEffectObserver observer) {
+    if (observersForIPreActingUCWeakMutBunch.ContainsKey(id)) {
+      var list = observersForIPreActingUCWeakMutBunch[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForIPreActingUCWeakMutBunch.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitIPostActingUCWeakMutBunchEffect(IIPostActingUCWeakMutBunchEffect effect) {
+    if (observersForIPostActingUCWeakMutBunch.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IIPostActingUCWeakMutBunchEffectObserver>(observers)) {
+        observer.OnIPostActingUCWeakMutBunchEffect(effect);
+      }
+    }
+  }
+  public void AddIPostActingUCWeakMutBunchObserver(int id, IIPostActingUCWeakMutBunchEffectObserver observer) {
+    List<IIPostActingUCWeakMutBunchEffectObserver> obsies;
+    if (!observersForIPostActingUCWeakMutBunch.TryGetValue(id, out obsies)) {
+      obsies = new List<IIPostActingUCWeakMutBunchEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForIPostActingUCWeakMutBunch[id] = obsies;
+  }
+
+  public void RemoveIPostActingUCWeakMutBunchObserver(int id, IIPostActingUCWeakMutBunchEffectObserver observer) {
+    if (observersForIPostActingUCWeakMutBunch.ContainsKey(id)) {
+      var list = observersForIPostActingUCWeakMutBunch[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForIPostActingUCWeakMutBunch.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
   public void visitIImpulseStrongMutBunchEffect(IIImpulseStrongMutBunchEffect effect) {
     if (observersForIImpulseStrongMutBunch.TryGetValue(effect.id, out var observers)) {
       foreach (var observer in new List<IIImpulseStrongMutBunchEffectObserver>(observers)) {
@@ -3319,90 +3357,6 @@ public class EffectBroadcaster : IEffectVisitor {
     }
   }
 
-  public void visitExecutionStateEffect(IExecutionStateEffect effect) {
-    if (observersForExecutionState.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<IExecutionStateEffectObserver>(observers)) {
-        observer.OnExecutionStateEffect(effect);
-      }
-    }
-  }
-  public void AddExecutionStateObserver(int id, IExecutionStateEffectObserver observer) {
-    List<IExecutionStateEffectObserver> obsies;
-    if (!observersForExecutionState.TryGetValue(id, out obsies)) {
-      obsies = new List<IExecutionStateEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForExecutionState[id] = obsies;
-  }
-
-  public void RemoveExecutionStateObserver(int id, IExecutionStateEffectObserver observer) {
-    if (observersForExecutionState.ContainsKey(id)) {
-      var list = observersForExecutionState[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForExecutionState.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
-  public void visitIPostActingUCWeakMutBunchEffect(IIPostActingUCWeakMutBunchEffect effect) {
-    if (observersForIPostActingUCWeakMutBunch.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<IIPostActingUCWeakMutBunchEffectObserver>(observers)) {
-        observer.OnIPostActingUCWeakMutBunchEffect(effect);
-      }
-    }
-  }
-  public void AddIPostActingUCWeakMutBunchObserver(int id, IIPostActingUCWeakMutBunchEffectObserver observer) {
-    List<IIPostActingUCWeakMutBunchEffectObserver> obsies;
-    if (!observersForIPostActingUCWeakMutBunch.TryGetValue(id, out obsies)) {
-      obsies = new List<IIPostActingUCWeakMutBunchEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForIPostActingUCWeakMutBunch[id] = obsies;
-  }
-
-  public void RemoveIPostActingUCWeakMutBunchObserver(int id, IIPostActingUCWeakMutBunchEffectObserver observer) {
-    if (observersForIPostActingUCWeakMutBunch.ContainsKey(id)) {
-      var list = observersForIPostActingUCWeakMutBunch[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForIPostActingUCWeakMutBunch.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
-  public void visitIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffect effect) {
-    if (observersForIPreActingUCWeakMutBunch.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<IIPreActingUCWeakMutBunchEffectObserver>(observers)) {
-        observer.OnIPreActingUCWeakMutBunchEffect(effect);
-      }
-    }
-  }
-  public void AddIPreActingUCWeakMutBunchObserver(int id, IIPreActingUCWeakMutBunchEffectObserver observer) {
-    List<IIPreActingUCWeakMutBunchEffectObserver> obsies;
-    if (!observersForIPreActingUCWeakMutBunch.TryGetValue(id, out obsies)) {
-      obsies = new List<IIPreActingUCWeakMutBunchEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForIPreActingUCWeakMutBunch[id] = obsies;
-  }
-
-  public void RemoveIPreActingUCWeakMutBunchObserver(int id, IIPreActingUCWeakMutBunchEffectObserver observer) {
-    if (observersForIPreActingUCWeakMutBunch.ContainsKey(id)) {
-      var list = observersForIPreActingUCWeakMutBunch[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForIPreActingUCWeakMutBunch.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
   public void visitGameEffect(IGameEffect effect) {
     if (observersForGame.TryGetValue(effect.id, out var observers)) {
       foreach (var observer in new List<IGameEffectObserver>(observers)) {
@@ -3767,60 +3721,6 @@ public class EffectBroadcaster : IEffectVisitor {
     }
   }
 
-    public void visitIGameEventMutListEffect(IIGameEventMutListEffect effect) {
-      if (observersForIGameEventMutList.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<IIGameEventMutListEffectObserver>(observers)) {
-          observer.OnIGameEventMutListEffect(effect);
-        }
-      }
-    }
-    public void AddIGameEventMutListObserver(int id, IIGameEventMutListEffectObserver observer) {
-      List<IIGameEventMutListEffectObserver> obsies;
-      if (!observersForIGameEventMutList.TryGetValue(id, out obsies)) {
-        obsies = new List<IIGameEventMutListEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForIGameEventMutList[id] = obsies;
-    }
-    public void RemoveIGameEventMutListObserver(int id, IIGameEventMutListEffectObserver observer) {
-      if (observersForIGameEventMutList.ContainsKey(id)) {
-        var map = observersForIGameEventMutList[id];
-        map.Remove(observer);
-        if (map.Count == 0) {
-          observersForIGameEventMutList.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitITerrainTileEventMutListEffect(IITerrainTileEventMutListEffect effect) {
-      if (observersForITerrainTileEventMutList.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<IITerrainTileEventMutListEffectObserver>(observers)) {
-          observer.OnITerrainTileEventMutListEffect(effect);
-        }
-      }
-    }
-    public void AddITerrainTileEventMutListObserver(int id, IITerrainTileEventMutListEffectObserver observer) {
-      List<IITerrainTileEventMutListEffectObserver> obsies;
-      if (!observersForITerrainTileEventMutList.TryGetValue(id, out obsies)) {
-        obsies = new List<IITerrainTileEventMutListEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForITerrainTileEventMutList[id] = obsies;
-    }
-    public void RemoveITerrainTileEventMutListObserver(int id, IITerrainTileEventMutListEffectObserver observer) {
-      if (observersForITerrainTileEventMutList.ContainsKey(id)) {
-        var map = observersForITerrainTileEventMutList[id];
-        map.Remove(observer);
-        if (map.Count == 0) {
-          observersForITerrainTileEventMutList.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
     public void visitLocationMutListEffect(ILocationMutListEffect effect) {
       if (observersForLocationMutList.TryGetValue(effect.id, out var observers)) {
         foreach (var observer in new List<ILocationMutListEffectObserver>(observers)) {
@@ -3875,33 +3775,6 @@ public class EffectBroadcaster : IEffectVisitor {
       }
     }
 
-    public void visitIUnitEventMutListEffect(IIUnitEventMutListEffect effect) {
-      if (observersForIUnitEventMutList.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<IIUnitEventMutListEffectObserver>(observers)) {
-          observer.OnIUnitEventMutListEffect(effect);
-        }
-      }
-    }
-    public void AddIUnitEventMutListObserver(int id, IIUnitEventMutListEffectObserver observer) {
-      List<IIUnitEventMutListEffectObserver> obsies;
-      if (!observersForIUnitEventMutList.TryGetValue(id, out obsies)) {
-        obsies = new List<IIUnitEventMutListEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForIUnitEventMutList[id] = obsies;
-    }
-    public void RemoveIUnitEventMutListObserver(int id, IIUnitEventMutListEffectObserver observer) {
-      if (observersForIUnitEventMutList.ContainsKey(id)) {
-        var map = observersForIUnitEventMutList[id];
-        map.Remove(observer);
-        if (map.Count == 0) {
-          observersForIUnitEventMutList.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
     public void visitLevelMutSetEffect(ILevelMutSetEffect effect) {
       if (observersForLevelMutSet.TryGetValue(effect.id, out var observers)) {
         foreach (var observer in new List<ILevelMutSetEffectObserver>(observers)) {
@@ -3923,276 +3796,6 @@ public class EffectBroadcaster : IEffectVisitor {
         list.Remove(observer);
         if (list.Count == 0) {
           observersForLevelMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitUnitWeakMutSetEffect(IUnitWeakMutSetEffect effect) {
-      if (observersForUnitWeakMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<IUnitWeakMutSetEffectObserver>(observers)) {
-          observer.OnUnitWeakMutSetEffect(effect);
-        }
-      }
-    }
-    public void AddUnitWeakMutSetObserver(int id, IUnitWeakMutSetEffectObserver observer) {
-      List<IUnitWeakMutSetEffectObserver> obsies;
-      if (!observersForUnitWeakMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IUnitWeakMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForUnitWeakMutSet[id] = obsies;
-    }
-    public void RemoveUnitWeakMutSetObserver(int id, IUnitWeakMutSetEffectObserver observer) {
-      if (observersForUnitWeakMutSet.ContainsKey(id)) {
-        var list = observersForUnitWeakMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForUnitWeakMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitTerrainTileWeakMutSetEffect(ITerrainTileWeakMutSetEffect effect) {
-      if (observersForTerrainTileWeakMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<ITerrainTileWeakMutSetEffectObserver>(observers)) {
-          observer.OnTerrainTileWeakMutSetEffect(effect);
-        }
-      }
-    }
-    public void AddTerrainTileWeakMutSetObserver(int id, ITerrainTileWeakMutSetEffectObserver observer) {
-      List<ITerrainTileWeakMutSetEffectObserver> obsies;
-      if (!observersForTerrainTileWeakMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<ITerrainTileWeakMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForTerrainTileWeakMutSet[id] = obsies;
-    }
-    public void RemoveTerrainTileWeakMutSetObserver(int id, ITerrainTileWeakMutSetEffectObserver observer) {
-      if (observersForTerrainTileWeakMutSet.ContainsKey(id)) {
-        var list = observersForTerrainTileWeakMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForTerrainTileWeakMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitDoomedUCWeakMutSetEffect(IDoomedUCWeakMutSetEffect effect) {
-      if (observersForDoomedUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<IDoomedUCWeakMutSetEffectObserver>(observers)) {
-          observer.OnDoomedUCWeakMutSetEffect(effect);
-        }
-      }
-    }
-    public void AddDoomedUCWeakMutSetObserver(int id, IDoomedUCWeakMutSetEffectObserver observer) {
-      List<IDoomedUCWeakMutSetEffectObserver> obsies;
-      if (!observersForDoomedUCWeakMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IDoomedUCWeakMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForDoomedUCWeakMutSet[id] = obsies;
-    }
-    public void RemoveDoomedUCWeakMutSetObserver(int id, IDoomedUCWeakMutSetEffectObserver observer) {
-      if (observersForDoomedUCWeakMutSet.ContainsKey(id)) {
-        var list = observersForDoomedUCWeakMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForDoomedUCWeakMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitMiredUCWeakMutSetEffect(IMiredUCWeakMutSetEffect effect) {
-      if (observersForMiredUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<IMiredUCWeakMutSetEffectObserver>(observers)) {
-          observer.OnMiredUCWeakMutSetEffect(effect);
-        }
-      }
-    }
-    public void AddMiredUCWeakMutSetObserver(int id, IMiredUCWeakMutSetEffectObserver observer) {
-      List<IMiredUCWeakMutSetEffectObserver> obsies;
-      if (!observersForMiredUCWeakMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IMiredUCWeakMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForMiredUCWeakMutSet[id] = obsies;
-    }
-    public void RemoveMiredUCWeakMutSetObserver(int id, IMiredUCWeakMutSetEffectObserver observer) {
-      if (observersForMiredUCWeakMutSet.ContainsKey(id)) {
-        var list = observersForMiredUCWeakMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForMiredUCWeakMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitInvincibilityUCWeakMutSetEffect(IInvincibilityUCWeakMutSetEffect effect) {
-      if (observersForInvincibilityUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<IInvincibilityUCWeakMutSetEffectObserver>(observers)) {
-          observer.OnInvincibilityUCWeakMutSetEffect(effect);
-        }
-      }
-    }
-    public void AddInvincibilityUCWeakMutSetObserver(int id, IInvincibilityUCWeakMutSetEffectObserver observer) {
-      List<IInvincibilityUCWeakMutSetEffectObserver> obsies;
-      if (!observersForInvincibilityUCWeakMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IInvincibilityUCWeakMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForInvincibilityUCWeakMutSet[id] = obsies;
-    }
-    public void RemoveInvincibilityUCWeakMutSetObserver(int id, IInvincibilityUCWeakMutSetEffectObserver observer) {
-      if (observersForInvincibilityUCWeakMutSet.ContainsKey(id)) {
-        var list = observersForInvincibilityUCWeakMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForInvincibilityUCWeakMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitDefyingUCWeakMutSetEffect(IDefyingUCWeakMutSetEffect effect) {
-      if (observersForDefyingUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<IDefyingUCWeakMutSetEffectObserver>(observers)) {
-          observer.OnDefyingUCWeakMutSetEffect(effect);
-        }
-      }
-    }
-    public void AddDefyingUCWeakMutSetObserver(int id, IDefyingUCWeakMutSetEffectObserver observer) {
-      List<IDefyingUCWeakMutSetEffectObserver> obsies;
-      if (!observersForDefyingUCWeakMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IDefyingUCWeakMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForDefyingUCWeakMutSet[id] = obsies;
-    }
-    public void RemoveDefyingUCWeakMutSetObserver(int id, IDefyingUCWeakMutSetEffectObserver observer) {
-      if (observersForDefyingUCWeakMutSet.ContainsKey(id)) {
-        var list = observersForDefyingUCWeakMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForDefyingUCWeakMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitCounteringUCWeakMutSetEffect(ICounteringUCWeakMutSetEffect effect) {
-      if (observersForCounteringUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<ICounteringUCWeakMutSetEffectObserver>(observers)) {
-          observer.OnCounteringUCWeakMutSetEffect(effect);
-        }
-      }
-    }
-    public void AddCounteringUCWeakMutSetObserver(int id, ICounteringUCWeakMutSetEffectObserver observer) {
-      List<ICounteringUCWeakMutSetEffectObserver> obsies;
-      if (!observersForCounteringUCWeakMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<ICounteringUCWeakMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForCounteringUCWeakMutSet[id] = obsies;
-    }
-    public void RemoveCounteringUCWeakMutSetObserver(int id, ICounteringUCWeakMutSetEffectObserver observer) {
-      if (observersForCounteringUCWeakMutSet.ContainsKey(id)) {
-        var list = observersForCounteringUCWeakMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForCounteringUCWeakMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitAttackAICapabilityUCWeakMutSetEffect(IAttackAICapabilityUCWeakMutSetEffect effect) {
-      if (observersForAttackAICapabilityUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<IAttackAICapabilityUCWeakMutSetEffectObserver>(observers)) {
-          observer.OnAttackAICapabilityUCWeakMutSetEffect(effect);
-        }
-      }
-    }
-    public void AddAttackAICapabilityUCWeakMutSetObserver(int id, IAttackAICapabilityUCWeakMutSetEffectObserver observer) {
-      List<IAttackAICapabilityUCWeakMutSetEffectObserver> obsies;
-      if (!observersForAttackAICapabilityUCWeakMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IAttackAICapabilityUCWeakMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForAttackAICapabilityUCWeakMutSet[id] = obsies;
-    }
-    public void RemoveAttackAICapabilityUCWeakMutSetObserver(int id, IAttackAICapabilityUCWeakMutSetEffectObserver observer) {
-      if (observersForAttackAICapabilityUCWeakMutSet.ContainsKey(id)) {
-        var list = observersForAttackAICapabilityUCWeakMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForAttackAICapabilityUCWeakMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitLightningChargedUCWeakMutSetEffect(ILightningChargedUCWeakMutSetEffect effect) {
-      if (observersForLightningChargedUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<ILightningChargedUCWeakMutSetEffectObserver>(observers)) {
-          observer.OnLightningChargedUCWeakMutSetEffect(effect);
-        }
-      }
-    }
-    public void AddLightningChargedUCWeakMutSetObserver(int id, ILightningChargedUCWeakMutSetEffectObserver observer) {
-      List<ILightningChargedUCWeakMutSetEffectObserver> obsies;
-      if (!observersForLightningChargedUCWeakMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<ILightningChargedUCWeakMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForLightningChargedUCWeakMutSet[id] = obsies;
-    }
-    public void RemoveLightningChargedUCWeakMutSetObserver(int id, ILightningChargedUCWeakMutSetEffectObserver observer) {
-      if (observersForLightningChargedUCWeakMutSet.ContainsKey(id)) {
-        var list = observersForLightningChargedUCWeakMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForLightningChargedUCWeakMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitTimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffect effect) {
-      if (observersForTimeCloneAICapabilityUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver>(observers)) {
-          observer.OnTimeCloneAICapabilityUCWeakMutSetEffect(effect);
-        }
-      }
-    }
-    public void AddTimeCloneAICapabilityUCWeakMutSetObserver(int id, ITimeCloneAICapabilityUCWeakMutSetEffectObserver observer) {
-      List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver> obsies;
-      if (!observersForTimeCloneAICapabilityUCWeakMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForTimeCloneAICapabilityUCWeakMutSet[id] = obsies;
-    }
-    public void RemoveTimeCloneAICapabilityUCWeakMutSetObserver(int id, ITimeCloneAICapabilityUCWeakMutSetEffectObserver observer) {
-      if (observersForTimeCloneAICapabilityUCWeakMutSet.ContainsKey(id)) {
-        var list = observersForTimeCloneAICapabilityUCWeakMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForTimeCloneAICapabilityUCWeakMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");
@@ -4868,6 +4471,222 @@ public class EffectBroadcaster : IEffectVisitor {
         list.Remove(observer);
         if (list.Count == 0) {
           observersForFireBombImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitLightningChargedUCWeakMutSetEffect(ILightningChargedUCWeakMutSetEffect effect) {
+      if (observersForLightningChargedUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<ILightningChargedUCWeakMutSetEffectObserver>(observers)) {
+          observer.OnLightningChargedUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddLightningChargedUCWeakMutSetObserver(int id, ILightningChargedUCWeakMutSetEffectObserver observer) {
+      List<ILightningChargedUCWeakMutSetEffectObserver> obsies;
+      if (!observersForLightningChargedUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ILightningChargedUCWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForLightningChargedUCWeakMutSet[id] = obsies;
+    }
+    public void RemoveLightningChargedUCWeakMutSetObserver(int id, ILightningChargedUCWeakMutSetEffectObserver observer) {
+      if (observersForLightningChargedUCWeakMutSet.ContainsKey(id)) {
+        var list = observersForLightningChargedUCWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForLightningChargedUCWeakMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitTimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffect effect) {
+      if (observersForTimeCloneAICapabilityUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver>(observers)) {
+          observer.OnTimeCloneAICapabilityUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddTimeCloneAICapabilityUCWeakMutSetObserver(int id, ITimeCloneAICapabilityUCWeakMutSetEffectObserver observer) {
+      List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver> obsies;
+      if (!observersForTimeCloneAICapabilityUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ITimeCloneAICapabilityUCWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForTimeCloneAICapabilityUCWeakMutSet[id] = obsies;
+    }
+    public void RemoveTimeCloneAICapabilityUCWeakMutSetObserver(int id, ITimeCloneAICapabilityUCWeakMutSetEffectObserver observer) {
+      if (observersForTimeCloneAICapabilityUCWeakMutSet.ContainsKey(id)) {
+        var list = observersForTimeCloneAICapabilityUCWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForTimeCloneAICapabilityUCWeakMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitDoomedUCWeakMutSetEffect(IDoomedUCWeakMutSetEffect effect) {
+      if (observersForDoomedUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IDoomedUCWeakMutSetEffectObserver>(observers)) {
+          observer.OnDoomedUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddDoomedUCWeakMutSetObserver(int id, IDoomedUCWeakMutSetEffectObserver observer) {
+      List<IDoomedUCWeakMutSetEffectObserver> obsies;
+      if (!observersForDoomedUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IDoomedUCWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForDoomedUCWeakMutSet[id] = obsies;
+    }
+    public void RemoveDoomedUCWeakMutSetObserver(int id, IDoomedUCWeakMutSetEffectObserver observer) {
+      if (observersForDoomedUCWeakMutSet.ContainsKey(id)) {
+        var list = observersForDoomedUCWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForDoomedUCWeakMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitMiredUCWeakMutSetEffect(IMiredUCWeakMutSetEffect effect) {
+      if (observersForMiredUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IMiredUCWeakMutSetEffectObserver>(observers)) {
+          observer.OnMiredUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddMiredUCWeakMutSetObserver(int id, IMiredUCWeakMutSetEffectObserver observer) {
+      List<IMiredUCWeakMutSetEffectObserver> obsies;
+      if (!observersForMiredUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IMiredUCWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForMiredUCWeakMutSet[id] = obsies;
+    }
+    public void RemoveMiredUCWeakMutSetObserver(int id, IMiredUCWeakMutSetEffectObserver observer) {
+      if (observersForMiredUCWeakMutSet.ContainsKey(id)) {
+        var list = observersForMiredUCWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForMiredUCWeakMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitInvincibilityUCWeakMutSetEffect(IInvincibilityUCWeakMutSetEffect effect) {
+      if (observersForInvincibilityUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IInvincibilityUCWeakMutSetEffectObserver>(observers)) {
+          observer.OnInvincibilityUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddInvincibilityUCWeakMutSetObserver(int id, IInvincibilityUCWeakMutSetEffectObserver observer) {
+      List<IInvincibilityUCWeakMutSetEffectObserver> obsies;
+      if (!observersForInvincibilityUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IInvincibilityUCWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForInvincibilityUCWeakMutSet[id] = obsies;
+    }
+    public void RemoveInvincibilityUCWeakMutSetObserver(int id, IInvincibilityUCWeakMutSetEffectObserver observer) {
+      if (observersForInvincibilityUCWeakMutSet.ContainsKey(id)) {
+        var list = observersForInvincibilityUCWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForInvincibilityUCWeakMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitDefyingUCWeakMutSetEffect(IDefyingUCWeakMutSetEffect effect) {
+      if (observersForDefyingUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IDefyingUCWeakMutSetEffectObserver>(observers)) {
+          observer.OnDefyingUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddDefyingUCWeakMutSetObserver(int id, IDefyingUCWeakMutSetEffectObserver observer) {
+      List<IDefyingUCWeakMutSetEffectObserver> obsies;
+      if (!observersForDefyingUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IDefyingUCWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForDefyingUCWeakMutSet[id] = obsies;
+    }
+    public void RemoveDefyingUCWeakMutSetObserver(int id, IDefyingUCWeakMutSetEffectObserver observer) {
+      if (observersForDefyingUCWeakMutSet.ContainsKey(id)) {
+        var list = observersForDefyingUCWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForDefyingUCWeakMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitCounteringUCWeakMutSetEffect(ICounteringUCWeakMutSetEffect effect) {
+      if (observersForCounteringUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<ICounteringUCWeakMutSetEffectObserver>(observers)) {
+          observer.OnCounteringUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddCounteringUCWeakMutSetObserver(int id, ICounteringUCWeakMutSetEffectObserver observer) {
+      List<ICounteringUCWeakMutSetEffectObserver> obsies;
+      if (!observersForCounteringUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ICounteringUCWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForCounteringUCWeakMutSet[id] = obsies;
+    }
+    public void RemoveCounteringUCWeakMutSetObserver(int id, ICounteringUCWeakMutSetEffectObserver observer) {
+      if (observersForCounteringUCWeakMutSet.ContainsKey(id)) {
+        var list = observersForCounteringUCWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForCounteringUCWeakMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitAttackAICapabilityUCWeakMutSetEffect(IAttackAICapabilityUCWeakMutSetEffect effect) {
+      if (observersForAttackAICapabilityUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IAttackAICapabilityUCWeakMutSetEffectObserver>(observers)) {
+          observer.OnAttackAICapabilityUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddAttackAICapabilityUCWeakMutSetObserver(int id, IAttackAICapabilityUCWeakMutSetEffectObserver observer) {
+      List<IAttackAICapabilityUCWeakMutSetEffectObserver> obsies;
+      if (!observersForAttackAICapabilityUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IAttackAICapabilityUCWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForAttackAICapabilityUCWeakMutSet[id] = obsies;
+    }
+    public void RemoveAttackAICapabilityUCWeakMutSetObserver(int id, IAttackAICapabilityUCWeakMutSetEffectObserver observer) {
+      if (observersForAttackAICapabilityUCWeakMutSet.ContainsKey(id)) {
+        var list = observersForAttackAICapabilityUCWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForAttackAICapabilityUCWeakMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");

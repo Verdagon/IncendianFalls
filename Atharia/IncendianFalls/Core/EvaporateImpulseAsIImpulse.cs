@@ -66,7 +66,7 @@ public class EvaporateImpulseAsIImpulse : IImpulse {
   public int GetWeight() {
     return EvaporateImpulseExtensions.GetWeight(obj);
   }
-  public bool Enact(Game game, Superstate superstate, Unit unit) {
+  public Void Enact(Game game, Superstate superstate, Unit unit) {
     return EvaporateImpulseExtensions.Enact(obj, game, superstate, unit);
   }
 

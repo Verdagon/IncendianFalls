@@ -42,6 +42,14 @@ public class Wat {
     if (!root.IImpulseStrongMutBunchExists(impulses.id)) {
       violations.Add("Null constraint violated! Wat#" + id + ".impulses");
     }
+
+    if (!root.IPostActingUCWeakMutBunchExists(blah.id)) {
+      violations.Add("Null constraint violated! Wat#" + id + ".blah");
+    }
+
+    if (!root.IPreActingUCWeakMutBunchExists(bloop.id)) {
+      violations.Add("Null constraint violated! Wat#" + id + ".bloop");
+    }
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
     if (foundIds.Contains(id)) {
@@ -53,6 +61,12 @@ public class Wat {
     }
     if (root.IImpulseStrongMutBunchExists(impulses.id)) {
       impulses.FindReachableObjects(foundIds);
+    }
+    if (root.IPostActingUCWeakMutBunchExists(blah.id)) {
+      blah.FindReachableObjects(foundIds);
+    }
+    if (root.IPreActingUCWeakMutBunchExists(bloop.id)) {
+      bloop.FindReachableObjects(foundIds);
     }
   }
   public bool Is(Wat that) {
@@ -80,6 +94,24 @@ public class Wat {
         throw new Exception("Tried to get member impulses of null!");
       }
       return new IImpulseStrongMutBunch(root, incarnation.impulses);
+    }
+                       }
+  public IPostActingUCWeakMutBunch blah {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member blah of null!");
+      }
+      return new IPostActingUCWeakMutBunch(root, incarnation.blah);
+    }
+                       }
+  public IPreActingUCWeakMutBunch bloop {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member bloop of null!");
+      }
+      return new IPreActingUCWeakMutBunch(root, incarnation.bloop);
     }
                        }
 }

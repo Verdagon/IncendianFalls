@@ -21,7 +21,7 @@ namespace IncendianFalls {
         if (center.distance(new Vec2(0, 0)) <= radius) {
           var tile =
             root.EffectTerrainTileCreate(
-                  root.EffectITerrainTileEventMutListCreate(),
+                  NullITerrainTileEvent.Null,
                   1,
                   ITerrainTileComponentMutBunch.New(root));
           terrain.tiles.Add(loc, tile);

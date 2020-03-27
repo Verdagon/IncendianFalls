@@ -380,30 +380,30 @@ namespace IncendianFalls {
       }
     }
 
-    public (List<IEffect>, string) RequestCancel(int gameId) {
+    //public (List<IEffect>, string) RequestCancel(int gameId) {
 
-      //var rollbackPoint = root.Snapshot();
-      try {
-        var request = new CancelRequest(gameId);
-        broadcastBeforeRequest(request.AsIRequest());
-        context.Flare(GetDeterministicHashCode());
-        var superstate = superstateByGameId[gameId];
-        var  (events, success) = context.root.Transact(delegate () {
-          return CancelRequestExecutor.Execute(context, superstate, request);
-        });
-        context.Flare(success.DStr());
-        broadcastAfterRequest(request.AsIRequest());
-        context.Flare(GetDeterministicHashCode());
-        return (events, success);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
-        //} catch (Exception) {
-        //  Logger.Error("Caught exception, rolling back!");
-        //  root.Revert(rollbackPoint);
-        //  throw;
-      }
-    }
+    //  //var rollbackPoint = root.Snapshot();
+    //  try {
+    //    var request = new CancelRequest(gameId);
+    //    broadcastBeforeRequest(request.AsIRequest());
+    //    context.Flare(GetDeterministicHashCode());
+    //    var superstate = superstateByGameId[gameId];
+    //    var  (events, success) = context.root.Transact(delegate () {
+    //      return CancelRequestExecutor.Execute(context, superstate, request);
+    //    });
+    //    context.Flare(success.DStr());
+    //    broadcastAfterRequest(request.AsIRequest());
+    //    context.Flare(GetDeterministicHashCode());
+    //    return (events, success);
+    //  } catch (Exception e) {
+    //    root.logger.Error(e.Message + " " + e.StackTrace);
+    //    throw e;
+    //    //} catch (Exception) {
+    //    //  Logger.Error("Caught exception, rolling back!");
+    //    //  root.Revert(rollbackPoint);
+    //    //  throw;
+    //  }
+    //}
 
     public (List<IEffect>, string) RequestDefy(int gameId) {
       //var rollbackPoint = root.Snapshot();
@@ -453,29 +453,29 @@ namespace IncendianFalls {
       }
     }
 
-    public (List<IEffect>, string) RequestFollowDirective(int gameId) {
-      //var rollbackPoint = root.Snapshot();
-      try {
-        var request = new FollowDirectiveRequest(gameId);
-        broadcastBeforeRequest(new FollowDirectiveRequestAsIRequest(request));
-        context.Flare(GetDeterministicHashCode());
-        var superstate = superstateByGameId[gameId];
-        var  (events, success) = context.root.Transact(delegate () {
-          return FollowDirectiveRequestExecutor.Execute(context, superstate, request);
-        });
-        context.Flare(success.DStr());
-        broadcastAfterRequest(new FollowDirectiveRequestAsIRequest(request));
-        context.Flare(GetDeterministicHashCode());
-        return (events, success);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
-        //} catch (Exception) {
-        //  Logger.Error("Caught exception, rolling back!");
-        //  root.Revert(rollbackPoint);
-        //  throw;
-      }
-    }
+    //public (List<IEffect>, string) RequestFollowDirective(int gameId) {
+    //  //var rollbackPoint = root.Snapshot();
+    //  try {
+    //    var request = new FollowDirectiveRequest(gameId);
+    //    broadcastBeforeRequest(new FollowDirectiveRequestAsIRequest(request));
+    //    context.Flare(GetDeterministicHashCode());
+    //    var superstate = superstateByGameId[gameId];
+    //    var  (events, success) = context.root.Transact(delegate () {
+    //      return FollowDirectiveRequestExecutor.Execute(context, superstate, request);
+    //    });
+    //    context.Flare(success.DStr());
+    //    broadcastAfterRequest(new FollowDirectiveRequestAsIRequest(request));
+    //    context.Flare(GetDeterministicHashCode());
+    //    return (events, success);
+    //  } catch (Exception e) {
+    //    root.logger.Error(e.Message + " " + e.StackTrace);
+    //    throw e;
+    //    //} catch (Exception) {
+    //    //  Logger.Error("Caught exception, rolling back!");
+    //    //  root.Revert(rollbackPoint);
+    //    //  throw;
+    //  }
+    //}
 
     public (List<IEffect>, string) RequestTimeAnchorMove(int gameId, Location destination) {
       //var rollbackPoint = root.Snapshot();
@@ -528,6 +528,8 @@ namespace IncendianFalls {
 
     public (List<IEffect>, string) RequestResume(int gameId) {
 
+      // Make sure the player just acted, or 
+
       //var rollbackPoint = root.Snapshot();
       try {
         var request = new ResumeRequest(gameId);
@@ -551,27 +553,27 @@ namespace IncendianFalls {
       }
     }
 
-    public (List<IEffect>, string) RequestContinuousResume(int gameId) {
-      List<IEffect> effects = new List<IEffect>();
-      var game = root.GetGame(gameId);
-      var superstate = GetSuperstate(game);
-      while (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        if (game.player.Exists() && !game.player.alive) {
-          return (effects, "No player!");
-        }
-        var (newEffects, status) = RequestResume(game.id);
-        effects.AddRange(newEffects);
-        if (status != "") {
-          return (effects, status);
-        }
-      }
+    //public (List<IEffect>, string) RequestContinuousResume(int gameId) {
+    //  List<IEffect> effects = new List<IEffect>();
+    //  var game = root.GetGame(gameId);
+    //  var superstate = GetSuperstate(game);
+    //  while (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
+    //    if (game.player.Exists() && !game.player.alive) {
+    //      return (effects, "No player!");
+    //    }
+    //    var (newEffects, status) = RequestResume(game.id);
+    //    effects.AddRange(newEffects);
+    //    if (status != "") {
+    //      return (effects, status);
+    //    }
+    //  }
 
-      return (effects, "");
-    }
+    //  return (effects, "");
+    //}
 
 
 
-public int GetDeterministicHashCode() {
+    public int GetDeterministicHashCode() {
       return root.GetDeterministicHashCode();
     }
 

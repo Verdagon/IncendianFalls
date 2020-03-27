@@ -107,6 +107,8 @@ void visitLevelEffect(ILevelEffect effect);
 void visitSpeedRingEffect(ISpeedRingEffect effect);
 void visitManaPotionEffect(IManaPotionEffect effect);
 void visitWatEffect(IWatEffect effect);
+void visitIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffect effect);
+void visitIPostActingUCWeakMutBunchEffect(IIPostActingUCWeakMutBunchEffect effect);
 void visitIImpulseStrongMutBunchEffect(IIImpulseStrongMutBunchEffect effect);
 void visitIItemStrongMutBunchEffect(IIItemStrongMutBunchEffect effect);
 void visitItemTTCEffect(IItemTTCEffect effect);
@@ -122,9 +124,6 @@ void visitIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTTCEffect
 void visitCliffLevelControllerEffect(ICliffLevelControllerEffect effect);
 void visitPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEffect effect);
 void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect effect);
-void visitExecutionStateEffect(IExecutionStateEffect effect);
-void visitIPostActingUCWeakMutBunchEffect(IIPostActingUCWeakMutBunchEffect effect);
-void visitIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffect effect);
 void visitGameEffect(IGameEffect effect);
 void visitVolcaetusLevelControllerEffect(IVolcaetusLevelControllerEffect effect);
 void visitTutorial2LevelControllerEffect(ITutorial2LevelControllerEffect effect);
@@ -138,22 +137,9 @@ void visitDirtRoadLevelControllerEffect(IDirtRoadLevelControllerEffect effect);
 void visitCaveLevelControllerEffect(ICaveLevelControllerEffect effect);
 void visitBridgesLevelControllerEffect(IBridgesLevelControllerEffect effect);
 void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEffect effect);
-void visitIGameEventMutListEffect(IIGameEventMutListEffect effect);
-void visitITerrainTileEventMutListEffect(IITerrainTileEventMutListEffect effect);
 void visitLocationMutListEffect(ILocationMutListEffect effect);
 void visitIRequestMutListEffect(IIRequestMutListEffect effect);
-void visitIUnitEventMutListEffect(IIUnitEventMutListEffect effect);
 void visitLevelMutSetEffect(ILevelMutSetEffect effect);
-void visitUnitWeakMutSetEffect(IUnitWeakMutSetEffect effect);
-void visitTerrainTileWeakMutSetEffect(ITerrainTileWeakMutSetEffect effect);
-void visitDoomedUCWeakMutSetEffect(IDoomedUCWeakMutSetEffect effect);
-void visitMiredUCWeakMutSetEffect(IMiredUCWeakMutSetEffect effect);
-void visitInvincibilityUCWeakMutSetEffect(IInvincibilityUCWeakMutSetEffect effect);
-void visitDefyingUCWeakMutSetEffect(IDefyingUCWeakMutSetEffect effect);
-void visitCounteringUCWeakMutSetEffect(ICounteringUCWeakMutSetEffect effect);
-void visitAttackAICapabilityUCWeakMutSetEffect(IAttackAICapabilityUCWeakMutSetEffect effect);
-void visitLightningChargedUCWeakMutSetEffect(ILightningChargedUCWeakMutSetEffect effect);
-void visitTimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffect effect);
 void visitManaPotionStrongMutSetEffect(IManaPotionStrongMutSetEffect effect);
 void visitHealthPotionStrongMutSetEffect(IHealthPotionStrongMutSetEffect effect);
 void visitSpeedRingStrongMutSetEffect(ISpeedRingStrongMutSetEffect effect);
@@ -179,6 +165,14 @@ void visitStartBidingImpulseStrongMutSetEffect(IStartBidingImpulseStrongMutSetEf
 void visitAttackImpulseStrongMutSetEffect(IAttackImpulseStrongMutSetEffect effect);
 void visitPursueImpulseStrongMutSetEffect(IPursueImpulseStrongMutSetEffect effect);
 void visitFireBombImpulseStrongMutSetEffect(IFireBombImpulseStrongMutSetEffect effect);
+void visitLightningChargedUCWeakMutSetEffect(ILightningChargedUCWeakMutSetEffect effect);
+void visitTimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffect effect);
+void visitDoomedUCWeakMutSetEffect(IDoomedUCWeakMutSetEffect effect);
+void visitMiredUCWeakMutSetEffect(IMiredUCWeakMutSetEffect effect);
+void visitInvincibilityUCWeakMutSetEffect(IInvincibilityUCWeakMutSetEffect effect);
+void visitDefyingUCWeakMutSetEffect(IDefyingUCWeakMutSetEffect effect);
+void visitCounteringUCWeakMutSetEffect(ICounteringUCWeakMutSetEffect effect);
+void visitAttackAICapabilityUCWeakMutSetEffect(IAttackAICapabilityUCWeakMutSetEffect effect);
 void visitUnitMutSetEffect(IUnitMutSetEffect effect);
 void visitSimplePresenceTriggerTTCMutSetEffect(ISimplePresenceTriggerTTCMutSetEffect effect);
 void visitItemTTCMutSetEffect(IItemTTCMutSetEffect effect);
@@ -621,6 +615,12 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsWat) {
       result += GetWatHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsIPreActingUCWeakMutBunch) {
+      result += GetIPreActingUCWeakMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsIPostActingUCWeakMutBunch) {
+      result += GetIPostActingUCWeakMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsIImpulseStrongMutBunch) {
       result += GetIImpulseStrongMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -666,15 +666,6 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsGauntletLevelController) {
       result += GetGauntletLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsExecutionState) {
-      result += GetExecutionStateHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsIPostActingUCWeakMutBunch) {
-      result += GetIPostActingUCWeakMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsIPreActingUCWeakMutBunch) {
-      result += GetIPreActingUCWeakMutBunchHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
     foreach (var entry in this.rootIncarnation.incarnationsGame) {
       result += GetGameHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -714,53 +705,14 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsAncientTownLevelController) {
       result += GetAncientTownLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsIGameEventMutList) {
-      result += GetIGameEventMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsITerrainTileEventMutList) {
-      result += GetITerrainTileEventMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
     foreach (var entry in this.rootIncarnation.incarnationsLocationMutList) {
       result += GetLocationMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsIRequestMutList) {
       result += GetIRequestMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsIUnitEventMutList) {
-      result += GetIUnitEventMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
     foreach (var entry in this.rootIncarnation.incarnationsLevelMutSet) {
       result += GetLevelMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsUnitWeakMutSet) {
-      result += GetUnitWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsTerrainTileWeakMutSet) {
-      result += GetTerrainTileWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsDoomedUCWeakMutSet) {
-      result += GetDoomedUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsMiredUCWeakMutSet) {
-      result += GetMiredUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsInvincibilityUCWeakMutSet) {
-      result += GetInvincibilityUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsDefyingUCWeakMutSet) {
-      result += GetDefyingUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsCounteringUCWeakMutSet) {
-      result += GetCounteringUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet) {
-      result += GetAttackAICapabilityUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsLightningChargedUCWeakMutSet) {
-      result += GetLightningChargedUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet) {
-      result += GetTimeCloneAICapabilityUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsManaPotionStrongMutSet) {
       result += GetManaPotionStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -836,6 +788,30 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsFireBombImpulseStrongMutSet) {
       result += GetFireBombImpulseStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsLightningChargedUCWeakMutSet) {
+      result += GetLightningChargedUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet) {
+      result += GetTimeCloneAICapabilityUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsDoomedUCWeakMutSet) {
+      result += GetDoomedUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsMiredUCWeakMutSet) {
+      result += GetMiredUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsInvincibilityUCWeakMutSet) {
+      result += GetInvincibilityUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsDefyingUCWeakMutSet) {
+      result += GetDefyingUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsCounteringUCWeakMutSet) {
+      result += GetCounteringUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet) {
+      result += GetAttackAICapabilityUCWeakMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsUnitMutSet) {
       result += GetUnitMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1275,6 +1251,12 @@ public class Root {
     foreach (var obj in this.AllWat()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllIPreActingUCWeakMutBunch()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllIPostActingUCWeakMutBunch()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllIImpulseStrongMutBunch()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1320,15 +1302,6 @@ public class Root {
     foreach (var obj in this.AllGauntletLevelController()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllExecutionState()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllIPostActingUCWeakMutBunch()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllIPreActingUCWeakMutBunch()) {
-      obj.CheckForNullViolations(violations);
-    }
     foreach (var obj in this.AllGame()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1368,52 +1341,13 @@ public class Root {
     foreach (var obj in this.AllAncientTownLevelController()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllIGameEventMutList()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllITerrainTileEventMutList()) {
-      obj.CheckForNullViolations(violations);
-    }
     foreach (var obj in this.AllLocationMutList()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllIRequestMutList()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllIUnitEventMutList()) {
-      obj.CheckForNullViolations(violations);
-    }
     foreach (var obj in this.AllLevelMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllUnitWeakMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllTerrainTileWeakMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllDoomedUCWeakMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllMiredUCWeakMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllInvincibilityUCWeakMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllDefyingUCWeakMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllCounteringUCWeakMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllAttackAICapabilityUCWeakMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllLightningChargedUCWeakMutSet()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllTimeCloneAICapabilityUCWeakMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllManaPotionStrongMutSet()) {
@@ -1489,6 +1423,30 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllFireBombImpulseStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllLightningChargedUCWeakMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllTimeCloneAICapabilityUCWeakMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllDoomedUCWeakMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllMiredUCWeakMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllInvincibilityUCWeakMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllDefyingUCWeakMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllCounteringUCWeakMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllAttackAICapabilityUCWeakMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllUnitMutSet()) {
@@ -2088,6 +2046,16 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllIPreActingUCWeakMutBunch()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllIPostActingUCWeakMutBunch()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllIImpulseStrongMutBunch()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -2163,21 +2131,6 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllExecutionState()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllIPostActingUCWeakMutBunch()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllIPreActingUCWeakMutBunch()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
     foreach (var obj in this.AllGame()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -2243,16 +2196,6 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllIGameEventMutList()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllITerrainTileEventMutList()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
     foreach (var obj in this.AllLocationMutList()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -2263,62 +2206,7 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllIUnitEventMutList()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
     foreach (var obj in this.AllLevelMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllUnitWeakMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllTerrainTileWeakMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllDoomedUCWeakMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllMiredUCWeakMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllInvincibilityUCWeakMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllDefyingUCWeakMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllCounteringUCWeakMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllAttackAICapabilityUCWeakMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllLightningChargedUCWeakMutSet()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllTimeCloneAICapabilityUCWeakMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -2444,6 +2332,46 @@ public class Root {
       }
     }
     foreach (var obj in this.AllFireBombImpulseStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllLightningChargedUCWeakMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllTimeCloneAICapabilityUCWeakMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllDoomedUCWeakMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllMiredUCWeakMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllInvincibilityUCWeakMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllDefyingUCWeakMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllCounteringUCWeakMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllAttackAICapabilityUCWeakMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -3592,6 +3520,26 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPreActingUCWeakMutBunch) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(sourceObjId)) {
+        EffectInternalCreateIPreActingUCWeakMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPostActingUCWeakMutBunch) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(sourceObjId)) {
+        EffectInternalCreateIPostActingUCWeakMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIImpulseStrongMutBunch) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3742,36 +3690,6 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExecutionState) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsExecutionState.ContainsKey(sourceObjId)) {
-        EffectInternalCreateExecutionState(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPostActingUCWeakMutBunch) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(sourceObjId)) {
-        EffectInternalCreateIPostActingUCWeakMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPreActingUCWeakMutBunch) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(sourceObjId)) {
-        EffectInternalCreateIPreActingUCWeakMutBunch(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGame) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3902,26 +3820,6 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIGameEventMutList) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsIGameEventMutList.ContainsKey(sourceObjId)) {
-        EffectInternalCreateIGameEventMutList(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsITerrainTileEventMutList) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsITerrainTileEventMutList.ContainsKey(sourceObjId)) {
-        EffectInternalCreateITerrainTileEventMutList(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLocationMutList) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3942,16 +3840,6 @@ public class Root {
       }
     }
          
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIUnitEventMutList) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsIUnitEventMutList.ContainsKey(sourceObjId)) {
-        EffectInternalCreateIUnitEventMutList(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevelMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3959,106 +3847,6 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsLevelMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateLevelMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUnitWeakMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsUnitWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateUnitWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTerrainTileWeakMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsTerrainTileWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateTerrainTileWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDoomedUCWeakMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsDoomedUCWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateDoomedUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMiredUCWeakMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsMiredUCWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateMiredUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsInvincibilityUCWeakMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsInvincibilityUCWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateInvincibilityUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDefyingUCWeakMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsDefyingUCWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateDefyingUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCounteringUCWeakMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsCounteringUCWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateCounteringUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackAICapabilityUCWeakMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateAttackAICapabilityUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargedUCWeakMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateLightningChargedUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
-      }
-    }
-         
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.ContainsKey(sourceObjId)) {
-        EffectInternalCreateTimeCloneAICapabilityUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -4309,6 +4097,86 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsFireBombImpulseStrongMutSet.ContainsKey(sourceObjId)) {
         EffectInternalCreateFireBombImpulseStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargedUCWeakMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateLightningChargedUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateTimeCloneAICapabilityUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDoomedUCWeakMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsDoomedUCWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateDoomedUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMiredUCWeakMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsMiredUCWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateMiredUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsInvincibilityUCWeakMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsInvincibilityUCWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateInvincibilityUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDefyingUCWeakMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsDefyingUCWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateDefyingUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCounteringUCWeakMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsCounteringUCWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateCounteringUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackAICapabilityUCWeakMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(sourceObjId)) {
+        EffectInternalCreateAttackAICapabilityUCWeakMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -4952,56 +4820,6 @@ public class Root {
       }
     }
          
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIGameEventMutList) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsIGameEventMutList.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIGameEventMutList[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            for (int i = currentObjIncarnation.list.Count - 1; i >= 0; i--) {
-              EffectIGameEventMutListRemoveAt(objId, i);
-            }
-            for (int i = 0; i < sourceObjIncarnation.list.Count; i++) {
-              EffectIGameEventMutListAdd(objId, i, sourceObjIncarnation.list[i]);
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-                  rootIncarnation.incarnationsIGameEventMutList[objId] = sourceVersionAndObjIncarnation;
-
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsITerrainTileEventMutList) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsITerrainTileEventMutList.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsITerrainTileEventMutList[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            for (int i = currentObjIncarnation.list.Count - 1; i >= 0; i--) {
-              EffectITerrainTileEventMutListRemoveAt(objId, i);
-            }
-            for (int i = 0; i < sourceObjIncarnation.list.Count; i++) {
-              EffectITerrainTileEventMutListAdd(objId, i, sourceObjIncarnation.list[i]);
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-                  rootIncarnation.incarnationsITerrainTileEventMutList[objId] = sourceVersionAndObjIncarnation;
-
-          }
-        }
-      }
-             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLocationMutList) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -5052,31 +4870,6 @@ public class Root {
         }
       }
              
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIUnitEventMutList) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsIUnitEventMutList.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIUnitEventMutList[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            for (int i = currentObjIncarnation.list.Count - 1; i >= 0; i--) {
-              EffectIUnitEventMutListRemoveAt(objId, i);
-            }
-            for (int i = 0; i < sourceObjIncarnation.list.Count; i++) {
-              EffectIUnitEventMutListAdd(objId, i, sourceObjIncarnation.list[i]);
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-                  rootIncarnation.incarnationsIUnitEventMutList[objId] = sourceVersionAndObjIncarnation;
-
-          }
-        }
-      }
-             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLevelMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -5101,286 +4894,6 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsLevelMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsUnitWeakMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsUnitWeakMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsUnitWeakMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectUnitWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectUnitWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsUnitWeakMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTerrainTileWeakMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsTerrainTileWeakMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsTerrainTileWeakMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectTerrainTileWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectTerrainTileWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsTerrainTileWeakMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDoomedUCWeakMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsDoomedUCWeakMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDoomedUCWeakMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectDoomedUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectDoomedUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsDoomedUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMiredUCWeakMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsMiredUCWeakMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsMiredUCWeakMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectMiredUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectMiredUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsMiredUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsInvincibilityUCWeakMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsInvincibilityUCWeakMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsInvincibilityUCWeakMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectInvincibilityUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectInvincibilityUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsInvincibilityUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDefyingUCWeakMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsDefyingUCWeakMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDefyingUCWeakMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectDefyingUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectDefyingUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsDefyingUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCounteringUCWeakMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsCounteringUCWeakMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsCounteringUCWeakMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectCounteringUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectCounteringUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsCounteringUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackAICapabilityUCWeakMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectAttackAICapabilityUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectAttackAICapabilityUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargedUCWeakMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectLightningChargedUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectLightningChargedUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsLightningChargedUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
-          }
-        }
-      }
-             
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet) {
-        var objId = sourceIdAndVersionAndObjIncarnation.Key;
-        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-        var sourceVersion = sourceVersionAndObjIncarnation.version;
-        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.ContainsKey(objId)) {
-          // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[objId];
-          var currentVersion = currentVersionAndObjIncarnation.version;
-          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-          if (currentVersion != sourceVersion) {
-            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
-              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
-                EffectTimeCloneAICapabilityUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
-              }
-            }
-            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
-              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
-                EffectTimeCloneAICapabilityUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
-              }
-            }
-            // Swap out the underlying incarnation. The only visible effect this has is
-            // changing the version number.
-            rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -6081,6 +5594,230 @@ public class Root {
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
             rootIncarnation.incarnationsFireBombImpulseStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLightningChargedUCWeakMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectLightningChargedUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectLightningChargedUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsLightningChargedUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectTimeCloneAICapabilityUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectTimeCloneAICapabilityUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDoomedUCWeakMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsDoomedUCWeakMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDoomedUCWeakMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectDoomedUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectDoomedUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsDoomedUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsMiredUCWeakMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsMiredUCWeakMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsMiredUCWeakMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectMiredUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectMiredUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsMiredUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsInvincibilityUCWeakMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsInvincibilityUCWeakMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsInvincibilityUCWeakMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectInvincibilityUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectInvincibilityUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsInvincibilityUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDefyingUCWeakMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsDefyingUCWeakMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDefyingUCWeakMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectDefyingUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectDefyingUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsDefyingUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCounteringUCWeakMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsCounteringUCWeakMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsCounteringUCWeakMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectCounteringUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectCounteringUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsCounteringUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+             
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsAttackAICapabilityUCWeakMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.set)) {
+              if (!sourceObjIncarnation.set.Contains(objIdInCurrentObjIncarnation)) {
+                EffectAttackAICapabilityUCWeakMutSetRemove(objId, objIdInCurrentObjIncarnation);
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.set) {
+              if (!currentObjIncarnation.set.Contains(unitIdInSourceObjIncarnation)) {
+                EffectAttackAICapabilityUCWeakMutSetAdd(objId, unitIdInSourceObjIncarnation);
+              }
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+            rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
@@ -7987,6 +7724,10 @@ public class Root {
         var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
         if (currentVersion != sourceVersion) {
 
+          if (sourceObjIncarnation.evvent != currentObjIncarnation.evvent) {
+            EffectUnitSetEvvent(objId, sourceObjIncarnation.evvent);
+          }
+
           if (sourceObjIncarnation.alive != currentObjIncarnation.alive) {
             EffectUnitSetAlive(objId, sourceObjIncarnation.alive);
           }
@@ -8925,6 +8666,10 @@ public class Root {
         var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
         if (currentVersion != sourceVersion) {
 
+          if (sourceObjIncarnation.evvent != currentObjIncarnation.evvent) {
+            EffectTerrainTileSetEvvent(objId, sourceObjIncarnation.evvent);
+          }
+
           if (sourceObjIncarnation.elevation != currentObjIncarnation.elevation) {
             EffectTerrainTileSetElevation(objId, sourceObjIncarnation.elevation);
           }
@@ -9647,6 +9392,48 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPreActingUCWeakMutBunch) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPostActingUCWeakMutBunch) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIImpulseStrongMutBunch) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -9962,85 +9749,6 @@ public class Root {
       }
     }
 
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExecutionState) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsExecutionState.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsExecutionState[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          if (sourceObjIncarnation.actingUnit != currentObjIncarnation.actingUnit) {
-            EffectExecutionStateSetActingUnit(objId, new Unit(this, sourceObjIncarnation.actingUnit));
-          }
-
-          if (sourceObjIncarnation.actingUnitDidAction != currentObjIncarnation.actingUnitDidAction) {
-            EffectExecutionStateSetActingUnitDidAction(objId, sourceObjIncarnation.actingUnitDidAction);
-          }
-
-          if (sourceObjIncarnation.remainingPreActingUnitComponents != currentObjIncarnation.remainingPreActingUnitComponents) {
-            EffectExecutionStateSetRemainingPreActingUnitComponents(objId, new IPreActingUCWeakMutBunch(this, sourceObjIncarnation.remainingPreActingUnitComponents));
-          }
-
-          if (sourceObjIncarnation.remainingPostActingUnitComponents != currentObjIncarnation.remainingPostActingUnitComponents) {
-            EffectExecutionStateSetRemainingPostActingUnitComponents(objId, new IPostActingUCWeakMutBunch(this, sourceObjIncarnation.remainingPostActingUnitComponents));
-          }
-
-          // Swap out the underlying incarnation. The only visible effect this has is
-          // changing the version number.
-          
-          rootIncarnation.incarnationsExecutionState[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPostActingUCWeakMutBunch) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation. The only visible effect this has is
-          // changing the version number.
-          
-          rootIncarnation.incarnationsIPostActingUCWeakMutBunch[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIPreActingUCWeakMutBunch) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation. The only visible effect this has is
-          // changing the version number.
-          
-          rootIncarnation.incarnationsIPreActingUCWeakMutBunch[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGame) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -10065,6 +9773,14 @@ public class Root {
             EffectGameSetTime(objId, sourceObjIncarnation.time);
           }
 
+          if (sourceObjIncarnation.actingUnit != currentObjIncarnation.actingUnit) {
+            EffectGameSetActingUnit(objId, new Unit(this, sourceObjIncarnation.actingUnit));
+          }
+
+          if (sourceObjIncarnation.pauseBeforeNextUnit != currentObjIncarnation.pauseBeforeNextUnit) {
+            EffectGameSetPauseBeforeNextUnit(objId, sourceObjIncarnation.pauseBeforeNextUnit);
+          }
+
           if (sourceObjIncarnation.actionNum != currentObjIncarnation.actionNum) {
             EffectGameSetActionNum(objId, sourceObjIncarnation.actionNum);
           }
@@ -10075,6 +9791,10 @@ public class Root {
 
           if (sourceObjIncarnation.hideInput != currentObjIncarnation.hideInput) {
             EffectGameSetHideInput(objId, sourceObjIncarnation.hideInput);
+          }
+
+          if (sourceObjIncarnation.evvent != currentObjIncarnation.evvent) {
+            EffectGameSetEvvent(objId, sourceObjIncarnation.evvent);
           }
 
           // Swap out the underlying incarnation. The only visible effect this has is
@@ -10898,6 +10618,20 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IPreActingUCWeakMutBunchIncarnation>>(rootIncarnation.incarnationsIPreActingUCWeakMutBunch)) {
+      if (!sourceIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectIPreActingUCWeakMutBunchDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IPostActingUCWeakMutBunchIncarnation>>(rootIncarnation.incarnationsIPostActingUCWeakMutBunch)) {
+      if (!sourceIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectIPostActingUCWeakMutBunchDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IImpulseStrongMutBunchIncarnation>>(rootIncarnation.incarnationsIImpulseStrongMutBunch)) {
       if (!sourceIncarnation.incarnationsIImpulseStrongMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -11003,27 +10737,6 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ExecutionStateIncarnation>>(rootIncarnation.incarnationsExecutionState)) {
-      if (!sourceIncarnation.incarnationsExecutionState.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectExecutionStateDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IPostActingUCWeakMutBunchIncarnation>>(rootIncarnation.incarnationsIPostActingUCWeakMutBunch)) {
-      if (!sourceIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectIPostActingUCWeakMutBunchDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IPreActingUCWeakMutBunchIncarnation>>(rootIncarnation.incarnationsIPreActingUCWeakMutBunch)) {
-      if (!sourceIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectIPreActingUCWeakMutBunchDelete(id);
-      }
-    }
-
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<GameIncarnation>>(rootIncarnation.incarnationsGame)) {
       if (!sourceIncarnation.incarnationsGame.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -11115,20 +10828,6 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IGameEventMutListIncarnation>>(rootIncarnation.incarnationsIGameEventMutList)) {
-      if (!sourceIncarnation.incarnationsIGameEventMutList.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectIGameEventMutListDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ITerrainTileEventMutListIncarnation>>(rootIncarnation.incarnationsITerrainTileEventMutList)) {
-      if (!sourceIncarnation.incarnationsITerrainTileEventMutList.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectITerrainTileEventMutListDelete(id);
-      }
-    }
-
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LocationMutListIncarnation>>(rootIncarnation.incarnationsLocationMutList)) {
       if (!sourceIncarnation.incarnationsLocationMutList.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -11143,87 +10842,10 @@ public class Root {
       }
     }
 
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IUnitEventMutListIncarnation>>(rootIncarnation.incarnationsIUnitEventMutList)) {
-      if (!sourceIncarnation.incarnationsIUnitEventMutList.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectIUnitEventMutListDelete(id);
-      }
-    }
-
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LevelMutSetIncarnation>>(rootIncarnation.incarnationsLevelMutSet)) {
       if (!sourceIncarnation.incarnationsLevelMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectLevelMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<UnitWeakMutSetIncarnation>>(rootIncarnation.incarnationsUnitWeakMutSet)) {
-      if (!sourceIncarnation.incarnationsUnitWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectUnitWeakMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TerrainTileWeakMutSetIncarnation>>(rootIncarnation.incarnationsTerrainTileWeakMutSet)) {
-      if (!sourceIncarnation.incarnationsTerrainTileWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectTerrainTileWeakMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DoomedUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsDoomedUCWeakMutSet)) {
-      if (!sourceIncarnation.incarnationsDoomedUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectDoomedUCWeakMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<MiredUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsMiredUCWeakMutSet)) {
-      if (!sourceIncarnation.incarnationsMiredUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectMiredUCWeakMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<InvincibilityUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsInvincibilityUCWeakMutSet)) {
-      if (!sourceIncarnation.incarnationsInvincibilityUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectInvincibilityUCWeakMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DefyingUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsDefyingUCWeakMutSet)) {
-      if (!sourceIncarnation.incarnationsDefyingUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectDefyingUCWeakMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CounteringUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsCounteringUCWeakMutSet)) {
-      if (!sourceIncarnation.incarnationsCounteringUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectCounteringUCWeakMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet)) {
-      if (!sourceIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectAttackAICapabilityUCWeakMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsLightningChargedUCWeakMutSet)) {
-      if (!sourceIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectLightningChargedUCWeakMutSetDelete(id);
-      }
-    }
-
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet)) {
-      if (!sourceIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        EffectTimeCloneAICapabilityUCWeakMutSetDelete(id);
       }
     }
 
@@ -11399,6 +11021,62 @@ public class Root {
       if (!sourceIncarnation.incarnationsFireBombImpulseStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectFireBombImpulseStrongMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsLightningChargedUCWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectLightningChargedUCWeakMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<TimeCloneAICapabilityUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectTimeCloneAICapabilityUCWeakMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DoomedUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsDoomedUCWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsDoomedUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectDoomedUCWeakMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<MiredUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsMiredUCWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsMiredUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectMiredUCWeakMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<InvincibilityUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsInvincibilityUCWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsInvincibilityUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectInvincibilityUCWeakMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DefyingUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsDefyingUCWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsDefyingUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectDefyingUCWeakMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CounteringUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsCounteringUCWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsCounteringUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectCounteringUCWeakMutSetDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>>(rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet)) {
+      if (!sourceIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectAttackAICapabilityUCWeakMutSetDelete(id);
       }
     }
 
@@ -12279,7 +11957,7 @@ var effect = new TutorialDefyCounterUCSetNumDefiesRemainingEffect(id, newValue);
     }
   }
   public Unit EffectUnitCreate(
-      IUnitEventMutList events,
+      IUnitEvent evvent,
       bool alive,
       int lifeEndTime,
       Location location,
@@ -12290,13 +11968,12 @@ var effect = new TutorialDefyCounterUCSetNumDefiesRemainingEffect(id, newValue);
       IUnitComponentMutBunch components,
       bool good) {
     CheckUnlocked();
-    CheckHasIUnitEventMutList(events);
     CheckHasIUnitComponentMutBunch(components);
 
     var id = NewId();
     var incarnation =
         new UnitIncarnation(
-            events.id,
+            evvent,
             alive,
             lifeEndTime,
             location,
@@ -12338,7 +12015,9 @@ var effect = new TutorialDefyCounterUCSetNumDefiesRemainingEffect(id, newValue);
      
   public int GetUnitHash(int id, int version, UnitIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.events.GetDeterministicHashCode();
+    if (!object.ReferenceEquals(incarnation.evvent, null)) {
+      result += id * version * 1 * incarnation.evvent.GetDeterministicHashCode();
+    }
     result += id * version * 2 * incarnation.alive.GetDeterministicHashCode();
     result += id * version * 3 * incarnation.lifeEndTime.GetDeterministicHashCode();
     result += id * version * 4 * incarnation.location.GetDeterministicHashCode();
@@ -12351,6 +12030,37 @@ var effect = new TutorialDefyCounterUCSetNumDefiesRemainingEffect(id, newValue);
     return result;
   }
      
+  public void EffectUnitSetEvvent(int id, IUnitEvent newValue) {
+    CheckUnlocked();
+    CheckHasUnit(id);
+var effect = new UnitSetEvventEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsUnit[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.evvent;
+      oldIncarnationAndVersion.incarnation.evvent = newValue;
+
+    } else {
+      var newIncarnation =
+          new UnitIncarnation(
+              newValue,
+              oldIncarnationAndVersion.incarnation.alive,
+              oldIncarnationAndVersion.incarnation.lifeEndTime,
+              oldIncarnationAndVersion.incarnation.location,
+              oldIncarnationAndVersion.incarnation.classId,
+              oldIncarnationAndVersion.incarnation.nextActionTime,
+              oldIncarnationAndVersion.incarnation.hp,
+              oldIncarnationAndVersion.incarnation.maxHp,
+              oldIncarnationAndVersion.incarnation.components,
+              oldIncarnationAndVersion.incarnation.good);
+      rootIncarnation.incarnationsUnit[id] =
+          new VersionAndIncarnation<UnitIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    NotifyEffect(effect);
+  }
+
   public void EffectUnitSetAlive(int id, bool newValue) {
     CheckUnlocked();
     CheckHasUnit(id);
@@ -12363,7 +12073,7 @@ var effect = new UnitSetAliveEffect(id, newValue);
     } else {
       var newIncarnation =
           new UnitIncarnation(
-              oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.evvent,
               newValue,
               oldIncarnationAndVersion.incarnation.lifeEndTime,
               oldIncarnationAndVersion.incarnation.location,
@@ -12394,7 +12104,7 @@ var effect = new UnitSetLifeEndTimeEffect(id, newValue);
     } else {
       var newIncarnation =
           new UnitIncarnation(
-              oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.evvent,
               oldIncarnationAndVersion.incarnation.alive,
               newValue,
               oldIncarnationAndVersion.incarnation.location,
@@ -12425,7 +12135,7 @@ var effect = new UnitSetLocationEffect(id, newValue);
     } else {
       var newIncarnation =
           new UnitIncarnation(
-              oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.evvent,
               oldIncarnationAndVersion.incarnation.alive,
               oldIncarnationAndVersion.incarnation.lifeEndTime,
               newValue,
@@ -12456,7 +12166,7 @@ var effect = new UnitSetNextActionTimeEffect(id, newValue);
     } else {
       var newIncarnation =
           new UnitIncarnation(
-              oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.evvent,
               oldIncarnationAndVersion.incarnation.alive,
               oldIncarnationAndVersion.incarnation.lifeEndTime,
               oldIncarnationAndVersion.incarnation.location,
@@ -12487,7 +12197,7 @@ var effect = new UnitSetHpEffect(id, newValue);
     } else {
       var newIncarnation =
           new UnitIncarnation(
-              oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.evvent,
               oldIncarnationAndVersion.incarnation.alive,
               oldIncarnationAndVersion.incarnation.lifeEndTime,
               oldIncarnationAndVersion.incarnation.location,
@@ -12518,7 +12228,7 @@ var effect = new UnitSetMaxHpEffect(id, newValue);
     } else {
       var newIncarnation =
           new UnitIncarnation(
-              oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.evvent,
               oldIncarnationAndVersion.incarnation.alive,
               oldIncarnationAndVersion.incarnation.lifeEndTime,
               oldIncarnationAndVersion.incarnation.location,
@@ -16400,17 +16110,16 @@ var effect = new AttackAICapabilityUCSetKillDirectiveEffect(id, newValue.id);
     }
   }
   public TerrainTile EffectTerrainTileCreate(
-      ITerrainTileEventMutList events,
+      ITerrainTileEvent evvent,
       int elevation,
       ITerrainTileComponentMutBunch components) {
     CheckUnlocked();
-    CheckHasITerrainTileEventMutList(events);
     CheckHasITerrainTileComponentMutBunch(components);
 
     var id = NewId();
     var incarnation =
         new TerrainTileIncarnation(
-            events.id,
+            evvent,
             elevation,
             components.id
             );
@@ -16445,12 +16154,38 @@ var effect = new AttackAICapabilityUCSetKillDirectiveEffect(id, newValue.id);
      
   public int GetTerrainTileHash(int id, int version, TerrainTileIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.events.GetDeterministicHashCode();
+    if (!object.ReferenceEquals(incarnation.evvent, null)) {
+      result += id * version * 1 * incarnation.evvent.GetDeterministicHashCode();
+    }
     result += id * version * 2 * incarnation.elevation.GetDeterministicHashCode();
     result += id * version * 3 * incarnation.components.GetDeterministicHashCode();
     return result;
   }
      
+  public void EffectTerrainTileSetEvvent(int id, ITerrainTileEvent newValue) {
+    CheckUnlocked();
+    CheckHasTerrainTile(id);
+var effect = new TerrainTileSetEvventEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsTerrainTile[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.evvent;
+      oldIncarnationAndVersion.incarnation.evvent = newValue;
+
+    } else {
+      var newIncarnation =
+          new TerrainTileIncarnation(
+              newValue,
+              oldIncarnationAndVersion.incarnation.elevation,
+              oldIncarnationAndVersion.incarnation.components);
+      rootIncarnation.incarnationsTerrainTile[id] =
+          new VersionAndIncarnation<TerrainTileIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    NotifyEffect(effect);
+  }
+
   public void EffectTerrainTileSetElevation(int id, int newValue) {
     CheckUnlocked();
     CheckHasTerrainTile(id);
@@ -16463,7 +16198,7 @@ var effect = new TerrainTileSetElevationEffect(id, newValue);
     } else {
       var newIncarnation =
           new TerrainTileIncarnation(
-              oldIncarnationAndVersion.incarnation.events,
+              oldIncarnationAndVersion.incarnation.evvent,
               newValue,
               oldIncarnationAndVersion.incarnation.components);
       rootIncarnation.incarnationsTerrainTile[id] =
@@ -19437,16 +19172,22 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public Wat EffectWatCreate(
       IItemStrongMutBunch items,
-      IImpulseStrongMutBunch impulses) {
+      IImpulseStrongMutBunch impulses,
+      IPostActingUCWeakMutBunch blah,
+      IPreActingUCWeakMutBunch bloop) {
     CheckUnlocked();
     CheckHasIItemStrongMutBunch(items);
     CheckHasIImpulseStrongMutBunch(impulses);
+    CheckHasIPostActingUCWeakMutBunch(blah);
+    CheckHasIPreActingUCWeakMutBunch(bloop);
 
     var id = NewId();
     var incarnation =
         new WatIncarnation(
             items.id,
-            impulses.id
+            impulses.id,
+            blah.id,
+            bloop.id
             );
     EffectInternalCreateWat(id, rootIncarnation.version, incarnation);
     return new Wat(this, id);
@@ -19481,6 +19222,202 @@ var effect = new LevelSetTimeEffect(id, newValue);
     int result = id * version;
     result += id * version * 1 * incarnation.items.GetDeterministicHashCode();
     result += id * version * 2 * incarnation.impulses.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.blah.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.bloop.GetDeterministicHashCode();
+    return result;
+  }
+       public IPreActingUCWeakMutBunchIncarnation GetIPreActingUCWeakMutBunchIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsIPreActingUCWeakMutBunch[id].incarnation;
+  }
+  public bool IPreActingUCWeakMutBunchExists(int id) {
+    return rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(id);
+  }
+  public IPreActingUCWeakMutBunch GetIPreActingUCWeakMutBunch(int id) {
+    CheckHasIPreActingUCWeakMutBunch(id);
+    return new IPreActingUCWeakMutBunch(this, id);
+  }
+  public IPreActingUCWeakMutBunch GetIPreActingUCWeakMutBunchOrNull(int id) {
+    if (IPreActingUCWeakMutBunchExists(id)) {
+      return new IPreActingUCWeakMutBunch(this, id);
+    } else {
+      return new IPreActingUCWeakMutBunch(this, 0);
+    }
+  }
+  public List<IPreActingUCWeakMutBunch> AllIPreActingUCWeakMutBunch() {
+    List<IPreActingUCWeakMutBunch> result = new List<IPreActingUCWeakMutBunch>(rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Count);
+    foreach (var id in rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Keys) {
+      result.Add(new IPreActingUCWeakMutBunch(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<IPreActingUCWeakMutBunch> EnumAllIPreActingUCWeakMutBunch() {
+    foreach (var id in rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Keys) {
+      yield return GetIPreActingUCWeakMutBunch(id);
+    }
+  }
+  public void CheckHasIPreActingUCWeakMutBunch(IPreActingUCWeakMutBunch thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasIPreActingUCWeakMutBunch(thing.id);
+  }
+  public void CheckHasIPreActingUCWeakMutBunch(int id) {
+    if (!rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(id)) {
+      throw new System.Exception("Invalid IPreActingUCWeakMutBunch: " + id);
+    }
+  }
+  public IPreActingUCWeakMutBunch EffectIPreActingUCWeakMutBunchCreate(
+      DoomedUCWeakMutSet membersDoomedUCWeakMutSet,
+      MiredUCWeakMutSet membersMiredUCWeakMutSet,
+      InvincibilityUCWeakMutSet membersInvincibilityUCWeakMutSet,
+      DefyingUCWeakMutSet membersDefyingUCWeakMutSet,
+      CounteringUCWeakMutSet membersCounteringUCWeakMutSet,
+      AttackAICapabilityUCWeakMutSet membersAttackAICapabilityUCWeakMutSet) {
+    CheckUnlocked();
+    CheckHasDoomedUCWeakMutSet(membersDoomedUCWeakMutSet);
+    CheckHasMiredUCWeakMutSet(membersMiredUCWeakMutSet);
+    CheckHasInvincibilityUCWeakMutSet(membersInvincibilityUCWeakMutSet);
+    CheckHasDefyingUCWeakMutSet(membersDefyingUCWeakMutSet);
+    CheckHasCounteringUCWeakMutSet(membersCounteringUCWeakMutSet);
+    CheckHasAttackAICapabilityUCWeakMutSet(membersAttackAICapabilityUCWeakMutSet);
+
+    var id = NewId();
+    var incarnation =
+        new IPreActingUCWeakMutBunchIncarnation(
+            membersDoomedUCWeakMutSet.id,
+            membersMiredUCWeakMutSet.id,
+            membersInvincibilityUCWeakMutSet.id,
+            membersDefyingUCWeakMutSet.id,
+            membersCounteringUCWeakMutSet.id,
+            membersAttackAICapabilityUCWeakMutSet.id
+            );
+    EffectInternalCreateIPreActingUCWeakMutBunch(id, rootIncarnation.version, incarnation);
+    return new IPreActingUCWeakMutBunch(this, id);
+  }
+  public void EffectInternalCreateIPreActingUCWeakMutBunch(
+      int id,
+      int incarnationVersion,
+      IPreActingUCWeakMutBunchIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new IPreActingUCWeakMutBunchCreateEffect(id, incarnation.Copy());
+    rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Add(
+        id,
+        new VersionAndIncarnation<IPreActingUCWeakMutBunchIncarnation>(
+            incarnationVersion,
+            incarnation));
+    NotifyEffect(effect);
+  }
+
+  public void EffectIPreActingUCWeakMutBunchDelete(int id) {
+    CheckUnlocked();
+    var effect = new IPreActingUCWeakMutBunchDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsIPreActingUCWeakMutBunch[id];
+
+    rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Remove(id);
+    NotifyEffect(effect);
+  }
+
+     
+  public int GetIPreActingUCWeakMutBunchHash(int id, int version, IPreActingUCWeakMutBunchIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.membersDoomedUCWeakMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersMiredUCWeakMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersInvincibilityUCWeakMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersDefyingUCWeakMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersCounteringUCWeakMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersAttackAICapabilityUCWeakMutSet.GetDeterministicHashCode();
+    return result;
+  }
+       public IPostActingUCWeakMutBunchIncarnation GetIPostActingUCWeakMutBunchIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsIPostActingUCWeakMutBunch[id].incarnation;
+  }
+  public bool IPostActingUCWeakMutBunchExists(int id) {
+    return rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(id);
+  }
+  public IPostActingUCWeakMutBunch GetIPostActingUCWeakMutBunch(int id) {
+    CheckHasIPostActingUCWeakMutBunch(id);
+    return new IPostActingUCWeakMutBunch(this, id);
+  }
+  public IPostActingUCWeakMutBunch GetIPostActingUCWeakMutBunchOrNull(int id) {
+    if (IPostActingUCWeakMutBunchExists(id)) {
+      return new IPostActingUCWeakMutBunch(this, id);
+    } else {
+      return new IPostActingUCWeakMutBunch(this, 0);
+    }
+  }
+  public List<IPostActingUCWeakMutBunch> AllIPostActingUCWeakMutBunch() {
+    List<IPostActingUCWeakMutBunch> result = new List<IPostActingUCWeakMutBunch>(rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Count);
+    foreach (var id in rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Keys) {
+      result.Add(new IPostActingUCWeakMutBunch(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<IPostActingUCWeakMutBunch> EnumAllIPostActingUCWeakMutBunch() {
+    foreach (var id in rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Keys) {
+      yield return GetIPostActingUCWeakMutBunch(id);
+    }
+  }
+  public void CheckHasIPostActingUCWeakMutBunch(IPostActingUCWeakMutBunch thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasIPostActingUCWeakMutBunch(thing.id);
+  }
+  public void CheckHasIPostActingUCWeakMutBunch(int id) {
+    if (!rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(id)) {
+      throw new System.Exception("Invalid IPostActingUCWeakMutBunch: " + id);
+    }
+  }
+  public IPostActingUCWeakMutBunch EffectIPostActingUCWeakMutBunchCreate(
+      LightningChargedUCWeakMutSet membersLightningChargedUCWeakMutSet,
+      TimeCloneAICapabilityUCWeakMutSet membersTimeCloneAICapabilityUCWeakMutSet) {
+    CheckUnlocked();
+    CheckHasLightningChargedUCWeakMutSet(membersLightningChargedUCWeakMutSet);
+    CheckHasTimeCloneAICapabilityUCWeakMutSet(membersTimeCloneAICapabilityUCWeakMutSet);
+
+    var id = NewId();
+    var incarnation =
+        new IPostActingUCWeakMutBunchIncarnation(
+            membersLightningChargedUCWeakMutSet.id,
+            membersTimeCloneAICapabilityUCWeakMutSet.id
+            );
+    EffectInternalCreateIPostActingUCWeakMutBunch(id, rootIncarnation.version, incarnation);
+    return new IPostActingUCWeakMutBunch(this, id);
+  }
+  public void EffectInternalCreateIPostActingUCWeakMutBunch(
+      int id,
+      int incarnationVersion,
+      IPostActingUCWeakMutBunchIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new IPostActingUCWeakMutBunchCreateEffect(id, incarnation.Copy());
+    rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Add(
+        id,
+        new VersionAndIncarnation<IPostActingUCWeakMutBunchIncarnation>(
+            incarnationVersion,
+            incarnation));
+    NotifyEffect(effect);
+  }
+
+  public void EffectIPostActingUCWeakMutBunchDelete(int id) {
+    CheckUnlocked();
+    var effect = new IPostActingUCWeakMutBunchDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsIPostActingUCWeakMutBunch[id];
+
+    rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Remove(id);
+    NotifyEffect(effect);
+  }
+
+     
+  public int GetIPostActingUCWeakMutBunchHash(int id, int version, IPostActingUCWeakMutBunchIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.membersLightningChargedUCWeakMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersTimeCloneAICapabilityUCWeakMutSet.GetDeterministicHashCode();
     return result;
   }
        public IImpulseStrongMutBunchIncarnation GetIImpulseStrongMutBunchIncarnation(int id) {
@@ -20848,399 +20785,6 @@ var effect = new LevelSetTimeEffect(id, newValue);
     result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
     return result;
   }
-       public ExecutionStateIncarnation GetExecutionStateIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsExecutionState[id].incarnation;
-  }
-  public bool ExecutionStateExists(int id) {
-    return rootIncarnation.incarnationsExecutionState.ContainsKey(id);
-  }
-  public ExecutionState GetExecutionState(int id) {
-    CheckHasExecutionState(id);
-    return new ExecutionState(this, id);
-  }
-  public ExecutionState GetExecutionStateOrNull(int id) {
-    if (ExecutionStateExists(id)) {
-      return new ExecutionState(this, id);
-    } else {
-      return new ExecutionState(this, 0);
-    }
-  }
-  public List<ExecutionState> AllExecutionState() {
-    List<ExecutionState> result = new List<ExecutionState>(rootIncarnation.incarnationsExecutionState.Count);
-    foreach (var id in rootIncarnation.incarnationsExecutionState.Keys) {
-      result.Add(new ExecutionState(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<ExecutionState> EnumAllExecutionState() {
-    foreach (var id in rootIncarnation.incarnationsExecutionState.Keys) {
-      yield return GetExecutionState(id);
-    }
-  }
-  public void CheckHasExecutionState(ExecutionState thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasExecutionState(thing.id);
-  }
-  public void CheckHasExecutionState(int id) {
-    if (!rootIncarnation.incarnationsExecutionState.ContainsKey(id)) {
-      throw new System.Exception("Invalid ExecutionState: " + id);
-    }
-  }
-  public ExecutionState EffectExecutionStateCreate(
-      Unit actingUnit,
-      bool actingUnitDidAction,
-      IPreActingUCWeakMutBunch remainingPreActingUnitComponents,
-      IPostActingUCWeakMutBunch remainingPostActingUnitComponents) {
-    CheckUnlocked();
-
-    var id = NewId();
-    var incarnation =
-        new ExecutionStateIncarnation(
-            actingUnit.id,
-            actingUnitDidAction,
-            remainingPreActingUnitComponents.id,
-            remainingPostActingUnitComponents.id
-            );
-    EffectInternalCreateExecutionState(id, rootIncarnation.version, incarnation);
-    return new ExecutionState(this, id);
-  }
-  public void EffectInternalCreateExecutionState(
-      int id,
-      int incarnationVersion,
-      ExecutionStateIncarnation incarnation) {
-    CheckUnlocked();
-    var effect = new ExecutionStateCreateEffect(id, incarnation.Copy());
-    rootIncarnation.incarnationsExecutionState.Add(
-        id,
-        new VersionAndIncarnation<ExecutionStateIncarnation>(
-            incarnationVersion,
-            incarnation));
-    NotifyEffect(effect);
-  }
-
-  public void EffectExecutionStateDelete(int id) {
-    CheckUnlocked();
-    var effect = new ExecutionStateDeleteEffect(id);
-
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsExecutionState[id];
-
-    rootIncarnation.incarnationsExecutionState.Remove(id);
-    NotifyEffect(effect);
-  }
-
-     
-  public int GetExecutionStateHash(int id, int version, ExecutionStateIncarnation incarnation) {
-    int result = id * version;
-    if (!object.ReferenceEquals(incarnation.actingUnit, null)) {
-      result += id * version * 1 * incarnation.actingUnit.GetDeterministicHashCode();
-    }
-    result += id * version * 2 * incarnation.actingUnitDidAction.GetDeterministicHashCode();
-    if (!object.ReferenceEquals(incarnation.remainingPreActingUnitComponents, null)) {
-      result += id * version * 3 * incarnation.remainingPreActingUnitComponents.GetDeterministicHashCode();
-    }
-    if (!object.ReferenceEquals(incarnation.remainingPostActingUnitComponents, null)) {
-      result += id * version * 4 * incarnation.remainingPostActingUnitComponents.GetDeterministicHashCode();
-    }
-    return result;
-  }
-     
-  public void EffectExecutionStateSetActingUnit(int id, Unit newValue) {
-    CheckUnlocked();
-    CheckHasExecutionState(id);
-var effect = new ExecutionStateSetActingUnitEffect(id, newValue.id);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsExecutionState[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldId = oldIncarnationAndVersion.incarnation.actingUnit;
-      oldIncarnationAndVersion.incarnation.actingUnit = newValue.id;
-
-    } else {
-      var newIncarnation =
-          new ExecutionStateIncarnation(
-              newValue.id,
-              oldIncarnationAndVersion.incarnation.actingUnitDidAction,
-              oldIncarnationAndVersion.incarnation.remainingPreActingUnitComponents,
-              oldIncarnationAndVersion.incarnation.remainingPostActingUnitComponents);
-      rootIncarnation.incarnationsExecutionState[id] =
-          new VersionAndIncarnation<ExecutionStateIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-    NotifyEffect(effect);
-  }
-
-  public void EffectExecutionStateSetActingUnitDidAction(int id, bool newValue) {
-    CheckUnlocked();
-    CheckHasExecutionState(id);
-var effect = new ExecutionStateSetActingUnitDidActionEffect(id, newValue);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsExecutionState[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.actingUnitDidAction;
-      oldIncarnationAndVersion.incarnation.actingUnitDidAction = newValue;
-
-    } else {
-      var newIncarnation =
-          new ExecutionStateIncarnation(
-              oldIncarnationAndVersion.incarnation.actingUnit,
-              newValue,
-              oldIncarnationAndVersion.incarnation.remainingPreActingUnitComponents,
-              oldIncarnationAndVersion.incarnation.remainingPostActingUnitComponents);
-      rootIncarnation.incarnationsExecutionState[id] =
-          new VersionAndIncarnation<ExecutionStateIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-    NotifyEffect(effect);
-  }
-
-  public void EffectExecutionStateSetRemainingPreActingUnitComponents(int id, IPreActingUCWeakMutBunch newValue) {
-    CheckUnlocked();
-    CheckHasExecutionState(id);
-var effect = new ExecutionStateSetRemainingPreActingUnitComponentsEffect(id, newValue.id);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsExecutionState[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldId = oldIncarnationAndVersion.incarnation.remainingPreActingUnitComponents;
-      oldIncarnationAndVersion.incarnation.remainingPreActingUnitComponents = newValue.id;
-
-    } else {
-      var newIncarnation =
-          new ExecutionStateIncarnation(
-              oldIncarnationAndVersion.incarnation.actingUnit,
-              oldIncarnationAndVersion.incarnation.actingUnitDidAction,
-              newValue.id,
-              oldIncarnationAndVersion.incarnation.remainingPostActingUnitComponents);
-      rootIncarnation.incarnationsExecutionState[id] =
-          new VersionAndIncarnation<ExecutionStateIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-    NotifyEffect(effect);
-  }
-
-  public void EffectExecutionStateSetRemainingPostActingUnitComponents(int id, IPostActingUCWeakMutBunch newValue) {
-    CheckUnlocked();
-    CheckHasExecutionState(id);
-var effect = new ExecutionStateSetRemainingPostActingUnitComponentsEffect(id, newValue.id);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsExecutionState[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldId = oldIncarnationAndVersion.incarnation.remainingPostActingUnitComponents;
-      oldIncarnationAndVersion.incarnation.remainingPostActingUnitComponents = newValue.id;
-
-    } else {
-      var newIncarnation =
-          new ExecutionStateIncarnation(
-              oldIncarnationAndVersion.incarnation.actingUnit,
-              oldIncarnationAndVersion.incarnation.actingUnitDidAction,
-              oldIncarnationAndVersion.incarnation.remainingPreActingUnitComponents,
-              newValue.id);
-      rootIncarnation.incarnationsExecutionState[id] =
-          new VersionAndIncarnation<ExecutionStateIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-    NotifyEffect(effect);
-  }
-  public IPostActingUCWeakMutBunchIncarnation GetIPostActingUCWeakMutBunchIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsIPostActingUCWeakMutBunch[id].incarnation;
-  }
-  public bool IPostActingUCWeakMutBunchExists(int id) {
-    return rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(id);
-  }
-  public IPostActingUCWeakMutBunch GetIPostActingUCWeakMutBunch(int id) {
-    CheckHasIPostActingUCWeakMutBunch(id);
-    return new IPostActingUCWeakMutBunch(this, id);
-  }
-  public IPostActingUCWeakMutBunch GetIPostActingUCWeakMutBunchOrNull(int id) {
-    if (IPostActingUCWeakMutBunchExists(id)) {
-      return new IPostActingUCWeakMutBunch(this, id);
-    } else {
-      return new IPostActingUCWeakMutBunch(this, 0);
-    }
-  }
-  public List<IPostActingUCWeakMutBunch> AllIPostActingUCWeakMutBunch() {
-    List<IPostActingUCWeakMutBunch> result = new List<IPostActingUCWeakMutBunch>(rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Count);
-    foreach (var id in rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Keys) {
-      result.Add(new IPostActingUCWeakMutBunch(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<IPostActingUCWeakMutBunch> EnumAllIPostActingUCWeakMutBunch() {
-    foreach (var id in rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Keys) {
-      yield return GetIPostActingUCWeakMutBunch(id);
-    }
-  }
-  public void CheckHasIPostActingUCWeakMutBunch(IPostActingUCWeakMutBunch thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasIPostActingUCWeakMutBunch(thing.id);
-  }
-  public void CheckHasIPostActingUCWeakMutBunch(int id) {
-    if (!rootIncarnation.incarnationsIPostActingUCWeakMutBunch.ContainsKey(id)) {
-      throw new System.Exception("Invalid IPostActingUCWeakMutBunch: " + id);
-    }
-  }
-  public IPostActingUCWeakMutBunch EffectIPostActingUCWeakMutBunchCreate(
-      LightningChargedUCWeakMutSet membersLightningChargedUCWeakMutSet,
-      TimeCloneAICapabilityUCWeakMutSet membersTimeCloneAICapabilityUCWeakMutSet) {
-    CheckUnlocked();
-    CheckHasLightningChargedUCWeakMutSet(membersLightningChargedUCWeakMutSet);
-    CheckHasTimeCloneAICapabilityUCWeakMutSet(membersTimeCloneAICapabilityUCWeakMutSet);
-
-    var id = NewId();
-    var incarnation =
-        new IPostActingUCWeakMutBunchIncarnation(
-            membersLightningChargedUCWeakMutSet.id,
-            membersTimeCloneAICapabilityUCWeakMutSet.id
-            );
-    EffectInternalCreateIPostActingUCWeakMutBunch(id, rootIncarnation.version, incarnation);
-    return new IPostActingUCWeakMutBunch(this, id);
-  }
-  public void EffectInternalCreateIPostActingUCWeakMutBunch(
-      int id,
-      int incarnationVersion,
-      IPostActingUCWeakMutBunchIncarnation incarnation) {
-    CheckUnlocked();
-    var effect = new IPostActingUCWeakMutBunchCreateEffect(id, incarnation.Copy());
-    rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Add(
-        id,
-        new VersionAndIncarnation<IPostActingUCWeakMutBunchIncarnation>(
-            incarnationVersion,
-            incarnation));
-    NotifyEffect(effect);
-  }
-
-  public void EffectIPostActingUCWeakMutBunchDelete(int id) {
-    CheckUnlocked();
-    var effect = new IPostActingUCWeakMutBunchDeleteEffect(id);
-
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsIPostActingUCWeakMutBunch[id];
-
-    rootIncarnation.incarnationsIPostActingUCWeakMutBunch.Remove(id);
-    NotifyEffect(effect);
-  }
-
-     
-  public int GetIPostActingUCWeakMutBunchHash(int id, int version, IPostActingUCWeakMutBunchIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.membersLightningChargedUCWeakMutSet.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.membersTimeCloneAICapabilityUCWeakMutSet.GetDeterministicHashCode();
-    return result;
-  }
-       public IPreActingUCWeakMutBunchIncarnation GetIPreActingUCWeakMutBunchIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsIPreActingUCWeakMutBunch[id].incarnation;
-  }
-  public bool IPreActingUCWeakMutBunchExists(int id) {
-    return rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(id);
-  }
-  public IPreActingUCWeakMutBunch GetIPreActingUCWeakMutBunch(int id) {
-    CheckHasIPreActingUCWeakMutBunch(id);
-    return new IPreActingUCWeakMutBunch(this, id);
-  }
-  public IPreActingUCWeakMutBunch GetIPreActingUCWeakMutBunchOrNull(int id) {
-    if (IPreActingUCWeakMutBunchExists(id)) {
-      return new IPreActingUCWeakMutBunch(this, id);
-    } else {
-      return new IPreActingUCWeakMutBunch(this, 0);
-    }
-  }
-  public List<IPreActingUCWeakMutBunch> AllIPreActingUCWeakMutBunch() {
-    List<IPreActingUCWeakMutBunch> result = new List<IPreActingUCWeakMutBunch>(rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Count);
-    foreach (var id in rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Keys) {
-      result.Add(new IPreActingUCWeakMutBunch(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<IPreActingUCWeakMutBunch> EnumAllIPreActingUCWeakMutBunch() {
-    foreach (var id in rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Keys) {
-      yield return GetIPreActingUCWeakMutBunch(id);
-    }
-  }
-  public void CheckHasIPreActingUCWeakMutBunch(IPreActingUCWeakMutBunch thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasIPreActingUCWeakMutBunch(thing.id);
-  }
-  public void CheckHasIPreActingUCWeakMutBunch(int id) {
-    if (!rootIncarnation.incarnationsIPreActingUCWeakMutBunch.ContainsKey(id)) {
-      throw new System.Exception("Invalid IPreActingUCWeakMutBunch: " + id);
-    }
-  }
-  public IPreActingUCWeakMutBunch EffectIPreActingUCWeakMutBunchCreate(
-      DoomedUCWeakMutSet membersDoomedUCWeakMutSet,
-      MiredUCWeakMutSet membersMiredUCWeakMutSet,
-      InvincibilityUCWeakMutSet membersInvincibilityUCWeakMutSet,
-      DefyingUCWeakMutSet membersDefyingUCWeakMutSet,
-      CounteringUCWeakMutSet membersCounteringUCWeakMutSet,
-      AttackAICapabilityUCWeakMutSet membersAttackAICapabilityUCWeakMutSet) {
-    CheckUnlocked();
-    CheckHasDoomedUCWeakMutSet(membersDoomedUCWeakMutSet);
-    CheckHasMiredUCWeakMutSet(membersMiredUCWeakMutSet);
-    CheckHasInvincibilityUCWeakMutSet(membersInvincibilityUCWeakMutSet);
-    CheckHasDefyingUCWeakMutSet(membersDefyingUCWeakMutSet);
-    CheckHasCounteringUCWeakMutSet(membersCounteringUCWeakMutSet);
-    CheckHasAttackAICapabilityUCWeakMutSet(membersAttackAICapabilityUCWeakMutSet);
-
-    var id = NewId();
-    var incarnation =
-        new IPreActingUCWeakMutBunchIncarnation(
-            membersDoomedUCWeakMutSet.id,
-            membersMiredUCWeakMutSet.id,
-            membersInvincibilityUCWeakMutSet.id,
-            membersDefyingUCWeakMutSet.id,
-            membersCounteringUCWeakMutSet.id,
-            membersAttackAICapabilityUCWeakMutSet.id
-            );
-    EffectInternalCreateIPreActingUCWeakMutBunch(id, rootIncarnation.version, incarnation);
-    return new IPreActingUCWeakMutBunch(this, id);
-  }
-  public void EffectInternalCreateIPreActingUCWeakMutBunch(
-      int id,
-      int incarnationVersion,
-      IPreActingUCWeakMutBunchIncarnation incarnation) {
-    CheckUnlocked();
-    var effect = new IPreActingUCWeakMutBunchCreateEffect(id, incarnation.Copy());
-    rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Add(
-        id,
-        new VersionAndIncarnation<IPreActingUCWeakMutBunchIncarnation>(
-            incarnationVersion,
-            incarnation));
-    NotifyEffect(effect);
-  }
-
-  public void EffectIPreActingUCWeakMutBunchDelete(int id) {
-    CheckUnlocked();
-    var effect = new IPreActingUCWeakMutBunchDeleteEffect(id);
-
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsIPreActingUCWeakMutBunch[id];
-
-    rootIncarnation.incarnationsIPreActingUCWeakMutBunch.Remove(id);
-    NotifyEffect(effect);
-  }
-
-     
-  public int GetIPreActingUCWeakMutBunchHash(int id, int version, IPreActingUCWeakMutBunchIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.membersDoomedUCWeakMutSet.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.membersMiredUCWeakMutSet.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.membersInvincibilityUCWeakMutSet.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.membersDefyingUCWeakMutSet.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.membersCounteringUCWeakMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersAttackAICapabilityUCWeakMutSet.GetDeterministicHashCode();
-    return result;
-  }
        public GameIncarnation GetGameIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -21289,20 +20833,15 @@ var effect = new ExecutionStateSetRemainingPostActingUnitComponentsEffect(id, ne
       Unit player,
       Level level,
       int time,
-      ExecutionState executionState,
+      Unit actingUnit,
+      bool pauseBeforeNextUnit,
       int actionNum,
       string instructions,
       bool hideInput,
-      IGameEventMutList events,
-      UnitWeakMutSet eventedUnits,
-      TerrainTileWeakMutSet eventedTerrainTiles) {
+      IGameEvent evvent) {
     CheckUnlocked();
     CheckHasRand(rand);
     CheckHasLevelMutSet(levels);
-    CheckHasExecutionState(executionState);
-    CheckHasIGameEventMutList(events);
-    CheckHasUnitWeakMutSet(eventedUnits);
-    CheckHasTerrainTileWeakMutSet(eventedTerrainTiles);
 
     var id = NewId();
     var incarnation =
@@ -21313,13 +20852,12 @@ var effect = new ExecutionStateSetRemainingPostActingUnitComponentsEffect(id, ne
             player.id,
             level.id,
             time,
-            executionState.id,
+            actingUnit.id,
+            pauseBeforeNextUnit,
             actionNum,
             instructions,
             hideInput,
-            events.id,
-            eventedUnits.id,
-            eventedTerrainTiles.id
+            evvent
             );
     EffectInternalCreateGame(id, rootIncarnation.version, incarnation);
     return new Game(this, id);
@@ -21362,13 +20900,16 @@ var effect = new ExecutionStateSetRemainingPostActingUnitComponentsEffect(id, ne
       result += id * version * 5 * incarnation.level.GetDeterministicHashCode();
     }
     result += id * version * 6 * incarnation.time.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.executionState.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.actionNum.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.instructions.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.hideInput.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.events.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.eventedUnits.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.eventedTerrainTiles.GetDeterministicHashCode();
+    if (!object.ReferenceEquals(incarnation.actingUnit, null)) {
+      result += id * version * 7 * incarnation.actingUnit.GetDeterministicHashCode();
+    }
+    result += id * version * 8 * incarnation.pauseBeforeNextUnit.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.actionNum.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.instructions.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.hideInput.GetDeterministicHashCode();
+    if (!object.ReferenceEquals(incarnation.evvent, null)) {
+      result += id * version * 12 * incarnation.evvent.GetDeterministicHashCode();
+    }
     return result;
   }
      
@@ -21390,13 +20931,12 @@ var effect = new GameSetPlayerEffect(id, newValue.id);
               newValue.id,
               oldIncarnationAndVersion.incarnation.level,
               oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
               oldIncarnationAndVersion.incarnation.actionNum,
               oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.events,
-              oldIncarnationAndVersion.incarnation.eventedUnits,
-              oldIncarnationAndVersion.incarnation.eventedTerrainTiles);
+              oldIncarnationAndVersion.incarnation.evvent);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21424,13 +20964,12 @@ var effect = new GameSetLevelEffect(id, newValue.id);
               oldIncarnationAndVersion.incarnation.player,
               newValue.id,
               oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
               oldIncarnationAndVersion.incarnation.actionNum,
               oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.events,
-              oldIncarnationAndVersion.incarnation.eventedUnits,
-              oldIncarnationAndVersion.incarnation.eventedTerrainTiles);
+              oldIncarnationAndVersion.incarnation.evvent);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21458,13 +20997,78 @@ var effect = new GameSetTimeEffect(id, newValue);
               oldIncarnationAndVersion.incarnation.player,
               oldIncarnationAndVersion.incarnation.level,
               newValue,
-              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
               oldIncarnationAndVersion.incarnation.actionNum,
               oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.events,
-              oldIncarnationAndVersion.incarnation.eventedUnits,
-              oldIncarnationAndVersion.incarnation.eventedTerrainTiles);
+              oldIncarnationAndVersion.incarnation.evvent);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    NotifyEffect(effect);
+  }
+
+  public void EffectGameSetActingUnit(int id, Unit newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+var effect = new GameSetActingUnitEffect(id, newValue.id);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldId = oldIncarnationAndVersion.incarnation.actingUnit;
+      oldIncarnationAndVersion.incarnation.actingUnit = newValue.id;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              newValue.id,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
+              oldIncarnationAndVersion.incarnation.actionNum,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              oldIncarnationAndVersion.incarnation.evvent);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    NotifyEffect(effect);
+  }
+
+  public void EffectGameSetPauseBeforeNextUnit(int id, bool newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+var effect = new GameSetPauseBeforeNextUnitEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit;
+      oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              newValue,
+              oldIncarnationAndVersion.incarnation.actionNum,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              oldIncarnationAndVersion.incarnation.evvent);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21492,13 +21096,12 @@ var effect = new GameSetActionNumEffect(id, newValue);
               oldIncarnationAndVersion.incarnation.player,
               oldIncarnationAndVersion.incarnation.level,
               oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
               newValue,
               oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.events,
-              oldIncarnationAndVersion.incarnation.eventedUnits,
-              oldIncarnationAndVersion.incarnation.eventedTerrainTiles);
+              oldIncarnationAndVersion.incarnation.evvent);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21526,13 +21129,12 @@ var effect = new GameSetInstructionsEffect(id, newValue);
               oldIncarnationAndVersion.incarnation.player,
               oldIncarnationAndVersion.incarnation.level,
               oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
               oldIncarnationAndVersion.incarnation.actionNum,
               newValue,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.events,
-              oldIncarnationAndVersion.incarnation.eventedUnits,
-              oldIncarnationAndVersion.incarnation.eventedTerrainTiles);
+              oldIncarnationAndVersion.incarnation.evvent);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21560,13 +21162,45 @@ var effect = new GameSetHideInputEffect(id, newValue);
               oldIncarnationAndVersion.incarnation.player,
               oldIncarnationAndVersion.incarnation.level,
               oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.executionState,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
               oldIncarnationAndVersion.incarnation.actionNum,
               oldIncarnationAndVersion.incarnation.instructions,
               newValue,
-              oldIncarnationAndVersion.incarnation.events,
-              oldIncarnationAndVersion.incarnation.eventedUnits,
-              oldIncarnationAndVersion.incarnation.eventedTerrainTiles);
+              oldIncarnationAndVersion.incarnation.evvent);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+    NotifyEffect(effect);
+  }
+
+  public void EffectGameSetEvvent(int id, IGameEvent newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+var effect = new GameSetEvventEffect(id, newValue);
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.evvent;
+      oldIncarnationAndVersion.incarnation.evvent = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
+              oldIncarnationAndVersion.incarnation.actionNum,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              newValue);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -24650,244 +24284,6 @@ var effect = new GameSetHideInputEffect(id, newValue);
     GetIDestructible(id);
   }
 
-    public int GetIGameEventMutListHash(int id, int version, IGameEventMutListIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.list) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public IGameEventMutListIncarnation GetIGameEventMutListIncarnation(int id) {
-      return rootIncarnation.incarnationsIGameEventMutList[id].incarnation;
-    }
-    public IGameEventMutList GetIGameEventMutList(int id) {
-      CheckHasIGameEventMutList(id);
-      return new IGameEventMutList(this, id);
-    }
-    public IGameEventMutList GetIGameEventMutListOrNull(int id) {
-      if (IGameEventMutListExists(id)) {
-        return new IGameEventMutList(this, id);
-      } else {
-        return new IGameEventMutList(this, 0);
-      }
-    }
-    public List<IGameEventMutList> AllIGameEventMutList() {
-      List<IGameEventMutList> result = new List<IGameEventMutList>(rootIncarnation.incarnationsIGameEventMutList.Count);
-      foreach (var id in rootIncarnation.incarnationsIGameEventMutList.Keys) {
-        result.Add(new IGameEventMutList(this, id));
-      }
-      return result;
-    }
-    public bool IGameEventMutListExists(int id) {
-      return rootIncarnation.incarnationsIGameEventMutList.ContainsKey(id);
-    }
-    public void CheckHasIGameEventMutList(IGameEventMutList thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasIGameEventMutList(thing.id);
-    }
-    public void CheckHasIGameEventMutList(int id) {
-      if (!rootIncarnation.incarnationsIGameEventMutList.ContainsKey(id)) {
-        throw new System.Exception("Invalid IGameEventMutList}: " + id);
-      }
-    }
-    public IGameEventMutList EffectIGameEventMutListCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      Asserts.Assert(!rootIncarnation.incarnationsIGameEventMutList.ContainsKey(id));
-      EffectInternalCreateIGameEventMutList(id, rootIncarnation.version, new IGameEventMutListIncarnation(new List<IGameEvent>()));
-      return new IGameEventMutList(this, id);
-    }
-    public IGameEventMutList EffectIGameEventMutListCreate(IEnumerable<IGameEvent> elements) {
-      var id = NewId();
-      var incarnation = new IGameEventMutListIncarnation(new List<IGameEvent>(elements));
-      EffectInternalCreateIGameEventMutList(id, rootIncarnation.version, incarnation);
-      return new IGameEventMutList(this, id);
-    }
-    public void EffectInternalCreateIGameEventMutList(int id, int incarnationVersion, IGameEventMutListIncarnation incarnation) {
-      var effect = new IGameEventMutListCreateEffect(id);
-      rootIncarnation.incarnationsIGameEventMutList
-          .Add(
-              id,
-              new VersionAndIncarnation<IGameEventMutListIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectIGameEventMutListDelete(int id) {
-      CheckUnlocked();
-      var effect = new IGameEventMutListDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsIGameEventMutList[id];
-      rootIncarnation.incarnationsIGameEventMutList.Remove(id);
-    }
-    public void EffectIGameEventMutListAdd(int listId, int addIndex, IGameEvent element) {
-      CheckUnlocked();
-      CheckHasIGameEventMutList(listId);
-
-    
-
-      var flattenedElement =
-element;
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsIGameEventMutList[listId];
-      var effect = new IGameEventMutListAddEffect(listId, addIndex, flattenedElement);
-
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, flattenedElement);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.list;
-        var newMap = new List<IGameEvent>(oldMap);
-        newMap.Add(flattenedElement);
-        var newIncarnation = new IGameEventMutListIncarnation(newMap);
-        rootIncarnation.incarnationsIGameEventMutList[listId] =
-            new VersionAndIncarnation<IGameEventMutListIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectIGameEventMutListRemoveAt(int listId, int index) {
-      CheckUnlocked();
-      CheckHasIGameEventMutList(listId);
-
-      var effect = new IGameEventMutListRemoveEffect(listId, index);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsIGameEventMutList[listId];
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        var oldElement = oldIncarnationAndVersion.incarnation.list[index];
-        oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.list;
-        var newMap = new List<IGameEvent>(oldMap);
-        newMap.RemoveAt(index);
-        var newIncarnation = new IGameEventMutListIncarnation(newMap);
-        rootIncarnation.incarnationsIGameEventMutList[listId] =
-            new VersionAndIncarnation<IGameEventMutListIncarnation>(
-                rootIncarnation.version, newIncarnation);
-
-      }
-      NotifyEffect(effect);
-    }
-       
-    public int GetITerrainTileEventMutListHash(int id, int version, ITerrainTileEventMutListIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.list) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public ITerrainTileEventMutListIncarnation GetITerrainTileEventMutListIncarnation(int id) {
-      return rootIncarnation.incarnationsITerrainTileEventMutList[id].incarnation;
-    }
-    public ITerrainTileEventMutList GetITerrainTileEventMutList(int id) {
-      CheckHasITerrainTileEventMutList(id);
-      return new ITerrainTileEventMutList(this, id);
-    }
-    public ITerrainTileEventMutList GetITerrainTileEventMutListOrNull(int id) {
-      if (ITerrainTileEventMutListExists(id)) {
-        return new ITerrainTileEventMutList(this, id);
-      } else {
-        return new ITerrainTileEventMutList(this, 0);
-      }
-    }
-    public List<ITerrainTileEventMutList> AllITerrainTileEventMutList() {
-      List<ITerrainTileEventMutList> result = new List<ITerrainTileEventMutList>(rootIncarnation.incarnationsITerrainTileEventMutList.Count);
-      foreach (var id in rootIncarnation.incarnationsITerrainTileEventMutList.Keys) {
-        result.Add(new ITerrainTileEventMutList(this, id));
-      }
-      return result;
-    }
-    public bool ITerrainTileEventMutListExists(int id) {
-      return rootIncarnation.incarnationsITerrainTileEventMutList.ContainsKey(id);
-    }
-    public void CheckHasITerrainTileEventMutList(ITerrainTileEventMutList thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasITerrainTileEventMutList(thing.id);
-    }
-    public void CheckHasITerrainTileEventMutList(int id) {
-      if (!rootIncarnation.incarnationsITerrainTileEventMutList.ContainsKey(id)) {
-        throw new System.Exception("Invalid ITerrainTileEventMutList}: " + id);
-      }
-    }
-    public ITerrainTileEventMutList EffectITerrainTileEventMutListCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      Asserts.Assert(!rootIncarnation.incarnationsITerrainTileEventMutList.ContainsKey(id));
-      EffectInternalCreateITerrainTileEventMutList(id, rootIncarnation.version, new ITerrainTileEventMutListIncarnation(new List<ITerrainTileEvent>()));
-      return new ITerrainTileEventMutList(this, id);
-    }
-    public ITerrainTileEventMutList EffectITerrainTileEventMutListCreate(IEnumerable<ITerrainTileEvent> elements) {
-      var id = NewId();
-      var incarnation = new ITerrainTileEventMutListIncarnation(new List<ITerrainTileEvent>(elements));
-      EffectInternalCreateITerrainTileEventMutList(id, rootIncarnation.version, incarnation);
-      return new ITerrainTileEventMutList(this, id);
-    }
-    public void EffectInternalCreateITerrainTileEventMutList(int id, int incarnationVersion, ITerrainTileEventMutListIncarnation incarnation) {
-      var effect = new ITerrainTileEventMutListCreateEffect(id);
-      rootIncarnation.incarnationsITerrainTileEventMutList
-          .Add(
-              id,
-              new VersionAndIncarnation<ITerrainTileEventMutListIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectITerrainTileEventMutListDelete(int id) {
-      CheckUnlocked();
-      var effect = new ITerrainTileEventMutListDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsITerrainTileEventMutList[id];
-      rootIncarnation.incarnationsITerrainTileEventMutList.Remove(id);
-    }
-    public void EffectITerrainTileEventMutListAdd(int listId, int addIndex, ITerrainTileEvent element) {
-      CheckUnlocked();
-      CheckHasITerrainTileEventMutList(listId);
-
-    
-
-      var flattenedElement =
-element;
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsITerrainTileEventMutList[listId];
-      var effect = new ITerrainTileEventMutListAddEffect(listId, addIndex, flattenedElement);
-
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, flattenedElement);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.list;
-        var newMap = new List<ITerrainTileEvent>(oldMap);
-        newMap.Add(flattenedElement);
-        var newIncarnation = new ITerrainTileEventMutListIncarnation(newMap);
-        rootIncarnation.incarnationsITerrainTileEventMutList[listId] =
-            new VersionAndIncarnation<ITerrainTileEventMutListIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectITerrainTileEventMutListRemoveAt(int listId, int index) {
-      CheckUnlocked();
-      CheckHasITerrainTileEventMutList(listId);
-
-      var effect = new ITerrainTileEventMutListRemoveEffect(listId, index);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsITerrainTileEventMutList[listId];
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        var oldElement = oldIncarnationAndVersion.incarnation.list[index];
-        oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.list;
-        var newMap = new List<ITerrainTileEvent>(oldMap);
-        newMap.RemoveAt(index);
-        var newIncarnation = new ITerrainTileEventMutListIncarnation(newMap);
-        rootIncarnation.incarnationsITerrainTileEventMutList[listId] =
-            new VersionAndIncarnation<ITerrainTileEventMutListIncarnation>(
-                rootIncarnation.version, newIncarnation);
-
-      }
-      NotifyEffect(effect);
-    }
-       
     public int GetLocationMutListHash(int id, int version, LocationMutListIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.list) {
@@ -24975,7 +24371,7 @@ element;
       } else {
         var oldMap = oldIncarnationAndVersion.incarnation.list;
         var newMap = new List<Location>(oldMap);
-        newMap.Add(flattenedElement);
+        newMap.Insert(addIndex, flattenedElement);
         var newIncarnation = new LocationMutListIncarnation(newMap);
         rootIncarnation.incarnationsLocationMutList[listId] =
             new VersionAndIncarnation<LocationMutListIncarnation>(
@@ -24990,9 +24386,12 @@ element;
 
       var effect = new LocationMutListRemoveEffect(listId, index);
 
+
       var oldIncarnationAndVersion = rootIncarnation.incarnationsLocationMutList[listId];
+      // Check that its there
+      var oldElement = oldIncarnationAndVersion.incarnation.list[index];
+      
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        var oldElement = oldIncarnationAndVersion.incarnation.list[index];
         oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
       } else {
         var oldMap = oldIncarnationAndVersion.incarnation.list;
@@ -25094,7 +24493,7 @@ element;
       } else {
         var oldMap = oldIncarnationAndVersion.incarnation.list;
         var newMap = new List<IRequest>(oldMap);
-        newMap.Add(flattenedElement);
+        newMap.Insert(addIndex, flattenedElement);
         var newIncarnation = new IRequestMutListIncarnation(newMap);
         rootIncarnation.incarnationsIRequestMutList[listId] =
             new VersionAndIncarnation<IRequestMutListIncarnation>(
@@ -25109,9 +24508,12 @@ element;
 
       var effect = new IRequestMutListRemoveEffect(listId, index);
 
+
       var oldIncarnationAndVersion = rootIncarnation.incarnationsIRequestMutList[listId];
+      // Check that its there
+      var oldElement = oldIncarnationAndVersion.incarnation.list[index];
+      
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        var oldElement = oldIncarnationAndVersion.incarnation.list[index];
         oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
       } else {
         var oldMap = oldIncarnationAndVersion.incarnation.list;
@@ -25120,125 +24522,6 @@ element;
         var newIncarnation = new IRequestMutListIncarnation(newMap);
         rootIncarnation.incarnationsIRequestMutList[listId] =
             new VersionAndIncarnation<IRequestMutListIncarnation>(
-                rootIncarnation.version, newIncarnation);
-
-      }
-      NotifyEffect(effect);
-    }
-       
-    public int GetIUnitEventMutListHash(int id, int version, IUnitEventMutListIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.list) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public IUnitEventMutListIncarnation GetIUnitEventMutListIncarnation(int id) {
-      return rootIncarnation.incarnationsIUnitEventMutList[id].incarnation;
-    }
-    public IUnitEventMutList GetIUnitEventMutList(int id) {
-      CheckHasIUnitEventMutList(id);
-      return new IUnitEventMutList(this, id);
-    }
-    public IUnitEventMutList GetIUnitEventMutListOrNull(int id) {
-      if (IUnitEventMutListExists(id)) {
-        return new IUnitEventMutList(this, id);
-      } else {
-        return new IUnitEventMutList(this, 0);
-      }
-    }
-    public List<IUnitEventMutList> AllIUnitEventMutList() {
-      List<IUnitEventMutList> result = new List<IUnitEventMutList>(rootIncarnation.incarnationsIUnitEventMutList.Count);
-      foreach (var id in rootIncarnation.incarnationsIUnitEventMutList.Keys) {
-        result.Add(new IUnitEventMutList(this, id));
-      }
-      return result;
-    }
-    public bool IUnitEventMutListExists(int id) {
-      return rootIncarnation.incarnationsIUnitEventMutList.ContainsKey(id);
-    }
-    public void CheckHasIUnitEventMutList(IUnitEventMutList thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasIUnitEventMutList(thing.id);
-    }
-    public void CheckHasIUnitEventMutList(int id) {
-      if (!rootIncarnation.incarnationsIUnitEventMutList.ContainsKey(id)) {
-        throw new System.Exception("Invalid IUnitEventMutList}: " + id);
-      }
-    }
-    public IUnitEventMutList EffectIUnitEventMutListCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      Asserts.Assert(!rootIncarnation.incarnationsIUnitEventMutList.ContainsKey(id));
-      EffectInternalCreateIUnitEventMutList(id, rootIncarnation.version, new IUnitEventMutListIncarnation(new List<IUnitEvent>()));
-      return new IUnitEventMutList(this, id);
-    }
-    public IUnitEventMutList EffectIUnitEventMutListCreate(IEnumerable<IUnitEvent> elements) {
-      var id = NewId();
-      var incarnation = new IUnitEventMutListIncarnation(new List<IUnitEvent>(elements));
-      EffectInternalCreateIUnitEventMutList(id, rootIncarnation.version, incarnation);
-      return new IUnitEventMutList(this, id);
-    }
-    public void EffectInternalCreateIUnitEventMutList(int id, int incarnationVersion, IUnitEventMutListIncarnation incarnation) {
-      var effect = new IUnitEventMutListCreateEffect(id);
-      rootIncarnation.incarnationsIUnitEventMutList
-          .Add(
-              id,
-              new VersionAndIncarnation<IUnitEventMutListIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectIUnitEventMutListDelete(int id) {
-      CheckUnlocked();
-      var effect = new IUnitEventMutListDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsIUnitEventMutList[id];
-      rootIncarnation.incarnationsIUnitEventMutList.Remove(id);
-    }
-    public void EffectIUnitEventMutListAdd(int listId, int addIndex, IUnitEvent element) {
-      CheckUnlocked();
-      CheckHasIUnitEventMutList(listId);
-
-    
-
-      var flattenedElement =
-element;
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsIUnitEventMutList[listId];
-      var effect = new IUnitEventMutListAddEffect(listId, addIndex, flattenedElement);
-
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, flattenedElement);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.list;
-        var newMap = new List<IUnitEvent>(oldMap);
-        newMap.Add(flattenedElement);
-        var newIncarnation = new IUnitEventMutListIncarnation(newMap);
-        rootIncarnation.incarnationsIUnitEventMutList[listId] =
-            new VersionAndIncarnation<IUnitEventMutListIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectIUnitEventMutListRemoveAt(int listId, int index) {
-      CheckUnlocked();
-      CheckHasIUnitEventMutList(listId);
-
-      var effect = new IUnitEventMutListRemoveEffect(listId, index);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsIUnitEventMutList[listId];
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        var oldElement = oldIncarnationAndVersion.incarnation.list[index];
-        oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.list;
-        var newMap = new List<IUnitEvent>(oldMap);
-        newMap.RemoveAt(index);
-        var newIncarnation = new IUnitEventMutListIncarnation(newMap);
-        rootIncarnation.incarnationsIUnitEventMutList[listId] =
-            new VersionAndIncarnation<IUnitEventMutListIncarnation>(
                 rootIncarnation.version, newIncarnation);
 
       }
@@ -25350,1096 +24633,6 @@ element;
         var newIncarnation = new LevelMutSetIncarnation(newMap);
         rootIncarnation.incarnationsLevelMutSet[setId] =
             new VersionAndIncarnation<LevelMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-
-       
-    public int GetUnitWeakMutSetHash(int id, int version, UnitWeakMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public UnitWeakMutSetIncarnation GetUnitWeakMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsUnitWeakMutSet[id].incarnation;
-    }
-    public UnitWeakMutSet GetUnitWeakMutSet(int id) {
-      return new UnitWeakMutSet(this, id);
-    }
-    public List<UnitWeakMutSet> AllUnitWeakMutSet() {
-      List<UnitWeakMutSet> result = new List<UnitWeakMutSet>(rootIncarnation.incarnationsUnitWeakMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsUnitWeakMutSet.Keys) {
-        result.Add(new UnitWeakMutSet(this, id));
-      }
-      return result;
-    }
-    public bool UnitWeakMutSetExists(int id) {
-      return rootIncarnation.incarnationsUnitWeakMutSet.ContainsKey(id);
-    }
-    public void CheckHasUnitWeakMutSet(UnitWeakMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasUnitWeakMutSet(thing.id);
-    }
-    public void CheckHasUnitWeakMutSet(int id) {
-      if (!rootIncarnation.incarnationsUnitWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid UnitWeakMutSet}: " + id);
-      }
-    }
-    public UnitWeakMutSet EffectUnitWeakMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new UnitWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateUnitWeakMutSet(id, rootIncarnation.version, incarnation);
-      return new UnitWeakMutSet(this, id);
-    }
-    public void EffectInternalCreateUnitWeakMutSet(int id, int incarnationVersion, UnitWeakMutSetIncarnation incarnation) {
-      var effect = new UnitWeakMutSetCreateEffect(id);
-      rootIncarnation.incarnationsUnitWeakMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<UnitWeakMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectUnitWeakMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new UnitWeakMutSetDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsUnitWeakMutSet[id];
-      rootIncarnation.incarnationsUnitWeakMutSet.Remove(id);
-    }
-
-       
-    public void EffectUnitWeakMutSetAdd(int setId, int element) {
-      CheckUnlocked();
-      CheckHasUnitWeakMutSet(setId);
-      CheckHasUnit(element);
-
-      var effect = new UnitWeakMutSetAddEffect(setId, element);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsUnitWeakMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(element);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(element);
-        var newIncarnation = new UnitWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsUnitWeakMutSet[setId] =
-            new VersionAndIncarnation<UnitWeakMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectUnitWeakMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasUnitWeakMutSet(setId);
-
-
-      var effect = new UnitWeakMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsUnitWeakMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new UnitWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsUnitWeakMutSet[setId] =
-            new VersionAndIncarnation<UnitWeakMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-
-       
-    public int GetTerrainTileWeakMutSetHash(int id, int version, TerrainTileWeakMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public TerrainTileWeakMutSetIncarnation GetTerrainTileWeakMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsTerrainTileWeakMutSet[id].incarnation;
-    }
-    public TerrainTileWeakMutSet GetTerrainTileWeakMutSet(int id) {
-      return new TerrainTileWeakMutSet(this, id);
-    }
-    public List<TerrainTileWeakMutSet> AllTerrainTileWeakMutSet() {
-      List<TerrainTileWeakMutSet> result = new List<TerrainTileWeakMutSet>(rootIncarnation.incarnationsTerrainTileWeakMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsTerrainTileWeakMutSet.Keys) {
-        result.Add(new TerrainTileWeakMutSet(this, id));
-      }
-      return result;
-    }
-    public bool TerrainTileWeakMutSetExists(int id) {
-      return rootIncarnation.incarnationsTerrainTileWeakMutSet.ContainsKey(id);
-    }
-    public void CheckHasTerrainTileWeakMutSet(TerrainTileWeakMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasTerrainTileWeakMutSet(thing.id);
-    }
-    public void CheckHasTerrainTileWeakMutSet(int id) {
-      if (!rootIncarnation.incarnationsTerrainTileWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid TerrainTileWeakMutSet}: " + id);
-      }
-    }
-    public TerrainTileWeakMutSet EffectTerrainTileWeakMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new TerrainTileWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateTerrainTileWeakMutSet(id, rootIncarnation.version, incarnation);
-      return new TerrainTileWeakMutSet(this, id);
-    }
-    public void EffectInternalCreateTerrainTileWeakMutSet(int id, int incarnationVersion, TerrainTileWeakMutSetIncarnation incarnation) {
-      var effect = new TerrainTileWeakMutSetCreateEffect(id);
-      rootIncarnation.incarnationsTerrainTileWeakMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<TerrainTileWeakMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectTerrainTileWeakMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new TerrainTileWeakMutSetDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsTerrainTileWeakMutSet[id];
-      rootIncarnation.incarnationsTerrainTileWeakMutSet.Remove(id);
-    }
-
-       
-    public void EffectTerrainTileWeakMutSetAdd(int setId, int element) {
-      CheckUnlocked();
-      CheckHasTerrainTileWeakMutSet(setId);
-      CheckHasTerrainTile(element);
-
-      var effect = new TerrainTileWeakMutSetAddEffect(setId, element);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsTerrainTileWeakMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(element);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(element);
-        var newIncarnation = new TerrainTileWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsTerrainTileWeakMutSet[setId] =
-            new VersionAndIncarnation<TerrainTileWeakMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectTerrainTileWeakMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasTerrainTileWeakMutSet(setId);
-
-
-      var effect = new TerrainTileWeakMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsTerrainTileWeakMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new TerrainTileWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsTerrainTileWeakMutSet[setId] =
-            new VersionAndIncarnation<TerrainTileWeakMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-
-       
-    public int GetDoomedUCWeakMutSetHash(int id, int version, DoomedUCWeakMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public DoomedUCWeakMutSetIncarnation GetDoomedUCWeakMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsDoomedUCWeakMutSet[id].incarnation;
-    }
-    public DoomedUCWeakMutSet GetDoomedUCWeakMutSet(int id) {
-      return new DoomedUCWeakMutSet(this, id);
-    }
-    public List<DoomedUCWeakMutSet> AllDoomedUCWeakMutSet() {
-      List<DoomedUCWeakMutSet> result = new List<DoomedUCWeakMutSet>(rootIncarnation.incarnationsDoomedUCWeakMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsDoomedUCWeakMutSet.Keys) {
-        result.Add(new DoomedUCWeakMutSet(this, id));
-      }
-      return result;
-    }
-    public bool DoomedUCWeakMutSetExists(int id) {
-      return rootIncarnation.incarnationsDoomedUCWeakMutSet.ContainsKey(id);
-    }
-    public void CheckHasDoomedUCWeakMutSet(DoomedUCWeakMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasDoomedUCWeakMutSet(thing.id);
-    }
-    public void CheckHasDoomedUCWeakMutSet(int id) {
-      if (!rootIncarnation.incarnationsDoomedUCWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid DoomedUCWeakMutSet}: " + id);
-      }
-    }
-    public DoomedUCWeakMutSet EffectDoomedUCWeakMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new DoomedUCWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateDoomedUCWeakMutSet(id, rootIncarnation.version, incarnation);
-      return new DoomedUCWeakMutSet(this, id);
-    }
-    public void EffectInternalCreateDoomedUCWeakMutSet(int id, int incarnationVersion, DoomedUCWeakMutSetIncarnation incarnation) {
-      var effect = new DoomedUCWeakMutSetCreateEffect(id);
-      rootIncarnation.incarnationsDoomedUCWeakMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<DoomedUCWeakMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectDoomedUCWeakMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new DoomedUCWeakMutSetDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsDoomedUCWeakMutSet[id];
-      rootIncarnation.incarnationsDoomedUCWeakMutSet.Remove(id);
-    }
-
-       
-    public void EffectDoomedUCWeakMutSetAdd(int setId, int element) {
-      CheckUnlocked();
-      CheckHasDoomedUCWeakMutSet(setId);
-      CheckHasDoomedUC(element);
-
-      var effect = new DoomedUCWeakMutSetAddEffect(setId, element);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsDoomedUCWeakMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(element);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(element);
-        var newIncarnation = new DoomedUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsDoomedUCWeakMutSet[setId] =
-            new VersionAndIncarnation<DoomedUCWeakMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectDoomedUCWeakMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasDoomedUCWeakMutSet(setId);
-
-
-      var effect = new DoomedUCWeakMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsDoomedUCWeakMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new DoomedUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsDoomedUCWeakMutSet[setId] =
-            new VersionAndIncarnation<DoomedUCWeakMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-
-       
-    public int GetMiredUCWeakMutSetHash(int id, int version, MiredUCWeakMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public MiredUCWeakMutSetIncarnation GetMiredUCWeakMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsMiredUCWeakMutSet[id].incarnation;
-    }
-    public MiredUCWeakMutSet GetMiredUCWeakMutSet(int id) {
-      return new MiredUCWeakMutSet(this, id);
-    }
-    public List<MiredUCWeakMutSet> AllMiredUCWeakMutSet() {
-      List<MiredUCWeakMutSet> result = new List<MiredUCWeakMutSet>(rootIncarnation.incarnationsMiredUCWeakMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsMiredUCWeakMutSet.Keys) {
-        result.Add(new MiredUCWeakMutSet(this, id));
-      }
-      return result;
-    }
-    public bool MiredUCWeakMutSetExists(int id) {
-      return rootIncarnation.incarnationsMiredUCWeakMutSet.ContainsKey(id);
-    }
-    public void CheckHasMiredUCWeakMutSet(MiredUCWeakMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasMiredUCWeakMutSet(thing.id);
-    }
-    public void CheckHasMiredUCWeakMutSet(int id) {
-      if (!rootIncarnation.incarnationsMiredUCWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid MiredUCWeakMutSet}: " + id);
-      }
-    }
-    public MiredUCWeakMutSet EffectMiredUCWeakMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new MiredUCWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateMiredUCWeakMutSet(id, rootIncarnation.version, incarnation);
-      return new MiredUCWeakMutSet(this, id);
-    }
-    public void EffectInternalCreateMiredUCWeakMutSet(int id, int incarnationVersion, MiredUCWeakMutSetIncarnation incarnation) {
-      var effect = new MiredUCWeakMutSetCreateEffect(id);
-      rootIncarnation.incarnationsMiredUCWeakMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<MiredUCWeakMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectMiredUCWeakMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new MiredUCWeakMutSetDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsMiredUCWeakMutSet[id];
-      rootIncarnation.incarnationsMiredUCWeakMutSet.Remove(id);
-    }
-
-       
-    public void EffectMiredUCWeakMutSetAdd(int setId, int element) {
-      CheckUnlocked();
-      CheckHasMiredUCWeakMutSet(setId);
-      CheckHasMiredUC(element);
-
-      var effect = new MiredUCWeakMutSetAddEffect(setId, element);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsMiredUCWeakMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(element);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(element);
-        var newIncarnation = new MiredUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsMiredUCWeakMutSet[setId] =
-            new VersionAndIncarnation<MiredUCWeakMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectMiredUCWeakMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasMiredUCWeakMutSet(setId);
-
-
-      var effect = new MiredUCWeakMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsMiredUCWeakMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new MiredUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsMiredUCWeakMutSet[setId] =
-            new VersionAndIncarnation<MiredUCWeakMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-
-       
-    public int GetInvincibilityUCWeakMutSetHash(int id, int version, InvincibilityUCWeakMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public InvincibilityUCWeakMutSetIncarnation GetInvincibilityUCWeakMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsInvincibilityUCWeakMutSet[id].incarnation;
-    }
-    public InvincibilityUCWeakMutSet GetInvincibilityUCWeakMutSet(int id) {
-      return new InvincibilityUCWeakMutSet(this, id);
-    }
-    public List<InvincibilityUCWeakMutSet> AllInvincibilityUCWeakMutSet() {
-      List<InvincibilityUCWeakMutSet> result = new List<InvincibilityUCWeakMutSet>(rootIncarnation.incarnationsInvincibilityUCWeakMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsInvincibilityUCWeakMutSet.Keys) {
-        result.Add(new InvincibilityUCWeakMutSet(this, id));
-      }
-      return result;
-    }
-    public bool InvincibilityUCWeakMutSetExists(int id) {
-      return rootIncarnation.incarnationsInvincibilityUCWeakMutSet.ContainsKey(id);
-    }
-    public void CheckHasInvincibilityUCWeakMutSet(InvincibilityUCWeakMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasInvincibilityUCWeakMutSet(thing.id);
-    }
-    public void CheckHasInvincibilityUCWeakMutSet(int id) {
-      if (!rootIncarnation.incarnationsInvincibilityUCWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid InvincibilityUCWeakMutSet}: " + id);
-      }
-    }
-    public InvincibilityUCWeakMutSet EffectInvincibilityUCWeakMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new InvincibilityUCWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateInvincibilityUCWeakMutSet(id, rootIncarnation.version, incarnation);
-      return new InvincibilityUCWeakMutSet(this, id);
-    }
-    public void EffectInternalCreateInvincibilityUCWeakMutSet(int id, int incarnationVersion, InvincibilityUCWeakMutSetIncarnation incarnation) {
-      var effect = new InvincibilityUCWeakMutSetCreateEffect(id);
-      rootIncarnation.incarnationsInvincibilityUCWeakMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<InvincibilityUCWeakMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectInvincibilityUCWeakMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new InvincibilityUCWeakMutSetDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsInvincibilityUCWeakMutSet[id];
-      rootIncarnation.incarnationsInvincibilityUCWeakMutSet.Remove(id);
-    }
-
-       
-    public void EffectInvincibilityUCWeakMutSetAdd(int setId, int element) {
-      CheckUnlocked();
-      CheckHasInvincibilityUCWeakMutSet(setId);
-      CheckHasInvincibilityUC(element);
-
-      var effect = new InvincibilityUCWeakMutSetAddEffect(setId, element);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsInvincibilityUCWeakMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(element);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(element);
-        var newIncarnation = new InvincibilityUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsInvincibilityUCWeakMutSet[setId] =
-            new VersionAndIncarnation<InvincibilityUCWeakMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectInvincibilityUCWeakMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasInvincibilityUCWeakMutSet(setId);
-
-
-      var effect = new InvincibilityUCWeakMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsInvincibilityUCWeakMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new InvincibilityUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsInvincibilityUCWeakMutSet[setId] =
-            new VersionAndIncarnation<InvincibilityUCWeakMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-
-       
-    public int GetDefyingUCWeakMutSetHash(int id, int version, DefyingUCWeakMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public DefyingUCWeakMutSetIncarnation GetDefyingUCWeakMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsDefyingUCWeakMutSet[id].incarnation;
-    }
-    public DefyingUCWeakMutSet GetDefyingUCWeakMutSet(int id) {
-      return new DefyingUCWeakMutSet(this, id);
-    }
-    public List<DefyingUCWeakMutSet> AllDefyingUCWeakMutSet() {
-      List<DefyingUCWeakMutSet> result = new List<DefyingUCWeakMutSet>(rootIncarnation.incarnationsDefyingUCWeakMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsDefyingUCWeakMutSet.Keys) {
-        result.Add(new DefyingUCWeakMutSet(this, id));
-      }
-      return result;
-    }
-    public bool DefyingUCWeakMutSetExists(int id) {
-      return rootIncarnation.incarnationsDefyingUCWeakMutSet.ContainsKey(id);
-    }
-    public void CheckHasDefyingUCWeakMutSet(DefyingUCWeakMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasDefyingUCWeakMutSet(thing.id);
-    }
-    public void CheckHasDefyingUCWeakMutSet(int id) {
-      if (!rootIncarnation.incarnationsDefyingUCWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid DefyingUCWeakMutSet}: " + id);
-      }
-    }
-    public DefyingUCWeakMutSet EffectDefyingUCWeakMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new DefyingUCWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateDefyingUCWeakMutSet(id, rootIncarnation.version, incarnation);
-      return new DefyingUCWeakMutSet(this, id);
-    }
-    public void EffectInternalCreateDefyingUCWeakMutSet(int id, int incarnationVersion, DefyingUCWeakMutSetIncarnation incarnation) {
-      var effect = new DefyingUCWeakMutSetCreateEffect(id);
-      rootIncarnation.incarnationsDefyingUCWeakMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<DefyingUCWeakMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectDefyingUCWeakMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new DefyingUCWeakMutSetDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsDefyingUCWeakMutSet[id];
-      rootIncarnation.incarnationsDefyingUCWeakMutSet.Remove(id);
-    }
-
-       
-    public void EffectDefyingUCWeakMutSetAdd(int setId, int element) {
-      CheckUnlocked();
-      CheckHasDefyingUCWeakMutSet(setId);
-      CheckHasDefyingUC(element);
-
-      var effect = new DefyingUCWeakMutSetAddEffect(setId, element);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsDefyingUCWeakMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(element);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(element);
-        var newIncarnation = new DefyingUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsDefyingUCWeakMutSet[setId] =
-            new VersionAndIncarnation<DefyingUCWeakMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectDefyingUCWeakMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasDefyingUCWeakMutSet(setId);
-
-
-      var effect = new DefyingUCWeakMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsDefyingUCWeakMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new DefyingUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsDefyingUCWeakMutSet[setId] =
-            new VersionAndIncarnation<DefyingUCWeakMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-
-       
-    public int GetCounteringUCWeakMutSetHash(int id, int version, CounteringUCWeakMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public CounteringUCWeakMutSetIncarnation GetCounteringUCWeakMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsCounteringUCWeakMutSet[id].incarnation;
-    }
-    public CounteringUCWeakMutSet GetCounteringUCWeakMutSet(int id) {
-      return new CounteringUCWeakMutSet(this, id);
-    }
-    public List<CounteringUCWeakMutSet> AllCounteringUCWeakMutSet() {
-      List<CounteringUCWeakMutSet> result = new List<CounteringUCWeakMutSet>(rootIncarnation.incarnationsCounteringUCWeakMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsCounteringUCWeakMutSet.Keys) {
-        result.Add(new CounteringUCWeakMutSet(this, id));
-      }
-      return result;
-    }
-    public bool CounteringUCWeakMutSetExists(int id) {
-      return rootIncarnation.incarnationsCounteringUCWeakMutSet.ContainsKey(id);
-    }
-    public void CheckHasCounteringUCWeakMutSet(CounteringUCWeakMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasCounteringUCWeakMutSet(thing.id);
-    }
-    public void CheckHasCounteringUCWeakMutSet(int id) {
-      if (!rootIncarnation.incarnationsCounteringUCWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid CounteringUCWeakMutSet}: " + id);
-      }
-    }
-    public CounteringUCWeakMutSet EffectCounteringUCWeakMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new CounteringUCWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateCounteringUCWeakMutSet(id, rootIncarnation.version, incarnation);
-      return new CounteringUCWeakMutSet(this, id);
-    }
-    public void EffectInternalCreateCounteringUCWeakMutSet(int id, int incarnationVersion, CounteringUCWeakMutSetIncarnation incarnation) {
-      var effect = new CounteringUCWeakMutSetCreateEffect(id);
-      rootIncarnation.incarnationsCounteringUCWeakMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<CounteringUCWeakMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectCounteringUCWeakMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new CounteringUCWeakMutSetDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsCounteringUCWeakMutSet[id];
-      rootIncarnation.incarnationsCounteringUCWeakMutSet.Remove(id);
-    }
-
-       
-    public void EffectCounteringUCWeakMutSetAdd(int setId, int element) {
-      CheckUnlocked();
-      CheckHasCounteringUCWeakMutSet(setId);
-      CheckHasCounteringUC(element);
-
-      var effect = new CounteringUCWeakMutSetAddEffect(setId, element);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsCounteringUCWeakMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(element);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(element);
-        var newIncarnation = new CounteringUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsCounteringUCWeakMutSet[setId] =
-            new VersionAndIncarnation<CounteringUCWeakMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectCounteringUCWeakMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasCounteringUCWeakMutSet(setId);
-
-
-      var effect = new CounteringUCWeakMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsCounteringUCWeakMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new CounteringUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsCounteringUCWeakMutSet[setId] =
-            new VersionAndIncarnation<CounteringUCWeakMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-
-       
-    public int GetAttackAICapabilityUCWeakMutSetHash(int id, int version, AttackAICapabilityUCWeakMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public AttackAICapabilityUCWeakMutSetIncarnation GetAttackAICapabilityUCWeakMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[id].incarnation;
-    }
-    public AttackAICapabilityUCWeakMutSet GetAttackAICapabilityUCWeakMutSet(int id) {
-      return new AttackAICapabilityUCWeakMutSet(this, id);
-    }
-    public List<AttackAICapabilityUCWeakMutSet> AllAttackAICapabilityUCWeakMutSet() {
-      List<AttackAICapabilityUCWeakMutSet> result = new List<AttackAICapabilityUCWeakMutSet>(rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.Keys) {
-        result.Add(new AttackAICapabilityUCWeakMutSet(this, id));
-      }
-      return result;
-    }
-    public bool AttackAICapabilityUCWeakMutSetExists(int id) {
-      return rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(id);
-    }
-    public void CheckHasAttackAICapabilityUCWeakMutSet(AttackAICapabilityUCWeakMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasAttackAICapabilityUCWeakMutSet(thing.id);
-    }
-    public void CheckHasAttackAICapabilityUCWeakMutSet(int id) {
-      if (!rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid AttackAICapabilityUCWeakMutSet}: " + id);
-      }
-    }
-    public AttackAICapabilityUCWeakMutSet EffectAttackAICapabilityUCWeakMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new AttackAICapabilityUCWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateAttackAICapabilityUCWeakMutSet(id, rootIncarnation.version, incarnation);
-      return new AttackAICapabilityUCWeakMutSet(this, id);
-    }
-    public void EffectInternalCreateAttackAICapabilityUCWeakMutSet(int id, int incarnationVersion, AttackAICapabilityUCWeakMutSetIncarnation incarnation) {
-      var effect = new AttackAICapabilityUCWeakMutSetCreateEffect(id);
-      rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectAttackAICapabilityUCWeakMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new AttackAICapabilityUCWeakMutSetDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[id];
-      rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.Remove(id);
-    }
-
-       
-    public void EffectAttackAICapabilityUCWeakMutSetAdd(int setId, int element) {
-      CheckUnlocked();
-      CheckHasAttackAICapabilityUCWeakMutSet(setId);
-      CheckHasAttackAICapabilityUC(element);
-
-      var effect = new AttackAICapabilityUCWeakMutSetAddEffect(setId, element);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(element);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(element);
-        var newIncarnation = new AttackAICapabilityUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId] =
-            new VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectAttackAICapabilityUCWeakMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasAttackAICapabilityUCWeakMutSet(setId);
-
-
-      var effect = new AttackAICapabilityUCWeakMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new AttackAICapabilityUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId] =
-            new VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-
-       
-    public int GetLightningChargedUCWeakMutSetHash(int id, int version, LightningChargedUCWeakMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public LightningChargedUCWeakMutSetIncarnation GetLightningChargedUCWeakMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsLightningChargedUCWeakMutSet[id].incarnation;
-    }
-    public LightningChargedUCWeakMutSet GetLightningChargedUCWeakMutSet(int id) {
-      return new LightningChargedUCWeakMutSet(this, id);
-    }
-    public List<LightningChargedUCWeakMutSet> AllLightningChargedUCWeakMutSet() {
-      List<LightningChargedUCWeakMutSet> result = new List<LightningChargedUCWeakMutSet>(rootIncarnation.incarnationsLightningChargedUCWeakMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsLightningChargedUCWeakMutSet.Keys) {
-        result.Add(new LightningChargedUCWeakMutSet(this, id));
-      }
-      return result;
-    }
-    public bool LightningChargedUCWeakMutSetExists(int id) {
-      return rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(id);
-    }
-    public void CheckHasLightningChargedUCWeakMutSet(LightningChargedUCWeakMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasLightningChargedUCWeakMutSet(thing.id);
-    }
-    public void CheckHasLightningChargedUCWeakMutSet(int id) {
-      if (!rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid LightningChargedUCWeakMutSet}: " + id);
-      }
-    }
-    public LightningChargedUCWeakMutSet EffectLightningChargedUCWeakMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new LightningChargedUCWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateLightningChargedUCWeakMutSet(id, rootIncarnation.version, incarnation);
-      return new LightningChargedUCWeakMutSet(this, id);
-    }
-    public void EffectInternalCreateLightningChargedUCWeakMutSet(int id, int incarnationVersion, LightningChargedUCWeakMutSetIncarnation incarnation) {
-      var effect = new LightningChargedUCWeakMutSetCreateEffect(id);
-      rootIncarnation.incarnationsLightningChargedUCWeakMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectLightningChargedUCWeakMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new LightningChargedUCWeakMutSetDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[id];
-      rootIncarnation.incarnationsLightningChargedUCWeakMutSet.Remove(id);
-    }
-
-       
-    public void EffectLightningChargedUCWeakMutSetAdd(int setId, int element) {
-      CheckUnlocked();
-      CheckHasLightningChargedUCWeakMutSet(setId);
-      CheckHasLightningChargedUC(element);
-
-      var effect = new LightningChargedUCWeakMutSetAddEffect(setId, element);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(element);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(element);
-        var newIncarnation = new LightningChargedUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId] =
-            new VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectLightningChargedUCWeakMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasLightningChargedUCWeakMutSet(setId);
-
-
-      var effect = new LightningChargedUCWeakMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new LightningChargedUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId] =
-            new VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>(
-                rootIncarnation.version, newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-
-       
-    public int GetTimeCloneAICapabilityUCWeakMutSetHash(int id, int version, TimeCloneAICapabilityUCWeakMutSetIncarnation incarnation) {
-      int result = id * version;
-      foreach (var element in incarnation.set) {
-        result += id * version * element.GetDeterministicHashCode();
-      }
-      return result;
-    }
-    public TimeCloneAICapabilityUCWeakMutSetIncarnation GetTimeCloneAICapabilityUCWeakMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[id].incarnation;
-    }
-    public TimeCloneAICapabilityUCWeakMutSet GetTimeCloneAICapabilityUCWeakMutSet(int id) {
-      return new TimeCloneAICapabilityUCWeakMutSet(this, id);
-    }
-    public List<TimeCloneAICapabilityUCWeakMutSet> AllTimeCloneAICapabilityUCWeakMutSet() {
-      List<TimeCloneAICapabilityUCWeakMutSet> result = new List<TimeCloneAICapabilityUCWeakMutSet>(rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.Keys) {
-        result.Add(new TimeCloneAICapabilityUCWeakMutSet(this, id));
-      }
-      return result;
-    }
-    public bool TimeCloneAICapabilityUCWeakMutSetExists(int id) {
-      return rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.ContainsKey(id);
-    }
-    public void CheckHasTimeCloneAICapabilityUCWeakMutSet(TimeCloneAICapabilityUCWeakMutSet thing) {
-      CheckRootsEqual(this, thing.root);
-      CheckHasTimeCloneAICapabilityUCWeakMutSet(thing.id);
-    }
-    public void CheckHasTimeCloneAICapabilityUCWeakMutSet(int id) {
-      if (!rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid TimeCloneAICapabilityUCWeakMutSet}: " + id);
-      }
-    }
-    public TimeCloneAICapabilityUCWeakMutSet EffectTimeCloneAICapabilityUCWeakMutSetCreate() {
-      CheckUnlocked();
-      var id = NewId();
-      var incarnation = new TimeCloneAICapabilityUCWeakMutSetIncarnation(new SortedSet<int>());
-      EffectInternalCreateTimeCloneAICapabilityUCWeakMutSet(id, rootIncarnation.version, incarnation);
-      return new TimeCloneAICapabilityUCWeakMutSet(this, id);
-    }
-    public void EffectInternalCreateTimeCloneAICapabilityUCWeakMutSet(int id, int incarnationVersion, TimeCloneAICapabilityUCWeakMutSetIncarnation incarnation) {
-      var effect = new TimeCloneAICapabilityUCWeakMutSetCreateEffect(id);
-      rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet
-          .Add(
-              id,
-              new VersionAndIncarnation<TimeCloneAICapabilityUCWeakMutSetIncarnation>(
-                  incarnationVersion,
-                  incarnation));
-      NotifyEffect(effect);
-    }
-    public void EffectTimeCloneAICapabilityUCWeakMutSetDelete(int id) {
-      CheckUnlocked();
-      var effect = new TimeCloneAICapabilityUCWeakMutSetDeleteEffect(id);
-      NotifyEffect(effect);
-      var versionAndIncarnation = rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[id];
-      rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.Remove(id);
-    }
-
-       
-    public void EffectTimeCloneAICapabilityUCWeakMutSetAdd(int setId, int element) {
-      CheckUnlocked();
-      CheckHasTimeCloneAICapabilityUCWeakMutSet(setId);
-      CheckHasTimeCloneAICapabilityUC(element);
-
-      var effect = new TimeCloneAICapabilityUCWeakMutSetAddEffect(setId, element);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[setId];
-      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
-        throw new Exception("Element already exists!");
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Add(element);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Add(element);
-        var newIncarnation = new TimeCloneAICapabilityUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[setId] =
-            new VersionAndIncarnation<TimeCloneAICapabilityUCWeakMutSetIncarnation>(
-                rootIncarnation.version,
-                newIncarnation);
-      }
-      NotifyEffect(effect);
-    }
-    public void EffectTimeCloneAICapabilityUCWeakMutSetRemove(int setId, int elementId) {
-      CheckUnlocked();
-      CheckHasTimeCloneAICapabilityUCWeakMutSet(setId);
-
-
-      var effect = new TimeCloneAICapabilityUCWeakMutSetRemoveEffect(setId, elementId);
-
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[setId];
-      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
-        throw new Exception("Element not found! " + elementId);
-      }
-      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
-      } else {
-        var oldMap = oldIncarnationAndVersion.incarnation.set;
-        var newMap = new SortedSet<int>(oldMap);
-        newMap.Remove(elementId);
-        var newIncarnation = new TimeCloneAICapabilityUCWeakMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[setId] =
-            new VersionAndIncarnation<TimeCloneAICapabilityUCWeakMutSetIncarnation>(
                 rootIncarnation.version, newIncarnation);
       }
       NotifyEffect(effect);
@@ -29215,6 +27408,878 @@ element;
         var newIncarnation = new FireBombImpulseStrongMutSetIncarnation(newMap);
         rootIncarnation.incarnationsFireBombImpulseStrongMutSet[setId] =
             new VersionAndIncarnation<FireBombImpulseStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+
+       
+    public int GetLightningChargedUCWeakMutSetHash(int id, int version, LightningChargedUCWeakMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public LightningChargedUCWeakMutSetIncarnation GetLightningChargedUCWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsLightningChargedUCWeakMutSet[id].incarnation;
+    }
+    public LightningChargedUCWeakMutSet GetLightningChargedUCWeakMutSet(int id) {
+      return new LightningChargedUCWeakMutSet(this, id);
+    }
+    public List<LightningChargedUCWeakMutSet> AllLightningChargedUCWeakMutSet() {
+      List<LightningChargedUCWeakMutSet> result = new List<LightningChargedUCWeakMutSet>(rootIncarnation.incarnationsLightningChargedUCWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsLightningChargedUCWeakMutSet.Keys) {
+        result.Add(new LightningChargedUCWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool LightningChargedUCWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasLightningChargedUCWeakMutSet(LightningChargedUCWeakMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasLightningChargedUCWeakMutSet(thing.id);
+    }
+    public void CheckHasLightningChargedUCWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsLightningChargedUCWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid LightningChargedUCWeakMutSet}: " + id);
+      }
+    }
+    public LightningChargedUCWeakMutSet EffectLightningChargedUCWeakMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new LightningChargedUCWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateLightningChargedUCWeakMutSet(id, rootIncarnation.version, incarnation);
+      return new LightningChargedUCWeakMutSet(this, id);
+    }
+    public void EffectInternalCreateLightningChargedUCWeakMutSet(int id, int incarnationVersion, LightningChargedUCWeakMutSetIncarnation incarnation) {
+      var effect = new LightningChargedUCWeakMutSetCreateEffect(id);
+      rootIncarnation.incarnationsLightningChargedUCWeakMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      NotifyEffect(effect);
+    }
+    public void EffectLightningChargedUCWeakMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new LightningChargedUCWeakMutSetDeleteEffect(id);
+      NotifyEffect(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[id];
+      rootIncarnation.incarnationsLightningChargedUCWeakMutSet.Remove(id);
+    }
+
+       
+    public void EffectLightningChargedUCWeakMutSetAdd(int setId, int element) {
+      CheckUnlocked();
+      CheckHasLightningChargedUCWeakMutSet(setId);
+      CheckHasLightningChargedUC(element);
+
+      var effect = new LightningChargedUCWeakMutSetAddEffect(setId, element);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new LightningChargedUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId] =
+            new VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+    public void EffectLightningChargedUCWeakMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasLightningChargedUCWeakMutSet(setId);
+
+
+      var effect = new LightningChargedUCWeakMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new LightningChargedUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsLightningChargedUCWeakMutSet[setId] =
+            new VersionAndIncarnation<LightningChargedUCWeakMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+
+       
+    public int GetTimeCloneAICapabilityUCWeakMutSetHash(int id, int version, TimeCloneAICapabilityUCWeakMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public TimeCloneAICapabilityUCWeakMutSetIncarnation GetTimeCloneAICapabilityUCWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[id].incarnation;
+    }
+    public TimeCloneAICapabilityUCWeakMutSet GetTimeCloneAICapabilityUCWeakMutSet(int id) {
+      return new TimeCloneAICapabilityUCWeakMutSet(this, id);
+    }
+    public List<TimeCloneAICapabilityUCWeakMutSet> AllTimeCloneAICapabilityUCWeakMutSet() {
+      List<TimeCloneAICapabilityUCWeakMutSet> result = new List<TimeCloneAICapabilityUCWeakMutSet>(rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.Keys) {
+        result.Add(new TimeCloneAICapabilityUCWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool TimeCloneAICapabilityUCWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasTimeCloneAICapabilityUCWeakMutSet(TimeCloneAICapabilityUCWeakMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasTimeCloneAICapabilityUCWeakMutSet(thing.id);
+    }
+    public void CheckHasTimeCloneAICapabilityUCWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid TimeCloneAICapabilityUCWeakMutSet}: " + id);
+      }
+    }
+    public TimeCloneAICapabilityUCWeakMutSet EffectTimeCloneAICapabilityUCWeakMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new TimeCloneAICapabilityUCWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateTimeCloneAICapabilityUCWeakMutSet(id, rootIncarnation.version, incarnation);
+      return new TimeCloneAICapabilityUCWeakMutSet(this, id);
+    }
+    public void EffectInternalCreateTimeCloneAICapabilityUCWeakMutSet(int id, int incarnationVersion, TimeCloneAICapabilityUCWeakMutSetIncarnation incarnation) {
+      var effect = new TimeCloneAICapabilityUCWeakMutSetCreateEffect(id);
+      rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<TimeCloneAICapabilityUCWeakMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      NotifyEffect(effect);
+    }
+    public void EffectTimeCloneAICapabilityUCWeakMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new TimeCloneAICapabilityUCWeakMutSetDeleteEffect(id);
+      NotifyEffect(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[id];
+      rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet.Remove(id);
+    }
+
+       
+    public void EffectTimeCloneAICapabilityUCWeakMutSetAdd(int setId, int element) {
+      CheckUnlocked();
+      CheckHasTimeCloneAICapabilityUCWeakMutSet(setId);
+      CheckHasTimeCloneAICapabilityUC(element);
+
+      var effect = new TimeCloneAICapabilityUCWeakMutSetAddEffect(setId, element);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new TimeCloneAICapabilityUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[setId] =
+            new VersionAndIncarnation<TimeCloneAICapabilityUCWeakMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+    public void EffectTimeCloneAICapabilityUCWeakMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasTimeCloneAICapabilityUCWeakMutSet(setId);
+
+
+      var effect = new TimeCloneAICapabilityUCWeakMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new TimeCloneAICapabilityUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsTimeCloneAICapabilityUCWeakMutSet[setId] =
+            new VersionAndIncarnation<TimeCloneAICapabilityUCWeakMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+
+       
+    public int GetDoomedUCWeakMutSetHash(int id, int version, DoomedUCWeakMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public DoomedUCWeakMutSetIncarnation GetDoomedUCWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsDoomedUCWeakMutSet[id].incarnation;
+    }
+    public DoomedUCWeakMutSet GetDoomedUCWeakMutSet(int id) {
+      return new DoomedUCWeakMutSet(this, id);
+    }
+    public List<DoomedUCWeakMutSet> AllDoomedUCWeakMutSet() {
+      List<DoomedUCWeakMutSet> result = new List<DoomedUCWeakMutSet>(rootIncarnation.incarnationsDoomedUCWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsDoomedUCWeakMutSet.Keys) {
+        result.Add(new DoomedUCWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool DoomedUCWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsDoomedUCWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasDoomedUCWeakMutSet(DoomedUCWeakMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasDoomedUCWeakMutSet(thing.id);
+    }
+    public void CheckHasDoomedUCWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsDoomedUCWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid DoomedUCWeakMutSet}: " + id);
+      }
+    }
+    public DoomedUCWeakMutSet EffectDoomedUCWeakMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new DoomedUCWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateDoomedUCWeakMutSet(id, rootIncarnation.version, incarnation);
+      return new DoomedUCWeakMutSet(this, id);
+    }
+    public void EffectInternalCreateDoomedUCWeakMutSet(int id, int incarnationVersion, DoomedUCWeakMutSetIncarnation incarnation) {
+      var effect = new DoomedUCWeakMutSetCreateEffect(id);
+      rootIncarnation.incarnationsDoomedUCWeakMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<DoomedUCWeakMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      NotifyEffect(effect);
+    }
+    public void EffectDoomedUCWeakMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new DoomedUCWeakMutSetDeleteEffect(id);
+      NotifyEffect(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsDoomedUCWeakMutSet[id];
+      rootIncarnation.incarnationsDoomedUCWeakMutSet.Remove(id);
+    }
+
+       
+    public void EffectDoomedUCWeakMutSetAdd(int setId, int element) {
+      CheckUnlocked();
+      CheckHasDoomedUCWeakMutSet(setId);
+      CheckHasDoomedUC(element);
+
+      var effect = new DoomedUCWeakMutSetAddEffect(setId, element);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsDoomedUCWeakMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new DoomedUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsDoomedUCWeakMutSet[setId] =
+            new VersionAndIncarnation<DoomedUCWeakMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+    public void EffectDoomedUCWeakMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasDoomedUCWeakMutSet(setId);
+
+
+      var effect = new DoomedUCWeakMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsDoomedUCWeakMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new DoomedUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsDoomedUCWeakMutSet[setId] =
+            new VersionAndIncarnation<DoomedUCWeakMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+
+       
+    public int GetMiredUCWeakMutSetHash(int id, int version, MiredUCWeakMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public MiredUCWeakMutSetIncarnation GetMiredUCWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsMiredUCWeakMutSet[id].incarnation;
+    }
+    public MiredUCWeakMutSet GetMiredUCWeakMutSet(int id) {
+      return new MiredUCWeakMutSet(this, id);
+    }
+    public List<MiredUCWeakMutSet> AllMiredUCWeakMutSet() {
+      List<MiredUCWeakMutSet> result = new List<MiredUCWeakMutSet>(rootIncarnation.incarnationsMiredUCWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsMiredUCWeakMutSet.Keys) {
+        result.Add(new MiredUCWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool MiredUCWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsMiredUCWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasMiredUCWeakMutSet(MiredUCWeakMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasMiredUCWeakMutSet(thing.id);
+    }
+    public void CheckHasMiredUCWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsMiredUCWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid MiredUCWeakMutSet}: " + id);
+      }
+    }
+    public MiredUCWeakMutSet EffectMiredUCWeakMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new MiredUCWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateMiredUCWeakMutSet(id, rootIncarnation.version, incarnation);
+      return new MiredUCWeakMutSet(this, id);
+    }
+    public void EffectInternalCreateMiredUCWeakMutSet(int id, int incarnationVersion, MiredUCWeakMutSetIncarnation incarnation) {
+      var effect = new MiredUCWeakMutSetCreateEffect(id);
+      rootIncarnation.incarnationsMiredUCWeakMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<MiredUCWeakMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      NotifyEffect(effect);
+    }
+    public void EffectMiredUCWeakMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new MiredUCWeakMutSetDeleteEffect(id);
+      NotifyEffect(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsMiredUCWeakMutSet[id];
+      rootIncarnation.incarnationsMiredUCWeakMutSet.Remove(id);
+    }
+
+       
+    public void EffectMiredUCWeakMutSetAdd(int setId, int element) {
+      CheckUnlocked();
+      CheckHasMiredUCWeakMutSet(setId);
+      CheckHasMiredUC(element);
+
+      var effect = new MiredUCWeakMutSetAddEffect(setId, element);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsMiredUCWeakMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new MiredUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsMiredUCWeakMutSet[setId] =
+            new VersionAndIncarnation<MiredUCWeakMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+    public void EffectMiredUCWeakMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasMiredUCWeakMutSet(setId);
+
+
+      var effect = new MiredUCWeakMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsMiredUCWeakMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new MiredUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsMiredUCWeakMutSet[setId] =
+            new VersionAndIncarnation<MiredUCWeakMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+
+       
+    public int GetInvincibilityUCWeakMutSetHash(int id, int version, InvincibilityUCWeakMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public InvincibilityUCWeakMutSetIncarnation GetInvincibilityUCWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsInvincibilityUCWeakMutSet[id].incarnation;
+    }
+    public InvincibilityUCWeakMutSet GetInvincibilityUCWeakMutSet(int id) {
+      return new InvincibilityUCWeakMutSet(this, id);
+    }
+    public List<InvincibilityUCWeakMutSet> AllInvincibilityUCWeakMutSet() {
+      List<InvincibilityUCWeakMutSet> result = new List<InvincibilityUCWeakMutSet>(rootIncarnation.incarnationsInvincibilityUCWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsInvincibilityUCWeakMutSet.Keys) {
+        result.Add(new InvincibilityUCWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool InvincibilityUCWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsInvincibilityUCWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasInvincibilityUCWeakMutSet(InvincibilityUCWeakMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasInvincibilityUCWeakMutSet(thing.id);
+    }
+    public void CheckHasInvincibilityUCWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsInvincibilityUCWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid InvincibilityUCWeakMutSet}: " + id);
+      }
+    }
+    public InvincibilityUCWeakMutSet EffectInvincibilityUCWeakMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new InvincibilityUCWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateInvincibilityUCWeakMutSet(id, rootIncarnation.version, incarnation);
+      return new InvincibilityUCWeakMutSet(this, id);
+    }
+    public void EffectInternalCreateInvincibilityUCWeakMutSet(int id, int incarnationVersion, InvincibilityUCWeakMutSetIncarnation incarnation) {
+      var effect = new InvincibilityUCWeakMutSetCreateEffect(id);
+      rootIncarnation.incarnationsInvincibilityUCWeakMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<InvincibilityUCWeakMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      NotifyEffect(effect);
+    }
+    public void EffectInvincibilityUCWeakMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new InvincibilityUCWeakMutSetDeleteEffect(id);
+      NotifyEffect(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsInvincibilityUCWeakMutSet[id];
+      rootIncarnation.incarnationsInvincibilityUCWeakMutSet.Remove(id);
+    }
+
+       
+    public void EffectInvincibilityUCWeakMutSetAdd(int setId, int element) {
+      CheckUnlocked();
+      CheckHasInvincibilityUCWeakMutSet(setId);
+      CheckHasInvincibilityUC(element);
+
+      var effect = new InvincibilityUCWeakMutSetAddEffect(setId, element);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsInvincibilityUCWeakMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new InvincibilityUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsInvincibilityUCWeakMutSet[setId] =
+            new VersionAndIncarnation<InvincibilityUCWeakMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+    public void EffectInvincibilityUCWeakMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasInvincibilityUCWeakMutSet(setId);
+
+
+      var effect = new InvincibilityUCWeakMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsInvincibilityUCWeakMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new InvincibilityUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsInvincibilityUCWeakMutSet[setId] =
+            new VersionAndIncarnation<InvincibilityUCWeakMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+
+       
+    public int GetDefyingUCWeakMutSetHash(int id, int version, DefyingUCWeakMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public DefyingUCWeakMutSetIncarnation GetDefyingUCWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsDefyingUCWeakMutSet[id].incarnation;
+    }
+    public DefyingUCWeakMutSet GetDefyingUCWeakMutSet(int id) {
+      return new DefyingUCWeakMutSet(this, id);
+    }
+    public List<DefyingUCWeakMutSet> AllDefyingUCWeakMutSet() {
+      List<DefyingUCWeakMutSet> result = new List<DefyingUCWeakMutSet>(rootIncarnation.incarnationsDefyingUCWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsDefyingUCWeakMutSet.Keys) {
+        result.Add(new DefyingUCWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool DefyingUCWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsDefyingUCWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasDefyingUCWeakMutSet(DefyingUCWeakMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasDefyingUCWeakMutSet(thing.id);
+    }
+    public void CheckHasDefyingUCWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsDefyingUCWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid DefyingUCWeakMutSet}: " + id);
+      }
+    }
+    public DefyingUCWeakMutSet EffectDefyingUCWeakMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new DefyingUCWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateDefyingUCWeakMutSet(id, rootIncarnation.version, incarnation);
+      return new DefyingUCWeakMutSet(this, id);
+    }
+    public void EffectInternalCreateDefyingUCWeakMutSet(int id, int incarnationVersion, DefyingUCWeakMutSetIncarnation incarnation) {
+      var effect = new DefyingUCWeakMutSetCreateEffect(id);
+      rootIncarnation.incarnationsDefyingUCWeakMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<DefyingUCWeakMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      NotifyEffect(effect);
+    }
+    public void EffectDefyingUCWeakMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new DefyingUCWeakMutSetDeleteEffect(id);
+      NotifyEffect(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsDefyingUCWeakMutSet[id];
+      rootIncarnation.incarnationsDefyingUCWeakMutSet.Remove(id);
+    }
+
+       
+    public void EffectDefyingUCWeakMutSetAdd(int setId, int element) {
+      CheckUnlocked();
+      CheckHasDefyingUCWeakMutSet(setId);
+      CheckHasDefyingUC(element);
+
+      var effect = new DefyingUCWeakMutSetAddEffect(setId, element);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsDefyingUCWeakMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new DefyingUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsDefyingUCWeakMutSet[setId] =
+            new VersionAndIncarnation<DefyingUCWeakMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+    public void EffectDefyingUCWeakMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasDefyingUCWeakMutSet(setId);
+
+
+      var effect = new DefyingUCWeakMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsDefyingUCWeakMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new DefyingUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsDefyingUCWeakMutSet[setId] =
+            new VersionAndIncarnation<DefyingUCWeakMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+
+       
+    public int GetCounteringUCWeakMutSetHash(int id, int version, CounteringUCWeakMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public CounteringUCWeakMutSetIncarnation GetCounteringUCWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsCounteringUCWeakMutSet[id].incarnation;
+    }
+    public CounteringUCWeakMutSet GetCounteringUCWeakMutSet(int id) {
+      return new CounteringUCWeakMutSet(this, id);
+    }
+    public List<CounteringUCWeakMutSet> AllCounteringUCWeakMutSet() {
+      List<CounteringUCWeakMutSet> result = new List<CounteringUCWeakMutSet>(rootIncarnation.incarnationsCounteringUCWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsCounteringUCWeakMutSet.Keys) {
+        result.Add(new CounteringUCWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool CounteringUCWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsCounteringUCWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasCounteringUCWeakMutSet(CounteringUCWeakMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasCounteringUCWeakMutSet(thing.id);
+    }
+    public void CheckHasCounteringUCWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsCounteringUCWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid CounteringUCWeakMutSet}: " + id);
+      }
+    }
+    public CounteringUCWeakMutSet EffectCounteringUCWeakMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new CounteringUCWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateCounteringUCWeakMutSet(id, rootIncarnation.version, incarnation);
+      return new CounteringUCWeakMutSet(this, id);
+    }
+    public void EffectInternalCreateCounteringUCWeakMutSet(int id, int incarnationVersion, CounteringUCWeakMutSetIncarnation incarnation) {
+      var effect = new CounteringUCWeakMutSetCreateEffect(id);
+      rootIncarnation.incarnationsCounteringUCWeakMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<CounteringUCWeakMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      NotifyEffect(effect);
+    }
+    public void EffectCounteringUCWeakMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new CounteringUCWeakMutSetDeleteEffect(id);
+      NotifyEffect(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsCounteringUCWeakMutSet[id];
+      rootIncarnation.incarnationsCounteringUCWeakMutSet.Remove(id);
+    }
+
+       
+    public void EffectCounteringUCWeakMutSetAdd(int setId, int element) {
+      CheckUnlocked();
+      CheckHasCounteringUCWeakMutSet(setId);
+      CheckHasCounteringUC(element);
+
+      var effect = new CounteringUCWeakMutSetAddEffect(setId, element);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsCounteringUCWeakMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new CounteringUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsCounteringUCWeakMutSet[setId] =
+            new VersionAndIncarnation<CounteringUCWeakMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+    public void EffectCounteringUCWeakMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasCounteringUCWeakMutSet(setId);
+
+
+      var effect = new CounteringUCWeakMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsCounteringUCWeakMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new CounteringUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsCounteringUCWeakMutSet[setId] =
+            new VersionAndIncarnation<CounteringUCWeakMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+
+       
+    public int GetAttackAICapabilityUCWeakMutSetHash(int id, int version, AttackAICapabilityUCWeakMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.set) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public AttackAICapabilityUCWeakMutSetIncarnation GetAttackAICapabilityUCWeakMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[id].incarnation;
+    }
+    public AttackAICapabilityUCWeakMutSet GetAttackAICapabilityUCWeakMutSet(int id) {
+      return new AttackAICapabilityUCWeakMutSet(this, id);
+    }
+    public List<AttackAICapabilityUCWeakMutSet> AllAttackAICapabilityUCWeakMutSet() {
+      List<AttackAICapabilityUCWeakMutSet> result = new List<AttackAICapabilityUCWeakMutSet>(rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.Keys) {
+        result.Add(new AttackAICapabilityUCWeakMutSet(this, id));
+      }
+      return result;
+    }
+    public bool AttackAICapabilityUCWeakMutSetExists(int id) {
+      return rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(id);
+    }
+    public void CheckHasAttackAICapabilityUCWeakMutSet(AttackAICapabilityUCWeakMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasAttackAICapabilityUCWeakMutSet(thing.id);
+    }
+    public void CheckHasAttackAICapabilityUCWeakMutSet(int id) {
+      if (!rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid AttackAICapabilityUCWeakMutSet}: " + id);
+      }
+    }
+    public AttackAICapabilityUCWeakMutSet EffectAttackAICapabilityUCWeakMutSetCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      var incarnation = new AttackAICapabilityUCWeakMutSetIncarnation(new SortedSet<int>());
+      EffectInternalCreateAttackAICapabilityUCWeakMutSet(id, rootIncarnation.version, incarnation);
+      return new AttackAICapabilityUCWeakMutSet(this, id);
+    }
+    public void EffectInternalCreateAttackAICapabilityUCWeakMutSet(int id, int incarnationVersion, AttackAICapabilityUCWeakMutSetIncarnation incarnation) {
+      var effect = new AttackAICapabilityUCWeakMutSetCreateEffect(id);
+      rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      NotifyEffect(effect);
+    }
+    public void EffectAttackAICapabilityUCWeakMutSetDelete(int id) {
+      CheckUnlocked();
+      var effect = new AttackAICapabilityUCWeakMutSetDeleteEffect(id);
+      NotifyEffect(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[id];
+      rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet.Remove(id);
+    }
+
+       
+    public void EffectAttackAICapabilityUCWeakMutSetAdd(int setId, int element) {
+      CheckUnlocked();
+      CheckHasAttackAICapabilityUCWeakMutSet(setId);
+      CheckHasAttackAICapabilityUC(element);
+
+      var effect = new AttackAICapabilityUCWeakMutSetAddEffect(setId, element);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId];
+      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new AttackAICapabilityUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId] =
+            new VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+    public void EffectAttackAICapabilityUCWeakMutSetRemove(int setId, int elementId) {
+      CheckUnlocked();
+      CheckHasAttackAICapabilityUCWeakMutSet(setId);
+
+
+      var effect = new AttackAICapabilityUCWeakMutSetRemoveEffect(setId, elementId);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId];
+      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.set;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new AttackAICapabilityUCWeakMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsAttackAICapabilityUCWeakMutSet[setId] =
+            new VersionAndIncarnation<AttackAICapabilityUCWeakMutSetIncarnation>(
                 rootIncarnation.version, newIncarnation);
       }
       NotifyEffect(effect);

@@ -4,228 +4,55 @@ using System.Threading.Tasks;
 using Atharia.Model;
 
 namespace IncendianFalls {
-  public class PauseCondition {
-    public readonly bool betweenUnits;
-    public PauseCondition(bool betweenUnits) {
-      this.betweenUnits = betweenUnits;
-    }
-  }
-
   public class GameLoop {
     public static void Continue(
-        IncendianFalls.SSContext context, Game game, Superstate superstate, PauseCondition pauseCondition) {
-      SortedSet<int> thisSpreeStartedUnitIds = new SortedSet<int>();
-
-      switch (game.GetStateType()) {
-        case WorldStateType.kBetweenUnits:
-          ContinueAtStartTurn(
-              context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-          break;
-        case WorldStateType.kAfterUnitAction:
-          ContinueAfterUnitAction(
-              context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-          break;
-        case WorldStateType.kPreActingDetail:
-          ContinueAfterPreActingDetail(
-              context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-          break;
-        case WorldStateType.kPostActingDetail:
-          ContinueAfterPostActingDetail(
-              context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-          break;
-        case WorldStateType.kBeforeEnemyAction:
-          // If we timeshifted, and just finished rewinding, the player just
-          // got reclassified as a time clone, who's about to do their action.
-          ContinueBeforeUnitAction(
-              context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-          break;
-        case WorldStateType.kBeforePlayerInput:
-          Asserts.Assert(false, "at beforeplayerinput! " + superstate.GetStateType() + " <-");
-          break;
-        default:
-          Asserts.Assert(false, "unknown state!");
-          break;
-      }
-    }
-
-    //public static void ContinueAtPlayerFollowDirective(
-    //    Game game,
-    //    Superstate superstate,
-    //    PauseCondition pauseCondition) {
-    //  SortedSet<int> thisSpreeStartedUnitIds = new SortedSet<int>();
-
-    //  if (game.player.GetDirectiveOrNull() is MoveDirectiveUCAsIDirectiveUC move) {
-
-    //    bool ret = PlayerAI.AI(game, superstate);
-    //    if (!ret) {
-    //      game.root.logger.Error("Couldn't follow move directive, bail!");
-    //      game.player.ClearDirective();
-    //      return;
-    //    }
-
-
-    //    GameLoop.NoteUnitActed(game, game.player);
-
-    //    GameLoop.ContinueAfterUnitAction(
-    //        game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-    //    return;
-    //  } else if (game.player.GetDirectiveOrNull() is TimeScriptDirectiveUCAsIDirectiveUC tsdI) {
-
-    //    bool ret = PlayerAI.AI(game, superstate);
-    //    Asserts.Assert(ret); // TODO, implement time clone evaporating
-
-    //    GameLoop.NoteUnitActed(game, game.player);
-
-    //    GameLoop.ContinueAfterUnitAction(
-    //        game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-    //    return;
-    //  } else {
-    //    Asserts.Assert(false);
-    //    return;
-    //  }
-    //}
-
-    // Called from the outside.
-    public static void ContinueAtStartTurn(
-        IncendianFalls.SSContext context,
-        Game game,
-        Superstate superstate,
-        PauseCondition pauseCondition,
-        SortedSet<int> thisSpreeStartedUnitIds) {
-      //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-      var executionState = game.executionState;
-      Asserts.Assert(!executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
-      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
-      Asserts.Assert(!executionState.actingUnitDidAction);
-
-      StartNextUnit(context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-
-      //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-    }
-
-    public static void NoteUnitAppearedReadyToAct(Game game, Superstate superstate) {
-      var executionState = game.executionState;
-      Asserts.Assert(!executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
-      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
-      Asserts.Assert(!executionState.actingUnitDidAction);
-
-      game.executionState.actingUnit = game.player;
-
-      Asserts.Assert(game.GetStateType() == WorldStateType.kBeforePlayerInput);
-    }
-
-    public static void NoteUnitActed(
-        Game game,
-        Unit unit) {
-      //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-      var executionState = game.executionState;
-      Asserts.Assert(executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
-      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
-      Asserts.Assert(!executionState.actingUnitDidAction);
-
-      executionState.actingUnitDidAction = true;
-
-      // To be continued... via ContinueAfterUnitAction.
-
-      //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        IncendianFalls.SSContext context, Game game, Superstate superstate) {
+      ContinueBetweenUnits(context, game, superstate);
     }
 
     // Called from the outside
     public static void ContinueAfterUnitAction(
         IncendianFalls.SSContext context,
         Game game,
-        Superstate superstate,
-        PauseCondition pauseCondition,
-        SortedSet<int> thisSpreeStartedUnitIds) {
+        Superstate superstate) {
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-      var executionState = game.executionState;
-      Asserts.Assert(executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
-      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
+      Asserts.Assert(game.actingUnit.Exists());
 
-      StartPostActions(
-          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-
-      //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-    }
-
-    // Only called from the inside, from ContinueAfterUnitAction, PlayerDefy, etc.
-    private static void StartPostActions(
-        IncendianFalls.SSContext context,
-        Game game,
-        Superstate superstate,
-        PauseCondition pauseCondition,
-        SortedSet<int> thisSpreeStartedUnitIds) {
-      //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-      var executionState = game.executionState;
-
-      var postActingDetails = IPostActingUCWeakMutBunch.New(game.root);
-      foreach (var details in executionState.actingUnit.components.GetAllIPostActingUC()) {
-        postActingDetails.Add(details);
+      var remainingPostActingUnitComponents = IPostActingUCWeakMutBunch.New(game.root);
+      foreach (var details in game.actingUnit.components.GetAllIPostActingUC()) {
+        remainingPostActingUnitComponents.Add(details);
       }
-      executionState.remainingPostActingUnitComponents = postActingDetails;
-
-      DoNextPostActingDetailOrContinue(
-          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-
-      //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-    }
-
-    // Can be called from StartPostActions or ContinueAfterPreActingDetail.
-    private static void DoNextPostActingDetailOrContinue(
-        IncendianFalls.SSContext context,
-        Game game,
-        Superstate superstate,
-        PauseCondition pauseCondition,
-        SortedSet<int> thisSpreeStartedUnitIds) {
-      //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-      var executionState = game.executionState;
-      var unit = executionState.actingUnit;
-      var remainingPostActingDetails = executionState.remainingPostActingUnitComponents;
-      Asserts.Assert(remainingPostActingDetails.Exists(), "details dont exist!");
-      Asserts.Assert(executionState.actingUnitDidAction, "acting unit didnt do action!");
-
-      while (remainingPostActingDetails.Count > 0) {
-        var detail = remainingPostActingDetails.GetArbitrary();
-        remainingPostActingDetails.Remove(detail);
-        if (!unit.alive) {
-          continue;
-        }
+      while (remainingPostActingUnitComponents.Count > 0) {
+        var detail = remainingPostActingUnitComponents.GetArbitrary();
+        remainingPostActingUnitComponents.Remove(detail);
         if (!detail.Exists()) {
           continue;
         }
-        bool ret = detail.PostAct(game, superstate, executionState.actingUnit);
-        //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-        if (ret) {
-          return; // To be continued... via ContinueAfterPostActingDetail.
+        if (!game.actingUnit.alive) {
+          continue;
         }
+        detail.PostAct(game, superstate, game.actingUnit);
       }
       // There were no existing remaining pre-acting details. Go on to the unit's acting.
-      executionState.remainingPostActingUnitComponents.Destruct();
+      remainingPostActingUnitComponents.Destruct();
 
-      // Figure out a way for a trigger to interrupt, and then we could resume after that trigger.
-      // Similar to what we did with the post acting unit components.
-      // This is so we can trigger a cinematic or camera movement and pause simulation while it's
-      // going.
-      // Presumably we'd need a trigger to resume simulation...
-      var presenceTriggers = game.level.terrain.tiles[unit.location].components.GetAllIPresenceTriggerTTC();
-      Asserts.Assert(presenceTriggers.Count <= 1); // dont support multiple yet. we could just fire both of them at once.
-      // but we should probably have some sort of stop/resume between each trigger.
-      foreach (var presenceTrigger in presenceTriggers) {
-        presenceTrigger.Trigger(context, game, superstate, unit, unit.location);
+      if (game.actingUnit.alive) {
+        // Figure out a way for a trigger to interrupt, and then we could resume after that trigger.
+        // Similar to what we did with the post acting unit components.
+        // This is so we can trigger a cinematic or camera movement and pause simulation while it's
+        // going.
+        // Presumably we'd need a trigger to resume simulation...
+        var presenceTriggers = game.level.terrain.tiles[game.actingUnit.location].components.GetAllIPresenceTriggerTTC();
+        Asserts.Assert(presenceTriggers.Count <= 1); // dont support multiple yet. we could just fire both of them at once.
+        // but we should probably have some sort of stop/resume between each trigger.
+        foreach (var presenceTrigger in presenceTriggers) {
+          presenceTrigger.Trigger(context, game, superstate, game.actingUnit, game.actingUnit.location);
+        }
       }
 
-      var wasPlayer = game.player.Exists() && unit.NullableIs(game.player);
-      executionState.actingUnit = new Unit(game.root, 0);
-      executionState.actingUnitDidAction = false;
+      var wasPlayer = game.player.Exists() && game.actingUnit.NullableIs(game.player);
+      game.actingUnit = Unit.Null;
 
       if (wasPlayer) {
         foreach (var locationAndActingTTC in superstate.levelSuperstate.GetAllActingTTCs()) {
@@ -234,57 +61,28 @@ namespace IncendianFalls {
         }
       }
 
-      if (pauseCondition.betweenUnits) {
-        return; // To be continued... via ContinueBeforeEnemyAction.
-      } else {
-        StartNextUnit(context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-      }
-
-      //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-    }
-
-    // Called from the outside, after we do a pre-acting detail.
-    public static void ContinueAfterPostActingDetail(
-        IncendianFalls.SSContext context,
-        Game game,
-        Superstate superstate,
-        PauseCondition pauseCondition,
-        SortedSet<int> thisSpreeStartedUnitIds) {
-      //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-      DoNextPostActingDetailOrContinue(
-          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-
-      //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-    }
-
-    // Called from ContinueAtStartTurn or ContinueAtNextPostActingDetail.
-    private static void StartNextUnit(
-        IncendianFalls.SSContext context,
-        Game game,
-        Superstate superstate,
-        PauseCondition pauseCondition,
-        SortedSet<int> thisSpreeStartedUnitIds) {
-      //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-      var executionState = game.executionState;
-      Asserts.Assert(!executionState.actingUnit.Exists(), "Doesnt exist!");
-      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists(), "No remaining post?");
-      Asserts.Assert(!executionState.actingUnitDidAction, "Unit did action?");
-
-      if (game.level.units.Count == 0) {
-        //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
+      if (game.pauseBeforeNextUnit) {
+        game.pauseBeforeNextUnit = false;
         return;
       }
 
-      Unit nextUnit;
-      while (true) {
-        nextUnit = Utils.GetNextActingUnit(game);
+      ContinueBetweenUnits(context, game, superstate);
+    }
 
-        if (thisSpreeStartedUnitIds.Contains(nextUnit.id)) {
-          return; // To be continued... via a ContinueAtStartTurn.
+    public static void ContinueBetweenUnits(
+        IncendianFalls.SSContext context,
+        Game game,
+        Superstate superstate) {
+      Asserts.Assert(!game.actingUnit.Exists());
+
+      Unit nextUnit;
+      // Keep pruning out dead units until we find something that can move or we run out of units.
+      while (true) {
+        if (game.level.units.Count == 0) {
+          return;
         }
-        thisSpreeStartedUnitIds.Add(nextUnit.id);
+
+        nextUnit = Utils.GetNextActingUnit(game);
 
         game.level.time = nextUnit.nextActionTime;
         game.time = nextUnit.nextActionTime;
@@ -294,159 +92,51 @@ namespace IncendianFalls {
             deathPreactor.BeforeDeath(game, superstate, nextUnit);
           }
 
-          if (nextUnit.NullableIs(game.player)) {
-            return; // To be continued... via ContinueAtStartTurn.
-          } else {
-            if (superstate.levelSuperstate.LocationContainsUnit(nextUnit.location)) {
-              // curiosity, we might need a:
-              game.root.logger.Warning("next unit isnt alive, but doesnt exist in superstate?");
-            }
-            //superstate.levelSuperstate.RemoveUnit(nextUnit);
-            game.level.units.Remove(nextUnit);
-            nextUnit.Destruct();
-            continue;
+          if (superstate.levelSuperstate.LocationContainsUnit(nextUnit.location)) {
+            // curiosity, we might need a:
+            game.root.logger.Warning("next unit isnt alive, but doesnt exist in superstate?");
           }
+          //superstate.levelSuperstate.RemoveUnit(nextUnit);
+          game.level.units.Remove(nextUnit);
+          nextUnit.Destruct();
+          continue;
         }
         break;
       }
 
-      executionState.actingUnit = nextUnit;
+      game.actingUnit = nextUnit;
 
-      StartPreActions(context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-
-      //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-    }
-
-    // Never called from the outside, always called by StartNextUnit
-    private static void StartPreActions(
-        IncendianFalls.SSContext context,
-        Game game,
-        Superstate superstate,
-        PauseCondition pauseCondition,
-        SortedSet<int> thisSpreeStartedUnitIds) {
-
-      //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-      var executionState = game.executionState;
-      Asserts.Assert(executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
-      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
-
-      var preActingDetails = IPreActingUCWeakMutBunch.New(game.root);
-      foreach (var details in executionState.actingUnit.components.GetAllIPreActingUC()) {
-        preActingDetails.Add(details);
+      // todo: replace with a foreach and addall
+      var remainingPreActingUnitComponents = IPreActingUCWeakMutBunch.New(game.root);
+      foreach (var details in game.actingUnit.components.GetAllIPreActingUC()) {
+        remainingPreActingUnitComponents.Add(details);
       }
-      executionState.remainingPreActingUnitComponents = preActingDetails;
-
-      DoNextPreActingDetailOrContinue(
-          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-
-      //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-    }
-
-    // Can be called from StartPreActions or ContinueAfterPreActingDetail.
-    private static void DoNextPreActingDetailOrContinue(
-        IncendianFalls.SSContext context,
-        Game game,
-        Superstate superstate,
-        PauseCondition pauseCondition,
-        SortedSet<int> thisSpreeStartedUnitIds) {
-      //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-      var executionState = game.executionState;
-      var unit = executionState.actingUnit;
-      var remainingPreActingDetails = executionState.remainingPreActingUnitComponents;
-      Asserts.Assert(remainingPreActingDetails.Exists());
-
-      while (remainingPreActingDetails.Count > 0) {
-        var detail = remainingPreActingDetails.GetArbitrary();
-        remainingPreActingDetails.Remove(detail);
-        if (!unit.alive) {
+      while (remainingPreActingUnitComponents.Count > 0) {
+        var detail = remainingPreActingUnitComponents.GetArbitrary();
+        remainingPreActingUnitComponents.Remove(detail);
+        if (!game.actingUnit.alive) {
           continue;
         }
         if (!detail.Exists()) {
           continue;
         }
-        bool ret = detail.PreAct(game, superstate, executionState.actingUnit);
-        //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-        if (ret) {
-          return; // To be continued... via ContinueAfterPreActingDetail.
-        }
+        detail.PreAct(game, superstate, game.actingUnit);
       }
 
       // There were no existing remaining pre-acting details. Go on to the unit's action.
-      executionState.remainingPreActingUnitComponents.Destruct();
+      remainingPreActingUnitComponents.Destruct();
 
-      DoUnitAction(
-          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-
-      //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-    }
-
-    // Called from the oustide, after we do a pre-acting detail.
-    public static void ContinueAfterPreActingDetail(
-        IncendianFalls.SSContext context,
-        Game game,
-        Superstate superstate,
-        PauseCondition pauseCondition,
-        SortedSet<int> thisSpreeStartedUnitIds) {
-      //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-      DoNextPreActingDetailOrContinue(
-          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-
-      //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-    }
-
-    public static void ContinueBeforeUnitAction(
-        IncendianFalls.SSContext context,
-        Game game,
-        Superstate superstate,
-        PauseCondition pauseCondition,
-        SortedSet<int> thisSpreeStartedUnitIds) {
-      Asserts.Assert(game.GetStateType() == WorldStateType.kBeforeEnemyAction);
-
-      DoUnitAction(
-        context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
-    }
-
-    private static void DoUnitAction(
-        IncendianFalls.SSContext context,
-        Game game,
-        Superstate superstate,
-        PauseCondition pauseCondition,
-        SortedSet<int> thisSpreeStartedUnitIds) {
-      //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-      var executionState = game.executionState;
-      Asserts.Assert(executionState.actingUnit.Exists());
-      Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
-      Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
-      Asserts.Assert(!executionState.actingUnitDidAction);
-      var unit = executionState.actingUnit;
-
-      if (unit.NullableIs(game.player)) {
+      if (game.actingUnit.NullableIs(game.player)) {
         // It's the player turn, we don't do any AI for it.
         //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
         return; // To be continued... via PlayerAttack, PlayerMove, etc.
       } else {
-        if (unit.alive) {
-          bool ret = EnemyAI.AI(context, game, superstate, unit);
-          executionState.actingUnitDidAction = true;
-          //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-          if (ret) {
-            return; // To be continued... via ContinueAfterUnitAction.
-          }
-        } else {
-          // If its not alive, itll skip its post actions and be cleaned up in the next transition to
-          // this unit's turn.
-          executionState.actingUnitDidAction = true;
+        if (game.actingUnit.alive) {
+          EnemyAI.AI(context, game, superstate, game.actingUnit);
         }
       }
 
-      ContinueAfterUnitAction(
-          context, game, superstate, pauseCondition, thisSpreeStartedUnitIds);
+      ContinueAfterUnitAction(context, game, superstate);
     }
 
   }

@@ -43,7 +43,7 @@ public class NullIPreActingUC : IPreActingUC {
     return NullIUnitComponent.Null;
   }
 
-  public bool PreAct(Game game, Superstate superstate, Unit unit) {
+  public Void PreAct(Game game, Superstate superstate, Unit unit) {
     throw new Exception("Called PreAct on a null!");
   }
              

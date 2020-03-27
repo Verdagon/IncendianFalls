@@ -9,7 +9,6 @@ public interface IRequestVisitor {
   void VisitIRequest(TriggerRequestAsIRequest obj);
   void VisitIRequest(TimeAnchorMoveRequestAsIRequest obj);
   void VisitIRequest(TimeShiftRequestAsIRequest obj);
-  void VisitIRequest(FollowDirectiveRequestAsIRequest obj);
   void VisitIRequest(CounterRequestAsIRequest obj);
   void VisitIRequest(DefyRequestAsIRequest obj);
   void VisitIRequest(MoveRequestAsIRequest obj);
@@ -17,7 +16,6 @@ public interface IRequestVisitor {
   void VisitIRequest(MireRequestAsIRequest obj);
   void VisitIRequest(FireBombRequestAsIRequest obj);
   void VisitIRequest(FireRequestAsIRequest obj);
-  void VisitIRequest(CancelRequestAsIRequest obj);
   void VisitIRequest(AttackRequestAsIRequest obj);
   void VisitIRequest(ResumeRequestAsIRequest obj);
   void VisitIRequest(InteractRequestAsIRequest obj);

@@ -13,7 +13,7 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static bool Enact(
+    public static Atharia.Model.Void Enact(
         this PursueImpulse impulse,
         Game game,
         Superstate superstate,
@@ -34,7 +34,7 @@ namespace Atharia.Model {
         capability.killDirective.Destruct();
       }
 
-      return false;
+      return new Atharia.Model.Void();
     }
   }
 }

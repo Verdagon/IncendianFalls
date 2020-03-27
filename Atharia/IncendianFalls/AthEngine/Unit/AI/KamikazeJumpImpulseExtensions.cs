@@ -15,7 +15,7 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static bool Enact(
+    public static Atharia.Model.Void Enact(
         this KamikazeJumpImpulse self,
         Game game,
         Superstate superstate,
@@ -37,7 +37,7 @@ namespace Atharia.Model {
 
       Asserts.Assert(self.capability.targetByLocation.Count == 0);
 
-      return false;
+      return new Atharia.Model.Void();
     }
   }
 }

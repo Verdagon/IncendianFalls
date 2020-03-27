@@ -84,7 +84,7 @@ public class DoomedUCAsIPreActingUC : IPreActingUC {
          public Void Destruct() {
     return DoomedUCExtensions.Destruct(obj);
   }
-  public bool PreAct(Game game, Superstate superstate, Unit unit) {
+  public Void PreAct(Game game, Superstate superstate, Unit unit) {
     return DoomedUCExtensions.PreAct(obj, game, superstate, unit);
   }
 

@@ -13,7 +13,7 @@ mut struct DoomedUC {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool {
+  : Void {
     DoomedUCExtensions.PreAct
   }
 }

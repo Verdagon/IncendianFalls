@@ -9,7 +9,7 @@ namespace Atharia.Model {
       obj.Delete();
       return new Atharia.Model.Void();
     }
-    public static bool PreAct(
+    public static Void PreAct(
         this Atharia.Model.DoomedUC self,
         Game game,
         Superstate superstate,
@@ -20,9 +20,8 @@ namespace Atharia.Model {
         // Bump the victim up to be the next acting unit.
         unit.nextActionTime = game.time;
         superstate.levelSuperstate.RemoveUnit(unit);
-        return true;
       }
-      return false;
+      return new Atharia.Model.Void();
     }
   }
 }

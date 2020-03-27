@@ -333,7 +333,6 @@ namespace Atharia.Model {
           game.player.nextActionTime + 300,
           Irkling.Make(game.root));
         game.AddEvent(new WaitEvent(true, 400, "ambush1b").AsIGameEvent());
-        superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush2Trigger") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush2Trigger", 1);
@@ -343,7 +342,6 @@ namespace Atharia.Model {
           game.player.nextActionTime + 300,
           Baug.Make(game.root));
         game.AddEvent(new WaitEvent(true, 400, "ambush2b").AsIGameEvent());
-        superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush3Trigger") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush3Trigger", 1);
@@ -353,7 +351,6 @@ namespace Atharia.Model {
           game.player.nextActionTime + 300,
           Spirient.Make(game.root));
         game.AddEvent(new WaitEvent(true, 400, "ambush3b").AsIGameEvent());
-        superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "defyHint") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("defyHint", 1);
@@ -369,12 +366,10 @@ namespace Atharia.Model {
               new Button("Got it!", "")
             }))
           .AsIGameEvent());
-        superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "healthPotion") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("healthPotion", 1);
         game.AddEvent(new WaitEvent(true, 400, "healthPotionB").AsIGameEvent());
-        superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush4Trigger") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4Trigger", 1);
@@ -385,19 +380,16 @@ namespace Atharia.Model {
           RavagianTrask.Make(game.root));
 
         game.AddEvent(new WaitEvent(true, 400, "ambush4b").AsIGameEvent());
-        superstate.navigatingState = null;
       }
       if (triggerName == "ambush4DefySpot" &&
           triggeringUnit.NullableIs(game.player)) {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefySpot", 1);
         game.AddEvent(new WaitEvent(true, 400, "ambush4e").AsIGameEvent());
-        superstate.navigatingState = null;
       }
       if (triggerName == "ambush4DefySpot" &&
           triggeringUnit.components.GetAllTimeCloneAICapabilityUC().Count > 0) {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefySpot", 1);
         game.AddEvent(new WaitEvent(true, 600, "ambush4f").AsIGameEvent());
-        superstate.navigatingState = null;
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "multipleHint") {
         // Make sure there arent any defy counters leftover, in case the player won the entire

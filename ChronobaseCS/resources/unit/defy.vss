@@ -14,7 +14,7 @@ mut struct DefyImpulse {
       this: DefyImpulse overrides IImpulse,
       game: Game,
       superstate: $Superstate,
-      unit: Unit): Bool {
+      unit: Unit): Void {
     DefyImpulseExtensions.Enact
   }
 }
@@ -41,7 +41,7 @@ mut struct DefyingUC {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool {
+  : Void {
     DefyingUCExtensions.PreAct
   }
 }

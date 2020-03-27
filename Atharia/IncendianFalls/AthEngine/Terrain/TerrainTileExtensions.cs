@@ -26,11 +26,9 @@ namespace Atharia.Model {
       return obj.components.GetAllIBlocksSightTTC().Count > 0;
     }
 
-    public static void AddEvent(this TerrainTile terrainTile, Game game, ITerrainTileEvent e) {
-      if (!game.eventedTerrainTiles.Contains(terrainTile)) {
-        game.eventedTerrainTiles.Add(terrainTile);
-      }
-      terrainTile.events.Add(e);
+    public static void AddEvent(this TerrainTile terrainTile, ITerrainTileEvent e) {
+      terrainTile.evvent = e;
+      terrainTile.evvent = NullITerrainTileEvent.Null;
     }
   }
 }

@@ -105,7 +105,7 @@ public class LightningChargedUCAsIPostActingUC : IPostActingUC {
          public Void Destruct() {
     return LightningChargedUCExtensions.Destruct(obj);
   }
-  public bool PostAct(Game game, Superstate superstate, Unit unit) {
+  public Void PostAct(Game game, Superstate superstate, Unit unit) {
     return LightningChargedUCExtensions.PostAct(obj, game, superstate, unit);
   }
 

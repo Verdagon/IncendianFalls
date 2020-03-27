@@ -63,7 +63,7 @@ namespace Atharia.Model {
         level.terrain.tiles.Add(
           wall,
           level.root.EffectTerrainTileCreate(
-              game.root.EffectITerrainTileEventMutListCreate(), 0, ITerrainTileComponentMutBunch.New(level.root)));
+              NullITerrainTileEvent.Null, 0, ITerrainTileComponentMutBunch.New(level.root)));
       }
 
       CellularAutomataTerrainGenerator.AddCircle(context, level.terrain, new Location(0, 0, 0), 16.0f);
@@ -105,7 +105,7 @@ namespace Atharia.Model {
       foreach (var borderLocation in borderLocations) {
         if (!level.terrain.tiles.ContainsKey(borderLocation)) {
           var tile = game.root.EffectTerrainTileCreate(
-              game.root.EffectITerrainTileEventMutListCreate(), 3, ITerrainTileComponentMutBunch.New(game.root));
+              NullITerrainTileEvent.Null, 3, ITerrainTileComponentMutBunch.New(game.root));
           tile.components.Add(game.root.EffectCaveWallTTCCreate().AsITerrainTileComponent());
           level.terrain.tiles.Add(borderLocation, tile);
         }

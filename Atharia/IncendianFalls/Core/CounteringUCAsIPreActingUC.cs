@@ -105,7 +105,7 @@ public class CounteringUCAsIPreActingUC : IPreActingUC {
          public Void Destruct() {
     return CounteringUCExtensions.Destruct(obj);
   }
-  public bool PreAct(Game game, Superstate superstate, Unit unit) {
+  public Void PreAct(Game game, Superstate superstate, Unit unit) {
     return CounteringUCExtensions.PreAct(obj, game, superstate, unit);
   }
 

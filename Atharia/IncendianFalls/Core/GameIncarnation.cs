@@ -11,13 +11,12 @@ public class GameIncarnation : IGameEffectVisitor {
   public  int player;
   public  int level;
   public  int time;
-  public readonly int executionState;
+  public  int actingUnit;
+  public  bool pauseBeforeNextUnit;
   public  int actionNum;
   public  string instructions;
   public  bool hideInput;
-  public readonly int events;
-  public readonly int eventedUnits;
-  public readonly int eventedTerrainTiles;
+  public  IGameEvent evvent;
   public GameIncarnation(
       int rand,
       bool squareLevelsOnly,
@@ -25,26 +24,24 @@ public class GameIncarnation : IGameEffectVisitor {
       int player,
       int level,
       int time,
-      int executionState,
+      int actingUnit,
+      bool pauseBeforeNextUnit,
       int actionNum,
       string instructions,
       bool hideInput,
-      int events,
-      int eventedUnits,
-      int eventedTerrainTiles) {
+      IGameEvent evvent) {
     this.rand = rand;
     this.squareLevelsOnly = squareLevelsOnly;
     this.levels = levels;
     this.player = player;
     this.level = level;
     this.time = time;
-    this.executionState = executionState;
+    this.actingUnit = actingUnit;
+    this.pauseBeforeNextUnit = pauseBeforeNextUnit;
     this.actionNum = actionNum;
     this.instructions = instructions;
     this.hideInput = hideInput;
-    this.events = events;
-    this.eventedUnits = eventedUnits;
-    this.eventedTerrainTiles = eventedTerrainTiles;
+    this.evvent = evvent;
   }
   public GameIncarnation Copy() {
     return new GameIncarnation(
@@ -54,13 +51,12 @@ levels,
 player,
 level,
 time,
-executionState,
+actingUnit,
+pauseBeforeNextUnit,
 actionNum,
 instructions,
 hideInput,
-events,
-eventedUnits,
-eventedTerrainTiles    );
+evvent    );
   }
 
   public void visitGameCreateEffect(GameCreateEffect e) {}
@@ -71,13 +67,12 @@ eventedTerrainTiles    );
 public void visitGameSetPlayerEffect(GameSetPlayerEffect e) { this.player = e.newValue; }
 public void visitGameSetLevelEffect(GameSetLevelEffect e) { this.level = e.newValue; }
 public void visitGameSetTimeEffect(GameSetTimeEffect e) { this.time = e.newValue; }
-
+public void visitGameSetActingUnitEffect(GameSetActingUnitEffect e) { this.actingUnit = e.newValue; }
+public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect e) { this.pauseBeforeNextUnit = e.newValue; }
 public void visitGameSetActionNumEffect(GameSetActionNumEffect e) { this.actionNum = e.newValue; }
 public void visitGameSetInstructionsEffect(GameSetInstructionsEffect e) { this.instructions = e.newValue; }
 public void visitGameSetHideInputEffect(GameSetHideInputEffect e) { this.hideInput = e.newValue; }
-
-
-
+public void visitGameSetEvventEffect(GameSetEvventEffect e) { this.evvent = e.newValue; }
   public void ApplyEffect(IGameEffect effect) { effect.visitIGameEffect(this); }
 }
 

@@ -9,7 +9,7 @@ namespace IncendianFalls {
     public TerrainTile VivifyTile(Root root, List<String> members) {
       var tile =
           root.EffectTerrainTileCreate(
-              root.EffectITerrainTileEventMutListCreate(),
+              NullITerrainTileEvent.Null,
               1, ITerrainTileComponentMutBunch.New(root));
 
       foreach (var member in members) {

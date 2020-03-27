@@ -14,7 +14,7 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static bool Enact(
+    public static Atharia.Model.Void Enact(
         this UnleashBideImpulse obj,
         Game game,
         Superstate superstate,
@@ -30,7 +30,7 @@ namespace Atharia.Model {
       
       Actions.UnleashBide(game, superstate, actingUnit, affectedTileLocations);
 
-      return true;
+      return new Atharia.Model.Void();
     }
   }
 }

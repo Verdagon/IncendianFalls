@@ -66,7 +66,7 @@ public class KamikazeJumpImpulseAsIImpulse : IImpulse {
   public int GetWeight() {
     return KamikazeJumpImpulseExtensions.GetWeight(obj);
   }
-  public bool Enact(Game game, Superstate superstate, Unit unit) {
+  public Void Enact(Game game, Superstate superstate, Unit unit) {
     return KamikazeJumpImpulseExtensions.Enact(obj, game, superstate, unit);
   }
 

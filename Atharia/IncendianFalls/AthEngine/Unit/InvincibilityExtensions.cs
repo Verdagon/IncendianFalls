@@ -21,13 +21,13 @@ namespace Atharia.Model {
     public static int GetIncomingDamageMultiplierPercent(this Atharia.Model.InvincibilityUC detail) {
       return 20;
     }
-    public static bool PreAct(
+    public static Void PreAct(
         this Atharia.Model.InvincibilityUC detail,
         Game game,
         Superstate superstate,
         Unit unit) {
       unit.hp = unit.maxHp;
-      return true;
+      return new Atharia.Model.Void();
     }
   }
 }

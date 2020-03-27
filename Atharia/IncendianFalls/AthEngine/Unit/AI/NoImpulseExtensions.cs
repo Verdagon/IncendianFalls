@@ -14,13 +14,13 @@ namespace Atharia.Model {
       return 0;
     }
 
-    public static bool Enact(
+    public static Atharia.Model.Void Enact(
         this NoImpulse obj,
         Game game,
         Superstate superstate,
         Unit unit) {
       unit.nextActionTime = unit.nextActionTime + unit.CalculateCombatTimeCost(300);
-      return false;
+      return new Atharia.Model.Void();
     }
   }
 }

@@ -15,11 +15,11 @@ namespace IncendianFalls {
         return "Error: Cannot resume while timeshifting!";
       }
 
-      EventsClearer.Clear(game);
-
-      Asserts.Assert(game.player.Exists() && game.player.alive, "Can't resume if player's not alive");
-
-      GameLoop.Continue(context, game, superstate, new PauseCondition(false));
+      if (game.actingUnit.Exists()) {
+        GameLoop.ContinueAfterUnitAction(context, game, superstate);
+      } else {
+        GameLoop.ContinueBetweenUnits(context, game, superstate);
+      }
 
       return "";
     }

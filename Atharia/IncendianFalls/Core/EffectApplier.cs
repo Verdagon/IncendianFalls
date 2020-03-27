@@ -86,6 +86,8 @@ ILevelEffectVisitor,
 ISpeedRingEffectVisitor,
 IManaPotionEffectVisitor,
 IWatEffectVisitor,
+IIPreActingUCWeakMutBunchEffectVisitor,
+IIPostActingUCWeakMutBunchEffectVisitor,
 IIImpulseStrongMutBunchEffectVisitor,
 IIItemStrongMutBunchEffectVisitor,
 IItemTTCEffectVisitor,
@@ -101,9 +103,6 @@ IIncendianFallsLevelLinkerTTCEffectVisitor,
 ICliffLevelControllerEffectVisitor,
 IPreGauntletLevelControllerEffectVisitor,
 IGauntletLevelControllerEffectVisitor,
-IExecutionStateEffectVisitor,
-IIPostActingUCWeakMutBunchEffectVisitor,
-IIPreActingUCWeakMutBunchEffectVisitor,
 IGameEffectVisitor,
 IVolcaetusLevelControllerEffectVisitor,
 ITutorial2LevelControllerEffectVisitor,
@@ -117,22 +116,9 @@ IDirtRoadLevelControllerEffectVisitor,
 ICaveLevelControllerEffectVisitor,
 IBridgesLevelControllerEffectVisitor,
 IAncientTownLevelControllerEffectVisitor,
-IIGameEventMutListEffectVisitor,
-IITerrainTileEventMutListEffectVisitor,
 ILocationMutListEffectVisitor,
 IIRequestMutListEffectVisitor,
-IIUnitEventMutListEffectVisitor,
 ILevelMutSetEffectVisitor,
-IUnitWeakMutSetEffectVisitor,
-ITerrainTileWeakMutSetEffectVisitor,
-IDoomedUCWeakMutSetEffectVisitor,
-IMiredUCWeakMutSetEffectVisitor,
-IInvincibilityUCWeakMutSetEffectVisitor,
-IDefyingUCWeakMutSetEffectVisitor,
-ICounteringUCWeakMutSetEffectVisitor,
-IAttackAICapabilityUCWeakMutSetEffectVisitor,
-ILightningChargedUCWeakMutSetEffectVisitor,
-ITimeCloneAICapabilityUCWeakMutSetEffectVisitor,
 IManaPotionStrongMutSetEffectVisitor,
 IHealthPotionStrongMutSetEffectVisitor,
 ISpeedRingStrongMutSetEffectVisitor,
@@ -158,6 +144,14 @@ IStartBidingImpulseStrongMutSetEffectVisitor,
 IAttackImpulseStrongMutSetEffectVisitor,
 IPursueImpulseStrongMutSetEffectVisitor,
 IFireBombImpulseStrongMutSetEffectVisitor,
+ILightningChargedUCWeakMutSetEffectVisitor,
+ITimeCloneAICapabilityUCWeakMutSetEffectVisitor,
+IDoomedUCWeakMutSetEffectVisitor,
+IMiredUCWeakMutSetEffectVisitor,
+IInvincibilityUCWeakMutSetEffectVisitor,
+IDefyingUCWeakMutSetEffectVisitor,
+ICounteringUCWeakMutSetEffectVisitor,
+IAttackAICapabilityUCWeakMutSetEffectVisitor,
 IUnitMutSetEffectVisitor,
 ISimplePresenceTriggerTTCMutSetEffectVisitor,
 IItemTTCMutSetEffectVisitor,
@@ -311,7 +305,7 @@ public void visitTutorialDefyCounterUCEffect(ITutorialDefyCounterUCEffect effect
 public void visitUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this); }
   public void visitUnitCreateEffect(UnitCreateEffect effect) {
     var instance = root.EffectUnitCreate(
-  root.GetIUnitEventMutList(effect.incarnation.events),
+  effect.incarnation.evvent,
   effect.incarnation.alive,
   effect.incarnation.lifeEndTime,
   effect.incarnation.location,
@@ -333,6 +327,13 @@ public void visitUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this);
   }
 
      
+  public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
+    root.EffectUnitSetEvvent(
+      effect.id,
+  effect.newValue
+    );
+  }
+
   public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) {
     root.EffectUnitSetAlive(
       effect.id,
@@ -1144,7 +1145,7 @@ public void visitTimeAnchorTTCEffect(ITimeAnchorTTCEffect effect) { effect.visit
 public void visitTerrainTileEffect(ITerrainTileEffect effect) { effect.visitITerrainTileEffect(this); }
   public void visitTerrainTileCreateEffect(TerrainTileCreateEffect effect) {
     var instance = root.EffectTerrainTileCreate(
-  root.GetITerrainTileEventMutList(effect.incarnation.events),
+  effect.incarnation.evvent,
   effect.incarnation.elevation,
   root.GetITerrainTileComponentMutBunch(effect.incarnation.components)    );
 
@@ -1159,6 +1160,13 @@ public void visitTerrainTileEffect(ITerrainTileEffect effect) { effect.visitITer
   }
 
      
+  public void visitTerrainTileSetEvventEffect(TerrainTileSetEvventEffect effect) {
+    root.EffectTerrainTileSetEvvent(
+      effect.id,
+  effect.newValue
+    );
+  }
+
   public void visitTerrainTileSetElevationEffect(TerrainTileSetElevationEffect effect) {
     root.EffectTerrainTileSetElevation(
       effect.id,
@@ -1750,7 +1758,9 @@ public void visitWatEffect(IWatEffect effect) { effect.visitIWatEffect(this); }
   public void visitWatCreateEffect(WatCreateEffect effect) {
     var instance = root.EffectWatCreate(
   root.GetIItemStrongMutBunch(effect.incarnation.items),
-  root.GetIImpulseStrongMutBunch(effect.incarnation.impulses)    );
+  root.GetIImpulseStrongMutBunch(effect.incarnation.impulses),
+  root.GetIPostActingUCWeakMutBunch(effect.incarnation.blah),
+  root.GetIPreActingUCWeakMutBunch(effect.incarnation.bloop)    );
 
   // If this fails, then we have to add a translation layer.
   // We shouldn't allow the user to specify the internal ID, because that's
@@ -1760,6 +1770,44 @@ public void visitWatEffect(IWatEffect effect) { effect.visitIWatEffect(this); }
 
   public void visitWatDeleteEffect(WatDeleteEffect effect) {
     root.EffectWatDelete(effect.id);
+  }
+
+     
+public void visitIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffect effect) { effect.visitIIPreActingUCWeakMutBunchEffect(this); }
+  public void visitIPreActingUCWeakMutBunchCreateEffect(IPreActingUCWeakMutBunchCreateEffect effect) {
+    var instance = root.EffectIPreActingUCWeakMutBunchCreate(
+  root.GetDoomedUCWeakMutSet(effect.incarnation.membersDoomedUCWeakMutSet),
+  root.GetMiredUCWeakMutSet(effect.incarnation.membersMiredUCWeakMutSet),
+  root.GetInvincibilityUCWeakMutSet(effect.incarnation.membersInvincibilityUCWeakMutSet),
+  root.GetDefyingUCWeakMutSet(effect.incarnation.membersDefyingUCWeakMutSet),
+  root.GetCounteringUCWeakMutSet(effect.incarnation.membersCounteringUCWeakMutSet),
+  root.GetAttackAICapabilityUCWeakMutSet(effect.incarnation.membersAttackAICapabilityUCWeakMutSet)    );
+
+  // If this fails, then we have to add a translation layer.
+  // We shouldn't allow the user to specify the internal ID, because that's
+  // core to a bunch of optimizations (such as how it's a generational index).
+  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
+}
+
+  public void visitIPreActingUCWeakMutBunchDeleteEffect(IPreActingUCWeakMutBunchDeleteEffect effect) {
+    root.EffectIPreActingUCWeakMutBunchDelete(effect.id);
+  }
+
+     
+public void visitIPostActingUCWeakMutBunchEffect(IIPostActingUCWeakMutBunchEffect effect) { effect.visitIIPostActingUCWeakMutBunchEffect(this); }
+  public void visitIPostActingUCWeakMutBunchCreateEffect(IPostActingUCWeakMutBunchCreateEffect effect) {
+    var instance = root.EffectIPostActingUCWeakMutBunchCreate(
+  root.GetLightningChargedUCWeakMutSet(effect.incarnation.membersLightningChargedUCWeakMutSet),
+  root.GetTimeCloneAICapabilityUCWeakMutSet(effect.incarnation.membersTimeCloneAICapabilityUCWeakMutSet)    );
+
+  // If this fails, then we have to add a translation layer.
+  // We shouldn't allow the user to specify the internal ID, because that's
+  // core to a bunch of optimizations (such as how it's a generational index).
+  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
+}
+
+  public void visitIPostActingUCWeakMutBunchDeleteEffect(IPostActingUCWeakMutBunchDeleteEffect effect) {
+    root.EffectIPostActingUCWeakMutBunchDelete(effect.id);
   }
 
      
@@ -2029,91 +2077,6 @@ public void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect ef
   }
 
      
-public void visitExecutionStateEffect(IExecutionStateEffect effect) { effect.visitIExecutionStateEffect(this); }
-  public void visitExecutionStateCreateEffect(ExecutionStateCreateEffect effect) {
-    var instance = root.EffectExecutionStateCreate(
-  root.GetUnitOrNull(effect.incarnation.actingUnit),
-  effect.incarnation.actingUnitDidAction,
-  root.GetIPreActingUCWeakMutBunchOrNull(effect.incarnation.remainingPreActingUnitComponents),
-  root.GetIPostActingUCWeakMutBunchOrNull(effect.incarnation.remainingPostActingUnitComponents)    );
-
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
-}
-
-  public void visitExecutionStateDeleteEffect(ExecutionStateDeleteEffect effect) {
-    root.EffectExecutionStateDelete(effect.id);
-  }
-
-     
-  public void visitExecutionStateSetActingUnitEffect(ExecutionStateSetActingUnitEffect effect) {
-    root.EffectExecutionStateSetActingUnit(
-      effect.id,
-  root.GetUnitOrNull(effect.newValue)
-    );
-  }
-
-  public void visitExecutionStateSetActingUnitDidActionEffect(ExecutionStateSetActingUnitDidActionEffect effect) {
-    root.EffectExecutionStateSetActingUnitDidAction(
-      effect.id,
-  effect.newValue
-    );
-  }
-
-  public void visitExecutionStateSetRemainingPreActingUnitComponentsEffect(ExecutionStateSetRemainingPreActingUnitComponentsEffect effect) {
-    root.EffectExecutionStateSetRemainingPreActingUnitComponents(
-      effect.id,
-  root.GetIPreActingUCWeakMutBunchOrNull(effect.newValue)
-    );
-  }
-
-  public void visitExecutionStateSetRemainingPostActingUnitComponentsEffect(ExecutionStateSetRemainingPostActingUnitComponentsEffect effect) {
-    root.EffectExecutionStateSetRemainingPostActingUnitComponents(
-      effect.id,
-  root.GetIPostActingUCWeakMutBunchOrNull(effect.newValue)
-    );
-  }
-
-public void visitIPostActingUCWeakMutBunchEffect(IIPostActingUCWeakMutBunchEffect effect) { effect.visitIIPostActingUCWeakMutBunchEffect(this); }
-  public void visitIPostActingUCWeakMutBunchCreateEffect(IPostActingUCWeakMutBunchCreateEffect effect) {
-    var instance = root.EffectIPostActingUCWeakMutBunchCreate(
-  root.GetLightningChargedUCWeakMutSet(effect.incarnation.membersLightningChargedUCWeakMutSet),
-  root.GetTimeCloneAICapabilityUCWeakMutSet(effect.incarnation.membersTimeCloneAICapabilityUCWeakMutSet)    );
-
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
-}
-
-  public void visitIPostActingUCWeakMutBunchDeleteEffect(IPostActingUCWeakMutBunchDeleteEffect effect) {
-    root.EffectIPostActingUCWeakMutBunchDelete(effect.id);
-  }
-
-     
-public void visitIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffect effect) { effect.visitIIPreActingUCWeakMutBunchEffect(this); }
-  public void visitIPreActingUCWeakMutBunchCreateEffect(IPreActingUCWeakMutBunchCreateEffect effect) {
-    var instance = root.EffectIPreActingUCWeakMutBunchCreate(
-  root.GetDoomedUCWeakMutSet(effect.incarnation.membersDoomedUCWeakMutSet),
-  root.GetMiredUCWeakMutSet(effect.incarnation.membersMiredUCWeakMutSet),
-  root.GetInvincibilityUCWeakMutSet(effect.incarnation.membersInvincibilityUCWeakMutSet),
-  root.GetDefyingUCWeakMutSet(effect.incarnation.membersDefyingUCWeakMutSet),
-  root.GetCounteringUCWeakMutSet(effect.incarnation.membersCounteringUCWeakMutSet),
-  root.GetAttackAICapabilityUCWeakMutSet(effect.incarnation.membersAttackAICapabilityUCWeakMutSet)    );
-
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
-}
-
-  public void visitIPreActingUCWeakMutBunchDeleteEffect(IPreActingUCWeakMutBunchDeleteEffect effect) {
-    root.EffectIPreActingUCWeakMutBunchDelete(effect.id);
-  }
-
-     
 public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this); }
   public void visitGameCreateEffect(GameCreateEffect effect) {
     var instance = root.EffectGameCreate(
@@ -2123,13 +2086,12 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
   root.GetUnitOrNull(effect.incarnation.player),
   root.GetLevelOrNull(effect.incarnation.level),
   effect.incarnation.time,
-  root.GetExecutionState(effect.incarnation.executionState),
+  root.GetUnitOrNull(effect.incarnation.actingUnit),
+  effect.incarnation.pauseBeforeNextUnit,
   effect.incarnation.actionNum,
   effect.incarnation.instructions,
   effect.incarnation.hideInput,
-  root.GetIGameEventMutList(effect.incarnation.events),
-  root.GetUnitWeakMutSet(effect.incarnation.eventedUnits),
-  root.GetTerrainTileWeakMutSet(effect.incarnation.eventedTerrainTiles)    );
+  effect.incarnation.evvent    );
 
   // If this fails, then we have to add a translation layer.
   // We shouldn't allow the user to specify the internal ID, because that's
@@ -2163,6 +2125,20 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
     );
   }
 
+  public void visitGameSetActingUnitEffect(GameSetActingUnitEffect effect) {
+    root.EffectGameSetActingUnit(
+      effect.id,
+  root.GetUnitOrNull(effect.newValue)
+    );
+  }
+
+  public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect effect) {
+    root.EffectGameSetPauseBeforeNextUnit(
+      effect.id,
+  effect.newValue
+    );
+  }
+
   public void visitGameSetActionNumEffect(GameSetActionNumEffect effect) {
     root.EffectGameSetActionNum(
       effect.id,
@@ -2179,6 +2155,13 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
 
   public void visitGameSetHideInputEffect(GameSetHideInputEffect effect) {
     root.EffectGameSetHideInput(
+      effect.id,
+  effect.newValue
+    );
+  }
+
+  public void visitGameSetEvventEffect(GameSetEvventEffect effect) {
+    root.EffectGameSetEvvent(
       effect.id,
   effect.newValue
     );
@@ -2377,44 +2360,6 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
   }
 
      
-    public void visitIGameEventMutListEffect(IIGameEventMutListEffect effect) { effect.visitIIGameEventMutListEffect(this); }
-    public void visitIGameEventMutListCreateEffect(IGameEventMutListCreateEffect effect) {
-      var list = root.EffectIGameEventMutListCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitIGameEventMutListDeleteEffect(IGameEventMutListDeleteEffect effect) {
-      root.EffectIGameEventMutListDelete(effect.id);
-    }
-    public void visitIGameEventMutListAddEffect(IGameEventMutListAddEffect effect) {
-      root.EffectIGameEventMutListAdd(effect.id, effect.index, effect.element);
-    }
-    public void visitIGameEventMutListRemoveEffect(IGameEventMutListRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectIGameEventMutListRemoveAt(effect.id, effect.index);
-    }
-       
-    public void visitITerrainTileEventMutListEffect(IITerrainTileEventMutListEffect effect) { effect.visitIITerrainTileEventMutListEffect(this); }
-    public void visitITerrainTileEventMutListCreateEffect(ITerrainTileEventMutListCreateEffect effect) {
-      var list = root.EffectITerrainTileEventMutListCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitITerrainTileEventMutListDeleteEffect(ITerrainTileEventMutListDeleteEffect effect) {
-      root.EffectITerrainTileEventMutListDelete(effect.id);
-    }
-    public void visitITerrainTileEventMutListAddEffect(ITerrainTileEventMutListAddEffect effect) {
-      root.EffectITerrainTileEventMutListAdd(effect.id, effect.index, effect.element);
-    }
-    public void visitITerrainTileEventMutListRemoveEffect(ITerrainTileEventMutListRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectITerrainTileEventMutListRemoveAt(effect.id, effect.index);
-    }
-       
     public void visitLocationMutListEffect(ILocationMutListEffect effect) { effect.visitILocationMutListEffect(this); }
     public void visitLocationMutListCreateEffect(LocationMutListCreateEffect effect) {
       var list = root.EffectLocationMutListCreate();
@@ -2453,25 +2398,6 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
       root.EffectIRequestMutListRemoveAt(effect.id, effect.index);
     }
        
-    public void visitIUnitEventMutListEffect(IIUnitEventMutListEffect effect) { effect.visitIIUnitEventMutListEffect(this); }
-    public void visitIUnitEventMutListCreateEffect(IUnitEventMutListCreateEffect effect) {
-      var list = root.EffectIUnitEventMutListCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitIUnitEventMutListDeleteEffect(IUnitEventMutListDeleteEffect effect) {
-      root.EffectIUnitEventMutListDelete(effect.id);
-    }
-    public void visitIUnitEventMutListAddEffect(IUnitEventMutListAddEffect effect) {
-      root.EffectIUnitEventMutListAdd(effect.id, effect.index, effect.element);
-    }
-    public void visitIUnitEventMutListRemoveEffect(IUnitEventMutListRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectIUnitEventMutListRemoveAt(effect.id, effect.index);
-    }
-       
     public void visitLevelMutSetEffect(ILevelMutSetEffect effect) { effect.visitILevelMutSetEffect(this); }
     public void visitLevelMutSetCreateEffect(LevelMutSetCreateEffect effect) {
       var list = root.EffectLevelMutSetCreate();
@@ -2489,196 +2415,6 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitLevelMutSetRemoveEffect(LevelMutSetRemoveEffect effect) {
       root.CheckUnlocked();
       root.EffectLevelMutSetRemove(effect.id, effect.element);
-    }
-       
-    public void visitUnitWeakMutSetEffect(IUnitWeakMutSetEffect effect) { effect.visitIUnitWeakMutSetEffect(this); }
-    public void visitUnitWeakMutSetCreateEffect(UnitWeakMutSetCreateEffect effect) {
-      var list = root.EffectUnitWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitUnitWeakMutSetDeleteEffect(UnitWeakMutSetDeleteEffect effect) {
-      root.EffectUnitWeakMutSetDelete(effect.id);
-    }
-    public void visitUnitWeakMutSetAddEffect(UnitWeakMutSetAddEffect effect) {
-     root.EffectUnitWeakMutSetAdd(effect.id, effect.element);
- }
-    public void visitUnitWeakMutSetRemoveEffect(UnitWeakMutSetRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectUnitWeakMutSetRemove(effect.id, effect.element);
-    }
-       
-    public void visitTerrainTileWeakMutSetEffect(ITerrainTileWeakMutSetEffect effect) { effect.visitITerrainTileWeakMutSetEffect(this); }
-    public void visitTerrainTileWeakMutSetCreateEffect(TerrainTileWeakMutSetCreateEffect effect) {
-      var list = root.EffectTerrainTileWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitTerrainTileWeakMutSetDeleteEffect(TerrainTileWeakMutSetDeleteEffect effect) {
-      root.EffectTerrainTileWeakMutSetDelete(effect.id);
-    }
-    public void visitTerrainTileWeakMutSetAddEffect(TerrainTileWeakMutSetAddEffect effect) {
-     root.EffectTerrainTileWeakMutSetAdd(effect.id, effect.element);
- }
-    public void visitTerrainTileWeakMutSetRemoveEffect(TerrainTileWeakMutSetRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectTerrainTileWeakMutSetRemove(effect.id, effect.element);
-    }
-       
-    public void visitDoomedUCWeakMutSetEffect(IDoomedUCWeakMutSetEffect effect) { effect.visitIDoomedUCWeakMutSetEffect(this); }
-    public void visitDoomedUCWeakMutSetCreateEffect(DoomedUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectDoomedUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitDoomedUCWeakMutSetDeleteEffect(DoomedUCWeakMutSetDeleteEffect effect) {
-      root.EffectDoomedUCWeakMutSetDelete(effect.id);
-    }
-    public void visitDoomedUCWeakMutSetAddEffect(DoomedUCWeakMutSetAddEffect effect) {
-     root.EffectDoomedUCWeakMutSetAdd(effect.id, effect.element);
- }
-    public void visitDoomedUCWeakMutSetRemoveEffect(DoomedUCWeakMutSetRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectDoomedUCWeakMutSetRemove(effect.id, effect.element);
-    }
-       
-    public void visitMiredUCWeakMutSetEffect(IMiredUCWeakMutSetEffect effect) { effect.visitIMiredUCWeakMutSetEffect(this); }
-    public void visitMiredUCWeakMutSetCreateEffect(MiredUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectMiredUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitMiredUCWeakMutSetDeleteEffect(MiredUCWeakMutSetDeleteEffect effect) {
-      root.EffectMiredUCWeakMutSetDelete(effect.id);
-    }
-    public void visitMiredUCWeakMutSetAddEffect(MiredUCWeakMutSetAddEffect effect) {
-     root.EffectMiredUCWeakMutSetAdd(effect.id, effect.element);
- }
-    public void visitMiredUCWeakMutSetRemoveEffect(MiredUCWeakMutSetRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectMiredUCWeakMutSetRemove(effect.id, effect.element);
-    }
-       
-    public void visitInvincibilityUCWeakMutSetEffect(IInvincibilityUCWeakMutSetEffect effect) { effect.visitIInvincibilityUCWeakMutSetEffect(this); }
-    public void visitInvincibilityUCWeakMutSetCreateEffect(InvincibilityUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectInvincibilityUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitInvincibilityUCWeakMutSetDeleteEffect(InvincibilityUCWeakMutSetDeleteEffect effect) {
-      root.EffectInvincibilityUCWeakMutSetDelete(effect.id);
-    }
-    public void visitInvincibilityUCWeakMutSetAddEffect(InvincibilityUCWeakMutSetAddEffect effect) {
-     root.EffectInvincibilityUCWeakMutSetAdd(effect.id, effect.element);
- }
-    public void visitInvincibilityUCWeakMutSetRemoveEffect(InvincibilityUCWeakMutSetRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectInvincibilityUCWeakMutSetRemove(effect.id, effect.element);
-    }
-       
-    public void visitDefyingUCWeakMutSetEffect(IDefyingUCWeakMutSetEffect effect) { effect.visitIDefyingUCWeakMutSetEffect(this); }
-    public void visitDefyingUCWeakMutSetCreateEffect(DefyingUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectDefyingUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitDefyingUCWeakMutSetDeleteEffect(DefyingUCWeakMutSetDeleteEffect effect) {
-      root.EffectDefyingUCWeakMutSetDelete(effect.id);
-    }
-    public void visitDefyingUCWeakMutSetAddEffect(DefyingUCWeakMutSetAddEffect effect) {
-     root.EffectDefyingUCWeakMutSetAdd(effect.id, effect.element);
- }
-    public void visitDefyingUCWeakMutSetRemoveEffect(DefyingUCWeakMutSetRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectDefyingUCWeakMutSetRemove(effect.id, effect.element);
-    }
-       
-    public void visitCounteringUCWeakMutSetEffect(ICounteringUCWeakMutSetEffect effect) { effect.visitICounteringUCWeakMutSetEffect(this); }
-    public void visitCounteringUCWeakMutSetCreateEffect(CounteringUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectCounteringUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitCounteringUCWeakMutSetDeleteEffect(CounteringUCWeakMutSetDeleteEffect effect) {
-      root.EffectCounteringUCWeakMutSetDelete(effect.id);
-    }
-    public void visitCounteringUCWeakMutSetAddEffect(CounteringUCWeakMutSetAddEffect effect) {
-     root.EffectCounteringUCWeakMutSetAdd(effect.id, effect.element);
- }
-    public void visitCounteringUCWeakMutSetRemoveEffect(CounteringUCWeakMutSetRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectCounteringUCWeakMutSetRemove(effect.id, effect.element);
-    }
-       
-    public void visitAttackAICapabilityUCWeakMutSetEffect(IAttackAICapabilityUCWeakMutSetEffect effect) { effect.visitIAttackAICapabilityUCWeakMutSetEffect(this); }
-    public void visitAttackAICapabilityUCWeakMutSetCreateEffect(AttackAICapabilityUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectAttackAICapabilityUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitAttackAICapabilityUCWeakMutSetDeleteEffect(AttackAICapabilityUCWeakMutSetDeleteEffect effect) {
-      root.EffectAttackAICapabilityUCWeakMutSetDelete(effect.id);
-    }
-    public void visitAttackAICapabilityUCWeakMutSetAddEffect(AttackAICapabilityUCWeakMutSetAddEffect effect) {
-     root.EffectAttackAICapabilityUCWeakMutSetAdd(effect.id, effect.element);
- }
-    public void visitAttackAICapabilityUCWeakMutSetRemoveEffect(AttackAICapabilityUCWeakMutSetRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectAttackAICapabilityUCWeakMutSetRemove(effect.id, effect.element);
-    }
-       
-    public void visitLightningChargedUCWeakMutSetEffect(ILightningChargedUCWeakMutSetEffect effect) { effect.visitILightningChargedUCWeakMutSetEffect(this); }
-    public void visitLightningChargedUCWeakMutSetCreateEffect(LightningChargedUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectLightningChargedUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitLightningChargedUCWeakMutSetDeleteEffect(LightningChargedUCWeakMutSetDeleteEffect effect) {
-      root.EffectLightningChargedUCWeakMutSetDelete(effect.id);
-    }
-    public void visitLightningChargedUCWeakMutSetAddEffect(LightningChargedUCWeakMutSetAddEffect effect) {
-     root.EffectLightningChargedUCWeakMutSetAdd(effect.id, effect.element);
- }
-    public void visitLightningChargedUCWeakMutSetRemoveEffect(LightningChargedUCWeakMutSetRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectLightningChargedUCWeakMutSetRemove(effect.id, effect.element);
-    }
-       
-    public void visitTimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffect effect) { effect.visitITimeCloneAICapabilityUCWeakMutSetEffect(this); }
-    public void visitTimeCloneAICapabilityUCWeakMutSetCreateEffect(TimeCloneAICapabilityUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectTimeCloneAICapabilityUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
-    }
-    public void visitTimeCloneAICapabilityUCWeakMutSetDeleteEffect(TimeCloneAICapabilityUCWeakMutSetDeleteEffect effect) {
-      root.EffectTimeCloneAICapabilityUCWeakMutSetDelete(effect.id);
-    }
-    public void visitTimeCloneAICapabilityUCWeakMutSetAddEffect(TimeCloneAICapabilityUCWeakMutSetAddEffect effect) {
-     root.EffectTimeCloneAICapabilityUCWeakMutSetAdd(effect.id, effect.element);
- }
-    public void visitTimeCloneAICapabilityUCWeakMutSetRemoveEffect(TimeCloneAICapabilityUCWeakMutSetRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectTimeCloneAICapabilityUCWeakMutSetRemove(effect.id, effect.element);
     }
        
     public void visitManaPotionStrongMutSetEffect(IManaPotionStrongMutSetEffect effect) { effect.visitIManaPotionStrongMutSetEffect(this); }
@@ -3154,6 +2890,158 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitFireBombImpulseStrongMutSetRemoveEffect(FireBombImpulseStrongMutSetRemoveEffect effect) {
       root.CheckUnlocked();
       root.EffectFireBombImpulseStrongMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitLightningChargedUCWeakMutSetEffect(ILightningChargedUCWeakMutSetEffect effect) { effect.visitILightningChargedUCWeakMutSetEffect(this); }
+    public void visitLightningChargedUCWeakMutSetCreateEffect(LightningChargedUCWeakMutSetCreateEffect effect) {
+      var list = root.EffectLightningChargedUCWeakMutSetCreate();
+      // If this fails, then we have to add a translation layer.
+      // We shouldn't allow the user to specify the internal ID, because that's
+      // core to a bunch of optimizations (such as how it's a generational index).
+      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+    }
+    public void visitLightningChargedUCWeakMutSetDeleteEffect(LightningChargedUCWeakMutSetDeleteEffect effect) {
+      root.EffectLightningChargedUCWeakMutSetDelete(effect.id);
+    }
+    public void visitLightningChargedUCWeakMutSetAddEffect(LightningChargedUCWeakMutSetAddEffect effect) {
+     root.EffectLightningChargedUCWeakMutSetAdd(effect.id, effect.element);
+ }
+    public void visitLightningChargedUCWeakMutSetRemoveEffect(LightningChargedUCWeakMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectLightningChargedUCWeakMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitTimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffect effect) { effect.visitITimeCloneAICapabilityUCWeakMutSetEffect(this); }
+    public void visitTimeCloneAICapabilityUCWeakMutSetCreateEffect(TimeCloneAICapabilityUCWeakMutSetCreateEffect effect) {
+      var list = root.EffectTimeCloneAICapabilityUCWeakMutSetCreate();
+      // If this fails, then we have to add a translation layer.
+      // We shouldn't allow the user to specify the internal ID, because that's
+      // core to a bunch of optimizations (such as how it's a generational index).
+      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+    }
+    public void visitTimeCloneAICapabilityUCWeakMutSetDeleteEffect(TimeCloneAICapabilityUCWeakMutSetDeleteEffect effect) {
+      root.EffectTimeCloneAICapabilityUCWeakMutSetDelete(effect.id);
+    }
+    public void visitTimeCloneAICapabilityUCWeakMutSetAddEffect(TimeCloneAICapabilityUCWeakMutSetAddEffect effect) {
+     root.EffectTimeCloneAICapabilityUCWeakMutSetAdd(effect.id, effect.element);
+ }
+    public void visitTimeCloneAICapabilityUCWeakMutSetRemoveEffect(TimeCloneAICapabilityUCWeakMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectTimeCloneAICapabilityUCWeakMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitDoomedUCWeakMutSetEffect(IDoomedUCWeakMutSetEffect effect) { effect.visitIDoomedUCWeakMutSetEffect(this); }
+    public void visitDoomedUCWeakMutSetCreateEffect(DoomedUCWeakMutSetCreateEffect effect) {
+      var list = root.EffectDoomedUCWeakMutSetCreate();
+      // If this fails, then we have to add a translation layer.
+      // We shouldn't allow the user to specify the internal ID, because that's
+      // core to a bunch of optimizations (such as how it's a generational index).
+      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+    }
+    public void visitDoomedUCWeakMutSetDeleteEffect(DoomedUCWeakMutSetDeleteEffect effect) {
+      root.EffectDoomedUCWeakMutSetDelete(effect.id);
+    }
+    public void visitDoomedUCWeakMutSetAddEffect(DoomedUCWeakMutSetAddEffect effect) {
+     root.EffectDoomedUCWeakMutSetAdd(effect.id, effect.element);
+ }
+    public void visitDoomedUCWeakMutSetRemoveEffect(DoomedUCWeakMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectDoomedUCWeakMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitMiredUCWeakMutSetEffect(IMiredUCWeakMutSetEffect effect) { effect.visitIMiredUCWeakMutSetEffect(this); }
+    public void visitMiredUCWeakMutSetCreateEffect(MiredUCWeakMutSetCreateEffect effect) {
+      var list = root.EffectMiredUCWeakMutSetCreate();
+      // If this fails, then we have to add a translation layer.
+      // We shouldn't allow the user to specify the internal ID, because that's
+      // core to a bunch of optimizations (such as how it's a generational index).
+      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+    }
+    public void visitMiredUCWeakMutSetDeleteEffect(MiredUCWeakMutSetDeleteEffect effect) {
+      root.EffectMiredUCWeakMutSetDelete(effect.id);
+    }
+    public void visitMiredUCWeakMutSetAddEffect(MiredUCWeakMutSetAddEffect effect) {
+     root.EffectMiredUCWeakMutSetAdd(effect.id, effect.element);
+ }
+    public void visitMiredUCWeakMutSetRemoveEffect(MiredUCWeakMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectMiredUCWeakMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitInvincibilityUCWeakMutSetEffect(IInvincibilityUCWeakMutSetEffect effect) { effect.visitIInvincibilityUCWeakMutSetEffect(this); }
+    public void visitInvincibilityUCWeakMutSetCreateEffect(InvincibilityUCWeakMutSetCreateEffect effect) {
+      var list = root.EffectInvincibilityUCWeakMutSetCreate();
+      // If this fails, then we have to add a translation layer.
+      // We shouldn't allow the user to specify the internal ID, because that's
+      // core to a bunch of optimizations (such as how it's a generational index).
+      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+    }
+    public void visitInvincibilityUCWeakMutSetDeleteEffect(InvincibilityUCWeakMutSetDeleteEffect effect) {
+      root.EffectInvincibilityUCWeakMutSetDelete(effect.id);
+    }
+    public void visitInvincibilityUCWeakMutSetAddEffect(InvincibilityUCWeakMutSetAddEffect effect) {
+     root.EffectInvincibilityUCWeakMutSetAdd(effect.id, effect.element);
+ }
+    public void visitInvincibilityUCWeakMutSetRemoveEffect(InvincibilityUCWeakMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectInvincibilityUCWeakMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitDefyingUCWeakMutSetEffect(IDefyingUCWeakMutSetEffect effect) { effect.visitIDefyingUCWeakMutSetEffect(this); }
+    public void visitDefyingUCWeakMutSetCreateEffect(DefyingUCWeakMutSetCreateEffect effect) {
+      var list = root.EffectDefyingUCWeakMutSetCreate();
+      // If this fails, then we have to add a translation layer.
+      // We shouldn't allow the user to specify the internal ID, because that's
+      // core to a bunch of optimizations (such as how it's a generational index).
+      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+    }
+    public void visitDefyingUCWeakMutSetDeleteEffect(DefyingUCWeakMutSetDeleteEffect effect) {
+      root.EffectDefyingUCWeakMutSetDelete(effect.id);
+    }
+    public void visitDefyingUCWeakMutSetAddEffect(DefyingUCWeakMutSetAddEffect effect) {
+     root.EffectDefyingUCWeakMutSetAdd(effect.id, effect.element);
+ }
+    public void visitDefyingUCWeakMutSetRemoveEffect(DefyingUCWeakMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectDefyingUCWeakMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitCounteringUCWeakMutSetEffect(ICounteringUCWeakMutSetEffect effect) { effect.visitICounteringUCWeakMutSetEffect(this); }
+    public void visitCounteringUCWeakMutSetCreateEffect(CounteringUCWeakMutSetCreateEffect effect) {
+      var list = root.EffectCounteringUCWeakMutSetCreate();
+      // If this fails, then we have to add a translation layer.
+      // We shouldn't allow the user to specify the internal ID, because that's
+      // core to a bunch of optimizations (such as how it's a generational index).
+      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+    }
+    public void visitCounteringUCWeakMutSetDeleteEffect(CounteringUCWeakMutSetDeleteEffect effect) {
+      root.EffectCounteringUCWeakMutSetDelete(effect.id);
+    }
+    public void visitCounteringUCWeakMutSetAddEffect(CounteringUCWeakMutSetAddEffect effect) {
+     root.EffectCounteringUCWeakMutSetAdd(effect.id, effect.element);
+ }
+    public void visitCounteringUCWeakMutSetRemoveEffect(CounteringUCWeakMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectCounteringUCWeakMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitAttackAICapabilityUCWeakMutSetEffect(IAttackAICapabilityUCWeakMutSetEffect effect) { effect.visitIAttackAICapabilityUCWeakMutSetEffect(this); }
+    public void visitAttackAICapabilityUCWeakMutSetCreateEffect(AttackAICapabilityUCWeakMutSetCreateEffect effect) {
+      var list = root.EffectAttackAICapabilityUCWeakMutSetCreate();
+      // If this fails, then we have to add a translation layer.
+      // We shouldn't allow the user to specify the internal ID, because that's
+      // core to a bunch of optimizations (such as how it's a generational index).
+      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+    }
+    public void visitAttackAICapabilityUCWeakMutSetDeleteEffect(AttackAICapabilityUCWeakMutSetDeleteEffect effect) {
+      root.EffectAttackAICapabilityUCWeakMutSetDelete(effect.id);
+    }
+    public void visitAttackAICapabilityUCWeakMutSetAddEffect(AttackAICapabilityUCWeakMutSetAddEffect effect) {
+     root.EffectAttackAICapabilityUCWeakMutSetAdd(effect.id, effect.element);
+ }
+    public void visitAttackAICapabilityUCWeakMutSetRemoveEffect(AttackAICapabilityUCWeakMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectAttackAICapabilityUCWeakMutSetRemove(effect.id, effect.element);
     }
        
     public void visitUnitMutSetEffect(IUnitMutSetEffect effect) { effect.visitIUnitMutSetEffect(this); }

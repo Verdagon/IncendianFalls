@@ -119,7 +119,7 @@ namespace IncendianFalls {
 
         var tile =
           level.root.EffectTerrainTileCreate(
-              level.root.EffectITerrainTileEventMutListCreate(),
+              NullITerrainTileEvent.Null,
             elevation, ITerrainTileComponentMutBunch.New(level.root));
         level.terrain.tiles.Add(location, tile);
 

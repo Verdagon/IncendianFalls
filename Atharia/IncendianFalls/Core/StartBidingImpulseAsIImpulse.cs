@@ -66,7 +66,7 @@ public class StartBidingImpulseAsIImpulse : IImpulse {
   public int GetWeight() {
     return StartBidingImpulseExtensions.GetWeight(obj);
   }
-  public bool Enact(Game game, Superstate superstate, Unit unit) {
+  public Void Enact(Game game, Superstate superstate, Unit unit) {
     return StartBidingImpulseExtensions.Enact(obj, game, superstate, unit);
   }
 

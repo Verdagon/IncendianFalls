@@ -9,14 +9,14 @@ namespace Atharia.Model {
       obj.Delete();
       return new Atharia.Model.Void();
     }
-    public static bool PreAct(
+    public static Void PreAct(
         this Atharia.Model.MiredUC detail,
         Game game,
         Superstate superstate,
         Unit unit) {
       unit.components.Remove(detail.AsIUnitComponent());
       detail.Destruct();
-      return true;
+      return new Atharia.Model.Void();
     }
   }
 }

@@ -28,14 +28,14 @@ namespace Atharia.Model {
       sorcerous.mp = sorcerous.mp - 2;
       return true;
     }
-    public static bool PreAct(
+    public static Atharia.Model.Void PreAct(
         this Atharia.Model.CounteringUC detail,
         Game game,
         Superstate superstate,
         Unit unit) {
       unit.components.Remove(detail.AsIUnitComponent());
       detail.Destruct();
-      return true;
+      return new Atharia.Model.Void();
     }
   }
 }

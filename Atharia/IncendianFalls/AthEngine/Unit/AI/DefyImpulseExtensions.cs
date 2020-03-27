@@ -14,13 +14,13 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static bool Enact(
+    public static Atharia.Model.Void Enact(
         this DefyImpulse obj,
         Game game,
         Superstate superstate,
         Unit unit) {
       Actions.Defy(game, unit);
-      return false;
+      return new Atharia.Model.Void();
     }
   }
 }

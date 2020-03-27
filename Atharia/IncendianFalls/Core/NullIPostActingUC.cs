@@ -43,7 +43,7 @@ public class NullIPostActingUC : IPostActingUC {
     return NullIUnitComponent.Null;
   }
 
-  public bool PostAct(Game game, Superstate superstate, Unit unit) {
+  public Void PostAct(Game game, Superstate superstate, Unit unit) {
     throw new Exception("Called PostAct on a null!");
   }
              

@@ -38,7 +38,7 @@ mut struct LightningChargedUC {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool {
+  : Void {
     LightningChargedUCExtensions.PostAct
   }
 }

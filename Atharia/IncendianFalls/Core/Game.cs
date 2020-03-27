@@ -42,22 +42,6 @@ public class Game {
     if (!root.LevelMutSetExists(levels.id)) {
       violations.Add("Null constraint violated! Game#" + id + ".levels");
     }
-
-    if (!root.ExecutionStateExists(executionState.id)) {
-      violations.Add("Null constraint violated! Game#" + id + ".executionState");
-    }
-
-    if (!root.IGameEventMutListExists(events.id)) {
-      violations.Add("Null constraint violated! Game#" + id + ".events");
-    }
-
-    if (!root.UnitWeakMutSetExists(eventedUnits.id)) {
-      violations.Add("Null constraint violated! Game#" + id + ".eventedUnits");
-    }
-
-    if (!root.TerrainTileWeakMutSetExists(eventedTerrainTiles.id)) {
-      violations.Add("Null constraint violated! Game#" + id + ".eventedTerrainTiles");
-    }
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
     if (foundIds.Contains(id)) {
@@ -76,17 +60,8 @@ public class Game {
     if (root.LevelExists(level.id)) {
       level.FindReachableObjects(foundIds);
     }
-    if (root.ExecutionStateExists(executionState.id)) {
-      executionState.FindReachableObjects(foundIds);
-    }
-    if (root.IGameEventMutListExists(events.id)) {
-      events.FindReachableObjects(foundIds);
-    }
-    if (root.UnitWeakMutSetExists(eventedUnits.id)) {
-      eventedUnits.FindReachableObjects(foundIds);
-    }
-    if (root.TerrainTileWeakMutSetExists(eventedTerrainTiles.id)) {
-      eventedTerrainTiles.FindReachableObjects(foundIds);
+    if (root.UnitExists(actingUnit.id)) {
+      actingUnit.FindReachableObjects(foundIds);
     }
   }
   public bool Is(Game that) {
@@ -143,15 +118,20 @@ public class Game {
     get { return incarnation.time; }
     set { root.EffectGameSetTime(id, value); }
   }
-  public ExecutionState executionState {
+  public Unit actingUnit {
 
     get {
       if (root == null) {
-        throw new Exception("Tried to get member executionState of null!");
+        throw new Exception("Tried to get member actingUnit of null!");
       }
-      return new ExecutionState(root, incarnation.executionState);
+      return new Unit(root, incarnation.actingUnit);
     }
-                       }
+                         set { root.EffectGameSetActingUnit(id, value); }
+  }
+  public bool pauseBeforeNextUnit {
+    get { return incarnation.pauseBeforeNextUnit; }
+    set { root.EffectGameSetPauseBeforeNextUnit(id, value); }
+  }
   public int actionNum {
     get { return incarnation.actionNum; }
     set { root.EffectGameSetActionNum(id, value); }
@@ -164,32 +144,9 @@ public class Game {
     get { return incarnation.hideInput; }
     set { root.EffectGameSetHideInput(id, value); }
   }
-  public IGameEventMutList events {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member events of null!");
-      }
-      return new IGameEventMutList(root, incarnation.events);
-    }
-                       }
-  public UnitWeakMutSet eventedUnits {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member eventedUnits of null!");
-      }
-      return new UnitWeakMutSet(root, incarnation.eventedUnits);
-    }
-                       }
-  public TerrainTileWeakMutSet eventedTerrainTiles {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member eventedTerrainTiles of null!");
-      }
-      return new TerrainTileWeakMutSet(root, incarnation.eventedTerrainTiles);
-    }
-                       }
+  public IGameEvent evvent {
+    get { return incarnation.evvent; }
+    set { root.EffectGameSetEvvent(id, value); }
+  }
 }
 }

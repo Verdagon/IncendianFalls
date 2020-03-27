@@ -46,7 +46,7 @@ namespace Atharia.Model {
       foreach (var borderLocation in borderLocations) {
         if (!terrain.tiles.ContainsKey(borderLocation)) {
           var tile = game.root.EffectTerrainTileCreate(
-              game.root.EffectITerrainTileEventMutListCreate(), 2, ITerrainTileComponentMutBunch.New(game.root));
+              NullITerrainTileEvent.Null, 2, ITerrainTileComponentMutBunch.New(game.root));
           tile.components.Add(game.root.EffectCaveWallTTCCreate().AsITerrainTileComponent());
           terrain.tiles.Add(borderLocation, tile);
         }

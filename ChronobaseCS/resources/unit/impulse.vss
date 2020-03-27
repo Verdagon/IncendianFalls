@@ -17,7 +17,7 @@ mut interface IImpulse {
   fn Enact(
       game: Game,
       superstate: $Superstate,
-      unit: Unit): Bool;
+      unit: Unit): Void;
 }
 
 mut struct NoImpulse {
@@ -34,7 +34,7 @@ mut struct NoImpulse {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool {
+  : Void {
     NoImpulseExtensions.Enact
   }
 }

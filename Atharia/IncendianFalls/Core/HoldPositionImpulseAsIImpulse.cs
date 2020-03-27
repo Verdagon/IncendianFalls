@@ -66,7 +66,7 @@ public class HoldPositionImpulseAsIImpulse : IImpulse {
   public int GetWeight() {
     return HoldPositionImpulseExtensions.GetWeight(obj);
   }
-  public bool Enact(Game game, Superstate superstate, Unit unit) {
+  public Void Enact(Game game, Superstate superstate, Unit unit) {
     return HoldPositionImpulseExtensions.Enact(obj, game, superstate, unit);
   }
 

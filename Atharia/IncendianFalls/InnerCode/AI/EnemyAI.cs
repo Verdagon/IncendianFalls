@@ -6,7 +6,7 @@ using Atharia.Model;
 namespace IncendianFalls {
   public class EnemyAI {
     // Returns true if we should return
-    public static bool AI(
+    public static void AI(
         IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
@@ -37,7 +37,7 @@ namespace IncendianFalls {
             strongestImpulse);
       }
 
-      bool ret = strongestImpulse.Enact(game, superstate, unit);
+      strongestImpulse.Enact(game, superstate, unit);
 
       // The unit theoretically could have self-destructed somehow.
       // Do we want to change this to a live check?
@@ -54,8 +54,6 @@ namespace IncendianFalls {
       }
 
       strongestImpulse.Destruct();
-
-      return ret;
     }
   }
 }

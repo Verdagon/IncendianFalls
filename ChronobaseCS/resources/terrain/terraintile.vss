@@ -1,8 +1,14 @@
 
 mut struct TerrainTile {
-  events: MutList:ITerrainTileEvent;
+  Unit isa IDestructible;
+
+  var evvent: ?ITerrainTileEvent;
   var elevation: Int;
   components: MutBunch:ITerrainTileComponent;
+
+  fn Destruct(this: TerrainTile overrides IDestructible): Void {
+    TerrainTileExtensions.Destruct
+  }
 }
 
 mut interface ITerrainTileComponent {

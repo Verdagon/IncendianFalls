@@ -5,11 +5,9 @@ namespace Atharia.Model {
   public static class UnitExtensions {
     public static Atharia.Model.Void Destruct(
         this Unit obj) {
-      var events = obj.events;
       var components = obj.components;
       obj.Delete();
       components.Destruct();
-      events.Destruct();
       return new Atharia.Model.Void();
     }
     public static int CalculateCombatTimeCost(this Unit unit, int unmodifiedTimeCost) {
@@ -64,11 +62,9 @@ namespace Atharia.Model {
       }
       return sightRange;
     }
-    public static void AddEvent(this Unit unit, Game game, IUnitEvent e) {
-      if (!game.eventedUnits.Contains(unit)) {
-        game.eventedUnits.Add(unit);
-      }
-      unit.events.Add(e);
+    public static void AddEvent(this Unit unit, IUnitEvent e) {
+      unit.evvent = e;
+      unit.evvent = NullIUnitEvent.Null;
     }
     //public static IDirectiveUC GetDirectiveOrNull(this Unit unit) {
     //  return unit.components.GetOnlyIDirectiveUCOrNull();

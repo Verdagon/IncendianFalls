@@ -3,7 +3,6 @@ package net.verdagon.chronobasecs.generator
 import net.verdagon.chronobasecs.compiled._
 import net.verdagon.chronobasecs.generator.chronobase.Generator.toCS
 import net.verdagon.chronobasecs.generator.chronobase.ChronobaseOptions
-import net.verdagon.chronobasecs.generator.chronobase.struct.MutStructRootMethods.generateRootStructInstanceSetterMethod
 
 object MutStructEffects {
 

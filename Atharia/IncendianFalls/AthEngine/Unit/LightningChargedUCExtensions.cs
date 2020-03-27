@@ -15,14 +15,14 @@ namespace Atharia.Model {
     public static int GetMovementTimeMultiplierPercent(this LightningChargedUC armor) {
       return 50;
     }
-    public static bool PostAct(
+    public static Void PostAct(
         this Atharia.Model.LightningChargedUC detail,
         Game game,
         Superstate superstate,
         Unit unit) {
       unit.components.Remove(detail.AsIUnitComponent());
       detail.Destruct();
-      return true;
+      return new Atharia.Model.Void();
     }
   }
 }

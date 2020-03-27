@@ -66,7 +66,7 @@ public class SummonImpulseAsIImpulse : IImpulse {
   public int GetWeight() {
     return SummonImpulseExtensions.GetWeight(obj);
   }
-  public bool Enact(Game game, Superstate superstate, Unit unit) {
+  public Void Enact(Game game, Superstate superstate, Unit unit) {
     return SummonImpulseExtensions.Enact(obj, game, superstate, unit);
   }
 

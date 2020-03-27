@@ -15,7 +15,7 @@ namespace Atharia.Model {
       return new Atharia.Model.Void();
     }
 
-    public static bool PreAct(
+    public static Void PreAct(
         this AttackAICapabilityUC obj,
         Game game,
         Superstate superstate,
@@ -33,14 +33,14 @@ namespace Atharia.Model {
       Unit nearestEnemy = DetermineTarget.Determine(game, superstate, unit);
       if (!nearestEnemy.Exists()) {
         // There are no enemies. Don't update directive.
-        return false;
+        return new Atharia.Model.Void();
       }
 
       // Enemy is not next to subject.
       // Check if we can see them.
       if (!Sight.CanSee(game, unit, nearestEnemy.location, out List<Location> sightPath)) {
         // Can't see the enemy. Don't update directive.
-        return false;
+        return new Atharia.Model.Void();
       }
 
       var terrain = game.level.terrain;
@@ -59,7 +59,7 @@ namespace Atharia.Model {
 
       if (pathToNearestEnemy.Count == 0) {
         // Can't see the enemy. Don't update directive.
-        return false;
+        return new Atharia.Model.Void();
       }
 
       if (obj.killDirective.Exists()) {
@@ -71,7 +71,7 @@ namespace Atharia.Model {
           game.root.EffectKillDirectiveCreate(
               nearestEnemy,
               game.root.EffectLocationMutListCreate(pathToNearestEnemy));
-      return false;
+      return new Atharia.Model.Void();
     }
 
     public static IImpulse ProduceImpulse(

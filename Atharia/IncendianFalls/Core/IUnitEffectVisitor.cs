@@ -7,6 +7,7 @@ namespace Atharia.Model {
 public interface IUnitEffectVisitor {
   void visitUnitCreateEffect(UnitCreateEffect effect);
   void visitUnitDeleteEffect(UnitDeleteEffect effect);
+  void visitUnitSetEvventEffect(UnitSetEvventEffect effect);
   void visitUnitSetAliveEffect(UnitSetAliveEffect effect);
   void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect);
   void visitUnitSetLocationEffect(UnitSetLocationEffect effect);

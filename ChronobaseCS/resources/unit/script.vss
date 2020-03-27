@@ -14,7 +14,7 @@ mut struct TimeCloneAICapabilityUC {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool {
+  : Void {
     TimeCloneAICapabilityUCExtensions.PostAct
   }
   fn ProduceImpulse(
@@ -52,7 +52,7 @@ mut struct EvaporateImpulse {
       this: EvaporateImpulse overrides IImpulse,
       game: Game,
       superstate: $Superstate,
-      unit: Unit): Bool {
+      unit: Unit): Void {
     EvaporateImpulseExtensions.Enact
   }
 }

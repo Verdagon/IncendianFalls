@@ -21,7 +21,7 @@ mut interface IPreActingUC {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool;
+  : Void;
 }
 
 mut interface IPostActingUC {
@@ -31,7 +31,7 @@ mut interface IPostActingUC {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool;
+  : Void;
 }
 
 mut interface IAICapabilityUC {

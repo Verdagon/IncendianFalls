@@ -126,7 +126,7 @@ public class TimeCloneAICapabilityUCAsIPostActingUC : IPostActingUC {
          public Void Destruct() {
     return TimeCloneAICapabilityUCExtensions.Destruct(obj);
   }
-  public bool PostAct(Game game, Superstate superstate, Unit unit) {
+  public Void PostAct(Game game, Superstate superstate, Unit unit) {
     return TimeCloneAICapabilityUCExtensions.PostAct(obj, game, superstate, unit);
   }
 

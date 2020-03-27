@@ -84,7 +84,7 @@ public class MiredUCAsIPreActingUC : IPreActingUC {
          public Void Destruct() {
     return MiredUCExtensions.Destruct(obj);
   }
-  public bool PreAct(Game game, Superstate superstate, Unit unit) {
+  public Void PreAct(Game game, Superstate superstate, Unit unit) {
     return MiredUCExtensions.PreAct(obj, game, superstate, unit);
   }
 

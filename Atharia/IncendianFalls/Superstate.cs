@@ -32,13 +32,13 @@ namespace Atharia.Model {
       }
     }
 
-    public class NavigatingState {
-      public readonly List<Location> path;
+    //public class NavigatingState {
+    //  public readonly List<Location> path;
 
-      public NavigatingState(List<Location> path) {
-        this.path = path;
-      }
-    }
+    //  public NavigatingState(List<Location> path) {
+    //    this.path = path;
+    //  }
+    //}
 
     public Game game;
 
@@ -57,7 +57,7 @@ namespace Atharia.Model {
     // If this is non-null, we are currently timeshifting.
     public TimeShiftingState timeShiftingState;
 
-    public NavigatingState navigatingState;
+    //public NavigatingState navigatingState;
 
     public Superstate(
         Game game,
@@ -65,27 +65,25 @@ namespace Atharia.Model {
         List<RootIncarnation> previousTurns,
         List<IRequest> requests,
         List<int> anchorTurnIndices,
-        TimeShiftingState timeShiftingState,
-        NavigatingState navigatingState) {
+        TimeShiftingState timeShiftingState//,
+        //NavigatingState navigatingState
+      ) {
       this.game = game;
       this.levelSuperstate = liveUnitByLocationMap;
       this.previousTurns = previousTurns;
       this.requests = requests;
       this.anchorTurnIndices = anchorTurnIndices;
       this.timeShiftingState = timeShiftingState;
-      this.navigatingState = navigatingState;
+      //this.navigatingState = navigatingState;
     }
 
     public MultiverseStateType GetStateType() {
-      var executionState = game.executionState;
       var player = game.player;
       if (timeShiftingState != null) {
         if (timeShiftingState.rewinding) {
           return MultiverseStateType.kTimeshiftingBackward;
         } else {
-          if (executionState.actingUnit.Exists()) {
-            Asserts.Assert(!executionState.remainingPreActingUnitComponents.Exists());
-            Asserts.Assert(!executionState.remainingPostActingUnitComponents.Exists());
+          if (game.actingUnit.Exists()) {
             return MultiverseStateType.kTimeshiftingCloneMoving;
           } else {
             // If this assert fails, that means the old player is still on the anchor,
@@ -101,25 +99,14 @@ namespace Atharia.Model {
           }
         }
       } else {
-        switch (game.GetStateType()) {
-          case WorldStateType.kAfterUnitAction:
-            return MultiverseStateType.kAfterUnitAction;
-          case WorldStateType.kBeforeEnemyAction:
-            return MultiverseStateType.kBeforeEnemyAction;
-          case WorldStateType.kBeforePlayerInput:
-            if (navigatingState != null) {
-              return MultiverseStateType.kBeforePlayerResume;
-            } else {
-              return MultiverseStateType.kBeforePlayerInput;
-            }
-          case WorldStateType.kBetweenUnits:
-            return MultiverseStateType.kBetweenUnits;
-          case WorldStateType.kPostActingDetail:
-            return MultiverseStateType.kPostActingDetail;
-          case WorldStateType.kPreActingDetail:
-            return MultiverseStateType.kPreActingDetail;
-          default:
-            throw new Exception("Unknown state " + game.GetStateType());
+        if (game.actingUnit.Exists()) {
+          //if (navigatingState != null) {
+          //  return MultiverseStateType.kBeforePlayerResume;
+          //} else {
+            return MultiverseStateType.kBeforePlayerInput;
+          //}
+        } else {
+          return MultiverseStateType.kBetweenUnits;
         }
       }
     }

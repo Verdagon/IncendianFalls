@@ -13,12 +13,12 @@ namespace Atharia.Model {
       return new Atharia.Model.Void();
     }
 
-    public static bool PostAct(
+    public static Void PostAct(
         this TimeCloneAICapabilityUC obj,
         Game game,
         Superstate superstate,
         Unit unit) {
-      return false;
+      return new Atharia.Model.Void();
     }
 
     public static Atharia.Model.Void AfterImpulse(

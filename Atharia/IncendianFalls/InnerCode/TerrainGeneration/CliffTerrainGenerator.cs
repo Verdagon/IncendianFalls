@@ -205,7 +205,7 @@ namespace IncendianFalls {
         Location location = canvasSearcher.Next(context);
         var tile =
             root.EffectTerrainTileCreate(
-              root.EffectITerrainTileEventMutListCreate(),
+              NullITerrainTileEvent.Null,
                 1, ITerrainTileComponentMutBunch.New(root));
         tile.components.Add(root.EffectMagmaTTCCreate().AsITerrainTileComponent());
         tiles.Add(location, tile);

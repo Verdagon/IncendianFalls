@@ -15,7 +15,7 @@ mut struct MireImpulse {
       this: MireImpulse overrides IImpulse,
       game: Game,
       superstate: $Superstate,
-      unit: Unit): Bool {
+      unit: Unit): Void {
     MireImpulseExtensions.Enact
   }
 }
@@ -32,7 +32,7 @@ mut struct MiredUC {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool {
+  : Void {
     MiredUCExtensions.PreAct
   }
 }

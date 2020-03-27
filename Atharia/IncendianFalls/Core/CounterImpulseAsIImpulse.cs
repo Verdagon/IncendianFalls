@@ -66,7 +66,7 @@ public class CounterImpulseAsIImpulse : IImpulse {
   public int GetWeight() {
     return CounterImpulseExtensions.GetWeight(obj);
   }
-  public bool Enact(Game game, Superstate superstate, Unit unit) {
+  public Void Enact(Game game, Superstate superstate, Unit unit) {
     return CounterImpulseExtensions.Enact(obj, game, superstate, unit);
   }
 

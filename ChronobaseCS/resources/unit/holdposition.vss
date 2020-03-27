@@ -16,7 +16,7 @@ mut struct HoldPositionImpulse {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool {
+  : Void {
     HoldPositionImpulseExtensions.Enact
   }
 }

@@ -80,8 +80,6 @@ namespace IncendianFalls {
 
       var game = context.root.GetGame(gameId);
 
-      EventsClearer.Clear(game);
-
       switch (superstate.GetStateType()) {
         case MultiverseStateType.kBeforePlayerInput:
           if (superstate.anchorTurnIndices.Count == 0) {
@@ -145,7 +143,8 @@ namespace IncendianFalls {
         case MultiverseStateType.kTimeshiftingCloneMoving:
           // We're not between units yet; the time clone should do things until we're
           // between units.
-          GameLoop.Continue(context, game, superstate, new PauseCondition(true));
+          game.pauseBeforeNextUnit = true;
+          GameLoop.ContinueAfterUnitAction(context, game, superstate);
 
           return "";
 
@@ -156,7 +155,7 @@ namespace IncendianFalls {
           // Now place a new player down, and switch game.player to it.
           var newPlayer =
               context.root.EffectUnitCreate(
-                  context.root.EffectIUnitEventMutListCreate(),
+                  NullIUnitEvent.Null,
                   true,
                   0,
                   superstate.timeShiftingState.targetAnchorLocation,
@@ -186,11 +185,10 @@ namespace IncendianFalls {
           // The game loop is between units. Let's simulate until it's waiting for player input.
           // There's some complexity here... see, before we timeshifted backward, all the components
           // did their pre turn actions. So to do them again might be weird.
-          // However, to not do them would probably confuse their internal states.
-          // Then again, confused internal states is a much more general problem that we
-          // should solve elsewhere.
-          // For now, fast-forward the state to waiting for user input.
-          GameLoop.NoteUnitAppearedReadyToAct(game, superstate);
+          // But, to not do them would probably confuse their internal states... because suddenly the
+          // world changed out from under them. But, that's a more general problem that happens even
+          // outside of chronomancy; if we had multiple pre-acting components which affected the world
+          // in various ways, they'd have to be coded against that.
 
           Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput);
 

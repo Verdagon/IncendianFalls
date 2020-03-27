@@ -126,7 +126,7 @@ public class InvincibilityUCAsIPreActingUC : IPreActingUC {
          public Void Destruct() {
     return InvincibilityUCExtensions.Destruct(obj);
   }
-  public bool PreAct(Game game, Superstate superstate, Unit unit) {
+  public Void PreAct(Game game, Superstate superstate, Unit unit) {
     return InvincibilityUCExtensions.PreAct(obj, game, superstate, unit);
   }
 

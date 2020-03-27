@@ -14,13 +14,13 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static bool Enact(
+    public static Atharia.Model.Void Enact(
         this MireImpulse obj,
         Game game,
         Superstate superstate,
         Unit unit) {
       Actions.Mire(game, superstate, unit, obj.targetUnit);
-      return false;
+      return new Atharia.Model.Void();
     }
   }
 }

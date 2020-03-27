@@ -20,12 +20,12 @@ namespace IncendianFalls {
               attacker.id,
               new IntImmList(victimsIds),
               new LocationImmList(otherLocations));
-      attacker.AddEvent(game, unleashBideEvent.AsIUnitEvent());
+      attacker.AddEvent(unleashBideEvent.AsIUnitEvent());
       foreach (var victim in victims) {
-        victim.AddEvent(game, unleashBideEvent.AsIUnitEvent());
+        victim.AddEvent(unleashBideEvent.AsIUnitEvent());
       }
       foreach (var location in otherLocations) {
-        game.level.terrain.tiles[location].AddEvent(game, unleashBideEvent.AsITerrainTileEvent());
+        game.level.terrain.tiles[location].AddEvent(unleashBideEvent.AsITerrainTileEvent());
       }
     }
     public static void broadcastUnitAttackEvent(
@@ -34,9 +34,9 @@ namespace IncendianFalls {
         Unit attacker,
         Unit victim) {
       var attackEvent = new UnitAttackEventAsIUnitEvent(new UnitAttackEvent(game.time, attacker.id, victim.id));
-      attacker.AddEvent(game, attackEvent);
+      attacker.AddEvent(attackEvent);
       if (victim.id != attacker.id) {
-        victim.AddEvent(game, attackEvent);
+        victim.AddEvent(attackEvent);
       }
     }
     public static void broadcastUnitFireEvent(
@@ -45,9 +45,9 @@ namespace IncendianFalls {
         Unit attacker,
         Unit victim) {
       var attackEvent = new UnitFireEventAsIUnitEvent(new UnitFireEvent(game.time, attacker.id, victim.id));
-      attacker.AddEvent(game, attackEvent);
+      attacker.AddEvent(attackEvent);
       if (victim.id != attacker.id) {
-        victim.AddEvent(game, attackEvent);
+        victim.AddEvent(attackEvent);
       }
     }
     public static void broadcastUnitFireBombedEvent(
@@ -57,9 +57,9 @@ namespace IncendianFalls {
         Location location) {
       var e = new UnitFireBombedEvent(game.time, victim.id, location);
       if (victim.Exists()) {
-        victim.AddEvent(game, e.AsIUnitEvent());
+        victim.AddEvent(e.AsIUnitEvent());
       } else {
-        game.level.terrain.tiles[location].AddEvent(game, e.AsITerrainTileEvent());
+        game.level.terrain.tiles[location].AddEvent(e.AsITerrainTileEvent());
       }
     }
     public static void broadcastUnitStepEvent(
@@ -69,14 +69,14 @@ namespace IncendianFalls {
         Location from,
         Location to) {
       var attackEvent = new UnitStepEventAsIUnitEvent(new UnitStepEvent(game.time, unit.id, from, to));
-      unit.AddEvent(game, attackEvent);
+      unit.AddEvent(attackEvent);
     }
     public static void broadcastUnitDefyingEvent(
         Root root,
         Game game,
         Unit unit) {
       var e = new UnitDefyingEvent(game.time);
-      unit.AddEvent(game, e.AsIUnitEvent());
+      unit.AddEvent(e.AsIUnitEvent());
     }
     public static void broadcastUnitMiredEvent(
         Root root,
@@ -84,9 +84,9 @@ namespace IncendianFalls {
         Unit attacker,
         Unit victim) {
       var e = new UnitMireEvent(game.time, attacker.id, victim.id);
-      attacker.AddEvent(game, e.AsIUnitEvent());
+      attacker.AddEvent(e.AsIUnitEvent());
       if (victim.id != attacker.id) {
-        victim.AddEvent(game, e.AsIUnitEvent());
+        victim.AddEvent(e.AsIUnitEvent());
       }
     }
     public static void broadcastUnitCounteringEvent(
@@ -94,7 +94,7 @@ namespace IncendianFalls {
         Game game,
         Unit unit) {
       var e = new UnitCounteringEvent(game.time);
-      unit.AddEvent(game, e.AsIUnitEvent());
+      unit.AddEvent(e.AsIUnitEvent());
     }
   }
 }

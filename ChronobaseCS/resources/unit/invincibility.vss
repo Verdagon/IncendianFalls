@@ -32,7 +32,7 @@ mut struct InvincibilityUC {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool {
+  : Void {
     InvincibilityUCExtensions.PreAct
   }
 }

@@ -52,12 +52,6 @@ imm struct AttackRequest {
   targetUnitId: Int;
 }
 
-imm struct CancelRequest {
-  CancelRequest isa IRequest;
-
-  gameId: Int;
-}
-
 imm struct FireRequest {
   FireRequest isa IRequest;
 
@@ -101,12 +95,6 @@ imm struct DefyRequest {
 
 imm struct CounterRequest {
   CounterRequest isa IRequest;
-
-  gameId: Int;
-}
-
-imm struct FollowDirectiveRequest {
-  FollowDirectiveRequest isa IRequest;
 
   gameId: Int;
 }

@@ -38,7 +38,7 @@ public class NullIImpulse : IImpulse {
     throw new Exception("Called GetWeight on a null!");
   }
              
-  public bool Enact(Game game, Superstate superstate, Unit unit) {
+  public Void Enact(Game game, Superstate superstate, Unit unit) {
     throw new Exception("Called Enact on a null!");
   }
              

@@ -14,7 +14,7 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static bool Enact(
+    public static Atharia.Model.Void Enact(
         this KamikazeTargetImpulse self,
         Game game,
         Superstate superstate,
@@ -30,7 +30,7 @@ namespace Atharia.Model {
 
       unit.nextActionTime = unit.nextActionTime + unit.CalculateCombatTimeCost(600);
 
-      return false;
+      return new Atharia.Model.Void();
     }
   }
 }

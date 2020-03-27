@@ -24,20 +24,16 @@ namespace EmberDeep {
               Unit.Null,
               Level.Null,
               0,
-              context.root.EffectExecutionStateCreate(
-                  Unit.Null,
-                  false,
-                  IPreActingUCWeakMutBunch.Null,
-                  IPostActingUCWeakMutBunch.Null),
+
+              Unit.Null,
+              false,
 
               1,
 
               "",
               false,
 
-              context.root.EffectIGameEventMutListCreate(new List<IGameEvent>()),
-              context.root.EffectUnitWeakMutSetCreate(),
-              context.root.EffectTerrainTileWeakMutSetCreate());
+              NullIGameEvent.Null);
 
       superstate =
           new Superstate(
@@ -46,7 +42,6 @@ namespace EmberDeep {
             new List<RootIncarnation>(),
             new List<IRequest>(),
             new List<int>(),
-            null,
             null);
 
       Level startLevel = Level.Null;

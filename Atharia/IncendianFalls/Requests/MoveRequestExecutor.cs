@@ -19,25 +19,25 @@ namespace IncendianFalls {
 
     public void Execute() {
       Actions.Step(game, superstate, game.player, destination, false, true);
-      GameLoop.NoteUnitActed(game, game.player);
+      //GameLoop.NoteUnitActed(game, game.player);
     }
   }
 
   public class MoveRequestExecutor {
-    public static void Continue(
-        SSContext context,
-        Game game,
-        Superstate superstate) {
-      var steps = superstate.navigatingState.path;
-      Asserts.Assert(steps.Count > 0, "No steps!");
-      var nextStep = steps[0];
-      steps.RemoveAt(0);
-      Asserts.Assert(Actions.CanStep(game, superstate, game.player, nextStep), "Can't step!");
-      Move(context, game, superstate, nextStep);
-      if (steps.Count == 0) {
-        superstate.navigatingState = null;
-      }
-    }
+    //public static void Continue(
+    //    SSContext context,
+    //    Game game,
+    //    Superstate superstate) {
+    //  var steps = superstate.navigatingState.path;
+    //  Asserts.Assert(steps.Count > 0, "No steps!");
+    //  var nextStep = steps[0];
+    //  steps.RemoveAt(0);
+    //  Asserts.Assert(Actions.CanStep(game, superstate, game.player, nextStep), "Can't step!");
+    //  Move(context, game, superstate, nextStep);
+    //  if (steps.Count == 0) {
+    //    superstate.navigatingState = null;
+    //  }
+    //}
 
 
     public static void Move(
@@ -51,13 +51,11 @@ namespace IncendianFalls {
       superstate.requests.Add(new MoveRequest(game.id, destination).AsIRequest());
       Actions.Step(game, superstate, game.player, destination, false, true);
 
-      GameLoop.NoteUnitActed(game, game.player);
-
       //GameLoop.ContinueAfterUnitAction(
+      //  context,
       //    game,
       //    superstate,
-      //    new PauseCondition(false),
-      //    new SortedSet<int>());
+      //    new PauseCondition(0));
     }
 
     public static string Execute(
@@ -68,20 +66,18 @@ namespace IncendianFalls {
       Location destination = request.destination;
       var game = context.root.GetGame(gameId);
 
-      EventsClearer.Clear(game);
-
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
         return "Error: Unexpected player input!";
       }
-      if (!game.executionState.actingUnit.Is(game.player)) {
+      if (!game.actingUnit.Is(game.player)) {
         return "Error: Player not next acting unit! (a)";
       }
       if (superstate.timeShiftingState != null) {
         return "Error: Cannot move while time shifting!";
       }
-      if (superstate.navigatingState != null) {
-        return "Error: Cannot move while already navigating!";
-      }
+      //if (superstate.navigatingState != null) {
+      //  return "Error: Cannot move while already navigating!";
+      //}
       if (destination == game.player.location) {
         return "Already there!";
       }
@@ -89,26 +85,27 @@ namespace IncendianFalls {
       if (Actions.CanStep(game, superstate, game.player, destination)) {
         Move(context, game, superstate, destination);
       } else {
-        var terrain = game.level.terrain;
-        var steps =
-            AStarExplorer.Go(
-                terrain.pattern,
-                game.player.location,
-                destination,
-                game.level.ConsiderCornersAdjacent(),
-                (Location from, Location to) => {
-                  return terrain.tiles.ContainsKey(to) &&
-                      terrain.tiles[to].IsWalkable() &&
-                      terrain.GetElevationDifference(from, to) <= 2;
-                });
-        if (steps.Count == 0) {
-          return "Can't go there!";
-        }
-        if (!Actions.CanStep(game, superstate, game.player, steps[0])) {
-          return "Can't step that way!";
-        }
-        superstate.navigatingState = new Superstate.NavigatingState(steps);
-        Continue(context, game, superstate);
+        return "Too far away!";
+        //var terrain = game.level.terrain;
+        //var steps =
+        //    AStarExplorer.Go(
+        //        terrain.pattern,
+        //        game.player.location,
+        //        destination,
+        //        game.level.ConsiderCornersAdjacent(),
+        //        (Location from, Location to) => {
+        //          return terrain.tiles.ContainsKey(to) &&
+        //              terrain.tiles[to].IsWalkable() &&
+        //              terrain.GetElevationDifference(from, to) <= 2;
+        //        });
+        //if (steps.Count == 0) {
+        //  return "Can't go there!";
+        //}
+        //if (!Actions.CanStep(game, superstate, game.player, steps[0])) {
+        //  return "Can't step that way!";
+        //}
+        //superstate.navigatingState = new Superstate.NavigatingState(steps);
+        //Continue(context, game, superstate);
       }
 
       return "";

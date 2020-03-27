@@ -35,10 +35,6 @@ public class TerrainTile {
   }
   public void CheckForNullViolations(List<string> violations) {
 
-    if (!root.ITerrainTileEventMutListExists(events.id)) {
-      violations.Add("Null constraint violated! TerrainTile#" + id + ".events");
-    }
-
     if (!root.ITerrainTileComponentMutBunchExists(components.id)) {
       violations.Add("Null constraint violated! TerrainTile#" + id + ".components");
     }
@@ -48,9 +44,6 @@ public class TerrainTile {
       return;
     }
     foundIds.Add(id);
-    if (root.ITerrainTileEventMutListExists(events.id)) {
-      events.FindReachableObjects(foundIds);
-    }
     if (root.ITerrainTileComponentMutBunchExists(components.id)) {
       components.FindReachableObjects(foundIds);
     }
@@ -64,15 +57,10 @@ public class TerrainTile {
     }
     return this.root == that.root && id == that.id;
   }
-         public ITerrainTileEventMutList events {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member events of null!");
-      }
-      return new ITerrainTileEventMutList(root, incarnation.events);
-    }
-                       }
+         public ITerrainTileEvent evvent {
+    get { return incarnation.evvent; }
+    set { root.EffectTerrainTileSetEvvent(id, value); }
+  }
   public int elevation {
     get { return incarnation.elevation; }
     set { root.EffectTerrainTileSetElevation(id, value); }

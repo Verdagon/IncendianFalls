@@ -15,13 +15,13 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static bool Enact(
+    public static Void Enact(
         this AttackImpulse obj,
         Game game,
         Superstate superstate,
         Unit unit) {
       Actions.Bump(game, superstate, unit, obj.targetUnit, 100, true);
-      return true;
+      return new Atharia.Model.Void();
     }
 
   }

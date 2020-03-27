@@ -147,7 +147,7 @@ public class AttackAICapabilityUCAsIPreActingUC : IPreActingUC {
          public Void Destruct() {
     return AttackAICapabilityUCExtensions.Destruct(obj);
   }
-  public bool PreAct(Game game, Superstate superstate, Unit unit) {
+  public Void PreAct(Game game, Superstate superstate, Unit unit) {
     return AttackAICapabilityUCExtensions.PreAct(obj, game, superstate, unit);
   }
 

@@ -15,14 +15,14 @@ namespace Atharia.Model {
     public static int GetIncomingDamageMultiplierPercent(this Atharia.Model.DefyingUC detail) {
       return 33;
     }
-    public static bool PreAct(
+    public static Void PreAct(
         this Atharia.Model.DefyingUC detail,
         Game game,
         Superstate superstate,
         Unit unit) {
       unit.components.Remove(detail.AsIUnitComponent());
       detail.Destruct();
-      return true;
+      return new Atharia.Model.Void();
     }
   }
 }

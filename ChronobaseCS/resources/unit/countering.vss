@@ -22,7 +22,7 @@ mut struct CounteringUC {
       game: Game,
       superstate: $Superstate,
       unit: Unit)
-  : Bool {
+  : Void {
     CounteringUCExtensions.PreAct
   }
 }

@@ -15,8 +15,6 @@ public static class IRequestParser {
         return new TimeAnchorMoveRequestAsIRequest(TimeAnchorMoveRequest.Parse(source));
       case "TimeShiftRequest":
         return new TimeShiftRequestAsIRequest(TimeShiftRequest.Parse(source));
-      case "FollowDirectiveRequest":
-        return new FollowDirectiveRequestAsIRequest(FollowDirectiveRequest.Parse(source));
       case "CounterRequest":
         return new CounterRequestAsIRequest(CounterRequest.Parse(source));
       case "DefyRequest":
@@ -31,8 +29,6 @@ public static class IRequestParser {
         return new FireBombRequestAsIRequest(FireBombRequest.Parse(source));
       case "FireRequest":
         return new FireRequestAsIRequest(FireRequest.Parse(source));
-      case "CancelRequest":
-        return new CancelRequestAsIRequest(CancelRequest.Parse(source));
       case "AttackRequest":
         return new AttackRequestAsIRequest(AttackRequest.Parse(source));
       case "ResumeRequest":

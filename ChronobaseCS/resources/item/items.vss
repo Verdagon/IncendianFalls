@@ -42,6 +42,8 @@ mut interface ICloneableUC {
 mut struct Wat {
   items: MutBunch:&IItem;
   impulses: MutBunch:&IImpulse;
+  blah: MutBunch:&&IPostActingUC;
+  bloop: MutBunch:&&IPreActingUC;
 }
 
 mut interface IUsableItem {

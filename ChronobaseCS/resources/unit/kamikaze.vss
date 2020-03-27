@@ -56,7 +56,7 @@ mut struct KamikazeTargetImpulse {
       this: KamikazeTargetImpulse overrides IImpulse,
       game: Game,
       superstate: $Superstate,
-      unit: Unit): Bool {
+      unit: Unit): Void {
     KamikazeTargetImpulseExtensions.Enact
   }
 }
@@ -78,7 +78,7 @@ mut struct KamikazeJumpImpulse {
       this: KamikazeJumpImpulse overrides IImpulse,
       game: Game,
       superstate: $Superstate,
-      unit: Unit): Bool {
+      unit: Unit): Void {
     KamikazeJumpImpulseExtensions.Enact
   }
 }

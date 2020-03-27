@@ -13,9 +13,7 @@ namespace IncendianFalls {
 
       var game = context.root.GetGame(gameId);
 
-      EventsClearer.Clear(game);
-
-      if (!game.executionState.actingUnit.Is(game.player)) {
+      if (!game.actingUnit.Is(game.player)) {
         return "Error: Player not next acting unit! (a)";
       }
       //if (!game.player.Is(Utils.GetNextActingUnit(game))) {
@@ -48,7 +46,7 @@ namespace IncendianFalls {
 
       Actions.Bump(game, superstate, game.player, victim, 100, true);
 
-      GameLoop.NoteUnitActed(game, game.player);
+      //GameLoop.NoteUnitActed(game, game.player);
 
       return "";
     }

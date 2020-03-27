@@ -15,13 +15,13 @@ namespace Atharia.Model {
       return obj.weight;
     }
 
-    public static bool Enact(
+    public static Atharia.Model.Void Enact(
         this FireBombImpulse obj,
         Game game,
         Superstate superstate,
         Unit unit) {
       Actions.PlaceFireBomb(game, superstate, unit, obj.location);
-      return true;
+      return new Atharia.Model.Void();
     }
   }
 }

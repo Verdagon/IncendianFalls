@@ -35,10 +35,6 @@ public class Unit {
   }
   public void CheckForNullViolations(List<string> violations) {
 
-    if (!root.IUnitEventMutListExists(events.id)) {
-      violations.Add("Null constraint violated! Unit#" + id + ".events");
-    }
-
     if (!root.IUnitComponentMutBunchExists(components.id)) {
       violations.Add("Null constraint violated! Unit#" + id + ".components");
     }
@@ -48,9 +44,6 @@ public class Unit {
       return;
     }
     foundIds.Add(id);
-    if (root.IUnitEventMutListExists(events.id)) {
-      events.FindReachableObjects(foundIds);
-    }
     if (root.IUnitComponentMutBunchExists(components.id)) {
       components.FindReachableObjects(foundIds);
     }
@@ -64,15 +57,10 @@ public class Unit {
     }
     return this.root == that.root && id == that.id;
   }
-         public IUnitEventMutList events {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member events of null!");
-      }
-      return new IUnitEventMutList(root, incarnation.events);
-    }
-                       }
+         public IUnitEvent evvent {
+    get { return incarnation.evvent; }
+    set { root.EffectUnitSetEvvent(id, value); }
+  }
   public bool alive {
     get { return incarnation.alive; }
     set { root.EffectUnitSetAlive(id, value); }

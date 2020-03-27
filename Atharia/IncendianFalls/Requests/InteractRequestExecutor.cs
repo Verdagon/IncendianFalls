@@ -10,14 +10,12 @@ namespace IncendianFalls {
       int gameId = request.gameId;
       var game = context.root.GetGame(gameId);
 
-      EventsClearer.Clear(game);
-
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }
       var player = game.player;
 
-      if (!game.executionState.actingUnit.Is(game.player)) {
+      if (!game.actingUnit.Is(game.player)) {
         return "Error: Player not next acting unit! (a)";
       }
       //if (!game.player.Is(Utils.GetNextActingUnit(game))) {
@@ -37,9 +35,9 @@ namespace IncendianFalls {
 
       context.Flare(game.root.GetDeterministicHashCode());
 
-      if (success == "") {
-        GameLoop.NoteUnitActed(game, game.player);
-      }
+      //if (success == "") {
+      //  GameLoop.NoteUnitActed(game, game.player);
+      //}
 
       return success;
     }

@@ -14,13 +14,13 @@ namespace Atharia.Model {
       return 1000;
     }
 
-    public static bool Enact(
+    public static Atharia.Model.Void Enact(
         this EvaporateImpulse obj,
         Game game,
         Superstate superstate,
         Unit unit) {
       Actions.Evaporate(game, superstate, unit);
-      return true;
+      return new Atharia.Model.Void();
     }
   }
 }

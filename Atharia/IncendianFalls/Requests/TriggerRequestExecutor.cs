@@ -15,8 +15,6 @@ namespace IncendianFalls {
       int gameId = request.gameId;
       var game = context.root.GetGame(gameId);
 
-      EventsClearer.Clear(game);
-
       game.level.controller.SimpleTrigger(context, game, superstate, request.triggerName);
 
       return "";
