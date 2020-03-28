@@ -70,3 +70,8 @@ imm struct SetGameSpeedEvent {
 
   percent: Int; // 100 for normal speed, 0 for paused, 200 for double speed.
 }
+
+// Sent whenever the game code reverts by one turn.
+imm struct RevertedEvent {
+  RevertedEvent isa IGameEvent;
+}

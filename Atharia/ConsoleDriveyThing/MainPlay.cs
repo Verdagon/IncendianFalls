@@ -76,22 +76,26 @@ namespace ConsoleDriveyThing {
     }
 
     private delegate void IDisplay();
-    private static void ApplyEffectsAndDisplay(Game game, List<IEffect> effects, bool slowly, IDisplay display) {
+    private static void ApplyEffectsAndDisplay(Game game, List<IEffect> effects, IDisplay display) {
       int currentActionNum = game.actionNum;
 
       game.root.Transact(delegate () {
         bool anyEffectsSinceLastDisplay = false;
         var applier = new EffectApplier(game.root);
         for (int i = 0; i < effects.Count; i++) {
+          var effect = effects[i];
           if (game.actionNum != currentActionNum) {
-            if (slowly) {
-              System.Threading.Thread.Sleep(100);
-              display();
-            }
+            display();
+            System.Threading.Thread.Sleep(100);
             currentActionNum = game.actionNum;
           }
-          Console.WriteLine("Applying " + effects[i]);
-          applier.Apply(effects[i]);
+          if (effect is GameSetEvventEffect gsee) {
+            if (gsee.newValue is RevertedEventAsIGameEvent) {
+              display();
+              System.Threading.Thread.Sleep(1000);
+            }
+          }
+          applier.Apply(effect);
           anyEffectsSinceLastDisplay = true;
         }
 
@@ -142,7 +146,7 @@ namespace ConsoleDriveyThing {
             }
             var (resumeEffects, resumeStatus) = serverSS.RequestResume(game.id);
             Asserts.Assert(resumeStatus == "");
-            ApplyEffectsAndDisplay(game, FilterRelevantEffects(resumeEffects), true, display);
+            ApplyEffectsAndDisplay(game, FilterRelevantEffects(resumeEffects), display);
           }
           if (game.player.Exists() && !game.player.alive) {
             break;
@@ -163,7 +167,7 @@ namespace ConsoleDriveyThing {
               break;
             case ConsoleKey.I:
               var (interactEffects, result) = serverSS.RequestInteract(game.id);
-              ApplyEffectsAndDisplay(game, FilterRelevantEffects(interactEffects), true, display);
+              ApplyEffectsAndDisplay(game, FilterRelevantEffects(interactEffects), display);
               if (result != "") {
                 Console.WriteLine(result);
               }
@@ -173,7 +177,7 @@ namespace ConsoleDriveyThing {
               break;
             case ConsoleKey.T:
               var (timeShiftEffects, timeShiftResult) = serverSS.RequestTimeShift(game.id);
-              ApplyEffectsAndDisplay(game, FilterRelevantEffects(timeShiftEffects), true, display);
+              ApplyEffectsAndDisplay(game, FilterRelevantEffects(timeShiftEffects), display);
               if (timeShiftResult.Length > 0) {
                 Console.WriteLine(timeShiftResult);
               }
@@ -190,14 +194,14 @@ namespace ConsoleDriveyThing {
               if (cursorMode) {
                 if (timeAnchoring) {
                   var (tamEffects, resultTAM) = serverSS.RequestTimeAnchorMove(game.id, cursor);
-                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(tamEffects), true, display);
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(tamEffects), display);
                   if (resultTAM != "") {
                     Console.WriteLine(resultTAM);
                     timeAnchoring = false;
                   }
                 } else {
                   var (moveEffects, resultM) = serverSS.RequestMove(game.id, cursor);
-                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(moveEffects), true, display);
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(moveEffects), display);
                   if (resultM != "") {
                     Console.WriteLine(resultM);
                   }
@@ -213,7 +217,7 @@ namespace ConsoleDriveyThing {
                   Console.WriteLine("No unit there!");
                 } else {
                   var (fireEffects, fireResult) = serverSS.RequestFire(game.id, unitThere.id);
-                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(fireEffects), true, display);
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(fireEffects), display);
                   if (fireResult.Length > 0) {
                     Console.WriteLine(fireResult);
                   }
@@ -229,7 +233,7 @@ namespace ConsoleDriveyThing {
                   Console.WriteLine("No unit there!");
                 } else {
                   var (mireEffects, mireResult) = serverSS.RequestMire(game.id, unitThere.id);
-                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(mireEffects), true, display);
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(mireEffects), display);
                   if (mireResult.Length > 0) {
                     Console.WriteLine(mireResult);
                   }
@@ -240,14 +244,14 @@ namespace ConsoleDriveyThing {
               break;
             case ConsoleKey.S:
               var (defyEffects, resultD) = serverSS.RequestDefy(game.id);
-              ApplyEffectsAndDisplay(game, FilterRelevantEffects(defyEffects), true, display);
+              ApplyEffectsAndDisplay(game, FilterRelevantEffects(defyEffects), display);
               if (resultD != "") {
                 Console.WriteLine(resultD);
               }
               break;
             case ConsoleKey.P:
               var (counterEffects, counterResult) = serverSS.RequestCounter(game.id);
-              ApplyEffectsAndDisplay(game, FilterRelevantEffects(counterEffects), true, display);
+              ApplyEffectsAndDisplay(game, FilterRelevantEffects(counterEffects), display);
               if (counterResult.Length > 0) {
                 Console.WriteLine(counterResult);
               }
@@ -268,7 +272,7 @@ namespace ConsoleDriveyThing {
                           game.player.location.groupY + direction.groupY,
                           game.player.location.indexInGroup + direction.indexInGroup);
                   var (tamEffects, resultA) = serverSS.RequestTimeAnchorMove(game.id, destination);
-                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(tamEffects), true, display);
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(tamEffects), display);
                   if (resultA != "") {
                     Console.WriteLine(resultA);
                   }
@@ -282,7 +286,7 @@ namespace ConsoleDriveyThing {
                           game.player.location.groupX + direction.groupX,
                           game.player.location.groupY + direction.groupY,
                           game.player.location.indexInGroup + direction.indexInGroup));
-                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(directionEffects), true, display);
+                  ApplyEffectsAndDisplay(game, FilterRelevantEffects(directionEffects), display);
                 }
               } else {
                 Console.WriteLine("Unknown key: " + key.Key);

@@ -89,12 +89,14 @@ namespace IncendianFalls {
 
       Location targetAnchorLocation = pastPlayerLocation;
 
-      while (true) {
+      // Because how would we revert to this turn?
+      Asserts.Assert(superstate.previousTurns.Count != targetAnchorTurnIndex);
+
+      while (superstate.previousTurns.Count != targetAnchorTurnIndex) {
         RewindOneTurn(superstate, game);
 
-        if (superstate.previousTurns.Count == targetAnchorTurnIndex) {
-          break;
-        }
+        // We broadcast this so the UI knows to pause for a little bit to let things settle down.
+        game.AddEvent(new RevertedEvent().AsIGameEvent());
       }
 
       TransitionToCloneMoving(superstate, targetAnchorTurnIndex, game);

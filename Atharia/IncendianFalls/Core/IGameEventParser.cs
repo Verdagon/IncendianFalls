@@ -9,6 +9,8 @@ public static class IGameEventParser {
   public static IGameEvent Parse(ParseSource source) {
     var nextThingPeek = source.PeekNextWord();
     switch (nextThingPeek) {
+      case "RevertedEvent":
+        return new RevertedEventAsIGameEvent(RevertedEvent.Parse(source));
       case "SetGameSpeedEvent":
         return new SetGameSpeedEventAsIGameEvent(SetGameSpeedEvent.Parse(source));
       case "WaitEvent":
