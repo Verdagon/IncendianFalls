@@ -8,6 +8,12 @@ namespace Atharia.Model {
   }
 
   public static class GameExtensions {
+    public static bool WaitingOnPlayerInput(this Game game) {
+      return game.actingUnit.Exists() &&
+        game.actingUnit.NullableIs(game.player) &&
+          game.player.alive &&
+          game.player.nextActionTime == game.time;
+    }
     public static void AddEvent(this Game game, IGameEvent e) {
       game.evvent = e;
       game.evvent = NullIGameEvent.Null;

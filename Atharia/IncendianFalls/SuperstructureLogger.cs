@@ -146,6 +146,8 @@ namespace IncendianFalls {
         ss.RequestTrigger(trI.obj.gameId, trI.obj.triggerName);
       } else if (request is FireBombRequestAsIRequest fbI) {
         ss.RequestFireBomb(fbI.obj.gameId, fbI.obj.location);
+      } else if (request is ResumeRequestAsIRequest rrI) {
+        ss.RequestResume(rrI.obj.gameId);
       } else {
         Asserts.Assert(false);
       }

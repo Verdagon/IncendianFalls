@@ -15,6 +15,8 @@ namespace IncendianFalls {
         return "Error: Cannot resume while timeshifting!";
       }
 
+      Asserts.Assert(!game.WaitingOnPlayerInput());
+
       if (game.actingUnit.Exists()) {
         GameLoop.ContinueAfterUnitAction(context, game, superstate);
       } else {

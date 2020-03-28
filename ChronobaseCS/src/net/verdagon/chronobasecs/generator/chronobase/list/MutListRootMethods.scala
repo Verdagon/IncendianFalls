@@ -60,27 +60,14 @@ object MutListRootMethods {
        |      return new ${listName}(this, id);
        |    }
        |    public ${listName} Effect${listName}Create(IEnumerable<${elementCSType}> elements) {
-       |      var id = NewId();
-       |""".stripMargin +
-    (elementType.kind.mutability match {
-      case MutableS => {
-        s"""      var elementsIds = new List<int>();
-           |      foreach (var element in elements) {
-           |        elementsIds.Add(element.id);
-           |      }
-           |      var incarnation = new ${listName}Incarnation(elementsIds);
-           |      EffectInternalCreate${listName}(id, rootIncarnation.version, incarnation);
-           |""".stripMargin
-      }
-      case ImmutableS => {
-        s"""      var incarnation = new ${listName}Incarnation(new List<${elementCSType}>(elements));
-           |      EffectInternalCreate${listName}(id, rootIncarnation.version, incarnation);
-           |""".stripMargin
-      }
-    }) +
-    s"""      return new ${listName}(this, id);
+       |      var list = Effect${listName}Create();
+       |      foreach (var element in elements) {
+       |        list.Add(element);
+       |      }
+       |      return list;
        |    }
-       |    public void EffectInternalCreate${listName}(int id, int incarnationVersion, ${listName}Incarnation incarnation) {
+       |""".stripMargin +
+    s"""    public void EffectInternalCreate${listName}(int id, int incarnationVersion, ${listName}Incarnation incarnation) {
        |      var effect = new ${listName}CreateEffect(id);
        |      rootIncarnation.incarnations${listName}
        |          .Add(
@@ -140,7 +127,7 @@ object MutListRootMethods {
       s"""      } else {
        |        var oldMap = oldIncarnationAndVersion.incarnation.list;
        |        var newMap = new List<${flattenedElementCSType}>(oldMap);
-       |        newMap.Add(flattenedElement);
+       |        newMap.Insert(addIndex, flattenedElement);
        |        var newIncarnation = new ${listName}Incarnation(newMap);
        |        rootIncarnation.incarnations${listName}[listId] =
        |            new VersionAndIncarnation<${listName}Incarnation>(
@@ -162,9 +149,12 @@ object MutListRootMethods {
        |
        |      var effect = new ${listName}RemoveEffect(listId, index);
        |
+       |
        |      var oldIncarnationAndVersion = rootIncarnation.incarnations${listName}[listId];
+       |      // Check that its there
+       |      var oldElement = oldIncarnationAndVersion.incarnation.list[index];
+       |
        |      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-       |        var oldElement = oldIncarnationAndVersion.incarnation.list[index];
        |""".stripMargin +
       (if (opt.hash) {
         s"""        this.rootIncarnation.hash -= listId * rootIncarnation.version * oldElement.GetDeterministicHashCode();

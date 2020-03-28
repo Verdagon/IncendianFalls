@@ -13,6 +13,8 @@ namespace IncendianFalls {
 
       var game = context.root.GetGame(gameId);
 
+      Asserts.Assert(game.WaitingOnPlayerInput());
+
       if (!game.actingUnit.Is(game.player)) {
         return "Error: Player not next acting unit! (a)";
       }

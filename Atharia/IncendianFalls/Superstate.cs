@@ -78,7 +78,6 @@ namespace Atharia.Model {
     }
 
     public MultiverseStateType GetStateType() {
-      var player = game.player;
       if (timeShiftingState != null) {
         if (timeShiftingState.rewinding) {
           return MultiverseStateType.kTimeshiftingBackward;

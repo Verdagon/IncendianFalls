@@ -88,6 +88,8 @@ namespace IncendianFalls {
         game.time = nextUnit.nextActionTime;
 
         if (nextUnit.alive == false) {
+          bool playerDying = nextUnit.NullableIs(game.player);
+
           foreach (var deathPreactor in nextUnit.components.GetAllIDeathPreReactor()) {
             deathPreactor.BeforeDeath(game, superstate, nextUnit);
           }
@@ -99,6 +101,11 @@ namespace IncendianFalls {
           //superstate.levelSuperstate.RemoveUnit(nextUnit);
           game.level.units.Remove(nextUnit);
           nextUnit.Destruct();
+
+          if (playerDying) {
+            return;
+          }
+
           continue;
         }
         break;
@@ -131,13 +138,24 @@ namespace IncendianFalls {
         //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
         return; // To be continued... via PlayerAttack, PlayerMove, etc.
       } else {
-        if (game.actingUnit.alive) {
-          EnemyAI.AI(context, game, superstate, game.actingUnit);
-        }
+        ContinueBeforeUnitAction(context, game, superstate);
+      }
+    }
+
+    // Beware, the player skips this entire function.
+    public static void ContinueBeforeUnitAction(
+        SSContext context,
+        Game game,
+        Superstate superstate) {
+
+      Asserts.Assert(game.actingUnit.Exists());
+      Asserts.Assert(!game.actingUnit.NullableIs(game.player)); // Because if it was, we should be getting user input.
+
+      while (game.actingUnit.alive && game.actingUnit.nextActionTime == game.time) {
+        EnemyAI.AI(context, game, superstate, game.actingUnit);
       }
 
       ContinueAfterUnitAction(context, game, superstate);
     }
-
   }
 }

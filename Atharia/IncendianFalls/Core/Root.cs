@@ -24332,10 +24332,11 @@ var effect = new GameSetEvventEffect(id, newValue);
       return new LocationMutList(this, id);
     }
     public LocationMutList EffectLocationMutListCreate(IEnumerable<Location> elements) {
-      var id = NewId();
-      var incarnation = new LocationMutListIncarnation(new List<Location>(elements));
-      EffectInternalCreateLocationMutList(id, rootIncarnation.version, incarnation);
-      return new LocationMutList(this, id);
+      var list = EffectLocationMutListCreate();
+      foreach (var element in elements) {
+        list.Add(element);
+      }
+      return list;
     }
     public void EffectInternalCreateLocationMutList(int id, int incarnationVersion, LocationMutListIncarnation incarnation) {
       var effect = new LocationMutListCreateEffect(id);
@@ -24390,7 +24391,7 @@ element;
       var oldIncarnationAndVersion = rootIncarnation.incarnationsLocationMutList[listId];
       // Check that its there
       var oldElement = oldIncarnationAndVersion.incarnation.list[index];
-      
+
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
         oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
       } else {
@@ -24454,10 +24455,11 @@ element;
       return new IRequestMutList(this, id);
     }
     public IRequestMutList EffectIRequestMutListCreate(IEnumerable<IRequest> elements) {
-      var id = NewId();
-      var incarnation = new IRequestMutListIncarnation(new List<IRequest>(elements));
-      EffectInternalCreateIRequestMutList(id, rootIncarnation.version, incarnation);
-      return new IRequestMutList(this, id);
+      var list = EffectIRequestMutListCreate();
+      foreach (var element in elements) {
+        list.Add(element);
+      }
+      return list;
     }
     public void EffectInternalCreateIRequestMutList(int id, int incarnationVersion, IRequestMutListIncarnation incarnation) {
       var effect = new IRequestMutListCreateEffect(id);
@@ -24512,7 +24514,7 @@ element;
       var oldIncarnationAndVersion = rootIncarnation.incarnationsIRequestMutList[listId];
       // Check that its there
       var oldElement = oldIncarnationAndVersion.incarnation.list[index];
-      
+
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
         oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
       } else {

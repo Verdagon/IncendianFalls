@@ -10,6 +10,8 @@ namespace IncendianFalls {
       int gameId = request.gameId;
       var game = context.root.GetGame(gameId);
 
+      Asserts.Assert(game.WaitingOnPlayerInput());
+
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
       }

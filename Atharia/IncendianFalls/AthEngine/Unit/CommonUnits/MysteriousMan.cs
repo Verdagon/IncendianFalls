@@ -9,7 +9,7 @@ namespace IncendianFalls {
       var components = IUnitComponentMutBunch.New(root);
       components.Add(root.EffectBaseDefenseUCCreate(0, 0).AsIUnitComponent());
       return root.EffectUnitCreate(
-          root.EffectIUnitEventMutListCreate(),
+          NullIUnitEvent.Null,
           true,
           0,
           new Location(0, 0, 0),

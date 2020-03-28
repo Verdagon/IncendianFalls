@@ -12,7 +12,7 @@ namespace IncendianFalls {
       components.Add(root.EffectBaseOffenseUCCreate(43, 100).AsIUnitComponent());
       components.Add(root.EffectBideAICapabilityUCCreate(0).AsIUnitComponent());
       return root.EffectUnitCreate(
-              root.EffectIUnitEventMutListCreate(),
+        NullIUnitEvent.Null,
               true,
               0,
               new Location(0, 0, 0),

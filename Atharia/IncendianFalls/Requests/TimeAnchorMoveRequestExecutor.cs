@@ -13,6 +13,8 @@ namespace IncendianFalls {
       Location destination = request.destination;
       var game = context.root.GetGame(gameId);
 
+      Asserts.Assert(game.WaitingOnPlayerInput());
+
       if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
         return "Error: Unexpected player input!";
       }

@@ -131,17 +131,19 @@ namespace ConsoleDriveyThing {
         bool timeAnchoring = false;
 
         IDisplay display = () => Displayer.Display(game, cursorMode, cursor, new Vec2(0, 0), terrainAndFeaturesMode);
+        display();
 
         for (bool running = true; running;) {
-          Stopwatch sw = new Stopwatch();
-          sw.Start();
-          var (continuousResumeEffects, continuousResumeStatus) = serverSS.RequestContinuousResume(game.id);
-          Asserts.Assert(continuousResumeStatus == "");
-          sw.Stop();
-          Console.WriteLine("Total elapsed time for turn: " + sw.Elapsed.TotalMilliseconds);
 
-          ApplyEffectsAndDisplay(game, FilterRelevantEffects(continuousResumeEffects), true, display);
-
+          while (!game.WaitingOnPlayerInput()) {
+            if (!game.player.Exists()) {
+              Console.WriteLine("Press any key to continue.");
+              Console.ReadKey();
+            }
+            var (resumeEffects, resumeStatus) = serverSS.RequestResume(game.id);
+            Asserts.Assert(resumeStatus == "");
+            ApplyEffectsAndDisplay(game, FilterRelevantEffects(resumeEffects), true, display);
+          }
           if (game.player.Exists() && !game.player.alive) {
             break;
           }
@@ -149,9 +151,9 @@ namespace ConsoleDriveyThing {
           float gameTimeBeforeAction = game.time;
 
           var key = Console.ReadKey();
-          // For some reason, doing this after an input makes the terminal print
-          // much smoother on my mac.
-          System.Threading.Thread.Sleep(33);
+          //// For some reason, doing this after an input makes the terminal print
+          //// much smoother on my mac.
+          //System.Threading.Thread.Sleep(33);
 
           Console.WriteLine();
 
