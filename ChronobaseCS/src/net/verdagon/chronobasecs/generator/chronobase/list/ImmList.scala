@@ -23,8 +23,8 @@ object ImmList {
            |  public ${listCSType}() {
            |    this.list = new List<${elementCSType}>();
            |  }
-           |  public ${listCSType}(${elementCSType}[] list) {
-           |    this.list = new List<${elementCSType}>(list);
+           |  public ${listCSType}(params ${elementCSType}[] values) {
+           |    this.list = new List<${elementCSType}>(values);
            |  }
            |  public ${listCSType}(IEnumerable<${elementCSType}> list) {
            |    this.list = new List<${elementCSType}>(list);

@@ -42,7 +42,7 @@ namespace AthPlayer {
   public class RootPresenter : MonoBehaviour {
     public static int sceneInitParamStartLevel = -5;
 
-    ISuperstructure ss;
+    Superstructure serverSS;
     ReplayLogger replayLogger;
     public Instantiator instantiator;
     public GameObject cameraObject;
@@ -74,9 +74,8 @@ namespace AthPlayer {
 
       var timestamp = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
-      var modelSS = new Superstructure(new LoggerImpl());
-      replayLogger = new ReplayLogger(modelSS, new string[] { "Latest.sslog", timestamp + ".sslog" });
-      ss = new SuperstructureWrapper(modelSS);
+      serverSS = new Superstructure(new LoggerImpl());
+      replayLogger = new ReplayLogger(serverSS, new string[] { "Latest.sslog", timestamp + ".sslog" });
 
       lookPanelView = new LookPanelView(uiTimer, overlayPaneler);
 
@@ -90,7 +89,8 @@ namespace AthPlayer {
       //Debug.LogWarning("Hardcoding random seed!");
       //var randomSeed = 1525224206;
       //var game = ss.RequestSetupIncendianFallsGame(randomSeed, false);
-      game = ss.RequestSetupEmberDeepGame(randomSeed, sceneInitParamStartLevel, false);
+      var (effects, game_) = serverSS.RequestSetupEmberDeepGame(randomSeed, sceneInitParamStartLevel, false);
+      this.game = game_;
       //var game = ss.RequestSetupGauntletGame(randomSeed, false);
 
       this.cameraController =
@@ -105,7 +105,7 @@ namespace AthPlayer {
               cameraTimer,
               soundPlayer,
               thinkingIndicator,
-              ss,
+              serverSS,
               inputSemaphore,
               game,
               instantiator,

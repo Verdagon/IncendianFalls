@@ -93,42 +93,10 @@ namespace Atharia.Model {
         }
         //game.player.components.Add(game.root.EffectBlastRodCreate().AsIUnitComponent());
 
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "Ambush Challenge",
-            "aside",
-            "narrator",
-          true,
-          true,
-          false,
-            new ButtonImmList(new List<Button>()))
-          .AsIGameEvent());
-        game.AddEvent(
-          new WaitEvent(true, 1000, "entrySpeech").AsIGameEvent());
-      }
-      if (triggerName == "entrySpeech") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "An ambush! Perhaps I can use the terrain and chronomancy to survive.",
-            "normal",
-            "kylin",
-          true,
-          true,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("For valor!", "showHint") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "showHint") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "Hint: to survive ambushes, you often need several past selves at once.",
-            "aside",
-            "narrator",
-          true,
-          true,
-          false,
-            new ButtonImmList(new List<Button>()))
-          .AsIGameEvent());
+        game.ShowAside("Ambush Challenge");
+        game.Wait(1000);
+        game.ShowDialogue("kylin", "An ambush! Perhaps I can use the terrain and chronomancy to survive.", "For valor!");
+        game.ShowAside("Hint: to survive ambushes, you often need several past selves at once.");
       }
 
       return new Atharia.Model.Void();

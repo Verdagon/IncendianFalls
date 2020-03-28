@@ -10,7 +10,6 @@ public interface IGameEventVisitor {
   void VisitIGameEvent(SetGameSpeedEventAsIGameEvent obj);
   void VisitIGameEvent(WaitEventAsIGameEvent obj);
   void VisitIGameEvent(FlyCameraEventAsIGameEvent obj);
-  void VisitIGameEvent(ShowOverlayEventAsIGameEvent obj);
 }
 
 }

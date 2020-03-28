@@ -11,8 +11,8 @@ public class PatternCornerAdjacencyImmListImmList : IEnumerable<PatternCornerAdj
   public PatternCornerAdjacencyImmListImmList() {
     this.list = new List<PatternCornerAdjacencyImmList>();
   }
-  public PatternCornerAdjacencyImmListImmList(PatternCornerAdjacencyImmList[] list) {
-    this.list = new List<PatternCornerAdjacencyImmList>(list);
+  public PatternCornerAdjacencyImmListImmList(params PatternCornerAdjacencyImmList[] values) {
+    this.list = new List<PatternCornerAdjacencyImmList>(values);
   }
   public PatternCornerAdjacencyImmListImmList(IEnumerable<PatternCornerAdjacencyImmList> list) {
     this.list = new List<PatternCornerAdjacencyImmList>(list);

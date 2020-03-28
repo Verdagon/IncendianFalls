@@ -33,7 +33,8 @@ namespace Gauntlet {
               "",
               false,
 
-              NullIGameEvent.Null);
+              NullIGameEvent.Null,
+              context.root.EffectCommMutListCreate());
 
       superstate =
           new Superstate(

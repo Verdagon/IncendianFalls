@@ -6,7 +6,6 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public interface IRequestVisitor {
-  void VisitIRequest(TriggerRequestAsIRequest obj);
   void VisitIRequest(TimeAnchorMoveRequestAsIRequest obj);
   void VisitIRequest(TimeShiftRequestAsIRequest obj);
   void VisitIRequest(CounterRequestAsIRequest obj);
@@ -17,6 +16,7 @@ public interface IRequestVisitor {
   void VisitIRequest(FireBombRequestAsIRequest obj);
   void VisitIRequest(FireRequestAsIRequest obj);
   void VisitIRequest(AttackRequestAsIRequest obj);
+  void VisitIRequest(CommActionRequestAsIRequest obj);
   void VisitIRequest(ResumeRequestAsIRequest obj);
   void VisitIRequest(InteractRequestAsIRequest obj);
   void VisitIRequest(SetupTerrainRequestAsIRequest obj);

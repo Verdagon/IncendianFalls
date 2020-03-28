@@ -163,15 +163,15 @@ namespace IncendianFalls {
       }
     }
 
-    public (List<IEffect>, string) RequestTrigger(int gameId, string triggerName) {
+    public (List<IEffect>, string) RequestCommAction(int gameId, int commId, int actionIndex) {
       //var rollbackPoint = root.Snapshot();
       try {
-        var request = new TriggerRequest(gameId, triggerName);
+        var request = new CommActionRequest(gameId, commId, actionIndex);
         broadcastBeforeRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
         var superstate = superstateByGameId[gameId];
         var (events, success) = context.root.Transact(delegate () {
-          return TriggerRequestExecutor.Execute(context, superstate, request);
+          return CommActionRequestExecutor.Execute(context, superstate, request);
         });
         context.Flare(success.DStr());
         broadcastAfterRequest(request.AsIRequest());

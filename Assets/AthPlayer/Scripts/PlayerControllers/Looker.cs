@@ -37,7 +37,7 @@ namespace AthPlayer {
 
 
       if (lookedUnit.Exists()) {
-        lookedUnit.RemoveObserver(this);
+        lookedUnit.RemoveObserver(broadcaster, this);
       }
       lookedUnit = unit;
       lookedTile = tile;
@@ -314,12 +314,12 @@ namespace AthPlayer {
 
       lookPanelView.SetStuff(true, unit.classId, unit.hp + " / " + unit.maxHp, symbolsAndLabels);
 
-      unit.AddObserver(this);
+      unit.AddObserver(broadcaster, this);
 
       return true;
     }
 
-    public void OnUnitEffect(IUnitEffect effect) { effect.visit(this); }
+    public void OnUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this); }
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) { }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) { }
@@ -331,6 +331,10 @@ namespace AthPlayer {
       if (!lookedUnit.Exists()) {
         Look(Unit.Null, lookedTile);
       }
+    }
+
+    public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
+      throw new NotImplementedException();
     }
   }
 }

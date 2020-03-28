@@ -11,8 +11,8 @@ public class Vec2ImmListImmList : IEnumerable<Vec2ImmList> {
   public Vec2ImmListImmList() {
     this.list = new List<Vec2ImmList>();
   }
-  public Vec2ImmListImmList(Vec2ImmList[] list) {
-    this.list = new List<Vec2ImmList>(list);
+  public Vec2ImmListImmList(params Vec2ImmList[] values) {
+    this.list = new List<Vec2ImmList>(values);
   }
   public Vec2ImmListImmList(IEnumerable<Vec2ImmList> list) {
     this.list = new List<Vec2ImmList>(list);

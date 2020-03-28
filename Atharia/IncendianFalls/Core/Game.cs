@@ -42,6 +42,10 @@ public class Game {
     if (!root.LevelMutSetExists(levels.id)) {
       violations.Add("Null constraint violated! Game#" + id + ".levels");
     }
+
+    if (!root.CommMutListExists(comms.id)) {
+      violations.Add("Null constraint violated! Game#" + id + ".comms");
+    }
   }
   public void FindReachableObjects(SortedSet<int> foundIds) {
     if (foundIds.Contains(id)) {
@@ -62,6 +66,9 @@ public class Game {
     }
     if (root.UnitExists(actingUnit.id)) {
       actingUnit.FindReachableObjects(foundIds);
+    }
+    if (root.CommMutListExists(comms.id)) {
+      comms.FindReachableObjects(foundIds);
     }
   }
   public bool Is(Game that) {
@@ -148,5 +155,14 @@ public class Game {
     get { return incarnation.evvent; }
     set { root.EffectGameSetEvvent(id, value); }
   }
+  public CommMutList comms {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member comms of null!");
+      }
+      return new CommMutList(root, incarnation.comms);
+    }
+                       }
 }
 }

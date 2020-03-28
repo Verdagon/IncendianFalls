@@ -10,8 +10,6 @@ namespace AthPlayer {
   public class UnitPresenter :
       IUnitEffectVisitor,
       IUnitEffectObserver,
-      IIUnitEventMutListEffectVisitor,
-      IIUnitEventMutListEffectObserver,
       IIUnitComponentMutBunchObserver,
       IBideAICapabilityUCEffectObserver,
       IBideAICapabilityUCEffectVisitor,
@@ -23,6 +21,7 @@ namespace AthPlayer {
     SoundPlayer soundPlayer;
     ExecutionStaller resumeStaller;
     ExecutionStaller turnStaller;
+    EffectBroadcaster broadcaster;
     Game game;
     public readonly Unit unit;
     Instantiator instantiator;
@@ -42,6 +41,7 @@ namespace AthPlayer {
       IClock clock,
         ITimer timer,
         SoundPlayer soundPlayer,
+        EffectBroadcaster broadcaster,
         ExecutionStaller resumeStaller,
         ExecutionStaller turnStaller,
         Game game,
@@ -49,6 +49,7 @@ namespace AthPlayer {
         Unit unit,
         Instantiator instantiator) {
       this.alive = true;
+      this.broadcaster = broadcaster;
       this.timer = timer;
       this.soundPlayer = soundPlayer;
       this.resumeStaller = resumeStaller;
@@ -57,11 +58,10 @@ namespace AthPlayer {
       this.unit = unit;
       this.instantiator = instantiator;
 
-      unit.AddObserver(this);
-      unit.events.AddObserver(this);
+      unit.AddObserver(broadcaster, this);
       var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
       if (sorcerous.Exists()) {
-        sorcerous.AddObserver(this);
+        sorcerous.AddObserver(broadcaster, this);
       }
 
       this.description = GetUnitViewDescription(unit);
@@ -74,18 +74,18 @@ namespace AthPlayer {
               GetUnitViewDescription(unit),
               game.level.cameraAngle.ToUnity());
 
-      componentsBroadcaster = new IUnitComponentMutBunchBroadcaster(unit.components);
+      componentsBroadcaster = new IUnitComponentMutBunchBroadcaster(broadcaster, unit.components);
       componentsBroadcaster.AddObserver(this);
 
       if (unit.components.GetOnlyBideAICapabilityUCOrNull().Exists()) {
-        unit.components.GetOnlyBideAICapabilityUCOrNull().AddObserver(this);
+        unit.components.GetOnlyBideAICapabilityUCOrNull().AddObserver(broadcaster, this);
       }
     }
 
     public void DestroyUnitPresenter() {
       if (unit.Exists()) {
         if (unit.components.GetOnlyBideAICapabilityUCOrNull().Exists()) {
-          unit.components.GetOnlyBideAICapabilityUCOrNull().RemoveObserver(this);
+          unit.components.GetOnlyBideAICapabilityUCOrNull().RemoveObserver(broadcaster, this);
         }
 
         componentsBroadcaster.RemoveObserver(this);
@@ -93,10 +93,9 @@ namespace AthPlayer {
 
         var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
         if (sorcerous.Exists()) {
-          sorcerous.RemoveObserver(this);
+          sorcerous.RemoveObserver(broadcaster, this);
         }
-        unit.events.RemoveObserver(this);
-        unit.RemoveObserver(this);
+        unit.RemoveObserver(broadcaster, this);
       }
 
       DestroyView();
@@ -107,7 +106,7 @@ namespace AthPlayer {
       //if (unit.Exists()) {
       //  description = GetUnitViewDescription(unit);
       //}
-        effect.visit(this);
+        effect.visitIUnitEffect(this);
     }
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
@@ -141,7 +140,7 @@ namespace AthPlayer {
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
-    public void OnSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visit(this); }
+    public void OnSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visitISorcerousUCEffect(this); }
     public void visitSorcerousUCCreateEffect(SorcerousUCCreateEffect effect) { }
     public void visitSorcerousUCDeleteEffect(SorcerousUCDeleteEffect effect) { }
     public void visitSorcerousUCSetMpEffect(SorcerousUCSetMpEffect effect) {
@@ -156,133 +155,13 @@ namespace AthPlayer {
       unitView = null;
     }
 
-    public void OnBideAICapabilityUCEffect(IBideAICapabilityUCEffect effect) { effect.visit(this); }
+    public void OnBideAICapabilityUCEffect(IBideAICapabilityUCEffect effect) { effect.visitIBideAICapabilityUCEffect(this); }
     public void visitBideAICapabilityUCCreateEffect(BideAICapabilityUCCreateEffect effect) { }
     public void visitBideAICapabilityUCDeleteEffect(BideAICapabilityUCDeleteEffect effect) { }
     public void visitBideAICapabilityUCSetChargeEffect(BideAICapabilityUCSetChargeEffect effect) {
       Asserts.Assert(unit.Exists());
       unitView.SetDescription(GetUnitViewDescription(unit));
     }
-
-    public void OnIUnitEventMutListEffect(IIUnitEventMutListEffect effect) {
-        effect.visit(this);
-    }
-    public void visitIUnitEventMutListCreateEffect(IUnitEventMutListCreateEffect effect) { }
-    public void visitIUnitEventMutListDeleteEffect(IUnitEventMutListDeleteEffect effect) { }
-    public void visitIUnitEventMutListAddEffect(IUnitEventMutListAddEffect effect) {
-      if (effect.element is UnitAttackEventAsIUnitEvent) {
-        var evt = ((UnitAttackEventAsIUnitEvent)effect.element).obj;
-        if (!unit.Exists()) {
-          return;
-        }
-        if (evt.attackerId == unit.id) {
-          var victim = unit.root.GetUnit(evt.victimId);
-          if (!victim.Exists()) {
-            return;
-          }
-          var victimPosition = game.level.terrain.GetTileCenter(victim.location).ToUnity();
-          var attackerPosition = game.level.terrain.GetTileCenter(unit.location).ToUnity();
-
-          soundPlayer.Play("attack");
-
-          unitView.Lunge((victimPosition - attackerPosition).normalized * .25f);
-
-          resumeStaller.StallForDuration(150);
-          turnStaller.StallForDuration(350);
-        }
-      } else if (effect.element is UnitUnleashBideEventAsIUnitEvent) {
-        unitView.ShowRune(
-            new ExtrudedSymbolDescription(
-                RenderPriority.RUNE,
-                new SymbolDescription(
-                    "r-3",
-                            50,
-                    new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
-                    0,
-                    OutlineMode.WithOutline,
-                    new UnityEngine.Color(0, 0, 0)),
-                true,
-                new UnityEngine.Color(0, 0, 1f, 1f)));
-      } else if (effect.element is UnitDefyingEventAsIUnitEvent) {
-        unitView.ShowRune(
-            new ExtrudedSymbolDescription(
-                RenderPriority.RUNE,
-                new SymbolDescription(
-                    "q",
-                            50,
-                    new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
-                    0,
-                    OutlineMode.WithOutline,
-                    new UnityEngine.Color(0, 0, 0)),
-                true,
-                new UnityEngine.Color(0, 0, 1f, 1f)));
-        timer.ScheduleTimer(1, delegate () {
-          if (alive) {
-            resumeStaller.StallForDuration(500);
-            turnStaller.StallForDuration(500);
-          }
-        });
-      } else if (effect.element is UnitCounteringEventAsIUnitEvent) {
-        unitView.ShowRune(
-            new ExtrudedSymbolDescription(
-                RenderPriority.RUNE,
-                new SymbolDescription(
-                    "v",
-                            50,
-                    new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
-                    0,
-                    OutlineMode.WithOutline,
-                    new UnityEngine.Color(0, 0, 0)),
-                true,
-                new UnityEngine.Color(0, 0, 1f, 1f)));
-        resumeStaller.StallForDuration(500);
-        turnStaller.StallForDuration(500);
-      } else if (effect.element is UnitFireEventAsIUnitEvent ufe) {
-        if (unit.id == ufe.obj.attackerId) {
-          unitView.ShowRune(
-              new ExtrudedSymbolDescription(
-                  RenderPriority.RUNE,
-                  new SymbolDescription(
-                      "w",
-                            50,
-                      new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
-                      0,
-                      OutlineMode.WithOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  true,
-                  new UnityEngine.Color(0, 0, 1f, 1f)));
-        } else if (unit.id == ufe.obj.victimId) {
-          unitView.ShowRune(
-              new ExtrudedSymbolDescription(
-                  RenderPriority.RUNE,
-                  new SymbolDescription(
-                      "r-3",
-                            50,
-                      new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
-                      0,
-                      OutlineMode.WithOutline,
-                      new UnityEngine.Color(0.8f, .4f, 0, 1.5f)),
-                  true,
-                  new UnityEngine.Color(0, 0, 1f, 1f)));
-        }
-      } else if (effect.element is UnitFireBombedEventAsIUnitEvent ufbe) {
-        unitView.ShowRune(
-            new ExtrudedSymbolDescription(
-                RenderPriority.RUNE,
-                new SymbolDescription(
-                    "r-3",
-                          50,
-                    new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
-                    0,
-                    OutlineMode.WithOutline,
-                    new UnityEngine.Color(0.8f, .4f, 0, 1.5f)),
-                true,
-                new UnityEngine.Color(0, 0, 1f, 1f)));
-      } else {
-
-      }
-    }
-    public void visitIUnitEventMutListRemoveEffect(IUnitEventMutListRemoveEffect effect) { }
 
     public void OnIUnitComponentMutBunchAdd(int id) {
       var component = game.root.GetIUnitComponentOrNull(id);
@@ -889,5 +768,119 @@ namespace AthPlayer {
       }
     }
 
+    public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
+
+      if (effect.newValue is UnitAttackEventAsIUnitEvent) {
+        var evt = ((UnitAttackEventAsIUnitEvent)effect.newValue).obj;
+        if (!unit.Exists()) {
+          return;
+        }
+        if (evt.attackerId == unit.id) {
+          var victim = unit.root.GetUnit(evt.victimId);
+          if (!victim.Exists()) {
+            return;
+          }
+          var victimPosition = game.level.terrain.GetTileCenter(victim.location).ToUnity();
+          var attackerPosition = game.level.terrain.GetTileCenter(unit.location).ToUnity();
+
+          soundPlayer.Play("attack");
+
+          unitView.Lunge((victimPosition - attackerPosition).normalized * .25f);
+
+          resumeStaller.StallForDuration(150);
+          turnStaller.StallForDuration(350);
+        }
+      } else if (effect.newValue is UnitUnleashBideEventAsIUnitEvent) {
+        unitView.ShowRune(
+            new ExtrudedSymbolDescription(
+                RenderPriority.RUNE,
+                new SymbolDescription(
+                    "r-3",
+                            50,
+                    new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
+                    0,
+                    OutlineMode.WithOutline,
+                    new UnityEngine.Color(0, 0, 0)),
+                true,
+                new UnityEngine.Color(0, 0, 1f, 1f)));
+      } else if (effect.newValue is UnitDefyingEventAsIUnitEvent) {
+        unitView.ShowRune(
+            new ExtrudedSymbolDescription(
+                RenderPriority.RUNE,
+                new SymbolDescription(
+                    "q",
+                            50,
+                    new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
+                    0,
+                    OutlineMode.WithOutline,
+                    new UnityEngine.Color(0, 0, 0)),
+                true,
+                new UnityEngine.Color(0, 0, 1f, 1f)));
+        timer.ScheduleTimer(1, delegate () {
+          if (alive) {
+            resumeStaller.StallForDuration(500);
+            turnStaller.StallForDuration(500);
+          }
+        });
+      } else if (effect.newValue is UnitCounteringEventAsIUnitEvent) {
+        unitView.ShowRune(
+            new ExtrudedSymbolDescription(
+                RenderPriority.RUNE,
+                new SymbolDescription(
+                    "v",
+                            50,
+                    new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
+                    0,
+                    OutlineMode.WithOutline,
+                    new UnityEngine.Color(0, 0, 0)),
+                true,
+                new UnityEngine.Color(0, 0, 1f, 1f)));
+        resumeStaller.StallForDuration(500);
+        turnStaller.StallForDuration(500);
+      } else if (effect.newValue is UnitFireEventAsIUnitEvent ufe) {
+        if (unit.id == ufe.obj.attackerId) {
+          unitView.ShowRune(
+              new ExtrudedSymbolDescription(
+                  RenderPriority.RUNE,
+                  new SymbolDescription(
+                      "w",
+                            50,
+                      new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
+                      0,
+                      OutlineMode.WithOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  true,
+                  new UnityEngine.Color(0, 0, 1f, 1f)));
+        } else if (unit.id == ufe.obj.victimId) {
+          unitView.ShowRune(
+              new ExtrudedSymbolDescription(
+                  RenderPriority.RUNE,
+                  new SymbolDescription(
+                      "r-3",
+                            50,
+                      new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
+                      0,
+                      OutlineMode.WithOutline,
+                      new UnityEngine.Color(0.8f, .4f, 0, 1.5f)),
+                  true,
+                  new UnityEngine.Color(0, 0, 1f, 1f)));
+        }
+      } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent ufbe) {
+        unitView.ShowRune(
+            new ExtrudedSymbolDescription(
+                RenderPriority.RUNE,
+                new SymbolDescription(
+                    "r-3",
+                          50,
+                    new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
+                    0,
+                    OutlineMode.WithOutline,
+                    new UnityEngine.Color(0.8f, .4f, 0, 1.5f)),
+                true,
+                new UnityEngine.Color(0, 0, 1f, 1f)));
+      } else {
+
+      }
+    }
   }
 }

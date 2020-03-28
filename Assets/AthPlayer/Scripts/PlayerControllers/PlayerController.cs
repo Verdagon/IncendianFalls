@@ -15,6 +15,7 @@ namespace Domino {
     IClock cinematicTimer;
     InputSemaphore inputSemaphore;
     ISuperstructure ss;
+    EffectBroadcaster broadcaster;
     Superstate superstate;
     FollowingCameraController cameraController;
     Game game;
@@ -41,6 +42,7 @@ namespace Domino {
         ExecutionStaller turnStaller,
         InputSemaphore inputSemaphore,
         ISuperstructure ss,
+        EffectBroadcaster broadcaster,
         Superstate superstate,
         Game game,
         Looker looker,
@@ -49,6 +51,7 @@ namespace Domino {
         CameraController innerCameraController,
         ShowError showError,
         GameObject thinkingIndicator) {
+      this.broadcaster = broadcaster;
       this.ss = ss;
       this.inputSemaphore = inputSemaphore;
       this.superstate = superstate;
@@ -63,9 +66,9 @@ namespace Domino {
       this.showError = showError;
       this.thinkingIndicator = thinkingIndicator;
 
-      cameraController = new FollowingCameraController(innerCameraController, game);
+      cameraController = new FollowingCameraController(innerCameraController, broadcaster, game);
 
-      this.game.AddObserver(this);
+      this.game.AddObserver(broadcaster, this);
 
       this.resumeStaller.unstalledEvent += (sender) => MaybeResume();
       this.turnStaller.unstalledEvent += (sender) => MaybeResume();
@@ -326,7 +329,7 @@ namespace Domino {
       }
     }
 
-    public void OnUnitEffect(IUnitEffect effect) { effect.visit(this); }
+    public void OnUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this); }
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) { }
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) { }
@@ -352,7 +355,7 @@ namespace Domino {
         playerPanelView.UpdatePlayerStatus();
       }
     }
-    public void OnSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visit(this); }
+    public void OnSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visitISorcerousUCEffect(this); }
     public void visitSorcerousUCCreateEffect(SorcerousUCCreateEffect effect) { }
     public void visitSorcerousUCDeleteEffect(SorcerousUCDeleteEffect effect) { }
     public void visitSorcerousUCSetMpEffect(SorcerousUCSetMpEffect effect) {
@@ -371,7 +374,7 @@ namespace Domino {
       modeCapabilityId = 0;
     }
 
-    public void OnGameEffect(IGameEffect effect) { effect.visit(this);  }
+    public void OnGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);  }
 
     public void visitGameCreateEffect(GameCreateEffect effect) { }
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
@@ -407,16 +410,16 @@ namespace Domino {
       if (player.Exists()) {
         var sorcerous = player.components.GetOnlySorcerousUCOrNull();
         if (sorcerous.Exists()) {
-          sorcerous.RemoveObserver(this);
+          sorcerous.RemoveObserver(broadcaster, this);
         }
-        player.RemoveObserver(this);
+        player.RemoveObserver(broadcaster, this);
       }
       player = game.player;
       if (player.Exists()) {
-        player.AddObserver(this);
+        player.AddObserver(broadcaster, this);
         var sorcerous = player.components.GetOnlySorcerousUCOrNull();
         if (sorcerous.Exists()) {
-          sorcerous.AddObserver(this);
+          sorcerous.AddObserver(broadcaster, this);
         }
       }
       UpdatePlayerPanel();
@@ -434,6 +437,26 @@ namespace Domino {
           playerPanelView = null;
         }
       }
+    }
+
+    public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
+      throw new NotImplementedException();
+    }
+
+    public void visitGameSetActingUnitEffect(GameSetActingUnitEffect effect) {
+      throw new NotImplementedException();
+    }
+
+    public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect effect) {
+      throw new NotImplementedException();
+    }
+
+    public void visitGameSetActionNumEffect(GameSetActionNumEffect effect) {
+      throw new NotImplementedException();
+    }
+
+    public void visitGameSetEvventEffect(GameSetEvventEffect effect) {
+      throw new NotImplementedException();
     }
   }
 }

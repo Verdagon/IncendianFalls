@@ -20,20 +20,12 @@ public class WaitEvent : IComparable<WaitEvent> {
     }
   }
   private readonly int hashCode;
-         public readonly bool lockInput;
-  public readonly int timeMs;
-  public readonly string endTriggerName;
+         public readonly int timeMs;
   public WaitEvent(
-      bool lockInput,
-      int timeMs,
-      string endTriggerName) {
-    this.lockInput = lockInput;
+      int timeMs) {
     this.timeMs = timeMs;
-    this.endTriggerName = endTriggerName;
     int hash = 0;
-    hash = hash * 37 + lockInput.GetDeterministicHashCode();
     hash = hash * 37 + timeMs.GetDeterministicHashCode();
-    hash = hash * 37 + endTriggerName.GetDeterministicHashCode();
     this.hashCode = hash;
 
   }
@@ -56,9 +48,7 @@ public class WaitEvent : IComparable<WaitEvent> {
     }
     var that = obj as WaitEvent;
     return true
-               && lockInput.Equals(that.lockInput)
-        && timeMs.Equals(that.timeMs)
-        && endTriggerName.Equals(that.endTriggerName)
+               && timeMs.Equals(that.timeMs)
         ;
   }
   public override int GetHashCode() {
@@ -66,36 +56,24 @@ public class WaitEvent : IComparable<WaitEvent> {
   }
   public int GetDeterministicHashCode() { return hashCode; }
   public int CompareTo(WaitEvent that) {
-    if (lockInput != that.lockInput) {
-      return lockInput.CompareTo(that.lockInput);
-    }
     if (timeMs != that.timeMs) {
       return timeMs.CompareTo(that.timeMs);
-    }
-    if (endTriggerName != that.endTriggerName) {
-      return endTriggerName.CompareTo(that.endTriggerName);
     }
     return 0;
   }
   public override string ToString() { return DStr(); }
   public string DStr() {
     return "WaitEvent(" +
-        lockInput.DStr() + ", " +
-        timeMs.DStr() + ", " +
-        endTriggerName.DStr()
+        timeMs.DStr()
         + ")";
 
     }
     public static WaitEvent Parse(ParseSource source) {
       source.Expect(NAME);
       source.Expect("(");
-      var lockInput = source.ParseBool();
-      source.Expect(",");
       var timeMs = source.ParseInt();
-      source.Expect(",");
-      var endTriggerName = source.ParseStr();
       source.Expect(")");
-      return new WaitEvent(lockInput, timeMs, endTriggerName);
+      return new WaitEvent(timeMs);
   }
 }
        

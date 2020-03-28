@@ -11,8 +11,8 @@ public class LocationImmList : IEnumerable<Location> {
   public LocationImmList() {
     this.list = new List<Location>();
   }
-  public LocationImmList(Location[] list) {
-    this.list = new List<Location>(list);
+  public LocationImmList(params Location[] values) {
+    this.list = new List<Location>(values);
   }
   public LocationImmList(IEnumerable<Location> list) {
     this.list = new List<Location>(list);

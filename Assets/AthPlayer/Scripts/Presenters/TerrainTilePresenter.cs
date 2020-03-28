@@ -20,9 +20,10 @@ namespace AthPlayer {
 
   public class TerrainTilePresenter :
       IITerrainTileComponentMutBunchObserver,
-      IITerrainTileEventMutListEffectObserver,
-      IITerrainTileEventMutListEffectVisitor {
-    Atharia.Model.Terrain terrain;
+    ITerrainTileEffectObserver,
+    ITerrainTileEffectVisitor {
+    EffectBroadcaster broadcaster;
+  Atharia.Model.Terrain terrain;
     public readonly Location location;
     TerrainTile terrainTile;
     Instantiator instantiator;
@@ -36,12 +37,14 @@ namespace AthPlayer {
     public TerrainTilePresenter(
       IClock clock,
       ITimer timer,
+      EffectBroadcaster broadcaster,
         Atharia.Model.Terrain terrain,
         Location location,
         TerrainTile terrainTile,
         Instantiator instantiator) {
       this.location = location;
       this.terrain = terrain;
+      this.broadcaster = broadcaster;
       this.terrainTile = terrainTile;
       this.instantiator = instantiator;
 
@@ -57,8 +60,8 @@ namespace AthPlayer {
               GetDescription());
       tileView.gameObject.AddComponent<TerrainTilePresenterTile>().Init(this);
 
-      terrainTile.events.AddObserver(this);
-      componentsBroadcaster = new ITerrainTileComponentMutBunchBroadcaster(terrainTile.components);
+      terrainTile.AddObserver(broadcaster, this);
+      componentsBroadcaster = new ITerrainTileComponentMutBunchBroadcaster(broadcaster, terrainTile.components);
       componentsBroadcaster.AddObserver(this);
 
       tileView.SetDescription(GetDescription());
@@ -147,7 +150,7 @@ namespace AthPlayer {
 
     public void DestroyTerrainTilePresenter() {
       if (terrainTile.Exists()) {
-        terrainTile.events.RemoveObserver(this);
+        terrainTile.RemoveObserver(broadcaster, this);
         componentsBroadcaster.RemoveObserver(this);
         componentsBroadcaster.Stop();
       }
@@ -558,16 +561,12 @@ namespace AthPlayer {
       tileView.SetDescription(GetDescription());
     }
 
-    public void OnITerrainTileEventMutListEffect(IITerrainTileEventMutListEffect effect) {
-      effect.visit(this);
-    }
-
-    public void visitITerrainTileEventMutListCreateEffect(ITerrainTileEventMutListCreateEffect effect) { }
-
-    public void visitITerrainTileEventMutListDeleteEffect(ITerrainTileEventMutListDeleteEffect effect) { }
-
-    public void visitITerrainTileEventMutListAddEffect(ITerrainTileEventMutListAddEffect effect) {
-      if (effect.element is UnitUnleashBideEventAsITerrainTileEvent) {
+    public void OnTerrainTileEffect(ITerrainTileEffect effect) { effect.visitITerrainTileEffect(this);  }
+    public void visitTerrainTileCreateEffect(TerrainTileCreateEffect effect) { }
+    public void visitTerrainTileSetElevationEffect(TerrainTileSetElevationEffect effect) { }
+    public void visitTerrainTileDeleteEffect(TerrainTileDeleteEffect effect) { }
+    public void visitTerrainTileSetEvventEffect(TerrainTileSetEvventEffect effect) {
+      if (effect.newValue is UnitUnleashBideEventAsITerrainTileEvent) {
         tileView.ShowRune(
             new ExtrudedSymbolDescription(
                 RenderPriority.RUNE,
@@ -580,7 +579,7 @@ namespace AthPlayer {
                     new UnityEngine.Color(0, 0, 0)),
                 true,
                 new UnityEngine.Color(0, 0, 1f, 1f)));
-      } else if (effect.element is UnitFireBombedEventAsITerrainTileEvent ufbe) {
+      } else if (effect.newValue is UnitFireBombedEventAsITerrainTileEvent ufbe) {
         tileView.ShowRune(
             new ExtrudedSymbolDescription(
                 RenderPriority.RUNE,
@@ -595,6 +594,5 @@ namespace AthPlayer {
                 new UnityEngine.Color(0, 0, 1f, 1f)));
       }
     }
-    public void visitITerrainTileEventMutListRemoveEffect(ITerrainTileEventMutListRemoveEffect effect) { }
   }
 }

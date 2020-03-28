@@ -9,8 +9,6 @@ public static class IRequestParser {
   public static IRequest Parse(ParseSource source) {
     var nextThingPeek = source.PeekNextWord();
     switch (nextThingPeek) {
-      case "TriggerRequest":
-        return new TriggerRequestAsIRequest(TriggerRequest.Parse(source));
       case "TimeAnchorMoveRequest":
         return new TimeAnchorMoveRequestAsIRequest(TimeAnchorMoveRequest.Parse(source));
       case "TimeShiftRequest":
@@ -31,6 +29,8 @@ public static class IRequestParser {
         return new FireRequestAsIRequest(FireRequest.Parse(source));
       case "AttackRequest":
         return new AttackRequestAsIRequest(AttackRequest.Parse(source));
+      case "CommActionRequest":
+        return new CommActionRequestAsIRequest(CommActionRequest.Parse(source));
       case "ResumeRequest":
         return new ResumeRequestAsIRequest(ResumeRequest.Parse(source));
       case "InteractRequest":

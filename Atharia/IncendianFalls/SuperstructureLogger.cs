@@ -142,8 +142,8 @@ namespace IncendianFalls {
         ss.RequestCheat(crI.obj.gameId, crI.obj.cheatName);
       } else if (request is TimeShiftRequestAsIRequest tsrI) {
         ss.RequestTimeShift(tsrI.obj.gameId);
-      } else if (request is TriggerRequestAsIRequest trI) {
-        ss.RequestTrigger(trI.obj.gameId, trI.obj.triggerName);
+      } else if (request is CommActionRequestAsIRequest trI) {
+        ss.RequestCommAction(trI.obj.gameId, trI.obj.commId, trI.obj.actionIndex);
       } else if (request is FireBombRequestAsIRequest fbI) {
         ss.RequestFireBomb(fbI.obj.gameId, fbI.obj.location);
       } else if (request is ResumeRequestAsIRequest rrI) {

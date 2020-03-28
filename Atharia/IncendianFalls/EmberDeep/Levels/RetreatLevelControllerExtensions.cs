@@ -93,67 +93,14 @@ namespace Atharia.Model {
           item.Destruct();
         }
 
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "Retreat Challenge",
-            "aside",
-          "narrator",
-          true,
-          true,
-          false,
-            new ButtonImmList(new List<Button>()))
-          .AsIGameEvent());
-        game.AddEvent(
-          new WaitEvent(true, 2000, "startTalking").AsIGameEvent());
-      }
-
-      if (triggerName == "startTalking") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "There's a superpowered Draxling chasing you!\n\nIf you just run, it will catch you and kill you.\n\nDistract it with time clones!",
-            "normal",
-          "narrator",
-          true,
-          true,
-          false,
-            new ButtonImmList(new Button[] { new Button("Uh oh!", "startCamera") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "startCamera") {
-        game.AddEvent(
-          new FlyCameraEvent(
-            new Location(15, 0, 0),
-            new Vec3(0, 8, 8),
-            1000,
-            "cameraReachedPanTo")
-          .AsIGameEvent());
-      }
-      if (triggerName == "cameraReachedPanTo") {
-        game.AddEvent(
-          new WaitEvent(true, 500, "cameraWaitDone").AsIGameEvent());
-      }
-      if (triggerName == "cameraWaitDone") {
-        game.AddEvent(
-          new FlyCameraEvent(
-            new Location(-10, 0, 0),
-            new Vec3(0, 8, 8),
-            1500,
-            "showHints")
-          .AsIGameEvent());
-      }
-      if (triggerName == "showHints") {
+        game.ShowAside("Retreat Challenge");
+        game.Wait(2000);
+        game.ShowComm("There's a superpowered Draxling chasing you!\n\nIf you just run, it will catch you and kill you.\n\nDistract it with time clones!", "Uh oh!");
+        game.FlyCameraTo(1000, new Location(15, 0, 0));
+        game.Wait(500);
+        game.FlyCameraTo(1500, new Location(-10, 0, 0));
         game.ExitCinematic();
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "Keep in mind, enemies usually attack whoever is closest to them.\n\nYour past self should be close enough to distract the enemy, and buy you time to get away!\n\nHint: Try drawing the Draxling away and then reverting before it attacks.",
-
-            "normal",
-          "narrator",
-          true,
-          true,
-          false,
-            new ButtonImmList(new Button[] { new Button("Got it!", "") }))
-          .AsIGameEvent());
+        game.ShowComm("Keep in mind, enemies usually attack whoever is closest to them.\n\nYour past self should be close enough to distract the enemy, and buy you time to get away!\n\nHint: Try drawing the Draxling away and then reverting before it attacks.", "Got it!");
       }
 
       return new Atharia.Model.Void();

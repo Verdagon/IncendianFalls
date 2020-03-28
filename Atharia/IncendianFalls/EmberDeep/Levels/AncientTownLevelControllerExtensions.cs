@@ -92,44 +92,13 @@ namespace Atharia.Model {
 
       if (triggerName == "levelStart") {
         game.EnterCinematic();
-        game.AddEvent(new WaitEvent(true, 1500, "startCamera").AsIGameEvent());
-      }
-      if (triggerName == "startCamera") {
-        game.AddEvent(
-          new FlyCameraEvent(
-            superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"),
-            new Vec3(0, 8, 8),
-            1000,
-            "cameraReachedPanTo")
-          .AsIGameEvent());
-      }
-      if (triggerName == "cameraReachedPanTo") {
-        game.AddEvent(
-          new WaitEvent(true, 1000, "cameraWaitDone").AsIGameEvent());
-      }
-      if (triggerName == "cameraWaitDone") {
-        game.AddEvent(
-          new FlyCameraEvent(
-            superstate.levelSuperstate.FindMarkerLocation("entry"),
-            new Vec3(0, 8, 8),
-            1500,
-            "cameraDone")
-          .AsIGameEvent());
-      }
-      if (triggerName == "cameraDone") {
+        game.Wait(1500);
+        game.FlyCameraTo(1000, superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"));
+        game.Wait(1000);
+        game.FlyCameraTo(1500, superstate.levelSuperstate.FindMarkerLocation("entry"));
         game.player.nextActionTime = game.level.time;
         game.ExitCinematic();
-
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "Some sort of ancient abandoned town...?",
-            "aside",
-            "kylin",
-          true,
-          true,
-          false,
-            new ButtonImmList(new List<Button>()))
-          .AsIGameEvent());
+        game.ShowAside("kylin", "Some sort of ancient abandoned town...?");
       }
 
       return new Atharia.Model.Void();

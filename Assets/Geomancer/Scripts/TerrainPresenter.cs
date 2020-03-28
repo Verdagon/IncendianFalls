@@ -16,6 +16,7 @@ namespace Geomancer {
 
     IClock clock;
     ITimer timer;
+    EffectBroadcaster broadcaster;
   MemberToViewMapper vivimap;
     Geomancer.Model.Terrain terrain;
     Instantiator instantiator;
@@ -27,14 +28,15 @@ namespace Geomancer {
     SortedSet<Location> selectedLocations = new SortedSet<Location>();
 
     public TerrainPresenter(IClock clock,
-      ITimer timer, MemberToViewMapper vivimap, Geomancer.Model.Terrain terrain, Instantiator instantiator) {
+      ITimer timer, EffectBroadcaster broadcaster, MemberToViewMapper vivimap, Geomancer.Model.Terrain terrain, Instantiator instantiator) {
       this.clock = clock;
       this.timer = timer;
+      this.broadcaster = broadcaster;
       this.vivimap = vivimap;
       this.terrain = terrain;
       this.instantiator = instantiator;
-      terrain.AddObserver(this);
-      terrain.tiles.AddObserver(this);
+      terrain.AddObserver(broadcaster, this);
+      terrain.tiles.AddObserver(broadcaster, this);
 
       foreach (var locationAndTile in terrain.tiles) {
         addTerrainTile(locationAndTile.Key, locationAndTile.Value);
@@ -51,9 +53,9 @@ namespace Geomancer {
       }
       if (terrain.Exists()) {
         if (terrain.tiles.Exists()) {
-          terrain.tiles.RemoveObserver(this);
+          terrain.tiles.RemoveObserver(broadcaster, this);
         }
-        terrain.RemoveObserver(this);
+        terrain.RemoveObserver(broadcaster, this);
       }
     }
 
@@ -160,7 +162,7 @@ namespace Geomancer {
     }
 
     private void addTerrainTile(Location location, TerrainTile tile) {
-      var presenter = new TerrainTilePresenter(clock, timer, vivimap, terrain, location, tile, instantiator);
+      var presenter = new TerrainTilePresenter(clock, timer, broadcaster, vivimap, terrain, location, tile, instantiator);
       tilePresenters.Add(location, presenter);
     }
 

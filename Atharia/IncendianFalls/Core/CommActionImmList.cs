@@ -5,27 +5,27 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public class ButtonImmList : IEnumerable<Button> {
-  List<Button> list;
+public class CommActionImmList : IEnumerable<CommAction> {
+  List<CommAction> list;
 
-  public ButtonImmList() {
-    this.list = new List<Button>();
+  public CommActionImmList() {
+    this.list = new List<CommAction>();
   }
-  public ButtonImmList(Button[] list) {
-    this.list = new List<Button>(list);
+  public CommActionImmList(params CommAction[] values) {
+    this.list = new List<CommAction>(values);
   }
-  public ButtonImmList(IEnumerable<Button> list) {
-    this.list = new List<Button>(list);
+  public CommActionImmList(IEnumerable<CommAction> list) {
+    this.list = new List<CommAction>(list);
   }
   public int Count { get { return list.Count; } }
 
-  public Button this[int index] { get { return list[index]; } }
+  public CommAction this[int index] { get { return list[index]; } }
 
-  public IEnumerator<Button> GetEnumerator() {
+  public IEnumerator<CommAction> GetEnumerator() {
     return list.GetEnumerator();
   }
 
-  public int CompareTo(ButtonImmList that) {
+  public int CompareTo(CommActionImmList that) {
     for (int i = 0; i < Count || i < that.Count; i++) {
       if (i >= Count) {
         return -1;
@@ -41,7 +41,7 @@ public class ButtonImmList : IEnumerable<Button> {
     return 0;
   }
 
-  public static ButtonImmList Parse(ParseSource source) {
+  public static CommActionImmList Parse(ParseSource source) {
     throw new Exception("Not implemented!");
   }
 
@@ -61,8 +61,8 @@ public class ButtonImmList : IEnumerable<Button> {
     }
     return hash;
   }
-  IEnumerator<Button> IEnumerable<Button>.GetEnumerator() {
-    return ((IEnumerable<Button>)list).GetEnumerator();
+  IEnumerator<CommAction> IEnumerable<CommAction>.GetEnumerator() {
+    return ((IEnumerable<CommAction>)list).GetEnumerator();
   }
   System.Collections.IEnumerator IEnumerable.GetEnumerator() {
     return this.GetEnumerator();

@@ -24,6 +24,7 @@ namespace Geomancer {
 
     IClock clock;
     ITimer timer;
+    EffectBroadcaster broadcaster;
   MemberToViewMapper vivimap;
     Geomancer.Model.Terrain terrain;
     public readonly Location location;
@@ -44,6 +45,7 @@ namespace Geomancer {
     public TerrainTilePresenter(
       IClock clock,
       ITimer timer,
+      EffectBroadcaster broadcaster,
         MemberToViewMapper vivimap,
         Geomancer.Model.Terrain terrain,
         Location location,
@@ -51,14 +53,15 @@ namespace Geomancer {
         Instantiator instantiator) {
       this.clock = clock;
       this.timer = timer;
+      this.broadcaster = broadcaster;
       this.vivimap = vivimap;
       this.location = location;
       this.terrain = terrain;
       this.terrainTile = terrainTile;
       this.instantiator = instantiator;
 
-      terrainTile.members.AddObserver(this);
-      terrainTile.AddObserver(this);
+      terrainTile.members.AddObserver(broadcaster, this);
+      terrainTile.AddObserver(broadcaster, this);
 
       ResetViews();
     }

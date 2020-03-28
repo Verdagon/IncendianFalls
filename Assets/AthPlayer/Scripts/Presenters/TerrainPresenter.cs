@@ -16,18 +16,20 @@ namespace AthPlayer {
 
     IClock clock;
     ITimer timer;
+    EffectBroadcaster broadcaster;
   Atharia.Model.Terrain terrain;
     Instantiator instantiator;
     Dictionary<Location, TerrainTilePresenter> tilePresenters = new Dictionary<Location, TerrainTilePresenter>();
     Location maybeHighlightLocation = null;
 
-    public TerrainPresenter(IClock clock, ITimer timer, Atharia.Model.Terrain terrain, Instantiator instantiator) {
+    public TerrainPresenter(IClock clock, ITimer timer, EffectBroadcaster broadcaster, Atharia.Model.Terrain terrain, Instantiator instantiator) {
       this.clock = clock;
       this.timer = timer;
+      this.broadcaster = broadcaster;
       this.terrain = terrain;
       this.instantiator = instantiator;
-      terrain.AddObserver(this);
-      terrain.tiles.AddObserver(this);
+      terrain.AddObserver(broadcaster, this);
+      terrain.tiles.AddObserver(broadcaster, this);
 
       foreach (var locationAndTile in terrain.tiles) {
         addTerrainTile(locationAndTile.Key, locationAndTile.Value);
@@ -35,7 +37,7 @@ namespace AthPlayer {
     }
 
     public void addTerrainTile(Location location, TerrainTile tile) {
-      var presenter = new TerrainTilePresenter(clock, timer, terrain, location, tile, instantiator);
+      var presenter = new TerrainTilePresenter(clock, timer, broadcaster, terrain, location, tile, instantiator);
       tilePresenters.Add(location, presenter);
     }
 
@@ -45,18 +47,18 @@ namespace AthPlayer {
       }
       if (terrain.Exists()) {
         if (terrain.tiles.Exists()) {
-          terrain.tiles.RemoveObserver(this);
+          terrain.tiles.RemoveObserver(broadcaster, this);
         }
-        terrain.RemoveObserver(this);
+        terrain.RemoveObserver(broadcaster, this);
       }
     }
 
-    public void OnTerrainEffect(ITerrainEffect effect) { effect.visit(this); }
+    public void OnTerrainEffect(ITerrainEffect effect) { effect.visitITerrainEffect(this); }
     public void visitTerrainCreateEffect(TerrainCreateEffect effect) { }
     public void visitTerrainDeleteEffect(TerrainDeleteEffect effect) { }
     public void visitTerrainSetPatternEffect(TerrainSetPatternEffect effect) { }
 
-    public void OnTerrainTileByLocationMutMapEffect(ITerrainTileByLocationMutMapEffect effect) { effect.visit(this); }
+    public void OnTerrainTileByLocationMutMapEffect(ITerrainTileByLocationMutMapEffect effect) { effect.visitITerrainTileByLocationMutMapEffect(this); }
     public void visitTerrainTileByLocationMutMapAddEffect(TerrainTileByLocationMutMapAddEffect effect) {
       addTerrainTile(effect.key, terrain.tiles[effect.key]);
     }

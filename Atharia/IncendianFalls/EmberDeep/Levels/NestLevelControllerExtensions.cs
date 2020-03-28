@@ -195,57 +195,16 @@ namespace Atharia.Model {
         game.EnterCinematic();
         var hopTo = superstate.levelSuperstate.FindMarkerLocation("playerHopTo");
         Actions.Step(game, superstate, game.player, hopTo, true, false);
-        game.AddEvent(new WaitEvent(true, 1000, "playerEntryHopDone").AsIGameEvent());
-      }
-      if (triggerName == "playerEntryHopDone") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "Uh oh...",
-            "aside",
-            "kylin",
-          true,
-          true,
-          false,
-            new ButtonImmList(new List<Button>()))
-          .AsIGameEvent());
-        game.AddEvent(new WaitEvent(true, 2000, "uhOhDone").AsIGameEvent());
-      }
-      if (triggerName == "uhOhDone") {
-        game.AddEvent(
-          new FlyCameraEvent(
-            superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"),
-            new Vec3(0, 8, 8),
-            1000,
-            "cameraReachedPanTo")
-          .AsIGameEvent());
-      }
-      if (triggerName == "cameraReachedPanTo") {
-        game.AddEvent(
-          new WaitEvent(true, 1000, "cameraWaitDone").AsIGameEvent());
-      }
-      if (triggerName == "cameraWaitDone") {
-        game.AddEvent(
-          new FlyCameraEvent(
-            superstate.levelSuperstate.FindMarkerLocation("playerHopTo"),
-            new Vec3(0, 8, 8),
-            1000,
-            "cameraDone")
-          .AsIGameEvent());
-      }
-      if (triggerName == "cameraDone") {
+        game.Wait(1000);
+        game.ShowAside("kylin", "Uh oh...");
+        game.Wait(2000);
+        game.FlyCameraTo(1000, superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"));
+        game.Wait(1000);
+        game.FlyCameraTo(1000, superstate.levelSuperstate.FindMarkerLocation("playerHopTo"));
         game.ExitCinematic();
         game.player.nextActionTime = game.level.time;
 
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "It's a nest of some sort! Time for some chronomancy!",
-            "aside",
-            "kylin",
-          true,
-          true,
-          false,
-            new ButtonImmList(new List<Button>()))
-          .AsIGameEvent());
+        game.ShowAside("kylin", "It's a nest of some sort! Time for some chronomancy!");
       }
 
       return new Atharia.Model.Void();
@@ -278,7 +237,7 @@ namespace Atharia.Model {
       //      true, // topAligned
       //      true, // leftAligned
 
-      //      new ButtonImmList(new List<Button>() { }))
+      //      new OverlayButtonImmList(new List<OverlayButton>() { }))
       //    .AsIGameEvent());
       //}
       return new Atharia.Model.Void();

@@ -298,6 +298,9 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>> observersForGauntletLevelController =
       new SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>>();
 
+  readonly SortedDictionary<int, List<ICommEffectObserver>> observersForComm =
+      new SortedDictionary<int, List<ICommEffectObserver>>();
+
   readonly SortedDictionary<int, List<IGameEffectObserver>> observersForGame =
       new SortedDictionary<int, List<IGameEffectObserver>>();
 
@@ -336,6 +339,9 @@ public class EffectBroadcaster : IEffectVisitor {
 
   readonly SortedDictionary<int, List<IAncientTownLevelControllerEffectObserver>> observersForAncientTownLevelController =
       new SortedDictionary<int, List<IAncientTownLevelControllerEffectObserver>>();
+
+  readonly SortedDictionary<int, List<ICommMutListEffectObserver>> observersForCommMutList =
+      new SortedDictionary<int, List<ICommMutListEffectObserver>>();
 
   readonly SortedDictionary<int, List<ILocationMutListEffectObserver>> observersForLocationMutList =
       new SortedDictionary<int, List<ILocationMutListEffectObserver>>();
@@ -3357,6 +3363,34 @@ public class EffectBroadcaster : IEffectVisitor {
     }
   }
 
+  public void visitCommEffect(ICommEffect effect) {
+    if (observersForComm.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<ICommEffectObserver>(observers)) {
+        observer.OnCommEffect(effect);
+      }
+    }
+  }
+  public void AddCommObserver(int id, ICommEffectObserver observer) {
+    List<ICommEffectObserver> obsies;
+    if (!observersForComm.TryGetValue(id, out obsies)) {
+      obsies = new List<ICommEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForComm[id] = obsies;
+  }
+
+  public void RemoveCommObserver(int id, ICommEffectObserver observer) {
+    if (observersForComm.ContainsKey(id)) {
+      var list = observersForComm[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForComm.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
   public void visitGameEffect(IGameEffect effect) {
     if (observersForGame.TryGetValue(effect.id, out var observers)) {
       foreach (var observer in new List<IGameEffectObserver>(observers)) {
@@ -3720,6 +3754,33 @@ public class EffectBroadcaster : IEffectVisitor {
       throw new Exception("Couldnt find!");
     }
   }
+
+    public void visitCommMutListEffect(ICommMutListEffect effect) {
+      if (observersForCommMutList.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<ICommMutListEffectObserver>(observers)) {
+          observer.OnCommMutListEffect(effect);
+        }
+      }
+    }
+    public void AddCommMutListObserver(int id, ICommMutListEffectObserver observer) {
+      List<ICommMutListEffectObserver> obsies;
+      if (!observersForCommMutList.TryGetValue(id, out obsies)) {
+        obsies = new List<ICommMutListEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForCommMutList[id] = obsies;
+    }
+    public void RemoveCommMutListObserver(int id, ICommMutListEffectObserver observer) {
+      if (observersForCommMutList.ContainsKey(id)) {
+        var map = observersForCommMutList[id];
+        map.Remove(observer);
+        if (map.Count == 0) {
+          observersForCommMutList.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
 
     public void visitLocationMutListEffect(ILocationMutListEffect effect) {
       if (observersForLocationMutList.TryGetValue(effect.id, out var observers)) {

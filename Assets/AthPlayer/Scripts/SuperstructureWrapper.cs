@@ -8,164 +8,164 @@ using System;
 using IncendianFalls;
 
 namespace AthPlayer {
-  public class SuperstructureWrapper : ISuperstructure {
-    Superstructure ss;
+  //public class SuperstructureWrapper : ISuperstructure {
+  //  Superstructure ss;
 
-    public SuperstructureWrapper(Superstructure ss) {
-      this.ss = ss;
-    }
+  //  public SuperstructureWrapper(Superstructure ss) {
+  //    this.ss = ss;
+  //  }
 
-    public Root GetRoot() {
-      return ss.GetRoot();
-    }
+  //  public Root GetRoot() {
+  //    return ss.GetRoot();
+  //  }
 
-    public Superstate GetSuperstate(int gameId) {
-      return ss.GetSuperstate(GetRoot().GetGame(gameId));
-    }
+  //  public Superstate GetSuperstate(int gameId) {
+  //    return ss.GetSuperstate(GetRoot().GetGame(gameId));
+  //  }
 
-    public Game RequestSetupGauntletGame(int randomSeed, bool squareLevelsOnly) {
-      var result = ss.RequestSetupGauntletGame(randomSeed, squareLevelsOnly);
+  //  public Game RequestSetupGauntletGame(int randomSeed, bool squareLevelsOnly) {
+  //    var result = ss.RequestSetupGauntletGame(randomSeed, squareLevelsOnly);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public Game RequestSetupIncendianFallsGame(int randomSeed, bool squareLevelsOnly) {
-      var result = ss.RequestSetupIncendianFallsGame(randomSeed, squareLevelsOnly);
+  //  public Game RequestSetupIncendianFallsGame(int randomSeed, bool squareLevelsOnly) {
+  //    var result = ss.RequestSetupIncendianFallsGame(randomSeed, squareLevelsOnly);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public Game RequestSetupEmberDeepGame(int randomSeed, int startLevel, bool squareLevelsOnly) {
-      var result = ss.RequestSetupEmberDeepGame(randomSeed, startLevel, squareLevelsOnly);
+  //  public Game RequestSetupEmberDeepGame(int randomSeed, int startLevel, bool squareLevelsOnly) {
+  //    var result = ss.RequestSetupEmberDeepGame(randomSeed, startLevel, squareLevelsOnly);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public Atharia.Model.Terrain RequestSetupTerrain(Pattern pattern) {
-      var result = ss.RequestSetupTerrain(pattern);
+  //  public Atharia.Model.Terrain RequestSetupTerrain(Pattern pattern) {
+  //    var result = ss.RequestSetupTerrain(pattern);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestCheat(int gameId, string cheatName) {
-      var result = ss.RequestCheat(gameId, cheatName);
+  //  public string RequestCheat(int gameId, string cheatName) {
+  //    var result = ss.RequestCheat(gameId, cheatName);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestAttack(int gameId, int targetUnitId) {
-      var result = ss.RequestAttack(gameId, targetUnitId);
+  //  public string RequestAttack(int gameId, int targetUnitId) {
+  //    var result = ss.RequestAttack(gameId, targetUnitId);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestCancel(int gameId) {
-      var result = ss.RequestCancel(gameId);
+  //  public string RequestCancel(int gameId) {
+  //    var result = ss.RequestCancel(gameId);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestFire(int gameId, int targetUnitId) {
-      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);
+  //  public string RequestFire(int gameId, int targetUnitId) {
+  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+  //    //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);
 
-      var result = ss.RequestFire(gameId, targetUnitId);
+  //    var result = ss.RequestFire(gameId, targetUnitId);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestFireBomb(int gameId, Location location) {
-      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);
+  //  public string RequestFireBomb(int gameId, Location location) {
+  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+  //    //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);
 
-      var result = ss.RequestFireBomb(gameId, location);
+  //    var result = ss.RequestFireBomb(gameId, location);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestMire(int gameId, int targetUnitId) {
-      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);
+  //  public string RequestMire(int gameId, int targetUnitId) {
+  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+  //    //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);
 
-      var result = ss.RequestMire(gameId, targetUnitId);
+  //    var result = ss.RequestMire(gameId, targetUnitId);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestMove(int gameId, Location newLocation) {
-      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestMove State: " + executionStateStr);
+  //  public string RequestMove(int gameId, Location newLocation) {
+  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+  //    //ss.GetRoot().logger.Error("RequestMove State: " + executionStateStr);
 
-      var result = ss.RequestMove(gameId, newLocation);
+  //    var result = ss.RequestMove(gameId, newLocation);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestTimeAnchorMove(int gameId, Location newLocation) {
-      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestMove State: " + executionStateStr);
+  //  public string RequestTimeAnchorMove(int gameId, Location newLocation) {
+  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+  //    //ss.GetRoot().logger.Error("RequestMove State: " + executionStateStr);
 
-      var result = ss.RequestTimeAnchorMove(gameId, newLocation);
+  //    var result = ss.RequestTimeAnchorMove(gameId, newLocation);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestTimeShift(int gameId) {
-      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestTimeShift State: " + executionStateStr);
+  //  public string RequestTimeShift(int gameId) {
+  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+  //    //ss.GetRoot().logger.Error("RequestTimeShift State: " + executionStateStr);
 
-      var result = ss.RequestTimeShift(gameId);
+  //    var result = ss.RequestTimeShift(gameId);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestResume(int gameId) {
-      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestResume State: " + executionStateStr);
+  //  public string RequestResume(int gameId) {
+  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+  //    //ss.GetRoot().logger.Error("RequestResume State: " + executionStateStr);
 
-      var result = ss.RequestResume(gameId);
+  //    var result = ss.RequestResume(gameId);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestDefy(int gameId) {
-      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
+  //  public string RequestDefy(int gameId) {
+  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+  //    //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
 
-      var result = ss.RequestDefy(gameId);
+  //    var result = ss.RequestDefy(gameId);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestCounter(int gameId) {
-      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
+  //  public string RequestCounter(int gameId) {
+  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+  //    //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
 
-      var result = ss.RequestCounter(gameId);
+  //    var result = ss.RequestCounter(gameId);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestInteract(int gameId) {
-      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
+  //  public string RequestInteract(int gameId) {
+  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+  //    //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
 
-      var result = ss.RequestInteract(gameId);
+  //    var result = ss.RequestInteract(gameId);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestFollowDirective(int gameId) {
-      //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-      //ss.GetRoot().logger.Error("RequestFollowDirective State: " + executionStateStr);
+  //  public string RequestFollowDirective(int gameId) {
+  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
+  //    //ss.GetRoot().logger.Error("RequestFollowDirective State: " + executionStateStr);
 
-      string result = ss.RequestFollowDirective(gameId);
+  //    string result = ss.RequestFollowDirective(gameId);
 
-      return result;
-    }
+  //    return result;
+  //  }
 
-    public string RequestTrigger(int gameId, string triggerName) {
-      return ss.RequestTrigger(gameId, triggerName);
-    }
-  }
+  //  public string RequestTrigger(int gameId, string triggerName) {
+  //    return ss.RequestTrigger(gameId, triggerName);
+  //  }
+  //}
 }

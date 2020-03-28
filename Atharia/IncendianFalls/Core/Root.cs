@@ -124,6 +124,7 @@ void visitIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTTCEffect
 void visitCliffLevelControllerEffect(ICliffLevelControllerEffect effect);
 void visitPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEffect effect);
 void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect effect);
+void visitCommEffect(ICommEffect effect);
 void visitGameEffect(IGameEffect effect);
 void visitVolcaetusLevelControllerEffect(IVolcaetusLevelControllerEffect effect);
 void visitTutorial2LevelControllerEffect(ITutorial2LevelControllerEffect effect);
@@ -137,6 +138,7 @@ void visitDirtRoadLevelControllerEffect(IDirtRoadLevelControllerEffect effect);
 void visitCaveLevelControllerEffect(ICaveLevelControllerEffect effect);
 void visitBridgesLevelControllerEffect(IBridgesLevelControllerEffect effect);
 void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEffect effect);
+void visitCommMutListEffect(ICommMutListEffect effect);
 void visitLocationMutListEffect(ILocationMutListEffect effect);
 void visitIRequestMutListEffect(IIRequestMutListEffect effect);
 void visitLevelMutSetEffect(ILevelMutSetEffect effect);
@@ -666,6 +668,9 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsGauntletLevelController) {
       result += GetGauntletLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsComm) {
+      result += GetCommHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsGame) {
       result += GetGameHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -704,6 +709,9 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsAncientTownLevelController) {
       result += GetAncientTownLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsCommMutList) {
+      result += GetCommMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsLocationMutList) {
       result += GetLocationMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1302,6 +1310,9 @@ public class Root {
     foreach (var obj in this.AllGauntletLevelController()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllComm()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllGame()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1339,6 +1350,9 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllAncientTownLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllCommMutList()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllLocationMutList()) {
@@ -2131,6 +2145,11 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllComm()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllGame()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -2192,6 +2211,11 @@ public class Root {
       }
     }
     foreach (var obj in this.AllAncientTownLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllCommMutList()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -3690,6 +3714,16 @@ public class Root {
       }
     }
          
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsComm) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsComm.ContainsKey(sourceObjId)) {
+        EffectInternalCreateComm(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGame) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -3817,6 +3851,16 @@ public class Root {
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
       if (!rootIncarnation.incarnationsAncientTownLevelController.ContainsKey(sourceObjId)) {
         EffectInternalCreateAncientTownLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      }
+    }
+         
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCommMutList) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsCommMutList.ContainsKey(sourceObjId)) {
+        EffectInternalCreateCommMutList(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
       }
     }
          
@@ -4820,6 +4864,31 @@ public class Root {
       }
     }
          
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCommMutList) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsCommMutList.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsCommMutList[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            for (int i = currentObjIncarnation.list.Count - 1; i >= 0; i--) {
+              EffectCommMutListRemoveAt(objId, i);
+            }
+            for (int i = 0; i < sourceObjIncarnation.list.Count; i++) {
+              EffectCommMutListAdd(objId, i, sourceObjIncarnation.list[i]);
+            }
+            // Swap out the underlying incarnation. The only visible effect this has is
+            // changing the version number.
+                  rootIncarnation.incarnationsCommMutList[objId] = sourceVersionAndObjIncarnation;
+
+          }
+        }
+      }
+             
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsLocationMutList) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -9749,6 +9818,27 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsComm) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsComm.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsComm[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation. The only visible effect this has is
+          // changing the version number.
+          
+          rootIncarnation.incarnationsComm[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGame) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -10737,6 +10827,13 @@ public class Root {
       }
     }
 
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CommIncarnation>>(rootIncarnation.incarnationsComm)) {
+      if (!sourceIncarnation.incarnationsComm.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectCommDelete(id);
+      }
+    }
+
     foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<GameIncarnation>>(rootIncarnation.incarnationsGame)) {
       if (!sourceIncarnation.incarnationsGame.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
@@ -10825,6 +10922,13 @@ public class Root {
       if (!sourceIncarnation.incarnationsAncientTownLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         EffectAncientTownLevelControllerDelete(id);
+      }
+    }
+
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CommMutListIncarnation>>(rootIncarnation.incarnationsCommMutList)) {
+      if (!sourceIncarnation.incarnationsCommMutList.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        EffectCommMutListDelete(id);
       }
     }
 
@@ -20785,6 +20889,96 @@ var effect = new LevelSetTimeEffect(id, newValue);
     result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
     return result;
   }
+       public CommIncarnation GetCommIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsComm[id].incarnation;
+  }
+  public bool CommExists(int id) {
+    return rootIncarnation.incarnationsComm.ContainsKey(id);
+  }
+  public Comm GetComm(int id) {
+    CheckHasComm(id);
+    return new Comm(this, id);
+  }
+  public Comm GetCommOrNull(int id) {
+    if (CommExists(id)) {
+      return new Comm(this, id);
+    } else {
+      return new Comm(this, 0);
+    }
+  }
+  public List<Comm> AllComm() {
+    List<Comm> result = new List<Comm>(rootIncarnation.incarnationsComm.Count);
+    foreach (var id in rootIncarnation.incarnationsComm.Keys) {
+      result.Add(new Comm(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<Comm> EnumAllComm() {
+    foreach (var id in rootIncarnation.incarnationsComm.Keys) {
+      yield return GetComm(id);
+    }
+  }
+  public void CheckHasComm(Comm thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasComm(thing.id);
+  }
+  public void CheckHasComm(int id) {
+    if (!rootIncarnation.incarnationsComm.ContainsKey(id)) {
+      throw new System.Exception("Invalid Comm: " + id);
+    }
+  }
+  public Comm EffectCommCreate(
+      ICommTemplate template,
+      CommActionImmList actions,
+      CommTextImmList texts) {
+    CheckUnlocked();
+
+    var id = NewId();
+    var incarnation =
+        new CommIncarnation(
+            template,
+            actions,
+            texts
+            );
+    EffectInternalCreateComm(id, rootIncarnation.version, incarnation);
+    return new Comm(this, id);
+  }
+  public void EffectInternalCreateComm(
+      int id,
+      int incarnationVersion,
+      CommIncarnation incarnation) {
+    CheckUnlocked();
+    var effect = new CommCreateEffect(id, incarnation.Copy());
+    rootIncarnation.incarnationsComm.Add(
+        id,
+        new VersionAndIncarnation<CommIncarnation>(
+            incarnationVersion,
+            incarnation));
+    NotifyEffect(effect);
+  }
+
+  public void EffectCommDelete(int id) {
+    CheckUnlocked();
+    var effect = new CommDeleteEffect(id);
+
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsComm[id];
+
+    rootIncarnation.incarnationsComm.Remove(id);
+    NotifyEffect(effect);
+  }
+
+     
+  public int GetCommHash(int id, int version, CommIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.template.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.actions.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.texts.GetDeterministicHashCode();
+    return result;
+  }
        public GameIncarnation GetGameIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
@@ -20838,10 +21032,12 @@ var effect = new LevelSetTimeEffect(id, newValue);
       int actionNum,
       string instructions,
       bool hideInput,
-      IGameEvent evvent) {
+      IGameEvent evvent,
+      CommMutList comms) {
     CheckUnlocked();
     CheckHasRand(rand);
     CheckHasLevelMutSet(levels);
+    CheckHasCommMutList(comms);
 
     var id = NewId();
     var incarnation =
@@ -20857,7 +21053,8 @@ var effect = new LevelSetTimeEffect(id, newValue);
             actionNum,
             instructions,
             hideInput,
-            evvent
+            evvent,
+            comms.id
             );
     EffectInternalCreateGame(id, rootIncarnation.version, incarnation);
     return new Game(this, id);
@@ -20910,6 +21107,7 @@ var effect = new LevelSetTimeEffect(id, newValue);
     if (!object.ReferenceEquals(incarnation.evvent, null)) {
       result += id * version * 12 * incarnation.evvent.GetDeterministicHashCode();
     }
+    result += id * version * 13 * incarnation.comms.GetDeterministicHashCode();
     return result;
   }
      
@@ -20936,7 +21134,8 @@ var effect = new GameSetPlayerEffect(id, newValue.id);
               oldIncarnationAndVersion.incarnation.actionNum,
               oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent);
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -20969,7 +21168,8 @@ var effect = new GameSetLevelEffect(id, newValue.id);
               oldIncarnationAndVersion.incarnation.actionNum,
               oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent);
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21002,7 +21202,8 @@ var effect = new GameSetTimeEffect(id, newValue);
               oldIncarnationAndVersion.incarnation.actionNum,
               oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent);
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21035,7 +21236,8 @@ var effect = new GameSetActingUnitEffect(id, newValue.id);
               oldIncarnationAndVersion.incarnation.actionNum,
               oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent);
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21068,7 +21270,8 @@ var effect = new GameSetPauseBeforeNextUnitEffect(id, newValue);
               oldIncarnationAndVersion.incarnation.actionNum,
               oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent);
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21101,7 +21304,8 @@ var effect = new GameSetActionNumEffect(id, newValue);
               newValue,
               oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent);
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21134,7 +21338,8 @@ var effect = new GameSetInstructionsEffect(id, newValue);
               oldIncarnationAndVersion.incarnation.actionNum,
               newValue,
               oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent);
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21167,7 +21372,8 @@ var effect = new GameSetHideInputEffect(id, newValue);
               oldIncarnationAndVersion.incarnation.actionNum,
               oldIncarnationAndVersion.incarnation.instructions,
               newValue,
-              oldIncarnationAndVersion.incarnation.evvent);
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -21200,7 +21406,8 @@ var effect = new GameSetEvventEffect(id, newValue);
               oldIncarnationAndVersion.incarnation.actionNum,
               oldIncarnationAndVersion.incarnation.instructions,
               oldIncarnationAndVersion.incarnation.hideInput,
-              newValue);
+              newValue,
+              oldIncarnationAndVersion.incarnation.comms);
       rootIncarnation.incarnationsGame[id] =
           new VersionAndIncarnation<GameIncarnation>(
               rootIncarnation.version,
@@ -24284,6 +24491,126 @@ var effect = new GameSetEvventEffect(id, newValue);
     GetIDestructible(id);
   }
 
+    public int GetCommMutListHash(int id, int version, CommMutListIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.list) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public CommMutListIncarnation GetCommMutListIncarnation(int id) {
+      return rootIncarnation.incarnationsCommMutList[id].incarnation;
+    }
+    public CommMutList GetCommMutList(int id) {
+      CheckHasCommMutList(id);
+      return new CommMutList(this, id);
+    }
+    public CommMutList GetCommMutListOrNull(int id) {
+      if (CommMutListExists(id)) {
+        return new CommMutList(this, id);
+      } else {
+        return new CommMutList(this, 0);
+      }
+    }
+    public List<CommMutList> AllCommMutList() {
+      List<CommMutList> result = new List<CommMutList>(rootIncarnation.incarnationsCommMutList.Count);
+      foreach (var id in rootIncarnation.incarnationsCommMutList.Keys) {
+        result.Add(new CommMutList(this, id));
+      }
+      return result;
+    }
+    public bool CommMutListExists(int id) {
+      return rootIncarnation.incarnationsCommMutList.ContainsKey(id);
+    }
+    public void CheckHasCommMutList(CommMutList thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasCommMutList(thing.id);
+    }
+    public void CheckHasCommMutList(int id) {
+      if (!rootIncarnation.incarnationsCommMutList.ContainsKey(id)) {
+        throw new System.Exception("Invalid CommMutList}: " + id);
+      }
+    }
+    public CommMutList EffectCommMutListCreate() {
+      CheckUnlocked();
+      var id = NewId();
+      Asserts.Assert(!rootIncarnation.incarnationsCommMutList.ContainsKey(id));
+      EffectInternalCreateCommMutList(id, rootIncarnation.version, new CommMutListIncarnation(new List<int>()));
+      return new CommMutList(this, id);
+    }
+    public CommMutList EffectCommMutListCreate(IEnumerable<Comm> elements) {
+      var list = EffectCommMutListCreate();
+      foreach (var element in elements) {
+        list.Add(element);
+      }
+      return list;
+    }
+    public void EffectInternalCreateCommMutList(int id, int incarnationVersion, CommMutListIncarnation incarnation) {
+      var effect = new CommMutListCreateEffect(id);
+      rootIncarnation.incarnationsCommMutList
+          .Add(
+              id,
+              new VersionAndIncarnation<CommMutListIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+      NotifyEffect(effect);
+    }
+    public void EffectCommMutListDelete(int id) {
+      CheckUnlocked();
+      var effect = new CommMutListDeleteEffect(id);
+      NotifyEffect(effect);
+      var versionAndIncarnation = rootIncarnation.incarnationsCommMutList[id];
+      rootIncarnation.incarnationsCommMutList.Remove(id);
+    }
+    public void EffectCommMutListAdd(int listId, int addIndex, int element) {
+      CheckUnlocked();
+      CheckHasCommMutList(listId);
+
+          CheckHasComm(element);
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsCommMutList[listId];
+      var effect = new CommMutListAddEffect(listId, addIndex, element);
+
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.list;
+        var newMap = new List<int>(oldMap);
+        newMap.Insert(addIndex, element);
+        var newIncarnation = new CommMutListIncarnation(newMap);
+        rootIncarnation.incarnationsCommMutList[listId] =
+            new VersionAndIncarnation<CommMutListIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      NotifyEffect(effect);
+    }
+    public void EffectCommMutListRemoveAt(int listId, int index) {
+      CheckUnlocked();
+      CheckHasCommMutList(listId);
+
+      var effect = new CommMutListRemoveEffect(listId, index);
+
+
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsCommMutList[listId];
+      // Check that its there
+      var oldElement = oldIncarnationAndVersion.incarnation.list[index];
+
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.list;
+        var newMap = new List<int>(oldMap);
+        newMap.RemoveAt(index);
+        var newIncarnation = new CommMutListIncarnation(newMap);
+        rootIncarnation.incarnationsCommMutList[listId] =
+            new VersionAndIncarnation<CommMutListIncarnation>(
+                rootIncarnation.version, newIncarnation);
+
+      }
+      NotifyEffect(effect);
+    }
+       
     public int GetLocationMutListHash(int id, int version, LocationMutListIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.list) {
@@ -24361,18 +24688,15 @@ var effect = new GameSetEvventEffect(id, newValue);
 
     
 
-      var flattenedElement =
-element;
-
       var oldIncarnationAndVersion = rootIncarnation.incarnationsLocationMutList[listId];
-      var effect = new LocationMutListAddEffect(listId, addIndex, flattenedElement);
+      var effect = new LocationMutListAddEffect(listId, addIndex, element);
 
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, flattenedElement);
+        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, element);
       } else {
         var oldMap = oldIncarnationAndVersion.incarnation.list;
         var newMap = new List<Location>(oldMap);
-        newMap.Insert(addIndex, flattenedElement);
+        newMap.Insert(addIndex, element);
         var newIncarnation = new LocationMutListIncarnation(newMap);
         rootIncarnation.incarnationsLocationMutList[listId] =
             new VersionAndIncarnation<LocationMutListIncarnation>(
@@ -24484,18 +24808,15 @@ element;
 
     
 
-      var flattenedElement =
-element;
-
       var oldIncarnationAndVersion = rootIncarnation.incarnationsIRequestMutList[listId];
-      var effect = new IRequestMutListAddEffect(listId, addIndex, flattenedElement);
+      var effect = new IRequestMutListAddEffect(listId, addIndex, element);
 
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, flattenedElement);
+        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, element);
       } else {
         var oldMap = oldIncarnationAndVersion.incarnation.list;
         var newMap = new List<IRequest>(oldMap);
-        newMap.Insert(addIndex, flattenedElement);
+        newMap.Insert(addIndex, element);
         var newIncarnation = new IRequestMutListIncarnation(newMap);
         rootIncarnation.incarnationsIRequestMutList[listId] =
             new VersionAndIncarnation<IRequestMutListIncarnation>(

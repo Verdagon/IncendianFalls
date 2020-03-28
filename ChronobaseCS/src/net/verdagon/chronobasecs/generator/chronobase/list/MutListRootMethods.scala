@@ -97,27 +97,22 @@ object MutListRootMethods {
       } else "") +
       s"""      rootIncarnation.incarnations${listName}.Remove(id);
        |    }
-       |    public void Effect${listName}Add(int listId, int addIndex, ${elementCSType} element) {
+       |    public void Effect${listName}Add(int listId, int addIndex, ${flattenedElementCSType} element) {
        |      CheckUnlocked();
        |      CheckHas${listName}(listId);
        |
     """.stripMargin+
     (elementType.kind.mutability match {
-      case MutableS => s"      CheckHas${flattenedElementCSType}(element);"
+      case MutableS => s"      CheckHas${elementCSType}(element);"
       case ImmutableS => ""
     }) +
     s"""
        |
-       |      var flattenedElement =
-       |""".stripMargin+
-    (elementType.kind.mutability match {case MutableS => s"      element.id;" case ImmutableS => "element;" }) +
-    s"""
-       |
        |      var oldIncarnationAndVersion = rootIncarnation.incarnations${listName}[listId];
-       |      var effect = new ${listName}AddEffect(listId, addIndex, flattenedElement);
+       |      var effect = new ${listName}AddEffect(listId, addIndex, element);
        |
        |      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-       |        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, flattenedElement);
+       |        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, element);
        |""".stripMargin +
       (if (opt.hash) {
         s"""        this.rootIncarnation.hash += listId * rootIncarnation.version * element.GetDeterministicHashCode();
@@ -127,7 +122,7 @@ object MutListRootMethods {
       s"""      } else {
        |        var oldMap = oldIncarnationAndVersion.incarnation.list;
        |        var newMap = new List<${flattenedElementCSType}>(oldMap);
-       |        newMap.Insert(addIndex, flattenedElement);
+       |        newMap.Insert(addIndex, element);
        |        var newIncarnation = new ${listName}Incarnation(newMap);
        |        rootIncarnation.incarnations${listName}[listId] =
        |            new VersionAndIncarnation<${listName}Incarnation>(

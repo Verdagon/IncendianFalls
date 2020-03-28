@@ -4,25 +4,25 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class Button : IComparable<Button> {
-  public static readonly string NAME = "Button";
-  public class EqualityComparer : IEqualityComparer<Button> {
-    public bool Equals(Button a, Button b) {
+public class CommAction : IComparable<CommAction> {
+  public static readonly string NAME = "CommAction";
+  public class EqualityComparer : IEqualityComparer<CommAction> {
+    public bool Equals(CommAction a, CommAction b) {
       return a.Equals(b);
     }
-    public int GetHashCode(Button a) {
+    public int GetHashCode(CommAction a) {
       return a.GetDeterministicHashCode();
     }
   }
-  public class Comparer : IComparer<Button> {
-    public int Compare(Button a, Button b) {
+  public class Comparer : IComparer<CommAction> {
+    public int Compare(CommAction a, CommAction b) {
       return a.CompareTo(b);
     }
   }
   private readonly int hashCode;
          public readonly string label;
   public readonly string triggerName;
-  public Button(
+  public CommAction(
       string label,
       string triggerName) {
     this.label = label;
@@ -33,12 +33,12 @@ public class Button : IComparable<Button> {
     this.hashCode = hash;
 
   }
-  public static bool operator==(Button a, Button b) {
+  public static bool operator==(CommAction a, CommAction b) {
     if (object.ReferenceEquals(a, null))
       return object.ReferenceEquals(b, null);
     return a.Equals(b);
   }
-  public static bool operator!=(Button a, Button b) {
+  public static bool operator!=(CommAction a, CommAction b) {
     if (object.ReferenceEquals(a, null))
       return !object.ReferenceEquals(b, null);
     return !a.Equals(b);
@@ -47,10 +47,10 @@ public class Button : IComparable<Button> {
     if (obj == null) {
       return false;
     }
-    if (!(obj is Button)) {
+    if (!(obj is CommAction)) {
       return false;
     }
-    var that = obj as Button;
+    var that = obj as CommAction;
     return true
                && label.Equals(that.label)
         && triggerName.Equals(that.triggerName)
@@ -60,7 +60,7 @@ public class Button : IComparable<Button> {
     return GetDeterministicHashCode();
   }
   public int GetDeterministicHashCode() { return hashCode; }
-  public int CompareTo(Button that) {
+  public int CompareTo(CommAction that) {
     if (label != that.label) {
       return label.CompareTo(that.label);
     }
@@ -71,20 +71,20 @@ public class Button : IComparable<Button> {
   }
   public override string ToString() { return DStr(); }
   public string DStr() {
-    return "Button(" +
+    return "CommAction(" +
         label.DStr() + ", " +
         triggerName.DStr()
         + ")";
 
     }
-    public static Button Parse(ParseSource source) {
+    public static CommAction Parse(ParseSource source) {
       source.Expect(NAME);
       source.Expect("(");
       var label = source.ParseStr();
       source.Expect(",");
       var triggerName = source.ParseStr();
       source.Expect(")");
-      return new Button(label, triggerName);
+      return new CommAction(label, triggerName);
   }
 }
        

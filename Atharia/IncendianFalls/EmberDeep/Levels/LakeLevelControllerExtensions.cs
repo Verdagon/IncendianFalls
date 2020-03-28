@@ -72,127 +72,14 @@ namespace Atharia.Model {
         string triggerName) {
       game.root.logger.Info("Got simple trigger: " + triggerName);
 
-
       if (triggerName == "levelStart") {
-        game.AddEvent(new WaitEvent(true, 1500, "startCamera").AsIGameEvent());
-      }
-      if (triggerName == "startCamera") {
-        game.AddEvent(
-          new FlyCameraEvent(
-            superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"),
-            new Vec3(0, 8, 8),
-            1000,
-            "cameraReachedPanTo")
-          .AsIGameEvent());
-      }
-      if (triggerName == "cameraReachedPanTo") {
-        game.AddEvent(
-          new WaitEvent(true, 1000, "cameraWaitDone").AsIGameEvent());
-      }
-      if (triggerName == "cameraWaitDone") {
-        game.AddEvent(
-          new FlyCameraEvent(
-            superstate.levelSuperstate.FindMarkerLocation("entry"),
-            new Vec3(0, 8, 8),
-            1500,
-            "cameraDone")
-          .AsIGameEvent());
-      }
-      if (triggerName == "cameraDone") {
+        game.Wait(1500);
+        game.FlyCameraTo(1000, superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"));
+        game.Wait(1000);
+        game.FlyCameraTo(1500, superstate.levelSuperstate.FindMarkerLocation("entry"));
         game.player.nextActionTime = game.level.time;
-
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "It's eerily silent in here.",
-            "aside",
-          "kylin",
-          true,
-          true,
-          false,
-            new ButtonImmList(new List<Button>()))
-          //new ShowOverlayEvent(
-          //  40, // sizePercent
-          //  new Color(16, 16, 16, 224), // backgroundColor
-          //  300,// fadeInEnd
-          //  2800, // fadeOutStart
-          //  3100, // fadeOutEnd,
-          //  "",
-
-          //  "It's eerily silent in here.",
-          //  new Color(255, 64, 0, 255), // textColor
-          //  300, // textFadeInStartS
-          //  600, // textFadeInEndS
-          //  2500, // textFadeOutStartS
-          //  2800, // textFadeOutEndS
-          //  true, // topAligned
-          //  true, // leftAligned
-
-          //  new ButtonImmList(new List<Button>() { }))
-          .AsIGameEvent());
+        game.ShowAside("kylin", "It's eerily silent in here.");
       }
-
-      if (triggerName == "line2") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "He slowly turns and looks at you, into your eyes, through them, as if into your soul.",
-            "normal",
-          "narrator",
-          false,
-          false,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("...", "line3") }))
-          //new ShowOverlayEvent(
-          //  50, // sizePercent
-          //  new Color(16, 16, 16, 224), // backgroundColor
-          //  0,// fadeInEnd
-          //  3800, // fadeOutStart
-          //  3800, // fadeOutEnd,
-          //  "line3",
-
-          //  "He slowly turns and looks at you, into your eyes, through them, as if into your soul.",
-          //  new Color(255, 64, 0, 255), // textColor
-          //  0, // textFadeInStartS
-          //  300, // textFadeInEndS
-          //  3500, // textFadeOutStartS
-          //  3800, // textFadeOutEndS
-          //  true, // topAligned
-          //  true, // leftAligned
-
-          //  new ButtonImmList(new List<Button>() { }))
-          .AsIGameEvent());
-      }
-
-      if (triggerName == "line3") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "He turns away and is still again.",
-            "normal",
-          "narrator",
-          false,
-          true,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("...", "") }))
-          //new ShowOverlayEvent(
-          //  50, // sizePercent
-          //  new Color(16, 16, 16, 224), // backgroundColor
-          //  0,// fadeInEnd
-          //  2200, // fadeOutStart
-          //  2500, // fadeOutEnd,
-          //  "",
-
-          //  "He turns away and is still again.",
-          //  new Color(255, 64, 0, 255), // textColor
-          //  0, // textFadeInStartS
-          //  300, // textFadeInEndS
-          //  1900, // textFadeOutStartS
-          //  2200, // textFadeOutEndS
-          //  true, // topAligned
-          //  true, // leftAligned
-
-          //  new ButtonImmList(new List<Button>() { }))
-          .AsIGameEvent());
-      }
-
 
       return new Atharia.Model.Void();
     }
@@ -209,37 +96,10 @@ namespace Atharia.Model {
 
       if (triggeringUnit.NullableIs(game.player) && triggerName == "nextToMysteriousMan") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("nextToMysteriousMan", 1);
-
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "You see a man, still as a statue.",
-            "normal",
-          "narrator",
-          true,
-          false,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("...", "line2") }))
-          //new ShowOverlayEvent(
-          //  50, // sizePercent
-          //  new Color(16, 16, 16, 224), // backgroundColor
-          //  300,// fadeInEnd
-          //  2800, // fadeOutStart
-          //  2800, // fadeOutEnd,
-          //  "line2",
-
-          //  "You see a man, still as a statue.",
-          //  new Color(255, 64, 0, 255), // textColor
-          //  300, // textFadeInStartS
-          //  600, // textFadeInEndS
-          //  2500, // textFadeOutStartS
-          //  2800, // textFadeOutEndS
-          //  true, // topAligned
-          //  true, // leftAligned
-
-          //  new ButtonImmList(new List<Button>() { }))
-          .AsIGameEvent());
+        game.ShowDialogue("narrator", "You see a man, still as a statue.", "...");
+        game.ShowDialogue("narrator", "He slowly turns and looks at you, into your eyes, through them, as if into your soul.", "...");
+        game.ShowDialogue("narrator", "He turns away and is still again.", "...");
       }
-
 
       return new Atharia.Model.Void();
     }

@@ -103,6 +103,7 @@ IIncendianFallsLevelLinkerTTCEffectVisitor,
 ICliffLevelControllerEffectVisitor,
 IPreGauntletLevelControllerEffectVisitor,
 IGauntletLevelControllerEffectVisitor,
+ICommEffectVisitor,
 IGameEffectVisitor,
 IVolcaetusLevelControllerEffectVisitor,
 ITutorial2LevelControllerEffectVisitor,
@@ -116,6 +117,7 @@ IDirtRoadLevelControllerEffectVisitor,
 ICaveLevelControllerEffectVisitor,
 IBridgesLevelControllerEffectVisitor,
 IAncientTownLevelControllerEffectVisitor,
+ICommMutListEffectVisitor,
 ILocationMutListEffectVisitor,
 IIRequestMutListEffectVisitor,
 ILevelMutSetEffectVisitor,
@@ -2077,6 +2079,24 @@ public void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect ef
   }
 
      
+public void visitCommEffect(ICommEffect effect) { effect.visitICommEffect(this); }
+  public void visitCommCreateEffect(CommCreateEffect effect) {
+    var instance = root.EffectCommCreate(
+  effect.incarnation.template,
+  effect.incarnation.actions,
+  effect.incarnation.texts    );
+
+  // If this fails, then we have to add a translation layer.
+  // We shouldn't allow the user to specify the internal ID, because that's
+  // core to a bunch of optimizations (such as how it's a generational index).
+  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
+}
+
+  public void visitCommDeleteEffect(CommDeleteEffect effect) {
+    root.EffectCommDelete(effect.id);
+  }
+
+     
 public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this); }
   public void visitGameCreateEffect(GameCreateEffect effect) {
     var instance = root.EffectGameCreate(
@@ -2091,7 +2111,8 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
   effect.incarnation.actionNum,
   effect.incarnation.instructions,
   effect.incarnation.hideInput,
-  effect.incarnation.evvent    );
+  effect.incarnation.evvent,
+  root.GetCommMutList(effect.incarnation.comms)    );
 
   // If this fails, then we have to add a translation layer.
   // We shouldn't allow the user to specify the internal ID, because that's
@@ -2360,6 +2381,25 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
   }
 
      
+    public void visitCommMutListEffect(ICommMutListEffect effect) { effect.visitICommMutListEffect(this); }
+    public void visitCommMutListCreateEffect(CommMutListCreateEffect effect) {
+      var list = root.EffectCommMutListCreate();
+      // If this fails, then we have to add a translation layer.
+      // We shouldn't allow the user to specify the internal ID, because that's
+      // core to a bunch of optimizations (such as how it's a generational index).
+      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+    }
+    public void visitCommMutListDeleteEffect(CommMutListDeleteEffect effect) {
+      root.EffectCommMutListDelete(effect.id);
+    }
+    public void visitCommMutListAddEffect(CommMutListAddEffect effect) {
+      root.EffectCommMutListAdd(effect.id, effect.index, effect.element);
+    }
+    public void visitCommMutListRemoveEffect(CommMutListRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectCommMutListRemoveAt(effect.id, effect.index);
+    }
+       
     public void visitLocationMutListEffect(ILocationMutListEffect effect) { effect.visitILocationMutListEffect(this); }
     public void visitLocationMutListCreateEffect(LocationMutListCreateEffect effect) {
       var list = root.EffectLocationMutListCreate();

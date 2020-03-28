@@ -39,10 +39,19 @@ imm struct InteractRequest {
   gameId: Int;
 }
 
+// This is for resuming game simulation when between units.
 imm struct ResumeRequest {
   ResumeRequest isa IRequest;
 
   gameId: Int;
+}
+
+imm struct CommActionRequest {
+  CommActionRequest isa IRequest;
+
+  gameId: Int;
+  commId: Int;
+  actionIndex: Int;
 }
 
 imm struct AttackRequest {
@@ -110,11 +119,4 @@ imm struct TimeAnchorMoveRequest {
 
   gameId: Int;
   destination: Location;
-}
-
-imm struct TriggerRequest {
-  TriggerRequest isa IRequest;
-
-  gameId: Int;
-  triggerName: Str;
 }

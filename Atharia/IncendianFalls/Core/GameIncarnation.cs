@@ -17,6 +17,7 @@ public class GameIncarnation : IGameEffectVisitor {
   public  string instructions;
   public  bool hideInput;
   public  IGameEvent evvent;
+  public readonly int comms;
   public GameIncarnation(
       int rand,
       bool squareLevelsOnly,
@@ -29,7 +30,8 @@ public class GameIncarnation : IGameEffectVisitor {
       int actionNum,
       string instructions,
       bool hideInput,
-      IGameEvent evvent) {
+      IGameEvent evvent,
+      int comms) {
     this.rand = rand;
     this.squareLevelsOnly = squareLevelsOnly;
     this.levels = levels;
@@ -42,6 +44,7 @@ public class GameIncarnation : IGameEffectVisitor {
     this.instructions = instructions;
     this.hideInput = hideInput;
     this.evvent = evvent;
+    this.comms = comms;
   }
   public GameIncarnation Copy() {
     return new GameIncarnation(
@@ -56,7 +59,8 @@ pauseBeforeNextUnit,
 actionNum,
 instructions,
 hideInput,
-evvent    );
+evvent,
+comms    );
   }
 
   public void visitGameCreateEffect(GameCreateEffect e) {}
@@ -73,6 +77,7 @@ public void visitGameSetActionNumEffect(GameSetActionNumEffect e) { this.actionN
 public void visitGameSetInstructionsEffect(GameSetInstructionsEffect e) { this.instructions = e.newValue; }
 public void visitGameSetHideInputEffect(GameSetHideInputEffect e) { this.hideInput = e.newValue; }
 public void visitGameSetEvventEffect(GameSetEvventEffect e) { this.evvent = e.newValue; }
+
   public void ApplyEffect(IGameEffect effect) { effect.visitIGameEffect(this); }
 }
 

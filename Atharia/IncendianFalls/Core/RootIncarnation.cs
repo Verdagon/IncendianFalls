@@ -105,6 +105,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>> incarnationsCliffLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>> incarnationsPreGauntletLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>> incarnationsGauntletLevelController;
+  public readonly SortedDictionary<int, VersionAndIncarnation<CommIncarnation>> incarnationsComm;
   public readonly SortedDictionary<int, VersionAndIncarnation<GameIncarnation>> incarnationsGame;
   public readonly SortedDictionary<int, VersionAndIncarnation<VolcaetusLevelControllerIncarnation>> incarnationsVolcaetusLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<Tutorial2LevelControllerIncarnation>> incarnationsTutorial2LevelController;
@@ -118,6 +119,7 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>> incarnationsCaveLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<BridgesLevelControllerIncarnation>> incarnationsBridgesLevelController;
   public readonly SortedDictionary<int, VersionAndIncarnation<AncientTownLevelControllerIncarnation>> incarnationsAncientTownLevelController;
+  public readonly SortedDictionary<int, VersionAndIncarnation<CommMutListIncarnation>> incarnationsCommMutList;
   public readonly SortedDictionary<int, VersionAndIncarnation<LocationMutListIncarnation>> incarnationsLocationMutList;
   public readonly SortedDictionary<int, VersionAndIncarnation<IRequestMutListIncarnation>> incarnationsIRequestMutList;
   public readonly SortedDictionary<int, VersionAndIncarnation<LevelMutSetIncarnation>> incarnationsLevelMutSet;
@@ -319,6 +321,7 @@ public class RootIncarnation {
     this.incarnationsCliffLevelController = new SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>>();
     this.incarnationsPreGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>>();
     this.incarnationsGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>>();
+    this.incarnationsComm = new SortedDictionary<int, VersionAndIncarnation<CommIncarnation>>();
     this.incarnationsGame = new SortedDictionary<int, VersionAndIncarnation<GameIncarnation>>();
     this.incarnationsVolcaetusLevelController = new SortedDictionary<int, VersionAndIncarnation<VolcaetusLevelControllerIncarnation>>();
     this.incarnationsTutorial2LevelController = new SortedDictionary<int, VersionAndIncarnation<Tutorial2LevelControllerIncarnation>>();
@@ -332,6 +335,7 @@ public class RootIncarnation {
     this.incarnationsCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>>();
     this.incarnationsBridgesLevelController = new SortedDictionary<int, VersionAndIncarnation<BridgesLevelControllerIncarnation>>();
     this.incarnationsAncientTownLevelController = new SortedDictionary<int, VersionAndIncarnation<AncientTownLevelControllerIncarnation>>();
+    this.incarnationsCommMutList = new SortedDictionary<int, VersionAndIncarnation<CommMutListIncarnation>>();
     this.incarnationsLocationMutList = new SortedDictionary<int, VersionAndIncarnation<LocationMutListIncarnation>>();
     this.incarnationsIRequestMutList = new SortedDictionary<int, VersionAndIncarnation<IRequestMutListIncarnation>>();
     this.incarnationsLevelMutSet = new SortedDictionary<int, VersionAndIncarnation<LevelMutSetIncarnation>>();
@@ -538,6 +542,7 @@ public class RootIncarnation {
     this.incarnationsCliffLevelController = new SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>>(that.incarnationsCliffLevelController);
     this.incarnationsPreGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>>(that.incarnationsPreGauntletLevelController);
     this.incarnationsGauntletLevelController = new SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>>(that.incarnationsGauntletLevelController);
+    this.incarnationsComm = new SortedDictionary<int, VersionAndIncarnation<CommIncarnation>>(that.incarnationsComm);
     this.incarnationsGame = new SortedDictionary<int, VersionAndIncarnation<GameIncarnation>>(that.incarnationsGame);
     this.incarnationsVolcaetusLevelController = new SortedDictionary<int, VersionAndIncarnation<VolcaetusLevelControllerIncarnation>>(that.incarnationsVolcaetusLevelController);
     this.incarnationsTutorial2LevelController = new SortedDictionary<int, VersionAndIncarnation<Tutorial2LevelControllerIncarnation>>(that.incarnationsTutorial2LevelController);
@@ -551,6 +556,7 @@ public class RootIncarnation {
     this.incarnationsCaveLevelController = new SortedDictionary<int, VersionAndIncarnation<CaveLevelControllerIncarnation>>(that.incarnationsCaveLevelController);
     this.incarnationsBridgesLevelController = new SortedDictionary<int, VersionAndIncarnation<BridgesLevelControllerIncarnation>>(that.incarnationsBridgesLevelController);
     this.incarnationsAncientTownLevelController = new SortedDictionary<int, VersionAndIncarnation<AncientTownLevelControllerIncarnation>>(that.incarnationsAncientTownLevelController);
+    this.incarnationsCommMutList = new SortedDictionary<int, VersionAndIncarnation<CommMutListIncarnation>>(that.incarnationsCommMutList);
     this.incarnationsLocationMutList = new SortedDictionary<int, VersionAndIncarnation<LocationMutListIncarnation>>(that.incarnationsLocationMutList);
     this.incarnationsIRequestMutList = new SortedDictionary<int, VersionAndIncarnation<IRequestMutListIncarnation>>(that.incarnationsIRequestMutList);
     this.incarnationsLevelMutSet = new SortedDictionary<int, VersionAndIncarnation<LevelMutSetIncarnation>>(that.incarnationsLevelMutSet);

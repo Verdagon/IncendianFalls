@@ -20,26 +20,45 @@ root mut struct Game {
   var hideInput: Bool;
 
   var evvent: ?IGameEvent;
+
+  // comm stands for communication.
+  comms: MutList:Comm;
 }
 
 imm interface IGameEvent { }
 
-imm struct ShowOverlayEvent {
-  ShowOverlayEvent isa IGameEvent;
+// Stands for Communication
+mut struct Comm {
+  template: ICommTemplate;
 
-  text: Str;
-  template: Str; // "normal", "dramatic", "aside"
-  speakerRole: Str; // "kylin", "kylinBrother", "narrator", "halohadrian"
-  isFirstInSequence: Bool;
-  isLastInSequence: Bool;
-  // Whether this dialog is hiding something. If so, we want to send the button trigger
-  // *before* things fade out.
-  isObscuring: Bool;
+  actions: ImmList:CommAction;
 
-  buttons: ImmList:Button;
+  texts: ImmList:CommText;
 }
 
-imm struct Button {
+imm interface ICommTemplate { }
+imm struct AsideCommTemplate {
+  AsideCommTemplate isa ICommTemplate;
+}
+imm struct DialogueCommTemplate {
+  DialogueCommTemplate isa ICommTemplate;
+}
+imm struct NormalCommTemplate {
+  NormalCommTemplate isa ICommTemplate;
+}
+imm struct DramaticCommTemplate {
+  DramaticCommTemplate isa ICommTemplate;
+  // Whether this dialog is hiding something. If so, we want to send the button trigger
+  // for the last page *before* it fades out.
+  isObscuring: Bool;
+}
+
+imm struct CommText {
+  speakerRole: Str; // "kylin", "kylinBrother", "narrator", "halohadrian"
+  text: Str;
+}
+
+imm struct CommAction {
   label: Str;
   triggerName: Str;
 }
@@ -50,19 +69,14 @@ imm struct FlyCameraEvent {
   lookAt: Location;
   relativeCameraPosition: Vec3;
   transitionTimeMs: Int; // Time to get to the specified camera
-  endTriggerName: Str;
 }
 
 imm struct WaitEvent {
   WaitEvent isa IGameEvent;
 
-  lockInput: Bool;
-
   // Time until it calls the trigger again.
   // If 0, will run when there's no more animations.
   timeMs: Int;
-
-  endTriggerName: Str;
 }
 
 imm struct SetGameSpeedEvent {

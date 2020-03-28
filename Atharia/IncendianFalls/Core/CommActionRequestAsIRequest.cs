@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public class TriggerRequestAsIRequest : IRequest {
-  public readonly TriggerRequest obj;
-  public TriggerRequestAsIRequest(TriggerRequest obj) {
+public class CommActionRequestAsIRequest : IRequest {
+  public readonly CommActionRequest obj;
+  public CommActionRequestAsIRequest(CommActionRequest obj) {
     this.obj = obj;
   }
   public string DStr() { return obj.DStr(); }
@@ -16,9 +16,9 @@ public class TriggerRequestAsIRequest : IRequest {
        
   public void VisitIRequest(IRequestVisitor visitor) { visitor.VisitIRequest(this); }
 }
-public static class TriggerRequestAsIRequestCaster {
-  public static TriggerRequestAsIRequest AsIRequest(this TriggerRequest obj) {
-    return new TriggerRequestAsIRequest(obj);
+public static class CommActionRequestAsIRequestCaster {
+  public static CommActionRequestAsIRequest AsIRequest(this CommActionRequest obj) {
+    return new CommActionRequestAsIRequest(obj);
   }
 }
 

@@ -11,30 +11,31 @@ namespace Domino {
       IGameEffectObserver, IGameEffectVisitor {
     CameraController cameraController;
 
+    EffectBroadcaster broadcaster;
     Game game;
     Unit followedUnit;
     Location cameraEndLookAtLocation;
 
-    private readonly static float cameraSpeedPerSecond = 8.0f;
-
-    public FollowingCameraController(CameraController cameraController, Game game) {
+    public FollowingCameraController(CameraController cameraController, EffectBroadcaster broadcaster, Game game) {
+      this.broadcaster = broadcaster;
       this.cameraController = cameraController;
       cameraEndLookAtLocation = game.player.location;
 
       this.game = game;
 
-      this.game.AddObserver(this);
+      this.game.AddObserver(broadcaster, this);
 
       followedUnit = Unit.Null;
 
       RefollowPlayer(0);
     }
 
-    public void OnUnitEffect(IUnitEffect effect) { effect.visit(this); }
+    public void OnUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this); }
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) { }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) { }
     public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) { }
+    public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) { }
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
@@ -42,9 +43,13 @@ namespace Domino {
       RefollowPlayer(250);
     }
 
-    public void OnGameEffect(IGameEffect effect) { effect.visit(this); }
+    public void OnGameEffect(IGameEffect effect) { effect.visitIGameEffect(this); }
     public void visitGameCreateEffect(GameCreateEffect effect) { }
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
+    public void visitGameSetActingUnitEffect(GameSetActingUnitEffect effect) { }
+    public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect effect) { }
+    public void visitGameSetActionNumEffect(GameSetActionNumEffect effect) { }
+    public void visitGameSetEvventEffect(GameSetEvventEffect effect) { }
     public void visitGameSetHideInputEffect(GameSetHideInputEffect effect) { }
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
       //cameraController.SetCameraAngle(game.level.cameraAngle.ToUnity());
@@ -62,17 +67,17 @@ namespace Domino {
             // Do nothing
           } else {
             // Player changed, follow this one now
-            followedUnit.RemoveObserver(this);
+            followedUnit.RemoveObserver(broadcaster, this);
             followedUnit = this.game.player;
-            followedUnit.AddObserver(this);
+            followedUnit.AddObserver(broadcaster, this);
           }
         } else {
-          followedUnit.RemoveObserver(this);
+          followedUnit.RemoveObserver(broadcaster, this);
         }
       } else {
         if (game.player.Exists()) {
           followedUnit = this.game.player;
-          followedUnit.AddObserver(this);
+          followedUnit.AddObserver(broadcaster, this);
         } else {
           // Do nothing, followedUnit and player both dont exist
         }
@@ -139,5 +144,6 @@ namespace Domino {
     public void StartMovingCameraTo(Vector3 newCameraEndLookAtPosition, long durationMs) {
       cameraController.StartMovingCameraTo(newCameraEndLookAtPosition, durationMs);
     }
+
   }
 }

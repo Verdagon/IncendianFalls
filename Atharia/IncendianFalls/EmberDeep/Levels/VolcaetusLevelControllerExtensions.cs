@@ -66,30 +66,6 @@ namespace Atharia.Model {
         string triggerName) {
       game.root.logger.Info("Got simple trigger: " + triggerName);
 
-      if (triggerName == "line2") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "I can finally rescue my brother!",
-            "dramatic",
-            "kylin",
-          true,
-          false,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("Hope lives!", "line3") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "line3") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "Congratulations, you have won the game!",
-            "dramatic",
-          "narrator",
-          false,
-          true,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("Huzzah!", "_exitGame") }))
-          .AsIGameEvent());
-      }
 
       return new Atharia.Model.Void();
     }
@@ -106,16 +82,13 @@ namespace Atharia.Model {
 
       if (triggeringUnit.NullableIs(game.player) && triggerName == "volcaetus") {
         game.EnterCinematic();
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "This is... this is Volcaetus!\n\nThe black incendium spear!",
-            "normal",
-            "kylin",
-          true,
-          true,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("Behold!", "line2") }))
-          .AsIGameEvent());
+        game.ShowDramatic("kylin", "This is... this is Volcaetus!\n\nThe black incendium spear!");
+        game.ShowDramatic("kylin", "I can finally rescue my brother!");
+        game.comms.Add(
+          game.root.EffectCommCreate(
+            new DramaticCommTemplate(false).AsICommTemplate(),
+            new CommActionImmList(new CommAction("Huzzah!", "_exitGame")),
+            new CommTextImmList(new CommText("narrator", "Congratulations, you have won the game!"))));
       }
 
       return new Atharia.Model.Void();

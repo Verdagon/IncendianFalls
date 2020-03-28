@@ -23,21 +23,17 @@ public class FlyCameraEvent : IComparable<FlyCameraEvent> {
          public readonly Location lookAt;
   public readonly Vec3 relativeCameraPosition;
   public readonly int transitionTimeMs;
-  public readonly string endTriggerName;
   public FlyCameraEvent(
       Location lookAt,
       Vec3 relativeCameraPosition,
-      int transitionTimeMs,
-      string endTriggerName) {
+      int transitionTimeMs) {
     this.lookAt = lookAt;
     this.relativeCameraPosition = relativeCameraPosition;
     this.transitionTimeMs = transitionTimeMs;
-    this.endTriggerName = endTriggerName;
     int hash = 0;
     hash = hash * 37 + lookAt.GetDeterministicHashCode();
     hash = hash * 37 + relativeCameraPosition.GetDeterministicHashCode();
     hash = hash * 37 + transitionTimeMs.GetDeterministicHashCode();
-    hash = hash * 37 + endTriggerName.GetDeterministicHashCode();
     this.hashCode = hash;
 
   }
@@ -63,7 +59,6 @@ public class FlyCameraEvent : IComparable<FlyCameraEvent> {
                && lookAt.Equals(that.lookAt)
         && relativeCameraPosition.Equals(that.relativeCameraPosition)
         && transitionTimeMs.Equals(that.transitionTimeMs)
-        && endTriggerName.Equals(that.endTriggerName)
         ;
   }
   public override int GetHashCode() {
@@ -80,9 +75,6 @@ public class FlyCameraEvent : IComparable<FlyCameraEvent> {
     if (transitionTimeMs != that.transitionTimeMs) {
       return transitionTimeMs.CompareTo(that.transitionTimeMs);
     }
-    if (endTriggerName != that.endTriggerName) {
-      return endTriggerName.CompareTo(that.endTriggerName);
-    }
     return 0;
   }
   public override string ToString() { return DStr(); }
@@ -90,8 +82,7 @@ public class FlyCameraEvent : IComparable<FlyCameraEvent> {
     return "FlyCameraEvent(" +
         lookAt.DStr() + ", " +
         relativeCameraPosition.DStr() + ", " +
-        transitionTimeMs.DStr() + ", " +
-        endTriggerName.DStr()
+        transitionTimeMs.DStr()
         + ")";
 
     }
@@ -103,10 +94,8 @@ public class FlyCameraEvent : IComparable<FlyCameraEvent> {
       var relativeCameraPosition = Vec3.Parse(source);
       source.Expect(",");
       var transitionTimeMs = source.ParseInt();
-      source.Expect(",");
-      var endTriggerName = source.ParseStr();
       source.Expect(")");
-      return new FlyCameraEvent(lookAt, relativeCameraPosition, transitionTimeMs, endTriggerName);
+      return new FlyCameraEvent(lookAt, relativeCameraPosition, transitionTimeMs);
   }
 }
        

@@ -9,7 +9,7 @@ namespace AthPlayer {
   public delegate void OnLocationHovered(Location location);
   public delegate void OnLocationClicked(Location location);
 
-  public class GamePresenter : IGameEffectVisitor, IGameEffectObserver, IUnitMutSetEffectVisitor, IUnitMutSetEffectObserver, IGameEventVisitor, IIGameEventMutListEffectVisitor, IIGameEventMutListEffectObserver {
+  public class GamePresenter : IGameEffectVisitor, IGameEffectObserver, IUnitMutSetEffectVisitor, IUnitMutSetEffectObserver, IGameEventVisitor {
     public OnLocationHovered LocationHovered;
     public OnLocationClicked LocationClicked;
 
@@ -31,7 +31,8 @@ namespace AthPlayer {
     // the player to act yet. Most basic case is a unit moving.
 
     GameObject thinkingIndicator;
-    ISuperstructure ss;
+    IncendianFalls.Superstructure serverSS;
+    EffectBroadcaster broadcaster;
     Game game;
     Level viewedLevel;
     Instantiator instantiator;
@@ -52,7 +53,8 @@ namespace AthPlayer {
         ITimer cameraTimer,
         SoundPlayer soundPlayer,
         GameObject thinkingIndicator,
-        ISuperstructure ss,
+        IncendianFalls.Superstructure serverSS,
+        EffectBroadcaster broadcaster,
         InputSemaphore inputSemaphore,
         Game game,
         Instantiator instantiator,
@@ -64,11 +66,12 @@ namespace AthPlayer {
         Looker looker,
         OverlayPaneler overlayPaneler) {
       this.soundPlayer = soundPlayer;
-      this.ss = ss;
+      this.serverSS = serverSS;
       this.game = game;
       this.overlayPresenterFactory = overlayPresenterFactory;
       this.inputSemaphore = inputSemaphore;
       this.instantiator = instantiator;
+      this.broadcaster = broadcaster;
       this.showError = showError;
       this.showInstructions = showInstructions;
       this.thinkingIndicator = thinkingIndicator;
@@ -91,12 +94,7 @@ namespace AthPlayer {
         stalledIndicator.SetActive(false);
       };
 
-      game.AddObserver(this);
-      game.events.AddObserver(this);
-
-      foreach (var e in game.events) {
-        e.Visit(this);
-      }
+      game.AddObserver(broadcaster, this);
 
       playerController =
           new PlayerController(
@@ -105,7 +103,7 @@ namespace AthPlayer {
               resumeStaller,
               turnStaller,
               inputSemaphore,
-              ss,
+              serverSS,
               ss.GetSuperstate(game.id),
               game,
               looker,
@@ -145,17 +143,17 @@ namespace AthPlayer {
       }
       unitPresenters[unitId] =
           new UnitPresenter(
-              timer, timer, soundPlayer, resumeStaller, turnStaller, game, viewedLevel.terrain, unit, instantiator);
+              timer, timer, soundPlayer, broadcaster, resumeStaller, turnStaller, game, viewedLevel.terrain, unit, instantiator);
     }
 
     private void LoadLevel() {
       viewedLevel = game.level;
 
-      this.terrainPresenter = new TerrainPresenter(timer, timer, viewedLevel.terrain, instantiator);
+      this.terrainPresenter = new TerrainPresenter(timer, timer, broadcaster, viewedLevel.terrain, instantiator);
       terrainPresenter.TerrainClicked += (location) => LocationClicked?.Invoke(location);
       terrainPresenter.TerrainHovered += (location) => LocationHovered?.Invoke(location);
 
-      viewedLevel.units.AddObserver(this);
+      viewedLevel.units.AddObserver(broadcaster, this);
       this.unitPresenters = new Dictionary<int, UnitPresenter>();
       foreach (var unit in viewedLevel.units) {
         AddUnit(unit.id);
@@ -173,7 +171,7 @@ namespace AthPlayer {
 
       // Could have been destroyed in a revert.
       if (viewedLevel.Exists()) {
-        viewedLevel.units.RemoveObserver(this);
+        viewedLevel.units.RemoveObserver(broadcaster, this);
       }
 
       terrainPresenter.DestroyTerrainPresenter();
@@ -182,7 +180,7 @@ namespace AthPlayer {
       viewedLevel = null;
     }
 
-    public void OnGameEffect(IGameEffect effect) { effect.visit(this); }
+    public void OnGameEffect(IGameEffect effect) { effect.visitIGameEffect(this); }
     public void visitGameCreateEffect(GameCreateEffect effect) { }
     public void visitGameDeleteEffect(GameDeleteEffect effect) { }
     public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
@@ -199,12 +197,12 @@ namespace AthPlayer {
     public void visitUnitMutSetCreateEffect(UnitMutSetCreateEffect effect) { }
     public void visitUnitMutSetDeleteEffect(UnitMutSetDeleteEffect effect) { }
     public void visitUnitMutSetAddEffect(UnitMutSetAddEffect effect) {
-      AddUnit(effect.elementId);
+      AddUnit(effect.element);
     }
     public void visitUnitMutSetRemoveEffect(UnitMutSetRemoveEffect effect) {
-      RemoveUnit(effect.elementId);
+      RemoveUnit(effect.element);
     }
-    public void OnUnitMutSetEffect(IUnitMutSetEffect effect) { effect.visit(this); }
+    public void OnUnitMutSetEffect(IUnitMutSetEffect effect) { effect.visitIUnitMutSetEffect(this); }
 
     public Location LocationFor(GameObject obj) {
       Location location = terrainPresenter.LocationFor(obj);
@@ -246,33 +244,6 @@ namespace AthPlayer {
     //}
 
 
-    public void OnIGameEventMutListEffect(IIGameEventMutListEffect effect) { effect.visit(this); }
-    public void visitIGameEventMutListCreateEffect(IGameEventMutListCreateEffect effect) { }
-    public void visitIGameEventMutListDeleteEffect(IGameEventMutListDeleteEffect effect) { }
-    public void visitIGameEventMutListRemoveEffect(IGameEventMutListRemoveEffect effect) { }
-    public void visitIGameEventMutListAddEffect(IGameEventMutListAddEffect effect) { effect.element.Visit(this); }
-    public void Visit(FlyCameraEventAsIGameEvent obj) {
-      var cameraEndLookAtPosition = game.level.terrain.GetTileCenter(obj.obj.lookAt).ToUnity();
-      cameraController.StartMovingCameraTo(cameraEndLookAtPosition, obj.obj.transitionTimeMs);
-      Debug.Log("Moving camera!");
-      cinematicTimer.ScheduleTimer(obj.obj.transitionTimeMs, () => ss.RequestTrigger(game.id, obj.obj.endTriggerName));
-    }
-    public void Visit(ShowOverlayEventAsIGameEvent obj) {
-      var overlayPresenter = overlayPresenterFactory(obj.obj);
-      // do nothing, itll kill itself.
-    }
-
-    public void Visit(SetGameSpeedEventAsIGameEvent obj) {
-      timer.SetTimeSpeedMultiplier(obj.obj.percent / 100f);
-    }
-
-    public void Visit(WaitEventAsIGameEvent obj) {
-      if (obj.obj.timeMs == 0) {
-
-      } else {
-        cinematicTimer.ScheduleTimer(obj.obj.timeMs, () => ss.RequestTrigger(game.id, obj.obj.endTriggerName));
-      }
-    }
 
     public void Update(UnityEngine.Ray ray) {
       timer.Update();
@@ -304,6 +275,40 @@ namespace AthPlayer {
           playerController.OnTileMouseClick(hoveredLocation);
         }
       }
+    }
+
+    public void visitGameSetActingUnitEffect(GameSetActingUnitEffect effect) {}
+    public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect effect) {}
+    public void visitGameSetActionNumEffect(GameSetActionNumEffect effect) { }
+    public void visitGameSetEvventEffect(GameSetEvventEffect effect) {}
+    public void VisitIGameEvent(RevertedEventAsIGameEvent obj) {}
+    public void VisitIGameEvent(SetGameSpeedEventAsIGameEvent obj) {
+      timer.SetTimeSpeedMultiplier(obj.obj.percent / 100f);
+    }
+
+    public void VisitIGameEvent(WaitEventAsIGameEvent obj) {
+      if (obj.obj.timeMs == 0) {
+
+      } else {
+        cinematicTimer.ScheduleTimer(obj.obj.timeMs, () => {
+          throw new NotImplementedException();
+          serverSS.RequestTrigger(game.id, obj.obj.endTriggerName);
+        });
+      }
+    }
+
+    public void VisitIGameEvent(FlyCameraEventAsIGameEvent obj) {
+      var cameraEndLookAtPosition = game.level.terrain.GetTileCenter(obj.obj.lookAt).ToUnity();
+      cameraController.StartMovingCameraTo(cameraEndLookAtPosition, obj.obj.transitionTimeMs);
+      cinematicTimer.ScheduleTimer(obj.obj.transitionTimeMs, () => {
+        throw new NotImplementedException();
+        serverSS.RequestTrigger(game.id, obj.obj.endTriggerName);
+      });
+    }
+
+    public void VisitIGameEvent(ShowOverlayEventAsIGameEvent obj) {
+      var overlayPresenter = overlayPresenterFactory(obj.obj);
+      // do nothing, itll kill itself.
     }
   }
 }

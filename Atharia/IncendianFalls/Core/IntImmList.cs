@@ -11,8 +11,8 @@ public class IntImmList : IEnumerable<int> {
   public IntImmList() {
     this.list = new List<int>();
   }
-  public IntImmList(int[] list) {
-    this.list = new List<int>(list);
+  public IntImmList(params int[] values) {
+    this.list = new List<int>(values);
   }
   public IntImmList(IEnumerable<int> list) {
     this.list = new List<int>(list);

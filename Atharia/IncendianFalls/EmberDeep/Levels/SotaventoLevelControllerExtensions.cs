@@ -71,155 +71,41 @@ namespace Atharia.Model {
 
       if (triggerName == "levelStart") {
         game.EnterCinematic();
-        game.AddEvent(
-          new ShowOverlayEvent(
+        game.ShowDramatic("kylin", "My brother was an explorer.\n\nOne of the only people to explore Ember Deep and survive, thanks to his mastery of chronomancy.");
+        game.ShowDramatic("kylinBrother", "\"Ember Deep is a dangerous place, ravaged by time magic since millenia ago.\n\nPeople fear it, and call it evil. I don't think it is.\n\nPast the danger, there are wonders to discover down there, answers to the deeper mysteries of our realm.\"");
+        game.ShowDramatic("kylin", "Seven years ago, when the terrible Ravashrike attacked our town, he stood against it.");
 
-            "My brother was an explorer.\n\nOne of the only people to explore Ember Deep and survive, thanks to his mastery of chronomancy.",
-
-            "dramatic",
-            "kylin",
-          // We tell the view that this isnt the first in the series because we dont want it to fade in.
-          // It's a bit of a hack. We could instead throw in another boolean to say "but its the first in the
-          // entire game" or something...
-          // Or, we can think of it like we've already started the sequence in the intro screen, we would
-          // just need to add an auto-closing fade-out from there. Maybe with some text.
-          false,
-          false,
-          false,
-
-            new ButtonImmList(new List<Button>() { new Button("...", "introLine1Done") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "introLine1Done") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "\"Ember Deep is a dangerous place, ravaged by time magic since millenia ago.\n\nPeople fear it, and call it evil. I don't think it is.\n\nPast the danger, there are wonders to discover down there, answers to the deeper mysteries of our realm.\"",
-            "dramatic",
-            "kylinBrother",
-          false,
-          false,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("...", "introLine2Done") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "introLine2Done") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "Seven years ago, when the terrible Ravashrike attacked our town, he stood against it.",
-            "dramatic",
-          "kylin",
-          false,
-          true,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("...", "introLine3Done") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "introLine3Done") {
         var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo1");
-        game.AddEvent(new FlyCameraEvent(ravashrikeHopTo1, new Vec3(5, 5, 5), 300, "flyCameraToRavashrikeDone").AsIGameEvent());
-      }
-      if (triggerName == "flyCameraToRavashrikeDone") {
-        game.AddEvent(new WaitEvent(true, 500, "wait1Done").AsIGameEvent());
-      }
-      if (triggerName == "wait1Done") {
+        game.FlyCameraTo(300, ravashrikeHopTo1);
+        game.Wait(500);
         var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
-        game.AddEvent(new FlyCameraEvent(chronomancer.location, new Vec3(5, 5, 5), 300, "flyToBrother1Done").AsIGameEvent());
-      }
-      if (triggerName == "flyToBrother1Done") {
+        game.FlyCameraTo(300, chronomancer.location);
         game.AddEvent(new SetGameSpeedEvent(40).AsIGameEvent());
         var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
-        var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo1");
         Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
-        game.AddEvent(new WaitEvent(true, 1000, "fire1").AsIGameEvent());
-      }
-      if (triggerName == "fire1") {
-        var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
-        var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
+        game.Wait(1000);
+
         Actions.Fire(game, superstate, chronomancer, ravashrike);
-        game.AddEvent(new WaitEvent(true, 500, "step2").AsIGameEvent());
-      }
-      if (triggerName == "step2") {
-        var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
-        var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo2");
-        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
-        game.AddEvent(new WaitEvent(true, 1000, "fire2").AsIGameEvent());
-      }
-      if (triggerName == "fire2") {
-        var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
-        var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
+        game.Wait(500);
+        var ravashrikeHopTo2 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo2");
+        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo2, true, false);
+        game.Wait(1000);
         Actions.Fire(game, superstate, chronomancer, ravashrike);
-        game.AddEvent(new WaitEvent(true, 500, "step3").AsIGameEvent());
-      }
-      if (triggerName == "step3") {
-        var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
-        var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo3");
-        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
-        game.AddEvent(new WaitEvent(true, 1000, "fire3").AsIGameEvent());
-      }
-      if (triggerName == "fire3") {
-        var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
-        var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
+        game.Wait(500);
+        var ravashrikeHopTo3 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo3");
+        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo3, true, false);
+        game.Wait(1000);
         Actions.Fire(game, superstate, chronomancer, ravashrike);
-        game.AddEvent(new WaitEvent(true, 500, "ravashrikeAttack").AsIGameEvent());
-      }
-      if (triggerName == "ravashrikeAttack") {
-        var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
-        var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
+        game.Wait(500);
         var retreatTo = superstate.levelSuperstate.FindMarkerLocation("retreatTo");
         Actions.Bump(game, superstate, ravashrike, chronomancer, 1300, true);
         Actions.Step(game, superstate, chronomancer, retreatTo, true, false);
-        game.AddEvent(new WaitEvent(true, 1000, "ravashrikeAttackDone").AsIGameEvent());
-      }
-      if (triggerName == "ravashrikeAttackDone") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "\"I can't fight it! Time to do something desperate...\"",
-            "normal",
-            "kylinBrother",
-          true,
-          true,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("...", "realizationDone") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "realizationDone") {
+        game.Wait(1000);
+        game.ShowDialogue("kylinBrother", "\"I can't fight it! Time to do something desperate...\"", "...");
         //Actions.Stasis(game, superstate, chronomancer, ravashrike);
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "He used a black incendium staff to cast an Eternal Stasis on the Ravashrike...\n\nBut he caught himself in it too.",
-            "dramatic",
-            "kylin",
-          true,
-          false,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("...", "iMust") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "iMust") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "To undo my brother's stasis, I need to follow the caves until I find something made of black incendium.",
-            "dramatic",
-            "kylin",
-          false,
-          false,
-          false,
-            new ButtonImmList(new List<Button>() { new Button("...", "journeyBegin") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "journeyBegin") {
-        game.AddEvent(
-          new ShowOverlayEvent(
-            "Now, my journey begins.",
-            "dramatic",
-            "kylin",
-          false,
-          false,
-          true,
-            new ButtonImmList(new List<Button>() { new Button("...", "cinematicDone") }))
-          .AsIGameEvent());
-      }
-      if (triggerName == "cinematicDone") {
+        game.ShowDramatic("kylin", "He used a black incendium staff to cast an Eternal Stasis on the Ravashrike...\n\nBut he caught himself in it too.");
+        game.ShowDramatic("kylin", "To undo my brother's stasis, I need to follow the caves until I find something made of black incendium.");
+        game.ShowDramatic("kylin", "Now, my journey begins.");
         game.ExitCinematic();
         game.AddEvent(new SetGameSpeedEvent(100).AsIGameEvent());
         var linkLocation = game.player.location;

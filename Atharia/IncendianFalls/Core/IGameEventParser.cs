@@ -17,8 +17,6 @@ public static class IGameEventParser {
         return new WaitEventAsIGameEvent(WaitEvent.Parse(source));
       case "FlyCameraEvent":
         return new FlyCameraEventAsIGameEvent(FlyCameraEvent.Parse(source));
-      case "ShowOverlayEvent":
-        return new ShowOverlayEventAsIGameEvent(ShowOverlayEvent.Parse(source));
       default:
         throw new Exception("Unexpected: " + nextThingPeek);
     }

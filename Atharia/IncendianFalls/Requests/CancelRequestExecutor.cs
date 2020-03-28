@@ -24,7 +24,7 @@ namespace IncendianFalls {
   //          true,
   //          true,
   //          false,
-  //          new ButtonImmList())
+  //          new OverlayButtonImmList())
   //        .AsIGameEvent());
   //    } else {
   //      game.AddEvent(
@@ -35,7 +35,7 @@ namespace IncendianFalls {
   //          true,
   //          true,
   //          false,
-  //          new ButtonImmList())
+  //          new OverlayButtonImmList())
   //        .AsIGameEvent());
   //    }
 
