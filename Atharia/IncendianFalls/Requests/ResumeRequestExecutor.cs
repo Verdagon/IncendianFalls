@@ -11,10 +11,6 @@ namespace IncendianFalls {
       int gameId = request.gameId;
       var game = context.root.GetGame(gameId);
 
-      if (superstate.timeShiftingState != null) {
-        return "Error: Cannot resume while timeshifting!";
-      }
-
       Asserts.Assert(!game.WaitingOnPlayerInput());
 
       if (game.actingUnit.Exists()) {

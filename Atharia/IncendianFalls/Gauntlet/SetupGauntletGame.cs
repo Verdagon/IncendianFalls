@@ -41,9 +41,7 @@ namespace Gauntlet {
             null,
             new List<RootIncarnation>(),
             new List<IRequest>(),
-            new List<int>(),
-            null);
-
+            new List<int>());
 
       PreGauntletLevelControllerExtensions.MakeLevel(
           out var preGauntletLevel,

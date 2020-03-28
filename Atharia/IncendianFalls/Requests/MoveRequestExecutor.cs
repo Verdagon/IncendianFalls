@@ -66,17 +66,11 @@ namespace IncendianFalls {
       Location destination = request.destination;
       var game = context.root.GetGame(gameId);
 
-      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        return "Error: Unexpected player input!";
-      }
       if (!game.actingUnit.Exists()) {
         return "Error: No player!";
       }
       if (!game.actingUnit.Is(game.player)) {
         return "Error: Player not next acting unit!";
-      }
-      if (superstate.timeShiftingState != null) {
-        return "Error: Cannot move while time shifting!";
       }
       if (game.player.nextActionTime != game.time) {
         return "Error: Not player's time to act!";

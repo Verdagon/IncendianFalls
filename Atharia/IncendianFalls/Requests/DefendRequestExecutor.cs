@@ -24,9 +24,6 @@ namespace IncendianFalls {
       //if (!game.player.Is(Utils.GetNextActingUnit(game))) {
       //  return "Error: Player not next acting unit! (b)";
       //}
-      if (superstate.timeShiftingState != null) {
-        return "Error: Cannot defend while time shifting!";
-      }
 
       superstate.previousTurns.Add(context.root.Snapshot());
       superstate.requests.Add(request.AsIRequest());

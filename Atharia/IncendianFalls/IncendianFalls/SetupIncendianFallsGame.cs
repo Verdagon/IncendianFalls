@@ -39,8 +39,7 @@ namespace IncendianFalls {
             null,
             new List<RootIncarnation>(),
             new List<IRequest>(),
-            new List<int>(),
-            null);
+            new List<int>());
 
       IncendianFallsLevelLinkerTTCExtensions.MakeNextLevel(
           out var firstLevel,

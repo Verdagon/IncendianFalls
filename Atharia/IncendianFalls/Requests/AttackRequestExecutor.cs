@@ -15,9 +15,6 @@ namespace IncendianFalls {
 
       Asserts.Assert(game.WaitingOnPlayerInput());
 
-      if (superstate.timeShiftingState != null) {
-        return "Error: Cannot attack while time shifting!";
-      }
 
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");

@@ -15,18 +15,12 @@ namespace IncendianFalls {
 
       Asserts.Assert(game.WaitingOnPlayerInput());
 
-      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        return "Error: Unexpected player input!";
-      }
       if (!game.actingUnit.Is(game.player)) {
         return "Error: Player not next acting unit! (a)";
       }
       //if (!game.player.Is(Utils.GetNextActingUnit(game))) {
       //  return "Error: Player not next acting unit! (b)";
       //}
-      if (superstate.timeShiftingState != null) {
-        return "Error: Cannot anchor move while time shifting!";
-      }
 
       if (destination == game.player.location) {
         return "Already there!";

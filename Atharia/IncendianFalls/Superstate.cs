@@ -4,34 +4,6 @@ using Atharia.Model;
 
 namespace Atharia.Model {
   public class Superstate {
-    public class TimeShiftingState {
-      // A root with the incarnation that is the future of this timeline. We maintain this
-      // so that when we finish timeshifting backwards, we can read the future player and
-      // bring them into the past/present.
-      public Root future;
-
-      // If future non-null, this is the index of the turn we're aiming at.
-      // If the last turn in turnsIncludingPresent is this index, we're done timeshifting.
-      public int targetAnchorTurnIndex;
-
-      public Location targetAnchorLocation;
-
-      // True while we're rewinding.
-      // False while we're waiting for the clone to move out of the way.
-      public bool rewinding;
-
-      public TimeShiftingState(
-          Root future,
-          int targetAnchorTurnIndex,
-          Location targetAnchorLocation,
-          bool rewinding) {
-        this.future = future;
-        this.targetAnchorTurnIndex = targetAnchorTurnIndex;
-        this.targetAnchorLocation = targetAnchorLocation;
-        this.rewinding = rewinding;
-      }
-    }
-
     //public class NavigatingState {
     //  public readonly List<Location> path;
 
@@ -54,60 +26,22 @@ namespace Atharia.Model {
     public List<IRequest> requests;
     public List<int> anchorTurnIndices;
 
-    // If this is non-null, we are currently timeshifting.
-    public TimeShiftingState timeShiftingState;
-
     //public NavigatingState navigatingState;
 
     public Superstate(
         Game game,
-        LevelSuperstate liveUnitByLocationMap,
+        LevelSuperstate levelSuperstate,
         List<RootIncarnation> previousTurns,
         List<IRequest> requests,
-        List<int> anchorTurnIndices,
-        TimeShiftingState timeShiftingState//,
+        List<int> anchorTurnIndices
         //NavigatingState navigatingState
       ) {
       this.game = game;
-      this.levelSuperstate = liveUnitByLocationMap;
+      this.levelSuperstate = levelSuperstate;
       this.previousTurns = previousTurns;
       this.requests = requests;
       this.anchorTurnIndices = anchorTurnIndices;
-      this.timeShiftingState = timeShiftingState;
       //this.navigatingState = navigatingState;
-    }
-
-    public MultiverseStateType GetStateType() {
-      if (timeShiftingState != null) {
-        if (timeShiftingState.rewinding) {
-          return MultiverseStateType.kTimeshiftingBackward;
-        } else {
-          if (game.actingUnit.Exists()) {
-            return MultiverseStateType.kTimeshiftingCloneMoving;
-          } else {
-            // If this assert fails, that means the old player is still on the anchor,
-            // which is a very bad thing.
-            Asserts.Assert(
-                !game.player.Exists() ||
-                game.player.location != timeShiftingState.targetAnchorLocation);
-            Asserts.Assert(
-                !levelSuperstate.LocationContainsUnit(timeShiftingState.targetAnchorLocation),
-                "Unit already there!");
-
-            return MultiverseStateType.kTimeshiftingAfterCloneMoved;
-          }
-        }
-      } else {
-        if (game.actingUnit.Exists()) {
-          //if (navigatingState != null) {
-          //  return MultiverseStateType.kBeforePlayerResume;
-          //} else {
-            return MultiverseStateType.kBeforePlayerInput;
-          //}
-        } else {
-          return MultiverseStateType.kBetweenUnits;
-        }
-      }
     }
   }
 }

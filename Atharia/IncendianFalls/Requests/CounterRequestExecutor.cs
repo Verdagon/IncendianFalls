@@ -24,9 +24,6 @@ namespace IncendianFalls {
       //if (!game.player.Is(Utils.GetNextActingUnit(game))) {
       //  return "Error: Player not next acting unit! (b)";
       //}
-      if (superstate.timeShiftingState != null) {
-        return "Error: Cannot counter while time shifting!";
-      }
 
       var sorcerous = player.components.GetOnlySorcerousUCOrNull();
       Asserts.Assert(sorcerous != null);

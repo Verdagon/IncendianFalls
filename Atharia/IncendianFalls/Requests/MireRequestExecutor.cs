@@ -21,9 +21,6 @@ namespace IncendianFalls {
       //if (!game.player.Is(Utils.GetNextActingUnit(game))) {
       //  return "Error: Player not next acting unit! (b)";
       //}
-      if (superstate.timeShiftingState != null) {
-        return "Error: Cannot slow while time shifting!";
-      }
 
       if (!game.player.Exists()) {
         throw new Exception("Player is dead!");
