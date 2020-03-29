@@ -15,7 +15,7 @@ namespace AthPlayer {
       IBideAICapabilityUCEffectVisitor,
       ISorcerousUCEffectObserver,
       ISorcerousUCEffectVisitor {
-    bool alive;
+    bool instanceAlive;
     IClock clock;
     ITimer timer;
     SoundPlayer soundPlayer;
@@ -39,8 +39,6 @@ namespace AthPlayer {
     // This will pay attention to the above endTimes and report stalls to the effect staller.
     UnitEffectStaller effectStaller;
 
-    private UnitDescription description;
-
     public UnitPresenter(
       IClock clock,
         ITimer timer,
@@ -52,7 +50,7 @@ namespace AthPlayer {
         Atharia.Model.Terrain terrain,
         Unit unit,
         Instantiator instantiator) {
-      this.alive = true;
+      this.instanceAlive = true;
       this.broadcaster = broadcaster;
       this.timer = timer;
       this.soundPlayer = soundPlayer;
@@ -66,8 +64,6 @@ namespace AthPlayer {
       if (sorcerous.Exists()) {
         sorcerous.AddObserver(broadcaster, this);
       }
-
-      this.description = GetUnitViewDescription(unit);
 
       unitView =
           instantiator.CreateUnitView(
@@ -84,34 +80,45 @@ namespace AthPlayer {
         unit.components.GetOnlyBideAICapabilityUCOrNull().AddObserver(broadcaster, this);
       }
 
-      this.effectStaller = new UnitEffectStaller(clock, previewBroadcaster, this, stallEffect);
+      this.effectStaller = new UnitEffectStaller(previewBroadcaster, this, stallEffect);
     }
 
-    public void DestroyUnitPresenter() {
-      if (unit.Exists()) {
-        if (unit.components.GetOnlyBideAICapabilityUCOrNull().Exists()) {
-          unit.components.GetOnlyBideAICapabilityUCOrNull().RemoveObserver(broadcaster, this);
-        }
+    public (long, UnitView) DestroyUnitPresenter() {
+      Asserts.Assert(instanceAlive);
+      Asserts.Assert(unit.Exists());
 
-        componentsBroadcaster.RemoveObserver(this);
-        componentsBroadcaster.Stop();
+      effectStaller.Destroy();
 
-        var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
-        if (sorcerous.Exists()) {
-          sorcerous.RemoveObserver(broadcaster, this);
-        }
-        unit.RemoveObserver(broadcaster, this);
+      if (unit.components.GetOnlyBideAICapabilityUCOrNull().Exists()) {
+        unit.components.GetOnlyBideAICapabilityUCOrNull().RemoveObserver(broadcaster, this);
       }
 
-      DestroyView();
-      alive = false;
+      componentsBroadcaster.RemoveObserver(this);
+      componentsBroadcaster.Stop();
+
+      var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
+      if (sorcerous.Exists()) {
+        sorcerous.RemoveObserver(broadcaster, this);
+      }
+      unit.RemoveObserver(broadcaster, this);
+
+      long animationsEndTime =
+        Math.Max(hopEndTime,
+          Math.Max(lungeEndTime,
+            Math.Max(runeEndTime,
+              dieEndTime)));
+      if (clock.GetTimeMs() >= animationsEndTime) {
+        unitView.Destruct();
+        unitView = null;
+      }
+
+      instanceAlive = false;
+      return (animationsEndTime, unitView);
     }
 
     public void OnUnitEffect(IUnitEffect effect) {
-      //if (unit.Exists()) {
-      //  description = GetUnitViewDescription(unit);
-      //}
-        effect.visitIUnitEffect(this);
+      Asserts.Assert(instanceAlive); 
+      effect.visitIUnitEffect(this);
     }
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
@@ -128,19 +135,19 @@ namespace AthPlayer {
       //}
     }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) {
-      if (unit.Exists()) {
-        unitView.SetDescription(GetUnitViewDescription(unit));
-      }
+      unitView.SetDescription(GetUnitViewDescription(unit));
     }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) {
       if (effect.newValue != 0) {
-        unitView.GetComponent<UnitView>().StartFadeAnimation(500);
-        dieEndTime = clock.GetTimeMs() + 500;
+        dieEndTime = unitView.Die();
       }
     }
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
-    public void OnSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visitISorcerousUCEffect(this); }
+    public void OnSorcerousUCEffect(ISorcerousUCEffect effect) {
+      Asserts.Assert(instanceAlive); 
+      effect.visitISorcerousUCEffect(this);
+    }
     public void visitSorcerousUCCreateEffect(SorcerousUCCreateEffect effect) { }
     public void visitSorcerousUCDeleteEffect(SorcerousUCDeleteEffect effect) { }
     public void visitSorcerousUCSetMpEffect(SorcerousUCSetMpEffect effect) {
@@ -150,12 +157,10 @@ namespace AthPlayer {
       unitView.SetDescription(GetUnitViewDescription(unit));
     }
 
-    private void DestroyView() {
-      unitView.Destruct();
-      unitView = null;
+    public void OnBideAICapabilityUCEffect(IBideAICapabilityUCEffect effect) {
+      Asserts.Assert(instanceAlive); 
+      effect.visitIBideAICapabilityUCEffect(this);
     }
-
-    public void OnBideAICapabilityUCEffect(IBideAICapabilityUCEffect effect) { effect.visitIBideAICapabilityUCEffect(this); }
     public void visitBideAICapabilityUCCreateEffect(BideAICapabilityUCCreateEffect effect) { }
     public void visitBideAICapabilityUCDeleteEffect(BideAICapabilityUCDeleteEffect effect) { }
     public void visitBideAICapabilityUCSetChargeEffect(BideAICapabilityUCSetChargeEffect effect) {
@@ -789,17 +794,13 @@ namespace AthPlayer {
     }
 
     public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
-
+      Asserts.Assert(instanceAlive);
       if (effect.newValue is UnitAttackEventAsIUnitEvent) {
         var evt = ((UnitAttackEventAsIUnitEvent)effect.newValue).obj;
-        if (!unit.Exists()) {
-          return;
-        }
+        Asserts.Assert(unit.Exists());
         if (evt.attackerId == unit.id) {
           var victim = unit.root.GetUnit(evt.victimId);
-          if (!victim.Exists()) {
-            return;
-          }
+          Asserts.Assert(victim.Exists());
           var victimPosition = game.level.terrain.GetTileCenter(victim.location).ToUnity();
           var attackerPosition = game.level.terrain.GetTileCenter(unit.location).ToUnity();
 
@@ -910,17 +911,14 @@ namespace AthPlayer {
       EffectBroadcaster previewBroadcaster;
       IUnitComponentMutBunchBroadcaster componentsBroadcaster;
       private UnitPresenter unitPresenter;
-      private IClock clock;
       private IEffectStaller staller;
 
       public UnitEffectStaller(
-          IClock clock,
           EffectBroadcaster previewBroadcaster,
           UnitPresenter unitPresenter,
           IEffectStaller staller) {
         this.previewBroadcaster = previewBroadcaster;
         this.unitPresenter = unitPresenter;
-        this.clock = clock;
         this.staller = staller;
 
         previewBroadcaster.AddUnitObserver(unitPresenter.unit.id, this);

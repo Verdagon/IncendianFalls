@@ -378,7 +378,13 @@ namespace Domino {
       return clock.GetTimeMs() + 500;
     }
 
-    public void StartFadeAnimation(long durationMs) {
+
+    public long Die() {
+      StartFadeAnimation(500);
+      return clock.GetTimeMs() + 500;
+    }
+
+    private void StartFadeAnimation(long durationMs) {
       dominoView.Fade(durationMs);
 
       faceSymbolView.Fade(durationMs);

@@ -39,6 +39,7 @@ namespace AthPlayer {
     ShowInstructions showInstructions;
 
     Dictionary<int, UnitPresenter> unitPresenters;
+    List<KeyValuePair<long, UnitView>> doomedUnitViews;
 
     PlayerController playerController;
 
@@ -69,6 +70,7 @@ namespace AthPlayer {
       this.showInstructions = showInstructions;
       this.thinkingIndicator = thinkingIndicator;
       this.cameraController = cameraController;
+      this.doomedUnitViews = new List<KeyValuePair<long, UnitView>>();
 
       Debug.Log("Random seed: " + randomSeed);
       //Debug.LogWarning("Hardcoding random seed!");
@@ -211,8 +213,13 @@ namespace AthPlayer {
           return;
         }
       }
-      this.unitPresenters[unitId].DestroyUnitPresenter();
+      var (animationsEndTime, unitView) =
+        this.unitPresenters[unitId].DestroyUnitPresenter();
       this.unitPresenters.Remove(unitId);
+
+      if (unitView) {
+        doomedUnitViews.Add(new KeyValuePair<long, UnitView>(animationsEndTime, unitView));
+      }
     }
 
     void AddUnit(int unitId) {
@@ -250,8 +257,17 @@ namespace AthPlayer {
     }
 
     private void UnloadLevel() {
+      foreach (var entry in doomedUnitViews) {
+        entry.Value.Destruct();
+      }
+      doomedUnitViews.Clear();
+
       foreach (var entry in unitPresenters) {
-        entry.Value.DestroyUnitPresenter();
+        var (animationsEndTime, unitView) = entry.Value.DestroyUnitPresenter();
+        // Dont care about animation end times, kill it right now.
+        if (unitView != null) {
+          unitView.Destruct();
+        }
       }
       unitPresenters.Clear();
       this.unitPresenters = null;
@@ -334,6 +350,18 @@ namespace AthPlayer {
 
 
     public void Update(UnityEngine.Ray ray) {
+      // We might not clean up every doomed unit view here, thats fine, we'll get em next round.
+      // We only delete until we find the first still-active one.
+      while (doomedUnitViews.Count > 0) {
+        var animationsEndTimeAndDoomedUnitView = doomedUnitViews[0];
+        if (timer.GetTimeMs() >= animationsEndTimeAndDoomedUnitView.Key) {
+          doomedUnitViews.RemoveAt(0);
+          animationsEndTimeAndDoomedUnitView.Value.Destruct();
+        } else {
+          break;
+        }
+      }
+
       ConsumeEffects();
 
       timer.Update();
