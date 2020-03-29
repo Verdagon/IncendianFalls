@@ -138,7 +138,7 @@ namespace AthPlayer {
       LoadLevel();
     }
 
-    private List<IEffect> GetReadyEffects() {
+    private List<IEffect> GetNextChunkOfReadyEffects() {
       var readyEffects = new List<IEffect>();
       if (serverSS.waitingEffects.Count == 0) {
         return readyEffects;
@@ -157,6 +157,11 @@ namespace AthPlayer {
           break;
         }
         readyEffects.Add(serverSS.waitingEffects.Dequeue());
+        // If the last one was an actionNum getting set, then break here, that's the end of the chunk.
+        // we should get the next waiting chunk in the same frame, unless an animation stalls it.
+        if (effect is GameSetActionNumEffect) {
+          break;
+        }
       }
 
       Debug.Log("returning " + readyEffects.Count + " ready effects!");
@@ -164,10 +169,14 @@ namespace AthPlayer {
     }
 
     private void ConsumeEffects() {
-      for (int i = 0; ; i++) {
-        Asserts.Assert(i != 100);
+      float startUnityTime = Time.time;
+      while (true) {
+        if (Time.time - startUnityTime > .2f) {
+          Asserts.Assert(false, "Consuming effects took too long!");
+          break;
+        }
 
-        var readyEffects = GetReadyEffects();
+        var readyEffects = GetNextChunkOfReadyEffects();
 
         if (readyEffects.Count > 0) {
           game.root.Transact(() => {

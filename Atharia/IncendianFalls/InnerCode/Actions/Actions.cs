@@ -34,6 +34,7 @@ namespace IncendianFalls {
       Eventer.broadcastUnitUnleashBideEvent(game.root, game, attacker, victims, otherLocations);
 
       attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(900);
+      game.actionNum++;
     }
 
     public static void Bump(
@@ -74,6 +75,7 @@ namespace IncendianFalls {
           }
         }
       }
+      game.actionNum++;
     }
 
     private static void AttackedInner(
@@ -103,6 +105,7 @@ namespace IncendianFalls {
 
       unit.nextActionTime = unit.nextActionTime + unit.CalculateCombatTimeCost(600);
       Eventer.broadcastUnitDefyingEvent(game.root, game, unit);
+      game.actionNum++;
     }
 
     public static void Mire(
@@ -128,6 +131,7 @@ namespace IncendianFalls {
       attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(600);
       victim.nextActionTime = victim.nextActionTime + delay;
       Eventer.broadcastUnitMiredEvent(game.root, game, attacker, victim);
+      game.actionNum++;
     }
 
     public static void Counter(
@@ -142,6 +146,7 @@ namespace IncendianFalls {
 
       unit.nextActionTime = unit.nextActionTime + unit.CalculateCombatTimeCost(600);
       Eventer.broadcastUnitCounteringEvent(game.root, game, unit);
+      game.actionNum++;
     }
 
     public static string Interact(
@@ -158,6 +163,7 @@ namespace IncendianFalls {
       } else {
         return "Nothing to interact with!";
       }
+      game.actionNum++;
     }
 
     public static bool CanTeleportTo(
@@ -214,6 +220,7 @@ namespace IncendianFalls {
       if (costsTime) {
         unit.nextActionTime = unit.nextActionTime + unit.CalculateMovementTimeCost(600);
       }
+      game.actionNum++;
     }
 
     public static void Evaporate(
@@ -239,6 +246,7 @@ namespace IncendianFalls {
       var sorcerous = attacker.components.GetOnlySorcerousUCOrNull();
       Asserts.Assert(sorcerous != null);
       sorcerous.mp = sorcerous.mp - FIRE_COST;
+      game.actionNum++;
     }
 
     public static void PlaceFireBomb(
@@ -254,6 +262,7 @@ namespace IncendianFalls {
       var sorcerous = attacker.components.GetOnlySorcerousUCOrNull();
       Asserts.Assert(sorcerous != null);
       sorcerous.mp = sorcerous.mp - FIRE_BOMB_COST;
+      game.actionNum++;
     }
 
     public static void ExplodeFireBomb(
@@ -265,6 +274,7 @@ namespace IncendianFalls {
       if (poorSuckerOnThisTile.Exists()) {
         AttackedInner(game, superstate, poorSuckerOnThisTile, FIRE_BOMB_DAMAGE, false);
       }
+      game.actionNum++;
     }
 
     public static void LightningCharge(
@@ -274,6 +284,7 @@ namespace IncendianFalls {
       unit.components.Add(game.root.EffectLightningChargedUCCreate().AsIUnitComponent());
       Eventer.broadcastUnitFireBombedEvent(game.root, game, unit, unit.location);
       AttackedInner(game, superstate, unit, LIGHTNING_CHARGE_DAMAGE, false);
+      game.actionNum++;
     }
   }
 }
