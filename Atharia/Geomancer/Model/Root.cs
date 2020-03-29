@@ -20,6 +20,22 @@ public struct VersionAndIncarnation<T> {
   }
 }
 
+public delegate void IEffectObserver(IEffect effect);
+
+public interface IEffect {
+  void visitIEffect(IEffectVisitor visitor);
+}
+
+public interface IEffectVisitor {
+void visitTerrainTileEffect(ITerrainTileEffect effect);
+void visitTerrainEffect(ITerrainEffect effect);
+void visitLevelEffect(ILevelEffect effect);
+void visitRandEffect(IRandEffect effect);
+void visitStrMutListEffect(IStrMutListEffect effect);
+void visitTerrainTileByLocationMutMapEffect(ITerrainTileByLocationMutMapEffect effect);
+
+}
+
 public class Root {
   private static readonly int VERSION_HASH_MULTIPLIER = 179424673;
   private static readonly int NEXT_ID_HASH_MULTIPLIER = 373587883;
@@ -32,6 +48,8 @@ public class Root {
 
   public readonly ILogger logger;
 
+  public List<IEffectObserver> effectObservers;
+
   // This *always* points to a live RootIncarnation. When we snapshot, we eagerly
   // make a new one of these.
   private RootIncarnation rootIncarnation;
@@ -39,63 +57,9 @@ public class Root {
   bool locked;
 
   // 0 means everything
-
-  readonly SortedDictionary<int, List<ITerrainTileEffectObserver>> observersForTerrainTile =
-      new SortedDictionary<int, List<ITerrainTileEffectObserver>>();
-  readonly List<TerrainTileCreateEffect> effectsTerrainTileCreateEffect =
-      new List<TerrainTileCreateEffect>();
-  readonly List<TerrainTileDeleteEffect> effectsTerrainTileDeleteEffect =
-      new List<TerrainTileDeleteEffect>();
-  readonly List<TerrainTileSetElevationEffect> effectsTerrainTileSetElevationEffect =
-      new List<TerrainTileSetElevationEffect>();
-
-  readonly SortedDictionary<int, List<ITerrainEffectObserver>> observersForTerrain =
-      new SortedDictionary<int, List<ITerrainEffectObserver>>();
-  readonly List<TerrainCreateEffect> effectsTerrainCreateEffect =
-      new List<TerrainCreateEffect>();
-  readonly List<TerrainDeleteEffect> effectsTerrainDeleteEffect =
-      new List<TerrainDeleteEffect>();
-
-  readonly SortedDictionary<int, List<ILevelEffectObserver>> observersForLevel =
-      new SortedDictionary<int, List<ILevelEffectObserver>>();
-  readonly List<LevelCreateEffect> effectsLevelCreateEffect =
-      new List<LevelCreateEffect>();
-  readonly List<LevelDeleteEffect> effectsLevelDeleteEffect =
-      new List<LevelDeleteEffect>();
-
-  readonly SortedDictionary<int, List<IRandEffectObserver>> observersForRand =
-      new SortedDictionary<int, List<IRandEffectObserver>>();
-  readonly List<RandCreateEffect> effectsRandCreateEffect =
-      new List<RandCreateEffect>();
-  readonly List<RandDeleteEffect> effectsRandDeleteEffect =
-      new List<RandDeleteEffect>();
-  readonly List<RandSetRandEffect> effectsRandSetRandEffect =
-      new List<RandSetRandEffect>();
-
-  readonly SortedDictionary<int, List<IStrMutListEffectObserver>> observersForStrMutList =
-      new SortedDictionary<int, List<IStrMutListEffectObserver>>();
-  readonly List<StrMutListCreateEffect> effectsStrMutListCreateEffect =
-      new List<StrMutListCreateEffect>();
-  readonly List<StrMutListDeleteEffect> effectsStrMutListDeleteEffect =
-      new List<StrMutListDeleteEffect>();
-  readonly List<StrMutListAddEffect> effectsStrMutListAddEffect =
-      new List<StrMutListAddEffect>();
-  readonly List<StrMutListRemoveEffect> effectsStrMutListRemoveEffect =
-      new List<StrMutListRemoveEffect>();
-
-  readonly SortedDictionary<int, List<ITerrainTileByLocationMutMapEffectObserver>> observersForTerrainTileByLocationMutMap =
-      new SortedDictionary<int, List<ITerrainTileByLocationMutMapEffectObserver>>();
-  readonly List<TerrainTileByLocationMutMapCreateEffect> effectsTerrainTileByLocationMutMapCreateEffect =
-      new List<TerrainTileByLocationMutMapCreateEffect>();
-  readonly List<TerrainTileByLocationMutMapDeleteEffect> effectsTerrainTileByLocationMutMapDeleteEffect =
-      new List<TerrainTileByLocationMutMapDeleteEffect>();
-  readonly List<TerrainTileByLocationMutMapAddEffect> effectsTerrainTileByLocationMutMapAddEffect =
-      new List<TerrainTileByLocationMutMapAddEffect>();
-  readonly List<TerrainTileByLocationMutMapRemoveEffect> effectsTerrainTileByLocationMutMapRemoveEffect =
-      new List<TerrainTileByLocationMutMapRemoveEffect>();
-
   public Root(ILogger logger) {
     this.logger = logger;
+    this.effectObservers = new List<IEffectObserver>();
     int initialVersion = 1;
     int initialNextId = 1;
     int initialHash = VERSION_HASH_MULTIPLIER * initialVersion + NEXT_ID_HASH_MULTIPLIER * initialNextId;
@@ -113,6 +77,20 @@ public class Root {
 
   public int version { get { return rootIncarnation.version; } }
 
+  public void AddObserver(IEffectObserver obs) {
+    effectObservers.Add(obs);
+  }
+
+  public void RemoveObserver(IEffectObserver obs) {
+    effectObservers.Remove(obs);
+  }
+
+  private void NotifyEffect(IEffect effect) {
+    foreach (var obs in effectObservers) {
+      obs(effect);
+    }
+  }
+
   public RootIncarnation Snapshot() {
     CheckUnlocked();
     RootIncarnation oldIncarnation = rootIncarnation;
@@ -126,7 +104,7 @@ public class Root {
 
   public delegate T ITransaction<T>();
 
-  public T Transact<T>(ITransaction<T> transaction) {
+  public (List<IEffect>, T) Transact<T>(ITransaction<T> transaction) {
     var stopwatch = new System.Diagnostics.Stopwatch();
     stopwatch.Start();
 
@@ -135,14 +113,21 @@ public class Root {
     }
     locked = false;
     // var rollbackPoint = Snapshot();
+
+    var effects = new List<IEffect>();
+    IEffectObserver effectObserver = (effect) => effects.Add(effect);
+    AddObserver(effectObserver);
+
     try {
-      return transaction();
+      var result = transaction();
+      return (effects, result);
     } catch (Exception e) {
       // logger.Error("Rolling back because of error: " + e.Message + "\n" + e.StackTrace);
       // Revert(rollbackPoint);
       logger.Error("Encountered error in transaction: " + e.Message + "\n" + e.StackTrace);
       throw;
     } finally {
+      RemoveObserver(effectObserver);
       if (locked) {
         logger.Error("Can't lock, already locked!");
         Environment.Exit(1);
@@ -151,8 +136,9 @@ public class Root {
       // CheckForViolations();
 
       stopwatch.Stop();
-      logger.Info("Transaction run time " + stopwatch.Elapsed.TotalMilliseconds);
-      FlushEvents();
+      var calculationDuration = stopwatch.Elapsed.TotalMilliseconds;
+
+      logger.Info("Transaction run time " + calculationDuration);
     }
   }
 
@@ -272,96 +258,6 @@ public class Root {
     }
   }
 
-  public void FlushEvents() {
-
-
-
-    var copyOfObserversForTerrainTile =
-        new SortedDictionary<int, List<ITerrainTileEffectObserver>>();
-    foreach (var entry in observersForTerrainTile) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForTerrainTile.Add(
-          objectId,
-          new List<ITerrainTileEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForTerrain =
-        new SortedDictionary<int, List<ITerrainEffectObserver>>();
-    foreach (var entry in observersForTerrain) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForTerrain.Add(
-          objectId,
-          new List<ITerrainEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForLevel =
-        new SortedDictionary<int, List<ILevelEffectObserver>>();
-    foreach (var entry in observersForLevel) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForLevel.Add(
-          objectId,
-          new List<ILevelEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForRand =
-        new SortedDictionary<int, List<IRandEffectObserver>>();
-    foreach (var entry in observersForRand) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForRand.Add(
-          objectId,
-          new List<IRandEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForStrMutList =
-        new SortedDictionary<int, List<IStrMutListEffectObserver>>();
-    foreach (var entry in observersForStrMutList) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForStrMutList.Add(
-          objectId,
-          new List<IStrMutListEffectObserver>(
-              observers));
-    }
-
-    var copyOfObserversForTerrainTileByLocationMutMap =
-        new SortedDictionary<int, List<ITerrainTileByLocationMutMapEffectObserver>>();
-    foreach (var entry in observersForTerrainTileByLocationMutMap) {
-      var objectId = entry.Key;
-      var observers = entry.Value;
-      copyOfObserversForTerrainTileByLocationMutMap.Add(
-          objectId,
-          new List<ITerrainTileByLocationMutMapEffectObserver>(
-              observers));
-    }
-
-    BroadcastTerrainTileEffects(
-        copyOfObserversForTerrainTile);
-           
-    BroadcastTerrainEffects(
-        copyOfObserversForTerrain);
-           
-    BroadcastLevelEffects(
-        copyOfObserversForLevel);
-           
-    BroadcastRandEffects(
-        copyOfObserversForRand);
-           
-    BroadcastStrMutListEffects(
-        copyOfObserversForStrMutList);
-           
-    BroadcastTerrainTileByLocationMutMapEffects(
-        copyOfObserversForTerrainTileByLocationMutMap);
-           
-  }
-
   public int GetDeterministicHashCode() {
     // int doubleCheckHash = RecalculateEntireHash();
     // Asserts.Assert(doubleCheckHash == this.rootIncarnation.hash);
@@ -450,8 +346,8 @@ public class Root {
             for (int i = currentObjIncarnation.list.Count - 1; i >= 0; i--) {
               EffectStrMutListRemoveAt(objId, i);
             }
-            foreach (var objIdInSourceObjIncarnation in sourceObjIncarnation.list) {
-              EffectStrMutListAdd(objId, objIdInSourceObjIncarnation);
+            for (int i = 0; i < sourceObjIncarnation.list.Count; i++) {
+              EffectStrMutListAdd(objId, i, sourceObjIncarnation.list[i]);
             }
             // Swap out the underlying incarnation. The only visible effect this has is
             // changing the version number.
@@ -637,7 +533,15 @@ public class Root {
     return rootIncarnation.incarnationsTerrainTile.ContainsKey(id);
   }
   public TerrainTile GetTerrainTile(int id) {
+    CheckHasTerrainTile(id);
     return new TerrainTile(this, id);
+  }
+  public TerrainTile GetTerrainTileOrNull(int id) {
+    if (TerrainTileExists(id)) {
+      return new TerrainTile(this, id);
+    } else {
+      return new TerrainTile(this, 0);
+    }
   }
   public List<TerrainTile> AllTerrainTile() {
     List<TerrainTile> result = new List<TerrainTile>(rootIncarnation.incarnationsTerrainTile.Count);
@@ -660,26 +564,6 @@ public class Root {
       throw new System.Exception("Invalid TerrainTile: " + id);
     }
   }
-  public void AddTerrainTileObserver(int id, ITerrainTileEffectObserver observer) {
-    List<ITerrainTileEffectObserver> obsies;
-    if (!observersForTerrainTile.TryGetValue(id, out obsies)) {
-      obsies = new List<ITerrainTileEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForTerrainTile[id] = obsies;
-  }
-
-  public void RemoveTerrainTileObserver(int id, ITerrainTileEffectObserver observer) {
-    if (observersForTerrainTile.ContainsKey(id)) {
-      var list = observersForTerrainTile[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForTerrainTile.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
   public TerrainTile EffectTerrainTileCreate(
       int elevation,
       StrMutList members) {
@@ -700,13 +584,13 @@ public class Root {
       int incarnationVersion,
       TerrainTileIncarnation incarnation) {
     CheckUnlocked();
-    var effect = new TerrainTileCreateEffect(id);
+    var effect = new TerrainTileCreateEffect(id, incarnation.Copy());
     rootIncarnation.incarnationsTerrainTile.Add(
         id,
         new VersionAndIncarnation<TerrainTileIncarnation>(
             incarnationVersion,
             incarnation));
-    effectsTerrainTileCreateEffect.Add(effect);
+    NotifyEffect(effect);
   }
 
   public void EffectTerrainTileDelete(int id) {
@@ -717,7 +601,7 @@ public class Root {
         rootIncarnation.incarnationsTerrainTile[id];
 
     rootIncarnation.incarnationsTerrainTile.Remove(id);
-    effectsTerrainTileDeleteEffect.Add(effect);
+    NotifyEffect(effect);
   }
 
      
@@ -728,57 +612,10 @@ public class Root {
     return result;
   }
      
-  public void BroadcastTerrainTileEffects(
-      SortedDictionary<int, List<ITerrainTileEffectObserver>> observers) {
-    foreach (var effect in effectsTerrainTileDeleteEffect) {
-      if (observers.TryGetValue(0, out List<ITerrainTileEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainTileEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITerrainTileEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainTileEffect(effect);
-        }
-        observersForTerrainTile.Remove(effect.id);
-      }
-    }
-    effectsTerrainTileDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsTerrainTileSetElevationEffect) {
-      if (observers.TryGetValue(0, out List<ITerrainTileEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainTileEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITerrainTileEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainTileEffect(effect);
-        }
-      }
-    }
-    effectsTerrainTileSetElevationEffect.Clear();
-
-    foreach (var effect in effectsTerrainTileCreateEffect) {
-      if (observers.TryGetValue(0, out List<ITerrainTileEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainTileEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITerrainTileEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainTileEffect(effect);
-        }
-      }
-    }
-    effectsTerrainTileCreateEffect.Clear();
-  }
-
   public void EffectTerrainTileSetElevation(int id, int newValue) {
     CheckUnlocked();
     CheckHasTerrainTile(id);
-    var effect = new TerrainTileSetElevationEffect(id, newValue);
+var effect = new TerrainTileSetElevationEffect(id, newValue);
     var oldIncarnationAndVersion = rootIncarnation.incarnationsTerrainTile[id];
     if (oldIncarnationAndVersion.version == rootIncarnation.version) {
       var oldValue = oldIncarnationAndVersion.incarnation.elevation;
@@ -795,7 +632,7 @@ public class Root {
               newIncarnation);
     }
 
-    effectsTerrainTileSetElevationEffect.Add(effect);
+    NotifyEffect(effect);
   }
   public TerrainIncarnation GetTerrainIncarnation(int id) {
     if (id == 0) {
@@ -807,7 +644,15 @@ public class Root {
     return rootIncarnation.incarnationsTerrain.ContainsKey(id);
   }
   public Terrain GetTerrain(int id) {
+    CheckHasTerrain(id);
     return new Terrain(this, id);
+  }
+  public Terrain GetTerrainOrNull(int id) {
+    if (TerrainExists(id)) {
+      return new Terrain(this, id);
+    } else {
+      return new Terrain(this, 0);
+    }
   }
   public List<Terrain> AllTerrain() {
     List<Terrain> result = new List<Terrain>(rootIncarnation.incarnationsTerrain.Count);
@@ -828,26 +673,6 @@ public class Root {
   public void CheckHasTerrain(int id) {
     if (!rootIncarnation.incarnationsTerrain.ContainsKey(id)) {
       throw new System.Exception("Invalid Terrain: " + id);
-    }
-  }
-  public void AddTerrainObserver(int id, ITerrainEffectObserver observer) {
-    List<ITerrainEffectObserver> obsies;
-    if (!observersForTerrain.TryGetValue(id, out obsies)) {
-      obsies = new List<ITerrainEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForTerrain[id] = obsies;
-  }
-
-  public void RemoveTerrainObserver(int id, ITerrainEffectObserver observer) {
-    if (observersForTerrain.ContainsKey(id)) {
-      var list = observersForTerrain[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForTerrain.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
     }
   }
   public Terrain EffectTerrainCreate(
@@ -872,13 +697,13 @@ public class Root {
       int incarnationVersion,
       TerrainIncarnation incarnation) {
     CheckUnlocked();
-    var effect = new TerrainCreateEffect(id);
+    var effect = new TerrainCreateEffect(id, incarnation.Copy());
     rootIncarnation.incarnationsTerrain.Add(
         id,
         new VersionAndIncarnation<TerrainIncarnation>(
             incarnationVersion,
             incarnation));
-    effectsTerrainCreateEffect.Add(effect);
+    NotifyEffect(effect);
   }
 
   public void EffectTerrainDelete(int id) {
@@ -889,7 +714,7 @@ public class Root {
         rootIncarnation.incarnationsTerrain[id];
 
     rootIncarnation.incarnationsTerrain.Remove(id);
-    effectsTerrainDeleteEffect.Add(effect);
+    NotifyEffect(effect);
   }
 
      
@@ -900,40 +725,7 @@ public class Root {
     result += id * version * 3 * incarnation.tiles.GetDeterministicHashCode();
     return result;
   }
-     
-  public void BroadcastTerrainEffects(
-      SortedDictionary<int, List<ITerrainEffectObserver>> observers) {
-    foreach (var effect in effectsTerrainDeleteEffect) {
-      if (observers.TryGetValue(0, out List<ITerrainEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITerrainEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainEffect(effect);
-        }
-        observersForTerrain.Remove(effect.id);
-      }
-    }
-    effectsTerrainDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsTerrainCreateEffect) {
-      if (observers.TryGetValue(0, out List<ITerrainEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITerrainEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainEffect(effect);
-        }
-      }
-    }
-    effectsTerrainCreateEffect.Clear();
-  }
-  public LevelIncarnation GetLevelIncarnation(int id) {
+       public LevelIncarnation GetLevelIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
     }
@@ -943,7 +735,15 @@ public class Root {
     return rootIncarnation.incarnationsLevel.ContainsKey(id);
   }
   public Level GetLevel(int id) {
+    CheckHasLevel(id);
     return new Level(this, id);
+  }
+  public Level GetLevelOrNull(int id) {
+    if (LevelExists(id)) {
+      return new Level(this, id);
+    } else {
+      return new Level(this, 0);
+    }
   }
   public List<Level> AllLevel() {
     List<Level> result = new List<Level>(rootIncarnation.incarnationsLevel.Count);
@@ -966,26 +766,6 @@ public class Root {
       throw new System.Exception("Invalid Level: " + id);
     }
   }
-  public void AddLevelObserver(int id, ILevelEffectObserver observer) {
-    List<ILevelEffectObserver> obsies;
-    if (!observersForLevel.TryGetValue(id, out obsies)) {
-      obsies = new List<ILevelEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForLevel[id] = obsies;
-  }
-
-  public void RemoveLevelObserver(int id, ILevelEffectObserver observer) {
-    if (observersForLevel.ContainsKey(id)) {
-      var list = observersForLevel[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForLevel.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
   public Level EffectLevelCreate(
       Terrain terrain) {
     CheckUnlocked();
@@ -1004,13 +784,13 @@ public class Root {
       int incarnationVersion,
       LevelIncarnation incarnation) {
     CheckUnlocked();
-    var effect = new LevelCreateEffect(id);
+    var effect = new LevelCreateEffect(id, incarnation.Copy());
     rootIncarnation.incarnationsLevel.Add(
         id,
         new VersionAndIncarnation<LevelIncarnation>(
             incarnationVersion,
             incarnation));
-    effectsLevelCreateEffect.Add(effect);
+    NotifyEffect(effect);
   }
 
   public void EffectLevelDelete(int id) {
@@ -1021,7 +801,7 @@ public class Root {
         rootIncarnation.incarnationsLevel[id];
 
     rootIncarnation.incarnationsLevel.Remove(id);
-    effectsLevelDeleteEffect.Add(effect);
+    NotifyEffect(effect);
   }
 
      
@@ -1030,40 +810,7 @@ public class Root {
     result += id * version * 1 * incarnation.terrain.GetDeterministicHashCode();
     return result;
   }
-     
-  public void BroadcastLevelEffects(
-      SortedDictionary<int, List<ILevelEffectObserver>> observers) {
-    foreach (var effect in effectsLevelDeleteEffect) {
-      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnLevelEffect(effect);
-        }
-        observersForLevel.Remove(effect.id);
-      }
-    }
-    effectsLevelDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsLevelCreateEffect) {
-      if (observers.TryGetValue(0, out List<ILevelEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ILevelEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnLevelEffect(effect);
-        }
-      }
-    }
-    effectsLevelCreateEffect.Clear();
-  }
-  public RandIncarnation GetRandIncarnation(int id) {
+       public RandIncarnation GetRandIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
     }
@@ -1073,7 +820,15 @@ public class Root {
     return rootIncarnation.incarnationsRand.ContainsKey(id);
   }
   public Rand GetRand(int id) {
+    CheckHasRand(id);
     return new Rand(this, id);
+  }
+  public Rand GetRandOrNull(int id) {
+    if (RandExists(id)) {
+      return new Rand(this, id);
+    } else {
+      return new Rand(this, 0);
+    }
   }
   public List<Rand> AllRand() {
     List<Rand> result = new List<Rand>(rootIncarnation.incarnationsRand.Count);
@@ -1096,26 +851,6 @@ public class Root {
       throw new System.Exception("Invalid Rand: " + id);
     }
   }
-  public void AddRandObserver(int id, IRandEffectObserver observer) {
-    List<IRandEffectObserver> obsies;
-    if (!observersForRand.TryGetValue(id, out obsies)) {
-      obsies = new List<IRandEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForRand[id] = obsies;
-  }
-
-  public void RemoveRandObserver(int id, IRandEffectObserver observer) {
-    if (observersForRand.ContainsKey(id)) {
-      var list = observersForRand[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForRand.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
   public Rand EffectRandCreate(
       int rand) {
     CheckUnlocked();
@@ -1133,13 +868,13 @@ public class Root {
       int incarnationVersion,
       RandIncarnation incarnation) {
     CheckUnlocked();
-    var effect = new RandCreateEffect(id);
+    var effect = new RandCreateEffect(id, incarnation.Copy());
     rootIncarnation.incarnationsRand.Add(
         id,
         new VersionAndIncarnation<RandIncarnation>(
             incarnationVersion,
             incarnation));
-    effectsRandCreateEffect.Add(effect);
+    NotifyEffect(effect);
   }
 
   public void EffectRandDelete(int id) {
@@ -1150,7 +885,7 @@ public class Root {
         rootIncarnation.incarnationsRand[id];
 
     rootIncarnation.incarnationsRand.Remove(id);
-    effectsRandDeleteEffect.Add(effect);
+    NotifyEffect(effect);
   }
 
      
@@ -1160,57 +895,10 @@ public class Root {
     return result;
   }
      
-  public void BroadcastRandEffects(
-      SortedDictionary<int, List<IRandEffectObserver>> observers) {
-    foreach (var effect in effectsRandDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IRandEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnRandEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IRandEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnRandEffect(effect);
-        }
-        observersForRand.Remove(effect.id);
-      }
-    }
-    effectsRandDeleteEffect.Clear();
-
-
-    foreach (var effect in effectsRandSetRandEffect) {
-      if (observers.TryGetValue(0, out List<IRandEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnRandEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IRandEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnRandEffect(effect);
-        }
-      }
-    }
-    effectsRandSetRandEffect.Clear();
-
-    foreach (var effect in effectsRandCreateEffect) {
-      if (observers.TryGetValue(0, out List<IRandEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnRandEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IRandEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnRandEffect(effect);
-        }
-      }
-    }
-    effectsRandCreateEffect.Clear();
-  }
-
   public void EffectRandSetRand(int id, int newValue) {
     CheckUnlocked();
     CheckHasRand(id);
-    var effect = new RandSetRandEffect(id, newValue);
+var effect = new RandSetRandEffect(id, newValue);
     var oldIncarnationAndVersion = rootIncarnation.incarnationsRand[id];
     if (oldIncarnationAndVersion.version == rootIncarnation.version) {
       var oldValue = oldIncarnationAndVersion.incarnation.rand;
@@ -1226,7 +914,7 @@ public class Root {
               newIncarnation);
     }
 
-    effectsRandSetRandEffect.Add(effect);
+    NotifyEffect(effect);
   }
 
     public int GetStrMutListHash(int id, int version, StrMutListIncarnation incarnation) {
@@ -1240,7 +928,15 @@ public class Root {
       return rootIncarnation.incarnationsStrMutList[id].incarnation;
     }
     public StrMutList GetStrMutList(int id) {
+      CheckHasStrMutList(id);
       return new StrMutList(this, id);
+    }
+    public StrMutList GetStrMutListOrNull(int id) {
+      if (StrMutListExists(id)) {
+        return new StrMutList(this, id);
+      } else {
+        return new StrMutList(this, 0);
+      }
     }
     public List<StrMutList> AllStrMutList() {
       List<StrMutList> result = new List<StrMutList>(rootIncarnation.incarnationsStrMutList.Count);
@@ -1264,14 +960,16 @@ public class Root {
     public StrMutList EffectStrMutListCreate() {
       CheckUnlocked();
       var id = NewId();
+      Asserts.Assert(!rootIncarnation.incarnationsStrMutList.ContainsKey(id));
       EffectInternalCreateStrMutList(id, rootIncarnation.version, new StrMutListIncarnation(new List<string>()));
       return new StrMutList(this, id);
     }
     public StrMutList EffectStrMutListCreate(IEnumerable<string> elements) {
-      var id = NewId();
-      var incarnation = new StrMutListIncarnation(new List<string>(elements));
-      EffectInternalCreateStrMutList(id, rootIncarnation.version, incarnation);
-      return new StrMutList(this, id);
+      var list = EffectStrMutListCreate();
+      foreach (var element in elements) {
+        list.Add(element);
+      }
+      return list;
     }
     public void EffectInternalCreateStrMutList(int id, int incarnationVersion, StrMutListIncarnation incarnation) {
       var effect = new StrMutListCreateEffect(id);
@@ -1281,36 +979,37 @@ public class Root {
               new VersionAndIncarnation<StrMutListIncarnation>(
                   incarnationVersion,
                   incarnation));
-      effectsStrMutListCreateEffect.Add(effect);
+      NotifyEffect(effect);
     }
     public void EffectStrMutListDelete(int id) {
       CheckUnlocked();
       var effect = new StrMutListDeleteEffect(id);
-      effectsStrMutListDeleteEffect.Add(effect);
+      NotifyEffect(effect);
       var versionAndIncarnation = rootIncarnation.incarnationsStrMutList[id];
       rootIncarnation.incarnationsStrMutList.Remove(id);
     }
-    public void EffectStrMutListAdd(int listId, string element) {
+    public void EffectStrMutListAdd(int listId, int addIndex, string element) {
       CheckUnlocked();
       CheckHasStrMutList(listId);
 
     
-      var effect = new StrMutListAddEffect(listId, element);
 
       var oldIncarnationAndVersion = rootIncarnation.incarnationsStrMutList[listId];
+      var effect = new StrMutListAddEffect(listId, addIndex, element);
+
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        oldIncarnationAndVersion.incarnation.list.Add(element);
+        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, element);
       } else {
         var oldMap = oldIncarnationAndVersion.incarnation.list;
         var newMap = new List<string>(oldMap);
-        newMap.Add(element);
+        newMap.Insert(addIndex, element);
         var newIncarnation = new StrMutListIncarnation(newMap);
         rootIncarnation.incarnationsStrMutList[listId] =
             new VersionAndIncarnation<StrMutListIncarnation>(
                 rootIncarnation.version,
                 newIncarnation);
       }
-      effectsStrMutListAddEffect.Add(effect);
+      NotifyEffect(effect);
     }
     public void EffectStrMutListRemoveAt(int listId, int index) {
       CheckUnlocked();
@@ -1318,9 +1017,12 @@ public class Root {
 
       var effect = new StrMutListRemoveEffect(listId, index);
 
+
       var oldIncarnationAndVersion = rootIncarnation.incarnationsStrMutList[listId];
+      // Check that its there
+      var oldElement = oldIncarnationAndVersion.incarnation.list[index];
+
       if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-        var oldElement = oldIncarnationAndVersion.incarnation.list[index];
         oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
       } else {
         var oldMap = oldIncarnationAndVersion.incarnation.list;
@@ -1332,91 +1034,9 @@ public class Root {
                 rootIncarnation.version, newIncarnation);
 
       }
-      effectsStrMutListRemoveEffect.Add(effect);
+      NotifyEffect(effect);
     }
        
-    public void AddStrMutListObserver(int id, IStrMutListEffectObserver observer) {
-      List<IStrMutListEffectObserver> obsies;
-      if (!observersForStrMutList.TryGetValue(id, out obsies)) {
-        obsies = new List<IStrMutListEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForStrMutList[id] = obsies;
-    }
-
-    public void RemoveStrMutListObserver(int id, IStrMutListEffectObserver observer) {
-      if (observersForStrMutList.ContainsKey(id)) {
-        var list = observersForStrMutList[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForStrMutList.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-  public void BroadcastStrMutListEffects(
-      SortedDictionary<int, List<IStrMutListEffectObserver>> observers) {
-    foreach (var effect in effectsStrMutListDeleteEffect) {
-      if (observers.TryGetValue(0, out List<IStrMutListEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnStrMutListEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IStrMutListEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnStrMutListEffect(effect);
-        }
-        observersForStrMutList.Remove(effect.id);
-      }
-    }
-    effectsStrMutListDeleteEffect.Clear();
-
-    foreach (var effect in effectsStrMutListAddEffect) {
-      if (observers.TryGetValue(0, out List<IStrMutListEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnStrMutListEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IStrMutListEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnStrMutListEffect(effect);
-        }
-      }
-    }
-    effectsStrMutListAddEffect.Clear();
-
-    foreach (var effect in effectsStrMutListRemoveEffect) {
-      if (observers.TryGetValue(0, out List<IStrMutListEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnStrMutListEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IStrMutListEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnStrMutListEffect(effect);
-        }
-      }
-    }
-    effectsStrMutListRemoveEffect.Clear();
-
-    foreach (var effect in effectsStrMutListCreateEffect) {
-      if (observers.TryGetValue(0, out List<IStrMutListEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnStrMutListEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<IStrMutListEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnStrMutListEffect(effect);
-        }
-      }
-    }
-    effectsStrMutListCreateEffect.Clear();
-
-  }
-
     public int GetTerrainTileByLocationMutMapHash(int id, int version, TerrainTileByLocationMutMapIncarnation incarnation) {
       int result = id * version;
       foreach (var entry in incarnation.map) {
@@ -1452,6 +1072,7 @@ public class Root {
     public TerrainTileByLocationMutMap EffectTerrainTileByLocationMutMapCreate() {
       CheckUnlocked();
       var id = NewId();
+      Asserts.Assert(!rootIncarnation.incarnationsTerrainTileByLocationMutMap.ContainsKey(id));
       EffectInternalCreateTerrainTileByLocationMutMap(
           id,
           rootIncarnation.version,
@@ -1468,12 +1089,12 @@ public class Root {
               new VersionAndIncarnation<TerrainTileByLocationMutMapIncarnation>(
                   incarnationVersion,
                   incarnation));
-      effectsTerrainTileByLocationMutMapCreateEffect.Add(effect);
+      NotifyEffect(effect);
     }
     public void EffectTerrainTileByLocationMutMapDelete(int id) {
       CheckUnlocked();
       var effect = new TerrainTileByLocationMutMapDeleteEffect(id);
-      effectsTerrainTileByLocationMutMapDeleteEffect.Add(effect);
+      NotifyEffect(effect);
       var versionAndIncarnation = rootIncarnation.incarnationsTerrainTileByLocationMutMap[id];
       rootIncarnation.incarnationsTerrainTileByLocationMutMap.Remove(id);
     }
@@ -1500,7 +1121,7 @@ public class Root {
                 rootIncarnation.version,
                 newIncarnation);
       }
-      effectsTerrainTileByLocationMutMapAddEffect.Add(effect);
+      NotifyEffect(effect);
     }
        
     public void EffectTerrainTileByLocationMutMapRemove(int mapId, Location key) {
@@ -1525,89 +1146,8 @@ public class Root {
             new VersionAndIncarnation<TerrainTileByLocationMutMapIncarnation>(
                 rootIncarnation.version, newIncarnation);
       }
-      effectsTerrainTileByLocationMutMapRemoveEffect.Add(effect);
+      NotifyEffect(effect);
     }
-    public void AddTerrainTileByLocationMutMapObserver(int id, ITerrainTileByLocationMutMapEffectObserver observer) {
-      List<ITerrainTileByLocationMutMapEffectObserver> obsies;
-      if (!observersForTerrainTileByLocationMutMap.TryGetValue(id, out obsies)) {
-        obsies = new List<ITerrainTileByLocationMutMapEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForTerrainTileByLocationMutMap[id] = obsies;
-    }
-
-    public void RemoveTerrainTileByLocationMutMapObserver(int id, ITerrainTileByLocationMutMapEffectObserver observer) {
-      if (observersForTerrainTileByLocationMutMap.ContainsKey(id)) {
-        var map = observersForTerrainTileByLocationMutMap[id];
-        map.Remove(observer);
-        if (map.Count == 0) {
-          observersForTerrainTileByLocationMutMap.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-  public void BroadcastTerrainTileByLocationMutMapEffects(
-      SortedDictionary<int, List<ITerrainTileByLocationMutMapEffectObserver>> observers) {
-    foreach (var effect in effectsTerrainTileByLocationMutMapDeleteEffect) {
-      if (observers.TryGetValue(0, out List<ITerrainTileByLocationMutMapEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainTileByLocationMutMapEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITerrainTileByLocationMutMapEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainTileByLocationMutMapEffect(effect);
-        }
-        observersForTerrainTileByLocationMutMap.Remove(effect.id);
-      }
-    }
-    effectsTerrainTileByLocationMutMapDeleteEffect.Clear();
-
-    foreach (var effect in effectsTerrainTileByLocationMutMapAddEffect) {
-      if (observers.TryGetValue(0, out List<ITerrainTileByLocationMutMapEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainTileByLocationMutMapEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITerrainTileByLocationMutMapEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainTileByLocationMutMapEffect(effect);
-        }
-      }
-    }
-    effectsTerrainTileByLocationMutMapAddEffect.Clear();
-
-    foreach (var effect in effectsTerrainTileByLocationMutMapRemoveEffect) {
-      if (observers.TryGetValue(0, out List<ITerrainTileByLocationMutMapEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainTileByLocationMutMapEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITerrainTileByLocationMutMapEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainTileByLocationMutMapEffect(effect);
-        }
-      }
-    }
-    effectsTerrainTileByLocationMutMapRemoveEffect.Clear();
-
-    foreach (var effect in effectsTerrainTileByLocationMutMapCreateEffect) {
-      if (observers.TryGetValue(0, out List<ITerrainTileByLocationMutMapEffectObserver> globalObservers)) {
-        foreach (var observer in globalObservers) {
-          observer.OnTerrainTileByLocationMutMapEffect(effect);
-        }
-      }
-      if (observers.TryGetValue(effect.id, out List<ITerrainTileByLocationMutMapEffectObserver> objObservers)) {
-        foreach (var observer in objObservers) {
-          observer.OnTerrainTileByLocationMutMapEffect(effect);
-        }
-      }
-    }
-    effectsTerrainTileByLocationMutMapCreateEffect.Clear();
-
-  }
 }
 
 }

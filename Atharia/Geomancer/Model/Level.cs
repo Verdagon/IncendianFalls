@@ -13,11 +13,11 @@ public class Level {
     this.id = id;
   }
   public LevelIncarnation incarnation { get { return root.GetLevelIncarnation(id); } }
-  public void AddObserver(ILevelEffectObserver observer) {
-    root.AddLevelObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ILevelEffectObserver observer) {
+    broadcaster.AddLevelObserver(id, observer);
   }
-  public void RemoveObserver(ILevelEffectObserver observer) {
-    root.RemoveLevelObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ILevelEffectObserver observer) {
+    broadcaster.RemoveLevelObserver(id, observer);
   }
   public void Delete() {
     root.EffectLevelDelete(id);

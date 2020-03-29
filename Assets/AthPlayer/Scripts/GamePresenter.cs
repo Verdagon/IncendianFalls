@@ -9,7 +9,12 @@ namespace AthPlayer {
   public delegate void OnLocationHovered(Location location);
   public delegate void OnLocationClicked(Location location);
 
-  public class GamePresenter : IGameEffectVisitor, IGameEffectObserver, IUnitMutSetEffectVisitor, IUnitMutSetEffectObserver, IGameEventVisitor {
+  public delegate void IEffectStaller(long untilTimeMs);
+
+  public class GamePresenter : IGameEffectVisitor, IGameEffectObserver, IUnitMutSetEffectVisitor, IUnitMutSetEffectObserver, IGameEventVisitor, ICommMutListEffectObserver, ICommMutListEffectVisitor {
+    public delegate void OnExitClicked();
+
+    public event OnExitClicked exitClicked;
     public OnLocationHovered LocationHovered;
     public OnLocationClicked LocationClicked;
 
@@ -17,21 +22,8 @@ namespace AthPlayer {
     SlowableTimerClock cinematicTimer;
     SoundPlayer soundPlayer;
 
-    // resumeStaller is for GamePresenter to pay attention to, so it can tell the game
-    // to resume the other units (and player's pre-acting and post-acting things).
-    ExecutionStaller resumeStaller;
-    // turnStaller is for the PlayerController to pay attention to, so it can delay the
-    // player's input.
-    ExecutionStaller turnStaller;
-    // If we delay the resumeStaller but not the turnStaller, that means we just did an
-    // animation where we're okay if the player interrupts it. Don't know if any of
-    // these cases exist.
-    // If we delay the turnStaller but not the resumeStaller, that means we just did an
-    // animation where we're okay if we do more animations and stuff, we just dont want
-    // the player to act yet. Most basic case is a unit moving.
-
     GameObject thinkingIndicator;
-    IncendianFalls.Superstructure serverSS;
+    SuperstructureWrapper serverSS;
     EffectBroadcaster broadcaster;
     Game game;
     Level viewedLevel;
@@ -53,30 +45,56 @@ namespace AthPlayer {
         ITimer cameraTimer,
         SoundPlayer soundPlayer,
         GameObject thinkingIndicator,
-        IncendianFalls.Superstructure serverSS,
-        EffectBroadcaster broadcaster,
+        IncendianFalls.Superstructure innerServerSS,
         InputSemaphore inputSemaphore,
-        Game game,
         Instantiator instantiator,
         OverlayPresenterFactory overlayPresenterFactory,
         ShowError showError,
         ShowInstructions showInstructions,
         CameraController cameraController,
         GameObject stalledIndicator,
-        Looker looker,
-        OverlayPaneler overlayPaneler) {
+        LookPanelView lookPanelView,
+        OverlayPaneler overlayPaneler,
+        int randomSeed,
+        int startLevel) {
       this.soundPlayer = soundPlayer;
-      this.serverSS = serverSS;
-      this.game = game;
-      this.overlayPresenterFactory = overlayPresenterFactory;
+      this.serverSS = new SuperstructureWrapper(innerServerSS);
       this.inputSemaphore = inputSemaphore;
       this.instantiator = instantiator;
-      this.broadcaster = broadcaster;
+      this.overlayPresenterFactory = overlayPresenterFactory;
       this.showError = showError;
       this.showInstructions = showInstructions;
       this.thinkingIndicator = thinkingIndicator;
       this.cameraController = cameraController;
 
+      Debug.Log("Random seed: " + randomSeed);
+      //Debug.LogWarning("Hardcoding random seed!");
+      //var randomSeed = 1525224206;
+      //var game = ss.RequestSetupIncendianFallsGame(randomSeed, false);
+
+      // Immediately getting ID of the server-game. We dont want to keep the server-game
+      // around, we want to deal with the client game.
+      var gameId = serverSS.RequestSetupEmberDeepGame(randomSeed, startLevel, false).id;
+
+      Root clientRoot = new Root(new LoggerImpl());
+      var (appliedEffects, _) =
+        clientRoot.Transact(() => {
+          // Consume all effects until we have a game.
+          while (serverSS.waitingEffects.Count > 0) {
+            var effect = serverSS.waitingEffects.Dequeue();
+            new EffectApplier(clientRoot).Apply(effect);
+            if (clientRoot.GameExists(gameId) && clientRoot.GetGame(gameId).level.Exists()) {
+              break;
+            }
+          }
+          return 0;
+        });
+      Asserts.Assert(clientRoot.GameExists(gameId));
+      game = clientRoot.GetGame(gameId);
+
+      broadcaster = new EffectBroadcaster();
+
+      var looker = new Looker(lookPanelView, broadcaster);
 
       timer = new SlowableTimerClock(1f);
       cinematicTimer = new SlowableTimerClock(1f);
@@ -84,15 +102,15 @@ namespace AthPlayer {
       inputSemaphore.OnLocked += () => timer.SetTimeSpeedMultiplier(0f);
       inputSemaphore.OnUnlocked += () => timer.SetTimeSpeedMultiplier(1f);
 
-      resumeStaller = new ExecutionStaller(timer, timer);
-      turnStaller = new ExecutionStaller(timer, timer);
+      //resumeStaller = new ExecutionStaller(timer, timer);
+      //turnStaller = new ExecutionStaller(timer, timer);
 
-      turnStaller.stalledEvent += (x) => {
-        stalledIndicator.SetActive(true);
-      };
-      turnStaller.unstalledEvent += (x) => {
-        stalledIndicator.SetActive(false);
-      };
+      //turnStaller.stalledEvent += (x) => {
+      //  stalledIndicator.SetActive(true);
+      //};
+      //turnStaller.unstalledEvent += (x) => {
+      //  stalledIndicator.SetActive(false);
+      //};
 
       game.AddObserver(broadcaster, this);
 
@@ -100,20 +118,43 @@ namespace AthPlayer {
           new PlayerController(
               timer,
               cinematicTimer,
-              resumeStaller,
-              turnStaller,
               inputSemaphore,
               serverSS,
-              ss.GetSuperstate(game.id),
+              broadcaster,
               game,
               looker,
               overlayPaneler,
               overlayPresenterFactory,
               cameraController,
+              showInstructions,
               showError,
               thinkingIndicator);
 
       LoadLevel();
+
+      ConsumeEffects();
+    }
+
+    private void ConsumeEffects() {
+      for (int i = 0; ; i++) {
+        Asserts.Assert(i != 100);
+        game.root.Transact(() => {
+          // TODO, do proper waiting here.
+          while (serverSS.waitingEffects.Count > 0) {
+            var effect = serverSS.waitingEffects.Dequeue();
+            new EffectApplier(game.root).Apply(effect);
+            broadcaster.Route(effect);
+          }
+          return 0;
+        });
+        // At this point, game is caught up to server game.
+        if (!game.WaitingOnPlayerInput()) {
+          var error = serverSS.RequestResume(game.id);
+          Asserts.Assert(error == "", error);
+        } else {
+          break;
+        }
+      }
     }
 
     public TerrainPresenter GetTerrainPresenter() { return terrainPresenter; }
@@ -143,7 +184,7 @@ namespace AthPlayer {
       }
       unitPresenters[unitId] =
           new UnitPresenter(
-              timer, timer, soundPlayer, broadcaster, resumeStaller, turnStaller, game, viewedLevel.terrain, unit, instantiator);
+              timer, timer, soundPlayer, broadcaster, game, viewedLevel.terrain, unit, instantiator);
     }
 
     private void LoadLevel() {
@@ -197,6 +238,7 @@ namespace AthPlayer {
     public void visitUnitMutSetCreateEffect(UnitMutSetCreateEffect effect) { }
     public void visitUnitMutSetDeleteEffect(UnitMutSetDeleteEffect effect) { }
     public void visitUnitMutSetAddEffect(UnitMutSetAddEffect effect) {
+      Debug.LogError("unit mut set add! " + effect.element);
       AddUnit(effect.element);
     }
     public void visitUnitMutSetRemoveEffect(UnitMutSetRemoveEffect effect) {
@@ -292,7 +334,7 @@ namespace AthPlayer {
       } else {
         cinematicTimer.ScheduleTimer(obj.obj.timeMs, () => {
           throw new NotImplementedException();
-          serverSS.RequestTrigger(game.id, obj.obj.endTriggerName);
+          //serverSS.RequestTrigger(game.id, obj.obj.endTriggerName);
         });
       }
     }
@@ -302,13 +344,48 @@ namespace AthPlayer {
       cameraController.StartMovingCameraTo(cameraEndLookAtPosition, obj.obj.transitionTimeMs);
       cinematicTimer.ScheduleTimer(obj.obj.transitionTimeMs, () => {
         throw new NotImplementedException();
-        serverSS.RequestTrigger(game.id, obj.obj.endTriggerName);
+        //serverSS.RequestTrigger(game.id, obj.obj.endTriggerName);
       });
     }
 
-    public void VisitIGameEvent(ShowOverlayEventAsIGameEvent obj) {
-      var overlayPresenter = overlayPresenterFactory(obj.obj);
+    public void VisitIGameEvent(WaitForAnimationsEventAsIGameEvent obj) {
+      throw new NotImplementedException();
+    }
+
+    public void OnCommMutListEffect(ICommMutListEffect effect) { effect.visitICommMutListEffect(this); }
+    public void visitCommMutListCreateEffect(CommMutListCreateEffect effect) { }
+    public void visitCommMutListDeleteEffect(CommMutListDeleteEffect effect) { }
+    public void visitCommMutListRemoveEffect(CommMutListRemoveEffect effect) { }
+    public void visitCommMutListAddEffect(CommMutListAddEffect effect) {
+      var comm = game.root.GetComm(effect.element);
+      throw new NotImplementedException();
+      //overlayPresenterFactory(comm.template, comm.spea)
       // do nothing, itll kill itself.
+
+      //var buttons = new List<OverlayPresenter.PageButton>();
+      //for (int i = 0; i < comm.actions.Count; i++) {
+      //  buttons.Add(
+      //    new OverlayPresenter.PageButton(
+      //      comm.actions[i].label,
+      //      () => {
+      //        if (comm.actions[i].triggerName == "_exitGame") {
+      //          exitClicked?.Invoke();
+      //        } else {
+      //          ss.RequestTrigger(game.id, button.triggerName);
+      //        }
+      //      }));
+      //}
+      //return new OverlayPresenter(
+      //  uiTimer,
+      //  overlayPaneler,
+      //  inputSemaphore,
+      //  comm.template,
+      //  comm.speakerRole,
+      //  comm.isFirstInSequence,
+      //  comm.isLastInSequence,
+      //  comm.isObscuring,
+      //  comm.text,
+      //  buttons);
     }
   }
 }

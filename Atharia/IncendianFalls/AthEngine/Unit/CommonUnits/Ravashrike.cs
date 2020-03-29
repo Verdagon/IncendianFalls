@@ -15,7 +15,6 @@ namespace IncendianFalls {
       components.Add(root.EffectBaseMovementTimeUCCreate(0, 40).AsIUnitComponent());
       return root.EffectUnitCreate(
           NullIUnitEvent.Null,
-          true,
           0,
           new Location(0, 0, 0),
           "Ravashrike",

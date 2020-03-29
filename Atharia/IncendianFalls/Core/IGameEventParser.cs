@@ -13,6 +13,8 @@ public static class IGameEventParser {
         return new RevertedEventAsIGameEvent(RevertedEvent.Parse(source));
       case "SetGameSpeedEvent":
         return new SetGameSpeedEventAsIGameEvent(SetGameSpeedEvent.Parse(source));
+      case "WaitForAnimationsEvent":
+        return new WaitForAnimationsEventAsIGameEvent(WaitForAnimationsEvent.Parse(source));
       case "WaitEvent":
         return new WaitEventAsIGameEvent(WaitEvent.Parse(source));
       case "FlyCameraEvent":

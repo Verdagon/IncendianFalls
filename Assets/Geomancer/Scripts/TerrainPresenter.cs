@@ -113,11 +113,11 @@ namespace Geomancer {
       return null;
     }
 
-    public void OnTerrainEffect(ITerrainEffect effect) { effect.visit(this); }
+    public void OnTerrainEffect(ITerrainEffect effect) { effect.visitITerrainEffect(this); }
     public void visitTerrainCreateEffect(TerrainCreateEffect effect) { }
     public void visitTerrainDeleteEffect(TerrainDeleteEffect effect) { }
 
-    public void OnTerrainTileByLocationMutMapEffect(ITerrainTileByLocationMutMapEffect effect) { effect.visit(this); }
+    public void OnTerrainTileByLocationMutMapEffect(ITerrainTileByLocationMutMapEffect effect) { effect.visitITerrainTileByLocationMutMapEffect(this); }
     public void visitTerrainTileByLocationMutMapAddEffect(TerrainTileByLocationMutMapAddEffect effect) {
       if (phantomTilePresenters.TryGetValue(effect.key, out var presenter)) {
         presenter.DestroyPhantomTilePresenter();

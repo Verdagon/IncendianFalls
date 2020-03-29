@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Geomancer.Model {
 
-public interface IStrMutListEffect {
+public interface IStrMutListEffect : IEffect {
   int id { get; }
-  void visit(IStrMutListEffectVisitor visitor);
+  void visitIStrMutListEffect(IStrMutListEffectVisitor visitor);
 }
 
 }

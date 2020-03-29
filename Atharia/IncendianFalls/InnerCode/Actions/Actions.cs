@@ -23,7 +23,7 @@ namespace IncendianFalls {
       foreach (var affectedTileLocation in affectedTileLocations) {
         if (game.level.terrain.tiles.ContainsKey(affectedTileLocation)) {
           var victim = superstate.levelSuperstate.GetLiveUnitAt(affectedTileLocation);
-          if (victim.Exists() && !victim.Is(attacker) && victim.alive) {
+          if (victim.Exists() && !victim.Is(attacker) && victim.Alive()) {
             victims.Add(victim);
             AttackInner(game, superstate, attacker, victim, 15, true);
           } else {
@@ -67,7 +67,7 @@ namespace IncendianFalls {
         bool physical) {
       int outgoingDamage = attacker.CalculateOutgoingDamage(initialDamage);
       AttackedInner(game, superstate, victim, outgoingDamage, physical);
-      if (victim.alive) {
+      if (victim.Alive()) {
         foreach (var reactor in new List<IReactingToAttacksUC>(victim.components.GetAllIReactingToAttacksUC())) {
           if (victim.Exists()) {
             reactor.React(game, superstate, victim, attacker);
@@ -88,7 +88,6 @@ namespace IncendianFalls {
       victim.hp = victim.hp - incomingDamage;
 
       if (victim.hp <= 0) {
-        victim.alive = false;
         victim.lifeEndTime = game.time;
         // Bump the victim up to be the next acting unit.
         victim.nextActionTime = game.time;
@@ -221,7 +220,6 @@ namespace IncendianFalls {
         Game game,
         Superstate superstate,
         Unit unit) {
-      unit.alive = false;
       unit.lifeEndTime = game.time;
       // Bump the victim up to be the next acting unit.
       unit.nextActionTime = game.time;

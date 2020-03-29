@@ -61,10 +61,6 @@ public class Unit {
     get { return incarnation.evvent; }
     set { root.EffectUnitSetEvvent(id, value); }
   }
-  public bool alive {
-    get { return incarnation.alive; }
-    set { root.EffectUnitSetAlive(id, value); }
-  }
   public int lifeEndTime {
     get { return incarnation.lifeEndTime; }
     set { root.EffectUnitSetLifeEndTime(id, value); }

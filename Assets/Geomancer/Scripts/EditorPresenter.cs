@@ -82,10 +82,12 @@ namespace Geomancer {
       var pattern = PentagonPattern9.makePentagon9Pattern();
       //var pattern = SquarePattern.MakeSquarePattern();
       //var pattern = HexPattern.MakeHexPattern();
-      level = ss.Transact(delegate () {
-        var terrain = ss.EffectTerrainCreate(pattern, 0.2f, ss.EffectTerrainTileByLocationMutMapCreate());
-        return ss.EffectLevelCreate(terrain);
-      });
+      var (_, newLevel) =
+        ss.Transact(delegate () {
+          var terrain = ss.EffectTerrainCreate(pattern, 0.2f, ss.EffectTerrainTileByLocationMutMapCreate());
+          return ss.EffectLevelCreate(terrain);
+        });
+      level = newLevel;
 
       using (var fileStream = new FileStream("level.athlev", FileMode.OpenOrCreate)) {
         using (var reader = new StreamReader(fileStream)) {

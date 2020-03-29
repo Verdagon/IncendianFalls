@@ -16,11 +16,11 @@ public class StrMutList : IEnumerable<string> {
   public StrMutListIncarnation incarnation {
     get { return root.GetStrMutListIncarnation(id); }
   }
-  public void AddObserver(IStrMutListEffectObserver observer) {
-    root.AddStrMutListObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, IStrMutListEffectObserver observer) {
+    broadcaster.AddStrMutListObserver(id, observer);
   }
-  public void RemoveObserver(IStrMutListEffectObserver observer) {
-    root.RemoveStrMutListObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, IStrMutListEffectObserver observer) {
+    broadcaster.RemoveStrMutListObserver(id, observer);
   }
   public void Delete() {
     root.EffectStrMutListDelete(id);
@@ -46,7 +46,7 @@ public class StrMutList : IEnumerable<string> {
     return this.root == that.root && id == that.id;
   }
   public void Add(string element) {
-    root.EffectStrMutListAdd(id, element);
+    root.EffectStrMutListAdd(id, Count, element);
   }
   public void RemoveAt(int index) {
     root.EffectStrMutListRemoveAt(id, index);

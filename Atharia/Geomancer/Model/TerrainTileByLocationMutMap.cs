@@ -21,11 +21,11 @@ public class TerrainTileByLocationMutMap {
 
   public bool Exists() { return root != null && root.TerrainTileByLocationMutMapExists(id); }
 
-  public void AddObserver(ITerrainTileByLocationMutMapEffectObserver observer) {
-    root.AddTerrainTileByLocationMutMapObserver(id, observer);
+  public void AddObserver(EffectBroadcaster broadcaster, ITerrainTileByLocationMutMapEffectObserver observer) {
+    broadcaster.AddTerrainTileByLocationMutMapObserver(id, observer);
   }
-  public void RemoveObserver(ITerrainTileByLocationMutMapEffectObserver observer) {
-    root.RemoveTerrainTileByLocationMutMapObserver(id, observer);
+  public void RemoveObserver(EffectBroadcaster broadcaster, ITerrainTileByLocationMutMapEffectObserver observer) {
+    broadcaster.RemoveTerrainTileByLocationMutMapObserver(id, observer);
   }
 
   public void Add(Location key, TerrainTile value) {

@@ -120,7 +120,7 @@ namespace Geomancer {
     }
 
     public void OnStrMutListEffect(IStrMutListEffect effect) {
-      effect.visit(this);
+      effect.visitIStrMutListEffect(this);
     }
 
     public void visitStrMutListCreateEffect(StrMutListCreateEffect effect) { }

@@ -1,4 +1,4 @@
-output: D:\Projects\Atharia\Geomancer\Model
+output: D:\IncendianFalls\Atharia\Geomancer\Model
 namespace: Geomancer.Model
 vstl/rand.vss
 vstl/vec.vss

@@ -5,27 +5,24 @@ using UnityEngine;
 
 namespace AthPlayer {
   public class NormalMode : IMode {
-    ISuperstructure ss;
-    Superstate superstate;
+    SuperstructureWrapper ss;
     Game game;
     IModeDelegate delegat;
     ShowError showError;
 
     public NormalMode(
-        ISuperstructure ss,
-        Superstate superstate,
+        SuperstructureWrapper ss,
         Game game,
         IModeDelegate delegat,
     ShowError showError) {
       this.ss = ss;
-      this.superstate = superstate;
       this.game = game;
       this.delegat = delegat;
       this.showError = showError;
     }
 
     public void OnTileMouseClick(Location newLocation) {
-      Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput, "Player not ready to act yet.");
+      Asserts.Assert(game.WaitingOnPlayerInput(), "Player not ready to act yet.");
 
       string attackResult = AttackAt(newLocation);
       if (attackResult == "") {
@@ -51,7 +48,7 @@ namespace AthPlayer {
       if (this.game.level.terrain.pattern.LocationsAreAdjacent(game.player.location, target, game.level.ConsiderCornersAdjacent())) {
         foreach (var unit in this.game.level.units) {
           if (unit.location == target) {
-            if (!unit.alive) {
+            if (!unit.Alive()) {
               continue;
             }
             return ss.RequestAttack(game.id, unit.id);
@@ -62,11 +59,12 @@ namespace AthPlayer {
     }
 
     public void Cancel(bool purposeful) {
-      string cancelResult = ss.RequestCancel(game.id);
-      if (cancelResult.Length > 0) {
-        showError(cancelResult);
-        return;
-      }
+      Asserts.Assert(false); // implement, have the navigating in NormalMode.
+      //string cancelResult = ss.RequestCancel(game.id);
+      //if (cancelResult.Length > 0) {
+      //  showError(cancelResult);
+      //  return;
+      //}
     }
   }
 }

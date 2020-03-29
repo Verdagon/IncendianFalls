@@ -11,7 +11,6 @@ namespace IncendianFalls {
       components.Add(root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
       return root.EffectUnitCreate(
         NullIUnitEvent.Null,
-          true,
           0,
           new Location(0, 0, 0),
           "avelisk",

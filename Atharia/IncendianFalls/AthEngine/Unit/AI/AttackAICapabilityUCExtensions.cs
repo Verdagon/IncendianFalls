@@ -22,7 +22,7 @@ namespace Atharia.Model {
         Unit unit) {
 
       var directive = obj.killDirective;
-      if (directive.Exists() && (!directive.targetUnit.Exists() || !directive.targetUnit.alive)) {
+      if (directive.Exists() && (!directive.targetUnit.Exists() || !directive.targetUnit.Alive())) {
         // Target died, and/or was deleted. Stop targeting.
         obj.killDirective.Destruct();
       }

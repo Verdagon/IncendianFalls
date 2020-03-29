@@ -6,7 +6,6 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 public class UnitIncarnation : IUnitEffectVisitor {
   public  IUnitEvent evvent;
-  public  bool alive;
   public  int lifeEndTime;
   public  Location location;
   public readonly string classId;
@@ -17,7 +16,6 @@ public class UnitIncarnation : IUnitEffectVisitor {
   public readonly bool good;
   public UnitIncarnation(
       IUnitEvent evvent,
-      bool alive,
       int lifeEndTime,
       Location location,
       string classId,
@@ -27,7 +25,6 @@ public class UnitIncarnation : IUnitEffectVisitor {
       int components,
       bool good) {
     this.evvent = evvent;
-    this.alive = alive;
     this.lifeEndTime = lifeEndTime;
     this.location = location;
     this.classId = classId;
@@ -40,7 +37,6 @@ public class UnitIncarnation : IUnitEffectVisitor {
   public UnitIncarnation Copy() {
     return new UnitIncarnation(
 evvent,
-alive,
 lifeEndTime,
 location,
 classId,
@@ -54,7 +50,6 @@ good    );
   public void visitUnitCreateEffect(UnitCreateEffect e) {}
   public void visitUnitDeleteEffect(UnitDeleteEffect e) {}
 public void visitUnitSetEvventEffect(UnitSetEvventEffect e) { this.evvent = e.newValue; }
-public void visitUnitSetAliveEffect(UnitSetAliveEffect e) { this.alive = e.newValue; }
 public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect e) { this.lifeEndTime = e.newValue; }
 public void visitUnitSetLocationEffect(UnitSetLocationEffect e) { this.location = e.newValue; }
 

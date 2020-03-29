@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Geomancer.Model {
 
-public interface ITerrainTileByLocationMutMapEffect {
+public interface ITerrainTileByLocationMutMapEffect : IEffect {
   int id { get; }
-  void visit(ITerrainTileByLocationMutMapEffectVisitor visitor);
+  void visitITerrainTileByLocationMutMapEffect(ITerrainTileByLocationMutMapEffectVisitor visitor);
 }
 
 }

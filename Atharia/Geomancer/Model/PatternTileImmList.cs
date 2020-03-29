@@ -11,8 +11,8 @@ public class PatternTileImmList : IEnumerable<PatternTile> {
   public PatternTileImmList() {
     this.list = new List<PatternTile>();
   }
-  public PatternTileImmList(PatternTile[] list) {
-    this.list = new List<PatternTile>(list);
+  public PatternTileImmList(params PatternTile[] values) {
+    this.list = new List<PatternTile>(values);
   }
   public PatternTileImmList(IEnumerable<PatternTile> list) {
     this.list = new List<PatternTile>(list);

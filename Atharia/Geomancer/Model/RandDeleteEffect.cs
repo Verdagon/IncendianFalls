@@ -11,8 +11,11 @@ public struct RandDeleteEffect : IRandEffect {
     this.id = id;
   }
   int IRandEffect.id => id;
-  public void visit(IRandEffectVisitor visitor) {
+  public void visitIRandEffect(IRandEffectVisitor visitor) {
     visitor.visitRandDeleteEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitRandEffect(this);
   }
 }
 

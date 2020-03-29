@@ -40,7 +40,7 @@ namespace Atharia.Model {
     }
 
     public static void EnterUnit(
-        this Level obj,
+        this Level self,
         LevelSuperstate levelSuperstate,
 
         Location location,
@@ -50,7 +50,7 @@ namespace Atharia.Model {
         Unit unit) {
       unit.location = location;
       unit.nextActionTime = nextActionTime;
-      obj.units.Add(unit);
+      self.units.Add(unit);
       levelSuperstate.AddUnit(unit);
     }
 

@@ -210,7 +210,7 @@ namespace Geomancer {
     //}
 
     public void OnStrMutListEffect(IStrMutListEffect effect) {
-      effect.visit(this);
+      effect.visitIStrMutListEffect(this);
     }
 
     public void visitStrMutListCreateEffect(StrMutListCreateEffect effect) {}
@@ -236,7 +236,7 @@ namespace Geomancer {
     }
 
     public void OnTerrainTileEffect(ITerrainTileEffect effect) {
-      effect.visit(this);
+      effect.visitITerrainTileEffect(this);
     }
   }
 }

@@ -29,7 +29,7 @@ namespace IncendianFalls {
         if (!detail.Exists()) {
           continue;
         }
-        if (!game.actingUnit.alive) {
+        if (!game.actingUnit.Alive()) {
           continue;
         }
         detail.PostAct(game, superstate, game.actingUnit);
@@ -37,7 +37,7 @@ namespace IncendianFalls {
       // There were no existing remaining pre-acting details. Go on to the unit's acting.
       remainingPostActingUnitComponents.Destruct();
 
-      if (game.actingUnit.alive) {
+      if (game.actingUnit.Alive()) {
         // Figure out a way for a trigger to interrupt, and then we could resume after that trigger.
         // Similar to what we did with the post acting unit components.
         // This is so we can trigger a cinematic or camera movement and pause simulation while it's
@@ -87,7 +87,7 @@ namespace IncendianFalls {
         game.level.time = nextUnit.nextActionTime;
         game.time = nextUnit.nextActionTime;
 
-        if (nextUnit.alive == false) {
+        if (nextUnit.Alive() == false) {
           bool playerDying = nextUnit.NullableIs(game.player);
 
           foreach (var deathPreactor in nextUnit.components.GetAllIDeathPreReactor()) {
@@ -121,7 +121,7 @@ namespace IncendianFalls {
       while (remainingPreActingUnitComponents.Count > 0) {
         var detail = remainingPreActingUnitComponents.GetArbitrary();
         remainingPreActingUnitComponents.Remove(detail);
-        if (!game.actingUnit.alive) {
+        if (!game.actingUnit.Alive()) {
           continue;
         }
         if (!detail.Exists()) {
@@ -134,6 +134,7 @@ namespace IncendianFalls {
       remainingPreActingUnitComponents.Destruct();
 
       if (game.actingUnit.NullableIs(game.player)) {
+        Asserts.Assert(game.WaitingOnPlayerInput());
         // It's the player turn, we don't do any AI for it.
         //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
         return; // To be continued... via PlayerAttack, PlayerMove, etc.
@@ -151,7 +152,7 @@ namespace IncendianFalls {
       Asserts.Assert(game.actingUnit.Exists());
       Asserts.Assert(!game.actingUnit.NullableIs(game.player)); // Because if it was, we should be getting user input.
 
-      while (game.actingUnit.alive && game.actingUnit.nextActionTime == game.time) {
+      while (game.actingUnit.Alive() && game.actingUnit.nextActionTime == game.time) {
         EnemyAI.AI(context, game, superstate, game.actingUnit);
       }
 

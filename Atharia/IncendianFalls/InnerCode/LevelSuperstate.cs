@@ -96,7 +96,7 @@ namespace Atharia.Model {
 
       liveUnitByLocation.Clear();
       foreach (var unit in level.units) {
-        if (unit.alive) {
+        if (unit.Alive()) {
           Asserts.Assert(walkableLocations.Contains(unit.location));
           liveUnitByLocation.Add(unit.location, unit);
         }

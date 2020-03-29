@@ -1,40 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atharia.Model;
 using Domino;
 
 namespace AthPlayer {
   public class TimeAnchorMoveMode : IMode {
-    ISuperstructure ss;
-    Superstate superstate;
+    SuperstructureWrapper ss;
     Game game;
     IModeDelegate delegat;
     ShowError showError;
     OverlayPresenter instructionsOverlay;
 
     public TimeAnchorMoveMode(
-        ISuperstructure ss,
-        Superstate superstate,
+        SuperstructureWrapper ss,
         Game game,
         IModeDelegate delegat,
-        OverlayPresenterFactory overlayPresenterFactory,
+        ShowInstructions showInstructions,
         ShowError showError) {
       this.ss = ss;
-      this.superstate = superstate;
       this.game = game;
       this.delegat = delegat;
       this.showError = showError;
 
       instructionsOverlay =
-        overlayPresenterFactory(
-          new ShowOverlayEvent(
-            "Placing a time anchor! Select an adjacent space to move to, to make room for it.",
-            "instructions", "narrator", true, true, false, new ButtonImmList()));
+        showInstructions("Placing a time anchor! Select an adjacent space to move to, to make room for it.");
     }
 
     public void OnTileMouseClick(Location newLocation) {
       instructionsOverlay.Close();
 
-      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
+      if (!game.WaitingOnPlayerInput()) {
         ss.GetRoot().logger.Error("Not your turn!");
         delegat.AfterDidSomething();
         return;

@@ -7,14 +7,17 @@ namespace Geomancer.Model {
 
 public struct StrMutListRemoveEffect : IStrMutListEffect {
   public readonly int id;
-  public readonly int elementId;
-  public StrMutListRemoveEffect(int id, int elementId) {
+  public readonly int index;
+  public StrMutListRemoveEffect(int id, int index) {
     this.id = id;
-    this.elementId = elementId;
+    this.index = index;
   }
   int IStrMutListEffect.id => id;
-  public void visit(IStrMutListEffectVisitor visitor) {
+  public void visitIStrMutListEffect(IStrMutListEffectVisitor visitor) {
     visitor.visitStrMutListRemoveEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitStrMutListEffect(this);
   }
 }
 

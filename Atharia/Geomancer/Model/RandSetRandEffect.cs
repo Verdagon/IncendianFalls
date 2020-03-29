@@ -16,8 +16,11 @@ public struct RandSetRandEffect : IRandEffect {
   }
   int IRandEffect.id => id;
 
-  public void visit(IRandEffectVisitor visitor) {
+  public void visitIRandEffect(IRandEffectVisitor visitor) {
     visitor.visitRandSetRandEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitRandEffect(this);
   }
 }
 

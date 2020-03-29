@@ -19,7 +19,12 @@ namespace Domino {
     public FollowingCameraController(CameraController cameraController, EffectBroadcaster broadcaster, Game game) {
       this.broadcaster = broadcaster;
       this.cameraController = cameraController;
-      cameraEndLookAtLocation = game.player.location;
+
+      if (game.player.Exists()) {
+        cameraEndLookAtLocation = game.player.location;
+      } else {
+        cameraEndLookAtLocation = new Location(0, 0, 0);
+      }
 
       this.game = game;
 
@@ -34,7 +39,6 @@ namespace Domino {
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) { }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) { }
-    public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) { }
     public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) { }
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }

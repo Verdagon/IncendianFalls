@@ -7,11 +7,20 @@ using UnityEngine.UI;
 using Domino;
 using IncendianFalls;
 using UnityEngine.SceneManagement;
+using static AthPlayer.OverlayPresenter;
 
 namespace AthPlayer {
-  public delegate OverlayPresenter OverlayPresenterFactory(ShowOverlayEvent overlay);
+  public delegate OverlayPresenter
+    OverlayPresenterFactory(
+      string template,
+      string role,
+      bool isFirstInSequence,
+      bool isLastInSequence,
+      bool isObscuring,
+      string unwrappedText,
+      List<PageButton> buttons);
   public delegate void ShowError(string error);
-  public delegate void ShowInstructions(string error);
+  public delegate OverlayPresenter ShowInstructions(string error);
 
   public class InputSemaphore {
     public delegate void Locked();
@@ -53,7 +62,6 @@ namespace AthPlayer {
     SlowableTimerClock cameraTimer;
 
     GamePresenter gamePresenter;
-    Game game;
     CameraController cameraController;
 
     LookPanelView lookPanelView;
@@ -65,8 +73,6 @@ namespace AthPlayer {
     public OverlayPaneler overlayPaneler;
 
     private OverlayPresenter currentErrorOverlay;
-    private OverlayPresenter currentInstructionsOverlay;
-    private Looker looker;
 
     public void Start() {
       uiTimer = new SlowableTimerClock(1.0f);
@@ -79,19 +85,7 @@ namespace AthPlayer {
 
       lookPanelView = new LookPanelView(uiTimer, overlayPaneler);
 
-      looker = new Looker(lookPanelView);
-
       inputSemaphore = new InputSemaphore();
-
-      Debug.Log("Setting up level: " + sceneInitParamStartLevel);
-      var randomSeed = timestamp;
-      Debug.Log("Random seed: " + randomSeed);
-      //Debug.LogWarning("Hardcoding random seed!");
-      //var randomSeed = 1525224206;
-      //var game = ss.RequestSetupIncendianFallsGame(randomSeed, false);
-      var (effects, game_) = serverSS.RequestSetupEmberDeepGame(randomSeed, sceneInitParamStartLevel, false);
-      this.game = game_;
-      //var game = ss.RequestSetupGauntletGame(randomSeed, false);
 
       this.cameraController =
         new CameraController(
@@ -100,6 +94,8 @@ namespace AthPlayer {
           new Vector3(0, 0, 0),
           new Vector3(0, -16, 8));
 
+      Debug.Log("Setting up level: " + sceneInitParamStartLevel);
+      var randomSeed = timestamp;
       gamePresenter =
           new GamePresenter(
               cameraTimer,
@@ -107,43 +103,31 @@ namespace AthPlayer {
               thinkingIndicator,
               serverSS,
               inputSemaphore,
-              game,
               instantiator,
-              NewOverlayPresenter,
+              this.NewOverlayPresenter,
               this.ShowError,
               this.ShowInstructions,
               cameraController,
               stalledIndicator,
-              looker,
-              overlayPaneler);
+              lookPanelView,
+              overlayPaneler,
+              randomSeed,
+              sceneInitParamStartLevel);
+      gamePresenter.exitClicked += () => {
+        replayLogger.Dispose();
+        SceneManager.LoadScene("MainMenu");
+      };
     }
 
-    private OverlayPresenter NewOverlayPresenter(ShowOverlayEvent overlay) {
-      var buttons = new List<OverlayPresenter.PageButton>();
-      foreach (var button in overlay.buttons) {
-        buttons.Add(
-          new OverlayPresenter.PageButton(
-            button.label,
-            () => {
-              if (button.triggerName == "_exitGame") {
-                replayLogger.Dispose();
-                SceneManager.LoadScene("MainMenu");
-              } else {
-                ss.RequestTrigger(game.id, button.triggerName);
-              }
-            }));
-      }
-      return new OverlayPresenter(
-        uiTimer,
-        overlayPaneler,
-        inputSemaphore,
-        overlay.template,
-        overlay.speakerRole,
-        overlay.isFirstInSequence,
-        overlay.isLastInSequence,
-        overlay.isObscuring,
-        overlay.text,
-        buttons);
+    private OverlayPresenter NewOverlayPresenter(
+        string template,
+        string role,
+        bool isFirstInSequence,
+        bool isLastInSequence,
+        bool isObscuring,
+        string unwrappedText,
+        List<PageButton> buttons) {
+      return new OverlayPresenter(uiTimer, overlayPaneler, inputSemaphore, template, role, isFirstInSequence, isLastInSequence, isObscuring, unwrappedText, buttons);
     }
 
     private void ShowError(string errorText) {
@@ -151,23 +135,11 @@ namespace AthPlayer {
         currentErrorOverlay.Close();
       }
       currentErrorOverlay =
-        NewOverlayPresenter(
-          new ShowOverlayEvent(
-            errorText, "error", "narrator", true, true, false, new ButtonImmList()));
+        NewOverlayPresenter("error", "narrator", true, true, false, errorText, new List<PageButton>());
     }
 
-    private void ShowInstructions(string errorText) {
-      Debug.LogError("Showing instructions: " + errorText);
-      if (currentInstructionsOverlay != null) {
-        currentInstructionsOverlay.Close();
-        currentInstructionsOverlay = null;
-      }
-      if (errorText.Length > 0) {
-        currentInstructionsOverlay =
-          NewOverlayPresenter(
-            new ShowOverlayEvent(
-              errorText, "instructions", "narrator", true, true, false, new ButtonImmList()));
-      }
+    private OverlayPresenter ShowInstructions(string errorText) {
+      return NewOverlayPresenter("instructions", "narrator", true, true, false, errorText, new List<PageButton>());
     }
 
     public void Update() {

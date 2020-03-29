@@ -13,7 +13,6 @@ namespace IncendianFalls {
       return
           root.EffectUnitCreate(
               NullIUnitEvent.Null,
-              true,
               0,
               new Location(0, 0, 0),
               "yoten",

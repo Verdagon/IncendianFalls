@@ -19,21 +19,23 @@ namespace AthPlayer {
     IClock clock;
     ITimer timer;
     SoundPlayer soundPlayer;
-    ExecutionStaller resumeStaller;
-    ExecutionStaller turnStaller;
     EffectBroadcaster broadcaster;
     Game game;
     public readonly Unit unit;
     Instantiator instantiator;
 
     UnitView unitView;
-    HashSet<int> invincibilityIds = new HashSet<int>();
-    HashSet<int> defyingIds = new HashSet<int>();
-    HashSet<int> miredIds = new HashSet<int>();
-    HashSet<int> counteringIds = new HashSet<int>();
-    HashSet<int> bidingIds = new HashSet<int>();
 
     IUnitComponentMutBunchBroadcaster componentsBroadcaster;
+
+    // We dont want two runes to appear at the same time.
+    long runeEndTime;
+    // We want hops to wait for each other.
+    long hopEndTime;
+    // We want lunges to wait for each other.
+    long lungeEndTime;
+    // We want delete to wait for death to finish.
+    long dieEndTime;
 
     private UnitDescription description;
 
@@ -42,8 +44,6 @@ namespace AthPlayer {
         ITimer timer,
         SoundPlayer soundPlayer,
         EffectBroadcaster broadcaster,
-        ExecutionStaller resumeStaller,
-        ExecutionStaller turnStaller,
         Game game,
         Atharia.Model.Terrain terrain,
         Unit unit,
@@ -52,8 +52,6 @@ namespace AthPlayer {
       this.broadcaster = broadcaster;
       this.timer = timer;
       this.soundPlayer = soundPlayer;
-      this.resumeStaller = resumeStaller;
-      this.turnStaller = turnStaller;
       this.game = game;
       this.unit = unit;
       this.instantiator = instantiator;
@@ -115,29 +113,24 @@ namespace AthPlayer {
     }
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) {
       var newPosition = game.level.terrain.GetTileCenter(unit.location).ToUnity();
-      unitView.GetComponent<UnitView>().HopTo(newPosition);
-      // If it's the player or a time shift clone, stall the next turn until we're done.
-      if (unit.good) {
-            turnStaller.StallForDuration(UnitView.HOP_DURATION_MS);
-      }
+      hopEndTime = unitView.GetComponent<UnitView>().HopTo(newPosition);
+
+      //// If it's the player or a time shift clone, stall the next turn until we're done.
+      //if (unit.good) {
+      //  this.hopEndTime = hopEndTime;
+      //}
     }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) {
       if (unit.Exists()) {
         unitView.SetDescription(GetUnitViewDescription(unit));
       }
     }
-    public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) {
-      if (!effect.newValue) {
+    public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) {
+      if (effect.newValue != 0) {
         unitView.GetComponent<UnitView>().StartFadeAnimation(500);
-        resumeStaller.StallForDuration(500);
-        timer.ScheduleTimer(500, () => {
-          if (unitView != null) {
-            unitView.SetUnitViewActive(false);
-          }
-        });
+        dieEndTime = clock.GetTimeMs() + 500;
       }
     }
-    public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
     public void OnSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visitISorcerousUCEffect(this); }
@@ -165,18 +158,14 @@ namespace AthPlayer {
 
     public void OnIUnitComponentMutBunchAdd(int id) {
       var component = game.root.GetIUnitComponentOrNull(id);
-      if (!component.Exists()) {
-      } else if (component is InvincibilityUCAsIUnitComponent invincibility) {
-        invincibilityIds.Add(id);
+      Asserts.Assert(component.Exists());
+      if (component is InvincibilityUCAsIUnitComponent invincibility) {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is DefyingUCAsIUnitComponent defying) {
-        defyingIds.Add(id);
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is MiredUCAsIUnitComponent mired) {
-        miredIds.Add(id);
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is CounteringUCAsIUnitComponent countering) {
-        counteringIds.Add(id);
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is WanderAICapabilityUCAsIUnitComponent) {
       } else if (component is KamikazeAICapabilityUCAsIUnitComponent) {
@@ -215,25 +204,49 @@ namespace AthPlayer {
     }
 
     public void OnIUnitComponentMutBunchRemove(int id) {
-      if (invincibilityIds.Contains(id)) {
-        invincibilityIds.Remove(id);
-        description = GetUnitViewDescription(unit);
-        unitView.SetDescription(description);
-      } else if (defyingIds.Contains(id)) {
-        defyingIds.Remove(id);
-        description = GetUnitViewDescription(unit);
-        unitView.SetDescription(description);
-      } else if (miredIds.Contains(id)) {
-        miredIds.Remove(id);
-        description = GetUnitViewDescription(unit);
-        unitView.SetDescription(description);
-      } else if (counteringIds.Contains(id)) {
-        counteringIds.Remove(id);
-        description = GetUnitViewDescription(unit);
-        unitView.SetDescription(description);
-      } else if (bidingIds.Contains(id)) {
+      var component = game.root.GetIUnitComponentOrNull(id);
+      Asserts.Assert(component.Exists());
+      if (component is InvincibilityUCAsIUnitComponent invincibility) {
         unitView.SetDescription(GetUnitViewDescription(unit));
-        bidingIds.Remove(id);
+      } else if (component is DefyingUCAsIUnitComponent defying) {
+        unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is MiredUCAsIUnitComponent mired) {
+        unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is CounteringUCAsIUnitComponent countering) {
+        unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is WanderAICapabilityUCAsIUnitComponent) {
+      } else if (component is KamikazeAICapabilityUCAsIUnitComponent) {
+      } else if (component is AttackAICapabilityUCAsIUnitComponent) {
+      } else if (component is BideAICapabilityUCAsIUnitComponent) {
+      } else if (component is SorcerousUCAsIUnitComponent) {
+      } else if (component is BaseCombatTimeUCAsIUnitComponent) {
+      } else if (component is SummonAICapabilityUCAsIUnitComponent) {
+      } else if (component is TemporaryCloneAICapabilityUC) {
+      } else if (component is BaseMovementTimeUCAsIUnitComponent) {
+      } else if (component is BaseSightRangeUCAsIUnitComponent) {
+      } else if (component is LightningChargingUCAsIUnitComponent) {
+      } else if (component is LightningChargedUCAsIUnitComponent) {
+      } else if (component is TutorialDefyCounterUCAsIUnitComponent) {
+      } else if (component is BaseOffenseUCAsIUnitComponent) {
+      } else if (component is BaseDefenseUCAsIUnitComponent) {
+      } else if (component is DoomedUCAsIUnitComponent) {
+        unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is TemporaryCloneAICapabilityUCAsIUnitComponent) {
+      } else if (component is TimeCloneAICapabilityUCAsIUnitComponent) {
+        unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is ManaPotionAsIUnitComponent) {
+      } else if (component is HealthPotionAsIUnitComponent) {
+      } else if (component is SlowRodAsIUnitComponent) {
+      } else if (component is BlastRodAsIUnitComponent) {
+        //unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is ArmorAsIUnitComponent) {
+        //unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is GlaiveAsIUnitComponent) {
+        //unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is SpeedRingAsIUnitComponent) {
+        //unitView.SetDescription(GetUnitViewDescription(unit));
+      } else {
+        Asserts.Assert(false, "Unknown component: " + component);
       }
     }
 
@@ -785,61 +798,56 @@ namespace AthPlayer {
 
           soundPlayer.Play("attack");
 
-          unitView.Lunge((victimPosition - attackerPosition).normalized * .25f);
-
-          resumeStaller.StallForDuration(150);
-          turnStaller.StallForDuration(350);
+          lungeEndTime =
+            unitView.Lunge((victimPosition - attackerPosition).normalized * .25f);
+          lungeEndTime = clock.GetTimeMs() + 150;
         }
       } else if (effect.newValue is UnitUnleashBideEventAsIUnitEvent) {
-        unitView.ShowRune(
-            new ExtrudedSymbolDescription(
-                RenderPriority.RUNE,
-                new SymbolDescription(
-                    "r-3",
-                            50,
-                    new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
-                    0,
-                    OutlineMode.WithOutline,
-                    new UnityEngine.Color(0, 0, 0)),
-                true,
-                new UnityEngine.Color(0, 0, 1f, 1f)));
+        runeEndTime =
+          unitView.ShowRune(
+              new ExtrudedSymbolDescription(
+                  RenderPriority.RUNE,
+                  new SymbolDescription(
+                      "r-3",
+                              50,
+                      new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
+                      0,
+                      OutlineMode.WithOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  true,
+                  new UnityEngine.Color(0, 0, 1f, 1f)));
       } else if (effect.newValue is UnitDefyingEventAsIUnitEvent) {
-        unitView.ShowRune(
-            new ExtrudedSymbolDescription(
-                RenderPriority.RUNE,
-                new SymbolDescription(
-                    "q",
-                            50,
-                    new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
-                    0,
-                    OutlineMode.WithOutline,
-                    new UnityEngine.Color(0, 0, 0)),
-                true,
-                new UnityEngine.Color(0, 0, 1f, 1f)));
-        timer.ScheduleTimer(1, delegate () {
-          if (alive) {
-            resumeStaller.StallForDuration(500);
-            turnStaller.StallForDuration(500);
-          }
-        });
+        runeEndTime =
+          unitView.ShowRune(
+              new ExtrudedSymbolDescription(
+                  RenderPriority.RUNE,
+                  new SymbolDescription(
+                      "q",
+                              50,
+                      new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
+                      0,
+                      OutlineMode.WithOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  true,
+                  new UnityEngine.Color(0, 0, 1f, 1f)));
       } else if (effect.newValue is UnitCounteringEventAsIUnitEvent) {
-        unitView.ShowRune(
-            new ExtrudedSymbolDescription(
-                RenderPriority.RUNE,
-                new SymbolDescription(
-                    "v",
-                            50,
-                    new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
-                    0,
-                    OutlineMode.WithOutline,
-                    new UnityEngine.Color(0, 0, 0)),
-                true,
-                new UnityEngine.Color(0, 0, 1f, 1f)));
-        resumeStaller.StallForDuration(500);
-        turnStaller.StallForDuration(500);
+        runeEndTime =
+          unitView.ShowRune(
+              new ExtrudedSymbolDescription(
+                  RenderPriority.RUNE,
+                  new SymbolDescription(
+                      "v",
+                              50,
+                      new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
+                      0,
+                      OutlineMode.WithOutline,
+                      new UnityEngine.Color(0, 0, 0)),
+                  true,
+                  new UnityEngine.Color(0, 0, 1f, 1f)));
       } else if (effect.newValue is UnitFireEventAsIUnitEvent ufe) {
         if (unit.id == ufe.obj.attackerId) {
-          unitView.ShowRune(
+          runeEndTime =
+            unitView.ShowRune(
               new ExtrudedSymbolDescription(
                   RenderPriority.RUNE,
                   new SymbolDescription(
@@ -852,7 +860,8 @@ namespace AthPlayer {
                   true,
                   new UnityEngine.Color(0, 0, 1f, 1f)));
         } else if (unit.id == ufe.obj.victimId) {
-          unitView.ShowRune(
+          runeEndTime =
+            unitView.ShowRune(
               new ExtrudedSymbolDescription(
                   RenderPriority.RUNE,
                   new SymbolDescription(
@@ -866,20 +875,117 @@ namespace AthPlayer {
                   new UnityEngine.Color(0, 0, 1f, 1f)));
         }
       } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent ufbe) {
-        unitView.ShowRune(
-            new ExtrudedSymbolDescription(
-                RenderPriority.RUNE,
-                new SymbolDescription(
-                    "r-3",
-                          50,
-                    new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
-                    0,
-                    OutlineMode.WithOutline,
-                    new UnityEngine.Color(0.8f, .4f, 0, 1.5f)),
-                true,
-                new UnityEngine.Color(0, 0, 1f, 1f)));
+        runeEndTime =
+          unitView.ShowRune(
+              new ExtrudedSymbolDescription(
+                  RenderPriority.RUNE,
+                  new SymbolDescription(
+                      "r-3",
+                            50,
+                      new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
+                      0,
+                      OutlineMode.WithOutline,
+                      new UnityEngine.Color(0.8f, .4f, 0, 1.5f)),
+                  true,
+                  new UnityEngine.Color(0, 0, 1f, 1f)));
       } else {
 
+      }
+    }
+
+    // This class gets to preview an effect before it officially happens.
+    // Its main purpose is to stall the effect until this UnitPresenter is ready.
+    private class UnitEffectStaller :
+        IUnitEffectObserver,
+        IUnitEffectVisitor,
+        IIUnitComponentMutBunchObserver,
+        IIUnitComponentMutBunchEffectVisitor {
+
+      EffectBroadcaster previewBroadcaster;
+      IUnitComponentMutBunchBroadcaster componentsBroadcaster;
+      private UnitPresenter unitPresenter;
+      private IClock clock;
+      private IEffectStaller staller;
+
+      public UnitEffectStaller(
+          IClock clock,
+          EffectBroadcaster previewBroadcaster,
+          UnitPresenter unitPresenter,
+          IEffectStaller staller) {
+        this.previewBroadcaster = previewBroadcaster;
+        this.unitPresenter = unitPresenter;
+        this.clock = clock;
+        this.staller = staller;
+
+        previewBroadcaster.AddUnitObserver(unitPresenter.unit.id, this);
+
+        this.componentsBroadcaster = new IUnitComponentMutBunchBroadcaster(previewBroadcaster, unitPresenter.unit.components);
+        componentsBroadcaster.AddObserver(this);
+      }
+
+      public void Destroy() {
+        componentsBroadcaster.RemoveObserver(this);
+        previewBroadcaster.RemoveUnitObserver(unitPresenter.unit.id, this);
+      }
+
+      public void OnUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this); }
+      public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
+      public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
+      public void visitUnitSetHpEffect(UnitSetHpEffect effect) { }
+      public void visitUnitCreateEffect(UnitCreateEffect effect) { }
+
+      public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
+        staller(
+          Math.Max(unitPresenter.hopEndTime,
+            Math.Max(unitPresenter.lungeEndTime,
+              Math.Max(unitPresenter.runeEndTime,
+                Math.Max(unitPresenter.dieEndTime,
+                  clock.GetTimeMs())))));
+      }
+
+      public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
+        if (effect.newValue is UnitAttackEventAsIUnitEvent a) {
+          if (a.obj.attackerId == unitPresenter.unit.id) {
+            staller(
+              Math.Max(unitPresenter.hopEndTime,
+                Math.Max(unitPresenter.lungeEndTime,
+                  clock.GetTimeMs())));
+          }
+        } else if (effect.newValue is UnitCounteringEventAsIUnitEvent) {
+          staller(Math.Max(unitPresenter.runeEndTime, clock.GetTimeMs()));
+        } else if (effect.newValue is UnitDefyingEventAsIUnitEvent) {
+          staller(Math.Max(unitPresenter.runeEndTime, clock.GetTimeMs()));
+        } else if (effect.newValue is UnitUnleashBideEventAsIUnitEvent) {
+          staller(Math.Max(unitPresenter.runeEndTime, clock.GetTimeMs()));
+        } else if (effect.newValue is UnitFireEventAsIUnitEvent f) {
+          // We show a rune for both attacker and victim, so no need to check that.
+          staller(Math.Max(unitPresenter.runeEndTime, clock.GetTimeMs()));
+        } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent) {
+          staller(Math.Max(unitPresenter.runeEndTime, clock.GetTimeMs()));
+        }
+      }
+
+      public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) {
+        staller(
+          Math.Max(unitPresenter.hopEndTime,
+            Math.Max(unitPresenter.lungeEndTime,
+              Math.Max(unitPresenter.runeEndTime,
+                clock.GetTimeMs()))));
+      }
+
+      public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) {
+        staller(Math.Max(unitPresenter.hopEndTime, clock.GetTimeMs()));
+      }
+
+      public void OnIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffect effect) { effect.visitIIUnitComponentMutBunchEffect(this); }
+      public void visitIUnitComponentMutBunchCreateEffect(IUnitComponentMutBunchCreateEffect effect) { }
+      public void visitIUnitComponentMutBunchDeleteEffect(IUnitComponentMutBunchDeleteEffect effect) { }
+      public void OnIUnitComponentMutBunchRemove(int id) { }
+      public void OnIUnitComponentMutBunchAdd(int id) {
+        //var unitComponent = unitPresenter.unit.root.GetIUnitComponent(id);
+        //if (unitComponent is DefyingUCAsIUnitComponent) {
+        //} else {
+        //}
       }
     }
   }

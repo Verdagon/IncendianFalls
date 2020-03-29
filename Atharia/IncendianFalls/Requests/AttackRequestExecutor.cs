@@ -22,7 +22,7 @@ namespace IncendianFalls {
       var player = game.player;
 
       Unit victim = context.root.GetUnit(targetUnitId);
-      if (!victim.alive) {
+      if (!victim.Alive()) {
         return "Can't attack, victim already dead!";
       }
 

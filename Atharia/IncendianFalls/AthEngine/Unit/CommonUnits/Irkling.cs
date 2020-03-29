@@ -12,7 +12,6 @@ namespace IncendianFalls {
       components.Add(root.EffectBaseOffenseUCCreate(0, 80).AsIUnitComponent());
       return root.EffectUnitCreate(
         NullIUnitEvent.Null,
-              true,
               0,
               new Location(0, 0, 0),
               "Irkling",

@@ -308,7 +308,6 @@ public void visitUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this);
   public void visitUnitCreateEffect(UnitCreateEffect effect) {
     var instance = root.EffectUnitCreate(
   effect.incarnation.evvent,
-  effect.incarnation.alive,
   effect.incarnation.lifeEndTime,
   effect.incarnation.location,
   effect.incarnation.classId,
@@ -331,13 +330,6 @@ public void visitUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this);
      
   public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
     root.EffectUnitSetEvvent(
-      effect.id,
-  effect.newValue
-    );
-  }
-
-  public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) {
-    root.EffectUnitSetAlive(
       effect.id,
   effect.newValue
     );

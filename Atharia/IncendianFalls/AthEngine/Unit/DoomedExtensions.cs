@@ -15,7 +15,6 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit unit) {
       if (game.time >= self.deathTime) {
-        unit.alive = false;
         unit.lifeEndTime = game.time;
         // Bump the victim up to be the next acting unit.
         unit.nextActionTime = game.time;

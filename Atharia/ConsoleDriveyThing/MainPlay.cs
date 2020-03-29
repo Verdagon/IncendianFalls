@@ -148,7 +148,7 @@ namespace ConsoleDriveyThing {
             Asserts.Assert(resumeStatus == "");
             ApplyEffectsAndDisplay(game, FilterRelevantEffects(resumeEffects), display);
           }
-          if (game.player.Exists() && !game.player.alive) {
+          if (game.player.Exists() && !game.player.Alive()) {
             break;
           }
 

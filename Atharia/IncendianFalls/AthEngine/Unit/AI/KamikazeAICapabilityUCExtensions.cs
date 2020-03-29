@@ -88,7 +88,7 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
-      Asserts.Assert(!unit.alive, "curiosity");
+      Asserts.Assert(!unit.Alive(), "curiosity");
       var targetLocations = new SortedSet<Location>(self.targetByLocation.Keys);
       foreach (var location in targetLocations) {
         var target = self.targetByLocation[location];

@@ -13,7 +13,6 @@ namespace IncendianFalls {
       components.Add(root.EffectSummonAICapabilityUCCreate("Irkling", 10).AsIUnitComponent());
       return root.EffectUnitCreate(
         NullIUnitEvent.Null,
-              true,
               0,
               new Location(0, 0, 0),
               "IrklingKing",

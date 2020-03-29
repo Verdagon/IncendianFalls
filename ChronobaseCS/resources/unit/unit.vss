@@ -3,8 +3,7 @@ mut struct Unit {
   Unit isa IDestructible;
 
   var evvent: ?IUnitEvent;
-  var alive: Bool;
-  var lifeEndTime: Int;
+  var lifeEndTime: Int; // if 0, hasn't died.
   var location: Location;
   classId: Str;
   var nextActionTime: Int;

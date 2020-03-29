@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Atharia.Model;
 using UnityEngine;
 using AthPlayer;
+using static AthPlayer.OverlayPresenter;
 
 namespace Domino {
   public class PlayerController :
@@ -14,16 +15,14 @@ namespace Domino {
 
     IClock cinematicTimer;
     InputSemaphore inputSemaphore;
-    ISuperstructure ss;
+    SuperstructureWrapper ss;
     EffectBroadcaster broadcaster;
-    Superstate superstate;
     FollowingCameraController cameraController;
     Game game;
     ITimer timer;
-    ExecutionStaller resumeStaller;
-    ExecutionStaller turnStaller;
     PlayerPanelView playerPanelView;
     OverlayPresenterFactory overlayPresenterFactory;
+    ShowInstructions showInstructions;
     ShowError showError;
     Looker looker;
     OverlayPaneler overlayPaneler;
@@ -38,29 +37,25 @@ namespace Domino {
     public PlayerController(
         ITimer timer,
         IClock cinematicTimer,
-        ExecutionStaller resumeStaller,
-        ExecutionStaller turnStaller,
         InputSemaphore inputSemaphore,
-        ISuperstructure ss,
+        SuperstructureWrapper ss,
         EffectBroadcaster broadcaster,
-        Superstate superstate,
         Game game,
         Looker looker,
         OverlayPaneler overlayPaneler,
         OverlayPresenterFactory overlayPresenterFactory,
         CameraController innerCameraController,
+        ShowInstructions showInstructions,
         ShowError showError,
         GameObject thinkingIndicator) {
       this.broadcaster = broadcaster;
       this.ss = ss;
       this.inputSemaphore = inputSemaphore;
-      this.superstate = superstate;
       this.cinematicTimer = cinematicTimer;
+      this.showInstructions = showInstructions;
       this.game = game;
       this.overlayPaneler = overlayPaneler;
       this.timer = timer;
-      this.resumeStaller = resumeStaller;
-      this.turnStaller = turnStaller;
       this.looker = looker;
       this.overlayPresenterFactory = overlayPresenterFactory;
       this.showError = showError;
@@ -70,9 +65,6 @@ namespace Domino {
 
       this.game.AddObserver(broadcaster, this);
 
-      this.resumeStaller.unstalledEvent += (sender) => MaybeResume();
-      this.turnStaller.unstalledEvent += (sender) => MaybeResume();
-
       this.hideInput = false;
       this.player = Unit.Null;
 
@@ -81,8 +73,6 @@ namespace Domino {
       UpdatePlayerPanel();
 
       SwitchToNormalMode();
-      
-      MaybeResume();
     }
 
     public void LookAt(Unit maybeUnit, TerrainTile maybeTerrainTile) {
@@ -98,29 +88,32 @@ namespace Domino {
     private void DoIfAllowedAndWhenReady(WaitingInput inputCallback) {
       if (inputSemaphore.locked) {
         Debug.LogError("Rejecting input, locked!");
+        // Someday we should show a little icon here or something.
       } else {
-        // We might be timeshifting or something, told by superstate.
-        // But even if the core is ready for input, we might be finishing up
-        // some animations, told by turnStaller.
-        if (superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput && !turnStaller.IsStalled()) {
-          thinkingIndicator.SetActive(true);
-          timer.ScheduleTimer(0, () => {
-            Asserts.Assert(!inputSemaphore.locked, "curiosity a");
-            // If this gets triggered, then perhaps we're sending input from somewhere else, in this 0ms window?
-            Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput, "curiosity b");
-            Asserts.Assert(!turnStaller.IsStalled(), "curiosity c");
-            inputCallback();
-            thinkingIndicator.SetActive(false);
-          });
-        } else {
-          waitingInput = () => {
-            thinkingIndicator.SetActive(true);
-            timer.ScheduleTimer(0, () => {
-              inputCallback();
-              thinkingIndicator.SetActive(false);
-            });
-          };
-        }
+        inputCallback();
+
+        //// We might be timeshifting or something, told by superstate.
+        //// But even if the core is ready for input, we might be finishing up
+        //// some animations, told by turnStaller.
+        //if (superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput && !turnStaller.IsStalled()) {
+        //  thinkingIndicator.SetActive(true);
+        //  timer.ScheduleTimer(0, () => {
+        //    Asserts.Assert(!inputSemaphore.locked, "curiosity a");
+        //    // If this gets triggered, then perhaps we're sending input from somewhere else, in this 0ms window?
+        //    Asserts.Assert(superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput, "curiosity b");
+        //    Asserts.Assert(!turnStaller.IsStalled(), "curiosity c");
+        //    inputCallback();
+        //    thinkingIndicator.SetActive(false);
+        //  });
+        //} else {
+        //  waitingInput = () => {
+        //    thinkingIndicator.SetActive(true);
+        //    timer.ScheduleTimer(0, () => {
+        //      inputCallback();
+        //      thinkingIndicator.SetActive(false);
+        //    });
+        //  };
+        //}
       }
     }
 
@@ -131,67 +124,67 @@ namespace Domino {
     }
 
     public void AfterDidSomething() {
-      MaybeResume();
+      //MaybeResume();
     }
 
-    private void MaybeResume() {
-      for (bool processing = true; processing; ) {
-        if (resumeStaller.IsStalled()) {
-          return; // To be continued... via a staller getting unstalled.
-        }
-        if (superstate.timeShiftingState == null) {
-          if (!game.player.Exists() || !game.player.alive) {
-            // Player has died, bail!
-            return;
-          }
-        }
-        switch (superstate.GetStateType()) {
-          case MultiverseStateType.kAfterUnitAction:
-          case MultiverseStateType.kBeforeEnemyAction:
-          case MultiverseStateType.kPreActingDetail:
-          case MultiverseStateType.kPostActingDetail:
-          case MultiverseStateType.kBetweenUnits:
-            Asserts.Assert(game.player.Exists() && game.player.alive, "Can't resume if player's not alive");
-            ss.RequestResume(game.id);
-            break;
-          case MultiverseStateType.kBeforePlayerInput:
-          case MultiverseStateType.kBeforePlayerResume:
-            processing = false;
-            break;
-          case MultiverseStateType.kTimeshiftingBackward:
-          case MultiverseStateType.kTimeshiftingCloneMoving:
-          case MultiverseStateType.kTimeshiftingAfterCloneMoved:
-            ss.RequestTimeShift(game.id);
-            resumeStaller.StallForDuration(300);
-            turnStaller.StallForDuration(300);
-            break;
-          default:
-            Asserts.Assert(false);
-            break;
-        }
-      }
+    //private void MaybeResume() {
+    //  for (bool processing = true; processing; ) {
+    //    if (resumeStaller.IsStalled()) {
+    //      return; // To be continued... via a staller getting unstalled.
+    //    }
+    //    if (superstate.timeShiftingState == null) {
+    //      if (!game.player.Exists() || !game.player.alive) {
+    //        // Player has died, bail!
+    //        return;
+    //      }
+    //    }
+    //    switch (superstate.GetStateType()) {
+    //      case MultiverseStateType.kAfterUnitAction:
+    //      case MultiverseStateType.kBeforeEnemyAction:
+    //      case MultiverseStateType.kPreActingDetail:
+    //      case MultiverseStateType.kPostActingDetail:
+    //      case MultiverseStateType.kBetweenUnits:
+    //        Asserts.Assert(game.player.Exists() && game.player.alive, "Can't resume if player's not alive");
+    //        ss.RequestResume(game.id);
+    //        break;
+    //      case MultiverseStateType.kBeforePlayerInput:
+    //      case MultiverseStateType.kBeforePlayerResume:
+    //        processing = false;
+    //        break;
+    //      case MultiverseStateType.kTimeshiftingBackward:
+    //      case MultiverseStateType.kTimeshiftingCloneMoving:
+    //      case MultiverseStateType.kTimeshiftingAfterCloneMoved:
+    //        ss.RequestTimeShift(game.id);
+    //        resumeStaller.StallForDuration(300);
+    //        turnStaller.StallForDuration(300);
+    //        break;
+    //      default:
+    //        Asserts.Assert(false);
+    //        break;
+    //    }
+    //  }
 
-      Asserts.Assert(
-          superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput ||
-          superstate.GetStateType() == MultiverseStateType.kBeforePlayerResume);
+    //  Asserts.Assert(
+    //      superstate.GetStateType() == MultiverseStateType.kBeforePlayerInput ||
+    //      superstate.GetStateType() == MultiverseStateType.kBeforePlayerResume);
 
-      if (turnStaller.IsStalled()) {
-        return; // To be continued... via a staller getting unstalled.
-      }
+    //  if (turnStaller.IsStalled()) {
+    //    return; // To be continued... via a staller getting unstalled.
+    //  }
 
-      if (superstate.GetStateType() == MultiverseStateType.kBeforePlayerResume) {
-        ss.RequestFollowDirective(game.id);
-        AfterDidSomething();
-      } else {
-        if (waitingInput != null) {
-          var lam = waitingInput;
-          waitingInput = null;
-          lam();
-        } else {
-          return; // To be continued... via a player action.
-        }
-      }
-    }
+    //  if (superstate.GetStateType() == MultiverseStateType.kBeforePlayerResume) {
+    //    ss.RequestFollowDirective(game.id);
+    //    AfterDidSomething();
+    //  } else {
+    //    if (waitingInput != null) {
+    //      var lam = waitingInput;
+    //      waitingInput = null;
+    //      lam();
+    //    } else {
+    //      return; // To be continued... via a player action.
+    //    }
+    //  }
+    //}
 
     public void ActivateCheat(string cheatName) {
       string result = ss.RequestCheat(game.id, cheatName);
@@ -255,16 +248,16 @@ namespace Domino {
         Cancel(false);
         // continue
       }
-      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
-        Asserts.Assert(false, "wat");
-        showError("(Player not ready to act yet.)");
-        AfterDidSomething();
-        return;
-      }
+      //if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
+      //  Asserts.Assert(false, "wat");
+      //  showError("(Player not ready to act yet.)");
+      //  AfterDidSomething();
+      //  return;
+      //}
       switch (capabilityId) {
         case PlayerPanelView.TIME_ANCHOR_MOVE_CAPABILITY_ID:
           modeCapabilityId = capabilityId;
-          mode = new TimeAnchorMoveMode(ss, superstate, game, this, overlayPresenterFactory, showError);
+          mode = new TimeAnchorMoveMode(ss, game, this, showInstructions, showError);
           break;
         case PlayerPanelView.REVERT_CAPABILITY_ID:
           string timeShiftResult = ss.RequestTimeShift(game.id);
@@ -273,7 +266,6 @@ namespace Domino {
             AfterDidSomething();
             return;
           }
-          ss.GetRoot().logger.Info("time shifted, new state: " + superstate.GetStateType());
           AfterDidSomething();
           break;
         case PlayerPanelView.INTERACT_CAPABILITY_ID:
@@ -305,23 +297,23 @@ namespace Domino {
           break;
         case PlayerPanelView.FIRE_BOMB_CAPABILITY_ID:
           if (game.player.components.GetAllBlastRod().Count == 0) {
-            overlayPresenterFactory(new ShowOverlayEvent("Can't fire bomb, find a Fire Rod first!", "error", "narrator", false, false, false, new ButtonImmList()));
+            overlayPresenterFactory("error", "narrator", false, false, false, "Can't fire bomb, find a Fire Rod first!", new List<PageButton>());
             return;
           }
           modeCapabilityId = capabilityId;
-          mode = new FireBombMode(ss, superstate, game, this, overlayPresenterFactory, showError);
+          mode = new FireBombMode(ss, game, this, showInstructions, showError);
           break;
         case PlayerPanelView.FIRE_CAPABILITY_ID:
           modeCapabilityId = capabilityId;
-          mode = new FireMode(ss, superstate, game, this, overlayPresenterFactory, showError);
+          mode = new FireMode(ss, game, this, showInstructions, showError);
           break;
         case PlayerPanelView.MIRE_CAPABILITY_ID:
           if (game.player.components.GetAllSlowRod().Count == 0) {
-            overlayPresenterFactory(new ShowOverlayEvent("Can't mire, find a Mire Staff first!", "error", "narrator", false, false, false, new ButtonImmList()));
+            overlayPresenterFactory("error", "narrator", false, false, false, "Can't mire, find a Mire Staff first!", new List<PageButton>());
             return;
           }
           modeCapabilityId = capabilityId;
-          mode = new MireMode(ss, superstate, game, this, overlayPresenterFactory, showError);
+          mode = new MireMode(ss, game, this, showInstructions, showError);
           break;
         default:
           Debug.LogError("unknown capability id!");
@@ -333,18 +325,19 @@ namespace Domino {
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) { }
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) { }
-    public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) {}
-    public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) {
-      if (effect.newValue == false) {
+    public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) {
+      if (effect.newValue != 0) {
         var overlayPresenter = overlayPresenterFactory(
-          new ShowOverlayEvent(
-            "You have died!",
             "normal",
             "narrator",
             false,
             false,
             false,
-            new ButtonImmList(new List<Button>() { new Button("Alas...", "_exitGame") })));
+            "You have died!",
+            new List<PageButton>() {new PageButton("Alas...", () => {
+              throw new NotImplementedException();
+              //exit?.Invoke();
+            }) });
         // Do nothing with it, itll kill itself.
       }
     }
@@ -370,7 +363,7 @@ namespace Domino {
     }
 
     public void SwitchToNormalMode() {
-      mode = new NormalMode(ss, superstate, game, this, showError);
+      mode = new NormalMode(ss, game, this, showError);
       modeCapabilityId = 0;
     }
 
@@ -439,24 +432,10 @@ namespace Domino {
       }
     }
 
-    public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
-      throw new NotImplementedException();
-    }
-
-    public void visitGameSetActingUnitEffect(GameSetActingUnitEffect effect) {
-      throw new NotImplementedException();
-    }
-
-    public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect effect) {
-      throw new NotImplementedException();
-    }
-
-    public void visitGameSetActionNumEffect(GameSetActionNumEffect effect) {
-      throw new NotImplementedException();
-    }
-
-    public void visitGameSetEvventEffect(GameSetEvventEffect effect) {
-      throw new NotImplementedException();
-    }
+    public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) { }
+    public void visitGameSetActingUnitEffect(GameSetActingUnitEffect effect) { }
+    public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect effect) { }
+    public void visitGameSetActionNumEffect(GameSetActionNumEffect effect) { }
+    public void visitGameSetEvventEffect(GameSetEvventEffect effect) { }
   }
 }

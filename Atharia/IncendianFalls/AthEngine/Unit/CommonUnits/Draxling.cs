@@ -14,7 +14,6 @@ namespace IncendianFalls {
       components.Add(root.EffectBaseOffenseUCCreate(0, 60).AsIUnitComponent());
       return root.EffectUnitCreate(
         NullIUnitEvent.Null,
-              true,
               0,
               new Location(0, 0, 0),
               "draxling",

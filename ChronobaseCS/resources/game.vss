@@ -79,6 +79,11 @@ imm struct WaitEvent {
   timeMs: Int;
 }
 
+// Includes camera and unit animations.
+imm struct WaitForAnimationsEvent {
+  WaitForAnimationsEvent isa IGameEvent;
+}
+
 imm struct SetGameSpeedEvent {
   SetGameSpeedEvent isa IGameEvent;
 

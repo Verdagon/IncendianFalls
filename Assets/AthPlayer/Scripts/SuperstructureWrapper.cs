@@ -8,164 +8,175 @@ using System;
 using IncendianFalls;
 
 namespace AthPlayer {
-  //public class SuperstructureWrapper : ISuperstructure {
-  //  Superstructure ss;
+  public class SuperstructureWrapper {
+    Superstructure ss;
+    public Queue<IEffect> waitingEffects { get; private set; }
 
-  //  public SuperstructureWrapper(Superstructure ss) {
-  //    this.ss = ss;
-  //  }
+    public SuperstructureWrapper(Superstructure ss) {
+      this.ss = ss;
+      waitingEffects = new Queue<IEffect>();
+    }
 
-  //  public Root GetRoot() {
-  //    return ss.GetRoot();
-  //  }
+    public Root GetRoot() {
+      return ss.GetRoot();
+    }
 
-  //  public Superstate GetSuperstate(int gameId) {
-  //    return ss.GetSuperstate(GetRoot().GetGame(gameId));
-  //  }
+    public Superstate GetSuperstate(int gameId) {
+      return ss.GetSuperstate(GetRoot().GetGame(gameId));
+    }
 
-  //  public Game RequestSetupGauntletGame(int randomSeed, bool squareLevelsOnly) {
-  //    var result = ss.RequestSetupGauntletGame(randomSeed, squareLevelsOnly);
+    public Game RequestSetupGauntletGame(int randomSeed, bool squareLevelsOnly) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestSetupGauntletGame(randomSeed, squareLevelsOnly);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //    return result;
-  //  }
+    public Game RequestSetupIncendianFallsGame(int randomSeed, bool squareLevelsOnly) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestSetupIncendianFallsGame(randomSeed, squareLevelsOnly);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //  public Game RequestSetupIncendianFallsGame(int randomSeed, bool squareLevelsOnly) {
-  //    var result = ss.RequestSetupIncendianFallsGame(randomSeed, squareLevelsOnly);
+    public Game RequestSetupEmberDeepGame(int randomSeed, int startLevel, bool squareLevelsOnly) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestSetupEmberDeepGame(randomSeed, startLevel, squareLevelsOnly);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //    return result;
-  //  }
+    //public Atharia.Model.Terrain RequestSetupTerrain(Pattern pattern) {
+    //  Asserts.Assert(waitingEffects.Count == 0);
+    //  var (effects, result) = ss.RequestSetupTerrain(pattern);
+    
+      //foreach (var effect in effects) {
+      //  waitingEffects.Enqueue(effect);
+      //}
+    //  return result;
+    //}
 
-  //  public Game RequestSetupEmberDeepGame(int randomSeed, int startLevel, bool squareLevelsOnly) {
-  //    var result = ss.RequestSetupEmberDeepGame(randomSeed, startLevel, squareLevelsOnly);
+    public string RequestCheat(int gameId, string cheatName) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestCheat(gameId, cheatName);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //    return result;
-  //  }
+    public string RequestAttack(int gameId, int targetUnitId) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestAttack(gameId, targetUnitId);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //  public Atharia.Model.Terrain RequestSetupTerrain(Pattern pattern) {
-  //    var result = ss.RequestSetupTerrain(pattern);
+    public string RequestFire(int gameId, int targetUnitId) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestFire(gameId, targetUnitId);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //    return result;
-  //  }
+    public string RequestFireBomb(int gameId, Location location) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestFireBomb(gameId, location);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //  public string RequestCheat(int gameId, string cheatName) {
-  //    var result = ss.RequestCheat(gameId, cheatName);
+    public string RequestMire(int gameId, int targetUnitId) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestMire(gameId, targetUnitId);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //    return result;
-  //  }
+    public string RequestMove(int gameId, Location newLocation) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestMove(gameId, newLocation);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //  public string RequestAttack(int gameId, int targetUnitId) {
-  //    var result = ss.RequestAttack(gameId, targetUnitId);
+    public string RequestTimeAnchorMove(int gameId, Location newLocation) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestTimeAnchorMove(gameId, newLocation);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //    return result;
-  //  }
+    public string RequestTimeShift(int gameId) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestTimeShift(gameId);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //  public string RequestCancel(int gameId) {
-  //    var result = ss.RequestCancel(gameId);
+    public string RequestResume(int gameId) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestResume(gameId);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //    return result;
-  //  }
+    public string RequestDefy(int gameId) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestDefy(gameId);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //  public string RequestFire(int gameId, int targetUnitId) {
-  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-  //    //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);
+    public string RequestCounter(int gameId) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestCounter(gameId);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //    var result = ss.RequestFire(gameId, targetUnitId);
+    public string RequestInteract(int gameId) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestInteract(gameId);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
 
-  //    return result;
-  //  }
-
-  //  public string RequestFireBomb(int gameId, Location location) {
-  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-  //    //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);
-
-  //    var result = ss.RequestFireBomb(gameId, location);
-
-  //    return result;
-  //  }
-
-  //  public string RequestMire(int gameId, int targetUnitId) {
-  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-  //    //ss.GetRoot().logger.Error("RequestAttack State: " + executionStateStr);
-
-  //    var result = ss.RequestMire(gameId, targetUnitId);
-
-  //    return result;
-  //  }
-
-  //  public string RequestMove(int gameId, Location newLocation) {
-  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-  //    //ss.GetRoot().logger.Error("RequestMove State: " + executionStateStr);
-
-  //    var result = ss.RequestMove(gameId, newLocation);
-
-  //    return result;
-  //  }
-
-  //  public string RequestTimeAnchorMove(int gameId, Location newLocation) {
-  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-  //    //ss.GetRoot().logger.Error("RequestMove State: " + executionStateStr);
-
-  //    var result = ss.RequestTimeAnchorMove(gameId, newLocation);
-
-  //    return result;
-  //  }
-
-  //  public string RequestTimeShift(int gameId) {
-  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-  //    //ss.GetRoot().logger.Error("RequestTimeShift State: " + executionStateStr);
-
-  //    var result = ss.RequestTimeShift(gameId);
-
-  //    return result;
-  //  }
-
-  //  public string RequestResume(int gameId) {
-  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-  //    //ss.GetRoot().logger.Error("RequestResume State: " + executionStateStr);
-
-  //    var result = ss.RequestResume(gameId);
-
-  //    return result;
-  //  }
-
-  //  public string RequestDefy(int gameId) {
-  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-  //    //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
-
-  //    var result = ss.RequestDefy(gameId);
-
-  //    return result;
-  //  }
-
-  //  public string RequestCounter(int gameId) {
-  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-  //    //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
-
-  //    var result = ss.RequestCounter(gameId);
-
-  //    return result;
-  //  }
-
-  //  public string RequestInteract(int gameId) {
-  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-  //    //ss.GetRoot().logger.Error("RequestDefy State: " + executionStateStr);
-
-  //    var result = ss.RequestInteract(gameId);
-
-  //    return result;
-  //  }
-
-  //  public string RequestFollowDirective(int gameId) {
-  //    //var executionStateStr = ss.GetRoot().GetGame(gameId).executionState.SummaryStr();
-  //    //ss.GetRoot().logger.Error("RequestFollowDirective State: " + executionStateStr);
-
-  //    string result = ss.RequestFollowDirective(gameId);
-
-  //    return result;
-  //  }
-
-  //  public string RequestTrigger(int gameId, string triggerName) {
-  //    return ss.RequestTrigger(gameId, triggerName);
-  //  }
-  //}
+    public string RequestCommAction(int gameId, int commId, int actionIndex) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestCommAction(gameId, commId, actionIndex);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
+  }
 }

@@ -141,7 +141,6 @@ namespace IncendianFalls {
       var newPlayer =
           context.root.EffectUnitCreate(
               NullIUnitEvent.Null,
-              true,
               0,
               targetAnchorLocation,
               futurePlayer.classId,

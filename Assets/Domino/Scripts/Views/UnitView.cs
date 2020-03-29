@@ -68,7 +68,7 @@ namespace Domino {
   }
 
   public class UnitView : MonoBehaviour {
-    public static readonly long HOP_DURATION_MS = 300;
+    private static readonly long HOP_DURATION_MS = 300;
 
     Instantiator instantiator;
 
@@ -307,13 +307,14 @@ namespace Domino {
       }
     }
 
-    public void HopTo(Vector3 newBasePosition) {
+    public long HopTo(Vector3 newBasePosition) {
       Vector3 oldBasePosition = basePosition;
       basePosition = newBasePosition;
 
       gameObject.transform.localPosition = newBasePosition;
 
       StartHopAnimation(HOP_DURATION_MS, newBasePosition - oldBasePosition, 0.5f);
+      return clock.GetTimeMs() + HOP_DURATION_MS;
     }
 
     private MovementAnimator GetOrCreateMovementAnimator() {
@@ -338,8 +339,9 @@ namespace Domino {
                       clock.GetTimeMs(), clock.GetTimeMs() + durationMs, offset, height)));
     }
 
-    public void Lunge(Vector3 offset) {
+    public long Lunge(Vector3 offset) {
       StartLungeAnimation(150, offset);
+      return clock.GetTimeMs() + 150;
     }
 
     private void StartLungeAnimation(long durationMs, Vector3 offset) {
@@ -350,7 +352,7 @@ namespace Domino {
               new LungeAnimation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs, offset));
     }
 
-    public void ShowRune(ExtrudedSymbolDescription runeSymbolDescription) {
+    public long ShowRune(ExtrudedSymbolDescription runeSymbolDescription) {
       var symbolView = instantiator.CreateSymbolView(clock, false, runeSymbolDescription);
       symbolView.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
       symbolView.transform.localScale = new Vector3(1, 1, .1f);
@@ -373,6 +375,7 @@ namespace Domino {
           Asserts.Assert(false, "Couldnt find!");
         });
       transientRunesAndTimerIds.Add(new KeyValuePair<SymbolView, int>(symbolView, timerId));
+      return clock.GetTimeMs() + 500;
     }
 
     public void StartFadeAnimation(long durationMs) {

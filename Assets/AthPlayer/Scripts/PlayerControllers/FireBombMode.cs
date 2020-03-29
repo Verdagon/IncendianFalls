@@ -5,37 +5,30 @@ using UnityEngine;
 
 namespace AthPlayer {
   public class FireBombMode : IMode {
-    ISuperstructure ss;
-    Superstate superstate;
+    SuperstructureWrapper ss;
     Game game;
     IModeDelegate delegat;
     ShowError showError;
     OverlayPresenter instructionsOverlay;
 
     public FireBombMode(
-        ISuperstructure ss,
-        Superstate superstate,
+        SuperstructureWrapper ss,
         Game game,
         IModeDelegate delegat,
-        OverlayPresenterFactory overlayPresenterFactory,
+        ShowInstructions showInstructions,
         ShowError showError) {
       this.ss = ss;
-      this.superstate = superstate;
       this.game = game;
       this.delegat = delegat;
       this.showError = showError;
 
-      instructionsOverlay =
-        overlayPresenterFactory(
-          new ShowOverlayEvent(
-            "Preparing to fire bomb! Select a location.",
-            "instructions", "narrator", true, true, false, new ButtonImmList()));
+      instructionsOverlay = showInstructions("Preparing to fire bomb! Select a location.");
     }
 
     public void OnTileMouseClick(Location location) {
       instructionsOverlay.Close();
 
-      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
+      if (!game.WaitingOnPlayerInput()) {
         ss.GetRoot().logger.Error("Not your turn!");
         delegat.AfterDidSomething();
         delegat.SwitchToNormalMode();

@@ -1,34 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using Atharia.Model;
 using Domino;
 
 namespace AthPlayer {
   public class FireMode : IMode {
-    ISuperstructure ss;
-    Superstate superstate;
+    SuperstructureWrapper ss;
     Game game;
     IModeDelegate delegat;
     ShowError showError;
     OverlayPresenter instructionsOverlay;
 
     public FireMode(
-        ISuperstructure ss,
-        Superstate superstate,
+        SuperstructureWrapper ss,
         Game game,
         IModeDelegate delegat,
-        OverlayPresenterFactory overlayPresenterFactory,
+        ShowInstructions showInstructions,
         ShowError showError) {
       this.ss = ss;
-      this.superstate = superstate;
       this.game = game;
       this.delegat = delegat;
       this.showError = showError;
 
       instructionsOverlay =
-        overlayPresenterFactory(
-          new ShowOverlayEvent(
-            "Preparing to fire! Select a unit to fire at.",
-            "instructions", "narrator", true, true, false, new ButtonImmList()));
+        showInstructions("Preparing to fire! Select a unit to fire at.");
     }
 
     private Unit FindUnitAtLocation(Location location) {
@@ -43,7 +38,7 @@ namespace AthPlayer {
     public void OnTileMouseClick(Location location) {
       instructionsOverlay.Close();
 
-      if (superstate.GetStateType() != MultiverseStateType.kBeforePlayerInput) {
+      if (!game.WaitingOnPlayerInput()) {
         ss.GetRoot().logger.Error("Not your turn!");
         delegat.AfterDidSomething();
         delegat.SwitchToNormalMode();

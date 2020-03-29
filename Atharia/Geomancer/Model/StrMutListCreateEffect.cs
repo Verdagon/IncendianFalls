@@ -11,8 +11,11 @@ public struct StrMutListCreateEffect : IStrMutListEffect {
     this.id = id;
   }
   int IStrMutListEffect.id => id;
-  public void visit(IStrMutListEffectVisitor visitor) {
+  public void visitIStrMutListEffect(IStrMutListEffectVisitor visitor) {
     visitor.visitStrMutListCreateEffect(this);
+  }
+  public void visitIEffect(IEffectVisitor visitor) {
+    visitor.visitStrMutListEffect(this);
   }
 }
 

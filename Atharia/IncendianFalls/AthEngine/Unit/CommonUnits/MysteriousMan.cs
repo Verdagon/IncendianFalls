@@ -10,7 +10,6 @@ namespace IncendianFalls {
       components.Add(root.EffectBaseDefenseUCCreate(0, 0).AsIUnitComponent());
       return root.EffectUnitCreate(
           NullIUnitEvent.Null,
-          true,
           0,
           new Location(0, 0, 0),
           "MysteriousMan",

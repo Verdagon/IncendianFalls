@@ -41,7 +41,7 @@ namespace IncendianFalls {
 
       // The unit theoretically could have self-destructed somehow.
       // Do we want to change this to a live check?
-      if (unit.alive) {
+      if (unit.Alive()) {
         foreach (var postReactor in unit.components.GetAllIImpulsePostReactor()) {
           postReactor.AfterImpulse(
             context,

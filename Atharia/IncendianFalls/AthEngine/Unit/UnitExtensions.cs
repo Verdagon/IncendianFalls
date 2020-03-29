@@ -62,6 +62,9 @@ namespace Atharia.Model {
       }
       return sightRange;
     }
+    public static bool Alive(this Unit unit) {
+      return unit.lifeEndTime == 0;
+    }
     public static void AddEvent(this Unit unit, IUnitEvent e) {
       unit.evvent = e;
       unit.evvent = NullIUnitEvent.Null;

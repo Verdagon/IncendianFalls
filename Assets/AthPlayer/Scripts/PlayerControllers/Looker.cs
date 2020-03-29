@@ -7,12 +7,14 @@ using UnityEngine;
 namespace AthPlayer {
   public class Looker : IUnitEffectObserver, IUnitEffectVisitor {
     LookPanelView lookPanelView;
+    EffectBroadcaster broadcaster;
     Unit lookedUnit = Unit.Null;
     TerrainTile lookedTile = TerrainTile.Null;
     string tooltip;
 
-    public Looker(LookPanelView lookPanelView) {
+    public Looker(LookPanelView lookPanelView, EffectBroadcaster broadcaster) {
       this.lookPanelView = lookPanelView;
+      this.broadcaster = broadcaster;
 
       lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
       SetTooltip("");
@@ -321,7 +323,6 @@ namespace AthPlayer {
 
     public void OnUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this); }
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
-    public void visitUnitSetAliveEffect(UnitSetAliveEffect effect) { }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) { }
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }

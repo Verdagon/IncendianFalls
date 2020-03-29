@@ -7797,10 +7797,6 @@ public class Root {
             EffectUnitSetEvvent(objId, sourceObjIncarnation.evvent);
           }
 
-          if (sourceObjIncarnation.alive != currentObjIncarnation.alive) {
-            EffectUnitSetAlive(objId, sourceObjIncarnation.alive);
-          }
-
           if (sourceObjIncarnation.lifeEndTime != currentObjIncarnation.lifeEndTime) {
             EffectUnitSetLifeEndTime(objId, sourceObjIncarnation.lifeEndTime);
           }
@@ -12062,7 +12058,6 @@ var effect = new TutorialDefyCounterUCSetNumDefiesRemainingEffect(id, newValue);
   }
   public Unit EffectUnitCreate(
       IUnitEvent evvent,
-      bool alive,
       int lifeEndTime,
       Location location,
       string classId,
@@ -12078,7 +12073,6 @@ var effect = new TutorialDefyCounterUCSetNumDefiesRemainingEffect(id, newValue);
     var incarnation =
         new UnitIncarnation(
             evvent,
-            alive,
             lifeEndTime,
             location,
             classId,
@@ -12122,15 +12116,14 @@ var effect = new TutorialDefyCounterUCSetNumDefiesRemainingEffect(id, newValue);
     if (!object.ReferenceEquals(incarnation.evvent, null)) {
       result += id * version * 1 * incarnation.evvent.GetDeterministicHashCode();
     }
-    result += id * version * 2 * incarnation.alive.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.lifeEndTime.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.location.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.classId.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.nextActionTime.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.hp.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.maxHp.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.components.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.good.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.lifeEndTime.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.location.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.classId.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.nextActionTime.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.hp.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.maxHp.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.components.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.good.GetDeterministicHashCode();
     return result;
   }
      
@@ -12146,38 +12139,6 @@ var effect = new UnitSetEvventEffect(id, newValue);
     } else {
       var newIncarnation =
           new UnitIncarnation(
-              newValue,
-              oldIncarnationAndVersion.incarnation.alive,
-              oldIncarnationAndVersion.incarnation.lifeEndTime,
-              oldIncarnationAndVersion.incarnation.location,
-              oldIncarnationAndVersion.incarnation.classId,
-              oldIncarnationAndVersion.incarnation.nextActionTime,
-              oldIncarnationAndVersion.incarnation.hp,
-              oldIncarnationAndVersion.incarnation.maxHp,
-              oldIncarnationAndVersion.incarnation.components,
-              oldIncarnationAndVersion.incarnation.good);
-      rootIncarnation.incarnationsUnit[id] =
-          new VersionAndIncarnation<UnitIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-    NotifyEffect(effect);
-  }
-
-  public void EffectUnitSetAlive(int id, bool newValue) {
-    CheckUnlocked();
-    CheckHasUnit(id);
-var effect = new UnitSetAliveEffect(id, newValue);
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsUnit[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.alive;
-      oldIncarnationAndVersion.incarnation.alive = newValue;
-
-    } else {
-      var newIncarnation =
-          new UnitIncarnation(
-              oldIncarnationAndVersion.incarnation.evvent,
               newValue,
               oldIncarnationAndVersion.incarnation.lifeEndTime,
               oldIncarnationAndVersion.incarnation.location,
@@ -12209,7 +12170,6 @@ var effect = new UnitSetLifeEndTimeEffect(id, newValue);
       var newIncarnation =
           new UnitIncarnation(
               oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.alive,
               newValue,
               oldIncarnationAndVersion.incarnation.location,
               oldIncarnationAndVersion.incarnation.classId,
@@ -12240,7 +12200,6 @@ var effect = new UnitSetLocationEffect(id, newValue);
       var newIncarnation =
           new UnitIncarnation(
               oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.alive,
               oldIncarnationAndVersion.incarnation.lifeEndTime,
               newValue,
               oldIncarnationAndVersion.incarnation.classId,
@@ -12271,7 +12230,6 @@ var effect = new UnitSetNextActionTimeEffect(id, newValue);
       var newIncarnation =
           new UnitIncarnation(
               oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.alive,
               oldIncarnationAndVersion.incarnation.lifeEndTime,
               oldIncarnationAndVersion.incarnation.location,
               oldIncarnationAndVersion.incarnation.classId,
@@ -12302,7 +12260,6 @@ var effect = new UnitSetHpEffect(id, newValue);
       var newIncarnation =
           new UnitIncarnation(
               oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.alive,
               oldIncarnationAndVersion.incarnation.lifeEndTime,
               oldIncarnationAndVersion.incarnation.location,
               oldIncarnationAndVersion.incarnation.classId,
@@ -12333,7 +12290,6 @@ var effect = new UnitSetMaxHpEffect(id, newValue);
       var newIncarnation =
           new UnitIncarnation(
               oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.alive,
               oldIncarnationAndVersion.incarnation.lifeEndTime,
               oldIncarnationAndVersion.incarnation.location,
               oldIncarnationAndVersion.incarnation.classId,
