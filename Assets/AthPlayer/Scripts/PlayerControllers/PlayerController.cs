@@ -297,7 +297,7 @@ namespace Domino {
           break;
         case PlayerPanelView.FIRE_BOMB_CAPABILITY_ID:
           if (game.player.components.GetAllBlastRod().Count == 0) {
-            overlayPresenterFactory("error", "narrator", false, false, false, "Can't fire bomb, find a Fire Rod first!", new List<PageButton>());
+            showError("Can't fire bomb, find a Fire Rod first!");
             return;
           }
           modeCapabilityId = capabilityId;
@@ -309,7 +309,7 @@ namespace Domino {
           break;
         case PlayerPanelView.MIRE_CAPABILITY_ID:
           if (game.player.components.GetAllSlowRod().Count == 0) {
-            overlayPresenterFactory("error", "narrator", false, false, false, "Can't mire, find a Mire Staff first!", new List<PageButton>());
+            showError("Can't mire, find a Mire Staff first!");
             return;
           }
           modeCapabilityId = capabilityId;
@@ -327,13 +327,10 @@ namespace Domino {
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) { }
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) {
       if (effect.newValue != 0) {
-        var overlayPresenter = overlayPresenterFactory(
-            "normal",
-            "narrator",
-            false,
-            false,
-            false,
-            "You have died!",
+        var overlayPresenter =
+          overlayPresenterFactory(
+            new NormalCommTemplate().AsICommTemplate(),
+            new List<PageText>() {  new PageText( "You have died!", new UnityEngine.Color(1, 1, 1)) },
             new List<PageButton>() {new PageButton("Alas...", () => {
               throw new NotImplementedException();
               //exit?.Invoke();

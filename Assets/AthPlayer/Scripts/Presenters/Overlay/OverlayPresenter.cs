@@ -25,113 +25,132 @@ namespace AthPlayer {
       }
     }
 
+    public class PageText {
+      public string text;
+      public UnityEngine.Color color;
+
+      public PageText(
+          string text,
+          UnityEngine.Color color) {
+        this.text = text;
+        this.color = color;
+      }
+    }
+
+    private class SubPageText {
+      public List<string> wrappedLines;
+      public UnityEngine.Color color;
+
+      public SubPageText(
+          List<string> wrappedLines,
+          UnityEngine.Color color) {
+        this.wrappedLines = wrappedLines;
+        this.color = color;
+      }
+    }
+
     public delegate void OnExit();
 
-    IPageController pageController;
-    bool isFirstInSequence;
-    bool isLastInSequence;
-    UnityEngine.Color textColor;
-    string[] wrappedOriginalLines;
-    List<PageButton> finalButtons;
     bool isPortrait;
+
+    List<PageButton> finalButtons;
     bool isObscuring;
+
+    List<SubPageText> subPageTexts;
+
+    IPageController pageController;
+    int currentSubPageIndex;
+
     OverlayPanelView currentPageOverlayPanelView;
 
     public OverlayPresenter(
         SlowableTimerClock cinematicTimer,
         OverlayPaneler overlayPaneler,
         InputSemaphore inputSemaphore,
-    string template,
-        string role,
-        bool isFirstInSequence,
-        bool isLastInSequence,
-        bool isObscuring,
-        string unwrappedText,
+        ICommTemplate template,
+        List<PageText> pageTexts,
         List<PageButton> buttons) {
       //this.cinematicTimer = cinematicTimer;
       //this.overlayPaneler = overlayPaneler;
       //this.inputSemaphore = inputSemaphore;
 
-      this.isFirstInSequence = isFirstInSequence;
-      this.isLastInSequence = isLastInSequence;
-      this.isObscuring = isObscuring;
-
-      switch (role) {
-        case "kylin":
-          textColor = new UnityEngine.Color(1, .2f, 0, 1);
-          break;
-        case "kylinBrother":
-          textColor = new UnityEngine.Color(.5f, 1, 1, 1);
-          break;
-        case "narrator":
-          textColor = new UnityEngine.Color(1, 1, 1, 1);
-          break;
-        default:
-          Debug.LogWarning("Unknown role: " + role);
-          textColor = new UnityEngine.Color(1, 1, 1, 1);
-          break;
-      }
-
-      switch (template) {
-        case "dramatic":
-          pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore, true, true);
-          break;
-        case "aside":
-          pageController = new AsidePageController(overlayPaneler, cinematicTimer, false);
-          break;
-        case "error":
-          pageController = new AsidePageController(overlayPaneler, cinematicTimer, true);
-          break;
-        case "instructions":
-          pageController = new InstructionsPageController(overlayPaneler, cinematicTimer);
-          break;
-        case "normal":
-        default:
-          pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore, false, false);
-          break;
-      }
-
-      finalButtons = buttons;
-
       isPortrait = Screen.height > Screen.width;
 
-      var (textMaxWidth, textMaxHeight) = pageController.GetPageTextMaxWidthAndHeight(isPortrait, finalButtons);
-      wrappedOriginalLines = LineWrapper.Wrap(unwrappedText, textMaxWidth);
+
+      this.finalButtons = buttons;
+      this.isObscuring = false;
+
+      if (template is DramaticCommTemplateAsICommTemplate dc) {
+        isObscuring = dc.obj.isObscuring;
+        pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore, true, true);
+      } else if (template is AsideCommTemplateAsICommTemplate a) {
+        pageController = new AsidePageController(overlayPaneler, cinematicTimer, false);
+      } else if (template is DialogueCommTemplateAsICommTemplate d) {
+        pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore, false, false);
+      } else if (template is ErrorCommTemplateAsICommTemplate e) {
+        pageController = new AsidePageController(overlayPaneler, cinematicTimer, true);
+      } else if (template is NormalCommTemplateAsICommTemplate) {
+        pageController = new NormalPageController(overlayPaneler, cinematicTimer, inputSemaphore, false, false);
+      } else if (template is InstructionsCommTemplateAsICommTemplate) {
+        pageController = new InstructionsPageController(overlayPaneler, cinematicTimer);
+      } else {
+        Asserts.Assert(false);
+      }
+
+      subPageTexts = new List<SubPageText>();
+      foreach (var pageText in pageTexts) {
+        var (textMaxWidth, textMaxHeight) = pageController.GetPageTextMaxWidthAndHeight(isPortrait, finalButtons);
+        var wrappedPageLines = LineWrapper.Wrap(pageText.text, textMaxWidth);
+
+        List<string> subPageLines = new List<string>();
+        foreach (var line in wrappedPageLines) {
+          subPageLines.Add(line);
+          if (subPageLines.Count == textMaxHeight) {
+            subPageTexts.Add(new SubPageText(subPageLines, pageText.color));
+            subPageLines = new List<string>();
+          }
+        }
+        if (subPageLines.Count > 0) {
+          subPageTexts.Add(new SubPageText(subPageLines, pageText.color));
+          subPageLines = new List<string>();
+        }
+      }
 
       ShowPage(0);
     }
 
-    private void ShowPage(int pageIndex) {
+    private void ShowPage(int subPageIndex) {
+      currentSubPageIndex = subPageIndex;
+
       var (textMaxWidth, textMaxHeight) = pageController.GetPageTextMaxWidthAndHeight(isPortrait, finalButtons);
 
-      List<string> pageLines = new List<string>();
-      for (int i = pageIndex * textMaxHeight; i < (pageIndex + 1) * textMaxHeight && i < wrappedOriginalLines.Length; i++) {
-        pageLines.Add(wrappedOriginalLines[i]);
-      }
+      var isFirstSubPage = currentSubPageIndex == 0;
+      var isLastSubPage = currentSubPageIndex == subPageTexts.Count - 1;
 
-      bool isFirstPage = pageIndex == 0;
+      //int numPages = (currentPageWrappedLines.Count + textMaxHeight - 1) / textMaxHeight; // Rounds up
 
-      int numPages = (wrappedOriginalLines.Length + textMaxHeight - 1) / textMaxHeight; // Rounds up
-      bool isLastPage = pageIndex == numPages - 1;
-
-      List<PageButton> buttons = finalButtons;// new List<PageButton>();
-      if (isLastPage) {
+      List<PageButton> buttons = new List<PageButton>();
+      if (isLastSubPage) {
         //foreach (var finalButton in finalButtons) {
         //  buttons.Add(new PageButton(finalButton.label, () => {
         //    finalButton.clicked();
         //  }));
         //}
+        buttons = finalButtons;
       } else {
-        buttons.Add(new PageButton("...", () => ShowPage(pageIndex + 1)));
+        buttons.Add(new PageButton("...", () => ShowPage(subPageIndex + 1)));
       }
 
-      var fadeInBackground = isFirstInSequence && isFirstPage;
-      var fadeOutBackground = isLastInSequence && isLastPage;
+      var fadeInBackground = isFirstSubPage;
+      var fadeOutBackground = isLastSubPage;
       var callCallbackAfterFadeOut = !isObscuring;
+
+      Debug.LogError("lines: " + subPageTexts[currentSubPageIndex].wrappedLines.Count);
+
       currentPageOverlayPanelView =
         pageController.ShowPage(
-          pageLines,
-          textColor,
+          subPageTexts[currentSubPageIndex].wrappedLines,
+          subPageTexts[currentSubPageIndex].color,
           buttons,
           fadeInBackground,
           fadeOutBackground,

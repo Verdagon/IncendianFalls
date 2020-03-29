@@ -34,6 +34,7 @@ namespace AthPlayer {
     InputSemaphore inputSemaphore;
 
     TerrainPresenter terrainPresenter;
+    OverlayPaneler overlayPaneler;
     OverlayPresenterFactory overlayPresenterFactory;
     ShowError showError;
     ShowInstructions showInstructions;
@@ -43,7 +44,11 @@ namespace AthPlayer {
 
     PlayerController playerController;
 
+    OverlayPresenter currentModalOverlay;
+
     long stallEffectUntilTimeMs;
+
+    CommEffectStaller commEffectStaller;
 
     public GamePresenter(
         ITimer cameraTimer,
@@ -66,6 +71,7 @@ namespace AthPlayer {
       this.inputSemaphore = inputSemaphore;
       this.instantiator = instantiator;
       this.overlayPresenterFactory = overlayPresenterFactory;
+      this.overlayPaneler = overlayPaneler;
       this.showError = showError;
       this.showInstructions = showInstructions;
       this.thinkingIndicator = thinkingIndicator;
@@ -106,20 +112,13 @@ namespace AthPlayer {
       timer = new SlowableTimerClock(1f);
       cinematicTimer = new SlowableTimerClock(1f);
 
+      commEffectStaller = new CommEffectStaller(timer, this, previewBroadcaster, StallEffect);
+
       inputSemaphore.OnLocked += () => timer.SetTimeSpeedMultiplier(0f);
       inputSemaphore.OnUnlocked += () => timer.SetTimeSpeedMultiplier(1f);
 
-      //resumeStaller = new ExecutionStaller(timer, timer);
-      //turnStaller = new ExecutionStaller(timer, timer);
-
-      //turnStaller.stalledEvent += (x) => {
-      //  stalledIndicator.SetActive(true);
-      //};
-      //turnStaller.unstalledEvent += (x) => {
-      //  stalledIndicator.SetActive(false);
-      //};
-
       game.AddObserver(broadcaster, this);
+      game.comms.AddObserver(broadcaster, this);
 
       playerController =
           new PlayerController(
@@ -153,7 +152,7 @@ namespace AthPlayer {
       while (serverSS.waitingEffects.Count > 0) {
         var effect = serverSS.waitingEffects.Peek();
 
-        previewBroadcaster.Route(effect);
+        previewBroadcaster.Broadcast(effect);
         // The above previewBroadcaster should make interested parties set the stallEffectUntilTimeMs.
         if (timer.GetTimeMs() < stallEffectUntilTimeMs) {
           break;
@@ -183,8 +182,9 @@ namespace AthPlayer {
         if (readyEffects.Count > 0) {
           game.root.Transact(() => {
             foreach (var effect in readyEffects) {
+              //Debug.Log("Applying " + effect);
               new EffectApplier(game.root).Apply(effect);
-              broadcaster.Route(effect);
+              broadcaster.Broadcast(effect);
             }
             return 0;
           });
@@ -300,7 +300,6 @@ namespace AthPlayer {
     public void visitUnitMutSetCreateEffect(UnitMutSetCreateEffect effect) { }
     public void visitUnitMutSetDeleteEffect(UnitMutSetDeleteEffect effect) { }
     public void visitUnitMutSetAddEffect(UnitMutSetAddEffect effect) {
-      Debug.LogError("unit mut set add! " + effect.element);
       AddUnit(effect.element);
     }
     public void visitUnitMutSetRemoveEffect(UnitMutSetRemoveEffect effect) {
@@ -434,34 +433,93 @@ namespace AthPlayer {
     public void visitCommMutListRemoveEffect(CommMutListRemoveEffect effect) { }
     public void visitCommMutListAddEffect(CommMutListAddEffect effect) {
       var comm = game.root.GetComm(effect.element);
-      throw new NotImplementedException();
-      //overlayPresenterFactory(comm.template, comm.spea)
-      // do nothing, itll kill itself.
 
-      //var buttons = new List<OverlayPresenter.PageButton>();
-      //for (int i = 0; i < comm.actions.Count; i++) {
-      //  buttons.Add(
-      //    new OverlayPresenter.PageButton(
-      //      comm.actions[i].label,
-      //      () => {
-      //        if (comm.actions[i].triggerName == "_exitGame") {
-      //          exitClicked?.Invoke();
-      //        } else {
-      //          ss.RequestTrigger(game.id, button.triggerName);
-      //        }
-      //      }));
-      //}
-      //return new OverlayPresenter(
-      //  uiTimer,
-      //  overlayPaneler,
-      //  inputSemaphore,
-      //  comm.template,
-      //  comm.speakerRole,
-      //  comm.isFirstInSequence,
-      //  comm.isLastInSequence,
-      //  comm.isObscuring,
-      //  comm.text,
-      //  buttons);
+      bool isModal =
+          comm.template is DramaticCommTemplateAsICommTemplate ||
+          comm.template is NormalCommTemplateAsICommTemplate ||
+          comm.template is DialogueCommTemplateAsICommTemplate;
+
+      var buttons = new List<OverlayPresenter.PageButton>();
+      for (int i = 0; i < comm.actions.Count; i++) {
+        buttons.Add(
+          new OverlayPresenter.PageButton(
+            comm.actions[i].label,
+            () => {
+              if (isModal) {
+                currentModalOverlay = null;
+              }
+              if (i < comm.actions.Count) {
+                if (comm.actions[i].triggerName == "_exitGame") {
+                  exitClicked?.Invoke();
+                } else {
+                  serverSS.RequestCommAction(game.id, comm.id, i);
+                }
+              }
+            }));
+      }
+
+      var overlayPages = new List<OverlayPresenter.PageText>();
+      foreach (var commText in comm.texts) {
+        var textColor = new UnityEngine.Color(1, 1, 1);
+        switch (commText.speakerRole) {
+          case "kylin":
+            textColor = new UnityEngine.Color(1, .2f, 0, 1);
+            break;
+          case "kylinBrother":
+            textColor = new UnityEngine.Color(.5f, 1, 1, 1);
+            break;
+          case "narrator":
+            textColor = new UnityEngine.Color(1, 1, 1, 1);
+            break;
+          default:
+            Debug.LogWarning("Unknown role: " + commText.speakerRole);
+            textColor = new UnityEngine.Color(1, 1, 1, 1);
+            break;
+        }
+        overlayPages.Add(new OverlayPresenter.PageText(commText.text, textColor));
+      }
+
+      var pres =
+        new OverlayPresenter(
+          cinematicTimer,
+          overlayPaneler,
+          inputSemaphore,
+          comm.template,
+          overlayPages,
+          buttons);
+      if (isModal) {
+        currentModalOverlay = pres;
+      }
+    }
+
+    // Stalls every effect until theres no more current overlay.
+    private class CommEffectStaller {
+      GamePresenter gamePresenter;
+      IEffectStaller stallEffect;
+      IClock clock;
+      IEffectObserver registeredObserver;
+      EffectBroadcaster previewBroadcaster;
+
+      public CommEffectStaller(IClock clock, GamePresenter gamePresenter, EffectBroadcaster previewBroadcaster, IEffectStaller stallEffect) {
+        this.gamePresenter = gamePresenter;
+        this.stallEffect = stallEffect;
+        this.clock = clock;
+        this.previewBroadcaster = previewBroadcaster;
+
+        registeredObserver = OnEffect;
+        previewBroadcaster.AddGlobalObserver(registeredObserver);
+      }
+
+      public void Destroy() {
+        previewBroadcaster.RemoveGlobalObserver(registeredObserver);
+      }
+
+      public void OnEffect(IEffect effect) {
+        if (gamePresenter.currentModalOverlay != null) {
+          // "Check back next frame."
+          stallEffect(clock.GetTimeMs() + 1);
+        }
+      }
     }
   }
 }

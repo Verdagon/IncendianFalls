@@ -52,6 +52,13 @@ imm struct DramaticCommTemplate {
   // for the last page *before* it fades out.
   isObscuring: Bool;
 }
+// Get rid of these, only used by the view
+imm struct ErrorCommTemplate {
+  ErrorCommTemplate isa ICommTemplate;
+}
+imm struct InstructionsCommTemplate {
+  InstructionsCommTemplate isa ICommTemplate;
+}
 
 imm struct CommText {
   speakerRole: Str; // "kylin", "kylinBrother", "narrator", "halohadrian"

@@ -59,6 +59,7 @@ namespace Atharia.Model {
           new DialogueCommTemplate().AsICommTemplate(),
           new CommActionImmList(new CommAction(continueButtonText, "")),
           new CommTextImmList(new CommText(speakerRole, text))));
+      game.actionNum++;
     }
 
     public static void ShowComm(this Game game, string text, string continueButtonText) {
@@ -67,6 +68,7 @@ namespace Atharia.Model {
           new NormalCommTemplate().AsICommTemplate(),
           new CommActionImmList(new CommAction(continueButtonText, "")),
           new CommTextImmList(new CommText("narrator", text))));
+      game.actionNum++;
     }
 
     public static void ShowDramatic(this Game game, string speakerRole, string text, bool isObscuring = false) {
@@ -75,6 +77,7 @@ namespace Atharia.Model {
           new DramaticCommTemplate(isObscuring).AsICommTemplate(),
           new CommActionImmList(new CommAction("...", "")),
           new CommTextImmList(new CommText(speakerRole, text))));
+      game.actionNum++;
     }
   }
 }

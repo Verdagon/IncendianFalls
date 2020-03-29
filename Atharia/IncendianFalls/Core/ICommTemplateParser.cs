@@ -9,6 +9,10 @@ public static class ICommTemplateParser {
   public static ICommTemplate Parse(ParseSource source) {
     var nextThingPeek = source.PeekNextWord();
     switch (nextThingPeek) {
+      case "InstructionsCommTemplate":
+        return new InstructionsCommTemplateAsICommTemplate(InstructionsCommTemplate.Parse(source));
+      case "ErrorCommTemplate":
+        return new ErrorCommTemplateAsICommTemplate(ErrorCommTemplate.Parse(source));
       case "DramaticCommTemplate":
         return new DramaticCommTemplateAsICommTemplate(DramaticCommTemplate.Parse(source));
       case "NormalCommTemplate":

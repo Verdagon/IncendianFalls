@@ -7,6 +7,9 @@ namespace Atharia.Model {
 
 public class EffectBroadcaster : IEffectVisitor {
 
+  List<IEffectObserver> globalEffectObservers;
+
+
   readonly SortedDictionary<int, List<IRandEffectObserver>> observersForRand =
       new SortedDictionary<int, List<IRandEffectObserver>>();
 
@@ -644,6 +647,15 @@ public class EffectBroadcaster : IEffectVisitor {
       new SortedDictionary<int, List<IKamikazeTargetTTCStrongByLocationMutMapEffectObserver>>();
 
   public EffectBroadcaster() {
+    globalEffectObservers = new List<IEffectObserver>();
+  }
+
+  public void AddGlobalObserver(IEffectObserver obs) {
+    this.globalEffectObservers.Add(obs);
+  }
+
+  public void RemoveGlobalObserver(IEffectObserver obs) {
+    this.globalEffectObservers.Remove(obs);
   }
 
 
@@ -6482,7 +6494,10 @@ public class EffectBroadcaster : IEffectVisitor {
       }
     }
 
-  public void Route(IEffect effect) {
+  public void Broadcast(IEffect effect) {
+    foreach (var obs in globalEffectObservers) {
+      obs(effect);
+    }
     effect.visitIEffect(this);
   }
 }

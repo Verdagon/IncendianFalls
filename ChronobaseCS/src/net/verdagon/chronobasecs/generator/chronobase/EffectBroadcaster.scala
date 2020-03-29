@@ -23,6 +23,9 @@ object EffectBroadcaster {
 
     s"""
        |public class EffectBroadcaster : IEffectVisitor {
+       |
+       |  List<IEffectObserver> globalEffectObservers;
+       |
          |""".stripMargin +
       ss.structs.filter(_.mutability == MutableS).map(struct => {
         StructGenerator.generateEffectBroadcasterMembers(opt, struct)
@@ -38,6 +41,15 @@ object EffectBroadcaster {
       }).mkString("") +
       s"""
          |  public EffectBroadcaster() {
+         |    globalEffectObservers = new List<IEffectObserver>();
+         |  }
+         |
+         |  public void AddGlobalObserver(IEffectObserver obs) {
+         |    this.globalEffectObservers.Add(obs);
+         |  }
+         |
+         |  public void RemoveGlobalObserver(IEffectObserver obs) {
+         |    this.globalEffectObservers.Remove(obs);
          |  }
          |
        |""".stripMargin +
@@ -54,7 +66,10 @@ object EffectBroadcaster {
         MapGenerator.generateEffectBroadcasterMethods(map)
       }).mkString("") +
       s"""
-         |  public void Route(IEffect effect) {
+         |  public void Broadcast(IEffect effect) {
+         |    foreach (var obs in globalEffectObservers) {
+         |      obs(effect);
+         |    }
          |    effect.visitIEffect(this);
          |  }
          |}

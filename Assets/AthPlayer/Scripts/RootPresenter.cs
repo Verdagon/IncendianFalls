@@ -12,13 +12,9 @@ using static AthPlayer.OverlayPresenter;
 namespace AthPlayer {
   public delegate OverlayPresenter
     OverlayPresenterFactory(
-      string template,
-      string role,
-      bool isFirstInSequence,
-      bool isLastInSequence,
-      bool isObscuring,
-      string unwrappedText,
-      List<PageButton> buttons);
+        ICommTemplate template,
+        List<PageText> pageTexts,
+        List<PageButton> buttons);
   public delegate void ShowError(string error);
   public delegate OverlayPresenter ShowInstructions(string error);
 
@@ -120,26 +116,29 @@ namespace AthPlayer {
     }
 
     private OverlayPresenter NewOverlayPresenter(
-        string template,
-        string role,
-        bool isFirstInSequence,
-        bool isLastInSequence,
-        bool isObscuring,
-        string unwrappedText,
+        // TODO: dont use the model's template objects
+        ICommTemplate template,
+        List<PageText> pageTexts,
         List<PageButton> buttons) {
-      return new OverlayPresenter(uiTimer, overlayPaneler, inputSemaphore, template, role, isFirstInSequence, isLastInSequence, isObscuring, unwrappedText, buttons);
+      return new OverlayPresenter(uiTimer, overlayPaneler, inputSemaphore, template, pageTexts, buttons);
     }
 
-    private void ShowError(string errorText) {
+    private void ShowError(string text) {
       if (currentErrorOverlay != null) {
         currentErrorOverlay.Close();
       }
       currentErrorOverlay =
-        NewOverlayPresenter("error", "narrator", true, true, false, errorText, new List<PageButton>());
+        NewOverlayPresenter(
+          new ErrorCommTemplate().AsICommTemplate(),
+          new List<PageText>() { new PageText(text, new UnityEngine.Color(1, .5f, .5f)) },
+          new List<PageButton>());
     }
 
-    private OverlayPresenter ShowInstructions(string errorText) {
-      return NewOverlayPresenter("instructions", "narrator", true, true, false, errorText, new List<PageButton>());
+    private OverlayPresenter ShowInstructions(string text) {
+      return NewOverlayPresenter(
+        new InstructionsCommTemplate().AsICommTemplate(),
+        new List<PageText>() { new PageText(text, new UnityEngine.Color(1, 1, 1)) },
+        new List<PageButton>());
     }
 
     public void Update() {
