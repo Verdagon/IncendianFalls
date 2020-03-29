@@ -36,6 +36,8 @@ namespace AthPlayer {
     long lungeEndTime;
     // We want delete to wait for death to finish.
     long dieEndTime;
+    // This will pay attention to the above endTimes and report stalls to the effect staller.
+    UnitEffectStaller effectStaller;
 
     private UnitDescription description;
 
@@ -43,6 +45,8 @@ namespace AthPlayer {
       IClock clock,
         ITimer timer,
         SoundPlayer soundPlayer,
+        EffectBroadcaster previewBroadcaster,
+        IEffectStaller stallEffect,
         EffectBroadcaster broadcaster,
         Game game,
         Atharia.Model.Terrain terrain,
@@ -53,6 +57,7 @@ namespace AthPlayer {
       this.timer = timer;
       this.soundPlayer = soundPlayer;
       this.game = game;
+      this.clock = clock;
       this.unit = unit;
       this.instantiator = instantiator;
 
@@ -78,6 +83,8 @@ namespace AthPlayer {
       if (unit.components.GetOnlyBideAICapabilityUCOrNull().Exists()) {
         unit.components.GetOnlyBideAICapabilityUCOrNull().AddObserver(broadcaster, this);
       }
+
+      this.effectStaller = new UnitEffectStaller(clock, previewBroadcaster, this, stallEffect);
     }
 
     public void DestroyUnitPresenter() {
@@ -800,7 +807,6 @@ namespace AthPlayer {
 
           lungeEndTime =
             unitView.Lunge((victimPosition - attackerPosition).normalized * .25f);
-          lungeEndTime = clock.GetTimeMs() + 150;
         }
       } else if (effect.newValue is UnitUnleashBideEventAsIUnitEvent) {
         runeEndTime =
@@ -935,46 +941,41 @@ namespace AthPlayer {
       public void visitUnitCreateEffect(UnitCreateEffect effect) { }
 
       public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
-        staller(
-          Math.Max(unitPresenter.hopEndTime,
-            Math.Max(unitPresenter.lungeEndTime,
-              Math.Max(unitPresenter.runeEndTime,
-                Math.Max(unitPresenter.dieEndTime,
-                  clock.GetTimeMs())))));
+        staller(unitPresenter.hopEndTime);
+        staller(unitPresenter.lungeEndTime);
+        staller(unitPresenter.runeEndTime);
+        staller(unitPresenter.dieEndTime);
       }
 
       public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
         if (effect.newValue is UnitAttackEventAsIUnitEvent a) {
           if (a.obj.attackerId == unitPresenter.unit.id) {
-            staller(
-              Math.Max(unitPresenter.hopEndTime,
-                Math.Max(unitPresenter.lungeEndTime,
-                  clock.GetTimeMs())));
+            Debug.Log("at " + unitPresenter.clock.GetTimeMs() + " stalling lunge until " + unitPresenter.lungeEndTime + " and " + unitPresenter.hopEndTime);
+            staller(unitPresenter.hopEndTime);
+            staller(unitPresenter.lungeEndTime);
           }
         } else if (effect.newValue is UnitCounteringEventAsIUnitEvent) {
-          staller(Math.Max(unitPresenter.runeEndTime, clock.GetTimeMs()));
+          staller(unitPresenter.runeEndTime);
         } else if (effect.newValue is UnitDefyingEventAsIUnitEvent) {
-          staller(Math.Max(unitPresenter.runeEndTime, clock.GetTimeMs()));
+          staller(unitPresenter.runeEndTime);
         } else if (effect.newValue is UnitUnleashBideEventAsIUnitEvent) {
-          staller(Math.Max(unitPresenter.runeEndTime, clock.GetTimeMs()));
+          staller(unitPresenter.runeEndTime);
         } else if (effect.newValue is UnitFireEventAsIUnitEvent f) {
           // We show a rune for both attacker and victim, so no need to check that.
-          staller(Math.Max(unitPresenter.runeEndTime, clock.GetTimeMs()));
+          staller(unitPresenter.runeEndTime);
         } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent) {
-          staller(Math.Max(unitPresenter.runeEndTime, clock.GetTimeMs()));
+          staller(unitPresenter.runeEndTime);
         }
       }
 
       public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) {
-        staller(
-          Math.Max(unitPresenter.hopEndTime,
-            Math.Max(unitPresenter.lungeEndTime,
-              Math.Max(unitPresenter.runeEndTime,
-                clock.GetTimeMs()))));
+        staller(unitPresenter.hopEndTime);
+        staller(unitPresenter.lungeEndTime);
+        staller(unitPresenter.runeEndTime);
       }
 
       public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) {
-        staller(Math.Max(unitPresenter.hopEndTime, clock.GetTimeMs()));
+        staller(unitPresenter.hopEndTime);
       }
 
       public void OnIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffect effect) { effect.visitIIUnitComponentMutBunchEffect(this); }

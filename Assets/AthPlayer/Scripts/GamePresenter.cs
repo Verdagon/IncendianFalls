@@ -24,6 +24,7 @@ namespace AthPlayer {
 
     GameObject thinkingIndicator;
     SuperstructureWrapper serverSS;
+    EffectBroadcaster previewBroadcaster;
     EffectBroadcaster broadcaster;
     Game game;
     Level viewedLevel;
@@ -40,6 +41,8 @@ namespace AthPlayer {
     Dictionary<int, UnitPresenter> unitPresenters;
 
     PlayerController playerController;
+
+    long stallEffectUntilTimeMs;
 
     public GamePresenter(
         ITimer cameraTimer,
@@ -92,7 +95,9 @@ namespace AthPlayer {
       Asserts.Assert(clientRoot.GameExists(gameId));
       game = clientRoot.GetGame(gameId);
 
+      previewBroadcaster = new EffectBroadcaster();
       broadcaster = new EffectBroadcaster();
+      stallEffectUntilTimeMs = 0;
 
       var looker = new Looker(lookPanelView, broadcaster);
 
@@ -131,26 +136,54 @@ namespace AthPlayer {
               thinkingIndicator);
 
       LoadLevel();
+    }
 
-      ConsumeEffects();
+    private List<IEffect> GetReadyEffects() {
+      var readyEffects = new List<IEffect>();
+      if (serverSS.waitingEffects.Count == 0) {
+        return readyEffects;
+      }
+      if (timer.GetTimeMs() < stallEffectUntilTimeMs) {
+        Debug.Log("stalled!");
+        return readyEffects;
+      }
+
+      while (serverSS.waitingEffects.Count > 0) {
+        var effect = serverSS.waitingEffects.Peek();
+
+        previewBroadcaster.Route(effect);
+        // The above previewBroadcaster should make interested parties set the stallEffectUntilTimeMs.
+        if (timer.GetTimeMs() < stallEffectUntilTimeMs) {
+          break;
+        }
+        readyEffects.Add(serverSS.waitingEffects.Dequeue());
+      }
+
+      Debug.Log("returning " + readyEffects.Count + " ready effects!");
+      return readyEffects;
     }
 
     private void ConsumeEffects() {
       for (int i = 0; ; i++) {
         Asserts.Assert(i != 100);
-        game.root.Transact(() => {
-          // TODO, do proper waiting here.
-          while (serverSS.waitingEffects.Count > 0) {
-            var effect = serverSS.waitingEffects.Dequeue();
-            new EffectApplier(game.root).Apply(effect);
-            broadcaster.Route(effect);
-          }
-          return 0;
-        });
+
+        var readyEffects = GetReadyEffects();
+
+        if (readyEffects.Count > 0) {
+          game.root.Transact(() => {
+            foreach (var effect in readyEffects) {
+              new EffectApplier(game.root).Apply(effect);
+              broadcaster.Route(effect);
+            }
+            return 0;
+          });
+        }
+
         // At this point, game is caught up to server game.
-        if (!game.WaitingOnPlayerInput()) {
+        if (serverSS.waitingEffects.Count == 0 && !game.WaitingOnPlayerInput()) {
           var error = serverSS.RequestResume(game.id);
           Asserts.Assert(error == "", error);
+          continue;
         } else {
           break;
         }
@@ -184,7 +217,11 @@ namespace AthPlayer {
       }
       unitPresenters[unitId] =
           new UnitPresenter(
-              timer, timer, soundPlayer, broadcaster, game, viewedLevel.terrain, unit, instantiator);
+              timer, timer, soundPlayer, previewBroadcaster, StallEffect, broadcaster, game, viewedLevel.terrain, unit, instantiator);
+    }
+
+    private void StallEffect(long untilTimeMs) {
+      stallEffectUntilTimeMs = Math.Max(stallEffectUntilTimeMs, untilTimeMs);
     }
 
     private void LoadLevel() {
@@ -288,6 +325,8 @@ namespace AthPlayer {
 
 
     public void Update(UnityEngine.Ray ray) {
+      ConsumeEffects();
+
       timer.Update();
       cinematicTimer.Update();
 

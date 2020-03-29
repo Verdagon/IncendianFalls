@@ -274,7 +274,7 @@ namespace ConsoleDriveyThing {
         PaintTerrain(terrainAndFeaturesMode, tile, cell);
       }
       foreach (var unit in game.level.units) {
-        if (unit.alive) {
+        if (unit.Alive()) {
           var location = unit.location;
           var tileCenter = game.level.terrain.pattern.GetTileCenter(location);
           var positionOnScreen = tileCenter.minus(cameraCenter).plus(new Vec2(39, 9));

@@ -324,6 +324,7 @@ namespace AthPlayer {
     public void OnUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this); }
     public void visitUnitCreateEffect(UnitCreateEffect effect) { }
     public void visitUnitSetHpEffect(UnitSetHpEffect effect) { }
+    public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) { }
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) { }
@@ -332,10 +333,6 @@ namespace AthPlayer {
       if (!lookedUnit.Exists()) {
         Look(Unit.Null, lookedTile);
       }
-    }
-
-    public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
-      throw new NotImplementedException();
     }
   }
 }

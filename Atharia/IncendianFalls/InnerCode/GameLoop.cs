@@ -66,6 +66,10 @@ namespace IncendianFalls {
         return;
       }
 
+      if (!game.player.Exists() || !game.player.Alive()) {
+        // Suspend if there's no player, so we dont infinite loop.
+        return;
+      }
       ContinueBetweenUnits(context, game, superstate);
     }
 
