@@ -292,6 +292,7 @@ object RootRevert {
       })
         .mkString("") +
       s"""
+         |    logger.Error("after reverting next id " + rootIncarnation.nextId);
          |  }
      """.stripMargin
   }

@@ -53,8 +53,10 @@ object MutListRootMethods {
        |      }
        |    }
        |    public ${listName} Effect${listName}Create() {
+       |      return Effect${listName}CreateWithId(NewId());
+       |    }
+       |    public ${listName} Effect${listName}CreateWithId(int id) {
        |      CheckUnlocked();
-       |      var id = NewId();
        |      Asserts.Assert(!rootIncarnation.incarnations${listName}.ContainsKey(id));
        |      EffectInternalCreate${listName}(id, rootIncarnation.version, new ${listName}Incarnation(new List<${flattenedElementCSType}>()));
        |      return new ${listName}(this, id);

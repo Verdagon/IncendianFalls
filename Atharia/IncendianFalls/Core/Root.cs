@@ -283,6 +283,8 @@ public class Root {
     this.locked = true;
   }
 
+  public int nextId { get { return rootIncarnation.nextId; } }
+
   public int version { get { return rootIncarnation.version; } }
 
   public void AddObserver(IEffectObserver obs) {
@@ -11630,6 +11632,7 @@ public class Root {
       }
     }
 
+    logger.Error("after reverting next id " + rootIncarnation.nextId);
   }
        public RandIncarnation GetRandIncarnation(int id) {
     if (id == 0) {
@@ -11674,9 +11677,13 @@ public class Root {
   }
   public Rand EffectRandCreate(
       int rand) {
+    return EffectRandCreateWithId(NewId()
+,rand    );
+  }
+  public Rand EffectRandCreateWithId(int id
+,      int rand) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new RandIncarnation(
             rand
@@ -11781,9 +11788,15 @@ var effect = new RandSetRandEffect(id, newValue);
   public HoldPositionImpulse EffectHoldPositionImpulseCreate(
       int weight,
       int duration) {
+    return EffectHoldPositionImpulseCreateWithId(NewId()
+,weight
+,duration    );
+  }
+  public HoldPositionImpulse EffectHoldPositionImpulseCreateWithId(int id
+,      int weight
+,      int duration) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new HoldPositionImpulseIncarnation(
             weight,
@@ -11867,9 +11880,13 @@ var effect = new RandSetRandEffect(id, newValue);
   }
   public WanderAICapabilityUC EffectWanderAICapabilityUCCreate(
 ) {
+    return EffectWanderAICapabilityUCCreateWithId(NewId()
+    );
+  }
+  public WanderAICapabilityUC EffectWanderAICapabilityUCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new WanderAICapabilityUCIncarnation(
 
@@ -11951,9 +11968,15 @@ var effect = new RandSetRandEffect(id, newValue);
   public TutorialDefyCounterUC EffectTutorialDefyCounterUCCreate(
       int numDefiesRemaining,
       string onChangeTriggerName) {
+    return EffectTutorialDefyCounterUCCreateWithId(NewId()
+,numDefiesRemaining
+,onChangeTriggerName    );
+  }
+  public TutorialDefyCounterUC EffectTutorialDefyCounterUCCreateWithId(int id
+,      int numDefiesRemaining
+,      string onChangeTriggerName) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new TutorialDefyCounterUCIncarnation(
             numDefiesRemaining,
@@ -12068,10 +12091,30 @@ var effect = new TutorialDefyCounterUCSetNumDefiesRemainingEffect(id, newValue);
       int maxHp,
       IUnitComponentMutBunch components,
       bool good) {
+    return EffectUnitCreateWithId(NewId()
+,evvent
+,lifeEndTime
+,location
+,classId
+,nextActionTime
+,hp
+,maxHp
+,components
+,good    );
+  }
+  public Unit EffectUnitCreateWithId(int id
+,      IUnitEvent evvent
+,      int lifeEndTime
+,      Location location
+,      string classId
+,      int nextActionTime
+,      int hp
+,      int maxHp
+,      IUnitComponentMutBunch components
+,      bool good) {
     CheckUnlocked();
     CheckHasIUnitComponentMutBunch(components);
 
-    var id = NewId();
     var incarnation =
         new UnitIncarnation(
             evvent,
@@ -12379,6 +12422,67 @@ var effect = new UnitSetMaxHpEffect(id, newValue);
       SorcerousUCMutSet membersSorcerousUCMutSet,
       BaseOffenseUCMutSet membersBaseOffenseUCMutSet,
       BaseDefenseUCMutSet membersBaseDefenseUCMutSet) {
+    return EffectIUnitComponentMutBunchCreateWithId(NewId()
+,membersTutorialDefyCounterUCMutSet
+,membersLightningChargingUCMutSet
+,membersWanderAICapabilityUCMutSet
+,membersTemporaryCloneAICapabilityUCMutSet
+,membersSummonAICapabilityUCMutSet
+,membersKamikazeAICapabilityUCMutSet
+,membersGuardAICapabilityUCMutSet
+,membersTimeCloneAICapabilityUCMutSet
+,membersDoomedUCMutSet
+,membersMiredUCMutSet
+,membersAttackAICapabilityUCMutSet
+,membersCounteringUCMutSet
+,membersLightningChargedUCMutSet
+,membersInvincibilityUCMutSet
+,membersDefyingUCMutSet
+,membersBideAICapabilityUCMutSet
+,membersBaseSightRangeUCMutSet
+,membersBaseMovementTimeUCMutSet
+,membersBaseCombatTimeUCMutSet
+,membersManaPotionMutSet
+,membersHealthPotionMutSet
+,membersSpeedRingMutSet
+,membersGlaiveMutSet
+,membersSlowRodMutSet
+,membersBlastRodMutSet
+,membersArmorMutSet
+,membersSorcerousUCMutSet
+,membersBaseOffenseUCMutSet
+,membersBaseDefenseUCMutSet    );
+  }
+  public IUnitComponentMutBunch EffectIUnitComponentMutBunchCreateWithId(int id
+,      TutorialDefyCounterUCMutSet membersTutorialDefyCounterUCMutSet
+,      LightningChargingUCMutSet membersLightningChargingUCMutSet
+,      WanderAICapabilityUCMutSet membersWanderAICapabilityUCMutSet
+,      TemporaryCloneAICapabilityUCMutSet membersTemporaryCloneAICapabilityUCMutSet
+,      SummonAICapabilityUCMutSet membersSummonAICapabilityUCMutSet
+,      KamikazeAICapabilityUCMutSet membersKamikazeAICapabilityUCMutSet
+,      GuardAICapabilityUCMutSet membersGuardAICapabilityUCMutSet
+,      TimeCloneAICapabilityUCMutSet membersTimeCloneAICapabilityUCMutSet
+,      DoomedUCMutSet membersDoomedUCMutSet
+,      MiredUCMutSet membersMiredUCMutSet
+,      AttackAICapabilityUCMutSet membersAttackAICapabilityUCMutSet
+,      CounteringUCMutSet membersCounteringUCMutSet
+,      LightningChargedUCMutSet membersLightningChargedUCMutSet
+,      InvincibilityUCMutSet membersInvincibilityUCMutSet
+,      DefyingUCMutSet membersDefyingUCMutSet
+,      BideAICapabilityUCMutSet membersBideAICapabilityUCMutSet
+,      BaseSightRangeUCMutSet membersBaseSightRangeUCMutSet
+,      BaseMovementTimeUCMutSet membersBaseMovementTimeUCMutSet
+,      BaseCombatTimeUCMutSet membersBaseCombatTimeUCMutSet
+,      ManaPotionMutSet membersManaPotionMutSet
+,      HealthPotionMutSet membersHealthPotionMutSet
+,      SpeedRingMutSet membersSpeedRingMutSet
+,      GlaiveMutSet membersGlaiveMutSet
+,      SlowRodMutSet membersSlowRodMutSet
+,      BlastRodMutSet membersBlastRodMutSet
+,      ArmorMutSet membersArmorMutSet
+,      SorcerousUCMutSet membersSorcerousUCMutSet
+,      BaseOffenseUCMutSet membersBaseOffenseUCMutSet
+,      BaseDefenseUCMutSet membersBaseDefenseUCMutSet) {
     CheckUnlocked();
     CheckHasTutorialDefyCounterUCMutSet(membersTutorialDefyCounterUCMutSet);
     CheckHasLightningChargingUCMutSet(membersLightningChargingUCMutSet);
@@ -12410,7 +12514,6 @@ var effect = new UnitSetMaxHpEffect(id, newValue);
     CheckHasBaseOffenseUCMutSet(membersBaseOffenseUCMutSet);
     CheckHasBaseDefenseUCMutSet(membersBaseDefenseUCMutSet);
 
-    var id = NewId();
     var incarnation =
         new IUnitComponentMutBunchIncarnation(
             membersTutorialDefyCounterUCMutSet.id,
@@ -12548,9 +12651,13 @@ var effect = new UnitSetMaxHpEffect(id, newValue);
   }
   public LightningChargedUC EffectLightningChargedUCCreate(
 ) {
+    return EffectLightningChargedUCCreateWithId(NewId()
+    );
+  }
+  public LightningChargedUC EffectLightningChargedUCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new LightningChargedUCIncarnation(
 
@@ -12631,9 +12738,13 @@ var effect = new UnitSetMaxHpEffect(id, newValue);
   }
   public LightningChargingUC EffectLightningChargingUCCreate(
 ) {
+    return EffectLightningChargingUCCreateWithId(NewId()
+    );
+  }
+  public LightningChargingUC EffectLightningChargingUCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new LightningChargingUCIncarnation(
 
@@ -12714,9 +12825,13 @@ var effect = new UnitSetMaxHpEffect(id, newValue);
   }
   public DoomedUC EffectDoomedUCCreate(
       int deathTime) {
+    return EffectDoomedUCCreateWithId(NewId()
+,deathTime    );
+  }
+  public DoomedUC EffectDoomedUCCreateWithId(int id
+,      int deathTime) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new DoomedUCIncarnation(
             deathTime
@@ -12801,9 +12916,19 @@ var effect = new UnitSetMaxHpEffect(id, newValue);
       string blueprintName,
       Location location,
       int hp) {
+    return EffectTemporaryCloneImpulseCreateWithId(NewId()
+,weight
+,blueprintName
+,location
+,hp    );
+  }
+  public TemporaryCloneImpulse EffectTemporaryCloneImpulseCreateWithId(int id
+,      int weight
+,      string blueprintName
+,      Location location
+,      int hp) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new TemporaryCloneImpulseIncarnation(
             weight,
@@ -12892,9 +13017,15 @@ var effect = new UnitSetMaxHpEffect(id, newValue);
   public TemporaryCloneAICapabilityUC EffectTemporaryCloneAICapabilityUCCreate(
       string blueprintName,
       int charges) {
+    return EffectTemporaryCloneAICapabilityUCCreateWithId(NewId()
+,blueprintName
+,charges    );
+  }
+  public TemporaryCloneAICapabilityUC EffectTemporaryCloneAICapabilityUCCreateWithId(int id
+,      string blueprintName
+,      int charges) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new TemporaryCloneAICapabilityUCIncarnation(
             blueprintName,
@@ -13003,9 +13134,17 @@ var effect = new TemporaryCloneAICapabilityUCSetChargesEffect(id, newValue);
       int weight,
       string blueprintName,
       Location location) {
+    return EffectSummonImpulseCreateWithId(NewId()
+,weight
+,blueprintName
+,location    );
+  }
+  public SummonImpulse EffectSummonImpulseCreateWithId(int id
+,      int weight
+,      string blueprintName
+,      Location location) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new SummonImpulseIncarnation(
             weight,
@@ -13092,9 +13231,15 @@ var effect = new TemporaryCloneAICapabilityUCSetChargesEffect(id, newValue);
   public SummonAICapabilityUC EffectSummonAICapabilityUCCreate(
       string blueprintName,
       int charges) {
+    return EffectSummonAICapabilityUCCreateWithId(NewId()
+,blueprintName
+,charges    );
+  }
+  public SummonAICapabilityUC EffectSummonAICapabilityUCCreateWithId(int id
+,      string blueprintName
+,      int charges) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new SummonAICapabilityUCIncarnation(
             blueprintName,
@@ -13202,9 +13347,15 @@ var effect = new SummonAICapabilityUCSetChargesEffect(id, newValue);
   public SorcerousUC EffectSorcerousUCCreate(
       int mp,
       int maxMp) {
+    return EffectSorcerousUCCreateWithId(NewId()
+,mp
+,maxMp    );
+  }
+  public SorcerousUC EffectSorcerousUCCreateWithId(int id
+,      int mp
+,      int maxMp) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new SorcerousUCIncarnation(
             mp,
@@ -13335,9 +13486,15 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   public BaseOffenseUC EffectBaseOffenseUCCreate(
       int outgoingDamageAddConstant,
       int outgoingDamageMultiplierPercent) {
+    return EffectBaseOffenseUCCreateWithId(NewId()
+,outgoingDamageAddConstant
+,outgoingDamageMultiplierPercent    );
+  }
+  public BaseOffenseUC EffectBaseOffenseUCCreateWithId(int id
+,      int outgoingDamageAddConstant
+,      int outgoingDamageMultiplierPercent) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new BaseOffenseUCIncarnation(
             outgoingDamageAddConstant,
@@ -13422,9 +13579,15 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   public BaseSightRangeUC EffectBaseSightRangeUCCreate(
       int sightRangeAddConstant,
       int sightRangeMultiplierPercent) {
+    return EffectBaseSightRangeUCCreateWithId(NewId()
+,sightRangeAddConstant
+,sightRangeMultiplierPercent    );
+  }
+  public BaseSightRangeUC EffectBaseSightRangeUCCreateWithId(int id
+,      int sightRangeAddConstant
+,      int sightRangeMultiplierPercent) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new BaseSightRangeUCIncarnation(
             sightRangeAddConstant,
@@ -13509,9 +13672,15 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   public BaseMovementTimeUC EffectBaseMovementTimeUCCreate(
       int movementTimeAddConstant,
       int movementTimeMultiplierPercent) {
+    return EffectBaseMovementTimeUCCreateWithId(NewId()
+,movementTimeAddConstant
+,movementTimeMultiplierPercent    );
+  }
+  public BaseMovementTimeUC EffectBaseMovementTimeUCCreateWithId(int id
+,      int movementTimeAddConstant
+,      int movementTimeMultiplierPercent) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new BaseMovementTimeUCIncarnation(
             movementTimeAddConstant,
@@ -13596,9 +13765,15 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   public BaseDefenseUC EffectBaseDefenseUCCreate(
       int incomingDamageAddConstant,
       int incomingDamageMultiplierPercent) {
+    return EffectBaseDefenseUCCreateWithId(NewId()
+,incomingDamageAddConstant
+,incomingDamageMultiplierPercent    );
+  }
+  public BaseDefenseUC EffectBaseDefenseUCCreateWithId(int id
+,      int incomingDamageAddConstant
+,      int incomingDamageMultiplierPercent) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new BaseDefenseUCIncarnation(
             incomingDamageAddConstant,
@@ -13683,9 +13858,15 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   public BaseCombatTimeUC EffectBaseCombatTimeUCCreate(
       int combatTimeAddConstant,
       int combatTimeMultiplierPercent) {
+    return EffectBaseCombatTimeUCCreateWithId(NewId()
+,combatTimeAddConstant
+,combatTimeMultiplierPercent    );
+  }
+  public BaseCombatTimeUC EffectBaseCombatTimeUCCreateWithId(int id
+,      int combatTimeAddConstant
+,      int combatTimeMultiplierPercent) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new BaseCombatTimeUCIncarnation(
             combatTimeAddConstant,
@@ -13769,9 +13950,13 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   }
   public MiredUC EffectMiredUCCreate(
 ) {
+    return EffectMiredUCCreateWithId(NewId()
+    );
+  }
+  public MiredUC EffectMiredUCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new MiredUCIncarnation(
 
@@ -13853,10 +14038,16 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   public MireImpulse EffectMireImpulseCreate(
       int weight,
       Unit targetUnit) {
+    return EffectMireImpulseCreateWithId(NewId()
+,weight
+,targetUnit    );
+  }
+  public MireImpulse EffectMireImpulseCreateWithId(int id
+,      int weight
+,      Unit targetUnit) {
     CheckUnlocked();
     CheckHasUnit(targetUnit);
 
-    var id = NewId();
     var incarnation =
         new MireImpulseIncarnation(
             weight,
@@ -13940,9 +14131,13 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   }
   public EvaporateImpulse EffectEvaporateImpulseCreate(
 ) {
+    return EffectEvaporateImpulseCreateWithId(NewId()
+    );
+  }
+  public EvaporateImpulse EffectEvaporateImpulseCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new EvaporateImpulseIncarnation(
 
@@ -14023,9 +14218,13 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   }
   public TimeCloneAICapabilityUC EffectTimeCloneAICapabilityUCCreate(
       IRequestMutList script) {
+    return EffectTimeCloneAICapabilityUCCreateWithId(NewId()
+,script    );
+  }
+  public TimeCloneAICapabilityUC EffectTimeCloneAICapabilityUCCreateWithId(int id
+,      IRequestMutList script) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new TimeCloneAICapabilityUCIncarnation(
             script.id
@@ -14110,9 +14309,15 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   public MoveImpulse EffectMoveImpulseCreate(
       int weight,
       Location stepLocation) {
+    return EffectMoveImpulseCreateWithId(NewId()
+,weight
+,stepLocation    );
+  }
+  public MoveImpulse EffectMoveImpulseCreateWithId(int id
+,      int weight
+,      Location stepLocation) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new MoveImpulseIncarnation(
             weight,
@@ -14196,10 +14401,14 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   }
   public KamikazeTargetTTC EffectKamikazeTargetTTCCreate(
       KamikazeAICapabilityUC capability) {
+    return EffectKamikazeTargetTTCCreateWithId(NewId()
+,capability    );
+  }
+  public KamikazeTargetTTC EffectKamikazeTargetTTCCreateWithId(int id
+,      KamikazeAICapabilityUC capability) {
     CheckUnlocked();
     CheckHasKamikazeAICapabilityUC(capability);
 
-    var id = NewId();
     var incarnation =
         new KamikazeTargetTTCIncarnation(
             capability.id
@@ -14283,10 +14492,18 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
       int weight,
       KamikazeAICapabilityUC capability,
       Location jumpTarget) {
+    return EffectKamikazeJumpImpulseCreateWithId(NewId()
+,weight
+,capability
+,jumpTarget    );
+  }
+  public KamikazeJumpImpulse EffectKamikazeJumpImpulseCreateWithId(int id
+,      int weight
+,      KamikazeAICapabilityUC capability
+,      Location jumpTarget) {
     CheckUnlocked();
     CheckHasKamikazeAICapabilityUC(capability);
 
-    var id = NewId();
     var incarnation =
         new KamikazeJumpImpulseIncarnation(
             weight,
@@ -14375,10 +14592,20 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
       KamikazeAICapabilityUC capability,
       Location targetLocationCenter,
       LocationImmList targetLocations) {
+    return EffectKamikazeTargetImpulseCreateWithId(NewId()
+,weight
+,capability
+,targetLocationCenter
+,targetLocations    );
+  }
+  public KamikazeTargetImpulse EffectKamikazeTargetImpulseCreateWithId(int id
+,      int weight
+,      KamikazeAICapabilityUC capability
+,      Location targetLocationCenter
+,      LocationImmList targetLocations) {
     CheckUnlocked();
     CheckHasKamikazeAICapabilityUC(capability);
 
-    var id = NewId();
     var incarnation =
         new KamikazeTargetImpulseIncarnation(
             weight,
@@ -14467,10 +14694,16 @@ var effect = new SorcerousUCSetMaxMpEffect(id, newValue);
   public KamikazeAICapabilityUC EffectKamikazeAICapabilityUCCreate(
       KamikazeTargetTTCStrongByLocationMutMap targetByLocation,
       Location targetLocationCenter) {
+    return EffectKamikazeAICapabilityUCCreateWithId(NewId()
+,targetByLocation
+,targetLocationCenter    );
+  }
+  public KamikazeAICapabilityUC EffectKamikazeAICapabilityUCCreateWithId(int id
+,      KamikazeTargetTTCStrongByLocationMutMap targetByLocation
+,      Location targetLocationCenter) {
     CheckUnlocked();
     CheckHasKamikazeTargetTTCStrongByLocationMutMap(targetByLocation);
 
-    var id = NewId();
     var incarnation =
         new KamikazeAICapabilityUCIncarnation(
             targetByLocation.id,
@@ -14600,9 +14833,13 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   }
   public InvincibilityUC EffectInvincibilityUCCreate(
 ) {
+    return EffectInvincibilityUCCreateWithId(NewId()
+    );
+  }
+  public InvincibilityUC EffectInvincibilityUCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new InvincibilityUCIncarnation(
 
@@ -14684,9 +14921,15 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   public GuardAICapabilityUC EffectGuardAICapabilityUCCreate(
       Location guardCenterLocation,
       int guardRadius) {
+    return EffectGuardAICapabilityUCCreateWithId(NewId()
+,guardCenterLocation
+,guardRadius    );
+  }
+  public GuardAICapabilityUC EffectGuardAICapabilityUCCreateWithId(int id
+,      Location guardCenterLocation
+,      int guardRadius) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new GuardAICapabilityUCIncarnation(
             guardCenterLocation,
@@ -14770,9 +15013,13 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   }
   public NoImpulse EffectNoImpulseCreate(
 ) {
+    return EffectNoImpulseCreateWithId(NewId()
+    );
+  }
+  public NoImpulse EffectNoImpulseCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new NoImpulseIncarnation(
 
@@ -14854,10 +15101,16 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   public FireImpulse EffectFireImpulseCreate(
       int weight,
       Unit targetUnit) {
+    return EffectFireImpulseCreateWithId(NewId()
+,weight
+,targetUnit    );
+  }
+  public FireImpulse EffectFireImpulseCreateWithId(int id
+,      int weight
+,      Unit targetUnit) {
     CheckUnlocked();
     CheckHasUnit(targetUnit);
 
-    var id = NewId();
     var incarnation =
         new FireImpulseIncarnation(
             weight,
@@ -14941,9 +15194,13 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   }
   public DefyingUC EffectDefyingUCCreate(
 ) {
+    return EffectDefyingUCCreateWithId(NewId()
+    );
+  }
+  public DefyingUC EffectDefyingUCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new DefyingUCIncarnation(
 
@@ -15024,9 +15281,13 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   }
   public DefyImpulse EffectDefyImpulseCreate(
       int weight) {
+    return EffectDefyImpulseCreateWithId(NewId()
+,weight    );
+  }
+  public DefyImpulse EffectDefyImpulseCreateWithId(int id
+,      int weight) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new DefyImpulseIncarnation(
             weight
@@ -15108,9 +15369,13 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   }
   public CounteringUC EffectCounteringUCCreate(
 ) {
+    return EffectCounteringUCCreateWithId(NewId()
+    );
+  }
+  public CounteringUC EffectCounteringUCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new CounteringUCIncarnation(
 
@@ -15191,9 +15456,13 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   }
   public CounterImpulse EffectCounterImpulseCreate(
       int weight) {
+    return EffectCounterImpulseCreateWithId(NewId()
+,weight    );
+  }
+  public CounterImpulse EffectCounterImpulseCreateWithId(int id
+,      int weight) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new CounterImpulseIncarnation(
             weight
@@ -15275,9 +15544,13 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   }
   public UnleashBideImpulse EffectUnleashBideImpulseCreate(
       int weight) {
+    return EffectUnleashBideImpulseCreateWithId(NewId()
+,weight    );
+  }
+  public UnleashBideImpulse EffectUnleashBideImpulseCreateWithId(int id
+,      int weight) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new UnleashBideImpulseIncarnation(
             weight
@@ -15359,9 +15632,13 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   }
   public ContinueBidingImpulse EffectContinueBidingImpulseCreate(
       int weight) {
+    return EffectContinueBidingImpulseCreateWithId(NewId()
+,weight    );
+  }
+  public ContinueBidingImpulse EffectContinueBidingImpulseCreateWithId(int id
+,      int weight) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new ContinueBidingImpulseIncarnation(
             weight
@@ -15443,9 +15720,13 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   }
   public StartBidingImpulse EffectStartBidingImpulseCreate(
       int weight) {
+    return EffectStartBidingImpulseCreateWithId(NewId()
+,weight    );
+  }
+  public StartBidingImpulse EffectStartBidingImpulseCreateWithId(int id
+,      int weight) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new StartBidingImpulseIncarnation(
             weight
@@ -15527,9 +15808,13 @@ var effect = new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValu
   }
   public BideAICapabilityUC EffectBideAICapabilityUCCreate(
       int charge) {
+    return EffectBideAICapabilityUCCreateWithId(NewId()
+,charge    );
+  }
+  public BideAICapabilityUC EffectBideAICapabilityUCCreateWithId(int id
+,      int charge) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new BideAICapabilityUCIncarnation(
             charge
@@ -15634,10 +15919,16 @@ var effect = new BideAICapabilityUCSetChargeEffect(id, newValue);
   public AttackImpulse EffectAttackImpulseCreate(
       int weight,
       Unit targetUnit) {
+    return EffectAttackImpulseCreateWithId(NewId()
+,weight
+,targetUnit    );
+  }
+  public AttackImpulse EffectAttackImpulseCreateWithId(int id
+,      int weight
+,      Unit targetUnit) {
     CheckUnlocked();
     CheckHasUnit(targetUnit);
 
-    var id = NewId();
     var incarnation =
         new AttackImpulseIncarnation(
             weight,
@@ -15722,9 +16013,15 @@ var effect = new BideAICapabilityUCSetChargeEffect(id, newValue);
   public PursueImpulse EffectPursueImpulseCreate(
       int weight,
       bool isClearPath) {
+    return EffectPursueImpulseCreateWithId(NewId()
+,weight
+,isClearPath    );
+  }
+  public PursueImpulse EffectPursueImpulseCreateWithId(int id
+,      int weight
+,      bool isClearPath) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new PursueImpulseIncarnation(
             weight,
@@ -15809,11 +16106,17 @@ var effect = new BideAICapabilityUCSetChargeEffect(id, newValue);
   public KillDirective EffectKillDirectiveCreate(
       Unit targetUnit,
       LocationMutList pathToLastSeenLocation) {
+    return EffectKillDirectiveCreateWithId(NewId()
+,targetUnit
+,pathToLastSeenLocation    );
+  }
+  public KillDirective EffectKillDirectiveCreateWithId(int id
+,      Unit targetUnit
+,      LocationMutList pathToLastSeenLocation) {
     CheckUnlocked();
     CheckHasUnit(targetUnit);
     CheckHasLocationMutList(pathToLastSeenLocation);
 
-    var id = NewId();
     var incarnation =
         new KillDirectiveIncarnation(
             targetUnit.id,
@@ -15897,9 +16200,13 @@ var effect = new BideAICapabilityUCSetChargeEffect(id, newValue);
   }
   public AttackAICapabilityUC EffectAttackAICapabilityUCCreate(
       KillDirective killDirective) {
+    return EffectAttackAICapabilityUCCreateWithId(NewId()
+,killDirective    );
+  }
+  public AttackAICapabilityUC EffectAttackAICapabilityUCCreateWithId(int id
+,      KillDirective killDirective) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new AttackAICapabilityUCIncarnation(
             killDirective.id
@@ -16005,9 +16312,13 @@ var effect = new AttackAICapabilityUCSetKillDirectiveEffect(id, newValue.id);
   }
   public WarperTTC EffectWarperTTCCreate(
       Location destinationLocation) {
+    return EffectWarperTTCCreateWithId(NewId()
+,destinationLocation    );
+  }
+  public WarperTTC EffectWarperTTCCreateWithId(int id
+,      Location destinationLocation) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new WarperTTCIncarnation(
             destinationLocation
@@ -16089,9 +16400,13 @@ var effect = new AttackAICapabilityUCSetKillDirectiveEffect(id, newValue.id);
   }
   public TimeAnchorTTC EffectTimeAnchorTTCCreate(
       int pastVersion) {
+    return EffectTimeAnchorTTCCreateWithId(NewId()
+,pastVersion    );
+  }
+  public TimeAnchorTTC EffectTimeAnchorTTCCreateWithId(int id
+,      int pastVersion) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new TimeAnchorTTCIncarnation(
             pastVersion
@@ -16175,10 +16490,18 @@ var effect = new AttackAICapabilityUCSetKillDirectiveEffect(id, newValue.id);
       ITerrainTileEvent evvent,
       int elevation,
       ITerrainTileComponentMutBunch components) {
+    return EffectTerrainTileCreateWithId(NewId()
+,evvent
+,elevation
+,components    );
+  }
+  public TerrainTile EffectTerrainTileCreateWithId(int id
+,      ITerrainTileEvent evvent
+,      int elevation
+,      ITerrainTileComponentMutBunch components) {
     CheckUnlocked();
     CheckHasITerrainTileComponentMutBunch(components);
 
-    var id = NewId();
     var incarnation =
         new TerrainTileIncarnation(
             evvent,
@@ -16345,6 +16668,73 @@ var effect = new TerrainTileSetElevationEffect(id, newValue);
       GrassTTCMutSet membersGrassTTCMutSet,
       IncendianFallsLevelLinkerTTCMutSet membersIncendianFallsLevelLinkerTTCMutSet,
       EmberDeepLevelLinkerTTCMutSet membersEmberDeepLevelLinkerTTCMutSet) {
+    return EffectITerrainTileComponentMutBunchCreateWithId(NewId()
+,membersSimplePresenceTriggerTTCMutSet
+,membersItemTTCMutSet
+,membersKamikazeTargetTTCMutSet
+,membersWarperTTCMutSet
+,membersTimeAnchorTTCMutSet
+,membersFireBombTTCMutSet
+,membersMarkerTTCMutSet
+,membersLevelLinkTTCMutSet
+,membersMudTTCMutSet
+,membersDirtTTCMutSet
+,membersObsidianTTCMutSet
+,membersDownStairsTTCMutSet
+,membersUpStairsTTCMutSet
+,membersWallTTCMutSet
+,membersBloodTTCMutSet
+,membersRocksTTCMutSet
+,membersTreeTTCMutSet
+,membersWaterTTCMutSet
+,membersFloorTTCMutSet
+,membersCaveWallTTCMutSet
+,membersCaveTTCMutSet
+,membersFallsTTCMutSet
+,membersFireTTCMutSet
+,membersObsidianFloorTTCMutSet
+,membersMagmaTTCMutSet
+,membersCliffTTCMutSet
+,membersRavaNestTTCMutSet
+,membersCliffLandingTTCMutSet
+,membersStoneTTCMutSet
+,membersGrassTTCMutSet
+,membersIncendianFallsLevelLinkerTTCMutSet
+,membersEmberDeepLevelLinkerTTCMutSet    );
+  }
+  public ITerrainTileComponentMutBunch EffectITerrainTileComponentMutBunchCreateWithId(int id
+,      SimplePresenceTriggerTTCMutSet membersSimplePresenceTriggerTTCMutSet
+,      ItemTTCMutSet membersItemTTCMutSet
+,      KamikazeTargetTTCMutSet membersKamikazeTargetTTCMutSet
+,      WarperTTCMutSet membersWarperTTCMutSet
+,      TimeAnchorTTCMutSet membersTimeAnchorTTCMutSet
+,      FireBombTTCMutSet membersFireBombTTCMutSet
+,      MarkerTTCMutSet membersMarkerTTCMutSet
+,      LevelLinkTTCMutSet membersLevelLinkTTCMutSet
+,      MudTTCMutSet membersMudTTCMutSet
+,      DirtTTCMutSet membersDirtTTCMutSet
+,      ObsidianTTCMutSet membersObsidianTTCMutSet
+,      DownStairsTTCMutSet membersDownStairsTTCMutSet
+,      UpStairsTTCMutSet membersUpStairsTTCMutSet
+,      WallTTCMutSet membersWallTTCMutSet
+,      BloodTTCMutSet membersBloodTTCMutSet
+,      RocksTTCMutSet membersRocksTTCMutSet
+,      TreeTTCMutSet membersTreeTTCMutSet
+,      WaterTTCMutSet membersWaterTTCMutSet
+,      FloorTTCMutSet membersFloorTTCMutSet
+,      CaveWallTTCMutSet membersCaveWallTTCMutSet
+,      CaveTTCMutSet membersCaveTTCMutSet
+,      FallsTTCMutSet membersFallsTTCMutSet
+,      FireTTCMutSet membersFireTTCMutSet
+,      ObsidianFloorTTCMutSet membersObsidianFloorTTCMutSet
+,      MagmaTTCMutSet membersMagmaTTCMutSet
+,      CliffTTCMutSet membersCliffTTCMutSet
+,      RavaNestTTCMutSet membersRavaNestTTCMutSet
+,      CliffLandingTTCMutSet membersCliffLandingTTCMutSet
+,      StoneTTCMutSet membersStoneTTCMutSet
+,      GrassTTCMutSet membersGrassTTCMutSet
+,      IncendianFallsLevelLinkerTTCMutSet membersIncendianFallsLevelLinkerTTCMutSet
+,      EmberDeepLevelLinkerTTCMutSet membersEmberDeepLevelLinkerTTCMutSet) {
     CheckUnlocked();
     CheckHasSimplePresenceTriggerTTCMutSet(membersSimplePresenceTriggerTTCMutSet);
     CheckHasItemTTCMutSet(membersItemTTCMutSet);
@@ -16379,7 +16769,6 @@ var effect = new TerrainTileSetElevationEffect(id, newValue);
     CheckHasIncendianFallsLevelLinkerTTCMutSet(membersIncendianFallsLevelLinkerTTCMutSet);
     CheckHasEmberDeepLevelLinkerTTCMutSet(membersEmberDeepLevelLinkerTTCMutSet);
 
-    var id = NewId();
     var incarnation =
         new ITerrainTileComponentMutBunchIncarnation(
             membersSimplePresenceTriggerTTCMutSet.id,
@@ -16525,10 +16914,18 @@ var effect = new TerrainTileSetElevationEffect(id, newValue);
       Pattern pattern,
       float elevationStepHeight,
       TerrainTileByLocationMutMap tiles) {
+    return EffectTerrainCreateWithId(NewId()
+,pattern
+,elevationStepHeight
+,tiles    );
+  }
+  public Terrain EffectTerrainCreateWithId(int id
+,      Pattern pattern
+,      float elevationStepHeight
+,      TerrainTileByLocationMutMap tiles) {
     CheckUnlocked();
     CheckHasTerrainTileByLocationMutMap(tiles);
 
-    var id = NewId();
     var incarnation =
         new TerrainIncarnation(
             pattern,
@@ -16638,9 +17035,13 @@ var effect = new TerrainSetPatternEffect(id, newValue);
   }
   public SimplePresenceTriggerTTC EffectSimplePresenceTriggerTTCCreate(
       string name) {
+    return EffectSimplePresenceTriggerTTCCreateWithId(NewId()
+,name    );
+  }
+  public SimplePresenceTriggerTTC EffectSimplePresenceTriggerTTCCreateWithId(int id
+,      string name) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new SimplePresenceTriggerTTCIncarnation(
             name
@@ -16723,9 +17124,15 @@ var effect = new TerrainSetPatternEffect(id, newValue);
   public FireBombImpulse EffectFireBombImpulseCreate(
       int weight,
       Location location) {
+    return EffectFireBombImpulseCreateWithId(NewId()
+,weight
+,location    );
+  }
+  public FireBombImpulse EffectFireBombImpulseCreateWithId(int id
+,      int weight
+,      Location location) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new FireBombImpulseIncarnation(
             weight,
@@ -16809,9 +17216,13 @@ var effect = new TerrainSetPatternEffect(id, newValue);
   }
   public FireBombTTC EffectFireBombTTCCreate(
       int turnsUntilExplosion) {
+    return EffectFireBombTTCCreateWithId(NewId()
+,turnsUntilExplosion    );
+  }
+  public FireBombTTC EffectFireBombTTCCreateWithId(int id
+,      int turnsUntilExplosion) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new FireBombTTCIncarnation(
             turnsUntilExplosion
@@ -16915,9 +17326,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public MarkerTTC EffectMarkerTTCCreate(
       string name) {
+    return EffectMarkerTTCCreateWithId(NewId()
+,name    );
+  }
+  public MarkerTTC EffectMarkerTTCCreateWithId(int id
+,      string name) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new MarkerTTCIncarnation(
             name
@@ -17001,10 +17416,18 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
       bool destroyThisLevel,
       Level destinationLevel,
       Location destinationLevelLocation) {
+    return EffectLevelLinkTTCCreateWithId(NewId()
+,destroyThisLevel
+,destinationLevel
+,destinationLevelLocation    );
+  }
+  public LevelLinkTTC EffectLevelLinkTTCCreateWithId(int id
+,      bool destroyThisLevel
+,      Level destinationLevel
+,      Location destinationLevelLocation) {
     CheckUnlocked();
     CheckHasLevel(destinationLevel);
 
-    var id = NewId();
     var incarnation =
         new LevelLinkTTCIncarnation(
             destroyThisLevel,
@@ -17090,9 +17513,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public MudTTC EffectMudTTCCreate(
 ) {
+    return EffectMudTTCCreateWithId(NewId()
+    );
+  }
+  public MudTTC EffectMudTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new MudTTCIncarnation(
 
@@ -17173,9 +17600,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public DirtTTC EffectDirtTTCCreate(
 ) {
+    return EffectDirtTTCCreateWithId(NewId()
+    );
+  }
+  public DirtTTC EffectDirtTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new DirtTTCIncarnation(
 
@@ -17256,9 +17687,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public ObsidianTTC EffectObsidianTTCCreate(
 ) {
+    return EffectObsidianTTCCreateWithId(NewId()
+    );
+  }
+  public ObsidianTTC EffectObsidianTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new ObsidianTTCIncarnation(
 
@@ -17339,9 +17774,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public DownStairsTTC EffectDownStairsTTCCreate(
 ) {
+    return EffectDownStairsTTCCreateWithId(NewId()
+    );
+  }
+  public DownStairsTTC EffectDownStairsTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new DownStairsTTCIncarnation(
 
@@ -17422,9 +17861,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public UpStairsTTC EffectUpStairsTTCCreate(
 ) {
+    return EffectUpStairsTTCCreateWithId(NewId()
+    );
+  }
+  public UpStairsTTC EffectUpStairsTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new UpStairsTTCIncarnation(
 
@@ -17505,9 +17948,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public WallTTC EffectWallTTCCreate(
 ) {
+    return EffectWallTTCCreateWithId(NewId()
+    );
+  }
+  public WallTTC EffectWallTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new WallTTCIncarnation(
 
@@ -17588,9 +18035,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public BloodTTC EffectBloodTTCCreate(
 ) {
+    return EffectBloodTTCCreateWithId(NewId()
+    );
+  }
+  public BloodTTC EffectBloodTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new BloodTTCIncarnation(
 
@@ -17671,9 +18122,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public RocksTTC EffectRocksTTCCreate(
 ) {
+    return EffectRocksTTCCreateWithId(NewId()
+    );
+  }
+  public RocksTTC EffectRocksTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new RocksTTCIncarnation(
 
@@ -17754,9 +18209,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public TreeTTC EffectTreeTTCCreate(
 ) {
+    return EffectTreeTTCCreateWithId(NewId()
+    );
+  }
+  public TreeTTC EffectTreeTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new TreeTTCIncarnation(
 
@@ -17837,9 +18296,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public WaterTTC EffectWaterTTCCreate(
 ) {
+    return EffectWaterTTCCreateWithId(NewId()
+    );
+  }
+  public WaterTTC EffectWaterTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new WaterTTCIncarnation(
 
@@ -17920,9 +18383,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public FloorTTC EffectFloorTTCCreate(
 ) {
+    return EffectFloorTTCCreateWithId(NewId()
+    );
+  }
+  public FloorTTC EffectFloorTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new FloorTTCIncarnation(
 
@@ -18003,9 +18470,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public CaveWallTTC EffectCaveWallTTCCreate(
 ) {
+    return EffectCaveWallTTCCreateWithId(NewId()
+    );
+  }
+  public CaveWallTTC EffectCaveWallTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new CaveWallTTCIncarnation(
 
@@ -18086,9 +18557,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public CaveTTC EffectCaveTTCCreate(
 ) {
+    return EffectCaveTTCCreateWithId(NewId()
+    );
+  }
+  public CaveTTC EffectCaveTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new CaveTTCIncarnation(
 
@@ -18169,9 +18644,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public FallsTTC EffectFallsTTCCreate(
 ) {
+    return EffectFallsTTCCreateWithId(NewId()
+    );
+  }
+  public FallsTTC EffectFallsTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new FallsTTCIncarnation(
 
@@ -18252,9 +18731,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public FireTTC EffectFireTTCCreate(
 ) {
+    return EffectFireTTCCreateWithId(NewId()
+    );
+  }
+  public FireTTC EffectFireTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new FireTTCIncarnation(
 
@@ -18335,9 +18818,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public ObsidianFloorTTC EffectObsidianFloorTTCCreate(
 ) {
+    return EffectObsidianFloorTTCCreateWithId(NewId()
+    );
+  }
+  public ObsidianFloorTTC EffectObsidianFloorTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new ObsidianFloorTTCIncarnation(
 
@@ -18418,9 +18905,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public MagmaTTC EffectMagmaTTCCreate(
 ) {
+    return EffectMagmaTTCCreateWithId(NewId()
+    );
+  }
+  public MagmaTTC EffectMagmaTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new MagmaTTCIncarnation(
 
@@ -18501,9 +18992,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public CliffTTC EffectCliffTTCCreate(
 ) {
+    return EffectCliffTTCCreateWithId(NewId()
+    );
+  }
+  public CliffTTC EffectCliffTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new CliffTTCIncarnation(
 
@@ -18584,9 +19079,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public RavaNestTTC EffectRavaNestTTCCreate(
 ) {
+    return EffectRavaNestTTCCreateWithId(NewId()
+    );
+  }
+  public RavaNestTTC EffectRavaNestTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new RavaNestTTCIncarnation(
 
@@ -18667,9 +19166,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public CliffLandingTTC EffectCliffLandingTTCCreate(
 ) {
+    return EffectCliffLandingTTCCreateWithId(NewId()
+    );
+  }
+  public CliffLandingTTC EffectCliffLandingTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new CliffLandingTTCIncarnation(
 
@@ -18750,9 +19253,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public StoneTTC EffectStoneTTCCreate(
 ) {
+    return EffectStoneTTCCreateWithId(NewId()
+    );
+  }
+  public StoneTTC EffectStoneTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new StoneTTCIncarnation(
 
@@ -18833,9 +19340,13 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
   }
   public GrassTTC EffectGrassTTCCreate(
 ) {
+    return EffectGrassTTCCreateWithId(NewId()
+    );
+  }
+  public GrassTTC EffectGrassTTCCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new GrassTTCIncarnation(
 
@@ -18920,11 +19431,23 @@ var effect = new FireBombTTCSetTurnsUntilExplosionEffect(id, newValue);
       UnitMutSet units,
       ILevelController controller,
       int time) {
+    return EffectLevelCreateWithId(NewId()
+,cameraAngle
+,terrain
+,units
+,controller
+,time    );
+  }
+  public Level EffectLevelCreateWithId(int id
+,      Vec3 cameraAngle
+,      Terrain terrain
+,      UnitMutSet units
+,      ILevelController controller
+,      int time) {
     CheckUnlocked();
     CheckHasTerrain(terrain);
     CheckHasUnitMutSet(units);
 
-    var id = NewId();
     var incarnation =
         new LevelIncarnation(
             cameraAngle,
@@ -19068,9 +19591,13 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public SpeedRing EffectSpeedRingCreate(
 ) {
+    return EffectSpeedRingCreateWithId(NewId()
+    );
+  }
+  public SpeedRing EffectSpeedRingCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new SpeedRingIncarnation(
 
@@ -19151,9 +19678,13 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public ManaPotion EffectManaPotionCreate(
 ) {
+    return EffectManaPotionCreateWithId(NewId()
+    );
+  }
+  public ManaPotion EffectManaPotionCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new ManaPotionIncarnation(
 
@@ -19237,13 +19768,23 @@ var effect = new LevelSetTimeEffect(id, newValue);
       IImpulseStrongMutBunch impulses,
       IPostActingUCWeakMutBunch blah,
       IPreActingUCWeakMutBunch bloop) {
+    return EffectWatCreateWithId(NewId()
+,items
+,impulses
+,blah
+,bloop    );
+  }
+  public Wat EffectWatCreateWithId(int id
+,      IItemStrongMutBunch items
+,      IImpulseStrongMutBunch impulses
+,      IPostActingUCWeakMutBunch blah
+,      IPreActingUCWeakMutBunch bloop) {
     CheckUnlocked();
     CheckHasIItemStrongMutBunch(items);
     CheckHasIImpulseStrongMutBunch(impulses);
     CheckHasIPostActingUCWeakMutBunch(blah);
     CheckHasIPreActingUCWeakMutBunch(bloop);
 
-    var id = NewId();
     var incarnation =
         new WatIncarnation(
             items.id,
@@ -19336,6 +19877,21 @@ var effect = new LevelSetTimeEffect(id, newValue);
       DefyingUCWeakMutSet membersDefyingUCWeakMutSet,
       CounteringUCWeakMutSet membersCounteringUCWeakMutSet,
       AttackAICapabilityUCWeakMutSet membersAttackAICapabilityUCWeakMutSet) {
+    return EffectIPreActingUCWeakMutBunchCreateWithId(NewId()
+,membersDoomedUCWeakMutSet
+,membersMiredUCWeakMutSet
+,membersInvincibilityUCWeakMutSet
+,membersDefyingUCWeakMutSet
+,membersCounteringUCWeakMutSet
+,membersAttackAICapabilityUCWeakMutSet    );
+  }
+  public IPreActingUCWeakMutBunch EffectIPreActingUCWeakMutBunchCreateWithId(int id
+,      DoomedUCWeakMutSet membersDoomedUCWeakMutSet
+,      MiredUCWeakMutSet membersMiredUCWeakMutSet
+,      InvincibilityUCWeakMutSet membersInvincibilityUCWeakMutSet
+,      DefyingUCWeakMutSet membersDefyingUCWeakMutSet
+,      CounteringUCWeakMutSet membersCounteringUCWeakMutSet
+,      AttackAICapabilityUCWeakMutSet membersAttackAICapabilityUCWeakMutSet) {
     CheckUnlocked();
     CheckHasDoomedUCWeakMutSet(membersDoomedUCWeakMutSet);
     CheckHasMiredUCWeakMutSet(membersMiredUCWeakMutSet);
@@ -19344,7 +19900,6 @@ var effect = new LevelSetTimeEffect(id, newValue);
     CheckHasCounteringUCWeakMutSet(membersCounteringUCWeakMutSet);
     CheckHasAttackAICapabilityUCWeakMutSet(membersAttackAICapabilityUCWeakMutSet);
 
-    var id = NewId();
     var incarnation =
         new IPreActingUCWeakMutBunchIncarnation(
             membersDoomedUCWeakMutSet.id,
@@ -19437,11 +19992,17 @@ var effect = new LevelSetTimeEffect(id, newValue);
   public IPostActingUCWeakMutBunch EffectIPostActingUCWeakMutBunchCreate(
       LightningChargedUCWeakMutSet membersLightningChargedUCWeakMutSet,
       TimeCloneAICapabilityUCWeakMutSet membersTimeCloneAICapabilityUCWeakMutSet) {
+    return EffectIPostActingUCWeakMutBunchCreateWithId(NewId()
+,membersLightningChargedUCWeakMutSet
+,membersTimeCloneAICapabilityUCWeakMutSet    );
+  }
+  public IPostActingUCWeakMutBunch EffectIPostActingUCWeakMutBunchCreateWithId(int id
+,      LightningChargedUCWeakMutSet membersLightningChargedUCWeakMutSet
+,      TimeCloneAICapabilityUCWeakMutSet membersTimeCloneAICapabilityUCWeakMutSet) {
     CheckUnlocked();
     CheckHasLightningChargedUCWeakMutSet(membersLightningChargedUCWeakMutSet);
     CheckHasTimeCloneAICapabilityUCWeakMutSet(membersTimeCloneAICapabilityUCWeakMutSet);
 
-    var id = NewId();
     var incarnation =
         new IPostActingUCWeakMutBunchIncarnation(
             membersLightningChargedUCWeakMutSet.id,
@@ -19542,6 +20103,45 @@ var effect = new LevelSetTimeEffect(id, newValue);
       AttackImpulseStrongMutSet membersAttackImpulseStrongMutSet,
       PursueImpulseStrongMutSet membersPursueImpulseStrongMutSet,
       FireBombImpulseStrongMutSet membersFireBombImpulseStrongMutSet) {
+    return EffectIImpulseStrongMutBunchCreateWithId(NewId()
+,membersHoldPositionImpulseStrongMutSet
+,membersTemporaryCloneImpulseStrongMutSet
+,membersSummonImpulseStrongMutSet
+,membersMireImpulseStrongMutSet
+,membersEvaporateImpulseStrongMutSet
+,membersMoveImpulseStrongMutSet
+,membersKamikazeJumpImpulseStrongMutSet
+,membersKamikazeTargetImpulseStrongMutSet
+,membersNoImpulseStrongMutSet
+,membersFireImpulseStrongMutSet
+,membersDefyImpulseStrongMutSet
+,membersCounterImpulseStrongMutSet
+,membersUnleashBideImpulseStrongMutSet
+,membersContinueBidingImpulseStrongMutSet
+,membersStartBidingImpulseStrongMutSet
+,membersAttackImpulseStrongMutSet
+,membersPursueImpulseStrongMutSet
+,membersFireBombImpulseStrongMutSet    );
+  }
+  public IImpulseStrongMutBunch EffectIImpulseStrongMutBunchCreateWithId(int id
+,      HoldPositionImpulseStrongMutSet membersHoldPositionImpulseStrongMutSet
+,      TemporaryCloneImpulseStrongMutSet membersTemporaryCloneImpulseStrongMutSet
+,      SummonImpulseStrongMutSet membersSummonImpulseStrongMutSet
+,      MireImpulseStrongMutSet membersMireImpulseStrongMutSet
+,      EvaporateImpulseStrongMutSet membersEvaporateImpulseStrongMutSet
+,      MoveImpulseStrongMutSet membersMoveImpulseStrongMutSet
+,      KamikazeJumpImpulseStrongMutSet membersKamikazeJumpImpulseStrongMutSet
+,      KamikazeTargetImpulseStrongMutSet membersKamikazeTargetImpulseStrongMutSet
+,      NoImpulseStrongMutSet membersNoImpulseStrongMutSet
+,      FireImpulseStrongMutSet membersFireImpulseStrongMutSet
+,      DefyImpulseStrongMutSet membersDefyImpulseStrongMutSet
+,      CounterImpulseStrongMutSet membersCounterImpulseStrongMutSet
+,      UnleashBideImpulseStrongMutSet membersUnleashBideImpulseStrongMutSet
+,      ContinueBidingImpulseStrongMutSet membersContinueBidingImpulseStrongMutSet
+,      StartBidingImpulseStrongMutSet membersStartBidingImpulseStrongMutSet
+,      AttackImpulseStrongMutSet membersAttackImpulseStrongMutSet
+,      PursueImpulseStrongMutSet membersPursueImpulseStrongMutSet
+,      FireBombImpulseStrongMutSet membersFireBombImpulseStrongMutSet) {
     CheckUnlocked();
     CheckHasHoldPositionImpulseStrongMutSet(membersHoldPositionImpulseStrongMutSet);
     CheckHasTemporaryCloneImpulseStrongMutSet(membersTemporaryCloneImpulseStrongMutSet);
@@ -19562,7 +20162,6 @@ var effect = new LevelSetTimeEffect(id, newValue);
     CheckHasPursueImpulseStrongMutSet(membersPursueImpulseStrongMutSet);
     CheckHasFireBombImpulseStrongMutSet(membersFireBombImpulseStrongMutSet);
 
-    var id = NewId();
     var incarnation =
         new IImpulseStrongMutBunchIncarnation(
             membersHoldPositionImpulseStrongMutSet.id,
@@ -19684,6 +20283,23 @@ var effect = new LevelSetTimeEffect(id, newValue);
       SlowRodStrongMutSet membersSlowRodStrongMutSet,
       BlastRodStrongMutSet membersBlastRodStrongMutSet,
       ArmorStrongMutSet membersArmorStrongMutSet) {
+    return EffectIItemStrongMutBunchCreateWithId(NewId()
+,membersManaPotionStrongMutSet
+,membersHealthPotionStrongMutSet
+,membersSpeedRingStrongMutSet
+,membersGlaiveStrongMutSet
+,membersSlowRodStrongMutSet
+,membersBlastRodStrongMutSet
+,membersArmorStrongMutSet    );
+  }
+  public IItemStrongMutBunch EffectIItemStrongMutBunchCreateWithId(int id
+,      ManaPotionStrongMutSet membersManaPotionStrongMutSet
+,      HealthPotionStrongMutSet membersHealthPotionStrongMutSet
+,      SpeedRingStrongMutSet membersSpeedRingStrongMutSet
+,      GlaiveStrongMutSet membersGlaiveStrongMutSet
+,      SlowRodStrongMutSet membersSlowRodStrongMutSet
+,      BlastRodStrongMutSet membersBlastRodStrongMutSet
+,      ArmorStrongMutSet membersArmorStrongMutSet) {
     CheckUnlocked();
     CheckHasManaPotionStrongMutSet(membersManaPotionStrongMutSet);
     CheckHasHealthPotionStrongMutSet(membersHealthPotionStrongMutSet);
@@ -19693,7 +20309,6 @@ var effect = new LevelSetTimeEffect(id, newValue);
     CheckHasBlastRodStrongMutSet(membersBlastRodStrongMutSet);
     CheckHasArmorStrongMutSet(membersArmorStrongMutSet);
 
-    var id = NewId();
     var incarnation =
         new IItemStrongMutBunchIncarnation(
             membersManaPotionStrongMutSet.id,
@@ -19787,10 +20402,14 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public ItemTTC EffectItemTTCCreate(
       IItem item) {
+    return EffectItemTTCCreateWithId(NewId()
+,item    );
+  }
+  public ItemTTC EffectItemTTCCreateWithId(int id
+,      IItem item) {
     CheckUnlocked();
     CheckHasIItem(item);
 
-    var id = NewId();
     var incarnation =
         new ItemTTCIncarnation(
             item.id
@@ -19872,9 +20491,13 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public HealthPotion EffectHealthPotionCreate(
 ) {
+    return EffectHealthPotionCreateWithId(NewId()
+    );
+  }
+  public HealthPotion EffectHealthPotionCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new HealthPotionIncarnation(
 
@@ -19955,9 +20578,13 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public Glaive EffectGlaiveCreate(
 ) {
+    return EffectGlaiveCreateWithId(NewId()
+    );
+  }
+  public Glaive EffectGlaiveCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new GlaiveIncarnation(
 
@@ -20038,9 +20665,13 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public SlowRod EffectSlowRodCreate(
 ) {
+    return EffectSlowRodCreateWithId(NewId()
+    );
+  }
+  public SlowRod EffectSlowRodCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new SlowRodIncarnation(
 
@@ -20121,9 +20752,13 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public BlastRod EffectBlastRodCreate(
 ) {
+    return EffectBlastRodCreateWithId(NewId()
+    );
+  }
+  public BlastRod EffectBlastRodCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new BlastRodIncarnation(
 
@@ -20204,9 +20839,13 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public Armor EffectArmorCreate(
 ) {
+    return EffectArmorCreateWithId(NewId()
+    );
+  }
+  public Armor EffectArmorCreateWithId(int id
+) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new ArmorIncarnation(
 
@@ -20288,10 +20927,16 @@ var effect = new LevelSetTimeEffect(id, newValue);
   public SquareCaveLevelController EffectSquareCaveLevelControllerCreate(
       Level level,
       int depth) {
+    return EffectSquareCaveLevelControllerCreateWithId(NewId()
+,level
+,depth    );
+  }
+  public SquareCaveLevelController EffectSquareCaveLevelControllerCreateWithId(int id
+,      Level level
+,      int depth) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new SquareCaveLevelControllerIncarnation(
             level.id,
@@ -20375,10 +21020,14 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public RavashrikeLevelController EffectRavashrikeLevelControllerCreate(
       Level level) {
+    return EffectRavashrikeLevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public RavashrikeLevelController EffectRavashrikeLevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new RavashrikeLevelControllerIncarnation(
             level.id
@@ -20461,10 +21110,16 @@ var effect = new LevelSetTimeEffect(id, newValue);
   public PentagonalCaveLevelController EffectPentagonalCaveLevelControllerCreate(
       Level level,
       int depth) {
+    return EffectPentagonalCaveLevelControllerCreateWithId(NewId()
+,level
+,depth    );
+  }
+  public PentagonalCaveLevelController EffectPentagonalCaveLevelControllerCreateWithId(int id
+,      Level level
+,      int depth) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new PentagonalCaveLevelControllerIncarnation(
             level.id,
@@ -20548,9 +21203,13 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public IncendianFallsLevelLinkerTTC EffectIncendianFallsLevelLinkerTTCCreate(
       int thisLevelDepth) {
+    return EffectIncendianFallsLevelLinkerTTCCreateWithId(NewId()
+,thisLevelDepth    );
+  }
+  public IncendianFallsLevelLinkerTTC EffectIncendianFallsLevelLinkerTTCCreateWithId(int id
+,      int thisLevelDepth) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new IncendianFallsLevelLinkerTTCIncarnation(
             thisLevelDepth
@@ -20633,10 +21292,16 @@ var effect = new LevelSetTimeEffect(id, newValue);
   public CliffLevelController EffectCliffLevelControllerCreate(
       Level level,
       int depth) {
+    return EffectCliffLevelControllerCreateWithId(NewId()
+,level
+,depth    );
+  }
+  public CliffLevelController EffectCliffLevelControllerCreateWithId(int id
+,      Level level
+,      int depth) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new CliffLevelControllerIncarnation(
             level.id,
@@ -20720,10 +21385,14 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public PreGauntletLevelController EffectPreGauntletLevelControllerCreate(
       Level level) {
+    return EffectPreGauntletLevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public PreGauntletLevelController EffectPreGauntletLevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new PreGauntletLevelControllerIncarnation(
             level.id
@@ -20805,10 +21474,14 @@ var effect = new LevelSetTimeEffect(id, newValue);
   }
   public GauntletLevelController EffectGauntletLevelControllerCreate(
       Level level) {
+    return EffectGauntletLevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public GauntletLevelController EffectGauntletLevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new GauntletLevelControllerIncarnation(
             level.id
@@ -20892,9 +21565,17 @@ var effect = new LevelSetTimeEffect(id, newValue);
       ICommTemplate template,
       CommActionImmList actions,
       CommTextImmList texts) {
+    return EffectCommCreateWithId(NewId()
+,template
+,actions
+,texts    );
+  }
+  public Comm EffectCommCreateWithId(int id
+,      ICommTemplate template
+,      CommActionImmList actions
+,      CommTextImmList texts) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new CommIncarnation(
             template,
@@ -20992,12 +21673,40 @@ var effect = new LevelSetTimeEffect(id, newValue);
       bool hideInput,
       IGameEvent evvent,
       CommMutList comms) {
+    return EffectGameCreateWithId(NewId()
+,rand
+,squareLevelsOnly
+,levels
+,player
+,level
+,time
+,actingUnit
+,pauseBeforeNextUnit
+,actionNum
+,instructions
+,hideInput
+,evvent
+,comms    );
+  }
+  public Game EffectGameCreateWithId(int id
+,      Rand rand
+,      bool squareLevelsOnly
+,      LevelMutSet levels
+,      Unit player
+,      Level level
+,      int time
+,      Unit actingUnit
+,      bool pauseBeforeNextUnit
+,      int actionNum
+,      string instructions
+,      bool hideInput
+,      IGameEvent evvent
+,      CommMutList comms) {
     CheckUnlocked();
     CheckHasRand(rand);
     CheckHasLevelMutSet(levels);
     CheckHasCommMutList(comms);
 
-    var id = NewId();
     var incarnation =
         new GameIncarnation(
             rand.id,
@@ -21417,10 +22126,14 @@ var effect = new GameSetEvventEffect(id, newValue);
   }
   public VolcaetusLevelController EffectVolcaetusLevelControllerCreate(
       Level level) {
+    return EffectVolcaetusLevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public VolcaetusLevelController EffectVolcaetusLevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new VolcaetusLevelControllerIncarnation(
             level.id
@@ -21502,10 +22215,14 @@ var effect = new GameSetEvventEffect(id, newValue);
   }
   public Tutorial2LevelController EffectTutorial2LevelControllerCreate(
       Level level) {
+    return EffectTutorial2LevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public Tutorial2LevelController EffectTutorial2LevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new Tutorial2LevelControllerIncarnation(
             level.id
@@ -21587,10 +22304,14 @@ var effect = new GameSetEvventEffect(id, newValue);
   }
   public Tutorial1LevelController EffectTutorial1LevelControllerCreate(
       Level level) {
+    return EffectTutorial1LevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public Tutorial1LevelController EffectTutorial1LevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new Tutorial1LevelControllerIncarnation(
             level.id
@@ -21672,10 +22393,14 @@ var effect = new GameSetEvventEffect(id, newValue);
   }
   public RetreatLevelController EffectRetreatLevelControllerCreate(
       Level level) {
+    return EffectRetreatLevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public RetreatLevelController EffectRetreatLevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new RetreatLevelControllerIncarnation(
             level.id
@@ -21757,10 +22482,14 @@ var effect = new GameSetEvventEffect(id, newValue);
   }
   public SotaventoLevelController EffectSotaventoLevelControllerCreate(
       Level level) {
+    return EffectSotaventoLevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public SotaventoLevelController EffectSotaventoLevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new SotaventoLevelControllerIncarnation(
             level.id
@@ -21842,10 +22571,14 @@ var effect = new GameSetEvventEffect(id, newValue);
   }
   public NestLevelController EffectNestLevelControllerCreate(
       Level level) {
+    return EffectNestLevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public NestLevelController EffectNestLevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new NestLevelControllerIncarnation(
             level.id
@@ -21927,10 +22660,14 @@ var effect = new GameSetEvventEffect(id, newValue);
   }
   public LakeLevelController EffectLakeLevelControllerCreate(
       Level level) {
+    return EffectLakeLevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public LakeLevelController EffectLakeLevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new LakeLevelControllerIncarnation(
             level.id
@@ -22012,9 +22749,13 @@ var effect = new GameSetEvventEffect(id, newValue);
   }
   public EmberDeepLevelLinkerTTC EffectEmberDeepLevelLinkerTTCCreate(
       int nextLevelDepth) {
+    return EffectEmberDeepLevelLinkerTTCCreateWithId(NewId()
+,nextLevelDepth    );
+  }
+  public EmberDeepLevelLinkerTTC EffectEmberDeepLevelLinkerTTCCreateWithId(int id
+,      int nextLevelDepth) {
     CheckUnlocked();
 
-    var id = NewId();
     var incarnation =
         new EmberDeepLevelLinkerTTCIncarnation(
             nextLevelDepth
@@ -22096,10 +22837,14 @@ var effect = new GameSetEvventEffect(id, newValue);
   }
   public DirtRoadLevelController EffectDirtRoadLevelControllerCreate(
       Level level) {
+    return EffectDirtRoadLevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public DirtRoadLevelController EffectDirtRoadLevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new DirtRoadLevelControllerIncarnation(
             level.id
@@ -22182,10 +22927,16 @@ var effect = new GameSetEvventEffect(id, newValue);
   public CaveLevelController EffectCaveLevelControllerCreate(
       Level level,
       int depth) {
+    return EffectCaveLevelControllerCreateWithId(NewId()
+,level
+,depth    );
+  }
+  public CaveLevelController EffectCaveLevelControllerCreateWithId(int id
+,      Level level
+,      int depth) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new CaveLevelControllerIncarnation(
             level.id,
@@ -22269,10 +23020,14 @@ var effect = new GameSetEvventEffect(id, newValue);
   }
   public BridgesLevelController EffectBridgesLevelControllerCreate(
       Level level) {
+    return EffectBridgesLevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public BridgesLevelController EffectBridgesLevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new BridgesLevelControllerIncarnation(
             level.id
@@ -22354,10 +23109,14 @@ var effect = new GameSetEvventEffect(id, newValue);
   }
   public AncientTownLevelController EffectAncientTownLevelControllerCreate(
       Level level) {
+    return EffectAncientTownLevelControllerCreateWithId(NewId()
+,level    );
+  }
+  public AncientTownLevelController EffectAncientTownLevelControllerCreateWithId(int id
+,      Level level) {
     CheckUnlocked();
     CheckHasLevel(level);
 
-    var id = NewId();
     var incarnation =
         new AncientTownLevelControllerIncarnation(
             level.id
@@ -24490,8 +25249,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public CommMutList EffectCommMutListCreate() {
+      return EffectCommMutListCreateWithId(NewId());
+    }
+    public CommMutList EffectCommMutListCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       Asserts.Assert(!rootIncarnation.incarnationsCommMutList.ContainsKey(id));
       EffectInternalCreateCommMutList(id, rootIncarnation.version, new CommMutListIncarnation(new List<int>()));
       return new CommMutList(this, id);
@@ -24610,8 +25371,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public LocationMutList EffectLocationMutListCreate() {
+      return EffectLocationMutListCreateWithId(NewId());
+    }
+    public LocationMutList EffectLocationMutListCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       Asserts.Assert(!rootIncarnation.incarnationsLocationMutList.ContainsKey(id));
       EffectInternalCreateLocationMutList(id, rootIncarnation.version, new LocationMutListIncarnation(new List<Location>()));
       return new LocationMutList(this, id);
@@ -24730,8 +25493,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public IRequestMutList EffectIRequestMutListCreate() {
+      return EffectIRequestMutListCreateWithId(NewId());
+    }
+    public IRequestMutList EffectIRequestMutListCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       Asserts.Assert(!rootIncarnation.incarnationsIRequestMutList.ContainsKey(id));
       EffectInternalCreateIRequestMutList(id, rootIncarnation.version, new IRequestMutListIncarnation(new List<IRequest>()));
       return new IRequestMutList(this, id);
@@ -24842,8 +25607,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public LevelMutSet EffectLevelMutSetCreate() {
+      return EffectLevelMutSetCreateWithId(NewId());
+    }
+    public LevelMutSet EffectLevelMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new LevelMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateLevelMutSet(id, rootIncarnation.version, incarnation);
       return new LevelMutSet(this, id);
@@ -24953,8 +25720,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public ManaPotionStrongMutSet EffectManaPotionStrongMutSetCreate() {
+      return EffectManaPotionStrongMutSetCreateWithId(NewId());
+    }
+    public ManaPotionStrongMutSet EffectManaPotionStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new ManaPotionStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateManaPotionStrongMutSet(id, rootIncarnation.version, incarnation);
       return new ManaPotionStrongMutSet(this, id);
@@ -25064,8 +25833,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public HealthPotionStrongMutSet EffectHealthPotionStrongMutSetCreate() {
+      return EffectHealthPotionStrongMutSetCreateWithId(NewId());
+    }
+    public HealthPotionStrongMutSet EffectHealthPotionStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new HealthPotionStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateHealthPotionStrongMutSet(id, rootIncarnation.version, incarnation);
       return new HealthPotionStrongMutSet(this, id);
@@ -25175,8 +25946,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public SpeedRingStrongMutSet EffectSpeedRingStrongMutSetCreate() {
+      return EffectSpeedRingStrongMutSetCreateWithId(NewId());
+    }
+    public SpeedRingStrongMutSet EffectSpeedRingStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new SpeedRingStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateSpeedRingStrongMutSet(id, rootIncarnation.version, incarnation);
       return new SpeedRingStrongMutSet(this, id);
@@ -25286,8 +26059,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public GlaiveStrongMutSet EffectGlaiveStrongMutSetCreate() {
+      return EffectGlaiveStrongMutSetCreateWithId(NewId());
+    }
+    public GlaiveStrongMutSet EffectGlaiveStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new GlaiveStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateGlaiveStrongMutSet(id, rootIncarnation.version, incarnation);
       return new GlaiveStrongMutSet(this, id);
@@ -25397,8 +26172,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public SlowRodStrongMutSet EffectSlowRodStrongMutSetCreate() {
+      return EffectSlowRodStrongMutSetCreateWithId(NewId());
+    }
+    public SlowRodStrongMutSet EffectSlowRodStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new SlowRodStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateSlowRodStrongMutSet(id, rootIncarnation.version, incarnation);
       return new SlowRodStrongMutSet(this, id);
@@ -25508,8 +26285,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public BlastRodStrongMutSet EffectBlastRodStrongMutSetCreate() {
+      return EffectBlastRodStrongMutSetCreateWithId(NewId());
+    }
+    public BlastRodStrongMutSet EffectBlastRodStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new BlastRodStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateBlastRodStrongMutSet(id, rootIncarnation.version, incarnation);
       return new BlastRodStrongMutSet(this, id);
@@ -25619,8 +26398,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public ArmorStrongMutSet EffectArmorStrongMutSetCreate() {
+      return EffectArmorStrongMutSetCreateWithId(NewId());
+    }
+    public ArmorStrongMutSet EffectArmorStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new ArmorStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateArmorStrongMutSet(id, rootIncarnation.version, incarnation);
       return new ArmorStrongMutSet(this, id);
@@ -25730,8 +26511,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public HoldPositionImpulseStrongMutSet EffectHoldPositionImpulseStrongMutSetCreate() {
+      return EffectHoldPositionImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public HoldPositionImpulseStrongMutSet EffectHoldPositionImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new HoldPositionImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateHoldPositionImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new HoldPositionImpulseStrongMutSet(this, id);
@@ -25841,8 +26624,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public TemporaryCloneImpulseStrongMutSet EffectTemporaryCloneImpulseStrongMutSetCreate() {
+      return EffectTemporaryCloneImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public TemporaryCloneImpulseStrongMutSet EffectTemporaryCloneImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new TemporaryCloneImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateTemporaryCloneImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new TemporaryCloneImpulseStrongMutSet(this, id);
@@ -25952,8 +26737,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public SummonImpulseStrongMutSet EffectSummonImpulseStrongMutSetCreate() {
+      return EffectSummonImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public SummonImpulseStrongMutSet EffectSummonImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new SummonImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateSummonImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new SummonImpulseStrongMutSet(this, id);
@@ -26063,8 +26850,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public MireImpulseStrongMutSet EffectMireImpulseStrongMutSetCreate() {
+      return EffectMireImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public MireImpulseStrongMutSet EffectMireImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new MireImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateMireImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new MireImpulseStrongMutSet(this, id);
@@ -26174,8 +26963,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public EvaporateImpulseStrongMutSet EffectEvaporateImpulseStrongMutSetCreate() {
+      return EffectEvaporateImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public EvaporateImpulseStrongMutSet EffectEvaporateImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new EvaporateImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateEvaporateImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new EvaporateImpulseStrongMutSet(this, id);
@@ -26285,8 +27076,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public MoveImpulseStrongMutSet EffectMoveImpulseStrongMutSetCreate() {
+      return EffectMoveImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public MoveImpulseStrongMutSet EffectMoveImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new MoveImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateMoveImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new MoveImpulseStrongMutSet(this, id);
@@ -26396,8 +27189,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public KamikazeJumpImpulseStrongMutSet EffectKamikazeJumpImpulseStrongMutSetCreate() {
+      return EffectKamikazeJumpImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public KamikazeJumpImpulseStrongMutSet EffectKamikazeJumpImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new KamikazeJumpImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateKamikazeJumpImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new KamikazeJumpImpulseStrongMutSet(this, id);
@@ -26507,8 +27302,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public KamikazeTargetImpulseStrongMutSet EffectKamikazeTargetImpulseStrongMutSetCreate() {
+      return EffectKamikazeTargetImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public KamikazeTargetImpulseStrongMutSet EffectKamikazeTargetImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new KamikazeTargetImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateKamikazeTargetImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new KamikazeTargetImpulseStrongMutSet(this, id);
@@ -26618,8 +27415,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public NoImpulseStrongMutSet EffectNoImpulseStrongMutSetCreate() {
+      return EffectNoImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public NoImpulseStrongMutSet EffectNoImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new NoImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateNoImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new NoImpulseStrongMutSet(this, id);
@@ -26729,8 +27528,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public FireImpulseStrongMutSet EffectFireImpulseStrongMutSetCreate() {
+      return EffectFireImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public FireImpulseStrongMutSet EffectFireImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new FireImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateFireImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new FireImpulseStrongMutSet(this, id);
@@ -26840,8 +27641,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public DefyImpulseStrongMutSet EffectDefyImpulseStrongMutSetCreate() {
+      return EffectDefyImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public DefyImpulseStrongMutSet EffectDefyImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new DefyImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateDefyImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new DefyImpulseStrongMutSet(this, id);
@@ -26951,8 +27754,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public CounterImpulseStrongMutSet EffectCounterImpulseStrongMutSetCreate() {
+      return EffectCounterImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public CounterImpulseStrongMutSet EffectCounterImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new CounterImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateCounterImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new CounterImpulseStrongMutSet(this, id);
@@ -27062,8 +27867,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public UnleashBideImpulseStrongMutSet EffectUnleashBideImpulseStrongMutSetCreate() {
+      return EffectUnleashBideImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public UnleashBideImpulseStrongMutSet EffectUnleashBideImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new UnleashBideImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateUnleashBideImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new UnleashBideImpulseStrongMutSet(this, id);
@@ -27173,8 +27980,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public ContinueBidingImpulseStrongMutSet EffectContinueBidingImpulseStrongMutSetCreate() {
+      return EffectContinueBidingImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public ContinueBidingImpulseStrongMutSet EffectContinueBidingImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new ContinueBidingImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateContinueBidingImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new ContinueBidingImpulseStrongMutSet(this, id);
@@ -27284,8 +28093,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public StartBidingImpulseStrongMutSet EffectStartBidingImpulseStrongMutSetCreate() {
+      return EffectStartBidingImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public StartBidingImpulseStrongMutSet EffectStartBidingImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new StartBidingImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateStartBidingImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new StartBidingImpulseStrongMutSet(this, id);
@@ -27395,8 +28206,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public AttackImpulseStrongMutSet EffectAttackImpulseStrongMutSetCreate() {
+      return EffectAttackImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public AttackImpulseStrongMutSet EffectAttackImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new AttackImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateAttackImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new AttackImpulseStrongMutSet(this, id);
@@ -27506,8 +28319,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public PursueImpulseStrongMutSet EffectPursueImpulseStrongMutSetCreate() {
+      return EffectPursueImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public PursueImpulseStrongMutSet EffectPursueImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new PursueImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreatePursueImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new PursueImpulseStrongMutSet(this, id);
@@ -27617,8 +28432,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public FireBombImpulseStrongMutSet EffectFireBombImpulseStrongMutSetCreate() {
+      return EffectFireBombImpulseStrongMutSetCreateWithId(NewId());
+    }
+    public FireBombImpulseStrongMutSet EffectFireBombImpulseStrongMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new FireBombImpulseStrongMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateFireBombImpulseStrongMutSet(id, rootIncarnation.version, incarnation);
       return new FireBombImpulseStrongMutSet(this, id);
@@ -27728,8 +28545,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public LightningChargedUCWeakMutSet EffectLightningChargedUCWeakMutSetCreate() {
+      return EffectLightningChargedUCWeakMutSetCreateWithId(NewId());
+    }
+    public LightningChargedUCWeakMutSet EffectLightningChargedUCWeakMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new LightningChargedUCWeakMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateLightningChargedUCWeakMutSet(id, rootIncarnation.version, incarnation);
       return new LightningChargedUCWeakMutSet(this, id);
@@ -27837,8 +28656,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public TimeCloneAICapabilityUCWeakMutSet EffectTimeCloneAICapabilityUCWeakMutSetCreate() {
+      return EffectTimeCloneAICapabilityUCWeakMutSetCreateWithId(NewId());
+    }
+    public TimeCloneAICapabilityUCWeakMutSet EffectTimeCloneAICapabilityUCWeakMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new TimeCloneAICapabilityUCWeakMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateTimeCloneAICapabilityUCWeakMutSet(id, rootIncarnation.version, incarnation);
       return new TimeCloneAICapabilityUCWeakMutSet(this, id);
@@ -27946,8 +28767,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public DoomedUCWeakMutSet EffectDoomedUCWeakMutSetCreate() {
+      return EffectDoomedUCWeakMutSetCreateWithId(NewId());
+    }
+    public DoomedUCWeakMutSet EffectDoomedUCWeakMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new DoomedUCWeakMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateDoomedUCWeakMutSet(id, rootIncarnation.version, incarnation);
       return new DoomedUCWeakMutSet(this, id);
@@ -28055,8 +28878,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public MiredUCWeakMutSet EffectMiredUCWeakMutSetCreate() {
+      return EffectMiredUCWeakMutSetCreateWithId(NewId());
+    }
+    public MiredUCWeakMutSet EffectMiredUCWeakMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new MiredUCWeakMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateMiredUCWeakMutSet(id, rootIncarnation.version, incarnation);
       return new MiredUCWeakMutSet(this, id);
@@ -28164,8 +28989,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public InvincibilityUCWeakMutSet EffectInvincibilityUCWeakMutSetCreate() {
+      return EffectInvincibilityUCWeakMutSetCreateWithId(NewId());
+    }
+    public InvincibilityUCWeakMutSet EffectInvincibilityUCWeakMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new InvincibilityUCWeakMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateInvincibilityUCWeakMutSet(id, rootIncarnation.version, incarnation);
       return new InvincibilityUCWeakMutSet(this, id);
@@ -28273,8 +29100,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public DefyingUCWeakMutSet EffectDefyingUCWeakMutSetCreate() {
+      return EffectDefyingUCWeakMutSetCreateWithId(NewId());
+    }
+    public DefyingUCWeakMutSet EffectDefyingUCWeakMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new DefyingUCWeakMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateDefyingUCWeakMutSet(id, rootIncarnation.version, incarnation);
       return new DefyingUCWeakMutSet(this, id);
@@ -28382,8 +29211,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public CounteringUCWeakMutSet EffectCounteringUCWeakMutSetCreate() {
+      return EffectCounteringUCWeakMutSetCreateWithId(NewId());
+    }
+    public CounteringUCWeakMutSet EffectCounteringUCWeakMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new CounteringUCWeakMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateCounteringUCWeakMutSet(id, rootIncarnation.version, incarnation);
       return new CounteringUCWeakMutSet(this, id);
@@ -28491,8 +29322,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public AttackAICapabilityUCWeakMutSet EffectAttackAICapabilityUCWeakMutSetCreate() {
+      return EffectAttackAICapabilityUCWeakMutSetCreateWithId(NewId());
+    }
+    public AttackAICapabilityUCWeakMutSet EffectAttackAICapabilityUCWeakMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new AttackAICapabilityUCWeakMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateAttackAICapabilityUCWeakMutSet(id, rootIncarnation.version, incarnation);
       return new AttackAICapabilityUCWeakMutSet(this, id);
@@ -28600,8 +29433,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public UnitMutSet EffectUnitMutSetCreate() {
+      return EffectUnitMutSetCreateWithId(NewId());
+    }
+    public UnitMutSet EffectUnitMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new UnitMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateUnitMutSet(id, rootIncarnation.version, incarnation);
       return new UnitMutSet(this, id);
@@ -28711,8 +29546,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public SimplePresenceTriggerTTCMutSet EffectSimplePresenceTriggerTTCMutSetCreate() {
+      return EffectSimplePresenceTriggerTTCMutSetCreateWithId(NewId());
+    }
+    public SimplePresenceTriggerTTCMutSet EffectSimplePresenceTriggerTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new SimplePresenceTriggerTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateSimplePresenceTriggerTTCMutSet(id, rootIncarnation.version, incarnation);
       return new SimplePresenceTriggerTTCMutSet(this, id);
@@ -28822,8 +29659,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public ItemTTCMutSet EffectItemTTCMutSetCreate() {
+      return EffectItemTTCMutSetCreateWithId(NewId());
+    }
+    public ItemTTCMutSet EffectItemTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new ItemTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateItemTTCMutSet(id, rootIncarnation.version, incarnation);
       return new ItemTTCMutSet(this, id);
@@ -28933,8 +29772,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public KamikazeTargetTTCMutSet EffectKamikazeTargetTTCMutSetCreate() {
+      return EffectKamikazeTargetTTCMutSetCreateWithId(NewId());
+    }
+    public KamikazeTargetTTCMutSet EffectKamikazeTargetTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new KamikazeTargetTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateKamikazeTargetTTCMutSet(id, rootIncarnation.version, incarnation);
       return new KamikazeTargetTTCMutSet(this, id);
@@ -29044,8 +29885,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public WarperTTCMutSet EffectWarperTTCMutSetCreate() {
+      return EffectWarperTTCMutSetCreateWithId(NewId());
+    }
+    public WarperTTCMutSet EffectWarperTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new WarperTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateWarperTTCMutSet(id, rootIncarnation.version, incarnation);
       return new WarperTTCMutSet(this, id);
@@ -29155,8 +29998,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public TimeAnchorTTCMutSet EffectTimeAnchorTTCMutSetCreate() {
+      return EffectTimeAnchorTTCMutSetCreateWithId(NewId());
+    }
+    public TimeAnchorTTCMutSet EffectTimeAnchorTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new TimeAnchorTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateTimeAnchorTTCMutSet(id, rootIncarnation.version, incarnation);
       return new TimeAnchorTTCMutSet(this, id);
@@ -29266,8 +30111,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public FireBombTTCMutSet EffectFireBombTTCMutSetCreate() {
+      return EffectFireBombTTCMutSetCreateWithId(NewId());
+    }
+    public FireBombTTCMutSet EffectFireBombTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new FireBombTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateFireBombTTCMutSet(id, rootIncarnation.version, incarnation);
       return new FireBombTTCMutSet(this, id);
@@ -29377,8 +30224,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public MarkerTTCMutSet EffectMarkerTTCMutSetCreate() {
+      return EffectMarkerTTCMutSetCreateWithId(NewId());
+    }
+    public MarkerTTCMutSet EffectMarkerTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new MarkerTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateMarkerTTCMutSet(id, rootIncarnation.version, incarnation);
       return new MarkerTTCMutSet(this, id);
@@ -29488,8 +30337,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public LevelLinkTTCMutSet EffectLevelLinkTTCMutSetCreate() {
+      return EffectLevelLinkTTCMutSetCreateWithId(NewId());
+    }
+    public LevelLinkTTCMutSet EffectLevelLinkTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new LevelLinkTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateLevelLinkTTCMutSet(id, rootIncarnation.version, incarnation);
       return new LevelLinkTTCMutSet(this, id);
@@ -29599,8 +30450,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public MudTTCMutSet EffectMudTTCMutSetCreate() {
+      return EffectMudTTCMutSetCreateWithId(NewId());
+    }
+    public MudTTCMutSet EffectMudTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new MudTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateMudTTCMutSet(id, rootIncarnation.version, incarnation);
       return new MudTTCMutSet(this, id);
@@ -29710,8 +30563,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public DirtTTCMutSet EffectDirtTTCMutSetCreate() {
+      return EffectDirtTTCMutSetCreateWithId(NewId());
+    }
+    public DirtTTCMutSet EffectDirtTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new DirtTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateDirtTTCMutSet(id, rootIncarnation.version, incarnation);
       return new DirtTTCMutSet(this, id);
@@ -29821,8 +30676,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public ObsidianTTCMutSet EffectObsidianTTCMutSetCreate() {
+      return EffectObsidianTTCMutSetCreateWithId(NewId());
+    }
+    public ObsidianTTCMutSet EffectObsidianTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new ObsidianTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateObsidianTTCMutSet(id, rootIncarnation.version, incarnation);
       return new ObsidianTTCMutSet(this, id);
@@ -29932,8 +30789,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public DownStairsTTCMutSet EffectDownStairsTTCMutSetCreate() {
+      return EffectDownStairsTTCMutSetCreateWithId(NewId());
+    }
+    public DownStairsTTCMutSet EffectDownStairsTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new DownStairsTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateDownStairsTTCMutSet(id, rootIncarnation.version, incarnation);
       return new DownStairsTTCMutSet(this, id);
@@ -30043,8 +30902,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public UpStairsTTCMutSet EffectUpStairsTTCMutSetCreate() {
+      return EffectUpStairsTTCMutSetCreateWithId(NewId());
+    }
+    public UpStairsTTCMutSet EffectUpStairsTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new UpStairsTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateUpStairsTTCMutSet(id, rootIncarnation.version, incarnation);
       return new UpStairsTTCMutSet(this, id);
@@ -30154,8 +31015,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public WallTTCMutSet EffectWallTTCMutSetCreate() {
+      return EffectWallTTCMutSetCreateWithId(NewId());
+    }
+    public WallTTCMutSet EffectWallTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new WallTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateWallTTCMutSet(id, rootIncarnation.version, incarnation);
       return new WallTTCMutSet(this, id);
@@ -30265,8 +31128,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public BloodTTCMutSet EffectBloodTTCMutSetCreate() {
+      return EffectBloodTTCMutSetCreateWithId(NewId());
+    }
+    public BloodTTCMutSet EffectBloodTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new BloodTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateBloodTTCMutSet(id, rootIncarnation.version, incarnation);
       return new BloodTTCMutSet(this, id);
@@ -30376,8 +31241,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public RocksTTCMutSet EffectRocksTTCMutSetCreate() {
+      return EffectRocksTTCMutSetCreateWithId(NewId());
+    }
+    public RocksTTCMutSet EffectRocksTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new RocksTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateRocksTTCMutSet(id, rootIncarnation.version, incarnation);
       return new RocksTTCMutSet(this, id);
@@ -30487,8 +31354,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public TreeTTCMutSet EffectTreeTTCMutSetCreate() {
+      return EffectTreeTTCMutSetCreateWithId(NewId());
+    }
+    public TreeTTCMutSet EffectTreeTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new TreeTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateTreeTTCMutSet(id, rootIncarnation.version, incarnation);
       return new TreeTTCMutSet(this, id);
@@ -30598,8 +31467,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public WaterTTCMutSet EffectWaterTTCMutSetCreate() {
+      return EffectWaterTTCMutSetCreateWithId(NewId());
+    }
+    public WaterTTCMutSet EffectWaterTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new WaterTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateWaterTTCMutSet(id, rootIncarnation.version, incarnation);
       return new WaterTTCMutSet(this, id);
@@ -30709,8 +31580,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public FloorTTCMutSet EffectFloorTTCMutSetCreate() {
+      return EffectFloorTTCMutSetCreateWithId(NewId());
+    }
+    public FloorTTCMutSet EffectFloorTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new FloorTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateFloorTTCMutSet(id, rootIncarnation.version, incarnation);
       return new FloorTTCMutSet(this, id);
@@ -30820,8 +31693,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public CaveWallTTCMutSet EffectCaveWallTTCMutSetCreate() {
+      return EffectCaveWallTTCMutSetCreateWithId(NewId());
+    }
+    public CaveWallTTCMutSet EffectCaveWallTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new CaveWallTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateCaveWallTTCMutSet(id, rootIncarnation.version, incarnation);
       return new CaveWallTTCMutSet(this, id);
@@ -30931,8 +31806,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public CaveTTCMutSet EffectCaveTTCMutSetCreate() {
+      return EffectCaveTTCMutSetCreateWithId(NewId());
+    }
+    public CaveTTCMutSet EffectCaveTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new CaveTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateCaveTTCMutSet(id, rootIncarnation.version, incarnation);
       return new CaveTTCMutSet(this, id);
@@ -31042,8 +31919,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public FallsTTCMutSet EffectFallsTTCMutSetCreate() {
+      return EffectFallsTTCMutSetCreateWithId(NewId());
+    }
+    public FallsTTCMutSet EffectFallsTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new FallsTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateFallsTTCMutSet(id, rootIncarnation.version, incarnation);
       return new FallsTTCMutSet(this, id);
@@ -31153,8 +32032,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public FireTTCMutSet EffectFireTTCMutSetCreate() {
+      return EffectFireTTCMutSetCreateWithId(NewId());
+    }
+    public FireTTCMutSet EffectFireTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new FireTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateFireTTCMutSet(id, rootIncarnation.version, incarnation);
       return new FireTTCMutSet(this, id);
@@ -31264,8 +32145,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public ObsidianFloorTTCMutSet EffectObsidianFloorTTCMutSetCreate() {
+      return EffectObsidianFloorTTCMutSetCreateWithId(NewId());
+    }
+    public ObsidianFloorTTCMutSet EffectObsidianFloorTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new ObsidianFloorTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateObsidianFloorTTCMutSet(id, rootIncarnation.version, incarnation);
       return new ObsidianFloorTTCMutSet(this, id);
@@ -31375,8 +32258,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public MagmaTTCMutSet EffectMagmaTTCMutSetCreate() {
+      return EffectMagmaTTCMutSetCreateWithId(NewId());
+    }
+    public MagmaTTCMutSet EffectMagmaTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new MagmaTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateMagmaTTCMutSet(id, rootIncarnation.version, incarnation);
       return new MagmaTTCMutSet(this, id);
@@ -31486,8 +32371,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public CliffTTCMutSet EffectCliffTTCMutSetCreate() {
+      return EffectCliffTTCMutSetCreateWithId(NewId());
+    }
+    public CliffTTCMutSet EffectCliffTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new CliffTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateCliffTTCMutSet(id, rootIncarnation.version, incarnation);
       return new CliffTTCMutSet(this, id);
@@ -31597,8 +32484,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public RavaNestTTCMutSet EffectRavaNestTTCMutSetCreate() {
+      return EffectRavaNestTTCMutSetCreateWithId(NewId());
+    }
+    public RavaNestTTCMutSet EffectRavaNestTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new RavaNestTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateRavaNestTTCMutSet(id, rootIncarnation.version, incarnation);
       return new RavaNestTTCMutSet(this, id);
@@ -31708,8 +32597,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public CliffLandingTTCMutSet EffectCliffLandingTTCMutSetCreate() {
+      return EffectCliffLandingTTCMutSetCreateWithId(NewId());
+    }
+    public CliffLandingTTCMutSet EffectCliffLandingTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new CliffLandingTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateCliffLandingTTCMutSet(id, rootIncarnation.version, incarnation);
       return new CliffLandingTTCMutSet(this, id);
@@ -31819,8 +32710,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public StoneTTCMutSet EffectStoneTTCMutSetCreate() {
+      return EffectStoneTTCMutSetCreateWithId(NewId());
+    }
+    public StoneTTCMutSet EffectStoneTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new StoneTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateStoneTTCMutSet(id, rootIncarnation.version, incarnation);
       return new StoneTTCMutSet(this, id);
@@ -31930,8 +32823,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public GrassTTCMutSet EffectGrassTTCMutSetCreate() {
+      return EffectGrassTTCMutSetCreateWithId(NewId());
+    }
+    public GrassTTCMutSet EffectGrassTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new GrassTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateGrassTTCMutSet(id, rootIncarnation.version, incarnation);
       return new GrassTTCMutSet(this, id);
@@ -32041,8 +32936,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public IncendianFallsLevelLinkerTTCMutSet EffectIncendianFallsLevelLinkerTTCMutSetCreate() {
+      return EffectIncendianFallsLevelLinkerTTCMutSetCreateWithId(NewId());
+    }
+    public IncendianFallsLevelLinkerTTCMutSet EffectIncendianFallsLevelLinkerTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new IncendianFallsLevelLinkerTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateIncendianFallsLevelLinkerTTCMutSet(id, rootIncarnation.version, incarnation);
       return new IncendianFallsLevelLinkerTTCMutSet(this, id);
@@ -32152,8 +33049,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public EmberDeepLevelLinkerTTCMutSet EffectEmberDeepLevelLinkerTTCMutSetCreate() {
+      return EffectEmberDeepLevelLinkerTTCMutSetCreateWithId(NewId());
+    }
+    public EmberDeepLevelLinkerTTCMutSet EffectEmberDeepLevelLinkerTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new EmberDeepLevelLinkerTTCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateEmberDeepLevelLinkerTTCMutSet(id, rootIncarnation.version, incarnation);
       return new EmberDeepLevelLinkerTTCMutSet(this, id);
@@ -32263,8 +33162,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public TutorialDefyCounterUCMutSet EffectTutorialDefyCounterUCMutSetCreate() {
+      return EffectTutorialDefyCounterUCMutSetCreateWithId(NewId());
+    }
+    public TutorialDefyCounterUCMutSet EffectTutorialDefyCounterUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new TutorialDefyCounterUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateTutorialDefyCounterUCMutSet(id, rootIncarnation.version, incarnation);
       return new TutorialDefyCounterUCMutSet(this, id);
@@ -32374,8 +33275,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public LightningChargingUCMutSet EffectLightningChargingUCMutSetCreate() {
+      return EffectLightningChargingUCMutSetCreateWithId(NewId());
+    }
+    public LightningChargingUCMutSet EffectLightningChargingUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new LightningChargingUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateLightningChargingUCMutSet(id, rootIncarnation.version, incarnation);
       return new LightningChargingUCMutSet(this, id);
@@ -32485,8 +33388,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public WanderAICapabilityUCMutSet EffectWanderAICapabilityUCMutSetCreate() {
+      return EffectWanderAICapabilityUCMutSetCreateWithId(NewId());
+    }
+    public WanderAICapabilityUCMutSet EffectWanderAICapabilityUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new WanderAICapabilityUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateWanderAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new WanderAICapabilityUCMutSet(this, id);
@@ -32596,8 +33501,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public TemporaryCloneAICapabilityUCMutSet EffectTemporaryCloneAICapabilityUCMutSetCreate() {
+      return EffectTemporaryCloneAICapabilityUCMutSetCreateWithId(NewId());
+    }
+    public TemporaryCloneAICapabilityUCMutSet EffectTemporaryCloneAICapabilityUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new TemporaryCloneAICapabilityUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateTemporaryCloneAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new TemporaryCloneAICapabilityUCMutSet(this, id);
@@ -32707,8 +33614,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public SummonAICapabilityUCMutSet EffectSummonAICapabilityUCMutSetCreate() {
+      return EffectSummonAICapabilityUCMutSetCreateWithId(NewId());
+    }
+    public SummonAICapabilityUCMutSet EffectSummonAICapabilityUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new SummonAICapabilityUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateSummonAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new SummonAICapabilityUCMutSet(this, id);
@@ -32818,8 +33727,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public KamikazeAICapabilityUCMutSet EffectKamikazeAICapabilityUCMutSetCreate() {
+      return EffectKamikazeAICapabilityUCMutSetCreateWithId(NewId());
+    }
+    public KamikazeAICapabilityUCMutSet EffectKamikazeAICapabilityUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new KamikazeAICapabilityUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateKamikazeAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new KamikazeAICapabilityUCMutSet(this, id);
@@ -32929,8 +33840,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public GuardAICapabilityUCMutSet EffectGuardAICapabilityUCMutSetCreate() {
+      return EffectGuardAICapabilityUCMutSetCreateWithId(NewId());
+    }
+    public GuardAICapabilityUCMutSet EffectGuardAICapabilityUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new GuardAICapabilityUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateGuardAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new GuardAICapabilityUCMutSet(this, id);
@@ -33040,8 +33953,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public TimeCloneAICapabilityUCMutSet EffectTimeCloneAICapabilityUCMutSetCreate() {
+      return EffectTimeCloneAICapabilityUCMutSetCreateWithId(NewId());
+    }
+    public TimeCloneAICapabilityUCMutSet EffectTimeCloneAICapabilityUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new TimeCloneAICapabilityUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateTimeCloneAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new TimeCloneAICapabilityUCMutSet(this, id);
@@ -33151,8 +34066,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public DoomedUCMutSet EffectDoomedUCMutSetCreate() {
+      return EffectDoomedUCMutSetCreateWithId(NewId());
+    }
+    public DoomedUCMutSet EffectDoomedUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new DoomedUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateDoomedUCMutSet(id, rootIncarnation.version, incarnation);
       return new DoomedUCMutSet(this, id);
@@ -33262,8 +34179,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public MiredUCMutSet EffectMiredUCMutSetCreate() {
+      return EffectMiredUCMutSetCreateWithId(NewId());
+    }
+    public MiredUCMutSet EffectMiredUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new MiredUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateMiredUCMutSet(id, rootIncarnation.version, incarnation);
       return new MiredUCMutSet(this, id);
@@ -33373,8 +34292,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public AttackAICapabilityUCMutSet EffectAttackAICapabilityUCMutSetCreate() {
+      return EffectAttackAICapabilityUCMutSetCreateWithId(NewId());
+    }
+    public AttackAICapabilityUCMutSet EffectAttackAICapabilityUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new AttackAICapabilityUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateAttackAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new AttackAICapabilityUCMutSet(this, id);
@@ -33484,8 +34405,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public CounteringUCMutSet EffectCounteringUCMutSetCreate() {
+      return EffectCounteringUCMutSetCreateWithId(NewId());
+    }
+    public CounteringUCMutSet EffectCounteringUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new CounteringUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateCounteringUCMutSet(id, rootIncarnation.version, incarnation);
       return new CounteringUCMutSet(this, id);
@@ -33595,8 +34518,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public LightningChargedUCMutSet EffectLightningChargedUCMutSetCreate() {
+      return EffectLightningChargedUCMutSetCreateWithId(NewId());
+    }
+    public LightningChargedUCMutSet EffectLightningChargedUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new LightningChargedUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateLightningChargedUCMutSet(id, rootIncarnation.version, incarnation);
       return new LightningChargedUCMutSet(this, id);
@@ -33706,8 +34631,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public InvincibilityUCMutSet EffectInvincibilityUCMutSetCreate() {
+      return EffectInvincibilityUCMutSetCreateWithId(NewId());
+    }
+    public InvincibilityUCMutSet EffectInvincibilityUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new InvincibilityUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateInvincibilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new InvincibilityUCMutSet(this, id);
@@ -33817,8 +34744,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public DefyingUCMutSet EffectDefyingUCMutSetCreate() {
+      return EffectDefyingUCMutSetCreateWithId(NewId());
+    }
+    public DefyingUCMutSet EffectDefyingUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new DefyingUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateDefyingUCMutSet(id, rootIncarnation.version, incarnation);
       return new DefyingUCMutSet(this, id);
@@ -33928,8 +34857,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public BideAICapabilityUCMutSet EffectBideAICapabilityUCMutSetCreate() {
+      return EffectBideAICapabilityUCMutSetCreateWithId(NewId());
+    }
+    public BideAICapabilityUCMutSet EffectBideAICapabilityUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new BideAICapabilityUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateBideAICapabilityUCMutSet(id, rootIncarnation.version, incarnation);
       return new BideAICapabilityUCMutSet(this, id);
@@ -34039,8 +34970,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public BaseSightRangeUCMutSet EffectBaseSightRangeUCMutSetCreate() {
+      return EffectBaseSightRangeUCMutSetCreateWithId(NewId());
+    }
+    public BaseSightRangeUCMutSet EffectBaseSightRangeUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new BaseSightRangeUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateBaseSightRangeUCMutSet(id, rootIncarnation.version, incarnation);
       return new BaseSightRangeUCMutSet(this, id);
@@ -34150,8 +35083,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public BaseMovementTimeUCMutSet EffectBaseMovementTimeUCMutSetCreate() {
+      return EffectBaseMovementTimeUCMutSetCreateWithId(NewId());
+    }
+    public BaseMovementTimeUCMutSet EffectBaseMovementTimeUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new BaseMovementTimeUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateBaseMovementTimeUCMutSet(id, rootIncarnation.version, incarnation);
       return new BaseMovementTimeUCMutSet(this, id);
@@ -34261,8 +35196,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public BaseCombatTimeUCMutSet EffectBaseCombatTimeUCMutSetCreate() {
+      return EffectBaseCombatTimeUCMutSetCreateWithId(NewId());
+    }
+    public BaseCombatTimeUCMutSet EffectBaseCombatTimeUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new BaseCombatTimeUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateBaseCombatTimeUCMutSet(id, rootIncarnation.version, incarnation);
       return new BaseCombatTimeUCMutSet(this, id);
@@ -34372,8 +35309,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public ManaPotionMutSet EffectManaPotionMutSetCreate() {
+      return EffectManaPotionMutSetCreateWithId(NewId());
+    }
+    public ManaPotionMutSet EffectManaPotionMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new ManaPotionMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateManaPotionMutSet(id, rootIncarnation.version, incarnation);
       return new ManaPotionMutSet(this, id);
@@ -34483,8 +35422,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public HealthPotionMutSet EffectHealthPotionMutSetCreate() {
+      return EffectHealthPotionMutSetCreateWithId(NewId());
+    }
+    public HealthPotionMutSet EffectHealthPotionMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new HealthPotionMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateHealthPotionMutSet(id, rootIncarnation.version, incarnation);
       return new HealthPotionMutSet(this, id);
@@ -34594,8 +35535,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public SpeedRingMutSet EffectSpeedRingMutSetCreate() {
+      return EffectSpeedRingMutSetCreateWithId(NewId());
+    }
+    public SpeedRingMutSet EffectSpeedRingMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new SpeedRingMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateSpeedRingMutSet(id, rootIncarnation.version, incarnation);
       return new SpeedRingMutSet(this, id);
@@ -34705,8 +35648,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public GlaiveMutSet EffectGlaiveMutSetCreate() {
+      return EffectGlaiveMutSetCreateWithId(NewId());
+    }
+    public GlaiveMutSet EffectGlaiveMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new GlaiveMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateGlaiveMutSet(id, rootIncarnation.version, incarnation);
       return new GlaiveMutSet(this, id);
@@ -34816,8 +35761,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public SlowRodMutSet EffectSlowRodMutSetCreate() {
+      return EffectSlowRodMutSetCreateWithId(NewId());
+    }
+    public SlowRodMutSet EffectSlowRodMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new SlowRodMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateSlowRodMutSet(id, rootIncarnation.version, incarnation);
       return new SlowRodMutSet(this, id);
@@ -34927,8 +35874,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public BlastRodMutSet EffectBlastRodMutSetCreate() {
+      return EffectBlastRodMutSetCreateWithId(NewId());
+    }
+    public BlastRodMutSet EffectBlastRodMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new BlastRodMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateBlastRodMutSet(id, rootIncarnation.version, incarnation);
       return new BlastRodMutSet(this, id);
@@ -35038,8 +35987,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public ArmorMutSet EffectArmorMutSetCreate() {
+      return EffectArmorMutSetCreateWithId(NewId());
+    }
+    public ArmorMutSet EffectArmorMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new ArmorMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateArmorMutSet(id, rootIncarnation.version, incarnation);
       return new ArmorMutSet(this, id);
@@ -35149,8 +36100,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public SorcerousUCMutSet EffectSorcerousUCMutSetCreate() {
+      return EffectSorcerousUCMutSetCreateWithId(NewId());
+    }
+    public SorcerousUCMutSet EffectSorcerousUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new SorcerousUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateSorcerousUCMutSet(id, rootIncarnation.version, incarnation);
       return new SorcerousUCMutSet(this, id);
@@ -35260,8 +36213,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public BaseOffenseUCMutSet EffectBaseOffenseUCMutSetCreate() {
+      return EffectBaseOffenseUCMutSetCreateWithId(NewId());
+    }
+    public BaseOffenseUCMutSet EffectBaseOffenseUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new BaseOffenseUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateBaseOffenseUCMutSet(id, rootIncarnation.version, incarnation);
       return new BaseOffenseUCMutSet(this, id);
@@ -35371,8 +36326,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public BaseDefenseUCMutSet EffectBaseDefenseUCMutSetCreate() {
+      return EffectBaseDefenseUCMutSetCreateWithId(NewId());
+    }
+    public BaseDefenseUCMutSet EffectBaseDefenseUCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       var incarnation = new BaseDefenseUCMutSetIncarnation(new SortedSet<int>());
       EffectInternalCreateBaseDefenseUCMutSet(id, rootIncarnation.version, incarnation);
       return new BaseDefenseUCMutSet(this, id);
@@ -35482,8 +36439,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public TerrainTileByLocationMutMap EffectTerrainTileByLocationMutMapCreate() {
+      return EffectTerrainTileByLocationMutMapCreateWithId(NewId());
+    }
+    public TerrainTileByLocationMutMap EffectTerrainTileByLocationMutMapCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       Asserts.Assert(!rootIncarnation.incarnationsTerrainTileByLocationMutMap.ContainsKey(id));
       EffectInternalCreateTerrainTileByLocationMutMap(
           id,
@@ -35594,8 +36553,10 @@ var effect = new GameSetEvventEffect(id, newValue);
       }
     }
     public KamikazeTargetTTCStrongByLocationMutMap EffectKamikazeTargetTTCStrongByLocationMutMapCreate() {
+      return EffectKamikazeTargetTTCStrongByLocationMutMapCreateWithId(NewId());
+    }
+    public KamikazeTargetTTCStrongByLocationMutMap EffectKamikazeTargetTTCStrongByLocationMutMapCreateWithId(int id) {
       CheckUnlocked();
-      var id = NewId();
       Asserts.Assert(!rootIncarnation.incarnationsKamikazeTargetTTCStrongByLocationMutMap.ContainsKey(id));
       EffectInternalCreateKamikazeTargetTTCStrongByLocationMutMap(
           id,

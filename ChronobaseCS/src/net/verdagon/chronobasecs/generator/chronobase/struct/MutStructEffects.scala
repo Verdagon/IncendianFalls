@@ -228,25 +228,23 @@ object MutStructEffects {
     val StructS(structName, _, MutableS, members, _, _, _) = struct
     val createEffect = s"${structName}CreateEffect"
     s"  public void visit${createEffect}(${createEffect} effect) {\n" +
-      s"    var instance = root.Effect${structName}Create(\n" +
+      s"    // For now we're just feeding the remote ID in. Someday we might want to have a map\n" +
+        s"    // in the applier instead.\n" +
+      s"    root.Effect${structName}CreateWithId(effect.id\n" +
       members.map({ case StructMemberS(memberName, variability, memberType) =>
         (memberType.kind.mutability match {
           case MutableS => {
             if (memberType.ownership == WeakS || memberType.nullable) {
-              s"  root.Get${memberType.name}OrNull(effect.incarnation.${memberName})"
+              s",  root.Get${memberType.name}OrNull(effect.incarnation.${memberName})"
             } else {
-              s"  root.Get${memberType.name}(effect.incarnation.${memberName})"
+              s",  root.Get${memberType.name}(effect.incarnation.${memberName})"
             }
           }
-          case ImmutableS => s"  effect.incarnation.${memberName}"
+          case ImmutableS => s",  effect.incarnation.${memberName}"
         })
-      }).mkString(",\n") +
+      }).mkString("\n") +
       s"    );\n" +
       s"""
-        |  // If this fails, then we have to add a translation layer.
-        |  // We shouldn't allow the user to specify the internal ID, because that's
-        |  // core to a bunch of optimizations (such as how it's a generational index).
-        |  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
         |}
         |""".stripMargin
   }

@@ -49,8 +49,10 @@ object MutSetRootMethods {
        |      }
        |    }
        |    public ${setName} Effect${setName}Create() {
+       |      return Effect${setName}CreateWithId(NewId());
+       |    }
+       |    public ${setName} Effect${setName}CreateWithId(int id) {
        |      CheckUnlocked();
-       |      var id = NewId();
        |      var incarnation = new ${setName}Incarnation(new SortedSet<int>());
        |      EffectInternalCreate${setName}(id, rootIncarnation.version, incarnation);
        |      return new ${setName}(this, id);

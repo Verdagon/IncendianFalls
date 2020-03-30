@@ -17,6 +17,15 @@ object MutStructRootMethods {
         "      " + toCS(memberType) + " " + memberName
       }).mkString(",\n") +
       ") {\n" +
+    s"    return Effect${structName}CreateWithId(NewId()\n" +
+      members.map(_.name).map("," + _).mkString("\n") +
+      "    );\n" +
+      "  }\n" +
+    s"  public ${structName} Effect${structName}CreateWithId(int id\n" +
+      members.map({ case StructMemberS(memberName, variability, memberType) =>
+        ",      " + toCS(memberType) + " " + memberName
+      }).mkString("\n") +
+      ") {\n" +
       "    CheckUnlocked();\n" +
       members
         .flatMap({ case StructMemberS(memberName, variability, memberType) =>
@@ -29,7 +38,6 @@ object MutStructRootMethods {
         })
         .mkString("") +
     s"""
-       |    var id = NewId();
        |    var incarnation =
        |        new ${structName}Incarnation(
        |""".stripMargin +

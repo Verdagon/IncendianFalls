@@ -226,13 +226,11 @@ IKamikazeTargetTTCStrongByLocationMutMapEffectVisitor {
 
 public void visitRandEffect(IRandEffect effect) { effect.visitIRandEffect(this); }
   public void visitRandCreateEffect(RandCreateEffect effect) {
-    var instance = root.EffectRandCreate(
-  effect.incarnation.rand    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectRandCreateWithId(effect.id
+,  effect.incarnation.rand    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitRandDeleteEffect(RandDeleteEffect effect) {
@@ -249,14 +247,12 @@ public void visitRandEffect(IRandEffect effect) { effect.visitIRandEffect(this);
 
 public void visitHoldPositionImpulseEffect(IHoldPositionImpulseEffect effect) { effect.visitIHoldPositionImpulseEffect(this); }
   public void visitHoldPositionImpulseCreateEffect(HoldPositionImpulseCreateEffect effect) {
-    var instance = root.EffectHoldPositionImpulseCreate(
-  effect.incarnation.weight,
-  effect.incarnation.duration    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectHoldPositionImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  effect.incarnation.duration    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitHoldPositionImpulseDeleteEffect(HoldPositionImpulseDeleteEffect effect) {
@@ -266,13 +262,11 @@ public void visitHoldPositionImpulseEffect(IHoldPositionImpulseEffect effect) { 
      
 public void visitWanderAICapabilityUCEffect(IWanderAICapabilityUCEffect effect) { effect.visitIWanderAICapabilityUCEffect(this); }
   public void visitWanderAICapabilityUCCreateEffect(WanderAICapabilityUCCreateEffect effect) {
-    var instance = root.EffectWanderAICapabilityUCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectWanderAICapabilityUCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitWanderAICapabilityUCDeleteEffect(WanderAICapabilityUCDeleteEffect effect) {
@@ -282,14 +276,12 @@ public void visitWanderAICapabilityUCEffect(IWanderAICapabilityUCEffect effect) 
      
 public void visitTutorialDefyCounterUCEffect(ITutorialDefyCounterUCEffect effect) { effect.visitITutorialDefyCounterUCEffect(this); }
   public void visitTutorialDefyCounterUCCreateEffect(TutorialDefyCounterUCCreateEffect effect) {
-    var instance = root.EffectTutorialDefyCounterUCCreate(
-  effect.incarnation.numDefiesRemaining,
-  effect.incarnation.onChangeTriggerName    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectTutorialDefyCounterUCCreateWithId(effect.id
+,  effect.incarnation.numDefiesRemaining
+,  effect.incarnation.onChangeTriggerName    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitTutorialDefyCounterUCDeleteEffect(TutorialDefyCounterUCDeleteEffect effect) {
@@ -306,21 +298,19 @@ public void visitTutorialDefyCounterUCEffect(ITutorialDefyCounterUCEffect effect
 
 public void visitUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this); }
   public void visitUnitCreateEffect(UnitCreateEffect effect) {
-    var instance = root.EffectUnitCreate(
-  effect.incarnation.evvent,
-  effect.incarnation.lifeEndTime,
-  effect.incarnation.location,
-  effect.incarnation.classId,
-  effect.incarnation.nextActionTime,
-  effect.incarnation.hp,
-  effect.incarnation.maxHp,
-  root.GetIUnitComponentMutBunch(effect.incarnation.components),
-  effect.incarnation.good    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectUnitCreateWithId(effect.id
+,  effect.incarnation.evvent
+,  effect.incarnation.lifeEndTime
+,  effect.incarnation.location
+,  effect.incarnation.classId
+,  effect.incarnation.nextActionTime
+,  effect.incarnation.hp
+,  effect.incarnation.maxHp
+,  root.GetIUnitComponentMutBunch(effect.incarnation.components)
+,  effect.incarnation.good    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
@@ -372,41 +362,39 @@ public void visitUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this);
 
 public void visitIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffect effect) { effect.visitIIUnitComponentMutBunchEffect(this); }
   public void visitIUnitComponentMutBunchCreateEffect(IUnitComponentMutBunchCreateEffect effect) {
-    var instance = root.EffectIUnitComponentMutBunchCreate(
-  root.GetTutorialDefyCounterUCMutSet(effect.incarnation.membersTutorialDefyCounterUCMutSet),
-  root.GetLightningChargingUCMutSet(effect.incarnation.membersLightningChargingUCMutSet),
-  root.GetWanderAICapabilityUCMutSet(effect.incarnation.membersWanderAICapabilityUCMutSet),
-  root.GetTemporaryCloneAICapabilityUCMutSet(effect.incarnation.membersTemporaryCloneAICapabilityUCMutSet),
-  root.GetSummonAICapabilityUCMutSet(effect.incarnation.membersSummonAICapabilityUCMutSet),
-  root.GetKamikazeAICapabilityUCMutSet(effect.incarnation.membersKamikazeAICapabilityUCMutSet),
-  root.GetGuardAICapabilityUCMutSet(effect.incarnation.membersGuardAICapabilityUCMutSet),
-  root.GetTimeCloneAICapabilityUCMutSet(effect.incarnation.membersTimeCloneAICapabilityUCMutSet),
-  root.GetDoomedUCMutSet(effect.incarnation.membersDoomedUCMutSet),
-  root.GetMiredUCMutSet(effect.incarnation.membersMiredUCMutSet),
-  root.GetAttackAICapabilityUCMutSet(effect.incarnation.membersAttackAICapabilityUCMutSet),
-  root.GetCounteringUCMutSet(effect.incarnation.membersCounteringUCMutSet),
-  root.GetLightningChargedUCMutSet(effect.incarnation.membersLightningChargedUCMutSet),
-  root.GetInvincibilityUCMutSet(effect.incarnation.membersInvincibilityUCMutSet),
-  root.GetDefyingUCMutSet(effect.incarnation.membersDefyingUCMutSet),
-  root.GetBideAICapabilityUCMutSet(effect.incarnation.membersBideAICapabilityUCMutSet),
-  root.GetBaseSightRangeUCMutSet(effect.incarnation.membersBaseSightRangeUCMutSet),
-  root.GetBaseMovementTimeUCMutSet(effect.incarnation.membersBaseMovementTimeUCMutSet),
-  root.GetBaseCombatTimeUCMutSet(effect.incarnation.membersBaseCombatTimeUCMutSet),
-  root.GetManaPotionMutSet(effect.incarnation.membersManaPotionMutSet),
-  root.GetHealthPotionMutSet(effect.incarnation.membersHealthPotionMutSet),
-  root.GetSpeedRingMutSet(effect.incarnation.membersSpeedRingMutSet),
-  root.GetGlaiveMutSet(effect.incarnation.membersGlaiveMutSet),
-  root.GetSlowRodMutSet(effect.incarnation.membersSlowRodMutSet),
-  root.GetBlastRodMutSet(effect.incarnation.membersBlastRodMutSet),
-  root.GetArmorMutSet(effect.incarnation.membersArmorMutSet),
-  root.GetSorcerousUCMutSet(effect.incarnation.membersSorcerousUCMutSet),
-  root.GetBaseOffenseUCMutSet(effect.incarnation.membersBaseOffenseUCMutSet),
-  root.GetBaseDefenseUCMutSet(effect.incarnation.membersBaseDefenseUCMutSet)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectIUnitComponentMutBunchCreateWithId(effect.id
+,  root.GetTutorialDefyCounterUCMutSet(effect.incarnation.membersTutorialDefyCounterUCMutSet)
+,  root.GetLightningChargingUCMutSet(effect.incarnation.membersLightningChargingUCMutSet)
+,  root.GetWanderAICapabilityUCMutSet(effect.incarnation.membersWanderAICapabilityUCMutSet)
+,  root.GetTemporaryCloneAICapabilityUCMutSet(effect.incarnation.membersTemporaryCloneAICapabilityUCMutSet)
+,  root.GetSummonAICapabilityUCMutSet(effect.incarnation.membersSummonAICapabilityUCMutSet)
+,  root.GetKamikazeAICapabilityUCMutSet(effect.incarnation.membersKamikazeAICapabilityUCMutSet)
+,  root.GetGuardAICapabilityUCMutSet(effect.incarnation.membersGuardAICapabilityUCMutSet)
+,  root.GetTimeCloneAICapabilityUCMutSet(effect.incarnation.membersTimeCloneAICapabilityUCMutSet)
+,  root.GetDoomedUCMutSet(effect.incarnation.membersDoomedUCMutSet)
+,  root.GetMiredUCMutSet(effect.incarnation.membersMiredUCMutSet)
+,  root.GetAttackAICapabilityUCMutSet(effect.incarnation.membersAttackAICapabilityUCMutSet)
+,  root.GetCounteringUCMutSet(effect.incarnation.membersCounteringUCMutSet)
+,  root.GetLightningChargedUCMutSet(effect.incarnation.membersLightningChargedUCMutSet)
+,  root.GetInvincibilityUCMutSet(effect.incarnation.membersInvincibilityUCMutSet)
+,  root.GetDefyingUCMutSet(effect.incarnation.membersDefyingUCMutSet)
+,  root.GetBideAICapabilityUCMutSet(effect.incarnation.membersBideAICapabilityUCMutSet)
+,  root.GetBaseSightRangeUCMutSet(effect.incarnation.membersBaseSightRangeUCMutSet)
+,  root.GetBaseMovementTimeUCMutSet(effect.incarnation.membersBaseMovementTimeUCMutSet)
+,  root.GetBaseCombatTimeUCMutSet(effect.incarnation.membersBaseCombatTimeUCMutSet)
+,  root.GetManaPotionMutSet(effect.incarnation.membersManaPotionMutSet)
+,  root.GetHealthPotionMutSet(effect.incarnation.membersHealthPotionMutSet)
+,  root.GetSpeedRingMutSet(effect.incarnation.membersSpeedRingMutSet)
+,  root.GetGlaiveMutSet(effect.incarnation.membersGlaiveMutSet)
+,  root.GetSlowRodMutSet(effect.incarnation.membersSlowRodMutSet)
+,  root.GetBlastRodMutSet(effect.incarnation.membersBlastRodMutSet)
+,  root.GetArmorMutSet(effect.incarnation.membersArmorMutSet)
+,  root.GetSorcerousUCMutSet(effect.incarnation.membersSorcerousUCMutSet)
+,  root.GetBaseOffenseUCMutSet(effect.incarnation.membersBaseOffenseUCMutSet)
+,  root.GetBaseDefenseUCMutSet(effect.incarnation.membersBaseDefenseUCMutSet)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitIUnitComponentMutBunchDeleteEffect(IUnitComponentMutBunchDeleteEffect effect) {
@@ -416,13 +404,11 @@ public void visitIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffect effe
      
 public void visitLightningChargedUCEffect(ILightningChargedUCEffect effect) { effect.visitILightningChargedUCEffect(this); }
   public void visitLightningChargedUCCreateEffect(LightningChargedUCCreateEffect effect) {
-    var instance = root.EffectLightningChargedUCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectLightningChargedUCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitLightningChargedUCDeleteEffect(LightningChargedUCDeleteEffect effect) {
@@ -432,13 +418,11 @@ public void visitLightningChargedUCEffect(ILightningChargedUCEffect effect) { ef
      
 public void visitLightningChargingUCEffect(ILightningChargingUCEffect effect) { effect.visitILightningChargingUCEffect(this); }
   public void visitLightningChargingUCCreateEffect(LightningChargingUCCreateEffect effect) {
-    var instance = root.EffectLightningChargingUCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectLightningChargingUCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitLightningChargingUCDeleteEffect(LightningChargingUCDeleteEffect effect) {
@@ -448,13 +432,11 @@ public void visitLightningChargingUCEffect(ILightningChargingUCEffect effect) { 
      
 public void visitDoomedUCEffect(IDoomedUCEffect effect) { effect.visitIDoomedUCEffect(this); }
   public void visitDoomedUCCreateEffect(DoomedUCCreateEffect effect) {
-    var instance = root.EffectDoomedUCCreate(
-  effect.incarnation.deathTime    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectDoomedUCCreateWithId(effect.id
+,  effect.incarnation.deathTime    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitDoomedUCDeleteEffect(DoomedUCDeleteEffect effect) {
@@ -464,16 +446,14 @@ public void visitDoomedUCEffect(IDoomedUCEffect effect) { effect.visitIDoomedUCE
      
 public void visitTemporaryCloneImpulseEffect(ITemporaryCloneImpulseEffect effect) { effect.visitITemporaryCloneImpulseEffect(this); }
   public void visitTemporaryCloneImpulseCreateEffect(TemporaryCloneImpulseCreateEffect effect) {
-    var instance = root.EffectTemporaryCloneImpulseCreate(
-  effect.incarnation.weight,
-  effect.incarnation.blueprintName,
-  effect.incarnation.location,
-  effect.incarnation.hp    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectTemporaryCloneImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  effect.incarnation.blueprintName
+,  effect.incarnation.location
+,  effect.incarnation.hp    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitTemporaryCloneImpulseDeleteEffect(TemporaryCloneImpulseDeleteEffect effect) {
@@ -483,14 +463,12 @@ public void visitTemporaryCloneImpulseEffect(ITemporaryCloneImpulseEffect effect
      
 public void visitTemporaryCloneAICapabilityUCEffect(ITemporaryCloneAICapabilityUCEffect effect) { effect.visitITemporaryCloneAICapabilityUCEffect(this); }
   public void visitTemporaryCloneAICapabilityUCCreateEffect(TemporaryCloneAICapabilityUCCreateEffect effect) {
-    var instance = root.EffectTemporaryCloneAICapabilityUCCreate(
-  effect.incarnation.blueprintName,
-  effect.incarnation.charges    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectTemporaryCloneAICapabilityUCCreateWithId(effect.id
+,  effect.incarnation.blueprintName
+,  effect.incarnation.charges    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitTemporaryCloneAICapabilityUCDeleteEffect(TemporaryCloneAICapabilityUCDeleteEffect effect) {
@@ -507,15 +485,13 @@ public void visitTemporaryCloneAICapabilityUCEffect(ITemporaryCloneAICapabilityU
 
 public void visitSummonImpulseEffect(ISummonImpulseEffect effect) { effect.visitISummonImpulseEffect(this); }
   public void visitSummonImpulseCreateEffect(SummonImpulseCreateEffect effect) {
-    var instance = root.EffectSummonImpulseCreate(
-  effect.incarnation.weight,
-  effect.incarnation.blueprintName,
-  effect.incarnation.location    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectSummonImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  effect.incarnation.blueprintName
+,  effect.incarnation.location    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitSummonImpulseDeleteEffect(SummonImpulseDeleteEffect effect) {
@@ -525,14 +501,12 @@ public void visitSummonImpulseEffect(ISummonImpulseEffect effect) { effect.visit
      
 public void visitSummonAICapabilityUCEffect(ISummonAICapabilityUCEffect effect) { effect.visitISummonAICapabilityUCEffect(this); }
   public void visitSummonAICapabilityUCCreateEffect(SummonAICapabilityUCCreateEffect effect) {
-    var instance = root.EffectSummonAICapabilityUCCreate(
-  effect.incarnation.blueprintName,
-  effect.incarnation.charges    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectSummonAICapabilityUCCreateWithId(effect.id
+,  effect.incarnation.blueprintName
+,  effect.incarnation.charges    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitSummonAICapabilityUCDeleteEffect(SummonAICapabilityUCDeleteEffect effect) {
@@ -549,14 +523,12 @@ public void visitSummonAICapabilityUCEffect(ISummonAICapabilityUCEffect effect) 
 
 public void visitSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visitISorcerousUCEffect(this); }
   public void visitSorcerousUCCreateEffect(SorcerousUCCreateEffect effect) {
-    var instance = root.EffectSorcerousUCCreate(
-  effect.incarnation.mp,
-  effect.incarnation.maxMp    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectSorcerousUCCreateWithId(effect.id
+,  effect.incarnation.mp
+,  effect.incarnation.maxMp    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitSorcerousUCDeleteEffect(SorcerousUCDeleteEffect effect) {
@@ -580,14 +552,12 @@ public void visitSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visitISor
 
 public void visitBaseOffenseUCEffect(IBaseOffenseUCEffect effect) { effect.visitIBaseOffenseUCEffect(this); }
   public void visitBaseOffenseUCCreateEffect(BaseOffenseUCCreateEffect effect) {
-    var instance = root.EffectBaseOffenseUCCreate(
-  effect.incarnation.outgoingDamageAddConstant,
-  effect.incarnation.outgoingDamageMultiplierPercent    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectBaseOffenseUCCreateWithId(effect.id
+,  effect.incarnation.outgoingDamageAddConstant
+,  effect.incarnation.outgoingDamageMultiplierPercent    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitBaseOffenseUCDeleteEffect(BaseOffenseUCDeleteEffect effect) {
@@ -597,14 +567,12 @@ public void visitBaseOffenseUCEffect(IBaseOffenseUCEffect effect) { effect.visit
      
 public void visitBaseSightRangeUCEffect(IBaseSightRangeUCEffect effect) { effect.visitIBaseSightRangeUCEffect(this); }
   public void visitBaseSightRangeUCCreateEffect(BaseSightRangeUCCreateEffect effect) {
-    var instance = root.EffectBaseSightRangeUCCreate(
-  effect.incarnation.sightRangeAddConstant,
-  effect.incarnation.sightRangeMultiplierPercent    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectBaseSightRangeUCCreateWithId(effect.id
+,  effect.incarnation.sightRangeAddConstant
+,  effect.incarnation.sightRangeMultiplierPercent    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitBaseSightRangeUCDeleteEffect(BaseSightRangeUCDeleteEffect effect) {
@@ -614,14 +582,12 @@ public void visitBaseSightRangeUCEffect(IBaseSightRangeUCEffect effect) { effect
      
 public void visitBaseMovementTimeUCEffect(IBaseMovementTimeUCEffect effect) { effect.visitIBaseMovementTimeUCEffect(this); }
   public void visitBaseMovementTimeUCCreateEffect(BaseMovementTimeUCCreateEffect effect) {
-    var instance = root.EffectBaseMovementTimeUCCreate(
-  effect.incarnation.movementTimeAddConstant,
-  effect.incarnation.movementTimeMultiplierPercent    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectBaseMovementTimeUCCreateWithId(effect.id
+,  effect.incarnation.movementTimeAddConstant
+,  effect.incarnation.movementTimeMultiplierPercent    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitBaseMovementTimeUCDeleteEffect(BaseMovementTimeUCDeleteEffect effect) {
@@ -631,14 +597,12 @@ public void visitBaseMovementTimeUCEffect(IBaseMovementTimeUCEffect effect) { ef
      
 public void visitBaseDefenseUCEffect(IBaseDefenseUCEffect effect) { effect.visitIBaseDefenseUCEffect(this); }
   public void visitBaseDefenseUCCreateEffect(BaseDefenseUCCreateEffect effect) {
-    var instance = root.EffectBaseDefenseUCCreate(
-  effect.incarnation.incomingDamageAddConstant,
-  effect.incarnation.incomingDamageMultiplierPercent    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectBaseDefenseUCCreateWithId(effect.id
+,  effect.incarnation.incomingDamageAddConstant
+,  effect.incarnation.incomingDamageMultiplierPercent    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitBaseDefenseUCDeleteEffect(BaseDefenseUCDeleteEffect effect) {
@@ -648,14 +612,12 @@ public void visitBaseDefenseUCEffect(IBaseDefenseUCEffect effect) { effect.visit
      
 public void visitBaseCombatTimeUCEffect(IBaseCombatTimeUCEffect effect) { effect.visitIBaseCombatTimeUCEffect(this); }
   public void visitBaseCombatTimeUCCreateEffect(BaseCombatTimeUCCreateEffect effect) {
-    var instance = root.EffectBaseCombatTimeUCCreate(
-  effect.incarnation.combatTimeAddConstant,
-  effect.incarnation.combatTimeMultiplierPercent    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectBaseCombatTimeUCCreateWithId(effect.id
+,  effect.incarnation.combatTimeAddConstant
+,  effect.incarnation.combatTimeMultiplierPercent    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitBaseCombatTimeUCDeleteEffect(BaseCombatTimeUCDeleteEffect effect) {
@@ -665,13 +627,11 @@ public void visitBaseCombatTimeUCEffect(IBaseCombatTimeUCEffect effect) { effect
      
 public void visitMiredUCEffect(IMiredUCEffect effect) { effect.visitIMiredUCEffect(this); }
   public void visitMiredUCCreateEffect(MiredUCCreateEffect effect) {
-    var instance = root.EffectMiredUCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectMiredUCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitMiredUCDeleteEffect(MiredUCDeleteEffect effect) {
@@ -681,14 +641,12 @@ public void visitMiredUCEffect(IMiredUCEffect effect) { effect.visitIMiredUCEffe
      
 public void visitMireImpulseEffect(IMireImpulseEffect effect) { effect.visitIMireImpulseEffect(this); }
   public void visitMireImpulseCreateEffect(MireImpulseCreateEffect effect) {
-    var instance = root.EffectMireImpulseCreate(
-  effect.incarnation.weight,
-  root.GetUnit(effect.incarnation.targetUnit)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectMireImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  root.GetUnit(effect.incarnation.targetUnit)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitMireImpulseDeleteEffect(MireImpulseDeleteEffect effect) {
@@ -698,13 +656,11 @@ public void visitMireImpulseEffect(IMireImpulseEffect effect) { effect.visitIMir
      
 public void visitEvaporateImpulseEffect(IEvaporateImpulseEffect effect) { effect.visitIEvaporateImpulseEffect(this); }
   public void visitEvaporateImpulseCreateEffect(EvaporateImpulseCreateEffect effect) {
-    var instance = root.EffectEvaporateImpulseCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectEvaporateImpulseCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitEvaporateImpulseDeleteEffect(EvaporateImpulseDeleteEffect effect) {
@@ -714,13 +670,11 @@ public void visitEvaporateImpulseEffect(IEvaporateImpulseEffect effect) { effect
      
 public void visitTimeCloneAICapabilityUCEffect(ITimeCloneAICapabilityUCEffect effect) { effect.visitITimeCloneAICapabilityUCEffect(this); }
   public void visitTimeCloneAICapabilityUCCreateEffect(TimeCloneAICapabilityUCCreateEffect effect) {
-    var instance = root.EffectTimeCloneAICapabilityUCCreate(
-  root.GetIRequestMutListOrNull(effect.incarnation.script)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectTimeCloneAICapabilityUCCreateWithId(effect.id
+,  root.GetIRequestMutListOrNull(effect.incarnation.script)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitTimeCloneAICapabilityUCDeleteEffect(TimeCloneAICapabilityUCDeleteEffect effect) {
@@ -730,14 +684,12 @@ public void visitTimeCloneAICapabilityUCEffect(ITimeCloneAICapabilityUCEffect ef
      
 public void visitMoveImpulseEffect(IMoveImpulseEffect effect) { effect.visitIMoveImpulseEffect(this); }
   public void visitMoveImpulseCreateEffect(MoveImpulseCreateEffect effect) {
-    var instance = root.EffectMoveImpulseCreate(
-  effect.incarnation.weight,
-  effect.incarnation.stepLocation    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectMoveImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  effect.incarnation.stepLocation    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitMoveImpulseDeleteEffect(MoveImpulseDeleteEffect effect) {
@@ -747,13 +699,11 @@ public void visitMoveImpulseEffect(IMoveImpulseEffect effect) { effect.visitIMov
      
 public void visitKamikazeTargetTTCEffect(IKamikazeTargetTTCEffect effect) { effect.visitIKamikazeTargetTTCEffect(this); }
   public void visitKamikazeTargetTTCCreateEffect(KamikazeTargetTTCCreateEffect effect) {
-    var instance = root.EffectKamikazeTargetTTCCreate(
-  root.GetKamikazeAICapabilityUC(effect.incarnation.capability)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectKamikazeTargetTTCCreateWithId(effect.id
+,  root.GetKamikazeAICapabilityUC(effect.incarnation.capability)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitKamikazeTargetTTCDeleteEffect(KamikazeTargetTTCDeleteEffect effect) {
@@ -763,15 +713,13 @@ public void visitKamikazeTargetTTCEffect(IKamikazeTargetTTCEffect effect) { effe
      
 public void visitKamikazeJumpImpulseEffect(IKamikazeJumpImpulseEffect effect) { effect.visitIKamikazeJumpImpulseEffect(this); }
   public void visitKamikazeJumpImpulseCreateEffect(KamikazeJumpImpulseCreateEffect effect) {
-    var instance = root.EffectKamikazeJumpImpulseCreate(
-  effect.incarnation.weight,
-  root.GetKamikazeAICapabilityUC(effect.incarnation.capability),
-  effect.incarnation.jumpTarget    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectKamikazeJumpImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  root.GetKamikazeAICapabilityUC(effect.incarnation.capability)
+,  effect.incarnation.jumpTarget    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitKamikazeJumpImpulseDeleteEffect(KamikazeJumpImpulseDeleteEffect effect) {
@@ -781,16 +729,14 @@ public void visitKamikazeJumpImpulseEffect(IKamikazeJumpImpulseEffect effect) { 
      
 public void visitKamikazeTargetImpulseEffect(IKamikazeTargetImpulseEffect effect) { effect.visitIKamikazeTargetImpulseEffect(this); }
   public void visitKamikazeTargetImpulseCreateEffect(KamikazeTargetImpulseCreateEffect effect) {
-    var instance = root.EffectKamikazeTargetImpulseCreate(
-  effect.incarnation.weight,
-  root.GetKamikazeAICapabilityUC(effect.incarnation.capability),
-  effect.incarnation.targetLocationCenter,
-  effect.incarnation.targetLocations    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectKamikazeTargetImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  root.GetKamikazeAICapabilityUC(effect.incarnation.capability)
+,  effect.incarnation.targetLocationCenter
+,  effect.incarnation.targetLocations    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitKamikazeTargetImpulseDeleteEffect(KamikazeTargetImpulseDeleteEffect effect) {
@@ -800,14 +746,12 @@ public void visitKamikazeTargetImpulseEffect(IKamikazeTargetImpulseEffect effect
      
 public void visitKamikazeAICapabilityUCEffect(IKamikazeAICapabilityUCEffect effect) { effect.visitIKamikazeAICapabilityUCEffect(this); }
   public void visitKamikazeAICapabilityUCCreateEffect(KamikazeAICapabilityUCCreateEffect effect) {
-    var instance = root.EffectKamikazeAICapabilityUCCreate(
-  root.GetKamikazeTargetTTCStrongByLocationMutMap(effect.incarnation.targetByLocation),
-  effect.incarnation.targetLocationCenter    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectKamikazeAICapabilityUCCreateWithId(effect.id
+,  root.GetKamikazeTargetTTCStrongByLocationMutMap(effect.incarnation.targetByLocation)
+,  effect.incarnation.targetLocationCenter    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitKamikazeAICapabilityUCDeleteEffect(KamikazeAICapabilityUCDeleteEffect effect) {
@@ -831,13 +775,11 @@ public void visitKamikazeAICapabilityUCEffect(IKamikazeAICapabilityUCEffect effe
 
 public void visitInvincibilityUCEffect(IInvincibilityUCEffect effect) { effect.visitIInvincibilityUCEffect(this); }
   public void visitInvincibilityUCCreateEffect(InvincibilityUCCreateEffect effect) {
-    var instance = root.EffectInvincibilityUCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectInvincibilityUCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitInvincibilityUCDeleteEffect(InvincibilityUCDeleteEffect effect) {
@@ -847,14 +789,12 @@ public void visitInvincibilityUCEffect(IInvincibilityUCEffect effect) { effect.v
      
 public void visitGuardAICapabilityUCEffect(IGuardAICapabilityUCEffect effect) { effect.visitIGuardAICapabilityUCEffect(this); }
   public void visitGuardAICapabilityUCCreateEffect(GuardAICapabilityUCCreateEffect effect) {
-    var instance = root.EffectGuardAICapabilityUCCreate(
-  effect.incarnation.guardCenterLocation,
-  effect.incarnation.guardRadius    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectGuardAICapabilityUCCreateWithId(effect.id
+,  effect.incarnation.guardCenterLocation
+,  effect.incarnation.guardRadius    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitGuardAICapabilityUCDeleteEffect(GuardAICapabilityUCDeleteEffect effect) {
@@ -864,13 +804,11 @@ public void visitGuardAICapabilityUCEffect(IGuardAICapabilityUCEffect effect) { 
      
 public void visitNoImpulseEffect(INoImpulseEffect effect) { effect.visitINoImpulseEffect(this); }
   public void visitNoImpulseCreateEffect(NoImpulseCreateEffect effect) {
-    var instance = root.EffectNoImpulseCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectNoImpulseCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitNoImpulseDeleteEffect(NoImpulseDeleteEffect effect) {
@@ -880,14 +818,12 @@ public void visitNoImpulseEffect(INoImpulseEffect effect) { effect.visitINoImpul
      
 public void visitFireImpulseEffect(IFireImpulseEffect effect) { effect.visitIFireImpulseEffect(this); }
   public void visitFireImpulseCreateEffect(FireImpulseCreateEffect effect) {
-    var instance = root.EffectFireImpulseCreate(
-  effect.incarnation.weight,
-  root.GetUnit(effect.incarnation.targetUnit)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectFireImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  root.GetUnit(effect.incarnation.targetUnit)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitFireImpulseDeleteEffect(FireImpulseDeleteEffect effect) {
@@ -897,13 +833,11 @@ public void visitFireImpulseEffect(IFireImpulseEffect effect) { effect.visitIFir
      
 public void visitDefyingUCEffect(IDefyingUCEffect effect) { effect.visitIDefyingUCEffect(this); }
   public void visitDefyingUCCreateEffect(DefyingUCCreateEffect effect) {
-    var instance = root.EffectDefyingUCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectDefyingUCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitDefyingUCDeleteEffect(DefyingUCDeleteEffect effect) {
@@ -913,13 +847,11 @@ public void visitDefyingUCEffect(IDefyingUCEffect effect) { effect.visitIDefying
      
 public void visitDefyImpulseEffect(IDefyImpulseEffect effect) { effect.visitIDefyImpulseEffect(this); }
   public void visitDefyImpulseCreateEffect(DefyImpulseCreateEffect effect) {
-    var instance = root.EffectDefyImpulseCreate(
-  effect.incarnation.weight    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectDefyImpulseCreateWithId(effect.id
+,  effect.incarnation.weight    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitDefyImpulseDeleteEffect(DefyImpulseDeleteEffect effect) {
@@ -929,13 +861,11 @@ public void visitDefyImpulseEffect(IDefyImpulseEffect effect) { effect.visitIDef
      
 public void visitCounteringUCEffect(ICounteringUCEffect effect) { effect.visitICounteringUCEffect(this); }
   public void visitCounteringUCCreateEffect(CounteringUCCreateEffect effect) {
-    var instance = root.EffectCounteringUCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectCounteringUCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitCounteringUCDeleteEffect(CounteringUCDeleteEffect effect) {
@@ -945,13 +875,11 @@ public void visitCounteringUCEffect(ICounteringUCEffect effect) { effect.visitIC
      
 public void visitCounterImpulseEffect(ICounterImpulseEffect effect) { effect.visitICounterImpulseEffect(this); }
   public void visitCounterImpulseCreateEffect(CounterImpulseCreateEffect effect) {
-    var instance = root.EffectCounterImpulseCreate(
-  effect.incarnation.weight    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectCounterImpulseCreateWithId(effect.id
+,  effect.incarnation.weight    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitCounterImpulseDeleteEffect(CounterImpulseDeleteEffect effect) {
@@ -961,13 +889,11 @@ public void visitCounterImpulseEffect(ICounterImpulseEffect effect) { effect.vis
      
 public void visitUnleashBideImpulseEffect(IUnleashBideImpulseEffect effect) { effect.visitIUnleashBideImpulseEffect(this); }
   public void visitUnleashBideImpulseCreateEffect(UnleashBideImpulseCreateEffect effect) {
-    var instance = root.EffectUnleashBideImpulseCreate(
-  effect.incarnation.weight    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectUnleashBideImpulseCreateWithId(effect.id
+,  effect.incarnation.weight    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitUnleashBideImpulseDeleteEffect(UnleashBideImpulseDeleteEffect effect) {
@@ -977,13 +903,11 @@ public void visitUnleashBideImpulseEffect(IUnleashBideImpulseEffect effect) { ef
      
 public void visitContinueBidingImpulseEffect(IContinueBidingImpulseEffect effect) { effect.visitIContinueBidingImpulseEffect(this); }
   public void visitContinueBidingImpulseCreateEffect(ContinueBidingImpulseCreateEffect effect) {
-    var instance = root.EffectContinueBidingImpulseCreate(
-  effect.incarnation.weight    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectContinueBidingImpulseCreateWithId(effect.id
+,  effect.incarnation.weight    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitContinueBidingImpulseDeleteEffect(ContinueBidingImpulseDeleteEffect effect) {
@@ -993,13 +917,11 @@ public void visitContinueBidingImpulseEffect(IContinueBidingImpulseEffect effect
      
 public void visitStartBidingImpulseEffect(IStartBidingImpulseEffect effect) { effect.visitIStartBidingImpulseEffect(this); }
   public void visitStartBidingImpulseCreateEffect(StartBidingImpulseCreateEffect effect) {
-    var instance = root.EffectStartBidingImpulseCreate(
-  effect.incarnation.weight    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectStartBidingImpulseCreateWithId(effect.id
+,  effect.incarnation.weight    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitStartBidingImpulseDeleteEffect(StartBidingImpulseDeleteEffect effect) {
@@ -1009,13 +931,11 @@ public void visitStartBidingImpulseEffect(IStartBidingImpulseEffect effect) { ef
      
 public void visitBideAICapabilityUCEffect(IBideAICapabilityUCEffect effect) { effect.visitIBideAICapabilityUCEffect(this); }
   public void visitBideAICapabilityUCCreateEffect(BideAICapabilityUCCreateEffect effect) {
-    var instance = root.EffectBideAICapabilityUCCreate(
-  effect.incarnation.charge    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectBideAICapabilityUCCreateWithId(effect.id
+,  effect.incarnation.charge    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitBideAICapabilityUCDeleteEffect(BideAICapabilityUCDeleteEffect effect) {
@@ -1032,14 +952,12 @@ public void visitBideAICapabilityUCEffect(IBideAICapabilityUCEffect effect) { ef
 
 public void visitAttackImpulseEffect(IAttackImpulseEffect effect) { effect.visitIAttackImpulseEffect(this); }
   public void visitAttackImpulseCreateEffect(AttackImpulseCreateEffect effect) {
-    var instance = root.EffectAttackImpulseCreate(
-  effect.incarnation.weight,
-  root.GetUnit(effect.incarnation.targetUnit)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectAttackImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  root.GetUnit(effect.incarnation.targetUnit)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitAttackImpulseDeleteEffect(AttackImpulseDeleteEffect effect) {
@@ -1049,14 +967,12 @@ public void visitAttackImpulseEffect(IAttackImpulseEffect effect) { effect.visit
      
 public void visitPursueImpulseEffect(IPursueImpulseEffect effect) { effect.visitIPursueImpulseEffect(this); }
   public void visitPursueImpulseCreateEffect(PursueImpulseCreateEffect effect) {
-    var instance = root.EffectPursueImpulseCreate(
-  effect.incarnation.weight,
-  effect.incarnation.isClearPath    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectPursueImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  effect.incarnation.isClearPath    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitPursueImpulseDeleteEffect(PursueImpulseDeleteEffect effect) {
@@ -1066,14 +982,12 @@ public void visitPursueImpulseEffect(IPursueImpulseEffect effect) { effect.visit
      
 public void visitKillDirectiveEffect(IKillDirectiveEffect effect) { effect.visitIKillDirectiveEffect(this); }
   public void visitKillDirectiveCreateEffect(KillDirectiveCreateEffect effect) {
-    var instance = root.EffectKillDirectiveCreate(
-  root.GetUnitOrNull(effect.incarnation.targetUnit),
-  root.GetLocationMutList(effect.incarnation.pathToLastSeenLocation)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectKillDirectiveCreateWithId(effect.id
+,  root.GetUnitOrNull(effect.incarnation.targetUnit)
+,  root.GetLocationMutList(effect.incarnation.pathToLastSeenLocation)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitKillDirectiveDeleteEffect(KillDirectiveDeleteEffect effect) {
@@ -1083,13 +997,11 @@ public void visitKillDirectiveEffect(IKillDirectiveEffect effect) { effect.visit
      
 public void visitAttackAICapabilityUCEffect(IAttackAICapabilityUCEffect effect) { effect.visitIAttackAICapabilityUCEffect(this); }
   public void visitAttackAICapabilityUCCreateEffect(AttackAICapabilityUCCreateEffect effect) {
-    var instance = root.EffectAttackAICapabilityUCCreate(
-  root.GetKillDirectiveOrNull(effect.incarnation.killDirective)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectAttackAICapabilityUCCreateWithId(effect.id
+,  root.GetKillDirectiveOrNull(effect.incarnation.killDirective)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitAttackAICapabilityUCDeleteEffect(AttackAICapabilityUCDeleteEffect effect) {
@@ -1106,13 +1018,11 @@ public void visitAttackAICapabilityUCEffect(IAttackAICapabilityUCEffect effect) 
 
 public void visitWarperTTCEffect(IWarperTTCEffect effect) { effect.visitIWarperTTCEffect(this); }
   public void visitWarperTTCCreateEffect(WarperTTCCreateEffect effect) {
-    var instance = root.EffectWarperTTCCreate(
-  effect.incarnation.destinationLocation    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectWarperTTCCreateWithId(effect.id
+,  effect.incarnation.destinationLocation    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitWarperTTCDeleteEffect(WarperTTCDeleteEffect effect) {
@@ -1122,13 +1032,11 @@ public void visitWarperTTCEffect(IWarperTTCEffect effect) { effect.visitIWarperT
      
 public void visitTimeAnchorTTCEffect(ITimeAnchorTTCEffect effect) { effect.visitITimeAnchorTTCEffect(this); }
   public void visitTimeAnchorTTCCreateEffect(TimeAnchorTTCCreateEffect effect) {
-    var instance = root.EffectTimeAnchorTTCCreate(
-  effect.incarnation.pastVersion    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectTimeAnchorTTCCreateWithId(effect.id
+,  effect.incarnation.pastVersion    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitTimeAnchorTTCDeleteEffect(TimeAnchorTTCDeleteEffect effect) {
@@ -1138,15 +1046,13 @@ public void visitTimeAnchorTTCEffect(ITimeAnchorTTCEffect effect) { effect.visit
      
 public void visitTerrainTileEffect(ITerrainTileEffect effect) { effect.visitITerrainTileEffect(this); }
   public void visitTerrainTileCreateEffect(TerrainTileCreateEffect effect) {
-    var instance = root.EffectTerrainTileCreate(
-  effect.incarnation.evvent,
-  effect.incarnation.elevation,
-  root.GetITerrainTileComponentMutBunch(effect.incarnation.components)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectTerrainTileCreateWithId(effect.id
+,  effect.incarnation.evvent
+,  effect.incarnation.elevation
+,  root.GetITerrainTileComponentMutBunch(effect.incarnation.components)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitTerrainTileDeleteEffect(TerrainTileDeleteEffect effect) {
@@ -1170,44 +1076,42 @@ public void visitTerrainTileEffect(ITerrainTileEffect effect) { effect.visitITer
 
 public void visitITerrainTileComponentMutBunchEffect(IITerrainTileComponentMutBunchEffect effect) { effect.visitIITerrainTileComponentMutBunchEffect(this); }
   public void visitITerrainTileComponentMutBunchCreateEffect(ITerrainTileComponentMutBunchCreateEffect effect) {
-    var instance = root.EffectITerrainTileComponentMutBunchCreate(
-  root.GetSimplePresenceTriggerTTCMutSet(effect.incarnation.membersSimplePresenceTriggerTTCMutSet),
-  root.GetItemTTCMutSet(effect.incarnation.membersItemTTCMutSet),
-  root.GetKamikazeTargetTTCMutSet(effect.incarnation.membersKamikazeTargetTTCMutSet),
-  root.GetWarperTTCMutSet(effect.incarnation.membersWarperTTCMutSet),
-  root.GetTimeAnchorTTCMutSet(effect.incarnation.membersTimeAnchorTTCMutSet),
-  root.GetFireBombTTCMutSet(effect.incarnation.membersFireBombTTCMutSet),
-  root.GetMarkerTTCMutSet(effect.incarnation.membersMarkerTTCMutSet),
-  root.GetLevelLinkTTCMutSet(effect.incarnation.membersLevelLinkTTCMutSet),
-  root.GetMudTTCMutSet(effect.incarnation.membersMudTTCMutSet),
-  root.GetDirtTTCMutSet(effect.incarnation.membersDirtTTCMutSet),
-  root.GetObsidianTTCMutSet(effect.incarnation.membersObsidianTTCMutSet),
-  root.GetDownStairsTTCMutSet(effect.incarnation.membersDownStairsTTCMutSet),
-  root.GetUpStairsTTCMutSet(effect.incarnation.membersUpStairsTTCMutSet),
-  root.GetWallTTCMutSet(effect.incarnation.membersWallTTCMutSet),
-  root.GetBloodTTCMutSet(effect.incarnation.membersBloodTTCMutSet),
-  root.GetRocksTTCMutSet(effect.incarnation.membersRocksTTCMutSet),
-  root.GetTreeTTCMutSet(effect.incarnation.membersTreeTTCMutSet),
-  root.GetWaterTTCMutSet(effect.incarnation.membersWaterTTCMutSet),
-  root.GetFloorTTCMutSet(effect.incarnation.membersFloorTTCMutSet),
-  root.GetCaveWallTTCMutSet(effect.incarnation.membersCaveWallTTCMutSet),
-  root.GetCaveTTCMutSet(effect.incarnation.membersCaveTTCMutSet),
-  root.GetFallsTTCMutSet(effect.incarnation.membersFallsTTCMutSet),
-  root.GetFireTTCMutSet(effect.incarnation.membersFireTTCMutSet),
-  root.GetObsidianFloorTTCMutSet(effect.incarnation.membersObsidianFloorTTCMutSet),
-  root.GetMagmaTTCMutSet(effect.incarnation.membersMagmaTTCMutSet),
-  root.GetCliffTTCMutSet(effect.incarnation.membersCliffTTCMutSet),
-  root.GetRavaNestTTCMutSet(effect.incarnation.membersRavaNestTTCMutSet),
-  root.GetCliffLandingTTCMutSet(effect.incarnation.membersCliffLandingTTCMutSet),
-  root.GetStoneTTCMutSet(effect.incarnation.membersStoneTTCMutSet),
-  root.GetGrassTTCMutSet(effect.incarnation.membersGrassTTCMutSet),
-  root.GetIncendianFallsLevelLinkerTTCMutSet(effect.incarnation.membersIncendianFallsLevelLinkerTTCMutSet),
-  root.GetEmberDeepLevelLinkerTTCMutSet(effect.incarnation.membersEmberDeepLevelLinkerTTCMutSet)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectITerrainTileComponentMutBunchCreateWithId(effect.id
+,  root.GetSimplePresenceTriggerTTCMutSet(effect.incarnation.membersSimplePresenceTriggerTTCMutSet)
+,  root.GetItemTTCMutSet(effect.incarnation.membersItemTTCMutSet)
+,  root.GetKamikazeTargetTTCMutSet(effect.incarnation.membersKamikazeTargetTTCMutSet)
+,  root.GetWarperTTCMutSet(effect.incarnation.membersWarperTTCMutSet)
+,  root.GetTimeAnchorTTCMutSet(effect.incarnation.membersTimeAnchorTTCMutSet)
+,  root.GetFireBombTTCMutSet(effect.incarnation.membersFireBombTTCMutSet)
+,  root.GetMarkerTTCMutSet(effect.incarnation.membersMarkerTTCMutSet)
+,  root.GetLevelLinkTTCMutSet(effect.incarnation.membersLevelLinkTTCMutSet)
+,  root.GetMudTTCMutSet(effect.incarnation.membersMudTTCMutSet)
+,  root.GetDirtTTCMutSet(effect.incarnation.membersDirtTTCMutSet)
+,  root.GetObsidianTTCMutSet(effect.incarnation.membersObsidianTTCMutSet)
+,  root.GetDownStairsTTCMutSet(effect.incarnation.membersDownStairsTTCMutSet)
+,  root.GetUpStairsTTCMutSet(effect.incarnation.membersUpStairsTTCMutSet)
+,  root.GetWallTTCMutSet(effect.incarnation.membersWallTTCMutSet)
+,  root.GetBloodTTCMutSet(effect.incarnation.membersBloodTTCMutSet)
+,  root.GetRocksTTCMutSet(effect.incarnation.membersRocksTTCMutSet)
+,  root.GetTreeTTCMutSet(effect.incarnation.membersTreeTTCMutSet)
+,  root.GetWaterTTCMutSet(effect.incarnation.membersWaterTTCMutSet)
+,  root.GetFloorTTCMutSet(effect.incarnation.membersFloorTTCMutSet)
+,  root.GetCaveWallTTCMutSet(effect.incarnation.membersCaveWallTTCMutSet)
+,  root.GetCaveTTCMutSet(effect.incarnation.membersCaveTTCMutSet)
+,  root.GetFallsTTCMutSet(effect.incarnation.membersFallsTTCMutSet)
+,  root.GetFireTTCMutSet(effect.incarnation.membersFireTTCMutSet)
+,  root.GetObsidianFloorTTCMutSet(effect.incarnation.membersObsidianFloorTTCMutSet)
+,  root.GetMagmaTTCMutSet(effect.incarnation.membersMagmaTTCMutSet)
+,  root.GetCliffTTCMutSet(effect.incarnation.membersCliffTTCMutSet)
+,  root.GetRavaNestTTCMutSet(effect.incarnation.membersRavaNestTTCMutSet)
+,  root.GetCliffLandingTTCMutSet(effect.incarnation.membersCliffLandingTTCMutSet)
+,  root.GetStoneTTCMutSet(effect.incarnation.membersStoneTTCMutSet)
+,  root.GetGrassTTCMutSet(effect.incarnation.membersGrassTTCMutSet)
+,  root.GetIncendianFallsLevelLinkerTTCMutSet(effect.incarnation.membersIncendianFallsLevelLinkerTTCMutSet)
+,  root.GetEmberDeepLevelLinkerTTCMutSet(effect.incarnation.membersEmberDeepLevelLinkerTTCMutSet)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitITerrainTileComponentMutBunchDeleteEffect(ITerrainTileComponentMutBunchDeleteEffect effect) {
@@ -1217,15 +1121,13 @@ public void visitITerrainTileComponentMutBunchEffect(IITerrainTileComponentMutBu
      
 public void visitTerrainEffect(ITerrainEffect effect) { effect.visitITerrainEffect(this); }
   public void visitTerrainCreateEffect(TerrainCreateEffect effect) {
-    var instance = root.EffectTerrainCreate(
-  effect.incarnation.pattern,
-  effect.incarnation.elevationStepHeight,
-  root.GetTerrainTileByLocationMutMap(effect.incarnation.tiles)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectTerrainCreateWithId(effect.id
+,  effect.incarnation.pattern
+,  effect.incarnation.elevationStepHeight
+,  root.GetTerrainTileByLocationMutMap(effect.incarnation.tiles)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitTerrainDeleteEffect(TerrainDeleteEffect effect) {
@@ -1242,13 +1144,11 @@ public void visitTerrainEffect(ITerrainEffect effect) { effect.visitITerrainEffe
 
 public void visitSimplePresenceTriggerTTCEffect(ISimplePresenceTriggerTTCEffect effect) { effect.visitISimplePresenceTriggerTTCEffect(this); }
   public void visitSimplePresenceTriggerTTCCreateEffect(SimplePresenceTriggerTTCCreateEffect effect) {
-    var instance = root.EffectSimplePresenceTriggerTTCCreate(
-  effect.incarnation.name    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectSimplePresenceTriggerTTCCreateWithId(effect.id
+,  effect.incarnation.name    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitSimplePresenceTriggerTTCDeleteEffect(SimplePresenceTriggerTTCDeleteEffect effect) {
@@ -1258,14 +1158,12 @@ public void visitSimplePresenceTriggerTTCEffect(ISimplePresenceTriggerTTCEffect 
      
 public void visitFireBombImpulseEffect(IFireBombImpulseEffect effect) { effect.visitIFireBombImpulseEffect(this); }
   public void visitFireBombImpulseCreateEffect(FireBombImpulseCreateEffect effect) {
-    var instance = root.EffectFireBombImpulseCreate(
-  effect.incarnation.weight,
-  effect.incarnation.location    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectFireBombImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  effect.incarnation.location    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitFireBombImpulseDeleteEffect(FireBombImpulseDeleteEffect effect) {
@@ -1275,13 +1173,11 @@ public void visitFireBombImpulseEffect(IFireBombImpulseEffect effect) { effect.v
      
 public void visitFireBombTTCEffect(IFireBombTTCEffect effect) { effect.visitIFireBombTTCEffect(this); }
   public void visitFireBombTTCCreateEffect(FireBombTTCCreateEffect effect) {
-    var instance = root.EffectFireBombTTCCreate(
-  effect.incarnation.turnsUntilExplosion    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectFireBombTTCCreateWithId(effect.id
+,  effect.incarnation.turnsUntilExplosion    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitFireBombTTCDeleteEffect(FireBombTTCDeleteEffect effect) {
@@ -1298,13 +1194,11 @@ public void visitFireBombTTCEffect(IFireBombTTCEffect effect) { effect.visitIFir
 
 public void visitMarkerTTCEffect(IMarkerTTCEffect effect) { effect.visitIMarkerTTCEffect(this); }
   public void visitMarkerTTCCreateEffect(MarkerTTCCreateEffect effect) {
-    var instance = root.EffectMarkerTTCCreate(
-  effect.incarnation.name    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectMarkerTTCCreateWithId(effect.id
+,  effect.incarnation.name    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitMarkerTTCDeleteEffect(MarkerTTCDeleteEffect effect) {
@@ -1314,15 +1208,13 @@ public void visitMarkerTTCEffect(IMarkerTTCEffect effect) { effect.visitIMarkerT
      
 public void visitLevelLinkTTCEffect(ILevelLinkTTCEffect effect) { effect.visitILevelLinkTTCEffect(this); }
   public void visitLevelLinkTTCCreateEffect(LevelLinkTTCCreateEffect effect) {
-    var instance = root.EffectLevelLinkTTCCreate(
-  effect.incarnation.destroyThisLevel,
-  root.GetLevel(effect.incarnation.destinationLevel),
-  effect.incarnation.destinationLevelLocation    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectLevelLinkTTCCreateWithId(effect.id
+,  effect.incarnation.destroyThisLevel
+,  root.GetLevel(effect.incarnation.destinationLevel)
+,  effect.incarnation.destinationLevelLocation    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitLevelLinkTTCDeleteEffect(LevelLinkTTCDeleteEffect effect) {
@@ -1332,13 +1224,11 @@ public void visitLevelLinkTTCEffect(ILevelLinkTTCEffect effect) { effect.visitIL
      
 public void visitMudTTCEffect(IMudTTCEffect effect) { effect.visitIMudTTCEffect(this); }
   public void visitMudTTCCreateEffect(MudTTCCreateEffect effect) {
-    var instance = root.EffectMudTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectMudTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitMudTTCDeleteEffect(MudTTCDeleteEffect effect) {
@@ -1348,13 +1238,11 @@ public void visitMudTTCEffect(IMudTTCEffect effect) { effect.visitIMudTTCEffect(
      
 public void visitDirtTTCEffect(IDirtTTCEffect effect) { effect.visitIDirtTTCEffect(this); }
   public void visitDirtTTCCreateEffect(DirtTTCCreateEffect effect) {
-    var instance = root.EffectDirtTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectDirtTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitDirtTTCDeleteEffect(DirtTTCDeleteEffect effect) {
@@ -1364,13 +1252,11 @@ public void visitDirtTTCEffect(IDirtTTCEffect effect) { effect.visitIDirtTTCEffe
      
 public void visitObsidianTTCEffect(IObsidianTTCEffect effect) { effect.visitIObsidianTTCEffect(this); }
   public void visitObsidianTTCCreateEffect(ObsidianTTCCreateEffect effect) {
-    var instance = root.EffectObsidianTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectObsidianTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitObsidianTTCDeleteEffect(ObsidianTTCDeleteEffect effect) {
@@ -1380,13 +1266,11 @@ public void visitObsidianTTCEffect(IObsidianTTCEffect effect) { effect.visitIObs
      
 public void visitDownStairsTTCEffect(IDownStairsTTCEffect effect) { effect.visitIDownStairsTTCEffect(this); }
   public void visitDownStairsTTCCreateEffect(DownStairsTTCCreateEffect effect) {
-    var instance = root.EffectDownStairsTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectDownStairsTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitDownStairsTTCDeleteEffect(DownStairsTTCDeleteEffect effect) {
@@ -1396,13 +1280,11 @@ public void visitDownStairsTTCEffect(IDownStairsTTCEffect effect) { effect.visit
      
 public void visitUpStairsTTCEffect(IUpStairsTTCEffect effect) { effect.visitIUpStairsTTCEffect(this); }
   public void visitUpStairsTTCCreateEffect(UpStairsTTCCreateEffect effect) {
-    var instance = root.EffectUpStairsTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectUpStairsTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitUpStairsTTCDeleteEffect(UpStairsTTCDeleteEffect effect) {
@@ -1412,13 +1294,11 @@ public void visitUpStairsTTCEffect(IUpStairsTTCEffect effect) { effect.visitIUpS
      
 public void visitWallTTCEffect(IWallTTCEffect effect) { effect.visitIWallTTCEffect(this); }
   public void visitWallTTCCreateEffect(WallTTCCreateEffect effect) {
-    var instance = root.EffectWallTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectWallTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitWallTTCDeleteEffect(WallTTCDeleteEffect effect) {
@@ -1428,13 +1308,11 @@ public void visitWallTTCEffect(IWallTTCEffect effect) { effect.visitIWallTTCEffe
      
 public void visitBloodTTCEffect(IBloodTTCEffect effect) { effect.visitIBloodTTCEffect(this); }
   public void visitBloodTTCCreateEffect(BloodTTCCreateEffect effect) {
-    var instance = root.EffectBloodTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectBloodTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitBloodTTCDeleteEffect(BloodTTCDeleteEffect effect) {
@@ -1444,13 +1322,11 @@ public void visitBloodTTCEffect(IBloodTTCEffect effect) { effect.visitIBloodTTCE
      
 public void visitRocksTTCEffect(IRocksTTCEffect effect) { effect.visitIRocksTTCEffect(this); }
   public void visitRocksTTCCreateEffect(RocksTTCCreateEffect effect) {
-    var instance = root.EffectRocksTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectRocksTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitRocksTTCDeleteEffect(RocksTTCDeleteEffect effect) {
@@ -1460,13 +1336,11 @@ public void visitRocksTTCEffect(IRocksTTCEffect effect) { effect.visitIRocksTTCE
      
 public void visitTreeTTCEffect(ITreeTTCEffect effect) { effect.visitITreeTTCEffect(this); }
   public void visitTreeTTCCreateEffect(TreeTTCCreateEffect effect) {
-    var instance = root.EffectTreeTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectTreeTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitTreeTTCDeleteEffect(TreeTTCDeleteEffect effect) {
@@ -1476,13 +1350,11 @@ public void visitTreeTTCEffect(ITreeTTCEffect effect) { effect.visitITreeTTCEffe
      
 public void visitWaterTTCEffect(IWaterTTCEffect effect) { effect.visitIWaterTTCEffect(this); }
   public void visitWaterTTCCreateEffect(WaterTTCCreateEffect effect) {
-    var instance = root.EffectWaterTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectWaterTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitWaterTTCDeleteEffect(WaterTTCDeleteEffect effect) {
@@ -1492,13 +1364,11 @@ public void visitWaterTTCEffect(IWaterTTCEffect effect) { effect.visitIWaterTTCE
      
 public void visitFloorTTCEffect(IFloorTTCEffect effect) { effect.visitIFloorTTCEffect(this); }
   public void visitFloorTTCCreateEffect(FloorTTCCreateEffect effect) {
-    var instance = root.EffectFloorTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectFloorTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitFloorTTCDeleteEffect(FloorTTCDeleteEffect effect) {
@@ -1508,13 +1378,11 @@ public void visitFloorTTCEffect(IFloorTTCEffect effect) { effect.visitIFloorTTCE
      
 public void visitCaveWallTTCEffect(ICaveWallTTCEffect effect) { effect.visitICaveWallTTCEffect(this); }
   public void visitCaveWallTTCCreateEffect(CaveWallTTCCreateEffect effect) {
-    var instance = root.EffectCaveWallTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectCaveWallTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitCaveWallTTCDeleteEffect(CaveWallTTCDeleteEffect effect) {
@@ -1524,13 +1392,11 @@ public void visitCaveWallTTCEffect(ICaveWallTTCEffect effect) { effect.visitICav
      
 public void visitCaveTTCEffect(ICaveTTCEffect effect) { effect.visitICaveTTCEffect(this); }
   public void visitCaveTTCCreateEffect(CaveTTCCreateEffect effect) {
-    var instance = root.EffectCaveTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectCaveTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitCaveTTCDeleteEffect(CaveTTCDeleteEffect effect) {
@@ -1540,13 +1406,11 @@ public void visitCaveTTCEffect(ICaveTTCEffect effect) { effect.visitICaveTTCEffe
      
 public void visitFallsTTCEffect(IFallsTTCEffect effect) { effect.visitIFallsTTCEffect(this); }
   public void visitFallsTTCCreateEffect(FallsTTCCreateEffect effect) {
-    var instance = root.EffectFallsTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectFallsTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitFallsTTCDeleteEffect(FallsTTCDeleteEffect effect) {
@@ -1556,13 +1420,11 @@ public void visitFallsTTCEffect(IFallsTTCEffect effect) { effect.visitIFallsTTCE
      
 public void visitFireTTCEffect(IFireTTCEffect effect) { effect.visitIFireTTCEffect(this); }
   public void visitFireTTCCreateEffect(FireTTCCreateEffect effect) {
-    var instance = root.EffectFireTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectFireTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitFireTTCDeleteEffect(FireTTCDeleteEffect effect) {
@@ -1572,13 +1434,11 @@ public void visitFireTTCEffect(IFireTTCEffect effect) { effect.visitIFireTTCEffe
      
 public void visitObsidianFloorTTCEffect(IObsidianFloorTTCEffect effect) { effect.visitIObsidianFloorTTCEffect(this); }
   public void visitObsidianFloorTTCCreateEffect(ObsidianFloorTTCCreateEffect effect) {
-    var instance = root.EffectObsidianFloorTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectObsidianFloorTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitObsidianFloorTTCDeleteEffect(ObsidianFloorTTCDeleteEffect effect) {
@@ -1588,13 +1448,11 @@ public void visitObsidianFloorTTCEffect(IObsidianFloorTTCEffect effect) { effect
      
 public void visitMagmaTTCEffect(IMagmaTTCEffect effect) { effect.visitIMagmaTTCEffect(this); }
   public void visitMagmaTTCCreateEffect(MagmaTTCCreateEffect effect) {
-    var instance = root.EffectMagmaTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectMagmaTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitMagmaTTCDeleteEffect(MagmaTTCDeleteEffect effect) {
@@ -1604,13 +1462,11 @@ public void visitMagmaTTCEffect(IMagmaTTCEffect effect) { effect.visitIMagmaTTCE
      
 public void visitCliffTTCEffect(ICliffTTCEffect effect) { effect.visitICliffTTCEffect(this); }
   public void visitCliffTTCCreateEffect(CliffTTCCreateEffect effect) {
-    var instance = root.EffectCliffTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectCliffTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitCliffTTCDeleteEffect(CliffTTCDeleteEffect effect) {
@@ -1620,13 +1476,11 @@ public void visitCliffTTCEffect(ICliffTTCEffect effect) { effect.visitICliffTTCE
      
 public void visitRavaNestTTCEffect(IRavaNestTTCEffect effect) { effect.visitIRavaNestTTCEffect(this); }
   public void visitRavaNestTTCCreateEffect(RavaNestTTCCreateEffect effect) {
-    var instance = root.EffectRavaNestTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectRavaNestTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitRavaNestTTCDeleteEffect(RavaNestTTCDeleteEffect effect) {
@@ -1636,13 +1490,11 @@ public void visitRavaNestTTCEffect(IRavaNestTTCEffect effect) { effect.visitIRav
      
 public void visitCliffLandingTTCEffect(ICliffLandingTTCEffect effect) { effect.visitICliffLandingTTCEffect(this); }
   public void visitCliffLandingTTCCreateEffect(CliffLandingTTCCreateEffect effect) {
-    var instance = root.EffectCliffLandingTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectCliffLandingTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitCliffLandingTTCDeleteEffect(CliffLandingTTCDeleteEffect effect) {
@@ -1652,13 +1504,11 @@ public void visitCliffLandingTTCEffect(ICliffLandingTTCEffect effect) { effect.v
      
 public void visitStoneTTCEffect(IStoneTTCEffect effect) { effect.visitIStoneTTCEffect(this); }
   public void visitStoneTTCCreateEffect(StoneTTCCreateEffect effect) {
-    var instance = root.EffectStoneTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectStoneTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitStoneTTCDeleteEffect(StoneTTCDeleteEffect effect) {
@@ -1668,13 +1518,11 @@ public void visitStoneTTCEffect(IStoneTTCEffect effect) { effect.visitIStoneTTCE
      
 public void visitGrassTTCEffect(IGrassTTCEffect effect) { effect.visitIGrassTTCEffect(this); }
   public void visitGrassTTCCreateEffect(GrassTTCCreateEffect effect) {
-    var instance = root.EffectGrassTTCCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectGrassTTCCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitGrassTTCDeleteEffect(GrassTTCDeleteEffect effect) {
@@ -1684,17 +1532,15 @@ public void visitGrassTTCEffect(IGrassTTCEffect effect) { effect.visitIGrassTTCE
      
 public void visitLevelEffect(ILevelEffect effect) { effect.visitILevelEffect(this); }
   public void visitLevelCreateEffect(LevelCreateEffect effect) {
-    var instance = root.EffectLevelCreate(
-  effect.incarnation.cameraAngle,
-  root.GetTerrain(effect.incarnation.terrain),
-  root.GetUnitMutSet(effect.incarnation.units),
-  root.GetILevelControllerOrNull(effect.incarnation.controller),
-  effect.incarnation.time    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectLevelCreateWithId(effect.id
+,  effect.incarnation.cameraAngle
+,  root.GetTerrain(effect.incarnation.terrain)
+,  root.GetUnitMutSet(effect.incarnation.units)
+,  root.GetILevelControllerOrNull(effect.incarnation.controller)
+,  effect.incarnation.time    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitLevelDeleteEffect(LevelDeleteEffect effect) {
@@ -1718,13 +1564,11 @@ public void visitLevelEffect(ILevelEffect effect) { effect.visitILevelEffect(thi
 
 public void visitSpeedRingEffect(ISpeedRingEffect effect) { effect.visitISpeedRingEffect(this); }
   public void visitSpeedRingCreateEffect(SpeedRingCreateEffect effect) {
-    var instance = root.EffectSpeedRingCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectSpeedRingCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitSpeedRingDeleteEffect(SpeedRingDeleteEffect effect) {
@@ -1734,13 +1578,11 @@ public void visitSpeedRingEffect(ISpeedRingEffect effect) { effect.visitISpeedRi
      
 public void visitManaPotionEffect(IManaPotionEffect effect) { effect.visitIManaPotionEffect(this); }
   public void visitManaPotionCreateEffect(ManaPotionCreateEffect effect) {
-    var instance = root.EffectManaPotionCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectManaPotionCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitManaPotionDeleteEffect(ManaPotionDeleteEffect effect) {
@@ -1750,16 +1592,14 @@ public void visitManaPotionEffect(IManaPotionEffect effect) { effect.visitIManaP
      
 public void visitWatEffect(IWatEffect effect) { effect.visitIWatEffect(this); }
   public void visitWatCreateEffect(WatCreateEffect effect) {
-    var instance = root.EffectWatCreate(
-  root.GetIItemStrongMutBunch(effect.incarnation.items),
-  root.GetIImpulseStrongMutBunch(effect.incarnation.impulses),
-  root.GetIPostActingUCWeakMutBunch(effect.incarnation.blah),
-  root.GetIPreActingUCWeakMutBunch(effect.incarnation.bloop)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectWatCreateWithId(effect.id
+,  root.GetIItemStrongMutBunch(effect.incarnation.items)
+,  root.GetIImpulseStrongMutBunch(effect.incarnation.impulses)
+,  root.GetIPostActingUCWeakMutBunch(effect.incarnation.blah)
+,  root.GetIPreActingUCWeakMutBunch(effect.incarnation.bloop)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitWatDeleteEffect(WatDeleteEffect effect) {
@@ -1769,18 +1609,16 @@ public void visitWatEffect(IWatEffect effect) { effect.visitIWatEffect(this); }
      
 public void visitIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffect effect) { effect.visitIIPreActingUCWeakMutBunchEffect(this); }
   public void visitIPreActingUCWeakMutBunchCreateEffect(IPreActingUCWeakMutBunchCreateEffect effect) {
-    var instance = root.EffectIPreActingUCWeakMutBunchCreate(
-  root.GetDoomedUCWeakMutSet(effect.incarnation.membersDoomedUCWeakMutSet),
-  root.GetMiredUCWeakMutSet(effect.incarnation.membersMiredUCWeakMutSet),
-  root.GetInvincibilityUCWeakMutSet(effect.incarnation.membersInvincibilityUCWeakMutSet),
-  root.GetDefyingUCWeakMutSet(effect.incarnation.membersDefyingUCWeakMutSet),
-  root.GetCounteringUCWeakMutSet(effect.incarnation.membersCounteringUCWeakMutSet),
-  root.GetAttackAICapabilityUCWeakMutSet(effect.incarnation.membersAttackAICapabilityUCWeakMutSet)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectIPreActingUCWeakMutBunchCreateWithId(effect.id
+,  root.GetDoomedUCWeakMutSet(effect.incarnation.membersDoomedUCWeakMutSet)
+,  root.GetMiredUCWeakMutSet(effect.incarnation.membersMiredUCWeakMutSet)
+,  root.GetInvincibilityUCWeakMutSet(effect.incarnation.membersInvincibilityUCWeakMutSet)
+,  root.GetDefyingUCWeakMutSet(effect.incarnation.membersDefyingUCWeakMutSet)
+,  root.GetCounteringUCWeakMutSet(effect.incarnation.membersCounteringUCWeakMutSet)
+,  root.GetAttackAICapabilityUCWeakMutSet(effect.incarnation.membersAttackAICapabilityUCWeakMutSet)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitIPreActingUCWeakMutBunchDeleteEffect(IPreActingUCWeakMutBunchDeleteEffect effect) {
@@ -1790,14 +1628,12 @@ public void visitIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffect 
      
 public void visitIPostActingUCWeakMutBunchEffect(IIPostActingUCWeakMutBunchEffect effect) { effect.visitIIPostActingUCWeakMutBunchEffect(this); }
   public void visitIPostActingUCWeakMutBunchCreateEffect(IPostActingUCWeakMutBunchCreateEffect effect) {
-    var instance = root.EffectIPostActingUCWeakMutBunchCreate(
-  root.GetLightningChargedUCWeakMutSet(effect.incarnation.membersLightningChargedUCWeakMutSet),
-  root.GetTimeCloneAICapabilityUCWeakMutSet(effect.incarnation.membersTimeCloneAICapabilityUCWeakMutSet)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectIPostActingUCWeakMutBunchCreateWithId(effect.id
+,  root.GetLightningChargedUCWeakMutSet(effect.incarnation.membersLightningChargedUCWeakMutSet)
+,  root.GetTimeCloneAICapabilityUCWeakMutSet(effect.incarnation.membersTimeCloneAICapabilityUCWeakMutSet)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitIPostActingUCWeakMutBunchDeleteEffect(IPostActingUCWeakMutBunchDeleteEffect effect) {
@@ -1807,30 +1643,28 @@ public void visitIPostActingUCWeakMutBunchEffect(IIPostActingUCWeakMutBunchEffec
      
 public void visitIImpulseStrongMutBunchEffect(IIImpulseStrongMutBunchEffect effect) { effect.visitIIImpulseStrongMutBunchEffect(this); }
   public void visitIImpulseStrongMutBunchCreateEffect(IImpulseStrongMutBunchCreateEffect effect) {
-    var instance = root.EffectIImpulseStrongMutBunchCreate(
-  root.GetHoldPositionImpulseStrongMutSet(effect.incarnation.membersHoldPositionImpulseStrongMutSet),
-  root.GetTemporaryCloneImpulseStrongMutSet(effect.incarnation.membersTemporaryCloneImpulseStrongMutSet),
-  root.GetSummonImpulseStrongMutSet(effect.incarnation.membersSummonImpulseStrongMutSet),
-  root.GetMireImpulseStrongMutSet(effect.incarnation.membersMireImpulseStrongMutSet),
-  root.GetEvaporateImpulseStrongMutSet(effect.incarnation.membersEvaporateImpulseStrongMutSet),
-  root.GetMoveImpulseStrongMutSet(effect.incarnation.membersMoveImpulseStrongMutSet),
-  root.GetKamikazeJumpImpulseStrongMutSet(effect.incarnation.membersKamikazeJumpImpulseStrongMutSet),
-  root.GetKamikazeTargetImpulseStrongMutSet(effect.incarnation.membersKamikazeTargetImpulseStrongMutSet),
-  root.GetNoImpulseStrongMutSet(effect.incarnation.membersNoImpulseStrongMutSet),
-  root.GetFireImpulseStrongMutSet(effect.incarnation.membersFireImpulseStrongMutSet),
-  root.GetDefyImpulseStrongMutSet(effect.incarnation.membersDefyImpulseStrongMutSet),
-  root.GetCounterImpulseStrongMutSet(effect.incarnation.membersCounterImpulseStrongMutSet),
-  root.GetUnleashBideImpulseStrongMutSet(effect.incarnation.membersUnleashBideImpulseStrongMutSet),
-  root.GetContinueBidingImpulseStrongMutSet(effect.incarnation.membersContinueBidingImpulseStrongMutSet),
-  root.GetStartBidingImpulseStrongMutSet(effect.incarnation.membersStartBidingImpulseStrongMutSet),
-  root.GetAttackImpulseStrongMutSet(effect.incarnation.membersAttackImpulseStrongMutSet),
-  root.GetPursueImpulseStrongMutSet(effect.incarnation.membersPursueImpulseStrongMutSet),
-  root.GetFireBombImpulseStrongMutSet(effect.incarnation.membersFireBombImpulseStrongMutSet)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectIImpulseStrongMutBunchCreateWithId(effect.id
+,  root.GetHoldPositionImpulseStrongMutSet(effect.incarnation.membersHoldPositionImpulseStrongMutSet)
+,  root.GetTemporaryCloneImpulseStrongMutSet(effect.incarnation.membersTemporaryCloneImpulseStrongMutSet)
+,  root.GetSummonImpulseStrongMutSet(effect.incarnation.membersSummonImpulseStrongMutSet)
+,  root.GetMireImpulseStrongMutSet(effect.incarnation.membersMireImpulseStrongMutSet)
+,  root.GetEvaporateImpulseStrongMutSet(effect.incarnation.membersEvaporateImpulseStrongMutSet)
+,  root.GetMoveImpulseStrongMutSet(effect.incarnation.membersMoveImpulseStrongMutSet)
+,  root.GetKamikazeJumpImpulseStrongMutSet(effect.incarnation.membersKamikazeJumpImpulseStrongMutSet)
+,  root.GetKamikazeTargetImpulseStrongMutSet(effect.incarnation.membersKamikazeTargetImpulseStrongMutSet)
+,  root.GetNoImpulseStrongMutSet(effect.incarnation.membersNoImpulseStrongMutSet)
+,  root.GetFireImpulseStrongMutSet(effect.incarnation.membersFireImpulseStrongMutSet)
+,  root.GetDefyImpulseStrongMutSet(effect.incarnation.membersDefyImpulseStrongMutSet)
+,  root.GetCounterImpulseStrongMutSet(effect.incarnation.membersCounterImpulseStrongMutSet)
+,  root.GetUnleashBideImpulseStrongMutSet(effect.incarnation.membersUnleashBideImpulseStrongMutSet)
+,  root.GetContinueBidingImpulseStrongMutSet(effect.incarnation.membersContinueBidingImpulseStrongMutSet)
+,  root.GetStartBidingImpulseStrongMutSet(effect.incarnation.membersStartBidingImpulseStrongMutSet)
+,  root.GetAttackImpulseStrongMutSet(effect.incarnation.membersAttackImpulseStrongMutSet)
+,  root.GetPursueImpulseStrongMutSet(effect.incarnation.membersPursueImpulseStrongMutSet)
+,  root.GetFireBombImpulseStrongMutSet(effect.incarnation.membersFireBombImpulseStrongMutSet)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitIImpulseStrongMutBunchDeleteEffect(IImpulseStrongMutBunchDeleteEffect effect) {
@@ -1840,19 +1674,17 @@ public void visitIImpulseStrongMutBunchEffect(IIImpulseStrongMutBunchEffect effe
      
 public void visitIItemStrongMutBunchEffect(IIItemStrongMutBunchEffect effect) { effect.visitIIItemStrongMutBunchEffect(this); }
   public void visitIItemStrongMutBunchCreateEffect(IItemStrongMutBunchCreateEffect effect) {
-    var instance = root.EffectIItemStrongMutBunchCreate(
-  root.GetManaPotionStrongMutSet(effect.incarnation.membersManaPotionStrongMutSet),
-  root.GetHealthPotionStrongMutSet(effect.incarnation.membersHealthPotionStrongMutSet),
-  root.GetSpeedRingStrongMutSet(effect.incarnation.membersSpeedRingStrongMutSet),
-  root.GetGlaiveStrongMutSet(effect.incarnation.membersGlaiveStrongMutSet),
-  root.GetSlowRodStrongMutSet(effect.incarnation.membersSlowRodStrongMutSet),
-  root.GetBlastRodStrongMutSet(effect.incarnation.membersBlastRodStrongMutSet),
-  root.GetArmorStrongMutSet(effect.incarnation.membersArmorStrongMutSet)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectIItemStrongMutBunchCreateWithId(effect.id
+,  root.GetManaPotionStrongMutSet(effect.incarnation.membersManaPotionStrongMutSet)
+,  root.GetHealthPotionStrongMutSet(effect.incarnation.membersHealthPotionStrongMutSet)
+,  root.GetSpeedRingStrongMutSet(effect.incarnation.membersSpeedRingStrongMutSet)
+,  root.GetGlaiveStrongMutSet(effect.incarnation.membersGlaiveStrongMutSet)
+,  root.GetSlowRodStrongMutSet(effect.incarnation.membersSlowRodStrongMutSet)
+,  root.GetBlastRodStrongMutSet(effect.incarnation.membersBlastRodStrongMutSet)
+,  root.GetArmorStrongMutSet(effect.incarnation.membersArmorStrongMutSet)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitIItemStrongMutBunchDeleteEffect(IItemStrongMutBunchDeleteEffect effect) {
@@ -1862,13 +1694,11 @@ public void visitIItemStrongMutBunchEffect(IIItemStrongMutBunchEffect effect) { 
      
 public void visitItemTTCEffect(IItemTTCEffect effect) { effect.visitIItemTTCEffect(this); }
   public void visitItemTTCCreateEffect(ItemTTCCreateEffect effect) {
-    var instance = root.EffectItemTTCCreate(
-  root.GetIItem(effect.incarnation.item)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectItemTTCCreateWithId(effect.id
+,  root.GetIItem(effect.incarnation.item)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitItemTTCDeleteEffect(ItemTTCDeleteEffect effect) {
@@ -1878,13 +1708,11 @@ public void visitItemTTCEffect(IItemTTCEffect effect) { effect.visitIItemTTCEffe
      
 public void visitHealthPotionEffect(IHealthPotionEffect effect) { effect.visitIHealthPotionEffect(this); }
   public void visitHealthPotionCreateEffect(HealthPotionCreateEffect effect) {
-    var instance = root.EffectHealthPotionCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectHealthPotionCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitHealthPotionDeleteEffect(HealthPotionDeleteEffect effect) {
@@ -1894,13 +1722,11 @@ public void visitHealthPotionEffect(IHealthPotionEffect effect) { effect.visitIH
      
 public void visitGlaiveEffect(IGlaiveEffect effect) { effect.visitIGlaiveEffect(this); }
   public void visitGlaiveCreateEffect(GlaiveCreateEffect effect) {
-    var instance = root.EffectGlaiveCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectGlaiveCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitGlaiveDeleteEffect(GlaiveDeleteEffect effect) {
@@ -1910,13 +1736,11 @@ public void visitGlaiveEffect(IGlaiveEffect effect) { effect.visitIGlaiveEffect(
      
 public void visitSlowRodEffect(ISlowRodEffect effect) { effect.visitISlowRodEffect(this); }
   public void visitSlowRodCreateEffect(SlowRodCreateEffect effect) {
-    var instance = root.EffectSlowRodCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectSlowRodCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitSlowRodDeleteEffect(SlowRodDeleteEffect effect) {
@@ -1926,13 +1750,11 @@ public void visitSlowRodEffect(ISlowRodEffect effect) { effect.visitISlowRodEffe
      
 public void visitBlastRodEffect(IBlastRodEffect effect) { effect.visitIBlastRodEffect(this); }
   public void visitBlastRodCreateEffect(BlastRodCreateEffect effect) {
-    var instance = root.EffectBlastRodCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectBlastRodCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitBlastRodDeleteEffect(BlastRodDeleteEffect effect) {
@@ -1942,13 +1764,11 @@ public void visitBlastRodEffect(IBlastRodEffect effect) { effect.visitIBlastRodE
      
 public void visitArmorEffect(IArmorEffect effect) { effect.visitIArmorEffect(this); }
   public void visitArmorCreateEffect(ArmorCreateEffect effect) {
-    var instance = root.EffectArmorCreate(
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectArmorCreateWithId(effect.id
     );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitArmorDeleteEffect(ArmorDeleteEffect effect) {
@@ -1958,14 +1778,12 @@ public void visitArmorEffect(IArmorEffect effect) { effect.visitIArmorEffect(thi
      
 public void visitSquareCaveLevelControllerEffect(ISquareCaveLevelControllerEffect effect) { effect.visitISquareCaveLevelControllerEffect(this); }
   public void visitSquareCaveLevelControllerCreateEffect(SquareCaveLevelControllerCreateEffect effect) {
-    var instance = root.EffectSquareCaveLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level),
-  effect.incarnation.depth    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectSquareCaveLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)
+,  effect.incarnation.depth    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitSquareCaveLevelControllerDeleteEffect(SquareCaveLevelControllerDeleteEffect effect) {
@@ -1975,13 +1793,11 @@ public void visitSquareCaveLevelControllerEffect(ISquareCaveLevelControllerEffec
      
 public void visitRavashrikeLevelControllerEffect(IRavashrikeLevelControllerEffect effect) { effect.visitIRavashrikeLevelControllerEffect(this); }
   public void visitRavashrikeLevelControllerCreateEffect(RavashrikeLevelControllerCreateEffect effect) {
-    var instance = root.EffectRavashrikeLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectRavashrikeLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitRavashrikeLevelControllerDeleteEffect(RavashrikeLevelControllerDeleteEffect effect) {
@@ -1991,14 +1807,12 @@ public void visitRavashrikeLevelControllerEffect(IRavashrikeLevelControllerEffec
      
 public void visitPentagonalCaveLevelControllerEffect(IPentagonalCaveLevelControllerEffect effect) { effect.visitIPentagonalCaveLevelControllerEffect(this); }
   public void visitPentagonalCaveLevelControllerCreateEffect(PentagonalCaveLevelControllerCreateEffect effect) {
-    var instance = root.EffectPentagonalCaveLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level),
-  effect.incarnation.depth    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectPentagonalCaveLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)
+,  effect.incarnation.depth    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitPentagonalCaveLevelControllerDeleteEffect(PentagonalCaveLevelControllerDeleteEffect effect) {
@@ -2008,13 +1822,11 @@ public void visitPentagonalCaveLevelControllerEffect(IPentagonalCaveLevelControl
      
 public void visitIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTTCEffect effect) { effect.visitIIncendianFallsLevelLinkerTTCEffect(this); }
   public void visitIncendianFallsLevelLinkerTTCCreateEffect(IncendianFallsLevelLinkerTTCCreateEffect effect) {
-    var instance = root.EffectIncendianFallsLevelLinkerTTCCreate(
-  effect.incarnation.thisLevelDepth    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectIncendianFallsLevelLinkerTTCCreateWithId(effect.id
+,  effect.incarnation.thisLevelDepth    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitIncendianFallsLevelLinkerTTCDeleteEffect(IncendianFallsLevelLinkerTTCDeleteEffect effect) {
@@ -2024,14 +1836,12 @@ public void visitIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTT
      
 public void visitCliffLevelControllerEffect(ICliffLevelControllerEffect effect) { effect.visitICliffLevelControllerEffect(this); }
   public void visitCliffLevelControllerCreateEffect(CliffLevelControllerCreateEffect effect) {
-    var instance = root.EffectCliffLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level),
-  effect.incarnation.depth    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectCliffLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)
+,  effect.incarnation.depth    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitCliffLevelControllerDeleteEffect(CliffLevelControllerDeleteEffect effect) {
@@ -2041,13 +1851,11 @@ public void visitCliffLevelControllerEffect(ICliffLevelControllerEffect effect) 
      
 public void visitPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEffect effect) { effect.visitIPreGauntletLevelControllerEffect(this); }
   public void visitPreGauntletLevelControllerCreateEffect(PreGauntletLevelControllerCreateEffect effect) {
-    var instance = root.EffectPreGauntletLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectPreGauntletLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitPreGauntletLevelControllerDeleteEffect(PreGauntletLevelControllerDeleteEffect effect) {
@@ -2057,13 +1865,11 @@ public void visitPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEff
      
 public void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect effect) { effect.visitIGauntletLevelControllerEffect(this); }
   public void visitGauntletLevelControllerCreateEffect(GauntletLevelControllerCreateEffect effect) {
-    var instance = root.EffectGauntletLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectGauntletLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitGauntletLevelControllerDeleteEffect(GauntletLevelControllerDeleteEffect effect) {
@@ -2073,15 +1879,13 @@ public void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect ef
      
 public void visitCommEffect(ICommEffect effect) { effect.visitICommEffect(this); }
   public void visitCommCreateEffect(CommCreateEffect effect) {
-    var instance = root.EffectCommCreate(
-  effect.incarnation.template,
-  effect.incarnation.actions,
-  effect.incarnation.texts    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectCommCreateWithId(effect.id
+,  effect.incarnation.template
+,  effect.incarnation.actions
+,  effect.incarnation.texts    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitCommDeleteEffect(CommDeleteEffect effect) {
@@ -2091,25 +1895,23 @@ public void visitCommEffect(ICommEffect effect) { effect.visitICommEffect(this);
      
 public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this); }
   public void visitGameCreateEffect(GameCreateEffect effect) {
-    var instance = root.EffectGameCreate(
-  root.GetRand(effect.incarnation.rand),
-  effect.incarnation.squareLevelsOnly,
-  root.GetLevelMutSet(effect.incarnation.levels),
-  root.GetUnitOrNull(effect.incarnation.player),
-  root.GetLevelOrNull(effect.incarnation.level),
-  effect.incarnation.time,
-  root.GetUnitOrNull(effect.incarnation.actingUnit),
-  effect.incarnation.pauseBeforeNextUnit,
-  effect.incarnation.actionNum,
-  effect.incarnation.instructions,
-  effect.incarnation.hideInput,
-  effect.incarnation.evvent,
-  root.GetCommMutList(effect.incarnation.comms)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectGameCreateWithId(effect.id
+,  root.GetRand(effect.incarnation.rand)
+,  effect.incarnation.squareLevelsOnly
+,  root.GetLevelMutSet(effect.incarnation.levels)
+,  root.GetUnitOrNull(effect.incarnation.player)
+,  root.GetLevelOrNull(effect.incarnation.level)
+,  effect.incarnation.time
+,  root.GetUnitOrNull(effect.incarnation.actingUnit)
+,  effect.incarnation.pauseBeforeNextUnit
+,  effect.incarnation.actionNum
+,  effect.incarnation.instructions
+,  effect.incarnation.hideInput
+,  effect.incarnation.evvent
+,  root.GetCommMutList(effect.incarnation.comms)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitGameDeleteEffect(GameDeleteEffect effect) {
@@ -2182,13 +1984,11 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
 
 public void visitVolcaetusLevelControllerEffect(IVolcaetusLevelControllerEffect effect) { effect.visitIVolcaetusLevelControllerEffect(this); }
   public void visitVolcaetusLevelControllerCreateEffect(VolcaetusLevelControllerCreateEffect effect) {
-    var instance = root.EffectVolcaetusLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectVolcaetusLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitVolcaetusLevelControllerDeleteEffect(VolcaetusLevelControllerDeleteEffect effect) {
@@ -2198,13 +1998,11 @@ public void visitVolcaetusLevelControllerEffect(IVolcaetusLevelControllerEffect 
      
 public void visitTutorial2LevelControllerEffect(ITutorial2LevelControllerEffect effect) { effect.visitITutorial2LevelControllerEffect(this); }
   public void visitTutorial2LevelControllerCreateEffect(Tutorial2LevelControllerCreateEffect effect) {
-    var instance = root.EffectTutorial2LevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectTutorial2LevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitTutorial2LevelControllerDeleteEffect(Tutorial2LevelControllerDeleteEffect effect) {
@@ -2214,13 +2012,11 @@ public void visitTutorial2LevelControllerEffect(ITutorial2LevelControllerEffect 
      
 public void visitTutorial1LevelControllerEffect(ITutorial1LevelControllerEffect effect) { effect.visitITutorial1LevelControllerEffect(this); }
   public void visitTutorial1LevelControllerCreateEffect(Tutorial1LevelControllerCreateEffect effect) {
-    var instance = root.EffectTutorial1LevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectTutorial1LevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitTutorial1LevelControllerDeleteEffect(Tutorial1LevelControllerDeleteEffect effect) {
@@ -2230,13 +2026,11 @@ public void visitTutorial1LevelControllerEffect(ITutorial1LevelControllerEffect 
      
 public void visitRetreatLevelControllerEffect(IRetreatLevelControllerEffect effect) { effect.visitIRetreatLevelControllerEffect(this); }
   public void visitRetreatLevelControllerCreateEffect(RetreatLevelControllerCreateEffect effect) {
-    var instance = root.EffectRetreatLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectRetreatLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitRetreatLevelControllerDeleteEffect(RetreatLevelControllerDeleteEffect effect) {
@@ -2246,13 +2040,11 @@ public void visitRetreatLevelControllerEffect(IRetreatLevelControllerEffect effe
      
 public void visitSotaventoLevelControllerEffect(ISotaventoLevelControllerEffect effect) { effect.visitISotaventoLevelControllerEffect(this); }
   public void visitSotaventoLevelControllerCreateEffect(SotaventoLevelControllerCreateEffect effect) {
-    var instance = root.EffectSotaventoLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectSotaventoLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitSotaventoLevelControllerDeleteEffect(SotaventoLevelControllerDeleteEffect effect) {
@@ -2262,13 +2054,11 @@ public void visitSotaventoLevelControllerEffect(ISotaventoLevelControllerEffect 
      
 public void visitNestLevelControllerEffect(INestLevelControllerEffect effect) { effect.visitINestLevelControllerEffect(this); }
   public void visitNestLevelControllerCreateEffect(NestLevelControllerCreateEffect effect) {
-    var instance = root.EffectNestLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectNestLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitNestLevelControllerDeleteEffect(NestLevelControllerDeleteEffect effect) {
@@ -2278,13 +2068,11 @@ public void visitNestLevelControllerEffect(INestLevelControllerEffect effect) { 
      
 public void visitLakeLevelControllerEffect(ILakeLevelControllerEffect effect) { effect.visitILakeLevelControllerEffect(this); }
   public void visitLakeLevelControllerCreateEffect(LakeLevelControllerCreateEffect effect) {
-    var instance = root.EffectLakeLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectLakeLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitLakeLevelControllerDeleteEffect(LakeLevelControllerDeleteEffect effect) {
@@ -2294,13 +2082,11 @@ public void visitLakeLevelControllerEffect(ILakeLevelControllerEffect effect) { 
      
 public void visitEmberDeepLevelLinkerTTCEffect(IEmberDeepLevelLinkerTTCEffect effect) { effect.visitIEmberDeepLevelLinkerTTCEffect(this); }
   public void visitEmberDeepLevelLinkerTTCCreateEffect(EmberDeepLevelLinkerTTCCreateEffect effect) {
-    var instance = root.EffectEmberDeepLevelLinkerTTCCreate(
-  effect.incarnation.nextLevelDepth    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectEmberDeepLevelLinkerTTCCreateWithId(effect.id
+,  effect.incarnation.nextLevelDepth    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitEmberDeepLevelLinkerTTCDeleteEffect(EmberDeepLevelLinkerTTCDeleteEffect effect) {
@@ -2310,13 +2096,11 @@ public void visitEmberDeepLevelLinkerTTCEffect(IEmberDeepLevelLinkerTTCEffect ef
      
 public void visitDirtRoadLevelControllerEffect(IDirtRoadLevelControllerEffect effect) { effect.visitIDirtRoadLevelControllerEffect(this); }
   public void visitDirtRoadLevelControllerCreateEffect(DirtRoadLevelControllerCreateEffect effect) {
-    var instance = root.EffectDirtRoadLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectDirtRoadLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitDirtRoadLevelControllerDeleteEffect(DirtRoadLevelControllerDeleteEffect effect) {
@@ -2326,14 +2110,12 @@ public void visitDirtRoadLevelControllerEffect(IDirtRoadLevelControllerEffect ef
      
 public void visitCaveLevelControllerEffect(ICaveLevelControllerEffect effect) { effect.visitICaveLevelControllerEffect(this); }
   public void visitCaveLevelControllerCreateEffect(CaveLevelControllerCreateEffect effect) {
-    var instance = root.EffectCaveLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level),
-  effect.incarnation.depth    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectCaveLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)
+,  effect.incarnation.depth    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitCaveLevelControllerDeleteEffect(CaveLevelControllerDeleteEffect effect) {
@@ -2343,13 +2125,11 @@ public void visitCaveLevelControllerEffect(ICaveLevelControllerEffect effect) { 
      
 public void visitBridgesLevelControllerEffect(IBridgesLevelControllerEffect effect) { effect.visitIBridgesLevelControllerEffect(this); }
   public void visitBridgesLevelControllerCreateEffect(BridgesLevelControllerCreateEffect effect) {
-    var instance = root.EffectBridgesLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectBridgesLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitBridgesLevelControllerDeleteEffect(BridgesLevelControllerDeleteEffect effect) {
@@ -2359,13 +2139,11 @@ public void visitBridgesLevelControllerEffect(IBridgesLevelControllerEffect effe
      
 public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEffect effect) { effect.visitIAncientTownLevelControllerEffect(this); }
   public void visitAncientTownLevelControllerCreateEffect(AncientTownLevelControllerCreateEffect effect) {
-    var instance = root.EffectAncientTownLevelControllerCreate(
-  root.GetLevel(effect.incarnation.level)    );
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.EffectAncientTownLevelControllerCreateWithId(effect.id
+,  root.GetLevel(effect.incarnation.level)    );
 
-  // If this fails, then we have to add a translation layer.
-  // We shouldn't allow the user to specify the internal ID, because that's
-  // core to a bunch of optimizations (such as how it's a generational index).
-  Asserts.Assert(instance.id == effect.id, "New ID mismatch!");
 }
 
   public void visitAncientTownLevelControllerDeleteEffect(AncientTownLevelControllerDeleteEffect effect) {
@@ -2375,11 +2153,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
      
     public void visitCommMutListEffect(ICommMutListEffect effect) { effect.visitICommMutListEffect(this); }
     public void visitCommMutListCreateEffect(CommMutListCreateEffect effect) {
-      var list = root.EffectCommMutListCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectCommMutListCreateWithId(effect.id);
     }
     public void visitCommMutListDeleteEffect(CommMutListDeleteEffect effect) {
       root.EffectCommMutListDelete(effect.id);
@@ -2394,11 +2170,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitLocationMutListEffect(ILocationMutListEffect effect) { effect.visitILocationMutListEffect(this); }
     public void visitLocationMutListCreateEffect(LocationMutListCreateEffect effect) {
-      var list = root.EffectLocationMutListCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectLocationMutListCreateWithId(effect.id);
     }
     public void visitLocationMutListDeleteEffect(LocationMutListDeleteEffect effect) {
       root.EffectLocationMutListDelete(effect.id);
@@ -2413,11 +2187,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitIRequestMutListEffect(IIRequestMutListEffect effect) { effect.visitIIRequestMutListEffect(this); }
     public void visitIRequestMutListCreateEffect(IRequestMutListCreateEffect effect) {
-      var list = root.EffectIRequestMutListCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectIRequestMutListCreateWithId(effect.id);
     }
     public void visitIRequestMutListDeleteEffect(IRequestMutListDeleteEffect effect) {
       root.EffectIRequestMutListDelete(effect.id);
@@ -2432,11 +2204,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitLevelMutSetEffect(ILevelMutSetEffect effect) { effect.visitILevelMutSetEffect(this); }
     public void visitLevelMutSetCreateEffect(LevelMutSetCreateEffect effect) {
-      var list = root.EffectLevelMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectLevelMutSetCreateWithId(effect.id);
     }
     public void visitLevelMutSetDeleteEffect(LevelMutSetDeleteEffect effect) {
       root.EffectLevelMutSetDelete(effect.id);
@@ -2451,11 +2221,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitManaPotionStrongMutSetEffect(IManaPotionStrongMutSetEffect effect) { effect.visitIManaPotionStrongMutSetEffect(this); }
     public void visitManaPotionStrongMutSetCreateEffect(ManaPotionStrongMutSetCreateEffect effect) {
-      var list = root.EffectManaPotionStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectManaPotionStrongMutSetCreateWithId(effect.id);
     }
     public void visitManaPotionStrongMutSetDeleteEffect(ManaPotionStrongMutSetDeleteEffect effect) {
       root.EffectManaPotionStrongMutSetDelete(effect.id);
@@ -2470,11 +2238,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitHealthPotionStrongMutSetEffect(IHealthPotionStrongMutSetEffect effect) { effect.visitIHealthPotionStrongMutSetEffect(this); }
     public void visitHealthPotionStrongMutSetCreateEffect(HealthPotionStrongMutSetCreateEffect effect) {
-      var list = root.EffectHealthPotionStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectHealthPotionStrongMutSetCreateWithId(effect.id);
     }
     public void visitHealthPotionStrongMutSetDeleteEffect(HealthPotionStrongMutSetDeleteEffect effect) {
       root.EffectHealthPotionStrongMutSetDelete(effect.id);
@@ -2489,11 +2255,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitSpeedRingStrongMutSetEffect(ISpeedRingStrongMutSetEffect effect) { effect.visitISpeedRingStrongMutSetEffect(this); }
     public void visitSpeedRingStrongMutSetCreateEffect(SpeedRingStrongMutSetCreateEffect effect) {
-      var list = root.EffectSpeedRingStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectSpeedRingStrongMutSetCreateWithId(effect.id);
     }
     public void visitSpeedRingStrongMutSetDeleteEffect(SpeedRingStrongMutSetDeleteEffect effect) {
       root.EffectSpeedRingStrongMutSetDelete(effect.id);
@@ -2508,11 +2272,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitGlaiveStrongMutSetEffect(IGlaiveStrongMutSetEffect effect) { effect.visitIGlaiveStrongMutSetEffect(this); }
     public void visitGlaiveStrongMutSetCreateEffect(GlaiveStrongMutSetCreateEffect effect) {
-      var list = root.EffectGlaiveStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectGlaiveStrongMutSetCreateWithId(effect.id);
     }
     public void visitGlaiveStrongMutSetDeleteEffect(GlaiveStrongMutSetDeleteEffect effect) {
       root.EffectGlaiveStrongMutSetDelete(effect.id);
@@ -2527,11 +2289,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitSlowRodStrongMutSetEffect(ISlowRodStrongMutSetEffect effect) { effect.visitISlowRodStrongMutSetEffect(this); }
     public void visitSlowRodStrongMutSetCreateEffect(SlowRodStrongMutSetCreateEffect effect) {
-      var list = root.EffectSlowRodStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectSlowRodStrongMutSetCreateWithId(effect.id);
     }
     public void visitSlowRodStrongMutSetDeleteEffect(SlowRodStrongMutSetDeleteEffect effect) {
       root.EffectSlowRodStrongMutSetDelete(effect.id);
@@ -2546,11 +2306,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitBlastRodStrongMutSetEffect(IBlastRodStrongMutSetEffect effect) { effect.visitIBlastRodStrongMutSetEffect(this); }
     public void visitBlastRodStrongMutSetCreateEffect(BlastRodStrongMutSetCreateEffect effect) {
-      var list = root.EffectBlastRodStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectBlastRodStrongMutSetCreateWithId(effect.id);
     }
     public void visitBlastRodStrongMutSetDeleteEffect(BlastRodStrongMutSetDeleteEffect effect) {
       root.EffectBlastRodStrongMutSetDelete(effect.id);
@@ -2565,11 +2323,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitArmorStrongMutSetEffect(IArmorStrongMutSetEffect effect) { effect.visitIArmorStrongMutSetEffect(this); }
     public void visitArmorStrongMutSetCreateEffect(ArmorStrongMutSetCreateEffect effect) {
-      var list = root.EffectArmorStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectArmorStrongMutSetCreateWithId(effect.id);
     }
     public void visitArmorStrongMutSetDeleteEffect(ArmorStrongMutSetDeleteEffect effect) {
       root.EffectArmorStrongMutSetDelete(effect.id);
@@ -2584,11 +2340,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitHoldPositionImpulseStrongMutSetEffect(IHoldPositionImpulseStrongMutSetEffect effect) { effect.visitIHoldPositionImpulseStrongMutSetEffect(this); }
     public void visitHoldPositionImpulseStrongMutSetCreateEffect(HoldPositionImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectHoldPositionImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectHoldPositionImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitHoldPositionImpulseStrongMutSetDeleteEffect(HoldPositionImpulseStrongMutSetDeleteEffect effect) {
       root.EffectHoldPositionImpulseStrongMutSetDelete(effect.id);
@@ -2603,11 +2357,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitTemporaryCloneImpulseStrongMutSetEffect(ITemporaryCloneImpulseStrongMutSetEffect effect) { effect.visitITemporaryCloneImpulseStrongMutSetEffect(this); }
     public void visitTemporaryCloneImpulseStrongMutSetCreateEffect(TemporaryCloneImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectTemporaryCloneImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectTemporaryCloneImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitTemporaryCloneImpulseStrongMutSetDeleteEffect(TemporaryCloneImpulseStrongMutSetDeleteEffect effect) {
       root.EffectTemporaryCloneImpulseStrongMutSetDelete(effect.id);
@@ -2622,11 +2374,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitSummonImpulseStrongMutSetEffect(ISummonImpulseStrongMutSetEffect effect) { effect.visitISummonImpulseStrongMutSetEffect(this); }
     public void visitSummonImpulseStrongMutSetCreateEffect(SummonImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectSummonImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectSummonImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitSummonImpulseStrongMutSetDeleteEffect(SummonImpulseStrongMutSetDeleteEffect effect) {
       root.EffectSummonImpulseStrongMutSetDelete(effect.id);
@@ -2641,11 +2391,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitMireImpulseStrongMutSetEffect(IMireImpulseStrongMutSetEffect effect) { effect.visitIMireImpulseStrongMutSetEffect(this); }
     public void visitMireImpulseStrongMutSetCreateEffect(MireImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectMireImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectMireImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitMireImpulseStrongMutSetDeleteEffect(MireImpulseStrongMutSetDeleteEffect effect) {
       root.EffectMireImpulseStrongMutSetDelete(effect.id);
@@ -2660,11 +2408,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitEvaporateImpulseStrongMutSetEffect(IEvaporateImpulseStrongMutSetEffect effect) { effect.visitIEvaporateImpulseStrongMutSetEffect(this); }
     public void visitEvaporateImpulseStrongMutSetCreateEffect(EvaporateImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectEvaporateImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectEvaporateImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitEvaporateImpulseStrongMutSetDeleteEffect(EvaporateImpulseStrongMutSetDeleteEffect effect) {
       root.EffectEvaporateImpulseStrongMutSetDelete(effect.id);
@@ -2679,11 +2425,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitMoveImpulseStrongMutSetEffect(IMoveImpulseStrongMutSetEffect effect) { effect.visitIMoveImpulseStrongMutSetEffect(this); }
     public void visitMoveImpulseStrongMutSetCreateEffect(MoveImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectMoveImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectMoveImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitMoveImpulseStrongMutSetDeleteEffect(MoveImpulseStrongMutSetDeleteEffect effect) {
       root.EffectMoveImpulseStrongMutSetDelete(effect.id);
@@ -2698,11 +2442,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitKamikazeJumpImpulseStrongMutSetEffect(IKamikazeJumpImpulseStrongMutSetEffect effect) { effect.visitIKamikazeJumpImpulseStrongMutSetEffect(this); }
     public void visitKamikazeJumpImpulseStrongMutSetCreateEffect(KamikazeJumpImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectKamikazeJumpImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectKamikazeJumpImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitKamikazeJumpImpulseStrongMutSetDeleteEffect(KamikazeJumpImpulseStrongMutSetDeleteEffect effect) {
       root.EffectKamikazeJumpImpulseStrongMutSetDelete(effect.id);
@@ -2717,11 +2459,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitKamikazeTargetImpulseStrongMutSetEffect(IKamikazeTargetImpulseStrongMutSetEffect effect) { effect.visitIKamikazeTargetImpulseStrongMutSetEffect(this); }
     public void visitKamikazeTargetImpulseStrongMutSetCreateEffect(KamikazeTargetImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectKamikazeTargetImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectKamikazeTargetImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitKamikazeTargetImpulseStrongMutSetDeleteEffect(KamikazeTargetImpulseStrongMutSetDeleteEffect effect) {
       root.EffectKamikazeTargetImpulseStrongMutSetDelete(effect.id);
@@ -2736,11 +2476,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitNoImpulseStrongMutSetEffect(INoImpulseStrongMutSetEffect effect) { effect.visitINoImpulseStrongMutSetEffect(this); }
     public void visitNoImpulseStrongMutSetCreateEffect(NoImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectNoImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectNoImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitNoImpulseStrongMutSetDeleteEffect(NoImpulseStrongMutSetDeleteEffect effect) {
       root.EffectNoImpulseStrongMutSetDelete(effect.id);
@@ -2755,11 +2493,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitFireImpulseStrongMutSetEffect(IFireImpulseStrongMutSetEffect effect) { effect.visitIFireImpulseStrongMutSetEffect(this); }
     public void visitFireImpulseStrongMutSetCreateEffect(FireImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectFireImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectFireImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitFireImpulseStrongMutSetDeleteEffect(FireImpulseStrongMutSetDeleteEffect effect) {
       root.EffectFireImpulseStrongMutSetDelete(effect.id);
@@ -2774,11 +2510,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitDefyImpulseStrongMutSetEffect(IDefyImpulseStrongMutSetEffect effect) { effect.visitIDefyImpulseStrongMutSetEffect(this); }
     public void visitDefyImpulseStrongMutSetCreateEffect(DefyImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectDefyImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectDefyImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitDefyImpulseStrongMutSetDeleteEffect(DefyImpulseStrongMutSetDeleteEffect effect) {
       root.EffectDefyImpulseStrongMutSetDelete(effect.id);
@@ -2793,11 +2527,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitCounterImpulseStrongMutSetEffect(ICounterImpulseStrongMutSetEffect effect) { effect.visitICounterImpulseStrongMutSetEffect(this); }
     public void visitCounterImpulseStrongMutSetCreateEffect(CounterImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectCounterImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectCounterImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitCounterImpulseStrongMutSetDeleteEffect(CounterImpulseStrongMutSetDeleteEffect effect) {
       root.EffectCounterImpulseStrongMutSetDelete(effect.id);
@@ -2812,11 +2544,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitUnleashBideImpulseStrongMutSetEffect(IUnleashBideImpulseStrongMutSetEffect effect) { effect.visitIUnleashBideImpulseStrongMutSetEffect(this); }
     public void visitUnleashBideImpulseStrongMutSetCreateEffect(UnleashBideImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectUnleashBideImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectUnleashBideImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitUnleashBideImpulseStrongMutSetDeleteEffect(UnleashBideImpulseStrongMutSetDeleteEffect effect) {
       root.EffectUnleashBideImpulseStrongMutSetDelete(effect.id);
@@ -2831,11 +2561,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitContinueBidingImpulseStrongMutSetEffect(IContinueBidingImpulseStrongMutSetEffect effect) { effect.visitIContinueBidingImpulseStrongMutSetEffect(this); }
     public void visitContinueBidingImpulseStrongMutSetCreateEffect(ContinueBidingImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectContinueBidingImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectContinueBidingImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitContinueBidingImpulseStrongMutSetDeleteEffect(ContinueBidingImpulseStrongMutSetDeleteEffect effect) {
       root.EffectContinueBidingImpulseStrongMutSetDelete(effect.id);
@@ -2850,11 +2578,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitStartBidingImpulseStrongMutSetEffect(IStartBidingImpulseStrongMutSetEffect effect) { effect.visitIStartBidingImpulseStrongMutSetEffect(this); }
     public void visitStartBidingImpulseStrongMutSetCreateEffect(StartBidingImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectStartBidingImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectStartBidingImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitStartBidingImpulseStrongMutSetDeleteEffect(StartBidingImpulseStrongMutSetDeleteEffect effect) {
       root.EffectStartBidingImpulseStrongMutSetDelete(effect.id);
@@ -2869,11 +2595,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitAttackImpulseStrongMutSetEffect(IAttackImpulseStrongMutSetEffect effect) { effect.visitIAttackImpulseStrongMutSetEffect(this); }
     public void visitAttackImpulseStrongMutSetCreateEffect(AttackImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectAttackImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectAttackImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitAttackImpulseStrongMutSetDeleteEffect(AttackImpulseStrongMutSetDeleteEffect effect) {
       root.EffectAttackImpulseStrongMutSetDelete(effect.id);
@@ -2888,11 +2612,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitPursueImpulseStrongMutSetEffect(IPursueImpulseStrongMutSetEffect effect) { effect.visitIPursueImpulseStrongMutSetEffect(this); }
     public void visitPursueImpulseStrongMutSetCreateEffect(PursueImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectPursueImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectPursueImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitPursueImpulseStrongMutSetDeleteEffect(PursueImpulseStrongMutSetDeleteEffect effect) {
       root.EffectPursueImpulseStrongMutSetDelete(effect.id);
@@ -2907,11 +2629,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitFireBombImpulseStrongMutSetEffect(IFireBombImpulseStrongMutSetEffect effect) { effect.visitIFireBombImpulseStrongMutSetEffect(this); }
     public void visitFireBombImpulseStrongMutSetCreateEffect(FireBombImpulseStrongMutSetCreateEffect effect) {
-      var list = root.EffectFireBombImpulseStrongMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectFireBombImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitFireBombImpulseStrongMutSetDeleteEffect(FireBombImpulseStrongMutSetDeleteEffect effect) {
       root.EffectFireBombImpulseStrongMutSetDelete(effect.id);
@@ -2926,11 +2646,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitLightningChargedUCWeakMutSetEffect(ILightningChargedUCWeakMutSetEffect effect) { effect.visitILightningChargedUCWeakMutSetEffect(this); }
     public void visitLightningChargedUCWeakMutSetCreateEffect(LightningChargedUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectLightningChargedUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectLightningChargedUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitLightningChargedUCWeakMutSetDeleteEffect(LightningChargedUCWeakMutSetDeleteEffect effect) {
       root.EffectLightningChargedUCWeakMutSetDelete(effect.id);
@@ -2945,11 +2663,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitTimeCloneAICapabilityUCWeakMutSetEffect(ITimeCloneAICapabilityUCWeakMutSetEffect effect) { effect.visitITimeCloneAICapabilityUCWeakMutSetEffect(this); }
     public void visitTimeCloneAICapabilityUCWeakMutSetCreateEffect(TimeCloneAICapabilityUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectTimeCloneAICapabilityUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectTimeCloneAICapabilityUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitTimeCloneAICapabilityUCWeakMutSetDeleteEffect(TimeCloneAICapabilityUCWeakMutSetDeleteEffect effect) {
       root.EffectTimeCloneAICapabilityUCWeakMutSetDelete(effect.id);
@@ -2964,11 +2680,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitDoomedUCWeakMutSetEffect(IDoomedUCWeakMutSetEffect effect) { effect.visitIDoomedUCWeakMutSetEffect(this); }
     public void visitDoomedUCWeakMutSetCreateEffect(DoomedUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectDoomedUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectDoomedUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitDoomedUCWeakMutSetDeleteEffect(DoomedUCWeakMutSetDeleteEffect effect) {
       root.EffectDoomedUCWeakMutSetDelete(effect.id);
@@ -2983,11 +2697,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitMiredUCWeakMutSetEffect(IMiredUCWeakMutSetEffect effect) { effect.visitIMiredUCWeakMutSetEffect(this); }
     public void visitMiredUCWeakMutSetCreateEffect(MiredUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectMiredUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectMiredUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitMiredUCWeakMutSetDeleteEffect(MiredUCWeakMutSetDeleteEffect effect) {
       root.EffectMiredUCWeakMutSetDelete(effect.id);
@@ -3002,11 +2714,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitInvincibilityUCWeakMutSetEffect(IInvincibilityUCWeakMutSetEffect effect) { effect.visitIInvincibilityUCWeakMutSetEffect(this); }
     public void visitInvincibilityUCWeakMutSetCreateEffect(InvincibilityUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectInvincibilityUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectInvincibilityUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitInvincibilityUCWeakMutSetDeleteEffect(InvincibilityUCWeakMutSetDeleteEffect effect) {
       root.EffectInvincibilityUCWeakMutSetDelete(effect.id);
@@ -3021,11 +2731,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitDefyingUCWeakMutSetEffect(IDefyingUCWeakMutSetEffect effect) { effect.visitIDefyingUCWeakMutSetEffect(this); }
     public void visitDefyingUCWeakMutSetCreateEffect(DefyingUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectDefyingUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectDefyingUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitDefyingUCWeakMutSetDeleteEffect(DefyingUCWeakMutSetDeleteEffect effect) {
       root.EffectDefyingUCWeakMutSetDelete(effect.id);
@@ -3040,11 +2748,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitCounteringUCWeakMutSetEffect(ICounteringUCWeakMutSetEffect effect) { effect.visitICounteringUCWeakMutSetEffect(this); }
     public void visitCounteringUCWeakMutSetCreateEffect(CounteringUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectCounteringUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectCounteringUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitCounteringUCWeakMutSetDeleteEffect(CounteringUCWeakMutSetDeleteEffect effect) {
       root.EffectCounteringUCWeakMutSetDelete(effect.id);
@@ -3059,11 +2765,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitAttackAICapabilityUCWeakMutSetEffect(IAttackAICapabilityUCWeakMutSetEffect effect) { effect.visitIAttackAICapabilityUCWeakMutSetEffect(this); }
     public void visitAttackAICapabilityUCWeakMutSetCreateEffect(AttackAICapabilityUCWeakMutSetCreateEffect effect) {
-      var list = root.EffectAttackAICapabilityUCWeakMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectAttackAICapabilityUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitAttackAICapabilityUCWeakMutSetDeleteEffect(AttackAICapabilityUCWeakMutSetDeleteEffect effect) {
       root.EffectAttackAICapabilityUCWeakMutSetDelete(effect.id);
@@ -3078,11 +2782,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitUnitMutSetEffect(IUnitMutSetEffect effect) { effect.visitIUnitMutSetEffect(this); }
     public void visitUnitMutSetCreateEffect(UnitMutSetCreateEffect effect) {
-      var list = root.EffectUnitMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectUnitMutSetCreateWithId(effect.id);
     }
     public void visitUnitMutSetDeleteEffect(UnitMutSetDeleteEffect effect) {
       root.EffectUnitMutSetDelete(effect.id);
@@ -3097,11 +2799,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitSimplePresenceTriggerTTCMutSetEffect(ISimplePresenceTriggerTTCMutSetEffect effect) { effect.visitISimplePresenceTriggerTTCMutSetEffect(this); }
     public void visitSimplePresenceTriggerTTCMutSetCreateEffect(SimplePresenceTriggerTTCMutSetCreateEffect effect) {
-      var list = root.EffectSimplePresenceTriggerTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectSimplePresenceTriggerTTCMutSetCreateWithId(effect.id);
     }
     public void visitSimplePresenceTriggerTTCMutSetDeleteEffect(SimplePresenceTriggerTTCMutSetDeleteEffect effect) {
       root.EffectSimplePresenceTriggerTTCMutSetDelete(effect.id);
@@ -3116,11 +2816,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitItemTTCMutSetEffect(IItemTTCMutSetEffect effect) { effect.visitIItemTTCMutSetEffect(this); }
     public void visitItemTTCMutSetCreateEffect(ItemTTCMutSetCreateEffect effect) {
-      var list = root.EffectItemTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectItemTTCMutSetCreateWithId(effect.id);
     }
     public void visitItemTTCMutSetDeleteEffect(ItemTTCMutSetDeleteEffect effect) {
       root.EffectItemTTCMutSetDelete(effect.id);
@@ -3135,11 +2833,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitKamikazeTargetTTCMutSetEffect(IKamikazeTargetTTCMutSetEffect effect) { effect.visitIKamikazeTargetTTCMutSetEffect(this); }
     public void visitKamikazeTargetTTCMutSetCreateEffect(KamikazeTargetTTCMutSetCreateEffect effect) {
-      var list = root.EffectKamikazeTargetTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectKamikazeTargetTTCMutSetCreateWithId(effect.id);
     }
     public void visitKamikazeTargetTTCMutSetDeleteEffect(KamikazeTargetTTCMutSetDeleteEffect effect) {
       root.EffectKamikazeTargetTTCMutSetDelete(effect.id);
@@ -3154,11 +2850,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitWarperTTCMutSetEffect(IWarperTTCMutSetEffect effect) { effect.visitIWarperTTCMutSetEffect(this); }
     public void visitWarperTTCMutSetCreateEffect(WarperTTCMutSetCreateEffect effect) {
-      var list = root.EffectWarperTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectWarperTTCMutSetCreateWithId(effect.id);
     }
     public void visitWarperTTCMutSetDeleteEffect(WarperTTCMutSetDeleteEffect effect) {
       root.EffectWarperTTCMutSetDelete(effect.id);
@@ -3173,11 +2867,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitTimeAnchorTTCMutSetEffect(ITimeAnchorTTCMutSetEffect effect) { effect.visitITimeAnchorTTCMutSetEffect(this); }
     public void visitTimeAnchorTTCMutSetCreateEffect(TimeAnchorTTCMutSetCreateEffect effect) {
-      var list = root.EffectTimeAnchorTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectTimeAnchorTTCMutSetCreateWithId(effect.id);
     }
     public void visitTimeAnchorTTCMutSetDeleteEffect(TimeAnchorTTCMutSetDeleteEffect effect) {
       root.EffectTimeAnchorTTCMutSetDelete(effect.id);
@@ -3192,11 +2884,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitFireBombTTCMutSetEffect(IFireBombTTCMutSetEffect effect) { effect.visitIFireBombTTCMutSetEffect(this); }
     public void visitFireBombTTCMutSetCreateEffect(FireBombTTCMutSetCreateEffect effect) {
-      var list = root.EffectFireBombTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectFireBombTTCMutSetCreateWithId(effect.id);
     }
     public void visitFireBombTTCMutSetDeleteEffect(FireBombTTCMutSetDeleteEffect effect) {
       root.EffectFireBombTTCMutSetDelete(effect.id);
@@ -3211,11 +2901,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitMarkerTTCMutSetEffect(IMarkerTTCMutSetEffect effect) { effect.visitIMarkerTTCMutSetEffect(this); }
     public void visitMarkerTTCMutSetCreateEffect(MarkerTTCMutSetCreateEffect effect) {
-      var list = root.EffectMarkerTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectMarkerTTCMutSetCreateWithId(effect.id);
     }
     public void visitMarkerTTCMutSetDeleteEffect(MarkerTTCMutSetDeleteEffect effect) {
       root.EffectMarkerTTCMutSetDelete(effect.id);
@@ -3230,11 +2918,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitLevelLinkTTCMutSetEffect(ILevelLinkTTCMutSetEffect effect) { effect.visitILevelLinkTTCMutSetEffect(this); }
     public void visitLevelLinkTTCMutSetCreateEffect(LevelLinkTTCMutSetCreateEffect effect) {
-      var list = root.EffectLevelLinkTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectLevelLinkTTCMutSetCreateWithId(effect.id);
     }
     public void visitLevelLinkTTCMutSetDeleteEffect(LevelLinkTTCMutSetDeleteEffect effect) {
       root.EffectLevelLinkTTCMutSetDelete(effect.id);
@@ -3249,11 +2935,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitMudTTCMutSetEffect(IMudTTCMutSetEffect effect) { effect.visitIMudTTCMutSetEffect(this); }
     public void visitMudTTCMutSetCreateEffect(MudTTCMutSetCreateEffect effect) {
-      var list = root.EffectMudTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectMudTTCMutSetCreateWithId(effect.id);
     }
     public void visitMudTTCMutSetDeleteEffect(MudTTCMutSetDeleteEffect effect) {
       root.EffectMudTTCMutSetDelete(effect.id);
@@ -3268,11 +2952,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitDirtTTCMutSetEffect(IDirtTTCMutSetEffect effect) { effect.visitIDirtTTCMutSetEffect(this); }
     public void visitDirtTTCMutSetCreateEffect(DirtTTCMutSetCreateEffect effect) {
-      var list = root.EffectDirtTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectDirtTTCMutSetCreateWithId(effect.id);
     }
     public void visitDirtTTCMutSetDeleteEffect(DirtTTCMutSetDeleteEffect effect) {
       root.EffectDirtTTCMutSetDelete(effect.id);
@@ -3287,11 +2969,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitObsidianTTCMutSetEffect(IObsidianTTCMutSetEffect effect) { effect.visitIObsidianTTCMutSetEffect(this); }
     public void visitObsidianTTCMutSetCreateEffect(ObsidianTTCMutSetCreateEffect effect) {
-      var list = root.EffectObsidianTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectObsidianTTCMutSetCreateWithId(effect.id);
     }
     public void visitObsidianTTCMutSetDeleteEffect(ObsidianTTCMutSetDeleteEffect effect) {
       root.EffectObsidianTTCMutSetDelete(effect.id);
@@ -3306,11 +2986,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitDownStairsTTCMutSetEffect(IDownStairsTTCMutSetEffect effect) { effect.visitIDownStairsTTCMutSetEffect(this); }
     public void visitDownStairsTTCMutSetCreateEffect(DownStairsTTCMutSetCreateEffect effect) {
-      var list = root.EffectDownStairsTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectDownStairsTTCMutSetCreateWithId(effect.id);
     }
     public void visitDownStairsTTCMutSetDeleteEffect(DownStairsTTCMutSetDeleteEffect effect) {
       root.EffectDownStairsTTCMutSetDelete(effect.id);
@@ -3325,11 +3003,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitUpStairsTTCMutSetEffect(IUpStairsTTCMutSetEffect effect) { effect.visitIUpStairsTTCMutSetEffect(this); }
     public void visitUpStairsTTCMutSetCreateEffect(UpStairsTTCMutSetCreateEffect effect) {
-      var list = root.EffectUpStairsTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectUpStairsTTCMutSetCreateWithId(effect.id);
     }
     public void visitUpStairsTTCMutSetDeleteEffect(UpStairsTTCMutSetDeleteEffect effect) {
       root.EffectUpStairsTTCMutSetDelete(effect.id);
@@ -3344,11 +3020,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitWallTTCMutSetEffect(IWallTTCMutSetEffect effect) { effect.visitIWallTTCMutSetEffect(this); }
     public void visitWallTTCMutSetCreateEffect(WallTTCMutSetCreateEffect effect) {
-      var list = root.EffectWallTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectWallTTCMutSetCreateWithId(effect.id);
     }
     public void visitWallTTCMutSetDeleteEffect(WallTTCMutSetDeleteEffect effect) {
       root.EffectWallTTCMutSetDelete(effect.id);
@@ -3363,11 +3037,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitBloodTTCMutSetEffect(IBloodTTCMutSetEffect effect) { effect.visitIBloodTTCMutSetEffect(this); }
     public void visitBloodTTCMutSetCreateEffect(BloodTTCMutSetCreateEffect effect) {
-      var list = root.EffectBloodTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectBloodTTCMutSetCreateWithId(effect.id);
     }
     public void visitBloodTTCMutSetDeleteEffect(BloodTTCMutSetDeleteEffect effect) {
       root.EffectBloodTTCMutSetDelete(effect.id);
@@ -3382,11 +3054,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitRocksTTCMutSetEffect(IRocksTTCMutSetEffect effect) { effect.visitIRocksTTCMutSetEffect(this); }
     public void visitRocksTTCMutSetCreateEffect(RocksTTCMutSetCreateEffect effect) {
-      var list = root.EffectRocksTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectRocksTTCMutSetCreateWithId(effect.id);
     }
     public void visitRocksTTCMutSetDeleteEffect(RocksTTCMutSetDeleteEffect effect) {
       root.EffectRocksTTCMutSetDelete(effect.id);
@@ -3401,11 +3071,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitTreeTTCMutSetEffect(ITreeTTCMutSetEffect effect) { effect.visitITreeTTCMutSetEffect(this); }
     public void visitTreeTTCMutSetCreateEffect(TreeTTCMutSetCreateEffect effect) {
-      var list = root.EffectTreeTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectTreeTTCMutSetCreateWithId(effect.id);
     }
     public void visitTreeTTCMutSetDeleteEffect(TreeTTCMutSetDeleteEffect effect) {
       root.EffectTreeTTCMutSetDelete(effect.id);
@@ -3420,11 +3088,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitWaterTTCMutSetEffect(IWaterTTCMutSetEffect effect) { effect.visitIWaterTTCMutSetEffect(this); }
     public void visitWaterTTCMutSetCreateEffect(WaterTTCMutSetCreateEffect effect) {
-      var list = root.EffectWaterTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectWaterTTCMutSetCreateWithId(effect.id);
     }
     public void visitWaterTTCMutSetDeleteEffect(WaterTTCMutSetDeleteEffect effect) {
       root.EffectWaterTTCMutSetDelete(effect.id);
@@ -3439,11 +3105,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitFloorTTCMutSetEffect(IFloorTTCMutSetEffect effect) { effect.visitIFloorTTCMutSetEffect(this); }
     public void visitFloorTTCMutSetCreateEffect(FloorTTCMutSetCreateEffect effect) {
-      var list = root.EffectFloorTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectFloorTTCMutSetCreateWithId(effect.id);
     }
     public void visitFloorTTCMutSetDeleteEffect(FloorTTCMutSetDeleteEffect effect) {
       root.EffectFloorTTCMutSetDelete(effect.id);
@@ -3458,11 +3122,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitCaveWallTTCMutSetEffect(ICaveWallTTCMutSetEffect effect) { effect.visitICaveWallTTCMutSetEffect(this); }
     public void visitCaveWallTTCMutSetCreateEffect(CaveWallTTCMutSetCreateEffect effect) {
-      var list = root.EffectCaveWallTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectCaveWallTTCMutSetCreateWithId(effect.id);
     }
     public void visitCaveWallTTCMutSetDeleteEffect(CaveWallTTCMutSetDeleteEffect effect) {
       root.EffectCaveWallTTCMutSetDelete(effect.id);
@@ -3477,11 +3139,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitCaveTTCMutSetEffect(ICaveTTCMutSetEffect effect) { effect.visitICaveTTCMutSetEffect(this); }
     public void visitCaveTTCMutSetCreateEffect(CaveTTCMutSetCreateEffect effect) {
-      var list = root.EffectCaveTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectCaveTTCMutSetCreateWithId(effect.id);
     }
     public void visitCaveTTCMutSetDeleteEffect(CaveTTCMutSetDeleteEffect effect) {
       root.EffectCaveTTCMutSetDelete(effect.id);
@@ -3496,11 +3156,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitFallsTTCMutSetEffect(IFallsTTCMutSetEffect effect) { effect.visitIFallsTTCMutSetEffect(this); }
     public void visitFallsTTCMutSetCreateEffect(FallsTTCMutSetCreateEffect effect) {
-      var list = root.EffectFallsTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectFallsTTCMutSetCreateWithId(effect.id);
     }
     public void visitFallsTTCMutSetDeleteEffect(FallsTTCMutSetDeleteEffect effect) {
       root.EffectFallsTTCMutSetDelete(effect.id);
@@ -3515,11 +3173,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitFireTTCMutSetEffect(IFireTTCMutSetEffect effect) { effect.visitIFireTTCMutSetEffect(this); }
     public void visitFireTTCMutSetCreateEffect(FireTTCMutSetCreateEffect effect) {
-      var list = root.EffectFireTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectFireTTCMutSetCreateWithId(effect.id);
     }
     public void visitFireTTCMutSetDeleteEffect(FireTTCMutSetDeleteEffect effect) {
       root.EffectFireTTCMutSetDelete(effect.id);
@@ -3534,11 +3190,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitObsidianFloorTTCMutSetEffect(IObsidianFloorTTCMutSetEffect effect) { effect.visitIObsidianFloorTTCMutSetEffect(this); }
     public void visitObsidianFloorTTCMutSetCreateEffect(ObsidianFloorTTCMutSetCreateEffect effect) {
-      var list = root.EffectObsidianFloorTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectObsidianFloorTTCMutSetCreateWithId(effect.id);
     }
     public void visitObsidianFloorTTCMutSetDeleteEffect(ObsidianFloorTTCMutSetDeleteEffect effect) {
       root.EffectObsidianFloorTTCMutSetDelete(effect.id);
@@ -3553,11 +3207,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitMagmaTTCMutSetEffect(IMagmaTTCMutSetEffect effect) { effect.visitIMagmaTTCMutSetEffect(this); }
     public void visitMagmaTTCMutSetCreateEffect(MagmaTTCMutSetCreateEffect effect) {
-      var list = root.EffectMagmaTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectMagmaTTCMutSetCreateWithId(effect.id);
     }
     public void visitMagmaTTCMutSetDeleteEffect(MagmaTTCMutSetDeleteEffect effect) {
       root.EffectMagmaTTCMutSetDelete(effect.id);
@@ -3572,11 +3224,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitCliffTTCMutSetEffect(ICliffTTCMutSetEffect effect) { effect.visitICliffTTCMutSetEffect(this); }
     public void visitCliffTTCMutSetCreateEffect(CliffTTCMutSetCreateEffect effect) {
-      var list = root.EffectCliffTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectCliffTTCMutSetCreateWithId(effect.id);
     }
     public void visitCliffTTCMutSetDeleteEffect(CliffTTCMutSetDeleteEffect effect) {
       root.EffectCliffTTCMutSetDelete(effect.id);
@@ -3591,11 +3241,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitRavaNestTTCMutSetEffect(IRavaNestTTCMutSetEffect effect) { effect.visitIRavaNestTTCMutSetEffect(this); }
     public void visitRavaNestTTCMutSetCreateEffect(RavaNestTTCMutSetCreateEffect effect) {
-      var list = root.EffectRavaNestTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectRavaNestTTCMutSetCreateWithId(effect.id);
     }
     public void visitRavaNestTTCMutSetDeleteEffect(RavaNestTTCMutSetDeleteEffect effect) {
       root.EffectRavaNestTTCMutSetDelete(effect.id);
@@ -3610,11 +3258,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitCliffLandingTTCMutSetEffect(ICliffLandingTTCMutSetEffect effect) { effect.visitICliffLandingTTCMutSetEffect(this); }
     public void visitCliffLandingTTCMutSetCreateEffect(CliffLandingTTCMutSetCreateEffect effect) {
-      var list = root.EffectCliffLandingTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectCliffLandingTTCMutSetCreateWithId(effect.id);
     }
     public void visitCliffLandingTTCMutSetDeleteEffect(CliffLandingTTCMutSetDeleteEffect effect) {
       root.EffectCliffLandingTTCMutSetDelete(effect.id);
@@ -3629,11 +3275,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitStoneTTCMutSetEffect(IStoneTTCMutSetEffect effect) { effect.visitIStoneTTCMutSetEffect(this); }
     public void visitStoneTTCMutSetCreateEffect(StoneTTCMutSetCreateEffect effect) {
-      var list = root.EffectStoneTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectStoneTTCMutSetCreateWithId(effect.id);
     }
     public void visitStoneTTCMutSetDeleteEffect(StoneTTCMutSetDeleteEffect effect) {
       root.EffectStoneTTCMutSetDelete(effect.id);
@@ -3648,11 +3292,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitGrassTTCMutSetEffect(IGrassTTCMutSetEffect effect) { effect.visitIGrassTTCMutSetEffect(this); }
     public void visitGrassTTCMutSetCreateEffect(GrassTTCMutSetCreateEffect effect) {
-      var list = root.EffectGrassTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectGrassTTCMutSetCreateWithId(effect.id);
     }
     public void visitGrassTTCMutSetDeleteEffect(GrassTTCMutSetDeleteEffect effect) {
       root.EffectGrassTTCMutSetDelete(effect.id);
@@ -3667,11 +3309,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitIncendianFallsLevelLinkerTTCMutSetEffect(IIncendianFallsLevelLinkerTTCMutSetEffect effect) { effect.visitIIncendianFallsLevelLinkerTTCMutSetEffect(this); }
     public void visitIncendianFallsLevelLinkerTTCMutSetCreateEffect(IncendianFallsLevelLinkerTTCMutSetCreateEffect effect) {
-      var list = root.EffectIncendianFallsLevelLinkerTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectIncendianFallsLevelLinkerTTCMutSetCreateWithId(effect.id);
     }
     public void visitIncendianFallsLevelLinkerTTCMutSetDeleteEffect(IncendianFallsLevelLinkerTTCMutSetDeleteEffect effect) {
       root.EffectIncendianFallsLevelLinkerTTCMutSetDelete(effect.id);
@@ -3686,11 +3326,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitEmberDeepLevelLinkerTTCMutSetEffect(IEmberDeepLevelLinkerTTCMutSetEffect effect) { effect.visitIEmberDeepLevelLinkerTTCMutSetEffect(this); }
     public void visitEmberDeepLevelLinkerTTCMutSetCreateEffect(EmberDeepLevelLinkerTTCMutSetCreateEffect effect) {
-      var list = root.EffectEmberDeepLevelLinkerTTCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectEmberDeepLevelLinkerTTCMutSetCreateWithId(effect.id);
     }
     public void visitEmberDeepLevelLinkerTTCMutSetDeleteEffect(EmberDeepLevelLinkerTTCMutSetDeleteEffect effect) {
       root.EffectEmberDeepLevelLinkerTTCMutSetDelete(effect.id);
@@ -3705,11 +3343,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitTutorialDefyCounterUCMutSetEffect(ITutorialDefyCounterUCMutSetEffect effect) { effect.visitITutorialDefyCounterUCMutSetEffect(this); }
     public void visitTutorialDefyCounterUCMutSetCreateEffect(TutorialDefyCounterUCMutSetCreateEffect effect) {
-      var list = root.EffectTutorialDefyCounterUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectTutorialDefyCounterUCMutSetCreateWithId(effect.id);
     }
     public void visitTutorialDefyCounterUCMutSetDeleteEffect(TutorialDefyCounterUCMutSetDeleteEffect effect) {
       root.EffectTutorialDefyCounterUCMutSetDelete(effect.id);
@@ -3724,11 +3360,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitLightningChargingUCMutSetEffect(ILightningChargingUCMutSetEffect effect) { effect.visitILightningChargingUCMutSetEffect(this); }
     public void visitLightningChargingUCMutSetCreateEffect(LightningChargingUCMutSetCreateEffect effect) {
-      var list = root.EffectLightningChargingUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectLightningChargingUCMutSetCreateWithId(effect.id);
     }
     public void visitLightningChargingUCMutSetDeleteEffect(LightningChargingUCMutSetDeleteEffect effect) {
       root.EffectLightningChargingUCMutSetDelete(effect.id);
@@ -3743,11 +3377,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitWanderAICapabilityUCMutSetEffect(IWanderAICapabilityUCMutSetEffect effect) { effect.visitIWanderAICapabilityUCMutSetEffect(this); }
     public void visitWanderAICapabilityUCMutSetCreateEffect(WanderAICapabilityUCMutSetCreateEffect effect) {
-      var list = root.EffectWanderAICapabilityUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectWanderAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitWanderAICapabilityUCMutSetDeleteEffect(WanderAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectWanderAICapabilityUCMutSetDelete(effect.id);
@@ -3762,11 +3394,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitTemporaryCloneAICapabilityUCMutSetEffect(ITemporaryCloneAICapabilityUCMutSetEffect effect) { effect.visitITemporaryCloneAICapabilityUCMutSetEffect(this); }
     public void visitTemporaryCloneAICapabilityUCMutSetCreateEffect(TemporaryCloneAICapabilityUCMutSetCreateEffect effect) {
-      var list = root.EffectTemporaryCloneAICapabilityUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectTemporaryCloneAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitTemporaryCloneAICapabilityUCMutSetDeleteEffect(TemporaryCloneAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectTemporaryCloneAICapabilityUCMutSetDelete(effect.id);
@@ -3781,11 +3411,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitSummonAICapabilityUCMutSetEffect(ISummonAICapabilityUCMutSetEffect effect) { effect.visitISummonAICapabilityUCMutSetEffect(this); }
     public void visitSummonAICapabilityUCMutSetCreateEffect(SummonAICapabilityUCMutSetCreateEffect effect) {
-      var list = root.EffectSummonAICapabilityUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectSummonAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitSummonAICapabilityUCMutSetDeleteEffect(SummonAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectSummonAICapabilityUCMutSetDelete(effect.id);
@@ -3800,11 +3428,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitKamikazeAICapabilityUCMutSetEffect(IKamikazeAICapabilityUCMutSetEffect effect) { effect.visitIKamikazeAICapabilityUCMutSetEffect(this); }
     public void visitKamikazeAICapabilityUCMutSetCreateEffect(KamikazeAICapabilityUCMutSetCreateEffect effect) {
-      var list = root.EffectKamikazeAICapabilityUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectKamikazeAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitKamikazeAICapabilityUCMutSetDeleteEffect(KamikazeAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectKamikazeAICapabilityUCMutSetDelete(effect.id);
@@ -3819,11 +3445,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitGuardAICapabilityUCMutSetEffect(IGuardAICapabilityUCMutSetEffect effect) { effect.visitIGuardAICapabilityUCMutSetEffect(this); }
     public void visitGuardAICapabilityUCMutSetCreateEffect(GuardAICapabilityUCMutSetCreateEffect effect) {
-      var list = root.EffectGuardAICapabilityUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectGuardAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitGuardAICapabilityUCMutSetDeleteEffect(GuardAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectGuardAICapabilityUCMutSetDelete(effect.id);
@@ -3838,11 +3462,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitTimeCloneAICapabilityUCMutSetEffect(ITimeCloneAICapabilityUCMutSetEffect effect) { effect.visitITimeCloneAICapabilityUCMutSetEffect(this); }
     public void visitTimeCloneAICapabilityUCMutSetCreateEffect(TimeCloneAICapabilityUCMutSetCreateEffect effect) {
-      var list = root.EffectTimeCloneAICapabilityUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectTimeCloneAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitTimeCloneAICapabilityUCMutSetDeleteEffect(TimeCloneAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectTimeCloneAICapabilityUCMutSetDelete(effect.id);
@@ -3857,11 +3479,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitDoomedUCMutSetEffect(IDoomedUCMutSetEffect effect) { effect.visitIDoomedUCMutSetEffect(this); }
     public void visitDoomedUCMutSetCreateEffect(DoomedUCMutSetCreateEffect effect) {
-      var list = root.EffectDoomedUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectDoomedUCMutSetCreateWithId(effect.id);
     }
     public void visitDoomedUCMutSetDeleteEffect(DoomedUCMutSetDeleteEffect effect) {
       root.EffectDoomedUCMutSetDelete(effect.id);
@@ -3876,11 +3496,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitMiredUCMutSetEffect(IMiredUCMutSetEffect effect) { effect.visitIMiredUCMutSetEffect(this); }
     public void visitMiredUCMutSetCreateEffect(MiredUCMutSetCreateEffect effect) {
-      var list = root.EffectMiredUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectMiredUCMutSetCreateWithId(effect.id);
     }
     public void visitMiredUCMutSetDeleteEffect(MiredUCMutSetDeleteEffect effect) {
       root.EffectMiredUCMutSetDelete(effect.id);
@@ -3895,11 +3513,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitAttackAICapabilityUCMutSetEffect(IAttackAICapabilityUCMutSetEffect effect) { effect.visitIAttackAICapabilityUCMutSetEffect(this); }
     public void visitAttackAICapabilityUCMutSetCreateEffect(AttackAICapabilityUCMutSetCreateEffect effect) {
-      var list = root.EffectAttackAICapabilityUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectAttackAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitAttackAICapabilityUCMutSetDeleteEffect(AttackAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectAttackAICapabilityUCMutSetDelete(effect.id);
@@ -3914,11 +3530,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitCounteringUCMutSetEffect(ICounteringUCMutSetEffect effect) { effect.visitICounteringUCMutSetEffect(this); }
     public void visitCounteringUCMutSetCreateEffect(CounteringUCMutSetCreateEffect effect) {
-      var list = root.EffectCounteringUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectCounteringUCMutSetCreateWithId(effect.id);
     }
     public void visitCounteringUCMutSetDeleteEffect(CounteringUCMutSetDeleteEffect effect) {
       root.EffectCounteringUCMutSetDelete(effect.id);
@@ -3933,11 +3547,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitLightningChargedUCMutSetEffect(ILightningChargedUCMutSetEffect effect) { effect.visitILightningChargedUCMutSetEffect(this); }
     public void visitLightningChargedUCMutSetCreateEffect(LightningChargedUCMutSetCreateEffect effect) {
-      var list = root.EffectLightningChargedUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectLightningChargedUCMutSetCreateWithId(effect.id);
     }
     public void visitLightningChargedUCMutSetDeleteEffect(LightningChargedUCMutSetDeleteEffect effect) {
       root.EffectLightningChargedUCMutSetDelete(effect.id);
@@ -3952,11 +3564,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitInvincibilityUCMutSetEffect(IInvincibilityUCMutSetEffect effect) { effect.visitIInvincibilityUCMutSetEffect(this); }
     public void visitInvincibilityUCMutSetCreateEffect(InvincibilityUCMutSetCreateEffect effect) {
-      var list = root.EffectInvincibilityUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectInvincibilityUCMutSetCreateWithId(effect.id);
     }
     public void visitInvincibilityUCMutSetDeleteEffect(InvincibilityUCMutSetDeleteEffect effect) {
       root.EffectInvincibilityUCMutSetDelete(effect.id);
@@ -3971,11 +3581,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitDefyingUCMutSetEffect(IDefyingUCMutSetEffect effect) { effect.visitIDefyingUCMutSetEffect(this); }
     public void visitDefyingUCMutSetCreateEffect(DefyingUCMutSetCreateEffect effect) {
-      var list = root.EffectDefyingUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectDefyingUCMutSetCreateWithId(effect.id);
     }
     public void visitDefyingUCMutSetDeleteEffect(DefyingUCMutSetDeleteEffect effect) {
       root.EffectDefyingUCMutSetDelete(effect.id);
@@ -3990,11 +3598,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitBideAICapabilityUCMutSetEffect(IBideAICapabilityUCMutSetEffect effect) { effect.visitIBideAICapabilityUCMutSetEffect(this); }
     public void visitBideAICapabilityUCMutSetCreateEffect(BideAICapabilityUCMutSetCreateEffect effect) {
-      var list = root.EffectBideAICapabilityUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectBideAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitBideAICapabilityUCMutSetDeleteEffect(BideAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectBideAICapabilityUCMutSetDelete(effect.id);
@@ -4009,11 +3615,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitBaseSightRangeUCMutSetEffect(IBaseSightRangeUCMutSetEffect effect) { effect.visitIBaseSightRangeUCMutSetEffect(this); }
     public void visitBaseSightRangeUCMutSetCreateEffect(BaseSightRangeUCMutSetCreateEffect effect) {
-      var list = root.EffectBaseSightRangeUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectBaseSightRangeUCMutSetCreateWithId(effect.id);
     }
     public void visitBaseSightRangeUCMutSetDeleteEffect(BaseSightRangeUCMutSetDeleteEffect effect) {
       root.EffectBaseSightRangeUCMutSetDelete(effect.id);
@@ -4028,11 +3632,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitBaseMovementTimeUCMutSetEffect(IBaseMovementTimeUCMutSetEffect effect) { effect.visitIBaseMovementTimeUCMutSetEffect(this); }
     public void visitBaseMovementTimeUCMutSetCreateEffect(BaseMovementTimeUCMutSetCreateEffect effect) {
-      var list = root.EffectBaseMovementTimeUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectBaseMovementTimeUCMutSetCreateWithId(effect.id);
     }
     public void visitBaseMovementTimeUCMutSetDeleteEffect(BaseMovementTimeUCMutSetDeleteEffect effect) {
       root.EffectBaseMovementTimeUCMutSetDelete(effect.id);
@@ -4047,11 +3649,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitBaseCombatTimeUCMutSetEffect(IBaseCombatTimeUCMutSetEffect effect) { effect.visitIBaseCombatTimeUCMutSetEffect(this); }
     public void visitBaseCombatTimeUCMutSetCreateEffect(BaseCombatTimeUCMutSetCreateEffect effect) {
-      var list = root.EffectBaseCombatTimeUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectBaseCombatTimeUCMutSetCreateWithId(effect.id);
     }
     public void visitBaseCombatTimeUCMutSetDeleteEffect(BaseCombatTimeUCMutSetDeleteEffect effect) {
       root.EffectBaseCombatTimeUCMutSetDelete(effect.id);
@@ -4066,11 +3666,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitManaPotionMutSetEffect(IManaPotionMutSetEffect effect) { effect.visitIManaPotionMutSetEffect(this); }
     public void visitManaPotionMutSetCreateEffect(ManaPotionMutSetCreateEffect effect) {
-      var list = root.EffectManaPotionMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectManaPotionMutSetCreateWithId(effect.id);
     }
     public void visitManaPotionMutSetDeleteEffect(ManaPotionMutSetDeleteEffect effect) {
       root.EffectManaPotionMutSetDelete(effect.id);
@@ -4085,11 +3683,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitHealthPotionMutSetEffect(IHealthPotionMutSetEffect effect) { effect.visitIHealthPotionMutSetEffect(this); }
     public void visitHealthPotionMutSetCreateEffect(HealthPotionMutSetCreateEffect effect) {
-      var list = root.EffectHealthPotionMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectHealthPotionMutSetCreateWithId(effect.id);
     }
     public void visitHealthPotionMutSetDeleteEffect(HealthPotionMutSetDeleteEffect effect) {
       root.EffectHealthPotionMutSetDelete(effect.id);
@@ -4104,11 +3700,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitSpeedRingMutSetEffect(ISpeedRingMutSetEffect effect) { effect.visitISpeedRingMutSetEffect(this); }
     public void visitSpeedRingMutSetCreateEffect(SpeedRingMutSetCreateEffect effect) {
-      var list = root.EffectSpeedRingMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectSpeedRingMutSetCreateWithId(effect.id);
     }
     public void visitSpeedRingMutSetDeleteEffect(SpeedRingMutSetDeleteEffect effect) {
       root.EffectSpeedRingMutSetDelete(effect.id);
@@ -4123,11 +3717,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitGlaiveMutSetEffect(IGlaiveMutSetEffect effect) { effect.visitIGlaiveMutSetEffect(this); }
     public void visitGlaiveMutSetCreateEffect(GlaiveMutSetCreateEffect effect) {
-      var list = root.EffectGlaiveMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectGlaiveMutSetCreateWithId(effect.id);
     }
     public void visitGlaiveMutSetDeleteEffect(GlaiveMutSetDeleteEffect effect) {
       root.EffectGlaiveMutSetDelete(effect.id);
@@ -4142,11 +3734,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitSlowRodMutSetEffect(ISlowRodMutSetEffect effect) { effect.visitISlowRodMutSetEffect(this); }
     public void visitSlowRodMutSetCreateEffect(SlowRodMutSetCreateEffect effect) {
-      var list = root.EffectSlowRodMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectSlowRodMutSetCreateWithId(effect.id);
     }
     public void visitSlowRodMutSetDeleteEffect(SlowRodMutSetDeleteEffect effect) {
       root.EffectSlowRodMutSetDelete(effect.id);
@@ -4161,11 +3751,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitBlastRodMutSetEffect(IBlastRodMutSetEffect effect) { effect.visitIBlastRodMutSetEffect(this); }
     public void visitBlastRodMutSetCreateEffect(BlastRodMutSetCreateEffect effect) {
-      var list = root.EffectBlastRodMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectBlastRodMutSetCreateWithId(effect.id);
     }
     public void visitBlastRodMutSetDeleteEffect(BlastRodMutSetDeleteEffect effect) {
       root.EffectBlastRodMutSetDelete(effect.id);
@@ -4180,11 +3768,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitArmorMutSetEffect(IArmorMutSetEffect effect) { effect.visitIArmorMutSetEffect(this); }
     public void visitArmorMutSetCreateEffect(ArmorMutSetCreateEffect effect) {
-      var list = root.EffectArmorMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectArmorMutSetCreateWithId(effect.id);
     }
     public void visitArmorMutSetDeleteEffect(ArmorMutSetDeleteEffect effect) {
       root.EffectArmorMutSetDelete(effect.id);
@@ -4199,11 +3785,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitSorcerousUCMutSetEffect(ISorcerousUCMutSetEffect effect) { effect.visitISorcerousUCMutSetEffect(this); }
     public void visitSorcerousUCMutSetCreateEffect(SorcerousUCMutSetCreateEffect effect) {
-      var list = root.EffectSorcerousUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectSorcerousUCMutSetCreateWithId(effect.id);
     }
     public void visitSorcerousUCMutSetDeleteEffect(SorcerousUCMutSetDeleteEffect effect) {
       root.EffectSorcerousUCMutSetDelete(effect.id);
@@ -4218,11 +3802,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitBaseOffenseUCMutSetEffect(IBaseOffenseUCMutSetEffect effect) { effect.visitIBaseOffenseUCMutSetEffect(this); }
     public void visitBaseOffenseUCMutSetCreateEffect(BaseOffenseUCMutSetCreateEffect effect) {
-      var list = root.EffectBaseOffenseUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectBaseOffenseUCMutSetCreateWithId(effect.id);
     }
     public void visitBaseOffenseUCMutSetDeleteEffect(BaseOffenseUCMutSetDeleteEffect effect) {
       root.EffectBaseOffenseUCMutSetDelete(effect.id);
@@ -4237,11 +3819,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitBaseDefenseUCMutSetEffect(IBaseDefenseUCMutSetEffect effect) { effect.visitIBaseDefenseUCMutSetEffect(this); }
     public void visitBaseDefenseUCMutSetCreateEffect(BaseDefenseUCMutSetCreateEffect effect) {
-      var list = root.EffectBaseDefenseUCMutSetCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectBaseDefenseUCMutSetCreateWithId(effect.id);
     }
     public void visitBaseDefenseUCMutSetDeleteEffect(BaseDefenseUCMutSetDeleteEffect effect) {
       root.EffectBaseDefenseUCMutSetDelete(effect.id);
@@ -4256,11 +3836,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
        
     public void visitTerrainTileByLocationMutMapEffect(ITerrainTileByLocationMutMapEffect effect) { effect.visitITerrainTileByLocationMutMapEffect(this); }
     public void visitTerrainTileByLocationMutMapCreateEffect(TerrainTileByLocationMutMapCreateEffect effect) {
-      var list = root.EffectTerrainTileByLocationMutMapCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectTerrainTileByLocationMutMapCreateWithId(effect.id);
     }
     public void visitTerrainTileByLocationMutMapDeleteEffect(TerrainTileByLocationMutMapDeleteEffect effect) {
       root.EffectTerrainTileByLocationMutMapDelete(effect.id);
@@ -4275,11 +3853,9 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
      
     public void visitKamikazeTargetTTCStrongByLocationMutMapEffect(IKamikazeTargetTTCStrongByLocationMutMapEffect effect) { effect.visitIKamikazeTargetTTCStrongByLocationMutMapEffect(this); }
     public void visitKamikazeTargetTTCStrongByLocationMutMapCreateEffect(KamikazeTargetTTCStrongByLocationMutMapCreateEffect effect) {
-      var list = root.EffectKamikazeTargetTTCStrongByLocationMutMapCreate();
-      // If this fails, then we have to add a translation layer.
-      // We shouldn't allow the user to specify the internal ID, because that's
-      // core to a bunch of optimizations (such as how it's a generational index).
-      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.EffectKamikazeTargetTTCStrongByLocationMutMapCreateWithId(effect.id);
     }
     public void visitKamikazeTargetTTCStrongByLocationMutMapDeleteEffect(KamikazeTargetTTCStrongByLocationMutMapDeleteEffect effect) {
       root.EffectKamikazeTargetTTCStrongByLocationMutMapDelete(effect.id);

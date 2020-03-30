@@ -183,7 +183,8 @@ namespace AthPlayer {
         readyEffects.Add(serverSS.waitingEffects.Dequeue());
         // If the last one was an actionNum getting set, then break here, that's the end of the chunk.
         // we should get the next waiting chunk in the same frame, unless an animation stalls it.
-        if (effect is GameSetActionNumEffect) {
+        if (effect is GameSetActionNumEffect || effect is RevertedEvent) {
+          Debug.LogError(effect + " and next id is " + game.root.nextId);
           break;
         }
       }

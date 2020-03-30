@@ -101,6 +101,8 @@ object Root {
          |    this.locked = true;
          |  }
          |
+         |  public int nextId { get { return rootIncarnation.nextId; } }
+         |
          |  public int version { get { return rootIncarnation.version; } }
          |
          |  public void AddObserver(IEffectObserver obs) {

@@ -47,8 +47,10 @@ object MutMapRootMethods {
        |      }
        |    }
        |    public ${mapName} Effect${mapName}Create() {
+       |      return Effect${mapName}CreateWithId(NewId());
+       |    }
+       |    public ${mapName} Effect${mapName}CreateWithId(int id) {
        |      CheckUnlocked();
-       |      var id = NewId();
        |      Asserts.Assert(!rootIncarnation.incarnations${mapName}.ContainsKey(id));
        |      EffectInternalCreate${mapName}(
        |          id,

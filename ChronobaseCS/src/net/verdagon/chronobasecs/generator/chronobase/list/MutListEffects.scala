@@ -208,11 +208,9 @@ object MutListEffects {
     s"""
        |    public void visit${listName}Effect(I${listName}Effect effect) { effect.visit${ieffectName}(this); }
        |    public void visit${createEffectName}(${createEffectName} effect) {
-       |      var list = root.Effect${listName}Create();
-       |      // If this fails, then we have to add a translation layer.
-       |      // We shouldn't allow the user to specify the internal ID, because that's
-       |      // core to a bunch of optimizations (such as how it's a generational index).
-       |      Asserts.Assert(list.id == effect.id, "New ID mismatch!");
+       |      // For now we're just feeding the remote ID in. Someday we might want to have a map
+       |      // in the applier instead.
+       |      root.Effect${listName}CreateWithId(effect.id);
        |    }
        |    public void visit${deleteEffectName}(${deleteEffectName} effect) {
        |      root.Effect${listName}Delete(effect.id);
