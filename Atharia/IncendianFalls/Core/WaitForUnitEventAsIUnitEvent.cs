@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public class UnitFireBombedEventAsIUnitEvent : IUnitEvent {
-  public readonly UnitFireBombedEvent obj;
-  public UnitFireBombedEventAsIUnitEvent(UnitFireBombedEvent obj) {
+public class WaitForUnitEventAsIUnitEvent : IUnitEvent {
+  public readonly WaitForUnitEvent obj;
+  public WaitForUnitEventAsIUnitEvent(WaitForUnitEvent obj) {
     this.obj = obj;
   }
   public string DStr() { return obj.DStr(); }
@@ -16,9 +16,9 @@ public class UnitFireBombedEventAsIUnitEvent : IUnitEvent {
        
   public void VisitIUnitEvent(IUnitEventVisitor visitor) { visitor.VisitIUnitEvent(this); }
 }
-public static class UnitFireBombedEventAsIUnitEventCaster {
-  public static UnitFireBombedEventAsIUnitEvent AsIUnitEvent(this UnitFireBombedEvent obj) {
-    return new UnitFireBombedEventAsIUnitEvent(obj);
+public static class WaitForUnitEventAsIUnitEventCaster {
+  public static WaitForUnitEventAsIUnitEvent AsIUnitEvent(this WaitForUnitEvent obj) {
+    return new WaitForUnitEventAsIUnitEvent(obj);
   }
 }
 

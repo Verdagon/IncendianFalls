@@ -13,8 +13,7 @@ public class UnitDefyingEventAsIUnitEvent : IUnitEvent {
   public string DStr() { return obj.DStr(); }
   public int GetDeterministicHashCode() { return obj.GetDeterministicHashCode(); }
   public override int GetHashCode() { return GetDeterministicHashCode(); }
-         public int GetTime() { return UnitDefyingEventExtensions.GetTime(obj); }
-
+       
   public void VisitIUnitEvent(IUnitEventVisitor visitor) { visitor.VisitIUnitEvent(this); }
 }
 public static class UnitDefyingEventAsIUnitEventCaster {

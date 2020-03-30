@@ -10,7 +10,6 @@ public class NullIUnitEvent : IUnitEvent {
   public string DStr() { return "null"; }
   public int GetDeterministicHashCode() { return 0; }
   public void VisitIUnitEvent(IUnitEventVisitor visitor) { throw new Exception("Called method on a null!"); }
-  public int GetTime(){ throw new Exception("Called method on a null!"); }
 }
 
 }

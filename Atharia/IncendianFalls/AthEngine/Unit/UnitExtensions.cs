@@ -10,6 +10,10 @@ namespace Atharia.Model {
       components.Destruct();
       return new Atharia.Model.Void();
     }
+
+    public static void WaitFor(this Unit unit) {
+      unit.AddEvent(new WaitForUnitEvent(unit.id).AsIUnitEvent());
+    }
     public static int CalculateCombatTimeCost(this Unit unit, int unmodifiedTimeCost) {
       int timeCost = unmodifiedTimeCost;
       foreach (var component in unit.components.GetAllICombatTimeFactorUC()) {

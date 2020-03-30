@@ -37,12 +37,24 @@ namespace Atharia.Model {
       game.ShowAside("narrator", text);
     }
 
-    public static void Wait(this Game game, int timeMs) {
-      game.AddEvent(new WaitEvent(timeMs).AsIGameEvent());
+    public static void WaitForCamera(this Game game) {
+      game.AddEvent(new WaitForCameraEvent().AsIGameEvent());
+      game.actionNum++;
     }
 
-    public static void FlyCameraTo(this Game game, int flightTimeMs, Location location) {
+    public static void Wait(this Game game, long ms) {
+      game.AddEvent(new WaitEvent((int)ms).AsIGameEvent());
+      game.actionNum++;
+    }
+
+    public static void FlyCameraTo(this Game game, int flightTimeMs, Location location, bool waitFor = true) {
       game.AddEvent(new FlyCameraEvent(location, new Vec3(0, -16, 8), flightTimeMs).AsIGameEvent());
+      game.actionNum++;
+      if (waitFor) {
+        // Gotta have this after the above actionNum++ so this waits on that camera movement.
+        game.WaitForCamera();
+        game.actionNum++;
+      }
     }
 
     public static void ShowAside(this Game game, string speakerRole, string text) {

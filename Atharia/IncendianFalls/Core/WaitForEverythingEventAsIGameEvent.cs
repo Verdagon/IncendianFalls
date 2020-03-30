@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 
-public class WaitForAnimationsEventAsIGameEvent : IGameEvent {
-  public readonly WaitForAnimationsEvent obj;
-  public WaitForAnimationsEventAsIGameEvent(WaitForAnimationsEvent obj) {
+public class WaitForEverythingEventAsIGameEvent : IGameEvent {
+  public readonly WaitForEverythingEvent obj;
+  public WaitForEverythingEventAsIGameEvent(WaitForEverythingEvent obj) {
     this.obj = obj;
   }
   public string DStr() { return obj.DStr(); }
@@ -16,9 +16,9 @@ public class WaitForAnimationsEventAsIGameEvent : IGameEvent {
        
   public void VisitIGameEvent(IGameEventVisitor visitor) { visitor.VisitIGameEvent(this); }
 }
-public static class WaitForAnimationsEventAsIGameEventCaster {
-  public static WaitForAnimationsEventAsIGameEvent AsIGameEvent(this WaitForAnimationsEvent obj) {
-    return new WaitForAnimationsEventAsIGameEvent(obj);
+public static class WaitForEverythingEventAsIGameEventCaster {
+  public static WaitForEverythingEventAsIGameEvent AsIGameEvent(this WaitForEverythingEvent obj) {
+    return new WaitForEverythingEventAsIGameEvent(obj);
   }
 }
 

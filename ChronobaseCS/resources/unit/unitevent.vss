@@ -1,6 +1,11 @@
 
 imm interface IUnitEvent {
-  fn GetTime(): Int;
+}
+
+imm struct WaitForUnitEvent {
+  WaitForUnitEvent isa IUnitEvent;
+
+  unitId: Int;
 }
 
 imm struct UnitStepEvent {
@@ -10,30 +15,18 @@ imm struct UnitStepEvent {
   unitId: Int;
   from: Location;
   to: Location;
-
-  fn GetTime(event: UnitStepEvent overrides IUnitEvent): Int {
-    UnitStepEventExtensions.GetTime
-  }
 }
 
 imm struct UnitDefyingEvent {
   UnitDefyingEvent isa IUnitEvent;
 
   time: Int;
-
-  fn GetTime(event: UnitDefyingEvent overrides IUnitEvent): Int {
-    UnitDefyingEventExtensions.GetTime
-  }
 }
 
 imm struct UnitCounteringEvent {
   UnitCounteringEvent isa IUnitEvent;
 
   time: Int;
-
-  fn GetTime(event: UnitCounteringEvent overrides IUnitEvent): Int {
-    UnitCounteringEventExtensions.GetTime
-  }
 }
 
 imm struct UnitAttackEvent {
@@ -42,10 +35,6 @@ imm struct UnitAttackEvent {
   time: Int;
   attackerId: Int;
   victimId: Int;
-
-  fn GetTime(event: UnitAttackEvent overrides IUnitEvent): Int {
-    UnitAttackEventExtensions.GetTime
-  }
 }
 
 imm struct UnitMireEvent {
@@ -54,10 +43,6 @@ imm struct UnitMireEvent {
   time: Int;
   attackerId: Int;
   victimId: Int;
-
-  fn GetTime(event: UnitMireEvent overrides IUnitEvent): Int {
-    UnitMireEventExtensions.GetTime
-  }
 }
 
 imm struct UnitFireEvent {
@@ -66,10 +51,6 @@ imm struct UnitFireEvent {
   time: Int;
   attackerId: Int;
   victimId: Int;
-
-  fn GetTime(event: UnitFireEvent overrides IUnitEvent): Int {
-    UnitFireEventExtensions.GetTime
-  }
 }
 
 imm struct UnitFireBombedEvent {
@@ -79,10 +60,6 @@ imm struct UnitFireBombedEvent {
   time: Int;
   victimId: Int;
   location: Location;
-
-  fn GetTime(event: UnitFireBombedEvent overrides IUnitEvent): Int {
-    UnitFireBombedEventExtensions.GetTime
-  }
 }
 
 imm struct UnitUnleashBideEvent {
@@ -93,8 +70,4 @@ imm struct UnitUnleashBideEvent {
   attackerId: Int;
   victimIds: ImmList:Int;
   otherLocations: ImmList:Location;
-
-  fn GetTime(event: UnitUnleashBideEvent overrides IUnitEvent): Int {
-    UnitUnleashBideEventExtensions.GetTime
-  }
 }

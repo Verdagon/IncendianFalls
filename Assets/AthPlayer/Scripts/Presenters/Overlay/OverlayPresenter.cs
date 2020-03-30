@@ -145,8 +145,6 @@ namespace AthPlayer {
       var fadeOutBackground = isLastSubPage;
       var callCallbackAfterFadeOut = !isObscuring;
 
-      Debug.LogError("lines: " + subPageTexts[currentSubPageIndex].wrappedLines.Count);
-
       currentPageOverlayPanelView =
         pageController.ShowPage(
           subPageTexts[currentSubPageIndex].wrappedLines,

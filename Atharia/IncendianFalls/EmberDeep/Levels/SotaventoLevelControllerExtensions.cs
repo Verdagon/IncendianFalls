@@ -78,31 +78,43 @@ namespace Atharia.Model {
         });
 
         var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo1");
-        game.FlyCameraTo(300, ravashrikeHopTo1);
-        game.Wait(500);
-        var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
-        game.FlyCameraTo(300, chronomancer.location);
-        game.AddEvent(new SetGameSpeedEvent(40).AsIGameEvent());
-        var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
-        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
-        game.Wait(1000);
-
-        Actions.Fire(game, superstate, chronomancer, ravashrike);
-        game.Wait(500);
         var ravashrikeHopTo2 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo2");
-        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo2, true, false);
-        game.Wait(1000);
-        Actions.Fire(game, superstate, chronomancer, ravashrike);
-        game.Wait(500);
         var ravashrikeHopTo3 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo3");
-        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo3, true, false);
-        game.Wait(1000);
-        Actions.Fire(game, superstate, chronomancer, ravashrike);
-        game.Wait(500);
         var retreatTo = superstate.levelSuperstate.FindMarkerLocation("retreatTo");
+
+        var chronomancer = superstate.levelSuperstate.FindLiveUnit("Chronomancer");
+        var ravashrike = superstate.levelSuperstate.FindLiveUnit("Ravashrike");
+
+        game.actionNum++;
+        game.FlyCameraTo(1000, ravashrikeHopTo1);
+        game.actionNum++;
+        game.Wait(500);
+        game.root.logger.Error("added a wait!");
+        game.actionNum++;
+        game.FlyCameraTo(1000, chronomancer.location);
+        game.actionNum++;
+        game.AddEvent(new SetGameSpeedEvent(40).AsIGameEvent());
+
+        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
+        Actions.Fire(game, superstate, chronomancer, ravashrike);
+        ravashrike.WaitFor();
+        chronomancer.WaitFor();
+
+        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo2, true, false);
+        Actions.Fire(game, superstate, chronomancer, ravashrike);
+        ravashrike.WaitFor();
+        chronomancer.WaitFor();
+
+        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo3, true, false);
+        Actions.Fire(game, superstate, chronomancer, ravashrike);
+        ravashrike.WaitFor();
+        chronomancer.WaitFor();
+
         Actions.Bump(game, superstate, ravashrike, chronomancer, 1300, true);
         Actions.Step(game, superstate, chronomancer, retreatTo, true, false);
-        game.Wait(1000);
+        chronomancer.WaitFor();
+        ravashrike.WaitFor();
+
         game.ShowDialogue("kylinBrother", "\"I can't fight it! Time to do something desperate...\"", "...");
         //Actions.Stasis(game, superstate, chronomancer, ravashrike);
         game.ShowDramatic(new CommText[] {

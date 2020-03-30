@@ -14,6 +14,7 @@ public interface IUnitEventVisitor {
   void VisitIUnitEvent(UnitCounteringEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitDefyingEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitStepEventAsIUnitEvent obj);
+  void VisitIUnitEvent(WaitForUnitEventAsIUnitEvent obj);
 }
 
 }

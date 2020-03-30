@@ -125,7 +125,7 @@ namespace Atharia.Model {
           superstate.levelSuperstate.FindMarkerLocation("ambush1Summon"),
           game.player.nextActionTime + 300,
           Irkling.Make(game.root));
-        game.Wait(400);
+        game.player.WaitFor();
         game.ShowComm("You see an Irkling!\n\nTo attack, click on it while next to it.", "Forward to glory!");
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "ambush2Trigger") {
@@ -135,7 +135,7 @@ namespace Atharia.Model {
           superstate.levelSuperstate.FindMarkerLocation("ambush2Summon"),
           game.player.nextActionTime + 300,
           Baug.Make(game.root));
-        game.Wait(400);
+        game.player.WaitFor();
 
         game.ShowComm("You see a Baug!\n\nBaugs have a lot of life points. You'll need to hit it several times.", "Forward to battle!");
       }
@@ -146,7 +146,7 @@ namespace Atharia.Model {
           superstate.levelSuperstate.FindMarkerLocation("ambush3Summon"),
           game.player.nextActionTime + 300,
           Spirient.Make(game.root));
-        game.Wait(400);
+        game.player.WaitFor();
 
         game.instructions = 1 + " Defy remaining!";
         game.player.components.Add(game.root.EffectTutorialDefyCounterUCCreate(1, "ambush3bDefied").AsIUnitComponent());
@@ -158,7 +158,7 @@ namespace Atharia.Model {
       }
       if (triggeringUnit.NullableIs(game.player) && triggerName == "healthPotion") {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("healthPotion", 1);
-        game.Wait(400);
+        game.player.WaitFor();
 
         // Player might not have defied.
         var defyCounter = game.player.components.GetOnlyTutorialDefyCounterUCOrNull();
@@ -177,8 +177,7 @@ namespace Atharia.Model {
           superstate.levelSuperstate.FindMarkerLocation("ambush4Summon"),
           game.player.nextActionTime + 300,
           RavagianTrask.Make(game.root));
-
-        game.Wait(400);
+        game.player.WaitFor();
 
         game.ShowComm("You see a Ravagian Trask!\n\nThese attack very fast.\n\nYou'll need help!", "Help? How?");
         game.ShowComm("You must help your future self, so that in the future, you'll receive help from your past self.", "Nonsense!");
@@ -187,7 +186,7 @@ namespace Atharia.Model {
       if (triggerName == "ambush4DefySpot" &&
           triggeringUnit.NullableIs(game.player)) {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefySpot", 1);
-        game.Wait(400);
+        game.player.WaitFor();
 
         if (superstate.anchorTurnIndices.Count == 0) {
           game.ShowComm("Uh oh! You didn't create a time anchor.\n\nYou're probably going to die now.\n\nNext time, use Time Anchor ('A')!", "Alas...");
@@ -200,7 +199,7 @@ namespace Atharia.Model {
       if (triggerName == "ambush4DefySpot" &&
           triggeringUnit.components.GetAllTimeCloneAICapabilityUC().Count > 0) {
         superstate.levelSuperstate.RemoveSimplePresenceTriggers("ambush4DefySpot", 1);
-        game.Wait(600);
+        game.player.WaitFor();
 
         // Player might not have finished defying the whole 10 previous ones.
         var defyCounter = game.player.components.GetOnlyTutorialDefyCounterUCOrNull();

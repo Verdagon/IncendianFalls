@@ -25,6 +25,8 @@ public static class IUnitEventParser {
         return new UnitDefyingEventAsIUnitEvent(UnitDefyingEvent.Parse(source));
       case "UnitStepEvent":
         return new UnitStepEventAsIUnitEvent(UnitStepEvent.Parse(source));
+      case "WaitForUnitEvent":
+        return new WaitForUnitEventAsIUnitEvent(WaitForUnitEvent.Parse(source));
       default:
         throw new Exception("Unexpected: " + nextThingPeek);
     }

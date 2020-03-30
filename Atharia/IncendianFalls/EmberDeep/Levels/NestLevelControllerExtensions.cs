@@ -195,11 +195,10 @@ namespace Atharia.Model {
         game.EnterCinematic();
         var hopTo = superstate.levelSuperstate.FindMarkerLocation("playerHopTo");
         Actions.Step(game, superstate, game.player, hopTo, true, false);
-        game.Wait(1000);
+        game.player.WaitFor();
         game.ShowAside("kylin", "Uh oh...");
         game.Wait(2000);
         game.FlyCameraTo(1000, superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"));
-        game.Wait(1000);
         game.FlyCameraTo(1000, superstate.levelSuperstate.FindMarkerLocation("playerHopTo"));
         game.ExitCinematic();
         game.player.nextActionTime = game.level.time;

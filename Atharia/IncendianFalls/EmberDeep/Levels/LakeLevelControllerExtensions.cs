@@ -75,7 +75,6 @@ namespace Atharia.Model {
       if (triggerName == "levelStart") {
         game.Wait(1500);
         game.FlyCameraTo(1000, superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"));
-        game.Wait(1000);
         game.FlyCameraTo(1500, superstate.levelSuperstate.FindMarkerLocation("entry"));
         game.player.nextActionTime = game.level.time;
         game.ShowAside("kylin", "It's eerily silent in here.");

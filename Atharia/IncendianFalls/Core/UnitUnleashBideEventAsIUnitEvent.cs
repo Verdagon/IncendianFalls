@@ -13,8 +13,7 @@ public class UnitUnleashBideEventAsIUnitEvent : IUnitEvent {
   public string DStr() { return obj.DStr(); }
   public int GetDeterministicHashCode() { return obj.GetDeterministicHashCode(); }
   public override int GetHashCode() { return GetDeterministicHashCode(); }
-         public int GetTime() { return UnitUnleashBideEventExtensions.GetTime(obj); }
-
+       
   public void VisitIUnitEvent(IUnitEventVisitor visitor) { visitor.VisitIUnitEvent(this); }
 }
 public static class UnitUnleashBideEventAsIUnitEventCaster {

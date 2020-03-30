@@ -940,6 +940,15 @@ namespace AthPlayer {
         game.AddObserver(previewBroadcaster, this);
       }
 
+      private void StallForAllAnimations(bool includingDeath) {
+        staller(unitPresenter.hopEndTime, "unit hop");
+        staller(unitPresenter.lungeEndTime, "unit lunge");
+        staller(unitPresenter.runeEndTime, "unit rune");
+        if (includingDeath) {
+          staller(unitPresenter.dieEndTime, "unit die");
+        }
+      }
+
       public void OnUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this); }
       public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
       public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
@@ -947,14 +956,13 @@ namespace AthPlayer {
       public void visitUnitCreateEffect(UnitCreateEffect effect) { }
 
       public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
-        staller(unitPresenter.hopEndTime, "unit hop");
-        staller(unitPresenter.lungeEndTime, "unit lunge");
-        staller(unitPresenter.runeEndTime, "unit rune");
-        staller(unitPresenter.dieEndTime, "unit die");
+        StallForAllAnimations(true);
       }
 
       public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
-        if (effect.newValue is UnitAttackEventAsIUnitEvent a) {
+        if (effect.newValue is WaitForUnitEventAsIUnitEvent) {
+          StallForAllAnimations(true);
+        } else if (effect.newValue is UnitAttackEventAsIUnitEvent a) {
           if (a.obj.attackerId == unitPresenter.unit.id) {
             staller(unitPresenter.hopEndTime, "unit hop");
             staller(unitPresenter.lungeEndTime, "unit lunge");
@@ -974,9 +982,7 @@ namespace AthPlayer {
       }
 
       public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) {
-        staller(unitPresenter.hopEndTime, "unit hop");
-        staller(unitPresenter.lungeEndTime, "unit lunge");
-        staller(unitPresenter.runeEndTime, "unit rune");
+        StallForAllAnimations(false);
       }
 
       public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) {
@@ -1006,11 +1012,8 @@ namespace AthPlayer {
       public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) { }
       public void visitGameSetHideInputEffect(GameSetHideInputEffect effect) { }
       public void visitGameSetEvventEffect(GameSetEvventEffect effect) {
-        if (effect.newValue is WaitForAnimationsEventAsIGameEvent) {
-          staller(unitPresenter.hopEndTime, "unit hop");
-          staller(unitPresenter.lungeEndTime, "unit lunge");
-          staller(unitPresenter.runeEndTime, "unit rune");
-          staller(unitPresenter.dieEndTime, "unit die");
+        if (effect.newValue is WaitForEverythingEventAsIGameEvent) {
+          StallForAllAnimations(true);
         }
       }
     }

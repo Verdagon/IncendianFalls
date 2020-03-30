@@ -233,8 +233,8 @@ namespace Atharia.Model {
         var hopToPossibilities = superstate.levelSuperstate.GetNRandomWalkableLocations(game.level.terrain, game.rand, 1, (loc) => locationsNextToPlayer.Contains(loc), true, true);
         if (hopToPossibilities.Count > 0) {
           Actions.Step(game, superstate, game.player, hopToPossibilities[0], true, false);
+          game.player.WaitFor();
         }
-        game.Wait(400);
         game.ShowAside("kylin", "I've made it to Ember Deep! Forward!");
       }
       return new Atharia.Model.Void();

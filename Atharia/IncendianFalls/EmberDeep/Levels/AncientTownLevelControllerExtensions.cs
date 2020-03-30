@@ -94,7 +94,6 @@ namespace Atharia.Model {
         game.EnterCinematic();
         game.Wait(1500);
         game.FlyCameraTo(1000, superstate.levelSuperstate.FindMarkerLocation("cameraPanTo"));
-        game.Wait(1000);
         game.FlyCameraTo(1500, superstate.levelSuperstate.FindMarkerLocation("entry"));
         game.player.nextActionTime = game.level.time;
         game.ExitCinematic();
