@@ -40,7 +40,6 @@ namespace AthPlayer {
 
       if (!game.WaitingOnPlayerInput()) {
         ss.GetRoot().logger.Error("Not your turn!");
-        delegat.AfterDidSomething();
         delegat.SwitchToNormalMode();
         return;
       }
@@ -49,7 +48,6 @@ namespace AthPlayer {
       if (!unit.Exists()) {
         showError("No unit there. Canceling Mire!");
         delegat.SwitchToNormalMode();
-        delegat.AfterDidSomething();
         return;
       }
 
@@ -57,15 +55,20 @@ namespace AthPlayer {
       if (result.Length > 0) {
         showError(result);
         delegat.SwitchToNormalMode();
-        delegat.AfterDidSomething();
         return;
       }
 
       delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
     }
 
-    public void Cancel(bool purposeful) {
+    public void OnTileMouseHover(Location maybeHoverLocation) {
+
+    }
+
+    public void StartedWaitingForPlayerInput() {
+    }
+
+    public void Destroy(bool purposeful) {
       instructionsOverlay.Close();
       if (purposeful) {
         showError("Canceled Mire!");

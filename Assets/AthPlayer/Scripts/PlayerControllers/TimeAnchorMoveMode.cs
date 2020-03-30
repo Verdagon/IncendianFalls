@@ -31,7 +31,6 @@ namespace AthPlayer {
 
       if (!game.WaitingOnPlayerInput()) {
         ss.GetRoot().logger.Error("Not your turn!");
-        delegat.AfterDidSomething();
         return;
       }
 
@@ -39,15 +38,20 @@ namespace AthPlayer {
       if (result != "") {
         showError(result);
         delegat.SwitchToNormalMode();
-        delegat.AfterDidSomething();
         return;
       }
 
       delegat.SwitchToNormalMode();
-      delegat.AfterDidSomething();
     }
 
-    public void Cancel(bool purposeful) {
+    public void OnTileMouseHover(Location maybeHoverLocation) {
+
+    }
+
+    public void StartedWaitingForPlayerInput() {
+    }
+
+    public void Destroy(bool purposeful) {
       instructionsOverlay.Close();
       if (purposeful) {
         showError("Canceled time anchor!");

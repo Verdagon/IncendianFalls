@@ -42,6 +42,7 @@ namespace AthPlayer {
     List<KeyValuePair<long, UnitView>> doomedUnitViews;
 
     PlayerController playerController;
+    SortedSet<Location> playerControllerHighlightLocations = new SortedSet<Location>();
 
     OverlayPresenter currentModalOverlay;
 
@@ -142,7 +143,11 @@ namespace AthPlayer {
               cameraController,
               showInstructions,
               showError,
-              thinkingIndicator);
+              thinkingIndicator,
+              (locations) => {
+                playerControllerHighlightLocations = locations;
+                UpdateHighlightLocations();
+              });
 
       LoadLevel();
     }
@@ -228,6 +233,10 @@ namespace AthPlayer {
         } else {
           break;
         }
+      }
+
+      if (serverSS.waitingEffects.Count == 0) {
+        playerController.StartedWaitingForPlayerInput();
       }
     }
 
@@ -372,8 +381,10 @@ namespace AthPlayer {
       }
     }
 
-    public void SetHighlightedLocations(SortedSet<Location> locations) {
-      terrainPresenter.SetHighlightLocations(locations);
+    public void UpdateHighlightLocations() {
+      if (terrainPresenter != null) {
+        terrainPresenter.SetHighlightLocations(playerControllerHighlightLocations);
+      }
     }
 
     //private Location LocationForUnit(GameObject gameObject) {
@@ -412,29 +423,7 @@ namespace AthPlayer {
         }
       }
 
-      if (hoveredLocation != null) {
-        if (!hoveredLocation.Equals(game.player.location)) {
-          var steps =
-              AStarExplorer.Go(
-                  game.level.terrain.pattern,
-                  game.player.location,
-                  hoveredLocation,
-                  game.level.ConsiderCornersAdjacent(),
-                  (from, to) => game.player.CanStep(game.level.terrain, from, to));
-          if (steps.Count > 0) {
-            SetHighlightedLocations(new SortedSet<Location>(steps));
-          } else {
-            SetHighlightedLocations(new SortedSet<Location>());
-          }
-        } else {
-          SetHighlightedLocations(new SortedSet<Location>());
-        }
-      } else {
-        SetHighlightedLocations(new SortedSet<Location>());
-      }
-
-
-      playerController.Update();
+      playerController.Update(hoveredLocation);
 
       Unit unit = Unit.Null;
       TerrainTile tile = TerrainTile.Null;

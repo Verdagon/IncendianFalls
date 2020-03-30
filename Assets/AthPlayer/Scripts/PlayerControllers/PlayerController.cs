@@ -4,6 +4,7 @@ using Atharia.Model;
 using UnityEngine;
 using AthPlayer;
 using static AthPlayer.OverlayPresenter;
+using IncendianFalls;
 
 namespace Domino {
   public class PlayerController :
@@ -12,6 +13,7 @@ namespace Domino {
     ISorcerousUCEffectObserver, ISorcerousUCEffectVisitor,
       IModeDelegate {
     private delegate void WaitingInput();
+    public delegate void SetHighlightLocations(SortedSet<Location> locations);
 
     IClock cinematicTimer;
     InputSemaphore inputSemaphore;
@@ -19,11 +21,13 @@ namespace Domino {
     EffectBroadcaster broadcaster;
     FollowingCameraController cameraController;
     Game game;
+    TerrainPresenter terrainPresenter;
     ITimer timer;
     PlayerPanelView playerPanelView;
     OverlayPresenterFactory overlayPresenterFactory;
     ShowInstructions showInstructions;
     ShowError showError;
+    SetHighlightLocations setHighlightLocations;
     Looker looker;
     OverlayPaneler overlayPaneler;
     GameObject thinkingIndicator;
@@ -47,7 +51,8 @@ namespace Domino {
         CameraController innerCameraController,
         ShowInstructions showInstructions,
         ShowError showError,
-        GameObject thinkingIndicator) {
+        GameObject thinkingIndicator,
+        SetHighlightLocations setHighlightLocations) {
       this.broadcaster = broadcaster;
       this.ss = ss;
       this.inputSemaphore = inputSemaphore;
@@ -60,6 +65,7 @@ namespace Domino {
       this.overlayPresenterFactory = overlayPresenterFactory;
       this.showError = showError;
       this.thinkingIndicator = thinkingIndicator;
+      this.setHighlightLocations = setHighlightLocations;
 
       cameraController = new FollowingCameraController(innerCameraController, broadcaster, game);
 
@@ -125,10 +131,6 @@ namespace Domino {
       DoIfAllowedAndWhenReady(() => mode.OnTileMouseClick(newLocation));
     }
 
-    public void AfterDidSomething() {
-      //MaybeResume();
-    }
-
     //private void MaybeResume() {
     //  for (bool processing = true; processing; ) {
     //    if (resumeStaller.IsStalled()) {
@@ -192,14 +194,14 @@ namespace Domino {
       string result = ss.RequestCheat(game.id, cheatName);
       if (result.Length > 0) {
         showError(result);
-        AfterDidSomething();
         return;
       }
-      AfterDidSomething();
     }
 
     private delegate void KeyAction();
-    public void Update() {
+    public void Update(Location maybeHoveredLocation) {
+      mode.OnTileMouseHover(maybeHoveredLocation);
+
       var lambdaByKey = new Dictionary<KeyCode, KeyAction>() {
         { KeyCode.A, () => ActivateCapability(PlayerPanelView.TIME_ANCHOR_MOVE_CAPABILITY_ID) },
         { KeyCode.R, () => ActivateCapability(PlayerPanelView.REVERT_CAPABILITY_ID) },
@@ -232,7 +234,7 @@ namespace Domino {
     }
 
     private void Cancel(bool purposeful) {
-      mode.Cancel(purposeful);
+      mode.Destroy(purposeful);
       SwitchToNormalMode();
     }
 
@@ -265,37 +267,29 @@ namespace Domino {
           string timeShiftResult = ss.RequestTimeShift(game.id);
           if (timeShiftResult != "") {
             showError(timeShiftResult);
-            AfterDidSomething();
             return;
           }
-          AfterDidSomething();
           break;
         case PlayerPanelView.INTERACT_CAPABILITY_ID:
           string interactResult = ss.RequestInteract(game.id);
           if (interactResult != "") {
             showError(interactResult);
-            AfterDidSomething();
             return;
           }
-          AfterDidSomething();
           break;
         case PlayerPanelView.DEFEND_CAPABILITY_ID:
           string defendResult = ss.RequestDefy(game.id);
           if (defendResult != "") {
             showError(defendResult);
-            AfterDidSomething();
             return;
           }
-          AfterDidSomething();
           break;
         case PlayerPanelView.COUNTER_CAPABILITY_ID:
           string counterResult = ss.RequestCounter(game.id);
           if (counterResult.Length > 0) {
             showError(counterResult);
-            AfterDidSomething();
             return;
           }
-          AfterDidSomething();
           break;
         case PlayerPanelView.FIRE_BOMB_CAPABILITY_ID:
           if (game.player.components.GetAllBlastRod().Count == 0) {
@@ -361,8 +355,12 @@ namespace Domino {
       }
     }
 
+    public void StartedWaitingForPlayerInput() {
+      mode.StartedWaitingForPlayerInput();
+    }
+
     public void SwitchToNormalMode() {
-      mode = new NormalMode(ss, game, this, showError);
+      mode = new NormalMode(ss, game, broadcaster, showError, setHighlightLocations);
       modeCapabilityId = 0;
     }
 
