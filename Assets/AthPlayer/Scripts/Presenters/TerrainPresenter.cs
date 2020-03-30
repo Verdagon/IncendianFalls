@@ -11,16 +11,14 @@ namespace AthPlayer {
   public delegate void OnTerrainHovered(Location location);
 
   public class TerrainPresenter : ITerrainEffectVisitor, ITerrainEffectObserver, ITerrainTileByLocationMutMapEffectObserver, ITerrainTileByLocationMutMapEffectVisitor {
-    public event OnTerrainClicked TerrainClicked;
-    public event OnTerrainHovered TerrainHovered;
-
     IClock clock;
     ITimer timer;
     EffectBroadcaster broadcaster;
   Atharia.Model.Terrain terrain;
     Instantiator instantiator;
     Dictionary<Location, TerrainTilePresenter> tilePresenters = new Dictionary<Location, TerrainTilePresenter>();
-    Location maybeHighlightLocation = null;
+
+    SortedSet<Location> highlightLocations = new SortedSet<Location>();
 
     public TerrainPresenter(IClock clock, ITimer timer, EffectBroadcaster broadcaster, Atharia.Model.Terrain terrain, Instantiator instantiator) {
       this.clock = clock;
@@ -67,27 +65,29 @@ namespace AthPlayer {
     public void visitTerrainTileByLocationMutMapRemoveEffect(TerrainTileByLocationMutMapRemoveEffect effect) { }
 
 
-    public void SetHighlightLocation(Location location) {
-      Location oldLocation = maybeHighlightLocation;
-      if (location != maybeHighlightLocation) {
-        maybeHighlightLocation = location;
-        if (oldLocation != null)
-          UpdateLocationHighlighted(oldLocation);
-        if (location != null)
-          UpdateLocationHighlighted(location);
-        TerrainHovered?.Invoke(location);
-      }
+    public void SetHighlightLocations(SortedSet<Location> newLocations) {
+      SortedSet<Location> oldLocations = highlightLocations;
+      highlightLocations = newLocations;
 
-      if (maybeHighlightLocation != null && Input.GetMouseButtonDown(0)) {
-        if (tilePresenters.TryGetValue(maybeHighlightLocation, out var newMousedPhantomTilePresenter)) {
-          TerrainClicked?.Invoke(maybeHighlightLocation);
+      SortedSet<Location> locationsToUpdate = new SortedSet<Location>();
+      foreach (var oldLocation in oldLocations) {
+        if (!newLocations.Contains(oldLocation)) {
+          locationsToUpdate.Add(oldLocation);
         }
+      }
+      foreach (var newLocation in newLocations) {
+        if (!oldLocations.Contains(newLocation)) {
+          locationsToUpdate.Add(newLocation);
+        }
+      }
+      foreach (var locationToUpdate in locationsToUpdate) {
+        UpdateLocationHighlighted(locationToUpdate);
       }
     }
 
     private void UpdateLocationHighlighted(Location location) {
       if (tilePresenters.TryGetValue(location, out var newMousedTerrainTilePresenter)) {
-        newMousedTerrainTilePresenter.SetHighlighted(location == maybeHighlightLocation);
+        newMousedTerrainTilePresenter.SetHighlighted(highlightLocations.Contains(location));
       }
     }
 

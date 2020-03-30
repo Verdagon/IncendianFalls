@@ -73,6 +73,11 @@ namespace Atharia.Model {
       unit.evvent = e;
       unit.evvent = NullIUnitEvent.Null;
     }
+    public static bool CanStep(this Unit unit, Terrain terrain, Location from, Location to) {
+      return terrain.tiles.ContainsKey(to) &&
+          terrain.tiles[to].IsWalkable() &&
+          terrain.GetElevationDifference(from, to) <= 2;
+    }
     //public static IDirectiveUC GetDirectiveOrNull(this Unit unit) {
     //  return unit.components.GetOnlyIDirectiveUCOrNull();
     //}

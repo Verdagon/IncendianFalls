@@ -4,6 +4,7 @@ using AthPlayer;
 using Atharia.Model;
 using UnityEngine;
 using Domino;
+using IncendianFalls;
 
 namespace AthPlayer {
   public delegate void OnLocationHovered(Location location);
@@ -15,8 +16,6 @@ namespace AthPlayer {
     public delegate void OnExitClicked();
 
     public event OnExitClicked exitClicked;
-    public OnLocationHovered LocationHovered;
-    public OnLocationClicked LocationClicked;
 
     SlowableTimerClock gameTimer;
     SlowableTimerClock uiTimer;
@@ -285,8 +284,6 @@ namespace AthPlayer {
       viewedLevel = game.level;
 
       this.terrainPresenter = new TerrainPresenter(gameTimer, gameTimer, broadcaster, viewedLevel.terrain, instantiator);
-      terrainPresenter.TerrainClicked += (location) => LocationClicked?.Invoke(location);
-      terrainPresenter.TerrainHovered += (location) => LocationHovered?.Invoke(location);
 
       viewedLevel.units.AddObserver(broadcaster, this);
       this.unitPresenters = new Dictionary<int, UnitPresenter>();
@@ -375,8 +372,8 @@ namespace AthPlayer {
       }
     }
 
-    public void SetHighlightedLocation(Location location) {
-      terrainPresenter.SetHighlightLocation(location);
+    public void SetHighlightedLocations(SortedSet<Location> locations) {
+      terrainPresenter.SetHighlightLocations(locations);
     }
 
     //private Location LocationForUnit(GameObject gameObject) {
@@ -414,7 +411,28 @@ namespace AthPlayer {
           hoveredLocation = LocationFor(hit.collider.gameObject);
         }
       }
-      SetHighlightedLocation(hoveredLocation);
+
+      if (hoveredLocation != null) {
+        if (!hoveredLocation.Equals(game.player.location)) {
+          var steps =
+              AStarExplorer.Go(
+                  game.level.terrain.pattern,
+                  game.player.location,
+                  hoveredLocation,
+                  game.level.ConsiderCornersAdjacent(),
+                  (from, to) => game.player.CanStep(game.level.terrain, from, to));
+          if (steps.Count > 0) {
+            SetHighlightedLocations(new SortedSet<Location>(steps));
+          } else {
+            SetHighlightedLocations(new SortedSet<Location>());
+          }
+        } else {
+          SetHighlightedLocations(new SortedSet<Location>());
+        }
+      } else {
+        SetHighlightedLocations(new SortedSet<Location>());
+      }
+
 
       playerController.Update();
 
