@@ -17,6 +17,7 @@ public struct GameDeleteEffect : IGameEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitGameEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

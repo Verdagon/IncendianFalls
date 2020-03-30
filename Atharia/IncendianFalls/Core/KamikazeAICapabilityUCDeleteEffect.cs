@@ -17,6 +17,7 @@ public struct KamikazeAICapabilityUCDeleteEffect : IKamikazeAICapabilityUCEffect
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitKamikazeAICapabilityUCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

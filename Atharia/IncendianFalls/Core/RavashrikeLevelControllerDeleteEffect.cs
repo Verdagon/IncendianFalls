@@ -17,6 +17,7 @@ public struct RavashrikeLevelControllerDeleteEffect : IRavashrikeLevelController
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitRavashrikeLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

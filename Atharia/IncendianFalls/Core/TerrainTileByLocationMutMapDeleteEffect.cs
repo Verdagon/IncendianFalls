@@ -17,6 +17,7 @@ public struct TerrainTileByLocationMutMapDeleteEffect : ITerrainTileByLocationMu
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTerrainTileByLocationMutMapEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

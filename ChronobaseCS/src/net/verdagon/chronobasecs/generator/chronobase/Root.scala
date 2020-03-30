@@ -40,6 +40,8 @@ object Root {
        |public delegate void IEffectObserver(IEffect effect);
        |
        |public interface IEffect {
+       |  // True for deletes/removes, false for creates/adds/sets.
+       |  bool isSubtractive();
        |  void visitIEffect(IEffectVisitor visitor);
        |}
        |

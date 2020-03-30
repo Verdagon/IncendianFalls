@@ -18,6 +18,7 @@ public struct ContinueBidingImpulseStrongMutSetRemoveEffect : IContinueBidingImp
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitContinueBidingImpulseStrongMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

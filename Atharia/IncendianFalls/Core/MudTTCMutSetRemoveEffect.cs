@@ -18,6 +18,7 @@ public struct MudTTCMutSetRemoveEffect : IMudTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitMudTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

@@ -19,6 +19,7 @@ public struct VolcaetusLevelControllerCreateEffect : IVolcaetusLevelControllerEf
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitVolcaetusLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

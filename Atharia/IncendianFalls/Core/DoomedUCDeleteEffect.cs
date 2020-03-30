@@ -17,6 +17,7 @@ public struct DoomedUCDeleteEffect : IDoomedUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitDoomedUCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

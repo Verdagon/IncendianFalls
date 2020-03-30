@@ -17,6 +17,7 @@ public struct IPreActingUCWeakMutBunchDeleteEffect : IIPreActingUCWeakMutBunchEf
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitIPreActingUCWeakMutBunchEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

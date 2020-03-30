@@ -16,6 +16,7 @@ public struct BaseMovementTimeUCMutSetDeleteEffect : IBaseMovementTimeUCMutSetEf
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBaseMovementTimeUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

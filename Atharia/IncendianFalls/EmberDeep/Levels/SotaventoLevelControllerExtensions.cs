@@ -71,9 +71,11 @@ namespace Atharia.Model {
 
       if (triggerName == "levelStart") {
         game.EnterCinematic();
-        game.ShowDramatic("kylin", "My brother was an explorer.\n\nOne of the only people to explore Ember Deep and survive, thanks to his mastery of chronomancy.");
-        game.ShowDramatic("kylinBrother", "\"Ember Deep is a dangerous place, ravaged by time magic since millenia ago.\n\nPeople fear it, and call it evil. I don't think it is.\n\nPast the danger, there are wonders to discover down there, answers to the deeper mysteries of our realm.\"");
-        game.ShowDramatic("kylin", "Seven years ago, when the terrible Ravashrike attacked our town, he stood against it.");
+        game.ShowDramatic(new CommText[] {
+          new CommText("kylin", "My brother was an explorer.\n\nOne of the only people to explore Ember Deep and survive, thanks to his mastery of chronomancy."),
+          new CommText("kylinBrother", "\"Ember Deep is a dangerous place, ravaged by time magic since millenia ago.\n\nPeople fear it, and call it evil. I don't think it is.\n\nPast the danger, there are wonders to discover down there, answers to the deeper mysteries of our realm.\""),
+          new CommText("kylin", "Seven years ago, when the terrible Ravashrike attacked our town, he stood against it.")
+        });
 
         var ravashrikeHopTo1 = superstate.levelSuperstate.FindMarkerLocation("ravashrikeHopTo1");
         game.FlyCameraTo(300, ravashrikeHopTo1);
@@ -103,9 +105,11 @@ namespace Atharia.Model {
         game.Wait(1000);
         game.ShowDialogue("kylinBrother", "\"I can't fight it! Time to do something desperate...\"", "...");
         //Actions.Stasis(game, superstate, chronomancer, ravashrike);
-        game.ShowDramatic("kylin", "He used a black incendium staff to cast an Eternal Stasis on the Ravashrike...\n\nBut he caught himself in it too.");
-        game.ShowDramatic("kylin", "To undo my brother's stasis, I need to follow the caves until I find something made of black incendium.");
-        game.ShowDramatic("kylin", "Now, my journey begins.");
+        game.ShowDramatic(new CommText[] {
+          new CommText("kylin", "He used a black incendium staff to cast an Eternal Stasis on the Ravashrike...\n\nBut he caught himself in it too."),
+          new CommText("kylin", "To undo my brother's stasis, I need to follow the caves until I find something made of black incendium."),
+          new CommText("kylin", "Now, my journey begins.")
+        });
         game.ExitCinematic();
         game.AddEvent(new SetGameSpeedEvent(100).AsIGameEvent());
         var linkLocation = game.player.location;

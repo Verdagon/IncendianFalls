@@ -17,6 +17,7 @@ public struct TemporaryCloneImpulseDeleteEffect : ITemporaryCloneImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTemporaryCloneImpulseEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

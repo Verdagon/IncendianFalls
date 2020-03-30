@@ -16,6 +16,7 @@ public struct MiredUCWeakMutSetDeleteEffect : IMiredUCWeakMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitMiredUCWeakMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

@@ -17,6 +17,7 @@ public struct TimeCloneAICapabilityUCDeleteEffect : ITimeCloneAICapabilityUCEffe
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTimeCloneAICapabilityUCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

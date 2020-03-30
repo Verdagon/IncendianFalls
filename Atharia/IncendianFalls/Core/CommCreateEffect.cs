@@ -19,6 +19,7 @@ public struct CommCreateEffect : ICommEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitCommEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

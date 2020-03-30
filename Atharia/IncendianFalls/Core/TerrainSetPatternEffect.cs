@@ -22,6 +22,7 @@ public struct TerrainSetPatternEffect : ITerrainEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTerrainEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

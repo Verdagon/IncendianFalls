@@ -17,6 +17,7 @@ public struct MiredUCDeleteEffect : IMiredUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitMiredUCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

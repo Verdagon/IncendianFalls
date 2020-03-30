@@ -16,6 +16,7 @@ public struct WallTTCMutSetCreateEffect : IWallTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitWallTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

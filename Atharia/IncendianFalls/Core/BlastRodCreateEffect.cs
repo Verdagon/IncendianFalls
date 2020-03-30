@@ -19,6 +19,7 @@ public struct BlastRodCreateEffect : IBlastRodEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBlastRodEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

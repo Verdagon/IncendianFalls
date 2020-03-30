@@ -19,6 +19,7 @@ public struct ArmorCreateEffect : IArmorEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitArmorEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

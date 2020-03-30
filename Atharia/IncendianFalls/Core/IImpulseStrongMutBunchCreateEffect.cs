@@ -19,6 +19,7 @@ public struct IImpulseStrongMutBunchCreateEffect : IIImpulseStrongMutBunchEffect
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitIImpulseStrongMutBunchEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -17,6 +17,7 @@ public struct UnitDeleteEffect : IUnitEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitUnitEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

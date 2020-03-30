@@ -17,6 +17,7 @@ public struct AttackImpulseDeleteEffect : IAttackImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitAttackImpulseEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

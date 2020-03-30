@@ -18,6 +18,7 @@ public struct BlastRodMutSetAddEffect : IBlastRodMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBlastRodMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

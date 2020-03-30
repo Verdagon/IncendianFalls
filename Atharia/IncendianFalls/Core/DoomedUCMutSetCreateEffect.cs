@@ -16,6 +16,7 @@ public struct DoomedUCMutSetCreateEffect : IDoomedUCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitDoomedUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -17,6 +17,7 @@ public struct TimeAnchorTTCDeleteEffect : ITimeAnchorTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTimeAnchorTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

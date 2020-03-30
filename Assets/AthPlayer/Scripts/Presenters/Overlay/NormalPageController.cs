@@ -160,10 +160,10 @@ namespace AthPlayer {
                 panelView.SetOnStartHideCallback(buttonCallback);
               }
               panelView.SetOnFinishHideCallback(() => {
+                inputSemaphore.Unlock();
                 if (callCallbackAfterFadeOut) {
                   buttonCallback();
                 }
-                inputSemaphore.Unlock();
               });
               panelView.ScheduleClose(0);
             },

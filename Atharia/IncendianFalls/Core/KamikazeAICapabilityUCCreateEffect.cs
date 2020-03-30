@@ -19,6 +19,7 @@ public struct KamikazeAICapabilityUCCreateEffect : IKamikazeAICapabilityUCEffect
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitKamikazeAICapabilityUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

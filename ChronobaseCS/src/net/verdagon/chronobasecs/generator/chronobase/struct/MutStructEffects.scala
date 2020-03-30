@@ -68,6 +68,7 @@ object MutStructEffects {
          |  public void visitIEffect(IEffectVisitor visitor) {
          |    visitor.visit${structName}Effect(this);
          |  }
+         |  public bool isSubtractive() { return false; }
          |}
          |""".stripMargin
 
@@ -85,6 +86,7 @@ object MutStructEffects {
          |  public void visitIEffect(IEffectVisitor visitor) {
          |    visitor.visit${structName}Effect(this);
          |  }
+         |  public bool isSubtractive() { return true; }
          |}
          |""".stripMargin
 
@@ -117,6 +119,7 @@ object MutStructEffects {
                |  public void visitIEffect(IEffectVisitor visitor) {
                |    visitor.visit${structName}Effect(this);
                |  }
+               |  public bool isSubtractive() { return false; }
                |}
                |""".stripMargin
           Map(effectName -> effectDefinition)

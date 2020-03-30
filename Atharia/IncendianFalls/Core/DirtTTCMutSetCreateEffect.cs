@@ -16,6 +16,7 @@ public struct DirtTTCMutSetCreateEffect : IDirtTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitDirtTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

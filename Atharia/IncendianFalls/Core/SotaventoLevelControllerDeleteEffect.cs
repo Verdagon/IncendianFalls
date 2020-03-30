@@ -17,6 +17,7 @@ public struct SotaventoLevelControllerDeleteEffect : ISotaventoLevelControllerEf
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSotaventoLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

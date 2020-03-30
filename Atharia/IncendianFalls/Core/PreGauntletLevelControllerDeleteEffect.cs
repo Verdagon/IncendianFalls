@@ -17,6 +17,7 @@ public struct PreGauntletLevelControllerDeleteEffect : IPreGauntletLevelControll
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitPreGauntletLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

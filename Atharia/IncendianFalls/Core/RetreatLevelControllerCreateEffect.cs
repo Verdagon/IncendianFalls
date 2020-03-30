@@ -19,6 +19,7 @@ public struct RetreatLevelControllerCreateEffect : IRetreatLevelControllerEffect
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitRetreatLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

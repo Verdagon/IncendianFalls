@@ -22,6 +22,7 @@ public struct UnitSetMaxHpEffect : IUnitEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitUnitEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -17,6 +17,7 @@ public struct MireImpulseDeleteEffect : IMireImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitMireImpulseEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

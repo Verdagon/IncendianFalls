@@ -16,6 +16,7 @@ public struct AttackAICapabilityUCWeakMutSetDeleteEffect : IAttackAICapabilityUC
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitAttackAICapabilityUCWeakMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

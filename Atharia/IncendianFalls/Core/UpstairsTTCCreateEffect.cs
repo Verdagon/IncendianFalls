@@ -19,6 +19,7 @@ public struct UpStairsTTCCreateEffect : IUpStairsTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitUpStairsTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

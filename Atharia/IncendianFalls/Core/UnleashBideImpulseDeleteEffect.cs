@@ -17,6 +17,7 @@ public struct UnleashBideImpulseDeleteEffect : IUnleashBideImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitUnleashBideImpulseEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

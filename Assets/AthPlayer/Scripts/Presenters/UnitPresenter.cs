@@ -80,7 +80,7 @@ namespace AthPlayer {
         unit.components.GetOnlyBideAICapabilityUCOrNull().AddObserver(broadcaster, this);
       }
 
-      this.effectStaller = new UnitEffectStaller(previewBroadcaster, this, stallEffect);
+      this.effectStaller = new UnitEffectStaller(previewBroadcaster, game, this, stallEffect);
     }
 
     public (long, UnitView) DestroyUnitPresenter() {
@@ -906,20 +906,27 @@ namespace AthPlayer {
         IUnitEffectObserver,
         IUnitEffectVisitor,
         IIUnitComponentMutBunchObserver,
-        IIUnitComponentMutBunchEffectVisitor {
+        IIUnitComponentMutBunchEffectVisitor,
+        IGameEffectObserver,
+        IGameEffectVisitor {
 
       EffectBroadcaster previewBroadcaster;
+      Game game;
       IUnitComponentMutBunchBroadcaster componentsBroadcaster;
       private UnitPresenter unitPresenter;
       private IEffectStaller staller;
 
       public UnitEffectStaller(
           EffectBroadcaster previewBroadcaster,
+          Game game,
           UnitPresenter unitPresenter,
           IEffectStaller staller) {
         this.previewBroadcaster = previewBroadcaster;
+        this.game = game;
         this.unitPresenter = unitPresenter;
         this.staller = staller;
+
+        game.AddObserver(previewBroadcaster, this);
 
         previewBroadcaster.AddUnitObserver(unitPresenter.unit.id, this);
 
@@ -930,6 +937,7 @@ namespace AthPlayer {
       public void Destroy() {
         componentsBroadcaster.RemoveObserver(this);
         previewBroadcaster.RemoveUnitObserver(unitPresenter.unit.id, this);
+        game.AddObserver(previewBroadcaster, this);
       }
 
       public void OnUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this); }
@@ -939,41 +947,40 @@ namespace AthPlayer {
       public void visitUnitCreateEffect(UnitCreateEffect effect) { }
 
       public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
-        staller(unitPresenter.hopEndTime);
-        staller(unitPresenter.lungeEndTime);
-        staller(unitPresenter.runeEndTime);
-        staller(unitPresenter.dieEndTime);
+        staller(unitPresenter.hopEndTime, "unit hop");
+        staller(unitPresenter.lungeEndTime, "unit lunge");
+        staller(unitPresenter.runeEndTime, "unit rune");
+        staller(unitPresenter.dieEndTime, "unit die");
       }
 
       public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) {
         if (effect.newValue is UnitAttackEventAsIUnitEvent a) {
           if (a.obj.attackerId == unitPresenter.unit.id) {
-            Debug.Log("at " + unitPresenter.clock.GetTimeMs() + " stalling lunge until " + unitPresenter.lungeEndTime + " and " + unitPresenter.hopEndTime);
-            staller(unitPresenter.hopEndTime);
-            staller(unitPresenter.lungeEndTime);
+            staller(unitPresenter.hopEndTime, "unit hop");
+            staller(unitPresenter.lungeEndTime, "unit lunge");
           }
         } else if (effect.newValue is UnitCounteringEventAsIUnitEvent) {
-          staller(unitPresenter.runeEndTime);
+          staller(unitPresenter.runeEndTime, "unit rune");
         } else if (effect.newValue is UnitDefyingEventAsIUnitEvent) {
-          staller(unitPresenter.runeEndTime);
+          staller(unitPresenter.runeEndTime, "unit rune");
         } else if (effect.newValue is UnitUnleashBideEventAsIUnitEvent) {
-          staller(unitPresenter.runeEndTime);
+          staller(unitPresenter.runeEndTime, "unit rune");
         } else if (effect.newValue is UnitFireEventAsIUnitEvent f) {
           // We show a rune for both attacker and victim, so no need to check that.
-          staller(unitPresenter.runeEndTime);
+          staller(unitPresenter.runeEndTime, "unit rune");
         } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent) {
-          staller(unitPresenter.runeEndTime);
+          staller(unitPresenter.runeEndTime, "unit rune");
         }
       }
 
       public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) {
-        staller(unitPresenter.hopEndTime);
-        staller(unitPresenter.lungeEndTime);
-        staller(unitPresenter.runeEndTime);
+        staller(unitPresenter.hopEndTime, "unit hop");
+        staller(unitPresenter.lungeEndTime, "unit lunge");
+        staller(unitPresenter.runeEndTime, "unit rune");
       }
 
       public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) {
-        staller(unitPresenter.hopEndTime);
+        staller(unitPresenter.hopEndTime, "unit hop");
       }
 
       public void OnIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffect effect) { effect.visitIIUnitComponentMutBunchEffect(this); }
@@ -985,6 +992,26 @@ namespace AthPlayer {
         //if (unitComponent is DefyingUCAsIUnitComponent) {
         //} else {
         //}
+      }
+
+      public void OnGameEffect(IGameEffect effect) { effect.visitIGameEffect(this); }
+      public void visitGameCreateEffect(GameCreateEffect effect) { }
+      public void visitGameDeleteEffect(GameDeleteEffect effect) { }
+      public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) { }
+      public void visitGameSetLevelEffect(GameSetLevelEffect effect) { }
+      public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
+      public void visitGameSetActingUnitEffect(GameSetActingUnitEffect effect) { }
+      public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect effect) { }
+      public void visitGameSetActionNumEffect(GameSetActionNumEffect effect) { }
+      public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) { }
+      public void visitGameSetHideInputEffect(GameSetHideInputEffect effect) { }
+      public void visitGameSetEvventEffect(GameSetEvventEffect effect) {
+        if (effect.newValue is WaitForAnimationsEventAsIGameEvent) {
+          staller(unitPresenter.hopEndTime, "unit hop");
+          staller(unitPresenter.lungeEndTime, "unit lunge");
+          staller(unitPresenter.runeEndTime, "unit rune");
+          staller(unitPresenter.dieEndTime, "unit die");
+        }
       }
     }
   }

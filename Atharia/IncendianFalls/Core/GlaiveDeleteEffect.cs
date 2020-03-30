@@ -17,6 +17,7 @@ public struct GlaiveDeleteEffect : IGlaiveEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitGlaiveEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

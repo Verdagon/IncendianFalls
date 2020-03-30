@@ -17,6 +17,7 @@ public struct VolcaetusLevelControllerDeleteEffect : IVolcaetusLevelControllerEf
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitVolcaetusLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

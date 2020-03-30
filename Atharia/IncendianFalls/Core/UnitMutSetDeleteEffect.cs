@@ -16,6 +16,7 @@ public struct UnitMutSetDeleteEffect : IUnitMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitUnitMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

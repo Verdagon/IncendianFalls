@@ -19,6 +19,7 @@ public struct ItemTTCCreateEffect : IItemTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitItemTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

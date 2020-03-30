@@ -19,6 +19,7 @@ public struct SpeedRingCreateEffect : ISpeedRingEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSpeedRingEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -17,6 +17,7 @@ public struct BloodTTCDeleteEffect : IBloodTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBloodTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

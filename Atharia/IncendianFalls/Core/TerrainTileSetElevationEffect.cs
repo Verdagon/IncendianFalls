@@ -22,6 +22,7 @@ public struct TerrainTileSetElevationEffect : ITerrainTileEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTerrainTileEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

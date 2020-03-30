@@ -17,6 +17,7 @@ public struct SorcerousUCDeleteEffect : ISorcerousUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSorcerousUCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

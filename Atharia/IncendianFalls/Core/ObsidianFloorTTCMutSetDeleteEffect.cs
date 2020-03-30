@@ -16,6 +16,7 @@ public struct ObsidianFloorTTCMutSetDeleteEffect : IObsidianFloorTTCMutSetEffect
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitObsidianFloorTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

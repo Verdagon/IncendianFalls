@@ -16,6 +16,7 @@ public struct FallsTTCMutSetDeleteEffect : IFallsTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitFallsTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

@@ -17,6 +17,7 @@ public struct HoldPositionImpulseDeleteEffect : IHoldPositionImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitHoldPositionImpulseEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

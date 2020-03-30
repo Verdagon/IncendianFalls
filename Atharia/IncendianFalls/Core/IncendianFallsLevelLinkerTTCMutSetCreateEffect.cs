@@ -16,6 +16,7 @@ public struct IncendianFallsLevelLinkerTTCMutSetCreateEffect : IIncendianFallsLe
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitIncendianFallsLevelLinkerTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

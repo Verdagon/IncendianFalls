@@ -17,6 +17,7 @@ public struct NoImpulseDeleteEffect : INoImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitNoImpulseEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

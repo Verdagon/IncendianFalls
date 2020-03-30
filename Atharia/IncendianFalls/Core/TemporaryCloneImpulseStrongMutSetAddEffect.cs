@@ -18,6 +18,7 @@ public struct TemporaryCloneImpulseStrongMutSetAddEffect : ITemporaryCloneImpuls
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTemporaryCloneImpulseStrongMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

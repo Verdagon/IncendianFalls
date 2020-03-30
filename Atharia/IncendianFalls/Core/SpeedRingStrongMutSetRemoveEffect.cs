@@ -18,6 +18,7 @@ public struct SpeedRingStrongMutSetRemoveEffect : ISpeedRingStrongMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSpeedRingStrongMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

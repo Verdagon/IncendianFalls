@@ -19,6 +19,7 @@ public struct PreGauntletLevelControllerCreateEffect : IPreGauntletLevelControll
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitPreGauntletLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

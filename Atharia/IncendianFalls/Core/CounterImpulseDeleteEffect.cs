@@ -17,6 +17,7 @@ public struct CounterImpulseDeleteEffect : ICounterImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitCounterImpulseEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

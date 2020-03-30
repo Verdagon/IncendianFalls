@@ -16,6 +16,7 @@ public struct FloorTTCMutSetCreateEffect : IFloorTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitFloorTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

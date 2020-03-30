@@ -16,6 +16,7 @@ public struct GlaiveStrongMutSetCreateEffect : IGlaiveStrongMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitGlaiveStrongMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

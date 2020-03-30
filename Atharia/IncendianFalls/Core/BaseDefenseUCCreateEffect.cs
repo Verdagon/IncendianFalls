@@ -19,6 +19,7 @@ public struct BaseDefenseUCCreateEffect : IBaseDefenseUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBaseDefenseUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

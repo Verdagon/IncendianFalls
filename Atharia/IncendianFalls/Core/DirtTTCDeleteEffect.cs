@@ -17,6 +17,7 @@ public struct DirtTTCDeleteEffect : IDirtTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitDirtTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

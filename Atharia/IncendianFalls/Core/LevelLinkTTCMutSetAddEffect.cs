@@ -18,6 +18,7 @@ public struct LevelLinkTTCMutSetAddEffect : ILevelLinkTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitLevelLinkTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

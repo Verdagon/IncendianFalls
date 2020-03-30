@@ -17,6 +17,7 @@ public struct TerrainDeleteEffect : ITerrainEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTerrainEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

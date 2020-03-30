@@ -36,6 +36,7 @@ namespace AthPlayer {
       count++;
     }
     public void Unlock() {
+      Debug.Log("Unlocking!");
       Asserts.Assert(count > 0);
       count--;
       if (count == 0) {
@@ -57,7 +58,7 @@ namespace AthPlayer {
     SlowableTimerClock uiTimer;
     SlowableTimerClock cameraTimer;
 
-    GamePresenter gamePresenter;
+    GameController gamePresenter;
     CameraController cameraController;
 
     LookPanelView lookPanelView;
@@ -93,7 +94,7 @@ namespace AthPlayer {
       Debug.Log("Setting up level: " + sceneInitParamStartLevel);
       var randomSeed = timestamp;
       gamePresenter =
-          new GamePresenter(
+          new GameController(
               cameraTimer,
               soundPlayer,
               thinkingIndicator,

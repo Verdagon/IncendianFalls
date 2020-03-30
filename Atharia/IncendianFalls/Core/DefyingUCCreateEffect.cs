@@ -19,6 +19,7 @@ public struct DefyingUCCreateEffect : IDefyingUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitDefyingUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

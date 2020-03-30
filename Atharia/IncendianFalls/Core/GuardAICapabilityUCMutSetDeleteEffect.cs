@@ -16,6 +16,7 @@ public struct GuardAICapabilityUCMutSetDeleteEffect : IGuardAICapabilityUCMutSet
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitGuardAICapabilityUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

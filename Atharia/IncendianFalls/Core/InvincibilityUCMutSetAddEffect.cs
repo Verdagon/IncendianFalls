@@ -18,6 +18,7 @@ public struct InvincibilityUCMutSetAddEffect : IInvincibilityUCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitInvincibilityUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

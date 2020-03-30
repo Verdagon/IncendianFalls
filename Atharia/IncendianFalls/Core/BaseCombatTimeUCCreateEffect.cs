@@ -19,6 +19,7 @@ public struct BaseCombatTimeUCCreateEffect : IBaseCombatTimeUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBaseCombatTimeUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

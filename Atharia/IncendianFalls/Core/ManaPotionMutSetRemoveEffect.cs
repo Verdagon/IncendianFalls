@@ -18,6 +18,7 @@ public struct ManaPotionMutSetRemoveEffect : IManaPotionMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitManaPotionMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

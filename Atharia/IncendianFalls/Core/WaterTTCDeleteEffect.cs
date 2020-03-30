@@ -17,6 +17,7 @@ public struct WaterTTCDeleteEffect : IWaterTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitWaterTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

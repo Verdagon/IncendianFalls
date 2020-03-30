@@ -18,6 +18,7 @@ public struct WarperTTCMutSetAddEffect : IWarperTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitWarperTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

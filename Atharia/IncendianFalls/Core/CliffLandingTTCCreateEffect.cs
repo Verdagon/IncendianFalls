@@ -19,6 +19,7 @@ public struct CliffLandingTTCCreateEffect : ICliffLandingTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitCliffLandingTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

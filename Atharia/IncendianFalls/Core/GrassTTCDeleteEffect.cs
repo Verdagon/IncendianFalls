@@ -17,6 +17,7 @@ public struct GrassTTCDeleteEffect : IGrassTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitGrassTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

@@ -17,6 +17,7 @@ public struct DirtRoadLevelControllerDeleteEffect : IDirtRoadLevelControllerEffe
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitDirtRoadLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

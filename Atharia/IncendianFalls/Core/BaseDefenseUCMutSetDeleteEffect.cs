@@ -16,6 +16,7 @@ public struct BaseDefenseUCMutSetDeleteEffect : IBaseDefenseUCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBaseDefenseUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

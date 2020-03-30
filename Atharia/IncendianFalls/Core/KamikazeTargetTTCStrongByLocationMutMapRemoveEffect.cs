@@ -19,6 +19,7 @@ public struct KamikazeTargetTTCStrongByLocationMutMapRemoveEffect : IKamikazeTar
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitKamikazeTargetTTCStrongByLocationMutMapEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

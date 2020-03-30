@@ -28,20 +28,23 @@ namespace Atharia.Model {
         Unit unit,
         Level destinationLevel,
         Location destinationLevelLocation,
-        bool destroyOldLevel) {
-      if (game.level.Exists()) {
-        var oldLevel = game.level;
+        bool destroyPreviousLevel) {
+      var previousLevel = game.level;
 
+      if (previousLevel.Exists()) {
         game.level.ExitUnit(game, superstate.levelSuperstate, unit);
-
-        if (destroyOldLevel) {
-          game.levels.Remove(oldLevel);
-          oldLevel.Destruct();
-        }
       }
 
       game.level = destinationLevel;
       superstate.levelSuperstate = new LevelSuperstate(game.level);
+
+      if (previousLevel.Exists()) {
+        if (destroyPreviousLevel) {
+          game.levels.Remove(previousLevel);
+          previousLevel.Destruct();
+        }
+      }
+
 
       // These will likely be in the distant past, since it's been a while since we've
       // visited here. We'll want to bump them all up to the near future.

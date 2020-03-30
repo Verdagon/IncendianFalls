@@ -19,6 +19,7 @@ public struct WatCreateEffect : IWatEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitWatEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -9,16 +9,16 @@ namespace AthPlayer {
   public delegate void OnLocationHovered(Location location);
   public delegate void OnLocationClicked(Location location);
 
-  public delegate void IEffectStaller(long untilTimeMs);
+  public delegate void IEffectStaller(long untilTimeMs, string reason);
 
-  public class GamePresenter : IGameEffectVisitor, IGameEffectObserver, IUnitMutSetEffectVisitor, IUnitMutSetEffectObserver, IGameEventVisitor, ICommMutListEffectObserver, ICommMutListEffectVisitor {
+  public class GameController : IGameEffectVisitor, IGameEffectObserver, IUnitMutSetEffectVisitor, IUnitMutSetEffectObserver, IGameEventVisitor, ICommMutListEffectObserver, ICommMutListEffectVisitor {
     public delegate void OnExitClicked();
 
     public event OnExitClicked exitClicked;
     public OnLocationHovered LocationHovered;
     public OnLocationClicked LocationClicked;
 
-    SlowableTimerClock timer;
+    SlowableTimerClock gameTimer;
     SlowableTimerClock cinematicTimer;
     SoundPlayer soundPlayer;
 
@@ -48,9 +48,9 @@ namespace AthPlayer {
 
     long stallEffectUntilTimeMs;
 
-    CommEffectStaller commEffectStaller;
+    //CommEffectStaller commEffectStaller;
 
-    public GamePresenter(
+    public GameController(
         ITimer cameraTimer,
         SoundPlayer soundPlayer,
         GameObject thinkingIndicator,
@@ -109,20 +109,22 @@ namespace AthPlayer {
 
       var looker = new Looker(lookPanelView, broadcaster);
 
-      timer = new SlowableTimerClock(1f);
+      gameTimer = new SlowableTimerClock(1f);
       cinematicTimer = new SlowableTimerClock(1f);
 
-      commEffectStaller = new CommEffectStaller(timer, this, previewBroadcaster, StallEffect);
+      //commEffectStaller = new CommEffectStaller(gameTimer, this, previewBroadcaster, StallEffect);
 
-      inputSemaphore.OnLocked += () => timer.SetTimeSpeedMultiplier(0f);
-      inputSemaphore.OnUnlocked += () => timer.SetTimeSpeedMultiplier(1f);
+      // this was bad because when we entered cinematic mode, it hideInput=true, which locked the
+      // input semaphore, which set game speed to zero, which prevented it from exiting cinematic mode.
+      //inputSemaphore.OnLocked += () => gameTimer.SetTimeSpeedMultiplier(0f);
+      //inputSemaphore.OnUnlocked += () => gameTimer.SetTimeSpeedMultiplier(1f);
 
       game.AddObserver(broadcaster, this);
       game.comms.AddObserver(broadcaster, this);
 
       playerController =
           new PlayerController(
-              timer,
+              gameTimer,
               cinematicTimer,
               inputSemaphore,
               serverSS,
@@ -144,17 +146,24 @@ namespace AthPlayer {
       if (serverSS.waitingEffects.Count == 0) {
         return readyEffects;
       }
-      if (timer.GetTimeMs() < stallEffectUntilTimeMs) {
-        Debug.Log("stalled!");
+      if (gameTimer.GetTimeMs() < stallEffectUntilTimeMs) {
+        Debug.Log("stalled at " + gameTimer.GetTimeMs() + "! about to run: " + serverSS.waitingEffects.Peek());
         return readyEffects;
       }
 
       while (serverSS.waitingEffects.Count > 0) {
         var effect = serverSS.waitingEffects.Peek();
 
+        // Make it so having a modal overlay stalls effects too.
+        // We would make some sort of OverlayEffectStaller, but the effect
+        // stalling is based on game time, and overlays set game time speed to zero,
+        // so they never actually get unstalled.
+        if (currentModalOverlay != null) {
+          break;
+        }
         previewBroadcaster.Broadcast(effect);
         // The above previewBroadcaster should make interested parties set the stallEffectUntilTimeMs.
-        if (timer.GetTimeMs() < stallEffectUntilTimeMs) {
+        if (gameTimer.GetTimeMs() < stallEffectUntilTimeMs) {
           break;
         }
         readyEffects.Add(serverSS.waitingEffects.Dequeue());
@@ -182,9 +191,16 @@ namespace AthPlayer {
         if (readyEffects.Count > 0) {
           game.root.Transact(() => {
             foreach (var effect in readyEffects) {
-              //Debug.Log("Applying " + effect);
-              new EffectApplier(game.root).Apply(effect);
-              broadcaster.Broadcast(effect);
+              Debug.Log("Applying " + effect);
+
+              // If the event is subtractive (delete or remove) then broadcast it first.
+              if (effect.isSubtractive()) {
+                broadcaster.Broadcast(effect);
+                new EffectApplier(game.root).Apply(effect);
+              } else {
+                new EffectApplier(game.root).Apply(effect);
+                broadcaster.Broadcast(effect);
+              }
             }
             return 0;
           });
@@ -233,17 +249,20 @@ namespace AthPlayer {
       }
       unitPresenters[unitId] =
           new UnitPresenter(
-              timer, timer, soundPlayer, previewBroadcaster, StallEffect, broadcaster, game, viewedLevel.terrain, unit, instantiator);
+              gameTimer, gameTimer, soundPlayer, previewBroadcaster, StallEffect, broadcaster, game, viewedLevel.terrain, unit, instantiator);
     }
 
-    private void StallEffect(long untilTimeMs) {
-      stallEffectUntilTimeMs = Math.Max(stallEffectUntilTimeMs, untilTimeMs);
+    private void StallEffect(long untilTimeMs, string reason) {
+      if (untilTimeMs > stallEffectUntilTimeMs) {
+        Debug.Log("Stalling for " + (untilTimeMs - gameTimer.GetTimeMs()) + " reason: " + reason);
+        stallEffectUntilTimeMs = untilTimeMs;
+      }
     }
 
     private void LoadLevel() {
       viewedLevel = game.level;
 
-      this.terrainPresenter = new TerrainPresenter(timer, timer, broadcaster, viewedLevel.terrain, instantiator);
+      this.terrainPresenter = new TerrainPresenter(gameTimer, gameTimer, broadcaster, viewedLevel.terrain, instantiator);
       terrainPresenter.TerrainClicked += (location) => LocationClicked?.Invoke(location);
       terrainPresenter.TerrainHovered += (location) => LocationHovered?.Invoke(location);
 
@@ -349,11 +368,14 @@ namespace AthPlayer {
 
 
     public void Update(UnityEngine.Ray ray) {
+      gameTimer.Update();
+      cinematicTimer.Update();
+
       // We might not clean up every doomed unit view here, thats fine, we'll get em next round.
       // We only delete until we find the first still-active one.
       while (doomedUnitViews.Count > 0) {
         var animationsEndTimeAndDoomedUnitView = doomedUnitViews[0];
-        if (timer.GetTimeMs() >= animationsEndTimeAndDoomedUnitView.Key) {
+        if (gameTimer.GetTimeMs() >= animationsEndTimeAndDoomedUnitView.Key) {
           doomedUnitViews.RemoveAt(0);
           animationsEndTimeAndDoomedUnitView.Value.Destruct();
         } else {
@@ -362,9 +384,6 @@ namespace AthPlayer {
       }
 
       ConsumeEffects();
-
-      timer.Update();
-      cinematicTimer.Update();
 
       Location hoveredLocation = null;
       RaycastHit hit;
@@ -400,7 +419,7 @@ namespace AthPlayer {
     public void visitGameSetEvventEffect(GameSetEvventEffect effect) {}
     public void VisitIGameEvent(RevertedEventAsIGameEvent obj) {}
     public void VisitIGameEvent(SetGameSpeedEventAsIGameEvent obj) {
-      timer.SetTimeSpeedMultiplier(obj.obj.percent / 100f);
+      gameTimer.SetTimeSpeedMultiplier(obj.obj.percent / 100f);
     }
 
     public void VisitIGameEvent(WaitEventAsIGameEvent obj) {
@@ -446,6 +465,7 @@ namespace AthPlayer {
             comm.actions[i].label,
             () => {
               if (isModal) {
+                Debug.LogError("is modal, nulling current modal!");
                 currentModalOverlay = null;
               }
               if (i < comm.actions.Count) {
@@ -492,34 +512,35 @@ namespace AthPlayer {
       }
     }
 
-    // Stalls every effect until theres no more current overlay.
-    private class CommEffectStaller {
-      GamePresenter gamePresenter;
-      IEffectStaller stallEffect;
-      IClock clock;
-      IEffectObserver registeredObserver;
-      EffectBroadcaster previewBroadcaster;
+    //// Stalls every effect until theres no more current overlay.
+    //private class CommEffectStaller {
+    //  GamePresenter gamePresenter;
+    //  IEffectStaller stallEffect;
+    //  IClock clock;
+    //  IEffectObserver registeredObserver;
+    //  EffectBroadcaster previewBroadcaster;
 
-      public CommEffectStaller(IClock clock, GamePresenter gamePresenter, EffectBroadcaster previewBroadcaster, IEffectStaller stallEffect) {
-        this.gamePresenter = gamePresenter;
-        this.stallEffect = stallEffect;
-        this.clock = clock;
-        this.previewBroadcaster = previewBroadcaster;
+    //  public CommEffectStaller(IClock clock, GamePresenter gamePresenter, EffectBroadcaster previewBroadcaster, IEffectStaller stallEffect) {
+    //    this.gamePresenter = gamePresenter;
+    //    this.stallEffect = stallEffect;
+    //    this.clock = clock;
+    //    this.previewBroadcaster = previewBroadcaster;
 
-        registeredObserver = OnEffect;
-        previewBroadcaster.AddGlobalObserver(registeredObserver);
-      }
+    //    registeredObserver = OnEffect;
+    //    previewBroadcaster.AddGlobalObserver(registeredObserver);
+    //  }
 
-      public void Destroy() {
-        previewBroadcaster.RemoveGlobalObserver(registeredObserver);
-      }
+    //  public void Destroy() {
+    //    previewBroadcaster.RemoveGlobalObserver(registeredObserver);
+    //  }
 
-      public void OnEffect(IEffect effect) {
-        if (gamePresenter.currentModalOverlay != null) {
-          // "Check back next frame."
-          stallEffect(clock.GetTimeMs() + 1);
-        }
-      }
-    }
+    //  public void OnEffect(IEffect effect) {
+    //    if (gamePresenter.currentModalOverlay != null) {
+    //      Debug.LogError("modal is open, stalling!");
+    //      // "Check back next frame."
+    //      stallEffect(clock.GetTimeMs() + 1, "gamePresenter.currentModalOverlay != null");
+    //    }
+    //  }
+    //}
   }
 }

@@ -17,6 +17,7 @@ public struct SimplePresenceTriggerTTCDeleteEffect : ISimplePresenceTriggerTTCEf
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSimplePresenceTriggerTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

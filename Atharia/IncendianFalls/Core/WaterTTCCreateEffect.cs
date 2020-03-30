@@ -19,6 +19,7 @@ public struct WaterTTCCreateEffect : IWaterTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitWaterTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

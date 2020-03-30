@@ -17,6 +17,7 @@ public struct NestLevelControllerDeleteEffect : INestLevelControllerEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitNestLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

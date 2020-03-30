@@ -19,6 +19,7 @@ public struct LightningChargingUCCreateEffect : ILightningChargingUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitLightningChargingUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

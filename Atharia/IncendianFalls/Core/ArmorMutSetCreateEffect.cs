@@ -16,6 +16,7 @@ public struct ArmorMutSetCreateEffect : IArmorMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitArmorMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

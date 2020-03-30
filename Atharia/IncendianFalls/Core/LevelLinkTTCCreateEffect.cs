@@ -19,6 +19,7 @@ public struct LevelLinkTTCCreateEffect : ILevelLinkTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitLevelLinkTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

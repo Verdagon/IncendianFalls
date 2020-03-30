@@ -19,6 +19,7 @@ public struct BaseMovementTimeUCCreateEffect : IBaseMovementTimeUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBaseMovementTimeUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

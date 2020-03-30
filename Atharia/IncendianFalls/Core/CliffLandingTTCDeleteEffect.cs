@@ -17,6 +17,7 @@ public struct CliffLandingTTCDeleteEffect : ICliffLandingTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitCliffLandingTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

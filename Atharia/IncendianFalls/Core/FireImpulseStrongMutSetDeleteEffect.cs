@@ -16,6 +16,7 @@ public struct FireImpulseStrongMutSetDeleteEffect : IFireImpulseStrongMutSetEffe
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitFireImpulseStrongMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

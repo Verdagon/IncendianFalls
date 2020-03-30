@@ -17,6 +17,7 @@ public struct LevelDeleteEffect : ILevelEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitLevelEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

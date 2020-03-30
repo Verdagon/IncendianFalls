@@ -16,6 +16,7 @@ public struct GrassTTCMutSetDeleteEffect : IGrassTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitGrassTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

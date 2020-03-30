@@ -21,6 +21,7 @@ public struct TerrainTileByLocationMutMapAddEffect : ITerrainTileByLocationMutMa
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTerrainTileByLocationMutMapEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

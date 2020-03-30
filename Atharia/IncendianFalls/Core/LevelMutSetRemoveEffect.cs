@@ -18,6 +18,7 @@ public struct LevelMutSetRemoveEffect : ILevelMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitLevelMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

@@ -18,6 +18,7 @@ public struct UpStairsTTCMutSetRemoveEffect : IUpStairsTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitUpStairsTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

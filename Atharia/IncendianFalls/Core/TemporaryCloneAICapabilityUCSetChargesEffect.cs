@@ -22,6 +22,7 @@ public struct TemporaryCloneAICapabilityUCSetChargesEffect : ITemporaryCloneAICa
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTemporaryCloneAICapabilityUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

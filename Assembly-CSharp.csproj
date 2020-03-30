@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AthPlayer\Scripts\ConsoleDriver.cs" />
-    <Compile Include="Assets\AthPlayer\Scripts\GamePresenter.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\GameController.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\ISuperstructure.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\ITimer.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Logger.cs" />

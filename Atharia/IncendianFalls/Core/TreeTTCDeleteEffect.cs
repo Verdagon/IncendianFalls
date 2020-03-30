@@ -17,6 +17,7 @@ public struct TreeTTCDeleteEffect : ITreeTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTreeTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

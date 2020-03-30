@@ -17,6 +17,7 @@ public struct IRequestMutListCreateEffect : IIRequestMutListEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitIRequestMutListEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

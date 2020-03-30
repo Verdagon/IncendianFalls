@@ -19,6 +19,7 @@ public struct GlaiveCreateEffect : IGlaiveEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitGlaiveEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -18,6 +18,7 @@ public struct KamikazeTargetTTCMutSetRemoveEffect : IKamikazeTargetTTCMutSetEffe
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitKamikazeTargetTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

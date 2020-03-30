@@ -18,6 +18,7 @@ public struct BloodTTCMutSetAddEffect : IBloodTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBloodTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

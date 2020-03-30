@@ -17,6 +17,7 @@ public struct KamikazeTargetTTCDeleteEffect : IKamikazeTargetTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitKamikazeTargetTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

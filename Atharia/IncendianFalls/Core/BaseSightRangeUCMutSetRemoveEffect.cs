@@ -18,6 +18,7 @@ public struct BaseSightRangeUCMutSetRemoveEffect : IBaseSightRangeUCMutSetEffect
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBaseSightRangeUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

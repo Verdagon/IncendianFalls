@@ -17,6 +17,7 @@ public struct PentagonalCaveLevelControllerDeleteEffect : IPentagonalCaveLevelCo
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitPentagonalCaveLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

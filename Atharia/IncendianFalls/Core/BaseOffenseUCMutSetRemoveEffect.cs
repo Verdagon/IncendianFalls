@@ -18,6 +18,7 @@ public struct BaseOffenseUCMutSetRemoveEffect : IBaseOffenseUCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBaseOffenseUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

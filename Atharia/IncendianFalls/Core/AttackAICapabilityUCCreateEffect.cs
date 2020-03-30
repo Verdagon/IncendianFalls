@@ -19,6 +19,7 @@ public struct AttackAICapabilityUCCreateEffect : IAttackAICapabilityUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitAttackAICapabilityUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

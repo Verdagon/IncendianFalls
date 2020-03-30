@@ -19,6 +19,7 @@ public struct HealthPotionCreateEffect : IHealthPotionEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitHealthPotionEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -16,6 +16,7 @@ public struct EvaporateImpulseStrongMutSetDeleteEffect : IEvaporateImpulseStrong
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitEvaporateImpulseStrongMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

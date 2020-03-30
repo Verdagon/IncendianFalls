@@ -19,6 +19,7 @@ public struct RocksTTCCreateEffect : IRocksTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitRocksTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

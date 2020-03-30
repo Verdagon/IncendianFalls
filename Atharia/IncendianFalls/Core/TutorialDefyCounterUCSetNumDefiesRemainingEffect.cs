@@ -22,6 +22,7 @@ public struct TutorialDefyCounterUCSetNumDefiesRemainingEffect : ITutorialDefyCo
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTutorialDefyCounterUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

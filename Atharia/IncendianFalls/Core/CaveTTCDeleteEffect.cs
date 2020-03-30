@@ -17,6 +17,7 @@ public struct CaveTTCDeleteEffect : ICaveTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitCaveTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

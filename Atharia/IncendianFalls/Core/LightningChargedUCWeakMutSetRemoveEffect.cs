@@ -18,6 +18,7 @@ public struct LightningChargedUCWeakMutSetRemoveEffect : ILightningChargedUCWeak
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitLightningChargedUCWeakMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

@@ -22,6 +22,7 @@ public struct FireBombTTCSetTurnsUntilExplosionEffect : IFireBombTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitFireBombTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

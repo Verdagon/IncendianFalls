@@ -17,6 +17,7 @@ public struct BaseOffenseUCDeleteEffect : IBaseOffenseUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBaseOffenseUCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

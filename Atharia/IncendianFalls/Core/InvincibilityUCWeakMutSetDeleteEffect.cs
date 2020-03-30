@@ -16,6 +16,7 @@ public struct InvincibilityUCWeakMutSetDeleteEffect : IInvincibilityUCWeakMutSet
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitInvincibilityUCWeakMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

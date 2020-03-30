@@ -19,6 +19,7 @@ public struct MarkerTTCCreateEffect : IMarkerTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitMarkerTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

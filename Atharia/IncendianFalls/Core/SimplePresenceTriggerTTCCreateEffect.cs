@@ -19,6 +19,7 @@ public struct SimplePresenceTriggerTTCCreateEffect : ISimplePresenceTriggerTTCEf
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSimplePresenceTriggerTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

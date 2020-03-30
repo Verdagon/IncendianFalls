@@ -18,6 +18,7 @@ public struct TemporaryCloneAICapabilityUCMutSetAddEffect : ITemporaryCloneAICap
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTemporaryCloneAICapabilityUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -21,6 +21,7 @@ public struct LocationMutListAddEffect : ILocationMutListEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitLocationMutListEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -18,6 +18,7 @@ public struct StartBidingImpulseStrongMutSetAddEffect : IStartBidingImpulseStron
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitStartBidingImpulseStrongMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -19,6 +19,7 @@ public struct RavashrikeLevelControllerCreateEffect : IRavashrikeLevelController
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitRavashrikeLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

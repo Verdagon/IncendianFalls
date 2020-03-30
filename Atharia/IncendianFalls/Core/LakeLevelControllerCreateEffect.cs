@@ -19,6 +19,7 @@ public struct LakeLevelControllerCreateEffect : ILakeLevelControllerEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitLakeLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

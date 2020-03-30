@@ -19,6 +19,7 @@ public struct CounteringUCCreateEffect : ICounteringUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitCounteringUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

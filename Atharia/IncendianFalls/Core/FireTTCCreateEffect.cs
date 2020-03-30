@@ -19,6 +19,7 @@ public struct FireTTCCreateEffect : IFireTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitFireTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

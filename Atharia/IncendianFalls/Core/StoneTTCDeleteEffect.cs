@@ -17,6 +17,7 @@ public struct StoneTTCDeleteEffect : IStoneTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitStoneTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

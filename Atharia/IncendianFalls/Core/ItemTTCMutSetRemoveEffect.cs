@@ -18,6 +18,7 @@ public struct ItemTTCMutSetRemoveEffect : IItemTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitItemTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

@@ -16,6 +16,7 @@ public struct CounteringUCWeakMutSetCreateEffect : ICounteringUCWeakMutSetEffect
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitCounteringUCWeakMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

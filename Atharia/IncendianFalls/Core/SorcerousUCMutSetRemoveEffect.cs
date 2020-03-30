@@ -18,6 +18,7 @@ public struct SorcerousUCMutSetRemoveEffect : ISorcerousUCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSorcerousUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

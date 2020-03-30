@@ -19,6 +19,7 @@ public struct DefyImpulseCreateEffect : IDefyImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitDefyImpulseEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

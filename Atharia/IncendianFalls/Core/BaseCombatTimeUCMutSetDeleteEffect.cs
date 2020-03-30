@@ -16,6 +16,7 @@ public struct BaseCombatTimeUCMutSetDeleteEffect : IBaseCombatTimeUCMutSetEffect
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBaseCombatTimeUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

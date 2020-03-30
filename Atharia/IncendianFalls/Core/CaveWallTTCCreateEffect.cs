@@ -19,6 +19,7 @@ public struct CaveWallTTCCreateEffect : ICaveWallTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitCaveWallTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

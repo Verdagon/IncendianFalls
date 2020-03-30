@@ -19,6 +19,7 @@ public struct GuardAICapabilityUCCreateEffect : IGuardAICapabilityUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitGuardAICapabilityUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

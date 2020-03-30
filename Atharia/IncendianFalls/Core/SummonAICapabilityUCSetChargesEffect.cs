@@ -22,6 +22,7 @@ public struct SummonAICapabilityUCSetChargesEffect : ISummonAICapabilityUCEffect
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSummonAICapabilityUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

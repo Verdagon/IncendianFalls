@@ -18,6 +18,7 @@ public struct MagmaTTCMutSetAddEffect : IMagmaTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitMagmaTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

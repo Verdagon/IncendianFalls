@@ -17,6 +17,7 @@ public struct SummonImpulseDeleteEffect : ISummonImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSummonImpulseEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

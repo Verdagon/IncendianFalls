@@ -17,6 +17,7 @@ public struct AncientTownLevelControllerDeleteEffect : IAncientTownLevelControll
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitAncientTownLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

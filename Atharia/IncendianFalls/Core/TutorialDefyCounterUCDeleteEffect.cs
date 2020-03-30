@@ -17,6 +17,7 @@ public struct TutorialDefyCounterUCDeleteEffect : ITutorialDefyCounterUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTutorialDefyCounterUCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

@@ -18,6 +18,7 @@ public struct TreeTTCMutSetRemoveEffect : ITreeTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTreeTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

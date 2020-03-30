@@ -19,6 +19,7 @@ public struct EvaporateImpulseCreateEffect : IEvaporateImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitEvaporateImpulseEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

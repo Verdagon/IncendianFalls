@@ -19,6 +19,7 @@ public struct GrassTTCCreateEffect : IGrassTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitGrassTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

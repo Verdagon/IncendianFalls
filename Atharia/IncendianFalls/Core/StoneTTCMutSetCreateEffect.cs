@@ -16,6 +16,7 @@ public struct StoneTTCMutSetCreateEffect : IStoneTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitStoneTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

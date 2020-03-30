@@ -17,6 +17,7 @@ public struct GauntletLevelControllerDeleteEffect : IGauntletLevelControllerEffe
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitGauntletLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

@@ -81,7 +81,9 @@ namespace Domino {
 
     public void OnLevelLoaded() {
       if (game.player.Exists()) {
-        cameraController.StartMovingCameraTo(game.level.terrain.GetTileCenter(game.player.location).ToUnity(), 0);
+        if (game.level.terrain.tiles.ContainsKey(game.player.location)) {
+          cameraController.StartMovingCameraTo(game.level.terrain.GetTileCenter(game.player.location).ToUnity(), 0);
+        }
       }
     }
 

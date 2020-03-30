@@ -17,6 +17,7 @@ public struct ITerrainTileComponentMutBunchDeleteEffect : IITerrainTileComponent
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitITerrainTileComponentMutBunchEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

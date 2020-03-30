@@ -19,6 +19,7 @@ public struct MoveImpulseCreateEffect : IMoveImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitMoveImpulseEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

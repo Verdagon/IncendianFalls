@@ -19,6 +19,7 @@ public struct BridgesLevelControllerCreateEffect : IBridgesLevelControllerEffect
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBridgesLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

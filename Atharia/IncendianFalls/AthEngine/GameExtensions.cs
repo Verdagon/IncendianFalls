@@ -79,5 +79,14 @@ namespace Atharia.Model {
           new CommTextImmList(new CommText(speakerRole, text))));
       game.actionNum++;
     }
+
+    public static void ShowDramatic(this Game game, CommText[] texts, bool isObscuring = false) {
+      game.comms.Add(
+        game.root.EffectCommCreate(
+          new DramaticCommTemplate(isObscuring).AsICommTemplate(),
+          new CommActionImmList(new CommAction("...", "")),
+          new CommTextImmList(texts)));
+      game.actionNum++;
+    }
   }
 }

@@ -17,6 +17,7 @@ public struct BaseSightRangeUCDeleteEffect : IBaseSightRangeUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBaseSightRangeUCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

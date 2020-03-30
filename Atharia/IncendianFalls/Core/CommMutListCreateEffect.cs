@@ -17,6 +17,7 @@ public struct CommMutListCreateEffect : ICommMutListEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitCommMutListEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

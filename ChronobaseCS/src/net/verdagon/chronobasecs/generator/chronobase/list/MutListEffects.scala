@@ -51,6 +51,7 @@ object MutListEffects {
            |  public void visitIEffect(IEffectVisitor visitor) {
            |    visitor.visit${listName}Effect(this);
            |  }
+           |  public bool isSubtractive() { return false; }
            |}
            |""".stripMargin
 
@@ -68,6 +69,7 @@ object MutListEffects {
            |  public void visitIEffect(IEffectVisitor visitor) {
            |    visitor.visit${listName}Effect(this);
            |  }
+           |  public bool isSubtractive() { return true; }
            |}
            |""".stripMargin
 
@@ -89,6 +91,7 @@ object MutListEffects {
            |  public void visitIEffect(IEffectVisitor visitor) {
            |    visitor.visit${listName}Effect(this);
            |  }
+           |  public bool isSubtractive() { return false; }
            |}
            |""".stripMargin
 
@@ -108,6 +111,7 @@ object MutListEffects {
            |  public void visitIEffect(IEffectVisitor visitor) {
            |    visitor.visit${listName}Effect(this);
            |  }
+           |  public bool isSubtractive() { return true; }
            |}
            |""".stripMargin
 

@@ -17,6 +17,7 @@ public struct IUnitComponentMutBunchDeleteEffect : IIUnitComponentMutBunchEffect
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitIUnitComponentMutBunchEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

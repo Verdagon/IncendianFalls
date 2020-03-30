@@ -19,6 +19,7 @@ public struct FireImpulseCreateEffect : IFireImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitFireImpulseEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

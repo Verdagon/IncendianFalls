@@ -16,6 +16,7 @@ public struct BideAICapabilityUCMutSetCreateEffect : IBideAICapabilityUCMutSetEf
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBideAICapabilityUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

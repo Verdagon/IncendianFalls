@@ -16,6 +16,7 @@ public struct WaterTTCMutSetDeleteEffect : IWaterTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitWaterTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

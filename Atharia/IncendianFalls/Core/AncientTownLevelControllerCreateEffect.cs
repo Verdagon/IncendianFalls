@@ -19,6 +19,7 @@ public struct AncientTownLevelControllerCreateEffect : IAncientTownLevelControll
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitAncientTownLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

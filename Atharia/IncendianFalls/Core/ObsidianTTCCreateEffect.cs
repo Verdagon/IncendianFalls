@@ -19,6 +19,7 @@ public struct ObsidianTTCCreateEffect : IObsidianTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitObsidianTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

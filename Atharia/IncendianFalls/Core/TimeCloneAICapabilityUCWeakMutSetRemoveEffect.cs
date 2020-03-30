@@ -18,6 +18,7 @@ public struct TimeCloneAICapabilityUCWeakMutSetRemoveEffect : ITimeCloneAICapabi
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitTimeCloneAICapabilityUCWeakMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

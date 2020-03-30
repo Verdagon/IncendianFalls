@@ -22,6 +22,7 @@ public struct KamikazeAICapabilityUCSetTargetLocationCenterEffect : IKamikazeAIC
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitKamikazeAICapabilityUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

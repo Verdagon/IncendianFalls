@@ -16,6 +16,7 @@ public struct FireTTCMutSetDeleteEffect : IFireTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitFireTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

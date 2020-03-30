@@ -16,6 +16,7 @@ public struct SlowRodStrongMutSetCreateEffect : ISlowRodStrongMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSlowRodStrongMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -16,6 +16,7 @@ public struct DefyImpulseStrongMutSetDeleteEffect : IDefyImpulseStrongMutSetEffe
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitDefyImpulseStrongMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

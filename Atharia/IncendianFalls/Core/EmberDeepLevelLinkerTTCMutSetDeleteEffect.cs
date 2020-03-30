@@ -16,6 +16,7 @@ public struct EmberDeepLevelLinkerTTCMutSetDeleteEffect : IEmberDeepLevelLinkerT
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitEmberDeepLevelLinkerTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

@@ -19,6 +19,7 @@ public struct FloorTTCCreateEffect : IFloorTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitFloorTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

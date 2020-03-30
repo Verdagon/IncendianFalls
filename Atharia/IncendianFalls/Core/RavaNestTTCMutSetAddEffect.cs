@@ -18,6 +18,7 @@ public struct RavaNestTTCMutSetAddEffect : IRavaNestTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitRavaNestTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

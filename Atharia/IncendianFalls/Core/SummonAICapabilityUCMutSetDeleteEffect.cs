@@ -16,6 +16,7 @@ public struct SummonAICapabilityUCMutSetDeleteEffect : ISummonAICapabilityUCMutS
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSummonAICapabilityUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

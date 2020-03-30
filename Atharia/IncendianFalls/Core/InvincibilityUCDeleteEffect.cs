@@ -17,6 +17,7 @@ public struct InvincibilityUCDeleteEffect : IInvincibilityUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitInvincibilityUCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

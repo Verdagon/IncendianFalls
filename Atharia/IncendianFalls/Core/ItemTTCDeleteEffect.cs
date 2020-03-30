@@ -17,6 +17,7 @@ public struct ItemTTCDeleteEffect : IItemTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitItemTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

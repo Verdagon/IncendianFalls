@@ -22,6 +22,7 @@ public struct GameSetLevelEffect : IGameEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitGameEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

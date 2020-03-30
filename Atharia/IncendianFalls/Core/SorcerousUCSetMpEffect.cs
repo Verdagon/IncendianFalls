@@ -22,6 +22,7 @@ public struct SorcerousUCSetMpEffect : ISorcerousUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSorcerousUCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

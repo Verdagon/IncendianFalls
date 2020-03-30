@@ -18,6 +18,7 @@ public struct RocksTTCMutSetAddEffect : IRocksTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitRocksTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

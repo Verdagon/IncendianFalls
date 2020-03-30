@@ -17,6 +17,7 @@ public struct WarperTTCDeleteEffect : IWarperTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitWarperTTCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

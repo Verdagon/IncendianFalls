@@ -19,6 +19,7 @@ public struct MudTTCCreateEffect : IMudTTCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitMudTTCEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

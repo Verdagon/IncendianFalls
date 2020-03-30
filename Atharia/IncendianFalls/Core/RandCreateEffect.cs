@@ -19,6 +19,7 @@ public struct RandCreateEffect : IRandEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitRandEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

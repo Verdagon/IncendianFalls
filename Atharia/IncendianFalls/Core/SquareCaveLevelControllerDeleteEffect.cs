@@ -17,6 +17,7 @@ public struct SquareCaveLevelControllerDeleteEffect : ISquareCaveLevelController
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSquareCaveLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

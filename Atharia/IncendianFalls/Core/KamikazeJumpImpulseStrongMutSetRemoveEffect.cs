@@ -18,6 +18,7 @@ public struct KamikazeJumpImpulseStrongMutSetRemoveEffect : IKamikazeJumpImpulse
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitKamikazeJumpImpulseStrongMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

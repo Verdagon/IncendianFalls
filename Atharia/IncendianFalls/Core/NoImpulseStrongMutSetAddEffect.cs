@@ -18,6 +18,7 @@ public struct NoImpulseStrongMutSetAddEffect : INoImpulseStrongMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitNoImpulseStrongMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -17,6 +17,7 @@ public struct CliffLevelControllerDeleteEffect : ICliffLevelControllerEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitCliffLevelControllerEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

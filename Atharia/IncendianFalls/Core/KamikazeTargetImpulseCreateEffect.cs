@@ -19,6 +19,7 @@ public struct KamikazeTargetImpulseCreateEffect : IKamikazeTargetImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitKamikazeTargetImpulseEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

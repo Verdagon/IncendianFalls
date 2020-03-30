@@ -17,6 +17,7 @@ public struct BaseMovementTimeUCDeleteEffect : IBaseMovementTimeUCEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitBaseMovementTimeUCEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

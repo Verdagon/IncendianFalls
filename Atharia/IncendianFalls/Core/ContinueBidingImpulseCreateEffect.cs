@@ -19,6 +19,7 @@ public struct ContinueBidingImpulseCreateEffect : IContinueBidingImpulseEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitContinueBidingImpulseEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

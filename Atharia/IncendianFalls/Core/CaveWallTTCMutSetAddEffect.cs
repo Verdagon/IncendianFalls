@@ -18,6 +18,7 @@ public struct CaveWallTTCMutSetAddEffect : ICaveWallTTCMutSetEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitCaveWallTTCMutSetEffect(this);
   }
+  public bool isSubtractive() { return false; }
 }
 
 }

@@ -16,6 +16,7 @@ public struct WanderAICapabilityUCMutSetDeleteEffect : IWanderAICapabilityUCMutS
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitWanderAICapabilityUCMutSetEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

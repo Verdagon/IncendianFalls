@@ -17,6 +17,7 @@ public struct KillDirectiveDeleteEffect : IKillDirectiveEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitKillDirectiveEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }

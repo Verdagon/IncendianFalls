@@ -17,6 +17,7 @@ public struct SlowRodDeleteEffect : ISlowRodEffect {
   public void visitIEffect(IEffectVisitor visitor) {
     visitor.visitSlowRodEffect(this);
   }
+  public bool isSubtractive() { return true; }
 }
 
 }
