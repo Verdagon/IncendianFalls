@@ -5,6 +5,7 @@ using UnityEngine;
 using AthPlayer;
 using static AthPlayer.OverlayPresenter;
 using IncendianFalls;
+using static AthPlayer.NormalMode;
 
 namespace Domino {
   public class PlayerController :
@@ -27,6 +28,7 @@ namespace Domino {
     OverlayPresenterFactory overlayPresenterFactory;
     ShowInstructions showInstructions;
     ShowError showError;
+    IAnimationsDoneAndReadyForPlayerInput animationsDoneAndReadyForPlayerInput;
     SetHighlightLocations setHighlightLocations;
     Looker looker;
     OverlayPaneler overlayPaneler;
@@ -49,6 +51,7 @@ namespace Domino {
         OverlayPaneler overlayPaneler,
         OverlayPresenterFactory overlayPresenterFactory,
         CameraController innerCameraController,
+        IAnimationsDoneAndReadyForPlayerInput animationsDoneAndReadyForPlayerInput,
         ShowInstructions showInstructions,
         ShowError showError,
         GameObject thinkingIndicator,
@@ -60,6 +63,7 @@ namespace Domino {
       this.showInstructions = showInstructions;
       this.game = game;
       this.overlayPaneler = overlayPaneler;
+      this.animationsDoneAndReadyForPlayerInput = animationsDoneAndReadyForPlayerInput;
       this.timer = timer;
       this.looker = looker;
       this.overlayPresenterFactory = overlayPresenterFactory;
@@ -200,7 +204,7 @@ namespace Domino {
 
     private delegate void KeyAction();
     public void Update(Location maybeHoveredLocation) {
-      mode.OnTileMouseHover(maybeHoveredLocation);
+      mode.Update(maybeHoveredLocation);
 
       var lambdaByKey = new Dictionary<KeyCode, KeyAction>() {
         { KeyCode.A, () => ActivateCapability(PlayerPanelView.TIME_ANCHOR_MOVE_CAPABILITY_ID) },
@@ -326,7 +330,7 @@ namespace Domino {
         var overlayPresenter =
           overlayPresenterFactory(
             new NormalCommTemplate().AsICommTemplate(),
-            new List<PageText>() {  new PageText( "You have died!", new UnityEngine.Color(1, 1, 1)) },
+            new List<PageText>() { new PageText("You have died!", new UnityEngine.Color(1, 1, 1)) },
             new List<PageButton>() {new PageButton("Alas...", () => {
               throw new NotImplementedException();
               //exit?.Invoke();
@@ -355,12 +359,8 @@ namespace Domino {
       }
     }
 
-    public void StartedWaitingForPlayerInput() {
-      mode.StartedWaitingForPlayerInput();
-    }
-
     public void SwitchToNormalMode() {
-      mode = new NormalMode(ss, game, broadcaster, showError, setHighlightLocations);
+      mode = new NormalMode(ss, game, broadcaster, showError, animationsDoneAndReadyForPlayerInput, setHighlightLocations);
       modeCapabilityId = 0;
     }
 

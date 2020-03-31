@@ -61,7 +61,7 @@ namespace AthPlayer {
       delegat.SwitchToNormalMode();
     }
 
-    public void OnTileMouseHover(Location maybeHoverLocation) {
+    public void Update(Location maybeHoverLocation) {
 
     }
 

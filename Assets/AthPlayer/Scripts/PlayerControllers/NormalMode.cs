@@ -8,10 +8,13 @@ using static Domino.PlayerController;
 
 namespace AthPlayer {
   public class NormalMode : IMode, IUnitEffectObserver, IUnitEffectVisitor {
+    public delegate bool IAnimationsDoneAndReadyForPlayerInput();
+
     SuperstructureWrapper serverSS;
     Game game;
     EffectBroadcaster broadcaster;
     ShowError showError;
+    IAnimationsDoneAndReadyForPlayerInput animationsDoneAndReadyForPlayerInput;
     SetHighlightLocations setHighlightLocations;
 
     Location maybeHoverLocation;
@@ -19,14 +22,16 @@ namespace AthPlayer {
     List<Location> path;
 
     public NormalMode(
-        SuperstructureWrapper serverSs,
+        SuperstructureWrapper serverSS,
         Game game,
         EffectBroadcaster broadcaster,
         ShowError showError,
+        IAnimationsDoneAndReadyForPlayerInput animationsDoneAndReadyForPlayerInput,
         SetHighlightLocations setHighlightLocations) {
-      this.serverSS = serverSs;
+      this.serverSS = serverSS;
       this.game = game;
       this.showError = showError;
+      this.animationsDoneAndReadyForPlayerInput = animationsDoneAndReadyForPlayerInput;
       this.setHighlightLocations = setHighlightLocations;
       this.path = new List<Location>();
 
@@ -38,8 +43,14 @@ namespace AthPlayer {
     }
 
     public void OnTileMouseClick(Location newLocation) {
+      if (moving) {
+        showError("Moving canceled!");
+        moving = false;
+        path.Clear();
+        return;
+      }
+
       Asserts.Assert(game.WaitingOnPlayerInput(), "Player not ready to act yet.");
-      Asserts.Assert(!moving);
 
       var unitAtLocation = GetUnitAt(newLocation);
       if (unitAtLocation.Exists()) {
@@ -96,10 +107,16 @@ namespace AthPlayer {
       }
     }
 
-    public void OnTileMouseHover(Location maybeHoverLocation) {
+    public void Update(Location maybeHoverLocation) {
       this.maybeHoverLocation = maybeHoverLocation;
 
-      if (!moving) {
+      if (moving) {
+        Asserts.Assert(path.Count > 0);
+        Debug.Log(animationsDoneAndReadyForPlayerInput());
+        if (animationsDoneAndReadyForPlayerInput()) {
+          TakeNextStep();
+        }
+      } else {
         // TODO: cache this somehow. Perhaps even in the level superstate? Can we even have
         // a level superstate in the client root? Dont think so... Make a thing that both we
         // and the level superstate can use.
@@ -135,19 +152,6 @@ namespace AthPlayer {
       //  highlightLocations.Add(game.player.location);
       //  setHighlightLocations(highlightLocations);
       //}
-    }
-
-    public void StartedWaitingForPlayerInput() {
-      // We might be waiting for player input, but there might still be some animations going.
-      // We need to wait for animations to stop, so the player has ample opportunity to cancel.
-      // This will also fix how the pending next steps (to send to serverSS) get far ahead of
-      // the client root's state, resulting in gaps in the path.
-      //start here
-
-      if (moving) {
-        Asserts.Assert(path.Count > 0);
-        TakeNextStep();
-      }
     }
 
     private static bool PathsEqual(List<Location> a, List<Location> b) {

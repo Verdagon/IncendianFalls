@@ -52,6 +52,8 @@ namespace AthPlayer {
     long stallEffectUntilGameTimeMs;
     long stallEffectUntilUiTimeMs;
 
+    long animationsEndGameTimeMs;
+
     CameraEffectStaller cameraEffectStaller;
     WaitEffectStaller waitEffectStaller;
 
@@ -141,6 +143,7 @@ namespace AthPlayer {
               overlayPaneler,
               overlayPresenterFactory,
               cameraController,
+              AnimationsDoneAndReadyForPlayerInput,
               showInstructions,
               showError,
               thinkingIndicator,
@@ -150,6 +153,10 @@ namespace AthPlayer {
               });
 
       LoadLevel();
+    }
+
+    private void OnUnitAnimation(long endGameTimeMs) {
+      animationsEndGameTimeMs = Math.Max(animationsEndGameTimeMs, endGameTimeMs);
     }
 
     private List<IEffect> GetNextChunkOfReadyEffects() {
@@ -188,12 +195,11 @@ namespace AthPlayer {
         // If the last one was an actionNum getting set, then break here, that's the end of the chunk.
         // we should get the next waiting chunk in the same frame, unless an animation stalls it.
         if (effect is GameSetActionNumEffect || effect is RevertedEvent) {
-          Debug.LogError(effect + " and next id is " + game.root.nextId);
           break;
         }
       }
 
-      Debug.Log("returning " + readyEffects.Count + " ready effects!");
+      //Debug.Log("returning " + readyEffects.Count + " ready effects!");
       return readyEffects;
     }
 
@@ -234,10 +240,6 @@ namespace AthPlayer {
           break;
         }
       }
-
-      if (serverSS.waitingEffects.Count == 0) {
-        playerController.StartedWaitingForPlayerInput();
-      }
     }
 
     public TerrainPresenter GetTerrainPresenter() { return terrainPresenter; }
@@ -273,6 +275,7 @@ namespace AthPlayer {
       unitPresenters[unitId] =
           new UnitPresenter(
               gameTimer, gameTimer, soundPlayer, previewBroadcaster, StallEffectGameTime, broadcaster, game, viewedLevel.terrain, unit, instantiator);
+      unitPresenters[unitId].onAnimation += OnUnitAnimation;
     }
 
     private void StallEffectGameTime(long untilTimeMs, string reason) {
@@ -395,7 +398,9 @@ namespace AthPlayer {
     //  return null;
     //}
 
-
+    public bool AnimationsDoneAndReadyForPlayerInput() {
+      return serverSS.waitingEffects.Count == 0 && game.WaitingOnPlayerInput() && gameTimer.GetTimeMs() >= animationsEndGameTimeMs;
+    }
 
     public void Update(UnityEngine.Ray ray) {
       gameTimer.Update();

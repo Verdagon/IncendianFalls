@@ -15,6 +15,9 @@ namespace AthPlayer {
       IBideAICapabilityUCEffectVisitor,
       ISorcerousUCEffectObserver,
       ISorcerousUCEffectVisitor {
+    public delegate void IOnAnimation(long endGameTimeMs);
+    public event IOnAnimation onAnimation;
+
     bool instanceAlive;
     IClock clock;
     ITimer timer;
@@ -128,6 +131,7 @@ namespace AthPlayer {
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) {
       var newPosition = game.level.terrain.GetTileCenter(unit.location).ToUnity();
       hopEndTime = unitView.GetComponent<UnitView>().HopTo(newPosition);
+      onAnimation?.Invoke(hopEndTime);
 
       //// If it's the player or a time shift clone, stall the next turn until we're done.
       //if (unit.good) {
@@ -140,6 +144,7 @@ namespace AthPlayer {
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) {
       if (effect.newValue != 0) {
         dieEndTime = unitView.Die();
+        onAnimation?.Invoke(dieEndTime);
       }
     }
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
@@ -808,6 +813,7 @@ namespace AthPlayer {
 
           lungeEndTime =
             unitView.Lunge((victimPosition - attackerPosition).normalized * .25f);
+          onAnimation?.Invoke(lungeEndTime);
         }
       } else if (effect.newValue is UnitUnleashBideEventAsIUnitEvent) {
         runeEndTime =
@@ -823,6 +829,7 @@ namespace AthPlayer {
                       new UnityEngine.Color(0, 0, 0)),
                   true,
                   new UnityEngine.Color(0, 0, 1f, 1f)));
+        onAnimation?.Invoke(runeEndTime);
       } else if (effect.newValue is UnitDefyingEventAsIUnitEvent) {
         runeEndTime =
           unitView.ShowRune(
@@ -837,6 +844,7 @@ namespace AthPlayer {
                       new UnityEngine.Color(0, 0, 0)),
                   true,
                   new UnityEngine.Color(0, 0, 1f, 1f)));
+        onAnimation?.Invoke(runeEndTime);
       } else if (effect.newValue is UnitCounteringEventAsIUnitEvent) {
         runeEndTime =
           unitView.ShowRune(
@@ -851,6 +859,7 @@ namespace AthPlayer {
                       new UnityEngine.Color(0, 0, 0)),
                   true,
                   new UnityEngine.Color(0, 0, 1f, 1f)));
+        onAnimation?.Invoke(runeEndTime);
       } else if (effect.newValue is UnitFireEventAsIUnitEvent ufe) {
         if (unit.id == ufe.obj.attackerId) {
           runeEndTime =
@@ -866,6 +875,7 @@ namespace AthPlayer {
                       new UnityEngine.Color(0, 0, 0)),
                   true,
                   new UnityEngine.Color(0, 0, 1f, 1f)));
+          onAnimation?.Invoke(runeEndTime);
         } else if (unit.id == ufe.obj.victimId) {
           runeEndTime =
             unitView.ShowRune(
@@ -880,6 +890,7 @@ namespace AthPlayer {
                       new UnityEngine.Color(0.8f, .4f, 0, 1.5f)),
                   true,
                   new UnityEngine.Color(0, 0, 1f, 1f)));
+          onAnimation?.Invoke(runeEndTime);
         }
       } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent ufbe) {
         runeEndTime =
@@ -895,6 +906,7 @@ namespace AthPlayer {
                       new UnityEngine.Color(0.8f, .4f, 0, 1.5f)),
                   true,
                   new UnityEngine.Color(0, 0, 1f, 1f)));
+        onAnimation?.Invoke(runeEndTime);
       } else {
 
       }
