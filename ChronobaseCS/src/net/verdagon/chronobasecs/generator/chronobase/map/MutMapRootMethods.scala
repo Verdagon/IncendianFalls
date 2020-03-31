@@ -47,9 +47,9 @@ object MutMapRootMethods {
        |      }
        |    }
        |    public ${mapName} Effect${mapName}Create() {
-       |      return Effect${mapName}CreateWithId(NewId());
+       |      return TrustedEffect${mapName}CreateWithId(NewId());
        |    }
-       |    public ${mapName} Effect${mapName}CreateWithId(int id) {
+       |    public ${mapName} TrustedEffect${mapName}CreateWithId(int id) {
        |      CheckUnlocked();
        |      Asserts.Assert(!rootIncarnation.incarnations${mapName}.ContainsKey(id));
        |      EffectInternalCreate${mapName}(

@@ -13,21 +13,23 @@ namespace AthPlayer {
   public class TerrainPresenter : ITerrainEffectVisitor, ITerrainEffectObserver, ITerrainTileByLocationMutMapEffectObserver, ITerrainTileByLocationMutMapEffectVisitor {
     IClock clock;
     ITimer timer;
-    EffectBroadcaster broadcaster;
-  Atharia.Model.Terrain terrain;
+    EffectBroadcaster preBroadcaster;
+    EffectBroadcaster postBroadcaster;
+    Atharia.Model.Terrain terrain;
     Instantiator instantiator;
     Dictionary<Location, TerrainTilePresenter> tilePresenters = new Dictionary<Location, TerrainTilePresenter>();
 
     SortedSet<Location> highlightLocations = new SortedSet<Location>();
 
-    public TerrainPresenter(IClock clock, ITimer timer, EffectBroadcaster broadcaster, Atharia.Model.Terrain terrain, Instantiator instantiator) {
+    public TerrainPresenter(IClock clock, ITimer timer, EffectBroadcaster preBroadcaster, EffectBroadcaster postBroadcaster, Atharia.Model.Terrain terrain, Instantiator instantiator) {
       this.clock = clock;
       this.timer = timer;
-      this.broadcaster = broadcaster;
+      this.preBroadcaster = preBroadcaster;
+      this.postBroadcaster = postBroadcaster;
       this.terrain = terrain;
       this.instantiator = instantiator;
-      terrain.AddObserver(broadcaster, this);
-      terrain.tiles.AddObserver(broadcaster, this);
+      terrain.AddObserver(postBroadcaster, this);
+      terrain.tiles.AddObserver(postBroadcaster, this);
 
       foreach (var locationAndTile in terrain.tiles) {
         addTerrainTile(locationAndTile.Key, locationAndTile.Value);
@@ -35,7 +37,7 @@ namespace AthPlayer {
     }
 
     public void addTerrainTile(Location location, TerrainTile tile) {
-      var presenter = new TerrainTilePresenter(clock, timer, broadcaster, terrain, location, tile, instantiator);
+      var presenter = new TerrainTilePresenter(clock, timer, preBroadcaster, postBroadcaster, terrain, location, tile, instantiator);
       tilePresenters.Add(location, presenter);
     }
 
@@ -45,9 +47,9 @@ namespace AthPlayer {
       }
       if (terrain.Exists()) {
         if (terrain.tiles.Exists()) {
-          terrain.tiles.RemoveObserver(broadcaster, this);
+          terrain.tiles.RemoveObserver(postBroadcaster, this);
         }
-        terrain.RemoveObserver(broadcaster, this);
+        terrain.RemoveObserver(postBroadcaster, this);
       }
     }
 

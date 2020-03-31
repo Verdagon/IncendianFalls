@@ -138,9 +138,11 @@ namespace AthPlayer {
 
     private void UpdateHighlight() {
       //if (moving) {
-        // We're moving right now, just highlight that one space and the current path.
-        var highlightLocations = new SortedSet<Location>(path);
+      // We're moving right now, just highlight that one space and the current path.
+      var highlightLocations = new SortedSet<Location>(path);
+      if (game.player.Exists()) {
         highlightLocations.Add(game.player.location);
+      }
         if (maybeHoverLocation != null) {
           highlightLocations.Add(maybeHoverLocation);
         }

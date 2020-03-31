@@ -228,7 +228,7 @@ public void visitRandEffect(IRandEffect effect) { effect.visitIRandEffect(this);
   public void visitRandCreateEffect(RandCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectRandCreateWithId(effect.id
+    root.TrustedEffectRandCreateWithId(effect.id
 ,  effect.incarnation.rand    );
 
 }
@@ -249,7 +249,7 @@ public void visitHoldPositionImpulseEffect(IHoldPositionImpulseEffect effect) { 
   public void visitHoldPositionImpulseCreateEffect(HoldPositionImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectHoldPositionImpulseCreateWithId(effect.id
+    root.TrustedEffectHoldPositionImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight
 ,  effect.incarnation.duration    );
 
@@ -264,7 +264,7 @@ public void visitWanderAICapabilityUCEffect(IWanderAICapabilityUCEffect effect) 
   public void visitWanderAICapabilityUCCreateEffect(WanderAICapabilityUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectWanderAICapabilityUCCreateWithId(effect.id
+    root.TrustedEffectWanderAICapabilityUCCreateWithId(effect.id
     );
 
 }
@@ -278,7 +278,7 @@ public void visitTutorialDefyCounterUCEffect(ITutorialDefyCounterUCEffect effect
   public void visitTutorialDefyCounterUCCreateEffect(TutorialDefyCounterUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectTutorialDefyCounterUCCreateWithId(effect.id
+    root.TrustedEffectTutorialDefyCounterUCCreateWithId(effect.id
 ,  effect.incarnation.numDefiesRemaining
 ,  effect.incarnation.onChangeTriggerName    );
 
@@ -300,7 +300,7 @@ public void visitUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this);
   public void visitUnitCreateEffect(UnitCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectUnitCreateWithId(effect.id
+    root.TrustedEffectUnitCreateWithId(effect.id
 ,  effect.incarnation.evvent
 ,  effect.incarnation.lifeEndTime
 ,  effect.incarnation.location
@@ -308,7 +308,7 @@ public void visitUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this);
 ,  effect.incarnation.nextActionTime
 ,  effect.incarnation.hp
 ,  effect.incarnation.maxHp
-,  root.GetIUnitComponentMutBunch(effect.incarnation.components)
+,  effect.incarnation.components
 ,  effect.incarnation.good    );
 
 }
@@ -364,36 +364,36 @@ public void visitIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffect effe
   public void visitIUnitComponentMutBunchCreateEffect(IUnitComponentMutBunchCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectIUnitComponentMutBunchCreateWithId(effect.id
-,  root.GetTutorialDefyCounterUCMutSet(effect.incarnation.membersTutorialDefyCounterUCMutSet)
-,  root.GetLightningChargingUCMutSet(effect.incarnation.membersLightningChargingUCMutSet)
-,  root.GetWanderAICapabilityUCMutSet(effect.incarnation.membersWanderAICapabilityUCMutSet)
-,  root.GetTemporaryCloneAICapabilityUCMutSet(effect.incarnation.membersTemporaryCloneAICapabilityUCMutSet)
-,  root.GetSummonAICapabilityUCMutSet(effect.incarnation.membersSummonAICapabilityUCMutSet)
-,  root.GetKamikazeAICapabilityUCMutSet(effect.incarnation.membersKamikazeAICapabilityUCMutSet)
-,  root.GetGuardAICapabilityUCMutSet(effect.incarnation.membersGuardAICapabilityUCMutSet)
-,  root.GetTimeCloneAICapabilityUCMutSet(effect.incarnation.membersTimeCloneAICapabilityUCMutSet)
-,  root.GetDoomedUCMutSet(effect.incarnation.membersDoomedUCMutSet)
-,  root.GetMiredUCMutSet(effect.incarnation.membersMiredUCMutSet)
-,  root.GetAttackAICapabilityUCMutSet(effect.incarnation.membersAttackAICapabilityUCMutSet)
-,  root.GetCounteringUCMutSet(effect.incarnation.membersCounteringUCMutSet)
-,  root.GetLightningChargedUCMutSet(effect.incarnation.membersLightningChargedUCMutSet)
-,  root.GetInvincibilityUCMutSet(effect.incarnation.membersInvincibilityUCMutSet)
-,  root.GetDefyingUCMutSet(effect.incarnation.membersDefyingUCMutSet)
-,  root.GetBideAICapabilityUCMutSet(effect.incarnation.membersBideAICapabilityUCMutSet)
-,  root.GetBaseSightRangeUCMutSet(effect.incarnation.membersBaseSightRangeUCMutSet)
-,  root.GetBaseMovementTimeUCMutSet(effect.incarnation.membersBaseMovementTimeUCMutSet)
-,  root.GetBaseCombatTimeUCMutSet(effect.incarnation.membersBaseCombatTimeUCMutSet)
-,  root.GetManaPotionMutSet(effect.incarnation.membersManaPotionMutSet)
-,  root.GetHealthPotionMutSet(effect.incarnation.membersHealthPotionMutSet)
-,  root.GetSpeedRingMutSet(effect.incarnation.membersSpeedRingMutSet)
-,  root.GetGlaiveMutSet(effect.incarnation.membersGlaiveMutSet)
-,  root.GetSlowRodMutSet(effect.incarnation.membersSlowRodMutSet)
-,  root.GetBlastRodMutSet(effect.incarnation.membersBlastRodMutSet)
-,  root.GetArmorMutSet(effect.incarnation.membersArmorMutSet)
-,  root.GetSorcerousUCMutSet(effect.incarnation.membersSorcerousUCMutSet)
-,  root.GetBaseOffenseUCMutSet(effect.incarnation.membersBaseOffenseUCMutSet)
-,  root.GetBaseDefenseUCMutSet(effect.incarnation.membersBaseDefenseUCMutSet)    );
+    root.TrustedEffectIUnitComponentMutBunchCreateWithId(effect.id
+,  effect.incarnation.membersTutorialDefyCounterUCMutSet
+,  effect.incarnation.membersLightningChargingUCMutSet
+,  effect.incarnation.membersWanderAICapabilityUCMutSet
+,  effect.incarnation.membersTemporaryCloneAICapabilityUCMutSet
+,  effect.incarnation.membersSummonAICapabilityUCMutSet
+,  effect.incarnation.membersKamikazeAICapabilityUCMutSet
+,  effect.incarnation.membersGuardAICapabilityUCMutSet
+,  effect.incarnation.membersTimeCloneAICapabilityUCMutSet
+,  effect.incarnation.membersDoomedUCMutSet
+,  effect.incarnation.membersMiredUCMutSet
+,  effect.incarnation.membersAttackAICapabilityUCMutSet
+,  effect.incarnation.membersCounteringUCMutSet
+,  effect.incarnation.membersLightningChargedUCMutSet
+,  effect.incarnation.membersInvincibilityUCMutSet
+,  effect.incarnation.membersDefyingUCMutSet
+,  effect.incarnation.membersBideAICapabilityUCMutSet
+,  effect.incarnation.membersBaseSightRangeUCMutSet
+,  effect.incarnation.membersBaseMovementTimeUCMutSet
+,  effect.incarnation.membersBaseCombatTimeUCMutSet
+,  effect.incarnation.membersManaPotionMutSet
+,  effect.incarnation.membersHealthPotionMutSet
+,  effect.incarnation.membersSpeedRingMutSet
+,  effect.incarnation.membersGlaiveMutSet
+,  effect.incarnation.membersSlowRodMutSet
+,  effect.incarnation.membersBlastRodMutSet
+,  effect.incarnation.membersArmorMutSet
+,  effect.incarnation.membersSorcerousUCMutSet
+,  effect.incarnation.membersBaseOffenseUCMutSet
+,  effect.incarnation.membersBaseDefenseUCMutSet    );
 
 }
 
@@ -406,7 +406,7 @@ public void visitLightningChargedUCEffect(ILightningChargedUCEffect effect) { ef
   public void visitLightningChargedUCCreateEffect(LightningChargedUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectLightningChargedUCCreateWithId(effect.id
+    root.TrustedEffectLightningChargedUCCreateWithId(effect.id
     );
 
 }
@@ -420,7 +420,7 @@ public void visitLightningChargingUCEffect(ILightningChargingUCEffect effect) { 
   public void visitLightningChargingUCCreateEffect(LightningChargingUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectLightningChargingUCCreateWithId(effect.id
+    root.TrustedEffectLightningChargingUCCreateWithId(effect.id
     );
 
 }
@@ -434,7 +434,7 @@ public void visitDoomedUCEffect(IDoomedUCEffect effect) { effect.visitIDoomedUCE
   public void visitDoomedUCCreateEffect(DoomedUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectDoomedUCCreateWithId(effect.id
+    root.TrustedEffectDoomedUCCreateWithId(effect.id
 ,  effect.incarnation.deathTime    );
 
 }
@@ -448,7 +448,7 @@ public void visitTemporaryCloneImpulseEffect(ITemporaryCloneImpulseEffect effect
   public void visitTemporaryCloneImpulseCreateEffect(TemporaryCloneImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectTemporaryCloneImpulseCreateWithId(effect.id
+    root.TrustedEffectTemporaryCloneImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight
 ,  effect.incarnation.blueprintName
 ,  effect.incarnation.location
@@ -465,7 +465,7 @@ public void visitTemporaryCloneAICapabilityUCEffect(ITemporaryCloneAICapabilityU
   public void visitTemporaryCloneAICapabilityUCCreateEffect(TemporaryCloneAICapabilityUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectTemporaryCloneAICapabilityUCCreateWithId(effect.id
+    root.TrustedEffectTemporaryCloneAICapabilityUCCreateWithId(effect.id
 ,  effect.incarnation.blueprintName
 ,  effect.incarnation.charges    );
 
@@ -487,7 +487,7 @@ public void visitSummonImpulseEffect(ISummonImpulseEffect effect) { effect.visit
   public void visitSummonImpulseCreateEffect(SummonImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectSummonImpulseCreateWithId(effect.id
+    root.TrustedEffectSummonImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight
 ,  effect.incarnation.blueprintName
 ,  effect.incarnation.location    );
@@ -503,7 +503,7 @@ public void visitSummonAICapabilityUCEffect(ISummonAICapabilityUCEffect effect) 
   public void visitSummonAICapabilityUCCreateEffect(SummonAICapabilityUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectSummonAICapabilityUCCreateWithId(effect.id
+    root.TrustedEffectSummonAICapabilityUCCreateWithId(effect.id
 ,  effect.incarnation.blueprintName
 ,  effect.incarnation.charges    );
 
@@ -525,7 +525,7 @@ public void visitSorcerousUCEffect(ISorcerousUCEffect effect) { effect.visitISor
   public void visitSorcerousUCCreateEffect(SorcerousUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectSorcerousUCCreateWithId(effect.id
+    root.TrustedEffectSorcerousUCCreateWithId(effect.id
 ,  effect.incarnation.mp
 ,  effect.incarnation.maxMp    );
 
@@ -554,7 +554,7 @@ public void visitBaseOffenseUCEffect(IBaseOffenseUCEffect effect) { effect.visit
   public void visitBaseOffenseUCCreateEffect(BaseOffenseUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectBaseOffenseUCCreateWithId(effect.id
+    root.TrustedEffectBaseOffenseUCCreateWithId(effect.id
 ,  effect.incarnation.outgoingDamageAddConstant
 ,  effect.incarnation.outgoingDamageMultiplierPercent    );
 
@@ -569,7 +569,7 @@ public void visitBaseSightRangeUCEffect(IBaseSightRangeUCEffect effect) { effect
   public void visitBaseSightRangeUCCreateEffect(BaseSightRangeUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectBaseSightRangeUCCreateWithId(effect.id
+    root.TrustedEffectBaseSightRangeUCCreateWithId(effect.id
 ,  effect.incarnation.sightRangeAddConstant
 ,  effect.incarnation.sightRangeMultiplierPercent    );
 
@@ -584,7 +584,7 @@ public void visitBaseMovementTimeUCEffect(IBaseMovementTimeUCEffect effect) { ef
   public void visitBaseMovementTimeUCCreateEffect(BaseMovementTimeUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectBaseMovementTimeUCCreateWithId(effect.id
+    root.TrustedEffectBaseMovementTimeUCCreateWithId(effect.id
 ,  effect.incarnation.movementTimeAddConstant
 ,  effect.incarnation.movementTimeMultiplierPercent    );
 
@@ -599,7 +599,7 @@ public void visitBaseDefenseUCEffect(IBaseDefenseUCEffect effect) { effect.visit
   public void visitBaseDefenseUCCreateEffect(BaseDefenseUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectBaseDefenseUCCreateWithId(effect.id
+    root.TrustedEffectBaseDefenseUCCreateWithId(effect.id
 ,  effect.incarnation.incomingDamageAddConstant
 ,  effect.incarnation.incomingDamageMultiplierPercent    );
 
@@ -614,7 +614,7 @@ public void visitBaseCombatTimeUCEffect(IBaseCombatTimeUCEffect effect) { effect
   public void visitBaseCombatTimeUCCreateEffect(BaseCombatTimeUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectBaseCombatTimeUCCreateWithId(effect.id
+    root.TrustedEffectBaseCombatTimeUCCreateWithId(effect.id
 ,  effect.incarnation.combatTimeAddConstant
 ,  effect.incarnation.combatTimeMultiplierPercent    );
 
@@ -629,7 +629,7 @@ public void visitMiredUCEffect(IMiredUCEffect effect) { effect.visitIMiredUCEffe
   public void visitMiredUCCreateEffect(MiredUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectMiredUCCreateWithId(effect.id
+    root.TrustedEffectMiredUCCreateWithId(effect.id
     );
 
 }
@@ -643,9 +643,9 @@ public void visitMireImpulseEffect(IMireImpulseEffect effect) { effect.visitIMir
   public void visitMireImpulseCreateEffect(MireImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectMireImpulseCreateWithId(effect.id
+    root.TrustedEffectMireImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight
-,  root.GetUnit(effect.incarnation.targetUnit)    );
+,  effect.incarnation.targetUnit    );
 
 }
 
@@ -658,7 +658,7 @@ public void visitEvaporateImpulseEffect(IEvaporateImpulseEffect effect) { effect
   public void visitEvaporateImpulseCreateEffect(EvaporateImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectEvaporateImpulseCreateWithId(effect.id
+    root.TrustedEffectEvaporateImpulseCreateWithId(effect.id
     );
 
 }
@@ -672,8 +672,8 @@ public void visitTimeCloneAICapabilityUCEffect(ITimeCloneAICapabilityUCEffect ef
   public void visitTimeCloneAICapabilityUCCreateEffect(TimeCloneAICapabilityUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectTimeCloneAICapabilityUCCreateWithId(effect.id
-,  root.GetIRequestMutListOrNull(effect.incarnation.script)    );
+    root.TrustedEffectTimeCloneAICapabilityUCCreateWithId(effect.id
+,  effect.incarnation.script    );
 
 }
 
@@ -686,7 +686,7 @@ public void visitMoveImpulseEffect(IMoveImpulseEffect effect) { effect.visitIMov
   public void visitMoveImpulseCreateEffect(MoveImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectMoveImpulseCreateWithId(effect.id
+    root.TrustedEffectMoveImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight
 ,  effect.incarnation.stepLocation    );
 
@@ -701,8 +701,8 @@ public void visitKamikazeTargetTTCEffect(IKamikazeTargetTTCEffect effect) { effe
   public void visitKamikazeTargetTTCCreateEffect(KamikazeTargetTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectKamikazeTargetTTCCreateWithId(effect.id
-,  root.GetKamikazeAICapabilityUC(effect.incarnation.capability)    );
+    root.TrustedEffectKamikazeTargetTTCCreateWithId(effect.id
+,  effect.incarnation.capability    );
 
 }
 
@@ -715,9 +715,9 @@ public void visitKamikazeJumpImpulseEffect(IKamikazeJumpImpulseEffect effect) { 
   public void visitKamikazeJumpImpulseCreateEffect(KamikazeJumpImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectKamikazeJumpImpulseCreateWithId(effect.id
+    root.TrustedEffectKamikazeJumpImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight
-,  root.GetKamikazeAICapabilityUC(effect.incarnation.capability)
+,  effect.incarnation.capability
 ,  effect.incarnation.jumpTarget    );
 
 }
@@ -731,9 +731,9 @@ public void visitKamikazeTargetImpulseEffect(IKamikazeTargetImpulseEffect effect
   public void visitKamikazeTargetImpulseCreateEffect(KamikazeTargetImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectKamikazeTargetImpulseCreateWithId(effect.id
+    root.TrustedEffectKamikazeTargetImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight
-,  root.GetKamikazeAICapabilityUC(effect.incarnation.capability)
+,  effect.incarnation.capability
 ,  effect.incarnation.targetLocationCenter
 ,  effect.incarnation.targetLocations    );
 
@@ -748,8 +748,8 @@ public void visitKamikazeAICapabilityUCEffect(IKamikazeAICapabilityUCEffect effe
   public void visitKamikazeAICapabilityUCCreateEffect(KamikazeAICapabilityUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectKamikazeAICapabilityUCCreateWithId(effect.id
-,  root.GetKamikazeTargetTTCStrongByLocationMutMap(effect.incarnation.targetByLocation)
+    root.TrustedEffectKamikazeAICapabilityUCCreateWithId(effect.id
+,  effect.incarnation.targetByLocation
 ,  effect.incarnation.targetLocationCenter    );
 
 }
@@ -777,7 +777,7 @@ public void visitInvincibilityUCEffect(IInvincibilityUCEffect effect) { effect.v
   public void visitInvincibilityUCCreateEffect(InvincibilityUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectInvincibilityUCCreateWithId(effect.id
+    root.TrustedEffectInvincibilityUCCreateWithId(effect.id
     );
 
 }
@@ -791,7 +791,7 @@ public void visitGuardAICapabilityUCEffect(IGuardAICapabilityUCEffect effect) { 
   public void visitGuardAICapabilityUCCreateEffect(GuardAICapabilityUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectGuardAICapabilityUCCreateWithId(effect.id
+    root.TrustedEffectGuardAICapabilityUCCreateWithId(effect.id
 ,  effect.incarnation.guardCenterLocation
 ,  effect.incarnation.guardRadius    );
 
@@ -806,7 +806,7 @@ public void visitNoImpulseEffect(INoImpulseEffect effect) { effect.visitINoImpul
   public void visitNoImpulseCreateEffect(NoImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectNoImpulseCreateWithId(effect.id
+    root.TrustedEffectNoImpulseCreateWithId(effect.id
     );
 
 }
@@ -820,9 +820,9 @@ public void visitFireImpulseEffect(IFireImpulseEffect effect) { effect.visitIFir
   public void visitFireImpulseCreateEffect(FireImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectFireImpulseCreateWithId(effect.id
+    root.TrustedEffectFireImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight
-,  root.GetUnit(effect.incarnation.targetUnit)    );
+,  effect.incarnation.targetUnit    );
 
 }
 
@@ -835,7 +835,7 @@ public void visitDefyingUCEffect(IDefyingUCEffect effect) { effect.visitIDefying
   public void visitDefyingUCCreateEffect(DefyingUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectDefyingUCCreateWithId(effect.id
+    root.TrustedEffectDefyingUCCreateWithId(effect.id
     );
 
 }
@@ -849,7 +849,7 @@ public void visitDefyImpulseEffect(IDefyImpulseEffect effect) { effect.visitIDef
   public void visitDefyImpulseCreateEffect(DefyImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectDefyImpulseCreateWithId(effect.id
+    root.TrustedEffectDefyImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight    );
 
 }
@@ -863,7 +863,7 @@ public void visitCounteringUCEffect(ICounteringUCEffect effect) { effect.visitIC
   public void visitCounteringUCCreateEffect(CounteringUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectCounteringUCCreateWithId(effect.id
+    root.TrustedEffectCounteringUCCreateWithId(effect.id
     );
 
 }
@@ -877,7 +877,7 @@ public void visitCounterImpulseEffect(ICounterImpulseEffect effect) { effect.vis
   public void visitCounterImpulseCreateEffect(CounterImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectCounterImpulseCreateWithId(effect.id
+    root.TrustedEffectCounterImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight    );
 
 }
@@ -891,7 +891,7 @@ public void visitUnleashBideImpulseEffect(IUnleashBideImpulseEffect effect) { ef
   public void visitUnleashBideImpulseCreateEffect(UnleashBideImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectUnleashBideImpulseCreateWithId(effect.id
+    root.TrustedEffectUnleashBideImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight    );
 
 }
@@ -905,7 +905,7 @@ public void visitContinueBidingImpulseEffect(IContinueBidingImpulseEffect effect
   public void visitContinueBidingImpulseCreateEffect(ContinueBidingImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectContinueBidingImpulseCreateWithId(effect.id
+    root.TrustedEffectContinueBidingImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight    );
 
 }
@@ -919,7 +919,7 @@ public void visitStartBidingImpulseEffect(IStartBidingImpulseEffect effect) { ef
   public void visitStartBidingImpulseCreateEffect(StartBidingImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectStartBidingImpulseCreateWithId(effect.id
+    root.TrustedEffectStartBidingImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight    );
 
 }
@@ -933,7 +933,7 @@ public void visitBideAICapabilityUCEffect(IBideAICapabilityUCEffect effect) { ef
   public void visitBideAICapabilityUCCreateEffect(BideAICapabilityUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectBideAICapabilityUCCreateWithId(effect.id
+    root.TrustedEffectBideAICapabilityUCCreateWithId(effect.id
 ,  effect.incarnation.charge    );
 
 }
@@ -954,9 +954,9 @@ public void visitAttackImpulseEffect(IAttackImpulseEffect effect) { effect.visit
   public void visitAttackImpulseCreateEffect(AttackImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectAttackImpulseCreateWithId(effect.id
+    root.TrustedEffectAttackImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight
-,  root.GetUnit(effect.incarnation.targetUnit)    );
+,  effect.incarnation.targetUnit    );
 
 }
 
@@ -969,7 +969,7 @@ public void visitPursueImpulseEffect(IPursueImpulseEffect effect) { effect.visit
   public void visitPursueImpulseCreateEffect(PursueImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectPursueImpulseCreateWithId(effect.id
+    root.TrustedEffectPursueImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight
 ,  effect.incarnation.isClearPath    );
 
@@ -984,9 +984,9 @@ public void visitKillDirectiveEffect(IKillDirectiveEffect effect) { effect.visit
   public void visitKillDirectiveCreateEffect(KillDirectiveCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectKillDirectiveCreateWithId(effect.id
-,  root.GetUnitOrNull(effect.incarnation.targetUnit)
-,  root.GetLocationMutList(effect.incarnation.pathToLastSeenLocation)    );
+    root.TrustedEffectKillDirectiveCreateWithId(effect.id
+,  effect.incarnation.targetUnit
+,  effect.incarnation.pathToLastSeenLocation    );
 
 }
 
@@ -999,8 +999,8 @@ public void visitAttackAICapabilityUCEffect(IAttackAICapabilityUCEffect effect) 
   public void visitAttackAICapabilityUCCreateEffect(AttackAICapabilityUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectAttackAICapabilityUCCreateWithId(effect.id
-,  root.GetKillDirectiveOrNull(effect.incarnation.killDirective)    );
+    root.TrustedEffectAttackAICapabilityUCCreateWithId(effect.id
+,  effect.incarnation.killDirective    );
 
 }
 
@@ -1020,7 +1020,7 @@ public void visitWarperTTCEffect(IWarperTTCEffect effect) { effect.visitIWarperT
   public void visitWarperTTCCreateEffect(WarperTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectWarperTTCCreateWithId(effect.id
+    root.TrustedEffectWarperTTCCreateWithId(effect.id
 ,  effect.incarnation.destinationLocation    );
 
 }
@@ -1034,7 +1034,7 @@ public void visitTimeAnchorTTCEffect(ITimeAnchorTTCEffect effect) { effect.visit
   public void visitTimeAnchorTTCCreateEffect(TimeAnchorTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectTimeAnchorTTCCreateWithId(effect.id
+    root.TrustedEffectTimeAnchorTTCCreateWithId(effect.id
 ,  effect.incarnation.pastVersion    );
 
 }
@@ -1048,10 +1048,10 @@ public void visitTerrainTileEffect(ITerrainTileEffect effect) { effect.visitITer
   public void visitTerrainTileCreateEffect(TerrainTileCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectTerrainTileCreateWithId(effect.id
+    root.TrustedEffectTerrainTileCreateWithId(effect.id
 ,  effect.incarnation.evvent
 ,  effect.incarnation.elevation
-,  root.GetITerrainTileComponentMutBunch(effect.incarnation.components)    );
+,  effect.incarnation.components    );
 
 }
 
@@ -1078,39 +1078,39 @@ public void visitITerrainTileComponentMutBunchEffect(IITerrainTileComponentMutBu
   public void visitITerrainTileComponentMutBunchCreateEffect(ITerrainTileComponentMutBunchCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectITerrainTileComponentMutBunchCreateWithId(effect.id
-,  root.GetSimplePresenceTriggerTTCMutSet(effect.incarnation.membersSimplePresenceTriggerTTCMutSet)
-,  root.GetItemTTCMutSet(effect.incarnation.membersItemTTCMutSet)
-,  root.GetKamikazeTargetTTCMutSet(effect.incarnation.membersKamikazeTargetTTCMutSet)
-,  root.GetWarperTTCMutSet(effect.incarnation.membersWarperTTCMutSet)
-,  root.GetTimeAnchorTTCMutSet(effect.incarnation.membersTimeAnchorTTCMutSet)
-,  root.GetFireBombTTCMutSet(effect.incarnation.membersFireBombTTCMutSet)
-,  root.GetMarkerTTCMutSet(effect.incarnation.membersMarkerTTCMutSet)
-,  root.GetLevelLinkTTCMutSet(effect.incarnation.membersLevelLinkTTCMutSet)
-,  root.GetMudTTCMutSet(effect.incarnation.membersMudTTCMutSet)
-,  root.GetDirtTTCMutSet(effect.incarnation.membersDirtTTCMutSet)
-,  root.GetObsidianTTCMutSet(effect.incarnation.membersObsidianTTCMutSet)
-,  root.GetDownStairsTTCMutSet(effect.incarnation.membersDownStairsTTCMutSet)
-,  root.GetUpStairsTTCMutSet(effect.incarnation.membersUpStairsTTCMutSet)
-,  root.GetWallTTCMutSet(effect.incarnation.membersWallTTCMutSet)
-,  root.GetBloodTTCMutSet(effect.incarnation.membersBloodTTCMutSet)
-,  root.GetRocksTTCMutSet(effect.incarnation.membersRocksTTCMutSet)
-,  root.GetTreeTTCMutSet(effect.incarnation.membersTreeTTCMutSet)
-,  root.GetWaterTTCMutSet(effect.incarnation.membersWaterTTCMutSet)
-,  root.GetFloorTTCMutSet(effect.incarnation.membersFloorTTCMutSet)
-,  root.GetCaveWallTTCMutSet(effect.incarnation.membersCaveWallTTCMutSet)
-,  root.GetCaveTTCMutSet(effect.incarnation.membersCaveTTCMutSet)
-,  root.GetFallsTTCMutSet(effect.incarnation.membersFallsTTCMutSet)
-,  root.GetFireTTCMutSet(effect.incarnation.membersFireTTCMutSet)
-,  root.GetObsidianFloorTTCMutSet(effect.incarnation.membersObsidianFloorTTCMutSet)
-,  root.GetMagmaTTCMutSet(effect.incarnation.membersMagmaTTCMutSet)
-,  root.GetCliffTTCMutSet(effect.incarnation.membersCliffTTCMutSet)
-,  root.GetRavaNestTTCMutSet(effect.incarnation.membersRavaNestTTCMutSet)
-,  root.GetCliffLandingTTCMutSet(effect.incarnation.membersCliffLandingTTCMutSet)
-,  root.GetStoneTTCMutSet(effect.incarnation.membersStoneTTCMutSet)
-,  root.GetGrassTTCMutSet(effect.incarnation.membersGrassTTCMutSet)
-,  root.GetIncendianFallsLevelLinkerTTCMutSet(effect.incarnation.membersIncendianFallsLevelLinkerTTCMutSet)
-,  root.GetEmberDeepLevelLinkerTTCMutSet(effect.incarnation.membersEmberDeepLevelLinkerTTCMutSet)    );
+    root.TrustedEffectITerrainTileComponentMutBunchCreateWithId(effect.id
+,  effect.incarnation.membersSimplePresenceTriggerTTCMutSet
+,  effect.incarnation.membersItemTTCMutSet
+,  effect.incarnation.membersKamikazeTargetTTCMutSet
+,  effect.incarnation.membersWarperTTCMutSet
+,  effect.incarnation.membersTimeAnchorTTCMutSet
+,  effect.incarnation.membersFireBombTTCMutSet
+,  effect.incarnation.membersMarkerTTCMutSet
+,  effect.incarnation.membersLevelLinkTTCMutSet
+,  effect.incarnation.membersMudTTCMutSet
+,  effect.incarnation.membersDirtTTCMutSet
+,  effect.incarnation.membersObsidianTTCMutSet
+,  effect.incarnation.membersDownStairsTTCMutSet
+,  effect.incarnation.membersUpStairsTTCMutSet
+,  effect.incarnation.membersWallTTCMutSet
+,  effect.incarnation.membersBloodTTCMutSet
+,  effect.incarnation.membersRocksTTCMutSet
+,  effect.incarnation.membersTreeTTCMutSet
+,  effect.incarnation.membersWaterTTCMutSet
+,  effect.incarnation.membersFloorTTCMutSet
+,  effect.incarnation.membersCaveWallTTCMutSet
+,  effect.incarnation.membersCaveTTCMutSet
+,  effect.incarnation.membersFallsTTCMutSet
+,  effect.incarnation.membersFireTTCMutSet
+,  effect.incarnation.membersObsidianFloorTTCMutSet
+,  effect.incarnation.membersMagmaTTCMutSet
+,  effect.incarnation.membersCliffTTCMutSet
+,  effect.incarnation.membersRavaNestTTCMutSet
+,  effect.incarnation.membersCliffLandingTTCMutSet
+,  effect.incarnation.membersStoneTTCMutSet
+,  effect.incarnation.membersGrassTTCMutSet
+,  effect.incarnation.membersIncendianFallsLevelLinkerTTCMutSet
+,  effect.incarnation.membersEmberDeepLevelLinkerTTCMutSet    );
 
 }
 
@@ -1123,10 +1123,10 @@ public void visitTerrainEffect(ITerrainEffect effect) { effect.visitITerrainEffe
   public void visitTerrainCreateEffect(TerrainCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectTerrainCreateWithId(effect.id
+    root.TrustedEffectTerrainCreateWithId(effect.id
 ,  effect.incarnation.pattern
 ,  effect.incarnation.elevationStepHeight
-,  root.GetTerrainTileByLocationMutMap(effect.incarnation.tiles)    );
+,  effect.incarnation.tiles    );
 
 }
 
@@ -1146,7 +1146,7 @@ public void visitSimplePresenceTriggerTTCEffect(ISimplePresenceTriggerTTCEffect 
   public void visitSimplePresenceTriggerTTCCreateEffect(SimplePresenceTriggerTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectSimplePresenceTriggerTTCCreateWithId(effect.id
+    root.TrustedEffectSimplePresenceTriggerTTCCreateWithId(effect.id
 ,  effect.incarnation.name    );
 
 }
@@ -1160,7 +1160,7 @@ public void visitFireBombImpulseEffect(IFireBombImpulseEffect effect) { effect.v
   public void visitFireBombImpulseCreateEffect(FireBombImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectFireBombImpulseCreateWithId(effect.id
+    root.TrustedEffectFireBombImpulseCreateWithId(effect.id
 ,  effect.incarnation.weight
 ,  effect.incarnation.location    );
 
@@ -1175,7 +1175,7 @@ public void visitFireBombTTCEffect(IFireBombTTCEffect effect) { effect.visitIFir
   public void visitFireBombTTCCreateEffect(FireBombTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectFireBombTTCCreateWithId(effect.id
+    root.TrustedEffectFireBombTTCCreateWithId(effect.id
 ,  effect.incarnation.turnsUntilExplosion    );
 
 }
@@ -1196,7 +1196,7 @@ public void visitMarkerTTCEffect(IMarkerTTCEffect effect) { effect.visitIMarkerT
   public void visitMarkerTTCCreateEffect(MarkerTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectMarkerTTCCreateWithId(effect.id
+    root.TrustedEffectMarkerTTCCreateWithId(effect.id
 ,  effect.incarnation.name    );
 
 }
@@ -1210,9 +1210,9 @@ public void visitLevelLinkTTCEffect(ILevelLinkTTCEffect effect) { effect.visitIL
   public void visitLevelLinkTTCCreateEffect(LevelLinkTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectLevelLinkTTCCreateWithId(effect.id
+    root.TrustedEffectLevelLinkTTCCreateWithId(effect.id
 ,  effect.incarnation.destroyThisLevel
-,  root.GetLevel(effect.incarnation.destinationLevel)
+,  effect.incarnation.destinationLevel
 ,  effect.incarnation.destinationLevelLocation    );
 
 }
@@ -1226,7 +1226,7 @@ public void visitMudTTCEffect(IMudTTCEffect effect) { effect.visitIMudTTCEffect(
   public void visitMudTTCCreateEffect(MudTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectMudTTCCreateWithId(effect.id
+    root.TrustedEffectMudTTCCreateWithId(effect.id
     );
 
 }
@@ -1240,7 +1240,7 @@ public void visitDirtTTCEffect(IDirtTTCEffect effect) { effect.visitIDirtTTCEffe
   public void visitDirtTTCCreateEffect(DirtTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectDirtTTCCreateWithId(effect.id
+    root.TrustedEffectDirtTTCCreateWithId(effect.id
     );
 
 }
@@ -1254,7 +1254,7 @@ public void visitObsidianTTCEffect(IObsidianTTCEffect effect) { effect.visitIObs
   public void visitObsidianTTCCreateEffect(ObsidianTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectObsidianTTCCreateWithId(effect.id
+    root.TrustedEffectObsidianTTCCreateWithId(effect.id
     );
 
 }
@@ -1268,7 +1268,7 @@ public void visitDownStairsTTCEffect(IDownStairsTTCEffect effect) { effect.visit
   public void visitDownStairsTTCCreateEffect(DownStairsTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectDownStairsTTCCreateWithId(effect.id
+    root.TrustedEffectDownStairsTTCCreateWithId(effect.id
     );
 
 }
@@ -1282,7 +1282,7 @@ public void visitUpStairsTTCEffect(IUpStairsTTCEffect effect) { effect.visitIUpS
   public void visitUpStairsTTCCreateEffect(UpStairsTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectUpStairsTTCCreateWithId(effect.id
+    root.TrustedEffectUpStairsTTCCreateWithId(effect.id
     );
 
 }
@@ -1296,7 +1296,7 @@ public void visitWallTTCEffect(IWallTTCEffect effect) { effect.visitIWallTTCEffe
   public void visitWallTTCCreateEffect(WallTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectWallTTCCreateWithId(effect.id
+    root.TrustedEffectWallTTCCreateWithId(effect.id
     );
 
 }
@@ -1310,7 +1310,7 @@ public void visitBloodTTCEffect(IBloodTTCEffect effect) { effect.visitIBloodTTCE
   public void visitBloodTTCCreateEffect(BloodTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectBloodTTCCreateWithId(effect.id
+    root.TrustedEffectBloodTTCCreateWithId(effect.id
     );
 
 }
@@ -1324,7 +1324,7 @@ public void visitRocksTTCEffect(IRocksTTCEffect effect) { effect.visitIRocksTTCE
   public void visitRocksTTCCreateEffect(RocksTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectRocksTTCCreateWithId(effect.id
+    root.TrustedEffectRocksTTCCreateWithId(effect.id
     );
 
 }
@@ -1338,7 +1338,7 @@ public void visitTreeTTCEffect(ITreeTTCEffect effect) { effect.visitITreeTTCEffe
   public void visitTreeTTCCreateEffect(TreeTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectTreeTTCCreateWithId(effect.id
+    root.TrustedEffectTreeTTCCreateWithId(effect.id
     );
 
 }
@@ -1352,7 +1352,7 @@ public void visitWaterTTCEffect(IWaterTTCEffect effect) { effect.visitIWaterTTCE
   public void visitWaterTTCCreateEffect(WaterTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectWaterTTCCreateWithId(effect.id
+    root.TrustedEffectWaterTTCCreateWithId(effect.id
     );
 
 }
@@ -1366,7 +1366,7 @@ public void visitFloorTTCEffect(IFloorTTCEffect effect) { effect.visitIFloorTTCE
   public void visitFloorTTCCreateEffect(FloorTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectFloorTTCCreateWithId(effect.id
+    root.TrustedEffectFloorTTCCreateWithId(effect.id
     );
 
 }
@@ -1380,7 +1380,7 @@ public void visitCaveWallTTCEffect(ICaveWallTTCEffect effect) { effect.visitICav
   public void visitCaveWallTTCCreateEffect(CaveWallTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectCaveWallTTCCreateWithId(effect.id
+    root.TrustedEffectCaveWallTTCCreateWithId(effect.id
     );
 
 }
@@ -1394,7 +1394,7 @@ public void visitCaveTTCEffect(ICaveTTCEffect effect) { effect.visitICaveTTCEffe
   public void visitCaveTTCCreateEffect(CaveTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectCaveTTCCreateWithId(effect.id
+    root.TrustedEffectCaveTTCCreateWithId(effect.id
     );
 
 }
@@ -1408,7 +1408,7 @@ public void visitFallsTTCEffect(IFallsTTCEffect effect) { effect.visitIFallsTTCE
   public void visitFallsTTCCreateEffect(FallsTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectFallsTTCCreateWithId(effect.id
+    root.TrustedEffectFallsTTCCreateWithId(effect.id
     );
 
 }
@@ -1422,7 +1422,7 @@ public void visitFireTTCEffect(IFireTTCEffect effect) { effect.visitIFireTTCEffe
   public void visitFireTTCCreateEffect(FireTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectFireTTCCreateWithId(effect.id
+    root.TrustedEffectFireTTCCreateWithId(effect.id
     );
 
 }
@@ -1436,7 +1436,7 @@ public void visitObsidianFloorTTCEffect(IObsidianFloorTTCEffect effect) { effect
   public void visitObsidianFloorTTCCreateEffect(ObsidianFloorTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectObsidianFloorTTCCreateWithId(effect.id
+    root.TrustedEffectObsidianFloorTTCCreateWithId(effect.id
     );
 
 }
@@ -1450,7 +1450,7 @@ public void visitMagmaTTCEffect(IMagmaTTCEffect effect) { effect.visitIMagmaTTCE
   public void visitMagmaTTCCreateEffect(MagmaTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectMagmaTTCCreateWithId(effect.id
+    root.TrustedEffectMagmaTTCCreateWithId(effect.id
     );
 
 }
@@ -1464,7 +1464,7 @@ public void visitCliffTTCEffect(ICliffTTCEffect effect) { effect.visitICliffTTCE
   public void visitCliffTTCCreateEffect(CliffTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectCliffTTCCreateWithId(effect.id
+    root.TrustedEffectCliffTTCCreateWithId(effect.id
     );
 
 }
@@ -1478,7 +1478,7 @@ public void visitRavaNestTTCEffect(IRavaNestTTCEffect effect) { effect.visitIRav
   public void visitRavaNestTTCCreateEffect(RavaNestTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectRavaNestTTCCreateWithId(effect.id
+    root.TrustedEffectRavaNestTTCCreateWithId(effect.id
     );
 
 }
@@ -1492,7 +1492,7 @@ public void visitCliffLandingTTCEffect(ICliffLandingTTCEffect effect) { effect.v
   public void visitCliffLandingTTCCreateEffect(CliffLandingTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectCliffLandingTTCCreateWithId(effect.id
+    root.TrustedEffectCliffLandingTTCCreateWithId(effect.id
     );
 
 }
@@ -1506,7 +1506,7 @@ public void visitStoneTTCEffect(IStoneTTCEffect effect) { effect.visitIStoneTTCE
   public void visitStoneTTCCreateEffect(StoneTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectStoneTTCCreateWithId(effect.id
+    root.TrustedEffectStoneTTCCreateWithId(effect.id
     );
 
 }
@@ -1520,7 +1520,7 @@ public void visitGrassTTCEffect(IGrassTTCEffect effect) { effect.visitIGrassTTCE
   public void visitGrassTTCCreateEffect(GrassTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectGrassTTCCreateWithId(effect.id
+    root.TrustedEffectGrassTTCCreateWithId(effect.id
     );
 
 }
@@ -1534,11 +1534,11 @@ public void visitLevelEffect(ILevelEffect effect) { effect.visitILevelEffect(thi
   public void visitLevelCreateEffect(LevelCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectLevelCreateWithId(effect.id
+    root.TrustedEffectLevelCreateWithId(effect.id
 ,  effect.incarnation.cameraAngle
-,  root.GetTerrain(effect.incarnation.terrain)
-,  root.GetUnitMutSet(effect.incarnation.units)
-,  root.GetILevelControllerOrNull(effect.incarnation.controller)
+,  effect.incarnation.terrain
+,  effect.incarnation.units
+,  effect.incarnation.controller
 ,  effect.incarnation.time    );
 
 }
@@ -1566,7 +1566,7 @@ public void visitSpeedRingEffect(ISpeedRingEffect effect) { effect.visitISpeedRi
   public void visitSpeedRingCreateEffect(SpeedRingCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectSpeedRingCreateWithId(effect.id
+    root.TrustedEffectSpeedRingCreateWithId(effect.id
     );
 
 }
@@ -1580,7 +1580,7 @@ public void visitManaPotionEffect(IManaPotionEffect effect) { effect.visitIManaP
   public void visitManaPotionCreateEffect(ManaPotionCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectManaPotionCreateWithId(effect.id
+    root.TrustedEffectManaPotionCreateWithId(effect.id
     );
 
 }
@@ -1594,11 +1594,11 @@ public void visitWatEffect(IWatEffect effect) { effect.visitIWatEffect(this); }
   public void visitWatCreateEffect(WatCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectWatCreateWithId(effect.id
-,  root.GetIItemStrongMutBunch(effect.incarnation.items)
-,  root.GetIImpulseStrongMutBunch(effect.incarnation.impulses)
-,  root.GetIPostActingUCWeakMutBunch(effect.incarnation.blah)
-,  root.GetIPreActingUCWeakMutBunch(effect.incarnation.bloop)    );
+    root.TrustedEffectWatCreateWithId(effect.id
+,  effect.incarnation.items
+,  effect.incarnation.impulses
+,  effect.incarnation.blah
+,  effect.incarnation.bloop    );
 
 }
 
@@ -1611,13 +1611,13 @@ public void visitIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffect 
   public void visitIPreActingUCWeakMutBunchCreateEffect(IPreActingUCWeakMutBunchCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectIPreActingUCWeakMutBunchCreateWithId(effect.id
-,  root.GetDoomedUCWeakMutSet(effect.incarnation.membersDoomedUCWeakMutSet)
-,  root.GetMiredUCWeakMutSet(effect.incarnation.membersMiredUCWeakMutSet)
-,  root.GetInvincibilityUCWeakMutSet(effect.incarnation.membersInvincibilityUCWeakMutSet)
-,  root.GetDefyingUCWeakMutSet(effect.incarnation.membersDefyingUCWeakMutSet)
-,  root.GetCounteringUCWeakMutSet(effect.incarnation.membersCounteringUCWeakMutSet)
-,  root.GetAttackAICapabilityUCWeakMutSet(effect.incarnation.membersAttackAICapabilityUCWeakMutSet)    );
+    root.TrustedEffectIPreActingUCWeakMutBunchCreateWithId(effect.id
+,  effect.incarnation.membersDoomedUCWeakMutSet
+,  effect.incarnation.membersMiredUCWeakMutSet
+,  effect.incarnation.membersInvincibilityUCWeakMutSet
+,  effect.incarnation.membersDefyingUCWeakMutSet
+,  effect.incarnation.membersCounteringUCWeakMutSet
+,  effect.incarnation.membersAttackAICapabilityUCWeakMutSet    );
 
 }
 
@@ -1630,9 +1630,9 @@ public void visitIPostActingUCWeakMutBunchEffect(IIPostActingUCWeakMutBunchEffec
   public void visitIPostActingUCWeakMutBunchCreateEffect(IPostActingUCWeakMutBunchCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectIPostActingUCWeakMutBunchCreateWithId(effect.id
-,  root.GetLightningChargedUCWeakMutSet(effect.incarnation.membersLightningChargedUCWeakMutSet)
-,  root.GetTimeCloneAICapabilityUCWeakMutSet(effect.incarnation.membersTimeCloneAICapabilityUCWeakMutSet)    );
+    root.TrustedEffectIPostActingUCWeakMutBunchCreateWithId(effect.id
+,  effect.incarnation.membersLightningChargedUCWeakMutSet
+,  effect.incarnation.membersTimeCloneAICapabilityUCWeakMutSet    );
 
 }
 
@@ -1645,25 +1645,25 @@ public void visitIImpulseStrongMutBunchEffect(IIImpulseStrongMutBunchEffect effe
   public void visitIImpulseStrongMutBunchCreateEffect(IImpulseStrongMutBunchCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectIImpulseStrongMutBunchCreateWithId(effect.id
-,  root.GetHoldPositionImpulseStrongMutSet(effect.incarnation.membersHoldPositionImpulseStrongMutSet)
-,  root.GetTemporaryCloneImpulseStrongMutSet(effect.incarnation.membersTemporaryCloneImpulseStrongMutSet)
-,  root.GetSummonImpulseStrongMutSet(effect.incarnation.membersSummonImpulseStrongMutSet)
-,  root.GetMireImpulseStrongMutSet(effect.incarnation.membersMireImpulseStrongMutSet)
-,  root.GetEvaporateImpulseStrongMutSet(effect.incarnation.membersEvaporateImpulseStrongMutSet)
-,  root.GetMoveImpulseStrongMutSet(effect.incarnation.membersMoveImpulseStrongMutSet)
-,  root.GetKamikazeJumpImpulseStrongMutSet(effect.incarnation.membersKamikazeJumpImpulseStrongMutSet)
-,  root.GetKamikazeTargetImpulseStrongMutSet(effect.incarnation.membersKamikazeTargetImpulseStrongMutSet)
-,  root.GetNoImpulseStrongMutSet(effect.incarnation.membersNoImpulseStrongMutSet)
-,  root.GetFireImpulseStrongMutSet(effect.incarnation.membersFireImpulseStrongMutSet)
-,  root.GetDefyImpulseStrongMutSet(effect.incarnation.membersDefyImpulseStrongMutSet)
-,  root.GetCounterImpulseStrongMutSet(effect.incarnation.membersCounterImpulseStrongMutSet)
-,  root.GetUnleashBideImpulseStrongMutSet(effect.incarnation.membersUnleashBideImpulseStrongMutSet)
-,  root.GetContinueBidingImpulseStrongMutSet(effect.incarnation.membersContinueBidingImpulseStrongMutSet)
-,  root.GetStartBidingImpulseStrongMutSet(effect.incarnation.membersStartBidingImpulseStrongMutSet)
-,  root.GetAttackImpulseStrongMutSet(effect.incarnation.membersAttackImpulseStrongMutSet)
-,  root.GetPursueImpulseStrongMutSet(effect.incarnation.membersPursueImpulseStrongMutSet)
-,  root.GetFireBombImpulseStrongMutSet(effect.incarnation.membersFireBombImpulseStrongMutSet)    );
+    root.TrustedEffectIImpulseStrongMutBunchCreateWithId(effect.id
+,  effect.incarnation.membersHoldPositionImpulseStrongMutSet
+,  effect.incarnation.membersTemporaryCloneImpulseStrongMutSet
+,  effect.incarnation.membersSummonImpulseStrongMutSet
+,  effect.incarnation.membersMireImpulseStrongMutSet
+,  effect.incarnation.membersEvaporateImpulseStrongMutSet
+,  effect.incarnation.membersMoveImpulseStrongMutSet
+,  effect.incarnation.membersKamikazeJumpImpulseStrongMutSet
+,  effect.incarnation.membersKamikazeTargetImpulseStrongMutSet
+,  effect.incarnation.membersNoImpulseStrongMutSet
+,  effect.incarnation.membersFireImpulseStrongMutSet
+,  effect.incarnation.membersDefyImpulseStrongMutSet
+,  effect.incarnation.membersCounterImpulseStrongMutSet
+,  effect.incarnation.membersUnleashBideImpulseStrongMutSet
+,  effect.incarnation.membersContinueBidingImpulseStrongMutSet
+,  effect.incarnation.membersStartBidingImpulseStrongMutSet
+,  effect.incarnation.membersAttackImpulseStrongMutSet
+,  effect.incarnation.membersPursueImpulseStrongMutSet
+,  effect.incarnation.membersFireBombImpulseStrongMutSet    );
 
 }
 
@@ -1676,14 +1676,14 @@ public void visitIItemStrongMutBunchEffect(IIItemStrongMutBunchEffect effect) { 
   public void visitIItemStrongMutBunchCreateEffect(IItemStrongMutBunchCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectIItemStrongMutBunchCreateWithId(effect.id
-,  root.GetManaPotionStrongMutSet(effect.incarnation.membersManaPotionStrongMutSet)
-,  root.GetHealthPotionStrongMutSet(effect.incarnation.membersHealthPotionStrongMutSet)
-,  root.GetSpeedRingStrongMutSet(effect.incarnation.membersSpeedRingStrongMutSet)
-,  root.GetGlaiveStrongMutSet(effect.incarnation.membersGlaiveStrongMutSet)
-,  root.GetSlowRodStrongMutSet(effect.incarnation.membersSlowRodStrongMutSet)
-,  root.GetBlastRodStrongMutSet(effect.incarnation.membersBlastRodStrongMutSet)
-,  root.GetArmorStrongMutSet(effect.incarnation.membersArmorStrongMutSet)    );
+    root.TrustedEffectIItemStrongMutBunchCreateWithId(effect.id
+,  effect.incarnation.membersManaPotionStrongMutSet
+,  effect.incarnation.membersHealthPotionStrongMutSet
+,  effect.incarnation.membersSpeedRingStrongMutSet
+,  effect.incarnation.membersGlaiveStrongMutSet
+,  effect.incarnation.membersSlowRodStrongMutSet
+,  effect.incarnation.membersBlastRodStrongMutSet
+,  effect.incarnation.membersArmorStrongMutSet    );
 
 }
 
@@ -1696,8 +1696,8 @@ public void visitItemTTCEffect(IItemTTCEffect effect) { effect.visitIItemTTCEffe
   public void visitItemTTCCreateEffect(ItemTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectItemTTCCreateWithId(effect.id
-,  root.GetIItem(effect.incarnation.item)    );
+    root.TrustedEffectItemTTCCreateWithId(effect.id
+,  effect.incarnation.item    );
 
 }
 
@@ -1710,7 +1710,7 @@ public void visitHealthPotionEffect(IHealthPotionEffect effect) { effect.visitIH
   public void visitHealthPotionCreateEffect(HealthPotionCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectHealthPotionCreateWithId(effect.id
+    root.TrustedEffectHealthPotionCreateWithId(effect.id
     );
 
 }
@@ -1724,7 +1724,7 @@ public void visitGlaiveEffect(IGlaiveEffect effect) { effect.visitIGlaiveEffect(
   public void visitGlaiveCreateEffect(GlaiveCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectGlaiveCreateWithId(effect.id
+    root.TrustedEffectGlaiveCreateWithId(effect.id
     );
 
 }
@@ -1738,7 +1738,7 @@ public void visitSlowRodEffect(ISlowRodEffect effect) { effect.visitISlowRodEffe
   public void visitSlowRodCreateEffect(SlowRodCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectSlowRodCreateWithId(effect.id
+    root.TrustedEffectSlowRodCreateWithId(effect.id
     );
 
 }
@@ -1752,7 +1752,7 @@ public void visitBlastRodEffect(IBlastRodEffect effect) { effect.visitIBlastRodE
   public void visitBlastRodCreateEffect(BlastRodCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectBlastRodCreateWithId(effect.id
+    root.TrustedEffectBlastRodCreateWithId(effect.id
     );
 
 }
@@ -1766,7 +1766,7 @@ public void visitArmorEffect(IArmorEffect effect) { effect.visitIArmorEffect(thi
   public void visitArmorCreateEffect(ArmorCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectArmorCreateWithId(effect.id
+    root.TrustedEffectArmorCreateWithId(effect.id
     );
 
 }
@@ -1780,8 +1780,8 @@ public void visitSquareCaveLevelControllerEffect(ISquareCaveLevelControllerEffec
   public void visitSquareCaveLevelControllerCreateEffect(SquareCaveLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectSquareCaveLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)
+    root.TrustedEffectSquareCaveLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level
 ,  effect.incarnation.depth    );
 
 }
@@ -1795,8 +1795,8 @@ public void visitRavashrikeLevelControllerEffect(IRavashrikeLevelControllerEffec
   public void visitRavashrikeLevelControllerCreateEffect(RavashrikeLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectRavashrikeLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectRavashrikeLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -1809,8 +1809,8 @@ public void visitPentagonalCaveLevelControllerEffect(IPentagonalCaveLevelControl
   public void visitPentagonalCaveLevelControllerCreateEffect(PentagonalCaveLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectPentagonalCaveLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)
+    root.TrustedEffectPentagonalCaveLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level
 ,  effect.incarnation.depth    );
 
 }
@@ -1824,7 +1824,7 @@ public void visitIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTT
   public void visitIncendianFallsLevelLinkerTTCCreateEffect(IncendianFallsLevelLinkerTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectIncendianFallsLevelLinkerTTCCreateWithId(effect.id
+    root.TrustedEffectIncendianFallsLevelLinkerTTCCreateWithId(effect.id
 ,  effect.incarnation.thisLevelDepth    );
 
 }
@@ -1838,8 +1838,8 @@ public void visitCliffLevelControllerEffect(ICliffLevelControllerEffect effect) 
   public void visitCliffLevelControllerCreateEffect(CliffLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectCliffLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)
+    root.TrustedEffectCliffLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level
 ,  effect.incarnation.depth    );
 
 }
@@ -1853,8 +1853,8 @@ public void visitPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEff
   public void visitPreGauntletLevelControllerCreateEffect(PreGauntletLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectPreGauntletLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectPreGauntletLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -1867,8 +1867,8 @@ public void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect ef
   public void visitGauntletLevelControllerCreateEffect(GauntletLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectGauntletLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectGauntletLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -1881,7 +1881,7 @@ public void visitCommEffect(ICommEffect effect) { effect.visitICommEffect(this);
   public void visitCommCreateEffect(CommCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectCommCreateWithId(effect.id
+    root.TrustedEffectCommCreateWithId(effect.id
 ,  effect.incarnation.template
 ,  effect.incarnation.actions
 ,  effect.incarnation.texts    );
@@ -1897,20 +1897,20 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
   public void visitGameCreateEffect(GameCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectGameCreateWithId(effect.id
-,  root.GetRand(effect.incarnation.rand)
+    root.TrustedEffectGameCreateWithId(effect.id
+,  effect.incarnation.rand
 ,  effect.incarnation.squareLevelsOnly
-,  root.GetLevelMutSet(effect.incarnation.levels)
-,  root.GetUnitOrNull(effect.incarnation.player)
-,  root.GetLevelOrNull(effect.incarnation.level)
+,  effect.incarnation.levels
+,  effect.incarnation.player
+,  effect.incarnation.level
 ,  effect.incarnation.time
-,  root.GetUnitOrNull(effect.incarnation.actingUnit)
+,  effect.incarnation.actingUnit
 ,  effect.incarnation.pauseBeforeNextUnit
 ,  effect.incarnation.actionNum
 ,  effect.incarnation.instructions
 ,  effect.incarnation.hideInput
 ,  effect.incarnation.evvent
-,  root.GetCommMutList(effect.incarnation.comms)    );
+,  effect.incarnation.comms    );
 
 }
 
@@ -1986,8 +1986,8 @@ public void visitVolcaetusLevelControllerEffect(IVolcaetusLevelControllerEffect 
   public void visitVolcaetusLevelControllerCreateEffect(VolcaetusLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectVolcaetusLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectVolcaetusLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -2000,8 +2000,8 @@ public void visitTutorial2LevelControllerEffect(ITutorial2LevelControllerEffect 
   public void visitTutorial2LevelControllerCreateEffect(Tutorial2LevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectTutorial2LevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectTutorial2LevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -2014,8 +2014,8 @@ public void visitTutorial1LevelControllerEffect(ITutorial1LevelControllerEffect 
   public void visitTutorial1LevelControllerCreateEffect(Tutorial1LevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectTutorial1LevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectTutorial1LevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -2028,8 +2028,8 @@ public void visitRetreatLevelControllerEffect(IRetreatLevelControllerEffect effe
   public void visitRetreatLevelControllerCreateEffect(RetreatLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectRetreatLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectRetreatLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -2042,8 +2042,8 @@ public void visitSotaventoLevelControllerEffect(ISotaventoLevelControllerEffect 
   public void visitSotaventoLevelControllerCreateEffect(SotaventoLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectSotaventoLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectSotaventoLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -2056,8 +2056,8 @@ public void visitNestLevelControllerEffect(INestLevelControllerEffect effect) { 
   public void visitNestLevelControllerCreateEffect(NestLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectNestLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectNestLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -2070,8 +2070,8 @@ public void visitLakeLevelControllerEffect(ILakeLevelControllerEffect effect) { 
   public void visitLakeLevelControllerCreateEffect(LakeLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectLakeLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectLakeLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -2084,7 +2084,7 @@ public void visitEmberDeepLevelLinkerTTCEffect(IEmberDeepLevelLinkerTTCEffect ef
   public void visitEmberDeepLevelLinkerTTCCreateEffect(EmberDeepLevelLinkerTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectEmberDeepLevelLinkerTTCCreateWithId(effect.id
+    root.TrustedEffectEmberDeepLevelLinkerTTCCreateWithId(effect.id
 ,  effect.incarnation.nextLevelDepth    );
 
 }
@@ -2098,8 +2098,8 @@ public void visitDirtRoadLevelControllerEffect(IDirtRoadLevelControllerEffect ef
   public void visitDirtRoadLevelControllerCreateEffect(DirtRoadLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectDirtRoadLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectDirtRoadLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -2112,8 +2112,8 @@ public void visitCaveLevelControllerEffect(ICaveLevelControllerEffect effect) { 
   public void visitCaveLevelControllerCreateEffect(CaveLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectCaveLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)
+    root.TrustedEffectCaveLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level
 ,  effect.incarnation.depth    );
 
 }
@@ -2127,8 +2127,8 @@ public void visitBridgesLevelControllerEffect(IBridgesLevelControllerEffect effe
   public void visitBridgesLevelControllerCreateEffect(BridgesLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectBridgesLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectBridgesLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -2141,8 +2141,8 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
   public void visitAncientTownLevelControllerCreateEffect(AncientTownLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
-    root.EffectAncientTownLevelControllerCreateWithId(effect.id
-,  root.GetLevel(effect.incarnation.level)    );
+    root.TrustedEffectAncientTownLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
 
 }
 
@@ -2155,7 +2155,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitCommMutListCreateEffect(CommMutListCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectCommMutListCreateWithId(effect.id);
+      root.TrustedEffectCommMutListCreateWithId(effect.id);
     }
     public void visitCommMutListDeleteEffect(CommMutListDeleteEffect effect) {
       root.EffectCommMutListDelete(effect.id);
@@ -2172,7 +2172,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitLocationMutListCreateEffect(LocationMutListCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectLocationMutListCreateWithId(effect.id);
+      root.TrustedEffectLocationMutListCreateWithId(effect.id);
     }
     public void visitLocationMutListDeleteEffect(LocationMutListDeleteEffect effect) {
       root.EffectLocationMutListDelete(effect.id);
@@ -2189,7 +2189,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitIRequestMutListCreateEffect(IRequestMutListCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectIRequestMutListCreateWithId(effect.id);
+      root.TrustedEffectIRequestMutListCreateWithId(effect.id);
     }
     public void visitIRequestMutListDeleteEffect(IRequestMutListDeleteEffect effect) {
       root.EffectIRequestMutListDelete(effect.id);
@@ -2206,7 +2206,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitLevelMutSetCreateEffect(LevelMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectLevelMutSetCreateWithId(effect.id);
+      root.TrustedEffectLevelMutSetCreateWithId(effect.id);
     }
     public void visitLevelMutSetDeleteEffect(LevelMutSetDeleteEffect effect) {
       root.EffectLevelMutSetDelete(effect.id);
@@ -2223,7 +2223,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitManaPotionStrongMutSetCreateEffect(ManaPotionStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectManaPotionStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectManaPotionStrongMutSetCreateWithId(effect.id);
     }
     public void visitManaPotionStrongMutSetDeleteEffect(ManaPotionStrongMutSetDeleteEffect effect) {
       root.EffectManaPotionStrongMutSetDelete(effect.id);
@@ -2240,7 +2240,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitHealthPotionStrongMutSetCreateEffect(HealthPotionStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectHealthPotionStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectHealthPotionStrongMutSetCreateWithId(effect.id);
     }
     public void visitHealthPotionStrongMutSetDeleteEffect(HealthPotionStrongMutSetDeleteEffect effect) {
       root.EffectHealthPotionStrongMutSetDelete(effect.id);
@@ -2257,7 +2257,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitSpeedRingStrongMutSetCreateEffect(SpeedRingStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectSpeedRingStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectSpeedRingStrongMutSetCreateWithId(effect.id);
     }
     public void visitSpeedRingStrongMutSetDeleteEffect(SpeedRingStrongMutSetDeleteEffect effect) {
       root.EffectSpeedRingStrongMutSetDelete(effect.id);
@@ -2274,7 +2274,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitGlaiveStrongMutSetCreateEffect(GlaiveStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectGlaiveStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectGlaiveStrongMutSetCreateWithId(effect.id);
     }
     public void visitGlaiveStrongMutSetDeleteEffect(GlaiveStrongMutSetDeleteEffect effect) {
       root.EffectGlaiveStrongMutSetDelete(effect.id);
@@ -2291,7 +2291,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitSlowRodStrongMutSetCreateEffect(SlowRodStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectSlowRodStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectSlowRodStrongMutSetCreateWithId(effect.id);
     }
     public void visitSlowRodStrongMutSetDeleteEffect(SlowRodStrongMutSetDeleteEffect effect) {
       root.EffectSlowRodStrongMutSetDelete(effect.id);
@@ -2308,7 +2308,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitBlastRodStrongMutSetCreateEffect(BlastRodStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectBlastRodStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectBlastRodStrongMutSetCreateWithId(effect.id);
     }
     public void visitBlastRodStrongMutSetDeleteEffect(BlastRodStrongMutSetDeleteEffect effect) {
       root.EffectBlastRodStrongMutSetDelete(effect.id);
@@ -2325,7 +2325,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitArmorStrongMutSetCreateEffect(ArmorStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectArmorStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectArmorStrongMutSetCreateWithId(effect.id);
     }
     public void visitArmorStrongMutSetDeleteEffect(ArmorStrongMutSetDeleteEffect effect) {
       root.EffectArmorStrongMutSetDelete(effect.id);
@@ -2342,7 +2342,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitHoldPositionImpulseStrongMutSetCreateEffect(HoldPositionImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectHoldPositionImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectHoldPositionImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitHoldPositionImpulseStrongMutSetDeleteEffect(HoldPositionImpulseStrongMutSetDeleteEffect effect) {
       root.EffectHoldPositionImpulseStrongMutSetDelete(effect.id);
@@ -2359,7 +2359,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitTemporaryCloneImpulseStrongMutSetCreateEffect(TemporaryCloneImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectTemporaryCloneImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectTemporaryCloneImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitTemporaryCloneImpulseStrongMutSetDeleteEffect(TemporaryCloneImpulseStrongMutSetDeleteEffect effect) {
       root.EffectTemporaryCloneImpulseStrongMutSetDelete(effect.id);
@@ -2376,7 +2376,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitSummonImpulseStrongMutSetCreateEffect(SummonImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectSummonImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectSummonImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitSummonImpulseStrongMutSetDeleteEffect(SummonImpulseStrongMutSetDeleteEffect effect) {
       root.EffectSummonImpulseStrongMutSetDelete(effect.id);
@@ -2393,7 +2393,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitMireImpulseStrongMutSetCreateEffect(MireImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectMireImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectMireImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitMireImpulseStrongMutSetDeleteEffect(MireImpulseStrongMutSetDeleteEffect effect) {
       root.EffectMireImpulseStrongMutSetDelete(effect.id);
@@ -2410,7 +2410,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitEvaporateImpulseStrongMutSetCreateEffect(EvaporateImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectEvaporateImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectEvaporateImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitEvaporateImpulseStrongMutSetDeleteEffect(EvaporateImpulseStrongMutSetDeleteEffect effect) {
       root.EffectEvaporateImpulseStrongMutSetDelete(effect.id);
@@ -2427,7 +2427,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitMoveImpulseStrongMutSetCreateEffect(MoveImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectMoveImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectMoveImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitMoveImpulseStrongMutSetDeleteEffect(MoveImpulseStrongMutSetDeleteEffect effect) {
       root.EffectMoveImpulseStrongMutSetDelete(effect.id);
@@ -2444,7 +2444,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitKamikazeJumpImpulseStrongMutSetCreateEffect(KamikazeJumpImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectKamikazeJumpImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectKamikazeJumpImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitKamikazeJumpImpulseStrongMutSetDeleteEffect(KamikazeJumpImpulseStrongMutSetDeleteEffect effect) {
       root.EffectKamikazeJumpImpulseStrongMutSetDelete(effect.id);
@@ -2461,7 +2461,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitKamikazeTargetImpulseStrongMutSetCreateEffect(KamikazeTargetImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectKamikazeTargetImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectKamikazeTargetImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitKamikazeTargetImpulseStrongMutSetDeleteEffect(KamikazeTargetImpulseStrongMutSetDeleteEffect effect) {
       root.EffectKamikazeTargetImpulseStrongMutSetDelete(effect.id);
@@ -2478,7 +2478,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitNoImpulseStrongMutSetCreateEffect(NoImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectNoImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectNoImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitNoImpulseStrongMutSetDeleteEffect(NoImpulseStrongMutSetDeleteEffect effect) {
       root.EffectNoImpulseStrongMutSetDelete(effect.id);
@@ -2495,7 +2495,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitFireImpulseStrongMutSetCreateEffect(FireImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectFireImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectFireImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitFireImpulseStrongMutSetDeleteEffect(FireImpulseStrongMutSetDeleteEffect effect) {
       root.EffectFireImpulseStrongMutSetDelete(effect.id);
@@ -2512,7 +2512,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitDefyImpulseStrongMutSetCreateEffect(DefyImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectDefyImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectDefyImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitDefyImpulseStrongMutSetDeleteEffect(DefyImpulseStrongMutSetDeleteEffect effect) {
       root.EffectDefyImpulseStrongMutSetDelete(effect.id);
@@ -2529,7 +2529,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitCounterImpulseStrongMutSetCreateEffect(CounterImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectCounterImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectCounterImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitCounterImpulseStrongMutSetDeleteEffect(CounterImpulseStrongMutSetDeleteEffect effect) {
       root.EffectCounterImpulseStrongMutSetDelete(effect.id);
@@ -2546,7 +2546,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitUnleashBideImpulseStrongMutSetCreateEffect(UnleashBideImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectUnleashBideImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectUnleashBideImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitUnleashBideImpulseStrongMutSetDeleteEffect(UnleashBideImpulseStrongMutSetDeleteEffect effect) {
       root.EffectUnleashBideImpulseStrongMutSetDelete(effect.id);
@@ -2563,7 +2563,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitContinueBidingImpulseStrongMutSetCreateEffect(ContinueBidingImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectContinueBidingImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectContinueBidingImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitContinueBidingImpulseStrongMutSetDeleteEffect(ContinueBidingImpulseStrongMutSetDeleteEffect effect) {
       root.EffectContinueBidingImpulseStrongMutSetDelete(effect.id);
@@ -2580,7 +2580,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitStartBidingImpulseStrongMutSetCreateEffect(StartBidingImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectStartBidingImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectStartBidingImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitStartBidingImpulseStrongMutSetDeleteEffect(StartBidingImpulseStrongMutSetDeleteEffect effect) {
       root.EffectStartBidingImpulseStrongMutSetDelete(effect.id);
@@ -2597,7 +2597,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitAttackImpulseStrongMutSetCreateEffect(AttackImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectAttackImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectAttackImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitAttackImpulseStrongMutSetDeleteEffect(AttackImpulseStrongMutSetDeleteEffect effect) {
       root.EffectAttackImpulseStrongMutSetDelete(effect.id);
@@ -2614,7 +2614,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitPursueImpulseStrongMutSetCreateEffect(PursueImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectPursueImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectPursueImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitPursueImpulseStrongMutSetDeleteEffect(PursueImpulseStrongMutSetDeleteEffect effect) {
       root.EffectPursueImpulseStrongMutSetDelete(effect.id);
@@ -2631,7 +2631,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitFireBombImpulseStrongMutSetCreateEffect(FireBombImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectFireBombImpulseStrongMutSetCreateWithId(effect.id);
+      root.TrustedEffectFireBombImpulseStrongMutSetCreateWithId(effect.id);
     }
     public void visitFireBombImpulseStrongMutSetDeleteEffect(FireBombImpulseStrongMutSetDeleteEffect effect) {
       root.EffectFireBombImpulseStrongMutSetDelete(effect.id);
@@ -2648,7 +2648,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitLightningChargedUCWeakMutSetCreateEffect(LightningChargedUCWeakMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectLightningChargedUCWeakMutSetCreateWithId(effect.id);
+      root.TrustedEffectLightningChargedUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitLightningChargedUCWeakMutSetDeleteEffect(LightningChargedUCWeakMutSetDeleteEffect effect) {
       root.EffectLightningChargedUCWeakMutSetDelete(effect.id);
@@ -2665,7 +2665,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitTimeCloneAICapabilityUCWeakMutSetCreateEffect(TimeCloneAICapabilityUCWeakMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectTimeCloneAICapabilityUCWeakMutSetCreateWithId(effect.id);
+      root.TrustedEffectTimeCloneAICapabilityUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitTimeCloneAICapabilityUCWeakMutSetDeleteEffect(TimeCloneAICapabilityUCWeakMutSetDeleteEffect effect) {
       root.EffectTimeCloneAICapabilityUCWeakMutSetDelete(effect.id);
@@ -2682,7 +2682,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitDoomedUCWeakMutSetCreateEffect(DoomedUCWeakMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectDoomedUCWeakMutSetCreateWithId(effect.id);
+      root.TrustedEffectDoomedUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitDoomedUCWeakMutSetDeleteEffect(DoomedUCWeakMutSetDeleteEffect effect) {
       root.EffectDoomedUCWeakMutSetDelete(effect.id);
@@ -2699,7 +2699,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitMiredUCWeakMutSetCreateEffect(MiredUCWeakMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectMiredUCWeakMutSetCreateWithId(effect.id);
+      root.TrustedEffectMiredUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitMiredUCWeakMutSetDeleteEffect(MiredUCWeakMutSetDeleteEffect effect) {
       root.EffectMiredUCWeakMutSetDelete(effect.id);
@@ -2716,7 +2716,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitInvincibilityUCWeakMutSetCreateEffect(InvincibilityUCWeakMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectInvincibilityUCWeakMutSetCreateWithId(effect.id);
+      root.TrustedEffectInvincibilityUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitInvincibilityUCWeakMutSetDeleteEffect(InvincibilityUCWeakMutSetDeleteEffect effect) {
       root.EffectInvincibilityUCWeakMutSetDelete(effect.id);
@@ -2733,7 +2733,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitDefyingUCWeakMutSetCreateEffect(DefyingUCWeakMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectDefyingUCWeakMutSetCreateWithId(effect.id);
+      root.TrustedEffectDefyingUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitDefyingUCWeakMutSetDeleteEffect(DefyingUCWeakMutSetDeleteEffect effect) {
       root.EffectDefyingUCWeakMutSetDelete(effect.id);
@@ -2750,7 +2750,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitCounteringUCWeakMutSetCreateEffect(CounteringUCWeakMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectCounteringUCWeakMutSetCreateWithId(effect.id);
+      root.TrustedEffectCounteringUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitCounteringUCWeakMutSetDeleteEffect(CounteringUCWeakMutSetDeleteEffect effect) {
       root.EffectCounteringUCWeakMutSetDelete(effect.id);
@@ -2767,7 +2767,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitAttackAICapabilityUCWeakMutSetCreateEffect(AttackAICapabilityUCWeakMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectAttackAICapabilityUCWeakMutSetCreateWithId(effect.id);
+      root.TrustedEffectAttackAICapabilityUCWeakMutSetCreateWithId(effect.id);
     }
     public void visitAttackAICapabilityUCWeakMutSetDeleteEffect(AttackAICapabilityUCWeakMutSetDeleteEffect effect) {
       root.EffectAttackAICapabilityUCWeakMutSetDelete(effect.id);
@@ -2784,7 +2784,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitUnitMutSetCreateEffect(UnitMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectUnitMutSetCreateWithId(effect.id);
+      root.TrustedEffectUnitMutSetCreateWithId(effect.id);
     }
     public void visitUnitMutSetDeleteEffect(UnitMutSetDeleteEffect effect) {
       root.EffectUnitMutSetDelete(effect.id);
@@ -2801,7 +2801,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitSimplePresenceTriggerTTCMutSetCreateEffect(SimplePresenceTriggerTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectSimplePresenceTriggerTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectSimplePresenceTriggerTTCMutSetCreateWithId(effect.id);
     }
     public void visitSimplePresenceTriggerTTCMutSetDeleteEffect(SimplePresenceTriggerTTCMutSetDeleteEffect effect) {
       root.EffectSimplePresenceTriggerTTCMutSetDelete(effect.id);
@@ -2818,7 +2818,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitItemTTCMutSetCreateEffect(ItemTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectItemTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectItemTTCMutSetCreateWithId(effect.id);
     }
     public void visitItemTTCMutSetDeleteEffect(ItemTTCMutSetDeleteEffect effect) {
       root.EffectItemTTCMutSetDelete(effect.id);
@@ -2835,7 +2835,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitKamikazeTargetTTCMutSetCreateEffect(KamikazeTargetTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectKamikazeTargetTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectKamikazeTargetTTCMutSetCreateWithId(effect.id);
     }
     public void visitKamikazeTargetTTCMutSetDeleteEffect(KamikazeTargetTTCMutSetDeleteEffect effect) {
       root.EffectKamikazeTargetTTCMutSetDelete(effect.id);
@@ -2852,7 +2852,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitWarperTTCMutSetCreateEffect(WarperTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectWarperTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectWarperTTCMutSetCreateWithId(effect.id);
     }
     public void visitWarperTTCMutSetDeleteEffect(WarperTTCMutSetDeleteEffect effect) {
       root.EffectWarperTTCMutSetDelete(effect.id);
@@ -2869,7 +2869,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitTimeAnchorTTCMutSetCreateEffect(TimeAnchorTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectTimeAnchorTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectTimeAnchorTTCMutSetCreateWithId(effect.id);
     }
     public void visitTimeAnchorTTCMutSetDeleteEffect(TimeAnchorTTCMutSetDeleteEffect effect) {
       root.EffectTimeAnchorTTCMutSetDelete(effect.id);
@@ -2886,7 +2886,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitFireBombTTCMutSetCreateEffect(FireBombTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectFireBombTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectFireBombTTCMutSetCreateWithId(effect.id);
     }
     public void visitFireBombTTCMutSetDeleteEffect(FireBombTTCMutSetDeleteEffect effect) {
       root.EffectFireBombTTCMutSetDelete(effect.id);
@@ -2903,7 +2903,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitMarkerTTCMutSetCreateEffect(MarkerTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectMarkerTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectMarkerTTCMutSetCreateWithId(effect.id);
     }
     public void visitMarkerTTCMutSetDeleteEffect(MarkerTTCMutSetDeleteEffect effect) {
       root.EffectMarkerTTCMutSetDelete(effect.id);
@@ -2920,7 +2920,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitLevelLinkTTCMutSetCreateEffect(LevelLinkTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectLevelLinkTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectLevelLinkTTCMutSetCreateWithId(effect.id);
     }
     public void visitLevelLinkTTCMutSetDeleteEffect(LevelLinkTTCMutSetDeleteEffect effect) {
       root.EffectLevelLinkTTCMutSetDelete(effect.id);
@@ -2937,7 +2937,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitMudTTCMutSetCreateEffect(MudTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectMudTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectMudTTCMutSetCreateWithId(effect.id);
     }
     public void visitMudTTCMutSetDeleteEffect(MudTTCMutSetDeleteEffect effect) {
       root.EffectMudTTCMutSetDelete(effect.id);
@@ -2954,7 +2954,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitDirtTTCMutSetCreateEffect(DirtTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectDirtTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectDirtTTCMutSetCreateWithId(effect.id);
     }
     public void visitDirtTTCMutSetDeleteEffect(DirtTTCMutSetDeleteEffect effect) {
       root.EffectDirtTTCMutSetDelete(effect.id);
@@ -2971,7 +2971,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitObsidianTTCMutSetCreateEffect(ObsidianTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectObsidianTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectObsidianTTCMutSetCreateWithId(effect.id);
     }
     public void visitObsidianTTCMutSetDeleteEffect(ObsidianTTCMutSetDeleteEffect effect) {
       root.EffectObsidianTTCMutSetDelete(effect.id);
@@ -2988,7 +2988,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitDownStairsTTCMutSetCreateEffect(DownStairsTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectDownStairsTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectDownStairsTTCMutSetCreateWithId(effect.id);
     }
     public void visitDownStairsTTCMutSetDeleteEffect(DownStairsTTCMutSetDeleteEffect effect) {
       root.EffectDownStairsTTCMutSetDelete(effect.id);
@@ -3005,7 +3005,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitUpStairsTTCMutSetCreateEffect(UpStairsTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectUpStairsTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectUpStairsTTCMutSetCreateWithId(effect.id);
     }
     public void visitUpStairsTTCMutSetDeleteEffect(UpStairsTTCMutSetDeleteEffect effect) {
       root.EffectUpStairsTTCMutSetDelete(effect.id);
@@ -3022,7 +3022,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitWallTTCMutSetCreateEffect(WallTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectWallTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectWallTTCMutSetCreateWithId(effect.id);
     }
     public void visitWallTTCMutSetDeleteEffect(WallTTCMutSetDeleteEffect effect) {
       root.EffectWallTTCMutSetDelete(effect.id);
@@ -3039,7 +3039,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitBloodTTCMutSetCreateEffect(BloodTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectBloodTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectBloodTTCMutSetCreateWithId(effect.id);
     }
     public void visitBloodTTCMutSetDeleteEffect(BloodTTCMutSetDeleteEffect effect) {
       root.EffectBloodTTCMutSetDelete(effect.id);
@@ -3056,7 +3056,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitRocksTTCMutSetCreateEffect(RocksTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectRocksTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectRocksTTCMutSetCreateWithId(effect.id);
     }
     public void visitRocksTTCMutSetDeleteEffect(RocksTTCMutSetDeleteEffect effect) {
       root.EffectRocksTTCMutSetDelete(effect.id);
@@ -3073,7 +3073,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitTreeTTCMutSetCreateEffect(TreeTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectTreeTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectTreeTTCMutSetCreateWithId(effect.id);
     }
     public void visitTreeTTCMutSetDeleteEffect(TreeTTCMutSetDeleteEffect effect) {
       root.EffectTreeTTCMutSetDelete(effect.id);
@@ -3090,7 +3090,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitWaterTTCMutSetCreateEffect(WaterTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectWaterTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectWaterTTCMutSetCreateWithId(effect.id);
     }
     public void visitWaterTTCMutSetDeleteEffect(WaterTTCMutSetDeleteEffect effect) {
       root.EffectWaterTTCMutSetDelete(effect.id);
@@ -3107,7 +3107,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitFloorTTCMutSetCreateEffect(FloorTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectFloorTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectFloorTTCMutSetCreateWithId(effect.id);
     }
     public void visitFloorTTCMutSetDeleteEffect(FloorTTCMutSetDeleteEffect effect) {
       root.EffectFloorTTCMutSetDelete(effect.id);
@@ -3124,7 +3124,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitCaveWallTTCMutSetCreateEffect(CaveWallTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectCaveWallTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectCaveWallTTCMutSetCreateWithId(effect.id);
     }
     public void visitCaveWallTTCMutSetDeleteEffect(CaveWallTTCMutSetDeleteEffect effect) {
       root.EffectCaveWallTTCMutSetDelete(effect.id);
@@ -3141,7 +3141,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitCaveTTCMutSetCreateEffect(CaveTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectCaveTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectCaveTTCMutSetCreateWithId(effect.id);
     }
     public void visitCaveTTCMutSetDeleteEffect(CaveTTCMutSetDeleteEffect effect) {
       root.EffectCaveTTCMutSetDelete(effect.id);
@@ -3158,7 +3158,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitFallsTTCMutSetCreateEffect(FallsTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectFallsTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectFallsTTCMutSetCreateWithId(effect.id);
     }
     public void visitFallsTTCMutSetDeleteEffect(FallsTTCMutSetDeleteEffect effect) {
       root.EffectFallsTTCMutSetDelete(effect.id);
@@ -3175,7 +3175,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitFireTTCMutSetCreateEffect(FireTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectFireTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectFireTTCMutSetCreateWithId(effect.id);
     }
     public void visitFireTTCMutSetDeleteEffect(FireTTCMutSetDeleteEffect effect) {
       root.EffectFireTTCMutSetDelete(effect.id);
@@ -3192,7 +3192,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitObsidianFloorTTCMutSetCreateEffect(ObsidianFloorTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectObsidianFloorTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectObsidianFloorTTCMutSetCreateWithId(effect.id);
     }
     public void visitObsidianFloorTTCMutSetDeleteEffect(ObsidianFloorTTCMutSetDeleteEffect effect) {
       root.EffectObsidianFloorTTCMutSetDelete(effect.id);
@@ -3209,7 +3209,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitMagmaTTCMutSetCreateEffect(MagmaTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectMagmaTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectMagmaTTCMutSetCreateWithId(effect.id);
     }
     public void visitMagmaTTCMutSetDeleteEffect(MagmaTTCMutSetDeleteEffect effect) {
       root.EffectMagmaTTCMutSetDelete(effect.id);
@@ -3226,7 +3226,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitCliffTTCMutSetCreateEffect(CliffTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectCliffTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectCliffTTCMutSetCreateWithId(effect.id);
     }
     public void visitCliffTTCMutSetDeleteEffect(CliffTTCMutSetDeleteEffect effect) {
       root.EffectCliffTTCMutSetDelete(effect.id);
@@ -3243,7 +3243,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitRavaNestTTCMutSetCreateEffect(RavaNestTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectRavaNestTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectRavaNestTTCMutSetCreateWithId(effect.id);
     }
     public void visitRavaNestTTCMutSetDeleteEffect(RavaNestTTCMutSetDeleteEffect effect) {
       root.EffectRavaNestTTCMutSetDelete(effect.id);
@@ -3260,7 +3260,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitCliffLandingTTCMutSetCreateEffect(CliffLandingTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectCliffLandingTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectCliffLandingTTCMutSetCreateWithId(effect.id);
     }
     public void visitCliffLandingTTCMutSetDeleteEffect(CliffLandingTTCMutSetDeleteEffect effect) {
       root.EffectCliffLandingTTCMutSetDelete(effect.id);
@@ -3277,7 +3277,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitStoneTTCMutSetCreateEffect(StoneTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectStoneTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectStoneTTCMutSetCreateWithId(effect.id);
     }
     public void visitStoneTTCMutSetDeleteEffect(StoneTTCMutSetDeleteEffect effect) {
       root.EffectStoneTTCMutSetDelete(effect.id);
@@ -3294,7 +3294,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitGrassTTCMutSetCreateEffect(GrassTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectGrassTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectGrassTTCMutSetCreateWithId(effect.id);
     }
     public void visitGrassTTCMutSetDeleteEffect(GrassTTCMutSetDeleteEffect effect) {
       root.EffectGrassTTCMutSetDelete(effect.id);
@@ -3311,7 +3311,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitIncendianFallsLevelLinkerTTCMutSetCreateEffect(IncendianFallsLevelLinkerTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectIncendianFallsLevelLinkerTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectIncendianFallsLevelLinkerTTCMutSetCreateWithId(effect.id);
     }
     public void visitIncendianFallsLevelLinkerTTCMutSetDeleteEffect(IncendianFallsLevelLinkerTTCMutSetDeleteEffect effect) {
       root.EffectIncendianFallsLevelLinkerTTCMutSetDelete(effect.id);
@@ -3328,7 +3328,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitEmberDeepLevelLinkerTTCMutSetCreateEffect(EmberDeepLevelLinkerTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectEmberDeepLevelLinkerTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectEmberDeepLevelLinkerTTCMutSetCreateWithId(effect.id);
     }
     public void visitEmberDeepLevelLinkerTTCMutSetDeleteEffect(EmberDeepLevelLinkerTTCMutSetDeleteEffect effect) {
       root.EffectEmberDeepLevelLinkerTTCMutSetDelete(effect.id);
@@ -3345,7 +3345,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitTutorialDefyCounterUCMutSetCreateEffect(TutorialDefyCounterUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectTutorialDefyCounterUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectTutorialDefyCounterUCMutSetCreateWithId(effect.id);
     }
     public void visitTutorialDefyCounterUCMutSetDeleteEffect(TutorialDefyCounterUCMutSetDeleteEffect effect) {
       root.EffectTutorialDefyCounterUCMutSetDelete(effect.id);
@@ -3362,7 +3362,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitLightningChargingUCMutSetCreateEffect(LightningChargingUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectLightningChargingUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectLightningChargingUCMutSetCreateWithId(effect.id);
     }
     public void visitLightningChargingUCMutSetDeleteEffect(LightningChargingUCMutSetDeleteEffect effect) {
       root.EffectLightningChargingUCMutSetDelete(effect.id);
@@ -3379,7 +3379,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitWanderAICapabilityUCMutSetCreateEffect(WanderAICapabilityUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectWanderAICapabilityUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectWanderAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitWanderAICapabilityUCMutSetDeleteEffect(WanderAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectWanderAICapabilityUCMutSetDelete(effect.id);
@@ -3396,7 +3396,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitTemporaryCloneAICapabilityUCMutSetCreateEffect(TemporaryCloneAICapabilityUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectTemporaryCloneAICapabilityUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectTemporaryCloneAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitTemporaryCloneAICapabilityUCMutSetDeleteEffect(TemporaryCloneAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectTemporaryCloneAICapabilityUCMutSetDelete(effect.id);
@@ -3413,7 +3413,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitSummonAICapabilityUCMutSetCreateEffect(SummonAICapabilityUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectSummonAICapabilityUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectSummonAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitSummonAICapabilityUCMutSetDeleteEffect(SummonAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectSummonAICapabilityUCMutSetDelete(effect.id);
@@ -3430,7 +3430,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitKamikazeAICapabilityUCMutSetCreateEffect(KamikazeAICapabilityUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectKamikazeAICapabilityUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectKamikazeAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitKamikazeAICapabilityUCMutSetDeleteEffect(KamikazeAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectKamikazeAICapabilityUCMutSetDelete(effect.id);
@@ -3447,7 +3447,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitGuardAICapabilityUCMutSetCreateEffect(GuardAICapabilityUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectGuardAICapabilityUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectGuardAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitGuardAICapabilityUCMutSetDeleteEffect(GuardAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectGuardAICapabilityUCMutSetDelete(effect.id);
@@ -3464,7 +3464,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitTimeCloneAICapabilityUCMutSetCreateEffect(TimeCloneAICapabilityUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectTimeCloneAICapabilityUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectTimeCloneAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitTimeCloneAICapabilityUCMutSetDeleteEffect(TimeCloneAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectTimeCloneAICapabilityUCMutSetDelete(effect.id);
@@ -3481,7 +3481,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitDoomedUCMutSetCreateEffect(DoomedUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectDoomedUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectDoomedUCMutSetCreateWithId(effect.id);
     }
     public void visitDoomedUCMutSetDeleteEffect(DoomedUCMutSetDeleteEffect effect) {
       root.EffectDoomedUCMutSetDelete(effect.id);
@@ -3498,7 +3498,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitMiredUCMutSetCreateEffect(MiredUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectMiredUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectMiredUCMutSetCreateWithId(effect.id);
     }
     public void visitMiredUCMutSetDeleteEffect(MiredUCMutSetDeleteEffect effect) {
       root.EffectMiredUCMutSetDelete(effect.id);
@@ -3515,7 +3515,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitAttackAICapabilityUCMutSetCreateEffect(AttackAICapabilityUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectAttackAICapabilityUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectAttackAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitAttackAICapabilityUCMutSetDeleteEffect(AttackAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectAttackAICapabilityUCMutSetDelete(effect.id);
@@ -3532,7 +3532,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitCounteringUCMutSetCreateEffect(CounteringUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectCounteringUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectCounteringUCMutSetCreateWithId(effect.id);
     }
     public void visitCounteringUCMutSetDeleteEffect(CounteringUCMutSetDeleteEffect effect) {
       root.EffectCounteringUCMutSetDelete(effect.id);
@@ -3549,7 +3549,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitLightningChargedUCMutSetCreateEffect(LightningChargedUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectLightningChargedUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectLightningChargedUCMutSetCreateWithId(effect.id);
     }
     public void visitLightningChargedUCMutSetDeleteEffect(LightningChargedUCMutSetDeleteEffect effect) {
       root.EffectLightningChargedUCMutSetDelete(effect.id);
@@ -3566,7 +3566,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitInvincibilityUCMutSetCreateEffect(InvincibilityUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectInvincibilityUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectInvincibilityUCMutSetCreateWithId(effect.id);
     }
     public void visitInvincibilityUCMutSetDeleteEffect(InvincibilityUCMutSetDeleteEffect effect) {
       root.EffectInvincibilityUCMutSetDelete(effect.id);
@@ -3583,7 +3583,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitDefyingUCMutSetCreateEffect(DefyingUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectDefyingUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectDefyingUCMutSetCreateWithId(effect.id);
     }
     public void visitDefyingUCMutSetDeleteEffect(DefyingUCMutSetDeleteEffect effect) {
       root.EffectDefyingUCMutSetDelete(effect.id);
@@ -3600,7 +3600,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitBideAICapabilityUCMutSetCreateEffect(BideAICapabilityUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectBideAICapabilityUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectBideAICapabilityUCMutSetCreateWithId(effect.id);
     }
     public void visitBideAICapabilityUCMutSetDeleteEffect(BideAICapabilityUCMutSetDeleteEffect effect) {
       root.EffectBideAICapabilityUCMutSetDelete(effect.id);
@@ -3617,7 +3617,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitBaseSightRangeUCMutSetCreateEffect(BaseSightRangeUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectBaseSightRangeUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectBaseSightRangeUCMutSetCreateWithId(effect.id);
     }
     public void visitBaseSightRangeUCMutSetDeleteEffect(BaseSightRangeUCMutSetDeleteEffect effect) {
       root.EffectBaseSightRangeUCMutSetDelete(effect.id);
@@ -3634,7 +3634,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitBaseMovementTimeUCMutSetCreateEffect(BaseMovementTimeUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectBaseMovementTimeUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectBaseMovementTimeUCMutSetCreateWithId(effect.id);
     }
     public void visitBaseMovementTimeUCMutSetDeleteEffect(BaseMovementTimeUCMutSetDeleteEffect effect) {
       root.EffectBaseMovementTimeUCMutSetDelete(effect.id);
@@ -3651,7 +3651,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitBaseCombatTimeUCMutSetCreateEffect(BaseCombatTimeUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectBaseCombatTimeUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectBaseCombatTimeUCMutSetCreateWithId(effect.id);
     }
     public void visitBaseCombatTimeUCMutSetDeleteEffect(BaseCombatTimeUCMutSetDeleteEffect effect) {
       root.EffectBaseCombatTimeUCMutSetDelete(effect.id);
@@ -3668,7 +3668,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitManaPotionMutSetCreateEffect(ManaPotionMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectManaPotionMutSetCreateWithId(effect.id);
+      root.TrustedEffectManaPotionMutSetCreateWithId(effect.id);
     }
     public void visitManaPotionMutSetDeleteEffect(ManaPotionMutSetDeleteEffect effect) {
       root.EffectManaPotionMutSetDelete(effect.id);
@@ -3685,7 +3685,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitHealthPotionMutSetCreateEffect(HealthPotionMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectHealthPotionMutSetCreateWithId(effect.id);
+      root.TrustedEffectHealthPotionMutSetCreateWithId(effect.id);
     }
     public void visitHealthPotionMutSetDeleteEffect(HealthPotionMutSetDeleteEffect effect) {
       root.EffectHealthPotionMutSetDelete(effect.id);
@@ -3702,7 +3702,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitSpeedRingMutSetCreateEffect(SpeedRingMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectSpeedRingMutSetCreateWithId(effect.id);
+      root.TrustedEffectSpeedRingMutSetCreateWithId(effect.id);
     }
     public void visitSpeedRingMutSetDeleteEffect(SpeedRingMutSetDeleteEffect effect) {
       root.EffectSpeedRingMutSetDelete(effect.id);
@@ -3719,7 +3719,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitGlaiveMutSetCreateEffect(GlaiveMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectGlaiveMutSetCreateWithId(effect.id);
+      root.TrustedEffectGlaiveMutSetCreateWithId(effect.id);
     }
     public void visitGlaiveMutSetDeleteEffect(GlaiveMutSetDeleteEffect effect) {
       root.EffectGlaiveMutSetDelete(effect.id);
@@ -3736,7 +3736,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitSlowRodMutSetCreateEffect(SlowRodMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectSlowRodMutSetCreateWithId(effect.id);
+      root.TrustedEffectSlowRodMutSetCreateWithId(effect.id);
     }
     public void visitSlowRodMutSetDeleteEffect(SlowRodMutSetDeleteEffect effect) {
       root.EffectSlowRodMutSetDelete(effect.id);
@@ -3753,7 +3753,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitBlastRodMutSetCreateEffect(BlastRodMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectBlastRodMutSetCreateWithId(effect.id);
+      root.TrustedEffectBlastRodMutSetCreateWithId(effect.id);
     }
     public void visitBlastRodMutSetDeleteEffect(BlastRodMutSetDeleteEffect effect) {
       root.EffectBlastRodMutSetDelete(effect.id);
@@ -3770,7 +3770,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitArmorMutSetCreateEffect(ArmorMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectArmorMutSetCreateWithId(effect.id);
+      root.TrustedEffectArmorMutSetCreateWithId(effect.id);
     }
     public void visitArmorMutSetDeleteEffect(ArmorMutSetDeleteEffect effect) {
       root.EffectArmorMutSetDelete(effect.id);
@@ -3787,7 +3787,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitSorcerousUCMutSetCreateEffect(SorcerousUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectSorcerousUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectSorcerousUCMutSetCreateWithId(effect.id);
     }
     public void visitSorcerousUCMutSetDeleteEffect(SorcerousUCMutSetDeleteEffect effect) {
       root.EffectSorcerousUCMutSetDelete(effect.id);
@@ -3804,7 +3804,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitBaseOffenseUCMutSetCreateEffect(BaseOffenseUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectBaseOffenseUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectBaseOffenseUCMutSetCreateWithId(effect.id);
     }
     public void visitBaseOffenseUCMutSetDeleteEffect(BaseOffenseUCMutSetDeleteEffect effect) {
       root.EffectBaseOffenseUCMutSetDelete(effect.id);
@@ -3821,7 +3821,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitBaseDefenseUCMutSetCreateEffect(BaseDefenseUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectBaseDefenseUCMutSetCreateWithId(effect.id);
+      root.TrustedEffectBaseDefenseUCMutSetCreateWithId(effect.id);
     }
     public void visitBaseDefenseUCMutSetDeleteEffect(BaseDefenseUCMutSetDeleteEffect effect) {
       root.EffectBaseDefenseUCMutSetDelete(effect.id);
@@ -3838,7 +3838,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitTerrainTileByLocationMutMapCreateEffect(TerrainTileByLocationMutMapCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectTerrainTileByLocationMutMapCreateWithId(effect.id);
+      root.TrustedEffectTerrainTileByLocationMutMapCreateWithId(effect.id);
     }
     public void visitTerrainTileByLocationMutMapDeleteEffect(TerrainTileByLocationMutMapDeleteEffect effect) {
       root.EffectTerrainTileByLocationMutMapDelete(effect.id);
@@ -3855,7 +3855,7 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
     public void visitKamikazeTargetTTCStrongByLocationMutMapCreateEffect(KamikazeTargetTTCStrongByLocationMutMapCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.EffectKamikazeTargetTTCStrongByLocationMutMapCreateWithId(effect.id);
+      root.TrustedEffectKamikazeTargetTTCStrongByLocationMutMapCreateWithId(effect.id);
     }
     public void visitKamikazeTargetTTCStrongByLocationMutMapDeleteEffect(KamikazeTargetTTCStrongByLocationMutMapDeleteEffect effect) {
       root.EffectKamikazeTargetTTCStrongByLocationMutMapDelete(effect.id);

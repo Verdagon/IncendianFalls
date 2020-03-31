@@ -17,16 +17,6 @@ object MutStructRootMethods {
         "      " + toCS(memberType) + " " + memberName
       }).mkString(",\n") +
       ") {\n" +
-    s"    return Effect${structName}CreateWithId(NewId()\n" +
-      members.map(_.name).map("," + _).mkString("\n") +
-      "    );\n" +
-      "  }\n" +
-    s"  public ${structName} Effect${structName}CreateWithId(int id\n" +
-      members.map({ case StructMemberS(memberName, variability, memberType) =>
-        ",      " + toCS(memberType) + " " + memberName
-      }).mkString("\n") +
-      ") {\n" +
-      "    CheckUnlocked();\n" +
       members
         .flatMap({ case StructMemberS(memberName, variability, memberType) =>
           if (memberType.kind.mutability == MutableS && !memberType.nullable) {
@@ -37,23 +27,34 @@ object MutStructRootMethods {
           }
         })
         .mkString("") +
+    s"    return TrustedEffect${structName}CreateWithId(NewId()\n" +
+    members.map({ case StructMemberS(memberName, variability, memberType) =>
+      if (memberType.kind.mutability == MutableS) {
+        s"            ,${memberName}.id"
+      } else {
+        s"            ,${memberName}"
+      }
+    }).mkString("\n") +
+      "    );\n" +
+      "  }\n" +
+    s"  public ${structName} TrustedEffect${structName}CreateWithId(int id\n" +
+      members.map({ case StructMemberS(memberName, variability, memberType) =>
+        ",      " + toCS(memberType.flatten) + " " + memberName
+      }).mkString("\n") +
+      ") {\n" +
+      "    CheckUnlocked();\n" +
     s"""
        |    var incarnation =
        |        new ${structName}Incarnation(
        |""".stripMargin +
     members.map({ case StructMemberS(memberName, variability, memberType) =>
-      if (memberType.kind.mutability == MutableS) {
-        s"            ${memberName}.id"
-      } else {
         s"            ${memberName}"
-      }
     }).mkString(",\n") +
     s"""
        |            );
-       |    EffectInternalCreate${structName}(id, rootIncarnation.version, incarnation);
-       |    return new ${structName}(this, id);
+       |    return EffectInternalCreate${structName}(id, rootIncarnation.version, incarnation);
        |  }
-       |  public void EffectInternalCreate${structName}(
+       |  public ${structName} EffectInternalCreate${structName}(
        |      int id,
        |      int incarnationVersion,
        |      ${structName}Incarnation incarnation) {
@@ -71,6 +72,7 @@ object MutStructRootMethods {
            |""".stripMargin
       } else "") +
       s"""    NotifyEffect(effect);
+         |    return new ${structName}(this, id);
        |  }
        |""".stripMargin
   }

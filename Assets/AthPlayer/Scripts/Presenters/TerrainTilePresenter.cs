@@ -22,8 +22,10 @@ namespace AthPlayer {
       IITerrainTileComponentMutBunchObserver,
     ITerrainTileEffectObserver,
     ITerrainTileEffectVisitor {
-    EffectBroadcaster broadcaster;
-  Atharia.Model.Terrain terrain;
+
+    EffectBroadcaster preBroadcaster;
+    EffectBroadcaster postBroadcaster;
+    Atharia.Model.Terrain terrain;
     public readonly Location location;
     TerrainTile terrainTile;
     Instantiator instantiator;
@@ -35,16 +37,18 @@ namespace AthPlayer {
     bool highlighted = false;
 
     public TerrainTilePresenter(
-      IClock clock,
-      ITimer timer,
-      EffectBroadcaster broadcaster,
+        IClock clock,
+        ITimer timer,
+        EffectBroadcaster preBroadcaster,
+        EffectBroadcaster postBroadcaster,
         Atharia.Model.Terrain terrain,
         Location location,
         TerrainTile terrainTile,
         Instantiator instantiator) {
       this.location = location;
       this.terrain = terrain;
-      this.broadcaster = broadcaster;
+      this.preBroadcaster = preBroadcaster;
+      this.postBroadcaster = postBroadcaster;
       this.terrainTile = terrainTile;
       this.instantiator = instantiator;
 
@@ -60,8 +64,8 @@ namespace AthPlayer {
               GetDescription());
       tileView.gameObject.AddComponent<TerrainTilePresenterTile>().Init(this);
 
-      terrainTile.AddObserver(broadcaster, this);
-      componentsBroadcaster = new ITerrainTileComponentMutBunchBroadcaster(broadcaster, terrainTile.components);
+      terrainTile.AddObserver(postBroadcaster, this);
+      componentsBroadcaster = new ITerrainTileComponentMutBunchBroadcaster(postBroadcaster, terrainTile.components);
       componentsBroadcaster.AddObserver(this);
 
       tileView.SetDescription(GetDescription());
@@ -150,7 +154,7 @@ namespace AthPlayer {
 
     public void DestroyTerrainTilePresenter() {
       if (terrainTile.Exists()) {
-        terrainTile.RemoveObserver(broadcaster, this);
+        terrainTile.RemoveObserver(postBroadcaster, this);
         componentsBroadcaster.RemoveObserver(this);
         componentsBroadcaster.Stop();
       }

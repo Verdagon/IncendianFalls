@@ -22,7 +22,8 @@ namespace AthPlayer {
     IClock clock;
     ITimer timer;
     SoundPlayer soundPlayer;
-    EffectBroadcaster broadcaster;
+    EffectBroadcaster preBroadcaster;
+    EffectBroadcaster postBroadcaster;
     Game game;
     public readonly Unit unit;
     Instantiator instantiator;
@@ -42,19 +43,23 @@ namespace AthPlayer {
     // This will pay attention to the above endTimes and report stalls to the effect staller.
     UnitEffectStaller effectStaller;
 
+    UnitEffectPreReactor effectPreReactor;
+
     public UnitPresenter(
       IClock clock,
         ITimer timer,
         SoundPlayer soundPlayer,
-        EffectBroadcaster previewBroadcaster,
+        EffectBroadcaster stallBroadcaster,
         IEffectStaller stallEffect,
-        EffectBroadcaster broadcaster,
+        EffectBroadcaster preBroadcaster,
+        EffectBroadcaster postBroadcaster,
         Game game,
         Atharia.Model.Terrain terrain,
         Unit unit,
         Instantiator instantiator) {
       this.instanceAlive = true;
-      this.broadcaster = broadcaster;
+      this.preBroadcaster = preBroadcaster;
+      this.postBroadcaster = postBroadcaster;
       this.timer = timer;
       this.soundPlayer = soundPlayer;
       this.game = game;
@@ -62,11 +67,17 @@ namespace AthPlayer {
       this.unit = unit;
       this.instantiator = instantiator;
 
-      unit.AddObserver(broadcaster, this);
+      unit.AddObserver(postBroadcaster, this);
       var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
       if (sorcerous.Exists()) {
-        sorcerous.AddObserver(broadcaster, this);
+        sorcerous.AddObserver(postBroadcaster, this);
       }
+
+      effectPreReactor = new UnitEffectPreReactor();
+      unit.AddObserver(preBroadcaster, effectPreReactor);
+
+      componentsBroadcaster = new IUnitComponentMutBunchBroadcaster(postBroadcaster, unit.components);
+      componentsBroadcaster.AddObserver(this);
 
       unitView =
           instantiator.CreateUnitView(
@@ -76,14 +87,11 @@ namespace AthPlayer {
               GetUnitViewDescription(unit),
               game.level.cameraAngle.ToUnity());
 
-      componentsBroadcaster = new IUnitComponentMutBunchBroadcaster(broadcaster, unit.components);
-      componentsBroadcaster.AddObserver(this);
-
       if (unit.components.GetOnlyBideAICapabilityUCOrNull().Exists()) {
-        unit.components.GetOnlyBideAICapabilityUCOrNull().AddObserver(broadcaster, this);
+        unit.components.GetOnlyBideAICapabilityUCOrNull().AddObserver(postBroadcaster, this);
       }
 
-      this.effectStaller = new UnitEffectStaller(previewBroadcaster, game, this, stallEffect);
+      this.effectStaller = new UnitEffectStaller(stallBroadcaster, game, this, stallEffect);
     }
 
     public (long, UnitView) DestroyUnitPresenter() {
@@ -93,17 +101,19 @@ namespace AthPlayer {
       effectStaller.Destroy();
 
       if (unit.components.GetOnlyBideAICapabilityUCOrNull().Exists()) {
-        unit.components.GetOnlyBideAICapabilityUCOrNull().RemoveObserver(broadcaster, this);
+        unit.components.GetOnlyBideAICapabilityUCOrNull().RemoveObserver(postBroadcaster, this);
       }
+
+      unit.RemoveObserver(preBroadcaster, effectPreReactor);
 
       componentsBroadcaster.RemoveObserver(this);
       componentsBroadcaster.Stop();
 
       var sorcerous = unit.components.GetOnlySorcerousUCOrNull();
       if (sorcerous.Exists()) {
-        sorcerous.RemoveObserver(broadcaster, this);
+        sorcerous.RemoveObserver(postBroadcaster, this);
       }
-      unit.RemoveObserver(broadcaster, this);
+      unit.RemoveObserver(postBroadcaster, this);
 
       long animationsEndTime =
         Math.Max(hopEndTime,
@@ -912,6 +922,22 @@ namespace AthPlayer {
       }
     }
 
+    private class UnitEffectPreReactor : IUnitEffectObserver, IUnitEffectVisitor {
+      private UnitPresenter unitPresenter;
+
+      public void OnUnitEffect(IUnitEffect effect) { effect.visitIUnitEffect(this); }
+      public void visitUnitCreateEffect(UnitCreateEffect effect) { }
+      public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) { }
+      public void visitUnitSetHpEffect(UnitSetHpEffect effect) { }
+      public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
+      public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) { }
+      public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
+      public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
+      public void visitUnitDeleteEffect(UnitDeleteEffect effect) {
+        //unitPresenter.BeforeDelete();
+      }
+    }
+
     // This class gets to preview an effect before it officially happens.
     // Its main purpose is to stall the effect until this UnitPresenter is ready.
     private class UnitEffectStaller :
@@ -922,34 +948,34 @@ namespace AthPlayer {
         IGameEffectObserver,
         IGameEffectVisitor {
 
-      EffectBroadcaster previewBroadcaster;
+      EffectBroadcaster stallBroadcaster;
       Game game;
       IUnitComponentMutBunchBroadcaster componentsBroadcaster;
       private UnitPresenter unitPresenter;
       private IEffectStaller staller;
 
       public UnitEffectStaller(
-          EffectBroadcaster previewBroadcaster,
+          EffectBroadcaster stallBroadcaster,
           Game game,
           UnitPresenter unitPresenter,
           IEffectStaller staller) {
-        this.previewBroadcaster = previewBroadcaster;
+        this.stallBroadcaster = stallBroadcaster;
         this.game = game;
         this.unitPresenter = unitPresenter;
         this.staller = staller;
 
-        game.AddObserver(previewBroadcaster, this);
+        game.AddObserver(stallBroadcaster, this);
 
-        previewBroadcaster.AddUnitObserver(unitPresenter.unit.id, this);
+        stallBroadcaster.AddUnitObserver(unitPresenter.unit.id, this);
 
-        this.componentsBroadcaster = new IUnitComponentMutBunchBroadcaster(previewBroadcaster, unitPresenter.unit.components);
+        this.componentsBroadcaster = new IUnitComponentMutBunchBroadcaster(stallBroadcaster, unitPresenter.unit.components);
         componentsBroadcaster.AddObserver(this);
       }
 
       public void Destroy() {
         componentsBroadcaster.RemoveObserver(this);
-        previewBroadcaster.RemoveUnitObserver(unitPresenter.unit.id, this);
-        game.AddObserver(previewBroadcaster, this);
+        stallBroadcaster.RemoveUnitObserver(unitPresenter.unit.id, this);
+        game.AddObserver(stallBroadcaster, this);
       }
 
       private void StallForAllAnimations(bool includingDeath) {

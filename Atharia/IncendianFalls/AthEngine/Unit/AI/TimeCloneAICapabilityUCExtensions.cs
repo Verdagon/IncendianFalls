@@ -63,7 +63,7 @@ namespace Atharia.Model {
           }
         } else if (request is AttackRequestAsIRequest arI) {
           var targetUnitId = arI.obj.targetUnitId;
-          var targetUnit = game.root.GetUnit(targetUnitId);
+          var targetUnit = game.root.GetUnitOrNull(targetUnitId);
           if (!targetUnit.Exists()) {
             return game.root.EffectHoldPositionImpulseCreate(1000, holdTime).AsIImpulse();
           }

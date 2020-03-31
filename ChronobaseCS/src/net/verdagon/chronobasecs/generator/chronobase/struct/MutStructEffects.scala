@@ -230,18 +230,14 @@ object MutStructEffects {
     s"  public void visit${createEffect}(${createEffect} effect) {\n" +
       s"    // For now we're just feeding the remote ID in. Someday we might want to have a map\n" +
         s"    // in the applier instead.\n" +
-      s"    root.Effect${structName}CreateWithId(effect.id\n" +
+      s"    root.TrustedEffect${structName}CreateWithId(effect.id\n" +
+      // We have to pass in the effect contents directly, we cant GetXYZ() them first because
+      // if this effect came from a revert, then we're doing a bunch of EffectXYZCreate in a
+      // crazy non-dependency-order, and the GetXYZ() would fail.
+      // We cant directly make the handles here either, because you cant directly make a interface
+      // handle.
       members.map({ case StructMemberS(memberName, variability, memberType) =>
-        (memberType.kind.mutability match {
-          case MutableS => {
-            if (memberType.ownership == WeakS || memberType.nullable) {
-              s",  root.Get${memberType.name}OrNull(effect.incarnation.${memberName})"
-            } else {
-              s",  root.Get${memberType.name}(effect.incarnation.${memberName})"
-            }
-          }
-          case ImmutableS => s",  effect.incarnation.${memberName}"
-        })
+        s",  effect.incarnation.${memberName}"
       }).mkString("\n") +
       s"    );\n" +
       s"""

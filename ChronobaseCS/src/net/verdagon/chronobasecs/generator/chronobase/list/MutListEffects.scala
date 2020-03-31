@@ -210,7 +210,7 @@ object MutListEffects {
        |    public void visit${createEffectName}(${createEffectName} effect) {
        |      // For now we're just feeding the remote ID in. Someday we might want to have a map
        |      // in the applier instead.
-       |      root.Effect${listName}CreateWithId(effect.id);
+       |      root.TrustedEffect${listName}CreateWithId(effect.id);
        |    }
        |    public void visit${deleteEffectName}(${deleteEffectName} effect) {
        |      root.Effect${listName}Delete(effect.id);

@@ -23,8 +23,9 @@ namespace AthPlayer {
 
     GameObject thinkingIndicator;
     SuperstructureWrapper serverSS;
-    EffectBroadcaster previewBroadcaster;
-    EffectBroadcaster broadcaster;
+    EffectBroadcaster stallingBroadcaster;
+    EffectBroadcaster preBroadcaster;
+    EffectBroadcaster postBroadcaster;
     Game game;
     Level viewedLevel;
     Instantiator instantiator;
@@ -110,26 +111,27 @@ namespace AthPlayer {
       Asserts.Assert(clientRoot.GameExists(gameId));
       game = clientRoot.GetGame(gameId);
 
-      previewBroadcaster = new EffectBroadcaster();
-      broadcaster = new EffectBroadcaster();
+      stallingBroadcaster = new EffectBroadcaster();
+      preBroadcaster = new EffectBroadcaster();
+      postBroadcaster = new EffectBroadcaster();
       stallEffectUntilUiTimeMs = 0;
       stallEffectUntilGameTimeMs = 0;
 
-      var looker = new Looker(lookPanelView, broadcaster);
+      var looker = new Looker(lookPanelView, postBroadcaster);
 
       gameTimer = new SlowableTimerClock(1f);
       uiTimer = new SlowableTimerClock(1f);
 
-      cameraEffectStaller = new CameraEffectStaller(this, previewBroadcaster, StallEffectUiTime);
-      waitEffectStaller = new WaitEffectStaller(this, previewBroadcaster, StallEffectUiTime);
+      cameraEffectStaller = new CameraEffectStaller(this, stallingBroadcaster, StallEffectUiTime);
+      waitEffectStaller = new WaitEffectStaller(this, stallingBroadcaster, StallEffectUiTime);
 
       // this was bad because when we entered cinematic mode, it hideInput=true, which locked the
       // input semaphore, which set game speed to zero, which prevented it from exiting cinematic mode.
       //inputSemaphore.OnLocked += () => gameTimer.SetTimeSpeedMultiplier(0f);
       //inputSemaphore.OnUnlocked += () => gameTimer.SetTimeSpeedMultiplier(1f);
 
-      game.AddObserver(broadcaster, this);
-      game.comms.AddObserver(broadcaster, this);
+      game.AddObserver(postBroadcaster, this);
+      game.comms.AddObserver(postBroadcaster, this);
 
       playerController =
           new PlayerController(
@@ -137,7 +139,7 @@ namespace AthPlayer {
               uiTimer,
               inputSemaphore,
               serverSS,
-              broadcaster,
+              postBroadcaster,
               game,
               looker,
               overlayPaneler,
@@ -183,7 +185,7 @@ namespace AthPlayer {
         if (currentModalOverlay != null) {
           break;
         }
-        previewBroadcaster.Broadcast(effect);
+        stallingBroadcaster.Broadcast(effect);
         // The above previewBroadcaster should make interested parties set the stallEffectUntilTimeMs.
         if (gameTimer.GetTimeMs() < stallEffectUntilGameTimeMs) {
           break;
@@ -218,14 +220,9 @@ namespace AthPlayer {
             foreach (var effect in readyEffects) {
               Debug.Log("Applying " + effect);
 
-              // If the event is subtractive (delete or remove) then broadcast it first.
-              if (effect.isSubtractive()) {
-                broadcaster.Broadcast(effect);
-                new EffectApplier(game.root).Apply(effect);
-              } else {
-                new EffectApplier(game.root).Apply(effect);
-                broadcaster.Broadcast(effect);
-              }
+              preBroadcaster.Broadcast(effect);
+              new EffectApplier(game.root).Apply(effect);
+              postBroadcaster.Broadcast(effect);
             }
             return 0;
           });
@@ -274,7 +271,17 @@ namespace AthPlayer {
       }
       unitPresenters[unitId] =
           new UnitPresenter(
-              gameTimer, gameTimer, soundPlayer, previewBroadcaster, StallEffectGameTime, broadcaster, game, viewedLevel.terrain, unit, instantiator);
+              gameTimer,
+              gameTimer,
+              soundPlayer,
+              stallingBroadcaster,
+              StallEffectGameTime,
+              preBroadcaster,
+              postBroadcaster,
+              game,
+              viewedLevel.terrain,
+              unit,
+              instantiator);
       unitPresenters[unitId].onAnimation += OnUnitAnimation;
     }
 
@@ -295,9 +302,9 @@ namespace AthPlayer {
     private void LoadLevel() {
       viewedLevel = game.level;
 
-      this.terrainPresenter = new TerrainPresenter(gameTimer, gameTimer, broadcaster, viewedLevel.terrain, instantiator);
+      this.terrainPresenter = new TerrainPresenter(gameTimer, gameTimer, preBroadcaster, postBroadcaster, viewedLevel.terrain, instantiator);
 
-      viewedLevel.units.AddObserver(broadcaster, this);
+      viewedLevel.units.AddObserver(postBroadcaster, this);
       this.unitPresenters = new Dictionary<int, UnitPresenter>();
       foreach (var unit in viewedLevel.units) {
         AddUnit(unit.id);
@@ -324,7 +331,7 @@ namespace AthPlayer {
 
       // Could have been destroyed in a revert.
       if (viewedLevel.Exists()) {
-        viewedLevel.units.RemoveObserver(broadcaster, this);
+        viewedLevel.units.RemoveObserver(postBroadcaster, this);
       }
 
       terrainPresenter.DestroyTerrainPresenter();
@@ -451,7 +458,6 @@ namespace AthPlayer {
     public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect effect) {}
     public void visitGameSetActionNumEffect(GameSetActionNumEffect effect) { }
     public void visitGameSetEvventEffect(GameSetEvventEffect effect) {
-      Debug.LogError("got game event " + effect.newValue);
       if (!effect.newValue.Equals(NullIGameEvent.Null)) {
         effect.newValue.VisitIGameEvent(this);
       }

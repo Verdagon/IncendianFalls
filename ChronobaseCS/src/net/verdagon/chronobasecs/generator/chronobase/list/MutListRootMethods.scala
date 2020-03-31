@@ -53,9 +53,9 @@ object MutListRootMethods {
        |      }
        |    }
        |    public ${listName} Effect${listName}Create() {
-       |      return Effect${listName}CreateWithId(NewId());
+       |      return TrustedEffect${listName}CreateWithId(NewId());
        |    }
-       |    public ${listName} Effect${listName}CreateWithId(int id) {
+       |    public ${listName} TrustedEffect${listName}CreateWithId(int id) {
        |      CheckUnlocked();
        |      Asserts.Assert(!rootIncarnation.incarnations${listName}.ContainsKey(id));
        |      EffectInternalCreate${listName}(id, rootIncarnation.version, new ${listName}Incarnation(new List<${flattenedElementCSType}>()));
