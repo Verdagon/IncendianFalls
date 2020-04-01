@@ -30,16 +30,16 @@ public class TreeTTCMutSet {
     root.EffectTreeTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var element in new List<int>(incarnation.set)) {
+    foreach (var element in new List<int>(incarnation.elements)) {
       root.EffectTreeTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(TreeTTC element) {
-      return incarnation.set.Contains(element.id);
+      return incarnation.elements.Contains(element.id);
   }
-  public int Count { get { return incarnation.set.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
   public IEnumerator<TreeTTC> GetEnumerator() {
-    foreach (var element in incarnation.set) {
+    foreach (var element in incarnation.elements) {
       yield return root.GetTreeTTC(element);
     }
   }

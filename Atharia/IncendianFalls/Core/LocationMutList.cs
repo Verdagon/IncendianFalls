@@ -61,10 +61,10 @@ public class LocationMutList : IEnumerable<Location> {
       RemoveAt(Count - 1);
     }
   }
-  public int Count { get { return incarnation.list.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
 
   public Location this[int index] {
-    get { return incarnation.list[index]; }
+    get { return incarnation.elements[index]; }
   }
   public void Destruct() {
     var elements = new List<Location>();
@@ -82,7 +82,7 @@ public class LocationMutList : IEnumerable<Location> {
     foundIds.Add(id);
   }
   public IEnumerator<Location> GetEnumerator() {
-    foreach (var element in incarnation.list) {
+    foreach (var element in incarnation.elements) {
       yield return element;
     }
   }

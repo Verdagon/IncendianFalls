@@ -18,7 +18,7 @@ object MutSetRootMethods {
     s"""
        |    public int Get${setName}Hash(int id, int version, ${setName}Incarnation incarnation) {
        |      int result = id * version;
-       |      foreach (var element in incarnation.set) {
+       |      foreach (var element in incarnation.elements) {
        |        result += id * version * element.GetDeterministicHashCode();
        |      }
        |      return result;
@@ -54,11 +54,11 @@ object MutSetRootMethods {
        |    public ${setName} TrustedEffect${setName}CreateWithId(int id) {
        |      CheckUnlocked();
        |      var incarnation = new ${setName}Incarnation(new SortedSet<int>());
-       |      EffectInternalCreate${setName}(id, rootIncarnation.version, incarnation);
+       |      var effect = InternalEffectCreate${setName}(id, rootIncarnation.version, incarnation);
+       |      NotifyEffect(effect);
        |      return new ${setName}(this, id);
        |    }
-       |    public void EffectInternalCreate${setName}(int id, int incarnationVersion, ${setName}Incarnation incarnation) {
-       |      var effect = new ${setName}CreateEffect(id);
+       |    public ${setName}CreateEffect InternalEffectCreate${setName}(int id, int incarnationVersion, ${setName}Incarnation incarnation) {
        |      rootIncarnation.incarnations${setName}
        |          .Add(
        |              id,
@@ -71,12 +71,15 @@ object MutSetRootMethods {
        |
            |""".stripMargin
       } else "") +
-      s"""      NotifyEffect(effect);
+      s"""
+       |      return new ${setName}CreateEffect(id);
        |    }
        |    public void Effect${setName}Delete(int id) {
-       |      CheckUnlocked();
-       |      var effect = new ${setName}DeleteEffect(id);
+       |      var effect = InternalEffect${setName}Delete(id);
        |      NotifyEffect(effect);
+       |    }
+       |    public ${setName}DeleteEffect InternalEffect${setName}Delete(int id) {
+       |      CheckUnlocked();
        |      var versionAndIncarnation = rootIncarnation.incarnations${setName}[id];
        |""".stripMargin +
       (if (opt.hash) {
@@ -86,89 +89,86 @@ object MutSetRootMethods {
            |""".stripMargin
       } else "") +
       s"""      rootIncarnation.incarnations${setName}.Remove(id);
+       |      return new ${setName}DeleteEffect(id);
        |    }
        |
        """.stripMargin +
     s"""
-       |    public void Effect${setName}Add(int setId, ${flattenedElementTypeCSName} element) {
+       |    public void Effect${setName}Add(int instanceId, ${flattenedElementTypeCSName} element) {
        |      CheckUnlocked();
-       |      CheckHas${setName}(setId);
+       |      CheckHas${setName}(instanceId);
        |      CheckHas${elementTypeCSName}(element);
-       |
-       |      var effect = new ${setName}AddEffect(setId, element);
-       |
-       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${setName}[setId];
-       |      if (oldIncarnationAndVersion.incarnation.set.Contains(element)) {
+       |      var effect = InternalEffect${setName}Add(instanceId, element);
+       |      NotifyEffect(effect);
+       |    }
+       |    public ${setName}AddEffect InternalEffect${setName}Add(int instanceId, ${flattenedElementTypeCSName} element) {
+       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${setName}[instanceId];
+       |      if (oldIncarnationAndVersion.incarnation.elements.Contains(element)) {
        |        throw new Exception("Element already exists!");
        |      }
        |      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-       |        oldIncarnationAndVersion.incarnation.set.Add(element);
+       |        oldIncarnationAndVersion.incarnation.elements.Add(element);
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash += setId * rootIncarnation.version * element.GetDeterministicHashCode();
+        s"""        this.rootIncarnation.hash += instanceId * rootIncarnation.version * element.GetDeterministicHashCode();
           |""".stripMargin
       } else "") +
       s"""      } else {
-       |        var oldMap = oldIncarnationAndVersion.incarnation.set;
+       |        var oldMap = oldIncarnationAndVersion.incarnation.elements;
        |        var newMap = new SortedSet<int>(oldMap);
        |        newMap.Add(element);
        |        var newIncarnation = new ${setName}Incarnation(newMap);
-       |        rootIncarnation.incarnations${setName}[setId] =
+       |        rootIncarnation.incarnations${setName}[instanceId] =
        |            new VersionAndIncarnation<${setName}Incarnation>(
        |                rootIncarnation.version,
        |                newIncarnation);
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash -= Get${setName}Hash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
-       |        this.rootIncarnation.hash += Get${setName}Hash(setId, rootIncarnation.version, newIncarnation);
+        s"""        this.rootIncarnation.hash -= Get${setName}Hash(instanceId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+       |        this.rootIncarnation.hash += Get${setName}Hash(instanceId, rootIncarnation.version, newIncarnation);
        |
            |""".stripMargin
       } else "") +
       s"""      }
+       |      return new ${setName}AddEffect(instanceId, element);
+       |    }
+       |    public void Effect${setName}Remove(int instanceId, ${flattenedElementTypeCSName} element) {
+       |      CheckUnlocked();
+       |      CheckHas${setName}(instanceId);
+       |      CheckHas${elementTypeCSName}(element);
+       |      var effect = InternalEffect${setName}Remove(instanceId, element);
        |      NotifyEffect(effect);
        |    }
-       |    public void Effect${setName}Remove(int setId, int elementId) {
-       |      CheckUnlocked();
-       |      CheckHas${setName}(setId);
-       |""".stripMargin +
-      (if (elementType.ownership != WeakS) {
-        s"""
-        CheckHas${elementTypeCSName}(elementId);
-           |""".stripMargin
-      } else "") +
-    s"""
-       |
-       |      var effect = new ${setName}RemoveEffect(setId, elementId);
-       |
-       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${setName}[setId];
-       |      if (!oldIncarnationAndVersion.incarnation.set.Contains(elementId)) {
+       |    public ${setName}RemoveEffect InternalEffect${setName}Remove(int instanceId, int elementId) {
+       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${setName}[instanceId];
+       |      if (!oldIncarnationAndVersion.incarnation.elements.Contains(elementId)) {
        |        throw new Exception("Element not found! " + elementId);
        |      }
        |      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash -= setId * rootIncarnation.version * elementId.GetDeterministicHashCode();
+        s"""        this.rootIncarnation.hash -= instanceId * rootIncarnation.version * elementId.GetDeterministicHashCode();
        |
            |""".stripMargin
       } else "") +
-      s"""        oldIncarnationAndVersion.incarnation.set.Remove(elementId);
+      s"""        oldIncarnationAndVersion.incarnation.elements.Remove(elementId);
        |      } else {
-       |        var oldMap = oldIncarnationAndVersion.incarnation.set;
+       |        var oldMap = oldIncarnationAndVersion.incarnation.elements;
        |        var newMap = new SortedSet<int>(oldMap);
        |        newMap.Remove(elementId);
        |        var newIncarnation = new ${setName}Incarnation(newMap);
-       |        rootIncarnation.incarnations${setName}[setId] =
+       |        rootIncarnation.incarnations${setName}[instanceId] =
        |            new VersionAndIncarnation<${setName}Incarnation>(
        |                rootIncarnation.version, newIncarnation);
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash -= Get${setName}Hash(setId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
-       |        this.rootIncarnation.hash += Get${setName}Hash(setId, rootIncarnation.version, newIncarnation);
+        s"""        this.rootIncarnation.hash -= Get${setName}Hash(instanceId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+       |        this.rootIncarnation.hash += Get${setName}Hash(instanceId, rootIncarnation.version, newIncarnation);
        |
            |""".stripMargin
       } else "") +
       s"""      }
-       |      NotifyEffect(effect);
+       |      return new ${setName}RemoveEffect(instanceId, elementId);
        |    }
        |
        """.stripMargin

@@ -43,6 +43,10 @@ namespace AthPlayer {
     }
 
     public void OnTileMouseClick(Location newLocation) {
+      if (!game.player.Exists()) {
+        return;
+      }
+
       if (moving) {
         showError("Moving canceled!");
         moving = false;
@@ -52,13 +56,15 @@ namespace AthPlayer {
 
       Asserts.Assert(game.WaitingOnPlayerInput(), "Player not ready to act yet.");
 
-      var unitAtLocation = GetUnitAt(newLocation);
-      if (unitAtLocation.Exists()) {
-        var error = serverSS.RequestAttack(game.id, unitAtLocation.id);
-        if (error != "") {
-          showError(error);
+      if (this.game.level.terrain.pattern.LocationsAreAdjacent(game.player.location, newLocation, game.level.ConsiderCornersAdjacent())) {
+        var unitAtLocation = GetUnitAt(newLocation);
+        if (unitAtLocation.Exists()) {
+          var error = serverSS.RequestAttack(game.id, unitAtLocation.id);
+          if (error != "") {
+            showError(error);
+          }
+          return;
         }
-        return;
       }
 
       var sanityCheckPath =
@@ -122,14 +128,16 @@ namespace AthPlayer {
         // and the level superstate can use.
         path = new List<Location>();
         if (maybeHoverLocation != null) {
-          if (!maybeHoverLocation.Equals(game.player.location)) {
-            path =
-                AStarExplorer.Go(
-                    game.level.terrain.pattern,
-                    game.player.location,
-                    maybeHoverLocation,
-                    game.level.ConsiderCornersAdjacent(),
-                    (from, to) => game.player.CanStep(game.level.terrain, from, to));
+          if (game.player.Exists()) {
+            if (!maybeHoverLocation.Equals(game.player.location)) {
+              path =
+                  AStarExplorer.Go(
+                      game.level.terrain.pattern,
+                      game.player.location,
+                      maybeHoverLocation,
+                      game.level.ConsiderCornersAdjacent(),
+                      (from, to) => game.player.CanStep(game.level.terrain, from, to));
+            }
           }
         }
       }
@@ -169,14 +177,12 @@ namespace AthPlayer {
     }
 
     private Unit GetUnitAt(Location target) {
-      if (this.game.level.terrain.pattern.LocationsAreAdjacent(game.player.location, target, game.level.ConsiderCornersAdjacent())) {
-        foreach (var unit in this.game.level.units) {
-          if (unit.location == target) {
-            if (!unit.Alive()) {
-              continue;
-            }
-            return unit;
+      foreach (var unit in this.game.level.units) {
+        if (unit.location == target) {
+          if (!unit.Alive()) {
+            continue;
           }
+          return unit;
         }
       }
       return Unit.Null;

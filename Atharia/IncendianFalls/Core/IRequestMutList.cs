@@ -61,10 +61,10 @@ public class IRequestMutList : IEnumerable<IRequest> {
       RemoveAt(Count - 1);
     }
   }
-  public int Count { get { return incarnation.list.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
 
   public IRequest this[int index] {
-    get { return incarnation.list[index]; }
+    get { return incarnation.elements[index]; }
   }
   public void Destruct() {
     var elements = new List<IRequest>();
@@ -82,7 +82,7 @@ public class IRequestMutList : IEnumerable<IRequest> {
     foundIds.Add(id);
   }
   public IEnumerator<IRequest> GetEnumerator() {
-    foreach (var element in incarnation.list) {
+    foreach (var element in incarnation.elements) {
       yield return element;
     }
   }

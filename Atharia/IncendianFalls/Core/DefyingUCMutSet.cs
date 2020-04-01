@@ -30,16 +30,16 @@ public class DefyingUCMutSet {
     root.EffectDefyingUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var element in new List<int>(incarnation.set)) {
+    foreach (var element in new List<int>(incarnation.elements)) {
       root.EffectDefyingUCMutSetRemove(id, element);
     }
   }
   public bool Contains(DefyingUC element) {
-      return incarnation.set.Contains(element.id);
+      return incarnation.elements.Contains(element.id);
   }
-  public int Count { get { return incarnation.set.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
   public IEnumerator<DefyingUC> GetEnumerator() {
-    foreach (var element in incarnation.set) {
+    foreach (var element in incarnation.elements) {
       yield return root.GetDefyingUC(element);
     }
   }

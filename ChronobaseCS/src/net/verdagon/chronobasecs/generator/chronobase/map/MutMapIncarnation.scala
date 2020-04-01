@@ -24,14 +24,14 @@ object MutMapIncarnation {
     val incarnationDefinition =
       s"""
          |public class ${mapName}Incarnation {
-         |  public readonly SortedDictionary<${flattenedKeyCSType}, int> map;
+         |  public readonly SortedDictionary<${flattenedKeyCSType}, int> elements;
          |
-         |  public ${mapName}Incarnation(SortedDictionary<${flattenedKeyCSType}, int> map) {
-         |    this.map = map;
+         |  public ${mapName}Incarnation(SortedDictionary<${flattenedKeyCSType}, int> elements) {
+         |    this.elements = elements;
          |  }
          |
          |  public ${mapName}Incarnation Copy() {
-         |    return new ${mapName}Incarnation(new SortedDictionary<${flattenedKeyCSType}, int>(map));
+         |    return new ${mapName}Incarnation(new SortedDictionary<${flattenedKeyCSType}, int>(elements));
          |  }
          |}
          """.stripMargin

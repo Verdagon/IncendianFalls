@@ -11,6 +11,8 @@ namespace IncendianFalls {
     // turn to the "newer" turn.
 
     private static void RewindOneTurn(Superstate superstate, Game game) {
+      //game.root.logger.Error("rewind a there are " + game.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
+
       var olderIncarnation =
           superstate.previousTurns[superstate.previousTurns.Count - 1];
 
@@ -52,6 +54,8 @@ namespace IncendianFalls {
         SSContext context,
         Superstate superstate,
         TimeShiftRequest request) {
+      //context.root.logger.Error("before start there are " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + context.root.rootIncarnation.countDefyingMemberships());
+
       int gameId = request.gameId;
       var game = context.root.GetGame(gameId);
       Asserts.Assert(game.WaitingOnPlayerInput());
@@ -71,10 +75,14 @@ namespace IncendianFalls {
         }
       }
 
+      //context.root.logger.Error("a there are " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
+
       RootIncarnation pastIncarnation =
           superstate.previousTurns[mostRecentAnchorTurnIndex];
       var pastPlayerId = pastIncarnation.incarnationsGame[game.id].incarnation.player;
       var pastPlayerLocation = pastIncarnation.incarnationsUnit[pastPlayerId].incarnation.location;
+
+      //context.root.logger.Error("b there are " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
 
       // Now that we're sure we can do it, do it!
 
@@ -82,7 +90,9 @@ namespace IncendianFalls {
       // so that when we finish timeshifting backwards, we can read the future player and
       // bring them into the past/present.
       var future = new Root(context.logger, context.root.Snapshot());
-      
+
+      //context.root.logger.Error("c there are " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
+
       // If future non-null, this is the index of the turn we're aiming at.
       // If the last turn in turnsIncludingPresent is this index, we're done timeshifting.
       int targetAnchorTurnIndex = mostRecentAnchorTurnIndex;
@@ -92,12 +102,19 @@ namespace IncendianFalls {
       // Because how would we revert to this turn?
       Asserts.Assert(superstate.previousTurns.Count != targetAnchorTurnIndex);
 
+      //game.root.logger.Error("now there are " + superstate.previousTurns.Count + " we want to go back to " + targetAnchorTurnIndex);
+      //context.root.logger.Error("d there are " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + context.root.rootIncarnation.countDefyingMemberships());
+
       while (superstate.previousTurns.Count != targetAnchorTurnIndex) {
+        game.root.logger.Error("rewinding one turn!");
+
         RewindOneTurn(superstate, game);
 
         // We broadcast this so the UI knows to pause for a little bit to let things settle down.
         game.AddEvent(new RevertedEvent().AsIGameEvent());
       }
+
+      game.root.logger.Error("transitioning, now there are " + superstate.previousTurns.Count);
 
       TransitionToCloneMoving(superstate, targetAnchorTurnIndex, game);
 

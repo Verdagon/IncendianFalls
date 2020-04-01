@@ -61,10 +61,10 @@ public class CommMutList : IEnumerable<Comm> {
       RemoveAt(Count - 1);
     }
   }
-  public int Count { get { return incarnation.list.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
 
   public Comm this[int index] {
-    get { return root.GetComm(incarnation.list[index]); }
+    get { return root.GetComm(incarnation.elements[index]); }
   }
   public void Destruct() {
     var elements = new List<Comm>();
@@ -95,7 +95,7 @@ public class CommMutList : IEnumerable<Comm> {
     }
   }
   public IEnumerator<Comm> GetEnumerator() {
-    foreach (var element in incarnation.list) {
+    foreach (var element in incarnation.elements) {
       yield return root.GetComm(element);
     }
   }

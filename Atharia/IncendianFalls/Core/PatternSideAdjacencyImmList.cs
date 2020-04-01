@@ -6,23 +6,23 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public class PatternSideAdjacencyImmList : IEnumerable<PatternSideAdjacency> {
-  List<PatternSideAdjacency> list;
+  List<PatternSideAdjacency> elements;
 
   public PatternSideAdjacencyImmList() {
-    this.list = new List<PatternSideAdjacency>();
+    this.elements = new List<PatternSideAdjacency>();
   }
   public PatternSideAdjacencyImmList(params PatternSideAdjacency[] values) {
-    this.list = new List<PatternSideAdjacency>(values);
+    this.elements = new List<PatternSideAdjacency>(values);
   }
-  public PatternSideAdjacencyImmList(IEnumerable<PatternSideAdjacency> list) {
-    this.list = new List<PatternSideAdjacency>(list);
+  public PatternSideAdjacencyImmList(IEnumerable<PatternSideAdjacency> elements) {
+    this.elements = new List<PatternSideAdjacency>(elements);
   }
-  public int Count { get { return list.Count; } }
+  public int Count { get { return elements.Count; } }
 
-  public PatternSideAdjacency this[int index] { get { return list[index]; } }
+  public PatternSideAdjacency this[int index] { get { return elements[index]; } }
 
   public IEnumerator<PatternSideAdjacency> GetEnumerator() {
-    return list.GetEnumerator();
+    return elements.GetEnumerator();
   }
 
   public int CompareTo(PatternSideAdjacencyImmList that) {
@@ -47,7 +47,7 @@ public class PatternSideAdjacencyImmList : IEnumerable<PatternSideAdjacency> {
 
   public string DStr() {
     string result = "";
-    foreach (var element in list) {
+    foreach (var element in elements) {
       result += element.DStr() + ", ";
     }
     return "(" + result + ")";
@@ -55,14 +55,14 @@ public class PatternSideAdjacencyImmList : IEnumerable<PatternSideAdjacency> {
 
   public int GetDeterministicHashCode() {
     int hash = 0;
-    hash = hash * 37 + list.Count;
-    foreach (var element in list) {
+    hash = hash * 37 + elements.Count;
+    foreach (var element in elements) {
       hash = hash * 37 + element.GetDeterministicHashCode();
     }
     return hash;
   }
   IEnumerator<PatternSideAdjacency> IEnumerable<PatternSideAdjacency>.GetEnumerator() {
-    return ((IEnumerable<PatternSideAdjacency>)list).GetEnumerator();
+    return ((IEnumerable<PatternSideAdjacency>)elements).GetEnumerator();
   }
   System.Collections.IEnumerator IEnumerable.GetEnumerator() {
     return this.GetEnumerator();

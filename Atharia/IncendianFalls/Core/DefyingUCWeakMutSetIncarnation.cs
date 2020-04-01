@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class DefyingUCWeakMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public DefyingUCWeakMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public DefyingUCWeakMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public DefyingUCWeakMutSetIncarnation Copy() {
-    return new DefyingUCWeakMutSetIncarnation(new SortedSet<int>(set));
+    return new DefyingUCWeakMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

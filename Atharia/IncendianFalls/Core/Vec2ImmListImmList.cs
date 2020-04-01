@@ -6,23 +6,23 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public class Vec2ImmListImmList : IEnumerable<Vec2ImmList> {
-  List<Vec2ImmList> list;
+  List<Vec2ImmList> elements;
 
   public Vec2ImmListImmList() {
-    this.list = new List<Vec2ImmList>();
+    this.elements = new List<Vec2ImmList>();
   }
   public Vec2ImmListImmList(params Vec2ImmList[] values) {
-    this.list = new List<Vec2ImmList>(values);
+    this.elements = new List<Vec2ImmList>(values);
   }
-  public Vec2ImmListImmList(IEnumerable<Vec2ImmList> list) {
-    this.list = new List<Vec2ImmList>(list);
+  public Vec2ImmListImmList(IEnumerable<Vec2ImmList> elements) {
+    this.elements = new List<Vec2ImmList>(elements);
   }
-  public int Count { get { return list.Count; } }
+  public int Count { get { return elements.Count; } }
 
-  public Vec2ImmList this[int index] { get { return list[index]; } }
+  public Vec2ImmList this[int index] { get { return elements[index]; } }
 
   public IEnumerator<Vec2ImmList> GetEnumerator() {
-    return list.GetEnumerator();
+    return elements.GetEnumerator();
   }
 
   public int CompareTo(Vec2ImmListImmList that) {
@@ -47,7 +47,7 @@ public class Vec2ImmListImmList : IEnumerable<Vec2ImmList> {
 
   public string DStr() {
     string result = "";
-    foreach (var element in list) {
+    foreach (var element in elements) {
       result += element.DStr() + ", ";
     }
     return "(" + result + ")";
@@ -55,14 +55,14 @@ public class Vec2ImmListImmList : IEnumerable<Vec2ImmList> {
 
   public int GetDeterministicHashCode() {
     int hash = 0;
-    hash = hash * 37 + list.Count;
-    foreach (var element in list) {
+    hash = hash * 37 + elements.Count;
+    foreach (var element in elements) {
       hash = hash * 37 + element.GetDeterministicHashCode();
     }
     return hash;
   }
   IEnumerator<Vec2ImmList> IEnumerable<Vec2ImmList>.GetEnumerator() {
-    return ((IEnumerable<Vec2ImmList>)list).GetEnumerator();
+    return ((IEnumerable<Vec2ImmList>)elements).GetEnumerator();
   }
   System.Collections.IEnumerator IEnumerable.GetEnumerator() {
     return this.GetEnumerator();

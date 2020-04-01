@@ -6,23 +6,23 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public class PatternCornerAdjacencyImmList : IEnumerable<PatternCornerAdjacency> {
-  List<PatternCornerAdjacency> list;
+  List<PatternCornerAdjacency> elements;
 
   public PatternCornerAdjacencyImmList() {
-    this.list = new List<PatternCornerAdjacency>();
+    this.elements = new List<PatternCornerAdjacency>();
   }
   public PatternCornerAdjacencyImmList(params PatternCornerAdjacency[] values) {
-    this.list = new List<PatternCornerAdjacency>(values);
+    this.elements = new List<PatternCornerAdjacency>(values);
   }
-  public PatternCornerAdjacencyImmList(IEnumerable<PatternCornerAdjacency> list) {
-    this.list = new List<PatternCornerAdjacency>(list);
+  public PatternCornerAdjacencyImmList(IEnumerable<PatternCornerAdjacency> elements) {
+    this.elements = new List<PatternCornerAdjacency>(elements);
   }
-  public int Count { get { return list.Count; } }
+  public int Count { get { return elements.Count; } }
 
-  public PatternCornerAdjacency this[int index] { get { return list[index]; } }
+  public PatternCornerAdjacency this[int index] { get { return elements[index]; } }
 
   public IEnumerator<PatternCornerAdjacency> GetEnumerator() {
-    return list.GetEnumerator();
+    return elements.GetEnumerator();
   }
 
   public int CompareTo(PatternCornerAdjacencyImmList that) {
@@ -47,7 +47,7 @@ public class PatternCornerAdjacencyImmList : IEnumerable<PatternCornerAdjacency>
 
   public string DStr() {
     string result = "";
-    foreach (var element in list) {
+    foreach (var element in elements) {
       result += element.DStr() + ", ";
     }
     return "(" + result + ")";
@@ -55,14 +55,14 @@ public class PatternCornerAdjacencyImmList : IEnumerable<PatternCornerAdjacency>
 
   public int GetDeterministicHashCode() {
     int hash = 0;
-    hash = hash * 37 + list.Count;
-    foreach (var element in list) {
+    hash = hash * 37 + elements.Count;
+    foreach (var element in elements) {
       hash = hash * 37 + element.GetDeterministicHashCode();
     }
     return hash;
   }
   IEnumerator<PatternCornerAdjacency> IEnumerable<PatternCornerAdjacency>.GetEnumerator() {
-    return ((IEnumerable<PatternCornerAdjacency>)list).GetEnumerator();
+    return ((IEnumerable<PatternCornerAdjacency>)elements).GetEnumerator();
   }
   System.Collections.IEnumerator IEnumerable.GetEnumerator() {
     return this.GetEnumerator();

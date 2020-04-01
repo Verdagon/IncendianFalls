@@ -83,13 +83,13 @@ object MutListHandle {
            |      RemoveAt(Count - 1);
            |    }
            |  }
-           |  public int Count { get { return incarnation.list.Count; } }
+           |  public int Count { get { return incarnation.elements.Count; } }
            |
            |  public ${elementCSType} this[int index] {
            |""".stripMargin +
         (elementType.kind.mutability match {
-          case MutableS => s"    get { return root.Get${elementCSType}(incarnation.list[index]); }\n"
-          case ImmutableS => s"    get { return incarnation.list[index]; }\n"
+          case MutableS => s"    get { return root.Get${elementCSType}(incarnation.elements[index]); }\n"
+          case ImmutableS => s"    get { return incarnation.elements[index]; }\n"
         }) +
         s"""  }
            |  public void Destruct() {
@@ -165,7 +165,7 @@ object MutListHandle {
         }) +
         s"""  }
            |  public IEnumerator<${elementCSType}> GetEnumerator() {
-           |    foreach (var element in incarnation.list) {
+           |    foreach (var element in incarnation.elements) {
            |""".stripMargin +
         (elementType.kind.mutability match {
           case MutableS => s"      yield return root.Get${elementCSType}(element);"

@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class ManaPotionStrongMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public ManaPotionStrongMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public ManaPotionStrongMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public ManaPotionStrongMutSetIncarnation Copy() {
-    return new ManaPotionStrongMutSetIncarnation(new SortedSet<int>(set));
+    return new ManaPotionStrongMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

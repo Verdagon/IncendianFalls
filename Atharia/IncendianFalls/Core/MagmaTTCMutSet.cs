@@ -30,16 +30,16 @@ public class MagmaTTCMutSet {
     root.EffectMagmaTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var element in new List<int>(incarnation.set)) {
+    foreach (var element in new List<int>(incarnation.elements)) {
       root.EffectMagmaTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(MagmaTTC element) {
-      return incarnation.set.Contains(element.id);
+      return incarnation.elements.Contains(element.id);
   }
-  public int Count { get { return incarnation.set.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
   public IEnumerator<MagmaTTC> GetEnumerator() {
-    foreach (var element in incarnation.set) {
+    foreach (var element in incarnation.elements) {
       yield return root.GetMagmaTTC(element);
     }
   }

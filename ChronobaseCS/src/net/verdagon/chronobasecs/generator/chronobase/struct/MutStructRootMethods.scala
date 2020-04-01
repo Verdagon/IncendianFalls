@@ -52,14 +52,15 @@ object MutStructRootMethods {
     }).mkString(",\n") +
     s"""
        |            );
-       |    return EffectInternalCreate${structName}(id, rootIncarnation.version, incarnation);
+       |    var effect = InternalEffectCreate${structName}(id, rootIncarnation.version, incarnation);
+       |    NotifyEffect(effect);
+       |    return new ${structName}(this, id);
        |  }
-       |  public ${structName} EffectInternalCreate${structName}(
+       |  public ${structName}CreateEffect InternalEffectCreate${structName}(
        |      int id,
        |      int incarnationVersion,
        |      ${structName}Incarnation incarnation) {
        |    CheckUnlocked();
-       |    var effect = new ${structName}CreateEffect(id, incarnation.Copy());
        |    rootIncarnation.incarnations${structName}.Add(
        |        id,
        |        new VersionAndIncarnation<${structName}Incarnation>(
@@ -71,8 +72,7 @@ object MutStructRootMethods {
        |
            |""".stripMargin
       } else "") +
-      s"""    NotifyEffect(effect);
-         |    return new ${structName}(this, id);
+      s"""    return new ${structName}CreateEffect(id, incarnation.Copy());
        |  }
        |""".stripMargin
   }
@@ -109,8 +109,10 @@ object MutStructRootMethods {
     s"""
        |  public void Effect${structName}Delete(int id) {
        |    CheckUnlocked();
-       |    var effect = new ${structName}DeleteEffect(id);
-       |
+       |    var effect = InternalEffect${structName}Delete(id);
+       |    NotifyEffect(effect);
+       |  }
+       |  public ${structName}DeleteEffect InternalEffect${structName}Delete(int id) {
        |    var oldIncarnationAndVersion =
        |        rootIncarnation.incarnations${structName}[id];
        |""".stripMargin +
@@ -123,7 +125,7 @@ object MutStructRootMethods {
       } else "") +
       s"""
        |    rootIncarnation.incarnations${structName}.Remove(id);
-       |    NotifyEffect(effect);
+       |    return new ${structName}DeleteEffect(id);
        |  }
        |
      """.stripMargin
@@ -137,15 +139,14 @@ object MutStructRootMethods {
                                               memberType: TypeS[IKindS]) = {
     val StructS(structName, _, MutableS, members, _, _, _) = struct
     s"""
-       |  public void Effect${struct.name}Set${memberName.capitalize}(int id, ${toCS(memberType)} newValue) {
+       |  public void Effect${struct.name}Set${memberName.capitalize}(
+       |      int id, ${toCS(memberType)} newValue) {
        |    CheckUnlocked();
        |    CheckHas${structName}(id);
-       |""".stripMargin +
-      (memberType.kind.mutability match {
-        case MutableS => s"var effect = new ${structName}Set${memberName.capitalize}Effect(id, newValue.id);"
-        case ImmutableS => s"var effect = new ${structName}Set${memberName.capitalize}Effect(id, newValue);"
-      }) +
-    s"""
+       |    var effect = InternalEffect${struct.name}Set${memberName.capitalize}(id, newValue);
+         |    NotifyEffect(effect);
+         |  }
+       |  public ${structName}Set${memberName.capitalize}Effect InternalEffect${struct.name}Set${memberName.capitalize}(int id, ${toCS(memberType)} newValue) {
        |    var oldIncarnationAndVersion = rootIncarnation.incarnations${structName}[id];
        |    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
        |""".stripMargin +
@@ -207,7 +208,12 @@ object MutStructRootMethods {
       } else "") +
       s"""    }
          |
-         |    NotifyEffect(effect);
+       |""".stripMargin +
+      (memberType.kind.mutability match {
+        case MutableS => s"return new ${structName}Set${memberName.capitalize}Effect(id, newValue.id);"
+        case ImmutableS => s"return new ${structName}Set${memberName.capitalize}Effect(id, newValue);"
+      }) +
+    s"""
          |  }
          |""".stripMargin
   }

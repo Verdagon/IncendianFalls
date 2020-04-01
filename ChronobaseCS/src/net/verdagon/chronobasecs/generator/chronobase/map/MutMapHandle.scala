@@ -62,7 +62,7 @@ object MutMapHandle {
            |    root.Effect${mapName}Remove(id, key);
            |  }
            |
-           |  public int Count { get { return incarnation.map.Count; } }
+           |  public int Count { get { return incarnation.elements.Count; } }
            |
            |  public void CheckForNullViolations(List<string> violations) {
            |""".stripMargin +
@@ -143,26 +143,26 @@ object MutMapHandle {
         }) +
         s"""  }
            |  public bool ContainsKey(${keyCSType} key) {
-           |    return incarnation.map.ContainsKey(key);
+           |    return incarnation.elements.ContainsKey(key);
            |  }
            |
            |  public List<Location> Keys {
            |    // Could be optimized, I think SortedDictionary uses an inner class instead of making a List
            |    // like this.
-           |    get { return new List<Location>(incarnation.map.Keys); }
+           |    get { return new List<Location>(incarnation.elements.Keys); }
            |  }
            |
            |  public ${elementCSType} this[${keyCSType} key] {
            |""".stripMargin +
         (elementType.kind.mutability match {
-          case MutableS => s"    get { return new ${elementCSType}(root, incarnation.map[key]); }"
-          case ImmutableS => s"    get { return incarnation.map[key]; }"
+          case MutableS => s"    get { return new ${elementCSType}(root, incarnation.elements[key]); }"
+          case ImmutableS => s"    get { return incarnation.elements[key]; }"
         }) +
         s"""
            |  }
            |
            |  public IEnumerator<KeyValuePair<${keyCSType}, ${elementCSType}>> GetEnumerator() {
-           |    foreach (var keyAndValue in incarnation.map) {
+           |    foreach (var keyAndValue in incarnation.elements) {
            |      yield return new KeyValuePair<${keyCSType}, ${elementCSType}>(
            |          keyAndValue.Key,
            |          new ${elementCSType}(root, keyAndValue.Value));

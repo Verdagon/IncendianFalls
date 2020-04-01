@@ -6,23 +6,23 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public class CommTextImmList : IEnumerable<CommText> {
-  List<CommText> list;
+  List<CommText> elements;
 
   public CommTextImmList() {
-    this.list = new List<CommText>();
+    this.elements = new List<CommText>();
   }
   public CommTextImmList(params CommText[] values) {
-    this.list = new List<CommText>(values);
+    this.elements = new List<CommText>(values);
   }
-  public CommTextImmList(IEnumerable<CommText> list) {
-    this.list = new List<CommText>(list);
+  public CommTextImmList(IEnumerable<CommText> elements) {
+    this.elements = new List<CommText>(elements);
   }
-  public int Count { get { return list.Count; } }
+  public int Count { get { return elements.Count; } }
 
-  public CommText this[int index] { get { return list[index]; } }
+  public CommText this[int index] { get { return elements[index]; } }
 
   public IEnumerator<CommText> GetEnumerator() {
-    return list.GetEnumerator();
+    return elements.GetEnumerator();
   }
 
   public int CompareTo(CommTextImmList that) {
@@ -47,7 +47,7 @@ public class CommTextImmList : IEnumerable<CommText> {
 
   public string DStr() {
     string result = "";
-    foreach (var element in list) {
+    foreach (var element in elements) {
       result += element.DStr() + ", ";
     }
     return "(" + result + ")";
@@ -55,14 +55,14 @@ public class CommTextImmList : IEnumerable<CommText> {
 
   public int GetDeterministicHashCode() {
     int hash = 0;
-    hash = hash * 37 + list.Count;
-    foreach (var element in list) {
+    hash = hash * 37 + elements.Count;
+    foreach (var element in elements) {
       hash = hash * 37 + element.GetDeterministicHashCode();
     }
     return hash;
   }
   IEnumerator<CommText> IEnumerable<CommText>.GetEnumerator() {
-    return ((IEnumerable<CommText>)list).GetEnumerator();
+    return ((IEnumerable<CommText>)elements).GetEnumerator();
   }
   System.Collections.IEnumerator IEnumerable.GetEnumerator() {
     return this.GetEnumerator();

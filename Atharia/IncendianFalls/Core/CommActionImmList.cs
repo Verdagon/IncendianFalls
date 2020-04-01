@@ -6,23 +6,23 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public class CommActionImmList : IEnumerable<CommAction> {
-  List<CommAction> list;
+  List<CommAction> elements;
 
   public CommActionImmList() {
-    this.list = new List<CommAction>();
+    this.elements = new List<CommAction>();
   }
   public CommActionImmList(params CommAction[] values) {
-    this.list = new List<CommAction>(values);
+    this.elements = new List<CommAction>(values);
   }
-  public CommActionImmList(IEnumerable<CommAction> list) {
-    this.list = new List<CommAction>(list);
+  public CommActionImmList(IEnumerable<CommAction> elements) {
+    this.elements = new List<CommAction>(elements);
   }
-  public int Count { get { return list.Count; } }
+  public int Count { get { return elements.Count; } }
 
-  public CommAction this[int index] { get { return list[index]; } }
+  public CommAction this[int index] { get { return elements[index]; } }
 
   public IEnumerator<CommAction> GetEnumerator() {
-    return list.GetEnumerator();
+    return elements.GetEnumerator();
   }
 
   public int CompareTo(CommActionImmList that) {
@@ -47,7 +47,7 @@ public class CommActionImmList : IEnumerable<CommAction> {
 
   public string DStr() {
     string result = "";
-    foreach (var element in list) {
+    foreach (var element in elements) {
       result += element.DStr() + ", ";
     }
     return "(" + result + ")";
@@ -55,14 +55,14 @@ public class CommActionImmList : IEnumerable<CommAction> {
 
   public int GetDeterministicHashCode() {
     int hash = 0;
-    hash = hash * 37 + list.Count;
-    foreach (var element in list) {
+    hash = hash * 37 + elements.Count;
+    foreach (var element in elements) {
       hash = hash * 37 + element.GetDeterministicHashCode();
     }
     return hash;
   }
   IEnumerator<CommAction> IEnumerable<CommAction>.GetEnumerator() {
-    return ((IEnumerable<CommAction>)list).GetEnumerator();
+    return ((IEnumerable<CommAction>)elements).GetEnumerator();
   }
   System.Collections.IEnumerator IEnumerable.GetEnumerator() {
     return this.GetEnumerator();

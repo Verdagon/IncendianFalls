@@ -30,16 +30,16 @@ public class SummonImpulseStrongMutSet {
     root.EffectSummonImpulseStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var element in new List<int>(incarnation.set)) {
+    foreach (var element in new List<int>(incarnation.elements)) {
       root.EffectSummonImpulseStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(SummonImpulse element) {
-      return incarnation.set.Contains(element.id);
+      return incarnation.elements.Contains(element.id);
   }
-  public int Count { get { return incarnation.set.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
   public IEnumerator<SummonImpulse> GetEnumerator() {
-    foreach (var element in incarnation.set) {
+    foreach (var element in incarnation.elements) {
       yield return root.GetSummonImpulse(element);
     }
   }

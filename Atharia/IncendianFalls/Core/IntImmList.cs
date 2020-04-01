@@ -6,23 +6,23 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public class IntImmList : IEnumerable<int> {
-  List<int> list;
+  List<int> elements;
 
   public IntImmList() {
-    this.list = new List<int>();
+    this.elements = new List<int>();
   }
   public IntImmList(params int[] values) {
-    this.list = new List<int>(values);
+    this.elements = new List<int>(values);
   }
-  public IntImmList(IEnumerable<int> list) {
-    this.list = new List<int>(list);
+  public IntImmList(IEnumerable<int> elements) {
+    this.elements = new List<int>(elements);
   }
-  public int Count { get { return list.Count; } }
+  public int Count { get { return elements.Count; } }
 
-  public int this[int index] { get { return list[index]; } }
+  public int this[int index] { get { return elements[index]; } }
 
   public IEnumerator<int> GetEnumerator() {
-    return list.GetEnumerator();
+    return elements.GetEnumerator();
   }
 
   public int CompareTo(IntImmList that) {
@@ -47,7 +47,7 @@ public class IntImmList : IEnumerable<int> {
 
   public string DStr() {
     string result = "";
-    foreach (var element in list) {
+    foreach (var element in elements) {
       result += element.DStr() + ", ";
     }
     return "(" + result + ")";
@@ -55,14 +55,14 @@ public class IntImmList : IEnumerable<int> {
 
   public int GetDeterministicHashCode() {
     int hash = 0;
-    hash = hash * 37 + list.Count;
-    foreach (var element in list) {
+    hash = hash * 37 + elements.Count;
+    foreach (var element in elements) {
       hash = hash * 37 + element.GetDeterministicHashCode();
     }
     return hash;
   }
   IEnumerator<int> IEnumerable<int>.GetEnumerator() {
-    return ((IEnumerable<int>)list).GetEnumerator();
+    return ((IEnumerable<int>)elements).GetEnumerator();
   }
   System.Collections.IEnumerator IEnumerable.GetEnumerator() {
     return this.GetEnumerator();

@@ -14,7 +14,7 @@ object MutListRootMethods {
     s"""
        |    public int Get${listName}Hash(int id, int version, ${listName}Incarnation incarnation) {
        |      int result = id * version;
-       |      foreach (var element in incarnation.list) {
+       |      foreach (var element in incarnation.elements) {
        |        result += id * version * element.GetDeterministicHashCode();
        |      }
        |      return result;
@@ -58,7 +58,8 @@ object MutListRootMethods {
        |    public ${listName} TrustedEffect${listName}CreateWithId(int id) {
        |      CheckUnlocked();
        |      Asserts.Assert(!rootIncarnation.incarnations${listName}.ContainsKey(id));
-       |      EffectInternalCreate${listName}(id, rootIncarnation.version, new ${listName}Incarnation(new List<${flattenedElementCSType}>()));
+       |      var effect = InternalEffectCreate${listName}(id, rootIncarnation.version, new ${listName}Incarnation(new List<${flattenedElementCSType}>()));
+       |      NotifyEffect(effect);
        |      return new ${listName}(this, id);
        |    }
        |    public ${listName} Effect${listName}Create(IEnumerable<${elementCSType}> elements) {
@@ -69,8 +70,7 @@ object MutListRootMethods {
        |      return list;
        |    }
        |""".stripMargin +
-    s"""    public void EffectInternalCreate${listName}(int id, int incarnationVersion, ${listName}Incarnation incarnation) {
-       |      var effect = new ${listName}CreateEffect(id);
+    s"""    public ${listName}CreateEffect InternalEffectCreate${listName}(int id, int incarnationVersion, ${listName}Incarnation incarnation) {
        |      rootIncarnation.incarnations${listName}
        |          .Add(
        |              id,
@@ -83,12 +83,14 @@ object MutListRootMethods {
        |
            |""".stripMargin
       } else "") +
-      s"""      NotifyEffect(effect);
+      s"""      return new ${listName}CreateEffect(id);
        |    }
        |    public void Effect${listName}Delete(int id) {
-       |      CheckUnlocked();
-       |      var effect = new ${listName}DeleteEffect(id);
+       |      var effect = InternalEffect${listName}Delete(id);
        |      NotifyEffect(effect);
+       |    }
+       |    public ${listName}DeleteEffect InternalEffect${listName}Delete(int id) {
+       |      CheckUnlocked();
        |      var versionAndIncarnation = rootIncarnation.incarnations${listName}[id];
        |""".stripMargin +
       (if (opt.hash) {
@@ -98,84 +100,86 @@ object MutListRootMethods {
            |""".stripMargin
       } else "") +
       s"""      rootIncarnation.incarnations${listName}.Remove(id);
+       |      return new ${listName}DeleteEffect(id);
        |    }
-       |    public void Effect${listName}Add(int listId, int addIndex, ${flattenedElementCSType} element) {
+       |    public void Effect${listName}Add(int instanceId, int addIndex, ${flattenedElementCSType} element) {
        |      CheckUnlocked();
-       |      CheckHas${listName}(listId);
-       |
+       |      CheckHas${listName}(instanceId);
     """.stripMargin+
     (elementType.kind.mutability match {
       case MutableS => s"      CheckHas${elementCSType}(element);"
       case ImmutableS => ""
     }) +
     s"""
-       |
-       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${listName}[listId];
-       |      var effect = new ${listName}AddEffect(listId, addIndex, element);
+       |      var effect = InternalEffect${listName}Add(instanceId, addIndex, element);
+       |      NotifyEffect(effect);
+       |    }
+       |    public ${listName}AddEffect InternalEffect${listName}Add(int instanceId, int addIndex, ${flattenedElementCSType} element) {
+       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${listName}[instanceId];
        |
        |      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-       |        oldIncarnationAndVersion.incarnation.list.Insert(addIndex, element);
+       |        oldIncarnationAndVersion.incarnation.elements.Insert(addIndex, element);
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash += listId * rootIncarnation.version * element.GetDeterministicHashCode();
+        s"""        this.rootIncarnation.hash += instanceId * rootIncarnation.version * element.GetDeterministicHashCode();
        |
            |""".stripMargin
       } else "") +
       s"""      } else {
-       |        var oldMap = oldIncarnationAndVersion.incarnation.list;
+       |        var oldMap = oldIncarnationAndVersion.incarnation.elements;
        |        var newMap = new List<${flattenedElementCSType}>(oldMap);
        |        newMap.Insert(addIndex, element);
        |        var newIncarnation = new ${listName}Incarnation(newMap);
-       |        rootIncarnation.incarnations${listName}[listId] =
+       |        rootIncarnation.incarnations${listName}[instanceId] =
        |            new VersionAndIncarnation<${listName}Incarnation>(
        |                rootIncarnation.version,
        |                newIncarnation);
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash -= Get${listName}Hash(listId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
-       |        this.rootIncarnation.hash += Get${listName}Hash(listId, rootIncarnation.version, newIncarnation);
+        s"""        this.rootIncarnation.hash -= Get${listName}Hash(instanceId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+       |        this.rootIncarnation.hash += Get${listName}Hash(instanceId, rootIncarnation.version, newIncarnation);
        |
            |""".stripMargin
       } else "") +
       s"""      }
+       |      return new ${listName}AddEffect(instanceId, addIndex, element);
+       |    }
+       |    public void Effect${listName}RemoveAt(int instanceId, int index) {
+       |      CheckUnlocked();
+       |      CheckHas${listName}(instanceId);
+       |      var effect = InternalEffect${listName}RemoveAt(instanceId, index);
        |      NotifyEffect(effect);
        |    }
-       |    public void Effect${listName}RemoveAt(int listId, int index) {
-       |      CheckUnlocked();
-       |      CheckHas${listName}(listId);
-       |
-       |      var effect = new ${listName}RemoveEffect(listId, index);
-       |
-       |
-       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${listName}[listId];
+       |    public ${listName}RemoveEffect InternalEffect${listName}RemoveAt(int instanceId, int index) {
+       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${listName}[instanceId];
        |      // Check that its there
-       |      var oldElement = oldIncarnationAndVersion.incarnation.list[index];
+       |      var oldElement = oldIncarnationAndVersion.incarnation.elements[index];
        |
        |      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash -= listId * rootIncarnation.version * oldElement.GetDeterministicHashCode();
+        s"""        this.rootIncarnation.hash -= instanceId * rootIncarnation.version * oldElement.GetDeterministicHashCode();
        |
            |""".stripMargin
       } else "") +
-      s"""        oldIncarnationAndVersion.incarnation.list.RemoveAt(index);
+      s"""        oldIncarnationAndVersion.incarnation.elements.RemoveAt(index);
        |      } else {
-       |        var oldMap = oldIncarnationAndVersion.incarnation.list;
+       |        var oldMap = oldIncarnationAndVersion.incarnation.elements;
        |        var newMap = new List<${flattenedElementCSType}>(oldMap);
        |        newMap.RemoveAt(index);
        |        var newIncarnation = new ${listName}Incarnation(newMap);
-       |        rootIncarnation.incarnations${listName}[listId] =
+       |        rootIncarnation.incarnations${listName}[instanceId] =
        |            new VersionAndIncarnation<${listName}Incarnation>(
        |                rootIncarnation.version, newIncarnation);
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash -= Get${listName}Hash(listId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
-       |        this.rootIncarnation.hash += Get${listName}Hash(listId, rootIncarnation.version, newIncarnation);
+        s"""        this.rootIncarnation.hash -= Get${listName}Hash(instanceId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+       |        this.rootIncarnation.hash += Get${listName}Hash(instanceId, rootIncarnation.version, newIncarnation);
            |""".stripMargin
       } else "") +
       s"""
        |      }
-       |      NotifyEffect(effect);
+       |      return new ${listName}RemoveEffect(instanceId, index);
        |    }
        """.stripMargin
   }

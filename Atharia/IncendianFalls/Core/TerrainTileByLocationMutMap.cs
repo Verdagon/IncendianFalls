@@ -36,7 +36,7 @@ public class TerrainTileByLocationMutMap {
     root.EffectTerrainTileByLocationMutMapRemove(id, key);
   }
 
-  public int Count { get { return incarnation.map.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
 
   public void CheckForNullViolations(List<string> violations) {
     foreach (var entry in this) {
@@ -73,21 +73,21 @@ public class TerrainTileByLocationMutMap {
     }
   }
   public bool ContainsKey(Location key) {
-    return incarnation.map.ContainsKey(key);
+    return incarnation.elements.ContainsKey(key);
   }
 
   public List<Location> Keys {
     // Could be optimized, I think SortedDictionary uses an inner class instead of making a List
     // like this.
-    get { return new List<Location>(incarnation.map.Keys); }
+    get { return new List<Location>(incarnation.elements.Keys); }
   }
 
   public TerrainTile this[Location key] {
-    get { return new TerrainTile(root, incarnation.map[key]); }
+    get { return new TerrainTile(root, incarnation.elements[key]); }
   }
 
   public IEnumerator<KeyValuePair<Location, TerrainTile>> GetEnumerator() {
-    foreach (var keyAndValue in incarnation.map) {
+    foreach (var keyAndValue in incarnation.elements) {
       yield return new KeyValuePair<Location, TerrainTile>(
           keyAndValue.Key,
           new TerrainTile(root, keyAndValue.Value));

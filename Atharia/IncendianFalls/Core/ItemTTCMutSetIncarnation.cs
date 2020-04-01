@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class ItemTTCMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public ItemTTCMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public ItemTTCMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public ItemTTCMutSetIncarnation Copy() {
-    return new ItemTTCMutSetIncarnation(new SortedSet<int>(set));
+    return new ItemTTCMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

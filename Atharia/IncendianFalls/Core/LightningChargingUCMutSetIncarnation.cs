@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class LightningChargingUCMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public LightningChargingUCMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public LightningChargingUCMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public LightningChargingUCMutSetIncarnation Copy() {
-    return new LightningChargingUCMutSetIncarnation(new SortedSet<int>(set));
+    return new LightningChargingUCMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

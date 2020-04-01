@@ -18,23 +18,23 @@ object ImmList {
     val instanceDefinition =
         s"""
            |public class ${listCSType} : IEnumerable<${elementCSType}> {
-           |  List<${elementCSType}> list;
+           |  List<${elementCSType}> elements;
            |
            |  public ${listCSType}() {
-           |    this.list = new List<${elementCSType}>();
+           |    this.elements = new List<${elementCSType}>();
            |  }
            |  public ${listCSType}(params ${elementCSType}[] values) {
-           |    this.list = new List<${elementCSType}>(values);
+           |    this.elements = new List<${elementCSType}>(values);
            |  }
-           |  public ${listCSType}(IEnumerable<${elementCSType}> list) {
-           |    this.list = new List<${elementCSType}>(list);
+           |  public ${listCSType}(IEnumerable<${elementCSType}> elements) {
+           |    this.elements = new List<${elementCSType}>(elements);
            |  }
-           |  public int Count { get { return list.Count; } }
+           |  public int Count { get { return elements.Count; } }
            |
-           |  public ${elementCSType} this[int index] { get { return list[index]; } }
+           |  public ${elementCSType} this[int index] { get { return elements[index]; } }
            |
            |  public IEnumerator<${elementCSType}> GetEnumerator() {
-           |    return list.GetEnumerator();
+           |    return elements.GetEnumerator();
            |  }
            |
            |  public int CompareTo(${listCSType} that) {
@@ -59,7 +59,7 @@ object ImmList {
            |
            |  public string DStr() {
            |    string result = "";
-           |    foreach (var element in list) {
+           |    foreach (var element in elements) {
            |      result += element.DStr() + ", ";
            |    }
            |    return "(" + result + ")";
@@ -67,14 +67,14 @@ object ImmList {
            |
            |  public int GetDeterministicHashCode() {
            |    int hash = 0;
-           |    hash = hash * 37 + list.Count;
-           |    foreach (var element in list) {
+           |    hash = hash * 37 + elements.Count;
+           |    foreach (var element in elements) {
            |      hash = hash * 37 + element.GetDeterministicHashCode();
            |    }
            |    return hash;
            |  }
            |  IEnumerator<${elementCSType}> IEnumerable<${elementCSType}>.GetEnumerator() {
-           |    return ((IEnumerable<${elementCSType}>)list).GetEnumerator();
+           |    return ((IEnumerable<${elementCSType}>)elements).GetEnumerator();
            |  }
            |  System.Collections.IEnumerator IEnumerable.GetEnumerator() {
            |    return this.GetEnumerator();

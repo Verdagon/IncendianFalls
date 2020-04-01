@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class IncendianFallsLevelLinkerTTCMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public IncendianFallsLevelLinkerTTCMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public IncendianFallsLevelLinkerTTCMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public IncendianFallsLevelLinkerTTCMutSetIncarnation Copy() {
-    return new IncendianFallsLevelLinkerTTCMutSetIncarnation(new SortedSet<int>(set));
+    return new IncendianFallsLevelLinkerTTCMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

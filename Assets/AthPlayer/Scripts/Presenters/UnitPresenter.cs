@@ -198,7 +198,8 @@ namespace AthPlayer {
       } else if (component is KamikazeAICapabilityUCAsIUnitComponent) {
       } else if (component is AttackAICapabilityUCAsIUnitComponent) {
       } else if (component is BideAICapabilityUCAsIUnitComponent) {
-      } else if (component is SorcerousUCAsIUnitComponent) {
+      } else if (component is SorcerousUCAsIUnitComponent sorc) {
+        sorc.obj.AddObserver(postBroadcaster, this);
       } else if (component is BaseCombatTimeUCAsIUnitComponent) {
       } else if (component is SummonAICapabilityUCAsIUnitComponent) {
       } else if (component is TemporaryCloneAICapabilityUC) {
@@ -245,7 +246,8 @@ namespace AthPlayer {
       } else if (component is KamikazeAICapabilityUCAsIUnitComponent) {
       } else if (component is AttackAICapabilityUCAsIUnitComponent) {
       } else if (component is BideAICapabilityUCAsIUnitComponent) {
-      } else if (component is SorcerousUCAsIUnitComponent) {
+      } else if (component is SorcerousUCAsIUnitComponent sorc) {
+        sorc.obj.RemoveObserver(postBroadcaster, this);
       } else if (component is BaseCombatTimeUCAsIUnitComponent) {
       } else if (component is SummonAICapabilityUCAsIUnitComponent) {
       } else if (component is TemporaryCloneAICapabilityUC) {

@@ -13,14 +13,14 @@ object MutSetIncarnation {
 
     val incarnationDefinition =
       s"""public class ${setName}Incarnation {
-         |  public readonly SortedSet<int> set;
+         |  public readonly SortedSet<int> elements;
          |
-         |  public ${setName}Incarnation(SortedSet<int> set) {
-         |    this.set = new SortedSet<int>(set);
+         |  public ${setName}Incarnation(SortedSet<int> elements) {
+         |    this.elements = new SortedSet<int>(elements);
          |  }
          |
          |  public ${setName}Incarnation Copy() {
-         |    return new ${setName}Incarnation(new SortedSet<int>(set));
+         |    return new ${setName}Incarnation(new SortedSet<int>(elements));
          |  }
          |}
          |""".stripMargin

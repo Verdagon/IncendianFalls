@@ -20,8 +20,10 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
+      //detail.root.logger.Error("PreAct removing " + detail.id + " there are " + game.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
       unit.components.Remove(detail.AsIUnitComponent());
       detail.Destruct();
+      //detail.root.logger.Error("PreAct removed, there are " + game.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
       return new Atharia.Model.Void();
     }
   }

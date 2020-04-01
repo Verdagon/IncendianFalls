@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class BaseCombatTimeUCMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public BaseCombatTimeUCMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public BaseCombatTimeUCMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public BaseCombatTimeUCMutSetIncarnation Copy() {
-    return new BaseCombatTimeUCMutSetIncarnation(new SortedSet<int>(set));
+    return new BaseCombatTimeUCMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

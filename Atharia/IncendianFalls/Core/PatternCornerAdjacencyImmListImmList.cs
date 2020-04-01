@@ -6,23 +6,23 @@ using System.Collections.Generic;
 namespace Atharia.Model {
 
 public class PatternCornerAdjacencyImmListImmList : IEnumerable<PatternCornerAdjacencyImmList> {
-  List<PatternCornerAdjacencyImmList> list;
+  List<PatternCornerAdjacencyImmList> elements;
 
   public PatternCornerAdjacencyImmListImmList() {
-    this.list = new List<PatternCornerAdjacencyImmList>();
+    this.elements = new List<PatternCornerAdjacencyImmList>();
   }
   public PatternCornerAdjacencyImmListImmList(params PatternCornerAdjacencyImmList[] values) {
-    this.list = new List<PatternCornerAdjacencyImmList>(values);
+    this.elements = new List<PatternCornerAdjacencyImmList>(values);
   }
-  public PatternCornerAdjacencyImmListImmList(IEnumerable<PatternCornerAdjacencyImmList> list) {
-    this.list = new List<PatternCornerAdjacencyImmList>(list);
+  public PatternCornerAdjacencyImmListImmList(IEnumerable<PatternCornerAdjacencyImmList> elements) {
+    this.elements = new List<PatternCornerAdjacencyImmList>(elements);
   }
-  public int Count { get { return list.Count; } }
+  public int Count { get { return elements.Count; } }
 
-  public PatternCornerAdjacencyImmList this[int index] { get { return list[index]; } }
+  public PatternCornerAdjacencyImmList this[int index] { get { return elements[index]; } }
 
   public IEnumerator<PatternCornerAdjacencyImmList> GetEnumerator() {
-    return list.GetEnumerator();
+    return elements.GetEnumerator();
   }
 
   public int CompareTo(PatternCornerAdjacencyImmListImmList that) {
@@ -47,7 +47,7 @@ public class PatternCornerAdjacencyImmListImmList : IEnumerable<PatternCornerAdj
 
   public string DStr() {
     string result = "";
-    foreach (var element in list) {
+    foreach (var element in elements) {
       result += element.DStr() + ", ";
     }
     return "(" + result + ")";
@@ -55,14 +55,14 @@ public class PatternCornerAdjacencyImmListImmList : IEnumerable<PatternCornerAdj
 
   public int GetDeterministicHashCode() {
     int hash = 0;
-    hash = hash * 37 + list.Count;
-    foreach (var element in list) {
+    hash = hash * 37 + elements.Count;
+    foreach (var element in elements) {
       hash = hash * 37 + element.GetDeterministicHashCode();
     }
     return hash;
   }
   IEnumerator<PatternCornerAdjacencyImmList> IEnumerable<PatternCornerAdjacencyImmList>.GetEnumerator() {
-    return ((IEnumerable<PatternCornerAdjacencyImmList>)list).GetEnumerator();
+    return ((IEnumerable<PatternCornerAdjacencyImmList>)elements).GetEnumerator();
   }
   System.Collections.IEnumerator IEnumerable.GetEnumerator() {
     return this.GetEnumerator();

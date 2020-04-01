@@ -30,16 +30,16 @@ public class SimplePresenceTriggerTTCMutSet {
     root.EffectSimplePresenceTriggerTTCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var element in new List<int>(incarnation.set)) {
+    foreach (var element in new List<int>(incarnation.elements)) {
       root.EffectSimplePresenceTriggerTTCMutSetRemove(id, element);
     }
   }
   public bool Contains(SimplePresenceTriggerTTC element) {
-      return incarnation.set.Contains(element.id);
+      return incarnation.elements.Contains(element.id);
   }
-  public int Count { get { return incarnation.set.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
   public IEnumerator<SimplePresenceTriggerTTC> GetEnumerator() {
-    foreach (var element in incarnation.set) {
+    foreach (var element in incarnation.elements) {
       yield return root.GetSimplePresenceTriggerTTC(element);
     }
   }

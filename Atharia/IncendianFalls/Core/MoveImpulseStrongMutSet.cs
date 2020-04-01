@@ -30,16 +30,16 @@ public class MoveImpulseStrongMutSet {
     root.EffectMoveImpulseStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var element in new List<int>(incarnation.set)) {
+    foreach (var element in new List<int>(incarnation.elements)) {
       root.EffectMoveImpulseStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(MoveImpulse element) {
-      return incarnation.set.Contains(element.id);
+      return incarnation.elements.Contains(element.id);
   }
-  public int Count { get { return incarnation.set.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
   public IEnumerator<MoveImpulse> GetEnumerator() {
-    foreach (var element in incarnation.set) {
+    foreach (var element in incarnation.elements) {
       yield return root.GetMoveImpulse(element);
     }
   }

@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class UnleashBideImpulseStrongMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public UnleashBideImpulseStrongMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public UnleashBideImpulseStrongMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public UnleashBideImpulseStrongMutSetIncarnation Copy() {
-    return new UnleashBideImpulseStrongMutSetIncarnation(new SortedSet<int>(set));
+    return new UnleashBideImpulseStrongMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

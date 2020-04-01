@@ -19,14 +19,14 @@ object MutListIncarnation {
     val incarnationDefinition =
       s"""
          |public class ${listName}Incarnation {
-         |  public readonly List<${flattenedElementCSType}> list;
+         |  public readonly List<${flattenedElementCSType}> elements;
          |
-         |  public ${listName}Incarnation(List<${flattenedElementCSType}> list) {
-         |    this.list = list;
+         |  public ${listName}Incarnation(List<${flattenedElementCSType}> elements) {
+         |    this.elements = elements;
          |  }
          |
          |  public ${listName}Incarnation Copy() {
-         |    return new ${listName}Incarnation(new List<${flattenedElementCSType}>(list));
+         |    return new ${listName}Incarnation(new List<${flattenedElementCSType}>(elements));
          |  }
          |}
          """.stripMargin

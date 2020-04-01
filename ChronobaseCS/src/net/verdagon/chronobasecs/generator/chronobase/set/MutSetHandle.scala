@@ -58,20 +58,20 @@ object MutSetHandle {
          |    root.Effect${setName}Delete(id);
          |  }
          |  public void Clear() {
-         |    foreach (var element in new List<${flattenedElementCSType}>(incarnation.set)) {
+         |    foreach (var element in new List<${flattenedElementCSType}>(incarnation.elements)) {
          |      root.Effect${setName}Remove(id, element);
          |    }
          |  }
          |  public bool Contains(${elementCSType} element) {
          |""".stripMargin +
       (elementType.kind.mutability match {
-        case MutableS => s"      return incarnation.set.Contains(element.id);\n"
-        case ImmutableS => s"      return incarnation.set.Contains(element);\n"
+        case MutableS => s"      return incarnation.elements.Contains(element.id);\n"
+        case ImmutableS => s"      return incarnation.elements.Contains(element);\n"
       }) +
       s"""  }
-         |  public int Count { get { return incarnation.set.Count; } }
+         |  public int Count { get { return incarnation.elements.Count; } }
          |  public IEnumerator<${elementCSType}> GetEnumerator() {
-         |    foreach (var element in incarnation.set) {
+         |    foreach (var element in incarnation.elements) {
          |""".stripMargin +
       (elementType.kind.mutability match {
         case MutableS => s"      yield return root.Get${elementCSType}(element);"

@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class SpeedRingMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public SpeedRingMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public SpeedRingMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public SpeedRingMutSetIncarnation Copy() {
-    return new SpeedRingMutSetIncarnation(new SortedSet<int>(set));
+    return new SpeedRingMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

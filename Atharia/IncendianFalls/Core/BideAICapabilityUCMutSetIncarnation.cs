@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class BideAICapabilityUCMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public BideAICapabilityUCMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public BideAICapabilityUCMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public BideAICapabilityUCMutSetIncarnation Copy() {
-    return new BideAICapabilityUCMutSetIncarnation(new SortedSet<int>(set));
+    return new BideAICapabilityUCMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

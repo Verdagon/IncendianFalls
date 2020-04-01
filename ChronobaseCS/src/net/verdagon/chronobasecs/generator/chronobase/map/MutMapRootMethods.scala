@@ -16,7 +16,7 @@ object MutMapRootMethods {
     s"""
        |    public int Get${mapName}Hash(int id, int version, ${mapName}Incarnation incarnation) {
        |      int result = id * version;
-       |      foreach (var entry in incarnation.map) {
+       |      foreach (var entry in incarnation.elements) {
        |        result += id * version * entry.Key.GetDeterministicHashCode() * entry.Value.GetDeterministicHashCode();
        |      }
        |      return result;
@@ -52,17 +52,18 @@ object MutMapRootMethods {
        |    public ${mapName} TrustedEffect${mapName}CreateWithId(int id) {
        |      CheckUnlocked();
        |      Asserts.Assert(!rootIncarnation.incarnations${mapName}.ContainsKey(id));
-       |      EffectInternalCreate${mapName}(
+       |      var effect =
+       |        InternalEffectCreate${mapName}(
        |          id,
        |          rootIncarnation.version,
        |          new ${mapName}Incarnation(
        |              new SortedDictionary<${flattenedKeyCSType}, ${flattenedElementCSType}>()));
+       |      NotifyEffect(effect);
        |      return new ${mapName}(this, id);
        |    }
        """.stripMargin +
     s"""
-       |    public void EffectInternalCreate${mapName}(int id, int incarnationVersion, ${mapName}Incarnation incarnation) {
-       |      var effect = new ${mapName}CreateEffect(id);
+       |    public ${mapName}CreateEffect InternalEffectCreate${mapName}(int id, int incarnationVersion, ${mapName}Incarnation incarnation) {
        |      rootIncarnation.incarnations${mapName}
        |          .Add(
        |              id,
@@ -75,12 +76,14 @@ object MutMapRootMethods {
        |
            |""".stripMargin
       } else "") +
-      s"""      NotifyEffect(effect);
+      s"""    return new ${mapName}CreateEffect(id);
        |    }
        |    public void Effect${mapName}Delete(int id) {
-       |      CheckUnlocked();
-       |      var effect = new ${mapName}DeleteEffect(id);
+       |      var effect = InternalEffect${mapName}Delete(id);
        |      NotifyEffect(effect);
+       |    }
+       |    public ${mapName}DeleteEffect InternalEffect${mapName}Delete(int id) {
+       |      CheckUnlocked();
        |      var versionAndIncarnation = rootIncarnation.incarnations${mapName}[id];
        |""".stripMargin +
       (if (opt.hash) {
@@ -90,83 +93,86 @@ object MutMapRootMethods {
            |""".stripMargin
       } else "") +
       s"""      rootIncarnation.incarnations${mapName}.Remove(id);
+       |        return new ${mapName}DeleteEffect(id);
        |    }
-       |    public void Effect${mapName}Add(int mapId, ${flattenedKeyCSType} key, ${flattenedElementCSType} value) {
+       |    public void Effect${mapName}Add(int instanceId, ${flattenedKeyCSType} key, ${flattenedElementCSType} value) {
        |      CheckUnlocked();
-       |      CheckHas${mapName}(mapId);
+       |      CheckHas${mapName}(instanceId);
        |      CheckHas${elementCSType}(value);
-       |
-       |      var effect = new ${mapName}AddEffect(mapId, key, value);
-       |
-       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${mapName}[mapId];
-       |      if (oldIncarnationAndVersion.incarnation.map.ContainsKey(key)) {
+       |      var effect = InternalEffect${mapName}Add(instanceId, key, value);
+       |      NotifyEffect(effect);
+       |    }
+       |    public ${mapName}AddEffect InternalEffect${mapName}Add(int instanceId, ${flattenedKeyCSType} key, ${flattenedElementCSType} value) {
+       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${mapName}[instanceId];
+       |      if (oldIncarnationAndVersion.incarnation.elements.ContainsKey(key)) {
        |        throw new Exception("Key exists! " + key);
        |      }
        |      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-       |        oldIncarnationAndVersion.incarnation.map.Add(key, value);
+       |        oldIncarnationAndVersion.incarnation.elements.Add(key, value);
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash += mapId * rootIncarnation.version * key.GetDeterministicHashCode() * value.GetDeterministicHashCode();
+        s"""        this.rootIncarnation.hash += instanceId * rootIncarnation.version * key.GetDeterministicHashCode() * value.GetDeterministicHashCode();
        |
            |""".stripMargin
       } else "") +
       s"""      } else {
-       |        var oldMap = oldIncarnationAndVersion.incarnation.map;
+       |        var oldMap = oldIncarnationAndVersion.incarnation.elements;
        |        var newMap = new SortedDictionary<${flattenedKeyCSType}, ${flattenedElementCSType}>(oldMap);
        |        newMap.Add(key, value);
        |        var newIncarnation = new ${mapName}Incarnation(newMap);
-       |        rootIncarnation.incarnations${mapName}[mapId] =
+       |        rootIncarnation.incarnations${mapName}[instanceId] =
        |            new VersionAndIncarnation<${mapName}Incarnation>(
        |                rootIncarnation.version,
        |                newIncarnation);
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash -= Get${mapName}Hash(mapId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
-       |        this.rootIncarnation.hash += Get${mapName}Hash(mapId, rootIncarnation.version, newIncarnation);
+        s"""        this.rootIncarnation.hash -= Get${mapName}Hash(instanceId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+       |        this.rootIncarnation.hash += Get${mapName}Hash(instanceId, rootIncarnation.version, newIncarnation);
        |
            |""".stripMargin
       } else "") +
       s"""      }
-       |      NotifyEffect(effect);
+       |      return new ${mapName}AddEffect(instanceId, key, value);
        |    }
        """.stripMargin +
     s"""
-       |    public void Effect${mapName}Remove(int mapId, ${flattenedKeyCSType} key) {
+       |    public void Effect${mapName}Remove(int instanceId, ${flattenedKeyCSType} key) {
        |      CheckUnlocked();
-       |      CheckHas${mapName}(mapId);
-       |
-       |      var effect = new ${mapName}RemoveEffect(mapId, key);
-       |
-       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${mapName}[mapId];
-       |      if (!oldIncarnationAndVersion.incarnation.map.ContainsKey(key)) {
+       |      CheckHas${mapName}(instanceId);
+       |      var effect = InternalEffect${mapName}Remove(instanceId, key);
+       |      NotifyEffect(effect);
+       |    }
+       |    public ${mapName}RemoveEffect InternalEffect${mapName}Remove(int instanceId, ${flattenedKeyCSType} key) {
+       |      var oldIncarnationAndVersion = rootIncarnation.incarnations${mapName}[instanceId];
+       |      if (!oldIncarnationAndVersion.incarnation.elements.ContainsKey(key)) {
        |        throw new Exception("Key doesnt exist! " + key);
        |      }
        |      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-       |        var oldValue = oldIncarnationAndVersion.incarnation.map[key];
-       |        oldIncarnationAndVersion.incarnation.map.Remove(key);
+       |        var oldValue = oldIncarnationAndVersion.incarnation.elements[key];
+       |        oldIncarnationAndVersion.incarnation.elements.Remove(key);
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash -= mapId * rootIncarnation.version * key.GetDeterministicHashCode() * oldValue.GetDeterministicHashCode();
+        s"""        this.rootIncarnation.hash -= instanceId * rootIncarnation.version * key.GetDeterministicHashCode() * oldValue.GetDeterministicHashCode();
        |
            |""".stripMargin
       } else "") +
       s"""      } else {
-       |        var oldMap = oldIncarnationAndVersion.incarnation.map;
+       |        var oldMap = oldIncarnationAndVersion.incarnation.elements;
        |        var newMap = new SortedDictionary<${flattenedKeyCSType}, ${flattenedElementCSType}>(oldMap);
        |        newMap.Remove(key);
        |        var newIncarnation = new ${mapName}Incarnation(newMap);
-       |        rootIncarnation.incarnations${mapName}[mapId] =
+       |        rootIncarnation.incarnations${mapName}[instanceId] =
        |            new VersionAndIncarnation<${mapName}Incarnation>(
        |                rootIncarnation.version, newIncarnation);
        |""".stripMargin +
       (if (opt.hash) {
-        s"""        this.rootIncarnation.hash -= Get${mapName}Hash(mapId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
-       |        this.rootIncarnation.hash += Get${mapName}Hash(mapId, rootIncarnation.version, newIncarnation);
+        s"""        this.rootIncarnation.hash -= Get${mapName}Hash(instanceId, oldIncarnationAndVersion.version, oldIncarnationAndVersion.incarnation);
+       |        this.rootIncarnation.hash += Get${mapName}Hash(instanceId, rootIncarnation.version, newIncarnation);
        |
            |""".stripMargin
       } else "") +
       s"""      }
-       |      NotifyEffect(effect);
+       |      return new ${mapName}RemoveEffect(instanceId, key);
        |    }
        |""".stripMargin
   }

@@ -15,6 +15,9 @@ namespace IncendianFalls {
         IncendianFalls.SSContext context,
         Game game,
         Superstate superstate) {
+
+      //context.root.logger.Error("after unit action there are " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
+
       //flare(game, System.Reflection.MethodBase.GetCurrentMethod().Name);
 
       Asserts.Assert(game.actingUnit.Exists());
@@ -79,6 +82,8 @@ namespace IncendianFalls {
         Superstate superstate) {
       Asserts.Assert(!game.actingUnit.Exists());
 
+      //context.root.logger.Error("between units there are " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
+
       Unit nextUnit;
       // Keep pruning out dead units until we find something that can move or we run out of units.
       while (true) {
@@ -92,6 +97,7 @@ namespace IncendianFalls {
         game.time = nextUnit.nextActionTime;
 
         if (nextUnit.Alive() == false) {
+          //game.root.logger.Error("dying now! " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
           bool playerDying = nextUnit.NullableIs(game.player);
 
           foreach (var deathPreactor in nextUnit.components.GetAllIDeathPreReactor()) {
@@ -105,6 +111,8 @@ namespace IncendianFalls {
           //superstate.levelSuperstate.RemoveUnit(nextUnit);
           game.level.units.Remove(nextUnit);
           nextUnit.Destruct();
+
+          //context.root.logger.Error("now dead! " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
 
           if (playerDying) {
             return;

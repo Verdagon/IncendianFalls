@@ -22,7 +22,7 @@ namespace Atharia.Model {
     public static bool TileExists(
         this Terrain terrain,
         Location location) {
-      return terrain.tiles.incarnation.map.ContainsKey(location);
+      return terrain.tiles.ContainsKey(location);
     }
 
     public static List<Location> GetAdjacentExistingLocations(

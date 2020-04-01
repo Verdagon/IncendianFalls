@@ -30,16 +30,16 @@ public class UnleashBideImpulseStrongMutSet {
     root.EffectUnleashBideImpulseStrongMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var element in new List<int>(incarnation.set)) {
+    foreach (var element in new List<int>(incarnation.elements)) {
       root.EffectUnleashBideImpulseStrongMutSetRemove(id, element);
     }
   }
   public bool Contains(UnleashBideImpulse element) {
-      return incarnation.set.Contains(element.id);
+      return incarnation.elements.Contains(element.id);
   }
-  public int Count { get { return incarnation.set.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
   public IEnumerator<UnleashBideImpulse> GetEnumerator() {
-    foreach (var element in incarnation.set) {
+    foreach (var element in incarnation.elements) {
       yield return root.GetUnleashBideImpulse(element);
     }
   }

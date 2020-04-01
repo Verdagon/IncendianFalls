@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class BaseSightRangeUCMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public BaseSightRangeUCMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public BaseSightRangeUCMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public BaseSightRangeUCMutSetIncarnation Copy() {
-    return new BaseSightRangeUCMutSetIncarnation(new SortedSet<int>(set));
+    return new BaseSightRangeUCMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

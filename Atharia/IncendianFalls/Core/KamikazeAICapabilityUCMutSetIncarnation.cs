@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class KamikazeAICapabilityUCMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public KamikazeAICapabilityUCMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public KamikazeAICapabilityUCMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public KamikazeAICapabilityUCMutSetIncarnation Copy() {
-    return new KamikazeAICapabilityUCMutSetIncarnation(new SortedSet<int>(set));
+    return new KamikazeAICapabilityUCMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

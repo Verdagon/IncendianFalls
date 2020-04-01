@@ -30,16 +30,16 @@ public class WanderAICapabilityUCMutSet {
     root.EffectWanderAICapabilityUCMutSetDelete(id);
   }
   public void Clear() {
-    foreach (var element in new List<int>(incarnation.set)) {
+    foreach (var element in new List<int>(incarnation.elements)) {
       root.EffectWanderAICapabilityUCMutSetRemove(id, element);
     }
   }
   public bool Contains(WanderAICapabilityUC element) {
-      return incarnation.set.Contains(element.id);
+      return incarnation.elements.Contains(element.id);
   }
-  public int Count { get { return incarnation.set.Count; } }
+  public int Count { get { return incarnation.elements.Count; } }
   public IEnumerator<WanderAICapabilityUC> GetEnumerator() {
-    foreach (var element in incarnation.set) {
+    foreach (var element in incarnation.elements) {
       yield return root.GetWanderAICapabilityUC(element);
     }
   }

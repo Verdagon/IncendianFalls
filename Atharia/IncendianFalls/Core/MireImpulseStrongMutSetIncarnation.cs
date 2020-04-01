@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class MireImpulseStrongMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public MireImpulseStrongMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public MireImpulseStrongMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public MireImpulseStrongMutSetIncarnation Copy() {
-    return new MireImpulseStrongMutSetIncarnation(new SortedSet<int>(set));
+    return new MireImpulseStrongMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 

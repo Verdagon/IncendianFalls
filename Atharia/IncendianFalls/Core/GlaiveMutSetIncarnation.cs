@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class GlaiveMutSetIncarnation {
-  public readonly SortedSet<int> set;
+  public readonly SortedSet<int> elements;
 
-  public GlaiveMutSetIncarnation(SortedSet<int> set) {
-    this.set = new SortedSet<int>(set);
+  public GlaiveMutSetIncarnation(SortedSet<int> elements) {
+    this.elements = new SortedSet<int>(elements);
   }
 
   public GlaiveMutSetIncarnation Copy() {
-    return new GlaiveMutSetIncarnation(new SortedSet<int>(set));
+    return new GlaiveMutSetIncarnation(new SortedSet<int>(elements));
   }
 }
 
