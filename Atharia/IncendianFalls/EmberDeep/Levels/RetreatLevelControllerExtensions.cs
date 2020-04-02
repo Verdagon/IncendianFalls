@@ -82,7 +82,6 @@ namespace Atharia.Model {
       game.root.logger.Info("Got simple trigger: " + triggerName);
 
       if (triggerName == "levelStart") {
-        game.EnterCinematic();
         game.player.hp = game.player.maxHp;
         var sorcerous = game.player.components.GetOnlySorcerousUCOrNull();
         if (sorcerous.Exists()) {
@@ -93,10 +92,12 @@ namespace Atharia.Model {
           item.Destruct();
         }
 
+        game.EnterCinematic();
         game.ShowAside("Retreat Challenge");
         game.Wait(2000);
         game.ShowComm("There's a superpowered Draxling chasing you!\n\nIf you just run, it will catch you and kill you.\n\nDistract it with time clones!", "Uh oh!");
         game.FlyCameraTo(1000, new Location(15, 0, 0));
+        game.Wait(800);
         game.FlyCameraTo(1500, new Location(-10, 0, 0));
         game.ExitCinematic();
         game.ShowComm("Keep in mind, enemies usually attack whoever is closest to them.\n\nYour past self should be close enough to distract the enemy, and buy you time to get away!\n\nHint: Try drawing the Draxling away and then reverting before it attacks.", "Got it!");

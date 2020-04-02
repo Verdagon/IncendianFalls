@@ -51,7 +51,10 @@ namespace AthPlayer {
     long waitEndUiTimeMs;
 
     long stallEffectUntilGameTimeMs;
+    string stallEffectUntilGameTimeReason;
+
     long stallEffectUntilUiTimeMs;
+    string stallEffectUntilUiTimeReason;
 
     long animationsEndGameTimeMs;
 
@@ -167,11 +170,11 @@ namespace AthPlayer {
         return readyEffects;
       }
       if (uiTimer.GetTimeMs() < stallEffectUntilUiTimeMs) {
-        Debug.Log("stalled at cinematic " + uiTimer.GetTimeMs() + "! about to run: " + serverSS.waitingEffects.Peek());
+        Debug.Log("stalled at game " + uiTimer.GetTimeMs() + " for reason " + stallEffectUntilUiTimeReason + "! about to run: " + serverSS.waitingEffects.Peek());
         return readyEffects;
       }
       if (gameTimer.GetTimeMs() < stallEffectUntilGameTimeMs) {
-        Debug.Log("stalled at game " + gameTimer.GetTimeMs() + "! about to run: " + serverSS.waitingEffects.Peek());
+        Debug.Log("stalled at game " + gameTimer.GetTimeMs() + " for reason " + stallEffectUntilGameTimeReason + "! about to run: " + serverSS.waitingEffects.Peek());
         return readyEffects;
       }
 
@@ -194,9 +197,13 @@ namespace AthPlayer {
           break;
         }
         readyEffects.Add(serverSS.waitingEffects.Dequeue());
+
         // If the last one was an actionNum getting set, then break here, that's the end of the chunk.
         // we should get the next waiting chunk in the same frame, unless an animation stalls it.
-        if (effect is GameSetActionNumEffect || effect is RevertedEvent) {
+        if (effect is GameSetActionNumEffect) {
+          break;
+        }
+        if (effect is GameSetEvventEffect gse && gse.newValue is RevertedEventAsIGameEvent) {
           break;
         }
       }
@@ -205,37 +212,60 @@ namespace AthPlayer {
       return readyEffects;
     }
 
+    private void EffectEffects(List<IEffect> effects) {
+      game.root.Transact(() => {
+        foreach (var effect in effects) {
+          //Debug.Log("Applying " + effect);
+
+          preBroadcaster.Broadcast(effect);
+          new EffectApplier(game.root).Apply(effect);
+          postBroadcaster.Broadcast(effect);
+        }
+        return 0;
+      });
+    }
+
     private void ConsumeEffects() {
       float startUnityTime = Time.time;
+      int appliedEffects = 0;
       while (true) {
         if (Time.time - startUnityTime > .2f) {
-          Asserts.Assert(false, "Consuming effects took too long!");
+          Debug.LogWarning("Consuming effects took too long!");
           break;
         }
 
         var readyEffects = GetNextChunkOfReadyEffects();
 
-        if (readyEffects.Count > 0) {
-          game.root.Transact(() => {
-            foreach (var effect in readyEffects) {
-              Debug.Log("Applying " + effect);
-
-              preBroadcaster.Broadcast(effect);
-              new EffectApplier(game.root).Apply(effect);
-              postBroadcaster.Broadcast(effect);
+        if (readyEffects.Count == 0) {
+          if (serverSS.waitingEffects.Count == 0) {
+            if (game.WaitingOnPlayerInput()) {
+              // No effects, and waiting on player input, so bail.
+              break;
+            } else {
+              // There are no waiting effects, and none are ready. However, we're not waiting on player input, so resume.
+              var error = serverSS.RequestResume(game.id);
+              Asserts.Assert(error == "", error);
+              continue;
             }
-            return 0;
-          });
+          } else {
+            // There are waiting effects, but none of them are ready.
+            // We must be waiting on some animations or something. Bail!
+            break;
+          }
         }
 
-        // At this point, game is caught up to server game.
-        if (serverSS.waitingEffects.Count == 0 && !game.WaitingOnPlayerInput()) {
-          var error = serverSS.RequestResume(game.id);
-          Asserts.Assert(error == "", error);
-          continue;
-        } else {
+        EffectEffects(readyEffects);
+
+        appliedEffects += readyEffects.Count;
+
+        // If there's no player, we'll never trigger the waiting-on-player-input break, so
+        // just process one chunk per frame.
+        if (!game.player.Exists()) {
           break;
         }
+      }
+      if (appliedEffects > 0) {
+        Debug.Log("Applied " + appliedEffects + " effects in " + (Time.time - startUnityTime) + "s, there are " + serverSS.waitingEffects.Count + " left.");
       }
     }
 
@@ -286,16 +316,18 @@ namespace AthPlayer {
     }
 
     private void StallEffectGameTime(long untilTimeMs, string reason) {
-      if (untilTimeMs > stallEffectUntilGameTimeMs) {
+      if (untilTimeMs > gameTimer.GetTimeMs() && untilTimeMs > stallEffectUntilGameTimeMs) {
         Debug.Log("Stalling for game " + (untilTimeMs - gameTimer.GetTimeMs()) + " reason: " + reason);
         stallEffectUntilGameTimeMs = untilTimeMs;
+        stallEffectUntilGameTimeReason = reason;
       }
     }
 
     private void StallEffectUiTime(long untilTimeMs, string reason) {
-      if (untilTimeMs > stallEffectUntilUiTimeMs) {
-        Debug.Log("Stalling for ui " + (untilTimeMs - gameTimer.GetTimeMs()) + " reason: " + reason);
+      if (untilTimeMs > uiTimer.GetTimeMs() && untilTimeMs > stallEffectUntilUiTimeMs) {
+        Debug.Log("Stalling for ui " + (untilTimeMs - uiTimer.GetTimeMs()) + " reason: " + reason);
         stallEffectUntilUiTimeMs = untilTimeMs;
+        stallEffectUntilUiTimeReason = reason;
       }
     }
 
@@ -469,7 +501,6 @@ namespace AthPlayer {
 
     public void VisitIGameEvent(WaitEventAsIGameEvent obj) {
       waitEndUiTimeMs = uiTimer.GetTimeMs() + obj.obj.timeMs;
-      Debug.LogError("waiting until " + waitEndUiTimeMs);
     }
 
     public void VisitIGameEvent(FlyCameraEventAsIGameEvent obj) {
@@ -497,7 +528,6 @@ namespace AthPlayer {
             comm.actions[i].label,
             () => {
               if (isModal) {
-                Debug.LogError("is modal, nulling current modal!");
                 currentModalOverlay = null;
               }
               if (i < comm.actions.Count) {
@@ -604,13 +634,10 @@ namespace AthPlayer {
       public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
       public void visitGameSetEvventEffect(GameSetEvventEffect effect) {
         if (effect.newValue is FlyCameraEventAsIGameEvent) {
-          Debug.LogError("Stalling!");
           stallEffectUiTime(gameController.cameraAnimationEndUiTimeMs, "wait for camera");
         } else if (effect.newValue is WaitForCameraEventAsIGameEvent) {
-          Debug.LogError("Stalling!");
           stallEffectUiTime(gameController.cameraAnimationEndUiTimeMs, "wait for camera");
         } else if (effect.newValue is WaitForEverythingEventAsIGameEvent) {
-          Debug.LogError("Stalling!");
           stallEffectUiTime(gameController.cameraAnimationEndUiTimeMs, "wait for camera");
         }
       }

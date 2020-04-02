@@ -106,15 +106,11 @@ namespace IncendianFalls {
       //context.root.logger.Error("d there are " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + context.root.rootIncarnation.countDefyingMemberships());
 
       while (superstate.previousTurns.Count != targetAnchorTurnIndex) {
-        game.root.logger.Error("rewinding one turn!");
-
         RewindOneTurn(superstate, game);
 
         // We broadcast this so the UI knows to pause for a little bit to let things settle down.
         game.AddEvent(new RevertedEvent().AsIGameEvent());
       }
-
-      game.root.logger.Error("transitioning, now there are " + superstate.previousTurns.Count);
 
       TransitionToCloneMoving(superstate, targetAnchorTurnIndex, game);
 

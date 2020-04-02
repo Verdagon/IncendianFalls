@@ -172,7 +172,7 @@ object Root {
          |      stopwatch.Stop();
          |      var calculationDuration = stopwatch.Elapsed.TotalMilliseconds;
          |
-         |      logger.Info("Transaction run time " + calculationDuration);
+         |      // logger.Info("Transaction run time " + calculationDuration + "ms");
          |    }
          |  }
          |
