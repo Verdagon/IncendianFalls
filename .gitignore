@@ -8,8 +8,7 @@ Library/CurrentLayout-default.dwlt
 Library/EditorInstance.json
 Temp
 ChronobaseCS/target
-Library/metadata
-Library/ScriptAssemblies
+Library
 ChronobaseCS/project/target
 ChronobaseCS/.idea/libraries
 Atharia/Geomancer/obj
@@ -232,3 +231,15 @@ project.lock.json
 *.feature.cs
 *.feature.xlsx.*
 *.Specs_*.html
+Library/ShaderCache.db
+Library/ScriptMapper
+Library/SceneVisibilityState.asset
+Library/CurrentLayout-default.dwlt
+Library/assetDatabase3
+Library/APIUpdater/project-dependencies.graph
+Library/ShaderCache.db
+Library/ScriptMapper
+Library/SceneVisibilityState.asset
+Library/CurrentLayout-default.dwlt
+Library/assetDatabase3
+Library/APIUpdater/project-dependencies.graph

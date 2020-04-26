@@ -512,27 +512,40 @@ namespace Domino {
     }
 
     public void Remove(int id) {
-      Asserts.Assert(id != 0);
-      Asserts.Assert(parentIdByChildId.ContainsKey(id));
-      Asserts.Assert(overlayObjects.ContainsKey(id));
-      var overlayObject = overlayObjects[id];
+      if (id == 0) {
+        while (overlayObjects.Count > 1) {
+          int first = 0;
+          foreach (var entry in overlayObjects) {
+            if (entry.Key != 0) {
+              first = entry.Key;
+              break;
+            }
+          }
+          Asserts.Assert(first != 0);
+          Remove(first);
+        }
+      } else {
+        Asserts.Assert(parentIdByChildId.ContainsKey(id));
+        Asserts.Assert(overlayObjects.ContainsKey(id));
+        var overlayObject = overlayObjects[id];
 
-      foreach (var childId in overlayObject.childIds) {
-        Remove(childId);
+        foreach (var childId in overlayObject.childIds) {
+          Remove(childId);
+        }
+
+        Asserts.Assert(overlayObjects[id].childIds.Count == 0);
+
+        Destroy(overlayObject.gameObject);
+        foreach (var borderRectGameObject in overlayObject.borderRectGameObjects) {
+          Destroy(borderRectGameObject);
+        }
+        overlayObjects.Remove(id);
+
+        int parentId = parentIdByChildId[id];
+        parentIdByChildId.Remove(id);
+
+        overlayObjects[parentId].childIds.Remove(id);
       }
-
-      Asserts.Assert(overlayObjects[id].childIds.Count == 0);
-
-      Destroy(overlayObject.gameObject);
-      foreach (var borderRectGameObject in overlayObject.borderRectGameObjects) {
-        Destroy(borderRectGameObject);
-      }
-      overlayObjects.Remove(id);
-
-      int parentId = parentIdByChildId[id];
-      parentIdByChildId.Remove(id);
-
-      overlayObjects[parentId].childIds.Remove(id);
     }
 
     //public void OnButtonClick(int id) {

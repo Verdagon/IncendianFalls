@@ -69,6 +69,8 @@ namespace AthPlayer {
 
     public OverlayPaneler overlayPaneler;
 
+    private OverlayPanelView gameOverlay;
+
     private OverlayPresenter currentErrorOverlay;
 
     public void Start() {
@@ -80,9 +82,20 @@ namespace AthPlayer {
       serverSS = new Superstructure(new LoggerImpl());
       replayLogger = new ReplayLogger(serverSS, new string[] { "Latest.sslog", timestamp + ".sslog" });
 
-      lookPanelView = new LookPanelView(uiTimer, overlayPaneler);
+      lookPanelView = new LookPanelView(uiTimer, overlayPaneler, 3, 0);
 
       inputSemaphore = new InputSemaphore();
+
+      // Our letters are .6667 (1x1.5)
+      // Lets pretend user's height setting is 20x30.
+      // If we have a 400x600 screen, we should have 20x20 grid.
+      // If we have a 400x400 screen, we should have 20x13 grid.
+      // If we have a 800x600 screen, we should have 40x20 grid.
+      int gridWidth = Screen.width / 20;
+      int gridHeight = Screen.height / 30;
+      gameOverlay = overlayPaneler.MakePanel(uiTimer, 0, 0, 100, 100, gridWidth, gridHeight, .6667f);
+
+      // fullscreen would be from -1,-1 to w+2 h+2.
 
       this.cameraController =
         new CameraController(

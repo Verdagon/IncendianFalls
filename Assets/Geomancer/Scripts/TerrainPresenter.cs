@@ -24,8 +24,7 @@ namespace Geomancer {
     Dictionary<Location, PhantomTilePresenter> phantomTilePresenters = new Dictionary<Location, PhantomTilePresenter>();
 
     Location maybeMouseHighlightedLocation = null;
-
-    SortedSet<Location> selectedLocations = new SortedSet<Location>();
+    private SortedSet<Location> highlightedLocations = new SortedSet<Location>();
 
     public TerrainPresenter(IClock clock,
       ITimer timer, EffectBroadcaster broadcaster, MemberToViewMapper vivimap, Geomancer.Model.Terrain terrain, Instantiator instantiator) {
@@ -83,7 +82,7 @@ namespace Geomancer {
 
     private void UpdateLocationHighlighted(Location location) {
       bool highlighted = location == maybeMouseHighlightedLocation;
-      bool selected = selectedLocations.Contains(location);
+      bool selected = highlightedLocations.Contains(location);
       if (location != null) {
         if (tilePresenters.TryGetValue(location, out var newMousedTerrainTilePresenter)) {
           newMousedTerrainTilePresenter.SetTinted(highlighted, selected);
@@ -130,9 +129,9 @@ namespace Geomancer {
     public void visitTerrainTileByLocationMutMapDeleteEffect(TerrainTileByLocationMutMapDeleteEffect effect) { }
     public void visitTerrainTileByLocationMutMapRemoveEffect(TerrainTileByLocationMutMapRemoveEffect effect) {
       tilePresenters.Remove(effect.key);
-      var selection = GetSelection();
-      selection.Remove(effect.key);
-      SetSelection(selection);
+      var newHighlightedLocations = new SortedSet<Location>(highlightedLocations);
+      newHighlightedLocations.Remove(effect.key);
+      SetHighlightedLocations(newHighlightedLocations);
       RefreshPhantomTiles();
     }
 
@@ -171,13 +170,9 @@ namespace Geomancer {
       phantomTilePresenters.Add(location, presenter);
     }
 
-    public SortedSet<Location> GetSelection() {
-      return new SortedSet<Location>(selectedLocations);
-    }
-
-    public void SetSelection(SortedSet<Location> locations) {
-      var (addedLocations, removedLocations) = Geomancer.Model.SetUtils.Diff(selectedLocations, locations);
-      selectedLocations = locations;
+    public void SetHighlightedLocations(SortedSet<Location> locations) {
+      var (addedLocations, removedLocations) = Geomancer.Model.SetUtils.Diff(highlightedLocations, locations);
+      highlightedLocations = locations;
       foreach (var addedLocation in addedLocations) {
         UpdateLocationHighlighted(addedLocation);
       }

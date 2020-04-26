@@ -24,15 +24,17 @@ namespace Geomancer {
   }
 
   public class EditorPresenter : MonoBehaviour {
-    private SlowableTimerClock clock;
     public Instantiator instantiator;
     public GameObject cameraObject;
 
+    public OverlayPaneler overlayPaneler;
+
     CameraController cameraController;
 
-    public LookPanelView lookPanelView;
+    private SlowableTimerClock clock;
 
-    public PlayerPanelView playerPanelView;
+    private LookPanelView lookPanelView;
+    private Location maybeLookedLocation;
 
     Root ss;
     Level level;
@@ -41,6 +43,10 @@ namespace Geomancer {
     TerrainPresenter terrainPresenter;
 
     Dictionary<KeyCode, string> memberByKeyCode;
+
+    SortedSet<Location> selectedLocations = new SortedSet<Location>();
+
+    ListView membersView;
 
     public void Start() {
       clock = new SlowableTimerClock(1.0f);
@@ -66,18 +72,12 @@ namespace Geomancer {
         [KeyCode.BackQuote] = "Water",
       };
 
-      // var timestamp = (int)DateTimeOffset.Now.ToUnixTimeMilliseconds();
-
-
-      //try {
-      //  writers.Add(new StreamWriter(logFilenames[i], false));
-      //} catch (UnauthorizedAccessException e) {
-      //  externalSS.GetRoot().logger.Error(
-      //      "Couldn't make a log file: " + e.Message);
-      //}
-
       ss = new Root(new EditorLogger());
 
+      lookPanelView = new LookPanelView(clock, overlayPaneler, 0, 1);
+
+      broadcaster = new EffectBroadcaster();
+      ss.AddObserver((effect) => broadcaster.Route(effect));
 
       var pattern = PentagonPattern9.makePentagon9Pattern();
       //var pattern = SquarePattern.MakeSquarePattern();
@@ -145,7 +145,12 @@ namespace Geomancer {
           clock,
           cameraObject,
           level.terrain.GetTileCenter(startLocation).ToUnity(),
-          new Vector3(0, 10, 5));
+          new Vector3(0, -10, 5));
+
+      membersView =
+        new ListView(
+          overlayPaneler.MakePanel(
+            clock, 100, 100, 100, 100, 40, 16, .6667f));
     }
 
 
@@ -157,19 +162,19 @@ namespace Geomancer {
       });
       Save();
 
-      var selection = terrainPresenter.GetSelection();
-      selection.Add(location);
-      terrainPresenter.SetSelection(selection);
+      var newSelection = new SortedSet<Location>(selectedLocations);
+      newSelection.Add(location);
+      SetSelection(newSelection);
     }
 
     public void HandleTerrainTileClicked(Location location) {
-      var selection = terrainPresenter.GetSelection();
-      if (selection.Contains(location)) {
-        selection.Remove(location);
+      var newSelection = new SortedSet<Location>(selectedLocations);
+      if (newSelection.Contains(location)) {
+        newSelection.Remove(location);
       } else {
-        selection.Add(location);
+        newSelection.Add(location);
       }
-      terrainPresenter.SetSelection(selection);
+      SetSelection(newSelection);
     }
 
     public void HandleTerrainTileHovered(Location location) {
@@ -178,23 +183,26 @@ namespace Geomancer {
 
     private void UpdateLookPanelView() {
       var location = terrainPresenter.GetMaybeMouseHighlightLocation();
-      if (location == null) {
-        lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
-      } else {
-        var message = "(" + location.groupX + ", " + location.groupY + ", " + location.indexInGroup + ")";
+      if (location != maybeLookedLocation) {
+        maybeLookedLocation = location;
+        if (location == null) {
+          lookPanelView.SetStuff(false, "", "", new List<KeyValuePair<SymbolDescription, string>>());
+        } else {
+          var message = "(" + location.groupX + ", " + location.groupY + ", " + location.indexInGroup + ")";
 
-        var symbolsAndDescriptions = new List<KeyValuePair<SymbolDescription, string>>();
-        if (level.terrain.tiles.ContainsKey(location)) {
-          message += " elevation " + level.terrain.tiles[location].elevation;
-          foreach (var member in level.terrain.tiles[location].members) {
-            var symbol =
-            new SymbolDescription("a",
-                            50, new Color(1f, 1f, 1f, 0), 180, OutlineMode.WithOutline, new Color(1, 1, 1));
-            symbolsAndDescriptions.Add(new KeyValuePair<SymbolDescription, string>(symbol, member));
+          var symbolsAndDescriptions = new List<KeyValuePair<SymbolDescription, string>>();
+          if (level.terrain.tiles.ContainsKey(location)) {
+            message += " elevation " + level.terrain.tiles[location].elevation;
+            foreach (var member in level.terrain.tiles[location].members) {
+              var symbol =
+              new SymbolDescription("a",
+                              50, new Color(1f, 1f, 1f, 0), 180, OutlineMode.WithOutline, new Color(1, 1, 1));
+              symbolsAndDescriptions.Add(new KeyValuePair<SymbolDescription, string>(symbol, member));
+            }
           }
-        }
 
-        lookPanelView.SetStuff(true, message, "", symbolsAndDescriptions);
+          lookPanelView.SetStuff(true, message, "", symbolsAndDescriptions);
+        }
       }
     }
 
@@ -221,18 +229,18 @@ namespace Geomancer {
         cameraController.MoveLeft(Time.deltaTime);
       }
       if (Input.GetKeyDown(KeyCode.Escape)) {
-        terrainPresenter.SetSelection(new SortedSet<Location>());
+        SetSelection(new SortedSet<Location>());
       }
       if (Input.GetKeyDown(KeyCode.Slash)) {
         var allLocations = new SortedSet<Location>();
         foreach (var locationAndTile in level.terrain.tiles) {
           allLocations.Add(locationAndTile.Key);
         }
-        terrainPresenter.SetSelection(allLocations);
+        SetSelection(allLocations);
       }
       if (Input.GetKeyDown(KeyCode.Equals) || Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.Mouse2)) {
         ss.Transact<Geomancer.Model.Void>(delegate () {
-          foreach (var loc in terrainPresenter.GetSelection()) {
+          foreach (var loc in selectedLocations) {
             level.terrain.tiles[loc].elevation = level.terrain.tiles[loc].elevation + 1;
           }
           return new Geomancer.Model.Void();
@@ -242,7 +250,7 @@ namespace Geomancer {
       }
       if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.Underscore) || Input.GetKeyDown(KeyCode.Mouse1)) {
         ss.Transact<Geomancer.Model.Void>(delegate () {
-          foreach (var loc in terrainPresenter.GetSelection()) {
+          foreach (var loc in selectedLocations) {
             level.terrain.tiles[loc].elevation = Math.Max(1, level.terrain.tiles[loc].elevation - 1);
           }
           return new Geomancer.Model.Void();
@@ -252,7 +260,8 @@ namespace Geomancer {
       }
       if (Input.GetKeyDown(KeyCode.Delete)) {
         ss.Transact<Geomancer.Model.Void>(delegate () {
-          foreach (var loc in terrainPresenter.GetSelection()) {
+          foreach (var loc in selectedLocations) {
+            selectedLocations.Remove(loc);
             var tile = level.terrain.tiles[loc];
             level.terrain.tiles.Remove(loc);
             tile.Destruct();
@@ -274,11 +283,43 @@ namespace Geomancer {
       terrainPresenter.UpdateMouse(ray);
     }
 
+    private void SetSelection(SortedSet<Location> locations) {
+      selectedLocations = locations;
+      terrainPresenter.SetHighlightedLocations(selectedLocations);
+
+      SortedSet<string> commonMembers = null;
+      foreach (var loc in selectedLocations) {
+        if (commonMembers == null) {
+          commonMembers = new SortedSet<string>();
+          foreach (var member in level.terrain.tiles[loc].members) {
+            commonMembers.Add(member);
+          }
+        } else {
+          var members = new SortedSet<string>();
+          foreach (var member in level.terrain.tiles[loc].members) {
+            members.Add(member);
+          }
+          foreach (var member in new SortedSet<string>(commonMembers)) {
+            if (!members.Contains(member)) {
+              commonMembers.Remove(member);
+            }
+          }
+        }
+      }
+
+      var entries = new List<ListView.Entry>();
+      if (commonMembers != null) {
+        foreach (var member in commonMembers) {
+          entries.Add(new ListView.Entry("f", member));
+        }
+      }
+      membersView.ShowEntries(entries);
+    }
+
     private void ToggleMember(string member) {
-      var selection = terrainPresenter.GetSelection();
-      if (!AllLocationsHaveMember(selection, member)) {
+      if (!AllLocationsHaveMember(selectedLocations, member)) {
         ss.Transact(delegate () {
-          foreach (var location in selection) {
+          foreach (var location in selectedLocations) {
             if (!LocationHasMember(location, member)) {
               level.terrain.tiles[location].members.Add(member);
             }
@@ -287,7 +328,7 @@ namespace Geomancer {
         });
       } else {
         ss.Transact(delegate () {
-          foreach (var location in selection) {
+          foreach (var location in selectedLocations) {
             var tile = level.terrain.tiles[location];
             for (int i = 0; i < tile.members.Count; i++) {
               if (tile.members[i] == member) {
