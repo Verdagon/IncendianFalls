@@ -8,16 +8,14 @@ using UnityEngine.UI;
 
 namespace AthPlayer {
   public class LookPanelView {
-    IClock cinematicTimer;
     OverlayPaneler overlayPaneler;
     OverlayPanelView visibleOverlayPanelView;
-    int bottomMargin;
+    int panelGYInScreen;
     int bottomPadding;
 
-    public LookPanelView(IClock cinematicTimer, OverlayPaneler overlayPaneler, int bottomMargin, int bottomPadding) {
-      this.cinematicTimer = cinematicTimer;
+    public LookPanelView(OverlayPaneler overlayPaneler, int panelGYInScreen, int bottomPadding) {
       this.overlayPaneler = overlayPaneler;
-      this.bottomMargin = bottomMargin;
+      this.panelGYInScreen = panelGYInScreen;
       this.bottomPadding = bottomPadding;
     }
 
@@ -41,17 +39,21 @@ namespace AthPlayer {
       }
 
       int topPadding = 1;
-      int contentYStart = bottomMargin + bottomPadding;
+      int contentYStart = bottomPadding;
+      // 1 line of text, 1 padding between, 1 line of text
+      int panelGH = bottomPadding + 1 + 1 + 1 + topPadding;
 
+
+      int panelGXInScreen = 0;
+      int panelGYInScreen = PlayerPanelView.PANEL_GH;
       visibleOverlayPanelView =
-        overlayPaneler.MakePanel(
-          cinematicTimer, 0, 0, 100, 30, 70, bottomMargin + bottomPadding + 3 + topPadding, .6667f);
+        overlayPaneler.MakePanel(panelGXInScreen, panelGYInScreen, overlayPaneler.screenGW, panelGH);
       visibleOverlayPanelView.AddRectangle(
         0,
+        -1,
         0,
-        bottomMargin,
-        visibleOverlayPanelView.symbolsWide,
-        bottomPadding + 3 + topPadding,
+        1 + overlayPaneler.screenGW + 1,
+        panelGH,
         1,
         new UnityEngine.Color(0, 0, 0, .85f), new UnityEngine.Color(0, 0, 0, 0));
 

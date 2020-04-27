@@ -74,12 +74,12 @@ namespace Domino {
     private OnClicked startFadeOutCallback;
     private OnClicked finishFadeOutCallback;
 
+    public float panelUnityXInParent { get; private set; }
+    public float panelUnityYInParent { get; private set; }
+    public float symbolWidth { get; private set; }
+    public float symbolHeight { get; private set; }
     public int symbolsWide { get; private set; }
     public int symbolsHigh { get; private set; }
-
-    float symbolWidth;
-    float symbolHeight;
-    float widthToHeightRatio;
 
     int nextId = 1000;
     private Dictionary<int, OverlayObject> overlayObjects;
@@ -90,16 +90,17 @@ namespace Domino {
         Instantiator instantiator,
         IClock cinematicTimer,
         GameObject parent,
-        int horizontalAlignmentPercent,
-        int verticalAlignmentPercent,
-        int widthPercent,
-        int heightPercent,
+        float panelUnityXInParent,
+        float panelUnityYInParent,
         int symbolsWide,
         int symbolsHigh,
-        // eg .6667 for something thats tall and thin.
-        float widthToHeightRatio) {
+        float symbolWidth,
+        float symbolHeight) {
       this.instantiator = instantiator;
-      this.widthToHeightRatio = widthToHeightRatio;
+      this.panelUnityXInParent = panelUnityXInParent;
+      this.panelUnityYInParent = panelUnityYInParent;
+      this.symbolWidth = symbolWidth;
+      this.symbolHeight = symbolHeight;
       this.symbolsWide = symbolsWide;
       this.symbolsHigh = symbolsHigh;
       parentIdByChildId = new Dictionary<int, int>();
@@ -112,32 +113,6 @@ namespace Domino {
       this.startFadeOutTimeAfterOpenMs = long.MaxValue;
       this.finishFadeOutTimeAfterOpenMs = long.MaxValue;
 
-      float horizontalAlignment = horizontalAlignmentPercent / 100.0f;
-      float verticalAlignment = verticalAlignmentPercent / 100.0f;
-
-      var parentRectTransform = parent.GetComponent<RectTransform>();
-      var parentWidth = parentRectTransform.rect.width;
-      var parentHeight = parentRectTransform.rect.height;
-
-      float panelWidth = parentWidth * widthPercent / 100;
-      float panelHeight = parentHeight * heightPercent / 100;
-
-      symbolWidth = panelWidth / symbolsWide;
-      symbolHeight = panelHeight / symbolsHigh;
-
-      // Reduce symbol width or height such that it's square (assuming widthToHeightRatio is 1)
-      // If widthToHeightRatio is eg .6667, and we have a 50x60 symbol, then reduce it to 40x60
-      // but if we had a 50x90 then reduce it to 50x75.
-      // Reduce it to the biggest we can while still conforming to the width/height ratio.
-      symbolWidth = Mathf.Min(symbolWidth, symbolHeight * widthToHeightRatio);
-      symbolHeight = symbolWidth / widthToHeightRatio;
-
-      panelWidth = symbolWidth * symbolsWide;
-      panelHeight = symbolHeight * symbolsHigh;
-
-      float panelX = horizontalAlignment * parentWidth - horizontalAlignment * panelWidth;
-      float panelY = verticalAlignment * parentHeight - verticalAlignment * panelHeight;
-
       var panelRectTransform = gameObject.GetComponent<RectTransform>();
       panelRectTransform.SetParent(parent.transform, false);
       panelRectTransform.SetAsFirstSibling(); // Move to back
@@ -145,8 +120,8 @@ namespace Domino {
       panelRectTransform.anchorMax = new Vector2(0, 0);
       panelRectTransform.localScale = new Vector3(1, 1, 1);
       panelRectTransform.pivot = new Vector2(0, 0);
-      panelRectTransform.anchoredPosition = new Vector2(panelX, panelY);
-      panelRectTransform.sizeDelta = new Vector2(panelWidth, panelHeight);
+      panelRectTransform.anchoredPosition = new Vector2(panelUnityXInParent, panelUnityYInParent);
+      panelRectTransform.sizeDelta = new Vector2(symbolsWide * symbolWidth, symbolsHigh * symbolHeight);
     }
 
     public void SetFadeIn(int id, FadeIn fadeIn) {
@@ -205,6 +180,7 @@ namespace Domino {
       textView.font = instantiator.GetFont(font.font);
       textView.alignment = centered ? TextAnchor.MiddleCenter : TextAnchor.LowerLeft;
       // * 2 and then we scale by .5 so that unity renders it with more resolution.
+      float widthToHeightRatio = symbolWidth / symbolHeight;
       textView.fontSize = (int)(symbolHeight * size * font.fontSizeMultiplier * widthToHeightRatio * 2);
       textView.color = color;
       textView.resizeTextForBestFit = false;

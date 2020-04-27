@@ -82,6 +82,7 @@
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\Overlay\IPageController.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\Overlay\InstructionsPageController.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\Overlay\NormalPageController.cs" />
+    <Compile Include="Assets\AthPlayer\Scripts\Presenters\Overlay\OverlayLane.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\Overlay\OverlayPresenter.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\TerrainPresenter.cs" />
     <Compile Include="Assets\AthPlayer\Scripts\Presenters\TerrainTilePresenter.cs" />
@@ -498,9 +499,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>D:/IncendianFalls/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>D:/IncendianFalls/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>D:/Unity Editors/2019.3.11f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

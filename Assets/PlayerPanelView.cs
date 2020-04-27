@@ -10,6 +10,9 @@ namespace Domino {
   public class PlayerPanelView {
     public delegate void OnCapabilityButtonClicked(int capabilityId);
 
+    // G = in grid units
+    public const int PANEL_GH = 3;
+
     public const int TIME_ANCHOR_MOVE_CAPABILITY_ID = 1;
     public const int REVERT_CAPABILITY_ID = 2;
     public const int FIRE_BOMB_CAPABILITY_ID = 3;
@@ -30,7 +33,7 @@ namespace Domino {
       this.unit = unit;
       this.looker = looker;
 
-      this.playerStatusView = overlayPaneler.MakePanel(cinematicTimer, 0, 0, 100, 50, 70, 3, .6667f);
+      this.playerStatusView = overlayPaneler.MakePanel(0, 0, overlayPaneler.screenGW, 3);
       playerStatusView.AddBackground(new UnityEngine.Color(0, 0, 0, .9f), new UnityEngine.Color(0, 0, 0, 0));
 
       textOverlayObjectIds = new List<int>();

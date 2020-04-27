@@ -67,9 +67,9 @@ namespace AthPlayer {
 
     public SoundPlayer soundPlayer;
 
-    public OverlayPaneler overlayPaneler;
+    public GameObject panelRootGameObject;
 
-    private OverlayPanelView gameOverlay;
+    OverlayPaneler overlayPaneler;
 
     private OverlayPresenter currentErrorOverlay;
 
@@ -82,18 +82,12 @@ namespace AthPlayer {
       serverSS = new Superstructure(new LoggerImpl());
       replayLogger = new ReplayLogger(serverSS, new string[] { "Latest.sslog", timestamp + ".sslog" });
 
-      lookPanelView = new LookPanelView(uiTimer, overlayPaneler, 3, 0);
-
       inputSemaphore = new InputSemaphore();
 
-      // Our letters are .6667 (1x1.5)
-      // Lets pretend user's height setting is 20x30.
-      // If we have a 400x600 screen, we should have 20x20 grid.
-      // If we have a 400x400 screen, we should have 20x13 grid.
-      // If we have a 800x600 screen, we should have 40x20 grid.
-      int gridWidth = Screen.width / 20;
-      int gridHeight = Screen.height / 30;
-      gameOverlay = overlayPaneler.MakePanel(uiTimer, 0, 0, 100, 100, gridWidth, gridHeight, .6667f);
+      overlayPaneler = new OverlayPaneler(panelRootGameObject, instantiator, uiTimer);
+      //gameOverlay = overlayPaneler.MakePanel(uiTimer, 0, 0, 100, 100, gridWidth, gridHeight, .6667f);
+
+      lookPanelView = new LookPanelView(overlayPaneler, PlayerPanelView.PANEL_GH, 0);
 
       // fullscreen would be from -1,-1 to w+2 h+2.
 

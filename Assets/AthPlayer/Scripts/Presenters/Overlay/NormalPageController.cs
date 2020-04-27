@@ -17,6 +17,9 @@ namespace AthPlayer {
     bool isFullscreen;
     bool longBackgroundFade;
 
+    const int PANEL_PADDING = 1;
+    const int PANEL_MARGIN = 1;
+
     public NormalPageController(
         OverlayPaneler overlayPaneler,
         IClock cinematicTimer,
@@ -30,23 +33,20 @@ namespace AthPlayer {
       this.longBackgroundFade = longBackgroundFade;
     }
 
-    public (int, int) GetPageTextMaxWidthAndHeight(bool isPortrait, List<OverlayPresenter.PageButton> buttons) {
+    // G = in grid units
+    public (int, int) GetPageTextMaxGWAndGH(
+        int maxGW,
+        int maxGH,
+        List<OverlayPresenter.PageButton> buttons) {
       if (isFullscreen) {
-        if (isPortrait) {
-          // 30 - 2 padding = 28
-          // 45 - 2 padding - 1 margin - 3 button = 39
-          return (28, 39);
-        } else {
-          // 70 - 2 padding = 68
-          // 50 - 2 padding - 1 margin - 3 button = 44
-          return (68, 44);
-        }
+        return (maxGW, maxGH);
       } else {
-        if (isPortrait) {
-          return (28, 9);
-        } else {
-          return (43, 14);
-        }
+        // We want 50 characters wide for text, or if the screens to small, then whatever the width is minus some side margin.
+        int gw = Math.Min(50, maxGW - PANEL_MARGIN * 2 - PANEL_PADDING * 2);
+        // Margin on top and bottom
+        int gh = maxGH - 2;
+
+        return (gw, gh);
       }
     }
 
@@ -70,7 +70,7 @@ namespace AthPlayer {
       // Will be unlocked by the buttons being clicked.
       inputSemaphore.Lock();
 
-      var (textMaxWidth, textMaxHeight) = GetPageTextMaxWidthAndHeight(isPortrait, buttons);
+      var (textMaxWidth, textMaxHeight) = GetPageTextMaxGWAndGH(overlayPaneler.screenGW, overlayPaneler.screenGH, buttons);
       if (pageLines.Count > textMaxHeight) {
         Debug.LogError("Too many lines for this kind of overlay!");
       }
@@ -79,27 +79,19 @@ namespace AthPlayer {
       // - as many lines for text as we can fit
       // - 1 line for space between text and buttons
       // - 2 lines for buttons
-      int numLinesForTopBorder = 1;
-      int numLinesForBottomBorder = 1;
       int numLinesBetweenTextAndButtons = 1;
-      int leftBorderWidth = 1;
-      int rightBorderWidth = 1;
       int numLinesForButtons = 3; // 1 for top border, 1 for the text, 1 for bottom border.
 
-      int panelWidth = textMaxWidth + leftBorderWidth + rightBorderWidth;
+      int panelWidth = overlayPaneler.screenGW - PANEL_MARGIN * 2;
 
       // Can be smaller than maxHeight.
-      int panelHeight = pageLines.Count + numLinesForTopBorder + numLinesBetweenTextAndButtons + numLinesForButtons + numLinesForBottomBorder;
+      int panelHeight = pageLines.Count + PANEL_PADDING + numLinesBetweenTextAndButtons + numLinesForButtons + PANEL_PADDING;
 
       OverlayPanelView panelView;
       if (isFullscreen) {
-        panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 50, 94, 94, panelWidth, panelHeight, .6667f);
+        panelView = overlayPaneler.MakePanel(-1, -1, overlayPaneler.screenGW + 2, overlayPaneler.screenGH + 2);
       } else {
-        if (isPortrait) {
-          panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 97, 94, 47, panelWidth, panelHeight, .6667f);
-        } else {
-          panelView = overlayPaneler.MakePanel(cinematicTimer, 50, 80, 80, 50, panelWidth, panelHeight, .6667f);
-        }
+        panelView = overlayPaneler.MakePanel(PANEL_MARGIN, overlayPaneler.screenGH - panelHeight - PANEL_MARGIN, panelWidth, panelHeight);
       }
 
       int backgroundId;
@@ -147,7 +139,7 @@ namespace AthPlayer {
         int buttonId =
           panelView.AddButton(
             0,
-            panelWidth - rightBorderWidth - buttonWidth,
+            panelWidth - PANEL_PADDING - buttonWidth,
             1,
             buttonWidth,
             buttonHeight,
@@ -170,7 +162,7 @@ namespace AthPlayer {
             () => { }, () => { });
         panelView.AddString(
           buttonId,
-          panelWidth - rightBorderWidth - buttonWidth + buttonBorderWidth,
+          panelWidth - PANEL_PADDING - buttonWidth + buttonBorderWidth,
           2f,
           buttonTextWidth,
           new UnityEngine.Color(1, 1, 1, 1),

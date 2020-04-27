@@ -193,26 +193,24 @@ namespace Domino {
     public OverlayPanelView CreateOverlayPanelView(
         GameObject parent,
         IClock cinematicTimer,
-        int horizontalAlignmentPercent,
-        int verticalAlignmentPercent,
-        int widthPercent,
-        int heightPercent,
+        float panelUnityXInParent,
+        float panelUnityYInParent,
         int symbolsWide,
         int symbolsHigh,
-        float widthToHeightRatio) {
+        float symbolWidth,
+        float symbolHeight) {
       var obj = Instantiate(emptyUiObject);
       var spv = obj.AddComponent<OverlayPanelView>();
       spv.Init(
         this,
         cinematicTimer,
         parent,
-        horizontalAlignmentPercent,
-        verticalAlignmentPercent,
-        widthPercent,
-        heightPercent,
+        panelUnityXInParent,
+        panelUnityYInParent,
         symbolsWide,
         symbolsHigh,
-        widthToHeightRatio);
+        symbolWidth,
+        symbolHeight);
         //500, -500, -0, 500, 1000, -1000, -500);
       return spv;
     }

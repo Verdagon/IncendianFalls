@@ -118,7 +118,6 @@ namespace AthPlayer {
 
       if (moving) {
         Asserts.Assert(path.Count > 0);
-        Debug.Log(animationsDoneAndReadyForPlayerInput());
         if (animationsDoneAndReadyForPlayerInput()) {
           TakeNextStep();
         }

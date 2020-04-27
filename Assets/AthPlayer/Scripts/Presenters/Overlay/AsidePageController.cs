@@ -48,7 +48,11 @@ namespace AthPlayer {
       this.isError = isError;
     }
 
-    public (int, int) GetPageTextMaxWidthAndHeight(bool isPortrait, List<OverlayPresenter.PageButton> buttons) {
+    // G = in grid units
+    public (int, int) GetPageTextMaxGWAndGH(
+        int maxGW,
+        int maxGH,
+        List<OverlayPresenter.PageButton> buttons) {
       int textWidth = panelWidth - panelLeftPadding;
       foreach (var button in buttons) {
         textWidth -= buttonLeftMargin + buttonPadding + button.label.Length + buttonPadding;
@@ -68,17 +72,15 @@ namespace AthPlayer {
         bool fadeOutBackground,
         bool isPortrait,
         bool callCallbackAfterFadeOut) {
-      var (textMaxWidth, textMaxHeight) = GetPageTextMaxWidthAndHeight(isPortrait, buttons);
+      var (textMaxWidth, textMaxHeight) = GetPageTextMaxGWAndGH(overlayPaneler.screenGW, overlayPaneler.screenGH, buttons);
       if (pageLines.Count > textMaxHeight) {
         Debug.LogError("Too many lines for this kind of overlay!");
       }
 
       int panelHeight = pageLines.Count + panelTopPadding + panelBottomPadding;
 
-      int widthPercent = isPortrait ? 94 : 44;
-      int horizontalAlignmentPercent = isPortrait ? 50 : 3;
       OverlayPanelView panelView =
-        overlayPaneler.MakePanel(cinematicTimer, horizontalAlignmentPercent, 97, widthPercent, 44, panelWidth, panelHeight, .6667f);
+        overlayPaneler.MakePanel(1, overlayPaneler.screenGH - 1 - panelHeight, overlayPaneler.screenGW - 2, panelHeight);
       int backgroundId;
       if (isError) {
         backgroundId =

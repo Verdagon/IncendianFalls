@@ -11,7 +11,11 @@ using UnityEngine.UI;
 
 namespace AthPlayer {
   public interface IPageController {
-    (int, int) GetPageTextMaxWidthAndHeight(bool isPortrait, List<OverlayPresenter.PageButton> buttons);
+    // G = in grid units
+    (int, int) GetPageTextMaxGWAndGH(
+        int maxGW,
+        int maxGH,
+        List<OverlayPresenter.PageButton> buttons);
 
     OverlayPanelView ShowPage(
         List<string> pageLines,

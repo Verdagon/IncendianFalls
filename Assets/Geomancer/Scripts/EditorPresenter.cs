@@ -74,7 +74,7 @@ namespace Geomancer {
 
       ss = new Root(new EditorLogger());
 
-      lookPanelView = new LookPanelView(clock, overlayPaneler, 0, 1);
+      lookPanelView = new LookPanelView(overlayPaneler, 0, 1);
 
       broadcaster = new EffectBroadcaster();
       ss.AddObserver((effect) => broadcaster.Route(effect));
@@ -150,7 +150,7 @@ namespace Geomancer {
       membersView =
         new ListView(
           overlayPaneler.MakePanel(
-            clock, 100, 100, 100, 100, 40, 16, .6667f));
+            0, 0, 40, 16));
     }
 
 

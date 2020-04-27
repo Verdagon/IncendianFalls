@@ -35,11 +35,16 @@ namespace AthPlayer {
       this.cinematicTimer = cinematicTimer;
     }
 
-    public (int, int) GetPageTextMaxWidthAndHeight(bool isPortrait, List<OverlayPresenter.PageButton> buttons) {
+    // G = in grid units
+    public (int, int) GetPageTextMaxGWAndGH(
+        int maxGW,
+        int maxGH,
+        List<OverlayPresenter.PageButton> buttons) {
       int textWidth = panelWidth - panelLeftPadding - panelRightPadding;
       if (textWidth < minTextWidth) {
         Asserts.Assert(false, "Too little area for text!");
       }
+
       return (textWidth, 13);
     }
 
@@ -54,10 +59,8 @@ namespace AthPlayer {
         bool callCallbackAfterFadeOut) {
       int panelHeight = pageLines.Count + panelTopPadding + panelBottomPadding;
 
-      int widthPercent = isPortrait ? 94 : 44;
-      int horizontalAlignmentPercent = isPortrait ? 50 : 97;
       OverlayPanelView panelView =
-        overlayPaneler.MakePanel(cinematicTimer, horizontalAlignmentPercent, 97, widthPercent, 44, panelWidth, panelHeight, .6667f);
+        overlayPaneler.MakePanel(1, overlayPaneler.screenGH - 1 - panelHeight, panelWidth - 2, panelHeight);
       int backgroundId =
         panelView.AddBackground(
           new UnityEngine.Color(0, 0, 0, .9f),

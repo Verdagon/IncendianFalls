@@ -51,6 +51,7 @@ namespace AthPlayer {
 
     public delegate void OnExit();
 
+    OverlayPaneler overlayPaneler;
     bool isPortrait;
 
     List<PageButton> finalButtons;
@@ -71,7 +72,7 @@ namespace AthPlayer {
         List<PageText> pageTexts,
         List<PageButton> buttons) {
       //this.cinematicTimer = cinematicTimer;
-      //this.overlayPaneler = overlayPaneler;
+      this.overlayPaneler = overlayPaneler;
       //this.inputSemaphore = inputSemaphore;
 
       isPortrait = Screen.height > Screen.width;
@@ -99,7 +100,7 @@ namespace AthPlayer {
 
       subPageTexts = new List<SubPageText>();
       foreach (var pageText in pageTexts) {
-        var (textMaxWidth, textMaxHeight) = pageController.GetPageTextMaxWidthAndHeight(isPortrait, finalButtons);
+        var (textMaxWidth, textMaxHeight) = pageController.GetPageTextMaxGWAndGH(overlayPaneler.screenGW, overlayPaneler.screenGH, finalButtons);
         var wrappedPageLines = LineWrapper.Wrap(pageText.text, textMaxWidth);
 
         List<string> subPageLines = new List<string>();
@@ -122,7 +123,7 @@ namespace AthPlayer {
     private void ShowPage(int subPageIndex) {
       currentSubPageIndex = subPageIndex;
 
-      var (textMaxWidth, textMaxHeight) = pageController.GetPageTextMaxWidthAndHeight(isPortrait, finalButtons);
+      var (textMaxWidth, textMaxHeight) = pageController.GetPageTextMaxGWAndGH(overlayPaneler.screenGW, overlayPaneler.screenGH, finalButtons);
 
       var isFirstSubPage = currentSubPageIndex == 0;
       var isLastSubPage = currentSubPageIndex == subPageTexts.Count - 1;
