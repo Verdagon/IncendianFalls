@@ -70,8 +70,8 @@ namespace Geomancer {
     private static TileDescription GetTileDescription(Pattern pattern, Location location, bool highlighted) {
       var patternTile = pattern.patternTiles[location.indexInGroup];
 
-      var frontColor = highlighted ? new Color(.1f, .1f, .1f) : new Color(0f, 0, 0f);
-      var sideColor = highlighted ? new Color(.1f, .1f, .1f) : new Color(0f, 0, 0f);
+      var frontColor = highlighted ? Vector4Animation.Color(.1f, .1f, .1f) : Vector4Animation.Color(0f, 0, 0f);
+      var sideColor = highlighted ? Vector4Animation.Color(.1f, .1f, .1f) : Vector4Animation.Color(0f, 0, 0f);
 
       string symbolName = "a";
       switch (pattern.name) {
@@ -103,11 +103,10 @@ namespace Geomancer {
                 RenderPriority.TILE,
                 new SymbolDescription(
                     symbolName,
-                    100,
                     frontColor,
                     patternTile.rotateDegrees,
                     OutlineMode.WithOutline,
-                    new Color(.2f, .2f, .2f)),
+                    Vector4Animation.Color(.2f, .2f, .2f)),
                 false,
                 sideColor),
               null,

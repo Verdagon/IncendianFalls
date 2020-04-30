@@ -30,14 +30,14 @@ namespace Domino {
     public void Init(
       IClock clock,
         Instantiator instantiator,
-        Color filledColor,
-        Color emptyColor,
+        IVector4Animation filledColor,
+        IVector4Animation emptyColor,
         float ratio) {
       this.clock = clock;
       this.instantiator = instantiator;
 
-      filledPart.GetComponent<ColorChanger>().SetColor(filledColor, RenderPriority.METER);
-      emptyPart.GetComponent<ColorChanger>().SetColor(emptyColor, RenderPriority.METER);
+      filledPart.GetComponent<ColorChangerThing>().Set(filledColor, RenderPriority.METER);
+      emptyPart.GetComponent<ColorChangerThing>().Set(emptyColor, RenderPriority.METER);
       InnerSetRatio(ratio);
 
       initialized = true;
@@ -86,33 +86,14 @@ namespace Domino {
     }
 
     public void Fade(long durationMs) {
-      GetOrCreateFilledPartOpacityAnimator().opacityAnimation =
-          new ClampFloatAnimation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
-              new LinearFloatAnimation(clock.GetTimeMs(), 1.0f, -1.0f / durationMs));
-      GetOrCreateEmptyPartOpacityAnimator().opacityAnimation =
-          new ClampFloatAnimation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
-              new LinearFloatAnimation(clock.GetTimeMs(), 1.0f, -1.0f / durationMs));
+      var filledPartAnimator = ColorChangerThing.MakeOrGetFrom(clock, filledPart);
+      filledPartAnimator.Set(
+          FadeAnimator.Fade(filledPartAnimator.Get(), clock.GetTimeMs(), durationMs),
+          RenderPriority.SYMBOL);
+      var emptyPartAnimator = ColorChangerThing.MakeOrGetFrom(clock, emptyPart);
+      emptyPartAnimator.Set(
+          FadeAnimator.Fade(emptyPartAnimator.Get(), clock.GetTimeMs(), durationMs),
+          RenderPriority.SYMBOL);
     }
-
-    private OpacityAnimator GetOrCreateFilledPartOpacityAnimator() {
-      CheckInitialized();
-      var animator = filledPart.GetComponent<OpacityAnimator>();
-      if (animator == null) {
-        animator = filledPart.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.Init(clock, RenderPriority.SYMBOL);
-      }
-      return animator;
-    }
-
-    private OpacityAnimator GetOrCreateEmptyPartOpacityAnimator() {
-      CheckInitialized();
-      var animator = emptyPart.GetComponent<OpacityAnimator>();
-      if (animator == null) {
-        animator = emptyPart.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.Init(clock, RenderPriority.SYMBOL);
-      }
-      return animator;
-    }
-
   }
 }

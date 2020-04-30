@@ -290,13 +290,11 @@ namespace AthPlayer {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "q",
-                            50,
-                          new UnityEngine.Color(1, 1, 1, 1.5f),
+                          Vector4Animation.GLOWY_WHITE,
                           0,
-                          OutlineMode.WithBackOutline,
-                          new UnityEngine.Color(0, 0, 0)),
+                          OutlineMode.WithBackOutline),
                       true,
-                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+                      Vector4Animation.GLOWY_WHITE)));
         } else if (detail is InvincibilityUCAsIUnitComponent inv) {
           detailSymbols.Add(
               new KeyValuePair<int, ExtrudedSymbolDescription>(
@@ -305,13 +303,11 @@ namespace AthPlayer {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "q",
-                            50,
-                          new UnityEngine.Color(0, .5f, 1, 1.5f),
+                          Vector4Animation.Color(0, .5f, 1, 1.5f),
                           0,
-                          OutlineMode.WithBackOutline,
-                          new UnityEngine.Color(0, 0, 0)),
+                          OutlineMode.WithBackOutline),
                       true,
-                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+                      Vector4Animation.GLOWY_WHITE)));
         } else if (detail is MiredUCAsIUnitComponent mired) {
           detailSymbols.Add(
               new KeyValuePair<int, ExtrudedSymbolDescription>(
@@ -320,13 +316,11 @@ namespace AthPlayer {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "f-8",
-                            50,
-                          new UnityEngine.Color(1, 1, 1, 1.5f),
+                          Vector4Animation.GLOWY_WHITE,
                           0,
-                          OutlineMode.WithBackOutline,
-                          new UnityEngine.Color(0, 0, 0)),
+                          OutlineMode.WithBackOutline),
                       true,
-                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+                      Vector4Animation.GLOWY_WHITE)));
         } else if (detail is CounteringUCAsIUnitComponent countering) {
           detailSymbols.Add(
               new KeyValuePair<int, ExtrudedSymbolDescription>(
@@ -335,13 +329,11 @@ namespace AthPlayer {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "v",
-                            50,
-                          new UnityEngine.Color(1, 1, 1, 1.5f),
+                          Vector4Animation.GLOWY_WHITE,
                           0,
-                          OutlineMode.WithBackOutline,
-                          new UnityEngine.Color(0, 0, 0)),
+                          OutlineMode.WithBackOutline),
                       true,
-                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+                      Vector4Animation.GLOWY_WHITE)));
         } else if (detail is TutorialDefyCounterUCAsIUnitComponent) {
         } else if (detail is LightningChargingUCAsIUnitComponent charging) {
         } else if (detail is LightningChargedUCAsIUnitComponent charged) {
@@ -352,13 +344,11 @@ namespace AthPlayer {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "r-3",
-                            50,
-                          new UnityEngine.Color(1, 1, 1, 1.5f),
+                          Vector4Animation.GLOWY_WHITE,
                           0,
-                          OutlineMode.WithBackOutline,
-                          new UnityEngine.Color(0, 0, 0)),
+                          OutlineMode.WithBackOutline),
                       true,
-                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+                      Vector4Animation.GLOWY_WHITE)));
         } else if (detail is WanderAICapabilityUCAsIUnitComponent) {
         } else if (detail is KamikazeAICapabilityUCAsIUnitComponent) {
         } else if (detail is AttackAICapabilityUCAsIUnitComponent) {
@@ -373,16 +363,16 @@ namespace AthPlayer {
         } else if (detail is BideAICapabilityUCAsIUnitComponent bideI) {
           var bide = bideI.obj;
           if (bide.charge > 0) {
-            var color = new UnityEngine.Color(1, 1, 1, 1.5f);
+            var color = Vector4Animation.GLOWY_WHITE;
             switch (bide.charge) {
               case 1:
-                color = new UnityEngine.Color(160/255f, 1f, 0f, 1.5f);
+                color = Vector4Animation.Color(160/255f, 1f, 0f, 1.5f);
                 break;
               case 2:
-                color = new UnityEngine.Color(1f, 64/255f, 0, 1.5f);
+                color = Vector4Animation.Color(1f, 64/255f, 0, 1.5f);
                 break;
               case 3:
-                color = new UnityEngine.Color(1, 0f, 0, 1.5f);
+                color = Vector4Animation.Color(1, 0f, 0, 1.5f);
                 break;
             }
             detailSymbols.Add(
@@ -392,13 +382,12 @@ namespace AthPlayer {
                         RenderPriority.SYMBOL,
                         new SymbolDescription(
                             "n",
-                            50,
                             color,
                             0,
                             OutlineMode.WithBackOutline,
-                            new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(0, 0, 0)),
                         false,
-                        new UnityEngine.Color(1, 1, 1, 1.5f))));
+                        Vector4Animation.GLOWY_WHITE)));
           }
         } else if (detail is TemporaryCloneAICapabilityUCAsIUnitComponent tca) {
         } else if (detail is DoomedUCAsIUnitComponent d) {
@@ -409,13 +398,11 @@ namespace AthPlayer {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "l",
-                            50,
-                          new UnityEngine.Color(1, 1, 1, 1.5f),
+                          Vector4Animation.GLOWY_WHITE,
                           0,
-                          OutlineMode.WithBackOutline,
-                          new UnityEngine.Color(0, 0, 0)),
+                          OutlineMode.WithBackOutline),
                       false,
-                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+                      Vector4Animation.GLOWY_WHITE)));
         } else if (detail is TimeCloneAICapabilityUCAsIUnitComponent tc) {
           detailSymbols.Add(
               new KeyValuePair<int, ExtrudedSymbolDescription>(
@@ -424,13 +411,11 @@ namespace AthPlayer {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "l",
-                            50,
-                          new UnityEngine.Color(1, 1, 1, 1.5f),
+                          Vector4Animation.GLOWY_WHITE,
                           0,
-                          OutlineMode.WithBackOutline,
-                          new UnityEngine.Color(0, 0, 0)),
+                          OutlineMode.WithBackOutline),
                       false,
-                      new UnityEngine.Color(1, 1, 1, 1.5f))));
+                      Vector4Animation.GLOWY_WHITE)));
         } else if (detail is GlaiveAsIUnitComponent) {
           //detailSymbols.Add(
           //    new KeyValuePair<int, ExtrudedSymbolDescription>(
@@ -440,11 +425,11 @@ namespace AthPlayer {
           //            new SymbolDescription(
           //                "s",
           //                  50,
-          //                new UnityEngine.Color(1, 1, 1, 1.5f),
+          //                Vector4Animation.GLOWY_WHITE,
           //                0,
           //                OutlineMode.WithBackOutline,
-          //          new UnityEngine.Color(0, 0, 0)),
-          //            true, new UnityEngine.Color(1, 1, 1, 1.5f))));
+          //          Vector4Animation.Color(0, 0, 0)),
+          //            true, Vector4Animation.GLOWY_WHITE)));
         } else if (detail is SpeedRingAsIUnitComponent) {
           //detailSymbols.Add(
           //    new KeyValuePair<int, ExtrudedSymbolDescription>(
@@ -454,11 +439,11 @@ namespace AthPlayer {
           //            new SymbolDescription(
           //                "4",
           //                  50,
-          //                new UnityEngine.Color(1, 1, 1, 1.5f),
+          //                Vector4Animation.GLOWY_WHITE,
           //                0,
           //                OutlineMode.WithBackOutline,
-          //          new UnityEngine.Color(0, 0, 0)),
-          //            true, new UnityEngine.Color(1, 1, 1, 1.5f))));
+          //          Vector4Animation.Color(0, 0, 0)),
+          //            true, Vector4Animation.GLOWY_WHITE)));
         } else if (detail is ArmorAsIUnitComponent) {
           //detailSymbols.Add(
           //    new KeyValuePair<int, ExtrudedSymbolDescription>(
@@ -468,12 +453,12 @@ namespace AthPlayer {
           //            new SymbolDescription(
           //                "zero",
           //                  50,
-          //                new UnityEngine.Color(1, 1, 1, 1.5f),
+          //                Vector4Animation.GLOWY_WHITE,
           //                0,
           //                OutlineMode.WithBackOutline,
-          //                new UnityEngine.Color(0, 0, 0)),
+          //                Vector4Animation.Color(0, 0, 0)),
           //            true,
-          //            new UnityEngine.Color(1, 1, 1, 1.5f))));
+          //            Vector4Animation.GLOWY_WHITE)));
         } else if (detail is SlowRodAsIUnitComponent) {
         } else if (detail is BlastRodAsIUnitComponent) {
           //detailSymbols.Add(
@@ -484,12 +469,12 @@ namespace AthPlayer {
           //            new SymbolDescription(
           //                "w",
           //                  50,
-          //                new UnityEngine.Color(1, 1, 1, 1.5f),
+          //                Vector4Animation.GLOWY_WHITE,
           //                0,
           //                OutlineMode.WithBackOutline,
-          //                new UnityEngine.Color(0, 0, 0)),
+          //                Vector4Animation.Color(0, 0, 0)),
           //            true,
-          //            new UnityEngine.Color(1, 1, 1, 1.5f))));
+          //            Vector4Animation.GLOWY_WHITE)));
         } else if (detail is HealthPotionAsIUnitComponent) {
         } else if (detail is ManaPotionAsIUnitComponent) {
         } else {
@@ -509,14 +494,26 @@ namespace AthPlayer {
           "Chronomancer",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, new UnityEngine.Color(0.0f, 0.2f, 1f)),
+              new DominoDescription(true, Vector4Animation.Color(0.0f, 0.2f, 1f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "b",
-                            50, new UnityEngine.Color(1, 1, 1, 1.2f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  true, new UnityEngine.Color(0, 0, 0)),
+                      new Vector4Animation(
+                        new ConstantFloatAnimation(1),
+                        new MultiplyFloatAnimation(
+                          new AddFloatAnimation(
+                            new SineFloatAnimation(
+                              new MultiplyFloatAnimation(
+                                new TimeFloatAnimation(),
+                                new ConstantFloatAnimation(Mathf.PI / 1000 * .5f))), // the half is to slow it down a little
+                            new ConstantFloatAnimation(1)),
+                          new ConstantFloatAnimation(.5f)),
+                        new ConstantFloatAnimation(1),
+                        new ConstantFloatAnimation(1.2f)),
+                      0,
+                      OutlineMode.WithBackOutline),
+                  true, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -524,14 +521,13 @@ namespace AthPlayer {
           "avelisk",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(1.0f, 0.6f, 0.0f)),
+              new DominoDescription(false, Vector4Animation.Color(1.0f, 0.6f, 0.0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "x",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -539,14 +535,13 @@ namespace AthPlayer {
           "novafaire",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.25f, 0.25f, 1.0f)),
+              new DominoDescription(false, Vector4Animation.Color(0.25f, 0.25f, 1.0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "y",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -554,14 +549,13 @@ namespace AthPlayer {
           "draxling",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.2f, 0.4f, 0.5f)),
+              new DominoDescription(false, Vector4Animation.Color(0.2f, 0.4f, 0.5f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "percent",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -569,14 +563,13 @@ namespace AthPlayer {
           "lornix",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.0f, 0.6f, 0.0f)),
+              new DominoDescription(false, Vector4Animation.Color(0.0f, 0.6f, 0.0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "ampersand",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -584,14 +577,13 @@ namespace AthPlayer {
           "yoten",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, new UnityEngine.Color(0.33f, 0.33f, 0.33f)),
+              new DominoDescription(true, Vector4Animation.Color(0.33f, 0.33f, 0.33f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "z",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -599,14 +591,14 @@ namespace AthPlayer {
           "spiriad",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, new UnityEngine.Color(1.0f, 1.0f, 1.0f)),
+              new DominoDescription(true, Vector4Animation.Color(1.0f, 1.0f, 1.0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "parenleft",
-                            50, new UnityEngine.Color(0, 0, 0, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(1, 1, 1)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(0, 0, 0, 1f), 0, OutlineMode.WithBackOutline,
+                      Vector4Animation.Color(1, 1, 1)),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -614,14 +606,14 @@ namespace AthPlayer {
           "mordranth",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, new UnityEngine.Color(0.0f, 0f, 0f)),
+              new DominoDescription(true, Vector4Animation.Color(0.0f, 0f, 0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "three",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
-                      new UnityEngine.Color(1, 1, 1)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
+                      Vector4Animation.Color(1, 1, 1)),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -629,14 +621,14 @@ namespace AthPlayer {
           "Emberfolk",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.7f, 0.35f, 0f)),
+              new DominoDescription(false, Vector4Animation.Color(0.7f, 0.35f, 0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "r-8",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
-                      new UnityEngine.Color(1, 1, 1)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
+                      Vector4Animation.Color(1, 1, 1)),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -644,14 +636,13 @@ namespace AthPlayer {
           "Irkling",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.5f, 0.2f, 0)),
+              new DominoDescription(false, Vector4Animation.Color(0.5f, 0.2f, 0)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "ampersand",
-                            50, new UnityEngine.Color(1f,1f,1f, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1f,1f,1f, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -659,14 +650,13 @@ namespace AthPlayer {
           "Baug",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.3f, 0.3f, 0.3f)),
+              new DominoDescription(false, Vector4Animation.Color(0.3f, 0.3f, 0.3f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "f-8",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -674,14 +664,13 @@ namespace AthPlayer {
           "Spirient",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.0f, 0.0f, 0.0f)),
+              new DominoDescription(false, Vector4Animation.Color(0.0f, 0.0f, 0.0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "parenleft",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -689,14 +678,13 @@ namespace AthPlayer {
           "RavagianTrask",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0f, 0.5f, 0.0f)),
+              new DominoDescription(false, Vector4Animation.Color(0f, 0.5f, 0.0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "x",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -704,14 +692,13 @@ namespace AthPlayer {
           "MantisBombardier",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, new UnityEngine.Color(0.0f, 0.4f, 0.0f)),
+              new DominoDescription(true, Vector4Animation.Color(0.0f, 0.4f, 0.0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "three",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -719,14 +706,13 @@ namespace AthPlayer {
           "Chronolisk",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, new UnityEngine.Color(0.5f, 0.5f, 0.5f)),
+              new DominoDescription(false, Vector4Animation.Color(0.5f, 0.5f, 0.5f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "k",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -734,14 +720,13 @@ namespace AthPlayer {
           "MysteriousMan",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, new UnityEngine.Color(0.5f, 0.5f, 0.5f)),
+              new DominoDescription(true, Vector4Animation.Color(0.5f, 0.5f, 0.5f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "y",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -749,14 +734,13 @@ namespace AthPlayer {
           "LightningTrask",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, new UnityEngine.Color(0.7f, 0f, 0f)),
+              new DominoDescription(true, Vector4Animation.Color(0.7f, 0f, 0f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "x",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -764,14 +748,13 @@ namespace AthPlayer {
           "IrklingKing",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, new UnityEngine.Color(.7f, 0, .6f, 1f)),
+              new DominoDescription(true, Vector4Animation.Color(.7f, 0, .6f, 1f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "ampersand",
-                            50, new UnityEngine.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline,
-                      new UnityEngine.Color(0, 0, 0)),
-                  false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -779,14 +762,13 @@ namespace AthPlayer {
           "Ravashrike",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, new UnityEngine.Color(0.7f, 0, 0.7f)),
+              new DominoDescription(true, Vector4Animation.Color(0.7f, 0, 0.7f)),
               new ExtrudedSymbolDescription(
               RenderPriority.SYMBOL,
 
                 new SymbolDescription(
               "m",
-                            50, new UnityEngine.Color(1, 1, 1, 1.5f), 0, OutlineMode.WithBackOutline,
-                    new UnityEngine.Color(0, 0, 0)), false, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.GLOWY_WHITE, 0, OutlineMode.WithBackOutline), false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -796,14 +778,14 @@ namespace AthPlayer {
         Debug.LogError("Unknown class id: " + unit.classId);
         return new UnitDescription(
               unit.id,
-            new DominoDescription(true, new UnityEngine.Color(1f, 1f, 0)),
+            new DominoDescription(true, Vector4Animation.Color(1f, 1f, 0)),
             new ExtrudedSymbolDescription(
             RenderPriority.SYMBOL,
 
                 new SymbolDescription(
             "a",
-                            50, new UnityEngine.Color(0, 1f, 1f), 15, OutlineMode.WithOutline,
-                    new UnityEngine.Color(0, 0, 0)), true, new UnityEngine.Color(0, 0, 0)),
+                            Vector4Animation.Color(0, 1f, 1f), 15, OutlineMode.WithOutline,
+                    Vector4Animation.Color(0, 0, 0)), true, Vector4Animation.Color(0, 0, 0)),
             new List<KeyValuePair<int, ExtrudedSymbolDescription>>(),
             hpRatio,
               mpRatio);
@@ -834,13 +816,11 @@ namespace AthPlayer {
                   RenderPriority.RUNE,
                   new SymbolDescription(
                       "r-3",
-                              50,
-                      new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
+                      Vector4Animation.Color(1.0f, 1f, 1f, 1.5f),
                       0,
-                      OutlineMode.WithOutline,
-                      new UnityEngine.Color(0, 0, 0)),
+                      OutlineMode.WithOutline),
                   true,
-                  new UnityEngine.Color(0, 0, 1f, 1f)));
+                  Vector4Animation.Color(0, 0, 1f, 1f)));
         onAnimation?.Invoke(runeEndTime);
       } else if (effect.newValue is UnitDefyingEventAsIUnitEvent) {
         runeEndTime =
@@ -849,13 +829,12 @@ namespace AthPlayer {
                   RenderPriority.RUNE,
                   new SymbolDescription(
                       "q",
-                              50,
-                      new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
+                      Vector4Animation.Color(1.0f, 1f, 1f, 1.5f),
                       0,
                       OutlineMode.WithOutline,
-                      new UnityEngine.Color(0, 0, 0)),
+                      Vector4Animation.Color(0, 0, 0)),
                   true,
-                  new UnityEngine.Color(0, 0, 1f, 1f)));
+                  Vector4Animation.Color(0, 0, 1f, 1f)));
         onAnimation?.Invoke(runeEndTime);
       } else if (effect.newValue is UnitCounteringEventAsIUnitEvent) {
         runeEndTime =
@@ -864,13 +843,12 @@ namespace AthPlayer {
                   RenderPriority.RUNE,
                   new SymbolDescription(
                       "v",
-                              50,
-                      new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
+                      Vector4Animation.Color(1.0f, 1f, 1f, 1.5f),
                       0,
                       OutlineMode.WithOutline,
-                      new UnityEngine.Color(0, 0, 0)),
+                      Vector4Animation.Color(0, 0, 0)),
                   true,
-                  new UnityEngine.Color(0, 0, 1f, 1f)));
+                  Vector4Animation.Color(0, 0, 1f, 1f)));
         onAnimation?.Invoke(runeEndTime);
       } else if (effect.newValue is UnitFireEventAsIUnitEvent ufe) {
         if (unit.id == ufe.obj.attackerId) {
@@ -880,13 +858,12 @@ namespace AthPlayer {
                   RenderPriority.RUNE,
                   new SymbolDescription(
                       "w",
-                            50,
-                      new UnityEngine.Color(1.0f, 1f, 1f, 1.5f),
+                      Vector4Animation.Color(1.0f, 1f, 1f, 1.5f),
                       0,
                       OutlineMode.WithOutline,
-                      new UnityEngine.Color(0, 0, 0)),
+                      Vector4Animation.Color(0, 0, 0)),
                   true,
-                  new UnityEngine.Color(0, 0, 1f, 1f)));
+                  Vector4Animation.Color(0, 0, 1f, 1f)));
           onAnimation?.Invoke(runeEndTime);
         } else if (unit.id == ufe.obj.victimId) {
           runeEndTime =
@@ -895,13 +872,12 @@ namespace AthPlayer {
                   RenderPriority.RUNE,
                   new SymbolDescription(
                       "r-3",
-                            50,
-                      new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
+                      Vector4Animation.Color(1.0f, .6f, 0, 1.5f),
                       0,
                       OutlineMode.WithOutline,
-                      new UnityEngine.Color(0.8f, .4f, 0, 1.5f)),
+                      Vector4Animation.Color(0.8f, .4f, 0, 1.5f)),
                   true,
-                  new UnityEngine.Color(0, 0, 1f, 1f)));
+                  Vector4Animation.Color(0, 0, 1f, 1f)));
           onAnimation?.Invoke(runeEndTime);
         }
       } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent ufbe) {
@@ -911,13 +887,12 @@ namespace AthPlayer {
                   RenderPriority.RUNE,
                   new SymbolDescription(
                       "r-3",
-                            50,
-                      new UnityEngine.Color(1.0f, .6f, 0, 1.5f),
+                      Vector4Animation.Color(1.0f, .6f, 0, 1.5f),
                       0,
                       OutlineMode.WithOutline,
-                      new UnityEngine.Color(0.8f, .4f, 0, 1.5f)),
+                      Vector4Animation.Color(0.8f, .4f, 0, 1.5f)),
                   true,
-                  new UnityEngine.Color(0, 0, 1f, 1f)));
+                  Vector4Animation.Color(0, 0, 1f, 1f)));
         onAnimation?.Invoke(runeEndTime);
       } else {
 

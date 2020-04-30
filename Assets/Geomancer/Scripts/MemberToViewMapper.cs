@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domino;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +9,16 @@ namespace Geomancer {
   public class MemberToViewMapper {
     public interface IDescription { }
     public class TopColorDescriptionForIDescription : IDescription {
-      public readonly UnityEngine.Color color;
-      public TopColorDescriptionForIDescription(UnityEngine.Color color) { this.color = color; }
+      public readonly Vector4Animation color;
+      public TopColorDescriptionForIDescription(Vector4Animation color) { this.color = color; }
     }
     public class SideColorDescriptionForIDescription : IDescription {
-      public readonly UnityEngine.Color color;
-      public SideColorDescriptionForIDescription(UnityEngine.Color color) { this.color = color; }
+      public readonly Vector4Animation color;
+      public SideColorDescriptionForIDescription(Vector4Animation color) { this.color = color; }
     }
     public class OutlineColorDescriptionForIDescription : IDescription {
-      public readonly UnityEngine.Color color;
-      public OutlineColorDescriptionForIDescription(UnityEngine.Color color) { this.color = color; }
+      public readonly Vector4Animation color;
+      public OutlineColorDescriptionForIDescription(Vector4Animation color) { this.color = color; }
     }
     public class OverlayDescriptionForIDescription : IDescription {
       public readonly Domino.ExtrudedSymbolDescription symbol;
@@ -54,11 +55,11 @@ namespace Geomancer {
         Domino.UnitDescription defaultUnit,
         List<String> members) {
       bool specifiedTopColor = false;
-      UnityEngine.Color topColor = new UnityEngine.Color();
+      Vector4Animation topColor = Vector4Animation.BLACK;
       bool specifiedOutlineColor = false;
-      UnityEngine.Color outlineColor = new UnityEngine.Color();
+      Vector4Animation outlineColor = Vector4Animation.BLACK;
       bool specifiedSideColor = false;
-      UnityEngine.Color sideColor = new UnityEngine.Color();
+      Vector4Animation sideColor = Vector4Animation.BLACK;
       Domino.ExtrudedSymbolDescription maybeOverlay = null;
       Domino.ExtrudedSymbolDescription maybeFeature = null;
       List<Domino.ExtrudedSymbolDescription> items = new List<Domino.ExtrudedSymbolDescription>();
@@ -109,13 +110,12 @@ namespace Geomancer {
             Domino.RenderPriority.SYMBOL,
             new Domino.SymbolDescription(
               "e",
-              100,
-              new UnityEngine.Color(0, 1.0f, 1.0f),
+              Vector4Animation.Color(0, 1.0f, 1.0f),
               0,
               Domino.OutlineMode.WithBackOutline,
-              new UnityEngine.Color(0, 0, 0)),
+              Vector4Animation.Color(0, 1.0f, 0.5f)),
             true,
-            new UnityEngine.Color(0, 0, 0)));
+            Vector4Animation.Color(0.5f, 1.0f, 1.0f)));
         }
       }
 
@@ -126,7 +126,6 @@ namespace Geomancer {
               defaultTile.tileSymbolDescription.renderPriority,
               new Domino.SymbolDescription(
                   defaultTile.tileSymbolDescription.symbol.symbolId,
-                  defaultTile.tileSymbolDescription.symbol.qualityPercent,
                   specifiedTopColor ? topColor : defaultTile.tileSymbolDescription.symbol.frontColor,
                   defaultTile.tileRotationDegrees,
                   outlineMode,

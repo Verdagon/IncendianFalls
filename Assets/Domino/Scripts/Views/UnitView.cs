@@ -78,6 +78,8 @@ namespace Domino {
     private bool initialized = false;
     private bool instanceAlive = false;
 
+    UnitDescription description;
+
     // The main object that lives in world space. It has no rotation or scale,
     // just a translation to the center of the tile the unit is in.
     // public GameObject gameObject; (provided by unity)
@@ -139,6 +141,7 @@ namespace Domino {
       this.instantiator = instantiator;
       this.timer = timer;
       this.basePosition = basePosition;
+      this.description = unitDescription;
       transientRunesAndTimerIds = new List<KeyValuePair<SymbolView, int>>();
 
       gameObject.transform.position = basePosition;
@@ -175,7 +178,7 @@ namespace Domino {
 
       bool showHpMeter = unitDescription.hpRatio < .999f;
       if (showHpMeter) {
-        hpMeterView = instantiator.CreateMeterView(clock, unitDescription.hpRatio, Color.green, Color.red);
+        hpMeterView = instantiator.CreateMeterView(clock, unitDescription.hpRatio, Vector4Animation.GREEN, Vector4Animation.RED);
         hpMeterView.gameObject.transform.FromMatrix(MakeMeterViewTransform(0));
         hpMeterView.transform.SetParent(body.transform, false);
       }
@@ -183,7 +186,7 @@ namespace Domino {
       bool showMpMeter = unitDescription.mpRatio < .999f;
       if (showMpMeter) {
         int position = (showHpMeter ? 1 : 0);
-        mpMeterView = instantiator.CreateMeterView(clock, unitDescription.mpRatio, Color.blue, Color.white);
+        mpMeterView = instantiator.CreateMeterView(clock, unitDescription.mpRatio, Vector4Animation.BLUE, Vector4Animation.WHITE);
         mpMeterView.gameObject.transform.FromMatrix(MakeMeterViewTransform(position));
         mpMeterView.transform.SetParent(body.transform, false);
       }
@@ -197,6 +200,7 @@ namespace Domino {
     }
 
     public void SetDescription(UnitDescription newUnitDescription) {
+      this.description = newUnitDescription;
       dominoView.SetDescription(newUnitDescription.dominoDescription);
       faceSymbolView.SetDescription(newUnitDescription.faceSymbolDescription);
 
@@ -221,7 +225,7 @@ namespace Domino {
       bool showingHpMeterChanged = (shouldShowHpMeter != didShowHpMeter);
       if (shouldShowHpMeter) {
         if (hpMeterView == null) {
-          hpMeterView = instantiator.CreateMeterView(clock, newUnitDescription.hpRatio, Color.green, Color.red);
+          hpMeterView = instantiator.CreateMeterView(clock, newUnitDescription.hpRatio, Vector4Animation.GREEN, Vector4Animation.RED);
           hpMeterView.gameObject.transform.FromMatrix(MakeMeterViewTransform(0));
           hpMeterView.transform.SetParent(body.transform, false);
         } else {
@@ -240,7 +244,7 @@ namespace Domino {
       int mpMeterPosition = (shouldShowHpMeter ? 1 : 0);
       if (shouldShowMpMeter) {
         if (mpMeterView == null) {
-          mpMeterView = instantiator.CreateMeterView(clock, newUnitDescription.mpRatio, Color.blue, Color.white);
+          mpMeterView = instantiator.CreateMeterView(clock, newUnitDescription.mpRatio, Vector4Animation.BLUE, Vector4Animation.WHITE);
           mpMeterView.gameObject.transform.FromMatrix(MakeMeterViewTransform(mpMeterPosition));
           mpMeterView.transform.SetParent(body.transform, false);
         } else {
@@ -356,7 +360,7 @@ namespace Domino {
       var symbolView = instantiator.CreateSymbolView(clock, false, runeSymbolDescription);
       symbolView.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
       symbolView.transform.localScale = new Vector3(1, 1, .1f);
-      if (dominoView.large) {
+      if (description.dominoDescription.large) {
         symbolView.transform.localPosition = new Vector3(0, 1f, -.2f);
       } else {
         symbolView.transform.localPosition = new Vector3(0, 0.5f, -.2f);

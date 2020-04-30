@@ -77,17 +77,19 @@ namespace Domino {
       return Instantiate(smallDominoPrefab);
     }
 
-    public SymbolMeshes GetSymbolMeshes(string symbolId, int qualityPercent) {
+    public SymbolMeshes GetSymbolMeshes(SymbolId symbolId) {
+      string symbolName = symbolId.name;
+      int qualityPercent = symbolId.qualityPercent;
       if (meshes == null) {
         meshes = new Dictionary<string, Dictionary<int, SymbolMeshes>>();
       }
-      if (meshes.ContainsKey(symbolId)) {
-        if (meshes[symbolId].ContainsKey(qualityPercent)) {
-          return meshes[symbolId][qualityPercent];
+      if (meshes.ContainsKey(symbolName)) {
+        if (meshes[symbolName].ContainsKey(qualityPercent)) {
+          return meshes[symbolName][qualityPercent];
         }
       }
       
-      var frontResourceName = symbolId + ".front";
+      var frontResourceName = symbolName + ".front";
       var frontGameObject = Resources.Load<GameObject>(frontResourceName);
       if (frontGameObject == null) {
         throw new Exception("Couldn't find " + frontResourceName);
@@ -95,14 +97,14 @@ namespace Domino {
       var frontMesh = frontGameObject.GetComponentInChildren<MeshFilter>().sharedMesh;
 
 
-      var frontOutlineResourceName = symbolId + ".outline.front";
+      var frontOutlineResourceName = symbolName + ".outline.front";
       var frontOutlineGameObject = Resources.Load<GameObject>(frontOutlineResourceName);
       if (frontOutlineGameObject == null) {
         throw new Exception("Couldn't find " + frontOutlineResourceName);
       }
       var frontOutlineMesh = frontOutlineGameObject.GetComponentInChildren<MeshFilter>().sharedMesh;
 
-      var sidesResourceName = symbolId + ".sides";
+      var sidesResourceName = symbolName + ".sides";
       var sidesGameObject = Resources.Load<GameObject>(sidesResourceName);
       if (sidesGameObject == null) {
         throw new Exception("Couldn't find " + sidesResourceName);
@@ -110,10 +112,10 @@ namespace Domino {
       var sidesMesh = sidesGameObject.GetComponentInChildren<MeshFilter>().sharedMesh;
 
       var newSymbolMeshes = new SymbolMeshes(frontMesh, frontOutlineMesh, sidesMesh, null);
-      if (!meshes.ContainsKey(symbolId)) {
-        meshes.Add(symbolId, new Dictionary<int, SymbolMeshes>());
+      if (!meshes.ContainsKey(symbolName)) {
+        meshes.Add(symbolName, new Dictionary<int, SymbolMeshes>());
       }
-      meshes[symbolId].Add(qualityPercent, newSymbolMeshes);
+      meshes[symbolName].Add(qualityPercent, newSymbolMeshes);
       return newSymbolMeshes;
     }
 
@@ -151,7 +153,7 @@ namespace Domino {
       return tileView;
     }
 
-    public MeterView CreateMeterView(IClock clock, float ratio, UnityEngine.Color filledColor, UnityEngine.Color emptyColor) {
+    public MeterView CreateMeterView(IClock clock, float ratio, IVector4Animation filledColor, IVector4Animation emptyColor) {
       var meterGameObject = Instantiate(meterPrefab);
       var meterView = meterGameObject.GetComponent<MeterView>();
       meterView.Init(clock, this, filledColor, emptyColor, ratio);

@@ -13,36 +13,54 @@ namespace Domino {
   }
 
   public class SymbolDescription {
-    public readonly string symbolId;
-    public readonly int qualityPercent;
-    public readonly Color frontColor;
+    public readonly SymbolId symbolId;
+    public readonly IVector4Animation frontColor;
     public readonly float rotationDegrees;
     public readonly OutlineMode withOutline;
-    public readonly Color outlineColor;
+    public readonly IVector4Animation outlineColor;
 
     public SymbolDescription(
         string symbolId,
-        int qualityPercent,
-        Color frontColor,
+        IVector4Animation frontColor,
+        float rotationDegrees,
+        OutlineMode withOutline) : this(new SymbolId(symbolId, 100), frontColor, rotationDegrees, withOutline) { }
+
+    public SymbolDescription(
+        SymbolId symbolId,
+        IVector4Animation frontColor,
+        float rotationDegrees,
+        OutlineMode withOutline)
+      : this(symbolId, frontColor, rotationDegrees, withOutline, Vector4Animation.BLACK) { }
+
+    public SymbolDescription(
+        string symbolId,
+        IVector4Animation frontColor,
         float rotationDegrees,
         OutlineMode withOutline,
-        Color outlineColor) {
+        IVector4Animation outlineColor)
+      : this(new SymbolId(symbolId, 100), frontColor, rotationDegrees, withOutline, outlineColor) { }
+
+    public SymbolDescription(
+        SymbolId symbolId,
+        IVector4Animation frontColor,
+        float rotationDegrees,
+        OutlineMode withOutline,
+        IVector4Animation outlineColor) {
       this.symbolId = symbolId;
-      this.qualityPercent = qualityPercent;
       this.frontColor = frontColor;
       this.rotationDegrees = rotationDegrees;
       this.withOutline = withOutline;
       this.outlineColor = outlineColor;
+
+      Asserts.Assert(outlineColor != null);
     }
 
-    public SymbolDescription WithFrontColor(Color newFrontColor) {
+    public SymbolDescription WithFrontColor(IVector4Animation newFrontColor) {
       return new SymbolDescription(
         symbolId,
-        qualityPercent,
         newFrontColor,
         rotationDegrees,
-        withOutline,
-        outlineColor);
+        withOutline);
     }
   }
 
@@ -50,13 +68,13 @@ namespace Domino {
     public readonly RenderPriority renderPriority;
     public readonly SymbolDescription symbol;
     public readonly bool extruded;
-    public readonly Color sidesColor;
+    public readonly IVector4Animation sidesColor;
 
     public ExtrudedSymbolDescription(
         RenderPriority renderPriority,
         SymbolDescription symbol,
         bool extruded,
-        Color sidesColor) {
+        IVector4Animation sidesColor) {
       this.renderPriority = renderPriority;
       this.symbol = symbol;
       this.extruded = extruded;
@@ -66,7 +84,7 @@ namespace Domino {
     public ExtrudedSymbolDescription WithSymbol(SymbolDescription newSymbol) {
       return new ExtrudedSymbolDescription(renderPriority, newSymbol, extruded, sidesColor);
     }
-    public ExtrudedSymbolDescription WithSidesColor(Color newSidesColor) {
+    public ExtrudedSymbolDescription WithSidesColor(IVector4Animation newSidesColor) {
       return new ExtrudedSymbolDescription(renderPriority, symbol, extruded, newSidesColor);
     }
   }
@@ -91,14 +109,13 @@ namespace Domino {
     Instantiator instantiator;
 
     RenderPriority renderPriority;
-    string symbolId_;
-    int qualityPercent_;
-    bool extruded_;
-    Color frontColor_;
-    Color sidesColor_;
-    float rotationDegrees_;
-    OutlineMode withOutline_;
-    Color outlineColor_;
+    SymbolId symbolId;
+    bool extruded;
+    IVector4Animation frontColor;
+    IVector4Animation sidesColor;
+    float rotationDegrees;
+    OutlineMode withOutline;
+    IVector4Animation outlineColor;
 
     public void Init(
         IClock clock,
@@ -112,12 +129,11 @@ namespace Domino {
       frontObject.transform.SetParent(gameObject.transform, false);
       frontOutlineObject.transform.SetParent(gameObject.transform, false);
       sidesObject.transform.SetParent(gameObject.transform, false);
-      InnerSetSymbolId(symbolDescription.symbol.symbolId, symbolDescription.symbol.qualityPercent);
+      InnerSetSymbolId(symbolDescription.symbol.symbolId);
       InnerSetExtruded(symbolDescription.extruded);
-      InnerSetWithOutline(symbolDescription.symbol.withOutline);
+      InnerSetOutline(symbolDescription.symbol.withOutline, symbolDescription.symbol.outlineColor);
       InnerSetFrontColor(symbolDescription.symbol.frontColor);
       InnerSetSidesColor(symbolDescription.sidesColor);
-      InnerSetOutlineColor(symbolDescription.symbol.outlineColor);
       instanceAlive = true;
 
       frontObject.GetComponent<MeshCollider>().enabled = mousable;
@@ -130,7 +146,7 @@ namespace Domino {
       return new ExtrudedSymbolDescription(
           renderPriority,
           new SymbolDescription(
-              symbolId, qualityPercent, frontColor, rotationDegrees, withOutline, outlineColor),
+              symbolId, frontColor, rotationDegrees, withOutline),
           extruded, sidesColor);
     }
 
@@ -153,142 +169,57 @@ namespace Domino {
       withOutline = description.symbol.withOutline;
       frontColor = description.symbol.frontColor;
       sidesColor = description.sidesColor;
-      outlineColor = description.symbol.outlineColor;
       rotationDegrees = description.symbol.rotationDegrees;
     }
 
-    public int qualityPercent {
-      get { CheckInstanceAlive(); return qualityPercent_; }
-      set {
-        CheckInstanceAlive();
-        if (qualityPercent_ != value) {
-          InnerSetSymbolId(symbolId, value);
-        }
-      }
-    }
-
-    public string symbolId {
-      get { CheckInstanceAlive(); return symbolId_; }
-      set {
-        CheckInstanceAlive();
-        if (symbolId_ != value) {
-          InnerSetSymbolId(value, qualityPercent);
-        }
-      }
-    }
-
-    public bool extruded {
-      get { CheckInstanceAlive(); return extruded_; }
-      set {
-        CheckInstanceAlive();
-        if (extruded_ != value) {
-          InnerSetExtruded(value);
-        }
-      }
-    }
-
-    public OutlineMode withOutline {
-      get { CheckInstanceAlive(); return withOutline_; }
-      set {
-        CheckInstanceAlive();
-        if (withOutline_ != value) {
-          InnerSetWithOutline(value);
-        }
-      }
-    }
-
-    public Color frontColor {
-      get { CheckInstanceAlive(); return frontColor_; }
-      set {
-        CheckInstanceAlive();
-        if (!frontColor_.Equals(value)) {
-          InnerSetFrontColor(value);
-        }
-      }
-    }
-
-    public Color outlineColor {
-      get { CheckInstanceAlive(); return outlineColor_; }
-      set {
-        CheckInstanceAlive();
-        if (!outlineColor_.Equals(value)) {
-          InnerSetOutlineColor(value);
-        }
-      }
-    }
-
-    public Color sidesColor {
-      get { CheckInstanceAlive(); return sidesColor_; }
-      set {
-        CheckInstanceAlive();
-        if (!sidesColor_.Equals(value)) {
-          InnerSetSidesColor(value);
-        }
-      }
-    }
-
-    public float rotationDegrees {
-      get { CheckInstanceAlive(); return rotationDegrees_; }
-      set {
-        CheckInstanceAlive();
-        if (rotationDegrees_ != value) {
-          InnerSetRotationDegrees(rotationDegrees_);
-        }
-      }
-    }
-
-    private void InnerSetSymbolId(string newSymbolId, int qualityPercent) {
-      SymbolMeshes meshes = instantiator.GetSymbolMeshes(newSymbolId, qualityPercent);
+    private void InnerSetSymbolId(SymbolId newSymbolId) {
+      SymbolMeshes meshes = instantiator.GetSymbolMeshes(newSymbolId);
       frontObject.GetComponent<MeshFilter>().mesh = meshes.front;
       frontObject.GetComponent<MeshCollider>().sharedMesh = meshes.front;
       frontOutlineObject.GetComponent<MeshFilter>().mesh = meshes.frontOutline;
       frontOutlineObject.GetComponent<MeshCollider>().sharedMesh = meshes.frontOutline;
       sidesObject.GetComponent<MeshFilter>().mesh = meshes.sides;
       sidesObject.GetComponent<MeshCollider>().sharedMesh = meshes.sides;
-      symbolId_ = newSymbolId;
-      InnerSetWithOutline(withOutline_);
-      InnerSetFrontColor(frontColor_);
-      InnerSetSidesColor(sidesColor_);
+      symbolId = newSymbolId;
+      //InnerSetOutline(withOutline, outlineColor);
+      //InnerSetFrontColor(frontColor);
+      //InnerSetSidesColor(sidesColor);
     }
 
     private void InnerSetExtruded(bool newExtruded) {
       sidesObject.SetActive(newExtruded);
-      extruded_ = newExtruded;
+      extruded = newExtruded;
     }
 
-    private void InnerSetWithOutline(OutlineMode newWithOutline) {
+    private void InnerSetOutline(OutlineMode newWithOutline, IVector4Animation newOutlineColor) {
       frontOutlineObject.SetActive(newWithOutline != OutlineMode.NoOutline);
       if (newWithOutline == OutlineMode.WithBackOutline) {
         frontOutlineObject.transform.localPosition = new Vector3(0, 0, -.01f);
         frontOutlineObject.transform.localScale = new Vector3(1, 1, .01f);
       }
-      withOutline_ = newWithOutline;
+      ColorChangerThing.MakeOrGetFrom(clock, frontOutlineObject).Set(newOutlineColor, renderPriority);
+      withOutline = newWithOutline;
+      outlineColor = newOutlineColor;
     }
 
-    private void InnerSetFrontColor(Color newColor) {
-      frontObject.GetComponent<ColorChanger>().SetColor(
-          newColor, renderPriority);
+    private void InnerSetFrontColor(IVector4Animation newColor) {
+      ColorChangerThing.MakeOrGetFrom(clock, frontObject).Set(newColor, renderPriority);
 
-      var blackWithNewOpacity = new Color(0, 0, 0, newColor.a);
-      frontOutlineObject.GetComponent<ColorChanger>().SetColor(
-          blackWithNewOpacity, renderPriority);
+      //var blackWithNewOpacity = new Color(0, 0, 0, newColor.a);
+      //frontOutlineObject.GetComponent<ColorChanger>().Set(
+      //    blackWithNewOpacity, renderPriority);
 
-      frontColor_ = newColor;
+      frontColor = newColor;
     }
 
-    private void InnerSetSidesColor(Color newColor) {
-      sidesObject.GetComponent<ColorChanger>().SetColor(newColor, renderPriority);
-      sidesColor_ = newColor;
-    }
-
-    private void InnerSetOutlineColor(Color newColor) {
-      frontOutlineObject.GetComponent<ColorChanger>().SetColor(newColor, renderPriority);
-      outlineColor_ = newColor;
+    private void InnerSetSidesColor(IVector4Animation newColor) {
+      ColorChangerThing.MakeOrGetFrom(clock, sidesObject).Set(newColor, renderPriority);
+      sidesColor = newColor;
     }
 
     private void InnerSetRotationDegrees(float newRotationDegrees) {
       transform.rotation = Quaternion.AngleAxis(rotationDegrees, Vector3.forward);
-      rotationDegrees_ = newRotationDegrees;
+      rotationDegrees = newRotationDegrees;
     }
 
     private static Vector3[] GetMinAndMax(Mesh mesh) {
@@ -347,63 +278,33 @@ namespace Domino {
     }
 
     public void FadeInThenOut(long inDurationMs, long outDurationMs) {
-      GetOrCreateFrontOpacityAnimator().opacityAnimation =
-          MakeFadeInThenOutAnimation(inDurationMs, outDurationMs);
-      GetOrCreateFrontOutlineOpacityAnimator().opacityAnimation =
-          MakeFadeInThenOutAnimation(inDurationMs, outDurationMs);
-      GetOrCreateSidesOpacityAnimator().opacityAnimation =
-          MakeFadeInThenOutAnimation(inDurationMs, outDurationMs);
-    }
-
-    private IFloatAnimation MakeFadeInThenOutAnimation(long inDurationMs, long outDurationMs) {
-      return new ClampFloatAnimation(
-          clock.GetTimeMs(), clock.GetTimeMs() + inDurationMs + outDurationMs,
-          new ThenFloatAnimation(
-              clock.GetTimeMs() + inDurationMs,
-              new LinearFloatAnimation(clock.GetTimeMs(), 0.0f, 1.0f / inDurationMs),
-              new LinearFloatAnimation(clock.GetTimeMs() + inDurationMs, 1.0f, -1.0f / outDurationMs)));
+      var frontAnimator = ColorChangerThing.MakeOrGetFrom(clock, frontObject);
+      frontAnimator.Set(
+        FadeAnimator.FadeInThenOut(frontAnimator.Get(), clock.GetTimeMs(), inDurationMs, outDurationMs),
+        renderPriority);
+      var frontOutlineAnimator = ColorChangerThing.MakeOrGetFrom(clock, frontOutlineObject);
+      frontOutlineAnimator.Set(
+        FadeAnimator.FadeInThenOut(frontOutlineAnimator.Get(), clock.GetTimeMs(), inDurationMs, outDurationMs),
+        renderPriority);
+      var sidesAnimator = ColorChangerThing.MakeOrGetFrom(clock, sidesObject);
+      sidesAnimator.Set(
+        FadeAnimator.FadeInThenOut(sidesAnimator.Get(), clock.GetTimeMs(), inDurationMs, outDurationMs),
+        renderPriority);
     }
 
     public void Fade(long durationMs) {
-      GetOrCreateFrontOpacityAnimator().opacityAnimation = CreateFadeAnimation(durationMs);
-      GetOrCreateFrontOutlineOpacityAnimator().opacityAnimation = CreateFadeAnimation(durationMs);
-      GetOrCreateSidesOpacityAnimator().opacityAnimation = CreateFadeAnimation(durationMs);
+      var frontAnimator = ColorChangerThing.MakeOrGetFrom(clock, frontObject);
+      frontAnimator.Set(
+        FadeAnimator.Fade(frontAnimator.Get(), clock.GetTimeMs(), durationMs),
+        renderPriority);
+      var frontOutlineAnimator = ColorChangerThing.MakeOrGetFrom(clock, frontOutlineObject);
+      frontOutlineAnimator.Set(
+        FadeAnimator.Fade(frontOutlineAnimator.Get(), clock.GetTimeMs(), durationMs),
+        renderPriority);
+      var sidesAnimator = ColorChangerThing.MakeOrGetFrom(clock, sidesObject);
+      sidesAnimator.Set(
+        FadeAnimator.Fade(sidesAnimator.Get(), clock.GetTimeMs(), durationMs),
+        renderPriority);
     }
-
-    private IFloatAnimation CreateFadeAnimation(long durationMs) {
-      return new ClampFloatAnimation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
-          new LinearFloatAnimation(clock.GetTimeMs(), 1.0f, -1.0f / durationMs));
-    }
-
-    private OpacityAnimator GetOrCreateSidesOpacityAnimator() {
-      CheckInstanceAlive();
-      var animator = sidesObject.GetComponent<OpacityAnimator>();
-      if (animator == null) {
-        animator = sidesObject.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.Init(clock, renderPriority);
-      }
-      return animator;
-    }
-
-    private OpacityAnimator GetOrCreateFrontOpacityAnimator() {
-      CheckInstanceAlive();
-      var animator = frontObject.GetComponent<OpacityAnimator>();
-      if (animator == null) {
-        animator = frontObject.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.Init(clock, renderPriority);
-      }
-      return animator;
-    }
-
-    private OpacityAnimator GetOrCreateFrontOutlineOpacityAnimator() {
-      CheckInstanceAlive();
-      var animator = frontOutlineObject.GetComponent<OpacityAnimator>();
-      if (animator == null) {
-        animator = frontOutlineObject.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.Init(clock, renderPriority);
-      }
-      return animator;
-    }
-
   }
 }

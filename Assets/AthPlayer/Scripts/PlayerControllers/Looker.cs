@@ -68,77 +68,63 @@ namespace AthPlayer {
               new KeyValuePair<SymbolDescription, string>(
                     new SymbolDescription(
                         "0",
-                              50,
-                        new UnityEngine.Color(1f, 1f, 1.0f, 1.5f),
+                        Vector4Animation.Color(1f, 1f, 1.0f, 1.5f),
                         0,
-                        OutlineMode.WithBackOutline,
-                        new UnityEngine.Color(0, 0, 0)),
+                        OutlineMode.WithBackOutline),
               "Igneous Armor"));
           } else if (item is BlastRodAsIItem) {
             symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                     new SymbolDescription(
                         "w",
-                              50,
-                        new UnityEngine.Color(1f, .5f, 0f, 1.5f),
+                        Vector4Animation.Color(1f, .5f, 0f, 1.5f),
                         0,
-                        OutlineMode.WithBackOutline,
-                        new UnityEngine.Color(0, 0, 0)),
+                        OutlineMode.WithBackOutline),
               "Fire Rod"));
           } else if (item is SlowRodAsIItem) {
             symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                     new SymbolDescription(
                         "w",
-                              50,
-                        new UnityEngine.Color(0f, .5f, 1f, 1.5f),
+                        Vector4Animation.Color(0f, .5f, 1f, 1.5f),
                         0,
-                        OutlineMode.WithBackOutline,
-                        new UnityEngine.Color(0, 0, 0)),
+                        OutlineMode.WithBackOutline),
               "Mire Staff"));
           } else if (item is GlaiveAsIItem) {
             symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                     new SymbolDescription(
                         "s",
-                              50,
-                        new UnityEngine.Color(1f, 1f, 1f, 1.5f),
+                        Vector4Animation.Color(1f, 1f, 1f, 1.5f),
                         0,
-                        OutlineMode.WithBackOutline,
-                        new UnityEngine.Color(0, 0, 0)),
+                        OutlineMode.WithBackOutline),
               "Glaive"));
           } else if (item is SpeedRingAsIItem) {
             symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                     new SymbolDescription(
                         "4",
-                              50,
-                        new UnityEngine.Color(1f, 1f, 1f, 1.5f),
+                        Vector4Animation.Color(1f, 1f, 1f, 1.5f),
                         0,
-                        OutlineMode.WithBackOutline,
-                        new UnityEngine.Color(0, 0, 0)),
+                        OutlineMode.WithBackOutline),
               "Speed Ring"));
           } else if (item is HealthPotionAsIItem) {
             symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                     new SymbolDescription(
                         "+",
-                              50,
-                        new UnityEngine.Color(.8f, 0, .8f, 1.5f),
+                        Vector4Animation.Color(.8f, 0, .8f, 1.5f),
                         0,
-                        OutlineMode.WithBackOutline,
-                        new UnityEngine.Color(0, 0, 0)),
+                        OutlineMode.WithBackOutline),
               "Life Potion"));
           } else if (item is ManaPotionAsIItem) {
             symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                     new SymbolDescription(
                         ",",
-                              50,
-                        new UnityEngine.Color(.25f, .7f, 1.0f, 1.5f),
+                        Vector4Animation.Color(.25f, .7f, 1.0f, 1.5f),
                         0,
-                        OutlineMode.WithBackOutline,
-                        new UnityEngine.Color(0, 0, 0)),
+                        OutlineMode.WithBackOutline),
               "Mana Potion"));
           } else {
             Asserts.Assert(false, "Found item: " + item);
@@ -164,33 +150,30 @@ namespace AthPlayer {
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "q",
-                    50,
-                    new UnityEngine.Color(0, .5f, 1, 1.5f),
+                    Vector4Animation.Color(0, .5f, 1, 1.5f),
                     0,
                     OutlineMode.NoOutline,
-                    new UnityEngine.Color(0, 0, 0)),
+                    Vector4Animation.Color(0, 0, 0)),
                 "Defying"));
         } else if (detail is DefyingUCAsIUnitComponent Defying) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "q",
-                    50,
-                    new UnityEngine.Color(1, 1, 1, 1.5f),
+                    Vector4Animation.GLOWY_WHITE,
                     0,
                     OutlineMode.NoOutline,
-                    new UnityEngine.Color(0, 0, 0)),
+                    Vector4Animation.Color(0, 0, 0)),
                 "Defying"));
         } else if (detail is MiredUCAsIUnitComponent mired) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "f-3",
-                    50,
-                    new UnityEngine.Color(1, 1, 1, 1.5f),
+                    Vector4Animation.GLOWY_WHITE,
                     0,
                     OutlineMode.NoOutline,
-                    new UnityEngine.Color(0, 0, 0)),
+                    Vector4Animation.Color(0, 0, 0)),
                 "Mired"));
         } else if (detail is WanderAICapabilityUCAsIUnitComponent) {
         } else if (detail is KamikazeAICapabilityUCAsIUnitComponent) {
@@ -202,11 +185,10 @@ namespace AthPlayer {
                 new KeyValuePair<SymbolDescription, string>(
                     new SymbolDescription(
                         "n",
-                    50,
-                        new UnityEngine.Color(1, 1, 1, 1.5f),
+                        Vector4Animation.GLOWY_WHITE,
                         0,
                         OutlineMode.NoOutline,
-                        new UnityEngine.Color(0, 0, 0)),
+                        Vector4Animation.Color(0, 0, 0)),
                     "Biding"));
           }
         } else if (detail is HealthPotionAsIUnitComponent) {
@@ -223,55 +205,50 @@ namespace AthPlayer {
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "w",
-                    50,
-                    new UnityEngine.Color(0, .5f, 1, 1.5f),
+                    Vector4Animation.Color(0, .5f, 1, 1.5f),
                     0,
                     OutlineMode.NoOutline,
-                    new UnityEngine.Color(0, 0, 0)),
+                    Vector4Animation.Color(0, 0, 0)),
                 "Mire Staff"));
         } else if (detail is BlastRodAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "w",
-                    50,
-                    new UnityEngine.Color(1, .5f, 0, 1.5f),
+                    Vector4Animation.Color(1, .5f, 0, 1.5f),
                     0,
                     OutlineMode.NoOutline,
-                    new UnityEngine.Color(0, 0, 0)),
+                    Vector4Animation.Color(0, 0, 0)),
                 "Fire Rod"));
         } else if (detail is ArmorAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "0",
-                    50,
-                    new UnityEngine.Color(1, 1, 1, 1.5f),
+                    Vector4Animation.GLOWY_WHITE,
                     0,
                     OutlineMode.NoOutline,
-                    new UnityEngine.Color(0, 0, 0)),
+                    Vector4Animation.Color(0, 0, 0)),
                 "Igneous Armor"));
         } else if (detail is GlaiveAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "s",
-                    50,
-                    new UnityEngine.Color(1, 1, 1, 1.5f),
+                    Vector4Animation.GLOWY_WHITE,
                     0,
                     OutlineMode.NoOutline,
-                    new UnityEngine.Color(0, 0, 0)),
+                    Vector4Animation.Color(0, 0, 0)),
                 "Obsidian Sword"));
         } else if (detail is SpeedRingAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
                     "4",
-                    50,
-                    new UnityEngine.Color(1, 1, 1, 1.5f),
+                    Vector4Animation.GLOWY_WHITE,
                     0,
                     OutlineMode.NoOutline,
-                    new UnityEngine.Color(0, 0, 0)),
+                    Vector4Animation.Color(0, 0, 0)),
                 "Ring of Speed"));
         } else if (detail is TemporaryCloneAICapabilityUCAsIUnitComponent) {
         } else if (detail is TutorialDefyCounterUCAsIUnitComponent) {
@@ -281,33 +258,27 @@ namespace AthPlayer {
               new KeyValuePair<SymbolDescription, string>(
                   new SymbolDescription(
                       "r-3",
-                    50,
-                      new UnityEngine.Color(1, 1, 1, 1.5f),
+                      Vector4Animation.GLOWY_WHITE,
                       0,
-                      OutlineMode.NoOutline,
-                      new UnityEngine.Color(0, 0, 0)),
+                      OutlineMode.NoOutline),
                   "Lightning Charged"));
         } else if (detail is TimeCloneAICapabilityUCAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                   new SymbolDescription(
                       "k",
-                    50,
-                      new UnityEngine.Color(1, 1, 1, 1.5f),
+                      Vector4Animation.GLOWY_WHITE,
                       0,
-                      OutlineMode.NoOutline,
-                      new UnityEngine.Color(0, 0, 0)),
+                      OutlineMode.NoOutline),
                   "Previous Incarnation"));
         } else if (detail is DoomedUCAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                   new SymbolDescription(
                       "k",
-                    50,
-                      new UnityEngine.Color(1, 1, 1, 1.5f),
+                      Vector4Animation.GLOWY_WHITE,
                       0,
-                      OutlineMode.NoOutline,
-                      new UnityEngine.Color(0, 0, 0)),
+                      OutlineMode.NoOutline),
                   "Previous Incarnation"));
         } else {
           Debug.LogError("Unknown detail type: " + detail);

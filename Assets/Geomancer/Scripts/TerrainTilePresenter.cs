@@ -142,13 +142,12 @@ namespace Geomancer {
                 RenderPriority.TILE,
                 new SymbolDescription(
                     symbolName,
-                    100,
-                    new Color(1, 0, 1),
+                    Vector4Animation.Color(1, 0, 1),
                     patternTile.rotateDegrees,
                     OutlineMode.WithOutline,
-                    new Color(0, 1.5f, 1.5f)),
+                    Vector4Animation.Color(0, 1.5f, 1.5f)),
                 true,
-                new Color(1, .5f, 0)),
+                Vector4Animation.Color(1, .5f, 0)),
               null,
               null,
               new SortedDictionary<int, ExtrudedSymbolDescription>());
@@ -156,13 +155,13 @@ namespace Geomancer {
       var defaultUnitDescription =
         new UnitDescription(
           null,
-          new DominoDescription(false, new Color(.5f, 0, .5f)),
+          new DominoDescription(false, Vector4Animation.Color(.5f, 0, .5f)),
           new ExtrudedSymbolDescription(
             RenderPriority.DOMINO,
             new SymbolDescription(
-              "a", 100, new Color(0, 1, 0), 45, OutlineMode.WithBackOutline, new Color(0, 0, 0)),
+              "a", Vector4Animation.Color(0, 1, 0), 45, OutlineMode.WithBackOutline),
             true,
-            new Color(0, 0, 0)),
+            Vector4Animation.Color(0, 0, 0)),
           new List<KeyValuePair<int, ExtrudedSymbolDescription>>(),
           1,
           1);
@@ -174,13 +173,28 @@ namespace Geomancer {
       var (tileDescription, unitDescription) =
         vivimap.Vivify(defaultTileDescription, defaultUnitDescription, members);
       if (highlighted || selected) {
-        Color frontColor;
+        IVector4Animation frontColor;
         if (selected && highlighted) {
-          frontColor = (tileDescription.tileSymbolDescription.symbol.frontColor * 5 + 3 * new Color(1, 1, 1, 1)) / 8;
+          frontColor =
+            new MultiplyVector4Animation(
+              new AddVector4Animation(
+                new MultiplyVector4Animation(tileDescription.tileSymbolDescription.symbol.frontColor, 5f),
+                new MultiplyVector4Animation(Vector4Animation.Color(1, 1, 1, 1), 3f)),
+              1 / 8f);
         } else if (selected) {
-          frontColor = (tileDescription.tileSymbolDescription.symbol.frontColor * 6 + 2 * new Color(1, 1, 1, 1)) / 8;
+          frontColor =
+            new MultiplyVector4Animation(
+              new AddVector4Animation(
+                new MultiplyVector4Animation(tileDescription.tileSymbolDescription.symbol.frontColor, 6f),
+                new MultiplyVector4Animation(Vector4Animation.Color(1, 1, 1, 1), 2f)),
+              1 / 8f);
         } else if (highlighted) {
-          frontColor = (tileDescription.tileSymbolDescription.symbol.frontColor * 7 + 1 * new Color(1, 1, 1, 1)) / 8;
+          frontColor =
+            new MultiplyVector4Animation(
+              new AddVector4Animation(
+                new MultiplyVector4Animation(tileDescription.tileSymbolDescription.symbol.frontColor, 7f),
+                new MultiplyVector4Animation(Vector4Animation.Color(1, 1, 1, 1), 1f)),
+              1 / 8f);
         } else {
           frontColor = tileDescription.tileSymbolDescription.symbol.frontColor;
         }

@@ -7,10 +7,10 @@ using UnityEngine;
 namespace Domino {
   public class DominoDescription {
     public readonly bool large;
-    public readonly Color color;
+    public readonly Vector4Animation color;
     public DominoDescription(
         bool large,
-        Color color) {
+        Vector4Animation color) {
       this.large = large;
       this.color = color;
     }
@@ -44,8 +44,8 @@ namespace Domino {
 
     Instantiator instantiator;
 
-    bool large_;
-    Color color_;
+    bool large;
+    IVector4Animation color;
 
     public void Init(
         IClock clock,
@@ -66,23 +66,6 @@ namespace Domino {
       color = newDominoDescription.color;
     }
 
-    public bool large {
-      get { return large_;  }
-      set {
-        if (large_ != value) {
-          InnerSetLarge(value);
-        }
-      }
-    }
-    public Color color {
-      get { return color_; }
-      set {
-        if (!color_.Equals(value)) {
-          InnerSetColor(value);
-        }
-      }
-    }
-
     private void InnerSetLarge(bool newLarge) {
       Destroy(innerObject);
       if (newLarge) {
@@ -90,13 +73,13 @@ namespace Domino {
       } else {
         innerObject = instantiator.CreateSmallDomino();
       }
-      large_ = newLarge;
-      InnerSetColor(color_);
+      large = newLarge;
+      //InnerSetColor(color);
     }
 
-    private void InnerSetColor(Color newColor) {
-      innerObject.GetComponent<ColorChanger>().SetColor(newColor, RenderPriority.DOMINO);
-      color_ = newColor;
+    private void InnerSetColor(IVector4Animation newColor) {
+      ColorChangerThing.MakeOrGetFrom(clock, innerObject).Set(newColor, RenderPriority.DOMINO);
+      color = newColor;
     }
 
     public void Start() {
@@ -106,18 +89,10 @@ namespace Domino {
     }
 
     public void Fade(long durationMs) {
-      GetOrCreateOpacityAnimator().opacityAnimation =
-          new ClampFloatAnimation(clock.GetTimeMs(), clock.GetTimeMs() + durationMs,
-              new LinearFloatAnimation(clock.GetTimeMs(), 1.0f, -1.0f / durationMs));
-    }
-
-    private OpacityAnimator GetOrCreateOpacityAnimator() {
-      var animator = innerObject.GetComponent<OpacityAnimator>();
-      if (animator == null) {
-        animator = innerObject.AddComponent<OpacityAnimator>() as OpacityAnimator;
-        animator.Init(clock, RenderPriority.DOMINO);
-      }
-      return animator;
+      var animator = ColorChangerThing.MakeOrGetFrom(clock, innerObject);
+      animator.Set(
+        FadeAnimator.Fade(animator.Get(), clock.GetTimeMs(), durationMs),
+        RenderPriority.DOMINO);
     }
   }
 }

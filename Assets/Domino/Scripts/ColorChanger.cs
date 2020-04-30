@@ -10,8 +10,35 @@ public class ColorChanger : MonoBehaviour {
   public Material opaqueMaterial;
   public Material transparentMaterial;
 
-  public Color GetColor() {
-    return lightColoredParts[0].GetComponent<MeshRenderer>().material.color;
+  private Color currentColor;
+  private RenderPriority renderPriority;
+
+  public (Color, RenderPriority) Get() {
+    return (currentColor, renderPriority);
+  }
+
+  public void Set(Color newCurrentColor, RenderPriority newRenderPriority) {
+    Debug.LogError("Start here, have a static cache of color+priority to material");
+
+    renderPriority = newRenderPriority;
+    currentColor = newCurrentColor;
+    Color lightColor = newCurrentColor;
+    Color darkColor = lightColor;
+    darkColor.r *= .8f;
+    darkColor.g *= .8f;
+    darkColor.b *= .8f;
+
+    Material lightMaterial = InstantiateMaterial(lightColor, newRenderPriority);
+    foreach (var part in lightColoredParts) {
+      part.GetComponent<MeshRenderer>().material = lightMaterial;
+      part.GetComponent<MeshRenderer>().enabled = lightColor.a > .001f;
+    }
+
+    Material darkMaterial = InstantiateMaterial(darkColor, newRenderPriority);
+    foreach (var part in darkColoredParts) {
+      part.GetComponent<MeshRenderer>().material = darkMaterial;
+      part.GetComponent<MeshRenderer>().enabled = darkColor.a > .001f;
+    }
   }
 
   private Material InstantiateMaterial(Color color, RenderPriority renderPriority) {
@@ -33,25 +60,6 @@ public class ColorChanger : MonoBehaviour {
       materialClone.color = color;
       //Debug.Log("Now color is " + materialClone.color.r + " " + materialClone.color.g + " " + materialClone.color.b);
       return materialClone;
-    }
-  }
-
-  public void SetColor(Color lightColor, RenderPriority renderPriority) {
-    Color darkColor = lightColor;
-    darkColor.r *= .8f;
-    darkColor.g *= .8f;
-    darkColor.b *= .8f;
-
-    Material lightMaterial = InstantiateMaterial(lightColor, renderPriority);
-    foreach (var part in lightColoredParts) {
-      part.GetComponent<MeshRenderer>().material = lightMaterial;
-      part.GetComponent<MeshRenderer>().enabled = lightColor.a > .001f;
-    }
-
-    Material darkMaterial = InstantiateMaterial(darkColor, renderPriority);
-    foreach (var part in darkColoredParts) {
-      part.GetComponent<MeshRenderer>().material = darkMaterial;
-      part.GetComponent<MeshRenderer>().enabled = darkColor.a > .001f;
     }
   }
 }

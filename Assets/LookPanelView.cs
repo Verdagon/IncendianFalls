@@ -76,7 +76,7 @@ namespace AthPlayer {
 
           var symbol = symbolAndLabel.Key;
           var label = symbolAndLabel.Value;
-          visibleOverlayPanelView.AddSymbol(0, x, contentYStart, 1f, 1, symbol.frontColor, Fonts.SYMBOLS_OVERLAY_FONT, symbol.symbolId, false);
+          visibleOverlayPanelView.AddSymbol(0, x, contentYStart, 1f, 1, symbol.frontColor.Get(long.MaxValue), Fonts.SYMBOLS_OVERLAY_FONT, symbol.symbolId.name, false);
           x += 2; // Symbol takes up a lot of space
 
           visibleOverlayPanelView.AddString(0, x, contentYStart, 20, new UnityEngine.Color(1, 1, 1, 1), Fonts.PROSE_OVERLAY_FONT, label);
