@@ -36,8 +36,8 @@ namespace Domino {
       this.clock = clock;
       this.instantiator = instantiator;
 
-      filledPart.GetComponent<ColorChangerThing>().Set(filledColor, RenderPriority.METER);
-      emptyPart.GetComponent<ColorChangerThing>().Set(emptyColor, RenderPriority.METER);
+      filledPart.GetComponent<ColorAnimator>().Set(filledColor, RenderPriority.METER);
+      emptyPart.GetComponent<ColorAnimator>().Set(emptyColor, RenderPriority.METER);
       InnerSetRatio(ratio);
 
       initialized = true;
@@ -86,11 +86,11 @@ namespace Domino {
     }
 
     public void Fade(long durationMs) {
-      var filledPartAnimator = ColorChangerThing.MakeOrGetFrom(clock, filledPart);
+      var filledPartAnimator = ColorAnimator.MakeOrGetFrom(clock, filledPart);
       filledPartAnimator.Set(
           FadeAnimator.Fade(filledPartAnimator.Get(), clock.GetTimeMs(), durationMs),
           RenderPriority.SYMBOL);
-      var emptyPartAnimator = ColorChangerThing.MakeOrGetFrom(clock, emptyPart);
+      var emptyPartAnimator = ColorAnimator.MakeOrGetFrom(clock, emptyPart);
       emptyPartAnimator.Set(
           FadeAnimator.Fade(emptyPartAnimator.Get(), clock.GetTimeMs(), durationMs),
           RenderPriority.SYMBOL);

@@ -128,8 +128,8 @@
     <Compile Include="Assets\Domino\Avatar\Raving.cs" />
     <Compile Include="Assets\Domino\Scripts\CameraAnimator.cs" />
     <Compile Include="Assets\Domino\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Domino\Scripts\ColorAnimator.cs" />
     <Compile Include="Assets\Domino\Scripts\ColorChanger.cs" />
-    <Compile Include="Assets\Domino\Scripts\ColorChangerThing.cs" />
     <Compile Include="Assets\Domino\Scripts\ExecutionStaller.cs" />
     <Compile Include="Assets\Domino\Scripts\FollowingCameraController.cs" />
     <Compile Include="Assets\Domino\Scripts\Instantiator.cs" />

@@ -197,13 +197,13 @@ namespace Domino {
         frontOutlineObject.transform.localPosition = new Vector3(0, 0, -.01f);
         frontOutlineObject.transform.localScale = new Vector3(1, 1, .01f);
       }
-      ColorChangerThing.MakeOrGetFrom(clock, frontOutlineObject).Set(newOutlineColor, renderPriority);
+      ColorAnimator.MakeOrGetFrom(clock, frontOutlineObject).Set(newOutlineColor, renderPriority);
       withOutline = newWithOutline;
       outlineColor = newOutlineColor;
     }
 
     private void InnerSetFrontColor(IVector4Animation newColor) {
-      ColorChangerThing.MakeOrGetFrom(clock, frontObject).Set(newColor, renderPriority);
+      ColorAnimator.MakeOrGetFrom(clock, frontObject).Set(newColor, renderPriority);
 
       //var blackWithNewOpacity = new Color(0, 0, 0, newColor.a);
       //frontOutlineObject.GetComponent<ColorChanger>().Set(
@@ -213,7 +213,7 @@ namespace Domino {
     }
 
     private void InnerSetSidesColor(IVector4Animation newColor) {
-      ColorChangerThing.MakeOrGetFrom(clock, sidesObject).Set(newColor, renderPriority);
+      ColorAnimator.MakeOrGetFrom(clock, sidesObject).Set(newColor, renderPriority);
       sidesColor = newColor;
     }
 
@@ -278,30 +278,30 @@ namespace Domino {
     }
 
     public void FadeInThenOut(long inDurationMs, long outDurationMs) {
-      var frontAnimator = ColorChangerThing.MakeOrGetFrom(clock, frontObject);
+      var frontAnimator = ColorAnimator.MakeOrGetFrom(clock, frontObject);
       frontAnimator.Set(
         FadeAnimator.FadeInThenOut(frontAnimator.Get(), clock.GetTimeMs(), inDurationMs, outDurationMs),
         renderPriority);
-      var frontOutlineAnimator = ColorChangerThing.MakeOrGetFrom(clock, frontOutlineObject);
+      var frontOutlineAnimator = ColorAnimator.MakeOrGetFrom(clock, frontOutlineObject);
       frontOutlineAnimator.Set(
         FadeAnimator.FadeInThenOut(frontOutlineAnimator.Get(), clock.GetTimeMs(), inDurationMs, outDurationMs),
         renderPriority);
-      var sidesAnimator = ColorChangerThing.MakeOrGetFrom(clock, sidesObject);
+      var sidesAnimator = ColorAnimator.MakeOrGetFrom(clock, sidesObject);
       sidesAnimator.Set(
         FadeAnimator.FadeInThenOut(sidesAnimator.Get(), clock.GetTimeMs(), inDurationMs, outDurationMs),
         renderPriority);
     }
 
     public void Fade(long durationMs) {
-      var frontAnimator = ColorChangerThing.MakeOrGetFrom(clock, frontObject);
+      var frontAnimator = ColorAnimator.MakeOrGetFrom(clock, frontObject);
       frontAnimator.Set(
         FadeAnimator.Fade(frontAnimator.Get(), clock.GetTimeMs(), durationMs),
         renderPriority);
-      var frontOutlineAnimator = ColorChangerThing.MakeOrGetFrom(clock, frontOutlineObject);
+      var frontOutlineAnimator = ColorAnimator.MakeOrGetFrom(clock, frontOutlineObject);
       frontOutlineAnimator.Set(
         FadeAnimator.Fade(frontOutlineAnimator.Get(), clock.GetTimeMs(), durationMs),
         renderPriority);
-      var sidesAnimator = ColorChangerThing.MakeOrGetFrom(clock, sidesObject);
+      var sidesAnimator = ColorAnimator.MakeOrGetFrom(clock, sidesObject);
       sidesAnimator.Set(
         FadeAnimator.Fade(sidesAnimator.Get(), clock.GetTimeMs(), durationMs),
         renderPriority);

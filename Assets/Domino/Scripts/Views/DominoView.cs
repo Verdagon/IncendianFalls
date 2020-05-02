@@ -78,7 +78,7 @@ namespace Domino {
     }
 
     private void InnerSetColor(IVector4Animation newColor) {
-      ColorChangerThing.MakeOrGetFrom(clock, innerObject).Set(newColor, RenderPriority.DOMINO);
+      ColorAnimator.MakeOrGetFrom(clock, innerObject).Set(newColor, RenderPriority.DOMINO);
       color = newColor;
     }
 
@@ -89,7 +89,7 @@ namespace Domino {
     }
 
     public void Fade(long durationMs) {
-      var animator = ColorChangerThing.MakeOrGetFrom(clock, innerObject);
+      var animator = ColorAnimator.MakeOrGetFrom(clock, innerObject);
       animator.Set(
         FadeAnimator.Fade(animator.Get(), clock.GetTimeMs(), durationMs),
         RenderPriority.DOMINO);

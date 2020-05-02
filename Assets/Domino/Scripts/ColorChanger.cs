@@ -10,6 +10,10 @@ public class ColorChanger : MonoBehaviour {
   public Material opaqueMaterial;
   public Material transparentMaterial;
 
+  private Material cachedGlowMaterial;
+  private Material cachedOpaqueMaterial;
+  private Material cachedTransparentMaterial;
+
   private Color currentColor;
   private RenderPriority renderPriority;
 
@@ -18,48 +22,58 @@ public class ColorChanger : MonoBehaviour {
   }
 
   public void Set(Color newCurrentColor, RenderPriority newRenderPriority) {
-    Debug.LogError("Start here, have a static cache of color+priority to material");
+    if (newCurrentColor == currentColor && newRenderPriority == renderPriority) {
+      return;
+    }
 
     renderPriority = newRenderPriority;
     currentColor = newCurrentColor;
-    Color lightColor = newCurrentColor;
-    Color darkColor = lightColor;
-    darkColor.r *= .8f;
-    darkColor.g *= .8f;
-    darkColor.b *= .8f;
 
-    Material lightMaterial = InstantiateMaterial(lightColor, newRenderPriority);
+    Color lightColor = newCurrentColor;
+    Color darkColor = new Color(currentColor.r * .8f, currentColor.g * .8f, currentColor.b * .8f, currentColor.a);
+
+    Material lightMaterial = GetOrInstantiateMaterial(lightColor, newRenderPriority);
     foreach (var part in lightColoredParts) {
-      part.GetComponent<MeshRenderer>().material = lightMaterial;
-      part.GetComponent<MeshRenderer>().enabled = lightColor.a > .001f;
+      var meshRenderer = part.GetComponent<MeshRenderer>();
+      meshRenderer.material = lightMaterial;
+      meshRenderer.enabled = lightColor.a > .001f;
     }
 
-    Material darkMaterial = InstantiateMaterial(darkColor, newRenderPriority);
-    foreach (var part in darkColoredParts) {
-      part.GetComponent<MeshRenderer>().material = darkMaterial;
-      part.GetComponent<MeshRenderer>().enabled = darkColor.a > .001f;
+    if (darkColoredParts.Length > 0) {
+      Material darkMaterial = GetOrInstantiateMaterial(darkColor, newRenderPriority);
+      foreach (var part in darkColoredParts) {
+        var meshRenderer = part.GetComponent<MeshRenderer>();
+        meshRenderer.material = darkMaterial;
+        meshRenderer.enabled = darkColor.a > .001f;
+      }
     }
   }
 
-  private Material InstantiateMaterial(Color color, RenderPriority renderPriority) {
+  private Material GetOrInstantiateMaterial(Color color, RenderPriority renderPriority) {
     if (color.a < .99f) {
-      Material materialClone = Instantiate(transparentMaterial);
-      materialClone.color = color;
-      materialClone.renderQueue =
+      if (cachedTransparentMaterial == null) {
+        cachedTransparentMaterial = Instantiate(transparentMaterial);
+      }
+      cachedTransparentMaterial.color = color;
+      cachedTransparentMaterial.renderQueue =
           (int)UnityEngine.Rendering.RenderQueue.Transparent +
           (int)renderPriority;
-      return materialClone;
+      return cachedTransparentMaterial;
     } else if (color.a > 1.01f) {
-      Material materialClone = Instantiate(glowMaterial);
-      materialClone.color = color;
-      materialClone.SetColor("_EmissionColor", color);
-      return materialClone;
+      if (cachedGlowMaterial == null) {
+        cachedGlowMaterial = Instantiate(transparentMaterial);
+      }
+      cachedGlowMaterial.color = color;
+      cachedGlowMaterial.SetColor("_EmissionColor", color);
+      return cachedGlowMaterial;
     } else {
-      Material materialClone = Instantiate(opaqueMaterial);
+      if (cachedOpaqueMaterial == null) {
+        cachedOpaqueMaterial = Instantiate(opaqueMaterial);
+      }
       //Debug.Log("Setting color to " + color.r + " " + color.g + " " + color.b);
-      materialClone.color = color;
+      cachedOpaqueMaterial.color = color;
       //Debug.Log("Now color is " + materialClone.color.r + " " + materialClone.color.g + " " + materialClone.color.b);
-      return materialClone;
+      return cachedOpaqueMaterial;
     }
   }
 }

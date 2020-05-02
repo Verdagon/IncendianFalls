@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using Domino;
 using UnityEngine;
 
-public class ColorChangerThing : MonoBehaviour {
+public class ColorAnimator : MonoBehaviour {
   private IClock clock;
 
   private IVector4Animation animation;
   private RenderPriority renderPriority;
 
-  public static ColorChangerThing MakeOrGetFrom(IClock clock, GameObject gameObject) {
-    var animator = gameObject.GetComponent<ColorChangerThing>() as ColorChangerThing;
+  public static ColorAnimator MakeOrGetFrom(IClock clock, GameObject gameObject) {
+    var animator = gameObject.GetComponent<ColorAnimator>() as ColorAnimator;
     if (animator == null) {
-      animator = gameObject.AddComponent<ColorChangerThing>() as ColorChangerThing;
+      animator = gameObject.AddComponent<ColorAnimator>() as ColorAnimator;
       animator.Init(clock);
     }
     return animator;
@@ -47,12 +47,12 @@ public class ColorChangerThing : MonoBehaviour {
   }
 
   private void UpdateColor() {
-Asserts.Assert(GetComponent<ColorChanger>() != null, "No colorchanger on this thing!");
+    Asserts.Assert(GetComponent<ColorChanger>() != null, "No colorchanger on this thing!");
     Asserts.Assert(animation != null, "No animation??");
     Asserts.Assert(clock != null, "No animation??");
     GetComponent<ColorChanger>().Set(animation.Get(clock.GetTimeMs()), renderPriority);
 
-    if (animation is ConstantVector4Animation) {
+    if (animation is ConstantVector4Animation || animation is IdentityVector4Animation) {
       Destroy(this);
     }
   }
