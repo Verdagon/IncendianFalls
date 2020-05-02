@@ -501,14 +501,7 @@ namespace AthPlayer {
                       "b",
                       new Vector4Animation(
                         new ConstantFloatAnimation(1),
-                        new MultiplyFloatAnimation(
-                          new AddFloatAnimation(
-                            new SineFloatAnimation(
-                              new MultiplyFloatAnimation(
-                                new TimeFloatAnimation(),
-                                new ConstantFloatAnimation(Mathf.PI / 1000 * .5f))), // the half is to slow it down a little
-                            new ConstantFloatAnimation(1)),
-                          new ConstantFloatAnimation(.5f)),
+                        SineFloatAnimation.Make(.5f), // the half is to slow it down a little
                         new ConstantFloatAnimation(1),
                         new ConstantFloatAnimation(1.2f)),
                       0,

@@ -34,7 +34,7 @@ namespace Domino {
       screenGW = (int)(parentWidth / symbolWidth);
       screenGH = (int)(parentHeight / symbolHeight);
 
-      Debug.LogError("parent w " + parentWidth + " h " + parentHeight + " gw " + screenGW + " gh " + screenGH);
+      //Debug.LogError("parent w " + parentWidth + " h " + parentHeight + " gw " + screenGW + " gh " + screenGH);
 
       float gridUnityWidth = screenGW * symbolWidth;
       float gridUnityHeight = screenGH * symbolHeight;

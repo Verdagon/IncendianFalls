@@ -109,6 +109,12 @@ namespace Domino {
 
     Instantiator instantiator;
 
+    TileDescription tileDescription;
+
+    // We have timers active to destroy these when theyre done, but we might
+    // also destroy them if we need to Destruct fast.
+    private List<KeyValuePair<SymbolView, int>> transientPrismSymbolsAndTimerIds;
+
     public void Init(
       IClock clock,
       ITimer timer,
@@ -119,12 +125,16 @@ namespace Domino {
       this.timer = timer;
       this.instantiator = instantiator;
 
+      transientPrismSymbolsAndTimerIds = new List<KeyValuePair<SymbolView, int>>();
+
       gameObject.transform.localPosition = basePosition;
 
       initialized = true;
     }
 
     public void SetDescription(TileDescription newTileDescription) {
+      tileDescription = newTileDescription;
+
       foreach (var tileSymbolView in tileSymbolViews) {
         tileSymbolView.Destruct();
       }
@@ -150,26 +160,34 @@ namespace Domino {
 
     public void DestroyTile() {
       initialized = false;
+
+      foreach (var transientRuneAndTimerId in transientPrismSymbolsAndTimerIds) {
+        var rune = transientRuneAndTimerId.Key;
+        var timerId = transientRuneAndTimerId.Value;
+        timer.CancelTimer(timerId);
+        rune.Destruct();
+      }
+
       Destroy(this.gameObject);
+    }
+
+    private void SetTileOrPrismTransform(SymbolView tileSymbolView, int elevationAtTop, int height) {
+      // No idea why we need the -90 or the - before the rotation. It has to do with
+      // unity's infuriating mishandling of .obj file imports.
+      tileSymbolView.gameObject.transform.localRotation =
+          Quaternion.Euler(new Vector3(-90, -tileDescription.tileRotationDegrees, 0));
+      tileSymbolView.gameObject.transform.localScale =
+          new Vector3(1, -1, tileDescription.elevationStepHeight * height);
+      tileSymbolView.gameObject.transform.localPosition =
+          new Vector3(0, tileDescription.elevationStepHeight * elevationAtTop);
     }
 
     private void SetStuff(TileDescription tileDescription) {
       for (int i = 0; i < tileDescription.depth; i++) {
         SymbolView tileSymbolView =
             instantiator.CreateSymbolView(clock, true, tileDescription.tileSymbolDescription);
-        //MatrixBuilder tileSymbolMatrixBuilder = new MatrixBuilder(Matrix4x4.identity);
-
-        // No idea why we need the -90 or the - before the rotation. It has to do with
-        // unity's infuriating mishandling of .obj file imports.
-        tileSymbolView.gameObject.transform.localRotation =
-            Quaternion.Euler(new Vector3(-90, -tileDescription.tileRotationDegrees, 0));
-        tileSymbolView.gameObject.transform.localScale =
-            new Vector3(1, -1, tileDescription.elevationStepHeight);
-        tileSymbolView.gameObject.transform.localPosition =
-            new Vector3(0, -tileDescription.elevationStepHeight * i);
-
+        SetTileOrPrismTransform(tileSymbolView, -i, 1);
         tileSymbolView.gameObject.transform.SetParent(transform, false);
-
         tileSymbolViews.Add(tileSymbolView);
       }
 
@@ -288,6 +306,71 @@ namespace Domino {
           symbolView.Destruct();
         }
       });
+    }
+
+    public void FadeInThenOut(long inDurationMs, long outDurationMs) {
+      List<SymbolView> allSymbolViews = new List<SymbolView>();
+      allSymbolViews.AddRange(tileSymbolViews);
+      allSymbolViews.Add(overlaySymbolView);
+      allSymbolViews.Add(featureSymbolView);
+      foreach (var thing in itemSymbolViewByItemId) {
+        allSymbolViews.Add(thing.Value);
+      }
+      foreach (var symbol in allSymbolViews) {
+        symbol.FadeInThenOut(inDurationMs, outDurationMs);
+      }
+    }
+
+    public long ShowPrism(
+      ExtrudedSymbolDescription prismDescription,
+      ExtrudedSymbolDescription prismOverlayDescription) {
+      var prismView =
+        instantiator.CreateSymbolView(
+          clock,
+          false,
+          prismDescription);
+      SetTileOrPrismTransform(prismView, 3, 3);
+      prismView.transform.SetParent(gameObject.transform, false);
+      prismView.FadeInThenOut(100, 400);
+      ScheduleSymbolViewDestruction(prismView);
+
+      var prismOverlayView =
+        instantiator.CreateSymbolView(
+          clock,
+          false,
+          prismOverlayDescription);
+
+      float overlayThickness = .35f * tileDescription.elevationStepHeight;
+
+      // No idea why we need the -90 or the - before the rotation. It has to do with
+      // unity's infuriating mishandling of .obj file imports.
+      prismOverlayView.gameObject.transform.localRotation =
+          Quaternion.Euler(new Vector3(-90, 0, 0));
+      prismOverlayView.gameObject.transform.localScale =
+          new Vector3(1 * .8f, -1 * .8f, overlayThickness);
+      prismOverlayView.gameObject.transform.localPosition =
+          new Vector3(0, tileDescription.elevationStepHeight * 3f + overlayThickness);
+
+      prismOverlayView.transform.SetParent(gameObject.transform, false);
+      prismOverlayView.FadeInThenOut(100, 400);
+      ScheduleSymbolViewDestruction(prismOverlayView);
+
+      return clock.GetTimeMs() + 500;
+    }
+
+    private void ScheduleSymbolViewDestruction(SymbolView symbolView) {
+      int prismOverlayTimerId =
+        timer.ScheduleTimer(1000, () => {
+          for (int i = 0; i < transientPrismSymbolsAndTimerIds.Count; i++) {
+            if (transientPrismSymbolsAndTimerIds[i].Key == symbolView) {
+              transientPrismSymbolsAndTimerIds.RemoveAt(i);
+              symbolView.Destruct();
+              return;
+            }
+          }
+          Asserts.Assert(false, "Couldnt find!");
+        });
+      transientPrismSymbolsAndTimerIds.Add(new KeyValuePair<SymbolView, int>(symbolView, prismOverlayTimerId));
     }
 
     public void Start() {

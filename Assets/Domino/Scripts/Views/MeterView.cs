@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Domino;
 using UnityEngine;
@@ -36,8 +35,8 @@ namespace Domino {
       this.clock = clock;
       this.instantiator = instantiator;
 
-      filledPart.GetComponent<ColorAnimator>().Set(filledColor, RenderPriority.METER);
-      emptyPart.GetComponent<ColorAnimator>().Set(emptyColor, RenderPriority.METER);
+      ColorAnimator.MakeOrGetFrom(clock, filledPart).Set(filledColor, RenderPriority.METER);
+      ColorAnimator.MakeOrGetFrom(clock, emptyPart).Set(emptyColor, RenderPriority.METER);
       InnerSetRatio(ratio);
 
       initialized = true;

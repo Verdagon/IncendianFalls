@@ -43,7 +43,8 @@ namespace AthPlayer {
 
     public void DestroyTerrainPresenter() {
       foreach (var entry in tilePresenters) {
-        entry.Value.DestroyTerrainTilePresenter();
+        var (_, tileView) = entry.Value.DestroyTerrainTilePresenter();
+        Asserts.Assert(tileView == null);
       }
       if (terrain.Exists()) {
         if (terrain.tiles.Exists()) {

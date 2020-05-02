@@ -16,4 +16,20 @@ public class SineFloatAnimation : IFloatAnimation {
   public IFloatAnimation Simplify(long timeMs) {
     return this;
   }
+
+  public static IFloatAnimation Make(float multiplyTimeInput = 1f, float min = 0, float max = 1) {
+    return
+      new AddFloatAnimation(
+        new MultiplyFloatAnimation(
+          new AddFloatAnimation(
+          new MultiplyFloatAnimation(
+            new SineFloatAnimation(
+              new MultiplyFloatAnimation(
+                new TimeFloatAnimation(),
+                new ConstantFloatAnimation(Mathf.PI / 1000 * multiplyTimeInput))),
+            new ConstantFloatAnimation(.5f)),
+          new ConstantFloatAnimation(.5f)),
+        new ConstantFloatAnimation(max - min)),
+      new ConstantFloatAnimation(min));
+  }
 }

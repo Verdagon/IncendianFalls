@@ -22,7 +22,10 @@ namespace AthPlayer {
       IITerrainTileComponentMutBunchObserver,
     ITerrainTileEffectObserver,
     ITerrainTileEffectVisitor {
+    public delegate void IOnAnimation(long endGameTimeMs);
+    public event IOnAnimation onAnimation;
 
+    IClock clock;
     EffectBroadcaster preBroadcaster;
     EffectBroadcaster postBroadcaster;
     Atharia.Model.Terrain terrain;
@@ -36,6 +39,9 @@ namespace AthPlayer {
 
     bool highlighted = false;
 
+    // We dont want two prisms to appear at the same time.
+    long prismEndTime;
+
     public TerrainTilePresenter(
         IClock clock,
         ITimer timer,
@@ -48,6 +54,7 @@ namespace AthPlayer {
       this.location = location;
       this.terrain = terrain;
       this.preBroadcaster = preBroadcaster;
+      this.clock = clock;
       this.postBroadcaster = postBroadcaster;
       this.terrainTile = terrainTile;
       this.instantiator = instantiator;
@@ -76,6 +83,29 @@ namespace AthPlayer {
       tileView.SetDescription(GetDescription());
     }
 
+    private string GetTerrainTileShapeSymbol(PatternTile patternTile) {
+      switch (terrain.pattern.name) {
+        case "square":
+          if (patternTile.shapeIndex == 0) {
+            return "six";
+          }
+          break;
+        case "pentagon9":
+          if (patternTile.shapeIndex == 0) {
+            return "i";
+          } else if (patternTile.shapeIndex == 1) {
+            return "h";
+          }
+          break;
+        case "hex":
+          if (patternTile.shapeIndex == 0) {
+            return "five";
+          }
+          break;
+      }
+      return "a";
+    }
+
     private TileDescription GetDescription() {
       int lowestNeighborElevation = int.MaxValue;
       foreach (var adjacentLocation in terrain.GetAdjacentExistingLocations(location, false)) {
@@ -95,26 +125,7 @@ namespace AthPlayer {
 
       var patternTile = terrain.pattern.patternTiles[location.indexInGroup];
 
-      string symbolName = "a";
-      switch (terrain.pattern.name) {
-        case "square":
-          if (patternTile.shapeIndex == 0) {
-            symbolName = "six";
-          }
-          break;
-        case "pentagon9":
-          if (patternTile.shapeIndex == 0) {
-            symbolName = "i";
-          } else if (patternTile.shapeIndex == 1) {
-            symbolName = "h";
-          }
-          break;
-        case "hex":
-          if (patternTile.shapeIndex == 0) {
-            symbolName = "five";
-          }
-          break;
-      }
+      string symbolName = GetTerrainTileShapeSymbol(patternTile);
 
       ExtrudedSymbolDescription tileSymbolDescription =
           new ExtrudedSymbolDescription(
@@ -163,14 +174,26 @@ namespace AthPlayer {
       return description;
     }
 
-    public void DestroyTerrainTilePresenter() {
+    public (long, TileView) DestroyTerrainTilePresenter() {
       if (terrainTile.Exists()) {
         terrainTile.RemoveObserver(postBroadcaster, this);
         componentsBroadcaster.RemoveObserver(this);
         componentsBroadcaster.Stop();
       }
 
-      tileView.DestroyTile();
+      long animationsEndTime =
+        //Math.Max(hopEndTime,
+        //  Math.Max(lungeEndTime,
+        //    Math.Max(runeEndTime,
+        //      dieEndTime)));
+        prismEndTime;
+      if (clock.GetTimeMs() >= animationsEndTime) {
+        tileView.DestroyTile();
+        tileView = null;
+      }
+
+      //instanceAlive = false;
+      return (animationsEndTime, tileView);
     }
 
     private static void DetermineTileAppearance(
@@ -215,8 +238,8 @@ namespace AthPlayer {
             sideColor = Vector4Animation.Color(.2f, .2f, .2f);
           }
         } else if (ttc is DirtTTCAsITerrainTileComponent) {
-          topColor = Vector4Animation.Color(.4f, .133f, 0);
-          sideColor = Vector4Animation.Color(.266f, .1f, 0);
+          topColor = Vector4Animation.Color(.4f, .133f, 0, .2f);
+          sideColor = Vector4Animation.Color(.266f, .1f, 0, .2f);
         } else if (ttc is MudTTCAsITerrainTileComponent) {
           topColor = Vector4Animation.Color(.35f, .11f, 0f);
           sideColor = Vector4Animation.Color(.23f, .08f, 0f);
@@ -558,18 +581,123 @@ namespace AthPlayer {
                 true,
                 Vector4Animation.Color(0, 0, 1f, 1f)));
       } else if (effect.newValue is UnitFireBombedEventAsITerrainTileEvent ufbe) {
-        tileView.ShowRune(
-            new ExtrudedSymbolDescription(
-                RenderPriority.RUNE,
-                new SymbolDescription(
-                    "r-3",
-                      Vector4Animation.Color(1.0f, .6f, 0, 1.5f),
-                    0,
-                    OutlineMode.WithOutline,
-                    Vector4Animation.Color(0, 0, 0)),
-                true,
-                Vector4Animation.Color(0, 0, 1f, 1f)));
+        //tileView.ShowRune(
+        //    new ExtrudedSymbolDescription(
+        //        RenderPriority.RUNE,
+        //        new SymbolDescription(
+        //            "r-3",
+        //              Vector4Animation.Color(1.0f, .6f, 0, 1.5f),
+        //            0,
+        //            OutlineMode.WithOutline,
+        //            Vector4Animation.Color(0, 0, 0)),
+        //        true,
+        //        Vector4Animation.Color(0, 0, 1f, 1f)));
+
+
+        var patternTile = terrain.pattern.patternTiles[location.indexInGroup];
+
+        prismEndTime =
+          tileView.ShowPrism(
+              new ExtrudedSymbolDescription(
+                  RenderPriority.RUNE,
+                  new SymbolDescription(
+                      GetTerrainTileShapeSymbol(patternTile),
+                      Vector4Animation.Color(1.0f, 0.3f, 0, 0.4f),
+                      0,
+                      OutlineMode.WithOutline,
+                      Vector4Animation.Color(0, 0, 0, 0.4f)),
+                  true,
+                  Vector4Animation.Color(1.0f, 0.3f, 0, 0.4f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.RUNE,
+                  new SymbolDescription(
+                      "r-3",
+                      Vector4Animation.Color(1.0f, .3f, 0, 0.5f),
+                      0,
+                      OutlineMode.NoOutline,
+                      Vector4Animation.Color(0, 0, 0)),
+                  true,
+                  Vector4Animation.Color(0, 0, 0, 0.5f)));
+        onAnimation?.Invoke(prismEndTime);
       }
+    }
+
+    // This class gets to preview an effect before it officially happens.
+    // Its main purpose is to stall the effect until this UnitPresenter is ready.
+    private class TileEffectStaller :
+        ITerrainTileEffectObserver,
+        ITerrainTileEffectVisitor,
+        IITerrainTileComponentMutBunchObserver,
+        IITerrainTileComponentMutBunchEffectVisitor,
+        IGameEffectObserver,
+        IGameEffectVisitor {
+
+      EffectBroadcaster stallBroadcaster;
+      Game game;
+      ITerrainTileComponentMutBunchBroadcaster componentsBroadcaster;
+      private TerrainTilePresenter terrainTilePresenter;
+      private IEffectStaller staller;
+
+      public TileEffectStaller(
+          EffectBroadcaster stallBroadcaster,
+          Game game,
+          TerrainTilePresenter terrainTilePresenter,
+          IEffectStaller staller) {
+        this.stallBroadcaster = stallBroadcaster;
+        this.game = game;
+        this.terrainTilePresenter = terrainTilePresenter;
+        this.staller = staller;
+
+        game.AddObserver(stallBroadcaster, this);
+
+        stallBroadcaster.AddTerrainTileObserver(terrainTilePresenter.terrainTile.id, this);
+
+        this.componentsBroadcaster = new ITerrainTileComponentMutBunchBroadcaster(stallBroadcaster, terrainTilePresenter.terrainTile.components);
+        componentsBroadcaster.AddObserver(this);
+      }
+
+      public void Destroy() {
+        componentsBroadcaster.RemoveObserver(this);
+        stallBroadcaster.RemoveTerrainTileObserver(terrainTilePresenter.terrainTile.id, this);
+        game.AddObserver(stallBroadcaster, this);
+      }
+
+      public void OnGameEffect(IGameEffect effect) { effect.visitIGameEffect(this); }
+      public void visitGameCreateEffect(GameCreateEffect effect) { }
+      public void visitGameDeleteEffect(GameDeleteEffect effect) { }
+      public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) { }
+      public void visitGameSetLevelEffect(GameSetLevelEffect effect) { }
+      public void visitGameSetTimeEffect(GameSetTimeEffect effect) { }
+      public void visitGameSetActingUnitEffect(GameSetActingUnitEffect effect) { }
+      public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect effect) { }
+      public void visitGameSetActionNumEffect(GameSetActionNumEffect effect) { }
+      public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) { }
+      public void visitGameSetHideInputEffect(GameSetHideInputEffect effect) { }
+      public void visitGameSetEvventEffect(GameSetEvventEffect effect) {
+        if (effect.newValue is WaitForEverythingEventAsIGameEvent) {
+          staller(terrainTilePresenter.prismEndTime, "prism");
+        }
+      }
+
+      public void visitTerrainTileCreateEffect(TerrainTileCreateEffect effect) { }
+      public void visitTerrainTileDeleteEffect(TerrainTileDeleteEffect effect) {
+        staller(terrainTilePresenter.prismEndTime, "prism");
+      }
+      public void visitTerrainTileSetEvventEffect(TerrainTileSetEvventEffect effect) {
+        if (effect.newValue is WaitForUnitEventAsIUnitEvent) {
+          staller(terrainTilePresenter.prismEndTime, "prism");
+        } else if (effect.newValue is UnitFireBombedEventAsITerrainTileEvent) {
+          staller(terrainTilePresenter.prismEndTime, "prism");
+        }
+      }
+      public void visitTerrainTileSetElevationEffect(TerrainTileSetElevationEffect effect) { }
+
+      public void OnTerrainTileEffect(ITerrainTileEffect effect) { effect.visitITerrainTileEffect(this); }
+      public void OnITerrainTileComponentMutBunchAdd(int id) { }
+      public void OnITerrainTileComponentMutBunchRemove(int id) { }
+
+      public void visitITerrainTileComponentMutBunchCreateEffect(ITerrainTileComponentMutBunchCreateEffect effect) { }
+      public void visitITerrainTileComponentMutBunchDeleteEffect(ITerrainTileComponentMutBunchDeleteEffect effect) { }
     }
   }
 }
