@@ -336,7 +336,7 @@ namespace Domino {
           new MultiplyFloatAnimation(
             new ConstantFloatAnimation(.05f),
             FloatAnimations.InThenOut(clock.GetTimeMs(), 100, 400, 1, 1, 0)));
-      var scaleAnimation = new Vector3Animation(new ConstantFloatAnimation(1), yScaleAnimation, new ConstantFloatAnimation(1));
+      var scaleAnimation = new Vector3Animation(new ConstantFloatAnimation(.9f), yScaleAnimation, new ConstantFloatAnimation(.9f));
       scaleAnimator.Set(scaleAnimation);
 
       var polygonView =

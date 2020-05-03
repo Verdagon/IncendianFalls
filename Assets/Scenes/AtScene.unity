@@ -174,6 +174,8 @@ MonoBehaviour:
     type: 3}
   emptyUiObject: {fileID: 7605059339150217124, guid: c84129227c5a1ff4c928d1927b478ed9,
     type: 3}
+  emptyGameObject: {fileID: 8117385056283421389, guid: df739a6a00ce7064fb636dbeb156afa9,
+    type: 3}
   symbolsFont: {fileID: 12800000, guid: 4a71f17ac0ae7469a8da0f8a668cbc10, type: 3}
   cascadiaFont: {fileID: 12800000, guid: 6bfb69841704238479add5dcac5c15b3, type: 3}
   proseFont: {fileID: 12800000, guid: 9351d59870c75be40a2875968e221ed7, type: 3}
