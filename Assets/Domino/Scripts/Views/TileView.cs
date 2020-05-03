@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using Atharia.Model;
 using UnityEngine;
 
 namespace Domino {
@@ -171,7 +169,7 @@ namespace Domino {
       Destroy(this.gameObject);
     }
 
-    private void SetTileOrPrismTransform(SymbolView tileSymbolView, int elevationAtTop, int height) {
+    private void SetTileOrPrismTransform(SymbolView tileSymbolView, int elevation, int height) {
       // No idea why we need the -90 or the - before the rotation. It has to do with
       // unity's infuriating mishandling of .obj file imports.
       tileSymbolView.gameObject.transform.localRotation =
@@ -179,13 +177,13 @@ namespace Domino {
       tileSymbolView.gameObject.transform.localScale =
           new Vector3(1, -1, tileDescription.elevationStepHeight * height);
       tileSymbolView.gameObject.transform.localPosition =
-          new Vector3(0, tileDescription.elevationStepHeight * elevationAtTop);
+          new Vector3(0, tileDescription.elevationStepHeight * elevation);
     }
 
     private void SetStuff(TileDescription tileDescription) {
       for (int i = 0; i < tileDescription.depth; i++) {
         SymbolView tileSymbolView =
-            instantiator.CreateSymbolView(clock, true, tileDescription.tileSymbolDescription);
+            instantiator.CreateSymbolView(clock, true, true, tileDescription.tileSymbolDescription);
         SetTileOrPrismTransform(tileSymbolView, -i, 1);
         tileSymbolView.gameObject.transform.SetParent(transform, false);
         tileSymbolViews.Add(tileSymbolView);
@@ -193,7 +191,7 @@ namespace Domino {
 
       if (tileDescription.maybeOverlaySymbolDescription != null) {
         var description = tileDescription.maybeOverlaySymbolDescription;
-        overlaySymbolView = instantiator.CreateSymbolView(clock, false, description);
+        overlaySymbolView = instantiator.CreateSymbolView(clock, false, true, description);
 
         overlaySymbolView.gameObject.transform.localPosition =
             new Vector3(0, .01f, 0);
@@ -210,7 +208,7 @@ namespace Domino {
 
       if (tileDescription.maybeFeatureSymbolDescription != null) {
         var description = tileDescription.maybeFeatureSymbolDescription;
-        featureSymbolView = instantiator.CreateSymbolView(clock, false, description);
+        featureSymbolView = instantiator.CreateSymbolView(clock, false, true, description);
 
         featureSymbolView.gameObject.transform.localPosition =
             new Vector3(0, .28f, .15f);
@@ -225,7 +223,7 @@ namespace Domino {
       int itemIndex = 0;
       foreach (var entry in tileDescription.itemSymbolDescriptionByItemId) {
         var description = entry.Value;
-        var itemSymbolView = instantiator.CreateSymbolView(clock, false, description);
+        var itemSymbolView = instantiator.CreateSymbolView(clock, false, true, description);
 
         float inscribeCircleRadius = 0.75f; // chosen cuz it looks about right
                                             // https://math.stackexchange.com/questions/666491/three-circles-within-a-larger-circle
@@ -295,7 +293,7 @@ namespace Domino {
     }
 
     public void ShowRune(ExtrudedSymbolDescription runeSymbolDescription) {
-      var symbolView = instantiator.CreateSymbolView(clock, false, runeSymbolDescription);
+      var symbolView = instantiator.CreateSymbolView(clock, false, true, runeSymbolDescription);
       symbolView.transform.localRotation = Quaternion.Euler(new Vector3(-50, 180, 0));
       symbolView.transform.localScale = new Vector3(1, 1, .1f);
       symbolView.transform.localPosition = new Vector3(0, 0.5f, -.2f);
@@ -324,36 +322,54 @@ namespace Domino {
     public long ShowPrism(
       ExtrudedSymbolDescription prismDescription,
       ExtrudedSymbolDescription prismOverlayDescription) {
-      var prismView =
+
+      var prismGameObject = instantiator.CreateEmptyGameObject();
+      prismGameObject.transform.SetParent(gameObject.transform, false);
+      // We want to rotate the overall prism object because we want the
+      // overlay symbol to be aligned with the camera but want the polygon
+      // symbol to be aligned with the terrain tile.
+      // However, we do animate the scale of this object.
+      var scaleAnimator = ScaleAnimator.MakeOrGetFrom(clock, prismGameObject);
+      var yScaleAnimation =
+        new AddFloatAnimation(
+          new ConstantFloatAnimation(.95f),
+          new MultiplyFloatAnimation(
+            new ConstantFloatAnimation(.05f),
+            FloatAnimations.InThenOut(clock.GetTimeMs(), 100, 400, 1, 1, 0)));
+      var scaleAnimation = new Vector3Animation(new ConstantFloatAnimation(1), yScaleAnimation, new ConstantFloatAnimation(1));
+      scaleAnimator.Set(scaleAnimation);
+
+      var polygonView =
         instantiator.CreateSymbolView(
           clock,
           false,
+          false,
           prismDescription);
-      SetTileOrPrismTransform(prismView, 3, 3);
-      prismView.transform.SetParent(gameObject.transform, false);
-      prismView.FadeInThenOut(100, 400);
-      ScheduleSymbolViewDestruction(prismView);
+      SetTileOrPrismTransform(polygonView, 0, 3);
+      polygonView.transform.SetParent(prismGameObject.transform, false);
+      polygonView.FadeInThenOut(100, 400);
+      ScheduleSymbolViewDestruction(polygonView);
 
-      var prismOverlayView =
+      var overlayView =
         instantiator.CreateSymbolView(
           clock,
+          false,
           false,
           prismOverlayDescription);
 
       float overlayThickness = .35f * tileDescription.elevationStepHeight;
-
-      // No idea why we need the -90 or the - before the rotation. It has to do with
+      // No idea why we need the -90. It has to do with
       // unity's infuriating mishandling of .obj file imports.
-      prismOverlayView.gameObject.transform.localRotation =
+      overlayView.gameObject.transform.localRotation =
           Quaternion.Euler(new Vector3(-90, 0, 0));
-      prismOverlayView.gameObject.transform.localScale =
+      overlayView.gameObject.transform.localScale =
           new Vector3(1 * .8f, -1 * .8f, overlayThickness);
-      prismOverlayView.gameObject.transform.localPosition =
+      overlayView.gameObject.transform.localPosition =
           new Vector3(0, tileDescription.elevationStepHeight * 3f + overlayThickness);
 
-      prismOverlayView.transform.SetParent(gameObject.transform, false);
-      prismOverlayView.FadeInThenOut(100, 400);
-      ScheduleSymbolViewDestruction(prismOverlayView);
+      overlayView.transform.SetParent(prismGameObject.transform, false);
+      overlayView.FadeInThenOut(100, 400);
+      ScheduleSymbolViewDestruction(overlayView);
 
       return clock.GetTimeMs() + 500;
     }

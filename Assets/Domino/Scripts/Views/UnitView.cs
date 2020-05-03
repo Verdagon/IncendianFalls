@@ -166,7 +166,7 @@ namespace Domino {
       dominoView = instantiator.CreateDominoView(clock, unitDescription.dominoDescription);
       dominoView.gameObject.transform.SetParent(body.transform, false);
 
-      faceSymbolView = instantiator.CreateSymbolView(clock, false, unitDescription.faceSymbolDescription);
+      faceSymbolView = instantiator.CreateSymbolView(clock, false, true, unitDescription.faceSymbolDescription);
       faceSymbolView.gameObject.transform.FromMatrix(
           ScaleToAndCenterInTile(unitDescription.dominoDescription.large));
       faceSymbolView.gameObject.transform.SetParent(body.transform, false);
@@ -357,7 +357,7 @@ namespace Domino {
     }
 
     public long ShowRune(ExtrudedSymbolDescription runeSymbolDescription) {
-      var symbolView = instantiator.CreateSymbolView(clock, false, runeSymbolDescription);
+      var symbolView = instantiator.CreateSymbolView(clock, false, true, runeSymbolDescription);
       symbolView.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
       symbolView.transform.localScale = new Vector3(1, 1, .1f);
       if (description.dominoDescription.large) {

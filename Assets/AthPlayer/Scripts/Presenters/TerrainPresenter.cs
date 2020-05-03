@@ -44,7 +44,7 @@ namespace AthPlayer {
     public void DestroyTerrainPresenter() {
       foreach (var entry in tilePresenters) {
         var (_, tileView) = entry.Value.DestroyTerrainTilePresenter();
-        Asserts.Assert(tileView == null);
+        Asserts.Assert(tileView == null, "unimplemented"); // implement keeping them around, like UnitPresenter does
       }
       if (terrain.Exists()) {
         if (terrain.tiles.Exists()) {

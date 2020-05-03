@@ -93,6 +93,7 @@
     <Compile Include="Assets\Domino\Animations\Float\AddFloatAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\Float\ClampFloatAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\Float\ConstantFloatAnimation.cs" />
+    <Compile Include="Assets\Domino\Animations\Float\FloatAnimations.cs" />
     <Compile Include="Assets\Domino\Animations\Float\IFloatAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\Float\IdentityFloatAnimation.cs" />
     <Compile Include="Assets\Domino\Animations\Float\LinearFloatAnimation.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Assets\Domino\Animations\Vector3\IVector3Animation.cs" />
     <Compile Include="Assets\Domino\Animations\Vector3\IdentityVector3Animation.cs" />
     <Compile Include="Assets\Domino\Animations\Vector3\LinearVector3Animation.cs" />
+    <Compile Include="Assets\Domino\Animations\Vector3\Vector3Animation.cs" />
     <Compile Include="Assets\Domino\Animations\Vector4\AddVector4Animation.cs" />
     <Compile Include="Assets\Domino\Animations\Vector4\ConstantVector4Animation.cs" />
     <Compile Include="Assets\Domino\Animations\Vector4\FadeAnimator.cs" />
@@ -136,6 +138,7 @@
     <Compile Include="Assets\Domino\Scripts\MatrixBuilder.cs" />
     <Compile Include="Assets\Domino\Scripts\MatrixExtensions.cs" />
     <Compile Include="Assets\Domino\Scripts\RenderPriority.cs" />
+    <Compile Include="Assets\Domino\Scripts\ScaleAnimator.cs" />
     <Compile Include="Assets\Domino\Scripts\SoundPlayer.cs" />
     <Compile Include="Assets\Domino\Scripts\SymbolId.cs" />
     <Compile Include="Assets\Domino\Scripts\TransformExtensions.cs" />

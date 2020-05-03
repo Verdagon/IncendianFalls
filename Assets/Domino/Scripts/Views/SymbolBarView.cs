@@ -54,7 +54,7 @@ namespace Domino {
 
       int i = 0;
       foreach (var entry in newSymbolsIdsAndDescriptions) {
-        var desiredSymbolView = instantiator.CreateSymbolView(clock, false, entry.Value);
+        var desiredSymbolView = instantiator.CreateSymbolView(clock, false, true, entry.Value);
         desiredSymbolView.gameObject.transform.SetParent(gameObject.transform, false);
         symbolsIdsAndViews.Add(new KeyValuePair<int, SymbolView>(entry.Key, desiredSymbolView));
         SetSymbolViewPosition(entry.Key, desiredSymbolView, i++);

@@ -121,6 +121,9 @@ namespace Domino {
         IClock clock,
         Instantiator instantiator,
         bool mousable,
+        // If true, z=0 will be the front of the symbol.
+        // If false, z=0 will be the back of the symbol (only really makes sense for extruded symbols).
+        bool originFront,
         ExtrudedSymbolDescription symbolDescription) {
       this.clock = clock;
       this.instantiator = instantiator;
@@ -129,6 +132,13 @@ namespace Domino {
       frontObject.transform.SetParent(gameObject.transform, false);
       frontOutlineObject.transform.SetParent(gameObject.transform, false);
       sidesObject.transform.SetParent(gameObject.transform, false);
+
+      if (!originFront) {
+        frontObject.transform.localPosition = new Vector3(0, 0, 1);
+        frontOutlineObject.transform.localPosition = new Vector3(0, 0, 1);
+        sidesObject.transform.localPosition = new Vector3(0, 0, 1);
+      }
+
       InnerSetSymbolId(symbolDescription.symbol.symbolId);
       InnerSetExtruded(symbolDescription.extruded);
       InnerSetOutline(symbolDescription.symbol.withOutline, symbolDescription.symbol.outlineColor);

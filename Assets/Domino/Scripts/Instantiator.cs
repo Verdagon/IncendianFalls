@@ -28,6 +28,7 @@ namespace Domino {
     public GameObject detailPrefab;
 
     public GameObject emptyUiObject;
+    public GameObject emptyGameObject;
 
     public Font symbolsFont;
     public Font cascadiaFont;
@@ -55,6 +56,10 @@ namespace Domino {
 
     public GameObject CreateEmptyUiObject() {
       return Instantiate(emptyUiObject);
+    }
+
+    public GameObject CreateEmptyGameObject() {
+      return Instantiate(emptyGameObject);
     }
 
     public Font GetFont(string font) {
@@ -163,10 +168,13 @@ namespace Domino {
     public SymbolView CreateSymbolView(
       IClock clock,
         bool mousable,
+        // If true, z=0 will be the front of the symbol.
+        // If false, z=0 will be the back of the symbol (only really makes sense for extruded symbols).
+        bool originFront,
         ExtrudedSymbolDescription symbolDescription) {
       var symbolGameObject = Instantiate(glyphPrefab);
       var symbolView = symbolGameObject.GetComponent<SymbolView>();
-      symbolView.Init(clock, this, mousable, symbolDescription);
+      symbolView.Init(clock, this, mousable, originFront, symbolDescription);
       return symbolView;
     }
 

@@ -604,7 +604,7 @@ namespace AthPlayer {
                       GetTerrainTileShapeSymbol(patternTile),
                       Vector4Animation.Color(1.0f, 0.3f, 0, 0.4f),
                       0,
-                      OutlineMode.WithOutline,
+                      OutlineMode.NoOutline,
                       Vector4Animation.Color(0, 0, 0, 0.4f)),
                   true,
                   Vector4Animation.Color(1.0f, 0.3f, 0, 0.4f)),

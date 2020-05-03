@@ -30,12 +30,7 @@ namespace Domino {
       IFloatAnimation newAlphaAnimation =
           new MultiplyFloatAnimation(
               alphaAnimation,
-              new ClampFloatAnimation(
-                  startTimeMs, startTimeMs + inDurationMs + outDurationMs,
-                  new ThenFloatAnimation(
-                      startTimeMs + inDurationMs,
-                      new LinearFloatAnimation(startTimeMs, 0.0f, 1.0f / inDurationMs),
-                      new LinearFloatAnimation(startTimeMs + inDurationMs, 1.0f, -1.0f / outDurationMs))));
+              FloatAnimations.InThenOut(startTimeMs, inDurationMs, outDurationMs));
 
       return new Vector4Animation(redAnimation, greenAnimation, blueAnimation, newAlphaAnimation);
     }
