@@ -2,13 +2,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleDriveyThing", "ConsoleDriveyThing\ConsoleDriveyThing.csproj", "{39CE20EE-F751-4681-9E74-E8C277F49A80}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geomancy", "Geomancy\Geomancy.csproj", "{C0B10971-C47E-419A-B0B8-D553D05D53BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncendianFalls", "IncendianFalls\IncendianFalls.csproj", "{BB12DBF1-168F-408E-A320-74EA25EF6418}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atharia", "Atharia\Atharia.csproj", "{9AD2F7BB-00CE-4893-9338-89C143C0E035}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geomancer", "Geomancer\Geomancer.csproj", "{A756BA25-6DD2-48D6-841C-B378FF9C2699}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AthConsole", "AthConsole\AthConsole.csproj", "{3E9F4AB3-0915-4B09-8183-97821CF54045}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleDriver", "ConsoleDriver\ConsoleDriver.csproj", "{99E9C26F-0F1E-4B36-8177-1AE13A51305A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,22 +14,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{39CE20EE-F751-4681-9E74-E8C277F49A80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39CE20EE-F751-4681-9E74-E8C277F49A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39CE20EE-F751-4681-9E74-E8C277F49A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39CE20EE-F751-4681-9E74-E8C277F49A80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BB12DBF1-168F-408E-A320-74EA25EF6418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB12DBF1-168F-408E-A320-74EA25EF6418}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB12DBF1-168F-408E-A320-74EA25EF6418}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB12DBF1-168F-408E-A320-74EA25EF6418}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A756BA25-6DD2-48D6-841C-B378FF9C2699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A756BA25-6DD2-48D6-841C-B378FF9C2699}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A756BA25-6DD2-48D6-841C-B378FF9C2699}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A756BA25-6DD2-48D6-841C-B378FF9C2699}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E9F4AB3-0915-4B09-8183-97821CF54045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E9F4AB3-0915-4B09-8183-97821CF54045}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E9F4AB3-0915-4B09-8183-97821CF54045}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E9F4AB3-0915-4B09-8183-97821CF54045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0B10971-C47E-419A-B0B8-D553D05D53BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0B10971-C47E-419A-B0B8-D553D05D53BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0B10971-C47E-419A-B0B8-D553D05D53BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0B10971-C47E-419A-B0B8-D553D05D53BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AD2F7BB-00CE-4893-9338-89C143C0E035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AD2F7BB-00CE-4893-9338-89C143C0E035}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AD2F7BB-00CE-4893-9338-89C143C0E035}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AD2F7BB-00CE-4893-9338-89C143C0E035}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99E9C26F-0F1E-4B36-8177-1AE13A51305A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99E9C26F-0F1E-4B36-8177-1AE13A51305A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99E9C26F-0F1E-4B36-8177-1AE13A51305A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99E9C26F-0F1E-4B36-8177-1AE13A51305A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{C0B10971-C47E-419A-B0B8-D553D05D53BE}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Geomancy</RootNamespace>
+        <AssemblyName>Geomancy</AssemblyName>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="ModelExtensions\PatternExtensions.cs" />
+        <Compile Include="ModelExtensions\RandExtensions.cs" />
+        <Compile Include="ModelExtensions\TerrainExtensions.cs" />
+        <Compile Include="ModelExtensions\TerrainTileExtensions.cs" />
+        <Compile Include="ModelExtensions\Vec2Extensions.cs" />
+        <Compile Include="ModelExtensions\Vec3Extensions.cs" />
+        <Compile Include="Model\EffectApplier.cs" />
+        <Compile Include="Model\EffectBroadcaster.cs" />
+        <Compile Include="Model\ElevatedLocation.cs" />
+        <Compile Include="Model\ILevelEffect.cs" />
+        <Compile Include="Model\ILevelEffectObserver.cs" />
+        <Compile Include="Model\ILevelEffectVisitor.cs" />
+        <Compile Include="Model\IRandEffect.cs" />
+        <Compile Include="Model\IRandEffectObserver.cs" />
+        <Compile Include="Model\IRandEffectVisitor.cs" />
+        <Compile Include="Model\IStrMutListEffect.cs" />
+        <Compile Include="Model\IStrMutListEffectObserver.cs" />
+        <Compile Include="Model\IStrMutListEffectVisitor.cs" />
+        <Compile Include="Model\ITerrainEffect.cs" />
+        <Compile Include="Model\ITerrainEffectObserver.cs" />
+        <Compile Include="Model\ITerrainEffectVisitor.cs" />
+        <Compile Include="Model\ITerrainTileByLocationMutMapEffect.cs" />
+        <Compile Include="Model\ITerrainTileByLocationMutMapEffectObserver.cs" />
+        <Compile Include="Model\ITerrainTileByLocationMutMapEffectVisitor.cs" />
+        <Compile Include="Model\ITerrainTileEffect.cs" />
+        <Compile Include="Model\ITerrainTileEffectObserver.cs" />
+        <Compile Include="Model\ITerrainTileEffectVisitor.cs" />
+        <Compile Include="Model\Level.cs" />
+        <Compile Include="Model\LevelCreateEffect.cs" />
+        <Compile Include="Model\LevelDeleteEffect.cs" />
+        <Compile Include="Model\LevelIncarnation.cs" />
+        <Compile Include="Model\Location.cs" />
+        <Compile Include="Model\ParseSource.cs" />
+        <Compile Include="Model\Pattern.cs" />
+        <Compile Include="Model\PatternCornerAdjacency.cs" />
+        <Compile Include="Model\PatternCornerAdjacencyImmList.cs" />
+        <Compile Include="Model\PatternCornerAdjacencyImmListImmList.cs" />
+        <Compile Include="Model\PatternSideAdjacency.cs" />
+        <Compile Include="Model\PatternSideAdjacencyImmList.cs" />
+        <Compile Include="Model\PatternTile.cs" />
+        <Compile Include="Model\PatternTileImmList.cs" />
+        <Compile Include="Model\PrimitivesExtensions.cs" />
+        <Compile Include="Model\Rand.cs" />
+        <Compile Include="Model\RandCreateEffect.cs" />
+        <Compile Include="Model\RandDeleteEffect.cs" />
+        <Compile Include="Model\RandIncarnation.cs" />
+        <Compile Include="Model\RandSetRandEffect.cs" />
+        <Compile Include="Model\Root.cs" />
+        <Compile Include="Model\RootIncarnation.cs" />
+        <Compile Include="Model\StrMutList.cs" />
+        <Compile Include="Model\StrMutListAddEffect.cs" />
+        <Compile Include="Model\StrMutListCreateEffect.cs" />
+        <Compile Include="Model\StrMutListDeleteEffect.cs" />
+        <Compile Include="Model\StrMutListIncarnation.cs" />
+        <Compile Include="Model\StrMutListRemoveEffect.cs" />
+        <Compile Include="Model\Terrain.cs" />
+        <Compile Include="Model\TerrainCreateEffect.cs" />
+        <Compile Include="Model\TerrainDeleteEffect.cs" />
+        <Compile Include="Model\TerrainIncarnation.cs" />
+        <Compile Include="Model\TerrainTile.cs" />
+        <Compile Include="Model\TerrainTileByLocationMutMap.cs" />
+        <Compile Include="Model\TerrainTileByLocationMutMapAddEffect.cs" />
+        <Compile Include="Model\TerrainTileByLocationMutMapCreateEffect.cs" />
+        <Compile Include="Model\TerrainTileByLocationMutMapDeleteEffect.cs" />
+        <Compile Include="Model\TerrainTileByLocationMutMapIncarnation.cs" />
+        <Compile Include="Model\TerrainTileByLocationMutMapRemoveEffect.cs" />
+        <Compile Include="Model\TerrainTileCreateEffect.cs" />
+        <Compile Include="Model\TerrainTileDeleteEffect.cs" />
+        <Compile Include="Model\TerrainTileIncarnation.cs" />
+        <Compile Include="Model\TerrainTileSetElevationEffect.cs" />
+        <Compile Include="Model\Vec2.cs" />
+        <Compile Include="Model\Vec2ImmList.cs" />
+        <Compile Include="Model\Vec2ImmListImmList.cs" />
+        <Compile Include="Model\Vec3.cs" />
+        <Compile Include="Patterns\HexPattern.cs" />
+        <Compile Include="Patterns\PentagonPattern9.cs" />
+        <Compile Include="Patterns\SquarePattern.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Utils\Asserts.cs" />
+        <Compile Include="Utils\ConsoleLoggers.cs" />
+        <Compile Include="Utils\DictionaryUtils.cs" />
+        <Compile Include="Utils\ListUtils.cs" />
+        <Compile Include="Utils\MathUtils.cs" />
+        <Compile Include="Utils\SetUtils.cs" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>

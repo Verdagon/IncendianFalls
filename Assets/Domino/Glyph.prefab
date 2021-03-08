@@ -45,7 +45,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1535881297293520679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000925774e38047e5a878c75150e2477, type: 3}
+  m_Script: {fileID: 11500000, guid: 8327cb845336b47beb016a80f46c4dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   frontObject: {fileID: 2764709691699560529}
@@ -63,7 +63,6 @@ GameObject:
   - component: {fileID: 676215734276536405}
   - component: {fileID: 2131022110638971410}
   - component: {fileID: 4137471184762416682}
-  - component: {fileID: 2855616703634574589}
   - component: {fileID: 1527069266069952204}
   m_Layer: 0
   m_Name: Front
@@ -108,10 +107,11 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f19be9067130443b397b2c0e43f92a5a, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -141,27 +141,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2764709691699560529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f49a0cb7c017466292187a0554dc5b8, type: 3}
+  m_Script: {fileID: 11500000, guid: c0d81e2ab571245e2a3419c2a2422aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lightColoredParts:
   - {fileID: 2764709691699560529}
   darkColoredParts: []
-  glowMaterial: {fileID: 2100000, guid: b4880b4e12ce24022803a97fa9f53e67, type: 2}
-  opaqueMaterial: {fileID: 2100000, guid: f19be9067130443b397b2c0e43f92a5a, type: 2}
-  transparentMaterial: {fileID: 2100000, guid: d3176f93acd7540f29b986b8bcd2f129, type: 2}
---- !u!114 &2855616703634574589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2764709691699560529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fa5c32b3f884d1fa2535292635164b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  glowMaterial: {fileID: 2100000, guid: 1f73a36c8494840419d3b887ce3c1670, type: 2}
+  opaqueMaterial: {fileID: 2100000, guid: 0031a926813684a109b56916d80ddb07, type: 2}
+  transparentMaterial: {fileID: 2100000, guid: 4b1c924e37e9e4d9bac9f64dd839aecb, type: 2}
 --- !u!64 &1527069266069952204
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -172,9 +160,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &3238173834198329893
 GameObject:
@@ -188,7 +176,6 @@ GameObject:
   - component: {fileID: 3987462635541061358}
   - component: {fileID: 4080671004860259357}
   - component: {fileID: 6853746449163618207}
-  - component: {fileID: 9196411523557247287}
   - component: {fileID: 7441183497867118043}
   m_Layer: 0
   m_Name: Sides
@@ -233,10 +220,11 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f19be9067130443b397b2c0e43f92a5a, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -266,27 +254,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3238173834198329893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f49a0cb7c017466292187a0554dc5b8, type: 3}
+  m_Script: {fileID: 11500000, guid: c0d81e2ab571245e2a3419c2a2422aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lightColoredParts:
   - {fileID: 3238173834198329893}
   darkColoredParts: []
-  glowMaterial: {fileID: 2100000, guid: b4880b4e12ce24022803a97fa9f53e67, type: 2}
-  opaqueMaterial: {fileID: 2100000, guid: f19be9067130443b397b2c0e43f92a5a, type: 2}
-  transparentMaterial: {fileID: 2100000, guid: d3176f93acd7540f29b986b8bcd2f129, type: 2}
---- !u!114 &9196411523557247287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3238173834198329893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fa5c32b3f884d1fa2535292635164b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  glowMaterial: {fileID: 2100000, guid: 1f73a36c8494840419d3b887ce3c1670, type: 2}
+  opaqueMaterial: {fileID: 2100000, guid: 0031a926813684a109b56916d80ddb07, type: 2}
+  transparentMaterial: {fileID: 2100000, guid: 4b1c924e37e9e4d9bac9f64dd839aecb, type: 2}
 --- !u!64 &7441183497867118043
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -297,9 +273,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &4009812470932249329
 GameObject:
@@ -313,7 +289,6 @@ GameObject:
   - component: {fileID: 2520759753436823967}
   - component: {fileID: 146099936881160218}
   - component: {fileID: 5829001667435048644}
-  - component: {fileID: 8033670861395379340}
   - component: {fileID: 8738063568454422886}
   m_Layer: 0
   m_Name: FrontOutline
@@ -358,10 +333,11 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f19be9067130443b397b2c0e43f92a5a, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -391,27 +367,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4009812470932249329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f49a0cb7c017466292187a0554dc5b8, type: 3}
+  m_Script: {fileID: 11500000, guid: c0d81e2ab571245e2a3419c2a2422aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lightColoredParts:
   - {fileID: 4009812470932249329}
   darkColoredParts: []
-  glowMaterial: {fileID: 2100000, guid: b4880b4e12ce24022803a97fa9f53e67, type: 2}
-  opaqueMaterial: {fileID: 2100000, guid: f19be9067130443b397b2c0e43f92a5a, type: 2}
-  transparentMaterial: {fileID: 2100000, guid: d3176f93acd7540f29b986b8bcd2f129, type: 2}
---- !u!114 &8033670861395379340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4009812470932249329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fa5c32b3f884d1fa2535292635164b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  glowMaterial: {fileID: 2100000, guid: 1f73a36c8494840419d3b887ce3c1670, type: 2}
+  opaqueMaterial: {fileID: 2100000, guid: 0031a926813684a109b56916d80ddb07, type: 2}
+  transparentMaterial: {fileID: 2100000, guid: 4b1c924e37e9e4d9bac9f64dd839aecb, type: 2}
 --- !u!64 &8738063568454422886
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -422,7 +386,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
