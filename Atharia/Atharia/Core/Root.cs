@@ -119,15 +119,6 @@ void visitGlaiveEffect(IGlaiveEffect effect);
 void visitSlowRodEffect(ISlowRodEffect effect);
 void visitBlastRodEffect(IBlastRodEffect effect);
 void visitArmorEffect(IArmorEffect effect);
-void visitSquareCaveLevelControllerEffect(ISquareCaveLevelControllerEffect effect);
-void visitRavashrikeLevelControllerEffect(IRavashrikeLevelControllerEffect effect);
-void visitPentagonalCaveLevelControllerEffect(IPentagonalCaveLevelControllerEffect effect);
-void visitIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTTCEffect effect);
-void visitCliffLevelControllerEffect(ICliffLevelControllerEffect effect);
-void visitPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEffect effect);
-void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect effect);
-void visitCommEffect(ICommEffect effect);
-void visitGameEffect(IGameEffect effect);
 void visitVolcaetusLevelControllerEffect(IVolcaetusLevelControllerEffect effect);
 void visitTutorial2LevelControllerEffect(ITutorial2LevelControllerEffect effect);
 void visitTutorial1LevelControllerEffect(ITutorial1LevelControllerEffect effect);
@@ -140,6 +131,17 @@ void visitDirtRoadLevelControllerEffect(IDirtRoadLevelControllerEffect effect);
 void visitCaveLevelControllerEffect(ICaveLevelControllerEffect effect);
 void visitBridgesLevelControllerEffect(IBridgesLevelControllerEffect effect);
 void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEffect effect);
+void visitSquareCaveLevelControllerEffect(ISquareCaveLevelControllerEffect effect);
+void visitRavashrikeLevelControllerEffect(IRavashrikeLevelControllerEffect effect);
+void visitPentagonalCaveLevelControllerEffect(IPentagonalCaveLevelControllerEffect effect);
+void visitIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTTCEffect effect);
+void visitCliffLevelControllerEffect(ICliffLevelControllerEffect effect);
+void visitPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEffect effect);
+void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect effect);
+void visitRavaArcanaLevelLinkerTTCEffect(IRavaArcanaLevelLinkerTTCEffect effect);
+void visitJumpingCaveLevelControllerEffect(IJumpingCaveLevelControllerEffect effect);
+void visitCommEffect(ICommEffect effect);
+void visitGameEffect(IGameEffect effect);
 void visitCommMutListEffect(ICommMutListEffect effect);
 void visitLocationMutListEffect(ILocationMutListEffect effect);
 void visitIRequestMutListEffect(IIRequestMutListEffect effect);
@@ -208,8 +210,9 @@ void visitRavaNestTTCMutSetEffect(IRavaNestTTCMutSetEffect effect);
 void visitCliffLandingTTCMutSetEffect(ICliffLandingTTCMutSetEffect effect);
 void visitStoneTTCMutSetEffect(IStoneTTCMutSetEffect effect);
 void visitGrassTTCMutSetEffect(IGrassTTCMutSetEffect effect);
-void visitIncendianFallsLevelLinkerTTCMutSetEffect(IIncendianFallsLevelLinkerTTCMutSetEffect effect);
 void visitEmberDeepLevelLinkerTTCMutSetEffect(IEmberDeepLevelLinkerTTCMutSetEffect effect);
+void visitIncendianFallsLevelLinkerTTCMutSetEffect(IIncendianFallsLevelLinkerTTCMutSetEffect effect);
+void visitRavaArcanaLevelLinkerTTCMutSetEffect(IRavaArcanaLevelLinkerTTCMutSetEffect effect);
 void visitTutorialDefyCounterUCMutSetEffect(ITutorialDefyCounterUCMutSetEffect effect);
 void visitLightningChargingUCMutSetEffect(ILightningChargingUCMutSetEffect effect);
 void visitWanderAICapabilityUCMutSetEffect(IWanderAICapabilityUCMutSetEffect effect);
@@ -651,33 +654,6 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsArmor) {
       result += GetArmorHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsSquareCaveLevelController) {
-      result += GetSquareCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsRavashrikeLevelController) {
-      result += GetRavashrikeLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsPentagonalCaveLevelController) {
-      result += GetPentagonalCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC) {
-      result += GetIncendianFallsLevelLinkerTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsCliffLevelController) {
-      result += GetCliffLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsPreGauntletLevelController) {
-      result += GetPreGauntletLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsGauntletLevelController) {
-      result += GetGauntletLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsComm) {
-      result += GetCommHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
-    foreach (var entry in this.rootIncarnation.incarnationsGame) {
-      result += GetGameHash(entry.Key, entry.Value.version, entry.Value.incarnation);
-    }
     foreach (var entry in this.rootIncarnation.incarnationsVolcaetusLevelController) {
       result += GetVolcaetusLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -713,6 +689,39 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsAncientTownLevelController) {
       result += GetAncientTownLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsSquareCaveLevelController) {
+      result += GetSquareCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsRavashrikeLevelController) {
+      result += GetRavashrikeLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsPentagonalCaveLevelController) {
+      result += GetPentagonalCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC) {
+      result += GetIncendianFallsLevelLinkerTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsCliffLevelController) {
+      result += GetCliffLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsPreGauntletLevelController) {
+      result += GetPreGauntletLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsGauntletLevelController) {
+      result += GetGauntletLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC) {
+      result += GetRavaArcanaLevelLinkerTTCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsJumpingCaveLevelController) {
+      result += GetJumpingCaveLevelControllerHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsComm) {
+      result += GetCommHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsGame) {
+      result += GetGameHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsCommMutList) {
       result += GetCommMutListHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -918,11 +927,14 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsGrassTTCMutSet) {
       result += GetGrassTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet) {
+      result += GetEmberDeepLevelLinkerTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet) {
       result += GetIncendianFallsLevelLinkerTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
-    foreach (var entry in this.rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet) {
-      result += GetEmberDeepLevelLinkerTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    foreach (var entry in this.rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet) {
+      result += GetRavaArcanaLevelLinkerTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsTutorialDefyCounterUCMutSet) {
       result += GetTutorialDefyCounterUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1293,33 +1305,6 @@ public class Root {
     foreach (var obj in this.AllArmor()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllSquareCaveLevelController()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllRavashrikeLevelController()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllPentagonalCaveLevelController()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllIncendianFallsLevelLinkerTTC()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllCliffLevelController()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllPreGauntletLevelController()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllGauntletLevelController()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllComm()) {
-      obj.CheckForNullViolations(violations);
-    }
-    foreach (var obj in this.AllGame()) {
-      obj.CheckForNullViolations(violations);
-    }
     foreach (var obj in this.AllVolcaetusLevelController()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1354,6 +1339,39 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllAncientTownLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllSquareCaveLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllRavashrikeLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllPentagonalCaveLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllIncendianFallsLevelLinkerTTC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllCliffLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllPreGauntletLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllGauntletLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllRavaArcanaLevelLinkerTTC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllJumpingCaveLevelController()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllComm()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllGame()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllCommMutList()) {
@@ -1560,10 +1578,13 @@ public class Root {
     foreach (var obj in this.AllGrassTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllEmberDeepLevelLinkerTTCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllIncendianFallsLevelLinkerTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
-    foreach (var obj in this.AllEmberDeepLevelLinkerTTCMutSet()) {
+    foreach (var obj in this.AllRavaArcanaLevelLinkerTTCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTutorialDefyCounterUCMutSet()) {
@@ -2114,51 +2135,6 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllSquareCaveLevelController()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllRavashrikeLevelController()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllPentagonalCaveLevelController()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllIncendianFallsLevelLinkerTTC()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllCliffLevelController()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllPreGauntletLevelController()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllGauntletLevelController()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllComm()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
-    foreach (var obj in this.AllGame()) {
-      if (!reachableIds.Contains(obj.id)) {
-        violations.Add("Unreachable: " + obj + "#" + obj.id);
-      }
-    }
     foreach (var obj in this.AllVolcaetusLevelController()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -2215,6 +2191,61 @@ public class Root {
       }
     }
     foreach (var obj in this.AllAncientTownLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllSquareCaveLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllRavashrikeLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllPentagonalCaveLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllIncendianFallsLevelLinkerTTC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllCliffLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllPreGauntletLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllGauntletLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllRavaArcanaLevelLinkerTTC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllJumpingCaveLevelController()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllComm()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllGame()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -2559,12 +2590,17 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllEmberDeepLevelLinkerTTCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllIncendianFallsLevelLinkerTTCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
-    foreach (var obj in this.AllEmberDeepLevelLinkerTTCMutSet()) {
+    foreach (var obj in this.AllRavaArcanaLevelLinkerTTCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -6178,375 +6214,6 @@ public class Root {
       }
     }
 
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSquareCaveLevelController) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsSquareCaveLevelController[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation.
-          
-          rootIncarnation.incarnationsSquareCaveLevelController[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSquareCaveLevelController) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(sourceObjId)) {
-        var effect = InternalEffectCreateSquareCaveLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
-        createEffects.Add(effect);
-      }
-    }
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>>(rootIncarnation.incarnationsSquareCaveLevelController)) {
-      if (!sourceIncarnation.incarnationsSquareCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        var effect = InternalEffectSquareCaveLevelControllerDelete(id);
-        deleteEffects.Add(effect);
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavashrikeLevelController) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsRavashrikeLevelController[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation.
-          
-          rootIncarnation.incarnationsRavashrikeLevelController[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavashrikeLevelController) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(sourceObjId)) {
-        var effect = InternalEffectCreateRavashrikeLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
-        createEffects.Add(effect);
-      }
-    }
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RavashrikeLevelControllerIncarnation>>(rootIncarnation.incarnationsRavashrikeLevelController)) {
-      if (!sourceIncarnation.incarnationsRavashrikeLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        var effect = InternalEffectRavashrikeLevelControllerDelete(id);
-        deleteEffects.Add(effect);
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPentagonalCaveLevelController) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsPentagonalCaveLevelController[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation.
-          
-          rootIncarnation.incarnationsPentagonalCaveLevelController[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPentagonalCaveLevelController) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(sourceObjId)) {
-        var effect = InternalEffectCreatePentagonalCaveLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
-        createEffects.Add(effect);
-      }
-    }
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>>(rootIncarnation.incarnationsPentagonalCaveLevelController)) {
-      if (!sourceIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        var effect = InternalEffectPentagonalCaveLevelControllerDelete(id);
-        deleteEffects.Add(effect);
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTC) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation.
-          
-          rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTC) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(sourceObjId)) {
-        var effect = InternalEffectCreateIncendianFallsLevelLinkerTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
-        createEffects.Add(effect);
-      }
-    }
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IncendianFallsLevelLinkerTTCIncarnation>>(rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC)) {
-      if (!sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        var effect = InternalEffectIncendianFallsLevelLinkerTTCDelete(id);
-        deleteEffects.Add(effect);
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCliffLevelController) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsCliffLevelController[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation.
-          
-          rootIncarnation.incarnationsCliffLevelController[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCliffLevelController) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsCliffLevelController.ContainsKey(sourceObjId)) {
-        var effect = InternalEffectCreateCliffLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
-        createEffects.Add(effect);
-      }
-    }
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>>(rootIncarnation.incarnationsCliffLevelController)) {
-      if (!sourceIncarnation.incarnationsCliffLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        var effect = InternalEffectCliffLevelControllerDelete(id);
-        deleteEffects.Add(effect);
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPreGauntletLevelController) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsPreGauntletLevelController[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation.
-          
-          rootIncarnation.incarnationsPreGauntletLevelController[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPreGauntletLevelController) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(sourceObjId)) {
-        var effect = InternalEffectCreatePreGauntletLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
-        createEffects.Add(effect);
-      }
-    }
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>>(rootIncarnation.incarnationsPreGauntletLevelController)) {
-      if (!sourceIncarnation.incarnationsPreGauntletLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        var effect = InternalEffectPreGauntletLevelControllerDelete(id);
-        deleteEffects.Add(effect);
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGauntletLevelController) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsGauntletLevelController[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation.
-          
-          rootIncarnation.incarnationsGauntletLevelController[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGauntletLevelController) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsGauntletLevelController.ContainsKey(sourceObjId)) {
-        var effect = InternalEffectCreateGauntletLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
-        createEffects.Add(effect);
-      }
-    }
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>>(rootIncarnation.incarnationsGauntletLevelController)) {
-      if (!sourceIncarnation.incarnationsGauntletLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        var effect = InternalEffectGauntletLevelControllerDelete(id);
-        deleteEffects.Add(effect);
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsComm) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsComm.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsComm[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          // Swap out the underlying incarnation.
-          
-          rootIncarnation.incarnationsComm[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsComm) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsComm.ContainsKey(sourceObjId)) {
-        var effect = InternalEffectCreateComm(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
-        createEffects.Add(effect);
-      }
-    }
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CommIncarnation>>(rootIncarnation.incarnationsComm)) {
-      if (!sourceIncarnation.incarnationsComm.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        var effect = InternalEffectCommDelete(id);
-        deleteEffects.Add(effect);
-      }
-    }
-
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGame) {
-      var objId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (rootIncarnation.incarnationsGame.ContainsKey(objId)) {
-        // Compare everything that could possibly have changed.
-        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsGame[objId];
-        var currentVersion = currentVersionAndObjIncarnation.version;
-        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
-        if (currentVersion != sourceVersion) {
-
-          if (sourceObjIncarnation.player != currentObjIncarnation.player) {
-            setEffects.Add(new GameSetPlayerEffect(objId, sourceObjIncarnation.player));
-          }
-
-          if (sourceObjIncarnation.level != currentObjIncarnation.level) {
-            setEffects.Add(new GameSetLevelEffect(objId, sourceObjIncarnation.level));
-          }
-
-          if (sourceObjIncarnation.time != currentObjIncarnation.time) {
-            setEffects.Add(new GameSetTimeEffect(objId, sourceObjIncarnation.time));
-          }
-
-          if (sourceObjIncarnation.actingUnit != currentObjIncarnation.actingUnit) {
-            setEffects.Add(new GameSetActingUnitEffect(objId, sourceObjIncarnation.actingUnit));
-          }
-
-          if (sourceObjIncarnation.pauseBeforeNextUnit != currentObjIncarnation.pauseBeforeNextUnit) {
-            setEffects.Add(new GameSetPauseBeforeNextUnitEffect(objId, sourceObjIncarnation.pauseBeforeNextUnit));
-          }
-
-          if (sourceObjIncarnation.actionNum != currentObjIncarnation.actionNum) {
-            setEffects.Add(new GameSetActionNumEffect(objId, sourceObjIncarnation.actionNum));
-          }
-
-          if (sourceObjIncarnation.instructions != currentObjIncarnation.instructions) {
-            setEffects.Add(new GameSetInstructionsEffect(objId, sourceObjIncarnation.instructions));
-          }
-
-          if (sourceObjIncarnation.hideInput != currentObjIncarnation.hideInput) {
-            setEffects.Add(new GameSetHideInputEffect(objId, sourceObjIncarnation.hideInput));
-          }
-
-          if (sourceObjIncarnation.evvent != currentObjIncarnation.evvent) {
-            setEffects.Add(new GameSetEvventEffect(objId, sourceObjIncarnation.evvent));
-          }
-
-          // Swap out the underlying incarnation.
-          
-          rootIncarnation.incarnationsGame[objId] = sourceVersionAndObjIncarnation;
-          
-        }
-      }
-    }
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGame) {
-      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
-      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
-      var sourceVersion = sourceVersionAndObjIncarnation.version;
-      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsGame.ContainsKey(sourceObjId)) {
-        var effect = InternalEffectCreateGame(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
-        createEffects.Add(effect);
-      }
-    }
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<GameIncarnation>>(rootIncarnation.incarnationsGame)) {
-      if (!sourceIncarnation.incarnationsGame.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
-        var id = currentIdAndVersionAndObjIncarnation.Key;
-        var effect = InternalEffectGameDelete(id);
-        deleteEffects.Add(effect);
-      }
-    }
-
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsVolcaetusLevelController) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -6987,6 +6654,449 @@ public class Root {
       if (!sourceIncarnation.incarnationsAncientTownLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         var effect = InternalEffectAncientTownLevelControllerDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSquareCaveLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsSquareCaveLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsSquareCaveLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsSquareCaveLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateSquareCaveLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<SquareCaveLevelControllerIncarnation>>(rootIncarnation.incarnationsSquareCaveLevelController)) {
+      if (!sourceIncarnation.incarnationsSquareCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectSquareCaveLevelControllerDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavashrikeLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsRavashrikeLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsRavashrikeLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavashrikeLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateRavashrikeLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RavashrikeLevelControllerIncarnation>>(rootIncarnation.incarnationsRavashrikeLevelController)) {
+      if (!sourceIncarnation.incarnationsRavashrikeLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectRavashrikeLevelControllerDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPentagonalCaveLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsPentagonalCaveLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsPentagonalCaveLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPentagonalCaveLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreatePentagonalCaveLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>>(rootIncarnation.incarnationsPentagonalCaveLevelController)) {
+      if (!sourceIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectPentagonalCaveLevelControllerDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateIncendianFallsLevelLinkerTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<IncendianFallsLevelLinkerTTCIncarnation>>(rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC)) {
+      if (!sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectIncendianFallsLevelLinkerTTCDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCliffLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsCliffLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsCliffLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsCliffLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsCliffLevelController.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateCliffLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CliffLevelControllerIncarnation>>(rootIncarnation.incarnationsCliffLevelController)) {
+      if (!sourceIncarnation.incarnationsCliffLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectCliffLevelControllerDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPreGauntletLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsPreGauntletLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsPreGauntletLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsPreGauntletLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreatePreGauntletLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<PreGauntletLevelControllerIncarnation>>(rootIncarnation.incarnationsPreGauntletLevelController)) {
+      if (!sourceIncarnation.incarnationsPreGauntletLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectPreGauntletLevelControllerDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGauntletLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsGauntletLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsGauntletLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGauntletLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsGauntletLevelController.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateGauntletLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<GauntletLevelControllerIncarnation>>(rootIncarnation.incarnationsGauntletLevelController)) {
+      if (!sourceIncarnation.incarnationsGauntletLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectGauntletLevelControllerDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavaArcanaLevelLinkerTTC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavaArcanaLevelLinkerTTC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateRavaArcanaLevelLinkerTTC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RavaArcanaLevelLinkerTTCIncarnation>>(rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC)) {
+      if (!sourceIncarnation.incarnationsRavaArcanaLevelLinkerTTC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectRavaArcanaLevelLinkerTTCDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsJumpingCaveLevelController) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsJumpingCaveLevelController.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsJumpingCaveLevelController[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsJumpingCaveLevelController[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsJumpingCaveLevelController) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsJumpingCaveLevelController.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateJumpingCaveLevelController(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<JumpingCaveLevelControllerIncarnation>>(rootIncarnation.incarnationsJumpingCaveLevelController)) {
+      if (!sourceIncarnation.incarnationsJumpingCaveLevelController.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectJumpingCaveLevelControllerDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsComm) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsComm.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsComm[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsComm[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsComm) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsComm.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateComm(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<CommIncarnation>>(rootIncarnation.incarnationsComm)) {
+      if (!sourceIncarnation.incarnationsComm.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectCommDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGame) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsGame.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsGame[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          if (sourceObjIncarnation.player != currentObjIncarnation.player) {
+            setEffects.Add(new GameSetPlayerEffect(objId, sourceObjIncarnation.player));
+          }
+
+          if (sourceObjIncarnation.level != currentObjIncarnation.level) {
+            setEffects.Add(new GameSetLevelEffect(objId, sourceObjIncarnation.level));
+          }
+
+          if (sourceObjIncarnation.time != currentObjIncarnation.time) {
+            setEffects.Add(new GameSetTimeEffect(objId, sourceObjIncarnation.time));
+          }
+
+          if (sourceObjIncarnation.actingUnit != currentObjIncarnation.actingUnit) {
+            setEffects.Add(new GameSetActingUnitEffect(objId, sourceObjIncarnation.actingUnit));
+          }
+
+          if (sourceObjIncarnation.pauseBeforeNextUnit != currentObjIncarnation.pauseBeforeNextUnit) {
+            setEffects.Add(new GameSetPauseBeforeNextUnitEffect(objId, sourceObjIncarnation.pauseBeforeNextUnit));
+          }
+
+          if (sourceObjIncarnation.actionNum != currentObjIncarnation.actionNum) {
+            setEffects.Add(new GameSetActionNumEffect(objId, sourceObjIncarnation.actionNum));
+          }
+
+          if (sourceObjIncarnation.instructions != currentObjIncarnation.instructions) {
+            setEffects.Add(new GameSetInstructionsEffect(objId, sourceObjIncarnation.instructions));
+          }
+
+          if (sourceObjIncarnation.hideInput != currentObjIncarnation.hideInput) {
+            setEffects.Add(new GameSetHideInputEffect(objId, sourceObjIncarnation.hideInput));
+          }
+
+          if (sourceObjIncarnation.evvent != currentObjIncarnation.evvent) {
+            setEffects.Add(new GameSetEvventEffect(objId, sourceObjIncarnation.evvent));
+          }
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsGame[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsGame) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsGame.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateGame(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<GameIncarnation>>(rootIncarnation.incarnationsGame)) {
+      if (!sourceIncarnation.incarnationsGame.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectGameDelete(id);
         deleteEffects.Add(effect);
       }
     }
@@ -10515,6 +10625,58 @@ public class Root {
       }
     }
 
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.elements)) {
+              if (!sourceObjIncarnation.elements.Contains(objIdInCurrentObjIncarnation)) {
+                removeEffects.Add(new EmberDeepLevelLinkerTTCMutSetRemoveEffect(objId, objIdInCurrentObjIncarnation));
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.elements) {
+              if (!currentObjIncarnation.elements.Contains(unitIdInSourceObjIncarnation)) {
+                addEffects.Add(new EmberDeepLevelLinkerTTCMutSetAddEffect(objId, unitIdInSourceObjIncarnation));
+              }
+            }
+            // Swap out the underlying incarnation.
+            rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.ContainsKey(sourceObjId)) {
+        var createEffect = InternalEffectCreateEmberDeepLevelLinkerTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+        createEffects.Add(createEffect);
+        foreach (var element in sourceObjIncarnation.elements) {
+          addEffects.Add(new EmberDeepLevelLinkerTTCMutSetAddEffect(sourceObjId, element));
+        }
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>>(rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var currentObjIncarnation = currentIdAndVersionAndObjIncarnation.Value.incarnation;
+        foreach (var element in currentObjIncarnation.elements) {
+          removeEffects.Add(new EmberDeepLevelLinkerTTCMutSetRemoveEffect(id, element));
+        }
+        var effect = InternalEffectEmberDeepLevelLinkerTTCMutSetDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsIncendianFallsLevelLinkerTTCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -10567,54 +10729,54 @@ public class Root {
       }
     }
 
-      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet) {
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
         var sourceVersion = sourceVersionAndObjIncarnation.version;
         var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-        if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.ContainsKey(objId)) {
+        if (rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet.ContainsKey(objId)) {
           // Compare everything that could possibly have changed.
-          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[objId];
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet[objId];
           var currentVersion = currentVersionAndObjIncarnation.version;
           var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
           if (currentVersion != sourceVersion) {
             foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.elements)) {
               if (!sourceObjIncarnation.elements.Contains(objIdInCurrentObjIncarnation)) {
-                removeEffects.Add(new EmberDeepLevelLinkerTTCMutSetRemoveEffect(objId, objIdInCurrentObjIncarnation));
+                removeEffects.Add(new RavaArcanaLevelLinkerTTCMutSetRemoveEffect(objId, objIdInCurrentObjIncarnation));
               }
             }
             foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.elements) {
               if (!currentObjIncarnation.elements.Contains(unitIdInSourceObjIncarnation)) {
-                addEffects.Add(new EmberDeepLevelLinkerTTCMutSetAddEffect(objId, unitIdInSourceObjIncarnation));
+                addEffects.Add(new RavaArcanaLevelLinkerTTCMutSetAddEffect(objId, unitIdInSourceObjIncarnation));
               }
             }
             // Swap out the underlying incarnation.
-            rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[objId] = sourceVersionAndObjIncarnation;
+            rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet[objId] = sourceVersionAndObjIncarnation;
           }
         }
       }
 
-    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet) {
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet) {
       var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
       var sourceVersion = sourceVersionAndObjIncarnation.version;
       var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
-      if (!rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.ContainsKey(sourceObjId)) {
-        var createEffect = InternalEffectCreateEmberDeepLevelLinkerTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+      if (!rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet.ContainsKey(sourceObjId)) {
+        var createEffect = InternalEffectCreateRavaArcanaLevelLinkerTTCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
         createEffects.Add(createEffect);
         foreach (var element in sourceObjIncarnation.elements) {
-          addEffects.Add(new EmberDeepLevelLinkerTTCMutSetAddEffect(sourceObjId, element));
+          addEffects.Add(new RavaArcanaLevelLinkerTTCMutSetAddEffect(sourceObjId, element));
         }
       }
     }
-    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>>(rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet)) {
-      if (!sourceIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<RavaArcanaLevelLinkerTTCMutSetIncarnation>>(rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet)) {
+      if (!sourceIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         var currentObjIncarnation = currentIdAndVersionAndObjIncarnation.Value.incarnation;
         foreach (var element in currentObjIncarnation.elements) {
-          removeEffects.Add(new EmberDeepLevelLinkerTTCMutSetRemoveEffect(id, element));
+          removeEffects.Add(new RavaArcanaLevelLinkerTTCMutSetRemoveEffect(id, element));
         }
-        var effect = InternalEffectEmberDeepLevelLinkerTTCMutSetDelete(id);
+        var effect = InternalEffectRavaArcanaLevelLinkerTTCMutSetDelete(id);
         deleteEffects.Add(effect);
       }
     }
@@ -17449,8 +17611,9 @@ return new TerrainTileSetElevationEffect(id, newValue);
       CliffLandingTTCMutSet membersCliffLandingTTCMutSet,
       StoneTTCMutSet membersStoneTTCMutSet,
       GrassTTCMutSet membersGrassTTCMutSet,
+      EmberDeepLevelLinkerTTCMutSet membersEmberDeepLevelLinkerTTCMutSet,
       IncendianFallsLevelLinkerTTCMutSet membersIncendianFallsLevelLinkerTTCMutSet,
-      EmberDeepLevelLinkerTTCMutSet membersEmberDeepLevelLinkerTTCMutSet) {
+      RavaArcanaLevelLinkerTTCMutSet membersRavaArcanaLevelLinkerTTCMutSet) {
     CheckHasSimplePresenceTriggerTTCMutSet(membersSimplePresenceTriggerTTCMutSet);
     CheckHasItemTTCMutSet(membersItemTTCMutSet);
     CheckHasKamikazeTargetTTCMutSet(membersKamikazeTargetTTCMutSet);
@@ -17481,8 +17644,9 @@ return new TerrainTileSetElevationEffect(id, newValue);
     CheckHasCliffLandingTTCMutSet(membersCliffLandingTTCMutSet);
     CheckHasStoneTTCMutSet(membersStoneTTCMutSet);
     CheckHasGrassTTCMutSet(membersGrassTTCMutSet);
-    CheckHasIncendianFallsLevelLinkerTTCMutSet(membersIncendianFallsLevelLinkerTTCMutSet);
     CheckHasEmberDeepLevelLinkerTTCMutSet(membersEmberDeepLevelLinkerTTCMutSet);
+    CheckHasIncendianFallsLevelLinkerTTCMutSet(membersIncendianFallsLevelLinkerTTCMutSet);
+    CheckHasRavaArcanaLevelLinkerTTCMutSet(membersRavaArcanaLevelLinkerTTCMutSet);
     return TrustedEffectITerrainTileComponentMutBunchCreateWithId(NewId()
             ,membersSimplePresenceTriggerTTCMutSet.id
             ,membersItemTTCMutSet.id
@@ -17514,8 +17678,9 @@ return new TerrainTileSetElevationEffect(id, newValue);
             ,membersCliffLandingTTCMutSet.id
             ,membersStoneTTCMutSet.id
             ,membersGrassTTCMutSet.id
+            ,membersEmberDeepLevelLinkerTTCMutSet.id
             ,membersIncendianFallsLevelLinkerTTCMutSet.id
-            ,membersEmberDeepLevelLinkerTTCMutSet.id    );
+            ,membersRavaArcanaLevelLinkerTTCMutSet.id    );
   }
   public ITerrainTileComponentMutBunch TrustedEffectITerrainTileComponentMutBunchCreateWithId(int id
 ,      int membersSimplePresenceTriggerTTCMutSet
@@ -17548,8 +17713,9 @@ return new TerrainTileSetElevationEffect(id, newValue);
 ,      int membersCliffLandingTTCMutSet
 ,      int membersStoneTTCMutSet
 ,      int membersGrassTTCMutSet
+,      int membersEmberDeepLevelLinkerTTCMutSet
 ,      int membersIncendianFallsLevelLinkerTTCMutSet
-,      int membersEmberDeepLevelLinkerTTCMutSet) {
+,      int membersRavaArcanaLevelLinkerTTCMutSet) {
     CheckUnlocked();
 
     var incarnation =
@@ -17584,8 +17750,9 @@ return new TerrainTileSetElevationEffect(id, newValue);
             membersCliffLandingTTCMutSet,
             membersStoneTTCMutSet,
             membersGrassTTCMutSet,
+            membersEmberDeepLevelLinkerTTCMutSet,
             membersIncendianFallsLevelLinkerTTCMutSet,
-            membersEmberDeepLevelLinkerTTCMutSet
+            membersRavaArcanaLevelLinkerTTCMutSet
             );
     var effect = InternalEffectCreateITerrainTileComponentMutBunch(id, rootIncarnation.version, incarnation);
     NotifyEffect(effect);
@@ -17650,8 +17817,9 @@ return new TerrainTileSetElevationEffect(id, newValue);
     result += id * version * 28 * incarnation.membersCliffLandingTTCMutSet.GetDeterministicHashCode();
     result += id * version * 29 * incarnation.membersStoneTTCMutSet.GetDeterministicHashCode();
     result += id * version * 30 * incarnation.membersGrassTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 31 * incarnation.membersIncendianFallsLevelLinkerTTCMutSet.GetDeterministicHashCode();
-    result += id * version * 32 * incarnation.membersEmberDeepLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 31 * incarnation.membersEmberDeepLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 32 * incarnation.membersIncendianFallsLevelLinkerTTCMutSet.GetDeterministicHashCode();
+    result += id * version * 33 * incarnation.membersRavaArcanaLevelLinkerTTCMutSet.GetDeterministicHashCode();
     return result;
   }
        public TerrainIncarnation GetTerrainIncarnation(int id) {
@@ -21768,1261 +21936,7 @@ return new LevelSetTimeEffect(id, newValue);
     int result = id * version;
     return result;
   }
-       public SquareCaveLevelControllerIncarnation GetSquareCaveLevelControllerIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsSquareCaveLevelController[id].incarnation;
-  }
-  public bool SquareCaveLevelControllerExists(int id) {
-    return rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id);
-  }
-  public SquareCaveLevelController GetSquareCaveLevelController(int id) {
-    CheckHasSquareCaveLevelController(id);
-    return new SquareCaveLevelController(this, id);
-  }
-  public SquareCaveLevelController GetSquareCaveLevelControllerOrNull(int id) {
-    if (SquareCaveLevelControllerExists(id)) {
-      return new SquareCaveLevelController(this, id);
-    } else {
-      return new SquareCaveLevelController(this, 0);
-    }
-  }
-  public List<SquareCaveLevelController> AllSquareCaveLevelController() {
-    List<SquareCaveLevelController> result = new List<SquareCaveLevelController>(rootIncarnation.incarnationsSquareCaveLevelController.Count);
-    foreach (var id in rootIncarnation.incarnationsSquareCaveLevelController.Keys) {
-      result.Add(new SquareCaveLevelController(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<SquareCaveLevelController> EnumAllSquareCaveLevelController() {
-    foreach (var id in rootIncarnation.incarnationsSquareCaveLevelController.Keys) {
-      yield return GetSquareCaveLevelController(id);
-    }
-  }
-  public void CheckHasSquareCaveLevelController(SquareCaveLevelController thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasSquareCaveLevelController(thing.id);
-  }
-  public void CheckHasSquareCaveLevelController(int id) {
-    if (!rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
-      throw new System.Exception("Invalid SquareCaveLevelController: " + id);
-    }
-  }
-  public SquareCaveLevelController EffectSquareCaveLevelControllerCreate(
-      Level level,
-      int depth) {
-    CheckHasLevel(level);
-    return TrustedEffectSquareCaveLevelControllerCreateWithId(NewId()
-            ,level.id
-            ,depth    );
-  }
-  public SquareCaveLevelController TrustedEffectSquareCaveLevelControllerCreateWithId(int id
-,      int level
-,      int depth) {
-    CheckUnlocked();
-
-    var incarnation =
-        new SquareCaveLevelControllerIncarnation(
-            level,
-            depth
-            );
-    var effect = InternalEffectCreateSquareCaveLevelController(id, rootIncarnation.version, incarnation);
-    NotifyEffect(effect);
-    return new SquareCaveLevelController(this, id);
-  }
-  public SquareCaveLevelControllerCreateEffect InternalEffectCreateSquareCaveLevelController(
-      int id,
-      int incarnationVersion,
-      SquareCaveLevelControllerIncarnation incarnation) {
-    CheckUnlocked();
-    rootIncarnation.incarnationsSquareCaveLevelController.Add(
-        id,
-        new VersionAndIncarnation<SquareCaveLevelControllerIncarnation>(
-            incarnationVersion,
-            incarnation));
-    return new SquareCaveLevelControllerCreateEffect(id, incarnation.Copy());
-  }
-
-  public void EffectSquareCaveLevelControllerDelete(int id) {
-    CheckUnlocked();
-    var effect = InternalEffectSquareCaveLevelControllerDelete(id);
-    NotifyEffect(effect);
-  }
-  public SquareCaveLevelControllerDeleteEffect InternalEffectSquareCaveLevelControllerDelete(int id) {
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsSquareCaveLevelController[id];
-
-    rootIncarnation.incarnationsSquareCaveLevelController.Remove(id);
-    return new SquareCaveLevelControllerDeleteEffect(id);
-  }
-
-     
-  public int GetSquareCaveLevelControllerHash(int id, int version, SquareCaveLevelControllerIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
-    return result;
-  }
-       public RavashrikeLevelControllerIncarnation GetRavashrikeLevelControllerIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsRavashrikeLevelController[id].incarnation;
-  }
-  public bool RavashrikeLevelControllerExists(int id) {
-    return rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id);
-  }
-  public RavashrikeLevelController GetRavashrikeLevelController(int id) {
-    CheckHasRavashrikeLevelController(id);
-    return new RavashrikeLevelController(this, id);
-  }
-  public RavashrikeLevelController GetRavashrikeLevelControllerOrNull(int id) {
-    if (RavashrikeLevelControllerExists(id)) {
-      return new RavashrikeLevelController(this, id);
-    } else {
-      return new RavashrikeLevelController(this, 0);
-    }
-  }
-  public List<RavashrikeLevelController> AllRavashrikeLevelController() {
-    List<RavashrikeLevelController> result = new List<RavashrikeLevelController>(rootIncarnation.incarnationsRavashrikeLevelController.Count);
-    foreach (var id in rootIncarnation.incarnationsRavashrikeLevelController.Keys) {
-      result.Add(new RavashrikeLevelController(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<RavashrikeLevelController> EnumAllRavashrikeLevelController() {
-    foreach (var id in rootIncarnation.incarnationsRavashrikeLevelController.Keys) {
-      yield return GetRavashrikeLevelController(id);
-    }
-  }
-  public void CheckHasRavashrikeLevelController(RavashrikeLevelController thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasRavashrikeLevelController(thing.id);
-  }
-  public void CheckHasRavashrikeLevelController(int id) {
-    if (!rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
-      throw new System.Exception("Invalid RavashrikeLevelController: " + id);
-    }
-  }
-  public RavashrikeLevelController EffectRavashrikeLevelControllerCreate(
-      Level level) {
-    CheckHasLevel(level);
-    return TrustedEffectRavashrikeLevelControllerCreateWithId(NewId()
-            ,level.id    );
-  }
-  public RavashrikeLevelController TrustedEffectRavashrikeLevelControllerCreateWithId(int id
-,      int level) {
-    CheckUnlocked();
-
-    var incarnation =
-        new RavashrikeLevelControllerIncarnation(
-            level
-            );
-    var effect = InternalEffectCreateRavashrikeLevelController(id, rootIncarnation.version, incarnation);
-    NotifyEffect(effect);
-    return new RavashrikeLevelController(this, id);
-  }
-  public RavashrikeLevelControllerCreateEffect InternalEffectCreateRavashrikeLevelController(
-      int id,
-      int incarnationVersion,
-      RavashrikeLevelControllerIncarnation incarnation) {
-    CheckUnlocked();
-    rootIncarnation.incarnationsRavashrikeLevelController.Add(
-        id,
-        new VersionAndIncarnation<RavashrikeLevelControllerIncarnation>(
-            incarnationVersion,
-            incarnation));
-    return new RavashrikeLevelControllerCreateEffect(id, incarnation.Copy());
-  }
-
-  public void EffectRavashrikeLevelControllerDelete(int id) {
-    CheckUnlocked();
-    var effect = InternalEffectRavashrikeLevelControllerDelete(id);
-    NotifyEffect(effect);
-  }
-  public RavashrikeLevelControllerDeleteEffect InternalEffectRavashrikeLevelControllerDelete(int id) {
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsRavashrikeLevelController[id];
-
-    rootIncarnation.incarnationsRavashrikeLevelController.Remove(id);
-    return new RavashrikeLevelControllerDeleteEffect(id);
-  }
-
-     
-  public int GetRavashrikeLevelControllerHash(int id, int version, RavashrikeLevelControllerIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
-    return result;
-  }
-       public PentagonalCaveLevelControllerIncarnation GetPentagonalCaveLevelControllerIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsPentagonalCaveLevelController[id].incarnation;
-  }
-  public bool PentagonalCaveLevelControllerExists(int id) {
-    return rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id);
-  }
-  public PentagonalCaveLevelController GetPentagonalCaveLevelController(int id) {
-    CheckHasPentagonalCaveLevelController(id);
-    return new PentagonalCaveLevelController(this, id);
-  }
-  public PentagonalCaveLevelController GetPentagonalCaveLevelControllerOrNull(int id) {
-    if (PentagonalCaveLevelControllerExists(id)) {
-      return new PentagonalCaveLevelController(this, id);
-    } else {
-      return new PentagonalCaveLevelController(this, 0);
-    }
-  }
-  public List<PentagonalCaveLevelController> AllPentagonalCaveLevelController() {
-    List<PentagonalCaveLevelController> result = new List<PentagonalCaveLevelController>(rootIncarnation.incarnationsPentagonalCaveLevelController.Count);
-    foreach (var id in rootIncarnation.incarnationsPentagonalCaveLevelController.Keys) {
-      result.Add(new PentagonalCaveLevelController(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<PentagonalCaveLevelController> EnumAllPentagonalCaveLevelController() {
-    foreach (var id in rootIncarnation.incarnationsPentagonalCaveLevelController.Keys) {
-      yield return GetPentagonalCaveLevelController(id);
-    }
-  }
-  public void CheckHasPentagonalCaveLevelController(PentagonalCaveLevelController thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasPentagonalCaveLevelController(thing.id);
-  }
-  public void CheckHasPentagonalCaveLevelController(int id) {
-    if (!rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
-      throw new System.Exception("Invalid PentagonalCaveLevelController: " + id);
-    }
-  }
-  public PentagonalCaveLevelController EffectPentagonalCaveLevelControllerCreate(
-      Level level,
-      int depth) {
-    CheckHasLevel(level);
-    return TrustedEffectPentagonalCaveLevelControllerCreateWithId(NewId()
-            ,level.id
-            ,depth    );
-  }
-  public PentagonalCaveLevelController TrustedEffectPentagonalCaveLevelControllerCreateWithId(int id
-,      int level
-,      int depth) {
-    CheckUnlocked();
-
-    var incarnation =
-        new PentagonalCaveLevelControllerIncarnation(
-            level,
-            depth
-            );
-    var effect = InternalEffectCreatePentagonalCaveLevelController(id, rootIncarnation.version, incarnation);
-    NotifyEffect(effect);
-    return new PentagonalCaveLevelController(this, id);
-  }
-  public PentagonalCaveLevelControllerCreateEffect InternalEffectCreatePentagonalCaveLevelController(
-      int id,
-      int incarnationVersion,
-      PentagonalCaveLevelControllerIncarnation incarnation) {
-    CheckUnlocked();
-    rootIncarnation.incarnationsPentagonalCaveLevelController.Add(
-        id,
-        new VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>(
-            incarnationVersion,
-            incarnation));
-    return new PentagonalCaveLevelControllerCreateEffect(id, incarnation.Copy());
-  }
-
-  public void EffectPentagonalCaveLevelControllerDelete(int id) {
-    CheckUnlocked();
-    var effect = InternalEffectPentagonalCaveLevelControllerDelete(id);
-    NotifyEffect(effect);
-  }
-  public PentagonalCaveLevelControllerDeleteEffect InternalEffectPentagonalCaveLevelControllerDelete(int id) {
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsPentagonalCaveLevelController[id];
-
-    rootIncarnation.incarnationsPentagonalCaveLevelController.Remove(id);
-    return new PentagonalCaveLevelControllerDeleteEffect(id);
-  }
-
-     
-  public int GetPentagonalCaveLevelControllerHash(int id, int version, PentagonalCaveLevelControllerIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
-    return result;
-  }
-       public IncendianFallsLevelLinkerTTCIncarnation GetIncendianFallsLevelLinkerTTCIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[id].incarnation;
-  }
-  public bool IncendianFallsLevelLinkerTTCExists(int id) {
-    return rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id);
-  }
-  public IncendianFallsLevelLinkerTTC GetIncendianFallsLevelLinkerTTC(int id) {
-    CheckHasIncendianFallsLevelLinkerTTC(id);
-    return new IncendianFallsLevelLinkerTTC(this, id);
-  }
-  public IncendianFallsLevelLinkerTTC GetIncendianFallsLevelLinkerTTCOrNull(int id) {
-    if (IncendianFallsLevelLinkerTTCExists(id)) {
-      return new IncendianFallsLevelLinkerTTC(this, id);
-    } else {
-      return new IncendianFallsLevelLinkerTTC(this, 0);
-    }
-  }
-  public List<IncendianFallsLevelLinkerTTC> AllIncendianFallsLevelLinkerTTC() {
-    List<IncendianFallsLevelLinkerTTC> result = new List<IncendianFallsLevelLinkerTTC>(rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Count);
-    foreach (var id in rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Keys) {
-      result.Add(new IncendianFallsLevelLinkerTTC(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<IncendianFallsLevelLinkerTTC> EnumAllIncendianFallsLevelLinkerTTC() {
-    foreach (var id in rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Keys) {
-      yield return GetIncendianFallsLevelLinkerTTC(id);
-    }
-  }
-  public void CheckHasIncendianFallsLevelLinkerTTC(IncendianFallsLevelLinkerTTC thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasIncendianFallsLevelLinkerTTC(thing.id);
-  }
-  public void CheckHasIncendianFallsLevelLinkerTTC(int id) {
-    if (!rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
-      throw new System.Exception("Invalid IncendianFallsLevelLinkerTTC: " + id);
-    }
-  }
-  public IncendianFallsLevelLinkerTTC EffectIncendianFallsLevelLinkerTTCCreate(
-      int thisLevelDepth) {
-    return TrustedEffectIncendianFallsLevelLinkerTTCCreateWithId(NewId()
-            ,thisLevelDepth    );
-  }
-  public IncendianFallsLevelLinkerTTC TrustedEffectIncendianFallsLevelLinkerTTCCreateWithId(int id
-,      int thisLevelDepth) {
-    CheckUnlocked();
-
-    var incarnation =
-        new IncendianFallsLevelLinkerTTCIncarnation(
-            thisLevelDepth
-            );
-    var effect = InternalEffectCreateIncendianFallsLevelLinkerTTC(id, rootIncarnation.version, incarnation);
-    NotifyEffect(effect);
-    return new IncendianFallsLevelLinkerTTC(this, id);
-  }
-  public IncendianFallsLevelLinkerTTCCreateEffect InternalEffectCreateIncendianFallsLevelLinkerTTC(
-      int id,
-      int incarnationVersion,
-      IncendianFallsLevelLinkerTTCIncarnation incarnation) {
-    CheckUnlocked();
-    rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Add(
-        id,
-        new VersionAndIncarnation<IncendianFallsLevelLinkerTTCIncarnation>(
-            incarnationVersion,
-            incarnation));
-    return new IncendianFallsLevelLinkerTTCCreateEffect(id, incarnation.Copy());
-  }
-
-  public void EffectIncendianFallsLevelLinkerTTCDelete(int id) {
-    CheckUnlocked();
-    var effect = InternalEffectIncendianFallsLevelLinkerTTCDelete(id);
-    NotifyEffect(effect);
-  }
-  public IncendianFallsLevelLinkerTTCDeleteEffect InternalEffectIncendianFallsLevelLinkerTTCDelete(int id) {
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[id];
-
-    rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Remove(id);
-    return new IncendianFallsLevelLinkerTTCDeleteEffect(id);
-  }
-
-     
-  public int GetIncendianFallsLevelLinkerTTCHash(int id, int version, IncendianFallsLevelLinkerTTCIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.thisLevelDepth.GetDeterministicHashCode();
-    return result;
-  }
-       public CliffLevelControllerIncarnation GetCliffLevelControllerIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsCliffLevelController[id].incarnation;
-  }
-  public bool CliffLevelControllerExists(int id) {
-    return rootIncarnation.incarnationsCliffLevelController.ContainsKey(id);
-  }
-  public CliffLevelController GetCliffLevelController(int id) {
-    CheckHasCliffLevelController(id);
-    return new CliffLevelController(this, id);
-  }
-  public CliffLevelController GetCliffLevelControllerOrNull(int id) {
-    if (CliffLevelControllerExists(id)) {
-      return new CliffLevelController(this, id);
-    } else {
-      return new CliffLevelController(this, 0);
-    }
-  }
-  public List<CliffLevelController> AllCliffLevelController() {
-    List<CliffLevelController> result = new List<CliffLevelController>(rootIncarnation.incarnationsCliffLevelController.Count);
-    foreach (var id in rootIncarnation.incarnationsCliffLevelController.Keys) {
-      result.Add(new CliffLevelController(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<CliffLevelController> EnumAllCliffLevelController() {
-    foreach (var id in rootIncarnation.incarnationsCliffLevelController.Keys) {
-      yield return GetCliffLevelController(id);
-    }
-  }
-  public void CheckHasCliffLevelController(CliffLevelController thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasCliffLevelController(thing.id);
-  }
-  public void CheckHasCliffLevelController(int id) {
-    if (!rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
-      throw new System.Exception("Invalid CliffLevelController: " + id);
-    }
-  }
-  public CliffLevelController EffectCliffLevelControllerCreate(
-      Level level,
-      int depth) {
-    CheckHasLevel(level);
-    return TrustedEffectCliffLevelControllerCreateWithId(NewId()
-            ,level.id
-            ,depth    );
-  }
-  public CliffLevelController TrustedEffectCliffLevelControllerCreateWithId(int id
-,      int level
-,      int depth) {
-    CheckUnlocked();
-
-    var incarnation =
-        new CliffLevelControllerIncarnation(
-            level,
-            depth
-            );
-    var effect = InternalEffectCreateCliffLevelController(id, rootIncarnation.version, incarnation);
-    NotifyEffect(effect);
-    return new CliffLevelController(this, id);
-  }
-  public CliffLevelControllerCreateEffect InternalEffectCreateCliffLevelController(
-      int id,
-      int incarnationVersion,
-      CliffLevelControllerIncarnation incarnation) {
-    CheckUnlocked();
-    rootIncarnation.incarnationsCliffLevelController.Add(
-        id,
-        new VersionAndIncarnation<CliffLevelControllerIncarnation>(
-            incarnationVersion,
-            incarnation));
-    return new CliffLevelControllerCreateEffect(id, incarnation.Copy());
-  }
-
-  public void EffectCliffLevelControllerDelete(int id) {
-    CheckUnlocked();
-    var effect = InternalEffectCliffLevelControllerDelete(id);
-    NotifyEffect(effect);
-  }
-  public CliffLevelControllerDeleteEffect InternalEffectCliffLevelControllerDelete(int id) {
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsCliffLevelController[id];
-
-    rootIncarnation.incarnationsCliffLevelController.Remove(id);
-    return new CliffLevelControllerDeleteEffect(id);
-  }
-
-     
-  public int GetCliffLevelControllerHash(int id, int version, CliffLevelControllerIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
-    return result;
-  }
-       public PreGauntletLevelControllerIncarnation GetPreGauntletLevelControllerIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsPreGauntletLevelController[id].incarnation;
-  }
-  public bool PreGauntletLevelControllerExists(int id) {
-    return rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id);
-  }
-  public PreGauntletLevelController GetPreGauntletLevelController(int id) {
-    CheckHasPreGauntletLevelController(id);
-    return new PreGauntletLevelController(this, id);
-  }
-  public PreGauntletLevelController GetPreGauntletLevelControllerOrNull(int id) {
-    if (PreGauntletLevelControllerExists(id)) {
-      return new PreGauntletLevelController(this, id);
-    } else {
-      return new PreGauntletLevelController(this, 0);
-    }
-  }
-  public List<PreGauntletLevelController> AllPreGauntletLevelController() {
-    List<PreGauntletLevelController> result = new List<PreGauntletLevelController>(rootIncarnation.incarnationsPreGauntletLevelController.Count);
-    foreach (var id in rootIncarnation.incarnationsPreGauntletLevelController.Keys) {
-      result.Add(new PreGauntletLevelController(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<PreGauntletLevelController> EnumAllPreGauntletLevelController() {
-    foreach (var id in rootIncarnation.incarnationsPreGauntletLevelController.Keys) {
-      yield return GetPreGauntletLevelController(id);
-    }
-  }
-  public void CheckHasPreGauntletLevelController(PreGauntletLevelController thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasPreGauntletLevelController(thing.id);
-  }
-  public void CheckHasPreGauntletLevelController(int id) {
-    if (!rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
-      throw new System.Exception("Invalid PreGauntletLevelController: " + id);
-    }
-  }
-  public PreGauntletLevelController EffectPreGauntletLevelControllerCreate(
-      Level level) {
-    CheckHasLevel(level);
-    return TrustedEffectPreGauntletLevelControllerCreateWithId(NewId()
-            ,level.id    );
-  }
-  public PreGauntletLevelController TrustedEffectPreGauntletLevelControllerCreateWithId(int id
-,      int level) {
-    CheckUnlocked();
-
-    var incarnation =
-        new PreGauntletLevelControllerIncarnation(
-            level
-            );
-    var effect = InternalEffectCreatePreGauntletLevelController(id, rootIncarnation.version, incarnation);
-    NotifyEffect(effect);
-    return new PreGauntletLevelController(this, id);
-  }
-  public PreGauntletLevelControllerCreateEffect InternalEffectCreatePreGauntletLevelController(
-      int id,
-      int incarnationVersion,
-      PreGauntletLevelControllerIncarnation incarnation) {
-    CheckUnlocked();
-    rootIncarnation.incarnationsPreGauntletLevelController.Add(
-        id,
-        new VersionAndIncarnation<PreGauntletLevelControllerIncarnation>(
-            incarnationVersion,
-            incarnation));
-    return new PreGauntletLevelControllerCreateEffect(id, incarnation.Copy());
-  }
-
-  public void EffectPreGauntletLevelControllerDelete(int id) {
-    CheckUnlocked();
-    var effect = InternalEffectPreGauntletLevelControllerDelete(id);
-    NotifyEffect(effect);
-  }
-  public PreGauntletLevelControllerDeleteEffect InternalEffectPreGauntletLevelControllerDelete(int id) {
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsPreGauntletLevelController[id];
-
-    rootIncarnation.incarnationsPreGauntletLevelController.Remove(id);
-    return new PreGauntletLevelControllerDeleteEffect(id);
-  }
-
-     
-  public int GetPreGauntletLevelControllerHash(int id, int version, PreGauntletLevelControllerIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
-    return result;
-  }
-       public GauntletLevelControllerIncarnation GetGauntletLevelControllerIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsGauntletLevelController[id].incarnation;
-  }
-  public bool GauntletLevelControllerExists(int id) {
-    return rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id);
-  }
-  public GauntletLevelController GetGauntletLevelController(int id) {
-    CheckHasGauntletLevelController(id);
-    return new GauntletLevelController(this, id);
-  }
-  public GauntletLevelController GetGauntletLevelControllerOrNull(int id) {
-    if (GauntletLevelControllerExists(id)) {
-      return new GauntletLevelController(this, id);
-    } else {
-      return new GauntletLevelController(this, 0);
-    }
-  }
-  public List<GauntletLevelController> AllGauntletLevelController() {
-    List<GauntletLevelController> result = new List<GauntletLevelController>(rootIncarnation.incarnationsGauntletLevelController.Count);
-    foreach (var id in rootIncarnation.incarnationsGauntletLevelController.Keys) {
-      result.Add(new GauntletLevelController(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<GauntletLevelController> EnumAllGauntletLevelController() {
-    foreach (var id in rootIncarnation.incarnationsGauntletLevelController.Keys) {
-      yield return GetGauntletLevelController(id);
-    }
-  }
-  public void CheckHasGauntletLevelController(GauntletLevelController thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasGauntletLevelController(thing.id);
-  }
-  public void CheckHasGauntletLevelController(int id) {
-    if (!rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
-      throw new System.Exception("Invalid GauntletLevelController: " + id);
-    }
-  }
-  public GauntletLevelController EffectGauntletLevelControllerCreate(
-      Level level) {
-    CheckHasLevel(level);
-    return TrustedEffectGauntletLevelControllerCreateWithId(NewId()
-            ,level.id    );
-  }
-  public GauntletLevelController TrustedEffectGauntletLevelControllerCreateWithId(int id
-,      int level) {
-    CheckUnlocked();
-
-    var incarnation =
-        new GauntletLevelControllerIncarnation(
-            level
-            );
-    var effect = InternalEffectCreateGauntletLevelController(id, rootIncarnation.version, incarnation);
-    NotifyEffect(effect);
-    return new GauntletLevelController(this, id);
-  }
-  public GauntletLevelControllerCreateEffect InternalEffectCreateGauntletLevelController(
-      int id,
-      int incarnationVersion,
-      GauntletLevelControllerIncarnation incarnation) {
-    CheckUnlocked();
-    rootIncarnation.incarnationsGauntletLevelController.Add(
-        id,
-        new VersionAndIncarnation<GauntletLevelControllerIncarnation>(
-            incarnationVersion,
-            incarnation));
-    return new GauntletLevelControllerCreateEffect(id, incarnation.Copy());
-  }
-
-  public void EffectGauntletLevelControllerDelete(int id) {
-    CheckUnlocked();
-    var effect = InternalEffectGauntletLevelControllerDelete(id);
-    NotifyEffect(effect);
-  }
-  public GauntletLevelControllerDeleteEffect InternalEffectGauntletLevelControllerDelete(int id) {
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsGauntletLevelController[id];
-
-    rootIncarnation.incarnationsGauntletLevelController.Remove(id);
-    return new GauntletLevelControllerDeleteEffect(id);
-  }
-
-     
-  public int GetGauntletLevelControllerHash(int id, int version, GauntletLevelControllerIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
-    return result;
-  }
-       public CommIncarnation GetCommIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsComm[id].incarnation;
-  }
-  public bool CommExists(int id) {
-    return rootIncarnation.incarnationsComm.ContainsKey(id);
-  }
-  public Comm GetComm(int id) {
-    CheckHasComm(id);
-    return new Comm(this, id);
-  }
-  public Comm GetCommOrNull(int id) {
-    if (CommExists(id)) {
-      return new Comm(this, id);
-    } else {
-      return new Comm(this, 0);
-    }
-  }
-  public List<Comm> AllComm() {
-    List<Comm> result = new List<Comm>(rootIncarnation.incarnationsComm.Count);
-    foreach (var id in rootIncarnation.incarnationsComm.Keys) {
-      result.Add(new Comm(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<Comm> EnumAllComm() {
-    foreach (var id in rootIncarnation.incarnationsComm.Keys) {
-      yield return GetComm(id);
-    }
-  }
-  public void CheckHasComm(Comm thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasComm(thing.id);
-  }
-  public void CheckHasComm(int id) {
-    if (!rootIncarnation.incarnationsComm.ContainsKey(id)) {
-      throw new System.Exception("Invalid Comm: " + id);
-    }
-  }
-  public Comm EffectCommCreate(
-      ICommTemplate template,
-      CommActionImmList actions,
-      CommTextImmList texts) {
-    return TrustedEffectCommCreateWithId(NewId()
-            ,template
-            ,actions
-            ,texts    );
-  }
-  public Comm TrustedEffectCommCreateWithId(int id
-,      ICommTemplate template
-,      CommActionImmList actions
-,      CommTextImmList texts) {
-    CheckUnlocked();
-
-    var incarnation =
-        new CommIncarnation(
-            template,
-            actions,
-            texts
-            );
-    var effect = InternalEffectCreateComm(id, rootIncarnation.version, incarnation);
-    NotifyEffect(effect);
-    return new Comm(this, id);
-  }
-  public CommCreateEffect InternalEffectCreateComm(
-      int id,
-      int incarnationVersion,
-      CommIncarnation incarnation) {
-    CheckUnlocked();
-    rootIncarnation.incarnationsComm.Add(
-        id,
-        new VersionAndIncarnation<CommIncarnation>(
-            incarnationVersion,
-            incarnation));
-    return new CommCreateEffect(id, incarnation.Copy());
-  }
-
-  public void EffectCommDelete(int id) {
-    CheckUnlocked();
-    var effect = InternalEffectCommDelete(id);
-    NotifyEffect(effect);
-  }
-  public CommDeleteEffect InternalEffectCommDelete(int id) {
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsComm[id];
-
-    rootIncarnation.incarnationsComm.Remove(id);
-    return new CommDeleteEffect(id);
-  }
-
-     
-  public int GetCommHash(int id, int version, CommIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.template.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.actions.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.texts.GetDeterministicHashCode();
-    return result;
-  }
-       public GameIncarnation GetGameIncarnation(int id) {
-    if (id == 0) {
-      throw new Exception("Tried dereferencing null!");
-    }
-    return rootIncarnation.incarnationsGame[id].incarnation;
-  }
-  public bool GameExists(int id) {
-    return rootIncarnation.incarnationsGame.ContainsKey(id);
-  }
-  public Game GetGame(int id) {
-    CheckHasGame(id);
-    return new Game(this, id);
-  }
-  public Game GetGameOrNull(int id) {
-    if (GameExists(id)) {
-      return new Game(this, id);
-    } else {
-      return new Game(this, 0);
-    }
-  }
-  public List<Game> AllGame() {
-    List<Game> result = new List<Game>(rootIncarnation.incarnationsGame.Count);
-    foreach (var id in rootIncarnation.incarnationsGame.Keys) {
-      result.Add(new Game(this, id));
-    }
-    return result;
-  }
-  public IEnumerator<Game> EnumAllGame() {
-    foreach (var id in rootIncarnation.incarnationsGame.Keys) {
-      yield return GetGame(id);
-    }
-  }
-  public void CheckHasGame(Game thing) {
-    CheckRootsEqual(this, thing.root);
-    CheckHasGame(thing.id);
-  }
-  public void CheckHasGame(int id) {
-    if (!rootIncarnation.incarnationsGame.ContainsKey(id)) {
-      throw new System.Exception("Invalid Game: " + id);
-    }
-  }
-  public Game EffectGameCreate(
-      Rand rand,
-      bool squareLevelsOnly,
-      LevelMutSet levels,
-      Unit player,
-      Level level,
-      int time,
-      Unit actingUnit,
-      bool pauseBeforeNextUnit,
-      int actionNum,
-      string instructions,
-      bool hideInput,
-      IGameEvent evvent,
-      CommMutList comms) {
-    CheckHasRand(rand);
-    CheckHasLevelMutSet(levels);
-    CheckHasCommMutList(comms);
-    return TrustedEffectGameCreateWithId(NewId()
-            ,rand.id
-            ,squareLevelsOnly
-            ,levels.id
-            ,player.id
-            ,level.id
-            ,time
-            ,actingUnit.id
-            ,pauseBeforeNextUnit
-            ,actionNum
-            ,instructions
-            ,hideInput
-            ,evvent
-            ,comms.id    );
-  }
-  public Game TrustedEffectGameCreateWithId(int id
-,      int rand
-,      bool squareLevelsOnly
-,      int levels
-,      int player
-,      int level
-,      int time
-,      int actingUnit
-,      bool pauseBeforeNextUnit
-,      int actionNum
-,      string instructions
-,      bool hideInput
-,      IGameEvent evvent
-,      int comms) {
-    CheckUnlocked();
-
-    var incarnation =
-        new GameIncarnation(
-            rand,
-            squareLevelsOnly,
-            levels,
-            player,
-            level,
-            time,
-            actingUnit,
-            pauseBeforeNextUnit,
-            actionNum,
-            instructions,
-            hideInput,
-            evvent,
-            comms
-            );
-    var effect = InternalEffectCreateGame(id, rootIncarnation.version, incarnation);
-    NotifyEffect(effect);
-    return new Game(this, id);
-  }
-  public GameCreateEffect InternalEffectCreateGame(
-      int id,
-      int incarnationVersion,
-      GameIncarnation incarnation) {
-    CheckUnlocked();
-    rootIncarnation.incarnationsGame.Add(
-        id,
-        new VersionAndIncarnation<GameIncarnation>(
-            incarnationVersion,
-            incarnation));
-    return new GameCreateEffect(id, incarnation.Copy());
-  }
-
-  public void EffectGameDelete(int id) {
-    CheckUnlocked();
-    var effect = InternalEffectGameDelete(id);
-    NotifyEffect(effect);
-  }
-  public GameDeleteEffect InternalEffectGameDelete(int id) {
-    var oldIncarnationAndVersion =
-        rootIncarnation.incarnationsGame[id];
-
-    rootIncarnation.incarnationsGame.Remove(id);
-    return new GameDeleteEffect(id);
-  }
-
-     
-  public int GetGameHash(int id, int version, GameIncarnation incarnation) {
-    int result = id * version;
-    result += id * version * 1 * incarnation.rand.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.squareLevelsOnly.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.levels.GetDeterministicHashCode();
-    if (!object.ReferenceEquals(incarnation.player, null)) {
-      result += id * version * 4 * incarnation.player.GetDeterministicHashCode();
-    }
-    if (!object.ReferenceEquals(incarnation.level, null)) {
-      result += id * version * 5 * incarnation.level.GetDeterministicHashCode();
-    }
-    result += id * version * 6 * incarnation.time.GetDeterministicHashCode();
-    if (!object.ReferenceEquals(incarnation.actingUnit, null)) {
-      result += id * version * 7 * incarnation.actingUnit.GetDeterministicHashCode();
-    }
-    result += id * version * 8 * incarnation.pauseBeforeNextUnit.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.actionNum.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.instructions.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.hideInput.GetDeterministicHashCode();
-    if (!object.ReferenceEquals(incarnation.evvent, null)) {
-      result += id * version * 12 * incarnation.evvent.GetDeterministicHashCode();
-    }
-    result += id * version * 13 * incarnation.comms.GetDeterministicHashCode();
-    return result;
-  }
-     
-  public void EffectGameSetPlayer(
-      int id, Unit newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = InternalEffectGameSetPlayer(id, newValue);
-    NotifyEffect(effect);
-  }
-  public GameSetPlayerEffect InternalEffectGameSetPlayer(int id, Unit newValue) {
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldId = oldIncarnationAndVersion.incarnation.player;
-      oldIncarnationAndVersion.incarnation.player = newValue.id;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.levels,
-              newValue.id,
-              oldIncarnationAndVersion.incarnation.level,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.actingUnit,
-              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
-              oldIncarnationAndVersion.incarnation.actionNum,
-              oldIncarnationAndVersion.incarnation.instructions,
-              oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.comms);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-return new GameSetPlayerEffect(id, newValue.id);
-  }
-
-  public void EffectGameSetLevel(
-      int id, Level newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = InternalEffectGameSetLevel(id, newValue);
-    NotifyEffect(effect);
-  }
-  public GameSetLevelEffect InternalEffectGameSetLevel(int id, Level newValue) {
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldId = oldIncarnationAndVersion.incarnation.level;
-      oldIncarnationAndVersion.incarnation.level = newValue.id;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.levels,
-              oldIncarnationAndVersion.incarnation.player,
-              newValue.id,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.actingUnit,
-              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
-              oldIncarnationAndVersion.incarnation.actionNum,
-              oldIncarnationAndVersion.incarnation.instructions,
-              oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.comms);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-return new GameSetLevelEffect(id, newValue.id);
-  }
-
-  public void EffectGameSetTime(
-      int id, int newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = InternalEffectGameSetTime(id, newValue);
-    NotifyEffect(effect);
-  }
-  public GameSetTimeEffect InternalEffectGameSetTime(int id, int newValue) {
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.time;
-      oldIncarnationAndVersion.incarnation.time = newValue;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.levels,
-              oldIncarnationAndVersion.incarnation.player,
-              oldIncarnationAndVersion.incarnation.level,
-              newValue,
-              oldIncarnationAndVersion.incarnation.actingUnit,
-              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
-              oldIncarnationAndVersion.incarnation.actionNum,
-              oldIncarnationAndVersion.incarnation.instructions,
-              oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.comms);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-return new GameSetTimeEffect(id, newValue);
-  }
-
-  public void EffectGameSetActingUnit(
-      int id, Unit newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = InternalEffectGameSetActingUnit(id, newValue);
-    NotifyEffect(effect);
-  }
-  public GameSetActingUnitEffect InternalEffectGameSetActingUnit(int id, Unit newValue) {
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldId = oldIncarnationAndVersion.incarnation.actingUnit;
-      oldIncarnationAndVersion.incarnation.actingUnit = newValue.id;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.levels,
-              oldIncarnationAndVersion.incarnation.player,
-              oldIncarnationAndVersion.incarnation.level,
-              oldIncarnationAndVersion.incarnation.time,
-              newValue.id,
-              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
-              oldIncarnationAndVersion.incarnation.actionNum,
-              oldIncarnationAndVersion.incarnation.instructions,
-              oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.comms);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-return new GameSetActingUnitEffect(id, newValue.id);
-  }
-
-  public void EffectGameSetPauseBeforeNextUnit(
-      int id, bool newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = InternalEffectGameSetPauseBeforeNextUnit(id, newValue);
-    NotifyEffect(effect);
-  }
-  public GameSetPauseBeforeNextUnitEffect InternalEffectGameSetPauseBeforeNextUnit(int id, bool newValue) {
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit;
-      oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit = newValue;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.levels,
-              oldIncarnationAndVersion.incarnation.player,
-              oldIncarnationAndVersion.incarnation.level,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.actingUnit,
-              newValue,
-              oldIncarnationAndVersion.incarnation.actionNum,
-              oldIncarnationAndVersion.incarnation.instructions,
-              oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.comms);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-return new GameSetPauseBeforeNextUnitEffect(id, newValue);
-  }
-
-  public void EffectGameSetActionNum(
-      int id, int newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = InternalEffectGameSetActionNum(id, newValue);
-    NotifyEffect(effect);
-  }
-  public GameSetActionNumEffect InternalEffectGameSetActionNum(int id, int newValue) {
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.actionNum;
-      oldIncarnationAndVersion.incarnation.actionNum = newValue;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.levels,
-              oldIncarnationAndVersion.incarnation.player,
-              oldIncarnationAndVersion.incarnation.level,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.actingUnit,
-              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
-              newValue,
-              oldIncarnationAndVersion.incarnation.instructions,
-              oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.comms);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-return new GameSetActionNumEffect(id, newValue);
-  }
-
-  public void EffectGameSetInstructions(
-      int id, string newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = InternalEffectGameSetInstructions(id, newValue);
-    NotifyEffect(effect);
-  }
-  public GameSetInstructionsEffect InternalEffectGameSetInstructions(int id, string newValue) {
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.instructions;
-      oldIncarnationAndVersion.incarnation.instructions = newValue;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.levels,
-              oldIncarnationAndVersion.incarnation.player,
-              oldIncarnationAndVersion.incarnation.level,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.actingUnit,
-              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
-              oldIncarnationAndVersion.incarnation.actionNum,
-              newValue,
-              oldIncarnationAndVersion.incarnation.hideInput,
-              oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.comms);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-return new GameSetInstructionsEffect(id, newValue);
-  }
-
-  public void EffectGameSetHideInput(
-      int id, bool newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = InternalEffectGameSetHideInput(id, newValue);
-    NotifyEffect(effect);
-  }
-  public GameSetHideInputEffect InternalEffectGameSetHideInput(int id, bool newValue) {
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.hideInput;
-      oldIncarnationAndVersion.incarnation.hideInput = newValue;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.levels,
-              oldIncarnationAndVersion.incarnation.player,
-              oldIncarnationAndVersion.incarnation.level,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.actingUnit,
-              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
-              oldIncarnationAndVersion.incarnation.actionNum,
-              oldIncarnationAndVersion.incarnation.instructions,
-              newValue,
-              oldIncarnationAndVersion.incarnation.evvent,
-              oldIncarnationAndVersion.incarnation.comms);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-return new GameSetHideInputEffect(id, newValue);
-  }
-
-  public void EffectGameSetEvvent(
-      int id, IGameEvent newValue) {
-    CheckUnlocked();
-    CheckHasGame(id);
-    var effect = InternalEffectGameSetEvvent(id, newValue);
-    NotifyEffect(effect);
-  }
-  public GameSetEvventEffect InternalEffectGameSetEvvent(int id, IGameEvent newValue) {
-    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
-    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
-      var oldValue = oldIncarnationAndVersion.incarnation.evvent;
-      oldIncarnationAndVersion.incarnation.evvent = newValue;
-
-    } else {
-      var newIncarnation =
-          new GameIncarnation(
-              oldIncarnationAndVersion.incarnation.rand,
-              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
-              oldIncarnationAndVersion.incarnation.levels,
-              oldIncarnationAndVersion.incarnation.player,
-              oldIncarnationAndVersion.incarnation.level,
-              oldIncarnationAndVersion.incarnation.time,
-              oldIncarnationAndVersion.incarnation.actingUnit,
-              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
-              oldIncarnationAndVersion.incarnation.actionNum,
-              oldIncarnationAndVersion.incarnation.instructions,
-              oldIncarnationAndVersion.incarnation.hideInput,
-              newValue,
-              oldIncarnationAndVersion.incarnation.comms);
-      rootIncarnation.incarnationsGame[id] =
-          new VersionAndIncarnation<GameIncarnation>(
-              rootIncarnation.version,
-              newIncarnation);
-    }
-
-return new GameSetEvventEffect(id, newValue);
-  }
-  public VolcaetusLevelControllerIncarnation GetVolcaetusLevelControllerIncarnation(int id) {
+       public VolcaetusLevelControllerIncarnation GetVolcaetusLevelControllerIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
     }
@@ -24118,7 +23032,1447 @@ return new GameSetEvventEffect(id, newValue);
     result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
     return result;
   }
+       public SquareCaveLevelControllerIncarnation GetSquareCaveLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsSquareCaveLevelController[id].incarnation;
+  }
+  public bool SquareCaveLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id);
+  }
+  public SquareCaveLevelController GetSquareCaveLevelController(int id) {
+    CheckHasSquareCaveLevelController(id);
+    return new SquareCaveLevelController(this, id);
+  }
+  public SquareCaveLevelController GetSquareCaveLevelControllerOrNull(int id) {
+    if (SquareCaveLevelControllerExists(id)) {
+      return new SquareCaveLevelController(this, id);
+    } else {
+      return new SquareCaveLevelController(this, 0);
+    }
+  }
+  public List<SquareCaveLevelController> AllSquareCaveLevelController() {
+    List<SquareCaveLevelController> result = new List<SquareCaveLevelController>(rootIncarnation.incarnationsSquareCaveLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsSquareCaveLevelController.Keys) {
+      result.Add(new SquareCaveLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<SquareCaveLevelController> EnumAllSquareCaveLevelController() {
+    foreach (var id in rootIncarnation.incarnationsSquareCaveLevelController.Keys) {
+      yield return GetSquareCaveLevelController(id);
+    }
+  }
+  public void CheckHasSquareCaveLevelController(SquareCaveLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasSquareCaveLevelController(thing.id);
+  }
+  public void CheckHasSquareCaveLevelController(int id) {
+    if (!rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid SquareCaveLevelController: " + id);
+    }
+  }
+  public SquareCaveLevelController EffectSquareCaveLevelControllerCreate(
+      Level level,
+      int depth) {
+    CheckHasLevel(level);
+    return TrustedEffectSquareCaveLevelControllerCreateWithId(NewId()
+            ,level.id
+            ,depth    );
+  }
+  public SquareCaveLevelController TrustedEffectSquareCaveLevelControllerCreateWithId(int id
+,      int level
+,      int depth) {
+    CheckUnlocked();
+
+    var incarnation =
+        new SquareCaveLevelControllerIncarnation(
+            level,
+            depth
+            );
+    var effect = InternalEffectCreateSquareCaveLevelController(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new SquareCaveLevelController(this, id);
+  }
+  public SquareCaveLevelControllerCreateEffect InternalEffectCreateSquareCaveLevelController(
+      int id,
+      int incarnationVersion,
+      SquareCaveLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsSquareCaveLevelController.Add(
+        id,
+        new VersionAndIncarnation<SquareCaveLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new SquareCaveLevelControllerCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectSquareCaveLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectSquareCaveLevelControllerDelete(id);
+    NotifyEffect(effect);
+  }
+  public SquareCaveLevelControllerDeleteEffect InternalEffectSquareCaveLevelControllerDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsSquareCaveLevelController[id];
+
+    rootIncarnation.incarnationsSquareCaveLevelController.Remove(id);
+    return new SquareCaveLevelControllerDeleteEffect(id);
+  }
+
      
+  public int GetSquareCaveLevelControllerHash(int id, int version, SquareCaveLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
+    return result;
+  }
+       public RavashrikeLevelControllerIncarnation GetRavashrikeLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsRavashrikeLevelController[id].incarnation;
+  }
+  public bool RavashrikeLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id);
+  }
+  public RavashrikeLevelController GetRavashrikeLevelController(int id) {
+    CheckHasRavashrikeLevelController(id);
+    return new RavashrikeLevelController(this, id);
+  }
+  public RavashrikeLevelController GetRavashrikeLevelControllerOrNull(int id) {
+    if (RavashrikeLevelControllerExists(id)) {
+      return new RavashrikeLevelController(this, id);
+    } else {
+      return new RavashrikeLevelController(this, 0);
+    }
+  }
+  public List<RavashrikeLevelController> AllRavashrikeLevelController() {
+    List<RavashrikeLevelController> result = new List<RavashrikeLevelController>(rootIncarnation.incarnationsRavashrikeLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsRavashrikeLevelController.Keys) {
+      result.Add(new RavashrikeLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<RavashrikeLevelController> EnumAllRavashrikeLevelController() {
+    foreach (var id in rootIncarnation.incarnationsRavashrikeLevelController.Keys) {
+      yield return GetRavashrikeLevelController(id);
+    }
+  }
+  public void CheckHasRavashrikeLevelController(RavashrikeLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasRavashrikeLevelController(thing.id);
+  }
+  public void CheckHasRavashrikeLevelController(int id) {
+    if (!rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid RavashrikeLevelController: " + id);
+    }
+  }
+  public RavashrikeLevelController EffectRavashrikeLevelControllerCreate(
+      Level level) {
+    CheckHasLevel(level);
+    return TrustedEffectRavashrikeLevelControllerCreateWithId(NewId()
+            ,level.id    );
+  }
+  public RavashrikeLevelController TrustedEffectRavashrikeLevelControllerCreateWithId(int id
+,      int level) {
+    CheckUnlocked();
+
+    var incarnation =
+        new RavashrikeLevelControllerIncarnation(
+            level
+            );
+    var effect = InternalEffectCreateRavashrikeLevelController(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new RavashrikeLevelController(this, id);
+  }
+  public RavashrikeLevelControllerCreateEffect InternalEffectCreateRavashrikeLevelController(
+      int id,
+      int incarnationVersion,
+      RavashrikeLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsRavashrikeLevelController.Add(
+        id,
+        new VersionAndIncarnation<RavashrikeLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new RavashrikeLevelControllerCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectRavashrikeLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectRavashrikeLevelControllerDelete(id);
+    NotifyEffect(effect);
+  }
+  public RavashrikeLevelControllerDeleteEffect InternalEffectRavashrikeLevelControllerDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsRavashrikeLevelController[id];
+
+    rootIncarnation.incarnationsRavashrikeLevelController.Remove(id);
+    return new RavashrikeLevelControllerDeleteEffect(id);
+  }
+
+     
+  public int GetRavashrikeLevelControllerHash(int id, int version, RavashrikeLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+       public PentagonalCaveLevelControllerIncarnation GetPentagonalCaveLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsPentagonalCaveLevelController[id].incarnation;
+  }
+  public bool PentagonalCaveLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id);
+  }
+  public PentagonalCaveLevelController GetPentagonalCaveLevelController(int id) {
+    CheckHasPentagonalCaveLevelController(id);
+    return new PentagonalCaveLevelController(this, id);
+  }
+  public PentagonalCaveLevelController GetPentagonalCaveLevelControllerOrNull(int id) {
+    if (PentagonalCaveLevelControllerExists(id)) {
+      return new PentagonalCaveLevelController(this, id);
+    } else {
+      return new PentagonalCaveLevelController(this, 0);
+    }
+  }
+  public List<PentagonalCaveLevelController> AllPentagonalCaveLevelController() {
+    List<PentagonalCaveLevelController> result = new List<PentagonalCaveLevelController>(rootIncarnation.incarnationsPentagonalCaveLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsPentagonalCaveLevelController.Keys) {
+      result.Add(new PentagonalCaveLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<PentagonalCaveLevelController> EnumAllPentagonalCaveLevelController() {
+    foreach (var id in rootIncarnation.incarnationsPentagonalCaveLevelController.Keys) {
+      yield return GetPentagonalCaveLevelController(id);
+    }
+  }
+  public void CheckHasPentagonalCaveLevelController(PentagonalCaveLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasPentagonalCaveLevelController(thing.id);
+  }
+  public void CheckHasPentagonalCaveLevelController(int id) {
+    if (!rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid PentagonalCaveLevelController: " + id);
+    }
+  }
+  public PentagonalCaveLevelController EffectPentagonalCaveLevelControllerCreate(
+      Level level,
+      int depth) {
+    CheckHasLevel(level);
+    return TrustedEffectPentagonalCaveLevelControllerCreateWithId(NewId()
+            ,level.id
+            ,depth    );
+  }
+  public PentagonalCaveLevelController TrustedEffectPentagonalCaveLevelControllerCreateWithId(int id
+,      int level
+,      int depth) {
+    CheckUnlocked();
+
+    var incarnation =
+        new PentagonalCaveLevelControllerIncarnation(
+            level,
+            depth
+            );
+    var effect = InternalEffectCreatePentagonalCaveLevelController(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new PentagonalCaveLevelController(this, id);
+  }
+  public PentagonalCaveLevelControllerCreateEffect InternalEffectCreatePentagonalCaveLevelController(
+      int id,
+      int incarnationVersion,
+      PentagonalCaveLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsPentagonalCaveLevelController.Add(
+        id,
+        new VersionAndIncarnation<PentagonalCaveLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new PentagonalCaveLevelControllerCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectPentagonalCaveLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectPentagonalCaveLevelControllerDelete(id);
+    NotifyEffect(effect);
+  }
+  public PentagonalCaveLevelControllerDeleteEffect InternalEffectPentagonalCaveLevelControllerDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsPentagonalCaveLevelController[id];
+
+    rootIncarnation.incarnationsPentagonalCaveLevelController.Remove(id);
+    return new PentagonalCaveLevelControllerDeleteEffect(id);
+  }
+
+     
+  public int GetPentagonalCaveLevelControllerHash(int id, int version, PentagonalCaveLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
+    return result;
+  }
+       public IncendianFallsLevelLinkerTTCIncarnation GetIncendianFallsLevelLinkerTTCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[id].incarnation;
+  }
+  public bool IncendianFallsLevelLinkerTTCExists(int id) {
+    return rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id);
+  }
+  public IncendianFallsLevelLinkerTTC GetIncendianFallsLevelLinkerTTC(int id) {
+    CheckHasIncendianFallsLevelLinkerTTC(id);
+    return new IncendianFallsLevelLinkerTTC(this, id);
+  }
+  public IncendianFallsLevelLinkerTTC GetIncendianFallsLevelLinkerTTCOrNull(int id) {
+    if (IncendianFallsLevelLinkerTTCExists(id)) {
+      return new IncendianFallsLevelLinkerTTC(this, id);
+    } else {
+      return new IncendianFallsLevelLinkerTTC(this, 0);
+    }
+  }
+  public List<IncendianFallsLevelLinkerTTC> AllIncendianFallsLevelLinkerTTC() {
+    List<IncendianFallsLevelLinkerTTC> result = new List<IncendianFallsLevelLinkerTTC>(rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Keys) {
+      result.Add(new IncendianFallsLevelLinkerTTC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<IncendianFallsLevelLinkerTTC> EnumAllIncendianFallsLevelLinkerTTC() {
+    foreach (var id in rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Keys) {
+      yield return GetIncendianFallsLevelLinkerTTC(id);
+    }
+  }
+  public void CheckHasIncendianFallsLevelLinkerTTC(IncendianFallsLevelLinkerTTC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasIncendianFallsLevelLinkerTTC(thing.id);
+  }
+  public void CheckHasIncendianFallsLevelLinkerTTC(int id) {
+    if (!rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid IncendianFallsLevelLinkerTTC: " + id);
+    }
+  }
+  public IncendianFallsLevelLinkerTTC EffectIncendianFallsLevelLinkerTTCCreate(
+      int thisLevelDepth) {
+    return TrustedEffectIncendianFallsLevelLinkerTTCCreateWithId(NewId()
+            ,thisLevelDepth    );
+  }
+  public IncendianFallsLevelLinkerTTC TrustedEffectIncendianFallsLevelLinkerTTCCreateWithId(int id
+,      int thisLevelDepth) {
+    CheckUnlocked();
+
+    var incarnation =
+        new IncendianFallsLevelLinkerTTCIncarnation(
+            thisLevelDepth
+            );
+    var effect = InternalEffectCreateIncendianFallsLevelLinkerTTC(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new IncendianFallsLevelLinkerTTC(this, id);
+  }
+  public IncendianFallsLevelLinkerTTCCreateEffect InternalEffectCreateIncendianFallsLevelLinkerTTC(
+      int id,
+      int incarnationVersion,
+      IncendianFallsLevelLinkerTTCIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Add(
+        id,
+        new VersionAndIncarnation<IncendianFallsLevelLinkerTTCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new IncendianFallsLevelLinkerTTCCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectIncendianFallsLevelLinkerTTCDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectIncendianFallsLevelLinkerTTCDelete(id);
+    NotifyEffect(effect);
+  }
+  public IncendianFallsLevelLinkerTTCDeleteEffect InternalEffectIncendianFallsLevelLinkerTTCDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC[id];
+
+    rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.Remove(id);
+    return new IncendianFallsLevelLinkerTTCDeleteEffect(id);
+  }
+
+     
+  public int GetIncendianFallsLevelLinkerTTCHash(int id, int version, IncendianFallsLevelLinkerTTCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.thisLevelDepth.GetDeterministicHashCode();
+    return result;
+  }
+       public CliffLevelControllerIncarnation GetCliffLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsCliffLevelController[id].incarnation;
+  }
+  public bool CliffLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsCliffLevelController.ContainsKey(id);
+  }
+  public CliffLevelController GetCliffLevelController(int id) {
+    CheckHasCliffLevelController(id);
+    return new CliffLevelController(this, id);
+  }
+  public CliffLevelController GetCliffLevelControllerOrNull(int id) {
+    if (CliffLevelControllerExists(id)) {
+      return new CliffLevelController(this, id);
+    } else {
+      return new CliffLevelController(this, 0);
+    }
+  }
+  public List<CliffLevelController> AllCliffLevelController() {
+    List<CliffLevelController> result = new List<CliffLevelController>(rootIncarnation.incarnationsCliffLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsCliffLevelController.Keys) {
+      result.Add(new CliffLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<CliffLevelController> EnumAllCliffLevelController() {
+    foreach (var id in rootIncarnation.incarnationsCliffLevelController.Keys) {
+      yield return GetCliffLevelController(id);
+    }
+  }
+  public void CheckHasCliffLevelController(CliffLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasCliffLevelController(thing.id);
+  }
+  public void CheckHasCliffLevelController(int id) {
+    if (!rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid CliffLevelController: " + id);
+    }
+  }
+  public CliffLevelController EffectCliffLevelControllerCreate(
+      Level level,
+      int depth) {
+    CheckHasLevel(level);
+    return TrustedEffectCliffLevelControllerCreateWithId(NewId()
+            ,level.id
+            ,depth    );
+  }
+  public CliffLevelController TrustedEffectCliffLevelControllerCreateWithId(int id
+,      int level
+,      int depth) {
+    CheckUnlocked();
+
+    var incarnation =
+        new CliffLevelControllerIncarnation(
+            level,
+            depth
+            );
+    var effect = InternalEffectCreateCliffLevelController(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new CliffLevelController(this, id);
+  }
+  public CliffLevelControllerCreateEffect InternalEffectCreateCliffLevelController(
+      int id,
+      int incarnationVersion,
+      CliffLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsCliffLevelController.Add(
+        id,
+        new VersionAndIncarnation<CliffLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new CliffLevelControllerCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectCliffLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectCliffLevelControllerDelete(id);
+    NotifyEffect(effect);
+  }
+  public CliffLevelControllerDeleteEffect InternalEffectCliffLevelControllerDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsCliffLevelController[id];
+
+    rootIncarnation.incarnationsCliffLevelController.Remove(id);
+    return new CliffLevelControllerDeleteEffect(id);
+  }
+
+     
+  public int GetCliffLevelControllerHash(int id, int version, CliffLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
+    return result;
+  }
+       public PreGauntletLevelControllerIncarnation GetPreGauntletLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsPreGauntletLevelController[id].incarnation;
+  }
+  public bool PreGauntletLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id);
+  }
+  public PreGauntletLevelController GetPreGauntletLevelController(int id) {
+    CheckHasPreGauntletLevelController(id);
+    return new PreGauntletLevelController(this, id);
+  }
+  public PreGauntletLevelController GetPreGauntletLevelControllerOrNull(int id) {
+    if (PreGauntletLevelControllerExists(id)) {
+      return new PreGauntletLevelController(this, id);
+    } else {
+      return new PreGauntletLevelController(this, 0);
+    }
+  }
+  public List<PreGauntletLevelController> AllPreGauntletLevelController() {
+    List<PreGauntletLevelController> result = new List<PreGauntletLevelController>(rootIncarnation.incarnationsPreGauntletLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsPreGauntletLevelController.Keys) {
+      result.Add(new PreGauntletLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<PreGauntletLevelController> EnumAllPreGauntletLevelController() {
+    foreach (var id in rootIncarnation.incarnationsPreGauntletLevelController.Keys) {
+      yield return GetPreGauntletLevelController(id);
+    }
+  }
+  public void CheckHasPreGauntletLevelController(PreGauntletLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasPreGauntletLevelController(thing.id);
+  }
+  public void CheckHasPreGauntletLevelController(int id) {
+    if (!rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid PreGauntletLevelController: " + id);
+    }
+  }
+  public PreGauntletLevelController EffectPreGauntletLevelControllerCreate(
+      Level level) {
+    CheckHasLevel(level);
+    return TrustedEffectPreGauntletLevelControllerCreateWithId(NewId()
+            ,level.id    );
+  }
+  public PreGauntletLevelController TrustedEffectPreGauntletLevelControllerCreateWithId(int id
+,      int level) {
+    CheckUnlocked();
+
+    var incarnation =
+        new PreGauntletLevelControllerIncarnation(
+            level
+            );
+    var effect = InternalEffectCreatePreGauntletLevelController(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new PreGauntletLevelController(this, id);
+  }
+  public PreGauntletLevelControllerCreateEffect InternalEffectCreatePreGauntletLevelController(
+      int id,
+      int incarnationVersion,
+      PreGauntletLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsPreGauntletLevelController.Add(
+        id,
+        new VersionAndIncarnation<PreGauntletLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new PreGauntletLevelControllerCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectPreGauntletLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectPreGauntletLevelControllerDelete(id);
+    NotifyEffect(effect);
+  }
+  public PreGauntletLevelControllerDeleteEffect InternalEffectPreGauntletLevelControllerDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsPreGauntletLevelController[id];
+
+    rootIncarnation.incarnationsPreGauntletLevelController.Remove(id);
+    return new PreGauntletLevelControllerDeleteEffect(id);
+  }
+
+     
+  public int GetPreGauntletLevelControllerHash(int id, int version, PreGauntletLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+       public GauntletLevelControllerIncarnation GetGauntletLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsGauntletLevelController[id].incarnation;
+  }
+  public bool GauntletLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id);
+  }
+  public GauntletLevelController GetGauntletLevelController(int id) {
+    CheckHasGauntletLevelController(id);
+    return new GauntletLevelController(this, id);
+  }
+  public GauntletLevelController GetGauntletLevelControllerOrNull(int id) {
+    if (GauntletLevelControllerExists(id)) {
+      return new GauntletLevelController(this, id);
+    } else {
+      return new GauntletLevelController(this, 0);
+    }
+  }
+  public List<GauntletLevelController> AllGauntletLevelController() {
+    List<GauntletLevelController> result = new List<GauntletLevelController>(rootIncarnation.incarnationsGauntletLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsGauntletLevelController.Keys) {
+      result.Add(new GauntletLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<GauntletLevelController> EnumAllGauntletLevelController() {
+    foreach (var id in rootIncarnation.incarnationsGauntletLevelController.Keys) {
+      yield return GetGauntletLevelController(id);
+    }
+  }
+  public void CheckHasGauntletLevelController(GauntletLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasGauntletLevelController(thing.id);
+  }
+  public void CheckHasGauntletLevelController(int id) {
+    if (!rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid GauntletLevelController: " + id);
+    }
+  }
+  public GauntletLevelController EffectGauntletLevelControllerCreate(
+      Level level) {
+    CheckHasLevel(level);
+    return TrustedEffectGauntletLevelControllerCreateWithId(NewId()
+            ,level.id    );
+  }
+  public GauntletLevelController TrustedEffectGauntletLevelControllerCreateWithId(int id
+,      int level) {
+    CheckUnlocked();
+
+    var incarnation =
+        new GauntletLevelControllerIncarnation(
+            level
+            );
+    var effect = InternalEffectCreateGauntletLevelController(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new GauntletLevelController(this, id);
+  }
+  public GauntletLevelControllerCreateEffect InternalEffectCreateGauntletLevelController(
+      int id,
+      int incarnationVersion,
+      GauntletLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsGauntletLevelController.Add(
+        id,
+        new VersionAndIncarnation<GauntletLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new GauntletLevelControllerCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectGauntletLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectGauntletLevelControllerDelete(id);
+    NotifyEffect(effect);
+  }
+  public GauntletLevelControllerDeleteEffect InternalEffectGauntletLevelControllerDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsGauntletLevelController[id];
+
+    rootIncarnation.incarnationsGauntletLevelController.Remove(id);
+    return new GauntletLevelControllerDeleteEffect(id);
+  }
+
+     
+  public int GetGauntletLevelControllerHash(int id, int version, GauntletLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    return result;
+  }
+       public RavaArcanaLevelLinkerTTCIncarnation GetRavaArcanaLevelLinkerTTCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC[id].incarnation;
+  }
+  public bool RavaArcanaLevelLinkerTTCExists(int id) {
+    return rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.ContainsKey(id);
+  }
+  public RavaArcanaLevelLinkerTTC GetRavaArcanaLevelLinkerTTC(int id) {
+    CheckHasRavaArcanaLevelLinkerTTC(id);
+    return new RavaArcanaLevelLinkerTTC(this, id);
+  }
+  public RavaArcanaLevelLinkerTTC GetRavaArcanaLevelLinkerTTCOrNull(int id) {
+    if (RavaArcanaLevelLinkerTTCExists(id)) {
+      return new RavaArcanaLevelLinkerTTC(this, id);
+    } else {
+      return new RavaArcanaLevelLinkerTTC(this, 0);
+    }
+  }
+  public List<RavaArcanaLevelLinkerTTC> AllRavaArcanaLevelLinkerTTC() {
+    List<RavaArcanaLevelLinkerTTC> result = new List<RavaArcanaLevelLinkerTTC>(rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.Count);
+    foreach (var id in rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.Keys) {
+      result.Add(new RavaArcanaLevelLinkerTTC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<RavaArcanaLevelLinkerTTC> EnumAllRavaArcanaLevelLinkerTTC() {
+    foreach (var id in rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.Keys) {
+      yield return GetRavaArcanaLevelLinkerTTC(id);
+    }
+  }
+  public void CheckHasRavaArcanaLevelLinkerTTC(RavaArcanaLevelLinkerTTC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasRavaArcanaLevelLinkerTTC(thing.id);
+  }
+  public void CheckHasRavaArcanaLevelLinkerTTC(int id) {
+    if (!rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.ContainsKey(id)) {
+      throw new System.Exception("Invalid RavaArcanaLevelLinkerTTC: " + id);
+    }
+  }
+  public RavaArcanaLevelLinkerTTC EffectRavaArcanaLevelLinkerTTCCreate(
+      int nextLevelDepth) {
+    return TrustedEffectRavaArcanaLevelLinkerTTCCreateWithId(NewId()
+            ,nextLevelDepth    );
+  }
+  public RavaArcanaLevelLinkerTTC TrustedEffectRavaArcanaLevelLinkerTTCCreateWithId(int id
+,      int nextLevelDepth) {
+    CheckUnlocked();
+
+    var incarnation =
+        new RavaArcanaLevelLinkerTTCIncarnation(
+            nextLevelDepth
+            );
+    var effect = InternalEffectCreateRavaArcanaLevelLinkerTTC(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new RavaArcanaLevelLinkerTTC(this, id);
+  }
+  public RavaArcanaLevelLinkerTTCCreateEffect InternalEffectCreateRavaArcanaLevelLinkerTTC(
+      int id,
+      int incarnationVersion,
+      RavaArcanaLevelLinkerTTCIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.Add(
+        id,
+        new VersionAndIncarnation<RavaArcanaLevelLinkerTTCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new RavaArcanaLevelLinkerTTCCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectRavaArcanaLevelLinkerTTCDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectRavaArcanaLevelLinkerTTCDelete(id);
+    NotifyEffect(effect);
+  }
+  public RavaArcanaLevelLinkerTTCDeleteEffect InternalEffectRavaArcanaLevelLinkerTTCDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC[id];
+
+    rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.Remove(id);
+    return new RavaArcanaLevelLinkerTTCDeleteEffect(id);
+  }
+
+     
+  public int GetRavaArcanaLevelLinkerTTCHash(int id, int version, RavaArcanaLevelLinkerTTCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.nextLevelDepth.GetDeterministicHashCode();
+    return result;
+  }
+       public JumpingCaveLevelControllerIncarnation GetJumpingCaveLevelControllerIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsJumpingCaveLevelController[id].incarnation;
+  }
+  public bool JumpingCaveLevelControllerExists(int id) {
+    return rootIncarnation.incarnationsJumpingCaveLevelController.ContainsKey(id);
+  }
+  public JumpingCaveLevelController GetJumpingCaveLevelController(int id) {
+    CheckHasJumpingCaveLevelController(id);
+    return new JumpingCaveLevelController(this, id);
+  }
+  public JumpingCaveLevelController GetJumpingCaveLevelControllerOrNull(int id) {
+    if (JumpingCaveLevelControllerExists(id)) {
+      return new JumpingCaveLevelController(this, id);
+    } else {
+      return new JumpingCaveLevelController(this, 0);
+    }
+  }
+  public List<JumpingCaveLevelController> AllJumpingCaveLevelController() {
+    List<JumpingCaveLevelController> result = new List<JumpingCaveLevelController>(rootIncarnation.incarnationsJumpingCaveLevelController.Count);
+    foreach (var id in rootIncarnation.incarnationsJumpingCaveLevelController.Keys) {
+      result.Add(new JumpingCaveLevelController(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<JumpingCaveLevelController> EnumAllJumpingCaveLevelController() {
+    foreach (var id in rootIncarnation.incarnationsJumpingCaveLevelController.Keys) {
+      yield return GetJumpingCaveLevelController(id);
+    }
+  }
+  public void CheckHasJumpingCaveLevelController(JumpingCaveLevelController thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasJumpingCaveLevelController(thing.id);
+  }
+  public void CheckHasJumpingCaveLevelController(int id) {
+    if (!rootIncarnation.incarnationsJumpingCaveLevelController.ContainsKey(id)) {
+      throw new System.Exception("Invalid JumpingCaveLevelController: " + id);
+    }
+  }
+  public JumpingCaveLevelController EffectJumpingCaveLevelControllerCreate(
+      Level level,
+      int depth) {
+    CheckHasLevel(level);
+    return TrustedEffectJumpingCaveLevelControllerCreateWithId(NewId()
+            ,level.id
+            ,depth    );
+  }
+  public JumpingCaveLevelController TrustedEffectJumpingCaveLevelControllerCreateWithId(int id
+,      int level
+,      int depth) {
+    CheckUnlocked();
+
+    var incarnation =
+        new JumpingCaveLevelControllerIncarnation(
+            level,
+            depth
+            );
+    var effect = InternalEffectCreateJumpingCaveLevelController(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new JumpingCaveLevelController(this, id);
+  }
+  public JumpingCaveLevelControllerCreateEffect InternalEffectCreateJumpingCaveLevelController(
+      int id,
+      int incarnationVersion,
+      JumpingCaveLevelControllerIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsJumpingCaveLevelController.Add(
+        id,
+        new VersionAndIncarnation<JumpingCaveLevelControllerIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new JumpingCaveLevelControllerCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectJumpingCaveLevelControllerDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectJumpingCaveLevelControllerDelete(id);
+    NotifyEffect(effect);
+  }
+  public JumpingCaveLevelControllerDeleteEffect InternalEffectJumpingCaveLevelControllerDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsJumpingCaveLevelController[id];
+
+    rootIncarnation.incarnationsJumpingCaveLevelController.Remove(id);
+    return new JumpingCaveLevelControllerDeleteEffect(id);
+  }
+
+     
+  public int GetJumpingCaveLevelControllerHash(int id, int version, JumpingCaveLevelControllerIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.level.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.depth.GetDeterministicHashCode();
+    return result;
+  }
+       public CommIncarnation GetCommIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsComm[id].incarnation;
+  }
+  public bool CommExists(int id) {
+    return rootIncarnation.incarnationsComm.ContainsKey(id);
+  }
+  public Comm GetComm(int id) {
+    CheckHasComm(id);
+    return new Comm(this, id);
+  }
+  public Comm GetCommOrNull(int id) {
+    if (CommExists(id)) {
+      return new Comm(this, id);
+    } else {
+      return new Comm(this, 0);
+    }
+  }
+  public List<Comm> AllComm() {
+    List<Comm> result = new List<Comm>(rootIncarnation.incarnationsComm.Count);
+    foreach (var id in rootIncarnation.incarnationsComm.Keys) {
+      result.Add(new Comm(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<Comm> EnumAllComm() {
+    foreach (var id in rootIncarnation.incarnationsComm.Keys) {
+      yield return GetComm(id);
+    }
+  }
+  public void CheckHasComm(Comm thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasComm(thing.id);
+  }
+  public void CheckHasComm(int id) {
+    if (!rootIncarnation.incarnationsComm.ContainsKey(id)) {
+      throw new System.Exception("Invalid Comm: " + id);
+    }
+  }
+  public Comm EffectCommCreate(
+      ICommTemplate template,
+      CommActionImmList actions,
+      CommTextImmList texts) {
+    return TrustedEffectCommCreateWithId(NewId()
+            ,template
+            ,actions
+            ,texts    );
+  }
+  public Comm TrustedEffectCommCreateWithId(int id
+,      ICommTemplate template
+,      CommActionImmList actions
+,      CommTextImmList texts) {
+    CheckUnlocked();
+
+    var incarnation =
+        new CommIncarnation(
+            template,
+            actions,
+            texts
+            );
+    var effect = InternalEffectCreateComm(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new Comm(this, id);
+  }
+  public CommCreateEffect InternalEffectCreateComm(
+      int id,
+      int incarnationVersion,
+      CommIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsComm.Add(
+        id,
+        new VersionAndIncarnation<CommIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new CommCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectCommDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectCommDelete(id);
+    NotifyEffect(effect);
+  }
+  public CommDeleteEffect InternalEffectCommDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsComm[id];
+
+    rootIncarnation.incarnationsComm.Remove(id);
+    return new CommDeleteEffect(id);
+  }
+
+     
+  public int GetCommHash(int id, int version, CommIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.template.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.actions.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.texts.GetDeterministicHashCode();
+    return result;
+  }
+       public GameIncarnation GetGameIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsGame[id].incarnation;
+  }
+  public bool GameExists(int id) {
+    return rootIncarnation.incarnationsGame.ContainsKey(id);
+  }
+  public Game GetGame(int id) {
+    CheckHasGame(id);
+    return new Game(this, id);
+  }
+  public Game GetGameOrNull(int id) {
+    if (GameExists(id)) {
+      return new Game(this, id);
+    } else {
+      return new Game(this, 0);
+    }
+  }
+  public List<Game> AllGame() {
+    List<Game> result = new List<Game>(rootIncarnation.incarnationsGame.Count);
+    foreach (var id in rootIncarnation.incarnationsGame.Keys) {
+      result.Add(new Game(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<Game> EnumAllGame() {
+    foreach (var id in rootIncarnation.incarnationsGame.Keys) {
+      yield return GetGame(id);
+    }
+  }
+  public void CheckHasGame(Game thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasGame(thing.id);
+  }
+  public void CheckHasGame(int id) {
+    if (!rootIncarnation.incarnationsGame.ContainsKey(id)) {
+      throw new System.Exception("Invalid Game: " + id);
+    }
+  }
+  public Game EffectGameCreate(
+      Rand rand,
+      bool squareLevelsOnly,
+      LevelMutSet levels,
+      Unit player,
+      Level level,
+      int time,
+      Unit actingUnit,
+      bool pauseBeforeNextUnit,
+      int actionNum,
+      string instructions,
+      bool hideInput,
+      IGameEvent evvent,
+      CommMutList comms) {
+    CheckHasRand(rand);
+    CheckHasLevelMutSet(levels);
+    CheckHasCommMutList(comms);
+    return TrustedEffectGameCreateWithId(NewId()
+            ,rand.id
+            ,squareLevelsOnly
+            ,levels.id
+            ,player.id
+            ,level.id
+            ,time
+            ,actingUnit.id
+            ,pauseBeforeNextUnit
+            ,actionNum
+            ,instructions
+            ,hideInput
+            ,evvent
+            ,comms.id    );
+  }
+  public Game TrustedEffectGameCreateWithId(int id
+,      int rand
+,      bool squareLevelsOnly
+,      int levels
+,      int player
+,      int level
+,      int time
+,      int actingUnit
+,      bool pauseBeforeNextUnit
+,      int actionNum
+,      string instructions
+,      bool hideInput
+,      IGameEvent evvent
+,      int comms) {
+    CheckUnlocked();
+
+    var incarnation =
+        new GameIncarnation(
+            rand,
+            squareLevelsOnly,
+            levels,
+            player,
+            level,
+            time,
+            actingUnit,
+            pauseBeforeNextUnit,
+            actionNum,
+            instructions,
+            hideInput,
+            evvent,
+            comms
+            );
+    var effect = InternalEffectCreateGame(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new Game(this, id);
+  }
+  public GameCreateEffect InternalEffectCreateGame(
+      int id,
+      int incarnationVersion,
+      GameIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsGame.Add(
+        id,
+        new VersionAndIncarnation<GameIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new GameCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectGameDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectGameDelete(id);
+    NotifyEffect(effect);
+  }
+  public GameDeleteEffect InternalEffectGameDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsGame[id];
+
+    rootIncarnation.incarnationsGame.Remove(id);
+    return new GameDeleteEffect(id);
+  }
+
+     
+  public int GetGameHash(int id, int version, GameIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.rand.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.squareLevelsOnly.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.levels.GetDeterministicHashCode();
+    if (!object.ReferenceEquals(incarnation.player, null)) {
+      result += id * version * 4 * incarnation.player.GetDeterministicHashCode();
+    }
+    if (!object.ReferenceEquals(incarnation.level, null)) {
+      result += id * version * 5 * incarnation.level.GetDeterministicHashCode();
+    }
+    result += id * version * 6 * incarnation.time.GetDeterministicHashCode();
+    if (!object.ReferenceEquals(incarnation.actingUnit, null)) {
+      result += id * version * 7 * incarnation.actingUnit.GetDeterministicHashCode();
+    }
+    result += id * version * 8 * incarnation.pauseBeforeNextUnit.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.actionNum.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.instructions.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.hideInput.GetDeterministicHashCode();
+    if (!object.ReferenceEquals(incarnation.evvent, null)) {
+      result += id * version * 12 * incarnation.evvent.GetDeterministicHashCode();
+    }
+    result += id * version * 13 * incarnation.comms.GetDeterministicHashCode();
+    return result;
+  }
+     
+  public void EffectGameSetPlayer(
+      int id, Unit newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = InternalEffectGameSetPlayer(id, newValue);
+    NotifyEffect(effect);
+  }
+  public GameSetPlayerEffect InternalEffectGameSetPlayer(int id, Unit newValue) {
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldId = oldIncarnationAndVersion.incarnation.player;
+      oldIncarnationAndVersion.incarnation.player = newValue.id;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              newValue.id,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
+              oldIncarnationAndVersion.incarnation.actionNum,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+return new GameSetPlayerEffect(id, newValue.id);
+  }
+
+  public void EffectGameSetLevel(
+      int id, Level newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = InternalEffectGameSetLevel(id, newValue);
+    NotifyEffect(effect);
+  }
+  public GameSetLevelEffect InternalEffectGameSetLevel(int id, Level newValue) {
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldId = oldIncarnationAndVersion.incarnation.level;
+      oldIncarnationAndVersion.incarnation.level = newValue.id;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              newValue.id,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
+              oldIncarnationAndVersion.incarnation.actionNum,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+return new GameSetLevelEffect(id, newValue.id);
+  }
+
+  public void EffectGameSetTime(
+      int id, int newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = InternalEffectGameSetTime(id, newValue);
+    NotifyEffect(effect);
+  }
+  public GameSetTimeEffect InternalEffectGameSetTime(int id, int newValue) {
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.time;
+      oldIncarnationAndVersion.incarnation.time = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              newValue,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
+              oldIncarnationAndVersion.incarnation.actionNum,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+return new GameSetTimeEffect(id, newValue);
+  }
+
+  public void EffectGameSetActingUnit(
+      int id, Unit newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = InternalEffectGameSetActingUnit(id, newValue);
+    NotifyEffect(effect);
+  }
+  public GameSetActingUnitEffect InternalEffectGameSetActingUnit(int id, Unit newValue) {
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldId = oldIncarnationAndVersion.incarnation.actingUnit;
+      oldIncarnationAndVersion.incarnation.actingUnit = newValue.id;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              newValue.id,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
+              oldIncarnationAndVersion.incarnation.actionNum,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+return new GameSetActingUnitEffect(id, newValue.id);
+  }
+
+  public void EffectGameSetPauseBeforeNextUnit(
+      int id, bool newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = InternalEffectGameSetPauseBeforeNextUnit(id, newValue);
+    NotifyEffect(effect);
+  }
+  public GameSetPauseBeforeNextUnitEffect InternalEffectGameSetPauseBeforeNextUnit(int id, bool newValue) {
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit;
+      oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              newValue,
+              oldIncarnationAndVersion.incarnation.actionNum,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+return new GameSetPauseBeforeNextUnitEffect(id, newValue);
+  }
+
+  public void EffectGameSetActionNum(
+      int id, int newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = InternalEffectGameSetActionNum(id, newValue);
+    NotifyEffect(effect);
+  }
+  public GameSetActionNumEffect InternalEffectGameSetActionNum(int id, int newValue) {
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.actionNum;
+      oldIncarnationAndVersion.incarnation.actionNum = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
+              newValue,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+return new GameSetActionNumEffect(id, newValue);
+  }
+
+  public void EffectGameSetInstructions(
+      int id, string newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = InternalEffectGameSetInstructions(id, newValue);
+    NotifyEffect(effect);
+  }
+  public GameSetInstructionsEffect InternalEffectGameSetInstructions(int id, string newValue) {
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.instructions;
+      oldIncarnationAndVersion.incarnation.instructions = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
+              oldIncarnationAndVersion.incarnation.actionNum,
+              newValue,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+return new GameSetInstructionsEffect(id, newValue);
+  }
+
+  public void EffectGameSetHideInput(
+      int id, bool newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = InternalEffectGameSetHideInput(id, newValue);
+    NotifyEffect(effect);
+  }
+  public GameSetHideInputEffect InternalEffectGameSetHideInput(int id, bool newValue) {
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.hideInput;
+      oldIncarnationAndVersion.incarnation.hideInput = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
+              oldIncarnationAndVersion.incarnation.actionNum,
+              oldIncarnationAndVersion.incarnation.instructions,
+              newValue,
+              oldIncarnationAndVersion.incarnation.evvent,
+              oldIncarnationAndVersion.incarnation.comms);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+return new GameSetHideInputEffect(id, newValue);
+  }
+
+  public void EffectGameSetEvvent(
+      int id, IGameEvent newValue) {
+    CheckUnlocked();
+    CheckHasGame(id);
+    var effect = InternalEffectGameSetEvvent(id, newValue);
+    NotifyEffect(effect);
+  }
+  public GameSetEvventEffect InternalEffectGameSetEvvent(int id, IGameEvent newValue) {
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsGame[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.evvent;
+      oldIncarnationAndVersion.incarnation.evvent = newValue;
+
+    } else {
+      var newIncarnation =
+          new GameIncarnation(
+              oldIncarnationAndVersion.incarnation.rand,
+              oldIncarnationAndVersion.incarnation.squareLevelsOnly,
+              oldIncarnationAndVersion.incarnation.levels,
+              oldIncarnationAndVersion.incarnation.player,
+              oldIncarnationAndVersion.incarnation.level,
+              oldIncarnationAndVersion.incarnation.time,
+              oldIncarnationAndVersion.incarnation.actingUnit,
+              oldIncarnationAndVersion.incarnation.pauseBeforeNextUnit,
+              oldIncarnationAndVersion.incarnation.actionNum,
+              oldIncarnationAndVersion.incarnation.instructions,
+              oldIncarnationAndVersion.incarnation.hideInput,
+              newValue,
+              oldIncarnationAndVersion.incarnation.comms);
+      rootIncarnation.incarnationsGame[id] =
+          new VersionAndIncarnation<GameIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+return new GameSetEvventEffect(id, newValue);
+  }
+
   public IDeathPreReactor GetIDeathPreReactor(int id) {
     if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
       return new KamikazeAICapabilityUCAsIDeathPreReactor(new KamikazeAICapabilityUC(this, id));
@@ -24907,11 +25261,14 @@ return new GameSetEvventEffect(id, newValue);
     if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
       return new ItemTTCAsIInteractableTTC(new ItemTTC(this, id));
     }
+    if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
+      return new EmberDeepLevelLinkerTTCAsIInteractableTTC(new EmberDeepLevelLinkerTTC(this, id));
+    }
     if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
       return new IncendianFallsLevelLinkerTTCAsIInteractableTTC(new IncendianFallsLevelLinkerTTC(this, id));
     }
-    if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
-      return new EmberDeepLevelLinkerTTCAsIInteractableTTC(new EmberDeepLevelLinkerTTC(this, id));
+    if (rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.ContainsKey(id)) {
+      return new RavaArcanaLevelLinkerTTCAsIInteractableTTC(new RavaArcanaLevelLinkerTTC(this, id));
     }
     throw new Exception("Unknown IInteractableTTC: " + id);
   }
@@ -24925,11 +25282,14 @@ return new GameSetEvventEffect(id, newValue);
     if (rootIncarnation.incarnationsItemTTC.ContainsKey(id)) {
       return new ItemTTCAsIInteractableTTC(new ItemTTC(this, id));
     }
+    if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
+      return new EmberDeepLevelLinkerTTCAsIInteractableTTC(new EmberDeepLevelLinkerTTC(this, id));
+    }
     if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
       return new IncendianFallsLevelLinkerTTCAsIInteractableTTC(new IncendianFallsLevelLinkerTTC(this, id));
     }
-    if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
-      return new EmberDeepLevelLinkerTTCAsIInteractableTTC(new EmberDeepLevelLinkerTTC(this, id));
+    if (rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.ContainsKey(id)) {
+      return new RavaArcanaLevelLinkerTTCAsIInteractableTTC(new RavaArcanaLevelLinkerTTC(this, id));
     }
     return NullIInteractableTTC.Null;
   }
@@ -25114,11 +25474,14 @@ return new GameSetEvventEffect(id, newValue);
     if (rootIncarnation.incarnationsGrassTTC.ContainsKey(id)) {
       return new GrassTTCAsITerrainTileComponent(new GrassTTC(this, id));
     }
+    if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
+      return new EmberDeepLevelLinkerTTCAsITerrainTileComponent(new EmberDeepLevelLinkerTTC(this, id));
+    }
     if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
       return new IncendianFallsLevelLinkerTTCAsITerrainTileComponent(new IncendianFallsLevelLinkerTTC(this, id));
     }
-    if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
-      return new EmberDeepLevelLinkerTTCAsITerrainTileComponent(new EmberDeepLevelLinkerTTC(this, id));
+    if (rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.ContainsKey(id)) {
+      return new RavaArcanaLevelLinkerTTCAsITerrainTileComponent(new RavaArcanaLevelLinkerTTC(this, id));
     }
     throw new Exception("Unknown ITerrainTileComponent: " + id);
   }
@@ -25213,11 +25576,14 @@ return new GameSetEvventEffect(id, newValue);
     if (rootIncarnation.incarnationsGrassTTC.ContainsKey(id)) {
       return new GrassTTCAsITerrainTileComponent(new GrassTTC(this, id));
     }
+    if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
+      return new EmberDeepLevelLinkerTTCAsITerrainTileComponent(new EmberDeepLevelLinkerTTC(this, id));
+    }
     if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
       return new IncendianFallsLevelLinkerTTCAsITerrainTileComponent(new IncendianFallsLevelLinkerTTC(this, id));
     }
-    if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
-      return new EmberDeepLevelLinkerTTCAsITerrainTileComponent(new EmberDeepLevelLinkerTTC(this, id));
+    if (rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.ContainsKey(id)) {
+      return new RavaArcanaLevelLinkerTTCAsITerrainTileComponent(new RavaArcanaLevelLinkerTTC(this, id));
     }
     return NullITerrainTileComponent.Null;
   }
@@ -25232,24 +25598,6 @@ return new GameSetEvventEffect(id, newValue);
   }
 
   public ILevelController GetILevelController(int id) {
-    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
-      return new SquareCaveLevelControllerAsILevelController(new SquareCaveLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
-      return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
-      return new PentagonalCaveLevelControllerAsILevelController(new PentagonalCaveLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
-      return new CliffLevelControllerAsILevelController(new CliffLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
-      return new PreGauntletLevelControllerAsILevelController(new PreGauntletLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
-      return new GauntletLevelControllerAsILevelController(new GauntletLevelController(this, id));
-    }
     if (rootIncarnation.incarnationsVolcaetusLevelController.ContainsKey(id)) {
       return new VolcaetusLevelControllerAsILevelController(new VolcaetusLevelController(this, id));
     }
@@ -25282,28 +25630,31 @@ return new GameSetEvventEffect(id, newValue);
     }
     if (rootIncarnation.incarnationsAncientTownLevelController.ContainsKey(id)) {
       return new AncientTownLevelControllerAsILevelController(new AncientTownLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      return new SquareCaveLevelControllerAsILevelController(new SquareCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      return new PentagonalCaveLevelControllerAsILevelController(new PentagonalCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      return new CliffLevelControllerAsILevelController(new CliffLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      return new PreGauntletLevelControllerAsILevelController(new PreGauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      return new GauntletLevelControllerAsILevelController(new GauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsJumpingCaveLevelController.ContainsKey(id)) {
+      return new JumpingCaveLevelControllerAsILevelController(new JumpingCaveLevelController(this, id));
     }
     throw new Exception("Unknown ILevelController: " + id);
   }
   public ILevelController GetILevelControllerOrNull(int id) {
-    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
-      return new SquareCaveLevelControllerAsILevelController(new SquareCaveLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
-      return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
-      return new PentagonalCaveLevelControllerAsILevelController(new PentagonalCaveLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
-      return new CliffLevelControllerAsILevelController(new CliffLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
-      return new PreGauntletLevelControllerAsILevelController(new PreGauntletLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
-      return new GauntletLevelControllerAsILevelController(new GauntletLevelController(this, id));
-    }
     if (rootIncarnation.incarnationsVolcaetusLevelController.ContainsKey(id)) {
       return new VolcaetusLevelControllerAsILevelController(new VolcaetusLevelController(this, id));
     }
@@ -25336,6 +25687,27 @@ return new GameSetEvventEffect(id, newValue);
     }
     if (rootIncarnation.incarnationsAncientTownLevelController.ContainsKey(id)) {
       return new AncientTownLevelControllerAsILevelController(new AncientTownLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      return new SquareCaveLevelControllerAsILevelController(new SquareCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      return new RavashrikeLevelControllerAsILevelController(new RavashrikeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      return new PentagonalCaveLevelControllerAsILevelController(new PentagonalCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      return new CliffLevelControllerAsILevelController(new CliffLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      return new PreGauntletLevelControllerAsILevelController(new PreGauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      return new GauntletLevelControllerAsILevelController(new GauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsJumpingCaveLevelController.ContainsKey(id)) {
+      return new JumpingCaveLevelControllerAsILevelController(new JumpingCaveLevelController(this, id));
     }
     return NullILevelController.Null;
   }
@@ -25805,29 +26177,14 @@ return new GameSetEvventEffect(id, newValue);
     if (rootIncarnation.incarnationsGrassTTC.ContainsKey(id)) {
       return new GrassTTCAsIDestructible(new GrassTTC(this, id));
     }
-    if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
-      return new IncendianFallsLevelLinkerTTCAsIDestructible(new IncendianFallsLevelLinkerTTC(this, id));
-    }
     if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
       return new EmberDeepLevelLinkerTTCAsIDestructible(new EmberDeepLevelLinkerTTC(this, id));
     }
-    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
-      return new SquareCaveLevelControllerAsIDestructible(new SquareCaveLevelController(this, id));
+    if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      return new IncendianFallsLevelLinkerTTCAsIDestructible(new IncendianFallsLevelLinkerTTC(this, id));
     }
-    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
-      return new RavashrikeLevelControllerAsIDestructible(new RavashrikeLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
-      return new PentagonalCaveLevelControllerAsIDestructible(new PentagonalCaveLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
-      return new CliffLevelControllerAsIDestructible(new CliffLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
-      return new PreGauntletLevelControllerAsIDestructible(new PreGauntletLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
-      return new GauntletLevelControllerAsIDestructible(new GauntletLevelController(this, id));
+    if (rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.ContainsKey(id)) {
+      return new RavaArcanaLevelLinkerTTCAsIDestructible(new RavaArcanaLevelLinkerTTC(this, id));
     }
     if (rootIncarnation.incarnationsVolcaetusLevelController.ContainsKey(id)) {
       return new VolcaetusLevelControllerAsIDestructible(new VolcaetusLevelController(this, id));
@@ -25861,6 +26218,27 @@ return new GameSetEvventEffect(id, newValue);
     }
     if (rootIncarnation.incarnationsAncientTownLevelController.ContainsKey(id)) {
       return new AncientTownLevelControllerAsIDestructible(new AncientTownLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      return new SquareCaveLevelControllerAsIDestructible(new SquareCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      return new RavashrikeLevelControllerAsIDestructible(new RavashrikeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      return new PentagonalCaveLevelControllerAsIDestructible(new PentagonalCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      return new CliffLevelControllerAsIDestructible(new CliffLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      return new PreGauntletLevelControllerAsIDestructible(new PreGauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      return new GauntletLevelControllerAsIDestructible(new GauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsJumpingCaveLevelController.ContainsKey(id)) {
+      return new JumpingCaveLevelControllerAsIDestructible(new JumpingCaveLevelController(this, id));
     }
     if (rootIncarnation.incarnationsUnit.ContainsKey(id)) {
       return new UnitAsIDestructible(new Unit(this, id));
@@ -26099,29 +26477,14 @@ return new GameSetEvventEffect(id, newValue);
     if (rootIncarnation.incarnationsGrassTTC.ContainsKey(id)) {
       return new GrassTTCAsIDestructible(new GrassTTC(this, id));
     }
-    if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
-      return new IncendianFallsLevelLinkerTTCAsIDestructible(new IncendianFallsLevelLinkerTTC(this, id));
-    }
     if (rootIncarnation.incarnationsEmberDeepLevelLinkerTTC.ContainsKey(id)) {
       return new EmberDeepLevelLinkerTTCAsIDestructible(new EmberDeepLevelLinkerTTC(this, id));
     }
-    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
-      return new SquareCaveLevelControllerAsIDestructible(new SquareCaveLevelController(this, id));
+    if (rootIncarnation.incarnationsIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      return new IncendianFallsLevelLinkerTTCAsIDestructible(new IncendianFallsLevelLinkerTTC(this, id));
     }
-    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
-      return new RavashrikeLevelControllerAsIDestructible(new RavashrikeLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
-      return new PentagonalCaveLevelControllerAsIDestructible(new PentagonalCaveLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
-      return new CliffLevelControllerAsIDestructible(new CliffLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
-      return new PreGauntletLevelControllerAsIDestructible(new PreGauntletLevelController(this, id));
-    }
-    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
-      return new GauntletLevelControllerAsIDestructible(new GauntletLevelController(this, id));
+    if (rootIncarnation.incarnationsRavaArcanaLevelLinkerTTC.ContainsKey(id)) {
+      return new RavaArcanaLevelLinkerTTCAsIDestructible(new RavaArcanaLevelLinkerTTC(this, id));
     }
     if (rootIncarnation.incarnationsVolcaetusLevelController.ContainsKey(id)) {
       return new VolcaetusLevelControllerAsIDestructible(new VolcaetusLevelController(this, id));
@@ -26155,6 +26518,27 @@ return new GameSetEvventEffect(id, newValue);
     }
     if (rootIncarnation.incarnationsAncientTownLevelController.ContainsKey(id)) {
       return new AncientTownLevelControllerAsIDestructible(new AncientTownLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsSquareCaveLevelController.ContainsKey(id)) {
+      return new SquareCaveLevelControllerAsIDestructible(new SquareCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsRavashrikeLevelController.ContainsKey(id)) {
+      return new RavashrikeLevelControllerAsIDestructible(new RavashrikeLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPentagonalCaveLevelController.ContainsKey(id)) {
+      return new PentagonalCaveLevelControllerAsIDestructible(new PentagonalCaveLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsCliffLevelController.ContainsKey(id)) {
+      return new CliffLevelControllerAsIDestructible(new CliffLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsPreGauntletLevelController.ContainsKey(id)) {
+      return new PreGauntletLevelControllerAsIDestructible(new PreGauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsGauntletLevelController.ContainsKey(id)) {
+      return new GauntletLevelControllerAsIDestructible(new GauntletLevelController(this, id));
+    }
+    if (rootIncarnation.incarnationsJumpingCaveLevelController.ContainsKey(id)) {
+      return new JumpingCaveLevelControllerAsIDestructible(new JumpingCaveLevelController(this, id));
     }
     if (rootIncarnation.incarnationsUnit.ContainsKey(id)) {
       return new UnitAsIDestructible(new Unit(this, id));
@@ -34154,6 +34538,123 @@ return new GameSetEvventEffect(id, newValue);
     }
 
        
+    public int GetEmberDeepLevelLinkerTTCMutSetHash(int id, int version, EmberDeepLevelLinkerTTCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.elements) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public EmberDeepLevelLinkerTTCMutSetIncarnation GetEmberDeepLevelLinkerTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[id].incarnation;
+    }
+    public EmberDeepLevelLinkerTTCMutSet GetEmberDeepLevelLinkerTTCMutSet(int id) {
+      return new EmberDeepLevelLinkerTTCMutSet(this, id);
+    }
+    public List<EmberDeepLevelLinkerTTCMutSet> AllEmberDeepLevelLinkerTTCMutSet() {
+      List<EmberDeepLevelLinkerTTCMutSet> result = new List<EmberDeepLevelLinkerTTCMutSet>(rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.Keys) {
+        result.Add(new EmberDeepLevelLinkerTTCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool EmberDeepLevelLinkerTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.ContainsKey(id);
+    }
+    public void CheckHasEmberDeepLevelLinkerTTCMutSet(EmberDeepLevelLinkerTTCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasEmberDeepLevelLinkerTTCMutSet(thing.id);
+    }
+    public void CheckHasEmberDeepLevelLinkerTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid EmberDeepLevelLinkerTTCMutSet}: " + id);
+      }
+    }
+    public EmberDeepLevelLinkerTTCMutSet EffectEmberDeepLevelLinkerTTCMutSetCreate() {
+      return TrustedEffectEmberDeepLevelLinkerTTCMutSetCreateWithId(NewId());
+    }
+    public EmberDeepLevelLinkerTTCMutSet TrustedEffectEmberDeepLevelLinkerTTCMutSetCreateWithId(int id) {
+      CheckUnlocked();
+      var incarnation = new EmberDeepLevelLinkerTTCMutSetIncarnation(new SortedSet<int>());
+      var effect = InternalEffectCreateEmberDeepLevelLinkerTTCMutSet(id, rootIncarnation.version, incarnation);
+      NotifyEffect(effect);
+      return new EmberDeepLevelLinkerTTCMutSet(this, id);
+    }
+    public EmberDeepLevelLinkerTTCMutSetCreateEffect InternalEffectCreateEmberDeepLevelLinkerTTCMutSet(int id, int incarnationVersion, EmberDeepLevelLinkerTTCMutSetIncarnation incarnation) {
+      rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+
+      return new EmberDeepLevelLinkerTTCMutSetCreateEffect(id);
+    }
+    public void EffectEmberDeepLevelLinkerTTCMutSetDelete(int id) {
+      var effect = InternalEffectEmberDeepLevelLinkerTTCMutSetDelete(id);
+      NotifyEffect(effect);
+    }
+    public EmberDeepLevelLinkerTTCMutSetDeleteEffect InternalEffectEmberDeepLevelLinkerTTCMutSetDelete(int id) {
+      CheckUnlocked();
+      var versionAndIncarnation = rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[id];
+      rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.Remove(id);
+      return new EmberDeepLevelLinkerTTCMutSetDeleteEffect(id);
+    }
+
+       
+    public void EffectEmberDeepLevelLinkerTTCMutSetAdd(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasEmberDeepLevelLinkerTTCMutSet(instanceId);
+      CheckHasEmberDeepLevelLinkerTTC(element);
+      var effect = InternalEffectEmberDeepLevelLinkerTTCMutSetAdd(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public EmberDeepLevelLinkerTTCMutSetAddEffect InternalEffectEmberDeepLevelLinkerTTCMutSetAdd(int instanceId, int element) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[instanceId];
+      if (oldIncarnationAndVersion.incarnation.elements.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new EmberDeepLevelLinkerTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[instanceId] =
+            new VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      return new EmberDeepLevelLinkerTTCMutSetAddEffect(instanceId, element);
+    }
+    public void EffectEmberDeepLevelLinkerTTCMutSetRemove(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasEmberDeepLevelLinkerTTCMutSet(instanceId);
+      CheckHasEmberDeepLevelLinkerTTC(element);
+      var effect = InternalEffectEmberDeepLevelLinkerTTCMutSetRemove(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public EmberDeepLevelLinkerTTCMutSetRemoveEffect InternalEffectEmberDeepLevelLinkerTTCMutSetRemove(int instanceId, int elementId) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[instanceId];
+      if (!oldIncarnationAndVersion.incarnation.elements.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new EmberDeepLevelLinkerTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[instanceId] =
+            new VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      return new EmberDeepLevelLinkerTTCMutSetRemoveEffect(instanceId, elementId);
+    }
+
+       
     public int GetIncendianFallsLevelLinkerTTCMutSetHash(int id, int version, IncendianFallsLevelLinkerTTCMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.elements) {
@@ -34271,79 +34772,79 @@ return new GameSetEvventEffect(id, newValue);
     }
 
        
-    public int GetEmberDeepLevelLinkerTTCMutSetHash(int id, int version, EmberDeepLevelLinkerTTCMutSetIncarnation incarnation) {
+    public int GetRavaArcanaLevelLinkerTTCMutSetHash(int id, int version, RavaArcanaLevelLinkerTTCMutSetIncarnation incarnation) {
       int result = id * version;
       foreach (var element in incarnation.elements) {
         result += id * version * element.GetDeterministicHashCode();
       }
       return result;
     }
-    public EmberDeepLevelLinkerTTCMutSetIncarnation GetEmberDeepLevelLinkerTTCMutSetIncarnation(int id) {
-      return rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[id].incarnation;
+    public RavaArcanaLevelLinkerTTCMutSetIncarnation GetRavaArcanaLevelLinkerTTCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet[id].incarnation;
     }
-    public EmberDeepLevelLinkerTTCMutSet GetEmberDeepLevelLinkerTTCMutSet(int id) {
-      return new EmberDeepLevelLinkerTTCMutSet(this, id);
+    public RavaArcanaLevelLinkerTTCMutSet GetRavaArcanaLevelLinkerTTCMutSet(int id) {
+      return new RavaArcanaLevelLinkerTTCMutSet(this, id);
     }
-    public List<EmberDeepLevelLinkerTTCMutSet> AllEmberDeepLevelLinkerTTCMutSet() {
-      List<EmberDeepLevelLinkerTTCMutSet> result = new List<EmberDeepLevelLinkerTTCMutSet>(rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.Count);
-      foreach (var id in rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.Keys) {
-        result.Add(new EmberDeepLevelLinkerTTCMutSet(this, id));
+    public List<RavaArcanaLevelLinkerTTCMutSet> AllRavaArcanaLevelLinkerTTCMutSet() {
+      List<RavaArcanaLevelLinkerTTCMutSet> result = new List<RavaArcanaLevelLinkerTTCMutSet>(rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet.Keys) {
+        result.Add(new RavaArcanaLevelLinkerTTCMutSet(this, id));
       }
       return result;
     }
-    public bool EmberDeepLevelLinkerTTCMutSetExists(int id) {
-      return rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.ContainsKey(id);
+    public bool RavaArcanaLevelLinkerTTCMutSetExists(int id) {
+      return rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet.ContainsKey(id);
     }
-    public void CheckHasEmberDeepLevelLinkerTTCMutSet(EmberDeepLevelLinkerTTCMutSet thing) {
+    public void CheckHasRavaArcanaLevelLinkerTTCMutSet(RavaArcanaLevelLinkerTTCMutSet thing) {
       CheckRootsEqual(this, thing.root);
-      CheckHasEmberDeepLevelLinkerTTCMutSet(thing.id);
+      CheckHasRavaArcanaLevelLinkerTTCMutSet(thing.id);
     }
-    public void CheckHasEmberDeepLevelLinkerTTCMutSet(int id) {
-      if (!rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.ContainsKey(id)) {
-        throw new System.Exception("Invalid EmberDeepLevelLinkerTTCMutSet}: " + id);
+    public void CheckHasRavaArcanaLevelLinkerTTCMutSet(int id) {
+      if (!rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid RavaArcanaLevelLinkerTTCMutSet}: " + id);
       }
     }
-    public EmberDeepLevelLinkerTTCMutSet EffectEmberDeepLevelLinkerTTCMutSetCreate() {
-      return TrustedEffectEmberDeepLevelLinkerTTCMutSetCreateWithId(NewId());
+    public RavaArcanaLevelLinkerTTCMutSet EffectRavaArcanaLevelLinkerTTCMutSetCreate() {
+      return TrustedEffectRavaArcanaLevelLinkerTTCMutSetCreateWithId(NewId());
     }
-    public EmberDeepLevelLinkerTTCMutSet TrustedEffectEmberDeepLevelLinkerTTCMutSetCreateWithId(int id) {
+    public RavaArcanaLevelLinkerTTCMutSet TrustedEffectRavaArcanaLevelLinkerTTCMutSetCreateWithId(int id) {
       CheckUnlocked();
-      var incarnation = new EmberDeepLevelLinkerTTCMutSetIncarnation(new SortedSet<int>());
-      var effect = InternalEffectCreateEmberDeepLevelLinkerTTCMutSet(id, rootIncarnation.version, incarnation);
+      var incarnation = new RavaArcanaLevelLinkerTTCMutSetIncarnation(new SortedSet<int>());
+      var effect = InternalEffectCreateRavaArcanaLevelLinkerTTCMutSet(id, rootIncarnation.version, incarnation);
       NotifyEffect(effect);
-      return new EmberDeepLevelLinkerTTCMutSet(this, id);
+      return new RavaArcanaLevelLinkerTTCMutSet(this, id);
     }
-    public EmberDeepLevelLinkerTTCMutSetCreateEffect InternalEffectCreateEmberDeepLevelLinkerTTCMutSet(int id, int incarnationVersion, EmberDeepLevelLinkerTTCMutSetIncarnation incarnation) {
-      rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet
+    public RavaArcanaLevelLinkerTTCMutSetCreateEffect InternalEffectCreateRavaArcanaLevelLinkerTTCMutSet(int id, int incarnationVersion, RavaArcanaLevelLinkerTTCMutSetIncarnation incarnation) {
+      rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet
           .Add(
               id,
-              new VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>(
+              new VersionAndIncarnation<RavaArcanaLevelLinkerTTCMutSetIncarnation>(
                   incarnationVersion,
                   incarnation));
 
-      return new EmberDeepLevelLinkerTTCMutSetCreateEffect(id);
+      return new RavaArcanaLevelLinkerTTCMutSetCreateEffect(id);
     }
-    public void EffectEmberDeepLevelLinkerTTCMutSetDelete(int id) {
-      var effect = InternalEffectEmberDeepLevelLinkerTTCMutSetDelete(id);
+    public void EffectRavaArcanaLevelLinkerTTCMutSetDelete(int id) {
+      var effect = InternalEffectRavaArcanaLevelLinkerTTCMutSetDelete(id);
       NotifyEffect(effect);
     }
-    public EmberDeepLevelLinkerTTCMutSetDeleteEffect InternalEffectEmberDeepLevelLinkerTTCMutSetDelete(int id) {
+    public RavaArcanaLevelLinkerTTCMutSetDeleteEffect InternalEffectRavaArcanaLevelLinkerTTCMutSetDelete(int id) {
       CheckUnlocked();
-      var versionAndIncarnation = rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[id];
-      rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet.Remove(id);
-      return new EmberDeepLevelLinkerTTCMutSetDeleteEffect(id);
+      var versionAndIncarnation = rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet[id];
+      rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet.Remove(id);
+      return new RavaArcanaLevelLinkerTTCMutSetDeleteEffect(id);
     }
 
        
-    public void EffectEmberDeepLevelLinkerTTCMutSetAdd(int instanceId, int element) {
+    public void EffectRavaArcanaLevelLinkerTTCMutSetAdd(int instanceId, int element) {
       CheckUnlocked();
-      CheckHasEmberDeepLevelLinkerTTCMutSet(instanceId);
-      CheckHasEmberDeepLevelLinkerTTC(element);
-      var effect = InternalEffectEmberDeepLevelLinkerTTCMutSetAdd(instanceId, element);
+      CheckHasRavaArcanaLevelLinkerTTCMutSet(instanceId);
+      CheckHasRavaArcanaLevelLinkerTTC(element);
+      var effect = InternalEffectRavaArcanaLevelLinkerTTCMutSetAdd(instanceId, element);
       NotifyEffect(effect);
     }
-    public EmberDeepLevelLinkerTTCMutSetAddEffect InternalEffectEmberDeepLevelLinkerTTCMutSetAdd(int instanceId, int element) {
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[instanceId];
+    public RavaArcanaLevelLinkerTTCMutSetAddEffect InternalEffectRavaArcanaLevelLinkerTTCMutSetAdd(int instanceId, int element) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet[instanceId];
       if (oldIncarnationAndVersion.incarnation.elements.Contains(element)) {
         throw new Exception("Element already exists!");
       }
@@ -34353,23 +34854,23 @@ return new GameSetEvventEffect(id, newValue);
         var oldMap = oldIncarnationAndVersion.incarnation.elements;
         var newMap = new SortedSet<int>(oldMap);
         newMap.Add(element);
-        var newIncarnation = new EmberDeepLevelLinkerTTCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[instanceId] =
-            new VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>(
+        var newIncarnation = new RavaArcanaLevelLinkerTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet[instanceId] =
+            new VersionAndIncarnation<RavaArcanaLevelLinkerTTCMutSetIncarnation>(
                 rootIncarnation.version,
                 newIncarnation);
       }
-      return new EmberDeepLevelLinkerTTCMutSetAddEffect(instanceId, element);
+      return new RavaArcanaLevelLinkerTTCMutSetAddEffect(instanceId, element);
     }
-    public void EffectEmberDeepLevelLinkerTTCMutSetRemove(int instanceId, int element) {
+    public void EffectRavaArcanaLevelLinkerTTCMutSetRemove(int instanceId, int element) {
       CheckUnlocked();
-      CheckHasEmberDeepLevelLinkerTTCMutSet(instanceId);
-      CheckHasEmberDeepLevelLinkerTTC(element);
-      var effect = InternalEffectEmberDeepLevelLinkerTTCMutSetRemove(instanceId, element);
+      CheckHasRavaArcanaLevelLinkerTTCMutSet(instanceId);
+      CheckHasRavaArcanaLevelLinkerTTC(element);
+      var effect = InternalEffectRavaArcanaLevelLinkerTTCMutSetRemove(instanceId, element);
       NotifyEffect(effect);
     }
-    public EmberDeepLevelLinkerTTCMutSetRemoveEffect InternalEffectEmberDeepLevelLinkerTTCMutSetRemove(int instanceId, int elementId) {
-      var oldIncarnationAndVersion = rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[instanceId];
+    public RavaArcanaLevelLinkerTTCMutSetRemoveEffect InternalEffectRavaArcanaLevelLinkerTTCMutSetRemove(int instanceId, int elementId) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet[instanceId];
       if (!oldIncarnationAndVersion.incarnation.elements.Contains(elementId)) {
         throw new Exception("Element not found! " + elementId);
       }
@@ -34379,12 +34880,12 @@ return new GameSetEvventEffect(id, newValue);
         var oldMap = oldIncarnationAndVersion.incarnation.elements;
         var newMap = new SortedSet<int>(oldMap);
         newMap.Remove(elementId);
-        var newIncarnation = new EmberDeepLevelLinkerTTCMutSetIncarnation(newMap);
-        rootIncarnation.incarnationsEmberDeepLevelLinkerTTCMutSet[instanceId] =
-            new VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>(
+        var newIncarnation = new RavaArcanaLevelLinkerTTCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet[instanceId] =
+            new VersionAndIncarnation<RavaArcanaLevelLinkerTTCMutSetIncarnation>(
                 rootIncarnation.version, newIncarnation);
       }
-      return new EmberDeepLevelLinkerTTCMutSetRemoveEffect(instanceId, elementId);
+      return new RavaArcanaLevelLinkerTTCMutSetRemoveEffect(instanceId, elementId);
     }
 
        

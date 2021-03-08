@@ -27,6 +27,14 @@ imm struct SetupEmberDeepGameRequest {
   squareLevelsOnly: Bool;
 }
 
+imm struct SetupRavaArcanaGameRequest {
+  SetupRavaArcanaGameRequest isa IRequest;
+
+  randomSeed: Int;
+  startLevel: Int;
+  squareLevelsOnly: Bool;
+}
+
 imm struct SetupTerrainRequest {
   SetupTerrainRequest isa IRequest;
 

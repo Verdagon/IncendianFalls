@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class ITerrainTileComponentMutBunchBroadcaster:ISimplePresenceTriggerTTCMutSetEffectObserver, ISimplePresenceTriggerTTCMutSetEffectVisitor, IItemTTCMutSetEffectObserver, IItemTTCMutSetEffectVisitor, IKamikazeTargetTTCMutSetEffectObserver, IKamikazeTargetTTCMutSetEffectVisitor, IWarperTTCMutSetEffectObserver, IWarperTTCMutSetEffectVisitor, ITimeAnchorTTCMutSetEffectObserver, ITimeAnchorTTCMutSetEffectVisitor, IFireBombTTCMutSetEffectObserver, IFireBombTTCMutSetEffectVisitor, IMarkerTTCMutSetEffectObserver, IMarkerTTCMutSetEffectVisitor, ILevelLinkTTCMutSetEffectObserver, ILevelLinkTTCMutSetEffectVisitor, IMudTTCMutSetEffectObserver, IMudTTCMutSetEffectVisitor, IDirtTTCMutSetEffectObserver, IDirtTTCMutSetEffectVisitor, IObsidianTTCMutSetEffectObserver, IObsidianTTCMutSetEffectVisitor, IDownStairsTTCMutSetEffectObserver, IDownStairsTTCMutSetEffectVisitor, IUpStairsTTCMutSetEffectObserver, IUpStairsTTCMutSetEffectVisitor, IWallTTCMutSetEffectObserver, IWallTTCMutSetEffectVisitor, IBloodTTCMutSetEffectObserver, IBloodTTCMutSetEffectVisitor, IRocksTTCMutSetEffectObserver, IRocksTTCMutSetEffectVisitor, ITreeTTCMutSetEffectObserver, ITreeTTCMutSetEffectVisitor, IWaterTTCMutSetEffectObserver, IWaterTTCMutSetEffectVisitor, IFloorTTCMutSetEffectObserver, IFloorTTCMutSetEffectVisitor, ICaveWallTTCMutSetEffectObserver, ICaveWallTTCMutSetEffectVisitor, ICaveTTCMutSetEffectObserver, ICaveTTCMutSetEffectVisitor, IFallsTTCMutSetEffectObserver, IFallsTTCMutSetEffectVisitor, IFireTTCMutSetEffectObserver, IFireTTCMutSetEffectVisitor, IObsidianFloorTTCMutSetEffectObserver, IObsidianFloorTTCMutSetEffectVisitor, IMagmaTTCMutSetEffectObserver, IMagmaTTCMutSetEffectVisitor, ICliffTTCMutSetEffectObserver, ICliffTTCMutSetEffectVisitor, IRavaNestTTCMutSetEffectObserver, IRavaNestTTCMutSetEffectVisitor, ICliffLandingTTCMutSetEffectObserver, ICliffLandingTTCMutSetEffectVisitor, IStoneTTCMutSetEffectObserver, IStoneTTCMutSetEffectVisitor, IGrassTTCMutSetEffectObserver, IGrassTTCMutSetEffectVisitor, IIncendianFallsLevelLinkerTTCMutSetEffectObserver, IIncendianFallsLevelLinkerTTCMutSetEffectVisitor, IEmberDeepLevelLinkerTTCMutSetEffectObserver, IEmberDeepLevelLinkerTTCMutSetEffectVisitor {
+public class ITerrainTileComponentMutBunchBroadcaster:ISimplePresenceTriggerTTCMutSetEffectObserver, ISimplePresenceTriggerTTCMutSetEffectVisitor, IItemTTCMutSetEffectObserver, IItemTTCMutSetEffectVisitor, IKamikazeTargetTTCMutSetEffectObserver, IKamikazeTargetTTCMutSetEffectVisitor, IWarperTTCMutSetEffectObserver, IWarperTTCMutSetEffectVisitor, ITimeAnchorTTCMutSetEffectObserver, ITimeAnchorTTCMutSetEffectVisitor, IFireBombTTCMutSetEffectObserver, IFireBombTTCMutSetEffectVisitor, IMarkerTTCMutSetEffectObserver, IMarkerTTCMutSetEffectVisitor, ILevelLinkTTCMutSetEffectObserver, ILevelLinkTTCMutSetEffectVisitor, IMudTTCMutSetEffectObserver, IMudTTCMutSetEffectVisitor, IDirtTTCMutSetEffectObserver, IDirtTTCMutSetEffectVisitor, IObsidianTTCMutSetEffectObserver, IObsidianTTCMutSetEffectVisitor, IDownStairsTTCMutSetEffectObserver, IDownStairsTTCMutSetEffectVisitor, IUpStairsTTCMutSetEffectObserver, IUpStairsTTCMutSetEffectVisitor, IWallTTCMutSetEffectObserver, IWallTTCMutSetEffectVisitor, IBloodTTCMutSetEffectObserver, IBloodTTCMutSetEffectVisitor, IRocksTTCMutSetEffectObserver, IRocksTTCMutSetEffectVisitor, ITreeTTCMutSetEffectObserver, ITreeTTCMutSetEffectVisitor, IWaterTTCMutSetEffectObserver, IWaterTTCMutSetEffectVisitor, IFloorTTCMutSetEffectObserver, IFloorTTCMutSetEffectVisitor, ICaveWallTTCMutSetEffectObserver, ICaveWallTTCMutSetEffectVisitor, ICaveTTCMutSetEffectObserver, ICaveTTCMutSetEffectVisitor, IFallsTTCMutSetEffectObserver, IFallsTTCMutSetEffectVisitor, IFireTTCMutSetEffectObserver, IFireTTCMutSetEffectVisitor, IObsidianFloorTTCMutSetEffectObserver, IObsidianFloorTTCMutSetEffectVisitor, IMagmaTTCMutSetEffectObserver, IMagmaTTCMutSetEffectVisitor, ICliffTTCMutSetEffectObserver, ICliffTTCMutSetEffectVisitor, IRavaNestTTCMutSetEffectObserver, IRavaNestTTCMutSetEffectVisitor, ICliffLandingTTCMutSetEffectObserver, ICliffLandingTTCMutSetEffectVisitor, IStoneTTCMutSetEffectObserver, IStoneTTCMutSetEffectVisitor, IGrassTTCMutSetEffectObserver, IGrassTTCMutSetEffectVisitor, IEmberDeepLevelLinkerTTCMutSetEffectObserver, IEmberDeepLevelLinkerTTCMutSetEffectVisitor, IIncendianFallsLevelLinkerTTCMutSetEffectObserver, IIncendianFallsLevelLinkerTTCMutSetEffectVisitor, IRavaArcanaLevelLinkerTTCMutSetEffectObserver, IRavaArcanaLevelLinkerTTCMutSetEffectVisitor {
   EffectBroadcaster broadcaster;
   ITerrainTileComponentMutBunch bunch;
   private List<IITerrainTileComponentMutBunchObserver> observers;
@@ -43,8 +43,9 @@ public class ITerrainTileComponentMutBunchBroadcaster:ISimplePresenceTriggerTTCM
     bunch.membersCliffLandingTTCMutSet.AddObserver(broadcaster, this);
     bunch.membersStoneTTCMutSet.AddObserver(broadcaster, this);
     bunch.membersGrassTTCMutSet.AddObserver(broadcaster, this);
-    bunch.membersIncendianFallsLevelLinkerTTCMutSet.AddObserver(broadcaster, this);
     bunch.membersEmberDeepLevelLinkerTTCMutSet.AddObserver(broadcaster, this);
+    bunch.membersIncendianFallsLevelLinkerTTCMutSet.AddObserver(broadcaster, this);
+    bunch.membersRavaArcanaLevelLinkerTTCMutSet.AddObserver(broadcaster, this);
 
   }
   public void Stop() {
@@ -78,8 +79,9 @@ public class ITerrainTileComponentMutBunchBroadcaster:ISimplePresenceTriggerTTCM
     bunch.membersCliffLandingTTCMutSet.RemoveObserver(broadcaster, this);
     bunch.membersStoneTTCMutSet.RemoveObserver(broadcaster, this);
     bunch.membersGrassTTCMutSet.RemoveObserver(broadcaster, this);
-    bunch.membersIncendianFallsLevelLinkerTTCMutSet.RemoveObserver(broadcaster, this);
     bunch.membersEmberDeepLevelLinkerTTCMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersIncendianFallsLevelLinkerTTCMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersRavaArcanaLevelLinkerTTCMutSet.RemoveObserver(broadcaster, this);
 
   }
   public void AddObserver(IITerrainTileComponentMutBunchObserver observer) {
@@ -428,17 +430,6 @@ public class ITerrainTileComponentMutBunchBroadcaster:ISimplePresenceTriggerTTCM
   }
   public void visitGrassTTCMutSetCreateEffect(GrassTTCMutSetCreateEffect effect) { }
   public void visitGrassTTCMutSetDeleteEffect(GrassTTCMutSetDeleteEffect effect) { }
-  public void OnIncendianFallsLevelLinkerTTCMutSetEffect(IIncendianFallsLevelLinkerTTCMutSetEffect effect) {
-    effect.visitIIncendianFallsLevelLinkerTTCMutSetEffect(this);
-  }
-  public void visitIncendianFallsLevelLinkerTTCMutSetAddEffect(IncendianFallsLevelLinkerTTCMutSetAddEffect effect) {
-    BroadcastAdd(effect.element);
-  }
-  public void visitIncendianFallsLevelLinkerTTCMutSetRemoveEffect(IncendianFallsLevelLinkerTTCMutSetRemoveEffect effect) {
-    BroadcastRemove(effect.element);
-  }
-  public void visitIncendianFallsLevelLinkerTTCMutSetCreateEffect(IncendianFallsLevelLinkerTTCMutSetCreateEffect effect) { }
-  public void visitIncendianFallsLevelLinkerTTCMutSetDeleteEffect(IncendianFallsLevelLinkerTTCMutSetDeleteEffect effect) { }
   public void OnEmberDeepLevelLinkerTTCMutSetEffect(IEmberDeepLevelLinkerTTCMutSetEffect effect) {
     effect.visitIEmberDeepLevelLinkerTTCMutSetEffect(this);
   }
@@ -450,6 +441,28 @@ public class ITerrainTileComponentMutBunchBroadcaster:ISimplePresenceTriggerTTCM
   }
   public void visitEmberDeepLevelLinkerTTCMutSetCreateEffect(EmberDeepLevelLinkerTTCMutSetCreateEffect effect) { }
   public void visitEmberDeepLevelLinkerTTCMutSetDeleteEffect(EmberDeepLevelLinkerTTCMutSetDeleteEffect effect) { }
+  public void OnIncendianFallsLevelLinkerTTCMutSetEffect(IIncendianFallsLevelLinkerTTCMutSetEffect effect) {
+    effect.visitIIncendianFallsLevelLinkerTTCMutSetEffect(this);
+  }
+  public void visitIncendianFallsLevelLinkerTTCMutSetAddEffect(IncendianFallsLevelLinkerTTCMutSetAddEffect effect) {
+    BroadcastAdd(effect.element);
+  }
+  public void visitIncendianFallsLevelLinkerTTCMutSetRemoveEffect(IncendianFallsLevelLinkerTTCMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.element);
+  }
+  public void visitIncendianFallsLevelLinkerTTCMutSetCreateEffect(IncendianFallsLevelLinkerTTCMutSetCreateEffect effect) { }
+  public void visitIncendianFallsLevelLinkerTTCMutSetDeleteEffect(IncendianFallsLevelLinkerTTCMutSetDeleteEffect effect) { }
+  public void OnRavaArcanaLevelLinkerTTCMutSetEffect(IRavaArcanaLevelLinkerTTCMutSetEffect effect) {
+    effect.visitIRavaArcanaLevelLinkerTTCMutSetEffect(this);
+  }
+  public void visitRavaArcanaLevelLinkerTTCMutSetAddEffect(RavaArcanaLevelLinkerTTCMutSetAddEffect effect) {
+    BroadcastAdd(effect.element);
+  }
+  public void visitRavaArcanaLevelLinkerTTCMutSetRemoveEffect(RavaArcanaLevelLinkerTTCMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.element);
+  }
+  public void visitRavaArcanaLevelLinkerTTCMutSetCreateEffect(RavaArcanaLevelLinkerTTCMutSetCreateEffect effect) { }
+  public void visitRavaArcanaLevelLinkerTTCMutSetDeleteEffect(RavaArcanaLevelLinkerTTCMutSetDeleteEffect effect) { }
 
 }
        

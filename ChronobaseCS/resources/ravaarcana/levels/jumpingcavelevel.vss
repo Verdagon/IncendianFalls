@@ -1,0 +1,41 @@
+
+mut struct JumpingCaveLevelController {
+  JumpingCaveLevelController isa ILevelController;
+
+  level: &Level;
+  depth: Int;
+
+  fn Destruct(this: JumpingCaveLevelController overrides IDestructible): Void {
+    JumpingCaveLevelControllerExtensions.Destruct
+  }
+
+  fn GetName(this: JumpingCaveLevelController overrides ILevelController): Str {
+    JumpingCaveLevelControllerExtensions.GetName
+  }
+
+  fn ConsiderCornersAdjacent(this: JumpingCaveLevelController overrides ILevelController): Bool {
+    JumpingCaveLevelControllerExtensions.ConsiderCornersAdjacent
+  }
+
+  fn SimpleTrigger(
+    this: JumpingCaveLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
+    game: Game,
+    superstate: $Superstate,
+    triggerName: Str):
+  Void {
+    JumpingCaveLevelControllerExtensions.SimpleTrigger
+  }
+
+  fn SimpleUnitTrigger(
+    this: JumpingCaveLevelController overrides ILevelController,
+    context: $IncendianFalls.SSContext,
+    game: Game,
+    superstate: $Superstate,
+    triggeringUnit: Unit,
+    location: Location,
+    triggerName: Str):
+  Void {
+    JumpingCaveLevelControllerExtensions.SimpleUnitTrigger
+  }
+}

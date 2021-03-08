@@ -1,0 +1,22 @@
+
+mut struct RavaArcanaLevelLinkerTTC {
+  RavaArcanaLevelLinkerTTC isa ITerrainTileComponent;
+  RavaArcanaLevelLinkerTTC isa IInteractableTTC;
+
+  nextLevelDepth: Int;
+
+  fn Interact(
+    this: RavaArcanaLevelLinkerTTC overrides IInteractableTTC,
+    context: $IncendianFalls.SSContext,
+    game: Game,
+    superstate: $Superstate,
+    interactingUnit: Unit,
+    containingTileLocation: Location):
+  Str {
+    RavaArcanaLevelLinkerTTCExtensions.Interact
+  }
+
+  fn Destruct(this: RavaArcanaLevelLinkerTTC overrides IDestructible): Void {
+    RavaArcanaLevelLinkerTTCExtensions.Destruct
+  }
+}

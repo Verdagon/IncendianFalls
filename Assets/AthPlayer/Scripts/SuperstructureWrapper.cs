@@ -52,6 +52,15 @@ namespace AthPlayer {
       return result;
     }
 
+    public Game RequestSetupRavaArcanaGame(int randomSeed, int startLevel, bool squareLevelsOnly) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestSetupRavaArcanaGame(randomSeed, startLevel, squareLevelsOnly);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
+
     //public Atharia.Model.Terrain RequestSetupTerrain(Pattern pattern) {
     //  Asserts.Assert(waitingEffects.Count == 0);
     //  var (effects, result) = ss.RequestSetupTerrain(pattern);

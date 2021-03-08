@@ -35,8 +35,9 @@ public class ITerrainTileComponentMutBunchIncarnation : IITerrainTileComponentMu
   public readonly int membersCliffLandingTTCMutSet;
   public readonly int membersStoneTTCMutSet;
   public readonly int membersGrassTTCMutSet;
-  public readonly int membersIncendianFallsLevelLinkerTTCMutSet;
   public readonly int membersEmberDeepLevelLinkerTTCMutSet;
+  public readonly int membersIncendianFallsLevelLinkerTTCMutSet;
+  public readonly int membersRavaArcanaLevelLinkerTTCMutSet;
   public ITerrainTileComponentMutBunchIncarnation(
       int membersSimplePresenceTriggerTTCMutSet,
       int membersItemTTCMutSet,
@@ -68,8 +69,9 @@ public class ITerrainTileComponentMutBunchIncarnation : IITerrainTileComponentMu
       int membersCliffLandingTTCMutSet,
       int membersStoneTTCMutSet,
       int membersGrassTTCMutSet,
+      int membersEmberDeepLevelLinkerTTCMutSet,
       int membersIncendianFallsLevelLinkerTTCMutSet,
-      int membersEmberDeepLevelLinkerTTCMutSet) {
+      int membersRavaArcanaLevelLinkerTTCMutSet) {
     this.membersSimplePresenceTriggerTTCMutSet = membersSimplePresenceTriggerTTCMutSet;
     this.membersItemTTCMutSet = membersItemTTCMutSet;
     this.membersKamikazeTargetTTCMutSet = membersKamikazeTargetTTCMutSet;
@@ -100,8 +102,9 @@ public class ITerrainTileComponentMutBunchIncarnation : IITerrainTileComponentMu
     this.membersCliffLandingTTCMutSet = membersCliffLandingTTCMutSet;
     this.membersStoneTTCMutSet = membersStoneTTCMutSet;
     this.membersGrassTTCMutSet = membersGrassTTCMutSet;
-    this.membersIncendianFallsLevelLinkerTTCMutSet = membersIncendianFallsLevelLinkerTTCMutSet;
     this.membersEmberDeepLevelLinkerTTCMutSet = membersEmberDeepLevelLinkerTTCMutSet;
+    this.membersIncendianFallsLevelLinkerTTCMutSet = membersIncendianFallsLevelLinkerTTCMutSet;
+    this.membersRavaArcanaLevelLinkerTTCMutSet = membersRavaArcanaLevelLinkerTTCMutSet;
   }
   public ITerrainTileComponentMutBunchIncarnation Copy() {
     return new ITerrainTileComponentMutBunchIncarnation(
@@ -135,12 +138,14 @@ membersRavaNestTTCMutSet,
 membersCliffLandingTTCMutSet,
 membersStoneTTCMutSet,
 membersGrassTTCMutSet,
+membersEmberDeepLevelLinkerTTCMutSet,
 membersIncendianFallsLevelLinkerTTCMutSet,
-membersEmberDeepLevelLinkerTTCMutSet    );
+membersRavaArcanaLevelLinkerTTCMutSet    );
   }
 
   public void visitITerrainTileComponentMutBunchCreateEffect(ITerrainTileComponentMutBunchCreateEffect e) {}
   public void visitITerrainTileComponentMutBunchDeleteEffect(ITerrainTileComponentMutBunchDeleteEffect e) {}
+
 
 
 

@@ -1,5 +1,16 @@
-output: D:\IncendianFalls\Atharia\IncendianFalls\Core
+output: /Users/verdagon/IncendianFalls/Atharia/Atharia/Core
 namespace: Atharia.Model
+game.vss
+ravaarcana/levels/jumpingcavelevel.vss
+ravaarcana/levels/ravaarcanalevellinker.vss
+gauntlet/levels/gauntletlevel.vss
+gauntlet/levels/pregauntletlevel.vss
+idestructible.vss
+incendianfalls/levels/clifflevel.vss
+incendianfalls/levels/incendianfallslevellinker.vss
+incendianfalls/levels/pentagonalcave.vss
+incendianfalls/levels/ravashrikelevel.vss
+incendianfalls/levels/squarecave.vss
 emberdeep/levels/ancienttownlevel.vss
 emberdeep/levels/bridgeslevel.vss
 emberdeep/levels/cavelevel.vss
@@ -12,15 +23,6 @@ emberdeep/levels/retreatlevel.vss
 emberdeep/levels/tutorial1level.vss
 emberdeep/levels/tutorial2level.vss
 emberdeep/levels/volcaetuslevel.vss
-game.vss
-gauntlet/levels/gauntletlevel.vss
-gauntlet/levels/pregauntletlevel.vss
-idestructible.vss
-incendianfalls/levels/clifflevel.vss
-incendianfalls/levels/incendianfallslevellinker.vss
-incendianfalls/levels/pentagonalcave.vss
-incendianfalls/levels/ravashrikelevel.vss
-incendianfalls/levels/squarecave.vss
 item/armor.vss
 item/blastrod.vss
 item/slowrod.vss

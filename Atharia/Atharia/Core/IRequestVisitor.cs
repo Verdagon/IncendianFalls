@@ -20,6 +20,7 @@ public interface IRequestVisitor {
   void VisitIRequest(ResumeRequestAsIRequest obj);
   void VisitIRequest(InteractRequestAsIRequest obj);
   void VisitIRequest(SetupTerrainRequestAsIRequest obj);
+  void VisitIRequest(SetupRavaArcanaGameRequestAsIRequest obj);
   void VisitIRequest(SetupEmberDeepGameRequestAsIRequest obj);
   void VisitIRequest(SetupGauntletGameRequestAsIRequest obj);
   void VisitIRequest(SetupIncendianFallsGameRequestAsIRequest obj);

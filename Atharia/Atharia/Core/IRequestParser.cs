@@ -37,6 +37,8 @@ public static class IRequestParser {
         return new InteractRequestAsIRequest(InteractRequest.Parse(source));
       case "SetupTerrainRequest":
         return new SetupTerrainRequestAsIRequest(SetupTerrainRequest.Parse(source));
+      case "SetupRavaArcanaGameRequest":
+        return new SetupRavaArcanaGameRequestAsIRequest(SetupRavaArcanaGameRequest.Parse(source));
       case "SetupEmberDeepGameRequest":
         return new SetupEmberDeepGameRequestAsIRequest(SetupEmberDeepGameRequest.Parse(source));
       case "SetupGauntletGameRequest":

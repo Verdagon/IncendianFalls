@@ -96,15 +96,6 @@ IGlaiveEffectVisitor,
 ISlowRodEffectVisitor,
 IBlastRodEffectVisitor,
 IArmorEffectVisitor,
-ISquareCaveLevelControllerEffectVisitor,
-IRavashrikeLevelControllerEffectVisitor,
-IPentagonalCaveLevelControllerEffectVisitor,
-IIncendianFallsLevelLinkerTTCEffectVisitor,
-ICliffLevelControllerEffectVisitor,
-IPreGauntletLevelControllerEffectVisitor,
-IGauntletLevelControllerEffectVisitor,
-ICommEffectVisitor,
-IGameEffectVisitor,
 IVolcaetusLevelControllerEffectVisitor,
 ITutorial2LevelControllerEffectVisitor,
 ITutorial1LevelControllerEffectVisitor,
@@ -117,6 +108,17 @@ IDirtRoadLevelControllerEffectVisitor,
 ICaveLevelControllerEffectVisitor,
 IBridgesLevelControllerEffectVisitor,
 IAncientTownLevelControllerEffectVisitor,
+ISquareCaveLevelControllerEffectVisitor,
+IRavashrikeLevelControllerEffectVisitor,
+IPentagonalCaveLevelControllerEffectVisitor,
+IIncendianFallsLevelLinkerTTCEffectVisitor,
+ICliffLevelControllerEffectVisitor,
+IPreGauntletLevelControllerEffectVisitor,
+IGauntletLevelControllerEffectVisitor,
+IRavaArcanaLevelLinkerTTCEffectVisitor,
+IJumpingCaveLevelControllerEffectVisitor,
+ICommEffectVisitor,
+IGameEffectVisitor,
 ICommMutListEffectVisitor,
 ILocationMutListEffectVisitor,
 IIRequestMutListEffectVisitor,
@@ -185,8 +187,9 @@ IRavaNestTTCMutSetEffectVisitor,
 ICliffLandingTTCMutSetEffectVisitor,
 IStoneTTCMutSetEffectVisitor,
 IGrassTTCMutSetEffectVisitor,
-IIncendianFallsLevelLinkerTTCMutSetEffectVisitor,
 IEmberDeepLevelLinkerTTCMutSetEffectVisitor,
+IIncendianFallsLevelLinkerTTCMutSetEffectVisitor,
+IRavaArcanaLevelLinkerTTCMutSetEffectVisitor,
 ITutorialDefyCounterUCMutSetEffectVisitor,
 ILightningChargingUCMutSetEffectVisitor,
 IWanderAICapabilityUCMutSetEffectVisitor,
@@ -1109,8 +1112,9 @@ public void visitITerrainTileComponentMutBunchEffect(IITerrainTileComponentMutBu
 ,  effect.incarnation.membersCliffLandingTTCMutSet
 ,  effect.incarnation.membersStoneTTCMutSet
 ,  effect.incarnation.membersGrassTTCMutSet
+,  effect.incarnation.membersEmberDeepLevelLinkerTTCMutSet
 ,  effect.incarnation.membersIncendianFallsLevelLinkerTTCMutSet
-,  effect.incarnation.membersEmberDeepLevelLinkerTTCMutSet    );
+,  effect.incarnation.membersRavaArcanaLevelLinkerTTCMutSet    );
 
 }
 
@@ -1776,212 +1780,6 @@ public void visitArmorEffect(IArmorEffect effect) { effect.visitIArmorEffect(thi
   }
 
      
-public void visitSquareCaveLevelControllerEffect(ISquareCaveLevelControllerEffect effect) { effect.visitISquareCaveLevelControllerEffect(this); }
-  public void visitSquareCaveLevelControllerCreateEffect(SquareCaveLevelControllerCreateEffect effect) {
-    // For now we're just feeding the remote ID in. Someday we might want to have a map
-    // in the applier instead.
-    root.TrustedEffectSquareCaveLevelControllerCreateWithId(effect.id
-,  effect.incarnation.level
-,  effect.incarnation.depth    );
-
-}
-
-  public void visitSquareCaveLevelControllerDeleteEffect(SquareCaveLevelControllerDeleteEffect effect) {
-    root.EffectSquareCaveLevelControllerDelete(effect.id);
-  }
-
-     
-public void visitRavashrikeLevelControllerEffect(IRavashrikeLevelControllerEffect effect) { effect.visitIRavashrikeLevelControllerEffect(this); }
-  public void visitRavashrikeLevelControllerCreateEffect(RavashrikeLevelControllerCreateEffect effect) {
-    // For now we're just feeding the remote ID in. Someday we might want to have a map
-    // in the applier instead.
-    root.TrustedEffectRavashrikeLevelControllerCreateWithId(effect.id
-,  effect.incarnation.level    );
-
-}
-
-  public void visitRavashrikeLevelControllerDeleteEffect(RavashrikeLevelControllerDeleteEffect effect) {
-    root.EffectRavashrikeLevelControllerDelete(effect.id);
-  }
-
-     
-public void visitPentagonalCaveLevelControllerEffect(IPentagonalCaveLevelControllerEffect effect) { effect.visitIPentagonalCaveLevelControllerEffect(this); }
-  public void visitPentagonalCaveLevelControllerCreateEffect(PentagonalCaveLevelControllerCreateEffect effect) {
-    // For now we're just feeding the remote ID in. Someday we might want to have a map
-    // in the applier instead.
-    root.TrustedEffectPentagonalCaveLevelControllerCreateWithId(effect.id
-,  effect.incarnation.level
-,  effect.incarnation.depth    );
-
-}
-
-  public void visitPentagonalCaveLevelControllerDeleteEffect(PentagonalCaveLevelControllerDeleteEffect effect) {
-    root.EffectPentagonalCaveLevelControllerDelete(effect.id);
-  }
-
-     
-public void visitIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTTCEffect effect) { effect.visitIIncendianFallsLevelLinkerTTCEffect(this); }
-  public void visitIncendianFallsLevelLinkerTTCCreateEffect(IncendianFallsLevelLinkerTTCCreateEffect effect) {
-    // For now we're just feeding the remote ID in. Someday we might want to have a map
-    // in the applier instead.
-    root.TrustedEffectIncendianFallsLevelLinkerTTCCreateWithId(effect.id
-,  effect.incarnation.thisLevelDepth    );
-
-}
-
-  public void visitIncendianFallsLevelLinkerTTCDeleteEffect(IncendianFallsLevelLinkerTTCDeleteEffect effect) {
-    root.EffectIncendianFallsLevelLinkerTTCDelete(effect.id);
-  }
-
-     
-public void visitCliffLevelControllerEffect(ICliffLevelControllerEffect effect) { effect.visitICliffLevelControllerEffect(this); }
-  public void visitCliffLevelControllerCreateEffect(CliffLevelControllerCreateEffect effect) {
-    // For now we're just feeding the remote ID in. Someday we might want to have a map
-    // in the applier instead.
-    root.TrustedEffectCliffLevelControllerCreateWithId(effect.id
-,  effect.incarnation.level
-,  effect.incarnation.depth    );
-
-}
-
-  public void visitCliffLevelControllerDeleteEffect(CliffLevelControllerDeleteEffect effect) {
-    root.EffectCliffLevelControllerDelete(effect.id);
-  }
-
-     
-public void visitPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEffect effect) { effect.visitIPreGauntletLevelControllerEffect(this); }
-  public void visitPreGauntletLevelControllerCreateEffect(PreGauntletLevelControllerCreateEffect effect) {
-    // For now we're just feeding the remote ID in. Someday we might want to have a map
-    // in the applier instead.
-    root.TrustedEffectPreGauntletLevelControllerCreateWithId(effect.id
-,  effect.incarnation.level    );
-
-}
-
-  public void visitPreGauntletLevelControllerDeleteEffect(PreGauntletLevelControllerDeleteEffect effect) {
-    root.EffectPreGauntletLevelControllerDelete(effect.id);
-  }
-
-     
-public void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect effect) { effect.visitIGauntletLevelControllerEffect(this); }
-  public void visitGauntletLevelControllerCreateEffect(GauntletLevelControllerCreateEffect effect) {
-    // For now we're just feeding the remote ID in. Someday we might want to have a map
-    // in the applier instead.
-    root.TrustedEffectGauntletLevelControllerCreateWithId(effect.id
-,  effect.incarnation.level    );
-
-}
-
-  public void visitGauntletLevelControllerDeleteEffect(GauntletLevelControllerDeleteEffect effect) {
-    root.EffectGauntletLevelControllerDelete(effect.id);
-  }
-
-     
-public void visitCommEffect(ICommEffect effect) { effect.visitICommEffect(this); }
-  public void visitCommCreateEffect(CommCreateEffect effect) {
-    // For now we're just feeding the remote ID in. Someday we might want to have a map
-    // in the applier instead.
-    root.TrustedEffectCommCreateWithId(effect.id
-,  effect.incarnation.template
-,  effect.incarnation.actions
-,  effect.incarnation.texts    );
-
-}
-
-  public void visitCommDeleteEffect(CommDeleteEffect effect) {
-    root.EffectCommDelete(effect.id);
-  }
-
-     
-public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this); }
-  public void visitGameCreateEffect(GameCreateEffect effect) {
-    // For now we're just feeding the remote ID in. Someday we might want to have a map
-    // in the applier instead.
-    root.TrustedEffectGameCreateWithId(effect.id
-,  effect.incarnation.rand
-,  effect.incarnation.squareLevelsOnly
-,  effect.incarnation.levels
-,  effect.incarnation.player
-,  effect.incarnation.level
-,  effect.incarnation.time
-,  effect.incarnation.actingUnit
-,  effect.incarnation.pauseBeforeNextUnit
-,  effect.incarnation.actionNum
-,  effect.incarnation.instructions
-,  effect.incarnation.hideInput
-,  effect.incarnation.evvent
-,  effect.incarnation.comms    );
-
-}
-
-  public void visitGameDeleteEffect(GameDeleteEffect effect) {
-    root.EffectGameDelete(effect.id);
-  }
-
-     
-  public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) {
-    root.EffectGameSetPlayer(
-      effect.id,
-  root.GetUnitOrNull(effect.newValue)
-    );
-  }
-
-  public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
-    root.EffectGameSetLevel(
-      effect.id,
-  root.GetLevelOrNull(effect.newValue)
-    );
-  }
-
-  public void visitGameSetTimeEffect(GameSetTimeEffect effect) {
-    root.EffectGameSetTime(
-      effect.id,
-  effect.newValue
-    );
-  }
-
-  public void visitGameSetActingUnitEffect(GameSetActingUnitEffect effect) {
-    root.EffectGameSetActingUnit(
-      effect.id,
-  root.GetUnitOrNull(effect.newValue)
-    );
-  }
-
-  public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect effect) {
-    root.EffectGameSetPauseBeforeNextUnit(
-      effect.id,
-  effect.newValue
-    );
-  }
-
-  public void visitGameSetActionNumEffect(GameSetActionNumEffect effect) {
-    root.EffectGameSetActionNum(
-      effect.id,
-  effect.newValue
-    );
-  }
-
-  public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) {
-    root.EffectGameSetInstructions(
-      effect.id,
-  effect.newValue
-    );
-  }
-
-  public void visitGameSetHideInputEffect(GameSetHideInputEffect effect) {
-    root.EffectGameSetHideInput(
-      effect.id,
-  effect.newValue
-    );
-  }
-
-  public void visitGameSetEvventEffect(GameSetEvventEffect effect) {
-    root.EffectGameSetEvvent(
-      effect.id,
-  effect.newValue
-    );
-  }
-
 public void visitVolcaetusLevelControllerEffect(IVolcaetusLevelControllerEffect effect) { effect.visitIVolcaetusLevelControllerEffect(this); }
   public void visitVolcaetusLevelControllerCreateEffect(VolcaetusLevelControllerCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
@@ -2151,6 +1949,241 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
   }
 
      
+public void visitSquareCaveLevelControllerEffect(ISquareCaveLevelControllerEffect effect) { effect.visitISquareCaveLevelControllerEffect(this); }
+  public void visitSquareCaveLevelControllerCreateEffect(SquareCaveLevelControllerCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectSquareCaveLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level
+,  effect.incarnation.depth    );
+
+}
+
+  public void visitSquareCaveLevelControllerDeleteEffect(SquareCaveLevelControllerDeleteEffect effect) {
+    root.EffectSquareCaveLevelControllerDelete(effect.id);
+  }
+
+     
+public void visitRavashrikeLevelControllerEffect(IRavashrikeLevelControllerEffect effect) { effect.visitIRavashrikeLevelControllerEffect(this); }
+  public void visitRavashrikeLevelControllerCreateEffect(RavashrikeLevelControllerCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectRavashrikeLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
+
+}
+
+  public void visitRavashrikeLevelControllerDeleteEffect(RavashrikeLevelControllerDeleteEffect effect) {
+    root.EffectRavashrikeLevelControllerDelete(effect.id);
+  }
+
+     
+public void visitPentagonalCaveLevelControllerEffect(IPentagonalCaveLevelControllerEffect effect) { effect.visitIPentagonalCaveLevelControllerEffect(this); }
+  public void visitPentagonalCaveLevelControllerCreateEffect(PentagonalCaveLevelControllerCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectPentagonalCaveLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level
+,  effect.incarnation.depth    );
+
+}
+
+  public void visitPentagonalCaveLevelControllerDeleteEffect(PentagonalCaveLevelControllerDeleteEffect effect) {
+    root.EffectPentagonalCaveLevelControllerDelete(effect.id);
+  }
+
+     
+public void visitIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTTCEffect effect) { effect.visitIIncendianFallsLevelLinkerTTCEffect(this); }
+  public void visitIncendianFallsLevelLinkerTTCCreateEffect(IncendianFallsLevelLinkerTTCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectIncendianFallsLevelLinkerTTCCreateWithId(effect.id
+,  effect.incarnation.thisLevelDepth    );
+
+}
+
+  public void visitIncendianFallsLevelLinkerTTCDeleteEffect(IncendianFallsLevelLinkerTTCDeleteEffect effect) {
+    root.EffectIncendianFallsLevelLinkerTTCDelete(effect.id);
+  }
+
+     
+public void visitCliffLevelControllerEffect(ICliffLevelControllerEffect effect) { effect.visitICliffLevelControllerEffect(this); }
+  public void visitCliffLevelControllerCreateEffect(CliffLevelControllerCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectCliffLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level
+,  effect.incarnation.depth    );
+
+}
+
+  public void visitCliffLevelControllerDeleteEffect(CliffLevelControllerDeleteEffect effect) {
+    root.EffectCliffLevelControllerDelete(effect.id);
+  }
+
+     
+public void visitPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEffect effect) { effect.visitIPreGauntletLevelControllerEffect(this); }
+  public void visitPreGauntletLevelControllerCreateEffect(PreGauntletLevelControllerCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectPreGauntletLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
+
+}
+
+  public void visitPreGauntletLevelControllerDeleteEffect(PreGauntletLevelControllerDeleteEffect effect) {
+    root.EffectPreGauntletLevelControllerDelete(effect.id);
+  }
+
+     
+public void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect effect) { effect.visitIGauntletLevelControllerEffect(this); }
+  public void visitGauntletLevelControllerCreateEffect(GauntletLevelControllerCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectGauntletLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level    );
+
+}
+
+  public void visitGauntletLevelControllerDeleteEffect(GauntletLevelControllerDeleteEffect effect) {
+    root.EffectGauntletLevelControllerDelete(effect.id);
+  }
+
+     
+public void visitRavaArcanaLevelLinkerTTCEffect(IRavaArcanaLevelLinkerTTCEffect effect) { effect.visitIRavaArcanaLevelLinkerTTCEffect(this); }
+  public void visitRavaArcanaLevelLinkerTTCCreateEffect(RavaArcanaLevelLinkerTTCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectRavaArcanaLevelLinkerTTCCreateWithId(effect.id
+,  effect.incarnation.nextLevelDepth    );
+
+}
+
+  public void visitRavaArcanaLevelLinkerTTCDeleteEffect(RavaArcanaLevelLinkerTTCDeleteEffect effect) {
+    root.EffectRavaArcanaLevelLinkerTTCDelete(effect.id);
+  }
+
+     
+public void visitJumpingCaveLevelControllerEffect(IJumpingCaveLevelControllerEffect effect) { effect.visitIJumpingCaveLevelControllerEffect(this); }
+  public void visitJumpingCaveLevelControllerCreateEffect(JumpingCaveLevelControllerCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectJumpingCaveLevelControllerCreateWithId(effect.id
+,  effect.incarnation.level
+,  effect.incarnation.depth    );
+
+}
+
+  public void visitJumpingCaveLevelControllerDeleteEffect(JumpingCaveLevelControllerDeleteEffect effect) {
+    root.EffectJumpingCaveLevelControllerDelete(effect.id);
+  }
+
+     
+public void visitCommEffect(ICommEffect effect) { effect.visitICommEffect(this); }
+  public void visitCommCreateEffect(CommCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectCommCreateWithId(effect.id
+,  effect.incarnation.template
+,  effect.incarnation.actions
+,  effect.incarnation.texts    );
+
+}
+
+  public void visitCommDeleteEffect(CommDeleteEffect effect) {
+    root.EffectCommDelete(effect.id);
+  }
+
+     
+public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this); }
+  public void visitGameCreateEffect(GameCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectGameCreateWithId(effect.id
+,  effect.incarnation.rand
+,  effect.incarnation.squareLevelsOnly
+,  effect.incarnation.levels
+,  effect.incarnation.player
+,  effect.incarnation.level
+,  effect.incarnation.time
+,  effect.incarnation.actingUnit
+,  effect.incarnation.pauseBeforeNextUnit
+,  effect.incarnation.actionNum
+,  effect.incarnation.instructions
+,  effect.incarnation.hideInput
+,  effect.incarnation.evvent
+,  effect.incarnation.comms    );
+
+}
+
+  public void visitGameDeleteEffect(GameDeleteEffect effect) {
+    root.EffectGameDelete(effect.id);
+  }
+
+     
+  public void visitGameSetPlayerEffect(GameSetPlayerEffect effect) {
+    root.EffectGameSetPlayer(
+      effect.id,
+  root.GetUnitOrNull(effect.newValue)
+    );
+  }
+
+  public void visitGameSetLevelEffect(GameSetLevelEffect effect) {
+    root.EffectGameSetLevel(
+      effect.id,
+  root.GetLevelOrNull(effect.newValue)
+    );
+  }
+
+  public void visitGameSetTimeEffect(GameSetTimeEffect effect) {
+    root.EffectGameSetTime(
+      effect.id,
+  effect.newValue
+    );
+  }
+
+  public void visitGameSetActingUnitEffect(GameSetActingUnitEffect effect) {
+    root.EffectGameSetActingUnit(
+      effect.id,
+  root.GetUnitOrNull(effect.newValue)
+    );
+  }
+
+  public void visitGameSetPauseBeforeNextUnitEffect(GameSetPauseBeforeNextUnitEffect effect) {
+    root.EffectGameSetPauseBeforeNextUnit(
+      effect.id,
+  effect.newValue
+    );
+  }
+
+  public void visitGameSetActionNumEffect(GameSetActionNumEffect effect) {
+    root.EffectGameSetActionNum(
+      effect.id,
+  effect.newValue
+    );
+  }
+
+  public void visitGameSetInstructionsEffect(GameSetInstructionsEffect effect) {
+    root.EffectGameSetInstructions(
+      effect.id,
+  effect.newValue
+    );
+  }
+
+  public void visitGameSetHideInputEffect(GameSetHideInputEffect effect) {
+    root.EffectGameSetHideInput(
+      effect.id,
+  effect.newValue
+    );
+  }
+
+  public void visitGameSetEvventEffect(GameSetEvventEffect effect) {
+    root.EffectGameSetEvvent(
+      effect.id,
+  effect.newValue
+    );
+  }
+
     public void visitCommMutListEffect(ICommMutListEffect effect) { effect.visitICommMutListEffect(this); }
     public void visitCommMutListCreateEffect(CommMutListCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
@@ -3307,6 +3340,23 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
       root.EffectGrassTTCMutSetRemove(effect.id, effect.element);
     }
        
+    public void visitEmberDeepLevelLinkerTTCMutSetEffect(IEmberDeepLevelLinkerTTCMutSetEffect effect) { effect.visitIEmberDeepLevelLinkerTTCMutSetEffect(this); }
+    public void visitEmberDeepLevelLinkerTTCMutSetCreateEffect(EmberDeepLevelLinkerTTCMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectEmberDeepLevelLinkerTTCMutSetCreateWithId(effect.id);
+    }
+    public void visitEmberDeepLevelLinkerTTCMutSetDeleteEffect(EmberDeepLevelLinkerTTCMutSetDeleteEffect effect) {
+      root.EffectEmberDeepLevelLinkerTTCMutSetDelete(effect.id);
+    }
+    public void visitEmberDeepLevelLinkerTTCMutSetAddEffect(EmberDeepLevelLinkerTTCMutSetAddEffect effect) {
+     root.EffectEmberDeepLevelLinkerTTCMutSetAdd(effect.id, effect.element);
+ }
+    public void visitEmberDeepLevelLinkerTTCMutSetRemoveEffect(EmberDeepLevelLinkerTTCMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectEmberDeepLevelLinkerTTCMutSetRemove(effect.id, effect.element);
+    }
+       
     public void visitIncendianFallsLevelLinkerTTCMutSetEffect(IIncendianFallsLevelLinkerTTCMutSetEffect effect) { effect.visitIIncendianFallsLevelLinkerTTCMutSetEffect(this); }
     public void visitIncendianFallsLevelLinkerTTCMutSetCreateEffect(IncendianFallsLevelLinkerTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
@@ -3324,21 +3374,21 @@ public void visitAncientTownLevelControllerEffect(IAncientTownLevelControllerEff
       root.EffectIncendianFallsLevelLinkerTTCMutSetRemove(effect.id, effect.element);
     }
        
-    public void visitEmberDeepLevelLinkerTTCMutSetEffect(IEmberDeepLevelLinkerTTCMutSetEffect effect) { effect.visitIEmberDeepLevelLinkerTTCMutSetEffect(this); }
-    public void visitEmberDeepLevelLinkerTTCMutSetCreateEffect(EmberDeepLevelLinkerTTCMutSetCreateEffect effect) {
+    public void visitRavaArcanaLevelLinkerTTCMutSetEffect(IRavaArcanaLevelLinkerTTCMutSetEffect effect) { effect.visitIRavaArcanaLevelLinkerTTCMutSetEffect(this); }
+    public void visitRavaArcanaLevelLinkerTTCMutSetCreateEffect(RavaArcanaLevelLinkerTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
       // in the applier instead.
-      root.TrustedEffectEmberDeepLevelLinkerTTCMutSetCreateWithId(effect.id);
+      root.TrustedEffectRavaArcanaLevelLinkerTTCMutSetCreateWithId(effect.id);
     }
-    public void visitEmberDeepLevelLinkerTTCMutSetDeleteEffect(EmberDeepLevelLinkerTTCMutSetDeleteEffect effect) {
-      root.EffectEmberDeepLevelLinkerTTCMutSetDelete(effect.id);
+    public void visitRavaArcanaLevelLinkerTTCMutSetDeleteEffect(RavaArcanaLevelLinkerTTCMutSetDeleteEffect effect) {
+      root.EffectRavaArcanaLevelLinkerTTCMutSetDelete(effect.id);
     }
-    public void visitEmberDeepLevelLinkerTTCMutSetAddEffect(EmberDeepLevelLinkerTTCMutSetAddEffect effect) {
-     root.EffectEmberDeepLevelLinkerTTCMutSetAdd(effect.id, effect.element);
+    public void visitRavaArcanaLevelLinkerTTCMutSetAddEffect(RavaArcanaLevelLinkerTTCMutSetAddEffect effect) {
+     root.EffectRavaArcanaLevelLinkerTTCMutSetAdd(effect.id, effect.element);
  }
-    public void visitEmberDeepLevelLinkerTTCMutSetRemoveEffect(EmberDeepLevelLinkerTTCMutSetRemoveEffect effect) {
+    public void visitRavaArcanaLevelLinkerTTCMutSetRemoveEffect(RavaArcanaLevelLinkerTTCMutSetRemoveEffect effect) {
       root.CheckUnlocked();
-      root.EffectEmberDeepLevelLinkerTTCMutSetRemove(effect.id, effect.element);
+      root.EffectRavaArcanaLevelLinkerTTCMutSetRemove(effect.id, effect.element);
     }
        
     public void visitTutorialDefyCounterUCMutSetEffect(ITutorialDefyCounterUCMutSetEffect effect) { effect.visitITutorialDefyCounterUCMutSetEffect(this); }

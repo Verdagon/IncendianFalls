@@ -280,33 +280,6 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly SortedDictionary<int, List<IArmorEffectObserver>> observersForArmor =
       new SortedDictionary<int, List<IArmorEffectObserver>>();
 
-  readonly SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>> observersForSquareCaveLevelController =
-      new SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>>();
-
-  readonly SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>> observersForRavashrikeLevelController =
-      new SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>>();
-
-  readonly SortedDictionary<int, List<IPentagonalCaveLevelControllerEffectObserver>> observersForPentagonalCaveLevelController =
-      new SortedDictionary<int, List<IPentagonalCaveLevelControllerEffectObserver>>();
-
-  readonly SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCEffectObserver>> observersForIncendianFallsLevelLinkerTTC =
-      new SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCEffectObserver>>();
-
-  readonly SortedDictionary<int, List<ICliffLevelControllerEffectObserver>> observersForCliffLevelController =
-      new SortedDictionary<int, List<ICliffLevelControllerEffectObserver>>();
-
-  readonly SortedDictionary<int, List<IPreGauntletLevelControllerEffectObserver>> observersForPreGauntletLevelController =
-      new SortedDictionary<int, List<IPreGauntletLevelControllerEffectObserver>>();
-
-  readonly SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>> observersForGauntletLevelController =
-      new SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>>();
-
-  readonly SortedDictionary<int, List<ICommEffectObserver>> observersForComm =
-      new SortedDictionary<int, List<ICommEffectObserver>>();
-
-  readonly SortedDictionary<int, List<IGameEffectObserver>> observersForGame =
-      new SortedDictionary<int, List<IGameEffectObserver>>();
-
   readonly SortedDictionary<int, List<IVolcaetusLevelControllerEffectObserver>> observersForVolcaetusLevelController =
       new SortedDictionary<int, List<IVolcaetusLevelControllerEffectObserver>>();
 
@@ -342,6 +315,39 @@ public class EffectBroadcaster : IEffectVisitor {
 
   readonly SortedDictionary<int, List<IAncientTownLevelControllerEffectObserver>> observersForAncientTownLevelController =
       new SortedDictionary<int, List<IAncientTownLevelControllerEffectObserver>>();
+
+  readonly SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>> observersForSquareCaveLevelController =
+      new SortedDictionary<int, List<ISquareCaveLevelControllerEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>> observersForRavashrikeLevelController =
+      new SortedDictionary<int, List<IRavashrikeLevelControllerEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IPentagonalCaveLevelControllerEffectObserver>> observersForPentagonalCaveLevelController =
+      new SortedDictionary<int, List<IPentagonalCaveLevelControllerEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCEffectObserver>> observersForIncendianFallsLevelLinkerTTC =
+      new SortedDictionary<int, List<IIncendianFallsLevelLinkerTTCEffectObserver>>();
+
+  readonly SortedDictionary<int, List<ICliffLevelControllerEffectObserver>> observersForCliffLevelController =
+      new SortedDictionary<int, List<ICliffLevelControllerEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IPreGauntletLevelControllerEffectObserver>> observersForPreGauntletLevelController =
+      new SortedDictionary<int, List<IPreGauntletLevelControllerEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>> observersForGauntletLevelController =
+      new SortedDictionary<int, List<IGauntletLevelControllerEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IRavaArcanaLevelLinkerTTCEffectObserver>> observersForRavaArcanaLevelLinkerTTC =
+      new SortedDictionary<int, List<IRavaArcanaLevelLinkerTTCEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IJumpingCaveLevelControllerEffectObserver>> observersForJumpingCaveLevelController =
+      new SortedDictionary<int, List<IJumpingCaveLevelControllerEffectObserver>>();
+
+  readonly SortedDictionary<int, List<ICommEffectObserver>> observersForComm =
+      new SortedDictionary<int, List<ICommEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IGameEffectObserver>> observersForGame =
+      new SortedDictionary<int, List<IGameEffectObserver>>();
 
   readonly SortedDictionary<int, List<ICommMutListEffectObserver>> observersForCommMutList =
       new SortedDictionary<int, List<ICommMutListEffectObserver>>();
@@ -547,11 +553,14 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly Dictionary<int, List<IGrassTTCMutSetEffectObserver>> observersForGrassTTCMutSet =
       new Dictionary<int, List<IGrassTTCMutSetEffectObserver>>();
 
+  readonly Dictionary<int, List<IEmberDeepLevelLinkerTTCMutSetEffectObserver>> observersForEmberDeepLevelLinkerTTCMutSet =
+      new Dictionary<int, List<IEmberDeepLevelLinkerTTCMutSetEffectObserver>>();
+
   readonly Dictionary<int, List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver>> observersForIncendianFallsLevelLinkerTTCMutSet =
       new Dictionary<int, List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver>>();
 
-  readonly Dictionary<int, List<IEmberDeepLevelLinkerTTCMutSetEffectObserver>> observersForEmberDeepLevelLinkerTTCMutSet =
-      new Dictionary<int, List<IEmberDeepLevelLinkerTTCMutSetEffectObserver>>();
+  readonly Dictionary<int, List<IRavaArcanaLevelLinkerTTCMutSetEffectObserver>> observersForRavaArcanaLevelLinkerTTCMutSet =
+      new Dictionary<int, List<IRavaArcanaLevelLinkerTTCMutSetEffectObserver>>();
 
   readonly Dictionary<int, List<ITutorialDefyCounterUCMutSetEffectObserver>> observersForTutorialDefyCounterUCMutSet =
       new Dictionary<int, List<ITutorialDefyCounterUCMutSetEffectObserver>>();
@@ -3179,258 +3188,6 @@ public class EffectBroadcaster : IEffectVisitor {
     }
   }
 
-  public void visitSquareCaveLevelControllerEffect(ISquareCaveLevelControllerEffect effect) {
-    if (observersForSquareCaveLevelController.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<ISquareCaveLevelControllerEffectObserver>(observers)) {
-        observer.OnSquareCaveLevelControllerEffect(effect);
-      }
-    }
-  }
-  public void AddSquareCaveLevelControllerObserver(int id, ISquareCaveLevelControllerEffectObserver observer) {
-    List<ISquareCaveLevelControllerEffectObserver> obsies;
-    if (!observersForSquareCaveLevelController.TryGetValue(id, out obsies)) {
-      obsies = new List<ISquareCaveLevelControllerEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForSquareCaveLevelController[id] = obsies;
-  }
-
-  public void RemoveSquareCaveLevelControllerObserver(int id, ISquareCaveLevelControllerEffectObserver observer) {
-    if (observersForSquareCaveLevelController.ContainsKey(id)) {
-      var list = observersForSquareCaveLevelController[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForSquareCaveLevelController.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
-  public void visitRavashrikeLevelControllerEffect(IRavashrikeLevelControllerEffect effect) {
-    if (observersForRavashrikeLevelController.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<IRavashrikeLevelControllerEffectObserver>(observers)) {
-        observer.OnRavashrikeLevelControllerEffect(effect);
-      }
-    }
-  }
-  public void AddRavashrikeLevelControllerObserver(int id, IRavashrikeLevelControllerEffectObserver observer) {
-    List<IRavashrikeLevelControllerEffectObserver> obsies;
-    if (!observersForRavashrikeLevelController.TryGetValue(id, out obsies)) {
-      obsies = new List<IRavashrikeLevelControllerEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForRavashrikeLevelController[id] = obsies;
-  }
-
-  public void RemoveRavashrikeLevelControllerObserver(int id, IRavashrikeLevelControllerEffectObserver observer) {
-    if (observersForRavashrikeLevelController.ContainsKey(id)) {
-      var list = observersForRavashrikeLevelController[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForRavashrikeLevelController.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
-  public void visitPentagonalCaveLevelControllerEffect(IPentagonalCaveLevelControllerEffect effect) {
-    if (observersForPentagonalCaveLevelController.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<IPentagonalCaveLevelControllerEffectObserver>(observers)) {
-        observer.OnPentagonalCaveLevelControllerEffect(effect);
-      }
-    }
-  }
-  public void AddPentagonalCaveLevelControllerObserver(int id, IPentagonalCaveLevelControllerEffectObserver observer) {
-    List<IPentagonalCaveLevelControllerEffectObserver> obsies;
-    if (!observersForPentagonalCaveLevelController.TryGetValue(id, out obsies)) {
-      obsies = new List<IPentagonalCaveLevelControllerEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForPentagonalCaveLevelController[id] = obsies;
-  }
-
-  public void RemovePentagonalCaveLevelControllerObserver(int id, IPentagonalCaveLevelControllerEffectObserver observer) {
-    if (observersForPentagonalCaveLevelController.ContainsKey(id)) {
-      var list = observersForPentagonalCaveLevelController[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForPentagonalCaveLevelController.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
-  public void visitIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTTCEffect effect) {
-    if (observersForIncendianFallsLevelLinkerTTC.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<IIncendianFallsLevelLinkerTTCEffectObserver>(observers)) {
-        observer.OnIncendianFallsLevelLinkerTTCEffect(effect);
-      }
-    }
-  }
-  public void AddIncendianFallsLevelLinkerTTCObserver(int id, IIncendianFallsLevelLinkerTTCEffectObserver observer) {
-    List<IIncendianFallsLevelLinkerTTCEffectObserver> obsies;
-    if (!observersForIncendianFallsLevelLinkerTTC.TryGetValue(id, out obsies)) {
-      obsies = new List<IIncendianFallsLevelLinkerTTCEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForIncendianFallsLevelLinkerTTC[id] = obsies;
-  }
-
-  public void RemoveIncendianFallsLevelLinkerTTCObserver(int id, IIncendianFallsLevelLinkerTTCEffectObserver observer) {
-    if (observersForIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
-      var list = observersForIncendianFallsLevelLinkerTTC[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForIncendianFallsLevelLinkerTTC.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
-  public void visitCliffLevelControllerEffect(ICliffLevelControllerEffect effect) {
-    if (observersForCliffLevelController.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<ICliffLevelControllerEffectObserver>(observers)) {
-        observer.OnCliffLevelControllerEffect(effect);
-      }
-    }
-  }
-  public void AddCliffLevelControllerObserver(int id, ICliffLevelControllerEffectObserver observer) {
-    List<ICliffLevelControllerEffectObserver> obsies;
-    if (!observersForCliffLevelController.TryGetValue(id, out obsies)) {
-      obsies = new List<ICliffLevelControllerEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForCliffLevelController[id] = obsies;
-  }
-
-  public void RemoveCliffLevelControllerObserver(int id, ICliffLevelControllerEffectObserver observer) {
-    if (observersForCliffLevelController.ContainsKey(id)) {
-      var list = observersForCliffLevelController[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForCliffLevelController.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
-  public void visitPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEffect effect) {
-    if (observersForPreGauntletLevelController.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<IPreGauntletLevelControllerEffectObserver>(observers)) {
-        observer.OnPreGauntletLevelControllerEffect(effect);
-      }
-    }
-  }
-  public void AddPreGauntletLevelControllerObserver(int id, IPreGauntletLevelControllerEffectObserver observer) {
-    List<IPreGauntletLevelControllerEffectObserver> obsies;
-    if (!observersForPreGauntletLevelController.TryGetValue(id, out obsies)) {
-      obsies = new List<IPreGauntletLevelControllerEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForPreGauntletLevelController[id] = obsies;
-  }
-
-  public void RemovePreGauntletLevelControllerObserver(int id, IPreGauntletLevelControllerEffectObserver observer) {
-    if (observersForPreGauntletLevelController.ContainsKey(id)) {
-      var list = observersForPreGauntletLevelController[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForPreGauntletLevelController.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
-  public void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect effect) {
-    if (observersForGauntletLevelController.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<IGauntletLevelControllerEffectObserver>(observers)) {
-        observer.OnGauntletLevelControllerEffect(effect);
-      }
-    }
-  }
-  public void AddGauntletLevelControllerObserver(int id, IGauntletLevelControllerEffectObserver observer) {
-    List<IGauntletLevelControllerEffectObserver> obsies;
-    if (!observersForGauntletLevelController.TryGetValue(id, out obsies)) {
-      obsies = new List<IGauntletLevelControllerEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForGauntletLevelController[id] = obsies;
-  }
-
-  public void RemoveGauntletLevelControllerObserver(int id, IGauntletLevelControllerEffectObserver observer) {
-    if (observersForGauntletLevelController.ContainsKey(id)) {
-      var list = observersForGauntletLevelController[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForGauntletLevelController.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
-  public void visitCommEffect(ICommEffect effect) {
-    if (observersForComm.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<ICommEffectObserver>(observers)) {
-        observer.OnCommEffect(effect);
-      }
-    }
-  }
-  public void AddCommObserver(int id, ICommEffectObserver observer) {
-    List<ICommEffectObserver> obsies;
-    if (!observersForComm.TryGetValue(id, out obsies)) {
-      obsies = new List<ICommEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForComm[id] = obsies;
-  }
-
-  public void RemoveCommObserver(int id, ICommEffectObserver observer) {
-    if (observersForComm.ContainsKey(id)) {
-      var list = observersForComm[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForComm.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
-  public void visitGameEffect(IGameEffect effect) {
-    if (observersForGame.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<IGameEffectObserver>(observers)) {
-        observer.OnGameEffect(effect);
-      }
-    }
-  }
-  public void AddGameObserver(int id, IGameEffectObserver observer) {
-    List<IGameEffectObserver> obsies;
-    if (!observersForGame.TryGetValue(id, out obsies)) {
-      obsies = new List<IGameEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForGame[id] = obsies;
-  }
-
-  public void RemoveGameObserver(int id, IGameEffectObserver observer) {
-    if (observersForGame.ContainsKey(id)) {
-      var list = observersForGame[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForGame.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
   public void visitVolcaetusLevelControllerEffect(IVolcaetusLevelControllerEffect effect) {
     if (observersForVolcaetusLevelController.TryGetValue(effect.id, out var observers)) {
       foreach (var observer in new List<IVolcaetusLevelControllerEffectObserver>(observers)) {
@@ -3761,6 +3518,314 @@ public class EffectBroadcaster : IEffectVisitor {
       list.Remove(observer);
       if (list.Count == 0) {
         observersForAncientTownLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitSquareCaveLevelControllerEffect(ISquareCaveLevelControllerEffect effect) {
+    if (observersForSquareCaveLevelController.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<ISquareCaveLevelControllerEffectObserver>(observers)) {
+        observer.OnSquareCaveLevelControllerEffect(effect);
+      }
+    }
+  }
+  public void AddSquareCaveLevelControllerObserver(int id, ISquareCaveLevelControllerEffectObserver observer) {
+    List<ISquareCaveLevelControllerEffectObserver> obsies;
+    if (!observersForSquareCaveLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<ISquareCaveLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForSquareCaveLevelController[id] = obsies;
+  }
+
+  public void RemoveSquareCaveLevelControllerObserver(int id, ISquareCaveLevelControllerEffectObserver observer) {
+    if (observersForSquareCaveLevelController.ContainsKey(id)) {
+      var list = observersForSquareCaveLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForSquareCaveLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitRavashrikeLevelControllerEffect(IRavashrikeLevelControllerEffect effect) {
+    if (observersForRavashrikeLevelController.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IRavashrikeLevelControllerEffectObserver>(observers)) {
+        observer.OnRavashrikeLevelControllerEffect(effect);
+      }
+    }
+  }
+  public void AddRavashrikeLevelControllerObserver(int id, IRavashrikeLevelControllerEffectObserver observer) {
+    List<IRavashrikeLevelControllerEffectObserver> obsies;
+    if (!observersForRavashrikeLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IRavashrikeLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForRavashrikeLevelController[id] = obsies;
+  }
+
+  public void RemoveRavashrikeLevelControllerObserver(int id, IRavashrikeLevelControllerEffectObserver observer) {
+    if (observersForRavashrikeLevelController.ContainsKey(id)) {
+      var list = observersForRavashrikeLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForRavashrikeLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitPentagonalCaveLevelControllerEffect(IPentagonalCaveLevelControllerEffect effect) {
+    if (observersForPentagonalCaveLevelController.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IPentagonalCaveLevelControllerEffectObserver>(observers)) {
+        observer.OnPentagonalCaveLevelControllerEffect(effect);
+      }
+    }
+  }
+  public void AddPentagonalCaveLevelControllerObserver(int id, IPentagonalCaveLevelControllerEffectObserver observer) {
+    List<IPentagonalCaveLevelControllerEffectObserver> obsies;
+    if (!observersForPentagonalCaveLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IPentagonalCaveLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForPentagonalCaveLevelController[id] = obsies;
+  }
+
+  public void RemovePentagonalCaveLevelControllerObserver(int id, IPentagonalCaveLevelControllerEffectObserver observer) {
+    if (observersForPentagonalCaveLevelController.ContainsKey(id)) {
+      var list = observersForPentagonalCaveLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForPentagonalCaveLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitIncendianFallsLevelLinkerTTCEffect(IIncendianFallsLevelLinkerTTCEffect effect) {
+    if (observersForIncendianFallsLevelLinkerTTC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IIncendianFallsLevelLinkerTTCEffectObserver>(observers)) {
+        observer.OnIncendianFallsLevelLinkerTTCEffect(effect);
+      }
+    }
+  }
+  public void AddIncendianFallsLevelLinkerTTCObserver(int id, IIncendianFallsLevelLinkerTTCEffectObserver observer) {
+    List<IIncendianFallsLevelLinkerTTCEffectObserver> obsies;
+    if (!observersForIncendianFallsLevelLinkerTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IIncendianFallsLevelLinkerTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForIncendianFallsLevelLinkerTTC[id] = obsies;
+  }
+
+  public void RemoveIncendianFallsLevelLinkerTTCObserver(int id, IIncendianFallsLevelLinkerTTCEffectObserver observer) {
+    if (observersForIncendianFallsLevelLinkerTTC.ContainsKey(id)) {
+      var list = observersForIncendianFallsLevelLinkerTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForIncendianFallsLevelLinkerTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitCliffLevelControllerEffect(ICliffLevelControllerEffect effect) {
+    if (observersForCliffLevelController.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<ICliffLevelControllerEffectObserver>(observers)) {
+        observer.OnCliffLevelControllerEffect(effect);
+      }
+    }
+  }
+  public void AddCliffLevelControllerObserver(int id, ICliffLevelControllerEffectObserver observer) {
+    List<ICliffLevelControllerEffectObserver> obsies;
+    if (!observersForCliffLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<ICliffLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForCliffLevelController[id] = obsies;
+  }
+
+  public void RemoveCliffLevelControllerObserver(int id, ICliffLevelControllerEffectObserver observer) {
+    if (observersForCliffLevelController.ContainsKey(id)) {
+      var list = observersForCliffLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForCliffLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitPreGauntletLevelControllerEffect(IPreGauntletLevelControllerEffect effect) {
+    if (observersForPreGauntletLevelController.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IPreGauntletLevelControllerEffectObserver>(observers)) {
+        observer.OnPreGauntletLevelControllerEffect(effect);
+      }
+    }
+  }
+  public void AddPreGauntletLevelControllerObserver(int id, IPreGauntletLevelControllerEffectObserver observer) {
+    List<IPreGauntletLevelControllerEffectObserver> obsies;
+    if (!observersForPreGauntletLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IPreGauntletLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForPreGauntletLevelController[id] = obsies;
+  }
+
+  public void RemovePreGauntletLevelControllerObserver(int id, IPreGauntletLevelControllerEffectObserver observer) {
+    if (observersForPreGauntletLevelController.ContainsKey(id)) {
+      var list = observersForPreGauntletLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForPreGauntletLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitGauntletLevelControllerEffect(IGauntletLevelControllerEffect effect) {
+    if (observersForGauntletLevelController.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IGauntletLevelControllerEffectObserver>(observers)) {
+        observer.OnGauntletLevelControllerEffect(effect);
+      }
+    }
+  }
+  public void AddGauntletLevelControllerObserver(int id, IGauntletLevelControllerEffectObserver observer) {
+    List<IGauntletLevelControllerEffectObserver> obsies;
+    if (!observersForGauntletLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IGauntletLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForGauntletLevelController[id] = obsies;
+  }
+
+  public void RemoveGauntletLevelControllerObserver(int id, IGauntletLevelControllerEffectObserver observer) {
+    if (observersForGauntletLevelController.ContainsKey(id)) {
+      var list = observersForGauntletLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForGauntletLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitRavaArcanaLevelLinkerTTCEffect(IRavaArcanaLevelLinkerTTCEffect effect) {
+    if (observersForRavaArcanaLevelLinkerTTC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IRavaArcanaLevelLinkerTTCEffectObserver>(observers)) {
+        observer.OnRavaArcanaLevelLinkerTTCEffect(effect);
+      }
+    }
+  }
+  public void AddRavaArcanaLevelLinkerTTCObserver(int id, IRavaArcanaLevelLinkerTTCEffectObserver observer) {
+    List<IRavaArcanaLevelLinkerTTCEffectObserver> obsies;
+    if (!observersForRavaArcanaLevelLinkerTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IRavaArcanaLevelLinkerTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForRavaArcanaLevelLinkerTTC[id] = obsies;
+  }
+
+  public void RemoveRavaArcanaLevelLinkerTTCObserver(int id, IRavaArcanaLevelLinkerTTCEffectObserver observer) {
+    if (observersForRavaArcanaLevelLinkerTTC.ContainsKey(id)) {
+      var list = observersForRavaArcanaLevelLinkerTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForRavaArcanaLevelLinkerTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitJumpingCaveLevelControllerEffect(IJumpingCaveLevelControllerEffect effect) {
+    if (observersForJumpingCaveLevelController.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IJumpingCaveLevelControllerEffectObserver>(observers)) {
+        observer.OnJumpingCaveLevelControllerEffect(effect);
+      }
+    }
+  }
+  public void AddJumpingCaveLevelControllerObserver(int id, IJumpingCaveLevelControllerEffectObserver observer) {
+    List<IJumpingCaveLevelControllerEffectObserver> obsies;
+    if (!observersForJumpingCaveLevelController.TryGetValue(id, out obsies)) {
+      obsies = new List<IJumpingCaveLevelControllerEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForJumpingCaveLevelController[id] = obsies;
+  }
+
+  public void RemoveJumpingCaveLevelControllerObserver(int id, IJumpingCaveLevelControllerEffectObserver observer) {
+    if (observersForJumpingCaveLevelController.ContainsKey(id)) {
+      var list = observersForJumpingCaveLevelController[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForJumpingCaveLevelController.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitCommEffect(ICommEffect effect) {
+    if (observersForComm.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<ICommEffectObserver>(observers)) {
+        observer.OnCommEffect(effect);
+      }
+    }
+  }
+  public void AddCommObserver(int id, ICommEffectObserver observer) {
+    List<ICommEffectObserver> obsies;
+    if (!observersForComm.TryGetValue(id, out obsies)) {
+      obsies = new List<ICommEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForComm[id] = obsies;
+  }
+
+  public void RemoveCommObserver(int id, ICommEffectObserver observer) {
+    if (observersForComm.ContainsKey(id)) {
+      var list = observersForComm[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForComm.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitGameEffect(IGameEffect effect) {
+    if (observersForGame.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IGameEffectObserver>(observers)) {
+        observer.OnGameEffect(effect);
+      }
+    }
+  }
+  public void AddGameObserver(int id, IGameEffectObserver observer) {
+    List<IGameEffectObserver> obsies;
+    if (!observersForGame.TryGetValue(id, out obsies)) {
+      obsies = new List<IGameEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForGame[id] = obsies;
+  }
+
+  public void RemoveGameObserver(int id, IGameEffectObserver observer) {
+    if (observersForGame.ContainsKey(id)) {
+      var list = observersForGame[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForGame.Remove(id);
       }
     } else {
       throw new Exception("Couldnt find!");
@@ -5603,6 +5668,33 @@ public class EffectBroadcaster : IEffectVisitor {
       }
     }
 
+    public void visitEmberDeepLevelLinkerTTCMutSetEffect(IEmberDeepLevelLinkerTTCMutSetEffect effect) {
+      if (observersForEmberDeepLevelLinkerTTCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IEmberDeepLevelLinkerTTCMutSetEffectObserver>(observers)) {
+          observer.OnEmberDeepLevelLinkerTTCMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddEmberDeepLevelLinkerTTCMutSetObserver(int id, IEmberDeepLevelLinkerTTCMutSetEffectObserver observer) {
+      List<IEmberDeepLevelLinkerTTCMutSetEffectObserver> obsies;
+      if (!observersForEmberDeepLevelLinkerTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IEmberDeepLevelLinkerTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForEmberDeepLevelLinkerTTCMutSet[id] = obsies;
+    }
+    public void RemoveEmberDeepLevelLinkerTTCMutSetObserver(int id, IEmberDeepLevelLinkerTTCMutSetEffectObserver observer) {
+      if (observersForEmberDeepLevelLinkerTTCMutSet.ContainsKey(id)) {
+        var list = observersForEmberDeepLevelLinkerTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForEmberDeepLevelLinkerTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
     public void visitIncendianFallsLevelLinkerTTCMutSetEffect(IIncendianFallsLevelLinkerTTCMutSetEffect effect) {
       if (observersForIncendianFallsLevelLinkerTTCMutSet.TryGetValue(effect.id, out var observers)) {
         foreach (var observer in new List<IIncendianFallsLevelLinkerTTCMutSetEffectObserver>(observers)) {
@@ -5630,27 +5722,27 @@ public class EffectBroadcaster : IEffectVisitor {
       }
     }
 
-    public void visitEmberDeepLevelLinkerTTCMutSetEffect(IEmberDeepLevelLinkerTTCMutSetEffect effect) {
-      if (observersForEmberDeepLevelLinkerTTCMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<IEmberDeepLevelLinkerTTCMutSetEffectObserver>(observers)) {
-          observer.OnEmberDeepLevelLinkerTTCMutSetEffect(effect);
+    public void visitRavaArcanaLevelLinkerTTCMutSetEffect(IRavaArcanaLevelLinkerTTCMutSetEffect effect) {
+      if (observersForRavaArcanaLevelLinkerTTCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IRavaArcanaLevelLinkerTTCMutSetEffectObserver>(observers)) {
+          observer.OnRavaArcanaLevelLinkerTTCMutSetEffect(effect);
         }
       }
     }
-    public void AddEmberDeepLevelLinkerTTCMutSetObserver(int id, IEmberDeepLevelLinkerTTCMutSetEffectObserver observer) {
-      List<IEmberDeepLevelLinkerTTCMutSetEffectObserver> obsies;
-      if (!observersForEmberDeepLevelLinkerTTCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IEmberDeepLevelLinkerTTCMutSetEffectObserver>();
+    public void AddRavaArcanaLevelLinkerTTCMutSetObserver(int id, IRavaArcanaLevelLinkerTTCMutSetEffectObserver observer) {
+      List<IRavaArcanaLevelLinkerTTCMutSetEffectObserver> obsies;
+      if (!observersForRavaArcanaLevelLinkerTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IRavaArcanaLevelLinkerTTCMutSetEffectObserver>();
       }
       obsies.Add(observer);
-      observersForEmberDeepLevelLinkerTTCMutSet[id] = obsies;
+      observersForRavaArcanaLevelLinkerTTCMutSet[id] = obsies;
     }
-    public void RemoveEmberDeepLevelLinkerTTCMutSetObserver(int id, IEmberDeepLevelLinkerTTCMutSetEffectObserver observer) {
-      if (observersForEmberDeepLevelLinkerTTCMutSet.ContainsKey(id)) {
-        var list = observersForEmberDeepLevelLinkerTTCMutSet[id];
+    public void RemoveRavaArcanaLevelLinkerTTCMutSetObserver(int id, IRavaArcanaLevelLinkerTTCMutSetEffectObserver observer) {
+      if (observersForRavaArcanaLevelLinkerTTCMutSet.ContainsKey(id)) {
+        var list = observersForRavaArcanaLevelLinkerTTCMutSet[id];
         list.Remove(observer);
         if (list.Count == 0) {
-          observersForEmberDeepLevelLinkerTTCMutSet.Remove(id);
+          observersForRavaArcanaLevelLinkerTTCMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");

@@ -163,6 +163,33 @@ namespace IncendianFalls {
       }
     }
 
+    public (List<IEffect>, Game) RequestSetupRavaArcanaGame(int randomSeed, int startLevel, bool squareLevelsOnly) {
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new SetupRavaArcanaGameRequest(randomSeed, startLevel, squareLevelsOnly);
+        broadcastBeforeRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
+        Superstate superstate = null;
+        var(events, game) = context.root.Transact(delegate () {
+          return SetupRavaArcanaGameRequestExecutor.Execute(context, out superstate, request);
+        });
+
+        superstateByGameId.Add(game.id, superstate);
+
+        // context.Flare(game.DStr());
+        broadcastAfterRequest(request.AsIRequest());
+        context.Flare(GetDeterministicHashCode());
+        return (events, game);
+      } catch (Exception e) {
+        root.logger.Error(e.Message + " " + e.StackTrace);
+        throw e;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
+      }
+    }
+
     public (List<IEffect>, string) RequestCommAction(int gameId, int commId, int actionIndex) {
       //var rollbackPoint = root.Snapshot();
       try {
