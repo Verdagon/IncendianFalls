@@ -116,8 +116,8 @@ namespace IncendianFalls {
 
         // Lets make it so we dont want to go straight, but we do like turning slightly, but don't like turning a lot.
         weightsByDirection[snakeCurrentDirection + 0] = 5;
-        weightsByDirection[snakeCurrentDirection - 1] = 17;
-        weightsByDirection[snakeCurrentDirection + 1] = 17;
+        weightsByDirection[snakeCurrentDirection - 1] = 15;
+        weightsByDirection[snakeCurrentDirection + 1] = 15;
         weightsByDirection[snakeCurrentDirection - 2] = 20;
         weightsByDirection[snakeCurrentDirection + 2] = 20;
         weightsByDirection[snakeCurrentDirection - 3] = 5;
@@ -127,24 +127,24 @@ namespace IncendianFalls {
         
         // If we're near the edge, then weigh against the direction of the edge.
         Vec2 centerToCurrentPosition = snakeCurrentPosition.minus(originPosition);
-        if (centerToCurrentPosition.length() < Math.Max(radius - 5, radius * .8f)) {
+        if (centerToCurrentPosition.length() > Math.Max(radius - 5, radius * .8f)) {
           Direction directionToOutside = Direction.fromVec(centerToCurrentPosition);
-          weightsByDirection[directionToOutside + 0] += -10;
-          weightsByDirection[directionToOutside - 1] += -10;
-          weightsByDirection[directionToOutside + 1] += -10;
-          weightsByDirection[directionToOutside - 2] += -5;
-          weightsByDirection[directionToOutside + 2] += -5;
-          weightsByDirection[directionToOutside - 3] += 0;
-          weightsByDirection[directionToOutside + 3] += 0;
+          weightsByDirection[directionToOutside + 0] += -11;
+          weightsByDirection[directionToOutside - 1] += -11;
+          weightsByDirection[directionToOutside + 1] += -11;
+          weightsByDirection[directionToOutside - 2] += -6;
+          weightsByDirection[directionToOutside + 2] += -6;
+          weightsByDirection[directionToOutside - 3] += -1;
+          weightsByDirection[directionToOutside + 3] += -1;
           weightsByDirection[directionToOutside - 4] += 0;
           weightsByDirection[directionToOutside + 4] += 0;
-          weightsByDirection[directionToOutside - 5] += 5;
-          weightsByDirection[directionToOutside + 5] += 5;
-          weightsByDirection[directionToOutside - 6] += 10;
-          weightsByDirection[directionToOutside + 6] += 10;
-          weightsByDirection[directionToOutside - 7] += 10;
-          weightsByDirection[directionToOutside + 7] += 10;
-          weightsByDirection[directionToOutside + 8] += 10;
+          weightsByDirection[directionToOutside - 5] += 4;
+          weightsByDirection[directionToOutside + 5] += 4;
+          weightsByDirection[directionToOutside - 6] += 9;
+          weightsByDirection[directionToOutside + 6] += 9;
+          weightsByDirection[directionToOutside - 7] += 9;
+          weightsByDirection[directionToOutside + 7] += 9;
+          weightsByDirection[directionToOutside + 8] += 9;
         }
 
         // This will explore everything within one slither.
@@ -201,6 +201,8 @@ namespace IncendianFalls {
           }
         }
         
+        // for debugging
+        var backupWeightsByDirection = new SortedDictionary<Direction, int>(weightsByDirection);
             
         var directionToThatWayPath = GetDirectionToThatWayPathMap(pattern, considerCornersAdjacent, snakeCurrentLocation);
         foreach (var directionAndThatWayPath in directionToThatWayPath) {

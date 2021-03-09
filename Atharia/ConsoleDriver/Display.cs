@@ -4,6 +4,8 @@ using Atharia.Model;
 
 namespace ConsoleDriveyThing {
   public class Displayer {
+    const int DISPLAY_WIDTH = 80;
+    const int DISPLAY_HEIGHT = 20;
 
     static void GetUnitColors(
         out ConsoleColor foregroundColor,
@@ -261,9 +263,9 @@ namespace ConsoleDriveyThing {
     }
 
     public static void Display(Game game, bool cursorMode, Location cursor, Vec2 cameraCenter, bool terrainAndFeaturesMode) {
-      Cell[,] map = new Cell[80, 20]; // x then y
-      for (int x = 0; x < 80; x++) {
-        for (int y = 0; y < 20; y++) {
+      Cell[,] map = new Cell[DISPLAY_WIDTH, 20]; // x then y
+      for (int x = 0; x < DISPLAY_WIDTH; x++) {
+        for (int y = 0; y < DISPLAY_HEIGHT; y++) {
           map[x, y] = new Cell(' ', ConsoleColor.Black, ConsoleColor.Black);
         }
       }
@@ -272,7 +274,7 @@ namespace ConsoleDriveyThing {
 
         var tile = locationAndTile.Value;
         var tileCenter = game.level.terrain.pattern.GetTileCenter(location);
-        var positionOnScreen = tileCenter.minus(cameraCenter).plus(new Vec2(39, 9));
+        var positionOnScreen = tileCenter.minus(cameraCenter).plus(new Vec2(DISPLAY_WIDTH / 2 - 1, DISPLAY_HEIGHT / 2 - 1));
         if (positionOnScreen.x < 0 || positionOnScreen.y < 0 || positionOnScreen.x >= map.GetLength(0) || positionOnScreen.y >= map.GetLength(1)) {
           continue;
         }
@@ -284,7 +286,7 @@ namespace ConsoleDriveyThing {
         if (unit.Alive()) {
           var location = unit.location;
           var tileCenter = game.level.terrain.pattern.GetTileCenter(location);
-          var positionOnScreen = tileCenter.minus(cameraCenter).plus(new Vec2(39, 9));
+          var positionOnScreen = tileCenter.minus(cameraCenter).plus(new Vec2(DISPLAY_WIDTH / 2 - 1, DISPLAY_HEIGHT / 2 - 1));
           if (positionOnScreen.x < 0 || positionOnScreen.y < 0 || positionOnScreen.x >= map.GetLength(0) || positionOnScreen.y >= map.GetLength(1)) {
             continue;
           }
@@ -297,7 +299,7 @@ namespace ConsoleDriveyThing {
       {
         var location = cursor;
         var tileCenter = game.level.terrain.pattern.GetTileCenter(location);
-        var positionOnScreen = tileCenter.minus(cameraCenter).plus(new Vec2(39, 9));
+        var positionOnScreen = tileCenter.minus(cameraCenter).plus(new Vec2(DISPLAY_WIDTH / 2 - 1, DISPLAY_HEIGHT / 2 - 1));
         if (positionOnScreen.x < 0 || positionOnScreen.y < 0 || positionOnScreen.x >= map.GetLength(0) || positionOnScreen.y >= map.GetLength(1)) {
           // do nothin
         } else {
@@ -307,8 +309,8 @@ namespace ConsoleDriveyThing {
       }
 
       Console.WriteLine();
-      for (int row = 19; row >= 0; row--) {
-        for (int col = 0; col < 80; col++) {
+      for (int row = DISPLAY_HEIGHT - 1; row >= 0; row--) {
+        for (int col = 0; col < DISPLAY_WIDTH; col++) {
           var cell = map[col, row];
           cell.Display();
         }
@@ -323,7 +325,7 @@ namespace ConsoleDriveyThing {
         maxHp = game.player.maxHp;
       }
       bottomBar += "HP: " + hp + " / " + maxHp;
-      while (bottomBar.Length < 19) {
+      while (bottomBar.Length < DISPLAY_HEIGHT - 1) {
         bottomBar += " ";
       }
       bottomBar += " ";
@@ -338,19 +340,19 @@ namespace ConsoleDriveyThing {
         }
       }
       bottomBar += "MP: " + mp + " / " + maxMp;
-      while (bottomBar.Length < 39) {
+      while (bottomBar.Length < DISPLAY_WIDTH / 2 - 1) {
         bottomBar += " ";
       }
       bottomBar += " ";
 
       bottomBar += "@ " + game.level.GetName();
-      while (bottomBar.Length < 59) {
+      while (bottomBar.Length < DISPLAY_WIDTH * 3 / 4 - 1) {
         bottomBar += " ";
       }
       bottomBar += " ";
 
       bottomBar += "Time: " + game.time;
-      while (bottomBar.Length < 78) {
+      while (bottomBar.Length < DISPLAY_WIDTH - 2) {
         bottomBar += " ";
       }
       Console.Write(bottomBar);

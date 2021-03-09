@@ -111,7 +111,7 @@ namespace ConsoleDriveyThing {
 
       //int random = (int)timestamp;
       //int random = 134337; // Stairs right next to you
-      int random = 1533324206;
+      int random = 1533524206;
       Superstructure serverSS = new Superstructure(new ConsoleLoggers.ConsoleLogger());
       Root clientRoot = new Root(new ConsoleLoggers.ConsoleLogger());
       using (new ReplayLogger(serverSS, new string[] { "Latest.sslog", timestamp + ".sslog" })) {
@@ -134,7 +134,7 @@ namespace ConsoleDriveyThing {
         bool terrainAndFeaturesMode = false;
         bool timeAnchoring = false;
 
-        IDisplay display = () => Displayer.Display(game, cursorMode, cursor, new Vec2(0, 0), terrainAndFeaturesMode);
+        IDisplay display = () => Displayer.Display(game, cursorMode, cursor, game.level.terrain.pattern.GetTileCenter(cursor), terrainAndFeaturesMode);
         display();
 
         for (bool running = true; running;) {
@@ -265,6 +265,7 @@ namespace ConsoleDriveyThing {
                           cursor.groupX + direction.groupX,
                           cursor.groupY + direction.groupY,
                           cursor.indexInGroup + direction.indexInGroup);
+                  display();
                 } else if (timeAnchoring) {
                   var destination =
                       new Location(

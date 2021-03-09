@@ -187,6 +187,9 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit unit,
         Location destination) {
+      if (!game.level.terrain.TileExists(destination)) {
+        return false;
+      }
       if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent())) {
         return false;
       }
