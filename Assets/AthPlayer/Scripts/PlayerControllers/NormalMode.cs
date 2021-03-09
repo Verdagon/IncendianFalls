@@ -73,7 +73,7 @@ namespace AthPlayer {
               game.player.location,
               newLocation,
               game.level.ConsiderCornersAdjacent(),
-              (from, to) => game.player.CanStep(game.level.terrain, from, to));
+              (from, to, totalCost) => game.player.CanStep(game.level.terrain, from, to));
       // If the path isnt whats already shown, then show it and bail out.
       // Maybe this could happen if the window isnt focused or something.
       if (!PathsEqual(path, sanityCheckPath)) {
@@ -135,7 +135,7 @@ namespace AthPlayer {
                       game.player.location,
                       maybeHoverLocation,
                       game.level.ConsiderCornersAdjacent(),
-                      (from, to) => game.player.CanStep(game.level.terrain, from, to));
+                      (from, to, totalCost) => game.player.CanStep(game.level.terrain, from, to));
             }
           }
         }

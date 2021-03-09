@@ -63,7 +63,8 @@ namespace RavaArcana {
           context,
           game,
           superstate,
-          startingDepth);
+          startingDepth,
+          squareLevelsOnly);
         if (!startLevel.Exists()) {
           startLevel = level;
           startLevelEntryLocation = entryLocation;

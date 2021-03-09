@@ -100,7 +100,7 @@ namespace IncendianFalls {
         return (events, game);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -127,7 +127,7 @@ namespace IncendianFalls {
         return (events, game);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -155,7 +155,7 @@ namespace IncendianFalls {
         return (events, game);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -182,7 +182,7 @@ namespace IncendianFalls {
         return (events, game);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -206,7 +206,7 @@ namespace IncendianFalls {
         return (events, success);
       } catch (Exception e) {
         root.logger.Error(e.Message + "\n" + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -254,7 +254,7 @@ namespace IncendianFalls {
         return (events, success);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -278,7 +278,7 @@ namespace IncendianFalls {
         return (events, success);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -302,7 +302,7 @@ namespace IncendianFalls {
         return (events, result);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -326,7 +326,7 @@ namespace IncendianFalls {
         return (events, result);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -350,7 +350,7 @@ namespace IncendianFalls {
         return (events, result);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -375,7 +375,7 @@ namespace IncendianFalls {
         return (events, success);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -400,7 +400,7 @@ namespace IncendianFalls {
     //    return (events, success);
     //  } catch (Exception e) {
     //    root.logger.Error(e.Message + " " + e.StackTrace);
-    //    throw e;
+    //    throw;
     //    //} catch (Exception) {
     //    //  Logger.Error("Caught exception, rolling back!");
     //    //  root.Revert(rollbackPoint);
@@ -424,7 +424,7 @@ namespace IncendianFalls {
         return (events, success);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -448,7 +448,7 @@ namespace IncendianFalls {
         return (events, result);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -472,7 +472,7 @@ namespace IncendianFalls {
     //    return (events, success);
     //  } catch (Exception e) {
     //    root.logger.Error(e.Message + " " + e.StackTrace);
-    //    throw e;
+    //    throw;
     //    //} catch (Exception) {
     //    //  Logger.Error("Caught exception, rolling back!");
     //    //  root.Revert(rollbackPoint);
@@ -497,7 +497,7 @@ namespace IncendianFalls {
         return (events, success);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -521,7 +521,7 @@ namespace IncendianFalls {
         return (events, result);
       } catch (Exception e) {
         root.logger.Error(e.Message + " " + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
@@ -548,7 +548,7 @@ namespace IncendianFalls {
         return (events, success);
       } catch (Exception e) {
         root.logger.Error(e.Message + "\n" + e.StackTrace);
-        throw e;
+        throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);

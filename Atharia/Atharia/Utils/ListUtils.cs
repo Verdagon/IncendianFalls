@@ -7,9 +7,16 @@ public static class ListUtils {
     if (list.Count < numToGet) {
       throw new Exception("Can't get " + numToGet + " from a list of only " + list.Count);
     }
-    List<T> shuffled = ListUtils.Shuffled(list, rand, numShuffles);
-    shuffled.RemoveRange(numToGet, shuffled.Count - numToGet);
-    return shuffled;
+
+    if (numToGet == 0) {
+      return new List<T>();
+    } else if (numToGet == 1) {
+      return new List<T>() { list[rand.Next() % list.Count] };
+    } else {
+      List<T> shuffled = ListUtils.Shuffled(list, rand, numShuffles);
+      shuffled.RemoveRange(numToGet, shuffled.Count - numToGet);
+      return shuffled;
+    }
   }
 
   public static List<T> Shuffled<T>(List<T> original, Rand rand, int numShuffles) {

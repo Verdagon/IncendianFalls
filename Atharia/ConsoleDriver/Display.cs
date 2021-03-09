@@ -118,6 +118,10 @@ namespace ConsoleDriveyThing {
           terrainPainters.Add(() => cell.Paint('.', ConsoleColor.DarkGray));
           recognized = true;
         }
+        if (tc is MudTTCAsITerrainTileComponent) {
+          terrainPainters.Add(() => cell.Paint('.', ConsoleColor.DarkGray));
+          recognized = true;
+        }
         if (tc is CliffLandingTTCAsITerrainTileComponent) {
           terrainPainters.Add(() => cell.Paint('.', ConsoleColor.DarkGray));
           recognized = true;
@@ -200,6 +204,9 @@ namespace ConsoleDriveyThing {
           recognized = true;
         }
         if (tc is LevelLinkTTCAsITerrainTileComponent) {
+          recognized = true;
+        }
+        if (tc is EmberDeepLevelLinkerTTCAsITerrainTileComponent) {
           recognized = true;
         }
         Asserts.Assert(recognized, tc.ToString());

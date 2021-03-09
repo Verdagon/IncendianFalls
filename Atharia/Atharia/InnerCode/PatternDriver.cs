@@ -30,7 +30,7 @@ namespace IncendianFalls {
               startLoc,
               endLoc,
               considerCornersAdjacent,
-              (Location from, Location to) => true);
+              (Location from, Location to, float totalCost) => true);
       Asserts.Assert(path.Count > 0);
       if (includeStart) {
         path.Insert(0, startLoc);

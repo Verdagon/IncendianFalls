@@ -111,14 +111,14 @@ namespace ConsoleDriveyThing {
 
       //int random = (int)timestamp;
       //int random = 134337; // Stairs right next to you
-      int random = 1525224206;
+      int random = 1533324206;
       Superstructure serverSS = new Superstructure(new ConsoleLoggers.ConsoleLogger());
       Root clientRoot = new Root(new ConsoleLoggers.ConsoleLogger());
       using (new ReplayLogger(serverSS, new string[] { "Latest.sslog", timestamp + ".sslog" })) {
 
         bool squareLevelsOnly = true;
         //bool squareLevelsOnly = false;
-        var (setupEffects, serverGame) = serverSS.RequestSetupGauntletGame(random, squareLevelsOnly);
+        var (setupEffects, serverGame) = serverSS.RequestSetupRavaArcanaGame(random, 0, squareLevelsOnly);
         clientRoot.Transact(delegate () {
           foreach (var effect in FilterRelevantEffects(setupEffects)) {
             Console.WriteLine("Applying " + effect);

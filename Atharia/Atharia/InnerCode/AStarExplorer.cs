@@ -3,22 +3,10 @@ using Atharia.Model;
 using System.Collections.Generic;
 
 namespace IncendianFalls {
-  // This is used to prioritize which ones to explore first.
-  // Numbers that are higher are explored with more interest.
-  // For example, ApatheticPatternExplorerPrioritizer treats all locations
-  // equally and therefore just spreads out in a breadth-first search (which
-  // is almost a circle but not exactly).
-  // To get an exact circle, you'd use LessDistanceFromPrioritizer which
-  // returns the negative distance from the start. It's negative because
-  // higher numbers are explored first.
-  // To make a square, make one that returns the difference between the X
-  // distance and Y distance from the start.
-
-  //if (distanceA == distanceB) {
-  //  return (new Location.BeforeComparer()).Compare(a, b);
-  //}
-
-  public delegate bool ICanStep(Location from, Location to);
+  public delegate bool ICanStep(Location from, Location to, float totalCost);
+  public delegate bool IStopCondition(Location loc);
+  public delegate float IFutureCostGuesser(Location loc);
+  public delegate float IDetermineCost(Location from, Location to);
 
   public class AStarExplorer {
     private class LowerFScoreComparer : IComparer<Location> {
@@ -53,52 +41,72 @@ namespace IncendianFalls {
       }
     }
 
-    // Could optimize this... instead of having all these separate maps, combine some of them
-    // so that they share cache lines.
+    // The set of nodes already evaluated
+    private SortedSet<Location> closedLocations = new SortedSet<Location>();
+    public SortedSet<Location> getClosedLocations() { return closedLocations; }
+    
+    // For each node:
+    // - cameFrom: which node it can most efficiently be reached from.
+    //   If a node can be reached from many nodes, cameFrom will eventually contain the
+    //   most efficient previous step.
+    // - g: the cost of getting from the start node to that node.
+    // - f: the total cost of getting from the start node to the goal
+    //   by passing by that node. That value is partly known, partly heuristic.
+    SortedDictionary<Location, GFAndCameFrom> gFAndCameFromByLocation = new SortedDictionary<Location, GFAndCameFrom>();
+
+
     public static List<Location> Go(
         Pattern pattern,
         Location startLocation,
         Location targetLocation,
         bool cornersAreAdjacent,
         ICanStep canStep) {
+      var explorer =
+          new AStarExplorer(
+              pattern,
+              new SortedSet<Location>() {startLocation},
+              cornersAreAdjacent,
+              canStep,
+              (a) => a == targetLocation,
+              MakeDistanceCostGuesser(pattern, targetLocation),
+              (a, b) => pattern.GetTileCenter(a).distance(pattern.GetTileCenter(b)));
+      if (explorer.closedLocations.Contains(targetLocation)) {
+        return explorer.GetPathTo(targetLocation);
+      } else {
+        return new List<Location>();
+      }
+    }
+
+    // Could optimize this... instead of having all these separate maps, combine some of them
+    // so that they share cache lines.
+    public AStarExplorer(
+        Pattern pattern,
+        SortedSet<Location> startLocations,
+        bool cornersAreAdjacent,
+        ICanStep canStep,
+        IStopCondition stopCondition,
+        IFutureCostGuesser costGuesser,
+        IDetermineCost determineCost) {
       //UnityEngine.Debug.Log("Pathing from " + startLocation + " to " + targetLocation);
 
-      if (startLocation == targetLocation) {
-        throw new Exception("wat");
-      }
-      // The set of nodes already evaluated
-      var closedLocations = new SortedSet<Location>();
-      // For each node:
-      // - cameFrom: which node it can most efficiently be reached from.
-      //   If a node can be reached from many nodes, cameFrom will eventually contain the
-      //   most efficient previous step.
-      // - g: the cost of getting from the start node to that node.
-      // - f: the total cost of getting from the start node to the goal
-      //   by passing by that node. That value is partly known, partly heuristic.
-      SortedDictionary<Location, GFAndCameFrom> gFAndCameFromByLocation = new SortedDictionary<Location, GFAndCameFrom>();
       // The set of currently discovered nodes that are not evaluated yet.
       // Initially, only the start node is known.
       SortedDictionary<Location, object> openLocationsLowestFFirst =
           new SortedDictionary<Location, object>(
               new LowerFScoreComparer(gFAndCameFromByLocation));
 
-      openLocationsLowestFFirst.Add(startLocation, new object());
-
-      gFAndCameFromByLocation[startLocation] =
-          new GFAndCameFrom(
-              EstimateHeuristicCost(pattern, startLocation, targetLocation),
-              0,
-              startLocation);
-
-
+      foreach (var startLocation in startLocations) {
+        Asserts.Assert(!stopCondition(startLocation));
+        openLocationsLowestFFirst.Add(startLocation, new object());
+        gFAndCameFromByLocation[startLocation] =
+            new GFAndCameFrom(costGuesser(startLocation), 0, startLocation);
+      }
+      
       while (openLocationsLowestFFirst.Count > 0) {
-        //UnityEngine.Debug.Log("remaining in open: " + openLocationsLowestFFirst.Count);
-        Location currentLocation =
-            DictionaryUtils.GetFirstKey<Location>(openLocationsLowestFFirst);
-        //UnityEngine.Debug.Log("current is " + currentLocation + " f score " + fGAndCameFromByLocation[currentLocation].fScore);
+        Location currentLocation = DictionaryUtils.GetFirstKey<Location>(openLocationsLowestFFirst);
 
-        if (currentLocation == targetLocation) {
-          return ReconstructPath(gFAndCameFromByLocation, currentLocation);
+        if (stopCondition(currentLocation)) {
+          return;
         }
 
         bool removed = openLocationsLowestFFirst.Remove(currentLocation);
@@ -109,16 +117,16 @@ namespace IncendianFalls {
 
         var neighbors = pattern.GetAdjacentLocations(currentLocation, cornersAreAdjacent);
         foreach (var neighborLocation in neighbors) {
-          if (!canStep(currentLocation, neighborLocation)) {
-            continue;
-          }
           if (closedLocations.Contains(neighborLocation)) {
             continue;
           }
+
           float tentativeGScore =
               gFAndCameFromByLocation[currentLocation].gScore +
-              pattern.GetTileCenter(currentLocation)
-                  .distance(pattern.GetTileCenter(neighborLocation));
+              determineCost(currentLocation, neighborLocation);
+          if (!canStep(currentLocation, neighborLocation, tentativeGScore)) {
+            continue;
+          }
           if (!openLocationsLowestFFirst.ContainsKey(neighborLocation)) {
             // Discovered a new node
             openLocationsLowestFFirst.Add(neighborLocation, new object());
@@ -134,35 +142,35 @@ namespace IncendianFalls {
           gFAndCameFromByLocation[neighborLocation] =
             new GFAndCameFrom(
               tentativeGScore,
-              tentativeGScore +
-                  EstimateHeuristicCost(pattern, neighborLocation, targetLocation),
+              tentativeGScore + costGuesser(neighborLocation),
               currentLocation);
           openLocationsLowestFFirst.Add(neighborLocation, new object());
         }
       }
       // There was no path.
-      return new List<Location>();
+      return;
     }
 
-    static float EstimateHeuristicCost(
-        Pattern pattern,
-        Location fromHere,
-        Location toHere) {
-      return pattern.GetTileCenter(fromHere).distance(
-          pattern.GetTileCenter(toHere));
+    static IFutureCostGuesser MakeDistanceCostGuesser(Pattern pattern, Location target) {
+      return (Location from) =>
+          pattern.GetTileCenter(from).distance(pattern.GetTileCenter(target));
     }
 
-    static List<Location> ReconstructPath(
-        SortedDictionary<Location, GFAndCameFrom> cameFromByLocation,
-        Location currentLocation) {
+    public bool WasExplored(Location targetLocation) {
+      return closedLocations.Contains(targetLocation);
+    }
+
+    public List<Location> GetPathTo(Location targetLocation) {
+      Asserts.Assert(gFAndCameFromByLocation.ContainsKey(targetLocation));
+      Location currentLocation = targetLocation;
       List<Location> path = new List<Location>();
       while (true) {
-        if (cameFromByLocation[currentLocation].cameFrom == currentLocation) {
+        if (gFAndCameFromByLocation[currentLocation].cameFrom == currentLocation) {
           path.Reverse();
           return path;
         }
         path.Add(currentLocation);
-        currentLocation = cameFromByLocation[currentLocation].cameFrom;
+        currentLocation = gFAndCameFromByLocation[currentLocation].cameFrom;
       }
     }
   }

@@ -184,7 +184,7 @@ namespace IncendianFalls {
               origin,
               destination,
               level.ConsiderCornersAdjacent(),
-              (Location from, Location to) => {
+              (Location from, Location to, float totalCost) => {
                 return terrain.tiles.ContainsKey(to) &&
                     terrain.tiles[to].IsWalkable() &&
                     terrain.GetElevationDifference(from, to) <= 2;
@@ -200,7 +200,7 @@ namespace IncendianFalls {
           origin,
           destination,
           level.ConsiderCornersAdjacent(),
-              (Location from, Location to) => {
+              (Location from, Location to, float totalCost) => {
                 return level.terrain.tiles.ContainsKey(to) &&
                     level.terrain.tiles[to].IsWalkable() &&
                     level.terrain.tiles[to].components.GetAllCliffTTC().Count > 0;

@@ -51,7 +51,7 @@ namespace Atharia.Model {
               unit.location,
               nearestEnemy.location,
               game.level.ConsiderCornersAdjacent(),
-              (Location from, Location to) => {
+              (Location from, Location to, float totalCost) => {
                 return terrain.tiles.ContainsKey(to) &&
                     terrain.tiles[to].IsWalkable() &&
                     terrain.GetElevationDifference(from, to) <= 2;

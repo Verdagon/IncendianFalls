@@ -7,6 +7,9 @@ namespace Atharia.Model {
           (b.x - a.x) * (b.x - a.x) +
           (b.y - a.y) * (b.y - a.y));
     }
+    public static float length(this Vec2 a) {
+      return (float)Math.Sqrt(a.x * a.x + a.y * a.y);
+    }
 
     public static Vec2 mul(this Vec2 v, float f) {
       return new Vec2(v.x * f, v.y * f);

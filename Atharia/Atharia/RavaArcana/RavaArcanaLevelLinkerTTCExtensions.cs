@@ -33,7 +33,8 @@ namespace Atharia.Model {
           context,
           game,
           superstate,
-          nextLevelDepth);
+          nextLevelDepth,
+          game.squareLevelsOnly);
 
       // Link to the next level.
       var levelLink = game.root.EffectLevelLinkTTCCreate(true, nextLevel, nextLevelEntryLocation);
@@ -71,7 +72,8 @@ namespace Atharia.Model {
         SSContext context,
         Game game,
         Superstate superstate,
-        int depth) {
+        int depth,
+        bool squareLevelsOnly) {
       game.root.logger.Info("in MakeNextLevel! depth " + depth);
       context.Flare(context.root.GetDeterministicHashCode().ToString());
       if (depth == 0) {
@@ -96,7 +98,8 @@ namespace Atharia.Model {
             context,
             game,
             superstate,
-            depth);
+            depth,
+            squareLevelsOnly);
           context.Flare(game.root.GetDeterministicHashCode().ToString());
           break;
       }
