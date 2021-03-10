@@ -111,7 +111,7 @@ namespace ConsoleDriveyThing {
 
       //int random = (int)timestamp;
       //int random = 134337; // Stairs right next to you
-      int random = 1533524206;
+      int random = 1533924206;
       Superstructure serverSS = new Superstructure(new ConsoleLoggers.ConsoleLogger());
       Root clientRoot = new Root(new ConsoleLoggers.ConsoleLogger());
       using (new ReplayLogger(serverSS, new string[] { "Latest.sslog", timestamp + ".sslog" })) {

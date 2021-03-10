@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Atharia.Model;
+using IncendianFalls;
 
 namespace Atharia.Model {
   public static class PatternExtensions {
@@ -107,6 +108,46 @@ namespace Atharia.Model {
       }
       return result;
     }
+
+    // public static SortedSet<Location> GetParallelLocations(
+    //     this Pattern pattern,
+    //     Location aLoc,
+    //     Location bLoc,
+    //     bool includeSourceLocs,
+    //     bool considerCornersAdjacent,
+    //     bool right) {
+    //   var aPos = pattern.GetTileCenter(aLoc);
+    //   var bPos = pattern.GetTileCenter(bLoc);
+    //   var aToBDir = Direction.fromVec(bPos.minus(aPos));
+    //   var perpendicularDir = right ? aToBDir - 4 : aToBDir + 4;
+    //   var perpendicularVec = perpendicularDir.toVec();
+    //
+    //   var aParallelLocs = new SortedSet<Location>();
+    //   foreach (var aAdjacentLoc in pattern.GetAdjacentLocations(aLoc, considerCornersAdjacent)) {
+    //     var aToAdjacent = pattern.GetTileCenter(aAdjacentLoc).minus(pattern.GetTileCenter(aLoc));
+    //     if (perpendicularVec.dot(aToAdjacent) >= 0) {
+    //       aParallelLocs.Add(aAdjacentLoc);
+    //     }
+    //   }
+    //   var bParallelLocs = new SortedSet<Location>();
+    //   foreach (var bAdjacentLoc in pattern.GetAdjacentLocations(bLoc, considerCornersAdjacent)) {
+    //     var bToAdjacent = pattern.GetTileCenter(bAdjacentLoc).minus(pattern.GetTileCenter(bLoc));
+    //     if (perpendicularVec.dot(bToAdjacent) >= 0) {
+    //       bParallelLocs.Add(bAdjacentLoc);
+    //     }
+    //   }
+    //
+    //   var allParallelLocs = new SortedSet<Location>(aParallelLocs);
+    //   SetUtils.AddAll(allParallelLocs, bParallelLocs);
+    //   if (includeSourceLocs) {
+    //     allParallelLocs.Add(aLoc);
+    //     allParallelLocs.Add(bLoc);
+    //   } else {
+    //     allParallelLocs.Remove(aLoc);
+    //     allParallelLocs.Remove(bLoc);
+    //   }
+    //   return allParallelLocs;
+    // }
 
     // Removes any locations that are at the edge of the given group of locations.
     public static SortedSet<Location> GetInnerLocations(
