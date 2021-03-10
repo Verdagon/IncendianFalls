@@ -160,6 +160,11 @@ namespace IncendianFalls {
       return closedLocations.Contains(targetLocation);
     }
 
+    public float GetCostTo(Location targetLocation) {
+      Asserts.Assert(gFAndCameFromByLocation.ContainsKey(targetLocation));
+      return gFAndCameFromByLocation[targetLocation].gScore;
+    }
+
     public List<Location> GetPathTo(Location targetLocation) {
       Asserts.Assert(gFAndCameFromByLocation.ContainsKey(targetLocation));
       Location currentLocation = targetLocation;

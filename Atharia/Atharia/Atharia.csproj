@@ -2391,8 +2391,11 @@
         <Compile Include="InnerCode\TerrainGeneration\CliffTerrainGeneratorOld.cs" />
         <Compile Include="InnerCode\TerrainGeneration\DungeonTerrainGenerator.cs" />
         <Compile Include="InnerCode\TerrainGeneration\ForestTerrainGenerator.cs" />
-        <Compile Include="InnerCode\TerrainGeneration\JumpingCaveTerrainGenerator.cs" />
         <Compile Include="InnerCode\TerrainGeneration\MakeLevel.cs" />
+        <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\Direction.cs" />
+        <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\DirectionToThatWayPathMap.cs" />
+        <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\Snake.cs" />
+        <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\SnakingCaveTerrainGenerator.cs" />
         <Compile Include="InnerCode\Utils.cs" />
         <Compile Include="InnerCode\Vivifier.cs" />
         <Compile Include="InnerCode\Vivimap.cs" />
