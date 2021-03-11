@@ -28,57 +28,225 @@ namespace IncendianFalls {
       var originLocation = new Location(0, 0, 0);
       
       // Get a random location in the level's circle.
-      var circleLocations = GetCircle(context, pattern, new Location(0, 0, 0), radius);
+      var circleLocs = GetCircle(context, pattern, new Location(0, 0, 0), radius);
 
+      var (mainLocs, sideLocs) = addSnakes(rand, terrain, considerCornersAdjacent, originLocation, radius, circleLocs);
+      
+      var untestedPossibleBridgeEndLocs = pattern.GetAdjacentLocations(mainLocs, false, considerCornersAdjacent);
+      SetUtils.RemoveAll(untestedPossibleBridgeEndLocs, sideLocs);
+      SetUtils.RetainAll(untestedPossibleBridgeEndLocs, circleLocs);
+      
+      var locToPossibleBridgeEndingThereMap = new SortedDictionary<Location, List<Bridge>>();
+      var locToPossibleBridgesTouchingThereMap = new SortedDictionary<Location, List<Bridge>>();
+      foreach (var untestedPossibleBridgeEndLoc in untestedPossibleBridgeEndLocs) {
+        var discoveredPossibleBridgesEndingHere =
+            BridgeMaker.getBridges(pattern, circleLocs, mainLocs, sideLocs, untestedPossibleBridgeEndLoc);
+        foreach (var bridge in discoveredPossibleBridgesEndingHere) {
+          foreach (var loc in bridge.getEndLocations()) {
+            if (locToPossibleBridgeEndingThereMap.TryGetValue(loc, out List<Bridge> existingPossibleBridgesEndingHere)) {
+              existingPossibleBridgesEndingHere.Add(bridge);
+            } else {
+              locToPossibleBridgeEndingThereMap.Add(loc, new List<Bridge>(){ bridge });
+            }
+          }
+          foreach (var loc in bridge.getPathLocations()) {
+            if (locToPossibleBridgesTouchingThereMap.TryGetValue(loc, out List<Bridge> existingPossibleBridgesTouchingHere)) {
+              existingPossibleBridgesTouchingHere.Add(bridge);
+            } else {
+              locToPossibleBridgesTouchingThereMap.Add(loc, new List<Bridge>{ bridge });
+            }
+          }
+        }
+      }
+      
+      var nonEmptyLocs = new SortedSet<Location>(terrain.tiles.Keys);
+      var nonEmptyAndAdjacentLocs = pattern.GetAdjacentLocations(nonEmptyLocs, true, false);
+      var overlayLocs = new SortedSet<Location>(circleLocs);
+      SetUtils.RemoveAll(overlayLocs, nonEmptyAndAdjacentLocs);
+      foreach (var overlayLoc in overlayLocs) {
+        if (locToPossibleBridgeEndingThereMap.TryGetValue(overlayLoc, out List<Bridge> bridgesEndingHere)) {
+          var newBridge = bridgesEndingHere[0];
+          implementBridge(terrain, newBridge);
+          
+          // If any bridge ends or paths in any of these locations, get rid of them.
+          var otherBridgeBlastZone = new SortedSet<Location>(newBridge.getAllLocations());
+          otherBridgeBlastZone = pattern.GetAdjacentLocations(otherBridgeBlastZone, true, false);
+      
+          // Remove all bridges that end in any of these locations.
+          var bridgesToRemove = new List<Bridge>();
+          foreach (var bridgeEndLoc in otherBridgeBlastZone) {
+            if (locToPossibleBridgesTouchingThereMap.TryGetValue(bridgeEndLoc, out List<Bridge> bridgesPathingThere)) {
+              foreach (var bridgePathingThere in bridgesPathingThere) {
+                bridgesToRemove.Add(bridgePathingThere);
+              }
+            }
+          }
+          while (bridgesToRemove.Count > 0) {
+            var bridge = bridgesToRemove[0];
+            // These bridges are being removed, so remove references to them in other ends' and paths' lists.
+            foreach (var bridgeEndingThereEndLoc in bridge.getEndLocations()) {
+              locToPossibleBridgeEndingThereMap[bridgeEndingThereEndLoc].Remove(bridge);
+              if (locToPossibleBridgeEndingThereMap[bridgeEndingThereEndLoc].Count == 0) {
+                locToPossibleBridgeEndingThereMap.Remove(bridgeEndingThereEndLoc);
+              }
+            }
+            foreach (var bridgePathingTherePathLoc in bridge.getPathLocations()) {
+              locToPossibleBridgesTouchingThereMap[bridgePathingTherePathLoc].Remove(bridge);
+              if (locToPossibleBridgesTouchingThereMap[bridgePathingTherePathLoc].Count == 0) {
+                locToPossibleBridgesTouchingThereMap.Remove(bridgePathingTherePathLoc);
+              }
+            }
+            while (bridgesToRemove.Remove(bridge)) { }
+          }
+        } else {
+          if (!terrain.TileExists(overlayLoc)) {
+            var tile = AddTile(terrain, overlayLoc, 3);
+            tile.components.Add(terrain.root.EffectMudTTCCreate().AsITerrainTileComponent());
+          }
+        }
+      }
+
+      // foreach (var overlayLoc in overlayLocs) {
+      //   if (locToPossibleBridgeEndingThereMap.ContainsKey(overlayLoc)) {
+      //     var tile = AddTile(terrain, overlayLoc, locToPossibleBridgeEndingThereMap[overlayLoc].Count);
+      //     tile.components.Add(terrain.root.EffectMudTTCCreate().AsITerrainTileComponent());
+      //   } else {
+      //     var tile = AddTile(terrain, overlayLoc, 3);
+      //     tile.components.Add(terrain.root.EffectMudTTCCreate().AsITerrainTileComponent());
+      //   }
+      // }
+      
+      
+      // // var tile = AddTile(terrain, untestedPossibleBridgeStartLoc, 3);
+      // // tile.components.Add(terrain.root.EffectMudTTCCreate().AsITerrainTileComponent());
+      // foreach (var loc in locToPossibleBridgeEndingThereMap.Keys) {
+      //   if (!terrain.TileExists(loc)) {
+      //     var tile = AddTile(terrain, loc, locToPossibleBridgeEndingThereMap[loc].Count);
+      //     tile.components.Add(terrain.root.EffectMudTTCCreate().AsITerrainTileComponent());
+      //   }
+      // }
+
+      // we'll need to make any locations next to ADEH -1, not just IJKL. See BridgeMaking2.png for an example.
+
+      return terrain;
+    }
+
+    static void implementBridge(Terrain terrain, Bridge bridge) {
+      foreach (var bridgeLoc in bridge.getAllLocations()) {
+        if (!terrain.TileExists(bridgeLoc)) {
+          var newTile = AddTile(terrain, bridgeLoc, 3);
+          newTile.components.Add(terrain.root.EffectMudTTCCreate().AsITerrainTileComponent());
+        }
+      }
+
+      terrain.tiles[bridge.bLoc].elevation = 1;
+      terrain.tiles[bridge.cLoc].elevation = 1;
+      terrain.tiles[bridge.fLoc].elevation = 1;
+      terrain.tiles[bridge.gLoc].elevation = 1;
+      
+      terrain.tiles[bridge.aLoc].elevation = 5;
+      terrain.tiles[bridge.dLoc].elevation = 5;
+      terrain.tiles[bridge.eLoc].elevation = 5;
+      terrain.tiles[bridge.hLoc].elevation = 5;
+      
+      terrain.tiles[bridge.iLoc].elevation = 4;
+      terrain.tiles[bridge.jLoc].elevation = 4;
+      terrain.tiles[bridge.kLoc].elevation = 4;
+      terrain.tiles[bridge.lLoc].elevation = 4;
+      
+      terrain.tiles[bridge.mLoc].elevation = 2;
+      terrain.tiles[bridge.nLoc].elevation = 2;
+      terrain.tiles[bridge.oLoc].elevation = 2;
+      terrain.tiles[bridge.pLoc].elevation = 2;
+      
+      
+    }
+
+    static (SortedSet<Location>, SortedSet<Location>) addSnakes(Rand rand, Terrain terrain, bool considerCornersAdjacent, Location originLocation, float radius, SortedSet<Location> circleLocs) {
+      
       var snakes = new List<Snake>();
       var deadSnakes = new List<Snake>();
       
-      var firstSnakeInitialLocation = ListUtils.GetRandomN(new List<Location>(circleLocations), rand, 0, 1)[0];
+      var firstSnakeInitialLocation = ListUtils.GetRandomN(new List<Location>(circleLocs), rand, 0, 4)[0];
       var firstSnakeInitialDirection = new Direction(rand.Next() % Direction.NUM);
       var firstSnake = new Snake(rand, terrain, considerCornersAdjacent, originLocation, radius, firstSnakeInitialLocation, firstSnakeInitialDirection);
       snakes.Add(firstSnake);
 
       growSnakes(rand, terrain, snakes, deadSnakes);
 
-      var dijkstra = makeDijkstra(terrain, originLocation, circleLocations);
-      var possibleStarts = GetPossibleStarts(rand, pattern, dijkstra, considerCornersAdjacent);
+      var dijkstra = makeDijkstra(terrain, originLocation, circleLocs);
+      var possibleSnakeStarts = GetPossibleSnakeStarts(rand, terrain.pattern, dijkstra, considerCornersAdjacent);
 
       int i = 0;
-      while (i < possibleStarts.Count) {
-        var (startLoc, startDir) = possibleStarts[i];
+      while (i < possibleSnakeStarts.Count) {
+        var (startLoc, startDir) = possibleSnakeStarts[i];
         var snake = new Snake(rand, terrain, considerCornersAdjacent, originLocation, radius, startLoc, startDir);
         snakes.Add(snake);
         growSnakes(rand, terrain, snakes, deadSnakes);
         if (snake.GetPathSoFar().Count > 0) {
-          dijkstra = makeDijkstra(terrain, originLocation, circleLocations);
-          possibleStarts = GetPossibleStarts(rand, pattern, dijkstra, considerCornersAdjacent);
+          dijkstra = makeDijkstra(terrain, originLocation, circleLocs);
+          possibleSnakeStarts = GetPossibleSnakeStarts(rand, terrain.pattern, dijkstra, considerCornersAdjacent);
           i = 0;
         } else {
           i++;
         }
       }
-      
-      // Now, undo any paths that are less than 10.
-      // start here
-      
-      AddRightSides(terrain, deadSnakes);
-      
-      // foreach (var start in possibleStarts) {
-      //   if (!terrain.TileExists(start.Item1)) {
-      //     var tile = AddTile(terrain, start.Item1, 3);
-      //     tile.components.Add(terrain.root.EffectMagmaTTCCreate().AsITerrainTileComponent());
-      //   }
-      // }
 
-      return terrain;
+      // The locations for the main paths, made by the snakes, so 1 wide and contiguous.
+      var mainLocs = new SortedSet<Location>(terrain.tiles.Keys);
+      AddRightSides(terrain, deadSnakes);
+      // All the extra locations to make the main paths wider.
+      var sideLocs = new SortedSet<Location>(terrain.tiles.Keys);
+      SetUtils.RemoveAll(sideLocs, mainLocs);
+
+      // Now, undo any areas that are too small.
+      // WARNING: this now means the terrain is out of sync with the snakes, don't use the snakes anymore.
+      var removedLocs = RemoveSmallPaths(terrain, considerCornersAdjacent);
+      // Use mainLocs and sideLocs instead.
+      SetUtils.RemoveAll(mainLocs, removedLocs);
+      SetUtils.RemoveAll(sideLocs, removedLocs);
+
+      return (mainLocs, sideLocs);
     }
 
-    static AStarExplorer makeDijkstra(Terrain terrain, Location originLocation, SortedSet<Location> circleLocations) {
+    static SortedSet<Location> RemoveSmallPaths(Terrain terrain, bool considerCornersAdjacent) {
+      var undiscoveredLocs = new SortedSet<Location>(terrain.tiles.Keys);
+
+      var removedLocs = new SortedSet<Location>();
+      
+      while (undiscoveredLocs.Count > 0) {
+        var islandExplorer =
+            new AStarExplorer(
+                terrain.pattern,
+                new SortedSet<Location>() {SetUtils.GetFirst(undiscoveredLocs)},
+                considerCornersAdjacent,
+                (a, b, totalCost) => undiscoveredLocs.Contains(b),
+                (a) => false, // dont stop early
+                (a) => 0, // no cost to get to the goal, there is no goal
+                (a, b) => 0); // no cost to go to any adjacent
+        var islandLocs = islandExplorer.getClosedLocations();
+        if (islandLocs.Count <= 16) {
+          foreach (var islandLoc in islandLocs) {
+            var tile = terrain.tiles[islandLoc];
+            terrain.tiles.Remove(islandLoc);
+            tile.Destruct();
+            removedLocs.Add(islandLoc);
+          }
+        }
+        foreach (var islandLoc in islandLocs) {
+          undiscoveredLocs.Remove(islandLoc);
+        }
+      }
+
+      return removedLocs;
+    }
+
+    static AStarExplorer makeDijkstra(Terrain terrain, Location originLocation, SortedSet<Location> circleLocs) {
       return new AStarExplorer(
           terrain.pattern,
           new SortedSet<Location>(terrain.tiles.Keys),
           false,
-          (a, b, totalCost) => circleLocations.Contains(b) && !terrain.TileExists(b),
+          (a, b, totalCost) => circleLocs.Contains(b) && !terrain.TileExists(b),
           (loc) => false, // dont stop early
           (a) => 0, // try everything equally
           (a, b) => 1); // every step costs 1
@@ -181,7 +349,7 @@ namespace IncendianFalls {
               if (isRightOfB) {
                 if (!terrain.tiles.ContainsKey(bAdjacentLoc)) {
                   var tile = AddTile(terrain, bAdjacentLoc, 3);
-                  tile.components.Add(terrain.root.EffectFloorTTCCreate().AsITerrainTileComponent());
+                  tile.components.Add(terrain.root.EffectMudTTCCreate().AsITerrainTileComponent());
                 }
               }
             }
@@ -192,9 +360,9 @@ namespace IncendianFalls {
       }
     }
 
-    static List<(Location, Direction)> GetPossibleStarts(
+    static List<(Location, Direction)> GetPossibleSnakeStarts(
         Rand rand, Pattern pattern, AStarExplorer dijkstra, bool considerCornersAdjacent) {
-      var possibleStarts = new List<(Location, Direction)>();
+      var possibleSnakeStarts = new List<(Location, Direction)>();
       foreach (var exploredLoc in dijkstra.getClosedLocations()) {
         var cost = dijkstra.GetCostTo(exploredLoc);
         if (cost >= AVOID_DISTANCE_STEPS + 1 && cost < AVOID_DISTANCE_STEPS + 2) {
@@ -207,10 +375,10 @@ namespace IncendianFalls {
           Asserts.Assert(pattern.LocationsAreAdjacent(exploredLoc, fromLoc, considerCornersAdjacent));
           var dirAwayFromExistingPaths =
               Direction.fromVec(pattern.GetTileCenter(exploredLoc).minus(pattern.GetTileCenter(fromLoc)));
-          possibleStarts.Add((exploredLoc, dirAwayFromExistingPaths));
+          possibleSnakeStarts.Add((exploredLoc, dirAwayFromExistingPaths));
         }
       }
-      return ListUtils.Shuffled(possibleStarts, rand, 2);
+      return ListUtils.Shuffled(possibleSnakeStarts, rand, 2);
     }
 
     public static SortedSet<Location> GetCircle(SSContext context, Pattern pattern, Location originLocation, float radius) {

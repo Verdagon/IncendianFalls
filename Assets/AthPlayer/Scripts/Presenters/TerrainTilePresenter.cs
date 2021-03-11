@@ -241,8 +241,11 @@ namespace AthPlayer {
           topColor = Vector4Animation.Color(.4f, .133f, 0, .2f);
           sideColor = Vector4Animation.Color(.266f, .1f, 0, .2f);
         } else if (ttc is MudTTCAsITerrainTileComponent) {
-          topColor = Vector4Animation.Color(.35f, .11f, 0f);
-          sideColor = Vector4Animation.Color(.23f, .08f, 0f);
+          // topColor = Vector4Animation.Color(.35f, .11f, 0f);
+          // sideColor = Vector4Animation.Color(.23f, .08f, 0f);
+          
+          topColor = Vector4Animation.Color(.20f + 0.05f * terrainTile.elevation, .02f + 0.03f * terrainTile.elevation, 0f);
+          sideColor = Vector4Animation.Color(.08f + 0.05f * terrainTile.elevation, 0.03f * terrainTile.elevation, 0f);
         } else if (ttc is CaveWallTTCAsITerrainTileComponent) {
           topColor = Vector4Animation.Color(.24f, .08f, 0f);
           sideColor = Vector4Animation.Color(.16f, .05f, 0f);

@@ -33,7 +33,7 @@ namespace Atharia.Model {
           pattern,
           game.rand,
           considerCornersAdjacent,
-          30.0f);
+          20.0f);
       context.Flare(context.root.GetDeterministicHashCode().ToString());
 
       foreach (var locationAndTile in terrain.tiles) {

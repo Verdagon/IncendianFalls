@@ -116,6 +116,8 @@ namespace IncendianFalls {
         ss.RequestSetupIncendianFallsGame(setupIncendianFallsGame.obj.randomSeed, setupIncendianFallsGame.obj.squareLevelsOnly);
       } else if (request is SetupGauntletGameRequestAsIRequest setupGauntletGame) {
         ss.RequestSetupGauntletGame(setupGauntletGame.obj.randomSeed, setupGauntletGame.obj.squareLevelsOnly);
+      } else if (request is SetupRavaArcanaGameRequestAsIRequest setupRavaArcanaGame) {
+        ss.RequestSetupRavaArcanaGame(setupRavaArcanaGame.obj.randomSeed, setupRavaArcanaGame.obj.startLevel, setupRavaArcanaGame.obj.squareLevelsOnly);
       } else if (request is SetupEmberDeepGameRequestAsIRequest setupEmberDeepGame) {
         ss.RequestSetupEmberDeepGame(setupEmberDeepGame.obj.randomSeed, setupEmberDeepGame.obj.startLevel, setupEmberDeepGame.obj.squareLevelsOnly);
       } else if (request is InteractRequestAsIRequest interact) {

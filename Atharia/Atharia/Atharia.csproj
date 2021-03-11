@@ -2392,6 +2392,7 @@
         <Compile Include="InnerCode\TerrainGeneration\DungeonTerrainGenerator.cs" />
         <Compile Include="InnerCode\TerrainGeneration\ForestTerrainGenerator.cs" />
         <Compile Include="InnerCode\TerrainGeneration\MakeLevel.cs" />
+        <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\BridgeMaker.cs" />
         <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\Direction.cs" />
         <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\DirectionToThatWayPathMap.cs" />
         <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\Snake.cs" />

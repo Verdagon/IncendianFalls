@@ -45,6 +45,16 @@ public class SetUtils {
       removeFrom.Remove(loc);
     }
   }
+  // Removes any from the removeFrom set that aren't in the keepThese set.
+  public static void RetainAll<T>(
+      SortedSet<T> removeFrom,
+      SortedSet<T> keepThese) {
+    foreach (var loc in new SortedSet<T>(removeFrom)) {
+      if (!keepThese.Contains(loc)) {
+        removeFrom.Remove(loc);
+      }
+    }
+  }
 
   public static void AddAll<T>(
       SortedSet<T> addTo,
