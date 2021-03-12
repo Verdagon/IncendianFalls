@@ -105,6 +105,7 @@ namespace Geomancer {
                     symbolName,
                     frontColor,
                     patternTile.rotateDegrees,
+                    1,
                     OutlineMode.WithOutline,
                     Vector4Animation.Color(.2f, .2f, .2f)),
                 false,

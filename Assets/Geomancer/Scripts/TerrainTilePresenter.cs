@@ -144,6 +144,7 @@ namespace Geomancer {
                     symbolName,
                     Vector4Animation.Color(1, 0, 1),
                     patternTile.rotateDegrees,
+                    1,
                     OutlineMode.WithOutline,
                     Vector4Animation.Color(0, 1.5f, 1.5f)),
                 true,
@@ -159,7 +160,7 @@ namespace Geomancer {
           new ExtrudedSymbolDescription(
             RenderPriority.DOMINO,
             new SymbolDescription(
-              "a", Vector4Animation.Color(0, 1, 0), 45, OutlineMode.WithBackOutline),
+              "a", Vector4Animation.Color(0, 1, 0), 45, 1, OutlineMode.WithBackOutline),
             true,
             Vector4Animation.Color(0, 0, 0)),
           new List<KeyValuePair<int, ExtrudedSymbolDescription>>(),

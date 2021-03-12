@@ -196,7 +196,7 @@ namespace Geomancer {
             foreach (var member in level.terrain.tiles[location].members) {
               var symbol =
               new SymbolDescription("a",
-                              Vector4Animation.Color(1f, 1f, 1f, 0), 180, OutlineMode.WithOutline, Vector4Animation.Color(1, 1, 1));
+                              Vector4Animation.Color(1f, 1f, 1f, 0), 180, 1, OutlineMode.WithOutline, Vector4Animation.Color(1, 1, 1));
               symbolsAndDescriptions.Add(new KeyValuePair<SymbolDescription, string>(symbol, member));
             }
           }

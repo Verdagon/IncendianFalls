@@ -70,6 +70,7 @@ namespace AthPlayer {
                         "0",
                         Vector4Animation.Color(1f, 1f, 1.0f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
               "Igneous Armor"));
           } else if (item is BlastRodAsIItem) {
@@ -79,6 +80,7 @@ namespace AthPlayer {
                         "w",
                         Vector4Animation.Color(1f, .5f, 0f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
               "Fire Rod"));
           } else if (item is SlowRodAsIItem) {
@@ -88,6 +90,7 @@ namespace AthPlayer {
                         "w",
                         Vector4Animation.Color(0f, .5f, 1f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
               "Mire Staff"));
           } else if (item is GlaiveAsIItem) {
@@ -97,6 +100,7 @@ namespace AthPlayer {
                         "s",
                         Vector4Animation.Color(1f, 1f, 1f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
               "Glaive"));
           } else if (item is SpeedRingAsIItem) {
@@ -106,6 +110,7 @@ namespace AthPlayer {
                         "4",
                         Vector4Animation.Color(1f, 1f, 1f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
               "Speed Ring"));
           } else if (item is HealthPotionAsIItem) {
@@ -115,6 +120,7 @@ namespace AthPlayer {
                         "+",
                         Vector4Animation.Color(.8f, 0, .8f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
               "Life Potion"));
           } else if (item is ManaPotionAsIItem) {
@@ -124,6 +130,7 @@ namespace AthPlayer {
                         ",",
                         Vector4Animation.Color(.25f, .7f, 1.0f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
               "Mana Potion"));
           } else {
@@ -152,6 +159,7 @@ namespace AthPlayer {
                     "q",
                     Vector4Animation.Color(0, .5f, 1, 1.5f),
                     0,
+                    1,
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 "Defying"));
@@ -162,6 +170,7 @@ namespace AthPlayer {
                     "q",
                     Vector4Animation.GLOWY_WHITE,
                     0,
+                    1,
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 "Defying"));
@@ -172,6 +181,7 @@ namespace AthPlayer {
                     "f-3",
                     Vector4Animation.GLOWY_WHITE,
                     0,
+                    1,
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 "Mired"));
@@ -187,6 +197,7 @@ namespace AthPlayer {
                         "n",
                         Vector4Animation.GLOWY_WHITE,
                         0,
+                        1,
                         OutlineMode.NoOutline,
                         Vector4Animation.Color(0, 0, 0)),
                     "Biding"));
@@ -207,6 +218,7 @@ namespace AthPlayer {
                     "w",
                     Vector4Animation.Color(0, .5f, 1, 1.5f),
                     0,
+                    1,
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 "Mire Staff"));
@@ -217,6 +229,7 @@ namespace AthPlayer {
                     "w",
                     Vector4Animation.Color(1, .5f, 0, 1.5f),
                     0,
+                    1,
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 "Fire Rod"));
@@ -227,6 +240,7 @@ namespace AthPlayer {
                     "0",
                     Vector4Animation.GLOWY_WHITE,
                     0,
+                    1,
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 "Igneous Armor"));
@@ -237,6 +251,7 @@ namespace AthPlayer {
                     "s",
                     Vector4Animation.GLOWY_WHITE,
                     0,
+                    1,
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 "Obsidian Sword"));
@@ -247,6 +262,7 @@ namespace AthPlayer {
                     "4",
                     Vector4Animation.GLOWY_WHITE,
                     0,
+                    1,
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 "Ring of Speed"));
@@ -260,6 +276,7 @@ namespace AthPlayer {
                       "r-3",
                       Vector4Animation.GLOWY_WHITE,
                       0,
+                      1,
                       OutlineMode.NoOutline),
                   "Lightning Charged"));
         } else if (detail is TimeCloneAICapabilityUCAsIUnitComponent) {
@@ -269,6 +286,7 @@ namespace AthPlayer {
                       "k",
                       Vector4Animation.GLOWY_WHITE,
                       0,
+                      1,
                       OutlineMode.NoOutline),
                   "Previous Incarnation"));
         } else if (detail is DoomedUCAsIUnitComponent) {
@@ -278,6 +296,7 @@ namespace AthPlayer {
                       "k",
                       Vector4Animation.GLOWY_WHITE,
                       0,
+                      1,
                       OutlineMode.NoOutline),
                   "Previous Incarnation"));
         } else {

@@ -135,6 +135,7 @@ namespace AthPlayer {
                   symbolName,
                   topColor,
                   0,
+                  1,
                   OutlineMode.WithOutline,
                   outlineColor),
               true,
@@ -231,6 +232,38 @@ namespace AthPlayer {
         if (ttc is GrassTTCAsITerrainTileComponent) {
           topColor = Vector4Animation.Color(0f, .1f + 0.0333f * terrainTile.elevation, 0);
           sideColor = Vector4Animation.Color(.15f, .1f, .05f);
+
+          if (!overlayLocked) {
+            var rand = new System.Random(
+                location.groupX + location.groupY + location.indexInGroup + terrainTile.elevation).Next() % 12;
+            if (rand < 3) {
+              overlay =
+                  new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          (new[] {"grass1", "grass2", "grass3"})[rand],
+                          Vector4Animation.Color(0f, .2f + 0.0333f * terrainTile.elevation, 0),
+                          0,
+                          1,
+                          OutlineMode.NoOutline,
+                          Vector4Animation.Color(0f, 0f, 0.5f)),
+                      false,
+                      Vector4Animation.Color(0, 0, 0));
+            } else if (rand < 6) {
+              rand -= 3;
+              feature =
+                  new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          (new[] {"7", "8", "9"})[rand],
+                          Vector4Animation.Color(0, .2f + 0.0333f * terrainTile.elevation, 0),
+                          0,
+                          1,
+                          OutlineMode.WithOutline),
+                      false,
+                      Vector4Animation.Color(0f, 0f, .5f));
+            }
+          }
         } else if (ttc is StoneTTCAsITerrainTileComponent) {
           if (terrainTile.elevation == 1) {
             topColor = Vector4Animation.Color(.2f, .2f, .2f);
@@ -279,7 +312,6 @@ namespace AthPlayer {
                   SineFloatAnimation.Make(.8f, offset, .092f, .108f),
                   SineFloatAnimation.Make(.8f, offset, .36f, .44f),
                   new ConstantFloatAnimation(1.0f));
-          Debug.Log(offset);
           outlineColor = Vector4Animation.Color(0f, 0f, 0f);
           sideColor = Vector4Animation.Color(.1f, .15f, 0.5f);
 
@@ -290,6 +322,7 @@ namespace AthPlayer {
                       "o",
                       Vector4Animation.Color(.1f, .15f, 0.5f),
                       0,
+                      1,
                       OutlineMode.NoOutline,
                       Vector4Animation.Color(0f, 0f, 0.5f)),
                   false,
@@ -310,6 +343,7 @@ namespace AthPlayer {
                       "f-3",
                       Vector4Animation.Color(.5f, .1f, 0f),
                       0,
+                      1,
                       OutlineMode.WithOutline,
                       Vector4Animation.Color(.5f, .1f, 0.0f)),
                   false,
@@ -326,6 +360,7 @@ namespace AthPlayer {
                       "o",
                       Vector4Animation.Color(.3f, .4f, 1.0f),
                       0,
+                      1,
                       OutlineMode.NoOutline,
                       Vector4Animation.Color(0f, 0f, 1.0f)),
                   false,
@@ -339,9 +374,11 @@ namespace AthPlayer {
                         "f-3",
                         Vector4Animation.Color(1f, 1f, 1f, .1f),
                         0,
+                        1,
                         OutlineMode.WithOutline),
                     false,
                     Vector4Animation.Color(0, 0, 0));
+            overlayLocked = true;
           }
         } else if (ttc is FireBombTTCAsITerrainTileComponent) {
           if (!overlayLocked) {
@@ -352,6 +389,7 @@ namespace AthPlayer {
                         "k",
                         Vector4Animation.Color(1.0f, 0.5f, 0f, 1.0f),
                         0,
+                        1,
                         OutlineMode.WithOutline),
                     false,
                     Vector4Animation.Color(0, 0, 0));
@@ -366,6 +404,7 @@ namespace AthPlayer {
                         "k",
                         Vector4Animation.Color(1.0f, 0f, 0f, 0.5f),
                         0,
+                        1,
                         OutlineMode.WithOutline),
                     false,
                     Vector4Animation.Color(0, 0, 0));
@@ -376,7 +415,7 @@ namespace AthPlayer {
             overlay =
                 new ExtrudedSymbolDescription(
             RenderPriority.TILE,
-            new SymbolDescription("f-3", Vector4Animation.Color(0f, 0f, 0f, .8f), 0, OutlineMode.WithOutline, Vector4Animation.Color(0, 0, 0)),
+            new SymbolDescription("f-3", Vector4Animation.Color(0f, 0f, 0f, .8f), 0, 1, OutlineMode.WithOutline, Vector4Animation.Color(0, 0, 0)),
             false,
             Vector4Animation.Color(0, 0, 0));
           }
@@ -389,6 +428,7 @@ namespace AthPlayer {
                         "g",
                         Vector4Animation.Color(1f, 0, 0, .3f),
                         0,
+                        1,
                         OutlineMode.WithOutline),
                     false,
                     Vector4Animation.Color(0, 0, 0));
@@ -404,6 +444,7 @@ namespace AthPlayer {
                       "d",
                       Vector4Animation.Color(.5f, .5f, .5f, 1f),
                       0,
+                      1,
                       OutlineMode.WithOutline),
                   false,
                   Vector4Animation.Color(0, 0, 0));
@@ -416,21 +457,27 @@ namespace AthPlayer {
                       "c",
                       Vector4Animation.Color(1f, 1f, 1f),
                       0,
+                      1,
                       OutlineMode.WithOutline),
                   true,
                   Vector4Animation.Color(1f, 1f, 1f));
           featureLocked = true;
         } else if (ttc is TreeTTCAsITerrainTileComponent) {
-          feature =
-              new ExtrudedSymbolDescription(
-                  RenderPriority.SYMBOL,
-                  new SymbolDescription(
-                      "n",
-                      Vector4Animation.Color(.25f, .1f, 0),
-                      0,
-                      OutlineMode.WithOutline),
-                  false,
-                  Vector4Animation.Color(0f, .3f, 0f));
+          // var symbols = new string[] {"tree1", "tree2", "tree3"};
+          // var symbolI = new System.Random(location.groupX + location.groupY + location.indexInGroup + terrainTile.elevation).Next() % symbols.Length;
+          // var symbol = symbols[symbolI];
+          //
+          // feature =
+          //     new ExtrudedSymbolDescription(
+          //         RenderPriority.SYMBOL,
+          //         new SymbolDescription(
+          //             symbol,
+          //             Vector4Animation.Color(0, .3f, 0),
+          //             0,
+          //             1,
+          //             OutlineMode.WithOutline),
+          //         false,
+          //         Vector4Animation.Color(0f, .2f, 0f));
         } else if (ttc is CaveTTCAsITerrainTileComponent) {
               feature =
                   new ExtrudedSymbolDescription(
@@ -439,6 +486,7 @@ namespace AthPlayer {
                           "p",
                           Vector4Animation.Color(0, 0, 0),
                           0,
+                          1,
                           OutlineMode.WithOutline,
                           Vector4Animation.Color(1, 1, 1)),
                       false,
@@ -452,6 +500,7 @@ namespace AthPlayer {
                           "r-3",
                           Vector4Animation.Color(.3f, .1f, 0, 1.2f),
                           0,
+                          1,
                           OutlineMode.WithOutline,
                           Vector4Animation.Color(0, 0, 0)),
                       false,
@@ -472,6 +521,7 @@ namespace AthPlayer {
                         "zero",
                         Vector4Animation.Color(1f, 1f, 1.0f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
                     true,
                     Vector4Animation.Color(.75f, .75f, 0)));
@@ -484,6 +534,7 @@ namespace AthPlayer {
                         "w",
                         Vector4Animation.Color(1f, .5f, 0f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
                     true,
                     Vector4Animation.Color(.75f, .75f, 0)));
@@ -496,6 +547,7 @@ namespace AthPlayer {
                         "w",
                         Vector4Animation.Color(0f, .5f, 1f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
                     true,
                     Vector4Animation.Color(.75f, .75f, 0)));
@@ -508,6 +560,7 @@ namespace AthPlayer {
                         "s",
                         Vector4Animation.Color(1f, 1f, 1f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
                     true,
                     Vector4Animation.Color(.5f, 0f, 0)));
@@ -520,6 +573,7 @@ namespace AthPlayer {
                         "four",
                         Vector4Animation.Color(1f, 1f, 1f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
                     true,
                     Vector4Animation.Color(.5f, 0f, 0)));
@@ -532,6 +586,7 @@ namespace AthPlayer {
                         "plus",
                         Vector4Animation.Color(.8f, 0, .8f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
                     true,
                     Vector4Animation.Color(0f, 0f, 0)));
@@ -544,6 +599,7 @@ namespace AthPlayer {
                         "comma",
                         Vector4Animation.Color(.25f, .7f, 1.0f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
                     true,
                     Vector4Animation.Color(0f, 0f, 0)));
@@ -560,6 +616,7 @@ namespace AthPlayer {
                         "k",
                         Vector4Animation.Color(1.0f, 1.0f, 1.0f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
                     true,
                     Vector4Animation.Color(0f, 0f, 0));
@@ -592,6 +649,7 @@ namespace AthPlayer {
                     "r-3",
                       Vector4Animation.Color(1.0f, .6f, 0, 1.5f),
                     0,
+                    1,
                     OutlineMode.WithOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 true,
@@ -620,6 +678,7 @@ namespace AthPlayer {
                       GetTerrainTileShapeSymbol(patternTile),
                       Vector4Animation.Color(1.0f, 0.3f, 0, 0.4f),
                       0,
+                      1,
                       OutlineMode.NoOutline,
                       Vector4Animation.Color(0, 0, 0, 0.4f)),
                   true,
@@ -630,6 +689,7 @@ namespace AthPlayer {
                       "r-3",
                       Vector4Animation.Color(1.0f, .3f, 0, 0.5f),
                       0,
+                      1,
                       OutlineMode.NoOutline,
                       Vector4Animation.Color(0, 0, 0)),
                   true,

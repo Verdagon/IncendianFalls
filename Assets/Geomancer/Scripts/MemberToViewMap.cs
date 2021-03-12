@@ -19,7 +19,7 @@ namespace Geomancer {
         new MemberToViewMapper.OverlayDescriptionForIDescription(
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
-            new SymbolDescription("f-3", Vector4Animation.Color(.5f, .5f, .5f, .2f), 0, OutlineMode.WithOutline),
+            new SymbolDescription("f-3", Vector4Animation.Color(.5f, .5f, .5f, .2f), 0, 1, OutlineMode.WithOutline),
             false,
             Vector4Animation.BLACK))
       });
@@ -27,7 +27,7 @@ namespace Geomancer {
         new MemberToViewMapper.OverlayDescriptionForIDescription(
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
-            new SymbolDescription("f-3", Vector4Animation.Color(0f, 0f, 0f, .8f), 0, OutlineMode.WithOutline),
+            new SymbolDescription("f-3", Vector4Animation.Color(0f, 0f, 0f, .8f), 0, 1, OutlineMode.WithOutline),
             false,
             Vector4Animation.BLACK))
       });
@@ -39,6 +39,7 @@ namespace Geomancer {
                         "plus",
                         Vector4Animation.Color(.8f, 0, .8f, 1.5f),
                         0,
+                        1,
                         OutlineMode.WithBackOutline),
                     true,
                     Vector4Animation.BLACK))
@@ -51,6 +52,7 @@ namespace Geomancer {
                   "comma",
                   Vector4Animation.Color(.25f, .7f, 1.0f, 1.5f),
                   0,
+                  1,
                   OutlineMode.WithBackOutline),
               true,
               Vector4Animation.BLACK))
@@ -63,6 +65,7 @@ namespace Geomancer {
                           "p",
                           Vector4Animation.BLACK,
                           0,
+                          1,
                           OutlineMode.WithOutline,
                           Vector4Animation.WHITE),
                       false,
@@ -76,6 +79,7 @@ namespace Geomancer {
                           "n",
                           Vector4Animation.Color(0, .5f, 0),
                           0,
+                          1,
                           OutlineMode.WithOutline),
                       false,
                       Vector4Animation.Color(0f, .3f, 0f)))
@@ -88,6 +92,7 @@ namespace Geomancer {
                           "r-3",
                           Vector4Animation.Color(.8f, .4f, 0, .5f),
                           0,
+                          1,
                           OutlineMode.WithOutline),
                       false,
                       Vector4Animation.Color(0f, .3f, 0f)))
@@ -138,6 +143,7 @@ namespace Geomancer {
                   "f-3",
                   Vector4Animation.Color(.5f, .0f, 0f),
                   0,
+                  1,
                   OutlineMode.NoOutline,
                   Vector4Animation.Color(0, 0, 0)),
               false,
@@ -147,7 +153,7 @@ namespace Geomancer {
         new MemberToViewMapper.ItemDescriptionForIDescription(
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
-            new SymbolDescription("n", Vector4Animation.Color(1f, 1f, 1f, 0.2f), 180, OutlineMode.NoOutline, Vector4Animation.Color(1, 1, 1)),
+            new SymbolDescription("n", Vector4Animation.Color(1f, 1f, 1f, 0.2f), 180, 1, OutlineMode.NoOutline, Vector4Animation.Color(1, 1, 1)),
             true,
             Vector4Animation.Color(.6f, .6f, .6f, 0.2f)))
       });
@@ -156,7 +162,7 @@ namespace Geomancer {
           new ExtrudedSymbolDescription(
             RenderPriority.TILE,
             new SymbolDescription(
-                "e", Vector4Animation.Color(1f, .75f, .5f, 1.2f), 0, OutlineMode.WithOutline),
+                "e", Vector4Animation.Color(1f, .75f, .5f, 1.2f), 0, 1, OutlineMode.WithOutline),
             false,
             Vector4Animation.BLACK))
       });

@@ -292,6 +292,7 @@ namespace AthPlayer {
                           "q",
                           Vector4Animation.GLOWY_WHITE,
                           0,
+                          1,
                           OutlineMode.WithBackOutline),
                       true,
                       Vector4Animation.GLOWY_WHITE)));
@@ -305,6 +306,7 @@ namespace AthPlayer {
                           "q",
                           Vector4Animation.Color(0, .5f, 1, 1.5f),
                           0,
+                          1,
                           OutlineMode.WithBackOutline),
                       true,
                       Vector4Animation.GLOWY_WHITE)));
@@ -318,6 +320,7 @@ namespace AthPlayer {
                           "f-8",
                           Vector4Animation.GLOWY_WHITE,
                           0,
+                          1,
                           OutlineMode.WithBackOutline),
                       true,
                       Vector4Animation.GLOWY_WHITE)));
@@ -331,6 +334,7 @@ namespace AthPlayer {
                           "v",
                           Vector4Animation.GLOWY_WHITE,
                           0,
+                          1,
                           OutlineMode.WithBackOutline),
                       true,
                       Vector4Animation.GLOWY_WHITE)));
@@ -346,6 +350,7 @@ namespace AthPlayer {
                           "r-3",
                           Vector4Animation.GLOWY_WHITE,
                           0,
+                          1,
                           OutlineMode.WithBackOutline),
                       true,
                       Vector4Animation.GLOWY_WHITE)));
@@ -384,6 +389,7 @@ namespace AthPlayer {
                             "n",
                             color,
                             0,
+                            1,
                             OutlineMode.WithBackOutline,
                             Vector4Animation.Color(0, 0, 0)),
                         false,
@@ -400,6 +406,7 @@ namespace AthPlayer {
                           "l",
                           Vector4Animation.GLOWY_WHITE,
                           0,
+                          1,
                           OutlineMode.WithBackOutline),
                       false,
                       Vector4Animation.GLOWY_WHITE)));
@@ -413,6 +420,7 @@ namespace AthPlayer {
                           "l",
                           Vector4Animation.GLOWY_WHITE,
                           0,
+                          1,
                           OutlineMode.WithBackOutline),
                       false,
                       Vector4Animation.GLOWY_WHITE)));
@@ -505,6 +513,7 @@ namespace AthPlayer {
                         new ConstantFloatAnimation(1),
                         new ConstantFloatAnimation(1.2f)),
                       0,
+                      1,
                       OutlineMode.WithBackOutline),
                   true, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
@@ -519,7 +528,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "x",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -533,7 +542,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "y",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -547,7 +556,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "percent",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -561,7 +570,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "ampersand",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -575,7 +584,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "z",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -589,7 +598,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "parenleft",
-                            Vector4Animation.Color(0, 0, 0, 1f), 0, OutlineMode.WithBackOutline,
+                            Vector4Animation.Color(0, 0, 0, 1f), 0, 1, OutlineMode.WithBackOutline,
                       Vector4Animation.Color(1, 1, 1)),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
@@ -604,7 +613,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "three",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.NoOutline,
                       Vector4Animation.Color(1, 1, 1)),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
@@ -619,7 +628,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "r-8",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.NoOutline,
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.NoOutline,
                       Vector4Animation.Color(1, 1, 1)),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
@@ -634,7 +643,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "ampersand",
-                            Vector4Animation.Color(1f,1f,1f, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1f,1f,1f, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -648,7 +657,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "f-8",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -662,7 +671,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "parenleft",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -676,7 +685,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "x",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -690,7 +699,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "three",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -704,7 +713,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "k",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -718,7 +727,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "y",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -732,7 +741,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "x",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -746,7 +755,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "ampersand",
-                            Vector4Animation.Color(1, 1, 1, 1f), 0, OutlineMode.WithBackOutline),
+                            Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
@@ -761,7 +770,7 @@ namespace AthPlayer {
 
                 new SymbolDescription(
               "m",
-                            Vector4Animation.GLOWY_WHITE, 0, OutlineMode.WithBackOutline), false, Vector4Animation.Color(0, 0, 0)),
+                            Vector4Animation.GLOWY_WHITE, 0, 1, OutlineMode.WithBackOutline), false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,
               mpRatio));
@@ -777,7 +786,7 @@ namespace AthPlayer {
 
                 new SymbolDescription(
             "a",
-                            Vector4Animation.Color(0, 1f, 1f), 15, OutlineMode.WithOutline,
+                            Vector4Animation.Color(0, 1f, 1f), 15, 1, OutlineMode.WithOutline,
                     Vector4Animation.Color(0, 0, 0)), true, Vector4Animation.Color(0, 0, 0)),
             new List<KeyValuePair<int, ExtrudedSymbolDescription>>(),
             hpRatio,
@@ -811,6 +820,7 @@ namespace AthPlayer {
                       "r-3",
                       Vector4Animation.Color(1.0f, 1f, 1f, 1.5f),
                       0,
+                      1,
                       OutlineMode.WithOutline),
                   true,
                   Vector4Animation.Color(0, 0, 1f, 1f)));
@@ -824,6 +834,7 @@ namespace AthPlayer {
                       "q",
                       Vector4Animation.Color(1.0f, 1f, 1f, 1.5f),
                       0,
+                      1,
                       OutlineMode.WithOutline,
                       Vector4Animation.Color(0, 0, 0)),
                   true,
@@ -838,6 +849,7 @@ namespace AthPlayer {
                       "v",
                       Vector4Animation.Color(1.0f, 1f, 1f, 1.5f),
                       0,
+                      1,
                       OutlineMode.WithOutline,
                       Vector4Animation.Color(0, 0, 0)),
                   true,
@@ -853,6 +865,7 @@ namespace AthPlayer {
                       "w",
                       Vector4Animation.Color(1.0f, 1f, 1f, 1.5f),
                       0,
+                      1,
                       OutlineMode.WithOutline,
                       Vector4Animation.Color(0, 0, 0)),
                   true,
@@ -867,6 +880,7 @@ namespace AthPlayer {
                       "r-3",
                       Vector4Animation.Color(1.0f, .6f, 0, 1.5f),
                       0,
+                      1,
                       OutlineMode.WithOutline,
                       Vector4Animation.Color(0.8f, .4f, 0, 1.5f)),
                   true,
@@ -882,6 +896,7 @@ namespace AthPlayer {
                       "r-3",
                       Vector4Animation.Color(1.0f, .6f, 0, 1.5f),
                       0,
+                      1,
                       OutlineMode.WithOutline,
                       Vector4Animation.Color(0.8f, .4f, 0, 1.5f)),
                   true,

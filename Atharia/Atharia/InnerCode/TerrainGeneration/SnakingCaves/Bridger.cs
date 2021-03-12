@@ -8,7 +8,8 @@ namespace IncendianFalls {
     public const int OVERLAY_HEIGHT = 2;
     public const int OVERLAY_BRIDGE_HEIGHT = 2;
 
-    public static SortedSet<Location> addBridgesAndOverlay(
+    // Returns overlay locs and new bridges
+    public static (SortedSet<Location>, List<Bridge>) addBridgesAndOverlay(
         Terrain terrain, bool considerCornersAdjacent, SortedSet<Location> circleLocs, SortedSet<Location> mainLocs, SortedSet<Location> sideLocs) {
       var untestedPossibleBridgeEndLocs = terrain.pattern.GetAdjacentLocations(mainLocs, false, considerCornersAdjacent);
       SetUtils.RemoveAll(untestedPossibleBridgeEndLocs, sideLocs);
@@ -36,6 +37,8 @@ namespace IncendianFalls {
           }
         }
       }
+
+      var implementedBridges = new List<Bridge>();
       
       var nonEmptyLocs = new SortedSet<Location>(terrain.tiles.Keys);
       var nonEmptyAndAdjacentLocs = terrain.pattern.GetAdjacentLocations(nonEmptyLocs, true, true);
@@ -46,6 +49,7 @@ namespace IncendianFalls {
         if (locToPossibleBridgeEndingThereMap.TryGetValue(overlayLoc, out List<Bridge> bridgesEndingHere)) {
           var newBridge = bridgesEndingHere[0];
           implementBridge(terrain, newBridge);
+          implementedBridges.Add(newBridge);
           
           // If any bridge ends or paths in any of these locations, get rid of them.
           var otherBridgeBlastZone = new SortedSet<Location>(newBridge.getAllLocations());
@@ -83,7 +87,7 @@ namespace IncendianFalls {
           }
         }
       }
-      return overlayLocs;
+      return (overlayLocs, implementedBridges);
     }
  
     static void implementBridge(Terrain terrain, Bridge bridge) {

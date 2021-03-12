@@ -84,7 +84,7 @@ namespace IncendianFalls {
 
     public (List<IEffect>, Game) RequestSetupIncendianFallsGame(int randomSeed, bool squareLevelsOnly) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new SetupIncendianFallsGameRequest(randomSeed, squareLevelsOnly);
         broadcastBeforeRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
@@ -98,19 +98,19 @@ namespace IncendianFalls {
         broadcastAfterRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
         return (events, game);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+        // root.logger.Error(e.Message + " " + e.StackTrace);
+        // throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, Game) RequestSetupGauntletGame(int randomSeed, bool squareLevelsOnly) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new SetupGauntletGameRequest(randomSeed, squareLevelsOnly);
         broadcastBeforeRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
@@ -125,20 +125,20 @@ namespace IncendianFalls {
         broadcastAfterRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
         return (events, game);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
 
     public (List<IEffect>, Game) RequestSetupEmberDeepGame(int randomSeed, int startLevel, bool squareLevelsOnly) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new SetupEmberDeepGameRequest(randomSeed, startLevel, squareLevelsOnly);
         broadcastBeforeRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
@@ -153,19 +153,19 @@ namespace IncendianFalls {
         broadcastAfterRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
         return (events, game);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+        // root.logger.Error(e.Message + " " + e.StackTrace);
+        // throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, Game) RequestSetupRavaArcanaGame(int randomSeed, int startLevel, bool squareLevelsOnly) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new SetupRavaArcanaGameRequest(randomSeed, startLevel, squareLevelsOnly);
         broadcastBeforeRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
@@ -180,19 +180,19 @@ namespace IncendianFalls {
         broadcastAfterRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
         return (events, game);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
-        //} catch (Exception) {
-        //  Logger.Error("Caught exception, rolling back!");
-        //  root.Revert(rollbackPoint);
-        //  throw;
-      }
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
+      //   //} catch (Exception) {
+      //   //  Logger.Error("Caught exception, rolling back!");
+      //   //  root.Revert(rollbackPoint);
+      //   //  throw;
+      // }
     }
 
     public (List<IEffect>, string) RequestCommAction(int gameId, int commId, int actionIndex) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new CommActionRequest(gameId, commId, actionIndex);
         broadcastBeforeRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
@@ -204,19 +204,19 @@ namespace IncendianFalls {
         broadcastAfterRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
         return (events, success);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + "\n" + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + "\n" + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, string) RequestInteract(int gameId) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new InteractRequest(gameId);
         broadcastBeforeRequest(new InteractRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -228,19 +228,19 @@ namespace IncendianFalls {
         broadcastAfterRequest(new InteractRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return (events, success);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + "\n" + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + "\n" + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, string) RequestCheat(int gameId, string cheatName) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new CheatRequest(gameId, cheatName);
         broadcastBeforeRequest(new CheatRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -252,19 +252,19 @@ namespace IncendianFalls {
         broadcastAfterRequest(new CheatRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return (events, success);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, string) RequestMove(int gameId, Location newLocation) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new MoveRequest(gameId, newLocation);
         broadcastBeforeRequest(new MoveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -276,19 +276,19 @@ namespace IncendianFalls {
         broadcastAfterRequest(new MoveRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return (events, success);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, string) RequestFire(int gameId, int targetUnitId) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new FireRequest(gameId, targetUnitId);
         broadcastBeforeRequest(new FireRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -300,19 +300,19 @@ namespace IncendianFalls {
         broadcastAfterRequest(new FireRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return (events, result);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, string) RequestFireBomb(int gameId, Location location) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new FireBombRequest(gameId, location);
         broadcastBeforeRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
@@ -324,19 +324,19 @@ namespace IncendianFalls {
         broadcastAfterRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
         return (events, result);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, string) RequestMire(int gameId, int targetUnitId) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new MireRequest(gameId, targetUnitId);
         broadcastBeforeRequest(new MireRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -348,20 +348,20 @@ namespace IncendianFalls {
         broadcastAfterRequest(new MireRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return (events, result);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, string) RequestAttack(int gameId, int targetUnitId) {
       
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new AttackRequest(gameId, targetUnitId);
         broadcastBeforeRequest(new AttackRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -373,14 +373,14 @@ namespace IncendianFalls {
         broadcastAfterRequest(new AttackRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return (events, success);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     //public (List<IEffect>, string) RequestCancel(int gameId) {
@@ -410,7 +410,7 @@ namespace IncendianFalls {
 
     public (List<IEffect>, string) RequestDefy(int gameId) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new DefyRequest(gameId);
         broadcastBeforeRequest(new DefyRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -422,19 +422,19 @@ namespace IncendianFalls {
         broadcastAfterRequest(new DefyRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return (events, success);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, string) RequestCounter(int gameId) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new CounterRequest(gameId);
         broadcastBeforeRequest(new CounterRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -446,14 +446,14 @@ namespace IncendianFalls {
         broadcastAfterRequest(new CounterRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return (events, result);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     //public (List<IEffect>, string) RequestFollowDirective(int gameId) {
@@ -482,7 +482,7 @@ namespace IncendianFalls {
 
     public (List<IEffect>, string) RequestTimeAnchorMove(int gameId, Location destination) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new TimeAnchorMoveRequest(gameId, destination);
         broadcastBeforeRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
@@ -495,19 +495,19 @@ namespace IncendianFalls {
         broadcastAfterRequest(request.AsIRequest());
         context.Flare(GetDeterministicHashCode());
         return (events, success);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, string) RequestTimeShift(int gameId) {
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new TimeShiftRequest(gameId);
         broadcastBeforeRequest(new TimeShiftRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -519,14 +519,14 @@ namespace IncendianFalls {
         broadcastAfterRequest(new TimeShiftRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return (events, result);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + " " + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + " " + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     public (List<IEffect>, string) RequestResume(int gameId) {
@@ -534,7 +534,7 @@ namespace IncendianFalls {
       // Make sure the player just acted, or 
 
       //var rollbackPoint = root.Snapshot();
-      try {
+      // try {
         var request = new ResumeRequest(gameId);
         broadcastBeforeRequest(new ResumeRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
@@ -546,14 +546,14 @@ namespace IncendianFalls {
         broadcastAfterRequest(new ResumeRequestAsIRequest(request));
         context.Flare(GetDeterministicHashCode());
         return (events, success);
-      } catch (Exception e) {
-        root.logger.Error(e.Message + "\n" + e.StackTrace);
-        throw;
+      // } catch (Exception e) {
+      //   root.logger.Error(e.Message + "\n" + e.StackTrace);
+      //   throw;
         //} catch (Exception) {
         //  Logger.Error("Caught exception, rolling back!");
         //  root.Revert(rollbackPoint);
         //  throw;
-      }
+      // }
     }
 
     //public (List<IEffect>, string) RequestContinuousResume(int gameId) {

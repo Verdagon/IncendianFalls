@@ -16,6 +16,7 @@ namespace Domino {
     public readonly SymbolId symbolId;
     public readonly IVector4Animation frontColor;
     public readonly float rotationDegrees;
+    public readonly float scale;
     public readonly OutlineMode withOutline;
     public readonly IVector4Animation outlineColor;
 
@@ -23,32 +24,37 @@ namespace Domino {
         string symbolId,
         IVector4Animation frontColor,
         float rotationDegrees,
-        OutlineMode withOutline) : this(new SymbolId(symbolId, 100), frontColor, rotationDegrees, withOutline) { }
+        float scale,
+        OutlineMode withOutline) : this(new SymbolId(symbolId, 100), frontColor, rotationDegrees, scale, withOutline) { }
 
     public SymbolDescription(
         SymbolId symbolId,
         IVector4Animation frontColor,
         float rotationDegrees,
+        float scale,
         OutlineMode withOutline)
-      : this(symbolId, frontColor, rotationDegrees, withOutline, Vector4Animation.BLACK) { }
+      : this(symbolId, frontColor, rotationDegrees, scale, withOutline, Vector4Animation.BLACK) { }
 
     public SymbolDescription(
         string symbolId,
         IVector4Animation frontColor,
         float rotationDegrees,
+        float scale,
         OutlineMode withOutline,
         IVector4Animation outlineColor)
-      : this(new SymbolId(symbolId, 100), frontColor, rotationDegrees, withOutline, outlineColor) { }
+      : this(new SymbolId(symbolId, 100), frontColor, rotationDegrees, scale, withOutline, outlineColor) { }
 
     public SymbolDescription(
         SymbolId symbolId,
         IVector4Animation frontColor,
         float rotationDegrees,
+        float scale,
         OutlineMode withOutline,
         IVector4Animation outlineColor) {
       this.symbolId = symbolId;
       this.frontColor = frontColor;
       this.rotationDegrees = rotationDegrees;
+      this.scale = scale;
       this.withOutline = withOutline;
       this.outlineColor = outlineColor;
 
@@ -60,6 +66,7 @@ namespace Domino {
         symbolId,
         newFrontColor,
         rotationDegrees,
+        scale,
         withOutline);
     }
   }
@@ -114,6 +121,7 @@ namespace Domino {
     IVector4Animation frontColor;
     IVector4Animation sidesColor;
     float rotationDegrees;
+    float scale;
     OutlineMode withOutline;
     IVector4Animation outlineColor;
 
@@ -144,6 +152,7 @@ namespace Domino {
       InnerSetOutline(symbolDescription.symbol.withOutline, symbolDescription.symbol.outlineColor);
       InnerSetFrontColor(symbolDescription.symbol.frontColor);
       InnerSetSidesColor(symbolDescription.sidesColor);
+      InnerSetScale(symbolDescription.symbol.scale);
       instanceAlive = true;
 
       frontObject.GetComponent<MeshCollider>().enabled = mousable;
@@ -156,7 +165,7 @@ namespace Domino {
       return new ExtrudedSymbolDescription(
           renderPriority,
           new SymbolDescription(
-              symbolId, frontColor, rotationDegrees, withOutline),
+              symbolId, frontColor, rotationDegrees, scale, withOutline),
           extruded, sidesColor);
     }
 
@@ -180,6 +189,7 @@ namespace Domino {
       frontColor = description.symbol.frontColor;
       sidesColor = description.sidesColor;
       rotationDegrees = description.symbol.rotationDegrees;
+      scale = description.symbol.scale;
     }
 
     private void InnerSetSymbolId(SymbolId newSymbolId) {
@@ -230,6 +240,16 @@ namespace Domino {
     private void InnerSetRotationDegrees(float newRotationDegrees) {
       transform.rotation = Quaternion.AngleAxis(rotationDegrees, Vector3.forward);
       rotationDegrees = newRotationDegrees;
+    }
+
+    private void InnerSetScale(float newScale) {
+      frontObject.transform.localScale = new Vector3(newScale, newScale, newScale);
+      sidesObject.transform.localScale = new Vector3(newScale, newScale, newScale);
+      frontOutlineObject.transform.localScale = new Vector3(newScale, newScale, newScale);
+      if (newScale > 9) {
+        Debug.Log("yeah over 9");
+      }
+      scale = newScale;
     }
 
     private static Vector3[] GetMinAndMax(Mesh mesh) {

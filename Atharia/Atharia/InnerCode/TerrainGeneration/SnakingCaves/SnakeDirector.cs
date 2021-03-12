@@ -14,7 +14,16 @@ namespace IncendianFalls {
       var deadSnakes = new List<Snake>();
       
       var firstSnakeInitialLocation = ListUtils.GetRandomN(new List<Location>(circleLocs), rand, 0, 4)[0];
-      var firstSnakeInitialDirection = new Direction(rand.Next() % Direction.NUM);
+      var firstSnakeInitialPosition = terrain.pattern.GetTileCenter(firstSnakeInitialLocation);
+      var firstSnakeInitialPositionToCenter =
+          terrain.pattern.GetTileCenter(new Location(0, 0, 0)).minus(firstSnakeInitialPosition);
+      // Make it go towards the center...
+      var firstSnakeDirectionToCenter = Direction.fromVec(firstSnakeInitialPositionToCenter);
+      // ...well, *roughly* towards the center.
+      var firstSnakeInitialDirection =
+          new Direction(
+              firstSnakeDirectionToCenter.dirNum +
+              rand.Next(-(Direction.NUM / 4 - 1), (Direction.NUM / 4 - 1)));
       var firstSnake = new Snake(rand, terrain, considerCornersAdjacent, originLocation, radius, firstSnakeInitialLocation, firstSnakeInitialDirection);
       snakes.Add(firstSnake);
 
@@ -40,7 +49,7 @@ namespace IncendianFalls {
 
       // The locations for the main paths, made by the snakes, so 1 wide and contiguous.
       var mainLocs = new SortedSet<Location>(terrain.tiles.Keys);
-      AddRightSides(terrain, deadSnakes);
+      AddRightSides(terrain, circleLocs, deadSnakes);
       // All the extra locations to make the main paths wider.
       var sideLocs = new SortedSet<Location>(terrain.tiles.Keys);
       SetUtils.RemoveAll(sideLocs, mainLocs);
@@ -89,7 +98,7 @@ namespace IncendianFalls {
     static void growSnakes(Rand rand, Terrain terrain, List<Snake> snakes, List<Snake> deadSnakes) {
       while (snakes.Count > 0) {
         for (int i = snakes.Count - 1; i >= 0; i--) {
-          if (rand.Next() % 8 == 0) {
+          if (snakes[i].GetPathSoFar().Count > 0 && rand.Next() % 8 == 0) {
             var newSnake = snakes[i].fork();
             if (newSnake != null) {
               snakes.Add(newSnake);
@@ -109,7 +118,7 @@ namespace IncendianFalls {
       }
     }
 
-    static void AddRightSides(Terrain terrain, List<Snake> deadSnakes) {
+    static void AddRightSides(Terrain terrain, SortedSet<Location> circleLocs, List<Snake> deadSnakes) {
       foreach (var snake in deadSnakes) {
         var previousPreviousLocation = snake.snakeInitialLocation;
         var previousLocation = previousPreviousLocation;
@@ -138,6 +147,10 @@ namespace IncendianFalls {
             // This should avoid us grabbing locations on the left accidentally when there are acute angles.
             
             foreach (var bAdjacentLoc in terrain.pattern.GetAdjacentLocations(bLoc, true)) {
+              if (!circleLocs.Contains(bAdjacentLoc)) {
+                continue;
+              }
+              
               var bAdjacentPos = terrain.pattern.GetTileCenter(bAdjacentLoc);
               var bToAdjacent = bAdjacentPos.minus(bPos);
               var rightOfAB = abRightVec.dot(bToAdjacent) >= 0;
