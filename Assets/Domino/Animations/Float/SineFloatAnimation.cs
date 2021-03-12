@@ -17,16 +17,18 @@ public class SineFloatAnimation : IFloatAnimation {
     return this;
   }
 
-  public static IFloatAnimation Make(float multiplyTimeInput = 1f, float min = 0, float max = 1) {
+  public static IFloatAnimation Make(float multiplyTimeInput = 1f, float addTimeInput = 0f, float min = 0, float max = 1) {
     return
       new AddFloatAnimation(
         new MultiplyFloatAnimation(
           new AddFloatAnimation(
           new MultiplyFloatAnimation(
             new SineFloatAnimation(
-              new MultiplyFloatAnimation(
-                new TimeFloatAnimation(),
-                new ConstantFloatAnimation(Mathf.PI / 1000 * multiplyTimeInput))),
+              new AddFloatAnimation(
+                new MultiplyFloatAnimation(
+                  new TimeFloatAnimation(),
+                  new ConstantFloatAnimation(Mathf.PI / 1000 * multiplyTimeInput)),
+                new ConstantFloatAnimation(addTimeInput))),
             new ConstantFloatAnimation(.5f)),
           new ConstantFloatAnimation(.5f)),
         new ConstantFloatAnimation(max - min)),

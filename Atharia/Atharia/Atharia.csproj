@@ -2392,11 +2392,13 @@
         <Compile Include="InnerCode\TerrainGeneration\DungeonTerrainGenerator.cs" />
         <Compile Include="InnerCode\TerrainGeneration\ForestTerrainGenerator.cs" />
         <Compile Include="InnerCode\TerrainGeneration\MakeLevel.cs" />
-        <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\BridgeMaker.cs" />
+        <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\BridgeDFS.cs" />
+        <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\Bridger.cs" />
         <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\Direction.cs" />
         <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\DirectionToThatWayPathMap.cs" />
         <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\Snake.cs" />
-        <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\SnakingCaveTerrainGenerator.cs" />
+        <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\SnakeDirector.cs" />
+        <Compile Include="InnerCode\TerrainGeneration\SnakingCaves\IntertwiningCaveTerrainGenerator.cs" />
         <Compile Include="InnerCode\Utils.cs" />
         <Compile Include="InnerCode\Vivifier.cs" />
         <Compile Include="InnerCode\Vivimap.cs" />

@@ -116,6 +116,7 @@ namespace AthPlayer {
 
       DetermineTileAppearance(
           terrainTile,
+          location,
           out Vector4Animation topColor,
           out Vector4Animation outlineColor,
           out Vector4Animation sideColor,
@@ -198,6 +199,7 @@ namespace AthPlayer {
 
     private static void DetermineTileAppearance(
         TerrainTile terrainTile,
+        Location location,
         out Vector4Animation topColor,
         out Vector4Animation outlineColor,
         out Vector4Animation sideColor,
@@ -227,8 +229,8 @@ namespace AthPlayer {
         // someday, we should have these if-else cases just call into a MemberToViewMapper...
 
         if (ttc is GrassTTCAsITerrainTileComponent) {
-            topColor = Vector4Animation.Color(0f, .3f, 0);
-            sideColor = Vector4Animation.Color(0f, .2f, 0);
+          topColor = Vector4Animation.Color(0f, .1f + 0.0333f * terrainTile.elevation, 0);
+          sideColor = Vector4Animation.Color(.15f, .1f, .05f);
         } else if (ttc is StoneTTCAsITerrainTileComponent) {
           if (terrainTile.elevation == 1) {
             topColor = Vector4Animation.Color(.2f, .2f, .2f);
@@ -244,8 +246,8 @@ namespace AthPlayer {
           // topColor = Vector4Animation.Color(.35f, .11f, 0f);
           // sideColor = Vector4Animation.Color(.23f, .08f, 0f);
           
-          topColor = Vector4Animation.Color(.20f + 0.05f * terrainTile.elevation, .02f + 0.03f * terrainTile.elevation, 0f);
-          sideColor = Vector4Animation.Color(.08f + 0.05f * terrainTile.elevation, 0.03f * terrainTile.elevation, 0f);
+          topColor = Vector4Animation.Color(.20f + 0.03f * terrainTile.elevation, .02f + 0.015f * terrainTile.elevation, 0f);
+          sideColor = Vector4Animation.Color(.08f + 0.03f * terrainTile.elevation, 0.015f * terrainTile.elevation, 0f);
         } else if (ttc is CaveWallTTCAsITerrainTileComponent) {
           topColor = Vector4Animation.Color(.24f, .08f, 0f);
           sideColor = Vector4Animation.Color(.16f, .05f, 0f);
@@ -266,19 +268,30 @@ namespace AthPlayer {
           sideColor = Vector4Animation.Color(.1f, .05f, 0f);
           outlineColor = Vector4Animation.Color(0f, 0f, 0f);
         } else if (ttc is WaterTTCAsITerrainTileComponent) {
-          topColor = Vector4Animation.Color(.2f, .3f, 1.0f);
-          outlineColor = Vector4Animation.Color(0f, 0f, 1.0f);
-          sideColor = Vector4Animation.Color(.2f, .3f, 1.0f);
+          var offset = new System.Random(location.groupX + location.groupY + location.indexInGroup + terrainTile.elevation).Next() % 628 / 100.0f;
+          topColor =
+              //Vector4Animation.Color(.075f, .1f, 0.4f);
+              new Vector4Animation(
+                  // SineFloatAnimation.Make(.5f, offset * .1f, .06f, .09f),
+                  // SineFloatAnimation.Make(.5f, offset * .1f, .08f, .12f),
+                  // SineFloatAnimation.Make(.5f, offset * .1f, .03f, .05f),
+                  SineFloatAnimation.Make(.8f, offset, .07f, .08f),
+                  SineFloatAnimation.Make(.8f, offset, .092f, .108f),
+                  SineFloatAnimation.Make(.8f, offset, .36f, .44f),
+                  new ConstantFloatAnimation(1.0f));
+          Debug.Log(offset);
+          outlineColor = Vector4Animation.Color(0f, 0f, 0f);
+          sideColor = Vector4Animation.Color(.1f, .15f, 0.5f);
 
           overlay =
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "o",
-                      Vector4Animation.Color(.3f, .4f, 1.0f),
+                      Vector4Animation.Color(.1f, .15f, 0.5f),
                       0,
                       OutlineMode.NoOutline,
-                      Vector4Animation.Color(0f, 0f, 1.0f)),
+                      Vector4Animation.Color(0f, 0f, 0.5f)),
                   false,
                   Vector4Animation.Color(0, 0, 0));
         } else if (ttc is FloorTTCAsITerrainTileComponent) {
@@ -413,7 +426,7 @@ namespace AthPlayer {
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "n",
-                      Vector4Animation.Color(0, .5f, 0),
+                      Vector4Animation.Color(.25f, .1f, 0),
                       0,
                       OutlineMode.WithOutline),
                   false,

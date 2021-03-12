@@ -34,7 +34,7 @@ namespace IncendianFalls {
       // Returns whether its still alive
       public bool slither() {
         // Lets make it so we dont want to go straight, but we do like turning slightly, but don't like turning a lot.
-        var (weightsByDirection, directionToThatWayPath) = GetDirectionWeights(SnakingCaveTerrainGenerator.SLITHER_DISTANCE, true, snakeCurrentDirection);
+        var (weightsByDirection, directionToThatWayPath) = GetDirectionWeights(SnakeDirector.SLITHER_DISTANCE, true, snakeCurrentDirection);
 
         // for debugging
         var backupWeightsByDirection = new SortedDictionary<Direction, int>(weightsByDirection);
@@ -54,7 +54,7 @@ namespace IncendianFalls {
 
         if (totalWeight == 0) {
           // End the snake!
-          GetDirectionWeights(SnakingCaveTerrainGenerator.SLITHER_DISTANCE, true, snakeCurrentDirection);
+          GetDirectionWeights(SnakeDirector.SLITHER_DISTANCE, true, snakeCurrentDirection);
           return false;
         } else {
           int choiceInWeights = rand.Next() % totalWeight;
@@ -85,7 +85,7 @@ namespace IncendianFalls {
           } else {
             previousSlither.Add(newLocation);
             pathSoFar.Add(newLocation);
-            SnakingCaveTerrainGenerator.AddTile(terrain, newLocation, 3);
+            SnakingCaveTerrainGenerator.AddTile(terrain, newLocation, SnakingCaveTerrainGenerator.PATH_HEIGHT);
           }
 
           snakeCurrentLocation = newLocation;
@@ -97,7 +97,7 @@ namespace IncendianFalls {
 
       public Snake fork() {
         var (directionWeights, directionToThatWayPath) =
-            GetDirectionWeights(SnakingCaveTerrainGenerator.SLITHER_DISTANCE * 1.5f, false, new Direction(0));
+            GetDirectionWeights(SnakeDirector.SLITHER_DISTANCE * 1.5f, false, new Direction(0));
 
         var leftDirection = snakeCurrentDirection + 3;
         var rightDirection = snakeCurrentDirection - 3;
@@ -211,7 +211,7 @@ namespace IncendianFalls {
                   // Only consider locations that are actually nearby the start location and are within AVOID_DISTANCE_STEPS
                   // steps of the locations to avoid.
                   // The + 0.5 is to avoid float rounding errors.
-                  return nearbyLocations.Contains(b) && totalCost < SnakingCaveTerrainGenerator.AVOID_DISTANCE_STEPS + 0.5;
+                  return nearbyLocations.Contains(b) && totalCost < SnakeDirector.AVOID_DISTANCE_STEPS + 0.5;
                 },
                 (a) => false, // Dont stop early
                 (a) => 0, // Every step is equally towards the "goal" (there is no goal)

@@ -13,7 +13,7 @@ namespace IncendianFalls {
               pattern,
               new SortedSet<Location>() { fromLocation },
               considerCornersAdjacent,
-              (a, b, totalCost) => pattern.GetTileCenter(fromLocation).distance(pattern.GetTileCenter(b)) < SnakingCaveTerrainGenerator.SLITHER_DISTANCE,
+              (a, b, totalCost) => pattern.GetTileCenter(fromLocation).distance(pattern.GetTileCenter(b)) < SnakeDirector.SLITHER_DISTANCE,
               (a) => false,
               (a) => 0,
               (a, b) => pattern.GetTileCenter(a).distance(pattern.GetTileCenter(b)));
