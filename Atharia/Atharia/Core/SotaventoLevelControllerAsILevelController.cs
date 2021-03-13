@@ -66,9 +66,6 @@ public class SotaventoLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return SotaventoLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return SotaventoLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return SotaventoLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

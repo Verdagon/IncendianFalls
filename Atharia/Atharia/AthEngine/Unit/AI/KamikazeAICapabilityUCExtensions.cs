@@ -35,18 +35,18 @@ namespace Atharia.Model {
         }
 
         var targetLocationCenter = nearestEnemy.location;
-        var targetLocations = game.level.terrain.GetAdjacentExistingLocations(targetLocationCenter, false);
+        var targetLocations = new List<Location>(game.level.terrain.GetAdjacentExistingLocations(targetLocationCenter, false));
         targetLocations.Insert(0, targetLocationCenter);
         return game.root.EffectKamikazeTargetImpulseCreate(700, self, targetLocationCenter, new LocationImmList(targetLocations)).AsIImpulse();
       } else {
         // We have targets, lets go there.
 
         Location locationToJumpTo = null;
-        if (Actions.CanTeleportTo(game, superstate, self.targetLocationCenter)) {
+        if (Actions.CanTeleportTo(game.level.terrain, superstate, self.targetLocationCenter)) {
           locationToJumpTo = self.targetLocationCenter;
         } else {
           foreach (var location in self.targetByLocation.Keys) {
-            if (Actions.CanTeleportTo(game, superstate, location)) {
+            if (Actions.CanTeleportTo(game.level.terrain, superstate, location)) {
               locationToJumpTo = location;
             }
           }

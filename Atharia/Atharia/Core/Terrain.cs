@@ -61,6 +61,9 @@ public class Terrain {
     get { return incarnation.pattern; }
     set { root.EffectTerrainSetPattern(id, value); }
   }
+  public bool considerCornersAdjacent {
+    get { return incarnation.considerCornersAdjacent; }
+  }
   public float elevationStepHeight {
     get { return incarnation.elevationStepHeight; }
   }

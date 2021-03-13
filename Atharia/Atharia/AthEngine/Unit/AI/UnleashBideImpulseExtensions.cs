@@ -25,8 +25,8 @@ namespace Atharia.Model {
 
       // Get this, all surrounding, and all surrounding those.
       var affectedTileLocations = new SortedSet<Location>() { actingUnit.location };
-      affectedTileLocations = game.level.terrain.pattern.GetAdjacentLocations(affectedTileLocations, true, game.level.ConsiderCornersAdjacent());
-      affectedTileLocations = game.level.terrain.pattern.GetAdjacentLocations(affectedTileLocations, true, game.level.ConsiderCornersAdjacent());
+      affectedTileLocations = game.level.terrain.pattern.GetAdjacentLocations(affectedTileLocations, true, game.level.terrain.considerCornersAdjacent);
+      affectedTileLocations = game.level.terrain.pattern.GetAdjacentLocations(affectedTileLocations, true, game.level.terrain.considerCornersAdjacent);
       
       Actions.UnleashBide(game, superstate, actingUnit, affectedTileLocations);
 

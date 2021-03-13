@@ -50,7 +50,7 @@ namespace Atharia.Model {
               terrain.pattern,
               unit.location,
               nearestEnemy.location,
-              game.level.ConsiderCornersAdjacent(),
+              game.level.terrain.considerCornersAdjacent,
               (Location from, Location to, float totalCost) => {
                 return terrain.tiles.ContainsKey(to) &&
                     terrain.tiles[to].IsWalkable() &&
@@ -86,7 +86,7 @@ namespace Atharia.Model {
         // No directive, do nothing.
         return obj.root.EffectNoImpulseCreate().AsIImpulse();
       } else {
-        if (game.level.terrain.pattern.LocationsAreAdjacent(unit.location, directive.targetUnit.location, game.level.ConsiderCornersAdjacent()) &&
+        if (game.level.terrain.pattern.LocationsAreAdjacent(unit.location, directive.targetUnit.location, game.level.terrain.considerCornersAdjacent) &&
             game.level.terrain.GetElevationDifference(unit.location, directive.targetUnit.location) <= 2) {
           // Target is right next to subject. Attack!
           return obj.root.EffectAttackImpulseCreate(800, directive.targetUnit).AsIImpulse();
@@ -105,7 +105,7 @@ namespace Atharia.Model {
               if (location.Equals(directive.targetUnit.location)) {
                 continue;
               }
-              if (!Actions.CanTeleportTo(game, superstate, location)) {
+              if (!Actions.CanTeleportTo(game.level.terrain, superstate, location)) {
                 isClearPath = false;
                 break;
               }

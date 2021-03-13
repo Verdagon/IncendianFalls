@@ -17,7 +17,7 @@ namespace Atharia.Model {
         SSContext context,
         Game game) {
       var terrain =
-        CircleTerrainGenerator.Generate(context, game.root, HexPattern.MakeHexPattern(), game.rand, 18.0f);
+        CircleTerrainGenerator.Generate(context, game.root, HexPattern.MakeHexPattern(), false, game.rand, 18.0f);
       TerrainUtils.randify(game.rand, terrain, 2);
       foreach (var locationAndTile in terrain.tiles) {
         locationAndTile.Value.components.Add(
@@ -67,10 +67,6 @@ namespace Atharia.Model {
 
     public static string GetName(this RetreatLevelController obj) {
       return "Retreat";
-    }
-
-    public static bool ConsiderCornersAdjacent(this RetreatLevelController obj) {
-      return false;
     }
 
     public static Atharia.Model.Void SimpleTrigger(

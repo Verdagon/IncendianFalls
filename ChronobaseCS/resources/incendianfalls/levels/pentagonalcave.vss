@@ -13,10 +13,6 @@ mut struct PentagonalCaveLevelController {
     PentagonalCaveLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: PentagonalCaveLevelController overrides ILevelController): Bool {
-    PentagonalCaveLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: PentagonalCaveLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

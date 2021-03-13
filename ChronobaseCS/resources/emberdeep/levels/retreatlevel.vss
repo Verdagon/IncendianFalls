@@ -12,10 +12,6 @@ mut struct RetreatLevelController {
     RetreatLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: RetreatLevelController overrides ILevelController): Bool {
-    RetreatLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: RetreatLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

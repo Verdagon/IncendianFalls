@@ -18,7 +18,9 @@ namespace Atharia.Model {
         Superstate superstate,
         int depth,
         int levelIndex) {
-      var terrain = CircleTerrainGenerator.Generate(context, game.root, PentagonPattern9.makePentagon9Pattern(), game.rand, 8.0f);
+      var terrain =
+          CircleTerrainGenerator.Generate(
+              context, game.root, PentagonPattern9.makePentagon9Pattern(), false, game.rand, 8.0f);
 
       var units = game.root.EffectUnitMutSetCreate();
 

@@ -12,10 +12,6 @@ mut struct SotaventoLevelController {
     SotaventoLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: SotaventoLevelController overrides ILevelController): Bool {
-    SotaventoLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: SotaventoLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

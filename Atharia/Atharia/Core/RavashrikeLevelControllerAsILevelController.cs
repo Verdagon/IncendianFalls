@@ -66,9 +66,6 @@ public class RavashrikeLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return RavashrikeLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return RavashrikeLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return RavashrikeLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

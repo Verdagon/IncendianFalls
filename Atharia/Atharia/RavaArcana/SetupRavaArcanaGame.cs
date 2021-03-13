@@ -24,12 +24,9 @@ namespace RavaArcana {
               Unit.Null,
               Level.Null,
               0,
-
               Unit.Null,
               false,
-
               1,
-
               "",
               false,
 
@@ -46,9 +43,11 @@ namespace RavaArcana {
 
       Level startLevel = Level.Null;
       Location startLevelEntryLocation = null;
+      LevelSuperstate startLevelSuperstate = null;
 
       Level previousLevel = Level.Null;
       Location previousLevelExitLocation = null;
+      LevelSuperstate previousLevelSuperstate = null;
 
       game.player = Chronomancer.Make(game.root);
 
@@ -68,9 +67,11 @@ namespace RavaArcana {
         if (!startLevel.Exists()) {
           startLevel = level;
           startLevelEntryLocation = entryLocation;
+          startLevelSuperstate = levelSuperstate;
         }
         previousLevel = level;
         previousLevelExitLocation = null;
+        previousLevelSuperstate = levelSuperstate;
       }
 
       Asserts.Assert(startLevel.Exists());

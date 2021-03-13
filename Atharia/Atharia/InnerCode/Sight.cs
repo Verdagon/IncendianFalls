@@ -42,7 +42,7 @@ namespace IncendianFalls {
         bool includeStart) {
       return PatternDriver.Drive(
           game.level.terrain.pattern,
-          game.level.ConsiderCornersAdjacent(),
+          game.level.terrain.considerCornersAdjacent,
           from,
           to,
           includeStart);

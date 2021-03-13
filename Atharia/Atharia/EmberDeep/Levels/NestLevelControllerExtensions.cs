@@ -49,6 +49,7 @@ namespace Atharia.Model {
           new Vec3(0, -8, 16),
           game.root.EffectTerrainCreate(
             PentagonPattern9.makePentagon9Pattern(),
+            considerCornersAdjacent,
             0.3f,
             game.root.EffectTerrainTileByLocationMutMapCreate()),
           game.root.EffectUnitMutSetCreate(),

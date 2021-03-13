@@ -62,6 +62,14 @@ imm struct CommActionRequest {
   actionIndex: Int;
 }
 
+imm struct FindPathRequest {
+  FindPathRequest isa IRequest;
+
+  gameId: Int;
+  unitId: Int;
+  destination: Location;
+}
+
 imm struct AttackRequest {
   AttackRequest isa IRequest;
 

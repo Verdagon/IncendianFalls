@@ -17,7 +17,6 @@ public interface ILevelController {
   IDestructible AsIDestructible();
   Void Destruct();
   string GetName();
-  bool ConsiderCornersAdjacent();
   Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName);
   Void SimpleUnitTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit triggeringUnit, Location location, string triggerName);
 }

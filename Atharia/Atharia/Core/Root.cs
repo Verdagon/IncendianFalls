@@ -17865,16 +17865,19 @@ return new TerrainTileSetElevationEffect(id, newValue);
   }
   public Terrain EffectTerrainCreate(
       Pattern pattern,
+      bool considerCornersAdjacent,
       float elevationStepHeight,
       TerrainTileByLocationMutMap tiles) {
     CheckHasTerrainTileByLocationMutMap(tiles);
     return TrustedEffectTerrainCreateWithId(NewId()
             ,pattern
+            ,considerCornersAdjacent
             ,elevationStepHeight
             ,tiles.id    );
   }
   public Terrain TrustedEffectTerrainCreateWithId(int id
 ,      Pattern pattern
+,      bool considerCornersAdjacent
 ,      float elevationStepHeight
 ,      int tiles) {
     CheckUnlocked();
@@ -17882,6 +17885,7 @@ return new TerrainTileSetElevationEffect(id, newValue);
     var incarnation =
         new TerrainIncarnation(
             pattern,
+            considerCornersAdjacent,
             elevationStepHeight,
             tiles
             );
@@ -17919,8 +17923,9 @@ return new TerrainTileSetElevationEffect(id, newValue);
   public int GetTerrainHash(int id, int version, TerrainIncarnation incarnation) {
     int result = id * version;
     result += id * version * 1 * incarnation.pattern.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.elevationStepHeight.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.tiles.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.considerCornersAdjacent.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.elevationStepHeight.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.tiles.GetDeterministicHashCode();
     return result;
   }
      
@@ -17941,6 +17946,7 @@ return new TerrainTileSetElevationEffect(id, newValue);
       var newIncarnation =
           new TerrainIncarnation(
               newValue,
+              oldIncarnationAndVersion.incarnation.considerCornersAdjacent,
               oldIncarnationAndVersion.incarnation.elevationStepHeight,
               oldIncarnationAndVersion.incarnation.tiles);
       rootIncarnation.incarnationsTerrain[id] =

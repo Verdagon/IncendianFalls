@@ -4,12 +4,13 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class CircleTerrainGenerator {
-    public static Terrain Generate(SSContext context, Root root, Pattern pattern, Rand rand, float radius) {
+    public static Terrain Generate(SSContext context, Root root, Pattern pattern, bool considerCornersAdjacent, Rand rand, float radius) {
       float elevationStepHeight = .2f;
 
       var terrain =
           root.EffectTerrainCreate(
               pattern,
+              considerCornersAdjacent,
               elevationStepHeight,
               root.EffectTerrainTileByLocationMutMapCreate());
 

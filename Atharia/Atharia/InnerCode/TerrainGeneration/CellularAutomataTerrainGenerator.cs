@@ -18,6 +18,7 @@ namespace IncendianFalls {
       var terrain =
           root.EffectTerrainCreate(
               pattern,
+              considerCornersAdjacent,
               elevationStepHeight,
               root.EffectTerrainTileByLocationMutMapCreate());
 

@@ -282,7 +282,7 @@ namespace IncendianFalls {
       }
       root.GetDeterministicHashCode();
 
-      terrain = root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
+      terrain = root.EffectTerrainCreate(pattern, true, elevationStepHeight, tiles);
       rooms = roomByNumber;
     }
 

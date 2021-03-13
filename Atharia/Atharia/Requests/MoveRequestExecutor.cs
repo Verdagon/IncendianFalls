@@ -94,7 +94,7 @@ namespace IncendianFalls {
         //        terrain.pattern,
         //        game.player.location,
         //        destination,
-        //        game.level.ConsiderCornersAdjacent(),
+        //        game.level.terrain.considerCornersAdjacent,
         //        (Location from, Location to) => {
         //          return terrain.tiles.ContainsKey(to) &&
         //              terrain.tiles[to].IsWalkable() &&

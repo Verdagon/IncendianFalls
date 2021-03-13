@@ -21,6 +21,7 @@ namespace Atharia.Model {
           new Vec3(0, -8, 16),
           game.root.EffectTerrainCreate(
             PentagonPattern9.makePentagon9Pattern(),
+            false,
             0.3f,
             game.root.EffectTerrainTileByLocationMutMapCreate()),
           game.root.EffectUnitMutSetCreate(),
@@ -52,10 +53,6 @@ namespace Atharia.Model {
 
     public static string GetName(this VolcaetusLevelController obj) {
       return "Volcaetus";
-    }
-
-    public static bool ConsiderCornersAdjacent(this VolcaetusLevelController obj) {
-      return false;
     }
 
     public static Atharia.Model.Void SimpleTrigger(

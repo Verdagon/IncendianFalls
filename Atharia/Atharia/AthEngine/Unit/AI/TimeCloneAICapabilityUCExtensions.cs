@@ -70,7 +70,7 @@ namespace Atharia.Model {
           if (!game.level.units.Contains(targetUnit)) {
             return game.root.EffectHoldPositionImpulseCreate(1000, holdTime).AsIImpulse();
           }
-          if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, targetUnit.location, game.level.ConsiderCornersAdjacent())) {
+          if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, targetUnit.location, game.level.terrain.considerCornersAdjacent)) {
             return game.root.EffectHoldPositionImpulseCreate(1000, holdTime).AsIImpulse();
           }
           return game.root.EffectAttackImpulseCreate(1000, targetUnit).AsIImpulse();

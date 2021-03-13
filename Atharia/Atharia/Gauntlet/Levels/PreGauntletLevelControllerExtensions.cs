@@ -26,6 +26,7 @@ namespace Atharia.Model {
             context,
             root,
             squareLevelsOnly ? SquarePattern.MakeSquarePattern() : HexPattern.MakeHexPattern(),
+            false,
             rand,
             4.0f);
 
@@ -53,10 +54,6 @@ namespace Atharia.Model {
 
     public static string GetName(this PreGauntletLevelController obj) {
       return "PreGauntlet Lair";
-    }
-
-    public static bool ConsiderCornersAdjacent(this PreGauntletLevelController obj) {
-      return false;
     }
 
     //public static Location GetEntryLocation(

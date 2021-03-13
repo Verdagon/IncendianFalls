@@ -42,9 +42,31 @@ namespace IncendianFalls {
       
       var nonEmptyLocs = new SortedSet<Location>(terrain.tiles.Keys);
       var nonEmptyAndAdjacentLocs = terrain.pattern.GetAdjacentLocations(nonEmptyLocs, true, true);
-      var overlayLocs = new SortedSet<Location>(circleLocs);
-      SetUtils.RemoveAll(overlayLocs, nonEmptyAndAdjacentLocs);
+      var overlayLocsPreCulling = new SortedSet<Location>(circleLocs);
+      SetUtils.RemoveAll(overlayLocsPreCulling, nonEmptyAndAdjacentLocs);
 
+      var overlayLocs = new SortedSet<Location>();
+      
+      // Remove any tiny islands we just made (<5 locs)
+      var unexploredOverlayLocs = new SortedSet<Location>(overlayLocsPreCulling);
+      while (unexploredOverlayLocs.Count > 0) {
+        var explorer =
+            new AStarExplorer(
+                new SortedSet<Location>{ SetUtils.GetFirst(unexploredOverlayLocs) },
+                (to) => terrain.pattern.GetAdjacentLocations(to, false),
+                (from, to, totalCost) => unexploredOverlayLocs.Contains(to),
+                (to) => false, // dont stop early
+                (to) => 0, // no goal
+                (from, to) => 1); // all steps equal cost
+        var connected = explorer.getClosedLocations();
+        SetUtils.RemoveAll(unexploredOverlayLocs, connected);
+        Asserts.Assert(connected.Count > 0);
+        if (connected.Count >= 5) {
+          SetUtils.AddAll(overlayLocs, connected);
+        }
+      }
+
+      
       foreach (var overlayLoc in overlayLocs) {
         if (locToPossibleBridgeEndingThereMap.TryGetValue(overlayLoc, out List<Bridge> bridgesEndingHere)) {
           var newBridge = bridgesEndingHere[0];

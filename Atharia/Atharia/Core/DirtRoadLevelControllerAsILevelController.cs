@@ -66,9 +66,6 @@ public class DirtRoadLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return DirtRoadLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return DirtRoadLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return DirtRoadLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

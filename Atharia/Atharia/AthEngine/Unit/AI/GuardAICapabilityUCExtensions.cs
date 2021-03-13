@@ -27,7 +27,7 @@ namespace Atharia.Model {
           game.level.terrain.pattern,
           unit.location,
           obj.guardCenterLocation,
-          game.level.ConsiderCornersAdjacent(),
+          game.level.terrain.considerCornersAdjacent,
           (Location from, Location to, float totalCost) => {
             return game.level.terrain.tiles.ContainsKey(to) &&
                 game.level.terrain.tiles[to].IsWalkable() &&

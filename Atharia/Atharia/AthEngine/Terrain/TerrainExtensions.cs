@@ -25,11 +25,11 @@ namespace Atharia.Model {
       return terrain.tiles.ContainsKey(location);
     }
 
-    public static List<Location> GetAdjacentExistingLocations(
+    public static SortedSet<Location> GetAdjacentExistingLocations(
         this Terrain terrain,
         Location loc,
         bool adjacentCornersToo) {
-      List<Location> result = new List<Location>();
+      SortedSet<Location> result = new SortedSet<Location>();
       foreach (Location adjacentLoc in terrain.pattern.GetAdjacentLocations(loc, adjacentCornersToo)) {
         if (terrain.TileExists(adjacentLoc))
           result.Add(adjacentLoc);

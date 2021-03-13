@@ -34,11 +34,6 @@ namespace Atharia.Model {
       return obj.controller.GetName();
     }
 
-    public static bool ConsiderCornersAdjacent(this Level obj) {
-      Asserts.Assert(obj.controller.Exists());
-      return obj.controller.ConsiderCornersAdjacent();
-    }
-
     public static void EnterUnit(
         this Level self,
         LevelSuperstate levelSuperstate,

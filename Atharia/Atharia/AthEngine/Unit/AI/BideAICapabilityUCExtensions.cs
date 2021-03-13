@@ -26,7 +26,7 @@ namespace Atharia.Model {
             game.level.terrain.pattern.LocationsAreAdjacent(
                 nearestEnemy.location,
                 unit.location,
-                game.level.ConsiderCornersAdjacent());
+                game.level.terrain.considerCornersAdjacent);
         if (!isNextToPlayer) {
           return self.root.EffectNoImpulseCreate().AsIImpulse();
         }

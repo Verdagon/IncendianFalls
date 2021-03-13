@@ -66,9 +66,6 @@ public class CliffLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return CliffLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return CliffLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return CliffLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

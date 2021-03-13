@@ -66,9 +66,6 @@ public class PentagonalCaveLevelControllerAsILevelController : ILevelController 
   public string GetName() {
     return PentagonalCaveLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return PentagonalCaveLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return PentagonalCaveLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

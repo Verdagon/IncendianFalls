@@ -66,9 +66,6 @@ public class NestLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return NestLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return NestLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return NestLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

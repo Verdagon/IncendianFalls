@@ -13,10 +13,6 @@ namespace Atharia.Model {
       return "Cliff" + obj.depth;
     }
 
-    public static bool ConsiderCornersAdjacent(this CliffLevelController obj) {
-      return false;
-    }
-
     public static Atharia.Model.Void SimpleTrigger(
         this CliffLevelController obj,
         IncendianFalls.SSContext context,

@@ -178,9 +178,8 @@ namespace IncendianFalls {
         // This doesn't use distance anywhere, just number of steps.
         var nearbyLocationsExplorer =
             new AStarExplorer(
-                terrain.pattern,
                 new SortedSet<Location>() { snakeCurrentLocation },
-                considerCornersAdjacent,
+                (to) => terrain.pattern.GetAdjacentLocations(to, considerCornersAdjacent),
                 // the + 0.5 is just to avoid floating rounding errors
                 (a, b, totalCost) => totalCost <= slitherDistance * 2 + 0.5f,
                 (a) => false, // Dont stop early
@@ -204,9 +203,8 @@ namespace IncendianFalls {
         // These are locations that are near the foreign locations, so we want to steer away from them.
         var unusableLocationsExplorer =
             new AStarExplorer(
-                terrain.pattern,
                 nearbyForeignTiles,
-                considerCornersAdjacent,
+                (to) => terrain.pattern.GetAdjacentLocations(to, considerCornersAdjacent),
                 (a, b, totalCost) => {
                   // Only consider locations that are actually nearby the start location and are within AVOID_DISTANCE_STEPS
                   // steps of the locations to avoid.

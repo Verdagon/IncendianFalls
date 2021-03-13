@@ -42,10 +42,6 @@ public class NullILevelController : ILevelController {
     throw new Exception("Called GetName on a null!");
   }
              
-  public bool ConsiderCornersAdjacent() {
-    throw new Exception("Called ConsiderCornersAdjacent on a null!");
-  }
-             
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     throw new Exception("Called SimpleTrigger on a null!");
   }

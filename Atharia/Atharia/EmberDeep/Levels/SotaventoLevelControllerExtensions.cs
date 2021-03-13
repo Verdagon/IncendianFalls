@@ -20,6 +20,7 @@ namespace Atharia.Model {
           new Vec3(0, -8, 16),
           game.root.EffectTerrainCreate(
             SquarePattern.MakeSquarePattern(),
+            false,
             0.3f,
             game.root.EffectTerrainTileByLocationMutMapCreate()),
           game.root.EffectUnitMutSetCreate(),
@@ -55,10 +56,6 @@ namespace Atharia.Model {
 
     public static string GetName(this SotaventoLevelController obj) {
       return "Sotavento";
-    }
-
-    public static bool ConsiderCornersAdjacent(this SotaventoLevelController obj) {
-      return false;
     }
 
     public static Atharia.Model.Void SimpleTrigger(

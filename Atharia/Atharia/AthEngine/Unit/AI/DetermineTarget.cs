@@ -8,7 +8,7 @@ namespace IncendianFalls {
     public static Unit Determine(Game game, Superstate superstate, Unit unit) {
       var adjLocs =
           game.level.terrain.GetAdjacentExistingLocations(
-              unit.location, game.level.ConsiderCornersAdjacent());
+              unit.location, game.level.terrain.considerCornersAdjacent);
       var adjacentEnemies = new List<Unit>();
       foreach (var adjLoc in adjLocs) {
         if (game.level.terrain.GetElevationDifference(unit.location, adjLoc) <= 2) {

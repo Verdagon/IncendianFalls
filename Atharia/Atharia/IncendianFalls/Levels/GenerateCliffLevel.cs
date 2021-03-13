@@ -183,7 +183,7 @@ namespace IncendianFalls {
               terrain.pattern,
               origin,
               destination,
-              level.ConsiderCornersAdjacent(),
+              level.terrain.considerCornersAdjacent,
               (Location from, Location to, float totalCost) => {
                 return terrain.tiles.ContainsKey(to) &&
                     terrain.tiles[to].IsWalkable() &&
@@ -199,7 +199,7 @@ namespace IncendianFalls {
           level.terrain.pattern,
           origin,
           destination,
-          level.ConsiderCornersAdjacent(),
+          level.terrain.considerCornersAdjacent,
               (Location from, Location to, float totalCost) => {
                 return level.terrain.tiles.ContainsKey(to) &&
                     level.terrain.tiles[to].IsWalkable() &&

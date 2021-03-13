@@ -13,10 +13,6 @@ mut struct SquareCaveLevelController {
     SquareCaveLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: SquareCaveLevelController overrides ILevelController): Bool {
-    SquareCaveLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: SquareCaveLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

@@ -17,7 +17,6 @@ mut interface ILevelController {
 
   fn Destruct(): Void;
   fn GetName(): Str;
-  fn ConsiderCornersAdjacent(): Bool;
   fn SimpleTrigger(
     context: $IncendianFalls.SSContext,
     game: Game,

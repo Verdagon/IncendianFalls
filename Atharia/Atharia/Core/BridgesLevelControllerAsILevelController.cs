@@ -66,9 +66,6 @@ public class BridgesLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return BridgesLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return BridgesLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return BridgesLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

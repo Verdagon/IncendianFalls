@@ -199,9 +199,8 @@ namespace IncendianFalls {
 
     static AStarExplorer makeDijkstra(Terrain terrain, Location originLocation, SortedSet<Location> circleLocs) {
       return new AStarExplorer(
-          terrain.pattern,
           new SortedSet<Location>(terrain.tiles.Keys),
-          false,
+          (to) => terrain.pattern.GetAdjacentLocations(to, false),
           (a, b, totalCost) => circleLocs.Contains(b) && !terrain.TileExists(b),
           (loc) => false, // dont stop early
           (a) => 0, // try everything equally
@@ -216,9 +215,8 @@ namespace IncendianFalls {
       while (undiscoveredLocs.Count > 0) {
         var islandExplorer =
             new AStarExplorer(
-                terrain.pattern,
                 new SortedSet<Location>() {SetUtils.GetFirst(undiscoveredLocs)},
-                considerCornersAdjacent,
+                (to) => terrain.pattern.GetAdjacentLocations(to, considerCornersAdjacent),
                 (a, b, totalCost) => undiscoveredLocs.Contains(b),
                 (a) => false, // dont stop early
                 (a) => 0, // no cost to get to the goal, there is no goal

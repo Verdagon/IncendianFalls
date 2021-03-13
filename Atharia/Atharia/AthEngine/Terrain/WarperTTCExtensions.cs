@@ -16,7 +16,7 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit interactingUnit,
         Location containingTileLocation) {
-      if (!IncendianFalls.Actions.CanTeleportTo(game, superstate, warper.destinationLocation)) {
+      if (!IncendianFalls.Actions.CanTeleportTo(game.level.terrain, superstate, warper.destinationLocation)) {
         return "Can't teleport there!";
       }
       IncendianFalls.Actions.Step(game, superstate, interactingUnit, warper.destinationLocation, true, false);

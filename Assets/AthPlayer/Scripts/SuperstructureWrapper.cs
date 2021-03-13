@@ -187,5 +187,10 @@ namespace AthPlayer {
       }
       return result;
     }
+
+    public List<Location> RequestFindPath(int gameId, int unitId, Location destination) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      return ss.RequestFindPath(gameId, unitId, destination);
+    }
   }
 }

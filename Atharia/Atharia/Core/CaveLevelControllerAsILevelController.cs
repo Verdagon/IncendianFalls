@@ -66,9 +66,6 @@ public class CaveLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return CaveLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return CaveLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return CaveLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

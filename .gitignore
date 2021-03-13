@@ -15,7 +15,10 @@ Atharia/Geomancer/obj
 Atharia/ConsoleDriveyThing/obj
 *.sslog
 Library/il2cpp_cache
-
+Assets/Fonts/Symbols.html
+Assets/Fonts/Symbols.svg
+Symbols
+RavaArcanaMac.app
 
 
 

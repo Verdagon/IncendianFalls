@@ -12,10 +12,6 @@ mut struct PreGauntletLevelController {
     PreGauntletLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: PreGauntletLevelController overrides ILevelController): Bool {
-    PreGauntletLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: PreGauntletLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

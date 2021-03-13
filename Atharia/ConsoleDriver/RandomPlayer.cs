@@ -62,7 +62,7 @@ namespace ConsoleDriveyThing {
       //    // 2-X: Go to that nearby location
       //    List<Location> nearbyLocations =
       //        game.level.terrain.GetAdjacentExistingLocations(
-      //            game.player.location, game.level.ConsiderCornersAdjacent());
+      //            game.player.location, game.level.terrain.considerCornersAdjacent);
       //    int numPossibleActions = 2 + nearbyLocations.Count;
 
       //    int action = random.Next() % numPossibleActions;

@@ -12,10 +12,6 @@ mut struct DirtRoadLevelController {
     DirtRoadLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: DirtRoadLevelController overrides ILevelController): Bool {
-    DirtRoadLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: DirtRoadLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

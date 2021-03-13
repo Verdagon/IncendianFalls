@@ -12,10 +12,6 @@ mut struct VolcaetusLevelController {
     VolcaetusLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: VolcaetusLevelController overrides ILevelController): Bool {
-    VolcaetusLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: VolcaetusLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

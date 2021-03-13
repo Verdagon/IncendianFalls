@@ -66,9 +66,6 @@ public class VolcaetusLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return VolcaetusLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return VolcaetusLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return VolcaetusLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

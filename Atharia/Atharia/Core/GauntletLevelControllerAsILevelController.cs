@@ -66,9 +66,6 @@ public class GauntletLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return GauntletLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return GauntletLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return GauntletLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

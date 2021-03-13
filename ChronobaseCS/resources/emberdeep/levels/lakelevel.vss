@@ -12,10 +12,6 @@ mut struct LakeLevelController {
     LakeLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: LakeLevelController overrides ILevelController): Bool {
-    LakeLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: LakeLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

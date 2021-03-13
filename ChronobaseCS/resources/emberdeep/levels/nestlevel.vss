@@ -12,10 +12,6 @@ mut struct NestLevelController {
     NestLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: NestLevelController overrides ILevelController): Bool {
-    NestLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: NestLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

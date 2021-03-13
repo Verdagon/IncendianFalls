@@ -21,6 +21,7 @@ namespace Atharia.Model {
             context,
             game.root,
             squareLevelsOnly ? SquarePattern.MakeSquarePattern() : PentagonPattern9.makePentagon9Pattern(),
+            false,
             game.rand,
             8.0f);
 

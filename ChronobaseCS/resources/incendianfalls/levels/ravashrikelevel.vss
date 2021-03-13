@@ -12,10 +12,6 @@ mut struct RavashrikeLevelController {
     RavashrikeLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: RavashrikeLevelController overrides ILevelController): Bool {
-    RavashrikeLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: RavashrikeLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

@@ -66,9 +66,6 @@ public class SquareCaveLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return SquareCaveLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return SquareCaveLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return SquareCaveLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

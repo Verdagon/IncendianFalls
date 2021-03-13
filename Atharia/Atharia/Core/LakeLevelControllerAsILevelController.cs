@@ -66,9 +66,6 @@ public class LakeLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return LakeLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return LakeLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return LakeLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

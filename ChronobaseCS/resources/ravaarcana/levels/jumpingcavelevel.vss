@@ -13,10 +13,6 @@ mut struct JumpingCaveLevelController {
     JumpingCaveLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: JumpingCaveLevelController overrides ILevelController): Bool {
-    JumpingCaveLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: JumpingCaveLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

@@ -66,9 +66,6 @@ public class AncientTownLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return AncientTownLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return AncientTownLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return AncientTownLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

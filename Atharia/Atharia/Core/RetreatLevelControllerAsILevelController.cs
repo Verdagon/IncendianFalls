@@ -66,9 +66,6 @@ public class RetreatLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return RetreatLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return RetreatLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return RetreatLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

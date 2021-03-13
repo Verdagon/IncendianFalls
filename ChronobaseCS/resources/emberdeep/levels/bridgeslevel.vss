@@ -12,10 +12,6 @@ mut struct BridgesLevelController {
     BridgesLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: BridgesLevelController overrides ILevelController): Bool {
-    BridgesLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: BridgesLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

@@ -3,12 +3,13 @@ using Atharia.Model;
 using System.Collections.Generic;
 
 namespace IncendianFalls {
-  public delegate bool ICanStep(Location from, Location to, float totalCost);
-  public delegate bool IStopCondition(Location loc);
-  public delegate float IFutureCostGuesser(Location loc);
-  public delegate float IDetermineCost(Location from, Location to);
-
   public class AStarExplorer {
+    public delegate bool ICanStep(Location from, Location to, float totalCost);
+    public delegate bool IStopCondition(Location loc);
+    public delegate float IFutureCostGuesser(Location loc);
+    public delegate float IDetermineCost(Location from, Location to);
+    public delegate SortedSet<Location> IGetAdjacents(Location from);
+
     private class LowerFScoreComparer : IComparer<Location> {
       SortedDictionary<Location, GFAndCameFrom> fGAndCameFromByLocation;
       public LowerFScoreComparer(SortedDictionary<Location, GFAndCameFrom> fGAndCameFromByLocation) {
@@ -63,9 +64,8 @@ namespace IncendianFalls {
         ICanStep canStep) {
       var explorer =
           new AStarExplorer(
-              pattern,
               new SortedSet<Location>() {startLocation},
-              cornersAreAdjacent,
+              (a) => pattern.GetAdjacentLocations(a, cornersAreAdjacent),
               canStep,
               (a) => a == targetLocation,
               MakeDistanceCostGuesser(pattern, targetLocation),
@@ -80,9 +80,8 @@ namespace IncendianFalls {
     // Could optimize this... instead of having all these separate maps, combine some of them
     // so that they share cache lines.
     public AStarExplorer(
-        Pattern pattern,
         SortedSet<Location> startLocations,
-        bool cornersAreAdjacent,
+        IGetAdjacents getAdjacents,
         ICanStep canStep,
         IStopCondition stopCondition,
         IFutureCostGuesser costGuesser,
@@ -105,17 +104,17 @@ namespace IncendianFalls {
       while (openLocationsLowestFFirst.Count > 0) {
         Location currentLocation = DictionaryUtils.GetFirstKey<Location>(openLocationsLowestFFirst);
 
-        if (stopCondition(currentLocation)) {
-          return;
-        }
-
         bool removed = openLocationsLowestFFirst.Remove(currentLocation);
         //if (!removed) {
         //  throw new Exception("wtf");
         //}
         closedLocations.Add(currentLocation);
 
-        var neighbors = pattern.GetAdjacentLocations(currentLocation, cornersAreAdjacent);
+        if (stopCondition(currentLocation)) {
+          return;
+        }
+
+        var neighbors = getAdjacents(currentLocation);
         foreach (var neighborLocation in neighbors) {
           if (closedLocations.Contains(neighborLocation)) {
             continue;
@@ -151,7 +150,7 @@ namespace IncendianFalls {
       return;
     }
 
-    static IFutureCostGuesser MakeDistanceCostGuesser(Pattern pattern, Location target) {
+    public static IFutureCostGuesser MakeDistanceCostGuesser(Pattern pattern, Location target) {
       return (Location from) =>
           pattern.GetTileCenter(from).distance(pattern.GetTileCenter(target));
     }

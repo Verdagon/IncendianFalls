@@ -1,6 +1,7 @@
 
 mut struct Terrain {
   var pattern: Pattern;
+  considerCornersAdjacent: Bool;
   elevationStepHeight: Float;
   tiles: MutMap:(Location, TerrainTile);
 }

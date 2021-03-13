@@ -13,10 +13,6 @@ mut struct CliffLevelController {
     CliffLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: CliffLevelController overrides ILevelController): Bool {
-    CliffLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: CliffLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

@@ -56,7 +56,7 @@ namespace AthPlayer {
 
       Asserts.Assert(game.WaitingOnPlayerInput(), "Player not ready to act yet.");
 
-      if (this.game.level.terrain.pattern.LocationsAreAdjacent(game.player.location, newLocation, game.level.ConsiderCornersAdjacent())) {
+      if (this.game.level.terrain.pattern.LocationsAreAdjacent(game.player.location, newLocation, game.level.terrain.considerCornersAdjacent)) {
         var unitAtLocation = GetUnitAt(newLocation);
         if (unitAtLocation.Exists()) {
           var error = serverSS.RequestAttack(game.id, unitAtLocation.id);
@@ -67,13 +67,7 @@ namespace AthPlayer {
         }
       }
 
-      var sanityCheckPath =
-          AStarExplorer.Go(
-              game.level.terrain.pattern,
-              game.player.location,
-              newLocation,
-              game.level.ConsiderCornersAdjacent(),
-              (from, to, totalCost) => game.player.CanStep(game.level.terrain, from, to));
+      var sanityCheckPath = serverSS.RequestFindPath(game.id, game.player.id, newLocation);
       // If the path isnt whats already shown, then show it and bail out.
       // Maybe this could happen if the window isnt focused or something.
       if (!PathsEqual(path, sanityCheckPath)) {
@@ -129,13 +123,7 @@ namespace AthPlayer {
         if (maybeHoverLocation != null) {
           if (game.player.Exists()) {
             if (!maybeHoverLocation.Equals(game.player.location)) {
-              path =
-                  AStarExplorer.Go(
-                      game.level.terrain.pattern,
-                      game.player.location,
-                      maybeHoverLocation,
-                      game.level.ConsiderCornersAdjacent(),
-                      (from, to, totalCost) => game.player.CanStep(game.level.terrain, from, to));
+              path = serverSS.RequestFindPath(game.id, game.player.id, maybeHoverLocation);
             }
           }
         }

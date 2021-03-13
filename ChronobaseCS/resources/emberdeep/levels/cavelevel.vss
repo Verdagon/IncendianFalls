@@ -13,10 +13,6 @@ mut struct CaveLevelController {
     CaveLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: CaveLevelController overrides ILevelController): Bool {
-    CaveLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: CaveLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

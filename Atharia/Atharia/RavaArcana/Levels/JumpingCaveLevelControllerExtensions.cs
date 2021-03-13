@@ -31,8 +31,8 @@ namespace Atharia.Model {
           context,
           game.root,
           pattern,
+          false,
           game.rand,
-          considerCornersAdjacent,
           20.0f);
       context.Flare(context.root.GetDeterministicHashCode().ToString());
 
@@ -57,7 +57,7 @@ namespace Atharia.Model {
 
       var level =
           game.root.EffectLevelCreate(
-          new Vec3(0, -8, 16),
+              new Vec3(0, -8, 16),
               terrain,
               game.root.EffectUnitMutSetCreate(),
               NullILevelController.Null,

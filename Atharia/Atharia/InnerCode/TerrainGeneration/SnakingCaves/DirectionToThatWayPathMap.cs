@@ -10,9 +10,8 @@ namespace IncendianFalls {
       var fromPosition = pattern.GetTileCenter(fromLocation);
       var explorer =
           new AStarExplorer(
-              pattern,
               new SortedSet<Location>() { fromLocation },
-              considerCornersAdjacent,
+              (to) => pattern.GetAdjacentLocations(to, considerCornersAdjacent),
               (a, b, totalCost) => pattern.GetTileCenter(fromLocation).distance(pattern.GetTileCenter(b)) < SnakeDirector.SLITHER_DISTANCE,
               (a) => false,
               (a) => 0,

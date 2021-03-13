@@ -77,33 +77,33 @@ namespace IncendianFalls {
       //TerrainUtils.ConnectRooms(pattern, rand, roomByNumber);
       throw new Exception("put this back in");
 
-      var tiles = root.EffectTerrainTileByLocationMutMapCreate();
-
-      foreach (var room in roomByNumber.Values) {
-        foreach (var roomFloorLocation in room.floors) {
-          var tile =
-              root.EffectTerrainTileCreate(
-              NullITerrainTileEvent.Null,
-                  1, ITerrainTileComponentMutBunch.New(root));
-          tile.components.Add(root.EffectGrassTTCCreate().AsITerrainTileComponent());
-          tiles.Add(roomFloorLocation, tile);
-        }
-      }
-
-      var allTiles = new SortedSet<Location>(tiles.Keys);
-      var allAdjacent = pattern.GetAdjacentLocations(allTiles, true, true);
-      SetUtils.RemoveAll(allAdjacent, allTiles);
-      foreach (var borderLocation in allAdjacent) {
-        var tile =
-            root.EffectTerrainTileCreate(
-              NullITerrainTileEvent.Null,
-                2, ITerrainTileComponentMutBunch.New(root));
-        tile.components.Add(root.EffectGrassTTCCreate().AsITerrainTileComponent());
-        tiles.Add(borderLocation, tile);
-      }
-
-      terrain = root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
-      rooms = roomByNumber;
+      // var tiles = root.EffectTerrainTileByLocationMutMapCreate();
+      //
+      // foreach (var room in roomByNumber.Values) {
+      //   foreach (var roomFloorLocation in room.floors) {
+      //     var tile =
+      //         root.EffectTerrainTileCreate(
+      //         NullITerrainTileEvent.Null,
+      //             1, ITerrainTileComponentMutBunch.New(root));
+      //     tile.components.Add(root.EffectGrassTTCCreate().AsITerrainTileComponent());
+      //     tiles.Add(roomFloorLocation, tile);
+      //   }
+      // }
+      //
+      // var allTiles = new SortedSet<Location>(tiles.Keys);
+      // var allAdjacent = pattern.GetAdjacentLocations(allTiles, true, true);
+      // SetUtils.RemoveAll(allAdjacent, allTiles);
+      // foreach (var borderLocation in allAdjacent) {
+      //   var tile =
+      //       root.EffectTerrainTileCreate(
+      //         NullITerrainTileEvent.Null,
+      //           2, ITerrainTileComponentMutBunch.New(root));
+      //   tile.components.Add(root.EffectGrassTTCCreate().AsITerrainTileComponent());
+      //   tiles.Add(borderLocation, tile);
+      // }
+      //
+      // terrain = root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
+      // rooms = roomByNumber;
     }
 
     

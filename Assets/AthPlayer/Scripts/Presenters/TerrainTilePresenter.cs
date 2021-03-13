@@ -234,14 +234,15 @@ namespace AthPlayer {
           sideColor = Vector4Animation.Color(.15f, .1f, .05f);
 
           if (!overlayLocked) {
-            var rand = new System.Random(
-                location.groupX + location.groupY + location.indexInGroup + terrainTile.elevation).Next() % 12;
-            if (rand < 3) {
+            
+            var rand = new System.Random(location.groupX * 177 + location.groupY * 131 + location.indexInGroup * 91 + terrainTile.elevation * 79);
+            var kind = rand.Next() % 100;
+            if (kind < 20) {
               overlay =
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
-                          (new[] {"grass1", "grass2", "grass3"})[rand],
+                          (new[] {"grass1", "grass2", "grass3"})[rand.Next() % 3],
                           Vector4Animation.Color(0f, .2f + 0.0333f * terrainTile.elevation, 0),
                           0,
                           1,
@@ -249,17 +250,38 @@ namespace AthPlayer {
                           Vector4Animation.Color(0f, 0f, 0.5f)),
                       false,
                       Vector4Animation.Color(0, 0, 0));
-            } else if (rand < 6) {
-              rand -= 3;
+            } else if (kind < 30) {
               feature =
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
-                          (new[] {"7", "8", "9"})[rand],
+                          (new[] {"7", "8", "9"})[rand.Next() % 3],
                           Vector4Animation.Color(0, .2f + 0.0333f * terrainTile.elevation, 0),
                           0,
                           1,
                           OutlineMode.WithOutline),
+                      false,
+                      Vector4Animation.Color(0f, 0f, .5f));
+            } else if (kind < 40) {
+              var hues = new[] {
+                  Vector4Animation.Color(.3f, .05f, .05f), // red
+                  Vector4Animation.Color(.367f, .18f, 0), // orange
+                  Vector4Animation.Color(.367f, .367f, 0), //yellow
+                  Vector4Animation.Color(0, .367f, .367f), //cyan
+                  Vector4Animation.Color(0.367f, 0, .367f) //pink
+              };
+              var hue = hues[rand.Next() % hues.Length];
+              
+              feature =
+                  new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          (new[] {"flowers", "lotus", "rose"})[rand.Next() % 3],
+                          hue,
+                          0,
+                          0.75f,
+                          OutlineMode.WithBackOutline,
+                          Vector4Animation.Color(0, 0, 0)),
                       false,
                       Vector4Animation.Color(0f, 0f, .5f));
             }
@@ -463,21 +485,21 @@ namespace AthPlayer {
                   Vector4Animation.Color(1f, 1f, 1f));
           featureLocked = true;
         } else if (ttc is TreeTTCAsITerrainTileComponent) {
-          // var symbols = new string[] {"tree1", "tree2", "tree3"};
-          // var symbolI = new System.Random(location.groupX + location.groupY + location.indexInGroup + terrainTile.elevation).Next() % symbols.Length;
-          // var symbol = symbols[symbolI];
-          //
-          // feature =
-          //     new ExtrudedSymbolDescription(
-          //         RenderPriority.SYMBOL,
-          //         new SymbolDescription(
-          //             symbol,
-          //             Vector4Animation.Color(0, .3f, 0),
-          //             0,
-          //             1,
-          //             OutlineMode.WithOutline),
-          //         false,
-          //         Vector4Animation.Color(0f, .2f, 0f));
+          var symbols = new string[] {"tree1", "tree2", "tree3"};
+          var symbolI = new System.Random(location.groupX + location.groupY + location.indexInGroup + terrainTile.elevation).Next() % symbols.Length;
+          var symbol = symbols[symbolI];
+          
+          feature =
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      symbol,
+                      Vector4Animation.Color(0, .3f, 0),
+                      0,
+                      1,
+                      OutlineMode.WithOutline),
+                  false,
+                  Vector4Animation.Color(0f, .2f, 0f));
         } else if (ttc is CaveTTCAsITerrainTileComponent) {
               feature =
                   new ExtrudedSymbolDescription(

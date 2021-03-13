@@ -29,6 +29,8 @@ public static class IRequestParser {
         return new FireRequestAsIRequest(FireRequest.Parse(source));
       case "AttackRequest":
         return new AttackRequestAsIRequest(AttackRequest.Parse(source));
+      case "FindPathRequest":
+        return new FindPathRequestAsIRequest(FindPathRequest.Parse(source));
       case "CommActionRequest":
         return new CommActionRequestAsIRequest(CommActionRequest.Parse(source));
       case "ResumeRequest":

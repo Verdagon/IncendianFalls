@@ -1129,6 +1129,7 @@ public void visitTerrainEffect(ITerrainEffect effect) { effect.visitITerrainEffe
     // in the applier instead.
     root.TrustedEffectTerrainCreateWithId(effect.id
 ,  effect.incarnation.pattern
+,  effect.incarnation.considerCornersAdjacent
 ,  effect.incarnation.elevationStepHeight
 ,  effect.incarnation.tiles    );
 

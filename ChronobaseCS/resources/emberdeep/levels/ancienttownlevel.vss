@@ -12,10 +12,6 @@ mut struct AncientTownLevelController {
     AncientTownLevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: AncientTownLevelController overrides ILevelController): Bool {
-    AncientTownLevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: AncientTownLevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

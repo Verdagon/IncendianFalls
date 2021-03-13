@@ -12,10 +12,6 @@ mut struct Tutorial2LevelController {
     Tutorial2LevelControllerExtensions.GetName
   }
 
-  fn ConsiderCornersAdjacent(this: Tutorial2LevelController overrides ILevelController): Bool {
-    Tutorial2LevelControllerExtensions.ConsiderCornersAdjacent
-  }
-
   fn SimpleTrigger(
     this: Tutorial2LevelController overrides ILevelController,
     context: $IncendianFalls.SSContext,

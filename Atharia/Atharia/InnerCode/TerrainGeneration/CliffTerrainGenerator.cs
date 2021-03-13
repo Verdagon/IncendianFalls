@@ -211,7 +211,12 @@ namespace IncendianFalls {
         tiles.Add(location, tile);
       }
 
-      terrain = root.EffectTerrainCreate(pattern, elevationStepHeight, tiles);
+      terrain = 
+          root.EffectTerrainCreate(
+              pattern,
+              false,
+              elevationStepHeight,
+              tiles);
 
       // Between .74 and .75, pentagonal9 had tiles that had some neighbors with elevation
       // more than 2 above them. Going with .73 to be safe.

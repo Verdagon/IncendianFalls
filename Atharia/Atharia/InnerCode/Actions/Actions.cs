@@ -13,6 +13,9 @@ namespace IncendianFalls {
     public static readonly int LIGHTNING_CHARGE_DAMAGE = 4;
     public static readonly int BUMP_TIME_COST = 600;
 
+    public const int LEAP_DISTANCE = 3;
+
+
     public static void UnleashBide(
         Game game,
         Superstate superstate,
@@ -167,13 +170,10 @@ namespace IncendianFalls {
     }
 
     public static bool CanTeleportTo(
-        Game game,
+        Terrain terrain,
         Superstate superstate,
         Location destination) {
-      if (!game.level.terrain.tiles.ContainsKey(destination)) {
-        return false;
-      }
-      if (!game.level.terrain.tiles[destination].IsWalkable()) {
+      if (!CanTeleportToNotCountingUnits(terrain, destination)) {
         return false;
       }
       if (superstate.levelSuperstate.LocationContainsUnit(destination)) {
@@ -182,23 +182,94 @@ namespace IncendianFalls {
       return true;
     }
 
+    public static bool CanTeleportToNotCountingUnits(
+        Terrain terrain,
+        Location destination) {
+      if (!terrain.tiles.ContainsKey(destination)) {
+        return false;
+      }
+      if (!terrain.tiles[destination].IsWalkable()) {
+        return false;
+      }
+      return true;
+    }
+
+    public static SortedSet<Location> GetReachableLocations(Level level, Location source) {
+      var sourceLocElevation = level.terrain.tiles[source].elevation;
+
+      var leapExplorer =
+          new AStarExplorer(
+              new SortedSet<Location> {source},
+              (to) => level.terrain.GetAdjacentExistingLocations(to, level.terrain.considerCornersAdjacent),
+              (a, b, totalCost) => {
+                return totalCost <= LEAP_DISTANCE &&
+                    level.terrain.tiles[b].elevation <= sourceLocElevation &&
+                    level.terrain.tiles[b].IsWalkable();
+              },
+              (a) => false,
+              (a) => 0,
+              (a, b) => 1); // consider each space to be 1 distance
+      var connected = leapExplorer.getClosedLocations();
+      var leapable = new SortedSet<Location>();
+      foreach (var loc in connected) {
+        if (level.terrain.tiles[loc].elevation == sourceLocElevation) {
+          leapable.Add(loc);
+        }
+      }
+      var adjacents = level.terrain.GetAdjacentExistingLocations(source, level.terrain.considerCornersAdjacent);
+      SetUtils.RemoveAll(leapable, adjacents);
+      var steppable = new SortedSet<Location>();
+      foreach (var adjacent in adjacents) {
+        var adjacentTile = level.terrain.tiles[adjacent];
+        var adjacentLocElevation = adjacentTile.elevation;
+        var elevationFine = adjacentLocElevation <= sourceLocElevation + 1 &&
+            adjacentLocElevation >= sourceLocElevation - 2;
+        if (!elevationFine) {
+          continue;
+        }
+        if (!adjacentTile.IsWalkable()) {
+          continue;
+        }
+        steppable.Add(adjacent);
+      }
+
+      var reachable = new SortedSet<Location>();
+      SetUtils.AddAll(reachable, leapable);
+      SetUtils.AddAll(reachable, steppable);
+      return reachable;
+    }
+    
     public static bool CanStep(
         Game game,
         Superstate superstate,
         Unit unit,
         Location destination) {
+      if (!CanStepNotCountingUnits(game, unit.location, destination)) {
+        return false;
+      }
+      if (!CanTeleportTo(game.level.terrain, superstate, destination)) {
+        return false;
+      }
+      return true;
+    }
+
+    public static bool CanStepNotCountingUnits(
+        Game game,
+        Location source,
+        Location destination) {
       if (!game.level.terrain.TileExists(destination)) {
         return false;
       }
-      if (!game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent())) {
+      if (!GetReachableLocations(game.level, source).Contains(destination)) {
         return false;
       }
-      if (game.level.terrain.GetElevationDifference(unit.location, destination) > 2) {
+      if (game.level.terrain.GetElevationDifference(source, destination) > 2) {
         return false;
       }
-      if (!CanTeleportTo(game, superstate, destination)) {
+      if (!CanTeleportToNotCountingUnits(game.level.terrain, destination)) {
         return false;
       }
+      
       return true;
     }
 
@@ -210,9 +281,9 @@ namespace IncendianFalls {
           bool overrideAdjacentCheck,
           bool costsTime) {
       Asserts.Assert(game.level.terrain.tiles[destination].IsWalkable(), "Not walkable!");
-      Asserts.Assert(
-        overrideAdjacentCheck || game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.ConsiderCornersAdjacent()),
-        "Adjacent check failed!");
+      // Asserts.Assert(
+      //   overrideAdjacentCheck || game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.terrain.considerCornersAdjacent),
+      //   "Adjacent check failed!");
       Asserts.Assert(!superstate.levelSuperstate.LocationContainsUnit(destination), "Unit is there!");
 
       bool removed = superstate.levelSuperstate.RemoveUnit(unit);

@@ -585,6 +585,8 @@
         <Compile Include="Core\FallsTTCMutSetDeleteEffect.cs" />
         <Compile Include="Core\FallsTTCMutSetIncarnation.cs" />
         <Compile Include="Core\FallsTTCMutSetRemoveEffect.cs" />
+        <Compile Include="Core\FindPathRequest.cs" />
+        <Compile Include="Core\FindPathRequestAsIRequest.cs" />
         <Compile Include="Core\FireBombImpulse.cs" />
         <Compile Include="Core\FireBombImpulseAsIDestructible.cs" />
         <Compile Include="Core\FireBombImpulseAsIImpulse.cs" />
@@ -2413,6 +2415,7 @@
         <Compile Include="Requests\CommActionRequestExecutor.cs" />
         <Compile Include="Requests\CounterRequestExecutor.cs" />
         <Compile Include="Requests\DefendRequestExecutor.cs" />
+        <Compile Include="Requests\FindPathRequestExecutor.cs" />
         <Compile Include="Requests\FireBombRequestExecutor.cs" />
         <Compile Include="Requests\FireRequestExecutor.cs" />
         <Compile Include="Requests\FollowDirectiveRequestExecutor.cs" />

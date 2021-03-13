@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using Atharia.Model;
 
@@ -12,14 +13,15 @@ namespace IncendianFalls {
         SSContext context,
         Root root,
         Pattern pattern,
-        Rand rand,
         bool considerCornersAdjacent,
+        Rand rand,
         float radius) {
       float elevationStepHeight = .2f;
 
       var terrain =
           root.EffectTerrainCreate(
               pattern,
+              considerCornersAdjacent,
               elevationStepHeight,
               root.EffectTerrainTileByLocationMutMapCreate());
 
@@ -30,43 +32,61 @@ namespace IncendianFalls {
 
       var (mainLocs, sideLocs) = SnakeDirector.addSnakes(rand, terrain, considerCornersAdjacent, originLocation, radius, circleLocs);
       
-      var (overlayLocs, bridges) = Bridger.addBridgesAndOverlay(terrain, considerCornersAdjacent, circleLocs, mainLocs, sideLocs);
+      var pathLocs = new SortedSet<Location>(mainLocs);
+      SetUtils.AddAll(pathLocs, sideLocs);
 
+      var (overlayLocs, bridges) =
+          Bridger.addBridgesAndOverlay(terrain, considerCornersAdjacent, circleLocs, mainLocs, sideLocs);
+
+      
       foreach (var circleLoc in circleLocs) {
         if (!terrain.TileExists(circleLoc)) {
           AddTile(terrain, circleLoc, WATER_HEIGHT, terrain.root.EffectWaterTTCCreate().AsITerrainTileComponent());
         }
       }
 
-      var overlayLocsNew = removeCentersOfLargeIslands(rand, terrain, circleLocs, overlayLocs);
-      var overlayAndCenterPondLocs = overlayLocs;
-      overlayLocs = overlayLocsNew;
+      overlayLocs = removeCentersOfLargeIslands(rand, terrain, circleLocs, overlayLocs);
+      
+      var bridgeLocs = new SortedSet<Location>();
+      foreach (var bridge in bridges) {
+        SetUtils.AddAll(bridgeLocs, bridge.getAllLocations());
+      }
 
-      var pathLocs = new SortedSet<Location>(mainLocs);
-      SetUtils.AddAll(pathLocs, sideLocs);
+      var connections = connectEverything(rand, terrain, circleLocs, pathLocs, overlayLocs, bridgeLocs);
+      var connectionLocs = new SortedSet<Location>();
+      foreach (var connection in connections) {
+        SetUtils.AddAll(connectionLocs, connection.getAllLocations());
+      }
 
-      connectEverything(rand, terrain, circleLocs, pathLocs, overlayLocs, overlayAndCenterPondLocs, bridges);
+      // Now lets noise a bit the tiles that don't much matter for understandability...
+      // Don't noise bridges or connections or the tiles next to them. Otherwise, add 0-1 elevation!
+      var noiseLocs = new SortedSet<Location>();
+      SetUtils.AddAll(noiseLocs, pathLocs);
+      SetUtils.AddAll(noiseLocs, overlayLocs);
+      
+      var bridgeAndAdjacentLocs = terrain.GetAdjacentExistingLocations(bridgeLocs, true, true);
+      var connectionAndAdjacentLocs = terrain.GetAdjacentExistingLocations(connectionLocs, true, true);
+      SetUtils.RemoveAll(noiseLocs, bridgeAndAdjacentLocs);
+      SetUtils.RemoveAll(noiseLocs, connectionAndAdjacentLocs);
+
+      foreach (var noiseLoc in noiseLocs) {
+        terrain.tiles[noiseLoc].elevation += rand.Next(0, 1);
+      }
       
       // we'll need to make any locations next to ADEH -1, not just IJKL. See BridgeMaking2.png for an example.
 
       return terrain;
     }
 
-    static void connectEverything(
+    static List<RegionConnection> connectEverything(
         Rand rand,
         Terrain terrain,
         SortedSet<Location> circleLocs,
         SortedSet<Location> pathLocs,
         SortedSet<Location> overlayLocs,
-        SortedSet<Location> overlayAndCenterPondLocs,
-        List<Bridge> bridges) {
+        SortedSet<Location> bridgeLocs) {
       // We read from pathLocs instead of the terrain because some of the path locs were lowered
       // as part of the bridges.
-
-      var bridgeLocs = new SortedSet<Location>();
-      foreach (var bridge in bridges) {
-        SetUtils.AddAll(bridgeLocs, bridge.getAllLocations());
-      }
 
       var (regionIdToLocsMap, locToRegionIdMap) = regionize(terrain, pathLocs, overlayLocs);
 
@@ -128,6 +148,8 @@ namespace IncendianFalls {
 
       var numOriginalRegions = regionIdToLocsMap.Count;
 
+      var implementedConnections = new List<RegionConnection>();
+      
       while (new SortedSet<string>(regionIdToRealmIdMap.Values).Count > 1) {
         for (int thisRegionId = 0; ; thisRegionId++) {
           if (thisRegionId == numOriginalRegions) {
@@ -160,12 +182,15 @@ namespace IncendianFalls {
             implementConnection(
                 terrain, regionIdToLocsMap, locToRegionIdMap, regionIdToRealmIdMap, locToPossibleConnectionMap,
                 regionIdToOtherRegionIdToPossibleConnectionMap, connection);
+            implementedConnections.Add(connection);
             // We connected our realm to another realm!
             // Revisit whether we need to continue with this entire endeavor. We might only have one realm left.
             break;
           }
         }
       }
+
+      return implementedConnections;
     }
 
     static void implementConnection(
@@ -247,9 +272,8 @@ namespace IncendianFalls {
       while (unregionedPathLocs.Count > 0) {
         var explorer =
             new AStarExplorer(
-                terrain.pattern,
                 new SortedSet<Location>{ SetUtils.GetFirst(unregionedPathLocs) },
-                true,
+                (to) => terrain.pattern.GetAdjacentLocations(to, false),
                 (from, to, totalCost) => pathLocs.Contains(to),
                 (to) => false, // dont stop early
                 (to) => 0, // no goal
@@ -265,9 +289,8 @@ namespace IncendianFalls {
       while (unregionedOverlayLocs.Count > 0) {
         var explorer =
             new AStarExplorer(
-                terrain.pattern,
                 new SortedSet<Location>{ SetUtils.GetFirst(unregionedOverlayLocs) },
-                true,
+                (to) => terrain.pattern.GetAdjacentLocations(to, false),
                 (from, to, totalCost) => overlayLocs.Contains(to),
                 (to) => false, // dont stop early
                 (to) => 0, // no goal
@@ -297,9 +320,8 @@ namespace IncendianFalls {
       SetUtils.RemoveAll(nonOverlayLocs, overlayLocs);
       var explorer =
           new AStarExplorer(
-              terrain.pattern,
               nonOverlayLocs,
-              true,
+              (to) => terrain.pattern.GetAdjacentLocations(to, true),
               (a, b, totalCost) => overlayLocs.Contains(b),
               (b) => false, // Dont stop early
               (a) => 0, // No goal
@@ -310,9 +332,9 @@ namespace IncendianFalls {
           // do nothing
         } else if (explorer.GetCostTo(loc) <= 2.5) {
           // randomly put stalagmites in occasionally
-          if (rand.Next() % 5 == 0) {
-            tile.components.Add(terrain.root.EffectTreeTTCCreate().AsITerrainTileComponent());
-          }
+          // if (rand.Next() % 5 == 0) {
+          //   tile.components.Add(terrain.root.EffectTreeTTCCreate().AsITerrainTileComponent());
+          // }
         } else {
           foreach (var mud in terrain.tiles[loc].components.GetAllGrassTTC()) {
             tile.components.Remove(mud.AsITerrainTileComponent());

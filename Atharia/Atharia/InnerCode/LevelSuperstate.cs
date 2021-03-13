@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Atharia.Model;
+using IncendianFalls;
 
 namespace Atharia.Model {
   public delegate bool LocationPredicate(Location location);
@@ -11,6 +12,7 @@ namespace Atharia.Model {
 
     // Even if a unit is on that location, the location will be in here.
     SortedSet<Location> walkableLocations;
+    SortedDictionary<Location, SortedSet<Location>> locToReachableLocs;
 
     SortedDictionary<Location, Unit> liveUnitByLocation;
     SortedSet<Location> noUnitLocations;
@@ -23,10 +25,15 @@ namespace Atharia.Model {
     public LevelSuperstate(Level level) {
       this.level = level;
       walkableLocations = new SortedSet<Location>();
+      locToReachableLocs = new SortedDictionary<Location, SortedSet<Location>>();
       liveUnitByLocation = new SortedDictionary<Location, Unit>();
       locationsWithActingTTCs = new SortedSet<Location>();
       noUnitLocations = new SortedSet<Location>();
       Reconstruct(level);
+    }
+
+    public SortedSet<Location> GetReachableLocations(Location loc) {
+      return new SortedSet<Location>(locToReachableLocs[loc]);
     }
 
     public void AddedActingTTC(Location location) {
@@ -83,6 +90,7 @@ namespace Atharia.Model {
     public void Reconstruct(Level level) {
       walkableLocations.Clear();
       locationsWithActingTTCs.Clear();
+      locToReachableLocs.Clear();
       foreach (var entry in level.terrain.tiles) {
         var location = entry.Key;
         var terrainTile = entry.Value;
@@ -92,6 +100,7 @@ namespace Atharia.Model {
         if (terrainTile.components.GetAllIActingTTC().Count > 0) {
           locationsWithActingTTCs.Add(location);
         }
+        locToReachableLocs.Add(location, Actions.GetReachableLocations(level, location));
       }
 
       liveUnitByLocation.Clear();

@@ -66,9 +66,6 @@ public class JumpingCaveLevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return JumpingCaveLevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return JumpingCaveLevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return JumpingCaveLevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

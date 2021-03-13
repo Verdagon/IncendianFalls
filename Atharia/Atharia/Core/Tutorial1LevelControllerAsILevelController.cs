@@ -66,9 +66,6 @@ public class Tutorial1LevelControllerAsILevelController : ILevelController {
   public string GetName() {
     return Tutorial1LevelControllerExtensions.GetName(obj);
   }
-  public bool ConsiderCornersAdjacent() {
-    return Tutorial1LevelControllerExtensions.ConsiderCornersAdjacent(obj);
-  }
   public Void SimpleTrigger(IncendianFalls.SSContext context, Game game, Superstate superstate, string triggerName) {
     return Tutorial1LevelControllerExtensions.SimpleTrigger(obj, context, game, superstate, triggerName);
   }

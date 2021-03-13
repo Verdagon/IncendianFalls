@@ -78,8 +78,8 @@ namespace Atharia.Model {
       return new List<Location>(result.Keys);
     }
 
-    public static List<Location> GetAdjacentLocations(this Pattern pattern, Location loc, bool considerCornersAdjacent) {
-      List<Location> result = new List<Location>();
+    public static SortedSet<Location> GetAdjacentLocations(this Pattern pattern, Location loc, bool considerCornersAdjacent) {
+      SortedSet<Location> result = new SortedSet<Location>();
       foreach (Location relativeLoc in pattern.getRelativeAdjacentLocations(loc.indexInGroup, considerCornersAdjacent)) {
         result.Add(new Location(
           loc.groupX + relativeLoc.groupX,
@@ -172,8 +172,7 @@ namespace Atharia.Model {
     }
 
     public static bool LocationsAreAdjacent(this Pattern pattern, Location a, Location b, bool considerCornersAdjacent) {
-      var locsAdjacentToA = pattern.GetAdjacentLocations(a, considerCornersAdjacent);
-      return 0 <= locsAdjacentToA.FindIndex(delegate (Location hay) { return hay == b; });
+      return pattern.GetAdjacentLocations(a, considerCornersAdjacent).Contains(b);
     }
 
     public static bool LineIntersectsLocation(this Pattern pattern, Vec2 position, Vec2 direction, Location location) {
