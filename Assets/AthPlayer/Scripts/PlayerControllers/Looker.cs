@@ -267,6 +267,7 @@ namespace AthPlayer {
                     Vector4Animation.Color(0, 0, 0)),
                 "Ring of Speed"));
         } else if (detail is TemporaryCloneAICapabilityUCAsIUnitComponent) {
+        } else if (detail is EvolvifyAICapabilityUCAsIUnitComponent) {
         } else if (detail is TutorialDefyCounterUCAsIUnitComponent) {
         } else if (detail is LightningChargingUCAsIUnitComponent) {
         } else if (detail is LightningChargedUCAsIUnitComponent) {

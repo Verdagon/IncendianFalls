@@ -123,7 +123,9 @@ namespace AthPlayer {
         if (maybeHoverLocation != null) {
           if (game.player.Exists()) {
             if (!maybeHoverLocation.Equals(game.player.location)) {
-              path = serverSS.RequestFindPath(game.id, game.player.id, maybeHoverLocation);
+              if (serverSS.waitingEffects.Count == 0) {
+                path = serverSS.RequestFindPath(game.id, game.player.id, maybeHoverLocation);
+              }
             }
           }
         }

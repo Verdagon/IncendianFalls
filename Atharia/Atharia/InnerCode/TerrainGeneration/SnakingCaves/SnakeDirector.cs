@@ -112,10 +112,6 @@ namespace IncendianFalls {
           }
         }
       }
-      
-      foreach (var locationAndTile in terrain.tiles) {
-        locationAndTile.Value.components.Add(terrain.root.EffectGrassTTCCreate().AsITerrainTileComponent());
-      }
     }
 
     static void AddRightSides(Terrain terrain, SortedSet<Location> circleLocs, List<Snake> deadSnakes) {
@@ -164,8 +160,7 @@ namespace IncendianFalls {
               }
               if (isRightOfB) {
                 if (!terrain.tiles.ContainsKey(bAdjacentLoc)) {
-                  SnakingCaveTerrainGenerator.AddTile(
-                      terrain, bAdjacentLoc, SnakingCaveTerrainGenerator.PATH_HEIGHT, terrain.root.EffectGrassTTCCreate().AsITerrainTileComponent());
+                  IntertwiningCaveTerrainGenerator.AddTile(terrain, bAdjacentLoc, IntertwiningCaveTerrainGenerator.PATH_HEIGHT);
                 }
               }
             }

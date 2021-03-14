@@ -209,7 +209,7 @@ namespace ConsoleDriveyThing {
           featurePainters.Add(() => cell.Paint(ConsoleColor.Green));
           recognized = true;
         }
-        if (tc is FireTTCAsITerrainTileComponent) {
+        if (tc is OnFireTTCAsITerrainTileComponent) {
           featurePainters.Add(() => cell.Paint(ConsoleColor.Red));
           recognized = true;
         }

@@ -37,7 +37,10 @@ IKamikazeAICapabilityUCEffectVisitor,
 IInvincibilityUCEffectVisitor,
 IGuardAICapabilityUCEffectVisitor,
 INoImpulseEffectVisitor,
+IEvolvifyImpulseEffectVisitor,
+IEvolvifyAICapabilityUCEffectVisitor,
 IFireImpulseEffectVisitor,
+IOnFireUCEffectVisitor,
 IDefyingUCEffectVisitor,
 IDefyImpulseEffectVisitor,
 ICounteringUCEffectVisitor,
@@ -58,6 +61,11 @@ ITerrainEffectVisitor,
 ISimplePresenceTriggerTTCEffectVisitor,
 IFireBombImpulseEffectVisitor,
 IFireBombTTCEffectVisitor,
+IFlowerTTCEffectVisitor,
+ILotusTTCEffectVisitor,
+IRoseTTCEffectVisitor,
+ILeafTTCEffectVisitor,
+IOnFireTTCEffectVisitor,
 IMarkerTTCEffectVisitor,
 ILevelLinkTTCEffectVisitor,
 IMudTTCEffectVisitor,
@@ -74,7 +82,6 @@ IFloorTTCEffectVisitor,
 ICaveWallTTCEffectVisitor,
 ICaveTTCEffectVisitor,
 IFallsTTCEffectVisitor,
-IFireTTCEffectVisitor,
 IObsidianFloorTTCEffectVisitor,
 IMagmaTTCEffectVisitor,
 ICliffTTCEffectVisitor,
@@ -139,6 +146,7 @@ IMoveImpulseStrongMutSetEffectVisitor,
 IKamikazeJumpImpulseStrongMutSetEffectVisitor,
 IKamikazeTargetImpulseStrongMutSetEffectVisitor,
 INoImpulseStrongMutSetEffectVisitor,
+IEvolvifyImpulseStrongMutSetEffectVisitor,
 IFireImpulseStrongMutSetEffectVisitor,
 IDefyImpulseStrongMutSetEffectVisitor,
 ICounterImpulseStrongMutSetEffectVisitor,
@@ -153,16 +161,22 @@ ITimeCloneAICapabilityUCWeakMutSetEffectVisitor,
 IDoomedUCWeakMutSetEffectVisitor,
 IMiredUCWeakMutSetEffectVisitor,
 IInvincibilityUCWeakMutSetEffectVisitor,
+IOnFireUCWeakMutSetEffectVisitor,
 IDefyingUCWeakMutSetEffectVisitor,
 ICounteringUCWeakMutSetEffectVisitor,
 IAttackAICapabilityUCWeakMutSetEffectVisitor,
 IUnitMutSetEffectVisitor,
 ISimplePresenceTriggerTTCMutSetEffectVisitor,
 IItemTTCMutSetEffectVisitor,
+IFlowerTTCMutSetEffectVisitor,
+ILotusTTCMutSetEffectVisitor,
+IRoseTTCMutSetEffectVisitor,
+ILeafTTCMutSetEffectVisitor,
 IKamikazeTargetTTCMutSetEffectVisitor,
 IWarperTTCMutSetEffectVisitor,
 ITimeAnchorTTCMutSetEffectVisitor,
 IFireBombTTCMutSetEffectVisitor,
+IOnFireTTCMutSetEffectVisitor,
 IMarkerTTCMutSetEffectVisitor,
 ILevelLinkTTCMutSetEffectVisitor,
 IMudTTCMutSetEffectVisitor,
@@ -179,7 +193,6 @@ IFloorTTCMutSetEffectVisitor,
 ICaveWallTTCMutSetEffectVisitor,
 ICaveTTCMutSetEffectVisitor,
 IFallsTTCMutSetEffectVisitor,
-IFireTTCMutSetEffectVisitor,
 IObsidianFloorTTCMutSetEffectVisitor,
 IMagmaTTCMutSetEffectVisitor,
 ICliffTTCMutSetEffectVisitor,
@@ -197,9 +210,11 @@ ITemporaryCloneAICapabilityUCMutSetEffectVisitor,
 ISummonAICapabilityUCMutSetEffectVisitor,
 IKamikazeAICapabilityUCMutSetEffectVisitor,
 IGuardAICapabilityUCMutSetEffectVisitor,
+IEvolvifyAICapabilityUCMutSetEffectVisitor,
 ITimeCloneAICapabilityUCMutSetEffectVisitor,
 IDoomedUCMutSetEffectVisitor,
 IMiredUCMutSetEffectVisitor,
+IOnFireUCMutSetEffectVisitor,
 IAttackAICapabilityUCMutSetEffectVisitor,
 ICounteringUCMutSetEffectVisitor,
 ILightningChargedUCMutSetEffectVisitor,
@@ -375,9 +390,11 @@ public void visitIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffect effe
 ,  effect.incarnation.membersSummonAICapabilityUCMutSet
 ,  effect.incarnation.membersKamikazeAICapabilityUCMutSet
 ,  effect.incarnation.membersGuardAICapabilityUCMutSet
+,  effect.incarnation.membersEvolvifyAICapabilityUCMutSet
 ,  effect.incarnation.membersTimeCloneAICapabilityUCMutSet
 ,  effect.incarnation.membersDoomedUCMutSet
 ,  effect.incarnation.membersMiredUCMutSet
+,  effect.incarnation.membersOnFireUCMutSet
 ,  effect.incarnation.membersAttackAICapabilityUCMutSet
 ,  effect.incarnation.membersCounteringUCMutSet
 ,  effect.incarnation.membersLightningChargedUCMutSet
@@ -819,6 +836,35 @@ public void visitNoImpulseEffect(INoImpulseEffect effect) { effect.visitINoImpul
   }
 
      
+public void visitEvolvifyImpulseEffect(IEvolvifyImpulseEffect effect) { effect.visitIEvolvifyImpulseEffect(this); }
+  public void visitEvolvifyImpulseCreateEffect(EvolvifyImpulseCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectEvolvifyImpulseCreateWithId(effect.id
+,  effect.incarnation.weight
+,  effect.incarnation.moveToLocation    );
+
+}
+
+  public void visitEvolvifyImpulseDeleteEffect(EvolvifyImpulseDeleteEffect effect) {
+    root.EffectEvolvifyImpulseDelete(effect.id);
+  }
+
+     
+public void visitEvolvifyAICapabilityUCEffect(IEvolvifyAICapabilityUCEffect effect) { effect.visitIEvolvifyAICapabilityUCEffect(this); }
+  public void visitEvolvifyAICapabilityUCCreateEffect(EvolvifyAICapabilityUCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectEvolvifyAICapabilityUCCreateWithId(effect.id
+    );
+
+}
+
+  public void visitEvolvifyAICapabilityUCDeleteEffect(EvolvifyAICapabilityUCDeleteEffect effect) {
+    root.EffectEvolvifyAICapabilityUCDelete(effect.id);
+  }
+
+     
 public void visitFireImpulseEffect(IFireImpulseEffect effect) { effect.visitIFireImpulseEffect(this); }
   public void visitFireImpulseCreateEffect(FireImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
@@ -831,6 +877,20 @@ public void visitFireImpulseEffect(IFireImpulseEffect effect) { effect.visitIFir
 
   public void visitFireImpulseDeleteEffect(FireImpulseDeleteEffect effect) {
     root.EffectFireImpulseDelete(effect.id);
+  }
+
+     
+public void visitOnFireUCEffect(IOnFireUCEffect effect) { effect.visitIOnFireUCEffect(this); }
+  public void visitOnFireUCCreateEffect(OnFireUCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectOnFireUCCreateWithId(effect.id
+,  effect.incarnation.turnsRemaining    );
+
+}
+
+  public void visitOnFireUCDeleteEffect(OnFireUCDeleteEffect effect) {
+    root.EffectOnFireUCDelete(effect.id);
   }
 
      
@@ -1084,10 +1144,15 @@ public void visitITerrainTileComponentMutBunchEffect(IITerrainTileComponentMutBu
     root.TrustedEffectITerrainTileComponentMutBunchCreateWithId(effect.id
 ,  effect.incarnation.membersSimplePresenceTriggerTTCMutSet
 ,  effect.incarnation.membersItemTTCMutSet
+,  effect.incarnation.membersFlowerTTCMutSet
+,  effect.incarnation.membersLotusTTCMutSet
+,  effect.incarnation.membersRoseTTCMutSet
+,  effect.incarnation.membersLeafTTCMutSet
 ,  effect.incarnation.membersKamikazeTargetTTCMutSet
 ,  effect.incarnation.membersWarperTTCMutSet
 ,  effect.incarnation.membersTimeAnchorTTCMutSet
 ,  effect.incarnation.membersFireBombTTCMutSet
+,  effect.incarnation.membersOnFireTTCMutSet
 ,  effect.incarnation.membersMarkerTTCMutSet
 ,  effect.incarnation.membersLevelLinkTTCMutSet
 ,  effect.incarnation.membersMudTTCMutSet
@@ -1104,7 +1169,6 @@ public void visitITerrainTileComponentMutBunchEffect(IITerrainTileComponentMutBu
 ,  effect.incarnation.membersCaveWallTTCMutSet
 ,  effect.incarnation.membersCaveTTCMutSet
 ,  effect.incarnation.membersFallsTTCMutSet
-,  effect.incarnation.membersFireTTCMutSet
 ,  effect.incarnation.membersObsidianFloorTTCMutSet
 ,  effect.incarnation.membersMagmaTTCMutSet
 ,  effect.incarnation.membersCliffTTCMutSet
@@ -1192,6 +1256,83 @@ public void visitFireBombTTCEffect(IFireBombTTCEffect effect) { effect.visitIFir
      
   public void visitFireBombTTCSetTurnsUntilExplosionEffect(FireBombTTCSetTurnsUntilExplosionEffect effect) {
     root.EffectFireBombTTCSetTurnsUntilExplosion(
+      effect.id,
+  effect.newValue
+    );
+  }
+
+public void visitFlowerTTCEffect(IFlowerTTCEffect effect) { effect.visitIFlowerTTCEffect(this); }
+  public void visitFlowerTTCCreateEffect(FlowerTTCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectFlowerTTCCreateWithId(effect.id
+    );
+
+}
+
+  public void visitFlowerTTCDeleteEffect(FlowerTTCDeleteEffect effect) {
+    root.EffectFlowerTTCDelete(effect.id);
+  }
+
+     
+public void visitLotusTTCEffect(ILotusTTCEffect effect) { effect.visitILotusTTCEffect(this); }
+  public void visitLotusTTCCreateEffect(LotusTTCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectLotusTTCCreateWithId(effect.id
+    );
+
+}
+
+  public void visitLotusTTCDeleteEffect(LotusTTCDeleteEffect effect) {
+    root.EffectLotusTTCDelete(effect.id);
+  }
+
+     
+public void visitRoseTTCEffect(IRoseTTCEffect effect) { effect.visitIRoseTTCEffect(this); }
+  public void visitRoseTTCCreateEffect(RoseTTCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectRoseTTCCreateWithId(effect.id
+    );
+
+}
+
+  public void visitRoseTTCDeleteEffect(RoseTTCDeleteEffect effect) {
+    root.EffectRoseTTCDelete(effect.id);
+  }
+
+     
+public void visitLeafTTCEffect(ILeafTTCEffect effect) { effect.visitILeafTTCEffect(this); }
+  public void visitLeafTTCCreateEffect(LeafTTCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectLeafTTCCreateWithId(effect.id
+    );
+
+}
+
+  public void visitLeafTTCDeleteEffect(LeafTTCDeleteEffect effect) {
+    root.EffectLeafTTCDelete(effect.id);
+  }
+
+     
+public void visitOnFireTTCEffect(IOnFireTTCEffect effect) { effect.visitIOnFireTTCEffect(this); }
+  public void visitOnFireTTCCreateEffect(OnFireTTCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectOnFireTTCCreateWithId(effect.id
+,  effect.incarnation.turnsRemaining    );
+
+}
+
+  public void visitOnFireTTCDeleteEffect(OnFireTTCDeleteEffect effect) {
+    root.EffectOnFireTTCDelete(effect.id);
+  }
+
+     
+  public void visitOnFireTTCSetTurnsRemainingEffect(OnFireTTCSetTurnsRemainingEffect effect) {
+    root.EffectOnFireTTCSetTurnsRemaining(
       effect.id,
   effect.newValue
     );
@@ -1423,20 +1564,6 @@ public void visitFallsTTCEffect(IFallsTTCEffect effect) { effect.visitIFallsTTCE
   }
 
      
-public void visitFireTTCEffect(IFireTTCEffect effect) { effect.visitIFireTTCEffect(this); }
-  public void visitFireTTCCreateEffect(FireTTCCreateEffect effect) {
-    // For now we're just feeding the remote ID in. Someday we might want to have a map
-    // in the applier instead.
-    root.TrustedEffectFireTTCCreateWithId(effect.id
-    );
-
-}
-
-  public void visitFireTTCDeleteEffect(FireTTCDeleteEffect effect) {
-    root.EffectFireTTCDelete(effect.id);
-  }
-
-     
 public void visitObsidianFloorTTCEffect(IObsidianFloorTTCEffect effect) { effect.visitIObsidianFloorTTCEffect(this); }
   public void visitObsidianFloorTTCCreateEffect(ObsidianFloorTTCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
@@ -1620,6 +1747,7 @@ public void visitIPreActingUCWeakMutBunchEffect(IIPreActingUCWeakMutBunchEffect 
 ,  effect.incarnation.membersDoomedUCWeakMutSet
 ,  effect.incarnation.membersMiredUCWeakMutSet
 ,  effect.incarnation.membersInvincibilityUCWeakMutSet
+,  effect.incarnation.membersOnFireUCWeakMutSet
 ,  effect.incarnation.membersDefyingUCWeakMutSet
 ,  effect.incarnation.membersCounteringUCWeakMutSet
 ,  effect.incarnation.membersAttackAICapabilityUCWeakMutSet    );
@@ -1660,6 +1788,7 @@ public void visitIImpulseStrongMutBunchEffect(IIImpulseStrongMutBunchEffect effe
 ,  effect.incarnation.membersKamikazeJumpImpulseStrongMutSet
 ,  effect.incarnation.membersKamikazeTargetImpulseStrongMutSet
 ,  effect.incarnation.membersNoImpulseStrongMutSet
+,  effect.incarnation.membersEvolvifyImpulseStrongMutSet
 ,  effect.incarnation.membersFireImpulseStrongMutSet
 ,  effect.incarnation.membersDefyImpulseStrongMutSet
 ,  effect.incarnation.membersCounterImpulseStrongMutSet
@@ -2525,6 +2654,23 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
       root.EffectNoImpulseStrongMutSetRemove(effect.id, effect.element);
     }
        
+    public void visitEvolvifyImpulseStrongMutSetEffect(IEvolvifyImpulseStrongMutSetEffect effect) { effect.visitIEvolvifyImpulseStrongMutSetEffect(this); }
+    public void visitEvolvifyImpulseStrongMutSetCreateEffect(EvolvifyImpulseStrongMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectEvolvifyImpulseStrongMutSetCreateWithId(effect.id);
+    }
+    public void visitEvolvifyImpulseStrongMutSetDeleteEffect(EvolvifyImpulseStrongMutSetDeleteEffect effect) {
+      root.EffectEvolvifyImpulseStrongMutSetDelete(effect.id);
+    }
+    public void visitEvolvifyImpulseStrongMutSetAddEffect(EvolvifyImpulseStrongMutSetAddEffect effect) {
+     root.EffectEvolvifyImpulseStrongMutSetAdd(effect.id, effect.element);
+ }
+    public void visitEvolvifyImpulseStrongMutSetRemoveEffect(EvolvifyImpulseStrongMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectEvolvifyImpulseStrongMutSetRemove(effect.id, effect.element);
+    }
+       
     public void visitFireImpulseStrongMutSetEffect(IFireImpulseStrongMutSetEffect effect) { effect.visitIFireImpulseStrongMutSetEffect(this); }
     public void visitFireImpulseStrongMutSetCreateEffect(FireImpulseStrongMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
@@ -2763,6 +2909,23 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
       root.EffectInvincibilityUCWeakMutSetRemove(effect.id, effect.element);
     }
        
+    public void visitOnFireUCWeakMutSetEffect(IOnFireUCWeakMutSetEffect effect) { effect.visitIOnFireUCWeakMutSetEffect(this); }
+    public void visitOnFireUCWeakMutSetCreateEffect(OnFireUCWeakMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectOnFireUCWeakMutSetCreateWithId(effect.id);
+    }
+    public void visitOnFireUCWeakMutSetDeleteEffect(OnFireUCWeakMutSetDeleteEffect effect) {
+      root.EffectOnFireUCWeakMutSetDelete(effect.id);
+    }
+    public void visitOnFireUCWeakMutSetAddEffect(OnFireUCWeakMutSetAddEffect effect) {
+     root.EffectOnFireUCWeakMutSetAdd(effect.id, effect.element);
+ }
+    public void visitOnFireUCWeakMutSetRemoveEffect(OnFireUCWeakMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectOnFireUCWeakMutSetRemove(effect.id, effect.element);
+    }
+       
     public void visitDefyingUCWeakMutSetEffect(IDefyingUCWeakMutSetEffect effect) { effect.visitIDefyingUCWeakMutSetEffect(this); }
     public void visitDefyingUCWeakMutSetCreateEffect(DefyingUCWeakMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
@@ -2865,6 +3028,74 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
       root.EffectItemTTCMutSetRemove(effect.id, effect.element);
     }
        
+    public void visitFlowerTTCMutSetEffect(IFlowerTTCMutSetEffect effect) { effect.visitIFlowerTTCMutSetEffect(this); }
+    public void visitFlowerTTCMutSetCreateEffect(FlowerTTCMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectFlowerTTCMutSetCreateWithId(effect.id);
+    }
+    public void visitFlowerTTCMutSetDeleteEffect(FlowerTTCMutSetDeleteEffect effect) {
+      root.EffectFlowerTTCMutSetDelete(effect.id);
+    }
+    public void visitFlowerTTCMutSetAddEffect(FlowerTTCMutSetAddEffect effect) {
+     root.EffectFlowerTTCMutSetAdd(effect.id, effect.element);
+ }
+    public void visitFlowerTTCMutSetRemoveEffect(FlowerTTCMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectFlowerTTCMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitLotusTTCMutSetEffect(ILotusTTCMutSetEffect effect) { effect.visitILotusTTCMutSetEffect(this); }
+    public void visitLotusTTCMutSetCreateEffect(LotusTTCMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectLotusTTCMutSetCreateWithId(effect.id);
+    }
+    public void visitLotusTTCMutSetDeleteEffect(LotusTTCMutSetDeleteEffect effect) {
+      root.EffectLotusTTCMutSetDelete(effect.id);
+    }
+    public void visitLotusTTCMutSetAddEffect(LotusTTCMutSetAddEffect effect) {
+     root.EffectLotusTTCMutSetAdd(effect.id, effect.element);
+ }
+    public void visitLotusTTCMutSetRemoveEffect(LotusTTCMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectLotusTTCMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitRoseTTCMutSetEffect(IRoseTTCMutSetEffect effect) { effect.visitIRoseTTCMutSetEffect(this); }
+    public void visitRoseTTCMutSetCreateEffect(RoseTTCMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectRoseTTCMutSetCreateWithId(effect.id);
+    }
+    public void visitRoseTTCMutSetDeleteEffect(RoseTTCMutSetDeleteEffect effect) {
+      root.EffectRoseTTCMutSetDelete(effect.id);
+    }
+    public void visitRoseTTCMutSetAddEffect(RoseTTCMutSetAddEffect effect) {
+     root.EffectRoseTTCMutSetAdd(effect.id, effect.element);
+ }
+    public void visitRoseTTCMutSetRemoveEffect(RoseTTCMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectRoseTTCMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitLeafTTCMutSetEffect(ILeafTTCMutSetEffect effect) { effect.visitILeafTTCMutSetEffect(this); }
+    public void visitLeafTTCMutSetCreateEffect(LeafTTCMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectLeafTTCMutSetCreateWithId(effect.id);
+    }
+    public void visitLeafTTCMutSetDeleteEffect(LeafTTCMutSetDeleteEffect effect) {
+      root.EffectLeafTTCMutSetDelete(effect.id);
+    }
+    public void visitLeafTTCMutSetAddEffect(LeafTTCMutSetAddEffect effect) {
+     root.EffectLeafTTCMutSetAdd(effect.id, effect.element);
+ }
+    public void visitLeafTTCMutSetRemoveEffect(LeafTTCMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectLeafTTCMutSetRemove(effect.id, effect.element);
+    }
+       
     public void visitKamikazeTargetTTCMutSetEffect(IKamikazeTargetTTCMutSetEffect effect) { effect.visitIKamikazeTargetTTCMutSetEffect(this); }
     public void visitKamikazeTargetTTCMutSetCreateEffect(KamikazeTargetTTCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
@@ -2931,6 +3162,23 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
     public void visitFireBombTTCMutSetRemoveEffect(FireBombTTCMutSetRemoveEffect effect) {
       root.CheckUnlocked();
       root.EffectFireBombTTCMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitOnFireTTCMutSetEffect(IOnFireTTCMutSetEffect effect) { effect.visitIOnFireTTCMutSetEffect(this); }
+    public void visitOnFireTTCMutSetCreateEffect(OnFireTTCMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectOnFireTTCMutSetCreateWithId(effect.id);
+    }
+    public void visitOnFireTTCMutSetDeleteEffect(OnFireTTCMutSetDeleteEffect effect) {
+      root.EffectOnFireTTCMutSetDelete(effect.id);
+    }
+    public void visitOnFireTTCMutSetAddEffect(OnFireTTCMutSetAddEffect effect) {
+     root.EffectOnFireTTCMutSetAdd(effect.id, effect.element);
+ }
+    public void visitOnFireTTCMutSetRemoveEffect(OnFireTTCMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectOnFireTTCMutSetRemove(effect.id, effect.element);
     }
        
     public void visitMarkerTTCMutSetEffect(IMarkerTTCMutSetEffect effect) { effect.visitIMarkerTTCMutSetEffect(this); }
@@ -3203,23 +3451,6 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
     public void visitFallsTTCMutSetRemoveEffect(FallsTTCMutSetRemoveEffect effect) {
       root.CheckUnlocked();
       root.EffectFallsTTCMutSetRemove(effect.id, effect.element);
-    }
-       
-    public void visitFireTTCMutSetEffect(IFireTTCMutSetEffect effect) { effect.visitIFireTTCMutSetEffect(this); }
-    public void visitFireTTCMutSetCreateEffect(FireTTCMutSetCreateEffect effect) {
-      // For now we're just feeding the remote ID in. Someday we might want to have a map
-      // in the applier instead.
-      root.TrustedEffectFireTTCMutSetCreateWithId(effect.id);
-    }
-    public void visitFireTTCMutSetDeleteEffect(FireTTCMutSetDeleteEffect effect) {
-      root.EffectFireTTCMutSetDelete(effect.id);
-    }
-    public void visitFireTTCMutSetAddEffect(FireTTCMutSetAddEffect effect) {
-     root.EffectFireTTCMutSetAdd(effect.id, effect.element);
- }
-    public void visitFireTTCMutSetRemoveEffect(FireTTCMutSetRemoveEffect effect) {
-      root.CheckUnlocked();
-      root.EffectFireTTCMutSetRemove(effect.id, effect.element);
     }
        
     public void visitObsidianFloorTTCMutSetEffect(IObsidianFloorTTCMutSetEffect effect) { effect.visitIObsidianFloorTTCMutSetEffect(this); }
@@ -3511,6 +3742,23 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
       root.EffectGuardAICapabilityUCMutSetRemove(effect.id, effect.element);
     }
        
+    public void visitEvolvifyAICapabilityUCMutSetEffect(IEvolvifyAICapabilityUCMutSetEffect effect) { effect.visitIEvolvifyAICapabilityUCMutSetEffect(this); }
+    public void visitEvolvifyAICapabilityUCMutSetCreateEffect(EvolvifyAICapabilityUCMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectEvolvifyAICapabilityUCMutSetCreateWithId(effect.id);
+    }
+    public void visitEvolvifyAICapabilityUCMutSetDeleteEffect(EvolvifyAICapabilityUCMutSetDeleteEffect effect) {
+      root.EffectEvolvifyAICapabilityUCMutSetDelete(effect.id);
+    }
+    public void visitEvolvifyAICapabilityUCMutSetAddEffect(EvolvifyAICapabilityUCMutSetAddEffect effect) {
+     root.EffectEvolvifyAICapabilityUCMutSetAdd(effect.id, effect.element);
+ }
+    public void visitEvolvifyAICapabilityUCMutSetRemoveEffect(EvolvifyAICapabilityUCMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectEvolvifyAICapabilityUCMutSetRemove(effect.id, effect.element);
+    }
+       
     public void visitTimeCloneAICapabilityUCMutSetEffect(ITimeCloneAICapabilityUCMutSetEffect effect) { effect.visitITimeCloneAICapabilityUCMutSetEffect(this); }
     public void visitTimeCloneAICapabilityUCMutSetCreateEffect(TimeCloneAICapabilityUCMutSetCreateEffect effect) {
       // For now we're just feeding the remote ID in. Someday we might want to have a map
@@ -3560,6 +3808,23 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
     public void visitMiredUCMutSetRemoveEffect(MiredUCMutSetRemoveEffect effect) {
       root.CheckUnlocked();
       root.EffectMiredUCMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitOnFireUCMutSetEffect(IOnFireUCMutSetEffect effect) { effect.visitIOnFireUCMutSetEffect(this); }
+    public void visitOnFireUCMutSetCreateEffect(OnFireUCMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectOnFireUCMutSetCreateWithId(effect.id);
+    }
+    public void visitOnFireUCMutSetDeleteEffect(OnFireUCMutSetDeleteEffect effect) {
+      root.EffectOnFireUCMutSetDelete(effect.id);
+    }
+    public void visitOnFireUCMutSetAddEffect(OnFireUCMutSetAddEffect effect) {
+     root.EffectOnFireUCMutSetAdd(effect.id, effect.element);
+ }
+    public void visitOnFireUCMutSetRemoveEffect(OnFireUCMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectOnFireUCMutSetRemove(effect.id, effect.element);
     }
        
     public void visitAttackAICapabilityUCMutSetEffect(IAttackAICapabilityUCMutSetEffect effect) { effect.visitIAttackAICapabilityUCMutSetEffect(this); }

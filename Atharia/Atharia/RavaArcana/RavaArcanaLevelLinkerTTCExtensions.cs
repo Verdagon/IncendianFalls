@@ -101,6 +101,30 @@ namespace Atharia.Model {
             depth,
             squareLevelsOnly);
           context.Flare(game.root.GetDeterministicHashCode().ToString());
+
+          foreach (var loc in level.terrain.tiles.Keys) {
+            if (level.terrain.tiles[loc].IsWalkable()) {
+              var plantRand = game.rand.Next() % 100;
+              if (plantRand < 20) {
+                level.terrain.tiles[loc].components.Add(level.root.EffectLeafTTCCreate().AsITerrainTileComponent());
+              } else if (plantRand < 25) {
+                level.terrain.tiles[loc].components.Add(level.root.EffectFlowerTTCCreate().AsITerrainTileComponent());
+              } else if (plantRand < 30) {
+                level.terrain.tiles[loc].components.Add(level.root.EffectRoseTTCCreate().AsITerrainTileComponent());
+              } else if (plantRand < 35) {
+                level.terrain.tiles[loc].components.Add(level.root.EffectLotusTTCCreate().AsITerrainTileComponent());
+              }
+            }
+          }
+
+          for (int i = 0; i < 20; i++) {
+            level.EnterUnit(
+                levelSuperstate,
+                levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (a) => true, true, true)[0],
+                level.time + 10,
+                Viviant.Make(level.root));
+          }
+
           break;
       }
     }

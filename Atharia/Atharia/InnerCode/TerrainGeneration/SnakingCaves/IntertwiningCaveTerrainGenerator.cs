@@ -5,7 +5,7 @@ using System.Diagnostics;
 using Atharia.Model;
 
 namespace IncendianFalls {
-  public class SnakingCaveTerrainGenerator {
+  public class IntertwiningCaveTerrainGenerator {
     public const int PATH_HEIGHT = 5;
     public const int WATER_HEIGHT = 1;
     
@@ -34,6 +34,9 @@ namespace IncendianFalls {
       
       var pathLocs = new SortedSet<Location>(mainLocs);
       SetUtils.AddAll(pathLocs, sideLocs);
+      // foreach (var pathLoc in pathLocs) {
+      //   terrain.tiles[pathLoc].components.Add(terrain.root.EffectGrassTTCCreate().AsITerrainTileComponent());
+      // }
 
       var (overlayLocs, bridges) =
           Bridger.addBridgesAndOverlay(terrain, considerCornersAdjacent, circleLocs, mainLocs, sideLocs);
@@ -71,6 +74,16 @@ namespace IncendianFalls {
 
       foreach (var noiseLoc in noiseLocs) {
         terrain.tiles[noiseLoc].elevation += rand.Next(0, 1);
+      }
+
+      foreach (var loc in terrain.tiles.Keys) {
+        if (terrain.tiles[loc].IsWalkable()) {
+          // if (terrain.tiles[loc].components.Count == 0) {
+             // if (rand.Next() % 100 < 40) {
+              terrain.tiles[loc].components.Add(rand.root.EffectGrassTTCCreate().AsITerrainTileComponent());
+            // }
+          // }
+        }
       }
       
       // we'll need to make any locations next to ADEH -1, not just IJKL. See BridgeMaking2.png for an example.
@@ -149,6 +162,7 @@ namespace IncendianFalls {
       var numOriginalRegions = regionIdToLocsMap.Count;
 
       var implementedConnections = new List<RegionConnection>();
+      var allAlreadyConnectionLocs = new SortedSet<Location>();
       
       while (new SortedSet<string>(regionIdToRealmIdMap.Values).Count > 1) {
         for (int thisRegionId = 0; ; thisRegionId++) {
@@ -179,6 +193,12 @@ namespace IncendianFalls {
             var possibleConnectionsFromThisRegionToThatRegion =
                 otherRegionIdToPossibleConnectionMap[otherRegionId];
             var connection = ListUtils.GetRandomN(possibleConnectionsFromThisRegionToThatRegion, rand, 1, 1)[0];
+
+            foreach (var loc in connection.getAllLocations()) {
+              Asserts.Assert(!allAlreadyConnectionLocs.Contains(loc));
+            }
+            SetUtils.AddAll(allAlreadyConnectionLocs, connection.getAllLocations());
+            
             implementConnection(
                 terrain, regionIdToLocsMap, locToRegionIdMap, regionIdToRealmIdMap, locToPossibleConnectionMap,
                 regionIdToOtherRegionIdToPossibleConnectionMap, connection);
@@ -209,7 +229,7 @@ namespace IncendianFalls {
       var firstStepWater = firstStepTile.components.GetOnlyWaterTTCOrNull();
       firstStepTile.components.Remove(firstStepWater.AsITerrainTileComponent());
       firstStepWater.Destruct();
-      firstStepTile.components.Add(terrain.root.EffectGrassTTCCreate().AsITerrainTileComponent());
+      // firstStepTile.components.Add(terrain.root.EffectGrassTTCCreate().AsITerrainTileComponent());
       // firstStepTile.components.Add(terrain.root.EffectFireTTCCreate().AsITerrainTileComponent());
       firstStepTile.elevation = thisRegionLocElevation + elevationDirection;
       
@@ -217,7 +237,7 @@ namespace IncendianFalls {
       var secondStepWater = secondStepTile.components.GetOnlyWaterTTCOrNull();
       secondStepTile.components.Remove(secondStepWater.AsITerrainTileComponent());
       secondStepWater.Destruct();
-      secondStepTile.components.Add(terrain.root.EffectGrassTTCCreate().AsITerrainTileComponent());
+      // secondStepTile.components.Add(terrain.root.EffectGrassTTCCreate().AsITerrainTileComponent());
       // secondStepTile.components.Add(terrain.root.EffectFireTTCCreate().AsITerrainTileComponent());
       secondStepTile.elevation = thisRegionLocElevation + elevationDirection * 2;
       
@@ -336,10 +356,10 @@ namespace IncendianFalls {
           //   tile.components.Add(terrain.root.EffectTreeTTCCreate().AsITerrainTileComponent());
           // }
         } else {
-          foreach (var mud in terrain.tiles[loc].components.GetAllGrassTTC()) {
-            tile.components.Remove(mud.AsITerrainTileComponent());
-            mud.Destruct();
-          }
+          // foreach (var mud in terrain.tiles[loc].components.GetAllGrassTTC()) {
+          //   tile.components.Remove(mud.AsITerrainTileComponent());
+          //   mud.Destruct();
+          // }
           tile.components.Add(terrain.root.EffectWaterTTCCreate().AsITerrainTileComponent());
           tile.elevation = WATER_HEIGHT;
           overlayLocsNew.Remove(loc);

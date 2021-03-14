@@ -485,6 +485,7 @@ namespace AthPlayer {
           //            Vector4Animation.GLOWY_WHITE)));
         } else if (detail is HealthPotionAsIUnitComponent) {
         } else if (detail is ManaPotionAsIUnitComponent) {
+        } else if (detail is EvolvifyAICapabilityUCAsIUnitComponent) {
         } else {
           Debug.LogError("Unknown detail type: " + detail);
         }
@@ -502,16 +503,17 @@ namespace AthPlayer {
           "Chronomancer",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, Vector4Animation.Color(0.0f, 0.2f, 1f)),
+              new DominoDescription(false, Vector4Animation.Color(0.0f, 0.2f, 1f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "b",
-                      new Vector4Animation(
-                        new ConstantFloatAnimation(1),
-                        SineFloatAnimation.Make(.5f), // the half is to slow it down a little
-                        new ConstantFloatAnimation(1),
-                        new ConstantFloatAnimation(1.2f)),
+                      Vector4Animation.GLOWY_WHITE,
+                      // new Vector4Animation(
+                      //   new ConstantFloatAnimation(1),
+                      //   SineFloatAnimation.Make(.5f), // the half is to slow it down a little
+                      //   new ConstantFloatAnimation(1),
+                      //   new ConstantFloatAnimation(1.2f)),
                       0,
                       1,
                       OutlineMode.WithBackOutline),
@@ -644,6 +646,76 @@ namespace AthPlayer {
                   new SymbolDescription(
                       "ampersand",
                             Vector4Animation.Color(1f,1f,1f, 1f), 0, 1, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "Leaf",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, Vector4Animation.Color(0f, .5f, 0)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "7",
+                      Vector4Animation.Color(1f,1f,1f, 1f), 0, 1, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "Lotus",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, Vector4Animation.Color(.1f, .5f, .5f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "lotus",
+                      Vector4Animation.Color(1f,1f,1f, 1f), 0, 1, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "Flower",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, Vector4Animation.Color(0.547f, .4f, .547f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "flower",
+                      Vector4Animation.Color(1f,1f,1f, 1f), 0, 1, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "Rose",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(false, Vector4Animation.Color(.8f, .4f, 0.28f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "rose",
+                      Vector4Animation.Color(1f,1f,1f, 1f), 0, 1, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "Viviant",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(true, Vector4Animation.Color(0.7f, 0.3f, 0)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "tree1",
+                      Vector4Animation.Color(1f,1f,1f, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
               hpRatio,

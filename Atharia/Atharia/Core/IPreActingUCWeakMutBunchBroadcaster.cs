@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IPreActingUCWeakMutBunchBroadcaster:IDoomedUCWeakMutSetEffectObserver, IDoomedUCWeakMutSetEffectVisitor, IMiredUCWeakMutSetEffectObserver, IMiredUCWeakMutSetEffectVisitor, IInvincibilityUCWeakMutSetEffectObserver, IInvincibilityUCWeakMutSetEffectVisitor, IDefyingUCWeakMutSetEffectObserver, IDefyingUCWeakMutSetEffectVisitor, ICounteringUCWeakMutSetEffectObserver, ICounteringUCWeakMutSetEffectVisitor, IAttackAICapabilityUCWeakMutSetEffectObserver, IAttackAICapabilityUCWeakMutSetEffectVisitor {
+public class IPreActingUCWeakMutBunchBroadcaster:IDoomedUCWeakMutSetEffectObserver, IDoomedUCWeakMutSetEffectVisitor, IMiredUCWeakMutSetEffectObserver, IMiredUCWeakMutSetEffectVisitor, IInvincibilityUCWeakMutSetEffectObserver, IInvincibilityUCWeakMutSetEffectVisitor, IOnFireUCWeakMutSetEffectObserver, IOnFireUCWeakMutSetEffectVisitor, IDefyingUCWeakMutSetEffectObserver, IDefyingUCWeakMutSetEffectVisitor, ICounteringUCWeakMutSetEffectObserver, ICounteringUCWeakMutSetEffectVisitor, IAttackAICapabilityUCWeakMutSetEffectObserver, IAttackAICapabilityUCWeakMutSetEffectVisitor {
   EffectBroadcaster broadcaster;
   IPreActingUCWeakMutBunch bunch;
   private List<IIPreActingUCWeakMutBunchObserver> observers;
@@ -16,6 +16,7 @@ public class IPreActingUCWeakMutBunchBroadcaster:IDoomedUCWeakMutSetEffectObserv
     bunch.membersDoomedUCWeakMutSet.AddObserver(broadcaster, this);
     bunch.membersMiredUCWeakMutSet.AddObserver(broadcaster, this);
     bunch.membersInvincibilityUCWeakMutSet.AddObserver(broadcaster, this);
+    bunch.membersOnFireUCWeakMutSet.AddObserver(broadcaster, this);
     bunch.membersDefyingUCWeakMutSet.AddObserver(broadcaster, this);
     bunch.membersCounteringUCWeakMutSet.AddObserver(broadcaster, this);
     bunch.membersAttackAICapabilityUCWeakMutSet.AddObserver(broadcaster, this);
@@ -25,6 +26,7 @@ public class IPreActingUCWeakMutBunchBroadcaster:IDoomedUCWeakMutSetEffectObserv
     bunch.membersDoomedUCWeakMutSet.RemoveObserver(broadcaster, this);
     bunch.membersMiredUCWeakMutSet.RemoveObserver(broadcaster, this);
     bunch.membersInvincibilityUCWeakMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersOnFireUCWeakMutSet.RemoveObserver(broadcaster, this);
     bunch.membersDefyingUCWeakMutSet.RemoveObserver(broadcaster, this);
     bunch.membersCounteringUCWeakMutSet.RemoveObserver(broadcaster, this);
     bunch.membersAttackAICapabilityUCWeakMutSet.RemoveObserver(broadcaster, this);
@@ -79,6 +81,17 @@ public class IPreActingUCWeakMutBunchBroadcaster:IDoomedUCWeakMutSetEffectObserv
   }
   public void visitInvincibilityUCWeakMutSetCreateEffect(InvincibilityUCWeakMutSetCreateEffect effect) { }
   public void visitInvincibilityUCWeakMutSetDeleteEffect(InvincibilityUCWeakMutSetDeleteEffect effect) { }
+  public void OnOnFireUCWeakMutSetEffect(IOnFireUCWeakMutSetEffect effect) {
+    effect.visitIOnFireUCWeakMutSetEffect(this);
+  }
+  public void visitOnFireUCWeakMutSetAddEffect(OnFireUCWeakMutSetAddEffect effect) {
+    BroadcastAdd(effect.element);
+  }
+  public void visitOnFireUCWeakMutSetRemoveEffect(OnFireUCWeakMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.element);
+  }
+  public void visitOnFireUCWeakMutSetCreateEffect(OnFireUCWeakMutSetCreateEffect effect) { }
+  public void visitOnFireUCWeakMutSetDeleteEffect(OnFireUCWeakMutSetDeleteEffect effect) { }
   public void OnDefyingUCWeakMutSetEffect(IDefyingUCWeakMutSetEffect effect) {
     effect.visitIDefyingUCWeakMutSetEffect(this);
   }

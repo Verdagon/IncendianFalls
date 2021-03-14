@@ -1,0 +1,19 @@
+
+mut struct OnFireUC {
+  OnFireUC isa IPreActingUC;
+
+  turnsRemaining: Int;
+
+  fn Destruct(this: OnFireUC overrides IDestructible): Void {
+    OnFireUCExtensions.Destruct
+  }
+
+  fn PreAct(
+      detail: OnFireUC overrides IPreActingUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Void {
+    OnFireUCExtensions.PreAct
+  }
+}

@@ -27,19 +27,13 @@ namespace Atharia.Model {
         pattern = HexPattern.MakeHexPattern();
       }
       var terrain =
-        SnakingCaveTerrainGenerator.Generate(
+        IntertwiningCaveTerrainGenerator.Generate(
           context,
           game.root,
           pattern,
           false,
           game.rand,
           20.0f);
-      context.Flare(context.root.GetDeterministicHashCode().ToString());
-
-      foreach (var locationAndTile in terrain.tiles) {
-        locationAndTile.Value.components.Add(game.root.EffectMudTTCCreate().AsITerrainTileComponent());
-      }
-
       context.Flare(context.root.GetDeterministicHashCode().ToString());
 
       var floors = new SortedSet<Location>(terrain.tiles.Keys);

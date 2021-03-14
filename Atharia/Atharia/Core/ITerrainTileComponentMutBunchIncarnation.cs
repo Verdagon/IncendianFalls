@@ -7,10 +7,15 @@ namespace Atharia.Model {
 public class ITerrainTileComponentMutBunchIncarnation : IITerrainTileComponentMutBunchEffectVisitor {
   public readonly int membersSimplePresenceTriggerTTCMutSet;
   public readonly int membersItemTTCMutSet;
+  public readonly int membersFlowerTTCMutSet;
+  public readonly int membersLotusTTCMutSet;
+  public readonly int membersRoseTTCMutSet;
+  public readonly int membersLeafTTCMutSet;
   public readonly int membersKamikazeTargetTTCMutSet;
   public readonly int membersWarperTTCMutSet;
   public readonly int membersTimeAnchorTTCMutSet;
   public readonly int membersFireBombTTCMutSet;
+  public readonly int membersOnFireTTCMutSet;
   public readonly int membersMarkerTTCMutSet;
   public readonly int membersLevelLinkTTCMutSet;
   public readonly int membersMudTTCMutSet;
@@ -27,7 +32,6 @@ public class ITerrainTileComponentMutBunchIncarnation : IITerrainTileComponentMu
   public readonly int membersCaveWallTTCMutSet;
   public readonly int membersCaveTTCMutSet;
   public readonly int membersFallsTTCMutSet;
-  public readonly int membersFireTTCMutSet;
   public readonly int membersObsidianFloorTTCMutSet;
   public readonly int membersMagmaTTCMutSet;
   public readonly int membersCliffTTCMutSet;
@@ -41,10 +45,15 @@ public class ITerrainTileComponentMutBunchIncarnation : IITerrainTileComponentMu
   public ITerrainTileComponentMutBunchIncarnation(
       int membersSimplePresenceTriggerTTCMutSet,
       int membersItemTTCMutSet,
+      int membersFlowerTTCMutSet,
+      int membersLotusTTCMutSet,
+      int membersRoseTTCMutSet,
+      int membersLeafTTCMutSet,
       int membersKamikazeTargetTTCMutSet,
       int membersWarperTTCMutSet,
       int membersTimeAnchorTTCMutSet,
       int membersFireBombTTCMutSet,
+      int membersOnFireTTCMutSet,
       int membersMarkerTTCMutSet,
       int membersLevelLinkTTCMutSet,
       int membersMudTTCMutSet,
@@ -61,7 +70,6 @@ public class ITerrainTileComponentMutBunchIncarnation : IITerrainTileComponentMu
       int membersCaveWallTTCMutSet,
       int membersCaveTTCMutSet,
       int membersFallsTTCMutSet,
-      int membersFireTTCMutSet,
       int membersObsidianFloorTTCMutSet,
       int membersMagmaTTCMutSet,
       int membersCliffTTCMutSet,
@@ -74,10 +82,15 @@ public class ITerrainTileComponentMutBunchIncarnation : IITerrainTileComponentMu
       int membersRavaArcanaLevelLinkerTTCMutSet) {
     this.membersSimplePresenceTriggerTTCMutSet = membersSimplePresenceTriggerTTCMutSet;
     this.membersItemTTCMutSet = membersItemTTCMutSet;
+    this.membersFlowerTTCMutSet = membersFlowerTTCMutSet;
+    this.membersLotusTTCMutSet = membersLotusTTCMutSet;
+    this.membersRoseTTCMutSet = membersRoseTTCMutSet;
+    this.membersLeafTTCMutSet = membersLeafTTCMutSet;
     this.membersKamikazeTargetTTCMutSet = membersKamikazeTargetTTCMutSet;
     this.membersWarperTTCMutSet = membersWarperTTCMutSet;
     this.membersTimeAnchorTTCMutSet = membersTimeAnchorTTCMutSet;
     this.membersFireBombTTCMutSet = membersFireBombTTCMutSet;
+    this.membersOnFireTTCMutSet = membersOnFireTTCMutSet;
     this.membersMarkerTTCMutSet = membersMarkerTTCMutSet;
     this.membersLevelLinkTTCMutSet = membersLevelLinkTTCMutSet;
     this.membersMudTTCMutSet = membersMudTTCMutSet;
@@ -94,7 +107,6 @@ public class ITerrainTileComponentMutBunchIncarnation : IITerrainTileComponentMu
     this.membersCaveWallTTCMutSet = membersCaveWallTTCMutSet;
     this.membersCaveTTCMutSet = membersCaveTTCMutSet;
     this.membersFallsTTCMutSet = membersFallsTTCMutSet;
-    this.membersFireTTCMutSet = membersFireTTCMutSet;
     this.membersObsidianFloorTTCMutSet = membersObsidianFloorTTCMutSet;
     this.membersMagmaTTCMutSet = membersMagmaTTCMutSet;
     this.membersCliffTTCMutSet = membersCliffTTCMutSet;
@@ -110,10 +122,15 @@ public class ITerrainTileComponentMutBunchIncarnation : IITerrainTileComponentMu
     return new ITerrainTileComponentMutBunchIncarnation(
 membersSimplePresenceTriggerTTCMutSet,
 membersItemTTCMutSet,
+membersFlowerTTCMutSet,
+membersLotusTTCMutSet,
+membersRoseTTCMutSet,
+membersLeafTTCMutSet,
 membersKamikazeTargetTTCMutSet,
 membersWarperTTCMutSet,
 membersTimeAnchorTTCMutSet,
 membersFireBombTTCMutSet,
+membersOnFireTTCMutSet,
 membersMarkerTTCMutSet,
 membersLevelLinkTTCMutSet,
 membersMudTTCMutSet,
@@ -130,7 +147,6 @@ membersFloorTTCMutSet,
 membersCaveWallTTCMutSet,
 membersCaveTTCMutSet,
 membersFallsTTCMutSet,
-membersFireTTCMutSet,
 membersObsidianFloorTTCMutSet,
 membersMagmaTTCMutSet,
 membersCliffTTCMutSet,
@@ -145,6 +161,10 @@ membersRavaArcanaLevelLinkerTTCMutSet    );
 
   public void visitITerrainTileComponentMutBunchCreateEffect(ITerrainTileComponentMutBunchCreateEffect e) {}
   public void visitITerrainTileComponentMutBunchDeleteEffect(ITerrainTileComponentMutBunchDeleteEffect e) {}
+
+
+
+
 
 
 

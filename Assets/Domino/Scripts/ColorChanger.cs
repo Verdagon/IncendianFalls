@@ -10,10 +10,9 @@ public class ColorChanger : MonoBehaviour {
   public Material opaqueMaterial;
   public Material transparentMaterial;
 
-  private Material cachedGlowMaterial;
-  private Material cachedOpaqueMaterial;
-  private Material cachedTransparentMaterial;
-
+  private MaterialCache lightMaterialCache;
+  private MaterialCache darkMaterialCache;
+  
   private Color currentColor;
   private RenderPriority renderPriority;
 
@@ -25,55 +24,67 @@ public class ColorChanger : MonoBehaviour {
     if (newCurrentColor == currentColor && newRenderPriority == renderPriority) {
       return;
     }
-
+    
     renderPriority = newRenderPriority;
     currentColor = newCurrentColor;
 
-    Color lightColor = newCurrentColor;
-    Color darkColor = new Color(currentColor.r * .8f, currentColor.g * .8f, currentColor.b * .8f, currentColor.a);
-
-    Material lightMaterial = GetOrInstantiateMaterial(lightColor, newRenderPriority);
+    if (lightMaterialCache == null) {
+      lightMaterialCache = new MaterialCache(this);
+    }
+    var lightMaterial = lightMaterialCache.GetMaterial(newCurrentColor, renderPriority);
     foreach (var part in lightColoredParts) {
       var meshRenderer = part.GetComponent<MeshRenderer>();
       meshRenderer.material = lightMaterial;
-      meshRenderer.enabled = lightColor.a > .001f;
+      meshRenderer.enabled = newCurrentColor.a > .001f;
     }
 
     if (darkColoredParts.Length > 0) {
-      Material darkMaterial = GetOrInstantiateMaterial(darkColor, newRenderPriority);
+      if (darkMaterialCache == null) {
+        darkMaterialCache = new MaterialCache(this);
+      }
+      Color darkColor = new Color(currentColor.r * .8f, currentColor.g * .8f, currentColor.b * .8f, currentColor.a);
+      var darkMaterial = darkMaterialCache.GetMaterial(darkColor, renderPriority);
       foreach (var part in darkColoredParts) {
         var meshRenderer = part.GetComponent<MeshRenderer>();
         meshRenderer.material = darkMaterial;
-        meshRenderer.enabled = darkColor.a > .001f;
+        meshRenderer.enabled = newCurrentColor.a > .001f;
       }
     }
   }
 
-  private Material GetOrInstantiateMaterial(Color color, RenderPriority renderPriority) {
-    if (color.a < .99f) {
-      if (cachedTransparentMaterial == null) {
-        cachedTransparentMaterial = Instantiate(transparentMaterial);
-      }
-      cachedTransparentMaterial.color = color;
-      cachedTransparentMaterial.renderQueue =
-          (int)UnityEngine.Rendering.RenderQueue.Transparent +
-          (int)renderPriority;
-      return cachedTransparentMaterial;
-    } else if (color.a > 1.01f) {
-      if (cachedGlowMaterial == null) {
-        cachedGlowMaterial = Instantiate(transparentMaterial);
-      }
-      cachedGlowMaterial.color = color;
-      cachedGlowMaterial.SetColor("_EmissionColor", color);
-      return cachedGlowMaterial;
-    } else {
-      if (cachedOpaqueMaterial == null) {
-        cachedOpaqueMaterial = Instantiate(opaqueMaterial);
-      }
-      //Debug.Log("Setting color to " + color.r + " " + color.g + " " + color.b);
-      cachedOpaqueMaterial.color = color;
-      //Debug.Log("Now color is " + materialClone.color.r + " " + materialClone.color.g + " " + materialClone.color.b);
-      return cachedOpaqueMaterial;
+  class MaterialCache {
+    private ColorChanger changer;
+    private Material cachedGlowMaterial = null;
+    private Material cachedOpaqueMaterial = null;
+    private Material cachedTransparentMaterial = null;
+
+    public MaterialCache(ColorChanger changer) {
+      this.changer = changer;
+    }
+
+    public Material GetMaterial(Color color, RenderPriority renderPriority) {
+      var darkColor = new Color(color.r * .8f, color.g * .8f, color.b * .8f, color.a);
+      if (color.a < .99f) {
+        if (ReferenceEquals(cachedTransparentMaterial, null)) {
+          cachedTransparentMaterial = Instantiate(changer.transparentMaterial);
+        }
+        cachedTransparentMaterial.color = color;
+        cachedTransparentMaterial.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent + (int)renderPriority;
+        return cachedTransparentMaterial;
+      } else if (color.a > 1.01f) {
+        if (ReferenceEquals(cachedTransparentMaterial, null)) {
+          cachedGlowMaterial = Instantiate(changer.transparentMaterial);
+        }
+        cachedGlowMaterial.color = color;
+        cachedGlowMaterial.SetColor("_EmissionColor", color);
+        return cachedGlowMaterial;
+      } else {
+        if (ReferenceEquals(cachedOpaqueMaterial, null)) {
+          cachedOpaqueMaterial = Instantiate(changer.opaqueMaterial);
+        }
+        cachedOpaqueMaterial.color = color;
+        return cachedOpaqueMaterial;
+      }      
     }
   }
 }

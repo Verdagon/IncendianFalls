@@ -14,6 +14,7 @@ public class IImpulseStrongMutBunchIncarnation : IIImpulseStrongMutBunchEffectVi
   public readonly int membersKamikazeJumpImpulseStrongMutSet;
   public readonly int membersKamikazeTargetImpulseStrongMutSet;
   public readonly int membersNoImpulseStrongMutSet;
+  public readonly int membersEvolvifyImpulseStrongMutSet;
   public readonly int membersFireImpulseStrongMutSet;
   public readonly int membersDefyImpulseStrongMutSet;
   public readonly int membersCounterImpulseStrongMutSet;
@@ -33,6 +34,7 @@ public class IImpulseStrongMutBunchIncarnation : IIImpulseStrongMutBunchEffectVi
       int membersKamikazeJumpImpulseStrongMutSet,
       int membersKamikazeTargetImpulseStrongMutSet,
       int membersNoImpulseStrongMutSet,
+      int membersEvolvifyImpulseStrongMutSet,
       int membersFireImpulseStrongMutSet,
       int membersDefyImpulseStrongMutSet,
       int membersCounterImpulseStrongMutSet,
@@ -51,6 +53,7 @@ public class IImpulseStrongMutBunchIncarnation : IIImpulseStrongMutBunchEffectVi
     this.membersKamikazeJumpImpulseStrongMutSet = membersKamikazeJumpImpulseStrongMutSet;
     this.membersKamikazeTargetImpulseStrongMutSet = membersKamikazeTargetImpulseStrongMutSet;
     this.membersNoImpulseStrongMutSet = membersNoImpulseStrongMutSet;
+    this.membersEvolvifyImpulseStrongMutSet = membersEvolvifyImpulseStrongMutSet;
     this.membersFireImpulseStrongMutSet = membersFireImpulseStrongMutSet;
     this.membersDefyImpulseStrongMutSet = membersDefyImpulseStrongMutSet;
     this.membersCounterImpulseStrongMutSet = membersCounterImpulseStrongMutSet;
@@ -72,6 +75,7 @@ membersMoveImpulseStrongMutSet,
 membersKamikazeJumpImpulseStrongMutSet,
 membersKamikazeTargetImpulseStrongMutSet,
 membersNoImpulseStrongMutSet,
+membersEvolvifyImpulseStrongMutSet,
 membersFireImpulseStrongMutSet,
 membersDefyImpulseStrongMutSet,
 membersCounterImpulseStrongMutSet,
@@ -85,6 +89,7 @@ membersFireBombImpulseStrongMutSet    );
 
   public void visitIImpulseStrongMutBunchCreateEffect(IImpulseStrongMutBunchCreateEffect e) {}
   public void visitIImpulseStrongMutBunchDeleteEffect(IImpulseStrongMutBunchDeleteEffect e) {}
+
 
 
 

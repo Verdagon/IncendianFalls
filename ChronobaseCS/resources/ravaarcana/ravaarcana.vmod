@@ -39,6 +39,8 @@ requests.vss
 terrain/appearance.vss
 terrain/levellink.vss
 terrain/marker.vss
+terrain/onfirettc.vss
+terrain/plant.vss
 terrain/firebomb.vss
 terrain/simplewalktrigger.vss
 terrain/terrain.vss
@@ -50,7 +52,9 @@ unit/bide.vss
 unit/counter.vss
 unit/countering.vss
 unit/defy.vss
+unit/onfireuc.vss
 unit/fire.vss
+unit/evolvify.vss
 unit/impulse.vss
 unit/guard.vss
 unit/invincibility.vss

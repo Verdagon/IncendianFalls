@@ -85,7 +85,7 @@ namespace IncendianFalls {
           } else {
             previousSlither.Add(newLocation);
             pathSoFar.Add(newLocation);
-            SnakingCaveTerrainGenerator.AddTile(terrain, newLocation, SnakingCaveTerrainGenerator.PATH_HEIGHT);
+            IntertwiningCaveTerrainGenerator.AddTile(terrain, newLocation, IntertwiningCaveTerrainGenerator.PATH_HEIGHT);
           }
 
           snakeCurrentLocation = newLocation;

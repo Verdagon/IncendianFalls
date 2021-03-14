@@ -1,0 +1,36 @@
+
+mut interface IPlantTTC {
+  IPlantTTC isa ITerrainTileComponent;
+}
+
+mut struct LeafTTC {
+  LeafTTC isa IPlantTTC;
+
+  fn Destruct(this: LeafTTC overrides IDestructible): Void {
+    LeafTTCExtensions.Destruct
+  }
+}
+
+mut struct RoseTTC {
+  RoseTTC isa IPlantTTC;
+
+  fn Destruct(this: RoseTTC overrides IDestructible): Void {
+    RoseTTCExtensions.Destruct
+  }
+}
+
+mut struct LotusTTC {
+  LotusTTC isa IPlantTTC;
+
+  fn Destruct(this: LotusTTC overrides IDestructible): Void {
+    LotusTTCExtensions.Destruct
+  }
+}
+
+mut struct FlowerTTC {
+  FlowerTTC isa IPlantTTC;
+
+  fn Destruct(this: FlowerTTC overrides IDestructible): Void {
+    FlowerTTCExtensions.Destruct
+  }
+}

@@ -1,0 +1,20 @@
+
+mut struct OnFireTTC {
+  OnFireTTC isa ITerrainTileComponent;
+  OnFireTTC isa IActingTTC;
+
+  var turnsRemaining: Int;
+
+  fn Destruct(this: OnFireTTC overrides IDestructible): Void {
+    OnFireTTCExtensions.Destruct
+  }
+
+  fn Act(
+    this: OnFireTTC overrides IActingTTC,
+    game: Game,
+    superstate: $Superstate,
+    containingTileLocation: Location):
+  Void {
+    OnFireTTCExtensions.Act
+  }
+}

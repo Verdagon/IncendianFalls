@@ -8,6 +8,7 @@ public class IPreActingUCWeakMutBunchIncarnation : IIPreActingUCWeakMutBunchEffe
   public readonly int membersDoomedUCWeakMutSet;
   public readonly int membersMiredUCWeakMutSet;
   public readonly int membersInvincibilityUCWeakMutSet;
+  public readonly int membersOnFireUCWeakMutSet;
   public readonly int membersDefyingUCWeakMutSet;
   public readonly int membersCounteringUCWeakMutSet;
   public readonly int membersAttackAICapabilityUCWeakMutSet;
@@ -15,12 +16,14 @@ public class IPreActingUCWeakMutBunchIncarnation : IIPreActingUCWeakMutBunchEffe
       int membersDoomedUCWeakMutSet,
       int membersMiredUCWeakMutSet,
       int membersInvincibilityUCWeakMutSet,
+      int membersOnFireUCWeakMutSet,
       int membersDefyingUCWeakMutSet,
       int membersCounteringUCWeakMutSet,
       int membersAttackAICapabilityUCWeakMutSet) {
     this.membersDoomedUCWeakMutSet = membersDoomedUCWeakMutSet;
     this.membersMiredUCWeakMutSet = membersMiredUCWeakMutSet;
     this.membersInvincibilityUCWeakMutSet = membersInvincibilityUCWeakMutSet;
+    this.membersOnFireUCWeakMutSet = membersOnFireUCWeakMutSet;
     this.membersDefyingUCWeakMutSet = membersDefyingUCWeakMutSet;
     this.membersCounteringUCWeakMutSet = membersCounteringUCWeakMutSet;
     this.membersAttackAICapabilityUCWeakMutSet = membersAttackAICapabilityUCWeakMutSet;
@@ -30,6 +33,7 @@ public class IPreActingUCWeakMutBunchIncarnation : IIPreActingUCWeakMutBunchEffe
 membersDoomedUCWeakMutSet,
 membersMiredUCWeakMutSet,
 membersInvincibilityUCWeakMutSet,
+membersOnFireUCWeakMutSet,
 membersDefyingUCWeakMutSet,
 membersCounteringUCWeakMutSet,
 membersAttackAICapabilityUCWeakMutSet    );
@@ -37,6 +41,7 @@ membersAttackAICapabilityUCWeakMutSet    );
 
   public void visitIPreActingUCWeakMutBunchCreateEffect(IPreActingUCWeakMutBunchCreateEffect e) {}
   public void visitIPreActingUCWeakMutBunchDeleteEffect(IPreActingUCWeakMutBunchDeleteEffect e) {}
+
 
 
 

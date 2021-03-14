@@ -1,0 +1,38 @@
+
+mut struct EvolvifyAICapabilityUC {
+  EvolvifyAICapabilityUC isa IAICapabilityUC;
+
+  fn Destruct(this: EvolvifyAICapabilityUC overrides IDestructible): Void {
+    EvolvifyAICapabilityUCExtensions.Destruct
+  }
+  fn ProduceImpulse(
+      this: EvolvifyAICapabilityUC overrides IAICapabilityUC,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : IImpulse {
+    EvolvifyAICapabilityUCExtensions.ProduceImpulse
+  }
+}
+
+// Assumes there's a kill directive right now.
+mut struct EvolvifyImpulse {
+  EvolvifyImpulse isa IImpulse;
+
+  weight: Int;
+  moveToLocation: Location;
+
+  fn Destruct(this: EvolvifyImpulse overrides IDestructible): Void {
+    EvolvifyImpulseExtensions.Destruct
+  }
+  fn GetWeight(this: EvolvifyImpulse overrides IImpulse): Int {
+    EvolvifyImpulseExtensions.GetWeight
+  }
+  fn Enact(
+      this: EvolvifyImpulse overrides IImpulse,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit): Void {
+    EvolvifyImpulseExtensions.Enact
+  }
+}

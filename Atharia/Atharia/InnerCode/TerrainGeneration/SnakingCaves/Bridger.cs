@@ -105,7 +105,7 @@ namespace IncendianFalls {
           }
         } else {
           if (!terrain.TileExists(overlayLoc)) {
-            SnakingCaveTerrainGenerator.AddTile(terrain, overlayLoc, OVERLAY_HEIGHT, terrain.root.EffectGrassTTCCreate().AsITerrainTileComponent());
+            IntertwiningCaveTerrainGenerator.AddTile(terrain, overlayLoc, OVERLAY_HEIGHT);
           }
         }
       }
@@ -115,7 +115,7 @@ namespace IncendianFalls {
     static void implementBridge(Terrain terrain, Bridge bridge) {
       foreach (var bridgeLoc in bridge.getAllLocations()) {
         if (!terrain.TileExists(bridgeLoc)) {
-          SnakingCaveTerrainGenerator.AddTile(terrain, bridgeLoc, OVERLAY_BRIDGE_HEIGHT, terrain.root.EffectGrassTTCCreate().AsITerrainTileComponent());
+          IntertwiningCaveTerrainGenerator.AddTile(terrain, bridgeLoc, OVERLAY_BRIDGE_HEIGHT);
         }
       }
 

@@ -43,6 +43,22 @@ public class ITerrainTileComponentMutBunch {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersItemTTCMutSet");
     }
 
+    if (!root.FlowerTTCMutSetExists(membersFlowerTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersFlowerTTCMutSet");
+    }
+
+    if (!root.LotusTTCMutSetExists(membersLotusTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersLotusTTCMutSet");
+    }
+
+    if (!root.RoseTTCMutSetExists(membersRoseTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersRoseTTCMutSet");
+    }
+
+    if (!root.LeafTTCMutSetExists(membersLeafTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersLeafTTCMutSet");
+    }
+
     if (!root.KamikazeTargetTTCMutSetExists(membersKamikazeTargetTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersKamikazeTargetTTCMutSet");
     }
@@ -57,6 +73,10 @@ public class ITerrainTileComponentMutBunch {
 
     if (!root.FireBombTTCMutSetExists(membersFireBombTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersFireBombTTCMutSet");
+    }
+
+    if (!root.OnFireTTCMutSetExists(membersOnFireTTCMutSet.id)) {
+      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersOnFireTTCMutSet");
     }
 
     if (!root.MarkerTTCMutSetExists(membersMarkerTTCMutSet.id)) {
@@ -123,10 +143,6 @@ public class ITerrainTileComponentMutBunch {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersFallsTTCMutSet");
     }
 
-    if (!root.FireTTCMutSetExists(membersFireTTCMutSet.id)) {
-      violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersFireTTCMutSet");
-    }
-
     if (!root.ObsidianFloorTTCMutSetExists(membersObsidianFloorTTCMutSet.id)) {
       violations.Add("Null constraint violated! ITerrainTileComponentMutBunch#" + id + ".membersObsidianFloorTTCMutSet");
     }
@@ -178,6 +194,18 @@ public class ITerrainTileComponentMutBunch {
     if (root.ItemTTCMutSetExists(membersItemTTCMutSet.id)) {
       membersItemTTCMutSet.FindReachableObjects(foundIds);
     }
+    if (root.FlowerTTCMutSetExists(membersFlowerTTCMutSet.id)) {
+      membersFlowerTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.LotusTTCMutSetExists(membersLotusTTCMutSet.id)) {
+      membersLotusTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.RoseTTCMutSetExists(membersRoseTTCMutSet.id)) {
+      membersRoseTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.LeafTTCMutSetExists(membersLeafTTCMutSet.id)) {
+      membersLeafTTCMutSet.FindReachableObjects(foundIds);
+    }
     if (root.KamikazeTargetTTCMutSetExists(membersKamikazeTargetTTCMutSet.id)) {
       membersKamikazeTargetTTCMutSet.FindReachableObjects(foundIds);
     }
@@ -189,6 +217,9 @@ public class ITerrainTileComponentMutBunch {
     }
     if (root.FireBombTTCMutSetExists(membersFireBombTTCMutSet.id)) {
       membersFireBombTTCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.OnFireTTCMutSetExists(membersOnFireTTCMutSet.id)) {
+      membersOnFireTTCMutSet.FindReachableObjects(foundIds);
     }
     if (root.MarkerTTCMutSetExists(membersMarkerTTCMutSet.id)) {
       membersMarkerTTCMutSet.FindReachableObjects(foundIds);
@@ -237,9 +268,6 @@ public class ITerrainTileComponentMutBunch {
     }
     if (root.FallsTTCMutSetExists(membersFallsTTCMutSet.id)) {
       membersFallsTTCMutSet.FindReachableObjects(foundIds);
-    }
-    if (root.FireTTCMutSetExists(membersFireTTCMutSet.id)) {
-      membersFireTTCMutSet.FindReachableObjects(foundIds);
     }
     if (root.ObsidianFloorTTCMutSetExists(membersObsidianFloorTTCMutSet.id)) {
       membersObsidianFloorTTCMutSet.FindReachableObjects(foundIds);
@@ -299,6 +327,42 @@ public class ITerrainTileComponentMutBunch {
       return new ItemTTCMutSet(root, incarnation.membersItemTTCMutSet);
     }
                        }
+  public FlowerTTCMutSet membersFlowerTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersFlowerTTCMutSet of null!");
+      }
+      return new FlowerTTCMutSet(root, incarnation.membersFlowerTTCMutSet);
+    }
+                       }
+  public LotusTTCMutSet membersLotusTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersLotusTTCMutSet of null!");
+      }
+      return new LotusTTCMutSet(root, incarnation.membersLotusTTCMutSet);
+    }
+                       }
+  public RoseTTCMutSet membersRoseTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersRoseTTCMutSet of null!");
+      }
+      return new RoseTTCMutSet(root, incarnation.membersRoseTTCMutSet);
+    }
+                       }
+  public LeafTTCMutSet membersLeafTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersLeafTTCMutSet of null!");
+      }
+      return new LeafTTCMutSet(root, incarnation.membersLeafTTCMutSet);
+    }
+                       }
   public KamikazeTargetTTCMutSet membersKamikazeTargetTTCMutSet {
 
     get {
@@ -333,6 +397,15 @@ public class ITerrainTileComponentMutBunch {
         throw new Exception("Tried to get member membersFireBombTTCMutSet of null!");
       }
       return new FireBombTTCMutSet(root, incarnation.membersFireBombTTCMutSet);
+    }
+                       }
+  public OnFireTTCMutSet membersOnFireTTCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersOnFireTTCMutSet of null!");
+      }
+      return new OnFireTTCMutSet(root, incarnation.membersOnFireTTCMutSet);
     }
                        }
   public MarkerTTCMutSet membersMarkerTTCMutSet {
@@ -479,15 +552,6 @@ public class ITerrainTileComponentMutBunch {
       return new FallsTTCMutSet(root, incarnation.membersFallsTTCMutSet);
     }
                        }
-  public FireTTCMutSet membersFireTTCMutSet {
-
-    get {
-      if (root == null) {
-        throw new Exception("Tried to get member membersFireTTCMutSet of null!");
-      }
-      return new FireTTCMutSet(root, incarnation.membersFireTTCMutSet);
-    }
-                       }
   public ObsidianFloorTTCMutSet membersObsidianFloorTTCMutSet {
 
     get {
@@ -585,6 +649,14 @@ public class ITerrainTileComponentMutBunch {
 ,
       root.EffectItemTTCMutSetCreate()
 ,
+      root.EffectFlowerTTCMutSetCreate()
+,
+      root.EffectLotusTTCMutSetCreate()
+,
+      root.EffectRoseTTCMutSetCreate()
+,
+      root.EffectLeafTTCMutSetCreate()
+,
       root.EffectKamikazeTargetTTCMutSetCreate()
 ,
       root.EffectWarperTTCMutSetCreate()
@@ -592,6 +664,8 @@ public class ITerrainTileComponentMutBunch {
       root.EffectTimeAnchorTTCMutSetCreate()
 ,
       root.EffectFireBombTTCMutSetCreate()
+,
+      root.EffectOnFireTTCMutSetCreate()
 ,
       root.EffectMarkerTTCMutSetCreate()
 ,
@@ -624,8 +698,6 @@ public class ITerrainTileComponentMutBunch {
       root.EffectCaveTTCMutSetCreate()
 ,
       root.EffectFallsTTCMutSetCreate()
-,
-      root.EffectFireTTCMutSetCreate()
 ,
       root.EffectObsidianFloorTTCMutSetCreate()
 ,
@@ -663,6 +735,30 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.FlowerTTCExists(elementI.id)) {
+      this.membersFlowerTTCMutSet.Add(root.GetFlowerTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.LotusTTCExists(elementI.id)) {
+      this.membersLotusTTCMutSet.Add(root.GetLotusTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.RoseTTCExists(elementI.id)) {
+      this.membersRoseTTCMutSet.Add(root.GetRoseTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.LeafTTCExists(elementI.id)) {
+      this.membersLeafTTCMutSet.Add(root.GetLeafTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.KamikazeTargetTTCExists(elementI.id)) {
       this.membersKamikazeTargetTTCMutSet.Add(root.GetKamikazeTargetTTC(elementI.id));
       return;
@@ -683,6 +779,12 @@ public class ITerrainTileComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.FireBombTTCExists(elementI.id)) {
       this.membersFireBombTTCMutSet.Add(root.GetFireBombTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.OnFireTTCExists(elementI.id)) {
+      this.membersOnFireTTCMutSet.Add(root.GetOnFireTTC(elementI.id));
       return;
     }
 
@@ -783,12 +885,6 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.FireTTCExists(elementI.id)) {
-      this.membersFireTTCMutSet.Add(root.GetFireTTC(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
     if (root.ObsidianFloorTTCExists(elementI.id)) {
       this.membersObsidianFloorTTCMutSet.Add(root.GetObsidianFloorTTC(elementI.id));
       return;
@@ -864,6 +960,30 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.FlowerTTCExists(elementI.id)) {
+      this.membersFlowerTTCMutSet.Remove(root.GetFlowerTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.LotusTTCExists(elementI.id)) {
+      this.membersLotusTTCMutSet.Remove(root.GetLotusTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.RoseTTCExists(elementI.id)) {
+      this.membersRoseTTCMutSet.Remove(root.GetRoseTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.LeafTTCExists(elementI.id)) {
+      this.membersLeafTTCMutSet.Remove(root.GetLeafTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.KamikazeTargetTTCExists(elementI.id)) {
       this.membersKamikazeTargetTTCMutSet.Remove(root.GetKamikazeTargetTTC(elementI.id));
       return;
@@ -884,6 +1004,12 @@ public class ITerrainTileComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.FireBombTTCExists(elementI.id)) {
       this.membersFireBombTTCMutSet.Remove(root.GetFireBombTTC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.OnFireTTCExists(elementI.id)) {
+      this.membersOnFireTTCMutSet.Remove(root.GetOnFireTTC(elementI.id));
       return;
     }
 
@@ -984,12 +1110,6 @@ public class ITerrainTileComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
-    if (root.FireTTCExists(elementI.id)) {
-      this.membersFireTTCMutSet.Remove(root.GetFireTTC(elementI.id));
-      return;
-    }
-
-    // Can optimize, check the type of element directly somehow
     if (root.ObsidianFloorTTCExists(elementI.id)) {
       this.membersObsidianFloorTTCMutSet.Remove(root.GetObsidianFloorTTC(elementI.id));
       return;
@@ -1053,10 +1173,15 @@ public class ITerrainTileComponentMutBunch {
   public void Clear() {
     this.membersSimplePresenceTriggerTTCMutSet.Clear();
     this.membersItemTTCMutSet.Clear();
+    this.membersFlowerTTCMutSet.Clear();
+    this.membersLotusTTCMutSet.Clear();
+    this.membersRoseTTCMutSet.Clear();
+    this.membersLeafTTCMutSet.Clear();
     this.membersKamikazeTargetTTCMutSet.Clear();
     this.membersWarperTTCMutSet.Clear();
     this.membersTimeAnchorTTCMutSet.Clear();
     this.membersFireBombTTCMutSet.Clear();
+    this.membersOnFireTTCMutSet.Clear();
     this.membersMarkerTTCMutSet.Clear();
     this.membersLevelLinkTTCMutSet.Clear();
     this.membersMudTTCMutSet.Clear();
@@ -1073,7 +1198,6 @@ public class ITerrainTileComponentMutBunch {
     this.membersCaveWallTTCMutSet.Clear();
     this.membersCaveTTCMutSet.Clear();
     this.membersFallsTTCMutSet.Clear();
-    this.membersFireTTCMutSet.Clear();
     this.membersObsidianFloorTTCMutSet.Clear();
     this.membersMagmaTTCMutSet.Clear();
     this.membersCliffTTCMutSet.Clear();
@@ -1090,10 +1214,15 @@ public class ITerrainTileComponentMutBunch {
       return
         this.membersSimplePresenceTriggerTTCMutSet.Count +
         this.membersItemTTCMutSet.Count +
+        this.membersFlowerTTCMutSet.Count +
+        this.membersLotusTTCMutSet.Count +
+        this.membersRoseTTCMutSet.Count +
+        this.membersLeafTTCMutSet.Count +
         this.membersKamikazeTargetTTCMutSet.Count +
         this.membersWarperTTCMutSet.Count +
         this.membersTimeAnchorTTCMutSet.Count +
         this.membersFireBombTTCMutSet.Count +
+        this.membersOnFireTTCMutSet.Count +
         this.membersMarkerTTCMutSet.Count +
         this.membersLevelLinkTTCMutSet.Count +
         this.membersMudTTCMutSet.Count +
@@ -1110,7 +1239,6 @@ public class ITerrainTileComponentMutBunch {
         this.membersCaveWallTTCMutSet.Count +
         this.membersCaveTTCMutSet.Count +
         this.membersFallsTTCMutSet.Count +
-        this.membersFireTTCMutSet.Count +
         this.membersObsidianFloorTTCMutSet.Count +
         this.membersMagmaTTCMutSet.Count +
         this.membersCliffTTCMutSet.Count +
@@ -1134,10 +1262,15 @@ public class ITerrainTileComponentMutBunch {
   public void Destruct() {
     var tempMembersSimplePresenceTriggerTTCMutSet = this.membersSimplePresenceTriggerTTCMutSet;
     var tempMembersItemTTCMutSet = this.membersItemTTCMutSet;
+    var tempMembersFlowerTTCMutSet = this.membersFlowerTTCMutSet;
+    var tempMembersLotusTTCMutSet = this.membersLotusTTCMutSet;
+    var tempMembersRoseTTCMutSet = this.membersRoseTTCMutSet;
+    var tempMembersLeafTTCMutSet = this.membersLeafTTCMutSet;
     var tempMembersKamikazeTargetTTCMutSet = this.membersKamikazeTargetTTCMutSet;
     var tempMembersWarperTTCMutSet = this.membersWarperTTCMutSet;
     var tempMembersTimeAnchorTTCMutSet = this.membersTimeAnchorTTCMutSet;
     var tempMembersFireBombTTCMutSet = this.membersFireBombTTCMutSet;
+    var tempMembersOnFireTTCMutSet = this.membersOnFireTTCMutSet;
     var tempMembersMarkerTTCMutSet = this.membersMarkerTTCMutSet;
     var tempMembersLevelLinkTTCMutSet = this.membersLevelLinkTTCMutSet;
     var tempMembersMudTTCMutSet = this.membersMudTTCMutSet;
@@ -1154,7 +1287,6 @@ public class ITerrainTileComponentMutBunch {
     var tempMembersCaveWallTTCMutSet = this.membersCaveWallTTCMutSet;
     var tempMembersCaveTTCMutSet = this.membersCaveTTCMutSet;
     var tempMembersFallsTTCMutSet = this.membersFallsTTCMutSet;
-    var tempMembersFireTTCMutSet = this.membersFireTTCMutSet;
     var tempMembersObsidianFloorTTCMutSet = this.membersObsidianFloorTTCMutSet;
     var tempMembersMagmaTTCMutSet = this.membersMagmaTTCMutSet;
     var tempMembersCliffTTCMutSet = this.membersCliffTTCMutSet;
@@ -1169,10 +1301,15 @@ public class ITerrainTileComponentMutBunch {
     this.Delete();
     tempMembersSimplePresenceTriggerTTCMutSet.Destruct();
     tempMembersItemTTCMutSet.Destruct();
+    tempMembersFlowerTTCMutSet.Destruct();
+    tempMembersLotusTTCMutSet.Destruct();
+    tempMembersRoseTTCMutSet.Destruct();
+    tempMembersLeafTTCMutSet.Destruct();
     tempMembersKamikazeTargetTTCMutSet.Destruct();
     tempMembersWarperTTCMutSet.Destruct();
     tempMembersTimeAnchorTTCMutSet.Destruct();
     tempMembersFireBombTTCMutSet.Destruct();
+    tempMembersOnFireTTCMutSet.Destruct();
     tempMembersMarkerTTCMutSet.Destruct();
     tempMembersLevelLinkTTCMutSet.Destruct();
     tempMembersMudTTCMutSet.Destruct();
@@ -1189,7 +1326,6 @@ public class ITerrainTileComponentMutBunch {
     tempMembersCaveWallTTCMutSet.Destruct();
     tempMembersCaveTTCMutSet.Destruct();
     tempMembersFallsTTCMutSet.Destruct();
-    tempMembersFireTTCMutSet.Destruct();
     tempMembersObsidianFloorTTCMutSet.Destruct();
     tempMembersMagmaTTCMutSet.Destruct();
     tempMembersCliffTTCMutSet.Destruct();
@@ -1208,6 +1344,18 @@ public class ITerrainTileComponentMutBunch {
     foreach (var element in this.membersItemTTCMutSet) {
       yield return new ItemTTCAsITerrainTileComponent(element);
     }
+    foreach (var element in this.membersFlowerTTCMutSet) {
+      yield return new FlowerTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersLotusTTCMutSet) {
+      yield return new LotusTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersRoseTTCMutSet) {
+      yield return new RoseTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersLeafTTCMutSet) {
+      yield return new LeafTTCAsITerrainTileComponent(element);
+    }
     foreach (var element in this.membersKamikazeTargetTTCMutSet) {
       yield return new KamikazeTargetTTCAsITerrainTileComponent(element);
     }
@@ -1219,6 +1367,9 @@ public class ITerrainTileComponentMutBunch {
     }
     foreach (var element in this.membersFireBombTTCMutSet) {
       yield return new FireBombTTCAsITerrainTileComponent(element);
+    }
+    foreach (var element in this.membersOnFireTTCMutSet) {
+      yield return new OnFireTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersMarkerTTCMutSet) {
       yield return new MarkerTTCAsITerrainTileComponent(element);
@@ -1267,9 +1418,6 @@ public class ITerrainTileComponentMutBunch {
     }
     foreach (var element in this.membersFallsTTCMutSet) {
       yield return new FallsTTCAsITerrainTileComponent(element);
-    }
-    foreach (var element in this.membersFireTTCMutSet) {
-      yield return new FireTTCAsITerrainTileComponent(element);
     }
     foreach (var element in this.membersObsidianFloorTTCMutSet) {
       yield return new ObsidianFloorTTCAsITerrainTileComponent(element);
@@ -1342,6 +1490,90 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return ItemTTC.Null;
+      }
+    }
+    public List<FlowerTTC> GetAllFlowerTTC() {
+      var result = new List<FlowerTTC>();
+      foreach (var thing in this.membersFlowerTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<FlowerTTC> ClearAllFlowerTTC() {
+      var result = new List<FlowerTTC>();
+      this.membersFlowerTTCMutSet.Clear();
+      return result;
+    }
+    public FlowerTTC GetOnlyFlowerTTCOrNull() {
+      var result = GetAllFlowerTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return FlowerTTC.Null;
+      }
+    }
+    public List<LotusTTC> GetAllLotusTTC() {
+      var result = new List<LotusTTC>();
+      foreach (var thing in this.membersLotusTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<LotusTTC> ClearAllLotusTTC() {
+      var result = new List<LotusTTC>();
+      this.membersLotusTTCMutSet.Clear();
+      return result;
+    }
+    public LotusTTC GetOnlyLotusTTCOrNull() {
+      var result = GetAllLotusTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return LotusTTC.Null;
+      }
+    }
+    public List<RoseTTC> GetAllRoseTTC() {
+      var result = new List<RoseTTC>();
+      foreach (var thing in this.membersRoseTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<RoseTTC> ClearAllRoseTTC() {
+      var result = new List<RoseTTC>();
+      this.membersRoseTTCMutSet.Clear();
+      return result;
+    }
+    public RoseTTC GetOnlyRoseTTCOrNull() {
+      var result = GetAllRoseTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return RoseTTC.Null;
+      }
+    }
+    public List<LeafTTC> GetAllLeafTTC() {
+      var result = new List<LeafTTC>();
+      foreach (var thing in this.membersLeafTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<LeafTTC> ClearAllLeafTTC() {
+      var result = new List<LeafTTC>();
+      this.membersLeafTTCMutSet.Clear();
+      return result;
+    }
+    public LeafTTC GetOnlyLeafTTCOrNull() {
+      var result = GetAllLeafTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return LeafTTC.Null;
       }
     }
     public List<KamikazeTargetTTC> GetAllKamikazeTargetTTC() {
@@ -1426,6 +1658,27 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return FireBombTTC.Null;
+      }
+    }
+    public List<OnFireTTC> GetAllOnFireTTC() {
+      var result = new List<OnFireTTC>();
+      foreach (var thing in this.membersOnFireTTCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<OnFireTTC> ClearAllOnFireTTC() {
+      var result = new List<OnFireTTC>();
+      this.membersOnFireTTCMutSet.Clear();
+      return result;
+    }
+    public OnFireTTC GetOnlyOnFireTTCOrNull() {
+      var result = GetAllOnFireTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return OnFireTTC.Null;
       }
     }
     public List<MarkerTTC> GetAllMarkerTTC() {
@@ -1764,27 +2017,6 @@ public class ITerrainTileComponentMutBunch {
         return FallsTTC.Null;
       }
     }
-    public List<FireTTC> GetAllFireTTC() {
-      var result = new List<FireTTC>();
-      foreach (var thing in this.membersFireTTCMutSet) {
-        result.Add(thing);
-      }
-      return result;
-    }
-    public List<FireTTC> ClearAllFireTTC() {
-      var result = new List<FireTTC>();
-      this.membersFireTTCMutSet.Clear();
-      return result;
-    }
-    public FireTTC GetOnlyFireTTCOrNull() {
-      var result = GetAllFireTTC();
-      Asserts.Assert(result.Count <= 1);
-      if (result.Count > 0) {
-        return result[0];
-      } else {
-        return FireTTC.Null;
-      }
-    }
     public List<ObsidianFloorTTC> GetAllObsidianFloorTTC() {
       var result = new List<ObsidianFloorTTC>();
       foreach (var thing in this.membersObsidianFloorTTCMutSet) {
@@ -2048,11 +2280,16 @@ public class ITerrainTileComponentMutBunch {
         result.Add(
             new FireBombTTCAsIActingTTC(obj));
       }
+      foreach (var obj in this.membersOnFireTTCMutSet) {
+        result.Add(
+            new OnFireTTCAsIActingTTC(obj));
+      }
       return result;
     }
     public List<IActingTTC> ClearAllIActingTTC() {
       var result = new List<IActingTTC>();
       this.membersFireBombTTCMutSet.Clear();
+      this.membersOnFireTTCMutSet.Clear();
       return result;
     }
     public IActingTTC GetOnlyIActingTTCOrNull() {
@@ -2158,6 +2395,43 @@ public class ITerrainTileComponentMutBunch {
         return result[0];
       } else {
         return NullIPresenceTriggerTTC.Null;
+      }
+    }
+                 public List<IPlantTTC> GetAllIPlantTTC() {
+      var result = new List<IPlantTTC>();
+      foreach (var obj in this.membersFlowerTTCMutSet) {
+        result.Add(
+            new FlowerTTCAsIPlantTTC(obj));
+      }
+      foreach (var obj in this.membersLotusTTCMutSet) {
+        result.Add(
+            new LotusTTCAsIPlantTTC(obj));
+      }
+      foreach (var obj in this.membersRoseTTCMutSet) {
+        result.Add(
+            new RoseTTCAsIPlantTTC(obj));
+      }
+      foreach (var obj in this.membersLeafTTCMutSet) {
+        result.Add(
+            new LeafTTCAsIPlantTTC(obj));
+      }
+      return result;
+    }
+    public List<IPlantTTC> ClearAllIPlantTTC() {
+      var result = new List<IPlantTTC>();
+      this.membersFlowerTTCMutSet.Clear();
+      this.membersLotusTTCMutSet.Clear();
+      this.membersRoseTTCMutSet.Clear();
+      this.membersLeafTTCMutSet.Clear();
+      return result;
+    }
+    public IPlantTTC GetOnlyIPlantTTCOrNull() {
+      var result = GetAllIPlantTTC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return NullIPlantTTC.Null;
       }
     }
              }

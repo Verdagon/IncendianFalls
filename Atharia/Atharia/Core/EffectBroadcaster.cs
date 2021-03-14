@@ -103,8 +103,17 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly SortedDictionary<int, List<INoImpulseEffectObserver>> observersForNoImpulse =
       new SortedDictionary<int, List<INoImpulseEffectObserver>>();
 
+  readonly SortedDictionary<int, List<IEvolvifyImpulseEffectObserver>> observersForEvolvifyImpulse =
+      new SortedDictionary<int, List<IEvolvifyImpulseEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IEvolvifyAICapabilityUCEffectObserver>> observersForEvolvifyAICapabilityUC =
+      new SortedDictionary<int, List<IEvolvifyAICapabilityUCEffectObserver>>();
+
   readonly SortedDictionary<int, List<IFireImpulseEffectObserver>> observersForFireImpulse =
       new SortedDictionary<int, List<IFireImpulseEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IOnFireUCEffectObserver>> observersForOnFireUC =
+      new SortedDictionary<int, List<IOnFireUCEffectObserver>>();
 
   readonly SortedDictionary<int, List<IDefyingUCEffectObserver>> observersForDefyingUC =
       new SortedDictionary<int, List<IDefyingUCEffectObserver>>();
@@ -166,6 +175,21 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly SortedDictionary<int, List<IFireBombTTCEffectObserver>> observersForFireBombTTC =
       new SortedDictionary<int, List<IFireBombTTCEffectObserver>>();
 
+  readonly SortedDictionary<int, List<IFlowerTTCEffectObserver>> observersForFlowerTTC =
+      new SortedDictionary<int, List<IFlowerTTCEffectObserver>>();
+
+  readonly SortedDictionary<int, List<ILotusTTCEffectObserver>> observersForLotusTTC =
+      new SortedDictionary<int, List<ILotusTTCEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IRoseTTCEffectObserver>> observersForRoseTTC =
+      new SortedDictionary<int, List<IRoseTTCEffectObserver>>();
+
+  readonly SortedDictionary<int, List<ILeafTTCEffectObserver>> observersForLeafTTC =
+      new SortedDictionary<int, List<ILeafTTCEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IOnFireTTCEffectObserver>> observersForOnFireTTC =
+      new SortedDictionary<int, List<IOnFireTTCEffectObserver>>();
+
   readonly SortedDictionary<int, List<IMarkerTTCEffectObserver>> observersForMarkerTTC =
       new SortedDictionary<int, List<IMarkerTTCEffectObserver>>();
 
@@ -213,9 +237,6 @@ public class EffectBroadcaster : IEffectVisitor {
 
   readonly SortedDictionary<int, List<IFallsTTCEffectObserver>> observersForFallsTTC =
       new SortedDictionary<int, List<IFallsTTCEffectObserver>>();
-
-  readonly SortedDictionary<int, List<IFireTTCEffectObserver>> observersForFireTTC =
-      new SortedDictionary<int, List<IFireTTCEffectObserver>>();
 
   readonly SortedDictionary<int, List<IObsidianFloorTTCEffectObserver>> observersForObsidianFloorTTC =
       new SortedDictionary<int, List<IObsidianFloorTTCEffectObserver>>();
@@ -409,6 +430,9 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly Dictionary<int, List<INoImpulseStrongMutSetEffectObserver>> observersForNoImpulseStrongMutSet =
       new Dictionary<int, List<INoImpulseStrongMutSetEffectObserver>>();
 
+  readonly Dictionary<int, List<IEvolvifyImpulseStrongMutSetEffectObserver>> observersForEvolvifyImpulseStrongMutSet =
+      new Dictionary<int, List<IEvolvifyImpulseStrongMutSetEffectObserver>>();
+
   readonly Dictionary<int, List<IFireImpulseStrongMutSetEffectObserver>> observersForFireImpulseStrongMutSet =
       new Dictionary<int, List<IFireImpulseStrongMutSetEffectObserver>>();
 
@@ -451,6 +475,9 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly Dictionary<int, List<IInvincibilityUCWeakMutSetEffectObserver>> observersForInvincibilityUCWeakMutSet =
       new Dictionary<int, List<IInvincibilityUCWeakMutSetEffectObserver>>();
 
+  readonly Dictionary<int, List<IOnFireUCWeakMutSetEffectObserver>> observersForOnFireUCWeakMutSet =
+      new Dictionary<int, List<IOnFireUCWeakMutSetEffectObserver>>();
+
   readonly Dictionary<int, List<IDefyingUCWeakMutSetEffectObserver>> observersForDefyingUCWeakMutSet =
       new Dictionary<int, List<IDefyingUCWeakMutSetEffectObserver>>();
 
@@ -469,6 +496,18 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly Dictionary<int, List<IItemTTCMutSetEffectObserver>> observersForItemTTCMutSet =
       new Dictionary<int, List<IItemTTCMutSetEffectObserver>>();
 
+  readonly Dictionary<int, List<IFlowerTTCMutSetEffectObserver>> observersForFlowerTTCMutSet =
+      new Dictionary<int, List<IFlowerTTCMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<ILotusTTCMutSetEffectObserver>> observersForLotusTTCMutSet =
+      new Dictionary<int, List<ILotusTTCMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IRoseTTCMutSetEffectObserver>> observersForRoseTTCMutSet =
+      new Dictionary<int, List<IRoseTTCMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<ILeafTTCMutSetEffectObserver>> observersForLeafTTCMutSet =
+      new Dictionary<int, List<ILeafTTCMutSetEffectObserver>>();
+
   readonly Dictionary<int, List<IKamikazeTargetTTCMutSetEffectObserver>> observersForKamikazeTargetTTCMutSet =
       new Dictionary<int, List<IKamikazeTargetTTCMutSetEffectObserver>>();
 
@@ -480,6 +519,9 @@ public class EffectBroadcaster : IEffectVisitor {
 
   readonly Dictionary<int, List<IFireBombTTCMutSetEffectObserver>> observersForFireBombTTCMutSet =
       new Dictionary<int, List<IFireBombTTCMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IOnFireTTCMutSetEffectObserver>> observersForOnFireTTCMutSet =
+      new Dictionary<int, List<IOnFireTTCMutSetEffectObserver>>();
 
   readonly Dictionary<int, List<IMarkerTTCMutSetEffectObserver>> observersForMarkerTTCMutSet =
       new Dictionary<int, List<IMarkerTTCMutSetEffectObserver>>();
@@ -528,9 +570,6 @@ public class EffectBroadcaster : IEffectVisitor {
 
   readonly Dictionary<int, List<IFallsTTCMutSetEffectObserver>> observersForFallsTTCMutSet =
       new Dictionary<int, List<IFallsTTCMutSetEffectObserver>>();
-
-  readonly Dictionary<int, List<IFireTTCMutSetEffectObserver>> observersForFireTTCMutSet =
-      new Dictionary<int, List<IFireTTCMutSetEffectObserver>>();
 
   readonly Dictionary<int, List<IObsidianFloorTTCMutSetEffectObserver>> observersForObsidianFloorTTCMutSet =
       new Dictionary<int, List<IObsidianFloorTTCMutSetEffectObserver>>();
@@ -583,6 +622,9 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly Dictionary<int, List<IGuardAICapabilityUCMutSetEffectObserver>> observersForGuardAICapabilityUCMutSet =
       new Dictionary<int, List<IGuardAICapabilityUCMutSetEffectObserver>>();
 
+  readonly Dictionary<int, List<IEvolvifyAICapabilityUCMutSetEffectObserver>> observersForEvolvifyAICapabilityUCMutSet =
+      new Dictionary<int, List<IEvolvifyAICapabilityUCMutSetEffectObserver>>();
+
   readonly Dictionary<int, List<ITimeCloneAICapabilityUCMutSetEffectObserver>> observersForTimeCloneAICapabilityUCMutSet =
       new Dictionary<int, List<ITimeCloneAICapabilityUCMutSetEffectObserver>>();
 
@@ -591,6 +633,9 @@ public class EffectBroadcaster : IEffectVisitor {
 
   readonly Dictionary<int, List<IMiredUCMutSetEffectObserver>> observersForMiredUCMutSet =
       new Dictionary<int, List<IMiredUCMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IOnFireUCMutSetEffectObserver>> observersForOnFireUCMutSet =
+      new Dictionary<int, List<IOnFireUCMutSetEffectObserver>>();
 
   readonly Dictionary<int, List<IAttackAICapabilityUCMutSetEffectObserver>> observersForAttackAICapabilityUCMutSet =
       new Dictionary<int, List<IAttackAICapabilityUCMutSetEffectObserver>>();
@@ -1536,6 +1581,62 @@ public class EffectBroadcaster : IEffectVisitor {
     }
   }
 
+  public void visitEvolvifyImpulseEffect(IEvolvifyImpulseEffect effect) {
+    if (observersForEvolvifyImpulse.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IEvolvifyImpulseEffectObserver>(observers)) {
+        observer.OnEvolvifyImpulseEffect(effect);
+      }
+    }
+  }
+  public void AddEvolvifyImpulseObserver(int id, IEvolvifyImpulseEffectObserver observer) {
+    List<IEvolvifyImpulseEffectObserver> obsies;
+    if (!observersForEvolvifyImpulse.TryGetValue(id, out obsies)) {
+      obsies = new List<IEvolvifyImpulseEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForEvolvifyImpulse[id] = obsies;
+  }
+
+  public void RemoveEvolvifyImpulseObserver(int id, IEvolvifyImpulseEffectObserver observer) {
+    if (observersForEvolvifyImpulse.ContainsKey(id)) {
+      var list = observersForEvolvifyImpulse[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForEvolvifyImpulse.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitEvolvifyAICapabilityUCEffect(IEvolvifyAICapabilityUCEffect effect) {
+    if (observersForEvolvifyAICapabilityUC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IEvolvifyAICapabilityUCEffectObserver>(observers)) {
+        observer.OnEvolvifyAICapabilityUCEffect(effect);
+      }
+    }
+  }
+  public void AddEvolvifyAICapabilityUCObserver(int id, IEvolvifyAICapabilityUCEffectObserver observer) {
+    List<IEvolvifyAICapabilityUCEffectObserver> obsies;
+    if (!observersForEvolvifyAICapabilityUC.TryGetValue(id, out obsies)) {
+      obsies = new List<IEvolvifyAICapabilityUCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForEvolvifyAICapabilityUC[id] = obsies;
+  }
+
+  public void RemoveEvolvifyAICapabilityUCObserver(int id, IEvolvifyAICapabilityUCEffectObserver observer) {
+    if (observersForEvolvifyAICapabilityUC.ContainsKey(id)) {
+      var list = observersForEvolvifyAICapabilityUC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForEvolvifyAICapabilityUC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
   public void visitFireImpulseEffect(IFireImpulseEffect effect) {
     if (observersForFireImpulse.TryGetValue(effect.id, out var observers)) {
       foreach (var observer in new List<IFireImpulseEffectObserver>(observers)) {
@@ -1558,6 +1659,34 @@ public class EffectBroadcaster : IEffectVisitor {
       list.Remove(observer);
       if (list.Count == 0) {
         observersForFireImpulse.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitOnFireUCEffect(IOnFireUCEffect effect) {
+    if (observersForOnFireUC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IOnFireUCEffectObserver>(observers)) {
+        observer.OnOnFireUCEffect(effect);
+      }
+    }
+  }
+  public void AddOnFireUCObserver(int id, IOnFireUCEffectObserver observer) {
+    List<IOnFireUCEffectObserver> obsies;
+    if (!observersForOnFireUC.TryGetValue(id, out obsies)) {
+      obsies = new List<IOnFireUCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForOnFireUC[id] = obsies;
+  }
+
+  public void RemoveOnFireUCObserver(int id, IOnFireUCEffectObserver observer) {
+    if (observersForOnFireUC.ContainsKey(id)) {
+      var list = observersForOnFireUC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForOnFireUC.Remove(id);
       }
     } else {
       throw new Exception("Couldnt find!");
@@ -2124,6 +2253,146 @@ public class EffectBroadcaster : IEffectVisitor {
     }
   }
 
+  public void visitFlowerTTCEffect(IFlowerTTCEffect effect) {
+    if (observersForFlowerTTC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IFlowerTTCEffectObserver>(observers)) {
+        observer.OnFlowerTTCEffect(effect);
+      }
+    }
+  }
+  public void AddFlowerTTCObserver(int id, IFlowerTTCEffectObserver observer) {
+    List<IFlowerTTCEffectObserver> obsies;
+    if (!observersForFlowerTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IFlowerTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForFlowerTTC[id] = obsies;
+  }
+
+  public void RemoveFlowerTTCObserver(int id, IFlowerTTCEffectObserver observer) {
+    if (observersForFlowerTTC.ContainsKey(id)) {
+      var list = observersForFlowerTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForFlowerTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitLotusTTCEffect(ILotusTTCEffect effect) {
+    if (observersForLotusTTC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<ILotusTTCEffectObserver>(observers)) {
+        observer.OnLotusTTCEffect(effect);
+      }
+    }
+  }
+  public void AddLotusTTCObserver(int id, ILotusTTCEffectObserver observer) {
+    List<ILotusTTCEffectObserver> obsies;
+    if (!observersForLotusTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<ILotusTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForLotusTTC[id] = obsies;
+  }
+
+  public void RemoveLotusTTCObserver(int id, ILotusTTCEffectObserver observer) {
+    if (observersForLotusTTC.ContainsKey(id)) {
+      var list = observersForLotusTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForLotusTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitRoseTTCEffect(IRoseTTCEffect effect) {
+    if (observersForRoseTTC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IRoseTTCEffectObserver>(observers)) {
+        observer.OnRoseTTCEffect(effect);
+      }
+    }
+  }
+  public void AddRoseTTCObserver(int id, IRoseTTCEffectObserver observer) {
+    List<IRoseTTCEffectObserver> obsies;
+    if (!observersForRoseTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IRoseTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForRoseTTC[id] = obsies;
+  }
+
+  public void RemoveRoseTTCObserver(int id, IRoseTTCEffectObserver observer) {
+    if (observersForRoseTTC.ContainsKey(id)) {
+      var list = observersForRoseTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForRoseTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitLeafTTCEffect(ILeafTTCEffect effect) {
+    if (observersForLeafTTC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<ILeafTTCEffectObserver>(observers)) {
+        observer.OnLeafTTCEffect(effect);
+      }
+    }
+  }
+  public void AddLeafTTCObserver(int id, ILeafTTCEffectObserver observer) {
+    List<ILeafTTCEffectObserver> obsies;
+    if (!observersForLeafTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<ILeafTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForLeafTTC[id] = obsies;
+  }
+
+  public void RemoveLeafTTCObserver(int id, ILeafTTCEffectObserver observer) {
+    if (observersForLeafTTC.ContainsKey(id)) {
+      var list = observersForLeafTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForLeafTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitOnFireTTCEffect(IOnFireTTCEffect effect) {
+    if (observersForOnFireTTC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IOnFireTTCEffectObserver>(observers)) {
+        observer.OnOnFireTTCEffect(effect);
+      }
+    }
+  }
+  public void AddOnFireTTCObserver(int id, IOnFireTTCEffectObserver observer) {
+    List<IOnFireTTCEffectObserver> obsies;
+    if (!observersForOnFireTTC.TryGetValue(id, out obsies)) {
+      obsies = new List<IOnFireTTCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForOnFireTTC[id] = obsies;
+  }
+
+  public void RemoveOnFireTTCObserver(int id, IOnFireTTCEffectObserver observer) {
+    if (observersForOnFireTTC.ContainsKey(id)) {
+      var list = observersForOnFireTTC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForOnFireTTC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
   public void visitMarkerTTCEffect(IMarkerTTCEffect effect) {
     if (observersForMarkerTTC.TryGetValue(effect.id, out var observers)) {
       foreach (var observer in new List<IMarkerTTCEffectObserver>(observers)) {
@@ -2566,34 +2835,6 @@ public class EffectBroadcaster : IEffectVisitor {
       list.Remove(observer);
       if (list.Count == 0) {
         observersForFallsTTC.Remove(id);
-      }
-    } else {
-      throw new Exception("Couldnt find!");
-    }
-  }
-
-  public void visitFireTTCEffect(IFireTTCEffect effect) {
-    if (observersForFireTTC.TryGetValue(effect.id, out var observers)) {
-      foreach (var observer in new List<IFireTTCEffectObserver>(observers)) {
-        observer.OnFireTTCEffect(effect);
-      }
-    }
-  }
-  public void AddFireTTCObserver(int id, IFireTTCEffectObserver observer) {
-    List<IFireTTCEffectObserver> obsies;
-    if (!observersForFireTTC.TryGetValue(id, out obsies)) {
-      obsies = new List<IFireTTCEffectObserver>();
-    }
-    obsies.Add(observer);
-    observersForFireTTC[id] = obsies;
-  }
-
-  public void RemoveFireTTCObserver(int id, IFireTTCEffectObserver observer) {
-    if (observersForFireTTC.ContainsKey(id)) {
-      var list = observersForFireTTC[id];
-      list.Remove(observer);
-      if (list.Count == 0) {
-        observersForFireTTC.Remove(id);
       }
     } else {
       throw new Exception("Couldnt find!");
@@ -4372,6 +4613,33 @@ public class EffectBroadcaster : IEffectVisitor {
       }
     }
 
+    public void visitEvolvifyImpulseStrongMutSetEffect(IEvolvifyImpulseStrongMutSetEffect effect) {
+      if (observersForEvolvifyImpulseStrongMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IEvolvifyImpulseStrongMutSetEffectObserver>(observers)) {
+          observer.OnEvolvifyImpulseStrongMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddEvolvifyImpulseStrongMutSetObserver(int id, IEvolvifyImpulseStrongMutSetEffectObserver observer) {
+      List<IEvolvifyImpulseStrongMutSetEffectObserver> obsies;
+      if (!observersForEvolvifyImpulseStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IEvolvifyImpulseStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForEvolvifyImpulseStrongMutSet[id] = obsies;
+    }
+    public void RemoveEvolvifyImpulseStrongMutSetObserver(int id, IEvolvifyImpulseStrongMutSetEffectObserver observer) {
+      if (observersForEvolvifyImpulseStrongMutSet.ContainsKey(id)) {
+        var list = observersForEvolvifyImpulseStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForEvolvifyImpulseStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
     public void visitFireImpulseStrongMutSetEffect(IFireImpulseStrongMutSetEffect effect) {
       if (observersForFireImpulseStrongMutSet.TryGetValue(effect.id, out var observers)) {
         foreach (var observer in new List<IFireImpulseStrongMutSetEffectObserver>(observers)) {
@@ -4750,6 +5018,33 @@ public class EffectBroadcaster : IEffectVisitor {
       }
     }
 
+    public void visitOnFireUCWeakMutSetEffect(IOnFireUCWeakMutSetEffect effect) {
+      if (observersForOnFireUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IOnFireUCWeakMutSetEffectObserver>(observers)) {
+          observer.OnOnFireUCWeakMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddOnFireUCWeakMutSetObserver(int id, IOnFireUCWeakMutSetEffectObserver observer) {
+      List<IOnFireUCWeakMutSetEffectObserver> obsies;
+      if (!observersForOnFireUCWeakMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IOnFireUCWeakMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForOnFireUCWeakMutSet[id] = obsies;
+    }
+    public void RemoveOnFireUCWeakMutSetObserver(int id, IOnFireUCWeakMutSetEffectObserver observer) {
+      if (observersForOnFireUCWeakMutSet.ContainsKey(id)) {
+        var list = observersForOnFireUCWeakMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForOnFireUCWeakMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
     public void visitDefyingUCWeakMutSetEffect(IDefyingUCWeakMutSetEffect effect) {
       if (observersForDefyingUCWeakMutSet.TryGetValue(effect.id, out var observers)) {
         foreach (var observer in new List<IDefyingUCWeakMutSetEffectObserver>(observers)) {
@@ -4912,6 +5207,114 @@ public class EffectBroadcaster : IEffectVisitor {
       }
     }
 
+    public void visitFlowerTTCMutSetEffect(IFlowerTTCMutSetEffect effect) {
+      if (observersForFlowerTTCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IFlowerTTCMutSetEffectObserver>(observers)) {
+          observer.OnFlowerTTCMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddFlowerTTCMutSetObserver(int id, IFlowerTTCMutSetEffectObserver observer) {
+      List<IFlowerTTCMutSetEffectObserver> obsies;
+      if (!observersForFlowerTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IFlowerTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForFlowerTTCMutSet[id] = obsies;
+    }
+    public void RemoveFlowerTTCMutSetObserver(int id, IFlowerTTCMutSetEffectObserver observer) {
+      if (observersForFlowerTTCMutSet.ContainsKey(id)) {
+        var list = observersForFlowerTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForFlowerTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitLotusTTCMutSetEffect(ILotusTTCMutSetEffect effect) {
+      if (observersForLotusTTCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<ILotusTTCMutSetEffectObserver>(observers)) {
+          observer.OnLotusTTCMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddLotusTTCMutSetObserver(int id, ILotusTTCMutSetEffectObserver observer) {
+      List<ILotusTTCMutSetEffectObserver> obsies;
+      if (!observersForLotusTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ILotusTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForLotusTTCMutSet[id] = obsies;
+    }
+    public void RemoveLotusTTCMutSetObserver(int id, ILotusTTCMutSetEffectObserver observer) {
+      if (observersForLotusTTCMutSet.ContainsKey(id)) {
+        var list = observersForLotusTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForLotusTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitRoseTTCMutSetEffect(IRoseTTCMutSetEffect effect) {
+      if (observersForRoseTTCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IRoseTTCMutSetEffectObserver>(observers)) {
+          observer.OnRoseTTCMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddRoseTTCMutSetObserver(int id, IRoseTTCMutSetEffectObserver observer) {
+      List<IRoseTTCMutSetEffectObserver> obsies;
+      if (!observersForRoseTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IRoseTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForRoseTTCMutSet[id] = obsies;
+    }
+    public void RemoveRoseTTCMutSetObserver(int id, IRoseTTCMutSetEffectObserver observer) {
+      if (observersForRoseTTCMutSet.ContainsKey(id)) {
+        var list = observersForRoseTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForRoseTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitLeafTTCMutSetEffect(ILeafTTCMutSetEffect effect) {
+      if (observersForLeafTTCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<ILeafTTCMutSetEffectObserver>(observers)) {
+          observer.OnLeafTTCMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddLeafTTCMutSetObserver(int id, ILeafTTCMutSetEffectObserver observer) {
+      List<ILeafTTCMutSetEffectObserver> obsies;
+      if (!observersForLeafTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<ILeafTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForLeafTTCMutSet[id] = obsies;
+    }
+    public void RemoveLeafTTCMutSetObserver(int id, ILeafTTCMutSetEffectObserver observer) {
+      if (observersForLeafTTCMutSet.ContainsKey(id)) {
+        var list = observersForLeafTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForLeafTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
     public void visitKamikazeTargetTTCMutSetEffect(IKamikazeTargetTTCMutSetEffect effect) {
       if (observersForKamikazeTargetTTCMutSet.TryGetValue(effect.id, out var observers)) {
         foreach (var observer in new List<IKamikazeTargetTTCMutSetEffectObserver>(observers)) {
@@ -5014,6 +5417,33 @@ public class EffectBroadcaster : IEffectVisitor {
         list.Remove(observer);
         if (list.Count == 0) {
           observersForFireBombTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitOnFireTTCMutSetEffect(IOnFireTTCMutSetEffect effect) {
+      if (observersForOnFireTTCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IOnFireTTCMutSetEffectObserver>(observers)) {
+          observer.OnOnFireTTCMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddOnFireTTCMutSetObserver(int id, IOnFireTTCMutSetEffectObserver observer) {
+      List<IOnFireTTCMutSetEffectObserver> obsies;
+      if (!observersForOnFireTTCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IOnFireTTCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForOnFireTTCMutSet[id] = obsies;
+    }
+    public void RemoveOnFireTTCMutSetObserver(int id, IOnFireTTCMutSetEffectObserver observer) {
+      if (observersForOnFireTTCMutSet.ContainsKey(id)) {
+        var list = observersForOnFireTTCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForOnFireTTCMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");
@@ -5446,33 +5876,6 @@ public class EffectBroadcaster : IEffectVisitor {
         list.Remove(observer);
         if (list.Count == 0) {
           observersForFallsTTCMutSet.Remove(id);
-        }
-      } else {
-        throw new Exception("Couldnt find!");
-      }
-    }
-
-    public void visitFireTTCMutSetEffect(IFireTTCMutSetEffect effect) {
-      if (observersForFireTTCMutSet.TryGetValue(effect.id, out var observers)) {
-        foreach (var observer in new List<IFireTTCMutSetEffectObserver>(observers)) {
-          observer.OnFireTTCMutSetEffect(effect);
-        }
-      }
-    }
-    public void AddFireTTCMutSetObserver(int id, IFireTTCMutSetEffectObserver observer) {
-      List<IFireTTCMutSetEffectObserver> obsies;
-      if (!observersForFireTTCMutSet.TryGetValue(id, out obsies)) {
-        obsies = new List<IFireTTCMutSetEffectObserver>();
-      }
-      obsies.Add(observer);
-      observersForFireTTCMutSet[id] = obsies;
-    }
-    public void RemoveFireTTCMutSetObserver(int id, IFireTTCMutSetEffectObserver observer) {
-      if (observersForFireTTCMutSet.ContainsKey(id)) {
-        var list = observersForFireTTCMutSet[id];
-        list.Remove(observer);
-        if (list.Count == 0) {
-          observersForFireTTCMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");
@@ -5938,6 +6341,33 @@ public class EffectBroadcaster : IEffectVisitor {
       }
     }
 
+    public void visitEvolvifyAICapabilityUCMutSetEffect(IEvolvifyAICapabilityUCMutSetEffect effect) {
+      if (observersForEvolvifyAICapabilityUCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IEvolvifyAICapabilityUCMutSetEffectObserver>(observers)) {
+          observer.OnEvolvifyAICapabilityUCMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddEvolvifyAICapabilityUCMutSetObserver(int id, IEvolvifyAICapabilityUCMutSetEffectObserver observer) {
+      List<IEvolvifyAICapabilityUCMutSetEffectObserver> obsies;
+      if (!observersForEvolvifyAICapabilityUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IEvolvifyAICapabilityUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForEvolvifyAICapabilityUCMutSet[id] = obsies;
+    }
+    public void RemoveEvolvifyAICapabilityUCMutSetObserver(int id, IEvolvifyAICapabilityUCMutSetEffectObserver observer) {
+      if (observersForEvolvifyAICapabilityUCMutSet.ContainsKey(id)) {
+        var list = observersForEvolvifyAICapabilityUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForEvolvifyAICapabilityUCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
     public void visitTimeCloneAICapabilityUCMutSetEffect(ITimeCloneAICapabilityUCMutSetEffect effect) {
       if (observersForTimeCloneAICapabilityUCMutSet.TryGetValue(effect.id, out var observers)) {
         foreach (var observer in new List<ITimeCloneAICapabilityUCMutSetEffectObserver>(observers)) {
@@ -6013,6 +6443,33 @@ public class EffectBroadcaster : IEffectVisitor {
         list.Remove(observer);
         if (list.Count == 0) {
           observersForMiredUCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitOnFireUCMutSetEffect(IOnFireUCMutSetEffect effect) {
+      if (observersForOnFireUCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IOnFireUCMutSetEffectObserver>(observers)) {
+          observer.OnOnFireUCMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddOnFireUCMutSetObserver(int id, IOnFireUCMutSetEffectObserver observer) {
+      List<IOnFireUCMutSetEffectObserver> obsies;
+      if (!observersForOnFireUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IOnFireUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForOnFireUCMutSet[id] = obsies;
+    }
+    public void RemoveOnFireUCMutSetObserver(int id, IOnFireUCMutSetEffectObserver observer) {
+      if (observersForOnFireUCMutSet.ContainsKey(id)) {
+        var list = observersForOnFireUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForOnFireUCMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");

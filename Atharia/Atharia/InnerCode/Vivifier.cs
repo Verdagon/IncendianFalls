@@ -175,7 +175,7 @@ namespace IncendianFalls {
           tile.components.Add(level.root.EffectMagmaTTCCreate().AsITerrainTileComponent());
           return true;
         case "Fire":
-          tile.components.Add(level.root.EffectFireTTCCreate().AsITerrainTileComponent());
+          tile.components.Add(level.root.EffectOnFireTTCCreate(Int32.MaxValue).AsITerrainTileComponent());
           return true;
         case "Ravashrike":
           var unit = Ravashrike.Make(level.root);

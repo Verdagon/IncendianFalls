@@ -12,9 +12,11 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
   public readonly int membersSummonAICapabilityUCMutSet;
   public readonly int membersKamikazeAICapabilityUCMutSet;
   public readonly int membersGuardAICapabilityUCMutSet;
+  public readonly int membersEvolvifyAICapabilityUCMutSet;
   public readonly int membersTimeCloneAICapabilityUCMutSet;
   public readonly int membersDoomedUCMutSet;
   public readonly int membersMiredUCMutSet;
+  public readonly int membersOnFireUCMutSet;
   public readonly int membersAttackAICapabilityUCMutSet;
   public readonly int membersCounteringUCMutSet;
   public readonly int membersLightningChargedUCMutSet;
@@ -42,9 +44,11 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
       int membersSummonAICapabilityUCMutSet,
       int membersKamikazeAICapabilityUCMutSet,
       int membersGuardAICapabilityUCMutSet,
+      int membersEvolvifyAICapabilityUCMutSet,
       int membersTimeCloneAICapabilityUCMutSet,
       int membersDoomedUCMutSet,
       int membersMiredUCMutSet,
+      int membersOnFireUCMutSet,
       int membersAttackAICapabilityUCMutSet,
       int membersCounteringUCMutSet,
       int membersLightningChargedUCMutSet,
@@ -71,9 +75,11 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
     this.membersSummonAICapabilityUCMutSet = membersSummonAICapabilityUCMutSet;
     this.membersKamikazeAICapabilityUCMutSet = membersKamikazeAICapabilityUCMutSet;
     this.membersGuardAICapabilityUCMutSet = membersGuardAICapabilityUCMutSet;
+    this.membersEvolvifyAICapabilityUCMutSet = membersEvolvifyAICapabilityUCMutSet;
     this.membersTimeCloneAICapabilityUCMutSet = membersTimeCloneAICapabilityUCMutSet;
     this.membersDoomedUCMutSet = membersDoomedUCMutSet;
     this.membersMiredUCMutSet = membersMiredUCMutSet;
+    this.membersOnFireUCMutSet = membersOnFireUCMutSet;
     this.membersAttackAICapabilityUCMutSet = membersAttackAICapabilityUCMutSet;
     this.membersCounteringUCMutSet = membersCounteringUCMutSet;
     this.membersLightningChargedUCMutSet = membersLightningChargedUCMutSet;
@@ -103,9 +109,11 @@ membersTemporaryCloneAICapabilityUCMutSet,
 membersSummonAICapabilityUCMutSet,
 membersKamikazeAICapabilityUCMutSet,
 membersGuardAICapabilityUCMutSet,
+membersEvolvifyAICapabilityUCMutSet,
 membersTimeCloneAICapabilityUCMutSet,
 membersDoomedUCMutSet,
 membersMiredUCMutSet,
+membersOnFireUCMutSet,
 membersAttackAICapabilityUCMutSet,
 membersCounteringUCMutSet,
 membersLightningChargedUCMutSet,
@@ -129,6 +137,8 @@ membersBaseDefenseUCMutSet    );
 
   public void visitIUnitComponentMutBunchCreateEffect(IUnitComponentMutBunchCreateEffect e) {}
   public void visitIUnitComponentMutBunchDeleteEffect(IUnitComponentMutBunchDeleteEffect e) {}
+
+
 
 
 

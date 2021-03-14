@@ -71,6 +71,10 @@ public class IImpulseStrongMutBunch {
       violations.Add("Null constraint violated! IImpulseStrongMutBunch#" + id + ".membersNoImpulseStrongMutSet");
     }
 
+    if (!root.EvolvifyImpulseStrongMutSetExists(membersEvolvifyImpulseStrongMutSet.id)) {
+      violations.Add("Null constraint violated! IImpulseStrongMutBunch#" + id + ".membersEvolvifyImpulseStrongMutSet");
+    }
+
     if (!root.FireImpulseStrongMutSetExists(membersFireImpulseStrongMutSet.id)) {
       violations.Add("Null constraint violated! IImpulseStrongMutBunch#" + id + ".membersFireImpulseStrongMutSet");
     }
@@ -138,6 +142,9 @@ public class IImpulseStrongMutBunch {
     }
     if (root.NoImpulseStrongMutSetExists(membersNoImpulseStrongMutSet.id)) {
       membersNoImpulseStrongMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.EvolvifyImpulseStrongMutSetExists(membersEvolvifyImpulseStrongMutSet.id)) {
+      membersEvolvifyImpulseStrongMutSet.FindReachableObjects(foundIds);
     }
     if (root.FireImpulseStrongMutSetExists(membersFireImpulseStrongMutSet.id)) {
       membersFireImpulseStrongMutSet.FindReachableObjects(foundIds);
@@ -257,6 +264,15 @@ public class IImpulseStrongMutBunch {
       return new NoImpulseStrongMutSet(root, incarnation.membersNoImpulseStrongMutSet);
     }
                        }
+  public EvolvifyImpulseStrongMutSet membersEvolvifyImpulseStrongMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersEvolvifyImpulseStrongMutSet of null!");
+      }
+      return new EvolvifyImpulseStrongMutSet(root, incarnation.membersEvolvifyImpulseStrongMutSet);
+    }
+                       }
   public FireImpulseStrongMutSet membersFireImpulseStrongMutSet {
 
     get {
@@ -359,6 +375,8 @@ public class IImpulseStrongMutBunch {
 ,
       root.EffectNoImpulseStrongMutSetCreate()
 ,
+      root.EffectEvolvifyImpulseStrongMutSetCreate()
+,
       root.EffectFireImpulseStrongMutSetCreate()
 ,
       root.EffectDefyImpulseStrongMutSetCreate()
@@ -431,6 +449,12 @@ public class IImpulseStrongMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.NoImpulseExists(elementI.id)) {
       this.membersNoImpulseStrongMutSet.Add(root.GetNoImpulse(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.EvolvifyImpulseExists(elementI.id)) {
+      this.membersEvolvifyImpulseStrongMutSet.Add(root.GetEvolvifyImpulse(elementI.id));
       return;
     }
 
@@ -546,6 +570,12 @@ public class IImpulseStrongMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.EvolvifyImpulseExists(elementI.id)) {
+      this.membersEvolvifyImpulseStrongMutSet.Remove(root.GetEvolvifyImpulse(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.FireImpulseExists(elementI.id)) {
       this.membersFireImpulseStrongMutSet.Remove(root.GetFireImpulse(elementI.id));
       return;
@@ -610,6 +640,7 @@ public class IImpulseStrongMutBunch {
     this.membersKamikazeJumpImpulseStrongMutSet.Clear();
     this.membersKamikazeTargetImpulseStrongMutSet.Clear();
     this.membersNoImpulseStrongMutSet.Clear();
+    this.membersEvolvifyImpulseStrongMutSet.Clear();
     this.membersFireImpulseStrongMutSet.Clear();
     this.membersDefyImpulseStrongMutSet.Clear();
     this.membersCounterImpulseStrongMutSet.Clear();
@@ -632,6 +663,7 @@ public class IImpulseStrongMutBunch {
         this.membersKamikazeJumpImpulseStrongMutSet.Count +
         this.membersKamikazeTargetImpulseStrongMutSet.Count +
         this.membersNoImpulseStrongMutSet.Count +
+        this.membersEvolvifyImpulseStrongMutSet.Count +
         this.membersFireImpulseStrongMutSet.Count +
         this.membersDefyImpulseStrongMutSet.Count +
         this.membersCounterImpulseStrongMutSet.Count +
@@ -661,6 +693,7 @@ public class IImpulseStrongMutBunch {
     var tempMembersKamikazeJumpImpulseStrongMutSet = this.membersKamikazeJumpImpulseStrongMutSet;
     var tempMembersKamikazeTargetImpulseStrongMutSet = this.membersKamikazeTargetImpulseStrongMutSet;
     var tempMembersNoImpulseStrongMutSet = this.membersNoImpulseStrongMutSet;
+    var tempMembersEvolvifyImpulseStrongMutSet = this.membersEvolvifyImpulseStrongMutSet;
     var tempMembersFireImpulseStrongMutSet = this.membersFireImpulseStrongMutSet;
     var tempMembersDefyImpulseStrongMutSet = this.membersDefyImpulseStrongMutSet;
     var tempMembersCounterImpulseStrongMutSet = this.membersCounterImpulseStrongMutSet;
@@ -681,6 +714,7 @@ public class IImpulseStrongMutBunch {
     tempMembersKamikazeJumpImpulseStrongMutSet.Destruct();
     tempMembersKamikazeTargetImpulseStrongMutSet.Destruct();
     tempMembersNoImpulseStrongMutSet.Destruct();
+    tempMembersEvolvifyImpulseStrongMutSet.Destruct();
     tempMembersFireImpulseStrongMutSet.Destruct();
     tempMembersDefyImpulseStrongMutSet.Destruct();
     tempMembersCounterImpulseStrongMutSet.Destruct();
@@ -718,6 +752,9 @@ public class IImpulseStrongMutBunch {
     }
     foreach (var element in this.membersNoImpulseStrongMutSet) {
       yield return new NoImpulseAsIImpulse(element);
+    }
+    foreach (var element in this.membersEvolvifyImpulseStrongMutSet) {
+      yield return new EvolvifyImpulseAsIImpulse(element);
     }
     foreach (var element in this.membersFireImpulseStrongMutSet) {
       yield return new FireImpulseAsIImpulse(element);
@@ -934,6 +971,27 @@ public class IImpulseStrongMutBunch {
         return result[0];
       } else {
         return NoImpulse.Null;
+      }
+    }
+    public List<EvolvifyImpulse> GetAllEvolvifyImpulse() {
+      var result = new List<EvolvifyImpulse>();
+      foreach (var thing in this.membersEvolvifyImpulseStrongMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<EvolvifyImpulse> ClearAllEvolvifyImpulse() {
+      var result = new List<EvolvifyImpulse>();
+      this.membersEvolvifyImpulseStrongMutSet.Clear();
+      return result;
+    }
+    public EvolvifyImpulse GetOnlyEvolvifyImpulseOrNull() {
+      var result = GetAllEvolvifyImpulse();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return EvolvifyImpulse.Null;
       }
     }
     public List<FireImpulse> GetAllFireImpulse() {

@@ -21,14 +21,32 @@ namespace Atharia.Model {
       return new Atharia.Model.Void();
     }
   }
-  public static class FireTTCExtensions {
-    public static Atharia.Model.Void Destruct(this FireTTC obj) {
+  public static class TreeTTCExtensions {
+    public static Atharia.Model.Void Destruct(this TreeTTC obj) {
       obj.Delete();
       return new Atharia.Model.Void();
     }
   }
-  public static class TreeTTCExtensions {
-    public static Atharia.Model.Void Destruct(this TreeTTC obj) {
+  public static class LeafTTCExtensions {
+    public static Atharia.Model.Void Destruct(this LeafTTC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+  }
+  public static class LotusTTCExtensions {
+    public static Atharia.Model.Void Destruct(this LotusTTC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+  }
+  public static class RoseTTCExtensions {
+    public static Atharia.Model.Void Destruct(this RoseTTC obj) {
+      obj.Delete();
+      return new Atharia.Model.Void();
+    }
+  }
+  public static class FlowerTTCExtensions {
+    public static Atharia.Model.Void Destruct(this FlowerTTC obj) {
       obj.Delete();
       return new Atharia.Model.Void();
     }

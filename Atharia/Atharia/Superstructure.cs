@@ -566,7 +566,10 @@ namespace IncendianFalls {
         var (events, path) = context.root.Transact(delegate () {
           return FindPathRequestExecutor.Execute(context, superstate, request);
         });
-        Asserts.Assert(events.Count == 0);
+        if (events.Count > 0) {
+          root.logger.Error(events[0].ToString());
+          Asserts.Assert(false);
+        }
         context.Flare(GetDeterministicHashCode());
         return path;
       } catch (Exception e) {
