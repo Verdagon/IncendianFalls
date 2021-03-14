@@ -13,6 +13,8 @@ namespace Atharia.Model {
         out Level levelRet,
         out LevelSuperstate levelSuperstate,
         out Location entryLocationRet,
+        out SortedSet<Location> openLowerLocsRet,
+        out SortedSet<Location> openUpperLocsRet,
         SSContext context,
         Game game,
         Superstate superstate,
@@ -26,7 +28,7 @@ namespace Atharia.Model {
       if (depth == 2) {
         pattern = HexPattern.MakeHexPattern();
       }
-      var terrain =
+      var (terrain, openLowerLocs, openUpperLocs) =
         IntertwiningCaveTerrainGenerator.Generate(
           context,
           game.root,
@@ -34,19 +36,8 @@ namespace Atharia.Model {
           false,
           game.rand,
           20.0f);
-      context.Flare(context.root.GetDeterministicHashCode().ToString());
-
-      var floors = new SortedSet<Location>(terrain.tiles.Keys);
-      // var borderLocations = terrain.pattern.GetAdjacentLocations(floors, false, true);
-      // foreach (var borderLocation in borderLocations) {
-      //   if (!terrain.tiles.ContainsKey(borderLocation)) {
-      //     var tile = game.root.EffectTerrainTileCreate(
-      //         NullITerrainTileEvent.Null, 2, ITerrainTileComponentMutBunch.New(game.root));
-      //     tile.components.Add(game.root.EffectCaveWallTTCCreate().AsITerrainTileComponent());
-      //     terrain.tiles.Add(borderLocation, tile);
-      //   }
-      // }
-
+      openLowerLocsRet = openLowerLocs;
+      openUpperLocsRet = openUpperLocs;
       context.Flare(context.root.GetDeterministicHashCode().ToString());
 
       var level =
@@ -61,8 +52,8 @@ namespace Atharia.Model {
       context.Flare(context.root.GetDeterministicHashCode().ToString());
 
 
-      var entryAndExitCandidateLocations = floors;
-      var wideOpenLocations = level.terrain.pattern.GetInnerLocations(floors, considerCornersAdjacent);
+      var entryAndExitCandidateLocations = openLowerLocs;
+      var wideOpenLocations = level.terrain.pattern.GetInnerLocations(openLowerLocs, considerCornersAdjacent);
       if (wideOpenLocations.Count >= 2) {
         entryAndExitCandidateLocations = wideOpenLocations;
       }
@@ -81,23 +72,23 @@ namespace Atharia.Model {
           (loc) => entryAndExitCandidateLocations.Contains(loc),
           false,
           false)[0];
-      // Asserts.Assert(wideOpenLocations.Contains(entryLocation), "wat");
-      Console.WriteLine("put this back in!");
+      openLowerLocs.Remove(entryLocation);
 
       context.Flare(context.root.GetDeterministicHashCode().ToString());
 
-      var exitLocation =
-        levelSuperstate.GetNRandomWalkableLocations(
-          level.terrain,
-          game.rand,
-          1,
-          (loc) => !loc.Equals(entryLocation),
-          false,
-          false)[0];
-      level.terrain.tiles[exitLocation].components.Add(
-        game.root.EffectCaveTTCCreate().AsITerrainTileComponent());
-      level.terrain.tiles[exitLocation].components.Add(
-        game.root.EffectEmberDeepLevelLinkerTTCCreate(depth + 1).AsITerrainTileComponent());
+      // var exitLocation =
+      //   levelSuperstate.GetNRandomWalkableLocations(
+      //     level.terrain,
+      //     game.rand,
+      //     1,
+      //     (loc) => !loc.Equals(entryLocation),
+      //     false,
+      //     false)[0];
+      // level.terrain.tiles[exitLocation].components.Add(
+      //   game.root.EffectCaveTTCCreate().AsITerrainTileComponent());
+      // level.terrain.tiles[exitLocation].components.Add(
+      //   game.root.EffectEmberDeepLevelLinkerTTCCreate(depth + 1).AsITerrainTileComponent());
+      // openUpperLocs.Remove(exitLocation);
 
       context.Flare(context.root.GetDeterministicHashCode().ToString());
 
@@ -106,97 +97,6 @@ namespace Atharia.Model {
       // context.Flare(context.root.GetDeterministicHashCode().ToString());
 
       level.controller = game.root.EffectJumpingCaveLevelControllerCreate(level, depth).AsILevelController();
-
-      // if (depth == 0) {
-      //   var nextToExitLocation =
-      //     levelSuperstate.GetNRandomWalkableLocations(
-      //       level.terrain,
-      //       game.rand,
-      //       1,
-      //       (loc) => level.terrain.pattern.LocationsAreAdjacent(loc, exitLocation, false), true, true)[0];
-      //   level.terrain.tiles[nextToExitLocation].components.Add(
-      //     game.root.EffectItemTTCCreate(
-      //       game.root.EffectSlowRodCreate().AsIItem())
-      //     .AsITerrainTileComponent());
-      //
-      //   EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .02f, 0f);
-      // } else {
-      //   EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLocation), .02f, .02f);
-      // }
-      //
-      // context.Flare(context.root.GetDeterministicHashCode().ToString());
-      //
-      // levelSuperstate.Reconstruct(level);
-      // levelSuperstate.AddNoUnitZone(entryLocation, 3);
-      //
-      // context.Flare(context.root.GetDeterministicHashCode().ToString());
-      //
-      // int numSpaces = levelSuperstate.NumWalkableLocations(false);
-      // if (depth == 0) {
-      //   EmberDeepUnitsAndItems.FillWithUnits(
-      //     game.rand,
-      //     level,
-      //     levelSuperstate,
-      //   (loc) => !loc.Equals(entryLocation),
-      //     /*numIrkling=*/ 20 * numSpaces / 200,
-      //     /*numDraxling=*/ 7 * numSpaces / 200,
-      //     /*numRavagianTrask=*/ 2 * numSpaces / 200,
-      //     /*numBaug=*/ 4 * numSpaces / 200,
-      //     /*numSpirient=*/ 1 * numSpaces / 200,
-      //     /*numIrklingKing=*/ 0 * numSpaces / 200,
-      //     /*numEmberfolk=*/ 0 * numSpaces / 200,
-      //     /*numChronolisk=*/ 0 * numSpaces / 200,
-      //     /*numMantisBombardier=*/ 0 * numSpaces / 200,
-      //     /*numLightningTrask=*/ 0 * numSpaces / 200);
-      // } else if (depth == 2) {
-      //   EmberDeepUnitsAndItems.FillWithUnits(
-      //     game.rand,
-      //     level,
-      //     levelSuperstate,
-      //   (loc) => !loc.Equals(entryLocation),
-      //     /*numIrkling=*/ 10 * numSpaces / 200,
-      //     /*numDraxling=*/ 7 * numSpaces / 200,
-      //     /*numRavagianTrask=*/ 3 * numSpaces / 200,
-      //     /*numBaug=*/ 3 * numSpaces / 200,
-      //     /*numSpirient=*/ 2 * numSpaces / 200,
-      //     /*numIrklingKing=*/ 1 * numSpaces / 200,
-      //     /*numEmberfolk=*/ 2 * numSpaces / 200,
-      //     /*numChronolisk=*/ 1 * numSpaces / 200,
-      //     /*numMantisBombardier=*/ 0 * numSpaces / 200,
-      //     /*numLightningTrask=*/ 0 * numSpaces / 200);
-      // } else if (depth == 4) {
-      //   EmberDeepUnitsAndItems.FillWithUnits(
-      //     game.rand,
-      //     level,
-      //     levelSuperstate,
-      //   (loc) => !loc.Equals(entryLocation),
-      //     /*numIrkling=*/ 4 * numSpaces / 200,
-      //     /*numDraxling=*/ 4 * numSpaces / 200,
-      //     /*numRavagianTrask=*/ 3 * numSpaces / 200,
-      //     /*numBaug=*/ 2 * numSpaces / 200,
-      //     /*numSpirient=*/ 1 * numSpaces / 200,
-      //     /*numIrklingKing=*/ 2 * numSpaces / 200,
-      //     /*numEmberfolk=*/ 3 * numSpaces / 200,
-      //     /*numChronolisk=*/ 1 * numSpaces / 200,
-      //     /*numMantisBombardier=*/ 1 * numSpaces / 200,
-      //     /*numLightningTrask=*/ 0);
-      // } else if (depth == 6) {
-      //   EmberDeepUnitsAndItems.FillWithUnits(
-      //     game.rand,
-      //     level,
-      //     levelSuperstate,
-      //   (loc) => !loc.Equals(entryLocation),
-      //     /*numIrkling=*/ 2 * numSpaces / 200,
-      //     /*numDraxling=*/ 2 * numSpaces / 200,
-      //     /*numRavagianTrask=*/ 3 * numSpaces / 200,
-      //     /*numBaug=*/ 1 * numSpaces / 200,
-      //     /*numSpirient=*/ 0 * numSpaces / 200,
-      //     /*numIrklingKing=*/ 4 * numSpaces / 200,
-      //     /*numEmberfolk=*/ 5 * numSpaces / 200,
-      //     /*numChronolisk=*/ 3 * numSpaces / 200,
-      //     /*numMantisBombardier=*/ 3 * numSpaces / 200,
-      //     /*numLightningTrask=*/ 1);
-      // }
 
       context.Flare(context.root.GetDeterministicHashCode().ToString());
 
@@ -211,7 +111,7 @@ namespace Atharia.Model {
     }
 
     public static string GetName(this JumpingCaveLevelController obj) {
-      return "Cave";
+      return "Forest";
     }
 
     public static bool ConsiderCornersAdjacent(this JumpingCaveLevelController obj) {

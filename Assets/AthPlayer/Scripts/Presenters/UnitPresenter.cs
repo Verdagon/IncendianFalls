@@ -218,6 +218,8 @@ namespace AthPlayer {
       } else if (component is ManaPotionAsIUnitComponent) {
       } else if (component is HealthPotionAsIUnitComponent) {
       } else if (component is SlowRodAsIUnitComponent) {
+      } else if (component is BlazeRodAsIUnitComponent) {
+      } else if (component is ExplosionRodAsIUnitComponent) {
       } else if (component is BlastRodAsIUnitComponent) {
         //unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is ArmorAsIUnitComponent) {
@@ -469,6 +471,8 @@ namespace AthPlayer {
           //            Vector4Animation.GLOWY_WHITE)));
         } else if (detail is SlowRodAsIUnitComponent) {
         } else if (detail is BlastRodAsIUnitComponent) {
+        } else if (detail is BlazeRodAsIUnitComponent) {
+        } else if (detail is ExplosionRodAsIUnitComponent) {
           //detailSymbols.Add(
           //    new KeyValuePair<int, ExtrudedSymbolDescription>(
           //        detail.id,
@@ -503,7 +507,7 @@ namespace AthPlayer {
           "Chronomancer",
           new UnitDescription(
               unit.id,
-              new DominoDescription(false, Vector4Animation.Color(0.0f, 0.2f, 1f)),
+              new DominoDescription(true, Vector4Animation.Color(0.0f, 0.2f, 1f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(

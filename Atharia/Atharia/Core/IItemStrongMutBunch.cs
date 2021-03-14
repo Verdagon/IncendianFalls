@@ -55,6 +55,14 @@ public class IItemStrongMutBunch {
       violations.Add("Null constraint violated! IItemStrongMutBunch#" + id + ".membersSlowRodStrongMutSet");
     }
 
+    if (!root.ExplosionRodStrongMutSetExists(membersExplosionRodStrongMutSet.id)) {
+      violations.Add("Null constraint violated! IItemStrongMutBunch#" + id + ".membersExplosionRodStrongMutSet");
+    }
+
+    if (!root.BlazeRodStrongMutSetExists(membersBlazeRodStrongMutSet.id)) {
+      violations.Add("Null constraint violated! IItemStrongMutBunch#" + id + ".membersBlazeRodStrongMutSet");
+    }
+
     if (!root.BlastRodStrongMutSetExists(membersBlastRodStrongMutSet.id)) {
       violations.Add("Null constraint violated! IItemStrongMutBunch#" + id + ".membersBlastRodStrongMutSet");
     }
@@ -82,6 +90,12 @@ public class IItemStrongMutBunch {
     }
     if (root.SlowRodStrongMutSetExists(membersSlowRodStrongMutSet.id)) {
       membersSlowRodStrongMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.ExplosionRodStrongMutSetExists(membersExplosionRodStrongMutSet.id)) {
+      membersExplosionRodStrongMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.BlazeRodStrongMutSetExists(membersBlazeRodStrongMutSet.id)) {
+      membersBlazeRodStrongMutSet.FindReachableObjects(foundIds);
     }
     if (root.BlastRodStrongMutSetExists(membersBlastRodStrongMutSet.id)) {
       membersBlastRodStrongMutSet.FindReachableObjects(foundIds);
@@ -144,6 +158,24 @@ public class IItemStrongMutBunch {
       return new SlowRodStrongMutSet(root, incarnation.membersSlowRodStrongMutSet);
     }
                        }
+  public ExplosionRodStrongMutSet membersExplosionRodStrongMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersExplosionRodStrongMutSet of null!");
+      }
+      return new ExplosionRodStrongMutSet(root, incarnation.membersExplosionRodStrongMutSet);
+    }
+                       }
+  public BlazeRodStrongMutSet membersBlazeRodStrongMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersBlazeRodStrongMutSet of null!");
+      }
+      return new BlazeRodStrongMutSet(root, incarnation.membersBlazeRodStrongMutSet);
+    }
+                       }
   public BlastRodStrongMutSet membersBlastRodStrongMutSet {
 
     get {
@@ -174,6 +206,10 @@ public class IItemStrongMutBunch {
       root.EffectGlaiveStrongMutSetCreate()
 ,
       root.EffectSlowRodStrongMutSetCreate()
+,
+      root.EffectExplosionRodStrongMutSetCreate()
+,
+      root.EffectBlazeRodStrongMutSetCreate()
 ,
       root.EffectBlastRodStrongMutSetCreate()
 ,
@@ -209,6 +245,18 @@ public class IItemStrongMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.SlowRodExists(elementI.id)) {
       this.membersSlowRodStrongMutSet.Add(root.GetSlowRod(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.ExplosionRodExists(elementI.id)) {
+      this.membersExplosionRodStrongMutSet.Add(root.GetExplosionRod(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.BlazeRodExists(elementI.id)) {
+      this.membersBlazeRodStrongMutSet.Add(root.GetBlazeRod(elementI.id));
       return;
     }
 
@@ -258,6 +306,18 @@ public class IItemStrongMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.ExplosionRodExists(elementI.id)) {
+      this.membersExplosionRodStrongMutSet.Remove(root.GetExplosionRod(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.BlazeRodExists(elementI.id)) {
+      this.membersBlazeRodStrongMutSet.Remove(root.GetBlazeRod(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.BlastRodExists(elementI.id)) {
       this.membersBlastRodStrongMutSet.Remove(root.GetBlastRod(elementI.id));
       return;
@@ -276,6 +336,8 @@ public class IItemStrongMutBunch {
     this.membersSpeedRingStrongMutSet.Clear();
     this.membersGlaiveStrongMutSet.Clear();
     this.membersSlowRodStrongMutSet.Clear();
+    this.membersExplosionRodStrongMutSet.Clear();
+    this.membersBlazeRodStrongMutSet.Clear();
     this.membersBlastRodStrongMutSet.Clear();
     this.membersArmorStrongMutSet.Clear();
   }
@@ -287,6 +349,8 @@ public class IItemStrongMutBunch {
         this.membersSpeedRingStrongMutSet.Count +
         this.membersGlaiveStrongMutSet.Count +
         this.membersSlowRodStrongMutSet.Count +
+        this.membersExplosionRodStrongMutSet.Count +
+        this.membersBlazeRodStrongMutSet.Count +
         this.membersBlastRodStrongMutSet.Count +
         this.membersArmorStrongMutSet.Count
         ;
@@ -305,6 +369,8 @@ public class IItemStrongMutBunch {
     var tempMembersSpeedRingStrongMutSet = this.membersSpeedRingStrongMutSet;
     var tempMembersGlaiveStrongMutSet = this.membersGlaiveStrongMutSet;
     var tempMembersSlowRodStrongMutSet = this.membersSlowRodStrongMutSet;
+    var tempMembersExplosionRodStrongMutSet = this.membersExplosionRodStrongMutSet;
+    var tempMembersBlazeRodStrongMutSet = this.membersBlazeRodStrongMutSet;
     var tempMembersBlastRodStrongMutSet = this.membersBlastRodStrongMutSet;
     var tempMembersArmorStrongMutSet = this.membersArmorStrongMutSet;
 
@@ -314,6 +380,8 @@ public class IItemStrongMutBunch {
     tempMembersSpeedRingStrongMutSet.Destruct();
     tempMembersGlaiveStrongMutSet.Destruct();
     tempMembersSlowRodStrongMutSet.Destruct();
+    tempMembersExplosionRodStrongMutSet.Destruct();
+    tempMembersBlazeRodStrongMutSet.Destruct();
     tempMembersBlastRodStrongMutSet.Destruct();
     tempMembersArmorStrongMutSet.Destruct();
   }
@@ -332,6 +400,12 @@ public class IItemStrongMutBunch {
     }
     foreach (var element in this.membersSlowRodStrongMutSet) {
       yield return new SlowRodAsIItem(element);
+    }
+    foreach (var element in this.membersExplosionRodStrongMutSet) {
+      yield return new ExplosionRodAsIItem(element);
+    }
+    foreach (var element in this.membersBlazeRodStrongMutSet) {
+      yield return new BlazeRodAsIItem(element);
     }
     foreach (var element in this.membersBlastRodStrongMutSet) {
       yield return new BlastRodAsIItem(element);
@@ -445,6 +519,48 @@ public class IItemStrongMutBunch {
         return SlowRod.Null;
       }
     }
+    public List<ExplosionRod> GetAllExplosionRod() {
+      var result = new List<ExplosionRod>();
+      foreach (var thing in this.membersExplosionRodStrongMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<ExplosionRod> ClearAllExplosionRod() {
+      var result = new List<ExplosionRod>();
+      this.membersExplosionRodStrongMutSet.Clear();
+      return result;
+    }
+    public ExplosionRod GetOnlyExplosionRodOrNull() {
+      var result = GetAllExplosionRod();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return ExplosionRod.Null;
+      }
+    }
+    public List<BlazeRod> GetAllBlazeRod() {
+      var result = new List<BlazeRod>();
+      foreach (var thing in this.membersBlazeRodStrongMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<BlazeRod> ClearAllBlazeRod() {
+      var result = new List<BlazeRod>();
+      this.membersBlazeRodStrongMutSet.Clear();
+      return result;
+    }
+    public BlazeRod GetOnlyBlazeRodOrNull() {
+      var result = GetAllBlazeRod();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return BlazeRod.Null;
+      }
+    }
     public List<BlastRod> GetAllBlastRod() {
       var result = new List<BlastRod>();
       foreach (var thing in this.membersBlastRodStrongMutSet) {
@@ -493,6 +609,14 @@ public class IItemStrongMutBunch {
         result.Add(
             new SlowRodAsIPickUpReactorItem(obj));
       }
+      foreach (var obj in this.membersExplosionRodStrongMutSet) {
+        result.Add(
+            new ExplosionRodAsIPickUpReactorItem(obj));
+      }
+      foreach (var obj in this.membersBlazeRodStrongMutSet) {
+        result.Add(
+            new BlazeRodAsIPickUpReactorItem(obj));
+      }
       foreach (var obj in this.membersBlastRodStrongMutSet) {
         result.Add(
             new BlastRodAsIPickUpReactorItem(obj));
@@ -502,6 +626,8 @@ public class IItemStrongMutBunch {
     public List<IPickUpReactorItem> ClearAllIPickUpReactorItem() {
       var result = new List<IPickUpReactorItem>();
       this.membersSlowRodStrongMutSet.Clear();
+      this.membersExplosionRodStrongMutSet.Clear();
+      this.membersBlazeRodStrongMutSet.Clear();
       this.membersBlastRodStrongMutSet.Clear();
       return result;
     }

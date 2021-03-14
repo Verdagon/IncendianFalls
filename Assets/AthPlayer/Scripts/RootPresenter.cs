@@ -46,7 +46,7 @@ namespace AthPlayer {
   }
 
   public class RootPresenter : MonoBehaviour {
-    public static int sceneInitParamStartLevel = -5;
+    public static int sceneInitParamStartLevel = 0;
 
     Superstructure serverSS;
     ReplayLogger replayLogger;

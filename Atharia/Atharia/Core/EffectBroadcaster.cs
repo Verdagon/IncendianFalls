@@ -295,6 +295,12 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly SortedDictionary<int, List<ISlowRodEffectObserver>> observersForSlowRod =
       new SortedDictionary<int, List<ISlowRodEffectObserver>>();
 
+  readonly SortedDictionary<int, List<IExplosionRodEffectObserver>> observersForExplosionRod =
+      new SortedDictionary<int, List<IExplosionRodEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IBlazeRodEffectObserver>> observersForBlazeRod =
+      new SortedDictionary<int, List<IBlazeRodEffectObserver>>();
+
   readonly SortedDictionary<int, List<IBlastRodEffectObserver>> observersForBlastRod =
       new SortedDictionary<int, List<IBlastRodEffectObserver>>();
 
@@ -396,6 +402,12 @@ public class EffectBroadcaster : IEffectVisitor {
 
   readonly Dictionary<int, List<ISlowRodStrongMutSetEffectObserver>> observersForSlowRodStrongMutSet =
       new Dictionary<int, List<ISlowRodStrongMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IExplosionRodStrongMutSetEffectObserver>> observersForExplosionRodStrongMutSet =
+      new Dictionary<int, List<IExplosionRodStrongMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IBlazeRodStrongMutSetEffectObserver>> observersForBlazeRodStrongMutSet =
+      new Dictionary<int, List<IBlazeRodStrongMutSetEffectObserver>>();
 
   readonly Dictionary<int, List<IBlastRodStrongMutSetEffectObserver>> observersForBlastRodStrongMutSet =
       new Dictionary<int, List<IBlastRodStrongMutSetEffectObserver>>();
@@ -678,6 +690,12 @@ public class EffectBroadcaster : IEffectVisitor {
 
   readonly Dictionary<int, List<ISlowRodMutSetEffectObserver>> observersForSlowRodMutSet =
       new Dictionary<int, List<ISlowRodMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IExplosionRodMutSetEffectObserver>> observersForExplosionRodMutSet =
+      new Dictionary<int, List<IExplosionRodMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IBlazeRodMutSetEffectObserver>> observersForBlazeRodMutSet =
+      new Dictionary<int, List<IBlazeRodMutSetEffectObserver>>();
 
   readonly Dictionary<int, List<IBlastRodMutSetEffectObserver>> observersForBlastRodMutSet =
       new Dictionary<int, List<IBlastRodMutSetEffectObserver>>();
@@ -3373,6 +3391,62 @@ public class EffectBroadcaster : IEffectVisitor {
     }
   }
 
+  public void visitExplosionRodEffect(IExplosionRodEffect effect) {
+    if (observersForExplosionRod.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IExplosionRodEffectObserver>(observers)) {
+        observer.OnExplosionRodEffect(effect);
+      }
+    }
+  }
+  public void AddExplosionRodObserver(int id, IExplosionRodEffectObserver observer) {
+    List<IExplosionRodEffectObserver> obsies;
+    if (!observersForExplosionRod.TryGetValue(id, out obsies)) {
+      obsies = new List<IExplosionRodEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForExplosionRod[id] = obsies;
+  }
+
+  public void RemoveExplosionRodObserver(int id, IExplosionRodEffectObserver observer) {
+    if (observersForExplosionRod.ContainsKey(id)) {
+      var list = observersForExplosionRod[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForExplosionRod.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitBlazeRodEffect(IBlazeRodEffect effect) {
+    if (observersForBlazeRod.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IBlazeRodEffectObserver>(observers)) {
+        observer.OnBlazeRodEffect(effect);
+      }
+    }
+  }
+  public void AddBlazeRodObserver(int id, IBlazeRodEffectObserver observer) {
+    List<IBlazeRodEffectObserver> obsies;
+    if (!observersForBlazeRod.TryGetValue(id, out obsies)) {
+      obsies = new List<IBlazeRodEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForBlazeRod[id] = obsies;
+  }
+
+  public void RemoveBlazeRodObserver(int id, IBlazeRodEffectObserver observer) {
+    if (observersForBlazeRod.ContainsKey(id)) {
+      var list = observersForBlazeRod[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForBlazeRod.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
   public void visitBlastRodEffect(IBlastRodEffect effect) {
     if (observersForBlastRod.TryGetValue(effect.id, out var observers)) {
       foreach (var observer in new List<IBlastRodEffectObserver>(observers)) {
@@ -4310,6 +4384,60 @@ public class EffectBroadcaster : IEffectVisitor {
         list.Remove(observer);
         if (list.Count == 0) {
           observersForSlowRodStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitExplosionRodStrongMutSetEffect(IExplosionRodStrongMutSetEffect effect) {
+      if (observersForExplosionRodStrongMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IExplosionRodStrongMutSetEffectObserver>(observers)) {
+          observer.OnExplosionRodStrongMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddExplosionRodStrongMutSetObserver(int id, IExplosionRodStrongMutSetEffectObserver observer) {
+      List<IExplosionRodStrongMutSetEffectObserver> obsies;
+      if (!observersForExplosionRodStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IExplosionRodStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForExplosionRodStrongMutSet[id] = obsies;
+    }
+    public void RemoveExplosionRodStrongMutSetObserver(int id, IExplosionRodStrongMutSetEffectObserver observer) {
+      if (observersForExplosionRodStrongMutSet.ContainsKey(id)) {
+        var list = observersForExplosionRodStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForExplosionRodStrongMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitBlazeRodStrongMutSetEffect(IBlazeRodStrongMutSetEffect effect) {
+      if (observersForBlazeRodStrongMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IBlazeRodStrongMutSetEffectObserver>(observers)) {
+          observer.OnBlazeRodStrongMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddBlazeRodStrongMutSetObserver(int id, IBlazeRodStrongMutSetEffectObserver observer) {
+      List<IBlazeRodStrongMutSetEffectObserver> obsies;
+      if (!observersForBlazeRodStrongMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IBlazeRodStrongMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForBlazeRodStrongMutSet[id] = obsies;
+    }
+    public void RemoveBlazeRodStrongMutSetObserver(int id, IBlazeRodStrongMutSetEffectObserver observer) {
+      if (observersForBlazeRodStrongMutSet.ContainsKey(id)) {
+        var list = observersForBlazeRodStrongMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForBlazeRodStrongMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");
@@ -6848,6 +6976,60 @@ public class EffectBroadcaster : IEffectVisitor {
         list.Remove(observer);
         if (list.Count == 0) {
           observersForSlowRodMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitExplosionRodMutSetEffect(IExplosionRodMutSetEffect effect) {
+      if (observersForExplosionRodMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IExplosionRodMutSetEffectObserver>(observers)) {
+          observer.OnExplosionRodMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddExplosionRodMutSetObserver(int id, IExplosionRodMutSetEffectObserver observer) {
+      List<IExplosionRodMutSetEffectObserver> obsies;
+      if (!observersForExplosionRodMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IExplosionRodMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForExplosionRodMutSet[id] = obsies;
+    }
+    public void RemoveExplosionRodMutSetObserver(int id, IExplosionRodMutSetEffectObserver observer) {
+      if (observersForExplosionRodMutSet.ContainsKey(id)) {
+        var list = observersForExplosionRodMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForExplosionRodMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitBlazeRodMutSetEffect(IBlazeRodMutSetEffect effect) {
+      if (observersForBlazeRodMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IBlazeRodMutSetEffectObserver>(observers)) {
+          observer.OnBlazeRodMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddBlazeRodMutSetObserver(int id, IBlazeRodMutSetEffectObserver observer) {
+      List<IBlazeRodMutSetEffectObserver> obsies;
+      if (!observersForBlazeRodMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IBlazeRodMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForBlazeRodMutSet[id] = obsies;
+    }
+    public void RemoveBlazeRodMutSetObserver(int id, IBlazeRodMutSetEffectObserver observer) {
+      if (observersForBlazeRodMutSet.ContainsKey(id)) {
+        var list = observersForBlazeRodMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForBlazeRodMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");

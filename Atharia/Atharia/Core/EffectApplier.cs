@@ -101,6 +101,8 @@ IItemTTCEffectVisitor,
 IHealthPotionEffectVisitor,
 IGlaiveEffectVisitor,
 ISlowRodEffectVisitor,
+IExplosionRodEffectVisitor,
+IBlazeRodEffectVisitor,
 IBlastRodEffectVisitor,
 IArmorEffectVisitor,
 IVolcaetusLevelControllerEffectVisitor,
@@ -135,6 +137,8 @@ IHealthPotionStrongMutSetEffectVisitor,
 ISpeedRingStrongMutSetEffectVisitor,
 IGlaiveStrongMutSetEffectVisitor,
 ISlowRodStrongMutSetEffectVisitor,
+IExplosionRodStrongMutSetEffectVisitor,
+IBlazeRodStrongMutSetEffectVisitor,
 IBlastRodStrongMutSetEffectVisitor,
 IArmorStrongMutSetEffectVisitor,
 IHoldPositionImpulseStrongMutSetEffectVisitor,
@@ -229,6 +233,8 @@ IHealthPotionMutSetEffectVisitor,
 ISpeedRingMutSetEffectVisitor,
 IGlaiveMutSetEffectVisitor,
 ISlowRodMutSetEffectVisitor,
+IExplosionRodMutSetEffectVisitor,
+IBlazeRodMutSetEffectVisitor,
 IBlastRodMutSetEffectVisitor,
 IArmorMutSetEffectVisitor,
 ISorcerousUCMutSetEffectVisitor,
@@ -409,6 +415,8 @@ public void visitIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffect effe
 ,  effect.incarnation.membersSpeedRingMutSet
 ,  effect.incarnation.membersGlaiveMutSet
 ,  effect.incarnation.membersSlowRodMutSet
+,  effect.incarnation.membersExplosionRodMutSet
+,  effect.incarnation.membersBlazeRodMutSet
 ,  effect.incarnation.membersBlastRodMutSet
 ,  effect.incarnation.membersArmorMutSet
 ,  effect.incarnation.membersSorcerousUCMutSet
@@ -1816,6 +1824,8 @@ public void visitIItemStrongMutBunchEffect(IIItemStrongMutBunchEffect effect) { 
 ,  effect.incarnation.membersSpeedRingStrongMutSet
 ,  effect.incarnation.membersGlaiveStrongMutSet
 ,  effect.incarnation.membersSlowRodStrongMutSet
+,  effect.incarnation.membersExplosionRodStrongMutSet
+,  effect.incarnation.membersBlazeRodStrongMutSet
 ,  effect.incarnation.membersBlastRodStrongMutSet
 ,  effect.incarnation.membersArmorStrongMutSet    );
 
@@ -1879,6 +1889,34 @@ public void visitSlowRodEffect(ISlowRodEffect effect) { effect.visitISlowRodEffe
 
   public void visitSlowRodDeleteEffect(SlowRodDeleteEffect effect) {
     root.EffectSlowRodDelete(effect.id);
+  }
+
+     
+public void visitExplosionRodEffect(IExplosionRodEffect effect) { effect.visitIExplosionRodEffect(this); }
+  public void visitExplosionRodCreateEffect(ExplosionRodCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectExplosionRodCreateWithId(effect.id
+    );
+
+}
+
+  public void visitExplosionRodDeleteEffect(ExplosionRodDeleteEffect effect) {
+    root.EffectExplosionRodDelete(effect.id);
+  }
+
+     
+public void visitBlazeRodEffect(IBlazeRodEffect effect) { effect.visitIBlazeRodEffect(this); }
+  public void visitBlazeRodCreateEffect(BlazeRodCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectBlazeRodCreateWithId(effect.id
+    );
+
+}
+
+  public void visitBlazeRodDeleteEffect(BlazeRodDeleteEffect effect) {
+    root.EffectBlazeRodDelete(effect.id);
   }
 
      
@@ -2465,6 +2503,40 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
     public void visitSlowRodStrongMutSetRemoveEffect(SlowRodStrongMutSetRemoveEffect effect) {
       root.CheckUnlocked();
       root.EffectSlowRodStrongMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitExplosionRodStrongMutSetEffect(IExplosionRodStrongMutSetEffect effect) { effect.visitIExplosionRodStrongMutSetEffect(this); }
+    public void visitExplosionRodStrongMutSetCreateEffect(ExplosionRodStrongMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectExplosionRodStrongMutSetCreateWithId(effect.id);
+    }
+    public void visitExplosionRodStrongMutSetDeleteEffect(ExplosionRodStrongMutSetDeleteEffect effect) {
+      root.EffectExplosionRodStrongMutSetDelete(effect.id);
+    }
+    public void visitExplosionRodStrongMutSetAddEffect(ExplosionRodStrongMutSetAddEffect effect) {
+     root.EffectExplosionRodStrongMutSetAdd(effect.id, effect.element);
+ }
+    public void visitExplosionRodStrongMutSetRemoveEffect(ExplosionRodStrongMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectExplosionRodStrongMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitBlazeRodStrongMutSetEffect(IBlazeRodStrongMutSetEffect effect) { effect.visitIBlazeRodStrongMutSetEffect(this); }
+    public void visitBlazeRodStrongMutSetCreateEffect(BlazeRodStrongMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectBlazeRodStrongMutSetCreateWithId(effect.id);
+    }
+    public void visitBlazeRodStrongMutSetDeleteEffect(BlazeRodStrongMutSetDeleteEffect effect) {
+      root.EffectBlazeRodStrongMutSetDelete(effect.id);
+    }
+    public void visitBlazeRodStrongMutSetAddEffect(BlazeRodStrongMutSetAddEffect effect) {
+     root.EffectBlazeRodStrongMutSetAdd(effect.id, effect.element);
+ }
+    public void visitBlazeRodStrongMutSetRemoveEffect(BlazeRodStrongMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectBlazeRodStrongMutSetRemove(effect.id, effect.element);
     }
        
     public void visitBlastRodStrongMutSetEffect(IBlastRodStrongMutSetEffect effect) { effect.visitIBlastRodStrongMutSetEffect(this); }
@@ -4063,6 +4135,40 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
     public void visitSlowRodMutSetRemoveEffect(SlowRodMutSetRemoveEffect effect) {
       root.CheckUnlocked();
       root.EffectSlowRodMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitExplosionRodMutSetEffect(IExplosionRodMutSetEffect effect) { effect.visitIExplosionRodMutSetEffect(this); }
+    public void visitExplosionRodMutSetCreateEffect(ExplosionRodMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectExplosionRodMutSetCreateWithId(effect.id);
+    }
+    public void visitExplosionRodMutSetDeleteEffect(ExplosionRodMutSetDeleteEffect effect) {
+      root.EffectExplosionRodMutSetDelete(effect.id);
+    }
+    public void visitExplosionRodMutSetAddEffect(ExplosionRodMutSetAddEffect effect) {
+     root.EffectExplosionRodMutSetAdd(effect.id, effect.element);
+ }
+    public void visitExplosionRodMutSetRemoveEffect(ExplosionRodMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectExplosionRodMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitBlazeRodMutSetEffect(IBlazeRodMutSetEffect effect) { effect.visitIBlazeRodMutSetEffect(this); }
+    public void visitBlazeRodMutSetCreateEffect(BlazeRodMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectBlazeRodMutSetCreateWithId(effect.id);
+    }
+    public void visitBlazeRodMutSetDeleteEffect(BlazeRodMutSetDeleteEffect effect) {
+      root.EffectBlazeRodMutSetDelete(effect.id);
+    }
+    public void visitBlazeRodMutSetAddEffect(BlazeRodMutSetAddEffect effect) {
+     root.EffectBlazeRodMutSetAdd(effect.id, effect.element);
+ }
+    public void visitBlazeRodMutSetRemoveEffect(BlazeRodMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectBlazeRodMutSetRemove(effect.id, effect.element);
     }
        
     public void visitBlastRodMutSetEffect(IBlastRodMutSetEffect effect) { effect.visitIBlastRodMutSetEffect(this); }

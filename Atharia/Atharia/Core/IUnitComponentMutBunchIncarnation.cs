@@ -31,6 +31,8 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
   public readonly int membersSpeedRingMutSet;
   public readonly int membersGlaiveMutSet;
   public readonly int membersSlowRodMutSet;
+  public readonly int membersExplosionRodMutSet;
+  public readonly int membersBlazeRodMutSet;
   public readonly int membersBlastRodMutSet;
   public readonly int membersArmorMutSet;
   public readonly int membersSorcerousUCMutSet;
@@ -63,6 +65,8 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
       int membersSpeedRingMutSet,
       int membersGlaiveMutSet,
       int membersSlowRodMutSet,
+      int membersExplosionRodMutSet,
+      int membersBlazeRodMutSet,
       int membersBlastRodMutSet,
       int membersArmorMutSet,
       int membersSorcerousUCMutSet,
@@ -94,6 +98,8 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
     this.membersSpeedRingMutSet = membersSpeedRingMutSet;
     this.membersGlaiveMutSet = membersGlaiveMutSet;
     this.membersSlowRodMutSet = membersSlowRodMutSet;
+    this.membersExplosionRodMutSet = membersExplosionRodMutSet;
+    this.membersBlazeRodMutSet = membersBlazeRodMutSet;
     this.membersBlastRodMutSet = membersBlastRodMutSet;
     this.membersArmorMutSet = membersArmorMutSet;
     this.membersSorcerousUCMutSet = membersSorcerousUCMutSet;
@@ -128,6 +134,8 @@ membersHealthPotionMutSet,
 membersSpeedRingMutSet,
 membersGlaiveMutSet,
 membersSlowRodMutSet,
+membersExplosionRodMutSet,
+membersBlazeRodMutSet,
 membersBlastRodMutSet,
 membersArmorMutSet,
 membersSorcerousUCMutSet,
@@ -137,6 +145,8 @@ membersBaseDefenseUCMutSet    );
 
   public void visitIUnitComponentMutBunchCreateEffect(IUnitComponentMutBunchCreateEffect e) {}
   public void visitIUnitComponentMutBunchDeleteEffect(IUnitComponentMutBunchDeleteEffect e) {}
+
+
 
 
 

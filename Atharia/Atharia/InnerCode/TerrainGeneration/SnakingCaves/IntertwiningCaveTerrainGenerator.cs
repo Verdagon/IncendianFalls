@@ -9,7 +9,8 @@ namespace IncendianFalls {
     public const int PATH_HEIGHT = 5;
     public const int WATER_HEIGHT = 1;
     
-    public static Terrain Generate(
+    // Returns the terrain, non-bridge non-connection lower locs, non-bridge non-connection upper locs.
+    public static (Terrain, SortedSet<Location>, SortedSet<Location>) Generate(
         SSContext context,
         Root root,
         Pattern pattern,
@@ -88,7 +89,15 @@ namespace IncendianFalls {
       
       // we'll need to make any locations next to ADEH -1, not just IJKL. See BridgeMaking2.png for an example.
 
-      return terrain;
+      var nonBridgeNonConnectionPathLocs = new SortedSet<Location>(pathLocs);
+      SetUtils.RemoveAll(nonBridgeNonConnectionPathLocs, bridgeLocs);
+      SetUtils.RemoveAll(nonBridgeNonConnectionPathLocs, connectionLocs);
+      
+      var nonBridgeNonConnectionOverlayLocs = new SortedSet<Location>(overlayLocs);
+      SetUtils.RemoveAll(nonBridgeNonConnectionOverlayLocs, bridgeLocs);
+      SetUtils.RemoveAll(nonBridgeNonConnectionOverlayLocs, connectionLocs);
+      
+      return (terrain, nonBridgeNonConnectionOverlayLocs, nonBridgeNonConnectionPathLocs);
     }
 
     static List<RegionConnection> connectEverything(
@@ -195,7 +204,10 @@ namespace IncendianFalls {
             var connection = ListUtils.GetRandomN(possibleConnectionsFromThisRegionToThatRegion, rand, 1, 1)[0];
 
             foreach (var loc in connection.getAllLocations()) {
-              Asserts.Assert(!allAlreadyConnectionLocs.Contains(loc));
+              if (allAlreadyConnectionLocs.Contains(loc)) {
+                rand.root.logger.Error("Already used " + loc + " in a connection!");
+                Asserts.Assert(false);
+              }
             }
             SetUtils.AddAll(allAlreadyConnectionLocs, connection.getAllLocations());
             

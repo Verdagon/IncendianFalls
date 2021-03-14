@@ -74,7 +74,7 @@ namespace Atharia.Model {
       game.actionNum++;
     }
 
-    public static void ShowComm(this Game game, string text, string continueButtonText) {
+    public static void ShowComm(this Game game, string continueButtonText, string text) {
       game.comms.Add(
         game.root.EffectCommCreate(
           new NormalCommTemplate().AsICommTemplate(),

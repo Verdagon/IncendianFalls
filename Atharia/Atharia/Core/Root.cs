@@ -124,6 +124,8 @@ void visitItemTTCEffect(IItemTTCEffect effect);
 void visitHealthPotionEffect(IHealthPotionEffect effect);
 void visitGlaiveEffect(IGlaiveEffect effect);
 void visitSlowRodEffect(ISlowRodEffect effect);
+void visitExplosionRodEffect(IExplosionRodEffect effect);
+void visitBlazeRodEffect(IBlazeRodEffect effect);
 void visitBlastRodEffect(IBlastRodEffect effect);
 void visitArmorEffect(IArmorEffect effect);
 void visitVolcaetusLevelControllerEffect(IVolcaetusLevelControllerEffect effect);
@@ -158,6 +160,8 @@ void visitHealthPotionStrongMutSetEffect(IHealthPotionStrongMutSetEffect effect)
 void visitSpeedRingStrongMutSetEffect(ISpeedRingStrongMutSetEffect effect);
 void visitGlaiveStrongMutSetEffect(IGlaiveStrongMutSetEffect effect);
 void visitSlowRodStrongMutSetEffect(ISlowRodStrongMutSetEffect effect);
+void visitExplosionRodStrongMutSetEffect(IExplosionRodStrongMutSetEffect effect);
+void visitBlazeRodStrongMutSetEffect(IBlazeRodStrongMutSetEffect effect);
 void visitBlastRodStrongMutSetEffect(IBlastRodStrongMutSetEffect effect);
 void visitArmorStrongMutSetEffect(IArmorStrongMutSetEffect effect);
 void visitHoldPositionImpulseStrongMutSetEffect(IHoldPositionImpulseStrongMutSetEffect effect);
@@ -252,6 +256,8 @@ void visitHealthPotionMutSetEffect(IHealthPotionMutSetEffect effect);
 void visitSpeedRingMutSetEffect(ISpeedRingMutSetEffect effect);
 void visitGlaiveMutSetEffect(IGlaiveMutSetEffect effect);
 void visitSlowRodMutSetEffect(ISlowRodMutSetEffect effect);
+void visitExplosionRodMutSetEffect(IExplosionRodMutSetEffect effect);
+void visitBlazeRodMutSetEffect(IBlazeRodMutSetEffect effect);
 void visitBlastRodMutSetEffect(IBlastRodMutSetEffect effect);
 void visitArmorMutSetEffect(IArmorMutSetEffect effect);
 void visitSorcerousUCMutSetEffect(ISorcerousUCMutSetEffect effect);
@@ -684,6 +690,12 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsSlowRod) {
       result += GetSlowRodHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsExplosionRod) {
+      result += GetExplosionRodHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsBlazeRod) {
+      result += GetBlazeRodHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsBlastRod) {
       result += GetBlastRodHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -785,6 +797,12 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsSlowRodStrongMutSet) {
       result += GetSlowRodStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsExplosionRodStrongMutSet) {
+      result += GetExplosionRodStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsBlazeRodStrongMutSet) {
+      result += GetBlazeRodStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsBlastRodStrongMutSet) {
       result += GetBlastRodStrongMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1067,6 +1085,12 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsSlowRodMutSet) {
       result += GetSlowRodMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsExplosionRodMutSet) {
+      result += GetExplosionRodMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsBlazeRodMutSet) {
+      result += GetBlazeRodMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsBlastRodMutSet) {
       result += GetBlastRodMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1380,6 +1404,12 @@ public class Root {
     foreach (var obj in this.AllSlowRod()) {
       obj.CheckForNullViolations(violations);
     }
+    foreach (var obj in this.AllExplosionRod()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllBlazeRod()) {
+      obj.CheckForNullViolations(violations);
+    }
     foreach (var obj in this.AllBlastRod()) {
       obj.CheckForNullViolations(violations);
     }
@@ -1480,6 +1510,12 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllSlowRodStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllExplosionRodStrongMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllBlazeRodStrongMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllBlastRodStrongMutSet()) {
@@ -1762,6 +1798,12 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllSlowRodMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllExplosionRodMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllBlazeRodMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllBlastRodMutSet()) {
@@ -2265,6 +2307,16 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllExplosionRod()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllBlazeRod()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllBlastRod()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -2431,6 +2483,16 @@ public class Root {
       }
     }
     foreach (var obj in this.AllSlowRodStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllExplosionRodStrongMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllBlazeRodStrongMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -2901,6 +2963,16 @@ public class Root {
       }
     }
     foreach (var obj in this.AllSlowRodMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllExplosionRodMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllBlazeRodMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -6583,6 +6655,80 @@ public class Root {
       }
     }
 
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExplosionRod) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsExplosionRod.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsExplosionRod[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsExplosionRod[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExplosionRod) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsExplosionRod.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateExplosionRod(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ExplosionRodIncarnation>>(rootIncarnation.incarnationsExplosionRod)) {
+      if (!sourceIncarnation.incarnationsExplosionRod.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectExplosionRodDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBlazeRod) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsBlazeRod.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsBlazeRod[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsBlazeRod[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBlazeRod) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsBlazeRod.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateBlazeRod(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BlazeRodIncarnation>>(rootIncarnation.incarnationsBlazeRod)) {
+      if (!sourceIncarnation.incarnationsBlazeRod.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectBlazeRodDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
     foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBlastRod) {
       var objId = sourceIdAndVersionAndObjIncarnation.Key;
       var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -7996,6 +8142,110 @@ public class Root {
           removeEffects.Add(new SlowRodStrongMutSetRemoveEffect(id, element));
         }
         var effect = InternalEffectSlowRodStrongMutSetDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExplosionRodStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsExplosionRodStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsExplosionRodStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.elements)) {
+              if (!sourceObjIncarnation.elements.Contains(objIdInCurrentObjIncarnation)) {
+                removeEffects.Add(new ExplosionRodStrongMutSetRemoveEffect(objId, objIdInCurrentObjIncarnation));
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.elements) {
+              if (!currentObjIncarnation.elements.Contains(unitIdInSourceObjIncarnation)) {
+                addEffects.Add(new ExplosionRodStrongMutSetAddEffect(objId, unitIdInSourceObjIncarnation));
+              }
+            }
+            // Swap out the underlying incarnation.
+            rootIncarnation.incarnationsExplosionRodStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExplosionRodStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsExplosionRodStrongMutSet.ContainsKey(sourceObjId)) {
+        var createEffect = InternalEffectCreateExplosionRodStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+        createEffects.Add(createEffect);
+        foreach (var element in sourceObjIncarnation.elements) {
+          addEffects.Add(new ExplosionRodStrongMutSetAddEffect(sourceObjId, element));
+        }
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ExplosionRodStrongMutSetIncarnation>>(rootIncarnation.incarnationsExplosionRodStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsExplosionRodStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var currentObjIncarnation = currentIdAndVersionAndObjIncarnation.Value.incarnation;
+        foreach (var element in currentObjIncarnation.elements) {
+          removeEffects.Add(new ExplosionRodStrongMutSetRemoveEffect(id, element));
+        }
+        var effect = InternalEffectExplosionRodStrongMutSetDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBlazeRodStrongMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsBlazeRodStrongMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsBlazeRodStrongMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.elements)) {
+              if (!sourceObjIncarnation.elements.Contains(objIdInCurrentObjIncarnation)) {
+                removeEffects.Add(new BlazeRodStrongMutSetRemoveEffect(objId, objIdInCurrentObjIncarnation));
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.elements) {
+              if (!currentObjIncarnation.elements.Contains(unitIdInSourceObjIncarnation)) {
+                addEffects.Add(new BlazeRodStrongMutSetAddEffect(objId, unitIdInSourceObjIncarnation));
+              }
+            }
+            // Swap out the underlying incarnation.
+            rootIncarnation.incarnationsBlazeRodStrongMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBlazeRodStrongMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsBlazeRodStrongMutSet.ContainsKey(sourceObjId)) {
+        var createEffect = InternalEffectCreateBlazeRodStrongMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+        createEffects.Add(createEffect);
+        foreach (var element in sourceObjIncarnation.elements) {
+          addEffects.Add(new BlazeRodStrongMutSetAddEffect(sourceObjId, element));
+        }
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BlazeRodStrongMutSetIncarnation>>(rootIncarnation.incarnationsBlazeRodStrongMutSet)) {
+      if (!sourceIncarnation.incarnationsBlazeRodStrongMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var currentObjIncarnation = currentIdAndVersionAndObjIncarnation.Value.incarnation;
+        foreach (var element in currentObjIncarnation.elements) {
+          removeEffects.Add(new BlazeRodStrongMutSetRemoveEffect(id, element));
+        }
+        var effect = InternalEffectBlazeRodStrongMutSetDelete(id);
         deleteEffects.Add(effect);
       }
     }
@@ -12888,6 +13138,110 @@ public class Root {
       }
     }
 
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExplosionRodMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsExplosionRodMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsExplosionRodMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.elements)) {
+              if (!sourceObjIncarnation.elements.Contains(objIdInCurrentObjIncarnation)) {
+                removeEffects.Add(new ExplosionRodMutSetRemoveEffect(objId, objIdInCurrentObjIncarnation));
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.elements) {
+              if (!currentObjIncarnation.elements.Contains(unitIdInSourceObjIncarnation)) {
+                addEffects.Add(new ExplosionRodMutSetAddEffect(objId, unitIdInSourceObjIncarnation));
+              }
+            }
+            // Swap out the underlying incarnation.
+            rootIncarnation.incarnationsExplosionRodMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsExplosionRodMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsExplosionRodMutSet.ContainsKey(sourceObjId)) {
+        var createEffect = InternalEffectCreateExplosionRodMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+        createEffects.Add(createEffect);
+        foreach (var element in sourceObjIncarnation.elements) {
+          addEffects.Add(new ExplosionRodMutSetAddEffect(sourceObjId, element));
+        }
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<ExplosionRodMutSetIncarnation>>(rootIncarnation.incarnationsExplosionRodMutSet)) {
+      if (!sourceIncarnation.incarnationsExplosionRodMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var currentObjIncarnation = currentIdAndVersionAndObjIncarnation.Value.incarnation;
+        foreach (var element in currentObjIncarnation.elements) {
+          removeEffects.Add(new ExplosionRodMutSetRemoveEffect(id, element));
+        }
+        var effect = InternalEffectExplosionRodMutSetDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBlazeRodMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsBlazeRodMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsBlazeRodMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.elements)) {
+              if (!sourceObjIncarnation.elements.Contains(objIdInCurrentObjIncarnation)) {
+                removeEffects.Add(new BlazeRodMutSetRemoveEffect(objId, objIdInCurrentObjIncarnation));
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.elements) {
+              if (!currentObjIncarnation.elements.Contains(unitIdInSourceObjIncarnation)) {
+                addEffects.Add(new BlazeRodMutSetAddEffect(objId, unitIdInSourceObjIncarnation));
+              }
+            }
+            // Swap out the underlying incarnation.
+            rootIncarnation.incarnationsBlazeRodMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBlazeRodMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsBlazeRodMutSet.ContainsKey(sourceObjId)) {
+        var createEffect = InternalEffectCreateBlazeRodMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+        createEffects.Add(createEffect);
+        foreach (var element in sourceObjIncarnation.elements) {
+          addEffects.Add(new BlazeRodMutSetAddEffect(sourceObjId, element));
+        }
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BlazeRodMutSetIncarnation>>(rootIncarnation.incarnationsBlazeRodMutSet)) {
+      if (!sourceIncarnation.incarnationsBlazeRodMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var currentObjIncarnation = currentIdAndVersionAndObjIncarnation.Value.incarnation;
+        foreach (var element in currentObjIncarnation.elements) {
+          removeEffects.Add(new BlazeRodMutSetRemoveEffect(id, element));
+        }
+        var effect = InternalEffectBlazeRodMutSetDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBlastRodMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -14099,6 +14453,8 @@ return new UnitSetMaxHpEffect(id, newValue);
       SpeedRingMutSet membersSpeedRingMutSet,
       GlaiveMutSet membersGlaiveMutSet,
       SlowRodMutSet membersSlowRodMutSet,
+      ExplosionRodMutSet membersExplosionRodMutSet,
+      BlazeRodMutSet membersBlazeRodMutSet,
       BlastRodMutSet membersBlastRodMutSet,
       ArmorMutSet membersArmorMutSet,
       SorcerousUCMutSet membersSorcerousUCMutSet,
@@ -14130,6 +14486,8 @@ return new UnitSetMaxHpEffect(id, newValue);
     CheckHasSpeedRingMutSet(membersSpeedRingMutSet);
     CheckHasGlaiveMutSet(membersGlaiveMutSet);
     CheckHasSlowRodMutSet(membersSlowRodMutSet);
+    CheckHasExplosionRodMutSet(membersExplosionRodMutSet);
+    CheckHasBlazeRodMutSet(membersBlazeRodMutSet);
     CheckHasBlastRodMutSet(membersBlastRodMutSet);
     CheckHasArmorMutSet(membersArmorMutSet);
     CheckHasSorcerousUCMutSet(membersSorcerousUCMutSet);
@@ -14162,6 +14520,8 @@ return new UnitSetMaxHpEffect(id, newValue);
             ,membersSpeedRingMutSet.id
             ,membersGlaiveMutSet.id
             ,membersSlowRodMutSet.id
+            ,membersExplosionRodMutSet.id
+            ,membersBlazeRodMutSet.id
             ,membersBlastRodMutSet.id
             ,membersArmorMutSet.id
             ,membersSorcerousUCMutSet.id
@@ -14195,6 +14555,8 @@ return new UnitSetMaxHpEffect(id, newValue);
 ,      int membersSpeedRingMutSet
 ,      int membersGlaiveMutSet
 ,      int membersSlowRodMutSet
+,      int membersExplosionRodMutSet
+,      int membersBlazeRodMutSet
 ,      int membersBlastRodMutSet
 ,      int membersArmorMutSet
 ,      int membersSorcerousUCMutSet
@@ -14230,6 +14592,8 @@ return new UnitSetMaxHpEffect(id, newValue);
             membersSpeedRingMutSet,
             membersGlaiveMutSet,
             membersSlowRodMutSet,
+            membersExplosionRodMutSet,
+            membersBlazeRodMutSet,
             membersBlastRodMutSet,
             membersArmorMutSet,
             membersSorcerousUCMutSet,
@@ -14295,11 +14659,13 @@ return new UnitSetMaxHpEffect(id, newValue);
     result += id * version * 24 * incarnation.membersSpeedRingMutSet.GetDeterministicHashCode();
     result += id * version * 25 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
     result += id * version * 26 * incarnation.membersSlowRodMutSet.GetDeterministicHashCode();
-    result += id * version * 27 * incarnation.membersBlastRodMutSet.GetDeterministicHashCode();
-    result += id * version * 28 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
-    result += id * version * 29 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
-    result += id * version * 30 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
-    result += id * version * 31 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 27 * incarnation.membersExplosionRodMutSet.GetDeterministicHashCode();
+    result += id * version * 28 * incarnation.membersBlazeRodMutSet.GetDeterministicHashCode();
+    result += id * version * 29 * incarnation.membersBlastRodMutSet.GetDeterministicHashCode();
+    result += id * version * 30 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
+    result += id * version * 31 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
+    result += id * version * 32 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 33 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
     return result;
   }
        public LightningChargedUCIncarnation GetLightningChargedUCIncarnation(int id) {
@@ -22890,6 +23256,8 @@ return new LevelSetTimeEffect(id, newValue);
       SpeedRingStrongMutSet membersSpeedRingStrongMutSet,
       GlaiveStrongMutSet membersGlaiveStrongMutSet,
       SlowRodStrongMutSet membersSlowRodStrongMutSet,
+      ExplosionRodStrongMutSet membersExplosionRodStrongMutSet,
+      BlazeRodStrongMutSet membersBlazeRodStrongMutSet,
       BlastRodStrongMutSet membersBlastRodStrongMutSet,
       ArmorStrongMutSet membersArmorStrongMutSet) {
     CheckHasManaPotionStrongMutSet(membersManaPotionStrongMutSet);
@@ -22897,6 +23265,8 @@ return new LevelSetTimeEffect(id, newValue);
     CheckHasSpeedRingStrongMutSet(membersSpeedRingStrongMutSet);
     CheckHasGlaiveStrongMutSet(membersGlaiveStrongMutSet);
     CheckHasSlowRodStrongMutSet(membersSlowRodStrongMutSet);
+    CheckHasExplosionRodStrongMutSet(membersExplosionRodStrongMutSet);
+    CheckHasBlazeRodStrongMutSet(membersBlazeRodStrongMutSet);
     CheckHasBlastRodStrongMutSet(membersBlastRodStrongMutSet);
     CheckHasArmorStrongMutSet(membersArmorStrongMutSet);
     return TrustedEffectIItemStrongMutBunchCreateWithId(NewId()
@@ -22905,6 +23275,8 @@ return new LevelSetTimeEffect(id, newValue);
             ,membersSpeedRingStrongMutSet.id
             ,membersGlaiveStrongMutSet.id
             ,membersSlowRodStrongMutSet.id
+            ,membersExplosionRodStrongMutSet.id
+            ,membersBlazeRodStrongMutSet.id
             ,membersBlastRodStrongMutSet.id
             ,membersArmorStrongMutSet.id    );
   }
@@ -22914,6 +23286,8 @@ return new LevelSetTimeEffect(id, newValue);
 ,      int membersSpeedRingStrongMutSet
 ,      int membersGlaiveStrongMutSet
 ,      int membersSlowRodStrongMutSet
+,      int membersExplosionRodStrongMutSet
+,      int membersBlazeRodStrongMutSet
 ,      int membersBlastRodStrongMutSet
 ,      int membersArmorStrongMutSet) {
     CheckUnlocked();
@@ -22925,6 +23299,8 @@ return new LevelSetTimeEffect(id, newValue);
             membersSpeedRingStrongMutSet,
             membersGlaiveStrongMutSet,
             membersSlowRodStrongMutSet,
+            membersExplosionRodStrongMutSet,
+            membersBlazeRodStrongMutSet,
             membersBlastRodStrongMutSet,
             membersArmorStrongMutSet
             );
@@ -22966,8 +23342,10 @@ return new LevelSetTimeEffect(id, newValue);
     result += id * version * 3 * incarnation.membersSpeedRingStrongMutSet.GetDeterministicHashCode();
     result += id * version * 4 * incarnation.membersGlaiveStrongMutSet.GetDeterministicHashCode();
     result += id * version * 5 * incarnation.membersSlowRodStrongMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersBlastRodStrongMutSet.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.membersArmorStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersExplosionRodStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersBlazeRodStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersBlastRodStrongMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersArmorStrongMutSet.GetDeterministicHashCode();
     return result;
   }
        public ItemTTCIncarnation GetItemTTCIncarnation(int id) {
@@ -23325,6 +23703,184 @@ return new LevelSetTimeEffect(id, newValue);
 
      
   public int GetSlowRodHash(int id, int version, SlowRodIncarnation incarnation) {
+    int result = id * version;
+    return result;
+  }
+       public ExplosionRodIncarnation GetExplosionRodIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsExplosionRod[id].incarnation;
+  }
+  public bool ExplosionRodExists(int id) {
+    return rootIncarnation.incarnationsExplosionRod.ContainsKey(id);
+  }
+  public ExplosionRod GetExplosionRod(int id) {
+    CheckHasExplosionRod(id);
+    return new ExplosionRod(this, id);
+  }
+  public ExplosionRod GetExplosionRodOrNull(int id) {
+    if (ExplosionRodExists(id)) {
+      return new ExplosionRod(this, id);
+    } else {
+      return new ExplosionRod(this, 0);
+    }
+  }
+  public List<ExplosionRod> AllExplosionRod() {
+    List<ExplosionRod> result = new List<ExplosionRod>(rootIncarnation.incarnationsExplosionRod.Count);
+    foreach (var id in rootIncarnation.incarnationsExplosionRod.Keys) {
+      result.Add(new ExplosionRod(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<ExplosionRod> EnumAllExplosionRod() {
+    foreach (var id in rootIncarnation.incarnationsExplosionRod.Keys) {
+      yield return GetExplosionRod(id);
+    }
+  }
+  public void CheckHasExplosionRod(ExplosionRod thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasExplosionRod(thing.id);
+  }
+  public void CheckHasExplosionRod(int id) {
+    if (!rootIncarnation.incarnationsExplosionRod.ContainsKey(id)) {
+      throw new System.Exception("Invalid ExplosionRod: " + id);
+    }
+  }
+  public ExplosionRod EffectExplosionRodCreate(
+) {
+    return TrustedEffectExplosionRodCreateWithId(NewId()
+    );
+  }
+  public ExplosionRod TrustedEffectExplosionRodCreateWithId(int id
+) {
+    CheckUnlocked();
+
+    var incarnation =
+        new ExplosionRodIncarnation(
+
+            );
+    var effect = InternalEffectCreateExplosionRod(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new ExplosionRod(this, id);
+  }
+  public ExplosionRodCreateEffect InternalEffectCreateExplosionRod(
+      int id,
+      int incarnationVersion,
+      ExplosionRodIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsExplosionRod.Add(
+        id,
+        new VersionAndIncarnation<ExplosionRodIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new ExplosionRodCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectExplosionRodDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectExplosionRodDelete(id);
+    NotifyEffect(effect);
+  }
+  public ExplosionRodDeleteEffect InternalEffectExplosionRodDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsExplosionRod[id];
+
+    rootIncarnation.incarnationsExplosionRod.Remove(id);
+    return new ExplosionRodDeleteEffect(id);
+  }
+
+     
+  public int GetExplosionRodHash(int id, int version, ExplosionRodIncarnation incarnation) {
+    int result = id * version;
+    return result;
+  }
+       public BlazeRodIncarnation GetBlazeRodIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsBlazeRod[id].incarnation;
+  }
+  public bool BlazeRodExists(int id) {
+    return rootIncarnation.incarnationsBlazeRod.ContainsKey(id);
+  }
+  public BlazeRod GetBlazeRod(int id) {
+    CheckHasBlazeRod(id);
+    return new BlazeRod(this, id);
+  }
+  public BlazeRod GetBlazeRodOrNull(int id) {
+    if (BlazeRodExists(id)) {
+      return new BlazeRod(this, id);
+    } else {
+      return new BlazeRod(this, 0);
+    }
+  }
+  public List<BlazeRod> AllBlazeRod() {
+    List<BlazeRod> result = new List<BlazeRod>(rootIncarnation.incarnationsBlazeRod.Count);
+    foreach (var id in rootIncarnation.incarnationsBlazeRod.Keys) {
+      result.Add(new BlazeRod(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<BlazeRod> EnumAllBlazeRod() {
+    foreach (var id in rootIncarnation.incarnationsBlazeRod.Keys) {
+      yield return GetBlazeRod(id);
+    }
+  }
+  public void CheckHasBlazeRod(BlazeRod thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasBlazeRod(thing.id);
+  }
+  public void CheckHasBlazeRod(int id) {
+    if (!rootIncarnation.incarnationsBlazeRod.ContainsKey(id)) {
+      throw new System.Exception("Invalid BlazeRod: " + id);
+    }
+  }
+  public BlazeRod EffectBlazeRodCreate(
+) {
+    return TrustedEffectBlazeRodCreateWithId(NewId()
+    );
+  }
+  public BlazeRod TrustedEffectBlazeRodCreateWithId(int id
+) {
+    CheckUnlocked();
+
+    var incarnation =
+        new BlazeRodIncarnation(
+
+            );
+    var effect = InternalEffectCreateBlazeRod(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new BlazeRod(this, id);
+  }
+  public BlazeRodCreateEffect InternalEffectCreateBlazeRod(
+      int id,
+      int incarnationVersion,
+      BlazeRodIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsBlazeRod.Add(
+        id,
+        new VersionAndIncarnation<BlazeRodIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new BlazeRodCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectBlazeRodDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectBlazeRodDelete(id);
+    NotifyEffect(effect);
+  }
+  public BlazeRodDeleteEffect InternalEffectBlazeRodDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsBlazeRod[id];
+
+    rootIncarnation.incarnationsBlazeRod.Remove(id);
+    return new BlazeRodDeleteEffect(id);
+  }
+
+     
+  public int GetBlazeRodHash(int id, int version, BlazeRodIncarnation incarnation) {
     int result = id * version;
     return result;
   }
@@ -26396,6 +26952,12 @@ return new GameSetEvventEffect(id, newValue);
     if (rootIncarnation.incarnationsSlowRod.ContainsKey(id)) {
       return new SlowRodAsIUnitComponent(new SlowRod(this, id));
     }
+    if (rootIncarnation.incarnationsExplosionRod.ContainsKey(id)) {
+      return new ExplosionRodAsIUnitComponent(new ExplosionRod(this, id));
+    }
+    if (rootIncarnation.incarnationsBlazeRod.ContainsKey(id)) {
+      return new BlazeRodAsIUnitComponent(new BlazeRod(this, id));
+    }
     if (rootIncarnation.incarnationsBlastRod.ContainsKey(id)) {
       return new BlastRodAsIUnitComponent(new BlastRod(this, id));
     }
@@ -26491,6 +27053,12 @@ return new GameSetEvventEffect(id, newValue);
     }
     if (rootIncarnation.incarnationsSlowRod.ContainsKey(id)) {
       return new SlowRodAsIUnitComponent(new SlowRod(this, id));
+    }
+    if (rootIncarnation.incarnationsExplosionRod.ContainsKey(id)) {
+      return new ExplosionRodAsIUnitComponent(new ExplosionRod(this, id));
+    }
+    if (rootIncarnation.incarnationsBlazeRod.ContainsKey(id)) {
+      return new BlazeRodAsIUnitComponent(new BlazeRod(this, id));
     }
     if (rootIncarnation.incarnationsBlastRod.ContainsKey(id)) {
       return new BlastRodAsIUnitComponent(new BlastRod(this, id));
@@ -27395,6 +27963,12 @@ return new GameSetEvventEffect(id, newValue);
     if (rootIncarnation.incarnationsSlowRod.ContainsKey(id)) {
       return new SlowRodAsIPickUpReactorItem(new SlowRod(this, id));
     }
+    if (rootIncarnation.incarnationsExplosionRod.ContainsKey(id)) {
+      return new ExplosionRodAsIPickUpReactorItem(new ExplosionRod(this, id));
+    }
+    if (rootIncarnation.incarnationsBlazeRod.ContainsKey(id)) {
+      return new BlazeRodAsIPickUpReactorItem(new BlazeRod(this, id));
+    }
     if (rootIncarnation.incarnationsBlastRod.ContainsKey(id)) {
       return new BlastRodAsIPickUpReactorItem(new BlastRod(this, id));
     }
@@ -27403,6 +27977,12 @@ return new GameSetEvventEffect(id, newValue);
   public IPickUpReactorItem GetIPickUpReactorItemOrNull(int id) {
     if (rootIncarnation.incarnationsSlowRod.ContainsKey(id)) {
       return new SlowRodAsIPickUpReactorItem(new SlowRod(this, id));
+    }
+    if (rootIncarnation.incarnationsExplosionRod.ContainsKey(id)) {
+      return new ExplosionRodAsIPickUpReactorItem(new ExplosionRod(this, id));
+    }
+    if (rootIncarnation.incarnationsBlazeRod.ContainsKey(id)) {
+      return new BlazeRodAsIPickUpReactorItem(new BlazeRod(this, id));
     }
     if (rootIncarnation.incarnationsBlastRod.ContainsKey(id)) {
       return new BlastRodAsIPickUpReactorItem(new BlastRod(this, id));
@@ -27503,6 +28083,12 @@ return new GameSetEvventEffect(id, newValue);
     if (rootIncarnation.incarnationsSlowRod.ContainsKey(id)) {
       return new SlowRodAsICloneableUC(new SlowRod(this, id));
     }
+    if (rootIncarnation.incarnationsExplosionRod.ContainsKey(id)) {
+      return new ExplosionRodAsICloneableUC(new ExplosionRod(this, id));
+    }
+    if (rootIncarnation.incarnationsBlazeRod.ContainsKey(id)) {
+      return new BlazeRodAsICloneableUC(new BlazeRod(this, id));
+    }
     if (rootIncarnation.incarnationsBlastRod.ContainsKey(id)) {
       return new BlastRodAsICloneableUC(new BlastRod(this, id));
     }
@@ -27539,6 +28125,12 @@ return new GameSetEvventEffect(id, newValue);
     if (rootIncarnation.incarnationsSlowRod.ContainsKey(id)) {
       return new SlowRodAsICloneableUC(new SlowRod(this, id));
     }
+    if (rootIncarnation.incarnationsExplosionRod.ContainsKey(id)) {
+      return new ExplosionRodAsICloneableUC(new ExplosionRod(this, id));
+    }
+    if (rootIncarnation.incarnationsBlazeRod.ContainsKey(id)) {
+      return new BlazeRodAsICloneableUC(new BlazeRod(this, id));
+    }
     if (rootIncarnation.incarnationsBlastRod.ContainsKey(id)) {
       return new BlastRodAsICloneableUC(new BlastRod(this, id));
     }
@@ -27573,6 +28165,12 @@ return new GameSetEvventEffect(id, newValue);
     if (rootIncarnation.incarnationsSlowRod.ContainsKey(id)) {
       return new SlowRodAsIItem(new SlowRod(this, id));
     }
+    if (rootIncarnation.incarnationsExplosionRod.ContainsKey(id)) {
+      return new ExplosionRodAsIItem(new ExplosionRod(this, id));
+    }
+    if (rootIncarnation.incarnationsBlazeRod.ContainsKey(id)) {
+      return new BlazeRodAsIItem(new BlazeRod(this, id));
+    }
     if (rootIncarnation.incarnationsBlastRod.ContainsKey(id)) {
       return new BlastRodAsIItem(new BlastRod(this, id));
     }
@@ -27596,6 +28194,12 @@ return new GameSetEvventEffect(id, newValue);
     }
     if (rootIncarnation.incarnationsSlowRod.ContainsKey(id)) {
       return new SlowRodAsIItem(new SlowRod(this, id));
+    }
+    if (rootIncarnation.incarnationsExplosionRod.ContainsKey(id)) {
+      return new ExplosionRodAsIItem(new ExplosionRod(this, id));
+    }
+    if (rootIncarnation.incarnationsBlazeRod.ContainsKey(id)) {
+      return new BlazeRodAsIItem(new BlazeRod(this, id));
     }
     if (rootIncarnation.incarnationsBlastRod.ContainsKey(id)) {
       return new BlastRodAsIItem(new BlastRod(this, id));
@@ -27693,6 +28297,12 @@ return new GameSetEvventEffect(id, newValue);
     }
     if (rootIncarnation.incarnationsSlowRod.ContainsKey(id)) {
       return new SlowRodAsIDestructible(new SlowRod(this, id));
+    }
+    if (rootIncarnation.incarnationsExplosionRod.ContainsKey(id)) {
+      return new ExplosionRodAsIDestructible(new ExplosionRod(this, id));
+    }
+    if (rootIncarnation.incarnationsBlazeRod.ContainsKey(id)) {
+      return new BlazeRodAsIDestructible(new BlazeRod(this, id));
     }
     if (rootIncarnation.incarnationsBlastRod.ContainsKey(id)) {
       return new BlastRodAsIDestructible(new BlastRod(this, id));
@@ -28014,6 +28624,12 @@ return new GameSetEvventEffect(id, newValue);
     }
     if (rootIncarnation.incarnationsSlowRod.ContainsKey(id)) {
       return new SlowRodAsIDestructible(new SlowRod(this, id));
+    }
+    if (rootIncarnation.incarnationsExplosionRod.ContainsKey(id)) {
+      return new ExplosionRodAsIDestructible(new ExplosionRod(this, id));
+    }
+    if (rootIncarnation.incarnationsBlazeRod.ContainsKey(id)) {
+      return new BlazeRodAsIDestructible(new BlazeRod(this, id));
     }
     if (rootIncarnation.incarnationsBlastRod.ContainsKey(id)) {
       return new BlastRodAsIDestructible(new BlastRod(this, id));
@@ -29344,6 +29960,240 @@ return new GameSetEvventEffect(id, newValue);
                 rootIncarnation.version, newIncarnation);
       }
       return new SlowRodStrongMutSetRemoveEffect(instanceId, elementId);
+    }
+
+       
+    public int GetExplosionRodStrongMutSetHash(int id, int version, ExplosionRodStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.elements) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public ExplosionRodStrongMutSetIncarnation GetExplosionRodStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsExplosionRodStrongMutSet[id].incarnation;
+    }
+    public ExplosionRodStrongMutSet GetExplosionRodStrongMutSet(int id) {
+      return new ExplosionRodStrongMutSet(this, id);
+    }
+    public List<ExplosionRodStrongMutSet> AllExplosionRodStrongMutSet() {
+      List<ExplosionRodStrongMutSet> result = new List<ExplosionRodStrongMutSet>(rootIncarnation.incarnationsExplosionRodStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsExplosionRodStrongMutSet.Keys) {
+        result.Add(new ExplosionRodStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool ExplosionRodStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsExplosionRodStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasExplosionRodStrongMutSet(ExplosionRodStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasExplosionRodStrongMutSet(thing.id);
+    }
+    public void CheckHasExplosionRodStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsExplosionRodStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid ExplosionRodStrongMutSet}: " + id);
+      }
+    }
+    public ExplosionRodStrongMutSet EffectExplosionRodStrongMutSetCreate() {
+      return TrustedEffectExplosionRodStrongMutSetCreateWithId(NewId());
+    }
+    public ExplosionRodStrongMutSet TrustedEffectExplosionRodStrongMutSetCreateWithId(int id) {
+      CheckUnlocked();
+      var incarnation = new ExplosionRodStrongMutSetIncarnation(new SortedSet<int>());
+      var effect = InternalEffectCreateExplosionRodStrongMutSet(id, rootIncarnation.version, incarnation);
+      NotifyEffect(effect);
+      return new ExplosionRodStrongMutSet(this, id);
+    }
+    public ExplosionRodStrongMutSetCreateEffect InternalEffectCreateExplosionRodStrongMutSet(int id, int incarnationVersion, ExplosionRodStrongMutSetIncarnation incarnation) {
+      rootIncarnation.incarnationsExplosionRodStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<ExplosionRodStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+
+      return new ExplosionRodStrongMutSetCreateEffect(id);
+    }
+    public void EffectExplosionRodStrongMutSetDelete(int id) {
+      var effect = InternalEffectExplosionRodStrongMutSetDelete(id);
+      NotifyEffect(effect);
+    }
+    public ExplosionRodStrongMutSetDeleteEffect InternalEffectExplosionRodStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var versionAndIncarnation = rootIncarnation.incarnationsExplosionRodStrongMutSet[id];
+      rootIncarnation.incarnationsExplosionRodStrongMutSet.Remove(id);
+      return new ExplosionRodStrongMutSetDeleteEffect(id);
+    }
+
+       
+    public void EffectExplosionRodStrongMutSetAdd(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasExplosionRodStrongMutSet(instanceId);
+      CheckHasExplosionRod(element);
+      var effect = InternalEffectExplosionRodStrongMutSetAdd(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public ExplosionRodStrongMutSetAddEffect InternalEffectExplosionRodStrongMutSetAdd(int instanceId, int element) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsExplosionRodStrongMutSet[instanceId];
+      if (oldIncarnationAndVersion.incarnation.elements.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new ExplosionRodStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsExplosionRodStrongMutSet[instanceId] =
+            new VersionAndIncarnation<ExplosionRodStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      return new ExplosionRodStrongMutSetAddEffect(instanceId, element);
+    }
+    public void EffectExplosionRodStrongMutSetRemove(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasExplosionRodStrongMutSet(instanceId);
+      CheckHasExplosionRod(element);
+      var effect = InternalEffectExplosionRodStrongMutSetRemove(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public ExplosionRodStrongMutSetRemoveEffect InternalEffectExplosionRodStrongMutSetRemove(int instanceId, int elementId) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsExplosionRodStrongMutSet[instanceId];
+      if (!oldIncarnationAndVersion.incarnation.elements.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new ExplosionRodStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsExplosionRodStrongMutSet[instanceId] =
+            new VersionAndIncarnation<ExplosionRodStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      return new ExplosionRodStrongMutSetRemoveEffect(instanceId, elementId);
+    }
+
+       
+    public int GetBlazeRodStrongMutSetHash(int id, int version, BlazeRodStrongMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.elements) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public BlazeRodStrongMutSetIncarnation GetBlazeRodStrongMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsBlazeRodStrongMutSet[id].incarnation;
+    }
+    public BlazeRodStrongMutSet GetBlazeRodStrongMutSet(int id) {
+      return new BlazeRodStrongMutSet(this, id);
+    }
+    public List<BlazeRodStrongMutSet> AllBlazeRodStrongMutSet() {
+      List<BlazeRodStrongMutSet> result = new List<BlazeRodStrongMutSet>(rootIncarnation.incarnationsBlazeRodStrongMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsBlazeRodStrongMutSet.Keys) {
+        result.Add(new BlazeRodStrongMutSet(this, id));
+      }
+      return result;
+    }
+    public bool BlazeRodStrongMutSetExists(int id) {
+      return rootIncarnation.incarnationsBlazeRodStrongMutSet.ContainsKey(id);
+    }
+    public void CheckHasBlazeRodStrongMutSet(BlazeRodStrongMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasBlazeRodStrongMutSet(thing.id);
+    }
+    public void CheckHasBlazeRodStrongMutSet(int id) {
+      if (!rootIncarnation.incarnationsBlazeRodStrongMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid BlazeRodStrongMutSet}: " + id);
+      }
+    }
+    public BlazeRodStrongMutSet EffectBlazeRodStrongMutSetCreate() {
+      return TrustedEffectBlazeRodStrongMutSetCreateWithId(NewId());
+    }
+    public BlazeRodStrongMutSet TrustedEffectBlazeRodStrongMutSetCreateWithId(int id) {
+      CheckUnlocked();
+      var incarnation = new BlazeRodStrongMutSetIncarnation(new SortedSet<int>());
+      var effect = InternalEffectCreateBlazeRodStrongMutSet(id, rootIncarnation.version, incarnation);
+      NotifyEffect(effect);
+      return new BlazeRodStrongMutSet(this, id);
+    }
+    public BlazeRodStrongMutSetCreateEffect InternalEffectCreateBlazeRodStrongMutSet(int id, int incarnationVersion, BlazeRodStrongMutSetIncarnation incarnation) {
+      rootIncarnation.incarnationsBlazeRodStrongMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<BlazeRodStrongMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+
+      return new BlazeRodStrongMutSetCreateEffect(id);
+    }
+    public void EffectBlazeRodStrongMutSetDelete(int id) {
+      var effect = InternalEffectBlazeRodStrongMutSetDelete(id);
+      NotifyEffect(effect);
+    }
+    public BlazeRodStrongMutSetDeleteEffect InternalEffectBlazeRodStrongMutSetDelete(int id) {
+      CheckUnlocked();
+      var versionAndIncarnation = rootIncarnation.incarnationsBlazeRodStrongMutSet[id];
+      rootIncarnation.incarnationsBlazeRodStrongMutSet.Remove(id);
+      return new BlazeRodStrongMutSetDeleteEffect(id);
+    }
+
+       
+    public void EffectBlazeRodStrongMutSetAdd(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasBlazeRodStrongMutSet(instanceId);
+      CheckHasBlazeRod(element);
+      var effect = InternalEffectBlazeRodStrongMutSetAdd(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public BlazeRodStrongMutSetAddEffect InternalEffectBlazeRodStrongMutSetAdd(int instanceId, int element) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsBlazeRodStrongMutSet[instanceId];
+      if (oldIncarnationAndVersion.incarnation.elements.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new BlazeRodStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsBlazeRodStrongMutSet[instanceId] =
+            new VersionAndIncarnation<BlazeRodStrongMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      return new BlazeRodStrongMutSetAddEffect(instanceId, element);
+    }
+    public void EffectBlazeRodStrongMutSetRemove(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasBlazeRodStrongMutSet(instanceId);
+      CheckHasBlazeRod(element);
+      var effect = InternalEffectBlazeRodStrongMutSetRemove(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public BlazeRodStrongMutSetRemoveEffect InternalEffectBlazeRodStrongMutSetRemove(int instanceId, int elementId) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsBlazeRodStrongMutSet[instanceId];
+      if (!oldIncarnationAndVersion.incarnation.elements.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new BlazeRodStrongMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsBlazeRodStrongMutSet[instanceId] =
+            new VersionAndIncarnation<BlazeRodStrongMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      return new BlazeRodStrongMutSetRemoveEffect(instanceId, elementId);
     }
 
        
@@ -40342,6 +41192,240 @@ return new GameSetEvventEffect(id, newValue);
                 rootIncarnation.version, newIncarnation);
       }
       return new SlowRodMutSetRemoveEffect(instanceId, elementId);
+    }
+
+       
+    public int GetExplosionRodMutSetHash(int id, int version, ExplosionRodMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.elements) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public ExplosionRodMutSetIncarnation GetExplosionRodMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsExplosionRodMutSet[id].incarnation;
+    }
+    public ExplosionRodMutSet GetExplosionRodMutSet(int id) {
+      return new ExplosionRodMutSet(this, id);
+    }
+    public List<ExplosionRodMutSet> AllExplosionRodMutSet() {
+      List<ExplosionRodMutSet> result = new List<ExplosionRodMutSet>(rootIncarnation.incarnationsExplosionRodMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsExplosionRodMutSet.Keys) {
+        result.Add(new ExplosionRodMutSet(this, id));
+      }
+      return result;
+    }
+    public bool ExplosionRodMutSetExists(int id) {
+      return rootIncarnation.incarnationsExplosionRodMutSet.ContainsKey(id);
+    }
+    public void CheckHasExplosionRodMutSet(ExplosionRodMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasExplosionRodMutSet(thing.id);
+    }
+    public void CheckHasExplosionRodMutSet(int id) {
+      if (!rootIncarnation.incarnationsExplosionRodMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid ExplosionRodMutSet}: " + id);
+      }
+    }
+    public ExplosionRodMutSet EffectExplosionRodMutSetCreate() {
+      return TrustedEffectExplosionRodMutSetCreateWithId(NewId());
+    }
+    public ExplosionRodMutSet TrustedEffectExplosionRodMutSetCreateWithId(int id) {
+      CheckUnlocked();
+      var incarnation = new ExplosionRodMutSetIncarnation(new SortedSet<int>());
+      var effect = InternalEffectCreateExplosionRodMutSet(id, rootIncarnation.version, incarnation);
+      NotifyEffect(effect);
+      return new ExplosionRodMutSet(this, id);
+    }
+    public ExplosionRodMutSetCreateEffect InternalEffectCreateExplosionRodMutSet(int id, int incarnationVersion, ExplosionRodMutSetIncarnation incarnation) {
+      rootIncarnation.incarnationsExplosionRodMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<ExplosionRodMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+
+      return new ExplosionRodMutSetCreateEffect(id);
+    }
+    public void EffectExplosionRodMutSetDelete(int id) {
+      var effect = InternalEffectExplosionRodMutSetDelete(id);
+      NotifyEffect(effect);
+    }
+    public ExplosionRodMutSetDeleteEffect InternalEffectExplosionRodMutSetDelete(int id) {
+      CheckUnlocked();
+      var versionAndIncarnation = rootIncarnation.incarnationsExplosionRodMutSet[id];
+      rootIncarnation.incarnationsExplosionRodMutSet.Remove(id);
+      return new ExplosionRodMutSetDeleteEffect(id);
+    }
+
+       
+    public void EffectExplosionRodMutSetAdd(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasExplosionRodMutSet(instanceId);
+      CheckHasExplosionRod(element);
+      var effect = InternalEffectExplosionRodMutSetAdd(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public ExplosionRodMutSetAddEffect InternalEffectExplosionRodMutSetAdd(int instanceId, int element) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsExplosionRodMutSet[instanceId];
+      if (oldIncarnationAndVersion.incarnation.elements.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new ExplosionRodMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsExplosionRodMutSet[instanceId] =
+            new VersionAndIncarnation<ExplosionRodMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      return new ExplosionRodMutSetAddEffect(instanceId, element);
+    }
+    public void EffectExplosionRodMutSetRemove(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasExplosionRodMutSet(instanceId);
+      CheckHasExplosionRod(element);
+      var effect = InternalEffectExplosionRodMutSetRemove(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public ExplosionRodMutSetRemoveEffect InternalEffectExplosionRodMutSetRemove(int instanceId, int elementId) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsExplosionRodMutSet[instanceId];
+      if (!oldIncarnationAndVersion.incarnation.elements.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new ExplosionRodMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsExplosionRodMutSet[instanceId] =
+            new VersionAndIncarnation<ExplosionRodMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      return new ExplosionRodMutSetRemoveEffect(instanceId, elementId);
+    }
+
+       
+    public int GetBlazeRodMutSetHash(int id, int version, BlazeRodMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.elements) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public BlazeRodMutSetIncarnation GetBlazeRodMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsBlazeRodMutSet[id].incarnation;
+    }
+    public BlazeRodMutSet GetBlazeRodMutSet(int id) {
+      return new BlazeRodMutSet(this, id);
+    }
+    public List<BlazeRodMutSet> AllBlazeRodMutSet() {
+      List<BlazeRodMutSet> result = new List<BlazeRodMutSet>(rootIncarnation.incarnationsBlazeRodMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsBlazeRodMutSet.Keys) {
+        result.Add(new BlazeRodMutSet(this, id));
+      }
+      return result;
+    }
+    public bool BlazeRodMutSetExists(int id) {
+      return rootIncarnation.incarnationsBlazeRodMutSet.ContainsKey(id);
+    }
+    public void CheckHasBlazeRodMutSet(BlazeRodMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasBlazeRodMutSet(thing.id);
+    }
+    public void CheckHasBlazeRodMutSet(int id) {
+      if (!rootIncarnation.incarnationsBlazeRodMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid BlazeRodMutSet}: " + id);
+      }
+    }
+    public BlazeRodMutSet EffectBlazeRodMutSetCreate() {
+      return TrustedEffectBlazeRodMutSetCreateWithId(NewId());
+    }
+    public BlazeRodMutSet TrustedEffectBlazeRodMutSetCreateWithId(int id) {
+      CheckUnlocked();
+      var incarnation = new BlazeRodMutSetIncarnation(new SortedSet<int>());
+      var effect = InternalEffectCreateBlazeRodMutSet(id, rootIncarnation.version, incarnation);
+      NotifyEffect(effect);
+      return new BlazeRodMutSet(this, id);
+    }
+    public BlazeRodMutSetCreateEffect InternalEffectCreateBlazeRodMutSet(int id, int incarnationVersion, BlazeRodMutSetIncarnation incarnation) {
+      rootIncarnation.incarnationsBlazeRodMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<BlazeRodMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+
+      return new BlazeRodMutSetCreateEffect(id);
+    }
+    public void EffectBlazeRodMutSetDelete(int id) {
+      var effect = InternalEffectBlazeRodMutSetDelete(id);
+      NotifyEffect(effect);
+    }
+    public BlazeRodMutSetDeleteEffect InternalEffectBlazeRodMutSetDelete(int id) {
+      CheckUnlocked();
+      var versionAndIncarnation = rootIncarnation.incarnationsBlazeRodMutSet[id];
+      rootIncarnation.incarnationsBlazeRodMutSet.Remove(id);
+      return new BlazeRodMutSetDeleteEffect(id);
+    }
+
+       
+    public void EffectBlazeRodMutSetAdd(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasBlazeRodMutSet(instanceId);
+      CheckHasBlazeRod(element);
+      var effect = InternalEffectBlazeRodMutSetAdd(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public BlazeRodMutSetAddEffect InternalEffectBlazeRodMutSetAdd(int instanceId, int element) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsBlazeRodMutSet[instanceId];
+      if (oldIncarnationAndVersion.incarnation.elements.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new BlazeRodMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsBlazeRodMutSet[instanceId] =
+            new VersionAndIncarnation<BlazeRodMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      return new BlazeRodMutSetAddEffect(instanceId, element);
+    }
+    public void EffectBlazeRodMutSetRemove(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasBlazeRodMutSet(instanceId);
+      CheckHasBlazeRod(element);
+      var effect = InternalEffectBlazeRodMutSetRemove(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public BlazeRodMutSetRemoveEffect InternalEffectBlazeRodMutSetRemove(int instanceId, int elementId) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsBlazeRodMutSet[instanceId];
+      if (!oldIncarnationAndVersion.incarnation.elements.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new BlazeRodMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsBlazeRodMutSet[instanceId] =
+            new VersionAndIncarnation<BlazeRodMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      return new BlazeRodMutSetRemoveEffect(instanceId, elementId);
     }
 
        

@@ -10,6 +10,8 @@ public class IItemStrongMutBunchIncarnation : IIItemStrongMutBunchEffectVisitor 
   public readonly int membersSpeedRingStrongMutSet;
   public readonly int membersGlaiveStrongMutSet;
   public readonly int membersSlowRodStrongMutSet;
+  public readonly int membersExplosionRodStrongMutSet;
+  public readonly int membersBlazeRodStrongMutSet;
   public readonly int membersBlastRodStrongMutSet;
   public readonly int membersArmorStrongMutSet;
   public IItemStrongMutBunchIncarnation(
@@ -18,6 +20,8 @@ public class IItemStrongMutBunchIncarnation : IIItemStrongMutBunchEffectVisitor 
       int membersSpeedRingStrongMutSet,
       int membersGlaiveStrongMutSet,
       int membersSlowRodStrongMutSet,
+      int membersExplosionRodStrongMutSet,
+      int membersBlazeRodStrongMutSet,
       int membersBlastRodStrongMutSet,
       int membersArmorStrongMutSet) {
     this.membersManaPotionStrongMutSet = membersManaPotionStrongMutSet;
@@ -25,6 +29,8 @@ public class IItemStrongMutBunchIncarnation : IIItemStrongMutBunchEffectVisitor 
     this.membersSpeedRingStrongMutSet = membersSpeedRingStrongMutSet;
     this.membersGlaiveStrongMutSet = membersGlaiveStrongMutSet;
     this.membersSlowRodStrongMutSet = membersSlowRodStrongMutSet;
+    this.membersExplosionRodStrongMutSet = membersExplosionRodStrongMutSet;
+    this.membersBlazeRodStrongMutSet = membersBlazeRodStrongMutSet;
     this.membersBlastRodStrongMutSet = membersBlastRodStrongMutSet;
     this.membersArmorStrongMutSet = membersArmorStrongMutSet;
   }
@@ -35,12 +41,16 @@ membersHealthPotionStrongMutSet,
 membersSpeedRingStrongMutSet,
 membersGlaiveStrongMutSet,
 membersSlowRodStrongMutSet,
+membersExplosionRodStrongMutSet,
+membersBlazeRodStrongMutSet,
 membersBlastRodStrongMutSet,
 membersArmorStrongMutSet    );
   }
 
   public void visitIItemStrongMutBunchCreateEffect(IItemStrongMutBunchCreateEffect e) {}
   public void visitIItemStrongMutBunchDeleteEffect(IItemStrongMutBunchDeleteEffect e) {}
+
+
 
 
 

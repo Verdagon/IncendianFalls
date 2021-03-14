@@ -1,0 +1,26 @@
+
+mut struct ExplosionRod {
+  ExplosionRod isa IItem;
+  ExplosionRod isa ICloneableUC;
+  ExplosionRod isa IPickUpReactorItem;
+
+  fn Destruct(this: ExplosionRod overrides IDestructible): Void {
+    ExplosionRodExtensions.Destruct
+  }
+
+  fn ClonifyAndReturnNewReal(
+      armor: ExplosionRod overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    ExplosionRodExtensions.ClonifyAndReturnNewReal
+  }
+
+  fn ReactToPickUp(
+    this: ExplosionRod overrides IPickUpReactorItem,
+    game: &Game,
+    superstate: $Superstate,
+    unit: &Unit)
+  : Void {
+    ExplosionRodExtensions.ReactToPickUp
+  }
+}

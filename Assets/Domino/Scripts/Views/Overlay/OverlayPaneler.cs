@@ -28,8 +28,8 @@ namespace Domino {
       var parentWidth = parentRectTransform.rect.width;
       var parentHeight = parentRectTransform.rect.height;
 
-      symbolWidth = 10;
-      symbolHeight = 15;
+      symbolWidth = 20;
+      symbolHeight = 30;
 
       screenGW = (int)(parentWidth / symbolWidth);
       screenGH = (int)(parentHeight / symbolHeight);

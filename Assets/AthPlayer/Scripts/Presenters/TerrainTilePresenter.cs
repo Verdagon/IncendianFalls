@@ -590,12 +590,38 @@ namespace AthPlayer {
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
                         "w",
-                        Vector4Animation.Color(1f, .5f, 0f, 1.5f),
+                        Vector4Animation.Color(1f, 1f, 1f, 1.5f),
                         0,
                         1,
                         OutlineMode.WithBackOutline),
                     true,
                     Vector4Animation.Color(.75f, .75f, 0)));
+          } else if (item is BlazeRodAsIItem) {
+            itemSymbolDescriptionByItemId.Add(
+                ttc.id,
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "w",
+                        Vector4Animation.Color(1f, 1f, 0, 1.5f),
+                        0,
+                        1,
+                        OutlineMode.NoOutline),
+                    true,
+                    Vector4Animation.Color(0f, 0f, 0)));
+          } else if (item is ExplosionRodAsIItem) {
+            itemSymbolDescriptionByItemId.Add(
+                ttc.id,
+                new ExtrudedSymbolDescription(
+                    RenderPriority.SYMBOL,
+                    new SymbolDescription(
+                        "w",
+                        Vector4Animation.Color(1f, 1f, 1f, 1.5f),
+                        0,
+                        1,
+                        OutlineMode.NoOutline),
+                    true,
+                    Vector4Animation.Color(0f, 0f, 0)));
           } else if (item is SlowRodAsIItem) {
             itemSymbolDescriptionByItemId.Add(
                 ttc.id,

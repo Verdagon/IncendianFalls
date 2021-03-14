@@ -6,9 +6,15 @@ using Atharia.Model;
 namespace IncendianFalls {
   public class Actions {
     public static readonly int FIRE_COST = 18;
-    public static readonly int FIRE_BOMB_COST = 10;
-    public static readonly int MIRE_COST = 2;
     public static readonly int FIRE_DAMAGE = 23;
+    public static readonly int BLAZE_COST = 10;
+    public static readonly int BLAZE_DAMAGE = 7;
+    public static readonly int BLAZE_DURATION = 4;
+    public static readonly int EXPLOSION_COST = 15;
+    public static readonly int EXPLOSION_DELAY = 3;
+    public static readonly int EXPLOSION_DAMAGE = 32;
+    public static readonly int MIRE_COST = 2;
+    public static readonly int FIRE_BOMB_COST = 10;
     public static readonly int FIRE_BOMB_DAMAGE = 32;
     public static readonly int LIGHTNING_CHARGE_DAMAGE = 4;
     public static readonly int BUMP_TIME_COST = 600;

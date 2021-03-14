@@ -1,0 +1,26 @@
+
+mut struct BlazeRod {
+  BlazeRod isa IItem;
+  BlazeRod isa ICloneableUC;
+  BlazeRod isa IPickUpReactorItem;
+
+  fn Destruct(this: BlazeRod overrides IDestructible): Void {
+    BlazeRodExtensions.Destruct
+  }
+
+  fn ClonifyAndReturnNewReal(
+      armor: BlazeRod overrides ICloneableUC,
+      newRoot: $Root)
+  : ICloneableUC {
+    BlazeRodExtensions.ClonifyAndReturnNewReal
+  }
+
+  fn ReactToPickUp(
+    this: BlazeRod overrides IPickUpReactorItem,
+    game: &Game,
+    superstate: $Superstate,
+    unit: &Unit)
+  : Void {
+    BlazeRodExtensions.ReactToPickUp
+  }
+}

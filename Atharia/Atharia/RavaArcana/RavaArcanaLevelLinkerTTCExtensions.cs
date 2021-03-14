@@ -95,6 +95,8 @@ namespace Atharia.Model {
             out level,
             out levelSuperstate,
             out entryLocation,
+            out SortedSet<Location> openLowerLocs,
+            out SortedSet<Location> openUpperLocs,
             context,
             game,
             superstate,
@@ -102,25 +104,53 @@ namespace Atharia.Model {
             squareLevelsOnly);
           context.Flare(game.root.GetDeterministicHashCode().ToString());
 
-          foreach (var loc in level.terrain.tiles.Keys) {
-            if (level.terrain.tiles[loc].IsWalkable()) {
-              var plantRand = game.rand.Next() % 100;
-              if (plantRand < 20) {
-                level.terrain.tiles[loc].components.Add(level.root.EffectLeafTTCCreate().AsITerrainTileComponent());
-              } else if (plantRand < 25) {
-                level.terrain.tiles[loc].components.Add(level.root.EffectFlowerTTCCreate().AsITerrainTileComponent());
-              } else if (plantRand < 30) {
-                level.terrain.tiles[loc].components.Add(level.root.EffectRoseTTCCreate().AsITerrainTileComponent());
-              } else if (plantRand < 35) {
-                level.terrain.tiles[loc].components.Add(level.root.EffectLotusTTCCreate().AsITerrainTileComponent());
-              }
+          if (depth == 0) {
+            var nearbyLocs = Actions.GetReachableLocations(level, entryLocation);
+            Asserts.Assert(nearbyLocs.Count > 0);
+            var blazeRodLoc = SetUtils.GetFirst(nearbyLocs);
+            var blazeRodTile = level.terrain.tiles[blazeRodLoc];
+            blazeRodTile.components.Add(
+                level.root.EffectItemTTCCreate(
+                        level.root.EffectBlazeRodCreate().AsIItem())
+                    .AsITerrainTileComponent());
+            openLowerLocs.Remove(blazeRodLoc);
+
+            var explosionRodLoc =
+                levelSuperstate.GetNRandomWalkableLocations(
+                    level.terrain,
+                    game.rand,
+                    1,
+                    (a) => openUpperLocs.Contains(a),
+                    true,
+                    true)[0];
+            var explosionRodTile = level.terrain.tiles[explosionRodLoc];
+            explosionRodTile.components.Add(
+                level.root.EffectItemTTCCreate(
+                        level.root.EffectExplosionRodCreate().AsIItem())
+                    .AsITerrainTileComponent());
+            openUpperLocs.Remove(explosionRodLoc);
+          }
+
+          var openLocs = new SortedSet<Location>(openLowerLocs);
+          SetUtils.AddAll(openLocs, openUpperLocs);
+          foreach (var loc in openLocs) {
+            var plantRand = game.rand.Next() % 100;
+            if (plantRand < 20) {
+              level.terrain.tiles[loc].components.Add(level.root.EffectLeafTTCCreate().AsITerrainTileComponent());
+            } else if (plantRand < 25) {
+              level.terrain.tiles[loc].components.Add(level.root.EffectFlowerTTCCreate().AsITerrainTileComponent());
+            } else if (plantRand < 30) {
+              level.terrain.tiles[loc].components.Add(level.root.EffectRoseTTCCreate().AsITerrainTileComponent());
+            } else if (plantRand < 35) {
+              level.terrain.tiles[loc].components.Add(level.root.EffectLotusTTCCreate().AsITerrainTileComponent());
             }
           }
 
-          for (int i = 0; i < 20; i++) {
+          var viviantLocations = SetUtils.GetRandomN(openLocs, game.rand, 2, 20);
+          foreach (var loc in viviantLocations) {
             level.EnterUnit(
                 levelSuperstate,
-                levelSuperstate.GetNRandomWalkableLocations(level.terrain, game.rand, 1, (a) => true, true, true)[0],
+                loc,
                 level.time + 10,
                 Viviant.Make(level.root));
           }

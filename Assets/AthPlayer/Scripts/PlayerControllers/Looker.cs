@@ -83,6 +83,26 @@ namespace AthPlayer {
                         1,
                         OutlineMode.WithBackOutline),
               "Fire Rod"));
+          } else if (item is BlazeRodAsIItem) {
+            symbolsAndLabels.Add(
+                new KeyValuePair<SymbolDescription, string>(
+                    new SymbolDescription(
+                        "w",
+                        Vector4Animation.Color(1f, 1f, 0f, 1.5f),
+                        0,
+                        1,
+                        OutlineMode.WithBackOutline),
+                    "Blaze Rod"));
+          } else if (item is ExplosionRodAsIItem) {
+            symbolsAndLabels.Add(
+                new KeyValuePair<SymbolDescription, string>(
+                    new SymbolDescription(
+                        "w",
+                        Vector4Animation.Color(1f, 1f, 1f, 1.5f),
+                        0,
+                        1,
+                        OutlineMode.WithBackOutline),
+                    "Explosion Staff"));
           } else if (item is SlowRodAsIItem) {
             symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(

@@ -41,49 +41,49 @@ namespace Domino {
       int position = 0;
       bool canChronomancy = true;
       if (canChronomancy) {
-        AddButton(position++, TIME_ANCHOR_MOVE_CAPABILITY_ID, "k", "(A) Time Anchor: Place a time anchor, which you can later Rewind to.");
-        AddButton(position++, REVERT_CAPABILITY_ID, "1", "(R) Rewind Time to your last Time Anchor. MP cost: 2+turns/4.");
+        AddButton(overlayPaneler.screenGW, position++, TIME_ANCHOR_MOVE_CAPABILITY_ID, "k", "(A) Time Anchor: Place a time anchor, which you can later Rewind to.");
+        AddButton(overlayPaneler.screenGW, position++, REVERT_CAPABILITY_ID, "1", "(R) Rewind Time to your last Time Anchor. MP cost: 2+turns/4.");
       }
       bool canInteract = true;
       if (canInteract) {
-        AddButton(position++, INTERACT_CAPABILITY_ID, "2", "(E) Interact with something where you're standing.");
+        AddButton(overlayPaneler.screenGW, position++, INTERACT_CAPABILITY_ID, "2", "(E) Interact with something where you're standing.");
       }
       bool canDefy = true;
       if (canDefy) {
-        AddButton(position++, DEFEND_CAPABILITY_ID, "q", "(D) Defy: Reduce incoming damage by 2/3. Tempts foes.");
+        AddButton(overlayPaneler.screenGW, position++, DEFEND_CAPABILITY_ID, "q", "(D) Defy: Reduce incoming damage by 2/3. Tempts foes.");
       }
       bool canCounter = false;
       if (canCounter) {
-        AddButton(position++, COUNTER_CAPABILITY_ID, "v", "(C) Counter: Counterattack when hit. Cost 1mp, 2mp more when hit. Tempts foes.");
+        AddButton(overlayPaneler.screenGW, position++, COUNTER_CAPABILITY_ID, "v", "(C) Counter: Counterattack when hit. Cost 1mp, 2mp more when hit. Tempts foes.");
       }
       bool canFire = false;
       if (canFire) {
-        AddButton(position++, FIRE_CAPABILITY_ID, "r", "(F) Fire: Cast fireball for " + IncendianFalls.Actions.FIRE_COST + "mp for " + IncendianFalls.Actions.FIRE_DAMAGE + " damage.");
+        AddButton(overlayPaneler.screenGW, position++, FIRE_CAPABILITY_ID, "r", "(F) Fire: Cast fireball for " + IncendianFalls.Actions.FIRE_COST + "mp for " + IncendianFalls.Actions.FIRE_DAMAGE + " damage.");
       }
       bool canFireBomb = true;
       if (canFireBomb) {
-        AddButton(position++, FIRE_BOMB_CAPABILITY_ID, "r", "(F) Fire Bomb: Places a bomb for " + IncendianFalls.Actions.FIRE_BOMB_COST + "mp which will explode after a couple turns for " + IncendianFalls.Actions.FIRE_BOMB_DAMAGE + " damage.");
+        AddButton(overlayPaneler.screenGW, position++, FIRE_BOMB_CAPABILITY_ID, "r", "(F) Fire Bomb: Places a bomb for " + IncendianFalls.Actions.FIRE_BOMB_COST + "mp which will explode after a couple turns for " + IncendianFalls.Actions.FIRE_BOMB_DAMAGE + " damage.");
       }
       bool canMire = true;
       if (canMire) {
-        AddButton(position++, MIRE_CAPABILITY_ID, "f", "(S) Slow: Freeze enemy for one turn. Cost " + IncendianFalls.Actions.MIRE_COST + "mp. Stacks by half each time.");
+        AddButton(overlayPaneler.screenGW, position++, MIRE_CAPABILITY_ID, "f", "(S) Slow: Freeze enemy for one turn. Cost " + IncendianFalls.Actions.MIRE_COST + "mp. Stacks by half each time.");
       }
 
       UpdatePlayerStatus();
     }
 
-    private int AddButton(int position, int capabilityId, string symbol, string hoverText) {
+    private int AddButton(int screenGW, int position, int capabilityId, string symbol, string hoverText) {
       float marginBetweenButtons = .2f;
       float paddingInsideButton = .25f;
       float buttonSize = 2f;
       int timeAnchorMoveButtonId =
         playerStatusView.AddButton(
-          0, 70 - 3, 3 + position * 2 + (position + 1) * .2f, 3, 2, 0,
+          0, screenGW - 3, 3 + position * 2 + (position + 1) * .2f, 3, 2, 0,
           new UnityEngine.Color(.4f, .4f, .4f), new UnityEngine.Color(0, 0, 0, 0), new UnityEngine.Color(1.2f, 1.2f, 1.2f),
           () => CapabilityButtonClicked?.Invoke(capabilityId),
           () => looker.SetTooltip(hoverText),
           () => looker.SetTooltip(""));
-      float symbolX = 70 - buttonSize - 1 + paddingInsideButton;
+      float symbolX = screenGW - buttonSize - 1 + paddingInsideButton;
       float symbolY = 3 + position * buttonSize + (position + 1) * marginBetweenButtons + paddingInsideButton;
       float symbolSize = buttonSize - paddingInsideButton * 2;
       playerStatusView.AddSymbol(
