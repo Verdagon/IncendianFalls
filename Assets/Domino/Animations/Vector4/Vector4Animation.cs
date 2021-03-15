@@ -10,6 +10,7 @@ namespace Domino {
     public static readonly Vector4Animation BLACK = Color(0, 0, 0, 1);
     public static readonly Vector4Animation WHITE = Color(1, 1, 1, 1);
     public static readonly Vector4Animation RED = Color(1, 0, 0, 1);
+    public static readonly Vector4Animation ORANGE = Color(1, .33f, 0, 1);
     public static readonly Vector4Animation GREEN = Color(0, 1, 0, 1);
     public static readonly Vector4Animation BLUE = Color(0, 0, 1, 1);
     public static readonly Vector4Animation GLOWY_WHITE = Color(1, 1, 1, 1.5f);

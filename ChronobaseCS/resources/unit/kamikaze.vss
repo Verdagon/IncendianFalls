@@ -30,6 +30,7 @@ mut struct KamikazeAICapabilityUC {
   }
   fn BeforeDeath(
       this: KamikazeAICapabilityUC overrides IDeathPreReactor,
+      context: $IncendianFalls.SSContext,
       game: Game,
       superstate: $Superstate,
       unit: Unit)

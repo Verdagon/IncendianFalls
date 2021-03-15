@@ -80,6 +80,7 @@ mut interface IDeathPreReactor {
   IDeathPreReactor isa IUnitComponent;
 
   fn BeforeDeath(
+      context: $IncendianFalls.SSContext,
       game: Game,
       superstate: $Superstate,
       unit: Unit)

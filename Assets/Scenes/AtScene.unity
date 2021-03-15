@@ -177,7 +177,7 @@ MonoBehaviour:
     type: 3}
   symbolsFont: {fileID: 12800000, guid: 7a06069d265944149b3f097fd25a2234, type: 3}
   cascadiaFont: {fileID: 12800000, guid: 5d3293add808e4017b52a4f8f5bc8433, type: 3}
-  proseFont: {fileID: 12800000, guid: 9fc590c4498dc48afb83a47010c05786, type: 3}
+  proseFont: {fileID: 12800000, guid: 21d92d48fcbf94a959e50a4440a3ace1, type: 3}
 --- !u!4 &900762316
 Transform:
   m_ObjectHideFlags: 0

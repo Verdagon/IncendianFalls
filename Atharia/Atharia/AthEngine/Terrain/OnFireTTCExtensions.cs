@@ -14,13 +14,13 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Location containingTileLocation) {
+      IncendianFalls.Actions.EffectBlaze(game, superstate, containingTileLocation);
       if (obj.turnsRemaining >= 0) {
         obj.turnsRemaining = obj.turnsRemaining - 1;
       } else {
         game.level.terrain.tiles[containingTileLocation].components.Remove(obj.AsITerrainTileComponent());
         obj.Destruct();
         superstate.levelSuperstate.RemovedActingTTC(containingTileLocation);
-        IncendianFalls.Actions.ExplodeFireBomb(game, superstate, containingTileLocation);
       }
 
       return new Atharia.Model.Void();

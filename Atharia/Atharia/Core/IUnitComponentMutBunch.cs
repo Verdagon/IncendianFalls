@@ -35,6 +35,14 @@ public class IUnitComponentMutBunch {
   }
   public void CheckForNullViolations(List<string> violations) {
 
+    if (!root.DeathTriggerUCMutSetExists(membersDeathTriggerUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersDeathTriggerUCMutSet");
+    }
+
+    if (!root.BequeathUCMutSetExists(membersBequeathUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersBequeathUCMutSet");
+    }
+
     if (!root.TutorialDefyCounterUCMutSetExists(membersTutorialDefyCounterUCMutSet.id)) {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersTutorialDefyCounterUCMutSet");
     }
@@ -172,6 +180,12 @@ public class IUnitComponentMutBunch {
       return;
     }
     foundIds.Add(id);
+    if (root.DeathTriggerUCMutSetExists(membersDeathTriggerUCMutSet.id)) {
+      membersDeathTriggerUCMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.BequeathUCMutSetExists(membersBequeathUCMutSet.id)) {
+      membersBequeathUCMutSet.FindReachableObjects(foundIds);
+    }
     if (root.TutorialDefyCounterUCMutSetExists(membersTutorialDefyCounterUCMutSet.id)) {
       membersTutorialDefyCounterUCMutSet.FindReachableObjects(foundIds);
     }
@@ -281,7 +295,25 @@ public class IUnitComponentMutBunch {
     }
     return this.root == that.root && id == that.id;
   }
-         public TutorialDefyCounterUCMutSet membersTutorialDefyCounterUCMutSet {
+         public DeathTriggerUCMutSet membersDeathTriggerUCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersDeathTriggerUCMutSet of null!");
+      }
+      return new DeathTriggerUCMutSet(root, incarnation.membersDeathTriggerUCMutSet);
+    }
+                       }
+  public BequeathUCMutSet membersBequeathUCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersBequeathUCMutSet of null!");
+      }
+      return new BequeathUCMutSet(root, incarnation.membersBequeathUCMutSet);
+    }
+                       }
+  public TutorialDefyCounterUCMutSet membersTutorialDefyCounterUCMutSet {
 
     get {
       if (root == null) {
@@ -581,6 +613,10 @@ public class IUnitComponentMutBunch {
 
   public static IUnitComponentMutBunch New(Root root) {
     return root.EffectIUnitComponentMutBunchCreate(
+      root.EffectDeathTriggerUCMutSetCreate()
+,
+      root.EffectBequeathUCMutSetCreate()
+,
       root.EffectTutorialDefyCounterUCMutSetCreate()
 ,
       root.EffectLightningChargingUCMutSetCreate()
@@ -649,6 +685,18 @@ public class IUnitComponentMutBunch {
         );
   }
   public void Add(IUnitComponent elementI) {
+
+    // Can optimize, check the type of element directly somehow
+    if (root.DeathTriggerUCExists(elementI.id)) {
+      this.membersDeathTriggerUCMutSet.Add(root.GetDeathTriggerUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.BequeathUCExists(elementI.id)) {
+      this.membersBequeathUCMutSet.Add(root.GetBequeathUC(elementI.id));
+      return;
+    }
 
     // Can optimize, check the type of element directly somehow
     if (root.TutorialDefyCounterUCExists(elementI.id)) {
@@ -852,6 +900,18 @@ public class IUnitComponentMutBunch {
   public void Remove(IUnitComponent elementI) {
 
     // Can optimize, check the type of element directly somehow
+    if (root.DeathTriggerUCExists(elementI.id)) {
+      this.membersDeathTriggerUCMutSet.Remove(root.GetDeathTriggerUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.BequeathUCExists(elementI.id)) {
+      this.membersBequeathUCMutSet.Remove(root.GetBequeathUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.TutorialDefyCounterUCExists(elementI.id)) {
       this.membersTutorialDefyCounterUCMutSet.Remove(root.GetTutorialDefyCounterUC(elementI.id));
       return;
@@ -1051,6 +1111,8 @@ public class IUnitComponentMutBunch {
     throw new Exception("Unknown type " + elementI);
   }
   public void Clear() {
+    this.membersDeathTriggerUCMutSet.Clear();
+    this.membersBequeathUCMutSet.Clear();
     this.membersTutorialDefyCounterUCMutSet.Clear();
     this.membersLightningChargingUCMutSet.Clear();
     this.membersWanderAICapabilityUCMutSet.Clear();
@@ -1088,6 +1150,8 @@ public class IUnitComponentMutBunch {
   public int Count {
     get {
       return
+        this.membersDeathTriggerUCMutSet.Count +
+        this.membersBequeathUCMutSet.Count +
         this.membersTutorialDefyCounterUCMutSet.Count +
         this.membersLightningChargingUCMutSet.Count +
         this.membersWanderAICapabilityUCMutSet.Count +
@@ -1132,6 +1196,8 @@ public class IUnitComponentMutBunch {
   }
 
   public void Destruct() {
+    var tempMembersDeathTriggerUCMutSet = this.membersDeathTriggerUCMutSet;
+    var tempMembersBequeathUCMutSet = this.membersBequeathUCMutSet;
     var tempMembersTutorialDefyCounterUCMutSet = this.membersTutorialDefyCounterUCMutSet;
     var tempMembersLightningChargingUCMutSet = this.membersLightningChargingUCMutSet;
     var tempMembersWanderAICapabilityUCMutSet = this.membersWanderAICapabilityUCMutSet;
@@ -1167,6 +1233,8 @@ public class IUnitComponentMutBunch {
     var tempMembersBaseDefenseUCMutSet = this.membersBaseDefenseUCMutSet;
 
     this.Delete();
+    tempMembersDeathTriggerUCMutSet.Destruct();
+    tempMembersBequeathUCMutSet.Destruct();
     tempMembersTutorialDefyCounterUCMutSet.Destruct();
     tempMembersLightningChargingUCMutSet.Destruct();
     tempMembersWanderAICapabilityUCMutSet.Destruct();
@@ -1202,6 +1270,12 @@ public class IUnitComponentMutBunch {
     tempMembersBaseDefenseUCMutSet.Destruct();
   }
   public IEnumerator<IUnitComponent> GetEnumerator() {
+    foreach (var element in this.membersDeathTriggerUCMutSet) {
+      yield return new DeathTriggerUCAsIUnitComponent(element);
+    }
+    foreach (var element in this.membersBequeathUCMutSet) {
+      yield return new BequeathUCAsIUnitComponent(element);
+    }
     foreach (var element in this.membersTutorialDefyCounterUCMutSet) {
       yield return new TutorialDefyCounterUCAsIUnitComponent(element);
     }
@@ -1302,6 +1376,48 @@ public class IUnitComponentMutBunch {
       yield return new BaseDefenseUCAsIUnitComponent(element);
     }
   }
+    public List<DeathTriggerUC> GetAllDeathTriggerUC() {
+      var result = new List<DeathTriggerUC>();
+      foreach (var thing in this.membersDeathTriggerUCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<DeathTriggerUC> ClearAllDeathTriggerUC() {
+      var result = new List<DeathTriggerUC>();
+      this.membersDeathTriggerUCMutSet.Clear();
+      return result;
+    }
+    public DeathTriggerUC GetOnlyDeathTriggerUCOrNull() {
+      var result = GetAllDeathTriggerUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return DeathTriggerUC.Null;
+      }
+    }
+    public List<BequeathUC> GetAllBequeathUC() {
+      var result = new List<BequeathUC>();
+      foreach (var thing in this.membersBequeathUCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<BequeathUC> ClearAllBequeathUC() {
+      var result = new List<BequeathUC>();
+      this.membersBequeathUCMutSet.Clear();
+      return result;
+    }
+    public BequeathUC GetOnlyBequeathUCOrNull() {
+      var result = GetAllBequeathUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return BequeathUC.Null;
+      }
+    }
     public List<TutorialDefyCounterUC> GetAllTutorialDefyCounterUC() {
       var result = new List<TutorialDefyCounterUC>();
       foreach (var thing in this.membersTutorialDefyCounterUCMutSet) {
@@ -2476,6 +2592,14 @@ public class IUnitComponentMutBunch {
     }
                  public List<IDeathPreReactor> GetAllIDeathPreReactor() {
       var result = new List<IDeathPreReactor>();
+      foreach (var obj in this.membersDeathTriggerUCMutSet) {
+        result.Add(
+            new DeathTriggerUCAsIDeathPreReactor(obj));
+      }
+      foreach (var obj in this.membersBequeathUCMutSet) {
+        result.Add(
+            new BequeathUCAsIDeathPreReactor(obj));
+      }
       foreach (var obj in this.membersKamikazeAICapabilityUCMutSet) {
         result.Add(
             new KamikazeAICapabilityUCAsIDeathPreReactor(obj));
@@ -2484,6 +2608,8 @@ public class IUnitComponentMutBunch {
     }
     public List<IDeathPreReactor> ClearAllIDeathPreReactor() {
       var result = new List<IDeathPreReactor>();
+      this.membersDeathTriggerUCMutSet.Clear();
+      this.membersBequeathUCMutSet.Clear();
       this.membersKamikazeAICapabilityUCMutSet.Clear();
       return result;
     }

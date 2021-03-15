@@ -11,14 +11,16 @@ namespace IncendianFalls {
       components.Add(root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
       components.Add(root.EffectEvolvifyAICapabilityUCCreate().AsIUnitComponent());
       // components.Add(root.EffectBaseSightRangeUCCreate(0, 50).AsIUnitComponent());
-      components.Add(root.EffectBaseOffenseUCCreate(0, 80).AsIUnitComponent());
+      components.Add(root.EffectBaseOffenseUCCreate(0, 70).AsIUnitComponent());
+      components.Add(root.EffectBequeathUCCreate("HealthPotion").AsIUnitComponent());
+      components.Add(root.EffectDeathTriggerUCCreate("viviantDied").AsIUnitComponent());
       return root.EffectUnitCreate(
           NullIUnitEvent.Null,
           0,
           new Location(0, 0, 0),
           "Viviant",
           0,
-          4, 4,
+          34, 34,
           components,
           false);
     }

@@ -98,6 +98,24 @@ namespace AthPlayer {
       return result;
     }
 
+    public string RequestBlaze(int gameId, Location targetLoc) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestBlaze(gameId, targetLoc);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
+
+    public string RequestExplosion(int gameId, Location targetLoc) {
+      Asserts.Assert(waitingEffects.Count == 0);
+      var (effects, result) = ss.RequestExplosion(gameId, targetLoc);
+      foreach (var effect in effects) {
+        waitingEffects.Enqueue(effect);
+      }
+      return result;
+    }
+
     public string RequestFireBomb(int gameId, Location location) {
       Asserts.Assert(waitingEffects.Count == 0);
       var (effects, result) = ss.RequestFireBomb(gameId, location);

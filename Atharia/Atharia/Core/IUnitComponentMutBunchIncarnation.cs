@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 namespace Atharia.Model {
 public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVisitor {
+  public readonly int membersDeathTriggerUCMutSet;
+  public readonly int membersBequeathUCMutSet;
   public readonly int membersTutorialDefyCounterUCMutSet;
   public readonly int membersLightningChargingUCMutSet;
   public readonly int membersWanderAICapabilityUCMutSet;
@@ -39,6 +41,8 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
   public readonly int membersBaseOffenseUCMutSet;
   public readonly int membersBaseDefenseUCMutSet;
   public IUnitComponentMutBunchIncarnation(
+      int membersDeathTriggerUCMutSet,
+      int membersBequeathUCMutSet,
       int membersTutorialDefyCounterUCMutSet,
       int membersLightningChargingUCMutSet,
       int membersWanderAICapabilityUCMutSet,
@@ -72,6 +76,8 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
       int membersSorcerousUCMutSet,
       int membersBaseOffenseUCMutSet,
       int membersBaseDefenseUCMutSet) {
+    this.membersDeathTriggerUCMutSet = membersDeathTriggerUCMutSet;
+    this.membersBequeathUCMutSet = membersBequeathUCMutSet;
     this.membersTutorialDefyCounterUCMutSet = membersTutorialDefyCounterUCMutSet;
     this.membersLightningChargingUCMutSet = membersLightningChargingUCMutSet;
     this.membersWanderAICapabilityUCMutSet = membersWanderAICapabilityUCMutSet;
@@ -108,6 +114,8 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
   }
   public IUnitComponentMutBunchIncarnation Copy() {
     return new IUnitComponentMutBunchIncarnation(
+membersDeathTriggerUCMutSet,
+membersBequeathUCMutSet,
 membersTutorialDefyCounterUCMutSet,
 membersLightningChargingUCMutSet,
 membersWanderAICapabilityUCMutSet,
@@ -145,6 +153,8 @@ membersBaseDefenseUCMutSet    );
 
   public void visitIUnitComponentMutBunchCreateEffect(IUnitComponentMutBunchCreateEffect e) {}
   public void visitIUnitComponentMutBunchDeleteEffect(IUnitComponentMutBunchDeleteEffect e) {}
+
+
 
 
 

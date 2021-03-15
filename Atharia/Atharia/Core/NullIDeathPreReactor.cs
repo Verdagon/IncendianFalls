@@ -43,7 +43,7 @@ public class NullIDeathPreReactor : IDeathPreReactor {
     return NullIUnitComponent.Null;
   }
 
-  public Void BeforeDeath(Game game, Superstate superstate, Unit unit) {
+  public Void BeforeDeath(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit unit) {
     throw new Exception("Called BeforeDeath on a null!");
   }
              

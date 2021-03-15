@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Atharia.Model {
-public class IUnitComponentMutBunchBroadcaster:ITutorialDefyCounterUCMutSetEffectObserver, ITutorialDefyCounterUCMutSetEffectVisitor, ILightningChargingUCMutSetEffectObserver, ILightningChargingUCMutSetEffectVisitor, IWanderAICapabilityUCMutSetEffectObserver, IWanderAICapabilityUCMutSetEffectVisitor, ITemporaryCloneAICapabilityUCMutSetEffectObserver, ITemporaryCloneAICapabilityUCMutSetEffectVisitor, ISummonAICapabilityUCMutSetEffectObserver, ISummonAICapabilityUCMutSetEffectVisitor, IKamikazeAICapabilityUCMutSetEffectObserver, IKamikazeAICapabilityUCMutSetEffectVisitor, IGuardAICapabilityUCMutSetEffectObserver, IGuardAICapabilityUCMutSetEffectVisitor, IEvolvifyAICapabilityUCMutSetEffectObserver, IEvolvifyAICapabilityUCMutSetEffectVisitor, ITimeCloneAICapabilityUCMutSetEffectObserver, ITimeCloneAICapabilityUCMutSetEffectVisitor, IDoomedUCMutSetEffectObserver, IDoomedUCMutSetEffectVisitor, IMiredUCMutSetEffectObserver, IMiredUCMutSetEffectVisitor, IOnFireUCMutSetEffectObserver, IOnFireUCMutSetEffectVisitor, IAttackAICapabilityUCMutSetEffectObserver, IAttackAICapabilityUCMutSetEffectVisitor, ICounteringUCMutSetEffectObserver, ICounteringUCMutSetEffectVisitor, ILightningChargedUCMutSetEffectObserver, ILightningChargedUCMutSetEffectVisitor, IInvincibilityUCMutSetEffectObserver, IInvincibilityUCMutSetEffectVisitor, IDefyingUCMutSetEffectObserver, IDefyingUCMutSetEffectVisitor, IBideAICapabilityUCMutSetEffectObserver, IBideAICapabilityUCMutSetEffectVisitor, IBaseSightRangeUCMutSetEffectObserver, IBaseSightRangeUCMutSetEffectVisitor, IBaseMovementTimeUCMutSetEffectObserver, IBaseMovementTimeUCMutSetEffectVisitor, IBaseCombatTimeUCMutSetEffectObserver, IBaseCombatTimeUCMutSetEffectVisitor, IManaPotionMutSetEffectObserver, IManaPotionMutSetEffectVisitor, IHealthPotionMutSetEffectObserver, IHealthPotionMutSetEffectVisitor, ISpeedRingMutSetEffectObserver, ISpeedRingMutSetEffectVisitor, IGlaiveMutSetEffectObserver, IGlaiveMutSetEffectVisitor, ISlowRodMutSetEffectObserver, ISlowRodMutSetEffectVisitor, IExplosionRodMutSetEffectObserver, IExplosionRodMutSetEffectVisitor, IBlazeRodMutSetEffectObserver, IBlazeRodMutSetEffectVisitor, IBlastRodMutSetEffectObserver, IBlastRodMutSetEffectVisitor, IArmorMutSetEffectObserver, IArmorMutSetEffectVisitor, ISorcerousUCMutSetEffectObserver, ISorcerousUCMutSetEffectVisitor, IBaseOffenseUCMutSetEffectObserver, IBaseOffenseUCMutSetEffectVisitor, IBaseDefenseUCMutSetEffectObserver, IBaseDefenseUCMutSetEffectVisitor {
+public class IUnitComponentMutBunchBroadcaster:IDeathTriggerUCMutSetEffectObserver, IDeathTriggerUCMutSetEffectVisitor, IBequeathUCMutSetEffectObserver, IBequeathUCMutSetEffectVisitor, ITutorialDefyCounterUCMutSetEffectObserver, ITutorialDefyCounterUCMutSetEffectVisitor, ILightningChargingUCMutSetEffectObserver, ILightningChargingUCMutSetEffectVisitor, IWanderAICapabilityUCMutSetEffectObserver, IWanderAICapabilityUCMutSetEffectVisitor, ITemporaryCloneAICapabilityUCMutSetEffectObserver, ITemporaryCloneAICapabilityUCMutSetEffectVisitor, ISummonAICapabilityUCMutSetEffectObserver, ISummonAICapabilityUCMutSetEffectVisitor, IKamikazeAICapabilityUCMutSetEffectObserver, IKamikazeAICapabilityUCMutSetEffectVisitor, IGuardAICapabilityUCMutSetEffectObserver, IGuardAICapabilityUCMutSetEffectVisitor, IEvolvifyAICapabilityUCMutSetEffectObserver, IEvolvifyAICapabilityUCMutSetEffectVisitor, ITimeCloneAICapabilityUCMutSetEffectObserver, ITimeCloneAICapabilityUCMutSetEffectVisitor, IDoomedUCMutSetEffectObserver, IDoomedUCMutSetEffectVisitor, IMiredUCMutSetEffectObserver, IMiredUCMutSetEffectVisitor, IOnFireUCMutSetEffectObserver, IOnFireUCMutSetEffectVisitor, IAttackAICapabilityUCMutSetEffectObserver, IAttackAICapabilityUCMutSetEffectVisitor, ICounteringUCMutSetEffectObserver, ICounteringUCMutSetEffectVisitor, ILightningChargedUCMutSetEffectObserver, ILightningChargedUCMutSetEffectVisitor, IInvincibilityUCMutSetEffectObserver, IInvincibilityUCMutSetEffectVisitor, IDefyingUCMutSetEffectObserver, IDefyingUCMutSetEffectVisitor, IBideAICapabilityUCMutSetEffectObserver, IBideAICapabilityUCMutSetEffectVisitor, IBaseSightRangeUCMutSetEffectObserver, IBaseSightRangeUCMutSetEffectVisitor, IBaseMovementTimeUCMutSetEffectObserver, IBaseMovementTimeUCMutSetEffectVisitor, IBaseCombatTimeUCMutSetEffectObserver, IBaseCombatTimeUCMutSetEffectVisitor, IManaPotionMutSetEffectObserver, IManaPotionMutSetEffectVisitor, IHealthPotionMutSetEffectObserver, IHealthPotionMutSetEffectVisitor, ISpeedRingMutSetEffectObserver, ISpeedRingMutSetEffectVisitor, IGlaiveMutSetEffectObserver, IGlaiveMutSetEffectVisitor, ISlowRodMutSetEffectObserver, ISlowRodMutSetEffectVisitor, IExplosionRodMutSetEffectObserver, IExplosionRodMutSetEffectVisitor, IBlazeRodMutSetEffectObserver, IBlazeRodMutSetEffectVisitor, IBlastRodMutSetEffectObserver, IBlastRodMutSetEffectVisitor, IArmorMutSetEffectObserver, IArmorMutSetEffectVisitor, ISorcerousUCMutSetEffectObserver, ISorcerousUCMutSetEffectVisitor, IBaseOffenseUCMutSetEffectObserver, IBaseOffenseUCMutSetEffectVisitor, IBaseDefenseUCMutSetEffectObserver, IBaseDefenseUCMutSetEffectVisitor {
   EffectBroadcaster broadcaster;
   IUnitComponentMutBunch bunch;
   private List<IIUnitComponentMutBunchObserver> observers;
@@ -13,6 +13,8 @@ public class IUnitComponentMutBunchBroadcaster:ITutorialDefyCounterUCMutSetEffec
     this.broadcaster = broadcaster;
     this.bunch = bunch;
     this.observers = new List<IIUnitComponentMutBunchObserver>();
+    bunch.membersDeathTriggerUCMutSet.AddObserver(broadcaster, this);
+    bunch.membersBequeathUCMutSet.AddObserver(broadcaster, this);
     bunch.membersTutorialDefyCounterUCMutSet.AddObserver(broadcaster, this);
     bunch.membersLightningChargingUCMutSet.AddObserver(broadcaster, this);
     bunch.membersWanderAICapabilityUCMutSet.AddObserver(broadcaster, this);
@@ -49,6 +51,8 @@ public class IUnitComponentMutBunchBroadcaster:ITutorialDefyCounterUCMutSetEffec
 
   }
   public void Stop() {
+    bunch.membersDeathTriggerUCMutSet.RemoveObserver(broadcaster, this);
+    bunch.membersBequeathUCMutSet.RemoveObserver(broadcaster, this);
     bunch.membersTutorialDefyCounterUCMutSet.RemoveObserver(broadcaster, this);
     bunch.membersLightningChargingUCMutSet.RemoveObserver(broadcaster, this);
     bunch.membersWanderAICapabilityUCMutSet.RemoveObserver(broadcaster, this);
@@ -100,6 +104,28 @@ public class IUnitComponentMutBunchBroadcaster:ITutorialDefyCounterUCMutSetEffec
       observer.OnIUnitComponentMutBunchRemove(id);
     }
   }
+  public void OnDeathTriggerUCMutSetEffect(IDeathTriggerUCMutSetEffect effect) {
+    effect.visitIDeathTriggerUCMutSetEffect(this);
+  }
+  public void visitDeathTriggerUCMutSetAddEffect(DeathTriggerUCMutSetAddEffect effect) {
+    BroadcastAdd(effect.element);
+  }
+  public void visitDeathTriggerUCMutSetRemoveEffect(DeathTriggerUCMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.element);
+  }
+  public void visitDeathTriggerUCMutSetCreateEffect(DeathTriggerUCMutSetCreateEffect effect) { }
+  public void visitDeathTriggerUCMutSetDeleteEffect(DeathTriggerUCMutSetDeleteEffect effect) { }
+  public void OnBequeathUCMutSetEffect(IBequeathUCMutSetEffect effect) {
+    effect.visitIBequeathUCMutSetEffect(this);
+  }
+  public void visitBequeathUCMutSetAddEffect(BequeathUCMutSetAddEffect effect) {
+    BroadcastAdd(effect.element);
+  }
+  public void visitBequeathUCMutSetRemoveEffect(BequeathUCMutSetRemoveEffect effect) {
+    BroadcastRemove(effect.element);
+  }
+  public void visitBequeathUCMutSetCreateEffect(BequeathUCMutSetCreateEffect effect) { }
+  public void visitBequeathUCMutSetDeleteEffect(BequeathUCMutSetDeleteEffect effect) { }
   public void OnTutorialDefyCounterUCMutSetEffect(ITutorialDefyCounterUCMutSetEffect effect) {
     effect.visitITutorialDefyCounterUCMutSetEffect(this);
   }

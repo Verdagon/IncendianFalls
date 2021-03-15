@@ -53,9 +53,51 @@ imm struct UnitFireEvent {
   victimId: Int;
 }
 
+imm struct UnitBlazeEvent {
+  UnitBlazeEvent isa IUnitEvent;
+
+  time: Int;
+  attackerId: Int;
+  targetLoc: Location;
+}
+
+imm struct UnitExplosionEvent {
+  UnitExplosionEvent isa IUnitEvent;
+
+  time: Int;
+  attackerId: Int;
+  targetLoc: Location;
+}
+
 imm struct UnitFireBombedEvent {
   UnitFireBombedEvent isa IUnitEvent;
   UnitFireBombedEvent isa ITerrainTileEvent;
+
+  time: Int;
+  victimId: Int;
+  location: Location;
+}
+
+imm struct UnitBlazedEvent {
+  UnitBlazedEvent isa IUnitEvent;
+  UnitBlazedEvent isa ITerrainTileEvent;
+
+  time: Int;
+  victimId: Int;
+  location: Location;
+}
+
+imm struct UnitBurningEvent {
+  UnitBurningEvent isa IUnitEvent;
+  UnitBurningEvent isa ITerrainTileEvent;
+
+  time: Int;
+  victimId: Int;
+}
+
+imm struct UnitExplosionedEvent {
+  UnitExplosionedEvent isa IUnitEvent;
+  UnitExplosionedEvent isa ITerrainTileEvent;
 
   time: Int;
   victimId: Int;

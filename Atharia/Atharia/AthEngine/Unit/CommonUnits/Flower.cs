@@ -10,6 +10,7 @@ namespace IncendianFalls {
       components.Add(root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
       components.Add(root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
       components.Add(root.EffectBaseOffenseUCCreate(0, 80).AsIUnitComponent());
+      components.Add(root.EffectBequeathUCCreate("ManaPotion").AsIUnitComponent());
       return root.EffectUnitCreate(
         NullIUnitEvent.Null,
               0,

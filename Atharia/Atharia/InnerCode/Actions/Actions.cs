@@ -8,8 +8,10 @@ namespace IncendianFalls {
     public static readonly int FIRE_COST = 18;
     public static readonly int FIRE_DAMAGE = 23;
     public static readonly int BLAZE_COST = 10;
+    public static readonly int BLAZE_RANGE = 5;
     public static readonly int BLAZE_DAMAGE = 7;
     public static readonly int BLAZE_DURATION = 4;
+    public static readonly int EXPLOSION_RANGE = 5;
     public static readonly int EXPLOSION_COST = 15;
     public static readonly int EXPLOSION_DELAY = 3;
     public static readonly int EXPLOSION_DAMAGE = 32;
@@ -329,6 +331,54 @@ namespace IncendianFalls {
       game.actionNum++;
     }
 
+    public static void Blaze(
+        Game game,
+        Superstate superstate,
+        Unit attacker,
+        Location targetLoc) {
+      Eventer.broadcastUnitBlazeEvent(game.root, game, attacker, targetLoc);
+
+      game.level.terrain.tiles[targetLoc].components.Add(
+          game.root.EffectOnFireTTCCreate(Actions.BLAZE_DURATION).AsITerrainTileComponent());
+      superstate.levelSuperstate.AddedActingTTC(targetLoc);
+      
+      attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(600);
+
+      var sorcerous = attacker.components.GetOnlySorcerousUCOrNull();
+      Asserts.Assert(sorcerous != null);
+      sorcerous.mp = sorcerous.mp - BLAZE_COST;
+      game.actionNum++;
+    }
+
+    public static void Explosion(
+        Game game,
+        Superstate superstate,
+        Unit attacker,
+        Location targetLoc) {
+      Eventer.broadcastUnitExplosionEvent(game.root, game, attacker, targetLoc);
+
+      var adjacentLocs = game.level.terrain.GetAdjacentExistingLocations(targetLoc, true);
+      adjacentLocs.Add(targetLoc);
+      var affectedLocs = new SortedSet<Location>();
+      foreach (var adjacentLoc in adjacentLocs) {
+        if (game.level.terrain.tiles[adjacentLoc].IsWalkable()) {
+          affectedLocs.Add(adjacentLoc);
+        }
+      }
+      foreach (var affectedLoc in affectedLocs) {
+        game.level.terrain.tiles[affectedLoc].components.Add(
+            game.root.EffectFireBombTTCCreate(Actions.EXPLOSION_DELAY).AsITerrainTileComponent());
+        superstate.levelSuperstate.AddedActingTTC(affectedLoc);
+      }
+
+      attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(600);
+
+      var sorcerous = attacker.components.GetOnlySorcerousUCOrNull();
+      Asserts.Assert(sorcerous != null);
+      sorcerous.mp = sorcerous.mp - EXPLOSION_COST;
+      game.actionNum++;
+    }
+
     public static void PlaceFireBomb(
         Game game,
         Superstate superstate,
@@ -353,6 +403,34 @@ namespace IncendianFalls {
       Eventer.broadcastUnitFireBombedEvent(game.root, game, poorSuckerOnThisTile, location);
       if (poorSuckerOnThisTile.Exists()) {
         AttackedInner(game, superstate, poorSuckerOnThisTile, FIRE_BOMB_DAMAGE, false);
+      }
+      game.actionNum++;
+    }
+    
+    public static void EffectBlaze(
+        Game game,
+        Superstate superstate,
+        Location location) {
+      Unit poorSuckerOnThisTile = superstate.levelSuperstate.GetLiveUnitAt(location);
+      Eventer.broadcastUnitBlazedEvent(game.root, game, poorSuckerOnThisTile, location);
+      if (poorSuckerOnThisTile.Exists()) {
+        AttackedInner(game, superstate, poorSuckerOnThisTile, BLAZE_DAMAGE, false);
+        if (!poorSuckerOnThisTile.components.GetOnlyOnFireUCOrNull().Exists()) {
+          poorSuckerOnThisTile.components.Add(
+              game.root.EffectOnFireUCCreate(Actions.BLAZE_DURATION).AsIUnitComponent());
+        }
+      }
+      game.actionNum++;
+    }
+    
+    public static void EffectExplosion(
+        Game game,
+        Superstate superstate,
+        Location location) {
+      Unit poorSuckerOnThisTile = superstate.levelSuperstate.GetLiveUnitAt(location);
+      Eventer.broadcastUnitExplosionedEvent(game.root, game, poorSuckerOnThisTile, location);
+      if (poorSuckerOnThisTile.Exists()) {
+        AttackedInner(game, superstate, poorSuckerOnThisTile, EXPLOSION_DAMAGE, false);
       }
       game.actionNum++;
     }

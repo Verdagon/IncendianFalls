@@ -50,12 +50,52 @@ namespace IncendianFalls {
         victim.AddEvent(attackEvent);
       }
     }
+    public static void broadcastUnitBlazeEvent(
+        Root root,
+        Game game,
+        Unit attacker,
+        Location targetLoc) {
+      var attackEvent = new UnitBlazeEventAsIUnitEvent(new UnitBlazeEvent(game.time, attacker.id, targetLoc));
+      attacker.AddEvent(attackEvent);
+    }
+    public static void broadcastUnitExplosionEvent(
+        Root root,
+        Game game,
+        Unit attacker,
+        Location targetLoc) {
+      var attackEvent = new UnitExplosionEventAsIUnitEvent(new UnitExplosionEvent(game.time, attacker.id, targetLoc));
+      attacker.AddEvent(attackEvent);
+    }
     public static void broadcastUnitFireBombedEvent(
         Root root,
         Game game,
         Unit victim,
         Location location) {
       var e = new UnitFireBombedEvent(game.time, victim.id, location);
+      if (victim.Exists()) {
+        victim.AddEvent(e.AsIUnitEvent());
+      } else {
+        game.level.terrain.tiles[location].AddEvent(e.AsITerrainTileEvent());
+      }
+    }
+    public static void broadcastUnitBlazedEvent(
+        Root root,
+        Game game,
+        Unit victim,
+        Location location) {
+      var e = new UnitBlazedEvent(game.time, victim.id, location);
+      if (victim.Exists()) {
+        victim.AddEvent(e.AsIUnitEvent());
+      } else {
+        game.level.terrain.tiles[location].AddEvent(e.AsITerrainTileEvent());
+      }
+    }
+    public static void broadcastUnitExplosionedEvent(
+        Root root,
+        Game game,
+        Unit victim,
+        Location location) {
+      var e = new UnitExplosionedEvent(game.time, victim.id, location);
       if (victim.Exists()) {
         victim.AddEvent(e.AsIUnitEvent());
       } else {

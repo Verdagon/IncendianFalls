@@ -207,14 +207,16 @@ namespace Domino {
       mode.Update(maybeHoveredLocation);
 
       var lambdaByKey = new Dictionary<KeyCode, KeyAction>() {
-        { KeyCode.A, () => ActivateCapability(PlayerPanelView.TIME_ANCHOR_MOVE_CAPABILITY_ID) },
-        { KeyCode.R, () => ActivateCapability(PlayerPanelView.REVERT_CAPABILITY_ID) },
+        // { KeyCode.A, () => ActivateCapability(PlayerPanelView.TIME_ANCHOR_MOVE_CAPABILITY_ID) },
+        // { KeyCode.R, () => ActivateCapability(PlayerPanelView.REVERT_CAPABILITY_ID) },
         { KeyCode.E, () => ActivateCapability(PlayerPanelView.INTERACT_CAPABILITY_ID) },
         { KeyCode.D, () => ActivateCapability(PlayerPanelView.DEFEND_CAPABILITY_ID) },
-        { KeyCode.C, () => ActivateCapability(PlayerPanelView.COUNTER_CAPABILITY_ID) },
-        { KeyCode.F, () => ActivateCapability(PlayerPanelView.FIRE_BOMB_CAPABILITY_ID) },
-        { KeyCode.B, () => ActivateCapability(PlayerPanelView.FIRE_BOMB_CAPABILITY_ID) },
-        { KeyCode.S, () => ActivateCapability(PlayerPanelView.MIRE_CAPABILITY_ID) },
+        // { KeyCode.C, () => ActivateCapability(PlayerPanelView.COUNTER_CAPABILITY_ID) },
+        // { KeyCode.F, () => ActivateCapability(PlayerPanelView.FIRE_BOMB_CAPABILITY_ID) },
+        // { KeyCode.B, () => ActivateCapability(PlayerPanelView.FIRE_BOMB_CAPABILITY_ID) },
+        // { KeyCode.S, () => ActivateCapability(PlayerPanelView.MIRE_CAPABILITY_ID) },
+        { KeyCode.B, () => ActivateCapability(PlayerPanelView.BLAZE_CAPABILITY_ID) },
+        { KeyCode.X, () => ActivateCapability(PlayerPanelView.EXPLOSION_CAPABILITY_ID) },
         { KeyCode.Escape, () => Cancel(true) },
         { KeyCode.Slash, () => ActivateCheat("warptoend") },
         { KeyCode.Equals, () => ActivateCheat("poweroverwhelming") },
@@ -306,6 +308,14 @@ namespace Domino {
         case PlayerPanelView.FIRE_CAPABILITY_ID:
           modeCapabilityId = capabilityId;
           mode = new FireMode(ss, game, this, showInstructions, showError);
+          break;
+        case PlayerPanelView.BLAZE_CAPABILITY_ID:
+          modeCapabilityId = capabilityId;
+          mode = new BlazeMode(ss, game, this, showInstructions, showError);
+          break;
+        case PlayerPanelView.EXPLOSION_CAPABILITY_ID:
+          modeCapabilityId = capabilityId;
+          mode = new ExplosionMode(ss, game, this, showInstructions, showError);
           break;
         case PlayerPanelView.MIRE_CAPABILITY_ID:
           if (game.player.components.GetAllSlowRod().Count == 0) {

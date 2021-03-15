@@ -17,11 +17,9 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit unit) {
 
-      var adjacentLocations =
-          game.level.terrain.GetAdjacentExistingLocations(
-              unit.location, game.level.terrain.considerCornersAdjacent);
+      var reachableLocations = Actions.GetReachableLocations(game.level, unit.location);
       var adjacentWalkableLocations = new SortedSet<Location>();
-      foreach (var adjacentLocation in adjacentLocations) {
+      foreach (var adjacentLocation in reachableLocations) {
         if (Actions.CanStep(game, superstate, unit, adjacentLocation)) {
           adjacentWalkableLocations.Add(adjacentLocation);
         }

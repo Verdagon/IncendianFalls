@@ -124,6 +124,46 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         string triggerName) {
+      if (self.depth == 0 && triggerName == "viviantDied") {
+        var numViviants = 0;
+        foreach (var unit in game.level.units) {
+          var deathTrigger = unit.components.GetOnlyDeathTriggerUCOrNull();
+          if (deathTrigger.Exists()) {
+            if (deathTrigger.triggerName == "viviantDied") {
+              numViviants++;
+            }
+          }
+        }
+        game.root.logger.Info("num viviants left: " + numViviants);
+        if (numViviants == 1) {
+          var viviarch = Viviarch.Make(self.root);
+          var viviarchLoc =
+              superstate.levelSuperstate.GetNRandomWalkableLocations(
+                  game.level.terrain,
+                  game.rand,
+                  1,
+                  (a) => true,
+                  true,
+                  true)[0];
+          game.level.EnterUnit(superstate.levelSuperstate, viviarchLoc, game.time, viviarch);
+          
+          game.EnterCinematic();
+          game.Wait(1500);
+          game.FlyCameraTo(1000, viviarchLoc);
+          game.Wait(800);
+          game.ShowAside("kylin", "Finally, found the cause of all this chaos!");
+          game.Wait(800);
+          game.FlyCameraTo(1500, game.player.location);
+          game.ExitCinematic();
+        }
+      }
+      if (self.depth == 0 && triggerName == "viviarchDied") {
+        game.comms.Add(
+            game.root.EffectCommCreate(
+                new DramaticCommTemplate(false).AsICommTemplate(),
+                new CommActionImmList(new CommAction("Huzzah!", "_exitGame")),
+                new CommTextImmList(new CommText("narrator", "Congratulations, you have won the game!"))));
+      }
       if (self.depth == 0 && triggerName == "levelStart") {
         var locationsNextToPlayer = game.level.terrain.GetAdjacentExistingLocations(game.player.location, false);
         var hopToPossibilities = superstate.levelSuperstate.GetNRandomWalkableLocations(game.level.terrain, game.rand, 1, (loc) => locationsNextToPlayer.Contains(loc), true, true);
@@ -131,7 +171,7 @@ namespace Atharia.Model {
           Actions.Step(game, superstate, game.player, hopToPossibilities[0], true, false);
           game.player.WaitFor();
         }
-        game.ShowAside("kylin", "I've made it to Ember Deep! Forward!");
+        game.ShowAside("kylin", "I've made it to the forest! I need to kill all these corrupted spirits!");
       }
       return new Atharia.Model.Void();
     }

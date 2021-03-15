@@ -7,6 +7,7 @@ namespace Atharia.Model {
 public interface IOnFireUCEffectVisitor {
   void visitOnFireUCCreateEffect(OnFireUCCreateEffect effect);
   void visitOnFireUCDeleteEffect(OnFireUCDeleteEffect effect);
+  void visitOnFireUCSetTurnsRemainingEffect(OnFireUCSetTurnsRemainingEffect effect);
 }
 
 }

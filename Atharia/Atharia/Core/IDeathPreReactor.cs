@@ -16,7 +16,7 @@ public interface IDeathPreReactor {
   bool NullableIs(IDeathPreReactor that);
   IDestructible AsIDestructible();
   IUnitComponent AsIUnitComponent();
-  Void BeforeDeath(Game game, Superstate superstate, Unit unit);
+  Void BeforeDeath(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit unit);
   Void Destruct();
 }
 }

@@ -44,7 +44,8 @@ namespace Atharia.Model {
       // Check if we're on top of a plant right now.
       if (game.level.terrain.tiles[unit.location].components.GetOnlyIPlantTTCOrNull().Exists()) {
         var destinationLoc = SetUtils.GetRandom(game.rand.Next(), steppableLocs);
-        return obj.root.EffectEvolvifyImpulseCreate(900, destinationLoc).AsIImpulse();
+        // 820 to override a possible attack command
+        return obj.root.EffectEvolvifyImpulseCreate(820, destinationLoc).AsIImpulse();
       } else {
         // If not, see if there are plants nearby, and walk to them.
         var steppableLocsWithPlants = new SortedSet<Location>();
@@ -58,7 +59,8 @@ namespace Atharia.Model {
         }
         
         var destinationLoc = SetUtils.GetRandom(game.rand.Next(), steppableLocsWithPlants);
-        return obj.root.EffectMoveImpulseCreate(700, destinationLoc).AsIImpulse();
+        // 820 to override a possible attack command
+        return obj.root.EffectMoveImpulseCreate(820, destinationLoc).AsIImpulse();
       }
     }
   }

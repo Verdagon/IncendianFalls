@@ -65,9 +65,6 @@ namespace AthPlayer {
 
     }
 
-    public void StartedWaitingForPlayerInput() {
-    }
-
     public void Destroy(bool purposeful) {
       instructionsOverlay.Close();
       if (purposeful) {

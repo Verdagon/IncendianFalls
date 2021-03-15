@@ -40,6 +40,8 @@ void visitLightningChargingUCEffect(ILightningChargingUCEffect effect);
 void visitDoomedUCEffect(IDoomedUCEffect effect);
 void visitTemporaryCloneImpulseEffect(ITemporaryCloneImpulseEffect effect);
 void visitTemporaryCloneAICapabilityUCEffect(ITemporaryCloneAICapabilityUCEffect effect);
+void visitDeathTriggerUCEffect(IDeathTriggerUCEffect effect);
+void visitBequeathUCEffect(IBequeathUCEffect effect);
 void visitSummonImpulseEffect(ISummonImpulseEffect effect);
 void visitSummonAICapabilityUCEffect(ISummonAICapabilityUCEffect effect);
 void visitSorcerousUCEffect(ISorcerousUCEffect effect);
@@ -230,6 +232,8 @@ void visitGrassTTCMutSetEffect(IGrassTTCMutSetEffect effect);
 void visitEmberDeepLevelLinkerTTCMutSetEffect(IEmberDeepLevelLinkerTTCMutSetEffect effect);
 void visitIncendianFallsLevelLinkerTTCMutSetEffect(IIncendianFallsLevelLinkerTTCMutSetEffect effect);
 void visitRavaArcanaLevelLinkerTTCMutSetEffect(IRavaArcanaLevelLinkerTTCMutSetEffect effect);
+void visitDeathTriggerUCMutSetEffect(IDeathTriggerUCMutSetEffect effect);
+void visitBequeathUCMutSetEffect(IBequeathUCMutSetEffect effect);
 void visitTutorialDefyCounterUCMutSetEffect(ITutorialDefyCounterUCMutSetEffect effect);
 void visitLightningChargingUCMutSetEffect(ILightningChargingUCMutSetEffect effect);
 void visitWanderAICapabilityUCMutSetEffect(IWanderAICapabilityUCMutSetEffect effect);
@@ -437,6 +441,12 @@ public class Root {
     }
     foreach (var entry in this.rootIncarnation.incarnationsTemporaryCloneAICapabilityUC) {
       result += GetTemporaryCloneAICapabilityUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsDeathTriggerUC) {
+      result += GetDeathTriggerUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsBequeathUC) {
+      result += GetBequeathUCHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
     foreach (var entry in this.rootIncarnation.incarnationsSummonImpulse) {
       result += GetSummonImpulseHash(entry.Key, entry.Value.version, entry.Value.incarnation);
@@ -1008,6 +1018,12 @@ public class Root {
     foreach (var entry in this.rootIncarnation.incarnationsRavaArcanaLevelLinkerTTCMutSet) {
       result += GetRavaArcanaLevelLinkerTTCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
+    foreach (var entry in this.rootIncarnation.incarnationsDeathTriggerUCMutSet) {
+      result += GetDeathTriggerUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
+    foreach (var entry in this.rootIncarnation.incarnationsBequeathUCMutSet) {
+      result += GetBequeathUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
+    }
     foreach (var entry in this.rootIncarnation.incarnationsTutorialDefyCounterUCMutSet) {
       result += GetTutorialDefyCounterUCMutSetHash(entry.Key, entry.Value.version, entry.Value.incarnation);
     }
@@ -1150,6 +1166,12 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTemporaryCloneAICapabilityUC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllDeathTriggerUC()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllBequeathUC()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllSummonImpulse()) {
@@ -1720,6 +1742,12 @@ public class Root {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllRavaArcanaLevelLinkerTTCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllDeathTriggerUCMutSet()) {
+      obj.CheckForNullViolations(violations);
+    }
+    foreach (var obj in this.AllBequeathUCMutSet()) {
       obj.CheckForNullViolations(violations);
     }
     foreach (var obj in this.AllTutorialDefyCounterUCMutSet()) {
@@ -1887,6 +1915,16 @@ public class Root {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
     }
+    foreach (var obj in this.AllDeathTriggerUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllBequeathUC()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
     foreach (var obj in this.AllSummonImpulse()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
@@ -2833,6 +2871,16 @@ public class Root {
       }
     }
     foreach (var obj in this.AllRavaArcanaLevelLinkerTTCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllDeathTriggerUCMutSet()) {
+      if (!reachableIds.Contains(obj.id)) {
+        violations.Add("Unreachable: " + obj + "#" + obj.id);
+      }
+    }
+    foreach (var obj in this.AllBequeathUCMutSet()) {
       if (!reachableIds.Contains(obj.id)) {
         violations.Add("Unreachable: " + obj + "#" + obj.id);
       }
@@ -3487,6 +3535,80 @@ public class Root {
       if (!sourceIncarnation.incarnationsTemporaryCloneAICapabilityUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
         var id = currentIdAndVersionAndObjIncarnation.Key;
         var effect = InternalEffectTemporaryCloneAICapabilityUCDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDeathTriggerUC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsDeathTriggerUC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDeathTriggerUC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsDeathTriggerUC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDeathTriggerUC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsDeathTriggerUC.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateDeathTriggerUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DeathTriggerUCIncarnation>>(rootIncarnation.incarnationsDeathTriggerUC)) {
+      if (!sourceIncarnation.incarnationsDeathTriggerUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectDeathTriggerUCDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBequeathUC) {
+      var objId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (rootIncarnation.incarnationsBequeathUC.ContainsKey(objId)) {
+        // Compare everything that could possibly have changed.
+        var currentVersionAndObjIncarnation = rootIncarnation.incarnationsBequeathUC[objId];
+        var currentVersion = currentVersionAndObjIncarnation.version;
+        var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+        if (currentVersion != sourceVersion) {
+
+          // Swap out the underlying incarnation.
+          
+          rootIncarnation.incarnationsBequeathUC[objId] = sourceVersionAndObjIncarnation;
+          
+        }
+      }
+    }
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBequeathUC) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsBequeathUC.ContainsKey(sourceObjId)) {
+        var effect = InternalEffectCreateBequeathUC(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation.Copy());
+        createEffects.Add(effect);
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BequeathUCIncarnation>>(rootIncarnation.incarnationsBequeathUC)) {
+      if (!sourceIncarnation.incarnationsBequeathUC.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var effect = InternalEffectBequeathUCDelete(id);
         deleteEffects.Add(effect);
       }
     }
@@ -4373,6 +4495,10 @@ public class Root {
         var currentVersion = currentVersionAndObjIncarnation.version;
         var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
         if (currentVersion != sourceVersion) {
+
+          if (sourceObjIncarnation.turnsRemaining != currentObjIncarnation.turnsRemaining) {
+            setEffects.Add(new OnFireUCSetTurnsRemainingEffect(objId, sourceObjIncarnation.turnsRemaining));
+          }
 
           // Swap out the underlying incarnation.
           
@@ -11786,6 +11912,110 @@ public class Root {
       }
     }
 
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDeathTriggerUCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsDeathTriggerUCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsDeathTriggerUCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.elements)) {
+              if (!sourceObjIncarnation.elements.Contains(objIdInCurrentObjIncarnation)) {
+                removeEffects.Add(new DeathTriggerUCMutSetRemoveEffect(objId, objIdInCurrentObjIncarnation));
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.elements) {
+              if (!currentObjIncarnation.elements.Contains(unitIdInSourceObjIncarnation)) {
+                addEffects.Add(new DeathTriggerUCMutSetAddEffect(objId, unitIdInSourceObjIncarnation));
+              }
+            }
+            // Swap out the underlying incarnation.
+            rootIncarnation.incarnationsDeathTriggerUCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsDeathTriggerUCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsDeathTriggerUCMutSet.ContainsKey(sourceObjId)) {
+        var createEffect = InternalEffectCreateDeathTriggerUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+        createEffects.Add(createEffect);
+        foreach (var element in sourceObjIncarnation.elements) {
+          addEffects.Add(new DeathTriggerUCMutSetAddEffect(sourceObjId, element));
+        }
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<DeathTriggerUCMutSetIncarnation>>(rootIncarnation.incarnationsDeathTriggerUCMutSet)) {
+      if (!sourceIncarnation.incarnationsDeathTriggerUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var currentObjIncarnation = currentIdAndVersionAndObjIncarnation.Value.incarnation;
+        foreach (var element in currentObjIncarnation.elements) {
+          removeEffects.Add(new DeathTriggerUCMutSetRemoveEffect(id, element));
+        }
+        var effect = InternalEffectDeathTriggerUCMutSetDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
+      foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBequeathUCMutSet) {
+        var objId = sourceIdAndVersionAndObjIncarnation.Key;
+        var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+        var sourceVersion = sourceVersionAndObjIncarnation.version;
+        var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+        if (rootIncarnation.incarnationsBequeathUCMutSet.ContainsKey(objId)) {
+          // Compare everything that could possibly have changed.
+          var currentVersionAndObjIncarnation = rootIncarnation.incarnationsBequeathUCMutSet[objId];
+          var currentVersion = currentVersionAndObjIncarnation.version;
+          var currentObjIncarnation = currentVersionAndObjIncarnation.incarnation;
+          if (currentVersion != sourceVersion) {
+            foreach (var objIdInCurrentObjIncarnation in new SortedSet<int>(currentObjIncarnation.elements)) {
+              if (!sourceObjIncarnation.elements.Contains(objIdInCurrentObjIncarnation)) {
+                removeEffects.Add(new BequeathUCMutSetRemoveEffect(objId, objIdInCurrentObjIncarnation));
+              }
+            }
+            foreach (var unitIdInSourceObjIncarnation in sourceObjIncarnation.elements) {
+              if (!currentObjIncarnation.elements.Contains(unitIdInSourceObjIncarnation)) {
+                addEffects.Add(new BequeathUCMutSetAddEffect(objId, unitIdInSourceObjIncarnation));
+              }
+            }
+            // Swap out the underlying incarnation.
+            rootIncarnation.incarnationsBequeathUCMutSet[objId] = sourceVersionAndObjIncarnation;
+          }
+        }
+      }
+
+    foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsBequeathUCMutSet) {
+      var sourceObjId = sourceIdAndVersionAndObjIncarnation.Key;
+      var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
+      var sourceVersion = sourceVersionAndObjIncarnation.version;
+      var sourceObjIncarnation = sourceVersionAndObjIncarnation.incarnation;
+      if (!rootIncarnation.incarnationsBequeathUCMutSet.ContainsKey(sourceObjId)) {
+        var createEffect = InternalEffectCreateBequeathUCMutSet(sourceObjId, sourceVersionAndObjIncarnation.version, sourceObjIncarnation);
+        createEffects.Add(createEffect);
+        foreach (var element in sourceObjIncarnation.elements) {
+          addEffects.Add(new BequeathUCMutSetAddEffect(sourceObjId, element));
+        }
+      }
+    }
+    foreach (var currentIdAndVersionAndObjIncarnation in new SortedDictionary<int, VersionAndIncarnation<BequeathUCMutSetIncarnation>>(rootIncarnation.incarnationsBequeathUCMutSet)) {
+      if (!sourceIncarnation.incarnationsBequeathUCMutSet.ContainsKey(currentIdAndVersionAndObjIncarnation.Key)) {
+        var id = currentIdAndVersionAndObjIncarnation.Key;
+        var currentObjIncarnation = currentIdAndVersionAndObjIncarnation.Value.incarnation;
+        foreach (var element in currentObjIncarnation.elements) {
+          removeEffects.Add(new BequeathUCMutSetRemoveEffect(id, element));
+        }
+        var effect = InternalEffectBequeathUCMutSetDelete(id);
+        deleteEffects.Add(effect);
+      }
+    }
+
       foreach (var sourceIdAndVersionAndObjIncarnation in sourceIncarnation.incarnationsTutorialDefyCounterUCMutSet) {
         var objId = sourceIdAndVersionAndObjIncarnation.Key;
         var sourceVersionAndObjIncarnation = sourceIdAndVersionAndObjIncarnation.Value;
@@ -14427,6 +14657,8 @@ return new UnitSetMaxHpEffect(id, newValue);
     }
   }
   public IUnitComponentMutBunch EffectIUnitComponentMutBunchCreate(
+      DeathTriggerUCMutSet membersDeathTriggerUCMutSet,
+      BequeathUCMutSet membersBequeathUCMutSet,
       TutorialDefyCounterUCMutSet membersTutorialDefyCounterUCMutSet,
       LightningChargingUCMutSet membersLightningChargingUCMutSet,
       WanderAICapabilityUCMutSet membersWanderAICapabilityUCMutSet,
@@ -14460,6 +14692,8 @@ return new UnitSetMaxHpEffect(id, newValue);
       SorcerousUCMutSet membersSorcerousUCMutSet,
       BaseOffenseUCMutSet membersBaseOffenseUCMutSet,
       BaseDefenseUCMutSet membersBaseDefenseUCMutSet) {
+    CheckHasDeathTriggerUCMutSet(membersDeathTriggerUCMutSet);
+    CheckHasBequeathUCMutSet(membersBequeathUCMutSet);
     CheckHasTutorialDefyCounterUCMutSet(membersTutorialDefyCounterUCMutSet);
     CheckHasLightningChargingUCMutSet(membersLightningChargingUCMutSet);
     CheckHasWanderAICapabilityUCMutSet(membersWanderAICapabilityUCMutSet);
@@ -14494,6 +14728,8 @@ return new UnitSetMaxHpEffect(id, newValue);
     CheckHasBaseOffenseUCMutSet(membersBaseOffenseUCMutSet);
     CheckHasBaseDefenseUCMutSet(membersBaseDefenseUCMutSet);
     return TrustedEffectIUnitComponentMutBunchCreateWithId(NewId()
+            ,membersDeathTriggerUCMutSet.id
+            ,membersBequeathUCMutSet.id
             ,membersTutorialDefyCounterUCMutSet.id
             ,membersLightningChargingUCMutSet.id
             ,membersWanderAICapabilityUCMutSet.id
@@ -14529,6 +14765,8 @@ return new UnitSetMaxHpEffect(id, newValue);
             ,membersBaseDefenseUCMutSet.id    );
   }
   public IUnitComponentMutBunch TrustedEffectIUnitComponentMutBunchCreateWithId(int id
+,      int membersDeathTriggerUCMutSet
+,      int membersBequeathUCMutSet
 ,      int membersTutorialDefyCounterUCMutSet
 ,      int membersLightningChargingUCMutSet
 ,      int membersWanderAICapabilityUCMutSet
@@ -14566,6 +14804,8 @@ return new UnitSetMaxHpEffect(id, newValue);
 
     var incarnation =
         new IUnitComponentMutBunchIncarnation(
+            membersDeathTriggerUCMutSet,
+            membersBequeathUCMutSet,
             membersTutorialDefyCounterUCMutSet,
             membersLightningChargingUCMutSet,
             membersWanderAICapabilityUCMutSet,
@@ -14633,39 +14873,41 @@ return new UnitSetMaxHpEffect(id, newValue);
      
   public int GetIUnitComponentMutBunchHash(int id, int version, IUnitComponentMutBunchIncarnation incarnation) {
     int result = id * version;
-    result += id * version * 1 * incarnation.membersTutorialDefyCounterUCMutSet.GetDeterministicHashCode();
-    result += id * version * 2 * incarnation.membersLightningChargingUCMutSet.GetDeterministicHashCode();
-    result += id * version * 3 * incarnation.membersWanderAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 4 * incarnation.membersTemporaryCloneAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 5 * incarnation.membersSummonAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 6 * incarnation.membersKamikazeAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 7 * incarnation.membersGuardAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 8 * incarnation.membersEvolvifyAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 9 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 10 * incarnation.membersDoomedUCMutSet.GetDeterministicHashCode();
-    result += id * version * 11 * incarnation.membersMiredUCMutSet.GetDeterministicHashCode();
-    result += id * version * 12 * incarnation.membersOnFireUCMutSet.GetDeterministicHashCode();
-    result += id * version * 13 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 14 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
-    result += id * version * 15 * incarnation.membersLightningChargedUCMutSet.GetDeterministicHashCode();
-    result += id * version * 16 * incarnation.membersInvincibilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 17 * incarnation.membersDefyingUCMutSet.GetDeterministicHashCode();
-    result += id * version * 18 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
-    result += id * version * 19 * incarnation.membersBaseSightRangeUCMutSet.GetDeterministicHashCode();
-    result += id * version * 20 * incarnation.membersBaseMovementTimeUCMutSet.GetDeterministicHashCode();
-    result += id * version * 21 * incarnation.membersBaseCombatTimeUCMutSet.GetDeterministicHashCode();
-    result += id * version * 22 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 23 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
-    result += id * version * 24 * incarnation.membersSpeedRingMutSet.GetDeterministicHashCode();
-    result += id * version * 25 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
-    result += id * version * 26 * incarnation.membersSlowRodMutSet.GetDeterministicHashCode();
-    result += id * version * 27 * incarnation.membersExplosionRodMutSet.GetDeterministicHashCode();
-    result += id * version * 28 * incarnation.membersBlazeRodMutSet.GetDeterministicHashCode();
-    result += id * version * 29 * incarnation.membersBlastRodMutSet.GetDeterministicHashCode();
-    result += id * version * 30 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
-    result += id * version * 31 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
-    result += id * version * 32 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
-    result += id * version * 33 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 1 * incarnation.membersDeathTriggerUCMutSet.GetDeterministicHashCode();
+    result += id * version * 2 * incarnation.membersBequeathUCMutSet.GetDeterministicHashCode();
+    result += id * version * 3 * incarnation.membersTutorialDefyCounterUCMutSet.GetDeterministicHashCode();
+    result += id * version * 4 * incarnation.membersLightningChargingUCMutSet.GetDeterministicHashCode();
+    result += id * version * 5 * incarnation.membersWanderAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 6 * incarnation.membersTemporaryCloneAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 7 * incarnation.membersSummonAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 8 * incarnation.membersKamikazeAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 9 * incarnation.membersGuardAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 10 * incarnation.membersEvolvifyAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 11 * incarnation.membersTimeCloneAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 12 * incarnation.membersDoomedUCMutSet.GetDeterministicHashCode();
+    result += id * version * 13 * incarnation.membersMiredUCMutSet.GetDeterministicHashCode();
+    result += id * version * 14 * incarnation.membersOnFireUCMutSet.GetDeterministicHashCode();
+    result += id * version * 15 * incarnation.membersAttackAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 16 * incarnation.membersCounteringUCMutSet.GetDeterministicHashCode();
+    result += id * version * 17 * incarnation.membersLightningChargedUCMutSet.GetDeterministicHashCode();
+    result += id * version * 18 * incarnation.membersInvincibilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 19 * incarnation.membersDefyingUCMutSet.GetDeterministicHashCode();
+    result += id * version * 20 * incarnation.membersBideAICapabilityUCMutSet.GetDeterministicHashCode();
+    result += id * version * 21 * incarnation.membersBaseSightRangeUCMutSet.GetDeterministicHashCode();
+    result += id * version * 22 * incarnation.membersBaseMovementTimeUCMutSet.GetDeterministicHashCode();
+    result += id * version * 23 * incarnation.membersBaseCombatTimeUCMutSet.GetDeterministicHashCode();
+    result += id * version * 24 * incarnation.membersManaPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 25 * incarnation.membersHealthPotionMutSet.GetDeterministicHashCode();
+    result += id * version * 26 * incarnation.membersSpeedRingMutSet.GetDeterministicHashCode();
+    result += id * version * 27 * incarnation.membersGlaiveMutSet.GetDeterministicHashCode();
+    result += id * version * 28 * incarnation.membersSlowRodMutSet.GetDeterministicHashCode();
+    result += id * version * 29 * incarnation.membersExplosionRodMutSet.GetDeterministicHashCode();
+    result += id * version * 30 * incarnation.membersBlazeRodMutSet.GetDeterministicHashCode();
+    result += id * version * 31 * incarnation.membersBlastRodMutSet.GetDeterministicHashCode();
+    result += id * version * 32 * incarnation.membersArmorMutSet.GetDeterministicHashCode();
+    result += id * version * 33 * incarnation.membersSorcerousUCMutSet.GetDeterministicHashCode();
+    result += id * version * 34 * incarnation.membersBaseOffenseUCMutSet.GetDeterministicHashCode();
+    result += id * version * 35 * incarnation.membersBaseDefenseUCMutSet.GetDeterministicHashCode();
     return result;
   }
        public LightningChargedUCIncarnation GetLightningChargedUCIncarnation(int id) {
@@ -15163,7 +15405,187 @@ return new UnitSetMaxHpEffect(id, newValue);
 
 return new TemporaryCloneAICapabilityUCSetChargesEffect(id, newValue);
   }
-  public SummonImpulseIncarnation GetSummonImpulseIncarnation(int id) {
+  public DeathTriggerUCIncarnation GetDeathTriggerUCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsDeathTriggerUC[id].incarnation;
+  }
+  public bool DeathTriggerUCExists(int id) {
+    return rootIncarnation.incarnationsDeathTriggerUC.ContainsKey(id);
+  }
+  public DeathTriggerUC GetDeathTriggerUC(int id) {
+    CheckHasDeathTriggerUC(id);
+    return new DeathTriggerUC(this, id);
+  }
+  public DeathTriggerUC GetDeathTriggerUCOrNull(int id) {
+    if (DeathTriggerUCExists(id)) {
+      return new DeathTriggerUC(this, id);
+    } else {
+      return new DeathTriggerUC(this, 0);
+    }
+  }
+  public List<DeathTriggerUC> AllDeathTriggerUC() {
+    List<DeathTriggerUC> result = new List<DeathTriggerUC>(rootIncarnation.incarnationsDeathTriggerUC.Count);
+    foreach (var id in rootIncarnation.incarnationsDeathTriggerUC.Keys) {
+      result.Add(new DeathTriggerUC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<DeathTriggerUC> EnumAllDeathTriggerUC() {
+    foreach (var id in rootIncarnation.incarnationsDeathTriggerUC.Keys) {
+      yield return GetDeathTriggerUC(id);
+    }
+  }
+  public void CheckHasDeathTriggerUC(DeathTriggerUC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasDeathTriggerUC(thing.id);
+  }
+  public void CheckHasDeathTriggerUC(int id) {
+    if (!rootIncarnation.incarnationsDeathTriggerUC.ContainsKey(id)) {
+      throw new System.Exception("Invalid DeathTriggerUC: " + id);
+    }
+  }
+  public DeathTriggerUC EffectDeathTriggerUCCreate(
+      string triggerName) {
+    return TrustedEffectDeathTriggerUCCreateWithId(NewId()
+            ,triggerName    );
+  }
+  public DeathTriggerUC TrustedEffectDeathTriggerUCCreateWithId(int id
+,      string triggerName) {
+    CheckUnlocked();
+
+    var incarnation =
+        new DeathTriggerUCIncarnation(
+            triggerName
+            );
+    var effect = InternalEffectCreateDeathTriggerUC(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new DeathTriggerUC(this, id);
+  }
+  public DeathTriggerUCCreateEffect InternalEffectCreateDeathTriggerUC(
+      int id,
+      int incarnationVersion,
+      DeathTriggerUCIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsDeathTriggerUC.Add(
+        id,
+        new VersionAndIncarnation<DeathTriggerUCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new DeathTriggerUCCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectDeathTriggerUCDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectDeathTriggerUCDelete(id);
+    NotifyEffect(effect);
+  }
+  public DeathTriggerUCDeleteEffect InternalEffectDeathTriggerUCDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsDeathTriggerUC[id];
+
+    rootIncarnation.incarnationsDeathTriggerUC.Remove(id);
+    return new DeathTriggerUCDeleteEffect(id);
+  }
+
+     
+  public int GetDeathTriggerUCHash(int id, int version, DeathTriggerUCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.triggerName.GetDeterministicHashCode();
+    return result;
+  }
+       public BequeathUCIncarnation GetBequeathUCIncarnation(int id) {
+    if (id == 0) {
+      throw new Exception("Tried dereferencing null!");
+    }
+    return rootIncarnation.incarnationsBequeathUC[id].incarnation;
+  }
+  public bool BequeathUCExists(int id) {
+    return rootIncarnation.incarnationsBequeathUC.ContainsKey(id);
+  }
+  public BequeathUC GetBequeathUC(int id) {
+    CheckHasBequeathUC(id);
+    return new BequeathUC(this, id);
+  }
+  public BequeathUC GetBequeathUCOrNull(int id) {
+    if (BequeathUCExists(id)) {
+      return new BequeathUC(this, id);
+    } else {
+      return new BequeathUC(this, 0);
+    }
+  }
+  public List<BequeathUC> AllBequeathUC() {
+    List<BequeathUC> result = new List<BequeathUC>(rootIncarnation.incarnationsBequeathUC.Count);
+    foreach (var id in rootIncarnation.incarnationsBequeathUC.Keys) {
+      result.Add(new BequeathUC(this, id));
+    }
+    return result;
+  }
+  public IEnumerator<BequeathUC> EnumAllBequeathUC() {
+    foreach (var id in rootIncarnation.incarnationsBequeathUC.Keys) {
+      yield return GetBequeathUC(id);
+    }
+  }
+  public void CheckHasBequeathUC(BequeathUC thing) {
+    CheckRootsEqual(this, thing.root);
+    CheckHasBequeathUC(thing.id);
+  }
+  public void CheckHasBequeathUC(int id) {
+    if (!rootIncarnation.incarnationsBequeathUC.ContainsKey(id)) {
+      throw new System.Exception("Invalid BequeathUC: " + id);
+    }
+  }
+  public BequeathUC EffectBequeathUCCreate(
+      string blueprintName) {
+    return TrustedEffectBequeathUCCreateWithId(NewId()
+            ,blueprintName    );
+  }
+  public BequeathUC TrustedEffectBequeathUCCreateWithId(int id
+,      string blueprintName) {
+    CheckUnlocked();
+
+    var incarnation =
+        new BequeathUCIncarnation(
+            blueprintName
+            );
+    var effect = InternalEffectCreateBequeathUC(id, rootIncarnation.version, incarnation);
+    NotifyEffect(effect);
+    return new BequeathUC(this, id);
+  }
+  public BequeathUCCreateEffect InternalEffectCreateBequeathUC(
+      int id,
+      int incarnationVersion,
+      BequeathUCIncarnation incarnation) {
+    CheckUnlocked();
+    rootIncarnation.incarnationsBequeathUC.Add(
+        id,
+        new VersionAndIncarnation<BequeathUCIncarnation>(
+            incarnationVersion,
+            incarnation));
+    return new BequeathUCCreateEffect(id, incarnation.Copy());
+  }
+
+  public void EffectBequeathUCDelete(int id) {
+    CheckUnlocked();
+    var effect = InternalEffectBequeathUCDelete(id);
+    NotifyEffect(effect);
+  }
+  public BequeathUCDeleteEffect InternalEffectBequeathUCDelete(int id) {
+    var oldIncarnationAndVersion =
+        rootIncarnation.incarnationsBequeathUC[id];
+
+    rootIncarnation.incarnationsBequeathUC.Remove(id);
+    return new BequeathUCDeleteEffect(id);
+  }
+
+     
+  public int GetBequeathUCHash(int id, int version, BequeathUCIncarnation incarnation) {
+    int result = id * version;
+    result += id * version * 1 * incarnation.blueprintName.GetDeterministicHashCode();
+    return result;
+  }
+       public SummonImpulseIncarnation GetSummonImpulseIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
     }
@@ -17561,7 +17983,33 @@ return new KamikazeAICapabilityUCSetTargetLocationCenterEffect(id, newValue);
     result += id * version * 1 * incarnation.turnsRemaining.GetDeterministicHashCode();
     return result;
   }
-       public DefyingUCIncarnation GetDefyingUCIncarnation(int id) {
+     
+  public void EffectOnFireUCSetTurnsRemaining(
+      int id, int newValue) {
+    CheckUnlocked();
+    CheckHasOnFireUC(id);
+    var effect = InternalEffectOnFireUCSetTurnsRemaining(id, newValue);
+    NotifyEffect(effect);
+  }
+  public OnFireUCSetTurnsRemainingEffect InternalEffectOnFireUCSetTurnsRemaining(int id, int newValue) {
+    var oldIncarnationAndVersion = rootIncarnation.incarnationsOnFireUC[id];
+    if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+      var oldValue = oldIncarnationAndVersion.incarnation.turnsRemaining;
+      oldIncarnationAndVersion.incarnation.turnsRemaining = newValue;
+
+    } else {
+      var newIncarnation =
+          new OnFireUCIncarnation(
+              newValue);
+      rootIncarnation.incarnationsOnFireUC[id] =
+          new VersionAndIncarnation<OnFireUCIncarnation>(
+              rootIncarnation.version,
+              newIncarnation);
+    }
+
+return new OnFireUCSetTurnsRemainingEffect(id, newValue);
+  }
+  public DefyingUCIncarnation GetDefyingUCIncarnation(int id) {
     if (id == 0) {
       throw new Exception("Tried dereferencing null!");
     }
@@ -26600,12 +27048,24 @@ return new GameSetEvventEffect(id, newValue);
   }
 
   public IDeathPreReactor GetIDeathPreReactor(int id) {
+    if (rootIncarnation.incarnationsDeathTriggerUC.ContainsKey(id)) {
+      return new DeathTriggerUCAsIDeathPreReactor(new DeathTriggerUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBequeathUC.ContainsKey(id)) {
+      return new BequeathUCAsIDeathPreReactor(new BequeathUC(this, id));
+    }
     if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
       return new KamikazeAICapabilityUCAsIDeathPreReactor(new KamikazeAICapabilityUC(this, id));
     }
     throw new Exception("Unknown IDeathPreReactor: " + id);
   }
   public IDeathPreReactor GetIDeathPreReactorOrNull(int id) {
+    if (rootIncarnation.incarnationsDeathTriggerUC.ContainsKey(id)) {
+      return new DeathTriggerUCAsIDeathPreReactor(new DeathTriggerUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBequeathUC.ContainsKey(id)) {
+      return new BequeathUCAsIDeathPreReactor(new BequeathUC(this, id));
+    }
     if (rootIncarnation.incarnationsKamikazeAICapabilityUC.ContainsKey(id)) {
       return new KamikazeAICapabilityUCAsIDeathPreReactor(new KamikazeAICapabilityUC(this, id));
     }
@@ -26874,6 +27334,12 @@ return new GameSetEvventEffect(id, newValue);
   }
 
   public IUnitComponent GetIUnitComponent(int id) {
+    if (rootIncarnation.incarnationsDeathTriggerUC.ContainsKey(id)) {
+      return new DeathTriggerUCAsIUnitComponent(new DeathTriggerUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBequeathUC.ContainsKey(id)) {
+      return new BequeathUCAsIUnitComponent(new BequeathUC(this, id));
+    }
     if (rootIncarnation.incarnationsTutorialDefyCounterUC.ContainsKey(id)) {
       return new TutorialDefyCounterUCAsIUnitComponent(new TutorialDefyCounterUC(this, id));
     }
@@ -26976,6 +27442,12 @@ return new GameSetEvventEffect(id, newValue);
     throw new Exception("Unknown IUnitComponent: " + id);
   }
   public IUnitComponent GetIUnitComponentOrNull(int id) {
+    if (rootIncarnation.incarnationsDeathTriggerUC.ContainsKey(id)) {
+      return new DeathTriggerUCAsIUnitComponent(new DeathTriggerUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBequeathUC.ContainsKey(id)) {
+      return new BequeathUCAsIUnitComponent(new BequeathUC(this, id));
+    }
     if (rootIncarnation.incarnationsTutorialDefyCounterUC.ContainsKey(id)) {
       return new TutorialDefyCounterUCAsIUnitComponent(new TutorialDefyCounterUC(this, id));
     }
@@ -28220,6 +28692,12 @@ return new GameSetEvventEffect(id, newValue);
   }
 
   public IDestructible GetIDestructible(int id) {
+    if (rootIncarnation.incarnationsDeathTriggerUC.ContainsKey(id)) {
+      return new DeathTriggerUCAsIDestructible(new DeathTriggerUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBequeathUC.ContainsKey(id)) {
+      return new BequeathUCAsIDestructible(new BequeathUC(this, id));
+    }
     if (rootIncarnation.incarnationsTutorialDefyCounterUC.ContainsKey(id)) {
       return new TutorialDefyCounterUCAsIDestructible(new TutorialDefyCounterUC(this, id));
     }
@@ -28547,6 +29025,12 @@ return new GameSetEvventEffect(id, newValue);
     throw new Exception("Unknown IDestructible: " + id);
   }
   public IDestructible GetIDestructibleOrNull(int id) {
+    if (rootIncarnation.incarnationsDeathTriggerUC.ContainsKey(id)) {
+      return new DeathTriggerUCAsIDestructible(new DeathTriggerUC(this, id));
+    }
+    if (rootIncarnation.incarnationsBequeathUC.ContainsKey(id)) {
+      return new BequeathUCAsIDestructible(new BequeathUC(this, id));
+    }
     if (rootIncarnation.incarnationsTutorialDefyCounterUC.ContainsKey(id)) {
       return new TutorialDefyCounterUCAsIDestructible(new TutorialDefyCounterUC(this, id));
     }
@@ -38150,6 +38634,240 @@ return new GameSetEvventEffect(id, newValue);
                 rootIncarnation.version, newIncarnation);
       }
       return new RavaArcanaLevelLinkerTTCMutSetRemoveEffect(instanceId, elementId);
+    }
+
+       
+    public int GetDeathTriggerUCMutSetHash(int id, int version, DeathTriggerUCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.elements) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public DeathTriggerUCMutSetIncarnation GetDeathTriggerUCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsDeathTriggerUCMutSet[id].incarnation;
+    }
+    public DeathTriggerUCMutSet GetDeathTriggerUCMutSet(int id) {
+      return new DeathTriggerUCMutSet(this, id);
+    }
+    public List<DeathTriggerUCMutSet> AllDeathTriggerUCMutSet() {
+      List<DeathTriggerUCMutSet> result = new List<DeathTriggerUCMutSet>(rootIncarnation.incarnationsDeathTriggerUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsDeathTriggerUCMutSet.Keys) {
+        result.Add(new DeathTriggerUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool DeathTriggerUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsDeathTriggerUCMutSet.ContainsKey(id);
+    }
+    public void CheckHasDeathTriggerUCMutSet(DeathTriggerUCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasDeathTriggerUCMutSet(thing.id);
+    }
+    public void CheckHasDeathTriggerUCMutSet(int id) {
+      if (!rootIncarnation.incarnationsDeathTriggerUCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid DeathTriggerUCMutSet}: " + id);
+      }
+    }
+    public DeathTriggerUCMutSet EffectDeathTriggerUCMutSetCreate() {
+      return TrustedEffectDeathTriggerUCMutSetCreateWithId(NewId());
+    }
+    public DeathTriggerUCMutSet TrustedEffectDeathTriggerUCMutSetCreateWithId(int id) {
+      CheckUnlocked();
+      var incarnation = new DeathTriggerUCMutSetIncarnation(new SortedSet<int>());
+      var effect = InternalEffectCreateDeathTriggerUCMutSet(id, rootIncarnation.version, incarnation);
+      NotifyEffect(effect);
+      return new DeathTriggerUCMutSet(this, id);
+    }
+    public DeathTriggerUCMutSetCreateEffect InternalEffectCreateDeathTriggerUCMutSet(int id, int incarnationVersion, DeathTriggerUCMutSetIncarnation incarnation) {
+      rootIncarnation.incarnationsDeathTriggerUCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<DeathTriggerUCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+
+      return new DeathTriggerUCMutSetCreateEffect(id);
+    }
+    public void EffectDeathTriggerUCMutSetDelete(int id) {
+      var effect = InternalEffectDeathTriggerUCMutSetDelete(id);
+      NotifyEffect(effect);
+    }
+    public DeathTriggerUCMutSetDeleteEffect InternalEffectDeathTriggerUCMutSetDelete(int id) {
+      CheckUnlocked();
+      var versionAndIncarnation = rootIncarnation.incarnationsDeathTriggerUCMutSet[id];
+      rootIncarnation.incarnationsDeathTriggerUCMutSet.Remove(id);
+      return new DeathTriggerUCMutSetDeleteEffect(id);
+    }
+
+       
+    public void EffectDeathTriggerUCMutSetAdd(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasDeathTriggerUCMutSet(instanceId);
+      CheckHasDeathTriggerUC(element);
+      var effect = InternalEffectDeathTriggerUCMutSetAdd(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public DeathTriggerUCMutSetAddEffect InternalEffectDeathTriggerUCMutSetAdd(int instanceId, int element) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsDeathTriggerUCMutSet[instanceId];
+      if (oldIncarnationAndVersion.incarnation.elements.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new DeathTriggerUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsDeathTriggerUCMutSet[instanceId] =
+            new VersionAndIncarnation<DeathTriggerUCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      return new DeathTriggerUCMutSetAddEffect(instanceId, element);
+    }
+    public void EffectDeathTriggerUCMutSetRemove(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasDeathTriggerUCMutSet(instanceId);
+      CheckHasDeathTriggerUC(element);
+      var effect = InternalEffectDeathTriggerUCMutSetRemove(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public DeathTriggerUCMutSetRemoveEffect InternalEffectDeathTriggerUCMutSetRemove(int instanceId, int elementId) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsDeathTriggerUCMutSet[instanceId];
+      if (!oldIncarnationAndVersion.incarnation.elements.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new DeathTriggerUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsDeathTriggerUCMutSet[instanceId] =
+            new VersionAndIncarnation<DeathTriggerUCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      return new DeathTriggerUCMutSetRemoveEffect(instanceId, elementId);
+    }
+
+       
+    public int GetBequeathUCMutSetHash(int id, int version, BequeathUCMutSetIncarnation incarnation) {
+      int result = id * version;
+      foreach (var element in incarnation.elements) {
+        result += id * version * element.GetDeterministicHashCode();
+      }
+      return result;
+    }
+    public BequeathUCMutSetIncarnation GetBequeathUCMutSetIncarnation(int id) {
+      return rootIncarnation.incarnationsBequeathUCMutSet[id].incarnation;
+    }
+    public BequeathUCMutSet GetBequeathUCMutSet(int id) {
+      return new BequeathUCMutSet(this, id);
+    }
+    public List<BequeathUCMutSet> AllBequeathUCMutSet() {
+      List<BequeathUCMutSet> result = new List<BequeathUCMutSet>(rootIncarnation.incarnationsBequeathUCMutSet.Count);
+      foreach (var id in rootIncarnation.incarnationsBequeathUCMutSet.Keys) {
+        result.Add(new BequeathUCMutSet(this, id));
+      }
+      return result;
+    }
+    public bool BequeathUCMutSetExists(int id) {
+      return rootIncarnation.incarnationsBequeathUCMutSet.ContainsKey(id);
+    }
+    public void CheckHasBequeathUCMutSet(BequeathUCMutSet thing) {
+      CheckRootsEqual(this, thing.root);
+      CheckHasBequeathUCMutSet(thing.id);
+    }
+    public void CheckHasBequeathUCMutSet(int id) {
+      if (!rootIncarnation.incarnationsBequeathUCMutSet.ContainsKey(id)) {
+        throw new System.Exception("Invalid BequeathUCMutSet}: " + id);
+      }
+    }
+    public BequeathUCMutSet EffectBequeathUCMutSetCreate() {
+      return TrustedEffectBequeathUCMutSetCreateWithId(NewId());
+    }
+    public BequeathUCMutSet TrustedEffectBequeathUCMutSetCreateWithId(int id) {
+      CheckUnlocked();
+      var incarnation = new BequeathUCMutSetIncarnation(new SortedSet<int>());
+      var effect = InternalEffectCreateBequeathUCMutSet(id, rootIncarnation.version, incarnation);
+      NotifyEffect(effect);
+      return new BequeathUCMutSet(this, id);
+    }
+    public BequeathUCMutSetCreateEffect InternalEffectCreateBequeathUCMutSet(int id, int incarnationVersion, BequeathUCMutSetIncarnation incarnation) {
+      rootIncarnation.incarnationsBequeathUCMutSet
+          .Add(
+              id,
+              new VersionAndIncarnation<BequeathUCMutSetIncarnation>(
+                  incarnationVersion,
+                  incarnation));
+
+      return new BequeathUCMutSetCreateEffect(id);
+    }
+    public void EffectBequeathUCMutSetDelete(int id) {
+      var effect = InternalEffectBequeathUCMutSetDelete(id);
+      NotifyEffect(effect);
+    }
+    public BequeathUCMutSetDeleteEffect InternalEffectBequeathUCMutSetDelete(int id) {
+      CheckUnlocked();
+      var versionAndIncarnation = rootIncarnation.incarnationsBequeathUCMutSet[id];
+      rootIncarnation.incarnationsBequeathUCMutSet.Remove(id);
+      return new BequeathUCMutSetDeleteEffect(id);
+    }
+
+       
+    public void EffectBequeathUCMutSetAdd(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasBequeathUCMutSet(instanceId);
+      CheckHasBequeathUC(element);
+      var effect = InternalEffectBequeathUCMutSetAdd(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public BequeathUCMutSetAddEffect InternalEffectBequeathUCMutSetAdd(int instanceId, int element) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsBequeathUCMutSet[instanceId];
+      if (oldIncarnationAndVersion.incarnation.elements.Contains(element)) {
+        throw new Exception("Element already exists!");
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Add(element);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Add(element);
+        var newIncarnation = new BequeathUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsBequeathUCMutSet[instanceId] =
+            new VersionAndIncarnation<BequeathUCMutSetIncarnation>(
+                rootIncarnation.version,
+                newIncarnation);
+      }
+      return new BequeathUCMutSetAddEffect(instanceId, element);
+    }
+    public void EffectBequeathUCMutSetRemove(int instanceId, int element) {
+      CheckUnlocked();
+      CheckHasBequeathUCMutSet(instanceId);
+      CheckHasBequeathUC(element);
+      var effect = InternalEffectBequeathUCMutSetRemove(instanceId, element);
+      NotifyEffect(effect);
+    }
+    public BequeathUCMutSetRemoveEffect InternalEffectBequeathUCMutSetRemove(int instanceId, int elementId) {
+      var oldIncarnationAndVersion = rootIncarnation.incarnationsBequeathUCMutSet[instanceId];
+      if (!oldIncarnationAndVersion.incarnation.elements.Contains(elementId)) {
+        throw new Exception("Element not found! " + elementId);
+      }
+      if (oldIncarnationAndVersion.version == rootIncarnation.version) {
+        oldIncarnationAndVersion.incarnation.elements.Remove(elementId);
+      } else {
+        var oldMap = oldIncarnationAndVersion.incarnation.elements;
+        var newMap = new SortedSet<int>(oldMap);
+        newMap.Remove(elementId);
+        var newIncarnation = new BequeathUCMutSetIncarnation(newMap);
+        rootIncarnation.incarnationsBequeathUCMutSet[instanceId] =
+            new VersionAndIncarnation<BequeathUCMutSetIncarnation>(
+                rootIncarnation.version, newIncarnation);
+      }
+      return new BequeathUCMutSetRemoveEffect(instanceId, elementId);
     }
 
        

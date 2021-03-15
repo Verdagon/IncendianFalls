@@ -1,0 +1,19 @@
+
+mut struct BequeathUC {
+  BequeathUC isa IDeathPreReactor;
+
+  blueprintName: Str;
+
+  fn Destruct(this: BequeathUC overrides IDestructible): Void {
+    BequeathUCExtensions.Destruct
+  }
+  fn BeforeDeath(
+      this: BequeathUC overrides IDeathPreReactor,
+      context: $IncendianFalls.SSContext,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Void {
+    BequeathUCExtensions.BeforeDeath
+  }
+}

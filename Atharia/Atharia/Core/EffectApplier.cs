@@ -17,6 +17,8 @@ ILightningChargingUCEffectVisitor,
 IDoomedUCEffectVisitor,
 ITemporaryCloneImpulseEffectVisitor,
 ITemporaryCloneAICapabilityUCEffectVisitor,
+IDeathTriggerUCEffectVisitor,
+IBequeathUCEffectVisitor,
 ISummonImpulseEffectVisitor,
 ISummonAICapabilityUCEffectVisitor,
 ISorcerousUCEffectVisitor,
@@ -207,6 +209,8 @@ IGrassTTCMutSetEffectVisitor,
 IEmberDeepLevelLinkerTTCMutSetEffectVisitor,
 IIncendianFallsLevelLinkerTTCMutSetEffectVisitor,
 IRavaArcanaLevelLinkerTTCMutSetEffectVisitor,
+IDeathTriggerUCMutSetEffectVisitor,
+IBequeathUCMutSetEffectVisitor,
 ITutorialDefyCounterUCMutSetEffectVisitor,
 ILightningChargingUCMutSetEffectVisitor,
 IWanderAICapabilityUCMutSetEffectVisitor,
@@ -389,6 +393,8 @@ public void visitIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffect effe
     // For now we're just feeding the remote ID in. Someday we might want to have a map
     // in the applier instead.
     root.TrustedEffectIUnitComponentMutBunchCreateWithId(effect.id
+,  effect.incarnation.membersDeathTriggerUCMutSet
+,  effect.incarnation.membersBequeathUCMutSet
 ,  effect.incarnation.membersTutorialDefyCounterUCMutSet
 ,  effect.incarnation.membersLightningChargingUCMutSet
 ,  effect.incarnation.membersWanderAICapabilityUCMutSet
@@ -511,6 +517,34 @@ public void visitTemporaryCloneAICapabilityUCEffect(ITemporaryCloneAICapabilityU
     );
   }
 
+public void visitDeathTriggerUCEffect(IDeathTriggerUCEffect effect) { effect.visitIDeathTriggerUCEffect(this); }
+  public void visitDeathTriggerUCCreateEffect(DeathTriggerUCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectDeathTriggerUCCreateWithId(effect.id
+,  effect.incarnation.triggerName    );
+
+}
+
+  public void visitDeathTriggerUCDeleteEffect(DeathTriggerUCDeleteEffect effect) {
+    root.EffectDeathTriggerUCDelete(effect.id);
+  }
+
+     
+public void visitBequeathUCEffect(IBequeathUCEffect effect) { effect.visitIBequeathUCEffect(this); }
+  public void visitBequeathUCCreateEffect(BequeathUCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectBequeathUCCreateWithId(effect.id
+,  effect.incarnation.blueprintName    );
+
+}
+
+  public void visitBequeathUCDeleteEffect(BequeathUCDeleteEffect effect) {
+    root.EffectBequeathUCDelete(effect.id);
+  }
+
+     
 public void visitSummonImpulseEffect(ISummonImpulseEffect effect) { effect.visitISummonImpulseEffect(this); }
   public void visitSummonImpulseCreateEffect(SummonImpulseCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
@@ -902,6 +936,13 @@ public void visitOnFireUCEffect(IOnFireUCEffect effect) { effect.visitIOnFireUCE
   }
 
      
+  public void visitOnFireUCSetTurnsRemainingEffect(OnFireUCSetTurnsRemainingEffect effect) {
+    root.EffectOnFireUCSetTurnsRemaining(
+      effect.id,
+  effect.newValue
+    );
+  }
+
 public void visitDefyingUCEffect(IDefyingUCEffect effect) { effect.visitIDefyingUCEffect(this); }
   public void visitDefyingUCCreateEffect(DefyingUCCreateEffect effect) {
     // For now we're just feeding the remote ID in. Someday we might want to have a map
@@ -3693,6 +3734,40 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
     public void visitRavaArcanaLevelLinkerTTCMutSetRemoveEffect(RavaArcanaLevelLinkerTTCMutSetRemoveEffect effect) {
       root.CheckUnlocked();
       root.EffectRavaArcanaLevelLinkerTTCMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitDeathTriggerUCMutSetEffect(IDeathTriggerUCMutSetEffect effect) { effect.visitIDeathTriggerUCMutSetEffect(this); }
+    public void visitDeathTriggerUCMutSetCreateEffect(DeathTriggerUCMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectDeathTriggerUCMutSetCreateWithId(effect.id);
+    }
+    public void visitDeathTriggerUCMutSetDeleteEffect(DeathTriggerUCMutSetDeleteEffect effect) {
+      root.EffectDeathTriggerUCMutSetDelete(effect.id);
+    }
+    public void visitDeathTriggerUCMutSetAddEffect(DeathTriggerUCMutSetAddEffect effect) {
+     root.EffectDeathTriggerUCMutSetAdd(effect.id, effect.element);
+ }
+    public void visitDeathTriggerUCMutSetRemoveEffect(DeathTriggerUCMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectDeathTriggerUCMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitBequeathUCMutSetEffect(IBequeathUCMutSetEffect effect) { effect.visitIBequeathUCMutSetEffect(this); }
+    public void visitBequeathUCMutSetCreateEffect(BequeathUCMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectBequeathUCMutSetCreateWithId(effect.id);
+    }
+    public void visitBequeathUCMutSetDeleteEffect(BequeathUCMutSetDeleteEffect effect) {
+      root.EffectBequeathUCMutSetDelete(effect.id);
+    }
+    public void visitBequeathUCMutSetAddEffect(BequeathUCMutSetAddEffect effect) {
+     root.EffectBequeathUCMutSetAdd(effect.id, effect.element);
+ }
+    public void visitBequeathUCMutSetRemoveEffect(BequeathUCMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectBequeathUCMutSetRemove(effect.id, effect.element);
     }
        
     public void visitTutorialDefyCounterUCMutSetEffect(ITutorialDefyCounterUCMutSetEffect effect) { effect.visitITutorialDefyCounterUCMutSetEffect(this); }

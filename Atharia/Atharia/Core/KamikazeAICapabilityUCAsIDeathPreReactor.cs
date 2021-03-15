@@ -126,8 +126,8 @@ public class KamikazeAICapabilityUCAsIDeathPreReactor : IDeathPreReactor {
          public Void Destruct() {
     return KamikazeAICapabilityUCExtensions.Destruct(obj);
   }
-  public Void BeforeDeath(Game game, Superstate superstate, Unit unit) {
-    return KamikazeAICapabilityUCExtensions.BeforeDeath(obj, game, superstate, unit);
+  public Void BeforeDeath(IncendianFalls.SSContext context, Game game, Superstate superstate, Unit unit) {
+    return KamikazeAICapabilityUCExtensions.BeforeDeath(obj, context, game, superstate, unit);
   }
 
 }

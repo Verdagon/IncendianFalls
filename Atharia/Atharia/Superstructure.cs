@@ -310,6 +310,54 @@ namespace IncendianFalls {
       }
     }
 
+    public (List<IEffect>, string) RequestBlaze(int gameId, Location targetLoc) {
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new BlazeRequest(gameId, targetLoc);
+        broadcastBeforeRequest(new BlazeRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        var superstate = superstateByGameId[gameId];
+        var(events, result) = context.root.Transact(delegate () {
+          return BlazeRequestExecutor.Execute(context, superstate, request);
+        });
+        context.Flare(result.DStr());
+        broadcastAfterRequest(new BlazeRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return (events, result);
+      } catch (Exception e) {
+        root.logger.Error(e.Message + " " + e.StackTrace);
+        throw;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
+      }
+    }
+
+    public (List<IEffect>, string) RequestExplosion(int gameId, Location targetLoc) {
+      //var rollbackPoint = root.Snapshot();
+      try {
+        var request = new ExplosionRequest(gameId, targetLoc);
+        broadcastBeforeRequest(new ExplosionRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        var superstate = superstateByGameId[gameId];
+        var(events, result) = context.root.Transact(delegate () {
+          return ExplosionRequestExecutor.Execute(context, superstate, request);
+        });
+        context.Flare(result.DStr());
+        broadcastAfterRequest(new ExplosionRequestAsIRequest(request));
+        context.Flare(GetDeterministicHashCode());
+        return (events, result);
+      } catch (Exception e) {
+        root.logger.Error(e.Message + " " + e.StackTrace);
+        throw;
+        //} catch (Exception) {
+        //  Logger.Error("Caught exception, rolling back!");
+        //  root.Revert(rollbackPoint);
+        //  throw;
+      }
+    }
+
     public (List<IEffect>, string) RequestFireBomb(int gameId, Location location) {
       //var rollbackPoint = root.Snapshot();
       try {

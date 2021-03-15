@@ -556,7 +556,7 @@ namespace AthPlayer {
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
                           "r-3",
-                          Vector4Animation.Color(.3f, .1f, 0, 1.2f),
+                          Vector4Animation.Color(1.0f, .4f, 0, 1.5f),
                           0,
                           1,
                           OutlineMode.WithOutline,
@@ -738,20 +738,9 @@ namespace AthPlayer {
                     Vector4Animation.Color(0, 0, 0)),
                 true,
                 Vector4Animation.Color(0, 0, 1f, 1f)));
-      } else if (effect.newValue is UnitFireBombedEventAsITerrainTileEvent ufbe) {
-        //tileView.ShowRune(
-        //    new ExtrudedSymbolDescription(
-        //        RenderPriority.RUNE,
-        //        new SymbolDescription(
-        //            "r-3",
-        //              Vector4Animation.Color(1.0f, .6f, 0, 1.5f),
-        //            0,
-        //            OutlineMode.WithOutline,
-        //            Vector4Animation.Color(0, 0, 0)),
-        //        true,
-        //        Vector4Animation.Color(0, 0, 1f, 1f)));
-
-
+      } else if (effect.newValue is UnitFireBombedEventAsITerrainTileEvent ||
+          effect.newValue is UnitBlazedEventAsITerrainTileEvent ||
+          effect.newValue is UnitExplosionedEventAsITerrainTileEvent) {
         var patternTile = terrain.pattern.patternTiles[location.indexInGroup];
 
         prismEndTime =
@@ -846,7 +835,9 @@ namespace AthPlayer {
       public void visitTerrainTileSetEvventEffect(TerrainTileSetEvventEffect effect) {
         if (effect.newValue is WaitForUnitEventAsIUnitEvent) {
           staller(terrainTilePresenter.prismEndTime, "prism");
-        } else if (effect.newValue is UnitFireBombedEventAsITerrainTileEvent) {
+        } else if (effect.newValue is UnitFireBombedEventAsITerrainTileEvent ||
+            effect.newValue is UnitBlazedEventAsITerrainTileEvent ||
+            effect.newValue is UnitExplosionedEventAsITerrainTileEvent) {
           staller(terrainTilePresenter.prismEndTime, "prism");
         }
       }

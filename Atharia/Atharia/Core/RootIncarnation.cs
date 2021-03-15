@@ -19,6 +19,8 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<DoomedUCIncarnation>> incarnationsDoomedUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<TemporaryCloneImpulseIncarnation>> incarnationsTemporaryCloneImpulse;
   public readonly SortedDictionary<int, VersionAndIncarnation<TemporaryCloneAICapabilityUCIncarnation>> incarnationsTemporaryCloneAICapabilityUC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<DeathTriggerUCIncarnation>> incarnationsDeathTriggerUC;
+  public readonly SortedDictionary<int, VersionAndIncarnation<BequeathUCIncarnation>> incarnationsBequeathUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<SummonImpulseIncarnation>> incarnationsSummonImpulse;
   public readonly SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCIncarnation>> incarnationsSummonAICapabilityUC;
   public readonly SortedDictionary<int, VersionAndIncarnation<SorcerousUCIncarnation>> incarnationsSorcerousUC;
@@ -209,6 +211,8 @@ public class RootIncarnation {
   public readonly SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>> incarnationsEmberDeepLevelLinkerTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<IncendianFallsLevelLinkerTTCMutSetIncarnation>> incarnationsIncendianFallsLevelLinkerTTCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<RavaArcanaLevelLinkerTTCMutSetIncarnation>> incarnationsRavaArcanaLevelLinkerTTCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<DeathTriggerUCMutSetIncarnation>> incarnationsDeathTriggerUCMutSet;
+  public readonly SortedDictionary<int, VersionAndIncarnation<BequeathUCMutSetIncarnation>> incarnationsBequeathUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<TutorialDefyCounterUCMutSetIncarnation>> incarnationsTutorialDefyCounterUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<LightningChargingUCMutSetIncarnation>> incarnationsLightningChargingUCMutSet;
   public readonly SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>> incarnationsWanderAICapabilityUCMutSet;
@@ -259,6 +263,8 @@ public class RootIncarnation {
     this.incarnationsDoomedUC = new SortedDictionary<int, VersionAndIncarnation<DoomedUCIncarnation>>();
     this.incarnationsTemporaryCloneImpulse = new SortedDictionary<int, VersionAndIncarnation<TemporaryCloneImpulseIncarnation>>();
     this.incarnationsTemporaryCloneAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<TemporaryCloneAICapabilityUCIncarnation>>();
+    this.incarnationsDeathTriggerUC = new SortedDictionary<int, VersionAndIncarnation<DeathTriggerUCIncarnation>>();
+    this.incarnationsBequeathUC = new SortedDictionary<int, VersionAndIncarnation<BequeathUCIncarnation>>();
     this.incarnationsSummonImpulse = new SortedDictionary<int, VersionAndIncarnation<SummonImpulseIncarnation>>();
     this.incarnationsSummonAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCIncarnation>>();
     this.incarnationsSorcerousUC = new SortedDictionary<int, VersionAndIncarnation<SorcerousUCIncarnation>>();
@@ -449,6 +455,8 @@ public class RootIncarnation {
     this.incarnationsEmberDeepLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>>();
     this.incarnationsIncendianFallsLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<IncendianFallsLevelLinkerTTCMutSetIncarnation>>();
     this.incarnationsRavaArcanaLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<RavaArcanaLevelLinkerTTCMutSetIncarnation>>();
+    this.incarnationsDeathTriggerUCMutSet = new SortedDictionary<int, VersionAndIncarnation<DeathTriggerUCMutSetIncarnation>>();
+    this.incarnationsBequeathUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BequeathUCMutSetIncarnation>>();
     this.incarnationsTutorialDefyCounterUCMutSet = new SortedDictionary<int, VersionAndIncarnation<TutorialDefyCounterUCMutSetIncarnation>>();
     this.incarnationsLightningChargingUCMutSet = new SortedDictionary<int, VersionAndIncarnation<LightningChargingUCMutSetIncarnation>>();
     this.incarnationsWanderAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>>();
@@ -504,6 +512,8 @@ public class RootIncarnation {
     this.incarnationsDoomedUC = new SortedDictionary<int, VersionAndIncarnation<DoomedUCIncarnation>>(that.incarnationsDoomedUC);
     this.incarnationsTemporaryCloneImpulse = new SortedDictionary<int, VersionAndIncarnation<TemporaryCloneImpulseIncarnation>>(that.incarnationsTemporaryCloneImpulse);
     this.incarnationsTemporaryCloneAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<TemporaryCloneAICapabilityUCIncarnation>>(that.incarnationsTemporaryCloneAICapabilityUC);
+    this.incarnationsDeathTriggerUC = new SortedDictionary<int, VersionAndIncarnation<DeathTriggerUCIncarnation>>(that.incarnationsDeathTriggerUC);
+    this.incarnationsBequeathUC = new SortedDictionary<int, VersionAndIncarnation<BequeathUCIncarnation>>(that.incarnationsBequeathUC);
     this.incarnationsSummonImpulse = new SortedDictionary<int, VersionAndIncarnation<SummonImpulseIncarnation>>(that.incarnationsSummonImpulse);
     this.incarnationsSummonAICapabilityUC = new SortedDictionary<int, VersionAndIncarnation<SummonAICapabilityUCIncarnation>>(that.incarnationsSummonAICapabilityUC);
     this.incarnationsSorcerousUC = new SortedDictionary<int, VersionAndIncarnation<SorcerousUCIncarnation>>(that.incarnationsSorcerousUC);
@@ -694,6 +704,8 @@ public class RootIncarnation {
     this.incarnationsEmberDeepLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<EmberDeepLevelLinkerTTCMutSetIncarnation>>(that.incarnationsEmberDeepLevelLinkerTTCMutSet);
     this.incarnationsIncendianFallsLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<IncendianFallsLevelLinkerTTCMutSetIncarnation>>(that.incarnationsIncendianFallsLevelLinkerTTCMutSet);
     this.incarnationsRavaArcanaLevelLinkerTTCMutSet = new SortedDictionary<int, VersionAndIncarnation<RavaArcanaLevelLinkerTTCMutSetIncarnation>>(that.incarnationsRavaArcanaLevelLinkerTTCMutSet);
+    this.incarnationsDeathTriggerUCMutSet = new SortedDictionary<int, VersionAndIncarnation<DeathTriggerUCMutSetIncarnation>>(that.incarnationsDeathTriggerUCMutSet);
+    this.incarnationsBequeathUCMutSet = new SortedDictionary<int, VersionAndIncarnation<BequeathUCMutSetIncarnation>>(that.incarnationsBequeathUCMutSet);
     this.incarnationsTutorialDefyCounterUCMutSet = new SortedDictionary<int, VersionAndIncarnation<TutorialDefyCounterUCMutSetIncarnation>>(that.incarnationsTutorialDefyCounterUCMutSet);
     this.incarnationsLightningChargingUCMutSet = new SortedDictionary<int, VersionAndIncarnation<LightningChargingUCMutSetIncarnation>>(that.incarnationsLightningChargingUCMutSet);
     this.incarnationsWanderAICapabilityUCMutSet = new SortedDictionary<int, VersionAndIncarnation<WanderAICapabilityUCMutSetIncarnation>>(that.incarnationsWanderAICapabilityUCMutSet);

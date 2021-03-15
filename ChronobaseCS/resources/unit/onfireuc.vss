@@ -2,7 +2,7 @@
 mut struct OnFireUC {
   OnFireUC isa IPreActingUC;
 
-  turnsRemaining: Int;
+  var turnsRemaining: Int;
 
   fn Destruct(this: OnFireUC overrides IDestructible): Void {
     OnFireUCExtensions.Destruct

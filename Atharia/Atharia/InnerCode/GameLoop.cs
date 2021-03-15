@@ -101,7 +101,7 @@ namespace IncendianFalls {
           bool playerDying = nextUnit.NullableIs(game.player);
 
           foreach (var deathPreactor in nextUnit.components.GetAllIDeathPreReactor()) {
-            deathPreactor.BeforeDeath(game, superstate, nextUnit);
+            deathPreactor.BeforeDeath(context, game, superstate, nextUnit);
           }
 
           if (superstate.levelSuperstate.LocationContainsUnit(nextUnit.location)) {

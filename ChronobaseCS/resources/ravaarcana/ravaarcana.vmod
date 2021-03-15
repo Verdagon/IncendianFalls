@@ -71,6 +71,8 @@ unit/stats/sightrange.vss
 unit/stats/offense.vss
 unit/stats/sorcerous.vss
 unit/summon.vss
+unit/bequeath.vss
+unit/deathtrigger.vss
 unit/temporaryclone.vss
 unit/doomed.vss
 unit/lightningcharge.vss

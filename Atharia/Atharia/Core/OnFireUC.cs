@@ -52,6 +52,7 @@ public class OnFireUC {
   }
          public int turnsRemaining {
     get { return incarnation.turnsRemaining; }
+    set { root.EffectOnFireUCSetTurnsRemaining(id, value); }
   }
 }
 }

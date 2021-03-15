@@ -85,6 +85,7 @@ namespace Atharia.Model {
 
     public static Atharia.Model.Void BeforeDeath(
         KamikazeAICapabilityUC self,
+        IncendianFalls.SSContext context,
         Game game,
         Superstate superstate,
         Unit unit) {

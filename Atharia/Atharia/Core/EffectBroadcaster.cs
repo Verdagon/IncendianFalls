@@ -43,6 +43,12 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly SortedDictionary<int, List<ITemporaryCloneAICapabilityUCEffectObserver>> observersForTemporaryCloneAICapabilityUC =
       new SortedDictionary<int, List<ITemporaryCloneAICapabilityUCEffectObserver>>();
 
+  readonly SortedDictionary<int, List<IDeathTriggerUCEffectObserver>> observersForDeathTriggerUC =
+      new SortedDictionary<int, List<IDeathTriggerUCEffectObserver>>();
+
+  readonly SortedDictionary<int, List<IBequeathUCEffectObserver>> observersForBequeathUC =
+      new SortedDictionary<int, List<IBequeathUCEffectObserver>>();
+
   readonly SortedDictionary<int, List<ISummonImpulseEffectObserver>> observersForSummonImpulse =
       new SortedDictionary<int, List<ISummonImpulseEffectObserver>>();
 
@@ -613,6 +619,12 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly Dictionary<int, List<IRavaArcanaLevelLinkerTTCMutSetEffectObserver>> observersForRavaArcanaLevelLinkerTTCMutSet =
       new Dictionary<int, List<IRavaArcanaLevelLinkerTTCMutSetEffectObserver>>();
 
+  readonly Dictionary<int, List<IDeathTriggerUCMutSetEffectObserver>> observersForDeathTriggerUCMutSet =
+      new Dictionary<int, List<IDeathTriggerUCMutSetEffectObserver>>();
+
+  readonly Dictionary<int, List<IBequeathUCMutSetEffectObserver>> observersForBequeathUCMutSet =
+      new Dictionary<int, List<IBequeathUCMutSetEffectObserver>>();
+
   readonly Dictionary<int, List<ITutorialDefyCounterUCMutSetEffectObserver>> observersForTutorialDefyCounterUCMutSet =
       new Dictionary<int, List<ITutorialDefyCounterUCMutSetEffectObserver>>();
 
@@ -1033,6 +1045,62 @@ public class EffectBroadcaster : IEffectVisitor {
       list.Remove(observer);
       if (list.Count == 0) {
         observersForTemporaryCloneAICapabilityUC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitDeathTriggerUCEffect(IDeathTriggerUCEffect effect) {
+    if (observersForDeathTriggerUC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IDeathTriggerUCEffectObserver>(observers)) {
+        observer.OnDeathTriggerUCEffect(effect);
+      }
+    }
+  }
+  public void AddDeathTriggerUCObserver(int id, IDeathTriggerUCEffectObserver observer) {
+    List<IDeathTriggerUCEffectObserver> obsies;
+    if (!observersForDeathTriggerUC.TryGetValue(id, out obsies)) {
+      obsies = new List<IDeathTriggerUCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForDeathTriggerUC[id] = obsies;
+  }
+
+  public void RemoveDeathTriggerUCObserver(int id, IDeathTriggerUCEffectObserver observer) {
+    if (observersForDeathTriggerUC.ContainsKey(id)) {
+      var list = observersForDeathTriggerUC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForDeathTriggerUC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitBequeathUCEffect(IBequeathUCEffect effect) {
+    if (observersForBequeathUC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IBequeathUCEffectObserver>(observers)) {
+        observer.OnBequeathUCEffect(effect);
+      }
+    }
+  }
+  public void AddBequeathUCObserver(int id, IBequeathUCEffectObserver observer) {
+    List<IBequeathUCEffectObserver> obsies;
+    if (!observersForBequeathUC.TryGetValue(id, out obsies)) {
+      obsies = new List<IBequeathUCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForBequeathUC[id] = obsies;
+  }
+
+  public void RemoveBequeathUCObserver(int id, IBequeathUCEffectObserver observer) {
+    if (observersForBequeathUC.ContainsKey(id)) {
+      var list = observersForBequeathUC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForBequeathUC.Remove(id);
       }
     } else {
       throw new Exception("Couldnt find!");
@@ -6274,6 +6342,60 @@ public class EffectBroadcaster : IEffectVisitor {
         list.Remove(observer);
         if (list.Count == 0) {
           observersForRavaArcanaLevelLinkerTTCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitDeathTriggerUCMutSetEffect(IDeathTriggerUCMutSetEffect effect) {
+      if (observersForDeathTriggerUCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IDeathTriggerUCMutSetEffectObserver>(observers)) {
+          observer.OnDeathTriggerUCMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddDeathTriggerUCMutSetObserver(int id, IDeathTriggerUCMutSetEffectObserver observer) {
+      List<IDeathTriggerUCMutSetEffectObserver> obsies;
+      if (!observersForDeathTriggerUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IDeathTriggerUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForDeathTriggerUCMutSet[id] = obsies;
+    }
+    public void RemoveDeathTriggerUCMutSetObserver(int id, IDeathTriggerUCMutSetEffectObserver observer) {
+      if (observersForDeathTriggerUCMutSet.ContainsKey(id)) {
+        var list = observersForDeathTriggerUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForDeathTriggerUCMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitBequeathUCMutSetEffect(IBequeathUCMutSetEffect effect) {
+      if (observersForBequeathUCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IBequeathUCMutSetEffectObserver>(observers)) {
+          observer.OnBequeathUCMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddBequeathUCMutSetObserver(int id, IBequeathUCMutSetEffectObserver observer) {
+      List<IBequeathUCMutSetEffectObserver> obsies;
+      if (!observersForBequeathUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IBequeathUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForBequeathUCMutSet[id] = obsies;
+    }
+    public void RemoveBequeathUCMutSetObserver(int id, IBequeathUCMutSetEffectObserver observer) {
+      if (observersForBequeathUCMutSet.ContainsKey(id)) {
+        var list = observersForBequeathUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForBequeathUCMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");

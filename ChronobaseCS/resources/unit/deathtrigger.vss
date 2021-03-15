@@ -1,0 +1,19 @@
+
+mut struct DeathTriggerUC {
+  DeathTriggerUC isa IDeathPreReactor;
+
+  triggerName: Str;
+
+  fn Destruct(this: DeathTriggerUC overrides IDestructible): Void {
+    DeathTriggerUCExtensions.Destruct
+  }
+  fn BeforeDeath(
+      this: DeathTriggerUC overrides IDeathPreReactor,
+      context: $IncendianFalls.SSContext,
+      game: Game,
+      superstate: $Superstate,
+      unit: Unit)
+  : Void {
+    DeathTriggerUCExtensions.BeforeDeath
+  }
+}

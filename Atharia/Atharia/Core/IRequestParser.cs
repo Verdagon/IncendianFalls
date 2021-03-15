@@ -25,6 +25,10 @@ public static class IRequestParser {
         return new MireRequestAsIRequest(MireRequest.Parse(source));
       case "FireBombRequest":
         return new FireBombRequestAsIRequest(FireBombRequest.Parse(source));
+      case "ExplosionRequest":
+        return new ExplosionRequestAsIRequest(ExplosionRequest.Parse(source));
+      case "BlazeRequest":
+        return new BlazeRequestAsIRequest(BlazeRequest.Parse(source));
       case "FireRequest":
         return new FireRequestAsIRequest(FireRequest.Parse(source));
       case "AttackRequest":

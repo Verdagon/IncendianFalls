@@ -21,6 +21,8 @@ namespace Domino {
     public const int INTERACT_CAPABILITY_ID = 6;
     public const int DEFEND_CAPABILITY_ID = 7;
     public const int COUNTER_CAPABILITY_ID = 8;
+    public const int BLAZE_CAPABILITY_ID = 9;
+    public const int EXPLOSION_CAPABILITY_ID = 10;
 
     public event OnCapabilityButtonClicked CapabilityButtonClicked;
 
@@ -39,7 +41,7 @@ namespace Domino {
       textOverlayObjectIds = new List<int>();
 
       int position = 0;
-      bool canChronomancy = true;
+      bool canChronomancy = false;
       if (canChronomancy) {
         AddButton(overlayPaneler.screenGW, position++, TIME_ANCHOR_MOVE_CAPABILITY_ID, "k", "(A) Time Anchor: Place a time anchor, which you can later Rewind to.");
         AddButton(overlayPaneler.screenGW, position++, REVERT_CAPABILITY_ID, "1", "(R) Rewind Time to your last Time Anchor. MP cost: 2+turns/4.");
@@ -60,11 +62,19 @@ namespace Domino {
       if (canFire) {
         AddButton(overlayPaneler.screenGW, position++, FIRE_CAPABILITY_ID, "r", "(F) Fire: Cast fireball for " + IncendianFalls.Actions.FIRE_COST + "mp for " + IncendianFalls.Actions.FIRE_DAMAGE + " damage.");
       }
-      bool canFireBomb = true;
+      bool canFireBomb = false;
       if (canFireBomb) {
         AddButton(overlayPaneler.screenGW, position++, FIRE_BOMB_CAPABILITY_ID, "r", "(F) Fire Bomb: Places a bomb for " + IncendianFalls.Actions.FIRE_BOMB_COST + "mp which will explode after a couple turns for " + IncendianFalls.Actions.FIRE_BOMB_DAMAGE + " damage.");
       }
-      bool canMire = true;
+      bool canBlaze = true;
+      if (canBlaze) {
+        AddButton(overlayPaneler.screenGW, position++, BLAZE_CAPABILITY_ID, "w", "(B) Blaze: Do " + IncendianFalls.Actions.BLAZE_DAMAGE + " per turn for " + IncendianFalls.Actions.BLAZE_DURATION + " turns for " + IncendianFalls.Actions.FIRE_BOMB_COST + "mp.");
+      }
+      bool canExplosion = true;
+      if (canExplosion) {
+        AddButton(overlayPaneler.screenGW, position++, EXPLOSION_CAPABILITY_ID, "w", "(X) Explosion: Do " + IncendianFalls.Actions.EXPLOSION_DAMAGE + " to an 8-space area for " + IncendianFalls.Actions.FIRE_BOMB_COST + "mp.");
+      }
+      bool canMire = false;
       if (canMire) {
         AddButton(overlayPaneler.screenGW, position++, MIRE_CAPABILITY_ID, "f", "(S) Slow: Freeze enemy for one turn. Cost " + IncendianFalls.Actions.MIRE_COST + "mp. Stacks by half each time.");
       }

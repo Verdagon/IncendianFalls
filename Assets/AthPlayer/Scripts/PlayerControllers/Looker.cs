@@ -194,7 +194,7 @@ namespace AthPlayer {
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 "Defying"));
-        } else if (detail is MiredUCAsIUnitComponent mired) {
+        } else if (detail is MiredUCAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
@@ -205,6 +205,17 @@ namespace AthPlayer {
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 "Mired"));
+        } else if (detail is OnFireUCAsIUnitComponent) {
+          symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                  new SymbolDescription(
+                      "r",
+                      Vector4Animation.ORANGE,
+                      0,
+                      1,
+                      OutlineMode.NoOutline,
+                      Vector4Animation.Color(0, 0, 0)),
+                  "On fire"));
         } else if (detail is WanderAICapabilityUCAsIUnitComponent) {
         } else if (detail is KamikazeAICapabilityUCAsIUnitComponent) {
         } else if (detail is GuardAICapabilityUCAsIUnitComponent) {
@@ -242,7 +253,8 @@ namespace AthPlayer {
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
                 "Mire Staff"));
-        } else if (detail is BlastRodAsIUnitComponent) {
+        } else if (detail is BlastRodAsIUnitComponent ||
+            detail is BlazeRodAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
                 new SymbolDescription(
@@ -252,7 +264,18 @@ namespace AthPlayer {
                     1,
                     OutlineMode.NoOutline,
                     Vector4Animation.Color(0, 0, 0)),
-                "Fire Rod"));
+                "Blaze Rod"));
+        } else if (detail is ExplosionRodAsIUnitComponent) {
+          symbolsAndLabels.Add(
+              new KeyValuePair<SymbolDescription, string>(
+                  new SymbolDescription(
+                      "w",
+                      Vector4Animation.Color(1, 1, 1, 1.5f),
+                      0,
+                      1,
+                      OutlineMode.NoOutline,
+                      Vector4Animation.Color(0, 0, 0)),
+                  "Explosion Staff"));
         } else if (detail is ArmorAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(
@@ -288,8 +311,10 @@ namespace AthPlayer {
                 "Ring of Speed"));
         } else if (detail is TemporaryCloneAICapabilityUCAsIUnitComponent) {
         } else if (detail is EvolvifyAICapabilityUCAsIUnitComponent) {
+        } else if (detail is BequeathUCAsIUnitComponent) {
         } else if (detail is TutorialDefyCounterUCAsIUnitComponent) {
         } else if (detail is LightningChargingUCAsIUnitComponent) {
+        } else if (detail is DeathTriggerUCAsIUnitComponent) {
         } else if (detail is LightningChargedUCAsIUnitComponent) {
           symbolsAndLabels.Add(
               new KeyValuePair<SymbolDescription, string>(

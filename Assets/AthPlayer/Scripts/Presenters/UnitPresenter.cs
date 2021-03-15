@@ -190,7 +190,9 @@ namespace AthPlayer {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is DefyingUCAsIUnitComponent defying) {
         unitView.SetDescription(GetUnitViewDescription(unit));
-      } else if (component is MiredUCAsIUnitComponent mired) {
+      } else if (component is MiredUCAsIUnitComponent) {
+        unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is OnFireUCAsIUnitComponent) {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is CounteringUCAsIUnitComponent countering) {
         unitView.SetDescription(GetUnitViewDescription(unit));
@@ -221,6 +223,7 @@ namespace AthPlayer {
       } else if (component is BlazeRodAsIUnitComponent) {
       } else if (component is ExplosionRodAsIUnitComponent) {
       } else if (component is BlastRodAsIUnitComponent) {
+      } else if (component is DeathTriggerUCAsIUnitComponent) {
         //unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is ArmorAsIUnitComponent) {
         //unitView.SetDescription(GetUnitViewDescription(unit));
@@ -241,6 +244,8 @@ namespace AthPlayer {
       } else if (component is DefyingUCAsIUnitComponent defying) {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is MiredUCAsIUnitComponent mired) {
+        unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is OnFireUCAsIUnitComponent) {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is CounteringUCAsIUnitComponent countering) {
         unitView.SetDescription(GetUnitViewDescription(unit));
@@ -269,6 +274,7 @@ namespace AthPlayer {
       } else if (component is HealthPotionAsIUnitComponent) {
       } else if (component is SlowRodAsIUnitComponent) {
       } else if (component is BlastRodAsIUnitComponent) {
+      } else if (component is DeathTriggerUCAsIUnitComponent) {
         //unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is ArmorAsIUnitComponent) {
         //unitView.SetDescription(GetUnitViewDescription(unit));
@@ -324,6 +330,20 @@ namespace AthPlayer {
                           0,
                           1,
                           OutlineMode.WithBackOutline),
+                      true,
+                      Vector4Animation.GLOWY_WHITE)));
+        } else if (detail is OnFireUCAsIUnitComponent onfire) {
+          detailSymbols.Add(
+              new KeyValuePair<int, ExtrudedSymbolDescription>(
+                  onfire.id,
+                  new ExtrudedSymbolDescription(
+                      RenderPriority.SYMBOL,
+                      new SymbolDescription(
+                          "r",
+                          Vector4Animation.ORANGE,
+                          0,
+                          1,
+                          OutlineMode.NoOutline),
                       true,
                       Vector4Animation.GLOWY_WHITE)));
         } else if (detail is CounteringUCAsIUnitComponent countering) {
@@ -471,6 +491,7 @@ namespace AthPlayer {
           //            Vector4Animation.GLOWY_WHITE)));
         } else if (detail is SlowRodAsIUnitComponent) {
         } else if (detail is BlastRodAsIUnitComponent) {
+        } else if (detail is DeathTriggerUCAsIUnitComponent) {
         } else if (detail is BlazeRodAsIUnitComponent) {
         } else if (detail is ExplosionRodAsIUnitComponent) {
           //detailSymbols.Add(
@@ -490,6 +511,7 @@ namespace AthPlayer {
         } else if (detail is HealthPotionAsIUnitComponent) {
         } else if (detail is ManaPotionAsIUnitComponent) {
         } else if (detail is EvolvifyAICapabilityUCAsIUnitComponent) {
+        } else if (detail is BequeathUCAsIUnitComponent) {
         } else {
           Debug.LogError("Unknown detail type: " + detail);
         }
@@ -714,11 +736,25 @@ namespace AthPlayer {
           "Viviant",
           new UnitDescription(
               unit.id,
-              new DominoDescription(true, Vector4Animation.Color(0.7f, 0.3f, 0)),
+              new DominoDescription(false, Vector4Animation.Color(.4f, 0f, .4f)),
               new ExtrudedSymbolDescription(
                   RenderPriority.SYMBOL,
                   new SymbolDescription(
                       "tree1",
+                      Vector4Animation.Color(1f,1f,1f, 1f), 0, 1, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)),
+              detailSymbols,
+              hpRatio,
+              mpRatio));
+      detailsByClassId.Add(
+          "Greater Viviarch",
+          new UnitDescription(
+              unit.id,
+              new DominoDescription(true, Vector4Animation.Color(0.6f, 0f, .4f)),
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "tree3",
                       Vector4Animation.Color(1f,1f,1f, 1f), 0, 1, OutlineMode.WithBackOutline),
                   false, Vector4Animation.Color(0, 0, 0)),
               detailSymbols,
@@ -963,7 +999,9 @@ namespace AthPlayer {
                   Vector4Animation.Color(0, 0, 1f, 1f)));
           onAnimation?.Invoke(runeEndTime);
         }
-      } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent ufbe) {
+      } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent ||
+          effect.newValue is UnitBlazedEventAsIUnitEvent ||
+          effect.newValue is UnitExplosionedEventAsIUnitEvent) {
         runeEndTime =
           unitView.ShowRune(
               new ExtrudedSymbolDescription(
@@ -1075,7 +1113,9 @@ namespace AthPlayer {
         } else if (effect.newValue is UnitFireEventAsIUnitEvent f) {
           // We show a rune for both attacker and victim, so no need to check that.
           staller(unitPresenter.runeEndTime, "unit rune");
-        } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent) {
+        } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent ||
+            effect.newValue is UnitBlazedEventAsIUnitEvent ||
+            effect.newValue is UnitExplosionedEventAsIUnitEvent) {
           staller(unitPresenter.runeEndTime, "unit rune");
         }
       }

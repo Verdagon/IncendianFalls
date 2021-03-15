@@ -1,5 +1,6 @@
 ﻿using System;
 using Atharia.Model;
+using IncendianFalls;
 
 namespace Atharia.Model {
   public static class OnFireUCExtensions {
@@ -13,9 +14,15 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
-      Asserts.Assert(false);
-      unit.components.Remove(detail.AsIUnitComponent());
-      detail.Destruct();
+      Actions.EffectBlaze(game, superstate, unit.location);
+      
+      if (detail.turnsRemaining > 0) {
+        detail.turnsRemaining -= 1;
+      } else {
+        unit.components.Remove(detail.AsIUnitComponent());
+        detail.Destruct();
+      }
+      
       return new Atharia.Model.Void();
     }
   }
