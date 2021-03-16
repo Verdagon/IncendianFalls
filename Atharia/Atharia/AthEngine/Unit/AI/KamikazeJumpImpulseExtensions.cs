@@ -31,7 +31,7 @@ namespace Atharia.Model {
 
       Actions.UnleashBide(game, superstate, unit, targetLocations);
 
-      Actions.Step(game, superstate, unit, self.jumpTarget, true, false);
+      Actions.Teleport(game, superstate, unit, self.jumpTarget);
       // We told step to take no time. Let's take double here.
       unit.nextActionTime = unit.nextActionTime + unit.CalculateMovementTimeCost(1200);
 

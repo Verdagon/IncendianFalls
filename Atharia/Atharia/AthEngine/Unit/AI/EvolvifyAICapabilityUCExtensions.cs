@@ -24,19 +24,14 @@ namespace Atharia.Model {
       }
 
       // Check if we can see them.
-      if (!Sight.CanSee(game, unit, nearestEnemy.location, out List<Location> sightPath)) {
+      if (!superstate.levelSuperstate.CanSee(unit.location, nearestEnemy.location)) {
         // Can't see the enemy. Don't update directive.
         return game.root.EffectNoImpulseCreate().AsIImpulse();
       }
       
       // Find a location that we ourselves can move to.
       var steppableLocs = game.level.terrain.GetAdjacentExistingLocations(unit.location, false);
-      SetUtils.RetainAll(steppableLocs, Actions.GetReachableLocations(game.level, unit.location));
-      foreach (var loc in new SortedSet<Location>(steppableLocs)) {
-        if (!superstate.levelSuperstate.IsLocationWalkable(loc, true)) {
-          steppableLocs.Remove(loc);
-        }
-      }
+      SetUtils.RetainAll(steppableLocs, superstate.levelSuperstate.GetHoppableLocs(unit.location, true));
       if (steppableLocs.Count == 0) {
         return game.root.EffectNoImpulseCreate().AsIImpulse();
       }

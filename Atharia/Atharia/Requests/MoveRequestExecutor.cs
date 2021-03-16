@@ -3,53 +3,17 @@ using System.Collections.Generic;
 using Atharia.Model;
 
 namespace IncendianFalls {
-  public class MoveExecutor {
-    Superstate superstate;
-    Game game;
-    Location destination;
-
-    public MoveExecutor(
-        Superstate superstate,
-        Game game,
-        Location destination) {
-      this.superstate = superstate;
-      this.game = game;
-      this.destination = destination;
-    }
-
-    public void Execute() {
-      Actions.Step(game, superstate, game.player, destination, false, true);
-      //GameLoop.NoteUnitActed(game, game.player);
-    }
-  }
-
   public class MoveRequestExecutor {
-    //public static void Continue(
-    //    SSContext context,
-    //    Game game,
-    //    Superstate superstate) {
-    //  var steps = superstate.navigatingState.path;
-    //  Asserts.Assert(steps.Count > 0, "No steps!");
-    //  var nextStep = steps[0];
-    //  steps.RemoveAt(0);
-    //  Asserts.Assert(Actions.CanStep(game, superstate, game.player, nextStep), "Can't step!");
-    //  Move(context, game, superstate, nextStep);
-    //  if (steps.Count == 0) {
-    //    superstate.navigatingState = null;
-    //  }
-    //}
-
-
     public static void Move(
         SSContext context,
         Game game,
         Superstate superstate,
         Location destination) {
-      Asserts.Assert(Actions.CanStep(game, superstate, game.player, destination));
+      Asserts.Assert(superstate.levelSuperstate.CanHop(game.player.location, destination, true));
 
       superstate.previousTurns.Add(context.root.Snapshot());
       superstate.requests.Add(new MoveRequest(game.id, destination).AsIRequest());
-      Actions.Step(game, superstate, game.player, destination, false, true);
+      Actions.Hop(game, superstate, game.player, destination, true);
 
       //GameLoop.ContinueAfterUnitAction(
       //  context,
@@ -84,7 +48,7 @@ namespace IncendianFalls {
         return "Already there!";
       }
 
-      if (Actions.CanStep(game, superstate, game.player, destination)) {
+      if (superstate.levelSuperstate.CanHop(game.player.location, destination, true)) {
         Move(context, game, superstate, destination);
       } else {
         return "Too far away!";

@@ -29,7 +29,7 @@ namespace Atharia.Model {
 
         // Enemy is not next to subject.
         // Check if we can see them.
-        if (!Sight.CanSee(game, unit, nearestEnemy.location, out List<Location> sightPath)) {
+        if (!superstate.levelSuperstate.CanSee(unit.location, nearestEnemy.location)) {
           // Can't see the enemy. Don't update directive.
           return game.root.EffectNoImpulseCreate().AsIImpulse();
         }
@@ -42,11 +42,11 @@ namespace Atharia.Model {
         // We have targets, lets go there.
 
         Location locationToJumpTo = null;
-        if (Actions.CanTeleportTo(game.level.terrain, superstate, self.targetLocationCenter)) {
+        if (Actions.CanTeleportTo(superstate.levelSuperstate, game.level.terrain, self.targetLocationCenter, true)) {
           locationToJumpTo = self.targetLocationCenter;
         } else {
           foreach (var location in self.targetByLocation.Keys) {
-            if (Actions.CanTeleportTo(game.level.terrain, superstate, location)) {
+            if (Actions.CanTeleportTo(superstate.levelSuperstate, game.level.terrain, location, true)) {
               locationToJumpTo = location;
             }
           }

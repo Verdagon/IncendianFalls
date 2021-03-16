@@ -19,7 +19,7 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
-      Actions.Step(game, superstate, unit, obj.stepLocation, false, true);
+      Actions.Hop(game, superstate, unit, obj.stepLocation, true);
       return new Atharia.Model.Void();
     }
   }

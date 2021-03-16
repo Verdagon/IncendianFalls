@@ -92,23 +92,23 @@ namespace Atharia.Model {
         game.actionNum++;
         game.AddEvent(new SetGameSpeedEvent(40).AsIGameEvent());
 
-        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo1, true, false);
+        Actions.Sttep(game, superstate, ravashrike, ravashrikeHopTo1, false);
         Actions.Fire(game, superstate, chronomancer, ravashrike);
         ravashrike.WaitFor();
         chronomancer.WaitFor();
 
-        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo2, true, false);
+        Actions.Sttep(game, superstate, ravashrike, ravashrikeHopTo2, false);
         Actions.Fire(game, superstate, chronomancer, ravashrike);
         ravashrike.WaitFor();
         chronomancer.WaitFor();
 
-        Actions.Step(game, superstate, ravashrike, ravashrikeHopTo3, true, false);
+        Actions.Sttep(game, superstate, ravashrike, ravashrikeHopTo3, false);
         Actions.Fire(game, superstate, chronomancer, ravashrike);
         ravashrike.WaitFor();
         chronomancer.WaitFor();
 
         Actions.Bump(game, superstate, ravashrike, chronomancer, 1300, true);
-        Actions.Step(game, superstate, chronomancer, retreatTo, true, false);
+        Actions.Sttep(game, superstate, chronomancer, retreatTo, false);
         chronomancer.WaitFor();
         ravashrike.WaitFor();
 

@@ -28,26 +28,19 @@ namespace Atharia.Model {
       }
 
       // Check if we can see them.
-      if (!Sight.CanSee(game, unit, nearestEnemy.location, out List<Location> sightPath)) {
+      if (!superstate.levelSuperstate.CanSee(unit.location, nearestEnemy.location)) {
         // Can't see the enemy. Don't update directive.
         return game.root.EffectNoImpulseCreate().AsIImpulse();
       }
 
 
-      var adjacentLocations =
-          game.level.terrain.GetAdjacentExistingLocations(
-              unit.location, game.level.terrain.considerCornersAdjacent);
-      var adjacentWalkableLocations = new SortedSet<Location>();
-      foreach (var adjacentLocation in adjacentLocations) {
-        if (Actions.CanStep(game, superstate, unit, adjacentLocation)) {
-          adjacentWalkableLocations.Add(adjacentLocation);
-        }
-      }
-      if (adjacentWalkableLocations.Count == 0) {
+      var adjacentSteppableLocs =
+          superstate.levelSuperstate.GetHoppableLocs(unit.location, true);
+      if (adjacentSteppableLocs.Count == 0) {
         // Nowhere to summon, so don't.
         return obj.root.EffectNoImpulseCreate().AsIImpulse();
       }
-      var randomAdjacentWalkableLocation = SetUtils.GetRandom(game.rand.Next(), adjacentWalkableLocations);
+      var randomAdjacentWalkableLocation = SetUtils.GetRandom(game.rand.Next(), adjacentSteppableLocs);
 
       return obj.root.EffectTemporaryCloneImpulseCreate(900, obj.blueprintName, randomAdjacentWalkableLocation, unit.hp).AsIImpulse();
     }

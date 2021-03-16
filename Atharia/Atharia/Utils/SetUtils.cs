@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Atharia.Model;
 
 public class SetUtils {
@@ -62,5 +63,35 @@ public class SetUtils {
     foreach (var loc in addThese) {
       addTo.Add(loc);
     }
+  }
+  
+  public static SortedSet<T> Union<T>(IEnumerable<T> a, IEnumerable<T> b) {
+    var result = new SortedSet<T>();
+    foreach (var x in a) {
+      result.Add(x);
+    }
+    foreach (var x in b) {
+      result.Add(x);
+    }
+    return result;
+  }
+  public static SortedSet<T> Intersection<T>(SortedSet<T> a, SortedSet<T> b) {
+    var result = new SortedSet<T>();
+    var (smaller, larger) = a.Count < b.Count ? (a, b) : (b, a);
+    foreach (var x in smaller) {
+      if (larger.Contains(x)) {
+        result.Add(x);
+      }
+    }
+    return result;
+  }
+  public static SortedSet<T> Minus<T>(SortedSet<T> a, SortedSet<T> b) {
+    var result = new SortedSet<T>();
+    foreach (var x in a) {
+      if (!b.Contains(x)) {
+        result.Add(x);
+      }
+    }
+    return result;
   }
 }

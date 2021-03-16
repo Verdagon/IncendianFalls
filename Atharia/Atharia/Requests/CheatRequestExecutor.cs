@@ -65,7 +65,7 @@ namespace IncendianFalls {
           if (!superstate.levelSuperstate.IsLocationWalkable(end, true)) {
             return "Couldn't warp to end!";
           }
-          Actions.Step(game, superstate, game.player, end, true, false);
+          Actions.Teleport(game, superstate, game.player, end);
           break;
         case "poweroverwhelming":
           game.player.components.Add(

@@ -26,7 +26,7 @@ namespace IncendianFalls {
         return "Already there!";
       }
 
-      if (!Actions.CanStep(game, superstate, game.player, destination)) {
+      if (!superstate.levelSuperstate.CanHop(game.player.location, destination, true)) {
         return "Can't step there!";
       }
 
@@ -40,7 +40,7 @@ namespace IncendianFalls {
       // (Remember, the current turn hasn't yet been added to the turnsIncludingPresent list)
       superstate.anchorTurnIndices.Add(anchorTurnIndex);
 
-      Actions.Step(game, superstate, game.player, destination, false, true);
+      Actions.Hop(game, superstate, game.player, destination, true);
 
       var terrainTileAtOldLocation = game.level.terrain.tiles[oldLocation];
       terrainTileAtOldLocation.components.Add(

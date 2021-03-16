@@ -30,15 +30,19 @@ namespace Atharia.Model {
       // Remember, if we get here, we might still have an existing valid directive.
       // The below code is to just to update it if we have better information now.
 
+      game.root.logger.Info("zork Looking!");
+      
       Unit nearestEnemy = DetermineTarget.Determine(game, superstate, unit);
       if (!nearestEnemy.Exists()) {
+        game.root.logger.Info("zork no nearest enemy!");
         // There are no enemies. Don't update directive.
         return new Atharia.Model.Void();
       }
 
       // Enemy is not next to subject.
       // Check if we can see them.
-      if (!Sight.CanSee(game, unit, nearestEnemy.location, out List<Location> sightPath)) {
+      if (!superstate.levelSuperstate.CanSee(unit.location, nearestEnemy.location)) {
+        game.root.logger.Info("zork Cant see!");
         // Can't see the enemy. Don't update directive.
         return new Atharia.Model.Void();
       }
@@ -46,11 +50,15 @@ namespace Atharia.Model {
       var terrain = game.level.terrain;
       // Check if we can reach them.
 
-      List<Location> pathToNearestEnemy = Actions.GetPathTo(game, superstate, unit, nearestEnemy.location);
+      List<Location> pathToNearestEnemy =
+          superstate.levelSuperstate.FindPath(unit.location, nearestEnemy.location);
       if (pathToNearestEnemy.Count == 0) {
+        game.root.logger.Info("zork No path!");
         // Can't see the enemy. Don't update directive.
         return new Atharia.Model.Void();
       }
+      
+      game.root.logger.Info("zork WE RIDE!");
 
       if (obj.killDirective.Exists()) {
         obj.killDirective.Destruct();
@@ -83,7 +91,7 @@ namespace Atharia.Model {
         } else {
           // Not right next to us.
 
-          if (!Actions.CanStep(game, superstate, unit, directive.pathToLastSeenLocation[0])) {
+          if (!superstate.levelSuperstate.CanHop(unit.location, directive.pathToLastSeenLocation[0], true)) {
             // Am confused. Can't step that way. This might be because another unit
             // walked in front of us or something. Keep the same directive, but stall
             // by half a turn.
@@ -95,7 +103,7 @@ namespace Atharia.Model {
               if (location.Equals(directive.targetUnit.location)) {
                 continue;
               }
-              if (!Actions.CanTeleportTo(game.level.terrain, superstate, location)) {
+              if (!Actions.CanTeleportTo(superstate.levelSuperstate, game.level.terrain, location, true)) {
                 isClearPath = false;
                 break;
               }

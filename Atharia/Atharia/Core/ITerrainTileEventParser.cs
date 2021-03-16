@@ -11,14 +11,10 @@ public static class ITerrainTileEventParser {
     switch (nextThingPeek) {
       case "UnitUnleashBideEvent":
         return new UnitUnleashBideEventAsITerrainTileEvent(UnitUnleashBideEvent.Parse(source));
-      case "UnitExplosionedEvent":
-        return new UnitExplosionedEventAsITerrainTileEvent(UnitExplosionedEvent.Parse(source));
-      case "UnitBurningEvent":
-        return new UnitBurningEventAsITerrainTileEvent(UnitBurningEvent.Parse(source));
-      case "UnitBlazedEvent":
-        return new UnitBlazedEventAsITerrainTileEvent(UnitBlazedEvent.Parse(source));
-      case "UnitFireBombedEvent":
-        return new UnitFireBombedEventAsITerrainTileEvent(UnitFireBombedEvent.Parse(source));
+      case "TileExplodingEvent":
+        return new TileExplodingEventAsITerrainTileEvent(TileExplodingEvent.Parse(source));
+      case "TileBurningEvent":
+        return new TileBurningEventAsITerrainTileEvent(TileBurningEvent.Parse(source));
       default:
         throw new Exception("Unexpected: " + nextThingPeek);
     }

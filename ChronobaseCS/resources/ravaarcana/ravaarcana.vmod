@@ -47,6 +47,7 @@ terrain/firebomb.vss
 terrain/simplewalktrigger.vss
 terrain/terrain.vss
 terrain/terraintile.vss
+terrain/tileevent.vss
 terrain/timeanchorttc.vss
 terrain/warper.vss
 unit/attack.vss

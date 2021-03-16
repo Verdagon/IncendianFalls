@@ -99,28 +99,28 @@ namespace Domino {
     public void MoveUp(float deltaTime) {
       var newEndLookAtPosition =
           cameraEndLookAtPosition +
-                cameraObject.transform.up * deltaTime * cameraSpeedPerSecond;
+                Vector3.forward * deltaTime * cameraSpeedPerSecond;
       StartMovingCameraTo(newEndLookAtPosition, 50);
     }
 
     public void MoveDown(float deltaTime) {
       var newEndLookAtPosition =
           cameraEndLookAtPosition -
-                cameraObject.transform.up * deltaTime * cameraSpeedPerSecond;
+              Vector3.forward * deltaTime * cameraSpeedPerSecond;
       StartMovingCameraTo(newEndLookAtPosition, 50);
     }
 
     public void MoveLeft(float deltaTime) {
       var newEndLookAtPosition =
           cameraEndLookAtPosition -
-              cameraObject.transform.right * deltaTime * cameraSpeedPerSecond;
+              Vector3.right * deltaTime * cameraSpeedPerSecond;
       StartMovingCameraTo(newEndLookAtPosition, 50);
     }
 
     public void MoveRight(float deltaTime) {
       var newEndLookAtPosition =
           cameraEndLookAtPosition +
-              cameraObject.transform.right * deltaTime * cameraSpeedPerSecond;
+              Vector3.right * deltaTime * cameraSpeedPerSecond;
       StartMovingCameraTo(newEndLookAtPosition, 50);
     }
   }

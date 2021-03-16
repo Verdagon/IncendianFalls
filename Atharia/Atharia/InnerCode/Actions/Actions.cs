@@ -42,7 +42,7 @@ namespace IncendianFalls {
           }
         }
       }
-      Eventer.broadcastUnitUnleashBideEvent(game.root, game, attacker, victims, otherLocations);
+      Eventer.broadcastUnitUnleashBideEvent(game, attacker, victims, otherLocations);
 
       attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(900);
       game.actionNum++;
@@ -55,7 +55,7 @@ namespace IncendianFalls {
         Unit victim,
         int multiplierPercent,
         bool takeTime) {
-      Eventer.broadcastUnitAttackEvent(game.root, game, attacker, victim);
+      Eventer.broadcastUnitAttackEvent(game, attacker, victim);
       int initialDamage = 5 * multiplierPercent / 100;
       AttackInner(
           game,
@@ -115,7 +115,7 @@ namespace IncendianFalls {
       unit.components.Add(detail.AsIUnitComponent());
 
       unit.nextActionTime = unit.nextActionTime + unit.CalculateCombatTimeCost(600);
-      Eventer.broadcastUnitDefyingEvent(game.root, game, unit);
+      Eventer.broadcastUnitDefyingEvent(game, unit);
       game.actionNum++;
     }
 
@@ -141,7 +141,7 @@ namespace IncendianFalls {
 
       attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(600);
       victim.nextActionTime = victim.nextActionTime + delay;
-      Eventer.broadcastUnitMiredEvent(game.root, game, attacker, victim);
+      Eventer.broadcastUnitMiredEvent(game, attacker, victim);
       game.actionNum++;
     }
 
@@ -156,7 +156,7 @@ namespace IncendianFalls {
       sorcerous.mp = sorcerous.mp - 1;
 
       unit.nextActionTime = unit.nextActionTime + unit.CalculateCombatTimeCost(600);
-      Eventer.broadcastUnitCounteringEvent(game.root, game, unit);
+      Eventer.broadcastUnitCounteringEvent(game, unit);
       game.actionNum++;
     }
 
@@ -178,127 +178,232 @@ namespace IncendianFalls {
     }
 
     public static bool CanTeleportTo(
+        LevelSuperstate levelSuperstate,
         Terrain terrain,
-        Superstate superstate,
-        Location destination) {
-      if (!CanTeleportToNotCountingUnits(terrain, destination)) {
-        return false;
-      }
-      if (superstate.levelSuperstate.LocationContainsUnit(destination)) {
-        return false;
-      }
-      return true;
-    }
-
-    public static bool CanTeleportToNotCountingUnits(
-        Terrain terrain,
-        Location destination) {
+        Location destination,
+        bool checkUnitNotPresent) {
       if (!terrain.tiles.ContainsKey(destination)) {
         return false;
       }
       if (!terrain.tiles[destination].IsWalkable()) {
         return false;
       }
+      if (checkUnitNotPresent && levelSuperstate.LocationContainsUnit(destination)) {
+        return false;
+      }
       return true;
     }
 
-    public static SortedSet<Location> GetReachableLocations(Level level, Location source) {
+    // public static bool CanHopExpensive(
+    //     LevelSuperstate levelSuperstate,
+    //     Level level,
+    //     Location from,
+    //     Location to,
+    //     bool checkUnitNotPresent) {
+    //   return CanSttep(levelSuperstate, level, from, to, checkUnitNotPresent) ||
+    //       CanLeapExpensive(levelSuperstate, level, from, to, checkUnitNotPresent);
+    // }
+
+    public static bool CanSttep(
+        LevelSuperstate levelSuperstate, Level level, Location from, Location to, bool checkUnitNotPresent) {
+      if (!CanTeleportTo(levelSuperstate, level.terrain, to, checkUnitNotPresent)) {
+        return false;
+      }
+      if (!level.terrain.pattern.LocationsAreAdjacent(from, to, level.terrain.considerCornersAdjacent)) {
+        return false;
+      }
+      var fromTile = level.terrain.tiles[from];
+      var fromElevation = fromTile.elevation;
+      var toTile = level.terrain.tiles[to];
+      var toElevation = toTile.elevation;
+      var elevationFine = toElevation <= fromElevation + 1 && toElevation >= fromElevation - 2;
+      if (!elevationFine) {
+        return false;
+      }
+      return true;
+    }
+
+    // public static bool CanLeapExpensive(
+    //     LevelSuperstate levelSuperstate,
+    //     Level level,
+    //     Location source,
+    //     Location destination,
+    //     bool checkUnitNotPresent) {
+    //   if (!CanTeleportTo(levelSuperstate, level.terrain, destination, checkUnitNotPresent)) {
+    //     return false;
+    //   }
+    //   if (level.terrain.tiles[source].elevation != level.terrain.tiles[destination].elevation) {
+    //     // Can only leap to the same elevation
+    //     return false;
+    //   }
+    //   if (level.terrain.pattern.GetTileCenter(source).distance(level.terrain.pattern.GetTileCenter(destination)) > LEAP_DISTANCE) {
+    //     // If it's further away then LEAP_DISTANCE, then we certainly wont find a path (which might not even
+    //     // go in a bee-line!) to get there in under LEAP_DISTANCE.
+    //     return false;
+    //   }
+    //   var inLeapingRangeExplorer =
+    //       new AStarExplorer(
+    //           new SortedSet<Location> {source},
+    //           (to) => level.terrain.pattern.GetAdjacentLocations(to, level.terrain.considerCornersAdjacent),
+    //           (a, b, totalCost) => {
+    //             return totalCost <= LEAP_DISTANCE &&
+    //                 // Can't leap over tiles that dont exist or arent walkable
+    //                 CanTeleportTo(levelSuperstate, level.terrain, b, checkUnitNotPresent);
+    //           },
+    //           (a) => a == destination,
+    //           AStarExplorer.MakeDistanceCostGuesser(level.terrain.pattern, destination),
+    //           (a, b) => 1); // consider each space to be 1 distance
+    //   if (!inLeapingRangeExplorer.WasExplored(destination)) {
+    //     // We can't leap there, bail.
+    //     return false;
+    //   }
+    //   
+    //   var steppableInRangeExplorer =
+    //       new AStarExplorer(
+    //           new SortedSet<Location> {source},
+    //           (to) => level.terrain.pattern.GetAdjacentLocations(to, level.terrain.considerCornersAdjacent),
+    //           (from, to, totalCost) => {
+    //             return totalCost <= LEAP_DISTANCE && CanSttep(levelSuperstate, level, from, to, false);
+    //           },
+    //           (a) => a == destination,
+    //           AStarExplorer.MakeDistanceCostGuesser(level.terrain.pattern, destination),
+    //           (a, b) => 1); // consider each space to be 1 distance
+    //   var steppable = steppableInRangeExplorer.WasExplored(destination);
+    //   if (steppable) {
+    //     // We CAN step to there, so it's not eligible for leaping.
+    //     return false;
+    //   }
+    //
+    //   return true;
+    // }
+
+    public static SortedSet<Location> GetLeapableLocationsExpensive(
+        LevelSuperstate levelSuperstate,
+        Level level,
+        Location source,
+        bool checkUnitNotPresent) {
       var sourceLocElevation = level.terrain.tiles[source].elevation;
 
-      var leapExplorer =
+      // We choose an arbitrary* number to multiply each step by, let's say 4.
+      // So, if the max leap distance is 3, and each step will cost 4, so we're
+      // looking for paths <= 12.
+      // *It's not actually arbitrary. We choose a number equal to the max leap range + 1.
+      // Also, if we go over something that's higher elevation thus blocks the leap, we add 1.
+      // This way, we can know at the end whether the path crossed something that blocked
+      // the leap, by seeing if it's not a multiple of e.g. 4.
+      var STEP_COST = LEAP_DISTANCE + 1;
+      var inLeapingRangeExplorer =
           new AStarExplorer(
               new SortedSet<Location> {source},
               (to) => level.terrain.GetAdjacentExistingLocations(to, level.terrain.considerCornersAdjacent),
               (a, b, totalCost) => {
+                // This would be totalCost <= 12, but we want to allow the +1s from the
+                // things blocking visibility. There can be up to LEAP_DISTANCE of them
+                // so really we want < 16, hence the + 1 here.
+                return totalCost < (LEAP_DISTANCE + 1) * STEP_COST &&
+                    // Can't leap over tiles that dont exist or arent walkable
+                    CanTeleportTo(levelSuperstate, level.terrain, b, checkUnitNotPresent);
+              },
+              (a) => false,
+              (a) => 0,
+              (a, b) => {
+                var blocksLeap = level.terrain.tiles[b].elevation > sourceLocElevation;
+                return STEP_COST + (blocksLeap ? 1 : 0);
+              });
+      var locsInLeapingRange = inLeapingRangeExplorer.getClosedLocations();
+      locsInLeapingRange.Remove(source);
+
+      var steppableInLeapingRangeExplorer =
+          new AStarExplorer(
+              new SortedSet<Location> {source},
+              (to) => level.terrain.pattern.GetAdjacentLocations(to, level.terrain.considerCornersAdjacent),
+              (from, to, totalCost) => {
                 return totalCost <= LEAP_DISTANCE &&
-                    level.terrain.tiles[b].elevation <= sourceLocElevation &&
-                    level.terrain.tiles[b].IsWalkable();
+                    CanSttep(levelSuperstate, level, from, to, false);
               },
               (a) => false,
               (a) => 0,
               (a, b) => 1); // consider each space to be 1 distance
-      var connected = leapExplorer.getClosedLocations();
-      var leapable = new SortedSet<Location>();
-      foreach (var loc in connected) {
-        if (level.terrain.tiles[loc].elevation == sourceLocElevation) {
-          leapable.Add(loc);
-        }
-      }
-      var adjacents = level.terrain.GetAdjacentExistingLocations(source, level.terrain.considerCornersAdjacent);
-      SetUtils.RemoveAll(leapable, adjacents);
-      var steppable = new SortedSet<Location>();
-      foreach (var adjacent in adjacents) {
-        var adjacentTile = level.terrain.tiles[adjacent];
-        var adjacentLocElevation = adjacentTile.elevation;
-        var elevationFine = adjacentLocElevation <= sourceLocElevation + 1 &&
-            adjacentLocElevation >= sourceLocElevation - 2;
-        if (!elevationFine) {
-          continue;
-        }
-        if (!adjacentTile.IsWalkable()) {
-          continue;
-        }
-        steppable.Add(adjacent);
-      }
-
-      var reachable = new SortedSet<Location>();
-      SetUtils.AddAll(reachable, leapable);
-      SetUtils.AddAll(reachable, steppable);
-      return reachable;
-    }
-    
-    public static bool CanStep(
-        Game game,
-        Superstate superstate,
-        Unit unit,
-        Location destination) {
-      if (!CanStepNotCountingUnits(game, unit.location, destination)) {
-        return false;
-      }
-      if (!CanTeleportTo(game.level.terrain, superstate, destination)) {
-        return false;
-      }
-      return true;
-    }
-
-    public static bool CanStepNotCountingUnits(
-        Game game,
-        Location source,
-        Location destination) {
-      if (!game.level.terrain.TileExists(destination)) {
-        return false;
-      }
-      if (!GetReachableLocations(game.level, source).Contains(destination)) {
-        return false;
-      }
-      if (game.level.terrain.GetElevationDifference(source, destination) > 2) {
-        return false;
-      }
-      if (!CanTeleportToNotCountingUnits(game.level.terrain, destination)) {
-        return false;
-      }
+      var steppableLocsInLeapingRange = steppableInLeapingRangeExplorer.getClosedLocations();
+      steppableLocsInLeapingRange.Remove(source);
       
-      return true;
+      var leapableLocs = new SortedSet<Location>();
+      foreach (var locInLeapingRange in locsInLeapingRange) {
+        if (inLeapingRangeExplorer.GetCostTo(locInLeapingRange) % STEP_COST > 0) {
+          // There was something that blocked the leap.
+          continue;
+        }
+        if (steppableLocsInLeapingRange.Contains(locInLeapingRange)) {
+          // Dont allow leaping to anywhere we could just take a few steps to
+          continue;
+        }
+        if (level.terrain.tiles[locInLeapingRange].elevation != sourceLocElevation) {
+          // Can only leap to the same elevation
+          continue;
+        }
+        leapableLocs.Add(locInLeapingRange);
+      }
+      Asserts.Assert(!leapableLocs.Contains(source));
+      return leapableLocs;
+    }
+    public static SortedSet<Location> GetStteppableLocations(
+        LevelSuperstate levelSuperstate, Level level, Location source, bool checkUnitNotPresent) {
+      var steppableLocs = new SortedSet<Location>();
+      var adjacentLocs = level.terrain.pattern.GetAdjacentLocations(source, level.terrain.considerCornersAdjacent);
+      foreach (var adjacentLoc in adjacentLocs) {
+        if (CanSttep(levelSuperstate, level, source, adjacentLoc, checkUnitNotPresent)) {
+          steppableLocs.Add(adjacentLoc);
+        }
+      }
+      Asserts.Assert(!steppableLocs.Contains(source));
+      return steppableLocs;
     }
 
-    public static void Step(
+    public static SortedSet<Location> GetHoppableLocationsExpensive(
+        LevelSuperstate levelSuperstate,
+        Level level,
+        Location source,
+        bool checkUnitNotPresent) {
+      return SetUtils.Union(
+          GetStteppableLocations(levelSuperstate, level, source, checkUnitNotPresent),
+          GetLeapableLocationsExpensive(levelSuperstate, level, source, checkUnitNotPresent));
+    }
+
+    public static void Hop(
           Game game,
           Superstate superstate,
           Unit unit,
           Location destination,
-          bool overrideAdjacentCheck,
           bool costsTime) {
-      Asserts.Assert(game.level.terrain.tiles[destination].IsWalkable(), "Not walkable!");
-      // Asserts.Assert(
-      //   overrideAdjacentCheck || game.level.terrain.pattern.LocationsAreAdjacent(unit.location, destination, game.level.terrain.considerCornersAdjacent),
-      //   "Adjacent check failed!");
-      Asserts.Assert(!superstate.levelSuperstate.LocationContainsUnit(destination), "Unit is there!");
+      Asserts.Assert(superstate.levelSuperstate.CanHop(unit.location, destination, true));
+      Teleport(game, superstate, unit, destination);
+      if (costsTime) {
+        unit.nextActionTime = unit.nextActionTime + unit.CalculateMovementTimeCost(600);
+      }
+      game.actionNum++;
+    }
+    
+    public static void Teleport(
+        Game game,
+        Superstate superstate,
+        Unit unit,
+        Location destination) {
+      Asserts.Assert(CanTeleportTo(superstate.levelSuperstate, game.level.terrain, destination, true));
 
       bool removed = superstate.levelSuperstate.RemoveUnit(unit);
       Asserts.Assert(removed, "Not removed!");
       unit.location = destination;
       superstate.levelSuperstate.AddUnit(unit);
+    }
 
+    public static void Sttep(
+        Game game,
+        Superstate superstate,
+        Unit unit,
+        Location destination,
+        bool costsTime) {
+      Asserts.Assert(CanSttep(superstate.levelSuperstate, game.level, unit.location, destination, true));
+      Teleport(game, superstate, unit, destination);
       if (costsTime) {
         unit.nextActionTime = unit.nextActionTime + unit.CalculateMovementTimeCost(600);
       }
@@ -320,7 +425,7 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit attacker,
         Unit victim) {
-      Eventer.broadcastUnitFireEvent(game.root, game, attacker, victim);
+      Eventer.broadcastUnitFireEvent(game, attacker, victim);
       AttackInner(
           game, superstate, attacker, victim, FIRE_DAMAGE, false);
       attacker.nextActionTime = attacker.nextActionTime + attacker.CalculateCombatTimeCost(600);
@@ -336,7 +441,7 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit attacker,
         Location targetLoc) {
-      Eventer.broadcastUnitBlazeEvent(game.root, game, attacker, targetLoc);
+      Eventer.broadcastUnitBlazeEvent(game, attacker, targetLoc);
 
       game.level.terrain.tiles[targetLoc].components.Add(
           game.root.EffectOnFireTTCCreate(Actions.BLAZE_DURATION).AsITerrainTileComponent());
@@ -355,7 +460,7 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit attacker,
         Location targetLoc) {
-      Eventer.broadcastUnitExplosionEvent(game.root, game, attacker, targetLoc);
+      Eventer.broadcastUnitExplosionEvent(game, attacker, targetLoc);
 
       var adjacentLocs = game.level.terrain.GetAdjacentExistingLocations(targetLoc, true);
       adjacentLocs.Add(targetLoc);
@@ -400,7 +505,7 @@ namespace IncendianFalls {
         Superstate superstate,
         Location location) {
       Unit poorSuckerOnThisTile = superstate.levelSuperstate.GetLiveUnitAt(location);
-      Eventer.broadcastUnitFireBombedEvent(game.root, game, poorSuckerOnThisTile, location);
+      Eventer.broadcastUnitFireBombedEvent(game, poorSuckerOnThisTile, location);
       if (poorSuckerOnThisTile.Exists()) {
         AttackedInner(game, superstate, poorSuckerOnThisTile, FIRE_BOMB_DAMAGE, false);
       }
@@ -411,9 +516,10 @@ namespace IncendianFalls {
         Game game,
         Superstate superstate,
         Location location) {
+      Eventer.broadcastTileBurningEvent(game, location);
       Unit poorSuckerOnThisTile = superstate.levelSuperstate.GetLiveUnitAt(location);
-      Eventer.broadcastUnitBlazedEvent(game.root, game, poorSuckerOnThisTile, location);
       if (poorSuckerOnThisTile.Exists()) {
+        Eventer.broadcastUnitBurningEvent(game, poorSuckerOnThisTile);
         AttackedInner(game, superstate, poorSuckerOnThisTile, BLAZE_DAMAGE, false);
         if (!poorSuckerOnThisTile.components.GetOnlyOnFireUCOrNull().Exists()) {
           poorSuckerOnThisTile.components.Add(
@@ -423,13 +529,30 @@ namespace IncendianFalls {
       game.actionNum++;
     }
     
-    public static void EffectExplosion(
+    public static void EffectBurn(
         Game game,
         Superstate superstate,
         Location location) {
       Unit poorSuckerOnThisTile = superstate.levelSuperstate.GetLiveUnitAt(location);
-      Eventer.broadcastUnitExplosionedEvent(game.root, game, poorSuckerOnThisTile, location);
       if (poorSuckerOnThisTile.Exists()) {
+        Eventer.broadcastUnitBurningEvent(game, poorSuckerOnThisTile);
+        AttackedInner(game, superstate, poorSuckerOnThisTile, BLAZE_DAMAGE, false);
+        if (!poorSuckerOnThisTile.components.GetOnlyOnFireUCOrNull().Exists()) {
+          poorSuckerOnThisTile.components.Add(
+              game.root.EffectOnFireUCCreate(Actions.BLAZE_DURATION).AsIUnitComponent());
+        }
+      }
+      game.actionNum++;
+    }
+
+    public static void EffectExplosion(
+        Game game,
+        Superstate superstate,
+        Location location) {
+      Eventer.broadcastTileExplodingEvent(game, location);
+      Unit poorSuckerOnThisTile = superstate.levelSuperstate.GetLiveUnitAt(location);
+      if (poorSuckerOnThisTile.Exists()) {
+        Eventer.broadcastUnitExplosionedEvent(game, poorSuckerOnThisTile, location);
         AttackedInner(game, superstate, poorSuckerOnThisTile, EXPLOSION_DAMAGE, false);
       }
       game.actionNum++;
@@ -440,31 +563,9 @@ namespace IncendianFalls {
         Superstate superstate,
         Unit unit) {
       unit.components.Add(game.root.EffectLightningChargedUCCreate().AsIUnitComponent());
-      Eventer.broadcastUnitFireBombedEvent(game.root, game, unit, unit.location);
+      Eventer.broadcastUnitFireBombedEvent(game, unit, unit.location);
       AttackedInner(game, superstate, unit, LIGHTNING_CHARGE_DAMAGE, false);
       game.actionNum++;
-    }
-
-    public static List<Location> GetPathTo(Game game, Superstate superstate, Unit unit, Location destination) {
-      var explorer =
-          new AStarExplorer(
-              new SortedSet<Location> {unit.location},
-              (a) => superstate.levelSuperstate.GetReachableLocations(a),
-              (a, b, totalCost) => true,
-              (a) => a == destination,
-              AStarExplorer.MakeDistanceCostGuesser(game.level.terrain.pattern, destination),
-              (a, b) => {
-                if (game.level.terrain.pattern.LocationsAreAdjacent(a, b, game.level.terrain.considerCornersAdjacent)) {
-                  return 1;
-                } else {
-                  return Actions.LEAP_DISTANCE + 1;
-                }
-              });
-      if (explorer.getClosedLocations().Contains(destination)) {
-        return explorer.GetPathTo(destination);
-      } else {
-        return new List<Location>();
-      }
     }
   }
 }

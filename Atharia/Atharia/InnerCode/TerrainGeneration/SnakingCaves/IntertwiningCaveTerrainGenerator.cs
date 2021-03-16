@@ -155,9 +155,9 @@ namespace IncendianFalls {
           // Now for every location that this connection touches, note that that location has a possible connection here
           foreach (var loc in possibleConnection.getAllLocations()) {
             if (!locToPossibleConnectionMap.ContainsKey(loc)) {
-              locToPossibleConnectionMap.Add(loc, new List<RegionConnection>(possibleConnections));
+              locToPossibleConnectionMap.Add(loc, new List<RegionConnection>());
             }
-            locToPossibleConnectionMap[loc].AddRange(possibleConnections);
+            locToPossibleConnectionMap[loc].Add(possibleConnection);
           }
         }
       }

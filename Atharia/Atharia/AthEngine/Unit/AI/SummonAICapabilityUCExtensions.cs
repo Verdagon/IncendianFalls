@@ -28,7 +28,7 @@ namespace Atharia.Model {
       }
 
       // Check if we can see them.
-      if (!Sight.CanSee(game, unit, nearestEnemy.location, out List<Location> sightPath)) {
+      if (!superstate.levelSuperstate.CanSee(unit.location, nearestEnemy.location)) {
         // Can't see the enemy. Don't update directive.
         return game.root.EffectNoImpulseCreate().AsIImpulse();
       }
@@ -39,7 +39,7 @@ namespace Atharia.Model {
               unit.location, game.level.terrain.considerCornersAdjacent);
       var adjacentWalkableLocations = new SortedSet<Location>();
       foreach (var adjacentLocation in adjacentLocations) {
-        if (Actions.CanStep(game, superstate, unit, adjacentLocation)) {
+        if (superstate.levelSuperstate.CanHop(unit.location, adjacentLocation, true)) {
           adjacentWalkableLocations.Add(adjacentLocation);
         }
       }

@@ -115,6 +115,12 @@ namespace IncendianFalls {
           //context.root.logger.Error("now dead! " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
 
           if (playerDying) {
+            game.hideInput = true;
+            game.comms.Add(
+                game.root.EffectCommCreate(
+                    new DramaticCommTemplate(false).AsICommTemplate(),
+                    new CommActionImmList(new CommAction("Alas...", "_exitGame")),
+                    new CommTextImmList(new CommText("narrator", "You have died!"))));
             return;
           }
 

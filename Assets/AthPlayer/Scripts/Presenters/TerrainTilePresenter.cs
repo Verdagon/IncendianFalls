@@ -233,8 +233,9 @@ namespace AthPlayer {
           topColor = Vector4Animation.Color(0f, .1f + 0.0333f * terrainTile.elevation, 0);
           sideColor = Vector4Animation.Color(.15f, .1f, .05f);
 
-          var rand = new System.Random(location.groupX * 177 + location.groupY * 131 + location.indexInGroup * 91 + terrainTile.elevation * 79);
-          if (rand.Next() < 40) {
+          var rand =
+              new System.Random(location.groupX * 177 + location.groupY * 131 + location.indexInGroup * 91 + terrainTile.elevation * 79);
+          if (rand.Next() % 100 < 40) {
             if (!overlayLocked) {
               overlay =
                   new ExtrudedSymbolDescription(
@@ -720,30 +721,10 @@ namespace AthPlayer {
       tileView.SetDescription(GetDescription());
     }
 
-    public void OnTerrainTileEffect(ITerrainTileEffect effect) { effect.visitITerrainTileEffect(this);  }
-    public void visitTerrainTileCreateEffect(TerrainTileCreateEffect effect) { }
-    public void visitTerrainTileSetElevationEffect(TerrainTileSetElevationEffect effect) { }
-    public void visitTerrainTileDeleteEffect(TerrainTileDeleteEffect effect) { }
-    public void visitTerrainTileSetEvventEffect(TerrainTileSetEvventEffect effect) {
-      if (effect.newValue is UnitUnleashBideEventAsITerrainTileEvent) {
-        tileView.ShowRune(
-            new ExtrudedSymbolDescription(
-                RenderPriority.RUNE,
-                new SymbolDescription(
-                    "r-3",
-                      Vector4Animation.Color(1.0f, .6f, 0, 1.5f),
-                    0,
-                    1,
-                    OutlineMode.WithOutline,
-                    Vector4Animation.Color(0, 0, 0)),
-                true,
-                Vector4Animation.Color(0, 0, 1f, 1f)));
-      } else if (effect.newValue is UnitFireBombedEventAsITerrainTileEvent ||
-          effect.newValue is UnitBlazedEventAsITerrainTileEvent ||
-          effect.newValue is UnitExplosionedEventAsITerrainTileEvent) {
-        var patternTile = terrain.pattern.patternTiles[location.indexInGroup];
+    public void ShowFirePrism() {
+      var patternTile = terrain.pattern.patternTiles[location.indexInGroup];
 
-        prismEndTime =
+      prismEndTime =
           tileView.ShowPrism(
               new ExtrudedSymbolDescription(
                   RenderPriority.RUNE,
@@ -767,7 +748,30 @@ namespace AthPlayer {
                       Vector4Animation.Color(0, 0, 0)),
                   true,
                   Vector4Animation.Color(0, 0, 0, 0.5f)));
-        onAnimation?.Invoke(prismEndTime);
+      onAnimation?.Invoke(prismEndTime);
+    }
+
+    public void OnTerrainTileEffect(ITerrainTileEffect effect) { effect.visitITerrainTileEffect(this);  }
+    public void visitTerrainTileCreateEffect(TerrainTileCreateEffect effect) { }
+    public void visitTerrainTileSetElevationEffect(TerrainTileSetElevationEffect effect) { }
+    public void visitTerrainTileDeleteEffect(TerrainTileDeleteEffect effect) { }
+    public void visitTerrainTileSetEvventEffect(TerrainTileSetEvventEffect effect) {
+      if (effect.newValue is UnitUnleashBideEventAsITerrainTileEvent) {
+        tileView.ShowRune(
+            new ExtrudedSymbolDescription(
+                RenderPriority.RUNE,
+                new SymbolDescription(
+                    "r-3",
+                      Vector4Animation.Color(1.0f, .6f, 0, 1.5f),
+                    0,
+                    1,
+                    OutlineMode.WithOutline,
+                    Vector4Animation.Color(0, 0, 0)),
+                true,
+                Vector4Animation.Color(0, 0, 1f, 1f)));
+      } else if (effect.newValue is TileBurningEventAsITerrainTileEvent ||
+          effect.newValue is TileExplodingEventAsITerrainTileEvent) {
+        ShowFirePrism();
       }
     }
 
@@ -833,11 +837,8 @@ namespace AthPlayer {
         staller(terrainTilePresenter.prismEndTime, "prism");
       }
       public void visitTerrainTileSetEvventEffect(TerrainTileSetEvventEffect effect) {
-        if (effect.newValue is WaitForUnitEventAsIUnitEvent) {
-          staller(terrainTilePresenter.prismEndTime, "prism");
-        } else if (effect.newValue is UnitFireBombedEventAsITerrainTileEvent ||
-            effect.newValue is UnitBlazedEventAsITerrainTileEvent ||
-            effect.newValue is UnitExplosionedEventAsITerrainTileEvent) {
+        if (effect.newValue is TileExplodingEventAsITerrainTileEvent ||
+            effect.newValue is TileBurningEventAsITerrainTileEvent) {
           staller(terrainTilePresenter.prismEndTime, "prism");
         }
       }

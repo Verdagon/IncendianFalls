@@ -310,10 +310,18 @@ namespace Domino {
           mode = new FireMode(ss, game, this, showInstructions, showError);
           break;
         case PlayerPanelView.BLAZE_CAPABILITY_ID:
+          if (game.player.components.GetAllBlazeRod().Count == 0) {
+            showError("Can't blaze, find a Blaze Rod first!");
+            return;
+          }
           modeCapabilityId = capabilityId;
           mode = new BlazeMode(ss, game, this, showInstructions, showError);
           break;
         case PlayerPanelView.EXPLOSION_CAPABILITY_ID:
+          if (game.player.components.GetAllExplosionRod().Count == 0) {
+            showError("Can't explode, find an Explosion Staff first!");
+            return;
+          }
           modeCapabilityId = capabilityId;
           mode = new ExplosionMode(ss, game, this, showInstructions, showError);
           break;
@@ -336,17 +344,6 @@ namespace Domino {
     public void visitUnitDeleteEffect(UnitDeleteEffect effect) { }
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) { }
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) {
-      if (effect.newValue != 0) {
-        var overlayPresenter =
-          overlayPresenterFactory(
-            new NormalCommTemplate().AsICommTemplate(),
-            new List<PageText>() { new PageText("You have died!", new UnityEngine.Color(1, 1, 1)) },
-            new List<PageButton>() {new PageButton("Alas...", () => {
-              throw new NotImplementedException();
-              //exit?.Invoke();
-            }) });
-        // Do nothing with it, itll kill itself.
-      }
     }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }

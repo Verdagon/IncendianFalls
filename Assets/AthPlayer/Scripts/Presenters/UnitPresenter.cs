@@ -1000,7 +1000,7 @@ namespace AthPlayer {
           onAnimation?.Invoke(runeEndTime);
         }
       } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent ||
-          effect.newValue is UnitBlazedEventAsIUnitEvent ||
+          effect.newValue is UnitBurningEventAsIUnitEvent ||
           effect.newValue is UnitExplosionedEventAsIUnitEvent) {
         runeEndTime =
           unitView.ShowRune(
@@ -1114,7 +1114,7 @@ namespace AthPlayer {
           // We show a rune for both attacker and victim, so no need to check that.
           staller(unitPresenter.runeEndTime, "unit rune");
         } else if (effect.newValue is UnitFireBombedEventAsIUnitEvent ||
-            effect.newValue is UnitBlazedEventAsIUnitEvent ||
+            effect.newValue is UnitBurningEventAsIUnitEvent ||
             effect.newValue is UnitExplosionedEventAsIUnitEvent) {
           staller(unitPresenter.runeEndTime, "unit rune");
         }

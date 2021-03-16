@@ -15,8 +15,6 @@ public static class IUnitEventParser {
         return new UnitExplosionedEventAsIUnitEvent(UnitExplosionedEvent.Parse(source));
       case "UnitBurningEvent":
         return new UnitBurningEventAsIUnitEvent(UnitBurningEvent.Parse(source));
-      case "UnitBlazedEvent":
-        return new UnitBlazedEventAsIUnitEvent(UnitBlazedEvent.Parse(source));
       case "UnitFireBombedEvent":
         return new UnitFireBombedEventAsIUnitEvent(UnitFireBombedEvent.Parse(source));
       case "UnitExplosionEvent":

@@ -14,7 +14,7 @@ namespace Atharia.Model {
         Game game,
         Superstate superstate,
         Unit unit) {
-      Actions.EffectBlaze(game, superstate, unit.location);
+      Actions.EffectBurn(game, superstate, unit.location);
       
       if (detail.turnsRemaining > 0) {
         detail.turnsRemaining -= 1;

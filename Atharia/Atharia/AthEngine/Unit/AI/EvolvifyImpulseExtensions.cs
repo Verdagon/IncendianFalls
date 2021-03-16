@@ -43,7 +43,7 @@ namespace Atharia.Model {
       var evolvifyTile = game.level.terrain.tiles[evolvifyLoc];
       
       var moveToLocation = obj.moveToLocation;
-      Actions.Step(game, superstate, actingUnit, moveToLocation, false, true);
+      Actions.Hop(game, superstate, actingUnit, moveToLocation, true);
       
       var newUnit = Evolvify(game, evolvifyTile);
       game.level.EnterUnit(superstate.levelSuperstate, evolvifyLoc, actingUnit.nextActionTime, newUnit);

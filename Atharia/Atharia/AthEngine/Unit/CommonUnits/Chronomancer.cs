@@ -16,7 +16,7 @@ namespace IncendianFalls {
           new Location(0, 0, 0),
           "Chronomancer",
           0,
-          90, 90,
+          30, 30,
           components,
           true);
     }

@@ -9,7 +9,6 @@ public interface IUnitEventVisitor {
   void VisitIUnitEvent(UnitUnleashBideEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitExplosionedEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitBurningEventAsIUnitEvent obj);
-  void VisitIUnitEvent(UnitBlazedEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitFireBombedEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitExplosionEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitBlazeEventAsIUnitEvent obj);

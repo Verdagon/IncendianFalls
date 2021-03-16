@@ -1,0 +1,17 @@
+
+imm interface ITerrainTileEvent {
+}
+
+imm struct TileBurningEvent {
+  TileBurningEvent isa ITerrainTileEvent;
+
+  time: Int;
+  loc: Location;
+}
+
+imm struct TileExplodingEvent {
+  TileExplodingEvent isa ITerrainTileEvent;
+
+  time: Int;
+  loc: Location;
+}

@@ -105,9 +105,7 @@ namespace Atharia.Model {
           context.Flare(game.root.GetDeterministicHashCode().ToString());
 
           if (depth == 0) {
-            var nearbyLocs = Actions.GetReachableLocations(level, entryLocation);
-            Asserts.Assert(nearbyLocs.Count > 0);
-            var blazeRodLoc = SetUtils.GetFirst(nearbyLocs);
+            var blazeRodLoc = entryLocation; // The player jumps off the entry loc anyway
             var blazeRodTile = level.terrain.tiles[blazeRodLoc];
             blazeRodTile.components.Add(
                 level.root.EffectItemTTCCreate(

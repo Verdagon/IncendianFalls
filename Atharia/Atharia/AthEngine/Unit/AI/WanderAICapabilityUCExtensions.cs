@@ -17,26 +17,15 @@ namespace Atharia.Model {
         Superstate superstate,
         Unit unit) {
 
-      var reachableLocations = Actions.GetReachableLocations(game.level, unit.location);
-      var adjacentWalkableLocations = new SortedSet<Location>();
-      foreach (var adjacentLocation in reachableLocations) {
-        if (Actions.CanStep(game, superstate, unit, adjacentLocation)) {
-          adjacentWalkableLocations.Add(adjacentLocation);
-        }
-      }
-
-      if (adjacentWalkableLocations.Count == 0) {
+      var hoppableLocs = superstate.levelSuperstate.GetHoppableLocs(unit.location, true);
+      if (hoppableLocs.Count == 0) {
         // Nowhere to walk, so can't wander.
         return obj.root.EffectNoImpulseCreate().AsIImpulse();
       }
 
-      var randomAdjacentWalkableLocation =
-        SetUtils.GetRandom(game.rand.Next(), adjacentWalkableLocations);
+      var randomSteppableLoc = SetUtils.GetRandom(game.rand.Next(), hoppableLocs);
 
-      return obj.root.EffectMoveImpulseCreate(
-          200,
-          randomAdjacentWalkableLocation)
-              .AsIImpulse();
+      return obj.root.EffectMoveImpulseCreate(200, randomSteppableLoc).AsIImpulse();
     }
   }
 }

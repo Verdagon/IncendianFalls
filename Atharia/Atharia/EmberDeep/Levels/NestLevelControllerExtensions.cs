@@ -195,7 +195,7 @@ namespace Atharia.Model {
       if (triggerName == "levelStart") {
         game.EnterCinematic();
         var hopTo = superstate.levelSuperstate.FindMarkerLocation("playerHopTo");
-        Actions.Step(game, superstate, game.player, hopTo, true, false);
+        Actions.Sttep(game, superstate, game.player, hopTo, false);
         game.player.WaitFor();
         game.ShowAside("kylin", "Uh oh...");
         game.Wait(2000);

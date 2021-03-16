@@ -18,7 +18,7 @@ namespace IncendianFalls {
       var game = context.root.GetGame(gameId);
       var unit = context.root.GetUnit(unitId);
 
-      return Actions.GetPathTo(game, superstate, unit, destination);
+      return superstate.levelSuperstate.FindPath(unit.location, destination);
     }
   }
 }

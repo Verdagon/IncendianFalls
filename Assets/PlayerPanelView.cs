@@ -68,11 +68,11 @@ namespace Domino {
       }
       bool canBlaze = true;
       if (canBlaze) {
-        AddButton(overlayPaneler.screenGW, position++, BLAZE_CAPABILITY_ID, "w", "(B) Blaze: Do " + IncendianFalls.Actions.BLAZE_DAMAGE + " per turn for " + IncendianFalls.Actions.BLAZE_DURATION + " turns for " + IncendianFalls.Actions.FIRE_BOMB_COST + "mp.");
+        AddButton(overlayPaneler.screenGW, position++, BLAZE_CAPABILITY_ID, "r-3", "(B) Blaze: Do " + IncendianFalls.Actions.BLAZE_DAMAGE + " per turn for " + IncendianFalls.Actions.BLAZE_DURATION + " turns for " + IncendianFalls.Actions.FIRE_BOMB_COST + "mp.");
       }
       bool canExplosion = true;
       if (canExplosion) {
-        AddButton(overlayPaneler.screenGW, position++, EXPLOSION_CAPABILITY_ID, "w", "(X) Explosion: Do " + IncendianFalls.Actions.EXPLOSION_DAMAGE + " to an 8-space area for " + IncendianFalls.Actions.FIRE_BOMB_COST + "mp.");
+        AddButton(overlayPaneler.screenGW, position++, EXPLOSION_CAPABILITY_ID, "G", "(X) Explosion: Do " + IncendianFalls.Actions.EXPLOSION_DAMAGE + " to an 8-space area for " + IncendianFalls.Actions.FIRE_BOMB_COST + "mp.");
       }
       bool canMire = false;
       if (canMire) {

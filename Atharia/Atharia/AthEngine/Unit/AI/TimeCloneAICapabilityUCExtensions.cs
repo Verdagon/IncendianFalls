@@ -56,7 +56,7 @@ namespace Atharia.Model {
         } else if (request is MoveRequestAsIRequest mrI) {
           var mr = mrI.obj;
           var destination = mr.destination;
-          if (Actions.CanStep(game, superstate, unit, destination)) {
+          if (superstate.levelSuperstate.CanHop(unit.location, destination, true)) {
             return game.root.EffectMoveImpulseCreate(1000, destination).AsIImpulse();
           } else {
             return game.root.EffectEvaporateImpulseCreate().AsIImpulse();

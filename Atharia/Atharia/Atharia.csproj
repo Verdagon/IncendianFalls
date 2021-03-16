@@ -2400,6 +2400,10 @@
         <Compile Include="Core\TerrainTileIncarnation.cs" />
         <Compile Include="Core\TerrainTileSetElevationEffect.cs" />
         <Compile Include="Core\TerrainTileSetEvventEffect.cs" />
+        <Compile Include="Core\TileBurningEvent.cs" />
+        <Compile Include="Core\TileBurningEventAsITerrainTileEvent.cs" />
+        <Compile Include="Core\TileExplodingEvent.cs" />
+        <Compile Include="Core\TileExplodingEventAsITerrainTileEvent.cs" />
         <Compile Include="Core\TimeAnchorMoveRequest.cs" />
         <Compile Include="Core\TimeAnchorMoveRequestAsIRequest.cs" />
         <Compile Include="Core\TimeAnchorTTC.cs" />
@@ -2481,13 +2485,9 @@
         <Compile Include="Core\UnitAsIDestructible.cs" />
         <Compile Include="Core\UnitAttackEvent.cs" />
         <Compile Include="Core\UnitAttackEventAsIUnitEvent.cs" />
-        <Compile Include="Core\UnitBlazedEvent.cs" />
-        <Compile Include="Core\UnitBlazedEventAsITerrainTileEvent.cs" />
-        <Compile Include="Core\UnitBlazedEventAsIUnitEvent.cs" />
         <Compile Include="Core\UnitBlazeEvent.cs" />
         <Compile Include="Core\UnitBlazeEventAsIUnitEvent.cs" />
         <Compile Include="Core\UnitBurningEvent.cs" />
-        <Compile Include="Core\UnitBurningEventAsITerrainTileEvent.cs" />
         <Compile Include="Core\UnitBurningEventAsIUnitEvent.cs" />
         <Compile Include="Core\UnitCounteringEvent.cs" />
         <Compile Include="Core\UnitCounteringEventAsIUnitEvent.cs" />
@@ -2496,12 +2496,10 @@
         <Compile Include="Core\UnitDefyingEventAsIUnitEvent.cs" />
         <Compile Include="Core\UnitDeleteEffect.cs" />
         <Compile Include="Core\UnitExplosionedEvent.cs" />
-        <Compile Include="Core\UnitExplosionedEventAsITerrainTileEvent.cs" />
         <Compile Include="Core\UnitExplosionedEventAsIUnitEvent.cs" />
         <Compile Include="Core\UnitExplosionEvent.cs" />
         <Compile Include="Core\UnitExplosionEventAsIUnitEvent.cs" />
         <Compile Include="Core\UnitFireBombedEvent.cs" />
-        <Compile Include="Core\UnitFireBombedEventAsITerrainTileEvent.cs" />
         <Compile Include="Core\UnitFireBombedEventAsIUnitEvent.cs" />
         <Compile Include="Core\UnitFireEvent.cs" />
         <Compile Include="Core\UnitFireEventAsIUnitEvent.cs" />
@@ -2656,6 +2654,7 @@
         <Compile Include="InnerCode\GameLoop.cs" />
         <Compile Include="InnerCode\LevelSuperstate.cs" />
         <Compile Include="InnerCode\MultiverseStateType.cs" />
+        <Compile Include="InnerCode\Navigation.cs" />
         <Compile Include="InnerCode\PatternDriver.cs" />
         <Compile Include="InnerCode\PatternExplorer.cs" />
         <Compile Include="InnerCode\Patterns\HexPattern.cs" />

@@ -5,7 +5,6 @@ using Atharia.Model;
 namespace IncendianFalls {
   public class Eventer {
     public static void broadcastUnitUnleashBideEvent(
-        Root root,
         Game game,
         Unit attacker,
         List<Unit> victims,
@@ -29,7 +28,6 @@ namespace IncendianFalls {
       }
     }
     public static void broadcastUnitAttackEvent(
-        Root root,
         Game game,
         Unit attacker,
         Unit victim) {
@@ -40,7 +38,6 @@ namespace IncendianFalls {
       }
     }
     public static void broadcastUnitFireEvent(
-        Root root,
         Game game,
         Unit attacker,
         Unit victim) {
@@ -51,7 +48,6 @@ namespace IncendianFalls {
       }
     }
     public static void broadcastUnitBlazeEvent(
-        Root root,
         Game game,
         Unit attacker,
         Location targetLoc) {
@@ -59,7 +55,6 @@ namespace IncendianFalls {
       attacker.AddEvent(attackEvent);
     }
     public static void broadcastUnitExplosionEvent(
-        Root root,
         Game game,
         Unit attacker,
         Location targetLoc) {
@@ -67,43 +62,38 @@ namespace IncendianFalls {
       attacker.AddEvent(attackEvent);
     }
     public static void broadcastUnitFireBombedEvent(
-        Root root,
         Game game,
         Unit victim,
         Location location) {
       var e = new UnitFireBombedEvent(game.time, victim.id, location);
-      if (victim.Exists()) {
-        victim.AddEvent(e.AsIUnitEvent());
-      } else {
-        game.level.terrain.tiles[location].AddEvent(e.AsITerrainTileEvent());
-      }
+      victim.AddEvent(e.AsIUnitEvent());
     }
-    public static void broadcastUnitBlazedEvent(
-        Root root,
+    public static void broadcastTileExplodingEvent(
         Game game,
-        Unit victim,
         Location location) {
-      var e = new UnitBlazedEvent(game.time, victim.id, location);
-      if (victim.Exists()) {
-        victim.AddEvent(e.AsIUnitEvent());
-      } else {
-        game.level.terrain.tiles[location].AddEvent(e.AsITerrainTileEvent());
-      }
+      var e = new TileExplodingEvent(game.time, location);
+      game.level.terrain.tiles[location].AddEvent(e.AsITerrainTileEvent());
+    }
+    public static void broadcastTileBurningEvent(
+        Game game,
+        Location location) {
+      var e = new TileBurningEvent(game.time, location);
+      game.level.terrain.tiles[location].AddEvent(e.AsITerrainTileEvent());
+    }
+    public static void broadcastUnitBurningEvent(
+        Game game,
+        Unit victim) {
+      var e = new UnitBurningEvent(game.time, victim.id);
+      victim.AddEvent(e.AsIUnitEvent());
     }
     public static void broadcastUnitExplosionedEvent(
-        Root root,
         Game game,
         Unit victim,
         Location location) {
       var e = new UnitExplosionedEvent(game.time, victim.id, location);
-      if (victim.Exists()) {
-        victim.AddEvent(e.AsIUnitEvent());
-      } else {
-        game.level.terrain.tiles[location].AddEvent(e.AsITerrainTileEvent());
-      }
+      victim.AddEvent(e.AsIUnitEvent());
     }
     public static void broadcastUnitStepEvent(
-        Root root,
         Game game,
         Unit unit,
         Location from,
@@ -112,14 +102,12 @@ namespace IncendianFalls {
       unit.AddEvent(attackEvent);
     }
     public static void broadcastUnitDefyingEvent(
-        Root root,
         Game game,
         Unit unit) {
       var e = new UnitDefyingEvent(game.time);
       unit.AddEvent(e.AsIUnitEvent());
     }
     public static void broadcastUnitMiredEvent(
-        Root root,
         Game game,
         Unit attacker,
         Unit victim) {
@@ -130,7 +118,6 @@ namespace IncendianFalls {
       }
     }
     public static void broadcastUnitCounteringEvent(
-        Root root,
         Game game,
         Unit unit) {
       var e = new UnitCounteringEvent(game.time);

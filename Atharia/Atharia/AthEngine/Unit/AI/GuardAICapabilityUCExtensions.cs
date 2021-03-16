@@ -42,7 +42,7 @@ namespace Atharia.Model {
       } else {
         // We want to go towards the area.
         var nextStep = pathToGuardArea[0];
-        if (!Actions.CanStep(game, superstate, unit, nextStep)) {
+        if (!superstate.levelSuperstate.CanHop(unit.location, nextStep, true)) {
           // Something else is in the way.
           return obj.root.EffectNoImpulseCreate().AsIImpulse();
         } else {

@@ -158,6 +158,7 @@ namespace Atharia.Model {
         }
       }
       if (self.depth == 0 && triggerName == "viviarchDied") {
+        game.hideInput = true;
         game.comms.Add(
             game.root.EffectCommCreate(
                 new DramaticCommTemplate(false).AsICommTemplate(),
@@ -165,10 +166,9 @@ namespace Atharia.Model {
                 new CommTextImmList(new CommText("narrator", "Congratulations, you have won the game!"))));
       }
       if (self.depth == 0 && triggerName == "levelStart") {
-        var locationsNextToPlayer = game.level.terrain.GetAdjacentExistingLocations(game.player.location, false);
-        var hopToPossibilities = superstate.levelSuperstate.GetNRandomWalkableLocations(game.level.terrain, game.rand, 1, (loc) => locationsNextToPlayer.Contains(loc), true, true);
-        if (hopToPossibilities.Count > 0) {
-          Actions.Step(game, superstate, game.player, hopToPossibilities[0], true, false);
+        var hoppableLocs = superstate.levelSuperstate.GetHoppableLocs(game.player.location, true);
+        if (hoppableLocs.Count > 0) {
+          Actions.Hop(game, superstate, game.player, SetUtils.GetFirst(hoppableLocs), false);
           game.player.WaitFor();
         }
         game.ShowAside("kylin", "I've made it to the forest! I need to kill all these corrupted spirits!");

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Atharia.Model;
 using IncendianFalls;
 
@@ -12,7 +13,9 @@ namespace Atharia.Model {
 
     // Even if a unit is on that location, the location will be in here.
     SortedSet<Location> walkableLocations;
-    SortedDictionary<Location, SortedSet<Location>> locToReachableLocs;
+    SortedDictionary<Location, SortedSet<Location>> locToHoppableLocs;
+    SortedDictionary<Location, SortedDictionary<Location, List<Location>>> locToNearbyLocToPath;
+    SortedDictionary<Location, SortedSet<Location>> locToVisibleLocs;
 
     SortedDictionary<Location, Unit> liveUnitByLocation;
     SortedSet<Location> noUnitLocations;
@@ -25,15 +28,92 @@ namespace Atharia.Model {
     public LevelSuperstate(Level level) {
       this.level = level;
       walkableLocations = new SortedSet<Location>();
-      locToReachableLocs = new SortedDictionary<Location, SortedSet<Location>>();
+      locToHoppableLocs = new SortedDictionary<Location, SortedSet<Location>>();
+      locToNearbyLocToPath = new SortedDictionary<Location, SortedDictionary<Location, List<Location>>>();
+      locToVisibleLocs = new SortedDictionary<Location, SortedSet<Location>>();
       liveUnitByLocation = new SortedDictionary<Location, Unit>();
       locationsWithActingTTCs = new SortedSet<Location>();
       noUnitLocations = new SortedSet<Location>();
       Reconstruct(level);
     }
 
-    public SortedSet<Location> GetReachableLocations(Location loc) {
-      return new SortedSet<Location>(locToReachableLocs[loc]);
+    public void Reconstruct(Level level) {
+      walkableLocations.Clear();
+      locationsWithActingTTCs.Clear();
+      locToHoppableLocs.Clear();
+      locToVisibleLocs.Clear();
+      locToNearbyLocToPath.Clear();
+      liveUnitByLocation.Clear();
+      foreach (var entry in level.terrain.tiles) {
+        var location = entry.Key;
+        var terrainTile = entry.Value;
+        if (terrainTile.IsWalkable()) {
+          walkableLocations.Add(location);
+        }
+        if (terrainTile.components.GetAllIActingTTC().Count > 0) {
+          locationsWithActingTTCs.Add(location);
+        }
+      }
+      foreach (var entry in level.terrain.tiles) {
+        var location = entry.Key;
+        locToHoppableLocs.Add(location, Actions.GetHoppableLocationsExpensive(this, level, location, false));
+      }
+      foreach (var entry in level.terrain.tiles) {
+        var location = entry.Key;
+        locToVisibleLocs.Add(location, Sight.GetVisibleLocationsExpensive(level.terrain, location));
+      }
+      foreach (var entry in level.terrain.tiles) {
+        var location = entry.Key;
+        locToNearbyLocToPath.Add(location, Navigation.GetNearbyLocationPathsExpensive(this, location));
+      }
+
+      foreach (var unit in level.units) {
+        if (unit.Alive()) {
+          Asserts.Assert(walkableLocations.Contains(unit.location));
+          liveUnitByLocation.Add(unit.location, unit);
+        }
+      }
+    }
+
+    public SortedSet<Location> GetHoppableLocs(Location source, bool checkUnitNotPresent) {
+      Asserts.Assert(level.terrain.TileExists(source));
+      var locs = new SortedSet<Location>(locToHoppableLocs[source]);
+      if (checkUnitNotPresent) {
+        foreach (var loc in locToHoppableLocs[source]) {
+          if (LocationContainsUnit(loc)) {
+            locs.Remove(loc);
+          }
+        }
+      }
+      return locs;
+    }
+    
+    public SortedSet<Location> GetVisibleLocs(Location source) {
+      return new SortedSet<Location>(locToVisibleLocs[source]);
+    }
+
+    public bool CanSee(Location source, Location destination) {
+      return locToVisibleLocs[source].Contains(destination);
+    }
+    
+    public List<Location> FindPath(Location source, Location destination) {
+      if (locToNearbyLocToPath.TryGetValue(
+          source, out SortedDictionary<Location, List<Location>> nearbyLocToPath)) {
+        if (nearbyLocToPath.TryGetValue(destination, out List<Location> path)) {
+          return new List<Location>(path);
+        }
+      }
+      return Navigation.FindPathExpensive(level.terrain, this, source, destination);
+    }
+
+    public bool CanHop(Location source, Location destination, bool checkUnitNotPresent) {
+      if (!locToHoppableLocs[source].Contains(destination)) {
+        return false;
+      }
+      if (checkUnitNotPresent && LocationContainsUnit(destination)) {
+        return false;
+      }
+      return true;
     }
 
     public void AddedActingTTC(Location location) {
@@ -85,31 +165,6 @@ namespace Atharia.Model {
 
     public bool LocationContainsUnit(Location location) {
       return liveUnitByLocation.ContainsKey(location);
-    }
-
-    public void Reconstruct(Level level) {
-      walkableLocations.Clear();
-      locationsWithActingTTCs.Clear();
-      locToReachableLocs.Clear();
-      foreach (var entry in level.terrain.tiles) {
-        var location = entry.Key;
-        var terrainTile = entry.Value;
-        if (terrainTile.IsWalkable()) {
-          walkableLocations.Add(location);
-        }
-        if (terrainTile.components.GetAllIActingTTC().Count > 0) {
-          locationsWithActingTTCs.Add(location);
-        }
-        locToReachableLocs.Add(location, Actions.GetReachableLocations(level, location));
-      }
-
-      liveUnitByLocation.Clear();
-      foreach (var unit in level.units) {
-        if (unit.Alive()) {
-          Asserts.Assert(walkableLocations.Contains(unit.location));
-          liveUnitByLocation.Add(unit.location, unit);
-        }
-      }
     }
 
     public bool IsLocationWalkable(

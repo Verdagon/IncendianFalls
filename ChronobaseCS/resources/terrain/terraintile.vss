@@ -56,6 +56,3 @@ mut interface IActingTTC {
     containingTileLocation: Location
   ): Void;
 }
-
-
-imm interface ITerrainTileEvent { }

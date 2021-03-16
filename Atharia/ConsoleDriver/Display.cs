@@ -32,6 +32,9 @@ namespace ConsoleDriveyThing {
         } else if (detail is BaseOffenseUCAsIUnitComponent) {
         } else if (detail is BaseDefenseUCAsIUnitComponent) {
         } else if (detail is SpeedRingAsIUnitComponent) {
+        } else if (detail is DeathTriggerUCAsIUnitComponent) {
+        } else if (detail is BequeathUCAsIUnitComponent) {
+        } else if (detail is EvolvifyAICapabilityUCAsIUnitComponent) {
         } else if (detail is BideAICapabilityUCAsIUnitComponent bideI) {
           if (bideI.obj.charge > 0) {
             isUsingSpecialAbility = true;
@@ -198,6 +201,12 @@ namespace ConsoleDriveyThing {
             } else if (item is SpeedRingAsIItem) {
               itemPainters.Add(() => cell.Paint('=', ConsoleColor.Yellow));
               recognized = true;
+            } else if (item is BlazeRodAsIItem) {
+              itemPainters.Add(() => cell.Paint('\\', ConsoleColor.Yellow));
+              recognized = true;
+            } else if (item is ExplosionRodAsIItem) {
+              itemPainters.Add(() => cell.Paint('\\', ConsoleColor.White));
+              recognized = true;
             }
           }
         }
@@ -213,10 +222,24 @@ namespace ConsoleDriveyThing {
           featurePainters.Add(() => cell.Paint(ConsoleColor.Red));
           recognized = true;
         }
-        if (tc is LevelLinkTTCAsITerrainTileComponent) {
+        if (tc is LevelLinkTTCAsITerrainTileComponent || 
+            tc is EmberDeepLevelLinkerTTCAsITerrainTileComponent) {
           recognized = true;
         }
-        if (tc is EmberDeepLevelLinkerTTCAsITerrainTileComponent) {
+        if (tc is LeafTTCAsITerrainTileComponent) {
+          terrainPainters.Add(() => cell.Paint('v', ConsoleColor.Green));
+          recognized = true;
+        }
+        if (tc is FlowerTTCAsITerrainTileComponent) {
+          terrainPainters.Add(() => cell.Paint('x', ConsoleColor.Green));
+          recognized = true;
+        }
+        if (tc is LotusTTCAsITerrainTileComponent) {
+          terrainPainters.Add(() => cell.Paint('w', ConsoleColor.Green));
+          recognized = true;
+        }
+        if (tc is RoseTTCAsITerrainTileComponent) {
+          terrainPainters.Add(() => cell.Paint('o', ConsoleColor.Green));
           recognized = true;
         }
         Asserts.Assert(recognized, tc.ToString());
