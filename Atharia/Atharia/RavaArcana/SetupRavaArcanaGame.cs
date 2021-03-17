@@ -24,8 +24,10 @@ namespace RavaArcana {
               Unit.Null,
               Level.Null,
               0,
+              
               Unit.Null,
               false,
+              
               1,
               "",
               false,

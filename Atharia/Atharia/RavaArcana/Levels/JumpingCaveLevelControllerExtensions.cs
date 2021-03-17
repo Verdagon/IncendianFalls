@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using IncendianFalls;
 
 namespace Atharia.Model {
@@ -125,17 +126,31 @@ namespace Atharia.Model {
         Superstate superstate,
         string triggerName) {
       if (self.depth == 0 && triggerName == "viviantDied") {
-        var numViviants = 0;
+        var viviants = new List<Unit>();
         foreach (var unit in game.level.units) {
           var deathTrigger = unit.components.GetOnlyDeathTriggerUCOrNull();
           if (deathTrigger.Exists()) {
             if (deathTrigger.triggerName == "viviantDied") {
-              numViviants++;
+              viviants.Add(unit);
             }
           }
         }
-        game.root.logger.Info("num viviants left: " + numViviants);
-        if (numViviants == 1) {
+        // In the second half, every time a viviant dies, send all idle units on the level at the player.
+        if (viviants.Count() < 10) {
+          foreach (var viviant in game.level.units) {
+            var attackCapability = viviant.components.GetOnlyAttackAICapabilityUCOrNull();
+            if (attackCapability.Exists()) {
+              if (!attackCapability.killDirective.Exists()) {
+                var pathToPlayer = superstate.levelSuperstate.FindPath(viviant.location, game.player.location);
+                attackCapability.killDirective =
+                    self.root.EffectKillDirectiveCreate(
+                        game.player,
+                        self.root.EffectLocationMutListCreate(pathToPlayer));
+              }
+            }
+          }
+        }
+        if (viviants.Count() == 1) {
           var viviarch = Viviarch.Make(self.root);
           var viviarchLoc =
               superstate.levelSuperstate.GetNRandomWalkableLocations(

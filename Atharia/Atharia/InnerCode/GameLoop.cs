@@ -5,11 +5,6 @@ using Atharia.Model;
 
 namespace IncendianFalls {
   public class GameLoop {
-    public static void Continue(
-        IncendianFalls.SSContext context, Game game, Superstate superstate) {
-      ContinueBetweenUnits(context, game, superstate);
-    }
-
     // Called from the outside
     public static void ContinueAfterUnitAction(
         IncendianFalls.SSContext context,
@@ -53,7 +48,7 @@ namespace IncendianFalls {
           presenceTrigger.Trigger(context, game, superstate, game.actingUnit, game.actingUnit.location);
         }
       }
-
+      
       var wasPlayer = game.player.Exists() && game.actingUnit.NullableIs(game.player);
       game.actingUnit = Unit.Null;
 
@@ -76,6 +71,7 @@ namespace IncendianFalls {
       ContinueBetweenUnits(context, game, superstate);
     }
 
+    // Called from outside
     public static void ContinueBetweenUnits(
         IncendianFalls.SSContext context,
         Game game,
@@ -170,8 +166,17 @@ namespace IncendianFalls {
       Asserts.Assert(game.actingUnit.Exists());
       Asserts.Assert(!game.actingUnit.NullableIs(game.player)); // Because if it was, we should be getting user input.
 
-      while (game.actingUnit.Alive() && game.actingUnit.nextActionTime == game.time) {
+      // See APMT
+      int keepGoingUntil = game.time + 400;
+      int numActionsSoFar = 0;
+      while (game.actingUnit.Alive() && game.actingUnit.nextActionTime < keepGoingUntil) {
         EnemyAI.AI(context, game, superstate, game.actingUnit);
+
+        numActionsSoFar++;
+        // This is more to interrupt infinite loops than for any gameplay reason.
+        if (numActionsSoFar == 100) {
+          break;
+        }
       }
 
       ContinueAfterUnitAction(context, game, superstate);

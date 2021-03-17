@@ -30,11 +30,9 @@ namespace Atharia.Model {
       // Remember, if we get here, we might still have an existing valid directive.
       // The below code is to just to update it if we have better information now.
 
-      game.root.logger.Info("zork Looking!");
       
       Unit nearestEnemy = DetermineTarget.Determine(game, superstate, unit);
       if (!nearestEnemy.Exists()) {
-        game.root.logger.Info("zork no nearest enemy!");
         // There are no enemies. Don't update directive.
         return new Atharia.Model.Void();
       }
@@ -42,7 +40,6 @@ namespace Atharia.Model {
       // Enemy is not next to subject.
       // Check if we can see them.
       if (!superstate.levelSuperstate.CanSee(unit.location, nearestEnemy.location)) {
-        game.root.logger.Info("zork Cant see!");
         // Can't see the enemy. Don't update directive.
         return new Atharia.Model.Void();
       }
@@ -53,12 +50,10 @@ namespace Atharia.Model {
       List<Location> pathToNearestEnemy =
           superstate.levelSuperstate.FindPath(unit.location, nearestEnemy.location);
       if (pathToNearestEnemy.Count == 0) {
-        game.root.logger.Info("zork No path!");
         // Can't see the enemy. Don't update directive.
         return new Atharia.Model.Void();
       }
       
-      game.root.logger.Info("zork WE RIDE!");
 
       if (obj.killDirective.Exists()) {
         obj.killDirective.Destruct();

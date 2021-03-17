@@ -109,7 +109,7 @@ namespace Atharia.Model {
             var blazeRodTile = level.terrain.tiles[blazeRodLoc];
             blazeRodTile.components.Add(
                 level.root.EffectItemTTCCreate(
-                        level.root.EffectBlazeRodCreate().AsIItem())
+                        level.root.EffectExplosionRodCreate().AsIItem())
                     .AsITerrainTileComponent());
             openLowerLocs.Remove(blazeRodLoc);
 

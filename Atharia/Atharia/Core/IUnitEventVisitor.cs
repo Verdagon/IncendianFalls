@@ -8,10 +8,10 @@ namespace Atharia.Model {
 public interface IUnitEventVisitor {
   void VisitIUnitEvent(UnitUnleashBideEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitExplosionedEventAsIUnitEvent obj);
-  void VisitIUnitEvent(UnitBurningEventAsIUnitEvent obj);
-  void VisitIUnitEvent(UnitFireBombedEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitExplosionEventAsIUnitEvent obj);
+  void VisitIUnitEvent(UnitBurningEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitBlazeEventAsIUnitEvent obj);
+  void VisitIUnitEvent(UnitFireBombedEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitFireEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitMireEventAsIUnitEvent obj);
   void VisitIUnitEvent(UnitAttackEventAsIUnitEvent obj);

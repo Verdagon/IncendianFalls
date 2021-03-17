@@ -8,7 +8,7 @@ root mut struct Game {
   var level: ?&Level;
   var time: Int;
 
-  // See Suspending doc for more info on these.
+  // See GLS for more info on these.
   var actingUnit: ?Unit;
   var pauseBeforeNextUnit: Bool;
 

@@ -20,7 +20,7 @@ namespace IncendianFalls {
           new Location(0, 0, 0),
           "Viviant",
           0,
-          34, 34,
+          31, 31,
           components,
           false);
     }

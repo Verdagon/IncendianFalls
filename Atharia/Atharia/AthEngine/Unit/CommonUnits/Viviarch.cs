@@ -10,7 +10,7 @@ namespace IncendianFalls {
       components.Add(root.EffectWanderAICapabilityUCCreate().AsIUnitComponent());
       components.Add(root.EffectAttackAICapabilityUCCreate(KillDirective.Null).AsIUnitComponent());
       components.Add(root.EffectEvolvifyAICapabilityUCCreate().AsIUnitComponent());
-      components.Add(root.EffectBaseOffenseUCCreate(0, 150).AsIUnitComponent());
+      components.Add(root.EffectBaseOffenseUCCreate(0, 200).AsIUnitComponent());
       components.Add(root.EffectDeathTriggerUCCreate("viviarchDied").AsIUnitComponent());
       return root.EffectUnitCreate(
           NullIUnitEvent.Null,
@@ -18,7 +18,7 @@ namespace IncendianFalls {
           new Location(0, 0, 0),
           "Greater Viviarch",
           0,
-          50, 50,
+          200, 200,
           components,
           false);
     }

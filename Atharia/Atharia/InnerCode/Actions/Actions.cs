@@ -9,17 +9,18 @@ namespace IncendianFalls {
     public static readonly int FIRE_DAMAGE = 23;
     public static readonly int BLAZE_COST = 10;
     public static readonly int BLAZE_RANGE = 5;
-    public static readonly int BLAZE_DAMAGE = 7;
+    public static readonly int BLAZE_DAMAGE = 4;
     public static readonly int BLAZE_DURATION = 4;
     public static readonly int EXPLOSION_RANGE = 5;
     public static readonly int EXPLOSION_COST = 15;
-    public static readonly int EXPLOSION_DELAY = 3;
+    public static readonly int EXPLOSION_DELAY = 2;
     public static readonly int EXPLOSION_DAMAGE = 32;
     public static readonly int MIRE_COST = 2;
     public static readonly int FIRE_BOMB_COST = 10;
     public static readonly int FIRE_BOMB_DAMAGE = 32;
     public static readonly int LIGHTNING_CHARGE_DAMAGE = 4;
     public static readonly int BUMP_TIME_COST = 600;
+    public static readonly int BUMP_DAMAGE = 5;
 
     public const int LEAP_DISTANCE = 3;
 
@@ -505,8 +506,9 @@ namespace IncendianFalls {
         Superstate superstate,
         Location location) {
       Unit poorSuckerOnThisTile = superstate.levelSuperstate.GetLiveUnitAt(location);
-      Eventer.broadcastUnitFireBombedEvent(game, poorSuckerOnThisTile, location);
+      Eventer.broadcastTileExplodingEvent(game, location);
       if (poorSuckerOnThisTile.Exists()) {
+        Eventer.broadcastUnitFireBombedEvent(game, poorSuckerOnThisTile, location);
         AttackedInner(game, superstate, poorSuckerOnThisTile, FIRE_BOMB_DAMAGE, false);
       }
       game.actionNum++;
