@@ -95,7 +95,7 @@ namespace IncendianFalls {
               new LowerFScoreComparer(gFAndCameFromByLocation));
 
       foreach (var startLocation in startLocations) {
-        Asserts.Assert(!stopCondition(startLocation));
+        Asserts.Assert(!stopCondition(startLocation), "Start meets stop condition!");
         openLocationsLowestFFirst.Add(startLocation, new object());
         gFAndCameFromByLocation[startLocation] =
             new GFAndCameFrom(costGuesser(startLocation), 0, startLocation);

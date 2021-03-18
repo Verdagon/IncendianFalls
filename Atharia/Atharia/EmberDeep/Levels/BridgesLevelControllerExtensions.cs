@@ -66,7 +66,7 @@ namespace Atharia.Model {
 
       var entryLoc = levelSuperstate.FindMarkerLocation("entry");
 
-      levelSuperstate.Reconstruct(level);
+      levelSuperstate.ReconstructExpensive(level);
       levelSuperstate.AddNoUnitZone(entryLoc, 3);
 
       EmberDeepUnitsAndItems.FillWithUnits(
@@ -85,7 +85,7 @@ namespace Atharia.Model {
         /*numMantisBombardier=*/ 0 * numSpaces / 200,
         /*numLightningTrask=*/ 0 * numSpaces / 200);
 
-      levelSuperstate.Reconstruct(level);
+      levelSuperstate.ReconstructExpensive(level);
 
       EmberDeepUnitsAndItems.PlaceItems(game.rand, level, levelSuperstate, (loc) => !loc.Equals(entryLoc), .04f, 0f);
 

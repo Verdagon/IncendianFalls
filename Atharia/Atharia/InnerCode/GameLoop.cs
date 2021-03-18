@@ -76,7 +76,7 @@ namespace IncendianFalls {
         IncendianFalls.SSContext context,
         Game game,
         Superstate superstate) {
-      Asserts.Assert(!game.actingUnit.Exists());
+      Asserts.Assert(!game.actingUnit.Exists(), "There's an acting unit but there shouldnt be!");
 
       //context.root.logger.Error("between units there are " + context.root.rootIncarnation.incarnationsDefyingUC.Count + "+" + game.root.rootIncarnation.countDefyingMemberships());
 
@@ -148,7 +148,7 @@ namespace IncendianFalls {
       remainingPreActingUnitComponents.Destruct();
 
       if (game.actingUnit.NullableIs(game.player)) {
-        Asserts.Assert(game.WaitingOnPlayerInput());
+        Asserts.Assert(game.WaitingOnPlayerInput(), "Waiting on player input!");
         // It's the player turn, we don't do any AI for it.
         //flare(game, "/" + System.Reflection.MethodBase.GetCurrentMethod().Name);
         return; // To be continued... via PlayerAttack, PlayerMove, etc.

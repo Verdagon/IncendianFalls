@@ -101,8 +101,6 @@ namespace Atharia.Model {
 
       context.Flare(context.root.GetDeterministicHashCode().ToString());
 
-      levelSuperstate.Reconstruct(level);
-
       game.levels.Add(level);
 
       context.Flare(context.root.GetDeterministicHashCode().ToString());
@@ -135,21 +133,24 @@ namespace Atharia.Model {
             }
           }
         }
-        // In the second half, every time a viviant dies, send all idle units on the level at the player.
-        if (viviants.Count() < 10) {
-          foreach (var viviant in game.level.units) {
-            var attackCapability = viviant.components.GetOnlyAttackAICapabilityUCOrNull();
-            if (attackCapability.Exists()) {
-              if (!attackCapability.killDirective.Exists()) {
-                var pathToPlayer = superstate.levelSuperstate.FindPath(viviant.location, game.player.location);
-                attackCapability.killDirective =
-                    self.root.EffectKillDirectiveCreate(
-                        game.player,
-                        self.root.EffectLocationMutListCreate(pathToPlayer));
-              }
-            }
-          }
+        if (viviants.Count() == 9) {
+          game.player.components.Add(game.root.EffectChallengingUCCreate().AsIUnitComponent());
         }
+        // // In the second half, every time a viviant dies, send all idle units on the level at the player.
+        // if (viviants.Count() < 10) {
+        //   foreach (var viviant in game.level.units) {
+        //     var attackCapability = viviant.components.GetOnlyAttackAICapabilityUCOrNull();
+        //     if (attackCapability.Exists()) {
+        //       if (!attackCapability.killDirective.Exists()) {
+        //         var pathToPlayer = superstate.levelSuperstate.FindPath(viviant.location, game.player.location);
+        //         attackCapability.killDirective =
+        //             self.root.EffectKillDirectiveCreate(
+        //                 game.player,
+        //                 self.root.EffectLocationMutListCreate(pathToPlayer));
+        //       }
+        //     }
+        //   }
+        // }
         if (viviants.Count() == 1) {
           var viviarch = Viviarch.Make(self.root);
           var viviarchLoc =

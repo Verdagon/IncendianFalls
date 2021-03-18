@@ -163,6 +163,10 @@ public class IUnitComponentMutBunch {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersArmorMutSet");
     }
 
+    if (!root.ChallengingUCMutSetExists(membersChallengingUCMutSet.id)) {
+      violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersChallengingUCMutSet");
+    }
+
     if (!root.SorcerousUCMutSetExists(membersSorcerousUCMutSet.id)) {
       violations.Add("Null constraint violated! IUnitComponentMutBunch#" + id + ".membersSorcerousUCMutSet");
     }
@@ -275,6 +279,9 @@ public class IUnitComponentMutBunch {
     }
     if (root.ArmorMutSetExists(membersArmorMutSet.id)) {
       membersArmorMutSet.FindReachableObjects(foundIds);
+    }
+    if (root.ChallengingUCMutSetExists(membersChallengingUCMutSet.id)) {
+      membersChallengingUCMutSet.FindReachableObjects(foundIds);
     }
     if (root.SorcerousUCMutSetExists(membersSorcerousUCMutSet.id)) {
       membersSorcerousUCMutSet.FindReachableObjects(foundIds);
@@ -583,6 +590,15 @@ public class IUnitComponentMutBunch {
       return new ArmorMutSet(root, incarnation.membersArmorMutSet);
     }
                        }
+  public ChallengingUCMutSet membersChallengingUCMutSet {
+
+    get {
+      if (root == null) {
+        throw new Exception("Tried to get member membersChallengingUCMutSet of null!");
+      }
+      return new ChallengingUCMutSet(root, incarnation.membersChallengingUCMutSet);
+    }
+                       }
   public SorcerousUCMutSet membersSorcerousUCMutSet {
 
     get {
@@ -676,6 +692,8 @@ public class IUnitComponentMutBunch {
       root.EffectBlastRodMutSetCreate()
 ,
       root.EffectArmorMutSetCreate()
+,
+      root.EffectChallengingUCMutSetCreate()
 ,
       root.EffectSorcerousUCMutSetCreate()
 ,
@@ -875,6 +893,12 @@ public class IUnitComponentMutBunch {
     // Can optimize, check the type of element directly somehow
     if (root.ArmorExists(elementI.id)) {
       this.membersArmorMutSet.Add(root.GetArmor(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
+    if (root.ChallengingUCExists(elementI.id)) {
+      this.membersChallengingUCMutSet.Add(root.GetChallengingUC(elementI.id));
       return;
     }
 
@@ -1092,6 +1116,12 @@ public class IUnitComponentMutBunch {
     }
 
     // Can optimize, check the type of element directly somehow
+    if (root.ChallengingUCExists(elementI.id)) {
+      this.membersChallengingUCMutSet.Remove(root.GetChallengingUC(elementI.id));
+      return;
+    }
+
+    // Can optimize, check the type of element directly somehow
     if (root.SorcerousUCExists(elementI.id)) {
       this.membersSorcerousUCMutSet.Remove(root.GetSorcerousUC(elementI.id));
       return;
@@ -1143,6 +1173,7 @@ public class IUnitComponentMutBunch {
     this.membersBlazeRodMutSet.Clear();
     this.membersBlastRodMutSet.Clear();
     this.membersArmorMutSet.Clear();
+    this.membersChallengingUCMutSet.Clear();
     this.membersSorcerousUCMutSet.Clear();
     this.membersBaseOffenseUCMutSet.Clear();
     this.membersBaseDefenseUCMutSet.Clear();
@@ -1182,6 +1213,7 @@ public class IUnitComponentMutBunch {
         this.membersBlazeRodMutSet.Count +
         this.membersBlastRodMutSet.Count +
         this.membersArmorMutSet.Count +
+        this.membersChallengingUCMutSet.Count +
         this.membersSorcerousUCMutSet.Count +
         this.membersBaseOffenseUCMutSet.Count +
         this.membersBaseDefenseUCMutSet.Count
@@ -1228,6 +1260,7 @@ public class IUnitComponentMutBunch {
     var tempMembersBlazeRodMutSet = this.membersBlazeRodMutSet;
     var tempMembersBlastRodMutSet = this.membersBlastRodMutSet;
     var tempMembersArmorMutSet = this.membersArmorMutSet;
+    var tempMembersChallengingUCMutSet = this.membersChallengingUCMutSet;
     var tempMembersSorcerousUCMutSet = this.membersSorcerousUCMutSet;
     var tempMembersBaseOffenseUCMutSet = this.membersBaseOffenseUCMutSet;
     var tempMembersBaseDefenseUCMutSet = this.membersBaseDefenseUCMutSet;
@@ -1265,6 +1298,7 @@ public class IUnitComponentMutBunch {
     tempMembersBlazeRodMutSet.Destruct();
     tempMembersBlastRodMutSet.Destruct();
     tempMembersArmorMutSet.Destruct();
+    tempMembersChallengingUCMutSet.Destruct();
     tempMembersSorcerousUCMutSet.Destruct();
     tempMembersBaseOffenseUCMutSet.Destruct();
     tempMembersBaseDefenseUCMutSet.Destruct();
@@ -1365,6 +1399,9 @@ public class IUnitComponentMutBunch {
     }
     foreach (var element in this.membersArmorMutSet) {
       yield return new ArmorAsIUnitComponent(element);
+    }
+    foreach (var element in this.membersChallengingUCMutSet) {
+      yield return new ChallengingUCAsIUnitComponent(element);
     }
     foreach (var element in this.membersSorcerousUCMutSet) {
       yield return new SorcerousUCAsIUnitComponent(element);
@@ -2046,6 +2083,27 @@ public class IUnitComponentMutBunch {
         return result[0];
       } else {
         return Armor.Null;
+      }
+    }
+    public List<ChallengingUC> GetAllChallengingUC() {
+      var result = new List<ChallengingUC>();
+      foreach (var thing in this.membersChallengingUCMutSet) {
+        result.Add(thing);
+      }
+      return result;
+    }
+    public List<ChallengingUC> ClearAllChallengingUC() {
+      var result = new List<ChallengingUC>();
+      this.membersChallengingUCMutSet.Clear();
+      return result;
+    }
+    public ChallengingUC GetOnlyChallengingUCOrNull() {
+      var result = GetAllChallengingUC();
+      Asserts.Assert(result.Count <= 1);
+      if (result.Count > 0) {
+        return result[0];
+      } else {
+        return ChallengingUC.Null;
       }
     }
     public List<SorcerousUC> GetAllSorcerousUC() {

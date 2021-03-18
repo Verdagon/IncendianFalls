@@ -46,11 +46,11 @@ namespace IncendianFalls {
           totalWeight += weightsByDirection[direction];
         }
 
-        string weightsStr = "weights:";
-        for (int dirNum = 0; dirNum < Direction.NUM; dirNum++) {
-          weightsStr += " " + dirNum + ":" + weightsByDirection[new Direction(dirNum)];
-        }
-        Console.WriteLine(weightsStr);
+        // string weightsStr = "weights:";
+        // for (int dirNum = 0; dirNum < Direction.NUM; dirNum++) {
+        //   weightsStr += " " + dirNum + ":" + weightsByDirection[new Direction(dirNum)];
+        // }
+        // Console.WriteLine(weightsStr);
 
         if (totalWeight == 0) {
           // End the snake!

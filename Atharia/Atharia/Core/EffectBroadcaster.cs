@@ -46,6 +46,9 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly SortedDictionary<int, List<IDeathTriggerUCEffectObserver>> observersForDeathTriggerUC =
       new SortedDictionary<int, List<IDeathTriggerUCEffectObserver>>();
 
+  readonly SortedDictionary<int, List<IChallengingUCEffectObserver>> observersForChallengingUC =
+      new SortedDictionary<int, List<IChallengingUCEffectObserver>>();
+
   readonly SortedDictionary<int, List<IBequeathUCEffectObserver>> observersForBequeathUC =
       new SortedDictionary<int, List<IBequeathUCEffectObserver>>();
 
@@ -715,6 +718,9 @@ public class EffectBroadcaster : IEffectVisitor {
   readonly Dictionary<int, List<IArmorMutSetEffectObserver>> observersForArmorMutSet =
       new Dictionary<int, List<IArmorMutSetEffectObserver>>();
 
+  readonly Dictionary<int, List<IChallengingUCMutSetEffectObserver>> observersForChallengingUCMutSet =
+      new Dictionary<int, List<IChallengingUCMutSetEffectObserver>>();
+
   readonly Dictionary<int, List<ISorcerousUCMutSetEffectObserver>> observersForSorcerousUCMutSet =
       new Dictionary<int, List<ISorcerousUCMutSetEffectObserver>>();
 
@@ -1073,6 +1079,34 @@ public class EffectBroadcaster : IEffectVisitor {
       list.Remove(observer);
       if (list.Count == 0) {
         observersForDeathTriggerUC.Remove(id);
+      }
+    } else {
+      throw new Exception("Couldnt find!");
+    }
+  }
+
+  public void visitChallengingUCEffect(IChallengingUCEffect effect) {
+    if (observersForChallengingUC.TryGetValue(effect.id, out var observers)) {
+      foreach (var observer in new List<IChallengingUCEffectObserver>(observers)) {
+        observer.OnChallengingUCEffect(effect);
+      }
+    }
+  }
+  public void AddChallengingUCObserver(int id, IChallengingUCEffectObserver observer) {
+    List<IChallengingUCEffectObserver> obsies;
+    if (!observersForChallengingUC.TryGetValue(id, out obsies)) {
+      obsies = new List<IChallengingUCEffectObserver>();
+    }
+    obsies.Add(observer);
+    observersForChallengingUC[id] = obsies;
+  }
+
+  public void RemoveChallengingUCObserver(int id, IChallengingUCEffectObserver observer) {
+    if (observersForChallengingUC.ContainsKey(id)) {
+      var list = observersForChallengingUC[id];
+      list.Remove(observer);
+      if (list.Count == 0) {
+        observersForChallengingUC.Remove(id);
       }
     } else {
       throw new Exception("Couldnt find!");
@@ -7206,6 +7240,33 @@ public class EffectBroadcaster : IEffectVisitor {
         list.Remove(observer);
         if (list.Count == 0) {
           observersForArmorMutSet.Remove(id);
+        }
+      } else {
+        throw new Exception("Couldnt find!");
+      }
+    }
+
+    public void visitChallengingUCMutSetEffect(IChallengingUCMutSetEffect effect) {
+      if (observersForChallengingUCMutSet.TryGetValue(effect.id, out var observers)) {
+        foreach (var observer in new List<IChallengingUCMutSetEffectObserver>(observers)) {
+          observer.OnChallengingUCMutSetEffect(effect);
+        }
+      }
+    }
+    public void AddChallengingUCMutSetObserver(int id, IChallengingUCMutSetEffectObserver observer) {
+      List<IChallengingUCMutSetEffectObserver> obsies;
+      if (!observersForChallengingUCMutSet.TryGetValue(id, out obsies)) {
+        obsies = new List<IChallengingUCMutSetEffectObserver>();
+      }
+      obsies.Add(observer);
+      observersForChallengingUCMutSet[id] = obsies;
+    }
+    public void RemoveChallengingUCMutSetObserver(int id, IChallengingUCMutSetEffectObserver observer) {
+      if (observersForChallengingUCMutSet.ContainsKey(id)) {
+        var list = observersForChallengingUCMutSet[id];
+        list.Remove(observer);
+        if (list.Count == 0) {
+          observersForChallengingUCMutSet.Remove(id);
         }
       } else {
         throw new Exception("Couldnt find!");

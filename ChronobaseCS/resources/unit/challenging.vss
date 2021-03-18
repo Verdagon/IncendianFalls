@@ -1,0 +1,8 @@
+
+mut struct ChallengingUC {
+  ChallengingUC isa IUnitComponent;
+
+  fn Destruct(this: ChallengingUC overrides IDestructible): Void {
+    ChallengingUCExtensions.Destruct
+  }
+}

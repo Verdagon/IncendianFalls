@@ -312,6 +312,7 @@ namespace AthPlayer {
         } else if (detail is TemporaryCloneAICapabilityUCAsIUnitComponent) {
         } else if (detail is EvolvifyAICapabilityUCAsIUnitComponent) {
         } else if (detail is BequeathUCAsIUnitComponent) {
+        } else if (detail is ChallengingUCAsIUnitComponent) {
         } else if (detail is TutorialDefyCounterUCAsIUnitComponent) {
         } else if (detail is LightningChargingUCAsIUnitComponent) {
         } else if (detail is DeathTriggerUCAsIUnitComponent) {

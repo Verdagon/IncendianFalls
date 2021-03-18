@@ -132,7 +132,7 @@ namespace Atharia.Model {
           level.root.EffectGlaiveCreate().AsIItem())
         .AsITerrainTileComponent());
 
-      levelSuperstate.Reconstruct(level);
+      levelSuperstate.ReconstructExpensive(level);
       levelSuperstate.AddNoUnitZone(entryLocation, 3);
 
       int numSpacesInRestOfLevel = levelSuperstate.NumWalkableLocations(false) - ambushAreaFloors.Count;
@@ -169,7 +169,7 @@ namespace Atharia.Model {
         /*numMantisBombardier=*/ 0,
         /*numLightningTrask=*/ 0);
 
-      levelSuperstate.Reconstruct(level);
+      levelSuperstate.ReconstructExpensive(level);
 
       game.levels.Add(level);
 

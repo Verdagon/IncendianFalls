@@ -18,6 +18,7 @@ IDoomedUCEffectVisitor,
 ITemporaryCloneImpulseEffectVisitor,
 ITemporaryCloneAICapabilityUCEffectVisitor,
 IDeathTriggerUCEffectVisitor,
+IChallengingUCEffectVisitor,
 IBequeathUCEffectVisitor,
 ISummonImpulseEffectVisitor,
 ISummonAICapabilityUCEffectVisitor,
@@ -241,6 +242,7 @@ IExplosionRodMutSetEffectVisitor,
 IBlazeRodMutSetEffectVisitor,
 IBlastRodMutSetEffectVisitor,
 IArmorMutSetEffectVisitor,
+IChallengingUCMutSetEffectVisitor,
 ISorcerousUCMutSetEffectVisitor,
 IBaseOffenseUCMutSetEffectVisitor,
 IBaseDefenseUCMutSetEffectVisitor,
@@ -425,6 +427,7 @@ public void visitIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffect effe
 ,  effect.incarnation.membersBlazeRodMutSet
 ,  effect.incarnation.membersBlastRodMutSet
 ,  effect.incarnation.membersArmorMutSet
+,  effect.incarnation.membersChallengingUCMutSet
 ,  effect.incarnation.membersSorcerousUCMutSet
 ,  effect.incarnation.membersBaseOffenseUCMutSet
 ,  effect.incarnation.membersBaseDefenseUCMutSet    );
@@ -528,6 +531,20 @@ public void visitDeathTriggerUCEffect(IDeathTriggerUCEffect effect) { effect.vis
 
   public void visitDeathTriggerUCDeleteEffect(DeathTriggerUCDeleteEffect effect) {
     root.EffectDeathTriggerUCDelete(effect.id);
+  }
+
+     
+public void visitChallengingUCEffect(IChallengingUCEffect effect) { effect.visitIChallengingUCEffect(this); }
+  public void visitChallengingUCCreateEffect(ChallengingUCCreateEffect effect) {
+    // For now we're just feeding the remote ID in. Someday we might want to have a map
+    // in the applier instead.
+    root.TrustedEffectChallengingUCCreateWithId(effect.id
+    );
+
+}
+
+  public void visitChallengingUCDeleteEffect(ChallengingUCDeleteEffect effect) {
+    root.EffectChallengingUCDelete(effect.id);
   }
 
      
@@ -4278,6 +4295,23 @@ public void visitGameEffect(IGameEffect effect) { effect.visitIGameEffect(this);
     public void visitArmorMutSetRemoveEffect(ArmorMutSetRemoveEffect effect) {
       root.CheckUnlocked();
       root.EffectArmorMutSetRemove(effect.id, effect.element);
+    }
+       
+    public void visitChallengingUCMutSetEffect(IChallengingUCMutSetEffect effect) { effect.visitIChallengingUCMutSetEffect(this); }
+    public void visitChallengingUCMutSetCreateEffect(ChallengingUCMutSetCreateEffect effect) {
+      // For now we're just feeding the remote ID in. Someday we might want to have a map
+      // in the applier instead.
+      root.TrustedEffectChallengingUCMutSetCreateWithId(effect.id);
+    }
+    public void visitChallengingUCMutSetDeleteEffect(ChallengingUCMutSetDeleteEffect effect) {
+      root.EffectChallengingUCMutSetDelete(effect.id);
+    }
+    public void visitChallengingUCMutSetAddEffect(ChallengingUCMutSetAddEffect effect) {
+     root.EffectChallengingUCMutSetAdd(effect.id, effect.element);
+ }
+    public void visitChallengingUCMutSetRemoveEffect(ChallengingUCMutSetRemoveEffect effect) {
+      root.CheckUnlocked();
+      root.EffectChallengingUCMutSetRemove(effect.id, effect.element);
     }
        
     public void visitSorcerousUCMutSetEffect(ISorcerousUCMutSetEffect effect) { effect.visitISorcerousUCMutSetEffect(this); }

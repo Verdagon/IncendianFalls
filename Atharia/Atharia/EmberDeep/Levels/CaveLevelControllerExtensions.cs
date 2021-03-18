@@ -130,7 +130,7 @@ namespace Atharia.Model {
 
       context.Flare(context.root.GetDeterministicHashCode().ToString());
 
-      levelSuperstate.Reconstruct(level);
+      levelSuperstate.ReconstructExpensive(level);
       levelSuperstate.AddNoUnitZone(entryLocation, 3);
 
       context.Flare(context.root.GetDeterministicHashCode().ToString());
@@ -204,7 +204,7 @@ namespace Atharia.Model {
 
       context.Flare(context.root.GetDeterministicHashCode().ToString());
 
-      levelSuperstate.Reconstruct(level);
+      levelSuperstate.ReconstructExpensive(level);
 
       game.levels.Add(level);
 

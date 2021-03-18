@@ -170,11 +170,11 @@ namespace AthPlayer {
         return readyEffects;
       }
       if (uiTimer.GetTimeMs() < stallEffectUntilUiTimeMs) {
-        Debug.Log("stalled at game " + uiTimer.GetTimeMs() + " for reason " + stallEffectUntilUiTimeReason + "! about to run: " + serverSS.waitingEffects.Peek());
+        // Debug.Log("stalled at game " + uiTimer.GetTimeMs() + " for reason " + stallEffectUntilUiTimeReason + "! about to run: " + serverSS.waitingEffects.Peek());
         return readyEffects;
       }
       if (gameTimer.GetTimeMs() < stallEffectUntilGameTimeMs) {
-        Debug.Log("stalled at game " + gameTimer.GetTimeMs() + " for reason " + stallEffectUntilGameTimeReason + "! about to run: " + serverSS.waitingEffects.Peek());
+        // Debug.Log("stalled at game " + gameTimer.GetTimeMs() + " for reason " + stallEffectUntilGameTimeReason + "! about to run: " + serverSS.waitingEffects.Peek());
         return readyEffects;
       }
 
@@ -265,7 +265,7 @@ namespace AthPlayer {
         }
       }
       if (appliedEffects > 0) {
-        Debug.Log("Applied " + appliedEffects + " effects in " + (Time.time - startUnityTime) + "s, there are " + serverSS.waitingEffects.Count + " left.");
+        // Debug.Log("Applied " + appliedEffects + " effects in " + (Time.time - startUnityTime) + "s, there are " + serverSS.waitingEffects.Count + " left.");
       }
     }
 
@@ -523,18 +523,19 @@ namespace AthPlayer {
 
       var buttons = new List<OverlayPresenter.PageButton>();
       for (int i = 0; i < comm.actions.Count; i++) {
+        int buttonIndex = i; // A new var so it can be closured unchanging 
         buttons.Add(
           new OverlayPresenter.PageButton(
-            comm.actions[i].label,
+            comm.actions[buttonIndex].label,
             () => {
               if (isModal) {
                 currentModalOverlay = null;
               }
-              if (i < comm.actions.Count) {
-                if (comm.actions[i].triggerName == "_exitGame") {
+              if (buttonIndex < comm.actions.Count) {
+                if (comm.actions[buttonIndex].triggerName == "_exitGame") {
                   exitClicked?.Invoke();
                 } else {
-                  serverSS.RequestCommAction(game.id, comm.id, i);
+                  serverSS.RequestCommAction(game.id, comm.id, buttonIndex);
                 }
               }
             }));

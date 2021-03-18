@@ -18,8 +18,9 @@ namespace AthPlayer {
     SetHighlightLocations setHighlightLocations;
 
     Location maybeHoverLocation;
-    bool moving = false;
+    bool pathing = false;
     List<Location> path;
+    int hpAtPathTime;
 
     public NormalMode(
         SuperstructureWrapper serverSS,
@@ -47,9 +48,9 @@ namespace AthPlayer {
         return;
       }
 
-      if (moving) {
+      if (pathing) {
         showError("Moving canceled!");
-        moving = false;
+        pathing = false;
         path.Clear();
         return;
       }
@@ -80,28 +81,29 @@ namespace AthPlayer {
         showError("Can't go there!");
         return;
       }
-
-      moving = true;
+      
+      pathing = true;
+      hpAtPathTime = game.player.hp;
       Asserts.Assert(!path[0].Equals(game.player.location));
       TakeNextStep();
     }
 
     private void TakeNextStep() {
-      Asserts.Assert(moving);
+      Asserts.Assert(pathing);
       Asserts.Assert(!path[0].Equals(game.player.location));
       var nextStep = path[0];
       path.RemoveAt(0);
 
 
       if (path.Count == 0) {
-        moving = false;
+        pathing = false;
         path.Clear();
       }
 
       var result = serverSS.RequestMove(game.id, nextStep);
       if (result != "") {
         showError(result);
-        moving = false;
+        pathing = false;
         path.Clear();
         return;
       }
@@ -110,7 +112,7 @@ namespace AthPlayer {
     public void Update(Location maybeHoverLocation) {
       this.maybeHoverLocation = maybeHoverLocation;
 
-      if (moving) {
+      if (pathing) {
         Asserts.Assert(path.Count > 0);
         if (animationsDoneAndReadyForPlayerInput()) {
           TakeNextStep();
@@ -183,10 +185,16 @@ namespace AthPlayer {
     public void visitUnitSetEvventEffect(UnitSetEvventEffect effect) { }
     public void visitUnitSetLifeEndTimeEffect(UnitSetLifeEndTimeEffect effect) { }
     public void visitUnitSetNextActionTimeEffect(UnitSetNextActionTimeEffect effect) { }
-    public void visitUnitSetHpEffect(UnitSetHpEffect effect) { }
+    public void visitUnitSetHpEffect(UnitSetHpEffect effect) {
+      if (path.Count > 0 && game.player.hp < hpAtPathTime) {
+        path.Clear();
+        pathing = false;
+        showError("Path interrupted!");
+      }
+    }
     public void visitUnitSetMaxHpEffect(UnitSetMaxHpEffect effect) { }
     public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) {
-      if (moving) {
+      if (pathing) {
         UpdateHighlight();
       }
     }

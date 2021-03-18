@@ -37,6 +37,7 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
   public readonly int membersBlazeRodMutSet;
   public readonly int membersBlastRodMutSet;
   public readonly int membersArmorMutSet;
+  public readonly int membersChallengingUCMutSet;
   public readonly int membersSorcerousUCMutSet;
   public readonly int membersBaseOffenseUCMutSet;
   public readonly int membersBaseDefenseUCMutSet;
@@ -73,6 +74,7 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
       int membersBlazeRodMutSet,
       int membersBlastRodMutSet,
       int membersArmorMutSet,
+      int membersChallengingUCMutSet,
       int membersSorcerousUCMutSet,
       int membersBaseOffenseUCMutSet,
       int membersBaseDefenseUCMutSet) {
@@ -108,6 +110,7 @@ public class IUnitComponentMutBunchIncarnation : IIUnitComponentMutBunchEffectVi
     this.membersBlazeRodMutSet = membersBlazeRodMutSet;
     this.membersBlastRodMutSet = membersBlastRodMutSet;
     this.membersArmorMutSet = membersArmorMutSet;
+    this.membersChallengingUCMutSet = membersChallengingUCMutSet;
     this.membersSorcerousUCMutSet = membersSorcerousUCMutSet;
     this.membersBaseOffenseUCMutSet = membersBaseOffenseUCMutSet;
     this.membersBaseDefenseUCMutSet = membersBaseDefenseUCMutSet;
@@ -146,6 +149,7 @@ membersExplosionRodMutSet,
 membersBlazeRodMutSet,
 membersBlastRodMutSet,
 membersArmorMutSet,
+membersChallengingUCMutSet,
 membersSorcerousUCMutSet,
 membersBaseOffenseUCMutSet,
 membersBaseDefenseUCMutSet    );
@@ -153,6 +157,7 @@ membersBaseDefenseUCMutSet    );
 
   public void visitIUnitComponentMutBunchCreateEffect(IUnitComponentMutBunchCreateEffect e) {}
   public void visitIUnitComponentMutBunchDeleteEffect(IUnitComponentMutBunchDeleteEffect e) {}
+
 
 
 

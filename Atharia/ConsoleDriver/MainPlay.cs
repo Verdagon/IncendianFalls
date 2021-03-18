@@ -121,7 +121,7 @@ namespace ConsoleDriveyThing {
         var (setupEffects, serverGame) = serverSS.RequestSetupRavaArcanaGame(random, 0, squareLevelsOnly);
         clientRoot.Transact(delegate () {
           foreach (var effect in FilterRelevantEffects(setupEffects)) {
-            Console.WriteLine("Applying " + effect);
+            // Console.WriteLine("Applying " + effect);
             new EffectApplier(clientRoot).Apply(effect);
           }
           return 0;

@@ -190,6 +190,7 @@ namespace AthPlayer {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is DefyingUCAsIUnitComponent defying) {
         unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is ChallengingUCAsIUnitComponent) {
       } else if (component is MiredUCAsIUnitComponent) {
         unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is OnFireUCAsIUnitComponent) {
@@ -204,7 +205,7 @@ namespace AthPlayer {
         sorc.obj.AddObserver(postBroadcaster, this);
       } else if (component is BaseCombatTimeUCAsIUnitComponent) {
       } else if (component is SummonAICapabilityUCAsIUnitComponent) {
-      } else if (component is TemporaryCloneAICapabilityUC) {
+      } else if (component is ChallengingUCAsIUnitComponent) {
       } else if (component is BaseMovementTimeUCAsIUnitComponent) {
       } else if (component is BaseSightRangeUCAsIUnitComponent) {
       } else if (component is LightningChargingUCAsIUnitComponent) {
@@ -257,7 +258,6 @@ namespace AthPlayer {
         sorc.obj.RemoveObserver(postBroadcaster, this);
       } else if (component is BaseCombatTimeUCAsIUnitComponent) {
       } else if (component is SummonAICapabilityUCAsIUnitComponent) {
-      } else if (component is TemporaryCloneAICapabilityUC) {
       } else if (component is BaseMovementTimeUCAsIUnitComponent) {
       } else if (component is BaseSightRangeUCAsIUnitComponent) {
       } else if (component is LightningChargingUCAsIUnitComponent) {
@@ -282,6 +282,7 @@ namespace AthPlayer {
         //unitView.SetDescription(GetUnitViewDescription(unit));
       } else if (component is SpeedRingAsIUnitComponent) {
         //unitView.SetDescription(GetUnitViewDescription(unit));
+      } else if (component is ChallengingUCAsIUnitComponent) {
       } else {
         Asserts.Assert(false, "Unknown component: " + component);
       }
@@ -512,6 +513,7 @@ namespace AthPlayer {
         } else if (detail is ManaPotionAsIUnitComponent) {
         } else if (detail is EvolvifyAICapabilityUCAsIUnitComponent) {
         } else if (detail is BequeathUCAsIUnitComponent) {
+        } else if (detail is ChallengingUCAsIUnitComponent) {
         } else {
           Debug.LogError("Unknown detail type: " + detail);
         }
@@ -1125,7 +1127,7 @@ namespace AthPlayer {
       }
 
       public void visitUnitSetLocationEffect(UnitSetLocationEffect effect) {
-        staller(unitPresenter.hopEndTime, "unit hop");
+        // staller(unitPresenter.hopEndTime, "unit hop");
       }
 
       public void OnIUnitComponentMutBunchEffect(IIUnitComponentMutBunchEffect effect) { effect.visitIIUnitComponentMutBunchEffect(this); }

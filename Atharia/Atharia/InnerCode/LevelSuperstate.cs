@@ -1,6 +1,13 @@
 ﻿using System;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Atharia.Model;
 using IncendianFalls;
 
@@ -34,10 +41,10 @@ namespace Atharia.Model {
       liveUnitByLocation = new SortedDictionary<Location, Unit>();
       locationsWithActingTTCs = new SortedSet<Location>();
       noUnitLocations = new SortedSet<Location>();
-      Reconstruct(level);
+      ReconstructExpensive(level);
     }
 
-    public void Reconstruct(Level level) {
+    public void ReconstructExpensive(Level level) {
       walkableLocations.Clear();
       locationsWithActingTTCs.Clear();
       locToHoppableLocs.Clear();
@@ -54,19 +61,45 @@ namespace Atharia.Model {
           locationsWithActingTTCs.Add(location);
         }
       }
-      foreach (var entry in level.terrain.tiles) {
-        var location = entry.Key;
-        locToHoppableLocs.Add(location, Actions.GetHoppableLocationsExpensive(this, level, location, false));
-      }
-      foreach (var entry in level.terrain.tiles) {
-        var location = entry.Key;
-        locToVisibleLocs.Add(location, Sight.GetVisibleLocationsExpensive(level.terrain, location));
-      }
-      foreach (var entry in level.terrain.tiles) {
-        var location = entry.Key;
-        locToNearbyLocToPath.Add(location, Navigation.GetNearbyLocationPathsExpensive(this, location));
+
+      // var startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+      
+      var locAndHoppableLocPairs = new ConcurrentBag<(Location, SortedSet<Location>)>();
+      // foreach (var location in level.terrain.tiles.Keys) {
+        Parallel.ForEach(level.terrain.tiles.Keys, location => {
+        var visibleLocs = Actions.GetHoppableLocationsExpensive(this, level, location, false);
+        locAndHoppableLocPairs.Add((location, visibleLocs));
+        });
+      // }
+      foreach (var pair in locAndHoppableLocPairs) {
+        locToHoppableLocs.Add(pair.Item1, pair.Item2);
       }
 
+      var locAndVisibleLocPairs = new ConcurrentBag<(Location, SortedSet<Location>)>();
+      // foreach (var location in level.terrain.tiles.Keys) {
+        Parallel.ForEach(level.terrain.tiles.Keys, location => {
+        var visibleLocs = Sight.GetVisibleLocationsExpensive(level.terrain, location);
+        locAndVisibleLocPairs.Add((location, visibleLocs));
+        });
+      // }
+      foreach (var pair in locAndVisibleLocPairs) {
+        locToVisibleLocs.Add(pair.Item1, pair.Item2);
+      }
+      
+      var locAndNearbyLocPairs = new ConcurrentBag<(Location, SortedDictionary<Location, List<Location>>)>();
+      // foreach (var location in level.terrain.tiles.Keys) {
+        Parallel.ForEach(level.terrain.tiles.Keys, location => {
+        var visibleLocs = Navigation.GetNearbyLocationPathsExpensive(this, location);
+        locAndNearbyLocPairs.Add((location, visibleLocs));
+        });
+      // }
+      foreach (var pair in locAndNearbyLocPairs) {
+        locToNearbyLocToPath.Add(pair.Item1, pair.Item2);
+      }
+      
+      // var endTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+      // Console.WriteLine("Duration: " + (endTime - startTime));
+      
       foreach (var unit in level.units) {
         if (unit.Alive()) {
           Asserts.Assert(walkableLocations.Contains(unit.location));
@@ -320,6 +353,8 @@ namespace Atharia.Model {
         Location nearestTo,
         Unit notThisUnit,
         bool goodFilter) {
+      // When changing this, remember that theres sometimes Challenging units across the
+      // map that we dont want to miss.
       Unit nearestEnemy = Unit.Null;
       float distanceToNearestEnemy = 0;
       foreach (var otherUnit in game.level.units) {

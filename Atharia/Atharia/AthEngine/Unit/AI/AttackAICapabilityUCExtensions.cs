@@ -38,8 +38,11 @@ namespace Atharia.Model {
       }
 
       // Enemy is not next to subject.
-      // Check if we can see them.
-      if (!superstate.levelSuperstate.CanSee(unit.location, nearestEnemy.location)) {
+      // Check if we can see them or they're challenging (so we know where they are).
+      var canSee =
+          nearestEnemy.components.GetAllChallengingUC().Count > 0 ||
+          superstate.levelSuperstate.CanSee(unit.location, nearestEnemy.location);
+      if (!canSee) {
         // Can't see the enemy. Don't update directive.
         return new Atharia.Model.Void();
       }

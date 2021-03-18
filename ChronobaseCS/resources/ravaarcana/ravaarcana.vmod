@@ -73,6 +73,7 @@ unit/stats/offense.vss
 unit/stats/sorcerous.vss
 unit/summon.vss
 unit/bequeath.vss
+unit/challenging.vss
 unit/deathtrigger.vss
 unit/temporaryclone.vss
 unit/doomed.vss

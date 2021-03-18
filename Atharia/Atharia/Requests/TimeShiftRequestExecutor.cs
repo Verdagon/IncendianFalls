@@ -21,7 +21,7 @@ namespace IncendianFalls {
       // Revert to the previous turn.
       game.root.Revert(olderIncarnation);
       // Reconstruct the views.
-      superstate.levelSuperstate.Reconstruct(game.level);
+      superstate.levelSuperstate.ReconstructExpensive(game.level);
 
       // Not removing from superstate.requests, we'll do that when timeshifting is done.
     }

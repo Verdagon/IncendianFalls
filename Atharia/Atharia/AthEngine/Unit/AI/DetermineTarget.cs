@@ -29,6 +29,8 @@ namespace IncendianFalls {
         return adjacentEnemies[0];
       }
 
+      // When changing this, remember that theres sometimes Challenging units across the
+      // map that we dont want to miss.
       return superstate.levelSuperstate.FindNearestLiveUnit(
           game,
           unit.location,
