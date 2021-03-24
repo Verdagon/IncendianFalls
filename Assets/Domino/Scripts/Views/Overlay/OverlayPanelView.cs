@@ -373,6 +373,11 @@ namespace Domino {
     }
 
     public void Update() {
+      if (instantiator == null) {
+        // We aren't initialized yet
+        return;
+      }
+      Asserts.Assert(fadingObjectIds != null);
       foreach (var id in new HashSet<int>(fadingObjectIds))
         UpdateOpacity(overlayObjects[id]);
 

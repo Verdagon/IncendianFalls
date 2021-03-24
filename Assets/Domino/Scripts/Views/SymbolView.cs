@@ -150,8 +150,8 @@ namespace Domino {
       InnerSetSymbolId(symbolDescription.symbol.symbolId);
       InnerSetExtruded(symbolDescription.extruded);
       InnerSetOutline(symbolDescription.symbol.withOutline, symbolDescription.symbol.outlineColor);
-      InnerSetFrontColor(symbolDescription.symbol.frontColor);
-      InnerSetSidesColor(symbolDescription.sidesColor);
+      SetFrontColor(symbolDescription.symbol.frontColor);
+      SetSidesColor(symbolDescription.sidesColor);
       InnerSetScale(symbolDescription.symbol.scale);
       instanceAlive = true;
 
@@ -222,17 +222,13 @@ namespace Domino {
       outlineColor = newOutlineColor;
     }
 
-    private void InnerSetFrontColor(IVector4Animation newColor) {
+    public void SetFrontColor(IVector4Animation newColor) {
       ColorAnimator.MakeOrGetFrom(clock, frontObject).Set(newColor, renderPriority);
-
-      //var blackWithNewOpacity = new Color(0, 0, 0, newColor.a);
-      //frontOutlineObject.GetComponent<ColorChanger>().Set(
-      //    blackWithNewOpacity, renderPriority);
 
       frontColor = newColor;
     }
 
-    private void InnerSetSidesColor(IVector4Animation newColor) {
+    public void SetSidesColor(IVector4Animation newColor) {
       ColorAnimator.MakeOrGetFrom(clock, sidesObject).Set(newColor, renderPriority);
       sidesColor = newColor;
     }

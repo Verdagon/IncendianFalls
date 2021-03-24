@@ -10,7 +10,11 @@ namespace AthPlayer {
   public class LookPanelView {
     OverlayPaneler overlayPaneler;
     OverlayPanelView visibleOverlayPanelView;
+    // In AthPlayer, the status view is below, so our LookPanelView is at 2 Y.
+    // In Editor, our LookPanelView is at the bottom, so has 0 Y.
     int panelGYInScreen;
+    // In AthPlayer, the status view has padding on top of it, so our LookPanelView needs 0 bottom padding.
+    // In Editor, the status view is at the bottom of the screen, so needs 1 bottom padding.
     int bottomPadding;
 
     public LookPanelView(OverlayPaneler overlayPaneler, int panelGYInScreen, int bottomPadding) {
@@ -39,13 +43,12 @@ namespace AthPlayer {
       }
 
       int topPadding = 1;
-      int contentYStart = bottomPadding;
-      // 1 line of text, 1 padding between, 1 line of text
+      int contentYStart = this.bottomPadding;
+      // 1 line of bottom padding, 1 line of text, 1 padding between, 1 line of text
       int panelGH = bottomPadding + 1 + 1 + 1 + topPadding;
 
 
       int panelGXInScreen = 0;
-      int panelGYInScreen = PlayerPanelView.PANEL_GH;
       visibleOverlayPanelView =
         overlayPaneler.MakePanel(panelGXInScreen, panelGYInScreen, overlayPaneler.screenGW, panelGH);
       visibleOverlayPanelView.AddRectangle(
@@ -60,13 +63,13 @@ namespace AthPlayer {
       int buttonsWidth = 3;
 
       if (status.Length == 0 && symbolsAndLabels.Count == 0) {
-        var lines = LineWrapper.Wrap(message, 68 - buttonsWidth);
+        var lines = LineWrapper.Wrap(message, overlayPaneler.screenGW - 2 - buttonsWidth);
         for (int i = 0; i < lines.Length; i++) {
-          visibleOverlayPanelView.AddString(0, 1, contentYStart + 2 - i, 68, new UnityEngine.Color(1, 1, 1, 1), Fonts.PROSE_OVERLAY_FONT, lines[i]);
+          visibleOverlayPanelView.AddString(0, 1, contentYStart + 2 - i, overlayPaneler.screenGW - 2, new UnityEngine.Color(1, 1, 1, 1), Fonts.PROSE_OVERLAY_FONT, lines[i]);
         }
       } else {
-        visibleOverlayPanelView.AddString(0, 1, contentYStart + 2, 68, new UnityEngine.Color(1, 1, 1, 1), Fonts.PROSE_OVERLAY_FONT, message);
-        visibleOverlayPanelView.AddString(0, 70 - buttonsWidth - 1 - status.Length, contentYStart + 2, 58, new UnityEngine.Color(1, 1, 1, 1), Fonts.PROSE_OVERLAY_FONT, status);
+        visibleOverlayPanelView.AddString(0, 1, contentYStart + 2, overlayPaneler.screenGW - 2, new UnityEngine.Color(1, 1, 1, 1), Fonts.PROSE_OVERLAY_FONT, message);
+        visibleOverlayPanelView.AddString(0, overlayPaneler.screenGW - buttonsWidth - 1 - status.Length, contentYStart + 2, overlayPaneler.screenGW - 20 - 2, new UnityEngine.Color(1, 1, 1, 1), Fonts.PROSE_OVERLAY_FONT, status);
         visibleOverlayPanelView.SetFadeIn(0, new OverlayPanelView.FadeIn(0, 100));
         visibleOverlayPanelView.SetFadeOut(0, new OverlayPanelView.FadeOut(-200, 0));
 

@@ -132,27 +132,27 @@ namespace Domino {
 
     public void SetDescription(TileDescription newTileDescription) {
       tileDescription = newTileDescription;
-
+    
       foreach (var tileSymbolView in tileSymbolViews) {
         tileSymbolView.Destruct();
       }
       tileSymbolViews.Clear();
-
+    
       if (overlaySymbolView != null) {
         overlaySymbolView.Destruct();
         overlaySymbolView = null;
       }
-
+    
       if (featureSymbolView != null) {
         featureSymbolView.Destruct();
         featureSymbolView = null;
       }
-
+    
       foreach (var entry in itemSymbolViewByItemId) {
         entry.Value.Destruct();
       }
       itemSymbolViewByItemId.Clear();
-
+    
       SetStuff(newTileDescription);
     }
 
@@ -178,6 +178,18 @@ namespace Domino {
           new Vector3(1, -1, tileDescription.elevationStepHeight * height);
       tileSymbolView.gameObject.transform.localPosition =
           new Vector3(0, tileDescription.elevationStepHeight * elevation);
+    }
+
+    public void SetFrontColor(Vector4Animation frontColor) {
+      foreach (var tsv in tileSymbolViews) {
+        tsv.SetFrontColor(frontColor);
+      }
+    }
+
+    public void SetSidesColor(Vector4Animation sideColor) {
+      foreach (var tsv in tileSymbolViews) {
+        tsv.SetSidesColor(sideColor);
+      }
     }
 
     private void SetStuff(TileDescription tileDescription) {

@@ -11,7 +11,7 @@ namespace Domino {
     public readonly List<KeyValuePair<int, ExtrudedSymbolDescription>> detailSymbolDescriptionById;
     public readonly float hpRatio;
     public readonly float mpRatio;
-
+  
     public UnitDescription(
         object tag,
         DominoDescription dominoDescription,
@@ -26,8 +26,8 @@ namespace Domino {
       this.hpRatio = hpRatio;
       this.mpRatio = mpRatio;
     }
-
-
+  
+  
     public override bool Equals(object obj) {
       if (!(obj is UnitDescription))
         return false;
@@ -203,7 +203,7 @@ namespace Domino {
       this.description = newUnitDescription;
       dominoView.SetDescription(newUnitDescription.dominoDescription);
       faceSymbolView.SetDescription(newUnitDescription.faceSymbolDescription);
-
+    
       if (symbolBarView == null) {
         if (newUnitDescription.detailSymbolDescriptionById.Count == 0) {
           // Dont do anything, its already gone
@@ -219,7 +219,7 @@ namespace Domino {
           symbolBarView.SetDescriptions(newUnitDescription.detailSymbolDescriptionById);
         }
       }
-
+    
       bool shouldShowHpMeter = newUnitDescription.hpRatio < .999f;
       bool didShowHpMeter = (hpMeterView != null);
       bool showingHpMeterChanged = (shouldShowHpMeter != didShowHpMeter);
@@ -239,7 +239,7 @@ namespace Domino {
           hpMeterView = null;
         }
       }
-
+    
       bool shouldShowMpMeter = newUnitDescription.mpRatio < .999f;
       int mpMeterPosition = (shouldShowHpMeter ? 1 : 0);
       if (shouldShowMpMeter) {

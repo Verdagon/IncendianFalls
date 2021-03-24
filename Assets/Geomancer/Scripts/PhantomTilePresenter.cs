@@ -50,8 +50,17 @@ namespace Geomancer {
       ResetViews();
     }
 
+    private (Vector4Animation, Vector4Animation) GetColors(bool highlighted) {
+      var frontColor = highlighted ? Vector4Animation.Color(.1f, .1f, .1f) : Vector4Animation.Color(0f, 0, 0f);
+      var sideColor = highlighted ? Vector4Animation.Color(.1f, .1f, .1f) : Vector4Animation.Color(0f, 0, 0f);
+      return (frontColor, sideColor);
+    }
+    
     public void SetHighlighted(bool highlighted) {
-      tileView.SetDescription(GetTileDescription(pattern, location, highlighted));
+      var (frontColor, sideColor) = GetColors(highlighted);
+      tileView.SetFrontColor(frontColor);
+      tileView.SetSidesColor(sideColor);
+      // tileView.SetDescription(GetTileDescription(pattern, location, highlighted));
     }
 
     private void ResetViews() {

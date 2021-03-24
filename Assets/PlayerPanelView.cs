@@ -35,7 +35,7 @@ namespace Domino {
       this.unit = unit;
       this.looker = looker;
 
-      this.playerStatusView = overlayPaneler.MakePanel(0, 0, overlayPaneler.screenGW, 3);
+      this.playerStatusView = overlayPaneler.MakePanel(-1, -1, overlayPaneler.screenGW + 2, 3 + 1);
       playerStatusView.AddBackground(new UnityEngine.Color(0, 0, 0, .9f), new UnityEngine.Color(0, 0, 0, 0));
 
       textOverlayObjectIds = new List<int>();
@@ -88,7 +88,7 @@ namespace Domino {
       float buttonSize = 2f;
       int timeAnchorMoveButtonId =
         playerStatusView.AddButton(
-          0, screenGW - 3, 3 + position * 2 + (position + 1) * .2f, 3, 2, 0,
+          0, 1 + screenGW - 3, 1 + 3 + position * 2 + (position + 1) * .2f, 3, 2, 0,
           new UnityEngine.Color(.4f, .4f, .4f), new UnityEngine.Color(0, 0, 0, 0), new UnityEngine.Color(1.2f, 1.2f, 1.2f),
           () => CapabilityButtonClicked?.Invoke(capabilityId),
           () => looker.SetTooltip(hoverText),
@@ -97,7 +97,7 @@ namespace Domino {
       float symbolY = 3 + position * buttonSize + (position + 1) * marginBetweenButtons + paddingInsideButton;
       float symbolSize = buttonSize - paddingInsideButton * 2;
       playerStatusView.AddSymbol(
-        timeAnchorMoveButtonId, symbolX, symbolY, symbolSize, 1, new UnityEngine.Color(1, 1, 1), Fonts.SYMBOLS_OVERLAY_FONT, symbol); ; ;
+        timeAnchorMoveButtonId, 1 + symbolX, 1 + symbolY, symbolSize, 1, new UnityEngine.Color(1, 1, 1), Fonts.SYMBOLS_OVERLAY_FONT, symbol); ; ;
       return timeAnchorMoveButtonId;
     }
 
@@ -116,7 +116,7 @@ namespace Domino {
       if (sorcerous.Exists()) {
         message += "   " + "MP " + sorcerous.mp + "/" + sorcerous.maxMp;
       }
-      textOverlayObjectIds = playerStatusView.AddString(0, 1, 1, 0, new UnityEngine.Color(1, 1, 1), Fonts.PROSE_OVERLAY_FONT, message);
+      textOverlayObjectIds = playerStatusView.AddString(0, 1 + 1, 1 + 1, 0, new UnityEngine.Color(1, 1, 1), Fonts.PROSE_OVERLAY_FONT, message);
     }
   }
 }

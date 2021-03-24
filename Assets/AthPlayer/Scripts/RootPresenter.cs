@@ -87,7 +87,7 @@ namespace AthPlayer {
       overlayPaneler = new OverlayPaneler(panelRootGameObject, instantiator, uiTimer);
       //gameOverlay = overlayPaneler.MakePanel(uiTimer, 0, 0, 100, 100, gridWidth, gridHeight, .6667f);
 
-      lookPanelView = new LookPanelView(overlayPaneler, PlayerPanelView.PANEL_GH, 0);
+      lookPanelView = new LookPanelView(overlayPaneler, PlayerPanelView.PANEL_GH, 2);
 
       // fullscreen would be from -1,-1 to w+2 h+2.
 

@@ -26,8 +26,10 @@ namespace Geomancer {
   public class EditorPresenter : MonoBehaviour {
     public Instantiator instantiator;
     public GameObject cameraObject;
+    
+    public GameObject panelRootGameObject;
 
-    public OverlayPaneler overlayPaneler;
+    private OverlayPaneler overlayPaneler;
 
     CameraController cameraController;
 
@@ -74,7 +76,8 @@ namespace Geomancer {
 
       ss = new Root(new EditorLogger());
 
-      lookPanelView = new LookPanelView(overlayPaneler, 0, 1);
+      overlayPaneler = new OverlayPaneler(panelRootGameObject, instantiator, clock);
+      lookPanelView = new LookPanelView(overlayPaneler, -1, 1);
 
       broadcaster = new EffectBroadcaster();
       ss.AddObserver((effect) => broadcaster.Route(effect));
@@ -260,7 +263,7 @@ namespace Geomancer {
       }
       if (Input.GetKeyDown(KeyCode.Delete)) {
         ss.Transact<Geomancer.Model.Void>(delegate () {
-          foreach (var loc in selectedLocations) {
+          foreach (var loc in new SortedSet<Location>(selectedLocations)) {
             selectedLocations.Remove(loc);
             var tile = level.terrain.tiles[loc];
             level.terrain.tiles.Remove(loc);

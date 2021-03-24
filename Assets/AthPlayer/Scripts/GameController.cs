@@ -96,7 +96,7 @@ namespace AthPlayer {
 
       // Immediately getting ID of the server-game. We dont want to keep the server-game
       // around, we want to deal with the client game.
-      var gameId = serverSS.RequestSetupRavaArcanaGame(randomSeed, startLevel, false).id;
+      var gameId = serverSS.RequestSetupEmberDeepGame(randomSeed, startLevel, false).id;
 
       Root clientRoot = new Root(new LoggerImpl());
       var (appliedEffects, _) =
