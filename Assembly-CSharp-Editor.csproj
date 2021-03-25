@@ -314,9 +314,6 @@
  <Reference Include="UnityEditor.LinuxStandalone.Extensions">
  <HintPath>/Applications/Unity/Hub/Editor/2019.3.11f1/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="Geomancer">
- <HintPath>/Users/verdagon/IncendianFalls/Assets/Geomancer.dll</HintPath>
- </Reference>
  <Reference Include="Atharia">
  <HintPath>/Users/verdagon/IncendianFalls/Assets/Atharia.dll</HintPath>
  </Reference>

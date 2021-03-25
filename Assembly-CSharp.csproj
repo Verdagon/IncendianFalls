@@ -148,14 +148,36 @@
      <Compile Include="Assets\Domino\Scripts\Views\TileView.cs" />
      <Compile Include="Assets\Domino\Scripts\Views\UnitView.cs" />
      <Compile Include="Assets\Fonts.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\ControllerRoot.cs" />
      <Compile Include="Assets\Geomancer\Scripts\EditorPresenter.cs" />
      <Compile Include="Assets\Geomancer\Scripts\ListView.cs" />
      <Compile Include="Assets\Geomancer\Scripts\MemberToViewMap.cs" />
      <Compile Include="Assets\Geomancer\Scripts\MemberToViewMapper.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\ListUtils.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\Location.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\ParseSource.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\Pattern.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\PatternCornerAdjacency.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\PatternCornerAdjacencyImmList.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\PatternCornerAdjacencyImmListImmList.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\PatternSideAdjacency.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\PatternSideAdjacencyImmList.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\PatternTile.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\PatternTileImmList.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\PrimitivesExtensions.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\Rand.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\SetUtils.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\Terrain.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\TerrainTile.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\Vec2.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\Vec2ImmList.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\Vec2ImmListImmList.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\Model\Vec3.cs" />
      <Compile Include="Assets\Geomancer\Scripts\ModelExtensions.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\PentagonPattern9.cs" />
      <Compile Include="Assets\Geomancer\Scripts\PhantomTilePresenter.cs" />
-     <Compile Include="Assets\Geomancer\Scripts\TerrainPresenter.cs" />
-     <Compile Include="Assets\Geomancer\Scripts\TerrainTilePresenter.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\TerrainController.cs" />
+     <Compile Include="Assets\Geomancer\Scripts\TerrainTileController.cs" />
      <Compile Include="Assets\LookPanelView.cs" />
      <Compile Include="Assets\MainMenuView.cs" />
      <Compile Include="Assets\PlayerPanelView.cs" />
@@ -453,9 +475,6 @@
  </Reference>
  <Reference Include="UnityEngine.XRModule">
  <HintPath>/Applications/Unity/Hub/Editor/2019.3.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
- </Reference>
- <Reference Include="Geomancer">
- <HintPath>/Users/verdagon/IncendianFalls/Assets/Geomancer.dll</HintPath>
  </Reference>
  <Reference Include="Atharia">
  <HintPath>/Users/verdagon/IncendianFalls/Assets/Atharia.dll</HintPath>

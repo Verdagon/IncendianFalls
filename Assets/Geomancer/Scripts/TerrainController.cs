@@ -9,16 +9,15 @@ namespace Geomancer {
   public delegate void OnTerrainTileClicked(Location location);
   public delegate void OnPhantomTileClicked(Location location);
 
-  public class TerrainPresenter : ITerrainEffectVisitor, ITerrainEffectObserver, ITerrainTileByLocationMutMapEffectObserver, ITerrainTileByLocationMutMapEffectVisitor {
+  public class TerrainPresenter {
     public OnTerrainTileHovered TerrainTileHovered;
     public OnTerrainTileClicked TerrainTileClicked;
     public OnPhantomTileClicked PhantomTileClicked;
 
     IClock clock;
     ITimer timer;
-    EffectBroadcaster broadcaster;
-  MemberToViewMapper vivimap;
-    Geomancer.Model.Terrain terrain;
+    MemberToViewMapper vivimap;
+    public readonly Geomancer.Model.Terrain terrain;
     Instantiator instantiator;
     Dictionary<Location, TerrainTilePresenter> tilePresenters = new Dictionary<Location, TerrainTilePresenter>();
     Dictionary<Location, PhantomTilePresenter> phantomTilePresenters = new Dictionary<Location, PhantomTilePresenter>();
@@ -27,15 +26,12 @@ namespace Geomancer {
     private SortedSet<Location> highlightedLocations = new SortedSet<Location>();
 
     public TerrainPresenter(IClock clock,
-      ITimer timer, EffectBroadcaster broadcaster, MemberToViewMapper vivimap, Geomancer.Model.Terrain terrain, Instantiator instantiator) {
+      ITimer timer, MemberToViewMapper vivimap, Geomancer.Model.Terrain terrain, Instantiator instantiator) {
       this.clock = clock;
       this.timer = timer;
-      this.broadcaster = broadcaster;
       this.vivimap = vivimap;
       this.terrain = terrain;
       this.instantiator = instantiator;
-      terrain.AddObserver(broadcaster, this);
-      terrain.tiles.AddObserver(broadcaster, this);
 
       foreach (var locationAndTile in terrain.tiles) {
         addTerrainTile(locationAndTile.Key, locationAndTile.Value);
@@ -44,17 +40,15 @@ namespace Geomancer {
       RefreshPhantomTiles();
     }
 
+    public void AddTile(TerrainTilePresenter presenter) {
+      tilePresenters.Add(presenter.location, presenter);
+    }
+
     public Location GetMaybeMouseHighlightLocation() { return maybeMouseHighlightedLocation; }
 
     public void DestroyTerrainPresenter() {
       foreach (var entry in tilePresenters) {
         entry.Value.DestroyTerrainTilePresenter();
-      }
-      if (terrain.Exists()) {
-        if (terrain.tiles.Exists()) {
-          terrain.tiles.RemoveObserver(broadcaster, this);
-        }
-        terrain.RemoveObserver(broadcaster, this);
       }
     }
 
@@ -85,7 +79,8 @@ namespace Geomancer {
       bool selected = highlightedLocations.Contains(location);
       if (location != null) {
         if (tilePresenters.TryGetValue(location, out var newMousedTerrainTilePresenter)) {
-          newMousedTerrainTilePresenter.SetTinted(highlighted, selected);
+          newMousedTerrainTilePresenter.SetHighlighted(highlighted);
+          newMousedTerrainTilePresenter.SetSelected(selected);
         }
         if (phantomTilePresenters.TryGetValue(location, out var newMousedPhantomTilePresenter)) {
           // Cant select a phantom tile
@@ -111,45 +106,45 @@ namespace Geomancer {
       }
       return null;
     }
-
-    public void OnTerrainEffect(ITerrainEffect effect) { effect.visitITerrainEffect(this); }
-    public void visitTerrainCreateEffect(TerrainCreateEffect effect) { }
-    public void visitTerrainDeleteEffect(TerrainDeleteEffect effect) { }
-
-    public void OnTerrainTileByLocationMutMapEffect(ITerrainTileByLocationMutMapEffect effect) { effect.visitITerrainTileByLocationMutMapEffect(this); }
-    public void visitTerrainTileByLocationMutMapAddEffect(TerrainTileByLocationMutMapAddEffect effect) {
-      if (phantomTilePresenters.TryGetValue(effect.key, out var presenter)) {
+    
+    public void AddTile(TerrainTile tile) {
+      if (phantomTilePresenters.TryGetValue(tile.location, out var presenter)) {
         presenter.DestroyPhantomTilePresenter();
-        phantomTilePresenters.Remove(effect.key);
+        phantomTilePresenters.Remove(tile.location);
       }
-      addTerrainTile(effect.key, terrain.tiles[effect.key]);
+      terrain.tiles.Add(tile.location, tile);
+      addTerrainTile(tile.location, terrain.tiles[tile.location]);
       RefreshPhantomTiles();
     }
-    public void visitTerrainTileByLocationMutMapCreateEffect(TerrainTileByLocationMutMapCreateEffect effect) { }
-    public void visitTerrainTileByLocationMutMapDeleteEffect(TerrainTileByLocationMutMapDeleteEffect effect) { }
-    public void visitTerrainTileByLocationMutMapRemoveEffect(TerrainTileByLocationMutMapRemoveEffect effect) {
-      tilePresenters.Remove(effect.key);
+    public void RemoveTile(TerrainTile tile) {
+      tilePresenters.Remove(tile.location);
       var newHighlightedLocations = new SortedSet<Location>(highlightedLocations);
-      newHighlightedLocations.Remove(effect.key);
+      newHighlightedLocations.Remove(tile.location);
       SetHighlightedLocations(newHighlightedLocations);
       RefreshPhantomTiles();
+    }
+    public TerrainTilePresenter GetTilePresenter(Location location) {
+      if (tilePresenters.TryGetValue(location, out var presenter)) {
+        return presenter;
+      }
+      return null;
     }
 
     private void RefreshPhantomTiles() {
       var phantomTileLocations =
         terrain.pattern.GetAdjacentLocations(new SortedSet<Location>(terrain.tiles.Keys), false, true);
       var previousPhantomTileLocations = phantomTilePresenters.Keys;
-
+    
       var addedPhantomTileLocations = new SortedSet<Location>(phantomTileLocations);
       SetUtils.RemoveAll(addedPhantomTileLocations, previousPhantomTileLocations);
-
+    
       var removedPhantomTileLocations = new SortedSet<Location>(previousPhantomTileLocations);
       SetUtils.RemoveAll(removedPhantomTileLocations, phantomTileLocations);
-
+    
       foreach (var removedPhantomTileLocation in removedPhantomTileLocations) {
         removePhantomTile(removedPhantomTileLocation);
       }
-
+    
       foreach (var addedPhantomTileLocation in addedPhantomTileLocations) {
         addPhantomTile(addedPhantomTileLocation);
       }
@@ -161,7 +156,7 @@ namespace Geomancer {
     }
 
     private void addTerrainTile(Location location, TerrainTile tile) {
-      var presenter = new TerrainTilePresenter(clock, timer, broadcaster, vivimap, terrain, location, tile, instantiator);
+      var presenter = new TerrainTilePresenter(clock, timer, vivimap, terrain, location, tile, instantiator);
       tilePresenters.Add(location, presenter);
     }
 

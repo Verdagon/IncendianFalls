@@ -7,47 +7,72 @@ using System.Threading.Tasks;
 
 namespace Geomancer {
   public class MemberToViewMapper {
-    public interface IDescription { }
+    public interface IDescriptionVisitor {
+      void visitTileTopColor(TopColorDescriptionForIDescription color);
+      void visitTileSideColor(SideColorDescriptionForIDescription color);
+      void visitTileOverlay(OverlayDescriptionForIDescription symbol);
+      void visitTileFeature(FeatureDescriptionForIDescription symbol);
+      void visitUnitDomino(DominoDescriptionForIDescription domino);
+      void visitUnitFace(FaceDescriptionForIDescription symbol);
+      void visitUnitDetail(DetailDescriptionForIDescription symbol);
+      void visitTileItem(ItemDescriptionForIDescription symbol);
+    }
+
+    public interface IDescription {
+      void visit(IDescriptionVisitor visitor);
+    }
     public class TopColorDescriptionForIDescription : IDescription {
       public readonly Vector4Animation color;
       public TopColorDescriptionForIDescription(Vector4Animation color) { this.color = color; }
+      public void visit(IDescriptionVisitor visitor) { visitor.visitTileTopColor(this); }
     }
     public class SideColorDescriptionForIDescription : IDescription {
       public readonly Vector4Animation color;
       public SideColorDescriptionForIDescription(Vector4Animation color) { this.color = color; }
+      public void visit(IDescriptionVisitor visitor) { visitor.visitTileSideColor(this); }
     }
-    public class OutlineColorDescriptionForIDescription : IDescription {
-      public readonly Vector4Animation color;
-      public OutlineColorDescriptionForIDescription(Vector4Animation color) { this.color = color; }
-    }
+    // public class OutlineColorDescriptionForIDescription : IDescription {
+    //   public readonly Vector4Animation color;
+    //   public OutlineColorDescriptionForIDescription(Vector4Animation color) { this.color = color; }
+    // }
     public class OverlayDescriptionForIDescription : IDescription {
       public readonly Domino.ExtrudedSymbolDescription symbol;
       public OverlayDescriptionForIDescription(Domino.ExtrudedSymbolDescription symbol) { this.symbol = symbol; }
+      public void visit(IDescriptionVisitor visitor) { visitor.visitTileOverlay(this); }
     }
     public class FeatureDescriptionForIDescription : IDescription {
       public readonly Domino.ExtrudedSymbolDescription symbol;
       public FeatureDescriptionForIDescription(Domino.ExtrudedSymbolDescription symbol) { this.symbol = symbol; }
+      public void visit(IDescriptionVisitor visitor) { visitor.visitTileFeature(this); }
     }
     public class FaceDescriptionForIDescription : IDescription {
       public readonly Domino.ExtrudedSymbolDescription symbol;
       public FaceDescriptionForIDescription(Domino.ExtrudedSymbolDescription symbol) { this.symbol = symbol; }
+      public void visit(IDescriptionVisitor visitor) { visitor.visitUnitFace(this); }
     }
     public class DominoDescriptionForIDescription : IDescription {
       public readonly Domino.DominoDescription domino;
       public DominoDescriptionForIDescription(Domino.DominoDescription domino) { this.domino = domino; }
+      public void visit(IDescriptionVisitor visitor) { visitor.visitUnitDomino(this); }
     }
     public class ItemDescriptionForIDescription : IDescription {
       public readonly Domino.ExtrudedSymbolDescription symbol;
       public ItemDescriptionForIDescription(Domino.ExtrudedSymbolDescription symbol) { this.symbol = symbol; }
+      public void visit(IDescriptionVisitor visitor) { visitor.visitTileItem(this); }
     }
     public class DetailDescriptionForIDescription : IDescription {
       public readonly Domino.ExtrudedSymbolDescription symbol;
       public DetailDescriptionForIDescription(Domino.ExtrudedSymbolDescription symbol) { this.symbol = symbol; }
+      public void visit(IDescriptionVisitor visitor) { visitor.visitUnitDetail(this); }
     }
 
     Dictionary<string, List<IDescription>> entries;
     public MemberToViewMapper(Dictionary<string, List<IDescription>> entries) {
       this.entries = entries;
+    }
+
+    public List<IDescription> getEntries(string name) {
+      return entries[name];
     }
 
     public (Domino.TileDescription, Domino.UnitDescription) Vivify(
@@ -82,10 +107,10 @@ namespace Geomancer {
               sideColor = (memberEntry as SideColorDescriptionForIDescription).color;
               specifiedSideColor = true;
             }
-            if (memberEntry is OutlineColorDescriptionForIDescription) {
-              outlineColor = (memberEntry as OutlineColorDescriptionForIDescription).color;
-              specifiedOutlineColor = true;
-            }
+            // if (memberEntry is OutlineColorDescriptionForIDescription) {
+            //   outlineColor = (memberEntry as OutlineColorDescriptionForIDescription).color;
+            //   specifiedOutlineColor = true;
+            // }
             if (memberEntry is OverlayDescriptionForIDescription) {
               maybeOverlay = (memberEntry as OverlayDescriptionForIDescription).symbol;
             }

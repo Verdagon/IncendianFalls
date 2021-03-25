@@ -13,7 +13,7 @@ namespace Geomancer {
       entries.Add("Grass", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.TopColorDescriptionForIDescription(Vector4Animation.Color(0, .3f, 0)),
         new MemberToViewMapper.SideColorDescriptionForIDescription(Vector4Animation.Color(0, .2f, 0)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
+        // new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
       });
       entries.Add("Rocks", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.OverlayDescriptionForIDescription(
@@ -100,42 +100,42 @@ namespace Geomancer {
       entries.Add("Dirt", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.TopColorDescriptionForIDescription(Vector4Animation.Color(.4f, .133f, 0)),
         new MemberToViewMapper.SideColorDescriptionForIDescription(Vector4Animation.Color(.266f, .1f, 0)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
+        // new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
       });
       entries.Add("Mud", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.TopColorDescriptionForIDescription(Vector4Animation.Color(.35f, .11f, 0)),
         new MemberToViewMapper.SideColorDescriptionForIDescription(Vector4Animation.Color(.23f, .08f, 0)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
+        // new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
       });
       entries.Add("ObsidianFloor", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.TopColorDescriptionForIDescription(Vector4Animation.Color(.1f, .1f, .05f)),
         new MemberToViewMapper.SideColorDescriptionForIDescription(Vector4Animation.Color(.05f, .05f, .05f)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
+        // new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
       });
       entries.Add("Floor", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.TopColorDescriptionForIDescription(Vector4Animation.Color(.2f, .2f, .2f)),
         new MemberToViewMapper.SideColorDescriptionForIDescription(Vector4Animation.Color(.15f, .15f, .15f)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
+        // new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
       });
       entries.Add("Wall", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.TopColorDescriptionForIDescription(Vector4Animation.Color(.3f, .3f, .3f)),
         new MemberToViewMapper.SideColorDescriptionForIDescription(Vector4Animation.Color(.2f, .2f, .2f)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
+        // new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
       });
       entries.Add("CaveWall", new List<MemberToViewMapper.IDescription>() {
       new MemberToViewMapper.TopColorDescriptionForIDescription(Vector4Animation.Color(.24f, .08f, 0)),
         new MemberToViewMapper.SideColorDescriptionForIDescription(Vector4Animation.Color(.16f, .05f, 0)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
+        // new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
       });
       entries.Add("Water", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.TopColorDescriptionForIDescription(Vector4Animation.Color(0f, .4f, .8f)),
         new MemberToViewMapper.SideColorDescriptionForIDescription(Vector4Animation.Color(0f, .45f, .85f)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
+        // new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK)
       });
       entries.Add("Magma", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.TopColorDescriptionForIDescription(Vector4Animation.Color(.4f, 0f, 0f)),
         new MemberToViewMapper.SideColorDescriptionForIDescription(Vector4Animation.Color(.2f, 0f, 0f)),
-        new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK),
+        // new MemberToViewMapper.OutlineColorDescriptionForIDescription(Vector4Animation.BLACK),
         new MemberToViewMapper.OverlayDescriptionForIDescription(
           new ExtrudedSymbolDescription(
               RenderPriority.SYMBOL,

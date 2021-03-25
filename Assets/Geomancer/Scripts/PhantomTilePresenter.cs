@@ -17,7 +17,7 @@ namespace Geomancer {
     }
   }
 
-  public class PhantomTilePresenter : IStrMutListEffectObserver, IStrMutListEffectVisitor {
+  public class PhantomTilePresenter {
     //public delegate void OnMouseInEvent();
     //public delegate void OnMouseOutEvent();
     public delegate void OnPhantomTileClickedEvent();
@@ -45,14 +45,14 @@ namespace Geomancer {
 
       var positionVec2 = pattern.GetTileCenter(location);
 
-      tileCenter = new UnityEngine.Vector3(positionVec2.x, 0, positionVec2.y);
+      tileCenter = new Vec3(positionVec2.x, positionVec2.y, 0).ToUnity();
 
       ResetViews();
     }
 
     private (Vector4Animation, Vector4Animation) GetColors(bool highlighted) {
-      var frontColor = highlighted ? Vector4Animation.Color(.1f, .1f, .1f) : Vector4Animation.Color(0f, 0, 0f);
-      var sideColor = highlighted ? Vector4Animation.Color(.1f, .1f, .1f) : Vector4Animation.Color(0f, 0, 0f);
+      var frontColor = highlighted ? Vector4Animation.Color(.2f, .2f, .2f) : Vector4Animation.Color(0f, 0, 0f);
+      var sideColor = highlighted ? Vector4Animation.Color(.2f, .2f, .2f) : Vector4Animation.Color(0f, 0, 0f);
       return (frontColor, sideColor);
     }
     
@@ -73,7 +73,7 @@ namespace Geomancer {
 
       tileView = instantiator.CreateTileView(clock, timer, tileCenter, tileDescription);
       tileView.gameObject.AddComponent<PhantomTilePresenterTile>().Init(this);
-      tileView.SetDescription(tileDescription);
+      // tileView.SetDescription(tileDescription);
     }
 
     private static TileDescription GetTileDescription(Pattern pattern, Location location, bool highlighted) {
@@ -106,14 +106,14 @@ namespace Geomancer {
       return
         new TileDescription(
               1,
-              patternTile.rotateDegrees,
+              patternTile.rotateRadianards / 1000f * 180f / (float)Math.PI,
               1,
               new ExtrudedSymbolDescription(
                 RenderPriority.TILE,
                 new SymbolDescription(
                     symbolName,
                     frontColor,
-                    patternTile.rotateDegrees,
+                    patternTile.rotateRadianards / 1000f * 180f / (float)Math.PI,
                     1,
                     OutlineMode.WithOutline,
                     Vector4Animation.Color(.2f, .2f, .2f)),
@@ -128,20 +128,20 @@ namespace Geomancer {
       tileView.DestroyTile();
     }
 
-    public void OnStrMutListEffect(IStrMutListEffect effect) {
-      effect.visitIStrMutListEffect(this);
-    }
-
-    public void visitStrMutListCreateEffect(StrMutListCreateEffect effect) { }
-
-    public void visitStrMutListDeleteEffect(StrMutListDeleteEffect effect) { }
-
-    public void visitStrMutListAddEffect(StrMutListAddEffect effect) {
-      ResetViews();
-    }
-
-    public void visitStrMutListRemoveEffect(StrMutListRemoveEffect effect) {
-      ResetViews();
-    }
+    // public void OnStrMutListEffect(IStrMutListEffect effect) {
+    //   effect.visitIStrMutListEffect(this);
+    // }
+    //
+    // public void visitStrMutListCreateEffect(StrMutListCreateEffect effect) { }
+    //
+    // public void visitStrMutListDeleteEffect(StrMutListDeleteEffect effect) { }
+    //
+    // public void visitStrMutListAddEffect(StrMutListAddEffect effect) {
+    //   ResetViews();
+    // }
+    //
+    // public void visitStrMutListRemoveEffect(StrMutListRemoveEffect effect) {
+    //   ResetViews();
+    // }
   }
 }

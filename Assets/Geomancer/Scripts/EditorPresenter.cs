@@ -9,20 +9,6 @@ using System.IO;
 using AthPlayer;
 
 namespace Geomancer {
-  class EditorLogger : Geomancer.Model.ILogger {
-    public void Error(string str) {
-      Debug.LogError(str);
-    }
-
-    public void Info(string str) {
-      Debug.Log(str);
-    }
-
-    public void Warning(string str) {
-      Debug.LogWarning(str);
-    }
-  }
-
   public class EditorPresenter : MonoBehaviour {
     public Instantiator instantiator;
     public GameObject cameraObject;
@@ -37,11 +23,7 @@ namespace Geomancer {
 
     private LookPanelView lookPanelView;
     private Location maybeLookedLocation;
-
-    Root ss;
-    Level level;
-    EffectBroadcaster broadcaster;
-
+    
     TerrainPresenter terrainPresenter;
 
     Dictionary<KeyCode, string> memberByKeyCode;
@@ -74,23 +56,13 @@ namespace Geomancer {
         [KeyCode.BackQuote] = "Water",
       };
 
-      ss = new Root(new EditorLogger());
-
       overlayPaneler = new OverlayPaneler(panelRootGameObject, instantiator, clock);
-      lookPanelView = new LookPanelView(overlayPaneler, -1, 1);
-
-      broadcaster = new EffectBroadcaster();
-      ss.AddObserver((effect) => broadcaster.Route(effect));
+      lookPanelView = new LookPanelView(overlayPaneler, -1, 2);
 
       var pattern = PentagonPattern9.makePentagon9Pattern();
       //var pattern = SquarePattern.MakeSquarePattern();
       //var pattern = HexPattern.MakeHexPattern();
-      var (_, newLevel) =
-        ss.Transact(delegate () {
-          var terrain = ss.EffectTerrainCreate(pattern, 0.2f, ss.EffectTerrainTileByLocationMutMapCreate());
-          return ss.EffectLevelCreate(terrain);
-        });
-      level = newLevel;
+      var terrain = new Geomancer.Model.Terrain(pattern, 200, new SortedDictionary<Location, TerrainTile>());
 
       using (var fileStream = new FileStream("level.athlev", FileMode.OpenOrCreate)) {
         using (var reader = new StreamReader(fileStream)) {
@@ -108,36 +80,30 @@ namespace Geomancer {
             int indexInGroup = int.Parse(parts[2]);
             int elevation = int.Parse(parts[3]);
 
-            ss.Transact(delegate () {
-              var tile = ss.EffectTerrainTileCreate(elevation, ss.EffectStrMutListCreate());
-              level.terrain.tiles.Add(new Location(groupX, groupY, indexInGroup), tile);
+            var location = new Location(groupX, groupY, indexInGroup);
+            var tile = new TerrainTile(location, elevation, new List<string>());
+            terrain.tiles.Add(location, tile);
 
-              for (int i = 4; i < parts.Length; i++) {
-                tile.members.Add(parts[i]);
-              }
-
-              return new Geomancer.Model.Void();
-            });
+            for (int i = 4; i < parts.Length; i++) {
+              tile.members.Add(parts[i]);
+            }
           }
         }
       }
 
-      if (level.terrain.tiles.Count == 0) {
-        ss.Transact(delegate () {
-          var tile = ss.EffectTerrainTileCreate(1, ss.EffectStrMutListCreate());
-          level.terrain.tiles.Add(new Location(0, 0, 0), tile);
-          return new Geomancer.Model.Void();
-        });
+      if (terrain.tiles.Count == 0) {
+        var tile = new TerrainTile(new Location(0, 0, 0), 1, new List<string>());
+        terrain.tiles.Add(new Location(0, 0, 0), tile);
       }
 
-      terrainPresenter = new TerrainPresenter(clock, clock, broadcaster, MemberToViewMap.MakeVivimap(), level.terrain, instantiator);
+      terrainPresenter = new TerrainPresenter(clock, clock, MemberToViewMap.MakeVivimap(), terrain, instantiator);
       terrainPresenter.PhantomTileClicked += HandlePhantomTileClicked;
       terrainPresenter.TerrainTileClicked += HandleTerrainTileClicked;
       terrainPresenter.TerrainTileHovered += HandleTerrainTileHovered;
 
       Location startLocation = new Location(0, 0, 0);
-      if (!level.terrain.tiles.ContainsKey(startLocation)) {
-        foreach (var locationAndTile in level.terrain.tiles) {
+      if (!terrain.tiles.ContainsKey(startLocation)) {
+        foreach (var locationAndTile in terrain.tiles) {
           startLocation = locationAndTile.Key;
           break;
         }
@@ -147,7 +113,7 @@ namespace Geomancer {
         new CameraController(
           clock,
           cameraObject,
-          level.terrain.GetTileCenter(startLocation).ToUnity(),
+          terrain.GetTileCenter(startLocation).ToUnity(),
           new Vector3(0, -10, 5));
 
       membersView =
@@ -158,11 +124,8 @@ namespace Geomancer {
 
 
     public void HandlePhantomTileClicked(Location location) {
-      ss.Transact(delegate () {
-        var terrainTile = level.root.EffectTerrainTileCreate(1, level.root.EffectStrMutListCreate());
-        level.terrain.tiles.Add(location, terrainTile);
-        return terrainTile;
-      });
+      var terrainTile = new TerrainTile(location, 1, new List<string>());
+      terrainPresenter.AddTile(terrainTile);
       Save();
 
       var newSelection = new SortedSet<Location>(selectedLocations);
@@ -194,9 +157,9 @@ namespace Geomancer {
           var message = "(" + location.groupX + ", " + location.groupY + ", " + location.indexInGroup + ")";
 
           var symbolsAndDescriptions = new List<KeyValuePair<SymbolDescription, string>>();
-          if (level.terrain.tiles.ContainsKey(location)) {
-            message += " elevation " + level.terrain.tiles[location].elevation;
-            foreach (var member in level.terrain.tiles[location].members) {
+          if (terrainPresenter.terrain.tiles.ContainsKey(location)) {
+            message += " elevation " + terrainPresenter.terrain.tiles[location].elevation;
+            foreach (var member in terrainPresenter.terrain.tiles[location].members) {
               var symbol =
               new SymbolDescription("a",
                               Vector4Animation.Color(1f, 1f, 1f, 0), 180, 1, OutlineMode.WithOutline, Vector4Animation.Color(1, 1, 1));
@@ -236,41 +199,34 @@ namespace Geomancer {
       }
       if (Input.GetKeyDown(KeyCode.Slash)) {
         var allLocations = new SortedSet<Location>();
-        foreach (var locationAndTile in level.terrain.tiles) {
+        foreach (var locationAndTile in terrainPresenter.terrain.tiles) {
           allLocations.Add(locationAndTile.Key);
         }
         SetSelection(allLocations);
       }
       if (Input.GetKeyDown(KeyCode.Equals) || Input.GetKeyDown(KeyCode.Plus) || Input.GetKeyDown(KeyCode.Mouse2)) {
-        ss.Transact<Geomancer.Model.Void>(delegate () {
-          foreach (var loc in selectedLocations) {
-            level.terrain.tiles[loc].elevation = level.terrain.tiles[loc].elevation + 1;
-          }
-          return new Geomancer.Model.Void();
-        });
+      
+        foreach (var loc in selectedLocations) {
+          terrainPresenter.GetTilePresenter(loc).SetElevation(terrainPresenter.terrain.tiles[loc].elevation + 1);
+        }
         Save();
         UpdateLookPanelView();
       }
       if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.Underscore) || Input.GetKeyDown(KeyCode.Mouse1)) {
-        ss.Transact<Geomancer.Model.Void>(delegate () {
-          foreach (var loc in selectedLocations) {
-            level.terrain.tiles[loc].elevation = Math.Max(1, level.terrain.tiles[loc].elevation - 1);
-          }
-          return new Geomancer.Model.Void();
-        });
+        foreach (var loc in selectedLocations) {
+          terrainPresenter.GetTilePresenter(loc).SetElevation(
+              Math.Max(1, terrainPresenter.terrain.tiles[loc].elevation - 1));
+        }
         Save();
         UpdateLookPanelView();
       }
       if (Input.GetKeyDown(KeyCode.Delete)) {
-        ss.Transact<Geomancer.Model.Void>(delegate () {
-          foreach (var loc in new SortedSet<Location>(selectedLocations)) {
-            selectedLocations.Remove(loc);
-            var tile = level.terrain.tiles[loc];
-            level.terrain.tiles.Remove(loc);
-            tile.Destruct();
-          }
-          return new Geomancer.Model.Void();
-        });
+        foreach (var loc in new SortedSet<Location>(selectedLocations)) {
+          selectedLocations.Remove(loc);
+          var tile = terrainPresenter.terrain.tiles[loc];
+          terrainPresenter.terrain.tiles.Remove(loc);
+          tile.Destruct();
+        }
         Save();
         UpdateLookPanelView();
       }
@@ -294,12 +250,12 @@ namespace Geomancer {
       foreach (var loc in selectedLocations) {
         if (commonMembers == null) {
           commonMembers = new SortedSet<string>();
-          foreach (var member in level.terrain.tiles[loc].members) {
+          foreach (var member in terrainPresenter.terrain.tiles[loc].members) {
             commonMembers.Add(member);
           }
         } else {
           var members = new SortedSet<string>();
-          foreach (var member in level.terrain.tiles[loc].members) {
+          foreach (var member in terrainPresenter.terrain.tiles[loc].members) {
             members.Add(member);
           }
           foreach (var member in new SortedSet<string>(commonMembers)) {
@@ -321,27 +277,21 @@ namespace Geomancer {
 
     private void ToggleMember(string member) {
       if (!AllLocationsHaveMember(selectedLocations, member)) {
-        ss.Transact(delegate () {
-          foreach (var location in selectedLocations) {
-            if (!LocationHasMember(location, member)) {
-              level.terrain.tiles[location].members.Add(member);
-            }
+        foreach (var location in selectedLocations) {
+          if (!LocationHasMember(location, member)) {
+            terrainPresenter.GetTilePresenter(location).AddMember(member);
           }
-          return new Geomancer.Model.Void();
-        });
+        }
       } else {
-        ss.Transact(delegate () {
-          foreach (var location in selectedLocations) {
-            var tile = level.terrain.tiles[location];
-            for (int i = 0; i < tile.members.Count; i++) {
-              if (tile.members[i] == member) {
-                tile.members.RemoveAt(i);
-                break;
-              }
+        foreach (var location in selectedLocations) {
+          var tile = terrainPresenter.terrain.tiles[location];
+          for (int i = 0; i < tile.members.Count; i++) {
+            if (tile.members[i] == member) {
+              terrainPresenter.GetTilePresenter(location).RemoveMember(i);
+              break;
             }
           }
-          return new Geomancer.Model.Void();
-        });
+        }
       }
     }
 
@@ -355,7 +305,7 @@ namespace Geomancer {
     }
 
     private bool LocationHasMember(Location location, string member) {
-      foreach (var hayMember in level.terrain.tiles[location].members) {
+      foreach (var hayMember in terrainPresenter.terrain.tiles[location].members) {
         if (member == hayMember) {
           return true;
         }
@@ -379,7 +329,7 @@ namespace Geomancer {
     }
 
     private void Save(StreamWriter writer) {
-      foreach (var locAndTile in level.terrain.tiles) {
+      foreach (var locAndTile in terrainPresenter.terrain.tiles) {
         var loc = locAndTile.Key;
         var tile = locAndTile.Value;
         string line = loc.groupX + " " + loc.groupY + " " + loc.indexInGroup + " " + tile.elevation;

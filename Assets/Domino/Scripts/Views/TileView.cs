@@ -108,6 +108,12 @@ namespace Domino {
     Instantiator instantiator;
 
     TileDescription tileDescription;
+    private IVector4Animation topColor;
+    private IVector4Animation sideColor;
+    private string tileSymbolId;
+    private float tileRotationDegrees;
+    private float tileScale;
+    private OutlineMode tileOutlineMode;
 
     // We have timers active to destroy these when theyre done, but we might
     // also destroy them if we need to Destruct fast.
@@ -128,11 +134,19 @@ namespace Domino {
       gameObject.transform.localPosition = basePosition;
 
       initialized = true;
+      
+      SetDescription(tileDescription);
     }
 
     public void SetDescription(TileDescription newTileDescription) {
       tileDescription = newTileDescription;
-    
+      topColor = newTileDescription.tileSymbolDescription.symbol.frontColor;
+      sideColor = newTileDescription.tileSymbolDescription.sidesColor;
+      tileSymbolId = newTileDescription.tileSymbolDescription.symbol.symbolId.name;
+      tileRotationDegrees = newTileDescription.tileSymbolDescription.symbol.rotationDegrees;
+      tileScale = newTileDescription.tileSymbolDescription.symbol.scale;
+      tileOutlineMode = newTileDescription.tileSymbolDescription.symbol.withOutline;
+
       foreach (var tileSymbolView in tileSymbolViews) {
         tileSymbolView.Destruct();
       }
@@ -180,15 +194,42 @@ namespace Domino {
           new Vector3(0, tileDescription.elevationStepHeight * elevation);
     }
 
-    public void SetFrontColor(Vector4Animation frontColor) {
+    public void SetFrontColor(IVector4Animation frontColor) {
       foreach (var tsv in tileSymbolViews) {
         tsv.SetFrontColor(frontColor);
       }
     }
 
-    public void SetSidesColor(Vector4Animation sideColor) {
+    public void SetSidesColor(IVector4Animation sideColor) {
+      this.sideColor = sideColor;
       foreach (var tsv in tileSymbolViews) {
         tsv.SetSidesColor(sideColor);
+      }
+    }
+
+    public void SetDepth(int depth) {
+      while (tileSymbolViews.Count > depth) {
+        var tsv = tileSymbolViews[tileSymbolViews.Count - 1];
+        tileSymbolViews.RemoveAt(tileSymbolViews.Count - 1);
+        tsv.Destruct();
+      }
+      var description =
+          new ExtrudedSymbolDescription(
+              RenderPriority.TILE,
+              new SymbolDescription(
+                  tileSymbolId,
+                  topColor,
+                  tileRotationDegrees,
+                  tileScale,
+                  tileOutlineMode),
+              true,
+              sideColor);
+      while (tileSymbolViews.Count < depth) {
+        var newIndex = tileSymbolViews.Count;
+        SymbolView tileSymbolView = instantiator.CreateSymbolView(clock, true, true, description);
+        SetTileOrPrismTransform(tileSymbolView, -newIndex, 1);
+        tileSymbolView.gameObject.transform.SetParent(transform, false);
+        tileSymbolViews.Add(tileSymbolView);
       }
     }
 
