@@ -8,7 +8,7 @@ namespace Domino {
     public readonly object tag;
     public readonly DominoDescription dominoDescription;
     public readonly ExtrudedSymbolDescription faceSymbolDescription;
-    public readonly List<KeyValuePair<int, ExtrudedSymbolDescription>> detailSymbolDescriptionById;
+    public readonly List<(ulong, ExtrudedSymbolDescription)> detailSymbolDescriptionById;
     public readonly float hpRatio;
     public readonly float mpRatio;
   
@@ -16,7 +16,7 @@ namespace Domino {
         object tag,
         DominoDescription dominoDescription,
         ExtrudedSymbolDescription faceSymbolDescription,
-        List<KeyValuePair<int, ExtrudedSymbolDescription>> detailSymbolDescriptionById,
+        List<(ulong, ExtrudedSymbolDescription)> detailSymbolDescriptionById,
         float hpRatio,
         float mpRatio) {
       this.tag = tag;
@@ -41,9 +41,9 @@ namespace Domino {
       if (detailSymbolDescriptionById.Count != that.detailSymbolDescriptionById.Count)
         return false;
       for (int i = 0; i < detailSymbolDescriptionById.Count; i++) {
-        if (detailSymbolDescriptionById[i].Key != that.detailSymbolDescriptionById[i].Key)
+        if (detailSymbolDescriptionById[i].Item1 != that.detailSymbolDescriptionById[i].Item1)
           return false;
-        if (!detailSymbolDescriptionById[i].Value.Equals(that.detailSymbolDescriptionById[i].Value))
+        if (!detailSymbolDescriptionById[i].Item2.Equals(that.detailSymbolDescriptionById[i].Item2))
           return false;
       }
       if (hpRatio != that.hpRatio)
@@ -59,7 +59,7 @@ namespace Domino {
       hashCode += 33 * faceSymbolDescription.GetHashCode();
       hashCode += 53 * detailSymbolDescriptionById.Count;
       foreach (var detailSymbolDescription in detailSymbolDescriptionById) {
-        hashCode += 67 * detailSymbolDescription.Key + 79 * detailSymbolDescription.Value.GetHashCode();
+        hashCode += 67 * (int)detailSymbolDescription.Item1 + 79 * detailSymbolDescription.Item2.GetHashCode();
       }
       hashCode += 87 * (int)(hpRatio * 100);
       hashCode += 103 * (int)(mpRatio * 100);
@@ -276,7 +276,7 @@ namespace Domino {
     private static SymbolBarView MakeSymbolBarView(
       IClock clock,
         Instantiator instantiator,
-        List<KeyValuePair<int, ExtrudedSymbolDescription>> symbolsIdsAndDescriptions,
+        List<(ulong, ExtrudedSymbolDescription)> symbolsIdsAndDescriptions,
         bool large) {
       SymbolBarView symbolBarView =
           instantiator.CreateSymbolBarView(clock, symbolsIdsAndDescriptions);

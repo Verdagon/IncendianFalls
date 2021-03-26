@@ -14,16 +14,16 @@ namespace Domino {
 
     private IClock clock;
     private Instantiator instantiator;
-    private List<KeyValuePair<int, SymbolView>> symbolsIdsAndViews;
+    private List<KeyValuePair<ulong, SymbolView>> symbolsIdsAndViews;
 
     public void Init(
       IClock clock,
         Instantiator instantiator,
-        List<KeyValuePair<int, ExtrudedSymbolDescription>> newSymbolsIdsAndDescriptions) {
+        List<(ulong, ExtrudedSymbolDescription)> newSymbolsIdsAndDescriptions) {
       this.initialized = true;
       this.clock = clock;
       this.instantiator = instantiator;
-      this.symbolsIdsAndViews = new List<KeyValuePair<int, SymbolView>>();
+      this.symbolsIdsAndViews = new List<KeyValuePair<ulong, SymbolView>>();
       SetDescriptions(newSymbolsIdsAndDescriptions);
     }
 
@@ -44,7 +44,7 @@ namespace Domino {
     }
 
     public void SetDescriptions(
-        List<KeyValuePair<int, ExtrudedSymbolDescription>> newSymbolsIdsAndDescriptions) {
+        List<(ulong, ExtrudedSymbolDescription)> newSymbolsIdsAndDescriptions) {
       CheckInitialized();
 
       foreach (var entry in symbolsIdsAndViews) {
@@ -54,15 +54,15 @@ namespace Domino {
 
       int i = 0;
       foreach (var entry in newSymbolsIdsAndDescriptions) {
-        var desiredSymbolView = instantiator.CreateSymbolView(clock, false, true, entry.Value);
+        var desiredSymbolView = instantiator.CreateSymbolView(clock, false, true, entry.Item2);
         desiredSymbolView.gameObject.transform.SetParent(gameObject.transform, false);
-        symbolsIdsAndViews.Add(new KeyValuePair<int, SymbolView>(entry.Key, desiredSymbolView));
-        SetSymbolViewPosition(entry.Key, desiredSymbolView, i++);
+        symbolsIdsAndViews.Add(new KeyValuePair<ulong, SymbolView>(entry.Item1, desiredSymbolView));
+        SetSymbolViewPosition(entry.Item1, desiredSymbolView, i++);
       }
 
 
       //var existingSymbolOldIndexById = new Dictionary<int, int>();
-      //var existingSymbolViewById = new Dictionary<int, SymbolView>();
+      //var existingSymbolViewById = new Dictionary<ulong, SymbolView>();
       //for (int i = 0; i < symbolsIdsAndViews.Count; i++) {
       //  existingSymbolViewById.Add(symbolsIdsAndViews[i].Key, symbolsIdsAndViews[i].Value);
       //  existingSymbolOldIndexById.Add(symbolsIdsAndViews[i].Key, i);
@@ -117,14 +117,14 @@ namespace Domino {
       //      // We had a symbol, but it wasn't in the right order so it got kicked out of the list.
       //      desiredSymbolView = existingSymbolViewById[desiredSymbolId];
       //      // Now we can add it back into the list.
-      //      symbolsIdsAndViews.Add(new KeyValuePair<int, SymbolView>(desiredSymbolId, desiredSymbolView));
+      //      symbolsIdsAndViews.Add(new KeyValuePair<ulong, SymbolView>(desiredSymbolId, desiredSymbolView));
       //      // Update it's description; we have to do it sometime, here's the best place.
       //      desiredSymbolView.SetDescription(desiredSymbolDescription);
       //    } else {
       //      // Then this is a completely new symbol. Let's make one and add it to the list.
       //      desiredSymbolView = instantiator.CreateSymbolView(false, desiredSymbolDescription);
       //      desiredSymbolView.gameObject.transform.SetParent(gameObject.transform, false);
-      //      symbolsIdsAndViews.Add(new KeyValuePair<int, SymbolView>(desiredSymbolId, desiredSymbolView));
+      //      symbolsIdsAndViews.Add(new KeyValuePair<ulong, SymbolView>(desiredSymbolId, desiredSymbolView));
       //    }
       //  } else {
       //    if (symbolsIdsAndViews[i].Key != desiredSymbolId)
@@ -153,7 +153,7 @@ namespace Domino {
     //  // soon, we should add some animating right here
     //}
 
-    private void SetSymbolViewPosition(int symbolId, SymbolView symbolView, int index) {
+    private void SetSymbolViewPosition(ulong symbolId, SymbolView symbolView, int index) {
       //Matrix4x4 matrix = GetMatrixForPosition(index);
       //symbolView.gameObject.transform.FromMatrix(matrix);
 

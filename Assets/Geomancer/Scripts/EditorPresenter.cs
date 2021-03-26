@@ -52,6 +52,8 @@ namespace Geomancer {
         [KeyCode.P] = "ManaPotion",
         [KeyCode.W] = "CaveWall",
         [KeyCode.Z] = "ObsidianFloor",
+        [KeyCode.V] = "Avelisk",
+        [KeyCode.Z] = "Zeddy",
         [KeyCode.Hash] = "Wall",
         [KeyCode.BackQuote] = "Water",
       };

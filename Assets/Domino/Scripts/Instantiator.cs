@@ -180,7 +180,7 @@ namespace Domino {
 
     public SymbolBarView CreateSymbolBarView(
       IClock clock,
-        List<KeyValuePair<int, ExtrudedSymbolDescription>> symbolsIdsAndDescriptions) {
+        List<(ulong, ExtrudedSymbolDescription)> symbolsIdsAndDescriptions) {
       var symbolBarGameObject = Instantiate(symbolBarPrefab);
       var symbolBarView = symbolBarGameObject.GetComponent<SymbolBarView>();
       symbolBarView.Init(clock, this, symbolsIdsAndDescriptions);

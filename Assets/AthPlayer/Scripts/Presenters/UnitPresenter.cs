@@ -289,12 +289,12 @@ namespace AthPlayer {
     }
 
     public static UnitDescription GetUnitViewDescription(Unit unit) {
-      var detailSymbols = new List<KeyValuePair<int, ExtrudedSymbolDescription>>();
+      var detailSymbols = new List<(ulong, ExtrudedSymbolDescription)>();
       foreach (var detail in unit.components) {
         if (detail is DefyingUCAsIUnitComponent defying) {
           detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  defying.id,
+              (
+                  (ulong)defying.id,
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
@@ -307,8 +307,8 @@ namespace AthPlayer {
                       Vector4Animation.GLOWY_WHITE)));
         } else if (detail is InvincibilityUCAsIUnitComponent inv) {
           detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  inv.id,
+              (
+                  (ulong)inv.id,
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
@@ -321,8 +321,8 @@ namespace AthPlayer {
                       Vector4Animation.GLOWY_WHITE)));
         } else if (detail is MiredUCAsIUnitComponent mired) {
           detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  mired.id,
+              (
+                  (ulong)mired.id,
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
@@ -335,8 +335,8 @@ namespace AthPlayer {
                       Vector4Animation.GLOWY_WHITE)));
         } else if (detail is OnFireUCAsIUnitComponent onfire) {
           detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  onfire.id,
+              (
+                  (ulong)onfire.id,
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
@@ -349,8 +349,8 @@ namespace AthPlayer {
                       Vector4Animation.GLOWY_WHITE)));
         } else if (detail is CounteringUCAsIUnitComponent countering) {
           detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  countering.id,
+              (
+                  (ulong)countering.id,
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
@@ -365,8 +365,8 @@ namespace AthPlayer {
         } else if (detail is LightningChargingUCAsIUnitComponent charging) {
         } else if (detail is LightningChargedUCAsIUnitComponent charged) {
           detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  charged.id,
+              (
+                  (ulong)charged.id,
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
@@ -404,8 +404,8 @@ namespace AthPlayer {
                 break;
             }
             detailSymbols.Add(
-                new KeyValuePair<int, ExtrudedSymbolDescription>(
-                    bideI.id,
+                (
+                    (ulong)bideI.id,
                     new ExtrudedSymbolDescription(
                         RenderPriority.SYMBOL,
                         new SymbolDescription(
@@ -421,8 +421,8 @@ namespace AthPlayer {
         } else if (detail is TemporaryCloneAICapabilityUCAsIUnitComponent tca) {
         } else if (detail is DoomedUCAsIUnitComponent d) {
           detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  d.id,
+              (
+                  (ulong)d.id,
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
@@ -435,8 +435,8 @@ namespace AthPlayer {
                       Vector4Animation.GLOWY_WHITE)));
         } else if (detail is TimeCloneAICapabilityUCAsIUnitComponent tc) {
           detailSymbols.Add(
-              new KeyValuePair<int, ExtrudedSymbolDescription>(
-                  tc.id,
+              (
+                  (ulong)tc.id,
                   new ExtrudedSymbolDescription(
                       RenderPriority.SYMBOL,
                       new SymbolDescription(
@@ -449,7 +449,7 @@ namespace AthPlayer {
                       Vector4Animation.GLOWY_WHITE)));
         } else if (detail is GlaiveAsIUnitComponent) {
           //detailSymbols.Add(
-          //    new KeyValuePair<int, ExtrudedSymbolDescription>(
+          //    (
           //        detail.id,
           //        new ExtrudedSymbolDescription(
           //            RenderPriority.SYMBOL,
@@ -463,7 +463,7 @@ namespace AthPlayer {
           //            true, Vector4Animation.GLOWY_WHITE)));
         } else if (detail is SpeedRingAsIUnitComponent) {
           //detailSymbols.Add(
-          //    new KeyValuePair<int, ExtrudedSymbolDescription>(
+          //    (
           //        detail.id,
           //        new ExtrudedSymbolDescription(
           //            RenderPriority.SYMBOL,
@@ -477,7 +477,7 @@ namespace AthPlayer {
           //            true, Vector4Animation.GLOWY_WHITE)));
         } else if (detail is ArmorAsIUnitComponent) {
           //detailSymbols.Add(
-          //    new KeyValuePair<int, ExtrudedSymbolDescription>(
+          //    (
           //        detail.id,
           //        new ExtrudedSymbolDescription(
           //            RenderPriority.SYMBOL,
@@ -496,7 +496,7 @@ namespace AthPlayer {
         } else if (detail is BlazeRodAsIUnitComponent) {
         } else if (detail is ExplosionRodAsIUnitComponent) {
           //detailSymbols.Add(
-          //    new KeyValuePair<int, ExtrudedSymbolDescription>(
+          //    (
           //        detail.id,
           //        new ExtrudedSymbolDescription(
           //            RenderPriority.SYMBOL,
@@ -902,7 +902,7 @@ namespace AthPlayer {
             "a",
                             Vector4Animation.Color(0, 1f, 1f), 15, 1, OutlineMode.WithOutline,
                     Vector4Animation.Color(0, 0, 0)), true, Vector4Animation.Color(0, 0, 0)),
-            new List<KeyValuePair<int, ExtrudedSymbolDescription>>(),
+            new List<(ulong, ExtrudedSymbolDescription)>(),
             hpRatio,
               mpRatio);
       }

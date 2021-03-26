@@ -177,9 +177,9 @@ namespace Geomancer {
 
       Domino.UnitDescription maybeUnitDescription = null;
       if (maybeUnitFace != null || maybeUnitDomino != null || unitDetails.Count > 0) {
-        var details = new List<KeyValuePair<int, Domino.ExtrudedSymbolDescription>>();
+        var details = new List<(ulong, ExtrudedSymbolDescription)>();
         for (int i = 0; i < items.Count; i++) {
-          details.Add(new KeyValuePair<int, Domino.ExtrudedSymbolDescription>(i, items[i]));
+          details.Add(((ulong)i, items[i]));
         }
 
         maybeUnitDescription =

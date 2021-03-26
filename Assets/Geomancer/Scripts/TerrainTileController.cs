@@ -40,10 +40,12 @@ namespace Geomancer {
     private List<(ulong, ExtrudedSymbolDescription)> membersFeatures = new List<(ulong, ExtrudedSymbolDescription)>();
     private List<(ulong, ExtrudedSymbolDescription)> membersOverlays = new List<(ulong, ExtrudedSymbolDescription)>();
     private List<(ulong, ExtrudedSymbolDescription)> membersItems = new List<(ulong, ExtrudedSymbolDescription)>();
+    private List<(ulong, DominoDescription)> membersDominos = new List<(ulong, DominoDescription)>();
+    private List<(ulong, ExtrudedSymbolDescription)> membersUnitFaces = new List<(ulong, ExtrudedSymbolDescription)>();
+    private List<(ulong, ExtrudedSymbolDescription)> membersDetails = new List<(ulong, ExtrudedSymbolDescription)>();
 
-    private bool highlightedZork;
-
-    private bool selectedZork;
+    private bool highlighted;
+    private bool selected;
 
     public TerrainTilePresenter(
       IClock clock,
@@ -60,9 +62,6 @@ namespace Geomancer {
       this.terrainTile = terrainTile;
       this.instantiator = instantiator;
       this.terrain = terrain;
-
-      // terrainTile.members.AddObserver(broadcaster, this);
-      // terrainTile.AddObserver(broadcaster, this);
 
       var eternalMemberId = nextMemberId++;
       membersFrontColors.Add((eternalMemberId, Vector4Animation.Color(.4f, .4f, 0, 1)));
@@ -104,7 +103,7 @@ namespace Geomancer {
                   RenderPriority.TILE,
                   new SymbolDescription(
                       symbolName, // symbol name
-                      CalculateTintedFrontColor(membersFrontColors[membersFrontColors.Count - 1].Item2, selectedZork, highlightedZork),
+                      CalculateTintedFrontColor(membersFrontColors[membersFrontColors.Count - 1].Item2, selected, highlighted),
                       patternTile.rotateRadianards / 1000f * 180f / (float)Math.PI,
                       1, // scale
                       OutlineMode.WithOutline,
@@ -126,19 +125,19 @@ namespace Geomancer {
       return positionVec3.ToUnity();
     }
 
-    public void SetHighlighted(bool highlightedZork) {
-      this.highlightedZork = highlightedZork;
+    public void SetHighlighted(bool highlighted) {
+      this.highlighted = highlighted;
       RefreshFrontColor();
     }
-    public void SetSelected(bool selectedZork) {
-      this.selectedZork = selectedZork;
+    public void SetSelected(bool selected) {
+      this.selected = selected;
       RefreshFrontColor();
     }
 
     private void RefreshFrontColor() {
       tileView.SetFrontColor(
           CalculateTintedFrontColor(
-              membersFrontColors[membersFrontColors.Count - 1].Item2, selectedZork, highlightedZork));
+              membersFrontColors[membersFrontColors.Count - 1].Item2, selected, highlighted));
     }
 
     private void RefreshSideColor() {
@@ -149,6 +148,36 @@ namespace Geomancer {
       tileView.SetFeature(membersFeatures.Count == 0 ? null : membersFeatures[membersFeatures.Count - 1].Item2);
     }
     
+    private void RefreshUnit() {
+      if (this.unitView != null) {
+        this.unitView.Destruct();
+        this.unitView = null;
+      }
+      if (this.unitView == null && membersDominos.Count > 0 && membersUnitFaces.Count > 0) {
+        var position = CalculatePosition(terrain.elevationStepHeight, terrain.pattern, location, terrainTile.elevation);
+        var unitDescription =
+            new UnitDescription(
+                null,
+                membersDominos[membersDominos.Count - 1].Item2,
+                membersUnitFaces[membersUnitFaces.Count - 1].Item2,
+                membersDetails,
+                1,
+                1);
+        this.unitView =
+            instantiator.CreateUnitView(clock, null, position, unitDescription, new Vector3(0, -8, 16));
+      }
+    }
+
+    private void RefreshDomino() {
+      // TODO: replace this with a call to unitView.SetDomino
+      RefreshUnit();
+    }
+
+    private void RefreshUnitFace() {
+      // TODO: replace this with a call to unitView.SetFace
+      RefreshUnit();
+    }
+
     private void RefreshOverlay() {
       tileView.SetOverlay(membersOverlays.Count == 0 ? null : membersOverlays[membersOverlays.Count - 1].Item2);
     }
@@ -167,6 +196,15 @@ namespace Geomancer {
       foreach (var x in membersItems) {
         tileView.AddItem(x.Item1, x.Item2);
       }
+    }
+
+    private void RefreshDetails() {
+      // unitView.ClearDetails();
+      // foreach (var x in membersDetails) {
+      //   unitView.AddItem(x.Item1, x.Item2);
+      // }
+      // TODO put the above in
+      RefreshUnit();
     }
 
     private void OnAddMember(string member) {
@@ -195,11 +233,26 @@ namespace Geomancer {
             RefreshFeature();
           }
         } else if (thing is MemberToViewMapper.DominoDescriptionForIDescription domino) {
-          throw new NotImplementedException();
+          membersDominos.Add((memberId, domino.domino));
+          if (unitView != null) {
+            RefreshUnit();
+          } else {
+            RefreshDomino();
+          }
         } else if (thing is MemberToViewMapper.FaceDescriptionForIDescription face) {
-          throw new NotImplementedException();
+          membersUnitFaces.Add((memberId, face.symbol));
+          if (unitView == null) {
+            RefreshUnit();
+          } else {
+            RefreshUnitFace();
+          }
         } else if (thing is MemberToViewMapper.DetailDescriptionForIDescription detail) {
-          throw new NotImplementedException();
+          membersDetails.Add((memberId, detail.symbol));
+          if (unitView == null) {
+            RefreshUnit();
+          } else {
+            RefreshDetails();
+          }
         } else if (thing is MemberToViewMapper.ItemDescriptionForIDescription item) {
           membersItems.Add((memberId, item.symbol));
           if (tileView != null) {
@@ -236,11 +289,20 @@ namespace Geomancer {
             RefreshFeature();
           }
         } else if (thing is MemberToViewMapper.DominoDescriptionForIDescription domino) {
-          throw new NotImplementedException();
+          membersDominos.RemoveAll(x => x.Item1 == memberId);
+          if (unitView != null) {
+            RefreshDomino();
+          }
         } else if (thing is MemberToViewMapper.FaceDescriptionForIDescription face) {
-          throw new NotImplementedException();
+          membersUnitFaces.RemoveAll(x => x.Item1 == memberId);
+          if (unitView != null) {
+            RefreshUnitFace();
+          }
         } else if (thing is MemberToViewMapper.DetailDescriptionForIDescription detail) {
-          throw new NotImplementedException();
+          membersDetails.RemoveAll(x => x.Item1 == memberId);
+          if (unitView != null) {
+            RefreshDetails();
+          }
         } else if (thing is MemberToViewMapper.ItemDescriptionForIDescription item) {
           membersItems.RemoveAll(x => x.Item1 == memberId);
           if (tileView != null) {
@@ -275,67 +337,18 @@ namespace Geomancer {
       RefreshDepth();
     }
 
-    // private void ResetViews() {
-    //   var (tileDescription, maybeUnitDescription) = GetDescriptions();
-    //
-    //   if (tileView != null) {
-    //     tileView.DestroyTile();
-    //     tileView = null;
-    //   }
-    //
-    //   var positionVec2 = terrain.pattern.GetTileCenter(location);
-    //   tileCenter =
-    //     new UnityEngine.Vector3(
-    //               positionVec2.x,
-    //               terrainTile.elevation * terrain.elevationStepHeight,
-    //               positionVec2.y);
-    //
-    //   tileView = instantiator.CreateTileView(clock, timer, tileCenter, tileDescription);
-    //   tileView.gameObject.AddComponent<TerrainTilePresenterTile>().Init(this);
-    //   // tileView.SetDescription(tileDescription);
-    //
     //   if (unitView) {
     //     unitView.Destruct();
     //     unitView = null;
     //   }
     //
     //   if (maybeUnitDescription != null) {
-    //     unitView = instantiator.CreateUnitView(clock, null, tileCenter, maybeUnitDescription, new Vector3(0, -8, 16));
+    //     
     //     // unitView.SetDescription(maybeUnitDescription);
     //   }
     // }
 
     // private (TileDescription, UnitDescription) GetDescriptions() {
-    //   int lowestNeighborElevation = int.MaxValue;
-    //   foreach (var adjacentLocation in terrain.GetAdjacentExistingLocations(location, false)) {
-    //     var adjacentTerrainTile = terrain.tiles[adjacentLocation];
-    //     lowestNeighborElevation = Math.Min(lowestNeighborElevation, adjacentTerrainTile.elevation);
-    //   }
-    //   int neededDepth = Math.Max(1, terrainTile.elevation - lowestNeighborElevation);
-    //
-    //   var patternTile = terrain.pattern.patternTiles[location.indexInGroup];
-    //
-    //   string symbolName = "a";
-    //   switch (terrain.pattern.name) {
-    //     case "square":
-    //       if (patternTile.shapeIndex == 0) {
-    //         symbolName = "six";
-    //       }
-    //       break;
-    //     case "pentagon9":
-    //       if (patternTile.shapeIndex == 0) {
-    //         symbolName = "i";
-    //       } else if (patternTile.shapeIndex == 1) {
-    //         symbolName = "h";
-    //       }
-    //       break;
-    //     case "hex":
-    //       if (patternTile.shapeIndex == 0) {
-    //         symbolName = "five";
-    //       }
-    //       break;
-    //   }
-    //
     //   var defaultUnitDescription =
     //     new UnitDescription(
     //       null,
@@ -346,24 +359,12 @@ namespace Geomancer {
     //           "a", Vector4Animation.Color(0, 1, 0), 45, 1, OutlineMode.WithBackOutline),
     //         true,
     //         Vector4Animation.Color(0, 0, 0)),
-    //       new List<KeyValuePair<int, ExtrudedSymbolDescription>>(),
+    //       new List<(int, ExtrudedSymbolDescription)>(),
     //       1,
     //       1);
     //
-    //   var members = new List<String>();
-    //   foreach (var member in this.terrainTile.members) {
-    //     members.Add(member);
-    //   }
     //   var (tileDescription, unitDescription) =
     //     vivimap.Vivify(defaultTileDescription, defaultUnitDescription, members);
-    //   if (highlighted || selected) {
-    //     IVector4Animation frontColor = CalculateFrontColor(selected, highlighted);
-    //     tileDescription =
-    //       tileDescription.WithTileSymbolDescription(
-    //         tileDescription.tileSymbolDescription.WithSymbol(
-    //           tileDescription.tileSymbolDescription.symbol.WithFrontColor(
-    //             frontColor)));
-    //   }
     //   return (tileDescription, unitDescription);
     // }
 

@@ -105,7 +105,7 @@ namespace Domino {
 
     Instantiator instantiator;
 
-    TileDescription initialTileDescription;
+    private float elevationStepHeight;
     private IVector4Animation topColor;
     private IVector4Animation sideColor;
     private ExtrudedSymbolDescription maybeFeature;
@@ -129,7 +129,6 @@ namespace Domino {
       this.clock = clock;
       this.timer = timer;
       this.instantiator = instantiator;
-      this.initialTileDescription = initialDescription;
 
       transientPrismSymbolsAndTimerIds = new List<KeyValuePair<SymbolView, int>>();
 
@@ -139,6 +138,7 @@ namespace Domino {
       
       tileSymbolId = initialDescription.tileSymbolDescription.symbol.symbolId.name;
       tileRotationDegrees = initialDescription.tileSymbolDescription.symbol.rotationDegrees;
+      elevationStepHeight = initialDescription.elevationStepHeight;
       tileScale = initialDescription.tileSymbolDescription.symbol.scale;
       tileOutlineMode = initialDescription.tileSymbolDescription.symbol.withOutline;
       tileOutlineColor = initialDescription.tileSymbolDescription.symbol.outlineColor;
@@ -411,7 +411,7 @@ namespace Domino {
       while (tileSymbolViews.Count < depth) {
         var newIndex = tileSymbolViews.Count;
         SymbolView tileSymbolView = instantiator.CreateSymbolView(clock, true, true, description);
-        SetTileOrPrismTransform(tileSymbolView, initialTileDescription.elevationStepHeight, initialTileDescription.tileRotationDegrees, -newIndex, 1);
+        SetTileOrPrismTransform(tileSymbolView, elevationStepHeight, tileRotationDegrees, -newIndex, 1);
         tileSymbolView.gameObject.transform.SetParent(transform, false);
         tileSymbolViews.Add(tileSymbolView);
       }
@@ -471,7 +471,7 @@ namespace Domino {
           false,
           false,
           prismDescription);
-      SetTileOrPrismTransform(polygonView, initialTileDescription.elevationStepHeight, initialTileDescription.tileRotationDegrees, 0, 3);
+      SetTileOrPrismTransform(polygonView, elevationStepHeight, tileRotationDegrees, 0, 3);
       polygonView.transform.SetParent(prismGameObject.transform, false);
       polygonView.FadeInThenOut(100, 400);
       ScheduleSymbolViewDestruction(polygonView);
@@ -483,7 +483,7 @@ namespace Domino {
           false,
           prismOverlayDescription);
 
-      float overlayThickness = .35f * initialTileDescription.elevationStepHeight;
+      float overlayThickness = .35f * elevationStepHeight;
       // No idea why we need the -90. It has to do with
       // unity's infuriating mishandling of .obj file imports.
       overlayView.gameObject.transform.localRotation =
@@ -491,7 +491,7 @@ namespace Domino {
       overlayView.gameObject.transform.localScale =
           new Vector3(1 * .8f, -1 * .8f, overlayThickness);
       overlayView.gameObject.transform.localPosition =
-          new Vector3(0, initialTileDescription.elevationStepHeight * 3f + overlayThickness);
+          new Vector3(0, elevationStepHeight * 3f + overlayThickness);
 
       overlayView.transform.SetParent(prismGameObject.transform, false);
       overlayView.FadeInThenOut(100, 400);

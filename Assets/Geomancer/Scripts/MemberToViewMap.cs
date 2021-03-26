@@ -166,6 +166,26 @@ namespace Geomancer {
             false,
             Vector4Animation.BLACK))
       });
+      entries.Add("Avelisk", new List<MemberToViewMapper.IDescription>() {
+          new MemberToViewMapper.DominoDescriptionForIDescription(
+              new DominoDescription(false, Vector4Animation.Color(1.0f, 0.6f, 0.0f))),
+          new MemberToViewMapper.FaceDescriptionForIDescription(
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "x",
+                      Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)))
+      });
+      entries.Add("Zeddy", new List<MemberToViewMapper.IDescription>() {
+          new MemberToViewMapper.DetailDescriptionForIDescription(
+              new ExtrudedSymbolDescription(
+                  RenderPriority.SYMBOL,
+                  new SymbolDescription(
+                      "u",
+                      Vector4Animation.Color(1, 1, 1, 1f), 0, 1, OutlineMode.WithBackOutline),
+                  false, Vector4Animation.Color(0, 0, 0)))
+      });
       return new MemberToViewMapper(entries);
     }
   }
