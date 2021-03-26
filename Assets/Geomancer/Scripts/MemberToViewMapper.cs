@@ -160,9 +160,9 @@ namespace Geomancer {
               defaultTile.tileSymbolDescription.extruded,
               specifiedSideColor ? sideColor : defaultTile.tileSymbolDescription.sidesColor);
 
-      var itemSymbolDescriptionByItemId = new SortedDictionary<int, Domino.ExtrudedSymbolDescription>();
+      var itemSymbolDescriptionByItemId = new List<(ulong, Domino.ExtrudedSymbolDescription)>();
       for (int i = 0; i < items.Count; i++) {
-        itemSymbolDescriptionByItemId.Add(i, items[i]);
+        itemSymbolDescriptionByItemId.Add(((ulong)i, items[i]));
       }
 
       var tileDescription =

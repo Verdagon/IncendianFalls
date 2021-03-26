@@ -75,12 +75,14 @@ namespace AthPlayer {
       componentsBroadcaster = new ITerrainTileComponentMutBunchBroadcaster(postBroadcaster, terrainTile.components);
       componentsBroadcaster.AddObserver(this);
 
-      tileView.SetDescription(GetDescription());
+      Asserts.Assert(false);
+      // tileView.SetDescription(GetDescription());
     }
 
     public void SetHighlighted(bool highlighted) {
       this.highlighted = highlighted;
-      tileView.SetDescription(GetDescription());
+      Asserts.Assert(false);
+      // tileView.SetDescription(GetDescription());
     }
 
     private string GetTerrainTileShapeSymbol(PatternTile patternTile) {
@@ -122,7 +124,7 @@ namespace AthPlayer {
           out Vector4Animation sideColor,
           out ExtrudedSymbolDescription overlayDescription,
           out ExtrudedSymbolDescription featureDescription,
-          out SortedDictionary<int, ExtrudedSymbolDescription> itemSymbolDescriptionByItemId);
+          out List<(ulong, ExtrudedSymbolDescription)> itemSymbolDescriptionByItemId);
 
       var patternTile = terrain.pattern.patternTiles[location.indexInGroup];
 
@@ -206,7 +208,7 @@ namespace AthPlayer {
         out Vector4Animation sideColor,
         out ExtrudedSymbolDescription overlay,
         out ExtrudedSymbolDescription feature,
-        out SortedDictionary<int, ExtrudedSymbolDescription> itemSymbolDescriptionByItemId) {
+        out List<(ulong, ExtrudedSymbolDescription)> itemSymbolDescriptionByItemId) {
 
       bool topColorLocked = false;
       topColor = Vector4Animation.Color(1.0f, 0, 1.0f);
@@ -223,7 +225,7 @@ namespace AthPlayer {
       bool featureLocked = false;
       feature = null;
 
-      itemSymbolDescriptionByItemId = new SortedDictionary<int, ExtrudedSymbolDescription>();
+      itemSymbolDescriptionByItemId = new List<(ulong, ExtrudedSymbolDescription)>();
 
       foreach (var ttc in terrainTile.components) {
 
@@ -573,7 +575,7 @@ namespace AthPlayer {
           var item = itemTTC.obj.item;
           if (item is ArmorAsIItem) {
             itemSymbolDescriptionByItemId.Add(
-                ttc.id,
+                ((ulong)ttc.id,
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
@@ -583,10 +585,10 @@ namespace AthPlayer {
                         1,
                         OutlineMode.WithBackOutline),
                     true,
-                    Vector4Animation.Color(.75f, .75f, 0)));
+                    Vector4Animation.Color(.75f, .75f, 0))));
           } else if (item is BlastRodAsIItem) {
             itemSymbolDescriptionByItemId.Add(
-                ttc.id,
+                ((ulong)ttc.id,
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
@@ -596,10 +598,10 @@ namespace AthPlayer {
                         1,
                         OutlineMode.WithBackOutline),
                     true,
-                    Vector4Animation.Color(.75f, .75f, 0)));
+                    Vector4Animation.Color(.75f, .75f, 0))));
           } else if (item is BlazeRodAsIItem) {
             itemSymbolDescriptionByItemId.Add(
-                ttc.id,
+                ((ulong)ttc.id,
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
@@ -609,10 +611,10 @@ namespace AthPlayer {
                         1,
                         OutlineMode.NoOutline),
                     true,
-                    Vector4Animation.Color(0f, 0f, 0)));
+                    Vector4Animation.Color(0f, 0f, 0))));
           } else if (item is ExplosionRodAsIItem) {
             itemSymbolDescriptionByItemId.Add(
-                ttc.id,
+                ((ulong)ttc.id,
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
@@ -622,10 +624,10 @@ namespace AthPlayer {
                         1,
                         OutlineMode.NoOutline),
                     true,
-                    Vector4Animation.Color(0f, 0f, 0)));
+                    Vector4Animation.Color(0f, 0f, 0))));
           } else if (item is SlowRodAsIItem) {
             itemSymbolDescriptionByItemId.Add(
-                ttc.id,
+                ((ulong)ttc.id,
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
@@ -635,10 +637,10 @@ namespace AthPlayer {
                         1,
                         OutlineMode.WithBackOutline),
                     true,
-                    Vector4Animation.Color(.75f, .75f, 0)));
+                    Vector4Animation.Color(.75f, .75f, 0))));
           } else if (item is GlaiveAsIItem) {
             itemSymbolDescriptionByItemId.Add(
-                ttc.id,
+                ((ulong)ttc.id,
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
@@ -648,10 +650,10 @@ namespace AthPlayer {
                         1,
                         OutlineMode.WithBackOutline),
                     true,
-                    Vector4Animation.Color(.5f, 0f, 0)));
+                    Vector4Animation.Color(.5f, 0f, 0))));
           } else if (item is SpeedRingAsIItem) {
             itemSymbolDescriptionByItemId.Add(
-                ttc.id,
+                ((ulong)ttc.id,
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
@@ -661,10 +663,10 @@ namespace AthPlayer {
                         1,
                         OutlineMode.WithBackOutline),
                     true,
-                    Vector4Animation.Color(.5f, 0f, 0)));
+                    Vector4Animation.Color(.5f, 0f, 0))));
           } else if (item is HealthPotionAsIItem) {
             itemSymbolDescriptionByItemId.Add(
-                ttc.id,
+                ((ulong)ttc.id,
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
@@ -674,10 +676,10 @@ namespace AthPlayer {
                         1,
                         OutlineMode.WithBackOutline),
                     true,
-                    Vector4Animation.Color(0f, 0f, 0)));
+                    Vector4Animation.Color(0f, 0f, 0))));
           } else if (item is ManaPotionAsIItem) {
             itemSymbolDescriptionByItemId.Add(
-                ttc.id,
+                ((ulong)ttc.id,
                 new ExtrudedSymbolDescription(
                     RenderPriority.SYMBOL,
                     new SymbolDescription(
@@ -687,7 +689,7 @@ namespace AthPlayer {
                         1,
                         OutlineMode.WithBackOutline),
                     true,
-                    Vector4Animation.Color(0f, 0f, 0)));
+                    Vector4Animation.Color(0f, 0f, 0))));
           } else {
             Asserts.Assert(false, "Found item: " + ttc);
           }
@@ -714,11 +716,13 @@ namespace AthPlayer {
     }
 
     public void OnITerrainTileComponentMutBunchAdd(int id) {
-      tileView.SetDescription(GetDescription());
+      Asserts.Assert(false);
+      // tileView.SetDescription(GetDescription());
     }
 
     public void OnITerrainTileComponentMutBunchRemove(int id) {
-      tileView.SetDescription(GetDescription());
+      Asserts.Assert(false);
+      // tileView.SetDescription(GetDescription());
     }
 
     public void ShowFirePrism() {

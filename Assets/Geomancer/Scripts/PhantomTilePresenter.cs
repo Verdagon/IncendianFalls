@@ -105,7 +105,7 @@ namespace Geomancer {
 
       return
         new TileDescription(
-              1,
+              .2f,
               patternTile.rotateRadianards / 1000f * 180f / (float)Math.PI,
               1,
               new ExtrudedSymbolDescription(
@@ -121,7 +121,7 @@ namespace Geomancer {
                 sideColor),
               null,
               null,
-              new SortedDictionary<int, ExtrudedSymbolDescription>());
+              new List<(ulong, ExtrudedSymbolDescription)>());
     }
 
     public void DestroyPhantomTilePresenter() {

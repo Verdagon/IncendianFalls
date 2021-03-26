@@ -32,20 +32,20 @@ namespace Geomancer {
             Vector4Animation.BLACK))
       });
       entries.Add("HealthPotion", new List<MemberToViewMapper.IDescription>() {
-        new MemberToViewMapper.OverlayDescriptionForIDescription(
-                new ExtrudedSymbolDescription(
-                    RenderPriority.SYMBOL,
-                    new SymbolDescription(
-                        "plus",
-                        Vector4Animation.Color(.8f, 0, .8f, 1.5f),
-                        0,
-                        1,
-                        OutlineMode.WithBackOutline),
-                    true,
-                    Vector4Animation.BLACK))
+        new MemberToViewMapper.ItemDescriptionForIDescription(
+            new ExtrudedSymbolDescription(
+                RenderPriority.SYMBOL,
+                new SymbolDescription(
+                    "plus",
+                    Vector4Animation.Color(.8f, 0, .8f, 1.5f),
+                    0,
+                    1,
+                    OutlineMode.NoOutline),
+                true,
+                Vector4Animation.BLACK))
       });
       entries.Add("ManaPotion", new List<MemberToViewMapper.IDescription>() {
-        new MemberToViewMapper.OverlayDescriptionForIDescription(
+        new MemberToViewMapper.ItemDescriptionForIDescription(
           new ExtrudedSymbolDescription(
               RenderPriority.SYMBOL,
               new SymbolDescription(
@@ -53,49 +53,49 @@ namespace Geomancer {
                   Vector4Animation.Color(.25f, .7f, 1.0f, 1.5f),
                   0,
                   1,
-                  OutlineMode.WithBackOutline),
+                  OutlineMode.NoOutline),
               true,
               Vector4Animation.BLACK))
       });
       entries.Add("Cave", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.FeatureDescriptionForIDescription(
-                  new ExtrudedSymbolDescription(
-                      RenderPriority.SYMBOL,
-                      new SymbolDescription(
-                          "p",
-                          Vector4Animation.BLACK,
-                          0,
-                          1,
-                          OutlineMode.WithOutline,
-                          Vector4Animation.WHITE),
-                      false,
-                      Vector4Animation.WHITE))
+            new ExtrudedSymbolDescription(
+                RenderPriority.SYMBOL,
+                new SymbolDescription(
+                    "p",
+                    Vector4Animation.BLACK,
+                    0,
+                    1,
+                    OutlineMode.WithOutline,
+                    Vector4Animation.WHITE),
+                false,
+                Vector4Animation.WHITE))
       });
       entries.Add("Tree", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.FeatureDescriptionForIDescription(
-                  new ExtrudedSymbolDescription(
-                      RenderPriority.SYMBOL,
-                      new SymbolDescription(
-                          "n",
-                          Vector4Animation.Color(0, .5f, 0),
-                          0,
-                          1,
-                          OutlineMode.WithOutline),
-                      false,
-                      Vector4Animation.Color(0f, .3f, 0f)))
+            new ExtrudedSymbolDescription(
+                RenderPriority.SYMBOL,
+                new SymbolDescription(
+                    "n",
+                    Vector4Animation.Color(0, .5f, 0),
+                    0,
+                    1,
+                    OutlineMode.WithOutline),
+                false,
+                Vector4Animation.Color(0f, .3f, 0f)))
       });
       entries.Add("Fire", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.FeatureDescriptionForIDescription(
-                  new ExtrudedSymbolDescription(
-                      RenderPriority.SYMBOL,
-                      new SymbolDescription(
-                          "r-3",
-                          Vector4Animation.Color(.8f, .4f, 0, .5f),
-                          0,
-                          1,
-                          OutlineMode.WithOutline),
-                      false,
-                      Vector4Animation.Color(0f, .3f, 0f)))
+            new ExtrudedSymbolDescription(
+                RenderPriority.SYMBOL,
+                new SymbolDescription(
+                    "r-3",
+                    Vector4Animation.Color(.8f, .4f, 0, .5f),
+                    0,
+                    1,
+                    OutlineMode.WithOutline),
+                false,
+                Vector4Animation.Color(0f, .3f, 0f)))
       });
       entries.Add("Dirt", new List<MemberToViewMapper.IDescription>() {
         new MemberToViewMapper.TopColorDescriptionForIDescription(Vector4Animation.Color(.4f, .133f, 0)),

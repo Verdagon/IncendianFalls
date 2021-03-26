@@ -36,9 +36,10 @@ namespace Geomancer {
     
     // (member ID, value)
     private List<(ulong, IVector4Animation)> membersFrontColors = new List<(ulong, IVector4Animation)>();
-    
-    // (member ID, value)
     private List<(ulong, IVector4Animation)> membersSideColors = new List<(ulong, IVector4Animation)>();
+    private List<(ulong, ExtrudedSymbolDescription)> membersFeatures = new List<(ulong, ExtrudedSymbolDescription)>();
+    private List<(ulong, ExtrudedSymbolDescription)> membersOverlays = new List<(ulong, ExtrudedSymbolDescription)>();
+    private List<(ulong, ExtrudedSymbolDescription)> membersItems = new List<(ulong, ExtrudedSymbolDescription)>();
 
     private bool highlightedZork;
 
@@ -110,9 +111,9 @@ namespace Geomancer {
                       Vector4Animation.Color(0, 0, 0)), // outline
                   true,
                   membersSideColors[membersSideColors.Count - 1].Item2),
-              null,
-              null,
-              new SortedDictionary<int, ExtrudedSymbolDescription>());
+              CalculateMaybeOverlay(membersOverlays),
+              CalculateMaybeFeature(membersFeatures),
+              membersItems);
 
       var position = CalculatePosition(terrain.elevationStepHeight, terrain.pattern, location, terrainTile.elevation);
       tileView = instantiator.CreateTileView(clock, timer, position, initialTileDescription);
@@ -143,6 +144,14 @@ namespace Geomancer {
     private void RefreshSideColor() {
       tileView.SetSidesColor(membersSideColors[membersSideColors.Count - 1].Item2);
     }
+    
+    private void RefreshFeature() {
+      tileView.SetFeature(membersFeatures.Count == 0 ? null : membersFeatures[membersFeatures.Count - 1].Item2);
+    }
+    
+    private void RefreshOverlay() {
+      tileView.SetOverlay(membersOverlays.Count == 0 ? null : membersOverlays[membersOverlays.Count - 1].Item2);
+    }
 
     private void RefreshPosition() {
       var position = CalculatePosition(terrain.elevationStepHeight, terrain.pattern, location, terrainTile.elevation);
@@ -153,37 +162,111 @@ namespace Geomancer {
       tileView.SetDepth(terrainTile.elevation);
     }
 
+    private void RefreshItems() {
+      tileView.ClearItems();
+      foreach (var x in membersItems) {
+        tileView.AddItem(x.Item1, x.Item2);
+      }
+    }
+
     private void OnAddMember(string member) {
       ulong memberId = nextMemberId++;
       members.Add((memberId, member));
-      var visitor = new AttributeAddingVisitor(this, memberId);
+      // var visitor = new AttributeAddingVisitor(this, memberId);
       foreach (var thing in vivimap.getEntries(member)) {
-        // Will set membersFrontColors/dirty, membersSideColors/dirty, etc.
-        thing.visit(visitor);
+        if (thing is MemberToViewMapper.TopColorDescriptionForIDescription topColor) {
+          membersFrontColors.Add((memberId, topColor.color));
+          if (tileView != null) {
+            RefreshFrontColor();
+          }
+        } else if (thing is MemberToViewMapper.SideColorDescriptionForIDescription sideColor) {
+          membersSideColors.Add((memberId, sideColor.color));
+          if (tileView != null) {
+            RefreshSideColor();
+          }
+        } else if (thing is MemberToViewMapper.OverlayDescriptionForIDescription overlay) {
+          membersOverlays.Add((memberId, overlay.symbol));
+          if (tileView != null) {
+            RefreshOverlay();
+          }
+        } else if (thing is MemberToViewMapper.FeatureDescriptionForIDescription feature) {
+          membersFeatures.Add((memberId, feature.symbol));
+          if (tileView != null) {
+            RefreshFeature();
+          }
+        } else if (thing is MemberToViewMapper.DominoDescriptionForIDescription domino) {
+          throw new NotImplementedException();
+        } else if (thing is MemberToViewMapper.FaceDescriptionForIDescription face) {
+          throw new NotImplementedException();
+        } else if (thing is MemberToViewMapper.DetailDescriptionForIDescription detail) {
+          throw new NotImplementedException();
+        } else if (thing is MemberToViewMapper.ItemDescriptionForIDescription item) {
+          membersItems.Add((memberId, item.symbol));
+          if (tileView != null) {
+            RefreshItems();
+          }
+        } else {
+          Asserts.Assert(false);
+        }
       }
     }
 
     public void OnRemoveMember(int index) {
       var (memberId, member) = members[index];
       members.RemoveAt(index);
-      var visitor = new AttributeRemovingVisitor(this, memberId);
       foreach (var thing in vivimap.getEntries(member)) {
-        thing.visit(visitor);
+        if (thing is MemberToViewMapper.TopColorDescriptionForIDescription topColor) {
+          membersFrontColors.RemoveAll(x => x.Item1 == memberId);
+          if (tileView != null) {
+            RefreshFrontColor();
+          }
+        } else if (thing is MemberToViewMapper.SideColorDescriptionForIDescription sideColor) {
+          membersSideColors.RemoveAll(x => x.Item1 == memberId);
+          if (tileView != null) {
+            RefreshSideColor();
+          }
+        } else if (thing is MemberToViewMapper.OverlayDescriptionForIDescription overlay) {
+          membersOverlays.RemoveAll(x => x.Item1 == memberId);
+          if (tileView != null) {
+            RefreshOverlay();
+          }
+        } else if (thing is MemberToViewMapper.FeatureDescriptionForIDescription feature) {
+          membersFeatures.RemoveAll(x => x.Item1 == memberId);
+          if (tileView != null) {
+            RefreshFeature();
+          }
+        } else if (thing is MemberToViewMapper.DominoDescriptionForIDescription domino) {
+          throw new NotImplementedException();
+        } else if (thing is MemberToViewMapper.FaceDescriptionForIDescription face) {
+          throw new NotImplementedException();
+        } else if (thing is MemberToViewMapper.DetailDescriptionForIDescription detail) {
+          throw new NotImplementedException();
+        } else if (thing is MemberToViewMapper.ItemDescriptionForIDescription item) {
+          membersItems.RemoveAll(x => x.Item1 == memberId);
+          if (tileView != null) {
+            RefreshItems();
+          }
+        } else {
+          Asserts.Assert(false);
+        }
       }
     }
 
     public void AddMember(string member) {
       terrainTile.members.Add(member);
       OnAddMember(member);
-      RefreshFrontColor();
-      RefreshSideColor();
     }
 
-    public void RemoveMember(int index) {
+    public void RemoveMember(string member) {
+      int index = terrainTile.members.IndexOf(member);
+      Asserts.Assert(index >= 0);
       terrainTile.members.RemoveAt(index);
       OnRemoveMember(index);
-      RefreshFrontColor();
-      RefreshSideColor();
+    }
+
+    public void RemoveMemberAt(int index) {
+      terrainTile.members.RemoveAt(index);
+      OnRemoveMember(index);
     }
 
     public void SetElevation(int elevation) {
@@ -288,54 +371,14 @@ namespace Geomancer {
       tileView.DestroyTile();
     }
 
-    //public void OnMouseClick() {
-    //  mouseClick.Invoke();
-    //}
+    private static ExtrudedSymbolDescription CalculateMaybeOverlay(List<(ulong, ExtrudedSymbolDescription)> membersOverlays) {
+      return membersOverlays.Count == 0 ? null : membersOverlays[membersOverlays.Count - 1].Item2;
+    }
 
-    //public void OnMouseEnter() {
-    //  mouseIn.Invoke();
-    //}
+    private static ExtrudedSymbolDescription CalculateMaybeFeature(List<(ulong, ExtrudedSymbolDescription)> membersFeatures) {
+      return membersFeatures.Count == 0 ? null : membersFeatures[membersFeatures.Count - 1].Item2;
+    }
 
-    //public void OnMouseExit() {
-    //  mouseOut.Invoke();
-    //}
-
-    // public void OnStrMutListEffect(IStrMutListEffect effect) {
-    //   effect.visitIStrMutListEffect(this);
-    // }
-
-    // public void visitStrMutListCreateEffect(StrMutListCreateEffect effect) {}
-    //
-    // public void visitStrMutListDeleteEffect(StrMutListDeleteEffect effect) {}
-    //
-    // public void visitStrMutListAddEffect(StrMutListAddEffect effect) {
-    //   Update(updater => {
-    //     updater.AddMember(effect.element);
-    //   });
-    // }
-    //
-    // public void visitStrMutListRemoveEffect(StrMutListRemoveEffect effect) {
-    //   Update(updater => {
-    //     updater.RemoveMember(effect.index);
-    //   });
-    // }
-    //
-    // public void visitTerrainTileCreateEffect(TerrainTileCreateEffect effect) {}
-    //
-    // public void visitTerrainTileDeleteEffect(TerrainTileDeleteEffect effect) {
-    //   tileView.DestroyTile();
-    // }
-    //
-    // public void visitTerrainTileSetElevationEffect(TerrainTileSetElevationEffect effect) {
-    //   this.Update(updater => {
-    //     updater.SetElevation(effect.newValue);
-    //   });
-    // }
-    //
-    // public void OnTerrainTileEffect(ITerrainTileEffect effect) {
-    //   effect.visitITerrainTileEffect(this);
-    // }
-    
     private static IVector4Animation CalculateTintedFrontColor(
         IVector4Animation membersFrontColor, bool selected, bool highlighted) {
       if (selected && highlighted) {
@@ -361,72 +404,6 @@ namespace Geomancer {
                 1 / 8f);
       } else {
         return membersFrontColor;
-      }
-    }
-    
-    class AttributeAddingVisitor : MemberToViewMapper.IDescriptionVisitor {
-      private TerrainTilePresenter presenter;
-      private ulong id;
-      public AttributeAddingVisitor(TerrainTilePresenter presenter, ulong id) {
-        this.presenter = presenter;
-        this.id = id;
-      }
-      public void visitTileTopColor(MemberToViewMapper.TopColorDescriptionForIDescription color) {
-        presenter.membersFrontColors.Add((id, color.color));
-      }
-      public void visitTileSideColor(MemberToViewMapper.SideColorDescriptionForIDescription color) {
-        presenter.membersSideColors.Add((id, color.color));
-      }
-      public void visitTileOverlay(MemberToViewMapper.OverlayDescriptionForIDescription symbol) {
-        throw new NotImplementedException();
-      }
-      public void visitTileFeature(MemberToViewMapper.FeatureDescriptionForIDescription symbol) {
-        throw new NotImplementedException();
-      }
-      public void visitUnitDomino(MemberToViewMapper.DominoDescriptionForIDescription domino) {
-        throw new NotImplementedException();
-      }
-      public void visitUnitFace(MemberToViewMapper.FaceDescriptionForIDescription symbol) {
-        throw new NotImplementedException();
-      }
-      public void visitUnitDetail(MemberToViewMapper.DetailDescriptionForIDescription symbol) {
-        throw new NotImplementedException();
-      }
-      public void visitTileItem(MemberToViewMapper.ItemDescriptionForIDescription symbol) {
-        throw new NotImplementedException();
-      }
-    }
-    
-    class AttributeRemovingVisitor : MemberToViewMapper.IDescriptionVisitor {
-      private TerrainTilePresenter presenter;
-      private ulong id;
-      public AttributeRemovingVisitor(TerrainTilePresenter presenter, ulong id) {
-        this.presenter = presenter;
-        this.id = id;
-      }
-      public void visitTileTopColor(MemberToViewMapper.TopColorDescriptionForIDescription color) {
-        presenter.membersFrontColors.RemoveAll(x => x.Item1 == id);
-      }
-      public void visitTileSideColor(MemberToViewMapper.SideColorDescriptionForIDescription color) {
-        presenter.membersSideColors.RemoveAll(x => x.Item1 == id);
-      }
-      public void visitTileOverlay(MemberToViewMapper.OverlayDescriptionForIDescription symbol) {
-        throw new NotImplementedException();
-      }
-      public void visitTileFeature(MemberToViewMapper.FeatureDescriptionForIDescription symbol) {
-        throw new NotImplementedException();
-      }
-      public void visitUnitDomino(MemberToViewMapper.DominoDescriptionForIDescription domino) {
-        throw new NotImplementedException();
-      }
-      public void visitUnitFace(MemberToViewMapper.FaceDescriptionForIDescription symbol) {
-        throw new NotImplementedException();
-      }
-      public void visitUnitDetail(MemberToViewMapper.DetailDescriptionForIDescription symbol) {
-        throw new NotImplementedException();
-      }
-      public void visitTileItem(MemberToViewMapper.ItemDescriptionForIDescription symbol) {
-        throw new NotImplementedException();
       }
     }
   }

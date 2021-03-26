@@ -232,7 +232,9 @@ namespace Geomancer {
       }
       foreach (var keyCodeAndMember in memberByKeyCode) {
         if (Input.GetKeyDown(keyCodeAndMember.Key)) {
-          ToggleMember(keyCodeAndMember.Value);
+          bool addKeyDown = Input.GetKey(KeyCode.RightAlt);
+          bool removeKeyDown = Input.GetKey(KeyCode.LeftAlt);
+          ChangeMember(keyCodeAndMember.Value, addKeyDown, removeKeyDown);
           Save();
         }
         UpdateLookPanelView();
@@ -275,24 +277,39 @@ namespace Geomancer {
       membersView.ShowEntries(entries);
     }
 
-    private void ToggleMember(string member) {
-      if (!AllLocationsHaveMember(selectedLocations, member)) {
+    private void ChangeMember(string member, bool addKeyDown, bool removeKeyDown) {
+      if (addKeyDown && removeKeyDown) {
+        return;
+      } else if (addKeyDown) {
+        // Add one to each tile
         foreach (var location in selectedLocations) {
-          if (!LocationHasMember(location, member)) {
-            terrainPresenter.GetTilePresenter(location).AddMember(member);
+          terrainPresenter.GetTilePresenter(location).AddMember(member);
+        }
+      } else if (removeKeyDown) {
+        foreach (var location in selectedLocations) {
+          if (LocationHasMember(location, member)) {
+            terrainPresenter.GetTilePresenter(location).RemoveMember(member);
           }
         }
       } else {
-        foreach (var location in selectedLocations) {
-          var tile = terrainPresenter.terrain.tiles[location];
-          for (int i = 0; i < tile.members.Count; i++) {
-            if (tile.members[i] == member) {
-              terrainPresenter.GetTilePresenter(location).RemoveMember(i);
-              break;
+        // Toggle; ensure it's there if its not
+        if (!AllLocationsHaveMember(selectedLocations, member)) {
+          foreach (var location in selectedLocations) {
+            // Add it if its not already there
+            if (!LocationHasMember(location, member)) {
+              terrainPresenter.GetTilePresenter(location).AddMember(member);
+            }
+          }
+        } else {
+          foreach (var location in selectedLocations) {
+            // Remove all of them that are present
+            while (LocationHasMember(location, member)) {
+              terrainPresenter.GetTilePresenter(location).RemoveMember(member);
             }
           }
         }
       }
+      
     }
 
     private bool AllLocationsHaveMember(SortedSet<Location> locations, string member) {
